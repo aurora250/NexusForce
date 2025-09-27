@@ -3,248 +3,61 @@
 #include "memory.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-static constexpr bool RB_TREE_RED__ = false;
-static constexpr bool RB_TREE_BLACK__ = true;
+static constexpr bool RB_TREE_RED = false;
+static constexpr bool RB_TREE_BLACK = true;
 
+MSTL_BEGIN_INNER__
 struct __rb_tree_node_base;
 struct __rb_tree_base_iterator;
+MSTL_END_INNER__
+
 template <bool IsConst, typename RB_TREE>
 struct rb_tree_iterator;
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
 class rb_tree;
 
-void rb_tree_rotate_left(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
-void rb_tree_rotate_right(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
-void rb_tree_rebalance(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
-__rb_tree_node_base* rb_tree_rebalance_for_erase(
-    __rb_tree_node_base* z, __rb_tree_node_base*& root,
-    __rb_tree_node_base*& leftmost, __rb_tree_node_base*& rightmost) noexcept;
+MSTL_BEGIN_INNER__
 
-struct __rb_tree_node_base {
+MSTL_API void rb_tree_rotate_left(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
+MSTL_API void rb_tree_rotate_right(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
+MSTL_API void rb_tree_rebalance(__rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept;
+MSTL_API __rb_tree_node_base* rb_tree_rebalance_for_erase(
+    __rb_tree_node_base* z, __rb_tree_node_base*& root,
+    __rb_tree_node_base*& leftmost, __rb_tree_node_base*& rightmost
+    ) noexcept;
+
+
+struct MSTL_API __rb_tree_node_base {
 public:
     using color_type = bool;
 
 protected:
     using base_ptr = __rb_tree_node_base*;
 
-    color_type color_ = RB_TREE_RED__;
+    color_type color_ = RB_TREE_RED;
     base_ptr parent_ = nullptr;
     base_ptr left_ = nullptr;
     base_ptr right_ = nullptr;
 
-    friend __rb_tree_base_iterator;
-    template <bool, typename> friend struct rb_tree_iterator;
-    template <typename, typename, typename, typename, typename> friend class rb_tree;
-    friend void rb_tree_rotate_left(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
-    friend void rb_tree_rotate_right(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
-    friend void rb_tree_rebalance(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
-    friend __rb_tree_node_base* rb_tree_rebalance_for_erase(
-        __rb_tree_node_base*, __rb_tree_node_base*&,
-        __rb_tree_node_base*&, __rb_tree_node_base*&) noexcept;
+    friend _INNER __rb_tree_base_iterator;
+    template <bool, typename> friend struct _MSTL rb_tree_iterator;
+    template <typename, typename, typename, typename, typename> friend class _MSTL rb_tree;
+    friend MSTL_API void _INNER rb_tree_rotate_left(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
+    friend MSTL_API void _INNER rb_tree_rotate_right(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
+    friend MSTL_API void _INNER rb_tree_rebalance(__rb_tree_node_base*, __rb_tree_node_base*&) noexcept;
+    friend MSTL_API _INNER __rb_tree_node_base* _INNER rb_tree_rebalance_for_erase(
+        _INNER __rb_tree_node_base*, _INNER __rb_tree_node_base*&,
+        _INNER __rb_tree_node_base*&, _INNER __rb_tree_node_base*&) noexcept;
 
-    static base_ptr minimum(base_ptr x) noexcept {
-        while (x->left_ != nullptr) x = x->left_;
-        return x;
-    }
-    static base_ptr maximum(base_ptr x) noexcept {
-        while (x->right_ != nullptr) x = x->right_;
-        return x;
-    }
+    static base_ptr minimum(base_ptr x) noexcept;
+    static base_ptr maximum(base_ptr x) noexcept;
 };
 
-
-inline void rb_tree_rotate_left(
-    __rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept {
-    __rb_tree_node_base* y = x->right_;
-    x->right_ = y->left_;
-    if (y->left_ != nullptr) y->left_->parent_ = x;
-    y->parent_ = x->parent_;
-    if (x == root) root = y;
-    else if (x == x->parent_->left_) x->parent_->left_ = y;
-    else x->parent_->right_ = y;
-    y->left_ = x;
-    x->parent_ = y;
-}
-
-inline void rb_tree_rotate_right(
-    __rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept {
-    __rb_tree_node_base* y = x->left_;
-    x->left_ = y->right_;
-    if (y->right_ != nullptr) y->right_->parent_ = x;
-    y->parent_ = x->parent_;
-    if (x == root) root = y;
-    else if (x == x->parent_->right_) x->parent_->right_ = y;
-    else x->parent_->left_ = y;
-    y->right_ = x;
-    x->parent_ = y;
-}
-
-inline void rb_tree_rebalance(
-    __rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept {
-    x->color_ = RB_TREE_RED__;
-    while (x != root && x->parent_->color_ == RB_TREE_RED__) {
-        if (x->parent_ == x->parent_->parent_->left_) {
-            __rb_tree_node_base* y = x->parent_->parent_->right_;
-            if (y != nullptr && y->color_ == RB_TREE_RED__) {
-                x->parent_->color_ = RB_TREE_BLACK__;
-                y->color_ = RB_TREE_BLACK__;
-                x->parent_->parent_->color_ = RB_TREE_RED__;
-                x = x->parent_->parent_;
-            }
-            else {
-                if (x == x->parent_->right_) {
-                    x = x->parent_;
-                    rb_tree_rotate_left(x, root);
-                }
-                x->parent_->color_ = RB_TREE_BLACK__;
-                x->parent_->parent_->color_ = RB_TREE_RED__;
-                rb_tree_rotate_right(x->parent_->parent_, root);
-            }
-        }
-        else {
-            __rb_tree_node_base* y = x->parent_->parent_->left_;
-            if (y != nullptr && y->color_ == RB_TREE_RED__) {
-                x->parent_->color_ = RB_TREE_BLACK__;
-                y->color_ = RB_TREE_BLACK__;
-                x->parent_->parent_->color_ = RB_TREE_RED__;
-                x = x->parent_->parent_;
-            }
-            else {
-                if (x == x->parent_->left_) {
-                    x = x->parent_;
-                    rb_tree_rotate_right(x, root);
-                }
-                x->parent_->color_ = RB_TREE_BLACK__;
-                x->parent_->parent_->color_ = RB_TREE_RED__;
-                rb_tree_rotate_left(x->parent_->parent_, root);
-            }
-        }
-    }
-    root->color_ = RB_TREE_BLACK__;
-}
-
-inline __rb_tree_node_base* rb_tree_rebalance_for_erase(
-    __rb_tree_node_base* z, __rb_tree_node_base*& root,
-    __rb_tree_node_base*& leftmost, __rb_tree_node_base*& rightmost) noexcept {
-    __rb_tree_node_base* y = z;
-    __rb_tree_node_base* x;
-    __rb_tree_node_base* x_parent;
-    if (y->left_ == nullptr) x = y->right_;
-    else {
-        if (y->right_ == nullptr) x = y->left_;
-        else {
-            y = y->right_;
-            while (y->left_ != nullptr) y = y->left_;
-            x = y->right_;
-        }
-    }
-    if (y != z) {
-        z->left_->parent_ = y;
-        y->left_ = z->left_;
-        if (y != z->right_) {
-            x_parent = y->parent_;
-            if (x != nullptr) x->parent_ = y->parent_;
-            y->parent_->left_ = x;
-            y->right_ = z->right_;
-            z->right_->parent_ = y;
-        }
-        else
-            x_parent = y;
-        if (root == z)
-            root = y;
-        else if (z->parent_->left_ == z)
-            z->parent_->left_ = y;
-        else
-            z->parent_->right_ = y;
-        y->parent_ = z->parent_;
-        _MSTL swap(y->color_, z->color_);
-        y = z;
-    }
-    else {
-        x_parent = y->parent_;
-        if (x != nullptr) x->parent_ = y->parent_;
-        if (root == z) root = x;
-        else {
-            if (z->parent_->left_ == z) z->parent_->left_ = x;
-            else z->parent_->right_ = x;
-        }
-        if (leftmost == z) {
-            if (z->right_ == nullptr) leftmost = z->parent_;
-            else leftmost = __rb_tree_node_base::minimum(x);
-        }
-        if (rightmost == z) {
-            if (z->left_ == nullptr) rightmost = z->parent_;
-            else rightmost = __rb_tree_node_base::maximum(x);
-        }
-    }
-    if (y->color_ != RB_TREE_RED__) {
-        while (x != root && (x == nullptr || x->color_ == RB_TREE_BLACK__)) {
-            if (x == x_parent->left_) {
-                __rb_tree_node_base* w = x_parent->right_;
-                if (!w) continue;
-                if (w->color_ == RB_TREE_RED__) {
-                    w->color_ = RB_TREE_BLACK__;
-                    x_parent->color_ = RB_TREE_RED__;
-                    rb_tree_rotate_left(x_parent, root);
-                    w = x_parent->right_;
-                }
-                if ((w->left_ == nullptr || w->left_->color_ == RB_TREE_BLACK__) &&
-                    (w->right_ == nullptr || w->right_->color_ == RB_TREE_BLACK__)) {
-                    w->color_ = RB_TREE_RED__;
-                    x = x_parent;
-                    x_parent = x_parent->parent_;
-                }
-                else {
-                    if (w->right_ == nullptr || w->right_->color_ == RB_TREE_BLACK__) {
-                        if (w->left_ != nullptr) w->left_->color_ = RB_TREE_BLACK__;
-                        w->color_ = RB_TREE_RED__;
-                        rb_tree_rotate_right(w, root);
-                        w = x_parent->right_;
-                    }
-                    w->color_ = x_parent->color_;
-                    x_parent->color_ = RB_TREE_BLACK__;
-                    if (w->right_ != nullptr) w->right_->color_ = RB_TREE_BLACK__;
-                    rb_tree_rotate_left(x_parent, root);
-                    break;
-                }
-            }
-            else {
-                __rb_tree_node_base* w = x_parent->left_;
-                if (w->color_ == RB_TREE_RED__) {
-                    w->color_ = RB_TREE_BLACK__;
-                    x_parent->color_ = RB_TREE_RED__;
-                    rb_tree_rotate_right(x_parent, root);
-                    w = x_parent->left_;
-                }
-                if ((w->right_ == nullptr || w->right_->color_ == RB_TREE_BLACK__) &&
-                    (w->left_ == nullptr || w->left_->color_ == RB_TREE_BLACK__)) {
-                    w->color_ = RB_TREE_RED__;
-                    x = x_parent;
-                    x_parent = x_parent->parent_;
-                }
-                else {
-                    if (w->left_ == nullptr || w->left_->color_ == RB_TREE_BLACK__) {
-                        if (w->right_ != nullptr) w->right_->color_ = RB_TREE_BLACK__;
-                        w->color_ = RB_TREE_RED__;
-                        rb_tree_rotate_left(w, root);
-                        w = x_parent->left_;
-                    }
-                    w->color_ = x_parent->color_;
-                    x_parent->color_ = RB_TREE_BLACK__;
-                    if (w->left_ != nullptr) w->left_->color_ = RB_TREE_BLACK__;
-                    rb_tree_rotate_right(x_parent, root);
-                    break;
-                }
-            }
-        }
-        if (x != nullptr) x->color_ = RB_TREE_BLACK__;
-    }
-    return y;
-}
+MSTL_END_INNER__
 
 
 template <typename T>
-struct __rb_tree_node : __rb_tree_node_base {
+struct rb_tree_node : _INNER __rb_tree_node_base {
 private:
     T data_{};
 
@@ -252,11 +65,13 @@ private:
     template <bool, typename> friend struct rb_tree_iterator;
 
 public:
-    __rb_tree_node() = default;
-    ~__rb_tree_node() = default;
+    rb_tree_node() = default;
+    ~rb_tree_node() = default;
 };
 
-struct __rb_tree_base_iterator {
+
+MSTL_BEGIN_INNER__
+struct MSTL_API __rb_tree_base_iterator {
 public:
     using iterator_category = bidirectional_iterator_tag;
 
@@ -264,53 +79,18 @@ protected:
     using base_ptr = __rb_tree_node_base::base_ptr;
     base_ptr node_ = nullptr;
 
-    void increment() noexcept {
-        if (node_->right_ != nullptr) {
-            node_ = node_->right_;
-            while (node_->left_ != nullptr) node_ = node_->left_;
-        }
-        else {
-            base_ptr y = node_->parent_;
-            while (node_ == y->right_) {
-                node_ = y;
-                y = y->parent_;
-            }
-            if (node_->right_ != y) node_ = y;
-        }
-    }
-
-    void decrement() noexcept {
-        if (node_->color_ == RB_TREE_RED__ &&
-            node_->parent_ != nullptr &&
-            node_->parent_->parent_ == node_) {
-            node_ = node_->right_;
-        }
-        else if (node_->left_ != nullptr) {
-            base_ptr y = node_->left_;
-            while (y->right_ != nullptr) y = y->right_;
-            node_ = y;
-        }
-        else {
-            base_ptr y = node_->parent_;
-            while (node_ == y->left_) {
-                node_ = y;
-                y = y->parent_;
-            }
-            node_ = y;
-        }
-    }
+    void increment() noexcept;
+    void decrement() noexcept;
 
 public:
-    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rh) const noexcept {
-        return node_ == rh.node_;
-    }
-    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rh) const noexcept {
-        return node_ != rh.node_;
-    }
+    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rh) const noexcept;
+    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rh) const noexcept;
 };
+MSTL_END_INNER__
+
 
 template <bool IsConst, typename RB_TREE>
-struct rb_tree_iterator : __rb_tree_base_iterator {
+struct rb_tree_iterator : _INNER __rb_tree_base_iterator {
 private:
     using container_type	= RB_TREE;
     using iterator			= rb_tree_iterator<false, container_type>;
@@ -326,7 +106,7 @@ public:
     using self              = rb_tree_iterator<IsConst, container_type>;
 
 private:
-    using link_type         = __rb_tree_node<value_type>*;
+    using link_type         = rb_tree_node<value_type>*;
 
     const container_type* tree_ = nullptr;
 
@@ -444,12 +224,12 @@ public:
 
 
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, 
-    typename Alloc = allocator<__rb_tree_node<Value>>>
+    typename Alloc = allocator<rb_tree_node<Value>>>
 class rb_tree {
 #ifdef MSTL_VERSION_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
+    static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
 
 public:
@@ -465,8 +245,10 @@ public:
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
 private:
-    using base_ptr  = __rb_tree_node_base*;
-    using link_type = __rb_tree_node<Value>*;
+    using base_node  = _INNER __rb_tree_node_base;
+    using link_node = rb_tree_node<Value>;
+    using base_ptr  = base_node*;
+    using link_type = link_node*;
 
     link_type header_ = nullptr;
     Compare key_compare_{};
@@ -498,25 +280,25 @@ private:
     }
     void destroy_node(link_type p) noexcept {
         if (p == nullptr) return;
-        destroy(&p->data_);
+        _MSTL destroy(&p->data_);
         size_pair_.get_base().deallocate(p);
     }
 
-    link_type& root() const noexcept { return (link_type &)header_->parent_; }
-    link_type& leftmost() const noexcept { return (link_type &)header_->left_; }
-    link_type& rightmost() const noexcept { return (link_type &)header_->right_; }
+    link_type& root() const noexcept { return reinterpret_cast<link_type&>(header_->parent_); }
+    link_type& leftmost() const noexcept { return reinterpret_cast<link_type&>(header_->left_); }
+    link_type& rightmost() const noexcept { return reinterpret_cast<link_type&>(header_->right_); }
 
-    static link_type& left(link_type x) noexcept { return (link_type &)x->left_; }
-    static link_type& right(link_type x) noexcept { return (link_type &)x->right_; }
-    static link_type& parent(link_type x) noexcept { return (link_type &)x->parent_; }
+    static link_type& left(link_type x) noexcept { return reinterpret_cast<link_type&>(x->left_); }
+    static link_type& right(link_type x) noexcept { return reinterpret_cast<link_type&>(x->right_); }
+    static link_type& parent(link_type x) noexcept { return reinterpret_cast<link_type&>(x->parent_); }
     static const Key& key(link_type x) noexcept { return KeyOfValue()(x->data_); }
-    static const Key& key(base_ptr x) noexcept { return KeyOfValue()(link_type(x)->data_); }
+    static const Key& key(const base_ptr x) noexcept { return self::key(reinterpret_cast<link_type>(x)); }
 
     static link_type minimum(link_type x) noexcept {
-        return static_cast<link_type>(__rb_tree_node_base::minimum(x));
+        return static_cast<link_type>(base_node::minimum(x));
     }
     static link_type maximum(link_type x) noexcept {
-        return static_cast<link_type>(__rb_tree_node_base::maximum(x));
+        return static_cast<link_type>(base_node::maximum(x));
     }
 
     iterator insert_node_into(base_ptr bx, base_ptr by, link_type p) {
@@ -538,7 +320,7 @@ private:
         parent(p) = y;
         left(p) = nullptr;
         right(p) = nullptr;
-        (rb_tree_rebalance)(p, header_->parent_);
+        _INNER rb_tree_rebalance(p, header_->parent_);
         ++size_pair_.value;
         return iterator(p, this);
     }
@@ -584,7 +366,7 @@ private:
 
     void header_init() {
         header_ = size_pair_.get_base().allocate();
-        header_->color_ = RB_TREE_RED__;
+        header_->color_ = RB_TREE_RED;
         root() = nullptr;
         leftmost() = header_;
         rightmost() = header_;
@@ -627,8 +409,10 @@ private:
         }
         if (key_compare_(key(link_type(j.node_)), key(p)))
             return pair<iterator, bool>(insert_node_into(x, y, p), true);
+        destroy_node(p);
         return pair<iterator, bool>(j, false);
     }
+
     iterator insert_equal_node(link_type p) {
         link_type y = header_;
         link_type x = root();
@@ -685,8 +469,9 @@ public:
 
     ~rb_tree() {
         clear();
-        if (header_)
+        if (header_) {
             size_pair_.get_base().deallocate(header_);
+        }
     }
 
     MSTL_NODISCARD iterator begin() noexcept { return {leftmost(), this}; }
@@ -714,7 +499,7 @@ public:
 
     template <typename... Args>
     pair<iterator, bool> emplace_unique(Args&&... args) {
-        link_type tmp = (create_node)(_MSTL forward<Args>(args)...);
+        const link_type tmp = (create_node)(_MSTL forward<Args>(args)...);
         return (insert_unique_node)(tmp);
     }
     pair<iterator, bool> insert_unique(const value_type& v) {
@@ -759,7 +544,7 @@ public:
 
     template <typename... Args>
     iterator emplace_equal(Args&&... args) {
-        link_type tmp = (create_node)(_MSTL forward<Args>(args)...);
+        const link_type tmp = (create_node)(_MSTL forward<Args>(args)...);
         return (insert_equal_node)(tmp);
     }
     iterator insert_equal(const value_type& v) {
@@ -809,8 +594,8 @@ public:
         return n;
     }
     void erase(iterator position) noexcept {
-        auto y = (link_type)rb_tree_rebalance_for_erase(
-            position.node_, header_->parent_, header_->left_, header_->right_);
+        auto y = reinterpret_cast<link_type>(rb_tree_rebalance_for_erase(
+            position.node_, header_->parent_, header_->left_, header_->right_));
         destroy_node(y);
         --size_pair_.value;
     }
@@ -969,6 +754,7 @@ MSTL_NODISCARD bool operator >=(
     const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
     return !(lh < rh);
 }
+
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
 void swap(rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
     rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {

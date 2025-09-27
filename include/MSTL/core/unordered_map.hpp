@@ -4,13 +4,13 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
-    typename Alloc = allocator<__hashtable_node<pair<const Key, T>>>>
+    typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 class unordered_map {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered map requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
+    static_assert(is_same_v<hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered map only contains object types.");
 
@@ -208,13 +208,13 @@ void swap(const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& lh,
 
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
-    typename Alloc = allocator<__hashtable_node<pair<const Key, T>>>>
+    typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 class unordered_multimap {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered multimap requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
+    static_assert(is_same_v<hashtable_node<pair<const Key, T>>, typename Alloc::value_type>,
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered multimap only contains object types.");
 

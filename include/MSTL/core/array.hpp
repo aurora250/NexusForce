@@ -371,13 +371,18 @@ public:
     MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void swap(array&) noexcept {}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
+
+MSTL_BEGIN_INNER__
 template <typename First, typename... Rest>
 struct __array_same {
     static_assert(conjunction_v<is_same<First, Rest>...>, "array types mismatch.");
     using type = First;
 };
+MSTL_END_INNER__
+
 template <typename First, typename... Rest>
-array(First, Rest...) -> array<typename __array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
+array(First, Rest...) -> array<typename _INNER __array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
+
 #endif // MSTL_SUPPORT_DEDUCTION_GUIDES__
 
 template <class T, size_t Size, enable_if_t<Size == 0 || is_swappable_v<T>, int> = 0>

@@ -245,8 +245,7 @@ private:
         }
     }
 
-    template <typename Iterator, enable_if_t<
-        is_iter_v<Iterator> && !is_ranges_fwd_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
         size_type n = _MSTL distance(first, last);
         const size_type init_size = _MSTL max(MEMORY_ALIGN_THRESHHOLD, n + 1);
@@ -259,7 +258,8 @@ private:
             destroy_buffer();
             throw;
         }
-        for (; n > 0; --n, ++first) this->append(*first);
+        for (; n > 0; --n, ++first)
+            this->append(*first);
     }
 
     template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
@@ -271,6 +271,7 @@ private:
             size_ = n;
             alloc_pair_.value = init_size;
             _MSTL uninitialized_copy(first, last, data_);
+            null_terminate();
         }
         catch (MemoryError&) {
             destroy_buffer();
@@ -409,6 +410,8 @@ public:
         }
     }
 
+    MSTL_CONSTEXPR20 explicit basic_string(size_type n) : basic_string(n, '\0') {}
+
     MSTL_CONSTEXPR20 explicit basic_string(size_type n, int32_t chr)
     : basic_string(n, static_cast<value_type>(chr)) {}
 
@@ -545,7 +548,7 @@ public:
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 allocator_type get_allocator() const noexcept { return allocator_type(); }
 
-    MSTL_CONSTEXPR20 void reserve(size_type n) {
+    MSTL_CONSTEXPR20 void reserve(const size_type n) {
         MSTL_DEBUG_VERIFY(n < max_size(), "basic_string reserve index out of range.");
         const size_type new_cap = n + 1;
         if (alloc_pair_.value >= new_cap) return;
@@ -559,37 +562,37 @@ public:
         null_terminate();
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type n) {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type n) noexcept {
         MSTL_DEBUG_VERIFY(n <= size_, "basic_string [] index out of range.");
         return *(data_ + n);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference operator [](const size_type n) const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference operator [](const size_type n) const noexcept {
         MSTL_DEBUG_VERIFY(n <= size_, "basic_string [] index out of range.");
         return *(data_ + n);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 reference at(const size_type n) {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 reference at(const size_type n) noexcept {
         range_check(n);
         return (*this)[n];
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference at(const size_type n) const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference at(const size_type n) const noexcept {
         range_check(n);
         return (*this)[n];
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 reference front() {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 reference front() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty basic_string");
         return *data_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference front() const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference front() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty basic_string");
         return *data_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 reference back() {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 reference back() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty basic_string");
         return *(data_ + size_ - 1);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference back() const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference back() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty basic_string");
         return *(data_ + size_ - 1);
     }
@@ -793,7 +796,7 @@ public:
 
     MSTL_CONSTEXPR20 void resize(size_type count, value_type chr) {
         if (count < size_)
-            this->erase(data_ + count, data_ + size_);
+            this->erase({data_ + count, this}, {data_ + size_, this});
         else
             this->append(count - size_, chr);
     }
@@ -834,6 +837,12 @@ public:
         range_check(off);
         count = clamp_size(off, count);
         return self(data_ + off, count);
+    }
+
+    MSTL_NODISCARD constexpr view_type view(const size_type off = 0, size_type count = npos) const noexcept {
+        range_check(off);
+        count = clamp_size(off, count);
+        return view_type(data_ + off, count);
     }
 
     MSTL_CONSTEXPR20 size_type copy(pointer dest, size_type count, size_type position = 0) const {
@@ -1473,8 +1482,6 @@ MSTL_CONSTEXPR20 void swap(basic_string<CharT, Traits, Alloc>& lh,
     lh.swap(rh);
 }
 
-template <typename CharT, typename Traits, typename Alloc>
-void show_data_only(const basic_string<CharT, Traits, Alloc>&, std::ostream&);
 template <typename CharT, typename Traits, typename Alloc>
 std::ostream& operator <<(std::ostream&, const basic_string<CharT, Traits, Alloc>&);
 

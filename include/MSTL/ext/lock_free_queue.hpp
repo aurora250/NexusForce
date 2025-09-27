@@ -169,10 +169,10 @@ public:
 };
 
 template <typename T>
-std::atomic<int> lock_free_queue<T>::destruct_count = 0;
+std::atomic<int> lock_free_queue<T>::destruct_count{0};
 
 template <typename T>
-std::atomic<int> lock_free_queue<T>::construct_count = 0;
+std::atomic<int> lock_free_queue<T>::construct_count{0};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_LOCK_FREE_QUEUE_HPP__

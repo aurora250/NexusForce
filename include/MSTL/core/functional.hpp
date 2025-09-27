@@ -3,6 +3,8 @@
 #include "memory.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_BEGIN_INNER__
+
 template <typename T, typename U = unwrap_reference_t<T>>
 constexpr U&& __invoke_forward(remove_reference_t<T>& t) noexcept {
     return static_cast<U&&>(t);
@@ -29,22 +31,26 @@ constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memobj_deref_tag, MemPtr&& f, T
     return *_MSTL forward<T>(t).*f;
 }
 
+MSTL_END_INNER__
+
 template <typename Callable, typename... Args>
-constexpr typename __invoke_result_aux<Callable, Args...>::type
+constexpr typename _INNER __invoke_result_aux<Callable, Args...>::type
 invoke(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    using result = __invoke_result_aux<Callable, Args...>;
+    using result = _INNER __invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
-    return _MSTL __invoke_dispatch<type>(tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
+    return _INNER __invoke_dispatch<type>(tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
 }
 
+
+MSTL_BEGIN_INNER__
 
 template <typename T, typename Tag, typename Res, typename Callable, typename... Args>
 constexpr enable_if_t<is_invocable_r_v<Res, Callable, Args...> && is_void_v<Res>, Res>
 __invoke_r_dispatch(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable_v<Callable, Args...>) {
-	_MSTL __invoke_dispatch<T>(Tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
+	__invoke_dispatch<T>(Tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
 	return;
 }
 
@@ -52,21 +58,25 @@ template <typename T, typename Tag, typename Res, typename Callable, typename...
 constexpr enable_if_t<is_invocable_r_v<Res, Callable, Args...> && !is_void_v<Res>, Res>
 __invoke_r_dispatch(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable_v<Callable, Args...>) {
-	return _MSTL __invoke_dispatch<T>(Tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
+	return __invoke_dispatch<T>(Tag{}, _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...);
 }
+
+MSTL_END_INNER__
 
 template <typename Res, typename Callable, typename... Args>
 constexpr enable_if_t<is_invocable_r_v<Res, Callable, Args...>, Res>
 invoke_r(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable_v<Callable, Args...>) {
-    using result = __invoke_result_aux<Callable, Args...>;
+    using result = _INNER  __invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
-    return _MSTL __invoke_r_dispatch<type, tag, Res, Callable, Args...>(
+    return _INNER __invoke_r_dispatch<type, tag, Res, Callable, Args...>(
     	_MSTL forward<Callable>(f), _MSTL forward<Args>(args)...
 		);
 }
 
+
+MSTL_BEGIN_INNER__
 
 template <template <typename...> class, typename, typename>
 MSTL_INLINE17 constexpr bool __apply_unpack_tuple_v = false;
@@ -92,13 +102,25 @@ constexpr decltype(auto) __apply_impl(F&& f, Tuple&& t, _MSTL index_sequence<Idx
     return _MSTL invoke(_MSTL forward<F>(f), _MSTL get<Idx>(_MSTL forward<Tuple>(t))...);
 }
 
+MSTL_END_INNER__
+
 template <typename F, typename Tuple>
 constexpr decltype(auto) apply(F&& f, Tuple&& t)
-noexcept(__apply_unpack_tuple<_MSTL is_nothrow_invocable, F, Tuple>::value) {
+noexcept(_INNER __apply_unpack_tuple<_MSTL is_nothrow_invocable, F, Tuple>::value) {
     using Indices = make_index_sequence<tuple_size_v<remove_reference_t<Tuple>>>;
-    return _MSTL __apply_impl(_MSTL forward<F>(f), _MSTL forward<Tuple>(t), Indices{});
+    return _INNER __apply_impl(_MSTL forward<F>(f), _MSTL forward<Tuple>(t), Indices{});
 }
 
+
+enum class FUNCTION_OPERATE {
+	GET_TYPE_INFO, GET_PTR, COPY_PTR, DESTROY_PTR
+};
+
+template <typename Sign>
+class function;
+
+
+MSTL_BEGIN_INNER__
 
 class __undefined_util;
 
@@ -120,16 +142,9 @@ union storage_data {
 	MSTL_NODISCARD const T& access() const noexcept { return *static_cast<const T*>(access()); }
 
 	__nocopy_type unused_;
-	char data_[sizeof(__nocopy_type)];
+	byte_t data_[sizeof(__nocopy_type)];
 };
 
-enum class FUNCTION_MANAGE_OPERATE {
-    GET_TYPE_INFO, GET_PTR, COPY_PTR, DESTROY_PTR
-};
-
-
-template <typename Sign>
-class function;
 
 class __function_base {
 public:
@@ -186,18 +201,18 @@ public:
 		}
 
     public:
-		static bool manage(storage_data& dest, const storage_data& src, const FUNCTION_MANAGE_OPERATE oper) {
+		static bool manage(storage_data& dest, const storage_data& src, const FUNCTION_OPERATE oper) {
 			switch (oper) {
-				case FUNCTION_MANAGE_OPERATE::GET_TYPE_INFO:
+				case FUNCTION_OPERATE::GET_TYPE_INFO:
 					dest.access<const std::type_info*>() = &typeid(F);
 					break;
-				case FUNCTION_MANAGE_OPERATE::GET_PTR:
+				case FUNCTION_OPERATE::GET_PTR:
 					dest.access<F*>() = __manager_base::get_pointer(src);
 					break;
-				case FUNCTION_MANAGE_OPERATE::COPY_PTR:
+				case FUNCTION_OPERATE::COPY_PTR:
 					__manager_base::init_func(dest, *const_cast<const F*>(__manager_base::get_pointer(src)));
 					break;
-				case FUNCTION_MANAGE_OPERATE::DESTROY_PTR:
+				case FUNCTION_OPERATE::DESTROY_PTR:
 					__manager_base::destroy(dest, storage_());
 					break;
 			}
@@ -228,7 +243,7 @@ public:
 		}
     };
 
-	using manage_type = bool (*)(storage_data&, const storage_data&, FUNCTION_MANAGE_OPERATE);
+	using manage_type = bool (*)(storage_data&, const storage_data&, FUNCTION_OPERATE);
 
 	storage_data func_{};
 	manage_type manager_ = nullptr;
@@ -237,7 +252,7 @@ public:
     __function_base() = default;
     ~__function_base() {
 		if (manager_)
-			manager_(func_, func_, FUNCTION_MANAGE_OPERATE::DESTROY_PTR);
+			manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);
     }
 
     MSTL_NODISCARD bool empty() const { return !manager_; }
@@ -253,12 +268,12 @@ private:
 	using base_type = __function_base::__manager_base<F>;
 public:
 	static bool manage(storage_data& dest, const storage_data& src,
-		FUNCTION_MANAGE_OPERATE oper) {
+		FUNCTION_OPERATE oper) {
 		switch (oper) {
-			case FUNCTION_MANAGE_OPERATE::GET_TYPE_INFO:
+			case FUNCTION_OPERATE::GET_TYPE_INFO:
 				dest.access<const std::type_info*>() = &typeid(F);
 				break;
-			case FUNCTION_MANAGE_OPERATE::GET_PTR:
+			case FUNCTION_OPERATE::GET_PTR:
 				dest.access<F*>() = base_type::get_pointer(src);
 				break;
 			default:
@@ -280,7 +295,7 @@ public:
 template <>
 class __function_manage_handler<void, void> {
 public:
-	static bool manage(storage_data&, const storage_data&, FUNCTION_MANAGE_OPERATE) {
+	static bool manage(storage_data&, const storage_data&, FUNCTION_OPERATE) {
 		return false;
 	}
 };
@@ -291,29 +306,31 @@ struct __function_handler_dispatch : __function_manage_handler<Sign, remove_cv_t
 template <typename Sign, typename F>
 struct __function_handler_dispatch<Sign, F, false> : __function_manage_handler<void, void> {};
 
+MSTL_END_INNER__
+
 
 template <typename Res, typename... Args>
-class function<Res(Args...)> : __function_base {
+class function<Res(Args...)> : _INNER __function_base {
 private:
 	template <typename F, bool IsSelf = is_same_v<remove_cvref_t<F>, function>>
 	using enable_decay_t = typename enable_if_t<!IsSelf, decay<F>>::type;
 
-	template <typename F, typename DF = enable_decay_t<F>, typename Res1 = __invoke_result_aux<DF&, Args...>>
-	struct callable_t : __is_invocable_aux<Res1, Res>::type {};
+	template <typename F, typename DF = enable_decay_t<F>, typename Res1 = _INNER __invoke_result_aux<DF&, Args...>>
+	struct callable_t : _INNER __is_invocable_aux<Res1, Res>::type {};
 
 	template<typename F>
-	using handler_t = __function_manage_handler<Res(Args...), decay_t<F>>;
+	using handler_t = _INNER __function_manage_handler<Res(Args...), decay_t<F>>;
 
-	using invoker_type = Res (*)(const storage_data&, Args&&...);
+	using invoker_type = Res (*)(const _INNER storage_data&, Args&&...);
 
 	invoker_type invoker_ = nullptr;
 
 	template <typename F, enable_if_t<is_object_v<F>, int> = 0>
 	const F* __target_impl() const noexcept {
-		if (manager_ == &__function_handler_dispatch<Res(Args...), F>::manage
+		if (manager_ == &_INNER __function_handler_dispatch<Res(Args...), F>::manage
 			|| (manager_ && typeid(F) == target_type())) {
-			storage_data ptr{};
-			manager_(ptr, func_, FUNCTION_MANAGE_OPERATE::GET_PTR);
+			_INNER storage_data ptr{};
+			manager_(ptr, func_, FUNCTION_OPERATE::GET_PTR);
 			return ptr.access<const F*>();
 		}
 		return nullptr;
@@ -330,7 +347,7 @@ public:
 
 	function(const function& x) : __function_base() {
 		if (static_cast<bool>(x)) {
-			x.manager_(func_, x.func_, FUNCTION_MANAGE_OPERATE::COPY_PTR);
+			x.manager_(func_, x.func_, FUNCTION_OPERATE::COPY_PTR);
 			invoker_ = x.invoker_;
 			manager_ = x.manager_;
 		}
@@ -369,7 +386,7 @@ public:
 	}
 	function& operator =(nullptr_t) noexcept {
 		if (manager_) {
-			manager_(func_, func_, FUNCTION_MANAGE_OPERATE::DESTROY_PTR);
+			manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);
 			manager_ = nullptr;
 			invoker_ = nullptr;
 		}
@@ -402,8 +419,8 @@ public:
 
 	MSTL_NODISCARD const std::type_info& target_type() const noexcept {
 		if (manager_) {
-			storage_data result{};
-			manager_(result, func_, FUNCTION_MANAGE_OPERATE::GET_TYPE_INFO);
+			_INNER storage_data result{};
+			manager_(result, func_, FUNCTION_OPERATE::GET_TYPE_INFO);
 			if (const auto info = result.access<const std::type_info*>())
 				return *info;
 		}

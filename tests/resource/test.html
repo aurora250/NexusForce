@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servlet功能测试</title>
+    <style>
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        body {
+            touch-action: manipulation;
+            -ms-touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>Servlet功能测试</h1>
+
+<div class="test-section" id="session-test">
+    <h2>Session测试</h2>
+    <div>
+        <button id="create-session">创建新Session</button>
+        <button id="invalidate-session">使Session失效</button>
+        <button id="get-session-info">获取Session信息</button>
+    </div>
+    <form id="session-form">
+        <label>属性名: <input type="text" name="attrName" placeholder="属性名" required></label>
+        <label>属性值: <input type="text" name="attrValue" placeholder="属性值" required></label>
+        <button type="submit">设置Session属性</button>
+    </form>
+    <div class="test-result" id="session-result">
+    </div>
+</div>
+
+<div class="test-section" id="cookie-test">
+    <h2>Cookies测试</h2>
+    <div>
+        <button id="get-cookies">查看Cookies</button>
+    </div>
+    <form id="cookie-form">
+        <label>Cookie名称: <input type="text" name="cookieName" placeholder="名称" required></label>
+        <label>Cookie值: <input type="text" name="cookieValue" placeholder="值" required></label>
+        <label>过期时间(秒): <input type="number" name="maxAge" value="3600"></label>
+        <button type="submit">设置Cookie</button>
+    </form>
+    <form id="delete-cookie-form">
+        <label>删除Cookie: <input type="text" name="cookieName" placeholder="Cookie名称" required></label>
+        <button type="submit">删除</button>
+    </form>
+    <div class="test-result" id="cookie-result">
+    </div>
+</div>
+
+<div class="test-section" id="filter-test">
+    <h2>Filter测试</h2>
+    <div>
+        <button id="test-cors">测试CORS过滤器</button>
+        <button id="test-logging">测试日志过滤器</button>
+    </div>
+    <div class="test-result" id="filter-result">
+    </div>
+</div>
+
+<div class="test-section">
+    <h2>基础功能测试</h2>
+    <ul>
+        <li><a href="/">测试根路径(/) - 返回index.html</a></li>
+        <li><a href="/api/data">测试API数据(/api/data) - JSON响应</a></li>
+        <li><a href="/detail">测试自身(detail.html)</a></li>
+    </ul>
+</div>
+
+<script>
+    const API_BASE = 'http://localhost:8080';
+
+    (function() {
+        'use strict';
+
+        console.log("Script loaded at:", new Date());
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM ready");
+
+            document.getElementById('create-session').addEventListener('click', function() {
+                fetch(API_BASE + '/api/session?action=create', {
+                    credentials: "same-origin"
+                })
+                    .then(function(response) {
+                        console.log("Response received:", response.status);
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        console.log("Data received:", data);
+                        document.getElementById('session-result').innerHTML =
+                            '<strong>新Session已创建:</strong><br>ID: ' + data.sessionId;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('invalidate-session').addEventListener('click', function() {
+                fetch(API_BASE + '/api/session?action=invalidate', { credentials: 'same-origin' })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        document.getElementById('session-result').innerHTML =
+                            '<strong>Session已失效:</strong><br>' + data.message;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('get-session-info').addEventListener('click', function() {
+                fetch(API_BASE + '/api/session?action=info', { credentials: 'same-origin' })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        var attributesHtml = '';
+                        for (var key in data.attributes) {
+                            if (data.attributes.hasOwnProperty(key)) {
+                                attributesHtml += key + ': ' + data.attributes[key] + '<br>';
+                            }
+                        }
+                        document.getElementById('session-result').innerHTML =
+                            '<strong>Session信息:</strong><br>' +
+                            'ID: ' + data.sessionId + '<br>' +
+                            '创建时间: ' + new Date(data.createTime * 1000).toLocaleString() + '<br>' +
+                            '最后访问: ' + new Date(data.lastAccess * 1000).toLocaleString() + '<br>' +
+                            '<strong>属性:</strong><br>' + attributesHtml;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('session-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                var data = {
+                    attrName: formData.get('attrName'),
+                    attrValue: formData.get('attrValue')
+                };
+
+                fetch(API_BASE + '/api/session-attribute', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                    credentials: 'same-origin'
+                })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        document.getElementById('session-result').innerHTML =
+                            '<strong>Session属性已设置:</strong><br>' + data.attrName + ' = ' + data.attrValue;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('get-cookies').addEventListener('click', function() {
+                var cookies = document.cookie;
+                var cookiesHtml = '';
+                if (cookies) {
+                    cookies.split(';').forEach(function(cookie) {
+                        var parts = cookie.split('=');
+                        cookiesHtml += parts[0].trim() + ': ' + (parts[1] || '').trim() + '<br>';
+                    });
+                } else {
+                    cookiesHtml = "未找到cookies";
+                }
+                document.getElementById('cookie-result').innerHTML =
+                    '<strong>当前Cookies:</strong><br>' + cookiesHtml;
+            });
+
+            document.getElementById('cookie-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                var data = {
+                    name: formData.get('cookieName'),
+                    value: formData.get('cookieValue'),
+                    maxAge: formData.get('maxAge') || 3600
+                };
+
+                fetch(API_BASE + '/api/cookie', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                    credentials: 'same-origin'
+                })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        document.getElementById('cookie-result').innerHTML =
+                            '<strong>Cookie已设置:</strong><br>' + data.name + ' = ' + data.value;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('delete-cookie-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                var cookieName = formData.get('cookieName');
+
+                fetch(API_BASE + '/api/cookie?name=' + encodeURIComponent(cookieName), {
+                    method: 'DELETE',
+                    credentials: 'same-origin'
+                })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        document.getElementById('cookie-result').innerHTML =
+                            '<strong>Cookie已删除:</strong><br>' + data.name;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('test-cors').addEventListener('click', function() {
+                fetch(API_BASE + '/api/data', {
+                    method: 'OPTIONS',
+                    credentials: 'same-origin'
+                })
+                    .then(function(response) {
+                        var headersHtml = '';
+                        for (var pair of response.headers.entries()) {
+                            headersHtml += pair[0] + ': ' + pair[1] + '<br>';
+                        }
+                        document.getElementById('filter-result').innerHTML =
+                            '<strong>CORS响应头:</strong><br>' + headersHtml;
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+
+            document.getElementById('test-logging').addEventListener('click', function() {
+                fetch(API_BASE + '/api/logger-test', {
+                    headers: { 'User-Agent': 'LoggingFilterTestClient/1.0' },
+                    credentials: 'same-origin'
+                })
+                    .then(function(response) { return response.text(); })
+                    .then(function() {
+                        document.getElementById('filter-result').innerHTML =
+                            '<strong>日志记录测试请求已发送。</strong><br>请在服务器控制台查看日志输出。';
+                    })
+                    .catch(function(error) { console.log(error); });
+            });
+        });
+    })();
+</script>
+</body>
+</html>

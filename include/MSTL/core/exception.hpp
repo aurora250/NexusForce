@@ -81,12 +81,19 @@ struct CUDAMemoryError final : MemoryError {
 #endif
 
 
+MSTL_BEGIN_INNER__
+MSTL_ALWAYS_INLINE inline void __report_err(const Error& err) {
+	std::cerr << "\nException : (" << err.type_ << ") " << err.info_ << "\n";
+#ifdef MSTL_SUPPORT_STACKTRACE__
+	std::cerr << boost::stacktrace::stacktrace() << std::endl;
+#endif
+}
+MSTL_END_INNER__
+
+
 // throw a new error and print stacktrace of boost is imported.
 inline void Exception(const Error& err){
-    std::cerr << "\nException : (" << err.type_ << ") " << err.info_ << "\n";
-#ifdef MSTL_SUPPORT_STACKTRACE__
-    std::cerr << boost::stacktrace::stacktrace() << std::endl;
-#endif
+	_INNER __report_err(err);
 	throw err;
 }
 
@@ -106,7 +113,7 @@ MSTL_NORETURN inline void Exit(const bool abort = false, void(* func)() = nullpt
 
 #ifdef MSTL_STATE_DEBUG__
 #define MSTL_REPORT_ERROR(MESG) \
-    { MSTL::Exception(MSTL::AssertionError(MESG)); }
+    { _INNER __report_err(_MSTL AssertionError(MESG)); }
 
 #define MSTL_DEBUG_VERIFY(CON, MESG) \
 	{ if (CON) {} else { MSTL_REPORT_ERROR(MESG); assert(false); } }

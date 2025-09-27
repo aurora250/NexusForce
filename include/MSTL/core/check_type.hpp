@@ -5,6 +5,7 @@
 #include <cxxabi.h>
 #endif // MSTL_COMPILER_GNUC__
 MSTL_BEGIN_NAMESPACE__
+MSTL_BEGIN_INNER__
 
 class output {
 private:
@@ -230,10 +231,12 @@ CHECK_TYPE_MEM_FUNC__(volatile)
 CHECK_TYPE_MEM_FUNC__(const volatile)
 #undef CHECK_TYPE_MEM_FUNC__
 
+MSTL_END_INNER__
+
 template <typename T>
 MSTL_CONSTEXPR20 string check_type() {
     string str;
-    check<T> { str };
+    _INNER check<T> { str };
     return str;
 }
 

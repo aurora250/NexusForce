@@ -4,13 +4,13 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
-    typename Alloc = allocator<__hashtable_node<Value>>>
+    typename Alloc = allocator<hashtable_node<Value>>>
 class unordered_set {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered set requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__hashtable_node<Value>, typename Alloc::value_type>,
+    static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>,
         "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered set only contains object types.");
 
@@ -189,13 +189,13 @@ void swap(unordered_set<Value, HashFcn, EqualKey, Alloc>& lh,
 
 
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
-    typename Alloc = allocator<__hashtable_node<Value>>>
+    typename Alloc = allocator<hashtable_node<Value>>>
 class unordered_multiset {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered multiset requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__hashtable_node<Value>, typename Alloc::value_type>,
+    static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>,
         "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered multiset only contains object types.");
 

@@ -46,7 +46,7 @@ private:
         is_assignable<T&, optional<U>&&>>;
 
     bool have_value_ = false;
-    union { T value_{}; };
+    union { T value_ = _MSTL initialize<T>(); };
 
 public:
     constexpr optional() noexcept = default;
@@ -261,15 +261,16 @@ public:
         return _MSTL move(value_);
     }
 
-    template <typename F, enable_if_t<is_copy_constructible_v<T>, int> = 0>
+    template <typename F, enable_if_t<is_invocable_v<F> && is_copy_constructible_v<T>, int> = 0>
     constexpr self or_else(F&& f) const & {
         if (have_value_) {
             return *this;
         }
         return _MSTL forward<F>(f)();
     }
-    template <typename F, enable_if_t<is_move_constructible_v<T>, int> = 0>
-    constexpr self or_else(F &&f) && {
+
+    template <typename F, enable_if_t<is_invocable_v<F> && is_move_constructible_v<T>, int> = 0>
+    constexpr self or_else(F&& f) && {
         if (have_value_) {
             return _MSTL move(*this);
         }

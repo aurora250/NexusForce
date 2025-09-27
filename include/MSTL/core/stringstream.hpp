@@ -141,7 +141,7 @@ public:
         return *this;
     }
 
-    template <typename Integer, enable_if_t<is_integral_v<Integer>, int> = 0>
+    template <typename Integer, enable_if_t<is_integral<Integer>::value, int> = 0>
     MSTL_CONSTEXPR20 self& extract_integer(Integer& x) {
         if (this->fail()) return *this;
 
@@ -285,6 +285,13 @@ public:
 };
 
 
+#define __MSTL_EXPAND_OSS_STREAM(T) \
+    MSTL_CONSTEXPR20 self& operator<<(const T& x) { \
+        this->buffer_.append(_MSTL move(_MSTL to_string(x))); \
+        return *this; \
+    }
+
+
 template <typename CharT>
 class basic_ostringstream : public basic_stringbuf<CharT> {
 public:
@@ -297,45 +304,13 @@ public:
     using base::base;
 
     MSTL_CONSTEXPR20 self& operator<<(const bool x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(static_cast<int>(x))));
+        this->buffer_.append(_MSTL move(_MSTL to_string(x)));
         return *this;
     }
-    MSTL_CONSTEXPR20 self& operator<<(int x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(unsigned int x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(long x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(unsigned long x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(long long x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(unsigned long long x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(float x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(double x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
-    MSTL_CONSTEXPR20 self& operator<<(long double x) {
-        this->buffer_.append(_MSTL move((__stream_to_string<char_type>)(x)));
-        return *this;
-    }
+
+    MSTL_MACRO_RANGE_FLOAT(__MSTL_EXPAND_OSS_STREAM)
+    MSTL_MACRO_RANGE_INT(__MSTL_EXPAND_OSS_STREAM)
+
     MSTL_CONSTEXPR20 self& operator<<(char_type x) {
         this->buffer_.append(x);
         return *this;

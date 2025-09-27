@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="check.css"/>
+  <title>交易信息布局</title>
+</head>
+<body>
+  <!-- 外部容器：实现整体居中 + 外边框 -->
+  <div class="outer-container">
+    <!-- 内部容器：左右布局 -->
+    <div class="container">
+      <!-- 信息与支付区域 -->
+      <div class="info-payment">
+        <h2>信息与支付</h2>
+        <div class="item">
+          <span class="label">负责人：</span>
+          <span class="value">小张</span>
+        </div>
+        <div class="item">
+          <span class="label">电话：</span>
+          <span class="value">173xxxx8890</span>
+        </div>
+        <div class="item">
+          <span class="label">微信：</span>
+          <span class="value">slxxx</span>
+        </div>
+        <h3>支付方式</h3>
+        <div class="payment-methods">
+          <div class="method">
+            <input type="radio" id="online-wechat" name="pay" checked>
+            <label for="online-wechat">线上：微信</label>
+          </div>
+          <div class="method">
+            <input type="radio" id="online-alipay" name="pay">
+            <label for="online-alipay">线上：支付宝</label>
+          </div>
+          <div class="method">
+            <input type="radio" id="offline-cash" name="pay">
+            <label for="offline-cash">线下：现金</label>
+          </div>
+          <div class="method">
+            <input type="radio" id="offline-card" name="pay">
+            <label for="offline-card">线下：银行卡</label>
+          </div>
+        </div>
+      </div>
+      <!-- 交易确认区域 -->
+      <div class="transaction-confirm">
+        <h2>交易确认区</h2>
+        <div class="transaction-info">
+          <p>交易双方确认：苹果 2 斤 共计 xxxx 元</p>
+          <div class="item">
+            <span class="label">卖家：</span>
+            <span class="value">小张</span>
+          </div>
+          <div class="item">
+            <span class="label">买家：</span>
+            <span class="value">小刘</span>
+          </div>
+          <div class="item">
+            <span class="label">时间：</span>
+            <input type="text" class="input" placeholder="请填写">
+          </div>
+          <div class="item">
+            <span class="label">地点：</span>
+            <input type="text" class="input" placeholder="请填写">
+          </div>
+          <div class="delivery-method">
+            <span class="label">方式：</span>
+            <input type="radio" id="self-pickup" name="delivery">
+            <label for="self-pickup">自提</label>
+            <input type="radio" id="home-delivery" name="delivery" checked>
+            <label for="home-delivery">送货上门</label>
+          </div>
+          <button class="confirm-btn">确认</button>
+        </div>
+        <div class="send-area">
+          <input type="text" class="send-input" placeholder="输入内容">
+          <button class="send-btn">发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

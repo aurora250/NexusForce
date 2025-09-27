@@ -1,12 +1,12 @@
 #ifndef MSTL_UTILITY_HPP__
 #define MSTL_UTILITY_HPP__
 #include "concepts.hpp"
-#include "errorlib.hpp"
+#include "iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, T... Values>
 struct integer_sequence {
-    static_assert(is_integral_v<T>, "integer sequence requires integral types.");
+    static_assert(is_integral<T>::value, "integer sequence requires integral types.");
 
     using value_type = T;
 
@@ -234,8 +234,10 @@ MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& get(tuple<Types...>&
 template <size_t Index, typename... Types>
 MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>&& get(const tuple<Types...>&& t) noexcept;
 
+MSTL_BEGIN_INNER__
 template <size_t Index, typename... Types>
 MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& __pair_get_from_tuple(tuple<Types...>&& t) noexcept;
+MSTL_END_INNER__
 
 
 template <typename T1, typename T2>
@@ -362,8 +364,8 @@ struct pair {
 
 	template <typename Tuple1, typename Tuple2, size_t... Index1, size_t... Index2>
 	constexpr pair(Tuple1& t1, Tuple2& t2, index_sequence<Index1...>, index_sequence<Index2...>)
-		: first(_MSTL __pair_get_from_tuple<Index1>(_MSTL move(t1))...),
-		second(_MSTL __pair_get_from_tuple<Index2>(_MSTL move(t2))...) {}
+		: first(_INNER __pair_get_from_tuple<Index1>(_MSTL move(t1))...),
+		second(_INNER __pair_get_from_tuple<Index2>(_MSTL move(t2))...) {}
 
 	// construct from tuple
 	template <typename... Types1, typename... Types2>
@@ -503,6 +505,8 @@ struct tuple_element<Index, pair<T1, T2>> {
 
 
 #ifndef MSTL_VERSION_17__
+MSTL_BEGIN_INNER__
+
 template <size_t Index, typename T1, typename T2>
 struct __pair_get_helper;
 template <typename T1, typename T2>
@@ -524,6 +528,7 @@ struct __pair_get_helper<0, T1, T2> {
 		return _MSTL forward<const T1>(pir.first);
 	}
 };
+
 template <typename T1, typename T2>
 struct __pair_get_helper<1, T1, T2> {
 	MSTL_NODISCARD constexpr static tuple_element_t<1, pair<T1, T2>>&
@@ -543,6 +548,8 @@ struct __pair_get_helper<1, T1, T2> {
 		return _MSTL forward<const T2>(pir.second);
 	}
 };
+
+MSTL_END_INNER__
 #endif // !MSTL_VERSION_17__
 
 
@@ -558,7 +565,7 @@ MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>& get(pair<T1, T2>&
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&
 get(pair<T1, T2>& pir) noexcept {
-	return __pair_get_helper<Index, T1, T2>::get(pir);
+	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
 }
 #endif // MSTL_VERSION_17__
 template <typename T1, typename T2>
@@ -584,7 +591,7 @@ get(const pair<T1, T2>& pir) noexcept {
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&
 get(const pair<T1, T2>& pir) noexcept {
-	return __pair_get_helper<Index, T1, T2>::get(pir);
+	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
 }
 #endif // MSTL_VERSION_17__
 template <typename T1, typename T2>
@@ -611,7 +618,7 @@ template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&&
 get(pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<tuple_element_t<Index, pair<T1, T2>>>(
-		__pair_get_helper<Index, T1, T2>::get(_MSTL forward<pair<T1, T2>>(pir)));
+		_INNER __pair_get_helper<Index, T1, T2>::get(_MSTL forward<pair<T1, T2>>(pir)));
 }
 #endif // MSTL_VERSION_17__
 template <typename T1, typename T2>
@@ -638,7 +645,7 @@ template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&&
 get(const pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<const tuple_element_t<Index, pair<T1, T2>>>(
-		__pair_get_helper<Index, T1, T2>::get(_MSTL forward<const pair<T1, T2>>(pir)));
+		_INNER __pair_get_helper<Index, T1, T2>::get(_MSTL forward<const pair<T1, T2>>(pir)));
 }
 #endif // MSTL_VERSION_17__
 template <typename T1, typename T2>

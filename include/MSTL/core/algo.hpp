@@ -246,6 +246,7 @@ MSTL_CONSTEXPR20 Iterator search_n(Iterator first, Iterator last, const size_t c
 }
 
 #ifndef MSTL_VERSION_17__
+MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2,
 	enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
@@ -271,11 +272,13 @@ MSTL_CONSTEXPR20 Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Ite
 		++first1;
 	}
 }
+MSTL_END_INNER__
+
 template <typename Iterator1, typename Iterator2,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
 	if (first2 == last2) return last1;
-	return _MSTL __find_end_aux(first1, last1, first2, last2);
+	return _INNER __find_end_aux(first1, last1, first2, last2);
 }
 #else
 template <typename Iterator1, typename Iterator2,
@@ -524,6 +527,7 @@ MSTL_CONSTEXPR20 void replace_if(Iterator first, Iterator last, Predicate pred, 
 }
 
 #ifndef MSTL_VERSION_17__
+MSTL_BEGIN_INNER__
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void __reverse_aux(Iterator first, Iterator last) {
 	while (first < last) {
@@ -541,9 +545,11 @@ void __reverse_aux(Iterator first, Iterator last) {
 		++first;
 	}
 }
+MSTL_END_INNER__
+
 template <typename Iterator, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 void reverse(Iterator first, Iterator last) {
-	_MSTL __reverse_aux(first, last);
+	_INNER __reverse_aux(first, last);
 }
 #else
 template <typename Iterator, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
@@ -566,6 +572,8 @@ MSTL_CONSTEXPR20 void reverse(Iterator first, Iterator last) {
 }
 #endif // MSTL_VERSION_17__
 
+MSTL_BEGIN_INNER__
+
 #ifndef MSTL_VERSION_17__
 template <typename Iterator, enable_if_t<!is_ranges_bid_iter_v<Iterator>, int> = 0>
 void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
@@ -587,9 +595,10 @@ void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
 	_MSTL reverse(middle, last);
 	_MSTL reverse(first, last);
 }
+
 template <typename Iterator, enable_if_t<!is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
-	_MSTL __rotate_aux_dispatch(first, middle, last);
+	_INNER __rotate_aux_dispatch(first, middle, last);
 }
 #else
 template <typename Iterator, enable_if_t<!is_ranges_rnd_iter_v<Iterator>, int> = 0>
@@ -636,13 +645,16 @@ template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 
 MSTL_CONSTEXPR20 void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 	iter_dif_t<Iterator> n = _MSTL gcd(last - first, middle - first);
 	while (n--)
-		_MSTL __rotate_cycle_aux(first, last, first + n, middle - first);
+		_INNER __rotate_cycle_aux(first, last, first + n, middle - first);
 }
+
+MSTL_END_INNER__
+
 
 template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void rotate(Iterator first, Iterator middle, Iterator last) {
 	if (first == middle || middle == last) return;
-	_MSTL __rotate_aux(first, middle, last);
+	_INNER __rotate_aux(first, middle, last);
 }
 
 template <typename Iterator1, typename Iterator2,
@@ -906,14 +918,12 @@ MSTL_CONSTEXPR20 bool prev_permutation(Iterator first, Iterator last) {
 }
 
 
-// based on Fisher-Yates algorithm to shuffle elements
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void shuffle(Iterator first, Iterator last) {
 	if (first == last) return;
-    _MSTL random_lcd rng;
     for (Iterator i = _MSTL next(first); i != last; ++i) {
         auto distance = _MSTL distance(first, i);
-        auto random_idx = rng.next_int(0, static_cast<int>(distance));
+        auto random_idx = random_lcd::next_int(0, static_cast<int>(distance));
         Iterator j = _MSTL next(first, random_idx);
         _MSTL iter_swap(i, j);
     }
@@ -960,6 +970,9 @@ MSTL_CONSTEXPR20 pair<Iterator, Iterator> equal_range(Iterator first, Iterator l
 	return _MSTL equal_range(first, last, value, _MSTL less<iter_val_t<Iterator>>());
 }
 
+
+MSTL_BEGIN_INNER__
+
 template <typename Iterator, typename Distance, typename Compare>
 MSTL_CONSTEXPR20 void __merge_without_buffer_aux(Iterator first, Iterator middle, Iterator last,
 	Distance len1, Distance len2, Compare comp) {
@@ -987,8 +1000,8 @@ MSTL_CONSTEXPR20 void __merge_without_buffer_aux(Iterator first, Iterator middle
 	_MSTL rotate(first_cut, middle, second_cut);
 	Iterator new_middle = first_cut;
 	_MSTL advance(new_middle, len22);
-	_MSTL __merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
-	_MSTL __merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
+	_INNER __merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
+	_INNER __merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
 }
 
 template <typename Iterator1, typename Iterator2, typename Distance>
@@ -1065,15 +1078,17 @@ MSTL_CONSTEXPR20 void __merge_with_buffer_aux(Iterator first, Iterator middle, I
 			first_cut = _MSTL upper_bound(first, middle, *second_cut, comp);
 			len11 = _MSTL distance(first, first_cut);
 		}
-		Iterator new_middle = _MSTL __rotate_with_buffer_aux(
+		Iterator new_middle = _INNER __rotate_with_buffer_aux(
 			first_cut, middle, second_cut, len1 - len11, len22, buffer, buffer_size);
 
-		_MSTL __merge_with_buffer_aux(
+		_INNER __merge_with_buffer_aux(
 			first, first_cut, new_middle, len11, len22, buffer, buffer_size, comp);
-		_MSTL __merge_with_buffer_aux(
+		_INNER __merge_with_buffer_aux(
 			new_middle, second_cut, last, len1 - len11, len2 - len22, buffer, buffer_size, comp);
 	}
 }
+
+MSTL_END_INNER__
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
@@ -1083,9 +1098,9 @@ MSTL_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator la
 	Distance len2 = _MSTL distance(middle, last);
 	temporary_buffer<Iterator> buffer(first, last);
 	if (buffer.begin() == 0)
-		_MSTL __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
+		_INNER __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
 	else
-		_MSTL __merge_with_buffer_aux(
+		_INNER __merge_with_buffer_aux(
 			first, middle, last, len1, len2, buffer.begin(), Distance(buffer.size()), comp);
 }
 
@@ -1195,7 +1210,7 @@ Iterator2 partial_sort_copy(
     return _MSTL partial_sort_copy(first, result_first, result_last, _MSTL less<iter_val_t<Iterator1>>());
 }
 
-
+MSTL_BEGIN_INNER__
 template <typename Iterator, typename T, typename Compare>
 void __insertion_sort_aux(Iterator last, T value, Compare comp) {
     Iterator next = last;
@@ -1207,6 +1222,7 @@ void __insertion_sort_aux(Iterator last, T value, Compare comp) {
     }
     *last = value;
 }
+MSTL_END_INNER__
 
 // insertion sort : Ot(N)~(N^2) Om(1) stable
 template <typename Iterator, typename Compare, enable_if_t<
@@ -1220,7 +1236,7 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
             _MSTL copy_backward(first, i, i + 1);
             *first = value;
         }
-        else _MSTL __insertion_sort_aux(i, value, comp);
+        else _INNER __insertion_sort_aux(i, value, comp);
     }
 }
 
@@ -1272,6 +1288,7 @@ void quick_sort(Iterator first, Iterator last) {
     return _MSTL quick_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
+MSTL_BEGIN_INNER__
 template <typename Iterator, typename Compare>
 void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compare comp) {
     while (last - first > SORT_DISPATCH_THRESHOLD) {
@@ -1282,21 +1299,22 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
         --depth_limit;
         Iterator cut = _MSTL lomuto_partition(
             first, last, _MSTL median(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);
-        _MSTL __intro_sort_dispatch(cut, last, depth_limit, comp);
+        _INNER __intro_sort_dispatch(cut, last, depth_limit, comp);
         last = cut;
     }
 }
+MSTL_END_INNER__
 
 // standard sort : Ot(NlogN) Om(logN) unstable
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
-    _MSTL __intro_sort_dispatch(first, last, (int)_MSTL cursory_lg2(last - first) * 2, comp);
+    _INNER __intro_sort_dispatch(first, last, (int)_MSTL cursory_lg2(last - first) * 2, comp);
     if (last - first > SORT_DISPATCH_THRESHOLD) {
         _MSTL insertion_sort(first, first + SORT_DISPATCH_THRESHOLD, comp);
         for (Iterator i = first + SORT_DISPATCH_THRESHOLD; i != last; ++i)
-            _MSTL __insertion_sort_aux(i, *i, comp);
+            _INNER __insertion_sort_aux(i, *i, comp);
     }
     else
         _MSTL insertion_sort(first, last, comp);

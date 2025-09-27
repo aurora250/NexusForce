@@ -9,10 +9,10 @@ template <bool IsConst, typename List>
 struct list_iterator;
 
 template <typename T>
-struct __list_node {
+struct list_node {
 private:
     using value_type    = T;
-    using node_type     = __list_node<value_type>;
+    using node_type     = list_node<value_type>;
 
     value_type data_{};
     node_type* prev_ = nullptr;
@@ -40,7 +40,7 @@ public:
     using self              = list_iterator<IsConst, container_type>;
 
 private:
-    using node_type         = __list_node<value_type>;
+    using node_type         = list_node<value_type>;
 
     node_type* node_ = nullptr;
     const container_type* list_ = nullptr;
@@ -146,12 +146,12 @@ public:
 };
 
 
-template <typename T, typename Alloc = allocator<__list_node<T>>>
+template <typename T, typename Alloc = allocator<list_node<T>>>
 class list {
 #ifdef MSTL_VERSION_20__	
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<__list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
+    static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "list only contains object types.");
 
 public:
@@ -165,7 +165,7 @@ public:
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
 private:
-    using node_type = __list_node<T>;
+    using node_type = list_node<T>;
     using link_type = node_type*;
 
     link_type head_ = nullptr;
@@ -237,7 +237,7 @@ public:
         clear();
         link_type p = x.head_->next_;
         while (p != x.head_) {
-            link_type q = create_node(p->data);
+            link_type q = this->create_node(p->data_);
             q->prev_ = head_->prev_;
             q->next_ = head_;
             head_->prev_->next_ = q;
@@ -250,12 +250,12 @@ public:
 
     list(self&& x) noexcept {
         empty_init();
-        swap(x);
+        this->swap(x);
     }
     self& operator =(self&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         clear();
-        swap(x);
+        this->swap(x);
         return *this;
     }
 
@@ -264,9 +264,9 @@ public:
         while (p != head_) {
             link_type q = p;
             p = p->next_;
-            destroy_node(q);
+            this->destroy_node(q);
         }
-        destroy_node(head_);
+        this->destroy_node(head_);
     }
 
     MSTL_NODISCARD iterator begin() noexcept { return {head_->next_, this}; }

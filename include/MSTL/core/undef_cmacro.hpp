@@ -12,3 +12,7 @@
 #ifdef min
 #undef min
 #endif
+
+#ifdef small
+#undef small
+#endif

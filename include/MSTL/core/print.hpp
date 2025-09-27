@@ -16,11 +16,20 @@
 #include "file.hpp"
 #include "json.hpp"
 #include "hexadecimal.hpp"
+#include "map.hpp"
 #include "MSTL/web/session.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_INLINE17 constexpr uint32_t MSTL_SPLIT_LENGTH = 25U;
+
+inline void split_line(std::ostream& out = std::cout,
+    uint32_t size = MSTL_SPLIT_LENGTH, const char split = '-') {
+    while (size--) out << split;
+    out << '\n';
+}
+
 template <typename T>
-struct __address_printer {
+struct address_printer {
     static void print(const T& t) {
         std::cout << "@" << _MSTL addressof(t);
     }
@@ -32,10 +41,10 @@ struct __address_printer {
 template <typename T, typename = void>
 struct printer {
     static void print(const T& t) {
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
-        __address_printer<T>::print_feature(t);
+        address_printer<T>::print_feature(t);
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
@@ -79,11 +88,11 @@ struct printer<T, enable_if_t<is_boolean_v<T>>> {
 template <typename T>
 struct printer<T, enable_if_t<is_standard_integer_v<T>>> {
 private:
-    template <typename U, enable_if_t<is_signed_v<U>, int> = 0>
+    template <typename U, enable_if_t<is_signed<U>::value, int> = 0>
     static void __print_feature_dispatch(const U& t) {
         std::cout << t;
     }
-    template <typename U, enable_if_t<is_unsigned_v<U>, int> = 0>
+    template <typename U, enable_if_t<is_unsigned<U>::value, int> = 0>
     static void __print_feature_dispatch(const U& t) {
         std::cout << t << "u";
     }
@@ -98,7 +107,7 @@ public:
 };
 
 template <typename T>
-struct printer<T, enable_if_t<is_floating_point_v<T>>> {
+struct printer<T, enable_if_t<is_floating_point<T>::value>> {
     static void print(T t) {
         std::cout << t;
     }
@@ -183,7 +192,7 @@ struct printer<T, enable_if_t<is_pointer_v<T> && !is_ctype_string_v<T>>> {
             printer<nullptr_t>::print(nullptr);
             return;
         }
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
         if (t == nullptr) {
@@ -201,7 +210,7 @@ struct printer<T, enable_if_t<is_pointer_v<T> && !is_ctype_string_v<T>>> {
 template <typename T>
 struct printer<T, enable_if_t<is_iter_v<T> && !is_pointer_v<T>>> {
     static void print(const T& t) {
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
         using raw_type = remove_cvref_t<decltype(*t)>;
@@ -219,14 +228,14 @@ struct printer<T, enable_if_t<is_member_object_pointer_v<T>>> {
             printer<nullptr_t>::print(nullptr);
             return;
         }
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
         if (t == nullptr) {
             printer<nullptr_t>::print(nullptr);
             return;
         }
-        __address_printer<T>::print_feature(t);
+        address_printer<T>::print_feature(t);
     }
 };
 
@@ -237,14 +246,14 @@ struct printer<T, enable_if_t<is_member_function_pointer_v<T>>> {
             printer<nullptr_t>::print(nullptr);
             return;
         }
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
         if (t == nullptr) {
             printer<nullptr_t>::print(nullptr);
             return;
         }
-        __address_printer<T>::print_feature(t);
+        address_printer<T>::print_feature(t);
     }
 };
 
@@ -265,10 +274,10 @@ struct printer<T, enable_if_t<is_enum_v<T>>> {
 template <typename T>
 struct printer<T, enable_if_t<is_union_v<T>>> {
     static void print(const T& t) {
-        __address_printer<T>::print(t);
+        address_printer<T>::print(t);
     }
     static void print_feature(const T& t) {
-        __address_printer<T>::print_feature(t);
+        address_printer<T>::print_feature(t);
     }
 };
 
@@ -359,6 +368,8 @@ struct printer<pair<T1, T2>> {
 };
 
 
+MSTL_BEGIN_INNER__
+
 template <typename Tuple, size_t I,
     enable_if_t<I == tuple_size_v<Tuple> - 1, int> = 0>
 void __print_tuple_elements(const Tuple& t) {
@@ -372,7 +383,7 @@ void __print_tuple_elements(const Tuple& t) {
     using type = remove_cvref_t<decltype(_MSTL get<I>(t))>;
     printer<type>::print(_MSTL get<I>(t));
     std::cout << ", ";
-    _MSTL __print_tuple_elements<Tuple, I + 1>(t);
+    _INNER __print_tuple_elements<Tuple, I + 1>(t);
 }
 
 template <typename Tuple, size_t I,
@@ -388,8 +399,11 @@ void __print_tuple_elements_feature(const Tuple& t) {
     using type = remove_cvref_t<decltype(_MSTL get<I>(t))>;
     printer<type>::print_feature(_MSTL get<I>(t));
     std::cout << ", ";
-    _MSTL __print_tuple_elements_feature<Tuple, I + 1>(t);
+    _INNER __print_tuple_elements_feature<Tuple, I + 1>(t);
 }
+
+MSTL_END_INNER__
+
 
 template <typename... Args>
 struct printer<_MSTL tuple<Args...>> {
@@ -402,7 +416,7 @@ private:
     template <typename... UArgs, enable_if_t<sizeof...(UArgs) != 0, int> = 0>
     static void __print_tuple_dispatch(const tuple<UArgs...>& t) {
         std::cout << "( ";
-        _MSTL __print_tuple_elements<decltype(t), 0>(t);
+        _INNER __print_tuple_elements<decltype(t), 0>(t);
         std::cout << " )";
     }
 
@@ -414,7 +428,7 @@ private:
     template <typename... UArgs, enable_if_t<sizeof...(UArgs) != 0, int> = 0>
     static void __print_tuple_feature_dispatch(const tuple<UArgs...>& t) {
         std::cout << "( ";
-        _MSTL __print_tuple_elements_feature<decltype(t), 0>(t);
+        _INNER __print_tuple_elements_feature<decltype(t), 0>(t);
         std::cout << " )(" << check_type<tuple<Args...>>() << ")";
     }
 
@@ -551,17 +565,17 @@ struct printer<_MSTL variant<Types...>> {
 
 
 template <typename CharT>
-struct __raw_string_printer {
+struct raw_string_printer {
     static void print(const CharT* t) {
         std::cout << t;
     }
     static void print_feature(const CharT* t) {
-        __raw_string_printer::print(t);
+        raw_string_printer::print(t);
     }
 };
 
 template <>
-struct __raw_string_printer<char> {
+struct raw_string_printer<char> {
     static void print(const char* t) {
         std::cout << t;
     }
@@ -588,56 +602,56 @@ struct __raw_string_printer<char> {
 };
 
 template <>
-struct __raw_string_printer<wchar_t> {
+struct raw_string_printer<wchar_t> {
     static void print(const wchar_t* t) {
         string utf8_str = _MSTL move(_MSTL wstring_to_utf8(t));
-        __raw_string_printer<char>::print(utf8_str.c_str());
+        raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const wchar_t* t) {
         string utf8_str = _MSTL move(_MSTL wstring_to_utf8(t));
         std::cout << "L";
-        __raw_string_printer<char>::print_feature(utf8_str.c_str());
+        raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
 };
 
 #ifdef MSTL_VERSION_20__
 template <>
-struct __raw_string_printer<char8_t> {
+struct raw_string_printer<char8_t> {
     static void print(const char8_t* t) {
         string utf8_str = _MSTL move(_MSTL u8string_to_utf8(t));
-        __raw_string_printer<char>::print(utf8_str.c_str());
+        raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char8_t* t) {
         string utf8_str = _MSTL move(_MSTL u8string_to_utf8(t));
         std::cout << "U8";
-        __raw_string_printer<char>::print_feature(utf8_str.c_str());
+        raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
 };
 #endif
 
 template <>
-struct __raw_string_printer<char16_t> {
+struct raw_string_printer<char16_t> {
     static void print(const char16_t* t) {
         string utf8_str = _MSTL move(_MSTL u16string_to_utf8(t));
-        __raw_string_printer<char>::print(utf8_str.c_str());
+        raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char16_t* t) {
         string utf8_str = _MSTL move(_MSTL u16string_to_utf8(t));
         std::cout << "U16";
-        __raw_string_printer<char>::print_feature(utf8_str.c_str());
+        raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
 };
 
 template <>
-struct __raw_string_printer<char32_t> {
+struct raw_string_printer<char32_t> {
     static void print(const char32_t* t) {
         string utf8_str = _MSTL move(_MSTL u32string_to_utf8(t));
-        __raw_string_printer<char>::print(utf8_str.c_str());
+        raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char32_t* t) {
         string utf8_str = _MSTL move(_MSTL u32string_to_utf8(t));
         std::cout << "U32";
-        __raw_string_printer<char>::print_feature(utf8_str.c_str());
+        raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
 };
 
@@ -649,20 +663,20 @@ private:
 
     template <typename U, enable_if_t<is_bounded_array_v<U>, int> = 0>
     static void __print_dispatch(const T& t) {
-        __raw_string_printer<char_type>::print(&t[0]);
+        raw_string_printer<char_type>::print(&t[0]);
     }
     template <typename U, enable_if_t<!is_bounded_array_v<U>, int> = 0>
     static void __print_dispatch(const T& t) {
-        __raw_string_printer<char_type>::print(t);
+        raw_string_printer<char_type>::print(t);
     }
 
     template <typename U, enable_if_t<is_bounded_array_v<U>, int> = 0>
     static void __print_feature_dispatch(const T& t) {
-        __raw_string_printer<char_type>::print_feature(&t[0]);
+        raw_string_printer<char_type>::print_feature(&t[0]);
     }
     template <typename U, enable_if_t<!is_bounded_array_v<U>, int> = 0>
     static void __print_feature_dispatch(const T& t) {
-        __raw_string_printer<char_type>::print_feature(t);
+        raw_string_printer<char_type>::print_feature(t);
     }
 
 public:
@@ -686,11 +700,11 @@ public:
 template <typename CharT, typename Traits>
 struct printer<basic_string_view<CharT, Traits>> {
     static void print(const basic_string_view<CharT, Traits>& t) {
-        __raw_string_printer<CharT>::print(t.data());
+        raw_string_printer<CharT>::print(t.data());
     }
 
     static void print_feature(const basic_string_view<CharT, Traits>& t) {
-        __raw_string_printer<CharT>::print_feature(t.data());
+        raw_string_printer<CharT>::print_feature(t.data());
         std::cout << "sv";
     }
 };
@@ -704,10 +718,10 @@ std::ostream& operator <<(std::ostream& out, basic_string_view<CharT, Traits> co
 template <typename CharT, typename Traits, typename Alloc>
 struct printer<basic_string<CharT, Traits, Alloc>> {
     static void print(const basic_string<CharT, Traits, Alloc>& t) {
-        __raw_string_printer<CharT>::print(t.data());
+        raw_string_printer<CharT>::print(t.data());
     }
     static void print_feature(const basic_string<CharT, Traits, Alloc>& t) {
-        __raw_string_printer<CharT>::print_feature(t.data());
+        raw_string_printer<CharT>::print_feature(t.data());
         std::cout << "s";
     }
 };
@@ -721,10 +735,10 @@ std::ostream& operator <<(std::ostream& out, basic_string<CharT, Traits, Alloc> 
 template <typename CharT>
 struct printer<basic_istringstream<CharT>> {
     static void print(const basic_istringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print(t.str().c_str());
+        raw_string_printer<CharT>::print(t.str().c_str());
     }
     static void print_feature(const basic_istringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print_feature(t.str().c_str());
+        raw_string_printer<CharT>::print_feature(t.str().c_str());
         std::cout << "iss";
     }
 };
@@ -732,10 +746,10 @@ struct printer<basic_istringstream<CharT>> {
 template <typename CharT>
 struct printer<basic_ostringstream<CharT>> {
     static void print(const basic_ostringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print(t.str().c_str());
+        raw_string_printer<CharT>::print(t.str().c_str());
     }
     static void print_feature(const basic_ostringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print_feature(t.str().c_str());
+        raw_string_printer<CharT>::print_feature(t.str().c_str());
         std::cout << "oss";
     }
 };
@@ -743,10 +757,10 @@ struct printer<basic_ostringstream<CharT>> {
 template <typename CharT>
 struct printer<basic_stringstream<CharT>> {
     static void print(const basic_stringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print(t.str().c_str());
+        raw_string_printer<CharT>::print(t.str().c_str());
     }
     static void print_feature(const basic_stringstream<CharT>& t) {
-        __raw_string_printer<CharT>::print_feature(t.str().c_str());
+        raw_string_printer<CharT>::print_feature(t.str().c_str());
         std::cout << "ss";
     }
 };
@@ -769,13 +783,13 @@ struct printer<file> {
         std::cout << check_type<file>();
     }
     static void print_feature(const file& t) {
-        std::cout << check_type<file>() << "(" << t.file_path() << ")";
+        std::cout << check_type<file>() << "(" << t.path() << ")";
     }
 };
 
 
 template <typename Container>
-struct __range_printer {
+struct range_printer {
     using value_type = typename Container::value_type;
 
     static void print(const Container& t) {
@@ -812,11 +826,11 @@ struct __range_printer {
 template <typename T, size_t Size>
 struct printer<array<T, Size>> {
     static void print(const array<T, Size>& t) {
-        __range_printer<array<T, Size>>::print(t);
+        range_printer<array<T, Size>>::print(t);
     }
 
     static void print_feature(const array<T, Size>& t) {
-        __range_printer<array<T, Size>>::print_feature(t);
+        range_printer<array<T, Size>>::print_feature(t);
     }
 };
 
@@ -825,10 +839,10 @@ struct printer<temporary_buffer<T>> {
     using type = temporary_buffer<T>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -837,10 +851,10 @@ struct printer<list<T, Alloc>> {
     using type = list<T, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -849,10 +863,10 @@ struct printer<deque<T, Alloc, BufSize>> {
     using type = deque<T, Alloc, BufSize>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -861,10 +875,10 @@ struct printer<bitmap> {
     using type = bitmap;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -873,10 +887,10 @@ struct printer<vector<T, Alloc>> {
     using type = vector<T, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -886,10 +900,10 @@ struct printer<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
     using type = rb_tree<Key, Value, KeyOfValue, Compare, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -898,10 +912,10 @@ struct printer<queue<T, Sequence>> {
     using type = queue<T, Sequence>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -910,10 +924,10 @@ struct printer<priority_queue<T, Sequence, Compare>> {
     using type = priority_queue<T, Sequence, Compare>;
 
     static void print(const type& t) {
-        __range_printer<Sequence>::print(t.get_container());
+        range_printer<Sequence>::print(t.get_container());
     }
     static void print_feature(const type& t) {
-        __range_printer<Sequence>::print_feature(t.get_container());
+        range_printer<Sequence>::print_feature(t.get_container());
     }
 };
 
@@ -922,10 +936,10 @@ struct printer<stack<T, Sequence>> {
     using type = stack<T, Sequence>;
 
     static void print(const type& t) {
-        __range_printer<Sequence>::print(t.get_container());
+        range_printer<Sequence>::print(t.get_container());
     }
     static void print_feature(const type& t) {
-        __range_printer<Sequence>::print_feature(t.get_container());
+        range_printer<Sequence>::print_feature(t.get_container());
     }
 };
 
@@ -935,10 +949,10 @@ struct printer<hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>> {
     using type = hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -947,10 +961,10 @@ struct printer<map<Key, T, Compare, Alloc>> {
     using type = map<Key, T, Compare, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -959,10 +973,10 @@ struct printer<multimap<Key, T, Compare, Alloc>> {
     using type = multimap<Key, T, Compare, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -971,10 +985,10 @@ struct printer<set<Key, Compare, Alloc>> {
     using type = set<Key, Compare, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -983,10 +997,10 @@ struct printer<multiset<Key, Compare, Alloc>> {
     using type = multiset<Key, Compare, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -996,10 +1010,10 @@ struct printer<unordered_map<Value, Key, HashFcn, EqualKey, Alloc>> {
     using type = unordered_map<Value, Key, HashFcn, EqualKey, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -1008,10 +1022,10 @@ struct printer<unordered_set<Value, HashFcn, EqualKey, Alloc>> {
     using type = unordered_set<Value, HashFcn, EqualKey, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -1021,10 +1035,10 @@ struct printer<unordered_multimap<Value, Key, HashFcn, EqualKey, Alloc>> {
     using type = unordered_multimap<Value, Key, HashFcn, EqualKey, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -1033,10 +1047,10 @@ struct printer<unordered_multiset<Value, HashFcn, EqualKey, Alloc>> {
     using type = unordered_multiset<Value, HashFcn, EqualKey, Alloc>;
 
     static void print(const type& t) {
-        __range_printer<type>::print(t);
+        range_printer<type>::print(t);
     }
     static void print_feature(const type& t) {
-        __range_printer<type>::print_feature(t);
+        range_printer<type>::print_feature(t);
     }
 };
 
@@ -1176,6 +1190,8 @@ struct printer<session> {
 #endif
 
 #ifndef MSTL_VERSION_17__
+MSTL_BEGIN_INNER__
+
 inline void __print_single() {
     std::cout.flush();
 }
@@ -1204,26 +1220,28 @@ void __print_feature_single(First&& first, Second&& second, Rest&&... rest) {
     __print_feature_single(_MSTL forward<Second>(second), _MSTL forward<Rest>(rest)...);
 }
 
+MSTL_END_INNER__
+
 
 template <typename... Args>
 void print(Args&&... args) {
-    __print_single(_MSTL forward<Args>(args)...);
+    _INNER __print_single(_MSTL forward<Args>(args)...);
 }
 
 template <typename... Args>
 void println(Args&&... args) {
-    __print_single(_MSTL forward<Args>(args)...);
+    _INNER __print_single(_MSTL forward<Args>(args)...);
     std::cout << "\n";
 }
 
 template <typename... Args>
 void print_feature(Args&&... args) {
-    __print_feature_single(_MSTL forward<Args>(args)...);
+    _INNER __print_feature_single(_MSTL forward<Args>(args)...);
 }
 
 template <typename... Args>
 void println_feature(Args&&... args) {
-    __print_feature_single(_MSTL forward<Args>(args)...);
+    _INNER __print_feature_single(_MSTL forward<Args>(args)...);
     std::cout << "\n";
 }
 

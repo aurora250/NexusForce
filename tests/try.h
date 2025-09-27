@@ -7,13 +7,15 @@ void test_file();
 void test_datetimes();
 void test_print();
 void test_rnd();
+void test_hex();
+void test_enctype();
 
 class example_servlet final : public servlet {
 public:
     example_servlet(const int id) : servlet(id) {
         set_session_cookie_name(HTTP_COOKIE::SESSIONID);
-        auto cors_filt = new cors_filter();
-        auto log_filt = new logging_filter();
+        auto cors_filt = ::new cors_filter();
+        auto log_filt = ::new logging_filter();
         add_filter(cors_filt);
         add_filter(log_filt);
     }
@@ -42,10 +44,10 @@ public:
             response.set_ok();
             if (path.ends_with(".css")) {
                 response.set_content_type(HTTP_CONTENT::CSS_TEXT);
-                response.set_body(_MSTL move(file::read("../resource" + path)));
+                response.set_body(_MSTL move(file::read("./resource" + path)));
             } else if (path.ends_with(".jpg")) {
                 response.set_content_type(HTTP_CONTENT::JPEG_IMG);
-                response.set_body(_MSTL move(file::read_binary("../resource" + path)));
+                response.set_body(_MSTL move(file::read_binary("./resource" + path)));
             }
             return;
         }
@@ -77,25 +79,25 @@ public:
         if (path == "/") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("../resource/index.html");
+            static file f("./resource/index.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/detail") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("../resource/detail.html");
+            static file f("./resource/detail.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/new-link") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("../resource/index.html");
+            static file f("./resource/index.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/test") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("../resource/test.html");
+            static file f("./resource/test.html");
             response.set_body(_MSTL move(f.read()));
         } else {
-            static file f("../resource/404err.html");
+            static file f("./resource/404err.html");
             response.set_body(_MSTL move(f.read()));
         }
     }

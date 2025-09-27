@@ -156,15 +156,16 @@ concept random_access_iterator = bidirectional_iterator<Iterator>
 };
 #endif // MSTL_VERSION_20__
 
-
+MSTL_BEGIN_INNER__
 template <typename, typename = void>
 MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_cat_t<Iterator>>> = true;
+MSTL_END_INNER__
 
 
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool is_ranges_iter_v = __is_iterator_with_cate_v<Iterator>;
+MSTL_INLINE17 constexpr bool is_ranges_iter_v = _INNER __is_iterator_with_cate_v<Iterator>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_iter_v =

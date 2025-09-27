@@ -7,7 +7,7 @@ static constexpr int MSTL_WORD_BIT_SIZE = 8 * sizeof(uint32_t);
 
 class bitmap;
 
-struct bit_reference {
+struct MSTL_API bit_reference {
 private:
     uint32_t* ptr_ = nullptr;
     uint32_t mask_ = 0;
@@ -179,7 +179,7 @@ public:
 };
 
 
-class bitmap {
+class MSTL_API bitmap {
 public:
     using value_type         = bool;
     using pointer            = bit_reference*;
@@ -484,6 +484,10 @@ public:
         _MSTL swap(end_of_storage_, x.end_of_storage_);
     }
 };
+
+MSTL_CONSTEXPR20 void swap(bitmap& x, bitmap& y) noexcept {
+    x.swap(y);
+}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_BITMAP_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_BASICLIB_H__
-#define MSTL_BASICLIB_H__
+#ifndef MSTL_BASICLIB_HPP__
+#define MSTL_BASICLIB_HPP__
 #include "undef_cmacro.hpp"
 #include <iostream>
 #ifdef MSTL_SUPPORT_BOOST__
@@ -31,16 +31,6 @@
 #else
 	// defined when project compiled in not supported systems.
 	#define MSTL_PLATFORM_UNSUPPORT__	1
-#endif
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <winsock2.h>
-#include <windows.h>
-#include <fcntl.h>
-#include <io.h>
-#include "undef_cmacro.hpp"
-#elif defined(MSTL_PLATFORM_LINUX__)
-#include <sys/sysinfo.h>
 #endif
 
 
@@ -102,9 +92,32 @@
 	// defined when project compiled in 64bits systems.
 	#define MSTL_DATA_BUS_WIDTH_64__	1
 #endif
-#if defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__) || defined(__i386__) || defined(MSTL_DATA_BUS_WIDTH_64__)
+#if defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__) || defined(__i386__)
 	// defined when project compiled in 32bits systems.
 	#define MSTL_DATA_BUS_WIDTH_32__	1
+#endif
+
+
+#ifdef MSTL_COMPILER_MSVC__
+	#if defined(_M_IX86)
+		#define MSTL_SUPPORT_INLINE_ASM__	1
+	#endif
+#elif defined(MSTL_COMPILER_GNUC__)
+	#if defined(__x86_64__) || defined(__i386__)
+		#define MSTL_SUPPORT_INLINE_ASM__	1
+	#endif
+#endif
+
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <WinSock2.h>
+#pragma comment(lib, "ws2_32.lib")
+#include <fcntl.h>
+#include <io.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include "undef_cmacro.hpp"
+#elif defined(MSTL_PLATFORM_LINUX__)
+#include <sys/sysinfo.h>
 #endif
 
 
@@ -113,6 +126,11 @@
 #define MSTL_BEGIN_NAMESPACE__ namespace __MSTL_GLOBAL_NAMESPACE__ {
 #define MSTL_END_NAMESPACE__ }
 #define _MSTL __MSTL_GLOBAL_NAMESPACE__ ::
+
+#define __MSTL_INNER_NAMESPACE__ __inner
+#define MSTL_BEGIN_INNER__ namespace __MSTL_INNER_NAMESPACE__ {
+#define MSTL_END_INNER__ }
+#define _INNER __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_INNER_NAMESPACE__ ::
 
 #define __MSTL_TAG_NAMESPACE__ tags
 #define MSTL_BEGIN_TAG__ inline namespace __MSTL_TAG_NAMESPACE__ {
@@ -571,31 +589,22 @@ MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAUL;
 #endif // MSTL_COMPILER_MSVC__
 
 
-MSTL_ALWAYS_INLINE inline void set_utf8_console() {
+MSTL_ALWAYS_INLINE inline void set_utf8_console() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-    _setmode(_fileno(stdout), _O_BINARY);
-    _setmode(_fileno(stderr), _O_BINARY);
-    _setmode(_fileno(stdin), _O_BINARY);
+    ::SetConsoleOutputCP(CP_UTF8);
+    ::SetConsoleCP(CP_UTF8);
+    ::_setmode(::_fileno(stdout), _O_BINARY);
+    ::_setmode(::_fileno(stderr), _O_BINARY);
+    ::_setmode(::_fileno(stdin), _O_BINARY);
 #endif
 }
 
 
-MSTL_INLINE17 constexpr uint32_t MSTL_SPLIT_LENGTH = 25U;
-
-inline void split_line(std::ostream& out = std::cout,
-    uint32_t size = MSTL_SPLIT_LENGTH, const char split = '-') {
-    while (size--) out << split;
-    out << '\n';
-}
-
-
-inline size_t get_available_memory() {
+MSTL_ALWAYS_INLINE inline size_t get_available_memory() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    MEMORYSTATUSEX statex;
+    ::MEMORYSTATUSEX statex;
     statex.dwLength = sizeof(statex);
-    GlobalMemoryStatusEx(&statex);
+    ::GlobalMemoryStatusEx(&statex);
     return statex.ullAvailPhys + statex.ullAvailVirtual;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::sysinfo info{};
@@ -607,6 +616,17 @@ inline size_t get_available_memory() {
 }
 
 
+#ifdef MSTL_COMPILER_GNUC__
+#define memory_barrier(p) \
+	__asm__ volatile ("" : : "m" (*p) : "memory");
+#elif defined(MSTL_COMPILER_MSVC__)
+#define memory_barrier(p) \
+	::_ReadWriteBarrier();
+#else
+#define memory_barrier(p)
+#endif
+
+
 constexpr uint64_t SPACE_MASK =
 	(1ULL << 9)  |  // \t
 	(1ULL << 10) |  // \n
@@ -616,25 +636,25 @@ constexpr uint64_t SPACE_MASK =
 	(1ULL << 32);   // space
 
 
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char c) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char c) noexcept {
 	return (SPACE_MASK & (1ULL << static_cast<byte_t>(c))) != 0;
 }
 
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const wchar_t c) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const wchar_t c) noexcept {
 	return c < 64 && (SPACE_MASK & (1ULL << c)) != 0;
 }
 
 #ifdef MSTL_VERSION_20__
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char8_t c) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char8_t c) noexcept {
 	return c < 64 && (SPACE_MASK & (1ULL << c)) != 0;
 }
 #endif
 
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char16_t c) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char16_t c) noexcept {
 	return c < 64 && (SPACE_MASK & (1ULL << c)) != 0;
 }
 
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char32_t c) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_space(const char32_t c) noexcept {
 	return c < 64 && (SPACE_MASK & (1ULL << c)) != 0;
 }
 
@@ -699,44 +719,44 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_digit(const char32_t c) noexcept {
 
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const char c) noexcept {
     const auto uc = static_cast<byte_t>(c);
-    bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
-    bool is_AF = (uc & 0xF0) == 0x40 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
-    bool is_af = (uc & 0xF0) == 0x60 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
+    const bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
+    const bool is_AF = (uc & 0xF0) == 0x40 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
+    const bool is_af = (uc & 0xF0) == 0x60 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
     return is_09 || is_AF || is_af;
 }
 
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const wchar_t c) noexcept {
     if (c < 0 || c > 127) return false;
     const auto uc = static_cast<unsigned>(c);
-    bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
-    bool is_AF = (uc & 0xF0) == 0x40 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
-    bool is_af = (uc & 0xF0) == 0x60 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
+    const bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
+    const bool is_AF = (uc & 0xF0) == 0x40 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
+    const bool is_af = (uc & 0xF0) == 0x60 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
     return is_09 || is_AF || is_af;
 }
 
 #ifdef MSTL_VERSION_20__
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const char8_t c) noexcept {
     if (c > 127) return false;
-    bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
-    bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
-    bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
+    const bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
     return is_09 || is_AF || is_af;
 }
 #endif
 
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const char16_t c) noexcept {
     if (c > 127) return false;
-    bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
-    bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
-    bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
+    const bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
     return is_09 || is_AF || is_af;
 }
 
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const char32_t c) noexcept {
     if (c > 127) return false;
-    bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
-    bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
-    bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_09 = (c & 0xF0) == 0x30 && (c & 0x0F) <= 0x09;
+    const bool is_AF = (c & 0xF0) == 0x40 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
+    const bool is_af = (c & 0xF0) == 0x60 && (c & 0x0F) >= 0x01 && (c & 0x0F) <= 0x06;
     return is_09 || is_AF || is_af;
 }
 
@@ -786,187 +806,609 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 char to_uppercase(const char c) noexcept {
 }
 
 
+static constexpr uint8_t POPCOUNT_TABLE[256] = {
+	0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
+};
+
+inline int popcountll(const size_t x) {
+#ifdef MSTL_COMPILER_GNUC__
+	return __builtin_popcountll(x);
+#elif defined(MSTL_COMPILER_MSVC__)
+#ifdef MSTL_DATA_BUS_WIDTH_64__
+	return static_cast<int>(__popcnt64(x));
+#else
+	return static_cast<int>(__popcnt(static_cast<uint32_t>(x)));
+#endif
+#else
+	return
+		POPCOUNT_TABLE[x & 0xFF] +
+		POPCOUNT_TABLE[(x >> 8) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 16) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 24) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 32) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 40) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 48) & 0xFF] +
+		POPCOUNT_TABLE[(x >> 56) & 0xFF];
+#endif
+}
+
+inline int clzll(size_t x) {
+	if (x == 0) return 64;
+#ifdef MSTL_COMPILER_GNUC__
+	return __builtin_clzll(x);
+#elif defined(MSTL_COMPILER_MSVC__)
+	unsigned long index;
+#ifdef MSTL_DATA_BUS_WIDTH_64__
+	::_BitScanReverse64(&index, x);
+#else
+	::_BitScanReverse(&index, x);
+#endif
+	return 63 - static_cast<int>(index);
+#else
+	if (x == 0) return 64;
+
+	int n = 0;
+	if (x <= 0x00000000FFFFFFFFULL) {
+		n += 32;
+		x <<= 32;
+	}
+	if (x <= 0x0000FFFFFFFFFFFFULL) {
+		n += 16;
+		x <<= 16;
+	}
+	if (x <= 0x00FFFFFFFFFFFFFFULL) {
+		n += 8;
+		x <<= 8;
+	}
+	if (x <= 0x0FFFFFFFFFFFFFFFULL) {
+		n += 4;
+		x <<= 4;
+	}
+	if (x <= 0x3FFFFFFFFFFFFFFFULL) {
+		n += 2;
+		x <<= 2;
+	}
+	if (x <= 0x7FFFFFFFFFFFFFFFULL) {
+		n += 1;
+	}
+	return n;
+#endif
+}
+
+
+#ifdef MSTL_COMPILER_MSVC__
+namespace masm {
+	extern "C" {
+		void* masm_memory_copy(void* dest, const void* src, size_t count);
+		void* masm_memory_copy_offset(void* dest, const void* src, size_t count);
+		void* masm_memory_char_copy(void* dest, const void* src, int chr, size_t count);
+		int masm_memory_compare(const void* lh, const void* rh, size_t count);
+		int masm_memory_compare_ignore_case(const void* ptr1, const void* rh, size_t count);
+		void* masm_memory_char(const void* dest, int value, size_t count);
+		void* masm_memory_move(void* dest, const void* src, size_t count);
+		void* masm_memory_set(void* dest, int value, size_t count);
+		void masm_memory_zero(void* dest, size_t count);
+		void masm_explicit_memory_zero(void* dest, size_t count);
+		void* masm_memory_in_memory(void* data, size_t data_len, const void* pattern, size_t pattern_len);
+		void* masm_memory_frobnicate(void* s, size_t n);
+	}
+}
+#endif
+
+
 // copy from source memory to destination memory with specific length.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memcpy.
-MSTL_CONSTEXPR14 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t byte) noexcept {
-	if(dest == nullptr || src == nullptr) return nullptr;
+inline void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+	if (dest == nullptr || src == nullptr) return nullptr;
+
+#ifdef MSTL_COMPILER_GNUC__
 	void* res = dest;
-	while (byte--) {
-		*static_cast<char*>(dest) = *static_cast<const char*>(src);
-		dest = static_cast<char*>(dest) + 1;
-		src = static_cast<const char*>(src) + 1;
-	}
+
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"cld\n\t"
+		"rep    movsb\n\t"
+		:
+		: "r" (res), "r" (src), "r" (dest), "r" (count)
+		: "rsi", "rdi", "rcx", "cc", "memory"
+	);
 	return res;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_copy(dest, src, count);
+#else
+	void* res = dest;
+	auto dest_v = static_cast<volatile byte_t*>(dest);
+	auto src_v = static_cast<const volatile byte_t*>(src);
+	while (count--) {
+		*dest_v = *src_v;
+		dest_v++;
+		src_v++;
+	}
+	memory_barrier(res);
+	return res;
+#endif
 }
 
-// mempcpy
-MSTL_CONSTEXPR14 void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t byte) noexcept {
-	if(dest == nullptr || src == nullptr) return nullptr;
-	while (byte--) {
-		*static_cast<char*>(dest) = *static_cast<const char*>(src);
-		dest = static_cast<char*>(dest) + 1;
-		src = static_cast<const char*>(src) + 1;
-	}
+// it`s similar with std::mempcpy
+inline void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+	if (dest == nullptr || src == nullptr) return nullptr;
+
+#ifdef MSTL_COMPILER_GNUC__
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"cld\n\t"
+		"rep    movsb\n\t"
+		"movq   %%rdi, %0\n\t"
+		: "=r" (dest)
+		: "r" (src), "r" (dest), "r" (count)
+		: "rsi", "rdi", "rcx", "cc", "memory"
+	);
 	return dest;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_copy_offset(dest, src, count);
+#else
+	auto dest_v = static_cast<volatile byte_t*>(dest);
+	auto src_v = static_cast<const volatile byte_t*>(src);
+	while (count--) {
+		*dest_v = *src_v;
+		dest_v++;
+		src_v++;
+	}
+	memory_barrier(dest_v);
+	return (void*) dest_v;
+#endif
 }
 
 // copy from source memory to destination memory with specific length if not encounter target character.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memccpy.
-MSTL_CONSTEXPR14 void* memory_char_copy(void* dest, const void* src, const int chr, size_t byte) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	const auto target = static_cast<byte_t>(chr);
-	while (byte--) {
-		const byte_t current = *static_cast<const byte_t*>(src);
-		*static_cast<byte_t*>(dest) = current;
-		if (current == target)
-			return static_cast<byte_t*>(dest) + 1;
-		dest = static_cast<byte_t*>(dest) + 1;
-		src = static_cast<const byte_t*>(src) + 1;
-	}
-	return nullptr;
+inline void* memory_char_copy(void* dest, const void* src, const int chr, size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) return nullptr;
+    const byte_t target = static_cast<byte_t>(chr);
+
+#ifdef MSTL_COMPILER_GNUC__
+    void* result;
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movb   %b3, %%al\n\t"
+		"movq   %4, %%rcx\n\t"
+		"cld\n\t"
+	".L1:\n\t"
+		"jrcxz  .L2\n\t"
+		"lodsb\n\t"
+		"stosb\n\t"
+		"cmpb   %b3, %%al\n\t"
+		"je     .L3\n\t"
+		"loop   .L1\n\t"
+	".L2:\n\t"
+		"xorq   %%rax, %%rax\n\t"
+		"jmp    .L4\n\t"
+	".L3:\n\t"
+		"movq   %%rdi, %%rax\n\t"
+		"jmp    .L4\n\t"
+	".L4:\n\t"
+		"movq   %%rax, %0\n\t"
+		: "=r" (result)
+		: "r" (src), "r" (dest), "r" (target), "r" (count)
+		: "rsi", "rdi", "rcx", "rax", "cc", "memory"
+	);
+    return result;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_char_copy(dest, src, count, chr);
+#else
+    auto dest_v = static_cast<volatile byte_t*>(dest);
+    auto src_v = static_cast<const volatile byte_t*>(src);
+
+    while (count--) {
+        const byte_t current = *src_v;
+        *dest_v = current;
+        if (current == target) {
+        	memory_barrier(dest_v);
+            return (void*) (++dest_v); // bypass the volatile check
+        }
+        dest_v++;
+        src_v++;
+    }
+	memory_barrier(dest_v);
+    return nullptr;
+#endif
 }
 
 // compare with left-hand memory and right-hand memory in a specific length.
 // return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::memcmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(const void* lh, const void* rh, size_t byte) noexcept {
-    if (lh == nullptr && rh == nullptr) return 0;
+MSTL_PURE_FUNCTION inline int memory_compare(const void* lh, const void* rh, size_t count) noexcept {
+	if (lh == nullptr && rh == nullptr) return 0;
 	if (lh == nullptr) return -1;
     if (rh == nullptr) return 1;
+#ifdef MSTL_COMPILER_GNUC__
+	int result;
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"cld\n\t"
+		"repe   cmpsb\n\t"
+		"je     1f\n\t"
 
-	while (byte--) {
-		if (*static_cast<const char*>(lh) != *static_cast<const char*>(rh))
-			return *static_cast<const char*>(lh) - *static_cast<const char*>(rh);
-		lh = static_cast<const char*>(lh) + 1;
-		rh = static_cast<const char*>(rh) + 1;
+		"movzbl -1(%%rsi), %%eax\n\t"
+		"movzbl -1(%%rdi), %%edx\n\t"
+		"subl   %%edx, %%eax\n\t"
+		"jmp    2f\n"
+
+		"1:\n\t"
+		"xorl   %%eax, %%eax\n"
+		"2:"
+		: "=a" (result)
+		: "r" (lh), "r" (rh), "r" (count)
+		: "rsi", "rdi", "rcx", "rdx", "cc"
+	);
+	return result;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_compare(lh, rh, count);
+#else
+	while (count--) {
+		if (*static_cast<const byte_t*>(lh) != *static_cast<const byte_t*>(rh))
+			return *static_cast<const byte_t*>(lh) - *static_cast<const byte_t*>(rh);
+		lh = static_cast<const byte_t*>(lh) + 1;
+		rh = static_cast<const byte_t*>(rh) + 1;
 	}
 	return 0;
+#endif
 }
 
 // compare with left-hand memory and right-hand memory in a specific length but ignored case of characters.
 // return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::memicmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare_ignore_case(const void* ptr1, const void* ptr2, size_t count) noexcept {
-	if ((ptr1 == nullptr && ptr2 == nullptr) || count == 0) return 0;
-	if (ptr1 == nullptr) return -1;
-	if (ptr2 == nullptr) return 1;
+MSTL_PURE_FUNCTION inline int memory_compare_ignore_case(const void* lh, const void* rh, size_t count) noexcept {
+	if ((lh == nullptr && rh == nullptr) || count == 0) return 0;
+	if (lh == nullptr) return -1;
+	if (rh == nullptr) return 1;
 
-	const auto* p1 = static_cast<const byte_t*>(ptr1);
-	const auto* p2 = static_cast<const byte_t*>(ptr2);
+#ifdef MSTL_COMPILER_GNUC__
+    int result = 0;
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"cld\n\t"
+	".L1:\n\t"
+		"jrcxz  .L2\n\t"
+		"lodsb\n\t"
+		"movb   %%al, %%dl\n\t"
+		"or     $0x20, %%dl\n\t"
+		"movb   (%%rdi), %%al\n\t"
+		"movb   %%al, %%bl\n\t"
+		"or     $0x20, %%bl\n\t"
+		"cmpb   %%bl, %%dl\n\t"
+		"jne    .L3\n\t"
+		"inc    %%rdi\n\t"
+		"loop   .L1\n\t"
+	".L2:\n\t"
+		"xorl   %%eax, %%eax\n\t"
+		"jmp    .L4\n\t"
+	".L3:\n\t"
+		"movzbl %%dl, %%eax\n\t"
+		"movzbl %%bl, %%edx\n\t"
+		"subl   %%edx, %%eax\n\t"
+	".L4:\n\t"
+		"movl   %%eax, %0\n\t"
+		: "=r" (result)
+		: "r" (lh), "r" (rh), "r" (count)
+		: "rsi", "rdi", "rcx", "rax", "rdx", "rbx", "cc"
+	);
+    return result;
+#elif defined(MSTL_COMPILER_MSVC__)
+    return masm::masm_memory_compare_ignore_case(lh, rh, count);
+#else
+	const auto lh_v = static_cast<const volatile byte_t*>(lh);
+	const auto rh_v = static_cast<const volatile byte_t*>(rh);
 
-	for (size_t i = 0; i < count; ++i) {
-		const auto c1 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(p1[i])));
-		const auto c2 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(p2[i])));
-		if (c1 != c2)
-			return static_cast<int>(c1) - static_cast<int>(c2);
-	}
-	return 0;
+    for (size_t i = 0; i < count; ++i) {
+        const byte_t c1 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(lh_v[i])));
+        const byte_t c2 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(rh_v[i])));
+        if (c1 != c2) {
+            return static_cast<int>(c1) - static_cast<int>(c2);
+        }
+    }
+    return 0;
+#endif
 }
 
 // return a pointer which is pointing to the first place that equal to target value in a specific length.
 // if parameter pointer is nullptr, return nullptr. if not found, return nullptr.
 // it`s similar with std::memchr.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 void* memory_char(const void* dest, const int value, size_t byte) noexcept {
+MSTL_PURE_FUNCTION inline void* memory_char(const void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
-	auto p = static_cast<const char *>(dest);
-	while (byte--) {
-		if (*p == static_cast<char>(value))
-			return const_cast<char*>(p);
+#ifdef MSTL_COMPILER_GNUC__
+	void* result;
+	__asm__ volatile (
+		"movb   %b2, %%al\n\t"
+		"movq   %1, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"cld\n\t"
+		"repne  scasb\n\t"
+		"je     1f\n\t"
+		"xorq   %%rax, %%rax\n\t"
+		"jmp    2f\n"
+		"1:\n\t"
+		"decq   %%rdi\n\t"
+		"movq   %%rdi, %%rax\n"
+		"2:"
+		: "=a" (result)
+		: "r" (dest), "r" (value), "r" (count)
+		: "rdi", "rcx", "cc"
+	);
+	return result;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_char(dest, value, count);
+#else
+	auto p = static_cast<const byte_t *>(dest);
+	while (count--) {
+		if (*p == static_cast<byte_t>(value))
+			return const_cast<byte_t*>(p);
 		p++;
 	}
 	return nullptr;
+#endif
 }
 
-//
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memmove.
-MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t byte) noexcept {
+inline void* memory_move(void* dest, const void* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
+#ifdef MSTL_COMPILER_GNUC__
 	void* res = dest;
-	if (dest < src) {
-		while (byte--) {
-			*static_cast<char*>(dest) = *static_cast<const char*>(src);
-			dest = static_cast<char *>(dest) + 1;
-			src = static_cast<const char*>(src) + 1;
-		}
-	}
-	else if (dest > src) {
-		while (byte--) {
-			*(static_cast<char *>(dest) + byte) = *(static_cast<const char*>(src) + byte);
-		}
-	}
+	__asm__ volatile (
+			"movq   %1, %%rsi\n\t"
+			"movq   %2, %%rdi\n\t"
+			"movq   %3, %%rcx\n\t"
+			"cmpq   %%rsi, %%rdi\n\t"
+			"jbe    1f\n\t"
+
+			"addq   %%rcx, %%rsi\n\t"
+			"addq   %%rcx, %%rdi\n\t"
+			"decq   %%rsi\n\t"
+			"decq   %%rdi\n\t"
+			"std\n\t"
+			"rep    movsb\n\t"
+			"cld\n\t"
+			"jmp    2f\n"
+
+			"1:\n\t"
+			"cld\n\t"
+			"rep    movsb\n"
+			"2:"
+			:
+			: "r" (res), "r" (src), "r" (dest), "r" (count)
+			: "rsi", "rdi", "rcx", "cc", "memory"
+		);
 	return res;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_move(dest, src, count);
+#else
+	void* res = dest;
+	auto dest_v = static_cast<volatile byte_t*>(dest);
+	auto src_v = static_cast<const volatile byte_t*>(src);
+	if (dest_v < src_v) {
+		while (count--) {
+			*dest_v = *src_v;
+			dest_v = dest_v + 1;
+			src_v = src_v + 1;
+		}
+	}
+	else if (dest_v > src_v) {
+		while (count--) {
+			*(dest_v + count) = *(src_v + count);
+		}
+	}
+	memory_barrier(res);
+	return res;
+#endif
 }
 
 // fill the destination memory with target value in the specific length.
 // if parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memset.
-MSTL_CONSTEXPR14 void* memory_set(void* dest, const int value, size_t byte) noexcept {
+inline void* memory_set(void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
-	void* ret = static_cast<char *>(dest);
-	while (byte--) {
-		*static_cast<char *>(dest) = static_cast<char>(value);
-		dest = static_cast<char *>(dest) + 1;
-	}
+#ifdef MSTL_COMPILER_GNUC__
+	void* ret = static_cast<byte_t *>(dest);
+	__asm__ volatile (
+		"movq   %1, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"movb   %b2, %%al\n\t"
+		"cld\n\t"
+		"rep    stosb"
+		:
+		: "r" (ret), "r" (dest), "r" (value), "r" (count)
+		: "rdi", "rcx", "rax", "cc", "memory"
+	);
 	return ret;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_set(dest, value, count);
+#else
+	void* ret = static_cast<byte_t *>(dest);
+	auto dest_v = static_cast<volatile byte_t *>(dest);
+	while (count--) {
+		*dest_v = static_cast<byte_t>(value);
+		dest_v = dest_v + 1;
+	}
+	memory_barrier(ret);
+	return ret;
+#endif
 }
 
 // clear the destination memory with zero in the specific length.
 // if parameter pointer is nullptr, do nothing.
 // it`s similar with std::bzero.
-MSTL_CONSTEXPR14 void memory_zero(void* dest, const size_t byte) noexcept {
-	if (dest == nullptr) return;
-	const auto ptr = static_cast<char*>(dest);
-	for (size_t i = 0; i < byte; ++i) {
-		ptr[i] = 0;
+inline void memory_zero(void* dest, const size_t count) noexcept {
+#ifdef MSTL_COMPILER_GNUC__
+	__asm__ volatile (
+		"movq   %1, %%rdi\n\t"
+		"movq   %2, %%rcx\n\t"
+		"xorb   %%al, %%al\n\t"
+		"cld\n\t"
+		"rep    stosb\n\t"
+		:
+		: "r" (dest), "r" (dest), "r" (count)
+		: "rdi", "rcx", "rax", "memory", "cc"
+	);
+#elif defined(MSTL_COMPILER_MSVC__)
+	masm::masm_memory_zero(dest, count);
+#else
+	const auto dest_v = static_cast<volatile byte_t*>(dest);
+	for (size_t i = 0; i < count; ++i) {
+		dest_v[i] = 0;
 	}
+	memory_barrier(dest_v);
+#endif
 }
 
 // explicit_bzero
-MSTL_CONSTEXPR20 void explicit_memory_zero(void* ptr, size_t size) noexcept {
-	if (ptr == nullptr || size == 0) return;
-
-	volatile auto* vptr = static_cast<volatile byte_t*>(ptr);
-	for (size_t i = 0; i < size; ++i)
-		vptr[i] = 0;
+inline void explicit_memory_zero(void* dest, const size_t count) noexcept {
+	if (dest == nullptr || count == 0) return;
 
 #ifdef MSTL_COMPILER_GNUC__
-	__asm__ __volatile__("" : : "m" (*vptr) : "memory");
+	__asm__ volatile (
+			"movq   %0, %%rdi\n\t"
+			"movq   %1, %%rcx\n\t"
+			"xorb   %%al, %%al\n\t"
+			"cld\n\t"
+			"rep    stosb\n\t"
+			""
+			:
+			: "r" (dest), "r" (count)
+			: "rdi", "rcx", "rax", "memory", "cc"
+		);
 #elif defined(MSTL_COMPILER_MSVC__)
-	_ReadWriteBarrier();
+	masm::masm_explicit_memory_zero(dest, count);
+#else
+	const auto vptr = static_cast<volatile byte_t*>(dest);
+	for (size_t i = 0; i < count; ++i)
+		vptr[i] = 0;
+	memory_barrier(vptr);
 #endif
 }
 
 // std::memmem
-MSTL_CONSTEXPR14 void* memory_in_memory(void* data, size_t data_len, const void* pattern, size_t pattern_len) noexcept {
-	if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
-		return nullptr;
-	}
-	const auto* data_ptr = static_cast<const byte_t*>(data);
-	const auto* pattern_ptr = static_cast<const byte_t*>(pattern);
-	const size_t last_possible = data_len - pattern_len + 1;
+inline void* memory_in_memory(void* data, size_t data_len, const void* pattern, size_t pattern_len) noexcept {
+    if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
+        return nullptr;
+    }
+#ifdef MSTL_COMPILER_GNUC__
+    void* result;
+    const size_t last_possible = data_len - pattern_len + 1;
+	__asm__ volatile (
+		"movq   %1, %%rsi\n\t"
+		"movq   %2, %%rdi\n\t"
+		"movq   %3, %%rcx\n\t"
+		"movq   %4, %%r8\n\t"
+		"xorq   %%rax, %%rax\n\t"
+		"cld\n\t"
+	".L1:\n\t"
+		"jrcxz  .L5\n\t"
+		"movb   (%%rsi), %%al\n\t"
+		"movb   (%%rdi), %%dl\n\t"
+		"cmpb   %%dl, %%al\n\t"
+		"jne    .L4\n\t"
+		"movq   %%rsi, %%r9\n\t"
+		"movq   %%rdi, %%r10\n\t"
+		"movq   %%r8, %%r11\n\t"
+	".L2:\n\t"
+		"jrcxz  .L3\n\t"
+		"movb   (%%r9), %%al\n\t"
+		"movb   (%%r10), %%dl\n\t"
+		"cmpb   %%dl, %%al\n\t"
+		"jne    .L3\n\t"
+		"inc    %%r9\n\t"
+		"inc    %%r10\n\t"
+		"dec    %%r11\n\t"
+		"jmp    .L2\n\t"
+	".L3:\n\t"
+		"cmpq   $0, %%r11\n\t"
+		"je     .L6\n\t"
+	".L4:\n\t"
+		"inc    %%rsi\n\t"
+		"dec    %%rcx\n\t"
+		"jmp    .L1\n\t"
+	".L5:\n\t"
+		"xorq   %%rax, %%rax\n\t"
+		"jmp    .L7\n\t"
+	".L6:\n\t"
+		"movq   %%rsi, %%rax\n\t"
+		"jmp    .L7\n\t"
+	".L7:\n\t"
+		"movq   %%rax, %0\n\t"
+		: "=r" (result)
+		: "r" (data), "r" (pattern), "r" (last_possible), "r" (pattern_len)
+		: "rsi", "rdi", "rcx", "rax", "rdx", "r8", "r9", "r10", "r11", "cc"
+	);
+    return result;
+#elif defined(MSTL_COMPILER_MSVC__)
+    return masm::masm_memory_in_memory(data, data_len, pattern, pattern_len);
+#else
+    const size_t last_possible = data_len - pattern_len + 1;
+    const auto data_v = static_cast<const byte_t*>(data);
+    const auto pattern_v = static_cast<const byte_t*>(pattern);
 
-	for (size_t i = 0; i < last_possible; ++i) {
-		if (data_ptr[i] == pattern_ptr[0]) {
-			if (memory_compare(data_ptr + i, pattern_ptr, pattern_len) == 0) {
-				return const_cast<void*>(static_cast<const void*>(data_ptr + i));
-			}
-		}
-	}
-	return nullptr;
+    for (size_t i = 0; i < last_possible; ++i) {
+        if (data_v[i] == pattern_v[0]) {
+            if (memory_compare(data_v + i, pattern_v, pattern_len) == 0) {
+                return const_cast<void*>(static_cast<const void*>(data_v + i));
+            }
+        }
+    }
+    return nullptr;
+#endif
 }
 
-// memfrob
-MSTL_CONSTEXPR14 void* memory_frobnicate(void* s, const size_t n) {
-	auto *p = static_cast<byte_t *>(s);
-	for (size_t i = 0; i < n; i++) {
-		p[i] ^= 42;
-	}
+// std::memfrob
+inline void* memory_frobnicate(void* s, const size_t n) {
+	if (s == nullptr || n == 0) return s;
+
+#ifdef MSTL_COMPILER_GNUC__
+	__asm__ volatile (
+		"movq   %1, %%rdi\n\t"
+		"movq   %2, %%rcx\n\t"
+		"movb   $42, %%al\n\t"
+		"cld\n\t"
+	".L1:"
+		"jrcxz  .L2\n\t"
+		"xorb   %%al, (%%rdi)\n\t"
+		"inc    %%rdi\n\t"
+		"loop   .L1\n\t"
+	".L2:"
+		:
+		: "r" (s), "r" (s), "r" (n)
+		: "rdi", "rcx", "rax", "memory", "cc"
+	);
 	return s;
+#elif defined(MSTL_COMPILER_MSVC__)
+	return masm::masm_memory_frobnicate(s, n);
+#else
+	const auto s_v = static_cast<volatile byte_t*>(s);
+	for (size_t i = 0; i < n; i++) {
+		s_v[i] ^= 42;
+	}
+	memory_barrier(s_v);
+	return s;
+#endif
 }
 
 
@@ -1615,4 +2057,4 @@ MSTL_CONSTEXPR14 ptrdiff_t u32string_length(const char32_t* str) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BASICLIB_H__
+#endif // MSTL_BASICLIB_HPP__

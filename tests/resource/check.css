@@ -1,0 +1,130 @@
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 页面布局：让内容垂直居中 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  /* 开启弹性布局，让内容垂直居中 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  min-height: 100vh; /* 确保页面高度至少占满视口 */
+}
+
+/* 外部容器：实现整体居中 + 外边框 */
+.outer-container {
+  border: 2px solid #007bff; /* 外边框颜色改为蓝色 */
+  border-radius: 8px;
+  width: 820px; /* 比内部 container 宽一些，给边框留出空间 */
+  padding: 10px; /* 与内部 container 隔开，显示外边框 */
+  background-color: #fff; /* 背景色覆盖，避免透明 */
+}
+
+/* 内部容器：左右布局 */
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto; /* 水平居中 */
+}
+
+/* 信息与支付区域样式 */
+.info-payment,
+.transaction-confirm {
+  flex: 1;
+  background-color: #f9f9f9; /* 浅灰色背景，区分区域 */
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.info-payment h2,
+.transaction-confirm h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-left: 5px solid #007bff;
+  padding-left: 10px;
+}
+
+.info-payment .item,
+.transaction-confirm .item {
+  margin-bottom: 10px;
+}
+
+.info-payment .label,
+.transaction-confirm .label {
+  width: 60px;
+  font-weight: bold;
+}
+
+.info-payment .value,
+.transaction-confirm .value {
+  color: #333;
+}
+
+/* 支付方式样式 */
+.payment-methods {
+  margin-top: 10px;
+}
+
+.payment-methods .method {
+  margin-bottom: 5px;
+}
+
+/* 交易确认区域内部样式 */
+.transaction-info {
+  margin-bottom: 20px;
+}
+
+.transaction-info p {
+  margin-bottom: 10px;
+}
+
+.delivery-method {
+  margin-top: 10px;
+}
+
+.confirm-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.confirm-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 发送区域样式 */
+.send-area {
+  display: flex;
+  gap: 10px;
+}
+
+.send-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.send-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background-color: #0056b3;
+}

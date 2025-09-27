@@ -3,10 +3,20 @@
 #include "utility.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+class MSTL_API any;
+
+MSTL_BEGIN_INNER__
+struct __any_cast_true_tag {};
+struct __any_cast_false_tag {};
+
+template <typename T, typename U>
+const T* __any_cast_aux_dispatch_impl(const _MSTL any* value, __any_cast_true_tag) noexcept;
+MSTL_END_INNER__
+
 MSTL_ERROR_BUILD_DERIVED_CLASS(AnyCastError, TypeCastError, "Cast From any Type Failed.")
 
 
-class any {
+class MSTL_API any {
 private:
     union storage_internal {
 		constexpr storage_internal() = default;
@@ -55,11 +65,11 @@ private:
 
         template<typename U>
         static void create(storage_internal& storage, U&& value) {
-            storage.ptr_ = new T(_MSTL forward<U>(value));
+            storage.ptr_ = ::new T(_MSTL forward<U>(value));
         }
         template <typename... Args>
         static void create(storage_internal& storage, Args&&... args) {
-            storage.ptr_ = new T(_MSTL forward<Args>(args)...);
+            storage.ptr_ = ::new T(_MSTL forward<Args>(args)...);
         }
         static T* access(const storage_internal& storage) {
             return static_cast<T*>(storage.ptr_);
@@ -76,10 +86,7 @@ private:
     storage_internal storage_;
 
     template <typename T, typename U>
-    friend const T* __any_cast_aux_dispatch_true(const any* value) noexcept;
-
-    template <typename T, typename U>
-    friend const T* __any_cast_aux_dispatch_false(const any* value) noexcept;
+    friend const T* _INNER __any_cast_aux_dispatch_impl(const any* value, _INNER __any_cast_true_tag) noexcept;
 
 
     template <typename T, typename... Args, typename Manager = manage_t<T>>
@@ -98,47 +105,14 @@ private:
 
 public:
     constexpr any() noexcept : manage_(nullptr) {}
-
-    any(const any& x) {
-        if (!x.has_value())
-	        manage_ = nullptr;
-        else {
-	        ArgT arg{};
-	        arg.any_ptr_ = this;
-	        x.manage_(COPY, &x, &arg);
-	    }
-    }
-
-    any& operator =(const any& rh) {
-        *this = any(rh);
-        return *this;
-    }
-
-    any(any&& x) noexcept {
-        if (!x.has_value())
-            manage_ = nullptr;
-        else {
-            ArgT arg{};
-            arg.any_ptr_ = this;
-            x.manage_(SWAP, &x, &arg);
-        }
-    }
-
-    any& operator =(any&& rh) noexcept {
-        if (!rh.has_value())
-            reset();
-        else if (this != &rh) {
-            reset();
-            ArgT arg{};
-            arg.any_ptr_ = this;
-            rh.manage_(SWAP, &rh, &arg);
-        }
-        return *this;
-    }
+    any(const any& x);
+    any& operator =(const any& rh);
+    any(any&& x) noexcept;
+    any& operator =(any&& rh) noexcept;
 
     template <typename T, typename VT = decay_t<T>, typename Manager = manage_t<VT>,
         enable_if_t<is_copy_constructible_v<VT> && !is_same_v<_MSTL_TAG inplace_construct_tag, VT> && !is_same_v<VT, any>, int> = 0>
-    any(T&& value) : manage_(&Manager::manage) {
+    explicit any(T&& value) : manage_(&Manager::manage) {
         Manager::create(storage_, _MSTL forward<T>(value));
     }
 
@@ -161,9 +135,7 @@ public:
 	    Manager::create(storage_, ilist, _MSTL forward<Args>(args)...);
     }
 
-    ~any() {
-        reset();
-    }
+    ~any();
 
     template <typename T, typename... Args, typename VT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, Args&&...>>, int> = 0>
@@ -179,44 +151,10 @@ public:
         return *manage_t<VT>::access(storage_);
     }
 
-    void reset() noexcept {
-        if (has_value()) {
-            manage_(DESTROY, this, nullptr);
-            manage_ = nullptr;
-        }
-    }
-
-    MSTL_NODISCARD bool has_value() const noexcept { return manage_ != nullptr; }
-
-    MSTL_NODISCARD const std::type_info& type() const noexcept {
-        if (!has_value())
-            return typeid(void);
-        ArgT arg{};
-        manage_(GET_TYPE_INFO, this, &arg);
-        return *arg.type_ptr_;
-    }
-
-    void swap(any& rh) noexcept {
-        if (!has_value() && !rh.has_value()) return;
-        if (has_value() && rh.has_value()) {
-            if (this == &rh) return;
-            any tmp;
-            ArgT arg{};
-            arg.any_ptr_ = &tmp;
-            rh.manage_(SWAP, &rh, &arg);
-            arg.any_ptr_ = &rh;
-            manage_(SWAP, this, &arg);
-            arg.any_ptr_ = this;
-            tmp.manage_(SWAP, &tmp, &arg);
-        }
-        else {
-            any* emp = !has_value() ? this : &rh;
-            any* full = !has_value() ? &rh : this;
-            ArgT arg{};
-            arg.any_ptr_ = emp;
-            full->manage_(SWAP, full, &arg);
-        }
-    }
+    void reset() noexcept;
+    MSTL_NODISCARD bool has_value() const noexcept;
+    MSTL_NODISCARD const std::type_info& type() const noexcept;
+    void swap(any& rh) noexcept;
 };
 
 template <typename T, typename... Args,
@@ -232,29 +170,18 @@ any make_any(std::initializer_list<U> ilist, Args&&... args) {
 }
 
 
-struct __any_cast_true_tag {};
-struct __any_cast_false_tag {};
+MSTL_BEGIN_INNER__
 
 template <typename T, typename U>
-const T* __any_cast_aux_dispatch_true(const any* value) noexcept {
+const T* __any_cast_aux_dispatch_impl(const any* value, __any_cast_true_tag) noexcept {
     if (value->manage_ == &any::manage_t<U>::manage || value->type() == typeid(T))
         return static_cast<const T*>(any::manage_t<U>::access(value->storage_));
     return nullptr;
 }
 
 template <typename T, typename U>
-const T* __any_cast_aux_dispatch_false(const any*) noexcept {
+const T* __any_cast_aux_dispatch_impl(const any*, __any_cast_false_tag) noexcept {
     return nullptr;
-}
-
-template <typename T, typename U>
-const T* __any_cast_aux_dispatch_impl(const any* value, __any_cast_true_tag) noexcept {
-    return __any_cast_aux_dispatch_true<T, U>(value);
-}
-
-template <typename T, typename U>
-const T* __any_cast_aux_dispatch_impl(const any* value, __any_cast_false_tag) noexcept {
-    return __any_cast_aux_dispatch_false<T, U>(value);
 }
 
 template <typename T, typename U>
@@ -263,7 +190,7 @@ const T* __any_cast_aux_dispatch(const any* value) noexcept {
         (is_same_v<decay_t<U>, U> || is_copy_constructible_v<U>),
         __any_cast_true_tag, __any_cast_false_tag
     >;
-    return _MSTL __any_cast_aux_dispatch_impl<T, U>(value, tag{});
+    return _INNER __any_cast_aux_dispatch_impl<T, U>(value, tag{});
 }
 
 template <typename T, enable_if_t<is_object_v<T>, int> = 0>
@@ -278,9 +205,11 @@ const T* __any_cast_aux(const any*) noexcept {
     return nullptr;
 }
 
+MSTL_END_INNER__
+
 template <typename T>
 const T* any_cast(const any* value) noexcept {
-    return __any_cast_aux<T>(value);
+    return _INNER __any_cast_aux<T>(value);
 }
 
 template <typename T>
@@ -345,7 +274,7 @@ void any::external_manage<T>::manage(const ANY_INNER_OPERATION oper, const any* 
             break;
         }
         case COPY: {
-            arg->any_ptr_->storage_.ptr_ = new T(*ptr);
+            arg->any_ptr_->storage_.ptr_ = ::new T(*ptr);
             arg->any_ptr_->manage_ = value->manage_;
             break;
         }

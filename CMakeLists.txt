@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.17)
 project(MSTL LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL (default: 17)")
+    set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
 endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(CMAKE_CXX_STANDARD LESS 14)
     message(FATAL_ERROR "MSTL can only be compiled with C++14 or higher standard")
@@ -61,7 +61,7 @@ endif()
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/MSTL/
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/MSTL
-        FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
+        FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h" PATTERN "*.asm"
 )
 
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/MSTL)

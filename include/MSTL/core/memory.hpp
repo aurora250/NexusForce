@@ -5,6 +5,7 @@
 #include <atomic>
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator1>>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
@@ -26,14 +27,16 @@ MSTL_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 l
     }
     return cur;
 }
+MSTL_END_INNER__
 
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 uninitialized_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
-    return _MSTL __uninitialized_copy_aux(first, last, result);
+    return _INNER __uninitialized_copy_aux(first, last, result);
 }
 
 
+MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
 MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
     Iterator1 first, size_t count, Iterator2 result) {
@@ -56,15 +59,17 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
     Iterator1 last = first + count;
     return _MSTL make_pair(last, _MSTL uninitialized_copy(first, last, result));
 }
+MSTL_END_INNER__
 
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(
     Iterator1 first, size_t count, Iterator2 result) {
-    return _MSTL __uninitialized_copy_n_aux(first, count, result);
+    return _INNER __uninitialized_copy_n_aux(first, count, result);
 }
 
 
+MSTL_BEGIN_INNER__
 template <typename Iterator, typename T, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
 MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, T&& x) {
@@ -85,13 +90,15 @@ MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, T&
         Exception(MemoryError("uninitialized fill failed."));
     }
 }
+MSTL_END_INNER__
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, T&& x) {
-    _MSTL __uninitialized_fill_aux(first, last, _MSTL forward<T>(x));
+    _INNER __uninitialized_fill_aux(first, last, _MSTL forward<T>(x));
 }
 
 
+MSTL_BEGIN_INNER__
 template <typename Iterator, typename T, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
 MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, T&& x) {
@@ -113,13 +120,15 @@ MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, T
     }
     return cur;
 }
+MSTL_END_INNER__
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 Iterator uninitialized_fill_n(Iterator first, size_t n, T&& x) {
-    return _MSTL __uninitialized_fill_n_aux(first, n, _MSTL forward<T>(x));
+    return _INNER __uninitialized_fill_n_aux(first, n, _MSTL forward<T>(x));
 }
 
 
+MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator1>>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
@@ -141,14 +150,16 @@ MSTL_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 l
     }
     return cur;
 }
+MSTL_END_INNER__
 
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 uninitialized_move(Iterator1 first, Iterator1 last, Iterator2 result) {
-    return _MSTL __uninitialized_move_aux(first, last, result);
+    return _INNER __uninitialized_move_aux(first, last, result);
 }
 
 
+MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
 MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
     Iterator1 first, size_t count, Iterator2 result) {
@@ -171,12 +182,13 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
     Iterator1 last = first + count;
     return _MSTL make_pair(last, _MSTL uninitialized_move(first, last, result));
 }
+MSTL_END_INNER__
 
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_move_n(
     Iterator1 first, size_t count, Iterator2 result) {
-    return _MSTL __uninitialized_move_n_aux(first, count, result);
+    return _INNER __uninitialized_move_n_aux(first, count, result);
 }
 
 
@@ -252,6 +264,8 @@ public:
 };
 
 
+MSTL_BEGIN_INNER__
+
 template <typename Ptr, typename Elem>
 struct __ptr_traits_base {
     using pointer = Ptr;
@@ -281,8 +295,10 @@ struct __ptr_traits_extract<T, void_t<typename T::element_type>, void>
     : __ptr_traits_base<T, typename T::element_type> {
 };
 
+MSTL_END_INNER__
+
 template <typename T>
-struct pointer_traits : __ptr_traits_extract<T> {};
+struct pointer_traits : _INNER __ptr_traits_extract<T> {};
 
 template <typename T>
 struct pointer_traits<T*> {
@@ -374,6 +390,8 @@ struct allocator_traits {
 };
 
 
+MSTL_BEGIN_INNER__
+
 template <size_t>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
 #ifdef MSTL_COMPILER_MSVC__
@@ -412,9 +430,11 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
 
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t bytes) {
-    return _MSTL __allocate_aux<Align>(bytes);
+    return _INNER __allocate_aux<Align>(bytes);
 }
 #endif
+
+MSTL_END_INNER__
 
 template <size_t Align>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
@@ -425,12 +445,14 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
 #endif // MSTL_VERSION_20__
 
 #ifdef MSTL_VERSION_17__
-    return _MSTL __allocate_dispatch<Align>(bytes);
+    return _INNER __allocate_dispatch<Align>(bytes);
 #else
-    return _MSTL __allocate_aux<Align>(bytes);
+    return _INNER __allocate_aux<Align>(bytes);
 #endif // MSTL_VERSION_17__
 }
 
+
+MSTL_BEGIN_INNER__
 
 template <size_t>
 void __deallocate_aux(void*& ptr, size_t& bytes) noexcept {
@@ -474,9 +496,11 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept 
 
 template<size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
 MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept {
-    _MSTL __deallocate_aux<Align>(ptr, bytes);
+    _INNER __deallocate_aux<Align>(ptr, bytes);
 }
 #endif // MSTL_VERSION_17__
+
+MSTL_END_INNER__
 
 template <size_t Align>
 MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
@@ -488,14 +512,17 @@ MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
 #endif // MSTL_VERSION_20__
 
 #ifdef MSTL_VERSION_17__
-    _MSTL __deallocate_dispatch<Align>(ptr, bytes);
+    _INNER __deallocate_dispatch<Align>(ptr, bytes);
 #else
-    _MSTL __deallocate_aux<Align>(ptr, bytes);
+    _INNER __deallocate_aux<Align>(ptr, bytes);
 #endif // MSTL_VERSION_17__
 }
 
+MSTL_BEGIN_INNER__
 template <typename T>
 constexpr size_t __FINAL_ALIGN_SIZE = _MSTL max(alignof(T), MEMORY_ALIGN_THRESHHOLD);
+MSTL_END_INNER__
+
 
 MSTL_ERROR_BUILD_FINAL_CLASS(AllocateError, MemoryError, "Memory Allocation Failed.")
 
@@ -536,7 +563,7 @@ public:
         static_assert(value_size > 0, "value type must be complete before allocation called.");
         const size_t alloc_size = value_size * n;
         MSTL_DEBUG_VERIFY(alloc_size <= UINT64_MAX_SIZE, "allocation will cause memory overflow.");
-        return static_cast<T*>(_MSTL allocate<__FINAL_ALIGN_SIZE<T>>(alloc_size));
+        return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
     }
 
     MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
@@ -546,7 +573,7 @@ public:
     static MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
         constexpr size_t value_size = sizeof(value_type);
         MSTL_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
-        _MSTL deallocate<__FINAL_ALIGN_SIZE<T>>(p, n * value_size);
+        _MSTL deallocate<_INNER __FINAL_ALIGN_SIZE<T>>(p, n * value_size);
     }
 
     static MSTL_CONSTEXPR20 void deallocate(const pointer p) noexcept {
@@ -755,6 +782,8 @@ struct default_delete<T[]> {
 };
 
 
+MSTL_BEGIN_INNER__
+
 template <typename T, typename Deleter>
 class __unique_ptr_impl {
 private:
@@ -881,17 +910,19 @@ struct __unique_ptr_data<T, Deleter, false, false> : __unique_ptr_impl<T, Delete
     __unique_ptr_data& operator =(__unique_ptr_data&&) = delete;
 };
 
+MSTL_END_INNER__
+
 
 template <typename T, typename Deleter = default_delete<T>>
 class unique_ptr {
 private:
     template <typename U>
-	using DeleterConstraint = typename __unique_ptr_impl<T, U>::DeleterConstraint::type;
+	using DeleterConstraint = typename _INNER __unique_ptr_impl<T, U>::DeleterConstraint::type;
 
-    __unique_ptr_data<T, Deleter> data_{};
+    _INNER __unique_ptr_data<T, Deleter> data_{};
 
 public:
-    using pointer       = typename __unique_ptr_impl<T, Deleter>::pointer;
+    using pointer       = typename _INNER __unique_ptr_impl<T, Deleter>::pointer;
     using element_type  = T;
     using deleter_type  = Deleter;
 
@@ -983,12 +1014,12 @@ public:
 template <typename T, typename Deleter>
 class unique_ptr<T[], Deleter> {
     template <typename _Up>
-    using DeleterConstraint = typename __unique_ptr_impl<T, _Up>::DeleterConstraint::type;
+    using DeleterConstraint = typename _INNER __unique_ptr_impl<T, _Up>::DeleterConstraint::type;
 
-    __unique_ptr_data<T, Deleter> data_;
+    _INNER __unique_ptr_data<T, Deleter> data_;
 
 public:
-    using pointer	        = typename __unique_ptr_impl<T, Deleter>::pointer;
+    using pointer	        = typename _INNER __unique_ptr_impl<T, Deleter>::pointer;
     using element_type    = T;
     using deleter_type    = Deleter;
 
@@ -1216,6 +1247,8 @@ template <typename T, typename... Args, enable_if_t<is_bounded_array_v<T>, int> 
 unique_ptr<T> make_unique_for_overwrite(Args&&...) = delete;
 
 
+MSTL_BEGIN_INNER__
+
 struct __smart_ptr_counter {
     std::atomic_ulong count_;
 
@@ -1274,40 +1307,49 @@ struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     }
 };
 
+MSTL_END_INNER__
+
+
 template <typename T>
 struct enable_shared_from_this;
+
 template <typename T>
 class shared_ptr;
 
+
+MSTL_BEGIN_INNER__
+
 template <typename T>
-void __set_enable_shared_from(enable_shared_from_this<T>* ptr, __smart_ptr_counter* owner) {
+void __set_enable_shared_from(_MSTL enable_shared_from_this<T>* ptr, __smart_ptr_counter* owner) {
     ptr->owner_ = owner;
 }
-template <typename T, enable_if_t<is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
+template <typename T, _MSTL enable_if_t<_MSTL is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
 void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) {
-    (__set_enable_shared_from)(static_cast<enable_shared_from_this<T>*>(ptr), owner);
+    (__set_enable_shared_from)(static_cast<_MSTL enable_shared_from_this<T>*>(ptr), owner);
 }
-template <typename T, enable_if_t<!is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
+template <typename T, _MSTL enable_if_t<!_MSTL is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
 void __setup_enable_shared_from(T*, __smart_ptr_counter*) {}
 
 template <typename T>
-shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
-    return shared_ptr<T>(ptr, owner);
+_MSTL shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
+    return _MSTL shared_ptr<T>(ptr, owner);
 }
+
+MSTL_END_INNER__
 
 template <typename T>
 class shared_ptr {
 private:
     T* ptr_ = nullptr;
-    __smart_ptr_counter* owner_ = nullptr;
+    _INNER __smart_ptr_counter* owner_ = nullptr;
 
-    explicit shared_ptr(T* ptr, __smart_ptr_counter* owner) noexcept : ptr_(ptr), owner_(owner) {}
+    explicit shared_ptr(T* ptr, _INNER __smart_ptr_counter* owner) noexcept : ptr_(ptr), owner_(owner) {}
 
     template <typename>
     friend class shared_ptr;
 
     template <typename U>
-    friend shared_ptr<U> __make_shared_fused(U*, __smart_ptr_counter*) noexcept;
+    friend shared_ptr<U> _INNER __make_shared_fused(U*, _INNER __smart_ptr_counter*) noexcept;
 
 public:
     using element_type  = T;
@@ -1318,14 +1360,14 @@ public:
 
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(U* ptr)
-    : ptr_(ptr), owner_(new __smart_ptr_counter_impl<U, default_delete<U>>(ptr)) {
-        _MSTL __setup_enable_shared_from<T>(ptr_, owner_);
+    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr)) {
+        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(U* ptr, Deleter deleter)
-    : ptr_(ptr), owner_(new __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL move(deleter))) {
-        _MSTL __setup_enable_shared_from<T>(ptr_, owner_);
+    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL move(deleter))) {
+        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
@@ -1412,8 +1454,8 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = new __smart_ptr_counter_impl<U, default_delete<U>>(ptr);
-        _MSTL __setup_enable_shared_from<T>(ptr_, owner_);
+        owner_ = new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr);
+        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
     template <typename U, typename Deleter>
     void reset(U* ptr, Deleter deleter) {
@@ -1421,8 +1463,8 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = new __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL move(deleter));
-        _MSTL __setup_enable_shared_from<T>(ptr_, owner_);
+        owner_ = new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL move(deleter));
+        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
     MSTL_NODISCARD long use_count() const noexcept {
@@ -1500,7 +1542,7 @@ public:
 template <typename T>
 struct enable_shared_from_this {
 private:
-    __smart_ptr_counter* owner_;
+    _INNER __smart_ptr_counter* owner_;
 
 protected:
     enable_shared_from_this() noexcept : owner_(nullptr) {}
@@ -1509,25 +1551,25 @@ protected:
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
         if (!owner_) Exception(MemoryError("smart pointer share failed."));
         owner_->incref();
-        return (__make_shared_fused)(static_cast<T*>(this), owner_);
+        return _INNER __make_shared_fused(static_cast<T*>(this), owner_);
     }
 
     shared_ptr<T const> shared_from_this() const {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
         if (!owner_) Exception(MemoryError("smart pointer share failed."));
         owner_->incref();
-        return (__make_shared_fused)(static_cast<T const*>(this), owner_);
+        return _INNER __make_shared_fused(static_cast<T const*>(this), owner_);
     }
 
     template <typename U>
-    friend void __set_enable_shared_from(enable_shared_from_this<U>*, __smart_ptr_counter*);
+    friend void __set_enable_shared_from(enable_shared_from_this<U>*, _INNER __smart_ptr_counter*);
 };
 
 
 template <typename T, typename... Args, enable_if_t<!is_unbounded_array_v<T>, int> = 0>
 shared_ptr<T> make_shared(Args&&... args) {
     auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
-    using Counter = __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
+    using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
     constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
@@ -1552,14 +1594,14 @@ shared_ptr<T> make_shared(Args&&... args) {
         Exception(MemoryError("shared ptr construction failed."));
     }
     new (counter) Counter(object, mem, deleter);
-    __setup_enable_shared_from(object, counter);
-    return (__make_shared_fused)(object, counter);
+    _INNER __setup_enable_shared_from(object, counter);
+    return _INNER __make_shared_fused(object, counter);
 }
 
 template <typename T, enable_if_t<!is_unbounded_array_v<T>, int> = 0>
 shared_ptr<T> make_shared_for_overwrite() {
     auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
-    using Counter = __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
+    using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
     constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
@@ -1584,8 +1626,8 @@ shared_ptr<T> make_shared_for_overwrite() {
         Exception(MemoryError("shared ptr construction failed."));
     }
     new (counter) Counter(object, mem, deleter);
-    __setup_enable_shared_from(object, counter);
-    return (__make_shared_fused)(object, counter);
+    _INNER __setup_enable_shared_from(object, counter);
+    return _INNER __make_shared_fused(object, counter);
 }
 
 template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>

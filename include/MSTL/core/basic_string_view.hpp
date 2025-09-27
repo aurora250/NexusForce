@@ -1,0 +1,397 @@
+#ifndef MSTL_BASIC_STRING_VIEW_HPP__
+#define MSTL_BASIC_STRING_VIEW_HPP__
+#include "char_traits.hpp"
+MSTL_BEGIN_NAMESPACE__
+
+template <typename CharT, typename Traits = char_traits<CharT>>
+class basic_string_view;
+
+
+template <typename Traits>
+class string_view_iterator {
+private:
+    using container_type	= basic_string_view<typename Traits::char_type, Traits>;
+    using iterator			= string_view_iterator<Traits>;
+    using const_iterator	= string_view_iterator<Traits>;
+
+public:
+#ifdef MSTL_VERSION_20__
+    using iterator_category = contiguous_iterator_tag;
+#else
+    using iterator_category = random_access_iterator_tag;
+#endif // MSTL_VERSION_20__
+    using value_type		= typename container_type::value_type;
+    using reference			= typename container_type::const_reference;
+    using pointer			= typename container_type::const_pointer;
+    using difference_type	= typename container_type::difference_type;
+    using size_type			= typename container_type::size_type;
+
+    using self				= string_view_iterator<Traits>;
+
+private:
+    pointer data_ = nullptr;
+    size_t size_ = 0;
+    size_t idx_ = 0;
+
+    friend basic_string_view<value_type, Traits>;
+
+public:
+    constexpr string_view_iterator() noexcept = default;
+
+    constexpr string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept
+        : data_(data), size_(size), idx_(off) {}
+
+    MSTL_NODISCARD constexpr reference operator *() const noexcept {
+        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
+        MSTL_DEBUG_VERIFY(idx_ < size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
+        return data_[idx_];
+    }
+
+    MSTL_NODISCARD constexpr pointer operator ->() const noexcept {
+        return &operator*();
+    }
+
+    constexpr self& operator ++() noexcept {
+        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
+        MSTL_DEBUG_VERIFY(idx_ < size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
+        ++idx_;
+        return *this;
+    }
+
+    constexpr self operator ++(int) noexcept {
+        self tmp(*this);
+        ++*this;
+        return tmp;
+    }
+
+    constexpr self& operator --() noexcept {
+        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
+        MSTL_DEBUG_VERIFY(idx_ != 0, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
+        --idx_;
+        return *this;
+    }
+
+    constexpr self operator --(int) noexcept {
+        self tmp(*this);
+        --*this;
+        return tmp;
+    }
+
+    constexpr self& operator +=(const difference_type n) noexcept {
+        if (n < 0) {
+            MSTL_DEBUG_VERIFY(data_ || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
+            MSTL_DEBUG_VERIFY(idx_ >= static_cast<size_t>(0) - static_cast<size_t>(n),
+                __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
+        }
+        else if (n > 0) {
+            MSTL_DEBUG_VERIFY(data_ || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
+            MSTL_DEBUG_VERIFY(size_ - idx_ >= static_cast<size_t>(n),
+                __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
+        }
+        idx_ += n;
+        return *this;
+    }
+    MSTL_NODISCARD constexpr self operator +(const difference_type n) const noexcept {
+        self tmp = *this;
+        tmp += n;
+        return tmp;
+    }
+    MSTL_NODISCARD friend constexpr self operator +(const difference_type n, const self& iter) noexcept {
+        return iter + n;
+    }
+
+    constexpr self& operator -=(const difference_type n) noexcept {
+        idx_ += -n;
+        return *this;
+    }
+    MSTL_NODISCARD constexpr self operator -(const difference_type n) const noexcept {
+        self tmp = *this;
+        tmp -= n;
+        return tmp;
+    }
+    MSTL_NODISCARD constexpr difference_type operator -(const self& iter) const noexcept {
+        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
+            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
+        return static_cast<difference_type>(idx_ - iter.idx_);
+    }
+
+    MSTL_NODISCARD constexpr reference operator [](const difference_type n) const noexcept {
+        return *(*this + n);
+    }
+
+    MSTL_NODISCARD constexpr bool operator ==(const self& iter) const noexcept {
+        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
+            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
+        return idx_ == iter.idx_;
+    }
+    MSTL_NODISCARD constexpr bool operator !=(const self& iter) const noexcept {
+        return !(*this == iter);
+    }
+    MSTL_NODISCARD constexpr bool operator <(const self& iter) const noexcept {
+        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
+            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
+        return idx_ < iter.idx_;
+    }
+    MSTL_NODISCARD constexpr bool operator >(const self& iter) const noexcept {
+        return iter < *this;
+    }
+    MSTL_NODISCARD constexpr bool operator <=(const self& iter) const noexcept {
+        return !(iter < *this);
+    }
+    MSTL_NODISCARD constexpr bool operator >=(const self& iter) const noexcept {
+        return !(*this < iter);
+    }
+};
+
+
+template <typename CharT, typename Traits>
+class basic_string_view {
+    static_assert(is_same_v<CharT, typename Traits::char_type>,
+        "char type of basic string view should be same with char traits.");
+    static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
+        "basic string view only contains non-array trivial standard-layout types.");
+
+public:
+    MSTL_BUILD_TYPE_ALIAS(CharT)
+    using traits_type               = Traits;
+    using self                      = basic_string_view<CharT, Traits>;
+
+    using const_iterator            = string_view_iterator<Traits>;
+    using iterator                  = const_iterator;
+    using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
+    using reverse_iterator          = const_reverse_iterator;
+
+    static constexpr auto npos = static_cast<size_type>(-1);
+
+private:
+    const_pointer data_;
+    size_type size_;
+
+    constexpr void range_check(const size_type n) const {
+        MSTL_DEBUG_VERIFY(size_ < n, "basic string view index out of ranges.");
+    }
+
+    MSTL_NODISCARD constexpr size_type clamp_size(const size_type position, const size_type size) const noexcept {
+        return _MSTL min(size, size_ - position);
+    }
+
+public:
+    constexpr basic_string_view() noexcept : data_(), size_(0) {}
+
+    constexpr basic_string_view(const self&) noexcept = default;
+    constexpr basic_string_view& operator =(const self&) noexcept = default;
+
+    constexpr basic_string_view(const_pointer str) noexcept
+        : data_(str), size_(Traits::length(str)) {}
+    constexpr basic_string_view(const_pointer str, const size_type n) noexcept
+        : data_(str), size_(n) {}
+
+    MSTL_NODISCARD constexpr const_iterator begin() const noexcept { return const_iterator(data_, size_, 0); }
+    MSTL_NODISCARD constexpr const_iterator end() const noexcept { return const_iterator(data_, size_, size_); }
+    MSTL_NODISCARD constexpr const_iterator cbegin() const noexcept { return begin(); }
+    MSTL_NODISCARD constexpr const_iterator cend() const noexcept { return end(); }
+    MSTL_NODISCARD constexpr const_reverse_iterator rbegin() const noexcept { return const_reverse_iterator(end()); }
+    MSTL_NODISCARD constexpr const_reverse_iterator rend() const noexcept { return const_reverse_iterator(begin()); }
+    MSTL_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept { return rbegin(); }
+    MSTL_NODISCARD constexpr const_reverse_iterator crend() const noexcept { return rend(); }
+
+    MSTL_NODISCARD constexpr size_type size() const noexcept { return size_; }
+    MSTL_NODISCARD constexpr size_type max_size() const noexcept {
+        return (npos - sizeof(size_type) - POINTER_SIZE) / sizeof(value_type) / 4;
+    }
+    MSTL_NODISCARD constexpr size_type length() const noexcept { return size_; }
+    MSTL_NODISCARD constexpr bool empty() const noexcept { return size_ == 0; }
+
+    MSTL_NODISCARD constexpr const_pointer data() const noexcept { return data_; }
+    MSTL_NODISCARD constexpr const_reference front() const noexcept {
+        MSTL_DEBUG_VERIFY(!empty(), "cannot call front on empty string_view");
+        return data_[0];
+    }
+    MSTL_NODISCARD constexpr const_reference back() const noexcept {
+        MSTL_DEBUG_VERIFY(!empty(), "cannot call back on empty string_view");
+        return data_[size_ - 1];
+    }
+
+    MSTL_NODISCARD constexpr const_reference operator [](const size_type n) const noexcept {
+        range_check(n);
+        return data_[n];
+    }
+    MSTL_NODISCARD constexpr const_reference at(const size_type n) const {
+        range_check(n);
+        return data_[n];
+    }
+
+    constexpr void remove_prefix(const size_type n) noexcept {
+        MSTL_DEBUG_VERIFY(size_ >= n, "cannot remove prefix longer than total size");
+        data_ += n;
+        size_ -= n;
+    }
+    constexpr void remove_suffix(const size_type n) noexcept {
+        MSTL_DEBUG_VERIFY(size_ >= n, "cannot remove suffix longer than total size");
+        size_ -= n;
+    }
+
+    constexpr void swap(self& view) noexcept {
+        const self tmp(view);
+        view = *this;
+        *this = tmp;
+    }
+
+    constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const {
+        range_check(off);
+        count = clamp_size(off, count);
+        Traits::copy(str, data_ + off, count);
+        return count;
+    }
+
+    MSTL_NODISCARD constexpr self substr(const size_type off = 0, size_type count = npos) const {
+        range_check(off);
+        count = clamp_size(off, count);
+        return self(data_ + off, count);
+    }
+
+    MSTL_NODISCARD constexpr bool equal_to(const self view) const noexcept {
+        return (char_traits_equal<Traits>)(data_, size_, view.data_, view.size_);
+    }
+
+    MSTL_NODISCARD constexpr int compare(const self view) const noexcept {
+        return (char_traits_compare<Traits>)(data_, size_, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const self view) const {
+        return substr(off, n).compare(view);
+    }
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const self view,
+        const size_type roff, const size_type count) const {
+        return substr(off, n).compare(view.substr(roff, count));
+    }
+    MSTL_NODISCARD constexpr int compare(const CharT* const str) const noexcept {
+        return compare(self(str));
+    }
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const CharT* const str) const {
+        return substr(off, n).compare(self(str));
+    }
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n,
+        const CharT* const str, const size_type count) const {
+        return substr(off, n).compare(self(str, count));
+    }
+
+    MSTL_NODISCARD constexpr size_type find(const self view, const size_type n = 0) const noexcept {
+        return (char_traits_find<Traits>)(data_, size_, n, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type find(const CharT chr, const size_type n = 0) const noexcept {
+        return (char_traits_find_char<Traits>)(data_, size_, n, chr);
+    }
+    MSTL_NODISCARD constexpr size_type find(const CharT* const str,
+        const size_type off, const size_type count) const noexcept {
+        return (char_traits_find<Traits>)(data_, size_, off, str, count);
+    }
+    MSTL_NODISCARD constexpr size_type find(const CharT* const str, const size_type off = 0) const noexcept {
+        return (char_traits_find<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_NODISCARD constexpr size_type rfind(const self view, const size_type off = npos) const noexcept {
+        return (char_traits_rfind<Traits>)(data_, size_, off, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type rfind(const CharT chr, const size_type n = npos) const noexcept {
+        return (char_traits_rfind_char<Traits>)(data_, size_, n, chr);
+    }
+    MSTL_NODISCARD constexpr size_type rfind(const CharT* const str, const size_type off,
+        const size_type n) const noexcept {
+        return (char_traits_rfind<Traits>)(data_, size_, off, str, n);
+    }
+    MSTL_NODISCARD constexpr size_type rfind(const CharT* const str, const size_type off = npos) const noexcept {
+        return (char_traits_rfind<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_NODISCARD constexpr size_type find_first_of(const self view, const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_of(const CharT chr, const size_type off = 0) const noexcept {
+        return (char_traits_find_char<Traits>)(data_, size_, off, chr);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_of(const CharT* const str, const size_type off,
+        const size_type n) const noexcept {
+        return (char_traits_find_first_of<Traits>)(data_, size_, off, str, n);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_of(const CharT* const str, const size_type off = 0) const noexcept {
+        return (char_traits_find_first_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_NODISCARD constexpr size_type find_last_of(const self view, const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_of(const CharT chr, const size_type off = npos) const noexcept {
+        return (char_traits_rfind_char<Traits>)(data_, size_, off, chr);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_of(const CharT* const str, const size_type off,
+        const size_type n) const noexcept {
+        return (char_traits_find_last_of<Traits>)(data_, size_, off, str, n);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_of(const CharT* const str, const size_type off = npos) const noexcept {
+        return (char_traits_find_last_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_NODISCARD constexpr size_type find_first_not_of(const self view,
+        const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_not_of(const CharT chr, const size_type off = 0) const noexcept {
+        return (char_traits_find_not_char<Traits>)(data_, size_, off, chr);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_not_of(const CharT* const str, const size_type off,
+        const size_type n) const noexcept {
+        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, str, n);
+    }
+    MSTL_NODISCARD constexpr size_type find_first_not_of(const CharT* const str, const size_type off = 0) const noexcept {
+        return (char_traits_find_first_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_NODISCARD constexpr size_type find_last_not_of(const self view,
+        const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_not_of(const CharT chr, const size_type off = npos) const noexcept {
+        return (char_traits_rfind_not_char<Traits>)(data_, size_, off, chr);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_not_of(const CharT* const str, const size_type off,
+        const size_type n) const noexcept {
+        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, n);
+    }
+    MSTL_NODISCARD constexpr size_type find_last_not_of(const CharT* const str,
+        const size_type off = npos) const noexcept {
+        return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+};
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator ==(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return lh.equal_to(rh);
+}
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator !=(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return !lh.equal_to(rh);
+}
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator <(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return lh.compare(rh) < 0;
+}
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator >(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return lh.compare(rh) > 0;
+}
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator <=(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return lh.compare(rh) <= 0;
+}
+template <typename CharT, typename Traits>
+MSTL_NODISCARD constexpr bool operator >=(
+    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
+    return lh.compare(rh) >= 0;
+}
+
+MSTL_END_NAMESPACE__
+#endif // MSTL_BASIC_STRING_VIEW_HPP__

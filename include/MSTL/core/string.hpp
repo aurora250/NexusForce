@@ -4,6 +4,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 using string = basic_string<char>;
+using bstring = basic_string<byte_t>;
 using wstring = basic_string<wchar_t>;
 #ifdef MSTL_VERSION_20__
 using u8string = basic_string<char8_t>;
@@ -28,7 +29,7 @@ struct hash<basic_string<CharT, Traits, Alloc>> {
 
 
 #ifdef MSTL_VERSION_17__
-inline namespace string_operator {
+inline namespace literals {
     MSTL_NODISCARD MSTL_CONSTEXPR20 string operator ""_s(const char* str, size_t len) noexcept {
         return {str, len};
     }
@@ -50,50 +51,11 @@ inline namespace string_operator {
 #endif // MSTL_VERSION_17__
 
 
-inline string wstring_to_utf8(const wchar_t* str) {
-    string utf8_str;
-    if (!str) return utf8_str;
-
-    size_t len = char_traits<wchar_t>::length(str);
-#ifdef MSTL_PLATFORM_WINDOWS__
-    const int size_needed = WideCharToMultiByte(CP_UTF8, 0, str,
-        static_cast<int>(len), nullptr, 0, nullptr, nullptr);
-    if (size_needed <= 0) return utf8_str;
-
-    utf8_str.resize(size_needed);
-    WideCharToMultiByte(CP_UTF8, 0, str,
-        static_cast<int>(len), &utf8_str[0], size_needed, nullptr, nullptr);
-#elif defined(MSTL_PLATFORM_LINUX__)
-    for (size_t i = 0; i < len; ++i) {
-        const auto cp = static_cast<uint32_t>(str[i]);
-
-        if (cp > 0x10FFFF || (cp >= 0xD800 && cp <= 0xDFFF)) {
-            utf8_str += "\xEF\xBF\xBD";
-            continue;
-        }
-        if (cp <= 0x7F) {
-            utf8_str += static_cast<char>(cp);
-        } else if (cp <= 0x7FF) {
-            utf8_str += static_cast<char>(0xC0 | (cp >> 6));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        } else if (cp <= 0xFFFF) {
-            utf8_str += static_cast<char>(0xE0 | (cp >> 12));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        } else {
-            utf8_str += static_cast<char>(0xF0 | (cp >> 18));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        }
-    }
-#endif
-    return _MSTL move(utf8_str);
-}
+MSTL_API string wstring_to_utf8(const wchar_t* str);
 
 #ifdef MSTL_VERSION_20__
 inline string u8string_to_utf8(const char8_t* str) {
-    return {reinterpret_cast<const char*>(t)};
+    return {reinterpret_cast<const char*>(str)};
 }
 #endif
 
@@ -110,173 +72,19 @@ constexpr bool is_low_surrogate(const char16_t c) {
 }
 
 constexpr uint32_t combine_surrogates(const char16_t high, const char16_t low) {
-    return 0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) +
-           (static_cast<uint32_t>(low) - 0xDC00);
+    return 0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) + (static_cast<uint32_t>(low) - 0xDC00);
 }
 
-inline string u16string_to_utf8(const char16_t* str) {
-    string utf8_str;
-    if (!str) return utf8_str;
-
-    for (size_t i = 0; str[i] != u'\0'; ++i) {
-        const char16_t c1 = str[i];
-        if (i == 0 && c1 == 0xFEFF) {
-            continue;
-        }
-        if (!is_high_surrogate(c1) && !is_low_surrogate(c1)) {
-            const auto cp = static_cast<uint32_t>(c1);
-
-            if (cp > 0x10FFFF) {
-                utf8_str += "\xEF\xBF\xBD";
-                continue;
-            }
-            if (cp <= 0x7F) {
-                utf8_str += static_cast<char>(cp);
-            } else if (cp <= 0x7FF) {
-                utf8_str += static_cast<char>(0xC0 | (cp >> 6));
-                utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-            } else {
-                utf8_str += static_cast<char>(0xE0 | (cp >> 12));
-                utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-                utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-            }
-        }
-        else if (is_high_surrogate(c1)) {
-            if (str[i+1] == u'\0' || !is_low_surrogate(str[i+1])) {
-                utf8_str += "\xEF\xBF\xBD";
-                continue;
-            }
-            const char16_t c2 = str[++i];
-            const uint32_t cp = combine_surrogates(c1, c2);
-
-            utf8_str += static_cast<char>(0xF0 | (cp >> 18));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        }
-        else {
-            utf8_str += "\xEF\xBF\xBD";
-        }
-    }
-    return _MSTL move(utf8_str);
-}
+MSTL_API string u16string_to_utf8(const char16_t* str);
 #endif
 
-inline string u32string_to_utf8(const char32_t* str) {
-    string utf8_str;
-    if (!str) return utf8_str;
-
-    size_t len = char_traits<char32_t>::length(str);
-#ifdef MSTL_PLATFORM_WINDOWS__
-    wstring utf16_buf;
-    // In the worst case, each UTF-32 character needs to be split into 2 UTF-16 surrogate pairs.
-    utf16_buf.reserve(len * 2);
-    for (size_t i = 0; i < len; ++i) {
-        char32_t cp = str[i];
-        if (cp > 0x10FFFF || (cp >= 0xD800 && cp <= 0xDFFF)) {
-            utf16_buf.push_back(0xFFFD);
-            continue;
-        }
-        if (cp <= 0xFFFF) {  // BMP
-            utf16_buf.push_back(static_cast<wchar_t>(cp));
-        } else {
-            cp -= 0x10000;
-            utf16_buf.push_back(static_cast<wchar_t>((cp >> 10) + 0xD800));
-            utf16_buf.push_back(static_cast<wchar_t>((cp & 0x3FF) + 0xDC00));
-        }
-    }
-    const int size_needed = WideCharToMultiByte(CP_UTF8, 0,
-        utf16_buf.data(), static_cast<int>(utf16_buf.size()),
-        nullptr, 0, nullptr, nullptr
-    );
-    if (size_needed <= 0) return utf8_str;
-
-    utf8_str.resize(size_needed);
-    const int written = WideCharToMultiByte(CP_UTF8, 0,
-        utf16_buf.data(), static_cast<int>(utf16_buf.size()),
-        &utf8_str[0], size_needed, nullptr, nullptr
-    );
-    if (written != size_needed) {
-        utf8_str.resize(written > 0 ? written : 0);
-    }
-#elif defined(MSTL_PLATFORM_LINUX__)
-    for (size_t i = 0; i < len; ++i) {
-        auto cp = static_cast<uint32_t>(str[i]);
-
-        if (cp > 0x10FFFF || (cp >= 0xD800 && cp <= 0xDFFF)) {
-            utf8_str += "\xEF\xBF\xBD";
-            continue;
-        }
-        if (cp <= 0x7F) {
-            utf8_str += static_cast<char>(cp);
-        } else if (cp <= 0x7FF) {
-            utf8_str += static_cast<char>(0xC0 | (cp >> 6));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        } else if (cp <= 0xFFFF) {
-            utf8_str += static_cast<char>(0xE0 | (cp >> 12));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        } else {
-            utf8_str += static_cast<char>(0xF0 | (cp >> 18));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            utf8_str += static_cast<char>(0x80 | (cp & 0x3F));
-        }
-    }
-#endif
-    return _MSTL move(utf8_str);
-}
+MSTL_API string u32string_to_utf8(const char32_t* str);
 
 
-inline string escape_string(const string& str) {
-    string result;
-    result.reserve(str.length() + str.length() / 4);
+MSTL_API string escape_string(const string& str);
 
-    for (const char c : str) {
-        switch (c) {
-            case '\"':
-                result += "\\\"";
-                break;
-            case '\'':
-                result += "\\\'";
-                break;
-            case '\\':
-                result += "\\\\";
-                break;
-            case '\b':
-                result += "\\b";
-                break;
-            case '\f':
-                result += "\\f";
-                break;
-            case '\n':
-                result += "\\n";
-                break;
-            case '\r':
-                result += "\\r";
-                break;
-            case '\t':
-                result += "\\t";
-                break;
-            case '\v':
-                result += "\\v";
-                break;
-            default:
-                if (static_cast<byte_t>(c) < 0x20) {
-                    result += "\\u";
-                    constexpr char hex[] = "0123456789abcdef";
-                    result += "00";
-                    result += hex[(c >> 4) & 0x0F];
-                    result += hex[c & 0x0F];
-                } else {
-                    result += c;
-                }
-            break;
-        }
-    }
-    return result;
-}
 
+MSTL_BEGIN_INNER__
 
 #ifndef MSTL_DATA_BUS_WIDTH_64__
 template <typename CharT, typename UT, enable_if_t<(sizeof(UT) > 4), int> = 0>
@@ -296,11 +104,11 @@ void __uint_to_buff_aux(CharT*, UT&) {}
 
 template <typename CharT, typename UT>
 MSTL_NODISCARD CharT* __uint_to_buff(CharT* riter, UT ux) {
-    static_assert(is_unsigned_v<UT>, "UT must be unsigned types.");
+    static_assert(is_unsigned<UT>::value, "UT must be unsigned types.");
 #ifdef MSTL_DATA_BUS_WIDTH_64__
     auto holder = ux;
 #else
-    _MSTL __uint_to_buff_aux(riter, ux);
+    _INNER __uint_to_buff_aux(riter, ux);
     auto holder = static_cast<unsigned long>(ux);
 #endif
     do {
@@ -310,7 +118,7 @@ MSTL_NODISCARD CharT* __uint_to_buff(CharT* riter, UT ux) {
     return riter;
 }
 
-template <typename CharT, typename T, enable_if_t<is_integral_v<T>, int> = 0>
+template <typename CharT, typename T, enable_if_t<is_integral<T>::value, int> = 0>
 MSTL_NODISCARD basic_string<CharT> __int_to_string(const T x) {
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
@@ -326,7 +134,7 @@ MSTL_NODISCARD basic_string<CharT> __int_to_string(const T x) {
 }
 
 template <typename CharT, typename T,
-    enable_if_t<is_integral_v<T> && is_unsigned_v<T>, int> = 0>
+    enable_if_t<conjunction_v<is_integral<T>, is_unsigned<T>>, int> = 0>
 MSTL_NODISCARD basic_string<CharT> __uint_to_string(const T x) {
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
@@ -334,7 +142,7 @@ MSTL_NODISCARD basic_string<CharT> __uint_to_string(const T x) {
     return basic_string<CharT>(rnext, buffer_end);
 }
 
-template <typename CharT, typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD basic_string<CharT> __float_to_string(const T x) {
 #ifdef MSTL_PLATFORM_LINUX__
     const int len = ::snprintf(nullptr, 0, "%f", x);
@@ -349,24 +157,29 @@ MSTL_NODISCARD basic_string<CharT> __float_to_string(const T x) {
 #endif
 }
 
+MSTL_END_INNER__
 
-MSTL_NODISCARD inline string to_string(const bool x) {
+
+template <typename T, enable_if_t<is_boolean_v<T>, int> = 0>
+MSTL_NODISCARD string to_string(const T x) {
     if (x) return {"true"};
     return {"false"};
 }
-template <typename T, enable_if_t<is_standard_integer_v<T> && is_signed_v<T>, int> = 0>
+template <typename T, enable_if_t<conjunction_v<is_standard_integral<T>, is_signed<T>>, int> = 0>
 MSTL_NODISCARD string to_string(const T x) {
-    return _MSTL __int_to_string<char>(x);
+    return _INNER __int_to_string<char>(x);
 }
-template <typename T, enable_if_t<is_standard_integer_v<T> && is_unsigned_v<T>, int> = 0>
+template <typename T, enable_if_t<conjunction_v<is_standard_integral<T>, is_unsigned<T>>, int> = 0>
 MSTL_NODISCARD string to_string(const T x) {
-    return _MSTL __uint_to_string<char>(x);
+    return _INNER __uint_to_string<char>(x);
 }
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD string to_string(const T x) {
-    return _MSTL __float_to_string<char>(x);
+    return _INNER __float_to_string<char>(x);
 }
 
+
+MSTL_BEGIN_INNER__
 
 MSTL_NODISCARD inline string __to_string_dispatch(const char* x) {
     return {x};
@@ -386,32 +199,32 @@ MSTL_NODISCARD inline string __to_string_dispatch(const char32_t* x) {
     return u32string_to_utf8(x);
 }
 
+MSTL_END_INNER__
+
 template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 MSTL_NODISCARD string to_string(const CharT x) {
     CharT str[2] = { x, static_cast<CharT>(0) };
-    return _MSTL __to_string_dispatch(str);
+    return _INNER __to_string_dispatch(str);
 }
 template <typename T, enable_if_t<is_ctype_string_v<T>, int> = 0>
 MSTL_NODISCARD string to_string(const T& x) {
-    return _MSTL __to_string_dispatch(x);
+    return _INNER __to_string_dispatch(x);
 }
 template <typename CharT>
 MSTL_NODISCARD string to_string(const basic_string_view<CharT> x) {
-    return _MSTL __to_string_dispatch(x.data());
-}
-template <>
-MSTL_NODISCARD inline string to_string<char>(const basic_string_view<char> x) {
-    return string{x};
+    return _INNER __to_string_dispatch(x.data());
 }
 template <typename CharT>
 MSTL_NODISCARD string to_string(const basic_string<CharT>& x) {
-    return _MSTL __to_string_dispatch(x);
+    return _INNER __to_string_dispatch(x);
+}
+template <>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string<byte_t>(const bstring& x) {
+    return string(x.begin(), x.end());
 }
 
-
-template <typename CharT, typename T, enable_if_t<is_same_v<CharT, char>, int> = 0>
-MSTL_NODISCARD basic_string<CharT> __stream_to_string(T x) {
-    return _MSTL to_string(x);
+MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string& x) {
+    return bstring(x.begin(), x.end());
 }
 
 MSTL_END_NAMESPACE__

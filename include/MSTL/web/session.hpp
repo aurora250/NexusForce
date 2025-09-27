@@ -4,6 +4,7 @@
 #include "MSTL/core/unordered_map.hpp"
 #include "MSTL/core/stringstream.hpp"
 #include "MSTL/core/hexadecimal.hpp"
+#include "MSTL/core/datetime.hpp"
 #include <mutex>
 #include <thread>
 MSTL_BEGIN_NAMESPACE__
@@ -208,6 +209,9 @@ public:
 };
 
 
+MSTL_BEGIN_INNER__
+class servlet;
+
 class __session_manager {
 private:
     unordered_map<string, session> sessions_;
@@ -220,7 +224,7 @@ private:
     static string generate_session_id() {
         ostringstream ss;
         for (int i = 0; i < 32; ++i) {
-            ss << hexadecimal(random_mt::next_int(0, 15)).to_std_string();
+            ss << hex_plain(hexadecimal(random_mt::next_int(0, 15)));
         }
         return ss.str();
     }
@@ -292,6 +296,7 @@ private:
         return it != sessions_.end() && it->second.is_valid();
     }
 };
+MSTL_END_INNER__
 
 
 enum class HTTP_STATUS : uint16_t {

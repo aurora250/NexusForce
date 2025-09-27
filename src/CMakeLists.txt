@@ -1,10 +1,17 @@
 # 编译器配置
 function(configure_compiler_options target)
     if(MSVC)
-        target_compile_options(${target} PRIVATE /utf-8)
         target_compile_options(${target} PRIVATE
+                $<$<COMPILE_LANGUAGE:CXX>:
+                /utf-8
                 $<$<CONFIG:Debug>:/WX /Od /Zi>
-                $<$<CONFIG:Release>:/O2>
+                $<$<CONFIG:Release>:/O2 /Zc:__cplusplus>
+                >
+        )
+        target_compile_options(${target} PRIVATE
+                $<$<COMPILE_LANGUAGE:ASM_MASM>:
+                /W3
+                >
         )
         message(STATUS "Configured MSVC compiler options for ${target} (${CMAKE_BUILD_TYPE})")
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
@@ -71,14 +78,64 @@ function(enable_database_support target)
 endfunction()
 
 
+if(MSVC)
+    enable_language(ASM_MASM)
+
+    set(ASM_SOURCES
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.asm
+    )
+
+    foreach(asm_file ${ASM_SOURCES})
+        set_property(
+                SOURCE ${asm_file}
+                PROPERTY LANGUAGE ASM_MASM
+        )
+        if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+            set_property(
+                    SOURCE ${asm_file}
+                    PROPERTY COMPILE_OPTIONS "/nologo;/W3"
+            )
+            set_property(
+                    SOURCE ${asm_file}
+                    PROPERTY COMPILE_DEFINITIONS "_WIN64"
+            )
+        else()
+            set_property(
+                    SOURCE ${asm_file}
+                    PROPERTY COMPILE_OPTIONS "/nologo;/W3"
+            )
+        endif()
+        get_filename_component(asm_name ${asm_file} NAME_WE)
+        set_property(SOURCE ${asm_file} PROPERTY OBJECT_OUTPUT_NAME ${asm_name})
+    endforeach()
+endif()
+
+
 # 链接文件
-set(MSTL_SOURCES
+set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/servlet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/rb_tree.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
 )
 
 # 编译为动态库
-add_library(MSTL SHARED ${MSTL_SOURCES})
+if(MSVC)
+    add_library(MSTL SHARED ${CPP_SOURCES} ${ASM_SOURCES})
+    target_sources(MSTL PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/MSTL.def)
+else()
+    add_library(MSTL SHARED ${CPP_SOURCES})
+endif()
+
 add_library(MSTL::MSTL ALIAS MSTL)
 
 # 编译设置
@@ -299,7 +356,9 @@ if(MSTL_ENABLE_QT6 AND MSTL_ARCH STREQUAL "x64" AND CMAKE_CXX_STANDARD GREATER_E
         find_package(Qt6 COMPONENTS Core Widgets Gui QUIET)
         if(Qt6_FOUND)
             if(MSVC)
-                target_compile_options(MSTL PRIVATE /Zc:__cplusplus)
+                target_compile_options(MSTL PRIVATE
+                        $<$<COMPILE_LANGUAGE:CXX>:/Zc:__cplusplus>
+                )
             endif()
 
             set_target_properties(MSTL PROPERTIES

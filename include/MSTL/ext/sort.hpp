@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 
 // bubble sort : Ot(N)~(N^2) Om(1) stable
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
-void bubble_sort(Iterator first, Iterator last, Compare comp) {
+MSTL_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
     auto revend = _MSTL make_reverse_iterator(first);
     auto revstart = _MSTL make_reverse_iterator(--last);
@@ -26,13 +26,13 @@ void bubble_sort(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-void bubble_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last) {
     return _MSTL bubble_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
 // cocktail sort : Ot(N)~(N^2) Om(1) stable
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
-void cocktail_sort(Iterator first, Iterator last, Compare comp) {
+MSTL_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
     bool swapped = true;
     Iterator left = first;
@@ -64,14 +64,14 @@ void cocktail_sort(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-void cocktail_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last) {
     return _MSTL cocktail_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
 // select sort : Ot(N^2) Om(1) unstable 
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
-void select_sort(Iterator first, Iterator last, Compare comp) {
+MSTL_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
     Iterator min;
     for (Iterator i = first; i != last; ++i) {
@@ -86,14 +86,14 @@ void select_sort(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-void select_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void select_sort(Iterator first, Iterator last) {
     return _MSTL select_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
 // shell sort : Ot(NlogN)~(N^2) Om(1) unstable
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void shell_sort(Iterator first, Iterator last, Compare comp) {
+MSTL_CONSTEXPR20 void shell_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
     using Distance = iter_dif_t<Iterator>;
     using T = iter_val_t<Iterator>;
@@ -110,14 +110,14 @@ void shell_sort(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-void shell_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void shell_sort(Iterator first, Iterator last) {
     return _MSTL shell_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
 // counting sort : Ot(N + k) Om(k) stable
 template <typename Iterator, typename Compare, typename IndexMapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapper) {
+MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapper) {
     if (first == last) return;
     using T = typename iterator_traits<Iterator>::value_type;
     auto min_max = _MSTL minmax_element(first, last, comp);
@@ -150,14 +150,14 @@ void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapp
 }
 
 template <typename Iterator>
-void counting_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
     _MSTL counting_sort(first, last, 
         _MSTL less<iter_val_t<Iterator>>(), _MSTL identity<iter_val_t<Iterator>>());
 }
 
 template <typename Iterator, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
-void bucket_sort_less(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
     using T = iter_val_t<Iterator>;
     pair<Iterator, Iterator> min_max = _MSTL minmax_element(first, last);
     T min_val = *min_max.first;
@@ -181,7 +181,7 @@ void bucket_sort_less(Iterator first, Iterator last) {
 
 template <typename Iterator, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
-void bucket_sort_greater(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
     using T = iter_val_t<Iterator>;
     pair<Iterator, Iterator> min_max = _MSTL minmax_element(first, last);
     T min_val = *min_max.first;
@@ -205,9 +205,11 @@ void bucket_sort_greater(Iterator first, Iterator last) {
 
 // bucket sort : Ot(N + k)~(N^2) Om(N + k) stable
 template<typename Iterator>
-void bucket_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void bucket_sort(Iterator first, Iterator last) {
     _MSTL bucket_sort_less(first, last);
 }
+
+MSTL_BEGIN_INNER__
 
 template <typename Iterator>
 int __max_bit_aux(Iterator first, Iterator last) {
@@ -229,9 +231,11 @@ int __get_number_aux(T num, T d) {
     return num / p % 10;
 }
 
+MSTL_END_INNER__
+
 template <typename Iterator, typename Mapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
+MSTL_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
     if (first == last) return;
     using Distance = typename iterator_traits<Iterator>::difference_type;
     using T = typename iterator_traits<Iterator>::value_type;
@@ -247,17 +251,17 @@ void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
         *value = mapper(*it++);
     }
 
-    for (int d = 1; d <= _MSTL __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
+    for (int d = 1; d <= _INNER __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
         _MSTL fill(count.begin(), count.end(), 0);
         FOR_EACH(num, mapped_values) {
-            ++count[_MSTL __get_number_aux(*num, d)];
+            ++count[_INNER __get_number_aux(*num, d)];
         }
 
         for (size_t i = 1; i < count.size(); ++i) {
             count[i] += count[i - 1];
         }
         for (auto iter = mapped_values.rbegin(); iter != mapped_values.rend(); ++iter) {
-            const int k = _MSTL __get_number_aux(*iter, d);
+            const int k = _INNER __get_number_aux(*iter, d);
             bucket[--count[k]] = *(first + _MSTL distance(mapped_values.begin(), iter.base() - 1));
         }
 
@@ -271,7 +275,7 @@ void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
 
 template <typename Iterator, typename Mapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
+MSTL_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
     if (first == last) return;
     using Mapped = remove_cvref_t<decltype(mapper(*first))>;
 
@@ -284,10 +288,10 @@ void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
     FOR_EACH(value, mapped_values) {
         *value = mapper(*it++);
     }
-    for (int d = 1; d <= _MSTL __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
+    for (int d = 1; d <= _INNER __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
         _MSTL fill(count.begin(), count.end(), 0);
         FOR_EACH(num, mapped_values) {
-            ++count[_MSTL __get_number_aux(*num, d)];
+            ++count[_INNER __get_number_aux(*num, d)];
         }
 
         for (size_t i = count.size() - 1; i > 0; --i) {
@@ -295,7 +299,7 @@ void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
         }
 
         for (auto iter = mapped_values.rbegin(); iter != mapped_values.rend(); ++iter) {
-            const int k = _MSTL __get_number_aux(*iter, d);
+            const int k = _INNER __get_number_aux(*iter, d);
             bucket[--count[k]] = *(first + _MSTL distance(mapped_values.begin(), iter.base() - 1));
         }
 
@@ -309,13 +313,13 @@ void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
 
 // radix sort : Ot(d(n + k)) Om(N + k) stable
 template <typename Iterator, typename Mapper = _MSTL identity<iter_val_t<Iterator>>>
-void radix_sort(Iterator first, Iterator last, Mapper mapper = Mapper()) {
+MSTL_CONSTEXPR20 void radix_sort(Iterator first, Iterator last, Mapper mapper = Mapper()) {
     _MSTL radix_sort_less(first, last, mapper);
 }
 
 // smooth sort : Ot(NlogN) Om(1) unstable
 template <typename Iterator>
-void smooth_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
     _MSTL make_leonardo_heap(first, last);
     _MSTL sort_leonardo_heap(first, last);
 }
@@ -323,8 +327,8 @@ void smooth_sort(Iterator first, Iterator last) {
 // tim sort : Ot(NlogN) Om(N) stable
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void tim_sort(Iterator first, Iterator last, Compare comp) {
-    static constexpr int MIN_MERGE = 32;
+MSTL_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
+    constexpr int MIN_MERGE = 32;
     iter_dif_t<Iterator> n = _MSTL distance(first, last);
     for (Iterator i = first; i < last; i += MIN_MERGE) {
         Iterator end = _MSTL min(i + MIN_MERGE, last);
@@ -342,7 +346,7 @@ void tim_sort(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-void tim_sort(Iterator first, Iterator last) {
+MSTL_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
     return _MSTL tim_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 

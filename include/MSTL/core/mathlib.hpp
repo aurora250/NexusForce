@@ -1,6 +1,6 @@
 ﻿#ifndef MSTL_MATHLIB_H__
 #define MSTL_MATHLIB_H__
-#include "errorlib.hpp"
+#include "exception.hpp"
 #include "type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -58,11 +58,11 @@ MSTL_PURE_FUNCTION constexpr mathld_t radian2angular(const mathld_t radian) noex
 	return radian * (constants::SEMI_CIRCLE / constants::PI);
 }
 
-template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
+template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr T opposite(const T& x) noexcept {
 	return -x;
 }
-template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
+template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
 	return x > 0 ? x : -x;
 }
@@ -83,8 +83,15 @@ MSTL_CONST_FUNCTION constexpr mathld_t average(Args... args) noexcept {
 	return _MSTL sum(args...) * 1.0 / sizeof...(Args);
 }
 
-template <typename T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>, int> = 0>
-MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept { // greatest common divisor
+template <typename T, enable_if_t<is_arithmetic<T>::value, int> = 0>
+constexpr int sign(const T& value) {
+	if (value > 0) return 1;
+	if (value < 0) return -1;
+	return 0;
+}
+
+template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
+MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
 	while (n != 0) {
 		T t = m % n;
 		m = n;
@@ -93,10 +100,27 @@ MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept { // greate
 	return m;
 }
 
-template <typename T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>, int> = 0>
-MSTL_CONST_FUNCTION  T lcm(const T& m, const T& n) noexcept { // least common multiple
+template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
+MSTL_CONST_FUNCTION  T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
+
+template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
+MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
+	T x = _MSTL absolute(m), y = _MSTL absolute(n);
+	while (y != 0) {
+		T t = x % y;
+		x = y;
+		y = t;
+	}
+	return x;
+}
+
+template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
+MSTL_CONST_FUNCTION T lcm(const T& m, const T& n) noexcept {
+	return m * n / _MSTL gcd(m, n);
+}
+
 
 inline mathld_t float_mod(const mathld_t x, const mathld_t y) {
 	if (y == 0) Exception(MathError("zero can not be dividend."));
@@ -111,7 +135,7 @@ MSTL_CONST_FUNCTION constexpr T square(const T& x) noexcept { return x * x; }
 template <typename T>
 MSTL_CONST_FUNCTION constexpr T cube(const T& x) noexcept { return _MSTL square(x) * x; }
 
-template <typename T, enable_if_t<is_integral_v<T>, int> = 0>
+template <typename T, enable_if_t<is_integral<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr mathl_t power(const T& x, mathui_t n) noexcept {
 	if (n == 0) return 1;
 	mathl_t result = 1;
@@ -125,7 +149,7 @@ MSTL_CONST_FUNCTION constexpr mathl_t power(const T& x, mathui_t n) noexcept {
 	return result;
 }
 
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr mathld_t power(const T& x, mathui_t n) noexcept {
 	if (n == 0) return 1;
 	mathld_t result = 1.0;
@@ -357,6 +381,7 @@ inline mathld_t cotangent(const mathld_t x) {
 	return 1 / tangent(x);
 }
 
+MSTL_BEGIN_INNER__
 MSTL_PURE_FUNCTION constexpr mathld_t __arctangent_taylor(const mathld_t x) noexcept {
     const mathld_t x_sq = x * x;
     mathld_t term = x;
@@ -369,13 +394,14 @@ MSTL_PURE_FUNCTION constexpr mathld_t __arctangent_taylor(const mathld_t x) noex
     }
     return sum;
 }
+MSTL_END_INNER__
 
 MSTL_PURE_FUNCTION constexpr mathld_t arctangent(const mathld_t x) noexcept {
     if (absolute(x) > 1) {
         const mathld_t sign = x > 0 ? 1.0 : -1.0;
-        return sign * (constants::PI / 2 - __arctangent_taylor(1 / absolute(x)));
+        return sign * (constants::PI / 2 - _INNER __arctangent_taylor(1 / absolute(x)));
     }
-	return __arctangent_taylor(x);
+	return _INNER __arctangent_taylor(x);
 }
 
 inline mathld_t arcsine(const mathld_t x) {

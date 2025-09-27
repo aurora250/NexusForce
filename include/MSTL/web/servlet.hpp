@@ -11,8 +11,6 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(HttpError, LinkError, "Http Actions Failed");
 
-class servlet;
-
 struct http_request {
 private:
     HTTP_METHOD method = HTTP_METHOD::GET;
@@ -25,7 +23,7 @@ private:
     string body{};
     session* session = nullptr;
 
-    friend class servlet;
+    friend class _INNER servlet;
 
     static MSTL_API const string EMPTY_MARK;
 
@@ -136,7 +134,7 @@ private:
 
     static MSTL_API const string EMPTY_MARK;
 
-    friend class servlet;
+    friend class _INNER servlet;
 
 public:
     http_response() {
@@ -348,6 +346,8 @@ struct HTTP_COOKIE {
 };
 
 
+MSTL_BEGIN_INNER__
+
 class servlet {
 private:
     socket server_socket_{};
@@ -359,7 +359,7 @@ private:
 #endif
     ::sockaddr_in server_addr_{};
     vector<std::thread> worker_threads_;
-    __session_manager session_manager_;
+    _INNER __session_manager session_manager_;
     filter_chain filter_chain_;
     string session_cookie_name_ = HTTP_COOKIE::JSESSIONID;
 
@@ -379,7 +379,7 @@ private:
                 reinterpret_cast<::sockaddr *>(&client_addr), &client_len);
             if (client_socket == socket::INVALID_MARK) {
                 if (running_) {
-                    perror("accept failed");
+                    println("accept failed");
                 }
                 continue;
             }
@@ -387,7 +387,7 @@ private:
             try {
                 handle_client(client_socket);
             } catch (const Error& e) {
-                perror(e.what());
+                println(e);
             }
 #ifdef MSTL_PLATFORM_WINDOWS__
             ::closesocket(client_socket);
@@ -649,7 +649,7 @@ protected:
             ssize_t bytes_sent = ::send(client_socket, data + sent, total - sent, 0);
 #endif
             if (bytes_sent <= 0) {
-                perror("send failed");
+                println("send failed");
                 break;
             }
             sent += bytes_sent;
@@ -816,14 +816,14 @@ public:
 
 #ifdef MSTL_PLATFORM_WINDOWS__
         if (::WSAStartup(MAKEWORD(2, 2), &wsa_data_) != 0) {
-            ::perror("WSAStartup failed");
+            println("WSAStartup failed");
             return false;
         }
 #endif
 
         server_socket_ = _MSTL move(socket(domain, type, protocol));
         if (!server_socket_.is_valid()) {
-            perror("socket creation failed");
+            println("socket creation failed");
             return false;
         }
 
@@ -835,7 +835,7 @@ public:
             &opt
 #endif
             , sizeof(opt))) {
-            perror("setsockopt failed");
+            println("setsockopt failed");
             return false;
         }
 
@@ -844,14 +844,14 @@ public:
         server_addr_.sin_port = htons(port_);
 
         if (::bind(server_socket_.get(),
-            reinterpret_cast<sockaddr*>(&server_addr_),
+            reinterpret_cast<::sockaddr*>(&server_addr_),
             sizeof(server_addr_))) {
-            perror("bind failed");
+            println("bind failed");
             return false;
         }
 
         if (::listen(server_socket_.get(), backlog_) < 0) {
-            perror("listen failed");
+            println("listen failed");
             return false;
         }
 
@@ -883,6 +883,11 @@ public:
         return session_cookie_name_;
     }
 };
+
+MSTL_END_INNER__
+
+using servlet = _INNER servlet;
+
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_SERVLET_HPP__

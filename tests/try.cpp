@@ -15,7 +15,7 @@ void test_file_basic_operations() {
     assert(file::is_file(TEST_FILE));
     assert(!file::is_directory(TEST_FILE));
 
-    assert(file::file_size(TEST_FILE) == TEST_CONTENT.size());
+    assert(file::size(TEST_FILE) == TEST_CONTENT.size());
 
     string read_content;
     bool read_ok = file::read(TEST_FILE, read_content);
@@ -26,7 +26,7 @@ void test_file_basic_operations() {
     assert(!f.opened());
     assert(f.open(TEST_FILE, FILE_ACCESS::READ_WRITE));
     assert(f.opened());
-    assert(f.file_path() == TEST_FILE);
+    assert(f.path() == TEST_FILE);
 
     string line;
     assert(f.read_line(line));
@@ -122,13 +122,13 @@ void test_move_semantics() {
     file f2 = _MSTL move(f1);
     assert(!f1.opened());
     assert(f2.opened());
-    assert(f2.file_path() == TEST_FILE);
+    assert(f2.path() == TEST_FILE);
 
     file f3;
     f3 = _MSTL move(f2);
     assert(!f2.opened());
     assert(f3.opened());
-    assert(f3.file_path() == TEST_FILE);
+    assert(f3.path() == TEST_FILE);
 }
 
 void clean_up() {
@@ -187,9 +187,9 @@ void test_date() {
     assert(_MSTL date::is_leap_year(2100) == false);
     assert(_MSTL date::is_leap_year(2400) == true);
 
-    assert(_MSTL date::get_month_day_(2024, 2) == 29);
-    assert(_MSTL date::get_month_day_(2023, 2) == 28);
-    assert(_MSTL date::get_month_day_(2023, 4) == 30);
+    assert(_MSTL date::get_month_day(2024, 2) == 29);
+    assert(_MSTL date::get_month_day(2023, 2) == 28);
+    assert(_MSTL date::get_month_day(2023, 4) == 30);
 
     _MSTL date d3(2024, 1, 1);
     assert(d3.day_of_week() == 1);
@@ -308,13 +308,13 @@ void test_datetimes() {
 
 void test_print() {
     decimal_t f = constants::PI;
-    FUNCTION_MANAGE_OPERATE enu = FUNCTION_MANAGE_OPERATE::GET_PTR;
-    __nocopy_type uni{};
+    FUNCTION_OPERATE enu = FUNCTION_OPERATE::GET_PTR;
+    _INNER __nocopy_type uni{};
     bit_reference obj{};
     int c_arr[2];
-    int* pa = new int[2];
-    delete[] pa;
+    int* pa = ::new int[2];
     println_feature(pa);
+    delete[] pa;
     pa = nullptr;
     int* p = &c_arr[0];
     const char* cs = "Hello World!";
@@ -327,7 +327,7 @@ void test_print() {
 #endif
     TypeCastError err;
     compressed_pair<printer<int>, int> cp;
-    tuple<int, char, decimal_t, int*> tup{1, 't', f, pa};
+    tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
     pair<int, char> pir{1, '1'};
     vector<int> v{1, 2, 3};
     vector<int>::iterator iter = v.begin();
@@ -362,7 +362,7 @@ void test_print() {
     println_feature(tup, var);
     println_feature(pir, cp, ih);
     println_feature('c', nullptr);
-    println_feature(&RB_TREE_RED__, &RB_TREE_BLACK__);
+    println_feature(&RB_TREE_RED, &RB_TREE_BLACK);
     println_feature(f, enu);
     println_feature(uni, obj);
     println_feature("\n\\\"\v", cs, err);
@@ -384,7 +384,7 @@ void test_print() {
     println(tup, var);
     println(pir, cp, ih);
     println('c', nullptr);
-    println(&RB_TREE_RED__, &RB_TREE_BLACK__);
+    println(&RB_TREE_RED, &RB_TREE_BLACK);
     println(f, enu);
     println(uni, obj);
     println("\n\\\"\v", cs, err);
@@ -408,6 +408,56 @@ void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
     println(_MSTL random_lcd::next_int(10, 20), random_lcd::next_int(10, 20), random_lcd::next_int(10, 20));
     println(_MSTL random_mt::next_int(10, 20), random_mt::next_int(10, 20), random_mt::next_int(10, 20));
+}
+
+void test_hex() {
+    hexadecimal x(255);
+    println(format_hex(x));                                    // "0xff"
+    println(format_hex(x, uppercase()));                       // "0XFF"
+    println(format_hex(x, setprefix(false)));                  // "ff"
+
+    println(format_hex(x, setw(10)));                          // "      0xff"
+    println(format_hex(x, setw(10), setfill('*')));            // "******0xff"
+    println(format_hex(x, setw(10), setzeropad(true)));        // "0x000000ff"
+
+    println(format_hex(x, setw(10), left()));                  // "0xff      "
+    println(format_hex(x, setw(10), right()));                 // "      0xff"
+    println(format_hex(x, setw(10), internal()));              // "0x      ff"
+
+    println(format_hex(x, setw(12), setfill('-'), uppercase(), internal()));  // "0X------FF"
+
+    hexadecimal neg(-255);
+    println(absolute(neg), sign(neg), gcd(neg, neg));
+    println(format_hex(neg, setw(10), setzeropad(true)));      // "-0x0000ff"
+    println(format_hex(neg, setw(10), setshowpos(false)));     // "      -0xff"
+
+    println(hex_string(x));                                    // "0xff"
+    println(HEX_string(x));                                    // "0XFF"
+    println(hex_fixed(x, 8));                                  // "0x0000ff"
+    println(hex_plain(x));                                     // "ff"
+}
+
+void test_enctype() {
+    string encrypted = xor_encrypt("Hello", "key");
+    string decrypted = xor_decrypt(encrypted, "key");
+    println(encrypted);
+    println(decrypted);
+
+    string encoded = base64_encode("Hello World");
+    string decoded = base64_decode(encoded);
+    println(encoded);
+    println(decoded);
+
+    string md5_hash = md5("Hello World");
+    string sha256_hash = sha256("Hello World");
+    println("MD5: ", md5_hash);
+    println(sha256_hash);
+
+    string key = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+    string aes_encrypted = aes256_encrypt("Hello World", key);
+    string aes_decrypted = aes256_decrypt(aes_encrypted, key);
+    println(aes_encrypted);
+    println(aes_decrypted);
 }
 
 void test_exce() {
@@ -1099,8 +1149,11 @@ void test_string() {
     test_string_search_replace(1000000, 10000);
     test_max_memory_string();
 
-    ostringstream ss;
-    ss << "a" << 'b' << 333 << " " << 9.333 << MSTL::string("hello") << false << MSTL::move(MSTL::string("a"));
+    MSTL::ostringstream ss;
+    ss << "a" << 'b';
+    ss << 333;
+    ss << 9.333;
+    ss << MSTL::string("hello") << false << MSTL::move(MSTL::string("a"));
     println_feature(ss);
     ss.str("where");
     println_feature(ss);
@@ -1357,6 +1410,8 @@ void test_tpool() {
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);
+    pool.submit_task(test_hex);
+    pool.submit_task(test_enctype);
     // pool.submit_task(try_db);
     pool.stop();
 }

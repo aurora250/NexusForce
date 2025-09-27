@@ -736,12 +736,18 @@ public:
     ~deque() {
         if (map_pair_.value == nullptr) return;
         this->clear();
-        if (*start_.node_ != nullptr) {
-            map_size_pair_.get_base().deallocate(*start_.node_, buffer_size_);
-            *start_.node_ = nullptr;
+
+        if (map_pair_.value != nullptr) {
+            for (size_type i = 0; i < map_size_pair_.value; ++i) {
+                if (map_pair_.value[i] != nullptr) {
+                    map_size_pair_.get_base().deallocate(map_pair_.value[i], buffer_size_);
+                    map_pair_.value[i] = nullptr;
+                }
+            }
+
+            map_pair_.get_base().deallocate(map_pair_.value, map_size_pair_.value);
+            map_pair_.value = nullptr;
         }
-        map_pair_.get_base().deallocate(map_pair_.value, map_size_pair_.value);
-        map_pair_.value = nullptr;
     }
 
     MSTL_NODISCARD iterator begin() noexcept { return iterator(start_); }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>水果销售系统</title>
+  <link type="text/css" rel="stylesheet" href="search.css"/>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部搜索栏 -->
+    <div class="header">
+      <div class="search-container">
+        <div class="search-icon">🔍</div>
+        <input type="text" class="search-input" placeholder="水果">
+        <button class="filter-btn">搜索</button>
+      </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="content">
+      <!-- 左侧边栏筛选器 -->
+      <div class="sidebar">
+        <div class="filter-group">
+          <div class="filter-title">筛选</div>
+          <div>
+            <label class="filter-label">价格区间</label>
+            <label>
+              <select class="filter-select">
+                <option value="">全部价格</option>
+                <option value="0-10">0-10元</option>
+                <option value="10-20">10-20元</option>
+                <option value="20-50">20-50元</option>
+                <option value="50+">50元以上</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="filter-label">在售数量</label>
+            <label>
+              <select class="filter-select">
+                <option value="">全部数量</option>
+                <option value="0-100">0-100件</option>
+                <option value="100-500">100-500件</option>
+                <option value="500-1000">500-1000件</option>
+                <option value="1000+">1000件以上</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="filter-label">品质等级</label>
+            <div class="quality-options">
+              <div class="quality-option"><input type="checkbox"> A</div>
+              <div class="quality-option"><input type="checkbox"> B</div>
+              <div class="quality-option"><input type="checkbox"> C</div>
+              <div class="quality-option"><input type="checkbox"> D</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 中间图片网格 -->
+      <div class="image-grid-container">
+        <div class="image-grid">
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="apple.jpg" alt="苹果">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">10-20元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">328件</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="banana.jpg" alt="香蕉">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">8-15元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">256件</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="orange.jpg" alt="橙子">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">15-25元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">189件</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="strawberry.jpg" alt="草莓">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">20-35元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">145件</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="grape.jpg" alt="葡萄">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">18-28元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">98件</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="image-card">
+            <div class="image-container">
+              <a href="detail.html" target="_blank">
+                <img src="pear.jpg" alt="梨">
+              </a>
+            </div>
+            <div class="image-details">
+              <div class="detail-row">
+                <span><span class="detail-label">价格区间：</span><span class="detail-value">6-12元</span></span>
+                <span><span class="detail-label">已售：</span><span class="detail-value">210件</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 右侧统计信息 -->
+      <div class="stats-container">
+        <div class="stats">
+          <div class="stats-title">本月销量排名：</div>
+          <ol class="stats-list">
+            <li>苹果</li>
+            <li>香蕉</li>
+            <li>橙子</li>
+          </ol>
+        </div>
+        
+        <div class="stats">
+          <div class="stats-title">今日提升：</div>
+          <ul class="stats-list">
+            <li>苹果较昨日提升20%</li>
+            <li>草莓较昨日提升18%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

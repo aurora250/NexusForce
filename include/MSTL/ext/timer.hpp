@@ -5,6 +5,7 @@
 #include <chrono>
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_BEGIN_INNER__
 struct __timer_node_base {
 protected:
 	int64_t expire_ = 0;
@@ -25,7 +26,14 @@ public:
     MSTL_NODISCARD size_t id() const { return id_; }
 };
 
-struct timer_node : __timer_node_base {
+inline bool operator <(const __timer_node_base& lh, const __timer_node_base& rh) {
+    if (lh.expire() < rh.expire()) return true;
+    if (lh.expire() > rh.expire()) return false;
+    return lh.id() < rh.id();
+}
+MSTL_END_INNER__
+
+struct timer_node : _INNER __timer_node_base {
 public:
     using call_back = _MSTL function<void(const timer_node& node)>;
 
@@ -45,12 +53,6 @@ public:
 
     MSTL_NODISCARD const call_back& hold() const { return func_; }
 };
-
-inline bool operator <(const __timer_node_base& lh, const __timer_node_base& rh) {
-	if (lh.expire() < rh.expire()) return true;
-	if (lh.expire() > rh.expire()) return false;
-	return lh.id() < rh.id();
-}
 
 
 class timer {
