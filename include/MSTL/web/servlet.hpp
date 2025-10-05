@@ -525,7 +525,7 @@ protected:
                         string cl_str = request_data.substr(
                             cl_pos + 15, cl_end - cl_pos - 15
                             ).trim();
-                        content_length = _MSTL to_uint32(cl_str.c_str());
+                        content_length = _MSTL uinteger32::parse(cl_str.c_str());
                     }
                 }
 

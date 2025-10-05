@@ -177,7 +177,7 @@ void test_file() {
 
 void test_date() {
     _MSTL date d1(2024, 2, 29);
-    assert(d1.get_year() == 2024 && d1.get_month() == 2 && d1.get_day() == 29);
+    assert(d1.year() == 2024 && d1.month() == 2 && d1.day() == 29);
 
     _MSTL date d2(2023, 2, 29);
     assert(d2 == _MSTL date::epoch());
@@ -187,31 +187,31 @@ void test_date() {
     assert(_MSTL date::is_leap_year(2100) == false);
     assert(_MSTL date::is_leap_year(2400) == true);
 
-    assert(_MSTL date::get_month_day(2024, 2) == 29);
-    assert(_MSTL date::get_month_day(2023, 2) == 28);
-    assert(_MSTL date::get_month_day(2023, 4) == 30);
+    assert(_MSTL date::days_of_month(2024, 2) == 29);
+    assert(_MSTL date::days_of_month(2023, 2) == 28);
+    assert(_MSTL date::days_of_month(2023, 4) == 30);
 
     _MSTL date d3(2024, 1, 1);
-    assert(d3.day_of_week() == 1);
+    assert(d3.days_of_week() == 1);
 
     _MSTL date d4(2024, 3, 1);
-    assert(d4.day_of_year() == 61);
+    assert(d4.days_of_year() == 61);
 
     _MSTL date d5(2024, 2, 28);
     d5 += 2;
-    assert(d5.get_month() == 3 && d5.get_day() == 1);
+    assert(d5.month() == 3 && d5.day() == 1);
 
     _MSTL date d6(2024, 3, 1);
     d6 -= 1;
-    assert(d6.get_month() == 2 && d6.get_day() == 29);
+    assert(d6.month() == 2 && d6.day() == 29);
 
     assert(_MSTL date(2024, 1, 1) < _MSTL date(2024, 1, 2));
     assert(_MSTL date(2024, 1, 1) > _MSTL date(2023, 12, 31));
 
     auto str = _MSTL date(2024, 5, 10).to_string();
     assert(str == "2024-05-10");
-    assert(_MSTL date::from_string("2024-05-10") == _MSTL date(2024, 5, 10));
-    assert(_MSTL date::from_string("invalid") == _MSTL date::epoch());
+    assert(_MSTL date::parse("2024-05-10") == _MSTL date(2024, 5, 10));
+    assert(_MSTL date::parse("invalid") == _MSTL date::epoch());
 
     println("test_date passed");
 }
@@ -219,7 +219,7 @@ void test_date() {
 void test_time() {
     using MSTL::time;
     _MSTL time t1(23, 59, 59);
-    assert(t1.get_hours() == 23 && t1.get_minutes() == 59 && t1.get_seconds() == 59);
+    assert(t1.hours() == 23 && t1.minutes() == 59 && t1.seconds() == 59);
 
     _MSTL time t2(25, 60, 60);
     assert(t2 == _MSTL time(0, 0, 0));
@@ -228,18 +228,18 @@ void test_time() {
 
     _MSTL time t3(23, 59, 59);
     t3 += 2;  // 00:00:01
-    assert(t3.get_hours() == 0 && t3.get_seconds() == 1);
+    assert(t3.hours() == 0 && t3.seconds() == 1);
 
     _MSTL time t4(0, 0, 1);
     t4 -= 2;  // 23:59:59
-    assert(t4.get_hours() == 23 && t4.get_seconds() == 59);
+    assert(t4.hours() == 23 && t4.seconds() == 59);
 
     assert(_MSTL time(12, 0, 0) < _MSTL time(13, 0, 0));
     assert(_MSTL time(12, 30, 0) > _MSTL time(12, 29, 59));
 
     assert(_MSTL time(9, 8, 7).to_string() == "09:08:07");
-    assert(_MSTL time::from_string("09:08:07") == _MSTL time(9, 8, 7));
-    assert(_MSTL time::from_string("invalid") == _MSTL time(0, 0, 0));
+    assert(_MSTL time::parse("09:08:07") == _MSTL time(9, 8, 7));
+    assert(_MSTL time::parse("invalid") == _MSTL time(0, 0, 0));
 
     println("test_time passed");
 }
@@ -247,24 +247,24 @@ void test_time() {
 void test_datetime() {
     using MSTL::time;
     _MSTL datetime dt1(_MSTL date(2024, 1, 1), _MSTL time(12, 0, 0));
-    assert(dt1.get_year() == 2024 && dt1.get_hours() == 12);
+    assert(dt1.year() == 2024 && dt1.hours() == 12);
 
     _MSTL datetime dt2(2024, 2, 28, 23, 59, 59);
     dt2 += 2;
-    assert(dt2.get_month() == 2 && dt2.get_day() == 29 && dt2.get_seconds() == 1);
+    assert(dt2.month() == 2 && dt2.day() == 29 && dt2.seconds() == 1);
 
     _MSTL datetime dt3(2024, 3, 1, 0, 0, 0);
     dt3 -= 1;
-    assert(dt3.get_month() == 2 && dt3.get_day() == 29);
+    assert(dt3.month() == 2 && dt3.day() == 29);
 
     _MSTL datetime dt4(2024, 1, 1, 0, 0, 0);
     _MSTL datetime dt5(2023, 12, 31, 23, 59, 59);
     assert(dt4 - dt5 == 1);
 
     assert(_MSTL datetime(2024, 5, 10, 9, 8, 7).to_string() == "2024-05-10 09:08:07");
-    assert(_MSTL datetime::from_string("2024-05-10 09:08:07")
+    assert(_MSTL datetime::parse("2024-05-10 09:08:07")
         == _MSTL datetime(2024, 5, 10, 9, 8, 7));
-    assert(_MSTL datetime::from_string("invalid") == _MSTL datetime::epoch());
+    assert(_MSTL datetime::parse("invalid") == _MSTL datetime::epoch());
 
     println("test_datetime passed");
 }
@@ -272,12 +272,12 @@ void test_datetime() {
 void test_timestamp() {
     _MSTL datetime epoch = _MSTL datetime::epoch();
     _MSTL timestamp ts1(epoch);
-    assert(ts1.get_seconds() == 0);
+    assert(ts1.seconds() == 0);
     assert(ts1.to_datetime() == epoch);
 
     _MSTL timestamp ts2(86400);
     _MSTL datetime dt = ts2.to_datetime();
-    assert(dt.get_day() == 2);
+    assert(dt.day() == 2);
 
     _MSTL timestamp ts3(100);
     _MSTL timestamp ts4(200);
@@ -290,7 +290,7 @@ void test_timestamp() {
 void test_utc_conversion() {
     _MSTL datetime dt(2024, 1, 1, 0, 0, 0);
     _MSTL datetime utc = _MSTL datetime::to_utc(dt);
-    _MSTL datetime local = _MSTL datetime::from_utc(utc);
+    _MSTL datetime local = _MSTL datetime::parse_utc(utc);
     assert(local == dt);
 
     println("test_utc_conversion passed");
@@ -307,7 +307,7 @@ void test_datetimes() {
 }
 
 void test_print() {
-    decimal_t f = constants::PI;
+    decimal_t f = _CONSTANTS PI;
     FUNCTION_OPERATE enu = FUNCTION_OPERATE::GET_PTR;
     _INNER __nocopy_type uni{};
     bit_reference obj{};
@@ -379,8 +379,6 @@ void test_print() {
     println_feature(emoji, wemoji);
     println_feature(u16emoji, u32emoji);
 
-    split_line();
-
     println(tup, var);
     println(pir, cp, ih);
     println('c', nullptr);
@@ -404,37 +402,114 @@ void test_print() {
     println(s, us);
 }
 
+void test_console() {
+    hexadecimal hex("F");
+    console.println(hex);
+    console.readln(hex);
+    console.println(hex);
+    int rawi = 3;
+    console.println(rawi);
+    console.read(rawi);
+    console.println(rawi);
+    _MSTL boolean b;
+    b.try_parse("true");
+    console.println(b);
+    console.readln(b);
+    console.println(b);
+    integer32 i32;
+    console.read(i32);
+    console.println(i32);
+    console.println();
+    float32 fp;
+    console.read(fp);
+    console.println(fp);
+    println(to_string(fp));
+}
+
+
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
     println(_MSTL random_lcd::next_int(10, 20), random_lcd::next_int(10, 20), random_lcd::next_int(10, 20));
     println(_MSTL random_mt::next_int(10, 20), random_mt::next_int(10, 20), random_mt::next_int(10, 20));
 }
 
-void test_hex() {
-    hexadecimal x(255);
-    println(format_hex(x));                                    // "0xff"
-    println(format_hex(x, uppercase()));                       // "0XFF"
-    println(format_hex(x, setprefix(false)));                  // "ff"
+void test_format() {
+    {
+        hexadecimal x(255);
+        println(format("{#x}", x));  // "0xff"
+        println(format("{#X}", x));  // "0XFF"
+        println(format("{x}", x));   // "ff"
 
-    println(format_hex(x, setw(10)));                          // "      0xff"
-    println(format_hex(x, setw(10), setfill('*')));            // "******0xff"
-    println(format_hex(x, setw(10), setzeropad(true)));        // "0x000000ff"
+        println(format("{#10x}", x));     // "      0xff"
+        println(format("{*>#10x}", x));   // "******0xff"
+        println(format("{0=#10x}", x));   // "0x000000ff"
 
-    println(format_hex(x, setw(10), left()));                  // "0xff      "
-    println(format_hex(x, setw(10), right()));                 // "      0xff"
-    println(format_hex(x, setw(10), internal()));              // "0x      ff"
+        println(format("{<#10x}", x));  // "0xff      "
+        println(format("{=#10x}", x));  // "0x      ff"
 
-    println(format_hex(x, setw(12), setfill('-'), uppercase(), internal()));  // "0X------FF"
+        println(format("{-=#10X}", x));  // "0X------FF"
 
-    hexadecimal neg(-255);
-    println(absolute(neg), sign(neg), gcd(neg, neg));
-    println(format_hex(neg, setw(10), setzeropad(true)));      // "-0x0000ff"
-    println(format_hex(neg, setw(10), setshowpos(false)));     // "      -0xff"
+        hexadecimal neg(-255);
+        println(absolute(neg), sign(neg), gcd(neg, neg));
+        println(format("{0=#10x}", neg)); // "-0x00000ff"
+        println(format("{#10x}", neg));   // "      -0xff"
 
-    println(hex_string(x));                                    // "0xff"
-    println(HEX_string(x));                                    // "0XFF"
-    println(hex_fixed(x, 8));                                  // "0x0000ff"
-    println(hex_plain(x));                                     // "ff"
+        println(format("{#x}", x));    // "0xff"
+        println(format("{#X}", x));    // "0XFF"
+        println(format("{#08x}", x));  // "0x0000ff"
+        println(format("{x}", x));     // "ff"
+
+
+        hexadecimal hex(255);
+        string result1 = format("{#010X}", hex);  // "0X000000FF"
+        println(result1);
+        hexadecimal tmp(222);
+        _MSTL swap(hex, tmp);
+        println(format("{#010X}", hex));          // "0X000000DE"
+        println(hexadecimal::to_string(222));
+
+        integer64 num(12345);
+        string result2 = format("{+>15d}", num);  // "        +12345"
+        println(result2);
+
+        string result3 = format("{#b}", num);  // "0b11000000111001"
+        println(result3);
+
+        decimal dec(3.14159);
+        string result4 = format("{.2f}", dec);  // "3.14"
+        println(result4);
+        string result5 = format("{.3e}", dec);  // "3.142e+00"
+        println(result5);
+
+        string result6 = format("{^20x}", hex);      // "       ff       "
+        println(result6);
+        string result7 = format("{#o}", num);        // "0o30071"
+        println(result7);
+        string result8 = format("{+10.4f}", dec);    // "   +3.1416"
+        println(result8);
+
+        string r1 = format("{.2f}", dec);  // "3.14"
+        println(r1);
+        string r2 = format("{.4e}", dec);  // "3.1416e+00"
+        println(r2);
+        string r3 = format("{.6g}", dec);  // "3.141589"
+        println(r3);
+        string r4 = format("{+10.3f}", dec);  // "    +3.142"
+        println(r4);
+    }
+    {
+        uinteger32 x = 255u;
+        println(format("{d}", x));  // "255"
+        println(format("{b}", x));  // "11111111"
+        println(format("{#b}", x));  // "0b11111111"
+        println(format("{10d}", x));  // "       255"
+        println(format("{<10d}", x)); // "255       "
+        println(format("{010d}", x)); // "0000000255"
+
+        uint64_t ull = 123456789ULL;
+        console.println(ull);
+        console.println(format("{#x}", ull));
+    }
 }
 
 void test_enctype() {
@@ -611,12 +686,9 @@ void test_check() {
     println(check_type<int (Foo::* const)(int, Foo&&, int) volatile>());
     string cstr("const string");
     const string* sr = new string("hai");
-    split_line();
     println(check_type<decltype((cstr))>());
     println(check_type<decltype(MSTL::move(cstr))>());
-    split_line();
     println(check_type<decltype(sr)>());
-    split_line();
     delete sr;
 }
 
@@ -945,7 +1017,7 @@ void test_math() {
     println(sine(1));
     println(cosine(angular2radian(270)));
     println(remainder(73.263, 0.9973));
-    println(float_part(constants::PI));
+    println(float_part(_CONSTANTS PI));
     println(exponential(3));
     println(logarithm_e(165));
     println(logarithm_10(147));
@@ -954,10 +1026,10 @@ void test_math() {
     println(radian2angular(arctangent(100)));
     println(arcsine(1), arcsine(0), arcsine(-1));
     println(arccosine(1), arccosine(0), arccosine(-1));
-    println(arctangent(DECIMAL_MAX_POSI_SIZE), arctangent(DECIMAL_MIN_NEGA_SIZE));
-    // println(tangent(constants::PI / 2));  // MathError
+    println(arctangent(DECIMAL_MAX_POSI_VALUE), arctangent(DECIMAL_MIN_NEGA_VALUE));
+    // println(tangent(_CONSTANTS PI / 2));  // MathError
     println(tangent(0));
-    println(around_pi(constants::PI), " : ", around_pi(6.28));
+    println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
 }
 
 void test_sort() {
@@ -1347,12 +1419,10 @@ void test_dbpool() {
         println(result->row_count(), ", ", result->column_count());
     }
 
-    split_line();
-
     begin = clock();
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
-        sprintf(sql, "SELECT 1");
+        _MSTL sprintf(sql, "SELECT 1");
         auto* conn = new db_mysql_connect();
         if(conn->connect_to(mysql_config)) {
             bool fin = conn->update(sql);
@@ -1368,7 +1438,7 @@ void test_dbpool() {
     begin = clock();
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
-        sprintf(sql, "SELECT 1");
+        _MSTL sprintf(sql, "SELECT 1");
         auto* conn = new db_sqlite_connect();
         if(conn->connect_to(sqlite_config)) {
             bool fin = conn->update(sql);
@@ -1410,7 +1480,7 @@ void test_tpool() {
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);
-    pool.submit_task(test_hex);
+    pool.submit_task(test_format);
     pool.submit_task(test_enctype);
     // pool.submit_task(try_db);
     pool.stop();

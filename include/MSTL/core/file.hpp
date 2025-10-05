@@ -8,15 +8,7 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-using file_flag_type =
-#ifdef MSTL_PLATFORM_WINDOWS__
-    unsigned long;
-#elif defined(MSTL_PLATFORM_LINUX__)
-    int;
-#endif
-
-
-enum class FILE_ACCESS : file_flag_type {
+enum class FILE_ACCESS : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     READ = GENERIC_READ,
     WRITE = GENERIC_WRITE,
@@ -31,14 +23,14 @@ enum class FILE_ACCESS : file_flag_type {
 };
 
 inline FILE_ACCESS operator |(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(static_cast<int>(a) | static_cast<int>(b));
+    return static_cast<FILE_ACCESS>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
 inline FILE_ACCESS operator &(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(static_cast<int>(a) & static_cast<int>(b));
+    return static_cast<FILE_ACCESS>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
 
-enum class FILE_SHARED : file_flag_type {
+enum class FILE_SHARED : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARE_READ = FILE_SHARE_READ,
     SHARE_WRITE = FILE_SHARE_WRITE,
@@ -57,14 +49,14 @@ enum class FILE_SHARED : file_flag_type {
 };
 
 inline FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(static_cast<int>(a) | static_cast<int>(b));
+    return static_cast<FILE_SHARED>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
 inline FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(static_cast<int>(a) & static_cast<int>(b));
+    return static_cast<FILE_SHARED>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
 
-enum class FILE_CREATION : file_flag_type {
+enum class FILE_CREATION : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     CREATE_FORCE = CREATE_ALWAYS,
     CREATE_NO_EXIST = CREATE_NEW,
@@ -81,14 +73,14 @@ enum class FILE_CREATION : file_flag_type {
 };
 
 inline FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(static_cast<int>(a) | static_cast<int>(b));
+    return static_cast<FILE_CREATION>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
 inline FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(static_cast<int>(a) & static_cast<int>(b));
+    return static_cast<FILE_CREATION>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
 
-enum class FILE_ATTRI : file_flag_type {
+enum class FILE_ATTRI : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     NORMAL = FILE_ATTRIBUTE_NORMAL,
     READONLY = FILE_ATTRIBUTE_READONLY,
@@ -115,16 +107,14 @@ enum class FILE_ATTRI : file_flag_type {
 };
 
 inline FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(
-        static_cast<file_flag_type>(a) | static_cast<file_flag_type>(b));
+    return static_cast<FILE_ATTRI>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
 inline FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(
-        static_cast<file_flag_type>(a) & static_cast<file_flag_type>(b));
+    return static_cast<FILE_ATTRI>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
 
-enum class FILE_POINTER : file_flag_type {
+enum class FILE_POINTER : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     BEGIN = FILE_BEGIN,
     CURRENT = FILE_CURRENT,
@@ -136,7 +126,7 @@ enum class FILE_POINTER : file_flag_type {
 #endif
 };
 
-enum class FILE_LOCK : file_flag_type {
+enum class FILE_LOCK : size_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARED = 0,
     EXCLUSIVE = LOCKFILE_EXCLUSIVE_LOCK,
@@ -149,10 +139,10 @@ enum class FILE_LOCK : file_flag_type {
 };
 
 inline FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(static_cast<int>(a) | static_cast<int>(b));
+    return static_cast<FILE_LOCK>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
 inline FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(static_cast<int>(a) & static_cast<int>(b));
+    return static_cast<FILE_LOCK>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
 

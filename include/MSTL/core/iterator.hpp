@@ -1,7 +1,6 @@
 #ifndef MSTL_ITERATOR_HPP__
 #define MSTL_ITERATOR_HPP__
 #include "concepts.hpp"
-#include "exception.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator>
@@ -150,7 +149,8 @@ public:
     using self              = back_insert_iterator<Container>;
 
     constexpr explicit back_insert_iterator(Container& x) noexcept
-        : container(_MSTL addressof(x)) {}
+    : container(_MSTL addressof(x)) {}
+
     constexpr self& operator =(const typename Container::value_type& value) {
         container->push_back(value);
         return *this;
@@ -159,6 +159,9 @@ public:
         container->push_back(_MSTL move(value));
         return *this;
     }
+
+    MSTL_CONSTEXPR20 ~back_insert_iterator() noexcept = default;
+
     MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
     constexpr self& operator ++() noexcept { return *this; }
     constexpr self& operator ++(int) noexcept { return *this; }
@@ -182,7 +185,8 @@ public:
     using self              = front_insert_iterator<Container>;
 
     constexpr explicit front_insert_iterator(Container& x) noexcept
-        : container(_MSTL addressof(x)) {}
+    : container(_MSTL addressof(x)) {}
+
     constexpr self& operator =(const typename Container::value_type& value) {
         container->push_front(value);
         return *this;
@@ -191,6 +195,9 @@ public:
         container->push_front(_MSTL move(value));
         return *this;
     }
+
+    MSTL_CONSTEXPR20 ~front_insert_iterator() noexcept = default;
+
     MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
     constexpr self& operator ++() noexcept { return *this; }
     constexpr self& operator ++(int) noexcept { return *this; }
@@ -215,7 +222,8 @@ public:
     using self              = insert_iterator<Container>;
 
     constexpr insert_iterator(Container& x, typename Container::iterator it) noexcept
-        : container(_MSTL addressof(x)), iter(_MSTL move(it)) {}
+    : container(_MSTL addressof(x)), iter(_MSTL move(it)) {}
+
     constexpr self& operator =(const typename Container::value_type& value) {
         iter = container->insert(iter, value);
         ++iter;
@@ -226,6 +234,9 @@ public:
         ++iter;
         return *this;
     }
+
+    MSTL_CONSTEXPR20 ~insert_iterator() noexcept = default;
+
     MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
     constexpr self& operator ++() noexcept { return *this; }
     constexpr self& operator ++(int) noexcept { return *this; }
@@ -261,8 +272,8 @@ public:
     constexpr reverse_iterator() = default;
 
     constexpr explicit reverse_iterator(Iterator x)
-        noexcept(is_nothrow_move_constructible_v<Iterator>)
-        : current(_MSTL move(x)) {}
+    noexcept(is_nothrow_move_constructible_v<Iterator>)
+    : current(_MSTL move(x)) {}
 
     template <typename U>
 #ifdef MSTL_VERSION_20__
@@ -282,6 +293,8 @@ public:
         current = x.current;
         return *this;
     }
+
+    MSTL_CONSTEXPR20 ~reverse_iterator() noexcept = default;
 
     MSTL_NODISCARD constexpr Iterator base() const
         noexcept(is_nothrow_copy_constructible_v<Iterator>) {

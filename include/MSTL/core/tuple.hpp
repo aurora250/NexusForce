@@ -106,7 +106,9 @@ MSTL_INLINE17 constexpr bool tuple_nothrow_assignable_v =
 
 
 template <>
-struct tuple<> {
+struct tuple<> : icommon<tuple<>> {
+	using self = tuple<>;
+
 	constexpr tuple() noexcept = default;
 	constexpr tuple(const tuple&) noexcept = default;
 	template <typename Tag, enable_if_t<is_same_v<Tag, _MSTL_TAG exact_arg_construct_tag>, int> = 0>
@@ -114,19 +116,31 @@ struct tuple<> {
 
 	constexpr tuple& operator =(const tuple&) noexcept = default;
 
-	constexpr void swap(const tuple&) noexcept {}
 	MSTL_NODISCARD constexpr bool equal_to(const tuple&) const noexcept { return true; }
 	MSTL_NODISCARD constexpr bool less_to(const tuple&) const noexcept { return false; }
+
+	MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
+	MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
+	MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
+	MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
+	MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
+	MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+
+	MSTL_NODISCARD constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
+	constexpr void swap(tuple&) noexcept {}
 };
 
 template <typename This, typename... Rest>
-struct tuple<This, Rest...> : private tuple<Rest...> {
-public:
+struct tuple<This, Rest...> : private tuple<Rest...>, icommon<tuple<This, Rest...>> {
 	using this_type = This;
 	using base_type = tuple<Rest...>;
+	using self = tuple<This, Rest...>;
 
 private:
 	this_type data_;
+
+	template <typename Tuple, size_t... Idx>
+	static constexpr size_t __broaden_tuple(const Tuple& tup, _MSTL index_sequence<Idx...>) noexcept;
 
 public:
 	template <typename Tag, typename U1, typename... U2, enable_if_t<
@@ -332,13 +346,6 @@ public:
 
 	tuple& operator =(const volatile tuple&) = delete;
 
-
-	constexpr void swap(tuple t) noexcept(conjunction_v<
-		is_nothrow_swappable<This>, is_nothrow_swappable<Rest>...>) {
-		_MSTL swap(data_, t.data_);
-		base_type::swap(t.get_rest());
-	}
-
 	constexpr base_type& get_rest() noexcept { return *this; }
 	constexpr const base_type& get_rest() const noexcept { return *this; }
 
@@ -362,6 +369,23 @@ public:
 
 	template <size_t Index, typename... Types>
 	friend constexpr tuple_element_t<Index, Types...>&& pair_get_from_tuple(tuple<Types...>&&) noexcept;
+
+	MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
+	MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
+	MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
+	MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
+	MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
+	MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+
+	MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+		return self::__broaden_tuple(*this, _MSTL index_sequence_for<This, Rest...>());
+	}
+
+	constexpr void swap(self& t)
+	noexcept(conjunction_v<is_nothrow_swappable<This>, is_nothrow_swappable<Rest>...>) {
+		_MSTL swap(data_, t.data_);
+		base_type::swap(t.get_rest());
+	}
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename... Types>
@@ -370,38 +394,6 @@ tuple(Types...) -> tuple<Types...>;
 template <typename T1, typename T2>
 tuple(pair<T1, T2>) -> tuple<T1, T2>;
 #endif
-
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator ==(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	static_assert(sizeof...(T1) == sizeof...(T2), "cannot compare tuples of different sizes");
-	return lh.equal_to(rh);
-}
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator !=(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	return !(lh == rh);
-}
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator <(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	static_assert(sizeof...(T1) == sizeof...(T2), "cannot compare tuples of different sizes");
-	return lh.less_to(rh);
-}
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator >(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	return rh < lh;
-}
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator <=(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	return !(rh < lh);
-}
-template <typename... T1, typename... T2>
-MSTL_NODISCARD constexpr bool operator >=(const tuple<T1...>& lh, const tuple<T2...>& rh) {
-	return !(lh < rh);
-}
-template <typename... T, enable_if_t<
-	conjunction_v<is_swappable<T>...>, int> = 0>
-constexpr void swap(tuple<T...>& lh, tuple<T...>& rh) noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
 
 
 template <size_t Index, typename... Types>
@@ -566,23 +558,16 @@ struct __broadern_tuple_hash_aux<Tuple, 0> {
 MSTL_END_INNER__
 #endif // !MSTL_VERSION_17__
 
-template <typename... Args>
-struct hash<tuple<Args...>> {
-private:
-	template <typename Tuple, size_t... Idx>
-	constexpr size_t __broaden_tuple(const Tuple& tup, _MSTL index_sequence<Idx...>) const noexcept {
-#ifdef MSTL_VERSION_17__
-		return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_MSTL get<Idx>(tup)) ^ ...);
-#else
-		return _INNER __broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
-#endif // MSTL_VERSION_17__
-	}
 
-public:
-	MSTL_NODISCARD constexpr size_t operator()(const _MSTL tuple<Args...>& tup) const noexcept {
-		return this->__broaden_tuple(tup, _MSTL index_sequence_for<Args...>());
-	}
-};
+template <typename This, typename ... Rest>
+template <typename Tuple, size_t... Idx>
+constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_sequence<Idx...>) noexcept {
+#ifdef MSTL_VERSION_17__
+	return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_MSTL get<Idx>(tup)) ^ ...);
+#else
+	return _INNER __broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
+#endif // MSTL_VERSION_17__
+}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_TUPLE_HPP__

@@ -37,10 +37,8 @@ public:
     ~trace_allocator() {
 #if MSTL_STATE_DEBUG__
         if (!traces_.empty()) {
-            split_line(std::cerr);
             std::cerr << "Memory leaks detected! \n\n";
             print_stacktrace();
-            split_line(std::cerr);
         }
 #endif
     }

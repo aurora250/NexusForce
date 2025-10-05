@@ -1,5 +1,5 @@
-#ifndef MSTL_THREAD_POOL_H__
-#define MSTL_THREAD_POOL_H__
+#ifndef MSTL_THREAD_POOL_HPP__
+#define MSTL_THREAD_POOL_HPP__
 #include <thread>
 #include <atomic>
 #include <mutex>
@@ -11,7 +11,7 @@
 #include "MSTL/core/unordered_map.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-static constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = INT32_MAX_SIZE;
+static constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = INT32_MAX_VALUE;
 static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = std::thread::hardware_concurrency();
 static constexpr int64_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
 
@@ -224,4 +224,4 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_THREAD_POOL_H__
+#endif // MSTL_THREAD_POOL_HPP__

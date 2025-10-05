@@ -1,6 +1,6 @@
 #ifndef MSTL_STRINGSTREAM_HPP__
 #define MSTL_STRINGSTREAM_HPP__
-#include "string.hpp"
+#include "object.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class iostate {
@@ -287,7 +287,7 @@ public:
 
 #define __MSTL_EXPAND_OSS_STREAM(T) \
     MSTL_CONSTEXPR20 self& operator<<(const T& x) { \
-        this->buffer_.append(_MSTL move(_MSTL to_string(x))); \
+        this->buffer_.append(_MSTL to_string(x)); \
         return *this; \
     }
 
@@ -304,7 +304,7 @@ public:
     using base::base;
 
     MSTL_CONSTEXPR20 self& operator<<(const bool x) {
-        this->buffer_.append(_MSTL move(_MSTL to_string(x)));
+        this->buffer_.append(_MSTL to_string(x));
         return *this;
     }
 

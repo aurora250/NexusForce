@@ -1,7 +1,9 @@
 #ifndef MSTL_UTILITY_HPP__
 #define MSTL_UTILITY_HPP__
-#include "concepts.hpp"
 #include "iterator.hpp"
+#include "exception.hpp"
+#include "cstring.hpp"
+#include "interface.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, T... Values>
@@ -42,7 +44,7 @@ constexpr void swap(T(& lh)[Size], T(& rh)[Size]) noexcept(is_nothrow_swappable<
 	}
 }
 
-template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>>, int>>
+template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int>>
 constexpr void swap(T& lh, T& rh)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
     T tmp = _MSTL move(lh);
@@ -84,8 +86,8 @@ struct unpack_utility_construct_tag {
 MSTL_END_TAG__
 
 
-template <typename IfEmpty, typename T, bool = is_empty_v<IfEmpty> && !is_final_v<IfEmpty>>
-struct compressed_pair final : IfEmpty {
+template <typename IfEmpty, typename T, bool Compressed = is_empty_v<IfEmpty> && !is_final_v<IfEmpty>>
+struct compressed_pair final : IfEmpty, iswappable<compressed_pair<IfEmpty, T, Compressed>> {
     using base_type = IfEmpty;
 
     T value{};
@@ -131,17 +133,9 @@ template <typename IfEmpty, typename T>
 compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
 #endif
 
-template <typename IfEmpty, typename T, enable_if_t<is_swappable_v<T>, int> = 0>
-constexpr void swap(
-    compressed_pair<IfEmpty, T, true>& lh,
-    compressed_pair<IfEmpty, T, true>& rh)
-noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
-
 
 template <typename IfEmpty, typename T>
-struct compressed_pair<IfEmpty, T, false> final {
+struct compressed_pair<IfEmpty, T, false> final : iswappable<compressed_pair<IfEmpty, T, false>> {
 	IfEmpty no_compressed;
 	T value;
 
@@ -189,15 +183,6 @@ struct compressed_pair<IfEmpty, T, false> final {
 	}
 };
 
-template <typename IfEmpty, typename T,
-    enable_if_t<is_swappable_v<IfEmpty> && is_swappable_v<T>, int> = 0>
-constexpr void swap(
-    compressed_pair<IfEmpty, T, false>& lh,
-    compressed_pair<IfEmpty, T, false>& rh)
-    noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
-
 
 #ifdef MSTL_VERSION_17__
 template <typename... Types>
@@ -241,7 +226,7 @@ MSTL_END_INNER__
 
 
 template <typename T1, typename T2>
-struct pair {
+struct pair : icommon<pair<T1, T2>> {
 	using first_type	= T1;
 	using second_type	= T2;
 
@@ -413,8 +398,40 @@ struct pair {
 
 	pair& operator=(const volatile pair&) = delete;
 
-	constexpr void swap(pair& p) noexcept(conjunction_v<
-		is_nothrow_swappable<T1>, is_nothrow_swappable<T2>>) {
+	MSTL_CONSTEXPR20 ~pair() = default;
+
+	constexpr bool operator ==(const pair& y) const
+	noexcept(noexcept(this->first == y.first && this->second == y.second)) {
+		return this->first == y.first && this->second == y.second;
+	}
+	constexpr bool operator !=(const pair& y) const
+	noexcept(noexcept(!(*this == y))) {
+		return !(*this == y);
+	}
+	constexpr bool operator <(const pair& y) const
+	noexcept(noexcept(this->first < y.first || (!(y.first < this->first) && this->second < y.second))) {
+		return this->first < y.first || (!(y.first < this->first) && this->second < y.second);
+	}
+	constexpr bool operator >(const pair& y) const
+	noexcept(noexcept(y < *this)) {
+		return y < *this;
+	}
+	constexpr bool operator <=(const pair& y) const
+	noexcept(noexcept(!(*this > y))) {
+		return !(*this > y);
+	}
+	constexpr bool operator >=(const pair& y) const
+	noexcept(noexcept(!(*this < y))) {
+		return !(*this < y);
+	}
+
+	MSTL_NODISCARD constexpr size_t to_hash() const
+	noexcept(noexcept(hash<remove_cvref_t<T1>>()(first) ^ hash<remove_cvref_t<T2>>()(second))) {
+		return hash<remove_cvref_t<T1>>()(first) ^ hash<remove_cvref_t<T2>>()(second);
+	}
+	
+	constexpr void swap(pair& p)
+	noexcept(conjunction_v<is_nothrow_swappable<T1>, is_nothrow_swappable<T2>>) {
 		_MSTL swap(first, p.first);
 		_MSTL swap(second, p.second);
 	}
@@ -424,36 +441,6 @@ template <typename T1, typename T2>
 pair(T1, T2) -> pair<T1, T2>;
 #endif
 
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator ==(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return x.first == y.first && x.second == y.second;
-}
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator !=(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return !(x == y);
-}
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator <(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return x.first < y.first || (!(y.first < x.first) && x.second < y.second);
-}
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator >(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return y < x;
-}
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator <=(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return !(x > y);
-}
-template <typename T1, typename T2, typename U1, typename U2>
-constexpr bool operator >=(const pair<T1, T2>& x, const pair<U1, U2>& y) {
-	return !(x < y);
-}
-template <typename T1, typename T2, enable_if_t<
-	conjunction_v<is_swappable<T1>, is_swappable<T2>>, int> = 0>
-constexpr void swap(pair<T1, T2>& lh, pair<T1, T2>& rh) noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
-
 
 template <typename T1, typename T2>
 constexpr pair<unwrap_ref_decay_t<T1>, unwrap_ref_decay_t<T2>> make_pair(T1&& x, T2&& y)
@@ -462,14 +449,6 @@ noexcept(conjunction_v<is_nothrow_constructible<unwrap_ref_decay_t<T1>, T1>,
 	using unwrap_pair = pair<unwrap_ref_decay_t<T1>, unwrap_ref_decay_t<T2>>;
 	return unwrap_pair(_MSTL forward<T1>(x), _MSTL forward<T2>(y));
 }
-
-
-template <typename T1, typename T2>
-struct hash<_MSTL pair<T1, T2>> {
-	MSTL_NODISCARD size_t operator() (const _MSTL pair<T1, T2>& pair) const noexcept {
-		return hash<remove_cvref_t<T1>>()(pair.first) ^ hash<remove_cvref_t<T2>>()(pair.second);
-	}
-};
 
 
 template <typename... Types>
@@ -1055,109 +1034,93 @@ inline pair<size_t, size_t> MurmurHash_x64(const char* key, const size_t len, co
 #pragma warning(pop)
 
 
-MSTL_NODISCARD inline float32_t to_float32(const char* str, size_t* idx = nullptr) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_BEGIN_INNER__
 
-    const float32_t num = std::strtof(str, &err);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
+MSTL_NODISCARD constexpr float32_t to_float32(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const float32_t num = _MSTL strtof(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline float64_t to_float64(const char* str, size_t* idx = nullptr) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr float64_t to_float64(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const float64_t num = _MSTL strtod(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const float64_t num = std::strtod(str, &err);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline decimal_t to_decimal(const char* str, size_t* idx = nullptr) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr decimal_t to_decimal(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const decimal_t num = _MSTL strtold(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const decimal_t num = std::strtold(str, &err);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline int64_t to_int64(const char* str, size_t* idx = nullptr, const int base = 10) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr int64_t to_int64(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const int64_t num = _MSTL strtoll(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const int64_t num = std::strtoll(str, &err, base);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline uint64_t to_uint64(const char* str, size_t* idx = nullptr, const int base = 10) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr uint64_t to_uint64(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const uint64_t num = _MSTL strtoull(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const uint64_t num = std::strtoull(str, &err, base);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline int32_t to_int32(const char* str, size_t* idx = nullptr, const int base = 10) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr int32_t to_int32(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const int32_t num = _MSTL strtol(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const int32_t num = std::strtol(str, &err, base);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline uint32_t to_uint32(const char* str, size_t* idx = nullptr, const int base = 10) {
-    int& errref = errno;
-    char* err;
-    errref = 0;
+MSTL_NODISCARD constexpr uint32_t to_uint32(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const uint32_t num = _MSTL strtoul(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
 
-    const uint32_t num = std::strtoul(str, &err, base);
-    Exception(!(str == err || errref == ERANGE), TypeCastError("Convert From string Failed."));
-
-    if (idx) *idx = static_cast<size_t>(err - str);
+    if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
 }
 
-MSTL_NODISCARD inline int16_t to_int16(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr int16_t to_int16(const char* str, size_t* idx = nullptr, const int base = 10) {
     return static_cast<int16_t>(to_int32(str, idx, base));
 }
 
-MSTL_NODISCARD inline uint16_t to_uint16(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr uint16_t to_uint16(const char* str, size_t* idx = nullptr, const int base = 10) {
     return static_cast<int16_t>(to_uint32(str, idx, base));
 }
 
-MSTL_NODISCARD inline int8_t to_int8(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr int8_t to_int8(const char* str, size_t* idx = nullptr, const int base = 10) {
     return static_cast<int8_t>(to_int32(str, idx, base));
 }
 
-MSTL_NODISCARD inline uint8_t to_uint8(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr uint8_t to_uint8(const char* str, size_t* idx = nullptr, const int base = 10) {
     return static_cast<uint8_t>(to_uint32(str, idx, base));
 }
 
-MSTL_NODISCARD inline bool to_bool(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr bool to_bool(const char* str, size_t* idx = nullptr, const int base = 10) {
     return static_cast<bool>(to_int32(str, idx, base));
 }
+
+MSTL_END_INNER__
+
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_UTILITY_HPP__

@@ -16,7 +16,7 @@ MSTL_END_INNER__
 MSTL_ERROR_BUILD_DERIVED_CLASS(AnyCastError, TypeCastError, "Cast From any Type Failed.")
 
 
-class MSTL_API any {
+class MSTL_API any : public iswappable<any> {
 private:
     union storage_internal {
 		constexpr storage_internal() = default;
@@ -91,14 +91,14 @@ private:
 
     template <typename T, typename... Args, typename Manager = manage_t<T>>
     void try_emplace(Args&&... args) {
-	    reset();
+	    this->reset();
         Manager::create(storage_, _MSTL forward<Args>(args)...);
         manage_ = &Manager::manage;
     }
 
     template <typename T, typename U, typename... Args, typename Manager = manage_t<T>>
     void try_emplace(std::initializer_list<U> ilist, Args&&... args) {
-	    reset();
+	    this->reset();
 	    Manager::create(storage_, ilist, _MSTL forward<Args>(args)...);
 	    manage_ = &Manager::manage;
     }
@@ -140,14 +140,14 @@ public:
     template <typename T, typename... Args, typename VT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, Args&&...>>, int> = 0>
     VT emplace(Args&&... args) {
-        try_emplace<VT>(_MSTL forward<Args>(args)...);
+        this->try_emplace<VT>(_MSTL forward<Args>(args)...);
         return *manage_t<VT>::access(storage_);
     }
 
     template <typename T, typename U, typename... Args, typename VT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, std::initializer_list<U>&, Args&&...>>, int> = 0>
     VT emplace(std::initializer_list<U> ilist, Args&&... args) {
-        try_emplace<VT, U>(ilist, _MSTL forward<Args>(args)...);
+        this->try_emplace<VT, U>(ilist, _MSTL forward<Args>(args)...);
         return *manage_t<VT>::access(storage_);
     }
 

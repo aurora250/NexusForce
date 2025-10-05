@@ -222,11 +222,11 @@ private:
     friend class servlet;
 
     static string generate_session_id() {
-        ostringstream ss;
+        string str;
         for (int i = 0; i < 32; ++i) {
-            ss << hex_plain(hexadecimal(random_mt::next_int(0, 15)));
+            str += format("x", random_mt::next_int(0, 15));
         }
-        return ss.str();
+        return _MSTL move(str);
     }
 
     void cleanup_expired_sessions() {

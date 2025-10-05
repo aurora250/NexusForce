@@ -152,7 +152,7 @@ public:
         if (_MSTL is_constant_evaluated()) {
             if constexpr (is_same_v<char_type, wchar_t>) {
 #if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
-                return ::__builtin_wcslen(str);
+                return __builtin_wcslen(str);
 #else
                 return _MSTL wstring_length(str);
 #endif
@@ -658,6 +658,49 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
     }
     return static_cast<size_t>(-1);
 }
+
+
+MSTL_BEGIN_INNER__
+template <typename CharT>
+constexpr size_t FNV_string_hash(const CharT* str, const size_t len) noexcept {
+    size_t result = FNV_OFFSET_BASIS;
+    for (size_t i = 0; i < len; ++i) {
+        result ^= static_cast<size_t>(static_cast<byte_t>(str[i]));
+        result *= FNV_PRIME;
+    }
+    return result;
+}
+MSTL_END_INNER__
+
+
+# define __MSTL_BUILD_CHAR_PTR_HASH(OPT) \
+template <> \
+struct hash<OPT*> { \
+    MSTL_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
+        return _INNER FNV_string_hash(str, char_traits<OPT>::length(str)); \
+    } \
+}; \
+template <> \
+struct hash<const OPT*> { \
+    MSTL_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
+        return _INNER FNV_string_hash(str, char_traits<OPT>::length(str)); \
+    } \
+}; \
+template <size_t N> \
+struct hash<OPT[N]> { \
+    MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+        return _INNER FNV_string_hash(str, N - 1); \
+    } \
+}; \
+template <size_t N> \
+struct hash<const OPT[N]> { \
+    MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+        return _INNER FNV_string_hash(str, N - 1); \
+    } \
+};
+
+MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_CHAR_PTR_HASH)
+#undef __MSTL_BUILD_CHAR_PTR_HASH
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CHAR_TRAITS_HPP__

@@ -20,14 +20,6 @@
 #include "MSTL/web/session.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_INLINE17 constexpr uint32_t MSTL_SPLIT_LENGTH = 25U;
-
-inline void split_line(std::ostream& out = std::cout,
-    uint32_t size = MSTL_SPLIT_LENGTH, const char split = '-') {
-    while (size--) out << split;
-    out << '\n';
-}
-
 template <typename T>
 struct address_printer {
     static void print(const T& t) {
@@ -129,7 +121,7 @@ struct printer<T, enable_if_t<is_null_pointer_v<T>>> {
 
 
 template <typename T>
-struct printer<T, enable_if_t<is_bounded_array_v<T> && !is_ctype_string_v<T>>> {
+struct printer<T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>>> {
     static void print(const T& t) {
         if (t == nullptr) {
             printer<nullptr_t>::print(nullptr);
@@ -186,7 +178,7 @@ struct printer<T, enable_if_t<is_unbounded_array_v<T>>> {
 
 
 template <typename T>
-struct printer<T, enable_if_t<is_pointer_v<T> && !is_ctype_string_v<T>>> {
+struct printer<T, enable_if_t<is_pointer_v<T> && !is_cstring_v<T>>> {
     static void print(const T& t) {
         if (t == nullptr) {
             printer<nullptr_t>::print(nullptr);
@@ -604,11 +596,11 @@ struct raw_string_printer<char> {
 template <>
 struct raw_string_printer<wchar_t> {
     static void print(const wchar_t* t) {
-        string utf8_str = _MSTL move(_MSTL wstring_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const wchar_t* t) {
-        string utf8_str = _MSTL move(_MSTL wstring_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         std::cout << "L";
         raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
@@ -618,11 +610,11 @@ struct raw_string_printer<wchar_t> {
 template <>
 struct raw_string_printer<char8_t> {
     static void print(const char8_t* t) {
-        string utf8_str = _MSTL move(_MSTL u8string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char8_t* t) {
-        string utf8_str = _MSTL move(_MSTL u8string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         std::cout << "U8";
         raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
@@ -632,11 +624,11 @@ struct raw_string_printer<char8_t> {
 template <>
 struct raw_string_printer<char16_t> {
     static void print(const char16_t* t) {
-        string utf8_str = _MSTL move(_MSTL u16string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char16_t* t) {
-        string utf8_str = _MSTL move(_MSTL u16string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         std::cout << "U16";
         raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
@@ -645,11 +637,11 @@ struct raw_string_printer<char16_t> {
 template <>
 struct raw_string_printer<char32_t> {
     static void print(const char32_t* t) {
-        string utf8_str = _MSTL move(_MSTL u32string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         raw_string_printer<char>::print(utf8_str.c_str());
     }
     static void print_feature(const char32_t* t) {
-        string utf8_str = _MSTL move(_MSTL u32string_to_utf8(t));
+        string utf8_str = _MSTL move(_MSTL string_to_utf8(t));
         std::cout << "U32";
         raw_string_printer<char>::print_feature(utf8_str.c_str());
     }
@@ -657,7 +649,7 @@ struct raw_string_printer<char32_t> {
 
 
 template <typename T>
-struct printer<T, enable_if_t<is_ctype_string_v<T>>> {
+struct printer<T, enable_if_t<is_cstring_v<T>>> {
 private:
     using char_type = char_of_string_t<T>;
 
@@ -1155,10 +1147,10 @@ struct printer<datetime> {
 template <>
 struct printer<timestamp> {
     static void print(const timestamp& t) {
-        std::cout << t.get_seconds();
+        std::cout << t.seconds();
     }
     static void print_feature(const timestamp& t) {
-        std::cout << t.get_seconds() << "(timestamp)";
+        std::cout << t.seconds() << "(timestamp)";
     }
 };
 

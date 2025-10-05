@@ -1,5 +1,5 @@
-#ifndef MSTL_BASIC_STRING_H__
-#define MSTL_BASIC_STRING_H__
+#ifndef MSTL_BASIC_STRING_HPP__
+#define MSTL_BASIC_STRING_HPP__
 #include "string_view.hpp"
 #include "memory.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -512,8 +512,7 @@ public:
         return *this;
     }
 
-    template <typename Iterator, enable_if_t<
-        !is_convertible_v<Iterator, value_type>, int> = 0>
+    template <typename Iterator, enable_if_t<!is_convertible_v<Iterator, value_type>, int> = 0>
     MSTL_CONSTEXPR20 basic_string(Iterator first, Iterator last) {
         this->construct_from_iter(first, last);
     }
@@ -1108,13 +1107,13 @@ public:
 
     MSTL_CONSTEXPR20 self& trim_left() {
         return this->trim_left_if([](value_type ch) {
-            return is_space(ch);
+            return _INNER is_space(ch);
         });
     }
 
     MSTL_CONSTEXPR20 self& trim_right() {
         return this->trim_right_if([](value_type ch) {
-            return is_space(ch);
+            return _INNER is_space(ch);
         });
     }
 
@@ -1486,4 +1485,4 @@ template <typename CharT, typename Traits, typename Alloc>
 std::ostream& operator <<(std::ostream&, const basic_string<CharT, Traits, Alloc>&);
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BASIC_STRING_H__
+#endif // MSTL_BASIC_STRING_HPP__

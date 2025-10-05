@@ -49,10 +49,10 @@ bstring base64::decode(const string& data) {
     size_t i = 0;
 
     while (i + 3 < data.size()) {
-        int a = char_to_index(data[i]);
-        int b = char_to_index(data[i + 1]);
-        int c = data[i + 2] == '=' ? 0 : char_to_index(data[i + 2]);
-        int d = data[i + 3] == '=' ? 0 : char_to_index(data[i + 3]);
+        const int a = char_to_index(data[i]);
+        const int b = char_to_index(data[i + 1]);
+        const int c = data[i + 2] == '=' ? 0 : char_to_index(data[i + 2]);
+        const int d = data[i + 3] == '=' ? 0 : char_to_index(data[i + 3]);
 
         if (a < 0 || b < 0) Exception(ValueError("Invalid Base64 character"));
 
@@ -155,10 +155,9 @@ bstring MD5::hash(bstring data) {
 string MD5::hash_hex(const bstring& data) {
     bstring hash_result = hash(data);
     string hex_result;
-    for (uint8_t byte : hash_result) {
+    for (const uint8_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        string hex_str = format_hex(hex_byte, setprefix(false), setw(2), setzeropad(true));
-        hex_result += hex_str;
+        hex_result += format("02x", hex_byte);
     }
     return hex_result;
 }
@@ -175,7 +174,7 @@ bstring SHA1::hash(bstring data) {
     while ((data.size() % 64) != 56) {
         data.push_back(0);
     }
-    uint64_t bit_len = original_len * 8;
+    const uint64_t bit_len = original_len * 8;
     for (int i = 7; i >= 0; --i) {
         data.push_back((bit_len >> (i * 8)) & 0xFF);
     }
@@ -219,7 +218,7 @@ bstring SHA1::hash(bstring data) {
                 k = 0xCA62C1D6;
             }
 
-            uint32_t temp = rotleft(a, 5) + f + e + k + w[i];
+            const uint32_t temp = rotleft(a, 5) + f + e + k + w[i];
             e = d;
             d = c;
             c = rotleft(b, 30);
@@ -250,8 +249,7 @@ string SHA1::hash_hex(const bstring& data) {
     string hex_result;
     for (const uint8_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        string hex_str = format_hex(hex_byte, setprefix(false), setw(2), setzeropad(true));
-        hex_result += hex_str;
+        hex_result += format("02x", hex_byte);
     }
     return hex_result;
 }
@@ -292,7 +290,7 @@ bstring SHA256::hash(bstring data) {
     while ((data.size() % 64) != 56) {
         data.push_back(0);
     }
-    uint64_t bit_len = original_len * 8;
+    const uint64_t bit_len = original_len * 8;
     for (int i = 7; i >= 0; --i) {
         data.push_back((bit_len >> (i * 8)) & 0xFF);
     }
@@ -348,8 +346,7 @@ string SHA256::hash_hex(const bstring& data) {
     string hex_result;
     for (const uint8_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        const string hex_str = format_hex(hex_byte, setprefix(false), setw(2), setzeropad(true));
-        hex_result += hex_str;
+        hex_result += format("02x", hex_byte);
     }
     return hex_result;
 }
@@ -378,7 +375,7 @@ void AES256::key_expansion(const uint8_t* key, uint8_t* expanded_key) {
         memory_copy(temp, expanded_key + (i - 1) * 4, 4);
 
         if (i % 8 == 0) {
-            uint8_t t = temp[0];
+            const uint8_t t = temp[0];
             temp[0] = temp[1];
             temp[1] = temp[2];
             temp[2] = temp[3];
@@ -605,10 +602,8 @@ string AES256::encrypt_hex(const string& data, const string& key_hex) {
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
             string byte_str = key_hex.substr(i, 2);
-            auto hex_val = hexadecimal::try_parse(byte_str);
-            if (hex_val) {
-                key_bytes.push_back(static_cast<uint8_t>(hex_val->to_decimal()));
-            }
+            const auto hex_val = hexadecimal::parse(byte_str);
+            key_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
         }
     }
 
@@ -618,8 +613,7 @@ string AES256::encrypt_hex(const string& data, const string& key_hex) {
     string result;
     for (const uint8_t byte : encrypted) {
         hexadecimal hex_byte(byte);
-        const string hex_str = format_hex(hex_byte, setprefix(false), setw(2), setzeropad(true));
-        result += hex_str;
+        result += format("02x", hex_byte);
     }
     return result;
 }
@@ -629,10 +623,8 @@ string AES256::decrypt_hex(const string& encrypted_hex, const string& key_hex) {
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
             string byte_str = key_hex.substr(i, 2);
-            auto hex_val = hexadecimal::try_parse("0x" + byte_str);
-            if (hex_val) {
-                key_bytes.push_back(static_cast<uint8_t>(hex_val->to_decimal()));
-            }
+            const auto hex_val = hexadecimal::parse("0x" + byte_str);
+            key_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
         }
     }
 
@@ -640,10 +632,8 @@ string AES256::decrypt_hex(const string& encrypted_hex, const string& key_hex) {
     for (size_t i = 0; i < encrypted_hex.size(); i += 2) {
         if (i + 1 < encrypted_hex.size()) {
             string byte_str = encrypted_hex.substr(i, 2);
-            auto hex_val = hexadecimal::try_parse("0x" + byte_str);
-            if (hex_val) {
-                encrypted_bytes.push_back(static_cast<uint8_t>(hex_val->to_decimal()));
-            }
+            const auto hex_val = hexadecimal::parse("0x" + byte_str);
+            encrypted_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
         }
     }
     bstring decrypted = decrypt_pkcs7(encrypted_bytes, key_bytes);

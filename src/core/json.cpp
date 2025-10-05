@@ -1,4 +1,5 @@
 #include <MSTL/core/json.hpp>
+#include <MSTL/core/object.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 const json_null* json_value::as_null() const noexcept { return nullptr; }
@@ -82,7 +83,7 @@ const vector<unique_ptr<json_value>>& json_array::get_elements() const noexcept 
 
 
 void json_parser::skip_space() noexcept {
-    while (pos < length && _MSTL is_space(json[pos])) {
+    while (pos < length && _INNER is_space(json[pos])) {
         pos++;
     }
 }
@@ -139,15 +140,15 @@ unique_ptr<json_number> json_parser::parse_number() {
         pos++;
         if (pos < length && json[pos] == '.') {
             pos++;
-            if (pos >= length || !_MSTL is_digit(json[pos])) {
+            if (pos >= length || !_INNER is_digit(json[pos])) {
                 Exception(JsonOperateError("Invalid decimal part"));
             }
-            while (pos < length && _MSTL is_digit(json[pos])) {
+            while (pos < length && _INNER is_digit(json[pos])) {
                 pos++;
             }
         }
-    } else if (_MSTL is_digit(current())) {
-        while (pos < length && _MSTL is_digit(json[pos])) {
+    } else if (_INNER is_digit(current())) {
+        while (pos < length && _INNER is_digit(json[pos])) {
             pos++;
         }
         if (pos < length && json[pos] == '.') {
@@ -178,12 +179,12 @@ unique_ptr<json_number> json_parser::parse_number() {
 
     string num_str = json.substr(start, pos - start);
     try {
-        double value = _MSTL to_float64(num_str.data());
+        double value = float64::parse(num_str.data());
         return make_unique<json_number>(value);
     } catch (...) {
         Exception(JsonOperateError("Invalid number value"));
     }
-    return make_unique<json_number>(FLOAT64_MAX_POSI_SIZE);
+    return make_unique<json_number>(FLOAT64_MAX_POSI_VALUE);
 }
 
 unique_ptr<json_value> json_parser::parse_keyword() {
@@ -484,8 +485,8 @@ static string json_value_to_string(const json_value* value) {
             const double val = num_val->get_value();
 
             if (val == static_cast<double>(static_cast<long long>(val)) &&
-                val >= static_cast<double>(INT64_MIN_SIZE) &&
-                val <= static_cast<double>(INT64_MAX_SIZE)) {
+                val >= static_cast<double>(INT64_MIN_VALUE) &&
+                val <= static_cast<double>(INT64_MAX_VALUE)) {
                 return _MSTL to_string(static_cast<long long>(val));
             }
             string result = _MSTL to_string(val);

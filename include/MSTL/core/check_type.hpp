@@ -1,6 +1,6 @@
 #ifndef MSTL_CHECK_TYPE_HPP__
 #define MSTL_CHECK_TYPE_HPP__
-#include "stringstream.hpp"
+#include "string.hpp"
 #ifdef MSTL_COMPILER_GNUC__
 #include <cxxabi.h>
 #endif // MSTL_COMPILER_GNUC__
@@ -20,7 +20,7 @@ private:
     MSTL_CONSTEXPR20 void out(const T& val) {
         if (this->check_empty(val)) return;
         if (!this->is_compact_) sr_ += " ";
-        this->sr_ += (stringstream() << val).str();
+        this->sr_ += _MSTL to_string(val);
         this->is_compact_ = false;
     }
 

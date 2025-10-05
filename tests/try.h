@@ -6,8 +6,9 @@ USE_MSTL
 void test_file();
 void test_datetimes();
 void test_print();
+void test_console();
 void test_rnd();
-void test_hex();
+void test_format();
 void test_enctype();
 
 class example_servlet final : public servlet {
@@ -222,7 +223,7 @@ private:
             if (!name.empty()) {
                 cookie cookie(name, value);
                 if (!max_age_str.empty()) {
-                    cookie.set_max_age(_MSTL to_int32(max_age_str.c_str()));
+                    cookie.set_max_age(_MSTL integer32::parse(max_age_str));
                 }
                 response.add_cookie(cookie);
 

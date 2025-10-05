@@ -1,5 +1,5 @@
-#ifndef MSTL_ERRORLIB_H__
-#define MSTL_ERRORLIB_H__
+#ifndef MSTL_EXCEPTION_HPP__
+#define MSTL_EXCEPTION_HPP__
 #include "basiclib.hpp"
 #include <cassert>
 #ifdef MSTL_SUPPORT_CUDA__
@@ -55,9 +55,9 @@ struct Error {
     __MSTL_ERROR_WHAT()
 };
 
-MSTL_ERROR_BUILD_DERIVED_CLASS(MemoryError, Error, "Memory Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(StopIterator, MemoryError, "Iterator or Pointer Access out of Range.")
 MSTL_ERROR_BUILD_FINAL_CLASS(AssertionError, Error, "Assertion Failed.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(MemoryError, Error, "Memory Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(StopIterator, MemoryError, "Iterator or Pointer Access Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(TypeCastError, MemoryError, "Type Cast Mismatch.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(ValueError, Error, "Function or Template Argument Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(LinkError, Error, "External Link Actions Failed.")
@@ -75,8 +75,8 @@ struct CUDAMemoryError final : MemoryError {
 		: MemoryError(cudaGetErrorString(err), __type__) {}
 
 	__MSTL_ERROR_FINAL_DESTRUCTOR(CUDAMemoryError)
-	__MSTL_ERROR_WHAT()
 	__MSTL_ERROR_TYPE(CUDAMemoryError)
+	__MSTL_ERROR_WHAT()
 };
 #endif
 
@@ -131,4 +131,4 @@ MSTL_NORETURN inline void Exit(const bool abort = false, void(* func)() = nullpt
 #define __MSTL_DEBUG_TAG_DECREMENT "decrement"
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ERRORLIB_H__
+#endif // MSTL_EXCEPTION_HPP__

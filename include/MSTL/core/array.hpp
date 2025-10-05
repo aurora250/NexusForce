@@ -4,7 +4,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
-class array_iterator {
+struct array_iterator  {
 private:
     using container_type	= Array;
     using iterator			= array_iterator<false, Size, container_type>;
@@ -29,92 +29,92 @@ private:
     size_t idx_ = 0;
 
 public:
-    MSTL_CONSTEXPR17 array_iterator() noexcept = default;
-    MSTL_CONSTEXPR17 array_iterator(pointer ptr, const size_t off = 0) noexcept
+    constexpr array_iterator() noexcept = default;
+    constexpr array_iterator(pointer ptr, const size_t off = 0) noexcept
     : ptr_(ptr), idx_(off) {}
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference operator *() const noexcept {
+    MSTL_NODISCARD constexpr reference operator *() const noexcept {
         return *operator->();
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 pointer operator ->() const noexcept {
+    MSTL_NODISCARD constexpr pointer operator ->() const noexcept {
         MSTL_DEBUG_VERIFY(ptr_ && idx_ < Size, "cannot dereference out of range array iterator");
         return ptr_ + idx_;
     }
 
-    MSTL_CONSTEXPR17 array_iterator& operator ++() noexcept {
+    constexpr array_iterator& operator ++() noexcept {
         MSTL_DEBUG_VERIFY(ptr_ && idx_ < Size, "cannot increment array iterator past end");
         ++idx_;
         return *this;
     }
-    MSTL_CONSTEXPR17 array_iterator operator ++(int) noexcept {
+    constexpr array_iterator operator ++(int) noexcept {
         array_iterator tmp = *this;
         ++*this;
         return tmp;
     }
-    MSTL_CONSTEXPR17 array_iterator& operator --() noexcept {
+    constexpr array_iterator& operator --() noexcept {
         MSTL_DEBUG_VERIFY(ptr_ && idx_ != 0, "cannot decrement array iterator before begin");
         --idx_;
         return *this;
     }
-    MSTL_CONSTEXPR17 array_iterator operator --(int) noexcept {
+    constexpr array_iterator operator --(int) noexcept {
         array_iterator tmp = *this;
         --*this;
         return tmp;
     }
 
-    MSTL_CONSTEXPR17 array_iterator& operator +=(const difference_type n) noexcept {
+    constexpr array_iterator& operator +=(const difference_type n) noexcept {
         idx_ += static_cast<size_t>(n);
         return *this;
     }
-    MSTL_CONSTEXPR17 array_iterator& operator -=(const difference_type n) noexcept {
+    constexpr array_iterator& operator -=(const difference_type n) noexcept {
         return *this += -n;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 difference_type operator -(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr difference_type operator -(const array_iterator& rh) const noexcept {
         return static_cast<difference_type>(idx_ - rh.idx_);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 array_iterator operator -(const difference_type n) const noexcept {
+    MSTL_NODISCARD constexpr array_iterator operator -(const difference_type n) const noexcept {
         array_iterator tmp = *this;
         tmp -= n;
         return tmp;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 array_iterator operator +(const difference_type n) const noexcept {
+    MSTL_NODISCARD constexpr array_iterator operator +(const difference_type n) const noexcept {
         array_iterator tmp = *this;
         tmp += n;
         return tmp;
     }
-    MSTL_NODISCARD friend MSTL_CONSTEXPR17 array_iterator operator +(
+    MSTL_NODISCARD friend constexpr array_iterator operator +(
         const difference_type n, array_iterator iter) noexcept {
         iter += n;
         return iter;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference operator [](const difference_type n) const noexcept {
+    MSTL_NODISCARD constexpr reference operator [](const difference_type n) const noexcept {
         return *(*this + n);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator ==(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator ==(const array_iterator& rh) const noexcept {
         return idx_ == rh.idx_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator!=(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator!=(const array_iterator& rh) const noexcept {
         return !(*this == rh);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator <(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator <(const array_iterator& rh) const noexcept {
         return idx_ < rh.idx_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator >(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator >(const array_iterator& rh) const noexcept {
         return rh < *this;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator <=(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator <=(const array_iterator& rh) const noexcept {
         return !(rh < *this);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 bool operator >=(const array_iterator& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator >=(const array_iterator& rh) const noexcept {
         return !(*this < rh);
     }
 };
 
 template <typename T, size_t Size>
-class array {
+class array : public icommon<array<T, Size>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 
 public:
@@ -130,49 +130,49 @@ private:
     T array_[Size];
 
 public:
-    MSTL_CONSTEXPR17 array() noexcept = default;
-    MSTL_CONSTEXPR17 array(const self& rhs) noexcept = default;
-    MSTL_CONSTEXPR17 array(self&& rhs) noexcept = default;
-    MSTL_CONSTEXPR17 array(std::initializer_list<T> init) noexcept {
+    constexpr array() noexcept = default;
+    constexpr array(const self& rhs) noexcept = default;
+    constexpr array(self&& rhs) noexcept = default;
+    constexpr array(std::initializer_list<T> init) noexcept {
         size_t size = init.size() < Size ? init.size() : Size;
         _MSTL copy(init.begin(), init.begin() + size, array_);
     }
     MSTL_CONSTEXPR20 ~array() noexcept = default;
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 iterator begin() noexcept {
+    MSTL_NODISCARD constexpr iterator begin() noexcept {
         return iterator(array_, 0);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 iterator end() noexcept {
+    MSTL_NODISCARD constexpr iterator end() noexcept {
         return iterator(array_, Size);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_iterator begin() const noexcept {
+    MSTL_NODISCARD constexpr const_iterator begin() const noexcept {
         return const_iterator(array_, 0);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_iterator end() const noexcept {
+    MSTL_NODISCARD constexpr const_iterator end() const noexcept {
         return const_iterator(array_, Size);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reverse_iterator rbegin() noexcept {
+    MSTL_NODISCARD constexpr reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reverse_iterator rend() noexcept {
+    MSTL_NODISCARD constexpr reverse_iterator rend() noexcept {
         return reverse_iterator(begin());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_reverse_iterator rbegin() const noexcept {
+    MSTL_NODISCARD constexpr const_reverse_iterator rbegin() const noexcept {
         return const_reverse_iterator(end());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_reverse_iterator rend() const noexcept {
+    MSTL_NODISCARD constexpr const_reverse_iterator rend() const noexcept {
         return const_reverse_iterator(begin());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_iterator cbegin() const noexcept {
+    MSTL_NODISCARD constexpr const_iterator cbegin() const noexcept {
         return const_iterator(array_, 0);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_iterator cend() const noexcept {
+    MSTL_NODISCARD constexpr const_iterator cend() const noexcept {
         return const_iterator(array_, Size);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_reverse_iterator crbegin() const noexcept {
+    MSTL_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept {
         return reverse_iterator(cend());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const_reverse_iterator crend() const noexcept {
+    MSTL_NODISCARD constexpr const_reverse_iterator crend() const noexcept {
         return reverse_iterator(cbegin());
     }
 
@@ -189,7 +189,7 @@ public:
         return false;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference at(size_type n) {
+    MSTL_NODISCARD constexpr reference at(size_type n) {
         MSTL_DEBUG_VERIFY(n < Size, "array subscript out of range");
         return array_[n];
     }
@@ -197,7 +197,7 @@ public:
         MSTL_DEBUG_VERIFY(n < Size, "array subscript out of range");
         return array_[n];
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference operator[](size_type n) noexcept {
+    MSTL_NODISCARD constexpr reference operator[](size_type n) noexcept {
         MSTL_DEBUG_VERIFY(n < Size, "array subscript out of range");
         return array_[n];
     }
@@ -206,23 +206,23 @@ public:
         return array_[n];
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference front() noexcept {
+    MSTL_NODISCARD constexpr reference front() noexcept {
         return array_[0];
     }
     MSTL_NODISCARD constexpr const_reference front() const noexcept {
         return array_[0];
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 reference back() noexcept {
+    MSTL_NODISCARD constexpr reference back() noexcept {
         return array_[Size - 1];
     }
     MSTL_NODISCARD constexpr const_reference back() const noexcept {
         return array_[Size - 1];
     }
-    MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE MSTL_CONSTEXPR17
+    MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE constexpr
     T* data() noexcept {
         return array_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR17 const T* data() const noexcept {
+    MSTL_NODISCARD constexpr const T* data() const noexcept {
         return array_;
     }
 
@@ -259,51 +259,51 @@ private:
 
 public:
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 iterator begin() noexcept {
+    constexpr iterator begin() noexcept {
         return iterator{};
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 iterator end() noexcept {
+    constexpr iterator end() noexcept {
         return iterator{};
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_iterator begin() const noexcept {
+    constexpr const_iterator begin() const noexcept {
         return const_iterator{};
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_iterator end() const noexcept {
+    constexpr const_iterator end() const noexcept {
         return const_iterator{};
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 reverse_iterator rbegin() noexcept {
+    constexpr reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 reverse_iterator rend() noexcept {
+    constexpr reverse_iterator rend() noexcept {
         return reverse_iterator(begin());
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_reverse_iterator rbegin() const noexcept {
+    constexpr const_reverse_iterator rbegin() const noexcept {
         return const_reverse_iterator(end());
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_reverse_iterator rend() const noexcept {
+    constexpr const_reverse_iterator rend() const noexcept {
         return const_reverse_iterator(begin());
     }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_iterator cbegin() const noexcept {
+    constexpr const_iterator cbegin() const noexcept {
         return begin();
     }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_iterator cend() const noexcept {
+    constexpr const_iterator cend() const noexcept {
         return end();
     }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_reverse_iterator crbegin() const noexcept {
+    constexpr const_reverse_iterator crbegin() const noexcept {
         return rbegin();
     }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const_reverse_iterator crend() const noexcept {
+    constexpr const_reverse_iterator crend() const noexcept {
         return rend();
     }
 
@@ -359,11 +359,11 @@ public:
     }
 
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 T* data() noexcept {
+    constexpr T* data() noexcept {
         return nullptr;
     }
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE
-    MSTL_CONSTEXPR17 const T* data() const noexcept {
+    constexpr const T* data() const noexcept {
         return nullptr;
     }
 

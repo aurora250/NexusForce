@@ -1,6 +1,8 @@
 #ifndef MSTL_MSTLCPP_HPP__
 #define MSTL_MSTLCPP_HPP__
 
+#include "MSTL/core/console.hpp"
+#include "MSTL/core/vsprintf.hpp"
 #include "MSTL/core/print.hpp"
 #include "MSTL/core/algorithm.hpp"
 #include "MSTL/ext/lock_free_queue.hpp"

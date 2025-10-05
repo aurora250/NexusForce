@@ -406,7 +406,33 @@ using void_t = void;
 
 
 template <typename T>
-struct is_character : bool_constant<is_any_of<remove_cvref_t<T>,
+struct package {
+    using type = T;
+};
+
+template <typename T>
+using package_t = typename package<T>::type;
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_packaged_v = !is_same_v<package_t<T>, T>;
+
+
+template <typename T>
+struct unpackage {
+    using type = T;
+};
+
+template <typename T>
+using unpackage_t = typename unpackage<T>::type;
+template <typename T>
+using unpack_remove_cvref_t = unpackage_t<remove_cvref_t<T>>;
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_unpackaged_v = !is_same_v<unpackage_t<T>, T>;
+
+
+template <typename T>
+struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
     char, signed char, unsigned char, wchar_t,
 #ifdef MSTL_VERSION_20__
     char8_t,
@@ -421,38 +447,26 @@ MSTL_INLINE17 constexpr bool is_character_v = is_character<T>::value;
 
 
 template <typename T>
-MSTL_INLINE17 constexpr bool is_boolean_v = is_same_v<remove_cvref_t<T>, bool>;
+MSTL_INLINE17 constexpr bool is_boolean_v = is_same_v<unpack_remove_cvref_t<T>, bool>;
 template <typename T>
 struct is_boolean : bool_constant<is_boolean_v<T>> {};
 
 
 template <typename T>
-MSTL_INLINE17 constexpr bool is_standard_integer_v = is_any_of_v<remove_cvref_t<T>, short, int, long, long long,
+MSTL_INLINE17 constexpr bool is_standard_integer_v = is_any_of_v<unpack_remove_cvref_t<T>, short, int, long, long long,
     unsigned short, unsigned int, unsigned long, unsigned long long>;
 template <typename T>
 struct is_standard_integral : bool_constant<is_standard_integer_v<T>> {};
 
 
-MSTL_BEGIN_INNER__
-class hexadecimal;
-MSTL_END_INNER__
-
 template <typename T>
-struct is_hexadecimal : false_type {};
-template <>
-struct is_hexadecimal<_INNER hexadecimal> : true_type {};
-template <typename T>
-MSTL_INLINE17 constexpr bool is_hexadecimal_v = is_hexadecimal<T>::value;
-
-
-template <typename T>
-struct is_integral : bool_constant<disjunction_v<is_hexadecimal<T>, is_standard_integral<T>, is_character<T>, is_boolean<T>>> {};
+struct is_integral : bool_constant<disjunction_v<is_standard_integral<T>, is_character<T>, is_boolean<T>>> {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_integral_v = is_integral<T>::value;
 
 
 template <typename T>
-struct is_floating_point : bool_constant<is_any_of_v<remove_cvref_t<T>, float, double, long double>> {};
+struct is_floating_point : bool_constant<is_any_of_v<unpack_remove_cvref_t<T>, float, double, long double>> {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_floating_point_v = is_floating_point<T>::value;
 
@@ -477,16 +491,12 @@ struct __check_sign_aux<T, false> {
 MSTL_END_INNER__
 
 template <typename T>
-struct is_signed : bool_constant<_INNER __check_sign_aux<T>::is_signed> {};
-template <>
-struct is_signed<_INNER hexadecimal> : true_type {};
+struct is_signed : bool_constant<_INNER __check_sign_aux<unpack_remove_cvref_t<T>>::is_signed> {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_signed_v = is_signed<T>::value;
 
 template <typename T>
-struct is_unsigned : bool_constant<_INNER __check_sign_aux<T>::is_unsigned> {};
-template <>
-struct is_unsigned<_INNER hexadecimal> : false_type {};
+struct is_unsigned : bool_constant<_INNER __check_sign_aux<unpack_remove_cvref_t<T>>::is_unsigned> {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_unsigned_v = is_unsigned<T>::value;
 
@@ -738,10 +748,10 @@ struct is_object : bool_constant<is_object_v<T>> {};
 
 
 template <typename T>
-constexpr bool is_ctype_string_v = (is_pointer_v<T> && is_character_v<remove_pointer_t<T>>) ||
-    (is_bounded_array_v<T> && is_character_v<remove_all_extents_t<T>>);
+constexpr bool is_cstring_v = (is_pointer_v<remove_cvref_t<T>> && is_character_v<remove_pointer_t<remove_cvref_t<T>>>) ||
+    (is_bounded_array_v<remove_cvref_t<T>> && is_character_v<remove_all_extents_t<remove_cvref_t<T>>>);
 template <typename T>
-struct is_ctype_string : bool_constant<is_ctype_string_v<T>> {};
+struct is_ctype_string : bool_constant<is_cstring_v<T>> {};
 
 
 template <typename T>
@@ -797,7 +807,7 @@ struct is_member_pointer : bool_constant<is_member_pointer_v<T>> {};
 // arithmetic, enum and pointer types are scalar types.
 template <typename T>
 MSTL_INLINE17 constexpr bool is_scalar_v =
-disjunction_v<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>>;
+    disjunction_v<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>>;
 template <typename T>
 struct is_scalar : bool_constant<is_scalar_v<T>> {};
 
@@ -1316,8 +1326,8 @@ MSTL_INLINE17 constexpr bool is_convertible_with = is_convertible_v<From, To> &&
 
 
 template <typename Alloc1, typename Alloc2>
-MSTL_INLINE17 constexpr bool is_allocable_with = is_same_v<
-    decltype(MSTL::declval<Alloc1>().allocate()), decltype(MSTL::declval<Alloc2>().allocate())>;
+MSTL_INLINE17 constexpr bool is_allocable_with =
+    is_same_v<decltype(_MSTL declval<Alloc1>().allocate()), decltype(_MSTL declval<Alloc2>().allocate())>;
 
 
 MSTL_BEGIN_INNER__
@@ -1366,15 +1376,15 @@ struct __set_sign {
     static_assert((is_integral<T>::value && !is_boolean_v<T>) || is_enum_v<T>,
         "make signed only support non bool integral types and enum types");
 
-    using signed_type   = copy_cv_t<T, __set_signed_byte<T>>;
-    using unsigned_type = copy_cv_t<T, __set_unsigned_byte<T>>;
+    using signed_type   = package_t<copy_cv_t<T, __set_signed_byte<T>>>;
+    using unsigned_type = package_t<copy_cv_t<T, __set_unsigned_byte<T>>>;
 };
 MSTL_END_INNER__
 
 template <typename T>
-using make_signed_t = typename _INNER __set_sign<T>::signed_type;
+using make_signed_t = typename _INNER __set_sign<unpackage_t<T>>::signed_type;
 template <typename T>
-using make_unsigned_t = typename _INNER __set_sign<T>::unsigned_type;
+using make_unsigned_t = typename _INNER __set_sign<unpackage_t<T>>::unsigned_type;
 
 template <typename T>
 struct make_signed {
@@ -1470,9 +1480,9 @@ constexpr size_t aligned_union_v = aligned_union<Len, Types...>::align_value;
 //   array and function types will be converted to pointer types unless they are used to initialize reference.
 template <typename T>
 struct decay {
-    using rem_ref_t = remove_reference_t<T>;
-    using chk_func_t = conditional_t<is_function_v<rem_ref_t>, add_pointer_t<rem_ref_t>, remove_cv_t<rem_ref_t>>;
-    using type = conditional_t<is_array_v<rem_ref_t>, add_pointer_t<remove_extent_t<rem_ref_t>>, chk_func_t>;
+    using remove_ref_t = remove_reference_t<T>;
+    using check_func_t = conditional_t<is_function_v<remove_ref_t>, add_pointer_t<remove_ref_t>, remove_cv_t<remove_ref_t>>;
+    using type = conditional_t<is_array_v<remove_ref_t>, add_pointer_t<remove_extent_t<remove_ref_t>>, check_func_t>;
 };
 template <typename T>
 using decay_t = typename decay<T>::type;
@@ -1528,16 +1538,17 @@ struct common_reference<T> {
 MSTL_BEGIN_INNER__
 
 template <typename T1, typename T2>
-struct common_reference_base_aux : common_type<T1, T2> {};
+struct __common_reference_base_aux : common_type<T1, T2> {};
 
-template <typename T1, typename T2>
-    requires requires { typename common_ternary_operator_t<T1, T2>; }
-struct common_reference_base_aux<T1, T2> {
-    using type = common_ternary_operator_t<T1, T2>;
+template <typename T1, typename T2> requires requires {
+    typename _MSTL common_ternary_operator_t<T1, T2>;
+}
+struct __common_reference_base_aux<T1, T2> {
+    using type = _MSTL common_ternary_operator_t<T1, T2>;
 };
 
 template <typename, typename, template <typename> typename, template <typename> typename>
-struct basic_common_reference {};
+struct __basic_common_reference {};
 
 template <typename T1>
 struct __add_qualifier_aux {
@@ -1546,11 +1557,11 @@ struct __add_qualifier_aux {
 };
 
 template <typename T1, typename T2>
-using qualifier_extract = typename basic_common_reference<remove_cvref_t<T1>, remove_cvref_t<T2>,
+using qualifier_extract = typename __basic_common_reference<remove_cvref_t<T1>, remove_cvref_t<T2>,
     __add_qualifier_aux<T1>::template apply_t, __add_qualifier_aux<T2>::template apply_t>::type;
 
 template <typename T1, typename T2>
-struct __common_ref_qualify_aux : common_reference_base_aux<T1, T2> {};
+struct __common_ref_qualify_aux : __common_reference_base_aux<T1, T2> {};
 
 template <typename T1, typename T2>
     requires requires { typename qualifier_extract<T1, T2>; }
@@ -1561,8 +1572,8 @@ struct __common_ref_qualify_aux<T1, T2> {
 template <typename T1, typename T2>
 struct __common_reference_ptr_aux : __common_ref_qualify_aux<T1, T2> {};
 
-template <typename T1, typename T2>
-    requires is_lvalue_reference_v<common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>>
+template <typename T1, typename T2> requires
+    is_lvalue_reference_v<common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>>
 using __common_lvalue_aux = common_ternary_operator_t<copy_cv_t<T1, T2>&, copy_cv_t<T2, T1>&>;
 
 template <typename, typename>
@@ -1574,14 +1585,14 @@ struct __common_reference_aux<T1&, T2&> {
     using type = __common_lvalue_aux<T1, T2>;
 };
 
-template <typename T1, typename T2>
-    requires is_convertible_v<T1&&, __common_lvalue_aux<const T1, T2>>
+template <typename T1, typename T2> requires
+    is_convertible_v<T1&&, __common_lvalue_aux<const T1, T2>>
 struct __common_reference_aux<T1&&, T2&> {
     using type = __common_lvalue_aux<const T1, T2>;
 };
 
-template <typename T1, typename T2>
-    requires is_convertible_v<T2&&, __common_lvalue_aux<const T2, T1>>
+template <typename T1, typename T2> requires
+    is_convertible_v<T2&&, __common_lvalue_aux<const T2, T1>>
 struct __common_reference_aux<T1&, T2&&> {
     using type = __common_lvalue_aux<const T2, T1>;
 };
@@ -1589,9 +1600,9 @@ struct __common_reference_aux<T1&, T2&&> {
 template <typename T1, typename T2>
 using __common_rvalue_aux = remove_reference_t<__common_lvalue_aux<T1, T2>>&&;
 
-template <typename T1, typename T2>
-    requires is_convertible_v<T1&&, __common_rvalue_aux<T1, T2>>
-&& is_convertible_v<T2&&, __common_rvalue_aux<T1, T2>>
+template <typename T1, typename T2> requires
+    is_convertible_v<T1&&, __common_rvalue_aux<T1, T2>> &&
+    is_convertible_v<T2&&, __common_rvalue_aux<T1, T2>>
 struct __common_reference_aux<T1&&, T2&&> {
     using type = __common_rvalue_aux<T1, T2>;
 };
@@ -1599,9 +1610,9 @@ struct __common_reference_aux<T1&&, T2&&> {
 template <typename T1, typename T2>
 using __common_reference_aux_t = typename __common_reference_aux<T1, T2>::type;
 
-template <typename T1, typename T2>
-    requires is_convertible_v<add_pointer_t<T1>, add_pointer_t<__common_reference_aux_t<T1, T2>>>
-&& is_convertible_v<add_pointer_t<T2>, add_pointer_t<__common_reference_aux_t<T1, T2>>>
+template <typename T1, typename T2> requires
+    is_convertible_v<add_pointer_t<T1>, add_pointer_t<__common_reference_aux_t<T1, T2>>> &&
+    is_convertible_v<add_pointer_t<T2>, add_pointer_t<__common_reference_aux_t<T1, T2>>>
 struct __common_reference_ptr_aux<T1, T2> {
     using type = __common_reference_aux_t<T1, T2>;
 };
@@ -1945,7 +1956,7 @@ private:
         typename = decltype(_MSTL declvoid<T>(_MSTL declval<Res_t>())), bool Dangle =
 #ifdef MSTL_COMPILER_GCC__
         __reference_converts_from_temporary(T, Res_t)
-#elif defined(MSTL_COMPILER_CLANG__) && !defined(MSTL_COMPILE_WITH_QT__)
+#elif defined(MSTL_COMPILER_CLANG__)
         __reference_converts_from_temporary(_MSTL declval<T>(), _MSTL declval<Res_t>())
 #else
         false
@@ -2025,7 +2036,6 @@ template <typename F, typename... Args>
 MSTL_INLINE17 constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<F, Args...>::value;
 
 
-#ifdef MSTL_COMPILER_MSVC__
 // layout compatible types have the same layout in memory.
 // that is, their member variables are arranged in the same order and alignment.
 // they have the same member variable types, number, and arrangement order.
@@ -2040,7 +2050,6 @@ struct is_pointer_interconvertible_base_of
     : bool_constant<__is_pointer_interconvertible_base_of(Base, Derived)> {};
 template <typename Base, typename Derived>
 MSTL_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v = is_pointer_interconvertible_base_of<Base, Derived>::value;
-#endif
 
 
 template <typename>
@@ -2106,7 +2115,10 @@ struct is_swappable;
 template <typename>
 struct is_nothrow_swappable;
 
-template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>>, int> = 0>
+template <typename T>
+struct iswappable;
+
+template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int> = 0>
 constexpr void swap(T&, T&) 
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
 
@@ -2187,13 +2199,13 @@ MSTL_INLINE17 constexpr bool is_nothrow_arrow<Iterator, Ptr, false> =
 noexcept(_MSTL declcopy<Ptr>(_MSTL declval<Iterator>().operator->()));
 
 
-template <typename Key>
+template <typename Key, typename = void>
 struct hash {};
 
 template <typename T>
 struct hash<T*> {
-    MSTL_NODISCARD constexpr size_t operator()(T* ptr) const noexcept {
-        return reinterpret_cast<size_t>(ptr);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 size_t operator()(T* ptr) const noexcept {
+        return static_cast<size_t>(reinterpret_cast<uintptr_t>(ptr));
     }
 };
 
@@ -2217,16 +2229,52 @@ constexpr size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
     return result;
 }
 
-#define FLOAT_HASH_STRUCT__(OPT) \
-    template <> struct hash<OPT> { \
-        MSTL_NODISCARD constexpr size_t operator ()(const OPT& x) const noexcept { \
-            return x == 0.0f ? 0 : FNV_hash(reinterpret_cast<const byte_t*>(&x), sizeof(OPT)); \
-        } \
-    };
-MSTL_MACRO_RANGE_FLOAT(FLOAT_HASH_STRUCT__)
-MSTL_MACRO_RANGE_CHARS(FLOAT_HASH_STRUCT__)
-MSTL_MACRO_RANGE_INT(FLOAT_HASH_STRUCT__)
+
+MSTL_BEGIN_INNER__
+template <typename T, enable_if_t<is_integral_v<T>, int> = 0>
+constexpr size_t FNV_hash_integer(const T& value) noexcept {
+    size_t result = FNV_OFFSET_BASIS;
+    for (size_t i = 0; i < sizeof(T); ++i) {
+        const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
+        result ^= static_cast<size_t>(byte_val);
+        result *= FNV_PRIME;
+    }
+    return result;
+}
+MSTL_END_INNER__
+
+
+template <>
+struct hash<bool> {
+    MSTL_NODISCARD constexpr size_t operator()(const bool x) const noexcept {
+        return x ? 0x9e3779b9 : 0x7f4a7c15;
+    }
+};
+
+#define __MSTL_BUILD_INTEGER_HASH_STRUCT(OPT) \
+template <> struct hash<OPT> { \
+    MSTL_NODISCARD constexpr size_t operator ()(const OPT& x) const noexcept { \
+        return x == 0.0f ? 0 : _INNER FNV_hash_integer(x); \
+    } \
+};
+
+MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_INTEGER_HASH_STRUCT)
+MSTL_MACRO_RANGE_INT(__MSTL_BUILD_INTEGER_HASH_STRUCT)
 #undef FLOAT_HASH_STRUCT__
+
+#define __MSTL_BUILD_FLOAT_HASH_STRUCT(OPT) \
+template <> \
+struct hash<OPT> { \
+    MSTL_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { \
+        if (x == 0.0f) return 0; \
+        union { OPT f; uint64_t i; } converter; \
+        converter.f = x; \
+        return _INNER FNV_hash_integer(converter.i); \
+    } \
+};
+
+MSTL_MACRO_RANGE_FLOAT(__MSTL_BUILD_FLOAT_HASH_STRUCT)
+#undef __MSTL_BUILD_FLOAT_HASH_STRUCT
 
 
 template <typename, typename = void>
@@ -2252,18 +2300,6 @@ concept is_pair_v = requires(T p) {
     p.second;
 };
 #endif // MSTL_VERSION_20__
-
-
-template <typename Category, typename T, typename Distance = ptrdiff_t,
-    typename Pointer = T*, typename Reference = T&>
-struct iterator {
-public:
-    using iterator_category = Category;
-    using value_type        = T;
-    using difference_type   = Distance;
-    using pointer           = Pointer;
-    using reference         = Reference;
-};
 
 
 MSTL_BEGIN_INNER__

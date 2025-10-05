@@ -1,5 +1,5 @@
-#ifndef MSTL_RB_TREE_H__
-#define MSTL_RB_TREE_H__
+#ifndef MSTL_RB_TREE_HPP__
+#define MSTL_RB_TREE_HPP__
 #include "memory.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -762,4 +762,4 @@ void swap(rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_RB_TREE_H__
+#endif // MSTL_RB_TREE_HPP__

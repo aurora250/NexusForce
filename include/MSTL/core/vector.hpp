@@ -1,29 +1,46 @@
 #ifndef MSTL_VECTOR_HPP__
 #define MSTL_VECTOR_HPP__
-#include "memory.hpp"
+#include "object.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Alloc>
 class vector;
 
 template <bool IsConst, typename Vector>
-struct vector_iterator {
+struct vector_iterator : iiterator<vector_iterator<IsConst, Vector>,
+#ifdef MSTL_VERSION_20__
+	contiguous_iterator_tag,
+#else
+	random_access_iterator_tag,
+#endif
+	typename Vector::value_type,
+	conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>,
+	conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>,
+	typename Vector::difference_type, typename Vector::size_type
+> {
 private:
 	using container_type	= Vector;
+	using base_type			= iiterator<vector_iterator<IsConst, Vector>,
+#ifdef MSTL_VERSION_20__
+		contiguous_iterator_tag,
+#else
+		random_access_iterator_tag,
+#endif
+		typename Vector::value_type,
+		conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>,
+		conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>,
+		typename Vector::difference_type, typename Vector::size_type
+	>;
 	using iterator			= vector_iterator<false, container_type>;
 	using const_iterator	= vector_iterator<true, container_type>;
 
 public:
-#ifdef MSTL_VERSION_20__
-	using iterator_category = contiguous_iterator_tag;
-#else
-	using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
-	using value_type		= typename container_type::value_type;
-	using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-	using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
-	using difference_type	= typename container_type::difference_type;
-	using size_type			= typename container_type::size_type;
+	using iterator_category = typename base_type::iterator_category;
+	using value_type		= typename base_type::value_type;
+	using reference			= typename base_type::reference;
+	using pointer			= typename base_type::pointer;
+	using difference_type	= typename base_type::difference_type;
+	using size_type			= typename base_type::size_type;
 
 	using self				= vector_iterator<IsConst, container_type>;
 
@@ -192,22 +209,35 @@ public:
 };
 
 template <typename T, typename Alloc = allocator<T>>
-class vector {
+class vector : public collector<vector<T, Alloc>, T,
+	vector_iterator<false, vector<T, Alloc>>,
+	vector_iterator<true, vector<T, Alloc>>
+> {
 #ifdef MSTL_VERSION_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
 	static_assert(is_object_v<T>, "vector only contains object types.");
 
-public:
-	MSTL_BUILD_TYPE_ALIAS(T)
-	using allocator_type			= Alloc;
-	using self						= vector<T, Alloc>;
+	using base_type = collector<vector, T,
+		vector_iterator<false, vector>,
+		vector_iterator<true, vector>
+	>;
 
-	using iterator					= vector_iterator<false, self>;
-	using const_iterator			= vector_iterator<true, self>;
-	using reverse_iterator			= _MSTL reverse_iterator<iterator>;
-	using const_reverse_iterator	= _MSTL reverse_iterator<const_iterator>;
+public:
+	using value_type		= typename base_type::value_type;
+	using reference			= typename base_type::reference;
+	using const_reference	= typename base_type::const_reference;
+	using pointer			= typename base_type::pointer;
+	using const_pointer		= typename base_type::const_pointer;
+	using difference_type	= typename base_type::difference_type;
+	using size_type			= typename base_type::size_type;
+	using iterator					= typename base_type::iterator;
+	using const_iterator			= typename base_type::const_iterator;
+	using reverse_iterator			= typename base_type::reverse_iterator;
+	using const_reverse_iterator	= typename base_type::const_reverse_iterator;
+	using allocator_type	= Alloc;
+	using self				= vector<T, Alloc>;
 
 private:
 	pointer start_ = nullptr;
@@ -427,7 +457,7 @@ public:
 	MSTL_NODISCARD MSTL_CONSTEXPR20 size_type size() const noexcept {
 		return static_cast<size_type>(finish_ - start_);
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 size_type max_size() const noexcept {
+	MSTL_NODISCARD static constexpr size_type max_size() noexcept {
 		return static_cast<size_type>(-1) / sizeof(T);
 	}
 	MSTL_NODISCARD MSTL_CONSTEXPR20 size_type capacity() const noexcept {
@@ -534,7 +564,7 @@ public:
 		--finish_;
 	}
 
-	MSTL_CONSTEXPR20 void assign(size_type n, const T& value) {
+	MSTL_CONSTEXPR20 void assign(size_type n, const value_type& value) {
 		if (n > this->capacity()) {
 			this->reserve(n);
 			this->insert(this->begin(), n, value);
@@ -554,18 +584,18 @@ public:
 		this->assign_aux(first, last);
 	}
 
-	MSTL_CONSTEXPR20 void assign(std::initializer_list<T> l) {
+	MSTL_CONSTEXPR20 void assign(std::initializer_list<value_type> l) {
 		this->assign(l.begin(), l.end());
 	}
 
-	MSTL_CONSTEXPR20 iterator insert(iterator position, const T& x) {
+	MSTL_CONSTEXPR20 iterator insert(iterator position, const value_type& x) {
 		size_type n = position - this->begin();
 		this->emplace(position, x);
 		return this->begin() + n;
 	}
-	MSTL_CONSTEXPR20 iterator insert(iterator position, T&& x) {
+	MSTL_CONSTEXPR20 iterator insert(iterator position, value_type&& x) {
 		size_type n = position - this->begin();
-		this->emplace(position, _MSTL forward<T>(x));
+		this->emplace(position, _MSTL move(x));
 		return this->begin() + n;
 	}
 
@@ -576,15 +606,15 @@ public:
 	template <typename Iterator>
 	MSTL_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
 		MSTL_DEBUG_VERIFY(
-			distance(first, last) >= 0, "vector insert resource iterator out of ranges."
+			_MSTL distance(first, last) >= 0, "vector insert resource iterator out of ranges."
 		);
 		this->range_insert(position, first, last);
 	}
 
-	MSTL_CONSTEXPR20 void insert(iterator position, std::initializer_list<T> l) {
+	MSTL_CONSTEXPR20 void insert(iterator position, std::initializer_list<value_type> l) {
 		this->range_insert(position, l.begin(), l.end());
 	}
-	MSTL_CONSTEXPR20 void insert(iterator position, size_type n, const T& x) {
+	MSTL_CONSTEXPR20 void insert(iterator position, size_type n, const value_type& x) {
 		if (n == 0) return;
 		if (static_cast<size_type>(pair_.value - finish_) >= n) {
 			const size_type elems_after = _MSTL distance(this->begin(), position);
@@ -642,12 +672,6 @@ public:
 		return position;
 	}
 
-	MSTL_CONSTEXPR20 void clear() noexcept {
-	    if (this->empty()) return;
-	    _MSTL destroy(start_, finish_);
-	    finish_ = start_;
-	}
-
 	MSTL_CONSTEXPR20 void shrink_to_fit() {
 		if (this->capacity() == this->size()) return;
 		if (this->size() == 0) {
@@ -662,6 +686,12 @@ public:
 		start_ = new_start;
 		finish_ = new_finish;
 		pair_.value = new_start + this->size();
+	}
+
+	MSTL_CONSTEXPR20 void clear() noexcept {
+		if (this->empty()) return;
+		_MSTL destroy(start_, finish_);
+		finish_ = start_;
 	}
 
 	MSTL_CONSTEXPR20 void swap(self& x) noexcept {
@@ -684,6 +714,31 @@ public:
 	MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type position) noexcept {
 		return this->at(position);
 	}
+
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& rh) const
+	noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
+		return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+	}
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const self& rh) const
+	noexcept(noexcept(!(*this == rh))) {
+		return !(*this == rh);
+	}
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const self& rh) const
+	noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
+		return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+	}
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const self& rh) const
+	noexcept(noexcept(rh < *this)) {
+		return rh < *this;
+	}
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const self& rh) const
+	noexcept(noexcept(!(*this < rh))) {
+		return !(*this < rh);
+	}
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const self& rh) const
+	noexcept(noexcept(!(*this > rh))) {
+		return !(*this > rh);
+	}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename T, typename Alloc>
@@ -692,35 +747,6 @@ vector(T, Alloc = Alloc()) -> vector<T, Alloc>;
 template <typename Iterator, typename Alloc>
 vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_val_t<Iterator>, Alloc>;
 #endif
-
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return lh.size() == rh.size() && _MSTL equal(lh.cbegin(), lh.cend(), rh.cbegin());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return !(lh == rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return _MSTL lexicographical_compare(lh.cbegin(), lh.cend(), rh.cbegin(), rh.cend());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return rh < lh;
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return !(lh < rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const vector<T, Alloc>& lh, const vector<T, Alloc>& rh) {
-	return !(lh > rh);
-}
-template <typename T, typename Alloc>
-MSTL_CONSTEXPR20 void swap(vector<T, Alloc>& x, vector<T, Alloc>& y) noexcept {
-	x.swap(y);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_VECTOR_HPP__

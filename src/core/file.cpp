@@ -98,12 +98,12 @@ file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     time_type ft = {0, 0};
     ::SYSTEMTIME st_local;
-    st_local.wYear = static_cast<::WORD>(dt.get_year());
-    st_local.wMonth = static_cast<::WORD>(dt.get_month());
-    st_local.wDay = static_cast<::WORD>(dt.get_day());
-    st_local.wHour = static_cast<::WORD>(dt.get_hours());
-    st_local.wMinute = static_cast<::WORD>(dt.get_minutes());
-    st_local.wSecond = static_cast<::WORD>(dt.get_seconds());
+    st_local.wYear = static_cast<::WORD>(dt.year());
+    st_local.wMonth = static_cast<::WORD>(dt.month());
+    st_local.wDay = static_cast<::WORD>(dt.day());
+    st_local.wHour = static_cast<::WORD>(dt.hours());
+    st_local.wMinute = static_cast<::WORD>(dt.minutes());
+    st_local.wSecond = static_cast<::WORD>(dt.seconds());
     st_local.wMilliseconds = 0;
 
     ::SYSTEMTIME st_utc;
@@ -224,11 +224,14 @@ bool file::open(
     write_buffer_pos_ = 0;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    handle_ = ::CreateFileA(path.c_str(),
-        static_cast<file_flag_type>(access),
-        static_cast<file_flag_type>(share_mode),
-        nullptr, static_cast<file_flag_type>(creation),
-        static_cast<file_flag_type>(attributes), nullptr);
+    handle_ = ::CreateFileA(
+        path.c_str(),
+        static_cast<size_t>(access),
+        static_cast<size_t>(share_mode),
+        nullptr, static_cast<size_t>(creation),
+        static_cast<size_t>(attributes),
+        nullptr
+        );
 #elif defined(MSTL_PLATFORM_LINUX__)
     int flags = static_cast<file_flag_type>(access);
     flags |= static_cast<file_flag_type>(creation);
@@ -533,8 +536,7 @@ bool file::seek(const difference_type distance, FILE_POINTER method) const noexc
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::LARGE_INTEGER li;
     li.QuadPart = distance;
-    return ::SetFilePointerEx(handle_, li,
-        nullptr, static_cast<file_flag_type>(method)) != 0;
+    return ::SetFilePointerEx(handle_, li, nullptr, static_cast<size_t>(method)) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     const ::off_t ret = ::lseek(handle_, distance, static_cast<int>(method));
     return ret != static_cast<off_t>(-1);
@@ -597,8 +599,7 @@ bool file::lock(const difference_type offset,
     ov.OffsetHigh = static_cast<size_type>(offset_64 >> 32);
 
     const uint64_t length_64 = length;
-    return ::LockFileEx(handle_, static_cast<file_flag_type>(mode), 0,
-        length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
+    return ::LockFileEx(handle_, static_cast<size_t>(mode), 0, length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
     if ((mode & FILE_LOCK::EXCLUSIVE) != FILE_LOCK::SHARED) {
@@ -658,7 +659,7 @@ bool file::set_attributes(FILE_ATTRI attr) const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE())
         return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetFileAttributesA(path_.c_str(), static_cast<file_flag_type>(attr)) != 0;
+    return ::SetFileAttributesA(path_.c_str(), static_cast<size_t>(attr)) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat st_old{};
     if (::fstat(handle_, &st_old) == -1) {

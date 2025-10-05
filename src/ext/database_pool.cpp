@@ -1,4 +1,5 @@
 #include <MSTL/ext/database_pool.hpp>
+#include <MSTL/core/object.hpp>
 MSTL_BEGIN_NAMESPACE__
 #ifdef MSTL_SUPPORT_DB__
 
@@ -89,16 +90,11 @@ bool db_mysql_result::at_bool(const size_type n) const {
     MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
     if (column_types_->at(n) != MYSQL_TYPE_BOOL)
         Exception(DatabaseTypeCastError("database type cast to bool mismatch"));
-    return static_cast<bool>(to_int8(cursor[n]));
+    return static_cast<bool>(boolean::parse(cursor[n]));
 }
 
 int8_t db_mysql_result::at_int8(const size_type n) const {
-    MSTL_DEBUG_VERIFY(cursor, "database_result_row_value can`t dereference nullptr.")
-    MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
-    const auto type = column_types_->at(n);
-    if (!(type == MYSQL_TYPE_TINY || type == MYSQL_TYPE_BOOL))
-        Exception(DatabaseTypeCastError("database type cast to int8 mismatch"));
-    return to_int8(cursor[n]);
+    return static_cast<int8_t>(this->at_int16(n));
 }
 
 int16_t db_mysql_result::at_int16(const size_type n) const {
@@ -107,7 +103,7 @@ int16_t db_mysql_result::at_int16(const size_type n) const {
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY || type == MYSQL_TYPE_BOOL))
         Exception(DatabaseTypeCastError("database type cast to int16 mismatch"));
-    return to_int16(cursor[n]);
+    return integer16::parse(cursor[n]);
 }
 
 int32_t db_mysql_result::at_int32(const size_type n) const {
@@ -117,7 +113,7 @@ int32_t db_mysql_result::at_int32(const size_type n) const {
     if (!(type == MYSQL_TYPE_LONG || type == MYSQL_TYPE_INT24 || type == MYSQL_TYPE_SHORT ||
         type == MYSQL_TYPE_TINY || type == MYSQL_TYPE_BOOL))
         Exception(DatabaseTypeCastError("database type cast to int32 mismatch"));
-    return to_int32(cursor[n]);
+    return integer32::parse(cursor[n]);
 }
 
 int64_t db_mysql_result::at_int64(const size_type n) const {
@@ -127,7 +123,7 @@ int64_t db_mysql_result::at_int64(const size_type n) const {
     if (!(type == MYSQL_TYPE_LONGLONG || type == MYSQL_TYPE_LONG || type == MYSQL_TYPE_INT24 ||
         type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY || type == MYSQL_TYPE_BOOL))
         Exception(DatabaseTypeCastError("database type cast to int64 mismatch"));
-    return to_int64(cursor[n]);
+    return integer64::parse(cursor[n]);
 }
 
 float32_t db_mysql_result::at_float32(const size_type n) const {
@@ -137,7 +133,7 @@ float32_t db_mysql_result::at_float32(const size_type n) const {
     if (!(type == MYSQL_TYPE_FLOAT || type == MYSQL_TYPE_LONG
         || type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY))
         Exception(DatabaseTypeCastError("database type cast to float32 mismatch"));
-    return to_float32(cursor[n]);
+    return float32::parse(cursor[n]);
 }
 
 float64_t db_mysql_result::at_float64(const size_type n) const {
@@ -147,7 +143,7 @@ float64_t db_mysql_result::at_float64(const size_type n) const {
     if (!(type == MYSQL_TYPE_DOUBLE || type == MYSQL_TYPE_FLOAT || type == MYSQL_TYPE_LONGLONG
         || type == MYSQL_TYPE_LONG || type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY))
         Exception(DatabaseTypeCastError("database type cast to float64 mismatch"));
-    return to_float64(cursor[n]);
+    return float64::parse(cursor[n]);
 }
 
 decimal_t db_mysql_result::at_decimal(const size_type n) const {
@@ -158,7 +154,7 @@ decimal_t db_mysql_result::at_decimal(const size_type n) const {
         type == MYSQL_TYPE_FLOAT || type == MYSQL_TYPE_LONGLONG || type == MYSQL_TYPE_LONG ||
         type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY))
         Exception(DatabaseTypeCastError("database type cast to decimal mismatch"));
-    return to_decimal(cursor[n]);
+    return decimal::parse(cursor[n]);
 }
 
 _MSTL vector<char> db_mysql_result::at_blob(const size_type n) const {
@@ -201,7 +197,7 @@ _MSTL date db_mysql_result::at_date(const size_type n) const {
     MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
     if (column_types_->at(n) != MYSQL_TYPE_DATE)
         Exception(DatabaseTypeCastError("database type cast to date mismatch"));
-    return _MSTL date::from_string(cursor[n]);
+    return _MSTL date::parse(cursor[n]);
 }
 
 _MSTL time db_mysql_result::at_time(const size_type n) const {
@@ -209,7 +205,7 @@ _MSTL time db_mysql_result::at_time(const size_type n) const {
     MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
     if (column_types_->at(n) != MYSQL_TYPE_DATE)
         Exception(DatabaseTypeCastError("database type cast to time mismatch"));
-    return _MSTL time::from_string(cursor[n]);
+    return _MSTL time::parse(cursor[n]);
 }
 
 _MSTL datetime db_mysql_result::at_datetime(const size_type n) const {
@@ -217,7 +213,7 @@ _MSTL datetime db_mysql_result::at_datetime(const size_type n) const {
     MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
     if (column_types_->at(n) != MYSQL_TYPE_DATETIME)
         Exception(DatabaseTypeCastError("database type cast to datetime mismatch"));
-    return _MSTL datetime::from_string(cursor[n]);
+    return _MSTL datetime::parse(cursor[n]);
 }
 
 _MSTL timestamp db_mysql_result::at_timestamp(const size_type n) const {
@@ -225,7 +221,7 @@ _MSTL timestamp db_mysql_result::at_timestamp(const size_type n) const {
     MSTL_DEBUG_VERIFY(columns > n, "database_result_row_value out of ranges.")
     if (column_types_->at(n) != MYSQL_TYPE_TIMESTAMP)
         Exception(DatabaseTypeCastError("database type cast to timestamp mismatch"));
-    return _MSTL timestamp(_MSTL datetime::from_string(cursor[n]));
+    return _MSTL timestamp(_MSTL datetime::parse(cursor[n]));
 }
 
 string db_mysql_result::at_string(const size_type n) const noexcept {
@@ -467,17 +463,17 @@ uint64_t db_sqlite_result::at_bit(const size_type n) const noexcept {
 }
 
 _MSTL date db_sqlite_result::at_date(const size_type n) const noexcept {
-    return at_datetime(n).get_date();
+    return at_datetime(n).date();
 }
 
 _MSTL time db_sqlite_result::at_time(const size_type n) const noexcept {
-    return at_datetime(n).get_time();
+    return at_datetime(n).time();
 }
 
 _MSTL datetime db_sqlite_result::at_datetime(const size_type n) const {
     const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt, n));
     if (text) {
-        return _MSTL datetime::from_string(text);
+        return _MSTL datetime::parse(text);
     }
     return _MSTL datetime{};
 }
@@ -644,7 +640,7 @@ _MSTL string db_redis_result::format_redis_reply_element(::redisReply* element) 
         case REDIS_REPLY_ERROR:
             return {element->str, element->len};
         case REDIS_REPLY_INTEGER:
-            return to_string(element->integer);
+            return integer32(element->integer).to_string();
         case REDIS_REPLY_NIL:
             return {};
         case REDIS_REPLY_ARRAY: {
@@ -712,31 +708,31 @@ bool db_redis_result::at_bool(size_type) const {
 }
 
 int8_t db_redis_result::at_int8(size_type) const {
-    return to_int8(at_string(0).c_str());
+    return static_cast<int8_t>(this->at_int16(int()));
 }
 
 int16_t db_redis_result::at_int16(size_type) const {
-    return to_int16(at_string(0).c_str());
+    return integer16::parse(at_string(0).c_str());
 }
 
 int32_t db_redis_result::at_int32(size_type) const {
-    return to_int32(at_string(0).c_str());
+    return integer32::parse(at_string(0).c_str());
 }
 
 int64_t db_redis_result::at_int64(size_type) const {
-    return to_int64(at_string(0).c_str());
+    return integer64::parse(at_string(0).c_str());
 }
 
 float32_t db_redis_result::at_float32(size_type) const {
-    return to_float32(at_string(0).c_str());
+    return float32::parse(at_string(0).c_str());
 }
 
 float64_t db_redis_result::at_float64(size_type) const {
-    return to_float64(at_string(0).c_str());
+    return float64::parse(at_string(0).c_str());
 }
 
 decimal_t db_redis_result::at_decimal(size_type) const {
-    return to_decimal(at_string(0).c_str());
+    return decimal::parse(at_string(0).c_str());
 }
 
 vector<char> db_redis_result::at_blob(size_type) const {
@@ -758,19 +754,19 @@ uint64_t db_redis_result::at_bit(size_type) const {
 }
 
 date db_redis_result::at_date(size_type) const {
-    return date::from_string(at_string(0));
+    return date::parse(at_string(0));
 }
 
 time db_redis_result::at_time(size_type) const {
-    return time::from_string(at_string(0));
+    return time::parse(at_string(0));
 }
 
 datetime db_redis_result::at_datetime(size_type) const {
-    return datetime::from_string(at_string(0));
+    return datetime::parse(at_string(0));
 }
 
 timestamp db_redis_result::at_timestamp(size_type) const {
-    return timestamp(to_int64(at_string(0).c_str()));
+    return timestamp(integer64::parse(at_string(0).c_str()));
 }
 
 string db_redis_result::at_string(size_type) const {
@@ -805,7 +801,7 @@ bool db_redis_connect::authenticate(const string& password) const {
 bool db_redis_connect::select_database(const string& db_index) const {
     if (db_index.empty()) return true;
     try {
-        const int db = to_int32(db_index.c_str());
+        const int db = integer32::parse(db_index.c_str());
         const auto reply = static_cast<::redisReply*>(::redisCommand(context_, "SELECT %d", db));
         if (!reply || reply->type == REDIS_REPLY_ERROR) {
             if (reply) {

@@ -29,8 +29,7 @@ MSTL_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 l
 }
 MSTL_END_INNER__
 
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 uninitialized_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
     return _INNER __uninitialized_copy_aux(first, last, result);
 }
@@ -61,8 +60,7 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
 }
 MSTL_END_INNER__
 
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(
     Iterator1 first, size_t count, Iterator2 result) {
     return _INNER __uninitialized_copy_n_aux(first, count, result);
@@ -214,8 +212,8 @@ private:
     MSTL_CONSTEXPR20 void allocate_buffer() {
         original_len_ = len_;
         buffer_ = 0;
-        if (len_ > static_cast<size_type>(UINT32_MAX_SIZE / sizeof(value_type)))
-            len_ = UINT32_MAX_SIZE / sizeof(value_type);
+        if (len_ > static_cast<size_type>(UINT32_MAX_VALUE / sizeof(value_type)))
+            len_ = UINT32_MAX_VALUE / sizeof(value_type);
 
         while (len_ > 0) {
             buffer_ = static_cast<pointer>(std::malloc(len_ * sizeof(value_type)));
@@ -562,7 +560,7 @@ public:
         constexpr size_t value_size = sizeof(value_type);
         static_assert(value_size > 0, "value type must be complete before allocation called.");
         const size_t alloc_size = value_size * n;
-        MSTL_DEBUG_VERIFY(alloc_size <= UINT64_MAX_SIZE, "allocation will cause memory overflow.");
+        MSTL_DEBUG_VERIFY(alloc_size <= UINT64_MAX_VALUE, "allocation will cause memory overflow.");
         return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
     }
 

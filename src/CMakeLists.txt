@@ -126,6 +126,13 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
+        ../include/MSTL/core/vsprintf.hpp
+        ../include/MSTL/core/cstring.hpp
+        ../include/MSTL/core/interface.hpp
+        core/vsprintf.cpp
+        ../include/MSTL/core/format.hpp
+        core/console.cpp
+        ../include/MSTL/core/numeric_limits.hpp
 )
 
 # 编译为动态库

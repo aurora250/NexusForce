@@ -1,5 +1,5 @@
-﻿#ifndef MSTL_MATHLIB_H__
-#define MSTL_MATHLIB_H__
+﻿#ifndef MSTL_MATHLIB_HPP__
+#define MSTL_MATHLIB_HPP__
 #include "exception.hpp"
 #include "type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -13,38 +13,42 @@ using mathul_t	= uint64_t;
 using mathd_t	= float64_t;
 using mathld_t	= decimal_t;
 
-namespace constants {
-	static constexpr mathld_t EULER = 2.718281828459045L;
-	static constexpr mathld_t PI = 3.141592653589793L;  // radian
-	static constexpr mathld_t PHI = 1.618033988749895L;
-	static constexpr mathld_t SEMI_CIRCLE = 180.0;  // angular
-	static constexpr mathld_t CIRCLE = 360.0;
-	static constexpr mathld_t EPSILON = 1e-15L;
 
-	static constexpr mathui_t TAYLOR_CONVERGENCE = 10000U;
-	static constexpr mathld_t PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * EPSILON;
-	static constexpr mathld_t LOW_PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * PRECISE_TOLERANCE;
+MSTL_BEGIN_CONSTANTS__
 
-	static constexpr mathul_t INFINITY_INT = INT64_MAX_SIZE;
-	static constexpr mathld_t INFINITY_FLT = DECIMAL_MAX_POSI_SIZE;
+static constexpr mathld_t EULER = 2.718281828459045L;
+static constexpr mathld_t PI = 3.141592653589793L;  // radian
+static constexpr mathld_t PHI = 1.618033988749895L;
+static constexpr mathld_t SEMI_CIRCLE = 180.0;  // angular
+static constexpr mathld_t CIRCLE = 360.0;
+static constexpr mathld_t EPSILON = 1e-15L;
 
-	static constexpr mathus_t FIBONACCI_COUNT = 50;
-	static constexpr mathul_t FIBONACCI_LIST[FIBONACCI_COUNT] = {
-		0,			1,			1,			2,			3,
-		5,			8,			13,			21,			34,
-		55,			89,			144,		233,		377,
-		610,		987,		1597,		2584,		4181,
-		6765,		10946,		17711,		28657,		46368,
-		75025,		121393,		196418,		317811,		514229,
-		832040,		1346269,	2178309,	3524578,	5702887,
-		9227465,	14930352,	24157817,	39088169,	63245986,
-		102334155,	165580141,	267914296,	433494437,	701408733,
-		1134903170, 1836311903, 2971215073, 4807526976, 7778742049
-	};
-}
+static constexpr mathui_t TAYLOR_CONVERGENCE = 10000U;
+static constexpr mathld_t PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * EPSILON;
+static constexpr mathld_t LOW_PRECISE_TOLERANCE = TAYLOR_CONVERGENCE * PRECISE_TOLERANCE;
+
+static constexpr mathul_t INFINITY_INT = INT64_MAX_VALUE;
+static constexpr mathld_t INFINITY_FLT = DECIMAL_MAX_POSI_VALUE;
+
+static constexpr mathus_t FIBONACCI_COUNT = 50;
+static constexpr mathul_t FIBONACCI_LIST[FIBONACCI_COUNT] = {
+	0,			1,			1,			2,			3,
+	5,			8,			13,			21,			34,
+	55,			89,			144,		233,		377,
+	610,		987,		1597,		2584,		4181,
+	6765,		10946,		17711,		28657,		46368,
+	75025,		121393,		196418,		317811,		514229,
+	832040,		1346269,	2178309,	3524578,	5702887,
+	9227465,	14930352,	24157817,	39088169,	63245986,
+	102334155,	165580141,	267914296,	433494437,	701408733,
+	1134903170, 1836311903, 2971215073, 4807526976, 7778742049
+};
+
+MSTL_END_CONSTANTS__
+
 
 MSTL_PURE_FUNCTION constexpr mathul_t fibonacci(const mathus_t n) {
-	if (n < constants::FIBONACCI_COUNT) return constants::FIBONACCI_LIST[n];
+	if (n < _CONSTANTS FIBONACCI_COUNT) return _CONSTANTS FIBONACCI_LIST[n];
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
 MSTL_PURE_FUNCTION constexpr mathul_t leonardo(const mathus_t n) {
@@ -52,10 +56,10 @@ MSTL_PURE_FUNCTION constexpr mathul_t leonardo(const mathus_t n) {
 }
 
 MSTL_PURE_FUNCTION constexpr mathld_t angular2radian(const mathld_t angular) noexcept {
-	return angular * constants::PI / constants::SEMI_CIRCLE;
+	return angular * _CONSTANTS PI / _CONSTANTS SEMI_CIRCLE;
 }
 MSTL_PURE_FUNCTION constexpr mathld_t radian2angular(const mathld_t radian) noexcept {
-	return radian * (constants::SEMI_CIRCLE / constants::PI);
+	return radian * (_CONSTANTS SEMI_CIRCLE / _CONSTANTS PI);
 }
 
 template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
@@ -101,7 +105,7 @@ MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
 }
 
 template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION  T lcm(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION constexpr T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
 
@@ -117,12 +121,12 @@ MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
 }
 
 template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
-MSTL_CONST_FUNCTION T lcm(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION constexpr T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
 
 
-inline mathld_t float_mod(const mathld_t x, const mathld_t y) {
+MSTL_CONSTEXPR17 mathld_t float_mod(const mathld_t x, const mathld_t y) {
 	if (y == 0) Exception(MathError("zero can not be dividend."));
 	const mathld_t result = x - static_cast<int>(x / y) * y;
 	return result;
@@ -135,10 +139,10 @@ MSTL_CONST_FUNCTION constexpr T square(const T& x) noexcept { return x * x; }
 template <typename T>
 MSTL_CONST_FUNCTION constexpr T cube(const T& x) noexcept { return _MSTL square(x) * x; }
 
-template <typename T, enable_if_t<is_integral<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr mathl_t power(const T& x, mathui_t n) noexcept {
+template <typename T, typename UT, enable_if_t<conjunction_v<is_integral<T>, is_integral<UT>>, int> = 0>
+MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
 	if (n == 0) return 1;
-	mathl_t result = 1;
+	T result = 1;
 	T base = x;
 	while (n > 0) {
 		if (n % 2 == 1)
@@ -149,27 +153,18 @@ MSTL_CONST_FUNCTION constexpr mathl_t power(const T& x, mathui_t n) noexcept {
 	return result;
 }
 
-template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr mathld_t power(const T& x, mathui_t n) noexcept {
-	if (n == 0) return 1;
-	mathld_t result = 1.0;
-	T base = x;
-	while (n > 0) {
-		if (n % 2 == 1)
-			result *= base;
-		base *= base;
-		n /= 2;
-	}
-	return result;
+template <typename T, typename UT, enable_if_t<conjunction_v<is_floating_point<T>, is_integral<UT>>, int> = 0>
+MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
+	return _INNER power(x, n);
 }
 
 MSTL_PURE_FUNCTION constexpr mathld_t exponential(const mathui_t n) noexcept {
-	return power(constants::EULER, n);
+	return power(_CONSTANTS EULER, n);
 }
 
 
 MSTL_PURE_FUNCTION constexpr mathld_t logarithm_e(const mathld_t x) noexcept {
-	mathui_t N = constants::TAYLOR_CONVERGENCE;
+	mathui_t N = _CONSTANTS TAYLOR_CONVERGENCE;
 	const mathld_t a = (x - 1) / (x + 1);
 	const mathld_t a_sqrt = a * a;
 	mathld_t nk = 2 * N + 1;
@@ -201,7 +196,7 @@ MSTL_CONST_FUNCTION constexpr mathul_t cursory_lg2(mathul_t x) noexcept {
 
 
 MSTL_PURE_FUNCTION constexpr mathld_t
-square_root(const mathld_t x, const mathld_t precise = constants::PRECISE_TOLERANCE) noexcept {
+square_root(const mathld_t x, const mathld_t precise = _CONSTANTS PRECISE_TOLERANCE) noexcept {
 	mathld_t t = 0.0;
 	mathld_t result = x;
 	while (absolute(result - t) > precise) {
@@ -212,7 +207,7 @@ square_root(const mathld_t x, const mathld_t precise = constants::PRECISE_TOLERA
 }
 
 MSTL_PURE_FUNCTION constexpr mathld_t
-cube_root(const mathld_t x, const mathld_t precise = constants::PRECISE_TOLERANCE) noexcept {
+cube_root(const mathld_t x, const mathld_t precise = _CONSTANTS PRECISE_TOLERANCE) noexcept {
 	mathld_t t = 0.0;
 	mathld_t result = x;
 	while (absolute(result - t) > precise) {
@@ -294,9 +289,9 @@ MSTL_CONST_FUNCTION constexpr mathld_t truncate(const mathld_t x) noexcept {
 
 
 inline bool around_multiple(mathld_t x, mathld_t axis,
-    const mathld_t toler = constants::PRECISE_TOLERANCE) {
+    const mathld_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 
-	if (absolute(axis) < constants::PRECISE_TOLERANCE)
+	if (absolute(axis) < _CONSTANTS PRECISE_TOLERANCE)
 	    Exception(MathError("Axis Cannot be 0"));
 
 	const mathld_t multi = _MSTL round(x / axis) * axis;
@@ -304,12 +299,12 @@ inline bool around_multiple(mathld_t x, mathld_t axis,
 }
 
 inline bool around_pi(const mathld_t x,
-    const mathld_t toler = constants::LOW_PRECISE_TOLERANCE) {
-	return around_multiple(x, constants::PI, toler);
+    const mathld_t toler = _CONSTANTS LOW_PRECISE_TOLERANCE) {
+	return around_multiple(x, _CONSTANTS PI, toler);
 }
 
 inline bool around_zero(const mathld_t x,
-    const mathld_t toler = constants::PRECISE_TOLERANCE) {
+    const mathld_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 	return absolute(x) < toler;
 }
 
@@ -335,15 +330,15 @@ MSTL_PURE_FUNCTION inline mathld_t sine(mathld_t x) noexcept {
         sign = -1.0;
         x = -x;
     }
-     constexpr mathld_t twoPi = 2 * constants::PI;
+     constexpr mathld_t twoPi = 2 * _CONSTANTS PI;
     x = x - twoPi * floor(x / twoPi);
 
-    if (x > constants::PI) {
-        x -= constants::PI;
+    if (x > _CONSTANTS PI) {
+        x -= _CONSTANTS PI;
         sign = -sign;
     }
-    if (x > constants::PI / 2) {
-        x = constants::PI - x;
+    if (x > _CONSTANTS PI / 2) {
+        x = _CONSTANTS PI - x;
     }
 
     mathld_t i = 1;
@@ -359,19 +354,19 @@ MSTL_PURE_FUNCTION inline mathld_t sine(mathld_t x) noexcept {
         sum = idx / fac * neg;
         taylor += sum;
         i += 2;
-    } while (absolute(sum) > constants::EPSILON);
+    } while (absolute(sum) > _CONSTANTS EPSILON);
     const auto fin = sign * taylor;
     return around_zero(fin) ? 0 : fin;
 }
 
 MSTL_PURE_FUNCTION inline mathld_t cosine(const mathld_t x) noexcept {
-	return sine(constants::PI / 2.0 - x);
+	return sine(_CONSTANTS PI / 2.0 - x);
 }
 
 inline mathld_t tangent(const mathld_t x) {
-    mathld_t multiple = (2 * _MSTL round((2 * x - constants::PI)
-        / (2 * constants::PI)) + 1) * (constants::PI / 2);
-    if (absolute(x - multiple) < constants::LOW_PRECISE_TOLERANCE) {
+    mathld_t multiple = (2 * _MSTL round((2 * x - _CONSTANTS PI)
+        / (2 * _CONSTANTS PI)) + 1) * (_CONSTANTS PI / 2);
+    if (absolute(x - multiple) < _CONSTANTS LOW_PRECISE_TOLERANCE) {
         Exception(MathError("Tangent Range Exceeded"));
     }
 	return sine(x) / cosine(x);
@@ -387,7 +382,7 @@ MSTL_PURE_FUNCTION constexpr mathld_t __arctangent_taylor(const mathld_t x) noex
     mathld_t term = x;
     mathld_t sum = x;
     mathld_t n = 1.0;
-    while (absolute(term) > constants::EPSILON) {
+    while (absolute(term) > _CONSTANTS EPSILON) {
         term *= -x_sq;
         n += 2.0;
         sum += term / n;
@@ -399,7 +394,7 @@ MSTL_END_INNER__
 MSTL_PURE_FUNCTION constexpr mathld_t arctangent(const mathld_t x) noexcept {
     if (absolute(x) > 1) {
         const mathld_t sign = x > 0 ? 1.0 : -1.0;
-        return sign * (constants::PI / 2 - _INNER __arctangent_taylor(1 / absolute(x)));
+        return sign * (_CONSTANTS PI / 2 - _INNER __arctangent_taylor(1 / absolute(x)));
     }
 	return _INNER __arctangent_taylor(x);
 }
@@ -411,8 +406,8 @@ inline mathld_t arcsine(const mathld_t x) {
 
 inline mathld_t arccosine(const mathld_t x) {
     if (x > 1 || x < -1) Exception(MathError("Arccosine Range Exceeded"));
-    return constants::PI / 2.0 - arcsine(x);
+    return _CONSTANTS PI / 2.0 - arcsine(x);
 }
 
 MSTL_END_NAMESPACE__
-#endif
+#endif // MSTL_MATHLIB_HPP__

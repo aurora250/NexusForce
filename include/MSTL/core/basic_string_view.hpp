@@ -145,7 +145,7 @@ public:
 
 
 template <typename CharT, typename Traits>
-class basic_string_view {
+class basic_string_view : icommon<basic_string_view<CharT, Traits>> {
     static_assert(is_same_v<CharT, typename Traits::char_type>,
         "char type of basic string view should be same with char traits.");
     static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
@@ -203,6 +203,12 @@ public:
     MSTL_NODISCARD constexpr bool empty() const noexcept { return size_ == 0; }
 
     MSTL_NODISCARD constexpr const_pointer data() const noexcept { return data_; }
+    MSTL_NODISCARD constexpr const_pointer to_cstring() const noexcept { return this->data(); }
+
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+        return _INNER FNV_string_hash(this->data(), this->length());
+    }
+
     MSTL_NODISCARD constexpr const_reference front() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "cannot call front on empty string_view");
         return data_[0];
@@ -229,12 +235,6 @@ public:
     constexpr void remove_suffix(const size_type n) noexcept {
         MSTL_DEBUG_VERIFY(size_ >= n, "cannot remove suffix longer than total size");
         size_ -= n;
-    }
-
-    constexpr void swap(self& view) noexcept {
-        const self tmp(view);
-        view = *this;
-        *this = tmp;
     }
 
     constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const {
@@ -361,37 +361,20 @@ public:
         const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
     }
+
+    MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
+    MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
+    MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->compare(rh) < 0; }
+    MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
+    MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
+    MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+
+    constexpr void swap(self& view) noexcept {
+        const self tmp(view);
+        view = *this;
+        *this = tmp;
+    }
 };
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator ==(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return lh.equal_to(rh);
-}
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator !=(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return !lh.equal_to(rh);
-}
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator <(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return lh.compare(rh) < 0;
-}
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator >(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return lh.compare(rh) > 0;
-}
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator <=(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return lh.compare(rh) <= 0;
-}
-template <typename CharT, typename Traits>
-MSTL_NODISCARD constexpr bool operator >=(
-    const basic_string_view<CharT, Traits> lh, const basic_string_view<CharT, Traits> rh) noexcept {
-    return lh.compare(rh) >= 0;
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_BASIC_STRING_VIEW_HPP__

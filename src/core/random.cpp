@@ -13,7 +13,7 @@ random_lcd::seed_type& random_lcd::get_seed() {
 
 void random_lcd::set_seed(const seed_type seed) {
     if (seed == 0) {
-        get_seed() = static_cast<seed_type>(_MSTL timestamp::now().get_seconds());
+        get_seed() = static_cast<seed_type>(_MSTL timestamp::now().seconds());
     } else {
         get_seed() = seed;
     }
@@ -30,7 +30,7 @@ int random_lcd::next_int(const int min, const int max) {
 }
 
 int random_lcd::next_int() {
-    return next_int(0, INT32_MAX_SIZE);
+    return next_int(0, INT32_MAX_VALUE);
 }
 
 double random_lcd::next_double() {
@@ -84,7 +84,7 @@ size_t& random_mt::get_index() {
 void random_mt::set_seed(const seed_type seed) {
     seed_type init_seed = seed;
     if (init_seed == 0) {
-        init_seed = static_cast<seed_type>(_MSTL timestamp::now().get_seconds());
+        init_seed = static_cast<seed_type>(_MSTL timestamp::now().seconds());
     }
 
     state()[0] = init_seed;
