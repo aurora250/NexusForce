@@ -1,10 +1,11 @@
 #ifndef MSTL_CSTRING_HPP__
 #define MSTL_CSTRING_HPP__
-#include "numeric_limits.hpp"
+#include "mathlib.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__
-constexpr uint64_t SPACE_MASK =
+MSTL_INLINE17 constexpr uint64_t SPACE_MASK =
     (1ULL << 9)  |  // \t
     (1ULL << 10) |  // \n
     (1ULL << 11) |  // \v
@@ -13,31 +14,30 @@ constexpr uint64_t SPACE_MASK =
     (1ULL << 32);   // space
 MSTL_END_CONSTANTS__
 
-MSTL_BEGIN_INNER__
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_space(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr bool is_space(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (_CONSTANTS SPACE_MASK & (1ULL << uc)) != 0;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_alpha(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr bool is_alpha(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     return (uc & 0xDF) >= 'A' && (uc & 0xDF) <= 'Z';
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_digit(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr bool is_digit(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     return (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 9;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_xdigit(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr bool is_xdigit(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     const bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
     const bool is_AF = (uc & 0xF0) == 0x40 && (uc & 0x0F) >= 0x01 && (uc & 0x0F) <= 0x06;
@@ -46,44 +46,48 @@ MSTL_CONST_FUNCTION constexpr bool is_xdigit(CharT c) noexcept {
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_alpha_or_digit(CharT c) noexcept {
-    return _INNER is_alpha(c) || _INNER is_digit(c);
+MSTL_CONST_FUNCTION constexpr bool is_alpha_or_digit(const CharT c) noexcept {
+    return _MSTL is_alpha(c) || _MSTL is_digit(c);
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_digit_or_alpha(CharT c) noexcept {
-    return _INNER is_digit(c) || _INNER is_alpha(c);
+MSTL_CONST_FUNCTION constexpr bool is_digit_or_alpha(const CharT c) noexcept {
+    return _MSTL is_digit(c) || _MSTL is_alpha(c);
 }
 
 
-MSTL_CONST_FUNCTION constexpr bool is_high_surrogate(const char16_t c) {
-    return (c >= 0xD800 && c <= 0xDBFF);
+MSTL_CONST_FUNCTION constexpr bool is_high_surrogate(const char16_t c) noexcept {
+    return c >= 0xD800 && c <= 0xDBFF;
 }
 
-MSTL_CONST_FUNCTION constexpr bool is_low_surrogate(const char16_t c) {
-    return (c >= 0xDC00 && c <= 0xDFFF);
+MSTL_CONST_FUNCTION constexpr bool is_low_surrogate(const char16_t c) noexcept {
+    return c >= 0xDC00 && c <= 0xDFFF;
 }
 
-MSTL_CONST_FUNCTION constexpr uint32_t combine_surrogates(const char16_t high, const char16_t low) {
+MSTL_CONST_FUNCTION constexpr uint32_t combine_surrogates(const char16_t high, const char16_t low) noexcept {
     return 0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) + (static_cast<uint32_t>(low) - 0xDC00);
 }
 
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr CharT to_lowercase(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr CharT to_lowercase(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc >= 'A' && uc <= 'Z') return static_cast<CharT>(uc | 0x20);
     return c;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr CharT to_uppercase(CharT c) noexcept {
-    auto uc = static_cast<make_unsigned_t<CharT>>(c);
+MSTL_CONST_FUNCTION constexpr CharT to_uppercase(const CharT c) noexcept {
+    const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc >= 'a' && uc <= 'z') return static_cast<CharT>(uc & 0xDF);
     return c;
 }
 
-MSTL_END_INNER__
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_nan(const T x) {
+	return x != x;
+}
 
 
 #ifdef MSTL_COMPILER_GNUC__
@@ -118,12 +122,12 @@ namespace masm {
 // copy from source memory to destination memory with specific length.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memcpy.
-MSTL_CONSTEXPR20 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+constexpr void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 #ifdef MSTL_COMPILER_GNUC__
 	void* res = dest;
-
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 	__asm__ volatile (
 		"movq   %1, %%rsi\n\t"
 		"movq   %2, %%rdi\n\t"
@@ -134,6 +138,18 @@ MSTL_CONSTEXPR20 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RE
 		: "r" (res), "r" (src), "r" (dest), "r" (count)
 		: "rsi", "rdi", "rcx", "cc", "memory"
 	);
+#else
+	__asm__ volatile (
+       "movl   %[src], %%esi\n\t"
+       "movl   %[dest], %%edi\n\t"
+       "movl   %[count], %%ecx\n\t"
+       "cld\n\t"
+       "rep    movsb\n\t"
+       : [dest] "+r" (dest)
+       : [src] "r" (src), [count] "r" (count)
+       : "esi", "edi", "ecx", "cc", "memory"
+   );
+#endif
 	return res;
 #elif defined(MSTL_COMPILER_MSVC__)
 	return masm::masm_memory_copy(dest, src, count);
@@ -156,6 +172,7 @@ inline void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTR
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 #ifdef MSTL_COMPILER_GNUC__
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 	__asm__ volatile (
 		"movq   %1, %%rsi\n\t"
 		"movq   %2, %%rdi\n\t"
@@ -167,6 +184,19 @@ inline void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTR
 		: "r" (src), "r" (dest), "r" (count)
 		: "rsi", "rdi", "rcx", "cc", "memory"
 	);
+#else
+	__asm__ volatile (
+		"movl   %1, %%esi\n\t"
+		"movl   %2, %%edi\n\t"
+		"movl   %3, %%ecx\n\t"
+		"cld\n\t"
+		"rep    movsb\n\t"
+		"movl   %%edi, %0\n\t"
+		: "=r" (dest)
+		: "r" (src), "r" (dest), "r" (count)
+		: "esi", "edi", "ecx", "cc", "memory"
+    );
+#endif
 	return dest;
 #elif defined(MSTL_COMPILER_MSVC__)
 	return masm::masm_memory_copy_offset(dest, src, count);
@@ -382,10 +412,11 @@ MSTL_PURE_FUNCTION inline void* memory_char(const void* dest, const int value, s
 
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memmove.
-inline void* memory_move(void* dest, const void* src, size_t count) noexcept {
+MSTL_CONSTEXPR20 void* memory_move(void* dest, const void* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 #ifdef MSTL_COMPILER_GNUC__
 	void* res = dest;
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 	__asm__ volatile (
 			"movq   %1, %%rsi\n\t"
 			"movq   %2, %%rdi\n\t"
@@ -410,6 +441,31 @@ inline void* memory_move(void* dest, const void* src, size_t count) noexcept {
 			: "r" (res), "r" (src), "r" (dest), "r" (count)
 			: "rsi", "rdi", "rcx", "cc", "memory"
 		);
+#else
+	__asm__ volatile (
+		"movl   %[src_reg], %%esi\n\t"
+		"cmpl   %[src_reg], %[dest_reg]\n\t"
+		"jbe    1f\n\t"
+
+		"addl   %[count], %[src_reg]\n\t"
+		"addl   %[count], %[dest_reg]\n\t"
+		"decl   %[src_reg]\n\t"
+		"decl   %[dest_reg]\n\t"
+		"movl   %[src_reg], %%esi\n\t"
+		"std\n\t"
+		"rep    movsb\n\t"
+		"cld\n\t"
+		"jmp    2f\n\t"
+
+	"1:\n\t"
+		"cld\n\t"
+		"rep    movsb\n\t"
+	"2:"
+		: [dest_reg] "=&D" (dest)
+		: [src_reg] "r" (src), [dest] "0" (dest), [count] "c" (count)
+		: "esi", "cc", "memory"
+    );
+#endif
 	return res;
 #elif defined(MSTL_COMPILER_MSVC__)
 	return masm::masm_memory_move(dest, src, count);
@@ -441,6 +497,7 @@ inline void* memory_set(void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 #ifdef MSTL_COMPILER_GNUC__
 	void* ret = static_cast<byte_t *>(dest);
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 	__asm__ volatile (
 		"movq   %1, %%rdi\n\t"
 		"movq   %3, %%rcx\n\t"
@@ -451,6 +508,18 @@ inline void* memory_set(void* dest, const int value, size_t count) noexcept {
 		: "r" (ret), "r" (dest), "r" (value), "r" (count)
 		: "rdi", "rcx", "rax", "cc", "memory"
 	);
+#else
+	__asm__ volatile (
+		"movl   %[dest], %%edi\n\t"
+		"movl   %[count], %%ecx\n\t"
+		"movb   %b[value], %%al\n\t"
+		"cld\n\t"
+		"rep    stosb\n\t"
+		: [dest] "+r" (dest)
+		: [value] "q" (value), [count] "r" (count)
+		: "edi", "ecx", "eax", "cc", "memory"
+    );
+#endif
 	return ret;
 #elif defined(MSTL_COMPILER_MSVC__)
 	return masm::masm_memory_set(dest, value, count);
@@ -627,7 +696,7 @@ inline void* memory_frobnicate(void* s, const size_t n) {
 // copy from source string to destination string.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::strcpy.
-MSTL_CONSTEXPR14 char* string_copy(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
+constexpr char* string_copy(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	char* ret = dest;
 	while (*src != '\0') {
@@ -640,7 +709,7 @@ MSTL_CONSTEXPR14 char* string_copy(char* MSTL_RESTRICT dest, const char* MSTL_RE
 }
 
 // stpcpy
-MSTL_CONSTEXPR14 char* string_copy_offset(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
+constexpr char* string_copy_offset(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	while (*src != '\0') {
 		*dest = *src;
@@ -654,7 +723,7 @@ MSTL_CONSTEXPR14 char* string_copy_offset(char* MSTL_RESTRICT dest, const char* 
 // concatenate source string to the tail of destination string.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::strcat.
-MSTL_CONSTEXPR14 char* string_concatenate(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
+constexpr char* string_concatenate(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	char* original_dest = dest;
 	while (*dest != '\0')
@@ -673,7 +742,7 @@ MSTL_CONSTEXPR14 char* string_concatenate(char* MSTL_RESTRICT dest, const char* 
 // return a positive number when left-hand string is greater, a negative number when right-hand string is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::strcmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare(const char* dest, const char* src) noexcept {
+MSTL_PURE_FUNCTION constexpr int string_compare(const char* dest, const char* src) noexcept {
 	if (dest == nullptr && src == nullptr) return 0;
 	if (dest == nullptr) return -1;
 	if (src == nullptr) return 1;
@@ -691,14 +760,14 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare(const char* dest, const c
 // return a positive number when left-hand string is greater, a negative number when right-hand string is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::stricmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare_ignore_case(const char* s1, const char* s2) {
+MSTL_PURE_FUNCTION constexpr int string_compare_ignore_case(const char* s1, const char* s2) {
 	if (s1 == nullptr && s2 == nullptr) return 0;
 	if (s1 == nullptr) return -1;
 	if (s2 == nullptr) return 1;
 
 	while (*s1 && *s2) {
-		const char c1 = _INNER to_lowercase(*s1);
-		const char c2 = _INNER to_lowercase(*s2);
+		const char c1 = _MSTL to_lowercase(*s1);
+		const char c2 = _MSTL to_lowercase(*s2);
 		if (c1 < c2) return -1;
 		if (c1 > c2) return 1;
 		++s1;
@@ -707,28 +776,28 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare_ignore_case(const char* s
 	return *s1 == *s2 ? 0 : *s1 < *s2 ? -1 : 1;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare_natural(const char* s1, const char* s2) noexcept {
+MSTL_PURE_FUNCTION constexpr int string_compare_natural(const char* s1, const char* s2) noexcept {
 	if (s1 == nullptr && s2 == nullptr) return 0;
 	if (s1 == nullptr) return -1;
 	if (s2 == nullptr) return 1;
 
 	while (*s1 != '\0' && *s2 != '\0') {
-		if (_INNER is_digit(*s1) && _INNER is_digit(*s2)) {
+		if (_MSTL is_digit(*s1) && _MSTL is_digit(*s2)) {
 			const char* s1_skip_zero = s1;
-			while (*s1_skip_zero == '0' && _INNER is_digit(*(s1_skip_zero + 1))) {
+			while (*s1_skip_zero == '0' && _MSTL is_digit(*(s1_skip_zero + 1))) {
 				s1_skip_zero++;
 			}
 			const char* s2_skip_zero = s2;
-			while (*s2_skip_zero == '0' && _INNER is_digit(*(s2_skip_zero + 1))) {
+			while (*s2_skip_zero == '0' && _MSTL is_digit(*(s2_skip_zero + 1))) {
 				s2_skip_zero++;
 			}
 
 			const char* s1_end = s1_skip_zero;
-			while (_INNER is_digit(*s1_end)) s1_end++;
+			while (_MSTL is_digit(*s1_end)) s1_end++;
 			const size_t len1 = s1_end - s1_skip_zero;
 
 			const char* s2_end = s2_skip_zero;
-			while (_INNER is_digit(*s2_end)) s2_end++;
+			while (_MSTL is_digit(*s2_end)) s2_end++;
 			const size_t len2 = s2_end - s2_skip_zero;
 
 			if (len1 != len2) {
@@ -754,7 +823,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_compare_natural(const char* s1, c
 
 // return the length of string when the loop encounter '\0'
 // it`s similar with std::strlen.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_length(const char* str) noexcept {
+MSTL_PURE_FUNCTION constexpr size_t string_length(const char* str) noexcept {
 	const char* p = str;
 	while (*p != '\0')
 		++p;
@@ -764,7 +833,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_length(const char* str) noexce
 // return a pointer which is pointing to the first place that equal to target character.
 // if parameter pointer is nullptr, return nullptr. if not found, return nullptr.
 // it`s similar with std::strchr.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_char(const char* str, const char chr) noexcept {
+MSTL_PURE_FUNCTION constexpr const char* string_char(const char* str, const char chr) noexcept {
 	if (str == nullptr) return nullptr;
 	while (*str != '\0') {
 		if (*str == static_cast<char>(chr))
@@ -780,7 +849,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_char(const char* str, con
 // return a pointer which is pointing to the last place that equal to target character.
 // if parameter pointer is nullptr, return nullptr. if not found, return nullptr.
 // it`s similar with std::strchr.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_last_char(const char* str, const char chr) noexcept {
+MSTL_PURE_FUNCTION constexpr const char* string_last_char(const char* str, const char chr) noexcept {
 	if (str == nullptr) return nullptr;
 	const char* last = nullptr;
 
@@ -795,7 +864,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_last_char(const char* str
 // return the index which is pointing to the last place that equal to target character.
 // if any parameter pointer is nullptr, return zero. if not found, return nullptr.
 // it`s similar with std::strspn.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_span_in(const char* str, const char* accept) noexcept {
+MSTL_PURE_FUNCTION constexpr size_t string_span_in(const char* str, const char* accept) noexcept {
 	if (str == nullptr || *str == '\0' || accept == nullptr || *accept == '\0')
 		return 0;
 
@@ -817,7 +886,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_span_in(const char* str, const
 	return static_cast<size_t>(str - original_str);
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_span_not_in(const char* str, const char* reject) noexcept {
+MSTL_PURE_FUNCTION constexpr size_t string_span_not_in(const char* str, const char* reject) noexcept {
 	if (str == nullptr || *str == '\0') return 0;
 	if (reject == nullptr || *reject == '\0') {
 		size_t len = 0;
@@ -838,7 +907,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_span_not_in(const char* str, c
 	return static_cast<size_t>(str - original_str);
 }
 
-MSTL_CONSTEXPR14 char* string_to_lowercase(char* str) noexcept {
+constexpr char* string_to_lowercase(char* str) noexcept {
 	if (str == nullptr) return nullptr;
 
 	constexpr size_t diff = 'a' - 'A';
@@ -851,7 +920,7 @@ MSTL_CONSTEXPR14 char* string_to_lowercase(char* str) noexcept {
 	return original;
 }
 
-MSTL_CONSTEXPR14 char* string_to_uppercase(char* str) noexcept {
+constexpr char* string_to_uppercase(char* str) noexcept {
 	if (str == nullptr) return nullptr;
 
 	constexpr size_t diff = 'a' - 'A';
@@ -865,7 +934,7 @@ MSTL_CONSTEXPR14 char* string_to_uppercase(char* str) noexcept {
 }
 
 // same to std::strpbrk
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 char* string_find_any(char* str, const char* accept) noexcept {
+MSTL_PURE_FUNCTION constexpr char* string_find_any(char* str, const char* accept) noexcept {
 	if (str == nullptr || *str == '\0' || accept == nullptr || *accept == '\0')
 		return nullptr;
 
@@ -881,7 +950,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 char* string_find_any(char* str, const char*
 	return nullptr;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_in_string(const char* dest, const char* src) noexcept {
+MSTL_PURE_FUNCTION constexpr const char* string_in_string(const char* dest, const char* src) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	const char* cur = dest;
 	while (*cur) {
@@ -897,7 +966,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_in_string(const char* des
 	return nullptr;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_in_string_ignored_case(const char* dest, const char* src) noexcept {
+MSTL_PURE_FUNCTION constexpr const char* string_in_string_ignored_case(const char* dest, const char* src) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	if (*src == '\0') return dest;
 
@@ -906,8 +975,8 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const char* string_in_string_ignored_case(co
 		const char* str1 = cur;
 		const char* str2 = src;
 		while (*str1 && *str2) {
-			const char c1 = _INNER to_lowercase(*str1);
-			const char c2 = _INNER to_lowercase(*str2);
+			const char c1 = _MSTL to_lowercase(*str1);
+			const char c2 = _MSTL to_lowercase(*str2);
 			if (c1 != c2) break;
 			str1++;
 			str2++;
@@ -982,18 +1051,7 @@ MSTL_CONSTEXPR23 char* string_last_token(char* MSTL_RESTRICT str, const char* MS
 	return token_start;
 }
 
-MSTL_MALLOC_FUNCTION MSTL_CONSTEXPR20 char* string_duplicate(const char* str) noexcept {
-	if (str == nullptr) return nullptr;
-
-	const size_t len = string_length(str);
-	const auto new_str = static_cast<char*>(std::malloc(len + 1));
-	if (new_str == nullptr) return nullptr;
-
-	string_copy(new_str, str);
-	return new_str;
-}
-
-MSTL_CONSTEXPR14 char* string_set(char* str, const char value) noexcept {
+constexpr char* string_set(char* str, const char value) noexcept {
 	if (str == nullptr) return nullptr;
 	char* original = str;
 	while (*str != '\0') {
@@ -1003,7 +1061,7 @@ MSTL_CONSTEXPR14 char* string_set(char* str, const char value) noexcept {
 	return original;
 }
 
-MSTL_CONSTEXPR14 char* string_reverse(char* str) noexcept {
+constexpr char* string_reverse(char* str) noexcept {
 	if (str == nullptr || *str == '\0') return str;
 
 	char* end = str;
@@ -1020,7 +1078,7 @@ MSTL_CONSTEXPR14 char* string_reverse(char* str) noexcept {
 }
 
 
-MSTL_CONSTEXPR14 char* string_n_copy(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src, const size_t count) noexcept {
+constexpr char* string_n_copy(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src, const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	char* ret = dest;
 	size_t i = 0;
@@ -1039,7 +1097,7 @@ MSTL_CONSTEXPR14 char* string_n_copy(char* MSTL_RESTRICT dest, const char* MSTL_
 }
 
 // stpncpy
-MSTL_CONSTEXPR14 char* string_n_copy_offset(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src, const size_t count) noexcept {
+constexpr char* string_n_copy_offset(char* MSTL_RESTRICT dest, const char* MSTL_RESTRICT src, const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	size_t i = 0;
 	while (i < count && *src != '\0') {
@@ -1056,7 +1114,7 @@ MSTL_CONSTEXPR14 char* string_n_copy_offset(char* MSTL_RESTRICT dest, const char
 	return dest;
 }
 
-MSTL_CONSTEXPR14 char* string_n_concatenate(char* MSTL_RESTRICT dest,
+constexpr char* string_n_concatenate(char* MSTL_RESTRICT dest,
     const char* MSTL_RESTRICT src, const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
@@ -1074,7 +1132,7 @@ MSTL_CONSTEXPR14 char* string_n_concatenate(char* MSTL_RESTRICT dest,
 	return original_dest;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_n_compare(
+MSTL_PURE_FUNCTION constexpr int string_n_compare(
     const char* dest, const char* src, const size_t count) noexcept {
 	if (dest == nullptr && src == nullptr) return 0;
 	if (dest == nullptr) return -1;
@@ -1091,7 +1149,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_n_compare(
 	return *dest < *src ? -1 : *dest > *src ? 1 : 0;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_n_compare_ignore_case(
+MSTL_PURE_FUNCTION constexpr int string_n_compare_ignore_case(
     const char* s1, const char* s2, const size_t count) noexcept {
 	if ((s1 == nullptr && s2 == nullptr) || count == 0) return 0;
 	if (s1 == nullptr) return -1;
@@ -1099,8 +1157,8 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_n_compare_ignore_case(
 
 	size_t i = 0;
 	while (*s1 && *s2 && i < count - 1) {
-		const char c1 = _INNER to_lowercase(*s1);
-		const char c2 = _INNER to_lowercase(*s2);
+		const char c1 = _MSTL to_lowercase(*s1);
+		const char c2 = _MSTL to_lowercase(*s2);
 		if (c1 < c2) return -1;
 		if (c1 > c2) return 1;
 		++s1;
@@ -1109,12 +1167,12 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int string_n_compare_ignore_case(
 	}
 	if (i == count - 1) return 0;
 
-	const char c1 = _INNER to_lowercase(*s1);
-	const char c2 = _INNER to_lowercase(*s2);
+	const char c1 = _MSTL to_lowercase(*s1);
+	const char c2 = _MSTL to_lowercase(*s2);
 	return c1 < c2 ? -1 : c1 > c2 ? 1 : 0;
 }
 
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_n_length(
+MSTL_PURE_FUNCTION constexpr size_t string_n_length(
     const char* str, const size_t max_len) noexcept {
 	const char* p = str;
 	ptrdiff_t len = 0;
@@ -1125,7 +1183,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 size_t string_n_length(
 	return len;
 }
 
-MSTL_CONSTEXPR14 char* string_n_set(char* str,
+constexpr char* string_n_set(char* str,
     const char value, const size_t count) noexcept {
 	if (str == nullptr || count == 0) return str;
 	char* original = str;
@@ -1140,7 +1198,7 @@ MSTL_CONSTEXPR14 char* string_n_set(char* str,
 
 
 // strlcpy
-MSTL_CONSTEXPR14 size_t string_copy_safe(char* MSTL_RESTRICT dest,
+constexpr size_t string_copy_safe(char* MSTL_RESTRICT dest,
     const char* MSTL_RESTRICT src, const size_t size) noexcept {
 	if (dest == nullptr || src == nullptr || size == 0) {
 		return src != nullptr ? string_length(src) : 0;
@@ -1163,7 +1221,7 @@ MSTL_CONSTEXPR14 size_t string_copy_safe(char* MSTL_RESTRICT dest,
 	return src_length;
 }
 
-MSTL_CONSTEXPR14 size_t string_concatenate_safe(char* MSTL_RESTRICT dest,
+constexpr size_t string_concatenate_safe(char* MSTL_RESTRICT dest,
     const char* MSTL_RESTRICT src, const size_t size) noexcept {
 	const size_t src_size_len = string_n_length(src, size);
 	if (dest == nullptr || src == nullptr || size == 0) {
@@ -1194,7 +1252,7 @@ MSTL_CONSTEXPR14 size_t string_concatenate_safe(char* MSTL_RESTRICT dest,
 }
 
 
-MSTL_CONSTEXPR14 wchar_t* wchar_memory_copy(wchar_t* dest, const wchar_t* src, size_t count) noexcept {
+constexpr wchar_t* wchar_memory_copy(wchar_t* dest, const wchar_t* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	wchar_t* res = dest;
 	while (count--) {
@@ -1205,7 +1263,7 @@ MSTL_CONSTEXPR14 wchar_t* wchar_memory_copy(wchar_t* dest, const wchar_t* src, s
 	return res;
 }
 
-MSTL_CONSTEXPR14 int wchar_memory_compare(const wchar_t* dest, const wchar_t* src, size_t count) noexcept {
+constexpr int wchar_memory_compare(const wchar_t* dest, const wchar_t* src, size_t count) noexcept {
 	if (dest == nullptr && src == nullptr) return 0;
 	if (dest == nullptr) return -1;
 	if (src == nullptr) return 1;
@@ -1218,7 +1276,7 @@ MSTL_CONSTEXPR14 int wchar_memory_compare(const wchar_t* dest, const wchar_t* sr
 	return 0;
 }
 
-MSTL_CONSTEXPR14 wchar_t* wchar_memory_char(const wchar_t* dest, const wchar_t value, size_t count) noexcept {
+constexpr wchar_t* wchar_memory_char(const wchar_t* dest, const wchar_t value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 	const wchar_t* p = dest;
 	while (count--) {
@@ -1229,12 +1287,12 @@ MSTL_CONSTEXPR14 wchar_t* wchar_memory_char(const wchar_t* dest, const wchar_t v
 	return nullptr;
 }
 
-MSTL_CONSTEXPR14 wchar_t* wchar_memory_move(wchar_t* dest, const wchar_t* src, const size_t count) noexcept {
+constexpr wchar_t* wchar_memory_move(wchar_t* dest, const wchar_t* src, const size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	return static_cast<wchar_t *>(memory_move(dest, src, count * sizeof(wchar_t)));
 }
 
-MSTL_CONSTEXPR14 wchar_t* wchar_memory_set(wchar_t* dest, const wchar_t value, size_t count) noexcept {
+constexpr wchar_t* wchar_memory_set(wchar_t* dest, const wchar_t value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 	wchar_t* ret = dest;
 	while (count--) {
@@ -1245,14 +1303,14 @@ MSTL_CONSTEXPR14 wchar_t* wchar_memory_set(wchar_t* dest, const wchar_t value, s
 }
 
 
-MSTL_CONSTEXPR14 ptrdiff_t wstring_length(const wchar_t* str) noexcept {
+constexpr ptrdiff_t wstring_length(const wchar_t* str) noexcept {
 	const wchar_t* p = str;
 	while (*p != L'\0') ++p;
 	return p - str;
 }
 
 #ifdef MSTL_VERSION_20__
-MSTL_CONSTEXPR14 ptrdiff_t u8string_length(const char8_t* str) noexcept {
+constexpr ptrdiff_t u8string_length(const char8_t* str) noexcept {
 	const char8_t* p = str;
 	while (*p != u8'\0')
 		++p;
@@ -1260,14 +1318,14 @@ MSTL_CONSTEXPR14 ptrdiff_t u8string_length(const char8_t* str) noexcept {
 }
 #endif
 
-MSTL_CONSTEXPR14 ptrdiff_t u16string_length(const char16_t* str) noexcept {
+constexpr ptrdiff_t u16string_length(const char16_t* str) noexcept {
 	const char16_t* p = str;
 	while (*p != u'\0')
 		++p;
 	return p - str;
 }
 
-MSTL_CONSTEXPR14 ptrdiff_t u32string_length(const char32_t* str) noexcept {
+constexpr ptrdiff_t u32string_length(const char32_t* str) noexcept {
 	const char32_t* p = str;
 	while (*p != U'\0')
 		++p;
@@ -1480,7 +1538,7 @@ MSTL_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     if (exp < 0 && -exp <= max_table_exp) {
 	    return neg_pow10_table[-exp];
     }
-    return static_cast<T>(_INNER power(10.0, exp));
+    return static_cast<T>(_MSTL power(10.0, exp));
 }
 
 template <typename T>
@@ -1491,7 +1549,7 @@ constexpr T str_to_floats(const char* str, char** endptr) {
     }
 
     const char* p = str;
-    while (_INNER is_space(*p)) p++;
+    while (_MSTL is_space(*p)) p++;
     const char* start_conversion = p;
 
     int sign = 1;
@@ -1502,7 +1560,7 @@ constexpr T str_to_floats(const char* str, char** endptr) {
         p++;
     }
 
-    if (_INNER to_lowercase(*p) == 'i') {
+    if (_MSTL to_lowercase(*p) == 'i') {
         if (_MSTL string_n_compare_ignore_case(p, "inf", 3) == 0) {
             p += 3;
             if (_MSTL string_n_compare_ignore_case(p, "inity", 5) == 0) {
@@ -1511,7 +1569,7 @@ constexpr T str_to_floats(const char* str, char** endptr) {
             if (endptr) *endptr = const_cast<char*>(p);
             return sign * numeric_limits<T>::max();
         }
-    } else if (_INNER to_lowercase(*p) == 'n') {
+    } else if (_MSTL to_lowercase(*p) == 'n') {
         if (_MSTL string_n_compare_ignore_case(p, "nan", 3) == 0) {
             p += 3;
             if (*p == '(') {
@@ -1631,6 +1689,86 @@ constexpr double strtod(const char* str, char** endptr) {
 }
 constexpr long double strtold(const char* str, char** endptr) {
 	return _INNER str_to_floats<long double>(str, endptr);
+}
+
+
+MSTL_NODISCARD constexpr float32_t to_float32(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const float32_t num = _MSTL strtof(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr float64_t to_float64(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const float64_t num = _MSTL strtod(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr decimal_t to_decimal(const char* str, size_t* idx = nullptr) {
+    char* endptr;
+    const decimal_t num = _MSTL strtold(str, &endptr);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr int64_t to_int64(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const int64_t num = _MSTL strtoll(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr uint64_t to_uint64(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const uint64_t num = _MSTL strtoull(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr int32_t to_int32(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const int32_t num = _MSTL strtol(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr uint32_t to_uint32(const char* str, size_t* idx = nullptr, const int base = 10) {
+    char* endptr;
+    const uint32_t num = _MSTL strtoul(str, &endptr, base);
+    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+
+    if (idx) *idx = static_cast<size_t>(endptr - str);
+    return num;
+}
+
+MSTL_NODISCARD constexpr int16_t to_int16(const char* str, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<int16_t>(to_int32(str, idx, base));
+}
+
+MSTL_NODISCARD constexpr uint16_t to_uint16(const char* str, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<int16_t>(to_uint32(str, idx, base));
+}
+
+MSTL_NODISCARD constexpr int8_t to_int8(const char* str, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<int8_t>(to_int32(str, idx, base));
+}
+
+MSTL_NODISCARD constexpr uint8_t to_uint8(const char* str, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<uint8_t>(to_uint32(str, idx, base));
 }
 
 MSTL_END_NAMESPACE__

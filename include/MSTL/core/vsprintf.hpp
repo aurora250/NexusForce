@@ -1,6 +1,7 @@
 #ifndef MSTL_VSPRINTF_HPP__
 #define MSTL_VSPRINTF_HPP__
-#include "cstring.hpp"
+#include "environment.hpp"
+#include <cstdarg>
 MSTL_BEGIN_NAMESPACE__
 
 int MSTL_API vsprintf(char *buf, const char *fmt, ::va_list args);

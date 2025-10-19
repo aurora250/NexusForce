@@ -1,5 +1,10 @@
 #include <MSTL/core/datetime.hpp>
 #include <MSTL/core/vsprintf.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <Windows.h>
+#else
+#include <time.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_NODISCARD datetime datetime::now() noexcept {
@@ -10,7 +15,7 @@ MSTL_NODISCARD datetime datetime::now() noexcept {
 #elif defined(MSTL_PLATFORM_LINUX__)
     const ::time_t now_time = ::time(nullptr);
     ::tm local_tm{};
-    localtime_r(&now_time, &local_tm);
+    ::localtime_r(&now_time, &local_tm);
     return datetime(local_tm.tm_year + 1900, local_tm.tm_mon + 1,
         local_tm.tm_mday, local_tm.tm_hour, local_tm.tm_min, local_tm.tm_sec);
 #else
@@ -36,12 +41,12 @@ datetime datetime::parse_utc(const datetime& utc_dt) noexcept {
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 #elif defined(MSTL_PLATFORM_LINUX__)
     ::tm utc_tm{};
-    utc_tm.tm_year = utc_dt.get_year() - 1900;
-    utc_tm.tm_mon = utc_dt.get_month() - 1;
-    utc_tm.tm_mday = utc_dt.get_day();
-    utc_tm.tm_hour = utc_dt.get_hours();
-    utc_tm.tm_min = utc_dt.get_minutes();
-    utc_tm.tm_sec = utc_dt.get_seconds();
+    utc_tm.tm_year = utc_dt.year() - 1900;
+    utc_tm.tm_mon = utc_dt.month() - 1;
+    utc_tm.tm_mday = utc_dt.day();
+    utc_tm.tm_hour = utc_dt.hours();
+    utc_tm.tm_min = utc_dt.minutes();
+    utc_tm.tm_sec = utc_dt.seconds();
     utc_tm.tm_isdst = -1;
 
     const ::time_t t = ::timegm(&utc_tm);
@@ -77,12 +82,12 @@ datetime datetime::to_utc(const datetime& local_dt) noexcept {
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 #elif defined(MSTL_PLATFORM_LINUX__)
     ::tm local_tm{};
-    local_tm.tm_year = local_dt.get_year() - 1900;
-    local_tm.tm_mon = local_dt.get_month() - 1;
-    local_tm.tm_mday = local_dt.get_day();
-    local_tm.tm_hour = local_dt.get_hours();
-    local_tm.tm_min = local_dt.get_minutes();
-    local_tm.tm_sec = local_dt.get_seconds();
+    local_tm.tm_year = local_dt.year() - 1900;
+    local_tm.tm_mon = local_dt.month() - 1;
+    local_tm.tm_mday = local_dt.day();
+    local_tm.tm_hour = local_dt.hours();
+    local_tm.tm_min = local_dt.minutes();
+    local_tm.tm_sec = local_dt.seconds();
     local_tm.tm_isdst = -1;
 
     const ::time_t t = ::mktime(&local_tm);

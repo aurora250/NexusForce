@@ -1,6 +1,6 @@
 #ifndef MSTL_ALGOBASE_HPP__
 #define MSTL_ALGOBASE_HPP__
-#include "iterator.hpp"
+#include "cstring.hpp"
 #include "utility.hpp"
 #include "functor.hpp"
 #include "undef_cmacro.hpp"
@@ -8,8 +8,8 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator1, typename Iterator2, typename BinaryPredicate, enable_if_t<
 	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1,
-	Iterator2 first2, BinaryPredicate binary_pred) {
+MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred)
+noexcept(noexcept(++first1) && noexcept(++first2) && noexcept(binary_pred(*first1, *first2))) {
 	for (; first1 != last1; ++first1, ++first2) {
 		if (!binary_pred(*first1, *first2)) return false;
 	}
@@ -17,18 +17,17 @@ MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1,
 }
 
 template <typename Iterator1, typename Iterator2>
-MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
+MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2)
+noexcept(noexcept(_MSTL equal(first1, last1, first2, _MSTL equal_to<iter_val_t<Iterator1>>()))) {
 	return _MSTL equal(first1, last1, first2, _MSTL equal_to<iter_val_t<Iterator1>>());
 }
 
-template <typename Iterator, typename T, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr void fill(Iterator first, Iterator last, T&& value) {
 	for (; first != last; ++first) *first = _MSTL forward<T>(value);
 }
 
-template <typename Iterator, typename T, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator fill_n(Iterator first, size_t n, T&& value) {
 	for (; n > 0; --n, ++first) *first = _MSTL forward<T>(value);
 	return first;
@@ -65,8 +64,7 @@ noexcept(noexcept(b < a)) {
 	return b < a ? b : a;
 }
 
-template <typename Iterator, typename Compare, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 pair<iter_val_t<Iterator>, iter_val_t<Iterator>>
 constexpr minmax(Iterator first, Iterator last, Compare comp) {
 	using T = iter_val_t<Iterator>;
@@ -115,8 +113,7 @@ noexcept(noexcept(_MSTL median(a, b, c, _MSTL less<T>()))) {
 	return _MSTL median(a, b, c, _MSTL less<T>());
 }
 
-template <typename Iterator, typename Compare, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator max_element(Iterator first, Iterator last, Compare comp) {
 	if (first == last) return first;
 	Iterator result = first;
@@ -136,8 +133,7 @@ constexpr const T& max(std::initializer_list<T> list) {
 	return *iter;
 }
 
-template <typename Iterator, typename Compare, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator min_element(Iterator first, Iterator last, Compare comp) {
 	if (first == last) return first;
 	Iterator result = first;
@@ -156,8 +152,7 @@ constexpr const T& min(std::initializer_list<T> list) {
 	return *_MSTL min_element(list.begin(), list.end());
 }
 
-template <typename Iterator, typename Compare, enable_if_t<
-	is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last, Compare comp) {
 	Iterator min = _MSTL min_element(first, last, comp);
 	Iterator max = _MSTL max_element(first, last, comp);
@@ -189,7 +184,12 @@ noexcept(noexcept(_MSTL clamp(value, lower, upper, _MSTL less<T>()))) {
 template <typename Iterator1, typename Iterator2, typename Compare, enable_if_t<
 	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
 MSTL_NODISCARD constexpr bool lexicographical_compare(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) {
+	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp)
+noexcept(
+	noexcept(++first1) && noexcept(++first2) &&
+	noexcept(comp(*first1, *first2)) &&
+	noexcept(first1 == last1 && first2 != last2)
+	) {
 	for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
 		if (comp(*first1, *first2)) return true;
 		if (comp(*first2, *first1)) return false;
@@ -203,7 +203,7 @@ MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>, int> = 0>
 MSTL_NODISCARD constexpr bool __lexicographical_compare_aux(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept {
 	const auto len1 = static_cast<size_t>(last1 - first1);
 	const auto len2 = static_cast<size_t>(last2 - first2);
 	const size_t clp = _MSTL min(len1, len2);
@@ -216,7 +216,8 @@ MSTL_NODISCARD constexpr bool __lexicographical_compare_aux(
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>), int> = 0>
 MSTL_NODISCARD constexpr bool __lexicographical_compare_aux(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
+noexcept(noexcept(_MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_val_t<Iterator1>>()))) {
 	return _MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_val_t<Iterator1>>());
 }
 
@@ -225,7 +226,8 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
 MSTL_NODISCARD constexpr bool lexicographical_compare(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
+noexcept(noexcept(_INNER __lexicographical_compare_aux(first1, last1, first2, last2))) {
 	return _INNER __lexicographical_compare_aux(first1, last1, first2, last2);
 }
 

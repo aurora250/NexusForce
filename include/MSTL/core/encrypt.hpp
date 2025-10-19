@@ -5,8 +5,8 @@ MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API XOR {
 public:
-    static bstring encrypt(const bstring& data, const bstring& key);
-    static bstring decrypt(const bstring& data, const bstring& key);
+    static bstring encrypt(bstring_view data, bstring_view key);
+    static bstring decrypt(bstring_view data, bstring_view key);
 };
 
 
@@ -24,8 +24,8 @@ private:
     }
 
 public:
-    static string encode(const bstring& data);
-    static bstring decode(const string& data);
+    static string encode(bstring_view data);
+    static bstring decode(string_view data);
 };
 
 
@@ -57,8 +57,8 @@ private:
     static uint32_t I(uint32_t x, uint32_t y, uint32_t z);
 
 public:
-    static bstring hash(bstring data);
-    static string hash_hex(const bstring& data);
+    static bstring hash(bstring_view data);
+    static string hash_hex(bstring_view data);
 };
 
 
@@ -67,8 +67,8 @@ private:
     static uint32_t rotleft(uint32_t x, uint32_t c);
 
 public:
-    static bstring hash(bstring data);
-    static string hash_hex(const bstring& data);
+    static bstring hash(bstring_view data);
+    static string hash_hex(bstring_view data);
 };
 
 
@@ -97,14 +97,14 @@ private:
     static uint32_t gamma1(uint32_t x);
 
 public:
-    static bstring hash(bstring data);
-    static string hash_hex(const bstring& data);
+    static bstring hash(bstring_view data);
+    static string hash_hex(bstring_view data);
 };
 
 
 class MSTL_API AES256 {
 private:
-    static constexpr uint8_t sbox[256] = {
+    static constexpr byte_t sbox[256] = {
         0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
         0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
         0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
@@ -123,7 +123,7 @@ private:
         0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16
     };
 
-    static constexpr uint8_t inv_sbox[256] = {
+    static constexpr byte_t inv_sbox[256] = {
         0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb,
         0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb,
         0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e,
@@ -142,88 +142,202 @@ private:
         0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d
     };
 
-    static constexpr uint8_t rcon[15] = {
+    static constexpr byte_t rcon[15] = {
         0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a
     };
 
-    static uint8_t gf_mult(uint8_t a, uint8_t b);
+    static byte_t gf_mult(byte_t a, byte_t b);
 
-    static void key_expansion(const uint8_t* key, uint8_t* expanded_key);
+    static void key_expansion(const byte_t* key, byte_t* expanded_key);
 
-    static void sub_bytes(uint8_t state[16]);
-    static void inv_sub_bytes(uint8_t state[16]);
+    static void sub_bytes(byte_t state[16]);
+    static void inv_sub_bytes(byte_t state[16]);
 
-    static void shift_rows(uint8_t state[16]);
-    static void inv_shift_rows(uint8_t state[16]);
+    static void shift_rows(byte_t state[16]);
+    static void inv_shift_rows(byte_t state[16]);
 
-    static void mix_columns(uint8_t state[16]);
-    static void inv_mix_columns(uint8_t state[16]);
+    static void mix_columns(byte_t state[16]);
+    static void inv_mix_columns(byte_t state[16]);
 
-    static void add_round_key(uint8_t state[16], const uint8_t* round_key);
+    static void add_round_key(byte_t state[16], const byte_t* round_key);
 
-    static void encrypt_block(uint8_t block[16], const uint8_t* expanded_key);
-    static void decrypt_block(uint8_t block[16], const uint8_t* expanded_key);
+    static void encrypt_block(byte_t block[16], const byte_t* expanded_key);
+    static void decrypt_block(byte_t block[16], const byte_t* expanded_key);
 
 public:
-    static bstring encrypt(const bstring& data, const bstring& key);
-    static bstring decrypt(const bstring& data, const bstring& key);
+    static bstring encrypt(bstring_view data, bstring_view key);
+    static bstring decrypt(bstring_view data, bstring_view key);
 
-    static bstring encrypt_pkcs7(bstring data, const bstring& key);
-    static bstring decrypt_pkcs7(const bstring& data, const bstring& key);
+    static bstring encrypt_pkcs7(bstring_view data, bstring_view key);
+    static bstring decrypt_pkcs7(bstring_view data, bstring_view key);
 
-    static string encrypt_hex(const string& data, const string& key_hex);
-    static string decrypt_hex(const string& encrypted_hex, const string& key_hex);
+    static string encrypt_hex(string_view data, string_view key_hex);
+    static string decrypt_hex(string_view encrypted_hex, string_view key_hex);
 };
 
 
-inline bstring xor_encrypt(const bstring& data, const bstring& key) {
-    return XOR::encrypt(data, key);
+MSTL_ALWAYS_INLINE inline bstring xor_encrypt(const bstring& data, const bstring& key) {
+    return XOR::encrypt(data.view(), key.view());
 }
-inline string xor_encrypt(const string& data, const string& key) {
+MSTL_ALWAYS_INLINE inline string xor_encrypt(const string& data, const string& key) {
     return to_string(xor_encrypt(to_bstring(data), to_bstring(key)));
 }
-inline bstring xor_decrypt(const bstring& data, const bstring& key) {
-    return XOR::decrypt(data, key);
+MSTL_ALWAYS_INLINE inline bstring xor_decrypt(const bstring& data, const bstring& key) {
+    return XOR::decrypt(data.view(), key.view());
 }
-inline string xor_decrypt(const string& data, const string& key) {
+MSTL_ALWAYS_INLINE inline string xor_decrypt(const string& data, const string& key) {
     return to_string(xor_decrypt(to_bstring(data), to_bstring(key)));
 }
 
-inline string base64_encode(const bstring& data) {
-    return base64::encode(data);
+MSTL_ALWAYS_INLINE inline bstring xor_encrypt(const bstring_view data, const bstring_view key) {
+    return XOR::encrypt(data, key);
 }
-inline string base64_encode(const string& data) {
+MSTL_ALWAYS_INLINE inline bstring xor_decrypt(const bstring_view data, const bstring_view key) {
+    return XOR::decrypt(data, key);
+}
+
+
+MSTL_ALWAYS_INLINE inline string base64_encode(const bstring& data) {
+    return base64::encode(data.view());
+}
+MSTL_ALWAYS_INLINE inline string base64_encode(const string& data) {
     return base64_encode(to_bstring(data));
 }
-inline string base64_decode(const string& data) {
+MSTL_ALWAYS_INLINE inline string base64_decode(const string& data) {
+    return to_string(base64::decode(data.view()));
+}
+
+MSTL_ALWAYS_INLINE inline string base64_encode(const bstring_view data) {
+    return base64::encode(data);
+}
+MSTL_ALWAYS_INLINE inline string base64_encode(const string_view data) {
+    return base64_encode(to_bstring(data));
+}
+MSTL_ALWAYS_INLINE inline string base64_decode(const string_view data) {
     return to_string(base64::decode(data));
 }
 
-inline string md5(const bstring& data) {
-    return MD5::hash_hex(data);
+MSTL_ALWAYS_INLINE inline string base64_encode(const char* data) {
+    return base64_encode(to_bstring(string_view{data}));
 }
-inline string md5(const string& data) {
+MSTL_ALWAYS_INLINE inline string base64_decode(const char* data) {
+    return to_string(base64::decode(string_view{data}));
+}
+
+
+MSTL_ALWAYS_INLINE inline string md5(const bstring& data) {
+    return MD5::hash_hex(data.view());
+}
+MSTL_ALWAYS_INLINE inline string md5(const string& data) {
     return md5(to_bstring(data));
 }
 
-inline string sha1(const bstring& data) {
-    return SHA1::hash_hex(data);
+MSTL_ALWAYS_INLINE inline string md5(const bstring_view data) {
+    return MD5::hash_hex(data);
 }
-inline string sha1(const string& data) {
+MSTL_ALWAYS_INLINE inline string md5(const string_view data) {
+    return md5(to_bstring(data));
+}
+
+MSTL_ALWAYS_INLINE inline string md5(const char* data) {
+    return md5(string_view{data});
+}
+
+
+MSTL_ALWAYS_INLINE inline string sha1(const bstring& data) {
+    return SHA1::hash_hex(data.view());
+}
+MSTL_ALWAYS_INLINE inline string sha1(const string& data) {
     return sha1(to_bstring(data));
 }
 
-inline string sha256(const bstring& data) {
-    return SHA256::hash_hex(data);
+MSTL_ALWAYS_INLINE inline string sha1(const bstring_view data) {
+    return SHA1::hash_hex(data);
 }
-inline string sha256(const string& data) {
+MSTL_ALWAYS_INLINE inline string sha1(const string_view data) {
+    return sha1(to_bstring(data));
+}
+
+
+MSTL_ALWAYS_INLINE inline string sha256(const bstring& data) {
+    return SHA256::hash_hex(data.view());
+}
+MSTL_ALWAYS_INLINE inline string sha256(const string& data) {
     return sha256(to_bstring(data));
 }
 
-inline string aes256_encrypt(const string& data, const string& key_hex) {
+MSTL_ALWAYS_INLINE inline string sha256(const bstring_view data) {
+    return SHA256::hash_hex(data);
+}
+MSTL_ALWAYS_INLINE inline string sha256(const string_view data) {
+    return sha256(to_bstring(data));
+}
+
+MSTL_ALWAYS_INLINE inline string sha256(const char* data) {
+    return sha256(string_view{data});
+}
+
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string& data, const string& key_hex) {
+    return AES256::encrypt_hex(data.view(), key_hex.view());
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string& encrypted_hex, const string& key_hex) {
+    return AES256::decrypt_hex(encrypted_hex.view(), key_hex.view());
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string& data, const string_view key_hex) {
+    return AES256::encrypt_hex(data.view(), key_hex);
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string& encrypted_hex, const string_view key_hex) {
+    return AES256::decrypt_hex(encrypted_hex.view(), key_hex);
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string& data, const char* key_hex) {
+    return AES256::encrypt_hex(data.view(), key_hex);
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string& encrypted_hex, const char* key_hex) {
+    return AES256::decrypt_hex(encrypted_hex.view(), key_hex);
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string_view data, const string& key_hex) {
+    return AES256::encrypt_hex(data, key_hex.view());
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string_view encrypted_hex, const string& key_hex) {
+    return AES256::decrypt_hex(encrypted_hex, key_hex.view());
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const char* data, const string& key_hex) {
+    return AES256::encrypt_hex(data, key_hex.view());
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const char* encrypted_hex, const string& key_hex) {
+    return AES256::decrypt_hex(encrypted_hex, key_hex.view());
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string_view data, const string_view key_hex) {
     return AES256::encrypt_hex(data, key_hex);
 }
-inline string aes256_decrypt(const string& encrypted_hex, const string& key_hex) {
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string_view encrypted_hex, const string_view key_hex) {
+    return AES256::decrypt_hex(encrypted_hex, key_hex);
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const char* data, const string_view key_hex) {
+    return AES256::encrypt_hex(data, key_hex);
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const char* encrypted_hex, const string_view key_hex) {
+    return AES256::decrypt_hex(encrypted_hex, key_hex);
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const string_view data, const char* key_hex) {
+    return AES256::encrypt_hex(data, key_hex);
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const string_view encrypted_hex, const char* key_hex) {
+    return AES256::decrypt_hex(encrypted_hex, key_hex);
+}
+
+MSTL_ALWAYS_INLINE inline string aes256_encrypt(const char* data, const char* key_hex) {
+    return AES256::encrypt_hex(data, key_hex);
+}
+MSTL_ALWAYS_INLINE inline string aes256_decrypt(const char* encrypted_hex, const char* key_hex) {
     return AES256::decrypt_hex(encrypted_hex, key_hex);
 }
 

@@ -6,7 +6,10 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Sequence = deque<T>>
-class queue {
+class queue : public icollector<queue<T, Sequence>> {
+    using self = queue<T, Sequence>;
+    using super = icollector<self>;
+
 public:
     using value_type        = typename Sequence::value_type;
     using difference_type   = typename Sequence::difference_type;
@@ -16,8 +19,6 @@ public:
 
     using iterator          = typename Sequence::iterator;
     using const_iterator    = typename Sequence::const_iterator;
-
-    using self              = queue<T, Sequence>;
 
     static_assert(is_object_v<T>, "queue only contains object types.");
     static_assert(is_same_v<T, value_type>, "queue require consistent types.");
@@ -60,68 +61,62 @@ public:
         _MSTL swap(seq_, x.seq_);
     }
 
-    MSTL_NODISCARD const Sequence& get_container() const noexcept { return seq_; }
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(seq_ == rh.seq_)) {
+        return seq_ == rh.seq_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(seq_ != rh.seq_)) {
+        return seq_ != rh.seq_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(seq_ < rh.seq_)) {
+        return seq_ < rh.seq_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(seq_ > rh.seq_)) {
+        return seq_ > rh.seq_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(seq_ <= rh.seq_)) {
+        return seq_ <= rh.seq_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(seq_ >= rh.seq_)) {
+        return seq_ >= rh.seq_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(seq_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(seq_);
+    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <class Sequence>
 queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
 #endif
 
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator ==(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-noexcept(noexcept(x.get_container() == y.get_container())) {
-    return x.get_container() == y.get_container();
-}
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator !=(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-noexcept(noexcept(x.get_container() != y.get_container())) {
-    return x.get_container() != y.get_container();
-}
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator <(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-    noexcept(noexcept(x.get_container() < y.get_container())) {
-    return x.get_container() < y.get_container();
-}
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator >(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-noexcept(noexcept(x.get_container() > y.get_container())) {
-    return x.get_container() > y.get_container();
-}
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator <=(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-noexcept(noexcept(x.get_container() <= y.get_container())) {
-    return x.get_container() <= y.get_container();
-}
-template <typename T, typename Sequence>
-MSTL_NODISCARD bool operator >=(const queue<T, Sequence>& x, const queue<T, Sequence>& y)
-noexcept(noexcept(x.get_container() >= y.get_container())) {
-    return x.get_container() >= y.get_container();
-} 
-template <typename T, typename Sequence, enable_if_t<
-    is_swappable_v<Sequence>, int> = 0>
-void swap(queue<T, Sequence>& lh, queue<T, Sequence>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
-
 
 template <typename T, typename Sequence = vector<T>,
     typename Compare = less<typename Sequence::value_type>>
-class priority_queue {
+class priority_queue : public icollector<priority_queue<T, Sequence, Compare>> {
+    using self = priority_queue<T, Sequence, Compare>;
+    using super = icollector<self>;
+
 public:
     using value_type        = typename Sequence::value_type;
     using size_type         = typename Sequence::size_type;
     using reference         = typename Sequence::reference;
     using const_reference   = typename Sequence::const_reference;
-    using self              = priority_queue<T, Sequence>;
 
     static_assert(is_object_v<T>, "priority queue only contains object types.");
     static_assert(is_same_v<T, value_type>, "priority queue require consistent types.");
 
 private:
     compressed_pair<Compare, Sequence> pair_{ _MSTL_TAG default_construct_tag{} };
-
-    template <typename T1, typename Sequence1, typename Compare1>
-    friend void detailof(const priority_queue<T1, Sequence1, Compare1>&, std::ostream&);
 
     void make_heap_inside() {
         _MSTL make_heap(pair_.value.begin(), pair_.value.end(), pair_.get_base());
@@ -207,7 +202,38 @@ public:
         pair_.swap(x.pair_);
     }
 
-    MSTL_NODISCARD const Sequence& get_container() const noexcept { return pair_.value; }
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(pair_.value == rh.pair_.value)) {
+        return pair_.value == rh.pair_.value;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(pair_.value != rh.pair_.value)) {
+        return pair_.value != rh.pair_.value;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(pair_.value < rh.pair_.value)) {
+        return pair_.value < rh.pair_.value;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(pair_.value > rh.pair_.value)) {
+        return pair_.value > rh.pair_.value;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(pair_.value <= rh.pair_.value)) {
+        return pair_.value <= rh.pair_.value;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(pair_.value >= rh.pair_.value)) {
+        return pair_.value >= rh.pair_.value;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(pair_.value);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(pair_.value);
+    }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Compare, typename Sequence>
@@ -218,13 +244,6 @@ template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
 priority_queue(Iterator, Iterator, Compare = Compare(), Sequence = Sequence())
 -> priority_queue<iter_val_t<Iterator>, Sequence, Compare>;
 #endif
-
-template <typename T, typename Sequence, typename Compare, enable_if_t<
-    is_swappable_v<Sequence>, int> = 0>
-void swap(priority_queue<T, Sequence, Compare>& lh, priority_queue<T, Sequence, Compare>& rh)
-    noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_QUEUE_HPP__

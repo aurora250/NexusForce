@@ -2,7 +2,7 @@
 #include <MSTL/core/hexadecimal.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-bstring XOR::encrypt(const bstring& data, const bstring& key) {
+bstring XOR::encrypt(const bstring_view data, const bstring_view key) {
     if (key.empty()) Exception(ValueError("Key cannot be empty"));
 
     bstring result;
@@ -14,12 +14,12 @@ bstring XOR::encrypt(const bstring& data, const bstring& key) {
     return result;
 }
 
-bstring XOR::decrypt(const bstring& data, const bstring& key) {
+bstring XOR::decrypt(const bstring_view data, const bstring_view key) {
     return encrypt(data, key);
 }
 
 
-string base64::encode(const bstring& data) {
+string base64::encode(const bstring_view data) {
     string result;
     size_t i = 0;
 
@@ -44,7 +44,7 @@ string base64::encode(const bstring& data) {
     return result;
 }
 
-bstring base64::decode(const string& data) {
+bstring base64::decode(const string_view data) {
     bstring result;
     size_t i = 0;
 
@@ -87,16 +87,17 @@ uint32_t MD5::I(const uint32_t x, const uint32_t y, const uint32_t z) {
     return y ^ (x | ~z);
 }
 
-bstring MD5::hash(bstring data) {
-    const uint64_t original_len = data.size();
-    data.push_back(0x80);
-    while ((data.size() % 64) != 56) {
-        data.push_back(0);
+bstring MD5::hash(const bstring_view data) {
+    bstring byte_data{data};
+    const uint64_t original_len = byte_data.size();
+    byte_data.push_back(0x80);
+    while ((byte_data.size() % 64) != 56) {
+        byte_data.push_back(0);
     }
 
     const uint64_t bit_len = original_len * 8;
     for (int i = 0; i < 8; ++i) {
-        data.push_back((bit_len >> (i * 8)) & 0xFF);
+        byte_data.push_back((bit_len >> (i * 8)) & 0xFF);
     }
 
     uint32_t h0 = 0x67452301;
@@ -104,13 +105,13 @@ bstring MD5::hash(bstring data) {
     uint32_t h2 = 0x98badcfe;
     uint32_t h3 = 0x10325476;
 
-    for (size_t chunk_start = 0; chunk_start < data.size(); chunk_start += 64) {
+    for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[16];
         for (int i = 0; i < 16; ++i) {
-            w[i] = (data[chunk_start + i * 4]) |
-                   (data[chunk_start + i * 4 + 1] << 8) |
-                   (data[chunk_start + i * 4 + 2] << 16) |
-                   (data[chunk_start + i * 4 + 3] << 24);
+            w[i] = (byte_data[chunk_start + i * 4]) |
+                   (byte_data[chunk_start + i * 4 + 1] << 8) |
+                   (byte_data[chunk_start + i * 4 + 2] << 16) |
+                   (byte_data[chunk_start + i * 4 + 3] << 24);
         }
 
         uint32_t a = h0, b = h1, c = h2, d = h3;
@@ -152,31 +153,35 @@ bstring MD5::hash(bstring data) {
     return result;
 }
 
-string MD5::hash_hex(const bstring& data) {
+string MD5::hash_hex(const bstring_view data) {
     bstring hash_result = hash(data);
     string hex_result;
-    for (const uint8_t byte : hash_result) {
+    for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("02x", hex_byte);
+        hex_result += format("{02x}", hex_byte);
     }
     return hex_result;
 }
+
+constexpr uint32_t MD5::S[64];
+constexpr uint32_t MD5::K[64];
 
 
 uint32_t SHA1::rotleft(const uint32_t x, const uint32_t c) {
     return (x << c) | (x >> (32 - c));
 }
 
-bstring SHA1::hash(bstring data) {
-    const uint64_t original_len = data.size();
-    data.push_back(0x80);
+bstring SHA1::hash(const bstring_view data) {
+    bstring byte_data{data};
+    const uint64_t original_len = byte_data.size();
+    byte_data.push_back(0x80);
 
-    while ((data.size() % 64) != 56) {
-        data.push_back(0);
+    while ((byte_data.size() % 64) != 56) {
+        byte_data.push_back(0);
     }
     const uint64_t bit_len = original_len * 8;
     for (int i = 7; i >= 0; --i) {
-        data.push_back((bit_len >> (i * 8)) & 0xFF);
+        byte_data.push_back((bit_len >> (i * 8)) & 0xFF);
     }
 
     uint32_t h0 = 0x67452301;
@@ -185,14 +190,14 @@ bstring SHA1::hash(bstring data) {
     uint32_t h3 = 0x10325476;
     uint32_t h4 = 0xC3D2E1F0;
 
-    for (size_t chunk_start = 0; chunk_start < data.size(); chunk_start += 64) {
+    for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[80];
 
         for (int i = 0; i < 16; ++i) {
-            w[i] = (data[chunk_start + i * 4] << 24) |
-                   (data[chunk_start + i * 4 + 1] << 16) |
-                   (data[chunk_start + i * 4 + 2] << 8) |
-                   (data[chunk_start + i * 4 + 3]);
+            w[i] = (byte_data[chunk_start + i * 4] << 24) |
+                   (byte_data[chunk_start + i * 4 + 1] << 16) |
+                   (byte_data[chunk_start + i * 4 + 2] << 8) |
+                   (byte_data[chunk_start + i * 4 + 3]);
         }
 
         for (int i = 16; i < 80; ++i) {
@@ -244,12 +249,12 @@ bstring SHA1::hash(bstring data) {
     return result;
 }
 
-string SHA1::hash_hex(const bstring& data) {
+string SHA1::hash_hex(const bstring_view data) {
     bstring hash_result = hash(data);
     string hex_result;
-    for (const uint8_t byte : hash_result) {
+    for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("02x", hex_byte);
+        hex_result += format("{02x}", hex_byte);
     }
     return hex_result;
 }
@@ -283,16 +288,17 @@ uint32_t SHA256::gamma1(const uint32_t x) {
     return rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10);
 }
 
-bstring SHA256::hash(bstring data) {
-    const uint64_t original_len = data.size();
-    data.push_back(0x80);
+bstring SHA256::hash(const bstring_view data) {
+    bstring byte_data{data};
+    const uint64_t original_len = byte_data.size();
+    byte_data.push_back(0x80);
 
-    while ((data.size() % 64) != 56) {
-        data.push_back(0);
+    while ((byte_data.size() % 64) != 56) {
+        byte_data.push_back(0);
     }
     const uint64_t bit_len = original_len * 8;
     for (int i = 7; i >= 0; --i) {
-        data.push_back((bit_len >> (i * 8)) & 0xFF);
+        byte_data.push_back((bit_len >> (i * 8)) & 0xFF);
     }
 
     uint32_t h[8] = {
@@ -300,13 +306,13 @@ bstring SHA256::hash(bstring data) {
         0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
     };
 
-    for (size_t chunk_start = 0; chunk_start < data.size(); chunk_start += 64) {
+    for (size_t chunk_start = 0; chunk_start < byte_data.size(); chunk_start += 64) {
         uint32_t w[64];
         for (int i = 0; i < 16; ++i) {
-            w[i] = (data[chunk_start + i * 4] << 24) |
-                   (data[chunk_start + i * 4 + 1] << 16) |
-                   (data[chunk_start + i * 4 + 2] << 8) |
-                   (data[chunk_start + i * 4 + 3]);
+            w[i] = (byte_data[chunk_start + i * 4] << 24) |
+                   (byte_data[chunk_start + i * 4 + 1] << 16) |
+                   (byte_data[chunk_start + i * 4 + 2] << 8) |
+                   (byte_data[chunk_start + i * 4 + 3]);
         }
 
         for (int i = 16; i < 64; ++i) {
@@ -341,24 +347,26 @@ bstring SHA256::hash(bstring data) {
     return result;
 }
 
-string SHA256::hash_hex(const bstring& data) {
+string SHA256::hash_hex(const bstring_view data) {
     bstring hash_result = hash(data);
     string hex_result;
-    for (const uint8_t byte : hash_result) {
+    for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("02x", hex_byte);
+        hex_result += format("{02x}", hex_byte);
     }
     return hex_result;
 }
 
+constexpr uint32_t SHA256::K[64];
 
-uint8_t AES256::gf_mult(uint8_t a, uint8_t b) {
-    uint8_t result = 0;
+
+byte_t AES256::gf_mult(byte_t a, byte_t b) {
+    byte_t result = 0;
     for (int i = 0; i < 8; ++i) {
         if ((b & 1) == 1) {
             result ^= a;
         }
-        const uint8_t hi_bit_set = (a & 0x80);
+        const byte_t hi_bit_set = (a & 0x80);
         a <<= 1;
         if (hi_bit_set == 0x80) {
             a ^= 0x1b;
@@ -368,14 +376,14 @@ uint8_t AES256::gf_mult(uint8_t a, uint8_t b) {
     return result;
 }
 
-void AES256::key_expansion(const uint8_t* key, uint8_t* expanded_key) {
+void AES256::key_expansion(const byte_t* key, byte_t* expanded_key) {
     memory_copy(expanded_key, key, 32);
     for (int i = 8; i < 60; ++i) {
-        uint8_t temp[4];
+        byte_t temp[4];
         memory_copy(temp, expanded_key + (i - 1) * 4, 4);
 
         if (i % 8 == 0) {
-            const uint8_t t = temp[0];
+            const byte_t t = temp[0];
             temp[0] = temp[1];
             temp[1] = temp[2];
             temp[2] = temp[3];
@@ -396,20 +404,20 @@ void AES256::key_expansion(const uint8_t* key, uint8_t* expanded_key) {
     }
 }
 
-void AES256::sub_bytes(uint8_t state[16]) {
+void AES256::sub_bytes(byte_t state[16]) {
     for (int i = 0; i < 16; ++i) {
         state[i] = sbox[state[i]];
     }
 }
 
-void AES256::inv_sub_bytes(uint8_t state[16]) {
+void AES256::inv_sub_bytes(byte_t state[16]) {
     for (int i = 0; i < 16; ++i) {
         state[i] = inv_sbox[state[i]];
     }
 }
 
-void AES256::shift_rows(uint8_t state[16]) {
-    uint8_t temp = state[1];
+void AES256::shift_rows(byte_t state[16]) {
+    byte_t temp = state[1];
     state[1] = state[5];
     state[5] = state[9];
     state[9] = state[13];
@@ -429,8 +437,8 @@ void AES256::shift_rows(uint8_t state[16]) {
     state[7] = temp;
 }
 
-void AES256::inv_shift_rows(uint8_t state[16]) {
-    uint8_t temp = state[13];
+void AES256::inv_shift_rows(byte_t state[16]) {
+    byte_t temp = state[13];
     state[13] = state[9];
     state[9] = state[5];
     state[5] = state[1];
@@ -450,12 +458,12 @@ void AES256::inv_shift_rows(uint8_t state[16]) {
     state[3] = temp;
 }
 
-void AES256::mix_columns(uint8_t state[16]) {
+void AES256::mix_columns(byte_t state[16]) {
     for (int c = 0; c < 4; ++c) {
-        const uint8_t s0 = state[c * 4];
-        const uint8_t s1 = state[c * 4 + 1];
-        const uint8_t s2 = state[c * 4 + 2];
-        const uint8_t s3 = state[c * 4 + 3];
+        const byte_t s0 = state[c * 4];
+        const byte_t s1 = state[c * 4 + 1];
+        const byte_t s2 = state[c * 4 + 2];
+        const byte_t s3 = state[c * 4 + 3];
 
         state[c * 4] = gf_mult(0x02, s0) ^ gf_mult(0x03, s1) ^ s2 ^ s3;
         state[c * 4 + 1] = s0 ^ gf_mult(0x02, s1) ^ gf_mult(0x03, s2) ^ s3;
@@ -464,12 +472,12 @@ void AES256::mix_columns(uint8_t state[16]) {
     }
 }
 
-void AES256::inv_mix_columns(uint8_t state[16]) {
+void AES256::inv_mix_columns(byte_t state[16]) {
     for (int c = 0; c < 4; ++c) {
-        const uint8_t s0 = state[c * 4];
-        const uint8_t s1 = state[c * 4 + 1];
-        const uint8_t s2 = state[c * 4 + 2];
-        const uint8_t s3 = state[c * 4 + 3];
+        const byte_t s0 = state[c * 4];
+        const byte_t s1 = state[c * 4 + 1];
+        const byte_t s2 = state[c * 4 + 2];
+        const byte_t s3 = state[c * 4 + 3];
 
         state[c * 4] = gf_mult(0x0e, s0) ^ gf_mult(0x0b, s1) ^ gf_mult(0x0d, s2) ^ gf_mult(0x09, s3);
         state[c * 4 + 1] = gf_mult(0x09, s0) ^ gf_mult(0x0e, s1) ^ gf_mult(0x0b, s2) ^ gf_mult(0x0d, s3);
@@ -478,13 +486,13 @@ void AES256::inv_mix_columns(uint8_t state[16]) {
     }
 }
 
-void AES256::add_round_key(uint8_t state[16], const uint8_t* round_key) {
+void AES256::add_round_key(byte_t state[16], const byte_t* round_key) {
     for (int i = 0; i < 16; ++i) {
         state[i] ^= round_key[i];
     }
 }
 
-void AES256::encrypt_block(uint8_t block[16], const uint8_t* expanded_key) {
+void AES256::encrypt_block(byte_t block[16], const byte_t* expanded_key) {
     add_round_key(block, expanded_key);
 
     for (int round = 1; round < 14; ++round) {
@@ -499,7 +507,7 @@ void AES256::encrypt_block(uint8_t block[16], const uint8_t* expanded_key) {
     add_round_key(block, expanded_key + 14 * 16);
 }
 
-void AES256::decrypt_block(uint8_t block[16], const uint8_t* expanded_key) {
+void AES256::decrypt_block(byte_t block[16], const byte_t* expanded_key) {
     add_round_key(block, expanded_key + 14 * 16);
 
     for (int round = 13; round >= 1; --round) {
@@ -514,7 +522,7 @@ void AES256::decrypt_block(uint8_t block[16], const uint8_t* expanded_key) {
     add_round_key(block, expanded_key);
 }
 
-bstring AES256::encrypt(const bstring& data, const bstring& key) {
+bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
     if (key.size() != 32) {
         Exception(ValueError("AES-256 requires 32-byte key"));
     }
@@ -522,13 +530,13 @@ bstring AES256::encrypt(const bstring& data, const bstring& key) {
         Exception(ValueError("Data size must be multiple of 16 bytes"));
     }
 
-    uint8_t expanded_key[240];
+    byte_t expanded_key[240];
     key_expansion(key.data(), expanded_key);
     bstring result;
     result.reserve(data.size());
 
     for (size_t i = 0; i < data.size(); i += 16) {
-        uint8_t block[16];
+        byte_t block[16];
         memory_copy(block, data.data() + i, 16);
         encrypt_block(block, expanded_key);
         for (int j = 0; j < 16; ++j) {
@@ -538,7 +546,7 @@ bstring AES256::encrypt(const bstring& data, const bstring& key) {
     return result;
 }
 
-bstring AES256::decrypt(const bstring& data, const bstring& key) {
+bstring AES256::decrypt(const bstring_view data, const bstring_view key) {
     if (key.size() != 32) {
         Exception(ValueError("AES-256 requires 32-byte key"));
     }
@@ -546,13 +554,13 @@ bstring AES256::decrypt(const bstring& data, const bstring& key) {
         Exception(ValueError("Data size must be multiple of 16 bytes"));
     }
 
-    uint8_t expanded_key[240];
+    byte_t expanded_key[240];
     key_expansion(key.data(), expanded_key);
     bstring result;
     result.reserve(data.size());
 
     for (size_t i = 0; i < data.size(); i += 16) {
-        uint8_t block[16];
+        byte_t block[16];
         memory_copy(block, data.data() + i, 16);
         decrypt_block(block, expanded_key);
         for (int j = 0; j < 16; ++j) {
@@ -562,19 +570,20 @@ bstring AES256::decrypt(const bstring& data, const bstring& key) {
     return result;
 }
 
-bstring AES256::encrypt_pkcs7(bstring data, const bstring& key) {
-    const uint8_t padding = 16 - (data.size() % 16);
+bstring AES256::encrypt_pkcs7(const bstring_view data, const bstring_view key) {
+    bstring byte_data{data};
+    const byte_t padding = 16 - (byte_data.size() % 16);
     for (int i = 0; i < padding; ++i) {
-        data.push_back(padding);
+        byte_data.push_back(padding);
     }
-    return encrypt(data, key);
+    return encrypt(byte_data.view(), key);
 }
 
-bstring AES256::decrypt_pkcs7(const bstring& data, const bstring& key) {
+bstring AES256::decrypt_pkcs7(const bstring_view data, const bstring_view key) {
     bstring decrypted = decrypt(data, key);
     if (decrypted.empty()) return decrypted;
 
-    const uint8_t padding_len = decrypted.back();
+    const byte_t padding_len = decrypted.back();
     const size_t original_size = decrypted.size();
 
     if (padding_len == 0 || padding_len > 16) {
@@ -597,49 +606,49 @@ bstring AES256::decrypt_pkcs7(const bstring& data, const bstring& key) {
     return decrypted;
 }
 
-string AES256::encrypt_hex(const string& data, const string& key_hex) {
+string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
     bstring key_bytes;
+    key_bytes.reserve(32);
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
-            string byte_str = key_hex.substr(i, 2);
-            const auto hex_val = hexadecimal::parse(byte_str);
-            key_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
+            const auto hex_val = hexadecimal::parse(key_hex.substr(i, 2));
+            key_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
         }
     }
 
     const bstring data_bytes(data.begin(), data.end());
-    bstring encrypted = encrypt_pkcs7(data_bytes, key_bytes);
+    bstring encrypted = encrypt_pkcs7(data_bytes.view(), key_bytes.view());
 
     string result;
-    for (const uint8_t byte : encrypted) {
+    for (const byte_t byte : encrypted) {
         hexadecimal hex_byte(byte);
-        result += format("02x", hex_byte);
+        result += format("{02x}", hex_byte);
     }
     return result;
 }
 
-string AES256::decrypt_hex(const string& encrypted_hex, const string& key_hex) {
+string AES256::decrypt_hex(const string_view encrypted_hex, const string_view key_hex) {
     bstring key_bytes;
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
-            string byte_str = key_hex.substr(i, 2);
-            const auto hex_val = hexadecimal::parse("0x" + byte_str);
-            key_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
+            const auto hex_val = hexadecimal::parse(key_hex.substr(i, 2));
+            key_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
         }
     }
 
     bstring encrypted_bytes;
     for (size_t i = 0; i < encrypted_hex.size(); i += 2) {
         if (i + 1 < encrypted_hex.size()) {
-            string byte_str = encrypted_hex.substr(i, 2);
-            const auto hex_val = hexadecimal::parse("0x" + byte_str);
-            encrypted_bytes.push_back(static_cast<uint8_t>(hex_val.to_decimal()));
+            const auto hex_val = hexadecimal::parse(encrypted_hex.substr(i, 2));
+            encrypted_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
         }
     }
-    bstring decrypted = decrypt_pkcs7(encrypted_bytes, key_bytes);
+    bstring decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());
     return string(decrypted.begin(), decrypted.end());
 }
 
-
+constexpr byte_t AES256::sbox[256];
+constexpr byte_t AES256::inv_sbox[256];
+constexpr byte_t AES256::rcon[15];
 
 MSTL_END_NAMESPACE__

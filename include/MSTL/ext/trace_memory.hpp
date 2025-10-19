@@ -1,6 +1,7 @@
 #ifndef MSTL_TRACE_MEMORY_HPP__
 #define MSTL_TRACE_MEMORY_HPP__
 #include "MSTL/core/unordered_map.hpp"
+#include "MSTL/core/console.hpp"
 #ifdef MSTL_SUPPORT_STACKTRACE__
 #include <boost/stacktrace.hpp>
 MSTL_BEGIN_NAMESPACE__
@@ -37,7 +38,7 @@ public:
     ~trace_allocator() {
 #if MSTL_STATE_DEBUG__
         if (!traces_.empty()) {
-            std::cerr << "Memory leaks detected! \n\n";
+            _MSTL println("Memory leaks detected! \n");
             print_stacktrace();
         }
 #endif
@@ -46,8 +47,8 @@ public:
     void print_stacktrace() const {
         FOR_EACH(entry, traces_) {
             if (entry->first == 0) continue;
-            std::cerr << "Leaked pointer: " << static_cast<void*>(entry->first) << "\n";
-            std::cerr << "Allocation stack trace:\n" << entry->second << "\n";
+            _MSTL println("Leaked pointer: ", static_cast<void*>(entry->first));
+            _MSTL println("Allocation stack trace:\n", entry->second);
         }
     }
 

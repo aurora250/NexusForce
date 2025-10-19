@@ -1,6 +1,6 @@
 #ifndef MSTL_LIST_HPP__
 #define MSTL_LIST_HPP__
-#include "object.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Alloc>
@@ -147,18 +147,19 @@ public:
 
 
 template <typename T, typename Alloc = allocator<list_node<T>>>
-class list {
+class list : public icollector<list<T, Alloc>> {
 #ifdef MSTL_VERSION_20__	
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "list only contains object types.");
 
+    using self = list<T, Alloc>;
+    using super = icollector<self>;
+
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using allocator_type            = Alloc;
-    using self                      = list<T, Alloc>;
-
     using iterator                  = list_iterator<false, self>;
     using const_iterator            = list_iterator<true, self>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
@@ -415,7 +416,7 @@ public:
 
     void swap(self& x) noexcept {
         _MSTL swap(head_, x.head_);
-        pair_.swap(x.pair_);
+        _MSTL swap(pair_, x.pair_);
     }
 
     void transfer(iterator position, iterator first, iterator last) {
@@ -569,40 +570,44 @@ public:
     MSTL_NODISCARD reference operator [](const size_type position) {
         return this->at(position);
     }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
+        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(!(*this == rh))) {
+        return !(*this == rh);
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(rh < *this)) {
+        return rh < *this;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(!(*this < rh))) {
+        return !(*this < rh);
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(!(*this > rh))) {
+        return !(*this > rh);
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(*this);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(*this);
+    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Alloc>
 list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_val_t<Iterator>, Alloc>;
 #endif
-
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator ==(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return lh.size() == rh.size() && _MSTL equal(lh.cbegin(), lh.cend(), rh.cbegin());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator !=(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return !(lh == rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator <(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return _MSTL lexicographical_compare(lh.cbegin(), lh.cend(), rh.cbegin(), rh.cend());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator >(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return rh < lh;
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator <=(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return !(lh > rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator >=(const list<T, Alloc>& lh, const list<T, Alloc>& rh) noexcept {
-    return !(lh < rh);
-}
-template <typename T, typename Alloc>
-void swap(list<T, Alloc>& lh, list<T, Alloc>& rh) noexcept {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_LIST_HPP__

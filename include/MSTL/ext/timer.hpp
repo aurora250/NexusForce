@@ -6,6 +6,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
+
 struct __timer_node_base {
 protected:
 	int64_t expire_ = 0;
@@ -14,7 +15,7 @@ protected:
 public:
     __timer_node_base() = default;
     __timer_node_base(const int64_t expire, const size_t id)
-        : expire_(expire), id_(id) {}
+    : expire_(expire), id_(id) {}
 
     __timer_node_base(const __timer_node_base &) = default;
     __timer_node_base &operator=(const __timer_node_base &) = default;
@@ -31,7 +32,9 @@ inline bool operator <(const __timer_node_base& lh, const __timer_node_base& rh)
     if (lh.expire() > rh.expire()) return false;
     return lh.id() < rh.id();
 }
+
 MSTL_END_INNER__
+
 
 struct timer_node : _INNER __timer_node_base {
 public:
@@ -42,8 +45,8 @@ private:
 
 public:
     timer_node() = default;
-    timer_node(const int64_t expire, const size_t id, call_back func)
-        : __timer_node_base(expire, id), func_(_MSTL move(func)) {}
+    timer_node(const int64_t expire, const size_t id, call_back&& func)
+    : __timer_node_base(expire, id), func_(_MSTL move(func)) {}
 
     timer_node(const timer_node& node) = default;
     timer_node& operator=(const timer_node& node) = default;
@@ -80,8 +83,8 @@ public:
         return sub.count();
     }
 
-    node_type add(const int64_t ms, const func_type &func) {
-        node_type tnode(get_tick() + ms, generate_id(), func);
+    node_type add(const int64_t ms, func_type&& func) {
+        node_type tnode(get_tick() + ms, generate_id(), _MSTL move(func));
         timer_set_.insert(tnode);
         return tnode;
     }

@@ -240,5 +240,19 @@ MSTL_CONSTEXPR20 string check_type() {
     return str;
 }
 
+
+template <typename T, enable_if_t<is_function_v<T>, int>>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
+    return _MSTL check_type<T>();
+}
+template <typename T, enable_if_t<is_member_object_pointer_v<T>, int>>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
+    return _MSTL check_type<T>();
+}
+template <typename T, enable_if_t<is_member_function_pointer_v<T>, int>>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
+    return _MSTL check_type<T>();
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CHECK_TYPE_HPP__

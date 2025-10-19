@@ -4,6 +4,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 using string_view = basic_string_view<char>;
+using bstring_view = basic_string_view<byte_t>;
 using wstring_view = basic_string_view<wchar_t>;
 #ifdef MSTL_VERSION_20__
 using u8string_view = basic_string_view<char8_t>;

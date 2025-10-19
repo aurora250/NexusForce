@@ -1,6 +1,7 @@
 #ifndef MSTL_VARIANT_HPP__
 #define MSTL_VARIANT_HPP__
-#include "algobase.hpp"
+#include "serialize.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename, typename>
@@ -14,7 +15,7 @@ template <typename Variant, size_t Idx>
 using variant_alternative_t = typename variant_alternative<Variant, Idx>::type;
 
 template <typename... Types>
-struct variant {
+struct variant : iobject<variant<Types...>> {
 private:
     using self = variant<Types...>;
 
@@ -279,7 +280,7 @@ public:
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const variant& rh) const {
         if (index_ != rh.index_) return false;
-        return visit([&](const auto& value) {
+        return this->visit([&](const auto& value) {
             return rh.visit([&](const auto& other_value) {
                 return value == other_value;
             });
@@ -291,7 +292,7 @@ public:
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const variant& rh) const {
         if (index_ != rh.index_) return false;
-        return visit([&](const auto& value) {
+        return this->visit([&](const auto& value) {
             return rh.visit([&](const auto& other_value) {
                 return value < other_value;
             });
@@ -306,6 +307,9 @@ public:
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const variant& rh) const {
         return !(*this < rh);
     }
+
+    MSTL_CONSTEXPR20 size_t to_hash() const;
+    MSTL_CONSTEXPR20 string to_string() const;
 };
 
 template <typename T, typename ...Types>
@@ -398,27 +402,29 @@ noexcept(noexcept(static_cast<const variant<Types...>&&>(var).visit(_MSTL forwar
     return static_cast<const variant_type&&>(var).visit(_MSTL forward<Lambda>(lambda));
 }
 
-template <typename... Types>
-struct hash<_MSTL variant<Types...>> {
-private:
-    struct __variant_elem_hasher {
-        template <typename T>
-        size_t operator()(const T& value) const {
-            return hash<decay_t<T>>{}(value);
-        }
-    };
-
-    static const __variant_elem_hasher& get_hasher() {
-        static const __variant_elem_hasher hasher;
-        return hasher;
-    }
-
-public:
-    MSTL_CONSTEXPR20 size_t operator()(const _MSTL variant<Types...>& var) const
-    noexcept(noexcept(var.visit(get_hasher()))) {
-        return var.visit(get_hasher());
+MSTL_BEGIN_INNER__
+struct __variant_elem_hasher {
+    template <typename T>
+    constexpr size_t operator ()(const T& value) const {
+        return hash<decay_t<T>>{}(value);
     }
 };
+MSTL_END_INNER__
+
+template <typename... Types>
+MSTL_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
+    constexpr _INNER __variant_elem_hasher hasher{};
+    return this->visit(hasher);
+}
+
+template <typename... Types>
+MSTL_CONSTEXPR20 string variant<Types...>::to_string() const {
+    string result;
+    _MSTL visit([&result] (auto const &v) {
+        result += _MSTL to_string(v);
+    }, *this);
+    return result;
+}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_VARIANT_HPP__

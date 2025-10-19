@@ -5,7 +5,7 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
     typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
-class unordered_map {
+class unordered_map : public icollector<unordered_map<Key, T, HashFcn, EqualKey, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered map requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
@@ -14,13 +14,16 @@ class unordered_map {
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered map only contains object types.");
 
-private:
+    using self = unordered_map<Key, T, HashFcn, EqualKey, Alloc>;
+    using super = icollector<self>;
     using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey, Alloc>;
+
 public:
     using key_type          = typename base_type::key_type;
     using value_type        = typename base_type::value_type;
     using hasher            = typename base_type::hasher;
     using key_equal         = typename base_type::key_equal;
+
     using size_type         = typename base_type::size_type;
     using difference_type   = typename base_type::difference_type;
     using pointer           = typename base_type::pointer;
@@ -32,14 +35,9 @@ public:
     using const_iterator    = typename base_type::const_iterator;
 
     using allocator_type    = typename base_type::allocator_type;
-    using self              = unordered_map<Key, T, HashFcn, EqualKey, Alloc>;
 
 private:
-    base_type ht_{101, hasher(), key_equal()};
-
-    template <typename Key1, typename T1, typename HashFcn1, typename EqualKey1, typename Alloc1>
-    friend bool operator ==(const unordered_map<Key1, T1, HashFcn1, EqualKey1, Alloc1>&,
-        const unordered_map<Key1, T1, HashFcn1, EqualKey1, Alloc1>&) noexcept;
+    base_type ht_{100, hasher(), key_equal()};
 
 public:
     unordered_map() = default;
@@ -137,8 +135,6 @@ public:
     const_iterator erase(const_iterator first, const_iterator last) noexcept { return ht_.erase(first, last); }
     void clear() noexcept { ht_.clear(); }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
-
     MSTL_NODISCARD iterator find(const key_type& key) { return ht_.find(key); }
     MSTL_NODISCARD const_iterator find(const key_type& key) const { return ht_.find(key); }
 
@@ -160,6 +156,41 @@ public:
     }
     MSTL_NODISCARD T& at(const key_type& key) {
         return const_cast<reference>(static_cast<const self*>(this)->at(key));
+    }
+
+    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+     noexcept(noexcept(ht_ == rh.ht_)) {
+        return ht_ == rh.ht_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(ht_ != rh.ht_)) {
+        return ht_ != rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(ht_ < rh.ht_)) {
+        return ht_ < rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(ht_ > rh.ht_)) {
+        return ht_ > rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(ht_ <= rh.ht_)) {
+        return ht_ <= rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(ht_ >= rh.ht_)) {
+        return ht_ >= rh.ht_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(ht_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(ht_);
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
@@ -190,26 +221,10 @@ unordered_map(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
 -> unordered_map<Key, T, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator ==(const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return lh.ht_ == rh.ht_;
-}
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator !=(const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return !(lh.ht_ == rh.ht_);
-}
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-void swap(const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_map<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
-
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
     typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
-class unordered_multimap {
+class unordered_multimap : icollector<unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered multimap requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
@@ -218,23 +233,27 @@ class unordered_multimap {
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered multimap only contains object types.");
 
-private:
+    using self = unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>;
+    using super = icollector<self>;
     using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey, Alloc>;
+
 public:
     using key_type          = typename base_type::key_type;
     using value_type        = typename base_type::value_type;
     using hasher            = typename base_type::hasher;
     using key_equal         = typename base_type::key_equal;
+
     using size_type         = typename base_type::size_type;
     using difference_type   = typename base_type::difference_type;
     using pointer           = typename base_type::pointer;
     using const_pointer     = typename base_type::const_pointer;
     using reference         = typename base_type::reference;
     using const_reference   = typename base_type::const_reference;
+
     using iterator          = typename base_type::iterator;
     using const_iterator    = typename base_type::const_iterator;
+
     using allocator_type    = typename base_type::allocator_type;
-    using self              = unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>;
 
 private:
     base_type ht_{100, hasher(), key_equal()};
@@ -338,14 +357,47 @@ public:
     const_iterator erase(const_iterator first, const_iterator last) noexcept { return ht_.erase(first, last); }
     void clear() noexcept { ht_.clear(); }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
-
     MSTL_NODISCARD iterator find(const key_type& key) { return ht_.find(key); }
     MSTL_NODISCARD const_iterator find(const key_type& key) const { return ht_.find(key); }
 
     MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& key) { return ht_.equal_range(key); }
     MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
         return ht_.equal_range(key);
+    }
+
+    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(ht_ == rh.ht_)) {
+        return ht_ == rh.ht_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(ht_ != rh.ht_)) {
+        return ht_ != rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(ht_ < rh.ht_)) {
+        return ht_ < rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(ht_ > rh.ht_)) {
+        return ht_ > rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(ht_ <= rh.ht_)) {
+        return ht_ <= rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(ht_ >= rh.ht_)) {
+        return ht_ >= rh.ht_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(ht_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(ht_);
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
@@ -375,22 +427,6 @@ template <typename Key, typename T, typename HashFcn, typename Alloc>
 unordered_multimap(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
 -> unordered_multimap<Key, T, HashFcn, equal_to<Key>, Alloc>;
 #endif
-
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator ==(const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return lh.ht_ == rh.ht_;
-}
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator !=(const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return !(lh.ht_ == rh.ht_);
-}
-template <typename Key, typename T, typename HashFcn, typename EqualKey, typename Alloc>
-void swap(const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_HASH_MAP_HPP__

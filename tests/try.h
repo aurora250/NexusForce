@@ -7,8 +7,11 @@ void test_file();
 void test_datetimes();
 void test_print();
 void test_console();
+void test_numeric();
+void test_dev();
 void test_rnd();
 void test_format();
+void test_color();
 void test_enctype();
 
 class example_servlet final : public servlet {
@@ -140,7 +143,7 @@ private:
 
                 response.set_ok();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
-                response.set_body(json_to_string(json));
+                response.set_body(to_string(json.get()));
             } else {
                 response.set_bad_request();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
@@ -187,7 +190,7 @@ private:
 
             response.set_ok();
             response.set_content_type(HTTP_CONTENT::JSON_APP);
-            response.set_body(json_to_string(json));
+            response.set_body(to_string(json.get()));
         } else {
             response.set_bad_request();
             response.set_body(R"({"error":"Missing attribute name"})");
@@ -223,7 +226,7 @@ private:
             if (!name.empty()) {
                 cookie cookie(name, value);
                 if (!max_age_str.empty()) {
-                    cookie.set_max_age(_MSTL integer32::parse(max_age_str));
+                    cookie.set_max_age(_MSTL integer32::parse(max_age_str.view()));
                 }
                 response.add_cookie(cookie);
 
@@ -235,7 +238,7 @@ private:
 
                 response.set_ok();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
-                response.set_body(json_to_string(json));
+                response.set_body(to_string(json.get()));
             } else {
                 response.set_bad_request();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
@@ -262,7 +265,6 @@ private:
 void test_serv();
 
 void test_list();
-void test_exce();
 void test_json();
 
 class Foo {};
@@ -280,23 +282,8 @@ inline int sum_3(int a, int b, int c) {
 }
 
 void test_tuple();
-void test_hash();
+void test_hashtable();
 void test_math();
-
-struct Person {
-    string name;
-    int age;
-};
-
-template <>
-struct MSTL::printer <Person> {
-    static void print (const Person& p) {
-        std::cout << p.name << " : " << p.age << " ";
-    }
-    static void print_feature(const Person& p) {
-        printer::print(p);
-    }
-};
 
 void test_sort();
 void test_variant();

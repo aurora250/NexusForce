@@ -1,5 +1,5 @@
 #include <MSTL/core/json.hpp>
-#include <MSTL/core/object.hpp>
+#include <MSTL/core/undef_cmacro.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 const json_null* json_value::as_null() const noexcept { return nullptr; }
@@ -83,7 +83,7 @@ const vector<unique_ptr<json_value>>& json_array::get_elements() const noexcept 
 
 
 void json_parser::skip_space() noexcept {
-    while (pos < length && _INNER is_space(json[pos])) {
+    while (pos < length && _MSTL is_space(json[pos])) {
         pos++;
     }
 }
@@ -140,23 +140,23 @@ unique_ptr<json_number> json_parser::parse_number() {
         pos++;
         if (pos < length && json[pos] == '.') {
             pos++;
-            if (pos >= length || !_INNER is_digit(json[pos])) {
+            if (pos >= length || !_MSTL is_digit(json[pos])) {
                 Exception(JsonOperateError("Invalid decimal part"));
             }
-            while (pos < length && _INNER is_digit(json[pos])) {
+            while (pos < length && _MSTL is_digit(json[pos])) {
                 pos++;
             }
         }
-    } else if (_INNER is_digit(current())) {
-        while (pos < length && _INNER is_digit(json[pos])) {
+    } else if (_MSTL is_digit(current())) {
+        while (pos < length && _MSTL is_digit(json[pos])) {
             pos++;
         }
         if (pos < length && json[pos] == '.') {
             pos++;
-            if (pos >= length || !isdigit(json[pos])) {
+            if (pos >= length || !_MSTL is_digit(json[pos])) {
                 Exception(JsonOperateError("Invalid decimal part"));
             }
-            while (pos < length && isdigit(json[pos])) {
+            while (pos < length && _MSTL is_digit(json[pos])) {
                 pos++;
             }
         }
@@ -169,31 +169,30 @@ unique_ptr<json_number> json_parser::parse_number() {
         if (pos < length && (json[pos] == '+' || json[pos] == '-')) {
             pos++;
         }
-        if (pos >= length || !isdigit(json[pos])) {
+        if (pos >= length || !_MSTL is_digit(json[pos])) {
             Exception(JsonOperateError("Invalid exponent part"));
         }
-        while (pos < length && isdigit(json[pos])) {
+        while (pos < length && _MSTL is_digit(json[pos])) {
             pos++;
         }
     }
 
-    string num_str = json.substr(start, pos - start);
     try {
-        double value = float64::parse(num_str.data());
+        double value = float64::parse(json.view(start, pos - start));
         return make_unique<json_number>(value);
     } catch (...) {
         Exception(JsonOperateError("Invalid number value"));
     }
-    return make_unique<json_number>(FLOAT64_MAX_POSI_VALUE);
+    return make_unique<json_number>(numeric_limits<float64_t>::max());
 }
 
 unique_ptr<json_value> json_parser::parse_keyword() {
     const size_t start = pos;
-    while (pos < length && isalpha(json[pos])) {
+    while (pos < length && _MSTL is_alpha(json[pos])) {
         pos++;
     }
 
-    string keyword = json.substr(start, pos - start);
+    const string_view keyword = json.view(start, pos - start);
     if (keyword == "true") {
         return make_unique<json_bool>(true);
     } else if (keyword == "false") {
@@ -249,7 +248,7 @@ unique_ptr<json_object> json_parser::parse_object() {
         if (current() != '"') {
             Exception(JsonOperateError("Expected string key in object"));
         }
-        auto key_obj = parse_string();
+        const auto key_obj = parse_string();
         string key = key_obj->get_value();
 
         skip_space();
@@ -326,8 +325,8 @@ optional<unique_ptr<json_value>> json_parser::try_parse() {
 }
 
 
-json_builder::frame::frame(const types t, json_object* obj) : type(t), object_ptr(obj) {}
-json_builder::frame::frame(const types t, json_array* arr) : type(t), array_ptr(arr) {}
+json_builder::frame::frame(const RANGE_TYPE t, json_object* obj) : type(t), object_ptr(obj) {}
+json_builder::frame::frame(const RANGE_TYPE t, json_array* arr) : type(t), array_ptr(arr) {}
 
 json_builder& json_builder::begin_object() {
     auto new_object = make_unique<json_object>();
@@ -339,10 +338,10 @@ json_builder& json_builder::begin_object() {
         }
         root = _MSTL move(new_object);
     } else {
-        auto& current = contexts.top();
-        if (current.type == Array) {
+        const auto & current = contexts.top();
+        if (current.type == ARRAY) {
             current.array_ptr->add_element(_MSTL move(new_object));
-        } else if (current.type == Object) {
+        } else if (current.type == OBJECT) {
             if (current_key.empty()) {
                 Exception(JsonOperateError("No key set for object value"));
             }
@@ -351,7 +350,7 @@ json_builder& json_builder::begin_object() {
         }
     }
 
-    contexts.push(frame(Object, obj_ptr));
+    contexts.push(frame(OBJECT, obj_ptr));
     return *this;
 }
 
@@ -365,10 +364,10 @@ json_builder& json_builder::begin_array() {
         }
         root = _MSTL move(new_array);
     } else {
-        auto& current = contexts.top();
-        if (current.type == Array) {
+        const auto & current = contexts.top();
+        if (current.type == ARRAY) {
             current.array_ptr->add_element(_MSTL move(new_array));
-        } else if (current.type == Object) {
+        } else if (current.type == OBJECT) {
             if (current_key.empty()) {
                 Exception(JsonOperateError("No key set for array value"));
             }
@@ -377,12 +376,12 @@ json_builder& json_builder::begin_array() {
         }
     }
 
-    contexts.push(frame(Array, arr_ptr));
+    contexts.push(frame(ARRAY, arr_ptr));
     return *this;
 }
 
 json_builder& json_builder::end_object() {
-    if (contexts.empty() || contexts.top().type != Object) {
+    if (contexts.empty() || contexts.top().type != OBJECT) {
         Exception(JsonOperateError("No object to close or context mismatch"));
     }
     if (!current_key.empty()) {
@@ -393,7 +392,7 @@ json_builder& json_builder::end_object() {
 }
 
 json_builder& json_builder::end_array() {
-    if (contexts.empty() || contexts.top().type != Array) {
+    if (contexts.empty() || contexts.top().type != ARRAY) {
         Exception(JsonOperateError("No array to close or context mismatch"));
     }
     contexts.pop();
@@ -401,7 +400,7 @@ json_builder& json_builder::end_array() {
 }
 
 json_builder& json_builder::key(const string& k) {
-    if (contexts.empty() || contexts.top().type != Object) {
+    if (contexts.empty() || contexts.top().type != OBJECT) {
         Exception(JsonOperateError("Key can only be set inside an object"));
     }
     if (!current_key.empty()) {
@@ -468,7 +467,9 @@ unique_ptr<json_value> json_builder::build() {
 }
 
 
-static string json_value_to_string(const json_value* value) {
+MSTL_BEGIN_INNER__
+
+string json_value_to_string(const json_value* value) {
     if (!value) {
         return "null";
     }
@@ -485,8 +486,8 @@ static string json_value_to_string(const json_value* value) {
             const double val = num_val->get_value();
 
             if (val == static_cast<double>(static_cast<long long>(val)) &&
-                val >= static_cast<double>(INT64_MIN_VALUE) &&
-                val <= static_cast<double>(INT64_MAX_VALUE)) {
+                val >= static_cast<double>(numeric_limits<int64_t>::min()) &&
+                val <= static_cast<double>(numeric_limits<int64_t>::max())) {
                 return _MSTL to_string(static_cast<long long>(val));
             }
             string result = _MSTL to_string(val);
@@ -502,40 +503,36 @@ static string json_value_to_string(const json_value* value) {
         }
         case json_value::String: {
             const json_string* str_val = value->as_string();
-            return "\"" + escape_string(str_val->get_value()) + "\"";
+            return "\"" + escape(str_val->get_value()) + "\"";
         }
         case json_value::Array: {
             const json_array* arr_val = value->as_array();
-            string result = "[";
-
             const auto& elements = arr_val->get_elements();
-            for (size_t i = 0; i < elements.size(); ++i) {
-                if (i > 0) {
-                    result += ",";
-                }
-                result += json_value_to_string(elements[i].get());
-            }
+            if (elements.empty()) return "[]";
 
+            string result = "[";
+            for (size_t i = 0; i < elements.size(); ++i) {
+                result += json_value_to_string(elements[i].get());
+                if (i != elements.size() - 1) result += ",";
+            }
             result += "]";
             return result;
         }
         case json_value::Object: {
             const json_object* obj_val = value->as_object();
-            string result = "{";
-
             const auto& members = obj_val->get_members();
-            bool first = true;
+            if (members.empty()) return "{}";
 
+            string result = "{";
+            size_t count = 0;
             for (const auto& pair : members) {
-                if (!first) {
-                    result += ",";
-                }
-                first = false;
-
-                result += "\"" + escape_string(pair.first) + "\":";
+                result += "\"" + escape(pair.first) + "\":";
                 result += json_value_to_string(pair.second.get());
-            }
 
+                if (count != members.size() - 1) result += ",";
+                count++;
+
+            }
             result += "}";
             return result;
         }
@@ -543,15 +540,93 @@ static string json_value_to_string(const json_value* value) {
     }
 }
 
-string json_to_string(const unique_ptr<json_value>& value) {
-    return json_value_to_string(value.get());
+static string indent_str(const int indent) {
+    return string(indent, ' ');
 }
-string json_to_string(unique_ptr<json_value>&& value) {
-    string result = json_value_to_string(value.get());
-    return _MSTL move(result);
+
+string json_value_to_indent_string(const json_value* value, int indent) {
+    if (!value) {
+        return "null";
+    }
+    switch (value->type()) {
+        case json_value::Null: {
+            return "null";
+        }
+        case json_value::Bool: {
+            const json_bool* bool_val = value->as_bool();
+            return to_string(bool_val->get_value());
+        }
+        case json_value::Number: {
+            const json_number* num_val = value->as_number();
+            const double val = num_val->get_value();
+
+            if (val == static_cast<double>(static_cast<long long>(val)) &&
+                val >= static_cast<double>(numeric_limits<int64_t>::min()) &&
+                val <= static_cast<double>(numeric_limits<int64_t>::max())) {
+                return to_string(static_cast<long long>(val));
+            }
+            string result = _MSTL to_string(val);
+            if (result.find('.') != string::npos) {
+                while (!result.empty() && result.back() == '0') {
+                    result.pop_back();
+                }
+                if (!result.empty() && result.back() == '.') {
+                    result.pop_back();
+                }
+            }
+            return result;
+        }
+        case json_value::String: {
+            const json_string* str_val = value->as_string();
+            return "\"" + _MSTL escape(str_val->get_value()) + "\"";
+        }
+        case json_value::Array: {
+            const json_array* arr_val = value->as_array();
+            const auto& elements = arr_val->get_elements();
+            if (elements.empty()) return "[]";
+
+            string result = "[\n";
+            const int child_indent = indent + 2;
+            for (size_t i = 0; i < elements.size(); ++i) {
+                result += indent_str(child_indent);
+                result += json_value_to_indent_string(elements[i].get(), child_indent);
+                if (i != elements.size() - 1) result += ",";
+                result += "\n";
+            }
+            result += indent_str(indent) + "]";
+            return result;
+        }
+        case json_value::Object: {
+            const json_object* obj_val = value->as_object();
+            const auto& members = obj_val->get_members();
+            if (members.empty()) return "{}";
+
+            string result = "{\n";
+            const int child_indent = indent + 2;
+            size_t count = 0;
+            for (const auto& pair : members) {
+                result += indent_str(child_indent);
+                result += "\"" + escape(pair.first) + "\":";
+                result += json_value_to_indent_string(pair.second.get(), child_indent);
+
+                if (count != members.size() - 1) result += ",";
+                result += "\n";
+                count++;
+            }
+            result += indent_str(indent) + "}";
+            return result;
+        }
+        default: return "null";
+    }
 }
-string json_to_string(const json_value* value) {
-    return json_value_to_string(value);
+
+MSTL_END_INNER__
+
+string json_value::to_string() const {
+    return _MSTL to_string(this);
+}
+string json_value::to_indent_string() const {
+    return _MSTL to_indent_string(this);
 }
 
 MSTL_END_NAMESPACE__

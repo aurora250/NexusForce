@@ -1,9 +1,9 @@
 #ifndef MSTL_HEXADECIMAL_HPP__
 #define MSTL_HEXADECIMAL_HPP__
-#include "object.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct hexadecimal : object<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
+struct hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
 public:
     using self = hexadecimal;
     using value_type = int64_t;
@@ -11,14 +11,13 @@ public:
 private:
     value_type value_ = 0;
 
-    static MSTL_CONSTEXPR20 value_type parse_hex(const string& str) {
-        if (str.empty()) return 0;
+    static MSTL_CONSTEXPR20 value_type parse_hex(const string_view s) {
+        if (s.empty()) return 0;
 
-        string s = str;
         bool negative = false;
         size_t start = 0;
 
-        while (start < s.size() && _INNER is_space(s[start])) ++start;
+        while (start < s.size() && _MSTL is_space(s[start])) ++start;
         if (start == s.size()) return 0;
 
         if (s[start] == '-') {
@@ -36,9 +35,9 @@ private:
         string hex_digits;
         while (start < s.size()) {
             const char c = s[start++];
-            if (_INNER is_xdigit(c)) {
+            if (_MSTL is_xdigit(c)) {
                 hex_digits += c;
-            } else if (!_INNER is_space(c)) {
+            } else if (!_MSTL is_space(c)) {
                 Exception(ValueError("Invalid hexadecimal character"));
             }
         }
@@ -46,18 +45,18 @@ private:
         if (hex_digits.empty()) return 0;
 
         size_t pos = 0;
-        const uint64_t raw = _INNER to_uint64(hex_digits.data(), &pos, 16);
+        const uint64_t raw = _MSTL to_uint64(hex_digits.data(), &pos, 16);
         if (pos != hex_digits.size()) {
             Exception(ValueError("Invalid hexadecimal format"));
         }
 
         if (negative) {
-            if (raw > static_cast<uint64_t>(INT64_MAX_VALUE) + 1) {
+            if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max()) + 1) {
                 Exception(ValueError("Hexadecimal value out of range"));
             }
             return -static_cast<int64_t>(raw);
         }
-        if (raw > static_cast<uint64_t>(INT64_MAX_VALUE)) {
+        if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max())) {
             Exception(ValueError("Hexadecimal value out of range"));
         }
         return static_cast<value_type>(raw);
@@ -65,9 +64,14 @@ private:
 
 public:
     constexpr hexadecimal() noexcept = default;
-    constexpr hexadecimal(const value_type v) noexcept : value_(v) {}
-    constexpr hexadecimal(const integer64& v) noexcept : value_(v.value()) {}
-    MSTL_CONSTEXPR20 explicit hexadecimal(const string& s) : value_(parse_hex(s)) {}
+    explicit constexpr hexadecimal(const short v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const int v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const long v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const long long v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const integer64& v) noexcept : value_(v.value()) {}
+    MSTL_CONSTEXPR20 explicit hexadecimal(const string_view s) : value_(parse_hex(s)) {}
+    MSTL_CONSTEXPR20 explicit hexadecimal(const char* s) : hexadecimal(string_view(s)) {}
+    MSTL_CONSTEXPR20 explicit hexadecimal(const string& s) : hexadecimal(s.view()) {}
 
     constexpr hexadecimal(const hexadecimal&) noexcept = default;
     constexpr hexadecimal& operator =(const hexadecimal&) noexcept = default;
@@ -80,17 +84,17 @@ public:
         return value_ != _MSTL initialize<value_type>();
     }
 
-    constexpr self operator +(const self& other) const noexcept { return {value_ + other.value_}; }
-    constexpr self operator -(const self& other) const noexcept { return {value_ - other.value_}; }
-    constexpr self operator -() const noexcept { return {-value_}; }
-    constexpr self operator *(const self& other) const noexcept { return {value_ * other.value_}; }
+    constexpr self operator +(const self& other) const noexcept { return self{value_ + other.value_}; }
+    constexpr self operator -(const self& other) const noexcept { return self{value_ - other.value_}; }
+    constexpr self operator -() const noexcept { return self{-value_}; }
+    constexpr self operator *(const self& other) const noexcept { return self{value_ * other.value_}; }
     constexpr self operator /(const self& other) const {
         if (other.value_ == 0) Exception(MathError("Division by zero"));
-        return {value_ / other.value_};
+        return self{value_ / other.value_};
     }
     constexpr self operator %(const self& other) const {
         if (other.value_ == 0) Exception(MathError("Modulo by zero"));
-        return {value_ % other.value_};
+        return self{value_ % other.value_};
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
@@ -140,17 +144,17 @@ public:
         return temp;
     }
 
-    constexpr self operator &(const self& other) const noexcept { return {value_ & other.value_}; }
-    constexpr self operator |(const self& other) const noexcept { return {value_ | other.value_}; }
-    constexpr self operator ^(const self& other) const noexcept { return {value_ ^ other.value_}; }
-    constexpr self operator ~() const noexcept { return {~value_}; }
+    constexpr self operator &(const self& other) const noexcept { return self{value_ & other.value_}; }
+    constexpr self operator |(const self& other) const noexcept { return self{value_ | other.value_}; }
+    constexpr self operator ^(const self& other) const noexcept { return self{value_ ^ other.value_}; }
+    constexpr self operator ~() const noexcept { return self{~value_}; }
     constexpr self operator <<(const uint32_t shift) const {
         if (shift >= 64) Exception(ValueError("Shift count out of range"));
-        return {value_ << shift};
+        return self{value_ << shift};
     }
     constexpr self operator >>(const uint32_t shift) const {
         if (shift >= 64) Exception(ValueError("Shift count out of range"));
-        return {value_ >> shift};
+        return self{value_ >> shift};
     }
 
     constexpr self& operator &=(const self& other) noexcept { value_ &= other.value_; return *this; }
@@ -182,15 +186,13 @@ public:
     MSTL_NODISCARD int popcount() const { return _MSTL popcountll(static_cast<size_t>(value_)); }
     MSTL_NODISCARD int clz() const { return _MSTL clzll(static_cast<size_t>(value_)); }
 
-    MSTL_NODISCARD constexpr decimal to_decimal() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr integer64 to_integer64() const noexcept { return value_; }
+    MSTL_NODISCARD constexpr int64_t to_int64() const noexcept { return value_; }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept { return hash<value_type>()(value_); }
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 string to_string(value_type value);
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const;
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string& str) { return self(str); }
-    MSTL_CONSTEXPR20 bool try_parse(const string& str) noexcept {
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) { return self(str); }
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         try {
             value_ = parse_hex(str);
             return true;
@@ -213,7 +215,7 @@ struct unpackage<hexadecimal> {
 template <>
 struct formatter<hexadecimal> {
     MSTL_CONSTEXPR20 string operator()(const hexadecimal& value, const format_options& options) const {
-        const int64_t val = value.to_decimal();
+        const int64_t val = value.to_int64();
         const bool is_negative = val < 0;
         uint64_t abs_value = is_negative ? static_cast<uint64_t>(-val) : static_cast<uint64_t>(val);
 
@@ -295,15 +297,14 @@ struct formatter<hexadecimal> {
 
 
 MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
-    return _MSTL format("#x", *this);
+    return _MSTL format("{#x}", *this);
 }
-MSTL_CONSTEXPR20 string hexadecimal::to_string(const value_type value) { return _MSTL format("#x", value); }
 
 
 MSTL_BEGIN_LITERALS__
 
 MSTL_CONSTEXPR20 hexadecimal operator ""_hex(const char* str, const size_t len) {
-    return hexadecimal(string(str, len));
+    return hexadecimal(string_view(str, len));
 }
 constexpr hexadecimal operator ""_hex(const unsigned long long value) {
     return hexadecimal(static_cast<long long>(value));

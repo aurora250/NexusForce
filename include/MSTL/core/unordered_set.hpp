@@ -5,39 +5,38 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
     typename Alloc = allocator<hashtable_node<Value>>>
-class unordered_set {
+class unordered_set : icollector<unordered_set<Value, HashFcn, EqualKey, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered set requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
-    static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>,
-        "allocator type mismatch.");
+    static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered set only contains object types.");
 
-private:
-    using base_type         = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
+    using self = unordered_set<Value, HashFcn, EqualKey, Alloc>;
+    using super = icollector<self>;
+    using base_type = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
+
 public:
     using key_type          = typename base_type::key_type;
     using value_type        = typename base_type::value_type;
     using hasher            = typename base_type::hasher;
     using key_equal         = typename base_type::key_equal;
+
     using size_type         = typename base_type::size_type;
     using difference_type   = typename base_type::difference_type;
     using pointer           = typename base_type::const_pointer;
     using const_pointer     = typename base_type::const_pointer;
     using reference         = typename base_type::const_reference;
     using const_reference   = typename base_type::const_reference;
+
     using iterator          = typename base_type::const_iterator;
     using const_iterator    = typename base_type::const_iterator;
+
     using allocator_type    = typename base_type::allocator_type;
-    using self              = unordered_set<Value, HashFcn, EqualKey, Alloc>;
 
 private:
-    base_type ht_;
-
-    template <typename Value1, typename HashFcn1, typename EqualKey1, typename Alloc1>
-    friend bool operator ==(const unordered_set<Value1, HashFcn1, EqualKey1, Alloc1>&,
-        const unordered_set<Value1, HashFcn1, EqualKey1, Alloc1>&) noexcept;
+    base_type ht_{100};
 
 public:
     unordered_set() : ht_(100, hasher(), key_equal()) {}
@@ -131,14 +130,47 @@ public:
     void erase(iterator first, iterator last) noexcept { ht_.erase(first, last); }
     void clear() noexcept { ht_.clear(); }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
-
     MSTL_NODISCARD iterator find(const key_type& key) { return ht_.find(key); }
     MSTL_NODISCARD const_iterator find(const key_type& key) const { return ht_.find(key); }
 
     MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& key) { return ht_.equal_range(key); }
     MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
         return ht_.equal_range(key);
+    }
+
+    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(ht_ == rh.ht_)) {
+        return ht_ == rh.ht_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(ht_ != rh.ht_)) {
+        return ht_ != rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(ht_ < rh.ht_)) {
+        return ht_ < rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(ht_ > rh.ht_)) {
+        return ht_ > rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(ht_ <= rh.ht_)) {
+        return ht_ <= rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(ht_ >= rh.ht_)) {
+        return ht_ >= rh.ht_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(ht_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(ht_);
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
@@ -169,28 +201,10 @@ unordered_set(std::initializer_list<Key>, HashFcn, Alloc)
 -> unordered_set<Key, HashFcn, equal_to<Key>, Alloc>;
 #endif
 
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator ==(
-    const unordered_set<Value, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_set<Value, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return lh.ht_ == rh.ht_;
-}
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator !=(
-    const unordered_set<Value, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_set<Value, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return !(lh.ht_ == rh.ht_);
-}
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-void swap(unordered_set<Value, HashFcn, EqualKey, Alloc>& lh,
-    unordered_set<Value, HashFcn, EqualKey, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
-
 
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
     typename Alloc = allocator<hashtable_node<Value>>>
-class unordered_multiset {
+class unordered_multiset : icollector<unordered_multiset<Value, HashFcn, EqualKey, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered multiset requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
@@ -199,30 +213,30 @@ class unordered_multiset {
         "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered multiset only contains object types.");
 
-private:
-    using base_type         = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
+    using self = unordered_multiset<Value, HashFcn, EqualKey, Alloc>;
+    using super = icollector<self>;
+    using base_type = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
+
 public:
     using key_type          = typename base_type::key_type;
     using value_type        = typename base_type::value_type;
     using hasher            = typename base_type::hasher;
     using key_equal         = typename base_type::key_equal;
+
     using size_type         = typename base_type::size_type;
     using difference_type   = typename base_type::difference_type;
     using pointer           = typename base_type::const_pointer;
     using const_pointer     = typename base_type::const_pointer;
     using reference         = typename base_type::const_reference;
     using const_reference   = typename base_type::const_reference;
+
     using iterator          = typename base_type::const_iterator;
     using const_iterator    = typename base_type::const_iterator;
+
     using allocator_type    = typename base_type::allocator_type;
-    using self              = unordered_multiset<Value, HashFcn, EqualKey, Alloc>;
 
 private:
-    base_type ht_;
-
-    template <typename Value1, typename HashFcn1, typename EqualKey1, typename Alloc1>
-    friend bool operator ==(const unordered_multiset<Value1, HashFcn1, EqualKey1, Alloc1>&,
-        const unordered_multiset<Value1, HashFcn1, EqualKey1, Alloc1>&) noexcept;
+    base_type ht_{100};
 
 public:
     unordered_multiset() : ht_(100, hasher(), key_equal()) {}
@@ -325,6 +339,39 @@ public:
     MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
         return ht_.equal_range(key);
     }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(ht_ == rh.ht_)) {
+        return ht_ == rh.ht_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(ht_ != rh.ht_)) {
+        return ht_ != rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(ht_ < rh.ht_)) {
+        return ht_ < rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(ht_ > rh.ht_)) {
+        return ht_ > rh.ht_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(ht_ <= rh.ht_)) {
+        return ht_ <= rh.ht_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(ht_ >= rh.ht_)) {
+        return ht_ >= rh.ht_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(ht_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(ht_);
+    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename HashFcn = hash<iter_val_t<Iterator>>, typename Compare
@@ -353,22 +400,6 @@ template <typename Value, typename HashFcn, typename Alloc>
 unordered_multiset(std::initializer_list<Value>, HashFcn, Alloc)
 -> unordered_multiset<Value, HashFcn, equal_to<Value>, Alloc>;
 #endif
-
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator ==(const unordered_multiset<Value, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_multiset<Value, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return lh.ht_ == rh.ht_;
-}
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator !=(const unordered_multiset<Value, HashFcn, EqualKey, Alloc>& lh,
-    const unordered_multiset<Value, HashFcn, EqualKey, Alloc>& rh) noexcept {
-    return !(lh.ht_ == rh.ht_);
-}
-template <typename Value, typename HashFcn, typename EqualKey, typename Alloc>
-void swap(unordered_multiset<Value, HashFcn, EqualKey, Alloc>& lh,
-    unordered_multiset<Value, HashFcn, EqualKey, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_HASH_SET_HPP__

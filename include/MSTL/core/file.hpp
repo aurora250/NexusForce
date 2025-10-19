@@ -2,6 +2,9 @@
 #define MSTL_FILE_HPP__
 #include "vector.hpp"
 #include "datetime.hpp"
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <Windows.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -22,10 +25,10 @@ enum class FILE_ACCESS : size_t {
 #endif
 };
 
-inline FILE_ACCESS operator |(FILE_ACCESS a, FILE_ACCESS b) {
+constexpr FILE_ACCESS operator |(FILE_ACCESS a, FILE_ACCESS b) {
     return static_cast<FILE_ACCESS>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
-inline FILE_ACCESS operator &(FILE_ACCESS a, FILE_ACCESS b) {
+constexpr FILE_ACCESS operator &(FILE_ACCESS a, FILE_ACCESS b) {
     return static_cast<FILE_ACCESS>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
@@ -48,10 +51,10 @@ enum class FILE_SHARED : size_t {
 #endif
 };
 
-inline FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
+constexpr FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
     return static_cast<FILE_SHARED>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
-inline FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
+constexpr FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
     return static_cast<FILE_SHARED>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
@@ -65,17 +68,17 @@ enum class FILE_CREATION : size_t {
     TRUNCATE_EXIST = TRUNCATE_EXISTING
 #elif defined(MSTL_PLATFORM_LINUX__)
     CREATE_FORCE = O_CREAT | O_TRUNC | O_WRONLY,
-    CREATE_NO_EXIST = O_CREAT | O_EXCL,
+    CREATE_NO_EXIST = O_CREAT | O_EXCL | O_WRONLY,
     OPEN_FORCE = O_CREAT,
     OPEN_EXIST = 0,
     TRUNCATE_EXIST = O_TRUNC
 #endif
 };
 
-inline FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
+constexpr FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
     return static_cast<FILE_CREATION>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
-inline FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
+constexpr FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
     return static_cast<FILE_CREATION>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
@@ -106,10 +109,10 @@ enum class FILE_ATTRI : size_t {
 #endif
 };
 
-inline FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
+constexpr FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
     return static_cast<FILE_ATTRI>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
-inline FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
+constexpr FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
     return static_cast<FILE_ATTRI>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
@@ -138,10 +141,10 @@ enum class FILE_LOCK : size_t {
 #endif
 };
 
-inline FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
+constexpr FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
     return static_cast<FILE_LOCK>(static_cast<size_t>(a) | static_cast<size_t>(b));
 }
-inline FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
+constexpr FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
     return static_cast<FILE_LOCK>(static_cast<size_t>(a) & static_cast<size_t>(b));
 }
 
@@ -149,10 +152,10 @@ inline FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
 class MSTL_API file {
 public:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    using size_type = DWORD;
-    using difference_type = LONG;
-    using file_handle = HANDLE;
-    using time_type = FILETIME;
+    using size_type = ::DWORD;
+    using difference_type = ::LONG;
+    using file_handle = ::HANDLE;
+    using time_type = ::FILETIME;
 #elif defined(MSTL_PLATFORM_LINUX__)
     using size_type = size_t;
     using difference_type = ::off_t;
@@ -161,7 +164,15 @@ public:
 #endif
 
 private:
-    static file_handle INVALID_HANDLE() noexcept;
+    MSTL_ALWAYS_INLINE static const file_handle& INVALID_HANDLE() noexcept {
+        static file_handle INVALID_HANDLE =
+    #ifdef MSTL_PLATFORM_WINDOWS__
+            INVALID_HANDLE_VALUE;
+#elif defined(MSTL_PLATFORM_LINUX__)
+            -1;
+#endif
+        return INVALID_HANDLE;
+    }
 
     file_handle handle_ = INVALID_HANDLE();
     string path_{};
@@ -198,7 +209,8 @@ private:
 public:
     file() = default;
 
-    explicit file(string path,
+    explicit file(
+        string path,
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
         FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
@@ -249,6 +261,7 @@ public:
 
     size_type size() const noexcept;
     static size_type size(const string& path);
+    static bool size(const string& path, size_type& size);
 
     bool seek(difference_type distance, FILE_POINTER method = FILE_POINTER::END) const noexcept;
     difference_type tell() const noexcept;
@@ -280,7 +293,7 @@ public:
     bool set_last_access_time(const datetime& dt) const noexcept;
     bool set_last_write_time(const datetime& dt) const noexcept;
 
-    const string& path() const noexcept;
+    string_view path() const noexcept;
     bool opened() const noexcept;
     bool is_append() const noexcept;
 
@@ -293,9 +306,12 @@ public:
     bool is_file() const noexcept;
     static bool is_file(const string& path) noexcept;
 
-    string extension() const noexcept;
-    static string extension(const string& path) noexcept;
-
+    constexpr string_view extension() const noexcept {
+        return file::extension(path_.view());
+    }
+    static constexpr string_view extension(const string& path) noexcept {
+        return file::extension(path.view());
+    }
     static constexpr string_view extension(const string_view path) noexcept {
         const size_t last_sep = path.find_last_of(FILE_SPLITER);
         const string_view filename = last_sep == string::npos ? path : path.substr(last_sep + 1);
@@ -305,6 +321,9 @@ public:
             return {};
         }
         return filename.substr(last_dot + 1);
+    }
+    static constexpr string_view extension(const char* path) noexcept {
+        return file::extension(string_view{path});
     }
 
     bool create_directories() const;
@@ -335,6 +354,8 @@ public:
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     static bool copy(const string& from, const string& to, bool overwrite = true);
+    static bool copy_directory(const string& source, const string& destination, bool overwrite = true);
+
     static bool move(const string& from, const string& to, bool overwrite = true) noexcept;
     static bool rename(const string& old_name, const string& new_name);
 };

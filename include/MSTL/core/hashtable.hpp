@@ -157,11 +157,10 @@ public:
 };
 
 
+MSTL_BEGIN_CONSTANTS__
 #ifdef MSTL_DATA_BUS_WIDTH_64__
-
-static constexpr uint16_t HASH_PRIMER_COUNT = 99;
-
-static constexpr size_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
+MSTL_INLINE17 constexpr size_t HASH_PRIMER_COUNT = 99;
+MSTL_INLINE17 constexpr size_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
     101,                    173,                        263,                        397,
     599,                    907,                        1361,                       2053, 
     3083,                   4637,                       6959,                       10453, 
@@ -188,19 +187,9 @@ static constexpr size_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
     1919262463423838231ull, 2878893695135757317ull,     4318340542703636011ull,     6477510814055453699ull,
     9716266221083181299ull, 14574399331624771603ull,    18446744073709551557ull
 };
-
-MSTL_NODISCARD inline size_t hashtable_next_prime(const size_t n) {
-    const size_t* first = HASH_PRIME_LIST;
-    const size_t* last = HASH_PRIME_LIST + HASH_PRIMER_COUNT;
-    const size_t* pos = _MSTL lower_bound(first, last, n);
-    return pos == last ? *(last - 1) : *pos;
-}
-
 #else
-
-static constexpr uint16_t HASH_PRIMER_COUNT = 28;
-
-static constexpr uint32_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
+MSTL_INLINE17 constexpr size_t HASH_PRIMER_COUNT = 28;
+MSTL_INLINE17 constexpr size_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
     53,         97,           193,         389,       769,
     1543,       3079,         6151,        12289,     24593,
     49157,      98317,        196613,      393241,    786433,
@@ -208,40 +197,35 @@ static constexpr uint32_t HASH_PRIME_LIST[HASH_PRIMER_COUNT] = {
     50331653,   100663319,    201326611,   402653189, 805306457,
     1610612741, 3221225473u,  4294967291u
 };
+#endif
+MSTL_END_CONSTANTS__
 
-MSTL_NODISCARD inline size_t hashtable_next_prime(const size_t n) {
-    const uint32_t* first = HASH_PRIME_LIST;
-    const uint32_t* last = HASH_PRIME_LIST + HASH_PRIMER_COUNT;
-    const uint32_t* pos = _MSTL lower_bound(first, last, n);
-    return pos == last ? static_cast<size_t>(*(last - 1)) : static_cast<size_t>(*pos);
+MSTL_NODISCARD MSTL_CONSTEXPR20 size_t hashtable_next_prime(const size_t n) {
+    const size_t* first = _CONSTANTS HASH_PRIME_LIST;
+    const size_t* last = _CONSTANTS HASH_PRIME_LIST + _CONSTANTS HASH_PRIMER_COUNT;
+    const size_t* pos = _MSTL lower_bound(first, last, n);
+    return pos == last ? *(last - 1) : *pos;
 }
 
-#endif
 
 template <typename Value, typename Key, typename HashFcn,
     typename ExtractKey, typename EqualKey, typename Alloc>
-class hashtable {
+class hashtable : public icollector<hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>> {
+    using self = hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>;
+    using super = icollector<self>;
+    using node_type = hashtable_node<Value>;
+
 public:
-    MSTL_BUILD_TYPE_ALIAS(Value)
-    using self              = hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>;
-    using allocator_type    = Alloc;
     using key_type          = Key;
     using hasher            = HashFcn;
     using key_equal         = EqualKey;
 
+    MSTL_BUILD_TYPE_ALIAS(Value)
+
     using iterator          = hashtable_iterator<false, self>;
     using const_iterator    = hashtable_iterator<true, self>;
 
-private:
-    using node_type         = hashtable_node<value_type>;
-
-    template <bool, typename>
-    friend struct hashtable_iterator;
-
-    template <typename Value1, typename Key1, typename HashFcn1,
-        typename ExtractKey1, typename EqualKey1, typename Alloc1>
-    friend bool operator ==(const hashtable<Value1, Key1, HashFcn1, ExtractKey1, EqualKey1, Alloc1>&,
-        const hashtable<Value1, Key1, HashFcn1, ExtractKey1, EqualKey1, Alloc1>&) noexcept;
+    using allocator_type    = Alloc;
 
 private:
     vector<node_type*> buckets_{};
@@ -251,6 +235,10 @@ private:
     ExtractKey extracter_{};
     compressed_pair<allocator_type, float> pair_{ _MSTL_TAG default_construct_tag{}, 1.0f };
 
+    template <bool, typename>
+    friend struct hashtable_iterator;
+
+private:
     MSTL_NODISCARD static size_type next_size(const size_type n) noexcept {
         return hashtable_next_prime(n);
     }
@@ -486,7 +474,7 @@ public:
     MSTL_NODISCARD bool empty() const noexcept { return size_ == 0; }
     MSTL_NODISCARD size_type bucket_count() const noexcept { return buckets_.size(); }
     MSTL_NODISCARD size_type max_bucket_count() const noexcept {
-        return HASH_PRIME_LIST[HASH_PRIMER_COUNT - 1];
+        return _CONSTANTS HASH_PRIME_LIST[_CONSTANTS HASH_PRIMER_COUNT - 1];
     }
     MSTL_NODISCARD size_type bucket(const key_type& key) const noexcept(is_nothrow_hashable_v<key_type>) {
         return bkt_num_key(key);
@@ -701,16 +689,6 @@ public:
         size_ = 0;
     }
 
-    void swap(self& ht) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey>) {
-        if (_MSTL addressof(ht) == this) return;
-        _MSTL swap(hasher_, ht.hasher_);
-        _MSTL swap(equals_, ht.equals_);
-        _MSTL swap(extracter_, ht.extracter_);
-        buckets_.swap(ht.buckets_);
-        _MSTL swap(size_, ht.size_);
-        pair_.swap(ht.pair_);
-    }
-
     MSTL_NODISCARD iterator find(const key_type& key) noexcept(is_nothrow_hashable_v<key_type>) {
         size_type n = this->bkt_num_key(key, buckets_.size());
         node_type* first;
@@ -780,36 +758,56 @@ public:
 
     // merge 
     // extract
-};
-template <typename Value, typename Key, typename HashFcn,
-    typename ExtractKey, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator ==(const hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& lh,
-    const hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& rh) noexcept {
-    typedef typename hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>::node_type node;
-    if (lh.buckets_.size() != rh.buckets_.size()) return false;
-    for (size_t n = 0; n < lh.buckets_.size(); n++) {
-        node* cur1 = lh.buckets_[n];
-        node* cur2 = rh.buckets_[n];
-        for (; cur1 != nullptr && cur2 != nullptr && cur1->data_ == cur2->data_; 
-            cur1 = cur1->next_, cur2 = cur2->next_) {}
-        if (cur1 != nullptr || cur2 != nullptr) return false;
+
+    void swap(self& ht) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey>) {
+        if (_MSTL addressof(ht) == this) return;
+        _MSTL swap(hasher_, ht.hasher_);
+        _MSTL swap(equals_, ht.equals_);
+        _MSTL swap(extracter_, ht.extracter_);
+        buckets_.swap(ht.buckets_);
+        _MSTL swap(size_, ht.size_);
+        _MSTL swap(pair_, ht.pair_);
     }
-    return true;
-}
-template <typename Value, typename Key, typename HashFcn,
-    typename ExtractKey, typename EqualKey, typename Alloc>
-MSTL_NODISCARD bool operator !=(const hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& lh,
-    const hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& rh) noexcept {
-    return !(lh == rh);
-}
-template <typename Value, typename Key, typename HashFcn,
-    typename ExtractKey, typename EqualKey, typename Alloc>
-void swap(hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& ht1,
-    hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>& ht2)
-    noexcept(noexcept(ht1.swap(ht2))) {
-    ht1.swap(ht2);
-}
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const noexcept {
+        if (this->buckets_.size() != rh.buckets_.size()) return false;
+        for (size_t n = 0; n < this->buckets_.size(); n++) {
+            node_type* cur1 = this->buckets_[n];
+            node_type* cur2 = rh.buckets_[n];
+            for (; cur1 != nullptr && cur2 != nullptr && cur1->data_ == cur2->data_;
+                cur1 = cur1->next_, cur2 = cur2->next_) {}
+            if (cur1 != nullptr || cur2 != nullptr) return false;
+        }
+        return true;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const noexcept {
+        return !(*this == rh);
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(rh < *this)) {
+        return rh < *this;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(!(*this < rh))) {
+        return !(*this < rh);
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(!(*this > rh))) {
+        return !(*this > rh);
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(*this);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(*this);
+    }
+};
 
 MSTL_END_NAMESPACE__
-
 #endif // MSTL_HASHTABLE_HPP__

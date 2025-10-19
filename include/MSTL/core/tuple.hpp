@@ -1,6 +1,6 @@
 #ifndef MSTL_TUPLE_HPP__
 #define MSTL_TUPLE_HPP__
-#include "utility.hpp"
+#include "hash.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -116,18 +116,19 @@ struct tuple<> : icommon<tuple<>> {
 
 	constexpr tuple& operator =(const tuple&) noexcept = default;
 
-	MSTL_NODISCARD constexpr bool equal_to(const tuple&) const noexcept { return true; }
-	MSTL_NODISCARD constexpr bool less_to(const tuple&) const noexcept { return false; }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool equal_to(const tuple&) const noexcept { return true; }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool less_to(const tuple&) const noexcept { return false; }
 
-	MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-	MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
-	MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
-	MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
-	MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
-	MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+	MSTL_ALWAYS_INLINE constexpr void swap(tuple&) noexcept {}
 
-	MSTL_NODISCARD constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
-	constexpr void swap(tuple&) noexcept {}
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
 };
 
 template <typename This, typename... Rest>
@@ -322,7 +323,7 @@ public:
 		conjunction_v<negation<is_same<tuple, tuple<U...>>>, tuple_assignable<tuple, U...>>, int> = 0>
 	constexpr tuple& operator =(tuple<U...>&& tup) noexcept(tuple_nothrow_assignable_v<tuple, U...>) {
 		data_ = _MSTL forward<typename tuple<U...>::this_type>(tup.data_);
-		get_rest() = _MSTL forward<typename tuple<U...>::base_type>(tup.get_rest());
+		get_rest() = _MSTL forward<typename tuple<U...>::super>(tup.get_rest());
 		return *this;
 	}
 
@@ -397,36 +398,36 @@ tuple(pair<T1, T2>) -> tuple<T1, T2>;
 
 
 template <size_t Index, typename... Types>
-MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>& get(tuple<Types...>& tup) noexcept {
+MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>& get(tuple<Types...>& t) noexcept {
 	using T = tuple_element_t<Index, tuple<Types...>>;
 	using tuple_type = tuple_extract_base_t<Index, tuple<Types...>>;
-	return static_cast<T&>(static_cast<tuple_type&>(tup).data_);
+	return static_cast<T&>(static_cast<tuple_type&>(t).data_);
 }
 template <size_t Index, typename... Types>
-MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>& get(const tuple<Types...>& tup) noexcept {
+MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>& get(const tuple<Types...>& t) noexcept {
 	using T = tuple_element_t<Index, tuple<Types...>>;
 	using tuple_type = tuple_extract_base_t<Index, tuple<Types...>>;
-	return static_cast<const T&>(static_cast<const tuple_type&>(tup).data_);
+	return static_cast<const T&>(static_cast<const tuple_type&>(t).data_);
 }
 template <size_t Index, typename... Types>
-MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& get(tuple<Types...>&& tup) noexcept {
+MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& get(tuple<Types...>&& t) noexcept {
 	using T = tuple_element_t<Index, tuple<Types...>>;
 	using tuple_type = tuple_extract_base_t<Index, tuple<Types...>>;
-	return static_cast<T&&>(static_cast<tuple_type&&>(tup).data_);
+	return static_cast<T&&>(static_cast<tuple_type&&>(t).data_);
 }
 template <size_t Index, typename... Types>
-MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>&& get(const tuple<Types...>&& tup) noexcept {
+MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>&& get(const tuple<Types...>&& t) noexcept {
 	using T = tuple_element_t<Index, tuple<Types...>>;
 	using tuple_type = tuple_extract_base_t<Index, tuple<Types...>>;
-	return static_cast<const T&&>(static_cast<const tuple_type&&>(tup).data_);
+	return static_cast<const T&&>(static_cast<const tuple_type&&>(t).data_);
 }
 
 MSTL_BEGIN_INNER__
 template <size_t Index, typename... Types>
-MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& __pair_get_from_tuple(tuple<Types...>&& tup) noexcept {
+MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& __pair_get_from_tuple(tuple<Types...>&& t) noexcept {
 	using T = tuple_element_t<Index, tuple<Types...>>;
 	using tuple_type = tuple_extract_base_t<Index, tuple<Types...>>;
-	return static_cast<T&&>(static_cast<tuple_type&>(tup).data_);
+	return static_cast<T&&>(static_cast<tuple_type&>(t).data_);
 }
 MSTL_END_INNER__
 

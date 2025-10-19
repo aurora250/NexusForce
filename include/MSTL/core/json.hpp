@@ -1,13 +1,14 @@
 #ifndef MSTL_JSON_HPP__
 #define MSTL_JSON_HPP__
 #include "unordered_map.hpp"
-#include "string.hpp"
 #include "vector.hpp"
 #include "stack.hpp"
 #include "functional.hpp"
 #include "optional.hpp"
+#include "console.hpp"
 MSTL_BEGIN_NAMESPACE__
-    MSTL_ERROR_BUILD_FINAL_CLASS(JsonOperateError, ValueError, "Json String Parse Failed")
+
+MSTL_ERROR_BUILD_FINAL_CLASS(JsonOperateError, ValueError, "Json String Parse Failed")
 
 class json_value;
 class json_null;
@@ -45,6 +46,9 @@ public:
     MSTL_NODISCARD bool is_string() const noexcept;
     MSTL_NODISCARD bool is_object() const noexcept;
     MSTL_NODISCARD bool is_array() const noexcept;
+
+    MSTL_NODISCARD string to_string() const;
+    MSTL_NODISCARD string to_indent_string() const;
 };
 
 
@@ -157,21 +161,18 @@ public:
 
 class MSTL_API json_builder {
 private:
-    enum types {
-        Object,
-        Array
-    };
+    enum RANGE_TYPE { OBJECT, ARRAY };
     
     struct frame {
-        types type = Object;
+        RANGE_TYPE type = OBJECT;
         union {
             json_object* object_ptr = nullptr;
             json_array* array_ptr;
         };
 
         frame() = default;
-        frame(types t, json_object* obj);
-        frame(types t, json_array* arr);
+        frame(RANGE_TYPE t, json_object* obj);
+        frame(RANGE_TYPE t, json_array* arr);
 
         frame(const frame&) = default;
         frame& operator =(const frame&) = default;
@@ -194,9 +195,9 @@ private:
             root = _MSTL move(v);
         } else {
             const auto& top = contexts.top();
-            if (top.type == Array) {
+            if (top.type == ARRAY) {
                 top.array_ptr->add_element(_MSTL move(v));
-            } else if (top.type == Object) {
+            } else if (top.type == OBJECT) {
                 if (current_key.empty()) {
                     Exception(JsonOperateError("No key set for value in object"));
                 }
@@ -267,9 +268,38 @@ public:
     unique_ptr<json_value> build();
 };
 
-MSTL_API string json_to_string(const unique_ptr<json_value>& value);
-MSTL_API string json_to_string(unique_ptr<json_value>&& value);
-MSTL_API string json_to_string(const json_value* value);
+MSTL_BEGIN_INNER__
+string MSTL_API json_value_to_string(const json_value* value);
+string MSTL_API json_value_to_indent_string(const json_value* value, int indent);
+MSTL_END_INNER__
+
+MSTL_ALWAYS_INLINE inline string to_string(const json_value* value) {
+    return _INNER json_value_to_string(value);
+}
+MSTL_ALWAYS_INLINE inline string to_string(const json_value& value) {
+    return _INNER json_value_to_string(&value);
+}
+
+MSTL_ALWAYS_INLINE inline string to_indent_string(const unique_ptr<json_value>& value) {
+    return _INNER json_value_to_indent_string(value.get() ,0);
+}
+MSTL_ALWAYS_INLINE inline string to_indent_string(unique_ptr<json_value>&& value) {
+    return _INNER json_value_to_indent_string(value.get(), 0);
+}
+MSTL_ALWAYS_INLINE inline string to_indent_string(const json_value* value) {
+    return _INNER json_value_to_indent_string(value, 0);
+}
+MSTL_ALWAYS_INLINE inline string to_indent_string(const json_value& value) {
+    return _INNER json_value_to_indent_string(&value, 0);
+}
+
+
+template <>
+struct io_base<json_value> {
+    static void write(sys_console& console, const json_value& value) {
+        io_base<string>::write(console, to_indent_string(value));
+    }
+};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_JSON_HPP__

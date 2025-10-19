@@ -1,5 +1,5 @@
 #include <MSTL/ext/database_pool.hpp>
-#include <MSTL/core/object.hpp>
+#include <MSTL/core/environment.hpp>
 MSTL_BEGIN_NAMESPACE__
 #ifdef MSTL_SUPPORT_DB__
 
@@ -754,15 +754,15 @@ uint64_t db_redis_result::at_bit(size_type) const {
 }
 
 date db_redis_result::at_date(size_type) const {
-    return date::parse(at_string(0));
+    return date::parse(at_string(0).view());
 }
 
 time db_redis_result::at_time(size_type) const {
-    return time::parse(at_string(0));
+    return time::parse(at_string(0).view());
 }
 
 datetime db_redis_result::at_datetime(size_type) const {
-    return datetime::parse(at_string(0));
+    return datetime::parse(at_string(0).view());
 }
 
 timestamp db_redis_result::at_timestamp(size_type) const {

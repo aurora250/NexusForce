@@ -1,19 +1,21 @@
 #ifndef MSTL_THREAD_POOL_HPP__
 #define MSTL_THREAD_POOL_HPP__
-#include <thread>
 #include <atomic>
 #include <mutex>
 #include <condition_variable>
 #include <chrono>
 #include <future>
+#include "MSTL/core/thread.hpp"
 #include "MSTL/core/queue.hpp"
 #include "MSTL/core/functional.hpp"
 #include "MSTL/core/unordered_map.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-static constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = INT32_MAX_VALUE;
-static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = std::thread::hardware_concurrency();
-static constexpr int64_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
+MSTL_INLINE17 constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = numeric_limits<int32_t>::max();
+MSTL_INLINE17 constexpr int64_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
+
+static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = _MSTL thread::hardware_concurrency();
+
 
 enum class THREAD_POOL_MODE {
 	MODE_FIXED,  // static number
@@ -36,84 +38,6 @@ private:
 MSTL_END_INNER__
 
 
-#ifdef MSTL_PLATFORM_LINUX__
-class MSTL_API pthread {
-private:
-	enum class STATE {
-		Created,
-		Detached,
-		Joined,
-		Cancelled
-	};
-
-	STATE state = STATE::Created;
-
-	pthread_t thread = 0;
-	int created = 1;
-
-public:
-	template <typename F, typename... Args>
-	explicit pthread(F&& func, Args&&... args) noexcept {
-		created = ::pthread_create(&thread, nullptr, func, this);
-	}
-	template <typename F, typename... Args>
-	explicit pthread(const pthread_attr_t* attr, F&& func, Args&&... args) noexcept {
-		created = ::pthread_create(&thread, attr, func, this);
-	}
-
-	~pthread() {
-		if (is_created() && state == STATE::Created) {
-			::pthread_detach(thread);
-		}
-	}
-
-	MSTL_NODISCARD bool is_created() const noexcept {
-		return created == 0;
-	}
-	MSTL_NODISCARD bool is_joinable() const noexcept {
-		return is_created() && state != STATE::Detached;
-	}
-
-	MSTL_NODISCARD bool set_name(const char* name) const noexcept {
-		return ::pthread_setname_np(thread, name) == 0;
-	}
-
-	MSTL_NODISCARD size_t get_id() const noexcept {
-		return thread;
-	}
-	MSTL_NODISCARD STATE get_state() const noexcept {
-		return state;
-	}
-
-	static pthread_t current_thread_id() noexcept {
-		return ::pthread_self();
-	}
-
-
-	MSTL_NODISCARD bool join() {
-		if (state != STATE::Created) return false;
-		const bool res = ::pthread_join(thread, nullptr) == 0;
-		if (res) state = STATE::Joined;
-		return res;
-	}
-
-	MSTL_NODISCARD bool detach() noexcept {
-		if (state != STATE::Created) return false;
-		const bool res = (pthread_detach(thread) == 0);
-		if (res) state = STATE::Detached;
-		return res;
-	}
-
-	MSTL_NODISCARD bool cancel() {
-		if (state != STATE::Created) return false;
-		const bool res = (pthread_cancel(thread) == 0);
-		if (res) state = STATE::Cancelled;
-		return res;
-	}
-};
-#endif
-
-
 class MSTL_API manual_thread {
 public:
     using id_type = uint32_t;
@@ -125,7 +49,7 @@ private:
 	id_type thread_id_;
 
 public:
-	explicit manual_thread(thread_func func) noexcept;
+	explicit manual_thread(thread_func&& func) noexcept;
 	~manual_thread() = default;
 
     MSTL_NODISCARD id_type get_id() const noexcept;

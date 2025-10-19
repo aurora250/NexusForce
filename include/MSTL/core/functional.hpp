@@ -1,6 +1,7 @@
 #ifndef MSTL_FUNCTION_HPP__
 #define MSTL_FUNCTION_HPP__
 #include "memory.hpp"
+#include <typeinfo>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -16,7 +17,7 @@ constexpr Res __invoke_dispatch(_MSTL_TAG invoke_other_tag, F&& f, Args&&... arg
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
 constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memfun_ref_tag, MemFun&& f, T&& t, Args&&... args) {
-    return (__invoke_forward<T>(t).*f)(_MSTL forward<Args>(args)...);
+    return (_INNER __invoke_forward<T>(t).*f)(_MSTL forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
 constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args){
@@ -24,7 +25,7 @@ constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memfun_deref_tag, MemFun&& f, T
 }
 template <typename Res, typename MemPtr, typename T>
 constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memobj_ref_tag, MemPtr&& f, T&& t) {
-    return __invoke_forward<T>(t).*f;
+    return _INNER __invoke_forward<T>(t).*f;
 }
 template <typename Res, typename MemPtr, typename T>
 constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memobj_deref_tag, MemPtr&& f, T&& t) {
@@ -32,6 +33,7 @@ constexpr Res __invoke_dispatch(_MSTL_TAG invoke_memobj_deref_tag, MemPtr&& f, T
 }
 
 MSTL_END_INNER__
+
 
 template <typename Callable, typename... Args>
 constexpr typename _INNER __invoke_result_aux<Callable, Args...>::type
@@ -63,6 +65,7 @@ noexcept(is_nothrow_invocable_v<Callable, Args...>) {
 
 MSTL_END_INNER__
 
+
 template <typename Res, typename Callable, typename... Args>
 constexpr enable_if_t<is_invocable_r_v<Res, Callable, Args...>, Res>
 invoke_r(Callable&& f, Args&&... args)
@@ -72,7 +75,7 @@ noexcept(is_nothrow_invocable_v<Callable, Args...>) {
     using tag = typename result::invoke_type;
     return _INNER __invoke_r_dispatch<type, tag, Res, Callable, Args...>(
     	_MSTL forward<Callable>(f), _MSTL forward<Args>(args)...
-		);
+	);
 }
 
 
@@ -99,10 +102,14 @@ struct __apply_unpack_tuple : bool_constant<__apply_unpack_tuple_v<Trait, T, Tup
 
 template <typename F, typename Tuple, size_t... Idx>
 constexpr decltype(auto) __apply_impl(F&& f, Tuple&& t, _MSTL index_sequence<Idx...>) {
-    return _MSTL invoke(_MSTL forward<F>(f), _MSTL get<Idx>(_MSTL forward<Tuple>(t))...);
+    return _MSTL invoke(_MSTL forward<F>(f),
+    	_MSTL forward<decltype(_MSTL get<Idx>(_MSTL forward<Tuple>(t)))>
+    		(_MSTL get<Idx>(_MSTL forward<Tuple>(t)))...
+    	);
 }
 
 MSTL_END_INNER__
+
 
 template <typename F, typename Tuple>
 constexpr decltype(auto) apply(F&& f, Tuple&& t)
@@ -112,15 +119,15 @@ noexcept(_INNER __apply_unpack_tuple<_MSTL is_nothrow_invocable, F, Tuple>::valu
 }
 
 
-enum class FUNCTION_OPERATE {
-	GET_TYPE_INFO, GET_PTR, COPY_PTR, DESTROY_PTR
-};
-
 template <typename Sign>
 class function;
 
 
 MSTL_BEGIN_INNER__
+
+enum class FUNCTION_OPERATE {
+	GET_TYPE_INFO, GET_PTR, COPY_PTR, DESTROY_PTR
+};
 
 class __undefined_util;
 
@@ -330,7 +337,7 @@ private:
 		if (manager_ == &_INNER __function_handler_dispatch<Res(Args...), F>::manage
 			|| (manager_ && typeid(F) == target_type())) {
 			_INNER storage_data ptr{};
-			manager_(ptr, func_, FUNCTION_OPERATE::GET_PTR);
+			manager_(ptr, func_, _INNER FUNCTION_OPERATE::GET_PTR);
 			return ptr.access<const F*>();
 		}
 		return nullptr;
@@ -347,7 +354,7 @@ public:
 
 	function(const function& x) : __function_base() {
 		if (static_cast<bool>(x)) {
-			x.manager_(func_, x.func_, FUNCTION_OPERATE::COPY_PTR);
+			x.manager_(func_, x.func_, _INNER FUNCTION_OPERATE::COPY_PTR);
 			invoker_ = x.invoker_;
 			manager_ = x.manager_;
 		}
@@ -386,7 +393,7 @@ public:
 	}
 	function& operator =(nullptr_t) noexcept {
 		if (manager_) {
-			manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);
+			manager_(func_, func_, _INNER FUNCTION_OPERATE::DESTROY_PTR);
 			manager_ = nullptr;
 			invoker_ = nullptr;
 		}
@@ -412,7 +419,26 @@ public:
 
 	explicit operator bool() const noexcept { return !empty(); }
 
-	Res operator ()(Args&&... args) const {
+	Res operator ()(Args&&... args) &
+    noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
+		if (empty()) Exception(MemoryError("functional pointing to null."));
+		return invoker_(func_, _MSTL forward<Args>(args)...);
+	}
+
+	Res operator ()(Args&&... args) &&
+	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
+		if (empty()) Exception(MemoryError("functional pointing to null."));
+		return invoker_(func_, _MSTL forward<Args>(args)...);
+	}
+
+	Res operator ()(Args&&... args) const &
+    noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
+		if (empty()) Exception(MemoryError("functional pointing to null."));
+		return invoker_(func_, _MSTL forward<Args>(args)...);
+	}
+
+	Res operator ()(Args&&... args) const &&
+	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
 		if (empty()) Exception(MemoryError("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
@@ -420,7 +446,7 @@ public:
 	MSTL_NODISCARD const std::type_info& target_type() const noexcept {
 		if (manager_) {
 			_INNER storage_data result{};
-			manager_(result, func_, FUNCTION_OPERATE::GET_TYPE_INFO);
+			manager_(result, func_, _INNER FUNCTION_OPERATE::GET_TYPE_INFO);
 			if (const auto info = result.access<const std::type_info*>())
 				return *info;
 		}

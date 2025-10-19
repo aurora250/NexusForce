@@ -1,8 +1,10 @@
 #ifndef MSTL_DATABASE_POOL_HPP__
 #define MSTL_DATABASE_POOL_HPP__
-#include "MSTL/core/basiclib.hpp"
 #ifdef MSTL_SUPPORT_DB__
 #ifdef MSTL_SUPPORT_MYSQL__
+#ifdef CR_OUT_OF_MEMORY
+#undef CR_OUT_OF_MEMORY
+#endif
 #include <mysql.h>
 #endif
 #ifdef MSTL_SUPPORT_SQLITE3__
@@ -12,12 +14,12 @@
 #include <hiredis.h>
 #endif
 #include "MSTL/core/undef_cmacro.hpp"
-#include <mutex>
-#include <thread>
-#include <condition_variable>
 #include "MSTL/core/queue.hpp"
 #include "MSTL/core/list.hpp"
 #include "MSTL/core/datetime.hpp"
+#include <mutex>
+#include <thread>
+#include <condition_variable>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseError, LinkError, "Database Operations Failed.")

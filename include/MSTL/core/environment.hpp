@@ -1,12 +1,11 @@
 #ifndef MSTL_BASICLIB_HPP__
 #define MSTL_BASICLIB_HPP__
-#include "undef_cmacro.hpp"
-#include <iostream>
 #ifdef MSTL_SUPPORT_BOOST__
 #include <boost/version.hpp>
 #endif
 #ifdef MSTL_SUPPORT_QT6__
 #include <QtGlobal>
+#include "undef_cmacro.hpp"
 #endif
 
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(_M_X86)
@@ -31,6 +30,11 @@
 #else
 	// defined when project compiled in not supported systems.
 	#define MSTL_PLATFORM_UNSUPPORT__	1
+#endif
+
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+#define WIN32_LEAN_AND_MEAN
 #endif
 
 
@@ -69,7 +73,7 @@
 
 
 #ifdef MSTL_COMPILER_MSVC__
-    #ifdef MSTL_EXPORTS
+    #ifdef MSTL_DLLEXPORTS
         #define MSTL_API __declspec(dllexport)
     #else
         #define MSTL_API __declspec(dllimport)
@@ -106,18 +110,6 @@
 	#if defined(__x86_64__) || defined(__i386__)
 		#define MSTL_SUPPORT_INLINE_ASM__	1
 	#endif
-#endif
-
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <WinSock2.h>
-#pragma comment(lib, "ws2_32.lib")
-#include <fcntl.h>
-#include <io.h>
-#define _CRT_SECURE_NO_WARNINGS
-#include "undef_cmacro.hpp"
-#elif defined(MSTL_PLATFORM_LINUX__)
-#include <sys/sysinfo.h>
 #endif
 
 
@@ -226,13 +218,6 @@
 
 #define FOR_EACH(VALUE, CONTAINER) \
 	for(auto VALUE = CONTAINER.begin(); VALUE != CONTAINER.end(); ++VALUE)
-
-#ifdef MSTL_STATE_DEBUG__
-	#define SIMPLE_LOG(MESG) \
-		std::cout << __FILE__ << ":" << __LINE__ << " " << __TIMESTAMP__ << " : " << MESG << std::endl;
-#else
-	#define SIMPLE_LOG(MESG)
-#endif
 
 
 #ifdef MSTL_SUPPORT_CONSTEXPR__
@@ -480,6 +465,12 @@
 	MAC(long double)
 
 
+#define MSTL_MACRO_RANGES_ALL(MAC) \
+	MSTL_MACRO_RANGE_CHARS(MAC) \
+	MSTL_MACRO_RANGE_INT(MAC) \
+	MSTL_MACRO_RANGE_FLOAT(MAC)
+
+
 // quickly define standard type alias.
 #define MSTL_BUILD_TYPE_ALIAS(TYPE) \
 	using value_type        = TYPE; \
@@ -499,299 +490,59 @@ using byte_t    = unsigned char;
 using int8_t	= signed char;
 using int16_t	= short;
 using int32_t	= int;
-#ifdef MSTL_PLATFORM_WINDOWS__
-using int64_t	= long long;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#ifdef MSTL_PLATFORM_LINUX64__
 using int64_t	= long;
+#elif defined(MSTL_PLATFORM_WINDOWS__) || defined(MSTL_PLATFORM_LINUX32__)
+using int64_t	= long long;
 #endif
+
 
 using uint8_t	= unsigned char;
 using uint16_t	= unsigned short;
 using uint32_t	= unsigned int;
-#ifdef MSTL_PLATFORM_WINDOWS__
-using uint64_t	= unsigned long long;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#ifdef MSTL_PLATFORM_LINUX64__
 using uint64_t	= unsigned long;
+#elif defined(MSTL_PLATFORM_WINDOWS__) || defined(MSTL_PLATFORM_LINUX32__)
+using uint64_t	= unsigned long long;
 #endif
+
 
 using float32_t	= float;
 using float64_t	= double;
 using decimal_t = long double;
 
-#if defined(MSTL_PLATFORM_LINUX__)
-using uintptr_t = unsigned long;
+#ifdef MSTL_PLATFORM_LINUX64__
 using size_t	= unsigned long;
 using ssize_t	= long;
 using ptrdiff_t = long;
 using intptr_t	= long;
+using uintptr_t = unsigned long;
+using intmax_t	= long;
+using uintmax_t = unsigned long;
 #elif defined(MSTL_PLATFORM_WIN64__)
 using uintptr_t = unsigned long long;
 using size_t	= unsigned long long;
 using ssize_t	= long long;
 using ptrdiff_t = long long;
 using intptr_t	= long long;
-#elif defined(MSTL_PLATFORM_WIN32__)
+using intmax_t	= long long;
+using uintmax_t = unsigned long long;
+#elif defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__)
 using uintptr_t = unsigned int;
 using size_t	= unsigned int;
 using ssize_t	= int;
 using ptrdiff_t = int;
 using intptr_t	= int;
+using intmax_t	= long long;
+using uintmax_t = unsigned long long;
 #endif
-
-
-MSTL_INLINE17 constexpr int8_t  INT8_MIN_VALUE  = -128;
-MSTL_INLINE17 constexpr int16_t INT16_MIN_VALUE = -32768;
-MSTL_INLINE17 constexpr int32_t INT32_MIN_VALUE = -2147483647 - 1;
-MSTL_INLINE17 constexpr int64_t INT64_MIN_VALUE = -9223372036854775807LL - 1;
-
-MSTL_INLINE17 constexpr int8_t  INT8_MAX_VALUE  = 127;
-MSTL_INLINE17 constexpr int16_t INT16_MAX_VALUE = 32767;
-MSTL_INLINE17 constexpr int32_t INT32_MAX_VALUE = 2147483647;
-MSTL_INLINE17 constexpr int64_t INT64_MAX_VALUE = 9223372036854775807LL;
-
-MSTL_INLINE17 constexpr uint8_t  UINT8_MIN_VALUE  = 0;
-MSTL_INLINE17 constexpr uint16_t UINT16_MIN_VALUE = 0;
-MSTL_INLINE17 constexpr uint32_t UINT32_MIN_VALUE = 0;
-MSTL_INLINE17 constexpr uint64_t UINT64_MIN_VALUE = 0;
-
-MSTL_INLINE17 constexpr uint8_t  UINT8_MAX_VALUE  = 255;
-MSTL_INLINE17 constexpr uint16_t UINT16_MAX_VALUE = 65535;
-MSTL_INLINE17 constexpr uint32_t UINT32_MAX_VALUE = 0xffffffffU;
-MSTL_INLINE17 constexpr uint64_t UINT64_MAX_VALUE = 0xffffffffffffffffULL;
-
-
-MSTL_INLINE17 constexpr unsigned long ULONG_MIN_VALUE = 0;
-MSTL_INLINE17 constexpr unsigned long ULONG_MAX_VALUE = static_cast<unsigned long>(-1);
-MSTL_INLINE17 constexpr long LONG_MAX_VALUE = (ULONG_MAX_VALUE - 1) / 2;
-MSTL_INLINE17 constexpr long LONG_MIN_VALUE = -LONG_MAX_VALUE - 1;
-
-
-MSTL_INLINE17 constexpr float32_t FLOAT32_MIN_NEGA_VALUE = -3.402823466e+38f;
-MSTL_INLINE17 constexpr float32_t FLOAT32_MAX_NEGA_VALUE = -1.175494351e-38f;
-MSTL_INLINE17 constexpr float32_t FLOAT32_MIN_POSI_VALUE = 1.175494351e-38f;
-MSTL_INLINE17 constexpr float32_t FLOAT32_MAX_POSI_VALUE = 3.402823466e+38f;
-
-MSTL_INLINE17 constexpr float64_t FLOAT64_MIN_NEGA_VALUE = -1.7976931348623157e+308;
-MSTL_INLINE17 constexpr float64_t FLOAT64_MAX_NEGA_VALUE = -2.2250738585072014e-308;
-MSTL_INLINE17 constexpr float64_t FLOAT64_MIN_POSI_VALUE = 2.2250738585072014e-308;
-MSTL_INLINE17 constexpr float64_t FLOAT64_MAX_POSI_VALUE = 1.7976931348623157e+308;
-
-#ifdef MSTL_COMPILER_MSVC__
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MIN_NEGA_VALUE = FLOAT64_MIN_NEGA_VALUE;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MAX_NEGA_VALUE = FLOAT64_MAX_NEGA_VALUE;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MIN_POSI_VALUE = FLOAT64_MIN_POSI_VALUE;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MAX_POSI_VALUE = FLOAT64_MAX_POSI_VALUE;
-#elif defined(MSTL_COMPILER_GNUC__)
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MIN_NEGA_VALUE = -1.18973149535723176502126385303097021e+4932L;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MAX_NEGA_VALUE = -3.36210314311209350626267781732175260e-4932L;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MIN_POSI_VALUE = 3.36210314311209350626267781732175260e-4932L;
-MSTL_INLINE17 constexpr decimal_t DECIMAL_MAX_POSI_VALUE = 1.18973149535723176502126385303097021e+4932L;
-#endif
-
-
-MSTL_INLINE17 constexpr float32_t FLOAT32_TRUE_MIN_POSITIVE_VALUE = 1.401298464e-45f;
-MSTL_INLINE17 constexpr float64_t FLOAT64_TRUE_MIN_POSITIVE_VALUE = 4.9406564584124654e-324;
-#ifdef MSTL_COMPILER_MSVC__
-MSTL_INLINE17 constexpr decimal_t DECIMAL_TRUE_MIN_POSITIVE_VALUE = FLOAT64_TRUE_MIN_POSITIVE_VALUE;
-#elif defined(MSTL_COMPILER_GNUC__)
-MSTL_INLINE17 constexpr decimal_t DECIMAL_TRUE_MIN_POSITIVE_VALUE = 0x1.0p-16494;
-#endif
-
-
-MSTL_INLINE17 constexpr int INT8_MAX_DIGITS = 3;
-MSTL_INLINE17 constexpr int INT16_MAX_DIGITS = 5;
-MSTL_INLINE17 constexpr int INT32_MAX_DIGITS = 10;
-MSTL_INLINE17 constexpr int INT64_MAX_DIGITS = 19;
-
-MSTL_INLINE17 constexpr int UINT8_MAX_DIGITS = 3;
-MSTL_INLINE17 constexpr int UINT16_MAX_DIGITS = 5;
-MSTL_INLINE17 constexpr int UINT32_MAX_DIGITS = 10;
-MSTL_INLINE17 constexpr int UINT64_MAX_DIGITS = 20;
-
-MSTL_INLINE17 constexpr int FLOAT32_MAX_DIGITS = 9;
-MSTL_INLINE17 constexpr int FLOAT64_MAX_DIGITS = 17;
-#ifdef MSTL_COMPILER_MSVC__
-MSTL_INLINE17 constexpr int DECIMAL_MAX_DIGITS = FLOAT64_MAX_DIGITS;
-#elif defined(MSTL_COMPILER_GNUC__)
-MSTL_INLINE17 constexpr int DECIMAL_MAX_DIGITS = 20;
-#endif
-
-
-MSTL_INLINE17 constexpr float32_t FLOAT32_EPSILON = 1.192092896e-07f;
-MSTL_INLINE17 constexpr float64_t FLOAT64_EPSILON = 2.2204460492503131e-16;
-#ifdef MSTL_COMPILER_MSVC__
-MSTL_INLINE17 constexpr decimal_t DECIMAL_EPSILON = FLOAT64_EPSILON;
-#elif defined(MSTL_COMPILER_GNUC__)
-MSTL_INLINE17 constexpr decimal_t DECIMAL_EPSILON = 1.9259299443872359e-34;
-#endif
-
-
-MSTL_INLINE17 constexpr bool IS_CHAR_SIGNED = (static_cast<char>(128) < 0);
-
-MSTL_INLINE17 constexpr char CHAR_MIN_VALUE = IS_CHAR_SIGNED ? INT8_MIN_VALUE : UINT8_MIN_VALUE;
-MSTL_INLINE17 constexpr char CHAR_MAX_VALUE = IS_CHAR_SIGNED ? INT8_MAX_VALUE : UINT8_MAX_VALUE;
-
-MSTL_INLINE17 constexpr wchar_t WCHAR_MIN_VALUE = UINT16_MIN_VALUE;
-MSTL_INLINE17 constexpr wchar_t WCHAR_MAX_VALUE = UINT16_MAX_VALUE;
-
-MSTL_INLINE17 constexpr char8_t CHAR8_MIN_VALUE = UINT8_MIN_VALUE;
-MSTL_INLINE17 constexpr char8_t CHAR8_MAX_VALUE = UINT8_MAX_VALUE;
-
-MSTL_INLINE17 constexpr char16_t CHAR16_MIN_VALUE = UINT16_MIN_VALUE;
-MSTL_INLINE17 constexpr char16_t CHAR16_MAX_VALUE = UINT16_MAX_VALUE;
-
-MSTL_INLINE17 constexpr char32_t CHAR32_MIN_VALUE = UINT32_MIN_VALUE;
-MSTL_INLINE17 constexpr char32_t CHAR32_MAX_VALUE = UINT32_MAX_VALUE;
-
-
-MSTL_INLINE17 constexpr int CHAR_MAX_DIGITS = IS_CHAR_SIGNED ? INT8_MAX_DIGITS : UINT8_MAX_DIGITS;
 
 
 MSTL_INLINE17 constexpr size_t POINTER_SIZE = sizeof(void*);
 MSTL_INLINE17 constexpr size_t SIZE_T_MAX_SIZE = static_cast<size_t>(-1);
-
-MSTL_INLINE17 constexpr float32_t FLOAT32_NAN_VALUE = __builtin_nanf("");
-
+MSTL_INLINE17 constexpr bool SIZE_T_SAME_WITH_LONG = sizeof(long) == sizeof(size_t);
 
 MSTL_INLINE17 constexpr size_t MEMORY_ALIGN_THRESHHOLD = 16UL;
-
-#ifdef MSTL_COMPILER_MSVC__
-MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32UL;
-MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
-
-#ifdef MSTL_STATE_DEBUG__
-MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = 2 * POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
-#else
-MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
-#endif
-
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAFAFAFAFAUL;
-#else
-MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAUL;
-#endif
-#endif // MSTL_COMPILER_MSVC__
-
-
-MSTL_ALWAYS_INLINE inline void set_utf8_console() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::SetConsoleOutputCP(CP_UTF8);
-    ::SetConsoleCP(CP_UTF8);
-    ::_setmode(::_fileno(stdout), _O_BINARY);
-    ::_setmode(::_fileno(stderr), _O_BINARY);
-    ::_setmode(::_fileno(stdin), _O_BINARY);
-#endif
-}
-
-
-MSTL_ALWAYS_INLINE inline size_t get_available_memory() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::MEMORYSTATUSEX statex;
-    statex.dwLength = sizeof(statex);
-    ::GlobalMemoryStatusEx(&statex);
-    return statex.ullAvailPhys + statex.ullAvailVirtual;
-#elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::sysinfo info{};
-    ::sysinfo(&info);
-    return info.freeram * info.mem_unit + info.freeswap * info.mem_unit;
-#else
-    return 0;
-#endif
-}
-
-
-static constexpr uint8_t POPCOUNT_TABLE[256] = {
-	0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
-};
-
-inline int popcountll(const size_t x) {
-#ifdef MSTL_COMPILER_GNUC__
-	return __builtin_popcountll(x);
-#elif defined(MSTL_COMPILER_MSVC__)
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	return static_cast<int>(__popcnt64(x));
-#else
-	return static_cast<int>(__popcnt(static_cast<uint32_t>(x)));
-#endif
-#else
-	return
-		POPCOUNT_TABLE[x & 0xFF] +
-		POPCOUNT_TABLE[(x >> 8) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 16) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 24) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 32) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 40) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 48) & 0xFF] +
-		POPCOUNT_TABLE[(x >> 56) & 0xFF];
-#endif
-}
-
-inline int clzll(size_t x) {
-	if (x == 0) return 64;
-#ifdef MSTL_COMPILER_GNUC__
-	return __builtin_clzll(x);
-#elif defined(MSTL_COMPILER_MSVC__)
-	unsigned long index;
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	::_BitScanReverse64(&index, x);
-#else
-	::_BitScanReverse(&index, x);
-#endif
-	return 63 - static_cast<int>(index);
-#else
-	if (x == 0) return 64;
-
-	int n = 0;
-	if (x <= 0x00000000FFFFFFFFULL) {
-		n += 32;
-		x <<= 32;
-	}
-	if (x <= 0x0000FFFFFFFFFFFFULL) {
-		n += 16;
-		x <<= 16;
-	}
-	if (x <= 0x00FFFFFFFFFFFFFFULL) {
-		n += 8;
-		x <<= 8;
-	}
-	if (x <= 0x0FFFFFFFFFFFFFFFULL) {
-		n += 4;
-		x <<= 4;
-	}
-	if (x <= 0x3FFFFFFFFFFFFFFFULL) {
-		n += 2;
-		x <<= 2;
-	}
-	if (x <= 0x7FFFFFFFFFFFFFFFULL) {
-		n += 1;
-	}
-	return n;
-#endif
-}
-
-
-MSTL_BEGIN_INNER__
-template <typename T, typename UT>
-MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
-	if (n == 0) return 1;
-	T result = 1.0;
-	T base = x;
-	while (n > 0) {
-		if (n % 2 == 1)
-			result *= base;
-		base *= base;
-		n /= 2;
-	}
-	return result;
-}
-MSTL_END_INNER__
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_BASICLIB_HPP__

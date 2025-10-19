@@ -17,7 +17,7 @@ function(configure_compiler_options target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE
                 -finput-charset=UTF-8 -fexec-charset=UTF-8
-                $<$<CONFIG:Debug>:-Werror -O0 -g>
+                $<$<CONFIG:Debug>:-Werror -O0 -g -gdwarf-4>
                 $<$<CONFIG:Release>:-O2>
         )
         target_link_options(${target} PRIVATE -Wl,--emit-relocs)
@@ -119,20 +119,17 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
-        ../include/MSTL/core/vsprintf.hpp
-        ../include/MSTL/core/cstring.hpp
-        ../include/MSTL/core/interface.hpp
-        core/vsprintf.cpp
-        ../include/MSTL/core/format.hpp
-        core/console.cpp
-        ../include/MSTL/core/numeric_limits.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/bitmap.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/mutex.cpp
 )
 
 # 编译为动态库
@@ -169,7 +166,7 @@ target_include_directories(MSTL
 )
 
 # 定义导出宏
-target_compile_definitions(MSTL PRIVATE MSTL_EXPORTS)
+target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
 
 configure_compiler_options(MSTL)
 

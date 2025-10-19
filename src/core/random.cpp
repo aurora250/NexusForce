@@ -1,5 +1,10 @@
 #include <MSTL/core/random.hpp>
 #include <MSTL/core/datetime.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <Windows.h>
+#include <wincrypt.h>
+#include <MSTL/core/undef_cmacro.hpp>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/fcntl.h>
 #include <unistd.h>
@@ -30,7 +35,7 @@ int random_lcd::next_int(const int min, const int max) {
 }
 
 int random_lcd::next_int() {
-    return next_int(0, INT32_MAX_VALUE);
+    return next_int(0, numeric_limits<int32_t>::max());
 }
 
 double random_lcd::next_double() {
@@ -160,7 +165,7 @@ int32_t secret::next_int(const int32_t min, const int32_t max) {
 
     uint32_t value;
     do {
-        get_random_bytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
+        get_random_bytes(reinterpret_cast<byte_t*>(&value), sizeof(value));
         value &= (1ULL << bits) - 1;
     } while (value >= range);
 
@@ -173,7 +178,7 @@ int32_t secret::next_int(const int32_t max) {
 
 double secret::next_double() {
     uint64_t value;
-    get_random_bytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
+    get_random_bytes(reinterpret_cast<byte_t*>(&value), sizeof(value));
     return static_cast<double>(value) / (static_cast<double>(1ULL << 63) + 1.0);
 }
 

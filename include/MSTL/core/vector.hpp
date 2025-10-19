@@ -1,59 +1,38 @@
 #ifndef MSTL_VECTOR_HPP__
 #define MSTL_VECTOR_HPP__
-#include "object.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename T, typename Alloc>
-class vector;
-
 template <bool IsConst, typename Vector>
-struct vector_iterator : iiterator<vector_iterator<IsConst, Vector>,
-#ifdef MSTL_VERSION_20__
-	contiguous_iterator_tag,
-#else
-	random_access_iterator_tag,
-#endif
-	typename Vector::value_type,
-	conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>,
-	conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>,
-	typename Vector::difference_type, typename Vector::size_type
-> {
+struct vector_iterator {
 private:
-	using container_type	= Vector;
-	using base_type			= iiterator<vector_iterator<IsConst, Vector>,
-#ifdef MSTL_VERSION_20__
-		contiguous_iterator_tag,
-#else
-		random_access_iterator_tag,
-#endif
-		typename Vector::value_type,
-		conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>,
-		conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>,
-		typename Vector::difference_type, typename Vector::size_type
-	>;
-	using iterator			= vector_iterator<false, container_type>;
-	using const_iterator	= vector_iterator<true, container_type>;
+	using self				= vector_iterator;
+	using iterator			= vector_iterator<false, Vector>;
+	using const_iterator	= vector_iterator<true, Vector>;
 
 public:
-	using iterator_category = typename base_type::iterator_category;
-	using value_type		= typename base_type::value_type;
-	using reference			= typename base_type::reference;
-	using pointer			= typename base_type::pointer;
-	using difference_type	= typename base_type::difference_type;
-	using size_type			= typename base_type::size_type;
-
-	using self				= vector_iterator<IsConst, container_type>;
+	using iterator_category =
+#ifdef MSTL_VERSION_20__
+		contiguous_iterator_tag;
+#else
+		random_access_iterator_tag;
+#endif
+	using value_type		= typename Vector::value_type;
+	using reference			= conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>;
+	using pointer			= conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>;
+	using difference_type	= typename Vector::difference_type;
+	using size_type			= typename Vector::size_type;
 
 private:
 	pointer ptr_ = nullptr;
-	const container_type* vec_ = nullptr;
+	const Vector* vec_ = nullptr;
 
 	template <bool, typename> friend struct vector_iterator;
 	template <typename, typename> friend class vector;
 
 public:
 	MSTL_CONSTEXPR20 vector_iterator() = default;
-	MSTL_CONSTEXPR20 vector_iterator(pointer ptr, const container_type* vec) : ptr_(ptr), vec_(vec) {}
+	MSTL_CONSTEXPR20 vector_iterator(pointer ptr, const Vector* vec) : ptr_(ptr), vec_(vec) {}
 
 	MSTL_CONSTEXPR20 vector_iterator(const iterator& x) noexcept
 	: ptr_(const_cast<pointer>(x.ptr_)), vec_(x.vec_) {}
@@ -209,35 +188,23 @@ public:
 };
 
 template <typename T, typename Alloc = allocator<T>>
-class vector : public collector<vector<T, Alloc>, T,
-	vector_iterator<false, vector<T, Alloc>>,
-	vector_iterator<true, vector<T, Alloc>>
-> {
+class vector : public icollector<vector<T, Alloc>> {
 #ifdef MSTL_VERSION_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
 	static_assert(is_object_v<T>, "vector only contains object types.");
 
-	using base_type = collector<vector, T,
-		vector_iterator<false, vector>,
-		vector_iterator<true, vector>
-	>;
+	using self = vector<T, Alloc>;
+	using super = icollector<self>;
 
 public:
-	using value_type		= typename base_type::value_type;
-	using reference			= typename base_type::reference;
-	using const_reference	= typename base_type::const_reference;
-	using pointer			= typename base_type::pointer;
-	using const_pointer		= typename base_type::const_pointer;
-	using difference_type	= typename base_type::difference_type;
-	using size_type			= typename base_type::size_type;
-	using iterator					= typename base_type::iterator;
-	using const_iterator			= typename base_type::const_iterator;
-	using reverse_iterator			= typename base_type::reverse_iterator;
-	using const_reverse_iterator	= typename base_type::const_reverse_iterator;
-	using allocator_type	= Alloc;
-	using self				= vector<T, Alloc>;
+	MSTL_BUILD_TYPE_ALIAS(T)
+	using iterator					= vector_iterator<false, vector<T, Alloc>>;
+	using const_iterator			= vector_iterator<true, vector<T, Alloc>>;
+	using reverse_iterator          = _MSTL reverse_iterator<iterator>;
+	using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
+	using allocator_type			= Alloc;
 
 private:
 	pointer start_ = nullptr;
@@ -637,8 +604,7 @@ public:
 			const size_type old_size = this->size();
 			const size_type len = old_size + _MSTL max(old_size, n);
 			pointer new_start = pair_.get_base().allocate(len);
-			pointer new_finish = new_start;
-			new_finish = _MSTL uninitialized_copy(this->begin(), position, new_start);
+			pointer new_finish = _MSTL uninitialized_copy(this->begin(), position, new_start);
 			new_finish = _MSTL uninitialized_fill_n(new_finish, n, x);
 			new_finish = _MSTL uninitialized_copy(position, this->end(), new_finish);
 			_MSTL destroy(start_, finish_);
@@ -694,13 +660,6 @@ public:
 		finish_ = start_;
 	}
 
-	MSTL_CONSTEXPR20 void swap(self& x) noexcept {
-		if (_MSTL addressof(x) == this) return;
-		_MSTL swap(start_, x.start_);
-		_MSTL swap(finish_, x.finish_);
-		_MSTL swap(pair_, x.pair_);
-	}
-
 	MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference at(const size_type position) const noexcept {
 		MSTL_DEBUG_VERIFY(position < this->size(), "vector access out of range");
 		return *(start_ + position);
@@ -713,6 +672,13 @@ public:
 	}
 	MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type position) noexcept {
 		return this->at(position);
+	}
+
+	MSTL_CONSTEXPR20 void swap(self& x) noexcept {
+		if (_MSTL addressof(x) == this) return;
+		_MSTL swap(start_, x.start_);
+		_MSTL swap(finish_, x.finish_);
+		_MSTL swap(pair_, x.pair_);
 	}
 
 	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& rh) const
@@ -738,6 +704,14 @@ public:
 	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const self& rh) const
 	noexcept(noexcept(!(*this > rh))) {
 		return !(*this > rh);
+	}
+
+	MSTL_NODISCARD MSTL_CONSTEXPR20 size_type to_hash() const noexcept {
+		return super::default_to_hash(*this);
+	}
+
+	MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+		return super::default_to_string(*this);
 	}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

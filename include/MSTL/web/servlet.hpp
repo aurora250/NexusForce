@@ -2,7 +2,7 @@
 #define MSTL_SERVLET_HPP__
 #include "socket.hpp"
 #include "session.hpp"
-#include "MSTL/core/print.hpp"
+#include "MSTL/core/undef_cmacro.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
 #include <netinet/in.h>
 #include <unistd.h>
@@ -11,7 +11,7 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(HttpError, LinkError, "Http Actions Failed");
 
-struct http_request {
+struct MSTL_API http_request {
 private:
     HTTP_METHOD method = HTTP_METHOD::GET;
     string path = "/";
@@ -23,9 +23,9 @@ private:
     string body{};
     session* session = nullptr;
 
-    friend class _INNER servlet;
+    friend class servlet;
 
-    static MSTL_API const string EMPTY_MARK;
+    static const string EMPTY_MARK;
 
 public:
     http_request() = default;
@@ -121,7 +121,7 @@ public:
 };
 
 
-struct http_response {
+struct MSTL_API http_response {
 private:
     string version = "HTTP/1.1";
     HTTP_STATUS status_code = HTTP_STATUS::S4_NOT_FOUNT;
@@ -132,9 +132,9 @@ private:
     string redirect_url{};
     string forward_path{};
 
-    static MSTL_API const string EMPTY_MARK;
+    static const string EMPTY_MARK;
 
-    friend class _INNER servlet;
+    friend class _MSTL servlet;
 
 public:
     http_response() {
@@ -177,7 +177,7 @@ public:
     void set_content_type(const string& value) {
         headers["Content-Type"] = value;
     }
-    void set_content_type(const char* value) {
+    void set_content_type(const string_view value) {
         headers["Content-Type"] = value;
     }
     void set_content_encode(const string& value) {
@@ -248,7 +248,7 @@ public:
 };
 
 
-class filter {
+class MSTL_API filter {
 public:
     virtual ~filter() = default;
     virtual void do_filter(http_request& request, http_response& response) = 0;
@@ -256,7 +256,7 @@ public:
     virtual void post_filter(http_request& request, http_response& response) {}
 };
 
-class filter_chain {
+class MSTL_API filter_chain {
 private:
     vector<filter*> filters_;
     size_t current_index_ = 0;
@@ -293,7 +293,7 @@ public:
 #undef DELETE
 #endif
 
-class cors_filter final : public filter {
+class MSTL_API cors_filter final : public filter {
 private:
     string allowed_origins_ = "*";
     HTTP_METHOD allowed_methods_ = HTTP_METHOD::GET & HTTP_METHOD::POST &
@@ -319,26 +319,26 @@ public:
     }
 };
 
-class logging_filter final : public filter {
+class MSTL_API logging_filter final : public filter {
 public:
     bool pre_filter(http_request& request, http_response& response) override {
-        print();
         println("[", datetime::now(), "] Request: ", request.get_method(), " ", request.get_path());
-        print();
         return true;
     }
 
     void post_filter(http_request& request, http_response& response) override {
-        print();
-        println("[", datetime::now(), "] Response: ", response.get_status(), " ", response.get_status_msg());
-        print();
+        using UT = underlying_type_t<HTTP_STATUS>;
+        println("[", datetime::now(), "] Response: ",
+            static_cast<UT>(response.get_status()), " ",
+            response.get_status_msg()
+            );
     }
 
     void do_filter(http_request& request, http_response& response) override {}
 };
 
 
-struct HTTP_COOKIE {
+struct MSTL_API HTTP_COOKIE {
     static constexpr auto JSESSIONID = "JSESSIONID";
     static constexpr auto SESSIONID = "SESSIONID";
     static constexpr auto PHPSESSID = "PHPSESSID";
@@ -346,9 +346,7 @@ struct HTTP_COOKIE {
 };
 
 
-MSTL_BEGIN_INNER__
-
-class servlet {
+class MSTL_API servlet {
 private:
     socket server_socket_{};
     uint16_t port_;
@@ -413,9 +411,8 @@ private:
         } while (true);
     }
 
-    static void parse_cookies(const string &cookie_header, http_request &request) {
-        if (cookie_header.empty())
-            return;
+    static void parse_cookies(const string& cookie_header, http_request &request) {
+        if (cookie_header.empty()) return;
 
         vector<string> cookie_pairs;
         size_t start = 0;
@@ -440,21 +437,20 @@ private:
 
     static void parse_parameters(http_request &request) {
         if (!request.get_query().empty()) {
-            parse_url_encoded(request.get_query(), request.parameters);
+            parse_url_encoded(request.get_query().view(), request.parameters);
         }
         if (request.get_method().is_post() && !request.get_body().empty()) {
-            string content_type = request.get_content_type();
+            const string& content_type = request.get_content_type();
             if (content_type.find(HTTP_CONTENT::FORM_APP) == 0) {
-                parse_url_encoded(request.get_body(), request.parameters);
+                parse_url_encoded(request.get_body().view(), request.parameters);
             }
         }
     }
 
-    static void parse_url_encoded(const string &data, unordered_map<string, string> &params) {
-        if (data.empty())
-            return;
+    static void parse_url_encoded(const string_view data, unordered_map<string, string> &params) {
+        if (data.empty()) return;
 
-        vector<string> pairs;
+        vector<string_view> pairs;
         size_t start = 0;
         size_t end = data.find('&');
 
@@ -469,19 +465,18 @@ private:
             const size_t eq_pos = pair.find('=');
             if (eq_pos != string::npos) {
                 string name = url_decode(pair.substr(0, eq_pos));
-                string value = url_decode(pair.substr(eq_pos + 1));
-                params[name] = value;
+                params[name] = url_decode(pair.substr(eq_pos + 1));
             }
         }
     }
 
-    static string url_decode(const string& str) {
+    static string url_decode(const string_view str) {
         string result;
         for (size_t i = 0; i < str.length(); ++i) {
             if (str[i] == '%' && i + 2 < str.length()) {
                 try {
                     hexadecimal hex_val(str.substr(i + 1, 2));
-                    result += static_cast<char>(hex_val.to_decimal());
+                    result += static_cast<char>(hex_val.to_int64());
                 } catch (...) {
                     result += str[i];
                 }
@@ -522,7 +517,7 @@ protected:
                 if (cl_pos != string::npos) {
                     const size_t cl_end = request_data.find("\r\n", cl_pos);
                     if (cl_end != string::npos) {
-                        string cl_str = request_data.substr(
+                        const string cl_str = request_data.substr(
                             cl_pos + 15, cl_end - cl_pos - 15
                             ).trim();
                         content_length = _MSTL uinteger32::parse(cl_str.c_str());
@@ -533,8 +528,12 @@ protected:
                 if (body_read < static_cast<ssize_t>(content_length)) {
                     ssize_t remaining = static_cast<ssize_t>(content_length - body_read);
                     while (remaining > 0) {
-                        bytes_read = ::read(client_socket, buffer,
-                            _MSTL min(static_cast<ssize_t>(sizeof(buffer)), remaining));
+                        const auto size = _MSTL min(static_cast<ssize_t>(sizeof(buffer)), remaining);
+#ifdef MSTL_PLATFORM_WINDOWS__
+                        bytes_read = ::recv(client_socket, buffer, size, 0);
+#elif defined(MSTL_PLATFORM_LINUX__)
+                        bytes_read = ::read(client_socket, buffer, size);
+#endif
                         if (bytes_read <= 0) break;
                         request_data.append(buffer, bytes_read);
                         remaining -= bytes_read;
@@ -546,9 +545,9 @@ protected:
             if (total_read > 1024 * 16) break;
         }
 
-        istringstream iss(request_data);
         string line;
-        if (iss.getline(line)) {
+        size_t pos = 0;
+        if (_MSTL getline(request_data, pos, line)) {
             line.trim();
             const size_t pos1 = line.find(' ');
             if (pos1 != string::npos) {
@@ -569,7 +568,7 @@ protected:
         }
 
         // request header
-        while (iss.getline(line)) {
+        while (_MSTL getline(request_data, pos, line)) {
             line.trim();
             if (line.empty()) break;
 
@@ -588,7 +587,7 @@ protected:
         }
 
         // Parse cookies
-        auto cookie_str = req.get_cookie();
+        const auto cookie_str = req.get_cookie();
         if (!cookie_str.empty()) {
             parse_cookies(cookie_str, req);
         }
@@ -606,34 +605,30 @@ protected:
     }
 
     virtual string build_response_str(const http_response& response) {
-        ostringstream ss;
-
+        string result;
         if (!response.get_redirect().empty()) {
-            ss << response.get_version() << " 302 Found\r\n";
-            ss << "Location: " << response.get_redirect() << "\r\n";
+            result += response.get_version() + " 302 Found\r\n";
+            result += "Location: " + response.get_redirect() + "\r\n";
         } else {
-            ss << response.get_version() << " "
-               << static_cast<uint16_t>(response.get_status()) << " "
-               << response.get_status_msg() << "\r\n";
+            result += response.get_version() + " " +
+                _MSTL to_string(static_cast<uint16_t>(response.get_status())) + " "
+                + response.get_status_msg() + "\r\n";
         }
 
         for (const auto& cookie : response.cookies) {
-            ss << "Set-Cookie: " << cookie.to_string() << "\r\n";
+            result += "Set-Cookie: " + cookie.to_string() + "\r\n";
         }
         if (response.get_redirect().empty() &&
             response.get_content_length().empty()) {
-            ss << "Content-Length: " << response.get_body().size() << "\r\n";
+            result += "Content-Length: " + _MSTL to_string(response.get_body().size()) + "\r\n";
         }
         for (auto iter = response.headers.begin(); iter != response.headers.end(); ++iter) {
-            ss << iter->first << ": " << iter->second << "\r\n";
+            result += iter->first + ": " + iter->second + "\r\n";
         }
-        ss << "\r\n";
+        result += "\r\n";
+        if (response.get_redirect().empty()) result += response.get_body();
 
-        if (!response.get_redirect().empty()) {
-        } else {
-            ss << response.get_body();
-        }
-        return ss.str();
+        return result;
     }
 
     void send_response(const socket::socket_t client_socket, const http_response& response) {
@@ -681,7 +676,7 @@ protected:
         return get_session(request, false);
     }
 
-    void add_session_cookie(http_request& request, http_response& response, session* session) const {
+    void add_session_cookie(const http_request& request, http_response& response, session* session) const {
         if (session && session->is_new()) {
             cookie session_cookie(session_cookie_name_, session->get_id());
             session_cookie.set_path("/");
@@ -712,13 +707,10 @@ protected:
         }
         filter_chain_.execute_filters(request, response);
 
-        print();
         println(
-            "[", request.get_method(), "]", request.get_path(),
-            "Query:", request.get_query(),
-            "Body size:", request.get_body().size(),
-            *request.get_session());
-        print();
+            "[", request.get_method(), "]", request.get_path(), "Query:", request.get_query(),
+            "Body size:", request.get_body().size(), *request.get_session()
+        );
 
         const HTTP_METHOD& method = request.get_method();
         if (method.is_get()) {
@@ -780,15 +772,15 @@ protected:
         response.set_status_msg("OK");
         response.set_content_type(HTTP_CONTENT::HTML_MSG);
 
-        ostringstream ss;
-        ss << request.get_method().to_string() << " " << request.get_path();
-        if (!request.get_query().empty()) ss << "?" << request.get_query();
-        ss << " " << request.get_version() << "\r";
+        string result;
+        result += request.get_method().to_string() + " " + request.get_path();
+        if (!request.get_query().empty()) result += "?" + request.get_query();
+        result += " " + request.get_version() + "\r";
         for (auto iter = request.headers.begin(); iter != request.headers.end(); ++iter) {
-            ss << iter->first << ": " << iter->second << "\r";
+            result += iter->first + ": " + iter->second + "\r";
         }
-        ss << "\r" << request.get_body();
-        response.set_body(ss.str());
+        result += "\r" + request.get_body();
+        response.set_body(result);
     }
 
     virtual void do_connect(http_request& request, http_response& response) {
@@ -883,10 +875,6 @@ public:
         return session_cookie_name_;
     }
 };
-
-MSTL_END_INNER__
-
-using servlet = _INNER servlet;
 
 
 MSTL_END_NAMESPACE__

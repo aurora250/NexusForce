@@ -1,6 +1,6 @@
 #ifndef MSTL_ARRAY_HPP__
 #define MSTL_ARRAY_HPP__
-#include "algobase.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
@@ -114,13 +114,14 @@ public:
 };
 
 template <typename T, size_t Size>
-class array : public icommon<array<T, Size>> {
+class array : public icollector<array<T, Size>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
+
+    using self = array<T, Size>;
+    using base_type = icollector<self>;
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using self = array<T, Size>;
-
     using iterator                  = array_iterator<false, Size, self>;
     using const_iterator            = array_iterator<true, Size, self>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
@@ -226,11 +227,39 @@ public:
         return array_;
     }
 
-    MSTL_CONSTEXPR20 void fill(const T& value) {
+    constexpr void fill(const T& value) {
         _MSTL fill_n(array_, Size, value);
     }
-    MSTL_CONSTEXPR20 void swap(array& x) noexcept(is_nothrow_swappable_v<T>) {
+
+    constexpr void swap(array& x) noexcept(is_nothrow_swappable_v<T>) {
         _MSTL swap(array_, x.array_);
+    }
+
+    MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept {
+        return _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    }
+    MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept {
+        return !(*this == rh);
+    }
+    MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    }
+    MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept {
+        return rh < *this;
+    }
+    MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept {
+        return !(*this < rh);
+    }
+    MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept {
+        return !(*this > rh);
+    }
+
+    MSTL_NODISCARD constexpr size_type to_hash() const noexcept {
+        return base_type::default_to_hash(*this);
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+        return base_type::default_to_string(*this);
     }
 };
 
@@ -241,13 +270,14 @@ struct empty_array_element_tag {
 MSTL_END_TAG__
 
 template <class T>
-class array<T, 0> {
+class array<T, 0> : public icollector<array<T, 0>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
+
+    using self = array<T, 0>;
+    using base_type = icollector<self>;
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using self = array<T, 0>;
-    
     using iterator                  = array_iterator<false, 0, self>;
     using const_iterator            = array_iterator<true, 0, self>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
@@ -367,11 +397,23 @@ public:
         return nullptr;
     }
 
-    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void fill(const T&) {}
-    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void swap(array&) noexcept {}
+    MSTL_ALWAYS_INLINE constexpr void fill(const T&) {}
+    MSTL_ALWAYS_INLINE constexpr void swap(array&) noexcept {}
+
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self&) const noexcept { return true; }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self&) const noexcept { return false; }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
+
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_type to_hash() const noexcept { return FNV_OFFSET_BASIS; }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+        return base_type::default_to_string(*this);
+    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-
 MSTL_BEGIN_INNER__
 template <typename First, typename... Rest>
 struct __array_same {
@@ -382,38 +424,7 @@ MSTL_END_INNER__
 
 template <typename First, typename... Rest>
 array(First, Rest...) -> array<typename _INNER __array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
-
 #endif // MSTL_SUPPORT_DEDUCTION_GUIDES__
-
-template <class T, size_t Size, enable_if_t<Size == 0 || is_swappable_v<T>, int> = 0>
-MSTL_CONSTEXPR20 void swap(array<T, Size>& lh, array<T, Size>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
-
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return _MSTL equal(lh.data(), lh.data() + Size, rh.data());
-}
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return !(lh == rh);
-}
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return _MSTL lexicographical_compare(lh.data(), lh.data() + Size, rh.data(), rh.data() + Size);
-}
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return rh < lh;
-}
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return !(rh < lh);
-}
-template <class T, size_t Size>
-MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const array<T, Size>& lh, const array<T, Size>& rh) {
-    return !(lh < rh);
-}
 
 
 template <size_t Idx, class T, size_t Size>

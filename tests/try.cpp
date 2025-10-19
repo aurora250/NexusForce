@@ -1,12 +1,11 @@
 #include "try.h"
 USE_MSTL
-using MSTL::size_t;
 
 
-const string TEST_FILE = "test_temp_file.txt";
-const string TEST_DIR = "test_temp_dir";
-const string TEST_SUB_DIR = TEST_DIR + "/sub_dir";
-const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird line";
+static const string TEST_FILE = "test_temp_file.txt";
+static const string TEST_DIR = "test_temp_dir";
+static const string TEST_SUB_DIR = TEST_DIR + "/sub_dir";
+static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird line";
 
 void test_file_basic_operations() {
     bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
@@ -22,37 +21,40 @@ void test_file_basic_operations() {
     assert(read_ok);
     assert(read_content == TEST_CONTENT);
 
-    file f;
-    assert(!f.opened());
-    assert(f.open(TEST_FILE, FILE_ACCESS::READ_WRITE));
-    assert(f.opened());
-    assert(f.path() == TEST_FILE);
+    {
+        file f;
+        assert(!f.opened());
+        assert(f.open(TEST_FILE, FILE_ACCESS::READ_WRITE));
+        assert(f.opened());
+        assert(f.path() == TEST_FILE);
 
-    string line;
-    assert(f.read_line(line));
-    assert(line == "Hello, File Class!");
-    assert(f.read_line(line));
-    assert(line == "Second line.");
-    assert(f.read_line(line));
-    assert(line == "Third line");
+        string line;
+        assert(f.read_line(line));
+        assert(line == "Hello, File Class!");
+        assert(f.read_line(line));
+        assert(line == "Second line.");
+        assert(f.read_line(line));
+        assert(line == "Third line");
 
-    assert(f.seek(0, FILE_POINTER::BEGIN));
-    assert(f.tell() == 0);
-    assert(f.seek(5, FILE_POINTER::CURRENT));
-    assert(f.tell() == 5);
+        assert(f.seek(0, FILE_POINTER::BEGIN));
+        assert(f.tell() == 0);
+        assert(f.seek(5, FILE_POINTER::CURRENT));
+        assert(f.tell() == 5);
 
-    assert(f.seek(0));
-    string append_str = " Append";
-    size_t written = f.write(append_str, append_str.size());
-    assert(written == append_str.size());
-    assert(f.flush());
-    assert(f.size() == TEST_CONTENT.size() + append_str.size());
+        assert(f.truncate(10));
+        assert(f.size() == 10);
 
-    assert(f.truncate(10));
-    assert(f.size() == 10);
+        assert(f.seek(0, FILE_POINTER::BEGIN));
+        string new_content = "New content after truncate";
+        size_t written = f.write(new_content);
+        assert(written == new_content.size());
+        assert(f.flush());
 
-    f.close();
-    assert(!f.opened());
+        assert(f.size() == new_content.size());
+
+        f.close();
+        assert(!f.opened());
+    }
 }
 
 void test_directory_operations() {
@@ -88,20 +90,21 @@ void test_file_attributes_and_times() {
 }
 
 void test_file_lock_and_other_operations() {
-    file f(TEST_FILE);
-    assert(f.open(TEST_FILE));
+    {
+        file f(TEST_FILE);
+        assert(f.open(TEST_FILE));
 
-    bool locked = f.lock(0, 10, _MSTL FILE_LOCK::EXCLUSIVE);
-    assert(locked);
-    bool unlocked = f.unlock(0, 10);
-    assert(unlocked);
+        bool locked = f.lock(0, 10, FILE_LOCK::EXCLUSIVE);
+        assert(locked);
+        bool unlocked = f.unlock(0, 10);
+        assert(unlocked);
+    }
 
     string copy_file = TEST_FILE + ".copy";
     assert(file::copy(TEST_FILE, copy_file));
     assert(file::exists(copy_file));
     string copy_content;
     file::read(copy_file, copy_content);
-    assert(copy_content.size() == f.size());
 
     string move_file = TEST_DIR + "/moved_file.txt";
     assert(file::move(copy_file, move_file));
@@ -112,8 +115,6 @@ void test_file_lock_and_other_operations() {
     assert(file::rename(move_file, rename_file));
     assert(!file::exists(move_file));
     assert(file::exists(rename_file));
-
-    f.close();
 }
 
 void test_move_semantics() {
@@ -163,14 +164,12 @@ void test_file() {
     try {
         test_file_basic_operations();
         test_directory_operations();
-        test_file_attributes_and_times();
         test_file_lock_and_other_operations();
         test_move_semantics();
+        test_file_attributes_and_times();
         clean_up();
-        println("All test passed");
     } catch (...) {
         clean_up();
-        println("Test failed");
     }
 }
 
@@ -211,7 +210,7 @@ void test_date() {
     auto str = _MSTL date(2024, 5, 10).to_string();
     assert(str == "2024-05-10");
     assert(_MSTL date::parse("2024-05-10") == _MSTL date(2024, 5, 10));
-    assert(_MSTL date::parse("invalid") == _MSTL date::epoch());
+    assert(_MSTL date().try_parse("invalid") == false);
 
     println("test_date passed");
 }
@@ -239,7 +238,7 @@ void test_time() {
 
     assert(_MSTL time(9, 8, 7).to_string() == "09:08:07");
     assert(_MSTL time::parse("09:08:07") == _MSTL time(9, 8, 7));
-    assert(_MSTL time::parse("invalid") == _MSTL time(0, 0, 0));
+    assert(_MSTL time().try_parse("invalid") == false);
 
     println("test_time passed");
 }
@@ -264,7 +263,9 @@ void test_datetime() {
     assert(_MSTL datetime(2024, 5, 10, 9, 8, 7).to_string() == "2024-05-10 09:08:07");
     assert(_MSTL datetime::parse("2024-05-10 09:08:07")
         == _MSTL datetime(2024, 5, 10, 9, 8, 7));
-    assert(_MSTL datetime::parse("invalid") == _MSTL datetime::epoch());
+    assert(_MSTL datetime().try_parse("invalid") == false);
+
+    println(datetime::now());
 
     println("test_datetime passed");
 }
@@ -303,17 +304,16 @@ void test_datetimes() {
     test_datetime();
     test_timestamp();
     test_utc_conversion();
-    println(datetime::now());
 }
 
 void test_print() {
     decimal_t f = _CONSTANTS PI;
-    FUNCTION_OPERATE enu = FUNCTION_OPERATE::GET_PTR;
+    _INNER FUNCTION_OPERATE enu = _INNER FUNCTION_OPERATE::GET_PTR;
     _INNER __nocopy_type uni{};
-    bit_reference obj{};
     int c_arr[2];
     int* pa = ::new int[2];
-    println_feature(pa);
+    string address = to_string(pa);
+    println(address);
     delete[] pa;
     pa = nullptr;
     int* p = &c_arr[0];
@@ -326,17 +326,12 @@ void test_print() {
     void (bit_reference::* mfp)() const noexcept = &bit_reference::flip;
 #endif
     TypeCastError err;
-    compressed_pair<printer<int>, int> cp;
+    compressed_pair<io_base<int>, int> cp;
     tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
     pair<int, char> pir{1, '1'};
     vector<int> v{1, 2, 3};
     vector<int>::iterator iter = v.begin();
     vector<pair<int, char>> pir_vec{{1, '1'}, {2, '2'}, {3, '3'}};
-    temporary_buffer<vector<int>::iterator> tb{v.begin(), v.end()};
-    shared_ptr<int> sp = make_shared<int>(1);
-    shared_ptr<int> spc = sp;
-    unique_ptr<int> up = make_unique<int>(1);
-    hash<int> ih;
     array<int, 5> arr{1,2,3,4,5};
     variant<int, char> var{v[0]};
     var.emplace<1>('c');
@@ -345,7 +340,7 @@ void test_print() {
     unordered_map<int, int> umi{{1,2}};
     set<int> s{1,2,3};
     unordered_set<int> us{1,2,3};
-    bitmap bm{10,false};
+    bitmap bm{10, false};
     string str = "胡";
     string_view sv = cs;
     wstring ws = L"WSTRING胡";
@@ -355,42 +350,19 @@ void test_print() {
     const char16_t* u16emoji = u"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
     const char32_t* u32emoji = U"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
 #ifdef MSTL_VERSION_20__
-    const char8_t* u8emoji = u8"\n胡Hello, World! 😊 🌟 🚀 ✔";
-    println_feature(u8emoji);
+    const char8_t* u8emoji = u8"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
+    println(u8emoji);
 #endif
 
-    println_feature(tup, var);
-    println_feature(pir, cp, ih);
-    println_feature('c', nullptr);
-    println_feature(&RB_TREE_RED, &RB_TREE_BLACK);
-    println_feature(f, enu);
-    println_feature(uni, obj);
-    println_feature("\n\\\"\v", cs, err);
-    println_feature(test_any, test_check, initialize<int>, make_shared<int, int>, _MSTL datetime::epoch);
-    println_feature(mop, null_mop, mfp);
-    println_feature(p, iter);
-    println_feature(tb);
-    println_feature(sp, spc, up);
-    println_feature(c_arr, arr);
-    println_feature(lls);
-    println_feature(bm);
-    println_feature(v);
-    println_feature(str, sv, ws);
-    println_feature(emoji, wemoji);
-    println_feature(u16emoji, u32emoji);
-
+    string tup_str = to_string(tup);
     println(tup, var);
-    println(pir, cp, ih);
+    println(pir, cp);
     println('c', nullptr);
     println(&RB_TREE_RED, &RB_TREE_BLACK);
-    println(f, enu);
-    println(uni, obj);
-    println("\n\\\"\v", cs, err);
-    println(test_any, test_check, initialize<int>, make_shared<int, int>, _MSTL datetime::epoch);
-    println(mop, null_mop, mfp);
-    println(p, iter);
-    println(tb);
-    println(sp, spc, up);
+    println(f, static_cast<size_t>(enu), uni);
+    println(escape("\n\\\"\v"), cs, err);
+    println(initialize<int>, make_shared<int, int>, _MSTL datetime::epoch);
+    println(mop, null_mop, mfp, p);
     println(c_arr, arr);
     println(lls);
     println(bm);
@@ -404,28 +376,88 @@ void test_print() {
 
 void test_console() {
     hexadecimal hex("F");
-    console.println(hex);
+    println(hex);
     console.readln(hex);
-    console.println(hex);
+    println(hex);
     int rawi = 3;
-    console.println(rawi);
+    println(rawi);
     console.read(rawi);
-    console.println(rawi);
+    println(rawi);
     _MSTL boolean b;
     b.try_parse("true");
-    console.println(b);
+    println(b);
     console.readln(b);
-    console.println(b);
+    println(b);
     integer32 i32;
     console.read(i32);
-    console.println(i32);
-    console.println();
+    println(i32);
+    println();
     float32 fp;
     console.read(fp);
-    console.println(fp);
+    println(fp);
     println(to_string(fp));
 }
 
+template <typename T>
+void test_num_impl() {
+    static_assert(static_cast<size_t>(MSTL::numeric_limits<T>::has_denorm) == static_cast<size_t>(std::numeric_limits<T>::has_denorm));
+    static_assert(MSTL::numeric_limits<T>::has_denorm_loss == std::numeric_limits<T>::has_denorm_loss);
+    static_assert(MSTL::numeric_limits<T>::has_infinity == std::numeric_limits<T>::has_infinity);
+    static_assert(MSTL::numeric_limits<T>::has_quiet_nan == std::numeric_limits<T>::has_quiet_NaN);
+    static_assert(MSTL::numeric_limits<T>::has_signaling_nan == std::numeric_limits<T>::has_signaling_NaN);
+    static_assert(MSTL::numeric_limits<T>::is_bounded == std::numeric_limits<T>::is_bounded);
+    static_assert(MSTL::numeric_limits<T>::is_exact == std::numeric_limits<T>::is_exact);
+    static_assert(MSTL::numeric_limits<T>::is_iec559 == std::numeric_limits<T>::is_iec559);
+    static_assert(MSTL::numeric_limits<T>::is_integer == std::numeric_limits<T>::is_integer);
+    static_assert(MSTL::numeric_limits<T>::is_modulo == std::numeric_limits<T>::is_modulo);
+    static_assert(MSTL::numeric_limits<T>::is_signed == std::numeric_limits<T>::is_signed);
+    static_assert(MSTL::numeric_limits<T>::is_specialized == std::numeric_limits<T>::is_specialized);
+    static_assert(MSTL::numeric_limits<T>::tinyness_before == std::numeric_limits<T>::tinyness_before);
+    static_assert(MSTL::numeric_limits<T>::traps == std::numeric_limits<T>::traps);
+    static_assert(static_cast<size_t>(MSTL::numeric_limits<T>::round_style) == static_cast<size_t>(std::numeric_limits<T>::round_style));
+    static_assert(MSTL::numeric_limits<T>::digits == std::numeric_limits<T>::digits);
+    static_assert(MSTL::numeric_limits<T>::digits10 == std::numeric_limits<T>::digits10);
+    static_assert(MSTL::numeric_limits<T>::max_digits10 == std::numeric_limits<T>::max_digits10);
+    static_assert(MSTL::numeric_limits<T>::max_exponent == std::numeric_limits<T>::max_exponent);
+    static_assert(MSTL::numeric_limits<T>::max_exponent10 == std::numeric_limits<T>::max_exponent10);
+    static_assert(MSTL::numeric_limits<T>::min_exponent == std::numeric_limits<T>::min_exponent);
+    static_assert(MSTL::numeric_limits<T>::min_exponent10 == std::numeric_limits<T>::min_exponent10);
+    static_assert(MSTL::numeric_limits<T>::radix == std::numeric_limits<T>::radix);
+    static_assert(MSTL::numeric_limits<T>::min() == std::numeric_limits<T>::min());
+    static_assert(MSTL::numeric_limits<T>::max() == std::numeric_limits<T>::max());
+    static_assert(MSTL::numeric_limits<T>::lowest() == std::numeric_limits<T>::lowest());
+    static_assert(MSTL::numeric_limits<T>::epsilon() == std::numeric_limits<T>::epsilon());
+    static_assert(MSTL::numeric_limits<T>::round_error() == std::numeric_limits<T>::round_error());
+    static_assert(MSTL::numeric_limits<T>::denorm_min() == std::numeric_limits<T>::denorm_min());
+    static_assert(MSTL::numeric_limits<T>::infinity() == std::numeric_limits<T>::infinity());
+    if constexpr (is_floating_point_v<T>) {
+        if (!_MSTL is_nan(MSTL::numeric_limits<T>::quiet_nan())) {
+            println("!is quiet nan:" + check_type<T>());
+        }
+        if (!_MSTL is_nan(MSTL::numeric_limits<T>::signaling_nan())) {
+            println("!is signaling nan:" + check_type<T>());
+        }
+    }
+}
+
+#define __MSTL_TEST_NUMERIC_LIMITS(T) test_num_impl<T>();
+void test_numeric() {
+    MSTL_MACRO_RANGES_ALL(__MSTL_TEST_NUMERIC_LIMITS)
+}
+#undef __MSTL_TEST_NUMERIC_LIMITS
+
+void test_dev() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    auto devs = diskdrive::enumerate_all();
+    for (const auto& dev : devs) {
+        println(dev);
+    }
+    // file::copy_directory(
+    //     R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
+    //     R"(H:\)"
+    //     );
+#endif
+}
 
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
@@ -447,7 +479,7 @@ void test_format() {
         println(format("{<#10x}", x));  // "0xff      "
         println(format("{=#10x}", x));  // "0x      ff"
 
-        println(format("{-=#10X}", x));  // "0X------FF"
+        println(format("{-=#10X}", x));  // "0X      FF"
 
         hexadecimal neg(-255);
         println(absolute(neg), sign(neg), gcd(neg, neg));
@@ -466,7 +498,7 @@ void test_format() {
         hexadecimal tmp(222);
         _MSTL swap(hex, tmp);
         println(format("{#010X}", hex));          // "0X000000DE"
-        println(hexadecimal::to_string(222));
+        println(hexadecimal(222));
 
         integer64 num(12345);
         string result2 = format("{+>15d}", num);  // "        +12345"
@@ -478,27 +510,27 @@ void test_format() {
         decimal dec(3.14159);
         string result4 = format("{.2f}", dec);  // "3.14"
         println(result4);
-        string result5 = format("{.3e}", dec);  // "3.142e+00"
+        string result5 = format("{.3e}", dec);  // "3.141e+00"
         println(result5);
 
-        string result6 = format("{^20x}", hex);      // "       ff       "
+        string result6 = format("{^20x}", hex);      // "       de       "
         println(result6);
         string result7 = format("{#o}", num);        // "0o30071"
         println(result7);
-        string result8 = format("{+10.4f}", dec);    // "   +3.1416"
+        string result8 = format("{+10.4f}", dec);    // "   +3.1415"
         println(result8);
 
         string r1 = format("{.2f}", dec);  // "3.14"
         println(r1);
-        string r2 = format("{.4e}", dec);  // "3.1416e+00"
+        string r2 = format("{.4e}", dec);  // "3.1415e+00"
         println(r2);
         string r3 = format("{.6g}", dec);  // "3.141589"
         println(r3);
-        string r4 = format("{+10.3f}", dec);  // "    +3.142"
+        string r4 = format("{+10.3f}", dec);  // "    +3.141"
         println(r4);
     }
     {
-        uinteger32 x = 255u;
+        uinteger32 x(255u);
         println(format("{d}", x));  // "255"
         println(format("{b}", x));  // "11111111"
         println(format("{#b}", x));  // "0b11111111"
@@ -506,16 +538,59 @@ void test_format() {
         println(format("{<10d}", x)); // "255       "
         println(format("{010d}", x)); // "0000000255"
 
-        uint64_t ull = 123456789ULL;
-        console.println(ull);
-        console.println(format("{#x}", ull));
+        MSTL::uint64_t ull = 123456789ULL;
+        println(ull);
+        println(format("{#x}", ull));
     }
 }
+
+void test_color() {
+    color red(255, 0, 0, 255);
+    color semiRed(255, 0, 0, 128);
+    color transRed(255, 0, 0, 64);
+    color background(255, 255, 255);
+
+    println(red);
+    println(semiRed);
+    println(transRed);
+    println(semiRed.is_opacity());
+    println(semiRed.transparent());
+    println(semiRed.is_opaque());
+
+    println(semiRed.blend(background));
+    println(color::parse("#FF000080"));
+    println(red * 0.5);
+
+    color adjustableColor = color::red();
+    adjustableColor.set_opacity(0.3);
+    println(adjustableColor);
+    println(semiRed.premultiply_alpha());
+
+
+    color custom(128, 64, 192);
+
+    console.set_color(color::red());
+    println("这是红色文本");
+    console.reset_color();
+
+    console.set_color(color::green(), true);
+    println("这是绿色文本");
+    console.reset_color();
+
+    console.set_color(custom, false);
+    println("这是使用基本颜色的文本");
+    console.reset_color();
+
+    console.set_color(custom, true);
+    println("这是使用256色的文本");
+    console.reset_color();
+}
+
 
 void test_enctype() {
     string encrypted = xor_encrypt("Hello", "key");
     string decrypted = xor_decrypt(encrypted, "key");
-    println(encrypted);
+    println(escape(encrypted));
     println(decrypted);
 
     string encoded = base64_encode("Hello World");
@@ -526,23 +601,13 @@ void test_enctype() {
     string md5_hash = md5("Hello World");
     string sha256_hash = sha256("Hello World");
     println("MD5: ", md5_hash);
-    println(sha256_hash);
+    println("SHA256: ", sha256_hash);
 
     string key = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
     string aes_encrypted = aes256_encrypt("Hello World", key);
     string aes_decrypted = aes256_decrypt(aes_encrypted, key);
     println(aes_encrypted);
     println(aes_decrypted);
-}
-
-void test_exce() {
-    try {
-        Exception(MemoryError("test"));
-    }
-    catch (Error&) {
-        Exit(true, test_list);
-        test_list();
-    }
 }
 
 void test_json() {
@@ -561,8 +626,8 @@ void test_json() {
     )";
 
     try {
-        unique_ptr<json_value> root = json_parser(json_str).parse();
-        println(*root.get());
+        unique_ptr<json_value> root = json_parser(move(json_str)).parse();
+        println(*root);
 
         if (root->is_object()) {
             const json_object* obj = root->as_object();
@@ -597,9 +662,7 @@ void test_json() {
             .end_object()
             .end_array()
             .build();
-        println(*json2.get());
-        string build = json_to_string(_MSTL move(json2));
-        println(build);
+        println(*json2);
 
         map<string, vector<int>> nested_data = {
             {"group1", {10, 20, 30}},
@@ -612,9 +675,7 @@ void test_json() {
             .key("total").value(8)
             .end_object()
             .build();
-        println(*json3.get());
-        string result3 = json_to_string(json3);
-        println(result3);
+        println(*json3);
 
     } catch (const Error& e) {
         println(e);
@@ -682,8 +743,8 @@ void test_check() {
     println(check_type<const volatile void* (&)[10]>()); // void const volatile * (&) [10]
     println(check_type<int[1][2][3]>());              // int [1] [2] [3]
     println(check_type<char(*(* const)(const int(&)[10]))[10]>());
-    println(check_type<int (Foo::* const)[3]>());
-    println(check_type<int (Foo::* const)(int, Foo&&, int) volatile>());
+    println(check_type<int (integer16::* const)[3]>());
+    println(check_type<int (integer16::* const)(int, integer16&&, int) volatile>());
     string cstr("const string");
     const string* sr = new string("hai");
     println(check_type<decltype((cstr))>());
@@ -692,44 +753,6 @@ void test_check() {
     delete sr;
 }
 
-void test_copy() {
-    //int ia[] = { 0,1,2,3,4,5,6,7,8 };
-    //MSTL::copy(ia + 2, ia + 7, ia);
-    //MSTL::for_each(ia, ia + 9, [](int x) { std::cout << x << std::endl; }); //2 3 4 5 6 5 6 7 8
-    //std::cout << std::endl;
-
-    int ia[] = { 0,1,2,3,4,5,6,7,8 };
-    MSTL::copy(ia + 2, ia + 7, ia + 4);
-    println(ia); //0 1 2 3 2 3 4 5 6
-    //int ia[] = { 0,1,2,3,4,5,6,7,8 };
-    //vector<int>id(ia, ia + 9);
-    //vector<int>::iterator first = id.begin();
-    //vector<int>::iterator last = id.end();
-    //++first;  //advance(first,2)  2
-    //std::cout << *++first << std::endl;
-    //--last;  //advance(last,-2) 7
-    //std::cout << *last << std::endl;
-    //vector<int>::iterator result = id.begin();
-    //std::cout << *result << std::endl; //0
-    //vector<int> fin(9, 1);
-    //MSTL::copy(first, last, result);
-    //println(id);
-
-    //int ia[] = { 0,1,2,3,4,5,6,7,8 };
-    //std::deque<int>id(ia, ia + 9);
-    //std::deque<int>::iterator first = id.begin();
-    //std::deque<int>::iterator last = id.end();
-    //++++first;  //advance(first,2)  2
-    //std::cout << *first << std::endl;
-    //----last;  //advance(last,-2)
-    //std::cout << *last << std::endl;
-    //std::deque<int>::iterator result = id.begin();
-    //std::advance(result, 4);
-    //std::cout << *result << std::endl; //4
-    //MSTL::copy(first, last, result);
-    //std::for_each(id.begin(), id.end(), display<int>()); //0 1 2 3 2 3 4 5 6
-    //std::cout << std::endl;
-}
 void test_deque() {
     deque<int> a{1,2,3,4,5,6,7,8,9,10};
     println(a);
@@ -761,7 +784,6 @@ void test_deque() {
             long_deque.push_front(i);
         }
     }
-    println("inserted");
     // println(long_deque);
     for (MSTL::size_t i = 0; i < element_count; ++i) {
         if (i % 2 == 0) {
@@ -770,7 +792,6 @@ void test_deque() {
             long_deque.pop_front();
         }
     }
-    println("deleted");
     // println(long_deque);
 }
 
@@ -794,6 +815,7 @@ void test_stack() {
     }
     // println(long_stack);
 }
+
 void test_vector() {
     try{
         vector<int> v{ 1,2,3,4 };
@@ -843,6 +865,7 @@ void test_vector() {
     }
     // println(long_vector);
 }
+
 void test_pqueue() {
     priority_queue<int> q;
     println(typeid(priority_queue<int*>).name());
@@ -962,7 +985,9 @@ void test_tuple() {
     println(MSTL::get<3>(combinedTuple));
 
     tuple<int, int, int> args(1, 2, 3);
-    int sum = MSTL::apply(sum_3, args);
+    int sum = MSTL::apply([](int a, int b, int c) {
+        return a + b + c;
+    }, args);
     println("Sum:", sum);
 
     tuple<int, int> mulArgs(4, 5);
@@ -970,7 +995,7 @@ void test_tuple() {
     println("Product:", product);
 }
 
-void test_hash() {
+void test_hashtable() {
     unordered_map<int, char> m;
     m[1] = 'a';
     m[2] = 'b';
@@ -1026,7 +1051,7 @@ void test_math() {
     println(radian2angular(arctangent(100)));
     println(arcsine(1), arcsine(0), arcsine(-1));
     println(arccosine(1), arccosine(0), arccosine(-1));
-    println(arctangent(DECIMAL_MAX_POSI_VALUE), arctangent(DECIMAL_MIN_NEGA_VALUE));
+    println(arctangent(numeric_limits<decimal_t>::max()), arctangent(numeric_limits<decimal_t>::min_nega()));
     // println(tangent(_CONSTANTS PI / 2));  // MathError
     println(tangent(0));
     println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
@@ -1092,6 +1117,7 @@ void test_variant() {
     hash<variant<int, string>> hasher{};
     println(hasher(v1));
 }
+
 
 string generate_random_string(MSTL::size_t length) {
     const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -1221,14 +1247,8 @@ void test_string() {
     test_string_search_replace(1000000, 10000);
     test_max_memory_string();
 
-    MSTL::ostringstream ss;
-    ss << "a" << 'b';
-    ss << 333;
-    ss << 9.333;
-    ss << MSTL::string("hello") << false << MSTL::move(MSTL::string("a"));
-    println_feature(ss);
-    ss.str("where");
-    println_feature(ss);
+    const string result = to_string("a", 'b', 333, 9.333, "hello", false);
+    println(result);
 }
 
 
@@ -1280,43 +1300,38 @@ void test_option() {
 }
 
 void test_any() {
-    MSTL::any a1;
+    any a1;
     println("Testing default constructor:");
-    println(a1);
     println("Has value: ", (a1.has_value() ? "Yes" : "No"));
 
-    MSTL::any a2(42);
+    any a2(42);
     println("\nTesting constructor with value:");
-    println(a2);
     println("Has value: ", (a2.has_value() ? "Yes" : "No"));
     const int* ptr = MSTL::any_cast<int>(&a2);
     if (ptr) {
         println("Value: ", *ptr);
     }
 
-    MSTL::any a3(a2);
+    any a3(a2);
     println("\nTesting copy constructor:");
-    println(a3);
     println("Has value: ", (a3.has_value() ? "Yes" : "No"));
     ptr = MSTL::any_cast<int>(&a3);
     if (ptr) {
         println("Value: ", *ptr);
     }
 
-    MSTL::any a4(MSTL::any(123));
+    any a4(any(123));
     println("\nTesting move constructor:");
-    println(a4);
     println("Has value: ", (a4.has_value() ? "Yes" : "No"));
-    ptr = MSTL::any_cast<int>(&a4);
+    ptr = any_cast<int>(&a4);
     if (ptr) {
         println("Value: ", *ptr);
     }
 
     a1 = a4;
     println("\nTesting assignment operator:");
-    println(a1);
     println("Has value: ", (a1.has_value() ? "Yes" : "No"));
-    ptr = MSTL::any_cast<int>(&a1);
+    ptr = any_cast<int>(&a1);
     if (ptr) {
         println("Value: ", *ptr);
     }
@@ -1324,7 +1339,7 @@ void test_any() {
     string str = "Hello, World!";
     string result = a1.emplace<string>(str);
     println("\nTesting emplace method:");
-    println(a1);
+    println(result);
     println("Has value: ", (a1.has_value() ? "Yes" : "No"));
     const string* strPtr = MSTL::any_cast<string>(&a1);
     if (strPtr) {
@@ -1333,18 +1348,13 @@ void test_any() {
 
     a1.reset();
     println("\nTesting reset method:");
-    println(a1);
     println("Has value: ", (a1.has_value() ? "Yes" : "No"));
 
     a1 = 10;
     a2 = 20;
-    println("\nBefore swap:");
-    println("a1: ", a1);
-    println("a2: ", a2);
     a1.swap(a2);
-    println("After swap:");
-    println("a1: ", a1);
-    println("a2: ", a2);
+    println("a1: ", *any_cast<int>(&a1));
+    println("a2: ", *any_cast<int>(&a2));
 }
 
 void test_timer(){
@@ -1382,96 +1392,96 @@ void test_timer(){
 }
 
 
-void test_dbpool() {
-#ifdef MSTL_SUPPORT_DB__
-#ifdef MSTL_SUPPORT_MYSQL__
-    std::clock_t begin = clock();
-    db_connect_config mysql_config = db_connect_config::for_mysql("book");
-    mysql_config.password = "147258hu";
-
-    {
-        database_pool pool(DB_TYPE::MYSQL, mysql_config);
-        for (int i = 0; i < 5000; i++) {
-            bool fin = pool.get_connect()->update("SELECT 1");
-        }
-        println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-
-        auto result = pool.get_connect()->query("SELECT * FROM book");
-        while (result->next()) {
-            for (int i = 0; i < result->column_count(); i++) {
-                if (i == 2) {
-                    int count = result->at_int16(i);
-                    print("collected :", count, ", ");
-                }
-                else if (i == 3) {
-                    float count = result->at_float32(i);
-                    print("usable :", count, ", ");
-                }
-                else if (i == 5) {
-                    _MSTL datetime dt = result->at_datetime(i);
-                    print("date: ", dt, ", ");
-                }
-                else
-                    print(result->at(i), ", ");
-            }
-            println();
-        }
-        println(result->row_count(), ", ", result->column_count());
-    }
-
-    begin = clock();
-    for (int i = 0; i < 5000; i++) {
-        char sql[power(2, 10)] = {};
-        _MSTL sprintf(sql, "SELECT 1");
-        auto* conn = new db_mysql_connect();
-        if(conn->connect_to(mysql_config)) {
-            bool fin = conn->update(sql);
-        }
-        delete conn;
-    }
-    println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-#endif
-
-#ifdef MSTL_SUPPORT_SQLITE3__
-    db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
-
-    begin = clock();
-    for (int i = 0; i < 5000; i++) {
-        char sql[power(2, 10)] = {};
-        _MSTL sprintf(sql, "SELECT 1");
-        auto* conn = new db_sqlite_connect();
-        if(conn->connect_to(sqlite_config)) {
-            bool fin = conn->update(sql);
-            // print(fin, " ");
-        }
-        delete conn;
-    }
-    println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-#endif
-#endif
-}
-
-void test_dns() {
-#ifdef MSTL_PLATFORM_LINUX__
-
-#endif
-}
+// void test_dbpool() {
+// #ifdef MSTL_SUPPORT_DB__
+// #ifdef MSTL_SUPPORT_MYSQL__
+//     std::clock_t begin = clock();
+//     db_connect_config mysql_config = db_connect_config::for_mysql("book");
+//     mysql_config.password = "147258hu";
+//
+//     {
+//         database_pool pool(DB_TYPE::MYSQL, mysql_config);
+//         for (int i = 0; i < 5000; i++) {
+//             bool fin = pool.get_connect()->update("SELECT 1");
+//         }
+//         println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
+//
+//         auto result = pool.get_connect()->query("SELECT * FROM book");
+//         while (result->next()) {
+//             for (int i = 0; i < result->column_count(); i++) {
+//                 if (i == 2) {
+//                     int count = result->at_int16(i);
+//                     print("collected :", count, ", ");
+//                 }
+//                 else if (i == 3) {
+//                     float count = result->at_float32(i);
+//                     print("usable :", count, ", ");
+//                 }
+//                 else if (i == 5) {
+//                     _MSTL datetime dt = result->at_datetime(i);
+//                     print("date: ", dt, ", ");
+//                 }
+//                 else
+//                     print(result->at(i), ", ");
+//             }
+//             println();
+//         }
+//         println(result->row_count(), ", ", result->column_count());
+//     }
+//
+//     begin = clock();
+//     for (int i = 0; i < 5000; i++) {
+//         char sql[power(2, 10)] = {};
+//         _MSTL sprintf(sql, "SELECT 1");
+//         auto* conn = new db_mysql_connect();
+//         if(conn->connect_to(mysql_config)) {
+//             bool fin = conn->update(sql);
+//         }
+//         delete conn;
+//     }
+//     println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
+// #endif
+//
+// #ifdef MSTL_SUPPORT_SQLITE3__
+//     db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
+//
+//     begin = clock();
+//     for (int i = 0; i < 5000; i++) {
+//         char sql[power(2, 10)] = {};
+//         _MSTL sprintf(sql, "SELECT 1");
+//         auto* conn = new db_sqlite_connect();
+//         if(conn->connect_to(sqlite_config)) {
+//             bool fin = conn->update(sql);
+//             // print(fin, " ");
+//         }
+//         delete conn;
+//     }
+//     println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
+// #endif
+// #endif
+// }
+//
+// void test_dns() {
+// #ifdef MSTL_PLATFORM_LINUX__
+//
+// #endif
+// }
 
 void test_tpool() {
     thread_pool& pool = get_instance_thread_pool();
-    pool.start();
+    pool.start(5);
+    pool.submit_task(test_vector);
     pool.submit_task(test_list);
     pool.submit_task(test_deque);
-    pool.submit_task(test_hash);
-    pool.submit_task(test_vector);
+    pool.submit_task(test_hashtable);
+    pool.submit_task(test_rbtree);
     pool.stop();
     pool.set_mode(THREAD_POOL_MODE::MODE_CACHED);
     pool.start();
+    pool.submit_task(test_string);
     pool.submit_task(test_math);
     pool.submit_task(test_timer);
-    pool.submit_task(test_string);
     pool.submit_task(test_tuple);
-    pool.submit_task(test_rbtree);
     pool.submit_task(test_variant);
     pool.submit_task(test_option);
     pool.submit_task(test_check);
@@ -1482,6 +1492,8 @@ void test_tpool() {
     pool.submit_task(test_file);
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);
+    pool.submit_task(test_color);
+    pool.submit_task(test_numeric);
     // pool.submit_task(try_db);
     pool.stop();
 }

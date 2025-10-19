@@ -1,29 +1,8 @@
 #ifndef MSTL_TYPE_TRAITS_HPP__
 #define MSTL_TYPE_TRAITS_HPP__
-#include "basiclib.hpp"
+#include "environment.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
-
-struct input_iterator_tag {
-    constexpr input_iterator_tag() = default;
-};
-struct output_iterator_tag {
-    constexpr output_iterator_tag() = default;
-};
-struct forward_iterator_tag : input_iterator_tag {
-    constexpr forward_iterator_tag() = default;
-};
-struct bidirectional_iterator_tag : forward_iterator_tag {
-    constexpr bidirectional_iterator_tag() = default;
-};
-struct random_access_iterator_tag : bidirectional_iterator_tag {
-    constexpr random_access_iterator_tag() = default;
-};
-#ifdef MSTL_VERSION_20__
-struct contiguous_iterator_tag : random_access_iterator_tag {
-    constexpr contiguous_iterator_tag() = default;
-};
-#endif
-
 
 template <typename T, T Value>
 struct integral_constant {
@@ -405,9 +384,24 @@ template <typename...>
 using void_t = void;
 
 
+template <typename>
+struct package_base {
+    using type = void;
+};
+
 template <typename T>
+struct package_helper {
+    using type = typename package_base<T>::type;
+};
+
+template <typename T, typename = void>
 struct package {
     using type = T;
+};
+
+template <typename T>
+struct package<T, void_t<typename package_helper<T>::type>> {
+    using type = conditional_t<is_void_v<typename package_helper<T>::type>, T, typename package_helper<T>::type>;
 };
 
 template <typename T>
@@ -417,9 +411,23 @@ template <typename T>
 MSTL_INLINE17 constexpr bool is_packaged_v = !is_same_v<package_t<T>, T>;
 
 
+template <typename>
+struct unpackage_base {
+    using type = void;
+};
 template <typename T>
+struct unpackage_helper {
+    using type = typename unpackage_base<T>::type;
+};
+
+template <typename T, typename = void>
 struct unpackage {
     using type = T;
+};
+
+template <typename T>
+struct unpackage<T, void_t<typename unpackage_helper<T>::type>> {
+    using type = conditional_t<is_void_v<typename unpackage_helper<T>::type>, T, typename unpackage_helper<T>::type>;
 };
 
 template <typename T>
@@ -443,6 +451,21 @@ struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
 #ifdef MSTL_VERSION_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool is_character_v = is_character<T>::value;
+#endif
+
+
+template <typename T>
+struct is_standard_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
+    char, wchar_t,
+#ifdef MSTL_VERSION_20__
+    char8_t,
+#endif
+    char16_t, char32_t
+>::value> {};
+
+#ifdef MSTL_VERSION_14__
+template <typename T>
+MSTL_INLINE17 constexpr bool is_standard_character_v = is_standard_character<T>::value;
 #endif
 
 
@@ -662,7 +685,7 @@ struct is_reference : bool_constant<is_reference_v<T>> {};
 
 
 template <typename T>
-MSTL_INLINE17 constexpr bool is_null_pointer_v = is_same_v<remove_cvref_t<T>, nullptr_t>;
+MSTL_INLINE17 constexpr bool is_null_pointer_v = is_same_v<remove_cvref_t<T>, decltype(nullptr)>;
 template <typename T>
 struct is_null_pointer : bool_constant<is_null_pointer_v<T>> {};
 
@@ -724,12 +747,17 @@ template <typename T>
 struct is_volatile : bool_constant<is_volatile_v<T>> {};
 
 
+#pragma warning(push)
+#pragma warning(disable: 4180)
+
 // function cannot be const qualified.
 template <typename T>
 MSTL_INLINE17 constexpr bool is_function_v =
     !is_const_v<const remove_function_qualifiers_t<T>> && !is_reference_v<remove_function_qualifiers_t<T>>;
 template <typename T>
 struct is_function : bool_constant<is_function_v<T>> {};
+
+#pragma warning(pop)
 
 
 template <typename T>
@@ -751,15 +779,15 @@ template <typename T>
 constexpr bool is_cstring_v = (is_pointer_v<remove_cvref_t<T>> && is_character_v<remove_pointer_t<remove_cvref_t<T>>>) ||
     (is_bounded_array_v<remove_cvref_t<T>> && is_character_v<remove_all_extents_t<remove_cvref_t<T>>>);
 template <typename T>
-struct is_ctype_string : bool_constant<is_cstring_v<T>> {};
+struct is_cstring : bool_constant<is_cstring_v<T>> {};
 
 
 template <typename T>
-using char_of_string_t = remove_cv_t<remove_all_extents_t<remove_pointer_t<remove_cvref_t<T>>>>;
+using cstring_char_t = remove_cv_t<remove_all_extents_t<remove_pointer_t<remove_cvref_t<T>>>>;
 
 template <typename T>
-struct char_of_string {
-    using type = char_of_string_t<T>;
+struct cstring_char {
+    using type = cstring_char_t<T>;
 };
 
 
@@ -773,6 +801,7 @@ struct __is_member_function_pointer_aux : false_type {};
 template <typename T, typename C>
 struct __is_member_function_pointer_aux<T C::*> : is_function<T> {};
 MSTL_END_INNER__
+
 template<typename T>
 struct is_member_function_pointer : _INNER __is_member_function_pointer_aux<remove_cv_t<T>> {};
 #endif
@@ -1350,6 +1379,7 @@ struct __sign_byte_aux<2> {
 };
 template <>
 struct __sign_byte_aux<4> {
+#ifdef MSTL_PLATFORM_WINDOWS__
     template <typename T>
     using signed_t = 
         conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, signed long, signed int>;
@@ -1357,13 +1387,29 @@ struct __sign_byte_aux<4> {
     template <typename T>
     using unsigned_t = 
         conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, unsigned long, unsigned int>;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    template <typename>
+    using signed_t = signed int;
+    template <typename>
+    using unsigned_t = unsigned int;
+#endif
 };
 template <>
 struct __sign_byte_aux<8> {
+#ifdef MSTL_PLATFORM_WINDOWS__
     template <typename>
     using signed_t = signed long long;
     template <typename>
     using unsigned_t = unsigned long long;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    template <typename T>
+    using signed_t =
+        conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, signed long, signed long long>;
+
+    template <typename T>
+    using unsigned_t =
+        conditional_t<is_same_v<T, signed long> || is_same_v<T, unsigned long>, unsigned long, unsigned long long>;
+#endif
 };
 
 template <typename T>
@@ -1376,15 +1422,15 @@ struct __set_sign {
     static_assert((is_integral<T>::value && !is_boolean_v<T>) || is_enum_v<T>,
         "make signed only support non bool integral types and enum types");
 
-    using signed_type   = package_t<copy_cv_t<T, __set_signed_byte<T>>>;
-    using unsigned_type = package_t<copy_cv_t<T, __set_unsigned_byte<T>>>;
+    using signed_type   = copy_cv_t<T, __set_signed_byte<T>>;
+    using unsigned_type = copy_cv_t<T, __set_unsigned_byte<T>>;
 };
 MSTL_END_INNER__
 
 template <typename T>
-using make_signed_t = typename _INNER __set_sign<unpackage_t<T>>::signed_type;
+using make_signed_t = typename _INNER __set_sign<T>::signed_type;
 template <typename T>
-using make_unsigned_t = typename _INNER __set_sign<unpackage_t<T>>::unsigned_type;
+using make_unsigned_t = typename _INNER __set_sign<T>::unsigned_type;
 
 template <typename T>
 struct make_signed {
@@ -1393,6 +1439,21 @@ struct make_signed {
 template <typename T>
 struct make_unsigned {
     using type = make_unsigned_t<T>;
+};
+
+
+template <typename T>
+using make_signed_package_t = package_t<typename _INNER __set_sign<unpackage_t<T>>::signed_type>;
+template <typename T>
+using make_unsigned_package_t = package_t<typename _INNER __set_sign<unpackage_t<T>>::unsigned_type>;
+
+template <typename T>
+struct make_signed_package {
+    using type = make_signed_package_t<T>;
+};
+template <typename T>
+struct make_unsigned_package {
+    using type = make_unsigned_package_t<T>;
 };
 
 
@@ -1486,6 +1547,10 @@ struct decay {
 };
 template <typename T>
 using decay_t = typename decay<T>::type;
+template <typename T>
+using remove_cv_decay_t = remove_cv_t<decay_t<T>>;
+template <typename T>
+using remove_cvref_decay_t = remove_cvref_t<decay_t<T>>;
 
 
 // ternary operator (expr1 ? expr2 : expr3) will try to find a suitable common type,
@@ -2036,6 +2101,7 @@ template <typename F, typename... Args>
 MSTL_INLINE17 constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<F, Args...>::value;
 
 
+#ifdef MSTL_COMPILER_MSVC__
 // layout compatible types have the same layout in memory.
 // that is, their member variables are arranged in the same order and alignment.
 // they have the same member variable types, number, and arrangement order.
@@ -2050,6 +2116,7 @@ struct is_pointer_interconvertible_base_of
     : bool_constant<__is_pointer_interconvertible_base_of(Base, Derived)> {};
 template <typename Base, typename Derived>
 MSTL_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v = is_pointer_interconvertible_base_of<Base, Derived>::value;
+#endif
 
 
 template <typename>
@@ -2118,8 +2185,14 @@ struct is_nothrow_swappable;
 template <typename T>
 struct iswappable;
 
+MSTL_BEGIN_INNER__
+template <typename T>
+MSTL_ALWAYS_INLINE constexpr void __raw_swap(T&, T&)
+noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
+MSTL_END_INNER__
+
 template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int> = 0>
-constexpr void swap(T&, T&) 
+constexpr void swap(T&, T&)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
 
 template <typename T, size_t Size, enable_if_t<is_swappable<T>::value, int> = 0>
@@ -2200,98 +2273,10 @@ noexcept(_MSTL declcopy<Ptr>(_MSTL declval<Iterator>().operator->()));
 
 
 template <typename Key, typename = void>
-struct hash {};
-
-template <typename T>
-struct hash<T*> {
-    MSTL_NODISCARD MSTL_CONSTEXPR20 size_t operator()(T* ptr) const noexcept {
-        return static_cast<size_t>(reinterpret_cast<uintptr_t>(ptr));
-    }
-};
-
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-static constexpr size_t FNV_OFFSET_BASIS = 14695981039346656037ULL;
-static constexpr size_t FNV_PRIME = 1099511628211ULL;
-#else
-static constexpr size_t FNV_OFFSET_BASIS = 2166136261U;
-static constexpr size_t FNV_PRIME = 16777619U;
-#endif
-
-// the FNV (Fowler-Noll-Vo) is a non-cryptographic hash algorithm
-// with a good avalanche effect and a low collision rate.
-// FNV_hash function is FNV-1a version.
-constexpr size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
-    size_t result = FNV_OFFSET_BASIS;
-    for (size_t i = 0; i < count; i++) {
-        result ^= static_cast<size_t>(first[i]);
-        result *= FNV_PRIME;
-    }
-    return result;
-}
-
-
-MSTL_BEGIN_INNER__
-template <typename T, enable_if_t<is_integral_v<T>, int> = 0>
-constexpr size_t FNV_hash_integer(const T& value) noexcept {
-    size_t result = FNV_OFFSET_BASIS;
-    for (size_t i = 0; i < sizeof(T); ++i) {
-        const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
-        result ^= static_cast<size_t>(byte_val);
-        result *= FNV_PRIME;
-    }
-    return result;
-}
-MSTL_END_INNER__
-
-
-template <>
-struct hash<bool> {
-    MSTL_NODISCARD constexpr size_t operator()(const bool x) const noexcept {
-        return x ? 0x9e3779b9 : 0x7f4a7c15;
-    }
-};
-
-#define __MSTL_BUILD_INTEGER_HASH_STRUCT(OPT) \
-template <> struct hash<OPT> { \
-    MSTL_NODISCARD constexpr size_t operator ()(const OPT& x) const noexcept { \
-        return x == 0.0f ? 0 : _INNER FNV_hash_integer(x); \
-    } \
-};
-
-MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_INTEGER_HASH_STRUCT)
-MSTL_MACRO_RANGE_INT(__MSTL_BUILD_INTEGER_HASH_STRUCT)
-#undef FLOAT_HASH_STRUCT__
-
-#define __MSTL_BUILD_FLOAT_HASH_STRUCT(OPT) \
-template <> \
-struct hash<OPT> { \
-    MSTL_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { \
-        if (x == 0.0f) return 0; \
-        union { OPT f; uint64_t i; } converter; \
-        converter.f = x; \
-        return _INNER FNV_hash_integer(converter.i); \
-    } \
-};
-
-MSTL_MACRO_RANGE_FLOAT(__MSTL_BUILD_FLOAT_HASH_STRUCT)
-#undef __MSTL_BUILD_FLOAT_HASH_STRUCT
-
-
-template <typename, typename = void>
-struct is_nothrow_hashable : false_type {};
-template <typename Key>
-struct is_nothrow_hashable<Key, void_t<decltype(_MSTL hash<Key>{}(_MSTL declval<const Key&>()))>>
-    : bool_constant<noexcept(_MSTL hash<Key>{}(_MSTL declval<const Key&>()))> {};
-template <typename Key>
-MSTL_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>::value;
+struct hash;
 
 
 #ifdef MSTL_VERSION_20__
-template <typename Func, typename Arg>
-concept is_hash_v = requires(Func f, Arg a) {
-    { f(a) } -> convertible_to<size_t>;
-};
-
 template <typename T>
 concept is_pair_v = requires(T p) {
     typename T::first_type;
@@ -2300,56 +2285,6 @@ concept is_pair_v = requires(T p) {
     p.second;
 };
 #endif // MSTL_VERSION_20__
-
-
-MSTL_BEGIN_INNER__
-
-template <typename, typename = void>
-struct __iterator_traits_base {};
-
-template <typename Iterator>
-struct __iterator_traits_base<Iterator,
-    void_t<typename Iterator::iterator_category, typename Iterator::value_type,
-    typename Iterator::difference_type, typename Iterator::pointer, typename Iterator::reference>>
-{
-    using iterator_category = typename Iterator::iterator_category;
-    using value_type        = typename Iterator::value_type;
-    using difference_type   = typename Iterator::difference_type;
-    using pointer           = typename Iterator::pointer;
-    using reference         = typename Iterator::reference;
-};
-
-MSTL_END_INNER__
-
-
-template <typename Iterator>
-struct iterator_traits : _INNER __iterator_traits_base<Iterator> {};
-
-template <typename T>
-struct iterator_traits<T*> {
-    static_assert(is_object_v<T>, "iterator traits requires object types.");
-
-#ifdef MSTL_VERSION_20__
-    using iterator_category = contiguous_iterator_tag;
-#else
-    using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
-    using value_type        = remove_cv_t<T>;
-    using difference_type   = ptrdiff_t;
-    using pointer           = T*;
-    using reference         = T&;
-};
-
-template <typename Iterator>
-using iter_cat_t = typename iterator_traits<Iterator>::iterator_category;
-template <typename Iterator>
-using iter_val_t = typename iterator_traits<Iterator>::value_type;
-template <typename Iterator>
-using iter_dif_t = typename iterator_traits<Iterator>::difference_type;
-template <typename Iterator>
-using iter_ptr_t = typename iterator_traits<Iterator>::pointer;
-template <typename Iterator>
-using iter_ref_t = typename iterator_traits<Iterator>::reference;
 
 
 // have to compile perform NRVO(Named Return Value Optimization) instead of moving it.
@@ -2467,6 +2402,53 @@ struct is_maplike : bool_constant<
 template <typename Map>
 MSTL_INLINE17 constexpr bool is_maplike_v = is_maplike<Map>::value;
 
+
+template <typename T>
+struct has_to_string {
+private:
+    template <typename U>
+    static auto __test(int) -> decltype(_MSTL declval<const U>().to_string(), true_type{});
+
+    template <typename U>
+    static false_type __test(...);
+public:
+    static constexpr bool value = decltype(__test<T>(0))::value;
+};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool has_to_string_v = has_to_string<T>::value;
+
+
+template <typename T>
+struct has_to_hash {
+private:
+    template <typename U>
+    static auto __test(int) -> decltype(_MSTL declval<const U>().to_hash(), true_type{});
+
+    template <typename U>
+    static false_type __test(...);
+public:
+    static constexpr bool value = decltype(__test<T>(0))::value;
+};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool has_to_hash_v = has_to_hash<T>::value;
+
+
+template <typename T>
+struct has_swap {
+private:
+    template <typename U>
+    static auto __test(int) -> decltype(_MSTL declval<U>().swap(_MSTL declval<U>()), true_type{});
+
+    template <typename U>
+    static false_type __test(...);
+public:
+    static constexpr bool value = decltype(__test<T>(0))::value;
+};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool has_swap_v = has_swap<T>::value;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_TYPE_TRAITS_HPP__

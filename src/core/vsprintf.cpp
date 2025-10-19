@@ -1,33 +1,34 @@
 #include <MSTL/core/vsprintf.hpp>
+#include <MSTL/core/cstring.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
 
-static constexpr int skip_atoi(const char **s) {
+static int skip_atoi(const char **s) {
 	int i = 0;
-	while (_INNER is_digit(**s)) {
+	while (_MSTL is_digit(**s)) {
 	    i = i * 10 + *((*s)++) - '0';
 	}
 	return i;
 }
 
-MSTL_INLINE17 int32_t constexpr ZEROPAD = 1;
-MSTL_INLINE17 int32_t constexpr SIGN = 2;
-MSTL_INLINE17 int32_t constexpr PLUS = 4;
-MSTL_INLINE17 int32_t constexpr SPACE = 8;
-MSTL_INLINE17 int32_t constexpr LEFT = 16;
-MSTL_INLINE17 int32_t constexpr SPECIAL = 32;
-MSTL_INLINE17 int32_t constexpr SMALL = 64;
+MSTL_INLINE17 constexpr int32_t ZEROPAD = 1;
+MSTL_INLINE17 constexpr int32_t SIGN = 2;
+MSTL_INLINE17 constexpr int32_t PLUS = 4;
+MSTL_INLINE17 constexpr int32_t SPACE = 8;
+MSTL_INLINE17 constexpr int32_t LEFT = 16;
+MSTL_INLINE17 constexpr int32_t SPECIAL = 32;
+MSTL_INLINE17 constexpr int32_t SMALL = 64;
 
-MSTL_INLINE17 int32_t constexpr MAX_VSPRINTF_BUFFER_SIZE = 4096;
+MSTL_INLINE17 constexpr int32_t MAX_VSPRINTF_BUFFER_SIZE = 4096;
 
-static constexpr unsigned int do_div(unsigned int* n, const unsigned int base) {
+static unsigned int do_div(unsigned int* n, const unsigned int base) {
     const unsigned int remainder = *n % base;
     *n = *n / base;
     return remainder;
 }
 
-static MSTL_CONSTEXPR20 char* number(char * str, unsigned int num,
+static char* number(char * str, unsigned int num,
     const int base, int size, int precision ,int type) {
 	char sign, tmp[36];
     auto digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -82,7 +83,7 @@ static MSTL_CONSTEXPR20 char* number(char * str, unsigned int num,
 	return str;
 }
 
-static MSTL_CONSTEXPR20 char* float_number(char* str, double num,
+static char* float_number(char* str, double num,
     const int field_width, int precision, const int flags) {
     char sign = 0;
     long long frac_part = 0;
@@ -101,7 +102,7 @@ static MSTL_CONSTEXPR20 char* float_number(char* str, double num,
     }
 
     if (precision < 0) precision = 6;
-    if (precision > DECIMAL_MAX_DIGITS) precision = DECIMAL_MAX_DIGITS;
+    if (precision > numeric_limits<decimal_t>::max_digits10) precision = numeric_limits<decimal_t>::max_digits10;
 
     long long int_part = static_cast<long long>(num);
     double frac = num - int_part;
@@ -198,7 +199,7 @@ int vsprintf(char *buf, const char *fmt, ::va_list args) {
 		}
 
 		int field_width = -1;
-		if (_INNER is_digit(*fmt))
+		if (_MSTL is_digit(*fmt))
 			field_width = _INNER skip_atoi(&fmt);
 		else if (*fmt == '*') {
 			field_width = va_arg(args, int);
@@ -211,7 +212,7 @@ int vsprintf(char *buf, const char *fmt, ::va_list args) {
 		int precision = -1;
 		if (*fmt == '.') {
 			++fmt;
-			if (_INNER is_digit(*fmt))
+			if (_MSTL is_digit(*fmt))
 				precision = _INNER skip_atoi(&fmt);
 			else if (*fmt == '*') {
 				precision = va_arg(args, int);

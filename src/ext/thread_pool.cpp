@@ -20,7 +20,7 @@ void __thread_pool_id_generator::reset_id() noexcept {
 MSTL_END_INNER__
 
 
-manual_thread::manual_thread(thread_func func) noexcept
+manual_thread::manual_thread(thread_func&& func) noexcept
     : func_(_MSTL move(func)),
     thread_id_(_INNER __thread_pool_id_generator::get_new_id()) {}
 
@@ -29,7 +29,7 @@ manual_thread::id_type manual_thread::get_id() const noexcept {
 }
 
 void manual_thread::start() {
-    std::thread t(func_, thread_id_);
+    _MSTL thread t(_MSTL move(func_), thread_id_);
     t.detach();
 }
 

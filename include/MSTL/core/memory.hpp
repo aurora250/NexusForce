@@ -212,8 +212,8 @@ private:
     MSTL_CONSTEXPR20 void allocate_buffer() {
         original_len_ = len_;
         buffer_ = 0;
-        if (len_ > static_cast<size_type>(UINT32_MAX_VALUE / sizeof(value_type)))
-            len_ = UINT32_MAX_VALUE / sizeof(value_type);
+        if (len_ > static_cast<size_type>(numeric_limits<uint32_t>::max() / sizeof(value_type)))
+            len_ = numeric_limits<uint32_t>::max() / sizeof(value_type);
 
         while (len_ > 0) {
             buffer_ = static_cast<pointer>(std::malloc(len_ * sizeof(value_type)));
@@ -388,16 +388,54 @@ struct allocator_traits {
 };
 
 
+MSTL_BEGIN_CONSTANTS__
+MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
+    0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
+};
+MSTL_END_CONSTANTS__
+
+MSTL_API int popcountll(size_t x);
+MSTL_API int clzll(size_t x);
+
+
+MSTL_API size_t get_available_memory() noexcept;
+
+
 MSTL_BEGIN_INNER__
 
-template <size_t>
+#ifdef MSTL_COMPILER_MSVC__
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32UL;
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
+
+#ifdef MSTL_STATE_DEBUG__
+MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = 2 * POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
+#else
+MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
+#endif
+
+#ifdef MSTL_DATA_BUS_WIDTH_64__
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAFAFAFAFAUL;
+#else
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAUL;
+#endif
+#endif // MSTL_COMPILER_MSVC__
+
+
+template <size_t Align>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
         if (block_size <= bytes)
             Exception(MemoryError("invalid block size."));
-        const auto holder = reinterpret_cast<uintptr_t>(::operator new(block_size));
+        const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
         MSTL_DEBUG_VERIFY(holder != 0, "invalid argument");
         const auto ptr = reinterpret_cast<void*>(
             (holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1)); // align the memory address
@@ -408,7 +446,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
         return ptr;
     }
 #endif
-    return ::operator new(bytes);
+    return operator new(bytes);
 }
 
 #ifdef MSTL_VERSION_17__
@@ -421,9 +459,9 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
 #endif
 #if defined(MSTL_COMPILER_CLANG__) && defined(MSTL_VERSION_20__)
     if (_MSTL is_constant_evaluated())
-        return ::operator new(bytes);
+        return operator new(bytes);
 #endif
-    return ::operator new(bytes, std::align_val_t{ align });
+    return operator new(bytes, std::align_val_t{ align });
 }
 
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
@@ -439,7 +477,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
     if (bytes == 0) return nullptr;
 #ifdef MSTL_VERSION_20__
     if (_MSTL is_constant_evaluated())
-        return ::operator new(bytes);
+        return operator new(bytes);
 #endif // MSTL_VERSION_20__
 
 #ifdef MSTL_VERSION_17__
@@ -471,9 +509,9 @@ void __deallocate_aux(void*& ptr, size_t& bytes) noexcept {
     }
 #endif
 #if defined(MSTL_VERSION_17__) && !defined(MSTL_COMPILER_CLANG__)
-    ::operator delete(ptr, bytes);
+    operator delete(ptr, bytes);
 #else
-    ::operator delete(ptr);
+    operator delete(ptr);
 #endif
 }
 
@@ -485,11 +523,12 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept 
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD)
         align = _MSTL max(Align, MEMORY_BIG_ALLOC_ALIGN);
 #endif
-#ifdef MSTL_COMPILER_CLANG__
-    ::operator delete(ptr, std::align_val_t{ align });
-#else
-    ::operator delete(ptr, bytes, std::align_val_t{ align });
+    operator delete(ptr,
+#ifdef __cpp_sized_deallocation
+        bytes,
 #endif
+        std::align_val_t{ align }
+        );
 }
 
 template<size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
@@ -504,7 +543,7 @@ template <size_t Align>
 MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
 #ifdef MSTL_VERSION_20__
     if (_MSTL is_constant_evaluated()) {
-        ::operator delete(ptr);
+        operator delete(ptr);
         return;
     }
 #endif // MSTL_VERSION_20__
@@ -560,7 +599,7 @@ public:
         constexpr size_t value_size = sizeof(value_type);
         static_assert(value_size > 0, "value type must be complete before allocation called.");
         const size_t alloc_size = value_size * n;
-        MSTL_DEBUG_VERIFY(alloc_size <= UINT64_MAX_VALUE, "allocation will cause memory overflow.");
+        MSTL_DEBUG_VERIFY(alloc_size <= numeric_limits<uint64_t>::max(), "allocation will cause memory overflow.");
         return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
     }
 
@@ -574,7 +613,7 @@ public:
         _MSTL deallocate<_INNER __FINAL_ALIGN_SIZE<T>>(p, n * value_size);
     }
 
-    static MSTL_CONSTEXPR20 void deallocate(const pointer p) noexcept {
+    static MSTL_CONSTEXPR20 void deallocate(pointer p) noexcept {
         self::deallocate(p, 1);
     }
 };
@@ -609,7 +648,7 @@ public:
     MSTL_CONSTEXPR20 ~ctype_allocator() noexcept = default;
     MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
 
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         if (n == 0) return nullptr;
         pointer ptr = nullptr;
         try {
@@ -620,10 +659,10 @@ public:
         }
         return ptr;
     }
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
         return self::allocate(1);
     }
-    static MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
+    MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
         if(p) std::free(p);
     }
 };
@@ -658,7 +697,7 @@ public:
     MSTL_CONSTEXPR20 ~new_allocator() noexcept = default;
     MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
 
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         if (n == 0) return nullptr;
         pointer ptr = nullptr;
         try {
@@ -669,10 +708,10 @@ public:
         }
         return ptr;
     }
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
         return self::allocate(1);
     }
-    static MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
+    MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
         if(p) ::operator delete(p);
     }
 };

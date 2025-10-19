@@ -1,7 +1,9 @@
 #ifndef MSTL_SOCKET_HPP__
 #define MSTL_SOCKET_HPP__
-#include "MSTL/core/basiclib.hpp"
+#include "MSTL/core/environment.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
+#include <WinSock2.h>
+#pragma comment(lib, "ws2_32.lib")
 #include <ws2tcpip.h>
 #elif defined(MSTL_PLATFORM_LINUX__)
 #include <sys/socket.h>

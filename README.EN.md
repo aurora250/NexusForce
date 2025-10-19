@@ -118,7 +118,7 @@ sudo make install
 
 The following files are introduced according to the hierarchical level of the file structure.
 
-- [basiclib.hpp](include/MSTL/core/basiclib.hpp)
+- [basiclib.hpp](include/MSTL/core/environment.hpp)
 
 Implements multi-compilation environment adaptation using macros
 for operating system platform, hosting platform, bus width, and C++ version,

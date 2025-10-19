@@ -1,6 +1,8 @@
 #ifndef MSTL_ANY_HPP__
 #define MSTL_ANY_HPP__
 #include "utility.hpp"
+#include "exception.hpp"
+#include <typeinfo>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API any;

@@ -1,6 +1,6 @@
 #ifndef MSTL_DATETIME_HPP__
 #define MSTL_DATETIME_HPP__
-#include "object.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__
@@ -10,7 +10,7 @@ MSTL_INLINE17 static constexpr int32_t MONTH_DAYS[12] = {
 };
 MSTL_END_CONSTANTS__
 
-class MSTL_API date : public object<date> {
+class MSTL_API date : public iserialize<date> {
 public:
     using date_type = int32_t;
     using self = date;
@@ -208,17 +208,17 @@ public:
         return _MSTL format("{:04d}-{:02d}-{:02d}", year(), month(), day());
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 static self parse(const string& str) {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 static self parse(const string_view str) {
         if (str.size() != 10 || str[4] != '-' || str[7] != '-') {
             Exception(ValueError("Wrong string formation."));
         }
-        const date_type year = integer32::parse(str.substr(0, 4).c_str());
-        const date_type month = integer32::parse(str.substr(5, 2).c_str());
-        const date_type day = integer32::parse(str.substr(8, 2).c_str());
+        const date_type year = integer32::parse(str.substr(0, 4));
+        const date_type month = integer32::parse(str.substr(5, 2));
+        const date_type day = integer32::parse(str.substr(8, 2));
         return date(year, month, day);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string& str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);
@@ -237,7 +237,7 @@ public:
 };
 
 
-class MSTL_API time : public object<time> {
+class MSTL_API time : public iserialize<time> {
 public:
     using time_type = int32_t;
     using self = _MSTL time;
@@ -392,17 +392,17 @@ public:
         return _MSTL format("{:02d}:{:02d}:{:02d}", hours(), minutes(), seconds());
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 time parse(const string& str) noexcept {
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 time parse(const string_view str) {
         if (str.size() != 8 || str[2] != ':' || str[5] != ':') {
             Exception(ValueError("Wrong string formation."));
         }
-        const time_type h = integer32::parse(str.substr(0, 2).c_str());
-        const time_type m = integer32::parse(str.substr(3, 2).c_str());
-        const time_type s = integer32::parse(str.substr(6, 2).c_str());
+        const time_type h = integer32::parse(str.substr(0, 2));
+        const time_type m = integer32::parse(str.substr(3, 2));
+        const time_type s = integer32::parse(str.substr(6, 2));
         return time(h, m, s);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string& str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);
@@ -421,7 +421,7 @@ public:
 };
 
 
-class MSTL_API datetime : public object<datetime> {
+class MSTL_API datetime : public iserialize<datetime> {
 public:
     using date_type = date::date_type;
     using time_type = time::time_type;
@@ -604,7 +604,7 @@ public:
         return date_.to_string() + " " + time_.to_string();
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 datetime parse(const string& str) noexcept {
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 datetime parse(const string_view str) {
         if (str.size() != 19 || str[10] != ' ') {
             Exception(ValueError("Wrong string formation."));
         }
@@ -613,7 +613,7 @@ public:
         return datetime(d, t);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string& str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);
@@ -631,7 +631,7 @@ public:
 };
 
 
-class MSTL_API timestamp : public object<timestamp> {
+class MSTL_API timestamp : public iserialize<timestamp> {
 public:
     using value_type = int64_t;
     using self = timestamp;
@@ -682,18 +682,14 @@ public:
     }
 
     MSTL_CONSTEXPR20 string to_string() const noexcept {
-        return _MSTL to_string(sec_since_epoch_);
+        return integer64(sec_since_epoch_).to_string();
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string& str) {
-        try {
-            return self{_INNER to_int64(str.c_str())};
-        } catch (...) {
-            throw;
-        }
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+        return self{integer64::parse(str)};
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string& str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);

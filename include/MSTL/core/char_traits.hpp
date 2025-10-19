@@ -1,6 +1,8 @@
 #ifndef MSTL_CHAR_TRAITS_HPP__
 #define MSTL_CHAR_TRAITS_HPP__
 #include "algobase.hpp"
+#include "hash.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename IntT>
@@ -118,14 +120,14 @@ struct base_char_traits {
     }
 };
 
-template <class CharT>
-struct wide_char_traits : private base_char_traits<CharT, uint16_t> {
+template <class CharT, typename IntT = uint16_t>
+struct wide_char_traits : private base_char_traits<CharT, IntT> {
 private:
-    using base_type = base_char_traits<CharT, uint16_t>;
+    using base_type = base_char_traits<CharT, IntT>;
 
 public:
     using char_type = CharT;
-    using int_type  = uint16_t;
+    using int_type  = IntT;
 
     using base_type::copy;
     using base_type::move;
@@ -262,7 +264,7 @@ public:
         else
 #endif // MSTL_VERSION_20__
         {
-            return ::__builtin_strlen(str);
+            return __builtin_strlen(str);
         }
 #else
         return _MSTL string_length(reinterpret_cast<const char*>(str));
@@ -337,14 +339,19 @@ public:
 };
 
 template <typename CharT>
-struct char_traits : public base_char_traits<CharT, int64_t> {};
-template <> struct char_traits<char> : public narrow_char_traits<char, int32_t> {};
-template <> struct char_traits<wchar_t> : public wide_char_traits<wchar_t> {};
+struct char_traits : base_char_traits<CharT, int64_t> {};
+template <> struct char_traits<char> : narrow_char_traits<char, int32_t> {};
+template <> struct char_traits<wchar_t> : wide_char_traits<wchar_t> {};
 #ifdef MSTL_VERSION_20__
-template <> struct char_traits<char8_t> : public narrow_char_traits<char8_t, uint32_t> {};
+template <> struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};
 #endif
-template <> struct char_traits<char16_t> : public wide_char_traits<char16_t> {};
-template <> struct char_traits<char32_t> : public base_char_traits<char32_t, uint32_t> {};
+#ifdef MSTL_PLATFORM_WINDOWS__
+template <> struct char_traits<char16_t> : wide_char_traits<char16_t> {};
+template <> struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> {};
+#elif defined(MSTL_PLATFORM_LINUX__)
+template <> struct char_traits<char16_t> : base_char_traits<char16_t, uint16_t> {};
+template <> struct char_traits<char32_t> : wide_char_traits<char32_t, uint32_t> {};
+#endif
 
 
 template <typename Traits>
@@ -660,42 +667,29 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
 }
 
 
-MSTL_BEGIN_INNER__
-template <typename CharT>
-constexpr size_t FNV_string_hash(const CharT* str, const size_t len) noexcept {
-    size_t result = FNV_OFFSET_BASIS;
-    for (size_t i = 0; i < len; ++i) {
-        result ^= static_cast<size_t>(static_cast<byte_t>(str[i]));
-        result *= FNV_PRIME;
-    }
-    return result;
-}
-MSTL_END_INNER__
-
-
-# define __MSTL_BUILD_CHAR_PTR_HASH(OPT) \
+#define __MSTL_BUILD_CHAR_PTR_HASH(OPT) \
 template <> \
 struct hash<OPT*> { \
     MSTL_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return _INNER FNV_string_hash(str, char_traits<OPT>::length(str)); \
+        return _INNER FNV_hash_string(str, char_traits<OPT>::length(str)); \
     } \
 }; \
 template <> \
 struct hash<const OPT*> { \
     MSTL_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return _INNER FNV_string_hash(str, char_traits<OPT>::length(str)); \
+        return _INNER FNV_hash_string(str, char_traits<OPT>::length(str)); \
     } \
 }; \
 template <size_t N> \
 struct hash<OPT[N]> { \
     MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
-        return _INNER FNV_string_hash(str, N - 1); \
+        return _INNER FNV_hash_string(str, N - 1); \
     } \
 }; \
 template <size_t N> \
 struct hash<const OPT[N]> { \
     MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
-        return _INNER FNV_string_hash(str, N - 1); \
+        return _INNER FNV_hash_string(str, N - 1); \
     } \
 };
 

@@ -167,10 +167,6 @@ private:
     const_pointer data_;
     size_type size_;
 
-    constexpr void range_check(const size_type n) const {
-        MSTL_DEBUG_VERIFY(size_ < n, "basic string view index out of ranges.");
-    }
-
     MSTL_NODISCARD constexpr size_type clamp_size(const size_type position, const size_type size) const noexcept {
         return _MSTL min(size, size_ - position);
     }
@@ -205,10 +201,6 @@ public:
     MSTL_NODISCARD constexpr const_pointer data() const noexcept { return data_; }
     MSTL_NODISCARD constexpr const_pointer to_cstring() const noexcept { return this->data(); }
 
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _INNER FNV_string_hash(this->data(), this->length());
-    }
-
     MSTL_NODISCARD constexpr const_reference front() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "cannot call front on empty string_view");
         return data_[0];
@@ -219,11 +211,11 @@ public:
     }
 
     MSTL_NODISCARD constexpr const_reference operator [](const size_type n) const noexcept {
-        range_check(n);
+        MSTL_DEBUG_VERIFY(n < size_, "basic string view index out of ranges.");
         return data_[n];
     }
     MSTL_NODISCARD constexpr const_reference at(const size_type n) const {
-        range_check(n);
+        MSTL_DEBUG_VERIFY(n < size_, "basic string view index out of ranges.");
         return data_[n];
     }
 
@@ -238,14 +230,14 @@ public:
     }
 
     constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const {
-        range_check(off);
+        MSTL_DEBUG_VERIFY(off < size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
         Traits::copy(str, data_ + off, count);
         return count;
     }
 
     MSTL_NODISCARD constexpr self substr(const size_type off = 0, size_type count = npos) const {
-        range_check(off);
+        MSTL_DEBUG_VERIFY(off < size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
         return self(data_ + off, count);
     }
@@ -362,6 +354,12 @@ public:
         return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
+    constexpr void swap(self& view) noexcept {
+        const self tmp(view);
+        view = *this;
+        *this = tmp;
+    }
+
     MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
     MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
     MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->compare(rh) < 0; }
@@ -369,10 +367,8 @@ public:
     MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
     MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
 
-    constexpr void swap(self& view) noexcept {
-        const self tmp(view);
-        view = *this;
-        *this = tmp;
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+        return _INNER FNV_hash_string(this->data(), this->length());
     }
 };
 

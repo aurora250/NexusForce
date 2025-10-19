@@ -117,7 +117,7 @@ sudo make install
 
 以下按照上述文件结构层级依次介绍。
 
-- [basiclib.hpp](include/MSTL/core/basiclib.hpp)
+- [basiclib.hpp](include/MSTL/core/environment.hpp)
 
 使用操作系统平台、托管平台、总线宽度和C++版本的宏实现多编译环境适配，定义内存操作与C风格字符串操作函数。
 

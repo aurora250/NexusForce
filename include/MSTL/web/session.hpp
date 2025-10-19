@@ -1,15 +1,13 @@
 #ifndef MSTL_WEB_COOKIE_HPP__
 #define MSTL_WEB_COOKIE_HPP__
-#include "MSTL/core/random.hpp"
 #include "MSTL/core/unordered_map.hpp"
-#include "MSTL/core/stringstream.hpp"
-#include "MSTL/core/hexadecimal.hpp"
 #include "MSTL/core/datetime.hpp"
+#include "MSTL/core/console.hpp"
 #include <mutex>
 #include <thread>
 MSTL_BEGIN_NAMESPACE__
 
-struct cookie {
+struct MSTL_API cookie {
 private:
     string name;
     string value;
@@ -19,7 +17,7 @@ private:
     bool secure = false;
     bool http_only = false;
     string same_site; // "Strict", "Lax", "None"
-    datetime expires;
+    datetime expires_;
 
 public:
     cookie() = default;
@@ -83,47 +81,37 @@ public:
     }
 
     void set_expires(datetime expires) {
-        this->expires = _MSTL move(expires);
+        this->expires_ = _MSTL move(expires);
     }
     datetime get_expires() const {
-        return this->expires;
+        return this->expires_;
     }
 
     string to_string() const {
-        ostringstream ss;
-        ss << name << "=" << value;
+        string result;
+        result += name + "=" + value;
 
-        if (!domain.empty()) ss << "; Domain=" << domain;
-        if (!path.empty()) ss << "; Path=" << path;
+        if (!domain.empty()) result += "; Domain=" + domain;
+        if (!path.empty()) result += "; Path=" + path;
 
         if (max_age >= 0) {
-            ss << "; Max-Age=" << max_age;
+            result += "; Max-Age=" + _MSTL to_string(max_age);
         }
 
-        if (expires > datetime::epoch()) {
-            ss << "; Expires=" << expires.to_gmt();
+        if (expires_ > datetime::epoch()) {
+            result += "; Expires=" + expires_.to_gmt();
         }
 
-        if (secure) ss << "; Secure";
-        if (http_only) ss << "; HttpOnly";
-        if (!same_site.empty()) ss << "; SameSite=" << same_site;
+        if (secure) result += "; Secure";
+        if (http_only) result += "; HttpOnly";
+        if (!same_site.empty()) result += "; SameSite=" + same_site;
 
-        return ss.str();
-    }
-};
-
-template <>
-struct printer<cookie, void> {
-    static void print(cookie const& t) {
-        std::cout << t.to_string();
-    }
-    static void print_feature(cookie const& t) {
-        std::cout << t.to_string();
+        return result;
     }
 };
 
 
-struct session {
+struct MSTL_API session {
 private:
     string id;
     unordered_map<string, string> data;
@@ -208,10 +196,18 @@ public:
     }
 };
 
+template <>
+struct io_base<session> {
+    static void write(sys_console& console, const session& s) {
+        _MSTL print("Session ID: [", s.get_id(), "]", "Data: ");
+        io_base<unordered_map<string, string>>::write(console, s.get_data());
+    }
+};
+
+
+class MSTL_API servlet;
 
 MSTL_BEGIN_INNER__
-class servlet;
-
 class __session_manager {
 private:
     unordered_map<string, session> sessions_;
@@ -219,7 +215,7 @@ private:
     std::atomic<bool> cleanup_running_{false};
     std::thread cleanup_thread_;
 
-    friend class servlet;
+    friend class _MSTL servlet;
 
     static string generate_session_id() {
         string str;
@@ -261,7 +257,7 @@ private:
         }
     }
 
-    session* get_session(const string& session_id, bool create = true) {
+    session* get_session(const string& session_id, const bool create = true) {
         std::lock_guard<std::mutex> lock(mutex_);
         auto it = sessions_.find(session_id);
         if (it != sessions_.end()) {
@@ -367,25 +363,25 @@ enum class HTTP_STATUS : uint16_t {
 };
 
 
-struct HTTP_CONTENT {
-    static constexpr auto HTML_TEXT  = "text/html";
-    static constexpr auto XML_TEXT   = "text/xml";
-    static constexpr auto CSS_TEXT   = "text/css";
-    static constexpr auto PLAIN_TEXT = "text/plain";
-    static constexpr auto JSON_APP   = "application/json";
-    static constexpr auto FORM_APP   = "application/x-www-form-urlencoded";
-    static constexpr auto JPEG_IMG   = "image/jpeg";
-    static constexpr auto PNG_IMG    = "image/png";
-    static constexpr auto BMP_IMG    = "image/bmp";
-    static constexpr auto WEBP_IMG   = "image/webp";
-    static constexpr auto HTML_MSG   = "message/http";
+struct MSTL_API HTTP_CONTENT {
+    static const string HTML_TEXT;
+    static const string XML_TEXT;
+    static const string CSS_TEXT;
+    static const string PLAIN_TEXT;
+    static const string JSON_APP;
+    static const string FORM_APP;
+    static const string JPEG_IMG;
+    static const string PNG_IMG;
+    static const string BMP_IMG;
+    static const string WEBP_IMG;
+    static const string HTML_MSG;
 };
 
 #ifdef DELETE
 #undef DELETE
 #endif
 
-struct HTTP_METHOD {
+struct MSTL_API HTTP_METHOD {
 private:
     string method_{"UNKNOWN"};
 public:
@@ -402,14 +398,14 @@ public:
         return HTTP_METHOD(lh.method_ + ", " + rh.method_);
     }
 
-    static MSTL_API const HTTP_METHOD GET;
-    static MSTL_API const HTTP_METHOD POST;
-    static MSTL_API const HTTP_METHOD HEAD;
-    static MSTL_API const HTTP_METHOD PUT;
-    static MSTL_API const HTTP_METHOD DELETE;
-    static MSTL_API const HTTP_METHOD OPTIONS;
-    static MSTL_API const HTTP_METHOD TRACE;
-    static MSTL_API const HTTP_METHOD CONNECT;
+    static const HTTP_METHOD GET;
+    static const HTTP_METHOD POST;
+    static const HTTP_METHOD HEAD;
+    static const HTTP_METHOD PUT;
+    static const HTTP_METHOD DELETE;
+    static const HTTP_METHOD OPTIONS;
+    static const HTTP_METHOD TRACE;
+    static const HTTP_METHOD CONNECT;
 
     bool is_get() const {
         return method_ == GET.method_;
@@ -441,13 +437,14 @@ public:
     }
 };
 
+inline string to_string(const HTTP_METHOD& method) {
+    return method.to_string();
+}
+
 template <>
-struct printer<HTTP_METHOD, void> {
-    static void print(const HTTP_METHOD& t) {
-        std::cout << t.to_string();
-    }
-    static void print_feature(const HTTP_METHOD& t) {
-        std::cout << t.to_string();
+struct io_base<HTTP_METHOD> {
+    static void write(sys_console& console, const HTTP_METHOD& hm) {
+        console.write_string(to_string(hm));
     }
 };
 

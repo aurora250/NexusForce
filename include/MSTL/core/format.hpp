@@ -3,14 +3,14 @@
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-enum class MSTL_API NUMBER_ALIGN {
-    LEFT,      // <
-    RIGHT,     // >
-    INTERNAL,  // =
-    CENTER     // ^
+enum class NUMBER_ALIGN {
+    LEFT        = '<',
+    RIGHT       = '>',
+    INTERNAL    = '=',
+    CENTER      = '^'
 };
 
-enum class MSTL_API NUMBER_TYPE {
+enum class NUMBER_TYPE {
     BINARY      = 'b',
     OCTAL       = 'o',
     DECIMAL     = 'd',
@@ -41,7 +41,7 @@ constexpr NUMBER_ALIGN to_number_alignment(const char c) {
         case '>': return NUMBER_ALIGN::RIGHT;
         case '^': return NUMBER_ALIGN::CENTER;
         case '=': return NUMBER_ALIGN::INTERNAL;
-        default: return NUMBER_ALIGN::RIGHT;
+        default:  return NUMBER_ALIGN::RIGHT;
     }
 }
 
@@ -118,9 +118,9 @@ MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) 
         ++pos;
     }
 
-    if (pos < fmt_str.size() && _INNER is_digit(fmt_str[pos])) {
+    if (pos < fmt_str.size() && _MSTL is_digit(fmt_str[pos])) {
         int width = 0;
-        while (pos < fmt_str.size() && _INNER is_digit(fmt_str[pos])) {
+        while (pos < fmt_str.size() && _MSTL is_digit(fmt_str[pos])) {
             width = width * 10 + (fmt_str[pos] - '0');
             ++pos;
         }
@@ -130,7 +130,7 @@ MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) 
     if (pos < fmt_str.size() && fmt_str[pos] == '.') {
         ++pos;
         int precision = 0;
-        while (pos < fmt_str.size() && _INNER is_digit(fmt_str[pos])) {
+        while (pos < fmt_str.size() && _MSTL is_digit(fmt_str[pos])) {
             precision = precision * 10 + (fmt_str[pos] - '0');
             ++pos;
         }
@@ -149,9 +149,8 @@ MSTL_END_INNER__
 
 
 template <typename Number, typename = void>
-struct formatter {
-    MSTL_CONSTEXPR20 string operator ()(const Number& value, const format_options& options) const;
-};
+struct formatter;
+
 
 template <typename T>
 struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
@@ -367,11 +366,12 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
                 return number_str + string(fill_count, options.fill);
             case NUMBER_ALIGN::RIGHT:
                 return string(fill_count, options.fill) + number_str;
-            case NUMBER_ALIGN::INTERNAL:
+            case NUMBER_ALIGN::INTERNAL: {
                 if (!base_prefix.empty()) {
                     return base_prefix + string(fill_count, options.fill) + digits;
                 }
                 return string(fill_count, options.fill) + number_str;
+            }
             case NUMBER_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
@@ -440,7 +440,7 @@ struct formatter<char> {
 
 
 MSTL_BEGIN_INNER__
-MSTL_CONSTEXPR20 string format_impl(const string_view& fmt, size_t& pos) {
+MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos) {
     string result;
     while (pos < fmt.size()) {
         if (fmt[pos] == '{') {
@@ -466,7 +466,7 @@ MSTL_CONSTEXPR20 string format_impl(const string_view& fmt, size_t& pos) {
 }
 
 template <typename First, typename... Rest>
-MSTL_CONSTEXPR20 string format_impl(const string_view& fmt, size_t& pos, First&& first, Rest&&... rest) {
+MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First&& first, Rest&&... rest) {
     string result;
     while (pos < fmt.size()) {
         if (fmt[pos] == '{') {
@@ -490,7 +490,7 @@ MSTL_CONSTEXPR20 string format_impl(const string_view& fmt, size_t& pos, First&&
                 Exception(ValueError("Unmatched '{' in format string"));
             }
 
-            string_view spec_str = fmt.substr(pos, end_pos - pos);
+            const string_view spec_str = fmt.substr(pos, end_pos - pos);
             pos = end_pos + 1;
             format_options opts;
             if (spec_str.empty()) {
@@ -521,7 +521,7 @@ MSTL_END_INNER__
 
 
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
-MSTL_CONSTEXPR20 string format(const string_view& fmt, Args&&... args) {
+MSTL_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     size_t pos = 0;
     return _INNER format_impl(fmt, pos, _MSTL forward<Args>(args)...);
 }

@@ -1,18 +1,38 @@
 #ifndef MSTL_OPTIONAL_HPP__
 #define MSTL_OPTIONAL_HPP__
-#include "utility.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(OptionalAccessError, MemoryError, "Access the Null Value of Optional.")
 
-struct nullopt_t {
+struct nullopt_t : iserialize<nullopt_t> {
     constexpr nullopt_t() noexcept = default;
+    MSTL_CONSTEXPR20 ~nullopt_t() = default;
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+        return {"nullopt"};
+    }
+
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 nullopt_t parse(const string_view str) {
+        if (str != "nullopt") return nullopt_t();
+        return nullopt_t();
+    }
+
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+        try {
+            *this = self::parse(str);
+            return true;
+        }
+        catch (...) {
+            return false;
+        }
+    }
 };
 static constexpr nullopt_t nullopt;
 
 
 template <typename T>
-class optional {
+class optional : public iserialize<optional<T>> {
     static_assert(!is_any_of_v<remove_cv_t<T>, nullopt_t, _MSTL_TAG inplace_construct_tag>,
         "optional do not contains _MSTL_TAG nullopt_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
@@ -421,6 +441,10 @@ public:
         return !(*this < rh);
     }
 
+    constexpr size_t to_hash() const noexcept {
+        return hash<T>()(this->operator*());
+    }
+
     MSTL_CONSTEXPR20 void swap(self& x)
     noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
         if(_MSTL addressof(x) == this) return;
@@ -437,17 +461,33 @@ public:
             x.reset();
         }
     }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+        if (this->have_value_) {
+            return _MSTL to_string(this->operator*());
+        }
+        return _MSTL to_string(nullopt);
+    }
+
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+        return iserialize<package_t<T>>::parse(str);
+    }
+
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+        try {
+            *this = self::parse(str);
+            return true;
+        }
+        catch (...) {
+            reset();
+            return false;
+        }
+    }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <class T>
 optional(T) -> optional<T>;
 #endif
-
-template <typename T, enable_if_t<is_move_constructible_v<T> && is_swappable_v<T>, int> = 0>
-MSTL_CONSTEXPR20 void swap(optional<T>& lh, optional<T>& rh)
-noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
 
 template <typename T, enable_if_t<is_constructible_v<decay_t<T>, T>, int> = 0>
 constexpr optional<decay_t<T>> make_optional(T&& value)
@@ -467,13 +507,6 @@ optional<T>> make_optional(std::initializer_list<U> ilist, Args&&... args)
 noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
     return optional<T>{ _MSTL_TAG inplace_construct_tag{}, ilist, _MSTL forward<Args>(args)... };
 }
-
-template <typename T>
-struct hash<optional<T>> {
-    size_t operator()(const optional<T>& x) const noexcept {
-        return hash<T>()(*x);
-    }
-};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_OPTIONAL_HPP__

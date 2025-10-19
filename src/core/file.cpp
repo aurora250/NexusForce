@@ -2,21 +2,13 @@
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/file.h>
 #include <sys/time.h>
+#include <time.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#include <dirent.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
-
-file::file_handle file::INVALID_HANDLE() noexcept {
-    static file_handle INVALID_HANDLE =
-#ifdef MSTL_PLATFORM_WINDOWS__
-        INVALID_HANDLE_VALUE;
-#elif defined(MSTL_PLATFORM_LINUX__)
-        -1;
-#endif
-    return INVALID_HANDLE;
-}
 
 bool file::flush_write_buffer() const noexcept {
     if (write_buffer_pos_ == 0) return true;
@@ -117,12 +109,12 @@ file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
     return ft;
 #elif defined(MSTL_PLATFORM_LINUX__)
     ::tm tm_val{};
-    tm_val.tm_year = dt.get_year() - 1900;
-    tm_val.tm_mon = dt.get_month() - 1;
-    tm_val.tm_mday = dt.get_day();
-    tm_val.tm_hour = dt.get_hours();
-    tm_val.tm_min = dt.get_minutes();
-    tm_val.tm_sec = dt.get_seconds();
+    tm_val.tm_year = dt.year() - 1900;
+    tm_val.tm_mon = dt.month() - 1;
+    tm_val.tm_mday = dt.day();
+    tm_val.tm_hour = dt.hours();
+    tm_val.tm_min = dt.minutes();
+    tm_val.tm_sec = dt.seconds();
     tm_val.tm_isdst = -1;
     return ::mktime(&tm_val);
 #endif
@@ -181,33 +173,62 @@ file::file(string path,
 }
 
 file::file(file&& other) noexcept
-    : handle_(other.handle_), path_(_MSTL move(other.path_)),
-    opened_(other.opened_), append_mode_(other.append_mode_) {
+    : handle_(other.handle_),
+      path_(_MSTL move(other.path_)),
+      opened_(other.opened_),
+      append_mode_(other.append_mode_),
+      read_buffer_(_MSTL move(other.read_buffer_)),
+      read_buffer_pos_(other.read_buffer_pos_),
+      read_buffer_size_(other.read_buffer_size_),
+      write_buffer_(_MSTL move(other.write_buffer_)),
+      write_buffer_pos_(other.write_buffer_pos_) {
+
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
+    other.path_ = string{};
+    other.read_buffer_.clear();
+    other.read_buffer_pos_ = 0;
+    other.read_buffer_size_ = 0;
+    other.write_buffer_.clear();
+    other.write_buffer_pos_ = 0;
 }
 
 file& file::operator =(file&& other) noexcept {
-    if (this == _MSTL addressof(other))
-        return *this;
+    if (this == _MSTL addressof(other)) return *this;
 
     this->close();
     handle_ = other.handle_;
     path_ = _MSTL move(other.path_);
     opened_ = other.opened_;
     append_mode_ = other.append_mode_;
+    read_buffer_ = _MSTL move(other.read_buffer_);
+    read_buffer_pos_ = other.read_buffer_pos_;
+    read_buffer_size_ = other.read_buffer_size_;
+    write_buffer_ = _MSTL move(other.write_buffer_);
+    write_buffer_pos_ = other.write_buffer_pos_;
 
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
-    other.path_.clear();
+    other.path_ = string{};
+    other.read_buffer_.clear();
+    other.read_buffer_pos_ = 0;
+    other.read_buffer_size_ = 0;
+    other.write_buffer_.clear();
+    other.write_buffer_pos_ = 0;
 
     return *this;
 }
 
 file::~file() {
     this->close();
+
+    read_buffer_.clear();
+    write_buffer_.clear();
+    read_buffer_pos_ = 0;
+    read_buffer_size_ = 0;
+    write_buffer_pos_ = 0;
 }
 
 bool file::open(
@@ -233,8 +254,8 @@ bool file::open(
         nullptr
         );
 #elif defined(MSTL_PLATFORM_LINUX__)
-    int flags = static_cast<file_flag_type>(access);
-    flags |= static_cast<file_flag_type>(creation);
+    int flags = static_cast<int>(access);
+    flags |= static_cast<int>(creation);
     if (append) flags |= O_APPEND;
 
     const ::mode_t mode = convert_attributes(attributes);
@@ -516,11 +537,25 @@ file::size_type file::size() const noexcept {
 }
 
 file::size_type file::size(const string& path) {
-    file f;
-    if (f.open(path, FILE_ACCESS::READ)) {
-        return f.size();
+    size_type sz = 0;
+    {
+        file f;
+        if (f.open(path, FILE_ACCESS::READ)) {
+            sz = f.size();
+        }
     }
-    return 0;
+    return sz;
+}
+
+bool file::size(const string& path, size_type& size) {
+    {
+        file f;
+        if (f.open(path, FILE_ACCESS::READ)) {
+            size = f.size();
+            return true;
+        }
+    }
+    return false;
 }
 
 bool file::seek(const difference_type distance, FILE_POINTER method) const noexcept {
@@ -743,9 +778,9 @@ bool file::set_all_times(const datetime& access, const datetime& write) const no
         return false;
 
     ::timeval times[2];
-    times[0].tv_sec = access.to_timestamp().get_seconds();
+    times[0].tv_sec = timestamp(access).seconds();
     times[0].tv_usec = 0;
-    times[1].tv_sec = write.to_timestamp().get_seconds();
+    times[1].tv_sec = timestamp(write).seconds();
     times[1].tv_usec = 0;
     return ::futimes(handle_, times) == 0;
 }
@@ -788,7 +823,7 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
 #endif
 }
 
-const string& file::path() const noexcept { return path_; }
+string_view file::path() const noexcept { return path_.view(); }
 bool file::opened() const noexcept { return opened_; }
 bool file::is_append() const noexcept { return append_mode_; }
 
@@ -833,14 +868,6 @@ bool file::is_file(const string& path) noexcept {
     if (::stat(path.c_str(), &st) == -1) return false;
     return S_ISREG(st.st_mode) || S_ISLNK(st.st_mode);
 #endif
-}
-
-string file::extension() const noexcept {
-    return file::extension(path_);
-}
-
-string file::extension(const string& path) noexcept {
-    return string{file::extension(string_view{path.c_str(), path.size()})};
 }
 
 bool file::create_directories() const {
@@ -1010,23 +1037,174 @@ string file::read_binary(const string& path,
 }
 
 bool file::copy(const string& from, const string& to, const bool overwrite) {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    return ::CopyFileA(from.c_str(), to.c_str(), !overwrite) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+    if (!file::exists(from)) return false;
+    if (file::is_directory(from)) return false;
     if (!overwrite && file::exists(to)) return false;
-    string content;
-    if (!file::read(from, content)) return false;
-    return file::create_and_write(to, content, false);
+
+    const string dest_dir = to.substr(0, to.find_last_of(FILE_SPLITER));
+    if (dest_dir != to && !file::exists(dest_dir)) {
+        if (!file::create_directories(dest_dir)) return false;
+    }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    string actual_to = to;
+    if (file::exists(to) && file::is_directory(to)) {
+        const string filename = from.substr(from.find_last_of(FILE_SPLITER) + 1);
+        actual_to = to + "\\" + filename;
+    }
+
+    if (overwrite && file::exists(actual_to)) {
+        const DWORD attrs = ::GetFileAttributesA(actual_to.c_str());
+        if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY)) {
+            ::SetFileAttributesA(actual_to.c_str(), attrs & ~FILE_ATTRIBUTE_READONLY);
+        }
+    }
+
+    if (::CopyFileA(from.c_str(), actual_to.c_str(), !overwrite)) {
+        return true;
+    }
+    const DWORD error = ::GetLastError();
+    return false;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    const int source_fd = ::open(from.c_str(), O_RDONLY);
+    if (source_fd == -1) return false;
+    struct ::stat st;
+    if (::fstat(source_fd, &st) == -1) {
+        ::close(source_fd);
+        return false;
+    }
+
+    int flags = O_WRONLY | O_CREAT;
+    if (overwrite) {
+        flags |= O_TRUNC;
+    } else {
+        flags |= O_EXCL;
+    }
+    const int dest_fd = ::open(to.c_str(), flags, 0644);
+    if (dest_fd == -1) {
+        ::close(source_fd);
+        return false;
+    }
+
+    char buffer[BUFFER_SIZE];
+    ssize_t bytes_read;
+    bool success = true;
+
+    while ((bytes_read = ::read(source_fd, buffer, BUFFER_SIZE)) > 0) {
+        const ssize_t bytes_written = ::write(dest_fd, buffer, bytes_read);
+        if (bytes_written != bytes_read) {
+            success = false;
+            break;
+        }
+    }
+    if (bytes_read < 0) success = false;
+
+    if (success) {
+        if (::fchmod(dest_fd, st.st_mode & 0777) == -1) {}
+        ::timeval times[2];
+        times[0].tv_sec = st.st_atime;
+        times[0].tv_usec = 0;
+        times[1].tv_sec = st.st_mtime;
+        times[1].tv_usec = 0;
+        if (::futimes(dest_fd, times) == -1) {}
+    }
+
+    ::close(source_fd);
+    ::close(dest_fd);
+
+    if (!success) {
+        ::unlink(to.c_str());
+    }
+
+    return success;
 #endif
 }
 
+
+bool file::copy_directory(const string& source, const string& destination, bool overwrite) {
+    if (!file::is_directory(source)) return false;
+    if (!file::exists(destination) && !file::create_directories(destination)) return false;
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    const string findPattern = source + "/*";
+    ::WIN32_FIND_DATAA findData;
+    const file_handle hFind = ::FindFirstFileA(findPattern.c_str(), &findData);
+
+    if (hFind == INVALID_HANDLE()) {
+        if (::GetLastError() == ERROR_FILE_NOT_FOUND) return true;
+        return false;
+    }
+
+    do {
+        string item = findData.cFileName;
+        if (item == "." || item == "..") continue;
+
+        string srcPath = source + "/" + item;
+        string dstPath = destination + "/" + item;
+
+        if (file::is_directory(srcPath)) {
+            if (!copy_directory(srcPath, dstPath, overwrite)) {
+                ::FindClose(hFind);
+                return false;
+            }
+        } else {
+            if (!file::copy(srcPath, dstPath, overwrite)) {
+                ::FindClose(hFind);
+                return false;
+            }
+        }
+    } while (::FindNextFileA(hFind, &findData) != 0);
+
+    ::FindClose(hFind);
+
+#elif defined(MSTL_PLATFORM_LINUX__)
+    ::DIR *dir = ::opendir(source.c_str());
+    if (dir == nullptr) return false;
+
+    ::dirent *entry;
+    while ((entry = ::readdir(dir)) != nullptr) {
+        string item = entry->d_name;
+        if (item == "." || item == "..") continue;
+
+        string srcPath = source + "/" + item;
+        string dstPath = destination + "/" + item;
+
+        if (file::is_directory(srcPath)) {
+            if (!file::copy_directory(srcPath, dstPath, overwrite)) {
+                ::closedir(dir);
+                return false;
+            }
+        } else {
+            if (!file::copy(srcPath, dstPath, overwrite)) {
+                ::closedir(dir);
+                return false;
+            }
+        }
+    }
+    ::closedir(dir);
+#endif
+    return true;
+}
+
+
 bool file::move(const string& from, const string& to, const bool overwrite) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    size_type flags = MOVEFILE_COPY_ALLOWED;
+    ::DWORD flags = MOVEFILE_COPY_ALLOWED;
     if (overwrite) {
         flags |= MOVEFILE_REPLACE_EXISTING;
     }
-    return ::MoveFileExA(from.c_str(), to.c_str(), flags) != 0;
+    if (::MoveFileExA(from.c_str(), to.c_str(), flags)) {
+        return true;
+    }
+
+    ::DWORD error = ::GetLastError();
+    if (file::copy(from, to, overwrite)) {
+        if (file::remove(from)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
 #elif defined(MSTL_PLATFORM_LINUX__)
     if (overwrite) {
         if (::rename(from.c_str(), to.c_str()) == 0) return true;

@@ -23,7 +23,7 @@ public:
 
 template <typename T>
 struct hash<T, enable_if_t<is_base_of_v<ihashable<T>, T>>> {
-    MSTL_NODISCARD constexpr size_t operator ()(const ihashable<T>& obj) const
+    MSTL_NODISCARD constexpr size_t operator ()(const T& obj) const
     noexcept(noexcept(obj.to_hash())) {
         return obj.to_hash();
     }
@@ -38,7 +38,7 @@ public:
 
 private:
     static constexpr child_type* to_template(const self* o) noexcept {
-        return const_cast<T*>(static_cast<const T*>(o));
+        return const_cast<child_type*>(static_cast<const child_type*>(o));
     }
 
 public:
@@ -57,7 +57,6 @@ noexcept(noexcept(lh.swap(rh))) {
 
 template <typename T>
 struct icomparable {
-public:
     using self = icomparable<T>;
     using child_type = T;
 
@@ -94,32 +93,32 @@ public:
 };
 
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator ==(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator ==(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator==(rh))) {
     return lh.operator==(rh);
 }
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator !=(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator !=(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator!=(rh))) {
     return lh.operator!=(rh);
 }
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator <(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator <(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator<(rh))) {
     return lh.operator<(rh);
 }
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator >(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator >(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator>(rh))) {
     return lh.operator>(rh);
 }
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator <=(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator <=(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator<=(rh))) {
     return lh.operator<=(rh);
 }
 template <typename T, enable_if_t<is_base_of_v<icomparable<T>, T>, int> = 0>
-MSTL_NODISCARD constexpr bool operator >=(const icomparable<T>& lh, const icomparable<T>& rh)
+MSTL_NODISCARD constexpr bool operator >=(const T& lh, const T& rh)
 noexcept(noexcept(lh.operator>=(rh))) {
     return lh.operator>=(rh);
 }

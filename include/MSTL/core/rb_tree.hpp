@@ -1,10 +1,10 @@
 #ifndef MSTL_RB_TREE_HPP__
 #define MSTL_RB_TREE_HPP__
-#include "memory.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-static constexpr bool RB_TREE_RED = false;
-static constexpr bool RB_TREE_BLACK = true;
+MSTL_INLINE17 constexpr bool RB_TREE_RED = false;
+MSTL_INLINE17 constexpr bool RB_TREE_BLACK = true;
 
 MSTL_BEGIN_INNER__
 struct __rb_tree_node_base;
@@ -225,36 +225,39 @@ public:
 
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, 
     typename Alloc = allocator<rb_tree_node<Value>>>
-class rb_tree {
+class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
 
+    using self = rb_tree<Key, Value, KeyOfValue, Compare, Alloc>;
+    using super = icollector<self>;
+
+    using base_node  = _INNER __rb_tree_node_base;
+    using link_node = rb_tree_node<Value>;
+    using base_ptr  = base_node*;
+    using link_type = link_node*;
+
 public:
+    using key_type = Key;
+    using color_type = bool;
+
     MSTL_BUILD_TYPE_ALIAS(Value)
-    using key_type                  = Key;
-    using color_type                = bool;
-    using allocator_type            = Alloc;
-    using self                      = rb_tree<Key, Value, KeyOfValue, Compare, Alloc>;
 
     using iterator                  = rb_tree_iterator<false, self>;
     using const_iterator            = rb_tree_iterator<true, self>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
-private:
-    using base_node  = _INNER __rb_tree_node_base;
-    using link_node = rb_tree_node<Value>;
-    using base_ptr  = base_node*;
-    using link_type = link_node*;
+    using allocator_type = Alloc;
 
+private:
     link_type header_ = nullptr;
     Compare key_compare_{};
     KeyOfValue extracter_{};
-    // allocator_, size_
-    compressed_pair<allocator_type, size_t> size_pair_{ _MSTL_TAG default_construct_tag{}, 0 };
+    compressed_pair<allocator_type, size_t> size_pair_{ _MSTL_TAG default_construct_tag{}, 0 }; // size
 
     template <bool, typename> friend struct rb_tree_iterator;
 
@@ -432,8 +435,9 @@ public:
         header_init();
     }
 
-    rb_tree(const self& x) 
-        : key_compare_(x.key_compare_), extracter_(x.extracter_), size_pair_(x.size_pair_) {
+    rb_tree(const self& x) :
+    key_compare_(x.key_compare_),
+    extracter_(x.extracter_), size_pair_(x.size_pair_) {
         header_init();
         copy_from(x);
     }
@@ -444,18 +448,14 @@ public:
         return *this;
     }
 
-    rb_tree(self&& x) 
-    noexcept(is_nothrow_move_constructible_v<Compare>
-        && is_nothrow_move_constructible_v<KeyOfValue>)
-    : header_(_MSTL move(x.header_)),
-    key_compare_(_MSTL move(x.key_compare_)),
-    extracter_(_MSTL move(x.extracter_)),
-    size_pair_(_MSTL move(x.size_pair_)) {
+    rb_tree(self&& x) noexcept :
+    header_(_MSTL move(x.header_)), key_compare_(_MSTL move(x.key_compare_)),
+    extracter_(_MSTL move(x.extracter_)), size_pair_(_MSTL move(x.size_pair_)) {
         x.header_ = nullptr;
         x.size_pair_.value = 0;
     }
 
-    self& operator =(self&& x) noexcept(noexcept(swap(x))) {
+    self& operator =(self&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         clear();
         size_pair_.get_base().deallocate(header_);
@@ -615,15 +615,6 @@ public:
         size_pair_.value = 0;
     }
 
-    void swap(self& x) noexcept(is_nothrow_swappable_v<Compare>
-        && is_nothrow_swappable_v<KeyOfValue>
-        && noexcept(size_pair_.swap(x.size_pair_))) {
-        _MSTL swap(header_, x.header_);
-        _MSTL swap(size_pair_, x.size_pair_);
-        _MSTL swap(key_compare_, x.key_compare_);
-        _MSTL swap(extracter_, x.extracter_);
-    }
-
     MSTL_NODISCARD iterator find(const key_type& k) {
         link_type y = header_;
         link_type x = root();
@@ -717,49 +708,50 @@ public:
     MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
         return pair<const_iterator, const_iterator>(this->lower_bound(k), this->upper_bound(k));
     }
-};
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator ==(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return lh.size() == rh.size() && _MSTL equal(lh.cbegin(), lh.cend(), rh.cbegin());
-}
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator !=(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return !(lh == rh);
-}
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return _MSTL lexicographical_compare(lh.cbegin(), lh.cend(), rh.cbegin(), rh.cend());
-}
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return rh < lh;
-}
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <=(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return !(lh > rh);
-}
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >=(
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    const rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept {
-    return !(lh < rh);
-}
 
-template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc>
-void swap(rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& lh,
-    rb_tree<Key, Value, KeyOfValue, Compare, Alloc>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
+    void swap(self& x)
+    noexcept(is_nothrow_swappable_v<Compare> &&
+    is_nothrow_swappable_v<KeyOfValue> &&
+    noexcept(size_pair_.swap(x.size_pair_))) {
+        _MSTL swap(header_, x.header_);
+        _MSTL swap(size_pair_, x.size_pair_);
+        _MSTL swap(key_compare_, x.key_compare_);
+        _MSTL swap(extracter_, x.extracter_);
+    }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
+        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(!(*this == rh))) {
+        return !(*this == rh);
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(rh < *this)) {
+        return rh < *this;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(!(*this < rh))) {
+        return !(*this < rh);
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(!(*this > rh))) {
+        return !(*this > rh);
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(*this);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(*this);
+    }
+};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_RB_TREE_HPP__

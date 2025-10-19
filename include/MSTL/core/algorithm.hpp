@@ -1,8 +1,7 @@
 ﻿#ifndef MSTL_ALGORITHM_HPP__
 #define MSTL_ALGORITHM_HPP__
 #include "numeric.hpp"
-#include "algo.hpp"
-#include <thread>
+#include "thread.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename BinaryOperation, typename Result,
@@ -16,7 +15,7 @@ void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
     else {
         Iterator mid = _MSTL next(first, dist / 2);
         Result l_res = res, r_res = res;
-        std::thread r_thd(reduce<Iterator, BinaryOperation, Result, Threshhold>, mid, last, op, _MSTL ref(r_res));
+        _MSTL thread r_thd(reduce<Iterator, BinaryOperation, Result, Threshhold>, mid, last, op, _MSTL ref(r_res));
         _MSTL reduce(first, mid, op, l_res);
         r_thd.join();
         res = op(l_res, r_res);
@@ -34,7 +33,7 @@ void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, B
     else {
         Iterator mid = _MSTL next(first, dist / 2);
         Result l_res = _MSTL initialize<Result>(), r_res = _MSTL initialize<Result>();
-        std::thread r_thd(transform_reduce<Iterator, UnaryOperation, BinaryOp, Result, Threshhold>,
+        _MSTL thread r_thd(transform_reduce<Iterator, UnaryOperation, BinaryOp, Result, Threshhold>,
             mid, last, transform, reduce, _MSTL ref(r_res));
         _MSTL transform_reduce(first, mid, transform, reduce, l_res);
         r_thd.join();

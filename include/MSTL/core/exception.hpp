@@ -1,12 +1,10 @@
 #ifndef MSTL_EXCEPTION_HPP__
 #define MSTL_EXCEPTION_HPP__
-#include "basiclib.hpp"
+#include "environment.hpp"
 #include <cassert>
+#include "undef_cmacro.hpp"
 #ifdef MSTL_SUPPORT_CUDA__
 #include <cuda_runtime.h>
-#endif
-#ifdef MSTL_SUPPORT_STACKTRACE__
-#include <boost/stacktrace/stacktrace.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -61,7 +59,7 @@ MSTL_ERROR_BUILD_FINAL_CLASS(StopIterator, MemoryError, "Iterator or Pointer Acc
 MSTL_ERROR_BUILD_DERIVED_CLASS(TypeCastError, MemoryError, "Type Cast Mismatch.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(ValueError, Error, "Function or Template Argument Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(LinkError, Error, "External Link Actions Failed.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(DeviceOperateError, Error, "Operate Device Failed.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(DeviceOperateError, Error, "Device Operation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(FileOperateError, DeviceOperateError, "Device File Operation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(MathError, ValueError, "Math Function Argument Invalid.")
 
@@ -81,44 +79,39 @@ struct CUDAMemoryError final : MemoryError {
 #endif
 
 
-MSTL_BEGIN_INNER__
-MSTL_ALWAYS_INLINE inline void __report_err(const Error& err) {
-	std::cerr << "\nException : (" << err.type_ << ") " << err.info_ << "\n";
-#ifdef MSTL_SUPPORT_STACKTRACE__
-	std::cerr << boost::stacktrace::stacktrace() << std::endl;
-#endif
-}
-MSTL_END_INNER__
+// MSTL_BEGIN_INNER__
+// MSTL_ALWAYS_INLINE inline void __report_err(const Error& err) {
+// 	std::cerr << "\nException : (" << err.type_ << ") " << err.info_ << "\n";
+// #ifdef MSTL_SUPPORT_STACKTRACE__
+// 	std::cerr << boost::stacktrace::stacktrace() << std::endl;
+// #endif
+// }
+// MSTL_END_INNER__
 
 
-// throw a new error and print stacktrace of boost is imported.
-inline void Exception(const Error& err){
-	_INNER __report_err(err);
+MSTL_ALWAYS_INLINE inline void Exception(const Error& err){
+	// _INNER __report_err(err);
 	throw err;
 }
 
-inline void Exception(const bool boolean, const Error& err = Error()) {
+MSTL_ALWAYS_INLINE inline void Exception(const bool boolean, const Error& err = AssertionError()) {
 	if (boolean) return;
 	Exception(err);
 }
 
 
-// just allowing void(void) function be called before process exit
-MSTL_NORETURN inline void Exit(const bool abort = false, void(* func)() = nullptr) {
-	if (abort) std::abort();
-	if (func) std::atexit(func);
-	std::exit(1);
-}
+// // just allowing void(void) function be called before process exit
+// MSTL_NORETURN inline void Exit(const bool abort = false, void(* func)() = nullptr) {
+// 	if (abort) std::abort();
+// 	if (func) std::atexit(func);
+// 	std::exit(1);
+// }
 
 
 #ifdef MSTL_STATE_DEBUG__
-#define MSTL_REPORT_ERROR(MESG) \
-    { _INNER __report_err(_MSTL AssertionError(MESG)); }
-
 #define MSTL_DEBUG_VERIFY(CON, MESG) \
-	{ if (CON) {} else { MSTL_REPORT_ERROR(MESG); assert(false); } }
+	{ if (CON) {} else { assert(false && MESG); } }
 #else
-#define MSTL_REPORT_ERROR(MESG)
 #define MSTL_DEBUG_VERIFY(CON, MESG)
 #endif
 

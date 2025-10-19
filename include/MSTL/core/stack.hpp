@@ -4,14 +4,16 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Sequence = deque<T>>
-class stack {
+class stack : public icollector<stack<T, Sequence>> {
+    using self = stack<T, Sequence>;
+    using super = icollector<self>;
+
 public:
     using value_type        = typename Sequence::value_type;
     using difference_type   = typename Sequence::difference_type;
     using size_type         = typename Sequence::size_type;
     using reference         = typename Sequence::reference;
     using const_reference   = typename Sequence::const_reference;
-    using self              = stack<T, Sequence>;
 
     static_assert(is_object_v<T>, "stack only contains object types.");
     static_assert(is_same_v<T, value_type>, "stack require consistent types.");
@@ -44,47 +46,43 @@ public:
         _MSTL swap(seq_, x.seq_);
     }
 
-    MSTL_NODISCARD const Sequence& get_container() const noexcept { return seq_; }
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+     noexcept(noexcept(seq_ == rh.seq_)) {
+        return seq_ == rh.seq_;
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(seq_ != rh.seq_)) {
+        return seq_ != rh.seq_;
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(seq_ < rh.seq_)) {
+        return seq_ < rh.seq_;
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(seq_ > rh.seq_)) {
+        return seq_ > rh.seq_;
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(seq_ <= rh.seq_)) {
+        return seq_ <= rh.seq_;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(seq_ >= rh.seq_)) {
+        return seq_ >= rh.seq_;
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(seq_);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(seq_);
+    }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Sequence>
 stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
-
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator ==(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-noexcept(noexcept(x.get_container() == y.get_container())) {
-    return x.get_container() == y.get_container();
-}
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator !=(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-noexcept(noexcept(x.get_container() != y.get_container())) {
-    return x.get_container() != y.get_container();
-}
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator <(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-noexcept(noexcept(x.get_container() < y.get_container())) {
-    return x.get_container() < y.get_container();
-}
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator >(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-    noexcept(noexcept(x.get_container() > y.get_container())) {
-    return x.get_container() > y.get_container();
-}
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator <=(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-    noexcept(noexcept(x.get_container() <= y.get_container())) {
-    return x.get_container() <= y.get_container();
-}
-template<typename T, typename Sequence>
-MSTL_NODISCARD bool operator >=(const stack<T, Sequence>& x, const stack<T, Sequence>& y)
-noexcept(noexcept(x.get_container() >= y.get_container())) {
-    return x.get_container() >= y.get_container();
-}
-template <typename T, typename Sequence>
-void swap(stack<T, Sequence>& lh, stack<T, Sequence>& rh) noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_STACK_HPP__

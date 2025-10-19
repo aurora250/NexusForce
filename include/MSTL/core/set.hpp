@@ -4,7 +4,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
-class set {
+class set : public icollector<set<Key, Compare, Alloc>> {
 #ifdef MSTL_VERSION_20__	
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
@@ -12,36 +12,32 @@ class set {
 		"allocator type mismatch.");
 	static_assert(is_object_v<Key>, "set only contains object types.");
 
+	using self = set<Key, Compare, Alloc>;
+	using super = icollector<self>;
+	using base_type = rb_tree<Key, Key, identity<Key>, Compare, Alloc>;
+
 public:
 	using key_type			= Key;
 	using value_type		= Key;
 	using key_compare		= Compare;
 	using value_compare		= Compare;
-private:
-	using base_type			= rb_tree<key_type, value_type, identity<value_type>, key_compare, Alloc>;
-public:
+
 	using size_type			= typename base_type::size_type;
 	using difference_type	= typename base_type::difference_type;
 	using pointer			= typename base_type::pointer;
 	using const_pointer		= typename base_type::const_pointer;
 	using reference			= typename base_type::reference;
 	using const_reference	= typename base_type::const_reference;
-	using iterator			= typename base_type::iterator;
-	using const_iterator	= typename base_type::const_iterator;
-	using reverse_iterator  = typename base_type::reverse_iterator;
-	using const_reverse_iterator = typename base_type::const_reverse_iterator;
+
+	using iterator					= typename base_type::iterator;
+	using const_iterator			= typename base_type::const_iterator;
+	using reverse_iterator			= typename base_type::reverse_iterator;
+	using const_reverse_iterator	= typename base_type::const_reverse_iterator;
+
 	using allocator_type	= typename base_type::allocator_type;
-	using self				= set<Key, Compare, Alloc>;
 
 private:
 	base_type tree_;
-
-	template <typename Key1, typename Compare1, typename Alloc1>
-	friend bool operator ==(const set<Key1, Compare1, Alloc1>&,
-		const set<Key1, Compare1, Alloc1>&) noexcept;
-	template <typename Key1, typename Compare1, typename Alloc1>
-	friend bool operator <(const set<Key1, Compare1, Alloc1>&,
-		const set<Key1, Compare1, Alloc1>&) noexcept;
 
 public:
 	set() : tree_(Compare()) {}
@@ -129,8 +125,6 @@ public:
 
 	void clear() noexcept { tree_.clear(); }
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
-
 	MSTL_NODISCARD iterator find(const key_type& x) { return tree_.find(x); }
 	MSTL_NODISCARD const_iterator find(const key_type& x) const { return tree_.find(x); }
 	MSTL_NODISCARD size_type count(const key_type& x) const { return tree_.count(x); }
@@ -144,6 +138,36 @@ public:
 	MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& x) const {
 		return tree_.equal_range(x);
 	}
+
+	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+
+	MSTL_NODISCARD bool operator ==(const self& rh) const
+	noexcept(noexcept(tree_ == rh.tree_)) {
+		return tree_ == rh.tree_;
+	}
+	MSTL_NODISCARD bool operator !=(const self& rh) const
+	noexcept(noexcept(tree_ != rh.tree_)) {
+		return tree_ != rh.tree_;
+	}
+	MSTL_NODISCARD bool operator <(const self& rh) const
+	noexcept(noexcept(tree_ < rh.tree_)) {
+		return tree_ < rh.tree_;
+	}
+	MSTL_NODISCARD bool operator >(const self& rh) const
+	noexcept(noexcept(tree_ > rh.tree_)) {
+		return tree_ > rh.tree_;
+	}
+	MSTL_NODISCARD bool operator <=(const self& rh) const
+	noexcept(noexcept(tree_ <= rh.tree_)) {
+		return tree_ <= rh.tree_;
+	}
+	MSTL_NODISCARD bool operator >=(const self& rh) const
+	noexcept(noexcept(tree_ >= rh.tree_)) {
+		return tree_ >= rh.tree_;
+	}
+
+	MSTL_NODISCARD size_type to_hash() const noexcept { return tree_.to_hash(); }
+	MSTL_NODISCARD string to_string() const { return tree_.to_string(); }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
@@ -160,51 +184,9 @@ template <typename Key, typename Alloc>
 set(std::initializer_list<Key>, Alloc) -> set<Key, less<Key>, Alloc>;
 #endif
 
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator ==(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ == rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator !=(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return !(lh.tree_ == rh.tree_);
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ < rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ > rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <=(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ <= rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >=(
-	const set<Key, Compare, Alloc>& lh,
-	const set<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ >= rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-void swap(set<Key, Compare, Alloc>& lh, set<Key, Compare, Alloc>& rh) 
-noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
-
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
-class multiset {
+class multiset : icollector<multiset<Key, Compare, Alloc>> {
 #ifdef MSTL_VERSION_20__	
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
@@ -212,36 +194,32 @@ class multiset {
 		"allocator type mismatch.");
 	static_assert(is_object_v<Key>, "multiset only contains object types.");
 
+	using self = multiset<Key, Compare, Alloc>;
+	using super = icollector<self>;
+	using base_type = rb_tree<Key, Key, identity<Key>, Compare, Alloc>;
+
 public:
 	using key_type			= Key;
 	using value_type		= Key;
 	using key_compare		= Compare;
 	using value_compare		= Compare;
-private:
-	using base_type			= rb_tree<key_type, value_type, identity<value_type>, key_compare, Alloc>;
-public:
+
 	using size_type			= typename base_type::size_type;
 	using difference_type	= typename base_type::difference_type;
 	using pointer			= typename base_type::pointer;
 	using const_pointer		= typename base_type::const_pointer;
 	using reference			= typename base_type::reference;
 	using const_reference	= typename base_type::const_reference;
-	using iterator			= typename base_type::iterator;
-	using const_iterator	= typename base_type::const_iterator;
-	using reverse_iterator	= typename base_type::reverse_iterator;
-	using const_reverse_iterator = typename base_type::const_reverse_iterator;
+
+	using iterator					= typename base_type::iterator;
+	using const_iterator			= typename base_type::const_iterator;
+	using reverse_iterator			= typename base_type::reverse_iterator;
+	using const_reverse_iterator	= typename base_type::const_reverse_iterator;
+
 	using allocator_type	= typename base_type::allocator_type;
-	using self				= multiset<Key, Compare, Alloc>;
 
 private:
 	base_type tree_;
-
-	template <typename Key1, typename Compare1, typename Alloc1>
-	friend bool operator ==(const multiset<Key1, Compare1, Alloc1>&,
-		const multiset<Key1, Compare1, Alloc1>&) noexcept;
-	template <typename Key1, typename Compare1, typename Alloc1>
-	friend bool operator <(const multiset<Key1, Compare1, Alloc1>&,
-		const multiset<Key1, Compare1, Alloc1>&) noexcept;
 
 public:
 	multiset() : tree_(Compare()) {}
@@ -330,8 +308,6 @@ public:
 
 	void clear() noexcept { tree_.clear(); }
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
-
 	MSTL_NODISCARD iterator find(const key_type& x) { return tree_.find(x); }
 	MSTL_NODISCARD const_iterator find(const key_type& x) const { return tree_.find(x); }
 	MSTL_NODISCARD size_type count(const key_type& x) const { return tree_.count(x); }
@@ -345,6 +321,36 @@ public:
 	MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& x) const {
 		return tree_.equal_range(x);
 	}
+
+	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+
+	MSTL_NODISCARD bool operator ==(const self& rh) const
+	noexcept(noexcept(tree_ == rh.tree_)) {
+		return tree_ == rh.tree_;
+	}
+	MSTL_NODISCARD bool operator !=(const self& rh) const
+	noexcept(noexcept(tree_ != rh.tree_)) {
+		return tree_ != rh.tree_;
+	}
+	MSTL_NODISCARD bool operator <(const self& rh) const
+	noexcept(noexcept(tree_ < rh.tree_)) {
+		return tree_ < rh.tree_;
+	}
+	MSTL_NODISCARD bool operator >(const self& rh) const
+	noexcept(noexcept(tree_ > rh.tree_)) {
+		return tree_ > rh.tree_;
+	}
+	MSTL_NODISCARD bool operator <=(const self& rh) const
+	noexcept(noexcept(tree_ <= rh.tree_)) {
+		return tree_ <= rh.tree_;
+	}
+	MSTL_NODISCARD bool operator >=(const self& rh) const
+	noexcept(noexcept(tree_ >= rh.tree_)) {
+		return tree_ >= rh.tree_;
+	}
+
+	MSTL_NODISCARD size_type to_hash() const noexcept { return tree_.to_hash(); }
+	MSTL_NODISCARD string to_string() const { return tree_.to_string(); }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
@@ -361,48 +367,6 @@ multiset(Iterator, Iterator, Alloc) -> multiset<iter_val_t<Iterator>, less<iter_
 template <typename Key, typename Alloc>
 multiset(std::initializer_list<Key>, Alloc) -> multiset<Key, less<Key>, Alloc>;
 #endif
-
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator ==(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ == rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator !=(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return !(lh.tree_ == rh.tree_);
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ < rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ > rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator <=(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ <= rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-MSTL_NODISCARD bool operator >=(
-	const multiset<Key, Compare, Alloc>& lh,
-	const multiset<Key, Compare, Alloc>& rh) noexcept {
-	return lh.tree_ >= rh.tree_;
-}
-template <typename Key, typename Compare, typename Alloc>
-void swap(multiset<Key, Compare, Alloc>& lh, multiset<Key, Compare, Alloc>& rh)
-noexcept(noexcept(lh.swap(rh))) {
-	lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_SET_HPP__

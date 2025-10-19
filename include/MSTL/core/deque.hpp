@@ -1,6 +1,6 @@
 #ifndef MSTL_DEQUE_HPP__
 #define MSTL_DEQUE_HPP__
-#include "memory.hpp"
+#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t MAX_DEQUE_BUFFER_THRESHHOLD = 256;
@@ -248,17 +248,19 @@ void swap (
 
 // let BufSize = 0 to use default deque size, or manually set it as you wish.
 template <typename T, typename Alloc = allocator<T>, size_t BufSize = 0>
-class deque {
+class deque : public icollector<deque<T, Alloc>> {
 #ifdef MSTL_VERSION_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "deque only contains object types.");
 
+    using self = deque<T, Alloc, BufSize>;
+    using super = icollector<self>;
+
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using allocator_type            = Alloc;
-    using self                      = deque<T, Alloc, BufSize>;
 
     using iterator                  = deque_iterator<false, self, BufSize>;
     using const_iterator            = deque_iterator<true, self, BufSize>;
@@ -405,7 +407,7 @@ private:
             insert(first1, last1);
     }
 
-    void reallocate_map(size_type n, const bool add_at_front) {
+    void reallocate_map(const size_type n, const bool add_at_front) {
         const auto begin_left = static_cast<size_type>(start_.cur_ - start_.first_);
         if (add_at_front && begin_left < n) {
             const size_t needed = (n - begin_left) / buffer_size_ + 1;
@@ -1027,14 +1029,6 @@ public:
         finish_ = start_;
     }
 
-    void swap(self& x) noexcept {
-        if (_MSTL addressof(x) == this) return;
-        _MSTL swap(start_, x.start_);
-        _MSTL swap(finish_, x.finish_);
-        _MSTL swap(map_pair_, x.map_pair_);
-        _MSTL swap(map_size_pair_, x.map_size_pair_);
-    }
-
     MSTL_NODISCARD const_reference at(size_type position) const {
         return const_iterator(start_)[position];
     }
@@ -1047,40 +1041,52 @@ public:
     MSTL_NODISCARD reference operator [](const size_type position) {
         return this->at(position);
     }
+
+    void swap(self& x) noexcept {
+        if (_MSTL addressof(x) == this) return;
+        _MSTL swap(start_, x.start_);
+        _MSTL swap(finish_, x.finish_);
+        _MSTL swap(map_pair_, x.map_pair_);
+        _MSTL swap(map_size_pair_, x.map_size_pair_);
+    }
+
+    MSTL_NODISCARD bool operator ==(const self& rh) const
+    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
+        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    }
+    MSTL_NODISCARD bool operator !=(const self& rh) const
+    noexcept(noexcept(!(*this == rh))) {
+        return !(*this == rh);
+    }
+    MSTL_NODISCARD bool operator <(const self& rh) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    }
+    MSTL_NODISCARD bool operator >(const self& rh) const
+    noexcept(noexcept(rh < *this)) {
+        return rh < *this;
+    }
+    MSTL_NODISCARD bool operator >=(const self& rh) const
+    noexcept(noexcept(!(*this < rh))) {
+        return !(*this < rh);
+    }
+    MSTL_NODISCARD bool operator <=(const self& rh) const
+    noexcept(noexcept(!(*this > rh))) {
+        return !(*this > rh);
+    }
+
+    MSTL_NODISCARD size_type to_hash() const noexcept {
+        return super::default_to_hash(*this);
+    }
+
+    MSTL_NODISCARD string to_string() const {
+        return super::default_to_string(*this);
+    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Alloc>
 deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_val_t<Iterator>, Alloc>;
 #endif
-
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator ==(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return lh.size() == rh.size() && _MSTL equal(lh.begin(), lh.end(), rh.begin());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator !=(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return !(lh == rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator <(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return _MSTL lexicographical_compare(lh.begin(), lh.end(), rh.begin(), rh.end());
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator >(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return rh < lh;
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator <=(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return !(lh > rh);
-}
-template <typename T, typename Alloc>
-MSTL_NODISCARD bool operator >=(const deque<T, Alloc>& lh, const deque<T, Alloc>& rh) {
-    return !(lh < rh);
-}
-template <typename T, typename Alloc>
-void swap(deque<T, Alloc>& lh, deque<T, Alloc>& rh) noexcept {
-    lh.swap(rh);
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_DEQUE_HPP__

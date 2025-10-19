@@ -1,6 +1,6 @@
 #ifndef MSTL_RANDOM_HPP__
 #define MSTL_RANDOM_HPP__
-#include "basiclib.hpp"
+#include "environment.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 // based on LCD algorithm to generate pseudorandom number
