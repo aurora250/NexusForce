@@ -2464,7 +2464,7 @@ MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
 };
 MSTL_END_CONSTANTS__
 
-constexpr int popcountll(size_t x) {
+constexpr int popcountll(uint64_t x) {
     return
         _CONSTANTS POPCOUNT_TABLE[x & 0xFF] +
         _CONSTANTS POPCOUNT_TABLE[(x >> 8) & 0xFF] +
@@ -2476,7 +2476,7 @@ constexpr int popcountll(size_t x) {
         _CONSTANTS POPCOUNT_TABLE[(x >> 56) & 0xFF];
 }
 
-constexpr int clzll(size_t x) {
+constexpr int clzll(uint64_t x) {
     if (x == 0) return 64;
     int n = 0;
     if (x <= 0x00000000FFFFFFFFULL) {
