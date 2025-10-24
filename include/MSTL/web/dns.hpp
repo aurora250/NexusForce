@@ -1,6 +1,6 @@
 #ifndef MSTL_DNS_CLIENT_HPP__
 #define MSTL_DNS_CLIENT_HPP__
-#include "MSTL/core/basiclib.hpp"
+#include "MSTL/core/environment.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
 #include <netinet/in.h>
 #include <future>

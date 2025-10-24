@@ -164,15 +164,16 @@ public:
     static constexpr auto npos = static_cast<size_type>(-1);
 
 private:
-    const_pointer data_;
-    size_type size_;
+    const_pointer data_ = nullptr;
+    size_type size_ = 0;
 
-    MSTL_NODISCARD constexpr size_type clamp_size(const size_type position, const size_type size) const noexcept {
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE
+    constexpr size_type clamp_size(const size_type position, const size_type size) const noexcept {
         return _MSTL min(size, size_ - position);
     }
 
 public:
-    constexpr basic_string_view() noexcept : data_(), size_(0) {}
+    constexpr basic_string_view() noexcept = default;
 
     constexpr basic_string_view(const self&) noexcept = default;
     constexpr basic_string_view& operator =(const self&) noexcept = default;
@@ -181,6 +182,12 @@ public:
         : data_(str), size_(Traits::length(str)) {}
     constexpr basic_string_view(const_pointer str, const size_type n) noexcept
         : data_(str), size_(n) {}
+
+    template <typename Iterator, enable_if_t<is_same_v<iter_val_t<Iterator>, value_type>, int> = 0>
+    constexpr basic_string_view(Iterator start, Iterator finish)
+    : data_(&*start), size_(_MSTL distance(start, finish)) {}
+
+    MSTL_CONSTEXPR20 ~basic_string_view() noexcept = default;
 
     MSTL_NODISCARD constexpr const_iterator begin() const noexcept { return const_iterator(data_, size_, 0); }
     MSTL_NODISCARD constexpr const_iterator end() const noexcept { return const_iterator(data_, size_, size_); }

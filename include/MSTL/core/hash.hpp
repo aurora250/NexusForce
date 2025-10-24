@@ -285,12 +285,16 @@ template <typename Key>
 MSTL_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>::value;
 
 
-#ifdef MSTL_VERSION_20__
+template <typename, typename, typename = void>
+struct is_hash : false_type {};
+
 template <typename Func, typename Arg>
-concept is_hash_v = requires(Func f, Arg a) {
-    { f(a) } -> convertible_to<size_t>;
-};
-#endif
+struct is_hash<Func, Arg, enable_if_t<
+    is_convertible_v<decltype(_MSTL declval<Func>()(_MSTL declval<Arg>())), size_t>
+>> : true_type {};
+
+template <typename Func, typename Arg>
+constexpr bool is_hash_v = is_hash<Func, Arg>::value;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_HASH_HPP__

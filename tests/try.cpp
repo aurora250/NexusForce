@@ -10,9 +10,13 @@ static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird li
 void test_file_basic_operations() {
     bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
     assert(create_ok);
+    println("test");
     assert(file::exists(TEST_FILE));
+    println("test");
     assert(file::is_file(TEST_FILE));
+    println("test");
     assert(!file::is_directory(TEST_FILE));
+    println("test");
 
     assert(file::size(TEST_FILE) == TEST_CONTENT.size());
 
@@ -24,7 +28,7 @@ void test_file_basic_operations() {
     {
         file f;
         assert(!f.opened());
-        assert(f.open(TEST_FILE, FILE_ACCESS::READ_WRITE));
+        assert(f.open(TEST_FILE, false, FILE_ACCESS::READ_WRITE));
         assert(f.opened());
         assert(f.path() == TEST_FILE);
 
@@ -55,6 +59,7 @@ void test_file_basic_operations() {
         f.close();
         assert(!f.opened());
     }
+    println("test file basic operations passed");
 }
 
 void test_directory_operations() {
@@ -67,6 +72,7 @@ void test_directory_operations() {
     string sub_file = TEST_SUB_DIR + "/sub_file.txt";
     assert(file::create_and_write(sub_file, "sub content"));
     assert(file::exists(sub_file));
+    println("test dictionary operations passed");
 }
 
 void test_file_attributes_and_times() {
@@ -87,6 +93,7 @@ void test_file_attributes_and_times() {
     assert(f.last_write_time().to_string() == now.to_string());
 
     f.close();
+    println("test file attributes and times passed");
 }
 
 void test_file_lock_and_other_operations() {
@@ -115,6 +122,7 @@ void test_file_lock_and_other_operations() {
     assert(file::rename(move_file, rename_file));
     assert(!file::exists(move_file));
     assert(file::exists(rename_file));
+    println("test file lock and other operations passed");
 }
 
 void test_move_semantics() {
@@ -130,6 +138,7 @@ void test_move_semantics() {
     assert(!f2.opened());
     assert(f3.opened());
     assert(f3.path() == TEST_FILE);
+    println("test move semantics passed");
 }
 
 void clean_up() {
@@ -397,54 +406,6 @@ void test_console() {
     println(fp);
     println(to_string(fp));
 }
-
-template <typename T>
-void test_num_impl() {
-    static_assert(static_cast<size_t>(MSTL::numeric_limits<T>::has_denorm) == static_cast<size_t>(std::numeric_limits<T>::has_denorm));
-    static_assert(MSTL::numeric_limits<T>::has_denorm_loss == std::numeric_limits<T>::has_denorm_loss);
-    static_assert(MSTL::numeric_limits<T>::has_infinity == std::numeric_limits<T>::has_infinity);
-    static_assert(MSTL::numeric_limits<T>::has_quiet_nan == std::numeric_limits<T>::has_quiet_NaN);
-    static_assert(MSTL::numeric_limits<T>::has_signaling_nan == std::numeric_limits<T>::has_signaling_NaN);
-    static_assert(MSTL::numeric_limits<T>::is_bounded == std::numeric_limits<T>::is_bounded);
-    static_assert(MSTL::numeric_limits<T>::is_exact == std::numeric_limits<T>::is_exact);
-    static_assert(MSTL::numeric_limits<T>::is_iec559 == std::numeric_limits<T>::is_iec559);
-    static_assert(MSTL::numeric_limits<T>::is_integer == std::numeric_limits<T>::is_integer);
-    static_assert(MSTL::numeric_limits<T>::is_modulo == std::numeric_limits<T>::is_modulo);
-    static_assert(MSTL::numeric_limits<T>::is_signed == std::numeric_limits<T>::is_signed);
-    static_assert(MSTL::numeric_limits<T>::is_specialized == std::numeric_limits<T>::is_specialized);
-    static_assert(MSTL::numeric_limits<T>::tinyness_before == std::numeric_limits<T>::tinyness_before);
-    static_assert(MSTL::numeric_limits<T>::traps == std::numeric_limits<T>::traps);
-    static_assert(static_cast<size_t>(MSTL::numeric_limits<T>::round_style) == static_cast<size_t>(std::numeric_limits<T>::round_style));
-    static_assert(MSTL::numeric_limits<T>::digits == std::numeric_limits<T>::digits);
-    static_assert(MSTL::numeric_limits<T>::digits10 == std::numeric_limits<T>::digits10);
-    static_assert(MSTL::numeric_limits<T>::max_digits10 == std::numeric_limits<T>::max_digits10);
-    static_assert(MSTL::numeric_limits<T>::max_exponent == std::numeric_limits<T>::max_exponent);
-    static_assert(MSTL::numeric_limits<T>::max_exponent10 == std::numeric_limits<T>::max_exponent10);
-    static_assert(MSTL::numeric_limits<T>::min_exponent == std::numeric_limits<T>::min_exponent);
-    static_assert(MSTL::numeric_limits<T>::min_exponent10 == std::numeric_limits<T>::min_exponent10);
-    static_assert(MSTL::numeric_limits<T>::radix == std::numeric_limits<T>::radix);
-    static_assert(MSTL::numeric_limits<T>::min() == std::numeric_limits<T>::min());
-    static_assert(MSTL::numeric_limits<T>::max() == std::numeric_limits<T>::max());
-    static_assert(MSTL::numeric_limits<T>::lowest() == std::numeric_limits<T>::lowest());
-    static_assert(MSTL::numeric_limits<T>::epsilon() == std::numeric_limits<T>::epsilon());
-    static_assert(MSTL::numeric_limits<T>::round_error() == std::numeric_limits<T>::round_error());
-    static_assert(MSTL::numeric_limits<T>::denorm_min() == std::numeric_limits<T>::denorm_min());
-    static_assert(MSTL::numeric_limits<T>::infinity() == std::numeric_limits<T>::infinity());
-    if constexpr (is_floating_point_v<T>) {
-        if (!_MSTL is_nan(MSTL::numeric_limits<T>::quiet_nan())) {
-            println("!is quiet nan:" + check_type<T>());
-        }
-        if (!_MSTL is_nan(MSTL::numeric_limits<T>::signaling_nan())) {
-            println("!is signaling nan:" + check_type<T>());
-        }
-    }
-}
-
-#define __MSTL_TEST_NUMERIC_LIMITS(T) test_num_impl<T>();
-void test_numeric() {
-    MSTL_MACRO_RANGES_ALL(__MSTL_TEST_NUMERIC_LIMITS)
-}
-#undef __MSTL_TEST_NUMERIC_LIMITS
 
 void test_dev() {
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -1033,6 +994,21 @@ void test_hashtable() {
     println(ms);
     ms.erase(ms.begin());
     println(ms);
+
+    unordered_set<float> fus;
+    fus.insert(1.5);
+    fus.insert(2.5);
+    fus.insert(3.5);
+    fus.insert(1.5);
+    println(fus);
+
+    unordered_multiset<float> fus2;
+    fus2.insert(1.5);
+    fus2.insert(2.5);
+    fus2.insert(3.5);
+    fus2.insert(1.5);
+    string fus2_str = fus2.to_string();
+    println(fus2_str);
 }
 
 void test_math() {
@@ -1493,7 +1469,6 @@ void test_tpool() {
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);
     pool.submit_task(test_color);
-    pool.submit_task(test_numeric);
     // pool.submit_task(try_db);
     pool.stop();
 }

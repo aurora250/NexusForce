@@ -118,41 +118,48 @@ masm_memory_copy_offset ENDP
 masm_memory_char_copy PROC
     IFDEF _WIN64
         test rcx, rcx
-        jz done_null
+        jz return_null
         test rdx, rdx
-        jz done_null
+        jz return_null
         test r9, r9
-        jz done_null
+        jz return_null
 
         push rdi
         push rsi
+        push rbx
+
         mov rsi, rdx
         mov rdi, rcx
-        mov rax, r9
+        mov rbx, r9
         mov dl, r8b
 
 loop_start:
-        test rax, rax
-        jz done_null_pop
+        test rbx, rbx
+        jz not_found
         lodsb
         stosb
         cmp al, dl
-        je done_found
-        dec rax
+        je found
+        dec rbx
         jmp loop_start
 
-done_found:
+found:
         mov rax, rdi
+        jmp cleanup
+
+not_found:
+        xor rax, rax
+
+cleanup:
+        pop rbx
         pop rsi
         pop rdi
         ret
 
-done_null_pop:
-        pop rsi
-        pop rdi
-done_null:
-    xor rax, rax
-    ret
+return_null:
+        xor rax, rax
+        ret
+
     ELSE
         push ebp
         mov ebp, esp
@@ -169,27 +176,25 @@ done_null:
         jz x86_done_null
         test esi, esi
         jz x86_done_null
-
-x86_loop:
         test ecx, ecx
         jz x86_done_null
+
+x86_loop:
         lodsb
         stosb
         cmp al, bl
         je x86_done_found
         dec ecx
-        jmp x86_loop
-
-x86_done_found:
-        mov eax, edi
-        pop ebx
-        pop esi
-        pop edi
-        pop ebp
-        ret
+        jnz x86_loop
 
 x86_done_null:
         xor eax, eax
+        jmp x86_cleanup
+
+x86_done_found:
+        mov eax, edi
+
+x86_cleanup:
         pop ebx
         pop esi
         pop edi
@@ -298,58 +303,66 @@ masm_memory_compare_ignore_case PROC
         test r8, r8
         jz equal
 
-        push rdi
         push rsi
-        push rbx
+        push rdi
         mov rsi, rcx
         mov rdi, rdx
-        mov rcx, r8
+compare_loop:
+        test r8, r8
+        jz equal
 
-loop_icase:
-        test rcx, rcx
-        jz loop_end
-        lodsb
-        mov bl, al
-        or bl, 20h
-        mov al, [rdi]
+        mov al, [rsi]
+        mov dl, [rdi]
+
+        cmp al, 'A'
+        jb first_done
+        cmp al, 'Z'
+        ja first_done
         or al, 20h
-        cmp bl, al
+first_done:
+        cmp dl, 'A'
+        jb second_done
+        cmp dl, 'Z'
+        ja second_done
+        or dl, 20h
+second_done:
+        cmp al, dl
         jne not_equal
-        inc rdi
-        dec rcx
-        jmp loop_icase
 
-loop_end:
-        xor rax, rax
-        pop rbx
-        pop rsi
-        pop rdi
-        ret
+        inc rsi
+        inc rdi
+        dec r8
+        jmp compare_loop
+
 not_equal:
-        movzx rax, bl
-        movzx rdx, al
-        sub rax, rdx
-        pop rbx
-        pop rsi
+        movzx rax, al
+        movzx rcx, dl
+        sub rax, rcx
         pop rdi
+        pop rsi
         ret
+
+equal:
+        xor rax, rax
+        pop rdi
+        pop rsi
+        ret
+
 p1_null:
         test rdx, rdx
         jz equal
         mov rax, -1
         ret
+
 p2_null:
         mov rax, 1
         ret
-equal:
-        xor rax, rax
-        ret
+
     ELSE
         push ebp
         mov ebp, esp
         push edi
         push esi
-        push ebx
 
         mov esi, [ebp+8]
         mov edi, [ebp+12]
@@ -361,33 +374,39 @@ equal:
         jz x86_p2_null
         test ecx, ecx
         jz x86_equal
-
-x86_loop_icase:
+x86_loop:
         test ecx, ecx
-        jz x86_loop_end
-        lodsb
-        mov bl, al
-        or bl, 20h
-        mov al, [edi]
+        jz x86_equal
+        mov al, [esi]
+        mov dl, [edi]
+        cmp al, 'A'
+        jb x86_first_done
+        cmp al, 'Z'
+        ja x86_first_done
         or al, 20h
-        cmp bl, al
+x86_first_done:
+        cmp dl, 'A'
+        jb x86_second_done
+        cmp dl, 'Z'
+        ja x86_second_done
+        or dl, 20h
+x86_second_done:
+        cmp al, dl
         jne x86_not_equal
+        inc esi
         inc edi
         dec ecx
-        jmp x86_loop_icase
-
-x86_loop_end:
+        jmp x86_loop
+x86_equal:
         xor eax, eax
-        pop ebx
         pop esi
         pop edi
         pop ebp
         ret
 x86_not_equal:
-        movzx eax, bl
-        movzx edx, al
+        movzx eax, al
+        movzx edx, dl
         sub eax, edx
-        pop ebx
         pop esi
         pop edi
         pop ebp
@@ -396,21 +415,12 @@ x86_p1_null:
         test edi, edi
         jz x86_equal
         mov eax, -1
-        pop ebx
         pop esi
         pop edi
         pop ebp
         ret
 x86_p2_null:
         mov eax, 1
-        pop ebx
-        pop esi
-        pop edi
-        pop ebp
-        ret
-x86_equal:
-        xor eax, eax
-        pop ebx
         pop esi
         pop edi
         pop ebp
@@ -609,10 +619,9 @@ masm_memory_zero PROC
         jz done
 
         push rdi
-        xor al, al
         mov rdi, rcx
-        mov rax, rcx
         mov rcx, rdx
+        xor eax, eax
         cld
         rep stosb
         pop rdi
@@ -623,17 +632,15 @@ masm_memory_zero PROC
 
         mov edi, [ebp+8]
         mov ecx, [ebp+12]
-        mov eax, [ebp+8]
 
         test edi, edi
         jz x86_done
         test ecx, ecx
         jz x86_done
 
-        xor al, al
+        xor eax, eax
         cld
         rep stosb
-
 x86_done:
         pop edi
         pop ebp

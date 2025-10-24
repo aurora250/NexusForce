@@ -11,12 +11,18 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-enum class FILE_ACCESS : size_t {
+#ifdef MSTL_PLATFORM_WINDOWS__
+using file_underlying_type_t = ::DWORD;
+#elif defined(MSTL_PLATFORM_LINUX__)
+using file_underlying_type_t = int;
+#endif
+
+enum class FILE_ACCESS : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     READ = GENERIC_READ,
     WRITE = GENERIC_WRITE,
     READ_WRITE = GENERIC_READ | GENERIC_WRITE,
-    APPEND = FILE_APPEND_DATA
+    APPEND = FILE_APPEND_DATA | GENERIC_WRITE
 #elif defined(MSTL_PLATFORM_LINUX__)
     READ = O_RDONLY,
     WRITE = O_WRONLY,
@@ -26,14 +32,20 @@ enum class FILE_ACCESS : size_t {
 };
 
 constexpr FILE_ACCESS operator |(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(static_cast<size_t>(a) | static_cast<size_t>(b));
+    return static_cast<FILE_ACCESS>(
+        static_cast<file_underlying_type_t>(a) |
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 constexpr FILE_ACCESS operator &(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(static_cast<size_t>(a) & static_cast<size_t>(b));
+    return static_cast<FILE_ACCESS>(
+        static_cast<file_underlying_type_t>(a) &
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 
 
-enum class FILE_SHARED : size_t {
+enum class FILE_SHARED : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARE_READ = FILE_SHARE_READ,
     SHARE_WRITE = FILE_SHARE_WRITE,
@@ -52,14 +64,20 @@ enum class FILE_SHARED : size_t {
 };
 
 constexpr FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(static_cast<size_t>(a) | static_cast<size_t>(b));
+    return static_cast<FILE_SHARED>(
+        static_cast<file_underlying_type_t>(a) |
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 constexpr FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(static_cast<size_t>(a) & static_cast<size_t>(b));
+    return static_cast<FILE_SHARED>(
+        static_cast<file_underlying_type_t>(a) &
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 
 
-enum class FILE_CREATION : size_t {
+enum class FILE_CREATION : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     CREATE_FORCE = CREATE_ALWAYS,
     CREATE_NO_EXIST = CREATE_NEW,
@@ -67,7 +85,7 @@ enum class FILE_CREATION : size_t {
     OPEN_EXIST = OPEN_EXISTING,
     TRUNCATE_EXIST = TRUNCATE_EXISTING
 #elif defined(MSTL_PLATFORM_LINUX__)
-    CREATE_FORCE = O_CREAT | O_TRUNC | O_WRONLY,
+    CREATE_FORCE = O_CREAT | O_TRUNC,
     CREATE_NO_EXIST = O_CREAT | O_EXCL | O_WRONLY,
     OPEN_FORCE = O_CREAT,
     OPEN_EXIST = 0,
@@ -76,14 +94,20 @@ enum class FILE_CREATION : size_t {
 };
 
 constexpr FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(static_cast<size_t>(a) | static_cast<size_t>(b));
+    return static_cast<FILE_CREATION>(
+        static_cast<file_underlying_type_t>(a) |
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 constexpr FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(static_cast<size_t>(a) & static_cast<size_t>(b));
+    return static_cast<FILE_CREATION>(
+        static_cast<file_underlying_type_t>(a) &
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 
 
-enum class FILE_ATTRI : size_t {
+enum class FILE_ATTRI : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     NORMAL = FILE_ATTRIBUTE_NORMAL,
     READONLY = FILE_ATTRIBUTE_READONLY,
@@ -110,14 +134,20 @@ enum class FILE_ATTRI : size_t {
 };
 
 constexpr FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(static_cast<size_t>(a) | static_cast<size_t>(b));
+    return static_cast<FILE_ATTRI>(
+        static_cast<file_underlying_type_t>(a) |
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 constexpr FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(static_cast<size_t>(a) & static_cast<size_t>(b));
+    return static_cast<FILE_ATTRI>(
+        static_cast<file_underlying_type_t>(a) &
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 
 
-enum class FILE_POINTER : size_t {
+enum class FILE_POINTER : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     BEGIN = FILE_BEGIN,
     CURRENT = FILE_CURRENT,
@@ -129,7 +159,7 @@ enum class FILE_POINTER : size_t {
 #endif
 };
 
-enum class FILE_LOCK : size_t {
+enum class FILE_LOCK : file_underlying_type_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARED = 0,
     EXCLUSIVE = LOCKFILE_EXCLUSIVE_LOCK,
@@ -142,18 +172,26 @@ enum class FILE_LOCK : size_t {
 };
 
 constexpr FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(static_cast<size_t>(a) | static_cast<size_t>(b));
+    return static_cast<FILE_LOCK>(
+        static_cast<file_underlying_type_t>(a) |
+        static_cast<file_underlying_type_t>(b)
+        );
 }
 constexpr FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(static_cast<size_t>(a) & static_cast<size_t>(b));
+    return static_cast<FILE_LOCK>(
+        static_cast<file_underlying_type_t>(a) &
+        static_cast<file_underlying_type_t>(b)
+        );
 }
+
+MSTL_INLINE17 constexpr size_t FILE_BUFFER_SIZE = 8192; // 8KB Buffer
 
 
 class MSTL_API file {
 public:
 #ifdef MSTL_PLATFORM_WINDOWS__
     using size_type = ::DWORD;
-    using difference_type = ::LONG;
+    using difference_type = ::LONGLONG;
     using file_handle = ::HANDLE;
     using time_type = ::FILETIME;
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -179,7 +217,6 @@ private:
     bool opened_ = false;
     bool append_mode_ = false;
 
-    static constexpr size_type BUFFER_SIZE = 8192; // 8KB Buffer
     mutable vector<char> read_buffer_{};
     mutable size_type read_buffer_pos_ = 0;
     mutable size_type read_buffer_size_ = 0;
@@ -211,11 +248,13 @@ public:
 
     explicit file(
         string path,
-        FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL,
-        bool append = false);
+        const FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
+        const FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
+        const FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
+        const FILE_ATTRI attributes = FILE_ATTRI::NORMAL,
+        const bool append = false) : path_(_MSTL move(path)) {
+        this->open(path_, append, access, share_mode, creation, attributes);
+    }
 
     file(const file&) = delete;
     file& operator =(const file&) = delete;
@@ -226,26 +265,25 @@ public:
     ~file();
 
 
-    bool open(
-        const string& path,
+    bool open(string path, bool append = false,
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
         FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL,
-        bool append = false);
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
-    bool open(
+    bool open(bool append = false,
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
         FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL,
-        bool append = false);
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
+        return this->open(_MSTL move(path_), append, access, share_mode, creation, attributes);
+    }
 
     void close() noexcept;
     bool flush() const noexcept;
 
     size_type write(const string& data, size_type size) const;
-    size_type write(const string& data) const;
+    size_type write(const string& data) const { return this->write(data, data.size()); }
 
     size_type read(string& str, size_type size) const;
     size_type read(string& str) const;
@@ -253,13 +291,13 @@ public:
 
     size_type read_binary(string& str, size_type size) const;
     size_type read_binary(string& str) const;
-    string read_binary() const;
+    string read_binary() const { return this->read_binary(path_); }
 
     bool read_line(string& line) const;
     string read_line() const;
     vector<string> read_lines() const;
 
-    size_type size() const noexcept;
+    MSTL_NODISCARD size_type size() const noexcept;
     static size_type size(const string& path);
     static bool size(const string& path, size_type& size);
 
@@ -272,7 +310,7 @@ public:
     bool lock(difference_type offset, difference_type length, FILE_LOCK mode = FILE_LOCK::EXCLUSIVE) const noexcept;
     bool unlock(difference_type offset, difference_type length) const noexcept;
 
-    FILE_ATTRI attributes() const noexcept;
+    MSTL_NODISCARD FILE_ATTRI attributes() const noexcept;
     bool set_attributes(FILE_ATTRI attr) const noexcept;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -293,25 +331,26 @@ public:
     bool set_last_access_time(const datetime& dt) const noexcept;
     bool set_last_write_time(const datetime& dt) const noexcept;
 
-    string_view path() const noexcept;
-    bool opened() const noexcept;
-    bool is_append() const noexcept;
+    MSTL_NODISCARD string_view path() const noexcept { return path_.view(); }
+    MSTL_NODISCARD bool opened() const noexcept { return opened_; }
+    MSTL_NODISCARD bool is_append() const noexcept { return append_mode_; }
 
-    bool exists() const noexcept;
-    static bool exists(const string& path) noexcept;
+    MSTL_NODISCARD bool exists() const noexcept { return file::exists(path_); }
+    MSTL_NODISCARD static bool exists(string_view path) noexcept;
+    MSTL_NODISCARD static bool exists(const string& path) noexcept { return file::exists(path.view()); }
+    MSTL_NODISCARD static bool exists(const char* path) noexcept { return file::exists(string_view{path}); }
 
-    bool is_directory() const noexcept;
-    static bool is_directory(const string& path) noexcept;
+    MSTL_NODISCARD bool is_directory() const noexcept { return file::is_directory(path_); }
+    MSTL_NODISCARD static bool is_directory(string_view path) noexcept;
+    MSTL_NODISCARD static bool is_directory(const string& path) noexcept { return file::is_directory(path.view()); }
+    MSTL_NODISCARD static bool is_directory(const char* path) noexcept { return file::is_directory(string_view{path}); }
 
-    bool is_file() const noexcept;
-    static bool is_file(const string& path) noexcept;
+    MSTL_NODISCARD bool is_file() const noexcept { return file::is_file(path_); }
+    MSTL_NODISCARD static bool is_file(string_view path) noexcept;
+    MSTL_NODISCARD static bool is_file(const string& path) noexcept { return file::is_file(path.view()); }
+    MSTL_NODISCARD static bool is_file(const char* path) noexcept { return file::is_file(string_view{path}); }
 
-    constexpr string_view extension() const noexcept {
-        return file::extension(path_.view());
-    }
-    static constexpr string_view extension(const string& path) noexcept {
-        return file::extension(path.view());
-    }
+    constexpr string_view extension() const noexcept { return file::extension(path_.view()); }
     static constexpr string_view extension(const string_view path) noexcept {
         const size_t last_sep = path.find_last_of(FILE_SPLITER);
         const string_view filename = last_sep == string::npos ? path : path.substr(last_sep + 1);
@@ -322,20 +361,23 @@ public:
         }
         return filename.substr(last_dot + 1);
     }
-    static constexpr string_view extension(const char* path) noexcept {
-        return file::extension(string_view{path});
-    }
+    static constexpr string_view extension(const string& path) noexcept { return file::extension(path.view()); }
+    static constexpr string_view extension(const char* path) noexcept { return file::extension(string_view{path}); }
 
-    bool create_directories() const;
+    bool create_directories() const { return file::create_directories(path_); }
     static bool create_directories(const string& path);
 
     static bool create_and_write(const string& path, const string& content, bool append = false);
 
-    bool remove() const noexcept;
-    static bool remove(const string& path) noexcept;
+    bool remove() const noexcept { return file::remove(path_); }
+    static bool remove(string_view path) noexcept;
+    static bool remove(const string& path) noexcept { return file::remove(path.view()); }
+    static bool remove(const char* path) noexcept { return file::remove(string_view{path}); }
 
-    bool remove_directory() const noexcept;
-    static bool remove_directory(const string& path) noexcept;
+    bool remove_directory() const noexcept { return file::remove_directory(path_); }
+    static bool remove_directory(string_view path) noexcept;
+    static bool remove_directory(const string& path) noexcept { return remove_directory(path.view()); }
+    static bool remove_directory(const char* path) noexcept { return remove_directory(string_view{path}); }
 
     static bool read(const string& path, string& content,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
@@ -357,7 +399,10 @@ public:
     static bool copy_directory(const string& source, const string& destination, bool overwrite = true);
 
     static bool move(const string& from, const string& to, bool overwrite = true) noexcept;
-    static bool rename(const string& old_name, const string& new_name);
+
+    static bool rename(const string& old_name, const string& new_name) {
+        return file::move(old_name, new_name, true);
+    }
 };
 
 MSTL_END_NAMESPACE__

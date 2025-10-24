@@ -5,42 +5,45 @@
 
 > Read this in other languages: [Chinese](README.md)
 
-This project aims to establish a comprehensive STL library (excluding concurrency libraries) that is highly readable and suitable for C++ beginners to learn and use, while providing various functional interfaces for educational purposes.
-This project minimizes the use of standard libraries except for concurrency components and attempts to implement simplified versions from scratch.
-We welcome issues and contributions to help improve this project. If there are deficiencies, please feel free to provide corrections.
+This project aims to establish a readable and relatively complete STL library (excluding concurrency libraries) for C++ beginners to learn and use, while providing various functional interfaces.
+It minimizes the use of standard libraries except for concurrency components and attempts to implement simplified versions from scratch.
+We welcome issues to help improve this project. If there are any deficiencies, please feel free to correct them.
 
-Suggested learning approach for beginners: Read and use files in the order described in the file introduction section below, consulting classmates or AI when encountering difficulties.
+Suggested learning approach for beginners: Read and use the files in the order described in the file introduction section below. When in doubt, consult classmates or AI.
 
-If you are compiling on Windows, please ensure your system's code page is set to UTF-8 or use MSTL's built-in set_utf8_console function for configuration.
+This library assumes your operating system uses UTF-8 code page when working with IO devices. If not, please try to configure it; otherwise, garbled characters may occur during IO operations.
+
 
 ## What can you learn by reading and using MSTL?
 
-- Using constexpr and if constexpr to reduce runtime overhead;
-- Using concept and requires to strengthen code robustness;
-- Strengthening noexcept guarantees;
-- Using template meta-programming techniques such as variadic templates, recursive expansion, and template specialization to implement type traits and write functional containers;
+- Using `constexpr` and `if constexpr` to reduce runtime overhead;
+- Using `concept` and `requires` to enhance code robustness;
+- Strengthening `noexcept` guarantees;
+- Using template metaprogramming techniques such as variadic templates, recursive expansion, and template specialization to implement type traits and write functional containers;
 - Functional programming design and type erasure design;
-- Implementing SFINAE (Substitution Failure Is Not An Error) through enable_if;
-- Implementing EBCO (Empty Base Class Optimization) through compressed_pair;
-- Using compiler built-in attributes to optimize code behavior;
-- Distinguishing type deduction and decay rules of decltype, auto, and template;
-- Coordinated use of memory allocation and placement construction;
-- Data manipulation methods of complex containers such as deque, red-black trees, and hash tables;
-- Conversion rules between different character encoding types;
-- Using Windows and Linux native interfaces to implement utility classes like datetime and file, understanding the similar data interfaces and processing methods between the two operating systems;
-- Implementing most standard algorithms (including concurrent algorithms) and all commonly used standard containers, with extensions of some impractical algorithms for educational purposes;
-- Implementation methods of more than ten general-purpose sorting algorithms;
-- Usage of standard library concurrency interfaces (atomic/condition_variable/thread/mutex/future/packaged_task, etc.);
-- Modern-style wrapper and usage of MySQL database C-style interfaces;
-- Designing thread polling pool operation patterns;
-- Socket wrapper for modern-style servlet for port listening and web operations;
+- Using compiler-built-in attributes to optimize code behavior;
+- Distinguishing type deduction and decay rules among `decltype`, `auto`, and templates;
+- Implementing SFINAE (Substitution Failure Is Not An Error) via `enable_if`;
+- Implementing EBCO (Empty Base Class Optimization) via `compressed_pair`;
+- Coordinating memory allocation with in-place construction;
+- Conversion rules between character encodings like UTF-8, UTF-16, and UTF-32;
+- Using `format` for fast string formatting;
+- Using CRTP (Curiously Recurring Template Pattern) for static polymorphism;
+- Implementing utility classes like `datetime` and `file` using Windows and Linux native interfaces, understanding the similar yet distinct data interfaces and processing methods between the two OSes;
+- Data manipulation methods for complex containers such as deques, red-black trees, and hash tables;
+- Implementing most standard algorithms (including concurrent ones) and all commonly used standard containers, with extensions of some non-practical algorithms for educational purposes;
+- Implementation methods for over ten general sorting functions;
+- Using standard library concurrency interfaces (`atomic`/`conditional_variable`/`thread`/`mutex`/`future`/`packaged_task`, etc.);
+- Modern wrappers and usage for MySQL and Redis interfaces;
+- Designing thread pools with polling patterns;
+- Wrapping sockets into modern-style servlets for web operations;
   ......
 
 ## Supporting Environments
 
 WINDOWS LINUX
 
-X64
+X64 X86
 
 MSVC GCC CLANG
 
@@ -53,31 +56,30 @@ C++ 14 17 20
 - CMake 3.17+
 - Compiler supporting C++14 or higher (GCC 7+, Clang 5+, MSVC 2017+)
 - Optional dependencies:
-    - Boost
-    - MySQL
-    - SQLite3
-    - hiredis
-    - Qt6
-    - CUDA Toolkit (MSVC only)
+  - Boost
+  - MySQL
+  - SQLite3
+  - hiredis
+  - Qt6
+  - CUDA Toolkit (MSVC only)
 
 Note: This project has discontinued CUDA support, which is disabled by default.
 
 ### Build Steps
 
-You can toggle dependencies in CMakeLists.txt in the project root
-And directly modify dependency paths in src\CMakeLists.txt
+You can toggle dependencies in the root `CMakeLists.txt` and directly modify local dependency paths in `src/CMakeLists.txt`.
 
 - Windows
 
 ```bash
-# Clone latest release version
+# Clone the latest release
 git clone --depth 1 https://github.com/aurora250/MSTL.git
 cd MSTL
 
 # Create build directory
 mkdir build && cd build
 
-# Configure build options, you can also edit them in CMakeLists.txt
+# Configure build options (can also modify in CMakeLists.txt)
 cmake .. -G "Visual Studio 17 2022" -A x64 \
   -DMSTL_ENABLE_QT6=OFF \
   -DMSTL_BUILD_TESTS=ON \
@@ -86,21 +88,21 @@ cmake .. -G "Visual Studio 17 2022" -A x64 \
 # Build
 cmake --build . --config Release
 
-# Optional: Install to system directory
+# Install to system directory
 cmake --install . --config Release
 ```
 
 - Linux
 
 ```bash
-# Clone latest release version
+# Clone the latest release
 git clone --depth 1 https://github.com/aurora250/MSTL.git
 cd MSTL
 
 # Create build directory
 mkdir build && cd build
 
-# Configure build options, you can also edit them in CMakeLists.txt
+# Configure build options (can also modify in CMakeLists.txt)
 cmake .. -DCMAKE_BUILD_TYPE=Release \
   -DMSTL_ENABLE_QT6=OFF \
   -DMSTL_BUILD_TESTS=ON
@@ -108,7 +110,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release \
 # Build
 make -j$(nproc)
 
-# Optional: Install to system directory
+# Install to system directory
 sudo make install
 ```
 
@@ -116,217 +118,275 @@ sudo make install
 
 ![File Structure](dependencies_structure.png)
 
-The following files are introduced according to the hierarchical level of the file structure.
+The following files are introduced in the order of the hierarchical structure shown above.
 
-- [basiclib.hpp](include/MSTL/core/environment.hpp)
+- [environment](include/MSTL/core/environment.hpp)
 
-Implements multi-compilation environment adaptation using macros
-for operating system platform, hosting platform, bus width, and C++ version,
-and defines memory operation and C-style string operation functions.
+Defines macros for operating system platform, hosting platform, bus width, and C++ version, implementing multi-compilation environment adaptation.
 
-- [type_traits.hpp](include/MSTL/core/type_traits.hpp)
+- [vsprintf](include/MSTL/core/vsprintf.hpp)
 
-Uses template meta-programming techniques to deduce type information at compile time
-and provides hash functions for basic numeric types and iterator extractors.
+Defines a series of functions to output variable argument lists to formatted strings.
 
-- [errorlib.hpp](include/MSTL/core/exception.hpp)
+- [type_traits](include/MSTL/core/type_traits.hpp)
 
-Defines error types and quick invocation macros.
-All error types in this project are contained in this file.
-You can use BUILD_ERROR series macros to quickly build error types compatible with this project.
+Defines type trait constants, using template metaprogramming to deduce type information at compile time.
 
-- [functor.hpp](include/MSTL/core/functor.hpp)
+- [exception](include/MSTL/core/exception.hpp)
 
-Defines functors and functor adapters (deprecated after C++11).
+Defines error types and quick-invocation macros. All error types in this project are defined in this file.
 
-- [concepts.hpp](include/MSTL/core/concepts.hpp)
+- [random](include/MSTL/core/random.hpp)
 
-Defines commonly used constraints and iterator type judgment trait constants.
+Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardware noise-based true random number generator (`secret`).
 
-- [mathlib.hpp](include/MSTL/core/mathlib.hpp)
+- [socket](include/MSTL/web/socket.hpp)
 
-Defines commonly used constexpr mathematical functions and constants.
+Defines the network socket class `socket`.
 
-- [numeric.hpp](include/MSTL/core/numeric.hpp)
+- [functor](include/MSTL/core/functor.hpp)
+
+Defines functors and functor adapters (deprecated in C++11).
+
+- [iterator_traits](include/MSTL/core/iterator_traits.hpp)
+
+Defines the iterator extractor `iterator_traits` and convenient type aliases.
+
+- [interface](include/MSTL/core/interface.hpp)
+
+Defines a series of basic CRTP base classes and globally generated functions based on them.
+
+- [hash](include/MSTL/core/hash.hpp)
+
+Defines hash functions for basic types and utility hash functions like FNV.
+
+- [numeric_limits](include/MSTL/core/numeric_limits.hpp)
+
+Defines the numeric type information class `numeric_limits`, providing mathematical details of numeric types at compile time.
+
+- [mutex](include/MSTL/core/mutex.hpp)
+
+Defines the mutex class `mutex` and the scoped locking class `lock_guard`.
+
+- [concepts](include/MSTL/core/concepts.hpp)
+
+Defines common constraints and iterator type judgment trait constants.
+
+- [utility](include/MSTL/core/utility.hpp)
+
+Defines `compressed_pair`, `pair` and their hash functions, type erasure functions, and functions to convert C-style strings to numeric types.
+
+- [tuple](include/MSTL/core/tuple.hpp)
+
+Defines the tuple class `tuple` and its auxiliary functions.
+
+- [mathlib](include/MSTL/core/mathlib.hpp)
+
+Defines common `constexpr` mathematical constants and functions.
+
+- [ratio](include/MSTL/core/ratio.hpp)
+
+Defines the ratio class `ratio`.
+
+- [numeric](include/MSTL/core/numeric.hpp)
 
 Defines mathematical algorithms.
 
-- [utility.hpp](include/MSTL/core/utility.hpp)
-
-Defines compressed_pair, pair and their hash functions, type erasure functions,
-and C-style string to numeric type conversion functions.
-
-- [heap.hpp](include/MSTL/core/heap.hpp)
+- [heap](include/MSTL/core/heap.hpp)
 
 Defines ordinary heap algorithms.
 
-- [iterator.hpp](include/MSTL/core/iterator.hpp)
+- [iterator](include/MSTL/core/iterator.hpp)
 
 Defines iterator utility functions and iterator adapters.
 
-- [tuple.hpp](include/MSTL/core/tuple.hpp)
-
-Defines tuple class and its auxiliary functions, providing hash functions for tuple.
-
-- [algobase.hpp](include/MSTL/core/algobase.hpp)
+- [algobase](include/MSTL/core/algobase.hpp)
 
 Defines comparison, copy, and move algorithms.
 
-- [optional.hpp](include/MSTL/core/optional.hpp)
+- [any](include/MSTL/core/any.hpp)
 
-Defines optional class that can host a type and set empty value nullopt.
+Defines the `any` class, which can store any type.
 
-- [memory.hpp](include/MSTL/core/memory.hpp)
+- [cstring](include/MSTL/core/cstring.hpp)
 
-Defines memory operation functions, temporary buffer classes, allocator classes, and smart pointer classes.
+Defines memory operation functions and C-style string operation functions.
 
-- [array.hpp](include/MSTL/core/array.hpp)
+- [memory](include/MSTL/core/memory.hpp)
 
-Defines array class that can determine values at compile time and operate arrays in a safer, more modern way.
+Defines memory operation functions, allocator classes, and smart pointer classes.
 
-- [variant.hpp](include/MSTL/core/variant.hpp)
+- [functional](include/MSTL/core/functional.hpp)
 
-Defines variant class that can host multiple types simultaneously on the same block of memory.
+Defines the `function` class that hosts function pointers and function-like types.
 
-- [string_view.hpp](include/MSTL/core/string_view.hpp)
+- [algo](include/MSTL/core/algo.hpp)
 
-Defines char_traits class, auxiliary extraction functions, and basic_string_view class with constexpr properties.
+Defines algorithms for judgment, set operations, searching, merging, moving, transforming, binding, and permutations.
 
-- [functional.hpp](include/MSTL/core/functional.hpp)
+- [thread](include/MSTL/core/thread.hpp)
 
-Defines function class that hosts function pointers and function-like types.
+Defines the thread class `thread`.
 
-- [list.hpp](include/MSTL/core/list.hpp)
+- [sort](include/MSTL/ext/sort.hpp)
 
-Defines doubly linked list class.
+Defines multiple sorting algorithms: bubble, cocktail, selection, shell, counting, bucket, index, merge,
+partial, quick, introspective, tim, and monkey sort.
 
-- [deque.hpp](include/MSTL/core/deque.hpp)
+- [algorithm](include/MSTL/core/algorithm.hpp)
 
-Defines double-ended queue class that can maintain map and buffer to allow data insertion at both front
-and back using double buffering mechanism.
+Includes basic algorithms and mathematical algorithms, 
+and defines concurrent algorithms for convenient inclusion by users.
 
-- [bitmap.hpp](include/MSTL/core/bitmap.hpp)
+- [char_traits](include/MSTL/core/char_traits.hpp)
 
-Defines bitmap class, but does not use it as bool specialization for vector.
+Defines the string traits class `basic_char_traits` and auxiliary extraction functions.
 
-- [vector.hpp](include/MSTL/core/vector.hpp)
+- [basic_string_view](include/MSTL/core/basic_string_view.hpp)
 
-Defines vector class.
+Defines the base class `basic_string_view` for string views.
 
-- [algo.hpp](include/MSTL/core/algo.hpp)
+- [string_view](include/MSTL/core/string_view.hpp)
 
-Defines judgment, set, search, merge, move, transform, bind, permutation and other algorithms.
+Defines the string view class `string_view`.
 
-- [rb_tree.hpp](include/MSTL/core/rb_tree.hpp)
+- [basic_string](include/MSTL/core/basic_string.hpp)
 
-Defines red-black tree class rb_tree as proxy class for ordered containers.
+Defines the base string class `basic_string`.
 
-- [basic_string.hpp](include/MSTL/core/basic_string.hpp)
+- [string](include/MSTL/core/string.hpp)
 
-Defines basic_string class.
+Defines the string class `string`, providing conversion functions between different character encodings.
 
-- [queue.hpp](include/MSTL/core/queue.hpp)
+- [format](include/MSTL/core/format.hpp)
 
-Defines queue as adapter of deque, and priority_queue based on ordinary heap algorithms.
+Defines the string formatting helper class `formatter` and the formatting function `format`.
 
-- [stack.hpp](include/MSTL/core/stack.hpp)
+- [encrypt](include/MSTL/core/encrypt.hpp)
 
-Defines stack as adapter of deque.
+Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`, `SHA256`, and `AES256`.
 
-- [hashtable.hpp](include/MSTL/core/hashtable.hpp)
+- [check_type](include/MSTL/core/check_type.hpp)
 
-Defines hashtable class as proxy class for unordered containers.
+Defines the type information analysis function `check_type` to standardize type information across compilers.
 
-- [leonardo_heap.hpp](include/MSTL/ext/leonardo_heap.hpp)
+- [serialize](include/MSTL/core/serialize.hpp)
 
-Defines leonardo heap algorithms.
+Defines a series of CRTP base classes for serialization.
 
-- [sort.hpp](include/MSTL/ext/sort.hpp)
+- [datetime](include/MSTL/core/datetime.hpp)
 
-Defines multiple sorting algorithms including
-bubble, cocktail, selection, shell, counting, bucket, index, merge, partial, quick, introspective, tim, monkey sorts.
+Defines time classes (`time`, `date`, `datetime`) and UNIX timestamp class (`timestamp`), providing convenient utility functions.
 
-- [sort.hpp](include/MSTL/ext/sort.hpp)
+- [hexadecimal](include/MSTL/core/hexadecimal.hpp)
 
-Define bubble, cocktail, select, shell, count, bucket, index, merge, partial, quick, introspective, tim, monkey sort algorithms.
+Defines the hexadecimal class `hexadecimal` and its formatting helper class.
 
-- [algorithm.hpp](include/MSTL/core/algorithm.hpp)
+- [color](include/MSTL/core/color.hpp)
 
-Includes basic algorithms and mathematical algorithms, defines concurrent algorithms for convenient user inclusion.
+Defines the color class `color`.
 
-- [map.hpp](include/MSTL/core/map.hpp)
+- [console](include/MSTL/core/console.hpp)
 
-Defines ordered dictionary classes map and multimap.
+Defines the IO base class `io_base` and the IO console class `console`.
 
-- [set.hpp](include/MSTL/core/set.hpp)
+- [variant](include/MSTL/core/variant.hpp)
 
-Defines ordered set classes set and multiset.
+Defines the `variant` class, which can host multiple types in the same memory block.
 
-- [string.hpp](include/MSTL/core/string.hpp)
+- [optional](include/MSTL/core/optional.hpp)
 
-Defines string classes for multiple character types and provides their hash functions, conversion functions
-from other character types to UTF-8 encoded string types,
-and conversion functions from basic data types to string types.
+Defines the `optional` class, which can host a type and optionally set a null value `nullopt`.
 
-- [unordered_map.hpp](include/MSTL/core/unordered_map.hpp)
+- [array](include/MSTL/core/array.hpp)
 
-Defines unordered dictionary classes unordered_map and unordered_multimap.
+Defines the array class `array`, which allows compile-time value determination and safer, more modern array operations.
 
-- [unordered_set.hpp](include/MSTL/core/unordered_set.hpp)
+- [bitmap](include/MSTL/core/bitmap.hpp)
 
-Defines unordered set classes unordered_set and unordered_multiset.
+Defines the bitmap class `bitmap`, which does not exist as a `vector<bool>` specialization.
 
-- [timer.hpp](include/MSTL/ext/timer.hpp)
+- [vector](include/MSTL/core/vector.hpp)
 
-Defines timer class that can manually poll to implement timing operations.
+Defines the vector class `vector`.
 
-- [datetime.hpp](include/MSTL/core/datetime.hpp)
+- [list](include/MSTL/core/list.hpp)
 
-Defines time, date, datetime, and UNIX timestamp classes, providing convenient operation utility functions.
+Defines the doubly linked list class `list`.
 
-- [stringstream.hpp](include/MSTL/core/stringstream.hpp)
+- [deque](include/MSTL/core/deque.hpp)
 
-Defines stream-like string classes basic_istringstream, basic_ostringstream, and basic_stringstream.
-They are not based on standard IO streams but are merely string classes that behave like streams.
+Defines the deque class `deque`, which supports O(1) insertion at both front and back.
 
-- [trace_memory.hpp](include/MSTL/ext/trace_memory.hpp)
+- [rb_tree](include/MSTL/core/rb_tree.hpp)
 
-Defines boost-based stack tracing allocator trace_allocator.
+Defines the red-black tree class `rb_tree`, used as a proxy class for ordered containers.
 
-- [random.hpp](include/MSTL/core/random.hpp)
+- [hashtable](include/MSTL/core/hashtable.hpp)
 
-Defines pseudo-random number generator classes random_lcd, random_mt,
-and hardware noise-based true random number generator class secret.
+Defines the hash table class `hashtable`, used as a proxy class for unordered containers.
 
-- [file.hpp](include/MSTL/core/file.hpp)
+- [unordered_map](include/MSTL/core/unordered_map.hpp)
 
-Defines file operation class based on OS native interfaces,
-using 8KB buffer to accommodate high-volume small data read/write operations.
+Defines the unordered dictionary classes `unordered_map` and `unordered_multimap`.
 
-- [check_type.hpp](include/MSTL/core/check_type.hpp)
+- [unordered_set](include/MSTL/core/unordered_set.hpp)
 
-Defines type information analysis class to make type information cleaner.
+Defines the unordered set classes `unordered_set` and `unordered_multiset`.
 
-- [thread_pool.hpp](include/MSTL/ext/thread_pool.hpp)
+- [leonardo_heap](include/MSTL/ext/leonardo_heap.hpp)
 
-Defines pooling thread pool type.
+Defines the Leonardo heap algorithm `leonardo_heap`.
 
-- [print.hpp](include/MSTL/core/print.hpp)
+- [queue](include/MSTL/core/queue.hpp)
 
-Defines type information output functions to quickly obtain
-well-formatted type content or content containing type information.
-Use printer to quickly extend custom output.
+Defines the queue class `queue` and the priority queue class `priority_queue` based on ordinary heap algorithms.
 
-- [database_pool.hpp](include/MSTL/ext/database_pool.hpp)
+- [stack](include/MSTL/core/stack.hpp)
 
-Defines polymorphic database connections and the database connection pool
-that support MySQL, SQLite3, and Redis connections.
+Defines the stack class `stack`.
 
-- [servlet.hpp](include/MSTL/web/servlet.hpp)
+- [map](include/MSTL/core/map.hpp)
 
-Defines servlet class, providing port listening, filter configuration,
-cookie setting, session attribute operations, and other functionalities.
+Defines the ordered dictionary classes `map` and `multimap`.
+
+- [set](include/MSTL/core/set.hpp)
+
+Defines the ordered set classes `set` and `multiset`.
+
+- [file](include/MSTL/core/file.hpp)
+
+Defines the file class `file`, which uses an 8KB buffer to handle high-volume small data read/write operations.
+
+- [json](include/MSTL/core/json.hpp)
+
+Defines the JSON parser class `json_parser` and JSON builder class `json_builder`.
+
+- [session](include/MSTL/web/session.hpp)
+
+Defines the cookie class, session class `session`, and HTTP constants.
+
+- [servlet](include/MSTL/web/servlet.hpp)
+
+Defines the microservice class `servlet`, providing port listening, filter configuration, cookie setting, session attribute operations, and other functionalities.
+
+- [trace_memory](include/MSTL/ext/trace_memory.hpp)
+
+Defines the Boost-based stack-tracing allocator `trace_allocator`.
+
+- [database_pool](include/MSTL/ext/database_pool.hpp)
+
+Defines polymorphic database connections (supporting MySQL, Sqlite3, Redis) and the database connection pool `database_pool`.
+
+- [thread_pool](include/MSTL/ext/thread_pool.hpp)
+
+Defines the polling thread pool class `thread_pool`.
+
+- [timer](include/MSTL/ext/timer.hpp)
+
+Defines the timer class `timer`.
+
 
 ## License
 
-This project is based on the [MIT License](LICENSE) 。
+This project is licensed under the [MIT License](LICENSE).

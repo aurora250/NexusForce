@@ -19,7 +19,7 @@ struct integer_sequence {
 
 template <typename T, T Size>
 using make_integer_sequence =
-#ifdef MSTL_SUPPORT_MAKE_INTEGER_SEQ__
+#if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
 __make_integer_seq<integer_sequence, T, Size>;
 #else
 integer_sequence<T, __integer_pack(Size)...>;

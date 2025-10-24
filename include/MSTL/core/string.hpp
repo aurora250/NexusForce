@@ -1428,7 +1428,8 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string collector_to_string(const Collector& c) {
     result += "[ ";
     for (auto iter = _MSTL cbegin(c); iter != _MSTL cend(c); ++iter) {
         if (iter != _MSTL cbegin(c)) result += ", ";
-        result += to_string(*iter);
+        string tmp = to_string(*iter);
+        result += tmp;
     }
     result += " ]";
     return result;
@@ -1550,7 +1551,7 @@ MSTL_BEGIN_INNER__
 template <typename CharT, typename UT, enable_if_t<(sizeof(UT) > 4), int> = 0>
 constexpr void __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
     while (ux > static_cast<UT>(0xFFFFFFFFU)) {
-        auto chunk = static_cast<unsigned long>(ux % static_cast<UT>(1000000000));
+        auto chunk = static_cast<uint32_t>(ux % static_cast<UT>(1000000000));
         ux /= static_cast<UT>(1000000000);
         for (int idx = 0; idx != 9; ++idx) {
             *--riter = static_cast<CharT>('0' + chunk % 10);
@@ -1562,13 +1563,13 @@ template <typename CharT, typename UT, enable_if_t<sizeof(UT) <= 4, int> = 0>
 constexpr void __uint_to_buff_aux(CharT*, UT&) noexcept {}
 #endif // MSTL_DATA_BUS_WIDTH_64__
 
-template <typename CharT, typename UT, enable_if_t<is_unsigned_v<UT>, int> = 0>
+template <typename CharT, typename UT, enable_if_t<is_unsigned<UT>::value, int> = 0>
 MSTL_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
     UT holder = ux;
 #else
     _INNER __uint_to_buff_aux(riter, ux);
-    auto holder = static_cast<unsigned long>(ux);
+    auto holder = static_cast<uint32_t>(ux);
 #endif
     do {
         *--riter = static_cast<CharT>('0' + holder % static_cast<UT>(10));
@@ -1587,29 +1588,32 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
     if (x < 0) {
         rnext = _INNER __uint_to_buff(rnext, static_cast<UT>(0 - unsigned_x));
         *--rnext = '-';
-    }
-    else
+    } else {
         rnext = _INNER __uint_to_buff(rnext, unsigned_x);
-    return basic_string<CharT>(rnext, buffer_end);
+    }
+    const size_t count = buffer_end - rnext;
+    _MSTL memory_zero(buffer, count);
+    return basic_string<CharT>(rnext, count);
 }
 
-template <typename CharT, typename T,
-    enable_if_t<conjunction_v<is_integral<T>, is_unsigned<T>>, int> = 0>
+template <typename CharT, typename T, enable_if_t<conjunction<is_integral<T>, is_unsigned<T>>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
     CharT* const rnext = _INNER __uint_to_buff(buffer_end, x);
-    return basic_string<CharT>(rnext, buffer_end);
+    const size_t count = buffer_end - rnext;
+    _MSTL memory_zero(buffer, count);
+    return basic_string<CharT>(rnext, count);
 }
 
-MSTL_CONSTEXPR20 string __uint_to_string_base(uint64_t value, int base, bool uppercase) {
+MSTL_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
     if (value == 0) {
         return "0";
     }
     string result;
-    const auto digits_lower = "0123456789abcdef";
-    const auto digits_upper = "0123456789ABCDEF";
-    const char* digits = uppercase ? digits_upper : digits_lower;
+    constexpr auto digits_lower = "0123456789abcdef";
+    constexpr auto digits_upper = "0123456789ABCDEF";
+    const auto digits = uppercase ? digits_upper : digits_lower;
     while (value > 0) {
         const uint64_t remainder = value % base;
         value /= base;
@@ -1633,7 +1637,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
 
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string_with_precision(
-    T x, int precision = 6, bool force_scientific = false, bool force_fixed = false) {
+    T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
     if (x == numeric_limits<T>::quiet_nan()) return basic_string<CharT>{"nan"};
     constexpr T inf = numeric_limits<T>::infinity();
     if (x == inf || x == -inf) {

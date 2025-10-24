@@ -145,7 +145,7 @@ MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
 	constexpr UT two = UT(2);
 
 	if (n == zero) return 1;
-	T result = static_cast<T>(1);
+	T result(1);
 	T base = x;
 	while (n > zero) {
 		if (n % two == one)

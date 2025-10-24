@@ -1,7 +1,6 @@
 #ifndef MSTL_COLOR_HPP__
 #define MSTL_COLOR_HPP__
 #include "hexadecimal.hpp"
-#include "serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class color : public iserialize<color> {

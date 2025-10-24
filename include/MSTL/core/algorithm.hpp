@@ -1,6 +1,7 @@
 ﻿#ifndef MSTL_ALGORITHM_HPP__
 #define MSTL_ALGORITHM_HPP__
 #include "numeric.hpp"
+#include "algo.hpp"
 #include "thread.hpp"
 MSTL_BEGIN_NAMESPACE__
 

@@ -259,7 +259,7 @@ public:
 #endif
 #else
             return base_type::length(str);
-#endif // MSTL_SUPPORT_U8_INTRINSICS__
+#endif
         }
         else
 #endif // MSTL_VERSION_20__

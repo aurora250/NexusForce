@@ -20,7 +20,6 @@ function(configure_compiler_options target)
                 $<$<CONFIG:Debug>:-Werror -O0 -g -gdwarf-4>
                 $<$<CONFIG:Release>:-O2>
         )
-        target_link_options(${target} PRIVATE -Wl,--emit-relocs)
         message(STATUS "Configured GNU/Clang compiler options for ${target} (${CMAKE_BUILD_TYPE})")
     else()
         message(FATAL_ERROR "Unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")

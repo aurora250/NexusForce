@@ -11,36 +11,38 @@
 
 对初学者的建议学习方式：按照下文的文件介绍顺序阅读和使用，在疑惑的地方咨询同学或AI。
 
-如您在Windows下编译使用，请保证您计算机本地的代码页为UTF-8或使用MSTL内置的set_utf8_console尝试进行设置。
+本库使用IO设备时默认您的操作系统为代码页为UTF-8，如不是，请尝试设置，否则可能在IO时乱码。
 
 ## 通过阅读和使用MSTL，您能学到什么？
 
-- 使用constexpr与if constexpr减轻运行期负担；
-- 使用concept与requires健壮代码；
-- 强化noexcept保证；
+- 使用`constexpr`与`if constexpr`减轻运行期负担；
+- 使用`concept`与`requires`健壮代码；
+- 强化`noexcept`保证；
 - 使用可变参数模板、递归展开和模板特化等模板元技术实现类型萃取并编写功能性容器；
 - 函数式编程设计和类型擦除设计；
-- 通过enable_if实现SFINAF(Substitution Failure Is Not An Error)；
-- 通过compressed_pair实现EBCO(Empty Base Class Optimization)；
 - 使用编译器内置attribute优化代码行为；
-- 区分decltype、auto与template的类型推导退化规则；
+- 区分`decltype`、`auto`与`template`的类型推导退化规则；
+- 通过`enable_if`实现SFINAF(Substitution Failure Is Not An Error)；
+- 通过`compressed_pair`实现EBCO(Empty Base Class Optimization)；
 - 内存分配与就地构造的配合使用；
+- UTF-8、UTF-16、UTF-32等不同字符编码类型间的转换规则；
+- 使用`format`快速格式化字符串；
+- 使用CRTP(Curiously Recurring Template Pattern)模板模式进行静态多态操作；
+- 使用Windows与Linux原生接口实现`datetime`、`file`等工具类，认识两个OS之间大同小异的数据接口与数据处理方式；
 - 双端队列、红黑树、哈希表等复杂容器的数据操作方式；
-- 不同字符编码类型间的转换规则；
-- 使用Windows与Linux原生接口实现datetime、file等工具类，认识两个OS之间大同小异的数据接口与数据处理方式；
 - 实现绝大部分标准算法(包括并发算法)与所有常用标准容器，并拓展部分教学用的非实用算法；
 - 十余种通用排序函数的实现方式；
-- 标准库并发接口的使用(atomic/conditional_variable/thread/mutex/future/package_task等)；
-- MySQL数据库C风格接口的现代风格包装与使用；
-- 设计线程轮询的池化运作模式；
-- socket封装现代风格servlet进行端口监听与web操作
-......
+- 标准库并发接口的使用(`atomic`/`conditional_variable`/`thread`/`mutex`/`future`/`package_task`等)；
+- MySQL、Redis接口的现代包装与使用；
+- 设计轮询模式的线程池；
+- socket封装现代风格servlet进行Web操作
+  ......
 
 ## 支持环境
 
 WINDOWS LINUX
 
-X64
+X64 X86
 
 MSVC GCC CLANG
 
@@ -85,7 +87,7 @@ cmake .. -G "Visual Studio 17 2022" -A x64 \
 # 编译
 cmake --build . --config Release
 
-# 可选：安装到系统目录
+# 安装到系统目录
 cmake --install . --config Release
 ```
 
@@ -107,7 +109,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release \
 # 编译
 make -j$(nproc)
 
-# 可选：安装到系统目录
+# 安装到系统目录
 sudo make install
 ```
 
@@ -117,197 +119,269 @@ sudo make install
 
 以下按照上述文件结构层级依次介绍。
 
-- [basiclib.hpp](include/MSTL/core/environment.hpp)
+- [environment](include/MSTL/core/environment.hpp)
 
-使用操作系统平台、托管平台、总线宽度和C++版本的宏实现多编译环境适配，定义内存操作与C风格字符串操作函数。
+定义操作系统平台、托管平台、总线宽度和C++版本的宏，实现多编译环境适配。
 
-- [type_traits.hpp](include/MSTL/core/type_traits.hpp)
+- [vsprintf](include/MSTL/core/vsprintf.hpp)
 
-使用模板元技术，在编译期推断类型信息，并提供基础数字类型的哈希函数和迭代器萃取器。
+定义一系列函数将可变参数列表输出到格式化的字符串。
 
-- [errorlib.hpp](include/MSTL/core/exception.hpp)
+- [type_traits](include/MSTL/core/type_traits.hpp)
 
-定义错误类型和快速调用宏，本项目的所有错误类型都为本文件内的错误类型，您可以使用BUILD_ERROR系列宏快速构建兼容本项目的错误类型。
+定义类型特征常量，使用模板元技术在编译期推断类型信息。
 
-- [functor.hpp](include/MSTL/core/functor.hpp)
+- [exception](include/MSTL/core/exception.hpp)
+
+定义错误类型和快速调用宏，本项目的所有错误类型都为本文件内的错误类型。
+
+- [random](include/MSTL/core/random.hpp)
+
+定义假随机数生成类`random_lcd`、`random_mt`和基于硬件噪声的真随机数生成类`secret`。
+
+- [socket](include/MSTL/web/socket.hpp)
+
+定义网络套接字类`socket`。
+
+- [functor](include/MSTL/core/functor.hpp)
 
 定义仿函数和仿函数配接器（C++11后被标准弃用）。
 
-- [concepts.hpp](include/MSTL/core/concepts.hpp)
+- [iterator_traits](include/MSTL/core/iterator_traits.hpp)
+
+定义迭代器萃取器`iterator_traits`及方便使用的类型别名。
+
+- [interface](include/MSTL/core/interface.hpp)
+
+定义一系列基础CRTP基类和基于其自动生成的全局函数。
+
+- [hash](include/MSTL/core/hash.hpp)
+
+定义基础类型的哈希函数及FNV等工具哈希函数。
+
+- [numeric_limits](include/MSTL/core/numeric_limits.hpp)
+
+定义数值类型信息类`numeric_limits`，在编译时提供数值类型的数学细节。
+
+- [mutex](include/MSTL/core/mutex.hpp)
+
+定义互斥锁`mutex`及作用域锁定类`lock_guard`。
+
+- [concepts](include/MSTL/core/concepts.hpp)
 
 定义常用的约束与迭代器类型判断特征常量。
 
-- [mathlib.hpp](include/MSTL/core/mathlib.hpp)
+- [utility](include/MSTL/core/utility.hpp)
 
-定义常用的constexpr数学函数与常量。
+定义压缩对`compressed_pair`、键值对`pair`及其哈希函数、类型擦除函数、C风格字符串转数字类型函数。
 
-- [numeric.hpp](include/MSTL/core/numeric.hpp)
+- [tuple](include/MSTL/core/tuple.hpp)
+
+定义元组类`tuple`及其辅助函数。
+
+- [mathlib](include/MSTL/core/mathlib.hpp)
+
+定义常用的`constexpr`数学常量与函数。
+
+- [ratio](include/MSTL/core/ratio.hpp)
+
+定义比率类`ratio`。
+
+- [numeric](include/MSTL/core/numeric.hpp)
 
 定义数学算法。
 
-- [utility.hpp](include/MSTL/core/utility.hpp)
-
-定义压缩对compredded_pair、键值对pair及其哈希函数、类型擦除函数、C风格字符串转数字类型函数。
-
-- [heap.hpp](include/MSTL/core/heap.hpp)
+- [heap](include/MSTL/core/heap.hpp)
 
 定义普通heap算法。
 
-- [iterator.hpp](include/MSTL/core/iterator.hpp)
+- [iterator](include/MSTL/core/iterator.hpp)
 
 定义迭代器工具函数和迭代器配接器。
 
-- [tuple.hpp](include/MSTL/core/tuple.hpp)
-
-定义元组tuple类及其辅助函数，提供tuple的哈希函数。
-
-- [algobase.hpp](include/MSTL/core/algobase.hpp)
+- [algobase](include/MSTL/core/algobase.hpp)
 
 定义比较、复制和移动算法。
 
-- [any.hpp](include/MSTL/core/any.hpp)
+- [any](include/MSTL/core/any.hpp)
 
-定义可存储任意类型的any类，使用any_cast可取出其值。
+定义任意类any，其可存储任意类型。
 
-- [optional.hpp](include/MSTL/core/optional.hpp)
+- [cstring](include/MSTL/core/cstring.hpp)
 
-定义自选optional类，可以托管一个类型并设置空值nullopt。
+定义内存操作函数与C风格字符串操作函数。
 
-- [memory.hpp](include/MSTL/core/memory.hpp)
+- [memory](include/MSTL/core/memory.hpp)
 
-定义内存操作函数、临时缓存区类、分配器类和智能指针类。
+定义内存操作函数、分配器类和智能指针类。
 
-- [array.hpp](include/MSTL/core/array.hpp)
-
-定义数组array类，可以在编译器确定取值并更安全现代地操作数组。
-
-- [variant.hpp](include/MSTL/core/variant.hpp)
-
-定义变体variant类，可在同一块内存同时托管多个类型。
-
-- [string_view.hpp](include/MSTL/core/string_view.hpp)
-
-定义字符串萃取类char_traits、辅助萃取函数与字符串视图类basic_string_view。
-
-- [functional.hpp](include/MSTL/core/functional.hpp)
+- [functional](include/MSTL/core/functional.hpp)
 
 定义托管函数指针和类函数类型的函数类function。
 
-- [list.hpp](include/MSTL/core/list.hpp)
-
-定义双向链表类list。
-
-- [deque.hpp](include/MSTL/core/deque.hpp)
-
-定义双端队列类deque，它可以维护map与buffer使数据可以向前和向后插入。
-
-- [bitmap.hpp](include/MSTL/core/bitmap.hpp)
-
-定义位图类，但不将其作为vector的bool特化。
-
-- [vector.hpp](include/MSTL/core/vector.hpp)
-
-定义向量类vector。
-
-- [algo.hpp](include/MSTL/core/algo.hpp)
+- [algo](include/MSTL/core/algo.hpp)
 
 定义判断、集合、查找、合并、移动、变换、绑定、排列等算法。
 
-- [rb_tree.hpp](include/MSTL/core/rb_tree.hpp)
+- [thread](include/MSTL/core/thread.hpp)
 
-定义红黑树类rb_tree作为有序容器的代理类。
+定义线程类`thread`。
 
-- [basic_string.hpp](include/MSTL/core/basic_string.hpp)
-
-定义基础字符串类basic_string。
-
-- [queue.hpp](include/MSTL/core/queue.hpp)
-
-定义双端队列deque的配接器 队列queue，和基于普通堆算法heap的优先级队列priority_queue。
-
-- [stack.hpp](include/MSTL/core/stack.hpp)
-
-定义双端队列deque的配接器 栈stack。
-
-- [hashtable.hpp](include/MSTL/core/hashtable.hpp)
-
-定义哈希表类hashtable作为无序容器的代理类。
-
-- [leonardo_heap.hpp](include/MSTL/ext/leonardo_heap.hpp)
-
-定义莱昂纳多堆算法leonardo_heap。
-
-- [sort.hpp](include/MSTL/ext/sort.hpp)
+- [sort](include/MSTL/ext/sort.hpp)
 
 定义冒泡、鸡尾酒、选择、希尔、计数、桶、索引、归并、部分、快速、内省、提姆、猴子等多种排序算法。
 
-- [algorithm.hpp](include/MSTL/core/algorithm.hpp)
+- [algorithm](include/MSTL/core/algorithm.hpp)
 
 引入基础算法和数学算法，定义并发算法，方便使用者引入。
 
-- [map.hpp](include/MSTL/core/map.hpp)
+- [char_traits](include/MSTL/core/char_traits.hpp)
 
-定义有序字典类map和multimap。
+定义字符串萃取类`basic_char_traits`及辅助萃取函数。
 
-- [set.hpp](include/MSTL/core/set.hpp)
+- [basic_string_view](include/MSTL/core/basic_string_view.hpp)
 
-定义有序集合类set和multiset。
+定义字符串视图基础类`basic_string_view`。
 
-- [string.hpp](include/MSTL/core/string.hpp)
+- [string_view](include/MSTL/core/string_view.hpp)
 
-定义多种字符类型的字符串类并提供其哈希函数，提供其它字符类型向UTF-8编码的string类型转换的转换函数、基本数据类型向字符串类转换的转换函数。
+定义字符串视图类`string_view`。
 
-- [unordered_map.hpp](include/MSTL/core/unordered_map.hpp)
+- [basic_string](include/MSTL/core/basic_string.hpp)
 
-定义无序字典类unordered_map和unordered_multimap。
+定义基础字符串类`basic_string`。
 
-- [unordered_set.hpp](include/MSTL/core/unordered_set.hpp)
+- [string](include/MSTL/core/string.hpp)
 
-定义无序集合类unordered_set和unordered_multiset。
+定义字符串类`string`，提供不同字符编码间的转换函数。
 
-- [timer.hpp](include/MSTL/ext/timer.hpp)
+- [format](include/MSTL/core/format.hpp)
 
-定义定时器类timer，可以手动轮询实现定时操作。
+定义字符串格式化辅助类`formatter`和格式化函数`format`。
 
-- [datetime.hpp](include/MSTL/core/datetime.hpp)
+- [encrypt](include/MSTL/core/encrypt.hpp)
 
-定义时间类time、日期类date、时期类datetime和UNIX时间戳类timestamp，提供方便操作的工具函数。
+定义字符加密类型及函数`XOR`、`base64`、`MD5`、`SHA1`、`SHA256`、`AES256`。
 
-- [stringstream.hpp](include/MSTL/core/stringstream.hpp)
+- [check_type](include/MSTL/core/check_type.hpp)
 
-定义流式字符串类basic_istringstream、basic_ostringstream和basic_stringstream。它们并不基于标准IO流，而仅仅是一个行为像流的字符串类。
+定义类型信息分析函数`check_type`，在多种编译器中规整类型信息。
 
-- [trace_memory.hpp](include/MSTL/ext/trace_memory.hpp)
+- [serialize](include/MSTL/core/serialize.hpp)
 
-定义基于boost的栈追踪分配器trace_allocator。
+定义一系列序列化的CRTP基类。
 
-- [random.hpp](include/MSTL/core/random.hpp)
+- [datetime](include/MSTL/core/datetime.hpp)
 
-定义假随机数生成类random_lcd、random_mt和基于硬件噪声的真随机数生成类secret。
+定义时间类`time`、日期类`date`、时期类`datetime`和UNIX时间戳类`timestamp`，提供方便操作的工具函数。
 
-- [file.hpp](include/MSTL/core/file.hpp)
+- [hexadecimal](include/MSTL/core/hexadecimal.hpp)
 
-定义基于OS原生接口的文件操作类file，使用8KB的buffer以适应大批量小数据的读写。
+定义十六进制类`hexadecimal`及其格式化辅助类。
 
-- [check_type.hpp](include/MSTL/core/check_type.hpp)
+- [color](include/MSTL/core/color.hpp)
 
-定义类型信息分析类，使类型信息更整洁。
+定义颜色类`color`。
 
-- [thread_pool.hpp](include/MSTL/ext/thread_pool.hpp)
+- [console](include/MSTL/core/console.hpp)
 
-定义轮询线程池。
+定义IO辅助类`io_base`及IO控制台类`console`。
 
-- [print.hpp](include/MSTL/core/print.hpp)
+- [variant](include/MSTL/core/variant.hpp)
 
-定义类型信息输出函数，快速获取工整的类型内容或含有类型信息的内容，使用printer可快速拓展自定义输出。
+定义变体类`variant`，其可在同一块内存同时托管多个类型。
 
-- [database_pool.hpp](include/MSTL/ext/database_pool.hpp)
+- [optional](include/MSTL/core/optional.hpp)
 
-定义支持MySQL、Sqlite3、Redis链接的多态数据库连接及数据库链接池。
+定义自选类`optional`，其可托管一个类型，设置可选空值nullopt。
 
-- [servlet.hpp](include/MSTL/web/servlet.hpp)
+- [array](include/MSTL/core/array.hpp)
 
-定义servlet类，提供监听端口、配置filter、设置cookie、操作session属性等功能。
+定义数组类`array`，可以在编译器确定取值并更安全现代地操作数组。
+
+- [bitmap](include/MSTL/core/bitmap.hpp)
+
+定义位图类`bitmap`，它不作为`vector<bool>`特化存在。
+
+- [vector](include/MSTL/core/vector.hpp)
+
+定义向量类`vector`。
+
+- [list](include/MSTL/core/list.hpp)
+
+定义双向链表类`list`。
+
+- [deque](include/MSTL/core/deque.hpp)
+
+定义双端队列类`deque`，其可以使数据向前和向后O(1)插入。
+
+- [rb_tree](include/MSTL/core/rb_tree.hpp)
+
+定义红黑树类`rb_tree`，它被作为有序容器的代理类。
+
+- [hashtable](include/MSTL/core/hashtable.hpp)
+
+定义哈希表类`hashtable`，它被作为无序容器的代理类。
+
+- [unordered_map](include/MSTL/core/unordered_map.hpp)
+
+定义无序字典类`unordered_map`和无序多值字典类`unordered_multimap`。
+
+- [unordered_set](include/MSTL/core/unordered_set.hpp)
+
+定义无序集合类`unordered_set`和无序多值集合类`unordered_multiset`。
+
+- [leonardo_heap](include/MSTL/ext/leonardo_heap.hpp)
+
+定义莱昂纳多堆算法leonardo_heap。
+
+- [queue](include/MSTL/core/queue.hpp)
+
+定义队列类`queue`和基于普通堆算法heap的优先级队列类`priority_queue`。
+
+- [stack](include/MSTL/core/stack.hpp)
+
+定义栈类`stack`。
+
+- [map](include/MSTL/core/map.hpp)
+
+定义有序字典类`map`和有序多值字典类`multimap`。
+
+- [set](include/MSTL/core/set.hpp)
+
+定义有序集合类`set`和有序多值集合类`multiset`。
+
+- [file](include/MSTL/core/file.hpp)
+
+定义文件类`file`，其使用8KB的buffer以适应大批量小数据的读写。
+
+- [json](include/MSTL/core/json.hpp)
+
+定义JSON解析类`json_parser`和JSON构建类`json_builder`。
+
+- [session](include/MSTL/web/session.hpp)
+
+定义`cookie`类、会话类`session`和HTTP常量。
+
+- [servlet](include/MSTL/web/servlet.hpp)
+
+定义微服务类`servlet`，提供监听端口、配置filter、设置cookie、操作session属性等功能。
+
+- [trace_memory](include/MSTL/ext/trace_memory.hpp)
+
+定义基于boost的栈追踪分配器`trace_allocator`。
+
+- [database_pool](include/MSTL/ext/database_pool.hpp)
+
+定义支持MySQL、Sqlite3、Redis链接的多态数据库连接及数据库链接池`database_pool`。
+
+- [thread_pool](include/MSTL/ext/thread_pool.hpp)
+
+定义轮询线程池类`thread_pool`。
+
+- [timer](include/MSTL/ext/timer.hpp)
+
+定义定时器类`timer`。
 
 ## 开源协议
 

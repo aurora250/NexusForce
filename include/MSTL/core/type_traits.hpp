@@ -2450,5 +2450,60 @@ public:
 template <typename T>
 MSTL_INLINE17 constexpr bool has_swap_v = has_swap<T>::value;
 
+
+MSTL_BEGIN_CONSTANTS__
+MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
+    0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+    3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
+};
+MSTL_END_CONSTANTS__
+
+constexpr int popcountll(size_t x) {
+    return
+        _CONSTANTS POPCOUNT_TABLE[x & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 8) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 16) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 24) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 32) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 40) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 48) & 0xFF] +
+        _CONSTANTS POPCOUNT_TABLE[(x >> 56) & 0xFF];
+}
+
+constexpr int clzll(size_t x) {
+    if (x == 0) return 64;
+    int n = 0;
+    if (x <= 0x00000000FFFFFFFFULL) {
+        n += 32;
+        x <<= 32;
+    }
+    if (x <= 0x0000FFFFFFFFFFFFULL) {
+        n += 16;
+        x <<= 16;
+    }
+    if (x <= 0x00FFFFFFFFFFFFFFULL) {
+        n += 8;
+        x <<= 8;
+    }
+    if (x <= 0x0FFFFFFFFFFFFFFFULL) {
+        n += 4;
+        x <<= 4;
+    }
+    if (x <= 0x3FFFFFFFFFFFFFFFULL) {
+        n += 2;
+        x <<= 2;
+    }
+    if (x <= 0x7FFFFFFFFFFFFFFFULL) {
+        n += 1;
+    }
+    return n;
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_TYPE_TRAITS_HPP__

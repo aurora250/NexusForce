@@ -2,7 +2,10 @@
 #define MSTL_TRACE_MEMORY_HPP__
 #include "MSTL/core/unordered_map.hpp"
 #include "MSTL/core/console.hpp"
-#ifdef MSTL_SUPPORT_STACKTRACE__
+#ifdef MSTL_SUPPORT_BOOST__
+#include <boost/version.hpp>
+#endif
+#if BOOST_VERSION >= 106500
 #include <boost/stacktrace.hpp>
 MSTL_BEGIN_NAMESPACE__
 

@@ -220,7 +220,7 @@ private:
     static string generate_session_id() {
         string str;
         for (int i = 0; i < 32; ++i) {
-            str += format("x", random_mt::next_int(0, 15));
+            str += format("{x}", random_mt::next_int(0, 15));
         }
         return _MSTL move(str);
     }

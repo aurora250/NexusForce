@@ -95,7 +95,7 @@ public:
         return value_ != _MSTL initialize<value_type>();
     }
     MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static MSTL_CONSTEVAL size_t bytes() noexcept { return sizeof(value_type) * 8; }
+    static constexpr size_t bytes() noexcept { return sizeof(value_type) * 8; }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return _MSTL hash<value_type>()(value_);
@@ -217,7 +217,7 @@ public: \
     } \
     \
     MSTL_NODISCARD static MSTL_CONSTEXPR20 string to_string(const value_type value) { \
-        return self(value).to_string(); \
+        return _INNER __int_to_string_dispatch(value); \
     } \
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const { \
         return _INNER __int_to_string_dispatch(value_); \

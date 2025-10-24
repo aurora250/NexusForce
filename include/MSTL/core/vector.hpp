@@ -1,6 +1,7 @@
 #ifndef MSTL_VECTOR_HPP__
 #define MSTL_VECTOR_HPP__
 #include "serialize.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, typename Vector>

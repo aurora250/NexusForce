@@ -1,7 +1,6 @@
 #include "try.h"
 
 int main() {
-    test_print();
-
+    test_tpool();
     console.pause();
 }

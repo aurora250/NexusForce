@@ -227,27 +227,27 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
         const char* digits;
         int base;
         switch (options.type) {
-            case NUMBER_TYPE::BINARY:
+            case NUMBER_TYPE::BINARY: {
                 digits = "01";
-            base = 2;
-            break;
-            case NUMBER_TYPE::OCTAL:
+                base = 2;
+                break;
+            } case NUMBER_TYPE::OCTAL: {
                 digits = "01234567";
-            base = 8;
-            break;
-            case NUMBER_TYPE::HEX_LOW:
+                base = 8;
+                break;
+            } case NUMBER_TYPE::HEX_LOW: {
                 digits = "0123456789abcdef";
-            base = 16;
-            break;
-            case NUMBER_TYPE::HEX_UP:
+                base = 16;
+                break;
+            } case NUMBER_TYPE::HEX_UP: {
                 digits = "0123456789ABCDEF";
-            base = 16;
-            break;
-            case NUMBER_TYPE::DECIMAL:
-                default:
-                    digits = "0123456789";
-            base = 10;
-            break;
+                base = 16;
+                break;
+            } case NUMBER_TYPE::DECIMAL: default: {
+                digits = "0123456789";
+                base = 10;
+                break;
+            }
         }
 
         string number_str;
@@ -271,10 +271,10 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
 
         if (options.show_base && base != 10) {
             switch (options.type) {
-                case NUMBER_TYPE::BINARY: prefix += "0b"; break;
-                case NUMBER_TYPE::OCTAL: prefix += "0o"; break;
+                case NUMBER_TYPE::BINARY:  prefix += "0b"; break;
+                case NUMBER_TYPE::OCTAL:   prefix += "0o"; break;
                 case NUMBER_TYPE::HEX_LOW: prefix += "0x"; break;
-                case NUMBER_TYPE::HEX_UP: prefix += "0X"; break;
+                case NUMBER_TYPE::HEX_UP:  prefix += "0X"; break;
                 default: break;
             }
         }
@@ -313,23 +313,24 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         bool uppercase = false;
 
         switch (options.type) {
-            case NUMBER_TYPE::HEX_LOW:
+            case NUMBER_TYPE::HEX_LOW: {
                 base = 16;
                 uppercase = false;
                 break;
-            case NUMBER_TYPE::HEX_UP:
+            } case NUMBER_TYPE::HEX_UP: {
                 base = 16;
                 uppercase = true;
                 break;
-            case NUMBER_TYPE::OCTAL:
+            } case NUMBER_TYPE::OCTAL: {
                 base = 8;
                 break;
-            case NUMBER_TYPE::BINARY:
+            } case NUMBER_TYPE::BINARY: {
                 base = 2;
                 break;
-            case NUMBER_TYPE::DECIMAL:
-            default:
+            } case NUMBER_TYPE::DECIMAL: default: {
                 base = 10;
+                break;
+            }
         }
 
         if (base == 10) {
@@ -341,15 +342,16 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         string base_prefix = "";
         if (options.show_base) {
             switch (base) {
-                case 16:
+                case 16: {
                     base_prefix = uppercase ? "0X" : "0x";
                     break;
-                case 8:
+                } case 8: {
                     base_prefix = "0";
                     break;
-                case 2:
+                } case 2: {
                     base_prefix = uppercase ? "0B" : "0b";
                     break;
+                } default: break;
             }
         }
 

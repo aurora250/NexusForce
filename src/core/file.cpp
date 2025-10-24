@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <cstdio>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -22,9 +23,7 @@ bool file::flush_write_buffer() const noexcept {
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
     ssize_t bytes_written = ::write(handle_, write_buffer_.data(), write_buffer_pos_);
-    if (bytes_written != static_cast<ssize_t>(write_buffer_pos_)) {
-        return false;
-    }
+    if (bytes_written != static_cast<ssize_t>(write_buffer_pos_)) return false;
 #endif
     write_buffer_pos_ = 0;
     return true;
@@ -35,7 +34,7 @@ bool file::fill_read_buffer() const noexcept {
     size_type bytes_read;
     const ::BOOL success = ::ReadFile(
         handle_, read_buffer_.data(),
-        BUFFER_SIZE,
+        FILE_BUFFER_SIZE,
         &bytes_read, nullptr
     );
     if (!success) {
@@ -44,7 +43,7 @@ bool file::fill_read_buffer() const noexcept {
     }
     read_buffer_size_ = bytes_read;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ssize_t bytes_read = ::read(handle_, read_buffer_.data(), BUFFER_SIZE);
+    ssize_t bytes_read = ::read(handle_, read_buffer_.data(), FILE_BUFFER_SIZE);
     if (bytes_read <= 0) {
         read_buffer_size_ = 0;
         return false;
@@ -74,9 +73,7 @@ datetime file::filetime_to_datetime(const time_type& ft) noexcept {
         st_local.wHour, st_local.wMinute, st_local.wSecond
     );
 #elif defined(MSTL_PLATFORM_LINUX__)
-    if (ft == 0) {
-        return datetime::epoch();
-    }
+    if (ft == 0) return datetime::epoch();
     ::tm tm_local{};
     ::localtime_r(&ft, &tm_local);
     return datetime(
@@ -165,13 +162,6 @@ string file::get_last_error_msg() {
 }
 #endif
 
-file::file(string path,
-    const FILE_ACCESS access, const FILE_SHARED share_mode,
-    const FILE_CREATION creation, const FILE_ATTRI attributes,
-    const bool append) : path_(_MSTL move(path)) {
-    this->open(access, share_mode, creation, attributes, append);
-}
-
 file::file(file&& other) noexcept
     : handle_(other.handle_),
       path_(_MSTL move(other.path_)),
@@ -231,26 +221,24 @@ file::~file() {
     write_buffer_pos_ = 0;
 }
 
-bool file::open(
-    const string& path,
+bool file::open(string path, const bool append,
     FILE_ACCESS access, FILE_SHARED share_mode,
-    FILE_CREATION creation, FILE_ATTRI attributes,
-    const bool append) {
+    FILE_CREATION creation, FILE_ATTRI attributes) {
     this->close();
 
-    read_buffer_.resize(BUFFER_SIZE);
-    write_buffer_.resize(BUFFER_SIZE);
+    read_buffer_.resize(FILE_BUFFER_SIZE);
+    write_buffer_.resize(FILE_BUFFER_SIZE);
     read_buffer_pos_ = 0;
     read_buffer_size_ = 0;
     write_buffer_pos_ = 0;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     handle_ = ::CreateFileA(
-        path.c_str(),
-        static_cast<size_t>(access),
-        static_cast<size_t>(share_mode),
-        nullptr, static_cast<size_t>(creation),
-        static_cast<size_t>(attributes),
+        path.data(),
+        static_cast<file_underlying_type_t>(access),
+        static_cast<file_underlying_type_t>(share_mode),
+        nullptr, static_cast<file_underlying_type_t>(creation),
+        static_cast<file_underlying_type_t>(attributes),
         nullptr
         );
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -259,29 +247,16 @@ bool file::open(
     if (append) flags |= O_APPEND;
 
     const ::mode_t mode = convert_attributes(attributes);
-    handle_ = ::open(path.c_str(), flags, mode);
+    handle_ = ::open(path.data(), flags, mode);
 #endif
-    if (handle_ == INVALID_HANDLE()) {
-        return false;
-    }
+    if (handle_ == INVALID_HANDLE()) return false;
 
-    path_ = path;
+    path_ = _MSTL move(path);
     opened_ = true;
     append_mode_ = append;
 
-    if (append) {
-        if (!this->seek(0, FILE_POINTER::END)) return false;
-    }
+    if (append && !this->seek(0, FILE_POINTER::END)) return false;
     return true;
-}
-
-bool file::open(
-    const FILE_ACCESS access,
-    const FILE_SHARED share_mode,
-    const FILE_CREATION creation,
-    const FILE_ATTRI attributes,
-    const bool append) {
-    return this->open(path_, access, share_mode, creation, attributes, append);
 }
 
 void file::close() noexcept {
@@ -299,12 +274,8 @@ void file::close() noexcept {
 }
 
 bool file::flush() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) {
-        return false;
-    }
-    if (!flush_write_buffer()) {
-        return false;
-    }
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
+    if (!flush_write_buffer()) return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::FlushFileBuffers(handle_) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -313,16 +284,13 @@ bool file::flush() const noexcept {
 }
 
 file::size_type file::write(const string& data, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return 0;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
 
     const size_type real_size = size > data.size() ? data.size() : size;
     if (real_size == 0) return 0;
 
-    if (real_size > BUFFER_SIZE * 4) {
-        if (!flush_write_buffer()) {
-            return 0;
-        }
+    if (real_size > FILE_BUFFER_SIZE * 4) {
+        if (!flush_write_buffer()) return 0;
 #ifdef MSTL_PLATFORM_WINDOWS__
         size_type bytes_written = 0;
         if (::WriteFile(handle_, data.data(), real_size, &bytes_written, nullptr)) {
@@ -345,7 +313,7 @@ file::size_type file::write(const string& data, const size_type size) const {
     size_type remaining = size;
 
     while (remaining > 0) {
-        const size_type available = BUFFER_SIZE - write_buffer_pos_;
+        const size_type available = FILE_BUFFER_SIZE - write_buffer_pos_;
         const size_type to_copy = remaining < available ? remaining : available;
 
         _MSTL copy_n(ptr, to_copy, write_buffer_.begin() + static_cast<ptrdiff_t>(write_buffer_pos_));
@@ -354,20 +322,15 @@ file::size_type file::write(const string& data, const size_type size) const {
         ptr += to_copy;
         remaining -= to_copy;
 
-        if (write_buffer_pos_ == BUFFER_SIZE && !flush_write_buffer()) {
+        if (write_buffer_pos_ == FILE_BUFFER_SIZE && !flush_write_buffer()) {
             break;
         }
     }
     return total_written;
 }
 
-file::size_type file::write(const string& data) const {
-    return this->write(data, data.size());
-}
-
 file::size_type file::read(string& str, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return 0;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
 
     str.clear();
     str.reserve(size);
@@ -381,8 +344,7 @@ file::size_type file::read(string& str, const size_type size) const {
         }
         const size_type available_in_buffer = read_buffer_size_ - read_buffer_pos_;
         const size_type needed = size - total_read;
-        const size_type to_read = (needed < available_in_buffer) ?
-            needed : available_in_buffer;
+        const size_type to_read = (needed < available_in_buffer) ? needed : available_in_buffer;
 
         str.append(read_buffer_.data() + read_buffer_pos_, to_read);
         read_buffer_pos_ += to_read;
@@ -398,32 +360,24 @@ file::size_type file::read(string& str) const {
 }
 
 string file::read() const {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return {};
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return {};
     const size_type file_size = size();
     if (file_size == 0) return {};
 
     const difference_type current_pos = this->tell();
-
     if (!this->seek(0, FILE_POINTER::BEGIN)) return {};
 
     string content;
     content.resize(file_size);
     const size_type bytes_read = this->read(content, file_size);
-
     if (!this->seek(current_pos, FILE_POINTER::BEGIN)) return {};
 
-    if (bytes_read != file_size) {
-        content.resize(bytes_read);
-    }
+    if (bytes_read != file_size) content.resize(bytes_read);
     return content;
 }
 
 file::size_type file::read_binary(string& str, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE() || str.empty() || size == 0)
-        return 0;
-
+    if (!opened_ || handle_ == INVALID_HANDLE() || str.empty() || size == 0) return 0;
     size_type total_read = 0;
 
     while (total_read < size) {
@@ -433,8 +387,7 @@ file::size_type file::read_binary(string& str, const size_type size) const {
             }
         }
         const size_type available = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read =
-            size - total_read < available ? size - total_read : available;
+        const size_type to_read = size - total_read < available ? size - total_read : available;
 
         const auto buffer = str.data();
         _MSTL copy_n(read_buffer_.data() + read_buffer_pos_, to_read, buffer + total_read);
@@ -448,10 +401,6 @@ file::size_type file::read_binary(string& str) const {
     const size_type s = size();
     str.resize(s);
     return this->read_binary(str, s);
-}
-
-string file::read_binary() const {
-    return this->read_binary(path_);
 }
 
 bool file::read_line(string& line) const {
@@ -488,8 +437,7 @@ string file::read_line() const {
 
 vector<string> file::read_lines() const {
     vector<string> lines;
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return lines;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return lines;
 
     string content;
     if (this->read(path_, content)) {
@@ -514,13 +462,8 @@ vector<string> file::read_lines() const {
 }
 
 file::size_type file::size() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) {
-        return 0;
-    }
-    if (write_buffer_pos_ > 0 && !flush_write_buffer()) {
-        return 0;
-    }
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
+    if (write_buffer_pos_ > 0 && !flush_write_buffer()) return 0;
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::LARGE_INTEGER file_size;
     if (!::GetFileSizeEx(handle_, &file_size)) {
@@ -528,10 +471,8 @@ file::size_type file::size() const noexcept {
     }
     return static_cast<size_type>(file_size.QuadPart);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::fstat(handle_, &st) == -1) {
-        return 0;
-    }
+    struct ::stat64 st{};
+    if (::fstat64(handle_, &st) == -1) return 0;
     return static_cast<size_type>(st.st_size);
 #endif
 }
@@ -540,9 +481,8 @@ file::size_type file::size(const string& path) {
     size_type sz = 0;
     {
         file f;
-        if (f.open(path, FILE_ACCESS::READ)) {
-            sz = f.size();
-        }
+        if (f.open(path, false, FILE_ACCESS::READ)) sz = f.size();
+        f.close();
     }
     return sz;
 }
@@ -550,7 +490,7 @@ file::size_type file::size(const string& path) {
 bool file::size(const string& path, size_type& size) {
     {
         file f;
-        if (f.open(path, FILE_ACCESS::READ)) {
+        if (f.open(path, false, FILE_ACCESS::READ)) {
             size = f.size();
             return true;
         }
@@ -559,36 +499,32 @@ bool file::size(const string& path, size_type& size) {
 }
 
 bool file::seek(const difference_type distance, FILE_POINTER method) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
+    if (write_buffer_pos_ > 0 && !flush_write_buffer()) return false;
 
-    if (write_buffer_pos_ > 0 && !flush_write_buffer()) {
-        return false;
-    }
     read_buffer_pos_ = 0;
     read_buffer_size_ = 0;
-
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::LARGE_INTEGER li;
     li.QuadPart = distance;
-    return ::SetFilePointerEx(handle_, li, nullptr, static_cast<size_t>(method)) != 0;
+    return ::SetFilePointerEx(handle_, li, nullptr,
+        static_cast<file_underlying_type_t>(method))
+    != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ::off_t ret = ::lseek(handle_, distance, static_cast<int>(method));
+    const ::off_t ret = ::lseek(handle_, distance, static_cast<file_underlying_type_t>(method));
     return ret != static_cast<off_t>(-1);
 #endif
 }
 
 file::difference_type file::tell() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return 0;
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
 #ifdef MSTL_PLATFORM_WINDOWS__
     constexpr ::LARGE_INTEGER li = {};
     ::LARGE_INTEGER new_pos;
     if (!::SetFilePointerEx(handle_, li, &new_pos, FILE_CURRENT)) {
         return 0;
     }
-    return static_cast<size_type>(new_pos.QuadPart);
+    return static_cast<difference_type>(new_pos.QuadPart);
 #elif defined(MSTL_PLATFORM_LINUX__)
     const ::off_t pos = ::lseek(handle_, 0, SEEK_CUR);
     return pos == static_cast<::off_t>(-1) ? 0 : pos;
@@ -600,8 +536,8 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 
 #ifdef MSTL_PLATFORM_LINUX__
     const size_type read_size = hint_size > 0 ?
-        _MSTL min(hint_size * 2, BUFFER_SIZE) :
-        BUFFER_SIZE;
+        _MSTL min(hint_size * 2, FILE_BUFFER_SIZE) :
+        FILE_BUFFER_SIZE;
 
     ::posix_fadvise(handle_, this->tell(), static_cast<difference_type>(read_size), POSIX_FADV_WILLNEED);
 #endif
@@ -609,13 +545,9 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 }
 
 bool file::truncate(const difference_type size) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!this->seek(size, FILE_POINTER::BEGIN)) {
-        return false;
-    }
+    if (!this->seek(size, FILE_POINTER::BEGIN)) return false;
     return ::SetEndOfFile(handle_) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     return ::ftruncate(handle_, size) == 0;
@@ -624,9 +556,7 @@ bool file::truncate(const difference_type size) const noexcept {
 
 bool file::lock(const difference_type offset,
     const difference_type length, FILE_LOCK mode) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::OVERLAPPED ov = {};
     const uint64_t offset_64 = offset;
@@ -634,7 +564,9 @@ bool file::lock(const difference_type offset,
     ov.OffsetHigh = static_cast<size_type>(offset_64 >> 32);
 
     const uint64_t length_64 = length;
-    return ::LockFileEx(handle_, static_cast<size_t>(mode), 0, length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
+    return ::LockFileEx(handle_, static_cast<file_underlying_type_t>(mode), 0,
+        length_64 & 0xFFFFFFFF, length_64 >> 32, &ov)
+    != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
     if ((mode & FILE_LOCK::EXCLUSIVE) != FILE_LOCK::SHARED) {
@@ -652,9 +584,7 @@ bool file::lock(const difference_type offset,
 }
 
 bool file::unlock(const difference_type offset, const difference_type length) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::OVERLAPPED ov = {};
     const uint64_t offset_64 = offset;
@@ -674,32 +604,28 @@ bool file::unlock(const difference_type offset, const difference_type length) co
 }
 
 FILE_ATTRI file::attributes() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return FILE_ATTRI::OTHERS;
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return FILE_ATTRI::OTHERS;
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::BY_HANDLE_FILE_INFORMATION info;
-    if (!::GetFileInformationByHandle(handle_, &info))
-        return FILE_ATTRI::OTHERS;
+    if (!::GetFileInformationByHandle(handle_, &info)) return FILE_ATTRI::OTHERS;
     return static_cast<FILE_ATTRI>(info.dwFileAttributes);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::fstat(handle_, &st) == -1)
-        return FILE_ATTRI::OTHERS;
+    struct ::stat64 st{};
+    if (::fstat64(handle_, &st) == -1) return FILE_ATTRI::OTHERS;
     return static_cast<FILE_ATTRI>(st.st_mode);
 #endif
 }
 
 bool file::set_attributes(FILE_ATTRI attr) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetFileAttributesA(path_.c_str(), static_cast<size_t>(attr)) != 0;
+    return ::SetFileAttributesA(path_.c_str(),
+        static_cast<file_underlying_type_t>(attr))
+    != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st_old{};
-    if (::fstat(handle_, &st_old) == -1) {
-        return false;
-    }
+    struct ::stat64 st_old{};
+    if (::fstat64(handle_, &st_old) == -1) return false;
+
     const ::mode_t current_mode = st_old.st_mode;
     constexpr ::mode_t perm_mask = S_IRWXU | S_IRWXG | S_IRWXO;
     const ::mode_t new_perm = static_cast<::mode_t>(attr) & perm_mask;
@@ -710,30 +636,26 @@ bool file::set_attributes(FILE_ATTRI attr) const noexcept {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 datetime file::creation_time() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return datetime::epoch();
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
     time_type ft_create, ft_access, ft_write;
-    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write)) {
+
+    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write))
         return datetime::epoch();
-    }
     return filetime_to_datetime(ft_create);
 }
 #endif
 
 datetime file::last_access_time() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return datetime::epoch();
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
 #ifdef MSTL_PLATFORM_WINDOWS__
     time_type ft_create, ft_access, ft_write;
-    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write)) {
+
+    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write))
         return datetime::epoch();
-    }
     return filetime_to_datetime(ft_access);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::fstat(handle_, &st) == -1) {
+    struct ::stat64 st{};
+    if (::fstat64(handle_, &st) == -1) {
         const ::time_t now = ::time(nullptr);
         return filetime_to_datetime(now);
     }
@@ -742,18 +664,16 @@ datetime file::last_access_time() const noexcept {
 }
 
 datetime file::last_write_time() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return datetime::epoch();
-
+    if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
 #ifdef MSTL_PLATFORM_WINDOWS__
     time_type ft_create, ft_access, ft_write;
-    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write)) {
+
+    if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write))
         return datetime::epoch();
-    }
     return filetime_to_datetime(ft_write);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::fstat(handle_, &st) == -1) {
+    struct ::stat64 st{};
+    if (::fstat64(handle_, &st) == -1) {
         const ::time_t now = ::time(nullptr);
         return filetime_to_datetime(now);
     }
@@ -764,8 +684,7 @@ datetime file::last_write_time() const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
 bool file::set_all_times(const datetime& create,
     const datetime& access, const datetime& write) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
     const time_type ft_create = datetime_to_filetime(create);
     const time_type ft_access = datetime_to_filetime(access);
@@ -774,8 +693,7 @@ bool file::set_all_times(const datetime& create,
 }
 #elif defined(MSTL_PLATFORM_LINUX__)
 bool file::set_all_times(const datetime& access, const datetime& write) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE())
-        return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
     ::timeval times[2];
     times[0].tv_sec = timestamp(access).seconds();
@@ -790,9 +708,8 @@ bool file::set_all_times(const datetime& access, const datetime& write) const no
 bool file::set_creation_time(const datetime& dt) const noexcept {
     const time_type ft_create = datetime_to_filetime(dt);
     time_type ft_access, ft_write;
-    if (!::GetFileTime(handle_, nullptr, &ft_access, &ft_write)) {
-        return false;
-    }
+
+    if (!::GetFileTime(handle_, nullptr, &ft_access, &ft_write)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 }
 #endif
@@ -801,9 +718,8 @@ bool file::set_last_access_time(const datetime& dt) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const time_type ft_access = datetime_to_filetime(dt);
     time_type ft_create, ft_write;
-    if (!::GetFileTime(handle_, &ft_create, nullptr, &ft_write)) {
-        return false;
-    }
+
+    if (!::GetFileTime(handle_, &ft_create, nullptr, &ft_write)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     return set_all_times(dt, last_write_time());
@@ -814,92 +730,70 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const time_type ft_write = datetime_to_filetime(dt);
     time_type ft_create, ft_access;
-    if (!::GetFileTime(handle_, &ft_create, &ft_access, nullptr)) {
-        return false;
-    }
+
+    if (!::GetFileTime(handle_, &ft_create, &ft_access, nullptr)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     return set_all_times(last_access_time(), datetime::to_utc(dt));
 #endif
 }
 
-string_view file::path() const noexcept { return path_.view(); }
-bool file::opened() const noexcept { return opened_; }
-bool file::is_append() const noexcept { return append_mode_; }
-
-bool file::exists() const noexcept {
-    return file::exists(path_);
-}
-
-bool file::exists(const string& path) noexcept {
+bool file::exists(const string_view path) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::GetFileAttributesA(path.c_str()) != INVALID_FILE_ATTRIBUTES;
+    return ::GetFileAttributesA(path.data()) != INVALID_FILE_ATTRIBUTES;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    return ::stat(path.c_str(), &st) == 0;
+    struct ::stat64 st{};
+    return ::stat64(path.data(), &st) != -1;
 #endif
 }
 
-bool file::is_directory() const noexcept {
-    return file::is_directory(path_);
-}
-
-bool file::is_directory(const string& path) noexcept {
+bool file::is_directory(const string_view path) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const size_type attrib = ::GetFileAttributesA(path.c_str());
+    const size_type attrib = ::GetFileAttributesA(path.data());
     return attrib != INVALID_FILE_ATTRIBUTES && attrib & FILE_ATTRIBUTE_DIRECTORY;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::stat(path.c_str(), &st) == -1) return false;
+    struct ::stat64 st{};
+    if (::stat64(path.data(), &st) == -1) return false;
     return S_ISDIR(st.st_mode);
 #endif
 }
 
-bool file::is_file() const noexcept {
-    return file::is_file(path_);
-}
-
-bool file::is_file(const string& path) noexcept {
+bool file::is_file(const string_view path) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const size_type attrib = ::GetFileAttributesA(path.c_str());
+    const size_type attrib = ::GetFileAttributesA(path.data());
     return attrib != INVALID_FILE_ATTRIBUTES && !(attrib & FILE_ATTRIBUTE_DIRECTORY);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::stat st{};
-    if (::stat(path.c_str(), &st) == -1) return false;
+    struct ::stat64 st{};
+    if (::stat64(path.data(), &st) == -1) return false;
     return S_ISREG(st.st_mode) || S_ISLNK(st.st_mode);
 #endif
-}
-
-bool file::create_directories() const {
-    return file::create_directories(path_);
 }
 
 bool file::create_directories(const string& path) {
     if (path.empty()) return false;
     if (file::is_directory(path)) return true;
     size_t pos = 0;
-#ifdef MSTL_PLATFORM_WINDOWS__
     string subdir;
-    while ((pos = path.find_first_of("/\\", pos + 1)) != string::npos) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    while ((pos = path.find_first_of(FILE_SPLITER, pos + 1)) != string::npos) {
         subdir = path.substr(0, pos);
         if (!subdir.empty() && !file::is_directory(subdir)) {
-            if (!::CreateDirectoryA(subdir.c_str(), nullptr)) {
+            if (!::CreateDirectoryA(subdir.data(), nullptr)) {
                 if (::GetLastError() != ERROR_ALREADY_EXISTS) {
                     return false;
                 }
             }
         }
     }
-    return ::CreateDirectoryA(path.c_str(), nullptr) || ::GetLastError() == ERROR_ALREADY_EXISTS;
+    return ::CreateDirectoryA(path.data(), nullptr) || ::GetLastError() == ERROR_ALREADY_EXISTS;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    string dir;
     while ((pos = path.find_first_of(FILE_SPLITER, pos + 1)) != string::npos) {
-        dir = path.substr(0, pos);
-        if (::mkdir(dir.c_str(), 0755) == -1 && errno != EEXIST) {
+        subdir = path.substr(0, pos);
+        if (::mkdir(subdir.data(), 0755) == -1 && errno != EEXIST) {
             return false;
         }
     }
-    return ::mkdir(path.c_str(), 0755) == 0 || errno == EEXIST;
+    return ::mkdir(path.data(), 0755) == 0 || errno == EEXIST;
 #endif
 }
 
@@ -915,10 +809,10 @@ bool file::create_and_write(const string& path, const string& content, const boo
     }
 #ifdef MSTL_PLATFORM_WINDOWS__
     file file;
-    if (!file.open(path,
+    if (!file.open(path, append,
         append ? FILE_ACCESS::APPEND : FILE_ACCESS::WRITE,
         FILE_SHARED::NO_SHARE, FILE_CREATION::OPEN_FORCE,
-        FILE_ATTRI::NORMAL, append)) {
+        FILE_ATTRI::NORMAL)) {
         return false;
         }
     const size_type bytes_written = file.write(content.c_str(), content.size());
@@ -937,31 +831,23 @@ bool file::create_and_write(const string& path, const string& content, const boo
 #endif
 }
 
-bool file::remove() const noexcept {
-    return file::remove(path_);
-}
-
-bool file::remove(const string& path) noexcept {
+bool file::remove(const string_view path) noexcept {
     if (file::is_file(path)) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-        return ::DeleteFileA(path.c_str()) != 0;
+        return ::DeleteFileA(path.data()) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-        return ::unlink(path.c_str()) == 0;
+        return ::unlink(path.data()) == 0;
 #endif
     }
     return false;
 }
 
-bool file::remove_directory() const noexcept {
-    return file::remove_directory(path_);
-}
-
-bool file::remove_directory(const string& path) noexcept {
+bool file::remove_directory(const string_view path) noexcept {
     if (file::is_directory(path)) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-        return ::RemoveDirectoryA(path.c_str()) != 0;
+        return ::RemoveDirectoryA(path.data()) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-        return ::rmdir(path.c_str()) == 0;
+        return ::rmdir(path.data()) == 0;
 #endif
     }
     return false;
@@ -972,7 +858,7 @@ bool file::read(
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     file file;
-    if (!file.open(path,
+    if (!file.open(path, false,
         FILE_ACCESS::READ, FILE_SHARED::SHARE_READ,
         creation, attributes)) {
         return false;
@@ -989,8 +875,8 @@ bool file::read(
     const int fd = ::open(path.c_str(), O_RDONLY);
     if (fd == -1) return false;
 
-    struct ::stat st{};
-    if (::fstat(fd, &st) == -1) {
+    struct ::stat64 st{};
+    if (::fstat64(fd, &st) == -1) {
         ::close(fd);
         return false;
     }
@@ -1011,7 +897,7 @@ string file::read(const string& path,
 bool file::read_binary(const string& path, string& content,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
     file f;
-    if (!f.open(path,
+    if (!f.open(path, false,
         FILE_ACCESS::READ,
         FILE_SHARED::SHARE_READ,
         creation, attributes)) {
@@ -1022,9 +908,7 @@ bool file::read_binary(const string& path, string& content,
     content.resize(sz);
     if (sz > 0) {
         const size_type bytes_read = f.read_binary(content, sz);
-        if (bytes_read != sz) {
-            content.resize(bytes_read);
-        }
+        if (bytes_read != sz) content.resize(bytes_read);
     }
     return true;
 }
@@ -1054,22 +938,19 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
     }
 
     if (overwrite && file::exists(actual_to)) {
-        const DWORD attrs = ::GetFileAttributesA(actual_to.c_str());
+        const ::DWORD attrs = ::GetFileAttributesA(actual_to.c_str());
         if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY)) {
             ::SetFileAttributesA(actual_to.c_str(), attrs & ~FILE_ATTRIBUTE_READONLY);
         }
     }
-
-    if (::CopyFileA(from.c_str(), actual_to.c_str(), !overwrite)) {
-        return true;
-    }
-    const DWORD error = ::GetLastError();
+    if (::CopyFileA(from.c_str(), actual_to.c_str(), !overwrite)) return true;
+    const ::DWORD error = ::GetLastError();
     return false;
 #elif defined(MSTL_PLATFORM_LINUX__)
     const int source_fd = ::open(from.c_str(), O_RDONLY);
     if (source_fd == -1) return false;
-    struct ::stat st;
-    if (::fstat(source_fd, &st) == -1) {
+    struct ::stat64 st;
+    if (::fstat64(source_fd, &st) == -1) {
         ::close(source_fd);
         return false;
     }
@@ -1086,11 +967,11 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
         return false;
     }
 
-    char buffer[BUFFER_SIZE];
+    char buffer[FILE_BUFFER_SIZE];
     ssize_t bytes_read;
     bool success = true;
 
-    while ((bytes_read = ::read(source_fd, buffer, BUFFER_SIZE)) > 0) {
+    while ((bytes_read = ::read(source_fd, buffer, FILE_BUFFER_SIZE)) > 0) {
         const ssize_t bytes_written = ::write(dest_fd, buffer, bytes_read);
         if (bytes_written != bytes_read) {
             success = false;
@@ -1111,11 +992,7 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
 
     ::close(source_fd);
     ::close(dest_fd);
-
-    if (!success) {
-        ::unlink(to.c_str());
-    }
-
+    if (!success) ::unlink(to.c_str());
     return success;
 #endif
 }
@@ -1166,16 +1043,15 @@ bool file::copy_directory(const string& source, const string& destination, bool 
         string item = entry->d_name;
         if (item == "." || item == "..") continue;
 
-        string srcPath = source + "/" + item;
-        string dstPath = destination + "/" + item;
-
-        if (file::is_directory(srcPath)) {
-            if (!file::copy_directory(srcPath, dstPath, overwrite)) {
+        string src_path = source + "/" + item;
+        string dst_path = destination + "/" + item;
+        if (file::is_directory(src_path)) {
+            if (!file::copy_directory(src_path, dst_path, overwrite)) {
                 ::closedir(dir);
                 return false;
             }
         } else {
-            if (!file::copy(srcPath, dstPath, overwrite)) {
+            if (!file::copy(src_path, dst_path, overwrite)) {
                 ::closedir(dir);
                 return false;
             }
@@ -1190,18 +1066,12 @@ bool file::copy_directory(const string& source, const string& destination, bool 
 bool file::move(const string& from, const string& to, const bool overwrite) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD flags = MOVEFILE_COPY_ALLOWED;
-    if (overwrite) {
-        flags |= MOVEFILE_REPLACE_EXISTING;
-    }
-    if (::MoveFileExA(from.c_str(), to.c_str(), flags)) {
-        return true;
-    }
+    if (overwrite) flags |= MOVEFILE_REPLACE_EXISTING;
+    if (::MoveFileExA(from.c_str(), to.c_str(), flags)) return true;
 
     ::DWORD error = ::GetLastError();
     if (file::copy(from, to, overwrite)) {
-        if (file::remove(from)) {
-            return true;
-        }
+        if (file::remove(from)) return true;
         return false;
     }
     return false;
@@ -1214,10 +1084,6 @@ bool file::move(const string& from, const string& to, const bool overwrite) noex
     }
     return ::rename(from.c_str(), to.c_str()) == 0;
 #endif
-}
-
-bool file::rename(const string& old_name, const string& new_name) {
-    return file::move(old_name, new_name, true);
 }
 
 MSTL_END_NAMESPACE__
