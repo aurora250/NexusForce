@@ -2,9 +2,7 @@
 #define MSTL_DEVICE_HPP__
 #include "environment.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include "vector.hpp"
-#include "unordered_map.hpp"
-#include "vsprintf.hpp"
+#include <Windows.h>
 #include <SetupAPI.h>
 #include <devguid.h>
 #include <Dbt.h>
@@ -12,6 +10,8 @@
 #pragma comment(lib, "SetupAPI.lib")
 #include <cfgmgr32.h>
 #pragma comment(lib, "cfgmgr32.lib")
+#include "vector.hpp"
+#include "unordered_map.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class DEVICE_CLASS {
