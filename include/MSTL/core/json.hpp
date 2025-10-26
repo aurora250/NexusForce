@@ -33,19 +33,19 @@ public:
     virtual ~json_value() = default;
     virtual types type() const noexcept = 0;
 
-    virtual const json_null* as_null() const noexcept;
-    virtual const json_bool* as_bool() const noexcept;
-    virtual const json_number* as_number() const noexcept;
-    virtual const json_string* as_string() const noexcept;
-    virtual const json_object* as_object() const noexcept;
-    virtual const json_array* as_array() const noexcept;
+    virtual const json_null* as_null() const noexcept { return nullptr; }
+    virtual const json_bool* as_bool() const noexcept { return nullptr; }
+    virtual const json_number* as_number() const noexcept { return nullptr; }
+    virtual const json_string* as_string() const noexcept { return nullptr; }
+    virtual const json_object* as_object() const noexcept { return nullptr; }
+    virtual const json_array* as_array() const noexcept { return nullptr; }
 
-    MSTL_NODISCARD bool is_null() const noexcept;
-    MSTL_NODISCARD bool is_bool() const noexcept;
-    MSTL_NODISCARD bool is_number() const noexcept;
-    MSTL_NODISCARD bool is_string() const noexcept;
-    MSTL_NODISCARD bool is_object() const noexcept;
-    MSTL_NODISCARD bool is_array() const noexcept;
+    MSTL_NODISCARD bool is_null() const noexcept { return type() == Null; }
+    MSTL_NODISCARD bool is_bool() const noexcept { return type() == Bool; }
+    MSTL_NODISCARD bool is_number() const noexcept { return type() == Number; }
+    MSTL_NODISCARD bool is_string() const noexcept { return type() == String; }
+    MSTL_NODISCARD bool is_object() const noexcept { return type() == Object; }
+    MSTL_NODISCARD bool is_array() const noexcept { return type() == Array; }
 
     MSTL_NODISCARD string to_string() const;
     MSTL_NODISCARD string to_indent_string() const;
@@ -54,8 +54,8 @@ public:
 
 class MSTL_API json_null final : public json_value {
 public:
-    types type() const noexcept override;
-    const json_null* as_null() const noexcept override;
+    types type() const noexcept override { return Null; }
+    const json_null* as_null() const noexcept override { return this; }
 };
 
 class MSTL_API json_bool final : public json_value {
@@ -63,10 +63,10 @@ private:
     bool value;
 
 public:
-    explicit json_bool(bool v) noexcept;
-    types type() const noexcept override;
-    const json_bool* as_bool() const noexcept override;
-    bool get_value() const noexcept;
+    explicit json_bool(bool v) noexcept : value(v) {}
+    types type() const noexcept override { return Bool; }
+    const json_bool* as_bool() const noexcept override { return this; }
+    bool get_value() const noexcept { return value; }
 };
 
 class MSTL_API json_number final : public json_value {
@@ -74,10 +74,10 @@ private:
     double value;
 
 public:
-    explicit json_number(double v) noexcept;
-    types type() const noexcept override;
-    const json_number* as_number() const noexcept override;
-    double get_value() const noexcept;
+    explicit json_number(double v) noexcept : value(v) {}
+    types type() const noexcept override { return Number; }
+    const json_number* as_number() const noexcept override { return this; }
+    double get_value() const noexcept { return value; }
 };
 
 class MSTL_API json_string final : public json_value {
@@ -85,10 +85,10 @@ private:
     string value;
 
 public:
-    explicit json_string(string v) noexcept;
-    types type() const noexcept override;
-    const json_string* as_string() const noexcept override;
-    const string& get_value() const noexcept;
+    explicit json_string(string v) noexcept : value(_MSTL move(v)) {}
+    types type() const noexcept override { return String; }
+    const json_string* as_string() const noexcept override { return this; }
+    const string& get_value() const noexcept { return value; }
 };
 
 class MSTL_API json_object final : public json_value {
@@ -102,13 +102,24 @@ public:
     json_object(json_object&&) = default;
     json_object& operator=(json_object&&) = default;
 
-    types type() const noexcept override;
-    const json_object* as_object() const noexcept override;
 
-    void add_member(const string& key, unique_ptr<json_value> value);
-    const json_value* get_member(const string& key) const;
+    types type() const noexcept override { return Object; }
+    const json_object* as_object() const noexcept override { return this; }
 
-    const unordered_map<string, unique_ptr<json_value>>& get_members() const noexcept;
+
+    void add_member(const string& key, unique_ptr<json_value> value) {
+        members[key] = _MSTL move(value);
+    }
+
+    const json_value* get_member(const string& key) const {
+        const auto it = members.find(key);
+        if (it != members.end()) return it->second.get();
+        return nullptr;
+    }
+
+    const unordered_map<string, unique_ptr<json_value>>& get_members() const noexcept {
+        return members;
+    }
 };
 
 class MSTL_API json_array final : public json_value {
@@ -122,27 +133,44 @@ public:
     json_array(json_array&&) = default;
     json_array& operator=(json_array&&) = default;
 
-    types type() const noexcept override;
-    const json_array* as_array() const noexcept override;
+    types type() const noexcept override { return Array; }
+    const json_array* as_array() const noexcept override { return this; }
 
-    void add_element(unique_ptr<json_value> value);
-    const json_value* get_element(size_t index) const noexcept;
 
-    size_t size() const noexcept;
+    void add_element(unique_ptr<json_value> value) {
+        elements.emplace_back(_MSTL move(value));
+    }
 
-    const vector<unique_ptr<json_value>>& get_elements() const noexcept;
+    const json_value* get_element(size_t index) const noexcept  {
+        if (index < elements.size()) return elements[index].get();
+        return nullptr;
+    }
+
+
+    size_t size() const noexcept { return elements.size(); }
+    const vector<unique_ptr<json_value>>& get_elements() const noexcept { return elements; }
 };
 
 
 class MSTL_API json_parser {
 private:
     string json;
-    size_t pos;
     size_t length;
+    size_t pos = 0;
 
-    void skip_space() noexcept;
-    char current() const noexcept;
-    bool eof() const noexcept;
+    void skip_space() noexcept {
+        while (pos < length && _MSTL is_space(json[pos])) {
+            pos++;
+        }
+    }
+
+    char current() const noexcept {
+        if (pos < length) return json[pos];
+        return '\0';
+    }
+
+    bool eof() const noexcept { return pos >= length; }
+
 
     unique_ptr<json_string> parse_string();
     unique_ptr<json_number> parse_number();
@@ -152,7 +180,8 @@ private:
     unique_ptr<json_value> parse_value();
 
 public:
-    explicit json_parser(string json_str) noexcept;
+    explicit json_parser(string json_str) noexcept
+    : json(_MSTL move(json_str)), length(json.size()) {}
 
     unique_ptr<json_value> parse();
     optional<unique_ptr<json_value>> try_parse();
@@ -171,8 +200,8 @@ private:
         };
 
         frame() = default;
-        frame(RANGE_TYPE t, json_object* obj);
-        frame(RANGE_TYPE t, json_array* arr);
+        frame(const RANGE_TYPE t, json_object* obj) : type(t), object_ptr(obj) {}
+        frame(const RANGE_TYPE t, json_array* arr) : type(t), array_ptr(arr) {}
 
         frame(const frame&) = default;
         frame& operator =(const frame&) = default;
@@ -248,14 +277,14 @@ public:
 
     json_builder& key(const string& k);
 
-    json_builder& value(nullptr_t);
-    json_builder& value(const string& v);
-    json_builder& value(const char* v);
-    json_builder& value(const string_view& v);
-    json_builder& value(double v);
-    json_builder& value(int v);
-    json_builder& value(bool v);
-    json_builder& value(unique_ptr<json_value>&& v);
+    json_builder& value(nullptr_t) { return value_impl(make_unique<json_null>()); }
+    json_builder& value(const string& v) { return value_impl(make_unique<json_string>(v)); }
+    json_builder& value(const char* v) { return value(string(v)); }
+    json_builder& value(const string_view& v) { return value(string(v)); }
+    json_builder& value(const double v) { return value_impl(make_unique<json_number>(v)); }
+    json_builder& value(const int v) { return value_impl(make_unique<json_number>(static_cast<double>(v))); }
+    json_builder& value(const bool v) { return value_impl(make_unique<json_bool>(v)); }
+    json_builder& value(unique_ptr<json_value>&& v) { return value_impl(_MSTL move(v)); }
 
     template <typename Iterable>
     json_builder& value(const Iterable& t) {

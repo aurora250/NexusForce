@@ -7,36 +7,32 @@ MSTL_BEGIN_NAMESPACE__
 using string = basic_string<char>;
 using bstring = basic_string<byte_t>;
 using wstring = basic_string<wchar_t>;
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 using u8string = basic_string<char8_t>;
 #endif
 using u16string = basic_string<char16_t>;
 using u32string = basic_string<char32_t>;
 
 
-#ifdef MSTL_VERSION_17__
 MSTL_BEGIN_LITERALS__
-
 MSTL_NODISCARD MSTL_CONSTEXPR20 string operator ""_s(const char* str, size_t len) noexcept {
     return {str, len};
 }
 MSTL_NODISCARD MSTL_CONSTEXPR20 wstring operator ""_s(const wchar_t* str, size_t len) noexcept {
     return {str, len};
 }
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 MSTL_NODISCARD MSTL_CONSTEXPR20 u8string operator ""_s(const char8_t* str, size_t len) noexcept {
     return {str, len};
 }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 MSTL_NODISCARD MSTL_CONSTEXPR20 u16string operator ""_s(const char16_t* str, size_t len) noexcept {
     return {str, len};
 }
 MSTL_NODISCARD MSTL_CONSTEXPR20 u32string operator ""_s(const char32_t* str, size_t len) noexcept {
     return {str, len};
 }
-
 MSTL_END_LITERALS__
-#endif // MSTL_VERSION_17__
 
 
 MSTL_CONSTEXPR20 string escape(const string_view str) {
@@ -179,7 +175,7 @@ template <>
 MSTL_CONSTEXPR20 void __append_utf8_char_aux<string>(string& result) {
     result.append("\xEF\xBF\xBD", 3);
 }
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <>
 MSTL_CONSTEXPR20 void __append_utf8_char_aux<u8string>(u8string& result) {
     result.append(u8"\xEF\xBF\xBD", 3);
@@ -423,7 +419,7 @@ public:
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         return child_type::to_wstring(obj);
     }
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         return child_type::to_u8string(obj);
     }
@@ -529,7 +525,7 @@ MSTL_CONSTEXPR20 wstring to_wstring<wchar_t>(wstring&& x) {
     return _MSTL move(x);
 }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
 MSTL_CONSTEXPR20 u8string to_u8string(const CharT& x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(basic_string<CharT>(1, x).view());
@@ -698,7 +694,7 @@ public:
         return result;
     }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -856,7 +852,7 @@ public:
         return wstring{obj};
     }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -936,7 +932,7 @@ struct unpackage_base<wcharacter> {
 };
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 
 struct u8character : icharacter<u8character, char8_t> {
     using value_type = char8_t;
@@ -1208,7 +1204,7 @@ public:
         return result;
     }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -1359,7 +1355,7 @@ public:
         return result;
     }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -1519,7 +1515,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string_view x) {
 }
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 
 MSTL_BEGIN_INNER__
 template <typename T>

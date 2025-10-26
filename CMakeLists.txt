@@ -1,7 +1,18 @@
 cmake_minimum_required(VERSION 3.17)
 project(MSTL LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+if(NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_CONFIGURATION_TYPES
+            "Debug;Release;RelWithDebInfo;MinSizeRel")
+    set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
+            "Configurations for MSTL" FORCE)
+endif()
+
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+endif()
+
+set(CMAKE_CXX_STANDARD 17)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
@@ -15,8 +26,10 @@ endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(MSTL_ARCH "x64")
-else()
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(MSTL_ARCH "x86")
+else()
+    message(FATAL_ERROR "MSTL can only be compiled in X64 or X86 system")
 endif()
 message(STATUS "Current Architecture: ${MSTL_ARCH}")
 message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
@@ -25,8 +38,8 @@ message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 option(MSTL_ENABLE_BOOST "Enable Boost library support" ON)
 option(MSTL_ENABLE_MYSQL "Enable MySQL database support" ON)
 option(MSTL_ENABLE_SQLITE3 "Enable SQLite3 database support" ON)
-option(MSTL_ENABLE_REDIS "Enable Redis database support" ON)
-option(MSTL_ENABLE_QT6 "Enable Qt6 toolchain support" ON)
+option(MSTL_ENABLE_REDIS "Enable Redis database support" OFF)
+option(MSTL_ENABLE_QT6 "Enable Qt6 toolchain support" OFF)
 option(MSTL_ENABLE_CUDA "Enable CUDA GPU acceleration" OFF)
 option(MSTL_BUILD_TESTS "Build unit tests (requires GTest)" ON)
 option(MSTL_BUILD_EXAMPLES "Build example programs" ON)

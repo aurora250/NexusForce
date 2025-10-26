@@ -15,11 +15,11 @@ private:
     using const_iterator	= string_view_iterator<Traits>;
 
 public:
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
 #else
     using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     using value_type		= typename container_type::value_type;
     using reference			= typename container_type::const_reference;
     using pointer			= typename container_type::const_pointer;

@@ -14,10 +14,6 @@ bstring XOR::encrypt(const bstring_view data, const bstring_view key) {
     return result;
 }
 
-bstring XOR::decrypt(const bstring_view data, const bstring_view key) {
-    return encrypt(data, key);
-}
-
 
 string base64::encode(const bstring_view data) {
     string result;
@@ -66,26 +62,6 @@ bstring base64::decode(const string_view data) {
     return result;
 }
 
-
-uint32_t MD5::rotleft(const uint32_t x, const uint32_t c) {
-    return (x << c) | (x >> (32 - c));
-}
-
-uint32_t MD5::F(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return (x & y) | (~x & z);
-}
-
-uint32_t MD5::G(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return (x & z) | (y & ~z);
-}
-
-uint32_t MD5::H(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return x ^ y ^ z;
-}
-
-uint32_t MD5::I(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return y ^ (x | ~z);
-}
 
 bstring MD5::hash(const bstring_view data) {
     bstring byte_data{data};
@@ -166,10 +142,6 @@ string MD5::hash_hex(const bstring_view data) {
 constexpr uint32_t MD5::S[64];
 constexpr uint32_t MD5::K[64];
 
-
-uint32_t SHA1::rotleft(const uint32_t x, const uint32_t c) {
-    return (x << c) | (x >> (32 - c));
-}
 
 bstring SHA1::hash(const bstring_view data) {
     bstring byte_data{data};
@@ -259,34 +231,6 @@ string SHA1::hash_hex(const bstring_view data) {
     return hex_result;
 }
 
-
-uint32_t SHA256::rotr(const uint32_t x, const uint32_t n) {
-    return (x >> n) | (x << (32 - n));
-}
-
-uint32_t SHA256::ch(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return (x & y) ^ (~x & z);
-}
-
-uint32_t SHA256::maj(const uint32_t x, const uint32_t y, const uint32_t z) {
-    return (x & y) ^ (x & z) ^ (y & z);
-}
-
-uint32_t SHA256::sig0(const uint32_t x) {
-    return rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22);
-}
-
-uint32_t SHA256::sig1(const uint32_t x) {
-    return rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25);
-}
-
-uint32_t SHA256::gamma0(const uint32_t x) {
-    return rotr(x, 7) ^ rotr(x, 18) ^ (x >> 3);
-}
-
-uint32_t SHA256::gamma1(const uint32_t x) {
-    return rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10);
-}
 
 bstring SHA256::hash(const bstring_view data) {
     bstring byte_data{data};
@@ -404,18 +348,6 @@ void AES256::key_expansion(const byte_t* key, byte_t* expanded_key) {
     }
 }
 
-void AES256::sub_bytes(byte_t state[16]) {
-    for (int i = 0; i < 16; ++i) {
-        state[i] = sbox[state[i]];
-    }
-}
-
-void AES256::inv_sub_bytes(byte_t state[16]) {
-    for (int i = 0; i < 16; ++i) {
-        state[i] = inv_sbox[state[i]];
-    }
-}
-
 void AES256::shift_rows(byte_t state[16]) {
     byte_t temp = state[1];
     state[1] = state[5];
@@ -483,12 +415,6 @@ void AES256::inv_mix_columns(byte_t state[16]) {
         state[c * 4 + 1] = gf_mult(0x09, s0) ^ gf_mult(0x0e, s1) ^ gf_mult(0x0b, s2) ^ gf_mult(0x0d, s3);
         state[c * 4 + 2] = gf_mult(0x0d, s0) ^ gf_mult(0x09, s1) ^ gf_mult(0x0e, s2) ^ gf_mult(0x0b, s3);
         state[c * 4 + 3] = gf_mult(0x0b, s0) ^ gf_mult(0x0d, s1) ^ gf_mult(0x09, s2) ^ gf_mult(0x0e, s3);
-    }
-}
-
-void AES256::add_round_key(byte_t state[16], const byte_t* round_key) {
-    for (int i = 0; i < 16; ++i) {
-        state[i] ^= round_key[i];
     }
 }
 

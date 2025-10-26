@@ -2,8 +2,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 any::any(const any& x) {
-    if (!x.has_value())
-        manage_ = nullptr;
+    if (!x.has_value()) manage_ = nullptr;
     else {
         ArgT arg{};
         arg.any_ptr_ = this;
@@ -11,14 +10,8 @@ any::any(const any& x) {
     }
 }
 
-any& any::operator =(const any& rh) {
-    *this = any(rh);
-    return *this;
-}
-
 any::any(any&& x) noexcept {
-    if (!x.has_value())
-        manage_ = nullptr;
+    if (!x.has_value()) manage_ = nullptr;
     else {
         ArgT arg{};
         arg.any_ptr_ = this;
@@ -27,8 +20,7 @@ any::any(any&& x) noexcept {
 }
 
 any& any::operator =(any&& rh) noexcept {
-    if (!rh.has_value())
-        reset();
+    if (!rh.has_value()) reset();
     else if (this != &rh) {
         reset();
         ArgT arg{};
@@ -38,22 +30,8 @@ any& any::operator =(any&& rh) noexcept {
     return *this;
 }
 
-any::~any() {
-    reset();
-}
-
-void any::reset() noexcept {
-    if (has_value()) {
-        manage_(DESTROY, this, nullptr);
-        manage_ = nullptr;
-    }
-}
-
-MSTL_NODISCARD bool any::has_value() const noexcept { return manage_ != nullptr; }
-
 MSTL_NODISCARD const std::type_info& any::type() const noexcept {
-    if (!has_value())
-        return typeid(void);
+    if (!has_value()) return typeid(void);
     ArgT arg{};
     manage_(GET_TYPE_INFO, this, &arg);
     return *arg.type_ptr_;

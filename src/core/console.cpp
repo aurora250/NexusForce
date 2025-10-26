@@ -7,10 +7,6 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-void sys_console::write_string_unsafe(const char* str) const {
-    this->write_string_unsafe(string_view{str});
-}
-
 void sys_console::write_string_unsafe(const string_view str) const {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD written;
@@ -26,10 +22,6 @@ void sys_console::write_string_unsafe(const string_view str) const {
         total += written;
     }
 #endif
-}
-
-void sys_console::write_string_unsafe(const string& str) const {
-    this->write_string_unsafe(str.view());
 }
 
 string sys_console::readln_string_unsafe() const {
@@ -117,45 +109,6 @@ void sys_console::init_console() {
     //     Exception(DeviceOperateError("Not a terminal device"));
     // }
 #endif
-}
-
-sys_console::sys_console() {
-    this->init_console();
-}
-
-sys_console::sys_console(const color& color, const bool use_256_color) {
-    this->init_console();
-    this->set_color(color, use_256_color);
-}
-
-void sys_console::flush() {
-    lock_guard<mutex> lock(mutex_);
-    this->flush_unsafe();
-}
-
-void sys_console::write_string(const string& str) {
-    lock_guard<mutex> lock(mutex_);
-    this->write_string_unsafe(str.view());
-}
-
-void sys_console::write_string(const string_view& str) {
-    lock_guard<mutex> lock(mutex_);
-    this->write_string_unsafe(str);
-}
-
-void sys_console::write_string(const char* str) {
-    lock_guard<mutex> lock(mutex_);
-    this->write_string_unsafe(str);
-}
-
-string sys_console::readln_string() {
-    lock_guard<mutex> lock(mutex_);
-    return this->readln_string_unsafe();
-}
-
-char sys_console::read_char() {
-    lock_guard<mutex> lock(mutex_);
-    return this->read_char_unsafe();
 }
 
 void sys_console::clear() {

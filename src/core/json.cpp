@@ -2,103 +2,6 @@
 #include <MSTL/core/undef_cmacro.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-const json_null* json_value::as_null() const noexcept { return nullptr; }
-const json_bool* json_value::as_bool() const noexcept { return nullptr; }
-const json_number* json_value::as_number() const noexcept { return nullptr; }
-const json_string* json_value::as_string() const noexcept { return nullptr; }
-const json_object* json_value::as_object() const noexcept { return nullptr; }
-const json_array* json_value::as_array() const noexcept { return nullptr; }
-
-
-MSTL_NODISCARD bool json_value::is_null() const noexcept { return type() == Null; }
-MSTL_NODISCARD bool json_value::is_bool() const noexcept { return type() == Bool; }
-MSTL_NODISCARD bool json_value::is_number() const noexcept { return type() == Number; }
-MSTL_NODISCARD bool json_value::is_string() const noexcept { return type() == String; }
-MSTL_NODISCARD bool json_value::is_object() const noexcept { return type() == Object; }
-MSTL_NODISCARD bool json_value::is_array() const noexcept { return type() == Array; }
-
-
-json_null::types json_null::type() const noexcept { return Null; }
-const json_null* json_null::as_null() const noexcept { return this; }
-
-
-json_bool::json_bool(const bool v) noexcept : value(v) {}
-json_bool::types json_bool::type() const noexcept { return Bool; }
-const json_bool* json_bool::as_bool() const noexcept { return this; }
-bool json_bool::get_value() const noexcept { return value; }
-
-
-json_number::json_number(const double v) noexcept : value(v) {}
-json_number::types json_number::type() const noexcept { return Number; }
-const json_number* json_number::as_number() const noexcept { return this; }
-double json_number::get_value() const noexcept { return value; }
-
-
-json_string::json_string(string v) noexcept : value(_MSTL move(v)) {}
-json_string::types json_string::type() const noexcept { return String; }
-const json_string* json_string::as_string() const noexcept { return this; }
-const string& json_string::get_value() const noexcept { return value; }
-
-
-json_object::types json_object::type() const noexcept { return Object; }
-const json_object* json_object::as_object() const noexcept { return this; }
-
-void json_object::add_member(const string& key, unique_ptr<json_value> value) {
-    members[key] = _MSTL move(value);
-}
-
-const json_value* json_object::get_member(const string& key) const {
-    auto it = members.find(key);
-    if (it != members.end()) {
-        return it->second.get();
-    }
-    return nullptr;
-}
-
-const unordered_map<string, unique_ptr<json_value>>&
-json_object::get_members() const noexcept {
-    return members;
-}
-
-
-json_array::types json_array::type() const noexcept { return Array; }
-const json_array* json_array::as_array() const noexcept { return this; }
-
-void json_array::add_element(unique_ptr<json_value> value) {
-    elements.emplace_back(_MSTL move(value));
-}
-
-const json_value* json_array::get_element(const size_t index) const noexcept {
-    if (index < elements.size()) {
-        return elements[index].get();
-    }
-    return nullptr;
-}
-
-size_t json_array::size() const noexcept { return elements.size(); }
-
-const vector<unique_ptr<json_value>>& json_array::get_elements() const noexcept {
-    return elements;
-}
-
-
-void json_parser::skip_space() noexcept {
-    while (pos < length && _MSTL is_space(json[pos])) {
-        pos++;
-    }
-}
-
-char json_parser::current() const noexcept {
-    if (pos < length) {
-        return json[pos];
-    }
-    return '\0';
-}
-
-bool json_parser::eof() const noexcept {
-    return pos >= length;
-}
-
 unique_ptr<json_string> json_parser::parse_string() {
     pos++;
     string result;
@@ -302,8 +205,6 @@ unique_ptr<json_value> json_parser::parse_value() {
     return parse_object();
 }
 
-json_parser::json_parser(string json_str) noexcept
-    : json(_MSTL move(json_str)), pos(0), length(json.size()) {}
 
 unique_ptr<json_value> json_parser::parse() {
     auto value = parse_value();
@@ -324,9 +225,6 @@ optional<unique_ptr<json_value>> json_parser::try_parse() {
     return _MSTL move(value);
 }
 
-
-json_builder::frame::frame(const RANGE_TYPE t, json_object* obj) : type(t), object_ptr(obj) {}
-json_builder::frame::frame(const RANGE_TYPE t, json_array* arr) : type(t), array_ptr(arr) {}
 
 json_builder& json_builder::begin_object() {
     auto new_object = make_unique<json_object>();
@@ -408,31 +306,6 @@ json_builder& json_builder::key(const string& k) {
     }
     current_key = k;
     return *this;
-}
-
-json_builder& json_builder::value(nullptr_t) {
-    return value_impl(make_unique<json_null>());
-}
-json_builder& json_builder::value(const string& v) {
-    return value_impl(make_unique<json_string>(v));
-}
-json_builder& json_builder::value(const char* v) {
-    return value(string(v));
-}
-json_builder& json_builder::value(const string_view& v) {
-    return value(string(v));
-}
-json_builder& json_builder::value(const double v) {
-    return value_impl(make_unique<json_number>(v));
-}
-json_builder& json_builder::value(const int v) {
-    return value_impl(make_unique<json_number>(static_cast<double>(v)));
-}
-json_builder& json_builder::value(const bool v) {
-    return value_impl(make_unique<json_bool>(v));
-}
-json_builder& json_builder::value(unique_ptr<json_value>&& v) {
-    return value_impl(_MSTL move(v));
 }
 
 json_builder& json_builder::value_object(_MSTL function<void(json_builder&)>&& build_func) {

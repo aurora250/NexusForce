@@ -11,11 +11,11 @@ private:
     using const_iterator	= array_iterator<true, Size, container_type>;
 
 public:
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
 #else
     using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     using value_type		= typename container_type::value_type;
     using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
     using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;

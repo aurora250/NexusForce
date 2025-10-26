@@ -22,9 +22,9 @@ class MSTL_API sys_console {
     friend sys_console& get_console();
 
 private:
-    void write_string_unsafe(const char* str) const;
+    void write_string_unsafe(const string& str) const { write_string_unsafe(str.view()); }
     void write_string_unsafe(string_view str) const;
-    void write_string_unsafe(const string& str) const;
+    void write_string_unsafe(const char* str) const { write_string_unsafe(string_view{str}); }
 
     string readln_string_unsafe() const;
     char read_char_unsafe() const;
@@ -34,8 +34,12 @@ private:
     void init_console();
 
 private:
-    sys_console();
-    explicit sys_console(const color& color, bool use_256_color = true);
+    sys_console() { this->init_console(); }
+
+    explicit sys_console(const color& color, bool use_256_color = true)  {
+        this->init_console();
+        this->set_color(color, use_256_color);
+    }
 
 public:
     sys_console(const sys_console&) = delete;
@@ -45,14 +49,35 @@ public:
 
     ~sys_console() = default;
 
-    void flush();
+    void flush() {
+        lock_guard<mutex> lock(mutex_);
+        this->flush_unsafe();
+    }
 
-    void write_string(const string& str);
-    void write_string(const string_view& str);
-    void write_string(const char* str);
+    void write_string(const string& str) {
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe(str.view());
+    }
+    void write_string(const string_view& str) {
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe(str);
+    }
+    void write_string(const char* str) {
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe(str);
+    }
 
-    string readln_string();
-    char read_char();
+
+    string readln_string()  {
+        lock_guard<mutex> lock(mutex_);
+        return this->readln_string_unsafe();
+    }
+
+    char read_char() {
+        lock_guard<mutex> lock(mutex_);
+        return this->read_char_unsafe();
+    }
+
 
     template <typename T>
     void print(const T& value) {
@@ -294,7 +319,7 @@ inline sys_console& get_console() {
 static sys_console& console = get_console();
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 
 MSTL_BEGIN_INNER__
 MSTL_ALWAYS_INLINE inline void print_rests() {}

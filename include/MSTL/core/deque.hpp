@@ -249,7 +249,7 @@ void swap (
 // let BufSize = 0 to use default deque size, or manually set it as you wish.
 template <typename T, typename Alloc = allocator<T>, size_t BufSize = 0>
 class deque : public icollector<deque<T, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");

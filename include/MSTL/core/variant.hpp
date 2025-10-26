@@ -165,7 +165,7 @@ public:
         new (union_) variant_alternative_t<variant, Idx>(ilist, _MSTL forward<Args>(args)...);
     }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     template <typename... Args, enable_if_t<disjunction_v<is_constructible<Types, Args...>...>, int> = 0>
     variant(Args&&... args) {
         static auto construct = [&]<size_t... Idx>(_MSTL index_sequence<Idx...>) {

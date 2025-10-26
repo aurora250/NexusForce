@@ -1,13 +1,12 @@
 #ifndef TRY_H
 #define TRY_H
 #include <MSTL/mstlc++.hpp>
-USE_MSTL
+using namespace MSTL;
 
 void test_file();
 void test_datetimes();
 void test_print();
 void test_console();
-void test_numeric();
 void test_dev();
 void test_rnd();
 void test_format();

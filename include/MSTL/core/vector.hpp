@@ -13,7 +13,7 @@ private:
 
 public:
 	using iterator_category =
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 		contiguous_iterator_tag;
 #else
 		random_access_iterator_tag;
@@ -190,7 +190,7 @@ public:
 
 template <typename T, typename Alloc = allocator<T>>
 class vector : public icollector<vector<T, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
@@ -230,7 +230,28 @@ private:
 	template <typename Iterator>
 	MSTL_CONSTEXPR20 pointer allocate_and_copy(size_type n, Iterator first, Iterator last) {
 		pointer result = pair_.get_base().allocate(n);
-			_MSTL uninitialized_copy(first, last, result);
+		pointer finish = result;
+		try {
+			finish = _MSTL uninitialized_copy(first, last, result);
+		} catch (...) {
+			_MSTL destroy(result, finish);
+			pair_.get_base().deallocate(result, n);
+			throw;
+		}
+		return result;
+	}
+
+	template <typename Iterator>
+	MSTL_CONSTEXPR20 pointer allocate_and_move(size_type n, Iterator first, Iterator last) {
+		pointer result = pair_.get_base().allocate(n);
+		pointer finish = result;
+		try {
+			finish = _MSTL uninitialized_move(first, last, result);
+		} catch (...) {
+			_MSTL destroy(result, finish);
+			pair_.get_base().deallocate(result, n);
+			throw;
+		}
 		return result;
 	}
 
@@ -271,7 +292,7 @@ private:
 				_MSTL advance(mid, elems_after);
 				_MSTL uninitialized_copy(mid, last, finish_);
 				finish_ += (n - elems_after);
-				_MSTL uninitialized_copy(position, old_finish, finish_);
+				_MSTL uninitialized_move(position, old_finish, finish_);
 				finish_ += elems_after;
 				_MSTL copy(first, mid, position);
 			}
@@ -294,7 +315,6 @@ private:
 
 	template <typename Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
 	MSTL_CONSTEXPR20 void assign_aux(Iterator first, Iterator last) {
-		const size_t n = _MSTL distance(first, last);
 		pointer cur = start_;
 		for (; first != last && cur != finish_; ++first, ++cur)
 			*cur = *first;
@@ -332,7 +352,19 @@ public:
 	}
 
 	MSTL_CONSTEXPR20 explicit vector(const size_type n) {
-		this->fill_initialize(n, _MSTL move(T()));
+		start_ = pair_.get_base().allocate(n);
+		finish_ = start_;
+		try {
+			for (size_type i = 0; i < n; ++i) {
+				_MSTL construct(finish_);
+				++finish_;
+			}
+		} catch (...) {
+			_MSTL destroy(start_, finish_);
+			pair_.get_base().deallocate(start_, n);
+			throw;
+		}
+		pair_.value = start_ + n;
 	}
 	MSTL_CONSTEXPR20 explicit vector(const size_type n, const T& value) {
 		this->fill_initialize(n, value);
@@ -386,11 +418,12 @@ public:
 
 	MSTL_CONSTEXPR20 self& operator =(std::initializer_list<T> x) {
 		if (x.size() > this->capacity()) {
-			iterator new_ = this->allocate_and_copy(x.end() - x.begin(), x.begin(), x.end());
+			iterator new_ = this->allocate_and_move(x.end() - x.begin(), x.begin(), x.end());
 			_MSTL destroy(start_, finish_);
 			this->deallocate();
 			start_ = new_;
-			pair_.value = start_ + (x.end() - x.begin());
+			finish_ = start_ + x.size();
+			pair_.value = start_ + x.size();
 		}
 		else if (size() >= x.size()) {
 			iterator i = _MSTL copy(x.begin(), x.end(), this->begin());
@@ -466,19 +499,32 @@ public:
 	MSTL_CONSTEXPR20 void reserve(const size_type n) {
 		MSTL_DEBUG_VERIFY(n < max_size(), "vector reserve out of allocate bounds.");
 		if (this->capacity() >= n) return;
+
 		size_type new_capacity = _MSTL max(this->capacity() * 2, n);
-		size_type old_size = this->size();
-		pointer tmp = this->allocate_and_copy(new_capacity, start_, finish_);
+		pointer new_start = pair_.get_base().allocate(new_capacity);
+		pointer new_finish = new_start;
+
+		try {
+			new_finish = _MSTL uninitialized_move(start_, finish_, new_start);
+		} catch (...) {
+			_MSTL destroy(new_start, new_finish);
+			pair_.get_base().deallocate(new_start, new_capacity);
+			throw;
+		}
+
 		_MSTL destroy(start_, finish_);
 		this->deallocate();
-		start_ = tmp;
-		finish_ = tmp + old_size;
+		start_ = new_start;
+		finish_ = new_finish;
 		pair_.value = start_ + new_capacity;
 	}
 
 	MSTL_CONSTEXPR20 void resize(size_type new_size, const T& x) {
-		if (new_size < this->size()) this->erase(this->begin() + new_size, this->end());
-		else this->insert(this->end(), new_size - this->size(), x);
+		if (new_size < this->size()) {
+			this->erase(this->begin() + new_size, this->end());
+		} else {
+			this->insert(this->end(), new_size - this->size(), x);
+		}
 	}
 	MSTL_CONSTEXPR20 void resize(const size_type new_size) {
 		this->resize(new_size, T());
@@ -534,6 +580,7 @@ public:
 
 	MSTL_CONSTEXPR20 void assign(size_type n, const value_type& value) {
 		if (n > this->capacity()) {
+			this->clear();
 			this->reserve(n);
 			this->insert(this->begin(), n, value);
 		}
@@ -596,9 +643,10 @@ public:
 			else {
 				_MSTL uninitialized_fill_n(finish_, n - elems_after, x);
 				finish_ += n - elems_after;
-				_MSTL uninitialized_copy(position, old_finish, this->end());
+				_MSTL uninitialized_move(position, old_finish, this->end());
 				finish_ += elems_after;
-				_MSTL fill(position, old_finish, x);
+				_MSTL destroy(position, old_finish);
+				_MSTL uninitialized_fill(position, old_finish, x);
 			}
 		}
 		else {
@@ -622,7 +670,7 @@ public:
 
 	    const auto elems_after = this->end() - last;
 	    if (elems_after > 0) {
-	        _MSTL move(last, this->end(), first);
+	        _MSTL move_backward(last, this->end(), first + elems_after);
 	    }
 	    pointer new_finish = finish_ - (last - first);
 	    _MSTL destroy(new_finish, finish_);
@@ -647,7 +695,14 @@ public:
 			return;
 		}
 		pointer new_start = pair_.get_base().allocate(this->size());
-		pointer new_finish = _MSTL uninitialized_copy(start_, finish_, new_start);
+		pointer new_finish = new_start;
+		try {
+			new_finish = _MSTL uninitialized_move(start_, finish_, new_start);
+		} catch (...) {
+			_MSTL destroy(new_start, new_finish);
+			pair_.get_base().deallocate(new_start, this->size());
+			throw;
+		}
 		_MSTL destroy(start_, finish_);
 		this->deallocate();
 		start_ = new_start;

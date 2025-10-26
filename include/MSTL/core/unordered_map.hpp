@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
     typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 class unordered_map : public icollector<unordered_map<Key, T, HashFcn, EqualKey, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered map requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
@@ -225,7 +225,7 @@ unordered_map(std::initializer_list<pair<Key, T>>, HashFcn, Alloc)
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename EqualKey = equal_to<Key>,
     typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 class unordered_multimap : icollector<unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_hash_v<HashFcn, Key>, "unordered multimap requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif

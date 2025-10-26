@@ -18,7 +18,7 @@ struct bidirectional_iterator_tag : forward_iterator_tag {
 struct random_access_iterator_tag : bidirectional_iterator_tag {
     constexpr random_access_iterator_tag() = default;
 };
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 struct contiguous_iterator_tag : random_access_iterator_tag {
     constexpr contiguous_iterator_tag() = default;
 };
@@ -52,11 +52,11 @@ template <typename T>
 struct iterator_traits<T*> {
     static_assert(is_object_v<T>, "iterator traits requires object types.");
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
 #else
     using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     using value_type        = remove_cv_t<T>;
     using difference_type   = ptrdiff_t;
     using pointer           = T*;

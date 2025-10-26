@@ -2,16 +2,6 @@
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_INNER__
 
-__rb_tree_node_base::base_ptr __rb_tree_node_base::minimum(base_ptr x) noexcept {
-    while (x->left_ != nullptr) x = x->left_;
-    return x;
-}
-
-__rb_tree_node_base::base_ptr __rb_tree_node_base::maximum(base_ptr x) noexcept {
-    while (x->right_ != nullptr) x = x->right_;
-    return x;
-}
-
 void rb_tree_rotate_left(
     __rb_tree_node_base* x, __rb_tree_node_base*& root) noexcept {
     __rb_tree_node_base* y = x->right_;
@@ -235,15 +225,6 @@ void __rb_tree_base_iterator::decrement() noexcept {
         }
         node_ = y;
     }
-}
-
-MSTL_NODISCARD bool __rb_tree_base_iterator::operator ==(
-    const __rb_tree_base_iterator& rh) const noexcept {
-    return node_ == rh.node_;
-}
-MSTL_NODISCARD bool __rb_tree_base_iterator::operator !=(
-    const __rb_tree_base_iterator& rh) const noexcept {
-    return node_ != rh.node_;
 }
 
 MSTL_END_INNER__

@@ -49,8 +49,14 @@ protected:
         _INNER __rb_tree_node_base*, _INNER __rb_tree_node_base*&,
         _INNER __rb_tree_node_base*&, _INNER __rb_tree_node_base*&) noexcept;
 
-    static base_ptr minimum(base_ptr x) noexcept;
-    static base_ptr maximum(base_ptr x) noexcept;
+    static base_ptr minimum(base_ptr x) noexcept {
+        while (x->left_ != nullptr) x = x->left_;
+        return x;
+    }
+    static base_ptr maximum(base_ptr x) noexcept {
+        while (x->right_ != nullptr) x = x->right_;
+        return x;
+    }
 };
 
 MSTL_END_INNER__
@@ -83,8 +89,12 @@ protected:
     void decrement() noexcept;
 
 public:
-    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rh) const noexcept;
-    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rh) const noexcept;
+    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rh) const noexcept {
+        return node_ == rh.node_;
+    }
+    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rh) const noexcept {
+        return node_ != rh.node_;
+    }
 };
 MSTL_END_INNER__
 
@@ -226,7 +236,7 @@ public:
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, 
     typename Alloc = allocator<rb_tree_node<Value>>>
 class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");

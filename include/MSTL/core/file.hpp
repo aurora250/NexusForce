@@ -290,11 +290,17 @@ public:
     string read() const;
 
     size_type read_binary(string& str, size_type size) const;
-    size_type read_binary(string& str) const;
+    size_type read_binary(string& str) const {
+        const size_type s = size(); str.resize(s);
+        return this->read_binary(str, s);
+    }
     string read_binary() const { return this->read_binary(path_); }
 
     bool read_line(string& line) const;
-    string read_line() const;
+    string read_line() const {
+        string line; if (!read_line(line)) return {};
+        return line;
+    }
     vector<string> read_lines() const;
 
     MSTL_NODISCARD size_type size() const noexcept;
@@ -379,13 +385,19 @@ public:
     static bool remove_directory(const string& path) noexcept { return remove_directory(path.view()); }
     static bool remove_directory(const char* path) noexcept { return remove_directory(string_view{path}); }
 
+    bool remove_all_in_directory(const bool recursive = true) const noexcept { return file::remove_all_in_directory(path_, recursive); }
+    static bool remove_all_in_directory(const string& directory_path, bool recursive = true) noexcept;
+
     static bool read(const string& path, string& content,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     static string read(const string& path,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
+        string content; file::read(path, content, creation, attributes);
+        return content;
+    }
 
     static bool read_binary(const string& path, string& content,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
@@ -393,7 +405,10 @@ public:
 
     static string read_binary(const string& path,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
+        string content; file::read_binary(path, content, creation, attributes);
+        return content;
+    }
 
     static bool copy(const string& from, const string& to, bool overwrite = true);
     static bool copy_directory(const string& source, const string& destination, bool overwrite = true);

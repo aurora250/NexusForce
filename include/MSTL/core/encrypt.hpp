@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 class MSTL_API XOR {
 public:
     static bstring encrypt(bstring_view data, bstring_view key);
-    static bstring decrypt(bstring_view data, bstring_view key);
+    static bstring decrypt(bstring_view data, bstring_view key) { return encrypt(data, key); }
 };
 
 
@@ -49,12 +49,12 @@ private:
         0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1, 0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
     };
 
-    static uint32_t rotleft(uint32_t x, uint32_t c);
+    static constexpr uint32_t rotleft(const uint32_t x, const uint32_t c) { return (x << c) | (x >> (32 - c)); }
 
-    static uint32_t F(uint32_t x, uint32_t y, uint32_t z);
-    static uint32_t G(uint32_t x, uint32_t y, uint32_t z);
-    static uint32_t H(uint32_t x, uint32_t y, uint32_t z);
-    static uint32_t I(uint32_t x, uint32_t y, uint32_t z);
+    static constexpr uint32_t F(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) | (~x & z); }
+    static constexpr uint32_t G(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & z) | (y & ~z); }
+    static constexpr uint32_t H(const uint32_t x, const uint32_t y, const uint32_t z) { return x ^ y ^ z; }
+    static constexpr uint32_t I(const uint32_t x, const uint32_t y, const uint32_t z) { return y ^ (x | ~z); }
 
 public:
     static bstring hash(bstring_view data);
@@ -64,7 +64,7 @@ public:
 
 class MSTL_API SHA1 {
 private:
-    static uint32_t rotleft(uint32_t x, uint32_t c);
+    static constexpr uint32_t rotleft(const uint32_t x, const uint32_t c)  { return (x << c) | (x >> (32 - c)); }
 
 public:
     static bstring hash(bstring_view data);
@@ -85,16 +85,16 @@ private:
         0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
     };
 
-    static uint32_t rotr(uint32_t x, uint32_t n);
+    static constexpr uint32_t rotr(const uint32_t x, const uint32_t n) { return (x >> n) | (x << (32 - n)); }
 
-    static uint32_t ch(uint32_t x, uint32_t y, uint32_t z);
-    static uint32_t maj(uint32_t x, uint32_t y, uint32_t z);
+    static constexpr uint32_t ch(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (~x & z); }
+    static constexpr uint32_t maj(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (x & z) ^ (y & z); }
 
-    static uint32_t sig0(uint32_t x);
-    static uint32_t sig1(uint32_t x);
+    static constexpr uint32_t sig0(const uint32_t x) { return rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22); }
+    static constexpr uint32_t sig1(const uint32_t x)  { return rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25); }
 
-    static uint32_t gamma0(uint32_t x);
-    static uint32_t gamma1(uint32_t x);
+    static constexpr uint32_t gamma0(const uint32_t x) { return rotr(x, 7) ^ rotr(x, 18) ^ (x >> 3); }
+    static constexpr uint32_t gamma1(const uint32_t x) { return rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10); }
 
 public:
     static bstring hash(bstring_view data);
@@ -150,8 +150,16 @@ private:
 
     static void key_expansion(const byte_t* key, byte_t* expanded_key);
 
-    static void sub_bytes(byte_t state[16]);
-    static void inv_sub_bytes(byte_t state[16]);
+    static void sub_bytes(byte_t state[16]) {
+        for (int i = 0; i < 16; ++i) {
+            state[i] = sbox[state[i]];
+        }
+    }
+    static void inv_sub_bytes(byte_t state[16])  {
+        for (int i = 0; i < 16; ++i) {
+            state[i] = inv_sbox[state[i]];
+        }
+    }
 
     static void shift_rows(byte_t state[16]);
     static void inv_shift_rows(byte_t state[16]);
@@ -159,7 +167,11 @@ private:
     static void mix_columns(byte_t state[16]);
     static void inv_mix_columns(byte_t state[16]);
 
-    static void add_round_key(byte_t state[16], const byte_t* round_key);
+    static void add_round_key(byte_t state[16], const byte_t* round_key) {
+        for (int i = 0; i < 16; ++i) {
+            state[i] ^= round_key[i];
+        }
+    }
 
     static void encrypt_block(byte_t block[16], const byte_t* expanded_key);
     static void decrypt_block(byte_t block[16], const byte_t* expanded_key);

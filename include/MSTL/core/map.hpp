@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 template <typename Key, typename T, typename Compare = less<Key>,
 	typename Alloc = allocator<rb_tree_node<pair<const Key, T>>>>
 class map : public icollector<map<Key, T, Compare, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<rb_tree_node<pair<const Key, T>>, typename Alloc::value_type>, 
@@ -231,7 +231,7 @@ map(std::initializer_list<pair<Key, T>>, Alloc) -> map<Key, T, less<Key>, Alloc>
 template <typename Key, typename T, typename Compare = less<Key>,
 	typename Alloc = allocator<rb_tree_node<pair<const Key, T>>>>
 class multimap : public icollector<multimap<Key, T, Compare, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<rb_tree_node<pair<const Key, T>>, typename Alloc::value_type>,

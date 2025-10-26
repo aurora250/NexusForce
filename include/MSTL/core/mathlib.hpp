@@ -63,9 +63,14 @@ template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr T opposite(const T& x) noexcept {
 	return -x;
 }
+
 template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
 MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
 	return x > T(0) ? x : -x;
+}
+template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
+MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
+	return x;
 }
 
 

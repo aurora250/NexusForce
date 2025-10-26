@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
     typename Alloc = allocator<hashtable_node<Value>>>
 class unordered_set : icollector<unordered_set<Value, HashFcn, EqualKey, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered set requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
@@ -205,7 +205,7 @@ unordered_set(std::initializer_list<Key>, HashFcn, Alloc)
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
     typename Alloc = allocator<hashtable_node<Value>>>
 class unordered_multiset : icollector<unordered_multiset<Value, HashFcn, EqualKey, Alloc>> {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     static_assert(is_hash_v<HashFcn, Value>, "unordered multiset requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif

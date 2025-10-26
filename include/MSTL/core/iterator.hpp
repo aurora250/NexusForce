@@ -22,7 +22,7 @@ iter_val_t<Iterator>* value_type(const Iterator&) noexcept {
 }
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Ptr, enable_if_t<is_pointer_v<Ptr>, int> = 0>
 constexpr iter_ptr_t<Ptr> __to_pointer_aux(Ptr iter) {
@@ -46,10 +46,10 @@ constexpr iter_ptr_t<Iterator> to_pointer(Iterator tmp) {
     else
         return tmp.operator->();
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator, typename Distance, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR17 void __advance_aux(Iterator& i, Distance n) {
@@ -89,7 +89,7 @@ MSTL_CONSTEXPR17 void advance(Iterator& i, Distance n) {
             ++i;
     }
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 template <typename Iterator>
 MSTL_CONSTEXPR17 Iterator prev(Iterator iter, iter_dif_t<Iterator> n = -1) {
@@ -106,7 +106,7 @@ MSTL_CONSTEXPR17 Iterator next(Iterator iter, iter_dif_t<Iterator> n = 1) {
 }
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR17 iter_dif_t<Iterator> __distance_aux(Iterator first, Iterator last) {
@@ -135,7 +135,7 @@ MSTL_CONSTEXPR17 iter_dif_t<Iterator> distance(Iterator first, Iterator last) {
         return n;
     }
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 
 template <typename Container>
@@ -276,18 +276,18 @@ public:
     : current(_MSTL move(x)) {}
 
     template <typename U>
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
         requires(!same_as<U, Iterator> && convertible_to<const U&, Iterator>)
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     constexpr explicit reverse_iterator(const reverse_iterator<U>& x)
         noexcept(is_nothrow_constructible_v<Iterator, const U&>)
         : current(x.current) {}
 
     template <typename U>
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
         requires(!same_as<U, Iterator> && convertible_to<const U&, Iterator> 
     && assignable_from<Iterator&, const U&>)
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     constexpr self& operator =(const reverse_iterator<U>& x)
         noexcept(is_nothrow_assignable_v<self&, const U&>) {
         current = x.current;
@@ -310,9 +310,9 @@ public:
     MSTL_NODISCARD constexpr pointer operator ->() const
         noexcept(is_nothrow_copy_constructible_v<Iterator> && noexcept(--(_MSTL declval<Iterator&>()))
             && is_nothrow_arrow<Iterator&, pointer>)
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
         requires (is_pointer_v<Iterator> || requires(const Iterator it) { it.operator->(); })
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     {
         Iterator tmp = current;
         --tmp;
@@ -377,9 +377,9 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator ==(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() == y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() == y.get_current() } -> convertible_to<bool>; }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 {
     return x.get_current() == y.get_current();
 }
@@ -388,9 +388,9 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator !=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() != y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() != y.get_current() } -> convertible_to<bool>; }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 {
     return x.get_current() != y.get_current();
 }
@@ -399,7 +399,7 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator <(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() > y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() > y.get_current() } -> convertible_to<bool>; }
 #endif
 {
@@ -410,9 +410,9 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator >(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() < y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() < y.get_current() } -> convertible_to<bool>; }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 {
     return x.get_current() < y.get_current();
 }
@@ -421,9 +421,9 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator <=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() >= y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() >= y.get_current() } -> convertible_to<bool>; }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 {
     return x.get_current() >= y.get_current();
 }
@@ -432,9 +432,9 @@ template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator >=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
     noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() <= y.get_current())))
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     requires requires { { x.get_current() <= y.get_current() } -> convertible_to<bool>; }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 {
     return x.get_current() <= y.get_current();
 }

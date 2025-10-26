@@ -1,6 +1,7 @@
 #ifndef MSTL_HEXADECIMAL_HPP__
 #define MSTL_HEXADECIMAL_HPP__
 #include "serialize.hpp"
+#include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
@@ -302,14 +303,12 @@ MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
 
 
 MSTL_BEGIN_LITERALS__
-
 MSTL_CONSTEXPR20 hexadecimal operator ""_hex(const char* str, const size_t len) {
     return hexadecimal(string_view(str, len));
 }
 constexpr hexadecimal operator ""_hex(const unsigned long long value) {
     return hexadecimal(static_cast<long long>(value));
 }
-
 MSTL_END_LITERALS__
 
 MSTL_END_NAMESPACE__

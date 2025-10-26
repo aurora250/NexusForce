@@ -296,7 +296,7 @@ class numeric_limits<char> : public numeric_limits<
     conditional_t<static_cast<char>(128) < 0, int8_t, uint8_t>
 > {};
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <>
 class numeric_limits<char8_t> : public numeric_limits<uint8_t> {};
 #endif

@@ -20,7 +20,7 @@ private:
     MSTL_CONSTEXPR20 void out(const T& val) {
         if (this->check_empty(val)) return;
         if (!this->is_compact_) sr_ += " ";
-        this->sr_ += _MSTL to_string(val);
+        this->sr_ += to_string(val);
         this->is_compact_ = false;
     }
 
@@ -159,7 +159,7 @@ struct parameter<IsStart, P1, P...> {
     CHECK_TYPE_ARRAY__(volatile, BOUND_OPT, ,##__VA_ARGS__) \
     CHECK_TYPE_ARRAY__(const volatile, BOUND_OPT, ,##__VA_ARGS__)
 
-#if defined(MSTL_COMPILE_GNUC__)
+#ifdef MSTL_COMPILE_GNUC__
 CHECK_TYPE_ARRAY_CV__(0)
 #endif
 CHECK_TYPE_ARRAY_CV__(N, size_t N)

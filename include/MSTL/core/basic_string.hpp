@@ -15,11 +15,11 @@ private:
     using const_iterator	= basic_string_iterator<true, container_type>;
 
 public:
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
 #else
     using iterator_category = random_access_iterator_tag;
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
     using value_type		= typename container_type::value_type;
     using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
     using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
@@ -188,7 +188,7 @@ public:
 
 template <typename CharT, typename Traits = char_traits<CharT>, typename Alloc = allocator<CharT>>
 class basic_string : icommon<basic_string<CharT, Traits, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<CharT, typename Alloc::value_type>, "allocator type mismatch.");
@@ -411,7 +411,7 @@ private:
         size_ += n;
         capacity_pair_.value = new_cap;
         null_terminate();
-        return data_ + diff;
+        return iterator(data_ + diff, this);
     }
 
     MSTL_CONSTEXPR20 iterator reallocate_and_copy(iterator position, const_iterator first, const_iterator last) {
@@ -428,7 +428,7 @@ private:
         size_ += n;
         capacity_pair_.value = new_cap;
         null_terminate();
-        return data_ + diff;
+        return iterator(data_ + diff, this);
     }
 
 public:
@@ -490,7 +490,7 @@ public:
     }
 
     MSTL_CONSTEXPR20 basic_string(self&& str) noexcept
-    : data_(_MSTL move(str.data_)), size_(str.size_),
+    : data_(str.data_), size_(str.size_),
     capacity_pair_(_MSTL move(str.capacity_pair_)) {
         str.data_ = nullptr;
         str.size_ = 0;
@@ -500,14 +500,18 @@ public:
     MSTL_CONSTEXPR20 self& operator =(self&& str) noexcept {
         if (_MSTL addressof(str) == this) return *this;
 
-        destroy_buffer();
-        data_ = str.data_;
-        size_ = str.size_;
-        capacity_pair_ = _MSTL move(str.capacity_pair_);
+        pointer new_data = str.data_;
+        const size_type new_size = str.size_;
+        auto new_capacity_pair = _MSTL move(str.capacity_pair_);
 
         str.data_ = nullptr;
         str.size_ = 0;
         str.capacity_pair_.value = 0;
+
+        destroy_buffer();
+        data_ = new_data;
+        size_ = new_size;
+        capacity_pair_ = _MSTL move(new_capacity_pair);
 
         return *this;
     }
@@ -538,7 +542,7 @@ public:
         this->construct_from_ptr(str.data_, position, str.size_ - position);
     }
 
-    MSTL_CONSTEXPR20 basic_string(const self& str, size_type position, size_type n) {
+    MSTL_CONSTEXPR20 basic_string(const self& str, const size_type position, const size_type n) {
         this->construct_from_ptr(str.data_, position, n);
     }
 
@@ -654,13 +658,21 @@ public:
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_pointer c_str() const noexcept { return data_; }
 
     MSTL_CONSTEXPR20 iterator insert(iterator position, value_type chr) {
-        if (size_ == capacity_pair_.value)
+        if (size_ == capacity_pair_.value) {
             return this->reallocate_and_fill(position, 1, chr);
-        traits_type::move(position + 1, position, end() - position);
+        }
+
+        size_type offset = position - begin();
+        pointer p = data_ + offset;
+        size_type chars_after = size_ - offset;
+        if (chars_after > 0) {
+            traits_type::move(p + 1, p, chars_after);
+        }
+
+        *p = chr;
         ++size_;
-        *position = chr;
         null_terminate();
-        return position;
+        return iterator(p, this);
     }
 
     MSTL_CONSTEXPR20 self& insert(size_type position, size_type n, value_type chr) {
@@ -670,34 +682,44 @@ public:
 
     MSTL_CONSTEXPR20 iterator insert(iterator position, size_type n, value_type chr) {
         if (n == 0) return position;
-        if (capacity_pair_.value - size_ < n)
+        if (capacity_pair_.value - size_ < n) {
             return this->reallocate_and_fill(position, n, chr);
-        if (position == end()) {
-            traits_type::assign(&*end(), n, chr);
-            size_ += n;
-            return position;
         }
-        traits_type::move(&*(position + n), &*position, n);
-        traits_type::assign(&*position, n, chr);
+
+        const size_type offset = position - begin();
+        pointer p = data_ + offset;
+        const size_type chars_after = size_ - offset;
+
+        if (chars_after > 0) {
+            traits_type::move(p + n, p, chars_after);
+        }
+        traits_type::assign(p, n, chr);
+
         size_ += n;
         null_terminate();
-        return position;
+        return iterator(p, this);
     }
 
     template <typename Iterator>
     MSTL_CONSTEXPR20 iterator insert(iterator position, Iterator first, Iterator last) {
         const size_type len = _MSTL distance(first, last);
         if (len == 0) return position;
-
-        if (capacity_pair_.value - size_ < len)
+        if (capacity_pair_.value - size_ < len) {
             return reallocate_and_copy(position, first, last);
-        if (position == end()) {
-            _MSTL uninitialized_copy(first, last, end());
-            size_ += len;
-            return position;
         }
-        traits_type::move(position + len, position, len);
-        _MSTL uninitialized_copy(first, last, position);
+
+        const size_type offset = position - begin();
+        pointer p = data_ + offset;
+        const size_type chars_after = size_ - offset;
+
+        if (chars_after > 0) {
+            traits_type::move(p + len, p, chars_after);
+        }
+        pointer curr = p;
+        for (Iterator it = first; it != last; ++it, ++curr) {
+            *curr = *it;
+        }
+
         size_ += len;
         null_terminate();
         return position;
@@ -748,14 +770,15 @@ public:
         traits_type::move(data_ + size_, str.data_ + position, n);
         size_ += n;
         null_terminate();
-        str.destroy_buffer();
         return *this;
     }
     MSTL_CONSTEXPR20 self& append(self&& str) {
-        return this->append(_MSTL move(str), 0, str.size_);
+        const size_type len = str.size_;
+        return this->append(_MSTL move(str), 0, len);
     }
     MSTL_CONSTEXPR20 self& append(self&& str, size_type position) {
-        return this->append(_MSTL move(str), position, str.size_ - position);
+        const size_type len = str.size_;
+        return this->append(_MSTL move(str), position, len - position);
     }
 
     MSTL_CONSTEXPR20 self& append(view_type str, size_type n) {
@@ -819,35 +842,52 @@ public:
     MSTL_CONSTEXPR20 self& operator +=(const self& str) { return this->append(str); }
     MSTL_CONSTEXPR20 self& operator +=(self&& str) { return this->append(_MSTL move(str)); }
     MSTL_CONSTEXPR20 self& operator +=(value_type chr) { return this->append(chr); }
-    MSTL_CONSTEXPR20 self& operator +=(const_pointer str) { return this->append(str, str + traits_type::length(str)); }
+    MSTL_CONSTEXPR20 self& operator +=(const_pointer str) { return this->append(str); }
     MSTL_CONSTEXPR20 self& operator +=(std::initializer_list<value_type> lls) { return this->append(lls); }
     MSTL_CONSTEXPR20 self& operator +=(view_type view) { return this->append(view); }
 
     MSTL_CONSTEXPR20 iterator erase(iterator position) noexcept {
-        MSTL_DEBUG_VERIFY(position != end(), "");
-        traits_type::move(position, position + 1, end() - position - 1);
+        MSTL_DEBUG_VERIFY(position != end(), "erase: cannot erase end() iterator");
+
+        pointer p = &*position;
+        const size_type chars_after = end() - position - 1;
+        if (chars_after > 0) {
+            traits_type::move(p, p + 1, chars_after);
+        }
+
         --size_;
         null_terminate();
         return position;
     }
 
-    MSTL_CONSTEXPR20 self& erase(size_type first = 0, size_type n = npos) noexcept {
-        this->erase(begin() + first, n);
+    MSTL_CONSTEXPR20 self& erase(size_type pos = 0, size_type len = npos) noexcept {
+        if (pos >= size_) return *this;
+        if (len == npos || pos + len >= size_) {
+            len = size_ - pos;
+        }
+        this->erase(begin() + pos, len);
         return *this;
     }
 
-    MSTL_CONSTEXPR20 iterator erase(iterator first, size_type n) noexcept {
-        return this->erase(first, first + n);
+    MSTL_CONSTEXPR20 iterator erase(iterator first, const size_type n) noexcept {
+        if (n == 0) return first;
+        iterator last = first + _MSTL min(n, static_cast<size_type>(end() - first));
+        return this->erase(first, last);
     }
 
     MSTL_CONSTEXPR20 iterator erase(iterator first, iterator last) noexcept {
-        if (first == begin() && last == end()) {
-            this->clear();
-            return end();
+        if (first == last) return first;
+
+        const size_type erase_count = last - first;
+        const size_type chars_after = end() - last;
+
+        if (chars_after > 0) {
+            pointer p_first = data_ + (first - begin());
+            pointer p_last = data_ + (last - begin());
+            traits_type::move(p_first, p_last, chars_after);
         }
-        const size_type n = end() - last;
-        traits_type::move(&*first, &*last, n);
-        size_ -= (last - first);
+
+        size_ -= erase_count;
         null_terminate();
         return first;
     }
@@ -866,15 +906,28 @@ public:
 
     template <typename Operation>
     MSTL_CONSTEXPR20 void resize_and_overwrite(size_type count, Operation op) {
-        if (count + 1 > capacity_pair_.value) {
+        MSTL_DEBUG_VERIFY(count < max_size(), "resize_and_overwrite: count too large");
+        if (count >= capacity_pair_.value) {
             this->reserve(count + 1);
         }
-        const size_type actual_size = op(data_, count);
-        MSTL_DEBUG_VERIFY(actual_size <= count, "resize_and_overwrite: operation returned size larger than requested");
-        size_ = actual_size;
-        null_terminate();
-    }
+        const size_type old_size = size_;
+        size_ = count;
 
+        try {
+            const size_type actual_size = op(data_, count);
+            if (actual_size > count) {
+                size_ = old_size;
+                Exception(ValueError("resize_and_overwrite: operation returned invalid size"));
+            }
+            size_ = actual_size;
+            null_terminate();
+        }
+        catch (...) {
+            size_ = old_size;
+            null_terminate();
+            throw;
+        }
+    }
 
     MSTL_CONSTEXPR20 void clear() noexcept {
         size_ = 0;
@@ -883,12 +936,12 @@ public:
 
     MSTL_CONSTEXPR20 void shrink_to_fit() {
         if (size_ + 1 >= capacity_pair_.value) return;
-        pointer new_buffer = capacity_pair_.get_base().allocate(size_ + 1);
-        traits_type::move(new_buffer, data_, size_);
-        capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
-        data_ = new_buffer;
-        capacity_pair_.value = size_ + 1;
-        null_terminate();
+        const size_type new_cap = size_ + 1;
+        basic_string temp;
+
+        temp.reserve(new_cap - 1);
+        temp.append(*this);
+        this->swap(temp);
     }
 
 
@@ -1115,7 +1168,7 @@ public:
     }
 
 
-    MSTL_CONSTEXPR20 size_type count(value_type chr, size_type position = 0) const noexcept {
+    MSTL_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
         size_type n = 0;
         for (size_type idx = position; idx < size_; ++idx) {
             if (*(data_ + idx) == chr) ++n;
@@ -1319,10 +1372,12 @@ MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
     basic_string<CharT, Traits, Alloc>&& lh, basic_string<CharT, Traits, Alloc>&& rh) {
-    MSTL_DEBUG_VERIFY(_MSTL addressof(lh) != _MSTL addressof(rh),
-        "cannot concatenate the same moved string to itself.");
     basic_string<CharT, Traits, Alloc> tmp(_MSTL move(lh));
-    tmp.append(_MSTL move(rh));
+    if (_MSTL addressof(lh) != _MSTL addressof(rh)) {
+        tmp.append(_MSTL move(rh));
+    } else {
+        tmp.append(lh);
+    }
     return _MSTL move(tmp);
 }
 

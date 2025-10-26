@@ -5,7 +5,7 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
 class set : public icollector<set<Key, Compare, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<rb_tree_node<Key>, typename Alloc::value_type>,
@@ -187,7 +187,7 @@ set(std::initializer_list<Key>, Alloc) -> set<Key, less<Key>, Alloc>;
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
 class multiset : icollector<multiset<Key, Compare, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
 	static_assert(is_same_v<rb_tree_node<Key>, typename Alloc::value_type>,

@@ -269,6 +269,7 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_iter_v<Iterator1> && is_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 copy(Iterator1 first, Iterator1 last, Iterator2 result) {
+	if (first == last) return result;
 	return _INNER __copy_aux(first, last, result);
 }
 
@@ -323,6 +324,7 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
+	if (first == last) return result;
 	return _INNER __copy_backward_aux(first, last, result);
 }
 
@@ -346,6 +348,7 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) {
+	if (first == last) return result;
 	return _INNER __move_aux(first, last, result);
 }
 
@@ -369,6 +372,7 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
+	if (first == last) return result;
 	return _INNER __move_backward_aux(first, last, result);
 }
 

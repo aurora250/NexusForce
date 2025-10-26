@@ -244,7 +244,7 @@ constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, c
 	return last;
 }
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2,
 	enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
@@ -308,7 +308,7 @@ constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2
 		}
 	}
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
 	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
@@ -525,7 +525,7 @@ constexpr void replace_if(Iterator first, Iterator last, Predicate pred, const T
 		if (pred(*first)) *first = new_value;
 }
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void __reverse_aux(Iterator first, Iterator last) {
@@ -569,11 +569,11 @@ constexpr void reverse(Iterator first, Iterator last) {
 		}
 	}
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 MSTL_BEGIN_INNER__
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 template <typename Iterator, enable_if_t<!is_ranges_bid_iter_v<Iterator>, int> = 0>
 void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
 	for (Iterator i = middle; ;) {
@@ -622,7 +622,7 @@ constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 		}
 	}
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 template <typename Iterator, typename Distance>
 constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initial, Distance shift) {

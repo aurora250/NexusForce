@@ -148,7 +148,7 @@ public:
 
 template <typename T, typename Alloc = allocator<list_node<T>>>
 class list : public icollector<list<T, Alloc>> {
-#ifdef MSTL_VERSION_20__	
+#ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif
     static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
@@ -175,10 +175,10 @@ private:
     template <bool, typename> friend struct list_iterator;
 
 private:
-    void range_check(const size_type position) const noexcept {
+    MSTL_ALWAYS_INLINE inline void range_check(const size_type position) const noexcept {
         MSTL_DEBUG_VERIFY(position < pair_.value, "list index out of ranges.");
     }
-    void range_check(iterator position) const noexcept {
+    MSTL_ALWAYS_INLINE inline void range_check(iterator position) const noexcept {
         MSTL_DEBUG_VERIFY(_MSTL distance(const_iterator(position), cend()) >= 0,
             "list iterator out of ranges."
         );
@@ -255,7 +255,6 @@ public:
     }
     self& operator =(self&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
-        clear();
         this->swap(x);
         return *this;
     }
@@ -285,9 +284,7 @@ public:
 
     MSTL_NODISCARD size_type size() const noexcept { return pair_.value; }
     MSTL_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
-    MSTL_NODISCARD bool empty() const noexcept {
-        return head_->next_ == head_ || link_type(head_->next_)->next_ == head_;
-    }
+    MSTL_NODISCARD bool empty() const noexcept { return head_->next_ == head_; }
 
     MSTL_NODISCARD allocator_type get_allocator() { return allocator_type(); }
 
@@ -373,15 +370,14 @@ public:
 
     void insert(iterator position, size_type n, const T& x) {
         range_check(position);
-        link_type cur = position.node_;
-        link_type temp;
+        link_type prev = position.node_->prev_;
         while (n--) {
-            temp = (create_node)(x);
-            temp->next_ = cur;
-            temp->prev_ = cur->prev_;
-            cur->prev_->next_ = temp;
-            cur->prev_ = temp;
-            cur = temp;
+            link_type temp = this->create_node(x);
+            temp->prev_ = prev;
+            temp->next_ = prev->next_;
+            prev->next_->prev_ = temp;
+            prev->next_ = temp;
+            prev = temp;
             ++pair_.value;
         }
     }
@@ -508,26 +504,25 @@ public:
 
     void reverse() noexcept {
         if (empty()) return;
-        iterator position = begin();
-        iterator first = position, last = end();
-        for (++first; first != last;) {
-            iterator temp = first;
-            transfer(position, first, ++temp);
-            position = first;
-            first = temp;
-        }
+        link_type current = head_;
+        do {
+            _MSTL swap(current->prev_, current->next_);
+            current = current->prev_;
+        } while (current != head_);
     }
 
     template <typename Pred>
     void unique(Pred pred) noexcept {
-        iterator first = begin();
-        iterator last = end();
-        if (first == last) return;
-        while (first != last) {
-            iterator next = first;
-            ++next;
-            if (next != last && pred(*first, *next)) erase(first);
-            first = next;
+        if (empty()) return;
+        iterator current = begin();
+        iterator next = current;
+        while (++next != end()) {
+            if (pred(*current, *next)) {
+                this->erase(next);
+                next = current;
+            } else {
+                current = next;
+            }
         }
     }
     void unique() noexcept {

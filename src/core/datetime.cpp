@@ -130,13 +130,4 @@ MSTL_NODISCARD string datetime::to_gmt() const noexcept {
     return string(buf);
 }
 
-MSTL_NODISCARD string datetime::to_iso_utc() const noexcept {
-    const datetime utc_dt = datetime::to_utc(*this);
-    return utc_dt.date().to_string() + "T" + utc_dt.time().to_string() + "Z";
-}
-
-MSTL_NODISCARD timestamp timestamp::now() noexcept {
-    return timestamp(datetime::now());
-}
-
 MSTL_END_NAMESPACE__

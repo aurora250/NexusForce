@@ -147,11 +147,11 @@ public:
         return tmp;
     }
 
-    MSTL_NODISCARD bool operator ==(const self& x) noexcept {
+    MSTL_NODISCARD bool operator ==(const self& x) const noexcept {
 		MSTL_DEBUG_VERIFY(ht_ == x.ht_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(hashtable_iterator));
         return cur_ == x.cur_;
     }
-    MSTL_NODISCARD bool operator !=(const self& x) noexcept {
+    MSTL_NODISCARD bool operator !=(const self& x) const noexcept {
         return !(*this == x);
     }
 };

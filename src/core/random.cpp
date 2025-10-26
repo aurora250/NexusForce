@@ -11,11 +11,6 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-random_lcd::seed_type& random_lcd::get_seed() {
-    static seed_type seed = 0;
-    return seed;
-}
-
 void random_lcd::set_seed(const seed_type seed) {
     if (seed == 0) {
         get_seed() = static_cast<seed_type>(_MSTL timestamp::now().seconds());
@@ -24,42 +19,8 @@ void random_lcd::set_seed(const seed_type seed) {
     }
 }
 
-int random_lcd::next_int(const int max) {
-    get_seed() = a * get_seed() + c;
-    get_seed() %= m;
-    return static_cast<int>(static_cast<double>(get_seed()) / m * max);
-}
-
-int random_lcd::next_int(const int min, const int max) {
-    return min + next_int(max - min);
-}
-
 int random_lcd::next_int() {
     return next_int(0, numeric_limits<int32_t>::max());
-}
-
-double random_lcd::next_double() {
-    get_seed() = a * get_seed() + c;
-    get_seed() %= m;
-    return static_cast<double>(get_seed()) / m;
-}
-
-double random_lcd::next_double(const double min, const double max) {
-    return min + (max - min) * next_double();
-}
-
-double random_lcd::next_double(const double max) {
-    return next_double(0, max);
-}
-
-random_mt::seed_type* random_mt::state() {
-    static seed_type state[n] = {};
-    return state;
-}
-
-size_t& random_mt::index() {
-    static size_t index = n;
-    return index;
 }
 
 void random_mt::twist() {
@@ -82,10 +43,6 @@ random_mt::seed_type* random_mt::get_state() {
     return state();
 }
 
-size_t& random_mt::get_index() {
-    return index();
-}
-
 void random_mt::set_seed(const seed_type seed) {
     seed_type init_seed = seed;
     if (init_seed == 0) {
@@ -103,7 +60,7 @@ int random_mt::next_int(const int max) {
     if (max <= 0) return 0;
 
     const seed_type* state = get_state();
-    size_t& idx = get_index();
+    size_t& idx = index();
 
     if (idx >= n) {
         twist();
@@ -115,24 +72,17 @@ int random_mt::next_int(const int max) {
     y ^= (y << t) & c;
     y ^= (y >> l);
 
-    return static_cast<int>(static_cast<double>(y) / UINT32_MAX * max);
-}
-int random_mt::next_int(const int min, const int max) {
-    if (min >= max) return min;
-    return min + next_int(max - min);
+    return static_cast<int>(static_cast<double>(y) / numeric_limits<uint32_t>::max() * max);
 }
 
 int random_mt::next_int() {
-    return next_int(0, INT32_MAX);
+    return next_int(0, numeric_limits<int32_t>::max());
 }
 
 double random_mt::next_double() {
     const seed_type* state = get_state();
-    size_t& idx = get_index();
-
-    if (idx >= n) {
-        twist();
-    }
+    size_t& idx = index();
+    if (idx >= n) twist();
 
     seed_type y = state[idx++];
     y ^= (y >> u);
@@ -140,16 +90,7 @@ double random_mt::next_double() {
     y ^= (y << t) & c;
     y ^= (y >> l);
 
-    return static_cast<double>(y) / UINT32_MAX;
-}
-
-double random_mt::next_double(const double min, const double max) {
-    if (min >= max) return min;
-    return min + (max - min) * next_double();
-}
-
-double random_mt::next_double(const double max) {
-    return next_double(0.0, max);
+    return static_cast<double>(y) / numeric_limits<uint32_t>::max();
 }
 
 int32_t secret::next_int(const int32_t min, const int32_t max) {
@@ -170,10 +111,6 @@ int32_t secret::next_int(const int32_t min, const int32_t max) {
     } while (value >= range);
 
     return min + static_cast<int32_t>(value);
-}
-
-int32_t secret::next_int(const int32_t max) {
-    return next_int(0, max);
 }
 
 double secret::next_double() {

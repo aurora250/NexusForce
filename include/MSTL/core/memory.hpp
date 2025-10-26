@@ -32,6 +32,7 @@ MSTL_END_INNER__
 
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 uninitialized_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
+    if (first == last) return result;
     return _INNER __uninitialized_copy_aux(first, last, result);
 }
 
@@ -93,6 +94,7 @@ MSTL_END_INNER__
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, T&& x) {
+    if (first == last) return;
     _INNER __uninitialized_fill_aux(first, last, _MSTL forward<T>(x));
 }
 
@@ -154,6 +156,7 @@ MSTL_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 MSTL_CONSTEXPR20 Iterator2 uninitialized_move(Iterator1 first, Iterator1 last, Iterator2 result) {
+    if (first == last) return result;
     return _INNER __uninitialized_move_aux(first, last, result);
 }
 
@@ -396,7 +399,6 @@ MSTL_BEGIN_INNER__
 
 #ifdef MSTL_COMPILER_MSVC__
 MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32UL;
-MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
 
 #ifdef MSTL_STATE_DEBUG__
 MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = 2 * POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
@@ -433,7 +435,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
     return operator new(bytes);
 }
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD) ,int> = 0>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t bytes) {
     size_t align = Align;
@@ -441,7 +443,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD)
         align = _MSTL max(Align, MEMORY_BIG_ALLOC_ALIGN);
 #endif
-#if defined(MSTL_COMPILER_CLANG__) && defined(MSTL_VERSION_20__)
+#if defined(MSTL_COMPILER_CLANG__) && defined(MSTL_STANDARD_20__)
     if (_MSTL is_constant_evaluated())
         return operator new(bytes);
 #endif
@@ -459,16 +461,16 @@ MSTL_END_INNER__
 template <size_t Align>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
     if (bytes == 0) return nullptr;
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     if (_MSTL is_constant_evaluated())
         return operator new(bytes);
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
     return _INNER __allocate_dispatch<Align>(bytes);
 #else
     return _INNER __allocate_aux<Align>(bytes);
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 }
 
 
@@ -492,14 +494,14 @@ void __deallocate_aux(void*& ptr, size_t& bytes) noexcept {
         ptr = reinterpret_cast<void*>(holder);
     }
 #endif
-#if defined(MSTL_VERSION_17__) && !defined(MSTL_COMPILER_CLANG__)
-    operator delete(ptr, bytes);
-#else
-    operator delete(ptr);
+    operator delete(ptr
+#ifdef __cpp_sized_deallocation
+        , bytes
 #endif
+        );
 }
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
 MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept {
     size_t align = Align;
@@ -519,24 +521,24 @@ template<size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
 MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept {
     _INNER __deallocate_aux<Align>(ptr, bytes);
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 MSTL_END_INNER__
 
 template <size_t Align>
 MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     if (_MSTL is_constant_evaluated()) {
         operator delete(ptr);
         return;
     }
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
     _INNER __deallocate_dispatch<Align>(ptr, bytes);
 #else
     _INNER __deallocate_aux<Align>(ptr, bytes);
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 }
 
 MSTL_BEGIN_INNER__
@@ -579,7 +581,7 @@ public:
     MSTL_CONSTEXPR20 ~standard_allocator() noexcept = default;
     MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
 
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         constexpr size_t value_size = sizeof(value_type);
         static_assert(value_size > 0, "value type must be complete before allocation called.");
         const size_t alloc_size = value_size * n;
@@ -587,17 +589,17 @@ public:
         return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
     }
 
-    MSTL_ALLOC_NODISCARD static MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
         return self::allocate(1);
     }
 
-    static MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
+    MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
         constexpr size_t value_size = sizeof(value_type);
         MSTL_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
         _MSTL deallocate<_INNER __FINAL_ALIGN_SIZE<T>>(p, n * value_size);
     }
 
-    static MSTL_CONSTEXPR20 void deallocate(pointer p) noexcept {
+    MSTL_CONSTEXPR20 void deallocate(pointer p) noexcept {
         self::deallocate(p, 1);
     }
 };
@@ -1319,7 +1321,7 @@ struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     }
 
     void operator delete(void* mem) noexcept {
-#if MSTL_VERSION_17__
+#if MSTL_STANDARD_17__
         ::operator delete(mem, static_cast<std::align_val_t>(
             _MSTL max(alignof(T), alignof(__smart_ptr_counter_impl_fused))));
 #else
@@ -1594,7 +1596,7 @@ shared_ptr<T> make_shared(Args&&... args) {
     constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
-#if MSTL_VERSION_17__
+#if MSTL_STANDARD_17__
     void* mem = ::operator new(size, static_cast<std::align_val_t>(align));
     auto* counter = static_cast<Counter*>(mem);
 #else
@@ -1607,7 +1609,7 @@ shared_ptr<T> make_shared(Args&&... args) {
         _MSTL construct(object, _MSTL forward<Args>(args)...);
     }
     catch (...) {
-#if MSTL_VERSION_17__
+#if MSTL_STANDARD_17__
         ::operator delete(mem, static_cast<std::align_val_t>(align));
 #else
         ::operator delete(mem);
@@ -1626,7 +1628,7 @@ shared_ptr<T> make_shared_for_overwrite() {
     constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
-#if MSTL_VERSION_17__
+#if MSTL_STANDARD_17__
     void* mem = ::operator new(size, static_cast<std::align_val_t>(align));
     auto* counter = static_cast<Counter*>(mem);
 #else
@@ -1639,7 +1641,7 @@ shared_ptr<T> make_shared_for_overwrite() {
         _MSTL construct(object);
     }
     catch (...) {
-#if MSTL_VERSION_17__
+#if MSTL_STANDARD_17__
         ::operator delete(mem, static_cast<std::align_val_t>(align));
 #else
         ::operator delete(mem);

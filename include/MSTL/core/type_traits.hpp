@@ -56,7 +56,7 @@ using conditional_t = typename conditional<Test, T1, T2>::type;
 template <typename T>
 struct negation : bool_constant<!static_cast<bool>(T::value)> {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool negation_v = negation<T>::value;
 #endif
@@ -67,7 +67,7 @@ struct is_same : false_type {};
 template <typename T>
 struct is_same<T, T> : true_type {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T1, typename T2>
 MSTL_INLINE17 constexpr bool is_same_v = is_same<T1, T2>::value;
 #endif
@@ -81,7 +81,7 @@ template <typename T>
 using type_identity_t = typename type_identity<T>::type;
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <typename T, typename... Types>
 MSTL_INLINE17 constexpr bool is_any_of_v = (is_same_v<T, Types> || ...);
 template <typename T, typename... Types>
@@ -97,12 +97,12 @@ template <typename T, typename U, typename... Types>
 struct is_any_of<T, U, Types...> 
     : conditional<is_same<T, U>::value, true_type, is_any_of<T, Types...>>::type {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T, typename... Types>
 MSTL_INLINE17 constexpr bool is_any_of_v = is_any_of<T, Types...>::value;
 #endif
 
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
 
 MSTL_BEGIN_INNER__
@@ -127,7 +127,7 @@ struct disjunction<First, Rest...>
     : _INNER __disjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
 };
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename... Args>
 MSTL_INLINE17 constexpr bool disjunction_v = disjunction<Args...>::value;
 #endif
@@ -155,7 +155,7 @@ struct conjunction<First, Rest...>
     : _INNER __conjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
 };
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename... Args>
 MSTL_INLINE17 constexpr bool conjunction_v = conjunction<Args...>::value;
 #endif
@@ -349,7 +349,7 @@ template <typename Ret, typename... Args>
 struct remove_function_qualifiers<Ret(Args...) const volatile> {
     using type = Ret(Args...);
 };
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <typename Ret, typename... Args>
 struct remove_function_qualifiers<Ret(Args...) noexcept> {
     using type = Ret(Args...);
@@ -375,7 +375,7 @@ using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::typ
 template <typename T>
 struct is_void : bool_constant<is_same<remove_cv_t<T>, void>::value> {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool is_void_v = is_void<T>::value;
 #endif
@@ -442,13 +442,13 @@ MSTL_INLINE17 constexpr bool is_unpackaged_v = !is_same_v<unpackage_t<T>, T>;
 template <typename T>
 struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
     char, signed char, unsigned char, wchar_t,
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     char8_t,
 #endif
     char16_t, char32_t
 >::value> {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool is_character_v = is_character<T>::value;
 #endif
@@ -457,13 +457,13 @@ MSTL_INLINE17 constexpr bool is_character_v = is_character<T>::value;
 template <typename T>
 struct is_standard_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
     char, wchar_t,
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     char8_t,
 #endif
     char16_t, char32_t
 >::value> {};
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool is_standard_character_v = is_standard_character<T>::value;
 #endif
@@ -925,7 +925,7 @@ MSTL_DEPRECATED MSTL_INLINE17 constexpr bool is_literal_type_v = is_literal_type
 #endif
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 // Determines whether a non-static member pointer points to the start of a class object
 template <typename T, typename Mem>
 constexpr bool is_pointer_interconvertible_with_class(Mem T::*mp) noexcept {
@@ -1311,7 +1311,7 @@ template <typename T>
 const T* addressof(const T&&) = delete;
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 MSTL_NODISCARD constexpr bool is_constant_evaluated() noexcept {
     return __builtin_is_constant_evaluated();
 }
@@ -1441,29 +1441,41 @@ struct make_unsigned {
     using type = make_unsigned_t<T>;
 };
 
-
 template <typename T>
-using make_signed_package_t = package_t<typename _INNER __set_sign<unpackage_t<T>>::signed_type>;
-template <typename T>
-using make_unsigned_package_t = package_t<typename _INNER __set_sign<unpackage_t<T>>::unsigned_type>;
-
-template <typename T>
-struct make_signed_package {
-    using type = make_signed_package_t<T>;
-};
-template <typename T>
-struct make_unsigned_package {
-    using type = make_unsigned_package_t<T>;
-};
-
-
-template <typename T>
-constexpr make_signed_t<T> signed_value(T x) {
+constexpr make_signed_t<T> signed_value(const T x) {
     return static_cast<make_signed_t<T>>(x);
 }
 template <typename T>
-constexpr make_unsigned_t<T> unsigned_value(T x) {
+constexpr make_unsigned_t<T> unsigned_value(const T x) {
     return static_cast<make_unsigned_t<T>>(x);
+}
+
+
+MSTL_BEGIN_INNER__
+template <size_t Size, bool IsSigned>
+struct __make_integer_impl;
+
+template <size_t Size>
+struct __make_integer_impl<Size, true> {
+    using type = typename __sign_byte_aux<Size>::template signed_t<int>;
+};
+template <size_t Size>
+struct __make_integer_impl<Size, false> {
+    using type = typename __sign_byte_aux<Size>::template unsigned_t<int>;
+};
+MSTL_END_INNER__
+
+template <size_t Size, bool IsSigned = true>
+struct make_integer {
+    using type = typename _INNER __make_integer_impl<Size, IsSigned>::type;
+};
+
+template <size_t Size, bool IsSigned = true>
+using make_integer_t = typename make_integer<Size, IsSigned>::type;
+
+template <typename T, bool IsSigned = is_signed_v<T>>
+constexpr make_integer_t<sizeof(T), IsSigned> integer_value(const T x) {
+    return static_cast<make_integer_t<sizeof(T), IsSigned>>(x);
 }
 
 
@@ -1585,7 +1597,7 @@ template <typename T1, typename T2, typename... Rest>
 struct common_type<T1, T2, Rest...> : common_type<common_type_t<T1, T2>, Rest...> {};
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 
 template <typename...>
 struct common_reference;
@@ -1695,10 +1707,10 @@ template <typename T1, typename T2, typename T3, typename... Rest>
     requires requires { typename common_reference_t<T1, T2>; }
 struct common_reference<T1, T2, T3, Rest...> : common_reference<common_reference_t<T1, T2>, T3, Rest...> {};
 
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <typename T, template <typename...> typename Template>
 MSTL_INLINE17 constexpr bool is_specialization_v = false;
 template <template <typename...> typename Template, typename... Args>
@@ -2159,14 +2171,14 @@ template <typename T, typename U>
 using get_rebind_type_t = typename get_rebind_type<T, U>::type;
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <typename T>
 concept is_allocator_v = requires(T alloc) {
     alloc.deallocate(alloc.allocate(size_t{ 1 }), size_t{ 1 });
 };
 template <typename T>
 struct is_allocator : bool_constant<is_allocator_v<T>> {};
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 
 template <typename Alloc1, typename Alloc2>
@@ -2259,10 +2271,10 @@ template <typename T>
 struct is_trivially_swappable : bool_constant<is_trivially_swappable_v<T>> {};
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <typename From, typename To>
 concept convertible_to = is_convertible_v<From, To> && requires { static_cast<To>(_MSTL declval<From>()); };
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 
 template <typename Iterator, typename Ptr, bool = is_pointer_v<remove_cvref_t<Iterator>>>
@@ -2276,7 +2288,7 @@ template <typename Key, typename = void>
 struct hash;
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 template <typename T>
 concept is_pair_v = requires(T p) {
     typename T::first_type;
@@ -2284,7 +2296,7 @@ concept is_pair_v = requires(T p) {
     p.first;
     p.second;
 };
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 
 // have to compile perform NRVO(Named Return Value Optimization) instead of moving it.
@@ -2464,19 +2476,19 @@ MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
 };
 MSTL_END_CONSTANTS__
 
-constexpr int popcountll(uint64_t x) {
+constexpr int popcountll(uint64_t x) noexcept {
     return
-        _CONSTANTS POPCOUNT_TABLE[x & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 8) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 16) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 24) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 32) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 40) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 48) & 0xFF] +
-        _CONSTANTS POPCOUNT_TABLE[(x >> 56) & 0xFF];
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>(x & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 8) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 16) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 24) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 32) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 40) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 48) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 56) & 0xFFULL)];
 }
 
-constexpr int clzll(uint64_t x) {
+constexpr int clzll(uint64_t x) noexcept {
     if (x == 0) return 64;
     int n = 0;
     if (x <= 0x00000000FFFFFFFFULL) {

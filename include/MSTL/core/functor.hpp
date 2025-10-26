@@ -281,9 +281,9 @@ struct identity {
 
 template <typename Pair>
 struct select1st {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_pair_v<Pair>, "select1st requires pair type.");
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 	using argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= Pair;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE	= typename Pair::first_type;
@@ -296,9 +296,9 @@ struct select1st {
 
 template <typename Pair>
 struct select2nd {
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	static_assert(is_pair_v<Pair>, "select2nd requires pair type.");
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
 	using argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= Pair;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE	= typename Pair::second_type;

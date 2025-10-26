@@ -160,7 +160,7 @@ public:
 		make_index_sequence<tuple_size_v<remove_reference_t<Tuple>>>{}) {}
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	template <typename T = This, enable_if_t<
 		conjunction_v<is_default_constructible<T>, is_default_constructible<Rest>...>, int> = 0>
 	constexpr explicit(!conjunction_v<
@@ -531,7 +531,7 @@ MSTL_NODISCARD constexpr typename _INNER __tuple_cat_bind_t<Tuples...>::Ret tupl
 }
 
 
-#if !defined(MSTL_VERSION_17__)
+#if !defined(MSTL_STANDARD_17__)
 MSTL_BEGIN_INNER__
 
 template <typename Tuple, size_t Index>
@@ -557,17 +557,17 @@ struct __broadern_tuple_hash_aux<Tuple, 0> {
 };
 
 MSTL_END_INNER__
-#endif // !MSTL_VERSION_17__
+#endif // !MSTL_STANDARD_17__
 
 
 template <typename This, typename ... Rest>
 template <typename Tuple, size_t... Idx>
 constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_sequence<Idx...>) noexcept {
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 	return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_MSTL get<Idx>(tup)) ^ ...);
 #else
 	return _INNER __broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 }
 
 MSTL_END_NAMESPACE__

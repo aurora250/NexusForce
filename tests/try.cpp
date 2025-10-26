@@ -1,6 +1,4 @@
 #include "try.h"
-USE_MSTL
-
 
 static const string TEST_FILE = "test_temp_file.txt";
 static const string TEST_DIR = "test_temp_dir";
@@ -329,7 +327,7 @@ void test_print() {
     const char* cs = "Hello World!";
     int pair<int, char>::* mop = &pair<int, char>::first;
     int pair<int, char>::* null_mop = nullptr;
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
     void (bit_reference::* mfp)() const = &bit_reference::flip;
 #else
     void (bit_reference::* mfp)() const noexcept = &bit_reference::flip;
@@ -358,7 +356,7 @@ void test_print() {
     const wchar_t* wemoji = L"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
     const char16_t* u16emoji = u"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
     const char32_t* u32emoji = U"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
     const char8_t* u8emoji = u8"\n胡Hello, World! 😇👩‍🦳🎗️⚽🥠🍋‍🟩⛴️🪣💖🚯🕕😊🌟🚀✔";
     println(u8emoji);
 #endif
@@ -410,15 +408,59 @@ void test_console() {
 void test_dev() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     auto devs = diskdrive::enumerate_all();
-    for (const auto& dev : devs) {
+    for (const auto &dev : devs) {
         println(dev);
     }
-    // file::copy_directory(
-    //     R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
-    //     R"(H:\)"
-    //     );
+    console.pause();
+    diskdrive& udisk = devs.back();
+
+    if(udisk.volume_label() != "Standby") {
+        println("剩余容量", udisk.free_capacity());
+        const string& path = udisk.device_path();
+
+        println("正在卸载卷...");
+        if (udisk.force_dismount()) {
+            println("卷卸载成功");
+        } else {
+            println("卷卸载失败");
+        }
+
+        println("正在禁用设备...");
+        if (udisk.base_drive().disable()) {
+            println("设备禁用成功");
+        } else {
+            println("设备禁用失败");
+        }
+
+        this_thread::sleep_for_ms(2000);
+
+        bool success = file::copy_directory(
+            R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
+            path
+        );
+        // 应该失败，但因为WINDOWS的系统权限设置，无法阻止，使用CMD指令代码可能实现
+        println("第一次拷贝结果:", success);
+        console.pause();
+
+        println("正在恢复访问权限...");
+        udisk.base_drive().enable();
+
+        success = file::copy_directory(
+            R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
+            path
+        );
+        println("第二次拷贝结果:", success);
+        console.pause();
+
+        println("正在删除拷贝文件...");
+        file::remove_all_in_directory(path);
+        console.pause();
+    } else {
+        println("无U盘设备");
+    }
 #endif
 }
+
 
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
@@ -1034,7 +1076,6 @@ void test_math() {
 }
 
 void test_sort() {
-    USE_MSTL;
     MSTL::vector<int> vec{ 6,9,1,5,8,4,7 };
     //insertion_sort(vec.begin(), vec.end());
     //bubble_sort(vec.begin(), vec.end());

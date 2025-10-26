@@ -252,7 +252,7 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 };
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <typename... Types>
 struct visitor : Types... {
 	using Types::operator()...;
@@ -301,7 +301,7 @@ struct pair : icommon<pair<T1, T2>> {
 	T1 first;
 	T2 second;
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	template <typename U1 = T1, typename U2 = T2, enable_if_t<
 		conjunction_v<is_default_constructible<U1>, is_default_constructible<U2>>, int> = 0>
 	constexpr explicit(!conjunction_v<
@@ -551,7 +551,7 @@ struct tuple_element<Index, pair<T1, T2>> {
 };
 
 
-#ifndef MSTL_VERSION_17__
+#ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 
 template <size_t Index, typename T1, typename T2>
@@ -597,10 +597,10 @@ struct __pair_get_helper<1, T1, T2> {
 };
 
 MSTL_END_INNER__
-#endif // !MSTL_VERSION_17__
+#endif // !MSTL_STANDARD_17__
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>& get(pair<T1, T2>& pir) noexcept {
 	if constexpr (Index == 0)
@@ -614,7 +614,7 @@ MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&
 get(pair<T1, T2>& pir) noexcept {
 	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 template <typename T1, typename T2>
 MSTL_NODISCARD constexpr T1& get(pair<T1, T2>& pir) noexcept {
 	return pir.first;
@@ -625,7 +625,7 @@ MSTL_NODISCARD constexpr T2& get(pair<T1, T2>& pir) noexcept {
 }
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&
 get(const pair<T1, T2>& pir) noexcept {
@@ -640,7 +640,7 @@ MSTL_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&
 get(const pair<T1, T2>& pir) noexcept {
 	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 template <typename T1, typename T2>
 MSTL_NODISCARD constexpr const T1& get(const pair<T1, T2>& pir) noexcept {
 	return pir.first;
@@ -651,7 +651,7 @@ MSTL_NODISCARD constexpr const T2& get(const pair<T1, T2>& pir) noexcept {
 }
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&&
 get(pair<T1, T2>&& pir) noexcept {
@@ -667,7 +667,7 @@ get(pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<tuple_element_t<Index, pair<T1, T2>>>(
 		_INNER __pair_get_helper<Index, T1, T2>::get(_MSTL forward<pair<T1, T2>>(pir)));
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 template <typename T1, typename T2>
 MSTL_NODISCARD constexpr T1&& get(pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<T1>(pir.first);
@@ -678,7 +678,7 @@ MSTL_NODISCARD constexpr T2&& get(pair<T1, T2>&& pir) noexcept {
 }
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 template <size_t Index, typename T1, typename T2>
 MSTL_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&&
 get(const pair<T1, T2>&& pir) noexcept {
@@ -694,7 +694,7 @@ get(const pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<const tuple_element_t<Index, pair<T1, T2>>>(
 		_INNER __pair_get_helper<Index, T1, T2>::get(_MSTL forward<const pair<T1, T2>>(pir)));
 }
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 template <typename T1, typename T2>
 MSTL_NODISCARD constexpr const T1&& get(const pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<const T1>(pir.first);

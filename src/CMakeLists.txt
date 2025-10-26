@@ -1,11 +1,14 @@
 # 编译器配置
 function(configure_compiler_options target)
     if(MSVC)
+        set_property(TARGET ${target} PROPERTY
+                MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+        )
         target_compile_options(${target} PRIVATE
                 $<$<COMPILE_LANGUAGE:CXX>:
                 /utf-8
-                $<$<CONFIG:Debug>:/WX /Od /Zi>
-                $<$<CONFIG:Release>:/O2 /Zc:__cplusplus>
+                $<$<CONFIG:Debug>:/WX /Od /Zi /MDd>
+                $<$<CONFIG:Release>:/O2 /Zc:__cplusplus /MD>
                 >
         )
         target_compile_options(${target} PRIVATE
@@ -129,6 +132,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/bitmap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/device.cpp
 )
 
 # 编译为动态库
@@ -147,11 +151,25 @@ set_target_properties(MSTL PROPERTIES
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS OFF
         LINKER_LANGUAGE CXX
-        VERSION 1.3.0
+        VERSION 1.3.1
         SOVERSION 1
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+
+        ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
+        LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
+        RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug
+
+        ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
+        LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release
+
+        ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
+        LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
+        RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/bin/RelWithDebInfo
+
+        ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
+        LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
+        RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
+
         $<$<PLATFORM_ID:Windows>:WINDOWS_EXPORT_ALL_SYMBOLS ON>
 )
 
@@ -169,9 +187,9 @@ target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
 
 configure_compiler_options(MSTL)
 
-# Windows链接ws2_32 wsock32
+# Windows链接ws2_32 wsock32 SetupAPI cfgmgr32
 if(WIN32)
-    target_link_libraries(MSTL PUBLIC ws2_32 wsock32)
+    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32)
 endif()
 
 
@@ -423,9 +441,19 @@ endif()
 
 # 安装库文件
 install(TARGETS MSTL
-        EXPORT MSTLTargets  # 导出目标
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        EXPORT MSTLTargets # 导出目标
+
+        LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+
+        ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+
+        RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )

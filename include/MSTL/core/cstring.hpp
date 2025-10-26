@@ -131,6 +131,66 @@ MSTL_CONST_FUNCTION constexpr bool is_digit_or_alpha(const CharT c) noexcept {
 }
 
 
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
+	using UInt = make_integer_t<sizeof(T), false>;
+
+	const UInt bits = *reinterpret_cast<const UInt*>(&x);
+	constexpr UInt sign_mask = static_cast<UInt>(1) << (8 * sizeof(UInt) - 1);
+	return (bits & sign_mask) != 0;
+}
+
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_nan(const T x) noexcept {
+	return x != x;
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_inf(const T x) noexcept {
+	return x == numeric_limits<T>::infinity();
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_pos_inf(const T x) noexcept {
+	return _MSTL is_inf(x);
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_neg_inf(const T x) noexcept {
+	return x == -numeric_limits<T>::infinity();
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_finite(const T x) noexcept {
+	return !_MSTL is_inf(x) && !_MSTL is_nan(x);
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
+	if (!_MSTL is_finite(x)) return false;
+	if (x == 0) return false;
+	return _MSTL absolute(x) >= numeric_limits<T>::min();
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
+	if (!_MSTL is_finite(x)) return false;
+	if (x == 0) return false;
+	return _MSTL absolute(x) < numeric_limits<T>::min();
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_positive(const T x) noexcept {
+	return x > 0 || (x == 0 && !_MSTL signbit(x));
+}
+
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+MSTL_CONST_FUNCTION constexpr bool is_negative(const T x) noexcept {
+	return x < 0 || (x == 0 && _MSTL signbit(x));
+}
+
+
 MSTL_CONST_FUNCTION constexpr bool is_high_surrogate(const char16_t c) noexcept {
     return c >= 0xD800 && c <= 0xDBFF;
 }
@@ -156,12 +216,6 @@ MSTL_CONST_FUNCTION constexpr CharT to_uppercase(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc >= 'a' && uc <= 'z') return static_cast<CharT>(uc & 0xDF);
     return c;
-}
-
-
-template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
-MSTL_CONST_FUNCTION constexpr bool is_nan(const T x) {
-	return x != x;
 }
 
 
@@ -196,38 +250,10 @@ namespace masm {
 // copy from source memory to destination memory with specific length.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memcpy.
-MSTL_CONSTEXPR20 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+constexpr void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	if (count == 0) return dest;
-#ifdef MSTL_COMPILER_GNUC__
-	void* res = dest;
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	__asm__ volatile (
-		"movq   %1, %%rsi\n\t"
-		"movq   %2, %%rdi\n\t"
-		"movq   %3, %%rcx\n\t"
-		"cld\n\t"
-		"rep    movsb\n\t"
-		:
-		: "r" (res), "r" (src), "r" (dest), "r" (count)
-		: "rsi", "rdi", "rcx", "cc", "memory"
-	);
-#else
-	__asm__ volatile (
-       "movl   %[src], %%esi\n\t"
-       "movl   %[dest], %%edi\n\t"
-       "movl   %[count], %%ecx\n\t"
-       "cld\n\t"
-       "rep    movsb\n\t"
-       : [dest] "+r" (dest)
-       : [src] "r" (src), [count] "r" (count)
-       : "esi", "edi", "ecx", "cc", "memory"
-   );
-#endif
-	return res;
-#elif defined(MSTL_COMPILER_MSVC__)
-	return masm::masm_memory_copy(dest, src, count);
-#else
+
 	void* res = dest;
 	auto dest_v = static_cast<volatile byte_t*>(dest);
 	auto src_v = static_cast<const volatile byte_t*>(src);
@@ -236,9 +262,7 @@ MSTL_CONSTEXPR20 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RE
 		dest_v++;
 		src_v++;
 	}
-	MSTL_MEMORY_BARRIER(res);
 	return res;
-#endif
 }
 
 // it`s similar with std::mempcpy
@@ -312,49 +336,11 @@ constexpr void* memory_char_copy(void* dest, const void* src, const int chr, siz
 // return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::memcmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR20 int memory_compare(const void* lh, const void* rh, size_t count) noexcept {
+MSTL_PURE_FUNCTION constexpr int memory_compare(const void* lh, const void* rh, size_t count) noexcept {
 	if (lh == nullptr && rh == nullptr) return 0;
 	if (lh == nullptr) return -1;
     if (rh == nullptr) return 1;
-#ifdef MSTL_COMPILER_GNUC__
-	int result;
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	__asm__ volatile (
-	    "cld\n\t"
-	    "repe   cmpsb\n\t"
-	    "je     1f\n\t"
-	    "movzbl -1(%%rsi), %%eax\n\t"
-	    "movzbl -1(%%rdi), %%edx\n\t"
-	    "subl   %%edx, %%eax\n\t"
-	    "jmp    2f\n"
-	    "1:\n\t"
-	    "xorl   %%eax, %%eax\n"
-	    "2:"
-	    : "=a" (result)
-	    : "S" (lh), "D" (rh), "c" (count)
-	    : "rdx", "cc", "memory"
-	);
-#else
-	__asm__ volatile (
-	    "cld\n\t"
-	    "repe   cmpsb\n\t"
-	    "je     1f\n\t"
-	    "movzbl -1(%%esi), %%eax\n\t"
-	    "movzbl -1(%%edi), %%edx\n\t"
-	    "subl   %%edx, %%eax\n\t"
-	    "jmp    2f\n"
-	    "1:\n\t"
-	    "xorl   %%eax, %%eax\n"
-	    "2:"
-	    : "=a" (result)
-	    : "S" (lh), "D" (rh), "c" (count)
-	    : "edx", "cc", "memory"
-	);
-#endif
-	return result;
-#elif defined(MSTL_COMPILER_MSVC__)
-	return masm::masm_memory_compare(lh, rh, count);
-#else
+
 	while (count--) {
 		if (*static_cast<const byte_t*>(lh) != *static_cast<const byte_t*>(rh))
 			return *static_cast<const byte_t*>(lh) - *static_cast<const byte_t*>(rh);
@@ -362,7 +348,6 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR20 int memory_compare(const void* lh, const voi
 		rh = static_cast<const byte_t*>(rh) + 1;
 	}
 	return 0;
-#endif
 }
 
 // compare with left-hand memory and right-hand memory in a specific length but ignored case of characters.
@@ -503,86 +488,28 @@ constexpr void* memory_move(void* dest, const void* src, size_t count) noexcept 
 // fill the destination memory with target value in the specific length.
 // if parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memset.
-MSTL_CONSTEXPR20 void* memory_set(void* dest, const int value, size_t count) noexcept {
+constexpr void* memory_set(void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
-#ifdef MSTL_COMPILER_GNUC__
-	void* ret = static_cast<byte_t *>(dest);
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	__asm__ volatile (
-		"movq   %1, %%rdi\n\t"
-		"movq   %3, %%rcx\n\t"
-		"movb   %b2, %%al\n\t"
-		"cld\n\t"
-		"rep    stosb\n\t"
-		:
-		: "r" (ret), "r" (dest), "r" (value), "r" (count)
-		: "rdi", "rcx", "rax", "cc", "memory"
-	);
-#else
-	__asm__ volatile (
-		"movl   %[dest], %%edi\n\t"
-		"movl   %[count], %%ecx\n\t"
-		"movb   %b[value], %%al\n\t"
-		"cld\n\t"
-		"rep    stosb\n\t"
-		: [dest] "+r" (dest)
-		: [value] "q" (value), [count] "r" (count)
-		: "edi", "ecx", "eax", "cc", "memory"
-    );
-#endif
-	return ret;
-#elif defined(MSTL_COMPILER_MSVC__)
-	return masm::masm_memory_set(dest, value, count);
-#else
+
 	void* ret = static_cast<byte_t *>(dest);
 	auto dest_v = static_cast<volatile byte_t *>(dest);
 	while (count--) {
 		*dest_v = static_cast<byte_t>(value);
 		dest_v = dest_v + 1;
 	}
-	MSTL_MEMORY_BARRIER(ret);
 	return ret;
-#endif
 }
 
 // clear the destination memory with zero in the specific length.
 // if parameter pointer is nullptr, do nothing.
 // it`s similar with std::bzero.
-inline void memory_zero(void* dest, const size_t count) noexcept {
+constexpr void memory_zero(void* dest, const size_t count) noexcept {
 	if (dest == nullptr) return;
-#ifdef MSTL_COMPILER_GNUC__
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-	__asm__ volatile (
-		"movq   %0, %%rdi\n\t"
-		"movq   %1, %%rcx\n\t"
-		"xorb   %%al, %%al\n\t"
-		"cld\n\t"
-		"rep    stosb\n\t"
-		:
-		: "r" (dest), "r" (count)
-		: "rdi", "rcx", "rax", "memory", "cc"
-	);
-#else
-	__asm__ volatile (
-		"movl   %0, %%edi\n\t"
-		"movl   %1, %%ecx\n\t"
-		"xorb   %%al, %%al\n\t"
-		"cld\n\t"
-		"rep    stosb\n\t"
-		:
-		: "r" (dest), "r" (count)
-		: "edi", "ecx", "eax", "memory", "cc"
-	);
-#endif
-#elif defined(MSTL_COMPILER_MSVC__)
-	masm::masm_memory_zero(dest, count);
-#else
+
 	const auto dest_v = static_cast<volatile byte_t*>(dest);
 	for (size_t i = 0; i < count; ++i) {
 		dest_v[i] = 0;
 	}
-	MSTL_MEMORY_BARRIER(dest_v);
-#endif
 }
 
 // std::memmem
@@ -1280,7 +1207,7 @@ constexpr ptrdiff_t wstring_length(const wchar_t* str) noexcept {
 	return p - str;
 }
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 constexpr ptrdiff_t u8string_length(const char8_t* str) noexcept {
 	const char8_t* p = str;
 	while (*p != u8'\0')

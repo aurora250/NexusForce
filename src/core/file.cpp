@@ -397,12 +397,6 @@ file::size_type file::read_binary(string& str, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read_binary(string& str) const {
-    const size_type s = size();
-    str.resize(s);
-    return this->read_binary(str, s);
-}
-
 bool file::read_line(string& line) const {
     if (!opened_ || handle_ == INVALID_HANDLE())
         return false;
@@ -427,12 +421,6 @@ bool file::read_line(string& line) const {
         }
     }
     return !line.empty() || line_complete;
-}
-
-string file::read_line() const {
-    string line;
-    if (!read_line(line)) return {};
-    return line;
 }
 
 vector<string> file::read_lines() const {
@@ -853,6 +841,89 @@ bool file::remove_directory(const string_view path) noexcept {
     return false;
 }
 
+bool file::remove_all_in_directory(const string& directory_path, bool recursive) noexcept {
+    if (!file::is_directory(directory_path)) return false;
+    bool success = true;
+#ifdef MSTL_PLATFORM_WINDOWS__
+    const string search_pattern = directory_path + "\\*";
+    ::WIN32_FIND_DATAA find_data;
+    const file_handle find_handle = ::FindFirstFileA(search_pattern.c_str(), &find_data);
+    if (find_handle == INVALID_HANDLE()) return false;
+
+    do {
+        string item_name = find_data.cFileName;
+        if (item_name == "." || item_name == "..") continue;
+        string full_path = directory_path + "\\" + item_name;
+
+        if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            if (recursive) {
+                if (!remove_all_in_directory(full_path, true)) {
+                    success = false;
+                }
+                if (!::RemoveDirectoryA(full_path.c_str())) {
+                    if (::GetLastError() != ERROR_DIR_NOT_EMPTY) {
+                        success = false;
+                    }
+                }
+            }
+        } else {
+            if (find_data.dwFileAttributes & FILE_ATTRIBUTE_READONLY) {
+                ::SetFileAttributesA(full_path.c_str(), find_data.dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
+            }
+            if (!::DeleteFileA(full_path.c_str())) {
+                ::DWORD error = ::GetLastError();
+                if (error == ERROR_ACCESS_DENIED) {
+                    ::SetFileAttributesA(full_path.c_str(), FILE_ATTRIBUTE_NORMAL);
+
+                    if (!::DeleteFileA(full_path.c_str())) {
+                        error = ::GetLastError();
+                        success = false;
+                    }
+                } else {
+                    success = false;
+                }
+            }
+        }
+    } while (::FindNextFileA(find_handle, &find_data) != 0);
+    ::FindClose(find_handle);
+#elif defined(MSTL_PLATFORM_LINUX__)
+    ::DIR* dir = ::opendir(directory_path.c_str());
+    if (dir == nullptr) return false;
+
+    ::dirent* entry;
+    while ((entry = ::readdir(dir)) != nullptr) {
+        string item_name = entry->d_name;
+        if (item_name == "." || item_name == "..") continue;
+
+        string full_path = directory_path + "/" + item_name;
+
+        if (file::is_directory(full_path)) {
+            if (recursive) {
+                if (!remove_all_in_directory(full_path, true)) {
+                    success = false;
+                }
+                if (::rmdir(full_path.c_str()) != 0 && errno != ENOTEMPTY) {
+                    success = false;
+                }
+            }
+        } else {
+            if (::unlink(full_path.c_str()) != 0) {
+                if (errno == EACCES) {
+                    ::chmod(full_path.c_str(), 0644);
+                    if (::unlink(full_path.c_str()) != 0) {
+                        success = false;
+                    }
+                } else {
+                    success = false;
+                }
+            }
+        }
+    }
+    ::closedir(dir);
+#endif
+    return success;
+}
+
 bool file::read(
     const string& path, string& content,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
@@ -887,13 +958,6 @@ bool file::read(
 #endif
 }
 
-string file::read(const string& path,
-    const FILE_CREATION creation, const FILE_ATTRI attributes) {
-    string content;
-    file::read(path, content, creation, attributes);
-    return content;
-}
-
 bool file::read_binary(const string& path, string& content,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
     file f;
@@ -911,13 +975,6 @@ bool file::read_binary(const string& path, string& content,
         if (bytes_read != sz) content.resize(bytes_read);
     }
     return true;
-}
-
-string file::read_binary(const string& path,
-    const FILE_CREATION creation, const FILE_ATTRI attributes) {
-    string content;
-    file::read_binary(path, content, creation, attributes);
-    return content;
 }
 
 bool file::copy(const string& from, const string& to, const bool overwrite) {

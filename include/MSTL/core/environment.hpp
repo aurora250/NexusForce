@@ -94,7 +94,6 @@
 
 
 #define __MSTL_GLOBAL_NAMESPACE__ MSTL
-#define USE_MSTL using namespace __MSTL_GLOBAL_NAMESPACE__;
 #define MSTL_BEGIN_NAMESPACE__ namespace __MSTL_GLOBAL_NAMESPACE__ {
 #define MSTL_END_NAMESPACE__ }
 #define _MSTL __MSTL_GLOBAL_NAMESPACE__ ::
@@ -122,31 +121,31 @@
 
 #if _HAS_CXX23 || (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L)
 	// defined when project compiled by using C++23 or upper version of standard library.
-	#define MSTL_VERSION_23__	1
+	#define MSTL_STANDARD_23__	1
 #endif
 #if _HAS_CXX20 || (__cplusplus >= 202002L) || (_MSVC_LANG >= 202002L)
 	// defined when project compiled by using C++20 or upper version of standard library.
-	#define MSTL_VERSION_20__	1
+	#define MSTL_STANDARD_20__	1
 #endif
-#if _HAS_CXX17 || (__cplusplus >= 201703L) || defined(MSTL_VERSION_20__) || (_MSVC_LANG >= 201703L)
+#if _HAS_CXX17 || (__cplusplus >= 201703L) || defined(MSTL_STANDARD_20__) || (_MSVC_LANG >= 201703L)
 	// defined when project compiled by using C++17 or upper version of standard library.
-	#define MSTL_VERSION_17__	1
+	#define MSTL_STANDARD_17__	1
 #endif
-#if (__cplusplus >= 201402L) || defined(MSTL_VERSION_17__) || (_MSVC_LANG >= 201402L)
+#if (__cplusplus >= 201402L) || defined(MSTL_STANDARD_17__) || (_MSVC_LANG >= 201402L)
 	// defined when project compiled by using C++14 or upper version of standard library.
-	#define MSTL_VERSION_14__	1
+	#define MSTL_STANDARD_14__	1
 #endif
-#if (__cplusplus >= 201103L) || defined(MSTL_VERSION_14__) || (_MSVC_LANG >= 201103L)
+#if (__cplusplus >= 201103L) || defined(MSTL_STANDARD_14__) || (_MSVC_LANG >= 201103L)
 	// defined when project compiled by using C++11 or upper version of standard library.
-	#define MSTL_VERSION_11__	1
+	#define MSTL_STANDARD_11__	1
 #endif
-#if (__cplusplus >= 199711L) || defined(MSTL_VERSION_11__) || (_MSVC_LANG >= 199711L)
+#if (__cplusplus >= 199711L) || defined(MSTL_STANDARD_11__) || (_MSVC_LANG >= 199711L)
 	// defined when project compiled by using C++98 or upper version of standard library.
-	#define MSTL_VERSION_98__	1
+	#define MSTL_STANDARD_98__	1
 #endif
 
 
-#if defined(MSTL_VERSION_17__)
+#ifdef MSTL_STANDARD_17__
 	#define MSTL_SUPPORT_DEDUCTION_GUIDES__ 1
 #endif
 
@@ -157,40 +156,40 @@
 	for(auto VALUE = CONTAINER.begin(); VALUE != CONTAINER.end(); ++VALUE)
 
 
-#ifdef MSTL_VERSION_11__
+#ifdef MSTL_STANDARD_11__
 	#define MSTL_CONSTEXPR11 constexpr
 #else
 	#define MSTL_CONSTEXPR11 inline
-#endif // MSTL_VERSION_11__
+#endif // MSTL_STANDARD_11__
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 	#define MSTL_CONSTEXPR14 MSTL_CONSTEXPR11
 #else
 	#define MSTL_CONSTEXPR14 inline
-#endif // MSTL_VERSION_14__
+#endif // MSTL_STANDARD_14__
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 	#define MSTL_CONSTEXPR17 MSTL_CONSTEXPR14
 	#define MSTL_INLINE17 inline
 #else
 	#define MSTL_CONSTEXPR17 inline
 	#define MSTL_INLINE17
-#endif // MSTL_VERSION_17__
+#endif // MSTL_STANDARD_17__
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	#define MSTL_CONSTEXPR20 MSTL_CONSTEXPR17
 #else
 	#define MSTL_CONSTEXPR20 inline
-#endif // MSTL_VERSION_20__
+#endif // MSTL_STANDARD_20__
 
-#ifdef MSTL_VERSION_23__
+#ifdef MSTL_STANDARD_23__
 	#define MSTL_CONSTEXPR23 MSTL_CONSTEXPR20
 #else
 	#define MSTL_CONSTEXPR23 inline
-#endif // MSTL_VERSION_23__
+#endif // MSTL_STANDARD_23__
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 	#define MSTL_IF_CONSTEXPR if constexpr
 #else
 	// this macro will be used with caution, as it may break static overload under C++17.
@@ -198,14 +197,14 @@
 #endif
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	#define MSTL_CONSTEVAL consteval
 #else
 	#define MSTL_CONSTEVAL MSTL_CONSTEXPR
 #endif
 
 
-#ifdef MSTL_VERSION_17__
+#ifdef MSTL_STANDARD_17__
 	#define MSTL_NODISCARD [[nodiscard]]
 	#define MSTL_ALLOC_NODISCARD \
 		[[nodiscard("discard the return of allocators will cause memory leaks.")]]
@@ -229,14 +228,14 @@
 
 #ifdef MSTL_COMPILER_GNUC__
 	#define MSTL_ALWAYS_INLINE __attribute__((always_inline))
-#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_VERSION_17__)
+#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_STANDARD_17__)
 	#define MSTL_ALWAYS_INLINE [[always_inline]]
 #else
 	#define MSTL_ALWAYS_INLINE
 #endif
 
 
-#if defined(MSTL_COMPILER_GNUC__) && defined(MSTL_VERSION_17__)
+#if defined(MSTL_COMPILER_GNUC__) && defined(MSTL_STANDARD_17__)
 	#define MSTL_UNLIKELY [[unlikely]]
 #else
 	#define MSTL_UNLIKELY
@@ -247,7 +246,7 @@
 	#define MSTL_NORETURN __attribute__((noreturn))
 #elif defined(MSTL_COMPILER_MSVC__)
 	#define MSTL_NORETURN __declspec(noreturn)
-#elif defined(MSTL_VERSION_11__)
+#elif defined(MSTL_STANDARD_11__)
 	#define MSTL_NORETURN [[noreturn]]
 #else
 	#define MSTL_NORETURN
@@ -272,7 +271,7 @@
 #endif
 
 
-#ifdef MSTL_VERSION_14__
+#ifdef MSTL_STANDARD_14__
 	#define MSTL_DEPRECATED [[deprecated]]
 	// after C++ 11, we can use lambda expressions to quickly build closures
 	// instead of using functor adapters.
@@ -310,7 +309,7 @@
 #define MSTL_RESTRICT __restrict
 
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 	#define MSTL_NO_UNIQUE_ADDRESS [[no_unique_address]]
 #else
 	#define MSTL_NO_UNIQUE_ADDRESS
@@ -337,7 +336,7 @@
 	MAC(signed char) \
 	MAC(unsigned char) \
 
-#ifdef MSTL_VERSION_20__
+#ifdef MSTL_STANDARD_20__
 // expand macro with Unicode char types.
 #define MSTL_MACRO_RANGES_UNICODE_CHARS(MAC) \
 	MAC(char8_t) \
@@ -454,9 +453,10 @@ using uintmax_t = uint64_t;
 
 MSTL_INLINE17 constexpr size_t POINTER_SIZE = sizeof(void*);
 MSTL_INLINE17 constexpr size_t SIZE_T_MAX_SIZE = static_cast<size_t>(-1);
-MSTL_INLINE17 constexpr bool SIZE_T_SAME_WITH_LONG = sizeof(long) == sizeof(size_t);
+MSTL_INLINE17 constexpr bool SIZE_T_SAME_WITH_ULONG = sizeof(unsigned long) == sizeof(size_t);
 
 MSTL_INLINE17 constexpr size_t MEMORY_ALIGN_THRESHHOLD = 16UL;
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_BASICLIB_HPP__

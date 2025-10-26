@@ -204,7 +204,7 @@ public:
         return hasher(day()) ^ hasher(month()) ^ hasher(year());
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _MSTL format("{:04d}-{:02d}-{:02d}", year(), month(), day());
     }
 
@@ -388,7 +388,7 @@ public:
         return hasher(hours()) ^ hasher(minutes()) ^ hasher(seconds());
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _MSTL format("{:02d}:{:02d}:{:02d}", hours(), minutes(), seconds());
     }
 
@@ -591,16 +591,22 @@ public:
 
 
     MSTL_NODISCARD string to_gmt() const noexcept;
-    MSTL_NODISCARD string to_iso_utc() const noexcept;
+
+    MSTL_NODISCARD string to_iso_utc() const {
+        const datetime utc_dt = datetime::to_utc(*this);
+        return utc_dt.date().to_string() + "T" + utc_dt.time().to_string() + "Z";
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_iso() const {
+        return date_.to_string() + "T" + time_.to_string() + "Z";
+    }
+
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return date_.to_hash() ^ time_.to_hash();
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_iso() const noexcept {
-        return date_.to_string() + "T" + time_.to_string() + "Z";
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return date_.to_string() + " " + time_.to_string();
     }
 
@@ -671,7 +677,7 @@ public:
     MSTL_CONSTEXPR20 ~timestamp() = default;
 
 
-    MSTL_NODISCARD static timestamp now() noexcept;
+    MSTL_NODISCARD static timestamp now() noexcept { return timestamp(datetime::now()); }
 
     MSTL_NODISCARD constexpr datetime to_datetime() const noexcept {
         return datetime::epoch() + sec_since_epoch_;
@@ -681,7 +687,7 @@ public:
         return hash<value_type>()(sec_since_epoch_);
     }
 
-    MSTL_CONSTEXPR20 string to_string() const noexcept {
+    MSTL_CONSTEXPR20 string to_string() const {
         return integer64(sec_since_epoch_).to_string();
     }
 

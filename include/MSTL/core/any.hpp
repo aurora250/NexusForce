@@ -108,7 +108,7 @@ private:
 public:
     constexpr any() noexcept : manage_(nullptr) {}
     any(const any& x);
-    any& operator =(const any& rh);
+    any& operator =(const any& rh) { *this = any(rh); return *this; }
     any(any&& x) noexcept;
     any& operator =(any&& rh) noexcept;
 
@@ -137,7 +137,7 @@ public:
 	    Manager::create(storage_, ilist, _MSTL forward<Args>(args)...);
     }
 
-    ~any();
+    ~any() { reset(); }
 
     template <typename T, typename... Args, typename VT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, Args&&...>>, int> = 0>
@@ -153,8 +153,13 @@ public:
         return *manage_t<VT>::access(storage_);
     }
 
-    void reset() noexcept;
-    MSTL_NODISCARD bool has_value() const noexcept;
+    void reset() noexcept {
+        if (has_value()) {
+            manage_(DESTROY, this, nullptr);
+            manage_ = nullptr;
+        }
+    }
+    MSTL_NODISCARD bool has_value() const noexcept { return manage_ != nullptr; }
     MSTL_NODISCARD const std::type_info& type() const noexcept;
     void swap(any& rh) noexcept;
 };
