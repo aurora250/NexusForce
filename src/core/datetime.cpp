@@ -107,8 +107,8 @@ datetime datetime::to_utc(const datetime& local_dt) noexcept {
 
 MSTL_NODISCARD string datetime::to_gmt() const noexcept {
     const datetime utc_dt = datetime::to_utc(*this);
-    const _MSTL date& utc_date = utc_dt.date();
-    const _MSTL time& utc_time = utc_dt.time();
+    const _MSTL date& utc_date = utc_dt.dates();
+    const _MSTL time& utc_time = utc_dt.times();
     static const char* weekdays[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     static const char* months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",

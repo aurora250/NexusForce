@@ -3,7 +3,7 @@
 #include "algobase.hpp"
 #include "tuple.hpp"
 #include <atomic>
-#include <stdlib.h>
+#include <stdlib.h> // malloc
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -72,17 +72,17 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(
 MSTL_BEGIN_INNER__
 template <typename Iterator, typename T, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, T&& x) {
-    _MSTL fill(first, last, _MSTL forward<T>(x));
+MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
+    _MSTL fill(first, last, x);
 }
 
 template <typename Iterator, typename T, enable_if_t<
     !is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, T&& x) {
+MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
     Iterator cur = first;
     try {
         for (; cur != last; ++cur)
-            _MSTL construct(&*cur, _MSTL forward<T>(x));
+            _MSTL construct(&*cur, x);
     }
     catch (...) {
         for (; cur != first; --cur)
@@ -93,26 +93,26 @@ MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, T&
 MSTL_END_INNER__
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, T&& x) {
+MSTL_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, const T& x) {
     if (first == last) return;
-    _INNER __uninitialized_fill_aux(first, last, _MSTL forward<T>(x));
+    _INNER __uninitialized_fill_aux(first, last, x);
 }
 
 
 MSTL_BEGIN_INNER__
 template <typename Iterator, typename T, enable_if_t<
     is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, T&& x) {
-    return _MSTL fill_n(first, n, _MSTL forward<T>(x));
+MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
+    return _MSTL fill_n(first, n, x);
 }
 
 template <typename Iterator, typename T, enable_if_t<
     !is_trivially_copy_assignable_v<iter_val_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, T&& x) {
+MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     Iterator cur = first;
     try{
         for (; n > 0; --n, ++cur)
-            _MSTL construct(&*cur, _MSTL forward<T>(x));
+            _MSTL construct(&*cur, x);
     }
     catch (...) {
         for (; cur != first; --cur)
@@ -124,8 +124,8 @@ MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, T
 MSTL_END_INNER__
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR20 Iterator uninitialized_fill_n(Iterator first, size_t n, T&& x) {
-    return _INNER __uninitialized_fill_n_aux(first, n, _MSTL forward<T>(x));
+MSTL_CONSTEXPR20 Iterator uninitialized_fill_n(Iterator first, size_t n, const T& x) {
+    return _INNER __uninitialized_fill_n_aux(first, n, x);
 }
 
 

@@ -215,14 +215,9 @@ private:
 	template <bool, typename> friend struct vector_iterator;
 
 private:
-	MSTL_CONSTEXPR20 pointer allocate_and_fill(size_type n, T&& x) {
-		pointer result = pair_.get_base().allocate(n);
-		_MSTL uninitialized_fill_n(result, n, _MSTL forward<T>(x));
-		return result;
-	}
-
-	MSTL_CONSTEXPR20 void fill_initialize(size_type n, T&& x) {
-		start_ = this->allocate_and_fill(n, _MSTL forward<T>(x));
+	MSTL_CONSTEXPR20 void fill_initialize(size_type n, const T& x) {
+		start_ = pair_.get_base().allocate(n);
+		_MSTL uninitialized_fill_n(start_, n, x);
 		finish_ = start_ + n;
 		pair_.value = finish_;
 	}
@@ -374,15 +369,6 @@ public:
 	}
 	MSTL_CONSTEXPR20 explicit vector(const long n, const T& value) {
 		this->fill_initialize(n, value);
-	}
-	MSTL_CONSTEXPR20 explicit vector(const size_type n, T&& value) {
-		this->fill_initialize(n, _MSTL forward<T>(value));
-	}
-	MSTL_CONSTEXPR20 explicit vector(const int n, T&& value) {
-		this->fill_initialize(n, _MSTL forward<T>(value));
-	}
-	MSTL_CONSTEXPR20 explicit vector(const long n, T&& value) {
-		this->fill_initialize(n, _MSTL forward<T>(value));
 	}
 
 	MSTL_CONSTEXPR20 vector(const self& x) {

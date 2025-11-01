@@ -192,6 +192,13 @@ MSTL_PURE_FUNCTION constexpr mathld_t logarithm_10(const mathld_t x) noexcept {
 }
 
 
+MSTL_CONST_FUNCTION constexpr mathul_t logarithm_2_integer(mathul_t x) noexcept {
+	mathul_t k = 0;
+	for (; x > 1; x >>= 1) ++k;
+	return k;
+}
+
+
 MSTL_PURE_FUNCTION constexpr mathld_t
 square_root(const mathld_t x, const mathld_t precise = _CONSTANTS PRECISE_TOLERANCE) noexcept {
 	mathld_t t = 0.0;

@@ -21,7 +21,7 @@ private:
     unordered_map<string, string> parameters; // query + body parameters
     string query{};
     string body{};
-    session* session = nullptr;
+    session* session_ = nullptr;
 
     friend class servlet;
 
@@ -59,10 +59,10 @@ public:
     }
 
     void set_session(class session* session) {
-        this->session = session;
+        this->session_ = session;
     }
     class session* get_session() const {
-        return session;
+        return session_;
     }
 
     void set_header(const string& name, const string& value) {

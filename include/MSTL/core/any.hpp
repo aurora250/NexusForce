@@ -21,7 +21,7 @@ MSTL_ERROR_BUILD_DERIVED_CLASS(AnyCastError, TypeCastError, "Cast From any Type 
 class MSTL_API any : public iswappable<any> {
 private:
     union storage_internal {
-		constexpr storage_internal() = default;
+		storage_internal() = default;
 		storage_internal(const storage_internal&) = delete;
 		storage_internal& operator=(const storage_internal&) = delete;
 
@@ -106,7 +106,7 @@ private:
     }
 
 public:
-    constexpr any() noexcept : manage_(nullptr) {}
+    any() noexcept : manage_(nullptr) {}
     any(const any& x);
     any& operator =(const any& rh) { *this = any(rh); return *this; }
     any(any&& x) noexcept;

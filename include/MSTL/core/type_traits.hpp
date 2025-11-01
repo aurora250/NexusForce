@@ -372,8 +372,15 @@ template <typename T>
 using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::type;
 
 
+MSTL_BEGIN_INNER__
+template <typename>
+struct __is_void_helper : false_type {};
+template <>
+struct __is_void_helper<void> : true_type {};
+MSTL_END_INNER__
+
 template <typename T>
-struct is_void : bool_constant<is_same<remove_cv_t<T>, void>::value> {};
+struct is_void : _INNER __is_void_helper<remove_cv_t<T>>::type {};
 
 #ifdef MSTL_STANDARD_14__
 template <typename T>
@@ -597,9 +604,11 @@ using add_pointer_t = typename add_pointer<T>::type;
 // declval will only work in no evaluation context (decltype or sizeof) to quickly get rvalue types. 
 template <typename T>
 add_rvalue_reference_t<T> declval() noexcept;
+
 // try to copy type T
 template <typename T>
 type_identity_t<T> declcopy(type_identity_t<T>) noexcept;
+
 // work with is_void_t
 template <typename T>
 void declvoid(type_identity_t<T>) noexcept;
@@ -1321,7 +1330,7 @@ MSTL_NODISCARD constexpr bool is_constant_evaluated() noexcept {
 #ifdef MSTL_COMPILER_MSVC__
 template <typename From, typename To>
 struct is_convertible : bool_constant<__is_convertible_to(From, To)> {};
-#elif defined(MSTL_COMPILER_GNUC__) && !defined(MSTL_COMPILE_WITH_QT__)
+#elif defined(MSTL_COMPILER_CLANG__)
 template <typename From, typename To>
 struct is_convertible : bool_constant<__is_convertible(From, To)> {};
 #else
@@ -2031,10 +2040,10 @@ private:
 
     template <typename T, bool Nothrow = noexcept(_MSTL declvoid<T>(_MSTL declval<Res_t>())),
         typename = decltype(_MSTL declvoid<T>(_MSTL declval<Res_t>())), bool Dangle =
-#ifdef MSTL_COMPILER_GCC__
-        __reference_converts_from_temporary(T, Res_t)
-#elif defined(MSTL_COMPILER_CLANG__)
+#if defined(MSTL_COMPILER_GNUC__) && defined(MSTL_PLATFORM_LINUX__)
         __reference_converts_from_temporary(_MSTL declval<T>(), _MSTL declval<Res_t>())
+#elif defined(MSTL_COMPILER_GCC__)
+    __reference_converts_from_temporary(T, Res_t)
 #else
         false
 #endif

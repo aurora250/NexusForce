@@ -8,8 +8,7 @@ MSTL_BEGIN_NAMESPACE__
 template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
 	for (; first != last; ++first) {
-		if (!pred(*first))
-			return false;
+		if (!pred(*first)) return false;
 	}
 	return true;
 }
@@ -17,8 +16,7 @@ constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
 template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
 	for (; first != last; ++first) {
-		if (pred(*first))
-			return true;
+		if (pred(*first)) return true;
 	}
 	return false;
 }
@@ -26,8 +24,7 @@ constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
 template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr bool none_of(Iterator first, Iterator last, Predicate pred) {
 	for (; first != last; ++first) {
-		if (pred(*first))
-			return false;
+		if (pred(*first)) return false;
 	}
 	return true;
 }
@@ -39,12 +36,10 @@ constexpr Iterator3 set_union(Iterator1 first1, Iterator1 last1, Iterator2 first
 		if (*first1 < *first2) {
 			*result = *first1;
 			++first1;
-		}
-		else if (*first2 < *first1) {
+		} else if (*first2 < *first1) {
 			*result = *first2;
 			++first2;
-		}
-		else {
+		} else {
 			*result = *first1;
 			++first1; ++first2;
 		}
@@ -58,9 +53,11 @@ template <typename Iterator1, typename Iterator2, typename Iterator3,
 constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1,
 	Iterator2 first2, Iterator2 last2, Iterator3 result) {
 	while (first1 != last1 && first2 != last2) {
-		if (*first1 < *first2) ++first1;
-		else if (*first2 < first1) ++first2;
-		else {
+		if (*first1 < *first2) {
+			++first1;
+		} else if (*first2 < first1) {
+			++first2;
+		} else {
 			*result = *first1;
 			++first1; ++first2;
 			++result;
@@ -78,9 +75,9 @@ constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1,
 			*result = *first1;
 			++first1;
 			++result;
-		}
-		else if (*first2 < first1) ++first2;
-		else {
+		} else if (*first2 < first1) {
+			++first2;
+		} else {
 			++first1; ++first2;
 		}
 	}
@@ -96,13 +93,11 @@ constexpr Iterator3 set_symmetric_difference(Iterator1 first1, Iterator1 last1,
 			*result = *first1;
 			++first1;
 			++result;
-		}
-		else if (*first2 < first1) {
+		} else if (*first2 < first1) {
 			*result = *first2;
 			++first1;
 			++result;
-		}
-		else {
+		} else {
 			++first1; ++first2;
 		}
 	}
@@ -159,8 +154,7 @@ constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred) {
 
 template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred) {
-	while (first != last && pred(*first))
-		++first;
+	while (first != last && pred(*first)) ++first;
 	return first;
 }
 
@@ -179,16 +173,13 @@ constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 		if (binary_pred(*current1, *current2)) {
 			++current1;
 			++current2;
-		}
-		else {
-			if (d1 == d2)
-				return last1;
-			else {
-				current1 = ++first1;
-				current2 = first2;
-				--d1;
-			}
-		}
+		} else {
+			if (d1 == d2) return last1;
+
+            current1 = ++first1;
+            current2 = first2;
+            --d1;
+        }
 	}
 	return first1;
 }
@@ -209,11 +200,10 @@ constexpr Iterator search_n(Iterator first, Iterator last, size_t count, const T
 			++i;
 			--n;
 		}
-		if (n == 0)
-			return first;
-		else
-			first = _MSTL find(i, last, value);
-	}
+		if (n == 0) return first;
+
+        first = _MSTL find(i, last, value);
+    }
 	return last;
 }
 
@@ -231,16 +221,14 @@ constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, c
 			++i;
 			--n;
 		}
-		if (n == 0)
-			return first;
-		else {
-			while (i != last) {
-				if (binary_pred(*i, value)) break;
-				++i;
-			}
-			first = i;
-		}
-	}
+		if (n == 0) return first;
+
+        while (i != last) {
+            if (binary_pred(*i, value)) break;
+            ++i;
+        }
+        first = i;
+    }
 	return last;
 }
 
@@ -314,9 +302,11 @@ template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
 	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
 constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1,
 	Iterator2 first2, Iterator2 last2, BinaryPredicate comp) {
-	for (; first1 != last1; ++first1)
-		for (Iterator2 iter = first2; iter != last2; ++iter)
+	for (; first1 != last1; ++first1) {
+		for (Iterator2 iter = first2; iter != last2; ++iter) {
 			if (comp(*first1, *iter)) return first1;
+		}
+	}
 	return last1;
 }
 
@@ -342,14 +332,16 @@ constexpr Iterator for_each_n(Iterator first, size_t n, Function f) {
 
 template <typename Iterator, typename Generator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr void generate(Iterator first, Iterator last, Generator gen) {
-	for (; first != last; ++first)
+	for (; first != last; ++first) {
 		*first = gen();
+	}
 }
 
 template <typename Iterator, typename Generator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator generate_n(Iterator first, size_t n, Generator gen) {
-	for (; n > 0; --n, ++first)
+	for (; n > 0; --n, ++first) {
 		*first = gen();
+	}
 	return first;
 }
 
@@ -357,12 +349,10 @@ template <typename Iterator1, typename Iterator2, typename Compare,
 	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
 constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) {
 	while (first1 != last1 && first2 != last2) {
-		if (comp(*first2, *first1))
-			return false;
-		if (comp(*first1, *first2))
-			++first1;
-		else
-			++first1, ++first2;
+		if (comp(*first2, *first1)) return false;
+
+		if (comp(*first1, *first2)) ++first1;
+		else ++first1, ++first2;
 	}
 	return first2 == last2;
 }
@@ -380,8 +370,7 @@ constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 		if (comp(*first2, *first1)) {
 			*result = *first2;
 			++first2;
-		}
-		else {
+		} else {
 			*result = *first1;
 			++first1;
 		}
@@ -399,21 +388,17 @@ template <typename Iterator, typename Predicate, enable_if_t<is_ranges_bid_iter_
 constexpr Iterator partition(Iterator first, Iterator last, Predicate pred) {
 	while (true) {
 		while (true) {
-			if (first == last)
-				return first;
-			if (pred(*first))
-				++first;
-			else
-				break;
+			if (first == last) return first;
+
+			if (pred(*first)) ++first;
+			else break;
 		}
 		--last;
 		while (true) {
-			if (first == last)
-				return first;
-			if (!pred(*last))
-				--last;
-			else
-				break;
+			if (first == last) return first;
+
+			if (!pred(*last)) --last;
+			else break;
 		}
 		_MSTL iter_swap(first, last);
 		++first;
@@ -441,22 +426,24 @@ constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivo
 template <typename Iterator1, typename Iterator2, typename T,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 result, const T& value) {
-	for (; first != last; ++first)
+	for (; first != last; ++first) {
 		if (*first != value) {
 			*result = *first;
 			++result;
 		}
+	}
 	return result;
 }
 
 template <typename Iterator1, typename Iterator2, typename Predicate,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred) {
-	for (; first != last; ++first)
+	for (; first != last; ++first) {
 		if (!pred(*first)) {
 			*result = *first;
 			++result;
 		}
+	}
 	return result;
 }
 
@@ -499,8 +486,9 @@ template <typename Iterator1, typename Iterator2, typename T,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 replace_copy(Iterator1 first, Iterator1 last, Iterator2 result,
 	const T& old_value, const T& new_value) {
-	for (; first != last; ++first, ++result)
+	for (; first != last; ++first, ++result) {
 		*result = *first == old_value ? new_value : *first;
+	}
 	return result;
 }
 
@@ -508,21 +496,24 @@ template <typename Iterator1, typename Iterator2, typename Predicate, typename T
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 replace_copy_if(Iterator1 first, Iterator1 last, Iterator2 result,
 	Predicate pred, const T& new_value) {
-	for (; first != last; ++first, ++result)
+	for (; first != last; ++first, ++result) {
 		*result = pred(*first) ? new_value : *first;
+	}
 	return result;
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 constexpr void replace(Iterator first, Iterator last, const T& old_value, const T& new_value) {
-	for (; first != last; ++first)
+	for (; first != last; ++first) {
 		if (*first == old_value) *first = new_value;
+	}
 }
 
 template <typename Iterator, typename Predicate, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 constexpr void replace_if(Iterator first, Iterator last, Predicate pred, const T& new_value) {
-	for (; first != last; ++first)
+	for (; first != last; ++first) {
 		if (pred(*first)) *first = new_value;
+	}
 }
 
 #ifndef MSTL_STANDARD_17__
@@ -616,9 +607,9 @@ constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 			if (first == middle) {
 				if (i == last) return;
 				middle = i;
-			}
-			else if (i == last)
+			} else if (i == last) {
 				i = middle;
+			}
 		}
 	}
 }
@@ -632,10 +623,11 @@ constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initia
 	while (ptr2 != initial) {
 		*ptr1 = *ptr2;
 		ptr1 = ptr2;
-		if (last - ptr2 > shift)
+		if (last - ptr2 > shift) {
 			ptr2 += shift;
-		else
+		} else {
 			ptr2 = first + (shift - (last - ptr2));
+		}
 	}
 	*ptr1 = value;
 }
@@ -643,8 +635,9 @@ constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initia
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 	iter_dif_t<Iterator> n = _MSTL gcd(last - first, middle - first);
-	while (n--)
+	while (n--) {
 		_INNER __rotate_cycle_aux(first, last, first + n, middle - first);
+	}
 }
 
 MSTL_END_INNER__
@@ -701,8 +694,9 @@ constexpr void shift_right(Iterator first, Iterator last, size_t n) {
 template <typename Iterator1, typename Iterator2,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 swap_ranges(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
-	for (; first1 != last1; ++first1, ++first2)
+	for (; first1 != last1; ++first1, ++first2) {
 		_MSTL iter_swap(first1, first2);
+	}
 	return first2;
 }
 
@@ -710,8 +704,9 @@ template <typename Iterator1, typename Iterator2, typename UnaryOperation,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator2 transform(Iterator1 first, Iterator1 last, Iterator2 result, UnaryOperation op)
 noexcept(noexcept(++first) && noexcept(++result) && noexcept(*result = op(*first))) {
-	for (; first != last; ++first, ++result)
+	for (; first != last; ++first, ++result) {
 		*result = op(*first);
+	}
 	return result;
 }
 
@@ -723,8 +718,9 @@ constexpr Iterator3 transform(
 	noexcept(++first1) && noexcept(first2) &&
 	noexcept(++result) && noexcept(*result = binary_op(*first1, *first2))
 ) {
-	for (; first1 != last1; ++first1, ++first2, ++result)
+	for (; first1 != last1; ++first1, ++first2, ++result) {
 		*result = binary_op(*first1, *first2);
+	}
 	return result;
 }
 
@@ -734,8 +730,9 @@ constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last,
 	Iterator2 result, BinaryPredicate binary_pred) {
 	if (first == last) return result;
 	*result = *first;
-	while (++first != last)
+	while (++first != last) {
 		if (!binary_pred(*result, *first)) *++result = *first;
+	}
 	return ++result;
 }
 
@@ -824,11 +821,12 @@ constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first
 	iter_dif_t<Iterator1> len1 = _MSTL distance(first1, last1);
 	iter_dif_t<Iterator2> len2 = _MSTL distance(first2, last2);
 	if (len1 != len2) return false;
+
 	for (; first1 != last1 && first2 != last2; ++first1, (void) ++first2) {
 		if (!pred(*first1, *first2)) break;
 	}
-	if (first1 == last1)
-		return true;
+	if (first1 == last1) return true;
+
 	for (Iterator1 i = first1; i != last1; ++i) {
 		bool is_repeated = false;
 		for (Iterator1 j = first1; j != i; ++j) {
@@ -840,15 +838,13 @@ constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first
 		if (!is_repeated) {
 			size_t c2 = 0;
 			for (Iterator2 j = first2; j != last2; ++j) {
-				if (pred(*i, *j))
-					++c2;
+				if (pred(*i, *j)) ++c2;
 			}
 			if (c2 == 0) return false;
 			size_t c1 = 1;
 			Iterator1 j = i;
 			for (++j; j != last1; ++j) {
-				if (pred(*i, *j))
-					++c1;
+				if (pred(*i, *j)) ++c1;
 			}
 			if (c1 != c2) return false;
 		}
@@ -927,8 +923,7 @@ void shuffle(Iterator first, Iterator last) {
 	if (first == last) return;
     for (Iterator i = _MSTL next(first); i != last; ++i) {
         auto distance = _MSTL distance(first, i);
-        auto random_idx = random_lcd::next_int(0, static_cast<int>(distance));
-        Iterator j = _MSTL next(first, random_idx);
+        Iterator j = _MSTL next(first, random_lcd::next_int(0, static_cast<int>(distance)));
         _MSTL iter_swap(i, j);
     }
 }
@@ -956,10 +951,9 @@ constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, co
 			first = middle;
 			++first;
 			len = len - half - 1;
-		}
-		else if (comp(value, *middle))
+		} else if (comp(value, *middle)) {
 			len = half;
-		else {
+		} else {
 			left = _MSTL lower_bound(first, middle, value, comp);
 			_MSTL advance(first, len);
 			right = _MSTL upper_bound(++middle, first, value, comp);
@@ -994,8 +988,7 @@ constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Itera
 		_MSTL advance(first_cut, len11);
 		second_cut = _MSTL lower_bound(middle, last, *first_cut, comp);
 		len22 = _MSTL distance(middle, second_cut);
-	}
-	else {
+	} else {
 		len22 = len2 / 2;
 		_MSTL advance(second_cut, len22);
 		first_cut = _MSTL upper_bound(first, middle, *second_cut, comp);
@@ -1075,8 +1068,7 @@ constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator
 			_MSTL advance(first_cut, len11);
 			second_cut = _MSTL lower_bound(middle, last, *first_cut, comp);
 			len22 = _MSTL distance(middle, second_cut);
-		}
-		else {
+		} else {
 			len22 = len2 / 2;
 			_MSTL advance(second_cut, len22);
 			first_cut = _MSTL upper_bound(first, middle, *second_cut, comp);
@@ -1101,11 +1093,12 @@ constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Com
 	Distance len1 = _MSTL distance(first, middle);
 	Distance len2 = _MSTL distance(middle, last);
 	temporary_buffer<Iterator> buffer(first, last);
-	if (buffer.begin() == 0)
+	if (buffer.begin() == 0) {
 		_INNER __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
-	else
-		_INNER __merge_with_buffer_aux(
-			first, middle, last, len1, len2, buffer.begin(), Distance(buffer.size()), comp);
+	} else {
+		_INNER __merge_with_buffer_aux(first, middle, last, len1, len2,
+			buffer.begin(), Distance(buffer.size()), comp);
+	}
 }
 
 template <typename Iterator>
@@ -1173,8 +1166,9 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
     if (first == middle) return;
     _MSTL make_heap(first, middle, comp);
     for (Iterator i = middle; i < last; ++i) {
-        if (comp(*i, *first))
-            _MSTL pop_heap_aux(first, middle, i, *i, comp);
+        if (comp(*i, *first)) {
+	        _MSTL pop_heap_aux(first, middle, i, *i, comp);
+        }
     }
     _MSTL sort_heap(first, middle, comp);
 }
@@ -1200,7 +1194,7 @@ Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
 	while (first != last) {
 		if (comp(*first, *result_first)) {
             _MSTL adjust_heap(result_first, Distance(0),
-                Distance(result_real_last - result_first), *first, comp);
+            	Distance(result_real_last - result_first), *first, comp);
         }
 		++first;
 	}
@@ -1239,8 +1233,9 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
         if (comp(value, *first)) {
             _MSTL copy_backward(first, i, i + 1);
             *first = value;
+        } else {
+	        _INNER __insertion_sort_aux(i, value, comp);
         }
-        else _INNER __insertion_sort_aux(i, value, comp);
     }
 }
 
@@ -1292,6 +1287,7 @@ void quick_sort(Iterator first, Iterator last) {
     return _MSTL quick_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
 
+
 MSTL_BEGIN_INNER__
 template <typename Iterator, typename Compare>
 void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compare comp) {
@@ -1307,12 +1303,6 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
         last = cut;
     }
 }
-
-MSTL_CONST_FUNCTION constexpr mathul_t cursory_lg2(mathul_t x) noexcept {
-	mathul_t k = 0;
-	for (; x > 1; x >>= 1) ++k;
-	return k;
-}
 MSTL_END_INNER__
 
 // standard sort : Ot(NlogN) Om(logN) unstable
@@ -1320,20 +1310,23 @@ template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
-    _INNER __intro_sort_dispatch(first, last, static_cast<int>(_INNER cursory_lg2(last - first)) * 2, comp);
+    _INNER __intro_sort_dispatch(first, last, static_cast<int>(_MSTL logarithm_2_integer(last - first)) * 2, comp);
     if (last - first > SORT_DISPATCH_THRESHOLD) {
         _MSTL insertion_sort(first, first + SORT_DISPATCH_THRESHOLD, comp);
-        for (Iterator i = first + SORT_DISPATCH_THRESHOLD; i != last; ++i)
-            _INNER __insertion_sort_aux(i, *i, comp);
+        for (Iterator i = first + SORT_DISPATCH_THRESHOLD; i != last; ++i) {
+	        _INNER __insertion_sort_aux(i, *i, comp);
+        }
     }
-    else
-        _MSTL insertion_sort(first, last, comp);
+    else {
+	    _MSTL insertion_sort(first, last, comp);
+    }
 }
 
 template <typename Iterator>
 void sort(Iterator first, Iterator last) {
     return _MSTL sort(first, last, _MSTL less<iter_val_t<Iterator>>());
 }
+
 
 // nth element : Ot(N)~(N^2) Om(1) unstable
 template <typename Iterator, typename Compare, enable_if_t<

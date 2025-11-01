@@ -118,7 +118,7 @@ public:
 		return tree_.insert_unique(x);
 	}
 	pair<iterator, bool> insert(value_type&& x) {
-		return tree_.insert_unique(_MSTL move(x));
+		return tree_.emplace_unique(_MSTL move(x));
 	}
 
 	template <typename... Args>

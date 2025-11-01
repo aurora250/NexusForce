@@ -484,8 +484,8 @@ public:
     MSTL_CONSTEXPR20 ~datetime() = default;
 
 
-    MSTL_NODISCARD constexpr const date& date() const noexcept { return date_; }
-    MSTL_NODISCARD constexpr const time& time() const noexcept { return time_; }
+    MSTL_NODISCARD constexpr const _MSTL date& dates() const noexcept { return date_; }
+    MSTL_NODISCARD constexpr const _MSTL time& times() const noexcept { return time_; }
 
     MSTL_NODISCARD constexpr time_type hours() const noexcept { return time_.hours(); }
     MSTL_NODISCARD constexpr time_type minutes() const noexcept { return time_.minutes(); }
@@ -594,7 +594,7 @@ public:
 
     MSTL_NODISCARD string to_iso_utc() const {
         const datetime utc_dt = datetime::to_utc(*this);
-        return utc_dt.date().to_string() + "T" + utc_dt.time().to_string() + "Z";
+        return utc_dt.dates().to_string() + "T" + utc_dt.times().to_string() + "Z";
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_iso() const {

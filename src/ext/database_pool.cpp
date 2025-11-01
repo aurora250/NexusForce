@@ -463,11 +463,11 @@ uint64_t db_sqlite_result::at_bit(const size_type n) const noexcept {
 }
 
 _MSTL date db_sqlite_result::at_date(const size_type n) const noexcept {
-    return at_datetime(n).date();
+    return at_datetime(n).dates();
 }
 
 _MSTL time db_sqlite_result::at_time(const size_type n) const noexcept {
-    return at_datetime(n).time();
+    return at_datetime(n).times();
 }
 
 _MSTL datetime db_sqlite_result::at_datetime(const size_type n) const {
