@@ -16,9 +16,9 @@ void test_enctype();
 class example_servlet final : public servlet {
 public:
     example_servlet(const int id) : servlet(id) {
-        set_session_cookie_name(HTTP_COOKIE::SESSIONID);
-        auto cors_filt = ::new cors_filter();
-        auto log_filt = ::new logging_filter();
+        set_session_cookie_name(HTTP_COOKIE_NAME::SESSIONID);
+        auto cors_filt = new cors_filter();
+        auto log_filt = new logging_filter();
         add_filter(cors_filt);
         add_filter(log_filt);
     }
@@ -28,13 +28,20 @@ public:
     }
 
     void do_post(http_request& request, http_response& response) override {
-        const string& path = request.get_path();
+        static const string res_root =
+#ifdef MSTL_PLATFORM_WINDOWS__
+            R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\tests\resource)";
+#elif defined(MSTL_PLATFORM_LINUX__)
+            R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)";
+#endif
+
+        const string& path = request.path();
         if (path == "/old-link") {
-            response.redirect("/new-link");
+            response.set_redirect("/new-link");
             return;
         }
         if (path == "/forward-me") {
-            response.forward("/forward-target");
+            response.set_forward("/forward-target");
             return;
         }
         if (path == "/forward-target") {
@@ -47,10 +54,10 @@ public:
             response.set_ok();
             if (path.ends_with(".css")) {
                 response.set_content_type(HTTP_CONTENT::CSS_TEXT);
-                response.set_body(_MSTL move(file::read("./resource" + path)));
+                response.set_body(_MSTL move(file::read(res_root + path)));
             } else if (path.ends_with(".jpg")) {
                 response.set_content_type(HTTP_CONTENT::JPEG_IMG);
-                response.set_body(_MSTL move(file::read_binary("./resource" + path)));
+                response.set_body(_MSTL move(file::read_binary(res_root + path)));
             }
             return;
         }
@@ -82,25 +89,25 @@ public:
         if (path == "/") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("./resource/index.html");
+            static file f(res_root + "/index.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/detail") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("./resource/detail.html");
+            static file f(res_root + "/detail.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/new-link") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("./resource/index.html");
+            static file f(res_root + "/index.html");
             response.set_body(_MSTL move(f.read()));
         } else if (path == "/test") {
             response.set_ok();
             response.set_status_msg("OK");
-            static file f("./resource/test.html");
+            static file f(res_root + "/test.html");
             response.set_body(_MSTL move(f.read()));
         } else {
-            static file f("./resource/404err.html");
+            static file f(res_root + "/404err.html");
             response.set_body(_MSTL move(f.read()));
         }
     }
@@ -117,13 +124,13 @@ public:
 private:
     void handle_session_api(http_request& request, http_response& response) {
         session* session = get_session(request);
-        string action = request.get_parameter("action");
+        string action = request.parameter("action");
 
         if (action == "create") {
             session = get_session(request, true);
             response.set_ok();
             response.set_content_type(HTTP_CONTENT::JSON_APP);
-            response.set_body(R"({"sessionId":")" + session->get_id() + R"("})");
+            response.set_body(R"({"sessionId":")"_s + session->id() + R"("})");
         }
         else if (action == "invalidate" && session) {
             session->invalidate();
@@ -134,9 +141,9 @@ private:
             if (session) {
                 const auto json = json_builder()
                     .begin_object()
-                    .key("sessionId").value(session->get_id())
-                    .key("createTime").value(session->get_create_time().to_iso_utc())
-                    .key("lastAccess").value(session->get_last_access().to_iso_utc())
+                    .key("sessionId").value(session->id())
+                    .key("createTime").value(session->create_time().to_ISO_UTC())
+                    .key("lastAccess").value(session->last_access().to_ISO_UTC())
                     .key("attributes").value(session->get_data())
                     .end_object().build();
 
@@ -158,9 +165,9 @@ private:
 
     void handle_session_attribute(http_request& request, http_response& response) {
         string attrName, attrValue;
-        string content_type = request.get_content_type();
-        if (content_type.find(HTTP_CONTENT::JSON_APP) == 0) {
-            const auto root = json_parser(request.get_body()).parse();
+        string content_type = request.content_type();
+        if (content_type.find(HTTP_CONTENT::JSON_APP.content()) == 0) {
+            const auto root = json_parser(request.body()).parse();
             if (root->is_object()) {
                 const json_object* obj = root->as_object();
                 const json_value* attrNameVal = obj->get_member("attrName");
@@ -173,8 +180,8 @@ private:
                 }
             }
         } else {
-            attrName = request.get_parameter("attrName");
-            attrValue = request.get_parameter("attrValue");
+            attrName = request.parameter("attrName");
+            attrValue = request.parameter("attrValue");
         }
 
         session* session = get_session(request, true);
@@ -197,12 +204,13 @@ private:
     }
 
     void handle_cookie_api(http_request& request, http_response& response) {
-        if (request.get_method().is_post()) {
-            string name, value, max_age_str;
-            string content_type = request.get_content_type();
+        if (request.method().is_post()) {
+            HTTP_COOKIE_NAME name;
+            string value, max_age_str;
+            string content_type = request.content_type();
 
-            if (content_type.find(HTTP_CONTENT::JSON_APP) != string::npos) {
-                auto root = json_parser(request.get_body()).parse();
+            if (content_type.find(HTTP_CONTENT::JSON_APP.content()) != string::npos) {
+                auto root = json_parser(request.body()).parse();
                 if (root && root->is_object()) {
                     const json_object* obj = root->as_object();
                     const json_value* nameVal = obj->get_member("name");
@@ -217,12 +225,12 @@ private:
                     }
                 }
             } else {
-                name = request.get_parameter("name");
-                value = request.get_parameter("value");
-                max_age_str = request.get_parameter("maxAge");
+                name = request.parameter("name");
+                value = request.parameter("value");
+                max_age_str = request.parameter("maxAge");
             }
 
-            if (!name.empty()) {
+            if (!name.cookie_name().empty()) {
                 cookie cookie(name, value);
                 if (!max_age_str.empty()) {
                     cookie.set_max_age(_MSTL integer32::parse(max_age_str.view()));
@@ -231,28 +239,28 @@ private:
 
                 auto json = json_builder()
                     .begin_object()
-                    .key("name").value(name)
+                    .key("name").value(name.cookie_name())
                     .key("value").value(value)
                     .end_object().build();
 
                 response.set_ok();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
-                response.set_body(to_string(json.get()));
+                response.set_body(json->to_string());
             } else {
                 response.set_bad_request();
                 response.set_content_type(HTTP_CONTENT::JSON_APP);
                 response.set_body(R"({"error":"Missing cookie name"})");
             }
         }
-        else if (request.get_method().is_delete()) {
-            string name = request.get_parameter("name");
-            if (!name.empty()) {
+        else if (request.method().is_delete()) {
+            HTTP_COOKIE_NAME name{request.parameter("name")};
+            if (!name.cookie_name().empty()) {
                 cookie cookie(name, "");
-                cookie.set_max_age(0);
+                cookie.invalidate();
                 response.add_cookie(cookie);
 
                 response.set_ok();
-                response.set_body(R"({"name":")" + name + R"("})");
+                response.set_body(R"({"name":")"_s + name.to_string() + R"("})");
             } else {
                 response.set_bad_request();
                 response.set_body(R"({"error":"Missing cookie name"})");

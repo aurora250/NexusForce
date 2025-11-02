@@ -24,7 +24,7 @@ manual_thread::manual_thread(thread_func&& func) noexcept
     : func_(_MSTL move(func)),
     thread_id_(_INNER __thread_pool_id_generator::get_new_id()) {}
 
-manual_thread::id_type manual_thread::get_id() const noexcept {
+manual_thread::id_type manual_thread::id() const noexcept {
     return thread_id_;
 }
 
@@ -126,7 +126,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     init_thread_size_ = init_thread_size;
     for (id_type i = 0; i < init_thread_size_; i++) {
         auto ptr = _MSTL make_unique<manual_thread>([this](const int id) { thread_function(id); });
-        threads_map_.emplace(ptr->get_id(), _MSTL move(ptr));
+        threads_map_.emplace(ptr->id(), _MSTL move(ptr));
     }
     for (id_type i = 0; i < init_thread_size_; i++) {
         threads_map_[i]->start();

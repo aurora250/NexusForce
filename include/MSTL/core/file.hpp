@@ -356,19 +356,10 @@ public:
     MSTL_NODISCARD static bool is_file(const string& path) noexcept { return file::is_file(path.view()); }
     MSTL_NODISCARD static bool is_file(const char* path) noexcept { return file::is_file(string_view{path}); }
 
-    constexpr string_view extension() const noexcept { return file::extension(path_.view()); }
-    static constexpr string_view extension(const string_view path) noexcept {
-        const size_t last_sep = path.find_last_of(FILE_SPLITER);
-        const string_view filename = last_sep == string::npos ? path : path.substr(last_sep + 1);
-
-        const size_t last_dot = filename.find_last_of('.');
-        if (last_dot == string::npos || last_dot == 0 || last_dot == filename.size() - 1) {
-            return {};
-        }
-        return filename.substr(last_dot + 1);
-    }
-    static constexpr string_view extension(const string& path) noexcept { return file::extension(path.view()); }
-    static constexpr string_view extension(const char* path) noexcept { return file::extension(string_view{path}); }
+    MSTL_NODISCARD string_view extension() const noexcept { return file::extension(path_.view()); }
+    MSTL_NODISCARD static string_view extension(string_view path) noexcept;
+    MSTL_NODISCARD static string_view extension(const string& path) noexcept { return file::extension(path.view()); }
+    MSTL_NODISCARD static string_view extension(const char* path) noexcept { return file::extension(string_view{path}); }
 
     bool create_directories() const { return file::create_directories(path_); }
     static bool create_directories(const string& path);

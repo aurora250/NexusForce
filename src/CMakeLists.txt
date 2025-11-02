@@ -115,8 +115,6 @@ endif()
 
 # 链接文件
 set(CPP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/servlet.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
@@ -125,14 +123,19 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/bitmap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/device.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http_constants.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/servlet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
 )
 
 # 编译为动态库

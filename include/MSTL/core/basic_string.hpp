@@ -221,11 +221,12 @@ private:
 
 private:
     MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void range_check(const size_type n) const noexcept {
-        MSTL_DEBUG_VERIFY(n < size_, "basic_string index out of ranges.");
+        MSTL_DEBUG_VERIFY(n <= size_, "basic_string index out of ranges.");
     }
 
     MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 size_type clamp_size(
         const size_type position, const size_type size) const noexcept {
+        if (size_ == 0) return 0;
         return _MSTL min(size, size_ - position);
     }
 
@@ -951,11 +952,16 @@ public:
         return self(data_ + off, count);
     }
 
-    MSTL_NODISCARD constexpr view_type view(const size_type off = 0, size_type count = npos) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 view_type view() const noexcept {
+        return view_type(data_, size());
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 view_type view(const size_type off, size_type count = npos) const noexcept {
         range_check(off);
         count = clamp_size(off, count);
         return view_type(data_ + off, count);
     }
+
 
     MSTL_CONSTEXPR20 size_type copy(pointer dest, size_type count, size_type position = 0) const {
         MSTL_DEBUG_VERIFY(position <= size_, "basic_string::copy: position out of range");

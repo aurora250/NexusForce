@@ -722,7 +722,7 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
     if (!::GetFileTime(handle_, &ft_create, &ft_access, nullptr)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    return set_all_times(last_access_time(), datetime::to_utc(dt));
+    return set_all_times(last_access_time(), datetime::to_UTC(dt));
 #endif
 }
 
@@ -755,6 +755,17 @@ bool file::is_file(const string_view path) noexcept {
     if (::stat64(path.data(), &st) == -1) return false;
     return S_ISREG(st.st_mode) || S_ISLNK(st.st_mode);
 #endif
+}
+
+string_view file::extension(const string_view path) noexcept {
+    const size_t last_sep = path.find_last_of(FILE_SPLITER);
+    const string_view filename = last_sep == string::npos ? path : path.substr(last_sep + 1);
+
+    const size_t last_dot = filename.find_last_of('.');
+    if (last_dot == string::npos || last_dot == 0 || last_dot == filename.size() - 1) {
+        return {};
+    }
+    return filename.substr(last_dot + 1);
 }
 
 bool file::create_directories(const string& path) {

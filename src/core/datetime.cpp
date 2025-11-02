@@ -23,7 +23,7 @@ MSTL_NODISCARD datetime datetime::now() noexcept {
 #endif
 }
 
-datetime datetime::parse_utc(const datetime& utc_dt) noexcept {
+datetime datetime::parse_UTC(const datetime& utc_dt) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::SYSTEMTIME st_utc;
     st_utc.wYear = static_cast<::WORD>(utc_dt.year());
@@ -64,7 +64,7 @@ datetime datetime::parse_utc(const datetime& utc_dt) noexcept {
 #endif
 }
 
-datetime datetime::to_utc(const datetime& local_dt) noexcept {
+datetime datetime::to_UTC(const datetime& local_dt) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::SYSTEMTIME st_local;
     st_local.wYear = static_cast<::WORD>(local_dt.year());
@@ -105,8 +105,8 @@ datetime datetime::to_utc(const datetime& local_dt) noexcept {
 #endif
 }
 
-MSTL_NODISCARD string datetime::to_gmt() const noexcept {
-    const datetime utc_dt = datetime::to_utc(*this);
+MSTL_NODISCARD string datetime::to_GMT() const noexcept {
+    const datetime utc_dt = datetime::to_UTC(*this);
     const _MSTL date& utc_date = utc_dt.dates();
     const _MSTL time& utc_time = utc_dt.times();
     static const char* weekdays[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};

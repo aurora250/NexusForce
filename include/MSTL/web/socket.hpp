@@ -48,13 +48,13 @@ private:
     socket_t sockfd_ = INVALID_MARK;
 
 public:
-    socket(const SOCKET_DOMAIN domain,
+    explicit socket(const SOCKET_DOMAIN domain,
         const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
-        const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) {
-        open(domain, type, protocol);
+        const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
+        this->open(domain, type, protocol);
     }
 
-    socket() = default;
+    socket() noexcept = default;
 
     ~socket() {
         close();
@@ -75,27 +75,22 @@ public:
         return *this;
     }
 
-    socket_t get() const { return sockfd_; }
-    bool is_valid() const { return sockfd_ != INVALID_MARK; }
+    MSTL_NODISCARD socket_t sockfd() const noexcept { return sockfd_; }
+    MSTL_NODISCARD bool is_valid() const noexcept { return sockfd_ != INVALID_MARK; }
 
 
-    bool open(const SOCKET_DOMAIN domain,
-        const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
-        const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) {
-
+    bool open(const SOCKET_DOMAIN domain, const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
+        const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
         sockfd_ = ::socket(
             static_cast<uint16_t>(domain),
             static_cast<uint16_t>(type),
-            static_cast<uint16_t>(protocol));
-
-        if (sockfd_ == INVALID_MARK) {
-            return false;
-        }
-        return true;
+            static_cast<uint16_t>(protocol)
+            );
+        return is_valid();
     }
 
-    void close() {
-        if (sockfd_ != INVALID_MARK) {
+    void close() noexcept {
+        if (is_valid()) {
 #ifdef MSTL_PLATFORM_WINDOWS__
             ::closesocket(sockfd_);
 #elif defined(MSTL_PLATFORM_LINUX__)

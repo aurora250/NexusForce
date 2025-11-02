@@ -52,7 +52,7 @@ public:
 	explicit manual_thread(thread_func&& func) noexcept;
 	~manual_thread() = default;
 
-    MSTL_NODISCARD id_type get_id() const noexcept;
+    MSTL_NODISCARD id_type id() const noexcept;
     void start();
 };
 
@@ -139,7 +139,7 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 		&& task_size_ > idle_thread_size_
 		&& threads_map_.size() < thread_threshhold_) {
 		auto ptr = _MSTL make_unique<manual_thread>([this](const id_type id) { thread_function(id); });
-		id_type thread_id = ptr->get_id();
+		id_type thread_id = ptr->id();
 		threads_map_.emplace(thread_id, _MSTL move(ptr));
 		threads_map_[thread_id]->start();
 		++idle_thread_size_;

@@ -143,7 +143,7 @@ public:
         return ht_.equal_range(key);
     }
 
-    MSTL_NODISCARD T& operator[](const key_type& key) {
+    MSTL_NODISCARD T& operator [](const key_type& key) {
         auto iter = ht_.find(key);
         if (iter == ht_.end()) 
             iter = ht_.emplace_unique(key, T()).first;

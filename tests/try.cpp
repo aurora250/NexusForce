@@ -297,8 +297,8 @@ void test_timestamp() {
 
 void test_utc_conversion() {
     _MSTL datetime dt(2024, 1, 1, 0, 0, 0);
-    _MSTL datetime utc = _MSTL datetime::to_utc(dt);
-    _MSTL datetime local = _MSTL datetime::parse_utc(utc);
+    _MSTL datetime utc = _MSTL datetime::to_UTC(dt);
+    _MSTL datetime local = _MSTL datetime::parse_UTC(utc);
     assert(local == dt);
 
     println("test_utc_conversion passed");
@@ -688,8 +688,14 @@ void test_json() {
 void test_serv() {
     try {
         example_servlet server(8080);
-        server.start();
-        getchar();
+        const bool flag = server.start();
+        if (!flag) {
+            println("Server start failed");
+            return;
+        }
+        while (true) {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
         server.stop();
     } catch (const Error& e) {
         println(e);

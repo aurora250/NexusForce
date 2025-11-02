@@ -496,8 +496,8 @@ public:
 
     MSTL_NODISCARD static constexpr datetime epoch() noexcept { return datetime{}; }
     MSTL_NODISCARD static datetime now() noexcept;
-    MSTL_NODISCARD static datetime parse_utc(const datetime& utc_dt) noexcept;
-    MSTL_NODISCARD static datetime to_utc(const datetime& local_dt) noexcept;
+    MSTL_NODISCARD static datetime parse_UTC(const datetime& utc_dt) noexcept;
+    MSTL_NODISCARD static datetime to_UTC(const datetime& local_dt) noexcept;
 
     constexpr void clear() noexcept {
         date_.clear();
@@ -590,14 +590,14 @@ public:
     }
 
 
-    MSTL_NODISCARD string to_gmt() const noexcept;
+    MSTL_NODISCARD string to_GMT() const noexcept;
 
-    MSTL_NODISCARD string to_iso_utc() const {
-        const datetime utc_dt = datetime::to_utc(*this);
+    MSTL_NODISCARD string to_ISO_UTC() const {
+        const datetime utc_dt = datetime::to_UTC(*this);
         return utc_dt.dates().to_string() + "T" + utc_dt.times().to_string() + "Z";
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_iso() const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_ISO() const {
         return date_.to_string() + "T" + time_.to_string() + "Z";
     }
 
