@@ -1,5 +1,8 @@
 #ifndef MSTL_TYPE_TRAITS_HPP__
 #define MSTL_TYPE_TRAITS_HPP__
+#include <sys/cdefs.h>
+
+
 #include "c++config.hpp"
 #include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -1161,8 +1164,7 @@ template <typename T>
 struct is_trivially_destructible : bool_constant<__is_trivially_destructible(T)> {};
 #else
 template <typename T>
-struct is_trivially_destructible : conjunction<
-    is_destructible<T>, bool_constant<__has_trivial_destructor(T)>> {};
+struct is_trivially_destructible : conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor(T)>> {};
 #endif
 
 template <typename T>
@@ -2050,10 +2052,10 @@ private:
 
     template <typename T, bool Nothrow = noexcept(_MSTL declvoid<T>(_MSTL declval<Res_t>())),
         typename = decltype(_MSTL declvoid<T>(_MSTL declval<Res_t>())), bool Dangle =
-#if defined(MSTL_COMPILER_GNUC__) && defined(MSTL_PLATFORM_LINUX__)
-        __reference_converts_from_temporary(_MSTL declval<T>(), _MSTL declval<Res_t>())
+#if defined(MSTL_COMPILER_CLANG__)
+        __reference_converts_from_temporary(T(), Res_t())
 #elif defined(MSTL_COMPILER_GCC__)
-    __reference_converts_from_temporary(T, Res_t)
+        __reference_converts_from_temporary(T, Res_t)
 #else
         false
 #endif

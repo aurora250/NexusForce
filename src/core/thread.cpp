@@ -15,7 +15,7 @@ thread::thread(thread&& other) noexcept
 thread& thread::operator =(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
-            std::terminate();
+            _MSTL terminate();
         }
 
         handle_ = other.handle_;

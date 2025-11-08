@@ -1463,7 +1463,7 @@ void test_dbpool() {
 #ifdef MSTL_SUPPORT_SQLITE3__
     db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
 
-    begin = chrono::high_resolution_clock::now();
+    auto nbegin = chrono::high_resolution_clock::now();
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
         _MSTL sprintf(sql, "SELECT 1");
@@ -1474,7 +1474,7 @@ void test_dbpool() {
         }
         delete conn;
     }
-    println((begin - chrono::high_resolution_clock::now()).count());
+    println((nbegin - chrono::high_resolution_clock::now()).count());
 #endif
 #endif
 }
