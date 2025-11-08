@@ -17,11 +17,15 @@
 #include "MSTL/core/algorithm.hpp"
 #include "MSTL/ext/lock_free_queue.hpp"
 #include "MSTL/ext/trace_memory.hpp"
-#include "MSTL/ext/database_pool.hpp"
-#include "MSTL/ext/thread_pool.hpp"
-#include "MSTL/ext/timer.hpp"
+#include "MSTL/db/database_pool.hpp"
+#include "MSTL/db/mysql.hpp"
+#include "MSTL/db/sqlite.hpp"
+#include "MSTL/db/redis.hpp"
+#include "MSTL/core/thread_pool.hpp"
+#include "MSTL/core/timer.hpp"
 #include "MSTL/core/encrypt.hpp"
 #include "MSTL/ext/sort.hpp"
 #include "MSTL/web/servlet.hpp"
+#include "MSTL/web/dns_client.hpp"
 
 #endif // MSTL_MSTLCPP_HPP__

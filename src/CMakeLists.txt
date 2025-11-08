@@ -116,6 +116,7 @@ endif()
 # 链接文件
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/chrono.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/random.cpp
@@ -129,13 +130,20 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/bitmap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/device.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/ext/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/ext/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/servlet.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
 )
 
 # 编译为动态库

@@ -6,6 +6,7 @@
 #include <chrono>
 #include <future>
 #include "MSTL/core/thread.hpp"
+#include "MSTL/core/atomic.hpp"
 #include "MSTL/core/queue.hpp"
 #include "MSTL/core/functional.hpp"
 #include "MSTL/core/unordered_map.hpp"

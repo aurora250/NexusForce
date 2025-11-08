@@ -1,7 +1,6 @@
 #ifndef MSTL_THREAD_HPP__
 #define MSTL_THREAD_HPP__
 #include "memory.hpp"
-#include <exception>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <process.h>
@@ -14,15 +13,16 @@ MSTL_BEGIN_NAMESPACE__
 MSTL_ERROR_BUILD_FINAL_CLASS(ThreadOperationError, MemoryError, "Thread Operation Failed.")
 
 
-class MSTL_API thread {
+class MSTL_API thread : public iswappable<thread> {
 public:
-    class id {
+    class id : public ihashable<id> {
     private:
 #ifdef MSTL_PLATFORM_WINDOWS__
         using native_id_type = ::DWORD;
 #else
         using native_id_type = ::pthread_t;
 #endif
+
         native_id_type id_
 #ifdef MSTL_PLATFORM_WINDOWS__
         = 0;
@@ -31,13 +31,26 @@ public:
 #endif
 
         friend class thread;
-        friend struct hash<id>;
-        friend bool operator ==(const id& lhs, const id& rhs) noexcept;
-        friend bool operator !=(const id& lhs, const id& rhs) noexcept;
 
     public:
         id() noexcept = default;
         explicit id(const native_id_type id) noexcept : id_(id) {}
+
+        MSTL_NODISCARD size_t to_hash() const noexcept {
+            return _MSTL FNV_hash(reinterpret_cast<const byte_t*>(&id_), sizeof(id));
+        }
+
+        MSTL_NODISCARD bool operator ==(const id& rhs) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+            return id_ == rhs.id_;
+#else
+            return ::pthread_equal(id_, rhs.id_) != 0;
+#endif
+        }
+
+        MSTL_NODISCARD bool operator !=(const id& rhs) const noexcept {
+            return !(*this == rhs);
+        }
     };
 
 private:
@@ -84,7 +97,7 @@ private:
         try {
             data->run();
         } catch (...) {
-            // 需要更复杂的异常处理
+            _MSTL terminate();
         }
 #ifdef MSTL_PLATFORM_WINDOWS__
         return 0;
@@ -133,40 +146,12 @@ public:
     thread(const thread&) = delete;
     thread& operator =(const thread&) = delete;
 
-    thread(thread&& other) noexcept
-    : handle_(other.handle_), id_(other.id_), state_(other.state_) {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        other.handle_ = nullptr;
-#else
-        other.handle_ = native_handle_type{};
-#endif
-        other.id_ = id{};
-        other.state_ = NOT_A_THREAD;
-    }
-
-    thread& operator =(thread&& other) noexcept {
-        if (this != &other) {
-            if (joinable()) {
-                std::terminate();
-            }
-
-            handle_ = other.handle_;
-            id_ = other.id_;
-            state_ = other.state_;
-#ifdef MSTL_PLATFORM_WINDOWS__
-            other.handle_ = nullptr;
-#else
-            other.handle_ = native_handle_type{};
-#endif
-            other.id_ = id{};
-            other.state_ = NOT_A_THREAD;
-        }
-        return *this;
-    }
+    thread(thread&& other) noexcept;
+    thread& operator =(thread&& other) noexcept;
 
     ~thread() {
         if (joinable()) {
-            std::terminate();
+            _MSTL terminate();
         }
     }
 
@@ -175,41 +160,8 @@ public:
 
     MSTL_NODISCARD bool joinable() const noexcept { return state_ == CREATED; }
 
-    void join() {
-        if (!joinable()) {
-            Exception(ThreadOperationError("Thread is not joinable"));
-        }
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-        if (::WaitForSingleObject(handle_, INFINITE) != WAIT_OBJECT_0) {
-            Exception(ThreadOperationError("Fail to join thread"));
-        }
-        ::CloseHandle(handle_);
-        handle_ = nullptr;
-#else
-        if (::pthread_join(handle_, nullptr) != 0) {
-            Exception(ThreadOperationError("Thread is not joinable"));
-        }
-        handle_ = native_handle_type{};
-#endif
-        state_ = JOINED;
-    }
-
-    void detach() {
-        if (!joinable()) {
-            Exception(ThreadOperationError("Thread is not detachable"));
-        }
-#ifdef MSTL_PLATFORM_WINDOWS__
-        ::CloseHandle(handle_);
-        handle_ = nullptr;
-#else
-        if (::pthread_detach(handle_) != 0) {
-            Exception(ThreadOperationError("Fail to Detach thread"));
-        }
-        handle_ = native_handle_type{};
-#endif
-        state_ = DETACHED;
-    }
+    void join();
+    void detach();
 
     void swap(thread& other) noexcept {
         _MSTL swap(handle_, other.handle_);
@@ -229,55 +181,34 @@ public:
     }
 };
 
-inline bool operator ==(const thread::id& lhs, const thread::id& rhs) noexcept {
+
+MSTL_BEGIN_THIS_THREAD__
+
+MSTL_ALWAYS_INLINE inline thread::id get_id() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return lhs.id_ == rhs.id_;
+    return thread::id(::GetCurrentThreadId());
 #else
-    return ::pthread_equal(lhs.id_, rhs.id_) != 0;
+    return thread::id(::pthread_self());
 #endif
 }
 
-inline bool operator !=(const thread::id& lhs, const thread::id& rhs) noexcept {
-    return !(lhs == rhs);
+MSTL_ALWAYS_INLINE inline void yield() noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::SwitchToThread();
+#else
+    ::sched_yield();
+#endif
 }
 
-template <>
-struct hash<thread::id> {
-    size_t operator ()(const thread::id& id) const noexcept {
-        return _MSTL FNV_hash(reinterpret_cast<const byte_t*>(&id.id_), sizeof(thread::id));
-    }
-};
-
-inline void swap(thread& lhs, thread& rhs) noexcept {
-    lhs.swap(rhs);
+MSTL_ALWAYS_INLINE inline void sleep_for_ms(uint32_t milliseconds) noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::Sleep(milliseconds);
+#else
+    ::usleep(milliseconds * 1000);
+#endif
 }
 
-
-namespace this_thread {
-    MSTL_ALWAYS_INLINE inline thread::id get_id() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        return thread::id(::GetCurrentThreadId());
-#else
-        return thread::id(::pthread_self());
-#endif
-    }
-
-    MSTL_ALWAYS_INLINE inline void yield() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        ::SwitchToThread();
-#else
-        ::sched_yield();
-#endif
-    }
-
-    MSTL_ALWAYS_INLINE inline void sleep_for_ms(unsigned int milliseconds) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        ::Sleep(milliseconds);
-#else
-        ::usleep(milliseconds * 1000);
-#endif
-    }
-}
+MSTL_END_THIS_THREAD__
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_THREAD_HPP__

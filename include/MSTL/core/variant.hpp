@@ -209,7 +209,7 @@ public:
 
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     MSTL_CONSTEXPR20 variant_alternative_t<variant, Idx>& get() {
-        Exception(index_ == Idx, ValueError("Template index not match."));
+        if(index_ != Idx) Exception(ValueError("Template index not match."));
         return *reinterpret_cast<variant_alternative_t<variant, Idx>*>(union_);
     }
     template <typename T>
@@ -218,7 +218,7 @@ public:
     }
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     MSTL_CONSTEXPR20 variant_alternative_t<variant, Idx> const& get() const {
-        Exception(index_ == Idx, ValueError("Template index not match."));
+        if(index_ != Idx) Exception(ValueError("Template index not match."));
         return *reinterpret_cast<variant_alternative_t<variant, Idx> const*>(union_);
     }
     template <typename T>

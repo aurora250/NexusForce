@@ -1381,114 +1381,115 @@ void test_any() {
 }
 
 void test_timer(){
-    timer t;
-
-    auto node1 = t.add(1000, [](const timer_node& node) {
-        println("定时器1（ID: ", node.id(), "）执行，到期时间: ", node.expire());
+    _MSTL steady_timer timer1;
+    timer1.expires_after(std::chrono::seconds(5));
+    timer1.async_wait([]() {
+        println("5秒后执行");
     });
-    println("已添加定时器1，ID: ", node1.id());
 
-    auto node2 = t.add(2000, [](const timer_node& node) {
-        println("定时器2（ID: ", node.id(), "）执行，到期时间: ", node.expire());
+    _MSTL system_timer timer2;
+    auto now = std::chrono::system_clock::now();
+    auto target = now + std::chrono::hours(1);
+    timer2.expires_at(target);
+    timer2.async_wait([]() {
+        println("1小时后执行");
     });
-    println("已添加定时器2，ID: ", node2.id());
 
-    auto node3 = t.add(1500, [](const timer_node& node) {
-        println("定时器3（ID: ", node.id(), "）执行（此信息不应输出）");
+    _MSTL steady_timer timer3;
+    timer3.expires_from_now(1000);
+    timer3.async_wait([]() {
+        println("1秒后执行");
     });
-    println("已添加定时器3，ID: ", node3.id() , "，准备移除...");
-    bool is_erased = t.erase(node3);
-    if (is_erased) {
-        println("定时器3移除成功");
-    }
-    while (true) {
-        int64_t sleep_us = t.sleep();
-        if (sleep_us == -1) {
-            break;
-        }
-        if (sleep_us > 0) {
-            println("距离下一个定时器到期还有 ", sleep_us, " 微秒，休眠中...");
-            std::this_thread::sleep_for(std::chrono::microseconds(sleep_us));
-        }
-        while (t.check()) {}
-    }
+
+    timer1.cancel();
+
+    timer1.expires_after(std::chrono::seconds(3));
+    timer1.async_wait([]() {
+        println("3秒后执行");
+    });
+
+    this_thread::sleep_for(chrono::seconds(7));
 }
 
 
-// void test_dbpool() {
-// #ifdef MSTL_SUPPORT_DB__
-// #ifdef MSTL_SUPPORT_MYSQL__
-//     std::clock_t begin = clock();
-//     db_connect_config mysql_config = db_connect_config::for_mysql("book");
-//     mysql_config.password = "147258hu";
-//
-//     {
-//         database_pool pool(DB_TYPE::MYSQL, mysql_config);
-//         for (int i = 0; i < 5000; i++) {
-//             bool fin = pool.get_connect()->update("SELECT 1");
-//         }
-//         println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-//
-//         auto result = pool.get_connect()->query("SELECT * FROM book");
-//         while (result->next()) {
-//             for (int i = 0; i < result->column_count(); i++) {
-//                 if (i == 2) {
-//                     int count = result->at_int16(i);
-//                     print("collected :", count, ", ");
-//                 }
-//                 else if (i == 3) {
-//                     float count = result->at_float32(i);
-//                     print("usable :", count, ", ");
-//                 }
-//                 else if (i == 5) {
-//                     _MSTL datetime dt = result->at_datetime(i);
-//                     print("date: ", dt, ", ");
-//                 }
-//                 else
-//                     print(result->at(i), ", ");
-//             }
-//             println();
-//         }
-//         println(result->row_count(), ", ", result->column_count());
-//     }
-//
-//     begin = clock();
-//     for (int i = 0; i < 5000; i++) {
-//         char sql[power(2, 10)] = {};
-//         _MSTL sprintf(sql, "SELECT 1");
-//         auto* conn = new db_mysql_connect();
-//         if(conn->connect_to(mysql_config)) {
-//             bool fin = conn->update(sql);
-//         }
-//         delete conn;
-//     }
-//     println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-// #endif
-//
-// #ifdef MSTL_SUPPORT_SQLITE3__
-//     db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
-//
-//     begin = clock();
-//     for (int i = 0; i < 5000; i++) {
-//         char sql[power(2, 10)] = {};
-//         _MSTL sprintf(sql, "SELECT 1");
-//         auto* conn = new db_sqlite_connect();
-//         if(conn->connect_to(sqlite_config)) {
-//             bool fin = conn->update(sql);
-//             // print(fin, " ");
-//         }
-//         delete conn;
-//     }
-//     println(1.0 * (clock() - begin) / CLOCKS_PER_SEC);
-// #endif
-// #endif
-// }
-//
-// void test_dns() {
-// #ifdef MSTL_PLATFORM_LINUX__
-//
-// #endif
-// }
+void test_dbpool() {
+#ifdef MSTL_SUPPORT_DB__
+#ifdef MSTL_SUPPORT_MYSQL__
+    auto begin = chrono::high_resolution_clock::now();
+    db_connect_config mysql_config = db_connect_config::for_mysql("book");
+    mysql_config.password = "147258hu";
+
+    {
+        database_pool pool(DB_TYPE::MYSQL, mysql_config);
+        for (int i = 0; i < 5000; i++) {
+            bool fin = pool.get_connect()->update("SELECT 1");
+        }
+        println((begin - chrono::high_resolution_clock::now()).count());
+
+        auto result = pool.get_connect()->query("SELECT * FROM book");
+        while (result->next()) {
+            for (int i = 0; i < result->column_count(); i++) {
+                if (i == 2) {
+                    int count = result->at_int16(i);
+                    print("collected :", count, ", ");
+                } else if (i == 3) {
+                    float count = result->at_float32(i);
+                    print("usable :", count, ", ");
+                } else if (i == 5) {
+                    _MSTL datetime dt = result->at_datetime(i);
+                    print("date: ", dt, ", ");
+                } else {
+                    print(result->at(i), ", ");
+                }
+            }
+            println();
+        }
+        println(result->row_count(), ", ", result->column_count());
+    }
+
+    begin = chrono::high_resolution_clock::now();
+    for (int i = 0; i < 5000; i++) {
+        char sql[power(2, 10)] = {};
+        _MSTL sprintf(sql, "SELECT 1");
+        auto* conn = new db_mysql_connect();
+        if(conn->connect_to(mysql_config)) {
+            bool fin = conn->update(sql);
+        }
+        delete conn;
+    }
+    println((begin - chrono::high_resolution_clock::now()).count());
+#endif
+
+#ifdef MSTL_SUPPORT_SQLITE3__
+    db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
+
+    begin = chrono::high_resolution_clock::now();
+    for (int i = 0; i < 5000; i++) {
+        char sql[power(2, 10)] = {};
+        _MSTL sprintf(sql, "SELECT 1");
+        auto* conn = new db_sqlite_connect();
+        if(conn->connect_to(sqlite_config)) {
+            bool fin = conn->update(sql);
+            // print(fin, " ");
+        }
+        delete conn;
+    }
+    println((begin - chrono::high_resolution_clock::now()).count());
+#endif
+#endif
+}
+
+void test_dns() {
+    try {
+        dns_client client("8.8.8.8");
+        auto ips = client.resolve_a("www.google.com");
+
+        println("IPv4 addresses for www.google.com:");
+        for (const auto& ip : ips) {
+            print(" ", ip);
+        }
+    } catch (...) {}
+}
 
 void test_tpool() {
     thread_pool& pool = get_instance_thread_pool();

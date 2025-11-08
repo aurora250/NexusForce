@@ -963,8 +963,8 @@ public:
     }
 
 
-    MSTL_CONSTEXPR20 size_type copy(pointer dest, size_type count, size_type position = 0) const {
-        MSTL_DEBUG_VERIFY(position <= size_, "basic_string::copy: position out of range");
+    MSTL_CONSTEXPR20 size_type copy(pointer dest, const size_type count, size_type position = 0) const {
+        MSTL_DEBUG_VERIFY(position <= size_, "basic_string copy position out of range");
 
         const size_type len = _MSTL min(count, size_ - position);
         traits_type::copy(dest, data_ + position, len);

@@ -53,7 +53,7 @@ C++ 14 17 20
 ### 前置依赖
 
 - CMake 3.17+
-- 支持C++14及以上的编译器（GCC 7+、Clang 5+、MSVC 2017+）
+- 支持C++14及以上的编译器（GCC 12+、Clang 5+、MSVC 2017+）
 - 可选依赖：
     - Boost
     - MySQL
@@ -119,7 +119,7 @@ sudo make install
 
 以下按照上述文件结构层级依次介绍。
 
-- [environment](include/MSTL/core/environment.hpp)
+- [environment](include/MSTL/core/c++config.hpp)
 
 定义操作系统平台、托管平台、总线宽度和C++版本的宏，实现多编译环境适配。
 
@@ -371,15 +371,15 @@ sudo make install
 
 定义基于boost的栈追踪分配器`trace_allocator`。
 
-- [database_pool](include/MSTL/ext/database_pool.hpp)
+- [database_pool](include/MSTL/db/database_pool.hpp)
 
 定义支持MySQL、Sqlite3、Redis链接的多态数据库连接及数据库链接池`database_pool`。
 
-- [thread_pool](include/MSTL/ext/thread_pool.hpp)
+- [thread_pool](include/MSTL/core/thread_pool.hpp)
 
 定义轮询线程池类`thread_pool`。
 
-- [timer](include/MSTL/ext/timer.hpp)
+- [timer](include/MSTL/core/timer.hpp)
 
 定义定时器类`timer`。
 

@@ -1,4 +1,5 @@
 #include <MSTL/web/filter.hpp>
+#include <MSTL/core/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void filter_chain::clean_filter() noexcept {

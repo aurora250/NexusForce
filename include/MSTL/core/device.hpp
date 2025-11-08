@@ -1,6 +1,6 @@
 #ifndef MSTL_DEVICE_HPP__
 #define MSTL_DEVICE_HPP__
-#include "environment.hpp"
+#include "c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include "vector.hpp"
 #include <Windows.h>

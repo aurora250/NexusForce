@@ -2,7 +2,6 @@
 #define MSTL_WEB_COOKIE_HPP__
 #include "MSTL/core/unordered_map.hpp"
 #include "MSTL/core/datetime.hpp"
-#include "MSTL/core/console.hpp"
 #include "http_constants.hpp"
 #include <mutex>
 #include <thread>

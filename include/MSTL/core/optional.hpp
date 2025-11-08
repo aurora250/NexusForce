@@ -78,12 +78,16 @@ public:
     }
 
     template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> && is_constructible_v<T, U> && is_convertible_v<U, T>, int> = 0>
+        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> &&
+            is_constructible_v<T, U> && is_convertible_v<U, T>, int
+    > = 0>
     constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
     : value_(_MSTL forward<U>(value)) {}
 
     template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> && is_constructible_v<T, U> && !is_convertible_v<U, T>, int> = 0>
+        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> &&
+            is_constructible_v<T, U> && !is_convertible_v<U, T>, int
+    > = 0>
     constexpr explicit optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
     : value_(_MSTL forward<U>(value)) {}
 
@@ -254,19 +258,19 @@ public:
     }
 
     constexpr const_reference value() const & {
-        Exception(have_value_, OptionalAccessError());
+        if (!have_value_) Exception(OptionalAccessError());
         return value_;
     }
     constexpr reference value() & {
-        Exception(have_value_, OptionalAccessError());
+        if (!have_value_) Exception(OptionalAccessError());
         return value_;
     }
     constexpr const value_type&& value() const && {
-        Exception(have_value_, OptionalAccessError());
+        if (!have_value_) Exception(OptionalAccessError());
         return _MSTL move(value_);
     }
     constexpr value_type&& value() && {
-        Exception(have_value_, OptionalAccessError());
+        if (!have_value_) Exception(OptionalAccessError());
         return _MSTL move(value_);
     }
 

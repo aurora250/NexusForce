@@ -247,7 +247,7 @@ MSTL_CONST_FUNCTION constexpr mathld_t ceil_bit(const mathld_t x, const mathui_t
 }
 
 MSTL_CONST_FUNCTION constexpr mathld_t round_bit(const mathld_t x, const mathui_t bit) noexcept {
-	return x < 0 ? ceil_bit(x - 0.5 / power(10.0, bit), bit) 
+	return x < 0 ? ceil_bit(x - 0.5 / power(10.0, bit), bit)
 		: floor_bit(x + 0.5 / power(10.0, bit), bit);
 }
 

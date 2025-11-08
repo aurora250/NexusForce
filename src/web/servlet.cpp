@@ -1,4 +1,5 @@
 #include <MSTL/web/servlet.hpp>
+#include <MSTL/core/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void servlet::start_workers(const int thread_count) {
@@ -9,12 +10,8 @@ void servlet::start_workers(const int thread_count) {
 
 void servlet::accept_conns() {
     while (running_) {
-        ::sockaddr_in client_addr{};
-        ::socklen_t client_len = sizeof(client_addr);
-
-        const socket::socket_t client_socket = ::accept(server_socket_.sockfd(),
-            reinterpret_cast<::sockaddr *>(&client_addr), &client_len);
-        if (client_socket == socket::INVALID_MARK) {
+        socket client_socket = server_socket_.accept();
+        if (!client_socket.is_valid()) {
             if (running_) {
                 println("accept failed");
             }
@@ -26,15 +23,11 @@ void servlet::accept_conns() {
         } catch (const Error& e) {
             println(e);
         }
-#ifdef MSTL_PLATFORM_WINDOWS__
-        ::closesocket(client_socket);
-#elif defined(MSTL_PLATFORM_LINUX__)
-        ::close(client_socket);
-#endif
+        client_socket.close();
     }
 }
 
-void servlet::handle_client(const socket::socket_t client_socket) {
+void servlet::handle_client(const socket& client_socket) {
     http_request request = parse_request(client_socket);
     int forward_count = 0;
     do {
@@ -128,14 +121,14 @@ string servlet::url_decode(const string_view str) {
     return result;
 }
 
-http_request servlet::parse_request(const socket::socket_t client_socket) {
+http_request servlet::parse_request(const socket& client_socket) {
     http_request req;
     char buffer[4096];
     string request_data;
 
     ssize_t total_read = 0;
     while (true) {
-        ssize_t bytes_read = ::recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+        ssize_t bytes_read = client_socket.receive(buffer, sizeof(buffer) - 1);
         if (bytes_read <= 0) break;
 
         buffer[bytes_read] = '\0';
@@ -163,7 +156,7 @@ http_request servlet::parse_request(const socket::socket_t client_socket) {
                 ssize_t remaining = static_cast<ssize_t>(content_length - body_read);
                 while (remaining > 0) {
                     const auto size = _MSTL min(static_cast<ssize_t>(sizeof(buffer)), remaining);
-                    bytes_read = ::recv(client_socket, buffer, size, 0);
+                    bytes_read = client_socket.receive(buffer, size);
                     if (bytes_read <= 0) break;
                     request_data.append(buffer, bytes_read);
                     remaining -= bytes_read;
@@ -263,14 +256,13 @@ string servlet::build_response_str(const http_response& response) {
     return result;
 }
 
-void servlet::send_response(const socket::socket_t client_socket, const http_response& response) {
-    string response_str = build_response_str(response);
-    const char *data = response_str.data();
-    const size_t total = response_str.size();
+void servlet::send_response(const socket& client_socket, const http_response& response) {
+    string res_str = build_response_str(response);
+    const size_t total = res_str.size();
     size_t sent = 0;
 
     while (sent < total) {
-        const ssize_t bytes_sent = ::send(client_socket, data + sent, total - sent, 0);
+        const ssize_t bytes_sent = client_socket.send(res_str.data() + sent, total - sent);
         if (bytes_sent <= 0) {
             println("send failed");
             break;
@@ -415,25 +407,21 @@ bool servlet::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
         return false;
     }
 
-    constexpr int opt = 1;
-    if (::setsockopt(server_socket_.sockfd(), SOL_SOCKET, SO_REUSEADDR,
-        reinterpret_cast<const char*>(&opt), sizeof(opt))) {
+    if (server_socket_.reuse_addr()) {
         println("setsockopt failed");
         return false;
-        }
+    }
 
     server_addr_.sin_family = AF_INET;
     server_addr_.sin_addr.s_addr = INADDR_ANY;
     server_addr_.sin_port = ::htons(port_);
 
-    if (::bind(server_socket_.sockfd(),
-        reinterpret_cast<::sockaddr*>(&server_addr_),
-        sizeof(server_addr_))) {
+    if (server_socket_.bind(server_addr_)) {
         println("bind failed");
         return false;
         }
 
-    if (::listen(server_socket_.sockfd(), backlog_) < 0) {
+    if (server_socket_.listen(backlog_)) {
         println("listen failed");
         return false;
     }

@@ -88,18 +88,27 @@ public:
     void printf(const string_view fmt, Args&&... args) {
         this->write_string(_MSTL format(fmt, _MSTL forward<Args>(args)...));
     }
+    template <typename T>
+    void printc(const color& color, const T& value) {
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
+        io_base<T>::write(*this, value);
+        this->write_string_unsafe("\033[0m");
+    }
 
     void println() {
-        this->write_string("\n");
+        constexpr string_view lf = "\n";
+        this->write_string(lf);
     }
     template <typename T>
     void println(const T& value) {
         this->print(value);
         this->println();
     }
-    template <typename... Args>
-    void printfln(const string_view fmt, Args&&... args) {
-        this->println(_MSTL format(fmt, _MSTL forward<Args>(args)...));
+    template <typename T>
+    void printcln(const color& color, const T& value) {
+        this->printc(color, value);
+        this->println();
     }
 
     template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
@@ -376,6 +385,13 @@ template <typename This, typename ...Rests>
 void println(const This& t, const Rests&... r) {
     console.print<remove_cvref_t<This>>(t);
     ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
+    println();
+}
+
+template <typename This, typename ...Rests>
+void printcln(const color& color, const This& t, const Rests&... r) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
     println();
 }
 

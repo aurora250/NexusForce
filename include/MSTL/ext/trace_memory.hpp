@@ -56,14 +56,14 @@ public:
     }
 
     MSTL_NODISCARD MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
-        pointer ptr = _MSTL allocator<T>::allocate(n);
+        pointer ptr = _MSTL allocator<T>().allocate(n);
         auto st = boost::stacktrace::stacktrace();
         traces_[ptr] = st;
         return ptr;
     }
 
     MSTL_NODISCARD MSTL_ALLOC_OPTIMIZE pointer allocate() {
-        return _MSTL allocator<T>::allocate(sizeof(value_type));
+        return _MSTL allocator<T>().allocate(sizeof(value_type));
     }
 
     void deallocate(pointer p) noexcept {
@@ -71,7 +71,7 @@ public:
         if (it != traces_.end()) {
             traces_.erase(it);
         }
-        _MSTL allocator<T>::deallocate(p, sizeof(value_type));
+        _MSTL allocator<T>().deallocate(p, sizeof(value_type));
     }
 
     void deallocate(pointer p, const size_type n) noexcept {
@@ -79,7 +79,7 @@ public:
         if (it != traces_.end()) {
             traces_.erase(it);
         }
-        _MSTL allocator<T>::deallocate(p, n);
+        _MSTL allocator<T>().deallocate(p, n);
     }
 
 private:

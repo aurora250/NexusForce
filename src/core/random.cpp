@@ -94,7 +94,7 @@ double random_mt::next_double() {
 }
 
 int32_t secret::next_int(const int32_t min, const int32_t max) {
-    Exception(min < max, ValueError("min is ge to max"));
+    if(min >= max) Exception(ValueError("min is ge to max"));
     const auto range = static_cast<uint32_t>(max - min + 1);
 
     int bits = 0;
@@ -141,7 +141,7 @@ bool secret::is_supported() {
 }
 
 void secret::get_random_bytes(byte_t* buffer, size_t length) {
-    Exception(buffer != nullptr && length != 0, ValueError("Invalid buffer or length"));
+    if(buffer == nullptr || length == 0) Exception(ValueError("Invalid buffer or length"));
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     HCRYPTPROV hProv = 0;
@@ -158,14 +158,14 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
     ::CryptReleaseContext(hProv, 0);
 #elif defined(MSTL_PLATFORM_LINUX__)
     const int fd = open("/dev/urandom", O_RDONLY);
-    Exception(fd != -1, FileOperateError("Failed to open /dev/urandom"));
+    if(fd == -1) Exception(FileOperateError("Failed to open /dev/urandom"));
 
     ssize_t bytesRead = 0;
     while (bytesRead < static_cast<ssize_t>(length)) {
         const ssize_t result = ::read(fd, buffer + bytesRead, length - bytesRead);
         if (result == -1) {
             ::close(fd);
-            Exception(fd != -1, FileOperateError("Failed to open /dev/urandom"));
+            if(fd == -1) Exception(FileOperateError("Failed to open /dev/urandom"));
         }
         bytesRead += result;
     }

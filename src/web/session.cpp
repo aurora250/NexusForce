@@ -106,9 +106,9 @@ void __session_manager::cleanup_expired_sessions() {
                 if (!it->second.is_valid() ||
                     diff > it->second.max_age()) {
                     it = sessions_.erase(it);
-                    } else {
-                        ++it;
-                    }
+                } else {
+                    ++it;
+                }
             }
         }
         std::this_thread::sleep_for(std::chrono::minutes(5));

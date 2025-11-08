@@ -113,6 +113,16 @@
 #define MSTL_END_CONSTANTS__ }
 #define _CONSTANTS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_CONSTANTS_NAMESPACE__ ::
 
+#define __MSTL_CHRONO_NAMESPACE__ chrono
+#define MSTL_BEGIN_CHRONO__ namespace __MSTL_CHRONO_NAMESPACE__ {
+#define MSTL_END_CHRONO__ }
+#define _MSTL_CHRONO __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_CHRONO_NAMESPACE__ ::
+
+#define __MSTL_THIS_THREAD_NAMESPACE__ this_thread
+#define MSTL_BEGIN_THIS_THREAD__ namespace __MSTL_THIS_THREAD_NAMESPACE__ {
+#define MSTL_END_THIS_THREAD__ }
+#define _THIS_THREAD __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_THIS_THREAD_NAMESPACE__ ::
+
 #define __MSTL_TAG_NAMESPACE__ tags
 #define MSTL_BEGIN_TAG__ inline namespace __MSTL_TAG_NAMESPACE__ {
 #define MSTL_END_TAG__ }
@@ -273,18 +283,18 @@
 
 #ifdef MSTL_STANDARD_14__
 	#define MSTL_DEPRECATED [[deprecated]]
+    #define MSTL_DEPRECATE_FOR(MSG) [[deprecated(MSG)]]
 	// after C++ 11, we can use lambda expressions to quickly build closures
 	// instead of using functor adapters.
 	#define MSTL_FUNC_ADAPTER_DEPRECATE \
-		[[deprecated("C++ 11 and later versions no longer use functor base types and functor adapters.")]]
+		MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use functor base types and functor adapters.")
 	#define MSTL_TRAITS_DEPRECATE \
-		[[deprecated("C++ 11 and later versions no longer use iterator traits functions.")]]
-    #define MSTL_DEPRECATE_FOR(MSG) [[deprecated(MSG)]]
+		MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use iterator traits functions.")
 #else
 	#define MSTL_DEPRECATED
+    #define MSTL_DEPRECATE_FOR(MSG)
 	#define MSTL_FUNC_ADAPTER_DEPRECATE
 	#define MSTL_TRAITS_DEPRECATE
-    #define MSTL_DEPRECATE_FOR(MSG)
 #endif
 
 

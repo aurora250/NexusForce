@@ -1,6 +1,6 @@
 #ifndef MSTL_TYPE_TRAITS_HPP__
 #define MSTL_TYPE_TRAITS_HPP__
-#include "environment.hpp"
+#include "c++config.hpp"
 #include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -25,6 +25,16 @@ using bool_constant = integral_constant<bool, Value>;
 
 using true_type = bool_constant<true>;
 using false_type = bool_constant<false>;
+
+
+template <uint16_t Value>
+using uint16_constant = integral_constant<uint16_t, Value>;
+
+template <uint32_t Value>
+using uint32_constant = integral_constant<uint32_t, Value>;
+
+template <uint64_t Value>
+using uint64_constant = integral_constant<uint64_t, Value>;
 
 
 // Test is false, SFINAF

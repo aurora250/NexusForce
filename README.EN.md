@@ -54,7 +54,7 @@ C++ 14 17 20
 ### Prerequisites
 
 - CMake 3.17+
-- Compiler supporting C++14 or higher (GCC 7+, Clang 5+, MSVC 2017+)
+- Compiler supporting C++14 or higher (GCC 12+, Clang 5+, MSVC 2017+)
 - Optional dependencies:
   - Boost
   - MySQL
@@ -120,7 +120,7 @@ sudo make install
 
 The following files are introduced in the order of the hierarchical structure shown above.
 
-- [environment](include/MSTL/core/environment.hpp)
+- [environment](include/MSTL/core/c++config.hpp)
 
 Defines macros for operating system platform, hosting platform, bus width, and C++ version, implementing multi-compilation environment adaptation.
 
@@ -374,15 +374,15 @@ Defines the microservice class `servlet`, providing port listening, filter confi
 
 Defines the Boost-based stack-tracing allocator `trace_allocator`.
 
-- [database_pool](include/MSTL/ext/database_pool.hpp)
+- [database_pool](include/MSTL/db/database_pool.hpp)
 
 Defines polymorphic database connections (supporting MySQL, Sqlite3, Redis) and the database connection pool `database_pool`.
 
-- [thread_pool](include/MSTL/ext/thread_pool.hpp)
+- [thread_pool](include/MSTL/core/thread_pool.hpp)
 
 Defines the polling thread pool class `thread_pool`.
 
-- [timer](include/MSTL/ext/timer.hpp)
+- [timer](include/MSTL/core/timer.hpp)
 
 Defines the timer class `timer`.
 

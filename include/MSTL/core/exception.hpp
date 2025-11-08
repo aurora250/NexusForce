@@ -1,6 +1,6 @@
 #ifndef MSTL_EXCEPTION_HPP__
 #define MSTL_EXCEPTION_HPP__
-#include "environment.hpp"
+#include "c++config.hpp"
 #include <cassert>
 #include "undef_cmacro.hpp"
 #ifdef MSTL_SUPPORT_CUDA__
@@ -79,33 +79,13 @@ struct CUDAMemoryError final : MemoryError {
 #endif
 
 
-// MSTL_BEGIN_INNER__
-// MSTL_ALWAYS_INLINE inline void __report_err(const Error& err) {
-// 	std::cerr << "\nException : (" << err.type_ << ") " << err.info_ << "\n";
-// #ifdef MSTL_SUPPORT_STACKTRACE__
-// 	std::cerr << boost::stacktrace::stacktrace() << std::endl;
-// #endif
-// }
-// MSTL_END_INNER__
+void Exception(const Error& err);
 
 
-MSTL_ALWAYS_INLINE inline void Exception(const Error& err){
-	// _INNER __report_err(err);
-	throw err;
-}
+using terminate_handler = void(*)();
 
-MSTL_ALWAYS_INLINE inline void Exception(const bool boolean, const Error& err = AssertionError()) {
-	if (boolean) return;
-	Exception(err);
-}
-
-
-// // just allowing void(void) function be called before process exit
-// MSTL_NORETURN inline void Exit(const bool abort = false, void(* func)() = nullptr) {
-// 	if (abort) std::abort();
-// 	if (func) std::atexit(func);
-// 	std::exit(1);
-// }
+void set_terminate(terminate_handler handler) noexcept;
+MSTL_NORETURN void terminate() noexcept;
 
 
 #ifdef MSTL_STATE_DEBUG__
@@ -122,6 +102,17 @@ MSTL_ALWAYS_INLINE inline void Exception(const bool boolean, const Error& err = 
 #define __MSTL_DEBUG_TAG_DEREFERENCE "dereference"
 #define __MSTL_DEBUG_TAG_INCREMENT "increment"
 #define __MSTL_DEBUG_TAG_DECREMENT "decrement"
+
+
+#ifdef MSTL_STANDARD_20__
+#define MSTL_CONSTEXPR_ASSERT(COND) \
+	do { \
+		if (__builtin_is_constant_evaluated() && !bool(COND)) \
+			__builtin_unreachable(); \
+	} while (false);
+#else
+#define MSTL_CONSTEXPR_ASSERT(COND)
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_EXCEPTION_HPP__

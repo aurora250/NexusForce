@@ -27,7 +27,7 @@ private:
     void start_workers(int thread_count);
 
     void accept_conns();
-    void handle_client(socket::socket_t client_socket);
+    void handle_client(const socket& client_socket);
 
     static void parse_cookies(const string& cookie_header, http_request &request);
     static void parse_parameters(http_request& request);
@@ -36,10 +36,10 @@ private:
     static string url_decode(string_view str);
 
 protected:
-    virtual http_request parse_request(socket::socket_t client_socket);
+    virtual http_request parse_request(const socket& client_socket);
     virtual string build_response_str(const http_response& response);
 
-    void send_response(socket::socket_t client_socket, const http_response& response);
+    void send_response(const socket& client_socket, const http_response& response);
 
 
     void add_filter(filter* filter) { filter_chain_.add_filter(filter); }
