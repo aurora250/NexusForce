@@ -97,8 +97,7 @@ public:
     }
 
     void println() {
-        constexpr string_view lf = "\n";
-        this->write_string(lf);
+        this->write_string("\n");
     }
     template <typename T>
     void println(const T& value) {
@@ -339,6 +338,15 @@ void print_rests(const First& first, const Rests&... rests) {
     console.print<remove_cvref_t<First>>(first);
     _INNER print_rests(rests...);
 }
+
+MSTL_ALWAYS_INLINE inline void printc_rests(const color&) {}
+
+template <typename First, typename... Rests>
+void printc_rests(const color& color, const First& first, const Rests&... rests) {
+    console.print(" ");
+    console.printc<remove_cvref_t<First>>(color, first);
+    _INNER printc_rests(color, rests...);
+}
 MSTL_END_INNER__
 
 template <typename This>
@@ -350,6 +358,17 @@ template <typename This, typename... Rests>
 void print(const This& t, const Rests&... rests) {
     console.print<remove_cvref_t<This>>(t);
     _INNER print_rests(rests...);
+}
+
+template <typename This>
+void printc(const color& color, const This& t) {
+    console.print<remove_cvref_t<This>>(color, t);
+}
+
+template <typename This, typename... Rests>
+void printc(const color& color, const This& t, const Rests&... rests) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    _INNER printc_rests(color, rests...);
 }
 
 MSTL_ALWAYS_INLINE inline void println() {
@@ -369,12 +388,25 @@ void println(const This& t, const Rests&... rests) {
     println();
 }
 
+template <typename This, typename ...Rests>
+void printcln(const color& color, const This& t, const Rests&... rests) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    _INNER printc_rests(color, rests...);
+    println();
+}
+
 #else
 
 template <typename This, typename ...Rests>
 void print(const This& t, const Rests&... r) {
     console.print<remove_cvref_t<This>>(t);
     ((console.print(" "), console.print<remove_cvref_t<Rests>>(r)), ...);
+}
+
+template <typename This, typename ...Rests>
+void printc(const color& color, const This& t, const Rests&... r) {
+    console.printc<remove_cvref_t<This>>(color, t);
+    ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
 }
 
 MSTL_ALWAYS_INLINE inline void println() {

@@ -4,6 +4,7 @@
 #include "MSTL/core/datetime.hpp"
 #include "http_constants.hpp"
 #include <mutex>
+#include <atomic>
 #include <thread>
 MSTL_BEGIN_NAMESPACE__
 

@@ -4,7 +4,6 @@
 #include "MSTL/core/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseError, LinkError, "Database Operations Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseTypeCastError, TypeCastError, "Database Type Cast Failed.")
 
 enum class DB_TYPE {

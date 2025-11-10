@@ -17,7 +17,7 @@ struct base_char_traits {
     static constexpr char_type* copy(char_type* const dest,
         const char_type* const srcs, const size_t count) noexcept {
 #ifdef MSTL_COMPILER_CLANG__
-        ::__builtin_memcpy(dest, srcs, count * sizeof(char_type));
+        __builtin_memcpy(dest, srcs, count * sizeof(char_type));
 #else
 #ifdef MSTL_STANDARD_20__
         if (_MSTL is_constant_evaluated()) {
@@ -35,7 +35,7 @@ struct base_char_traits {
         const char_type* const srcs, const size_t count) noexcept {
 #if defined(MSTL_COMPILER_CLANG__)
 #if __has_builtin(__builtin_memmove)
-        ::__builtin_memmove(dest, srcs, count * sizeof(char_type));
+        __builtin_memmove(dest, srcs, count * sizeof(char_type));
 #else
         _MSTL memory_move(dest, srcs, count * sizeof(char_type));
 #endif

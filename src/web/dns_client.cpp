@@ -1,8 +1,10 @@
 #include <MSTL/web/dns_client.hpp>
+#ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/vsprintf.hpp>
+#include <arpa/inet.h>
 MSTL_BEGIN_NAMESPACE__
 
-vector<uint8_t> dns_client::build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass) const {
+vector<uint8_t> dns_client::build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
     vector<uint8_t> query;
 
     dns_header header;
@@ -27,7 +29,7 @@ vector<uint8_t> dns_client::build_dns_query(const string& domain, DNS_RECORD typ
     return query;
 }
 
-vector<uint8_t> dns_client::encode_domain_name(const string& domain) const {
+vector<uint8_t> dns_client::encode_domain_name(const string& domain) {
     vector<uint8_t> encoded;
     size_t start = 0;
     size_t pos;
@@ -55,17 +57,17 @@ vector<uint8_t> dns_client::encode_domain_name(const string& domain) const {
     return encoded;
 }
 
-string dns_client::decode_domain_name(const vector<uint8_t>& data, size_t& offset) const {
+string dns_client::decode_domain_name(const vector<uint8_t>& data, size_t& offset) {
     string name;
     bool jumped = false;
     size_t original_offset = offset;
     int jumps = 0;
-    constexpr int MAX_JUMPS = 5;
 
     while (offset < data.size()) {
         const uint8_t len = data[offset];
 
         if ((len & 0xC0) == 0xC0) {
+            constexpr int MAX_JUMPS = 5;
             if (offset + 1 >= data.size()) {
                 Exception(DNSError("Invalid pointer in domain name"));
             }
@@ -109,8 +111,8 @@ string dns_client::decode_domain_name(const vector<uint8_t>& data, size_t& offse
     return name;
 }
 
-sockaddr_in dns_client::create_server_address() const {
-    sockaddr_in addr{};
+::sockaddr_in dns_client::create_server_address() const {
+    ::sockaddr_in addr{};
     addr.sin_family = AF_INET;
     addr.sin_port = ::htons(dns_port_);
     if (::inet_pton(AF_INET, dns_server_.c_str(), &addr.sin_addr) <= 0) {
@@ -125,7 +127,7 @@ vector<uint8_t> dns_client::send_udp_query(const vector<uint8_t>& query) const {
     if (!udp_sock.is_valid()) {
         Exception(DNSError("Failed to create UDP socket"));
     }
-    if (udp_sock.set_receive_timeout(timeout_)) {
+    if (!udp_sock.set_receive_timeout(timeout_)) {
         Exception(DNSError("Failed to set socket timeout"));
     }
 
@@ -149,10 +151,10 @@ vector<uint8_t> dns_client::send_tcp_query(const vector<uint8_t>& query) const {
     if (!tcp_sock.is_valid()) {
         Exception(DNSError("Failed to create TCP socket"));
     }
-    if (tcp_sock.set_receive_timeout(timeout_) && tcp_sock.set_send_timeout(timeout_)) {
+    if (!tcp_sock.set_receive_timeout(timeout_) || !tcp_sock.set_send_timeout(timeout_)) {
         Exception(DNSError("Failed to set socket timeout"));
     }
-    if (tcp_sock.connect(create_server_address())) {
+    if (!tcp_sock.connect(create_server_address())) {
         Exception(DNSError("Failed to connect to DNS server"));
     }
 
@@ -183,7 +185,7 @@ vector<uint8_t> dns_client::send_tcp_query(const vector<uint8_t>& query) const {
     return buffer;
 }
 
-string dns_client::parse_a_record(const vector<uint8_t>& rdata) const {
+string dns_client::parse_a_record(const vector<uint8_t>& rdata) {
     if (rdata.size() != 4) {
         Exception(DNSError("Invalid A record length"));
     }
@@ -191,10 +193,10 @@ string dns_client::parse_a_record(const vector<uint8_t>& rdata) const {
     if (::inet_ntop(AF_INET, rdata.data(), ip, INET_ADDRSTRLEN) == nullptr) {
         Exception(DNSError("Failed to parse A record"));
     }
-    return string(ip);
+    return {ip};
 }
 
-string dns_client::parse_aaaa_record(const vector<uint8_t>& rdata) const {
+string dns_client::parse_aaaa_record(const vector<uint8_t>& rdata) {
     if (rdata.size() != 16) {
         Exception(DNSError("Invalid AAAA record length"));
     }
@@ -202,10 +204,10 @@ string dns_client::parse_aaaa_record(const vector<uint8_t>& rdata) const {
     if (::inet_ntop(AF_INET6, rdata.data(), ip, INET6_ADDRSTRLEN) == nullptr) {
         Exception(DNSError("Failed to parse AAAA record"));
     }
-    return string(ip);
+    return {ip};
 }
 
-string dns_client::parse_mx_record(const vector<uint8_t>& data, size_t offset, const uint16_t rdlength) const {
+string dns_client::parse_mx_record(const vector<uint8_t>& data, size_t offset, const uint16_t rdlength) {
     if (rdlength < 2) {
         Exception(DNSError("Invalid MX record length"));
     }
@@ -215,7 +217,7 @@ string dns_client::parse_mx_record(const vector<uint8_t>& data, size_t offset, c
     return to_string(preference) + " " + exchange;
 }
 
-string dns_client::parse_txt_record(const vector<uint8_t>& rdata) const {
+string dns_client::parse_txt_record(const vector<uint8_t>& rdata) {
     string result;
     size_t offset = 0;
 
@@ -232,7 +234,7 @@ string dns_client::parse_txt_record(const vector<uint8_t>& rdata) const {
     return result;
 }
 
-dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t& offset) const {
+dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t& offset) {
     dns_record record;
     record.name = decode_domain_name(data, offset);
 
@@ -287,7 +289,7 @@ dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t
     return record;
 }
 
-dns_query_result dns_client::parse_dns_response(const vector<uint8_t>& response) const {
+dns_query_result dns_client::parse_dns_response(const vector<uint8_t>& response) {
     if (response.size() < sizeof(dns_header)) {
         Exception(DNSError("Response too short"));
     }
@@ -503,3 +505,4 @@ void dns_client::update_cache(const string& key, const dns_query_result& result)
 }
 
 MSTL_END_NAMESPACE__
+#endif // MSTL_PLATFORM_LINUX__

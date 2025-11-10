@@ -193,17 +193,17 @@ public:
             const int r = hexadecimal::parse(clean_hex.substr(0, 2)).to_int64();
             const int g = hexadecimal::parse(clean_hex.substr(2, 2)).to_int64();
             const int b = hexadecimal::parse(clean_hex.substr(4, 2)).to_int64();
-            return color(r, g, b);
+            return {r, g, b};
         } else if (clean_hex.length() == 8) {
             const int r = hexadecimal::parse(clean_hex.substr(0, 2)).to_int64();
             const int g = hexadecimal::parse(clean_hex.substr(2, 2)).to_int64();
             const int b = hexadecimal::parse(clean_hex.substr(4, 2)).to_int64();
             const int a = hexadecimal::parse(clean_hex.substr(6, 2)).to_int64();
-            return color(r, g, b, a);
+            return {r, g, b, a};
         } else {
             Exception(ValueError("Invalid hex string"));
         }
-        return color();
+        return {};
     }
 
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
@@ -262,23 +262,23 @@ public:
 
     constexpr integer32 to_ansi_foreground(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return integer32{38 * 100 + 5 * 10 + to_ansi_256()};
+            return {38 * 100 + 5 * 10 + to_ansi_256()};
         }
-        return integer32(to_ansi_basic(false));
+        return {to_ansi_basic(false)};
     }
 
     constexpr integer32 to_ansi_background(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return integer32{48 * 100 + 5 * 10 + to_ansi_256()};
+            return {48 * 100 + 5 * 10 + to_ansi_256()};
         }
-        return integer32(to_ansi_basic(true));
+        return {to_ansi_basic(true)};
     }
 
     constexpr integer32 to_integer32(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return integer32(to_ansi_256());
+            return {to_ansi_256()};
         }
-        return integer32(to_ansi_basic(false));
+        return {to_ansi_basic(false)};
     }
 
     constexpr size_t to_hash() const noexcept {

@@ -2052,10 +2052,8 @@ private:
 
     template <typename T, bool Nothrow = noexcept(_MSTL declvoid<T>(_MSTL declval<Res_t>())),
         typename = decltype(_MSTL declvoid<T>(_MSTL declval<Res_t>())), bool Dangle =
-#if defined(MSTL_COMPILER_CLANG__)
+#if defined(MSTL_COMPILER_GNUC__)
         __reference_converts_from_temporary(T(), Res_t())
-#elif defined(MSTL_COMPILER_GCC__)
-        __reference_converts_from_temporary(T, Res_t)
 #else
         false
 #endif

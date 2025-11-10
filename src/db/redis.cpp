@@ -1,16 +1,16 @@
 #include <MSTL/db/redis.hpp>
-#ifdef MSTL_SUPPORT_DB__
-MSTL_BEGIN_NAMESPACE__
+#include <MSTL/core/serialize.hpp>
 #ifdef MSTL_SUPPORT_REDIS__
+MSTL_BEGIN_NAMESPACE__
 
-_MSTL string db_redis_result::format_redis_reply_element(::redisReply* element) {
+_MSTL string db_redis_result::format_redis_reply_element(redis::redisReply* element) {
     switch (element->type) {
         case REDIS_REPLY_STRING:
         case REDIS_REPLY_STATUS:
         case REDIS_REPLY_ERROR:
             return {element->str, element->len};
         case REDIS_REPLY_INTEGER:
-            return integer32(element->integer).to_string();
+            return integer64(element->integer).to_string();
         case REDIS_REPLY_NIL:
             return {};
         case REDIS_REPLY_ARRAY: {
@@ -26,40 +26,52 @@ _MSTL string db_redis_result::format_redis_reply_element(::redisReply* element) 
     }
 }
 
-db_redis_result::db_redis_result(::redisReply* reply) noexcept
-    : reply_(reply) {
-    if (reply_) {
-        if (reply_->type == REDIS_REPLY_ARRAY) {
+void db_redis_result::process_reply() {
+    if (!reply_) return;
+
+    switch (reply_->type) {
+        case REDIS_REPLY_ARRAY: {
             is_array_ = true;
             rows_ = reply_->elements;
-            column_names_.push_back("value");
-        } else {
+
+            if (rows_ % 2 == 0) {
+                for (size_t i = 0; i < rows_; i += 2) {
+                    string key = format_redis_reply_element(reply_->element[i]);
+                    string value = format_redis_reply_element(reply_->element[i + 1]);
+                    kv_pairs_.emplace_back(_MSTL move(key), _MSTL move(value));
+                }
+                rows_ = kv_pairs_.size();
+            } else {
+                column_names_.push_back("value");
+            }
+            break;
+        } case REDIS_REPLY_STRING: case REDIS_REPLY_STATUS:
+        case REDIS_REPLY_ERROR: case REDIS_REPLY_INTEGER: {
             rows_ = 1;
             column_names_.push_back("result");
+            break;
+        } case REDIS_REPLY_NIL: {
+            rows_ = 0;
+            break;
+        } default: {
+            rows_ = 1;
+            column_names_.push_back("result");
+            break;
         }
     }
 }
 
-db_redis_result::~db_redis_result() {
-    if (reply_) {
-        ::freeReplyObject(reply_);
+string db_redis_result::at_string() const {
+    if (empty()) return {};
+
+    if (!kv_pairs_.empty() && kv_cursor_ > 0) {
+        return string(value());
     }
-}
-
-bool db_redis_result::empty() const noexcept {
-    return !reply_ || rows_ == 0;
-}
-
-db_redis_result::size_type db_redis_result::row_count() const noexcept {
-    return rows_;
-}
-
-db_redis_result::size_type db_redis_result::column_count() const noexcept {
-    return 1;
-}
-
-const list<string_view>& db_redis_result::column_names() const noexcept {
-    return column_names_;
+    if (is_array_ && cursor_ > 0) {
+        redis::redisReply* element = reply_->element[cursor_ - 1];
+        return format_redis_reply_element(element);
+    }
+    return format_redis_reply_element(reply_);
 }
 
 bool db_redis_result::next() noexcept {
@@ -68,119 +80,89 @@ bool db_redis_result::next() noexcept {
     return cursor_ <= rows_;
 }
 
-string_view db_redis_result::at(size_type) const noexcept {
-    return {at_string(0).data(), at_string(0).length()};
+string_view db_redis_result::key() const noexcept {
+    if (kv_pairs_.empty() || kv_cursor_ == 0) return {};
+    return kv_pairs_[kv_cursor_ - 1].first.view();
 }
 
-bool db_redis_result::at_bool(size_type) const {
-    const string s = at_string(0);
-    return s == "1" || s == "true" || s == "TRUE" || s == "yes";
+string_view db_redis_result::value() const noexcept {
+    if (kv_pairs_.empty() || kv_cursor_ == 0) return {};
+    return kv_pairs_[kv_cursor_ - 1].second.view();
 }
 
-int8_t db_redis_result::at_int8(size_type) const {
-    return static_cast<int8_t>(this->at_int16(int()));
+bool db_redis_result::value_bool() const {
+    return boolean::parse(at_string().view()).value();
 }
 
-int16_t db_redis_result::at_int16(size_type) const {
-    return integer16::parse(at_string(0).c_str());
-}
-
-int32_t db_redis_result::at_int32(size_type) const {
-    return integer32::parse(at_string(0).c_str());
-}
-
-int64_t db_redis_result::at_int64(size_type) const {
-    return integer64::parse(at_string(0).c_str());
-}
-
-float32_t db_redis_result::at_float32(size_type) const {
-    return float32::parse(at_string(0).c_str());
-}
-
-float64_t db_redis_result::at_float64(size_type) const {
-    return float64::parse(at_string(0).c_str());
-}
-
-decimal_t db_redis_result::at_decimal(size_type) const {
-    return decimal::parse(at_string(0).c_str());
-}
-
-vector<char> db_redis_result::at_blob(size_type) const {
-    const string s = at_string(0);
-    return {s.begin(), s.end()};
-}
-
-string db_redis_result::at_set(size_type) const {
-    return at_string(0);
-}
-
-uint64_t db_redis_result::at_bit(size_type) const {
-    const string data = at_string(0);
-    uint64_t value = 0;
-    for (unsigned long i = 0; i < data.size(); ++i) {
-        value = (value << 8) | static_cast<byte_t>(data[i]);
+int64_t db_redis_result::value_int64() const {
+    if (!reply_) return 0;
+    if (reply_->type == REDIS_REPLY_INTEGER) {
+        return reply_->integer;
     }
-    return value;
+    return integer64::parse(at_string().view());
 }
 
-date db_redis_result::at_date(size_type) const {
-    return date::parse(at_string(0).view());
+double db_redis_result::value_double() const {
+    return float64::parse(at_string().view());
 }
 
-time db_redis_result::at_time(size_type) const {
-    return time::parse(at_string(0).view());
-}
-
-datetime db_redis_result::at_datetime(size_type) const {
-    return datetime::parse(at_string(0).view());
-}
-
-timestamp db_redis_result::at_timestamp(size_type) const {
-    return timestamp(integer64::parse(at_string(0).c_str()));
-}
-
-string db_redis_result::at_string(size_type) const {
-    if (empty() || cursor_ == 0) return {};
-
-    if (is_array_) {
-        ::redisReply* element = reply_->element[cursor_ - 1];
-        return format_redis_reply_element(element);
+vector<string> db_redis_result::value_array() const {
+    vector<string> result;
+    if (reply_ && reply_->type == REDIS_REPLY_ARRAY) {
+        for (size_t i = 0; i < reply_->elements; ++i) {
+            string value = format_redis_reply_element(reply_->element[i]);
+            result.push_back(_MSTL move(value));
+        }
     }
-    return format_redis_reply_element(reply_);
+    return result;
 }
 
-string_view db_redis_result::at_enum(size_type) const noexcept {
-    return {at_string(0).c_str(), at_string(0).length()};
-}
+redis::redisReply* db_redis_connect::execute_command(
+    const string_view command, const vector<string_view>& args) const {
+    if (!context_) return nullptr;
 
+    vector<const char*> argv;
+    vector<size_t> argvlen;
+
+    argv.push_back(command.data());
+    argvlen.push_back(command.length());
+
+    for (const auto& arg : args) {
+        argv.push_back(arg.data());
+        argvlen.push_back(arg.length());
+    }
+
+    return static_cast<redis::redisReply*>(
+        redis::redisCommandArgv(context_, argv.size(), argv.data(), argvlen.data())
+    );
+}
 
 bool db_redis_connect::authenticate(const string& password) const {
     if (password.empty()) return true;
-    const auto reply = static_cast<::redisReply*>(::redisCommand(context_, "AUTH %s", password.c_str()));
+    const auto reply = execute_command("AUTH", {password.view()});
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Authentication failed";
-            ::freeReplyObject(reply);
+            redis::freeReplyObject(reply);
         }
         return false;
     }
-    ::freeReplyObject(reply);
+    redis::freeReplyObject(reply);
     return true;
 }
 
 bool db_redis_connect::select_database(const string& db_index) const {
     if (db_index.empty()) return true;
     try {
-        const int db = integer32::parse(db_index.c_str());
-        const auto reply = static_cast<::redisReply*>(::redisCommand(context_, "SELECT %d", db));
+        const auto reply = execute_command("SELECT", {db_index.view()});
         if (!reply || reply->type == REDIS_REPLY_ERROR) {
             if (reply) {
                 last_error_ = reply->str ? reply->str : "SELECT failed";
-                ::freeReplyObject(reply);
+                redis::freeReplyObject(reply);
             }
             return false;
         }
-        ::freeReplyObject(reply);
+        redis::freeReplyObject(reply);
         return true;
     } catch (...) {
         last_error_ = "Invalid database index";
@@ -191,11 +173,11 @@ bool db_redis_connect::select_database(const string& db_index) const {
 bool db_redis_connect::connect_to_host(
     const string& host, const uint16_t port,
     const string& password, const string& dbname) {
-    context_ = redisConnect(host.c_str(), port);
+    context_ = redis::redisConnect(host.c_str(), port);
     if (!context_ || context_->err) {
         if (context_) {
             last_error_ = context_->errstr;
-            ::redisFree(context_);
+            redis::redisFree(context_);
             context_ = nullptr;
         } else {
             last_error_ = "Connection failed";
@@ -213,26 +195,9 @@ bool db_redis_connect::connect_to_host(
     return true;
 }
 
-
-db_redis_connect::~db_redis_connect() {
+bool db_redis_connect::reset_connect(const db_connect_config& config) {
     close();
-}
-
-bool db_redis_connect::connect_to(const string&, const string& password,
-    const string& dbname, const string& host,
-    const uint32_t port, const string&) {
-    return connect_to_host(host, port, password, dbname);
-}
-
-bool db_redis_connect::connect_to(const db_connect_config& config) {
-    return connect_to_host(config.host, config.port, config.password, config.database);
-}
-
-bool db_redis_connect::set_character_set(const string&) const noexcept {
-    return true;
-}
-string_view db_redis_connect::get_character_set() const noexcept {
-    return {};
+    return connect_to(config);
 }
 
 string_view db_redis_connect::get_error() const noexcept {
@@ -242,73 +207,246 @@ string_view db_redis_connect::get_error() const noexcept {
     return {last_error_.data(), last_error_.size()};
 }
 
-uint32_t db_redis_connect::get_errno() const noexcept {
-    return context_ ? context_->err : 0;
-}
-
 bool db_redis_connect::update(const string& sql) const noexcept {
-    const auto reply = static_cast<::redisReply*>(::redisCommand(context_, sql.c_str()));
+    const auto reply = static_cast<redis::redisReply*>(
+        redis::redisCommand(context_, sql.c_str())
+        );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Command failed";
-            ::freeReplyObject(reply);
+            redis::freeReplyObject(reply);
         }
         return false;
     }
-    ::freeReplyObject(reply);
+    redis::freeReplyObject(reply);
     return true;
 }
 
-unique_ptr<idb_result> db_redis_connect::query(const string& sql) const {
-    const auto reply = static_cast<::redisReply*>(::redisCommand(context_, sql.c_str()));
+unique_ptr<idb_kv_result> db_redis_connect::query(const string& sql) const {
+    const auto reply = static_cast<redis::redisReply*>(
+        redis::redisCommand(context_, sql.c_str())
+        );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Query failed";
-            ::freeReplyObject(reply);
+            redis::freeReplyObject(reply);
         }
         return nullptr;
     }
     return make_unique<db_redis_result>(reply);
 }
 
-bool db_redis_connect::connected() const noexcept {
-    return context_ != nullptr && !context_->err;
-}
-
 bool db_redis_connect::is_valid() const noexcept {
     if (!connected()) return false;
-    const auto reply = static_cast<::redisReply*>(::redisCommand(context_, "PING"));
+    const auto reply = execute_command("PING");
     if (!reply || reply->type != REDIS_REPLY_STATUS ||
         string_compare(reply->str, "PONG") != 0) {
-        if (reply) ::freeReplyObject(reply);
+        if (reply) redis::freeReplyObject(reply);
         return false;
-        }
-    ::freeReplyObject(reply);
+    }
+    redis::freeReplyObject(reply);
     return true;
 }
 
 void db_redis_connect::close() noexcept {
-    if (context_) {
-        ::redisFree(context_);
-        context_ = nullptr;
+    if (!context_) return;
+    redis::redisFree(context_);
+    context_ = nullptr;
+}
+
+bool db_redis_connect::set(const string& key, const string& value) {
+    const auto reply = execute_command("SET", {key.view(), value.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "SET failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
     }
+    redis::freeReplyObject(reply);
+    return true;
 }
 
-void db_redis_connect::refresh_alive() noexcept {
-    alive_time_ = std::clock();
+bool db_redis_connect::setex(const string& key, const string& value, const int seconds) {
+    const string sec_str = integer32(seconds).to_string();
+    const auto reply = execute_command("SETEX", {key.view(), sec_str.view(), value.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "SETEX failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    redis::freeReplyObject(reply);
+    return true;
 }
 
-db_redis_connect::clock_type db_redis_connect::get_alive() const noexcept {
-    return std::clock() - alive_time_;
+unique_ptr<idb_kv_result> db_redis_connect::get(const string& key) {
+    const auto reply = execute_command("GET", {key.view()});
+    if (!reply) {
+        last_error_ = "GET command failed";
+        return nullptr;
+    }
+    if (reply->type == REDIS_REPLY_ERROR) {
+        last_error_ = reply->str ? reply->str : "GET failed";
+        redis::freeReplyObject(reply);
+        return nullptr;
+    }
+    return make_unique<db_redis_result>(reply);
 }
 
-bool db_redis_connect::reset_connect(const db_connect_config& config) {
-    close();
-    return connect_to(config);
+bool db_redis_connect::del(const string& key) {
+    const auto reply = execute_command("DEL", {key.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "DEL failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
+    redis::freeReplyObject(reply);
+    return result;
 }
 
+bool db_redis_connect::exists(const string& key) {
+    const auto reply = execute_command("EXISTS", {key.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "EXISTS failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
+    redis::freeReplyObject(reply);
+    return result;
+}
 
-db_redis_factory::db_redis_factory(const db_connect_config& config) : idb_factory(config) {}
+bool db_redis_connect::expire(const string& key, const int seconds) {
+    const string sec_str = integer32(seconds).to_string();
+    const auto reply = execute_command("EXPIRE", {key.view(), sec_str.view() });
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "EXPIRE failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
+    redis::freeReplyObject(reply);
+    return result;
+}
+
+bool db_redis_connect::hset(const string& key, const string& field, const string& value) {
+    const auto reply = execute_command("HSET", {key.view(), field.view(), value.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "HSET failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    redis::freeReplyObject(reply);
+    return true;
+}
+
+unique_ptr<idb_kv_result> db_redis_connect::hget(const string& key, const string& field) {
+    const auto reply = execute_command("HGET", {key.view(), field.view()});
+    if (!reply) {
+        last_error_ = "HGET command failed";
+        return nullptr;
+    }
+    if (reply->type == REDIS_REPLY_ERROR) {
+        last_error_ = reply->str ? reply->str : "HGET failed";
+        redis::freeReplyObject(reply);
+        return nullptr;
+    }
+    return make_unique<db_redis_result>(reply);
+}
+
+unique_ptr<idb_kv_result> db_redis_connect::hgetall(const string& key) {
+    const auto reply = execute_command("HGETALL", {key.view()});
+    if (!reply) {
+        last_error_ = "HGETALL command failed";
+        return nullptr;
+    }
+    if (reply->type == REDIS_REPLY_ERROR) {
+        last_error_ = reply->str ? reply->str : "HGETALL failed";
+        redis::freeReplyObject(reply);
+        return nullptr;
+    }
+    return make_unique<db_redis_result>(reply);
+}
+
+bool db_redis_connect::lpush(const string& key, const string& value) {
+    const auto reply = execute_command("LPUSH", {key.view(), value.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "LPUSH failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    redis::freeReplyObject(reply);
+    return true;
+}
+
+bool db_redis_connect::rpush(const string& key, const string& value) {
+    const auto reply = execute_command("RPUSH", {key.view(), value.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "RPUSH failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    redis::freeReplyObject(reply);
+    return true;
+}
+
+unique_ptr<idb_kv_result> db_redis_connect::lrange(const string& key, const int start, const int stop) {
+    const string start_str = integer32(start).to_string();
+    const string stop_str = integer32(stop).to_string();
+    const auto reply = execute_command("LRANGE", {key.view(), start_str.view(), stop_str.view() });
+    if (!reply) {
+        last_error_ = "LRANGE command failed";
+        return nullptr;
+    }
+    if (reply->type == REDIS_REPLY_ERROR) {
+        last_error_ = reply->str ? reply->str : "LRANGE failed";
+        redis::freeReplyObject(reply);
+        return nullptr;
+    }
+    return make_unique<db_redis_result>(reply);
+}
+
+bool db_redis_connect::sadd(const string& key, const string& member) {
+    const auto reply = execute_command("SADD", {key.view(), member.view()});
+    if (!reply || reply->type == REDIS_REPLY_ERROR) {
+        if (reply) {
+            last_error_ = reply->str ? reply->str : "SADD failed";
+            redis::freeReplyObject(reply);
+        }
+        return false;
+    }
+    redis::freeReplyObject(reply);
+    return true;
+}
+
+unique_ptr<idb_kv_result> db_redis_connect::smembers(const string& key) {
+    const auto reply = execute_command("SMEMBERS", {key.view()});
+    if (!reply) {
+        last_error_ = "SMEMBERS command failed";
+        return nullptr;
+    }
+    if (reply->type == REDIS_REPLY_ERROR) {
+        last_error_ = reply->str ? reply->str : "SMEMBERS failed";
+        redis::freeReplyObject(reply);
+        return nullptr;
+    }
+    return make_unique<db_redis_result>(reply);
+}
 
 idb_connect* db_redis_factory::create_connect() {
     auto conn = new db_redis_connect();
@@ -319,10 +457,5 @@ idb_connect* db_redis_factory::create_connect() {
     return conn;
 }
 
-idb_result* db_redis_factory::create_result(void* native_result) {
-    return new db_redis_result(static_cast<::redisReply*>(native_result));
-}
-
-#endif // MSTL_SUPPORT_REDIS__
 MSTL_END_NAMESPACE__
-#endif // MSTL_SUPPORT_DB__
+#endif // MSTL_SUPPORT_REDIS__

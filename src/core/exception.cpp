@@ -1,6 +1,6 @@
 #include <MSTL/core/exception.hpp>
 #include <MSTL/core/console.hpp>
-#include <cstdlib>
+#include <cstdlib> // std::abort
 #include <atomic>
 MSTL_BEGIN_NAMESPACE__
 

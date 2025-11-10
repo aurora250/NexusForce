@@ -1,7 +1,7 @@
 #include "try.h"
 
 int main() {
-    test_dns();
+    test_tpool();
 
     console.pause();
 }

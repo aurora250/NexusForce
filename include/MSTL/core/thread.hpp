@@ -66,11 +66,11 @@ private:
         virtual void run() = 0;
     };
 
-    template<typename Callable>
+    template <typename Callable>
     struct thread_data final : thread_data_base {
         Callable func_;
 
-        template<typename F>
+        template <typename F>
         explicit thread_data(F&& f) : func_(_MSTL forward<F>(f)) {}
 
         void run() override { func_(); }

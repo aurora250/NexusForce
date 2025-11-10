@@ -7,6 +7,8 @@
 #include <mutex>
 #include <thread>
 #include <condition_variable>
+
+#include "mysql.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API database_pool {
@@ -44,6 +46,22 @@ public:
     database_pool& operator =(database_pool&&) = delete;
 
     _MSTL shared_ptr<idb_connect> get_connect();
+
+    _MSTL shared_ptr<idb_tb_connect> get_tb_connect() {
+        const auto sp = get_connect();
+        {
+            std::unique_lock<std::mutex> lock(queue_mtx_);
+            return _MSTL shared_ptr<idb_tb_connect>(dynamic_cast<idb_tb_connect*>(sp.get()));
+        }
+    }
+
+    _MSTL shared_ptr<idb_kv_connect> get_kv_connect() {
+        const auto sp = get_connect();
+        {
+            std::unique_lock<std::mutex> lock(queue_mtx_);
+            return _MSTL shared_ptr<idb_kv_connect>(dynamic_cast<idb_kv_connect*>(sp.get()));
+        }
+    }
 };
 
 MSTL_END_NAMESPACE__

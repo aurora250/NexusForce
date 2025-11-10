@@ -12,7 +12,7 @@ if(MSVC)
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
@@ -48,11 +48,11 @@ message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 option(MSTL_ENABLE_BOOST "Enable Boost library support" ON)
 option(MSTL_ENABLE_MYSQL "Enable MySQL database support" ON)
 option(MSTL_ENABLE_SQLITE3 "Enable SQLite3 database support" ON)
-option(MSTL_ENABLE_REDIS "Enable Redis database support" OFF)
+option(MSTL_ENABLE_REDIS "Enable Redis database support" ON)
 option(MSTL_ENABLE_QT6 "Enable Qt6 toolchain support" OFF)
 option(MSTL_ENABLE_CUDA "Enable CUDA GPU acceleration" OFF)
 option(MSTL_BUILD_TESTS "Build unit tests (requires GTest)" ON)
-option(MSTL_BUILD_EXAMPLES "Build example programs" ON)
+option(MSTL_BUILD_EXAMPLES "Build example programs" OFF)
 
 
 message(STATUS "Project Configuration:")

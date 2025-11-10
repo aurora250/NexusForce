@@ -495,11 +495,4 @@ string json_value_to_indent_string(const json_value* value, int indent) {
 
 MSTL_END_INNER__
 
-string json_value::to_string() const {
-    return _MSTL to_string(this);
-}
-string json_value::to_indent_string() const {
-    return _MSTL to_indent_string(this);
-}
-
 MSTL_END_NAMESPACE__

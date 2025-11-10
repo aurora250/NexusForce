@@ -5,7 +5,6 @@
 #include "stack.hpp"
 #include "functional.hpp"
 #include "optional.hpp"
-#include "console.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(JsonOperateError, ValueError, "Json String Parse Failed")
@@ -19,7 +18,7 @@ class json_object;
 class json_array;
 
 
-class MSTL_API json_value {
+class MSTL_API json_value : public istringify<json_value> {
 public:
     enum types {
         Null,
@@ -48,7 +47,6 @@ public:
     MSTL_NODISCARD bool is_array() const noexcept { return type() == Array; }
 
     MSTL_NODISCARD string to_string() const;
-    MSTL_NODISCARD string to_indent_string() const;
 };
 
 
@@ -280,7 +278,7 @@ public:
     json_builder& value(nullptr_t) { return value_impl(make_unique<json_null>()); }
     json_builder& value(const string& v) { return value_impl(make_unique<json_string>(v)); }
     json_builder& value(const char* v) { return value(string(v)); }
-    json_builder& value(const string_view& v) { return value(string(v)); }
+    json_builder& value(const string_view v) { return value(string(v)); }
     json_builder& value(const double v) { return value_impl(make_unique<json_number>(v)); }
     json_builder& value(const int v) { return value_impl(make_unique<json_number>(static_cast<double>(v))); }
     json_builder& value(const bool v) { return value_impl(make_unique<json_bool>(v)); }
@@ -322,13 +320,9 @@ MSTL_ALWAYS_INLINE inline string to_indent_string(const json_value& value) {
     return _INNER json_value_to_indent_string(&value, 0);
 }
 
-
-template <>
-struct io_base<json_value> {
-    static void write(sys_console& console, const json_value& value) {
-        io_base<string>::write(console, to_indent_string(value));
-    }
-};
+inline string json_value::to_string() const {
+    return _MSTL to_indent_string(this);
+}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_JSON_HPP__

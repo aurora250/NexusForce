@@ -452,7 +452,8 @@ public:
         }
     }
 
-    MSTL_CONSTEXPR20 explicit basic_string(size_type n) : basic_string(n, '\0') {}
+    MSTL_CONSTEXPR20 explicit basic_string(size_type n)
+    : basic_string(n, static_cast<value_type>(0)) {}
 
     MSTL_CONSTEXPR20 explicit basic_string(size_type n, int32_t chr)
     : basic_string(n, static_cast<value_type>(chr)) {}
@@ -604,18 +605,21 @@ public:
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 allocator_type get_allocator() const noexcept { return allocator_type(); }
 
-    MSTL_CONSTEXPR20 void reserve(const size_type n) {
+    MSTL_CONSTEXPR20 void reserve_exact(const size_type n) {
         MSTL_DEBUG_VERIFY(n < max_size(), "basic_string reserve index out of range.");
-        const size_type new_cap = n + 1;
-        if (capacity_pair_.value >= new_cap) return;
+        if (capacity_pair_.value >= n) return;
 
-        pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
+        pointer new_buffer = capacity_pair_.get_base().allocate(n);
         traits_type::move(new_buffer, data_, size_);
         capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
 
         data_ = new_buffer;
-        capacity_pair_.value = new_cap;
+        capacity_pair_.value = n;
         null_terminate();
+    }
+
+    MSTL_CONSTEXPR20 void reserve(const size_type n) {
+        reserve_exact(n + 1);
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type n) noexcept {
@@ -936,15 +940,22 @@ public:
     }
 
     MSTL_CONSTEXPR20 void shrink_to_fit() {
-        if (size_ + 1 >= capacity_pair_.value) return;
         const size_type new_cap = size_ + 1;
-        basic_string temp;
+        if (new_cap >= capacity_pair_.value) return;
 
-        temp.reserve(new_cap - 1);
+        basic_string temp;
+        temp.reserve(new_cap);
         temp.append(*this);
         this->swap(temp);
     }
 
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self repeat(size_type n) const noexcept {
+        self result;
+        result.reserve(size() * n);
+        while (n--) result += *this;
+        return _MSTL move(result);
+    }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 self substr(const size_type off = 0, size_type count = npos) const {
         range_check(off);

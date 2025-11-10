@@ -316,7 +316,7 @@ MSTL_CONSTEXPR20 void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* 
 // it`s similar with std::memccpy.
 constexpr void* memory_char_copy(void* dest, const void* src, const int chr, size_t count) noexcept {
     if (dest == nullptr || src == nullptr) return nullptr;
-    const byte_t target = static_cast<byte_t>(chr);
+    const auto target = static_cast<byte_t>(chr);
     auto dest_v = static_cast<volatile byte_t*>(dest);
     auto src_v = static_cast<const volatile byte_t*>(src);
 

@@ -1413,7 +1413,6 @@ void test_timer(){
 
 
 void test_dbpool() {
-#ifdef MSTL_SUPPORT_DB__
 #ifdef MSTL_SUPPORT_MYSQL__
     auto begin = chrono::high_resolution_clock::now();
     db_connect_config mysql_config = db_connect_config::for_mysql("book");
@@ -1426,20 +1425,20 @@ void test_dbpool() {
         }
         println((begin - chrono::high_resolution_clock::now()).count());
 
-        auto result = pool.get_connect()->query("SELECT * FROM book");
+        auto result = pool.get_tb_connect()->query("SELECT * FROM book");
         while (result->next()) {
             for (int i = 0; i < result->column_count(); i++) {
                 if (i == 2) {
-                    int count = result->at_int16(i);
+                    int count = result->get_int16(i);
                     print("collected :", count, ", ");
                 } else if (i == 3) {
-                    float count = result->at_float32(i);
+                    float count = result->get_float32(i);
                     print("usable :", count, ", ");
                 } else if (i == 5) {
-                    _MSTL datetime dt = result->at_datetime(i);
+                    _MSTL datetime dt = result->get_datetime(i);
                     print("date: ", dt, ", ");
                 } else {
-                    print(result->at(i), ", ");
+                    print(result->get(i), ", ");
                 }
             }
             println();
@@ -1459,24 +1458,6 @@ void test_dbpool() {
     }
     println((begin - chrono::high_resolution_clock::now()).count());
 #endif
-
-#ifdef MSTL_SUPPORT_SQLITE3__
-    db_connect_config sqlite_config = db_connect_config::for_sqlite("test.db");
-
-    auto nbegin = chrono::high_resolution_clock::now();
-    for (int i = 0; i < 5000; i++) {
-        char sql[power(2, 10)] = {};
-        _MSTL sprintf(sql, "SELECT 1");
-        auto* conn = new db_sqlite_connect();
-        if(conn->connect_to(sqlite_config)) {
-            bool fin = conn->update(sql);
-            // print(fin, " ");
-        }
-        delete conn;
-    }
-    println((nbegin - chrono::high_resolution_clock::now()).count());
-#endif
-#endif
 }
 
 void test_dns() {
@@ -1486,8 +1467,9 @@ void test_dns() {
 
         println("IPv4 addresses for www.google.com:");
         for (const auto& ip : ips) {
-            print(" ", ip);
+            print(ip, " ");
         }
+        println();
     } catch (...) {}
 }
 

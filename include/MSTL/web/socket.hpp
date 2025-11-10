@@ -122,14 +122,14 @@ public:
     }
 
     bool set_receive_timeout(const chrono::milliseconds timeout) const noexcept {
-        ::timeval tv;
+        ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) == 0;
     }
 
     bool set_send_timeout(const chrono::milliseconds timeout) const noexcept {
-        ::timeval tv;
+        ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) == 0;
@@ -158,7 +158,8 @@ public:
 
     MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len,
         const ::sockaddr_in& dest_addr, const int flags = 0) const noexcept {
-        return ::sendto(sockfd_, buf, len, flags, reinterpret_cast<const sockaddr*>(&dest_addr), sizeof(dest_addr));
+        return ::sendto(sockfd_, buf, len, flags,
+            reinterpret_cast<const sockaddr*>(&dest_addr), sizeof(dest_addr));
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, ::sockaddr* src_addr,

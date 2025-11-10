@@ -67,7 +67,7 @@ database_pool::database_pool(const DB_TYPE type, const db_connect_config& config
 #endif
         default:
             // never run:
-            Exception(DatabaseError("Useless Database Type"));
+            Exception(ValueError("Useless Database Type"));
             break;
     }
 
@@ -119,7 +119,7 @@ _MSTL shared_ptr<idb_connect> database_pool::get_connect() {
                 }
                 return nullptr;
             }
-            }
+        }
     }
 
     idb_connect* raw_conn = connect_queue_.front();

@@ -32,7 +32,7 @@ public:
 #ifdef MSTL_PLATFORM_WINDOWS__
             R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\tests\resource)";
 #elif defined(MSTL_PLATFORM_LINUX__)
-            R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)";
+            R"(/home/huenqi/Workspace/MSTL/tests/resource)";
 #endif
 
         const string& path = request.path();
