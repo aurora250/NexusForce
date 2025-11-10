@@ -7,8 +7,6 @@
 #include <mutex>
 #include <thread>
 #include <condition_variable>
-
-#include "mysql.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API database_pool {

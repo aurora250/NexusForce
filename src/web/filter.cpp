@@ -52,7 +52,7 @@ void logging_filter::post_filter(http_request& request, http_response& response)
     using UT = underlying_type_t<HTTP_STATUS>;
     println("[", datetime::now(), "] Response: ",
         static_cast<UT>(response.status()), " ",
-        response.get_status_msg()
+        response.status_msg()
         );
 }
 

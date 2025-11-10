@@ -198,10 +198,10 @@ public:
 
 
     void set_status_msg(string status_msg) { this->status_msg_ = _MSTL move(status_msg); }
-    MSTL_NODISCARD const string& get_status_msg() const { return status_msg_; }
+    MSTL_NODISCARD const string& status_msg() const { return status_msg_; }
 
     void set_body(string body) noexcept { this->body_ = _MSTL move(body); }
-    MSTL_NODISCARD const string& get_body() const noexcept { return body_; }
+    MSTL_NODISCARD const string& body() const noexcept { return body_; }
 
     void set_redirect(string url) noexcept { redirect_url_ = _MSTL move(url); }
     MSTL_NODISCARD const string& redirect() const noexcept { return redirect_url_; }

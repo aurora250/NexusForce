@@ -13,20 +13,12 @@ uint32_t __thread_pool_id_generator::get_new_id() noexcept {
     return __pool_thread_id++;
 }
 
-void __thread_pool_id_generator::reset_id() noexcept {
-    get_id() = 0;
-}
-
 MSTL_END_INNER__
 
 
 manual_thread::manual_thread(thread_func&& func) noexcept
     : func_(_MSTL move(func)),
     thread_id_(_INNER __thread_pool_id_generator::get_new_id()) {}
-
-manual_thread::id_type manual_thread::id() const noexcept {
-    return thread_id_;
-}
 
 void manual_thread::start() {
     _MSTL thread t(_MSTL move(func_), thread_id_);
@@ -85,10 +77,6 @@ thread_pool::thread_pool()
     pool_mode_(THREAD_POOL_MODE::MODE_FIXED),
     is_running_(false) {}
 
-thread_pool::~thread_pool() {
-    if(is_running_) stop();
-}
-
 bool thread_pool::set_mode(const THREAD_POOL_MODE mode) noexcept {
     if (is_running_) return false;
     pool_mode_ = mode;
@@ -106,18 +94,6 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
     thread_threshhold_ = threshhold > THREAD_POOL_THREAD_MAX_THRESHHOLD
         ? THREAD_POOL_THREAD_MAX_THRESHHOLD : threshhold;
     return true;
-}
-
-size_t thread_pool::max_thread_size() noexcept {
-    return THREAD_POOL_THREAD_MAX_THRESHHOLD;
-}
-
-bool thread_pool::running() const noexcept {
-    return is_running_;
-}
-
-THREAD_POOL_MODE thread_pool::mode() const noexcept {
-    return pool_mode_;
 }
 
 bool thread_pool::start(const size_t init_thread_size) {

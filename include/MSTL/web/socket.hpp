@@ -118,21 +118,21 @@ public:
 
     int reuse_addr() const noexcept {
         constexpr int opt = 1;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char*>(&opt), sizeof(opt));
     }
 
     bool set_receive_timeout(const chrono::milliseconds timeout) const noexcept {
         ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) == 0;
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
     }
 
     bool set_send_timeout(const chrono::milliseconds timeout) const noexcept {
         ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) == 0;
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
     }
 
     MSTL_NODISCARD bool connect(const ::sockaddr* addr, const ::socklen_t addrlen) const noexcept {
@@ -144,33 +144,33 @@ public:
     }
 
     MSTL_NODISCARD ssize_t send(const void* buf, const size_t len, const int flags = 0) const noexcept {
-        return ::send(sockfd_, buf, len, flags);
+        return ::send(sockfd_, static_cast<const char*>(buf), len, flags);
     }
 
     MSTL_NODISCARD ssize_t receive(void* buf, const size_t len, const int flags = 0) const noexcept {
-        return ::recv(sockfd_, buf, len, flags);
+        return ::recv(sockfd_, static_cast<char*>(buf), len, flags);
     }
 
     MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len, const ::sockaddr* dest_addr,
         const ::socklen_t addrlen, const int flags = 0) const noexcept {
-        return ::sendto(sockfd_, buf, len, flags, dest_addr, addrlen);
+        return ::sendto(sockfd_, static_cast<const char*>(buf), len, flags, dest_addr, addrlen);
     }
 
     MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len,
         const ::sockaddr_in& dest_addr, const int flags = 0) const noexcept {
-        return ::sendto(sockfd_, buf, len, flags,
+        return ::sendto(sockfd_, static_cast<const char*>(buf), len, flags,
             reinterpret_cast<const sockaddr*>(&dest_addr), sizeof(dest_addr));
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, ::sockaddr* src_addr,
         ::socklen_t* addrlen, const int flags = 0) const noexcept {
-        return ::recvfrom(sockfd_, buf, len, flags, src_addr, addrlen);
+        return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, src_addr, addrlen);
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, const int flags = 0) const noexcept {
         sockaddr_in from_addr{};
         socklen_t from_len = sizeof(from_addr);
-        return ::recvfrom(sockfd_, buf, len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
+        return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
     }
 };
 

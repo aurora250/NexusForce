@@ -1461,16 +1461,37 @@ void test_dbpool() {
 }
 
 void test_dns() {
+#ifdef MSTL_PLATFORM_LINUX__
     try {
-        dns_client client("8.8.8.8");
-        auto ips = client.resolve_a("www.google.com");
+        dns_client cloudflare_client("1.1.1.1");
+        dns_client opendns_client("208.67.222.222");
+        dns_client custom_client("192.168.1.1", 5353);
 
-        println("IPv4 addresses for www.google.com:");
+        auto ips = cloudflare_client.resolve_a("example.com");
+        println("IPv4 addresses:");
         for (const auto& ip : ips) {
             print(ip, " ");
         }
         println();
+
+        dns_client client;
+        auto ipv6_addrs = client.resolve_aaaa("www.google.com");
+        println("IPv6 addresses:");
+        for (const auto& ip : ipv6_addrs) {
+            print(ip, "  ");
+        }
+        println();
+
+        auto cnames = client.resolve_cname("www.github.com");
+        println("CNAME records:");
+        for (const auto& cname : cnames) {
+            print(cname, "  ");
+        }
+        println();
+
+
     } catch (...) {}
+#endif
 }
 
 void test_tpool() {

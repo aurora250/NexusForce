@@ -30,7 +30,7 @@ struct dns_query_result {
     chrono::milliseconds query_time;
 
     bool is_success() const noexcept {
-        return response_code == DNS_RESPONSE::NO_ERROR;
+        return response_code == DNS_RESPONSE::NON_ERROR;
     }
 };
 

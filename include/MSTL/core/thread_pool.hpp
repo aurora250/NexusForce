@@ -31,7 +31,7 @@ struct MSTL_API __thread_pool_id_generator {
 private:
     static uint32_t& get_id() noexcept;
     static uint32_t get_new_id() noexcept;
-    static void reset_id() noexcept;
+    static void reset_id() noexcept { get_id() = 0; }
 
     friend class _MSTL manual_thread;
     friend class _MSTL thread_pool;
@@ -53,7 +53,7 @@ public:
 	explicit manual_thread(thread_func&& func) noexcept;
 	~manual_thread() = default;
 
-    MSTL_NODISCARD id_type id() const noexcept;
+    MSTL_NODISCARD id_type id() const noexcept { return thread_id_; }
     void start();
 };
 
@@ -89,7 +89,7 @@ private:
     void thread_function(id_type thread_id);
 
     thread_pool();
-    ~thread_pool();
+    ~thread_pool() { if(is_running_) stop(); }
 
 public:
     thread_pool(const thread_pool&) = delete;
@@ -101,9 +101,9 @@ public:
     bool set_task_threshhold(size_t threshhold) noexcept;
     bool set_thread_threshhold(size_t threshhold) noexcept;
 
-    MSTL_NODISCARD static size_t max_thread_size() noexcept;
-    MSTL_NODISCARD bool running() const noexcept;
-    MSTL_NODISCARD THREAD_POOL_MODE mode() const noexcept;
+    MSTL_NODISCARD static size_t max_thread_size() noexcept { return THREAD_POOL_THREAD_MAX_THRESHHOLD; }
+    MSTL_NODISCARD bool running() const noexcept { return is_running_; }
+    MSTL_NODISCARD THREAD_POOL_MODE mode() const noexcept{ return pool_mode_; }
 
     bool start(size_t init_thread_size = 3);
     void stop();

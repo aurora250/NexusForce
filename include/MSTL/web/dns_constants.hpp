@@ -23,7 +23,7 @@ enum class DNS_QUERY : uint16_t {
 };
 
 enum class DNS_RESPONSE : uint8_t {
-    NO_ERROR = 0,
+    NON_ERROR = 0,
     FORMAT_ERROR = 1,
     SERVER_FAILURE = 2,
     NAME_ERROR = 3,

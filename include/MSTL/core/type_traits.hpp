@@ -1,8 +1,5 @@
 #ifndef MSTL_TYPE_TRAITS_HPP__
 #define MSTL_TYPE_TRAITS_HPP__
-#include <sys/cdefs.h>
-
-
 #include "c++config.hpp"
 #include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__

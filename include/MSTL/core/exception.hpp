@@ -27,21 +27,21 @@ MSTL_BEGIN_NAMESPACE__
 	}
 
 #define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \
-	struct THIS : BASE { \
+	struct MSTL_API THIS : BASE { \
 		__MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
 		__MSTL_ERROR_DERIVED_DESTRUCTOR(THIS) \
 		__MSTL_ERROR_TYPE(THIS) \
 	};
 
 #define MSTL_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO) \
-	struct THIS final : BASE { \
+	struct MSTL_API THIS final : BASE { \
 		__MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
 		__MSTL_ERROR_FINAL_DESTRUCTOR(THIS) \
 		__MSTL_ERROR_TYPE(THIS) \
 	};
 
 
-struct Error {
+struct MSTL_API Error {
 	const char* const info_ = nullptr;
 	const char* const type_ = nullptr;
 
@@ -79,13 +79,13 @@ struct CUDAMemoryError final : MemoryError {
 #endif
 
 
-void Exception(const Error& err);
+void MSTL_API Exception(const Error& err);
 
 
 using terminate_handler = void(*)();
 
-void set_terminate(terminate_handler handler) noexcept;
-MSTL_NORETURN void terminate() noexcept;
+void MSTL_API set_terminate(terminate_handler handler) noexcept;
+MSTL_NORETURN void MSTL_API terminate() noexcept;
 
 
 #ifdef MSTL_STATE_DEBUG__

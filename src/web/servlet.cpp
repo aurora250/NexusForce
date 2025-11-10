@@ -234,7 +234,7 @@ string servlet::build_response_str(const http_response& response) {
     } else {
         result += response.version() + " " +
             _MSTL to_string(static_cast<uint16_t>(response.status())) + " "
-            + response.get_status_msg() + "\r\n";
+            + response.status_msg() + "\r\n";
     }
 
     for (const auto& cookie : response.cookies()) {
@@ -242,7 +242,7 @@ string servlet::build_response_str(const http_response& response) {
     }
     if (response.redirect().empty() &&
         response.content_length().empty()) {
-        result += "Content-Length: " + _MSTL to_string(response.get_body().size()) + "\r\n";
+        result += "Content-Length: " + _MSTL to_string(response.body().size()) + "\r\n";
         }
     const auto& header = response.headers();
     for (auto iter = header.begin(); iter != header.end(); ++iter) {
@@ -250,7 +250,7 @@ string servlet::build_response_str(const http_response& response) {
     }
     result += "\r\n";
     if (response.redirect().empty()) {
-        result += response.get_body();
+        result += response.body();
     }
 
     return result;
