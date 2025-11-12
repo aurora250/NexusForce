@@ -3,8 +3,8 @@
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_SUPPORT_MYSQL__
-db_connect_config db_connect_config::for_mysql(const string& db) {
-    db_connect_config config;
+db_config db_config::for_mysql(const string& db) {
+    db_config config;
     config.port = 3306;
     config.database = db;
     config.charset = "utf8mb4";
@@ -14,16 +14,16 @@ db_connect_config db_connect_config::for_mysql(const string& db) {
 #endif
 
 #ifdef MSTL_SUPPORT_SQLITE3__
-db_connect_config db_connect_config::for_sqlite(const string& file) {
-    db_connect_config config;
+db_config db_config::for_sqlite(const string& file) {
+    db_config config;
     config.database = file;
     return config;
 }
 #endif
 
 #ifdef MSTL_SUPPORT_REDIS__
-db_connect_config db_connect_config::for_redis(const string& db) {
-    db_connect_config config;
+db_config db_config::for_redis(const string& db) {
+    db_config config;
     config.port = 6379;
     config.database = db;
     return config;

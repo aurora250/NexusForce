@@ -38,24 +38,24 @@ void db_redis_result::process_reply() {
                 for (size_t i = 0; i < rows_; i += 2) {
                     string key = format_redis_reply_element(reply_->element[i]);
                     string value = format_redis_reply_element(reply_->element[i + 1]);
-                    kv_pairs_.emplace_back(_MSTL move(key), _MSTL move(value));
+                    kv_pairs_->emplace_back(_MSTL move(key), _MSTL move(value));
                 }
-                rows_ = kv_pairs_.size();
+                rows_ = kv_pairs_->size();
             } else {
-                column_names_.push_back("value");
+                column_names_->push_back("value");
             }
             break;
         } case REDIS_REPLY_STRING: case REDIS_REPLY_STATUS:
         case REDIS_REPLY_ERROR: case REDIS_REPLY_INTEGER: {
             rows_ = 1;
-            column_names_.push_back("result");
+            column_names_->push_back("result");
             break;
         } case REDIS_REPLY_NIL: {
             rows_ = 0;
             break;
         } default: {
             rows_ = 1;
-            column_names_.push_back("result");
+            column_names_->push_back("result");
             break;
         }
     }
@@ -64,7 +64,7 @@ void db_redis_result::process_reply() {
 string db_redis_result::at_string() const {
     if (empty()) return {};
 
-    if (!kv_pairs_.empty() && kv_cursor_ > 0) {
+    if (!kv_pairs_->empty() && kv_cursor_ > 0) {
         return string(value());
     }
     if (is_array_ && cursor_ > 0) {
@@ -81,13 +81,13 @@ bool db_redis_result::next() noexcept {
 }
 
 string_view db_redis_result::key() const noexcept {
-    if (kv_pairs_.empty() || kv_cursor_ == 0) return {};
-    return kv_pairs_[kv_cursor_ - 1].first.view();
+    if (kv_pairs_->empty() || kv_cursor_ == 0) return {};
+    return kv_pairs_->operator [](kv_cursor_ - 1).first.view();
 }
 
 string_view db_redis_result::value() const noexcept {
-    if (kv_pairs_.empty() || kv_cursor_ == 0) return {};
-    return kv_pairs_[kv_cursor_ - 1].second.view();
+    if (kv_pairs_->empty() || kv_cursor_ == 0) return {};
+    return kv_pairs_->operator [](kv_cursor_ - 1).second.view();
 }
 
 bool db_redis_result::value_bool() const {
@@ -195,7 +195,7 @@ bool db_redis_connect::connect_to_host(
     return true;
 }
 
-bool db_redis_connect::reset_connect(const db_connect_config& config) {
+bool db_redis_connect::reset_connect(const db_config& config) {
     close();
     return connect_to(config);
 }

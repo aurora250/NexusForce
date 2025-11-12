@@ -62,6 +62,7 @@ MSTL_ERROR_BUILD_DERIVED_CLASS(LinkError, Error, "External Link Actions Failed."
 MSTL_ERROR_BUILD_DERIVED_CLASS(DeviceOperateError, Error, "Device Operation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(FileOperateError, DeviceOperateError, "Device File Operation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(MathError, ValueError, "Math Function Argument Invalid.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(DatabaseError, Error, "Database Operation Failed.")
 
 
 #ifdef MSTL_SUPPORT_CUDA__

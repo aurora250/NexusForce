@@ -861,7 +861,7 @@ private:
 
 protected:
     template <typename T>
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE static constexpr size_t default_to_hash(const T& c) noexcept {
+    MSTL_NODISCARD static constexpr size_t default_to_hash(const T& c) noexcept {
         size_t result = FNV_OFFSET_BASIS;
         if (_MSTL empty(c)) return result;
 
@@ -871,7 +871,7 @@ protected:
     }
 
     template <typename T>
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE static MSTL_CONSTEXPR20 string default_to_string(const T& c) {
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 string default_to_string(const T& c) {
         return _INNER collector_to_string(c);
     }
 

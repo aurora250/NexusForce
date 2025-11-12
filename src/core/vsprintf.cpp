@@ -109,7 +109,7 @@ static char* float_number(char* str, double num,
         const char* nan_str = (flags & _INNER SMALL) ? "nan" : "NAN";
         return _MSTL string_copy(str, nan_str);
     }
-    if (_MSTL is_inf(num)) {
+    if (_MSTL is_infinity(num)) {
         const char* inf_str = (flags & _INNER SMALL) ? "inf" : "INF";
         if (num < 0) {
             sign = '-';

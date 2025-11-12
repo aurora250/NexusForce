@@ -184,7 +184,7 @@ public:
 
 MSTL_BEGIN_THIS_THREAD__
 
-MSTL_ALWAYS_INLINE inline thread::id get_id() noexcept {
+MSTL_ALWAYS_INLINE_INLINE thread::id get_id() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return thread::id(::GetCurrentThreadId());
 #else
@@ -192,7 +192,7 @@ MSTL_ALWAYS_INLINE inline thread::id get_id() noexcept {
 #endif
 }
 
-MSTL_ALWAYS_INLINE inline void yield() noexcept {
+MSTL_ALWAYS_INLINE_INLINE void yield() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::SwitchToThread();
 #else
@@ -200,7 +200,7 @@ MSTL_ALWAYS_INLINE inline void yield() noexcept {
 #endif
 }
 
-MSTL_ALWAYS_INLINE inline void sleep_for_ms(uint32_t milliseconds) noexcept {
+MSTL_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::Sleep(milliseconds);
 #else

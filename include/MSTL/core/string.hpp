@@ -4,11 +4,11 @@
 #include "basic_string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-using string = basic_string<char>;
-using bstring = basic_string<byte_t>;
-using wstring = basic_string<wchar_t>;
+using string    = basic_string<char>;
+using bstring   = basic_string<byte_t>;
+using wstring   = basic_string<wchar_t>;
 #ifdef MSTL_STANDARD_20__
-using u8string = basic_string<char8_t>;
+using u8string  = basic_string<char8_t>;
 #endif
 using u16string = basic_string<char16_t>;
 using u32string = basic_string<char32_t>;
@@ -170,7 +170,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& value);
 MSTL_BEGIN_INNER__
 
 template <typename T>
-MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void __append_utf8_char_aux(T&) {}
+MSTL_ALWAYS_INLINE constexpr void __append_utf8_char_aux(T&) {}
 template <>
 MSTL_CONSTEXPR20 void __append_utf8_char_aux<string>(string& result) {
     result.append("\xEF\xBF\xBD", 3);

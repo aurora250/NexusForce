@@ -220,15 +220,7 @@ private:
     template <bool, typename> friend struct basic_string_iterator;
 
 private:
-    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void range_check(const size_type n) const noexcept {
-        MSTL_DEBUG_VERIFY(n <= size_, "basic_string index out of ranges.");
-    }
 
-    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 size_type clamp_size(
-        const size_type position, const size_type size) const noexcept {
-        if (size_ == 0) return 0;
-        return _MSTL min(size, size_ - position);
-    }
 
     MSTL_CONSTEXPR20 void null_terminate() {
         if (data_ && size_ < capacity_pair_.value) {
@@ -632,11 +624,11 @@ public:
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference at(const size_type n) noexcept {
-        range_check(n);
+        MSTL_DEBUG_VERIFY(n < size_, "basic_string index out of ranges.");
         return (*this)[n];
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference at(const size_type n) const noexcept {
-        range_check(n);
+        MSTL_DEBUG_VERIFY(n < size_, "basic_string index out of ranges.");
         return (*this)[n];
     }
 
@@ -958,8 +950,8 @@ public:
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 self substr(const size_type off = 0, size_type count = npos) const {
-        range_check(off);
-        count = clamp_size(off, count);
+        MSTL_DEBUG_VERIFY(off < size_, "basic_string index out of ranges.");
+        count = _MSTL min(count, size_ - off);
         return self(data_ + off, count);
     }
 
@@ -968,8 +960,8 @@ public:
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 view_type view(const size_type off, size_type count = npos) const noexcept {
-        range_check(off);
-        count = clamp_size(off, count);
+        MSTL_DEBUG_VERIFY(off < size_, "basic_string index out of ranges.");
+        count = _MSTL min(count, size_ - off);
         return view_type(data_ + off, count);
     }
 
@@ -1008,7 +1000,7 @@ public:
     }
 
     MSTL_CONSTEXPR20 self& replace(const size_type position, const size_type n, const self& str) {
-        range_check(position);
+        MSTL_DEBUG_VERIFY(position < size_, "basic_string index out of ranges.");
         return this->replace_copy(begin() + position, n, str.data_, str.size_);
     }
     MSTL_CONSTEXPR20 self& replace(iterator first, iterator last, const self& str) {
@@ -1016,7 +1008,7 @@ public:
         return this->replace_copy(first, last - first, str.data_, str.size_);
     }
     MSTL_CONSTEXPR20 self& replace(const size_type position, const size_type n, const_pointer str) {
-        range_check(position);
+        MSTL_DEBUG_VERIFY(position < size_, "basic_string index out of ranges.");
         return this->replace_copy({data_ + position, this}, n, str, traits_type::length(str));
     }
     MSTL_CONSTEXPR20 self& replace(iterator first, iterator last, const_pointer str) {
@@ -1024,7 +1016,7 @@ public:
         return this->replace_copy(first, last - first, str, traits_type::length(str));
     }
     MSTL_CONSTEXPR20 self& replace(const size_type position, const size_type n1, const_pointer str, const size_type n2) {
-        range_check(position);
+        MSTL_DEBUG_VERIFY(position < size_, "basic_string index out of ranges.");
         return this->replace_copy(data_ + position, n1, str, n2);
     }
     MSTL_CONSTEXPR20 self& replace(iterator first, iterator last, const_pointer str, const size_type n) {
@@ -1032,7 +1024,7 @@ public:
         return this->replace_copy(first, last - first, str, n);
     }
     MSTL_CONSTEXPR20 self& replace(const size_type position, const size_type n1, const size_type n2, const value_type chr) {
-        range_check(position);
+        MSTL_DEBUG_VERIFY(position < size_, "basic_string index out of ranges.");
         return this->replace_fill(data_ + position, n1, n2, chr);
     }
     MSTL_CONSTEXPR20 self& replace(iterator first, iterator last, const size_type n, const value_type chr) {
@@ -1041,8 +1033,8 @@ public:
     }
     MSTL_CONSTEXPR20 self& replace(const size_type position1, const size_type n1, const self& str,
         const size_type position2, const size_type n2 = npos) {
-        range_check(position1);
-        range_check(position2);
+        MSTL_DEBUG_VERIFY(position1 < size_, "basic_string index out of ranges.");
+        MSTL_DEBUG_VERIFY(position2 < size_, "basic_string index out of ranges.");
         return this->replace_copy(data_ + position1, n1, str.data_ + position2, n2);
     }
     template <typename Iterator>

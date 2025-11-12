@@ -300,6 +300,8 @@ void test_option();
 
 void test_any();
 void test_timer();
+void test_sql();
+void test_mysql();
 void test_dbpool();
 void test_tpool();
 void test_dns();

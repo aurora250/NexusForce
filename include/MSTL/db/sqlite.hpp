@@ -1,7 +1,7 @@
 #ifndef MSTL_DB_SQLITE_HPP__
 #define MSTL_DB_SQLITE_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
-#include "interface.hpp"
+#include "db_interface.hpp"
 #include <sqlite3.h>
 namespace sqlite {
     using ::sqlite3;
@@ -30,21 +30,22 @@ private:
     sqlite::sqlite3_stmt* stmt_ = nullptr;
     size_type cursor_ = 0;
     size_type columns_ = 0;
-    list<string_view>* column_names_ = new list<string_view>;
-    list<int>* column_types_ = new list<int>;
+    unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();
+    unique_ptr<vector<int>> column_types_ = make_unique<vector<int>>();
 
 public:
     db_sqlite_result() noexcept = default;
-
     explicit db_sqlite_result(sqlite::sqlite3_stmt* statement) noexcept;
-    ~db_sqlite_result() override;
+
+    ~db_sqlite_result() override { if (stmt_) sqlite::sqlite3_finalize(stmt_); }
 
     MSTL_NODISCARD MSTL_DEPRECATE_FOR("use COUNT * instead of using this function")
     size_type row_count() const noexcept override { return 0; }
     MSTL_NODISCARD size_type column_count() const noexcept override { return columns_; }
 
     MSTL_NODISCARD bool empty() const noexcept override { return stmt_ == nullptr; }
-    MSTL_NODISCARD const list<string_view>& column_names() const noexcept override { return *column_names_; }
+    MSTL_NODISCARD const vector<string_view>& column_names() const noexcept override { return *column_names_; }
+    MSTL_NODISCARD const vector<int>& column_types() const noexcept { return *column_types_; }
     MSTL_NODISCARD bool next() noexcept override;
 
     MSTL_NODISCARD _MSTL string_view get(size_type n) const noexcept override;
@@ -82,8 +83,8 @@ public:
         const _MSTL string& dbname, const _MSTL string&,
         uint32_t, const _MSTL string&) override;
 
-    bool connect_to(const db_connect_config& config) override;
-    MSTL_NODISCARD bool reset_connect(const db_connect_config& config) override;
+    bool connect_to(const db_config& config) override;
+    MSTL_NODISCARD bool reset_connect(const db_config& config) override;
 
     MSTL_NODISCARD bool set_character_set(const _MSTL string& encoding) const override;
 
@@ -107,7 +108,7 @@ private:
 
 class MSTL_API db_sqlite_factory final : public idb_factory {
 public:
-    explicit db_sqlite_factory(db_connect_config config)
+    explicit db_sqlite_factory(db_config config)
     : idb_factory(_MSTL move(config)) {}
 
     idb_connect* create_connect() override;

@@ -1,10 +1,8 @@
 #ifndef MSTL_DB_INTERFACE_HPP__
 #define MSTL_DB_INTERFACE_HPP__
-#ifdef MSTL_SUPPORT_DB__
 #include "db_config.hpp"
 #include "MSTL/core/vector.hpp"
 #include "MSTL/core/datetime.hpp"
-#include "MSTL/core/list.hpp"
 #include <ctime>
 MSTL_BEGIN_NAMESPACE__
 
@@ -23,7 +21,7 @@ struct MSTL_API idb_tb_result : idb_result {
     virtual size_type row_count() const = 0;
     virtual size_type column_count() const = 0;
 
-    virtual const list<string_view>& column_names() const = 0;
+    virtual const vector<string_view>& column_names() const = 0;
 
     virtual string_view get(size_type) const = 0;
     virtual bool get_bool(size_type) const = 0;
@@ -67,7 +65,7 @@ struct MSTL_API idb_connect {
     virtual bool connect_to(const _MSTL string& user, const _MSTL string& password,
         const _MSTL string& dbname, const _MSTL string& ip,
         uint32_t port, const _MSTL string& character_set) = 0;
-    virtual bool connect_to(const db_connect_config& config) = 0;
+    virtual bool connect_to(const db_config& config) = 0;
 
     virtual bool set_character_set(const _MSTL string& encoding) const = 0;
     virtual string_view get_character_set() const = 0;
@@ -80,7 +78,7 @@ struct MSTL_API idb_connect {
     virtual void close() = 0;
     virtual void refresh_alive() = 0;
     virtual clock_type get_alive() const = 0;
-    virtual bool reset_connect(const db_connect_config& config) = 0;
+    virtual bool reset_connect(const db_config& config) = 0;
 };
 
 struct MSTL_API idb_tb_connect : idb_connect {
@@ -116,10 +114,10 @@ struct MSTL_API idb_kv_connect : idb_connect {
 
 class MSTL_API idb_factory {
 protected:
-    db_connect_config config_;
+    db_config config_;
 
 public:
-    explicit idb_factory(db_connect_config config) : config_(_MSTL move(config)) {}
+    explicit idb_factory(db_config config) : config_(_MSTL move(config)) {}
     virtual ~idb_factory() = default;
 
     virtual idb_connect* create_connect() = 0;
@@ -127,5 +125,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_SUPPORT_DB__
 #endif // MSTL_DB_INTERFACE_HPP__

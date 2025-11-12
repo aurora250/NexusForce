@@ -1,0 +1,67 @@
+#ifndef MSTL_MYSQL_PREPARED_RESULT_HPP__
+#define MSTL_MYSQL_PREPARED_RESULT_HPP__
+#ifdef MSTL_SUPPORT_MYSQL__
+#include "MSTL/db/db_interface.hpp"
+#include "mysql_config.hpp"
+#include "MSTL/core/undef_cmacro.hpp"
+MSTL_BEGIN_NAMESPACE__
+
+class MSTL_API mysql_prepared_result final : public idb_tb_result {
+private:
+    _MSTL_MYSQL MYSQL_STMT* stmt_ = nullptr;
+    _MSTL_MYSQL MYSQL_RES* metadata_ = nullptr;
+    uint32_t column_count_ = 0;
+    uint64_t row_count_ = 0;
+    bool has_current_row_ = false;
+
+    unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();
+    unique_ptr<vector<_MSTL_MYSQL enum_field_types>> column_types_ = make_unique<vector<_MSTL_MYSQL enum_field_types>>();
+
+    unique_ptr<vector<_MSTL_MYSQL MYSQL_BIND>> bind_results_ = make_unique<vector<_MSTL_MYSQL MYSQL_BIND>>();
+    unique_ptr<vector<vector<char>>> buffers_ = make_unique<vector<vector<char>>>();
+    unique_ptr<vector<unsigned long>> lengths_ = make_unique<vector<unsigned long>>();
+    unique_ptr<vector<bool>> is_null_ = make_unique<vector<bool>>();
+    unique_ptr<vector<bool>> is_error_ = make_unique<vector<bool>>();
+
+    void initialize_bindings() const;
+    size_t get_buffer_size(_MSTL_MYSQL enum_field_types type) const;
+
+public:
+    explicit mysql_prepared_result(_MSTL_MYSQL MYSQL_STMT* stmt);
+    ~mysql_prepared_result() override;
+
+    mysql_prepared_result(const mysql_prepared_result&) = delete;
+    mysql_prepared_result& operator=(const mysql_prepared_result&) = delete;
+
+    bool empty() const override { return row_count_ == 0; }
+    bool next() override;
+
+    size_type row_count() const override { return row_count_; }
+    size_type column_count() const override { return column_count_; }
+
+    const vector<string_view>& column_names() const override { return *column_names_; }
+    const vector<_MSTL_MYSQL enum_field_types>& column_types() const { return *column_types_; }
+
+    string_view get(size_type n) const override;
+    bool get_bool(size_type n) const override;
+    int8_t get_int8(size_type n) const override;
+    int16_t get_int16(size_type n) const override;
+    int32_t get_int32(size_type n) const override;
+    int64_t get_int64(size_type n) const override;
+    float32_t get_float32(size_type n) const override;
+    float64_t get_float64(size_type n) const override;
+    decimal_t get_decimal(size_type n) const override;
+    vector<char> get_blob(size_type n) const override;
+    string get_set(size_type n) const override;
+    uint64_t get_bit(size_type n) const override;
+    date get_date(size_type n) const override;
+    time get_time(size_type n) const override;
+    datetime get_datetime(size_type n) const override;
+    timestamp get_timestamp(size_type n) const override;
+    string get_string(size_type n) const override { return string(get(n)); }
+    string_view get_enum(size_type n) const override { return get(n); }
+};
+
+MSTL_END_NAMESPACE__
+#endif
+#endif // MSTL_MYSQL_PREPARED_RESULT_HPP__

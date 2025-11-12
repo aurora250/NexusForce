@@ -300,23 +300,23 @@ string MSTL_API json_value_to_string(const json_value* value);
 string MSTL_API json_value_to_indent_string(const json_value* value, int indent);
 MSTL_END_INNER__
 
-MSTL_ALWAYS_INLINE inline string to_string(const json_value* value) {
+MSTL_ALWAYS_INLINE_INLINE string to_string(const json_value* value) {
     return _INNER json_value_to_string(value);
 }
-MSTL_ALWAYS_INLINE inline string to_string(const json_value& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
     return _INNER json_value_to_string(&value);
 }
 
-MSTL_ALWAYS_INLINE inline string to_indent_string(const unique_ptr<json_value>& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const unique_ptr<json_value>& value) {
     return _INNER json_value_to_indent_string(value.get() ,0);
 }
-MSTL_ALWAYS_INLINE inline string to_indent_string(unique_ptr<json_value>&& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(unique_ptr<json_value>&& value) {
     return _INNER json_value_to_indent_string(value.get(), 0);
 }
-MSTL_ALWAYS_INLINE inline string to_indent_string(const json_value* value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {
     return _INNER json_value_to_indent_string(value, 0);
 }
-MSTL_ALWAYS_INLINE inline string to_indent_string(const json_value& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_value& value) {
     return _INNER json_value_to_indent_string(&value, 0);
 }
 

@@ -1,10 +1,11 @@
 #ifndef MSTL_DB_CONFIG_HPP__
 #define MSTL_DB_CONFIG_HPP__
-#ifdef MSTL_SUPPORT_DB__
 #include "MSTL/core/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseTypeCastError, TypeCastError, "Database Type Cast Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseTypeCastError, DatabaseError, "Database Type Cast Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(DatabasePreparedStmtError, DatabaseError, "Database Prepared Statement Operations Error.")
+
 
 enum class DB_TYPE {
 #ifdef MSTL_SUPPORT_MYSQL__
@@ -18,7 +19,7 @@ enum class DB_TYPE {
 #endif
 };
 
-struct MSTL_API db_connect_config {
+struct MSTL_API db_config {
     string username{};
     string password{};
     string database{};
@@ -27,18 +28,17 @@ struct MSTL_API db_connect_config {
     string charset{};
 
 #ifdef MSTL_SUPPORT_MYSQL__
-    static db_connect_config for_mysql(const string& db);
+    static db_config for_mysql(const string& db);
 #endif
 
 #ifdef MSTL_SUPPORT_SQLITE3__
-    static db_connect_config for_sqlite(const string& file);
+    static db_config for_sqlite(const string& file);
 #endif
 
 #ifdef MSTL_SUPPORT_REDIS__
-    static db_connect_config for_redis(const string& db);
+    static db_config for_redis(const string& db);
 #endif
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_SUPPORT_DB__
 #endif // MSTL_DB_CONFIG_HPP__

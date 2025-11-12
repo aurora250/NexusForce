@@ -12,14 +12,6 @@ db_sqlite_result::db_sqlite_result(sqlite::sqlite3_stmt* statement) noexcept : s
     }
 }
 
-db_sqlite_result::~db_sqlite_result() {
-    if (stmt_) {
-        sqlite::sqlite3_finalize(stmt_);
-    }
-    delete column_names_;
-    delete column_types_;
-}
-
 bool db_sqlite_result::next() noexcept {
     if (empty()) return false;
     return sqlite::sqlite3_step(stmt_) == SQLITE_ROW && ++cursor_;
@@ -29,7 +21,7 @@ _MSTL string_view db_sqlite_result::get(const size_type n) const noexcept {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto text = reinterpret_cast<const char*>(sqlite::sqlite3_column_text(stmt_, n));
-    return text ? string_view(text) : string_view{};
+    return text ? string_view{text} : string_view{};
 }
 
 bool db_sqlite_result::get_bool(const size_type n) const {
@@ -119,7 +111,7 @@ bool db_sqlite_connect::connect_to(const _MSTL string&, const _MSTL string&,
     return connect_to_file(dbname);
 }
 
-bool db_sqlite_connect::connect_to(const db_connect_config& config) {
+bool db_sqlite_connect::connect_to(const db_config& config) {
     sqlite::sqlite3_open(config.database.c_str(), &db);
     return connect_to_file(config.database);
 }
@@ -181,7 +173,7 @@ bool db_sqlite_connect::is_valid() const {
     return false;
 }
 
-bool db_sqlite_connect::reset_connect(const db_connect_config& config) {
+bool db_sqlite_connect::reset_connect(const db_config& config) {
     if (connected()) {
         sqlite::sqlite3_close(db);
         return connect_to(config);

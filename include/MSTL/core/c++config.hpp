@@ -129,6 +129,28 @@
 #define _MSTL_TAG __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_TAG_NAMESPACE__ ::
 
 
+#ifdef MSTL_SUPPORT_MYSQL__
+#define __MSTL_MYSQL_NAMESPACE__ mysql
+#define MSTL_BEGIN_MYSQL__ namespace __MSTL_MYSQL_NAMESPACE__ {
+#define MSTL_END_MYSQL__ }
+#define _MSTL_MYSQL __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_MYSQL_NAMESPACE__ ::
+#endif
+
+#ifdef MSTL_SUPPORT_SQLITE3__
+#define __MSTL_SQLITE_NAMESPACE__ sqlite
+#define MSTL_BEGIN_SQLITE__ namespace __MSTL_SQLITE_NAMESPACE__ {
+#define MSTL_END_SQLITE__ }
+#define _MSTL_SQLITE __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_SQLITE_NAMESPACE__ ::
+#endif
+
+#ifdef MSTL_SUPPORT_REDIS__
+#define __MSTL_REDIS_NAMESPACE__ redis
+#define MSTL_BEGIN_REDIS__ namespace __MSTL_REDIS_NAMESPACE__ {
+#define MSTL_END_REDIS__ }
+#define _MSTL_REDIS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_REDIS_NAMESPACE__ ::
+#endif
+
+
 #if _HAS_CXX23 || (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L)
 	// defined when project compiled by using C++23 or upper version of standard library.
 	#define MSTL_STANDARD_23__	1
@@ -224,10 +246,10 @@
 #endif
 
 
-#if defined(MSTL_COMPILER_GNUC__)
+#ifdef MSTL_COMPILER_GNUC__
 	#define MSTL_ALIGNOF_DEFAULT() __attribute__((__aligned__))
 	#define MSTL_ALIGNOF(ALIGN) __attribute__((__aligned__((ALIGN))))
-#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_SUPPORT_ALIGNED__)
+#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_STANDARD_11__)
 	#define MSTL_ALIGNOF_DEFAULT() [[aligned]]
 	#define MSTL_ALIGNOF(ALIGN) [[aligned(ALIGN)]]
 #else
@@ -238,14 +260,20 @@
 
 #ifdef MSTL_COMPILER_GNUC__
 	#define MSTL_ALWAYS_INLINE __attribute__((always_inline))
-#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_STANDARD_17__)
+	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
+#elif defined(MSTL_COMPILER_MSVC__)
+	#define MSTL_ALWAYS_INLINE __forceinline
+	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
+#elif defined(MSTL_STANDARD_17__)
 	#define MSTL_ALWAYS_INLINE [[always_inline]]
+	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #else
 	#define MSTL_ALWAYS_INLINE
+	#define MSTL_ALWAYS_INLINE_INLINE
 #endif
 
 
-#if defined(MSTL_COMPILER_GNUC__) && defined(MSTL_STANDARD_17__)
+#ifdef MSTL_STANDARD_17__
 	#define MSTL_UNLIKELY [[unlikely]]
 #else
 	#define MSTL_UNLIKELY

@@ -175,15 +175,6 @@ private:
     template <bool, typename> friend struct list_iterator;
 
 private:
-    MSTL_ALWAYS_INLINE inline void range_check(const size_type position) const noexcept {
-        MSTL_DEBUG_VERIFY(position < pair_.value, "list index out of ranges.");
-    }
-    MSTL_ALWAYS_INLINE inline void range_check(iterator position) const noexcept {
-        MSTL_DEBUG_VERIFY(_MSTL distance(const_iterator(position), cend()) >= 0,
-            "list iterator out of ranges."
-        );
-    }
-
     template <typename... Args>
     link_type create_node(Args&&... args) {
         link_type p = pair_.get_base().allocate();
@@ -307,7 +298,6 @@ public:
 
     template <typename... U>
     iterator emplace(iterator position, U&&... args) {
-        range_check(position);
         link_type temp = (create_node)(_MSTL forward<U>(args)...);
         temp->next_ = position.node_;
         temp->prev_ = position.node_->prev_;
@@ -383,7 +373,6 @@ public:
     }
 
     iterator erase(iterator position) noexcept {
-        range_check(position);
         if (empty()) return end();
         link_type ret = position.node_->next_;
         position.node_->prev_->next_ = position.node_->next_;
@@ -393,9 +382,7 @@ public:
         return {ret, this};
     }
     iterator erase(iterator first, iterator last) noexcept {
-        Exception(_MSTL distance(first, last) >= 0, StopIterator("list erase out of ranges."));
-        while (first != last) 
-            first = erase(first);
+        while (first != last) first = erase(first);
         return first;
     }
     void clear() noexcept {
@@ -549,7 +536,6 @@ public:
     }
 
     MSTL_NODISCARD const_reference at(size_type position) const {
-        range_check(position);
         const_iterator iter = cbegin();
         while (position--) ++iter;
         return iter.node_->data_;

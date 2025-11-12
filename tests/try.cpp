@@ -1404,18 +1404,135 @@ void test_timer(){
     timer1.cancel();
 
     timer1.expires_after(std::chrono::seconds(3));
-    timer1.async_wait([]() {
-        println("3秒后执行");
+    timer1.async_wait([]() { println("3秒后执行");
     });
 
     this_thread::sleep_for(chrono::seconds(7));
+}
+
+void test_sql(){
+    auto sql1 = sql_builder()
+        .select({"id", "name", "email"})
+        .from("users")
+        .where_eq("status", "'active'")
+        .where_gt("age", "18")
+        .order_by_desc("created_at")
+        .limit(10)
+        .build();
+    println(sql1);
+
+    auto sql2 = sql_builder()
+        .select({"u.name", "u.email", "o.order_no", "o.amount"})
+        .from("users", "u")
+        .left_join("orders o", "u.id = o.user_id")
+        .where_ge("o.amount", "100")
+        .order_by_desc("o.created_at")
+        .build();
+    println(sql2);
+
+    auto sql3 = sql_builder()
+        .select_count("*", "total")
+        .select_sum("amount", "total_amount")
+        .select_avg("amount", "avg_amount")
+        .from("orders")
+        .group_by("user_id")
+        .having("SUM(amount) > 1000")
+        .build();
+    println(sql3);
+
+    auto sql4 = sql_builder()
+        .select_all()
+        .from("products")
+        .where_like("name", "'%phone%'")
+        .where_between("price", "100", "500")
+        .page(2, 20)
+        .build();
+    println(sql4);
+
+    auto sql5 = sql_builder()
+        .insert_into("users", {"name", "email", "age"})
+        .values({"'John'", "'john@example.com'", "25"})
+        .build();
+    println(sql5);
+
+    auto sql6 = sql_builder()
+        .update("users")
+        .set("status", "'inactive'")
+        .set_increment("login_count")
+        .where_eq("id", "123")
+        .build();
+    println(sql6);
+
+    auto sql7 = sql_builder()
+        .delete_from("users")
+        .where_eq("status", "'deleted'")
+        .where_lt("last_login", "'2020-01-01'")
+        .build();
+    println(sql7);
+
+    auto sql8 = sql_builder()
+        .select({"category", "COUNT(*) as cnt", "AVG(price) as avg_price"})
+        .from("products")
+        .where_in("status", {"'active'", "'pending'"})
+        .where_is_not_null("description")
+        .group_by("category")
+        .having("COUNT(*) > 10")
+        .order_by_asc("category")
+        .build();
+    println(sql8);
+
+    auto sql9 = sql_builder()
+        .select({"u.name", "total_orders"})
+        .from_subquery(
+            "SELECT user_id, COUNT(*) as total_orders FROM orders GROUP BY user_id",
+            "o"
+        )
+        .inner_join("users u", "u.id = o.user_id")
+        .where_gt("o.total_orders", "5")
+        .build();
+    println(sql9);
+
+    auto sql10 = sql_builder()
+        .distinct()
+        .select({"city", "country"})
+        .from("users")
+        .order_by_asc("country")
+        .build();
+    println(sql10);
+
+    sql_builder builder;
+    builder.select({"id", "name"})
+           .from("users");
+
+    auto active_users = builder.where_eq("status", "'active'").build();
+    builder.reset();
+}
+
+void test_mysql() {
+    db_config mysql_config = db_config::for_mysql("book");
+    mysql_config.password = "147258hu";
+    database_pool pool(DB_TYPE::MYSQL, mysql_config);
+
+    const auto sql = sql_builder().select({"ISBN", "BookName"}).from("book").where("CollectNumber = 10").build();
+    auto pstmt = dynamic_cast<db_mysql_connect*>(
+        pool.get_tb_connect().get()
+        )->prepare_statement(sql);
+
+    auto res = pstmt->execute_query();
+    println(res->column_names());
+    while (res->next()) {
+        for (int i = 0; i < res->column_count(); ++i) {
+            print(res->get(i), " ");
+        }
+        println();
+    }
 }
 
 
 void test_dbpool() {
 #ifdef MSTL_SUPPORT_MYSQL__
     auto begin = chrono::high_resolution_clock::now();
-    db_connect_config mysql_config = db_connect_config::for_mysql("book");
+    db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
 
     {
@@ -1469,25 +1586,16 @@ void test_dns() {
 
         auto ips = cloudflare_client.resolve_a("example.com");
         println("IPv4 addresses:");
-        for (const auto& ip : ips) {
-            print(ip, " ");
-        }
-        println();
+        println(ips);
 
         dns_client client;
         auto ipv6_addrs = client.resolve_aaaa("www.google.com");
         println("IPv6 addresses:");
-        for (const auto& ip : ipv6_addrs) {
-            print(ip, "  ");
-        }
-        println();
+        println(ipv6_addrs);
 
         auto cnames = client.resolve_cname("www.github.com");
         println("CNAME records:");
-        for (const auto& cname : cnames) {
-            print(cname, "  ");
-        }
-        println();
+        println(cnames);
 
 
     } catch (...) {}

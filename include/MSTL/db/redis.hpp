@@ -1,7 +1,7 @@
 #ifndef MSTL_DB_REDIS_HPP__
 #define MSTL_DB_REDIS_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
-#include "interface.hpp"
+#include "db_interface.hpp"
 #include <hiredis.h>
 namespace redis {
     using ::redisReply;
@@ -19,9 +19,9 @@ private:
     redis::redisReply* reply_ = nullptr;
     size_type cursor_ = 0;
     size_type rows_ = 0;
-    list<string> column_names_{};
+    unique_ptr<vector<string>> column_names_ = make_unique<vector<string>>();
+    unique_ptr<vector<pair<string, string>>> kv_pairs_ = make_unique<vector<pair<string, string>>>();
     bool is_array_ = false;
-    vector<pair<string, string>> kv_pairs_;
     size_type kv_cursor_ = 0;
 
     static string format_redis_reply_element(redis::redisReply* element);
@@ -40,7 +40,7 @@ public:
         if (reply_) redis::freeReplyObject(reply_);
     }
 
-    MSTL_NODISCARD bool empty() const noexcept override { return !reply_ || (rows_ == 0 && kv_pairs_.empty()); }
+    MSTL_NODISCARD bool empty() const noexcept override { return !reply_ || (rows_ == 0 && kv_pairs_->empty()); }
     MSTL_NODISCARD bool next() noexcept override;
 
     MSTL_NODISCARD string_view key() const noexcept override;
@@ -50,7 +50,7 @@ public:
     MSTL_NODISCARD int64_t value_int64() const override;
     MSTL_NODISCARD double value_double() const override;
     MSTL_NODISCARD vector<string> value_array() const override;
-    MSTL_NODISCARD const vector<pair<string, string>>& value_hash() const override { return kv_pairs_; }
+    MSTL_NODISCARD const vector<pair<string, string>>& value_hash() const override { return *kv_pairs_; }
 
     MSTL_NODISCARD int type() const noexcept { return reply_ ? reply_->type : -1; }
     MSTL_NODISCARD bool is_nil() const noexcept { return reply_ && reply_->type == REDIS_REPLY_NIL; }
@@ -77,7 +77,7 @@ public:
         return connect_to_host(host, port, password, dbname);
     }
 
-    bool connect_to(const db_connect_config& config) override {
+    bool connect_to(const db_config& config) override {
         return connect_to_host(
             config.host,
             config.port,
@@ -86,7 +86,7 @@ public:
             );
     }
 
-    bool reset_connect(const db_connect_config& config) override;
+    bool reset_connect(const db_config& config) override;
 
     MSTL_DEPRECATE_FOR("Redis not support setting character sets")
     bool set_character_set(const string&) const noexcept override { return false; }
@@ -128,7 +128,7 @@ public:
 
 class MSTL_API db_redis_factory final : public idb_factory {
 public:
-    explicit db_redis_factory(db_connect_config config)
+    explicit db_redis_factory(db_config config)
     : idb_factory(_MSTL move(config)) {}
 
     idb_connect* create_connect() override;

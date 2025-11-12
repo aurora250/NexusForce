@@ -496,8 +496,6 @@ public:
 
     MSTL_NODISCARD static constexpr datetime epoch() noexcept { return datetime{}; }
     MSTL_NODISCARD static datetime now() noexcept;
-    MSTL_NODISCARD static datetime parse_UTC(const datetime& utc_dt) noexcept;
-    MSTL_NODISCARD static datetime to_UTC(const datetime& local_dt) noexcept;
 
     constexpr void clear() noexcept {
         date_.clear();
@@ -589,6 +587,9 @@ public:
         return sec_diff;
     }
 
+
+    MSTL_NODISCARD static datetime parse_UTC(const datetime& utc_dt) noexcept;
+    MSTL_NODISCARD static datetime to_UTC(const datetime& local_dt) noexcept;
 
     MSTL_NODISCARD string to_GMT() const noexcept;
 

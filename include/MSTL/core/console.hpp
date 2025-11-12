@@ -330,7 +330,7 @@ static sys_console& console = get_console();
 #ifndef MSTL_STANDARD_17__
 
 MSTL_BEGIN_INNER__
-MSTL_ALWAYS_INLINE inline void print_rests() {}
+MSTL_ALWAYS_INLINE_INLINE void print_rests() {}
 
 template <typename First, typename... Rests>
 void print_rests(const First& first, const Rests&... rests) {
@@ -339,7 +339,7 @@ void print_rests(const First& first, const Rests&... rests) {
     _INNER print_rests(rests...);
 }
 
-MSTL_ALWAYS_INLINE inline void printc_rests(const color&) {}
+MSTL_ALWAYS_INLINE_INLINE void printc_rests(const color&) {}
 
 template <typename First, typename... Rests>
 void printc_rests(const color& color, const First& first, const Rests&... rests) {
@@ -371,7 +371,7 @@ void printc(const color& color, const This& t, const Rests&... rests) {
     _INNER printc_rests(color, rests...);
 }
 
-MSTL_ALWAYS_INLINE inline void println() {
+MSTL_ALWAYS_INLINE_INLINE void println() {
     console.println();
 }
 

@@ -134,7 +134,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
@@ -144,6 +146,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
+        db/mysql/mysql_prepared_statement.cpp
+        db/sql_builder.cpp
 )
 
 # 编译为动态库
