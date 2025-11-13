@@ -1,6 +1,7 @@
 #ifndef MSTL_DATETIME_HPP__
 #define MSTL_DATETIME_HPP__
-#include "serialize.hpp"
+#include "format.hpp"
+#include "packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__

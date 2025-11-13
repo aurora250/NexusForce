@@ -105,6 +105,25 @@ private:
         return function_ptrs;
     }
 
+    template <size_t I, typename... Args>
+    constexpr bool try_construct_impl(Args&&... args) {
+        if constexpr (I < sizeof...(Types)) {
+            if constexpr (is_constructible_v<variant_alternative_t<variant, I>, Args...>) {
+                index_ = I;
+                new (union_) variant_alternative_t<variant, I>(_MSTL forward<Args>(args)...);
+                return true;
+            } else {
+                return try_construct_impl<I + 1>(_MSTL forward<Args>(args)...);
+            }
+        }
+        return false;
+    }
+
+    template <size_t I = 0, typename... Args>
+    constexpr bool try_construct(Args&&... args) {
+        return try_construct_impl<I>(_MSTL forward<Args>(args)...);
+    }
+
 public:
     MSTL_CONSTEXPR20 variant()
     noexcept(is_nothrow_default_constructible_v<variant_alternative_t<variant, 0>>)
@@ -168,17 +187,10 @@ public:
 #ifdef MSTL_STANDARD_20__
     template <typename... Args, enable_if_t<disjunction_v<is_constructible<Types, Args...>...>, int> = 0>
     variant(Args&&... args) {
-        static auto construct = [&]<size_t... Idx>(_MSTL index_sequence<Idx...>) {
-            ((is_constructible_v<variant_alternative_t<variant, Idx>, Args...> && [&]() {
-                if constexpr (is_constructible_v<variant_alternative_t<variant, Idx>, Args...>) {
-                    index_ = Idx;
-                    new (union_) variant_alternative_t<variant, Idx>(_MSTL forward<Args>(args)...);
-                    return true;
-                }
-                return false;
-            }()) || ...);
-        };
-        construct(_MSTL make_index_sequence<sizeof...(Types)>{});
+        if (!try_construct(_MSTL forward<Args>(args)...)) {
+            index_ = 0;
+            new (union_) variant_alternative_t<variant, 0>();
+        }
     }
 #endif
 

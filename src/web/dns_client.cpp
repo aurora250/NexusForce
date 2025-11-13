@@ -1,6 +1,7 @@
 #include <MSTL/web/dns_client.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/vsprintf.hpp>
+#include <MSTL/core/packages.hpp>
 #include <arpa/inet.h>
 MSTL_BEGIN_NAMESPACE__
 

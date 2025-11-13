@@ -1,6 +1,7 @@
 #ifndef MSTL_STATIC_NUMERIC_HPP__
 #define MSTL_STATIC_NUMERIC_HPP__
 #include "numeric_limits.hpp"
+#include "bit.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <intmax_t Numerator>
@@ -112,7 +113,7 @@ template <uintmax_t NumHigh, uintmax_t NumLow, uintmax_t Den>
 struct big_div {
 private:
     static_assert(Den != 0, "Internal library error");
-    static_assert(sizeof (uintmax_t) == sizeof (unsigned long long), "__builtin_clzll is unsafe on your platform.");
+    static_assert(sizeof (uintmax_t) == sizeof (unsigned long long), "clzll is unsafe on your platform.");
     static constexpr int leading_zeros = _MSTL clzll(Den);
     static constexpr int complement_shift = sizeof(uintmax_t) * 8 - leading_zeros;
     static constexpr int actual_shift = (leading_zeros != 0) ? complement_shift : 0;

@@ -87,7 +87,9 @@ MSTL_BEGIN_INNER__
 template <typename ratio1, typename ratio2,
     typename left_product = big_mul<ratio1::num, ratio2::den>,
     typename right_product = big_mul<ratio2::num, ratio1::den>>
-struct __ratio_less_impl_base : integral_constant<bool, big_less<left_product::result_high, left_product::result_low, right_product::result_high, right_product::result_low>::value> {};
+struct __ratio_less_impl_base : integral_constant<bool, big_less<
+    left_product::result_high, left_product::result_low, right_product::result_high, right_product::result_low>::value
+> {};
 
 template <typename ratio1, typename ratio2,
     bool has_zero_or_different_sign = (ratio1::num == 0 || ratio2::num == 0 || (static_sign<ratio1::num>::value != static_sign<ratio2::num>::value)),

@@ -1,5 +1,6 @@
 #include <MSTL/db/mysql/mysql_prepared_statement.hpp>
 #ifdef MSTL_SUPPORT_MYSQL__
+#include <MSTL/db/mysql/mysql_prepared_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 mysql_prepared_statement::mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, const string_view sql)
@@ -46,7 +47,7 @@ mysql_prepared_statement& mysql_prepared_statement::operator =(mysql_prepared_st
     return *this;
 }
 
-bool mysql_prepared_statement::bind_param(const uint32_t index, const string& value) {
+bool mysql_prepared_statement::bind_param(const uint32_t index, const string_view value) {
     try {
         throw_if_stmt_null();
         if (index >= param_count_) return false;
@@ -108,14 +109,14 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int64_t va
     }
 }
 
-bool mysql_prepared_statement::bind_param(const uint32_t index, const double value) {
+bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t value) {
     try {
         throw_if_stmt_null();
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
-        buffer.resize(sizeof(double));
-        memory_copy(buffer.data(), &value, sizeof(double));
+        buffer.resize(sizeof(float64_t));
+        memory_copy(buffer.data(), &value, sizeof(float64_t));
 
         _MSTL_MYSQL MYSQL_BIND& bind = bind_params_[index];
         memory_zero(&bind, sizeof(_MSTL_MYSQL MYSQL_BIND));
@@ -157,7 +158,7 @@ bool mysql_prepared_statement::execute() {
     return mysql_stmt_execute(stmt_) == 0;
 }
 
-unique_ptr<mysql_prepared_result> mysql_prepared_statement::execute_query() {
+unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {
     throw_if_stmt_null();
     if (param_count_ > 0) {
         if (_MSTL_MYSQL mysql_stmt_bind_param(stmt_, bind_params_.data()) != 0) {
@@ -168,6 +169,16 @@ unique_ptr<mysql_prepared_result> mysql_prepared_statement::execute_query() {
         return nullptr;
     }
     return make_unique<mysql_prepared_result>(stmt_);
+}
+
+string_view mysql_prepared_statement::get_error() const noexcept {
+    if (!stmt_) return "Invalid statement!";
+    return _MSTL_MYSQL mysql_stmt_error(stmt_);
+}
+
+uint32_t mysql_prepared_statement::get_errno() const noexcept {
+    if (!stmt_) return 0;
+    return _MSTL_MYSQL mysql_stmt_errno(stmt_);
 }
 
 void mysql_prepared_statement::swap(mysql_prepared_statement& other) noexcept {

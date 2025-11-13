@@ -1,6 +1,6 @@
 #ifndef MSTL_CHECK_TYPE_HPP__
 #define MSTL_CHECK_TYPE_HPP__
-#include "string.hpp"
+#include "character.hpp"
 #include <typeinfo>
 #ifdef MSTL_COMPILER_GNUC__
 #include <cxxabi.h>
@@ -239,20 +239,6 @@ MSTL_CONSTEXPR20 string check_type() {
     string str;
     _INNER check<T> { str };
     return str;
-}
-
-
-template <typename T, enable_if_t<is_function_v<T>, int>>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
-    return _MSTL check_type<T>();
-}
-template <typename T, enable_if_t<is_member_object_pointer_v<T>, int>>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
-    return _MSTL check_type<T>();
-}
-template <typename T, enable_if_t<is_member_function_pointer_v<T>, int>>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(T&&) {
-    return _MSTL check_type<T>();
 }
 
 MSTL_END_NAMESPACE__

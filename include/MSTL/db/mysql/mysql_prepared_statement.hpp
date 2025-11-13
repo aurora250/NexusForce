@@ -1,10 +1,11 @@
 #ifndef MSTL_MYSQL_PREPARED_STATEMENT_HPP__
 #define MSTL_MYSQL_PREPARED_STATEMENT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
-#include "mysql_prepared_result.hpp"
+#include "MSTL/db/db_interface.hpp"
+#include "mysql_config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class MSTL_API mysql_prepared_statement {
+class MSTL_API mysql_prepared_statement final : public idb_prepared_statement {
 private:
     _MSTL_MYSQL MYSQL_STMT* stmt_ = nullptr;
     _MSTL_MYSQL MYSQL* conn_ = nullptr;
@@ -34,28 +35,23 @@ public:
     mysql_prepared_statement(const mysql_prepared_statement&) = delete;
     mysql_prepared_statement& operator =(const mysql_prepared_statement&) = delete;
 
-    ~mysql_prepared_statement();
+    ~mysql_prepared_statement() override;
 
-    MSTL_NODISCARD uint32_t param_count() const noexcept { return param_count_; }
+    MSTL_NODISCARD uint32_t param_count() const noexcept override { return param_count_; }
 
-    bool bind_param(uint32_t index, const string& value);
-    bool bind_param(uint32_t index, int32_t value);
-    bool bind_param(uint32_t index, int64_t value);
-    bool bind_param(uint32_t index, float64_t value);
-    bool bind_param(uint32_t index, const void* data, size_t length);
+    bool bind_param(uint32_t index, const string& value) override { return bind_param(index, value.view()); }
+    bool bind_param(uint32_t index, string_view value) override;
+    bool bind_param(uint32_t index, const char* value) override { return bind_param(index, string_view{value}); }
+    bool bind_param(uint32_t index, int32_t value) override;
+    bool bind_param(uint32_t index, int64_t value) override;
+    bool bind_param(uint32_t index, float64_t value) override;
+    bool bind_param(uint32_t index, const void* data, size_t length) override;
 
-    bool execute();
-    MSTL_NODISCARD unique_ptr<mysql_prepared_result> execute_query();
+    bool execute() override;
+    MSTL_NODISCARD unique_ptr<idb_prepared_result> execute_query() override;
 
-    MSTL_NODISCARD string_view get_error() const noexcept {
-        if (!stmt_) return "Invalid statement!";
-        return _MSTL_MYSQL mysql_stmt_error(stmt_);
-    }
-
-    MSTL_NODISCARD uint32_t get_errno() const noexcept {
-        if (!stmt_) return 0;
-        return _MSTL_MYSQL mysql_stmt_errno(stmt_);
-    }
+    MSTL_NODISCARD string_view get_error() const noexcept override;
+    MSTL_NODISCARD uint32_t get_errno() const noexcept override;
 
     void swap(mysql_prepared_statement& other) noexcept;
 };

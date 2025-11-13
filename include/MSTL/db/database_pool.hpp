@@ -42,13 +42,13 @@ public:
     database_pool(database_pool&&) = delete;
     database_pool& operator =(database_pool&&) = delete;
 
-    _MSTL shared_ptr<idb_connect> database_pool::get_connect() {
+    _MSTL shared_ptr<idb_connect> get_connect() {
         return get_connect_impl<idb_connect>();
     }
-    _MSTL shared_ptr<idb_tb_connect> database_pool::get_tb_connect() {
+    _MSTL shared_ptr<idb_tb_connect> get_tb_connect() {
         return get_connect_impl<idb_tb_connect>();
     }
-    _MSTL shared_ptr<idb_kv_connect> database_pool::get_kv_connect() {
+    _MSTL shared_ptr<idb_kv_connect> get_kv_connect() {
         return get_connect_impl<idb_kv_connect>();
     }
 };

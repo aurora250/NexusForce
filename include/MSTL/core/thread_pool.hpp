@@ -83,8 +83,6 @@ private:
 	std::atomic<THREAD_POOL_MODE> pool_mode_;
 	std::atomic_bool is_running_;
 
-    friend MSTL_API thread_pool& get_instance_thread_pool();
-
 private:
     void thread_function(id_type thread_id);
 
@@ -96,6 +94,11 @@ public:
     thread_pool(thread_pool&&) = delete;
     thread_pool& operator =(const thread_pool&) = delete;
     thread_pool& operator =(thread_pool&&) = delete;
+
+	static thread_pool& instance() {
+		static thread_pool instance;
+		return instance;
+	}
 
     bool set_mode(THREAD_POOL_MODE mode) noexcept;
     bool set_task_threshhold(size_t threshhold) noexcept;
@@ -111,8 +114,6 @@ public:
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
 	decltype(auto) submit_task(Func&& func, Args&&... args);
 };
-
-MSTL_API thread_pool& get_instance_thread_pool();
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>

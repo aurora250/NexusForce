@@ -6,7 +6,7 @@
 #include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class MSTL_API mysql_prepared_result final : public idb_tb_result {
+class MSTL_API mysql_prepared_result final : public idb_prepared_result {
 private:
     _MSTL_MYSQL MYSQL_STMT* stmt_ = nullptr;
     _MSTL_MYSQL MYSQL_RES* metadata_ = nullptr;

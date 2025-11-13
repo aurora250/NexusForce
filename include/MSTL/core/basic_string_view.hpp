@@ -248,6 +248,10 @@ public:
         count = clamp_size(off, count);
         return self(data_ + off, count);
     }
+    
+    MSTL_NODISCARD constexpr self view(const size_type off, size_type count = npos) const {
+        return substr(off, count);
+    }
 
     MSTL_NODISCARD constexpr bool equal_to(const self view) const noexcept {
         return (char_traits_equal<Traits>)(data_, size_, view.data_, view.size_);

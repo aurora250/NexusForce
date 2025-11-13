@@ -353,12 +353,6 @@ file::size_type file::read(string& str, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read(string& str) const {
-    const size_type s = size();
-    str.resize(s);
-    return this->read(str, s);
-}
-
 string file::read() const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return {};
     const size_type file_size = size();
@@ -437,13 +431,13 @@ vector<string> file::read_lines() const {
             if (!line.empty() && line.back() == '\r') {
                 line.pop_back();
             }
-            lines.push_back(line);
+            lines.emplace_back(_MSTL move(line));
             start = end + 1;
             end = content.find('\n', start);
         }
 
         if (start < content.size()) {
-            lines.push_back(content.substr(start));
+            lines.emplace_back(content.view(start));
         }
     }
     return lines;
@@ -469,8 +463,9 @@ file::size_type file::size(const string& path) {
     size_type sz = 0;
     {
         file f;
-        if (f.open(path, false, FILE_ACCESS::READ)) sz = f.size();
-        f.close();
+        if (f.open(path, false, FILE_ACCESS::READ)) {
+            sz = f.size();
+        }
     }
     return sz;
 }

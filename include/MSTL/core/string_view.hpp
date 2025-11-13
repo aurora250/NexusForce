@@ -3,11 +3,11 @@
 #include "basic_string_view.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-using string_view = basic_string_view<char>;
-using bstring_view = basic_string_view<byte_t>;
-using wstring_view = basic_string_view<wchar_t>;
+using string_view    = basic_string_view<char>;
+using bstring_view   = basic_string_view<byte_t>;
+using wstring_view   = basic_string_view<wchar_t>;
 #ifdef MSTL_STANDARD_20__
-using u8string_view = basic_string_view<char8_t>;
+using u8string_view  = basic_string_view<char8_t>;
 #endif // MSTL_STANDARD_20__
 using u16string_view = basic_string_view<char16_t>;
 using u32string_view = basic_string_view<char32_t>;

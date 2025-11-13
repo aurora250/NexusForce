@@ -1,6 +1,7 @@
 #ifndef MSTL_COLOR_HPP__
 #define MSTL_COLOR_HPP__
 #include "hexadecimal.hpp"
+#include "packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class color : public iserialize<color> {
@@ -29,6 +30,10 @@ public:
 
     constexpr color(const int red, const int green, const int blue, const int alpha) noexcept
     : r(clamp(red)), g(clamp(green)), b(clamp(blue)), a(clamp(alpha)) {}
+
+    MSTL_CONSTEXPR20 explicit color(const string_view str) { try_parse(str); }
+    MSTL_CONSTEXPR20 explicit color(const string& str) { try_parse(str.view()); }
+    MSTL_CONSTEXPR20 explicit color(const char* str) { try_parse(str); }
 
     constexpr color(const color& other) noexcept = default;
     constexpr color& operator =(const color& other) noexcept = default;

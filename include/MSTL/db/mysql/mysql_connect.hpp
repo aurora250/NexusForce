@@ -1,18 +1,19 @@
 #ifndef MSTL_DB_MYSQL_CONNECT_HPP__
 #define MSTL_DB_MYSQL_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
-#include "mysql_result.hpp"
-#include "mysql_prepared_statement.hpp"
+#include "MSTL/db/db_interface.hpp"
+#include "mysql_config.hpp"
+#include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct MSTL_API db_mysql_connect final : idb_tb_connect {
+struct MSTL_API mysql_connect final : idb_tb_connect {
 private:
     _MSTL_MYSQL MYSQL* mysql_ = nullptr;
     clock_type alive_time_ = 0;
 
 public:
-    db_mysql_connect() noexcept { mysql_ = _MSTL_MYSQL mysql_init(nullptr); }
-    ~db_mysql_connect() noexcept override { this->close(); }
+    mysql_connect() noexcept { mysql_ = _MSTL_MYSQL mysql_init(nullptr); }
+    ~mysql_connect() noexcept override { this->close(); }
 
     MSTL_NODISCARD bool connect_to(
         const _MSTL string& user, const _MSTL string& password,
@@ -51,12 +52,8 @@ public:
     MSTL_NODISCARD bool update(const _MSTL string& sql) const noexcept override {
         return !_MSTL_MYSQL mysql_query(mysql_, sql.c_str());
     }
-    MSTL_NODISCARD unique_ptr<idb_tb_result> query(const _MSTL string& sql) const noexcept override;
-
-    MSTL_NODISCARD unique_ptr<mysql_prepared_statement> prepare_statement(const string& sql) const {
-        return _MSTL make_unique<mysql_prepared_statement>(mysql_, sql);
-    }
-
+    MSTL_NODISCARD unique_ptr<idb_tb_result> query(const string& sql) const noexcept override;
+    MSTL_NODISCARD unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const override;
 
     MSTL_NODISCARD bool connected() const noexcept override { return mysql_ != nullptr; }
     MSTL_NODISCARD bool is_valid() const noexcept override { return mysql_ping(mysql_) == 0; }
@@ -66,15 +63,13 @@ public:
     MSTL_NODISCARD clock_type get_alive() const noexcept override { return std::clock() - alive_time_; }
 };
 
-class MSTL_API db_mysql_factory final : public idb_factory {
+class MSTL_API mysql_factory final : public idb_factory {
 public:
-    explicit db_mysql_factory(db_config config)
+    explicit mysql_factory(db_config config)
     : idb_factory(_MSTL move(config)) {}
 
     idb_connect* create_connect() override;
-    idb_result* create_result(void* native_result) override {
-        return new db_mysql_result(static_cast<_MSTL_MYSQL MYSQL_RES*>(native_result));
-    }
+    idb_result* create_result(void* native_result) override;
 };
 
 MSTL_END_NAMESPACE__

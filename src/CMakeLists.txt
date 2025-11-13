@@ -120,9 +120,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/console.cpp
@@ -134,11 +137,17 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
@@ -146,8 +155,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
-        db/mysql/mysql_prepared_statement.cpp
-        db/sql_builder.cpp
 )
 
 # 编译为动态库

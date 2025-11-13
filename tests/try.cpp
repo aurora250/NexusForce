@@ -1509,12 +1509,13 @@ void test_sql(){
 }
 
 void test_mysql() {
+#ifdef MSTL_SUPPORT_MYSQL__
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
     database_pool pool(DB_TYPE::MYSQL, mysql_config);
 
     const auto sql = sql_builder().select({"ISBN", "BookName"}).from("book").where("CollectNumber = 10").build();
-    auto pstmt = dynamic_cast<db_mysql_connect*>(
+    auto pstmt = dynamic_cast<mysql_connect*>(
         pool.get_tb_connect().get()
         )->prepare_statement(sql);
 
@@ -1526,8 +1527,8 @@ void test_mysql() {
         }
         println();
     }
+#endif
 }
-
 
 void test_dbpool() {
 #ifdef MSTL_SUPPORT_MYSQL__
@@ -1567,7 +1568,7 @@ void test_dbpool() {
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
         _MSTL sprintf(sql, "SELECT 1");
-        auto* conn = new db_mysql_connect();
+        auto* conn = new mysql_connect();
         if(conn->connect_to(mysql_config)) {
             bool fin = conn->update(sql);
         }
@@ -1589,13 +1590,49 @@ void test_dns() {
         println(ips);
 
         dns_client client;
+        auto start = chrono::steady_clock::now();
         auto ipv6_addrs = client.resolve_aaaa("www.google.com");
+        auto end = chrono::steady_clock::now();
+        auto duration1 = chrono::duration_cast<chrono::milliseconds>(end - start);
         println("IPv6 addresses:");
         println(ipv6_addrs);
 
-        auto cnames = client.resolve_cname("www.github.com");
-        println("CNAME records:");
-        println(cnames);
+        start = chrono::steady_clock::now();
+        ipv6_addrs = client.resolve_aaaa("www.google.com");
+        end = chrono::steady_clock::now();
+        auto duration2 = chrono::duration_cast<chrono::milliseconds>(end - start);
+        println("First:", duration1.count(), "Second:", duration2.count());
+
+        auto mx_records = client.resolve_mx("gmail.com");
+        println("MX records for gmail.com:");
+        println(mx_records);
+
+        string hostname = client.reverse_query("8.8.8.8");
+        println("8.8.8.8 resolves to:", hostname);
+        hostname = client.reverse_query("1.1.1.1");
+        println("1.1.1.1 resolves to:", hostname);
+
+        vector<string> domains = {
+            "google.com",
+            "facebook.com",
+            "twitter.com",
+            "github.com",
+            "stackoverflow.com"
+        };
+        auto results = client.batch_query(domains, DNS_RECORD::A);
+
+        for (size_t i = 0; i < domains.size(); ++i) {
+            println(domains[i], ":");
+
+            if (results[i].is_success()) {
+                for (const auto& answer : results[i].answers) {
+                    println("  ", answer.data);
+                }
+                println("  Query time:", results[i].query_time.count(), "ms");
+            } else {
+                println("  Query failed\n");
+            }
+        }
 
 
     } catch (...) {}
@@ -1603,7 +1640,7 @@ void test_dns() {
 }
 
 void test_tpool() {
-    thread_pool& pool = get_instance_thread_pool();
+    thread_pool& pool = thread_pool::instance();
     pool.start(5);
     pool.submit_task(test_vector);
     pool.submit_task(test_list);
@@ -1628,6 +1665,6 @@ void test_tpool() {
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);
     pool.submit_task(test_color);
-    // pool.submit_task(try_db);
+    pool.submit_task(test_sql);
     pool.stop();
 }

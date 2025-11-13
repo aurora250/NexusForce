@@ -3,9 +3,10 @@
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "MSTL/db/db_interface.hpp"
 #include "mysql_config.hpp"
+#include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct MSTL_API db_mysql_result final : idb_tb_result {
+struct MSTL_API mysql_result final : idb_tb_result {
 private:
     _MSTL_MYSQL MYSQL_RES* result_ = nullptr;
     size_type rows_ = 0;
@@ -18,10 +19,10 @@ private:
         make_unique<vector<_MSTL_MYSQL enum_field_types>>();
 
 public:
-    db_mysql_result() noexcept = default;
-    explicit db_mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept;
+    mysql_result() noexcept = default;
+    explicit mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept;
 
-    ~db_mysql_result() override { if (result_) _MSTL_MYSQL mysql_free_result(result_); }
+    ~mysql_result() override { if (result_) _MSTL_MYSQL mysql_free_result(result_); }
 
     MSTL_NODISCARD bool empty() const noexcept override { return result_ == nullptr; }
     MSTL_NODISCARD size_type row_count() const noexcept override { return rows_; }

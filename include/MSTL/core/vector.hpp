@@ -364,10 +364,13 @@ public:
 	MSTL_CONSTEXPR20 explicit vector(const size_type n, const T& value) {
 		this->fill_initialize(n, value);
 	}
-	MSTL_CONSTEXPR20 explicit vector(const uint16_t n, const T& value) {
+	MSTL_CONSTEXPR20 explicit vector(const int16_t n, const T& value) {
 		this->fill_initialize(n, value);
 	}
-	MSTL_CONSTEXPR20 explicit vector(const uint32_t n, const T& value) {
+	MSTL_CONSTEXPR20 explicit vector(const int32_t n, const T& value) {
+		this->fill_initialize(n, value);
+	}
+	MSTL_CONSTEXPR20 explicit vector(const int64_t n, const T& value) {
 		this->fill_initialize(n, value);
 	}
 

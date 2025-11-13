@@ -1,10 +1,11 @@
 #ifndef MSTL_HEXADECIMAL_HPP__
 #define MSTL_HEXADECIMAL_HPP__
 #include "serialize.hpp"
+#include "format.hpp"
 #include "undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
+struct MSTL_API hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
 public:
     using self = hexadecimal;
     using value_type = int64_t;
@@ -65,11 +66,10 @@ private:
 
 public:
     constexpr hexadecimal() noexcept = default;
-    explicit constexpr hexadecimal(const short v) noexcept : value_(v) {}
-    explicit constexpr hexadecimal(const int v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const int16_t v) noexcept : value_(v) {}
+    explicit constexpr hexadecimal(const int32_t v) noexcept : value_(v) {}
     explicit constexpr hexadecimal(const long v) noexcept : value_(v) {}
     explicit constexpr hexadecimal(const long long v) noexcept : value_(v) {}
-    explicit constexpr hexadecimal(const integer64& v) noexcept : value_(v.value()) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const string_view s) : value_(parse_hex(s)) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const char* s) : hexadecimal(string_view(s)) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const string& s) : hexadecimal(s.view()) {}
@@ -165,7 +165,7 @@ public:
     constexpr self& operator >>=(const uint32_t shift) { *this = *this >> shift; return *this; }
 
 
-    bool get_bit(const size_t position) const {
+    constexpr bool get_bit(const size_t position) const {
         if (position >= 64) Exception(ValueError("Bit position out of range"));
         return (value_ >> position) & 1;
     }
@@ -183,9 +183,6 @@ public:
         value_ ^= (1ULL << position);
         return *this;
     }
-
-    MSTL_NODISCARD int popcount() const { return _MSTL popcountll(static_cast<size_t>(value_)); }
-    MSTL_NODISCARD int clz() const { return _MSTL clzll(static_cast<size_t>(value_)); }
 
     MSTL_NODISCARD constexpr int64_t to_int64() const noexcept { return value_; }
 

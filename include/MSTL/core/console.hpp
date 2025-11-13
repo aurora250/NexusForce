@@ -409,7 +409,7 @@ void printc(const color& color, const This& t, const Rests&... r) {
     ((console.print(" "), console.printc<remove_cvref_t<Rests>>(color, r)), ...);
 }
 
-MSTL_ALWAYS_INLINE inline void println() {
+MSTL_ALWAYS_INLINE_INLINE void println() {
     console.println();
 }
 

@@ -386,3 +386,21 @@ sudo make install
 ## 开源协议
 
 本项目基于 [MIT 开源协议](LICENSE) 。
+
+## 待实现功能
+
+lib:
+atomic
+future
+ranges
+logger
+cuda-mutrix
+xml
+yaml
+postgresql
+zip
+
+fix:
+strong assert
+strong serialize
+support macos

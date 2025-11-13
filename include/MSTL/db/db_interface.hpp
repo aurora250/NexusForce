@@ -57,6 +57,30 @@ struct MSTL_API idb_kv_result : idb_result {
 };
 
 
+struct MSTL_API idb_prepared_result : idb_tb_result {
+    ~idb_prepared_result() override = default;
+};
+
+struct MSTL_API idb_prepared_statement {
+    virtual ~idb_prepared_statement() = default;
+
+    virtual uint32_t param_count() const noexcept = 0;
+
+    virtual bool bind_param(uint32_t index, const string& value) = 0;
+    virtual bool bind_param(uint32_t index, string_view value) = 0;
+    virtual bool bind_param(uint32_t index, const char* value) = 0;
+    virtual bool bind_param(uint32_t index, int32_t value) = 0;
+    virtual bool bind_param(uint32_t index, int64_t value) = 0;
+    virtual bool bind_param(uint32_t index, float64_t value) = 0;
+    virtual bool bind_param(uint32_t index, const void* data, size_t length) = 0;
+
+    virtual bool execute() = 0;
+    virtual unique_ptr<idb_prepared_result> execute_query() = 0;
+    virtual string_view get_error() const noexcept = 0;
+    virtual uint32_t get_errno() const noexcept = 0;
+};
+
+
 struct MSTL_API idb_connect {
     using clock_type = std::clock_t;
 
@@ -85,6 +109,7 @@ struct MSTL_API idb_tb_connect : idb_connect {
     ~idb_tb_connect() override = default;
 
     virtual unique_ptr<idb_tb_result> query(const string& sql) const = 0;
+    virtual unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const = 0;
 };
 
 struct MSTL_API idb_kv_connect : idb_connect {

@@ -1,4 +1,5 @@
 #include <MSTL/db/sql_builder.hpp>
+#include <MSTL/core/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 select_data* sql_builder::ensure_select_data() {
@@ -132,7 +133,7 @@ sql_builder& sql_builder::join(const SQL_JOIN_TYPE type, string table, string on
 }
 
 sql_builder& sql_builder::join(string table, string on_condition) {
-    return inner_join(_MSTL move(table), _MSTL move(on_condition));
+    return join(SQL_JOIN_TYPE::INNER, _MSTL move(table), _MSTL move(on_condition));
 }
 
 sql_builder& sql_builder::left_join(string table, string on_condition) {

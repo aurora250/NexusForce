@@ -1,8 +1,8 @@
 #include <MSTL/db/database_pool.hpp>
 #ifdef MSTL_SUPPORT_DB__
 #include <MSTL/db/mysql/mysql_connect.hpp>
-#include <MSTL/db/sqlite.hpp>
-#include <MSTL/db/redis.hpp>
+#include <MSTL/db/sqlite/sqlite_connect.hpp>
+#include <MSTL/db/redis/redis_connect.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -55,19 +55,19 @@ connect_timeout_(connect_timeout), running_(true) {
     switch(type) {
 #ifdef MSTL_SUPPORT_MYSQL__
         case DB_TYPE::MYSQL: {
-            factory_ = make_unique<db_mysql_factory>(config);
+            factory_ = make_unique<mysql_factory>(config);
             break;
         }
 #endif
 #ifdef MSTL_SUPPORT_SQLITE3__
         case DB_TYPE::SQLITE3: {
-            factory_ = make_unique<db_sqlite_factory>(config);
+            factory_ = make_unique<sqlite_factory>(config);
             break;
         }
 #endif
 #ifdef MSTL_SUPPORT_REDIS__
         case DB_TYPE::REDIS: {
-            factory_ = make_unique<db_redis_factory>(config);
+            factory_ = make_unique<redis_factory>(config);
             break;
         }
 #endif

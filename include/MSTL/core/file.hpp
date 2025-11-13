@@ -203,7 +203,7 @@ public:
 
 private:
     MSTL_ALWAYS_INLINE static const file_handle& INVALID_HANDLE() noexcept {
-        static file_handle INVALID_HANDLE =
+        static const auto INVALID_HANDLE =
     #ifdef MSTL_PLATFORM_WINDOWS__
             INVALID_HANDLE_VALUE;
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -286,7 +286,7 @@ public:
     size_type write(const string& data) const { return this->write(data, data.size()); }
 
     size_type read(string& str, size_type size) const;
-    size_type read(string& str) const;
+    size_type read(string& str) const { return this->read(str, str.size()); }
     string read() const;
 
     size_type read_binary(string& str, size_type size) const;

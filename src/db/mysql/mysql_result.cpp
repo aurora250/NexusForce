@@ -2,7 +2,7 @@
 #ifdef MSTL_SUPPORT_MYSQL__
 MSTL_BEGIN_NAMESPACE__
 
-db_mysql_result::db_mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept
+mysql_result::mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept
 : result_(result), rows_(_MSTL_MYSQL mysql_num_rows(result)), columns_(_MSTL_MYSQL mysql_num_fields(result)) {
     _MSTL_MYSQL MYSQL_FIELD* field;
     while ((field = _MSTL_MYSQL mysql_fetch_field(result))) {
@@ -11,7 +11,7 @@ db_mysql_result::db_mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept
     }
 }
 
-bool db_mysql_result::next() noexcept {
+bool mysql_result::next() noexcept {
     if (!empty()) {
         cursor_ = _MSTL_MYSQL mysql_fetch_row(result_);
         return cursor_ != nullptr;
@@ -19,13 +19,13 @@ bool db_mysql_result::next() noexcept {
     return false;
 }
 
-_MSTL string_view db_mysql_result::get(const size_type n) const noexcept {
+_MSTL string_view mysql_result::get(const size_type n) const noexcept {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     return cursor_[n];
 }
 
-bool db_mysql_result::get_bool(const size_type n) const {
+bool mysql_result::get_bool(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_BOOL)
@@ -33,11 +33,11 @@ bool db_mysql_result::get_bool(const size_type n) const {
     return static_cast<bool>(boolean::parse(cursor_[n]));
 }
 
-int8_t db_mysql_result::get_int8(const size_type n) const {
+int8_t mysql_result::get_int8(const size_type n) const {
     return static_cast<int8_t>(this->get_int16(n));
 }
 
-int16_t db_mysql_result::get_int16(const size_type n) const {
+int16_t mysql_result::get_int16(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -47,7 +47,7 @@ int16_t db_mysql_result::get_int16(const size_type n) const {
     return integer16::parse(cursor_[n]);
 }
 
-int32_t db_mysql_result::get_int32(const size_type n) const {
+int32_t mysql_result::get_int32(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -58,7 +58,7 @@ int32_t db_mysql_result::get_int32(const size_type n) const {
     return integer32::parse(cursor_[n]);
 }
 
-int64_t db_mysql_result::get_int64(const size_type n) const {
+int64_t mysql_result::get_int64(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -69,7 +69,7 @@ int64_t db_mysql_result::get_int64(const size_type n) const {
     return integer64::parse(cursor_[n]);
 }
 
-float32_t db_mysql_result::get_float32(const size_type n) const {
+float32_t mysql_result::get_float32(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -79,7 +79,7 @@ float32_t db_mysql_result::get_float32(const size_type n) const {
     return float32::parse(cursor_[n]);
 }
 
-float64_t db_mysql_result::get_float64(const size_type n) const {
+float64_t mysql_result::get_float64(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -90,7 +90,7 @@ float64_t db_mysql_result::get_float64(const size_type n) const {
     return float64::parse(cursor_[n]);
 }
 
-decimal_t db_mysql_result::get_decimal(const size_type n) const {
+decimal_t mysql_result::get_decimal(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -102,7 +102,7 @@ decimal_t db_mysql_result::get_decimal(const size_type n) const {
     return decimal::parse(cursor_[n]);
 }
 
-_MSTL vector<char> db_mysql_result::get_blob(const size_type n) const {
+_MSTL vector<char> mysql_result::get_blob(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto type = column_types_->at(n);
@@ -112,7 +112,7 @@ _MSTL vector<char> db_mysql_result::get_blob(const size_type n) const {
     return {cursor_[n], cursor_[n] + mysql_fetch_lengths(result_)[n]};
 }
 
-_MSTL string db_mysql_result::get_set(const size_type n) const {
+_MSTL string mysql_result::get_set(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_SET) {
@@ -121,7 +121,7 @@ _MSTL string db_mysql_result::get_set(const size_type n) const {
     return cursor_[n];
 }
 
-uint64_t db_mysql_result::get_bit(const size_type n) const {
+uint64_t mysql_result::get_bit(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_BIT) {
@@ -137,7 +137,7 @@ uint64_t db_mysql_result::get_bit(const size_type n) const {
     return value;
 }
 
-_MSTL date db_mysql_result::get_date(const size_type n) const {
+_MSTL date mysql_result::get_date(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_DATE)
@@ -145,7 +145,7 @@ _MSTL date db_mysql_result::get_date(const size_type n) const {
     return _MSTL date::parse(cursor_[n]);
 }
 
-_MSTL time db_mysql_result::get_time(const size_type n) const {
+_MSTL time mysql_result::get_time(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_DATE)
@@ -153,7 +153,7 @@ _MSTL time db_mysql_result::get_time(const size_type n) const {
     return _MSTL time::parse(cursor_[n]);
 }
 
-_MSTL datetime db_mysql_result::get_datetime(const size_type n) const {
+_MSTL datetime mysql_result::get_datetime(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_DATETIME)
@@ -161,7 +161,7 @@ _MSTL datetime db_mysql_result::get_datetime(const size_type n) const {
     return _MSTL datetime::parse(cursor_[n]);
 }
 
-_MSTL timestamp db_mysql_result::get_timestamp(const size_type n) const {
+_MSTL timestamp mysql_result::get_timestamp(const size_type n) const {
     MSTL_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     MSTL_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     if (column_types_->at(n) != _MSTL_MYSQL MYSQL_TYPE_TIMESTAMP)

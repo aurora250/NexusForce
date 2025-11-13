@@ -782,9 +782,9 @@ struct default_delete {
     constexpr default_delete() noexcept = default;
 
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-	MSTL_CONSTEXPR23 default_delete(const default_delete<U>&) noexcept {}
+	MSTL_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
 
-    MSTL_CONSTEXPR23 void operator()(const T* ptr) const {
+    MSTL_CONSTEXPR20 void operator()(const T* ptr) const {
 	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete ptr;
     }
@@ -795,10 +795,10 @@ struct default_delete<T[]> {
     constexpr default_delete() noexcept = default;
 
     template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
-    MSTL_CONSTEXPR23 default_delete(const default_delete<U[]>&) noexcept {}
+    MSTL_CONSTEXPR20 default_delete(const default_delete<U[]>&) noexcept {}
 
     template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
-    MSTL_CONSTEXPR23 void operator ()(U* ptr) const{
+    MSTL_CONSTEXPR20 void operator ()(U* ptr) const{
 	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete [] ptr;
 	}
@@ -832,40 +832,40 @@ private:
 
 public:
     __unique_ptr_impl() = default;
-    MSTL_CONSTEXPR23 __unique_ptr_impl(pointer ptr) : tup() { get_ptr() = ptr; }
+    MSTL_CONSTEXPR20 __unique_ptr_impl(pointer ptr) : tup() { get_ptr() = ptr; }
 
     template <typename Del>
-    MSTL_CONSTEXPR23 __unique_ptr_impl(pointer ptr, Del&& del)
+    MSTL_CONSTEXPR20 __unique_ptr_impl(pointer ptr, Del&& del)
 	: tup(ptr, _MSTL forward<Del>(del)) {}
 
-    MSTL_CONSTEXPR23 __unique_ptr_impl(__unique_ptr_impl&& ptr) noexcept
+    MSTL_CONSTEXPR20 __unique_ptr_impl(__unique_ptr_impl&& ptr) noexcept
     : tup(_MSTL move(ptr.tup)) { ptr.get_ptr() = nullptr; }
 
-    MSTL_CONSTEXPR23 __unique_ptr_impl& operator =(__unique_ptr_impl&& x) noexcept {
+    MSTL_CONSTEXPR20 __unique_ptr_impl& operator =(__unique_ptr_impl&& x) noexcept {
 	    reset(x.release());
 	    get_deleter() = _MSTL forward<Deleter>(x.get_deleter());
 	    return *this;
     }
 
-    MSTL_CONSTEXPR23 pointer& get_ptr() noexcept { return _MSTL get<0>(tup); }
-    MSTL_CONSTEXPR23 pointer get_ptr() const noexcept { return _MSTL get<0>(tup); }
-    MSTL_CONSTEXPR23 Deleter& get_deleter() noexcept { return _MSTL get<1>(tup); }
-    MSTL_CONSTEXPR23 const Deleter& get_deleter() const noexcept { return _MSTL get<1>(tup); }
+    MSTL_CONSTEXPR20 pointer& get_ptr() noexcept { return _MSTL get<0>(tup); }
+    MSTL_CONSTEXPR20 pointer get_ptr() const noexcept { return _MSTL get<0>(tup); }
+    MSTL_CONSTEXPR20 Deleter& get_deleter() noexcept { return _MSTL get<1>(tup); }
+    MSTL_CONSTEXPR20 const Deleter& get_deleter() const noexcept { return _MSTL get<1>(tup); }
 
-    MSTL_CONSTEXPR23 void reset(pointer ptr) noexcept {
+    MSTL_CONSTEXPR20 void reset(pointer ptr) noexcept {
 	    const pointer old = get_ptr();
 	    get_ptr() = ptr;
 	    if (old)
 	        get_deleter()(old);
     }
 
-    MSTL_CONSTEXPR23 pointer release() noexcept {
+    MSTL_CONSTEXPR20 pointer release() noexcept {
 	    pointer p = get_ptr();
 	    get_ptr() = nullptr;
 	    return p;
     }
 
-    MSTL_CONSTEXPR23 void swap(__unique_ptr_impl& x) noexcept {
+    MSTL_CONSTEXPR20 void swap(__unique_ptr_impl& x) noexcept {
 	    _MSTL swap(get_ptr(), x.get_ptr());
 	    _MSTL swap(get_deleter(), x.get_deleter());
     }
@@ -879,10 +879,10 @@ struct __unique_ptr_data : __unique_ptr_impl<T, Deleter> {
     using pointer = typename base_type::pointer;
 
     __unique_ptr_data() = default;
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
 
     template <typename Del>
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
 
     __unique_ptr_data(__unique_ptr_data&&) = default;
     __unique_ptr_data& operator =(__unique_ptr_data&&) = default;
@@ -894,10 +894,10 @@ struct __unique_ptr_data<T, Deleter, true, false> : __unique_ptr_impl<T, Deleter
     using pointer = typename base_type::pointer;
 
     __unique_ptr_data() = default;
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
 
     template <typename Del>
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
 
     __unique_ptr_data(__unique_ptr_data&&) = default;
     __unique_ptr_data& operator =(__unique_ptr_data&&) = delete;
@@ -909,10 +909,10 @@ struct __unique_ptr_data<T, Deleter, false, true> : __unique_ptr_impl<T, Deleter
     using pointer = typename base_type::pointer;
 
     __unique_ptr_data() = default;
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
 
     template <typename Del>
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
 
     __unique_ptr_data(__unique_ptr_data&&) = delete;
     __unique_ptr_data& operator =(__unique_ptr_data&&) = default;
@@ -924,10 +924,10 @@ struct __unique_ptr_data<T, Deleter, false, false> : __unique_ptr_impl<T, Delete
     using pointer = typename base_type::pointer;
 
     __unique_ptr_data() = default;
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr) : base_type(ptr) {}
 
     template <typename Del>
-    MSTL_CONSTEXPR23 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
+    MSTL_CONSTEXPR20 __unique_ptr_data(pointer ptr, Del&& del) : base_type(ptr, _MSTL forward<Del>(del)) {}
 
     __unique_ptr_data(__unique_ptr_data&&) = delete;
     __unique_ptr_data& operator =(__unique_ptr_data&&) = delete;
@@ -956,25 +956,25 @@ private:
 
 public:
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
-    MSTL_CONSTEXPR23 unique_ptr(pointer p) noexcept : data_(p) {}
+    MSTL_CONSTEXPR20 unique_ptr(pointer p) noexcept : data_(p) {}
 
     template <typename Del = deleter_type, enable_if_t<is_copy_constructible_v<Del>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(pointer ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
+    MSTL_CONSTEXPR20 unique_ptr(pointer ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
 
     template <typename Del = deleter_type, enable_if_t<is_move_constructible_v<Del>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(pointer ptr, Del&& del) noexcept : data_(ptr, _MSTL move(del)) {}
+    MSTL_CONSTEXPR20 unique_ptr(pointer ptr, Del&& del) noexcept : data_(ptr, _MSTL move(del)) {}
 
     template<typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>>
-    MSTL_CONSTEXPR23 unique_ptr(pointer, enable_if_t<is_lvalue_reference_v<Del>, DelMoveRef&&>) = delete;
+    MSTL_CONSTEXPR20 unique_ptr(pointer, enable_if_t<is_lvalue_reference_v<Del>, DelMoveRef&&>) = delete;
 
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
 	constexpr unique_ptr(nullptr_t = nullptr) noexcept : data_() {}
 
-    MSTL_CONSTEXPR23 unique_ptr(unique_ptr&&) = default;
+    MSTL_CONSTEXPR20 unique_ptr(unique_ptr&&) = default;
 
     template <typename U, typename E, enable_if_t<conjunction_v<safe_conversion<U, E>,
         conditional_t<is_reference_v<Deleter>, is_same<E, Deleter>, is_convertible<E, Deleter>>>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(unique_ptr<U, E>&& x) noexcept
+    MSTL_CONSTEXPR20 unique_ptr(unique_ptr<U, E>&& x) noexcept
 	    : data_(x.release(), _MSTL forward<E>(x.get_deleter())) {}
 
     ~unique_ptr() noexcept {
@@ -989,43 +989,43 @@ public:
 
     template <typename U, typename E, enable_if_t<conjunction_v<
         safe_conversion<U, E>, is_assignable<deleter_type&, E&&>>, int> = 0>
-	MSTL_CONSTEXPR23 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
+	MSTL_CONSTEXPR20 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
 	    reset(x.release());
 	    get_deleter() = _MSTL forward<E>(x.get_deleter());
 	    return *this;
 	}
 
-    MSTL_CONSTEXPR23 unique_ptr& operator =(nullptr_t) noexcept {
+    MSTL_CONSTEXPR20 unique_ptr& operator =(nullptr_t) noexcept {
 	    reset();
 	    return *this;
     }
 
-    MSTL_CONSTEXPR23 add_lvalue_reference_t<element_type> operator *() const
+    MSTL_CONSTEXPR20 add_lvalue_reference_t<element_type> operator *() const
     noexcept(noexcept(*_MSTL declval<pointer>())) {
 	    MSTL_DEBUG_VERIFY(get() != pointer(), "_MSTL add_lvalue_reference_t<element_type> failed");
 	    return *get();
     }
-    MSTL_CONSTEXPR23 pointer operator ->() const noexcept {
+    MSTL_CONSTEXPR20 pointer operator ->() const noexcept {
 	    MSTL_DEBUG_VERIFY(get() != pointer(), "_MSTL operator->() failed");
 	    return get();
     }
 
-    MSTL_CONSTEXPR23 pointer get() const noexcept { return data_.get_ptr(); }
-    MSTL_CONSTEXPR23 deleter_type& get_deleter() noexcept { return data_.get_deleter(); }
-    MSTL_CONSTEXPR23 const deleter_type& get_deleter() const noexcept { return data_.get_deleter(); }
+    MSTL_CONSTEXPR20 pointer get() const noexcept { return data_.get_ptr(); }
+    MSTL_CONSTEXPR20 deleter_type& get_deleter() noexcept { return data_.get_deleter(); }
+    MSTL_CONSTEXPR20 const deleter_type& get_deleter() const noexcept { return data_.get_deleter(); }
 
-    MSTL_CONSTEXPR23 explicit operator bool() const noexcept {
+    MSTL_CONSTEXPR20 explicit operator bool() const noexcept {
         return get() == pointer() ? false : true;
     }
 
-    MSTL_CONSTEXPR23 pointer release() noexcept { return data_.release(); }
-    MSTL_CONSTEXPR23 void reset(pointer ptr = pointer()) noexcept {
+    MSTL_CONSTEXPR20 pointer release() noexcept { return data_.release(); }
+    MSTL_CONSTEXPR20 void reset(pointer ptr = pointer()) noexcept {
 	    static_assert(is_invocable_v<deleter_type&, pointer>,
 	        "deleter of unique_ptr must be invocable with a pointer");
 	    data_.reset(_MSTL move(ptr));
     }
 
-    MSTL_CONSTEXPR23 void swap(unique_ptr& x) noexcept {
+    MSTL_CONSTEXPR20 void swap(unique_ptr& x) noexcept {
 	    static_assert(is_swappable_v<Deleter>, "deleter must be swappable.");
 	    data_.swap(x.data_);
     }
@@ -1059,15 +1059,15 @@ public:
 
     template <typename U, typename Del = Deleter, typename = DeleterConstraint<Del>,
         enable_if_t<safe_conversion_raw<U>::value, int> = 0>
-    MSTL_CONSTEXPR23 explicit unique_ptr(U ptr) noexcept : data_(ptr) {}
+    MSTL_CONSTEXPR20 explicit unique_ptr(U ptr) noexcept : data_(ptr) {}
 
     template <typename U, typename Del = deleter_type,
         enable_if_t<conjunction_v<safe_conversion_raw<U>, is_copy_constructible<Del>>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(U ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
+    MSTL_CONSTEXPR20 unique_ptr(U ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
 
     template <typename U, typename Del = deleter_type,
         enable_if_t<conjunction_v<safe_conversion_raw<U>, is_move_constructible<Del>>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(U ptr, enable_if_t<!is_lvalue_reference_v<Del>, Del&&> del) noexcept
+    MSTL_CONSTEXPR20 unique_ptr(U ptr, enable_if_t<!is_lvalue_reference_v<Del>, Del&&> del) noexcept
     	: data_(_MSTL move(ptr), _MSTL move(del)) {}
 
     template <typename U, typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>,
@@ -1081,7 +1081,7 @@ public:
 
     template <typename U, typename E, enable_if_t<conjunction_v<safe_conversion<U, E>,
 	       conditional_t<is_reference_v<Deleter>, is_same<E, Deleter>, is_convertible<E, Deleter>>>, int> = 0>
-    MSTL_CONSTEXPR23 unique_ptr(unique_ptr<U, E>&& x) noexcept
+    MSTL_CONSTEXPR20 unique_ptr(unique_ptr<U, E>&& x) noexcept
 	    : data_(x.release(), _MSTL forward<E>(x.get_deleter())) {}
 
     MSTL_CONSTEXPR20 ~unique_ptr() {
@@ -1095,37 +1095,37 @@ public:
 
     template <typename U, typename E, enable_if_t<conjunction_v<
         safe_conversion<U, E>, is_assignable<deleter_type&, E&&>, int>> = 0>
-    MSTL_CONSTEXPR23 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
+    MSTL_CONSTEXPR20 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
 	    reset(x.release());
 	    get_deleter() = _MSTL forward<E>(x.get_deleter());
 	    return *this;
 	}
 
-    MSTL_CONSTEXPR23 unique_ptr& operator =(nullptr_t) noexcept {
+    MSTL_CONSTEXPR20 unique_ptr& operator =(nullptr_t) noexcept {
 	    reset();
 	    return *this;
     }
 
-    MSTL_CONSTEXPR23 add_lvalue_reference_t<element_type> operator [](size_t idx) const {
+    MSTL_CONSTEXPR20 add_lvalue_reference_t<element_type> operator [](size_t idx) const {
 	    MSTL_DEBUG_VERIFY(get() != pointer(), "_MSTL add_lvalue_reference_t<element_type> failed");
 	    return get()[idx];
     }
 
-    MSTL_CONSTEXPR23 pointer get() const noexcept { return data_.get_ptr(); }
-    MSTL_CONSTEXPR23 deleter_type& get_deleter() noexcept { return data_.get_deleter(); }
-    MSTL_CONSTEXPR23 const deleter_type& get_deleter() const noexcept { return data_.get_deleter(); }
+    MSTL_CONSTEXPR20 pointer get() const noexcept { return data_.get_ptr(); }
+    MSTL_CONSTEXPR20 deleter_type& get_deleter() noexcept { return data_.get_deleter(); }
+    MSTL_CONSTEXPR20 const deleter_type& get_deleter() const noexcept { return data_.get_deleter(); }
 
-    MSTL_CONSTEXPR23 explicit operator bool() const noexcept {
+    MSTL_CONSTEXPR20 explicit operator bool() const noexcept {
         return get() == pointer() ? false : true;
     }
 
-    MSTL_CONSTEXPR23 pointer release() noexcept { return data_.release(); }
+    MSTL_CONSTEXPR20 pointer release() noexcept { return data_.release(); }
     template <typename U, enable_if_t<conjunction_v<disjunction<is_same<U, pointer>, conjunction<
         is_same<pointer, element_type*>, is_pointer<U>, is_convertible<remove_pointer_t<U>(*)[],element_type(*)[]>>>>, int> = 0>
-    MSTL_CONSTEXPR23 void reset(U ptr) noexcept { data_.reset(_MSTL move(ptr)); }
-    MSTL_CONSTEXPR23 void reset(nullptr_t = nullptr) noexcept { reset(pointer()); }
+    MSTL_CONSTEXPR20 void reset(U ptr) noexcept { data_.reset(_MSTL move(ptr)); }
+    MSTL_CONSTEXPR20 void reset(nullptr_t = nullptr) noexcept { reset(pointer()); }
 
-    MSTL_CONSTEXPR23 void swap(unique_ptr& x) noexcept {
+    MSTL_CONSTEXPR20 void swap(unique_ptr& x) noexcept {
 	    static_assert(is_swappable_v<Deleter>, "deleter must be swappable");
 	    data_.swap(x.data_);
     }
@@ -1140,105 +1140,105 @@ void swap(unique_ptr<T, Deleter>& lh, unique_ptr<T, Deleter>& rh) noexcept {
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator ==(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     return lh.get() == rh.get();
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator ==(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return !lh;
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator ==(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return !rh;
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator !=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     return lh.get() != rh.get();
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator !=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return static_cast<bool>(lh);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator !=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return static_cast<bool>(rh);
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     using common_t = common_type_t<typename unique_ptr<T, D>::pointer, typename unique_ptr<U, E>::pointer>;
     return _MSTL less<common_t>()(lh.get(), rh.get());
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return _MSTL less<typename unique_ptr<T, D>::pointer>()(lh.get(), nullptr);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, rh.get());
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     return rh.get() < lh.get();
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, lh.get());
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return _MSTL less<typename unique_ptr<T, D>::pointer>()(rh.get(), nullptr);
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     return !(lh > rh);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return !(lh > nullptr);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator <=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return !(nullptr > rh);
 }
 
 template <typename T, typename D, typename U, typename E>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
     const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
     return !(lh < rh);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
     const unique_ptr<T, D>& lh, nullptr_t) {
     return !(lh < nullptr);
 }
 template <typename T, typename D>
-MSTL_NODISCARD MSTL_CONSTEXPR23 bool operator >=(
+MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return !(nullptr < rh);
 }
 
 template <typename T, typename Deleter>
 struct hash<unique_ptr<T, Deleter>> {
-    MSTL_CONSTEXPR23 size_t operator ()(const unique_ptr<T, Deleter>& ptr) const
+    MSTL_CONSTEXPR20 size_t operator ()(const unique_ptr<T, Deleter>& ptr) const
     noexcept(noexcept(_MSTL declval<_MSTL hash<
         typename unique_ptr<T, Deleter>::pointer>>()(_MSTL declval<typename unique_ptr<T, Deleter>::pointer>()))) {
         return hash<T>()(ptr.get());
@@ -1247,11 +1247,11 @@ struct hash<unique_ptr<T, Deleter>> {
 
 
 template <typename T, typename... Args, enable_if_t<!is_array_v<T>, int> = 0>
-MSTL_CONSTEXPR23 unique_ptr<T> make_unique(Args&&... args) {
+MSTL_CONSTEXPR20 unique_ptr<T> make_unique(Args&&... args) {
     return unique_ptr<T>(new T(_MSTL forward<Args>(args)...));
 }
 template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
-MSTL_CONSTEXPR23 unique_ptr<T> make_unique(const size_t len) {
+MSTL_CONSTEXPR20 unique_ptr<T> make_unique(const size_t len) {
     return unique_ptr<T>(new remove_extent_t<T>[len]());
 }
 template <typename T, typename... Args, enable_if_t<is_bounded_array_v<T>, int> = 0>
@@ -1259,11 +1259,11 @@ unique_ptr<T> make_unique(Args&&...) = delete;
 
 
 template <typename T, enable_if_t<!is_array_v<T>, int> = 0>
-MSTL_CONSTEXPR23 unique_ptr<T> make_unique_for_overwrite() {
+MSTL_CONSTEXPR20 unique_ptr<T> make_unique_for_overwrite() {
     return unique_ptr<T>(new T());
 }
 template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
-MSTL_CONSTEXPR23 unique_ptr<T> make_unique_for_overwrite(const size_t len) {
+MSTL_CONSTEXPR20 unique_ptr<T> make_unique_for_overwrite(const size_t len) {
     return unique_ptr<T>(new remove_extent_t<T>[len]());
 }
 template <typename T, typename... Args, enable_if_t<is_bounded_array_v<T>, int> = 0>
@@ -1703,7 +1703,7 @@ shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
 
 template <typename T>
 struct hash<shared_ptr<T>> {
-    MSTL_CONSTEXPR23 size_t operator ()(const shared_ptr<T>& ptr) const
+    MSTL_CONSTEXPR20 size_t operator ()(const shared_ptr<T>& ptr) const
     noexcept(noexcept(_MSTL declval<_MSTL hash<
         typename shared_ptr<T>::pointer>>()(_MSTL declval<typename shared_ptr<T>::pointer>()))) {
         return hash<T>()(ptr.get());

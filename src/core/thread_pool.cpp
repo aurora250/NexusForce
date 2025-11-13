@@ -124,10 +124,4 @@ void thread_pool::stop() {
     _INNER __thread_pool_id_generator::reset_id();
 }
 
-
-thread_pool& get_instance_thread_pool() {
-    static thread_pool instance;
-    return instance;
-}
-
 MSTL_END_NAMESPACE__

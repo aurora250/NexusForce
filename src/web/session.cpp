@@ -1,4 +1,5 @@
 #include <MSTL/web/session.hpp>
+#include <MSTL/core/character.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void cookie::swap(cookie& other) noexcept {

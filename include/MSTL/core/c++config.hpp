@@ -1,5 +1,5 @@
-#ifndef MSTL_BASICLIB_HPP__
-#define MSTL_BASICLIB_HPP__
+#ifndef MSTL_CPPCONFIG_HPP__
+#define MSTL_CPPCONFIG_HPP__
 #include "undef_cmacro.hpp"
 
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(_M_X86)
@@ -497,4 +497,4 @@ MSTL_INLINE17 constexpr size_t MEMORY_ALIGN_THRESHHOLD = 16UL;
 MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BASICLIB_HPP__
+#endif // MSTL_CPPCONFIG_HPP__
