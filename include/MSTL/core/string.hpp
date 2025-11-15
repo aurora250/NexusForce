@@ -2,6 +2,7 @@
 #define MSTL_STRING_HPP__
 #include "cstring.hpp"
 #include "basic_string.hpp"
+#include <typeinfo>
 MSTL_BEGIN_NAMESPACE__
 
 using string    = basic_string<char>;

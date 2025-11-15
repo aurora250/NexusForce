@@ -1,7 +1,6 @@
 #ifndef MSTL_CHECK_TYPE_HPP__
 #define MSTL_CHECK_TYPE_HPP__
 #include "character.hpp"
-#include <typeinfo>
 #ifdef MSTL_COMPILER_GNUC__
 #include <cxxabi.h>
 #endif // MSTL_COMPILER_GNUC__

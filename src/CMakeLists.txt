@@ -155,6 +155,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
+        core/logger.cpp
+        ../include/MSTL/core/log_sink.hpp
+        core/log_sink.cpp
 )
 
 # 编译为动态库

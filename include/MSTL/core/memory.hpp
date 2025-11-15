@@ -1382,7 +1382,7 @@ public:
     shared_ptr(nullptr_t = nullptr) noexcept {}
 
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    explicit shared_ptr(U* ptr)
+    shared_ptr(U* ptr)
     : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr)) {
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
@@ -1409,7 +1409,7 @@ public:
         return *this;
     }
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    explicit shared_ptr(const shared_ptr<U>& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
+    shared_ptr(const shared_ptr<U>& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
         if (owner_) owner_->incref();
     }
 
@@ -1589,7 +1589,9 @@ protected:
 };
 
 
-template <typename T, typename... Args, enable_if_t<!is_unbounded_array_v<T>, int> = 0>
+template <typename T, typename... Args, enable_if_t<
+    !is_unbounded_array_v<T> && is_constructible_v<T, Args...>, int> = 0
+>
 shared_ptr<T> make_shared(Args&&... args) {
     auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
     using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
@@ -1604,15 +1606,15 @@ shared_ptr<T> make_shared(Args&&... args) {
     size_t aligned_addr = (reinterpret_cast<size_t>(mem) + (align - 1)) & ~(align - 1);
     Counter* counter = reinterpret_cast<Counter*>(aligned_addr);
 #endif
-    T* object = reinterpret_cast<T*>(reinterpret_cast<char*>(counter) + offset);
+    T* object = reinterpret_cast<T*>(reinterpret_cast<byte_t*>(counter) + offset);
     try {
         _MSTL construct(object, _MSTL forward<Args>(args)...);
     }
     catch (...) {
 #if MSTL_STANDARD_17__
-        ::operator delete(mem, static_cast<std::align_val_t>(align));
+        operator delete(mem, static_cast<std::align_val_t>(align));
 #else
-        ::operator delete(mem);
+        operator delete(mem);
 #endif
         Exception(MemoryError("shared ptr construction failed."));
     }
@@ -1629,7 +1631,7 @@ shared_ptr<T> make_shared_for_overwrite() {
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
 #if MSTL_STANDARD_17__
-    void* mem = ::operator new(size, static_cast<std::align_val_t>(align));
+    void* mem = operator new(size, static_cast<std::align_val_t>(align));
     auto* counter = static_cast<Counter*>(mem);
 #else
     void* mem = ::operator new(size + align - 1);
@@ -1642,9 +1644,9 @@ shared_ptr<T> make_shared_for_overwrite() {
     }
     catch (...) {
 #if MSTL_STANDARD_17__
-        ::operator delete(mem, static_cast<std::align_val_t>(align));
+        operator delete(mem, static_cast<std::align_val_t>(align));
 #else
-        ::operator delete(mem);
+        operator delete(mem);
 #endif
         Exception(MemoryError("shared ptr construction failed."));
     }

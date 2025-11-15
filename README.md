@@ -393,14 +393,12 @@ lib:
 atomic
 future
 ranges
-logger
-cuda-mutrix
+cuda-matrix
 xml
 yaml
 postgresql
-zip
 
 fix:
 strong assert
 strong serialize
-support macos
+support macOS

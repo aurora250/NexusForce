@@ -1391,9 +1391,7 @@ void test_timer(){
     auto now = std::chrono::system_clock::now();
     auto target = now + std::chrono::hours(1);
     timer2.expires_at(target);
-    timer2.async_wait([]() {
-        println("1小时后执行");
-    });
+    timer2.async_wait([]() { println("1小时后执行"); });
 
     _MSTL steady_timer timer3;
     timer3.expires_from_now(1000);
@@ -1408,6 +1406,25 @@ void test_timer(){
     });
 
     this_thread::sleep_for(chrono::seconds(7));
+}
+
+void test_log() {
+    auto& logger = logger::instance();
+    logger.set_level(LOG_LEVEL::DEBUG);
+    logger.add_context("app", "myapp");
+    logger.set_filter([](const log_event& ev) -> bool {
+        return ev.level >= LOG_LEVEL::INFO;
+    });
+    const auto sink = make_shared<console_sink>();
+    sink->set_formatter(make_unique<log_formatter>("[{time}][{level}][{context.app}] {message}"));
+    logger.add_sink(sink);
+    logger.enable_async(true);
+
+    MSTL_LOG_INFO("This is a info message");
+    logger.flush();
+
+    logger.enable_async(false);
+    logger.flush();
 }
 
 void test_sql(){
@@ -1515,9 +1532,7 @@ void test_mysql() {
     database_pool pool(DB_TYPE::MYSQL, mysql_config);
 
     const auto sql = sql_builder().select({"ISBN", "BookName"}).from("book").where("CollectNumber = 10").build();
-    auto pstmt = dynamic_cast<mysql_connect*>(
-        pool.get_tb_connect().get()
-        )->prepare_statement(sql);
+    auto pstmt = dynamic_pointer_cast<mysql_connect>(pool.get_tb_connect())->prepare_statement(sql);
 
     auto res = pstmt->execute_query();
     println(res->column_names());
@@ -1633,8 +1648,6 @@ void test_dns() {
                 println("  Query failed\n");
             }
         }
-
-
     } catch (...) {}
 #endif
 }

@@ -322,8 +322,14 @@ private:
 	template <typename F, bool IsSelf = is_same_v<remove_cvref_t<F>, function>>
 	using enable_decay_t = typename enable_if_t<!IsSelf, decay<F>>::type;
 
-	template <typename F, typename DF = enable_decay_t<F>, typename Res1 = _INNER __invoke_result_aux<DF&, Args...>>
-	struct callable_t : _INNER __is_invocable_aux<Res1, Res>::type {};
+	template <typename F, typename = void>
+	struct callable_t : false_type {};
+
+	template <typename F>
+	struct callable_t<F, enable_if_t<
+		!is_same_v<remove_cvref_t<F>, function> &&
+		is_invocable_r_v<Res, decay_t<F>&, Args...>
+	>> : true_type {};
 
 	template<typename F>
 	using handler_t = _INNER __function_manage_handler<Res(Args...), decay_t<F>>;
@@ -401,7 +407,7 @@ public:
 	}
 
 	template <typename F, enable_if_t<callable_t<F>::value, int> = 0>
-	function& operator =(F&& f) noexcept(handler_t<F>::template _S_nothrow_init<F>()) {
+	function& operator =(F&& f) noexcept(handler_t<F>::template nothrow_init<F>()) {
 		function(_MSTL forward<F>(f)).swap(*this);
 		return *this;
 	}
