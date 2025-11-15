@@ -368,9 +368,7 @@ void test_print() {
     println(&RB_TREE_RED, &RB_TREE_BLACK);
     println(f, static_cast<size_t>(enu), uni);
     println(escape("\n\\\"\v"), cs, err);
-    println(initialize<int>, make_shared<int, int>, _MSTL datetime::epoch);
-    println(mop, null_mop, mfp, p);
-    println(c_arr, arr);
+    println(p, c_arr, arr);
     println(lls);
     println(bm);
     println(v);
@@ -1427,6 +1425,133 @@ void test_log() {
     logger.flush();
 }
 
+void test_ranges(){
+#ifdef MSTL_STANDARD_20__
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    auto view1 = vec
+        | rv::filter([](int x) { return x % 2 == 0; })
+        | rv::transform([](int x) { return x * x; });
+    println(view1);
+
+    auto view2 = vec
+        | rv::filter([](int x) { return x > 3; })
+        | rv::filter([](int x) { return x % 2 == 1; })
+        | rv::transform([](int x) { return x * 10; });
+    println(view2);
+
+    auto view3 = vec
+        | rv::drop(3)
+        | rv::take(4)
+        | rv::transform([](int x) { return x * 2; });
+    println(view3);
+
+    auto adaptor = rv::filter([](int x) { return x % 2 == 0; })
+                 | rv::transform([](int x) { return x + 100; });
+    auto view4 = vec | adaptor;
+    println(view4);
+
+    vector<string> words = {"hello", "world", "cpp", "range", "view", "library"};
+    auto view5 = words
+        | rv::filter([](const string& s) { return s.length() > 3; })
+        | rv::transform([](const string& s) { return s.length(); })
+        | rv::filter([](size_t len) { return len < 6; });
+    println(view5);
+
+    auto view6 = vec
+        | rv::filter([](int x) { return x <= 5; })
+        | rv::reverse();
+    println(view6);
+
+
+    int filter_count = 0;
+    int transform_count = 0;
+
+    auto view7 = vec
+        | rv::filter([&filter_count](int x) {
+            ++filter_count;
+            println("  Filter called for", x);
+            return x % 2 == 0;
+        })
+        | rv::transform([&transform_count](int x) {
+            ++transform_count;
+            println("  Transform called for", x);
+            return x * x;
+        });
+    println("filter_count: ", filter_count, ", transform_count: ", transform_count);
+
+    int result_count = 0;
+    for (auto x : view7) {
+        println(x);
+        if (++result_count >= 3) break;
+    }
+    println("filter_count: ", filter_count, ", transform_count: ", transform_count);
+
+    auto view8 = vec
+            | rv::take(8)
+            | rv::drop(2)
+            | rv::filter([](int x) { return x % 2 == 1; })
+            | rv::transform([](int x) { return x * x; })
+            | rv::filter([](int x) { return x < 50; });
+    println(view8);
+
+    auto view9 = rv::transform(
+        rv::filter(vec, [](int x) { return x > 5; }),
+        [](int x) { return x * 10; }
+    );
+    println(view9);
+
+    const vector<int> const_vec = {1, 2, 3, 4, 5};
+    const auto view10 = const_vec
+        | rv::filter([](int x) { return x % 2 == 1; })
+        | rv::transform([](int x) { return x * 5; });
+    println(view10);
+
+    auto view11 = vec
+        | rv::take_while([](int x) { return x < 7; })
+        | rv::transform([](int x) { return x * 3; });
+    println(view11);
+
+    auto view12 = vec
+        | rv::drop_while([](int x) { return x < 5; })
+        | rv::transform([](int x) { return x + 100; });
+    println(view12);
+
+    auto view13 = vec
+        | rv::drop_while([](int x){ return x % 2 == 1; })
+        | rv::take_while([](int x) { return x <= 8; }) | rv::transform([](int x) { return x * 2; });
+    println(view13);
+
+    vector<int> a{1, 2, 3};
+    vector<int> b{4, 5, 6};
+
+    auto view14 = a
+        | rv::concat(b)
+        | rv::transform([](int x) { return x * 10; });
+    println(view14);
+
+    string sentence = "hello world cpp ranges views";
+    auto word_str = sentence | rv::split(' ');
+    auto upper_words = word_str
+        | rv::transform([](auto subrange) {
+            return subrange | rv::transform([](char c){ return _MSTL to_uppercase(c); });
+        });
+
+    for (const auto& word_view : upper_words) {
+        for (char c : word_view)
+            print(c);
+        println();
+    }
+
+    auto view15 = vec
+        | rv::slice(2, 5)
+        | rv::filter([](int x) { return x > 4; })
+        | rv::take(2);
+    println(view15);
+#endif
+}
+
 void test_sql(){
     auto sql1 = sql_builder()
         .select({"id", "name", "email"})
@@ -1679,5 +1804,6 @@ void test_tpool() {
     pool.submit_task(test_enctype);
     pool.submit_task(test_color);
     pool.submit_task(test_sql);
+    pool.submit_task(test_ranges);
     pool.stop();
 }

@@ -21,7 +21,7 @@ template <typename Iterator1, typename Iterator2, typename BinaryOperation,
 MSTL_CONSTEXPR20 Iterator2 adjacent_difference(Iterator1 first, Iterator1 last,
 	Iterator2 result, BinaryOperation binary_op) {
 	if (first == last) return result;
-	using T = iter_val_t<Iterator1>;
+	using T = iter_value_t<Iterator1>;
 	*result = *first;
 	T value = *first;
 	while (++first != last) {
@@ -34,7 +34,7 @@ MSTL_CONSTEXPR20 Iterator2 adjacent_difference(Iterator1 first, Iterator1 last,
 
 template <typename Iterator1, typename Iterator2>
 MSTL_CONSTEXPR20 Iterator2 adjacent_difference(Iterator1 first, Iterator1 last, Iterator2 result) {
-	return _MSTL adjacent_difference(first, last, result, _MSTL minus<iter_val_t<Iterator1>>());
+	return _MSTL adjacent_difference(first, last, result, _MSTL minus<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator1, typename Iterator2, typename T, typename BinaryOperation1, typename BinaryOperation2,
@@ -56,7 +56,7 @@ template <typename Iterator1, typename Iterator2, typename BinaryOperation,
 MSTL_CONSTEXPR20 Iterator2 partial_sum(Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op) {
 	if (first == last) return result;
 	*result = *first;
-	iter_val_t<Iterator1> value = *first;
+	iter_value_t<Iterator1> value = *first;
 	while (++first != last) {
 		value = binary_op(value, *first);
 		*++result = value;
@@ -66,7 +66,7 @@ MSTL_CONSTEXPR20 Iterator2 partial_sum(Iterator1 first, Iterator1 last, Iterator
 
 template <typename Iterator1, typename Iterator2>
 MSTL_CONSTEXPR20 Iterator2 partial_sum(Iterator1 first, Iterator1 last, Iterator2 result) {
-	return _MSTL partial_sum(first, last, result, _MSTL plus<iter_val_t<Iterator1>>());
+	return _MSTL partial_sum(first, last, result, _MSTL plus<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>

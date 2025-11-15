@@ -45,6 +45,9 @@ private:
     struct part {
         bool is_placeholder;
         string text;
+
+        part(const bool ph, string t) noexcept
+        : is_placeholder(ph), text(_MSTL move(t)) {}
     };
     string pattern_;
     vector<part> parts_;

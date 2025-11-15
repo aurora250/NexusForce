@@ -174,10 +174,10 @@ public:
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename HashFcn = hash<iter_val_t<Iterator>>, typename Compare
-    = equal_to<iter_val_t<Iterator>>, typename Alloc = allocator<iter_val_t<Iterator>>>
+template <typename Iterator, typename HashFcn = hash<iter_value_t<Iterator>>, typename Compare
+    = equal_to<iter_value_t<Iterator>>, typename Alloc = allocator<iter_value_t<Iterator>>>
 unordered_set(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
--> unordered_set<iter_val_t<Iterator>, HashFcn, Compare, Alloc>;
+-> unordered_set<iter_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
 template <typename Key, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>,
     typename Alloc = allocator<Key>>
@@ -186,11 +186,11 @@ unordered_set(std::initializer_list<Key>, HashFcn = HashFcn(), Compare = Compare
 
 template <typename Iterator, typename Alloc>
 unordered_set(Iterator, Iterator, Alloc)
--> unordered_set<iter_val_t<Iterator>, hash<iter_val_t<Iterator>>, equal_to<iter_val_t<Iterator>>, Alloc>;
+-> unordered_set<iter_value_t<Iterator>, hash<iter_value_t<Iterator>>, equal_to<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Iterator, typename HashFcn, typename Alloc>
 unordered_set(Iterator, Iterator, HashFcn, Alloc)
--> unordered_set<iter_val_t<Iterator>, HashFcn, equal_to<iter_val_t<Iterator>>, Alloc>;
+-> unordered_set<iter_value_t<Iterator>, HashFcn, equal_to<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Key, typename Alloc>
 unordered_set(std::initializer_list<Key>, Alloc)
@@ -374,10 +374,10 @@ public:
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename HashFcn = hash<iter_val_t<Iterator>>, typename Compare
-    = equal_to<iter_val_t<Iterator>>, typename Alloc = allocator<iter_val_t<Iterator>>>
+template <typename Iterator, typename HashFcn = hash<iter_value_t<Iterator>>, typename Compare
+    = equal_to<iter_value_t<Iterator>>, typename Alloc = allocator<iter_value_t<Iterator>>>
 unordered_multiset(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
--> unordered_multiset<iter_val_t<Iterator>, HashFcn, Compare, Alloc>;
+-> unordered_multiset<iter_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
 template <typename Value, typename HashFcn = hash<Value>, typename Compare = equal_to<Value>,
     typename Alloc = allocator<Value>>
@@ -386,11 +386,11 @@ unordered_multiset(std::initializer_list<Value>, HashFcn = HashFcn(), Compare = 
 
 template <typename Iterator, typename Alloc>
 unordered_multiset(Iterator, Iterator, Alloc)
--> unordered_multiset<iter_val_t<Iterator>, hash<iter_val_t<Iterator>>, equal_to<iter_val_t<Iterator>>, Alloc>;
+-> unordered_multiset<iter_value_t<Iterator>, hash<iter_value_t<Iterator>>, equal_to<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Iterator, typename HashFcn, typename Alloc>
 unordered_multiset(Iterator, Iterator, HashFcn, Alloc)
--> unordered_multiset<iter_val_t<Iterator>, HashFcn, equal_to<iter_val_t<Iterator>>, Alloc>;
+-> unordered_multiset<iter_value_t<Iterator>, HashFcn, equal_to<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Value, typename Alloc>
 unordered_multiset(std::initializer_list<Value>, Alloc)

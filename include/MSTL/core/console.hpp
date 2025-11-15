@@ -1,7 +1,6 @@
 #ifndef MSTL_CONSOLE_HPP__
 #define MSTL_CONSOLE_HPP__
 #include "color.hpp"
-#include "check_type.hpp"
 #include "mutex.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -162,6 +161,24 @@ public:
 
 
 template <typename T>
+struct io_base<T, enable_if_t<is_base_of_v<_MSTL_RANGES view_base<T>, T>>> {
+    static void write(sys_console& console, const T& value) {
+        string result;
+        if (value.begin() == value.end()) {
+            result = "[]";
+        } else {
+            result += "[ ";
+            for (auto iter = value.begin(); iter != value.end(); ++iter) {
+                if (iter != value.begin()) result += ", ";
+                result += to_string(*iter);
+            }
+            result += " ]";
+        }
+        console.write_string(result.view());
+    }
+};
+
+template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iserialize<T>, T>>> {
     static void write(sys_console& console, const T& value) {
         console.write_string(value.to_string());
@@ -248,33 +265,6 @@ struct io_base<T, enable_if_t<is_union_v<T>>> {
         console.write_string(_MSTL to_string(value));
     }
 };
-
-
-#pragma warning(push)
-#pragma warning(disable: 4180)
-
-template <typename T>
-struct io_base<T, enable_if_t<is_function_v<T>>> {
-    static void write(sys_console& console, const T&) {
-        console.write_string(_MSTL check_type<T>());
-    }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_member_object_pointer_v<T>>> {
-    static void write(sys_console& console, const T& ) {
-        console.write_string(_MSTL check_type<T>());
-    }
-};
-
-template <typename T>
-struct io_base<T, enable_if_t<is_member_function_pointer_v<T>>> {
-    static void write(sys_console& console, const T&) {
-        console.write_string(_MSTL check_type<T>());
-    }
-};
-
-#pragma warning(pop)
 
 
 template <typename T>

@@ -255,14 +255,14 @@ private:
 
     template <typename Iterator1, typename Iterator2>
     MSTL_CONSTEXPR20 Iterator2 bit_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
-        iter_dif_t<Iterator1> n = _MSTL distance(first, last);
+        iter_difference_t<Iterator1> n = _MSTL distance(first, last);
         for (; n > 0; --n, ++first, ++result)
             *result = *first;
         return result;
     }
     template <typename Iterator1, typename Iterator2>
     MSTL_CONSTEXPR20 Iterator2 bit_copy_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
-        iter_dif_t<Iterator1> n = _MSTL distance(first, last);
+        iter_difference_t<Iterator1> n = _MSTL distance(first, last);
         for (; n > 0; --n)
             *--result = *--last;
         return result;
@@ -292,7 +292,7 @@ private:
         }
     }
 
-    template <class Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 void initialize_range(Iterator first, Iterator last) {
         start_ = iterator();
         finish_ = iterator();
@@ -300,21 +300,21 @@ private:
         for ( ; first != last; ++first)
             push_back(*first);
     }
-    template <class Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 void initialize_range(Iterator first, Iterator last) {
         const size_type n = _MSTL distance(first, last);
         initialize(n);
         bit_copy(first, last, start_);
     }
 
-    template <class Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 void insert_range(iterator pos, Iterator first, Iterator last) {
         for ( ; first != last; ++first) {
             pos = insert(pos, *first);
             ++pos;
         }
     }
-    template <class Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 void insert_range(iterator position, Iterator first, Iterator last) {
         if (first != last) {
             size_type n = 0;
@@ -384,7 +384,7 @@ public:
         return *this;
     }
 
-    template <class InputIterator>
+    template <typename InputIterator>
     MSTL_CONSTEXPR20 bitmap(InputIterator first, InputIterator last) {
         this->initialize_range(first, last);
     }
@@ -463,7 +463,7 @@ public:
         return begin() + n;
     }
 
-    template <class Iterator>
+    template <typename Iterator>
     MSTL_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
         insert_range(position, first, last, iterator_category(first));
     }

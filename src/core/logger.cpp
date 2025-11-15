@@ -33,10 +33,9 @@ void logger::stop_worker() {
         auto timeout = std::chrono::seconds(5);
         if (worker_.joinable()) {
             auto start = std::chrono::steady_clock::now();
-            while (worker_.joinable() &&
-                   std::chrono::steady_clock::now() - start < timeout) {
+            while (worker_.joinable() && std::chrono::steady_clock::now() - start < timeout) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                   }
+            }
 
             if (worker_.joinable()) {
                 println("Warning: Worker thread did not exit in time, detaching...");

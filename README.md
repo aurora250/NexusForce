@@ -392,7 +392,6 @@ sudo make install
 lib:
 atomic
 future
-ranges
 cuda-matrix
 xml
 yaml

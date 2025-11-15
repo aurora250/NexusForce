@@ -154,13 +154,87 @@ concept random_access_iterator = bidirectional_iterator<Iterator>
 	{ it2 - it1 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
 	{ it1[n] } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
 };
+
+
+template <typename Iterator>
+concept input_or_output_iterator = input_iterator<Iterator>;
+
+
+template <typename Sentinel, typename Iterator>
+concept sentinel_for =
+    input_or_output_iterator<Iterator> &&
+    semiregular<Sentinel> &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ i == s } -> convertible_to<bool>;
+		{ i != s } -> convertible_to<bool>;
+    };
+
+
+template <typename T>
+concept integral = is_integral_v<T>;
+template <typename T>
+concept signed_integral = integral<T> && is_signed_v<T>;
+template <typename T>
+concept unsigned_integral = integral<T> && !signed_integral<T>;
+
+template <typename T>
+concept floating_point = is_floating_point_v<T>;
+
+template <typename T, typename... Args>
+concept invocable = is_invocable_v<T, Args...>;
+
+template <typename F, typename... Args>
+concept boolean_testable_return = convertible_to<invoke_result_t<F, Args...>, bool>;
+
+template <typename F, typename... Args>
+concept predicate = invocable<F, Args...> && boolean_testable_return<F, Args...>;
+
+
+template <typename Sentinel, typename Iterator>
+concept sized_sentinel_for =
+    input_iterator<Iterator> &&
+    sentinel_for<Sentinel, Iterator> &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ s - i } -> same_as<iter_difference_t<Iterator>>;
+    } &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ i + (s - i) } -> same_as<Iterator>;
+    };
 #endif // MSTL_STANDARD_20__
+
+
+MSTL_BEGIN_RANGES__
+template <typename Derived>
+struct view_base {
+	constexpr auto begin() const {
+		return static_cast<const Derived*>(this)->begin();
+	}
+	constexpr auto end() const {
+		return static_cast<const Derived*>(this)->end();
+	}
+	constexpr auto begin() {
+		return static_cast<Derived*>(this)->begin();
+	}
+	constexpr auto end() {
+		return static_cast<Derived*>(this)->end();
+	}
+};
+MSTL_END_RANGES__
+
+template <typename T>
+struct is_view : false_type {};
+template <typename D>
+struct is_view<_MSTL_RANGES view_base<D>> : true_type {};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_view_v = is_base_of_v<_MSTL_RANGES view_base<T>, T>;
+
 
 MSTL_BEGIN_INNER__
 template <typename, typename = void>
 MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_cat_t<Iterator>>> = true;
+MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_category_t<Iterator>>> = true;
 MSTL_END_INNER__
 
 
@@ -176,7 +250,7 @@ is_ranges_iter_v<Iterator>;
 
 
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool is_ranges_input_iter_v = is_convertible_v<iter_cat_t<Iterator>, input_iterator_tag>;
+MSTL_INLINE17 constexpr bool is_ranges_input_iter_v = is_convertible_v<iter_category_t<Iterator>, input_iterator_tag>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_input_iter_v =
@@ -187,7 +261,7 @@ is_ranges_input_iter_v<Iterator>;
 
 
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool is_ranges_fwd_iter_v = is_convertible_v<iter_cat_t<Iterator>, forward_iterator_tag>;
+MSTL_INLINE17 constexpr bool is_ranges_fwd_iter_v = is_convertible_v<iter_category_t<Iterator>, forward_iterator_tag>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_fwd_iter_v =
@@ -198,7 +272,7 @@ is_ranges_fwd_iter_v<Iterator>;
 
 
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool is_ranges_bid_iter_v = is_convertible_v<iter_cat_t<Iterator>, bidirectional_iterator_tag>;
+MSTL_INLINE17 constexpr bool is_ranges_bid_iter_v = is_convertible_v<iter_category_t<Iterator>, bidirectional_iterator_tag>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_bid_iter_v =
@@ -209,7 +283,7 @@ is_ranges_bid_iter_v<Iterator>;
 
 
 template <typename Iterator>
-MSTL_INLINE17 constexpr bool is_ranges_rnd_iter_v = is_convertible_v<iter_cat_t<Iterator>, random_access_iterator_tag>;
+MSTL_INLINE17 constexpr bool is_ranges_rnd_iter_v = is_convertible_v<iter_category_t<Iterator>, random_access_iterator_tag>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_rnd_iter_v =
@@ -222,7 +296,7 @@ is_ranges_rnd_iter_v<Iterator>;
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_ranges_cot_iter_v =
 #ifdef MSTL_STANDARD_20__
-is_convertible_v<iter_cat_t<Iterator>, contiguous_iterator_tag>;
+is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
 #else
 is_pointer_v<Iterator>;
 #endif // MSTL_STANDARD_20__
@@ -233,7 +307,7 @@ MSTL_INLINE17 constexpr bool is_cot_iter_v =
 random_access_iterator<Iterator> && 
 #endif // MSTL_STANDARD_20__
 is_lvalue_reference_v<decltype(*_MSTL declval<Iterator&>())> && is_same_v<remove_cv_t<Iterator>, Iterator>
-&& is_pod_v<iter_val_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
+&& is_pod_v<iter_value_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CONCEPTS_HPP__

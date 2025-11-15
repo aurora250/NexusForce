@@ -718,14 +718,14 @@ MSTL_CONSTEXPR20 void destroy(T* pointer) noexcept(is_nothrow_destructible_v<T>)
 }
 
 template <typename Iterator, enable_if_t<
-	is_iter_v<Iterator> && !is_trivially_destructible_v<iter_val_t<Iterator>>, int> = 0>
+	is_iter_v<Iterator> && !is_trivially_destructible_v<iter_value_t<Iterator>>, int> = 0>
 MSTL_CONSTEXPR20 void destroy(Iterator first, Iterator last)
-noexcept(is_nothrow_destructible_v<iter_val_t<Iterator>>) {
+noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
 	for (; first < last; ++first) _MSTL destroy(&*first);
 }
 
 template <typename Iterator, enable_if_t<
-	is_iter_v<Iterator> && is_trivially_destructible_v<iter_val_t<Iterator>>, int> = 0>
+	is_iter_v<Iterator> && is_trivially_destructible_v<iter_value_t<Iterator>>, int> = 0>
 MSTL_CONSTEXPR20 void destroy(Iterator, Iterator) noexcept {}
 
 
@@ -739,115 +739,115 @@ using get_iter_pair_t = pair<add_const_t<typename iterator_traits<Iterator>::val
 
 
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) begin(Container& cont) noexcept(noexcept(cont.begin())) {
 	return cont.begin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) begin(const Container& cont) noexcept(noexcept(cont.begin())) {
 	return cont.begin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) end(Container& cont) noexcept(noexcept(cont.end())) {
 	return cont.end();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) end(const Container& cont) noexcept(noexcept(cont.end())) {
 	return cont.end();
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 T* begin(T (&arr)[Size]) noexcept {
 	return arr;
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 T* end(T (&arr)[Size]) noexcept {
 	return arr + Size;
 }
 
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) cbegin(const Container& cont) noexcept(noexcept(cont.cbegin())) {
 	return cont.cbegin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) cend(const Container& cont) noexcept(noexcept(cont.cend())) {
 	return cont.cend();
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 const T* cbegin(T (&arr)[Size]) noexcept {
     return arr;
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 const T* cend(T (&arr)[Size]) noexcept {
     return arr + Size;
 }
 
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) rbegin(Container& cont) noexcept(noexcept(cont.rbegin())) {
 	return cont.rbegin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) rbegin(const Container& cont) noexcept(noexcept(cont.rbegin())) {
 	return cont.rbegin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) rend(Container& cont) noexcept(noexcept(cont.rend())) {
 	return cont.rend();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) rend(const Container& cont) noexcept(noexcept(cont.rend())) {
 	return cont.rend();
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 reverse_iterator<T*> rbegin(T (&arr)[Size]) noexcept {
 	return reverse_iterator<T*>(arr + Size);
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 reverse_iterator<T*> rend(T (&arr)[Size]) noexcept {
 	return reverse_iterator<T*>(arr);
 }
 template <typename T>
-MSTL_NODISCARD MSTL_CONSTEXPR14
+MSTL_NODISCARD constexpr
 reverse_iterator<const T*> rbegin(std::initializer_list<T> lls) noexcept {
 	return reverse_iterator<const T*>(lls.end());
 }
 template <typename T>
-MSTL_NODISCARD MSTL_CONSTEXPR14
+MSTL_NODISCARD constexpr
 reverse_iterator<const T*> rend(std::initializer_list<T> lls) noexcept {
 	return reverse_iterator<const T*>(lls.begin());
 }
 
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) crbegin(const Container& cont) noexcept(noexcept(cont.crbegin())) {
 	return cont.crbegin();
 }
 template <typename Container>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 decltype(auto) crend(const Container& cont) noexcept(noexcept(cont.crend())) {
 	return cont.crend();
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 reverse_iterator<const T*> crbegin(T (&arr)[Size]) noexcept {
     return reverse_iterator<const T*>(arr + Size);
 }
 template <typename T, size_t Size>
-MSTL_NODISCARD MSTL_ALWAYS_INLINE MSTL_CONSTEXPR14
+MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr
 reverse_iterator<const T*> crend(T (&arr)[Size]) noexcept {
     return reverse_iterator<const T*>(arr);
 }

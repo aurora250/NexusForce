@@ -124,7 +124,7 @@ struct base_char_traits {
     }
 };
 
-template <class CharT, typename IntT = uint32_t>
+template <typename CharT, typename IntT = uint32_t>
 struct wide_char_traits : private base_char_traits<CharT, IntT> {
 private:
     using base_type = base_char_traits<CharT, IntT>;

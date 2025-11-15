@@ -1,6 +1,7 @@
 #ifndef MSTL_MSTLCPP_HPP__
 #define MSTL_MSTLCPP_HPP__
 
+#include "MSTL/core/check_type.hpp"
 #include "MSTL/core/chrono.hpp"
 #include "MSTL/core/file.hpp"
 #include "MSTL/core/device.hpp"
@@ -17,6 +18,7 @@
 #include "MSTL/core/vsprintf.hpp"
 #include "MSTL/core/algorithm.hpp"
 #include "MSTL/core/logger.hpp"
+#include "MSTL/core/ranges.hpp"
 #include "MSTL/ext/lock_free_queue.hpp"
 #include "MSTL/ext/trace_memory.hpp"
 #include "MSTL/db/database_pool.hpp"

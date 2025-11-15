@@ -764,7 +764,7 @@ template <typename T, typename Alloc>
 vector(T, Alloc = Alloc()) -> vector<T, Alloc>;
 
 template <typename Iterator, typename Alloc>
-vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_val_t<Iterator>, Alloc>;
+vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_value_t<Iterator>, Alloc>;
 #endif
 
 MSTL_END_NAMESPACE__

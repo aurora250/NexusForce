@@ -5,6 +5,7 @@
 #include "functional.hpp"
 #include <condition_variable>
 #include <mutex>
+#include <thread>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API logger {
@@ -22,7 +23,7 @@ private:
     std::thread worker_;
     std::atomic<bool> running_;
 
-    std::atomic<bool> flush_requested_ = false;
+    std::atomic<bool> flush_requested_{false};
     std::mutex flush_mutex_;
     std::condition_variable flush_cv_;
 

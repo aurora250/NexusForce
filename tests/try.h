@@ -301,6 +301,7 @@ void test_option();
 void test_any();
 void test_timer();
 void test_log();
+void test_ranges();
 void test_sql();
 void test_mysql();
 void test_dbpool();

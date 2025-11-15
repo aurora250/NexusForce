@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 // is heap
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance n = _MSTL distance(first, last);
 	Distance parent = 0;
 	for (Distance child = 1; child < n; ++child) {
@@ -19,7 +19,7 @@ MSTL_CONSTEXPR20 bool is_heap(Iterator first, Iterator last) {
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance n = _MSTL distance(first, last);
 	Distance parent = 0;
 	for (Distance child = 1; child < n; ++child) {
@@ -33,7 +33,7 @@ MSTL_CONSTEXPR20 bool is_heap(Iterator first, Iterator last, Compare comp) {
 // is heap until
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance n = _MSTL distance(first, last);
 	Distance parent = 0;
 	for (Distance child = 1; child < n; ++child) {
@@ -47,7 +47,7 @@ MSTL_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last) {
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 Iterator is_heap_until(Iterator first, Iterator last, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance n = _MSTL distance(first, last);
 	Distance parent = 0;
 	for (Distance child = 1; child < n; ++child) {
@@ -73,7 +73,7 @@ MSTL_CONSTEXPR20 void push_heap_aux(Iterator first, Distance hole_index, Distanc
 
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void push_heap(Iterator first, Iterator last) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	_MSTL push_heap_aux(first, Distance((last - first) - 1), Distance(0), *(last - 1));
 }
 
@@ -91,7 +91,7 @@ MSTL_CONSTEXPR20 void push_heap_aux(Iterator first, Distance hole_index, Distanc
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	_MSTL push_heap_aux(first, Distance(last - first - 1), Distance(0), *(last - 1), comp);
 }
 
@@ -135,7 +135,7 @@ MSTL_CONSTEXPR20 void adjust_heap(Iterator first, Distance holeIndex, Distance l
 // pop heap
 template <typename Iterator, typename T, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator result, T value) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	*result = *first;
 	_MSTL adjust_heap(first, Distance(0), Distance(last - first), value);
 }
@@ -148,7 +148,7 @@ MSTL_CONSTEXPR20 void pop_heap(Iterator first, Iterator last) {
 
 template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator result, T value, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	*result = *first;
 	_MSTL adjust_heap(first, Distance(0), Distance(last - first), value, comp);
 }
@@ -176,7 +176,7 @@ MSTL_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp) {
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
 	if (last - first < 2) return;
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len = last - first;
 	Distance parent = (len - 2) / 2;
 	while (true) {
@@ -189,7 +189,7 @@ MSTL_CONSTEXPR20 void make_heap(Iterator first, Iterator last) {
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp) {
 	if (last - first < 2) return;
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len = last - first;
 	Distance parent = (len - 2) / 2;
 	while (true) {

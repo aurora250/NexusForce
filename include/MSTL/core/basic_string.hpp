@@ -338,7 +338,7 @@ private:
     }
 
     template <typename Iterator,
-        enable_if_t<is_iter_v<Iterator> && is_same_v<iter_val_t<Iterator>, value_type>, int> = 0>
+        enable_if_t<is_iter_v<Iterator> && is_same_v<iter_value_t<Iterator>, value_type>, int> = 0>
     MSTL_CONSTEXPR20 basic_string& replace_copy(iterator first1, iterator last1, Iterator first2, Iterator last2) {
         size_type len1 = _MSTL distance(first1, last1);
         size_type len2 = _MSTL distance(first2, last2);
@@ -1285,9 +1285,9 @@ public:
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename Alloc = allocator<iter_val_t<Iterator>>>
+template <typename Iterator, typename Alloc = allocator<iter_value_t<Iterator>>>
 basic_string(Iterator, Iterator, Alloc = Alloc())
--> basic_string<iter_val_t<Iterator>, char_traits<iter_val_t<Iterator>>, Alloc>;
+-> basic_string<iter_value_t<Iterator>, char_traits<iter_value_t<Iterator>>, Alloc>;
 
 template <typename CharT, typename Traits, typename Alloc = allocator<CharT>>
 explicit basic_string(basic_string_view<CharT, Traits>, const Alloc & = Alloc())

@@ -170,15 +170,15 @@ public:
 	MSTL_NODISCARD string to_string() const { return tree_.to_string(); }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
-	typename Alloc = allocator<iter_val_t<Iterator>>>
-set(Iterator, Iterator, Compare = Compare(), Alloc = Alloc()) -> set<iter_val_t<Iterator>, Compare, Alloc>;
+template <typename Iterator, typename Compare = less<iter_value_t<Iterator>>,
+	typename Alloc = allocator<iter_value_t<Iterator>>>
+set(Iterator, Iterator, Compare = Compare(), Alloc = Alloc()) -> set<iter_value_t<Iterator>, Compare, Alloc>;
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<Key>>
 set(std::initializer_list<Key>, Compare = Compare(), Alloc = Alloc()) -> set<Key, Compare, Alloc>;
 
 template <typename Iterator, typename Alloc>
-set(Iterator, Iterator, Alloc) -> set<iter_val_t<Iterator>, less<iter_val_t<Iterator>>, Alloc>;
+set(Iterator, Iterator, Alloc) -> set<iter_value_t<Iterator>, less<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Key, typename Alloc>
 set(std::initializer_list<Key>, Alloc) -> set<Key, less<Key>, Alloc>;
@@ -353,16 +353,16 @@ public:
 	MSTL_NODISCARD string to_string() const { return tree_.to_string(); }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
-	typename Alloc = allocator<iter_val_t<Iterator>>>
+template <typename Iterator, typename Compare = less<iter_value_t<Iterator>>,
+	typename Alloc = allocator<iter_value_t<Iterator>>>
 multiset(Iterator, Iterator, Compare = Compare(), Alloc = Alloc())
--> multiset<iter_val_t<Iterator>, Compare, Alloc>;
+-> multiset<iter_value_t<Iterator>, Compare, Alloc>;
 
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<Key>>
 multiset(std::initializer_list<Key>, Compare = Compare(), Alloc = Alloc()) -> multiset<Key, Compare, Alloc>;
 
 template <typename Iterator, typename Alloc>
-multiset(Iterator, Iterator, Alloc) -> multiset<iter_val_t<Iterator>, less<iter_val_t<Iterator>>, Alloc>;
+multiset(Iterator, Iterator, Alloc) -> multiset<iter_value_t<Iterator>, less<iter_value_t<Iterator>>, Alloc>;
 
 template <typename Key, typename Alloc>
 multiset(std::initializer_list<Key>, Alloc) -> multiset<Key, less<Key>, Alloc>;

@@ -64,15 +64,15 @@ struct iterator_traits<T*> {
 };
 
 template <typename Iterator>
-using iter_cat_t = typename iterator_traits<Iterator>::iterator_category;
+using iter_category_t   = typename iterator_traits<Iterator>::iterator_category;
 template <typename Iterator>
-using iter_val_t = typename iterator_traits<Iterator>::value_type;
+using iter_value_t      = typename iterator_traits<Iterator>::value_type;
 template <typename Iterator>
-using iter_dif_t = typename iterator_traits<Iterator>::difference_type;
+using iter_difference_t = typename iterator_traits<Iterator>::difference_type;
 template <typename Iterator>
-using iter_ptr_t = typename iterator_traits<Iterator>::pointer;
+using iter_pointer_t    = typename iterator_traits<Iterator>::pointer;
 template <typename Iterator>
-using iter_ref_t = typename iterator_traits<Iterator>::reference;
+using iter_reference_t  = typename iterator_traits<Iterator>::reference;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_ITERATOR_TRAITS_HPP__

@@ -18,8 +18,8 @@ noexcept(noexcept(++first1) && noexcept(++first2) && noexcept(binary_pred(*first
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool equal(Iterator1 first1, Iterator1 last1, Iterator2 first2)
-noexcept(noexcept(_MSTL equal(first1, last1, first2, _MSTL equal_to<iter_val_t<Iterator1>>()))) {
-	return _MSTL equal(first1, last1, first2, _MSTL equal_to<iter_val_t<Iterator1>>());
+noexcept(noexcept(_MSTL equal(first1, last1, first2, _MSTL equal_to<iter_value_t<Iterator1>>()))) {
+	return _MSTL equal(first1, last1, first2, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
@@ -65,9 +65,9 @@ noexcept(noexcept(b < a)) {
 }
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-pair<iter_val_t<Iterator>, iter_val_t<Iterator>>
+pair<iter_value_t<Iterator>, iter_value_t<Iterator>>
 constexpr minmax(Iterator first, Iterator last, Compare comp) {
-	using T = iter_val_t<Iterator>;
+	using T = iter_value_t<Iterator>;
 	if (first == last) {
 		return _MSTL make_pair(T(), T());
 	}
@@ -85,8 +85,8 @@ constexpr minmax(Iterator first, Iterator last, Compare comp) {
 }
 
 template <typename Iterator>
-constexpr pair<iter_val_t<Iterator>, iter_val_t<Iterator>> minmax(Iterator first, Iterator last) {
-	return _MSTL minmax(first, last, _MSTL less<iter_val_t<Iterator>>());
+constexpr pair<iter_value_t<Iterator>, iter_value_t<Iterator>> minmax(Iterator first, Iterator last) {
+	return _MSTL minmax(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename T, typename Compare>
@@ -124,7 +124,7 @@ constexpr Iterator max_element(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 constexpr Iterator max_element(Iterator first, Iterator last) {
-	return _MSTL max_element(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL max_element(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename T>
@@ -144,7 +144,7 @@ constexpr Iterator min_element(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 constexpr Iterator min_element(Iterator first, Iterator last) {
-	return _MSTL min_element(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL min_element(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename T>
@@ -161,7 +161,7 @@ constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last,
 
 template <typename Iterator>
 constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last) {
-	return _MSTL minmax_element(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL minmax_element(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename T, typename Compare>
@@ -209,7 +209,7 @@ MSTL_NODISCARD constexpr bool __lexicographical_compare_aux(
 	const size_t clp = _MSTL min(len1, len2);
 
 	const int result = _MSTL memory_compare(
-		_MSTL addressof(*first1), _MSTL addressof(*first2), clp * sizeof(iter_val_t<Iterator1>));
+		_MSTL addressof(*first1), _MSTL addressof(*first2), clp * sizeof(iter_value_t<Iterator1>));
 	return result != 0 ? result < 0 : len1 < len2;
 }
 
@@ -217,8 +217,8 @@ template <typename Iterator1, typename Iterator2, enable_if_t<
 	!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>), int> = 0>
 MSTL_NODISCARD constexpr bool __lexicographical_compare_aux(
 	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
-noexcept(noexcept(_MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_val_t<Iterator1>>()))) {
-	return _MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_val_t<Iterator1>>());
+noexcept(noexcept(_MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_value_t<Iterator1>>()))) {
+	return _MSTL lexicographical_compare(first1, last1, first2, last2, _MSTL less<iter_value_t<Iterator1>>());
 }
 
 MSTL_END_INNER__
@@ -244,14 +244,14 @@ constexpr mismatch(Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare 
 
 template <typename Iterator1, typename Iterator2>
 constexpr pair<Iterator1, Iterator2> mismatch(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
-	return _MSTL mismatch(first1, last1, first2, _MSTL equal_to<iter_val_t<Iterator1>>());
+	return _MSTL mismatch(first1, last1, first2, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 
 MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
-	iter_dif_t<Iterator1> n = _MSTL distance(first, last);
+	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
 	for (; n > 0; --n, ++first, ++result)
 		*result = *first;
 	return result;
@@ -259,7 +259,7 @@ constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
-	const auto bytes = n * sizeof(iter_val_t<Iterator1>);
+	const auto bytes = n * sizeof(iter_value_t<Iterator1>);
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), bytes);
 	return result + n;
 }
@@ -307,7 +307,7 @@ constexpr Iterator2 copy_if(Iterator1 first, Iterator1 last, Iterator2 result, U
 MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
-	iter_dif_t<Iterator1> n = _MSTL distance(first, last);
+	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
 	for (; n > 0; --n)
 		*--result = *--last;
 	return result;
@@ -316,7 +316,7 @@ template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter
 constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
 	last -= n;
-	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_val_t<Iterator1>));
+	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
 }
 MSTL_END_INNER__
@@ -332,7 +332,7 @@ constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 res
 MSTL_BEGIN_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
-	iter_dif_t<Iterator1> n = _MSTL distance(first, last);
+	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
 	for (; n > 0; --n, ++first, ++result)
 		*result = _MSTL move(*first);
 	return result;
@@ -340,7 +340,7 @@ constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
-	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_val_t<Iterator1>));
+	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result + n;
 }
 MSTL_END_INNER__
@@ -364,7 +364,7 @@ template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter
 constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
 	last -= n;
-	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_val_t<Iterator1>));
+	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
 }
 MSTL_END_INNER__

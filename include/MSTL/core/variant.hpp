@@ -107,8 +107,8 @@ private:
 
     template <size_t I, typename... Args>
     constexpr bool try_construct_impl(Args&&... args) {
-        if constexpr (I < sizeof...(Types)) {
-            if constexpr (is_constructible_v<variant_alternative_t<variant, I>, Args...>) {
+        MSTL_IF_CONSTEXPR (I < sizeof...(Types)) {
+            MSTL_IF_CONSTEXPR (is_constructible_v<variant_alternative_t<variant, I>, Args...>) {
                 index_ = I;
                 new (union_) variant_alternative_t<variant, I>(_MSTL forward<Args>(args)...);
                 return true;

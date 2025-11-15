@@ -37,7 +37,7 @@ public:
 
     constexpr explicit bitset(const block_type val) noexcept {
         blocks.fill(0);
-        if constexpr (block_count > 0) {
+        MSTL_IF_CONSTEXPR (block_count > 0) {
             blocks[0] = val & last_block_mask();
         }
     }

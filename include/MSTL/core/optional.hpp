@@ -103,13 +103,13 @@ public:
         return *this;
     }
 
-    template <class U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
         is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(const optional<U>& x) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (x) emplace(*x);
     }
 
-    template <class U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
         !is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr explicit optional(const optional<U>& x) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (x) emplace(*x);
@@ -158,13 +158,13 @@ public:
         return *this;
     }
 
-    template <class U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
         is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(optional<U>&& x) noexcept(is_nothrow_constructible_v<T, U>) {
         if (x) emplace(_MSTL move(*x));
     }
 
-    template <class U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
+    template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
         !is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(optional<U>&& x) noexcept(is_nothrow_constructible_v<T, U>) {
         if (x) emplace(_MSTL move(*x));
@@ -489,7 +489,7 @@ public:
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <class T>
+template <typename T>
 optional(T) -> optional<T>;
 #endif
 

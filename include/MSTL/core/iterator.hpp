@@ -4,20 +4,20 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator>
-MSTL_TRAITS_DEPRECATE MSTL_NODISCARD constexpr iter_cat_t<Iterator>
+MSTL_TRAITS_DEPRECATE MSTL_NODISCARD constexpr iter_category_t<Iterator>
 iterator_category(const Iterator&) noexcept {
-    return iter_cat_t<Iterator>();
+    return iter_category_t<Iterator>();
 }
 
 template <typename Iterator>
-MSTL_TRAITS_DEPRECATE MSTL_NODISCARD constexpr iter_dif_t<Iterator>*
+MSTL_TRAITS_DEPRECATE MSTL_NODISCARD constexpr iter_difference_t<Iterator>*
 distance_type(const Iterator&) noexcept {
     return nullptr;
 }
 
 template <typename Iterator>
 MSTL_TRAITS_DEPRECATE MSTL_NODISCARD constexpr
-iter_val_t<Iterator>* value_type(const Iterator&) noexcept {
+iter_value_t<Iterator>* value_type(const Iterator&) noexcept {
     return nullptr;
 }
 
@@ -25,22 +25,22 @@ iter_val_t<Iterator>* value_type(const Iterator&) noexcept {
 #ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Ptr, enable_if_t<is_pointer_v<Ptr>, int> = 0>
-constexpr iter_ptr_t<Ptr> __to_pointer_aux(Ptr iter) {
+constexpr iter_pointer_t<Ptr> __to_pointer_aux(Ptr iter) {
     return iter;
 }
 template <typename Iterator, enable_if_t<!is_pointer_v<Iterator>, int> = 0>
-constexpr iter_ptr_t<Iterator> __to_pointer_aux(Iterator iter) {
+constexpr iter_pointer_t<Iterator> __to_pointer_aux(Iterator iter) {
     return iter.operator->();
 }
 MSTL_END_INNER__
 
 template <typename Iterator>
-constexpr iter_ptr_t<Iterator> to_pointer(Iterator iter) {
+constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
     return _INNER __to_pointer_aux(iter);
 }
 #else
 template <typename Iterator>
-constexpr iter_ptr_t<Iterator> to_pointer(Iterator tmp) {
+constexpr iter_pointer_t<Iterator> to_pointer(Iterator tmp) {
     if constexpr (is_pointer_v<Iterator>)
         return tmp;
     else
@@ -52,28 +52,28 @@ constexpr iter_ptr_t<Iterator> to_pointer(Iterator tmp) {
 #ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator, typename Distance, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 void __advance_aux(Iterator& i, Distance n) {
+constexpr void __advance_aux(Iterator& i, Distance n) {
     i += n;
 }
 template <typename Iterator, typename Distance, enable_if_t<!is_rnd_iter_v<Iterator> && is_ranges_bid_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 void __advance_aux(Iterator& i, Distance n) {
+constexpr void __advance_aux(Iterator& i, Distance n) {
     for (; n < 0; ++n) --i;
     for (; 0 < n; --n) ++i;
 }
 template <typename Iterator, typename Distance, enable_if_t<!is_rnd_iter_v<Iterator> && !is_ranges_bid_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 void __advance_aux(Iterator& i, Distance n) {
+constexpr void __advance_aux(Iterator& i, Distance n) {
     MSTL_DEBUG_VERIFY__(is_signed_v<Distance> && n >= 0, "negative advance of non-bidirectional iterator");
     for (; 0 < n; --n) ++i;
 }
 MSTL_END_INNER__
 
 template <typename Iterator, typename Distance, enable_if_t<is_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 void advance(Iterator& i, Distance n) {
+constexpr void advance(Iterator& i, Distance n) {
     _INNER __advance_aux(i, n);
 }
 #else
 template <typename Iterator, typename Distance, enable_if_t<is_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 void advance(Iterator& i, Distance n) {
+constexpr void advance(Iterator& i, Distance n) {
     if constexpr (is_rnd_iter_v<Iterator>) {
         i += n;
     }
@@ -92,14 +92,14 @@ MSTL_CONSTEXPR17 void advance(Iterator& i, Distance n) {
 #endif // MSTL_STANDARD_17__
 
 template <typename Iterator>
-MSTL_CONSTEXPR17 Iterator prev(Iterator iter, iter_dif_t<Iterator> n = -1) {
+constexpr Iterator prev(Iterator iter, iter_difference_t<Iterator> n = -1) {
     MSTL_DEBUG_VERIFY(n <= 0, "negative advance in previous operation function.");
     _MSTL advance(iter, n);
     return iter;
 }
 
 template <typename Iterator>
-MSTL_CONSTEXPR17 Iterator next(Iterator iter, iter_dif_t<Iterator> n = 1) {
+constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
     MSTL_DEBUG_VERIFY(n >= 0, "positive advance in next operation function.");
     _MSTL advance(iter, n);
     return iter;
@@ -109,28 +109,28 @@ MSTL_CONSTEXPR17 Iterator next(Iterator iter, iter_dif_t<Iterator> n = 1) {
 #ifndef MSTL_STANDARD_17__
 MSTL_BEGIN_INNER__
 template <typename Iterator, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 iter_dif_t<Iterator> __distance_aux(Iterator first, Iterator last) {
+constexpr iter_difference_t<Iterator> __distance_aux(Iterator first, Iterator last) {
     return last - first;
 }
 template <typename Iterator, enable_if_t<!is_rnd_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 iter_dif_t<Iterator> __distance_aux(Iterator first, Iterator last) {
-    iter_dif_t<Iterator> n = 0;
+constexpr iter_difference_t<Iterator> __distance_aux(Iterator first, Iterator last) {
+    iter_difference_t<Iterator> n = 0;
     while (first != last) { ++first; ++n; }
     return n;
 }
 MSTL_END_INNER__
 
 template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 iter_dif_t<Iterator> distance(Iterator first, Iterator last) {
+constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
     return _INNER __distance_aux(first, last);
 }
 #else
 template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
-MSTL_CONSTEXPR17 iter_dif_t<Iterator> distance(Iterator first, Iterator last) {
+constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
     if constexpr (is_rnd_iter_v<Iterator>)
         return last - first;
     else {
-        iter_dif_t<Iterator> n = 0;
+        iter_difference_t<Iterator> n = 0;
         while (first != last) { ++first; ++n; }
         return n;
     }
@@ -258,11 +258,11 @@ class reverse_iterator {
     static_assert(is_bid_iter_v<Iterator>, "reverse iterator requires bidirectional iterator.");
 
 public:
-    using iterator_category = iter_cat_t<Iterator>;
-    using value_type        = iter_val_t<Iterator>;
-    using difference_type   = iter_dif_t<Iterator>;
-    using pointer           = iter_ptr_t<Iterator>;
-    using reference         = iter_ref_t<Iterator>;
+    using iterator_category = iter_category_t<Iterator>;
+    using value_type        = iter_value_t<Iterator>;
+    using difference_type   = iter_difference_t<Iterator>;
+    using pointer           = iter_pointer_t<Iterator>;
+    using reference         = iter_reference_t<Iterator>;
     using self              = reverse_iterator<Iterator>;
 
 private:
@@ -448,7 +448,7 @@ MSTL_NODISCARD constexpr decltype(auto) operator -(
 
 template <typename Iterator>
 constexpr reverse_iterator<Iterator> operator +(
-    iter_dif_t<Iterator> n, const reverse_iterator<Iterator>& x)
+    iter_difference_t<Iterator> n, const reverse_iterator<Iterator>& x)
     noexcept(noexcept(x + n)) {
     return x + n;
 }

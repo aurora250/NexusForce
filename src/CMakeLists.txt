@@ -136,6 +136,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
@@ -155,9 +157,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
-        core/logger.cpp
-        ../include/MSTL/core/log_sink.hpp
-        core/log_sink.cpp
 )
 
 # 编译为动态库

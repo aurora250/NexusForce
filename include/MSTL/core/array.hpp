@@ -269,7 +269,7 @@ struct empty_array_element_tag {
 };
 MSTL_END_TAG__
 
-template <class T>
+template <typename T>
 class array<T, 0> : public icollector<array<T, 0>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 

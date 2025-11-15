@@ -1085,7 +1085,7 @@ public:
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Alloc>
-deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_val_t<Iterator>, Alloc>;
+deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Alloc>;
 #endif
 
 MSTL_END_NAMESPACE__

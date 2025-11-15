@@ -183,7 +183,7 @@ public:
     constexpr basic_string_view(const_pointer str, const size_type n) noexcept
         : data_(str), size_(n) {}
 
-    template <typename Iterator, enable_if_t<is_same_v<iter_val_t<Iterator>, value_type>, int> = 0>
+    template <typename Iterator, enable_if_t<is_same_v<iter_value_t<Iterator>, value_type>, int> = 0>
     constexpr basic_string_view(Iterator start, Iterator finish)
     : data_(&*start), size_(_MSTL distance(start, finish)) {}
 

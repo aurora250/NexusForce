@@ -95,7 +95,7 @@ public:
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <class Sequence>
+template <typename Sequence>
 queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
 #endif
 
@@ -239,10 +239,10 @@ public:
 template <typename Compare, typename Sequence>
 priority_queue(Compare, Sequence) -> priority_queue<typename Sequence::value_type, Sequence, Compare>;
 
-template <typename Iterator, typename Compare = less<iter_val_t<Iterator>>,
-    typename Sequence = vector<iter_val_t<Iterator>>>
+template <typename Iterator, typename Compare = less<iter_value_t<Iterator>>,
+    typename Sequence = vector<iter_value_t<Iterator>>>
 priority_queue(Iterator, Iterator, Compare = Compare(), Sequence = Sequence())
--> priority_queue<iter_val_t<Iterator>, Sequence, Compare>;
+-> priority_queue<iter_value_t<Iterator>, Sequence, Compare>;
 #endif
 
 MSTL_END_NAMESPACE__

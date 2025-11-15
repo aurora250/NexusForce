@@ -117,13 +117,13 @@ constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate 
 
 template <typename Iterator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator adjacent_find(Iterator first, Iterator last) {
-	return _MSTL adjacent_find(first, last, _MSTL equal_to<iter_val_t<Iterator>>());
+	return _MSTL adjacent_find(first, last, _MSTL equal_to<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename T, typename BinaryPredicate,
 	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr iter_dif_t<Iterator> count_if(Iterator first, Iterator last, const T& value, BinaryPredicate pred) {
-	iter_dif_t<Iterator> n = 0;
+constexpr iter_difference_t<Iterator> count_if(Iterator first, Iterator last, const T& value, BinaryPredicate pred) {
+	iter_difference_t<Iterator> n = 0;
 	for (; first != last; ++first) {
 		if (pred(*first, value)) ++n;
 	}
@@ -131,8 +131,8 @@ constexpr iter_dif_t<Iterator> count_if(Iterator first, Iterator last, const T& 
 }
 
 template <typename Iterator, typename T>
-constexpr iter_dif_t<Iterator> count(Iterator first, Iterator last, const T& value) {
-	return _MSTL count_if(first, last, value, _MSTL equal_to<iter_val_t<Iterator>>());
+constexpr iter_difference_t<Iterator> count(Iterator first, Iterator last, const T& value) {
+	return _MSTL count_if(first, last, value, _MSTL equal_to<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
@@ -162,8 +162,8 @@ template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 	Iterator2 last2, BinaryPredicate binary_pred) {
-	iter_dif_t<Iterator1> d1 = _MSTL distance(first1, last1);
-	iter_dif_t<Iterator2> d2 = _MSTL distance(first2, last2);
+	iter_difference_t<Iterator1> d1 = _MSTL distance(first1, last1);
+	iter_difference_t<Iterator2> d2 = _MSTL distance(first2, last2);
 	if (d1 < d2) return last1;
 
 	Iterator1 current1 = first1;
@@ -186,7 +186,7 @@ constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
-	return _MSTL search(first1, last1, first2, last2, _MSTL equal_to<iter_val_t<Iterator1>>());
+	return _MSTL search(first1, last1, first2, last2, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
@@ -312,7 +312,7 @@ constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1,
 
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
-	return _MSTL find_first_of(first1, last1, first2, last2, _MSTL equal_to<iter_val_t<Iterator1>>());
+	return _MSTL find_first_of(first1, last1, first2, last2, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
@@ -359,7 +359,7 @@ constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Ite
 
 template <typename Iterator1, typename Iterator2>
 constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
-	return _MSTL includes(first1, last1, first2, last2, _MSTL less<iter_val_t<Iterator1>>());
+	return _MSTL includes(first1, last1, first2, last2, _MSTL less<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare,
@@ -381,7 +381,7 @@ constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
-	return _MSTL merge(first1, last1, first2, last2, result, _MSTL less<iter_val_t<Iterator1>>());
+	return _MSTL merge(first1, last1, first2, last2, result, _MSTL less<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename Predicate, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
@@ -617,7 +617,7 @@ constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 
 template <typename Iterator, typename Distance>
 constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initial, Distance shift) {
-	iter_val_t<Iterator> value = *initial;
+	iter_value_t<Iterator> value = *initial;
 	Iterator ptr1 = initial;
 	Iterator ptr2 = ptr1 + shift;
 	while (ptr2 != initial) {
@@ -634,7 +634,7 @@ constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initia
 
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
-	iter_dif_t<Iterator> n = _MSTL gcd(last - first, middle - first);
+	iter_difference_t<Iterator> n = _MSTL gcd(last - first, middle - first);
 	while (n--) {
 		_INNER __rotate_cycle_aux(first, last, first + n, middle - first);
 	}
@@ -656,12 +656,12 @@ constexpr Iterator2 rotate_copy(Iterator1 first, Iterator1 middle, Iterator1 las
 }
 
 template <typename Iterator,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator> && is_default_constructible_v<iter_val_t<Iterator>>, int> = 0>
+	enable_if_t<is_ranges_fwd_iter_v<Iterator> && is_default_constructible_v<iter_value_t<Iterator>>, int> = 0>
 constexpr void shift_left(Iterator first, Iterator last, size_t n) {
 	if (first == last || n == 0) return;
 	if (n >= _MSTL distance(first, last)) {
 		for (; first != last; ++first) {
-			*first = _MSTL initialize<iter_val_t<Iterator>>();
+			*first = _MSTL initialize<iter_value_t<Iterator>>();
 		}
 		return;
 	}
@@ -669,17 +669,17 @@ constexpr void shift_left(Iterator first, Iterator last, size_t n) {
 	_MSTL copy(new_first, last, first);
 	Iterator end = _MSTL prev(last, -n);
 	for (; end != last; ++end) {
-		*end = _MSTL initialize<iter_val_t<Iterator>>();
+		*end = _MSTL initialize<iter_value_t<Iterator>>();
 	}
 }
 
 template<typename Iterator,
-	enable_if_t<is_ranges_bid_iter_v<Iterator> && is_default_constructible_v<iter_val_t<Iterator>>, int> = 0>
+	enable_if_t<is_ranges_bid_iter_v<Iterator> && is_default_constructible_v<iter_value_t<Iterator>>, int> = 0>
 constexpr void shift_right(Iterator first, Iterator last, size_t n) {
 	if (first == last || n == 0) return;
 	if (n >= _MSTL distance(first, last)) {
 		for (; first != last; ++first) {
-			*first = _MSTL initialize<iter_val_t<Iterator>>();
+			*first = _MSTL initialize<iter_value_t<Iterator>>();
 		}
 		return;
 	}
@@ -687,7 +687,7 @@ constexpr void shift_right(Iterator first, Iterator last, size_t n) {
 	_MSTL move_backward(first, new_last, last);
 	auto end = _MSTL next(first, n);
 	for (; first != end; ++first) {
-		*first = _MSTL initialize<iter_val_t<Iterator>>();
+		*first = _MSTL initialize<iter_value_t<Iterator>>();
 	}
 }
 
@@ -738,7 +738,7 @@ constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last,
 
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
-	return _MSTL unique_copy(first, last, result, _MSTL equal_to<iter_val_t<Iterator1>>());
+	return _MSTL unique_copy(first, last, result, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
@@ -755,7 +755,7 @@ constexpr Iterator unique(Iterator first, Iterator last, BinaryPredicate binary_
 
 template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len = _MSTL distance(first, last);
 	Distance half;
 	Iterator middle;
@@ -775,12 +775,12 @@ constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value, Co
 
 template <typename Iterator, typename T>
 constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value) {
-	return _MSTL lower_bound(first, last, value, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL lower_bound(first, last, value, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len = _MSTL distance(first, last);
 	Distance half;
 	Iterator middle;
@@ -800,7 +800,7 @@ constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Co
 
 template <typename Iterator, typename T>
 constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value) {
-	return _MSTL upper_bound(first, last, value, _MSTL greater<iter_val_t<Iterator>>());
+	return _MSTL upper_bound(first, last, value, _MSTL greater<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
@@ -818,8 +818,8 @@ constexpr bool binary_search(Iterator first, Iterator last, const T& value, Comp
 template <typename Iterator1, typename Iterator2, typename BinaryPred,
 	enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
 constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPred pred) {
-	iter_dif_t<Iterator1> len1 = _MSTL distance(first1, last1);
-	iter_dif_t<Iterator2> len2 = _MSTL distance(first2, last2);
+	iter_difference_t<Iterator1> len1 = _MSTL distance(first1, last1);
+	iter_difference_t<Iterator2> len2 = _MSTL distance(first2, last2);
 	if (len1 != len2) return false;
 
 	for (; first1 != last1 && first2 != last2; ++first1, (void) ++first2) {
@@ -854,7 +854,7 @@ constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first
 
 template <typename Iterator1, typename Iterator2>
 constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
-	return _MSTL is_permutation(first1, last1, first2, last2, _MSTL equal_to<iter_val_t<Iterator1>>());
+	return _MSTL is_permutation(first1, last1, first2, last2, _MSTL equal_to<iter_value_t<Iterator1>>());
 }
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
@@ -884,7 +884,7 @@ constexpr bool next_permutation(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 constexpr bool next_permutation(Iterator first, Iterator last) {
-	return _MSTL next_permutation(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL next_permutation(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
@@ -914,7 +914,7 @@ constexpr bool prev_permutation(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 constexpr bool prev_permutation(Iterator first, Iterator last) {
-	return _MSTL prev_permutation(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL prev_permutation(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -939,7 +939,7 @@ void shuffle(Iterator first, Iterator last, Generator& rand) {
 
 template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, const T& value, Compare comp) {
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len = distance(first, last);
 	Distance half;
 	Iterator middle, left, right;
@@ -965,7 +965,7 @@ constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, co
 
 template <typename Iterator, typename T>
 constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, const T& value) {
-	return _MSTL equal_range(first, last, value, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL equal_range(first, last, value, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1089,7 +1089,7 @@ MSTL_END_INNER__
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
 	if (first == middle || middle == last) return;
-	using Distance = iter_dif_t<Iterator>;
+	using Distance = iter_difference_t<Iterator>;
 	Distance len1 = _MSTL distance(first, middle);
 	Distance len2 = _MSTL distance(middle, last);
 	temporary_buffer<Iterator> buffer(first, last);
@@ -1103,7 +1103,7 @@ constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Com
 
 template <typename Iterator>
 constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last) {
-	return _MSTL inplace_merge(first, middle, last, _MSTL less<iter_val_t<Iterator>>());
+	return _MSTL inplace_merge(first, middle, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1121,7 +1121,7 @@ bool is_sorted(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 bool is_sorted(Iterator first, Iterator last) {
-	return is_sorted(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return is_sorted(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
@@ -1137,7 +1137,7 @@ Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 Iterator is_sorted_until(Iterator first, Iterator last) {
-	return is_sorted_until(first, last, _MSTL less<iter_val_t<Iterator>>());
+	return is_sorted_until(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1156,7 +1156,7 @@ void merge_sort(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 void merge_sort(Iterator first, Iterator last) {
-    return _MSTL merge_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL merge_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 // partial sort / heap sort : Ot(NlogN) Om(1) unstable
@@ -1175,7 +1175,7 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
 
 template <typename Iterator>
 void partial_sort(Iterator first, Iterator middle, Iterator last) {
-    return _MSTL partial_sort(first, middle, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL partial_sort(first, middle, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 template <typename Iterator1, typename Iterator2, typename Compare, enable_if_t<
@@ -1205,7 +1205,7 @@ Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
 template <typename Iterator1, typename Iterator2>
 Iterator2 partial_sort_copy(
     Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last) {
-    return _MSTL partial_sort_copy(first, result_first, result_last, _MSTL less<iter_val_t<Iterator1>>());
+    return _MSTL partial_sort_copy(first, result_first, result_last, _MSTL less<iter_value_t<Iterator1>>());
 }
 
 MSTL_BEGIN_INNER__
@@ -1241,7 +1241,7 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 void insertion_sort(Iterator first, Iterator last) {
-    return _MSTL insertion_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL insertion_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1266,7 +1266,7 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare 
 
 template <typename Iterator>
 void introspective_sort(Iterator first, Iterator last, int depth_limit) {
-    return _MSTL introspective_sort(first, last, depth_limit, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL introspective_sort(first, last, depth_limit, _MSTL less<iter_value_t<Iterator>>());
 }
 
 // quick sort : Ot(NlogN) Om(1) unstable
@@ -1284,7 +1284,7 @@ void quick_sort(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 void quick_sort(Iterator first, Iterator last) {
-    return _MSTL quick_sort(first, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL quick_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1324,7 +1324,7 @@ void sort(Iterator first, Iterator last, Compare comp) {
 
 template <typename Iterator>
 void sort(Iterator first, Iterator last) {
-    return _MSTL sort(first, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
@@ -1343,7 +1343,7 @@ void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
 
 template <typename Iterator>
 void nth_element(Iterator first, Iterator nth, Iterator last) {
-    return _MSTL nth_element(first, nth, last, _MSTL less<iter_val_t<Iterator>>());
+    return _MSTL nth_element(first, nth, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 MSTL_END_NAMESPACE__

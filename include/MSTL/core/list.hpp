@@ -587,7 +587,7 @@ public:
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Alloc>
-list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_val_t<Iterator>, Alloc>;
+list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_value_t<Iterator>, Alloc>;
 #endif
 
 MSTL_END_NAMESPACE__

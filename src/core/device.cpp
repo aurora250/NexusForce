@@ -2,7 +2,6 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/unordered_map.hpp>
 #include <MSTL/core/packages.hpp>
-#include <MSTL/core/character.hpp>
 #include <MSTL/core/format.hpp>
 #include <devguid.h>
 #include <Dbt.h>
