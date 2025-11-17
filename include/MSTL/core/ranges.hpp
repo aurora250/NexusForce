@@ -625,6 +625,16 @@ public:
         return !(*this == s);
     }
 
+    template <typename S>
+    friend constexpr bool operator ==(const S& s, const take_while_iterator& t) {
+        return t.done_ || t.current_ == s;
+    }
+
+    template <typename S>
+    friend constexpr bool operator !=(const S& s, const take_while_iterator& t) {
+        return !(s == t);
+    }
+
 private:
     BaseIter current_{};
     Sentinel end_{};
@@ -788,6 +798,16 @@ public:
     requires (!same_as<S, drop_while_iterator>)
     constexpr bool operator!=(const S& s) const {
         return !(*this == s);
+    }
+
+    template <typename S>
+    friend constexpr bool operator ==(const S& s, const drop_while_iterator& t) {
+        return t.current_ == s;
+    }
+
+    template <typename S>
+    friend constexpr bool operator !=(const S& s, const drop_while_iterator& t) {
+        return t.current_ != s;
     }
 
 private:

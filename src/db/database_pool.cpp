@@ -72,7 +72,7 @@ connect_timeout_(connect_timeout), running_(true) {
             break;
         }
 #endif
-#ifdef MSTL_SUPPORT_REDIS__
+#ifdef MSTL_SUPPORT_POSTGRESQL__
         case DB_TYPE::POSTGRESQL: {
             factory_ = make_unique<postgresql_factory>(config);
             break;

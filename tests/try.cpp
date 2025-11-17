@@ -1698,6 +1698,7 @@ void test_redis() {
 }
 
 void test_postgre() {
+#ifdef MSTL_SUPPORT_POSTGRESQL__
     db_config postgre_config = db_config::for_postgresql("user");
     postgre_config.password = "483674";
     database_pool pool(DB_TYPE::POSTGRESQL, postgre_config);
@@ -1718,6 +1719,7 @@ void test_postgre() {
         }
         println();
     }
+#endif
 }
 
 void test_dbpool() {
