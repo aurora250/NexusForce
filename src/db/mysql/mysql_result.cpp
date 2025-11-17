@@ -1,4 +1,4 @@
-#include <MSTL/db/mysql/mysql_result.hpp>
+#include <MSTL/database/mysql/mysql_result.hpp>
 #ifdef MSTL_SUPPORT_MYSQL__
 MSTL_BEGIN_NAMESPACE__
 

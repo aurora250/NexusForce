@@ -1,4 +1,4 @@
-#include <MSTL/db/sqlite/sqlite_prepared_result.hpp>
+#include <MSTL/database/sqlite/sqlite_prepared_result.hpp>
 #ifdef MSTL_SUPPORT_SQLITE3__
 MSTL_BEGIN_NAMESPACE__
 

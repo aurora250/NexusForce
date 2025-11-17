@@ -1599,10 +1599,11 @@ class slice_view : public view_base<slice_view<V>> {
         base_iterator begin_;
         base_iterator end_;
     };
-    mutable _MSTL optional<cache_t> cache_;
+    mutable cache_t cache_;
+    mutable bool has_value_ = false;
 
     void ensure_cache() const {
-        if (cache_) return;
+        if (has_value_) return;
 
         auto b = base_.begin();
         auto e = base_.end();
@@ -1614,6 +1615,7 @@ class slice_view : public view_base<slice_view<V>> {
         auto end_it = b;
 
         cache_ = cache_t{begin_it, end_it};
+        has_value_ = true;
     }
 
 public:
@@ -1625,24 +1627,24 @@ public:
 
     base_iterator begin() {
         ensure_cache();
-        return cache_->begin_;
+        return cache_.begin_;
     }
 
     base_iterator end() {
         ensure_cache();
-        return cache_->end_;
+        return cache_.end_;
     }
 
     base_iterator begin() const
     requires Range<const V> {
         ensure_cache();
-        return cache_->begin_;
+        return cache_.begin_;
     }
 
     base_iterator end() const
     requires Range<const V> {
         ensure_cache();
-        return cache_->end_;
+        return cache_.end_;
     }
 };
 

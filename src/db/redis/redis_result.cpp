@@ -1,4 +1,4 @@
-#include <MSTL/db/redis/redis_result.hpp>
+#include <MSTL/database/redis/redis_result.hpp>
 #ifdef MSTL_SUPPORT_REDIS__
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__

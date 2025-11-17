@@ -1,6 +1,6 @@
-#include <MSTL/db/redis/redis_connect.hpp>
+#include <MSTL/database/redis/redis_connect.hpp>
 #ifdef MSTL_SUPPORT_REDIS__
-#include <MSTL/db/redis/redis_result.hpp>
+#include <MSTL/database/redis/redis_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 _MSTL_REDIS redisReply* redis_connect::execute_command(

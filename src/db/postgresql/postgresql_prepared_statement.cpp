@@ -1,7 +1,7 @@
-#include <MSTL/db/postgresql/postgresql_prepared_statement.hpp>
+#include <MSTL/database/postgresql/postgresql_prepared_statement.hpp>
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <MSTL/core/utility/packages.hpp>
-#include <MSTL/db/postgresql/postgresql_prepared_result.hpp>
+#include <MSTL/database/postgresql/postgresql_prepared_result.hpp>
 #include <atomic>
 MSTL_BEGIN_NAMESPACE__
 

@@ -1,7 +1,7 @@
-#include <MSTL/db/sqlite/sqlite_connect.hpp>
+#include <MSTL/database/sqlite/sqlite_connect.hpp>
 #ifdef MSTL_SUPPORT_SQLITE3__
-#include <MSTL/db/sqlite/sqlite_prepared_statement.hpp>
-#include <MSTL/db/sqlite/sqlite_result.hpp>
+#include <MSTL/database/sqlite/sqlite_prepared_statement.hpp>
+#include <MSTL/database/sqlite/sqlite_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 bool sqlite_connect::connect_to(const _MSTL string&, const _MSTL string&,

@@ -1,6 +1,6 @@
-#include <MSTL/db/mysql/mysql_prepared_statement.hpp>
+#include <MSTL/database/mysql/mysql_prepared_statement.hpp>
 #ifdef MSTL_SUPPORT_MYSQL__
-#include <MSTL/db/mysql/mysql_prepared_result.hpp>
+#include <MSTL/database/mysql/mysql_prepared_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 mysql_prepared_statement::mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, const string_view sql)

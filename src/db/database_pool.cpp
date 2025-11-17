@@ -1,9 +1,9 @@
-#include <MSTL/db/database_pool.hpp>
+#include <MSTL/database/database_pool.hpp>
 #ifdef MSTL_SUPPORT_DB__
-#include <MSTL/db/mysql/mysql_connect.hpp>
-#include <MSTL/db/sqlite/sqlite_connect.hpp>
-#include <MSTL/db/redis/redis_connect.hpp>
-#include <MSTL/db/postgresql/postgresql_connect.hpp>
+#include <MSTL/database/mysql/mysql_connect.hpp>
+#include <MSTL/database/postgresql/postgresql_connect.hpp>
+#include <MSTL/database/redis/redis_connect.hpp>
+#include <MSTL/database/sqlite/sqlite_connect.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

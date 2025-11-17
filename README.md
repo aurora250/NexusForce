@@ -139,7 +139,7 @@ sudo make install
 
 定义假随机数生成类`random_lcd`、`random_mt`和基于硬件噪声的真随机数生成类`secret`。
 
-- [socket](include/MSTL/web/socket.hpp)
+- [socket](include/MSTL/network/socket.hpp)
 
 定义网络套接字类`socket`。
 
@@ -155,7 +155,7 @@ sudo make install
 
 定义一系列基础CRTP基类和基于其自动生成的全局函数。
 
-- [hash](include/MSTL/core/algorithm/hash.hpp)
+- [hash](include/MSTL/core/functional/hash.hpp)
 
 定义基础类型的哈希函数及FNV等工具哈希函数。
 
@@ -359,11 +359,11 @@ sudo make install
 
 定义JSON解析类`json_parser`和JSON构建类`json_builder`。
 
-- [session](include/MSTL/web/session.hpp)
+- [session](include/MSTL/network/http/session.hpp)
 
 定义`cookie`类、会话类`session`和HTTP常量。
 
-- [servlet](include/MSTL/web/servlet.hpp)
+- [servlet](include/MSTL/network/http/servlet.hpp)
 
 定义微服务类`servlet`，提供监听端口、配置filter、设置cookie、操作session属性等功能。
 
@@ -371,7 +371,7 @@ sudo make install
 
 定义基于boost的栈追踪分配器`trace_allocator`。
 
-- [database_pool](include/MSTL/db/database_pool.hpp)
+- [database_pool](include/MSTL/database/database_pool.hpp)
 
 定义支持MySQL、Sqlite3、Redis链接的多态数据库连接及数据库链接池`database_pool`。
 

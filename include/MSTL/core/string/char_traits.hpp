@@ -1,9 +1,9 @@
 #ifndef MSTL_CHAR_TRAITS_HPP__
 #define MSTL_CHAR_TRAITS_HPP__
 #include "../algorithm/algobase.hpp"
-#include "../algorithm/hash.hpp"
-#include "../string/cstring.hpp"
 #include "../config/undef_cmacro.hpp"
+#include "../functional/hash.hpp"
+#include "../string/cstring.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename IntT>
@@ -253,6 +253,7 @@ public:
     }
 
     MSTL_NODISCARD static constexpr size_t length(const char_type* const str) noexcept {
+        if (!str) return 0;
 #ifdef MSTL_STANDARD_17__
 #ifdef MSTL_STANDARD_20__
         if constexpr (is_same_v<char_type, char8_t>) {

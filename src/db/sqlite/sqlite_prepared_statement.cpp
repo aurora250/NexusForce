@@ -1,6 +1,6 @@
-#include <MSTL/db/sqlite/sqlite_prepared_statement.hpp>
+#include <MSTL/database/sqlite/sqlite_prepared_statement.hpp>
 #ifdef MSTL_SUPPORT_SQLITE3__
-#include <MSTL/db/sqlite/sqlite_prepared_result.hpp>
+#include <MSTL/database/sqlite/sqlite_prepared_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void sqlite_prepared_statement::clear_bindings() noexcept {

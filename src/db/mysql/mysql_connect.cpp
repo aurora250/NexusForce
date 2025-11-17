@@ -1,7 +1,7 @@
-#include <MSTL/db/mysql/mysql_connect.hpp>
+#include <MSTL/database/mysql/mysql_connect.hpp>
 #ifdef MSTL_SUPPORT_MYSQL__
-#include <MSTL/db/mysql/mysql_prepared_statement.hpp>
-#include <MSTL/db/mysql/mysql_result.hpp>
+#include <MSTL/database/mysql/mysql_prepared_statement.hpp>
+#include <MSTL/database/mysql/mysql_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 bool mysql_connect::connect_to(

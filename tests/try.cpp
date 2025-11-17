@@ -1,6 +1,6 @@
 #include "try.h"
 
-#include <MSTL/db/redis/redis_result.hpp>
+#include <MSTL/database/redis/redis_result.hpp>
 
 static const string TEST_FILE = "test_temp_file.txt";
 static const string TEST_DIR = "test_temp_dir";

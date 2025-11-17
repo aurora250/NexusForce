@@ -1,4 +1,4 @@
-#include <MSTL/db/db_config.hpp>
+#include <MSTL/database/db_config.hpp>
 #ifdef MSTL_SUPPORT_DB__
 MSTL_BEGIN_NAMESPACE__
 

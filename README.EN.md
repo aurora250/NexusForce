@@ -140,7 +140,7 @@ Defines error types and quick-invocation macros. All error types in this project
 
 Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardware noise-based true random number generator (`secret`).
 
-- [socket](include/MSTL/web/socket.hpp)
+- [socket](include/MSTL/network/socket.hpp)
 
 Defines the network socket class `socket`.
 
@@ -156,7 +156,7 @@ Defines the iterator extractor `iterator_traits` and convenient type aliases.
 
 Defines a series of basic CRTP base classes and globally generated functions based on them.
 
-- [hash](include/MSTL/core/algorithm/hash.hpp)
+- [hash](include/MSTL/core/functional/hash.hpp)
 
 Defines hash functions for basic types and utility hash functions like FNV.
 
@@ -362,11 +362,11 @@ Defines the file class `file`, which uses an 8KB buffer to handle high-volume sm
 
 Defines the JSON parser class `json_parser` and JSON builder class `json_builder`.
 
-- [session](include/MSTL/web/session.hpp)
+- [session](include/MSTL/network/http/session.hpp)
 
 Defines the cookie class, session class `session`, and HTTP constants.
 
-- [servlet](include/MSTL/web/servlet.hpp)
+- [servlet](include/MSTL/network/http/servlet.hpp)
 
 Defines the microservice class `servlet`, providing port listening, filter configuration, cookie setting, session attribute operations, and other functionalities.
 
@@ -374,7 +374,7 @@ Defines the microservice class `servlet`, providing port listening, filter confi
 
 Defines the Boost-based stack-tracing allocator `trace_allocator`.
 
-- [database_pool](include/MSTL/db/database_pool.hpp)
+- [database_pool](include/MSTL/database/database_pool.hpp)
 
 Defines polymorphic database connections (supporting MySQL, Sqlite3, Redis) and the database connection pool `database_pool`.
 

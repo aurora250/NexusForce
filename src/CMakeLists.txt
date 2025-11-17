@@ -119,7 +119,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/algorithm/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_value.cpp
@@ -155,12 +155,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http_constants.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/servlet.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http_message.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/filter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/http_constants.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/servlet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/http_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/web/dns/dns_client.cpp
 )
 
 # 编译为动态库

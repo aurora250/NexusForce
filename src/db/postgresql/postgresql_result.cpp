@@ -1,4 +1,4 @@
-#include <MSTL/db/postgresql/postgresql_result.hpp>
+#include <MSTL/database/postgresql/postgresql_result.hpp>
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__

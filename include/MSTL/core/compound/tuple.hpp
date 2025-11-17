@@ -1,7 +1,7 @@
 #ifndef MSTL_TUPLE_HPP__
 #define MSTL_TUPLE_HPP__
-#include "../algorithm/hash.hpp"
 #include "../compound/pair.hpp"
+#include "../functional/hash.hpp"
 #include "../utility/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
