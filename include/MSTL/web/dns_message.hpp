@@ -1,7 +1,6 @@
 #ifndef MSTL_DNS_MESSAGE_HPP
 #define MSTL_DNS_MESSAGE_HPP
 #include "dns_constants.hpp"
-#include "MSTL/core/string.hpp"
 #include "MSTL/core/vector.hpp"
 #include "MSTL/core/chrono.hpp"
 MSTL_BEGIN_NAMESPACE__

@@ -2,6 +2,17 @@
 #ifdef MSTL_SUPPORT_DB__
 MSTL_BEGIN_NAMESPACE__
 
+#ifdef MSTL_SUPPORT_POSTGRESQL__
+db_config db_config::for_postgresql(const string& db) {
+    db_config config;
+    config.port = 5432;
+    config.database = db;
+    config.charset = "utf8";
+    config.username = "postgres";
+    return config;
+}
+#endif
+
 #ifdef MSTL_SUPPORT_MYSQL__
 db_config db_config::for_mysql(const string& db) {
     db_config config;

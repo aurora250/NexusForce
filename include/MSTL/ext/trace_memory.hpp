@@ -2,11 +2,7 @@
 #define MSTL_TRACE_MEMORY_HPP__
 #include "MSTL/core/unordered_map.hpp"
 #include "MSTL/core/console.hpp"
-#ifdef MSTL_SUPPORT_BOOST__
-#include <boost/version.hpp>
-#endif
-#if BOOST_VERSION >= 106500
-#include <boost/stacktrace.hpp>
+#include "MSTL/core/stacktrace.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
@@ -41,24 +37,24 @@ public:
     ~trace_allocator() {
 #if MSTL_STATE_DEBUG__
         if (!traces_.empty()) {
-            _MSTL println("Memory leaks detected! \n");
+            _MSTL printcln(color::red(), "Memory leaks detected! \n");
             print_stacktrace();
         }
 #endif
     }
 
     void print_stacktrace() const {
-        FOR_EACH(entry, traces_) {
-            if (entry->first == 0) continue;
-            _MSTL println("Leaked pointer: ", static_cast<void*>(entry->first));
-            _MSTL println("Allocation stack trace:\n", entry->second);
+        for(auto& entry : traces_) {
+            if (entry.first == 0) continue;
+            _MSTL printcln(color::red(), "Leaked pointer: ", static_cast<void*>(entry.first));
+            _MSTL printcln(color::red(), "Allocation stack trace:\n", entry.second);
         }
     }
 
     MSTL_NODISCARD MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         pointer ptr = _MSTL allocator<T>().allocate(n);
-        auto st = boost::stacktrace::stacktrace();
-        traces_[ptr] = st;
+        stacktrace st{};
+        traces_[ptr] = _MSTL move(st);
         return ptr;
     }
 
@@ -83,7 +79,7 @@ public:
     }
 
 private:
-    _MSTL unordered_map<T*, boost::stacktrace::stacktrace> traces_;
+    _MSTL unordered_map<T*, _MSTL stacktrace> traces_;
 };
 template <typename T, typename U>
 bool operator ==(const trace_allocator<T>&, const trace_allocator<U>&) noexcept {
@@ -95,5 +91,4 @@ bool operator !=(const trace_allocator<T>&, const trace_allocator<U>&) noexcept 
 }
 
 MSTL_END_NAMESPACE__
-#endif
 #endif // MSTL_TRACE_MEMORY_HPP__

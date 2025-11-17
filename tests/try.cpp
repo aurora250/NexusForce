@@ -1,5 +1,7 @@
 #include "try.h"
 
+#include <MSTL/db/redis/redis_result.hpp>
+
 static const string TEST_FILE = "test_temp_file.txt";
 static const string TEST_DIR = "test_temp_dir";
 static const string TEST_SUB_DIR = TEST_DIR + "/sub_dir";
@@ -1320,6 +1322,11 @@ void test_option() {
     println(result3);
 }
 
+void test_st(){
+    trace_allocator<int> alloc;
+    auto* ptr = alloc.allocate(1);
+}
+
 void test_any() {
     any a1;
     println("Testing default constructor:");
@@ -1656,9 +1663,14 @@ void test_mysql() {
     mysql_config.password = "147258hu";
     database_pool pool(DB_TYPE::MYSQL, mysql_config);
 
-    const auto sql = sql_builder().select({"ISBN", "BookName"}).from("book").where("CollectNumber = 10").build();
-    auto pstmt = dynamic_pointer_cast<mysql_connect>(pool.get_tb_connect())->prepare_statement(sql);
-
+    const auto sql = sql_builder()
+        .select({"ISBN", "BookName"})
+        .from("book")
+        .where("CollectNumber = ?")
+        .build();
+    auto pstmt = dynamic_pointer_cast<mysql_connect>(
+        pool.get_tb_connect())->prepare_statement(sql);
+    pstmt->bind_param(0, 10);
     auto res = pstmt->execute_query();
     println(res->column_names());
     while (res->next()) {
@@ -1668,6 +1680,44 @@ void test_mysql() {
         println();
     }
 #endif
+}
+
+void test_redis() {
+#ifdef MSTL_SUPPORT_REDIS__
+    db_config redis_config = db_config::for_redis("0");
+    database_pool pool(DB_TYPE::REDIS, redis_config, 10, 20, 2);
+    auto conn = dynamic_pointer_cast<redis_connect>(pool.get_kv_connect());
+    println(conn->is_valid());
+    println(conn->update("SET age 20"));
+    auto res = dynamic_pointer_cast<redis_result>(conn->get("age"));
+    println(res->empty());
+    while (res->next()) {
+        println(res->value());
+    }
+#endif
+}
+
+void test_postgre() {
+    db_config postgre_config = db_config::for_postgresql("user");
+    postgre_config.password = "483674";
+    database_pool pool(DB_TYPE::POSTGRESQL, postgre_config);
+
+    const auto sql = sql_builder()
+        .select({"username", "email"})
+        .from("user")
+        .where_le("age", to_string(30))
+        .build();
+    auto pstmt = dynamic_pointer_cast<postgresql_connect>(
+        pool.get_tb_connect())->prepare_statement(sql);
+    pstmt->bind_param(0, 10);
+    auto res = pstmt->execute_query();
+    println(res->column_names());
+    while (res->next()) {
+        for (int i = 0; i < res->column_count(); ++i) {
+            print(res->get(i), " ");
+        }
+        println();
+    }
 }
 
 void test_dbpool() {

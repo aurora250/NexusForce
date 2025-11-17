@@ -15,7 +15,10 @@ enum class DB_TYPE {
     SQLITE3,
 #endif
 #ifdef MSTL_SUPPORT_REDIS__
-    REDIS
+    REDIS,
+#endif
+#ifdef MSTL_SUPPORT_POSTGRESQL__
+    POSTGRESQL
 #endif
 };
 
@@ -24,8 +27,12 @@ struct MSTL_API db_config {
     string password{};
     string database{};
     string host = "127.0.0.1";
-    uint16_t port = 0;
     string charset{};
+    uint16_t port = 0;
+
+#ifdef MSTL_SUPPORT_POSTGRESQL__
+    static db_config for_postgresql(const string& db);
+#endif
 
 #ifdef MSTL_SUPPORT_MYSQL__
     static db_config for_mysql(const string& db);

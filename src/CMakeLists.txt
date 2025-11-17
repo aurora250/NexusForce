@@ -138,7 +138,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/log_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
@@ -216,9 +220,9 @@ target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
 
 configure_compiler_options(MSTL)
 
-# Windows链接ws2_32 wsock32 SetupAPI cfgmgr32
+# Windows链接系统库
 if(WIN32)
-    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32)
+    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32 DbgHelp)
 endif()
 
 
@@ -230,7 +234,7 @@ if(MSTL_ENABLE_BOOST AND MSTL_ARCH STREQUAL "x64")
 
     find_package(Boost QUIET COMPONENTS system filesystem)
     if(Boost_FOUND)
-        target_link_libraries(MSTL PUBLIC Boost::system Boost::filesystem)
+        target_link_libraries(MSTL PUBLIC Boost::system)
         target_compile_definitions(MSTL PUBLIC MSTL_SUPPORT_BOOST__)
         message(STATUS "Boost linked successfully")
     else()
@@ -238,6 +242,108 @@ if(MSTL_ENABLE_BOOST AND MSTL_ARCH STREQUAL "x64")
     endif()
 else()
     message(STATUS "Boost support disabled")
+endif()
+
+
+if(MSTL_ENABLE_POSTGRESQL AND MSTL_ARCH STREQUAL "x64")
+    set(PostgreSQL_FOUND FALSE)
+
+    if(WIN32)
+        set(POSTGRESQL_ROOT_DIR "D:/PostgreSQL/18" CACHE PATH "PostgreSQL root directory")
+
+        find_path(POSTGRESQL_INCLUDE_DIR
+                NAMES libpq-fe.h
+                HINTS "${POSTGRESQL_ROOT_DIR}/include"
+                PATHS
+                "C:/Program Files/PostgreSQL/*/include"
+                "$ENV{POSTGRESQL_ROOT}/include"
+                NO_DEFAULT_PATH
+        )
+
+        find_library(POSTGRESQL_LIBRARY
+                NAMES libpq libpq-static pq
+                HINTS "${POSTGRESQL_ROOT_DIR}/lib"
+                PATHS
+                "C:/Program Files/PostgreSQL/*/lib"
+                "$ENV{POSTGRESQL_ROOT}/lib"
+                NO_DEFAULT_PATH
+        )
+
+        if(MSVC)
+            find_file(POSTGRESQL_DLL
+                    NAMES libpq.dll
+                    HINTS "${POSTGRESQL_ROOT_DIR}/bin"
+                    PATHS
+                    "C:/Program Files/PostgreSQL/*/bin"
+                    "$ENV{POSTGRESQL_ROOT}/bin"
+                    NO_DEFAULT_PATH
+            )
+        endif()
+
+    else()
+        find_package(PkgConfig QUIET)
+        if(PkgConfig_FOUND)
+            pkg_check_modules(PC_POSTGRESQL QUIET libpq)
+        endif()
+
+        find_path(POSTGRESQL_INCLUDE_DIR
+                NAMES libpq-fe.h
+                HINTS ${PC_POSTGRESQL_INCLUDE_DIRS}
+                PATHS
+                /usr/include
+                /usr/include/postgresql
+                /usr/local/include
+                /usr/local/include/postgresql
+                /opt/local/include/postgresql
+                PATH_SUFFIXES postgresql
+        )
+
+        find_library(POSTGRESQL_LIBRARY
+                NAMES pq
+                HINTS ${PC_POSTGRESQL_LIBRARY_DIRS}
+                PATHS
+                /usr/lib
+                /usr/lib64
+                /usr/lib/x86_64-linux-gnu
+                /usr/local/lib
+                /usr/local/lib64
+                PATH_SUFFIXES postgresql
+        )
+    endif()
+
+    if(POSTGRESQL_INCLUDE_DIR AND POSTGRESQL_LIBRARY)
+        set(PostgreSQL_FOUND TRUE)
+        target_include_directories(MSTL PUBLIC ${POSTGRESQL_INCLUDE_DIR})
+        target_link_libraries(MSTL PUBLIC ${POSTGRESQL_LIBRARY})
+
+        if(WIN32 AND POSTGRESQL_DLL AND EXISTS ${POSTGRESQL_DLL})
+            add_custom_command(TARGET MSTL POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    ${POSTGRESQL_DLL}
+                    $<TARGET_FILE_DIR:MSTL>
+                    COMMENT "Copying libpq.dll to output directory"
+            )
+        endif()
+
+        target_compile_definitions(MSTL PUBLIC MSTL_SUPPORT_POSTGRESQL__)
+        enable_database_support(MSTL)
+        message(STATUS "PostgreSQL linked successfully")
+    else()
+        message(WARNING "PostgreSQL not found - PostgreSQL components will be unavailable")
+        if(WIN32)
+            message(STATUS "  Hint: Set POSTGRESQL_ROOT_DIR to your PostgreSQL installation directory")
+        endif()
+    endif()
+else()
+    set(disable_reasons "")
+    if(NOT MSTL_ARCH STREQUAL "x64")
+        list(APPEND disable_reasons "only x64 supported")
+    endif()
+    if(NOT MSTL_ENABLE_POSTGRESQL)
+        list(APPEND disable_reasons "disabled by option")
+    endif()
+    string(JOIN ", " reason_str ${disable_reasons})
+    message(STATUS "PostgreSQL support disabled: ${reason_str}")
 endif()
 
 

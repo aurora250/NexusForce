@@ -788,6 +788,11 @@ struct default_delete {
 	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete ptr;
     }
+
+    template <typename U>
+    MSTL_CONSTEXPR20 default_delete<U> rebind() && {
+        return default_delete<U>();
+    }
 };
 
 template <typename T>
@@ -802,6 +807,11 @@ struct default_delete<T[]> {
 	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete [] ptr;
 	}
+
+    template <typename U>
+    MSTL_CONSTEXPR20 default_delete<U[]> rebind() && {
+        return default_delete<U[]>();
+    }
 };
 
 
@@ -1235,6 +1245,38 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
     nullptr_t, const unique_ptr<T, D>& rh) {
     return !(nullptr < rh);
 }
+
+
+template <typename T, typename U>
+unique_ptr<T> static_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> const_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> reinterpret_pointer_cast(const unique_ptr<U>& ptr) = delete;
+template <typename T, typename U>
+unique_ptr<T> dynamic_pointer_cast(const unique_ptr<U>& ptr) = delete;
+
+template <typename T, typename U>
+MSTL_CONSTEXPR20 unique_ptr<T> static_pointer_cast(unique_ptr<U>&& ptr) {
+    return unique_ptr<T>(static_cast<T*>(ptr.release()), ptr.get_deleter());
+}
+template <typename T, typename U>
+MSTL_CONSTEXPR20 unique_ptr<T> const_pointer_cast(unique_ptr<U>&& ptr) {
+    return unique_ptr<T>(const_cast<T*>(ptr.release()), ptr.get_deleter());
+}
+template <typename T, typename U>
+unique_ptr<T> reinterpret_pointer_cast(unique_ptr<U>&& ptr) {
+    return unique_ptr<T>(reinterpret_cast<T*>(ptr.release()), ptr.get_deleter());
+}
+template <typename T, typename U>
+unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
+    T* tmp = dynamic_cast<T*>(ptr.release());
+    if (tmp != nullptr) {
+        return unique_ptr<T>(tmp, _MSTL move(ptr.get_deleter()).template rebind<T>());
+    }
+    return nullptr;
+}
+
 
 template <typename T, typename Deleter>
 struct hash<unique_ptr<T, Deleter>> {

@@ -22,6 +22,7 @@
 #include "MSTL/ext/lock_free_queue.hpp"
 #include "MSTL/ext/trace_memory.hpp"
 #include "MSTL/db/database_pool.hpp"
+#include "MSTL/db/postgresql/postgresql_connect.hpp"
 #include "MSTL/db/mysql/mysql_connect.hpp"
 #include "MSTL/db/sqlite/sqlite_connect.hpp"
 #include "MSTL/db/redis/redis_connect.hpp"

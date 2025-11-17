@@ -14,6 +14,78 @@ if(@MSTL_ENABLE_CUDA@)
     find_dependency(CUDAToolkit)
 endif()
 
+if(@MSTL_ENABLE_POSTGRESQL@)
+    if(WIN32)
+        find_path(PostgreSQL_INCLUDE_DIR NAMES libpq-fe.h
+            PATHS "C:/Program Files/PostgreSQL/*/include"
+                  "D:/PostgreSQL/18/include"
+                  "$ENV{POSTGRESQL_ROOT}/include")
+        find_library(PostgreSQL_LIBRARY NAMES libpq pq
+            PATHS "C:/Program Files/PostgreSQL/*/lib"
+                  "D:/PostgreSQL/18/lib"
+                  "$ENV{POSTGRESQL_ROOT}/lib")
+        if(PostgreSQL_INCLUDE_DIR AND PostgreSQL_LIBRARY)
+            set(PostgreSQL_FOUND TRUE)
+        endif()
+    else()
+        find_dependency(PostgreSQL)
+    endif()
+endif()
+
+if(@MSTL_ENABLE_MYSQL@)
+    if(WIN32)
+        find_path(MySQL_INCLUDE_DIR NAMES mysql.h
+            PATHS "C:/Program Files/MySQL/*/include"
+                  "D:/MySQL/MySQL Server 8.0/include"
+                  "$ENV{MYSQL_DIR}/include"
+        )
+        find_library(MySQL_LIBRARY NAMES libmysql mysqlclient
+            PATHS "C:/Program Files/MySQL/*/lib"
+                  "D:/MySQL/MySQL Server 8.0/lib"
+                  "$ENV{MYSQL_DIR}/lib"
+        )
+        if(MySQL_INCLUDE_DIR AND MySQL_LIBRARY)
+            set(MySQL_FOUND TRUE)
+        endif()
+    else()
+        find_path(MySQL_INCLUDE_DIR NAMES mysql.h
+            PATHS /usr/include/mysql /usr/local/include/mysql)
+        find_library(MySQL_LIBRARY NAMES mysqlclient
+            PATHS /usr/lib /usr/local/lib)
+        if(MySQL_INCLUDE_DIR AND MySQL_LIBRARY)
+            set(MySQL_FOUND TRUE)
+        endif()
+    endif()
+endif()
+
+if(@MSTL_ENABLE_SQLITE3@)
+    find_dependency(SQLite3)
+endif()
+
+if(@MSTL_ENABLE_REDIS@)
+    if(WIN32)
+        find_path(HIREDIS_INCLUDE_DIR NAMES hiredis/hiredis.h
+            PATHS "$ENV{HIREDIS_ROOT}/include"
+                  "D:/vcpkg/packages/hiredis_x64-windows/include"
+            )
+        find_library(HIREDIS_LIBRARY NAMES hiredis
+            PATHS "$ENV{HIREDIS_ROOT}/lib"
+                  "D:/vcpkg/packages/hiredis_x64-windows/lib"
+                  )
+        if(HIREDIS_INCLUDE_DIR AND HIREDIS_LIBRARY)
+            set(HIREDIS_FOUND TRUE)
+        endif()
+    else()
+        find_path(HIREDIS_INCLUDE_DIR NAMES hiredis/hiredis.h
+            PATHS /usr/include /usr/local/include)
+        find_library(HIREDIS_LIBRARY NAMES hiredis
+            PATHS /usr/lib /usr/local/lib)
+        if(HIREDIS_INCLUDE_DIR AND HIREDIS_LIBRARY)
+            set(HIREDIS_FOUND TRUE)
+        endif()
+    endif()
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(MSTL_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/../lib/Debug")
 else()
@@ -33,3 +105,11 @@ set(MSTL_INCLUDE_DIR ${MSTL_INCLUDE_DIRS})
 set(MSTL_LIBRARY_DIR ${MSTL_LIBRARY_DIRS})
 
 message(STATUS "Found MSTL: ${CMAKE_CURRENT_LIST_DIR} (include: ${MSTL_INCLUDE_DIR})")
+
+set(MSTL_ENABLE_BOOST @MSTL_ENABLE_BOOST@)
+set(MSTL_ENABLE_MYSQL @MSTL_ENABLE_MYSQL@)
+set(MSTL_ENABLE_SQLITE3 @MSTL_ENABLE_SQLITE3@)
+set(MSTL_ENABLE_REDIS @MSTL_ENABLE_REDIS@)
+set(MSTL_ENABLE_POSTGRESQL @MSTL_ENABLE_POSTGRESQL@)
+set(MSTL_ENABLE_QT6 @MSTL_ENABLE_QT6@)
+set(MSTL_ENABLE_CUDA @MSTL_ENABLE_CUDA@)

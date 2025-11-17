@@ -523,7 +523,7 @@ MSTL_END_INNER__
 
 
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
-MSTL_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
+MSTL_NODISCARD MSTL_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     size_t pos = 0;
     return _INNER format_impl(fmt, pos, _MSTL forward<Args>(args)...);
 }

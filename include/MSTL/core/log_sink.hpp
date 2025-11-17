@@ -58,7 +58,7 @@ private:
 public:
     explicit log_formatter(string pattern);
 
-    string format(const log_event& event);
+    MSTL_NODISCARD string format(const log_event& event);
 };
 
 

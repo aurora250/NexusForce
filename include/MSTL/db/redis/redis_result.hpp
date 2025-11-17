@@ -8,28 +8,31 @@ MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API redis_result final : idb_kv_result {
 private:
-    redis::redisReply* reply_ = nullptr;
+    _MSTL_REDIS redisReply* reply_ = nullptr;
     size_type cursor_ = 0;
     size_type rows_ = 0;
-    unique_ptr<vector<string>> column_names_ = make_unique<vector<string>>();
-    unique_ptr<vector<pair<string, string>>> kv_pairs_ = make_unique<vector<pair<string, string>>>();
-    bool is_array_ = false;
-    size_type kv_cursor_ = 0;
+    unique_ptr<vector<string>> column_names_ =
+        make_unique<vector<string>>();
+    unique_ptr<vector<pair<string, string>>> kv_pairs_ =
+        make_unique<vector<pair<string, string>>>();
 
-    static string format_redis_reply_element(redis::redisReply* element);
+    size_type kv_cursor_ = 0;
+    bool is_array_ = false;
+
+    static string format_redis_reply_element(_MSTL_REDIS redisReply* element);
     void process_reply();
-    string at_string() const;
+    string get_string() const;
 
 public:
     redis_result() noexcept = default;
 
-    explicit redis_result(redis::redisReply* reply) noexcept
+    explicit redis_result(_MSTL_REDIS redisReply* reply) noexcept
     : reply_(reply) {
         process_reply();
     }
 
     ~redis_result() override {
-        if (reply_) redis::freeReplyObject(reply_);
+        if (reply_) _MSTL_REDIS freeReplyObject(reply_);
     }
 
     MSTL_NODISCARD bool empty() const noexcept override { return !reply_ || (rows_ == 0 && kv_pairs_->empty()); }

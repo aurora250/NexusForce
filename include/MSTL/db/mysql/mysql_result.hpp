@@ -33,7 +33,7 @@ public:
 
     MSTL_NODISCARD bool next() noexcept override;
 
-    MSTL_NODISCARD _MSTL string_view get(size_type n) const noexcept override;
+    MSTL_NODISCARD string_view get(size_type n) const noexcept override;
 
     MSTL_NODISCARD bool get_bool(size_type n) const override;
     MSTL_NODISCARD int8_t get_int8(size_type n) const override;
@@ -43,8 +43,8 @@ public:
     MSTL_NODISCARD float32_t get_float32(size_type n) const override;
     MSTL_NODISCARD float64_t get_float64(size_type n) const override;
     MSTL_NODISCARD decimal_t get_decimal(size_type n) const override;
-    MSTL_NODISCARD _MSTL vector<char> get_blob(size_type n) const override;
-    MSTL_NODISCARD _MSTL string get_set(size_type n) const override;
+    MSTL_NODISCARD vector<char> get_blob(size_type n) const override;
+    MSTL_NODISCARD string get_set(size_type n) const override;
     MSTL_NODISCARD uint64_t get_bit(size_type n) const override;
     MSTL_NODISCARD _MSTL date get_date(size_type n) const override;
     MSTL_NODISCARD _MSTL time get_time(size_type n) const override;

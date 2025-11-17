@@ -297,13 +297,15 @@ void test_variant();
 void test_string();
 
 void test_option();
-
+void test_st();
 void test_any();
 void test_timer();
 void test_log();
 void test_ranges();
 void test_sql();
 void test_mysql();
+void test_redis();
+void test_postgre();
 void test_dbpool();
 void test_tpool();
 void test_dns();

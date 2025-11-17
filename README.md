@@ -395,7 +395,8 @@ future
 cuda-matrix
 xml
 yaml
-postgresql
+ini
+toml
 
 fix:
 strong assert

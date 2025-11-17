@@ -3,6 +3,7 @@
 #include <MSTL/db/mysql/mysql_connect.hpp>
 #include <MSTL/db/sqlite/sqlite_connect.hpp>
 #include <MSTL/db/redis/redis_connect.hpp>
+#include <MSTL/db/postgresql/postgresql_connect.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -68,6 +69,12 @@ connect_timeout_(connect_timeout), running_(true) {
 #ifdef MSTL_SUPPORT_REDIS__
         case DB_TYPE::REDIS: {
             factory_ = make_unique<redis_factory>(config);
+            break;
+        }
+#endif
+#ifdef MSTL_SUPPORT_REDIS__
+        case DB_TYPE::POSTGRESQL: {
+            factory_ = make_unique<postgresql_factory>(config);
             break;
         }
 #endif

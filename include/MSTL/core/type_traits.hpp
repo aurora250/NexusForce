@@ -1814,7 +1814,7 @@ public:
         return *ptr_;
     }
     template <typename... Args>
-    MSTL_CONSTEXPR20 typename _INNER __invoke_result_aux<T&, Args...>::type
+    constexpr typename _INNER __invoke_result_aux<T&, Args...>::type
     operator()(Args&&... args) const noexcept(is_nothrow_invocable<T&, Args...>::value) {
         return _MSTL invoke(get(), _MSTL forward<Args>(args)...);
     }

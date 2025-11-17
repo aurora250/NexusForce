@@ -1,6 +1,7 @@
 #ifndef MSTL_MUTEX_HPP__
 #define MSTL_MUTEX_HPP__
 #include "type_traits.hpp"
+#include <atomic>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -253,6 +254,40 @@ public:
         return ret;
     }
 };
+
+
+class once_flag {
+public:
+    once_flag() noexcept : state_(0) {}
+
+    once_flag(const once_flag&) = delete;
+    once_flag& operator=(const once_flag&) = delete;
+    once_flag(once_flag&&) = delete;
+    once_flag& operator=(once_flag&&) = delete;
+
+private:
+    template<typename Callable, typename... Args>
+    friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
+
+    std::atomic<int> state_;
+    mutex mtx_;
+};
+
+template <typename Callable, typename... Args>
+void call_once(once_flag& flag, Callable&& func, Args&&... args) {
+    if (flag.state_.load(std::memory_order_acquire) == 1) {
+        return;
+    }
+    lock_guard<mutex> lock(flag.mtx_);
+    if (flag.state_.load(std::memory_order_relaxed) == 0) {
+        try {
+            _MSTL forward<Callable>(func)(_MSTL forward<Args>(args)...);
+            flag.state_.store(1, std::memory_order_release);
+        } catch (...) {
+            throw;
+        }
+    }
+}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_MUTEX_HPP__

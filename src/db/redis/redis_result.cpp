@@ -3,7 +3,7 @@
 #include <MSTL/core/serialize.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-_MSTL string redis_result::format_redis_reply_element(redis::redisReply* element) {
+_MSTL string redis_result::format_redis_reply_element(_MSTL_REDIS redisReply* element) {
     switch (element->type) {
         case REDIS_REPLY_STRING:
         case REDIS_REPLY_STATUS:
@@ -36,8 +36,8 @@ void redis_result::process_reply() {
 
             if (rows_ % 2 == 0) {
                 for (size_t i = 0; i < rows_; i += 2) {
-                    string key = format_redis_reply_element(reply_->element[i]);
-                    string value = format_redis_reply_element(reply_->element[i + 1]);
+                    const string key = format_redis_reply_element(reply_->element[i]);
+                    const string value = format_redis_reply_element(reply_->element[i + 1]);
                     kv_pairs_->emplace_back(_MSTL move(key), _MSTL move(value));
                 }
                 rows_ = kv_pairs_->size();
@@ -45,15 +45,20 @@ void redis_result::process_reply() {
                 column_names_->push_back("value");
             }
             break;
-        } case REDIS_REPLY_STRING: case REDIS_REPLY_STATUS:
+        }
+        case REDIS_REPLY_STRING: case REDIS_REPLY_STATUS:
         case REDIS_REPLY_ERROR: case REDIS_REPLY_INTEGER: {
             rows_ = 1;
             column_names_->push_back("result");
+            string value = format_redis_reply_element(reply_);
+            kv_pairs_->emplace_back("", _MSTL move(value));
             break;
-        } case REDIS_REPLY_NIL: {
+        }
+        case REDIS_REPLY_NIL: {
             rows_ = 0;
             break;
-        } default: {
+        }
+        default: {
             rows_ = 1;
             column_names_->push_back("result");
             break;
@@ -61,14 +66,14 @@ void redis_result::process_reply() {
     }
 }
 
-string redis_result::at_string() const {
+string redis_result::get_string() const {
     if (empty()) return {};
 
     if (!kv_pairs_->empty() && kv_cursor_ > 0) {
         return string(value());
     }
     if (is_array_ && cursor_ > 0) {
-        redis::redisReply* element = reply_->element[cursor_ - 1];
+        _MSTL_REDIS redisReply* element = reply_->element[cursor_ - 1];
         return format_redis_reply_element(element);
     }
     return format_redis_reply_element(reply_);
@@ -77,6 +82,7 @@ string redis_result::at_string() const {
 bool redis_result::next() noexcept {
     if (empty() || cursor_ >= rows_) return false;
     ++cursor_;
+    ++kv_cursor_;
     return cursor_ <= rows_;
 }
 
@@ -91,7 +97,7 @@ string_view redis_result::value() const noexcept {
 }
 
 bool redis_result::value_bool() const {
-    return boolean::parse(at_string().view()).value();
+    return boolean::parse(get_string().view()).value();
 }
 
 int64_t redis_result::value_int64() const {
@@ -99,11 +105,11 @@ int64_t redis_result::value_int64() const {
     if (reply_->type == REDIS_REPLY_INTEGER) {
         return reply_->integer;
     }
-    return integer64::parse(at_string().view());
+    return integer64::parse(get_string().view());
 }
 
 double redis_result::value_double() const {
-    return float64::parse(at_string().view());
+    return float64::parse(get_string().view());
 }
 
 vector<string> redis_result::value_array() const {
