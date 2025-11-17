@@ -1,6 +1,6 @@
 #ifndef MSTL_SERVLET_HPP__
 #define MSTL_SERVLET_HPP__
-#include "../core/utilities/undef_cmacro.hpp"
+#include "../core/config/undef_cmacro.hpp"
 #include "filter.hpp"
 #include "socket.hpp"
 MSTL_BEGIN_NAMESPACE__

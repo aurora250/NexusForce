@@ -1,6 +1,6 @@
 #ifndef MSTL_HTTP_CONSTANTS_HPP__
 #define MSTL_HTTP_CONSTANTS_HPP__
-#include "../core/string/serialize.hpp"
+#include "../core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class HTTP_STATUS : uint32_t {

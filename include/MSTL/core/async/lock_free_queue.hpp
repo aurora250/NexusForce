@@ -1,7 +1,7 @@
 #ifndef MSTL_LOCK_FREE_QUEUE_HPP__
 #define MSTL_LOCK_FREE_QUEUE_HPP__
 #include <atomic>
-#include "../memory/memory.hpp"
+#include "../memory/unique_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

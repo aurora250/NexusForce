@@ -1,7 +1,7 @@
 #ifndef MSTL_MYSQL_RESULT_HPP__
 #define MSTL_MYSQL_RESULT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
-#include "../../core/utilities/undef_cmacro.hpp"
+#include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "mysql_config.hpp"
 MSTL_BEGIN_NAMESPACE__

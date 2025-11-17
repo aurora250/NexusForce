@@ -1,7 +1,6 @@
 #ifndef MSTL_SQLITE_CONNECT_HPP__
 #define MSTL_SQLITE_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
-#include "../../core/utilities/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "MSTL/db/sqlite/sqlite_config.hpp"
 MSTL_BEGIN_NAMESPACE__

@@ -1,5 +1,5 @@
-#include <MSTL/core/datetime/datetime.hpp>
-#include <MSTL/core/utilities/vsprintf.hpp>
+#include <MSTL/core/time/datetime.hpp>
+#include <MSTL/core/utility/vsprintf.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #else
@@ -127,7 +127,7 @@ MSTL_NODISCARD string datetime::to_GMT() const noexcept {
         months[mon_idx],
         utc_date.year(),
         utc_time.to_string().c_str());
-    return string(buf);
+    return {buf};
 }
 
 MSTL_END_NAMESPACE__

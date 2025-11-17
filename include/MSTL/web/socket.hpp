@@ -1,6 +1,6 @@
 #ifndef MSTL_SOCKET_HPP__
 #define MSTL_SOCKET_HPP__
-#include "../core/datetime/chrono.hpp"
+#include "../core/time/duration.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <WinSock2.h>
 #pragma comment(lib, "ws2_32.lib")

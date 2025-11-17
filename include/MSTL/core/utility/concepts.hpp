@@ -1,0 +1,313 @@
+#ifndef MSTL_CONCEPTS_HPP__
+#define MSTL_CONCEPTS_HPP__
+#include "../iterator/iterator_traits.hpp"
+MSTL_BEGIN_NAMESPACE__
+
+#ifdef MSTL_STANDARD_20__
+template <typename T1, typename T2>
+concept same_as = is_same_v<T1, T2> && is_same_v<T2, T1>;
+
+template <typename T1, typename T2>
+concept common_reference_with = requires {
+	typename common_reference_t<T1, T2>;
+	typename common_reference_t<T2, T1>;
+}
+&& same_as<common_reference_t<T1, T2>, common_reference_t<T2, T1>>
+&& convertible_to<T1, common_reference_t<T1, T2>>
+&& convertible_to<T2, common_reference_t<T1, T2>>;
+
+template <typename T1, typename T2>
+concept common_with = requires { typename common_type_t<T1, T2>; typename common_type_t<T2, T1>; }
+&& same_as<common_type_t<T1, T2>, common_type_t<T2, T1>> && requires {
+	static_cast<common_type_t<T1, T2>>(_MSTL declval<T1>());
+	static_cast<common_type_t<T1, T2>>(_MSTL declval<T2>());
+} && common_reference_with<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>>
+&& common_reference_with<add_lvalue_reference_t<common_type_t<T1, T2>>,
+	common_reference_t<add_lvalue_reference_t<const T1>, add_lvalue_reference_t<const T2>>>;
+
+template <typename Derived, typename Base>
+concept derived_from = is_base_of_v<Base, Derived> && convertible_to<const volatile Derived*, const volatile Base*>;
+
+
+template<typename T, typename... Args>
+concept constructible_from = is_constructible_v<T, Args...>;
+template <typename T>
+concept move_constructible = is_move_constructible_v<T>;
+template<typename T>
+concept copy_constructible = move_constructible<T>
+&& constructible_from<T, T&>&& convertible_to<T&, T>
+&& constructible_from<T, const T&>&& convertible_to<const T&, T>
+&& constructible_from<T, const T>&& convertible_to<const T, T>;
+
+
+template <typename T>
+concept default_initializable = constructible_from<T> && requires {
+	T{};
+	::new (static_cast<void*>(nullptr)) T;
+};
+
+
+template <typename To, typename From>
+concept assignable_from = is_lvalue_reference_v<To>
+&& common_reference_with<const remove_reference_t<To>&, const remove_reference_t<From>&>
+&& requires(To x, From&& y) {
+	{ x = static_cast<From&&>(y) } -> same_as<To>;
+};
+
+
+template <typename T>
+concept movable = is_object_v<T>
+&& move_constructible<T>
+&& assignable_from<T&, T>
+&& is_swappable_v<T>;
+
+template <typename T>
+concept copyable = copy_constructible<T>
+&& movable<T>
+&& assignable_from<T&, T&>
+&& assignable_from<T&, const T&>
+&& assignable_from<T&, const T>;
+
+
+template <typename T1, typename T2>
+concept one_way_equality_comparable =
+	requires(const remove_reference_t<T1>& x, const remove_reference_t<T2>& y) {
+		{ x == y } -> convertible_to<bool>;
+		{ x != y } -> convertible_to<bool>;
+};
+
+template <typename T1, typename T2>
+concept both_equality_comparable =
+one_way_equality_comparable<T1, T2>&& one_way_equality_comparable<T2, T1>;
+
+template <typename T>
+concept equality_comparable = one_way_equality_comparable<T, T>;
+
+template <typename T1, typename T2>
+concept equality_comparable_with = equality_comparable<T1> && equality_comparable<T2>
+&& common_reference_with<const remove_reference_t<T1>&, const remove_reference_t<T2>&>
+&& equality_comparable<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>>
+&& both_equality_comparable<T1, T2>;
+
+
+template <typename T1, typename T2>
+concept one_way_ordered = requires(const remove_reference_t<T1>& x, const remove_reference_t<T2>& y) {
+	{ x < y } -> convertible_to<bool>;
+	{ x > y } -> convertible_to<bool>;
+	{ x <= y } -> convertible_to<bool>;
+	{ x >= y } -> convertible_to<bool>;
+};
+
+template <typename T1, typename T2>
+concept both_ordered_with = one_way_ordered<T1, T2>&& one_way_ordered<T2, T1>;
+
+template <typename T>
+concept totally_ordered = equality_comparable<T> && one_way_ordered<T, T>;
+
+template <typename T1, typename T2>
+concept totally_ordered_with = totally_ordered<T1> && totally_ordered<T2>
+&& equality_comparable_with<T1, T2>
+&& totally_ordered<common_reference_t<const remove_reference_t<T1>&, const remove_reference_t<T2>&>>
+&& both_ordered_with<T1, T2>;
+
+
+template <typename T>
+concept semiregular = copyable<T> && default_initializable<T>;
+template <typename T>
+concept regular = semiregular<T> && equality_comparable<T>;
+
+
+template <typename T>
+concept iterator_typedef = requires() {
+	typename iterator_traits<T>::iterator_category;
+	typename iterator_traits<T>::value_type;
+	typename iterator_traits<T>::difference_type;
+	typename iterator_traits<T>::pointer;
+	typename iterator_traits<T>::reference;
+};
+
+template <typename Iterator>
+concept input_iterator = both_equality_comparable<Iterator, Iterator>
+&& iterator_typedef<Iterator> && requires(Iterator it) {
+	{ *it } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
+	{ ++it } -> same_as<Iterator&>;
+	{ it++ } -> same_as<Iterator>;
+};
+template <typename Iterator>
+concept forward_iterator = both_ordered_with<Iterator, Iterator> && semiregular<Iterator>
+&& input_iterator<Iterator> && requires(Iterator it1, Iterator it2) {
+	{ it1 - it2 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
+};
+template <typename Iterator>
+concept bidirectional_iterator = forward_iterator<Iterator> && requires(Iterator it) {
+	{ --it } -> same_as<Iterator&>;
+	{ it-- } -> same_as<Iterator>;
+};
+template <typename Iterator>
+concept random_access_iterator = bidirectional_iterator<Iterator>
+&& requires(Iterator it1, Iterator it2, typename iterator_traits<Iterator>::difference_type n) {
+	{ it1 + n } -> convertible_to<Iterator>;
+	{ n + it1 } -> convertible_to<Iterator>;
+	{ it1 - n } -> convertible_to<Iterator>;
+	{ it1 += n } -> convertible_to<Iterator>;
+	{ it1 -= n } -> convertible_to<Iterator>;
+	{ it2 - it1 } -> convertible_to<typename iterator_traits<Iterator>::difference_type>;
+	{ it1[n] } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
+};
+
+
+template <typename Iterator>
+concept input_or_output_iterator = input_iterator<Iterator>;
+
+
+template <typename Sentinel, typename Iterator>
+concept sentinel_for =
+    input_or_output_iterator<Iterator> &&
+    semiregular<Sentinel> &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ i == s } -> convertible_to<bool>;
+		{ i != s } -> convertible_to<bool>;
+    };
+
+
+template <typename T>
+concept integral = is_integral_v<T>;
+template <typename T>
+concept signed_integral = integral<T> && is_signed_v<T>;
+template <typename T>
+concept unsigned_integral = integral<T> && !signed_integral<T>;
+
+template <typename T>
+concept floating_point = is_floating_point_v<T>;
+
+template <typename T, typename... Args>
+concept invocable = is_invocable_v<T, Args...>;
+
+template <typename F, typename... Args>
+concept boolean_testable_return = convertible_to<invoke_result_t<F, Args...>, bool>;
+
+template <typename F, typename... Args>
+concept predicate = invocable<F, Args...> && boolean_testable_return<F, Args...>;
+
+
+template <typename Sentinel, typename Iterator>
+concept sized_sentinel_for =
+    input_iterator<Iterator> &&
+    sentinel_for<Sentinel, Iterator> &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ s - i } -> same_as<iter_difference_t<Iterator>>;
+    } &&
+    requires(const Iterator& i, const Sentinel& s) {
+		{ i + (s - i) } -> same_as<Iterator>;
+    };
+#endif // MSTL_STANDARD_20__
+
+
+MSTL_BEGIN_RANGES__
+template <typename Derived>
+struct view_base {
+	constexpr auto begin() const {
+		return static_cast<const Derived*>(this)->begin();
+	}
+	constexpr auto end() const {
+		return static_cast<const Derived*>(this)->end();
+	}
+	constexpr auto begin() {
+		return static_cast<Derived*>(this)->begin();
+	}
+	constexpr auto end() {
+		return static_cast<Derived*>(this)->end();
+	}
+};
+MSTL_END_RANGES__
+
+template <typename T>
+struct is_view : false_type {};
+template <typename D>
+struct is_view<_MSTL_RANGES view_base<D>> : true_type {};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_view_v = is_base_of_v<_MSTL_RANGES view_base<T>, T>;
+
+
+MSTL_BEGIN_INNER__
+template <typename, typename = void>
+MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v = false;
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool __is_iterator_with_cate_v<Iterator, void_t<iter_category_t<Iterator>>> = true;
+MSTL_END_INNER__
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_iter_v = _INNER __is_iterator_with_cate_v<Iterator>;
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_iter_v =
+#ifdef MSTL_STANDARD_20__
+iterator_typedef<Iterator> &&
+#endif
+is_ranges_iter_v<Iterator>;
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_input_iter_v = is_convertible_v<iter_category_t<Iterator>, input_iterator_tag>;
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_input_iter_v =
+#ifdef MSTL_STANDARD_20__
+input_iterator<Iterator> &&
+#endif
+is_ranges_input_iter_v<Iterator>;
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_fwd_iter_v = is_convertible_v<iter_category_t<Iterator>, forward_iterator_tag>;
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_fwd_iter_v =
+#ifdef MSTL_STANDARD_20__
+forward_iterator<Iterator> &&
+#endif
+is_ranges_fwd_iter_v<Iterator>;
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_bid_iter_v = is_convertible_v<iter_category_t<Iterator>, bidirectional_iterator_tag>;
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_bid_iter_v =
+#ifdef MSTL_STANDARD_20__
+bidirectional_iterator<Iterator> &&
+#endif
+is_ranges_bid_iter_v<Iterator>;
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_rnd_iter_v = is_convertible_v<iter_category_t<Iterator>, random_access_iterator_tag>;
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_rnd_iter_v =
+#ifdef MSTL_STANDARD_20__
+random_access_iterator<Iterator> &&
+#endif
+is_ranges_rnd_iter_v<Iterator>;
+
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_ranges_cot_iter_v =
+#ifdef MSTL_STANDARD_20__
+is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
+#else
+is_pointer_v<Iterator>;
+#endif // MSTL_STANDARD_20__
+
+template <typename Iterator>
+MSTL_INLINE17 constexpr bool is_cot_iter_v =
+#ifdef MSTL_STANDARD_20__
+random_access_iterator<Iterator> && 
+#endif // MSTL_STANDARD_20__
+is_lvalue_reference_v<decltype(*_MSTL declval<Iterator&>())> && is_same_v<remove_cv_t<Iterator>, Iterator>
+&& is_pod_v<iter_value_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
+
+MSTL_END_NAMESPACE__
+#endif // MSTL_CONCEPTS_HPP__

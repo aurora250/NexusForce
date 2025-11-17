@@ -2,6 +2,7 @@
 #define MSTL_JSON_VALUE_HPP__
 #include "../container/unordered_map.hpp"
 #include "../container/vector.hpp"
+#include "../memory/unique_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(JsonOperateError, ValueError, "Json String Parse Failed")

@@ -1,6 +1,7 @@
 #ifndef MSTL_HASH_HPP__
 #define MSTL_HASH_HPP__
-#include "../utilities/type_traits.hpp"
+#include "../utility/type_traits.hpp"
+#include "../config/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

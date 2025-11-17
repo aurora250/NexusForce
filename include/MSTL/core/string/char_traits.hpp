@@ -2,7 +2,8 @@
 #define MSTL_CHAR_TRAITS_HPP__
 #include "../algorithm/algobase.hpp"
 #include "../algorithm/hash.hpp"
-#include "../utilities/undef_cmacro.hpp"
+#include "../string/cstring.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename IntT>

@@ -2,7 +2,7 @@
 #define MSTL_SQLITE_CONFIG_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
 #include <sqlite3.h>
-#include "../../core/config/c++config.hpp"
+#include "MSTL/core/config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_SQLITE__
 using ::sqlite3;

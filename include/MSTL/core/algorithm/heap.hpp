@@ -1,7 +1,6 @@
 #ifndef MSTL_HEAP_HPP__
 #define MSTL_HEAP_HPP__
-#include "../utilities/concepts.hpp"
-#include "../utilities/iterator.hpp"
+#include "../iterator/iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 // is heap

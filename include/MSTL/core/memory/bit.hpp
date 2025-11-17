@@ -1,6 +1,6 @@
 #ifndef MSTL_BIT_HPP__
 #define MSTL_BIT_HPP__
-#include "../config/c++config.hpp"
+#include "../config/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__

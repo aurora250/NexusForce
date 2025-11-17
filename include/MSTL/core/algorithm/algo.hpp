@@ -1,7 +1,10 @@
 #ifndef MSTL_ALGO_HPP__
 #define MSTL_ALGO_HPP__
-#include "../memory/memory.hpp"
-#include "../utilities/random.hpp"
+#include "../numeric/random.hpp"
+#include "../numeric/math.hpp"
+#include "../iterator/reverse_iterator.hpp"
+#include "../memory/temporary_buffer.hpp"
+#include "algobase.hpp"
 #include "heap.hpp"
 MSTL_BEGIN_NAMESPACE__
 

@@ -1,8 +1,7 @@
 #ifndef MSTL_STRING_HPP__
 #define MSTL_STRING_HPP__
-#include <typeinfo>
 #include "basic_string.hpp"
-#include "cstring.hpp"
+#include "../algorithm/erase.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 using string    = basic_string<char>;
@@ -1500,17 +1499,6 @@ template <typename... Args>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const tuple<Args...>& t) {
     return _INNER __to_string_tuple_dispatch(t);
 }
-
-
-template <typename T>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const shared_ptr<T>& sp) {
-    return address_string(sp.get());
-}
-template <typename T, typename Deleter>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const unique_ptr<T, Deleter>& sp) {
-    return address_string(sp.get());
-}
-
 
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const bstring& x) {
     return string(x.begin(), x.end());

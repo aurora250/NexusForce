@@ -1,7 +1,6 @@
 #ifndef MSTL_HASHTABLE_HPP__
 #define MSTL_HASHTABLE_HPP__
-#include "../algorithm/algo.hpp"
-#include "../utilities/undef_cmacro.hpp"
+#include "../config/undef_cmacro.hpp"
 #include "vector.hpp"
 MSTL_BEGIN_NAMESPACE__
 

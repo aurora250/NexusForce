@@ -1,13 +1,13 @@
 #ifndef MSTL_TIMER_HPP__
 #define MSTL_TIMER_HPP__
+#include "../container/map.hpp"
+#include "../container/set.hpp"
+#include "../functional/function.hpp"
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <mutex>
 #include <thread>
-#include "../container/map.hpp"
-#include "../container/set.hpp"
-#include "../utilities/functional.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Clock>

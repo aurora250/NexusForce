@@ -1,9 +1,9 @@
 #ifndef MSTL_POSTGRESQL_CONNECT_HPP__
 #define MSTL_POSTGRESQL_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_POSTGRESQL__
+#include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "postgresql_config.hpp"
-#include "MSTL/core/utilities/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API postgresql_connect final : public idb_tb_connect {

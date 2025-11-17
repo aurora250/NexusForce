@@ -1,7 +1,7 @@
 #ifndef MSTL_JSON_BUILDER_HPP__
 #define MSTL_JSON_BUILDER_HPP__
 #include "../container/stack.hpp"
-#include "../utilities/functional.hpp"
+#include "../functional/function.hpp"
 #include "json_value.hpp"
 MSTL_BEGIN_NAMESPACE__
 

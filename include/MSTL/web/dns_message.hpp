@@ -1,7 +1,7 @@
 #ifndef MSTL_DNS_MESSAGE_HPP
 #define MSTL_DNS_MESSAGE_HPP
 #include "../core/container/vector.hpp"
-#include "../core/datetime/chrono.hpp"
+#include "../core/time/duration.hpp"
 #include "dns_constants.hpp"
 MSTL_BEGIN_NAMESPACE__
 

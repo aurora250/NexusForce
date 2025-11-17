@@ -1,6 +1,6 @@
 #ifndef MSTL_ATOMIC_HPP__
 #define MSTL_ATOMIC_HPP__
-#include "../utilities/type_traits.hpp"
+#include "../utility/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 

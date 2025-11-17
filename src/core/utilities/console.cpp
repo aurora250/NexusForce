@@ -1,5 +1,5 @@
-#include <MSTL/core/utilities/console.hpp>
-#include <MSTL/core/utilities/undef_cmacro.hpp>
+#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/config/undef_cmacro.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <termios.h>
 #include <unistd.h>

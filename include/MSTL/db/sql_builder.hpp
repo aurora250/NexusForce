@@ -1,7 +1,8 @@
 #ifndef MSTL_SQL_BUILDER_HPP__
 #define MSTL_SQL_BUILDER_HPP__
+#include "../core/config/undef_cmacro.hpp"
 #include "../core/container/vector.hpp"
-#include "../core/utilities/undef_cmacro.hpp"
+#include "../core/memory/unique_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef DELETE

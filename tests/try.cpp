@@ -364,7 +364,7 @@ void test_print() {
 #endif
 
     string tup_str = to_string(tup);
-    println(tup, var);
+    println(tup);
     println(pir, cp);
     println('c', nullptr);
     println(&RB_TREE_RED, &RB_TREE_BLACK);
@@ -1024,7 +1024,6 @@ void test_hashtable() {
     println(mm);
     unordered_map<int, unique_ptr<int>> uncopy;
     uncopy.emplace(1, MSTL::make_unique<int>(1));
-    println(uncopy);
     uncopy.erase(uncopy.begin());
 
     unordered_set<pair<int, char>> us;

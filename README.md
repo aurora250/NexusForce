@@ -123,19 +123,19 @@ sudo make install
 
 定义操作系统平台、托管平台、总线宽度和C++版本的宏，实现多编译环境适配。
 
-- [vsprintf](include/MSTL/core/utilities/vsprintf.hpp)
+- [vsprintf](include/MSTL/core/utility/vsprintf.hpp)
 
 定义一系列函数将可变参数列表输出到格式化的字符串。
 
-- [type_traits](include/MSTL/core/utilities/type_traits.hpp)
+- [type_traits](include/MSTL/core/utility/type_traits.hpp)
 
 定义类型特征常量，使用模板元技术在编译期推断类型信息。
 
-- [exception](include/MSTL/core/utilities/exception.hpp)
+- [exception](include/MSTL/core/config/exception.hpp)
 
 定义错误类型和快速调用宏，本项目的所有错误类型都为本文件内的错误类型。
 
-- [random](include/MSTL/core/utilities/random.hpp)
+- [random](include/MSTL/core/numeric/random.hpp)
 
 定义假随机数生成类`random_lcd`、`random_mt`和基于硬件噪声的真随机数生成类`secret`。
 
@@ -143,15 +143,15 @@ sudo make install
 
 定义网络套接字类`socket`。
 
-- [functor](include/MSTL/core/utilities/functor.hpp)
+- [functor](include/MSTL/core/functional/functor.hpp)
 
 定义仿函数和仿函数配接器（C++11后被标准弃用）。
 
-- [iterator_traits](include/MSTL/core/utilities/iterator_traits.hpp)
+- [iterator_traits](include/MSTL/core/iterator/iterator_traits.hpp)
 
 定义迭代器萃取器`iterator_traits`及方便使用的类型别名。
 
-- [interface](include/MSTL/core/utilities/interface.hpp)
+- [interface](include/MSTL/core/utility/interface.hpp)
 
 定义一系列基础CRTP基类和基于其自动生成的全局函数。
 
@@ -159,7 +159,7 @@ sudo make install
 
 定义基础类型的哈希函数及FNV等工具哈希函数。
 
-- [numeric_limits](include/MSTL/core/utilities/numeric_limits.hpp)
+- [numeric_limits](include/MSTL/core/numeric/numeric_limits.hpp)
 
 定义数值类型信息类`numeric_limits`，在编译时提供数值类型的数学细节。
 
@@ -167,23 +167,23 @@ sudo make install
 
 定义互斥锁`mutex`及作用域锁定类`lock_guard`。
 
-- [concepts](include/MSTL/core/utilities/concepts.hpp)
+- [concepts](include/MSTL/core/utility/concepts.hpp)
 
 定义常用的约束与迭代器类型判断特征常量。
 
-- [utility](include/MSTL/core/utilities/utility.hpp)
+- [utility](include/MSTL/core/utility/utility.hpp)
 
 定义压缩对`compressed_pair`、键值对`pair`及其哈希函数、类型擦除函数、C风格字符串转数字类型函数。
 
-- [tuple](include/MSTL/core/utilities/tuple.hpp)
+- [tuple](include/MSTL/core/compound/tuple.hpp)
 
 定义元组类`tuple`及其辅助函数。
 
-- [mathlib](include/MSTL/core/algorithm/mathlib.hpp)
+- [mathlib](include/MSTL/core/numeric/math.hpp)
 
 定义常用的`constexpr`数学常量与函数。
 
-- [ratio](include/MSTL/core/utilities/ratio.hpp)
+- [ratio](include/MSTL/core/numeric/ratio.hpp)
 
 定义比率类`ratio`。
 
@@ -195,7 +195,7 @@ sudo make install
 
 定义普通heap算法。
 
-- [iterator](include/MSTL/core/utilities/iterator.hpp)
+- [iterator](include/MSTL/core/iterator/iterator.hpp)
 
 定义迭代器工具函数和迭代器配接器。
 
@@ -203,7 +203,7 @@ sudo make install
 
 定义比较、复制和移动算法。
 
-- [any](include/MSTL/core/utilities/any.hpp)
+- [any](include/MSTL/core/compound/any.hpp)
 
 定义任意类any，其可存储任意类型。
 
@@ -211,11 +211,11 @@ sudo make install
 
 定义内存操作函数与C风格字符串操作函数。
 
-- [memory](include/MSTL/core/memory/memory.hpp)
+- [memory](include/MSTL/core/memory/memories.hpp)
 
 定义内存操作函数、分配器类和智能指针类。
 
-- [functional](include/MSTL/core/utilities/functional.hpp)
+- [functional](include/MSTL/core/functional/function.hpp)
 
 定义托管函数指针和类函数类型的函数类function。
 
@@ -227,7 +227,7 @@ sudo make install
 
 定义线程类`thread`。
 
-- [sort](include/MSTL/core/utilities/sort.hpp)
+- [sort](include/MSTL/core/algorithm/sort.hpp)
 
 定义冒泡、鸡尾酒、选择、希尔、计数、桶、索引、归并、部分、快速、内省、提姆、猴子等多种排序算法。
 
@@ -263,7 +263,7 @@ sudo make install
 
 定义字符加密类型及函数`XOR`、`base64`、`MD5`、`SHA1`、`SHA256`、`AES256`。
 
-- [check_type](include/MSTL/core/utilities/check_type.hpp)
+- [check_type](include/MSTL/core/utility/check_type.hpp)
 
 定义类型信息分析函数`check_type`，在多种编译器中规整类型信息。
 
@@ -271,7 +271,7 @@ sudo make install
 
 定义一系列序列化的CRTP基类。
 
-- [datetime](include/MSTL/core/datetime/datetime.hpp)
+- [datetime](include/MSTL/core/time/datetime.hpp)
 
 定义时间类`time`、日期类`date`、时期类`datetime`和UNIX时间戳类`timestamp`，提供方便操作的工具函数。
 
@@ -279,19 +279,19 @@ sudo make install
 
 定义十六进制类`hexadecimal`及其格式化辅助类。
 
-- [color](include/MSTL/core/utilities/color.hpp)
+- [color](include/MSTL/core/utility/color.hpp)
 
 定义颜色类`color`。
 
-- [console](include/MSTL/core/utilities/console.hpp)
+- [console](include/MSTL/core/utility/console.hpp)
 
 定义IO辅助类`io_base`及IO控制台类`console`。
 
-- [variant](include/MSTL/core/utilities/variant.hpp)
+- [variant](include/MSTL/core/compound/variant.hpp)
 
 定义变体类`variant`，其可在同一块内存同时托管多个类型。
 
-- [optional](include/MSTL/core/utilities/optional.hpp)
+- [optional](include/MSTL/core/compound/optional.hpp)
 
 定义自选类`optional`，其可托管一个类型，设置可选空值nullopt。
 
@@ -351,7 +351,7 @@ sudo make install
 
 定义有序集合类`set`和有序多值集合类`multiset`。
 
-- [file](include/MSTL/core/utilities/file.hpp)
+- [file](include/MSTL/core/utility/file.hpp)
 
 定义文件类`file`，其使用8KB的buffer以适应大批量小数据的读写。
 

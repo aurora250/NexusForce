@@ -1,10 +1,9 @@
 #ifndef MSTL_LOG_SINK_HPP__
 #define MSTL_LOG_SINK_HPP__
-#include <mutex>
-#include "../async/mutex.hpp"
 #include "../async/thread.hpp"
 #include "../container/unordered_map.hpp"
-#include "../utilities/file.hpp"
+#include "../utility/file.hpp"
+#include <mutex>
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef ERROR

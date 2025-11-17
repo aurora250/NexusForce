@@ -1,9 +1,10 @@
 #ifndef MSTL_DB_INTERFACE_HPP__
 #define MSTL_DB_INTERFACE_HPP__
-#include <ctime>
 #include "../core/container/vector.hpp"
-#include "../core/datetime/datetime.hpp"
+#include "../core/time/datetime.hpp"
+#include "../core/memory/unique_ptr.hpp"
 #include "db_config.hpp"
+#include <ctime>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API idb_result {

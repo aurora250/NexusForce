@@ -1,6 +1,6 @@
 #ifndef MSTL_JSON_PARSER_HPP__
 #define MSTL_JSON_PARSER_HPP__
-#include "../utilities/optional.hpp"
+#include "../compound/optional.hpp"
 #include "json_value.hpp"
 MSTL_BEGIN_NAMESPACE__
 

@@ -42,7 +42,7 @@ sqlite_prepared_statement::sqlite_prepared_statement(
 
 sqlite_prepared_statement::sqlite_prepared_statement(sqlite_prepared_statement&& other) noexcept
 : db_(other.db_), stmt_(other.stmt_), param_count_(other.param_count_),
-param_buffers_(move(other.param_buffers_)), prepared_(other.prepared_), last_error_(std::move(other.last_error_)) {
+param_buffers_(move(other.param_buffers_)), prepared_(other.prepared_), last_error_(_MSTL move(other.last_error_)) {
     other.stmt_ = nullptr;
     other.db_ = nullptr;
     other.param_count_ = 0;
@@ -60,8 +60,8 @@ sqlite_prepared_statement& sqlite_prepared_statement::operator =(
         db_ = other.db_;
         stmt_ = other.stmt_;
         param_count_ = other.param_count_;
-        param_buffers_ = std::move(other.param_buffers_);
-        last_error_ = std::move(other.last_error_);
+        param_buffers_ = _MSTL move(other.param_buffers_);
+        last_error_ = _MSTL move(other.last_error_);
         prepared_ = other.prepared_;
 
         other.stmt_ = nullptr;

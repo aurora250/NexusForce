@@ -1,5 +1,8 @@
 #ifndef MSTL_BASIC_STRING_HPP__
 #define MSTL_BASIC_STRING_HPP__
+#include "../memory/standard_allocator.hpp"
+#include "../memory/allocator_traits.hpp"
+#include "../compound/compressed_pair.hpp"
 #include "../algorithm/algo.hpp"
 #include "string_view.hpp"
 MSTL_BEGIN_NAMESPACE__

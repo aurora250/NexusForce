@@ -1,7 +1,7 @@
 #ifndef MSTL_REDIS_CONNECT_HPP__
 #define MSTL_REDIS_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
-#include "../../core/utilities/undef_cmacro.hpp"
+#include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "redis_config.hpp"
 MSTL_BEGIN_NAMESPACE__

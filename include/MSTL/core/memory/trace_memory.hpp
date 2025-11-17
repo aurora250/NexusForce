@@ -1,8 +1,8 @@
 #ifndef MSTL_TRACE_MEMORY_HPP__
 #define MSTL_TRACE_MEMORY_HPP__
 #include "../container/unordered_map.hpp"
-#include "../utilities/console.hpp"
-#include "../utilities/stacktrace.hpp"
+#include "../utility/console.hpp"
+#include "../utility/stacktrace.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

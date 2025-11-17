@@ -1,6 +1,6 @@
 #include <MSTL/db/postgresql/postgresql_result.hpp>
 #ifdef MSTL_SUPPORT_POSTGRESQL__
-#include <MSTL/core/utilities/packages.hpp>
+#include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 postgresql_tb_result::postgresql_tb_result(

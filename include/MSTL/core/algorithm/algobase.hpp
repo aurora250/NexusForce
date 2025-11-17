@@ -1,9 +1,11 @@
 #ifndef MSTL_ALGOBASE_HPP__
 #define MSTL_ALGOBASE_HPP__
-#include "../string/cstring.hpp"
-#include "../utilities/functor.hpp"
-#include "../utilities/undef_cmacro.hpp"
-#include "../utilities/utility.hpp"
+#include "../compound/pair.hpp"
+#include "../functional/functor.hpp"
+#include "../iterator/iterator.hpp"
+#include "../memory/memory.hpp"
+#include "../config/undef_cmacro.hpp"
+#include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator1, typename Iterator2, typename BinaryPredicate, enable_if_t<

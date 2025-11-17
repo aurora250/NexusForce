@@ -1,6 +1,7 @@
 #ifndef MSTL_THREAD_HPP__
 #define MSTL_THREAD_HPP__
-#include "../memory/memory.hpp"
+#include "../memory/unique_ptr.hpp"
+#include "../functional/apply.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <process.h>

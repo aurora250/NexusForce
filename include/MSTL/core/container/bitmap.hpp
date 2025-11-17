@@ -1,6 +1,6 @@
 #ifndef MSTL_BITMAP_HPP__
 #define MSTL_BITMAP_HPP__
-#include "../utilities/packages.hpp"
+#include "../utility/packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr uint32_t WORD_BIT_SIZE = 8 * sizeof(uint32_t);

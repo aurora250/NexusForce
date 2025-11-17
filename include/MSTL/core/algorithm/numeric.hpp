@@ -1,7 +1,7 @@
 #ifndef MSTL_NUMERIC_HPP__
 #define MSTL_NUMERIC_HPP__
-#include "../utilities/concepts.hpp"
-#include "../utilities/functor.hpp"
+#include "../functional/functor.hpp"
+#include "../utility/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename T, typename BinaryOperation,

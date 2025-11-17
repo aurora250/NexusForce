@@ -96,7 +96,7 @@ include(GNUInstallDirs)
 
 write_basic_package_version_file(
         ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfigVersion.cmake
-        VERSION 1.3.1
+        VERSION 1.4.0
         COMPATIBILITY SameMajorVersion
 )
 

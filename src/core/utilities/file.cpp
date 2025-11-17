@@ -1,10 +1,10 @@
-#include <MSTL/core/utilities/file.hpp>
+#include <MSTL/core/utility/file.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/file.h>
 #include <sys/time.h>
-#include <time.h>
-#include <string.h>
-#include <errno.h>
+#include <ctime>
+#include <cstring>
+#include <cerrno>
 #include <unistd.h>
 #include <dirent.h>
 #include <cstdio>
@@ -22,7 +22,7 @@ bool file::flush_write_buffer() const noexcept {
         return false;
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ssize_t bytes_written = ::write(handle_, write_buffer_.data(), write_buffer_pos_);
+    const ssize_t bytes_written = ::write(handle_, write_buffer_.data(), write_buffer_pos_);
     if (bytes_written != static_cast<ssize_t>(write_buffer_pos_)) return false;
 #endif
     write_buffer_pos_ = 0;
@@ -43,7 +43,7 @@ bool file::fill_read_buffer() const noexcept {
     }
     read_buffer_size_ = bytes_read;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ssize_t bytes_read = ::read(handle_, read_buffer_.data(), FILE_BUFFER_SIZE);
+    const ssize_t bytes_read = ::read(handle_, read_buffer_.data(), FILE_BUFFER_SIZE);
     if (bytes_read <= 0) {
         read_buffer_size_ = 0;
         return false;
@@ -847,7 +847,7 @@ bool file::remove_directory(const string_view path) noexcept {
     return false;
 }
 
-bool file::remove_all_in_directory(const string& directory_path, bool recursive) noexcept {
+bool file::remove_all_in_directory(const string& directory_path, const bool recursive) noexcept {
     if (!file::is_directory(directory_path)) return false;
     bool success = true;
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -958,7 +958,7 @@ bool file::read(
         return false;
     }
     content.resize(st.st_size);
-    ssize_t read = ::read(fd, content.data(), st.st_size);
+    const ssize_t read = ::read(fd, content.data(), st.st_size);
     ::close(fd);
     return read == st.st_size;
 #endif
@@ -1061,7 +1061,7 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
 }
 
 
-bool file::copy_directory(const string& source, const string& destination, bool overwrite) {
+bool file::copy_directory(const string& source, const string& destination, const bool overwrite) {
     if (!file::is_directory(source)) return false;
     if (!file::exists(destination) && !file::create_directories(destination)) return false;
 

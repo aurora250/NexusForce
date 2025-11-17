@@ -116,7 +116,6 @@ endif()
 # 链接文件
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/any.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/chrono.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/random.cpp
@@ -135,10 +134,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/config/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_prepared_statement.cpp
@@ -179,7 +179,7 @@ set_target_properties(MSTL PROPERTIES
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS OFF
         LINKER_LANGUAGE CXX
-        VERSION 1.3.1
+        VERSION 1.4.0
         SOVERSION 1
 
         BUILD_WITH_INSTALL_RPATH TRUE

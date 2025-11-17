@@ -1,11 +1,12 @@
 #ifndef MSTL_LOGGER_HPP__
 #define MSTL_LOGGER_HPP__
+#include "../container/queue.hpp"
+#include "../functional/function.hpp"
+#include "../memory/shared_ptr.hpp"
+#include "log_sink.hpp"
 #include <condition_variable>
 #include <mutex>
 #include <thread>
-#include "../container/queue.hpp"
-#include "../utilities/functional.hpp"
-#include "log_sink.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API logger {

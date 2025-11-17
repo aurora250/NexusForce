@@ -1,8 +1,9 @@
 #ifndef MSTL_HEXADECIMAL_HPP__
 #define MSTL_HEXADECIMAL_HPP__
+#include "../config/undef_cmacro.hpp"
 #include "../string/format.hpp"
 #include "../string/serialize.hpp"
-#include "../utilities/undef_cmacro.hpp"
+#include "../string/to_numerics.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {

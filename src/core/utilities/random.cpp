@@ -1,5 +1,5 @@
-#include <MSTL/core/datetime/datetime.hpp>
-#include <MSTL/core/utilities/random.hpp>
+#include <MSTL/core/numeric/random.hpp>
+#include <MSTL/core/time/datetime.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <wincrypt.h>
@@ -141,7 +141,9 @@ bool secret::is_supported() {
 }
 
 void secret::get_random_bytes(byte_t* buffer, size_t length) {
-    if(buffer == nullptr || length == 0) Exception(ValueError("Invalid buffer or length"));
+    if(buffer == nullptr || length == 0) {
+        Exception(ValueError("Invalid buffer or length"));
+    }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     HCRYPTPROV hProv = 0;
