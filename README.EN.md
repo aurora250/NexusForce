@@ -120,23 +120,23 @@ sudo make install
 
 The following files are introduced in the order of the hierarchical structure shown above.
 
-- [environment](include/MSTL/core/c++config.hpp)
+- [environment](include/MSTL/core/config/c++config.hpp)
 
 Defines macros for operating system platform, hosting platform, bus width, and C++ version, implementing multi-compilation environment adaptation.
 
-- [vsprintf](include/MSTL/core/vsprintf.hpp)
+- [vsprintf](include/MSTL/core/utilities/vsprintf.hpp)
 
 Defines a series of functions to output variable argument lists to formatted strings.
 
-- [type_traits](include/MSTL/core/type_traits.hpp)
+- [type_traits](include/MSTL/core/utilities/type_traits.hpp)
 
 Defines type trait constants, using template metaprogramming to deduce type information at compile time.
 
-- [exception](include/MSTL/core/exception.hpp)
+- [exception](include/MSTL/core/utilities/exception.hpp)
 
 Defines error types and quick-invocation macros. All error types in this project are defined in this file.
 
-- [random](include/MSTL/core/random.hpp)
+- [random](include/MSTL/core/utilities/random.hpp)
 
 Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardware noise-based true random number generator (`secret`).
 
@@ -144,217 +144,217 @@ Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardwa
 
 Defines the network socket class `socket`.
 
-- [functor](include/MSTL/core/functor.hpp)
+- [functor](include/MSTL/core/utilities/functor.hpp)
 
 Defines functors and functor adapters (deprecated in C++11).
 
-- [iterator_traits](include/MSTL/core/iterator_traits.hpp)
+- [iterator_traits](include/MSTL/core/utilities/iterator_traits.hpp)
 
 Defines the iterator extractor `iterator_traits` and convenient type aliases.
 
-- [interface](include/MSTL/core/interface.hpp)
+- [interface](include/MSTL/core/utilities/interface.hpp)
 
 Defines a series of basic CRTP base classes and globally generated functions based on them.
 
-- [hash](include/MSTL/core/hash.hpp)
+- [hash](include/MSTL/core/algorithm/hash.hpp)
 
 Defines hash functions for basic types and utility hash functions like FNV.
 
-- [numeric_limits](include/MSTL/core/numeric_limits.hpp)
+- [numeric_limits](include/MSTL/core/utilities/numeric_limits.hpp)
 
 Defines the numeric type information class `numeric_limits`, providing mathematical details of numeric types at compile time.
 
-- [mutex](include/MSTL/core/mutex.hpp)
+- [mutex](include/MSTL/core/async/mutex.hpp)
 
 Defines the mutex class `mutex` and the scoped locking class `lock_guard`.
 
-- [concepts](include/MSTL/core/concepts.hpp)
+- [concepts](include/MSTL/core/utilities/concepts.hpp)
 
 Defines common constraints and iterator type judgment trait constants.
 
-- [utility](include/MSTL/core/utility.hpp)
+- [utility](include/MSTL/core/utilities/utility.hpp)
 
 Defines `compressed_pair`, `pair` and their hash functions, type erasure functions, and functions to convert C-style strings to numeric types.
 
-- [tuple](include/MSTL/core/tuple.hpp)
+- [tuple](include/MSTL/core/utilities/tuple.hpp)
 
 Defines the tuple class `tuple` and its auxiliary functions.
 
-- [mathlib](include/MSTL/core/mathlib.hpp)
+- [mathlib](include/MSTL/core/algorithm/mathlib.hpp)
 
 Defines common `constexpr` mathematical constants and functions.
 
-- [ratio](include/MSTL/core/ratio.hpp)
+- [ratio](include/MSTL/core/utilities/ratio.hpp)
 
 Defines the ratio class `ratio`.
 
-- [numeric](include/MSTL/core/numeric.hpp)
+- [numeric](include/MSTL/core/algorithm/numeric.hpp)
 
 Defines mathematical algorithms.
 
-- [heap](include/MSTL/core/heap.hpp)
+- [heap](include/MSTL/core/algorithm/heap.hpp)
 
 Defines ordinary heap algorithms.
 
-- [iterator](include/MSTL/core/iterator.hpp)
+- [iterator](include/MSTL/core/utilities/iterator.hpp)
 
 Defines iterator utility functions and iterator adapters.
 
-- [algobase](include/MSTL/core/algobase.hpp)
+- [algobase](include/MSTL/core/algorithm/algobase.hpp)
 
 Defines comparison, copy, and move algorithms.
 
-- [any](include/MSTL/core/any.hpp)
+- [any](include/MSTL/core/utilities/any.hpp)
 
 Defines the `any` class, which can store any type.
 
-- [cstring](include/MSTL/core/cstring.hpp)
+- [cstring](include/MSTL/core/string/cstring.hpp)
 
 Defines memory operation functions and C-style string operation functions.
 
-- [memory](include/MSTL/core/memory.hpp)
+- [memory](include/MSTL/core/memory/memory.hpp)
 
 Defines memory operation functions, allocator classes, and smart pointer classes.
 
-- [functional](include/MSTL/core/functional.hpp)
+- [functional](include/MSTL/core/utilities/functional.hpp)
 
 Defines the `function` class that hosts function pointers and function-like types.
 
-- [algo](include/MSTL/core/algo.hpp)
+- [algo](include/MSTL/core/algorithm/algo.hpp)
 
 Defines algorithms for judgment, set operations, searching, merging, moving, transforming, binding, and permutations.
 
-- [thread](include/MSTL/core/thread.hpp)
+- [thread](include/MSTL/core/async/thread.hpp)
 
 Defines the thread class `thread`.
 
-- [sort](include/MSTL/ext/sort.hpp)
+- [sort](include/MSTL/core/utilities/sort.hpp)
 
 Defines multiple sorting algorithms: bubble, cocktail, selection, shell, counting, bucket, index, merge,
 partial, quick, introspective, tim, and monkey sort.
 
-- [algorithm](include/MSTL/core/algorithm.hpp)
+- [algorithm](include/MSTL/core/algorithm/algorithm.hpp)
 
 Includes basic algorithms and mathematical algorithms, 
 and defines concurrent algorithms for convenient inclusion by users.
 
-- [char_traits](include/MSTL/core/char_traits.hpp)
+- [char_traits](include/MSTL/core/string/char_traits.hpp)
 
 Defines the string traits class `basic_char_traits` and auxiliary extraction functions.
 
-- [basic_string_view](include/MSTL/core/basic_string_view.hpp)
+- [basic_string_view](include/MSTL/core/string/basic_string_view.hpp)
 
 Defines the base class `basic_string_view` for string views.
 
-- [string_view](include/MSTL/core/string_view.hpp)
+- [string_view](include/MSTL/core/string/string_view.hpp)
 
 Defines the string view class `string_view`.
 
-- [basic_string](include/MSTL/core/basic_string.hpp)
+- [basic_string](include/MSTL/core/string/basic_string.hpp)
 
 Defines the base string class `basic_string`.
 
-- [string](include/MSTL/core/string.hpp)
+- [string](include/MSTL/core/string/string.hpp)
 
 Defines the string class `string`, providing conversion functions between different character encodings.
 
-- [format](include/MSTL/core/format.hpp)
+- [format](include/MSTL/core/string/format.hpp)
 
 Defines the string formatting helper class `formatter` and the formatting function `format`.
 
-- [encrypt](include/MSTL/core/encrypt.hpp)
+- [encrypt](include/MSTL/core/string/encrypt.hpp)
 
 Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`, `SHA256`, and `AES256`.
 
-- [check_type](include/MSTL/core/check_type.hpp)
+- [check_type](include/MSTL/core/utilities/check_type.hpp)
 
 Defines the type information analysis function `check_type` to standardize type information across compilers.
 
-- [serialize](include/MSTL/core/serialize.hpp)
+- [serialize](include/MSTL/core/string/serialize.hpp)
 
 Defines a series of CRTP base classes for serialization.
 
-- [datetime](include/MSTL/core/datetime.hpp)
+- [datetime](include/MSTL/core/datetime/datetime.hpp)
 
 Defines time classes (`time`, `date`, `datetime`) and UNIX timestamp class (`timestamp`), providing convenient utility functions.
 
-- [hexadecimal](include/MSTL/core/hexadecimal.hpp)
+- [hexadecimal](include/MSTL/core/memory/hexadecimal.hpp)
 
 Defines the hexadecimal class `hexadecimal` and its formatting helper class.
 
-- [color](include/MSTL/core/color.hpp)
+- [color](include/MSTL/core/utilities/color.hpp)
 
 Defines the color class `color`.
 
-- [console](include/MSTL/core/console.hpp)
+- [console](include/MSTL/core/utilities/console.hpp)
 
 Defines the IO base class `io_base` and the IO console class `console`.
 
-- [variant](include/MSTL/core/variant.hpp)
+- [variant](include/MSTL/core/utilities/variant.hpp)
 
 Defines the `variant` class, which can host multiple types in the same memory block.
 
-- [optional](include/MSTL/core/optional.hpp)
+- [optional](include/MSTL/core/utilities/optional.hpp)
 
 Defines the `optional` class, which can host a type and optionally set a null value `nullopt`.
 
-- [array](include/MSTL/core/array.hpp)
+- [array](include/MSTL/core/container/array.hpp)
 
 Defines the array class `array`, which allows compile-time value determination and safer, more modern array operations.
 
-- [bitmap](include/MSTL/core/bitmap.hpp)
+- [bitmap](include/MSTL/core/container/bitmap.hpp)
 
 Defines the bitmap class `bitmap`, which does not exist as a `vector<bool>` specialization.
 
-- [vector](include/MSTL/core/vector.hpp)
+- [vector](include/MSTL/core/container/vector.hpp)
 
 Defines the vector class `vector`.
 
-- [list](include/MSTL/core/list.hpp)
+- [list](include/MSTL/core/container/list.hpp)
 
 Defines the doubly linked list class `list`.
 
-- [deque](include/MSTL/core/deque.hpp)
+- [deque](include/MSTL/core/container/deque.hpp)
 
 Defines the deque class `deque`, which supports O(1) insertion at both front and back.
 
-- [rb_tree](include/MSTL/core/rb_tree.hpp)
+- [rb_tree](include/MSTL/core/container/rb_tree.hpp)
 
 Defines the red-black tree class `rb_tree`, used as a proxy class for ordered containers.
 
-- [hashtable](include/MSTL/core/hashtable.hpp)
+- [hashtable](include/MSTL/core/container/hashtable.hpp)
 
 Defines the hash table class `hashtable`, used as a proxy class for unordered containers.
 
-- [unordered_map](include/MSTL/core/unordered_map.hpp)
+- [unordered_map](include/MSTL/core/container/unordered_map.hpp)
 
 Defines the unordered dictionary classes `unordered_map` and `unordered_multimap`.
 
-- [unordered_set](include/MSTL/core/unordered_set.hpp)
+- [unordered_set](include/MSTL/core/container/unordered_set.hpp)
 
 Defines the unordered set classes `unordered_set` and `unordered_multiset`.
 
-- [leonardo_heap](include/MSTL/ext/leonardo_heap.hpp)
+- [leonardo_heap](include/MSTL/core/algorithm/leonardo_heap.hpp)
 
 Defines the Leonardo heap algorithm `leonardo_heap`.
 
-- [queue](include/MSTL/core/queue.hpp)
+- [queue](include/MSTL/core/container/queue.hpp)
 
 Defines the queue class `queue` and the priority queue class `priority_queue` based on ordinary heap algorithms.
 
-- [stack](include/MSTL/core/stack.hpp)
+- [stack](include/MSTL/core/container/stack.hpp)
 
 Defines the stack class `stack`.
 
-- [map](include/MSTL/core/map.hpp)
+- [map](include/MSTL/core/container/map.hpp)
 
 Defines the ordered dictionary classes `map` and `multimap`.
 
-- [set](include/MSTL/core/set.hpp)
+- [set](include/MSTL/core/container/set.hpp)
 
 Defines the ordered set classes `set` and `multiset`.
 
-- [file](include/MSTL/core/file.hpp)
+- [file](include/MSTL/core/utilities/file.hpp)
 
 Defines the file class `file`, which uses an 8KB buffer to handle high-volume small data read/write operations.
 
@@ -370,7 +370,7 @@ Defines the cookie class, session class `session`, and HTTP constants.
 
 Defines the microservice class `servlet`, providing port listening, filter configuration, cookie setting, session attribute operations, and other functionalities.
 
-- [trace_memory](include/MSTL/ext/trace_memory.hpp)
+- [trace_memory](include/MSTL/core/memory/trace_memory.hpp)
 
 Defines the Boost-based stack-tracing allocator `trace_allocator`.
 
@@ -378,11 +378,11 @@ Defines the Boost-based stack-tracing allocator `trace_allocator`.
 
 Defines polymorphic database connections (supporting MySQL, Sqlite3, Redis) and the database connection pool `database_pool`.
 
-- [thread_pool](include/MSTL/core/thread_pool.hpp)
+- [thread_pool](include/MSTL/core/async/thread_pool.hpp)
 
 Defines the polling thread pool class `thread_pool`.
 
-- [timer](include/MSTL/core/timer.hpp)
+- [timer](include/MSTL/core/async/timer.hpp)
 
 Defines the timer class `timer`.
 

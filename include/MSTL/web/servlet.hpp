@@ -1,8 +1,8 @@
 #ifndef MSTL_SERVLET_HPP__
 #define MSTL_SERVLET_HPP__
-#include "socket.hpp"
+#include "../core/utilities/undef_cmacro.hpp"
 #include "filter.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
+#include "socket.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(HttpError, LinkError, "Http Actions Failed");

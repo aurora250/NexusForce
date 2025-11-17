@@ -1,5 +1,5 @@
+#include <MSTL/core/utilities/packages.hpp>
 #include <MSTL/db/sql_builder.hpp>
-#include <MSTL/core/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 select_data* sql_builder::ensure_select_data() {

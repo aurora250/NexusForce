@@ -1,9 +1,9 @@
 #ifndef MSTL_DB_MYSQL_CONNECT_HPP__
 #define MSTL_DB_MYSQL_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
+#include "../../core/utilities/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "mysql_config.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API mysql_connect final : idb_tb_connect {

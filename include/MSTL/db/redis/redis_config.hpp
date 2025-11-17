@@ -1,8 +1,8 @@
 #ifndef MSTL_REDIS_CONFIG_HPP__
 #define MSTL_REDIS_CONFIG_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
-#include "MSTL/core/c++config.hpp"
 #include <hiredis.h>
+#include "../../core/config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_REDIS__
 using ::redisReply;

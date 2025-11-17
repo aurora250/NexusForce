@@ -1,6 +1,6 @@
 #include <MSTL/db/redis/redis_result.hpp>
 #ifdef MSTL_SUPPORT_REDIS__
-#include <MSTL/core/serialize.hpp>
+#include <MSTL/core/string/serialize.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 _MSTL string redis_result::format_redis_reply_element(_MSTL_REDIS redisReply* element) {

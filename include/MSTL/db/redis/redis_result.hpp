@@ -1,9 +1,9 @@
 #ifndef MSTL_REDIS_RESULT_HPP__
 #define MSTL_REDIS_RESULT_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
-#include "redis_config.hpp"
+#include "../../core/utilities/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
+#include "redis_config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API redis_result final : idb_kv_result {

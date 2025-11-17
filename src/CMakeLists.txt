@@ -84,7 +84,7 @@ if(MSVC)
     enable_language(ASM_MASM)
 
     set(ASM_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.asm
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.asm
     )
 
     foreach(asm_file ${ASM_SOURCES})
@@ -115,30 +115,30 @@ endif()
 
 # 链接文件
 set(CPP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/any.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/chrono.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/rb_tree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/hexadecimal.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_parser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/vsprintf.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/console.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/bitmap.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/mutex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/device.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/log_sink.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/chrono.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/algorithm/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/encrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/device.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/log_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_prepared_statement.cpp

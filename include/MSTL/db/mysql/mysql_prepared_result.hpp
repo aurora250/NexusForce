@@ -1,9 +1,9 @@
 #ifndef MSTL_MYSQL_PREPARED_RESULT_HPP__
 #define MSTL_MYSQL_PREPARED_RESULT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
+#include "../../core/utilities/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "mysql_config.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API mysql_prepared_result final : public idb_prepared_result {

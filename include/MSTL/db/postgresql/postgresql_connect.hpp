@@ -3,7 +3,7 @@
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include "MSTL/db/db_interface.hpp"
 #include "postgresql_config.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
+#include "MSTL/core/utilities/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API postgresql_connect final : public idb_tb_connect {

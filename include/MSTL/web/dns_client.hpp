@@ -2,11 +2,11 @@
 #define MSTL_DNS_CLIENT_HPP__
 #include "dns_message.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
-#include "MSTL/core/optional.hpp"
-#include "MSTL/core/unordered_map.hpp"
-#include "socket.hpp"
-#include <netinet/in.h>
 #include <future>
+#include <netinet/in.h>
+#include "../core/container/unordered_map.hpp"
+#include "../core/utilities/optional.hpp"
+#include "socket.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(DNSError, LinkError, "DNS Operate Failed");

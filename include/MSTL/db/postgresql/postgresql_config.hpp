@@ -2,8 +2,8 @@
 #define MSTL_POSTGRESQL_CONFIG_HPP__
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <libpq-fe.h>
-#include "MSTL/core/c++config.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
+#include "MSTL/core/config/c++config.hpp"
+#include "MSTL/core/utilities/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_POSTGRESQL__
 using ::PGconn;

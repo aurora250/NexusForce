@@ -1,6 +1,6 @@
 #ifndef MSTL_DB_CONFIG_HPP__
 #define MSTL_DB_CONFIG_HPP__
-#include "MSTL/core/string.hpp"
+#include "../core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseTypeCastError, DatabaseError, "Database Type Cast Failed.")

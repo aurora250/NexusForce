@@ -5,7 +5,7 @@
 #undef CR_OUT_OF_MEMORY
 #endif
 #include <mysql.h>
-#include "MSTL/core/c++config.hpp"
+#include "../../core/config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_MYSQL__
 using ::MYSQL;

@@ -1,9 +1,9 @@
 #ifndef MSTL_SQLITE_PREPARED_RESULT_HPP__
 #define MSTL_SQLITE_PREPARED_RESULT_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
+#include "../../core/utilities/undef_cmacro.hpp"
 #include "MSTL/db/db_interface.hpp"
 #include "sqlite_config.hpp"
-#include "MSTL/core/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API sqlite_prepared_result final : idb_prepared_result {

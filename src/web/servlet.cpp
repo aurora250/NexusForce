@@ -1,5 +1,5 @@
+#include <MSTL/core/utilities/console.hpp>
 #include <MSTL/web/servlet.hpp>
-#include <MSTL/core/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void servlet::start_workers(const int thread_count) {

@@ -2,7 +2,7 @@
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <MSTL/db/postgresql/postgresql_result.hpp>
 #include <MSTL/db/postgresql/postgresql_prepared_statement.hpp>
-#include <MSTL/core/packages.hpp>
+#include <MSTL/core/utilities/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void postgresql_connect::clear_error() noexcept {
