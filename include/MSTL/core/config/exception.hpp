@@ -1,7 +1,6 @@
 #ifndef MSTL_EXCEPTION_HPP__
 #define MSTL_EXCEPTION_HPP__
 #include "c++config.hpp"
-#include <cassert>
 #ifdef MSTL_SUPPORT_CUDA__
 #include <cuda_runtime.h>
 #endif
@@ -87,33 +86,6 @@ using terminate_handler = void(*)();
 
 void MSTL_API set_terminate(terminate_handler handler) noexcept;
 MSTL_NORETURN void MSTL_API terminate() noexcept;
-
-
-#ifdef MSTL_STATE_DEBUG__
-#define MSTL_DEBUG_VERIFY(CON, MESG) \
-	{ if (CON) {} else { assert(false && MESG); } }
-#else
-#define MSTL_DEBUG_VERIFY(CON, MESG)
-#endif
-
-#define __MSTL_DEBUG_MESG_OPERATE_NULLPTR(ITER, ACT) "can`t " ACT ": " #ITER " is pointing to nullptr."
-#define __MSTL_DEBUG_MESG_OUT_OF_RANGE(CLASS, ACT) "can`t " ACT ": " #CLASS " out of ranges."
-#define __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(ITER) "not comparable :" #ITER " container incompatible."
-
-#define __MSTL_DEBUG_TAG_DEREFERENCE "dereference"
-#define __MSTL_DEBUG_TAG_INCREMENT "increment"
-#define __MSTL_DEBUG_TAG_DECREMENT "decrement"
-
-
-#ifdef MSTL_STANDARD_20__
-#define MSTL_CONSTEXPR_ASSERT(COND) \
-	do { \
-		if (__builtin_is_constant_evaluated() && !bool(COND)) \
-			__builtin_unreachable(); \
-	} while (false);
-#else
-#define MSTL_CONSTEXPR_ASSERT(COND)
-#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_EXCEPTION_HPP__

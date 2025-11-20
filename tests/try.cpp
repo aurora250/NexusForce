@@ -694,7 +694,7 @@ void test_serv() {
             return;
         }
         while (true) {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            _MSTL this_thread::sleep_for(_MSTL chrono::seconds(1));
         }
         server.stop();
     } catch (const Error& e) {
@@ -1386,14 +1386,14 @@ void test_any() {
 
 void test_timer(){
     _MSTL steady_timer timer1;
-    timer1.expires_after(std::chrono::seconds(5));
+    timer1.expires_after(chrono::seconds(5));
     timer1.async_wait([]() {
         println("5秒后执行");
     });
 
     _MSTL system_timer timer2;
-    auto now = std::chrono::system_clock::now();
-    auto target = now + std::chrono::hours(1);
+    auto now = chrono::system_clock::now();
+    auto target = now + chrono::hours(1);
     timer2.expires_at(target);
     timer2.async_wait([]() { println("1小时后执行"); });
 
@@ -1405,7 +1405,7 @@ void test_timer(){
 
     timer1.cancel();
 
-    timer1.expires_after(std::chrono::seconds(3));
+    timer1.expires_after(chrono::seconds(3));
     timer1.async_wait([]() { println("3秒后执行");
     });
 
@@ -1660,7 +1660,7 @@ void test_mysql() {
 #ifdef MSTL_SUPPORT_MYSQL__
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
-    database_pool pool(DB_TYPE::MYSQL, mysql_config);
+    database_pool pool(DB_TYPE::MYSQL, mysql_config, 10, 20, 2);
 
     const auto sql = sql_builder()
         .select({"ISBN", "BookName"})

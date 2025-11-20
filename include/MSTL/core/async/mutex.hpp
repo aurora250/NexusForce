@@ -9,23 +9,50 @@
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API mutex {
+public:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    using mutex_type = ::CRITICAL_SECTION;
+    using native_handle_type = ::SRWLOCK;
 #else
-    using mutex_type = ::pthread_mutex_t;
+    using native_handle_type = ::pthread_mutex_t;
 #endif
 
-    mutable mutex_type mutex_;
+private:
+    mutable native_handle_type mutex_;
 
 public:
     mutex();
+
     mutex(const mutex&) = delete;
     mutex& operator=(const mutex&) = delete;
     ~mutex();
 
-    mutex_type* native_handle() noexcept { return &mutex_; }
-    const mutex_type* native_handle() const noexcept { return &mutex_; }
+    native_handle_type* native_handle() noexcept { return &mutex_; }
+    const native_handle_type* native_handle() const noexcept { return &mutex_; }
+    void lock();
+    void unlock();
+    bool try_lock() noexcept;
+};
 
+
+class MSTL_API recursive_mutex {
+public:
+#ifdef MSTL_PLATFORM_WINDOWS__
+    using native_handle_type = ::CRITICAL_SECTION;
+#else
+    using native_handle_type = ::pthread_mutex_t;
+#endif
+
+private:
+    mutable native_handle_type recursive_mutex_;
+
+public:
+    recursive_mutex();
+    recursive_mutex(const recursive_mutex&) = delete;
+    recursive_mutex& operator=(const recursive_mutex&) = delete;
+    ~recursive_mutex();
+
+    native_handle_type* native_handle() noexcept { return &recursive_mutex_; }
+    const native_handle_type* native_handle() const noexcept { return &recursive_mutex_; }
     void lock();
     void unlock();
     bool try_lock() noexcept;
@@ -33,13 +60,15 @@ public:
 
 
 class MSTL_API shared_mutex {
+public:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    using shared_mutex_type = ::SRWLOCK;
+    using native_handle_type = ::SRWLOCK;
 #else
-    using shared_mutex_type = ::pthread_rwlock_t;
+    using native_handle_type = ::pthread_rwlock_t;
 #endif
 
-    mutable shared_mutex_type shared_mutex_;
+private:
+    mutable native_handle_type shared_mutex_;
 
 public:
     shared_mutex();
@@ -47,8 +76,8 @@ public:
     shared_mutex& operator=(const shared_mutex&) = delete;
     ~shared_mutex();
 
-    shared_mutex_type* native_handle() noexcept { return &shared_mutex_; }
-    const shared_mutex_type* native_handle() const noexcept { return &shared_mutex_; }
+    native_handle_type* native_handle() noexcept { return &shared_mutex_; }
+    const native_handle_type* native_handle() const noexcept { return &shared_mutex_; }
 
     void lock();
     void unlock();

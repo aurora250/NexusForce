@@ -80,33 +80,49 @@ public:
 
     template <typename T>
     void print(const T& value) {
-        lock_guard<mutex> lock(mutex_);
         io_base<T>::write(*this, value);
     }
     template <typename... Args>
     void printf(const string_view fmt, Args&&... args) {
-        this->write_string(_MSTL format(fmt, _MSTL forward<Args>(args)...));
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe(_MSTL format(fmt, _MSTL forward<Args>(args)...));
     }
     template <typename T>
     void printc(const color& color, const T& value) {
-        lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
+        {
+            lock_guard<mutex> lock(mutex_);
+            this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
+        }
         io_base<T>::write(*this, value);
-        this->write_string_unsafe("\033[0m");
+        {
+            lock_guard<mutex> lock(mutex_);
+            this->write_string_unsafe("\033[0m");
+        }
     }
 
     void println() {
-        this->write_string("\n");
+        lock_guard<mutex> lock(mutex_);
+        this->write_string_unsafe("\n");
     }
     template <typename T>
     void println(const T& value) {
-        this->print(value);
-        this->println();
+        io_base<T>::write(*this, value);
+        {
+            lock_guard<mutex> lock(mutex_);
+            this->write_string_unsafe("\n");
+        }
     }
     template <typename T>
     void printcln(const color& color, const T& value) {
-        this->printc(color, value);
-        this->println();
+        {
+            lock_guard<mutex> lock(mutex_);
+            this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
+        }
+        io_base<T>::write(*this, value);
+        {
+            lock_guard<mutex> lock(mutex_);
+            this->write_string_unsafe("\033[0m\n");
+        }
     }
 
     template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>

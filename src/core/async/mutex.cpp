@@ -3,27 +3,24 @@ MSTL_BEGIN_NAMESPACE__
 
 mutex::mutex() {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::InitializeCriticalSection(&mutex_);
+    ::InitializeSRWLock(&mutex_);
 #else
     ::pthread_mutexattr_t attr;
     ::pthread_mutexattr_init(&attr);
-    ::pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
     ::pthread_mutex_init(&mutex_, &attr);
     ::pthread_mutexattr_destroy(&attr);
 #endif
 }
 
 mutex::~mutex() {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::DeleteCriticalSection(&mutex_);
-#else
+#ifdef MSTL_PLATFORM_LINUX__
     ::pthread_mutex_destroy(&mutex_);
 #endif
 }
 
 void mutex::lock() {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::EnterCriticalSection(&mutex_);
+    ::AcquireSRWLockExclusive(&mutex_);
 #else
     ::pthread_mutex_lock(&mutex_);
 #endif
@@ -31,7 +28,7 @@ void mutex::lock() {
 
 void mutex::unlock() {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::LeaveCriticalSection(&mutex_);
+    ::ReleaseSRWLockExclusive(&mutex_);
 #else
     ::pthread_mutex_unlock(&mutex_);
 #endif
@@ -39,9 +36,54 @@ void mutex::unlock() {
 
 bool mutex::try_lock() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::TryEnterCriticalSection(&mutex_) != 0;
+    return ::TryAcquireSRWLockExclusive(&mutex_) != 0;
 #else
     return ::pthread_mutex_trylock(&mutex_) == 0;
+#endif
+}
+
+
+recursive_mutex::recursive_mutex() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::InitializeCriticalSection(&recursive_mutex_);
+#else
+    ::pthread_mutexattr_t attr;
+    ::pthread_mutexattr_init(&attr);
+    ::pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
+    ::pthread_mutex_init(&recursive_mutex_, &attr);
+    ::pthread_mutexattr_destroy(&attr);
+#endif
+}
+
+recursive_mutex::~recursive_mutex() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::DeleteCriticalSection(&recursive_mutex_);
+#else
+    ::pthread_mutex_destroy(&recursive_mutex_);
+#endif
+}
+
+void recursive_mutex::lock() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::EnterCriticalSection(&recursive_mutex_);
+#else
+    ::pthread_mutex_lock(&recursive_mutex_);
+#endif
+}
+
+void recursive_mutex::unlock() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::LeaveCriticalSection(&recursive_mutex_);
+#else
+    ::pthread_mutex_unlock(&recursive_mutex_);
+#endif
+}
+
+bool recursive_mutex::try_lock() noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    return ::TryEnterCriticalSection(&recursive_mutex_) != 0;
+#else
+    return ::pthread_mutex_trylock(&recursive_mutex_) == 0;
 #endif
 }
 

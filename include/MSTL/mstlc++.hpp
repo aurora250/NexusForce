@@ -5,6 +5,7 @@
 #include "core/async/lock_free_queue.hpp"
 #include "core/async/thread_pool.hpp"
 #include "core/async/timer.hpp"
+#include "core/async/call_once.hpp"
 #include "core/compound/any.hpp"
 #include "core/compound/variant.hpp"
 #include "core/container/bitmap.hpp"

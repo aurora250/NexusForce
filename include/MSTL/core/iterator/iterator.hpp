@@ -2,7 +2,7 @@
 #define MSTL_ITERATOR_HPP__
 #include "../iterator/iterator_traits.hpp"
 #include "../utility/concepts.hpp"
-#include "../config/exception.hpp"
+#include "../config/assertion.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator>

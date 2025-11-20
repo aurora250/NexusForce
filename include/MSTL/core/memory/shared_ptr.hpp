@@ -1,30 +1,30 @@
 #ifndef MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #define MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #include "../algorithm/algobase.hpp"
+#include "../async/atomic.hpp"
 #include "unique_ptr.hpp"
 #include "construct.hpp"
-#include <atomic> // std::atomic_ulong
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
 
 struct __smart_ptr_counter {
-    std::atomic_ulong count_;
+    _MSTL atomic_ulong count_;
 
     __smart_ptr_counter() noexcept : count_(1) {}
     __smart_ptr_counter(__smart_ptr_counter&&) = delete;
     virtual ~__smart_ptr_counter() = default;
 
     void incref() noexcept {
-        count_.fetch_add(1, std::memory_order_relaxed);
+        count_.fetch_add(1, _MSTL memory_order_relaxed);
     }
     void decref() noexcept {
-        if (count_.fetch_sub(1, std::memory_order_relaxed) == 1) {
+        if (count_.fetch_sub(1, _MSTL memory_order_relaxed) == 1) {
             delete this;
         }
     }
     MSTL_NODISCARD uint64_t countref() const noexcept {
-        return count_.load(std::memory_order_relaxed);
+        return count_.load(_MSTL memory_order_relaxed);
     }
 };
 

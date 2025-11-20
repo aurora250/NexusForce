@@ -1,10 +1,10 @@
 #ifndef MSTL_WEB_COOKIE_HPP__
 #define MSTL_WEB_COOKIE_HPP__
-#include <atomic>
-#include <mutex>
-#include <thread>
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/time/datetime.hpp"
+#include "MSTL/core/async/thread.hpp"
+#include "MSTL/core/async/atomic.hpp"
+#include "MSTL/core/async/mutex.hpp"
 #include "http_constants.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -150,9 +150,9 @@ MSTL_BEGIN_INNER__
 class __session_manager {
 private:
     unordered_map<string, session> sessions_;
-    std::mutex mutex_;
-    std::atomic<bool> cleanup_running_{false};
-    std::thread cleanup_thread_;
+    _MSTL mutex mutex_;
+    _MSTL atomic<bool> cleanup_running_{false};
+    _MSTL thread cleanup_thread_;
 
     friend class _MSTL servlet;
 

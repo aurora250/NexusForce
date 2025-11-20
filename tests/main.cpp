@@ -1,7 +1,7 @@
 #include "try.h"
 
 int main() {
-    test_postgre();
+    test_serv();
 
     console.pause();
 }

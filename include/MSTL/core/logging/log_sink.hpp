@@ -1,9 +1,9 @@
 #ifndef MSTL_LOG_SINK_HPP__
 #define MSTL_LOG_SINK_HPP__
-#include "../async/thread.hpp"
 #include "../container/unordered_map.hpp"
 #include "../utility/file.hpp"
-#include <mutex>
+#include "../async/mutex.hpp"
+#include "../async/thread.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef ERROR
@@ -86,7 +86,7 @@ public:
 class MSTL_API file_sink final : public log_sink {
 private:
     file file_;
-    std::recursive_mutex mutex_;
+    _MSTL recursive_mutex mutex_;
     string base_filename_;
     string current_date_;
     size_t max_file_size_;

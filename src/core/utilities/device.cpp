@@ -1,8 +1,8 @@
 #include <MSTL/core/utility/device.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/unordered_map.hpp>
-#include <MSTL/core/packages.hpp>
-#include <MSTL/core/format.hpp>
+#include <MSTL/core/container/unordered_map.hpp>
+#include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/string/format.hpp>
 #include <devguid.h>
 #include <Dbt.h>
 MSTL_BEGIN_NAMESPACE__

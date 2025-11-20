@@ -1,4 +1,5 @@
 #include <MSTL/network/http/session.hpp>
+#include <MSTL/core/time/clocks.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void cookie::swap(cookie& other) noexcept {
@@ -65,7 +66,7 @@ MSTL_NODISCARD string __session_manager::generate_session_id() {
 
 __session_manager::__session_manager() {
     cleanup_running_ = true;
-    cleanup_thread_ = std::thread(&__session_manager::cleanup_expired_sessions, this);
+    cleanup_thread_ = _MSTL thread(&__session_manager::cleanup_expired_sessions, this);
 }
 
 __session_manager::~__session_manager() {
@@ -76,7 +77,7 @@ __session_manager::~__session_manager() {
 }
 
 MSTL_NODISCARD session* __session_manager::get_session(const string& session_id, const bool create) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     if (it != sessions_.end()) {
         if (it->second.is_valid()) {
@@ -98,7 +99,7 @@ MSTL_NODISCARD session* __session_manager::get_session(const string& session_id,
 void __session_manager::cleanup_expired_sessions() {
     while (cleanup_running_) {
         {
-            std::lock_guard<std::mutex> lock(mutex_);
+            _MSTL lock_guard<_MSTL mutex> lock(mutex_);
             datetime now = datetime::now();
             auto it = sessions_.begin();
             while (it != sessions_.end()) {
@@ -111,17 +112,17 @@ void __session_manager::cleanup_expired_sessions() {
                 }
             }
         }
-        std::this_thread::sleep_for(std::chrono::minutes(5));
+        _MSTL this_thread::sleep_for(_MSTL chrono::minutes(5));
     }
 }
 
 void __session_manager::remove_session(const string& session_id) noexcept {
-    std::lock_guard<std::mutex> lock(mutex_);
+    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     sessions_.erase(session_id);
 }
 
 MSTL_NODISCARD bool __session_manager::session_exists(const string& session_id) noexcept {
-    std::lock_guard<std::mutex> lock(mutex_);
+    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     return it != sessions_.end() && it->second.is_valid();
 }

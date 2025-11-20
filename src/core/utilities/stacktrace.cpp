@@ -3,7 +3,8 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <DbgHelp.h>
 #pragma comment(lib, "DbgHelp.lib")
-#include "MSTL/core/undef_cmacro.hpp"
+#include <MSTL/core/config/undef_cmacro.hpp>
+#include <MSTL/core/async/call_once.hpp>
 #else
 #include <execinfo.h>
 #include <dlfcn.h>

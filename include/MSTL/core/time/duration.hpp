@@ -3,6 +3,10 @@
 #include "../numeric/ratio.hpp"
 #include "../numeric/math.hpp"
 #include <ctime> // std::time_t
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <Windows.h>
+#include "../config/undef_cmacro.hpp"
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CHRONO__
@@ -379,6 +383,27 @@ constexpr bool operator >=(const duration<Rep1, Period1>& lhs, const duration<Re
     return !(lhs < rhs);
 }
 
+
+template <typename ToDur, typename Rep, typename Period>
+MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
+floor(const duration<Rep, Period>& dur) {
+	auto to = chrono::duration_cast<ToDur>(dur);
+	if (to > dur) {
+		return to - ToDur{1};
+	}
+	return to;
+}
+
+template <typename ToDur, typename Rep, typename Period>
+MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
+ceil(const duration<Rep, Period>& dur) {
+	auto to = chrono::duration_cast<ToDur>(dur);
+	if (to < dur) {
+		return to + ToDur{1};
+	}
+	return to;
+}
+
 MSTL_END_CHRONO__
 
 
@@ -460,7 +485,7 @@ void sleep_for(const _MSTL_CHRONO duration<Rep, Period>& time) {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     auto ns = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(time);
-    ::LARGE_INTEGER li;
+    ::LARGE_INTEGER li{};
     li.QuadPart = -(ns.count() / 100);
 
     const ::HANDLE timer = ::CreateWaitableTimerW(nullptr, 1, nullptr);

@@ -104,23 +104,36 @@ private:
         return function_ptrs;
     }
 
+    template <size_t I, typename... Args, enable_if_t<
+        is_constructible_v<variant_alternative_t<variant, I>, Args...>, int> = 0>
+    constexpr bool try_construct_impl_aux_aux(Args&&... args) {
+        index_ = I;
+        new (union_) variant_alternative_t<variant, I>(_MSTL forward<Args>(args)...);
+        return true;
+    }
+    template <size_t I, typename... Args, enable_if_t<
+        !is_constructible_v<variant_alternative_t<variant, I>, Args...>, int> = 0>
+    constexpr bool try_construct_impl_aux_aux(Args&&... args) {
+        return variant::try_construct_impl<I + 1>(_MSTL forward<Args>(args)...);
+    }
+
+    template <size_t I, typename... Args, enable_if_t<(I < sizeof...(Types)), int> = 0>
+    constexpr bool try_construct_impl_aux(Args&&... args) {
+        return variant::try_construct_impl_aux_aux<I>(_MSTL forward<Args>(args)...);
+    }
+    template <size_t I, typename... Args, enable_if_t<(I >= sizeof...(Types)), int> = 0>
+    constexpr bool try_construct_impl_aux(Args&&...) {
+        return false;
+    }
+
     template <size_t I, typename... Args>
     constexpr bool try_construct_impl(Args&&... args) {
-        MSTL_IF_CONSTEXPR (I < sizeof...(Types)) {
-            MSTL_IF_CONSTEXPR (is_constructible_v<variant_alternative_t<variant, I>, Args...>) {
-                index_ = I;
-                new (union_) variant_alternative_t<variant, I>(_MSTL forward<Args>(args)...);
-                return true;
-            } else {
-                return try_construct_impl<I + 1>(_MSTL forward<Args>(args)...);
-            }
-        }
-        return false;
+        return variant::try_construct_impl_aux<I>(_MSTL forward<Args>(args)...);
     }
 
     template <size_t I = 0, typename... Args>
     constexpr bool try_construct(Args&&... args) {
-        return try_construct_impl<I>(_MSTL forward<Args>(args)...);
+        return variant::try_construct_impl<I>(_MSTL forward<Args>(args)...);
     }
 
 public:

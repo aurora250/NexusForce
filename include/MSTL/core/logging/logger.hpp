@@ -3,36 +3,35 @@
 #include "../container/queue.hpp"
 #include "../functional/function.hpp"
 #include "../memory/shared_ptr.hpp"
+#include "../async/condition_variable.hpp"
+#include "../async/atomic.hpp"
 #include "log_sink.hpp"
-#include <condition_variable>
-#include <mutex>
-#include <thread>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API logger {
 private:
     LOG_LEVEL level_;
-    std::atomic<bool> async_;
+    _MSTL atomic<bool> async_;
 
     vector<shared_ptr<log_sink>> sinks_;
-    std::mutex sinks_mutex_;
+    _MSTL mutex sinks_mutex_;
 
     queue<log_event> queue_;
-    std::mutex queue_mutex_;
-    std::condition_variable cv_;
+    _MSTL mutex queue_mutex_;
+    _MSTL condition_variable cv_;
 
-    std::thread worker_;
-    std::atomic<bool> running_;
+    _MSTL thread worker_;
+    _MSTL atomic<bool> running_;
 
-    std::atomic<bool> flush_requested_{false};
-    std::mutex flush_mutex_;
-    std::condition_variable flush_cv_;
+    _MSTL atomic<bool> flush_requested_{false};
+    _MSTL mutex flush_mutex_;
+    _MSTL condition_variable flush_cv_;
 
     function<bool(const log_event&)> filter_;
-    std::mutex filter_mutex_;
+    _MSTL mutex filter_mutex_;
 
     unordered_map<string, string> context_;
-    std::mutex context_mutex_;
+    _MSTL mutex context_mutex_;
 
     void enqueue(log_event&& ev);
     void enqueue(const log_event& ev);

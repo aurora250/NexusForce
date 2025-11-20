@@ -74,15 +74,6 @@
 #endif
 
 
-#if defined(DEBUG) || defined(_DEBUG) || !defined(NDEBUG) || !defined(QT_NO_DEBUG)
-	// defined when project compiled under debug statement.
-	#define MSTL_STATE_DEBUG__			1
-#else
-	// defined when project compiled under release statement.
-	#define MSTL_STATE_RELEASE__		1
-#endif
-
-
 #if defined(MSTL_PLATFORM_WIN64__) || defined(MSTL_PLATFORM_LINUX64__) || defined(__amd64__) || defined(__x86_64__) || defined(__aarch64__)
 	// defined when project compiled in 64bits systems.
 	#define MSTL_DATA_BUS_WIDTH_64__	1
@@ -280,6 +271,13 @@
 #else
 	#define MSTL_ALWAYS_INLINE
 	#define MSTL_ALWAYS_INLINE_INLINE
+#endif
+
+
+#ifdef MSTL_COMPILER_GNUC__
+	#define MSTL_UNUSED __attribute__((unused))
+#else
+	#define MSTL_UNUSED
 #endif
 
 

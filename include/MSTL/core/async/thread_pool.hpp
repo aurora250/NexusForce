@@ -6,11 +6,9 @@
 #include "../memory/shared_ptr.hpp"
 #include "atomic.hpp"
 #include "thread.hpp"
-#include <atomic>
-#include <chrono>
-#include <condition_variable>
+#include "condition_variable.hpp"
 #include <future>
-#include <mutex>
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = numeric_limits<int32_t>::max();
@@ -72,17 +70,17 @@ private:
 	size_t thread_threshhold_;
 
 	_MSTL queue<Task> task_queue_;
-	std::atomic_uint task_size_;
-	std::atomic_uint idle_thread_size_;
+	_MSTL atomic_uint task_size_;
+	_MSTL atomic_uint idle_thread_size_;
 	size_t task_threshhold_;
 
-	std::mutex task_queue_mtx_;
-	std::condition_variable not_full_;
-	std::condition_variable not_empty_;
-	std::condition_variable exit_cond_;
+	_MSTL mutex task_queue_mtx_;
+	_MSTL condition_variable not_full_;
+	_MSTL condition_variable not_empty_;
+	_MSTL condition_variable exit_cond_;
 
-	std::atomic<THREAD_POOL_MODE> pool_mode_;
-	std::atomic_bool is_running_;
+	_MSTL atomic<THREAD_POOL_MODE> pool_mode_;
+	_MSTL atomic_bool is_running_;
 
 private:
     void thread_function(id_type thread_id);
@@ -127,8 +125,8 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 	);
 	std::future<Result> res = task->get_future();
 
-	std::unique_lock<std::mutex> lock(task_queue_mtx_);
-	if (!not_full_.wait_for(lock, std::chrono::seconds(1), [&]()->bool {
+	_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+	if (!not_full_.wait_for(lock, _MSTL chrono::seconds(1), [&]()->bool {
 		return task_queue_.size() < task_threshhold_;
 	})) {
 		auto task_ = _MSTL make_shared<std::packaged_task<Result()>>([]() -> Result { return Result(); });

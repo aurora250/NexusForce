@@ -2,6 +2,7 @@
 #define MSTL_STATIC_NUMERIC_HPP__
 #include "../memory/bit.hpp"
 #include "numeric_limits.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <intmax_t Numerator>

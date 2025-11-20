@@ -2,10 +2,10 @@
 #define MSTL_DATABASE_POOL_HPP__
 #include "../core/container/queue.hpp"
 #include "../core/memory/shared_ptr.hpp"
+#include "../core/async/condition_variable.hpp"
+#include "../core/async/atomic.hpp"
+#include "../core/async/thread.hpp"
 #include "db_interface.hpp"
-#include <condition_variable>
-#include <mutex>
-#include <thread>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API database_pool {
@@ -18,12 +18,12 @@ private:
 
     _MSTL unique_ptr<idb_factory> factory_ = nullptr;
     _MSTL queue<idb_connect*> connect_queue_;
-    std::mutex queue_mtx_;
-    std::condition_variable cv_;
-    std::atomic<bool> running_{false};
+    _MSTL mutex queue_mtx_;
+    _MSTL condition_variable cv_;
+    _MSTL atomic<bool> running_{false};
 
-    std::thread produce_;
-    std::thread scanner_;
+    _MSTL thread produce_;
+    _MSTL thread scanner_;
 
     void produce_connect_task();
     void scanner_connect_task();
@@ -57,10 +57,10 @@ public:
 
 template <typename T>
 _MSTL shared_ptr<T> database_pool::get_connect_impl() {
-    std::unique_lock<std::mutex> lock(queue_mtx_);
+    _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
 
     while (connect_queue_.empty() && running_) {
-        if (cv_.wait_for(lock, std::chrono::milliseconds(connect_timeout_)) == std::cv_status::timeout) {
+        if (cv_.wait_for(lock, _MSTL chrono::milliseconds(connect_timeout_)) == _MSTL cv_status::timeout) {
             if (connect_queue_.empty()) {
                 if (connect_queue_.size() < max_size_) {
                     auto* new_conn = factory_->create_connect();
@@ -99,7 +99,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
     auto conn_ptr = _MSTL shared_ptr<T>(
         dynamic_cast<T*>(raw_conn),
         [this](T* p) {
-            std::unique_lock<std::mutex> lock1(queue_mtx_);
+            _MSTL unique_lock<_MSTL mutex> lock1(queue_mtx_);
             if (p->is_valid()) {
                 p->refresh_alive();
                 connect_queue_.push(p);

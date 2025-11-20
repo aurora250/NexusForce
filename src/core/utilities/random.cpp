@@ -3,7 +3,7 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <wincrypt.h>
-#include <MSTL/core/undef_cmacro.hpp>
+#include <MSTL/core/config/undef_cmacro.hpp>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/fcntl.h>

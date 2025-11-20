@@ -27,12 +27,12 @@ void manual_thread::start() {
 
 
 void thread_pool::thread_function(const id_type thread_id) {
-    auto last = std::chrono::high_resolution_clock::now();
+    auto last = _MSTL chrono::high_resolution_clock::now();
 
     for (;;) {
         Task task{};
         {
-            std::unique_lock<std::mutex> lock(task_queue_mtx_);
+            _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
             while (task_queue_.empty()) {
                 if (!is_running_) {
                     threads_map_.erase(thread_id);
@@ -40,10 +40,11 @@ void thread_pool::thread_function(const id_type thread_id) {
                     return;
                 }
                 if (pool_mode_ == THREAD_POOL_MODE::MODE_CACHED) {
-                    if (std::cv_status::timeout == not_empty_.wait_for(lock, std::chrono::seconds(1))) {
-                        auto now = std::chrono::high_resolution_clock::now();
-                        const auto sub = std::chrono::duration_cast<std::chrono::seconds>(now - last);
-                        if (sub.count() >= THREAD_POOL_MAX_IDLE_SECONDS && threads_map_.size() > init_thread_size_) {
+                    if (_MSTL cv_status::timeout == not_empty_.wait_for(lock, _MSTL chrono::seconds(1))) {
+                        auto now = _MSTL chrono::high_resolution_clock::now();
+                        const auto sub = _MSTL chrono::duration_cast<_MSTL chrono::seconds>(now - last);
+                        if (sub.count() >= THREAD_POOL_MAX_IDLE_SECONDS
+                            && threads_map_.size() > init_thread_size_) {
                             threads_map_.erase(thread_id);
                             --idle_thread_size_;
                             return;
@@ -64,7 +65,7 @@ void thread_pool::thread_function(const id_type thread_id) {
         }
         if (task != nullptr) task();
         ++idle_thread_size_;
-        last = std::chrono::high_resolution_clock::now();
+        last = _MSTL chrono::high_resolution_clock::now();
     }
 }
 
@@ -115,7 +116,7 @@ void thread_pool::stop() {
     if (!is_running_) return;
     is_running_ = false;
 
-    std::unique_lock<std::mutex> lock(task_queue_mtx_);
+    _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
     not_empty_.notify_all();
     exit_cond_.wait(lock, [&]()->bool { return threads_map_.empty(); });
 

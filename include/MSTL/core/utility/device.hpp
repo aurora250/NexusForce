@@ -2,7 +2,7 @@
 #define MSTL_DEVICE_HPP__
 #include "../config/c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include "vector.hpp"
+#include "../container/vector.hpp"
 #include <Windows.h>
 #include <SetupAPI.h>
 #pragma comment(lib, "SetupAPI.lib")

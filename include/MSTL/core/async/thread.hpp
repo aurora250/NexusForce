@@ -2,6 +2,7 @@
 #define MSTL_THREAD_HPP__
 #include "../memory/unique_ptr.hpp"
 #include "../functional/apply.hpp"
+#include "../config/exception.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <process.h>

@@ -13,12 +13,12 @@ private:
     socket server_socket_{};
     uint16_t port_;
     int backlog_;
-    std::atomic<bool> running_{false};
+    _MSTL atomic_bool running_{false};
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::WSADATA wsa_data_{};
 #endif
     ::sockaddr_in server_addr_{};
-    vector<std::thread> worker_threads_;
+    vector<_MSTL thread> worker_threads_;
     _INNER __session_manager session_manager_;
     filter_chain filter_chain_;
     HTTP_COOKIE_NAME cookie_name_ = HTTP_COOKIE_NAME::JSESSIONID;

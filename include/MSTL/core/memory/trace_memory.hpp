@@ -35,7 +35,7 @@ public:
     }
 
     ~trace_allocator() {
-#if MSTL_STATE_DEBUG__
+#ifdef MSTL_STATE_DEBUG__
         if (!traces_.empty()) {
             _MSTL printcln(color::red(), "Memory leaks detected! \n");
             print_stacktrace();

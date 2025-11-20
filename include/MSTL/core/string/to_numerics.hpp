@@ -3,6 +3,7 @@
 #include "../string/cstring.hpp"
 #include "../numeric/math.hpp"
 #include "../config/exception.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

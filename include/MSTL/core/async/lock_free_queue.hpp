@@ -1,7 +1,7 @@
 #ifndef MSTL_LOCK_FREE_QUEUE_HPP__
 #define MSTL_LOCK_FREE_QUEUE_HPP__
-#include <atomic>
 #include "../memory/unique_ptr.hpp"
+#include "../async/atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
@@ -22,9 +22,9 @@ private:
     };
 
     struct node {
-        std::atomic<T*> data;
-        std::atomic<node_counter> count;
-        std::atomic<counted_node_ptr> next;
+        _MSTL atomic<T*> data;
+        _MSTL atomic<node_counter> count;
+        _MSTL atomic<counted_node_ptr> next;
 
         node(int external_count = 2) {
             node_counter new_count;
@@ -40,14 +40,14 @@ private:
         }
 
         void release_ref() {
-            node_counter old_counter = count.load(std::memory_order_relaxed);
+            node_counter old_counter = count.load(_MSTL memory_order_relaxed);
             node_counter new_counter;
             do {
                 new_counter = old_counter;
                 --new_counter.internal_count;
             }
             while (!count.compare_exchange_strong(old_counter, new_counter,
-                std::memory_order_acquire, std::memory_order_relaxed));
+                _MSTL memory_order_acquire, _MSTL memory_order_relaxed));
             if (!new_counter.internal_count && !new_counter.external_counters) {
                 delete this;
                 destruct_count.fetch_add(1);
@@ -56,11 +56,11 @@ private:
     };
 
 private:
-    static std::atomic<int> destruct_count;
-    static std::atomic<int> construct_count;
+    static _MSTL atomic<int> destruct_count;
+    static _MSTL atomic<int> construct_count;
 
-    std::atomic<counted_node_ptr> head;
-    std::atomic<counted_node_ptr> tail;
+    _MSTL atomic<counted_node_ptr> head;
+    _MSTL atomic<counted_node_ptr> tail;
 
 private:
     void set_new_tail(counted_node_ptr& old_tail, counted_node_ptr const& new_tail) {
@@ -76,7 +76,7 @@ private:
     static void free_external_counter(counted_node_ptr& old_node_ptr) {
         node* const ptr = old_node_ptr.ptr;
         int const count_increase = old_node_ptr.external_count - 2;
-        node_counter old_counter = ptr->count.load(std::memory_order_relaxed);
+        node_counter old_counter = ptr->count.load(_MSTL memory_order_relaxed);
         node_counter new_counter;
         do {
             new_counter = old_counter;
@@ -84,20 +84,20 @@ private:
             new_counter.internal_count += count_increase;
         }
         while (!ptr->count.compare_exchange_strong(old_counter, new_counter,
-            std::memory_order_acquire, std::memory_order_relaxed));
+            _MSTL memory_order_acquire, _MSTL memory_order_relaxed));
         if (!new_counter.internal_count && !new_counter.external_counters) {
             destruct_count.fetch_add(1);
             delete ptr;
         }
     }
 
-    static void increase_external_count(std::atomic<counted_node_ptr>& counter, counted_node_ptr& old_counter) {
+    static void increase_external_count(_MSTL atomic<counted_node_ptr>& counter, counted_node_ptr& old_counter) {
         counted_node_ptr new_counter;
         do {
             new_counter = old_counter;
             ++new_counter.external_count;
         } while (!counter.compare_exchange_strong(old_counter, new_counter,
-            std::memory_order_acquire, std::memory_order_relaxed));
+            _MSTL memory_order_acquire, _MSTL memory_order_relaxed));
         old_counter.external_count = new_counter.external_count;
     }
 
@@ -149,7 +149,7 @@ public:
     }
 
     unique_ptr<T> pop() {
-        counted_node_ptr old_head = head.load(std::memory_order_relaxed);
+        counted_node_ptr old_head = head.load(_MSTL memory_order_relaxed);
         for (;;) {
             lock_free_queue::increase_external_count(head, old_head);
             node* const ptr = old_head.ptr;
@@ -169,10 +169,10 @@ public:
 };
 
 template <typename T>
-std::atomic<int> lock_free_queue<T>::destruct_count{0};
+_MSTL atomic<int> lock_free_queue<T>::destruct_count{0};
 
 template <typename T>
-std::atomic<int> lock_free_queue<T>::construct_count{0};
+_MSTL atomic<int> lock_free_queue<T>::construct_count{0};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_LOCK_FREE_QUEUE_HPP__

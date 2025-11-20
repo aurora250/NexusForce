@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_MEMORY_STANDARD_ALLOCATOR_HPP__
 #define MSTL_CORE_MEMORY_STANDARD_ALLOCATOR_HPP__
 #include "../config/types.hpp"
+#include "../config/assertion.hpp"
 #include "../config/exception.hpp"
 #include "../utility/type_traits.hpp"
 #include "../utility/tags.hpp"
@@ -53,7 +54,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
     size_t align = Align;
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD)
-        align = _MSTL max(Align, MEMORY_BIG_ALLOC_ALIGN);
+        align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
 #endif
 #if defined(MSTL_COMPILER_CLANG__) && defined(MSTL_STANDARD_20__)
     if (_MSTL is_constant_evaluated())
@@ -119,7 +120,7 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept 
     size_t align = Align;
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD)
-        align = _MSTL max(Align, MEMORY_BIG_ALLOC_ALIGN);
+        align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
 #endif
     operator delete(ptr,
 #ifdef __cpp_sized_deallocation
@@ -184,7 +185,12 @@ public:
         static_assert(value_size > 0, "value type must be complete before allocation called.");
         const size_t alloc_size = value_size * n;
         MSTL_DEBUG_VERIFY(alloc_size <= static_cast<size_t>(-1), "allocation will cause memory overflow.");
-        return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
+        try {
+            return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
+        } catch (...) {
+            Exception(AllocateError("standard allocate failed"));
+            return nullptr;
+        }
     }
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {

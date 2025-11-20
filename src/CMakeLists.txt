@@ -139,28 +139,28 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/postgresql/postgresql_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/http_constants.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/servlet.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/http_message.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/http/filter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/web/dns/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/db_config.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/mysql/mysql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/mysql/mysql_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/mysql/mysql_prepared_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/mysql/mysql_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/sqlite/sqlite_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/sqlite/sqlite_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/sqlite/sqlite_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/sqlite/sqlite_prepared_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/redis/redis_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/redis/redis_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/sql_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/database/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/servlet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
 )
 
 # 编译为动态库
@@ -172,6 +172,11 @@ else()
 endif()
 
 add_library(MSTL::MSTL ALIAS MSTL)
+
+target_compile_definitions(MSTL
+        PRIVATE
+        $<$<CONFIG:Debug>:MSTL_STATE_DEBUG__>
+)
 
 # 编译设置
 set_target_properties(MSTL PROPERTIES
@@ -245,6 +250,7 @@ else()
 endif()
 
 
+#PostgreSQL
 if(MSTL_ENABLE_POSTGRESQL AND MSTL_ARCH STREQUAL "x64")
     set(PostgreSQL_FOUND FALSE)
 

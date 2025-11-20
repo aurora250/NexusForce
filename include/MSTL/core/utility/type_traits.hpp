@@ -1588,14 +1588,15 @@ using remove_cvref_decay_t = remove_cvref_t<decay_t<T>>;
 //   if expr2 and expr3 are different types, the compiler will attempt to type a common type.
 //   conversion rules are typically based on standard implicit type conversion rules.
 template <typename T1, typename T2>
-using common_ternary_operator_t = decltype(false ? _MSTL declval<T1>() : _MSTL declval<T2>());
+using common_ternary_operator_t = decltype(true ? _MSTL declval<T1>() : _MSTL declval<T2>());
+
 
 MSTL_BEGIN_INNER__
 template <typename, typename, typename = void>
 struct __oper_decay_aux {};
 template <typename T1, typename T2>
-struct __oper_decay_aux<T1, T2, void_t<common_ternary_operator_t<T1, T2>>> {
-    using type = decay_t<common_ternary_operator_t<T1, T2>>;
+struct __oper_decay_aux<T1, T2, void_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>> {
+    using type = decay_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>;
 };
 MSTL_END_INNER__
 

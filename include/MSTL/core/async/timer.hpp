@@ -3,11 +3,9 @@
 #include "../container/map.hpp"
 #include "../container/set.hpp"
 #include "../functional/function.hpp"
-#include <atomic>
-#include <chrono>
-#include <condition_variable>
-#include <mutex>
-#include <thread>
+#include "../async/thread.hpp"
+#include "../async/condition_variable.hpp"
+#include "../async/atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Clock>
@@ -38,15 +36,15 @@ private:
     _MSTL set<node> nodes_;
     _MSTL map<token, typename _MSTL set<node>::iterator> node_map_;
 
-    std::thread thread_;
-    std::mutex mutex_;
-    std::condition_variable cv_;
+    _MSTL thread thread_;
+    _MSTL mutex mutex_;
+    _MSTL condition_variable cv_;
     token next_id_;
-    std::atomic<bool> stopped_;
+    _MSTL atomic_bool stopped_;
 
     void run() {
         while (!stopped_.load()) {
-            std::unique_lock<std::mutex> lock(mutex_);
+            _MSTL unique_lock<_MSTL mutex> lock(mutex_);
 
             if (nodes_.empty()) {
                 cv_.wait(lock, [this] {
@@ -78,7 +76,7 @@ private:
     }
 
     timer_scheduler() : next_id_(0), stopped_(false) {
-        thread_ = std::thread(&timer_scheduler::run, this);
+        thread_ = _MSTL thread(&timer_scheduler::run, this);
     }
 
     ~timer_scheduler() {
@@ -101,7 +99,7 @@ public:
     timer_scheduler& operator=(timer_scheduler&&) = delete;
 
     token add_task(time_point expire, handler_type&& handler) {
-        std::unique_lock<std::mutex> lock(mutex_);
+        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
         token id = next_id_++;
 
         const bool is_earliest = nodes_.empty() || expire < nodes_.begin()->expire;
@@ -120,7 +118,7 @@ public:
     }
 
     bool cancel(token id) {
-        std::unique_lock<std::mutex> lock(mutex_);
+        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
         auto it_map = node_map_.find(id);
         if (it_map == node_map_.end()) {
             return false;
@@ -140,7 +138,7 @@ public:
     }
 
     void cancel_all() {
-        std::unique_lock<std::mutex> lock(mutex_);
+        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
         nodes_.clear();
         node_map_.clear();
         lock.unlock();
@@ -148,7 +146,7 @@ public:
     }
 
     size_t size() const {
-        std::unique_lock<std::mutex> lock(const_cast<std::mutex&>(mutex_));
+        _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(mutex_));
         return nodes_.size();
     }
 };
@@ -209,7 +207,7 @@ public:
     }
 
     void expires_from_now(const int64_t milliseconds) {
-        expires_after(std::chrono::milliseconds(milliseconds));
+        expires_after(_MSTL chrono::milliseconds(milliseconds));
     }
 
     time_point expiry() const {
@@ -235,9 +233,9 @@ public:
     }
 };
 
-using steady_timer = basic_timer<std::chrono::steady_clock>;
-using system_timer = basic_timer<std::chrono::system_clock>;
-using high_resolution_timer = basic_timer<std::chrono::high_resolution_clock>;
+using steady_timer = basic_timer<_MSTL chrono::steady_clock>;
+using system_timer = basic_timer<_MSTL chrono::system_clock>;
+using high_resolution_timer = basic_timer<_MSTL chrono::high_resolution_clock>;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_TIMER_HPP__

@@ -1,6 +1,6 @@
 #include <MSTL/core/config/exception.hpp>
 #include <MSTL/core/utility/console.hpp>
-#include <atomic>
+#include <MSTL/core/async/atomic.hpp>
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__
 
@@ -10,17 +10,17 @@ void Exception(const Error& err) {
 }
 
 
-static std::atomic<terminate_handler>& get_terminate_handler() noexcept {
-    static std::atomic<terminate_handler> handler{nullptr};
+static atomic<terminate_handler>& get_terminate_handler() noexcept {
+    static atomic<terminate_handler> handler{nullptr};
     return handler;
 }
 
 void set_terminate(terminate_handler handler) noexcept {
-    get_terminate_handler().store(handler, std::memory_order_release);
+    get_terminate_handler().store(handler, memory_order_release);
 }
 
 void terminate() noexcept {
-    const auto handler = get_terminate_handler().load(std::memory_order_acquire);
+    const auto handler = get_terminate_handler().load(memory_order_acquire);
     if (handler) handler();
     std::abort();
 }
