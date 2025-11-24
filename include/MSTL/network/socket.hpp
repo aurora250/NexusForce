@@ -105,7 +105,10 @@ public:
     MSTL_NODISCARD socket accept() const noexcept {
         ::sockaddr_in client_addr{};
         ::socklen_t client_len = sizeof(client_addr);
-        return socket{::accept(sockfd_, reinterpret_cast<::sockaddr *>(&client_addr), &client_len)};
+        return socket{::accept(
+            sockfd_,
+            reinterpret_cast<::sockaddr *>(&client_addr),
+            &client_len)};
     }
 
     bool listen(const int backlog) const noexcept {
@@ -118,21 +121,36 @@ public:
 
     int reuse_addr() const noexcept {
         constexpr int opt = 1;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char*>(&opt), sizeof(opt));
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR,
+            reinterpret_cast<const char*>(&opt), sizeof(opt));
     }
 
     bool set_receive_timeout(const chrono::milliseconds timeout) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        ::DWORD tv = static_cast<::DWORD>(timeout.count());
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO,
+            reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+#else
         ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO,
+            reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+#endif
     }
 
     bool set_send_timeout(const chrono::milliseconds timeout) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        ::DWORD tv = static_cast<::DWORD>(timeout.count());
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO,
+            reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+#else
         ::timeval tv{};
         tv.tv_sec = timeout.count() / 1000;
         tv.tv_usec = (timeout.count() % 1000) * 1000;
-        return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+        return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO,
+            reinterpret_cast<const char*>(&tv), sizeof(tv)) == 0;
+#endif
     }
 
     MSTL_NODISCARD bool connect(const ::sockaddr* addr, const ::socklen_t addrlen) const noexcept {
@@ -140,7 +158,7 @@ public:
     }
 
     MSTL_NODISCARD bool connect(const ::sockaddr_in& addr) const noexcept {
-        return socket::connect(reinterpret_cast<const sockaddr*>(&addr), sizeof(addr));
+        return socket::connect(reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr));
     }
 
     MSTL_NODISCARD ssize_t send(const void* buf, const size_t len, const int flags = 0) const noexcept {
@@ -159,7 +177,7 @@ public:
     MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len,
         const ::sockaddr_in& dest_addr, const int flags = 0) const noexcept {
         return ::sendto(sockfd_, static_cast<const char*>(buf), len, flags,
-            reinterpret_cast<const sockaddr*>(&dest_addr), sizeof(dest_addr));
+            reinterpret_cast<const ::sockaddr*>(&dest_addr), sizeof(dest_addr));
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, ::sockaddr* src_addr,
@@ -168,9 +186,17 @@ public:
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, const int flags = 0) const noexcept {
-        sockaddr_in from_addr{};
-        socklen_t from_len = sizeof(from_addr);
+        ::sockaddr_in from_addr{};
+        ::socklen_t from_len = sizeof(from_addr);
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
+    }
+
+    MSTL_NODISCARD int get_last_error() const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        return ::WSAGetLastError();
+#else
+        return errno;
+#endif
     }
 };
 

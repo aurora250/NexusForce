@@ -1770,7 +1770,6 @@ void test_dbpool() {
 }
 
 void test_dns() {
-#ifdef MSTL_PLATFORM_LINUX__
     try {
         dns_client cloudflare_client("1.1.1.1");
         dns_client opendns_client("208.67.222.222");
@@ -1825,7 +1824,6 @@ void test_dns() {
             }
         }
     } catch (...) {}
-#endif
 }
 
 void test_tpool() {

@@ -122,7 +122,7 @@ private:
             ::_beginthreadex(nullptr, 0, thread_entry, data.get(), 0, &thread_id)
         );
         if (handle_ == nullptr) {
-            throw_exception(ThreadOperationError("Failed to create thread"));
+            throw_exception(thread_exception("Failed to create thread"));
         }
         id_ = id(thread_id);
 #else

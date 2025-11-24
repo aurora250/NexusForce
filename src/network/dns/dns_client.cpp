@@ -1,14 +1,15 @@
 #include <MSTL/network/dns/dns_client.hpp>
-#ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/network/socket.hpp>
 #include <MSTL/core/utility/packages.hpp>
 #include <MSTL/core/utility/vsprintf.hpp>
 #include <MSTL/core/async/async.hpp>
+#ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
 
-vector<uint8_t> dns_client::build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
-    vector<uint8_t> query;
+vector<byte_t> dns_client::build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
+    vector<byte_t> query;
 
     dns_header header;
     header.id = ::htons(generate_query_id());
@@ -24,16 +25,16 @@ vector<uint8_t> dns_client::build_dns_query(const string& domain, DNS_RECORD typ
     uint16_t qtype = ::htons(static_cast<uint16_t>(type));
     uint16_t qclass_val = ::htons(static_cast<uint16_t>(qclass));
 
-    query.insert(query.end(), reinterpret_cast<uint8_t*>(&qtype),
-        reinterpret_cast<uint8_t*>(&qtype) + sizeof(qtype));
-    query.insert(query.end(), reinterpret_cast<uint8_t*>(&qclass_val),
-        reinterpret_cast<uint8_t*>(&qclass_val) + sizeof(qclass_val));
+    query.insert(query.end(), reinterpret_cast<byte_t*>(&qtype),
+        reinterpret_cast<byte_t*>(&qtype) + sizeof(qtype));
+    query.insert(query.end(), reinterpret_cast<byte_t*>(&qclass_val),
+        reinterpret_cast<byte_t*>(&qclass_val) + sizeof(qclass_val));
 
     return query;
 }
 
-vector<uint8_t> dns_client::encode_domain_name(const string& domain) {
-    vector<uint8_t> encoded;
+vector<byte_t> dns_client::encode_domain_name(const string& domain) {
+    vector<byte_t> encoded;
     size_t start = 0;
     size_t pos;
 
@@ -42,7 +43,7 @@ vector<uint8_t> dns_client::encode_domain_name(const string& domain) {
         if (len > 63) {
             throw_exception(dns_exception("Label too long in domain name"));
         }
-        encoded.push_back(static_cast<uint8_t>(len));
+        encoded.push_back(static_cast<byte_t>(len));
         encoded.insert(encoded.end(), domain.begin() + start, domain.begin() + pos);
         start = pos + 1;
     }
@@ -52,7 +53,7 @@ vector<uint8_t> dns_client::encode_domain_name(const string& domain) {
         if (len > 63) {
             throw_exception(dns_exception("Label too long in domain name"));
         }
-        encoded.push_back(static_cast<uint8_t>(len));
+        encoded.push_back(static_cast<byte_t>(len));
         encoded.insert(encoded.end(), domain.begin() + start, domain.end());
     }
 
@@ -60,14 +61,14 @@ vector<uint8_t> dns_client::encode_domain_name(const string& domain) {
     return encoded;
 }
 
-string dns_client::decode_domain_name(const vector<uint8_t>& data, size_t& offset) {
+string dns_client::decode_domain_name(const vector<byte_t>& data, size_t& offset) {
     string name;
     bool jumped = false;
     size_t original_offset = offset;
     int jumps = 0;
 
     while (offset < data.size()) {
-        const uint8_t len = data[offset];
+        const byte_t len = data[offset];
 
         if ((len & 0xC0) == 0xC0) {
             constexpr int MAX_JUMPS = 5;
@@ -124,7 +125,9 @@ string dns_client::decode_domain_name(const vector<uint8_t>& data, size_t& offse
     return addr;
 }
 
-vector<uint8_t> dns_client::send_udp_query(const vector<uint8_t>& query) const {
+vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
+    ensure_winsock_initialized();
+
     const socket udp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::DATAGRAM, SOCKET_PROTOCOL::UDP);
 
     if (!udp_sock.is_valid()) {
@@ -139,7 +142,7 @@ vector<uint8_t> dns_client::send_udp_query(const vector<uint8_t>& query) const {
         throw_exception(dns_exception("Failed to send UDP query"));
     }
 
-    vector<uint8_t> buffer(512);
+    vector<byte_t> buffer(512);
     const ssize_t received = udp_sock.receive_from(buffer.data(), buffer.size());
     if (received < 0) {
         throw_exception(dns_exception("UDP query timeout or receive error"));
@@ -148,7 +151,9 @@ vector<uint8_t> dns_client::send_udp_query(const vector<uint8_t>& query) const {
     return buffer;
 }
 
-vector<uint8_t> dns_client::send_tcp_query(const vector<uint8_t>& query) const {
+vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
+    ensure_winsock_initialized();
+
     const socket tcp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::STREAM, SOCKET_PROTOCOL::TCP);
 
     if (!tcp_sock.is_valid()) {
@@ -175,7 +180,7 @@ vector<uint8_t> dns_client::send_tcp_query(const vector<uint8_t>& query) const {
     }
     res_len = ::ntohs(res_len);
 
-    vector<uint8_t> buffer(res_len);
+    vector<byte_t> buffer(res_len);
     size_t total = 0;
     while (total < res_len) {
         const ssize_t received = tcp_sock.receive(buffer.data() + total, res_len - total);
@@ -188,7 +193,7 @@ vector<uint8_t> dns_client::send_tcp_query(const vector<uint8_t>& query) const {
     return buffer;
 }
 
-string dns_client::parse_a_record(const vector<uint8_t>& rdata) {
+string dns_client::parse_a_record(const vector<byte_t>& rdata) {
     if (rdata.size() != 4) {
         throw_exception(dns_exception("Invalid A record length"));
     }
@@ -199,7 +204,7 @@ string dns_client::parse_a_record(const vector<uint8_t>& rdata) {
     return {ip};
 }
 
-string dns_client::parse_aaaa_record(const vector<uint8_t>& rdata) {
+string dns_client::parse_aaaa_record(const vector<byte_t>& rdata) {
     if (rdata.size() != 16) {
         throw_exception(dns_exception("Invalid AAAA record length"));
     }
@@ -210,7 +215,7 @@ string dns_client::parse_aaaa_record(const vector<uint8_t>& rdata) {
     return {ip};
 }
 
-string dns_client::parse_mx_record(const vector<uint8_t>& data, size_t offset, const uint16_t rdlength) {
+string dns_client::parse_mx_record(const vector<byte_t>& data, size_t offset, const uint16_t rdlength) {
     if (rdlength < 2) {
         throw_exception(dns_exception("Invalid MX record length"));
     }
@@ -220,12 +225,12 @@ string dns_client::parse_mx_record(const vector<uint8_t>& data, size_t offset, c
     return to_string(preference) + " " + exchange;
 }
 
-string dns_client::parse_txt_record(const vector<uint8_t>& rdata) {
+string dns_client::parse_txt_record(const vector<byte_t>& rdata) {
     string result;
     size_t offset = 0;
 
     while (offset < rdata.size()) {
-        const uint8_t len = rdata[offset++];
+        const byte_t len = rdata[offset++];
         if (offset + len > rdata.size()) {
             throw_exception(dns_exception("Invalid TXT record"));
         }
@@ -237,7 +242,27 @@ string dns_client::parse_txt_record(const vector<uint8_t>& rdata) {
     return result;
 }
 
-dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t& offset) {
+void dns_client::ensure_winsock_initialized() {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    static bool initialized = []() -> bool {
+        ::WSADATA wsa_data;
+        int result = ::WSAStartup(MAKEWORD(2, 2), &wsa_data);
+        if (result != 0) {
+            return false;
+        }
+        std::atexit([]() {
+            ::WSACleanup();
+        });
+        return true;
+    }();
+
+    if (!initialized) {
+        throw_exception(dns_exception("Failed to initialize Winsock"));
+    }
+#endif
+}
+
+dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t& offset) {
     dns_record record;
     record.name = decode_domain_name(data, offset);
 
@@ -258,7 +283,7 @@ dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t
         throw_exception(dns_exception("RDATA exceeds buffer"));
     }
 
-    vector<uint8_t> rdata(data.begin() + offset, data.begin() + offset + rdlength);
+    vector<byte_t> rdata(data.begin() + offset, data.begin() + offset + rdlength);
     size_t rdata_offset = offset;
 
     switch (record.type) {
@@ -279,7 +304,7 @@ dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t
             break;
         } default: {
             record.data = "";
-            for (const uint8_t byte : rdata) {
+            for (const byte_t byte : rdata) {
                 char hex[4];
                 _MSTL snprintf(hex, sizeof(hex), "%02x", byte);
                 record.data += hex;
@@ -292,7 +317,7 @@ dns_record dns_client::parse_resource_record(const vector<uint8_t>& data, size_t
     return record;
 }
 
-dns_query_result dns_client::parse_dns_response(const vector<uint8_t>& response) {
+dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) {
     if (response.size() < sizeof(dns_header)) {
         throw_exception(dns_exception("Response too short"));
     }
@@ -342,7 +367,7 @@ dns_query_result dns_client::query(
     }
 
     const auto query_data = build_dns_query(domain, type, qclass);
-    vector<uint8_t> response;
+    vector<byte_t> response;
     if (use_tcp_) {
         response = send_tcp_query(query_data);
     } else {
@@ -508,4 +533,3 @@ void dns_client::update_cache(const string& key, const dns_query_result& result)
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_PLATFORM_LINUX__

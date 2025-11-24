@@ -115,30 +115,31 @@ endif()
 
 # 链接文件
 set(CPP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/device.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/vsprintf.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/config/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/log_sink.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_prepared_statement.cpp
@@ -161,7 +162,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
-        core/async/atomic_futex.cpp
 )
 
 # 编译为动态库

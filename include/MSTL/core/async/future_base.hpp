@@ -6,7 +6,6 @@
 #include "../memory/exception_ptr.hpp"
 #include "../functional/function.hpp"
 #include "atomic_futex.hpp"
-#include "condition_variable.hpp"
 #include "call_once.hpp"
 #include "at_thread_exit.hpp"
 MSTL_BEGIN_NAMESPACE__

@@ -35,16 +35,14 @@ template <size_t...> struct index_tuple {};
 
 template <size_t Num>
 struct build_index_tuple {
-    template <typename, size_t... Indices>
-    using idx_tuple = index_tuple<Indices...>;
+    template <size_t... Is>
+    static index_tuple<Is...> convert(index_sequence<Is...>);
 
-    using type =
-#if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
-        __make_integer_seq<idx_tuple, size_t, Num>;
-#else
-        idx_tuple<size_t, __integer_pack(Num)...>;
-#endif
+    using type = decltype(convert(make_index_sequence<Num>{}));
 };
+
+template <size_t Num>
+using build_index_tuple_t = typename build_index_tuple<Num>::type;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__

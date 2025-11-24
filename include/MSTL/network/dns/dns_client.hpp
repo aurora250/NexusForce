@@ -1,19 +1,21 @@
 #ifndef MSTL_DNS_CLIENT_HPP__
 #define MSTL_DNS_CLIENT_HPP__
-#include "dns_message.hpp"
-#ifdef MSTL_PLATFORM_LINUX__
 #include "MSTL/core/compound/optional.hpp"
 #include "MSTL/core/container/unordered_map.hpp"
-#include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/time/clocks.hpp"
 #include "MSTL/core/async/future.hpp"
+#include "dns_message.hpp"
+#ifdef MSTL_PLATFORM_LINUX__
 #include <netinet/in.h>
+#else
+#include <ws2def.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(dns_exception, link_exception, "DNS Operate Failed");
 
 
-class dns_client {
+class MSTL_API dns_client {
 private:
     string dns_server_;
     uint16_t dns_port_;
@@ -23,14 +25,14 @@ private:
     chrono::seconds cache_ttl_{300};
 
 private:
-    static vector<uint8_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
-    static vector<uint8_t> encode_domain_name(const string& domain);
-    static string decode_domain_name(const vector<uint8_t>& data, size_t& offset);
+    static vector<byte_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
+    static vector<byte_t> encode_domain_name(const string& domain);
+    static string decode_domain_name(const vector<byte_t>& data, size_t& offset);
 
-    vector<uint8_t> send_udp_query(const vector<uint8_t>& query)const;
-    vector<uint8_t> send_tcp_query(const vector<uint8_t>& query)const;
+    vector<byte_t> send_udp_query(const vector<byte_t>& query)const;
+    vector<byte_t> send_tcp_query(const vector<byte_t>& query)const;
 
-    static dns_query_result parse_dns_response(const vector<uint8_t>& response);
+    static dns_query_result parse_dns_response(const vector<byte_t>& response);
     static uint16_t generate_query_id() { return random_mt::next_int(1, 65535); }
 
     optional<dns_query_result> check_cache(const string& key);
@@ -38,11 +40,13 @@ private:
     static string create_cache_key(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
 
     ::sockaddr_in create_server_address() const;
-    static dns_record parse_resource_record(const vector<uint8_t>& data, size_t &offset);
-    static string parse_a_record(const vector<uint8_t>& rdata);
-    static string parse_aaaa_record(const vector<uint8_t>& rdata);
-    static string parse_mx_record(const vector<uint8_t>& data, size_t offset, uint16_t rdlength);
-    static string parse_txt_record(const vector<uint8_t>& rdata);
+    static dns_record parse_resource_record(const vector<byte_t>& data, size_t &offset);
+    static string parse_a_record(const vector<byte_t>& rdata);
+    static string parse_aaaa_record(const vector<byte_t>& rdata);
+    static string parse_mx_record(const vector<byte_t>& data, size_t offset, uint16_t rdlength);
+    static string parse_txt_record(const vector<byte_t>& rdata);
+
+    static void ensure_winsock_initialized();
 
 public:
     explicit dns_client(
@@ -85,10 +89,10 @@ public:
     vector<dns_query_result> batch_query(const vector<string>& domains, DNS_RECORD type = DNS_RECORD::A);
 };
 
-inline unique_ptr<dns_client> create_dns_client(const string& dns_server = "8.8.8.8") {
-    return make_unique<dns_client>(dns_server);
+MSTL_ALWAYS_INLINE_INLINE unique_ptr<dns_client>
+make_dns_client(string dns_server = "8.8.8.8") {
+    return _MSTL make_unique<dns_client>(_MSTL move(dns_server));
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_PLATFORM_LINUX__
 #endif // MSTL_DNS_CLIENT_HPP__

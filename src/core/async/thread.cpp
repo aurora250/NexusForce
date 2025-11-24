@@ -39,7 +39,7 @@ void thread::join() {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::WaitForSingleObject(handle_, INFINITE) != WAIT_OBJECT_0) {
-        throw_exception(ThreadOperationError("Fail to join thread"));
+        throw_exception(thread_exception("Fail to join thread"));
     }
     ::CloseHandle(handle_);
     handle_ = nullptr;

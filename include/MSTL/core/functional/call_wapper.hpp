@@ -26,7 +26,7 @@ public:
     }
 
     typename result_t<Tuple>::type operator ()() {
-        using Indices = typename build_index_tuple<tuple_size<Tuple>::value>::type;
+        using Indices = build_index_tuple_t<tuple_size_v<Tuple>>;
         return this->invoke(Indices());
     }
 };
