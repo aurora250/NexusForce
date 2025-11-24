@@ -1,5 +1,5 @@
-#ifndef MSTL_CONSOLE_HPP__
-#define MSTL_CONSOLE_HPP__
+#ifndef MSTL_CORE_SYSTEM_CONSOLE_HPP__
+#define MSTL_CORE_SYSTEM_CONSOLE_HPP__
 #include "../async/mutex.hpp"
 #include "../utility/color.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -441,4 +441,4 @@ void printf(const string_view fmt, Args&&... args) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CONSOLE_HPP__
+#endif // MSTL_CORE_SYSTEM_CONSOLE_HPP__

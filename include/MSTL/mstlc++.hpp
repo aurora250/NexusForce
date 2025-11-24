@@ -42,5 +42,5 @@
 #include "database/sql_builder.hpp"
 #include "database/sqlite/sqlite_connect.hpp"
 #include "network/dns/dns_client.hpp"
-#include "network/http/servlet.hpp"
+#include "network/http/http_server.hpp"
 #endif // MSTL_MSTLCPP_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_ENCRYPT_HPP__
-#define MSTL_ENCRYPT_HPP__
+#ifndef MSTL_CORE_STRING_ENCRYPT_HPP__
+#define MSTL_CORE_STRING_ENCRYPT_HPP__
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -354,4 +354,4 @@ MSTL_ALWAYS_INLINE_INLINE string aes256_decrypt(const char* encrypted_hex, const
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ENCRYPT_HPP__
+#endif // MSTL_CORE_STRING_ENCRYPT_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_PACKAGES_HPP__
-#define MSTL_PACKAGES_HPP__
+#ifndef MSTL_CORE_UTILITY_PACKAGES_HPP__
+#define MSTL_CORE_UTILITY_PACKAGES_HPP__
 #include "../string/serialize.hpp"
 #include "../string/to_numerics.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -796,4 +796,4 @@ struct unpackage_base<decimal> {
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_PACKAGES_HPP__
+#endif // MSTL_CORE_UTILITY_PACKAGES_HPP__

@@ -249,7 +249,10 @@ bool file::open(string path, const bool append,
     const ::mode_t mode = convert_attributes(attributes);
     handle_ = ::open(path.data(), flags, mode);
 #endif
-    if (handle_ == INVALID_HANDLE()) return false;
+    if (handle_ == INVALID_HANDLE()) {
+        const ::DWORD error = ::GetLastError();
+        return false;
+    }
 
     path_ = _MSTL move(path);
     opened_ = true;
@@ -969,7 +972,7 @@ bool file::read_binary(const string& path, string& content,
     file f;
     if (!f.open(path, false,
         FILE_ACCESS::READ,
-        FILE_SHARED::SHARE_READ,
+        FILE_SHARED::SHARE_READ_WRITE,
         creation, attributes)) {
         return false;
    }

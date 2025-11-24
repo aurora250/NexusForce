@@ -1,5 +1,5 @@
-#ifndef MSTL_DNS_MESSAGE_HPP
-#define MSTL_DNS_MESSAGE_HPP
+#ifndef MSTL_NETWORK_DNS_MESSAGE_HPP
+#define MSTL_NETWORK_DNS_MESSAGE_HPP
 #include "MSTL/core/container/vector.hpp"
 #include "MSTL/core/time/duration.hpp"
 #include "dns_constants.hpp"
@@ -45,4 +45,4 @@ struct dns_header {
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DNS_MESSAGE_HPP
+#endif // MSTL_NETWORK_DNS_MESSAGE_HPP

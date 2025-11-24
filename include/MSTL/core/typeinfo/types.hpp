@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_CONFIG_TYPES_HPP__
-#define MSTL_CORE_CONFIG_TYPES_HPP__
+#ifndef MSTL_CORE_TYPEINFO_TYPES_HPP__
+#define MSTL_CORE_TYPEINFO_TYPES_HPP__
 #include "../config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -93,4 +93,4 @@ using size_type         = size_t; \
 using difference_type   = ptrdiff_t;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_CONFIG_TYPES_HPP__
+#endif // MSTL_CORE_TYPEINFO_TYPES_HPP__

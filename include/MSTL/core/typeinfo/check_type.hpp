@@ -1,5 +1,5 @@
-#ifndef MSTL_CHECK_TYPE_HPP__
-#define MSTL_CHECK_TYPE_HPP__
+#ifndef MSTL_CORE_TYPEINFO_CHECK_TYPE_HPP__
+#define MSTL_CORE_TYPEINFO_CHECK_TYPE_HPP__
 #include "../utility/packages.hpp"
 #ifdef MSTL_COMPILER_GNUC__
 #include <cxxabi.h>
@@ -241,4 +241,4 @@ MSTL_CONSTEXPR20 string check_type() {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CHECK_TYPE_HPP__
+#endif // MSTL_CORE_TYPEINFO_CHECK_TYPE_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_SQLITE_CONFIG_HPP__
-#define MSTL_SQLITE_CONFIG_HPP__
+#ifndef MSTL_DATABASE_SQLITE_CONFIG_HPP__
+#define MSTL_DATABASE_SQLITE_CONFIG_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
 #include <sqlite3.h>
 #include "MSTL/core/config/c++config.hpp"
@@ -34,4 +34,4 @@ using ::sqlite3_close;
 MSTL_END_SQLITE__
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_SQLITE_CONFIG_HPP__
+#endif // MSTL_DATABASE_SQLITE_CONFIG_HPP__

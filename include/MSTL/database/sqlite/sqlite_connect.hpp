@@ -1,5 +1,5 @@
-#ifndef MSTL_SQLITE_CONNECT_HPP__
-#define MSTL_SQLITE_CONNECT_HPP__
+#ifndef MSTL_DATABASE_SQLITE_CONNECT_HPP__
+#define MSTL_DATABASE_SQLITE_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
 #include "MSTL/database/db_interface.hpp"
 #include "MSTL/database/sqlite/sqlite_config.hpp"
@@ -54,4 +54,4 @@ public:
 
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_SQLITE_CONNECT_HPP__
+#endif // MSTL_DATABASE_SQLITE_CONNECT_HPP__

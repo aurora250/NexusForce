@@ -1,5 +1,5 @@
-#ifndef MSTL_DNS_CLIENT_HPP__
-#define MSTL_DNS_CLIENT_HPP__
+#ifndef MSTL_NETWORK_DNS_CLIENT_HPP__
+#define MSTL_NETWORK_DNS_CLIENT_HPP__
 #include "MSTL/core/compound/optional.hpp"
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/time/clocks.hpp"
@@ -95,4 +95,4 @@ make_dns_client(string dns_server = "8.8.8.8") {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DNS_CLIENT_HPP__
+#endif // MSTL_NETWORK_DNS_CLIENT_HPP__

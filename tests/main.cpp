@@ -1,7 +1,7 @@
 #include "try.h"
 
 int main() {
-    test_dns();
+    test_http_server();
 
     console.pause();
 }

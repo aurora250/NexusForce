@@ -1,5 +1,5 @@
-#ifndef MSTL_SOCKET_HPP__
-#define MSTL_SOCKET_HPP__
+#ifndef MSTL_NETWORK_SOCKET_HPP__
+#define MSTL_NETWORK_SOCKET_HPP__
 #include "../core/time/duration.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <WinSock2.h>
@@ -201,4 +201,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_SOCKET_HPP__
+#endif // MSTL_NETWORK_SOCKET_HPP__

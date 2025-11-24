@@ -1,5 +1,5 @@
-#ifndef MSTL_STRING_VIEW_HPP__
-#define MSTL_STRING_VIEW_HPP__
+#ifndef MSTL_CORE_STRING_STRING_VIEW_HPP__
+#define MSTL_CORE_STRING_STRING_VIEW_HPP__
 #include "basic_string_view.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -34,4 +34,4 @@ MSTL_NODISCARD constexpr u32string_view operator ""_sv(const char32_t* str, size
 MSTL_END_LITERALS__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_STRING_VIEW_HPP__
+#endif // MSTL_CORE_STRING_STRING_VIEW_HPP__

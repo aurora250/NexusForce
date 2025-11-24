@@ -1,5 +1,5 @@
-#ifndef MSTL_MYSQL_RESULT_HPP__
-#define MSTL_MYSQL_RESULT_HPP__
+#ifndef MSTL_DATABASE_MYSQL_RESULT_HPP__
+#define MSTL_DATABASE_MYSQL_RESULT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
@@ -56,4 +56,4 @@ public:
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_SUPPORT_MYSQL__
-#endif // MSTL_MYSQL_RESULT_HPP__
+#endif // MSTL_DATABASE_MYSQL_RESULT_HPP__

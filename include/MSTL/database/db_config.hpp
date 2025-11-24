@@ -1,5 +1,5 @@
-#ifndef MSTL_DB_CONFIG_HPP__
-#define MSTL_DB_CONFIG_HPP__
+#ifndef MSTL_DATABASE_DB_CONFIG_HPP__
+#define MSTL_DATABASE_DB_CONFIG_HPP__
 #include "../core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -48,4 +48,4 @@ struct MSTL_API db_config {
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DB_CONFIG_HPP__
+#endif // MSTL_DATABASE_DB_CONFIG_HPP__

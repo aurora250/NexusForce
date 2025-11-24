@@ -1,5 +1,5 @@
-#ifndef MSTL_DB_INTERFACE_HPP__
-#define MSTL_DB_INTERFACE_HPP__
+#ifndef MSTL_DATABASE_DB_INTERFACE_HPP__
+#define MSTL_DATABASE_DB_INTERFACE_HPP__
 #include "../core/container/vector.hpp"
 #include "../core/time/datetime.hpp"
 #include "../core/memory/unique_ptr.hpp"
@@ -151,4 +151,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DB_INTERFACE_HPP__
+#endif // MSTL_DATABASE_DB_INTERFACE_HPP__

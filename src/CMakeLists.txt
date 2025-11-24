@@ -158,10 +158,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/database/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/servlet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        network/http/router.cpp
 )
 
 # 编译为动态库

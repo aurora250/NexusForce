@@ -1,5 +1,5 @@
-#ifndef MSTL_VSPRINTF_HPP__
-#define MSTL_VSPRINTF_HPP__
+#ifndef MSTL_CORE_UTILITY_VSPRINTF_HPP__
+#define MSTL_CORE_UTILITY_VSPRINTF_HPP__
 #include "../typeinfo/types.hpp"
 #include <cstdarg>
 MSTL_BEGIN_NAMESPACE__
@@ -11,4 +11,4 @@ int MSTL_API snprintf(char *buf, size_t size, const char *fmt, ...) noexcept;
 int MSTL_API scprintf(const char *fmt, ...) noexcept;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_VSPRINTF_HPP__
+#endif // MSTL_CORE_UTILITY_VSPRINTF_HPP__

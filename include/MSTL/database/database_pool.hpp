@@ -1,5 +1,5 @@
-#ifndef MSTL_DATABASE_POOL_HPP__
-#define MSTL_DATABASE_POOL_HPP__
+#ifndef MSTL_DATABASE_DATABASE_POOL_HPP__
+#define MSTL_DATABASE_DATABASE_POOL_HPP__
 #include "../core/container/queue.hpp"
 #include "../core/memory/shared_ptr.hpp"
 #include "../core/async/condition_variable.hpp"
@@ -116,4 +116,4 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DATABASE_POOL_HPP__
+#endif // MSTL_DATABASE_DATABASE_POOL_HPP__

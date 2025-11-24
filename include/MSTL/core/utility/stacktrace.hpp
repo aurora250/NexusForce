@@ -1,5 +1,5 @@
-#ifndef MSTL_STACKTRACE_HPP__
-#define MSTL_STACKTRACE_HPP__
+#ifndef MSTL_CORE_UTILITY_STACKTRACE_HPP__
+#define MSTL_CORE_UTILITY_STACKTRACE_HPP__
 #include "../container/vector.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include "../async/mutex.hpp"
@@ -59,4 +59,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_STACKTRACE_HPP__
+#endif // MSTL_CORE_UTILITY_STACKTRACE_HPP__

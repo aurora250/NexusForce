@@ -1,5 +1,5 @@
-#ifndef MSTL_WEB_COOKIE_HPP__
-#define MSTL_WEB_COOKIE_HPP__
+#ifndef MSTL_NETWORK_HTTP_COOKIE_HPP__
+#define MSTL_NETWORK_HTTP_COOKIE_HPP__
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/time/datetime.hpp"
 #include "MSTL/core/async/thread.hpp"
@@ -144,7 +144,7 @@ public:
 };
 
 
-class MSTL_API servlet;
+class MSTL_API http_server;
 
 MSTL_BEGIN_INNER__
 class __session_manager {
@@ -154,7 +154,7 @@ private:
     _MSTL atomic<bool> cleanup_running_{false};
     _MSTL thread cleanup_thread_;
 
-    friend class _MSTL servlet;
+    friend class _MSTL http_server;
 
     MSTL_NODISCARD static string generate_session_id();
 
@@ -172,4 +172,4 @@ private:
 MSTL_END_INNER__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_WEB_COOKIE_HPP__
+#endif // MSTL_NETWORK_HTTP_COOKIE_HPP__

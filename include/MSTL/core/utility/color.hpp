@@ -1,5 +1,5 @@
-#ifndef MSTL_COLOR_HPP__
-#define MSTL_COLOR_HPP__
+#ifndef MSTL_CORE_UTILITY_COLOR_HPP__
+#define MSTL_CORE_UTILITY_COLOR_HPP__
 #include "../memory/hexadecimal.hpp"
 #include "packages.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -316,4 +316,4 @@ constexpr color operator *(const int scalar, const color& color) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_COLOR_HPP__
+#endif // MSTL_CORE_UTILITY_COLOR_HPP__

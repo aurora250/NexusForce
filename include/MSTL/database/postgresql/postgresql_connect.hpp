@@ -1,5 +1,5 @@
-#ifndef MSTL_POSTGRESQL_CONNECT_HPP__
-#define MSTL_POSTGRESQL_CONNECT_HPP__
+#ifndef MSTL_DATABASE_POSTGRESQL_CONNECT_HPP__
+#define MSTL_DATABASE_POSTGRESQL_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
@@ -68,4 +68,4 @@ public:
 
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_POSTGRESQL_CONNECT_HPP__
+#endif // MSTL_DATABASE_POSTGRESQL_CONNECT_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_CONCEPTS_HPP__
-#define MSTL_CONCEPTS_HPP__
+#ifndef MSTL_CORE_TYPEINFO_CONCEPTS_HPP__
+#define MSTL_CORE_TYPEINFO_CONCEPTS_HPP__
 #include "../iterator/iterator_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -310,4 +310,4 @@ is_lvalue_reference_v<decltype(*_MSTL declval<Iterator&>())> && is_same_v<remove
 && is_pod_v<iter_value_t<Iterator>> && is_ranges_cot_iter_v<Iterator>;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CONCEPTS_HPP__
+#endif // MSTL_CORE_TYPEINFO_CONCEPTS_HPP__

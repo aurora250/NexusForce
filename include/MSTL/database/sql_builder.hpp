@@ -1,5 +1,5 @@
-#ifndef MSTL_SQL_BUILDER_HPP__
-#define MSTL_SQL_BUILDER_HPP__
+#ifndef MSTL_DATABASE_SQL_BUILDER_HPP__
+#define MSTL_DATABASE_SQL_BUILDER_HPP__
 #include "../core/config/undef_cmacro.hpp"
 #include "../core/container/vector.hpp"
 #include "../core/memory/unique_ptr.hpp"
@@ -178,4 +178,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_SQL_BUILDER_HPP__
+#endif // MSTL_DATABASE_SQL_BUILDER_HPP__

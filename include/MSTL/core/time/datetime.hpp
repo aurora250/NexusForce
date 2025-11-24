@@ -1,5 +1,5 @@
-#ifndef MSTL_DATETIME_HPP__
-#define MSTL_DATETIME_HPP__
+#ifndef MSTL_CORE_TIME_DATETIME_HPP__
+#define MSTL_CORE_TIME_DATETIME_HPP__
 #include "../string/format.hpp"
 #include "../utility/packages.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -763,4 +763,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DATETIME_HPP__
+#endif // MSTL_CORE_TIME_DATETIME_HPP__

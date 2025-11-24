@@ -1,5 +1,5 @@
-#ifndef MSTL_DEVICE_HPP__
-#define MSTL_DEVICE_HPP__
+#ifndef MSTL_CORE_SYSTEM_DEVICE_HPP__
+#define MSTL_CORE_SYSTEM_DEVICE_HPP__
 #include "../config/c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include "../container/vector.hpp"
@@ -168,4 +168,4 @@ public:
 
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_DEVICE_HPP__
+#endif // MSTL_CORE_SYSTEM_DEVICE_HPP__

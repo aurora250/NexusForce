@@ -685,21 +685,109 @@ void test_json() {
     }
 }
 
-void test_serv() {
+void test_http_server() {
+    static const string res_root =
+#ifdef MSTL_PLATFORM_WINDOWS__
+        R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)";
+#elif defined(MSTL_PLATFORM_LINUX__)
+        R"(/home/huenqi/Workspace/MSTL/tests/resource)";
+#endif
+
     try {
-        example_servlet server(8080);
-        const bool flag = server.start();
-        if (!flag) {
-            println("Server start failed");
-            return;
+        http_server server(8080);
+
+        router& r = server.get_router();
+        r.use(new logging_filter());
+        r.use(new cors_filter("http://127.0.0.1:5500"));
+        r.use(new static_file_filter(res_root));
+
+        r.post("/old-link", [](http_request&, http_response& response) {
+            response.set_redirect("/new-link");
+        });
+        r.post("/forward-me", [](http_request&, http_response& response) {
+            response.set_forward("/forward-target");
+        });
+        r.post("/forward-target", [](http_request&, http_response& response) {
+            response.set_ok();
+            response.set_status_msg("OK");
+            response.set_body("Forward Successfully");
+        });
+
+        r.get_post("/api/session",
+            [&server](http_request& req, http_response& res) {
+                handle_session_api(req, res, server);
+            }
+        );
+        r.get_post("/api/session-attribute",
+            [&server](http_request& req, http_response& res) {
+                handle_session_attribute(req, res, server);
+            }
+        );
+        r.post_delete("/api/cookie",
+            [](http_request& req, http_response& res) {
+                handle_cookie_api(req, res);
+            }
+        );
+
+        r.get("/api/logger-test", [](http_request&, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_body("Logging filter test successful");
+        });
+        r.get("/api/data", [](http_request&, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::JSON_APP);
+            res.set_body(R"({"status":"success"})");
+        });
+
+        r.get("/", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            res.set_body(file::read(res_root + "/index.html"));
+        });
+
+        r.get("/detail", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            res.set_body(file::read(res_root + "/detail.html"));
+        });
+
+        r.get("/new-link", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            res.set_body(file::read(res_root + "/index.html"));
+        });
+
+        r.get("/test", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            res.set_body(file::read(res_root + "/test.html"));
+        });
+
+        r.set_not_found_handler([](http_request &req, http_response &res) {
+            res.set_not_found();
+            res.set_status_msg("Not Found");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            try {
+                res.set_body(file::read(res_root + "/404err.html"));
+            } catch (...) {
+                res.set_body("<h1>404 - Page Not Found</h1>");
+            }
+        });
+
+        if (server.start()) {
+            printcln(color::green(), "Press Ctrl+C to stop the server.");
+            while (true) {
+                _MSTL this_thread::sleep_for(chrono::seconds(1));
+            }
         }
-        while (true) {
-            _MSTL this_thread::sleep_for(_MSTL chrono::seconds(1));
-        }
-        server.stop();
-    } catch (const exception& e) {
-        println(e);
-    }
+        printcln(color::red(), "Failed to start server!");
+    } catch (...) {}
 }
 
 void test_list() {

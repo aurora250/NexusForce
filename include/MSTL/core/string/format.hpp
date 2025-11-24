@@ -1,5 +1,5 @@
-#ifndef MSTL_FORMAT_HPP__
-#define MSTL_FORMAT_HPP__
+#ifndef MSTL_CORE_STRING_FORMAT_HPP__
+#define MSTL_CORE_STRING_FORMAT_HPP__
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -529,4 +529,4 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string format(const string_view fmt, Args&&... a
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_FORMAT_HPP__
+#endif // MSTL_CORE_STRING_FORMAT_HPP__

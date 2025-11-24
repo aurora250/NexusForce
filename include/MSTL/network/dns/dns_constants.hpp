@@ -1,5 +1,5 @@
-#ifndef MSTL_DNS_CONSTANTS_HPP__
-#define MSTL_DNS_CONSTANTS_HPP__
+#ifndef MSTL_NETWORK_DNS_CONSTANTS_HPP__
+#define MSTL_NETWORK_DNS_CONSTANTS_HPP__
 #include "MSTL/core/typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -32,4 +32,4 @@ enum class DNS_RESPONSE : uint8_t {
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DNS_CONSTANTS_HPP__
+#endif // MSTL_NETWORK_DNS_CONSTANTS_HPP__

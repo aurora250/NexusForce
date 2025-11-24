@@ -1,5 +1,5 @@
-#ifndef MSTL_HTTP_CONSTANTS_HPP__
-#define MSTL_HTTP_CONSTANTS_HPP__
+#ifndef MSTL_NETWORK_HTTP_CONSTANTS_HPP__
+#define MSTL_NETWORK_HTTP_CONSTANTS_HPP__
 #include "MSTL/core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -161,9 +161,19 @@ public:
         return *this;
     }
 
-    explicit HTTP_METHOD(const string& method) : method_(method) {}
+    explicit HTTP_METHOD(const string& method)
+    : method_(method) {}
+
     HTTP_METHOD& operator =(const string& method) {
         method_ = method;
+        return *this;
+    }
+
+    explicit HTTP_METHOD(string&& method)
+    : method_(_MSTL move(method)) {}
+
+    HTTP_METHOD& operator =(string&& method) {
+        method_ = _MSTL move(method);
         return *this;
     }
 
@@ -180,11 +190,20 @@ public:
     static const HTTP_METHOD DEFAULT;
 
 
-    MSTL_NODISCARD string_view method() const & noexcept { return method_.view(); }
+    MSTL_NODISCARD const string& method() const & noexcept { return method_; }
     MSTL_NODISCARD string method() && noexcept { return _MSTL move(method_); }
 
-    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rh) const {
+    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rh) const & {
         return HTTP_METHOD(method_ + ", " + rh.method_);
+    }
+    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rh) const & {
+        return HTTP_METHOD(method_ + ", " + _MSTL move(rh.method_));
+    }
+    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rh) && {
+        return HTTP_METHOD(_MSTL move(method_) + ", " + rh.method_);
+    }
+    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rh) && {
+        return HTTP_METHOD(_MSTL move(method_) + ", " + _MSTL move(rh.method_));
     }
 
     MSTL_NODISCARD bool is_get() const noexcept { return method_ == GET.method_; }
@@ -236,4 +255,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_HTTP_CONSTANTS_HPP__
+#endif // MSTL_NETWORK_HTTP_CONSTANTS_HPP__

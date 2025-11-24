@@ -1,5 +1,5 @@
-#ifndef MSTL_FILE_HPP__
-#define MSTL_FILE_HPP__
+#ifndef MSTL_CORE_SYSTEM_FILE_HPP__
+#define MSTL_CORE_SYSTEM_FILE_HPP__
 #include "../container/vector.hpp"
 #include "../time/datetime.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -267,13 +267,13 @@ public:
 
     bool open(string path, bool append = false,
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
+        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ_WRITE,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     bool open(bool append = false,
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
+        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ_WRITE,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
         return this->open(_MSTL move(path_), append, access, share_mode, creation, attributes);
@@ -397,7 +397,8 @@ public:
     static string read_binary(const string& path,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
-        string content; file::read_binary(path, content, creation, attributes);
+        string content;
+        file::read_binary(path, content, creation, attributes);
         return content;
     }
 
@@ -412,4 +413,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_FILE_HPP__
+#endif // MSTL_CORE_SYSTEM_FILE_HPP__

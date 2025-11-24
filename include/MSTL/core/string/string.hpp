@@ -1,5 +1,5 @@
-#ifndef MSTL_STRING_HPP__
-#define MSTL_STRING_HPP__
+#ifndef MSTL_CORE_STRING_STRING_HPP__
+#define MSTL_CORE_STRING_STRING_HPP__
 #include "basic_string.hpp"
 #include "../algorithm/erase.hpp"
 MSTL_BEGIN_NAMESPACE__

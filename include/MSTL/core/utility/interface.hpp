@@ -1,5 +1,5 @@
-#ifndef MSTL_INTERFACE_HPP__
-#define MSTL_INTERFACE_HPP__
+#ifndef MSTL_CORE_UTILITY_INTERFACE_HPP__
+#define MSTL_CORE_UTILITY_INTERFACE_HPP__
 #include "../typeinfo/type_traits.hpp"
 #include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -344,4 +344,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_INTERFACE_HPP__
+#endif // MSTL_CORE_UTILITY_INTERFACE_HPP__

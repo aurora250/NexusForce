@@ -1,14 +1,14 @@
-#include <MSTL/network/http/servlet.hpp>
+#include <MSTL/network/http/http_server.hpp>
 #include <MSTL/core/system/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-void servlet::start_workers(const int thread_count) {
+void http_server::start_workers(const int thread_count) {
     for (int i = 0; i < thread_count; ++i) {
-        worker_threads_.emplace_back(&servlet::accept_conns, this);
+        worker_threads_.emplace_back(&http_server::accept_conns, this);
     }
 }
 
-void servlet::accept_conns() {
+void http_server::accept_conns() {
     while (running_) {
         socket client_socket = server_socket_.accept();
         if (!client_socket.is_valid()) {
@@ -27,23 +27,31 @@ void servlet::accept_conns() {
     }
 }
 
-void servlet::handle_client(const socket& client_socket) {
+void http_server::handle_client(const socket& client_socket) {
     http_request request = parse_request(client_socket);
+    session* sess = get_session(request, true);
     int forward_count = 0;
+
     do {
         constexpr int MAX_FORWARD = 5;
-        http_response response = handle_request(request);
+
+        http_response response = router_.handle_request(request);
+        if (sess) {
+            add_session_cookie(request, response, sess);
+        }
+
         if (!response.forward().empty() && forward_count < MAX_FORWARD) {
             request.set_path(response.forward());
             forward_count++;
             continue;
         }
+
         send_response(client_socket, response);
         return;
     } while (true);
 }
 
-void servlet::parse_cookies(const string& cookie_header, http_request &request) {
+void http_server::parse_cookies(const string& cookie_header, http_request &request) {
     if (cookie_header.empty()) return;
 
     vector<string> cookie_pairs;
@@ -67,7 +75,7 @@ void servlet::parse_cookies(const string& cookie_header, http_request &request) 
     }
 }
 
-void servlet::parse_parameters(http_request& request) {
+void http_server::parse_parameters(http_request& request) {
     if (!request.query().empty()) {
         parse_url_encoded(request.query().view(), request.parameters());
     }
@@ -78,7 +86,7 @@ void servlet::parse_parameters(http_request& request) {
     }
 }
 
-void servlet::parse_url_encoded(const string_view data, unordered_map<string, string> &params) {
+void http_server::parse_url_encoded(const string_view data, unordered_map<string, string> &params) {
     if (data.empty()) return;
 
     vector<string_view> pairs;
@@ -101,7 +109,7 @@ void servlet::parse_url_encoded(const string_view data, unordered_map<string, st
     }
 }
 
-string servlet::url_decode(const string_view str) {
+string http_server::url_decode(const string_view str) {
     string result;
     for (size_t i = 0; i < str.length(); ++i) {
         if (str[i] == '%' && i + 2 < str.length()) {
@@ -121,8 +129,11 @@ string servlet::url_decode(const string_view str) {
     return result;
 }
 
-http_request servlet::parse_request(const socket& client_socket) {
-    http_request req;
+http_request http_server::parse_request(const socket& client_socket) {
+    constexpr string_view crlf = "\r\n";
+    constexpr string_view crlf2 = "\r\n\r\n";
+
+    http_request request;
     char buffer[4096];
     string request_data;
 
@@ -135,14 +146,14 @@ http_request servlet::parse_request(const socket& client_socket) {
         request_data.append(buffer, bytes_read);
         total_read += bytes_read;
 
-        const size_t header_end = request_data.find("\r\n\r\n");
+        const size_t header_end = request_data.find(crlf2);
         if (header_end != string::npos) {
             size_t content_length = 0;
             const size_t content_start = header_end + 4;
 
             const size_t cl_pos = request_data.find("Content-Length:");
             if (cl_pos != string::npos) {
-                const size_t cl_end = request_data.find("\r\n", cl_pos);
+                const size_t cl_end = request_data.find(crlf, cl_pos);
                 if (cl_end != string::npos) {
                     const string cl_str = request_data.substr(
                         cl_pos + 15, cl_end - cl_pos - 15
@@ -173,20 +184,20 @@ http_request servlet::parse_request(const socket& client_socket) {
         line.trim();
         const size_t pos1 = line.find(' ');
         if (pos1 != string::npos) {
-            req.set_method(HTTP_METHOD{line.substr(0, pos1)});
+            request.set_method(HTTP_METHOD{line.substr(0, pos1)});
             const size_t pos2 = line.find(' ', pos1 + 1);
             if (pos2 != string::npos) {
-                req.set_path(line.substr(pos1 + 1, pos2 - pos1 - 1));
-                req.set_version(line.substr(pos2 + 1));
+                request.set_path(line.substr(pos1 + 1, pos2 - pos1 - 1));
+                request.set_version(line.substr(pos2 + 1));
             }
         }
     }
 
     // url query
-    const size_t query_pos = req.path().find('?');
+    const size_t query_pos = request.path().find('?');
     if (query_pos != string::npos) {
-        req.set_query(req.path().substr(query_pos+1));
-        req.set_path(req.path().substr(0, query_pos));
+        request.set_query(request.path().substr(query_pos+1));
+        request.set_path(request.path().substr(0, query_pos));
     }
 
     // request header
@@ -198,35 +209,35 @@ http_request servlet::parse_request(const socket& client_socket) {
         if (colon_pos != string::npos) {
             string key = line.substr(0, colon_pos).trim();
             string value = line.substr(colon_pos+1).trim();
-            req.set_header(key, _MSTL move(value));
+            request.set_header(key, _MSTL move(value));
         }
     }
 
     // request body
     const size_t body_start = request_data.find("\r\n\r\n");
     if (body_start != string::npos && body_start + 4 < request_data.size()) {
-        req.set_body(request_data.substr(body_start + 4));
+        request.set_body(request_data.substr(body_start + 4));
     }
 
     // Parse cookies
-    const auto& cookie_str = req.cookie();
+    const auto& cookie_str = request.cookie();
     if (!cookie_str.empty()) {
-        parse_cookies(cookie_str, req);
+        parse_cookies(cookie_str, request);
     }
 
     // Parse parameters
-    parse_parameters(req);
+    parse_parameters(request);
 
     // Handle session
-    const auto& session_id = req.cookie(cookie_name_.cookie_name());
+    const auto& session_id = request.cookie(cookie_name_.cookie_name());
     if (!session_id.empty() && session_manager_.session_exists(session_id)) {
-        req.set_session(session_manager_.get_session(session_id, false));
+        request.set_session(session_manager_.get_session(session_id, false));
     }
 
-    return req;
+    return request;
 }
 
-string servlet::build_response_str(const http_response& response) {
+string http_server::build_response_str(const http_response& response) {
     string result;
     if (!response.redirect().empty()) {
         result += response.version() + " 302 Found\r\n";
@@ -256,7 +267,7 @@ string servlet::build_response_str(const http_response& response) {
     return result;
 }
 
-void servlet::send_response(const socket& client_socket, const http_response& response) {
+void http_server::send_response(const socket& client_socket, const http_response& response) {
     string res_str = build_response_str(response);
     const size_t total = res_str.size();
     size_t sent = 0;
@@ -271,7 +282,7 @@ void servlet::send_response(const socket& client_socket, const http_response& re
     }
 }
 
-session* servlet::get_session(http_request& request, const bool create) {
+session* http_server::get_session(http_request& request, const bool create) {
     session* session = request.get_session();
     if (session) return session;
 
@@ -287,7 +298,7 @@ session* servlet::get_session(http_request& request, const bool create) {
     return session;
 }
 
-void servlet::add_session_cookie(const http_request& request, http_response& response, session* session) const {
+void http_server::add_session_cookie(const http_request& request, http_response& response, session* session) const {
     if (session && session->is_new()) {
         cookie session_cookie(cookie_name_, session->id());
         session_cookie.set_path("/");
@@ -302,97 +313,10 @@ void servlet::add_session_cookie(const http_request& request, http_response& res
     }
 }
 
-http_response servlet::handle_request(http_request& request) {
-    http_response response;
-
-    if (!filter_chain_.execute_pre_filters(request, response)) {
-        return response;
-    }
-
-    session* session = get_session(request, true);
-    if (session) {
-        add_session_cookie(request, response, session);
-    }
-    filter_chain_.execute_filters(request, response);
-
-    println(
-        "[", request.method(), "]", request.path(), "Query:", request.query(),
-        "Body size:", request.body().size(), *request.get_session()
-    );
-
-    const auto& method = request.method();
-    if (method.is_get()) {
-        do_get(request, response);
-    } else if (method.is_post()) {
-        do_post(request, response);
-    } else if (method.is_put()) {
-        do_put(request, response);
-    } else if (method.is_delete()) {
-        do_delete(request, response);
-    } else if (method.is_head()) {
-        do_head(request, response);
-    } else if (method.is_options()) {
-        do_options(request, response);
-    } else if (method.is_trace()) {
-        do_trace(request, response);
-    } else if (method.is_connect()) {
-        do_connect(request, response);
-    } else {
-        response.set_status(HTTP_STATUS::S4_METHOD_NOT_ALLOWED);
-        response.set_status_msg("Method Not Allowed");
-        response.set_body("Method Not Allowed");
-    }
-
-    filter_chain_.execute_post_filters(request, response);
-    return response;
-}
-
-void servlet::do_head(http_request& request, http_response& response) {
-    do_get(request, response);
-    response.set_body(""); // HEAD should not return body
-}
-
-void servlet::do_options(http_request& request, http_response& response) {
-    response.set_status(HTTP_STATUS::S2_NO_CONTENT);
-    response.set_status_msg("No Content");
-    response.set_allow_method(HTTP_METHOD::DEFAULT);
-    response.set_allow_headers("Content-Type, Cookie, Accept, X-Requested-With");
-    response.set_max_age(86400);
-}
-
-void servlet::do_trace(http_request& request, http_response& response) {
-    response.set_ok();
-    response.set_status_msg("OK");
-    response.set_content_type(HTTP_CONTENT::HTML_MSG);
-
-    string result;
-    result += request.method().to_string() + " " + request.path();
-    if (!request.query().empty()) result += "?" + request.query();
-    result += " " + request.version() + "\r";
-    const auto& headers = request.headers();
-    for (auto iter = headers.begin(); iter != headers.end(); ++iter) {
-        result += iter->first + ": " + iter->second + "\r";
-    }
-    result += "\r" + request.body();
-    response.set_body(result);
-}
-
-void servlet::do_connect(http_request& request, http_response& response) {
-    response.set_status(HTTP_STATUS::S4_METHOD_NOT_ALLOWED);
-    response.set_status_msg("Method Not Allowed");
-    response.set_body("CONNECT method not supported");
-}
-
-servlet::~servlet() {
-    this->stop();
-    filter_chain_.clean_filter();
-}
-
-bool servlet::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
+bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
                     const SOCKET_PROTOCOL protocol, const uint32_t thread_count
                     ) {
     if (running_) return true;
-    if (!init()) return false;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::WSAStartup(MAKEWORD(2, 2), &wsa_data_) != 0) {
@@ -431,7 +355,7 @@ bool servlet::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
     return true;
 }
 
-void servlet::stop() noexcept {
+void http_server::stop() noexcept {
     if (!running_) return;
 
     running_ = false;
@@ -444,7 +368,6 @@ void servlet::stop() noexcept {
         if (t.joinable()) t.join();
     }
     worker_threads_.clear();
-    destroy();
 }
 
 MSTL_END_NAMESPACE__

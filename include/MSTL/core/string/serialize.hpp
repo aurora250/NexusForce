@@ -1,5 +1,5 @@
-#ifndef MSTL_IPACKAGE_HPP__
-#define MSTL_IPACKAGE_HPP__
+#ifndef MSTL_CORE_STRING_SERIALIZE_HPP__
+#define MSTL_CORE_STRING_SERIALIZE_HPP__
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -70,4 +70,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_IPACKAGE_HPP__
+#endif // MSTL_CORE_STRING_SERIALIZE_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_REDIS_CONFIG_HPP__
-#define MSTL_REDIS_CONFIG_HPP__
+#ifndef MSTL_DATABASE_REDIS_CONFIG_HPP__
+#define MSTL_DATABASE_REDIS_CONFIG_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
 #include <hiredis.h>
 #include "MSTL/core/config/c++config.hpp"
@@ -15,4 +15,4 @@ using ::redisFree;
 MSTL_END_REDIS__
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_REDIS_CONFIG_HPP__
+#endif // MSTL_DATABASE_REDIS_CONFIG_HPP__

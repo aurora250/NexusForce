@@ -1,5 +1,5 @@
-#ifndef MSTL_CHAR_TRAITS_HPP__
-#define MSTL_CHAR_TRAITS_HPP__
+#ifndef MSTL_CORE_STRING_CHAR_TRAITS_HPP__
+#define MSTL_CORE_STRING_CHAR_TRAITS_HPP__
 #include "../algorithm/algobase.hpp"
 #include "../config/undef_cmacro.hpp"
 #include "../functional/hash.hpp"
@@ -708,4 +708,4 @@ MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_CHAR_PTR_HASH)
 #undef __MSTL_BUILD_CHAR_PTR_HASH
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CHAR_TRAITS_HPP__
+#endif // MSTL_CORE_STRING_CHAR_TRAITS_HPP__

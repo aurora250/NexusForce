@@ -1,5 +1,5 @@
-#ifndef MSTL_CSTRING_HPP__
-#define MSTL_CSTRING_HPP__
+#ifndef MSTL_CORE_STRING_CSTRING_HPP__
+#define MSTL_CORE_STRING_CSTRING_HPP__
 #include "../string/char_types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -638,4 +638,4 @@ constexpr ptrdiff_t u32string_length(const char32_t* str) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CSTRING_HPP__
+#endif // MSTL_CORE_STRING_CSTRING_HPP__

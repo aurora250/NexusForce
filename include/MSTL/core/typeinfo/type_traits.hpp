@@ -1,5 +1,5 @@
-#ifndef MSTL_TYPE_TRAITS_HPP__
-#define MSTL_TYPE_TRAITS_HPP__
+#ifndef MSTL_CORE_TYPEINFO_TYPE_TRAITS_HPP__
+#define MSTL_CORE_TYPEINFO_TYPE_TRAITS_HPP__
 #include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -2547,4 +2547,4 @@ constexpr T exchange(T& val, U&& new_val) noexcept(conjunction_v<
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_TYPE_TRAITS_HPP__
+#endif // MSTL_CORE_TYPEINFO_TYPE_TRAITS_HPP__
