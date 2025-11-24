@@ -8,6 +8,9 @@
 #include "../async/atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+class thread_pool;
+
+
 template <typename Clock>
 class timer_scheduler {
 public:
@@ -42,6 +45,9 @@ private:
     token next_id_;
     _MSTL atomic_bool stopped_;
 
+    friend class thread_pool;
+
+private:
     void run() {
         while (!stopped_.load()) {
             _MSTL unique_lock<_MSTL mutex> lock(mutex_);

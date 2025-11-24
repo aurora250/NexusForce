@@ -562,7 +562,8 @@ public:
 	}
 
 	MSTL_CONSTEXPR20 void pop_back() noexcept {
-		_MSTL destroy(finish_);
+		MSTL_DEBUG_VERIFY(!empty(), "pop called in an empty vector")
+		_MSTL destroy(finish_ - 1);
 		--finish_;
 	}
 

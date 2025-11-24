@@ -1,4 +1,5 @@
 #include <MSTL/core/async/thread_pool.hpp>
+#include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -25,6 +26,16 @@ void manual_thread::start() {
     t.detach();
 }
 
+string thread_pool::pool_statistics::to_string() const {
+    string result;
+    result += _MSTL to_string("total_threads:   ", total_threads,   "\n");
+    result += _MSTL to_string("idle_threads:    ", idle_threads,    "\n");
+    result += _MSTL to_string("busy_threads:    ", busy_threads,    "\n");
+    result += _MSTL to_string("queue_size:      ", queue_size,      "\n");
+    result += _MSTL to_string("total_submitted: ", total_submitted, "\n");
+    result += _MSTL to_string("total_completed: ", total_completed);
+    return result;
+}
 
 void thread_pool::thread_function(const id_type thread_id) {
     auto last = _MSTL chrono::high_resolution_clock::now();
@@ -57,27 +68,31 @@ void thread_pool::thread_function(const id_type thread_id) {
             }
 
             --idle_thread_size_;
-            task = task_queue_.front();
+            task = task_queue_.top().task;
             task_queue_.pop();
             --task_size_;
             if (!task_queue_.empty()) not_empty_.notify_all();
             not_full_.notify_all();
         }
-        if (task != nullptr) task();
+        if (task != nullptr) {
+            task();
+            ++total_completed_tasks_;
+        }
         ++idle_thread_size_;
         last = _MSTL chrono::high_resolution_clock::now();
     }
 }
 
 thread_pool::thread_pool()
-    : timer_(timer_scheduler<chrono::steady_clock>::instance()),
-    init_thread_size_(0),
+    : init_thread_size_(0),
     thread_threshhold_(THREAD_POOL_THREAD_MAX_THRESHHOLD),
     task_size_(0),
     idle_thread_size_(0),
     task_threshhold_(THREAD_POOL_TASK_MAX_THRESHHOLD),
     pool_mode_(THREAD_POOL_MODE::MODE_FIXED),
-    is_running_(false) {}
+    is_running_(false),
+    total_submitted_tasks_(0),
+    total_completed_tasks_(0) {}
 
 bool thread_pool::set_mode(const THREAD_POOL_MODE mode) noexcept {
     if (is_running_) return false;
@@ -96,6 +111,19 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
     thread_threshhold_ = threshhold > THREAD_POOL_THREAD_MAX_THRESHHOLD
         ? THREAD_POOL_THREAD_MAX_THRESHHOLD : threshhold;
     return true;
+}
+
+thread_pool::pool_statistics thread_pool::statistics() const {
+    _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(task_queue_mtx_));
+    pool_statistics stats;
+    stats.total_threads = threads_map_.size();
+    stats.idle_threads = idle_thread_size_.load();
+    stats.busy_threads = stats.total_threads > stats.idle_threads ?
+        stats.total_threads - stats.idle_threads : 0;
+    stats.queue_size = task_size_.load();
+    stats.total_submitted = total_submitted_tasks_.load();
+    stats.total_completed = total_completed_tasks_.load();
+    return stats;
 }
 
 bool thread_pool::start(const size_t init_thread_size) {
@@ -123,6 +151,8 @@ void thread_pool::stop() {
 
     while (!task_queue_.empty()) task_queue_.pop();
     task_size_ = 0;
+    total_submitted_tasks_ = 0;
+    total_completed_tasks_ = 0;
     _INNER __thread_pool_id_generator::reset_id();
 }
 

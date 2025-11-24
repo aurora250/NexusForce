@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_THREAD_POOL_HPP__
 #define MSTL_CORE_ASYNC_THREAD_POOL_HPP__
-#include "../container/queue.hpp"
+#include "../container/priority_queue.hpp"
 #include "../container/unordered_map.hpp"
 #include "condition_variable.hpp"
 #include "packaged_task.hpp"
@@ -60,19 +60,42 @@ public:
 		atomic_bool cancelled{false};
 	};
 
+	struct MSTL_API pool_statistics : istringify<pool_statistics> {
+		size_t total_threads;
+		size_t idle_threads;
+		size_t busy_threads;
+		size_t queue_size;
+		size_t total_submitted;
+		size_t total_completed;
+
+		string to_string() const;
+	};
+
     using id_type = manual_thread::id_type;
 	using periodic_token = shared_ptr<periodic_task_state>;
 
 private:
 	using Task = _MSTL function<void()>;
 
+	struct priority_task {
+		Task task;
+		unsigned int priority;
+
+		priority_task(Task t, unsigned int p)
+		: task(_MSTL move(t)), priority(p) {}
+
+		bool operator <(const priority_task& other) const {
+			return priority < other.priority;
+		}
+	};
+
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<manual_thread>> threads_map_;
-	_MSTL timer_scheduler<chrono::steady_clock>& timer_;
+	_MSTL timer_scheduler<chrono::steady_clock> timer_;
 
 	id_type init_thread_size_;
 	size_t thread_threshhold_;
 
-	_MSTL queue<Task> task_queue_;
+	_MSTL priority_queue<priority_task> task_queue_;
 	_MSTL atomic_uint task_size_;
 	_MSTL atomic_uint idle_thread_size_;
 	size_t task_threshhold_;
@@ -84,6 +107,9 @@ private:
 
 	_MSTL atomic<THREAD_POOL_MODE> pool_mode_;
 	_MSTL atomic_bool is_running_;
+
+	_MSTL atomic_size_t total_submitted_tasks_;
+	_MSTL atomic_size_t total_completed_tasks_;
 
 private:
     void thread_function(id_type thread_id);
@@ -108,26 +134,42 @@ public:
 
     MSTL_NODISCARD static size_t max_thread_size() noexcept { return THREAD_POOL_THREAD_MAX_THRESHHOLD; }
     MSTL_NODISCARD bool running() const noexcept { return is_running_; }
-    MSTL_NODISCARD THREAD_POOL_MODE mode() const noexcept{ return pool_mode_; }
+    MSTL_NODISCARD THREAD_POOL_MODE mode() const noexcept { return pool_mode_; }
+	MSTL_NODISCARD pool_statistics statistics() const;
 
     bool start(size_t init_thread_size = 3);
     void stop();
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_task(Func&& func, Args&&... args);
+	decltype(auto) submit_task(unsigned int priority, Func&& func, Args&&... args);
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_after(int64_t delay_ms, Func&& func, Args&&... args);
+	decltype(auto) submit_task(Func&& func, Args&&... args) {
+		return this->submit_task(0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
+	}
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	periodic_token submit_every(int64_t interval_ms, Func&& func, Args&&... args);
+	decltype(auto) submit_after(int64_t delay_ms, unsigned int priority, Func&& func, Args&&... args);
+
+	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	decltype(auto) submit_after(int64_t delay_ms, Func&& func, Args&&... args) {
+		return this->submit_after(delay_ms, 0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
+	}
+
+	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	periodic_token submit_every(int64_t interval_ms, unsigned int priority, Func&& func, Args&&... args);
+
+	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	periodic_token submit_every(int64_t interval_ms, Func&& func, Args&&... args) {
+		return this->submit_every(interval_ms, 0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
+	}
 
 	void cancel_periodic_task(const periodic_token& token);
 };
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
-decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
+decltype(auto) thread_pool::submit_task(unsigned int priority, Func&& func, Args&&... args) {
 	using Result = decltype(func(_MSTL forward<Args>(args)...));
 	auto task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
 		[func = _MSTL forward<Func>(func), args = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
@@ -144,9 +186,12 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 		(*task_)();
 		return task_->get_future();
 	}
-	task_queue_.emplace([task] { (*task)(); });
+
+	task_queue_.emplace(priority_task([task] { (*task)(); }, priority));
 	++task_size_;
+	++total_submitted_tasks_;
 	not_empty_.notify_all();
+
 	if (pool_mode_ == THREAD_POOL_MODE::MODE_CACHED
 		&& task_size_ > idle_thread_size_
 		&& threads_map_.size() < thread_threshhold_) {
@@ -160,16 +205,17 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 }
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
-decltype(auto) thread_pool::submit_after(const int64_t delay_ms, Func&& func, Args&&... args) {
+decltype(auto) thread_pool::submit_after(const int64_t delay_ms, unsigned int priority, Func&& func, Args&&... args) {
 	using ResultType = decltype(func(args...));
 	auto task = _MSTL make_shared<_MSTL packaged_task<ResultType()>>(
 		[func = _MSTL forward<Func>(func), tup = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
 			return _MSTL apply(func, tup);
 		});
 	_MSTL future<ResultType> res = task->get_future();
+
 	auto expire_time = chrono::steady_clock::now() + chrono::milliseconds(delay_ms);
-	timer_.add_task(expire_time, [this, task = _MSTL move(task)]() mutable {
-		this->submit_task([task]() {
+	timer_.add_task(expire_time, [this, task = _MSTL move(task), priority]() mutable {
+		this->submit_task(priority, [task]() {
 			(*task)();
 	    });
 	});
@@ -177,35 +223,28 @@ decltype(auto) thread_pool::submit_after(const int64_t delay_ms, Func&& func, Ar
 }
 
 template<typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
-thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, Func &&func, Args &&...args) {
+thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, unsigned int priority, Func &&func, Args &&...args) {
     auto state = _MSTL make_shared<periodic_task_state>();
 	auto task = _MSTL make_shared<_MSTL function<void()>>(
 	    [func = _MSTL forward<Func>(func), tup = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
 			_MSTL apply(func, tup);
 	    }
 	);
-
     auto handler_ptr = _MSTL make_shared<Task>();
-    *handler_ptr = [this, state, task, interval_ms, handler_ptr]() {
-        if (state->cancelled.load()) {
-            return;
-        }
+    *handler_ptr = [this, state, task, interval_ms, priority, handler_ptr]() {
+        if (state->cancelled.load()) return;
 
-    	this->submit_task([task]() {
+    	this->submit_task(priority, [task]() {
 			(*task)();
 	    });
 
-        if (state->cancelled.load()) {
-            return;
-        }
-
+        if (state->cancelled.load()) return;
         auto next_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
         timer_.add_task(next_time, [handler_ptr]() { (*handler_ptr)(); });
     };
 
     auto first_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
     timer_.add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
-
     return state;
 }
 

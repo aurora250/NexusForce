@@ -1876,11 +1876,17 @@ void test_ext_tpool() {
     thread_pool& pool = thread_pool::instance();
     pool.start(5);
 
+    pool.submit_task([]{ println("Normal task"); });
+    pool.submit_task(10, []{ println("High priority task"); });
+    pool.submit_task(1, []{ println("Low priority task"); });
+    pool.submit_after(1000, 5, []{ println("Delayed high priority"); });
+    this_thread::sleep_for(chrono::seconds(3));
+
     println(timestamp::now());
     auto future1 = pool.submit_after(2000, []() {
         println(timestamp::now());
     });
-    this_thread::sleep_for(chrono::milliseconds(3000));
+    this_thread::sleep_for(chrono::seconds(3));
 
     auto future2 = pool.submit_after(1000, simple_task, "Task with parameters");
     auto future3 = pool.submit_after(1500, compute_sum, 42, 58);
@@ -1917,6 +1923,9 @@ void test_ext_tpool() {
         println("  Task C (1500ms interval)");
     });
     this_thread::sleep_for(chrono::seconds(5));
+
+    auto state = pool.statistics();
+    println(state);
     pool.cancel_periodic_task(token3);
     pool.cancel_periodic_task(token4);
     pool.cancel_periodic_task(token5);
