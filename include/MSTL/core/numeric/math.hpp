@@ -1,5 +1,5 @@
-﻿#ifndef MSTL_MATHLIB_HPP__
-#define MSTL_MATHLIB_HPP__
+﻿#ifndef MSTL_CORE_NUMERIC_MATH_HPP__
+#define MSTL_CORE_NUMERIC_MATH_HPP__
 #include "../config/exception.hpp"
 #include "numeric_limits.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -121,7 +121,7 @@ MSTL_CONST_FUNCTION constexpr T lcm(const T& m, const T& n) noexcept {
 
 
 MSTL_CONST_FUNCTION constexpr decimal_t float_mod(const decimal_t x, const decimal_t y) {
-	if (y == 0) Exception(MathError("zero can not be dividend."));
+	if (y == 0) throw_exception(math_exception("zero can not be dividend."));
 	const decimal_t result = x - static_cast<int>(x / y) * y;
 	return result;
 }
@@ -285,7 +285,7 @@ MSTL_CONST_FUNCTION constexpr decimal_t truncate(const decimal_t x) noexcept {
 MSTL_CONST_FUNCTION constexpr bool around_multiple(const decimal_t x, const decimal_t axis,
 	const decimal_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 	if (absolute(axis) < _CONSTANTS PRECISE_TOLERANCE)
-	    Exception(MathError("Axis Cannot be 0"));
+	    throw_exception(math_exception("Axis Cannot be 0"));
 
 	const decimal_t multi = _MSTL round(x / axis) * axis;
 	return absolute(x - multi) < toler;
@@ -360,7 +360,7 @@ MSTL_PURE_FUNCTION constexpr decimal_t tangent(const decimal_t x) {
     const decimal_t multiple = (2 * _MSTL round((2 * x - _CONSTANTS PI)
         / (2 * _CONSTANTS PI)) + 1) * (_CONSTANTS PI / 2);
     if (absolute(x - multiple) < _CONSTANTS LOW_PRECISE_TOLERANCE) {
-        Exception(MathError("Tangent Range Exceeded"));
+        throw_exception(math_exception("Tangent Range Exceeded"));
     }
 	return sine(x) / cosine(x);
 }
@@ -393,14 +393,14 @@ MSTL_PURE_FUNCTION constexpr decimal_t arctangent(const decimal_t x) noexcept {
 }
 
 MSTL_PURE_FUNCTION constexpr decimal_t arcsine(const decimal_t x) {
-    if (x > 1 || x < -1) Exception(MathError("Arcsine Range Exceeded"));
+    if (x > 1 || x < -1) throw_exception(math_exception("Arcsine Range Exceeded"));
     return arctangent(x / square_root(1 - x * x));
 }
 
 MSTL_PURE_FUNCTION constexpr decimal_t arccosine(const decimal_t x) {
-    if (x > 1 || x < -1) Exception(MathError("Arccosine Range Exceeded"));
+    if (x > 1 || x < -1) throw_exception(math_exception("Arccosine Range Exceeded"));
     return _CONSTANTS PI / 2.0 - arcsine(x);
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_MATHLIB_HPP__
+#endif // MSTL_CORE_NUMERIC_MATH_HPP__

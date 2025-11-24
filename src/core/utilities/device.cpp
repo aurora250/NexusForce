@@ -1,4 +1,4 @@
-#include <MSTL/core/utility/device.hpp>
+#include <MSTL/core/system/device.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/container/unordered_map.hpp>
 #include <MSTL/core/utility/packages.hpp>

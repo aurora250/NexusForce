@@ -1,5 +1,5 @@
 #include <MSTL/core/logging/logger.hpp>
-#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/system/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void logger::enqueue(log_event&& ev) {

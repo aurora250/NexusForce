@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__
 #define MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__
-#include "type_traits.hpp"
-#include "../config/types.hpp"
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, T... Values>
@@ -18,7 +18,7 @@ struct integer_sequence {
 template <typename T, T Size>
 using make_integer_sequence =
 #if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
-__make_integer_seq<integer_sequence, T, Size>;
+    __make_integer_seq<integer_sequence, T, Size>;
 #else
     integer_sequence<T, __integer_pack(Size)...>;
 #endif
@@ -29,6 +29,22 @@ template <size_t Size>
 using make_index_sequence = make_integer_sequence<size_t, Size>;
 template <typename... Types>
 using index_sequence_for = make_index_sequence<sizeof...(Types)>;
+
+
+template <size_t...> struct index_tuple {};
+
+template <size_t Num>
+struct build_index_tuple {
+    template <typename, size_t... Indices>
+    using idx_tuple = index_tuple<Indices...>;
+
+    using type =
+#if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
+        __make_integer_seq<idx_tuple, size_t, Num>;
+#else
+        idx_tuple<size_t, __integer_pack(Num)...>;
+#endif
+};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__

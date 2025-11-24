@@ -1,5 +1,5 @@
-#ifndef MSTL_HEXADECIMAL_HPP__
-#define MSTL_HEXADECIMAL_HPP__
+#ifndef MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
+#define MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
 #include "../config/undef_cmacro.hpp"
 #include "../string/format.hpp"
 #include "../string/serialize.hpp"
@@ -41,7 +41,7 @@ private:
             if (_MSTL is_xdigit(c)) {
                 hex_digits += c;
             } else if (!_MSTL is_space(c)) {
-                Exception(ValueError("Invalid hexadecimal character"));
+                throw_exception(value_exception("Invalid hexadecimal character"));
             }
         }
 
@@ -50,17 +50,17 @@ private:
         size_t pos = 0;
         const uint64_t raw = _MSTL to_uint64(hex_digits.data(), &pos, 16);
         if (pos != hex_digits.size()) {
-            Exception(ValueError("Invalid hexadecimal format"));
+            throw_exception(value_exception("Invalid hexadecimal format"));
         }
 
         if (negative) {
             if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max()) + 1) {
-                Exception(ValueError("Hexadecimal value out of range"));
+                throw_exception(value_exception("Hexadecimal value out of range"));
             }
             return -static_cast<int64_t>(raw);
         }
         if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max())) {
-            Exception(ValueError("Hexadecimal value out of range"));
+            throw_exception(value_exception("Hexadecimal value out of range"));
         }
         return static_cast<value_type>(raw);
     }
@@ -91,11 +91,11 @@ public:
     constexpr self operator -() const noexcept { return self{-value_}; }
     constexpr self operator *(const self& other) const noexcept { return self{value_ * other.value_}; }
     constexpr self operator /(const self& other) const {
-        if (other.value_ == 0) Exception(MathError("Division by zero"));
+        if (other.value_ == 0) throw_exception(math_exception("Division by zero"));
         return self{value_ / other.value_};
     }
     constexpr self operator %(const self& other) const {
-        if (other.value_ == 0) Exception(MathError("Modulo by zero"));
+        if (other.value_ == 0) throw_exception(math_exception("Modulo by zero"));
         return self{value_ % other.value_};
     }
 
@@ -151,11 +151,11 @@ public:
     constexpr self operator ^(const self& other) const noexcept { return self{value_ ^ other.value_}; }
     constexpr self operator ~() const noexcept { return self{~value_}; }
     constexpr self operator <<(const uint32_t shift) const {
-        if (shift >= 64) Exception(ValueError("Shift count out of range"));
+        if (shift >= 64) throw_exception(value_exception("Shift count out of range"));
         return self{value_ << shift};
     }
     constexpr self operator >>(const uint32_t shift) const {
-        if (shift >= 64) Exception(ValueError("Shift count out of range"));
+        if (shift >= 64) throw_exception(value_exception("Shift count out of range"));
         return self{value_ >> shift};
     }
 
@@ -167,11 +167,11 @@ public:
 
 
     constexpr bool get_bit(const size_t position) const {
-        if (position >= 64) Exception(ValueError("Bit position out of range"));
+        if (position >= 64) throw_exception(value_exception("Bit position out of range"));
         return (value_ >> position) & 1;
     }
     constexpr hexadecimal& set_bit(const size_t position, const bool bit_value_ = true) {
-        if (position >= 64) Exception(ValueError("Bit position out of range"));
+        if (position >= 64) throw_exception(value_exception("Bit position out of range"));
         if (bit_value_) {
             value_ |= (1ULL << position);
         } else {
@@ -180,7 +180,7 @@ public:
         return *this;
     }
     constexpr hexadecimal& flip_bit(const size_t position) {
-        if (position >= 64) Exception(ValueError("Bit position out of range"));
+        if (position >= 64) throw_exception(value_exception("Bit position out of range"));
         value_ ^= (1ULL << position);
         return *this;
     }
@@ -310,4 +310,4 @@ constexpr hexadecimal operator ""_hex(const unsigned long long value) {
 MSTL_END_LITERALS__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_HEXADECIMAL_HPP__
+#endif // MSTL_CORE_MEMORY_HEXADECIMAL_HPP__

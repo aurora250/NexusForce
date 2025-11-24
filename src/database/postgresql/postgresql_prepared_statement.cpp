@@ -2,12 +2,12 @@
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <MSTL/core/utility/packages.hpp>
 #include <MSTL/database/postgresql/postgresql_prepared_result.hpp>
-#include <atomic>
+#include <MSTL/core/async/atomic.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 postgresql_prepared_statement::postgresql_prepared_statement(_MSTL_POSTGRESQL PGconn* conn, const string& sql)
 : conn_(conn), sql_(sql) {
-    static std::atomic<uint64_t> stmt_counter{0};
+    static _MSTL atomic<uint64_t> stmt_counter{0};
     stmt_name_ = "pstmt_" + _MSTL to_string(stmt_counter++);
 
     size_t pos = 0;

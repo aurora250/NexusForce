@@ -1,5 +1,5 @@
-#ifndef MSTL_DEQUE_HPP__
-#define MSTL_DEQUE_HPP__
+#ifndef MSTL_CORE_CONTAINER_DEQUE_HPP__
+#define MSTL_CORE_CONTAINER_DEQUE_HPP__
 #include "../string/serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -302,7 +302,7 @@ private:
             for (cur = nstart; cur <= nfinish; ++cur)
                 *cur = map_size_pair_.get_base().allocate(buffer_size_);
         }
-        catch (AllocateError&) {
+        catch (...) {
             while (cur != nstart) {
                 --cur;
                 map_size_pair_.get_base().deallocate(*cur, buffer_size_);
@@ -327,7 +327,7 @@ private:
         try {
             map_pair_.value = this->create_map(map_size_pair_.value);
         }
-        catch (MemoryError&) {
+        catch (...) {
             map_pair_.value = nullptr;
             map_size_pair_.value = 0;
             throw;
@@ -1089,4 +1089,4 @@ deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Allo
 #endif
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_DEQUE_HPP__
+#endif // MSTL_CORE_CONTAINER_DEQUE_HPP__

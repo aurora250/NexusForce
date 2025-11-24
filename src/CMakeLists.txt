@@ -161,6 +161,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        core/async/atomic_futex.cpp
 )
 
 # 编译为动态库
@@ -227,7 +228,7 @@ configure_compiler_options(MSTL)
 
 # Windows链接系统库
 if(WIN32)
-    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32 DbgHelp)
+    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32 DbgHelp synchronization)
 endif()
 
 

@@ -1,7 +1,7 @@
-#ifndef MSTL_HASH_HPP__
-#define MSTL_HASH_HPP__
-#include "../config/types.hpp"
-#include "../utility/type_traits.hpp"
+#ifndef MSTL_CORE_FUNCTIONAL_HASH_HPP__
+#define MSTL_CORE_FUNCTIONAL_HASH_HPP__
+#include "../typeinfo/types.hpp"
+#include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
@@ -182,4 +182,4 @@ template <typename Func, typename Arg>
 constexpr bool is_hash_v = is_hash<Func, Arg>::value;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_HASH_HPP__
+#endif // MSTL_CORE_FUNCTIONAL_HASH_HPP__

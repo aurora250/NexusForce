@@ -1,7 +1,7 @@
-#ifndef MSTL_NUMERIC_LIMITS_HPP__
-#define MSTL_NUMERIC_LIMITS_HPP__
-#include "../config/types.hpp"
-#include "../utility/type_traits.hpp"
+#ifndef MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__
+#define MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__
+#include "../typeinfo/types.hpp"
+#include "../typeinfo/type_traits.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -449,4 +449,4 @@ template <typename T>
 class numeric_limits<T, enable_if_t<is_unpackaged_v<T>>> : public numeric_limits<unpackage_t<T>> {};
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_NUMERIC_LIMITS_HPP__
+#endif // MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__

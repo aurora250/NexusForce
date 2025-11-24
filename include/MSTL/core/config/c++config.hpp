@@ -1,5 +1,5 @@
-#ifndef MSTL_CPPCONFIG_HPP__
-#define MSTL_CPPCONFIG_HPP__
+#ifndef MSTL_CORE_CONFIG_CPPCONFIG_HPP__
+#define MSTL_CORE_CONFIG_CPPCONFIG_HPP__
 #include "undef_cmacro.hpp"
 
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(_M_X86)
@@ -432,4 +432,4 @@
 	MSTL_MACRO_RANGE_INT(MAC) \
 	MSTL_MACRO_RANGE_FLOAT(MAC)
 
-#endif // MSTL_CPPCONFIG_HPP__
+#endif // MSTL_CORE_CONFIG_CPPCONFIG_HPP__

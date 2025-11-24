@@ -1,5 +1,5 @@
-#ifndef MSTL_RB_TREE_HPP__
-#define MSTL_RB_TREE_HPP__
+#ifndef MSTL_CORE_CONTAINER_RB_TREE_HPP__
+#define MSTL_CORE_CONTAINER_RB_TREE_HPP__
 #include "../string/serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -280,7 +280,7 @@ private:
         }
         catch (...) {
             destroy_node(tmp);
-            Exception(MemoryError("rb tree construct node failed."));
+            throw_exception(memory_exception("rb tree construct node failed."));
         }
         return tmp;
     }
@@ -363,7 +363,7 @@ private:
                 rightmost() = header_;
             }
         }
-        catch (MemoryError&) {
+        catch (...) {
             this->erase_under_node(top);
             throw;
         }
@@ -395,7 +395,7 @@ private:
             try {
               root() = copy_under_node(x.root(), header_);
             }
-            catch (MemoryError&) {
+            catch (...) {
                 size_pair_.get_base().deallocate(header_);
                 throw;
             }
@@ -764,4 +764,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_RB_TREE_HPP__
+#endif // MSTL_CORE_CONTAINER_RB_TREE_HPP__

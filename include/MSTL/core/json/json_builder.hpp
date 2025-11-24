@@ -1,5 +1,5 @@
-#ifndef MSTL_JSON_BUILDER_HPP__
-#define MSTL_JSON_BUILDER_HPP__
+#ifndef MSTL_CORE_JSON_JSON_BUILDER_HPP__
+#define MSTL_CORE_JSON_JSON_BUILDER_HPP__
 #include "../container/stack.hpp"
 #include "../functional/function.hpp"
 #include "json_value.hpp"
@@ -36,7 +36,7 @@ private:
     json_builder& value_impl(unique_ptr<T> v) {
         if (contexts.empty()) {
             if (root) {
-                Exception(JsonOperateError("Multiple root values not allowed"));
+                throw_exception(json_exception("Multiple root values not allowed"));
             }
             root = _MSTL move(v);
         } else {
@@ -45,7 +45,7 @@ private:
                 top.array_ptr->add_element(_MSTL move(v));
             } else if (top.type == OBJECT) {
                 if (current_key.empty()) {
-                    Exception(JsonOperateError("No key set for value in object"));
+                    throw_exception(json_exception("No key set for value in object"));
                 }
                 top.object_ptr->add_member(current_key, _MSTL move(v));
                 current_key.clear();
@@ -115,4 +115,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_JSON_BUILDER_HPP__
+#endif // MSTL_CORE_JSON_JSON_BUILDER_HPP__

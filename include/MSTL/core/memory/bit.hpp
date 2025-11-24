@@ -1,6 +1,6 @@
-#ifndef MSTL_BIT_HPP__
-#define MSTL_BIT_HPP__
-#include "../config/types.hpp"
+#ifndef MSTL_CORE_MEMORY_BIT_HPP__
+#define MSTL_CORE_MEMORY_BIT_HPP__
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__
@@ -134,4 +134,4 @@ constexpr uint64_t mask_from_to(const int from, const int to) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BIT_HPP__
+#endif // MSTL_CORE_MEMORY_BIT_HPP__

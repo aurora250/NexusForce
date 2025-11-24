@@ -24,7 +24,7 @@ MSTL_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 l
     catch (...) {
         for (; result != cur; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized copy failed."));
+        throw_exception(memory_exception("uninitialized copy failed."));
     }
     return cur;
 }
@@ -49,7 +49,7 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
     catch (...) {
         for (; result != cur; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized copy n failed."));
+        throw_exception(memory_exception("uninitialized copy n failed."));
     }
     return pair<Iterator1, Iterator2>(first, cur);
 }
@@ -87,7 +87,7 @@ MSTL_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, co
     catch (...) {
         for (; cur != first; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized fill failed."));
+        throw_exception(memory_exception("uninitialized fill failed."));
     }
 }
 MSTL_END_INNER__
@@ -117,7 +117,7 @@ MSTL_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, c
     catch (...) {
         for (; cur != first; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized fill n failed."));
+        throw_exception(memory_exception("uninitialized fill n failed."));
     }
     return cur;
 }
@@ -147,7 +147,7 @@ MSTL_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 l
     catch (...) {
         for (; result != cur; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized move failed."));
+        throw_exception(memory_exception("uninitialized move failed."));
     }
     return cur;
 }
@@ -173,7 +173,7 @@ MSTL_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
     catch (...) {
         for (; result != cur; --cur)
             _MSTL destroy(&*cur);
-        Exception(MemoryError("uninitialized move n failed."));
+        throw_exception(memory_exception("uninitialized move n failed."));
     }
     return pair<Iterator1, Iterator2>(first, cur);
 }

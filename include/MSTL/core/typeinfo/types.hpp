@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_CONFIG_TYPES_HPP__
 #define MSTL_CORE_CONFIG_TYPES_HPP__
-#include "c++config.hpp"
+#include "../config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 using nullptr_t	= decltype(nullptr);

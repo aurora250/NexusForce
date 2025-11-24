@@ -566,7 +566,7 @@ string sql_builder::build() const {
         }
         case SQL_OPERATE_TYPE::INSERT: {
             if (!insert_data_ || insert_data_->fields.empty()) {
-                Exception(ValueError("No fields for INSERT"));
+                throw_exception(value_exception("No fields for INSERT"));
             }
             result += "INSERT INTO " + table_ + " (";
             for (size_t i = 0; i < insert_data_->fields.size(); ++i) {
@@ -583,7 +583,7 @@ string sql_builder::build() const {
         }
         case SQL_OPERATE_TYPE::UPDATE: {
             if (!update_data_ || update_data_->assignments.empty()) {
-                Exception(ValueError("No assignments for UPDATE"));
+                throw_exception(value_exception("No assignments for UPDATE"));
             }
             result += "UPDATE " + table_ + " SET ";
             for (size_t i = 0; i < update_data_->assignments.size(); ++i) {
@@ -611,7 +611,7 @@ string sql_builder::build() const {
             break;
         }
         default: {
-            Exception(ValueError("Unsupported SQL type or not specified"));
+            throw_exception(value_exception("Unsupported SQL type or not specified"));
             break;
         }
     }

@@ -1,7 +1,7 @@
-#ifndef MSTL_ITERATOR_TRAITS_HPP__
-#define MSTL_ITERATOR_TRAITS_HPP__
-#include "../utility/type_traits.hpp"
-#include "../utility/tags.hpp"
+#ifndef MSTL_CORE_ITERATOR_ITERATOR_TRAITS_HPP__
+#define MSTL_CORE_ITERATOR_ITERATOR_TRAITS_HPP__
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -54,4 +54,4 @@ template <typename Iterator>
 using iter_reference_t  = typename iterator_traits<Iterator>::reference;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ITERATOR_TRAITS_HPP__
+#endif // MSTL_CORE_ITERATOR_ITERATOR_TRAITS_HPP__

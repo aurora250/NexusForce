@@ -1,5 +1,5 @@
-#ifndef MSTL_ALGO_HPP__
-#define MSTL_ALGO_HPP__
+#ifndef MSTL_CORE_ALGORITHM_ALGO_HPP__
+#define MSTL_CORE_ALGORITHM_ALGO_HPP__
 #include "../numeric/random.hpp"
 #include "../numeric/math.hpp"
 #include "../iterator/reverse_iterator.hpp"
@@ -1350,4 +1350,4 @@ void nth_element(Iterator first, Iterator nth, Iterator last) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ALGO_HPP__
+#endif // MSTL_CORE_ALGORITHM_ALGO_HPP__

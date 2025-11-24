@@ -1,6 +1,6 @@
-#ifndef MSTL_MUTEX_HPP__
-#define MSTL_MUTEX_HPP__
-#include "../utility/type_traits.hpp"
+#ifndef MSTL_CORE_ASYNC_MUTEX_HPP__
+#define MSTL_CORE_ASYNC_MUTEX_HPP__
+#include "../typeinfo/type_traits.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -284,4 +284,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_MUTEX_HPP__
+#endif // MSTL_CORE_ASYNC_MUTEX_HPP__

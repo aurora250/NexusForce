@@ -1,5 +1,5 @@
-#ifndef MSTL_HEAP_HPP__
-#define MSTL_HEAP_HPP__
+#ifndef MSTL_CORE_ALGORITHM_HEAP_HPP__
+#define MSTL_CORE_ALGORITHM_HEAP_HPP__
 #include "../iterator/iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -200,4 +200,4 @@ MSTL_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_HEAP_HPP__
+#endif // MSTL_CORE_ALGORITHM_HEAP_HPP__

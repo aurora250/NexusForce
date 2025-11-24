@@ -1,10 +1,10 @@
 #ifndef MSTL_CORE_MEMORY_STANDARD_ALLOCATOR_HPP__
 #define MSTL_CORE_MEMORY_STANDARD_ALLOCATOR_HPP__
-#include "../config/types.hpp"
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/tags.hpp"
+#include "../typeinfo/types.hpp"
 #include "../config/assertion.hpp"
 #include "../config/exception.hpp"
-#include "../utility/type_traits.hpp"
-#include "../utility/tags.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__
 
@@ -33,7 +33,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
         if (block_size <= bytes)
-            Exception(MemoryError("invalid block size."));
+            throw_exception(memory_exception("invalid block size."));
         const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
         MSTL_DEBUG_VERIFY(holder != 0, "invalid argument");
         const auto ptr = reinterpret_cast<void*>(
@@ -188,7 +188,7 @@ public:
         try {
             return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
         } catch (...) {
-            Exception(AllocateError("standard allocate failed"));
+            throw_exception(allocate_exception("standard allocate failed"));
             return nullptr;
         }
     }

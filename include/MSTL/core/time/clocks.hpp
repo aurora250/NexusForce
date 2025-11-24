@@ -45,6 +45,16 @@ struct MSTL_API steady_clock {
 
 MSTL_END_CHRONO__
 
+template <typename T>
+struct is_clock;
+template <>
+struct is_clock<_MSTL_CHRONO system_clock> : true_type {};
+template <>
+struct is_clock<_MSTL_CHRONO steady_clock> : true_type {};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
+
 
 MSTL_BEGIN_THIS_THREAD__
 

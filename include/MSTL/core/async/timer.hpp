@@ -1,5 +1,5 @@
-#ifndef MSTL_TIMER_HPP__
-#define MSTL_TIMER_HPP__
+#ifndef MSTL_CORE_ASYNC_TIMER_HPP__
+#define MSTL_CORE_ASYNC_TIMER_HPP__
 #include "../container/map.hpp"
 #include "../container/set.hpp"
 #include "../functional/function.hpp"
@@ -238,4 +238,4 @@ using system_timer = basic_timer<_MSTL chrono::system_clock>;
 using high_resolution_timer = basic_timer<_MSTL chrono::high_resolution_clock>;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_TIMER_HPP__
+#endif // MSTL_CORE_ASYNC_TIMER_HPP__

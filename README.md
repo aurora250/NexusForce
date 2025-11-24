@@ -5,11 +5,8 @@
 
 > 通过其他语言阅读: [English](README.EN.md)
 
-本项目旨在建立一套供C++初学者学习并使用的、阅读性强的、较为健全的除并发库外的STL库，同时提供多种功能性接口。
-本项目尽最大可能减少除并发库外的标准库的使用，尝试实现简化版本。
+本项目旨在建立一套供学习使用的、阅读性强的、较为健全的标准库及扩展。
 有劳各位多多issue，使本项目趋于健全。如有不足，还望斧正。
-
-对初学者的建议学习方式：按照下文的文件介绍顺序阅读和使用，在疑惑的地方咨询同学或AI。
 
 本库使用IO设备时默认您的操作系统为代码页为UTF-8，如不是，请尝试设置，否则可能在IO时乱码。
 
@@ -55,12 +52,12 @@ C++ 14 17 20
 - CMake 3.17+
 - 支持C++14及以上的编译器（GCC 12+、Clang 5+、MSVC 2017+）
 - 可选依赖：
-    - Boost
-    - MySQL
-    - SQLite3
-    - hiredis
-    - Qt6
-    - CUDA Toolkit（仅MSVC）
+  - Boost
+  - MySQL
+  - SQLite3
+  - hiredis
+  - Qt6
+  - CUDA Toolkit（仅MSVC）
 
 请注意：本项目已停止对CUDA的支持，它被默认关闭依赖
 
@@ -127,7 +124,7 @@ sudo make install
 
 定义一系列函数将可变参数列表输出到格式化的字符串。
 
-- [type_traits](include/MSTL/core/utility/type_traits.hpp)
+- [type_traits](include/MSTL/core/typeinfo/type_traits.hpp)
 
 定义类型特征常量，使用模板元技术在编译期推断类型信息。
 
@@ -167,7 +164,7 @@ sudo make install
 
 定义互斥锁`mutex`及作用域锁定类`lock_guard`。
 
-- [concepts](include/MSTL/core/utility/concepts.hpp)
+- [concepts](include/MSTL/core/typeinfo/concepts.hpp)
 
 定义常用的约束与迭代器类型判断特征常量。
 
@@ -263,7 +260,7 @@ sudo make install
 
 定义字符加密类型及函数`XOR`、`base64`、`MD5`、`SHA1`、`SHA256`、`AES256`。
 
-- [check_type](include/MSTL/core/utility/check_type.hpp)
+- [check_type](include/MSTL/core/typeinfo/check_type.hpp)
 
 定义类型信息分析函数`check_type`，在多种编译器中规整类型信息。
 
@@ -283,7 +280,7 @@ sudo make install
 
 定义颜色类`color`。
 
-- [console](include/MSTL/core/utility/console.hpp)
+- [console](include/MSTL/core/system/console.hpp)
 
 定义IO辅助类`io_base`及IO控制台类`console`。
 
@@ -351,7 +348,7 @@ sudo make install
 
 定义有序集合类`set`和有序多值集合类`multiset`。
 
-- [file](include/MSTL/core/utility/file.hpp)
+- [file](include/MSTL/core/system/file.hpp)
 
 定义文件类`file`，其使用8KB的buffer以适应大批量小数据的读写。
 
@@ -390,7 +387,6 @@ sudo make install
 ## 待实现功能
 
 lib:
-atomic
 future
 cuda-matrix
 xml

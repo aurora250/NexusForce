@@ -1,6 +1,6 @@
-#ifndef MSTL_RANGES_HPP__
-#define MSTL_RANGES_HPP__
-#include "../utility/concepts.hpp"
+#ifndef MSTL_CORE_ITERATOR_RANGES_HPP__
+#define MSTL_CORE_ITERATOR_RANGES_HPP__
+#include "../typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 #ifdef MSTL_STANDARD_20__
 
@@ -2072,4 +2072,4 @@ MSTL_END_RANGES_VIEWS__
 MSTL_END_RANGES__
 #endif // MSTL_STANDARD_20__
 MSTL_END_NAMESPACE__
-#endif // MSTL_RANGES_HPP__
+#endif // MSTL_CORE_ITERATOR_RANGES_HPP__

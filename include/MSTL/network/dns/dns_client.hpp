@@ -6,11 +6,12 @@
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/time/clocks.hpp"
-#include <future>
+#include "MSTL/core/async/future.hpp"
 #include <netinet/in.h>
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(DNSError, LinkError, "DNS Operate Failed");
+MSTL_ERROR_BUILD_FINAL_CLASS(dns_exception, link_exception, "DNS Operate Failed");
+
 
 class dns_client {
 private:
@@ -68,7 +69,7 @@ public:
         DNS_QUERY qclass = DNS_QUERY::INTERNET
     );
 
-    std::future<dns_query_result> query_async(
+    _MSTL future<dns_query_result> query_async(
         const string& domain,
         DNS_RECORD type = DNS_RECORD::A,
         DNS_QUERY qclass = DNS_QUERY::INTERNET

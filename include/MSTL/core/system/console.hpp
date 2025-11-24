@@ -1,7 +1,7 @@
 #ifndef MSTL_CONSOLE_HPP__
 #define MSTL_CONSOLE_HPP__
 #include "../async/mutex.hpp"
-#include "color.hpp"
+#include "../utility/color.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename = void>
@@ -298,7 +298,7 @@ struct io_base<T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>>> {
 };
 
 template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<Error,T>>> {
+struct io_base<T, enable_if_t<is_base_of_v<exception, T>>> {
     static void write(sys_console& console, const T& value) {
         io_base<string>::write(console, _MSTL to_string(value));
     }

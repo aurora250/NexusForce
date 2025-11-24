@@ -70,7 +70,7 @@ public:
             } else if (str == "false" || str == "no" || str == "n") {
                 obj = false;
             } else {
-                Exception(TypeCastError("Convert from string to boolean failed."));
+                throw_exception(typecast_exception("Convert from string to boolean failed."));
             }
         }
         return obj;
@@ -221,11 +221,11 @@ public: \
     } \
     \
     MSTL_NODISCARD constexpr self operator/(const self& other) const { \
-        if (other.value_ == 0) Exception(MathError("Division by zero")); \
+        if (other.value_ == 0) throw_exception(math_exception("Division by zero")); \
         return self(value_ / other.value_); \
     } \
     MSTL_NODISCARD constexpr self operator%(const self& other) const { \
-        if (other.value_ == 0) Exception(MathError("Division by zero")); \
+        if (other.value_ == 0) throw_exception(math_exception("Division by zero")); \
         return self(value_ % other.value_); \
     } \
     \
@@ -264,11 +264,11 @@ public: \
     } \
     \
     MSTL_NODISCARD constexpr self operator<<(const uint32_t shift) const { \
-        if (shift >= static_cast<uint32_t>(bits())) Exception(ValueError("Shift out of size.")); \
+        if (shift >= static_cast<uint32_t>(bits())) throw_exception(value_exception("Shift out of size.")); \
         return self(value_ << shift); \
     } \
     MSTL_NODISCARD constexpr self operator>>(const uint32_t shift) const { \
-        if (shift >= static_cast<uint32_t>(bits())) Exception(ValueError("Shift out of size.")); \
+        if (shift >= static_cast<uint32_t>(bits())) throw_exception(value_exception("Shift out of size.")); \
         return self(value_ >> shift); \
     } \
     \
@@ -453,11 +453,11 @@ public:
     }
 
     MSTL_NODISCARD constexpr self operator/(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(value_ / other. value_);
     }
     MSTL_NODISCARD constexpr self operator%(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(_MSTL float_mod(value_, other.value_));
     }
 
@@ -614,11 +614,11 @@ public:
     }
 
     MSTL_NODISCARD constexpr self operator/(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(value_ / other. value_);
     }
     MSTL_NODISCARD constexpr self operator%(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(_MSTL float_mod(value_, other.value_));
     }
 
@@ -755,11 +755,11 @@ public:
     constexpr self operator-() const { return self(0 - value_); }
 
     MSTL_NODISCARD constexpr self operator/(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(value_ / other. value_);
     }
     MSTL_NODISCARD constexpr self operator%(const self& other) const {
-        if (other. value_ == 0) Exception(MathError("Division by zero"));
+        if (other. value_ == 0) throw_exception(math_exception("Division by zero"));
         return self(_MSTL float_mod(value_, other.value_));
     }
 

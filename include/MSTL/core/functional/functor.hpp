@@ -1,6 +1,6 @@
 #ifndef MSTL_FUNCTOR_HPP__
 #define MSTL_FUNCTOR_HPP__
-#include "../utility/type_traits.hpp"
+#include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Arg, typename Result>

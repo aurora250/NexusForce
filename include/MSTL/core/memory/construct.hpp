@@ -1,6 +1,6 @@
-#ifndef MSTLCORE_MEMORY_CONSTRUCT_HPP__
-#define MSTLCORE_MEMORY_CONSTRUCT_HPP__
-#include "../utility/concepts.hpp"
+#ifndef MSTL_CORE_MEMORY_CONSTRUCT_HPP__
+#define MSTL_CORE_MEMORY_CONSTRUCT_HPP__
+#include "../typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename... Args>
@@ -27,4 +27,4 @@ MSTL_CONSTEXPR20 void destroy(Iterator, Iterator) noexcept {}
 
 
 MSTL_END_NAMESPACE__
-#endif // MSTLCORE_MEMORY_CONSTRUCT_HPP__
+#endif // MSTL_CORE_MEMORY_CONSTRUCT_HPP__

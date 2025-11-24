@@ -1,5 +1,5 @@
-#ifndef MSTL_BITMAP_HPP__
-#define MSTL_BITMAP_HPP__
+#ifndef MSTL_CORE_CONTAINER_BITMAP_HPP__
+#define MSTL_CORE_CONTAINER_BITMAP_HPP__
 #include "../utility/packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -574,4 +574,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BITMAP_HPP__
+#endif // MSTL_CORE_CONTAINER_BITMAP_HPP__

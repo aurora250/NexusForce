@@ -1,6 +1,6 @@
 #ifndef MSTL_TYPE_TRAITS_HPP__
 #define MSTL_TYPE_TRAITS_HPP__
-#include "../config/types.hpp"
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, T Value>
@@ -1582,6 +1582,26 @@ template <typename T>
 using remove_cvref_decay_t = remove_cvref_t<decay_t<T>>;
 
 
+MSTL_BEGIN_INNER__
+template <typename Default, typename, template<typename...> class, typename...>
+struct __detector {
+    using value_t = false_type;
+    using type = Default;
+};
+template <typename Default, template<typename...> class Op, typename... Args>
+struct __detector<Default, void_t<Op<Args...>>, Op, Args...> {
+    using value_t = true_type;
+    using type = Op<Args...>;
+};
+MSTL_END_INNER__
+
+template <typename Default, template<typename...> class Op, typename... Args>
+using detected_or = _INNER __detector<Default, void, Op, Args...>;
+
+template <typename Default, template<typename...> class Op, typename... Args>
+using detected_or_t = typename detected_or<Default, Op, Args...>::type;
+
+
 // ternary operator (expr1 ? expr2 : expr3) will try to find a suitable common type,
 // so that both expr2 and expr3 can implicitly convert to this type:
 //   if expr2 and expr3 are of the same type, then the type of the entire expression is that type.
@@ -2023,6 +2043,13 @@ template <typename F, typename... Args>
 using invoke_result_t = typename _INNER __invoke_result_aux<F, Args...>::type;
 
 
+template <typename T>
+struct is_location_invariant : is_trivially_copyable<T>::type {};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<T>::value;
+
+
 MSTL_BEGIN_INNER__
 
 template <typename Result, typename Ret, bool = is_void_v<Ret>, typename = void>
@@ -2185,24 +2212,6 @@ struct get_rebind_type<T, U, enable_if_t<is_same_v<typename T::template rebind<U
 };
 template <typename T, typename U>
 using get_rebind_type_t = typename get_rebind_type<T, U>::type;
-
-
-#ifdef MSTL_STANDARD_20__
-template <typename T>
-concept is_allocator_v = requires(T alloc) {
-    alloc.deallocate(alloc.allocate(size_t{ 1 }), size_t{ 1 });
-};
-template <typename T>
-struct is_allocator : bool_constant<is_allocator_v<T>> {};
-#endif // MSTL_STANDARD_20__
-
-
-template <typename Alloc1, typename Alloc2>
-MSTL_INLINE17 constexpr bool allocable_from_v = is_same_v<
-    decltype(_MSTL declval<Alloc1>().allocate(1)), decltype(_MSTL declval<Alloc2>().allocate(1))>;
-
-template <typename Alloc1, typename Alloc2>
-MSTL_INLINE17 constexpr bool allocable_with = allocable_from_v<Alloc1, Alloc2> && allocable_from_v<Alloc2, Alloc1>;
 
 
 template <typename>
@@ -2477,6 +2486,29 @@ public:
 
 template <typename T>
 MSTL_INLINE17 constexpr bool has_swap_v = has_swap<T>::value;
+
+
+MSTL_BEGIN_INNER__
+template <typename Alloc, typename T, typename... Args>
+struct __has_construct_impl {
+private:
+    template <typename Alloc1,
+    typename = decltype(_MSTL declval<Alloc1*>()->construct(_MSTL declval<T*>(), _MSTL declval<Args>()...))>
+    static true_type __test(int);
+
+    template<typename>
+    static false_type __test(...);
+
+public:
+    using type = decltype(__test<Alloc>(0));
+};
+MSTL_END_INNER__
+
+template <typename Alloc, typename T, typename... Args>
+struct has_construct : _INNER __has_construct_impl<Alloc, T, Args...>::type {};
+
+template <typename Alloc, typename T, typename... Args>
+MSTL_INLINE17 constexpr bool has_construct_v = has_construct<Alloc, T, Args...>::value;
 
 
 template <typename T, size_t Size, enable_if_t<is_swappable<T>::value, int>>

@@ -34,18 +34,18 @@ thread& thread::operator =(thread&& other) noexcept {
 
 void thread::join() {
     if (!joinable()) {
-        Exception(ThreadOperationError("Thread is not joinable"));
+        throw_exception(thread_exception("Thread is not joinable"));
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::WaitForSingleObject(handle_, INFINITE) != WAIT_OBJECT_0) {
-        Exception(ThreadOperationError("Fail to join thread"));
+        throw_exception(ThreadOperationError("Fail to join thread"));
     }
     ::CloseHandle(handle_);
     handle_ = nullptr;
 #else
     if (::pthread_join(handle_, nullptr) != 0) {
-        Exception(ThreadOperationError("Thread is not joinable"));
+        throw_exception(thread_exception("Thread is not joinable"));
     }
     handle_ = native_handle_type{};
 #endif
@@ -54,14 +54,14 @@ void thread::join() {
 
 void thread::detach() {
     if (!joinable()) {
-        Exception(ThreadOperationError("Thread is not detachable"));
+        throw_exception(thread_exception("Thread is not detachable"));
     }
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CloseHandle(handle_);
     handle_ = nullptr;
 #else
     if (::pthread_detach(handle_) != 0) {
-        Exception(ThreadOperationError("Fail to Detach thread"));
+        throw_exception(thread_exception("Fail to Detach thread"));
     }
     handle_ = native_handle_type{};
 #endif

@@ -80,7 +80,7 @@ connect_timeout_(connect_timeout), running_(true) {
 #endif
         default: {
             // never run:
-            Exception(ValueError("Useless Database Type"));
+            throw_exception(value_exception("Useless Database Type"));
             break;
         }
     }

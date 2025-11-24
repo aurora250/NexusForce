@@ -1,7 +1,8 @@
-#ifndef MSTL_THREAD_HPP__
-#define MSTL_THREAD_HPP__
+#ifndef MSTL_CORE_ASYNC_THREAD_HPP__
+#define MSTL_CORE_ASYNC_THREAD_HPP__
 #include "../memory/unique_ptr.hpp"
 #include "../functional/apply.hpp"
+#include "../config/terminate.hpp"
 #include "../config/exception.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
@@ -12,7 +13,7 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(ThreadOperationError, MemoryError, "Thread Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(thread_exception, memory_exception, "Thread Operation Failed.")
 
 
 class MSTL_API thread : public iswappable<thread> {
@@ -121,13 +122,13 @@ private:
             ::_beginthreadex(nullptr, 0, thread_entry, data.get(), 0, &thread_id)
         );
         if (handle_ == nullptr) {
-            Exception(ThreadOperationError("Failed to create thread"));
+            throw_exception(ThreadOperationError("Failed to create thread"));
         }
         id_ = id(thread_id);
 #else
         native_handle_type tid;
         if (::pthread_create(&tid, nullptr, thread_entry, data.get()) != 0) {
-            Exception(ThreadOperationError("Failed to create thread"));
+            throw_exception(thread_exception("Failed to create thread"));
         }
         handle_ = tid;
         id_ = id(tid);
@@ -215,4 +216,4 @@ MSTL_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept {
 MSTL_END_THIS_THREAD__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_THREAD_HPP__
+#endif // MSTL_CORE_ASYNC_THREAD_HPP__

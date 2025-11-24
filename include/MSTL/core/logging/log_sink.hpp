@@ -1,7 +1,7 @@
-#ifndef MSTL_LOG_SINK_HPP__
-#define MSTL_LOG_SINK_HPP__
+#ifndef MSTL_CORE_LOGGING_LOG_SINK_HPP__
+#define MSTL_CORE_LOGGING_LOG_SINK_HPP__
 #include "../container/unordered_map.hpp"
-#include "../utility/file.hpp"
+#include "../system/file.hpp"
 #include "../async/mutex.hpp"
 #include "../async/thread.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -109,4 +109,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_LOG_SINK_HPP__
+#endif // MSTL_CORE_LOGGING_LOG_SINK_HPP__

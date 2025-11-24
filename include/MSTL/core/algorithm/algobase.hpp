@@ -1,5 +1,5 @@
-#ifndef MSTL_ALGOBASE_HPP__
-#define MSTL_ALGOBASE_HPP__
+#ifndef MSTL_CORE_ALGORITHM_ALGOBASE_HPP__
+#define MSTL_CORE_ALGORITHM_ALGOBASE_HPP__
 #include "../compound/pair.hpp"
 #include "../functional/functor.hpp"
 #include "../iterator/iterator.hpp"
@@ -379,4 +379,4 @@ constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 res
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ALGOBASE_HPP__
+#endif // MSTL_CORE_ALGORITHM_ALGOBASE_HPP__

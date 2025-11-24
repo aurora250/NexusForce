@@ -1,5 +1,5 @@
 #include <MSTL/core/logging/log_sink.hpp>
-#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/utility/vsprintf.hpp>
 MSTL_BEGIN_NAMESPACE__
 
@@ -103,7 +103,7 @@ void file_sink::open_new_file() {
         FILE_ACCESS::WRITE,
         FILE_SHARED::SHARE_WRITE,
         FILE_CREATION::OPEN_FORCE)) {
-        Exception(FileOperateError("Failed to open log file"));
+        throw_exception(file_exception("Failed to open log file"));
     }
     current_size_ = file_.size();
 }

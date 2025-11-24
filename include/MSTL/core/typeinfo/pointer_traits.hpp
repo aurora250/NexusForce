@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_UTILITY_POINTER_TRAITS_HPP__
 #define MSTL_CORE_UTILITY_POINTER_TRAITS_HPP__
-#include "../utility/type_traits.hpp"
-#include "../config/types.hpp"
+#include "type_traits.hpp"
+#include "types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -66,6 +66,40 @@ constexpr decltype(auto) ptr_const_cast(Ptr ptr) noexcept {
 template <typename T>
 constexpr decltype(auto) ptr_const_cast(T* ptr) noexcept {
     return const_cast<remove_const_t<T>*>(ptr);
+}
+
+
+MSTL_BEGIN_INNER__
+
+template <typename _Tp>
+constexpr _Tp* __to_address(_Tp* ptr) noexcept
+{
+    static_assert(!is_function_v<_Tp>, "not a function pointer");
+    return ptr;
+}
+
+template <typename _Ptr>
+constexpr auto __to_address(const _Ptr& ptr) noexcept
+-> decltype(pointer_traits<_Ptr>::to_address(ptr)) {
+    return pointer_traits<_Ptr>::to_address(ptr);
+}
+
+template <typename _Ptr, typename... _None>
+constexpr auto __to_address(const _Ptr& ptr, _None...) noexcept {
+    return to_address(ptr.operator->());
+}
+
+MSTL_END_INNER__
+
+
+template <typename _Tp>
+constexpr _Tp* to_address(_Tp* ptr) noexcept {
+    return __to_address(ptr);
+}
+
+template<typename _Ptr>
+constexpr auto to_address(const _Ptr& ptr) noexcept {
+    return __to_address(ptr);
 }
 
 

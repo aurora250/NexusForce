@@ -1,5 +1,5 @@
-#ifndef MSTL_LEONARDO_HEAP_HPP__
-#define MSTL_LEONARDO_HEAP_HPP__
+#ifndef MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__
+#define MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__
 #include "../container/vector.hpp"
 #include "../numeric/math.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -179,4 +179,4 @@ void make_leonardo_heap(Iterator first, Iterator last) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_LEONARDO_HEAP_HPP__
+#endif // MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__

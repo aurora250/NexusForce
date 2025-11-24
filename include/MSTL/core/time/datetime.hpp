@@ -211,7 +211,7 @@ public:
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 static self parse(const string_view str) {
         if (str.size() != 10 || str[4] != '-' || str[7] != '-') {
-            Exception(ValueError("Wrong string formation."));
+            throw_exception(value_exception("Wrong string formation."));
         }
         const date_type year = integer32::parse(str.substr(0, 4));
         const date_type month = integer32::parse(str.substr(5, 2));
@@ -395,7 +395,7 @@ public:
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 time parse(const string_view str) {
         if (str.size() != 8 || str[2] != ':' || str[5] != ':') {
-            Exception(ValueError("Wrong string formation."));
+            throw_exception(value_exception("Wrong string formation."));
         }
         const time_type h = integer32::parse(str.substr(0, 2));
         const time_type m = integer32::parse(str.substr(3, 2));
@@ -614,7 +614,7 @@ public:
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 datetime parse(const string_view str) {
         if (str.size() != 19 || str[10] != ' ') {
-            Exception(ValueError("Wrong string formation."));
+            throw_exception(value_exception("Wrong string formation."));
         }
         const _MSTL date d = date::parse(str.substr(0, 10));
         const _MSTL time t = time::parse(str.substr(11, 8));

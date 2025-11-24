@@ -3,7 +3,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 bstring XOR::encrypt(const bstring_view data, const bstring_view key) {
-    if (key.empty()) Exception(ValueError("Key cannot be empty"));
+    if (key.empty()) throw_exception(value_exception("Key cannot be empty"));
 
     bstring result;
     result.reserve(data.size());
@@ -50,7 +50,7 @@ bstring base64::decode(const string_view data) {
         const int c = data[i + 2] == '=' ? 0 : char_to_index(data[i + 2]);
         const int d = data[i + 3] == '=' ? 0 : char_to_index(data[i + 3]);
 
-        if (a < 0 || b < 0) Exception(ValueError("Invalid Base64 character"));
+        if (a < 0 || b < 0) throw_exception(value_exception("Invalid Base64 character"));
 
         const uint32_t val = (a << 18) | (b << 12) | (c << 6) | d;
         result.push_back((val >> 16) & 0xFF);
@@ -450,10 +450,10 @@ void AES256::decrypt_block(byte_t block[16], const byte_t* expanded_key) {
 
 bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
     if (key.size() != 32) {
-        Exception(ValueError("AES-256 requires 32-byte key"));
+        throw_exception(value_exception("AES-256 requires 32-byte key"));
     }
     if (data.size() % 16 != 0) {
-        Exception(ValueError("Data size must be multiple of 16 bytes"));
+        throw_exception(value_exception("Data size must be multiple of 16 bytes"));
     }
 
     byte_t expanded_key[240];
@@ -474,10 +474,10 @@ bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
 
 bstring AES256::decrypt(const bstring_view data, const bstring_view key) {
     if (key.size() != 32) {
-        Exception(ValueError("AES-256 requires 32-byte key"));
+        throw_exception(value_exception("AES-256 requires 32-byte key"));
     }
     if (data.size() % 16 != 0) {
-        Exception(ValueError("Data size must be multiple of 16 bytes"));
+        throw_exception(value_exception("Data size must be multiple of 16 bytes"));
     }
 
     byte_t expanded_key[240];
@@ -513,18 +513,18 @@ bstring AES256::decrypt_pkcs7(const bstring_view data, const bstring_view key) {
     const size_t original_size = decrypted.size();
 
     if (padding_len == 0 || padding_len > 16) {
-        Exception(ValueError("Invalid PKCS7 padding (invalid length)"));
+        throw_exception(value_exception("Invalid PKCS7 padding (invalid length)"));
     }
     if (padding_len > original_size) {
-        Exception(ValueError("Invalid PKCS7 padding (length exceeds data size)"));
+        throw_exception(value_exception("Invalid PKCS7 padding (length exceeds data size)"));
     }
     const size_t new_size = original_size - padding_len;
     if (new_size >= original_size) {
-        Exception(ValueError("Invalid PKCS7 padding (overflow detected)"));
+        throw_exception(value_exception("Invalid PKCS7 padding (overflow detected)"));
     }
     for (size_t i = new_size; i < original_size; ++i) {
         if (decrypted[i] != padding_len) {
-            Exception(ValueError("Invalid PKCS7 padding (mismatched value)"));
+            throw_exception(value_exception("Invalid PKCS7 padding (mismatched value)"));
         }
     }
 

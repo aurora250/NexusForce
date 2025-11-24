@@ -1,7 +1,7 @@
 #ifndef MSTL_INTERFACE_HPP__
 #define MSTL_INTERFACE_HPP__
-#include "type_traits.hpp"
-#include "../config/types.hpp"
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

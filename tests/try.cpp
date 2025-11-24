@@ -334,7 +334,7 @@ void test_print() {
 #else
     void (bit_reference::* mfp)() const noexcept = &bit_reference::flip;
 #endif
-    TypeCastError err;
+    typecast_exception err;
     compressed_pair<io_base<int>, int> cp;
     tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
     pair<int, char> pir{1, '1'};
@@ -680,7 +680,7 @@ void test_json() {
             .build();
         println(*json3);
 
-    } catch (const Error& e) {
+    } catch (const exception& e) {
         println(e);
     }
 }
@@ -697,7 +697,7 @@ void test_serv() {
             _MSTL this_thread::sleep_for(_MSTL chrono::seconds(1));
         }
         server.stop();
-    } catch (const Error& e) {
+    } catch (const exception& e) {
         println(e);
     }
 }
@@ -860,7 +860,7 @@ void test_vector() {
         vec.assign(anotherVec.begin(), anotherVec.end());
         println(vec);
     }
-    catch (Error& error) {
+    catch (exception& error) {
         println(error);
     }
 
@@ -1233,7 +1233,7 @@ void test_max_memory_string() {
         max_test_size = _MSTL min(max_test_size, upper_limit);
 
         if (max_test_size == 0) {
-            Exception(MemoryError("Insufficient system memory for test."));
+            throw_exception(memory_exception("Insufficient system memory for test."));
         }
 
         string huge_str;
@@ -1257,7 +1257,7 @@ void test_max_memory_string() {
         println("Test 5: Success. Allocated "
                   , total_written / (1024 * 1024), " MB string.");
     }
-    catch (const Error& e) {
+    catch (const exception& e) {
         println("Test 5: ", e.what());
     }
 }
@@ -1276,31 +1276,31 @@ void test_string() {
 
 void test_option() {
     optional<int> opt1;
-    println(opt1);
+    println(opt1.value());
 
     optional<int> opt2(nullopt);
-    println(opt2);
+    println(opt2.value());
 
     optional<int> opt3(42);
-    println(opt3);
+    println(opt3.value());
 
     opt1 = 100;
-    println(opt1);
+    println(opt1.value());
 
     optional<int> opt4(opt3);
-    println(opt4);
+    println(opt4.value());
 
     opt2 = opt3;
-    println(opt2);
+    println(opt2.value());
 
     optional<string> opt5(inplace_construct_tag{}, "Hello, World!");
-    println(opt5);
+    println(opt5.value());
 
     opt1.emplace(200);
-    println(opt1);
+    println(opt1.value());
 
     opt1.reset();
-    println(opt1);
+    println(opt1.value());
 
     if (opt3.has_value()) {
         println("opt3 has a value.");
@@ -1312,13 +1312,13 @@ void test_option() {
     println("Value of opt1 or default: ", default_val);
 
     auto result1 = opt1.or_else([]() { return MSTL::optional<int>(400); });
-    println(result1);
+    println(result1.value());
 
     auto result2 = opt3.and_then([](int x) { return MSTL::optional<int>(x * 2); });
-    println(result2);
+    println(result2.value());
 
     auto result3 = opt3.transform([](int x) { return x + 1; });
-    println(result3);
+    println(result3.value());
 }
 
 void test_st(){

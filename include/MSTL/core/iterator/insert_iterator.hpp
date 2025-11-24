@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_ITERATOR_INSERT_ITERATOR_HPP__
 #define MSTL_CORE_ITERATOR_INSERT_ITERATOR_HPP__
-#include "../utility/type_traits.hpp"
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Container>

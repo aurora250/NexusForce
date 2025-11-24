@@ -94,7 +94,7 @@ double random_mt::next_double() {
 }
 
 int32_t secret::next_int(const int32_t min, const int32_t max) {
-    if(min >= max) Exception(ValueError("min is ge to max"));
+    if(min >= max) throw_exception(value_exception("min is ge to max"));
     const auto range = static_cast<uint32_t>(max - min + 1);
 
     int bits = 0;
@@ -142,34 +142,34 @@ bool secret::is_supported() {
 
 void secret::get_random_bytes(byte_t* buffer, size_t length) {
     if(buffer == nullptr || length == 0) {
-        Exception(ValueError("Invalid buffer or length"));
+        throw_exception(value_exception("Invalid buffer or length"));
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     HCRYPTPROV hProv = 0;
     if (!::CryptAcquireContext(&hProv, nullptr, nullptr,
         PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
-        Exception(DeviceOperateError("Failed to acquire crypto context"));
+        throw_exception(device_exception("Failed to acquire crypto context"));
         }
 
     if (!::CryptGenRandom(hProv, static_cast<DWORD>(length), reinterpret_cast<BYTE*>(buffer))) {
         ::CryptReleaseContext(hProv, 0);
-        Exception(DeviceOperateError("Failed to generate random bytes"));
+        throw_exception(device_exception("Failed to generate random bytes"));
     }
 
     ::CryptReleaseContext(hProv, 0);
 #elif defined(MSTL_PLATFORM_LINUX__)
     const int fd = open("/dev/urandom", O_RDONLY);
-    if(fd == -1) Exception(FileOperateError("Failed to open /dev/urandom"));
+    if(fd == -1) throw_exception(file_exception("Failed to open /dev/urandom"));
 
-    ssize_t bytesRead = 0;
-    while (bytesRead < static_cast<ssize_t>(length)) {
-        const ssize_t result = ::read(fd, buffer + bytesRead, length - bytesRead);
+    ssize_t bytes_read = 0;
+    while (bytes_read < static_cast<ssize_t>(length)) {
+        const ssize_t result = ::read(fd, buffer + bytes_read, length - bytes_read);
         if (result == -1) {
             ::close(fd);
-            if(fd == -1) Exception(FileOperateError("Failed to open /dev/urandom"));
+            if(fd == -1) throw_exception(file_exception("Failed to open /dev/urandom"));
         }
-        bytesRead += result;
+        bytes_read += result;
     }
     ::close(fd);
 #endif

@@ -7,7 +7,7 @@ json_builder& json_builder::begin_object() {
 
     if (contexts.empty()) {
         if (root) {
-            Exception(JsonOperateError("Root value already set"));
+            throw_exception(json_exception("Root value already set"));
         }
         root = _MSTL move(new_object);
     } else {
@@ -16,7 +16,7 @@ json_builder& json_builder::begin_object() {
             current.array_ptr->add_element(_MSTL move(new_object));
         } else if (current.type == OBJECT) {
             if (current_key.empty()) {
-                Exception(JsonOperateError("No key set for object value"));
+                throw_exception(json_exception("No key set for object value"));
             }
             current.object_ptr->add_member(current_key, _MSTL move(new_object));
             current_key.clear();
@@ -33,7 +33,7 @@ json_builder& json_builder::begin_array() {
 
     if (contexts.empty()) {
         if (root) {
-            Exception(JsonOperateError("Root value already set"));
+            throw_exception(json_exception("Root value already set"));
         }
         root = _MSTL move(new_array);
     } else {
@@ -42,7 +42,7 @@ json_builder& json_builder::begin_array() {
             current.array_ptr->add_element(_MSTL move(new_array));
         } else if (current.type == OBJECT) {
             if (current_key.empty()) {
-                Exception(JsonOperateError("No key set for array value"));
+                throw_exception(json_exception("No key set for array value"));
             }
             current.object_ptr->add_member(current_key, _MSTL move(new_array));
             current_key.clear();
@@ -55,10 +55,10 @@ json_builder& json_builder::begin_array() {
 
 json_builder& json_builder::end_object() {
     if (contexts.empty() || contexts.top().type != OBJECT) {
-        Exception(JsonOperateError("No object to close or context mismatch"));
+        throw_exception(json_exception("No object to close or context mismatch"));
     }
     if (!current_key.empty()) {
-        Exception(JsonOperateError("Incomplete key-value pair in object"));
+        throw_exception(json_exception("Incomplete key-value pair in object"));
     }
     contexts.pop();
     return *this;
@@ -66,7 +66,7 @@ json_builder& json_builder::end_object() {
 
 json_builder& json_builder::end_array() {
     if (contexts.empty() || contexts.top().type != ARRAY) {
-        Exception(JsonOperateError("No array to close or context mismatch"));
+        throw_exception(json_exception("No array to close or context mismatch"));
     }
     contexts.pop();
     return *this;
@@ -74,10 +74,10 @@ json_builder& json_builder::end_array() {
 
 json_builder& json_builder::key(const string& k) {
     if (contexts.empty() || contexts.top().type != OBJECT) {
-        Exception(JsonOperateError("Key can only be set inside an object"));
+        throw_exception(json_exception("Key can only be set inside an object"));
     }
     if (!current_key.empty()) {
-        Exception(JsonOperateError("Key already set without corresponding value"));
+        throw_exception(json_exception("Key already set without corresponding value"));
     }
     current_key = k;
     return *this;
@@ -103,13 +103,13 @@ json_builder& json_builder::value_array(_MSTL function<void(json_builder&)>&& bu
 
 unique_ptr<json_value> json_builder::build() {
     if (!contexts.empty()) {
-        Exception(JsonOperateError("Incomplete JSON structure - unclosed objects or arrays"));
+        throw_exception(json_exception("Incomplete JSON structure - unclosed objects or arrays"));
     }
     if (!current_key.empty()) {
-        Exception(JsonOperateError("Incomplete key-value pair"));
+        throw_exception(json_exception("Incomplete key-value pair"));
     }
     if (!root) {
-        Exception(JsonOperateError("No JSON value built"));
+        throw_exception(json_exception("No JSON value built"));
     }
     return _MSTL move(root);
 }

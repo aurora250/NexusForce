@@ -1,5 +1,5 @@
-#ifndef MSTL_STATIC_NUMERIC_HPP__
-#define MSTL_STATIC_NUMERIC_HPP__
+#ifndef MSTL_CORE_NUMERIC_STATIC_NUMERIC_HPP__
+#define MSTL_CORE_NUMERIC_STATIC_NUMERIC_HPP__
 #include "../memory/bit.hpp"
 #include "numeric_limits.hpp"
 #include "../config/undef_cmacro.hpp"
@@ -352,4 +352,4 @@ using static_select_int_t = typename _INNER __select_int_base<
 >::type;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_STATIC_NUMERIC_HPP__
+#endif // MSTL_CORE_NUMERIC_STATIC_NUMERIC_HPP__

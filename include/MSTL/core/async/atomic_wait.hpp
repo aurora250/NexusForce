@@ -1,6 +1,7 @@
-#ifndef MSTL_ATOMIC_WAIT_HPP__
-#define MSTL_ATOMIC_WAIT_HPP__
+#ifndef MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
+#define MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #include "../numeric/numeric_limits.hpp"
+#include "../config/terminate.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <intrin.h>
@@ -73,7 +74,7 @@ void platform_wait(const T* addr, const platform_wait_t val) noexcept {
 
 	if (!err) return;
 	if (errno == EAGAIN) return;
-	terminate();
+	_MSTL terminate();
 #endif
 }
 
@@ -196,7 +197,7 @@ struct waiter_pool_base {
 };
 
 struct waiter_pool : waiter_pool_base {
-	void waiter_do_wait(const platform_wait_t* addr, platform_wait_t old) const noexcept {
+	void waiter_do_wait(const platform_wait_t* addr, const platform_wait_t old) const noexcept {
 		platform_wait(addr, old);
 	}
 };
@@ -313,7 +314,7 @@ public:
 		do {
 			platform_wait_t value;
 			if (base_type::writer_do_spin_v(old, f, value)) return;
-			base_type::waiter_.waiter_do_wait(base_type::addr_, value);
+			waiter_.waiter_do_wait(base_type::addr_, value);
 		} while (_INNER atomic_compare<T>(old, f()));
 	}
 
@@ -346,10 +347,10 @@ void atomic_wait_address(const T* addr, Pred pred) noexcept {
 }
 
 template <typename T>
-void atomic_notify_address(const T* addr, bool all) noexcept {
+void atomic_notify_address(const T* addr, const bool all) noexcept {
 	_INNER bare_wait waiter(addr);
 	waiter.waiter_notify(all);
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ATOMIC_WAIT_HPP__
+#endif // MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__

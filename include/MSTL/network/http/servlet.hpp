@@ -5,7 +5,7 @@
 #include "filter.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(HttpError, LinkError, "Http Actions Failed");
+MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, link_exception, "Http Actions Failed");
 
 
 class MSTL_API servlet {

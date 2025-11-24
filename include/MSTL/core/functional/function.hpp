@@ -14,6 +14,7 @@ enum class FUNCTION_OPERATE {
 	GET_TYPE_INFO, GET_PTR, COPY_PTR, DESTROY_PTR
 };
 
+
 class __undefined_util;
 
 union __nocopy_type {
@@ -46,7 +47,7 @@ public:
     template <typename F>
 	class __manager_base {
     protected:
-		static constexpr bool stored_ = is_trivially_copyable_v<F> && sizeof(F) <= max_size_
+		static constexpr bool stored_ = is_location_invariant_v<F> && sizeof(F) <= max_size_
 			&& alignof(F) <= max_align_ && max_align_ % alignof(F) == 0;
 
     private:
@@ -312,25 +313,25 @@ public:
 
 	Res operator ()(Args&&... args) &
     noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) Exception(MemoryError("functional pointing to null."));
+		if (empty()) throw_exception(memory_exception("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
 
 	Res operator ()(Args&&... args) &&
 	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) Exception(MemoryError("functional pointing to null."));
+		if (empty()) throw_exception(memory_exception("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
 
 	Res operator ()(Args&&... args) const &
     noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) Exception(MemoryError("functional pointing to null."));
+		if (empty()) throw_exception(memory_exception("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
 
 	Res operator ()(Args&&... args) const &&
 	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) Exception(MemoryError("functional pointing to null."));
+		if (empty()) throw_exception(memory_exception("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
 
@@ -354,6 +355,63 @@ public:
 		return *const_cast<F**>(&f);
 	}
 };
+#ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
+MSTL_BEGIN_INNER__
+
+template <typename>
+struct __function_guide_helper {};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...)> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) noexcept> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) &> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) & noexcept> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) const> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) const noexcept> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) const &> {
+	using type = Result(Args...);
+};
+
+template<typename Result, typename Class, typename... Args>
+struct __function_guide_helper<Result (Class::*)(Args...) const & noexcept> {
+	using type = Result(Args...);
+};
+
+MSTL_END_INNER__
+
+template<typename Result, typename... ArgTypes>
+function(Result(*)(ArgTypes...)) -> function<Result(ArgTypes...)>;
+
+template<typename Functor, typename Signature = typename
+_INNER __function_guide_helper<decltype(&Functor::operator())>::type>
+function(Functor) -> function<Signature>;
+
+#endif
+
 
 template <typename Res, typename... Args>
 bool operator ==(const function<Res(Args...)>& f, nullptr_t) noexcept {

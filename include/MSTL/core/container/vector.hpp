@@ -1,5 +1,5 @@
-#ifndef MSTL_VECTOR_HPP__
-#define MSTL_VECTOR_HPP__
+#ifndef MSTL_CORE_CONTAINER_VECTOR_HPP__
+#define MSTL_CORE_CONTAINER_VECTOR_HPP__
 #include "../string/serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -767,4 +767,4 @@ vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_value_t<Iterator>, Al
 #endif
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_VECTOR_HPP__
+#endif // MSTL_CORE_CONTAINER_VECTOR_HPP__

@@ -368,7 +368,7 @@ constexpr long double strtold(const char* str, char** endptr) {
 MSTL_NODISCARD constexpr float32_t to_float32(const char* str, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float32_t num = _MSTL strtof(str, &endptr);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -377,7 +377,7 @@ MSTL_NODISCARD constexpr float32_t to_float32(const char* str, size_t* idx = nul
 MSTL_NODISCARD constexpr float64_t to_float64(const char* str, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float64_t num = _MSTL strtod(str, &endptr);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -386,7 +386,7 @@ MSTL_NODISCARD constexpr float64_t to_float64(const char* str, size_t* idx = nul
 MSTL_NODISCARD constexpr decimal_t to_decimal(const char* str, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const decimal_t num = _MSTL strtold(str, &endptr);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -395,7 +395,7 @@ MSTL_NODISCARD constexpr decimal_t to_decimal(const char* str, size_t* idx = nul
 MSTL_NODISCARD constexpr int64_t to_int64(const char* str, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int64_t num = _MSTL strtoll(str, &endptr, base);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -404,7 +404,7 @@ MSTL_NODISCARD constexpr int64_t to_int64(const char* str, size_t* idx = nullptr
 MSTL_NODISCARD constexpr uint64_t to_uint64(const char* str, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint64_t num = _MSTL strtoull(str, &endptr, base);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -413,7 +413,7 @@ MSTL_NODISCARD constexpr uint64_t to_uint64(const char* str, size_t* idx = nullp
 MSTL_NODISCARD constexpr int32_t to_int32(const char* str, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int32_t num = _MSTL strtol(str, &endptr, base);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;
@@ -422,7 +422,7 @@ MSTL_NODISCARD constexpr int32_t to_int32(const char* str, size_t* idx = nullptr
 MSTL_NODISCARD constexpr uint32_t to_uint32(const char* str, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint32_t num = _MSTL strtoul(str, &endptr, base);
-    if(str == endptr) Exception(TypeCastError("Convert from string failed."));
+    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
 
     if (idx) *idx = static_cast<size_t>(endptr - str);
     return num;

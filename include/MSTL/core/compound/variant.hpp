@@ -1,5 +1,5 @@
-#ifndef MSTL_VARIANT_HPP__
-#define MSTL_VARIANT_HPP__
+#ifndef MSTL_CORE_COMPOUND_VARIANT_HPP__
+#define MSTL_CORE_COMPOUND_VARIANT_HPP__
 #include "../utility/interface.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -233,7 +233,9 @@ public:
 
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     MSTL_CONSTEXPR20 variant_alternative_t<variant, Idx>& get() {
-        if(index_ != Idx) Exception(ValueError("Template index not match."));
+        if(index_ != Idx) {
+            throw_exception(value_exception("Template index not match."));
+        }
         return *reinterpret_cast<variant_alternative_t<variant, Idx>*>(union_);
     }
     template <typename T>
@@ -242,7 +244,9 @@ public:
     }
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     MSTL_CONSTEXPR20 variant_alternative_t<variant, Idx> const& get() const {
-        if(index_ != Idx) Exception(ValueError("Template index not match."));
+        if(index_ != Idx) {
+            throw_exception(value_exception("Template index not match."));
+        }
         return *reinterpret_cast<variant_alternative_t<variant, Idx> const*>(union_);
     }
     template <typename T>
@@ -441,4 +445,4 @@ MSTL_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_VARIANT_HPP__
+#endif // MSTL_CORE_COMPOUND_VARIANT_HPP__

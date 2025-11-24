@@ -206,7 +206,7 @@ public:
             const int a = hexadecimal::parse(clean_hex.substr(6, 2)).to_int64();
             return {r, g, b, a};
         } else {
-            Exception(ValueError("Invalid hex string"));
+            throw_exception(value_exception("Invalid hex string"));
         }
         return {};
     }

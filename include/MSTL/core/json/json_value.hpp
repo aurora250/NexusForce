@@ -1,11 +1,11 @@
-#ifndef MSTL_JSON_VALUE_HPP__
-#define MSTL_JSON_VALUE_HPP__
+#ifndef MSTL_CORE_JSON_JSON_VALUE_HPP__
+#define MSTL_CORE_JSON_JSON_VALUE_HPP__
 #include "../container/unordered_map.hpp"
 #include "../container/vector.hpp"
 #include "../memory/unique_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(JsonOperateError, ValueError, "Json String Parse Failed")
+MSTL_ERROR_BUILD_FINAL_CLASS(json_exception, value_exception, "Json String Parse Failed")
 
 class json_value;
 class json_null;
@@ -176,4 +176,4 @@ MSTL_NODISCARD MSTL_ALWAYS_INLINE_INLINE string json_value::to_string() const {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_JSON_VALUE_HPP__
+#endif // MSTL_CORE_JSON_JSON_VALUE_HPP__

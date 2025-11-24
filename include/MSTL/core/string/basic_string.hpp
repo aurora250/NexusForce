@@ -1,5 +1,5 @@
-#ifndef MSTL_BASIC_STRING_HPP__
-#define MSTL_BASIC_STRING_HPP__
+#ifndef MSTL_CORE_STRING_BASIC_STRING_HPP__
+#define MSTL_CORE_STRING_BASIC_STRING_HPP__
 #include "../memory/standard_allocator.hpp"
 #include "../memory/allocator_traits.hpp"
 #include "../compound/compressed_pair.hpp"
@@ -903,7 +903,7 @@ public:
             const size_type actual_size = op(data_, count);
             if (actual_size > count) {
                 size_ = old_size;
-                Exception(ValueError("resize_and_overwrite: operation returned invalid size"));
+                throw_exception(value_exception("resize_and_overwrite: operation returned invalid size"));
             }
             size_ = actual_size;
             null_terminate();
@@ -1297,7 +1297,10 @@ explicit basic_string(basic_string_view<CharT, Traits>, const Alloc & = Alloc())
 -> basic_string<CharT, Traits, Alloc>;
 
 template <typename CharT, typename Traits, typename Alloc = allocator<CharT>>
-basic_string(basic_string_view<CharT, Traits>, alloc_size_t<Alloc>, alloc_size_t<Alloc>, const Alloc & = Alloc())
+basic_string(basic_string_view<CharT, Traits>,
+    typename allocator_traits<Alloc>::size_type,
+    typename allocator_traits<Alloc>::size_type,
+    const Alloc & = Alloc())
 -> basic_string<CharT, Traits, Alloc>;
 #endif
 
@@ -1556,4 +1559,4 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BASIC_STRING_HPP__
+#endif // MSTL_CORE_STRING_BASIC_STRING_HPP__

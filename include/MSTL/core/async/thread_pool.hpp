@@ -1,13 +1,9 @@
-#ifndef MSTL_THREAD_POOL_HPP__
-#define MSTL_THREAD_POOL_HPP__
+#ifndef MSTL_CORE_ASYNC_THREAD_POOL_HPP__
+#define MSTL_CORE_ASYNC_THREAD_POOL_HPP__
 #include "../container/queue.hpp"
 #include "../container/unordered_map.hpp"
-#include "../functional/function.hpp"
-#include "../memory/shared_ptr.hpp"
-#include "atomic.hpp"
-#include "thread.hpp"
 #include "condition_variable.hpp"
-#include <future>
+#include "packaged_task.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -118,18 +114,18 @@ public:
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
 decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 	using Result = decltype(func(_MSTL forward<Args>(args)...));
-	auto task = _MSTL make_shared<std::packaged_task<Result()>>(
+	auto task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
 		[func = _MSTL forward<Func>(func), args = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
 			return _MSTL apply(func, args);
 		}
 	);
-	std::future<Result> res = task->get_future();
+	_MSTL future<Result> res = task->get_future();
 
 	_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
 	if (!not_full_.wait_for(lock, _MSTL chrono::seconds(1), [&]()->bool {
 		return task_queue_.size() < task_threshhold_;
 	})) {
-		auto task_ = _MSTL make_shared<std::packaged_task<Result()>>([]() -> Result { return Result(); });
+		auto task_ = _MSTL make_shared<_MSTL packaged_task<Result()>>([]() -> Result { return Result(); });
 		(*task_)();
 		return task_->get_future();
 	}
@@ -149,4 +145,4 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_THREAD_POOL_HPP__
+#endif // MSTL_CORE_ASYNC_THREAD_POOL_HPP__

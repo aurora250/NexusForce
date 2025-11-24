@@ -4,10 +4,14 @@ MSTL_BEGIN_NAMESPACE__
 
 mysql_prepared_result::mysql_prepared_result(MYSQL_STMT* stmt)
     : stmt_(stmt) {
-    if (!stmt_) Exception(DatabasePreparedStmtError("Invalid MYSQL_STMT pointer"));
+    if (!stmt_) {
+        throw_exception(database_prepared_stmt_exception("Invalid MYSQL_STMT pointer"));
+    }
 
     metadata_ = mysql_stmt_result_metadata(stmt_);
-    if (!metadata_) Exception(DatabasePreparedStmtError("No result metadata from prepared statement"));
+    if (!metadata_) {
+        throw_exception(database_prepared_stmt_exception("No result metadata from prepared statement"));
+    }
 
     column_count_ = mysql_num_fields(metadata_);
 
@@ -20,10 +24,10 @@ mysql_prepared_result::mysql_prepared_result(MYSQL_STMT* stmt)
     initialize_bindings();
 
     if (mysql_stmt_bind_result(stmt_, bind_results_->data()) != 0) {
-        Exception(DatabasePreparedStmtError(mysql_stmt_error(stmt_)));
+        throw_exception(database_prepared_stmt_exception(mysql_stmt_error(stmt_)));
     }
     if (mysql_stmt_store_result(stmt_) != 0) {
-        Exception(DatabasePreparedStmtError(mysql_stmt_error(stmt_)));
+        throw_exception(database_prepared_stmt_exception(mysql_stmt_error(stmt_)));
     }
 
     row_count_ = mysql_stmt_num_rows(stmt_);
@@ -137,7 +141,7 @@ bool mysql_prepared_result::get_bool(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_TINY) {
-        Exception(DatabaseTypeCastError("Database type cast to bool mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to bool mismatch"));
     }
     if ((*is_null_)[n]) return false;
     return *reinterpret_cast<const int8_t*>((*buffers_)[n].data()) != 0;
@@ -152,7 +156,7 @@ int16_t mysql_prepared_result::get_int16(const size_type n) const {
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY)) {
-        Exception(DatabaseTypeCastError("Database type cast to int16 mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to int16 mismatch"));
     }
 
     if ((*is_null_)[n]) return 0;
@@ -168,7 +172,7 @@ int32_t mysql_prepared_result::get_int32(const size_type n) const {
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_LONG || type == MYSQL_TYPE_INT24 ||
           type == MYSQL_TYPE_SHORT || type == MYSQL_TYPE_TINY)) {
-        Exception(DatabaseTypeCastError("Database type cast to int32 mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to int32 mismatch"));
     }
 
     if ((*is_null_)[n]) return 0;
@@ -188,7 +192,7 @@ int64_t mysql_prepared_result::get_int64(const size_type n) const {
     if (!(type == MYSQL_TYPE_LONGLONG || type == MYSQL_TYPE_LONG ||
           type == MYSQL_TYPE_INT24 || type == MYSQL_TYPE_SHORT ||
           type == MYSQL_TYPE_TINY)) {
-        Exception(DatabaseTypeCastError("Database type cast to int64 mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to int64 mismatch"));
     }
 
     if ((*is_null_)[n]) return 0;
@@ -208,7 +212,7 @@ float32_t mysql_prepared_result::get_float32(const size_type n) const {
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
     if (type != MYSQL_TYPE_FLOAT) {
-        Exception(DatabaseTypeCastError("Database type cast to float32 mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to float32 mismatch"));
     }
 
     if ((*is_null_)[n]) return 0.0f;
@@ -220,7 +224,7 @@ float64_t mysql_prepared_result::get_float64(const size_type n) const {
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_DOUBLE || type == MYSQL_TYPE_FLOAT)) {
-        Exception(DatabaseTypeCastError("Database type cast to float64 mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to float64 mismatch"));
     }
 
     if ((*is_null_)[n]) return 0.0;
@@ -235,7 +239,7 @@ decimal_t mysql_prepared_result::get_decimal(const size_type n) const {
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_DECIMAL || type == MYSQL_TYPE_NEWDECIMAL)) {
-        Exception(DatabaseTypeCastError("Database type cast to decimal mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to decimal mismatch"));
     }
 
     if ((*is_null_)[n]) return {};
@@ -248,7 +252,7 @@ vector<char> mysql_prepared_result::get_blob(const size_type n) const {
     const auto type = column_types_->at(n);
     if (!(type == MYSQL_TYPE_BLOB || type == MYSQL_TYPE_TINY_BLOB ||
           type == MYSQL_TYPE_MEDIUM_BLOB || type == MYSQL_TYPE_LONG_BLOB)) {
-        Exception(DatabaseTypeCastError("Database type cast to blob mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to blob mismatch"));
     }
 
     if ((*is_null_)[n]) return {};
@@ -259,7 +263,7 @@ string mysql_prepared_result::get_set(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_SET) {
-        Exception(DatabaseTypeCastError("Database type cast to SET mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to SET mismatch"));
     }
 
     if ((*is_null_)[n]) return {};
@@ -270,7 +274,7 @@ uint64_t mysql_prepared_result::get_bit(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_BIT) {
-        Exception(DatabaseTypeCastError("Database type cast to BIT mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to BIT mismatch"));
     }
     if ((*is_null_)[n]) return 0;
 
@@ -286,7 +290,7 @@ date mysql_prepared_result::get_date(const size_type n) const {
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
 
     if (column_types_->at(n) != MYSQL_TYPE_DATE) {
-        Exception(DatabaseTypeCastError("Database type cast to date mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to date mismatch"));
     }
     if ((*is_null_)[n]) return date();
     const auto mt = reinterpret_cast<const MYSQL_TIME*>((*buffers_)[n].data());
@@ -297,7 +301,7 @@ time mysql_prepared_result::get_time(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_TIME) {
-        Exception(DatabaseTypeCastError("Database type cast to time mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to time mismatch"));
     }
     if ((*is_null_)[n]) return time{};
     const auto mt = reinterpret_cast<const MYSQL_TIME*>((*buffers_)[n].data());
@@ -308,7 +312,7 @@ datetime mysql_prepared_result::get_datetime(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_DATETIME) {
-        Exception(DatabaseTypeCastError("Database type cast to datetime mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to datetime mismatch"));
     }
     if ((*is_null_)[n]) return {};
     const auto mt = reinterpret_cast<const MYSQL_TIME*>((*buffers_)[n].data());
@@ -319,7 +323,7 @@ timestamp mysql_prepared_result::get_timestamp(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if (column_types_->at(n) != MYSQL_TYPE_TIMESTAMP) {
-        Exception(DatabaseTypeCastError("Database type cast to timestamp mismatch"));
+        throw_exception(database_typecast_exception("Database type cast to timestamp mismatch"));
     }
     if ((*is_null_)[n]) return {};
     const auto mt = reinterpret_cast<const MYSQL_TIME*>((*buffers_)[n].data());

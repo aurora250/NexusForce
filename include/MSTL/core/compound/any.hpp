@@ -1,8 +1,8 @@
-#ifndef MSTL_ANY_HPP__
-#define MSTL_ANY_HPP__
+#ifndef MSTL_CORE_COMPOUND_ANY_HPP__
+#define MSTL_CORE_COMPOUND_ANY_HPP__
 #include "../config/exception.hpp"
 #include "../utility/interface.hpp"
-#include "../utility/tags.hpp"
+#include "../typeinfo/tags.hpp"
 #include <typeinfo>
 #include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
@@ -17,7 +17,7 @@ template <typename T, typename U>
 const T* __any_cast_aux_dispatch_impl(const _MSTL any* value, __any_cast_true_tag) noexcept;
 MSTL_END_INNER__
 
-MSTL_ERROR_BUILD_DERIVED_CLASS(AnyCastError, TypeCastError, "Cast From any Type Failed.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(anycast_exception, typecast_exception, "Cast From any Type Failed.")
 
 
 class MSTL_API any : public iswappable<any> {
@@ -234,7 +234,7 @@ T any_cast(const any& value) {
     auto ptr = any_cast<U>(&value);
     if (ptr)
         return static_cast<T>(*ptr);
-    Exception(AnyCastError());
+    throw_exception(anycast_exception());
     return T();
 }
 
@@ -302,4 +302,4 @@ void any::external_manage<T>::manage(const ANY_INNER_OPERATION oper, const any* 
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ANY_HPP__
+#endif // MSTL_CORE_COMPOUND_ANY_HPP__

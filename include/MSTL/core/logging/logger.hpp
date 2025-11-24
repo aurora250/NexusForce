@@ -1,5 +1,5 @@
-#ifndef MSTL_LOGGER_HPP__
-#define MSTL_LOGGER_HPP__
+#ifndef MSTL_CORE_LOGGING_LOGGER_HPP__
+#define MSTL_CORE_LOGGING_LOGGER_HPP__
 #include "../container/queue.hpp"
 #include "../functional/function.hpp"
 #include "../memory/shared_ptr.hpp"
@@ -96,4 +96,4 @@ public:
 #define MSTL_LOG_FATAL(msg) logger::instance().fatal(msg, __FILE__, __func__, __LINE__);
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_LOGGER_HPP__
+#endif // MSTL_CORE_LOGGING_LOGGER_HPP__

@@ -1,5 +1,5 @@
-#ifndef MSTL_ATOMIC_HPP__
-#define MSTL_ATOMIC_HPP__
+#ifndef MSTL_CORE_ASYNC_ATOMIC_HPP__
+#define MSTL_CORE_ASYNC_ATOMIC_HPP__
 #include "atomic_base.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -1530,4 +1530,4 @@ T atomic_fetch_xor(volatile atomic_base<T>* flag, type_identity_t<T> value) noex
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ATOMIC_HPP__
+#endif // MSTL_CORE_ASYNC_ATOMIC_HPP__

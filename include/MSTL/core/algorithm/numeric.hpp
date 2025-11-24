@@ -1,7 +1,7 @@
-#ifndef MSTL_NUMERIC_HPP__
-#define MSTL_NUMERIC_HPP__
+#ifndef MSTL_CORE_ALGORITHM_NUMERIC_HPP__
+#define MSTL_CORE_ALGORITHM_NUMERIC_HPP__
 #include "../functional/functor.hpp"
-#include "../utility/concepts.hpp"
+#include "../typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename T, typename BinaryOperation,
@@ -78,4 +78,4 @@ MSTL_CONSTEXPR20 void iota(Iterator first, Iterator last, T value) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_NUMERIC_HPP__
+#endif // MSTL_CORE_ALGORITHM_NUMERIC_HPP__

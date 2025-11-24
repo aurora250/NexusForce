@@ -5,15 +5,19 @@ MSTL_BEGIN_NAMESPACE__
 
 mysql_prepared_statement::mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, const string_view sql)
 : conn_(conn) {
-    if (!conn_) Exception(DatabasePreparedStmtError("Invalid MySQL connection pointer"));
+    if (!conn_) {
+        throw_exception(database_prepared_stmt_exception("Invalid MySQL connection pointer"));
+    }
     stmt_ = _MSTL_MYSQL mysql_stmt_init(conn_);
-    if (!stmt_) Exception(DatabasePreparedStmtError("mysql_stmt_init failed"));
+    if (!stmt_) {
+        throw_exception(database_prepared_stmt_exception("mysql_stmt_init failed"));
+    }
 
     if (_MSTL_MYSQL mysql_stmt_prepare(stmt_, sql.data(), sql.size())) {
         const string_view err = _MSTL_MYSQL mysql_stmt_error(stmt_);
         _MSTL_MYSQL mysql_stmt_close(stmt_);
         stmt_ = nullptr;
-        Exception(DatabasePreparedStmtError(err.data()));
+        throw_exception(database_prepared_stmt_exception(err.data()));
     }
 
     param_count_ = _MSTL_MYSQL mysql_stmt_param_count(stmt_);

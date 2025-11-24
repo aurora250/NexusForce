@@ -31,7 +31,7 @@ void postgresql_tb_result::init_column_names() const {
 
 bool postgresql_tb_result::is_null(const size_type index) const {
     if (static_cast<int>(index) >= column_count_) {
-        Exception(DatabaseError("Column index out of range"));
+        throw_exception(database_exception("Column index out of range"));
     }
     return _MSTL_POSTGRESQL PQgetisnull(
         result_, current_row_, static_cast<int>(index)) != 0;

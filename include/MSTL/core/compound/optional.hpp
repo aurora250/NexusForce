@@ -1,38 +1,21 @@
-#ifndef MSTL_OPTIONAL_HPP__
-#define MSTL_OPTIONAL_HPP__
-#include "../string/serialize.hpp"
+#ifndef MSTL_CORE_COMPOUND_OPTIONAL_HPP__
+#define MSTL_CORE_COMPOUND_OPTIONAL_HPP__
+#include "../memory/construct.hpp"
+#include "../config/exception.hpp"
+#include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(OptionalAccessError, MemoryError, "Access the Null Value of Optional.")
+MSTL_ERROR_BUILD_FINAL_CLASS(OptionalAccessError, memory_exception, "Access the Null Value of Optional.")
 
-struct nullopt_t : iserialize<nullopt_t> {
+
+struct nullopt_t {
     constexpr nullopt_t() noexcept = default;
-    MSTL_CONSTEXPR20 ~nullopt_t() = default;
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return {"nullopt"};
-    }
-
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 nullopt_t parse(const string_view str) {
-        if (str != "nullopt") return {};
-        return {};
-    }
-
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
-        try {
-            *this = self::parse(str);
-            return true;
-        }
-        catch (...) {
-            return false;
-        }
-    }
 };
 static constexpr nullopt_t nullopt;
 
 
 template <typename T>
-class optional : public iserialize<optional<T>> {
+class optional {
     static_assert(!is_any_of_v<remove_cv_t<T>, nullopt_t, _MSTL_TAG inplace_construct_tag>,
         "optional do not contains _MSTL_TAG nullopt_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
@@ -258,19 +241,19 @@ public:
     }
 
     constexpr const_reference value() const & {
-        if (!have_value_) Exception(OptionalAccessError());
+        if (!have_value_) throw_exception(OptionalAccessError());
         return value_;
     }
     constexpr reference value() & {
-        if (!have_value_) Exception(OptionalAccessError());
+        if (!have_value_) throw_exception(OptionalAccessError());
         return value_;
     }
     constexpr const value_type&& value() const && {
-        if (!have_value_) Exception(OptionalAccessError());
+        if (!have_value_) throw_exception(OptionalAccessError());
         return _MSTL move(value_);
     }
     constexpr value_type&& value() && {
-        if (!have_value_) Exception(OptionalAccessError());
+        if (!have_value_) throw_exception(OptionalAccessError());
         return _MSTL move(value_);
     }
 
@@ -465,28 +448,6 @@ public:
             x.reset();
         }
     }
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        if (this->have_value_) {
-            return _MSTL to_string(this->operator*());
-        }
-        return _MSTL to_string(nullopt);
-    }
-
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
-        return iserialize<package_t<T>>::parse(str);
-    }
-
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
-        try {
-            *this = self::parse(str);
-            return true;
-        }
-        catch (...) {
-            reset();
-            return false;
-        }
-    }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename T>
@@ -513,4 +474,4 @@ noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_OPTIONAL_HPP__
+#endif // MSTL_CORE_COMPOUND_OPTIONAL_HPP__

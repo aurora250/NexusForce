@@ -3,8 +3,8 @@
 #include "../core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(DatabaseTypeCastError, DatabaseError, "Database Type Cast Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(DatabasePreparedStmtError, DatabaseError, "Database Prepared Statement Operations Error.")
+MSTL_ERROR_BUILD_FINAL_CLASS(database_typecast_exception, database_exception, "Database Type Cast Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(database_prepared_stmt_exception, database_exception, "Database Prepared Statement Operations Error.")
 
 
 enum class DB_TYPE {

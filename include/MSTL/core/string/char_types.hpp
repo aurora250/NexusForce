@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_STRING_CHAR_TYPES_HPP__
 #define MSTL_CORE_STRING_CHAR_TYPES_HPP__
-#include "../config/types.hpp"
-#include "../utility/type_traits.hpp"
+#include "../typeinfo/types.hpp"
+#include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_CONSTANTS__

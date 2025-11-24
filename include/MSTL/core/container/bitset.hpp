@@ -1,5 +1,5 @@
-#ifndef MSTL_BITSET_HPP__
-#define MSTL_BITSET_HPP__
+#ifndef MSTL_CORE_CONTAINER_BITSET_HPP__
+#define MSTL_CORE_CONTAINER_BITSET_HPP__
 #include "../memory/bit.hpp"
 #include "array.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -56,7 +56,7 @@ public:
             } else if (c == zero) {
                 reset(pos);
             } else {
-                Exception(ValueError("bitset string ctor: invalid character"));
+                throw_exception(value_exception("bitset string ctor: invalid character"));
             }
         }
     }
@@ -264,8 +264,9 @@ public:
         MSTL_IF_CONSTEXPR (N > sizeof(unsigned long) * 8) {
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ulong_blocks; i < block_count; ++i) {
-                if (blocks[i] != 0)
-                    Exception(ValueError("bitset to_ulong overflow"));
+                if (blocks[i] != 0) {
+                    throw_exception(value_exception("bitset to_ulong overflow"));
+                }
             }
 
             constexpr size_t ulong_bits = sizeof(unsigned long) * 8;
@@ -274,7 +275,7 @@ public:
                 constexpr size_t last_ulong_block = ulong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ulong_block] & mask) != 0) {
-                    Exception(ValueError("bitset to_ulong overflow"));
+                    throw_exception(value_exception("bitset to_ulong overflow"));
                 }
             }
         }
@@ -297,8 +298,9 @@ public:
         MSTL_IF_CONSTEXPR (N > sizeof(unsigned long long) * 8) {
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ullong_blocks; i < block_count; ++i) {
-                if (blocks[i] != 0)
-                    Exception(ValueError("bitset to_ullong overflow"));
+                if (blocks[i] != 0) {
+                    throw_exception(value_exception("bitset to_ullong overflow"));
+                }
             }
 
             constexpr size_t ullong_bits = sizeof(unsigned long long) * 8;
@@ -307,7 +309,7 @@ public:
                 constexpr size_t last_ullong_block = ullong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ullong_block] & mask) != 0) {
-                    Exception(ValueError("bitset to_ullong overflow"));
+                    throw_exception(value_exception("bitset to_ullong overflow"));
                 }
             }
         }
@@ -388,4 +390,4 @@ bitset<N> operator ^(const bitset<N>& lhs, const bitset<N>& rhs) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_BITSET_HPP__
+#endif // MSTL_CORE_CONTAINER_BITSET_HPP__

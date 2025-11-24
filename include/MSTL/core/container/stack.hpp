@@ -1,5 +1,5 @@
-#ifndef MSTL_STACK_HPP__
-#define MSTL_STACK_HPP__
+#ifndef MSTL_CORE_CONTAINER_STACK_HPP__
+#define MSTL_CORE_CONTAINER_STACK_HPP__
 #include "deque.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -85,4 +85,4 @@ stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_STACK_HPP__
+#endif // MSTL_CORE_CONTAINER_STACK_HPP__

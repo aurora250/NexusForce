@@ -128,7 +128,7 @@ Defines macros for operating system platform, hosting platform, bus width, and C
 
 Defines a series of functions to output variable argument lists to formatted strings.
 
-- [type_traits](include/MSTL/core/utility/type_traits.hpp)
+- [type_traits](include/MSTL/core/typeinfo/type_traits.hpp)
 
 Defines type trait constants, using template metaprogramming to deduce type information at compile time.
 
@@ -168,7 +168,7 @@ Defines the numeric type information class `numeric_limits`, providing mathemati
 
 Defines the mutex class `mutex` and the scoped locking class `lock_guard`.
 
-- [concepts](include/MSTL/core/utility/concepts.hpp)
+- [concepts](include/MSTL/core/typeinfo/concepts.hpp)
 
 Defines common constraints and iterator type judgment trait constants.
 
@@ -266,7 +266,7 @@ Defines the string formatting helper class `formatter` and the formatting functi
 
 Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`, `SHA256`, and `AES256`.
 
-- [check_type](include/MSTL/core/utility/check_type.hpp)
+- [check_type](include/MSTL/core/typeinfo/check_type.hpp)
 
 Defines the type information analysis function `check_type` to standardize type information across compilers.
 
@@ -286,7 +286,7 @@ Defines the hexadecimal class `hexadecimal` and its formatting helper class.
 
 Defines the color class `color`.
 
-- [console](include/MSTL/core/utility/console.hpp)
+- [console](include/MSTL/core/system/console.hpp)
 
 Defines the IO base class `io_base` and the IO console class `console`.
 
@@ -354,7 +354,7 @@ Defines the ordered dictionary classes `map` and `multimap`.
 
 Defines the ordered set classes `set` and `multiset`.
 
-- [file](include/MSTL/core/utility/file.hpp)
+- [file](include/MSTL/core/system/file.hpp)
 
 Defines the file class `file`, which uses an 8KB buffer to handle high-volume small data read/write operations.
 

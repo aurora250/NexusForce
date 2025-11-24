@@ -1,7 +1,7 @@
-#ifndef MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__
-#define MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__
+#ifndef MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
+#define MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
 #include "../utility/interface.hpp"
-#include "../utility/tags.hpp"
+#include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename IfEmpty, typename T, bool Compressed = is_empty_v<IfEmpty> && !is_final_v<IfEmpty>>
@@ -162,4 +162,4 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__
+#endif // MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__

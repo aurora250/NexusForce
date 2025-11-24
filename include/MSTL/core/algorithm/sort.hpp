@@ -1,5 +1,5 @@
-#ifndef MSTL_SORT_HPP__
-#define MSTL_SORT_HPP__
+#ifndef MSTL_CORE_ALGORITHM_SORT_HPP__
+#define MSTL_CORE_ALGORITHM_SORT_HPP__
 #include "algo.hpp"
 #include "leonardo_heap.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -129,7 +129,7 @@ MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp,
     for (Iterator it = first; it != last; ++it) {
         auto value = mapper(*it);
         if (value < min_val || value > max_val) {
-            Exception(StopIterator("element out of range for counting sort."));
+            throw_exception(iterator_exception("element out of range for counting sort."));
         }
         ++count[static_cast<size_t>(value - min_val)];
     }
@@ -365,4 +365,4 @@ void monkey_sort(Iterator first, Iterator last) {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_SORT_HPP__
+#endif // MSTL_CORE_ALGORITHM_SORT_HPP__

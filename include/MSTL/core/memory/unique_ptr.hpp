@@ -2,7 +2,6 @@
 #define MSTL_CORE_MEMORY_UNIQUE_PTR_HPP__
 #include "../compound/tuple.hpp"
 #include "../functional/functor.hpp"
-#include "../config/assertion.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
@@ -240,11 +239,9 @@ public:
 
     MSTL_CONSTEXPR20 add_lvalue_reference_t<element_type> operator *() const
     noexcept(noexcept(*_MSTL declval<pointer>())) {
-	    MSTL_DEBUG_VERIFY(get() != pointer(), "_MSTL add_lvalue_reference_t<element_type> failed");
 	    return *get();
     }
     MSTL_CONSTEXPR20 pointer operator ->() const noexcept {
-	    MSTL_DEBUG_VERIFY(get() != pointer(), "_MSTL operator->() failed");
 	    return get();
     }
 

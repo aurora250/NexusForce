@@ -1,5 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_CALL_ONCE_HPP__
 #define MSTL_CORE_ASYNC_CALL_ONCE_HPP__
+#include "../functional/invoke.hpp"
 #include "mutex.hpp"
 #include "atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -14,7 +15,7 @@ public:
     once_flag& operator=(once_flag&&) = delete;
 
 private:
-    template<typename Callable, typename... Args>
+    template <typename Callable, typename... Args>
     friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
 
     atomic_bool state_;
@@ -28,7 +29,8 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     }
     lock_guard<mutex> lock(flag.mtx_);
     if (!flag.state_.load(memory_order_relaxed)) {
-        _MSTL forward<Callable>(func)(_MSTL forward<Args>(args)...);
+        _MSTL invoke_r<invoke_result_t<Callable, Args...>, Callable, Args...>(
+            _MSTL forward<Callable>(func), _MSTL forward<Args>(args)...);
         flag.state_.store(true, memory_order_release);
     }
 }

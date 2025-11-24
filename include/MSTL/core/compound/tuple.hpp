@@ -1,8 +1,7 @@
-#ifndef MSTL_TUPLE_HPP__
-#define MSTL_TUPLE_HPP__
+#ifndef MSTL_CORE_COMPOUND_TUPLE_HPP__
+#define MSTL_CORE_COMPOUND_TUPLE_HPP__
 #include "../compound/pair.hpp"
 #include "../functional/hash.hpp"
-#include "../utility/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -573,4 +572,4 @@ constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_s
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_TUPLE_HPP__
+#endif // MSTL_CORE_COMPOUND_TUPLE_HPP__

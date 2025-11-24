@@ -1,4 +1,4 @@
-#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/config/undef_cmacro.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <termios.h>
@@ -91,7 +91,7 @@ void sys_console::init_console() {
     in_ = ::GetStdHandle(STD_INPUT_HANDLE);
 
     if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
-        Exception(DeviceOperateError("Failed to get console handles"));
+        throw_exception(device_exception("Failed to get console handles"));
     }
 
     ::SetConsoleOutputCP(CP_UTF8);

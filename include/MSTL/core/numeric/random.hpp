@@ -1,6 +1,6 @@
-#ifndef MSTL_RANDOM_HPP__
-#define MSTL_RANDOM_HPP__
-#include "../config/types.hpp"
+#ifndef MSTL_CORE_NUMERIC_RANDOM_HPP__
+#define MSTL_CORE_NUMERIC_RANDOM_HPP__
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 // based on LCD algorithm to generate pseudorandom number
@@ -104,4 +104,4 @@ private:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_RANDOM_HPP__
+#endif // MSTL_CORE_NUMERIC_RANDOM_HPP__

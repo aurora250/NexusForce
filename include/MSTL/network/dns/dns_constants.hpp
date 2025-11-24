@@ -1,6 +1,6 @@
 #ifndef MSTL_DNS_CONSTANTS_HPP__
 #define MSTL_DNS_CONSTANTS_HPP__
-#include "MSTL/core/config/types.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class DNS_RECORD : uint16_t {

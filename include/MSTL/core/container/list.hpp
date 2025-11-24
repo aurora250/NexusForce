@@ -1,5 +1,5 @@
-#ifndef MSTL_LIST_HPP__
-#define MSTL_LIST_HPP__
+#ifndef MSTL_CORE_CONTAINER_LIST_HPP__
+#define MSTL_CORE_CONTAINER_LIST_HPP__
 #include "../string/serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -348,8 +348,6 @@ public:
 
     template <typename InputIterator>
     void insert(iterator position, InputIterator first, InputIterator last) {
-        range_check(position);
-        Exception(_MSTL distance(first, last) >= 0, StopIterator("deque insert out of ranges."));
         for (--last; first != last; --last)
             position = insert(position, *last);
         insert(position, *last);
@@ -359,7 +357,6 @@ public:
     }
 
     void insert(iterator position, size_type n, const T& x) {
-        range_check(position);
         link_type prev = position.node_->prev_;
         while (n--) {
             link_type temp = this->create_node(x);
@@ -403,10 +400,6 @@ public:
     }
 
     void transfer(iterator position, iterator first, iterator last) {
-        range_check(position);
-        range_check(first);
-        range_check(last);
-        Exception(_MSTL distance(first, last) >= 0, StopIterator("list transfer index out of ranges."));
         if (position == last) return;
         last.node_->prev_->next_ = position.node_;
         first.node_->prev_->next_ = last.node_;
@@ -591,4 +584,4 @@ list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_value_t<Iterator>, Alloc>
 #endif
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_LIST_HPP__
+#endif // MSTL_CORE_CONTAINER_LIST_HPP__

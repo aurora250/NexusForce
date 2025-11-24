@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_UTILITY_NUMERIC_TYPES_HPP__
-#define MSTL_CORE_UTILITY_NUMERIC_TYPES_HPP__
+#ifndef MSTL_CORE_NUMERIC_NUMERIC_TYPES_HPP__
+#define MSTL_CORE_NUMERIC_NUMERIC_TYPES_HPP__
 #include "math.hpp"
 #include "numeric_limits.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -65,4 +65,4 @@ MSTL_CONST_FUNCTION constexpr bool is_negative(const T x) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_UTILITY_NUMERIC_TYPES_HPP__
+#endif // MSTL_CORE_NUMERIC_NUMERIC_TYPES_HPP__

@@ -1,8 +1,8 @@
-#ifndef MSTL_CORE_UTILITY_PAIR_HPP__
-#define MSTL_CORE_UTILITY_PAIR_HPP__
+#ifndef MSTL_CORE_COMPOUND_PAIR_HPP__
+#define MSTL_CORE_COMPOUND_PAIR_HPP__
 #include "../utility/integer_sequence.hpp"
 #include "../utility/interface.hpp"
-#include "../utility/tags.hpp"
+#include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename...>
@@ -447,4 +447,4 @@ MSTL_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_UTILITY_PAIR_HPP__
+#endif // MSTL_CORE_COMPOUND_PAIR_HPP__

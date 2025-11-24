@@ -1,9 +1,9 @@
 #ifndef MSTL_CORE_MEMORY_BUILTIN_ALLOCATOR_HPP__
 #define MSTL_CORE_MEMORY_BUILTIN_ALLOCATOR_HPP__
-#include "../config/types.hpp"
 #include "../config/exception.hpp"
-#include "../utility/type_traits.hpp"
-#include "../utility/tags.hpp"
+#include "../typeinfo/types.hpp"
+#include "../typeinfo/type_traits.hpp"
+#include "../typeinfo/tags.hpp"
 #include <cstdlib> // std::malloc
 MSTL_BEGIN_NAMESPACE__
 
@@ -32,9 +32,8 @@ public:
         pointer ptr = nullptr;
         try {
             ptr = static_cast<pointer>(std::malloc(n * sizeof(T)));
-        }
-        catch (...) {
-            Exception(AllocateError());
+        } catch (...) {
+            throw_exception(allocate_exception());
         }
         return ptr;
     }
@@ -81,9 +80,8 @@ public:
         pointer ptr = nullptr;
         try {
             ptr = static_cast<pointer>(operator new(n * sizeof(T)));
-        }
-        catch (...) {
-            Exception(AllocateError());
+        } catch (...) {
+            throw_exception(allocate_exception());
         }
         return ptr;
     }

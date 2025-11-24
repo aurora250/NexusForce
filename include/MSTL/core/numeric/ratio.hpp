@@ -1,5 +1,5 @@
-#ifndef MSTL_RATIO_HPP__
-#define MSTL_RATIO_HPP__
+#ifndef MSTL_CORE_NUMERIC_RATIO_HPP__
+#define MSTL_CORE_NUMERIC_RATIO_HPP__
 #include "static_numeric.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -261,4 +261,4 @@ using peta  = ratio<1000000000000000,    1>;
 using exa   = ratio<1000000000000000000, 1>;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_RATIO_HPP__
+#endif // MSTL_CORE_NUMERIC_RATIO_HPP__

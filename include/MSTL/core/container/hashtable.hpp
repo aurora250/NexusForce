@@ -1,5 +1,5 @@
-#ifndef MSTL_HASHTABLE_HPP__
-#define MSTL_HASHTABLE_HPP__
+#ifndef MSTL_CORE_CONTAINER_HASHTABLE_HPP__
+#define MSTL_CORE_CONTAINER_HASHTABLE_HPP__
 #include "../config/undef_cmacro.hpp"
 #include "vector.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -270,7 +270,7 @@ private:
         }
         catch (...) {
             this->delete_node(n);
-            Exception(MemoryError("hashtable construct node failed."));
+            throw_exception(memory_exception("hashtable construct node failed."));
         }
         return n;
     }
@@ -580,7 +580,7 @@ public:
 
         const size_type n = next_size(new_size);
         if (n < target) {
-            Exception(ValueError("hashtable size exceeds max count"));
+            throw_exception(value_exception("hashtable size exceeds max count"));
         }
 
         vector<node_type*> new_buckets;
@@ -628,7 +628,7 @@ public:
 
         const double needed = static_cast<double>(count) / max_load_factor();
         if (needed > static_cast<double>(max_bucket_count())) {
-            Exception(ValueError("hashtable size exceeds max count"));
+            throw_exception(value_exception("hashtable size exceeds max count"));
         }
         const size_type n = static_cast<size_type>(_MSTL ceil(needed));
         rehash(n);
@@ -940,4 +940,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_HASHTABLE_HPP__
+#endif // MSTL_CORE_CONTAINER_HASHTABLE_HPP__

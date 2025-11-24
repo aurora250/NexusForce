@@ -1,7 +1,8 @@
-#ifndef MSTL_ATOMIC_BASE_HPP__
-#define MSTL_ATOMIC_BASE_HPP__
-#include "atomic_wait.hpp"
+#ifndef MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
+#define MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
 #include "../config/assertion.hpp"
+#include "../memory/memory.hpp"
+#include "atomic_wait.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class memory_order : int32_t {
@@ -53,7 +54,7 @@ constexpr bool is_valid_cmpexch_failure_order(const memory_order mo) noexcept {
 }
 
 
-MSTL_INLINE17 constexpr uint8_t ATOMIC_TS_TRUEVAL = 1;
+MSTL_INLINE17 constexpr uint8_t ATOMIC_TS_TRUEVAL = 4;
 MSTL_INLINE17 constexpr bool ATOMIC_TS_IS_BOOL = ATOMIC_TS_TRUEVAL == 1;
 
 
@@ -605,7 +606,7 @@ struct atomic_flag {
 	~atomic_flag() noexcept = default;
 
 	constexpr atomic_flag(const value_type flag) noexcept
-	: flag_{static_cast<value_type>(flag ? ATOMIC_TS_TRUEVAL : 0)}  {}
+	: flag_{static_cast<value_type>(flag ? 1 : 0)}  {}
 
 	MSTL_ALWAYS_INLINE bool
 	test_and_set(memory_order mo = memory_order_seq_cst) noexcept {
@@ -618,8 +619,8 @@ struct atomic_flag {
 		return __atomic_test_and_set(&flag_, static_cast<int32_t>(mo));
 #else
 		const long old_val = ::_InterlockedExchange(
-			reinterpret_cast<volatile long*>(&flag_),
-			static_cast<long>(ATOMIC_TS_TRUEVAL));
+			reinterpret_cast<volatile value_type*>(&flag_),
+			static_cast<long>(1));
 		if (mo == memory_order_seq_cst) ::_ReadWriteBarrier();
 		return old_val != 0;
 #endif
@@ -637,8 +638,7 @@ struct atomic_flag {
 		__atomic_load(&flag_, &value, static_cast<int32_t>(mo));
 		return value == ATOMIC_TS_TRUEVAL;
 #else
-		const long as_bytes = ::__iso_volatile_load32(
-			reinterpret_cast<const volatile int*>(&flag_));
+		const long as_bytes = flag_;
 		if (mo != memory_order_relaxed) ::_ReadWriteBarrier();
 		return as_bytes != 0;
 #endif
@@ -651,7 +651,7 @@ struct atomic_flag {
 
 	ATOMIC_ALWAYS_INLINE void
 	wait(bool old, memory_order mo = memory_order_seq_cst) const volatile noexcept {
-		const value_type value = old ? ATOMIC_TS_TRUEVAL : 0;
+		const value_type value = old ? 1 : 0;
 		_MSTL atomic_wait_address_v(
 			const_cast<const value_type*>(&flag_), value,
 			[this, mo] { return this->test(mo); }
@@ -1918,4 +1918,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ATOMIC_BASE_HPP__
+#endif // MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__

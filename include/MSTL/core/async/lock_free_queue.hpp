@@ -1,5 +1,5 @@
-#ifndef MSTL_LOCK_FREE_QUEUE_HPP__
-#define MSTL_LOCK_FREE_QUEUE_HPP__
+#ifndef MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
+#define MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
 #include "../memory/unique_ptr.hpp"
 #include "../async/atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -175,4 +175,4 @@ template <typename T>
 _MSTL atomic<int> lock_free_queue<T>::construct_count{0};
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_LOCK_FREE_QUEUE_HPP__
+#endif // MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__

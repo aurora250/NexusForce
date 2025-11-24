@@ -1,11 +1,11 @@
 #include <MSTL/core/config/exception.hpp>
-#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/async/atomic.hpp>
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__
 
-void Exception(const Error& err) {
-    printcln(color::red(), "\nException : (", err.type_, ") ", err.info_);
+void throw_exception(const exception& err) {
+    printcln(color::red(), "\nException : (", err.type, ") ", err.info);
     throw err;
 }
 

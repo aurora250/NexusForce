@@ -1,5 +1,5 @@
-#ifndef MSTL_EXCEPTION_HPP__
-#define MSTL_EXCEPTION_HPP__
+#ifndef MSTL_CORE_CONFIG_EXCEPTION_HPP__
+#define MSTL_CORE_CONFIG_EXCEPTION_HPP__
 #include "c++config.hpp"
 #ifdef MSTL_SUPPORT_CUDA__
 #include <cuda_runtime.h>
@@ -21,7 +21,7 @@ MSTL_BEGIN_NAMESPACE__
 
 #define __MSTL_ERROR_WHAT() \
 	const char* what() const { \
-		return info_; \
+		return info; \
 	}
 
 #define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \
@@ -39,29 +39,29 @@ MSTL_BEGIN_NAMESPACE__
 	};
 
 
-struct MSTL_API Error {
-	const char* const info_ = nullptr;
-	const char* const type_ = nullptr;
+struct MSTL_API exception {
+	const char* const info = nullptr;
+	const char* const type = nullptr;
 
-	constexpr explicit Error(const char* const info = __type__, const char* const type = __type__) noexcept
-		: info_(info), type_(type) {}
+	constexpr explicit exception(const char* const info = __type__, const char* const type = __type__) noexcept
+		: info(info), type(type) {}
 
-	__MSTL_ERROR_DERIVED_DESTRUCTOR(Error)
-	__MSTL_ERROR_TYPE(Error)
+	__MSTL_ERROR_DERIVED_DESTRUCTOR(exception)
+	__MSTL_ERROR_TYPE(exception)
     __MSTL_ERROR_WHAT()
 };
 
-MSTL_ERROR_BUILD_FINAL_CLASS(AssertionError, Error, "Assertion Failed.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(MemoryError, Error, "Memory Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(AllocateError, MemoryError, "Memory Allocation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(StopIterator, MemoryError, "Iterator or Pointer Access Invalid.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(TypeCastError, MemoryError, "Type Cast Mismatch.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(ValueError, Error, "Function or Template Argument Invalid.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(LinkError, Error, "External Link Actions Failed.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(DeviceOperateError, Error, "Device Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(FileOperateError, DeviceOperateError, "Device File Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(MathError, ValueError, "Math Function Argument Invalid.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(DatabaseError, Error, "Database Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(assert_exception, exception, "Assertion Failed.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, "Memory Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(iterator_exception, memory_exception, "Iterator or Pointer Access Invalid.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(typecast_exception, memory_exception, "Type Cast Mismatch.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, "Function or Template Argument Invalid.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(link_exception, exception, "External Link Actions Failed.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(device_exception, exception, "Device Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(file_exception, device_exception, "Device File Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Function Argument Invalid.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, exception, "Database Operation Failed.")
 
 
 #ifdef MSTL_SUPPORT_CUDA__
@@ -78,14 +78,7 @@ struct CUDAMemoryError final : MemoryError {
 };
 #endif
 
-
-void MSTL_API Exception(const Error& err);
-
-
-using terminate_handler = void(*)();
-
-void MSTL_API set_terminate(terminate_handler handler) noexcept;
-MSTL_NORETURN void MSTL_API terminate() noexcept;
+void MSTL_API throw_exception(const exception& err);
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_EXCEPTION_HPP__
+#endif // MSTL_CORE_CONFIG_EXCEPTION_HPP__

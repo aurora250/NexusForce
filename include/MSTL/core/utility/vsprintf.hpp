@@ -1,6 +1,6 @@
 #ifndef MSTL_VSPRINTF_HPP__
 #define MSTL_VSPRINTF_HPP__
-#include "../config/types.hpp"
+#include "../typeinfo/types.hpp"
 #include <cstdarg>
 MSTL_BEGIN_NAMESPACE__
 

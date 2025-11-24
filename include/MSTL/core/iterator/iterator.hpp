@@ -1,7 +1,7 @@
-#ifndef MSTL_ITERATOR_HPP__
-#define MSTL_ITERATOR_HPP__
+#ifndef MSTL_CORE_ITERATOR_ITERATOR_HPP__
+#define MSTL_CORE_ITERATOR_ITERATOR_HPP__
 #include "../iterator/iterator_traits.hpp"
-#include "../utility/concepts.hpp"
+#include "../typeinfo/concepts.hpp"
 #include "../config/assertion.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -140,4 +140,4 @@ constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
 #endif // MSTL_STANDARD_17__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ITERATOR_HPP__
+#endif // MSTL_CORE_ITERATOR_ITERATOR_HPP__

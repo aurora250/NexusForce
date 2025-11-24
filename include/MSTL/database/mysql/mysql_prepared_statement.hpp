@@ -16,7 +16,7 @@ private:
 
     MSTL_ALWAYS_INLINE void throw_if_stmt_null() const {
         if (!stmt_) {
-            Exception(DatabasePreparedStmtError("Prepared statement not initialized"));
+            throw_exception(database_prepared_stmt_exception("Prepared statement not initialized"));
         }
     }
 

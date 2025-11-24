@@ -1,5 +1,5 @@
-#ifndef MSTL_ARRAY_HPP__
-#define MSTL_ARRAY_HPP__
+#ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
+#define MSTL_CORE_CONTAINER_ARRAY_HPP__
 #include "../string/serialize.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -351,40 +351,40 @@ public:
     }
 
     MSTL_NODISCARD reference at(size_type) {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return array_[0];
     }
 
     MSTL_NODISCARD const_reference at(size_type) const {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return array_[0];
     }
 
     MSTL_NODISCARD reference operator [](size_type) noexcept {
-        Exception(StopIterator("array index out of range"));
+        throw_exception(iterator_exception("array index out of range"));
         return *data();
     }
     MSTL_NODISCARD const_reference operator [](size_type) const noexcept {
-        Exception(StopIterator("array index out of range"));
+        throw_exception(iterator_exception("array index out of range"));
         return *data();
     }
 
     MSTL_NODISCARD reference front() noexcept {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return *data();
     }
     MSTL_NODISCARD const_reference front() const noexcept {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return *data();
     }
 
     MSTL_NODISCARD reference back() noexcept {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return *data();
     }
 
     MSTL_NODISCARD const_reference back() const noexcept {
-        Exception(StopIterator("array empty."));
+        throw_exception(iterator_exception("array empty."));
         return *data();
     }
 
@@ -465,4 +465,4 @@ template <typename T, size_t Size>
 MSTL_INLINE17 constexpr size_t tuple_size_v<const array<T, Size>> = Size;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_ARRAY_HPP__
+#endif // MSTL_CORE_CONTAINER_ARRAY_HPP__

@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_FUNCTIONAL_INVOKE_HPP__
 #define MSTL_CORE_FUNCTIONAL_INVOKE_HPP__
-#include "../utility/type_traits.hpp"
+#include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

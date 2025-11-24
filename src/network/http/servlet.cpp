@@ -1,5 +1,5 @@
 #include <MSTL/network/http/servlet.hpp>
-#include <MSTL/core/utility/console.hpp>
+#include <MSTL/core/system/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void servlet::start_workers(const int thread_count) {
@@ -20,7 +20,7 @@ void servlet::accept_conns() {
 
         try {
             handle_client(client_socket);
-        } catch (const Error& e) {
+        } catch (const exception& e) {
             println(e);
         }
         client_socket.close();

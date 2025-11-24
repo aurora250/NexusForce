@@ -3,6 +3,7 @@
 #include "../async/mutex.hpp"
 #include "../time/clocks.hpp"
 #include "../config/assertion.hpp"
+#include "../config/terminate.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include "../config/undef_cmacro.hpp"
