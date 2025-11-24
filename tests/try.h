@@ -238,6 +238,7 @@ void test_mysql();
 void test_redis();
 void test_postgre();
 void test_dbpool();
+void test_ext_tpool();
 void test_tpool();
 void test_dns();
 

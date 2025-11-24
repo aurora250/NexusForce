@@ -190,14 +190,6 @@ public:
         ::socklen_t from_len = sizeof(from_addr);
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
     }
-
-    MSTL_NODISCARD int get_last_error() const noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        return ::WSAGetLastError();
-#else
-        return errno;
-#endif
-    }
 };
 
 MSTL_END_NAMESPACE__

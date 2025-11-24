@@ -1857,6 +1857,74 @@ void test_dbpool() {
 #endif
 }
 
+void simple_task(const string& name) {
+    println("Executing task: " + name);
+}
+
+int compute_sum(int a, int b) {
+    int result = a + b;
+    println("Computing: " + to_string(a) + " + " +
+        to_string(b) + " = " + to_string(result));
+    return result;
+}
+
+void periodic_work(int counter) {
+    println("Periodic task #" + to_string(counter));
+}
+
+void test_ext_tpool() {
+    thread_pool& pool = thread_pool::instance();
+    pool.start(5);
+
+    println(timestamp::now());
+    auto future1 = pool.submit_after(2000, []() {
+        println(timestamp::now());
+    });
+    this_thread::sleep_for(chrono::milliseconds(3000));
+
+    auto future2 = pool.submit_after(1000, simple_task, "Task with parameters");
+    auto future3 = pool.submit_after(1500, compute_sum, 42, 58);
+    println(future3.get());
+
+    auto counter = make_shared<atomic_int>(0);
+    thread_pool::periodic_token token1;
+
+    token1 = pool.submit_every(1000, [counter, &pool, &token1]() {
+        int count = counter->fetch_add(1) + 1;
+        println("Periodic task iteration #" + to_string(count));
+
+        if (count >= 5) {
+            println("Cancelling periodic task after 5 iterations");
+            pool.cancel_periodic_task(token1);
+        }
+    });
+    this_thread::sleep_for(chrono::seconds(6));
+
+    thread_pool::periodic_token token2 = pool.submit_every(500, []() {
+        println("Fast periodic task executing...");
+    });
+    this_thread::sleep_for(chrono::seconds(3));
+    pool.cancel_periodic_task(token2);
+    this_thread::sleep_for(chrono::seconds(2));
+
+    auto token3 = pool.submit_every(800, []() {
+        println("  Task A (800ms interval)");
+    });
+    auto token4 = pool.submit_every(1200, []() {
+        println("  Task B (1200ms interval)");
+    });
+    auto token5 = pool.submit_every(1500, []() {
+        println("  Task C (1500ms interval)");
+    });
+    this_thread::sleep_for(chrono::seconds(5));
+    pool.cancel_periodic_task(token3);
+    pool.cancel_periodic_task(token4);
+    pool.cancel_periodic_task(token5);
+    this_thread::sleep_for(chrono::seconds(2));
+
+    pool.stop();
+}
+
 void test_dns() {
     try {
         dns_client cloudflare_client("1.1.1.1");

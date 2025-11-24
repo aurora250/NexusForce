@@ -4,6 +4,7 @@
 #include "../container/unordered_map.hpp"
 #include "condition_variable.hpp"
 #include "packaged_task.hpp"
+#include "timer.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -55,12 +56,18 @@ public:
 
 class MSTL_API thread_pool {
 public:
+	struct periodic_task_state {
+		atomic_bool cancelled{false};
+	};
+
     using id_type = manual_thread::id_type;
+	using periodic_token = shared_ptr<periodic_task_state>;
 
 private:
 	using Task = _MSTL function<void()>;
 
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<manual_thread>> threads_map_;
+	_MSTL timer_scheduler<chrono::steady_clock>& timer_;
 
 	id_type init_thread_size_;
 	size_t thread_threshhold_;
@@ -108,6 +115,14 @@ public:
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
 	decltype(auto) submit_task(Func&& func, Args&&... args);
+
+	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	decltype(auto) submit_after(int64_t delay_ms, Func&& func, Args&&... args);
+
+	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	periodic_token submit_every(int64_t interval_ms, Func&& func, Args&&... args);
+
+	void cancel_periodic_task(const periodic_token& token);
 };
 
 
@@ -142,6 +157,56 @@ decltype(auto) thread_pool::submit_task(Func&& func, Args&&... args) {
 		++idle_thread_size_;
 	}
 	return res;
+}
+
+template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+decltype(auto) thread_pool::submit_after(const int64_t delay_ms, Func&& func, Args&&... args) {
+	using ResultType = decltype(func(args...));
+	auto task = _MSTL make_shared<_MSTL packaged_task<ResultType()>>(
+		[func = _MSTL forward<Func>(func), tup = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
+			return _MSTL apply(func, tup);
+		});
+	_MSTL future<ResultType> res = task->get_future();
+	auto expire_time = chrono::steady_clock::now() + chrono::milliseconds(delay_ms);
+	timer_.add_task(expire_time, [this, task = _MSTL move(task)]() mutable {
+		this->submit_task([task]() {
+			(*task)();
+	    });
+	});
+	return res;
+}
+
+template<typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, Func &&func, Args &&...args) {
+    auto state = _MSTL make_shared<periodic_task_state>();
+	auto task = _MSTL make_shared<_MSTL function<void()>>(
+	    [func = _MSTL forward<Func>(func), tup = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
+			_MSTL apply(func, tup);
+	    }
+	);
+
+    auto handler_ptr = _MSTL make_shared<Task>();
+    *handler_ptr = [this, state, task, interval_ms, handler_ptr]() {
+        if (state->cancelled.load()) {
+            return;
+        }
+
+    	this->submit_task([task]() {
+			(*task)();
+	    });
+
+        if (state->cancelled.load()) {
+            return;
+        }
+
+        auto next_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
+        timer_.add_task(next_time, [handler_ptr]() { (*handler_ptr)(); });
+    };
+
+    auto first_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
+    timer_.add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
+
+    return state;
 }
 
 MSTL_END_NAMESPACE__

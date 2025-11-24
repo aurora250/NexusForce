@@ -70,7 +70,8 @@ void thread_pool::thread_function(const id_type thread_id) {
 }
 
 thread_pool::thread_pool()
-    : init_thread_size_(0),
+    : timer_(timer_scheduler<chrono::steady_clock>::instance()),
+    init_thread_size_(0),
     thread_threshhold_(THREAD_POOL_THREAD_MAX_THRESHHOLD),
     task_size_(0),
     idle_thread_size_(0),
@@ -123,6 +124,10 @@ void thread_pool::stop() {
     while (!task_queue_.empty()) task_queue_.pop();
     task_size_ = 0;
     _INNER __thread_pool_id_generator::reset_id();
+}
+
+void thread_pool::cancel_periodic_task(const periodic_token& token) {
+    if (token) token->cancelled.store(true);
 }
 
 MSTL_END_NAMESPACE__

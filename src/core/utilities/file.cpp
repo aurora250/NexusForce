@@ -250,7 +250,6 @@ bool file::open(string path, const bool append,
     handle_ = ::open(path.data(), flags, mode);
 #endif
     if (handle_ == INVALID_HANDLE()) {
-        const ::DWORD error = ::GetLastError();
         return false;
     }
 
