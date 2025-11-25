@@ -1,7 +1,7 @@
 #include "try.h"
 
 int main() {
-    test_ext_tpool();
+    test_tpool();
 
     console.pause();
 }

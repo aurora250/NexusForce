@@ -47,6 +47,8 @@ public:
     MSTL_NODISCARD string to_string() const;
 };
 
+using json_ptr = unique_ptr<json_value>;
+
 
 class MSTL_API json_null final : public json_value {
 public:
@@ -89,7 +91,7 @@ public:
 
 class MSTL_API json_object final : public json_value {
 private:
-    unordered_map<string, unique_ptr<json_value>> members{};
+    unordered_map<string, json_ptr> members{};
 
 public:
     json_object() = default;
@@ -111,14 +113,14 @@ public:
         return nullptr;
     }
 
-    const unordered_map<string, unique_ptr<json_value>>& get_members() const noexcept {
+    const unordered_map<string, json_ptr>& get_members() const noexcept {
         return members;
     }
 };
 
 class MSTL_API json_array final : public json_value {
 private:
-    vector<unique_ptr<json_value>> elements;
+    vector<json_ptr> elements;
 
 public:
     json_array() = default;
@@ -141,7 +143,7 @@ public:
     }
 
     size_t size() const noexcept { return elements.size(); }
-    const vector<unique_ptr<json_value>>& get_elements() const noexcept { return elements; }
+    const vector<json_ptr>& get_elements() const noexcept { return elements; }
 };
 
 
@@ -158,10 +160,10 @@ MSTL_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
     return _INNER json_value_to_string(&value);
 }
 
-MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const unique_ptr<json_value>& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_ptr& value) {
     return _INNER json_value_to_indent_string(value.get() ,0);
 }
-MSTL_ALWAYS_INLINE_INLINE string to_indent_string(unique_ptr<json_value>&& value) {
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(json_ptr&& value) {
     return _INNER json_value_to_indent_string(value.get(), 0);
 }
 MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {

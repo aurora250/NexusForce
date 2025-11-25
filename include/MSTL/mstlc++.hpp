@@ -35,6 +35,7 @@
 #include "core/system/device.hpp"
 #include "core/system/file.hpp"
 #include "core/utility/vsprintf.hpp"
+#include "core/serialize/serialize.hpp"
 #include "database/database_pool.hpp"
 #include "database/mysql/mysql_connect.hpp"
 #include "database/postgresql/postgresql_connect.hpp"

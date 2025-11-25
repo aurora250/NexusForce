@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_ALGORITHM_HEAP_HPP__
 #define MSTL_CORE_ALGORITHM_HEAP_HPP__
 #include "../iterator/iterator.hpp"
+#include "../functional/functor.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>

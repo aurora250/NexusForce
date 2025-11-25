@@ -155,6 +155,15 @@ concept random_access_iterator = bidirectional_iterator<Iterator>
 	{ it1[n] } -> convertible_to<typename iterator_traits<Iterator>::value_type>;
 };
 
+template <typename Iterator>
+concept contiguous_iterator = random_access_iterator<Iterator>
+&& is_lvalue_reference_v<iter_reference_t<Iterator>>
+&& same_as<iter_value_t<Iterator>, remove_cvref_t<iter_reference_t<Iterator>>>
+&& requires(const Iterator& __i) {
+	{ to_address(__i) }
+	-> same_as<add_pointer_t<iter_reference_t<Iterator>>>;
+};
+
 
 template <typename Iterator>
 concept input_or_output_iterator = input_iterator<Iterator>;

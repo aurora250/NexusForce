@@ -56,6 +56,20 @@ struct allocate_gpu_tag {
     constexpr allocate_gpu_tag() noexcept = default;
 };
 
+
+struct string_serializer_tag {};
+struct binary_serializer_tag {};
+struct json_serializer_tag {};
+struct xml_serializer_tag {};
+struct yaml_serializer_tag {};
+
+struct serialize_tag {};
+struct deserialize_tag {};
+
+struct compact_tag {};
+struct human_readable_tag {};
+struct versioned_tag { unsigned int version; };
+
 MSTL_END_TAG__
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_UTILITY_TAGS_HPP__

@@ -46,11 +46,6 @@ public:
 
     MSTL_CONSTEXPR20 ~reverse_iterator() noexcept = default;
 
-    MSTL_NODISCARD constexpr Iterator base() const
-        noexcept(is_nothrow_copy_constructible_v<Iterator>) {
-        return current;
-    }
-
     MSTL_NODISCARD constexpr reference operator *() const
         noexcept(is_nothrow_copy_assignable_v<Iterator> && noexcept(*--(_MSTL declval<Iterator&>()))) {
         Iterator iter = current;
@@ -114,86 +109,87 @@ public:
         return *this;
     }
 
-    constexpr reference operator[](const difference_type n) const
+    constexpr reference operator [](const difference_type n) const
         noexcept(noexcept(_MSTL declcopy<reference>(self(current - n)))) {
         return *(*this + n);
     }
 
-    MSTL_NODISCARD constexpr const Iterator& get_current() const noexcept {
+    
+    MSTL_NODISCARD constexpr const Iterator& base() const noexcept {
         return current;
     }
 };
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator ==(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() == y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() == y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() == y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() == y.base() } -> convertible_to<bool>; }
 #endif // MSTL_STANDARD_20__
 {
-    return x.get_current() == y.get_current();
+    return x.base() == y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator !=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() != y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() != y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() != y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() != y.base() } -> convertible_to<bool>; }
 #endif // MSTL_STANDARD_20__
 {
-    return x.get_current() != y.get_current();
+    return x.base() != y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator <(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() > y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() > y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() > y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() > y.base() } -> convertible_to<bool>; }
 #endif
 {
-    return x.get_current() > y.get_current();
+    return x.base() > y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator >(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() < y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() < y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() < y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() < y.base() } -> convertible_to<bool>; }
 #endif // MSTL_STANDARD_20__
 {
-    return x.get_current() < y.get_current();
+    return x.base() < y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator <=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() >= y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() >= y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() >= y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() >= y.base() } -> convertible_to<bool>; }
 #endif // MSTL_STANDARD_20__
 {
-    return x.get_current() >= y.get_current();
+    return x.base() >= y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr bool operator >=(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(_MSTL declcopy<bool>(x.get_current() <= y.get_current())))
+    noexcept(noexcept(_MSTL declcopy<bool>(x.base() <= y.base())))
 #ifdef MSTL_STANDARD_20__
-    requires requires { { x.get_current() <= y.get_current() } -> convertible_to<bool>; }
+    requires requires { { x.base() <= y.base() } -> convertible_to<bool>; }
 #endif // MSTL_STANDARD_20__
 {
-    return x.get_current() <= y.get_current();
+    return x.base() <= y.base();
 }
 
 template <typename Iterator1, typename Iterator2>
 MSTL_NODISCARD constexpr decltype(auto) operator -(
     const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
-    noexcept(noexcept(y.get_current() - x.get_current())) {
-    return y.get_current() - x.get_current();
+    noexcept(noexcept(y.base() - x.base())) {
+    return y.base() - x.base();
 }
 
 template <typename Iterator>

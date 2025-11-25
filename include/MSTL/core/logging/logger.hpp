@@ -44,7 +44,10 @@ private:
     explicit logger(LOG_LEVEL level = LOG_LEVEL::INFO, bool async = false);
 
 public:
-    static logger& instance();
+    static logger& instance() {
+        static logger log;
+        return log;
+    }
 
     logger(const logger&) = delete;
     logger& operator =(const logger&) = delete;

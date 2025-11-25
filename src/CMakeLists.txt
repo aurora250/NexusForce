@@ -117,13 +117,13 @@ endif()
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/any.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/device.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/stacktrace.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/vsprintf.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utilities/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/compound/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
@@ -162,7 +162,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
-        network/http/router.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/router.cpp
 )
 
 # 编译为动态库

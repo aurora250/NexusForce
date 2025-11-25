@@ -1371,6 +1371,13 @@ template <typename From, typename To>
 MSTL_INLINE17 constexpr bool is_convertible_with = is_convertible_v<From, To> && is_convertible_v<To, From>;
 
 
+template <typename ToElement, typename FromElement>
+using is_array_convertible = is_convertible<FromElement(*)[], ToElement(*)[]>;
+
+template <typename ToElement, typename FromElement>
+MSTL_INLINE17 constexpr bool is_array_convertible_v = is_array_convertible<ToElement, FromElement>::value;
+
+
 template <typename Alloc1, typename Alloc2>
 MSTL_INLINE17 constexpr bool is_allocable_with =
     is_same_v<decltype(_MSTL declval<Alloc1>().allocate()), decltype(_MSTL declval<Alloc2>().allocate())>;
@@ -2175,46 +2182,6 @@ MSTL_INLINE17 constexpr bool is_pointer_interconvertible_base_of_v = is_pointer_
 
 
 template <typename>
-struct get_first_parameter;
-template <template <typename, typename...> class T, typename First, typename... Rest>
-struct get_first_parameter<T<First, Rest...>> {
-    using type = First;
-};
-
-
-template <typename, typename = void>
-struct get_ptr_difference_type {
-    using type = ptrdiff_t;
-};
-template <typename T>
-struct get_ptr_difference_type<T, enable_if_t<is_same_v<typename T::difference_type, typename T::difference_type>>> {
-    using type = typename T::difference_type;
-};
-template <typename T>
-using get_ptr_difference_type_t = typename get_ptr_difference_type<T>::type;
-
-
-template <typename, typename>
-struct replace_first_parameter;
-template <typename NewFirst, template <typename, typename...> class T, typename First, typename... Rest>
-struct replace_first_parameter<NewFirst, T<First, Rest...>> {
-    using type = T<NewFirst, Rest...>;
-};
-
-
-template <typename T, typename U, typename = void>
-struct get_rebind_type {
-    using type = typename replace_first_parameter<U, T>::type;
-};
-template <typename T, typename U>
-struct get_rebind_type<T, U, enable_if_t<is_same_v<typename T::template rebind<U>, typename T::template rebind<U>>>> {
-    using type = typename T::template rebind<U>;
-};
-template <typename T, typename U>
-using get_rebind_type_t = typename get_rebind_type<T, U>::type;
-
-
-template <typename>
 struct is_swappable;
 template <typename>
 struct is_nothrow_swappable;
@@ -2440,8 +2407,9 @@ template <typename Map>
 MSTL_INLINE17 constexpr bool is_maplike_v = is_maplike<Map>::value;
 
 
+MSTL_BEGIN_INNER__
 template <typename T>
-struct has_to_string {
+struct __has_to_string_impl {
 private:
     template <typename U>
     static auto __test(int) -> decltype(_MSTL declval<const U>().to_string(), true_type{});
@@ -2451,13 +2419,18 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
+MSTL_END_INNER__
+
+template <typename T>
+struct has_to_string : bool_constant<_INNER __has_to_string_impl<T>::value> {};
 
 template <typename T>
 MSTL_INLINE17 constexpr bool has_to_string_v = has_to_string<T>::value;
 
 
+MSTL_BEGIN_INNER__
 template <typename T>
-struct has_to_hash {
+struct __has_to_hash_impl {
 private:
     template <typename U>
     static auto __test(int) -> decltype(_MSTL declval<const U>().to_hash(), true_type{});
@@ -2467,13 +2440,18 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
+MSTL_END_INNER__
+
+template <typename T>
+struct has_to_hash : bool_constant<_INNER __has_to_hash_impl<T>::value> {};
 
 template <typename T>
 MSTL_INLINE17 constexpr bool has_to_hash_v = has_to_hash<T>::value;
 
 
+MSTL_BEGIN_INNER__
 template <typename T>
-struct has_swap {
+struct __has_swap_impl {
 private:
     template <typename U>
     static auto __test(int) -> decltype(_MSTL declval<U>().swap(_MSTL declval<U>()), true_type{});
@@ -2483,6 +2461,10 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
+MSTL_END_INNER__
+
+template <typename T>
+struct has_swap : bool_constant<_INNER __has_swap_impl<T>::value> {};
 
 template <typename T>
 MSTL_INLINE17 constexpr bool has_swap_v = has_swap<T>::value;
@@ -2509,6 +2491,27 @@ struct has_construct : _INNER __has_construct_impl<Alloc, T, Args...>::type {};
 
 template <typename Alloc, typename T, typename... Args>
 MSTL_INLINE17 constexpr bool has_construct_v = has_construct<Alloc, T, Args...>::value;
+
+
+MSTL_BEGIN_INNER__
+template <typename T>
+struct __has_base_impl {
+private:
+    template <typename U>
+    static auto __test(int) -> decltype(_MSTL declval<const U>().base(), true_type{});
+
+    template <typename U>
+    static false_type __test(...);
+public:
+    static constexpr bool value = decltype(__test<T>(0))::value;
+};
+MSTL_END_INNER__
+
+template <typename T>
+struct has_base : bool_constant<_INNER __has_base_impl<T>::value> {};
+
+template <typename T>
+MSTL_INLINE17 constexpr bool has_base_v = has_base<T>::value;
 
 
 template <typename T, size_t Size, enable_if_t<is_swappable<T>::value, int>>

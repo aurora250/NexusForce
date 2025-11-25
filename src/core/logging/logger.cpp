@@ -117,11 +117,6 @@ logger::~logger() {
     }
 }
 
-logger& logger::instance() {
-    static logger log;
-    return log;
-}
-
 void logger::add_sink(shared_ptr<log_sink> sink) {
     _MSTL lock_guard<_MSTL mutex> lock(sinks_mutex_);
     sinks_.push_back(move(sink));
