@@ -214,6 +214,10 @@ public:
     MSTL_CONSTEXPR20 bool operator >=(const bitmap_iterator& x) const noexcept {
         return !(*this < x);
     }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 pointer base() const noexcept {
+        return ptr_;
+    }
 };
 
 

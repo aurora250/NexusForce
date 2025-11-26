@@ -4,20 +4,21 @@
 #include "thread.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename Result, typename... ArgTypes>
-class packaged_task<Result(ArgTypes...)> {
-    typedef __future_base::task_state_base<Result(ArgTypes...)> StateType;
+template <typename Res, typename... Args>
+class packaged_task<Res(Args...)> {
+    using StateType = __future_base::task_state_base<Res(Args...)>;
+
     shared_ptr<StateType> state_ptr;
 
-    template<typename Function, typename Function2 = remove_cvref_t<Function>>
-    using NotSameType = typename enable_if<!is_same<packaged_task, Function2>::value>::type;
+    template <typename Func, typename U = remove_cvref_t<Func>>
+    using not_same_t = typename enable_if<!is_same<packaged_task, U>::value>::type;
 
 public:
     packaged_task() noexcept {}
 
-    template <typename Function, typename = NotSameType<Function>>
-    explicit packaged_task(Function&& function)
-    : state_ptr(create_task_state<Result(ArgTypes...)>(_MSTL forward<Function>(function)))
+    template <typename Func, typename = not_same_t<Func>>
+    explicit packaged_task(Func&& function)
+    : state_ptr(create_task_state<Res(Args...)>(_MSTL forward<Func>(function)))
     {}
 
     ~packaged_task() {
@@ -45,18 +46,18 @@ public:
         return static_cast<bool>(state_ptr);
     }
 
-    future<Result> get_future() {
-        return future<Result>(state_ptr);
+    future<Res> get_future() {
+        return future<Res>(state_ptr);
     }
 
-    void operator()(ArgTypes... args) {
+    void operator()(Args... args) {
         __future_base::state_base::check(state_ptr);
-        state_ptr->run(_MSTL forward<ArgTypes>(args)...);
+        state_ptr->run(_MSTL forward<Args>(args)...);
     }
 
-    void make_ready_at_thread_exit(ArgTypes... args) {
+    void make_ready_at_thread_exit(Args... args) {
         __future_base::state_base::check(state_ptr);
-        state_ptr->run_delayed(_MSTL forward<ArgTypes>(args)..., state_ptr);
+        state_ptr->run_delayed(_MSTL forward<Args>(args)..., state_ptr);
     }
 
     void reset() {
@@ -68,74 +69,65 @@ public:
 };
 
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Result, typename... ArgTypes>
-packaged_task(Result(*)(ArgTypes...)) -> packaged_task<Result(ArgTypes...)>;
+template <typename Res, typename... Args>
+packaged_task(Res(*)(Args...)) -> packaged_task<Res(Args...)>;
 
-template <typename Function, typename Signature = typename
-    _INNER __function_guide_helper<decltype(&Function::operator())>::type>
-packaged_task(Function) -> packaged_task<Signature>;
+template <typename Func, typename Sign = typename
+    _INNER __function_guide_helper<decltype(&Func::operator())>::type>
+packaged_task(Func) -> packaged_task<Sign>;
 #endif
 
-template <typename Result, typename... ArgTypes>
+template <typename Res, typename... Args>
 void swap(
-    packaged_task<Result(ArgTypes...)>& left,
-    packaged_task<Result(ArgTypes...)>& right) noexcept {
+    packaged_task<Res(Args...)>& left,
+    packaged_task<Res(Args...)>& right) noexcept {
     left.swap(right);
 }
 
 
-template <typename BoundFunction, typename Result>
+template <typename BoundFunc, typename Res>
 class __future_base::deferred_state final
     : public __future_base::state_base {
-public:
-    template <typename... Args>
-    explicit deferred_state(Args&&... args)
-    : result_storage(new basic_result<Result>()),
-    function(_MSTL forward<Args>(args)...) {}
-
 private:
-    typedef __future_base::Ptr<basic_result<Result>> PtrType;
+    using PtrType = __future_base::Ptr<basic_result<Res>>;
+
     PtrType result_storage;
-    BoundFunction function;
+    BoundFunc function;
 
     void complete_async() override {
         set_result(create_task_setter(result_storage, function), true);
     }
-
     bool is_deferred_future() const override { return true; }
+
+public:
+    template <typename... Args>
+    explicit deferred_state(Args&&... args)
+    : result_storage(new basic_result<Res>()),
+    function(_MSTL forward<Args>(args)...) {}
+
 };
 
 class __future_base::async_state_common
     : public __future_base::state_base {
 protected:
+    _MSTL thread thread;
+    _MSTL once_flag once_flag;
+
     ~async_state_common() override = default;
 
     void complete_async() override { join(); }
-
     void join() { _MSTL call_once(once_flag, &_MSTL thread::join, &thread); }
-
-    _MSTL thread thread;
-    _MSTL once_flag once_flag;
 };
 
 template <typename Func, typename Res>
 class __future_base::async_state_impl final
     : public __future_base::async_state_common {
-public:
-    template <typename... Args>
-    explicit async_state_impl(Args&&... args)
-    : result_storage(new basic_result<Res>()),
-    function(_MSTL forward<Args>(args)...) {
-        thread = _MSTL thread{&async_state_impl::run, this};
-    }
-
-    ~async_state_impl() override {
-        if (thread.joinable()) {
-            thread.join();
-        }
-    }
-
 private:
+    using PtrType = __future_base::Ptr<basic_result<Res>>;
+
+    PtrType result_storage;
+    Func function;
+
     void run() {
         try {
             this->set_result(create_task_setter(result_storage, function));
@@ -147,9 +139,17 @@ private:
         }
     }
 
-    typedef __future_base::Ptr<basic_result<Res>> PtrType;
-    PtrType result_storage;
-    Func function;
+public:
+    template <typename... Args>
+    explicit async_state_impl(Args&&... args)
+    : result_storage(new basic_result<Res>()), function(_MSTL forward<Args>(args)...) {
+        thread = _MSTL thread{&async_state_impl::run, this};
+    }
+    ~async_state_impl() override {
+        if (thread.joinable()) {
+            thread.join();
+        }
+    }
 };
 
 MSTL_END_NAMESPACE__

@@ -111,6 +111,10 @@ public:
     MSTL_NODISCARD constexpr bool operator >=(const array_iterator& rh) const noexcept {
         return !(*this < rh);
     }
+
+    MSTL_NODISCARD constexpr pointer base() const noexcept {
+        return ptr_;
+    }
 };
 
 template <typename T, size_t Size>

@@ -1,53 +1,53 @@
-#include <MSTL/network/http/router.hpp>
+#include <MSTL/network/http/http_router.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-router::router() {
+http_router::http_router() {
     setup_default_handlers();
 }
 
-void router::get(const string& path, handler_func handler) {
+void http_router::get(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::GET.method()][path] = _MSTL move(handler);
 }
 
-void router::post(const string& path, handler_func handler) {
+void http_router::post(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::POST.method()][path] = _MSTL move(handler);
 }
 
-void router::put(const string& path, handler_func handler) {
+void http_router::put(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::PUT.method()][path] = _MSTL move(handler);
 }
 
-void router::del(const string& path, handler_func handler) {
+void http_router::del(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::DELETE.method()][path] = _MSTL move(handler);
 }
 
-void router::head(const string& path, handler_func handler) {
+void http_router::head(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::HEAD.method()][path] = _MSTL move(handler);
 }
 
-void router::options(const string& path, handler_func handler) {
+void http_router::options(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::OPTIONS.method()][path] = _MSTL move(handler);
 }
 
-void router::trace(const string& path, handler_func handler) {
+void http_router::trace(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::TRACE.method()][path] = _MSTL move(handler);
 }
 
-void router::connect(const string& path, handler_func handler) {
+void http_router::connect(const string& path, handler_func handler) {
     routes_[HTTP_METHOD::CONNECT.method()][path] = _MSTL move(handler);
 }
 
-void router::get_post(const string& path, handler_func handler) {
+void http_router::get_post(const string& path, handler_func handler) {
     get(path, handler);
     post(path, _MSTL move(handler));
 }
 
-void router::post_delete(const string& path, handler_func handler) {
+void http_router::post_delete(const string& path, handler_func handler) {
     post(path, handler);
     del(path, _MSTL move(handler));
 }
 
-void router::all(const string& path, handler_func handler) {
+void http_router::all(const string& path, handler_func handler) {
     get(path, handler);
     post(path, handler);
     put(path, handler);
@@ -58,7 +58,7 @@ void router::all(const string& path, handler_func handler) {
     connect(path, _MSTL move(handler));
 }
 
-void router::route(const HTTP_METHOD& method, const string& path, handler_func handler) {
+void http_router::route(const HTTP_METHOD& method, const string& path, handler_func handler) {
     string method_str = method.method();
     if (method_str.find(',') != string::npos) {
         vector<string> methods = split_methods(method_str);
@@ -70,7 +70,7 @@ void router::route(const HTTP_METHOD& method, const string& path, handler_func h
     }
 }
 
-router::handler_func* router::find_handler(const HTTP_METHOD& method, const string& path) {
+http_router::handler_func* http_router::find_handler(const HTTP_METHOD& method, const string& path) {
     auto method_it = routes_.find(method.method());
     if (method_it == routes_.end()) return nullptr;
 
@@ -80,7 +80,7 @@ router::handler_func* router::find_handler(const HTTP_METHOD& method, const stri
     return &path_it->second;
 }
 
-vector<string> router::split_methods(const string& method_str) {
+vector<string> http_router::split_methods(const string& method_str) {
     vector<string> result;
     size_t start = 0;
     size_t pos = method_str.find(',');
@@ -95,7 +95,7 @@ vector<string> router::split_methods(const string& method_str) {
     return result;
 }
 
-void router::setup_default_handlers() {
+void http_router::setup_default_handlers() {
     not_found_handler_ = [](http_request& request, http_response& response) {
         response.set_not_found();
         response.set_status_msg("Not Found");
@@ -109,7 +109,7 @@ void router::setup_default_handlers() {
     };
 }
 
-http_response router::handle_request(http_request& request) {
+http_response http_router::handle_request(http_request& request) {
     http_response response;
 
     if (!middleware_chain_.execute_pre_filters(request, response)) {

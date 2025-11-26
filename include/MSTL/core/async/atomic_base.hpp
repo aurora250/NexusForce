@@ -1,7 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
 #include "../config/assertion.hpp"
-#include "../memory/memory.hpp"
 #include "atomic_wait.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -66,54 +65,46 @@ MSTL_BEGIN_INNER__
 
 #ifdef MSTL_COMPILER_MSVC__
 
-template <class Int, class T>
-Int __atomic_reinterpret_impl(const T& value, true_type, true_type) {
+template <typename Int, typename T>
+MSTL_ALWAYS_INLINE Int __atomic_reinterpret_impl(const T& value, true_type, true_type) {
 	return static_cast<Int>(value);
 }
 
-template <class Int, class T>
-Int __atomic_reinterpret_impl(const T& value, false_type, true_type) {
+template <typename Int, typename T>
+MSTL_ALWAYS_INLINE Int __atomic_reinterpret_impl(const T& value, false_type, true_type) {
 	return reinterpret_cast<Int>(value);
 }
 
-template <class Int, class T, class Cond1, class Cond2>
+template <typename Int, typename T, typename Cond1, typename Cond2>
 Int __atomic_reinterpret_impl(const T& value, Cond1, Cond2) {
 	Int result{};
 	_MSTL memory_copy(&result, _MSTL addressof(value), sizeof(value));
 	return result;
 }
 
-template <class Int, class T>
-MSTL_NODISCARD Int __atomic_reinterpret_as(const T& value) noexcept {
+template <typename Int, typename T>
+MSTL_ALWAYS_INLINE MSTL_NODISCARD Int __atomic_reinterpret_as(const T& value) noexcept {
 	static_assert(is_integral_v<Int>, "Int must be an integral type");
-
-	using is_same_size = integral_constant<bool, sizeof(Int) == sizeof(T)>;
-	using is_integral_t = typename is_integral<T>::type;
-	using is_pointer_t = typename is_pointer<T>::type;
-	constexpr bool is_integral_case = is_integral_v<T> && sizeof(Int) == sizeof(T);
-	constexpr bool is_pointer_case = is_pointer_v<T> && sizeof(Int) == sizeof(T);
-
-	return _INNER __atomic_reinterpret_impl<Int>(
-	    value,
-	    integral_constant<bool, is_integral_case>(),
-	    integral_constant<bool, is_pointer_case>()
+	return _INNER __atomic_reinterpret_impl<Int>(value,
+	    bool_constant<is_integral_v<T> && sizeof(Int) == sizeof(T)>(),
+	    bool_constant<is_pointer_v<T> && sizeof(Int) == sizeof(T)>()
 	);
 }
 
 
-inline void apply_memory_order_load(memory_order mo) noexcept {
+MSTL_ALWAYS_INLINE void apply_memory_order_load(const memory_order mo) noexcept {
 	if (mo == memory_order_seq_cst || mo == memory_order_acquire) {
 		::_ReadWriteBarrier();
 	}
 }
 
-inline void apply_memory_order_store(memory_order mo) noexcept {
+MSTL_ALWAYS_INLINE void apply_memory_order_store(const memory_order mo) noexcept {
 	if (mo == memory_order_seq_cst || mo == memory_order_release) {
 		::_ReadWriteBarrier();
 	}
 }
 
-inline void apply_memory_order_seq_cst(memory_order mo) noexcept {
+MSTL_ALWAYS_INLINE void apply_memory_order_seq_cst(const memory_order mo) noexcept {
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -128,24 +119,24 @@ struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = __atomic_always_lock_free(Size, nullptr);
 };
 #else
-template<size_t Size> struct atomic_is_always_lock_free_impl {
+template <size_t> struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = false;
 };
-template<> struct atomic_is_always_lock_free_impl<1> {
+template <> struct atomic_is_always_lock_free_impl<1> {
 	static constexpr bool value = true;
 };
-template<> struct atomic_is_always_lock_free_impl<2> {
+template <> struct atomic_is_always_lock_free_impl<2> {
 	static constexpr bool value = true;
 };
-template<> struct atomic_is_always_lock_free_impl<4> {
+template <> struct atomic_is_always_lock_free_impl<4> {
 	static constexpr bool value = true;
 };
-template<> struct atomic_is_always_lock_free_impl<8> {
+template <> struct atomic_is_always_lock_free_impl<8> {
 	static constexpr bool value = true;
 };
 #endif
 
-template<size_t Size>
+template <size_t Size>
 constexpr bool atomic_is_always_lock_free = atomic_is_always_lock_free_impl<Size>::value;
 
 
@@ -168,55 +159,58 @@ bool is_lock_free_impl() noexcept {
 
 #ifdef MSTL_COMPILER_MSVC__
 
-template<size_t Size> struct interlocked_exchange_impl;
+template <size_t Size>
+struct interlocked_exchange_impl;
 
-template<>
+template <>
 struct interlocked_exchange_impl<1> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchange8(
+		return static_cast<T>(::_InterlockedExchange8(
 		    reinterpret_cast<volatile char*>(target),
 		    static_cast<char>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_exchange_impl<2> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchange16(
+		return static_cast<T>(::_InterlockedExchange16(
 		    reinterpret_cast<volatile short*>(target),
 		    static_cast<short>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_exchange_impl<4> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchange(
+		return static_cast<T>(::_InterlockedExchange(
 		    reinterpret_cast<volatile long*>(target),
 		    static_cast<long>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_exchange_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchange64(
+		return static_cast<T>(::_InterlockedExchange64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
 	}
 };
 
-template<size_t Size> struct interlocked_compare_exchange_impl;
 
-template<>
+template <size_t Size>
+struct interlocked_compare_exchange_impl;
+
+template <>
 struct interlocked_compare_exchange_impl<1> {
 	template <typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
-		char old = _InterlockedCompareExchange8(
+		char old = ::_InterlockedCompareExchange8(
 		    reinterpret_cast<volatile char*>(target),
 		    static_cast<char>(desired),
 		    static_cast<char>(*expected));
@@ -226,11 +220,11 @@ struct interlocked_compare_exchange_impl<1> {
 	}
 };
 
-template<>
+template <>
 struct interlocked_compare_exchange_impl<2> {
 	template<typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
-		short old = _InterlockedCompareExchange16(
+		short old = ::_InterlockedCompareExchange16(
 		    reinterpret_cast<volatile short*>(target),
 		    static_cast<short>(desired),
 		    static_cast<short>(*expected));
@@ -240,11 +234,11 @@ struct interlocked_compare_exchange_impl<2> {
 	}
 };
 
-template<>
+template <>
 struct interlocked_compare_exchange_impl<4> {
 	template<typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
-		long old = _InterlockedCompareExchange(
+		long old = ::_InterlockedCompareExchange(
 		    reinterpret_cast<volatile long*>(target),
 		    static_cast<long>(desired),
 		    static_cast<long>(*expected));
@@ -254,11 +248,11 @@ struct interlocked_compare_exchange_impl<4> {
 	}
 };
 
-template<>
+template <>
 struct interlocked_compare_exchange_impl<8> {
 	template<typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
-		long long old = _InterlockedCompareExchange64(
+		long long old = ::_InterlockedCompareExchange64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(desired),
 		    static_cast<long long>(*expected));
@@ -268,144 +262,164 @@ struct interlocked_compare_exchange_impl<8> {
 	}
 };
 
-template<size_t Size> struct interlocked_fetch_add_impl;
 
-template<>
+template <size_t Size>
+struct interlocked_fetch_add_impl;
+
+template <>
 struct interlocked_fetch_add_impl<1> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchangeAdd8(
+		return static_cast<T>(::_InterlockedExchangeAdd8(
 		    reinterpret_cast<volatile char*>(target),
 		    static_cast<char>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_fetch_add_impl<2> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchangeAdd16(
+		return static_cast<T>(::_InterlockedExchangeAdd16(
 		    reinterpret_cast<volatile short*>(target),
 		    static_cast<short>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_fetch_add_impl<4> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchangeAdd(
+		return static_cast<T>(::_InterlockedExchangeAdd(
 		    reinterpret_cast<volatile long*>(target),
 		    static_cast<long>(value)));
 	}
 };
 
-template<>
+template <>
 struct interlocked_fetch_add_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedExchangeAdd64(
+		return static_cast<T>(::_InterlockedExchangeAdd64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
 	}
 };
 
-template<size_t Size> struct interlocked_fetch_and_impl;
 
-template<> struct interlocked_fetch_and_impl<1> {
+template <size_t Size>
+struct interlocked_fetch_and_impl;
+
+template <>
+struct interlocked_fetch_and_impl<1> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedAnd8(
+		return static_cast<T>(::_InterlockedAnd8(
 		    reinterpret_cast<volatile char*>(target),
 		    static_cast<char>(value)));
 	}
 };
 
-template<> struct interlocked_fetch_and_impl<2> {
+template <>
+struct interlocked_fetch_and_impl<2> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedAnd16(
+		return static_cast<T>(::_InterlockedAnd16(
 		    reinterpret_cast<volatile short*>(target),
 		    static_cast<short>(value)));
 	}
 };
 
-template<> struct interlocked_fetch_and_impl<4> {
+template <>
+struct interlocked_fetch_and_impl<4> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedAnd(
+		return static_cast<T>(::_InterlockedAnd(
 		    reinterpret_cast<volatile long*>(target),
 		    static_cast<long>(value)));
 	}
 };
 
-template<> struct interlocked_fetch_and_impl<8> {
+template <>
+struct interlocked_fetch_and_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedAnd64(
+		return static_cast<T>(::_InterlockedAnd64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
 	}
 };
 
-template<size_t Size> struct interlocked_fetch_or_impl;
 
-template<> struct interlocked_fetch_or_impl<1> {
+template <size_t Size>
+struct interlocked_fetch_or_impl;
+
+template <>
+struct interlocked_fetch_or_impl<1> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedOr8(
+		return static_cast<T>(::_InterlockedOr8(
 		    reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
 	}
 };
-template<> struct interlocked_fetch_or_impl<2> {
+template <>
+struct interlocked_fetch_or_impl<2> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedOr16(
+		return static_cast<T>(::_InterlockedOr16(
 		    reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
 	}
 };
-template<> struct interlocked_fetch_or_impl<4> {
+template <>
+struct interlocked_fetch_or_impl<4> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedOr(
+		return static_cast<T>(::_InterlockedOr(
 		    reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
 	}
 };
-template<> struct interlocked_fetch_or_impl<8> {
+template <>
+struct interlocked_fetch_or_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedOr64(
+		return static_cast<T>(::_InterlockedOr64(
 		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 	}
 };
 
-template<size_t Size> struct interlocked_fetch_xor_impl;
 
-template<> struct interlocked_fetch_xor_impl<1> {
+template <size_t Size>
+struct interlocked_fetch_xor_impl;
+
+template <>
+struct interlocked_fetch_xor_impl<1> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedXor8(
+		return static_cast<T>(::_InterlockedXor8(
 		    reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
 	}
 };
-template<> struct interlocked_fetch_xor_impl<2> {
+template <>
+struct interlocked_fetch_xor_impl<2> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedXor16(
+		return static_cast<T>(::_InterlockedXor16(
 		    reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
 	}
 };
-template<> struct interlocked_fetch_xor_impl<4> {
+template <>
+struct interlocked_fetch_xor_impl<4> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedXor(
+		return static_cast<T>(::_InterlockedXor(
 		    reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
 	}
 };
-template<> struct interlocked_fetch_xor_impl<8> {
+template <>
+struct interlocked_fetch_xor_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
-		return static_cast<T>(_InterlockedXor64(
+		return static_cast<T>(::_InterlockedXor64(
 		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 	}
 };
@@ -422,35 +436,35 @@ template<> struct interlocked_fetch_xor_impl<8> {
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE void
-store(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
+store(volatile T* ptr, __atomic_raw_value<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     __atomic_store_n(ptr, value, static_cast<int32_t>(mo));
 #else
-    interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_store(mo);
+    _INNER interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_store(mo);
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-load(const volatile T* ptr, memory_order mo) noexcept {
+load(const volatile T* ptr, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_load_n(ptr, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> result = *ptr;
-    apply_memory_order_load(mo);
+    _INNER __atomic_raw_value<T> result = *ptr;
+    _INNER apply_memory_order_load(mo);
     return result;
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-exchange(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
+exchange(volatile T* ptr, __atomic_raw_value<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_exchange_n(ptr, value, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> old = interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_seq_cst(mo);
+    _INNER __atomic_raw_value<T> old = _INNER interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_seq_cst(mo);
     return old;
 #endif
 }
@@ -459,13 +473,13 @@ template <typename T>
 ATOMIC_ALWAYS_INLINE bool
 compare_exchange_weak(
 	volatile T* ptr, __atomic_raw_value<T>* expected,
-	__atomic_raw_value<T> desired, memory_order success, memory_order failure) noexcept {
+	__atomic_raw_value<T> desired, const memory_order success, const memory_order failure) noexcept {
     MSTL_CONSTEXPR_ASSERT(is_valid_cmpexch_failure_order(failure));
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_compare_exchange_n(ptr, expected, desired, 1,
                                        static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
-    bool result = interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, desired);
+    const bool result = _INNER interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, desired);
     if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
         ::_ReadWriteBarrier();
     }
@@ -477,70 +491,70 @@ template <typename T>
 ATOMIC_ALWAYS_INLINE bool
 compare_exchange_strong(
 	volatile T* ptr, __atomic_raw_value<T>* expected,
-	__atomic_raw_value<T> desired, memory_order success, memory_order failure) noexcept {
+	__atomic_raw_value<T> desired, const memory_order success, const memory_order failure) noexcept {
     MSTL_CONSTEXPR_ASSERT(is_valid_cmpexch_failure_order(failure));
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_compare_exchange_n(ptr, expected, desired, 0,
                                        static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
-    return compare_exchange_weak(ptr, expected, desired, success, failure);
+    return _INNER compare_exchange_weak(ptr, expected, desired, success, failure);
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-fetch_add(volatile T* ptr, __atomic_diff<T> value, memory_order mo) noexcept {
+fetch_add(volatile T* ptr, __atomic_diff<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_fetch_add(ptr, value, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> old = interlocked_fetch_add_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_seq_cst(mo);
+    _INNER __atomic_raw_value<T> old = _INNER interlocked_fetch_add_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_seq_cst(mo);
     return old;
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-fetch_sub(volatile T* ptr, __atomic_diff<T> value, memory_order mo) noexcept {
+fetch_sub(volatile T* ptr, __atomic_diff<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_fetch_sub(ptr, value, static_cast<int32_t>(mo));
 #else
-    return fetch_add(ptr, static_cast<__atomic_diff<T>>(-value), mo);
+    return _INNER fetch_add(ptr, static_cast<__atomic_diff<T>>(-value), mo);
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-fetch_and(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
+fetch_and(volatile T* ptr, __atomic_raw_value<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_fetch_and(ptr, value, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> old = interlocked_fetch_and_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_seq_cst(mo);
+    _INNER __atomic_raw_value<T> old = _INNER interlocked_fetch_and_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_seq_cst(mo);
     return old;
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-fetch_or(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
+fetch_or(volatile T* ptr, __atomic_raw_value<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_fetch_or(ptr, value, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> old = interlocked_fetch_or_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_seq_cst(mo);
+    _INNER __atomic_raw_value<T> old = _INNER interlocked_fetch_or_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_seq_cst(mo);
     return old;
 #endif
 }
 
 template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
-fetch_xor(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
+fetch_xor(volatile T* ptr, __atomic_raw_value<T> value, const memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
     return __atomic_fetch_xor(ptr, value, static_cast<int32_t>(mo));
 #else
-    __atomic_raw_value<T> old = interlocked_fetch_xor_impl<sizeof(T)>::call(ptr, value);
-    apply_memory_order_seq_cst(mo);
+    _INNER __atomic_raw_value<T> old = _INNER interlocked_fetch_xor_impl<sizeof(T)>::call(ptr, value);
+    _INNER apply_memory_order_seq_cst(mo);
     return old;
 #endif
 }
@@ -551,7 +565,7 @@ add_fetch(volatile T* ptr, __atomic_diff<T> value, memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 	return __atomic_add_fetch(ptr, value, static_cast<int32_t>(mo));
 #else
-	return fetch_add(ptr, value, mo) + value;
+	return _INNER fetch_add(ptr, value, mo) + value;
 #endif
 }
 
@@ -561,7 +575,7 @@ sub_fetch(volatile T* ptr, __atomic_diff<T> value, memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 	return __atomic_sub_fetch(ptr, value, static_cast<int32_t>(mo));
 #else
-	return fetch_sub(ptr, value, mo) - value;
+	return _INNER fetch_sub(ptr, value, mo) - value;
 #endif
 }
 
@@ -571,7 +585,7 @@ and_fetch(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcep
 #ifdef MSTL_COMPILER_GNUC__
 	return __atomic_and_fetch(ptr, value, static_cast<int32_t>(mo));
 #else
-	return fetch_and(ptr, value, mo) & value;
+	return _INNER fetch_and(ptr, value, mo) & value;
 #endif
 }
 
@@ -581,7 +595,7 @@ or_fetch(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept
 #ifdef MSTL_COMPILER_GNUC__
 	return __atomic_or_fetch(ptr, value, static_cast<int32_t>(mo));
 #else
-	return fetch_or(ptr, value, mo) | value;
+	return _INNER fetch_or(ptr, value, mo) | value;
 #endif
 }
 
@@ -591,7 +605,7 @@ xor_fetch(volatile T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcep
 #ifdef MSTL_COMPILER_GNUC__
 	return __atomic_xor_fetch(ptr, value, static_cast<int32_t>(mo));
 #else
-	return fetch_xor(ptr, value, mo) ^ value;
+	return _INNER fetch_xor(ptr, value, mo) ^ value;
 #endif
 }
 
@@ -613,12 +627,12 @@ struct atomic_flag {
 	: flag_{static_cast<value_type>(flag ? 1 : 0)}  {}
 
 	MSTL_ALWAYS_INLINE bool
-	test_and_set(memory_order mo = memory_order_seq_cst) noexcept {
+	test_and_set(const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_flag*>(this)->test_and_set(mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE bool
-	test_and_set(memory_order mo = memory_order_seq_cst) volatile noexcept {
+	test_and_set(const memory_order mo = memory_order_seq_cst) volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_test_and_set(&flag_, static_cast<int32_t>(mo));
 #else
@@ -631,12 +645,12 @@ struct atomic_flag {
 	}
 
 	MSTL_ALWAYS_INLINE bool
-	test(memory_order mo = memory_order_seq_cst) const noexcept {
+	test(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return const_cast<const volatile atomic_flag*>(this)->test(mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE bool
-	test(memory_order mo = memory_order_seq_cst) const volatile noexcept {
+	test(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 		value_type value;
 		__atomic_load(&flag_, &value, static_cast<int32_t>(mo));
@@ -649,12 +663,12 @@ struct atomic_flag {
 	}
 
 	MSTL_ALWAYS_INLINE void
-	wait(bool old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(const bool old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		const_cast<const volatile atomic_flag*>(this)->wait(old, mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE void
-	wait(bool old, memory_order mo = memory_order_seq_cst) const volatile noexcept {
+	wait(const bool old, const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 		const value_type value = old ? 1 : 0;
 		_MSTL atomic_wait_address_v(
 			const_cast<const value_type*>(&flag_), value,
@@ -673,12 +687,12 @@ struct atomic_flag {
 
 
 	MSTL_ALWAYS_INLINE void
-	clear(memory_order mo = memory_order_seq_cst) noexcept {
+	clear(const memory_order mo = memory_order_seq_cst) noexcept {
 		const_cast<volatile atomic_flag*>(this)->clear(mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE void
-	clear(memory_order mo = memory_order_seq_cst) volatile noexcept {
+	clear(const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		memory_order rmo MSTL_UNUSED = mo & memory_order_modifier::memory_order_mask;
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_consume);
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
@@ -785,12 +799,12 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE void
-	store(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	store(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		const_cast<volatile atomic_base*>(this)->store(value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE void
-	store(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	store(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		memory_order rmo MSTL_UNUSED = mo & memory_order_modifier::memory_order_mask;
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
@@ -799,12 +813,12 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	load(memory_order mo = memory_order_seq_cst) const noexcept {
+	load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return const_cast<const volatile atomic_base*>(this)->load(mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	load(memory_order mo = memory_order_seq_cst) const volatile noexcept {
+	load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 		memory_order rmo MSTL_UNUSED = mo & memory_order_modifier::memory_order_mask;
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_release);
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
@@ -812,66 +826,66 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	exchange(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	exchange(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->exchange(value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	exchange(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	exchange(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER exchange(&value_, value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return const_cast<volatile atomic_base*>(this)->compare_exchange_weak(expected, desired, success, failure);
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		return _INNER compare_exchange_weak(&value_, &expected, desired, success, failure);
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return this->compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) volatile noexcept {
+		return this->compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return const_cast<volatile atomic_base*>(this)->compare_exchange_strong(expected, desired, success, failure);
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		return _INNER compare_exchange_strong(&value_, &expected, desired, success, failure);
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return this->compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
 		const memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
+		return this->compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(value_type old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(value_type old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(&value_, old, [mo, this] {
 			return this->load(mo);
 		});
@@ -887,47 +901,47 @@ public:
 
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_add(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_add(value, mo);
 	}
 	MSTL_ALWAYS_INLINE value_type
-	fetch_add(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_add(&value_, value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_sub(value, mo);
 	}
 	MSTL_ALWAYS_INLINE value_type
-	fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_sub(&value_, value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_and(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_and(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_and(value, mo);
 	}
 	MSTL_ALWAYS_INLINE value_type
-	fetch_and(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_and(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_and(&value_, value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_or(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_or(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_or(value, mo);
 	}
 	MSTL_ALWAYS_INLINE value_type
-	fetch_or(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_or(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_or(&value_, value, mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_xor(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_xor(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_xor(value, mo);
 	}
 	MSTL_ALWAYS_INLINE value_type
-	fetch_xor(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_xor(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_xor(&value_, value, mo);
 	}
 };
@@ -952,16 +966,16 @@ public:
 	atomic_base& operator=(const atomic_base&) volatile = delete;
 	~atomic_base() noexcept = default;
 
-	constexpr atomic_base(value_type ptr) noexcept : ptr_(ptr) {}
+	constexpr atomic_base(const value_type ptr) noexcept : ptr_(ptr) {}
 
 	operator value_type() const noexcept { return load(); }
 	operator value_type() const volatile noexcept { return load(); }
 
-	value_type operator =(value_type ptr) noexcept {
+	value_type operator =(const value_type ptr) noexcept {
 		atomic_base::store(ptr);
 		return ptr;
 	}
-	value_type operator =(value_type ptr) volatile noexcept {
+	value_type operator =(const value_type ptr) volatile noexcept {
 		atomic_base::store(ptr);
 		return ptr;
 	}
@@ -979,8 +993,8 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_add_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(sizeof(T))));
 		return reinterpret_cast<value_type>(old_ptr + sizeof(T));
@@ -994,8 +1008,8 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_sub_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-static_cast<ptrdiff_t>(sizeof(T)))));
 		return reinterpret_cast<value_type>(old_ptr - sizeof(T));
@@ -1009,8 +1023,8 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_add_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(dest * sizeof(T))));
 		return reinterpret_cast<value_type>(old_ptr + dest * sizeof(T));
@@ -1024,8 +1038,8 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_sub_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-dest * static_cast<ptrdiff_t>(sizeof(T)))));
 		return reinterpret_cast<value_type>(old_ptr - dest * sizeof(T));
@@ -1040,12 +1054,12 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE void
-	store(value_type ptr, memory_order mo = memory_order_seq_cst) noexcept {
+	store(const value_type ptr, const memory_order mo = memory_order_seq_cst) noexcept {
 		const_cast<volatile atomic_base*>(this)->store(ptr, mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE void
-	store(value_type ptr, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	store(const value_type ptr, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		memory_order rmo MSTL_UNUSED = mo & memory_order_modifier::memory_order_mask;
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acquire);
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
@@ -1054,19 +1068,19 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		__atomic_store_n(&ptr_, ptr, static_cast<int32_t>(mo));
 #else
-		_InterlockedExchangePointer(
+		::_InterlockedExchangePointer(
 		    reinterpret_cast<void* volatile*>(&ptr_), ptr);
 		_INNER apply_memory_order_store(mo);
 #endif
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	load(memory_order mo = memory_order_seq_cst) const noexcept {
+	load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return const_cast<const volatile atomic_base*>(this)->load(mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE value_type
-	load(memory_order mo = memory_order_seq_cst) const volatile noexcept {
+	load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 		memory_order rmo MSTL_UNUSED = mo & memory_order_modifier::memory_order_mask;
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_release);
 		MSTL_CONSTEXPR_ASSERT(rmo != memory_order_acq_rel);
@@ -1074,24 +1088,24 @@ public:
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_load_n(&ptr_, static_cast<int32_t>(mo));
 #else
-		value_type result = *reinterpret_cast<value_type const volatile*>(&ptr_);
+		const value_type result = *reinterpret_cast<value_type const volatile*>(&ptr_);
 		_INNER apply_memory_order_load(mo);
 		return result;
 #endif
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	exchange(value_type ptr, memory_order mo = memory_order_seq_cst) noexcept {
+	exchange(const value_type ptr, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->exchange(ptr, mo);
 	}
 
 	ATOMIC_ALWAYS_INLINE value_type
-	exchange(value_type ptr, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	exchange(const value_type ptr, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_exchange_n(&ptr_, ptr, static_cast<int32_t>(mo));
 #else
-		value_type old = static_cast<value_type>(
-		    _InterlockedExchangePointer(
+		const value_type old = static_cast<value_type>(
+		    ::_InterlockedExchangePointer(
 			reinterpret_cast<void* volatile*>(&ptr_), ptr));
 		_INNER apply_memory_order_seq_cst(mo);
 		return old;
@@ -1100,32 +1114,32 @@ public:
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return const_cast<volatile atomic_base*>(this)->compare_exchange_weak(expected, desired, success, failure);
 	}
 
 	ATOMIC_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		MSTL_CONSTEXPR_ASSERT(is_valid_cmpexch_failure_order(failure));
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_compare_exchange_n(
 		    &ptr_, &expected, desired, 1,
 		    static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
-		void* old = _InterlockedCompareExchangePointer(
+		void* old = ::_InterlockedCompareExchangePointer(
 		    reinterpret_cast<void* volatile*>(&ptr_),
 		    desired,
 		    expected);
 		if (old == expected) {
 			if (success == memory_order_seq_cst) {
-				_ReadWriteBarrier();
+				::_ReadWriteBarrier();
 			}
 			return true;
 		}
 		expected = static_cast<value_type>(old);
 		if (failure == memory_order_seq_cst) {
-			_ReadWriteBarrier();
+			::_ReadWriteBarrier();
 		}
 		return false;
 #endif
@@ -1133,25 +1147,25 @@ public:
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return _INNER compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_weak(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) volatile noexcept {
+		return _INNER compare_exchange_weak(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return const_cast<volatile atomic_base*>(this)->compare_exchange_strong(expected, desired, success, failure);
 	}
 
 	ATOMIC_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		MSTL_CONSTEXPR_ASSERT(is_valid_cmpexch_failure_order(failure));
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_compare_exchange_n(
@@ -1159,25 +1173,25 @@ public:
 		    static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
 		// On x86/x64, weak and strong are the same
-		return compare_exchange_weak(expected, desired, success, failure);
+		return _INNER compare_exchange_weak(expected, desired, success, failure);
 #endif
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return _INNER compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 	MSTL_ALWAYS_INLINE bool
 	compare_exchange_strong(value_type& expected, value_type desired,
-		memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) volatile noexcept {
+		return _INNER compare_exchange_strong(expected, desired, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(value_type old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(value_type old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(&ptr_, old, [mo, this] {
 			return this->load(mo);
 		});
@@ -1193,16 +1207,16 @@ public:
 
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_add(const ptrdiff_t dest, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_add(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_add(dest, mo);
 	}
 	ATOMIC_ALWAYS_INLINE value_type
-	fetch_add(const ptrdiff_t dest, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_add(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_fetch_add(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(dest * sizeof(T))));
 		_INNER apply_memory_order_seq_cst(mo);
@@ -1211,16 +1225,16 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_sub(const ptrdiff_t dest, memory_order mo = memory_order_seq_cst) noexcept {
+	fetch_sub(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) noexcept {
 		return const_cast<volatile atomic_base*>(this)->fetch_sub(dest, mo);
 	}
 	ATOMIC_ALWAYS_INLINE value_type
-	fetch_sub(const ptrdiff_t dest, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	fetch_sub(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_fetch_sub(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
 #else
-		char* old_ptr = reinterpret_cast<char*>(
-		    _InterlockedExchangeAdd64(
+		const char* old_ptr = reinterpret_cast<char*>(
+		    ::_InterlockedExchangeAdd64(
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-dest * static_cast<ptrdiff_t>(sizeof(T)))));
 		_INNER apply_memory_order_seq_cst(mo);
@@ -1239,7 +1253,7 @@ store(T* ptr, __atomic_raw_value<T> value, memory_order mo) noexcept {
 	__atomic_store(ptr, _MSTL addressof(value), static_cast<int32_t>(mo));
 #else
 	__atomic_raw_value<T> expected = *ptr;
-	while (!compare_exchange_weak(ptr, expected, value, mo, memory_order_relaxed)) {
+	while (!_INNER compare_exchange_weak(ptr, expected, value, mo, memory_order_relaxed)) {
 		// Retry
 	}
 #endif
@@ -1256,7 +1270,7 @@ load(const T* ptr, memory_order mo) noexcept {
 #else
 	__atomic_raw_value<T> result;
 	_MSTL memory_copy(&result, ptr, sizeof(T));
-	apply_memory_order_load(mo);
+	_INNER apply_memory_order_load(mo);
 	return result;
 #endif
 }
@@ -1270,8 +1284,8 @@ exchange(T* ptr, __atomic_raw_value<T> desired, memory_order mo) noexcept {
 	__atomic_exchange(ptr, _MSTL addressof(desired), dest, static_cast<int32_t>(mo));
 	return *dest;
 #else
-	__atomic_raw_value<T> old = load(ptr, memory_order_relaxed);
-	while (!compare_exchange_weak(ptr, old, desired, mo, memory_order_relaxed)) {
+	__atomic_raw_value<T> old = _INNER load(ptr, memory_order_relaxed);
+	while (!_INNER compare_exchange_weak(ptr, old, desired, mo, memory_order_relaxed)) {
 		// Retry
 	}
 	return old;
@@ -1363,69 +1377,69 @@ public:
 		return _INNER is_lock_free_impl<sizeof(Float), inner_align>();
 	}
 
-	void store(Float value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	void store(Float value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		_INNER store(&float_, value, mo);
 	}
-	void store(Float value, memory_order mo = memory_order_seq_cst) noexcept {
+	void store(Float value, const memory_order mo = memory_order_seq_cst) noexcept {
 		_INNER store(&float_, value, mo);
 	}
 
-	Float load(memory_order mo = memory_order_seq_cst) const volatile noexcept {
+	Float load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 		return _INNER load(&float_, mo);
 	}
-	Float load(memory_order mo = memory_order_seq_cst) const noexcept {
+	Float load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER load(&float_, mo);
 	}
 
 	operator Float() const volatile noexcept { return this->load(); }
 	operator Float() const noexcept { return this->load(); }
 
-	Float exchange(Float desire, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	Float exchange(Float desire, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER exchange(&float_, desire, mo);
 	}
-	Float exchange(Float desire, memory_order mo = memory_order_seq_cst) noexcept {
+	Float exchange(Float desire, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER exchange(&float_, desire, mo);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_weak(&float_, expected, desire, success, failure);
 	}
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		return _INNER compare_exchange_weak(&float_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order success, memory_order failure) noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_strong(&float_, expected, desire, success, failure);
 	}
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order success, memory_order failure) volatile noexcept {
+		const memory_order success, const memory_order failure) volatile noexcept {
 		return _INNER compare_exchange_strong(&float_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) volatile noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) volatile noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(Float old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(Float old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(&float_, old, [mo, this] {
 			return this->load(mo);
 		});
@@ -1440,17 +1454,17 @@ public:
 	}
 
 
-	value_type fetch_add(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_add_float(&float_, value, mo);
 	}
-	value_type fetch_add(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_add_float(&float_, value, mo);
 	}
 
-	value_type fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_sub_float(&float_, value, mo);
 	}
-	value_type fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) volatile noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 		return _INNER fetch_sub_float(&float_, value, mo);
 	}
 
@@ -1511,41 +1525,41 @@ public:
 		return _INNER is_lock_free_impl<sizeof(T), required_alignment>();
 	}
 
-	void store(T value, memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
-	T load(memory_order mo = memory_order_seq_cst) const noexcept {
+	T load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER load(ptr_, mo);
 	}
 
-	T exchange(T desire, memory_order mo = memory_order_seq_cst) const noexcept {
+	T exchange(T desire, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(T old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(T old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(ptr_, old, [this, mo] {
 			return this->load(mo);
 		});
@@ -1599,41 +1613,41 @@ public:
 		return _INNER is_lock_free_impl<sizeof(T), required_alignment>();
 	}
 
-	void store(T value, memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
-	T load(memory_order mo = memory_order_seq_cst) const noexcept {
+	T load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER load(ptr_, mo);
 	}
 
-	T exchange(T desire, memory_order mo = memory_order_seq_cst) const noexcept {
+	T exchange(T desire, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(T old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(T old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(ptr_, old, [this, mo] {
 		    return this->load(mo);
 		});
@@ -1648,23 +1662,23 @@ public:
 	}
 
 
-	value_type fetch_add(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_add(ptr_, value, mo);
 	}
 
-	value_type fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_sub(ptr_, value, mo);
 	}
 
-	value_type fetch_and(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_and(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_and(ptr_, value, mo);
 	}
 
-	value_type fetch_or(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_or(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_or(ptr_, value, mo);
 	}
 
-	value_type fetch_xor(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_xor(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_xor(ptr_, value, mo);
 	}
 
@@ -1734,41 +1748,41 @@ public:
 		return _INNER is_lock_free_impl<sizeof(Float), required_alignment>();
 	}
 
-	void store(Float value, memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(Float value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
-	Float load(memory_order mo = memory_order_seq_cst) const noexcept {
+	Float load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER load(ptr_, mo);
 	}
 
-	Float exchange(Float desire, memory_order mo = memory_order_seq_cst) const noexcept {
+	Float exchange(Float desire, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(Float old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(Float old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(ptr_, old, [this, mo] {
 			return this->load(mo);
 		});
@@ -1783,11 +1797,11 @@ public:
 	}
 
 
-	value_type fetch_add(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_add_float(ptr_, value, mo);
 	}
 
-	value_type fetch_sub(value_type value, memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_sub_float(ptr_, value, mo);
 	}
 
@@ -1842,41 +1856,41 @@ public:
 		return _INNER is_lock_free_impl<sizeof(T*), required_alignment>();
 	}
 
-	void store(T* value, memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T* value, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
-	T* load(memory_order mo = memory_order_seq_cst) const noexcept {
+	T* load(const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER load(ptr_, mo);
 	}
 
-	T* exchange(T* desire, memory_order mo = memory_order_seq_cst) const noexcept {
+	T* exchange(T* desire, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T*& expected, T* desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T*& expected, T* desire,
-		memory_order success, memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) const noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T*& expected, T* desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T*& expected, T* desire,
-		memory_order mo = memory_order_seq_cst) const noexcept {
-		return compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		const memory_order mo = memory_order_seq_cst) const noexcept {
+		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 
 	MSTL_ALWAYS_INLINE void
-	wait(T* old, memory_order mo = memory_order_seq_cst) const noexcept {
+	wait(T* old, const memory_order mo = memory_order_seq_cst) const noexcept {
 		_MSTL atomic_wait_address_v(ptr_, old, [this, mo] {
 			return this->load(mo);
 		});
@@ -1892,12 +1906,12 @@ public:
 
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_add(const difference_type dest, memory_order mo = memory_order_seq_cst) const noexcept {
+	fetch_add(const difference_type dest, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_add(ptr_, real_type_sizes(dest), mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_sub(const difference_type dest, memory_order mo = memory_order_seq_cst) const noexcept {
+	fetch_sub(const difference_type dest, const memory_order mo = memory_order_seq_cst) const noexcept {
 		return _INNER fetch_sub(ptr_, real_type_sizes(dest), mo);
 	}
 
@@ -1920,6 +1934,8 @@ public:
 		return _INNER sub_fetch(ptr_, real_type_sizes(dest));
 	}
 };
+
+#undef ATOMIC_ALWAYS_INLINE
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__

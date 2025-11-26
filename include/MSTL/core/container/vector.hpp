@@ -185,6 +185,10 @@ public:
 	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const self& x) const noexcept {
 		return !(*this < x);
 	}
+
+	MSTL_NODISCARD constexpr pointer base() const noexcept {
+		return ptr_;
+	}
 };
 
 template <typename T, typename Alloc = allocator<T>>

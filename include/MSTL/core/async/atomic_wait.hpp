@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #include "../numeric/numeric_limits.hpp"
+#include "../memory/memory.hpp"
 #include "../config/terminate.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
@@ -58,7 +59,7 @@ void platform_wait(const T* addr, const platform_wait_t val) noexcept {
 	const ::BOOL result = ::WaitOnAddress(
 		p, const_cast<platform_wait_t*>(&val),
 		sizeof(platform_wait_t),
-		numeric_limits<uint32_t>::max());
+		_MSTL numeric_limits<uint32_t>::max());
 
 	if (result == 0) {
 		::DWORD err = ::GetLastError();
@@ -95,7 +96,7 @@ void platform_notify(const T* addr, const bool all) noexcept {
 #endif
 }
 
-inline void thread_yield() noexcept {
+MSTL_ALWAYS_INLINE_INLINE void thread_yield() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
 	::SwitchToThread();
 #else
@@ -103,7 +104,7 @@ inline void thread_yield() noexcept {
 #endif
 }
 
-inline void thread_relax() noexcept {
+MSTL_ALWAYS_INLINE_INLINE void thread_relax() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
 	::YieldProcessor();
 #else
@@ -135,7 +136,7 @@ bool atomic_spin(Pred& pred, Spin spin = Spin{}) noexcept {
 
 template <typename T>
 bool atomic_compare(const T& lh, const T& rh) {
-	return __builtin_memcmp(&lh, &rh, sizeof(T)) == 0;
+	return _MSTL memory_compare(&lh, &rh, sizeof(T)) == 0;
 }
 
 
@@ -209,7 +210,7 @@ private:
 	template <typename U, enable_if_t<PLATFORM_WAIT_USE_T<U>, int> = 0>
 	MSTL_ALWAYS_INLINE static void waiter_do_spin_v_impl(
 		platform_wait_t*, const U& old, platform_wait_t& value) {
-		memory_copy(&value, &old, sizeof(value));
+		_MSTL memory_copy(&value, &old, sizeof(value));
 	}
 	template <typename U, enable_if_t<!PLATFORM_WAIT_USE_T<U>, int> = 0>
 	MSTL_ALWAYS_INLINE static void waiter_do_spin_v_impl(
@@ -322,9 +323,8 @@ public:
 	void waiter_do_wait(Pred pred) noexcept {
 		do {
 			platform_wait_t value;
-			if (base_type::writer_do_spin(pred, value))
-				return;
-			base_type::waiter_.waiter_do_wait(base_type::addr_, value);
+			if (base_type::writer_do_spin(pred, value)) return;
+			waiter_.waiter_do_wait(base_type::addr_, value);
 		} while (!pred());
 	}
 };

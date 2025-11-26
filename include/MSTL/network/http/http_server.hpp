@@ -2,7 +2,7 @@
 #define MSTL_NETWORK_HTTP_SERVER_HPP__
 #include "MSTL/core/config/undef_cmacro.hpp"
 #include "../socket.hpp"
-#include "router.hpp"
+#include "http_router.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, link_exception, "Http Actions Failed");
@@ -23,7 +23,7 @@ private:
     _INNER __session_manager session_manager_;
     HTTP_COOKIE_NAME cookie_name_ = HTTP_COOKIE_NAME::JSESSIONID;
 
-    router router_;
+    http_router router_;
 
 private:
     void start_workers(int thread_count);
@@ -50,8 +50,8 @@ public:
 
     ~http_server() { stop(); }
 
-    router& get_router() noexcept { return router_; }
-    const router& get_router() const noexcept { return router_; }
+    http_router& get_router() noexcept { return router_; }
+    const http_router& get_router() const noexcept { return router_; }
 
     session* get_session(http_request& request, bool create = false);
 

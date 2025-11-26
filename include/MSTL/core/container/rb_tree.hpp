@@ -230,6 +230,10 @@ public:
 		MSTL_DEBUG_VERIFY(tree_ == rh.tree_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(rb_tree_iterator));
         return __rb_tree_base_iterator::operator !=(rh);
     }
+
+    MSTL_NODISCARD constexpr pointer base() const noexcept {
+        return node_;
+    }
 };
 
 

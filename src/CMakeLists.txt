@@ -134,7 +134,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/config/exception.cpp

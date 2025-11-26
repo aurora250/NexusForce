@@ -696,7 +696,7 @@ void test_http_server() {
     try {
         http_server server(8080);
 
-        router& r = server.get_router();
+        http_router& r = server.get_router();
         r.use(new logging_filter());
         r.use(new cors_filter("http://127.0.0.1:5500"));
         r.use(new static_file_filter(res_root));

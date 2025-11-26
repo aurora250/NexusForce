@@ -974,6 +974,15 @@ template <typename T>
 MSTL_INLINE17 constexpr bool is_trivially_copyable_v = is_trivially_copyable<T>::value;
 
 
+#ifdef MSTL_STANDARD_20__
+template <typename To, typename From>
+    requires (sizeof(To) == sizeof(From)) && is_trivially_copyable_v<To> && is_trivially_copyable_v<From>
+MSTL_NODISCARD constexpr To bit_cast(const From& value) noexcept {
+    return __builtin_bit_cast(To, value);
+}
+#endif
+
+
 template <typename T>
 struct has_virtual_destructor : bool_constant<__has_virtual_destructor(T)> {};
 template <typename T>

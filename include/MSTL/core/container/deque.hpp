@@ -237,6 +237,10 @@ public:
         x.node_ = nullptr;
         x.deq_ = nullptr;
     }
+
+    MSTL_NODISCARD pointer base() const noexcept {
+        return cur_;
+    }
 };
 template <bool IsConst, typename Deque, size_t BufSize>
 void swap (

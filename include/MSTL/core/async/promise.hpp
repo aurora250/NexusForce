@@ -3,15 +3,15 @@
 #include "future.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename Result>
+template <typename Res>
 class promise {
-    static_assert(!is_array<Result>{}, "result type must not be an array");
-    static_assert(!is_function<Result>{}, "result type must not be a function");
-    static_assert(is_destructible<Result>{}, "result type must be destructible");
+    static_assert(!is_array<Res>{}, "result type must not be an array");
+    static_assert(!is_function<Res>{}, "result type must not be a function");
+    static_assert(is_destructible<Res>{}, "result type must be destructible");
 
 public:
     typedef __future_base::state_base state_type;
-    typedef __future_base::basic_result<Result> result_type;
+    typedef __future_base::basic_result<Res> result_type;
     typedef __future_base::Ptr<result_type> ptr_type;
 
 private:
@@ -21,16 +21,17 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
+    state_type& state() {
+        __future_base::state_base::check(future_ptr);
+        return *future_ptr;
+    }
+
 public:
     promise()
-        : future_ptr(_MSTL make_shared<state_type>())
-        , storage(new result_type())
-    { }
+    : future_ptr(_MSTL make_shared<state_type>()) , storage(new result_type()) {}
 
     promise(promise&& other) noexcept
-        : future_ptr(_MSTL move(other.future_ptr))
-        , storage(_MSTL move(other.storage))
-    { }
+    : future_ptr(_MSTL move(other.future_ptr)) , storage(_MSTL move(other.storage)) {}
 
     promise(const promise&) = delete;
 
@@ -52,15 +53,15 @@ public:
         storage.swap(other.storage);
     }
 
-    future<Result> get_future() {
-        return future<Result>(future_ptr);
+    future<Res> get_future() {
+        return future<Res>(future_ptr);
     }
 
-    void set_value(const Result& value) {
+    void set_value(const Res& value) {
         state().set_result(state_type::create_setter(this, value));
     }
 
-    void set_value(Result&& value) {
+    void set_value(Res&& value) {
         state().set_result(state_type::create_setter(this, _MSTL move(value)));
     }
 
@@ -68,11 +69,11 @@ public:
         state().set_result(state_type::create_setter(exception, this));
     }
 
-    void set_value_at_thread_exit(const Result& value) {
+    void set_value_at_thread_exit(const Res& value) {
         state().set_delayed_result(state_type::create_setter(this, value), future_ptr);
     }
 
-    void set_value_at_thread_exit(Result&& value) {
+    void set_value_at_thread_exit(Res&& value) {
         state().set_delayed_result(
             state_type::create_setter(this, _MSTL move(value)), future_ptr);
     }
@@ -80,25 +81,19 @@ public:
     void set_exception_at_thread_exit(exception_ptr exception) {
         state().set_delayed_result(state_type::create_setter(exception, this), future_ptr);
     }
-
-private:
-    state_type& state() {
-        __future_base::state_base::check(future_ptr);
-        return *future_ptr;
-    }
 };
 
-template<typename Result>
-inline void swap(promise<Result>& left, promise<Result>& right) noexcept
-{
+template <typename Res>
+void swap(promise<Res>& left, promise<Res>& right) noexcept {
     left.swap(right);
 }
 
-template <typename Result>
-class promise<Result&> {
+
+template <typename Res>
+class promise<Res&> {
 public:
     typedef __future_base::state_base state_type;
-    typedef __future_base::basic_result<Result&> result_type;
+    typedef __future_base::basic_result<Res&> result_type;
     typedef __future_base::Ptr<result_type> ptr_type;
 
 private:
@@ -108,16 +103,17 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
+    state_type& state() {
+        __future_base::state_base::check(future_ptr);
+        return *future_ptr;
+    }
+
 public:
     promise()
-        : future_ptr(_MSTL make_shared<state_type>())
-        , storage(new result_type())
-    { }
+    : future_ptr(_MSTL make_shared<state_type>()), storage(new result_type()) {}
 
     promise(promise&& other) noexcept
-        : future_ptr(_MSTL move(other.future_ptr))
-        , storage(_MSTL move(other.storage))
-    { }
+    : future_ptr(_MSTL move(other.future_ptr)), storage(_MSTL move(other.storage)) {}
 
     promise(const promise&) = delete;
 
@@ -139,11 +135,11 @@ public:
         storage.swap(other.storage);
     }
 
-    future<Result&> get_future() {
-        return future<Result&>(future_ptr);
+    future<Res&> get_future() {
+        return future<Res&>(future_ptr);
     }
 
-    void set_value(Result& value) {
+    void set_value(Res& value) {
         state().set_result(state_type::create_setter(this, value));
     }
 
@@ -151,18 +147,12 @@ public:
         state().set_result(state_type::create_setter(exception, this));
     }
 
-    void set_value_at_thread_exit(Result& value) {
+    void set_value_at_thread_exit(Res& value) {
         state().set_delayed_result(state_type::create_setter(this, value), future_ptr);
     }
 
     void set_exception_at_thread_exit(exception_ptr exception) {
         state().set_delayed_result(state_type::create_setter(exception, this), future_ptr);
-    }
-
-private:
-    state_type& state() {
-        __future_base::state_base::check(future_ptr);
-        return *future_ptr;
     }
 };
 
@@ -180,15 +170,17 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
+    state_type& state() {
+        __future_base::state_base::check(future_ptr);
+        return *future_ptr;
+    }
+
 public:
     promise()
-    : future_ptr(_MSTL make_shared<state_type>())
-    , storage(new result_type()) {}
+    : future_ptr(_MSTL make_shared<state_type>()), storage(new result_type()) {}
 
     promise(promise&& other) noexcept
-        : future_ptr(_MSTL move(other.future_ptr))
-        , storage(_MSTL move(other.storage))
-    { }
+    : future_ptr(_MSTL move(other.future_ptr)), storage(_MSTL move(other.storage)) {}
 
     promise(const promise&) = delete;
 
@@ -229,18 +221,15 @@ public:
     void set_exception_at_thread_exit(exception_ptr exception) {
         state().set_delayed_result(state_type::create_setter(exception, this), future_ptr);
     }
-
-private:
-    state_type& state() {
-        __future_base::state_base::check(future_ptr);
-        return *future_ptr;
-    }
 };
 
 
-template <typename PtrType, typename Function, typename Result>
+template <typename PtrT, typename Func, typename>
 struct __future_base::task_setter {
-    PtrType operator()() const {
+    PtrT* result_ptr;
+    Func* function_ptr;
+
+    PtrT operator()() const {
         try {
             (*result_ptr)->set((*function_ptr)());
         } catch(...) {
@@ -248,13 +237,14 @@ struct __future_base::task_setter {
         }
         return _MSTL move(*result_ptr);
     }
-    PtrType* result_ptr;
-    Function* function_ptr;
 };
 
-template <typename PtrType, typename Function>
-struct __future_base::task_setter<PtrType, Function, void> {
-    PtrType operator()() const {
+template <typename PtrT, typename Func>
+struct __future_base::task_setter<PtrT, Func, void> {
+    PtrT* result_ptr;
+    Func* function_ptr;
+
+    PtrT operator()() const {
         try {
             (*function_ptr)();
         } catch(...) {
@@ -262,81 +252,72 @@ struct __future_base::task_setter<PtrType, Function, void> {
         }
         return _MSTL move(*result_ptr);
     }
-    PtrType* result_ptr;
-    Function* function_ptr;
 };
 
-template <typename Result, typename... Args>
-struct __future_base::task_state_base<Result(Args...)>
-    : __future_base::state_base {
-    typedef Result result_type;
+template <typename Res, typename... Args>
+struct __future_base::task_state_base<Res(Args...)> : __future_base::state_base {
+    typedef Res result_type;
+    typedef __future_base::Ptr<basic_result<Res>> PtrType;
+    PtrType result_storage;
 
     template<typename Alloc>
     task_state_base(const Alloc& alloc)
-        : result_storage(allocate_result<Result>(alloc))
-    { }
+    : result_storage(allocate_result<Res>(alloc)) {}
 
     virtual void run(Args&&... args) = 0;
 
     virtual void run_delayed(Args&&... args, weak_ptr<state_base> self) = 0;
 
     virtual shared_ptr<task_state_base> reset() = 0;
-
-    typedef __future_base::Ptr<basic_result<Result>> PtrType;
-    PtrType result_storage;
 };
 
-template <typename Function, typename Alloc, typename Result, typename... Args>
-struct __future_base::task_state<Function, Alloc, Result(Args...)> final
-    : __future_base::task_state_base<Result(Args...)> {
-    template<typename Function2>
-    task_state(Function2&& function, const Alloc& alloc)
-        : task_state_base<Result(Args...)>(alloc)
-        , implementation(_MSTL forward<Function2>(function), alloc)
-    {}
+template <typename Func, typename Alloc, typename Res, typename... Args>
+struct __future_base::task_state<Func, Alloc, Res(Args...)> final
+    : __future_base::task_state_base<Res(Args...)> {
+    template <typename Func2>
+    task_state(Func2&& func, const Alloc& alloc)
+    : task_state_base<Res(Args...)>(alloc)
+    , impl(_MSTL forward<Func2>(func), alloc) {}
 
 private:
     virtual void run(Args&&... args) {
-        auto bound_function = [&]() -> Result {
-            return _MSTL invoke_r<Result>(implementation.function_ptr,
-                                         _MSTL forward<Args>(args)...);
+        auto bound_func = [&]() -> Res {
+            return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
-        this->set_result(create_task_setter(this->result_storage, bound_function));
+        this->set_result(create_task_setter(this->result_storage, bound_func));
     }
 
     virtual void run_delayed(Args&&... args, weak_ptr<state_base> self) {
-        auto bound_function = [&]() -> Result {
-            return _MSTL invoke_r<Result>(implementation.function_ptr,
-                                         _MSTL forward<Args>(args)...);
+        auto bound_function = [&]() -> Res {
+            return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
-        this->set_delayed_result(create_task_setter(this->result_storage, bound_function),
-                               _MSTL move(self));
+        this->set_delayed_result(create_task_setter(this->result_storage, bound_function), _MSTL move(self));
     }
 
-    virtual shared_ptr<task_state_base<Result(Args...)>>
+    virtual shared_ptr<task_state_base<Res(Args...)>>
     reset();
 
     struct Implementation : Alloc {
-        template<typename Function2>
-        Implementation(Function2&& function, const Alloc& alloc)
-            : Alloc(alloc), function_ptr(_MSTL forward<Function2>(function)) { }
-        Function function_ptr;
-    } implementation;
+        Func function_ptr;
+
+        template <typename Func2>
+        Implementation(Func2&& func, const Alloc& alloc)
+        : Alloc(alloc), function_ptr(_MSTL forward<Func2>(func)) {}
+    } impl;
 };
 
-template <typename Signature, typename Function, typename Alloc = _MSTL allocator<int>>
-static shared_ptr<__future_base::task_state_base<Signature>>
-create_task_state(Function&& function, const Alloc& alloc = Alloc()) {
-    typedef typename decay<Function>::type Function2;
-    typedef __future_base::task_state<Function2, Alloc, Signature> State;
-    return _MSTL allocate_shared<State>(alloc, _MSTL forward<Function>(function), alloc);
+template <typename Sign, typename Func, typename Alloc = _MSTL allocator<int>>
+static shared_ptr<__future_base::task_state_base<Sign>>
+create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
+    typedef typename decay<Func>::type Function2;
+    typedef __future_base::task_state<Function2, Alloc, Sign> State;
+    return _MSTL allocate_shared<State>(alloc, _MSTL forward<Func>(func), alloc);
 }
 
-template <typename Function, typename Alloc, typename Result, typename... Args>
-shared_ptr<__future_base::task_state_base<Result(Args...)>>
-__future_base::task_state<Function, Alloc, Result(Args...)>::reset() {
-    return create_task_state<Result(Args...)>(
-        _MSTL move(implementation.function_ptr), static_cast<Alloc&>(implementation));
+template <typename Func, typename Alloc, typename Res, typename... Args>
+shared_ptr<__future_base::task_state_base<Res(Args...)>>
+__future_base::task_state<Func, Alloc, Res(Args...)>::reset() {
+    return create_task_state<Res(Args...)>(_MSTL move(impl.function_ptr), static_cast<Alloc&>(impl));
 }
 
 MSTL_END_NAMESPACE__

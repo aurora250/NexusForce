@@ -154,6 +154,10 @@ public:
     MSTL_NODISCARD bool operator !=(const self& x) const noexcept {
         return !(*this == x);
     }
+
+    MSTL_NODISCARD pointer base() const noexcept {
+        return cur_;
+    }
 };
 
 

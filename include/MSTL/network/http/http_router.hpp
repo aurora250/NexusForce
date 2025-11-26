@@ -1,10 +1,10 @@
 #ifndef MSTL_NETWORK_HTTP_ROUTER_HPP__
 #define MSTL_NETWORK_HTTP_ROUTER_HPP__
 #include "MSTL/core/functional/function.hpp"
-#include "filter.hpp"
+#include "http_filter.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class MSTL_API router {
+class MSTL_API http_router {
 public:
     using handler_func = function<void(http_request&, http_response&)>;
 
@@ -20,8 +20,8 @@ private:
     static vector<string> split_methods(const string& method_str);
 
 public:
-    router();
-    ~router() = default;
+    http_router();
+    ~http_router() = default;
 
     void get(const string& path, handler_func handler);
     void post(const string& path, handler_func handler);

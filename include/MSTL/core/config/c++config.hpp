@@ -74,6 +74,15 @@
 #endif
 
 
+#ifdef MSTL_COMPILER_MSVC__
+	#define MSTL_THREAD_LOCAL __declspec(thread)
+#elif defined(MSTL_COMPILER_GCC__)
+	#define MSTL_THREAD_LOCAL thread_local
+#else
+	#define MSTL_THREAD_LOCAL
+#endif
+
+
 #if defined(MSTL_PLATFORM_WIN64__) || defined(MSTL_PLATFORM_LINUX64__) || defined(__amd64__) || defined(__x86_64__) || defined(__aarch64__)
 	// defined when project compiled in 64bits systems.
 	#define MSTL_DATA_BUS_WIDTH_64__	1
