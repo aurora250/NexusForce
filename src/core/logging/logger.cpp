@@ -30,11 +30,11 @@ void logger::stop_worker() {
     cv_.notify_all();
 
     if (worker_.joinable()) {
-        auto timeout = _MSTL chrono::seconds(5);
+        auto timeout = _MSTL_CHRONO seconds(5);
         if (worker_.joinable()) {
-            auto start = _MSTL chrono::steady_clock::now();
-            while (worker_.joinable() && _MSTL chrono::steady_clock::now() - start < timeout) {
-                _MSTL this_thread::sleep_for(_MSTL chrono::milliseconds(10));
+            auto start = _MSTL_CHRONO steady_clock::now();
+            while (worker_.joinable() && _MSTL_CHRONO steady_clock::now() - start < timeout) {
+                _MSTL this_thread::sleep_for(_MSTL_CHRONO milliseconds(10));
             }
 
             if (worker_.joinable()) {
@@ -52,7 +52,7 @@ void logger::worker_loop() {
 
         {
             _MSTL unique_lock<_MSTL mutex> lock(queue_mutex_);
-            cv_.wait_for(lock, _MSTL chrono::milliseconds(100), [this] {
+            cv_.wait_for(lock, _MSTL_CHRONO milliseconds(100), [this] {
                 return !queue_.empty() ||
                        flush_requested_.load(_MSTL memory_order_acquire);
             });

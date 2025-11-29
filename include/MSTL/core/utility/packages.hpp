@@ -57,8 +57,7 @@ public:
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view lower) {
         self obj;
-        string str(lower);
-        str.trim();
+        string str(lower.trim());
         try {
             obj = static_cast<bool>(to_int32(str.data(), nullptr, 10));
         } catch (...) {

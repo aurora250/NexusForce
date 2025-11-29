@@ -358,7 +358,7 @@ dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) 
 
 dns_query_result dns_client::query(
     const string& domain, const DNS_RECORD type, const DNS_QUERY qclass) {
-    const auto start_time = chrono::steady_clock::now();
+    const auto start_time = _MSTL_CHRONO steady_clock::now();
 
     const auto cache_key = create_cache_key(domain, type, qclass);
     auto cached = check_cache(cache_key);
@@ -375,8 +375,8 @@ dns_query_result dns_client::query(
     }
 
     auto result = parse_dns_response(response);
-    const auto end_time = chrono::steady_clock::now();
-    result.query_time = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
+    const auto end_time = _MSTL_CHRONO steady_clock::now();
+    result.query_time = _MSTL_CHRONO duration_cast<_MSTL_CHRONO milliseconds>(end_time - start_time);
 
     update_cache(cache_key, result);
 

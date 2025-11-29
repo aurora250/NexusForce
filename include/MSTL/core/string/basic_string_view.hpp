@@ -253,10 +253,6 @@ public:
         return substr(off, count);
     }
 
-    MSTL_NODISCARD constexpr bool equal_to(const self view) const noexcept {
-        return (char_traits_equal<Traits>)(data_, size_, view.data_, view.size_);
-    }
-
     MSTL_NODISCARD constexpr int compare(const self view) const noexcept {
         return (char_traits_compare<Traits>)(data_, size_, view.data_, view.size_);
     }
@@ -363,6 +359,99 @@ public:
     MSTL_NODISCARD constexpr size_type find_last_not_of(const CharT* const str,
         const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
+    }
+
+    MSTL_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
+        size_type n = 0;
+        for (size_type idx = position; idx < size_; ++idx) {
+            if (*(data() + idx) == chr) ++n;
+        }
+        return n;
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const self view) const noexcept {
+        return view.size() <= size_ && traits_type::compare(data(), view.data(), view.size()) == 0;
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(value_type chr) const noexcept {
+        return !empty() && traits_type::eq(front(), chr);
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const_pointer str) const noexcept {
+        return this->starts_with(view_type(str));
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const self view) const noexcept {
+        const size_type view_size = view.size();
+        return view_size <= size_ && traits_type::compare(data_ + size_ - view_size, view.data(), view_size) == 0;
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(value_type chr) const noexcept {
+        return !empty() && traits_type::eq(back(), chr);
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const_pointer str) const noexcept {
+        return this->ends_with(view_type(str));
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const self view) const noexcept {
+        return this->find(view) != npos;
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(value_type chr) const noexcept {
+        return this->find(chr) != npos;
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const_pointer str) const noexcept {
+        return this->find(str) != npos;
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_left() const noexcept {
+        return this->trim_left_if([](value_type ch) { return _MSTL is_space(ch); });
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_right() const noexcept {
+        return this->trim_right_if([](value_type ch) { return _MSTL is_space(ch); });
+    }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim() const noexcept { 
+        return this->trim_left().trim_right(); 
+    }
+
+    template <typename Predicate>
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_left_if(Predicate pred) const
+    noexcept(noexcept(pred(*cbegin()))) {
+        if (empty()) return *this;
+
+        const_iterator it = cbegin();
+        while (it != cend() && pred(*it))
+            ++it;
+
+        if (it != cbegin())
+            return self(data_ + (it - cbegin()), size_ - (it - cbegin()));
+        
+        return *this;
+    }
+
+    template <typename Predicate>
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_right_if(Predicate pred) const
+    noexcept(noexcept(pred(*crbegin()))) {
+        if (empty()) return *this;
+
+        const_reverse_iterator rit = crbegin();
+        while (rit != crend() && pred(*rit))
+            ++rit;
+
+        if (rit != crbegin())
+            return self(data_, size_ - (rit - crbegin()));
+        
+        return *this;
+    }
+
+    template <typename Predicate>
+    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_if(Predicate pred) const
+    noexcept(noexcept(this->trim_right_if(pred)) && noexcept(this->trim_left_if(pred))) {
+        return this->trim_left_if(pred).trim_right_if(pred);
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal_to(const self str) const noexcept {
+        return (char_traits_equal<Traits>)(data_, size_, str.data_, str.size_);
+    }
+    
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
+        return equal_to(view_type(str));
     }
 
     constexpr void swap(self& view) noexcept {

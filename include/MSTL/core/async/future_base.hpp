@@ -216,7 +216,7 @@ struct __future_base {
         }
 
         template <typename Rep, typename Period>
-        future_status wait_for(const chrono::duration<Rep, Period>& relative_time) {
+        future_status wait_for(const _MSTL_CHRONO duration<Rep, Period>& relative_time) {
             if (status.load(memory_order_acquire) == status::ready) {
                 return future_status::ready;
             }
@@ -234,7 +234,7 @@ struct __future_base {
         }
 
         template <typename Clock, typename Dur>
-        future_status wait_until(const chrono::time_point<Clock, Dur>& absolute_time) {
+        future_status wait_until(const _MSTL_CHRONO time_point<Clock, Dur>& absolute_time) {
             static_assert(is_clock_v<Clock>);
             if (status.load(memory_order_acquire) == status::ready) {
                 return future_status::ready;
@@ -478,13 +478,13 @@ public:
     }
 
     template <typename Rep, typename Period>
-    future_status wait_for(const chrono::duration<Rep, Period>& relative_time) const {
+    future_status wait_for(const _MSTL_CHRONO duration<Rep, Period>& relative_time) const {
         state_base::check(state_ptr);
         return state_ptr->wait_for(relative_time);
     }
 
     template <typename Clock, typename Dur>
-    future_status wait_until(const chrono::time_point<Clock, Dur>& absolute_time) const {
+    future_status wait_until(const _MSTL_CHRONO time_point<Clock, Dur>& absolute_time) const {
         state_base::check(state_ptr);
         return state_ptr->wait_until(absolute_time);
     }

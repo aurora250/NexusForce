@@ -31,7 +31,7 @@ private:
     void accept_conns();
     void handle_client(const socket& client_socket);
 
-    static void parse_cookies(const string& cookie_header, http_request &request);
+    static void parse_cookies(string_view cookie_header, http_request &request);
     static void parse_parameters(http_request& request);
     static void parse_url_encoded(string_view data, unordered_map<string, string> &params);
     static string url_decode(string_view str);

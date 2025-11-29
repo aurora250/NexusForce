@@ -625,11 +625,11 @@ public:
 
 	bool compare_exchange_weak(value_type& ptr1, value_type ptr2,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _INNER compare_exchange_weak(ptr1, ptr2, mo, cmpexch_failure_order(mo));
+		return this->compare_exchange_weak(ptr1, ptr2, mo, cmpexch_failure_order(mo));
 	}
 	bool compare_exchange_weak(value_type& ptr1, value_type ptr2,
 		const memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return _INNER compare_exchange_weak(ptr1, ptr2, mo, cmpexch_failure_order(mo));
+		return this->compare_exchange_weak(ptr1, ptr2, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(value_type& ptr1, value_type ptr2,

@@ -133,6 +133,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
@@ -162,9 +163,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/router.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
 )
 
 # 编译为动态库

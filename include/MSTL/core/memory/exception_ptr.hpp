@@ -7,12 +7,12 @@ MSTL_BEGIN_NAMESPACE__
 
 class exception_ptr;
 
-exception_ptr current_exception() noexcept;
+exception_ptr MSTL_API current_exception() noexcept;
 
 template <typename Ex>
 exception_ptr make_exception_ptr(Ex) noexcept;
 
-void rethrow_exception(exception_ptr);
+void MSTL_API rethrow_exception(const exception_ptr &);
 
 MSTL_BEGIN_INNER__
 template <typename Ex>
@@ -79,9 +79,9 @@ private:
     template <typename Ex>
     friend exception_ptr make_exception_ptr(Ex) noexcept;
 
-    friend exception_ptr current_exception() noexcept;
+    friend exception_ptr MSTL_API current_exception() noexcept;
 
-    friend void rethrow_exception(exception_ptr);
+    friend void MSTL_API rethrow_exception(const exception_ptr &);
 
     template <typename Ex>
     friend class _INNER exception_handler;
@@ -163,8 +163,6 @@ inline void swap(exception_ptr& lhs, exception_ptr& rhs) noexcept {
 
 MSTL_BEGIN_INNER__
 
-MSTL_INLINE17 thread_local exception_ptr current_exception_ptr;
-
 template <typename Ex>
 class exception_handler {
 public:
@@ -181,34 +179,14 @@ public:
 
 MSTL_END_INNER__
 
-
-inline exception_ptr current_exception() noexcept {
-    return _INNER current_exception_ptr;
-}
-
-inline void rethrow_exception(exception_ptr p) {
-    if (!p) {
-        throw_exception(memory_exception());
-    }
-
-    if (p.ecb_ && p.ecb_->wrapper) {
-        p.ecb_->wrapper->rethrow();
-    } else {
-        throw_exception(memory_exception());
-    }
-}
-
 template <typename Ex>
 exception_ptr make_exception_ptr(Ex ex) noexcept {
     return _INNER exception_handler<Ex>::handle(_MSTL move(ex));
 }
 
-
 MSTL_BEGIN_INNER__
 
-inline void set_current_exception(exception_ptr ptr) noexcept {
-    _INNER current_exception_ptr = _MSTL move(ptr);
-}
+void MSTL_API set_current_exception(exception_ptr ptr) noexcept;
 
 template <typename Ex>
 exception_ptr capture_exception(Ex&& ex) noexcept {

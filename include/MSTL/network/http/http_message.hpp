@@ -54,8 +54,8 @@ public:
     MSTL_NODISCARD const class session* get_session() const noexcept { return session_; }
     MSTL_NODISCARD class session* get_session() noexcept { return session_; }
 
-    void set_header(const string& name, const string& value) {
-        headers_[name] = value;
+    void set_header(const string& name, string value) {
+        headers_[name] = _MSTL move(value);
     }
     MSTL_NODISCARD const string& header(const string& name) const noexcept {
         const auto it = headers_.find(name);

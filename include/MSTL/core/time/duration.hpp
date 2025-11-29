@@ -387,7 +387,7 @@ constexpr bool operator >=(const duration<Rep1, Period1>& lhs, const duration<Re
 template <typename ToDur, typename Rep, typename Period>
 MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
 floor(const duration<Rep, Period>& dur) {
-	auto to = chrono::duration_cast<ToDur>(dur);
+	auto to = _MSTL_CHRONO duration_cast<ToDur>(dur);
 	if (to > dur) {
 		return to - ToDur{1};
 	}
@@ -397,7 +397,7 @@ floor(const duration<Rep, Period>& dur) {
 template <typename ToDur, typename Rep, typename Period>
 MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
 ceil(const duration<Rep, Period>& dur) {
-	auto to = chrono::duration_cast<ToDur>(dur);
+	auto to = _MSTL_CHRONO duration_cast<ToDur>(dur);
 	if (to < dur) {
 		return to + ToDur{1};
 	}

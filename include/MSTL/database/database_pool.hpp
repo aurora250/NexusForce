@@ -60,7 +60,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
     _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
 
     while (connect_queue_.empty() && running_) {
-        if (cv_.wait_for(lock, _MSTL chrono::milliseconds(connect_timeout_)) == _MSTL cv_status::timeout) {
+        if (cv_.wait_for(lock, _MSTL_CHRONO milliseconds(connect_timeout_)) == _MSTL cv_status::timeout) {
             if (connect_queue_.empty()) {
                 if (connect_queue_.size() < max_size_) {
                     auto* new_conn = factory_->create_connect();

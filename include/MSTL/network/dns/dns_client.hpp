@@ -19,10 +19,10 @@ class MSTL_API dns_client {
 private:
     string dns_server_;
     uint16_t dns_port_;
-    chrono::milliseconds timeout_;
+    _MSTL_CHRONO milliseconds timeout_;
     bool use_tcp_;
-    unordered_map<string, pair<dns_query_result, chrono::steady_clock::time_point>> cache_;
-    chrono::seconds cache_ttl_{300};
+    unordered_map<string, pair<dns_query_result, _MSTL_CHRONO steady_clock::time_point>> cache_;
+    _MSTL_CHRONO seconds cache_ttl_{300};
 
 private:
     static vector<byte_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
@@ -52,7 +52,7 @@ public:
     explicit dns_client(
         string dns_server = "8.8.8.8",
         const uint16_t dns_port = 53,
-        const chrono::milliseconds timeout = chrono::milliseconds(5000),
+        const _MSTL_CHRONO milliseconds timeout = _MSTL_CHRONO milliseconds(5000),
         const bool use_tcp = false)
     : dns_server_(_MSTL move(dns_server)), dns_port_(dns_port), timeout_(timeout), use_tcp_(use_tcp) {}
 
@@ -61,9 +61,9 @@ public:
         dns_port_ = port;
     }
 
-    void set_timeout(const chrono::milliseconds timeout) { timeout_ = timeout; }
+    void set_timeout(const _MSTL_CHRONO milliseconds timeout) { timeout_ = timeout; }
     void set_use_tcp(const bool use_tcp) { use_tcp_ = use_tcp; }
-    void set_cache_ttl(const chrono::seconds ttl) { cache_ttl_ = ttl; }
+    void set_cache_ttl(const _MSTL_CHRONO seconds ttl) { cache_ttl_ = ttl; }
 
     void clear_cache() { cache_.clear(); }
 

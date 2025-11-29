@@ -26,12 +26,7 @@ public:
         using native_id_type = ::pthread_t;
 #endif
 
-        native_id_type id_
-#ifdef MSTL_PLATFORM_WINDOWS__
-        = 0;
-  #else
-        {};
-#endif
+        native_id_type id_{};
 
         friend class thread;
 

@@ -90,7 +90,7 @@ private:
 	};
 
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<manual_thread>> threads_map_;
-	_MSTL timer_scheduler<chrono::steady_clock> timer_;
+	_MSTL timer_scheduler<_MSTL_CHRONO steady_clock> timer_;
 
 	id_type init_thread_size_;
 	size_t thread_threshhold_;
@@ -164,7 +164,9 @@ public:
 		return this->submit_every(interval_ms, 0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
 	}
 
-	void cancel_periodic_task(const periodic_token& token);
+	static void cancel_periodic_task(const periodic_token& token) {
+		if (token) token->cancelled.store(true);
+	}
 };
 
 
@@ -179,12 +181,12 @@ decltype(auto) thread_pool::submit_task(unsigned int priority, Func&& func, Args
 	_MSTL future<Result> res = task->get_future();
 
 	_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
-	if (!not_full_.wait_for(lock, _MSTL chrono::seconds(1), [&]()->bool {
+	if (!not_full_.wait_for(lock, _MSTL_CHRONO seconds(1), [&]()->bool {
 		return task_queue_.size() < task_threshhold_;
 	})) {
 		auto task_ = _MSTL make_shared<_MSTL packaged_task<Result()>>([]() -> Result { return Result(); });
 		(*task_)();
-		return task_->get_future();
+		return task_->get_future(); // 无意义future
 	}
 
 	task_queue_.emplace(priority_task([task] { (*task)(); }, priority));
@@ -192,8 +194,8 @@ decltype(auto) thread_pool::submit_task(unsigned int priority, Func&& func, Args
 	++total_submitted_tasks_;
 	not_empty_.notify_all();
 
-	if (pool_mode_ == THREAD_POOL_MODE::MODE_CACHED
-		&& task_size_ > idle_thread_size_
+	if (pool_mode_.load() == THREAD_POOL_MODE::MODE_CACHED
+		&& task_size_.load() > idle_thread_size_
 		&& threads_map_.size() < thread_threshhold_) {
 		auto ptr = _MSTL make_unique<manual_thread>([this](const id_type id) { thread_function(id); });
 		id_type thread_id = ptr->id();
@@ -213,7 +215,7 @@ decltype(auto) thread_pool::submit_after(const int64_t delay_ms, unsigned int pr
 		});
 	_MSTL future<ResultType> res = task->get_future();
 
-	auto expire_time = chrono::steady_clock::now() + chrono::milliseconds(delay_ms);
+	auto expire_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(delay_ms);
 	timer_.add_task(expire_time, [this, task = _MSTL move(task), priority]() mutable {
 		this->submit_task(priority, [task]() {
 			(*task)();
@@ -239,11 +241,11 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, unsig
 	    });
 
         if (state->cancelled.load()) return;
-        auto next_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
+        auto next_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(interval_ms);
         timer_.add_task(next_time, [handler_ptr]() { (*handler_ptr)(); });
     };
 
-    auto first_time = chrono::steady_clock::now() + chrono::milliseconds(interval_ms);
+    auto first_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(interval_ms);
     timer_.add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
     return state;
 }

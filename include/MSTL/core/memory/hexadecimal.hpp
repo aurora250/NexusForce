@@ -214,86 +214,9 @@ struct unpackage<hexadecimal> {
 template <>
 struct formatter<hexadecimal> {
     MSTL_CONSTEXPR20 string operator()(const hexadecimal& value, const format_options& options) const {
-        const int64_t val = value.to_int64();
-        const bool is_negative = val < 0;
-        uint64_t abs_value = is_negative ? static_cast<uint64_t>(-val) : static_cast<uint64_t>(val);
-
-        const char* digits;
-        int base;
-        switch (options.type) {
-            case NUMBER_TYPE::BINARY: {
-                digits = "01";
-                base = 2;
-                break;
-            }
-            case NUMBER_TYPE::OCTAL: {
-                digits = "01234567";
-                base = 8;
-                break;
-            }
-            case NUMBER_TYPE::HEX_UP: {
-                digits = "0123456789ABCDEF";
-                base = 16;
-                break;
-            }
-            case NUMBER_TYPE::HEX_LOW: default: {
-                digits = "0123456789abcdef";
-                base = 16;
-                break;
-            }
-        }
-
-        string number_str;
-        if (abs_value == 0) {
-            number_str = "0";
-        } else {
-            while (abs_value > 0) {
-                number_str = digits[abs_value % base] + number_str;
-                abs_value /= base;
-            }
-        }
-
-        string prefix;
-        if (is_negative) {
-            prefix += "-";
-        } else if (options.sign_mode == '+') {
-            prefix += "+";
-        } else if (options.sign_mode == ' ') {
-            prefix += " ";
-        }
-
-        if (options.show_base) {
-            switch (options.type) {
-                case NUMBER_TYPE::BINARY: prefix += "0b"; break;
-                case NUMBER_TYPE::OCTAL: prefix += "0o"; break;
-                case NUMBER_TYPE::HEX_LOW: prefix += "0x"; break;
-                case NUMBER_TYPE::HEX_UP: prefix += "0X"; break;
-                default: break;
-            }
-        }
-
-        string result = prefix + number_str;
-        if (options.width <= 0 || result.size() >= static_cast<size_t>(options.width)) {
-            return result;
-        }
-
-        const size_t fill_count = options.width - result.size();
-        const string fill_str(fill_count, options.fill);
-
-        switch (options.alignment) {
-            case NUMBER_ALIGN::LEFT: return result + fill_str;
-            case NUMBER_ALIGN::RIGHT: return fill_str + result;
-            case NUMBER_ALIGN::INTERNAL: return prefix + fill_str + number_str;
-            case NUMBER_ALIGN::CENTER: {
-                const size_t left_fill = fill_count / 2;
-                const size_t right_fill = fill_count - left_fill;
-                return string(left_fill, options.fill) + result + string(right_fill, options.fill);
-            }
-            default: return fill_str + result;
-        }
+        return formatter<int64_t>()(value.to_int64(), options);
     }
 };
-
 
 MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
     return _MSTL format("{#x}", *this);
@@ -301,12 +224,14 @@ MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
 
 
 MSTL_BEGIN_LITERALS__
+
 MSTL_CONSTEXPR20 hexadecimal operator ""_hex(const char* str, const size_t len) {
     return hexadecimal(string_view(str, len));
 }
 constexpr hexadecimal operator ""_hex(const unsigned long long value) {
     return hexadecimal(static_cast<long long>(value));
 }
+
 MSTL_END_LITERALS__
 
 MSTL_END_NAMESPACE__

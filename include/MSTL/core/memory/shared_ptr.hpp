@@ -113,7 +113,7 @@ struct __smart_ptr_counter_impl_allocated final : __smart_ptr_counter {
     MSTL_NO_UNIQUE_ADDRESS Alloc allocator_;
 
     explicit __smart_ptr_counter_impl_allocated(T* ptr, void* mem,
-        size_t size, Deleter deleter, Alloc alloc) noexcept
+        const size_t size, Deleter deleter, Alloc alloc) noexcept
     : ptr_(ptr), mem_(mem), size_(size),
     deleter_(_MSTL move(deleter)),
     allocator_(_MSTL move(alloc)) {}
@@ -124,7 +124,6 @@ struct __smart_ptr_counter_impl_allocated final : __smart_ptr_counter {
     }
 
     void delete_this() noexcept override {
-        using byte_t = unsigned char;
         using alloc_traits = allocator_traits<Alloc>;
         using byte_allocator = typename alloc_traits::template alloc_rebind_t<Alloc, byte_t>;
         byte_allocator byte_alloc(allocator_);

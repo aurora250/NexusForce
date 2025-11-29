@@ -783,7 +783,7 @@ void test_http_server() {
         if (server.start()) {
             printcln(color::green(), "Press Ctrl+C to stop the server.");
             while (true) {
-                _MSTL this_thread::sleep_for(chrono::seconds(1));
+                _MSTL this_thread::sleep_for(_MSTL_CHRONO seconds(1));
             }
         }
         printcln(color::red(), "Failed to start server!");
@@ -1474,7 +1474,7 @@ void test_any() {
 
 void test_timer(){
     _MSTL steady_timer timer1;
-    timer1.expires_after(chrono::seconds(5));
+    timer1.expires_after(_MSTL_CHRONO seconds(5));
     timer1.async_wait([]() {
         println("5秒后执行");
     });

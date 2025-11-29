@@ -213,7 +213,7 @@ public:
     }
 
     void expires_from_now(const int64_t milliseconds) {
-        expires_after(_MSTL chrono::milliseconds(milliseconds));
+        expires_after(_MSTL_CHRONO milliseconds(milliseconds));
     }
 
     time_point expiry() const {
@@ -239,9 +239,9 @@ public:
     }
 };
 
-using steady_timer = basic_timer<_MSTL chrono::steady_clock>;
-using system_timer = basic_timer<_MSTL chrono::system_clock>;
-using high_resolution_timer = basic_timer<_MSTL chrono::high_resolution_clock>;
+using steady_timer = basic_timer<_MSTL_CHRONO steady_clock>;
+using system_timer = basic_timer<_MSTL_CHRONO system_clock>;
+using high_resolution_timer = basic_timer<_MSTL_CHRONO high_resolution_clock>;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_TIMER_HPP__

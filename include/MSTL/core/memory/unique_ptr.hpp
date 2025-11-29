@@ -474,25 +474,32 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
 
 template <typename T, typename U>
 unique_ptr<T> static_pointer_cast(const unique_ptr<U>& ptr) = delete;
+
 template <typename T, typename U>
 unique_ptr<T> const_pointer_cast(const unique_ptr<U>& ptr) = delete;
+
 template <typename T, typename U>
 unique_ptr<T> reinterpret_pointer_cast(const unique_ptr<U>& ptr) = delete;
+
 template <typename T, typename U>
 unique_ptr<T> dynamic_pointer_cast(const unique_ptr<U>& ptr) = delete;
+
 
 template <typename T, typename U>
 MSTL_CONSTEXPR20 unique_ptr<T> static_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(static_cast<T*>(ptr.release()), ptr.get_deleter());
 }
+
 template <typename T, typename U>
 MSTL_CONSTEXPR20 unique_ptr<T> const_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(const_cast<T*>(ptr.release()), ptr.get_deleter());
 }
+
 template <typename T, typename U>
 unique_ptr<T> reinterpret_pointer_cast(unique_ptr<U>&& ptr) {
     return unique_ptr<T>(reinterpret_cast<T*>(ptr.release()), ptr.get_deleter());
 }
+
 template <typename T, typename U>
 unique_ptr<T> dynamic_pointer_cast(unique_ptr<U>&& ptr) {
     T* tmp = dynamic_cast<T*>(ptr.release());

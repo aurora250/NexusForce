@@ -51,15 +51,15 @@ void http_server::handle_client(const socket& client_socket) {
     } while (true);
 }
 
-void http_server::parse_cookies(const string& cookie_header, http_request &request) {
+void http_server::parse_cookies(const string_view cookie_header, http_request &request) {
     if (cookie_header.empty()) return;
 
-    vector<string> cookie_pairs;
+    vector<string_view> cookie_pairs;
     size_t start = 0;
     size_t end = cookie_header.find(';');
 
     while (end != string::npos) {
-        cookie_pairs.push_back(cookie_header.substr(start, end - start).trim());
+        cookie_pairs.push_back(cookie_header.view(start, end - start).trim());
         start = end + 1;
         end = cookie_header.find(';', start);
     }
@@ -68,8 +68,8 @@ void http_server::parse_cookies(const string& cookie_header, http_request &reque
     for (const auto &pair: cookie_pairs) {
         const size_t eq_pos = pair.find('=');
         if (eq_pos != string::npos) {
-            const string name = pair.substr(0, eq_pos).trim();
-            const string value = pair.substr(eq_pos + 1).trim();
+            const string name{pair.substr(0, eq_pos).trim()};
+            const string value{pair.substr(eq_pos + 1).trim()};
             request.set_cookie(name, value);
         }
     }
@@ -103,7 +103,7 @@ void http_server::parse_url_encoded(const string_view data, unordered_map<string
     for (const auto &pair: pairs) {
         const size_t eq_pos = pair.find('=');
         if (eq_pos != string_view::npos) {
-            string name = url_decode(pair.substr(0, eq_pos));
+            const string name = url_decode(pair.substr(0, eq_pos));
             params[name] = url_decode(pair.substr(eq_pos + 1));
         }
     }
@@ -158,7 +158,7 @@ http_request http_server::parse_request(const socket& client_socket) {
                     const string cl_str = request_data.substr(
                         cl_pos + 15, cl_end - cl_pos - 15
                         ).trim();
-                    content_length = _MSTL uinteger32::parse(cl_str.c_str());
+                    content_length = _MSTL uinteger32::parse(cl_str.view());
                 }
             }
 
@@ -178,17 +178,17 @@ http_request http_server::parse_request(const socket& client_socket) {
         if (total_read > 1024 * 16) break;
     }
 
-    string line;
+    string_view line;
     size_t pos = 0;
-    if (_MSTL getline(request_data, pos, line)) {
-        line.trim();
+    if (_MSTL getline(request_data.view(), pos, line)) {
+        line = line.trim();
         const size_t pos1 = line.find(' ');
         if (pos1 != string::npos) {
-            request.set_method(HTTP_METHOD{line.substr(0, pos1)});
+            request.set_method(HTTP_METHOD{string{line.substr(0, pos1)}});
             const size_t pos2 = line.find(' ', pos1 + 1);
             if (pos2 != string::npos) {
-                request.set_path(line.substr(pos1 + 1, pos2 - pos1 - 1));
-                request.set_version(line.substr(pos2 + 1));
+                request.set_path(string{line.substr(pos1 + 1, pos2 - pos1 - 1)});
+                request.set_version(string{line.substr(pos2 + 1)});
             }
         }
     }
@@ -201,20 +201,20 @@ http_request http_server::parse_request(const socket& client_socket) {
     }
 
     // request header
-    while (_MSTL getline(request_data, pos, line)) {
-        line.trim();
+    while (_MSTL getline(request_data.view(), pos, line)) {
+        line = line.trim();
         if (line.empty()) break;
 
         const size_t colon_pos = line.find(':');
         if (colon_pos != string::npos) {
-            string key = line.substr(0, colon_pos).trim();
-            string value = line.substr(colon_pos+1).trim();
+            const string key{line.substr(0, colon_pos).trim()};
+            const string value{line.substr(colon_pos+1).trim()};
             request.set_header(key, _MSTL move(value));
         }
     }
 
     // request body
-    const size_t body_start = request_data.find("\r\n\r\n");
+    const size_t body_start = request_data.find(crlf2);
     if (body_start != string::npos && body_start + 4 < request_data.size()) {
         request.set_body(request_data.substr(body_start + 4));
     }
@@ -222,7 +222,7 @@ http_request http_server::parse_request(const socket& client_socket) {
     // Parse cookies
     const auto& cookie_str = request.cookie();
     if (!cookie_str.empty()) {
-        parse_cookies(cookie_str, request);
+        parse_cookies(cookie_str.view(), request);
     }
 
     // Parse parameters
@@ -275,7 +275,7 @@ void http_server::send_response(const socket& client_socket, const http_response
     while (sent < total) {
         const ssize_t bytes_sent = client_socket.send(res_str.data() + sent, total - sent);
         if (bytes_sent <= 0) {
-            println("send failed");
+            printcln(color::red(), "send failed");
             break;
         }
         sent += bytes_sent;
@@ -314,25 +314,24 @@ void http_server::add_session_cookie(const http_request& request, http_response&
 }
 
 bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
-                    const SOCKET_PROTOCOL protocol, const uint32_t thread_count
-                    ) {
+    const SOCKET_PROTOCOL protocol, const uint32_t thread_count) {
     if (running_) return true;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::WSAStartup(MAKEWORD(2, 2), &wsa_data_) != 0) {
-        println("WSAStartup failed");
+        printcln(color::red(), "WSAStartup failed");
         return false;
     }
 #endif
 
     server_socket_ = _MSTL move(socket(domain, type, protocol));
     if (!server_socket_.is_valid()) {
-        println("socket creation failed");
+        printcln(color::red(), "socket creation failed");
         return false;
     }
 
     if (server_socket_.reuse_addr()) {
-        println("setsockopt failed");
+        printcln(color::red(), "setsockopt failed");
         return false;
     }
 
@@ -341,12 +340,12 @@ bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
     server_addr_.sin_port = ::htons(port_);
 
     if (server_socket_.bind(server_addr_)) {
-        println("bind failed");
+        printcln(color::red(), "bind failed");
         return false;
         }
 
     if (server_socket_.listen(backlog_)) {
-        println("listen failed");
+        printcln(color::red(), "listen failed");
         return false;
     }
 

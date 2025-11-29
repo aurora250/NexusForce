@@ -38,7 +38,7 @@ string thread_pool::pool_statistics::to_string() const {
 }
 
 void thread_pool::thread_function(const id_type thread_id) {
-    auto last = _MSTL chrono::high_resolution_clock::now();
+    auto last = _MSTL_CHRONO high_resolution_clock::now();
 
     for (;;) {
         Task task{};
@@ -51,9 +51,9 @@ void thread_pool::thread_function(const id_type thread_id) {
                     return;
                 }
                 if (pool_mode_ == THREAD_POOL_MODE::MODE_CACHED) {
-                    if (_MSTL cv_status::timeout == not_empty_.wait_for(lock, _MSTL chrono::seconds(1))) {
-                        auto now = _MSTL chrono::high_resolution_clock::now();
-                        const auto sub = _MSTL chrono::duration_cast<_MSTL chrono::seconds>(now - last);
+                    if (_MSTL cv_status::timeout == not_empty_.wait_for(lock, _MSTL_CHRONO seconds(1))) {
+                        auto now = _MSTL_CHRONO high_resolution_clock::now();
+                        const auto sub = _MSTL_CHRONO duration_cast<_MSTL_CHRONO seconds>(now - last);
                         if (sub.count() >= THREAD_POOL_MAX_IDLE_SECONDS
                             && threads_map_.size() > init_thread_size_) {
                             threads_map_.erase(thread_id);
@@ -75,11 +75,15 @@ void thread_pool::thread_function(const id_type thread_id) {
             not_full_.notify_all();
         }
         if (task != nullptr) {
-            task();
+            try {
+                task();
+            } catch (...) {
+                // 错误处理
+            }
             ++total_completed_tasks_;
         }
         ++idle_thread_size_;
-        last = _MSTL chrono::high_resolution_clock::now();
+        last = _MSTL_CHRONO high_resolution_clock::now();
     }
 }
 
@@ -154,10 +158,6 @@ void thread_pool::stop() {
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;
     _INNER __thread_pool_id_generator::reset_id();
-}
-
-void thread_pool::cancel_periodic_task(const periodic_token& token) {
-    if (token) token->cancelled.store(true);
 }
 
 MSTL_END_NAMESPACE__

@@ -33,5 +33,26 @@ MSTL_NODISCARD constexpr u32string_view operator ""_sv(const char32_t* str, size
 }
 MSTL_END_LITERALS__
 
+
+template <typename CharT>
+constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
+    basic_string_view<CharT>& str, CharT delim = static_cast<CharT>('\n')) {
+
+    if (pos >= data.size()) {
+        str = basic_string_view<CharT>();
+        return false;
+    }
+
+    size_t start = pos;
+    size_t end = pos;
+    while (end < data.size() && data[end] != delim) {
+        ++end;
+    }
+    str = data.substr(start, end - start);
+    pos = (end < data.size()) ? end + 1 : end;
+
+    return true;
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_STRING_VIEW_HPP__

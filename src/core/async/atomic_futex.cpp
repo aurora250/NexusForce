@@ -16,7 +16,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
-    const bool has_timeout, const chrono::seconds sec, const chrono::nanoseconds ns) {
+    const bool has_timeout, const _MSTL_CHRONO seconds sec, const _MSTL_CHRONO nanoseconds ns) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (!has_timeout) {
         ::BOOL ret = ::WaitOnAddress(
@@ -82,7 +82,7 @@ bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
 }
 
 bool atomic_futex_base::futex_wait_until_steady(unsigned *addr, const unsigned value,
-    const bool has_timeout, const chrono::seconds sec, const chrono::nanoseconds ns) {
+    const bool has_timeout, const _MSTL_CHRONO seconds sec, const _MSTL_CHRONO nanoseconds ns) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (!has_timeout) {
         ::BOOL ret = ::WaitOnAddress(

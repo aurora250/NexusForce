@@ -3,14 +3,14 @@
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-enum class NUMBER_ALIGN {
+enum class FORMAT_ALIGN {
     LEFT        = '<',
     RIGHT       = '>',
     INTERNAL    = '=',
     CENTER      = '^'
 };
 
-enum class NUMBER_TYPE {
+enum class FORMAT_TYPE {
     BINARY      = 'b',
     OCTAL       = 'o',
     DECIMAL     = 'd',
@@ -25,37 +25,37 @@ struct MSTL_API format_options {
     char fill = ' ';
     int width = 0;
     int precision = -1;
-    NUMBER_ALIGN alignment = NUMBER_ALIGN::RIGHT;
+    FORMAT_ALIGN alignment = FORMAT_ALIGN::RIGHT;
     char sign_mode = 0;  // 0: default, '+': always show, '-': only nega, ' ': posi space
     bool show_base = false;
-    NUMBER_TYPE type = NUMBER_TYPE::DECIMAL;
+    FORMAT_TYPE type = FORMAT_TYPE::DECIMAL;
     bool zero_pad = false;
 };
 
 
 MSTL_BEGIN_INNER__
 
-constexpr NUMBER_ALIGN to_number_alignment(const char c) {
+constexpr FORMAT_ALIGN to_number_alignment(const char c) {
     switch (c) {
-        case '<': return NUMBER_ALIGN::LEFT;
-        case '>': return NUMBER_ALIGN::RIGHT;
-        case '^': return NUMBER_ALIGN::CENTER;
-        case '=': return NUMBER_ALIGN::INTERNAL;
-        default:  return NUMBER_ALIGN::RIGHT;
+        case '<': return FORMAT_ALIGN::LEFT;
+        case '>': return FORMAT_ALIGN::RIGHT;
+        case '^': return FORMAT_ALIGN::CENTER;
+        case '=': return FORMAT_ALIGN::INTERNAL;
+        default:  return FORMAT_ALIGN::RIGHT;
     }
 }
 
-constexpr NUMBER_TYPE to_number_type(const char c) {
+constexpr FORMAT_TYPE to_number_type(const char c) {
     switch (c) {
-        case 'b': return NUMBER_TYPE::BINARY;
-        case 'o': return NUMBER_TYPE::OCTAL;
-        case 'd': return NUMBER_TYPE::DECIMAL;
-        case 'x': return NUMBER_TYPE::HEX_LOW;
-        case 'X': return NUMBER_TYPE::HEX_UP;
-        case 'f': return NUMBER_TYPE::FLOAT_FIX;
-        case 'e': return NUMBER_TYPE::FLOAT_EXP;
-        case 'g': return NUMBER_TYPE::FLOAT_GEN;
-        default:  return NUMBER_TYPE::DECIMAL;
+        case 'b': return FORMAT_TYPE::BINARY;
+        case 'o': return FORMAT_TYPE::OCTAL;
+        case 'd': return FORMAT_TYPE::DECIMAL;
+        case 'x': return FORMAT_TYPE::HEX_LOW;
+        case 'X': return FORMAT_TYPE::HEX_UP;
+        case 'f': return FORMAT_TYPE::FLOAT_FIX;
+        case 'e': return FORMAT_TYPE::FLOAT_EXP;
+        case 'g': return FORMAT_TYPE::FLOAT_GEN;
+        default:  return FORMAT_TYPE::DECIMAL;
     }
 }
 
@@ -111,10 +111,10 @@ MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) 
     }
 
     if (pos < fmt_str.size() && fmt_str[pos] == '0' &&
-        options.fill == ' ' && options.alignment == NUMBER_ALIGN::RIGHT) {
+        options.fill == ' ' && options.alignment == FORMAT_ALIGN::RIGHT) {
         options.zero_pad = true;
         options.fill = '0';
-        options.alignment = NUMBER_ALIGN::INTERNAL;
+        options.alignment = FORMAT_ALIGN::INTERNAL;
         ++pos;
     }
 
@@ -172,15 +172,15 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
         const int precision = options.precision >= 0 ? options.precision : 6;
 
         switch (options.type) {
-            case NUMBER_TYPE::FLOAT_FIX: {
+            case FORMAT_TYPE::FLOAT_FIX: {
                 number_str = _INNER __to_string_fixed(val, precision);
                 break;
             }
-            case NUMBER_TYPE::FLOAT_EXP: {
+            case FORMAT_TYPE::FLOAT_EXP: {
                 number_str = _INNER __to_string_scientific(val, precision);
                 break;
             }
-            case NUMBER_TYPE::FLOAT_GEN:
+            case FORMAT_TYPE::FLOAT_GEN:
             default: {
                 number_str = _INNER __to_string_general(val, precision);
                 break;
@@ -200,13 +200,13 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case NUMBER_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT:
                 return result + fill_str;
-            case NUMBER_ALIGN::RIGHT:
+            case FORMAT_ALIGN::RIGHT:
                 return fill_str + result;
-            case NUMBER_ALIGN::INTERNAL:
+            case FORMAT_ALIGN::INTERNAL:
                 return prefix + fill_str + number_str;
-            case NUMBER_ALIGN::CENTER: {
+            case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + result + string(right_fill, options.fill);
@@ -227,23 +227,23 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
         const char* digits;
         int base;
         switch (options.type) {
-            case NUMBER_TYPE::BINARY: {
+            case FORMAT_TYPE::BINARY: {
                 digits = "01";
                 base = 2;
                 break;
-            } case NUMBER_TYPE::OCTAL: {
+            } case FORMAT_TYPE::OCTAL: {
                 digits = "01234567";
                 base = 8;
                 break;
-            } case NUMBER_TYPE::HEX_LOW: {
+            } case FORMAT_TYPE::HEX_LOW: {
                 digits = "0123456789abcdef";
                 base = 16;
                 break;
-            } case NUMBER_TYPE::HEX_UP: {
+            } case FORMAT_TYPE::HEX_UP: {
                 digits = "0123456789ABCDEF";
                 base = 16;
                 break;
-            } case NUMBER_TYPE::DECIMAL: default: {
+            } case FORMAT_TYPE::DECIMAL: default: {
                 digits = "0123456789";
                 base = 10;
                 break;
@@ -271,10 +271,10 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
 
         if (options.show_base && base != 10) {
             switch (options.type) {
-                case NUMBER_TYPE::BINARY:  prefix += "0b"; break;
-                case NUMBER_TYPE::OCTAL:   prefix += "0o"; break;
-                case NUMBER_TYPE::HEX_LOW: prefix += "0x"; break;
-                case NUMBER_TYPE::HEX_UP:  prefix += "0X"; break;
+                case FORMAT_TYPE::BINARY:  prefix += "0b"; break;
+                case FORMAT_TYPE::OCTAL:   prefix += "0o"; break;
+                case FORMAT_TYPE::HEX_LOW: prefix += "0x"; break;
+                case FORMAT_TYPE::HEX_UP:  prefix += "0X"; break;
                 default: break;
             }
         }
@@ -288,13 +288,13 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case NUMBER_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT:
                 return result + fill_str;
-            case NUMBER_ALIGN::RIGHT:
+            case FORMAT_ALIGN::RIGHT:
                 return fill_str + result;
-            case NUMBER_ALIGN::INTERNAL:
+            case FORMAT_ALIGN::INTERNAL:
                 return prefix + fill_str + number_str;
-            case NUMBER_ALIGN::CENTER: {
+            case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + result + string(right_fill, options.fill);
@@ -313,21 +313,21 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         bool uppercase = false;
 
         switch (options.type) {
-            case NUMBER_TYPE::HEX_LOW: {
+            case FORMAT_TYPE::HEX_LOW: {
                 base = 16;
                 uppercase = false;
                 break;
-            } case NUMBER_TYPE::HEX_UP: {
+            } case FORMAT_TYPE::HEX_UP: {
                 base = 16;
                 uppercase = true;
                 break;
-            } case NUMBER_TYPE::OCTAL: {
+            } case FORMAT_TYPE::OCTAL: {
                 base = 8;
                 break;
-            } case NUMBER_TYPE::BINARY: {
+            } case FORMAT_TYPE::BINARY: {
                 base = 2;
                 break;
-            } case NUMBER_TYPE::DECIMAL: default: {
+            } case FORMAT_TYPE::DECIMAL: default: {
                 base = 10;
                 break;
             }
@@ -364,17 +364,17 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         const size_t fill_count = options.width - number_str.size();
 
         switch (options.alignment) {
-            case NUMBER_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT:
                 return number_str + string(fill_count, options.fill);
-            case NUMBER_ALIGN::RIGHT:
+            case FORMAT_ALIGN::RIGHT:
                 return string(fill_count, options.fill) + number_str;
-            case NUMBER_ALIGN::INTERNAL: {
+            case FORMAT_ALIGN::INTERNAL: {
                 if (!base_prefix.empty()) {
                     return base_prefix + string(fill_count, options.fill) + digits;
                 }
                 return string(fill_count, options.fill) + number_str;
             }
-            case NUMBER_ALIGN::CENTER: {
+            case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + number_str + string(right_fill, options.fill);
@@ -396,16 +396,16 @@ struct formatter<string> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case NUMBER_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT:
                 return value + fill_str;
-            case NUMBER_ALIGN::RIGHT:
+            case FORMAT_ALIGN::RIGHT:
                 return fill_str + value;
-            case NUMBER_ALIGN::CENTER: {
+            case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + value + string(right_fill, options.fill);
             }
-            case NUMBER_ALIGN::INTERNAL:
+            case FORMAT_ALIGN::INTERNAL:
                 default:
                     return fill_str + value;
         }
