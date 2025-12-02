@@ -1,5 +1,6 @@
 #include <MSTL/network/http/session.hpp>
 #include <MSTL/core/time/clocks.hpp>
+#include <MSTL/core/numeric/random.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void cookie::swap(cookie& other) noexcept {
@@ -29,7 +30,7 @@ MSTL_NODISCARD string cookie::to_string() const {
         result += "; Max-Age=" + _MSTL to_string(max_age_);
     }
     if (expires_ > datetime::epoch()) {
-        result += "; Expires=" + expires_.to_GMT();
+        result += "; Expires=" + expires_.to_string_GMT();
     }
 
     if (secure_) result += "; Secure";

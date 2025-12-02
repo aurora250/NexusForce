@@ -9,6 +9,7 @@
 #include <execinfo.h>
 #include <dlfcn.h>
 #include <cxxabi.h>
+#include <cstdlib>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -56,7 +57,7 @@ string stacktrace::frame::name() const {
             nullptr, nullptr, &status);
         if (status == 0 && demangled) {
             string res(demangled);
-            ::free(demangled);
+            std::free(demangled);
             return res;
         }
         return {info.dli_sname};

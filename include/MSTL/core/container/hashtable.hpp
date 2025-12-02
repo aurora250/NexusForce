@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_CONTAINER_HASHTABLE_HPP__
 #define MSTL_CORE_CONTAINER_HASHTABLE_HPP__
-#include "../config/undef_cmacro.hpp"
+#include "../algorithm/sort.hpp"
 #include "vector.hpp"
 MSTL_BEGIN_NAMESPACE__
 

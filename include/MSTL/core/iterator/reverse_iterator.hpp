@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ITERATOR_REVERSE_ITERATOR_HPP
 #define MSTL_CORE_ITERATOR_REVERSE_ITERATOR_HPP
-#include "iterator.hpp"
+#include "../algorithm/iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator>

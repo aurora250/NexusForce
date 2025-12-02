@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #define MSTL_CORE_MEMORY_SHARED_PTR_HPP__
-#include "../algorithm/algobase.hpp"
+#include "../algorithm/compare.hpp"
 #include "../async/atomic.hpp"
 #include "unique_ptr.hpp"
 #include "construct.hpp"

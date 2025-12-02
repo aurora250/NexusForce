@@ -132,7 +132,7 @@ Defines a series of functions to output variable argument lists to formatted str
 
 Defines type trait constants, using template metaprogramming to deduce type information at compile time.
 
-- [exception](include/MSTL/core/config/exception.hpp)
+- [exception](include/MSTL/core/exception/exception.hpp)
 
 Defines error types and quick-invocation macros. All error types in this project are defined in this file.
 
@@ -262,7 +262,7 @@ Defines the string class `string`, providing conversion functions between differ
 
 Defines the string formatting helper class `formatter` and the formatting function `format`.
 
-- [encrypt](include/MSTL/core/string/encrypt.hpp)
+- [encrypt](include/MSTL/core/encrypt/encrypt.hpp)
 
 Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`, `SHA256`, and `AES256`.
 

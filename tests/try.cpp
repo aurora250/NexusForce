@@ -300,7 +300,7 @@ void test_timestamp() {
 void test_utc_conversion() {
     _MSTL datetime dt(2024, 1, 1, 0, 0, 0);
     _MSTL datetime utc = _MSTL datetime::to_UTC(dt);
-    _MSTL datetime local = _MSTL datetime::parse_UTC(utc);
+    _MSTL datetime local = _MSTL datetime::from_UTC(utc);
     assert(local == dt);
 
     println("test_utc_conversion passed");

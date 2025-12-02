@@ -4,6 +4,7 @@
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/time/clocks.hpp"
 #include "MSTL/core/async/future.hpp"
+#include "MSTL/core/numeric/random.hpp"
 #include "dns_message.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
 #include <netinet/in.h>

@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_MEMORY_BUILTIN_ALLOCATOR_HPP__
 #define MSTL_CORE_MEMORY_BUILTIN_ALLOCATOR_HPP__
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "../typeinfo/types.hpp"
 #include "../typeinfo/type_traits.hpp"
 #include "../typeinfo/tags.hpp"

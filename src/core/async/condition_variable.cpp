@@ -1,5 +1,5 @@
 #include <MSTL/core/async/condition_variable.hpp>
-#include <MSTL/core/config/terminate.hpp>
+#include <MSTL/core/exception/terminate.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_PLATFORM_WINDOWS__

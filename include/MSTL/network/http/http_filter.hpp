@@ -1,6 +1,6 @@
 #ifndef MSTL_NETWORK_HTTP_FILTER_HPP__
 #define MSTL_NETWORK_HTTP_FILTER_HPP__
-#include "http_message.hpp"
+#include "http_server_message.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API http_filter {

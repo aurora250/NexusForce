@@ -1,5 +1,5 @@
-#include <MSTL/core/memory/exception_ptr.hpp>
-#include <MSTL/core/config/exception.hpp>
+#include <MSTL/core/exception/exception_ptr.hpp>
+#include <MSTL/core/exception/exception.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 thread_local exception_ptr current_exception_ptr;

@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
-#include "../config/assertion.hpp"
+#include "../exception/assertion.hpp"
 #include "atomic_wait.hpp"
 MSTL_BEGIN_NAMESPACE__
 

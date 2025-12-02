@@ -422,6 +422,24 @@ public:
 };
 
 
+MSTL_BEGIN_CONSTANTS__
+
+MSTL_INLINE17 constexpr string_view WEEKDAYS_STRING[] =
+    {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+MSTL_INLINE17 constexpr string_view MONTHS_STRING[] =
+    {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+MSTL_END_CONSTANTS__
+
+constexpr int months_to_int(const string_view sv) {
+    for (int i = 0; i < 12; ++i) {
+        if (sv == _CONSTANTS MONTHS_STRING[i]) return i + 1;
+    }
+    return 0;
+}
+
+
 class MSTL_API datetime : public iserialize<datetime> {
 public:
     using date_type = date::date_type;
@@ -589,17 +607,19 @@ public:
     }
 
 
-    MSTL_NODISCARD static datetime parse_UTC(const datetime& utc_dt) noexcept;
+    MSTL_NODISCARD static datetime from_UTC(const datetime& utc_dt) noexcept;
     MSTL_NODISCARD static datetime to_UTC(const datetime& local_dt) noexcept;
 
-    MSTL_NODISCARD string to_GMT() const noexcept;
+    MSTL_NODISCARD static datetime parse_RFC1123(string_view str);
 
-    MSTL_NODISCARD string to_ISO_UTC() const {
+    MSTL_NODISCARD string to_string_GMT() const noexcept;
+
+    MSTL_NODISCARD string to_string_ISO_UTC() const {
         const datetime utc_dt = datetime::to_UTC(*this);
         return utc_dt.dates().to_string() + "T" + utc_dt.times().to_string() + "Z";
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_ISO() const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_ISO() const {
         return date_.to_string() + "T" + time_.to_string() + "Z";
     }
 

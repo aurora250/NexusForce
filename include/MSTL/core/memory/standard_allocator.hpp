@@ -3,8 +3,8 @@
 #include "../typeinfo/type_traits.hpp"
 #include "../typeinfo/tags.hpp"
 #include "../typeinfo/types.hpp"
-#include "../config/assertion.hpp"
-#include "../config/exception.hpp"
+#include "../exception/assertion.hpp"
+#include "../exception/exception.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__
 

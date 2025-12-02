@@ -48,18 +48,13 @@ private:
     socket_t sockfd_ = INVALID_MARK;
 
 public:
+    socket() noexcept = default;
+    explicit socket(const socket_t fd) : sockfd_(_MSTL move(fd)) {}
+
     explicit socket(const SOCKET_DOMAIN domain,
         const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
         const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
         this->open(domain, type, protocol);
-    }
-
-    explicit socket(const socket_t fd) : sockfd_(_MSTL move(fd)) {}
-
-    socket() noexcept = default;
-
-    ~socket() {
-        close();
     }
 
     socket(const socket&) = delete;
@@ -77,9 +72,12 @@ public:
         return *this;
     }
 
-    MSTL_NODISCARD socket_t sockfd() const noexcept { return sockfd_; }
-    MSTL_NODISCARD bool is_valid() const noexcept { return sockfd_ != INVALID_MARK; }
+    ~socket() {
+        close();
+    }
 
+    MSTL_NODISCARD const socket_t& sockfd() const noexcept { return sockfd_; }
+    MSTL_NODISCARD bool is_valid() const noexcept { return sockfd_ != INVALID_MARK; }
 
     bool open(const SOCKET_DOMAIN domain, const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
         const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
@@ -112,17 +110,17 @@ public:
     }
 
     bool listen(const int backlog) const noexcept {
-        return ::listen(sockfd_, backlog) == -1;
+        return ::listen(sockfd_, backlog) == 0;
     }
 
-    int bind(::sockaddr_in& addr) const noexcept {
-        return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr));
+    bool bind(::sockaddr_in& addr) const noexcept {
+        return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) == 0;
     }
 
-    int reuse_addr() const noexcept {
+    bool reuse_addr() const noexcept {
         constexpr int opt = 1;
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR,
-            reinterpret_cast<const char*>(&opt), sizeof(opt));
+            reinterpret_cast<const char*>(&opt), sizeof(opt)) == 0;
     }
 
     bool set_receive_timeout(const _MSTL_CHRONO milliseconds timeout) const noexcept {

@@ -37,9 +37,9 @@ inline void handle_session_api(
                 .key("sessionId")
                 .value(sess->id())
                 .key("createTime")
-                .value(sess->create_time().to_ISO_UTC())
+                .value(sess->create_time().to_string_ISO_UTC())
                 .key("lastAccess")
-                .value(sess->last_access().to_ISO_UTC())
+                .value(sess->last_access().to_string_ISO_UTC())
                 .key("attributes")
                 .value(sess->get_data()).end_object()
                 .build();

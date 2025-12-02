@@ -59,7 +59,7 @@ public:
         self obj;
         string str(lower.trim());
         try {
-            obj = static_cast<bool>(to_int32(str.data(), nullptr, 10));
+            obj = static_cast<bool>(to_int32(str.view(), nullptr, 10));
         } catch (...) {
             _MSTL transform(str.begin(), str.end(), str.begin(), [](byte_t c) {
                 return _MSTL to_lowercase(c);
@@ -170,7 +170,7 @@ public: \
     } \
     \
     MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) { \
-        return self{_MSTL to_## SIGN## int## BYTE (str.data())}; \
+        return self{_MSTL to_## SIGN## int## BYTE (str)}; \
     } \
     \
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept { \
@@ -402,7 +402,7 @@ public:
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
-        return self{_MSTL to_float32(str.data())};
+        return self{_MSTL to_float32(str)};
     }
 
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
@@ -563,7 +563,7 @@ public:
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
-        return self{_MSTL to_float64(str.data())};
+        return self{_MSTL to_float64(str)};
     }
 
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
@@ -724,7 +724,7 @@ public:
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
-        return self{_MSTL to_decimal(str.data())};
+        return self{_MSTL to_decimal(str)};
     }
 
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {

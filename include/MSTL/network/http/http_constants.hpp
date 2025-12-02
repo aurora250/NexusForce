@@ -3,6 +3,9 @@
 #include "MSTL/core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, link_exception, "Http Actions Failed");
+
+
 enum class HTTP_STATUS : uint32_t {
     // 1xx Message Codes
 
@@ -69,6 +72,10 @@ enum class HTTP_STATUS : uint32_t {
     // The HTTP version of the request is not supported
     S5_HTTP_VERSION_NOT_SUPPORT = 505
 };
+
+
+MSTL_INLINE17 constexpr string_view HTTP_CRLF = "\r\n";
+MSTL_INLINE17 constexpr string_view HTTP_CRLF2 = "\r\n\r\n";
 
 
 struct MSTL_API HTTP_CONTENT : istringify<HTTP_CONTENT> {

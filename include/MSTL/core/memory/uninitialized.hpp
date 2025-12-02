@@ -1,7 +1,6 @@
 #ifndef MSTL_CORE_MEMORY_UNINITIALIZED_HPP__
 #define MSTL_CORE_MEMORY_UNINITIALIZED_HPP__
-#include "../algorithm/algobase.hpp"
-#include "../config/exception.hpp"
+#include "../algorithm/shift.hpp"
 #include "construct.hpp"
 MSTL_BEGIN_NAMESPACE__
 

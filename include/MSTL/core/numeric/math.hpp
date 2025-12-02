@@ -1,6 +1,6 @@
 ﻿#ifndef MSTL_CORE_NUMERIC_MATH_HPP__
 #define MSTL_CORE_NUMERIC_MATH_HPP__
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "numeric_limits.hpp"
 MSTL_BEGIN_NAMESPACE__
 

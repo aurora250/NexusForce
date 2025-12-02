@@ -2,7 +2,7 @@
 #define MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #include "../numeric/numeric_limits.hpp"
 #include "../memory/memory.hpp"
-#include "../config/terminate.hpp"
+#include "../exception/terminate.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <intrin.h>

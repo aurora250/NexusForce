@@ -1,10 +1,8 @@
 #ifndef MSTL_CORE_MEMORY_TEMPORARY_BUFFER_HPP__
 #define MSTL_CORE_MEMORY_TEMPORARY_BUFFER_HPP__
-#include "../numeric/numeric_limits.hpp"
-#include "../typeinfo/concepts.hpp"
 #include "../memory/uninitialized.hpp"
-#include "../memory/construct.hpp"
 #include <cstdlib> // std::malloc
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename T = iter_value_t<Iterator>>

@@ -1,30 +1,35 @@
 #ifndef MSTL_CORE_STRING_TO_NUMERICS_HPP__
 #define MSTL_CORE_STRING_TO_NUMERICS_HPP__
 #include "../string/cstring.hpp"
+#include "../string/string_view.hpp"
 #include "../numeric/math.hpp"
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
 
 template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
-constexpr T str_to_ints(const char* str, char** endptr, int base) {
-    if (str == nullptr) {
-        if (endptr) *endptr = const_cast<char*>(str);
+constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
+    const char* start = sv.data();
+    const size_t len = sv.size();
+    const char* end = start + len;
+
+    if (len == 0) {
+        if (endptr) *endptr = const_cast<char*>(start);
         return 0;
     }
 
-    const char* p = str;
-    while (is_space(*p)) p++;
+    const char* p = start;
+    while (p != end && is_space(*p)) ++p;
     const char* start_conversion = p;
 
     int sign = 1;
-    if (*p == '+') {
-        p++;
-    } else if (*p == '-') {
+    if (p != end && *p == '+') {
+        ++p;
+    } else if (p != end && *p == '-') {
         sign = -1;
-        p++;
+        ++p;
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
@@ -33,8 +38,8 @@ constexpr T str_to_ints(const char* str, char** endptr, int base) {
     }
 
     if (base == 0) {
-        if (*p == '0') {
-            if (*(p + 1) == 'x' || *(p + 1) == 'X') {
+        if (p != end && *p == '0') {
+            if (p + 1 != end && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
                 base = 16;
                 p += 2;
             } else {
@@ -45,7 +50,7 @@ constexpr T str_to_ints(const char* str, char** endptr, int base) {
         }
     }
 
-    if (base == 16 && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
+    if (base == 16 && p + 1 < end && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
         p += 2;
     }
 
@@ -55,21 +60,21 @@ constexpr T str_to_ints(const char* str, char** endptr, int base) {
     bool any_converted = false;
     bool overflow = false;
 
-    while (*p) {
+    while (p != end) {
         int digit = 0;
-        if (*p >= '0' && *p <= '9') {
-            digit = *p - '0';
-        } else if (*p >= 'a' && *p <= 'z') {
-            digit = *p - 'a' + 10;
-        } else if (*p >= 'A' && *p <= 'Z') {
-            digit = *p - 'A' + 10;
+        char c = *p;
+        if (c >= '0' && c <= '9') {
+            digit = c - '0';
+        } else if (c >= 'a' && c <= 'z') {
+            digit = c - 'a' + 10;
+        } else if (c >= 'A' && c <= 'Z') {
+            digit = c - 'A' + 10;
         } else {
             break;
         }
         if (digit >= base) break;
 
         any_converted = true;
-
         if (!overflow) {
             if (result < cutoff || (result == cutoff && digit > -cutlim)) {
                 overflow = true;
@@ -77,15 +82,11 @@ constexpr T str_to_ints(const char* str, char** endptr, int base) {
                 result = result * base - digit;
             }
         }
-        p++;
+        ++p;
     }
 
     if (endptr) {
-        if (any_converted) {
-            *endptr = const_cast<char*>(p);
-        } else {
-            *endptr = const_cast<char*>(start_conversion);
-        }
+        *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
     if (!any_converted) return 0;
@@ -101,22 +102,26 @@ constexpr T str_to_ints(const char* str, char** endptr, int base) {
 }
 
 template <typename T, enable_if_t<is_unsigned_v<T>, int> = 0>
-constexpr T str_to_uints(const char* str, char** endptr, int base) {
-    if (str == nullptr) {
-        if (endptr) *endptr = const_cast<char*>(str);
+constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
+    const char* start = sv.data();
+    const size_t len = sv.size();
+    const char* end = start + len;
+
+    if (len == 0) {
+        if (endptr) *endptr = const_cast<char*>(start);
         return 0;
     }
 
-    const char* p = str;
-    while (is_space(*p)) p++;
+    const char* p = start;
+    while (p != end && is_space(*p)) ++p;
     const char* start_conversion = p;
 
     int sign = 1;
-    if (*p == '+') {
-        p++;
-    } else if (*p == '-') {
+    if (p != end && *p == '+') {
+        ++p;
+    } else if (p != end && *p == '-') {
         sign = -1;
-        p++;
+        ++p;
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
@@ -125,8 +130,8 @@ constexpr T str_to_uints(const char* str, char** endptr, int base) {
     }
 
     if (base == 0) {
-        if (*p == '0') {
-            if (*(p + 1) == 'x' || *(p + 1) == 'X') {
+        if (p != end && *p == '0') {
+            if (p + 1 != end && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
                 base = 16;
                 p += 2;
             } else {
@@ -137,7 +142,7 @@ constexpr T str_to_uints(const char* str, char** endptr, int base) {
         }
     }
 
-    if (base == 16 && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
+    if (base == 16 && p + 1 < end && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
         p += 2;
     }
 
@@ -147,21 +152,21 @@ constexpr T str_to_uints(const char* str, char** endptr, int base) {
     bool any_converted = false;
     bool overflow = false;
 
-    while (*p) {
+    while (p != end) {
         unsigned int digit = 0;
-        if (*p >= '0' && *p <= '9') {
-            digit = *p - '0';
-        } else if (*p >= 'a' && *p <= 'z') {
-            digit = *p - 'a' + 10;
-        } else if (*p >= 'A' && *p <= 'Z') {
-            digit = *p - 'A' + 10;
+        char c = *p;
+        if (c >= '0' && c <= '9') {
+            digit = c - '0';
+        } else if (c >= 'a' && c <= 'z') {
+            digit = c - 'a' + 10;
+        } else if (c >= 'A' && c <= 'Z') {
+            digit = c - 'A' + 10;
         } else {
             break;
         }
         if (digit >= static_cast<unsigned int>(base)) break;
 
         any_converted = true;
-
         if (!overflow) {
             if (result > cutoff || (result == cutoff && digit > cutlim)) {
                 overflow = true;
@@ -169,22 +174,22 @@ constexpr T str_to_uints(const char* str, char** endptr, int base) {
                 result = result * base + digit;
             }
         }
-        p++;
+        ++p;
     }
 
     if (endptr) {
-        if (any_converted) {
-            *endptr = const_cast<char*>(p);
-        } else {
-            *endptr = const_cast<char*>(start_conversion);
-        }
+        *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
     if (!any_converted) return 0;
     if (overflow) return numeric_limits<T>::max();
 
-    if (sign < 0)
+    if (sign < 0) {
+        // for unsigned, negative sign yields two's complement wrap,
+        // but we follow C standard: strtoul("-1", ...) returns ULLONG_MAX.
+        // So just cast via signed negation then to unsigned.
         return static_cast<T>(-static_cast<make_signed_t<T>>(result));
+    }
     return result;
 }
 
@@ -209,45 +214,51 @@ MSTL_CONST_FUNCTION constexpr T fast_pow10(int exp) {
         return pow10_table[exp];
     }
     if (exp < 0 && -exp <= max_table_exp) {
-	    return neg_pow10_table[-exp];
+        return neg_pow10_table[-exp];
     }
     return static_cast<T>(_MSTL power(10.0, exp));
 }
 
 template <typename T>
-constexpr T str_to_floats(const char* str, char** endptr) {
-    if (str == nullptr) {
-        if (endptr) *endptr = const_cast<char*>(str);
+constexpr T str_to_floats(const string_view sv, char** endptr) {
+    const char* start = sv.data();
+    const size_t len = sv.size();
+    const char* end = start + len;
+
+    if (len == 0) {
+        if (endptr) *endptr = const_cast<char*>(start);
         return static_cast<T>(0);
     }
 
-    const char* p = str;
-    while (_MSTL is_space(*p)) p++;
+    const char* p = start;
+    while (p != end && _MSTL is_space(*p)) ++p;
     const char* start_conversion = p;
 
     int sign = 1;
-    if (*p == '+') {
-        p++;
-    } else if (*p == '-') {
+    if (p != end && *p == '+') {
+        ++p;
+    } else if (p != end && *p == '-') {
         sign = -1;
-        p++;
+        ++p;
     }
 
-    if (_MSTL to_lowercase(*p) == 'i') {
-        if (_MSTL string_n_compare_ignore_case(p, "inf", 3) == 0) {
+    if (p != end && _MSTL to_lowercase(*p) == 'i') {
+        if (p + 2 < end && _MSTL string_n_compare_ignore_case(p, "inf", 3) == 0) {
             p += 3;
-            if (_MSTL string_n_compare_ignore_case(p, "inity", 5) == 0) {
+            if (p + 4 < end && _MSTL string_n_compare_ignore_case(p, "inity", 5) == 0) {
                 p += 5;
             }
             if (endptr) *endptr = const_cast<char*>(p);
             return sign * numeric_limits<T>::max();
         }
-    } else if (_MSTL to_lowercase(*p) == 'n') {
-        if (_MSTL string_n_compare_ignore_case(p, "nan", 3) == 0) {
+    }
+    else if (p != end && _MSTL to_lowercase(*p) == 'n') {
+        if (p + 2 < end && _MSTL string_n_compare_ignore_case(p, "nan", 3) == 0) {
             p += 3;
-            if (*p == '(') {
-                while (*p != '\0' && *p != ')') p++;
-                if (*p == ')') p++;
+            if (p != end && *p == '(') {
+                ++p;
+                while (p != end && *p != ')') ++p;
+                if (p != end && *p == ')') ++p;
             }
             if (endptr) *endptr = const_cast<char*>(p);
             return numeric_limits<T>::quiet_nan();
@@ -259,7 +270,7 @@ constexpr T str_to_floats(const char* str, char** endptr) {
     int digits_count = 0;
     bool has_digits = false;
 
-    while (*p >= '0' && *p <= '9') {
+    while (p != end && *p >= '0' && *p <= '9') {
         has_digits = true;
         if (digits_count < numeric_limits<T>::digits10) {
             significand = significand * 10 + (*p - '0');
@@ -267,19 +278,19 @@ constexpr T str_to_floats(const char* str, char** endptr) {
             exponent++;
         }
         digits_count++;
-        p++;
+        ++p;
     }
 
-    if (*p == '.') {
-        p++;
-        while (*p >= '0' && *p <= '9') {
+    if (p != end && *p == '.') {
+        ++p;
+        while (p != end && *p >= '0' && *p <= '9') {
             has_digits = true;
             if (digits_count < numeric_limits<T>::digits10) {
                 significand = significand * 10 + (*p - '0');
                 exponent--;
             }
             digits_count++;
-            p++;
+            ++p;
         }
     }
 
@@ -288,28 +299,28 @@ constexpr T str_to_floats(const char* str, char** endptr) {
         return static_cast<T>(0);
     }
 
-    if (*p == 'e' || *p == 'E') {
-        p++;
+    if (p != end && (*p == 'e' || *p == 'E')) {
+        ++p;
         int exp_sign = 1;
-        if (*p == '+') {
-            p++;
-        } else if (*p == '-') {
+        if (p != end && *p == '+') {
+            ++p;
+        } else if (p != end && *p == '-') {
             exp_sign = -1;
-            p++;
+            ++p;
         }
 
-        if (*p >= '0' && *p <= '9') {
+        if (p != end && *p >= '0' && *p <= '9') {
             int exp_val = 0;
-            while (*p >= '0' && *p <= '9') {
+            while (p != end && *p >= '0' && *p <= '9') {
                 if (exp_val < 10000) {
                     exp_val = exp_val * 10 + (*p - '0');
                 }
-                p++;
+                ++p;
             }
             exponent += exp_sign * exp_val;
         } else {
-            p--;
-            if (*p == '+' || *p == '-') p--;
+            --p;
+            if (p != start_conversion && (p[-1] == '+' || p[-1] == '-')) --p;
         }
     }
 
@@ -329,7 +340,7 @@ constexpr T str_to_floats(const char* str, char** endptr) {
 
     result *= sign;
     const T inf = numeric_limits<T>::infinity();
-    if (inf == result || -inf == result) {
+    if (result == inf || result == -inf) {
         result = sign * numeric_limits<T>::max();
     }
 
@@ -339,110 +350,128 @@ constexpr T str_to_floats(const char* str, char** endptr) {
 
 MSTL_END_INNER__
 
-
-constexpr int64_t strtoll(const char* str, char** endptr, const int base) {
-    return _INNER str_to_ints<int64_t>(str, endptr, base);
+constexpr int64_t strtoll(const string_view sv, char** endptr, const int base) {
+    return _INNER str_to_ints<int64_t>(sv, endptr, base);
 }
-constexpr long strtol(const char* str, char** endptr, const int base) {
-    return _INNER str_to_ints<long>(str, endptr, base);
-}
-
-constexpr uint64_t strtoull(const char* str, char** endptr, const int base) {
-    return _INNER str_to_uints<uint64_t>(str, endptr, base);
-}
-constexpr unsigned long strtoul(const char* str, char** endptr, const int base) {
-    return _INNER str_to_uints<unsigned long>(str, endptr, base);
+constexpr long strtol(const string_view sv, char** endptr, const int base) {
+    return _INNER str_to_ints<long>(sv, endptr, base);
 }
 
-constexpr float strtof(const char* str, char** endptr) {
-	return _INNER str_to_floats<float>(str, endptr);
+constexpr uint64_t strtoull(const string_view sv, char** endptr, const int base) {
+    return _INNER str_to_uints<uint64_t>(sv, endptr, base);
 }
-constexpr double strtod(const char* str, char** endptr) {
-	return _INNER str_to_floats<double>(str, endptr);
+constexpr unsigned long strtoul(const string_view sv, char** endptr, const int base) {
+    return _INNER str_to_uints<unsigned long>(sv, endptr, base);
 }
-constexpr long double strtold(const char* str, char** endptr) {
-	return _INNER str_to_floats<long double>(str, endptr);
+
+constexpr float strtof(const string_view sv, char** endptr) {
+    return _INNER str_to_floats<float>(sv, endptr);
+}
+constexpr double strtod(const string_view sv, char** endptr) {
+    return _INNER str_to_floats<double>(sv, endptr);
+}
+constexpr long double strtold(const string_view sv, char** endptr) {
+    return _INNER str_to_floats<long double>(sv, endptr);
 }
 
 
-MSTL_NODISCARD constexpr float32_t to_float32(const char* str, size_t* idx = nullptr) {
+MSTL_NODISCARD constexpr float32_t
+to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float32_t num = _MSTL strtof(str, &endptr);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const float32_t num = _MSTL strtof(sv, &endptr);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr float64_t to_float64(const char* str, size_t* idx = nullptr) {
+MSTL_NODISCARD constexpr float64_t
+to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float64_t num = _MSTL strtod(str, &endptr);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const float64_t num = _MSTL strtod(sv, &endptr);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr decimal_t to_decimal(const char* str, size_t* idx = nullptr) {
+MSTL_NODISCARD constexpr decimal_t
+to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const decimal_t num = _MSTL strtold(str, &endptr);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const decimal_t num = _MSTL strtold(sv, &endptr);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr int64_t to_int64(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr int64_t
+to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const int64_t num = _MSTL strtoll(str, &endptr, base);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const int64_t num = _MSTL strtoll(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr uint64_t to_uint64(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr uint64_t
+to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const uint64_t num = _MSTL strtoull(str, &endptr, base);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const uint64_t num = _MSTL strtoull(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr int32_t to_int32(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr int32_t
+to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const int32_t num = _MSTL strtol(str, &endptr, base);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const int32_t num = _MSTL strtol(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr uint32_t to_uint32(const char* str, size_t* idx = nullptr, const int base = 10) {
+MSTL_NODISCARD constexpr uint32_t
+to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const uint32_t num = _MSTL strtoul(str, &endptr, base);
-    if(str == endptr) throw_exception(typecast_exception("Convert from string failed."));
-
-    if (idx) *idx = static_cast<size_t>(endptr - str);
+    const uint32_t num = _MSTL strtoul(sv, &endptr, base);
+    if (sv.data() == endptr) {
+        throw_exception(typecast_exception("Convert from string failed."));
+    }
+    if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
 }
 
-MSTL_NODISCARD constexpr int16_t to_int16(const char* str, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<int16_t>(to_int32(str, idx, base));
+MSTL_NODISCARD constexpr int16_t
+to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<int16_t>(to_int32(sv, idx, base));
 }
 
-MSTL_NODISCARD constexpr uint16_t to_uint16(const char* str, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<int16_t>(to_uint32(str, idx, base));
+MSTL_NODISCARD constexpr uint16_t
+to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<uint16_t>(to_uint32(sv, idx, base));
 }
 
-MSTL_NODISCARD constexpr int8_t to_int8(const char* str, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<int8_t>(to_int32(str, idx, base));
+MSTL_NODISCARD constexpr int8_t
+to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<int8_t>(to_int32(sv, idx, base));
 }
 
-MSTL_NODISCARD constexpr uint8_t to_uint8(const char* str, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<uint8_t>(to_uint32(str, idx, base));
+MSTL_NODISCARD constexpr uint8_t
+to_uint8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
+    return static_cast<uint8_t>(to_uint32(sv, idx, base));
 }
 
 MSTL_END_NAMESPACE__
+
 #endif // MSTL_CORE_STRING_TO_NUMERICS_HPP__

@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_COMPOUND_OPTIONAL_HPP__
 #define MSTL_CORE_COMPOUND_OPTIONAL_HPP__
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "../memory/construct.hpp"
 #include "../utility/interface.hpp"
 #include <initializer_list>

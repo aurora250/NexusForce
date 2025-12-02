@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_STRING_STRING_HPP__
 #define MSTL_CORE_STRING_STRING_HPP__
+#include "../algorithm/type_erase.hpp"
 #include "basic_string.hpp"
-#include "../algorithm/erase.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 using string    = basic_string<char>;

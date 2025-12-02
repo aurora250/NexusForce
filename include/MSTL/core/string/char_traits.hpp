@@ -1,9 +1,9 @@
 #ifndef MSTL_CORE_STRING_CHAR_TRAITS_HPP__
 #define MSTL_CORE_STRING_CHAR_TRAITS_HPP__
-#include "../algorithm/algobase.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "../algorithm/compare.hpp"
 #include "../functional/hash.hpp"
 #include "../string/cstring.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename IntT>

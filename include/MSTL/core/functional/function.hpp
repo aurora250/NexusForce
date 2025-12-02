@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_FUNCTIONAL_FUNCTION_HPP__
 #define MSTL_CORE_FUNCTIONAL_FUNCTION_HPP__
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "invoke.hpp"
 #include <typeinfo>
 MSTL_BEGIN_NAMESPACE__

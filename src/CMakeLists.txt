@@ -79,44 +79,10 @@ function(enable_database_support target)
     endif()
 endfunction()
 
-
-if(MSVC)
-    enable_language(ASM_MASM)
-
-    set(ASM_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.asm
-    )
-
-    foreach(asm_file ${ASM_SOURCES})
-        set_property(
-                SOURCE ${asm_file}
-                PROPERTY LANGUAGE ASM_MASM
-        )
-        if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-            set_property(
-                    SOURCE ${asm_file}
-                    PROPERTY COMPILE_OPTIONS "/nologo;/W3"
-            )
-            set_property(
-                    SOURCE ${asm_file}
-                    PROPERTY COMPILE_DEFINITIONS "_WIN64"
-            )
-        else()
-            set_property(
-                    SOURCE ${asm_file}
-                    PROPERTY COMPILE_OPTIONS "/nologo;/W3"
-            )
-        endif()
-        get_filename_component(asm_name ${asm_file} NAME_WE)
-        set_property(SOURCE ${asm_file} PROPERTY OBJECT_OUTPUT_NAME ${asm_name})
-    endforeach()
-endif()
-
-
 # 链接文件
 set(CPP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/datetime.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/datetime/clocks.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/compound/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
@@ -130,7 +96,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/encrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/exception_ptr.cpp
@@ -140,9 +106,10 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/config/exception.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/logging/log_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/db_config.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/postgresql/postgresql_prepared_statement.cpp
@@ -159,23 +126,19 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/database/redis/redis_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
 )
 
 # 编译为动态库
-if(MSVC)
-    add_library(MSTL SHARED ${CPP_SOURCES} ${ASM_SOURCES})
-    target_sources(MSTL PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/MSTL.def)
-else()
-    add_library(MSTL SHARED ${CPP_SOURCES})
-endif()
-
+add_library(MSTL SHARED ${CPP_SOURCES})
 add_library(MSTL::MSTL ALIAS MSTL)
 
 target_compile_definitions(MSTL

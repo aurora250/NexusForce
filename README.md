@@ -128,7 +128,7 @@ sudo make install
 
 定义类型特征常量，使用模板元技术在编译期推断类型信息。
 
-- [exception](include/MSTL/core/config/exception.hpp)
+- [exception](include/MSTL/core/exception/exception.hpp)
 
 定义错误类型和快速调用宏，本项目的所有错误类型都为本文件内的错误类型。
 
@@ -256,7 +256,7 @@ sudo make install
 
 定义字符串格式化辅助类`formatter`和格式化函数`format`。
 
-- [encrypt](include/MSTL/core/string/encrypt.hpp)
+- [encrypt](include/MSTL/core/encrypt/encrypt.hpp)
 
 定义字符加密类型及函数`XOR`、`base64`、`MD5`、`SHA1`、`SHA256`、`AES256`。
 

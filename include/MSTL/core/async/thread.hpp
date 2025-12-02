@@ -2,8 +2,8 @@
 #define MSTL_CORE_ASYNC_THREAD_HPP__
 #include "../memory/unique_ptr.hpp"
 #include "../functional/apply.hpp"
-#include "../config/terminate.hpp"
-#include "../config/exception.hpp"
+#include "../exception/terminate.hpp"
+#include "../exception/exception.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <process.h>

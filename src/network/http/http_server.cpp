@@ -130,9 +130,6 @@ string http_server::url_decode(const string_view str) {
 }
 
 http_request http_server::parse_request(const socket& client_socket) {
-    constexpr string_view crlf = "\r\n";
-    constexpr string_view crlf2 = "\r\n\r\n";
-
     http_request request;
     char buffer[4096];
     string request_data;
@@ -146,14 +143,14 @@ http_request http_server::parse_request(const socket& client_socket) {
         request_data.append(buffer, bytes_read);
         total_read += bytes_read;
 
-        const size_t header_end = request_data.find(crlf2);
+        const size_t header_end = request_data.find(HTTP_CRLF2);
         if (header_end != string::npos) {
             size_t content_length = 0;
             const size_t content_start = header_end + 4;
 
             const size_t cl_pos = request_data.find("Content-Length:");
             if (cl_pos != string::npos) {
-                const size_t cl_end = request_data.find(crlf, cl_pos);
+                const size_t cl_end = request_data.find(HTTP_CRLF, cl_pos);
                 if (cl_end != string::npos) {
                     const string cl_str = request_data.substr(
                         cl_pos + 15, cl_end - cl_pos - 15
@@ -214,7 +211,7 @@ http_request http_server::parse_request(const socket& client_socket) {
     }
 
     // request body
-    const size_t body_start = request_data.find(crlf2);
+    const size_t body_start = request_data.find(HTTP_CRLF2);
     if (body_start != string::npos && body_start + 4 < request_data.size()) {
         request.set_body(request_data.substr(body_start + 4));
     }
@@ -330,7 +327,7 @@ bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
         return false;
     }
 
-    if (server_socket_.reuse_addr()) {
+    if (!server_socket_.reuse_addr()) {
         printcln(color::red(), "setsockopt failed");
         return false;
     }
@@ -339,12 +336,12 @@ bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
     server_addr_.sin_addr.s_addr = INADDR_ANY;
     server_addr_.sin_port = ::htons(port_);
 
-    if (server_socket_.bind(server_addr_)) {
+    if (!server_socket_.bind(server_addr_)) {
         printcln(color::red(), "bind failed");
         return false;
         }
 
-    if (server_socket_.listen(backlog_)) {
+    if (!server_socket_.listen(backlog_)) {
         printcln(color::red(), "listen failed");
         return false;
     }

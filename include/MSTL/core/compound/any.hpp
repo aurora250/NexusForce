@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_COMPOUND_ANY_HPP__
 #define MSTL_CORE_COMPOUND_ANY_HPP__
-#include "../config/exception.hpp"
+#include "../exception/exception.hpp"
 #include "../utility/interface.hpp"
 #include "../typeinfo/tags.hpp"
 #include <typeinfo>

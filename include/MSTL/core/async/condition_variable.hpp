@@ -2,7 +2,7 @@
 #define MSTL_CORE_ASYNC_CONDITION_VARIABLE_HPP__
 #include "../async/mutex.hpp"
 #include "../time/clocks.hpp"
-#include "../config/assertion.hpp"
+#include "../exception/assertion.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include "../config/undef_cmacro.hpp"

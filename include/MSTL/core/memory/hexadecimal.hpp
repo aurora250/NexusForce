@@ -48,7 +48,7 @@ private:
         if (hex_digits.empty()) return 0;
 
         size_t pos = 0;
-        const uint64_t raw = _MSTL to_uint64(hex_digits.data(), &pos, 16);
+        const uint64_t raw = _MSTL to_uint64(hex_digits.view(), &pos, 16);
         if (pos != hex_digits.size()) {
             throw_exception(value_exception("Invalid hexadecimal format"));
         }

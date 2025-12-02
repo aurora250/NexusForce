@@ -2,9 +2,11 @@
 #define MSTL_CORE_STRING_BASIC_STRING_HPP__
 #include "../memory/standard_allocator.hpp"
 #include "../memory/allocator_traits.hpp"
+#include "../memory/uninitialized.hpp"
 #include "../compound/compressed_pair.hpp"
-#include "../algorithm/algo.hpp"
+#include "../algorithm/shift.hpp"
 #include "string_view.hpp"
+#include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename Traits, typename Alloc>
@@ -496,7 +498,7 @@ public:
         return *this;
     }
 
-    MSTL_CONSTEXPR20 explicit basic_string(view_type str) {
+    MSTL_CONSTEXPR20 basic_string(view_type str) {
         this->construct_from_ptr(str.data(), 0, str.size());
     }
 
