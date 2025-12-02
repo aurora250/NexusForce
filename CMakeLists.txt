@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
 project(MSTL LANGUAGES CXX)
 
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
 if(NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_CONFIGURATION_TYPES
             "Debug;Release;RelWithDebInfo;MinSizeRel")
@@ -91,17 +94,11 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/MSTL/
 
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/MSTL)
 
-include(CMakePackageConfigHelpers)
-include(GNUInstallDirs)
-
 write_basic_package_version_file(
         ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfigVersion.cmake
         VERSION 1.4.0
         COMPATIBILITY SameMajorVersion
 )
-
-set(CMAKE_INSTALL_INCLUDEDIR include)
-set(CMAKE_INSTALL_LIBDIR lib)
 
 configure_package_config_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/MSTLConfig.cmake.in

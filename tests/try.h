@@ -1,6 +1,6 @@
 #ifndef TRY_H
 #define TRY_H
-#include <MSTL/mstlc++.hpp>
+#include <MSTL/MSTL.hpp>
 using namespace MSTL;
 
 void test_file();
