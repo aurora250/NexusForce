@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ALGORITHM_SET_HPP__
 #define MSTL_CORE_ALGORITHM_SET_HPP__
-#include "../typeinfo/concepts.hpp"
+#include "shift.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator1, typename Iterator2, typename Iterator3,

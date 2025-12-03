@@ -424,10 +424,10 @@ public:
 
 MSTL_BEGIN_CONSTANTS__
 
-MSTL_INLINE17 constexpr string_view WEEKDAYS_STRING[] =
+MSTL_INLINE17 constexpr const char* const WEEKDAYS_STRING[] =
     {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-MSTL_INLINE17 constexpr string_view MONTHS_STRING[] =
+MSTL_INLINE17 constexpr const char* const MONTHS_STRING[] =
     {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 MSTL_END_CONSTANTS__

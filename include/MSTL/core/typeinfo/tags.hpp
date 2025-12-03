@@ -49,6 +49,14 @@ struct unpack_utility_construct_tag {
 };
 
 
+struct inplace_invoke_tag {
+    constexpr inplace_invoke_tag() noexcept  = default;
+};
+struct unexpect_invoke_tag {
+    constexpr unexpect_invoke_tag() noexcept  = default;
+};
+
+
 struct allocate_cpu_tag {
     constexpr allocate_cpu_tag() noexcept = default;
 };

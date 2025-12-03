@@ -64,7 +64,7 @@ void mysql_prepared_result::initialize_bindings() const {
     }
 }
 
-size_t mysql_prepared_result::get_buffer_size(const enum_field_types type) const {
+size_t mysql_prepared_result::get_buffer_size(const enum_field_types type) {
     switch (type) {
         case MYSQL_TYPE_TINY:
             return 1;
@@ -121,9 +121,6 @@ bool mysql_prepared_result::next() {
             }
         }
         return true;
-    } else if (ret == MYSQL_NO_DATA) {
-        has_current_row_ = false;
-        return false;
     } else {
         has_current_row_ = false;
         return false;
@@ -134,7 +131,7 @@ string_view mysql_prepared_result::get(const size_type n) const {
     MSTL_DEBUG_VERIFY(has_current_row_, "No current row to fetch data from")
     MSTL_DEBUG_VERIFY(n < column_count_, "Column index out of range")
     if ((*is_null_)[n]) return {};
-    return string_view((*buffers_)[n].data(), (*lengths_)[n]);
+    return {(*buffers_)[n].data(), (*lengths_)[n]};
 }
 
 bool mysql_prepared_result::get_bool(const size_type n) const {
@@ -280,7 +277,7 @@ uint64_t mysql_prepared_result::get_bit(const size_type n) const {
 
     uint64_t value = 0;
     for (unsigned long i = 0; i < (*lengths_)[n]; ++i) {
-        value = (value << 8) | static_cast<uint8_t>((*buffers_)[n][i]);
+        value = (value << 8) | static_cast<byte_t>((*buffers_)[n][i]);
     }
     return value;
 }
@@ -292,7 +289,7 @@ date mysql_prepared_result::get_date(const size_type n) const {
     if (column_types_->at(n) != MYSQL_TYPE_DATE) {
         throw_exception(database_typecast_exception("Database type cast to date mismatch"));
     }
-    if ((*is_null_)[n]) return date();
+    if ((*is_null_)[n]) return {};
     const auto mt = reinterpret_cast<const MYSQL_TIME*>((*buffers_)[n].data());
     return date(mt->year, mt->month, mt->day);
 }

@@ -1,9 +1,10 @@
 #ifndef MSTL_CORE_SERIALIZE_SERIALIZE_HPP__
 #define MSTL_CORE_SERIALIZE_SERIALIZE_HPP__
 #include "../container/vector.hpp"
-#include "../json/json_value.hpp"
 #include "serialize_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
+
+#ifdef MSTL_STANDARD_20__
 
 template<typename SerializerTag = void, typename T>
 constexpr auto serialize(const T& obj) {
@@ -63,6 +64,8 @@ template<typename T>
 T from_json(string_view json_str) {
     return deserialize<T, json_serializer_tag>(json_str);
 }
+
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_SERIALIZE_SERIALIZE_HPP__

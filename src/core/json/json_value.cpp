@@ -78,7 +78,7 @@ static string indent_str(const int indent) {
     return string(indent, ' ');
 }
 
-string json_value_to_indent_string(const json_value* value, int indent) {
+string json_value_to_indent_string(const json_value* value, const int indent) {
     if (!value) {
         return "null";
     }

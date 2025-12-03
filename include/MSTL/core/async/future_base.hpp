@@ -235,7 +235,7 @@ struct __future_base {
 
         template <typename Clock, typename Dur>
         future_status wait_until(const _MSTL_CHRONO time_point<Clock, Dur>& absolute_time) {
-            static_assert(is_clock_v<Clock>);
+            static_assert(is_clock_v<Clock>, "Clock type must be clock_t");
             if (status.load(memory_order_acquire) == status::ready) {
                 return future_status::ready;
             }

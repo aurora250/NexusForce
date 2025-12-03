@@ -6,6 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 template<typename SerializerTag, typename T, typename = void>
 struct serializer_traits;
 
+#ifdef MSTL_STANDARD_20__
 
 template<typename T>
 struct serializer_traits<string_serializer_tag, T> {
@@ -73,6 +74,8 @@ struct default_serializer {
 
 template<typename T>
 using default_serializer_t = typename default_serializer<T>::type;
+
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_SERIALIZE_SERIALIZE_TRAITS_HPP__

@@ -76,7 +76,7 @@
 
 #ifdef MSTL_COMPILER_MSVC__
 	#define MSTL_THREAD_LOCAL __declspec(thread)
-#elif defined(MSTL_COMPILER_GCC__)
+#elif defined(MSTL_COMPILER_GNUC__)
 	#define MSTL_THREAD_LOCAL thread_local
 #else
 	#define MSTL_THREAD_LOCAL

@@ -23,6 +23,8 @@ template<typename T>
 T deserialize(json_serializer_tag, const json_ptr& input);
 
 
+#ifdef MSTL_STANDARD_20__
+
 template<typename T>
 concept HasToString = requires(const T& obj) {
   { obj.to_string() } -> convertible_to<string>;
@@ -48,6 +50,8 @@ concept HasBinaryDeserialize = requires(span<const byte_t> data) {
 
 template<typename T>
 concept BinarySerializable = HasBinarySerialize<T> && HasBinaryDeserialize<T>;
+
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_SERIALIZE_CONCEPTS_HPP__

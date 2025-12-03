@@ -21,7 +21,6 @@ class atomic_futex : atomic_futex_base {
 
     atomic<unsigned> data_;
 
-private:
 	unsigned load_and_test_until(unsigned assumed, const unsigned operand,
 	    const bool equal, const memory_order mo, const bool has_timeout,
 	    const _MSTL_CHRONO seconds sec, const _MSTL_CHRONO nanoseconds ns) {
@@ -82,7 +81,8 @@ private:
 public:
 	explicit atomic_futex(const unsigned data) : data_(data) {}
 
-	MSTL_ALWAYS_INLINE unsigned load(const memory_order mo) const {
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE unsigned
+    load(const memory_order mo) const {
 		return data_.load(mo) & ~WaiterBit;
 	}
 	

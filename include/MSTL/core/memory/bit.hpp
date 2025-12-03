@@ -18,14 +18,14 @@ MSTL_END_CONSTANTS__
 
 constexpr int popcountll(const uint64_t x) noexcept {
     return
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>(x & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 8) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 16) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 24) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 32) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 40) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 48) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<uint8_t>((x >> 56) & 0xFFULL)];
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
 }
 
 constexpr int clzll(uint64_t x) noexcept {

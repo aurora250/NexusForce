@@ -5,9 +5,9 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename Res>
 class promise {
-    static_assert(!is_array<Res>{}, "result type must not be an array");
-    static_assert(!is_function<Res>{}, "result type must not be a function");
-    static_assert(is_destructible<Res>{}, "result type must be destructible");
+    static_assert(!is_array_v<Res>, "result type must not be an array");
+    static_assert(!is_function_v<Res>, "result type must not be a function");
+    static_assert(is_destructible_v<Res>, "result type must be destructible");
 
 public:
     typedef __future_base::state_base state_type;
@@ -21,7 +21,7 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
-    state_type& state() {
+    MSTL_NODISCARD state_type& state() const {
         __future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
@@ -103,7 +103,7 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
-    state_type& state() {
+    MSTL_NODISCARD state_type& state() const {
         __future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
@@ -170,7 +170,7 @@ private:
     template <typename T, typename U>
     friend struct __future_base::state_base::setter;
 
-    state_type& state() {
+    MSTL_NODISCARD state_type& state() const {
         __future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
@@ -202,7 +202,7 @@ public:
         storage.swap(other.storage);
     }
 
-    future<void> get_future() {
+    MSTL_NODISCARD future<void> get_future() const {
         return future<void>(future_ptr);
     }
 
@@ -255,12 +255,13 @@ struct __future_base::task_setter<PtrT, Func, void> {
 };
 
 template <typename Res, typename... Args>
-struct __future_base::task_state_base<Res(Args...)> : __future_base::state_base {
+class __future_base::task_state_base<Res(Args...)> : public __future_base::state_base {
+public:
     typedef Res result_type;
     typedef __future_base::Ptr<basic_result<Res>> PtrType;
     PtrType result_storage;
 
-    template<typename Alloc>
+    template <typename Alloc>
     task_state_base(const Alloc& alloc)
     : result_storage(allocate_result<Res>(alloc)) {}
 
@@ -272,36 +273,37 @@ struct __future_base::task_state_base<Res(Args...)> : __future_base::state_base 
 };
 
 template <typename Func, typename Alloc, typename Res, typename... Args>
-struct __future_base::task_state<Func, Alloc, Res(Args...)> final
-    : __future_base::task_state_base<Res(Args...)> {
+class __future_base::task_state<Func, Alloc, Res(Args...)> final
+    : public __future_base::task_state_base<Res(Args...)> {
+public:
     template <typename Func2>
     task_state(Func2&& func, const Alloc& alloc)
     : task_state_base<Res(Args...)>(alloc)
     , impl(_MSTL forward<Func2>(func), alloc) {}
 
 private:
-    virtual void run(Args&&... args) {
+    void run(Args&&... args) override {
         auto bound_func = [&]() -> Res {
             return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
         this->set_result(create_task_setter(this->result_storage, bound_func));
     }
 
-    virtual void run_delayed(Args&&... args, weak_ptr<state_base> self) {
+    void run_delayed(Args&&... args, weak_ptr<state_base> self) override {
         auto bound_function = [&]() -> Res {
             return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
         this->set_delayed_result(create_task_setter(this->result_storage, bound_function), _MSTL move(self));
     }
 
-    virtual shared_ptr<task_state_base<Res(Args...)>>
-    reset();
+    shared_ptr<task_state_base<Res(Args...)>>
+    reset() override;
 
-    struct Implementation : Alloc {
+    struct Impl : Alloc {
         Func function_ptr;
 
         template <typename Func2>
-        Implementation(Func2&& func, const Alloc& alloc)
+        Impl(Func2&& func, const Alloc& alloc)
         : Alloc(alloc), function_ptr(_MSTL forward<Func2>(func)) {}
     } impl;
 };

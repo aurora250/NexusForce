@@ -24,7 +24,7 @@ private:
     unique_ptr<vector<bool>> is_error_ = make_unique<vector<bool>>();
 
     void initialize_bindings() const;
-    size_t get_buffer_size(_MSTL_MYSQL enum_field_types type) const;
+    static size_t get_buffer_size(_MSTL_MYSQL enum_field_types type);
 
 public:
     explicit mysql_prepared_result(_MSTL_MYSQL MYSQL_STMT* stmt);

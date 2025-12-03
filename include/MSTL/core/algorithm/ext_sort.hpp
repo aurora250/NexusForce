@@ -118,7 +118,6 @@ template <typename Iterator, typename Compare, typename IndexMapper, enable_if_t
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapper) {
     if (first == last) return;
-    using T = typename iterator_traits<Iterator>::value_type;
     auto min_max = _MSTL minmax_element(first, last, comp);
     auto min_val = mapper(*min_max.first);
     auto max_val = mapper(*min_max.second);
@@ -136,7 +135,7 @@ MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp,
     for (size_t i = 1; i < count.size(); ++i)
         count[i] += count[i - 1];
 
-    vector<T> sorted(_MSTL distance(first, last));
+    vector<iter_value_t<Iterator>> sorted(_MSTL distance(first, last));
     auto bound = _MSTL make_reverse_iterator(first);
 
     for (auto rit = _MSTL make_reverse_iterator(last); rit != bound; ++rit) {
@@ -173,7 +172,7 @@ MSTL_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
     for (size_t i = 0; i < bucket.size(); ++i) {
         while (bucket[i] > 0) {
             *index++ = static_cast<T>(i + min_val);
-            bucket[i]--;
+            --bucket[i];
         }
     }
 }
@@ -197,7 +196,7 @@ MSTL_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
     for (size_t i = bucket.size(); i-- > 0; ) {
         while (bucket[i] > 0) {
             *index++ = static_cast<T>(i + min_val);
-            bucket[i]--;
+            --bucket[i];
         }
     }
 }
@@ -236,13 +235,11 @@ template <typename Iterator, typename Mapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
     if (first == last) return;
-    using Distance = typename iterator_traits<Iterator>::difference_type;
-    using T = typename iterator_traits<Iterator>::value_type;
     using Mapped = remove_reference_t<decltype(mapper(*first))>;
 
-    Distance length = _MSTL distance(first, last);
+    iter_difference_t<Iterator> length = _MSTL distance(first, last);
     vector<Mapped> mapped_values(length);
-    vector<T> bucket(length);
+    vector<iter_value_t<Iterator>> bucket(length);
     vector<int> count(10);
     Iterator it = first;
 

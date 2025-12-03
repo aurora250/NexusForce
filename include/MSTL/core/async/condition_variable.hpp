@@ -38,7 +38,7 @@ public:
 
     void wait(mutex& mtx);
     cv_status wait_until(mutex& mtx, const ::timespec& abs);
-    cv_status wait_until(mutex& mtx, const int clock, const ::timespec& abs);
+    cv_status wait_until(mutex& mtx, int clock, const ::timespec& abs);
 
     void notify_one() noexcept;
     void notify_all() noexcept;

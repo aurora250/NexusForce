@@ -75,7 +75,6 @@ constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterato
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
-	last -= n;
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
 }
@@ -123,7 +122,6 @@ constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterato
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	const auto n = static_cast<size_t>(last - first);
-	last -= n;
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
 }
@@ -162,7 +160,7 @@ constexpr Function for_each(Iterator first, Iterator last, Function f) {
 }
 
 template<typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator for_each_n(Iterator first, size_t n, Function f) {
+constexpr Iterator for_each_n(Iterator first, const size_t n, Function f) {
 	for (size_t i = 0; i < n; i++) {
 		f(*first);
 		++first;

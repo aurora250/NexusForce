@@ -119,7 +119,7 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
 
 thread_pool::pool_statistics thread_pool::statistics() const {
     _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(task_queue_mtx_));
-    pool_statistics stats;
+    pool_statistics stats{};
     stats.total_threads = threads_map_.size();
     stats.idle_threads = idle_thread_size_.load();
     stats.busy_threads = stats.total_threads > stats.idle_threads ?

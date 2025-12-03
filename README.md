@@ -1,4 +1,4 @@
-# MSTL V1.3.1
+# MSTL V1.4.0
 
 [![Build Status](https://travis-ci.org/aurora250/MSTL.svg?branch=master)](https://travis-ci.org/aurora250/MSTL)
 [![License](https://img.shields.io/badge/License-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)

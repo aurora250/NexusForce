@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ALGORITHM_BOUND_HPP__
 #define MSTL_CORE_ALGORITHM_BOUND_HPP__
-#include "../typeinfo/concepts.hpp"
+#include "iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>

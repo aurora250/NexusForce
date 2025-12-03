@@ -54,9 +54,9 @@ constexpr bool is_valid_cmpexch_failure_order(const memory_order mo) noexcept {
 
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-MSTL_INLINE17 constexpr uint8_t ATOMIC_TS_TRUEVAL = 4;
+MSTL_INLINE17 constexpr byte_t ATOMIC_TS_TRUEVAL = 4;
 #else
-MSTL_INLINE17 constexpr uint8_t ATOMIC_TS_TRUEVAL = 1;
+MSTL_INLINE17 constexpr byte_t ATOMIC_TS_TRUEVAL = 1;
 #endif
 MSTL_INLINE17 constexpr bool ATOMIC_TS_IS_BOOL = ATOMIC_TS_TRUEVAL == 1;
 

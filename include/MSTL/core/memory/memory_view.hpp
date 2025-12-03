@@ -79,7 +79,7 @@ private:
 
     template <size_t UE = Extent, enable_if_t<UE != dynamic_extent, int> = 0>
     MSTL_ALWAYS_INLINE constexpr void check_count(const size_t Count) const noexcept {
-        static_assert(Count <= Extent);
+        static_assert(Count <= Extent, "COunt must less than Extend");
     }
     template <size_t UE = Extent, enable_if_t<UE == dynamic_extent, int> = 0>
     MSTL_ALWAYS_INLINE constexpr void check_count(const size_t Count) const noexcept {
@@ -112,7 +112,10 @@ public:
 #else
     template <typename Iter, enable_if_t<is_cot_iter_v<Iter>, int> = 0>
 #endif
-    constexpr explicit(Extent != dynamic_extent)
+    constexpr
+#ifdef MSTL_STANDARD_20__
+    explicit(Extent != dynamic_extent)
+#endif
     memory_view(Iter first, size_type count) noexcept
     : extent_pair_(exact_arg_construct_tag{}, count, _MSTL to_address(first)) {
         memory_view::check_extend<Extent>(count);
@@ -124,7 +127,10 @@ public:
 #else
     template <typename Iter, typename End, enable_if_t<is_cot_iter_v<Iter>, int> = 0>
 #endif
-    constexpr explicit(Extent != dynamic_extent)
+    constexpr
+#ifdef MSTL_STANDARD_20__
+    explicit(Extent != dynamic_extent)
+#endif
     memory_view(Iter first, End last) noexcept(noexcept(last - first))
     : extent_pair_(exact_arg_construct_tag{}, static_cast<size_type>(last - first), _MSTL to_address(first)) {
         memory_view::check_extend<Extent>(last - first);
@@ -158,7 +164,10 @@ public:
     requires (Extent == dynamic_extent || OE == dynamic_extent || Extent == OE)
         && is_array_convertible_v<Element, U>
 #endif
-    constexpr explicit(Extent != dynamic_extent && OE == dynamic_extent)
+    constexpr
+#ifdef MSTL_STANDARD_20__
+    explicit(Extent != dynamic_extent && OE == dynamic_extent)
+#endif
     memory_view(const memory_view<U, OE>& other) noexcept
     : extent_pair_(other.extent_pair_) {
         memory_view::check_extend<Extent>(other.size());

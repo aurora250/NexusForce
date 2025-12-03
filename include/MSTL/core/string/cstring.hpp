@@ -133,10 +133,12 @@ MSTL_PURE_FUNCTION constexpr int string_compare_natural(const char* s1, const ch
 
 // return the length of string when the loop encounter '\0'
 // it`s similar with std::strlen.
-MSTL_PURE_FUNCTION constexpr size_t string_length(const char* str) noexcept {
+template <typename CharT>
+MSTL_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
 	const char* p = str;
-	while (*p != '\0')
-		++p;
+	while (*p != static_cast<CharT>(0)) {
+	    ++p;
+	}
 	return static_cast<size_t>(p - str);
 }
 

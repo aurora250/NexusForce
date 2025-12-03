@@ -44,8 +44,7 @@ Iterator is_sorted_until(Iterator first, Iterator last) {
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void merge_sort(Iterator first, Iterator last, Compare comp) {
-    using Distance = typename iterator_traits<Iterator>::difference_type;
-    Distance n = _MSTL distance(first, last);
+    iter_difference_t<Iterator> n = _MSTL distance(first, last);
     if (n < 2) return;
     Iterator mid = first + n / 2;
     _MSTL merge_sort(first, mid);
@@ -82,7 +81,6 @@ template <typename Iterator1, typename Iterator2, typename Compare, enable_if_t<
 Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
 	Iterator2 result_first, Iterator2 result_last, Compare comp) {
 	if (result_first == result_last) return result_last;
-    using Distance = typename iterator_traits<Iterator1>::difference_type;
 	Iterator2 result_real_last = result_first;
 	while (first != last && result_real_last != result_last) {
 		*result_real_last = *first;
@@ -92,7 +90,7 @@ Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
     _MSTL make_heap(result_first, result_real_last, comp);
 	while (first != last) {
 		if (comp(*first, *result_first)) {
-            _MSTL adjust_heap(result_first, Distance(0),
+            _MSTL adjust_heap(result_first, iter_difference_t<Iterator1>(0),
             	Distance(result_real_last - result_first), *first, comp);
         }
 		++first;
@@ -102,8 +100,7 @@ Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
 }
 
 template <typename Iterator1, typename Iterator2>
-Iterator2 partial_sort_copy(
-    Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last) {
+Iterator2 partial_sort_copy(Iterator1 first, Iterator1, Iterator2 result_first, Iterator2 result_last) {
     return _MSTL partial_sort_copy(first, result_first, result_last, _MSTL less<iter_value_t<Iterator1>>());
 }
 
@@ -126,9 +123,8 @@ template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void insertion_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
-    using T = typename iterator_traits<Iterator>::value_type;
     for (Iterator i = first + 1; i != last; ++i) {
-        T value = *i;
+        iter_value_t<Iterator> value = *i;
         if (comp(value, *first)) {
             _MSTL copy_backward(first, i, i + 1);
             *first = value;

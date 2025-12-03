@@ -273,7 +273,7 @@ public:
             return __builtin_strlen(str);
         }
 #else
-        return _MSTL string_length(reinterpret_cast<const char*>(str));
+        return _MSTL string_length(str);
 #endif // MSTL_STANDARD_17__
     }
 

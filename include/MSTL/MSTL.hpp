@@ -7,6 +7,7 @@
 #include "core/async/timer.hpp"
 #include "core/async/async.hpp"
 #include "core/compound/any.hpp"
+#include "core/compound/expected.hpp"
 #include "core/compound/variant.hpp"
 #include "core/container/bitmap.hpp"
 #include "core/container/bitset.hpp"

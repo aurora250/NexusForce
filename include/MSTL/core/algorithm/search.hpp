@@ -114,7 +114,7 @@ constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, 
 }
 
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
-constexpr Iterator search_n(Iterator first, Iterator last, size_t count, const T& value) {
+constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T& value) {
 	first = _MSTL find(first, last, value);
 	while (first != last) {
 		size_t n = count - 1;

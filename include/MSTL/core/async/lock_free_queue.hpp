@@ -26,7 +26,7 @@ private:
         _MSTL atomic<node_counter> count;
         _MSTL atomic<counted_node_ptr> next;
 
-        node(int external_count = 2) {
+        explicit node(int external_count = 2) {
             node_counter new_count;
             new_count.internal_count = 0;
             new_count.external_counters = external_count;
