@@ -63,25 +63,9 @@ public:
     noexcept(noexcept(seq_ == rh.seq_)) {
         return seq_ == rh.seq_;
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(seq_ != rh.seq_)) {
-        return seq_ != rh.seq_;
-    }
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(seq_ < rh.seq_)) {
         return seq_ < rh.seq_;
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(seq_ > rh.seq_)) {
-        return seq_ > rh.seq_;
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(seq_ <= rh.seq_)) {
-        return seq_ <= rh.seq_;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(seq_ >= rh.seq_)) {
-        return seq_ >= rh.seq_;
     }
 
     MSTL_NODISCARD size_type to_hash() const noexcept {

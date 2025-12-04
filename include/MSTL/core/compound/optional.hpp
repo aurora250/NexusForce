@@ -180,17 +180,13 @@ public:
     constexpr T& operator *() const && noexcept { return *ptr_; }
     constexpr T& operator *() && noexcept { return *ptr_; }
 
-    constexpr bool operator ==(nullopt_t) const noexcept {
-        return ptr_ == nullptr;
-    }
-    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
-        return rh.ptr_ == nullptr;
-    }
-
     constexpr bool operator ==(const self& other) const noexcept {
         if (ptr_ == nullptr || other.ptr_ == nullptr)
             return ptr_ == other.ptr_;
         return *ptr_ == *other.ptr_;
+    }
+    constexpr bool operator >(const self& other) const noexcept {
+        return ptr_ && other.ptr_ && *ptr_ > *other.ptr_;
     }
 
     template <typename U>
@@ -200,33 +196,19 @@ public:
         return *ptr_ == *other.ptr_;
     }
 
-    constexpr bool operator !=(nullopt_t) const noexcept {
-        return ptr_ != nullptr;
+    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
+        return rh.ptr_ == nullptr;
     }
     friend constexpr bool operator !=(nullopt_t, const self& rh) noexcept {
         return rh.ptr_ != nullptr;
     }
-    constexpr bool operator !=(const self& other) const noexcept {
-        return !(*this == other);
-    }
 
+    constexpr bool operator ==(nullopt_t) const noexcept { return ptr_ == nullptr; }
+    constexpr bool operator !=(nullopt_t) const noexcept { return ptr_ != nullptr; }
     constexpr bool operator >(nullopt_t) const noexcept { return ptr_ != nullptr; }
     constexpr bool operator <(nullopt_t) const noexcept { return false; }
     constexpr bool operator >=(nullopt_t) const noexcept { return true; }
     constexpr bool operator <=(nullopt_t) const noexcept { return ptr_ == nullptr; }
-
-    constexpr bool operator >(const self& other) const noexcept {
-        return ptr_ && other.ptr_ && *ptr_ > *other.ptr_;
-    }
-    constexpr bool operator <(const self& other) const noexcept {
-        return other > *this;
-    }
-    constexpr bool operator >=(const self& other) const noexcept {
-        return !(*this < other);
-    }
-    constexpr bool operator <=(const self& other) const noexcept {
-        return !(*this > other);
-    }
 
     constexpr size_t to_hash() const noexcept {
         return ptr_ ? hash<remove_cv_t<T>>()(*ptr_) : 0;
@@ -590,25 +572,11 @@ public:
         return _MSTL addressof(value_);
     }
 
-    constexpr const_reference operator *() const & noexcept {
-        return value_;
-    }
-    constexpr reference operator *() & noexcept {
-        return value_;
-    }
-    constexpr const value_type&& operator *() const && noexcept {
-        return _MSTL move(value_);
-    }
-    constexpr value_type&& operator *() && noexcept {
-        return _MSTL move(value_);
-    }
+    constexpr const_reference operator *() const & noexcept { return value_; }
+    constexpr reference operator *() & noexcept { return value_; }
+    constexpr const value_type&& operator *() const && noexcept { return _MSTL move(value_); }
+    constexpr value_type&& operator *() && noexcept { return _MSTL move(value_); }
 
-    constexpr bool operator ==(nullopt_t) const noexcept {
-        return !have_value_;
-    }
-    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
-        return !rh.have_value_;
-    }
     constexpr bool operator ==(const self& rh) const noexcept {
         if (have_value_ != rh.have_value_)
             return false;
@@ -616,57 +584,36 @@ public:
             return value_ == rh.value_;
         return true;
     }
+    constexpr bool operator <(const self& rh) const noexcept {
+        if (!have_value_ || !rh.have_value_)
+            return false;
+        return value_ < rh.value_;
+    }
 
-    constexpr bool operator !=(nullopt_t) const noexcept {
-        return have_value_;
+    constexpr bool operator ==(nullopt_t) const noexcept { return !have_value_; }
+    constexpr bool operator !=(nullopt_t) const noexcept { return have_value_; }
+    constexpr bool operator >(nullopt_t) const noexcept { return have_value_; }
+    constexpr bool operator <(nullopt_t) const noexcept { return false; }
+    constexpr bool operator >=(nullopt_t) const noexcept { return true; }
+    constexpr bool operator <=(nullopt_t) const noexcept { return !have_value_; }
+
+    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
+        return !rh.have_value_;
     }
     friend constexpr bool operator !=(nullopt_t, const self& rh) noexcept {
         return rh.have_value_;
     }
-    constexpr bool operator !=(const self& rh) const noexcept {
-        return !(*this == rh);
-    }
-
-    constexpr bool operator >(nullopt_t) const noexcept {
-        return have_value_;
-    }
     friend constexpr bool operator >(nullopt_t, const self&) noexcept {
-        return false;
-    }
-    constexpr bool operator >(const self& rh) const noexcept {
-        if (!have_value_ || !rh.have_value_)
-            return false;
-        return value_ > rh.value_;
-    }
-
-    constexpr bool operator <(nullopt_t) const noexcept {
         return false;
     }
     friend constexpr bool operator <(nullopt_t, const self& rh) noexcept {
         return rh.have_value_;
     }
-    constexpr bool operator <(const self& rh) const noexcept {
-        return rh > *this;
-    }
-
-    constexpr bool operator >=(nullopt_t) const noexcept {
-        return true;
-    }
     friend constexpr bool operator >=(nullopt_t, const self& rh) noexcept {
         return !rh.have_value_;
     }
-    constexpr bool operator >=(const self& rh) const noexcept {
-        return !(*this < rh);
-    }
-
-    constexpr bool operator <=(nullopt_t) const noexcept {
-        return !have_value_;
-    }
-    friend constexpr bool operator <=(nullopt_t, const self& rh) noexcept {
+    friend constexpr bool operator <=(nullopt_t, const self&) noexcept {
         return true;
-    }
-    constexpr bool operator <=(const self& rh) const noexcept {
-        return !(*this < rh);
     }
 
     constexpr size_t to_hash() const noexcept {

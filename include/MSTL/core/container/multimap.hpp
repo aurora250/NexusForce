@@ -170,25 +170,9 @@ public:
     noexcept(noexcept(tree_ == rh.tree_)) {
 		return tree_ == rh.tree_;
 	}
-	MSTL_NODISCARD bool operator !=(const self& rh) const
-	noexcept(noexcept(tree_ != rh.tree_)) {
-		return tree_ != rh.tree_;
-	}
 	MSTL_NODISCARD bool operator <(const self& rh) const
 	noexcept(noexcept(tree_ < rh.tree_)) {
 		return tree_ < rh.tree_;
-	}
-	MSTL_NODISCARD bool operator >(const self& rh) const
-	noexcept(noexcept(tree_ > rh.tree_)) {
-		return tree_ > rh.tree_;
-	}
-	MSTL_NODISCARD bool operator <=(const self& rh) const
-	noexcept(noexcept(tree_ <= rh.tree_)) {
-		return tree_ <= rh.tree_;
-	}
-	MSTL_NODISCARD bool operator >=(const self& rh) const
-	noexcept(noexcept(tree_ >= rh.tree_)) {
-		return tree_ >= rh.tree_;
 	}
 
 	MSTL_NODISCARD size_type to_hash() const noexcept { return tree_.to_hash(); }

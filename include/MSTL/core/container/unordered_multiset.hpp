@@ -145,25 +145,9 @@ public:
     noexcept(noexcept(ht_ == rh.ht_)) {
         return ht_ == rh.ht_;
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(ht_ != rh.ht_)) {
-        return ht_ != rh.ht_;
-    }
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(ht_ < rh.ht_)) {
         return ht_ < rh.ht_;
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(ht_ > rh.ht_)) {
-        return ht_ > rh.ht_;
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(ht_ <= rh.ht_)) {
-        return ht_ <= rh.ht_;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(ht_ >= rh.ht_)) {
-        return ht_ >= rh.ht_;
     }
 
     MSTL_NODISCARD size_type to_hash() const noexcept {

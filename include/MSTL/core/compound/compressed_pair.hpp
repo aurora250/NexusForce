@@ -55,32 +55,11 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
 	noexcept(noexcept(this->value == y.value)) {
     	return this->value == y.value;
     }
-	constexpr bool operator !=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this == y))) {
-    	return !(*this == y);
-    }
 	constexpr bool operator <(const compressed_pair& y) const
 	noexcept(noexcept(this->value < y.value)) {
     	return this->value < y.value;
     }
-	constexpr bool operator >(const compressed_pair& y) const
-	noexcept(noexcept(y < *this)) {
-    	return y < *this;
-    }
-	constexpr bool operator <=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this > y))) {
-    	return !(*this > y);
-    }
-	constexpr bool operator >=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this < y))) {
-    	return !(*this < y);
-    }
 };
-#if MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename IfEmpty, typename T>
-compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
-#endif
-
 
 template <typename IfEmpty, typename T>
 struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpty, T, false>> {
@@ -139,27 +118,17 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 	noexcept(noexcept(this->no_compressed == y.no_compressed && this->value == y.value)) {
 		return this->no_compressed == y.no_compressed && this->value == y.value;
 	}
-	constexpr bool operator !=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this == y))) {
-		return !(*this == y);
-	}
 	constexpr bool operator <(const compressed_pair& y) const
 	noexcept(noexcept(this->no_compressed < y.no_compressed || (!(y.no_compressed < this->no_compressed) && this->value < y.value))) {
 		return this->no_compressed < y.no_compressed || (!(y.no_compressed < this->no_compressed) && this->value < y.value);
 	}
-	constexpr bool operator >(const compressed_pair& y) const
-	noexcept(noexcept(y < *this)) {
-		return y < *this;
-	}
-	constexpr bool operator <=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this > y))) {
-		return !(*this > y);
-	}
-	constexpr bool operator >=(const compressed_pair& y) const
-	noexcept(noexcept(!(*this < y))) {
-		return !(*this < y);
-	}
 };
+
+
+#if MSTL_SUPPORT_DEDUCTION_GUIDES__
+template <typename IfEmpty, typename T>
+compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__

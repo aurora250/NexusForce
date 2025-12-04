@@ -462,11 +462,7 @@ public:
     }
 
     MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-    MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
     MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->compare(rh) < 0; }
-    MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
-    MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
-    MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(this->data(), this->length());

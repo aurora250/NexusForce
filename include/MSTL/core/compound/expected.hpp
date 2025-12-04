@@ -35,14 +35,14 @@ class unexpected;
 
 
 template <typename T>
-constexpr bool is_expected = false;
+MSTL_INLINE17 constexpr bool is_expected = false;
 template <typename T, typename ErrorT>
-constexpr bool is_expected<expected<T, ErrorT>> = true;
+MSTL_INLINE17 constexpr bool is_expected<expected<T, ErrorT>> = true;
 
 template <typename T>
-constexpr bool is_unexpected = false;
+MSTL_INLINE17 constexpr bool is_unexpected = false;
 template <typename T>
-constexpr bool is_unexpected<unexpected<T>> = true;
+MSTL_INLINE17 constexpr bool is_unexpected<unexpected<T>> = true;
 
 
 template <typename Func, typename T>
@@ -140,22 +140,22 @@ template <typename ErrorT>
 unexpected(ErrorT) -> unexpected<ErrorT>;
 
 template <typename T>
-struct expected_guard {
+struct temporary_guard {
     static_assert(is_nothrow_move_constructible_v<T>);
 
-    constexpr explicit expected_guard(T& value)
+    constexpr explicit temporary_guard(T& value)
         : guarded_ptr(_MSTL addressof(value)), temp(_MSTL move(value)) {
         _MSTL destroy(guarded_ptr);
     }
 
-    constexpr ~expected_guard() {
+    constexpr ~temporary_guard() {
         if (guarded_ptr) MSTL_UNLIKELY {
             _MSTL construct(guarded_ptr, _MSTL move(temp));
         }
     }
 
-    expected_guard(const expected_guard&) = delete;
-    expected_guard& operator=(const expected_guard&) = delete;
+    temporary_guard(const temporary_guard&) = delete;
+    temporary_guard& operator=(const temporary_guard&) = delete;
 
     constexpr T&& release() noexcept {
         guarded_ptr = nullptr;
@@ -178,7 +178,7 @@ noexcept(is_nothrow_constructible_v<NT, Arg>) {
         _MSTL destroy(old_val);
         _MSTL construct(new_val, _MSTL move(temp));
     } else {
-        expected_guard<OT> guard(*old_val);
+        temporary_guard<OT> guard(*old_val);
         _MSTL construct(new_val, _MSTL forward<Arg>(arg));
         guard.release();
     }
@@ -535,25 +535,25 @@ public:
     }
 
     constexpr const T& value() const & {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return value_;
         throw_exception(expected_exception(error_));
     }
 
     constexpr T& value() & {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return value_;
         throw_exception(expected_exception(error_));
     }
 
     constexpr const T&& value() const && {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return _MSTL move(value_);
         throw_exception(expected_exception(error_));
     }
 
     constexpr T&& value() && {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return _MSTL move(value_);
         throw_exception(expected_exception(error_));
     }
@@ -920,14 +920,14 @@ private:
         is_nothrow_move_constructible<T>
     >) {
         if constexpr (is_nothrow_move_constructible_v<ErrorT>) {
-            expected_guard<ErrorT> guard(other.error_);
+            temporary_guard<ErrorT> guard(other.error_);
             _MSTL construct(_MSTL addressof(other.value_), _MSTL move(value_));
             other.has_value_ = true;
             _MSTL destroy(_MSTL addressof(value_));
             _MSTL construct(_MSTL addressof(error_), guard.release());
             has_value_ = false;
         } else {
-            expected_guard<T> guard(value_);
+            temporary_guard<T> guard(value_);
             _MSTL construct(_MSTL addressof(error_), _MSTL move(other.error_));
             has_value_ = false;
             _MSTL destroy(_MSTL addressof(other.error_));
@@ -1157,15 +1157,15 @@ public:
     }
 
     constexpr void value() const & {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return;
-        _GLIBCXX_THROW_OR_ABORT(expected_exception(error_));
+        throw_exception(expected_exception(error_));
     }
 
     constexpr void value() && {
-        if (has_value_) [[likely]]
+        if (has_value_) MSTL_LIKELY
             return;
-        _GLIBCXX_THROW_OR_ABORT(expected_exception(_MSTL move(error_)));
+        throw_exception(expected_exception(error_));
     }
 
     constexpr const ErrorT& error() const & noexcept {

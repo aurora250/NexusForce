@@ -645,11 +645,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
     constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
@@ -799,11 +795,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
     constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
@@ -976,11 +968,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
     constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
@@ -1124,11 +1112,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
     constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
@@ -1311,11 +1295,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
     constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }

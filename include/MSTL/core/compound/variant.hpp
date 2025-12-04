@@ -314,9 +314,6 @@ public:
             });
         });
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const variant& rh) const {
-        return !(*this == rh);
-    }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const variant& rh) const {
         if (index_ != rh.index_) return false;
@@ -325,15 +322,6 @@ public:
                 return value < other_value;
             });
         });
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const variant& rh) const {
-        return rh < *this;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const variant& rh) const {
-        return !(*this > rh);
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const variant& rh) const {
-        return !(*this < rh);
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_t to_hash() const;

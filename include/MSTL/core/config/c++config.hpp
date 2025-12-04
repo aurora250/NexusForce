@@ -297,6 +297,13 @@
 #endif
 
 
+#ifdef MSTL_STANDARD_20__
+	#define MSTL_LIKELY [[likely]]
+#else
+	#define MSTL_LIKELY
+#endif
+
+
 #ifdef MSTL_COMPILER_GNUC__
 	#define MSTL_NORETURN __attribute__((noreturn))
 #elif defined(MSTL_COMPILER_MSVC__)

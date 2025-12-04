@@ -72,8 +72,8 @@ public:
         return self::to_template(this)->operator ==(rh);
     }
     MSTL_NODISCARD constexpr bool operator !=(const child_type& rh) const
-    noexcept(noexcept(self::to_template(this)->operator!=(rh))) {
-        return self::to_template(this)->operator !=(rh);
+    noexcept(noexcept(!(*self::to_template(this) == rh))) {
+        return !(*this == rh);
     }
     MSTL_NODISCARD constexpr bool operator <(const child_type& rh) const
     noexcept(noexcept(self::to_template(this)->operator<(rh))) {
@@ -81,15 +81,15 @@ public:
     }
     MSTL_NODISCARD constexpr bool operator >(const child_type& rh) const
     noexcept(noexcept(self::to_template(this)->operator>(rh))) {
-        return self::to_template(this)->operator >(rh);
+        return rh < *self::to_template(this);
     }
     MSTL_NODISCARD constexpr bool operator <=(const child_type& rh) const
     noexcept(noexcept(self::to_template(this)->operator<=(rh))) {
-        return self::to_template(this)->operator <=(rh);
+        return !(*this > rh);
     }
     MSTL_NODISCARD constexpr bool operator >=(const child_type& rh) const
     noexcept(noexcept(self::to_template(this)->operator>=(rh))) {
-        return self::to_template(this)->operator >=(rh);
+        return !(*this < rh);
     }
 };
 

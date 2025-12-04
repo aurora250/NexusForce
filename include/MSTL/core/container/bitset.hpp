@@ -330,20 +330,8 @@ public:
     MSTL_NODISCARD constexpr bool operator ==(const bitset& other) const noexcept {
         return blocks == other.blocks;
     }
-    MSTL_NODISCARD constexpr bool operator !=(const bitset& other) const noexcept {
-        return blocks != other.blocks;
-    }
     MSTL_NODISCARD constexpr bool operator <(const bitset& other) const noexcept {
         return blocks < other.blocks;
-    }
-    MSTL_NODISCARD constexpr bool operator >(const bitset& other) const noexcept {
-        return blocks > other.blocks;
-    }
-    MSTL_NODISCARD constexpr bool operator <=(const bitset& other) const noexcept {
-        return blocks <= other.blocks;
-    }
-    MSTL_NODISCARD constexpr bool operator >=(const bitset& other) const noexcept {
-        return blocks >= other.blocks;
     }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {

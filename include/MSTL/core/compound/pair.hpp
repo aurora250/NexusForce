@@ -214,25 +214,9 @@ struct pair : icommon<pair<T1, T2>> {
 	noexcept(noexcept(this->first == y.first && this->second == y.second)) {
 		return this->first == y.first && this->second == y.second;
 	}
-	constexpr bool operator !=(const pair& y) const
-	noexcept(noexcept(!(*this == y))) {
-		return !(*this == y);
-	}
 	constexpr bool operator <(const pair& y) const
 	noexcept(noexcept(this->first < y.first || (!(y.first < this->first) && this->second < y.second))) {
 		return this->first < y.first || (!(y.first < this->first) && this->second < y.second);
-	}
-	constexpr bool operator >(const pair& y) const
-	noexcept(noexcept(y < *this)) {
-		return y < *this;
-	}
-	constexpr bool operator <=(const pair& y) const
-	noexcept(noexcept(!(*this > y))) {
-		return !(*this > y);
-	}
-	constexpr bool operator >=(const pair& y) const
-	noexcept(noexcept(!(*this < y))) {
-		return !(*this < y);
 	}
 
 	MSTL_NODISCARD constexpr size_t to_hash() const

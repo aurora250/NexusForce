@@ -110,25 +110,9 @@ public:
     noexcept(noexcept(pair_.value == rh.pair_.value)) {
         return pair_.value == rh.pair_.value;
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(pair_.value != rh.pair_.value)) {
-        return pair_.value != rh.pair_.value;
-    }
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(pair_.value < rh.pair_.value)) {
         return pair_.value < rh.pair_.value;
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(pair_.value > rh.pair_.value)) {
-        return pair_.value > rh.pair_.value;
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(pair_.value <= rh.pair_.value)) {
-        return pair_.value <= rh.pair_.value;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(pair_.value >= rh.pair_.value)) {
-        return pair_.value >= rh.pair_.value;
     }
 
     MSTL_NODISCARD size_type to_hash() const noexcept {

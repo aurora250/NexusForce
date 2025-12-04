@@ -123,11 +123,7 @@ struct tuple<> : icommon<tuple<>> {
 	MSTL_ALWAYS_INLINE constexpr void swap(tuple&) noexcept {}
 
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
 
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
 };
@@ -373,11 +369,7 @@ public:
 	friend constexpr tuple_element_t<Index, Types...>&& pair_get_from_tuple(tuple<Types...>&&) noexcept;
 
 	MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-	MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
 	MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
-	MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
-	MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
-	MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
 
 	MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
 		return self::__broaden_tuple(*this, _MSTL index_sequence_for<This, Rest...>());

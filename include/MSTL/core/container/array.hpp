@@ -242,20 +242,8 @@ public:
     MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept {
         return _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
     }
-    MSTL_NODISCARD constexpr bool operator !=(const self& rh) const noexcept {
-        return !(*this == rh);
-    }
     MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
-    }
-    MSTL_NODISCARD constexpr bool operator >(const self& rh) const noexcept {
-        return rh < *this;
-    }
-    MSTL_NODISCARD constexpr bool operator >=(const self& rh) const noexcept {
-        return !(*this < rh);
-    }
-    MSTL_NODISCARD constexpr bool operator <=(const self& rh) const noexcept {
-        return !(*this > rh);
     }
 
     MSTL_NODISCARD constexpr size_type to_hash() const noexcept {
@@ -405,11 +393,7 @@ public:
     MSTL_ALWAYS_INLINE constexpr void swap(array&) noexcept {}
 
     MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self&) const noexcept { return true; }
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator !=(const self& rh) const noexcept { return !(*this == rh); }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self&) const noexcept { return false; }
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >(const self& rh) const noexcept { return rh < *this; }
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <=(const self& rh) const noexcept { return !(rh < *this); }
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator >=(const self& rh) const noexcept { return !(*this < rh); }
 
     MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_type to_hash() const noexcept { return FNV_OFFSET_BASIS; }
 
