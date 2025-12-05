@@ -39,7 +39,7 @@ constexpr memory_order operator &(memory_order mo, memory_order_modifier mod) no
 
 constexpr memory_order cmpexch_failure_order2(const memory_order mo) noexcept {
     return mo == memory_order_acq_rel ? memory_order_acquire
-        : mo == memory_order_release ? memory_order_relaxed : mo;
+         : mo == memory_order_release ? memory_order_relaxed : mo;
 }
 
 constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
@@ -83,7 +83,7 @@ Int __atomic_reinterpret_impl(const T& value, Cond1, Cond2) {
 }
 
 template <typename Int, typename T>
-MSTL_ALWAYS_INLINE MSTL_NODISCARD Int __atomic_reinterpret_as(const T& value) noexcept {
+MSTL_ALWAYS_INLINE Int __atomic_reinterpret_as(const T& value) noexcept {
 	static_assert(is_integral_v<Int>, "Int must be an integral type");
 	return _INNER __atomic_reinterpret_impl<Int>(value,
 	    bool_constant<is_integral_v<T> && sizeof(Int) == sizeof(T)>(),

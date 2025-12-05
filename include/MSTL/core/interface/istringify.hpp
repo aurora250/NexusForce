@@ -9,19 +9,19 @@ struct istringify {
     using child_type = T;
 
 private:
-    static constexpr child_type* to_template(const self* o) noexcept {
-        return const_cast<child_type*>(static_cast<const child_type*>(o));
+    constexpr const child_type& derived() const noexcept {
+        return static_cast<const child_type&>(*this);
     }
 
 public:
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return self::to_template(this)->to_string();
+        return derived().to_string();
     }
 };
 
 template <typename T, enable_if_t<is_base_of_v<istringify<T>, T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& obj) {
-    return static_cast<const istringify<T>&>(obj).to_string();
+    return obj.to_string();
 }
 
 MSTL_END_NAMESPACE__

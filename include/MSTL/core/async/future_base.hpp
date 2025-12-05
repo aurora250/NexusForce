@@ -3,6 +3,7 @@
 #include "../memory/aligned_buffer.hpp"
 #include "../memory/weak_ptr.hpp"
 #include "../memory/allocated_ptr.hpp"
+#include "../memory/standard_allocator.hpp"
 #include "../exception/exception_ptr.hpp"
 #include "../functional/function.hpp"
 #include "atomic_futex.hpp"

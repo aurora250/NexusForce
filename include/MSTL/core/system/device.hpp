@@ -3,6 +3,7 @@
 #include "../config/c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include "../container/vector.hpp"
+#include "../interface/istringify.hpp"
 #include <Windows.h>
 #include <SetupAPI.h>
 #pragma comment(lib, "SetupAPI.lib")

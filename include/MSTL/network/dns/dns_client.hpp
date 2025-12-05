@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #else
 #include <ws2def.h>
+#include <ws2tcpip.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

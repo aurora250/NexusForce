@@ -1,5 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_PROMISE_HPP__
 #define MSTL_CORE_ASYNC_PROMISE_HPP__
+#include "../memory/standard_allocator.hpp"
 #include "future.hpp"
 MSTL_BEGIN_NAMESPACE__
 

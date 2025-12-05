@@ -6,7 +6,7 @@ MSTL_BEGIN_NAMESPACE__
 MSTL_INLINE17 constexpr uint32_t WORD_BIT_SIZE = 8 * sizeof(uint32_t);
 
 
-struct MSTL_API bit_reference : iobject<bit_reference> {
+struct MSTL_API bit_reference : icommon<bit_reference>, istringify<bit_reference> {
 private:
     using self = bit_reference;
     using super = iobject<bit_reference>;
@@ -30,10 +30,11 @@ public:
     }
 
     MSTL_CONSTEXPR20 bit_reference& operator =(const bool x) noexcept {
-        if (x)
+        if (x) {
             *ptr_ |= mask_;
-        else
+        } else {
             *ptr_ &= ~mask_;
+        }
         return *this;
     }
 

@@ -230,7 +230,7 @@ string device::to_string() const {
     res += "设备类别: " + _MSTL to_string(static_cast<size_t>(class_)) + "\n";
     res += "制造商: " + (manufacturer_.empty() ? "UNKNOWN"_s : manufacturer_) + "\n";
     res += "位置: " + (location_.empty() ? "UNKNOWN"_s : location_) + "\n";
-    res += "状态: " + is_present_ ? "LINKED"_s : "UNLINK"_s + "\n";
+    res += "状态: " + (is_present_ ? "LINKED"_s : "UNLINK"_s) + "\n";
     return res;
 }
 
