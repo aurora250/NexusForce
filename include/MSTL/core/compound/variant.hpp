@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_COMPOUND_VARIANT_HPP__
 #define MSTL_CORE_COMPOUND_VARIANT_HPP__
-#include "../utility/interface.hpp"
+#include "../interface/icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename, typename>

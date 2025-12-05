@@ -4,6 +4,7 @@
 #include "../async/atomic.hpp"
 #include "unique_ptr.hpp"
 #include "construct.hpp"
+#include "allocator_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

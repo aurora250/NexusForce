@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_STRING_FORMAT_HPP__
 #define MSTL_CORE_STRING_FORMAT_HPP__
-#include "string.hpp"
+#include "to_string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class FORMAT_ALIGN {
@@ -309,7 +309,7 @@ template <typename T>
 struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
     MSTL_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
         string digits;
-        int base = 10;
+        int base;
         bool uppercase = false;
 
         switch (options.type) {
@@ -334,9 +334,9 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         }
 
         if (base == 10) {
-            digits = _INNER __uint_to_string<char>(value);
+            digits = _INNER __uint_to_string<char>(static_cast<const unpackage_t<T>&>(value));
         } else {
-            digits = _INNER __uint_to_string_base(value, base, uppercase);
+            digits = _INNER __uint_to_string_base(static_cast<const unpackage_t<T>&>(value), base, uppercase);
         }
 
         string base_prefix = "";

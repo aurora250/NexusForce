@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_UTILITY_STACKTRACE_HPP__
 #define MSTL_CORE_UTILITY_STACKTRACE_HPP__
 #include "../container/vector.hpp"
+#include "../interface/istringify.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include "../async/mutex.hpp"
 #endif

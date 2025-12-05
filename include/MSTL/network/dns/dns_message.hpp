@@ -2,6 +2,7 @@
 #define MSTL_NETWORK_DNS_MESSAGE_HPP
 #include "MSTL/core/container/vector.hpp"
 #include "MSTL/core/time/duration.hpp"
+#include "MSTL/core/string/string.hpp"
 #include "dns_constants.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -16,7 +17,8 @@ struct dns_record {
     dns_record(string n,
         const DNS_RECORD t, const DNS_QUERY c,
         const uint32_t ttl_val, string d)
-    : name(_MSTL move(n)), data(_MSTL move(d)), ttl(ttl_val), type(t), class_type(c) {}
+    : name(_MSTL move(n)), data(_MSTL move(d)),
+    ttl(ttl_val), type(t), class_type(c) {}
 };
 
 struct dns_query_result {

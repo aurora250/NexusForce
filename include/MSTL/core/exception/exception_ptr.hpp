@@ -67,7 +67,7 @@ struct exception_control_block {
 };
 
 
-class exception_ptr {
+class exception_ptr : public iswappable<exception_ptr> {
 private:
     exception_control_block* ecb_{nullptr};
 
@@ -148,17 +148,13 @@ public:
         return static_cast<bool>(ptr);
     }
 
-    const std::type_info* exception_type() const noexcept {
+    MSTL_NODISCARD const std::type_info* exception_type() const noexcept {
         if (!ecb_ || !ecb_->wrapper) {
             return nullptr;
         }
         return &ecb_->wrapper->type();
     }
 };
-
-inline void swap(exception_ptr& lhs, exception_ptr& rhs) noexcept {
-    lhs.swap(rhs);
-}
 
 
 MSTL_BEGIN_INNER__

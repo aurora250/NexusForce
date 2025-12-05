@@ -1,36 +1,12 @@
-#ifndef MSTL_CORE_STRING_SERIALIZE_HPP__
-#define MSTL_CORE_STRING_SERIALIZE_HPP__
-#include "string.hpp"
+#ifndef MSTL_CORE_INTERFACE_ICOLLECTOR_HPP__
+#define MSTL_CORE_INTERFACE_ICOLLECTOR_HPP__
+#include "../algorithm/type_erase.hpp"
+#include "../functional/hash.hpp"
+#include "icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename T>
-struct iobject : icommon<T>, istringify<T> {};
-
-
-template <typename T>
-struct iserialize : iobject<T> {
-    using self = iserialize<T>;
-    using child_type = T;
-
-private:
-    static constexpr child_type* to_template(const self* o) noexcept {
-        return const_cast<T*>(static_cast<const T*>(o));
-    }
-
-public:
-    MSTL_CONSTEXPR20 ~iserialize() = default;
-
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 child_type parse(const string_view str) {
-        return child_type::parse(str);
-    }
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
-        return self::to_template(this)->try_parse(str);
-    }
-};
-
-
 template <typename Collector>
-struct icollector : iobject<Collector> {
+struct icollector : icommon<Collector> {
 private:
     using collector_type    = Collector;
     using self              = icollector;
@@ -50,11 +26,6 @@ protected:
         return result;
     }
 
-    template <typename T>
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 string default_to_string(const T& c) {
-        return _INNER collector_to_string(c);
-    }
-
 public:
     MSTL_CONSTEXPR20 ~icollector() = default;
 
@@ -67,7 +38,17 @@ public:
     noexcept(noexcept(self::to_template(this)->empty())) {
         return self::to_template(this)->empty();
     }
+
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+        const auto& c = *self::to_template(this);
+        size_t result = FNV_OFFSET_BASIS;
+        if (_MSTL empty(c)) return result;
+
+        constexpr hash<remove_cvref_t<decltype(*_MSTL cbegin(c))>> hasher;
+        for (auto elem : c) result ^= hasher(elem);
+        return result;
+    }
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_STRING_SERIALIZE_HPP__
+#endif // MSTL_CORE_INTERFACE_ICOLLECTOR_HPP__

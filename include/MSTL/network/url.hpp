@@ -1,6 +1,6 @@
 #ifndef MSTL_NETWORK_URL_HPP__
 #define MSTL_NETWORK_URL_HPP__
-#include "MSTL/core/string/string.hpp"
+#include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct url : istringify<url> {

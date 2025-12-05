@@ -1,6 +1,6 @@
 #ifndef MSTL_NETWORK_HTTP_CONSTANTS_HPP__
 #define MSTL_NETWORK_HTTP_CONSTANTS_HPP__
-#include "MSTL/core/string/string.hpp"
+#include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, link_exception, "Http Actions Failed");

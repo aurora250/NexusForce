@@ -1,12 +1,13 @@
 #ifndef MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
 #define MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
 #include "../config/undef_cmacro.hpp"
+#include "../interface/iobject.hpp"
+#include "../interface/inumeric.hpp"
 #include "../string/format.hpp"
-#include "../string/serialize.hpp"
 #include "../string/to_numerics.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct MSTL_API hexadecimal : iserialize<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
+struct MSTL_API hexadecimal : iobject<hexadecimal>, iarithmetic<hexadecimal>, ibinary<hexadecimal> {
 public:
     using self = hexadecimal;
     using value_type = int64_t;
@@ -99,12 +100,12 @@ public:
         return self{value_ % other.value_};
     }
 
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
+    constexpr bool operator ==(const self& other) const noexcept {
+        return value_ == other.value_;
+    }
+    constexpr bool operator <(const self& other) const noexcept {
+        return value_ < other.value_;
+    }
 
     constexpr self& operator+=(const self& other) noexcept {
         value_ += other. value_;

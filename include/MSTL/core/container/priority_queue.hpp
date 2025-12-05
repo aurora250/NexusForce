@@ -114,14 +114,6 @@ public:
     noexcept(noexcept(pair_.value < rh.pair_.value)) {
         return pair_.value < rh.pair_.value;
     }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(pair_.value);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(pair_.value);
-    }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Compare, typename Sequence>

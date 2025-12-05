@@ -1,8 +1,8 @@
 #ifndef MSTL_CORE_COMPOUND_PAIR_HPP__
 #define MSTL_CORE_COMPOUND_PAIR_HPP__
-#include "../utility/integer_sequence.hpp"
-#include "../utility/interface.hpp"
+#include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
+#include "../utility/integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename...>

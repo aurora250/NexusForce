@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_CONTAINER_LIST_HPP__
 #define MSTL_CORE_CONTAINER_LIST_HPP__
-#include "../string/serialize.hpp"
+#include "../interface/icollector.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Alloc>
@@ -553,33 +553,10 @@ public:
     noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
         return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(!(*this == rh))) {
-        return !(*this == rh);
-    }
+
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(rh < *this)) {
-        return rh < *this;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(!(*this < rh))) {
-        return !(*this < rh);
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(!(*this > rh))) {
-        return !(*this > rh);
-    }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(*this);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(*this);
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

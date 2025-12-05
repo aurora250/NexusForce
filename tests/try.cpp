@@ -10,13 +10,9 @@ static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird li
 void test_file_basic_operations() {
     bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
     assert(create_ok);
-    println("test");
     assert(file::exists(TEST_FILE));
-    println("test");
     assert(file::is_file(TEST_FILE));
-    println("test");
     assert(!file::is_directory(TEST_FILE));
-    println("test");
 
     assert(file::size(TEST_FILE) == TEST_CONTENT.size());
 
@@ -485,7 +481,7 @@ void test_format() {
         println(format("{-=#10X}", x));  // "0X      FF"
 
         hexadecimal neg(-255);
-        println(absolute(neg), sign(neg), gcd(neg, neg));
+        println(absolute(neg), sign(neg));
         println(format("{0=#10x}", neg)); // "-0x00000ff"
         println(format("{#10x}", neg));   // "      -0xff"
 
@@ -898,9 +894,7 @@ void test_stack() {
     s.push(3);
     s.push(5);
     s.push(4);
-    println(s);
     s.pop();
-    println(s);
 
     stack<int> long_stack;
     constexpr MSTL::size_t element_count = 100000;
@@ -967,10 +961,8 @@ void test_pqueue() {
     priority_queue<int> q;
     println(typeid(priority_queue<int*>).name());
     q.push(6); q.push(9); q.push(1); q.push(5);
-    q.push(8); q.push(4); q.emplace(7);
-    println(q); // 9 8 7 5 6 1 4
+    q.push(8); q.push(4); q.emplace(7); // 9 8 7 5 6 1 4
     q.pop();
-    println(q);
 
     priority_queue<int> long_pque;
     constexpr MSTL::size_t element_count = 100000;
@@ -980,7 +972,6 @@ void test_pqueue() {
     for (int i = 0; i < element_count; ++i) {
         long_pque.pop();
     }
-    // println(long_pque);
 }
 
 void test_rbtree() {
@@ -1142,7 +1133,7 @@ void test_hashtable() {
     fus2.insert(2.5);
     fus2.insert(3.5);
     fus2.insert(1.5);
-    string fus2_str = fus2.to_string();
+    string fus2_str = to_string(fus2);
     println(fus2_str);
 }
 

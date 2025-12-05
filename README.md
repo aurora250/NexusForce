@@ -148,7 +148,7 @@ sudo make install
 
 定义迭代器萃取器`iterator_traits`及方便使用的类型别名。
 
-- [interface](include/MSTL/core/utility/interface.hpp)
+- [interface](include/MSTL/core/interface/interface.hpp)
 
 定义一系列基础CRTP基类和基于其自动生成的全局函数。
 
@@ -264,7 +264,7 @@ sudo make install
 
 定义类型信息分析函数`check_type`，在多种编译器中规整类型信息。
 
-- [serialize](include/MSTL/core/string/serialize.hpp)
+- [serialize](include/MSTL/core/interface/iobject.hpp)
 
 定义一系列序列化的CRTP基类。
 

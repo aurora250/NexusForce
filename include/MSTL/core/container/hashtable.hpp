@@ -914,32 +914,10 @@ public:
         if (size_ < 100) return equal_small(rh);
         return equal_large(rh);
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const {
-        return !(*this == rh);
-    }
+
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(rh < *this)) {
-        return rh < *this;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(!(*this < rh))) {
-        return !(*this < rh);
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(!(*this > rh))) {
-        return !(*this > rh);
-    }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(*this);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(*this);
     }
 };
 

@@ -144,33 +144,9 @@ public:
     noexcept(noexcept(ht_ == rh.ht_)) {
         return ht_ == rh.ht_;
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(ht_ != rh.ht_)) {
-        return ht_ != rh.ht_;
-    }
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(ht_ < rh.ht_)) {
         return ht_ < rh.ht_;
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(ht_ > rh.ht_)) {
-        return ht_ > rh.ht_;
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(ht_ <= rh.ht_)) {
-        return ht_ <= rh.ht_;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(ht_ >= rh.ht_)) {
-        return ht_ >= rh.ht_;
-    }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(ht_);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(ht_);
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

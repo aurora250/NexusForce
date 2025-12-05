@@ -2,6 +2,7 @@
 #define MSTL_CORE_ASYNC_THREAD_POOL_HPP__
 #include "../container/priority_queue.hpp"
 #include "../container/unordered_map.hpp"
+#include "../interface/istringify.hpp"
 #include "condition_variable.hpp"
 #include "packaged_task.hpp"
 #include "timer.hpp"

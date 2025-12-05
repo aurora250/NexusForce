@@ -192,9 +192,6 @@ public:
 	noexcept(noexcept(tree_ < rh.tree_)) {
 		return tree_ < rh.tree_;
 	}
-
-	MSTL_NODISCARD size_type to_hash() const noexcept { return tree_.to_hash(); }
-	MSTL_NODISCARD string to_string() const { return tree_.to_string(); }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Compare, typename Alloc

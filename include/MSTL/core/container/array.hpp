@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
 #define MSTL_CORE_CONTAINER_ARRAY_HPP__
-#include "../string/serialize.hpp"
+#include "../interface/icollector.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
@@ -245,14 +245,6 @@ public:
     MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
     }
-
-    MSTL_NODISCARD constexpr size_type to_hash() const noexcept {
-        return base_type::default_to_hash(*this);
-    }
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return base_type::default_to_string(*this);
-    }
 };
 
 MSTL_BEGIN_TAG__
@@ -394,12 +386,6 @@ public:
 
     MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self&) const noexcept { return true; }
     MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self&) const noexcept { return false; }
-
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_type to_hash() const noexcept { return FNV_OFFSET_BASIS; }
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return base_type::default_to_string(*this);
-    }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 MSTL_BEGIN_INNER__

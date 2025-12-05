@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
 #define MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
-#include "../utility/interface.hpp"
+#include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 

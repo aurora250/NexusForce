@@ -1,6 +1,7 @@
 #include <MSTL/network/http/session.hpp>
 #include <MSTL/core/time/clocks.hpp>
 #include <MSTL/core/numeric/random.hpp>
+#include <MSTL/core/string/to_string.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void cookie::swap(cookie& other) noexcept {
@@ -50,7 +51,7 @@ MSTL_NODISCARD bool session::expired(int max_inactive) const noexcept {
 MSTL_NODISCARD string session::to_string() const {
     string result;
     result += "Session ID: ["_s + _MSTL to_string(id_) + "]" + "Data: ";
-    result += data_.to_string();
+    result += _MSTL to_string(data_);
     return result;
 }
 

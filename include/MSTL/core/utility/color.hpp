@@ -4,7 +4,7 @@
 #include "packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class color : public iserialize<color> {
+class color : public iobject<color> {
 private:
     using self = color;
 
@@ -110,7 +110,7 @@ public:
     }
 
     constexpr color operator *(const int scalar) const noexcept {
-        return color(r * scalar, g * scalar, b * scalar, a * scalar);
+        return {r * scalar, g * scalar, b * scalar, a * scalar};
     }
 
     constexpr color& operator +=(const color& other) noexcept {
@@ -140,26 +140,15 @@ public:
     constexpr bool operator ==(const color& other) const noexcept {
         return r == other.r && g == other.g && b == other.b && a == other.a;
     }
-    constexpr bool operator !=(const color& other) const noexcept {
-        return !(*this == other);
-    }
+
     constexpr bool operator <(const color& other) const noexcept {
         if (r != other.r) return r < other.r;
         if (g != other.g) return g < other.g;
         if (b != other.b) return b < other.b;
         return a < other.a;
     }
-    constexpr bool operator >(const color& other) const noexcept {
-        return other < *this;
-    }
-    constexpr bool operator <=(const color& other) const noexcept {
-        return other >= *this;
-    }
-    constexpr bool operator >=(const color& other) const noexcept {
-        return !(*this < other);
-    }
 
-    constexpr color blend(const color& background) const noexcept {
+    MSTL_NODISCARD constexpr color blend(const color& background) const noexcept {
         if (a == 255) return *this;
         if (a == 0) return background;
 
@@ -172,7 +161,7 @@ public:
         return color(newR, newG, newB, 255);
     }
 
-    constexpr color premultiply_alpha() const noexcept {
+    MSTL_NODISCARD constexpr color premultiply_alpha() const noexcept {
         const double alpha = a / 255.0;
         return color(
             static_cast<int>(_MSTL round(r * alpha)),
@@ -182,11 +171,11 @@ public:
         );
     }
 
-    constexpr double gray_value() const noexcept {
+    MSTL_NODISCARD constexpr double gray_value() const noexcept {
         return 0.299 * r + 0.587 * g + 0.114 * b;
     }
 
-    MSTL_CONSTEXPR20 string to_string() const {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _MSTL format("{02X}{02X}{02X}{02X}", r, g, b, a);
     }
 
@@ -222,7 +211,7 @@ public:
         return true;
     }
 
-    constexpr int to_ansi_256() const noexcept {
+    MSTL_NODISCARD constexpr int to_ansi_256() const noexcept {
         if (r < 8 && g < 8 && b < 8) return 16;
         if (r > 248 && g > 248 && b > 248) return 231;
 
@@ -238,7 +227,7 @@ public:
         return 16 + 36 * r_idx + 6 * g_idx + b_idx;
     }
 
-    constexpr int to_ansi_basic(const bool is_background = false) const noexcept {
+    MSTL_NODISCARD constexpr int to_ansi_basic(const bool is_background = false) const noexcept {
         const int base = is_background ? 40 : 30;
 
         if (r > g && r > b) {
@@ -265,28 +254,28 @@ public:
         return base + 7;
     }
 
-    constexpr integer32 to_ansi_foreground(const bool use_256_color = true) const noexcept {
+    MSTL_NODISCARD constexpr integer32 to_ansi_foreground(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
             return {38 * 100 + 5 * 10 + to_ansi_256()};
         }
         return {to_ansi_basic(false)};
     }
 
-    constexpr integer32 to_ansi_background(const bool use_256_color = true) const noexcept {
+    MSTL_NODISCARD constexpr integer32 to_ansi_background(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
             return {48 * 100 + 5 * 10 + to_ansi_256()};
         }
         return {to_ansi_basic(true)};
     }
 
-    constexpr integer32 to_integer32(const bool use_256_color = true) const noexcept {
+    MSTL_NODISCARD constexpr integer32 to_integer32(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
             return {to_ansi_256()};
         }
         return {to_ansi_basic(false)};
     }
 
-    constexpr size_t to_hash() const noexcept {
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         constexpr hash<int> hasher;
         return hasher(r) ^ hasher(g) ^ hasher(b) ^ hasher(a);
     }

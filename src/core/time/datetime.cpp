@@ -3,7 +3,7 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #else
-#include <time.h>
+#include <ctime>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -13,8 +13,8 @@ MSTL_NODISCARD datetime datetime::now() noexcept {
     ::GetLocalTime(&st);
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ::time_t now_time = ::time(nullptr);
-    ::tm local_tm{};
+    const std::time_t now_time = std::time(nullptr);
+    std::tm local_tm{};
     ::localtime_r(&now_time, &local_tm);
     return datetime(local_tm.tm_year + 1900, local_tm.tm_mon + 1,
         local_tm.tm_mday, local_tm.tm_hour, local_tm.tm_min, local_tm.tm_sec);
@@ -40,7 +40,7 @@ datetime datetime::from_UTC(const datetime& utc_dt) noexcept {
     }
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::tm utc_tm{};
+    std::tm utc_tm{};
     utc_tm.tm_year = utc_dt.year() - 1900;
     utc_tm.tm_mon = utc_dt.month() - 1;
     utc_tm.tm_mday = utc_dt.day();
@@ -49,11 +49,11 @@ datetime datetime::from_UTC(const datetime& utc_dt) noexcept {
     utc_tm.tm_sec = utc_dt.seconds();
     utc_tm.tm_isdst = -1;
 
-    const ::time_t t = ::timegm(&utc_tm);
+    const std::time_t t = ::timegm(&utc_tm);
     if (t == -1) {
         return datetime::epoch();
     }
-    ::tm local_tm{};
+    std::tm local_tm{};
     if (!localtime_r(&t, &local_tm)) {
         return datetime::epoch();
     }
@@ -81,7 +81,7 @@ datetime datetime::to_UTC(const datetime& local_dt) noexcept {
     }
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::tm local_tm{};
+    std::tm local_tm{};
     local_tm.tm_year = local_dt.year() - 1900;
     local_tm.tm_mon = local_dt.month() - 1;
     local_tm.tm_mday = local_dt.day();
@@ -90,12 +90,12 @@ datetime datetime::to_UTC(const datetime& local_dt) noexcept {
     local_tm.tm_sec = local_dt.seconds();
     local_tm.tm_isdst = -1;
 
-    const ::time_t t = ::mktime(&local_tm);
+    const std::time_t t = ::mktime(&local_tm);
     if (t == -1) {
         return datetime::epoch();
     }
-    ::tm utc_tm{};
-    if (!gmtime_r(&t, &utc_tm)) {
+    std::tm utc_tm{};
+    if (!::gmtime_r(&t, &utc_tm)) {
         return datetime::epoch();
     }
     return datetime(utc_tm.tm_year + 1900, utc_tm.tm_mon + 1,
@@ -128,10 +128,10 @@ MSTL_NODISCARD string datetime::to_string_GMT() const noexcept {
 
 datetime datetime::parse_RFC1123(string_view str) {
     if (str.size() < 29) {
-        throw_exception(value_exception("Invalid HTTP date string length."));
+        throw_exception(value_exception("Invalid date length."));
     }
     if (str.substr(3, 2) != ", ") {
-        throw_exception(value_exception("Invalid HTTP date format"));
+        throw_exception(value_exception("Invalid date format"));
     }
     str.remove_prefix(5);
 
@@ -139,7 +139,7 @@ datetime datetime::parse_RFC1123(string_view str) {
     str.remove_prefix(3);
 
     const int mon = months_to_int(str.substr(0, 3));
-    if (mon == 0) throw_exception(value_exception("Invalid month in HTTP date"));
+    if (mon == 0) throw_exception(value_exception("Invalid month in date"));
     str.remove_prefix(4);
 
     const int year = integer32::parse(str.substr(0, 4));
@@ -158,9 +158,7 @@ datetime datetime::parse_RFC1123(string_view str) {
         throw_exception(value_exception("Invalid timezone in HTTP date"));
     }
 
-    const date d(year, mon, day);
-    const time t(hour, minute, second);
-    return datetime(d, t);
+    return datetime(year, mon, day, hour, minute, second);
 }
 
 

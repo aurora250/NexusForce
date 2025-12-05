@@ -11,7 +11,7 @@ MSTL_INLINE17 static constexpr int32_t MONTH_DAYS[12] = {
 };
 MSTL_END_CONSTANTS__
 
-class MSTL_API date : public iserialize<date> {
+class MSTL_API date : public iobject<date> {
 public:
     using date_type = int32_t;
     using self = date;
@@ -21,13 +21,19 @@ private:
     date_type month_ = 1;
     date_type day_ = 1;
 
+    static constexpr int64_t to_julian_day(const date_type y, const date_type m, const date_type d) noexcept {
+        const int64_t a = (14 - m) / 12;
+        const int64_t year = y + 4800 - a;
+        const int64_t month = m + 12 * a - 3;
+        return d + (153 * month + 2) / 5 + 365 * year + year / 4 - year / 100 + year / 400 - 32045;
+    }
+
 public:
     constexpr date() noexcept = default;
 
     constexpr explicit date(
         const date_type year, const date_type month, const date_type day) noexcept {
-        if (year >= 0 && (month > 0 && month < 13) &&
-            (day > 0 && day <= days_of_month(year, month))) {
+        if (is_valid(year, month, day)) {
             year_ = year;
             month_ = month;
             day_ = day;
@@ -61,6 +67,10 @@ public:
     MSTL_NODISCARD constexpr date_type month() const noexcept { return month_; }
     MSTL_NODISCARD constexpr date_type day() const noexcept { return day_; }
 
+    static constexpr bool is_valid(date_type y, date_type m, date_type d) noexcept {
+        return y >= 0 && m > 0 && m <= 12 && d > 0 && d <= days_of_month(y, m);
+    }
+
 
     static constexpr date epoch() noexcept {
         return date{};
@@ -74,7 +84,7 @@ public:
     MSTL_NODISCARD constexpr date_type days_of_week() const noexcept {
         date_type y = year_;
         date_type m = month_;
-        date_type d = day_;
+        const date_type d = day_;
         if (m < 3) {
             y--;
             m += 12;
@@ -110,28 +120,15 @@ public:
     constexpr bool operator ==(const date& d) const noexcept {
         return year_ == d.year_ && month_ == d.month_ && day_ == d.day_;
     }
-    constexpr bool operator !=(const date& d) const noexcept {
-        return !(*this == d);
-    }
 
-    constexpr bool operator >(const date& d) const noexcept {
-        if (year_ > d.year_) return true;
-        if (year_ == d.year_ && month_ > d.month_) return true;
-        if (year_ == d.year_ && month_ == d.month_ && day_ > d.day_) return true;
+    constexpr bool operator <(const date& d) const noexcept {
+        if (year_ < d.year_) return true;
+        if (year_ == d.year_ && month_ < d.month_) return true;
+        if (year_ == d.year_ && month_ == d.month_ && day_ < d.day_) return true;
         return false;
     }
-    constexpr bool operator >=(const date& d) const noexcept {
-        return *this > d || *this == d;
-    }
-    constexpr bool operator <(const date& d) const noexcept {
-        return !(*this >= d);
-    }
-    constexpr bool operator <=(const date& d) const noexcept {
-        return !(*this > d);
-    }
 
-
-    constexpr date& operator +=(const date_type day) {
+    constexpr date& operator +=(const date_type day) noexcept {
         if (day < 0) return *this -= -day;
 
         day_ += day;
@@ -182,22 +179,7 @@ public:
     }
 
     constexpr date_type operator -(const date& d) const noexcept {
-        date max = *this;
-        date min = d;
-        int flag = 1;
-
-        if (*this < d) {
-            max = d;
-            min = *this;
-            flag = -1;
-        }
-
-        date_type count = 0;
-        while (min != max) {
-            ++min;
-            count++;
-        }
-        return count * flag;
+        return static_cast<date_type>(to_julian_day(year_, month_, day_) - to_julian_day(d.year_, d.month_, d.day_));
     }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
@@ -238,7 +220,7 @@ public:
 };
 
 
-class MSTL_API time : public iserialize<time> {
+class MSTL_API time : public iobject<time> {
 public:
     using time_type = int32_t;
     using self = _MSTL time;
@@ -290,24 +272,19 @@ public:
         seconds_ = 0;
     }
 
-    constexpr bool operator ==(const time& other) const noexcept {
-        return hours_ == other.hours_ &&
-               minutes_ == other.minutes_ &&
-               seconds_ == other.seconds_;
-    }
-    constexpr bool operator !=(const time& other) const noexcept { return !(*this == other); }
 
-    constexpr bool operator >(const time& other) const noexcept {
-        if (hours_ > other.hours_) return true;
+    constexpr bool operator ==(const time& other) const noexcept {
+        return hours_ == other.hours_ && minutes_ == other.minutes_ && seconds_ == other.seconds_;
+    }
+
+    constexpr bool operator <(const time& other) const noexcept {
+        if (hours_ < other.hours_) return true;
         if (hours_ == other.hours_) {
-            if (minutes_ > other.minutes_) return true;
-            if (minutes_ == other.minutes_ && seconds_ > other.seconds_) return true;
+            if (minutes_ < other.minutes_) return true;
+            if (minutes_ == other.minutes_ && seconds_ < other.seconds_) return true;
         }
         return false;
     }
-    constexpr bool operator >=(const time& other) const noexcept { return *this > other || *this == other; }
-    constexpr bool operator <(const time& other) const noexcept { return !(*this >= other); }
-    constexpr bool operator <=(const time& other) const noexcept { return !(*this > other); }
 
 
     constexpr time& operator +=(const time_type seconds) {
@@ -330,20 +307,13 @@ public:
     constexpr time& operator -=(const time_type seconds) noexcept {
         if (seconds < 0) return *this += -seconds;
 
-        seconds_ -= seconds;
-        while (seconds_ < 0) {
-            seconds_ += 60;
-            minutes_--;
-        }
+        int64_t total_sec = to_seconds() - seconds;
+        total_sec %= 86400;
+        if (total_sec < 0) total_sec += 86400;
 
-        while (minutes_ < 0) {
-            minutes_ += 60;
-            hours_--;
-        }
-
-        while (hours_ < 0) {
-            hours_ += 24;
-        }
+        hours_   = static_cast<time_type>(total_sec / 3600);
+        minutes_ = static_cast<time_type>((total_sec % 3600) / 60);
+        seconds_ = static_cast<time_type>(total_sec % 60);
         return *this;
     }
 
@@ -415,9 +385,9 @@ public:
     }
 
     constexpr void swap(time& other) noexcept {
-        _MSTL swap(seconds_, other.seconds_);
         _MSTL swap(hours_, other.hours_);
         _MSTL swap(minutes_, other.minutes_);
+        _MSTL swap(seconds_, other.seconds_);
     }
 };
 
@@ -440,7 +410,7 @@ constexpr int months_to_int(const string_view sv) {
 }
 
 
-class MSTL_API datetime : public iserialize<datetime> {
+class MSTL_API datetime : public iobject<datetime> {
 public:
     using date_type = date::date_type;
     using time_type = time::time_type;
@@ -525,52 +495,62 @@ public:
     constexpr bool operator ==(const datetime& other) const noexcept {
         return date_ == other.date_ && time_ == other.time_;
     }
-    constexpr bool operator !=(const datetime& other) const noexcept { return !(*this == other); }
 
-    constexpr bool operator >(const datetime& other) const noexcept {
-        if (date_ > other.date_) return true;
-        if (date_ == other.date_ && time_ > other.time_) return true;
+    constexpr bool operator <(const datetime& other) const noexcept {
+        if (date_ < other.date_) return true;
+        if (date_ == other.date_ && time_ < other.time_) return true;
         return false;
     }
-    constexpr bool operator >=(const datetime& other) const noexcept {
-        return *this > other || *this == other;
-    }
-    constexpr bool operator <(const datetime& other) const noexcept { return !(*this >= other); }
-    constexpr bool operator <=(const datetime& other) const noexcept { return !(*this > other); }
 
 
     constexpr datetime& operator +=(const time_type seconds) {
         if (seconds < 0) return *this -= -seconds;
 
-        const _MSTL time temp_time = time_;
-        const time_type max_seconds_without_day_change = 86400 -
-            (temp_time.hours() * 3600 + temp_time.minutes() * 60 + temp_time.seconds());
+        const int64_t current_total_sec =
+            static_cast<int64_t>(time_.hours()) * 3600 +
+            static_cast<int64_t>(time_.minutes()) * 60 +
+            static_cast<int64_t>(time_.seconds());
 
-        if (seconds < max_seconds_without_day_change) {
-            time_ += seconds;
+        int64_t new_total_sec = current_total_sec + seconds;
+        int64_t days_to_add = new_total_sec / 86400;
+        new_total_sec %= 86400;
+
+        if (new_total_sec < 0) {
+            new_total_sec += 86400;
+            days_to_add--;
         }
-        else {
-            const time_type remaining_seconds = seconds - max_seconds_without_day_change - 1;
-            date_ += 1;
-            time_ = _MSTL time(0, 0, 0) + (remaining_seconds + 1);
-        }
+
+        date_ += static_cast<date_type>(days_to_add);
+        time_ = time(
+            static_cast<time_type>(new_total_sec / 3600),
+            static_cast<time_type>((new_total_sec % 3600) / 60),
+            static_cast<time_type>(new_total_sec % 60)
+        );
         return *this;
     }
 
     constexpr datetime& operator -=(const time_type seconds) noexcept {
         if (seconds < 0) return *this += -seconds;
 
-        const  time_type current_seconds =
-            time_.hours() * 3600 + time_.minutes() * 60 + time_.seconds();
+        const int64_t current_total_sec =
+            static_cast<int64_t>(time_.hours()) * 3600 +
+            static_cast<int64_t>(time_.minutes()) * 60 +
+            static_cast<int64_t>(time_.seconds());
 
-        if (seconds < current_seconds) {
-            time_ -= seconds;
+        int64_t new_total_sec = current_total_sec - seconds;
+        int64_t days_to_subtract = 0;
+
+        if (new_total_sec < 0) {
+            days_to_subtract = (-new_total_sec + 86399) / 86400;
+            new_total_sec += days_to_subtract * 86400;
         }
-        else {
-            const time_type remaining_seconds = seconds - current_seconds - 1;
-            date_ -= 1;
-            time_ = _MSTL time(23, 59, 59) - remaining_seconds;
-        }
+
+        date_ -= static_cast<date_type>(days_to_subtract);
+        time_ = time(
+            static_cast<time_type>(new_total_sec / 3600),
+            static_cast<time_type>((new_total_sec % 3600) / 60),
+            static_cast<time_type>(new_total_sec % 60)
+        );
         return *this;
     }
 
@@ -620,7 +600,7 @@ public:
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_ISO() const {
-        return date_.to_string() + "T" + time_.to_string() + "Z";
+        return date_.to_string() + "T" + time_.to_string();
     }
 
 
@@ -659,7 +639,7 @@ public:
 };
 
 
-class MSTL_API timestamp : public iserialize<timestamp> {
+class MSTL_API timestamp : public iobject<timestamp> {
 public:
     using value_type = int64_t;
     using self = timestamp;
@@ -770,16 +750,10 @@ public:
     constexpr bool operator ==(const timestamp& other) const noexcept {
         return sec_since_epoch_ == other.sec_since_epoch_;
     }
-    constexpr bool operator !=(const timestamp& other) const noexcept { return !(*this == other); }
 
-    constexpr bool operator >(const timestamp& other) const noexcept {
-        return sec_since_epoch_ > other.sec_since_epoch_;
+    constexpr bool operator <(const timestamp& other) const noexcept {
+        return sec_since_epoch_ < other.sec_since_epoch_;
     }
-    constexpr bool operator >=(const timestamp& other) const noexcept {
-        return *this > other || *this == other;
-    }
-    constexpr bool operator <(const timestamp& other) const noexcept { return !(*this >= other); }
-    constexpr bool operator <=(const timestamp& other) const noexcept { return !(*this > other); }
 };
 
 MSTL_END_NAMESPACE__

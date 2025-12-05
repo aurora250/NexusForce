@@ -152,7 +152,7 @@ Defines functors and functor adapters (deprecated in C++11).
 
 Defines the iterator extractor `iterator_traits` and convenient type aliases.
 
-- [interface](include/MSTL/core/utility/interface.hpp)
+- [interface](include/MSTL/core/interface/interface.hpp)
 
 Defines a series of basic CRTP base classes and globally generated functions based on them.
 
@@ -270,7 +270,7 @@ Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`
 
 Defines the type information analysis function `check_type` to standardize type information across compilers.
 
-- [serialize](include/MSTL/core/string/serialize.hpp)
+- [serialize](include/MSTL/core/interface/iobject.hpp)
 
 Defines a series of CRTP base classes for serialization.
 

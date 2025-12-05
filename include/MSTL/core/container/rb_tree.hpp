@@ -1,6 +1,11 @@
 #ifndef MSTL_CORE_CONTAINER_RB_TREE_HPP__
 #define MSTL_CORE_CONTAINER_RB_TREE_HPP__
-#include "../string/serialize.hpp"
+#include "../interface/icollector.hpp"
+#include "../memory/construct.hpp"
+#include "../memory/standard_allocator.hpp"
+#include "../compound/compressed_pair.hpp"
+#include "../compound/pair.hpp"
+#include "../algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr bool RB_TREE_RED = false;
@@ -740,14 +745,6 @@ public:
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
-    }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(*this);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(*this);
     }
 };
 

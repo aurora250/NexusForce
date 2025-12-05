@@ -3,6 +3,7 @@
 #include "../container/unordered_map.hpp"
 #include "../container/vector.hpp"
 #include "../memory/unique_ptr.hpp"
+#include "../interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(json_exception, value_exception, "Json String Parse Failed")

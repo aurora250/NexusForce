@@ -192,7 +192,7 @@ public:
 };
 
 template <typename CharT, typename Traits = char_traits<CharT>, typename Alloc = allocator<CharT>>
-class basic_string : icommon<basic_string<CharT, Traits, Alloc>> {
+class basic_string : public icommon<basic_string<CharT, Traits, Alloc>> {
 #ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
 #endif

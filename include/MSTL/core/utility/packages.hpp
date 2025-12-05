@@ -1,10 +1,12 @@
 #ifndef MSTL_CORE_UTILITY_PACKAGES_HPP__
 #define MSTL_CORE_UTILITY_PACKAGES_HPP__
-#include "../string/serialize.hpp"
+#include "../interface/iobject.hpp"
+#include "../interface/inumeric.hpp"
 #include "../string/to_numerics.hpp"
+#include "../string/to_string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct boolean : iserialize<boolean>, ibinary<boolean> {
+struct boolean : iobject<boolean>, ibinary<boolean> {
     using value_type = bool;
     using self = boolean;
 
@@ -91,11 +93,7 @@ public:
     }
 
     constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator !=(const self& other) const noexcept { return value_ != other.value_; }
     constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-    constexpr bool operator <=(const self& other) const noexcept { return value_ <= other.value_; }
-    constexpr bool operator >(const self& other) const noexcept { return value_ > other.value_; }
-    constexpr bool operator >=(const self& other) const noexcept { return value_ >= other.value_; }
 
     constexpr self operator !() const noexcept { return self(!value_); }
     constexpr self operator &(const self& other) const noexcept { return self{static_cast<value_type>(value_ & other.value_)}; }
@@ -118,7 +116,7 @@ struct unpackage_base<boolean> {
 
 
 #define __MSTL_BUILD_INTEGER_STRUCT(SIGN, UPPER, BYTE) \
-struct SIGN## integer## BYTE : iserialize<SIGN## integer## BYTE>, iarithmetic<SIGN## integer## BYTE>, ibinary<SIGN## integer## BYTE> { \
+struct SIGN## integer## BYTE : iobject<SIGN## integer## BYTE>, iarithmetic<SIGN## integer## BYTE>, ibinary<SIGN## integer## BYTE> { \
     using value_type = SIGN## int## BYTE## _t; \
     using self = SIGN## integer## BYTE; \
     \
@@ -190,20 +188,8 @@ public: \
     constexpr bool operator==(const self& other) const noexcept { \
         return value_ == other.value_; \
     } \
-    constexpr bool operator!=(const self& other) const noexcept { \
-        return value_ != other.value_; \
-    } \
     constexpr bool operator<(const self& other) const noexcept { \
         return value_ < other.value_; \
-    } \
-    constexpr bool operator<=(const self& other) const noexcept { \
-        return value_ <= other.value_; \
-    } \
-    constexpr bool operator>(const self& other) const noexcept { \
-        return value_ > other.value_; \
-    } \
-    constexpr bool operator>=(const self& other) const noexcept { \
-        return value_ >= other.value_; \
     } \
     \
     constexpr self operator+(const self& other) const { \
@@ -350,7 +336,7 @@ struct package_base<unsigned long> {
 #endif
 
 
-struct float32 : iserialize<float32>, iarithmetic<float32> {
+struct float32 : iobject<float32>, iarithmetic<float32> {
     using value_type = float32_t;
     using self = float32;
 
@@ -422,20 +408,8 @@ public:
     constexpr bool operator==(const self& other) const noexcept {
         return value_ == other. value_;
     }
-    constexpr bool operator!=(const self& other) const noexcept {
-        return value_ != other. value_;
-    }
     constexpr bool operator<(const self& other) const noexcept {
         return value_ < other. value_;
-    }
-    constexpr bool operator<=(const self& other) const noexcept {
-        return value_ <= other. value_;
-    }
-    constexpr bool operator>(const self& other) const noexcept {
-        return value_ > other. value_;
-    }
-    constexpr bool operator>=(const self& other) const noexcept {
-        return value_ >= other. value_;
     }
 
     constexpr self operator+(const self& other) const {
@@ -511,7 +485,7 @@ struct unpackage_base<float32> {
 };
 
 
-struct float64 : iserialize<float64>, iarithmetic<float64> {
+struct float64 : iobject<float64>, iarithmetic<float64> {
     using value_type = float64_t;
     using self = float64;
 
@@ -583,20 +557,8 @@ public:
     constexpr bool operator==(const self& other) const noexcept {
         return value_ == other. value_;
     }
-    constexpr bool operator!=(const self& other) const noexcept {
-        return value_ != other. value_;
-    }
     constexpr bool operator<(const self& other) const noexcept {
         return value_ < other. value_;
-    }
-    constexpr bool operator<=(const self& other) const noexcept {
-        return value_ <= other. value_;
-    }
-    constexpr bool operator>(const self& other) const noexcept {
-        return value_ > other. value_;
-    }
-    constexpr bool operator>=(const self& other) const noexcept {
-        return value_ >= other. value_;
     }
 
     constexpr self operator+(const self& other) const {
@@ -672,7 +634,7 @@ struct unpackage_base<float64> {
 };
 
 
-struct decimal : iserialize<decimal>, iarithmetic<decimal> {
+struct decimal : iobject<decimal>, iarithmetic<decimal> {
     using value_type = decimal_t;
     using self = decimal;
 
@@ -742,11 +704,7 @@ public:
     }
 
     constexpr bool operator==(const self& other) const noexcept { return value_ == other. value_; }
-    constexpr bool operator!=(const self& other) const noexcept { return value_ != other. value_; }
     constexpr bool operator<(const self& other) const noexcept { return value_ < other. value_; }
-    constexpr bool operator<=(const self& other) const noexcept { return value_ <= other. value_; }
-    constexpr bool operator>(const self& other) const noexcept { return value_ > other. value_; }
-    constexpr bool operator>=(const self& other) const noexcept { return value_ >= other. value_; }
 
     constexpr self operator+(const self& other) const { return self(value_ + other. value_); }
     constexpr self operator-(const self& other) const { return self(value_ - other. value_); }

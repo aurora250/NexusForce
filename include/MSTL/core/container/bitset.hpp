@@ -5,7 +5,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <size_t N>
-class bitset : public icollector<bitset<N>> {
+class bitset : public icommon<bitset<N>>, public istringify<bitset<N>> {
 private:
     using block_type = size_t;
     static constexpr size_t bits_per_block = sizeof(block_type) * 8;

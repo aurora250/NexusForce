@@ -994,14 +994,13 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
     if (dest_dir != to && !file::exists(dest_dir)) {
         if (!file::create_directories(dest_dir)) return false;
     }
-
-#ifdef MSTL_PLATFORM_WINDOWS__
     string actual_to = to;
     if (file::exists(to) && file::is_directory(to)) {
         const string filename = from.substr(from.find_last_of(FILE_SPLITER) + 1);
-        actual_to = to + "\\" + filename;
+        actual_to = to + FILE_SPLITER[0] + filename;
     }
 
+#ifdef MSTL_PLATFORM_WINDOWS__
     if (overwrite && file::exists(actual_to)) {
         const ::DWORD attrs = ::GetFileAttributesA(actual_to.c_str());
         if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY)) {
@@ -1014,7 +1013,7 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
 #elif defined(MSTL_PLATFORM_LINUX__)
     const int source_fd = ::open(from.c_str(), O_RDONLY);
     if (source_fd == -1) return false;
-    struct ::stat64 st;
+    struct ::stat64 st{};
     if (::fstat64(source_fd, &st) == -1) {
         ::close(source_fd);
         return false;
@@ -1026,7 +1025,7 @@ bool file::copy(const string& from, const string& to, const bool overwrite) {
     } else {
         flags |= O_EXCL;
     }
-    const int dest_fd = ::open(to.c_str(), flags, 0644);
+    const int dest_fd = ::open(actual_to.c_str(), flags, 0644);
     if (dest_fd == -1) {
         ::close(source_fd);
         return false;
@@ -1144,8 +1143,11 @@ bool file::move(const string& from, const string& to, const bool overwrite) noex
     if (overwrite) {
         if (::rename(from.c_str(), to.c_str()) == 0) return true;
         if (errno != EEXIST) return false;
-        if (file::remove(to) != 0) return false;
-        return ::rename(from.c_str(), to.c_str()) == 0;
+        if (file::is_directory(to)) {
+            if (!file::remove_directory(to)) return false;
+        } else {
+            if (!file::remove(to)) return false;
+        }
     }
     return ::rename(from.c_str(), to.c_str()) == 0;
 #endif

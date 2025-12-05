@@ -1,8 +1,8 @@
 #ifndef MSTL_CORE_COMPOUND_EXPECTED_HPP__
 #define MSTL_CORE_COMPOUND_EXPECTED_HPP__
-#include "../functional/invoke.hpp"
 #include "../exception/exception.hpp"
 #include "../typeinfo/tags.hpp"
+#ifdef MSTL_STANDARD_20__
 MSTL_BEGIN_NAMESPACE__
 
 struct expected_exception final : memory_exception {
@@ -27,7 +27,7 @@ struct unexpect_t {
 MSTL_INLINE17 constexpr unexpect_t unexpect{};
 
 
-template <typename T, typename ErrorT>
+template <typename T, typename ErrorT, typename = void>
 class expected;
 
 template <typename ErrorT>
@@ -45,15 +45,13 @@ template <typename T>
 MSTL_INLINE17 constexpr bool is_unexpected<unexpected<T>> = true;
 
 
+MSTL_BEGIN_INNER__
 template <typename Func, typename T>
 using expected_invoke_result = remove_cvref_t<invoke_result_t<Func&&, T&&>>;
-
 template <typename Func, typename T>
 using expected_transform_result = remove_cv_t<invoke_result_t<Func&&, T&&>>;
-
 template <typename Func>
 using expected_invoke_narg_result = remove_cvref_t<invoke_result_t<Func&&>>;
-
 template <typename Func>
 using expected_transform_narg_result = remove_cv_t<invoke_result_t<Func&&>>;
 
@@ -61,34 +59,38 @@ template <typename ErrorT>
 MSTL_INLINE17 constexpr bool can_be_unexpected = is_object_v<ErrorT>
     && !is_array_v<ErrorT> && !is_unexpected<ErrorT>
     && !is_const_v<ErrorT> && !is_volatile_v<ErrorT>;
+MSTL_END_INNER__
 
 
 template <typename ErrorT>
-class unexpected {
-    static_assert(can_be_unexpected<ErrorT>);
+class unexpected : public iswappable<unexpected<ErrorT>>{
+    static_assert(_INNER can_be_unexpected<ErrorT>, "ErrorT should be non-array, unexpected, const or volatile type");
+
+private:
+    ErrorT error_;
 
 public:
     constexpr unexpected(const unexpected&) = default;
     constexpr unexpected(unexpected&&) = default;
 
-    template <typename Err = ErrorT>
-    requires (!is_same_v<remove_cvref_t<Err>, unexpected>)
-        && (!is_same_v<remove_cvref_t<Err>, inplace_construct_tag>)
-        && is_constructible_v<ErrorT, Err>
+    template <typename Err = ErrorT, typename =
+        enable_if_t<!is_same_v<remove_cvref_t<Err>, unexpected>
+            && !is_same_v<remove_cvref_t<Err>, inplace_construct_tag>
+            && is_constructible_v<ErrorT, Err>>>
     constexpr explicit
     unexpected(Err&& error)
     noexcept(is_nothrow_constructible_v<ErrorT, Err>)
         : error_(_MSTL forward<Err>(error)) {}
 
-    template <typename... Args>
-    requires is_constructible_v<ErrorT, Args...>
+    template <typename... Args, typename =
+        enable_if_t<is_constructible_v<ErrorT, Args...>>>
     constexpr explicit
     unexpected(inplace_construct_tag, Args&&... args)
     noexcept(is_nothrow_constructible_v<ErrorT, Args...>)
         : error_(_MSTL forward<Args>(args)...) {}
 
-    template <typename U, typename... Args>
-    requires is_constructible_v<ErrorT, std::initializer_list<U>&, Args...>
+    template <typename U, typename... Args, typename =
+        enable_if_t<is_constructible_v<ErrorT, std::initializer_list<U>&, Args...>>>
     constexpr explicit
     unexpected(inplace_construct_tag, std::initializer_list<U> list, Args&&... args)
     noexcept(is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>)
@@ -114,8 +116,7 @@ public:
     }
 
     constexpr void swap(unexpected& other) 
-    noexcept(is_nothrow_swappable_v<ErrorT>)
-    requires is_swappable_v<ErrorT> {
+    noexcept(is_nothrow_swappable_v<ErrorT>) {
         _MSTL swap(error_, other.error_);
     }
 
@@ -124,31 +125,27 @@ public:
     operator==(const unexpected& lhs, const unexpected<OtherError>& rhs) {
         return lhs.error_ == rhs.error();
     }
-
-    friend constexpr void
-    swap(unexpected& lhs, unexpected& rhs) 
-    noexcept(noexcept(lhs.swap(rhs)))
-    requires is_swappable_v<ErrorT> {
-        lhs.swap(rhs);
-    }
-
-private:
-    ErrorT error_;
 };
 
 template <typename ErrorT> 
 unexpected(ErrorT) -> unexpected<ErrorT>;
 
+
 template <typename T>
 struct temporary_guard {
     static_assert(is_nothrow_move_constructible_v<T>);
 
+private:
+    T* guarded_ptr;
+    T temp;
+
+public:
     constexpr explicit temporary_guard(T& value)
         : guarded_ptr(_MSTL addressof(value)), temp(_MSTL move(value)) {
         _MSTL destroy(guarded_ptr);
     }
 
-    constexpr ~temporary_guard() {
+    MSTL_CONSTEXPR20 ~temporary_guard() {
         if (guarded_ptr) MSTL_UNLIKELY {
             _MSTL construct(guarded_ptr, _MSTL move(temp));
         }
@@ -161,10 +158,6 @@ struct temporary_guard {
         guarded_ptr = nullptr;
         return _MSTL move(temp);
     }
-
-private:
-    T* guarded_ptr;
-    T temp;
 };
 
 template <typename NT, typename OT, typename Arg>
@@ -184,14 +177,14 @@ noexcept(is_nothrow_constructible_v<NT, Arg>) {
     }
 }
 
-template <typename T, typename ErrorT>
+template <typename T, typename ErrorT, typename>
 class expected {
     static_assert(!is_reference_v<T>);
     static_assert(!is_function_v<T>);
     static_assert(!is_same_v<remove_cv_t<T>, inplace_construct_tag>);
     static_assert(!is_same_v<remove_cv_t<T>, unexpect_t>);
     static_assert(!is_unexpected<remove_cv_t<T>>);
-    static_assert(can_be_unexpected<ErrorT>);
+    static_assert(_INNER can_be_unexpected<ErrorT>);
 
     template <typename U, typename Err, typename UE = unexpected<ErrorT>>
     static constexpr bool constructible_from_expected = disjunction_v<
@@ -231,7 +224,6 @@ public:
 
     constexpr expected()
     noexcept(is_nothrow_default_constructible_v<T>)
-    requires is_default_constructible_v<T>
         : value_(), has_value_(true) {}
 
     expected(const expected&) = default;
@@ -356,7 +348,7 @@ public:
 
     constexpr ~expected() = default;
 
-    constexpr ~expected()
+    MSTL_CONSTEXPR20 ~expected()
     requires (!is_trivially_destructible_v<T>)
         || (!is_trivially_destructible_v<ErrorT>) {
         if (has_value_)
@@ -629,7 +621,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT&>
     constexpr auto and_then(Func&& func) & {
-        using Res = expected_invoke_result<Func, T&>;
+        using Res = _INNER expected_invoke_result<Func, T&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::error_type, ErrorT>,
@@ -644,7 +636,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT&>
     constexpr auto and_then(Func&& func) const & {
-        using Res = expected_invoke_result<Func, const T&>;
+        using Res = _INNER expected_invoke_result<Func, const T&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::error_type, ErrorT>,
@@ -659,7 +651,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT>
     constexpr auto and_then(Func&& func) && {
-        using Res = expected_invoke_result<Func, T&&>;
+        using Res = _INNER expected_invoke_result<Func, T&&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::error_type, ErrorT>,
@@ -674,7 +666,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT>
     constexpr auto and_then(Func&& func) const && {
-        using Res = expected_invoke_result<Func, const T&&>;
+        using Res = _INNER expected_invoke_result<Func, const T&&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::error_type, ErrorT>,
@@ -689,7 +681,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, T&>
     constexpr auto or_else(Func&& func) & {
-        using Res = expected_invoke_result<Func, ErrorT&>;
+        using Res = _INNER expected_invoke_result<Func, ErrorT&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>,
@@ -704,7 +696,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, const T&>
     constexpr auto or_else(Func&& func) const & {
-        using Res = expected_invoke_result<Func, const ErrorT&>;
+        using Res = _INNER expected_invoke_result<Func, const ErrorT&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>,
@@ -719,7 +711,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, T>
     constexpr auto or_else(Func&& func) && {
-        using Res = expected_invoke_result<Func, ErrorT&&>;
+        using Res = _INNER expected_invoke_result<Func, ErrorT&&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>,
@@ -734,7 +726,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, const T>
     constexpr auto or_else(Func&& func) const && {
-        using Res = expected_invoke_result<Func, const ErrorT&&>;
+        using Res = _INNER expected_invoke_result<Func, const ErrorT&&>;
         static_assert(is_expected<Res>,
             "Func must return an expected type");
         static_assert(is_same_v<typename Res::value_type, T>,
@@ -749,7 +741,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT&>
     constexpr auto transform(Func&& func) & {
-        using U = expected_transform_result<Func, T&>;
+        using U = _INNER expected_transform_result<Func, T&>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -763,7 +755,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT&>
     constexpr auto transform(Func&& func) const & {
-        using U = expected_transform_result<Func, const T&>;
+        using U = _INNER expected_transform_result<Func, const T&>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -777,7 +769,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT>
     constexpr auto transform(Func&& func) && {
-        using U = expected_transform_result<Func, T>;
+        using U = _INNER expected_transform_result<Func, T>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -791,7 +783,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT>
     constexpr auto transform(Func&& func) const && {
-        using U = expected_transform_result<Func, const T>;
+        using U = _INNER expected_transform_result<Func, const T>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -805,7 +797,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, T&>
     constexpr auto transform_error(Func&& func) & {
-        using Gr = expected_transform_result<Func, ErrorT&>;
+        using Gr = _INNER expected_transform_result<Func, ErrorT&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -819,7 +811,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, const T&>
     constexpr auto transform_error(Func&& func) const & {
-        using Gr = expected_transform_result<Func, const ErrorT&>;
+        using Gr = _INNER expected_transform_result<Func, const ErrorT&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -833,7 +825,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, T>
     constexpr auto transform_error(Func&& func) && {
-        using Gr = expected_transform_result<Func, ErrorT&&>;
+        using Gr = _INNER expected_transform_result<Func, ErrorT&&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -847,7 +839,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<T, const T>
     constexpr auto transform_error(Func&& func) const && {
-        using Gr = expected_transform_result<Func, const ErrorT&&>;
+        using Gr = _INNER expected_transform_result<Func, const ErrorT&&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -883,7 +875,10 @@ public:
 
     friend constexpr void swap(expected& lhs, expected& rhs)
     noexcept(noexcept(lhs.swap(rhs)))
-    requires requires { lhs.swap(rhs); } {
+#ifdef MSTL_STANDARD_20__
+    requires requires { lhs.swap(rhs); }
+#endif
+    {
         lhs.swap(rhs);
     }
 
@@ -953,9 +948,8 @@ private:
 };
 
 template <typename T, typename ErrorT>
-requires is_void_v<T>
-class expected<T, ErrorT> {
-    static_assert(can_be_unexpected<ErrorT>);
+class expected<T, ErrorT, enable_if_t<is_void_v<T>>> {
+    static_assert(_INNER can_be_unexpected<ErrorT>);
 
     template <typename U, typename Err, typename UE = unexpected<ErrorT>>
     static constexpr bool constructible_from_expected = disjunction_v<
@@ -970,6 +964,37 @@ class expected<T, ErrorT> {
 
     template <typename U>
     static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
+
+    template <typename, typename> friend class expected;
+
+private:
+    union {
+        struct {} void_;
+        ErrorT error_;
+    };
+
+    bool has_value_;
+
+    template <typename U>
+    constexpr void assign_error(U&& err) {
+        if (has_value_) {
+            _MSTL construct(_MSTL addressof(error_), _MSTL forward<U>(err));
+            has_value_ = false;
+        } else {
+            error_ = _MSTL forward<U>(err);
+        }
+    }
+
+    template <typename Func>
+    explicit constexpr expected(inplace_invoke_tag, Func&& func)
+        : void_(), has_value_(true) {
+        _MSTL forward<Func>(func)();
+    }
+
+    template <typename Func>
+    explicit constexpr expected(unexpect_invoke_tag, Func&& func)
+        : error_(_MSTL forward<Func>(func)()), has_value_(false) {}
+
 
 public:
     using value_type = T;
@@ -1059,9 +1084,9 @@ public:
     noexcept(is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>)
         : error_(list, _MSTL forward<Args>(args)...), has_value_(false) {}
 
-    constexpr ~expected() = default;
+    MSTL_CONSTEXPR20 ~expected() = default;
 
-    constexpr ~expected() requires (!is_trivially_destructible_v<ErrorT>) {
+    MSTL_CONSTEXPR20 ~expected() requires (!is_trivially_destructible_v<ErrorT>) {
         if (!has_value_)
             _MSTL destroy(_MSTL addressof(error_));
     }
@@ -1211,7 +1236,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT&>
     constexpr auto and_then(Func&& func) & {
-        using Res = expected_invoke_narg_result<Func>;
+        using Res = _INNER expected_invoke_narg_result<Func>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::error_type, ErrorT>);
 
@@ -1224,7 +1249,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT&>
     constexpr auto and_then(Func&& func) const & {
-        using Res = expected_invoke_narg_result<Func>;
+        using Res = _INNER expected_invoke_narg_result<Func>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::error_type, ErrorT>);
 
@@ -1237,7 +1262,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT>
     constexpr auto and_then(Func&& func) && {
-        using Res = expected_invoke_narg_result<Func>;
+        using Res = _INNER expected_invoke_narg_result<Func>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::error_type, ErrorT>);
 
@@ -1250,7 +1275,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT>
     constexpr auto and_then(Func&& func) const && {
-        using Res = expected_invoke_narg_result<Func>;
+        using Res = _INNER expected_invoke_narg_result<Func>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::error_type, ErrorT>);
 
@@ -1262,7 +1287,7 @@ public:
 
     template <typename Func>
     constexpr auto or_else(Func&& func) & {
-        using Res = expected_invoke_result<Func, ErrorT&>;
+        using Res = _INNER expected_invoke_result<Func, ErrorT&>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::value_type, T>);
 
@@ -1274,7 +1299,7 @@ public:
 
     template <typename Func>
     constexpr auto or_else(Func&& func) const & {
-        using Res = expected_invoke_result<Func, const ErrorT&>;
+        using Res = _INNER expected_invoke_result<Func, const ErrorT&>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::value_type, T>);
 
@@ -1286,7 +1311,7 @@ public:
 
     template <typename Func>
     constexpr auto or_else(Func&& func) && {
-        using Res = expected_invoke_result<Func, ErrorT&&>;
+        using Res = _INNER expected_invoke_result<Func, ErrorT&&>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::value_type, T>);
 
@@ -1298,7 +1323,7 @@ public:
 
     template <typename Func>
     constexpr auto or_else(Func&& func) const && {
-        using Res = expected_invoke_result<Func, const ErrorT&&>;
+        using Res = _INNER expected_invoke_result<Func, const ErrorT&&>;
         static_assert(is_expected<Res>);
         static_assert(is_same_v<typename Res::value_type, T>);
 
@@ -1311,7 +1336,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT&>
     constexpr auto transform(Func&& func) & {
-        using U = expected_transform_narg_result<Func>;
+        using U = _INNER expected_transform_narg_result<Func>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -1323,7 +1348,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT&>
     constexpr auto transform(Func&& func) const & {
-        using U = expected_transform_narg_result<Func>;
+        using U = _INNER expected_transform_narg_result<Func>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -1335,7 +1360,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, ErrorT>
     constexpr auto transform(Func&& func) && {
-        using U = expected_transform_narg_result<Func>;
+        using U = _INNER expected_transform_narg_result<Func>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -1347,7 +1372,7 @@ public:
     template <typename Func> 
     requires is_constructible_v<ErrorT, const ErrorT>
     constexpr auto transform(Func&& func) const && {
-        using U = expected_transform_narg_result<Func>;
+        using U = _INNER expected_transform_narg_result<Func>;
         using Res = expected<U, ErrorT>;
 
         if (has_value())
@@ -1358,7 +1383,7 @@ public:
 
     template <typename Func>
     constexpr auto transform_error(Func&& func) & {
-        using Gr = expected_transform_result<Func, ErrorT&>;
+        using Gr = _INNER expected_transform_result<Func, ErrorT&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -1371,7 +1396,7 @@ public:
 
     template <typename Func>
     constexpr auto transform_error(Func&& func) const & {
-        using Gr = expected_transform_result<Func, const ErrorT&>;
+        using Gr = _INNER expected_transform_result<Func, const ErrorT&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -1384,7 +1409,7 @@ public:
 
     template <typename Func>
     constexpr auto transform_error(Func&& func) && {
-        using Gr = expected_transform_result<Func, ErrorT&&>;
+        using Gr = _INNER expected_transform_result<Func, ErrorT&&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -1397,7 +1422,7 @@ public:
 
     template <typename Func>
     constexpr auto transform_error(Func&& func) const && {
-        using Gr = expected_transform_result<Func, const ErrorT&&>;
+        using Gr = _INNER expected_transform_result<Func, const ErrorT&&>;
         using Res = expected<T, Gr>;
 
         if (has_value())
@@ -1428,41 +1453,14 @@ public:
 
     friend constexpr void swap(expected& lhs, expected& rhs)
     noexcept(noexcept(lhs.swap(rhs)))
-    requires requires { lhs.swap(rhs); } {
+#ifdef MSTL_STANDARD_20__
+    requires requires { lhs.swap(rhs); }
+#endif
+    {
         lhs.swap(rhs);
     }
-
-private:
-    template <typename, typename> friend class expected;
-
-    template <typename U>
-    constexpr void assign_error(U&& err) {
-        if (has_value_) {
-            _MSTL construct(_MSTL addressof(error_), _MSTL forward<U>(err));
-            has_value_ = false;
-        } else {
-            error_ = _MSTL forward<U>(err);
-        }
-    }
-
-    template <typename Func>
-    explicit constexpr expected(inplace_invoke_tag, Func&& func)
-        : void_(), has_value_(true) {
-        _MSTL forward<Func>(func)();
-    }
-
-    template <typename Func>
-    explicit constexpr expected(unexpect_invoke_tag, Func&& func)
-        : error_(_MSTL forward<Func>(func)()), has_value_(false) {}
-
-    union {
-        struct {} void_;
-        ErrorT error_;
-    };
-
-    bool has_value_;
 };
 
 MSTL_END_NAMESPACE__
-
+#endif
 #endif // MSTL_CORE_COMPOUND_EXPECTED_HPP__

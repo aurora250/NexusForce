@@ -146,7 +146,7 @@ public:
 
 
 template <typename CharT, typename Traits>
-class basic_string_view : icommon<basic_string_view<CharT, Traits>> {
+class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
     static_assert(is_same_v<CharT, typename Traits::char_type>,
         "char type of basic string view should be same with char traits.");
     static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,

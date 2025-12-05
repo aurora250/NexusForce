@@ -225,7 +225,7 @@ private:
 
     static constexpr auto FILE_SPLITER =
 #ifdef MSTL_PLATFORM_WINDOWS__
-        "/\\";
+        "\\/";
 #elif defined(MSTL_PLATFORM_LINUX__)
         "/";
 #endif

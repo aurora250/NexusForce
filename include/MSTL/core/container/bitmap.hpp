@@ -539,14 +539,6 @@ public:
     noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
     }
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 size_type to_hash() const noexcept {
-        return super::default_to_hash(*this);
-    }
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return super::default_to_string(*this);
-    }
 };
 
 MSTL_END_NAMESPACE__

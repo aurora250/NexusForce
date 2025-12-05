@@ -50,33 +50,9 @@ public:
      noexcept(noexcept(seq_ == rh.seq_)) {
         return seq_ == rh.seq_;
     }
-    MSTL_NODISCARD bool operator !=(const self& rh) const
-    noexcept(noexcept(seq_ != rh.seq_)) {
-        return seq_ != rh.seq_;
-    }
     MSTL_NODISCARD bool operator <(const self& rh) const
     noexcept(noexcept(seq_ < rh.seq_)) {
         return seq_ < rh.seq_;
-    }
-    MSTL_NODISCARD bool operator >(const self& rh) const
-    noexcept(noexcept(seq_ > rh.seq_)) {
-        return seq_ > rh.seq_;
-    }
-    MSTL_NODISCARD bool operator <=(const self& rh) const
-    noexcept(noexcept(seq_ <= rh.seq_)) {
-        return seq_ <= rh.seq_;
-    }
-    MSTL_NODISCARD bool operator >=(const self& rh) const
-    noexcept(noexcept(seq_ >= rh.seq_)) {
-        return seq_ >= rh.seq_;
-    }
-
-    MSTL_NODISCARD size_type to_hash() const noexcept {
-        return super::default_to_hash(seq_);
-    }
-
-    MSTL_NODISCARD string to_string() const {
-        return super::default_to_string(seq_);
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

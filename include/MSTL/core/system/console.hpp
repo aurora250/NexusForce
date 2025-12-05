@@ -144,11 +144,11 @@ public:
         io_base<T>::read(*this, value);
     }
 
-    template <typename T, enable_if_t<!is_packaged_v<T> && !is_base_of_v<iserialize<T>, T>, int> = 0>
+    template <typename T, enable_if_t<!is_packaged_v<T> && !is_base_of_v<iobject<T>, T>, int> = 0>
     T readln() {
         return T(this->readln_string());
     }
-    template <typename T, enable_if_t<!is_packaged_v<T> && is_base_of_v<iserialize<T>, T>, int> = 0>
+    template <typename T, enable_if_t<!is_packaged_v<T> && is_base_of_v<iobject<T>, T>, int> = 0>
     T readln() {
         T obj;
         obj.try_parse(this->readln_string().view());
@@ -195,19 +195,26 @@ struct io_base<T, enable_if_t<is_base_of_v<_MSTL_RANGES view_base<T>, T>>> {
 };
 
 template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iserialize<T>, T>>> {
+struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iobject<T>, T>>> {
     static void write(sys_console& console, const T& value) {
         console.write_string(value.to_string());
     }
 };
 
 template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<iserialize<T>, T>>> {
+struct io_base<T, enable_if_t<is_base_of_v<icollector<T>, T>>> {
+    static void write(sys_console& console, const T& value) {
+        console.write_string(to_string(value));
+    }
+};
+
+template <typename T>
+struct io_base<T, enable_if_t<is_base_of_v<iobject<T>, T>>> {
     static void write(sys_console& console, const T& value) {
         console.write_string(value.to_string());
     }
     static void read(sys_console& console, T& value) {
-        value = iserialize<T>::parse(console.readln_string().view());
+        value = iobject<T>::parse(console.readln_string().view());
     }
 };
 

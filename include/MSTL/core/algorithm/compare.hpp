@@ -2,8 +2,10 @@
 #define MSTL_CORE_ALGORITHM_COMPARE_HPP__
 #include "../compound/pair.hpp"
 #include "../memory/memory.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "../functional/functor.hpp"
+#include "bound.hpp"
 #include <initializer_list>
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator1, typename Iterator2, typename BinaryPredicate, enable_if_t<
