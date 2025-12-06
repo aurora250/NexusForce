@@ -417,7 +417,7 @@ private:
         const size_t new_cap = _MSTL max(old_cap + n, old_cap + (old_cap >> 1));
         pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
         pointer end1 = traits_type::move(new_buffer, data_, diff) + diff;
-        pointer end2 = _MSTL uninitialized_copy_n(first, n, end1) + n;
+        pointer end2 = _MSTL uninitialized_copy_n(first, n, end1).second + n;
         traits_type::move(end2, data_ + diff, size_ - diff);
         capacity_pair_.get_base().deallocate(data_, old_cap);
         data_ = new_buffer;
@@ -1253,13 +1253,23 @@ public:
     }
 
     MSTL_CONSTEXPR20 bool equal_to(const self& str) const noexcept {
-        return equal_to(str.view());
+        return this->equal_to(str.view());
     }
     MSTL_CONSTEXPR20 bool equal_to(const view_type str) const noexcept {
         return _MSTL char_traits_equal<Traits>(data(), size_, str.data(), str.size());
     }
     MSTL_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
-        return equal_to(view_type(str));
+        return this->equal_to(view_type(str));
+    }
+
+    MSTL_CONSTEXPR20 bool iequal_to(const self& str) const noexcept {
+        return this->iequal_to(str.view());
+    }
+    MSTL_CONSTEXPR20 bool iequal_to(const view_type str) const noexcept {
+        return _MSTL char_traits_equal<Traits>(data(), size_, str.data(), str.size());
+    }
+    MSTL_CONSTEXPR20 bool iequal_to(const CharT* str) const noexcept {
+        return this->iequal_to(view_type(str));
     }
 
     MSTL_CONSTEXPR20 void lowercase()

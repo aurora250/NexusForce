@@ -348,7 +348,7 @@ sudo make install
 
 定义有序集合类`set`和有序多值集合类`multiset`。
 
-- [file](include/MSTL/core/system/file.hpp)
+- [file](include/MSTL/core/file/file.hpp)
 
 定义文件类`file`，其使用8KB的buffer以适应大批量小数据的读写。
 

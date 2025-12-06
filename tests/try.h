@@ -201,8 +201,11 @@ inline void handle_cookie_api(
 }
 
 void test_http_server();
+void test_http_client();
 
 void test_list();
+
+void test_ini();
 void test_json();
 
 class Foo {};

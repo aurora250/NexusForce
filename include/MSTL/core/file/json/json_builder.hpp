@@ -1,7 +1,7 @@
-#ifndef MSTL_CORE_JSON_JSON_BUILDER_HPP__
-#define MSTL_CORE_JSON_JSON_BUILDER_HPP__
-#include "../container/stack.hpp"
-#include "../functional/function.hpp"
+#ifndef MSTL_CORE_FILE_JSON_JSON_BUILDER_HPP__
+#define MSTL_CORE_FILE_JSON_JSON_BUILDER_HPP__
+#include "MSTL/core/container/stack.hpp"
+#include "MSTL/core/functional/function.hpp"
 #include "json_value.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -115,4 +115,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_JSON_JSON_BUILDER_HPP__
+#endif // MSTL_CORE_FILE_JSON_JSON_BUILDER_HPP__

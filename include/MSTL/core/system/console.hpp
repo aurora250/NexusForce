@@ -258,7 +258,7 @@ struct io_base<const T[N], enable_if_t<is_character_v<T>>> {
 };
 
 template <typename T>
-struct io_base<const T*, enable_if_t<is_character_v<T>>> {
+struct io_base<T*, enable_if_t<is_character_v<T>>> {
     static void write(sys_console& console, const T* value) {
         console.write_string(_MSTL to_string(value));
     }

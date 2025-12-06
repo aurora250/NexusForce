@@ -7,7 +7,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 #define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
-	constexpr explicit THIS(const char* const info = INFO, const char* const type = __type__) noexcept \
+	explicit THIS(const char* info = INFO, const char* type = __type__) noexcept \
 		: BASE(info, type) {}
 
 #define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \
@@ -40,10 +40,10 @@ MSTL_BEGIN_NAMESPACE__
 
 
 struct MSTL_API exception {
-	const char* const info = nullptr;
-	const char* const type = nullptr;
+	const char* info = nullptr;
+	const char* type = nullptr;
 
-	constexpr explicit exception(const char* const info = __type__, const char* const type = __type__) noexcept
+	constexpr explicit exception(const char* info = __type__, const char* type = __type__) noexcept
 		: info(info), type(type) {}
 
 	__MSTL_ERROR_DERIVED_DESTRUCTOR(exception)

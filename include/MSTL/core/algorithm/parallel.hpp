@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_ALGORITHM_ASYNC_HPP__
-#define MSTL_CORE_ALGORITHM_ASYNC_HPP__
+#ifndef MSTL_CORE_ALGORITHM_PARALLEL_HPP__
+#define MSTL_CORE_ALGORITHM_PARALLEL_HPP__
 #include "iterator.hpp"
 #include "../async/thread.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -42,4 +42,4 @@ void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, B
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_ALGORITHM_ASYNC_HPP__
+#endif // MSTL_CORE_ALGORITHM_PARALLEL_HPP__

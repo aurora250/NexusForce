@@ -354,7 +354,7 @@ Defines the ordered dictionary classes `map` and `multimap`.
 
 Defines the ordered set classes `set` and `multiset`.
 
-- [file](include/MSTL/core/system/file.hpp)
+- [file](include/MSTL/core/file/file.hpp)
 
 Defines the file class `file`, which uses an 8KB buffer to handle high-volume small data read/write operations.
 

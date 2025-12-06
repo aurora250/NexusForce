@@ -203,7 +203,7 @@ MSTL_END_INNER__
 
 
 template <typename Res, typename... Args>
-class function<Res(Args...)> : _INNER __function_base {
+class function<Res(Args...)> : _INNER __function_base, public iswappable<function<Res(Args...)>> {
 private:
 	template <typename F, bool IsSelf = is_same_v<remove_cvref_t<F>, function>>
 	using enable_decay_t = typename enable_if_t<!IsSelf, decay<F>>::type;
@@ -311,26 +311,8 @@ public:
 
 	explicit operator bool() const noexcept { return !empty(); }
 
-	Res operator ()(Args&&... args) &
+	Res operator ()(Args&&... args) const
     noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) throw_exception(memory_exception("functional pointing to null."));
-		return invoker_(func_, _MSTL forward<Args>(args)...);
-	}
-
-	Res operator ()(Args&&... args) &&
-	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) throw_exception(memory_exception("functional pointing to null."));
-		return invoker_(func_, _MSTL forward<Args>(args)...);
-	}
-
-	Res operator ()(Args&&... args) const &
-    noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) throw_exception(memory_exception("functional pointing to null."));
-		return invoker_(func_, _MSTL forward<Args>(args)...);
-	}
-
-	Res operator ()(Args&&... args) const &&
-	noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
 		if (empty()) throw_exception(memory_exception("functional pointing to null."));
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
@@ -403,12 +385,12 @@ struct __function_guide_helper<Result (Class::*)(Args...) const & noexcept> {
 
 MSTL_END_INNER__
 
-template<typename Result, typename... ArgTypes>
-function(Result(*)(ArgTypes...)) -> function<Result(ArgTypes...)>;
+template<typename Res, typename... Args>
+function(Res(*)(Args...)) -> function<Res(Args...)>;
 
-template<typename Functor, typename Signature = typename
-_INNER __function_guide_helper<decltype(&Functor::operator())>::type>
-function(Functor) -> function<Signature>;
+template<typename Func, typename Sign = typename
+_INNER __function_guide_helper<decltype(&Func::operator())>::type>
+function(Func) -> function<Sign>;
 
 #endif
 
@@ -428,10 +410,6 @@ bool operator !=(const function<Res(Args...)>& f, nullptr_t) noexcept {
 template <typename Res, typename... Args>
 bool operator !=(nullptr_t, const function<Res(Args...)>& f) noexcept {
 	return static_cast<bool>(f);
-}
-template <typename Res, typename... Args>
-void swap(function<Res(Args...)>& lh, function<Res(Args...)>& rh) noexcept {
-	lh.swap(rh);
 }
 
 MSTL_END_NAMESPACE__

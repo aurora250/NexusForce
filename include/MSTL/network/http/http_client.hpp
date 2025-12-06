@@ -20,20 +20,21 @@ private:
     _MSTL_CHRONO milliseconds connect_timeout_{5000};
     _MSTL_CHRONO milliseconds read_timeout_{5000};
 
-    bool connect_domain(const string &host, uint16_t port);
+    bool try_connect(const string& host, uint16_t port, const string& ip, bool ipv6);
+    bool connect_domain(const string& host, uint16_t port);
     void close_connection() noexcept;
 
-    string build_request_str(const http_client_request &req) const;
+    string build_request_str(const http_client_request& req, const url& req_url) const;
 
-    bool read_response(string &out_data) const;
-    bool parse_response(string_view resp_str, http_client_response &resp) const;
+    bool read_response(string& out_data) const;
+    bool parse_response(string_view resp_str, http_client_response& resp) const;
 
-    cookie parse_set_cookie(string_view str, const string &default_domain, const string &default_path) const;
+    cookie parse_set_cookie(string_view str, const string& default_domain, const string& default_path) const;
 
-    void update_cookies(const vector<cookie> &resp_cookies, const url &request_url);
+    void update_cookies(const vector<cookie>& resp_cookies, const url& request_url);
 
-    bool parse_chunked_body(string_view chunked, string &decoded) const;
-    string build_cookie_header(const url &request_url) const;
+    bool parse_chunked_body(string_view chunked, string& decoded) const;
+    string build_cookie_header(const url& ) const;
 
 public:
     explicit http_client() = default;

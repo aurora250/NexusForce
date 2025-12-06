@@ -2,7 +2,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 void file_sink::open_new_file() {
-    string filename = base_filename_;
+    string filename = base_filename_.str();
 
     if (enable_date_rotation_ && !current_date_.empty()) {
         filename += "." + current_date_;
@@ -11,7 +11,7 @@ void file_sink::open_new_file() {
         filename += "." + to_string(file_index_);
     }
 
-    if (!file_.open(filename, true,
+    if (!file_.open(path(filename), true,
         FILE_ACCESS::WRITE,
         FILE_SHARED::SHARE_WRITE,
         FILE_CREATION::OPEN_FORCE)) {
@@ -40,7 +40,7 @@ string file_sink::default_format(log_event ev) {
     return result;
 }
 
-file_sink::file_sink(string filename, const size_t max_file_size, const bool enable_date_rotation)
+file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation)
 : base_filename_(move(filename)), max_file_size_(max_file_size),
 current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
     if (enable_date_rotation_) {

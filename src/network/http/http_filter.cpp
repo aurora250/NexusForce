@@ -1,6 +1,6 @@
 #include <MSTL/network/http/http_filter.hpp>
 #include <MSTL/core/system/console.hpp>
-#include <MSTL/core/system/file.hpp>
+#include <MSTL/core/file/file.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void http_filter_chain::clean_filter() noexcept {
@@ -79,7 +79,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
         const auto& type = elem.second;
         if (path.ends_with(ext.view())) {
             try {
-                const string file_path = root_path_ + path;
+                const _MSTL path file_path(root_path_ + path);
                 if (ext == ".jpg" || ext == ".jpeg" || ext == ".png") {
                     response.set_body(file(file_path).read_binary());
                 } else {

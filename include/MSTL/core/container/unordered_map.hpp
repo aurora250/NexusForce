@@ -169,16 +169,6 @@ public:
         return ht_ < rh.ht_;
     }
 };
-
-template <typename Iterator>
-using get_iter_key_t = remove_const_t<typename iterator_traits<Iterator>::value_type::first_type>;
-template <typename Iterator>
-using get_iter_val_t = typename iterator_traits<Iterator>::value_type::second_type;
-template <typename Iterator>
-using get_iter_pair_t = pair<add_const_t<typename iterator_traits<Iterator>::value_type::first_type>,
-    typename iterator_traits<Iterator>::value_type::second_type>;
-
-
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename HashFcn = hash<get_iter_key_t<Iterator>>,
     typename Compare = equal_to<get_iter_key_t<Iterator>>, typename Alloc>

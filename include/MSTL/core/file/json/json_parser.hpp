@@ -1,6 +1,6 @@
-#ifndef MSTL_CORE_JSON_JSON_PARSER_HPP__
-#define MSTL_CORE_JSON_JSON_PARSER_HPP__
-#include "../compound/optional.hpp"
+#ifndef MSTL_CORE_FILE_JSON_JSON_PARSER_HPP__
+#define MSTL_CORE_FILE_JSON_JSON_PARSER_HPP__
+#include "MSTL/core/compound/optional.hpp"
 #include "json_value.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -40,4 +40,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_JSON_JSON_PARSER_HPP__
+#endif // MSTL_CORE_FILE_JSON_JSON_PARSER_HPP__

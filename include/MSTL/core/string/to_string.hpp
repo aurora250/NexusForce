@@ -333,27 +333,27 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string(T x) {
     return _INNER __float_to_string_with_precision<CharT>(x, 6, false, false);
 }
 
+MSTL_END_INNER__
+
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string __to_string_with_precision(T x, int precision, bool scientific = false) {
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_with_precision(T x, int precision, bool scientific = false) {
     return _INNER __float_to_string_with_precision<char>(x, precision, scientific, scientific);
 }
 
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string __to_string_general(T x, int precision = 6) {
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_general(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, false, false);
 }
 
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string __to_string_fixed(T x, int precision = 6) {
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_fixed(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, false, true);
 }
 
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string __to_string_scientific(T x, int precision = 6) {
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_scientific(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, true, false);
 }
-
-MSTL_END_INNER__
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_TO_STRING_HPP__

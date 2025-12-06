@@ -5,6 +5,7 @@
 #include "../memory/uninitialized.hpp"
 #include "../compound/compressed_pair.hpp"
 #include "../algorithm/compare.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, typename Vector>
@@ -526,20 +527,20 @@ public:
 		this->resize(new_size, T());
 	}
 
-	template <typename... U>
-	MSTL_CONSTEXPR20 void emplace(iterator position, U&&... args) {
+	template <typename... Args>
+	MSTL_CONSTEXPR20 void emplace(iterator position, Args&&... args) {
 		if (finish_ != pair_.value) {
 			_MSTL construct(finish_, _MSTL move(*(finish_ - 1)));
 			++finish_;
 			_MSTL move_backward(position, _MSTL prev(this->end(), -2), _MSTL prev(this->end()));
-			_MSTL construct(&*position, _MSTL forward<U>(args)...);
+			_MSTL construct(&*position, _MSTL forward<Args>(args)...);
 			return;
 		}
 		const size_type old_size = this->size();
 		const size_type len = old_size != 0 ? 2 * old_size : 1;
 		pointer new_start = pair_.get_base().allocate(len);
 		pointer new_finish = _MSTL uninitialized_move(begin(), position, new_start);
-		_MSTL construct(new_finish, _MSTL forward<U>(args)...);
+		_MSTL construct(new_finish, _MSTL forward<Args>(args)...);
 		++new_finish;
 		new_finish = _MSTL uninitialized_move(position, end(), new_finish);
 		_MSTL destroy(begin(), end());
@@ -549,13 +550,13 @@ public:
 		pair_.value = new_start + len;
 	}
 
-	template <typename... U>
-	MSTL_CONSTEXPR20 void emplace_back(U&&... args) {
+	template <typename... Args>
+	MSTL_CONSTEXPR20 void emplace_back(Args&&... args) {
 		if (finish_ != pair_.value) {
-			_MSTL construct(finish_, _MSTL forward<U>(args)...);
+			_MSTL construct(finish_, _MSTL forward<Args>(args)...);
 			++finish_;
 		}
-		else this->emplace(this->end(), _MSTL forward<U>(args)...);
+		else this->emplace(this->end(), _MSTL forward<Args>(args)...);
 	}
 
 	MSTL_CONSTEXPR20 void push_back(const T& val) {

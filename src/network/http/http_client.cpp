@@ -1,11 +1,49 @@
-#include <MSTL/network/http/http_client.hpp>
+#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/time/datetime.hpp>
+#include <MSTL/network/http/http_client.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-bool http_client::connect_domain(const string &host, uint16_t port) {
+bool http_client::try_connect(const string& host, uint16_t port, const string& ip, bool ipv6) {
+    socket s(
+     ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
+     SOCKET_TYPE::STREAM,
+     SOCKET_PROTOCOL::TCP);
+
+    if (!s.is_valid()) return false;
+    if (!s.set_send_timeout(connect_timeout_) ||
+        !s.set_receive_timeout(read_timeout_)) {
+        return false;
+        }
+
+    ::sockaddr_storage addr{};
+    ::socklen_t addr_len;
+    if (ipv6) {
+        auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
+        a6->sin6_family = AF_INET6;
+        ::inet_pton(AF_INET6, ip.c_str(), &a6->sin6_addr);
+        a6->sin6_port = ::htons(port);
+        addr_len = sizeof(::sockaddr_in6);
+    } else {
+        auto *a4 = reinterpret_cast<::sockaddr_in *>(&addr);
+        a4->sin_family = AF_INET;
+        ::inet_pton(AF_INET, ip.c_str(), &a4->sin_addr);
+        a4->sin_port = ::htons(port);
+        addr_len = sizeof(::sockaddr_in);
+    }
+
+    if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) return false;
+
+    sock_ = _MSTL move(s);
+    connected_ = true;
+    connected_host_ = host;
+    connected_port_ = port;
+    return true;
+}
+
+bool http_client::connect_domain(const string& host, uint16_t port) {
     if (connected_ && connected_host_ == host && connected_port_ == port) return true;
     close_connection();
 
@@ -13,45 +51,8 @@ bool http_client::connect_domain(const string &host, uint16_t port) {
     vector<string> ips6;
     if (ips.empty()) ips6 = dns_.resolve_aaaa(host);
 
-    auto try_connect = [this, &host, port](const string &ip, const bool ipv6) -> bool {
-        socket s(
-            ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
-            SOCKET_TYPE::STREAM,
-            SOCKET_PROTOCOL::TCP);
-
-        if (!s.is_valid()) return false;
-        if (!s.set_send_timeout(connect_timeout_) ||
-            !s.set_receive_timeout(read_timeout_)) {
-            return false;
-        }
-
-        ::sockaddr_storage addr{};
-        ::socklen_t addr_len;
-        if (ipv6) {
-            auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
-            a6->sin6_family = AF_INET6;
-            ::inet_pton(AF_INET6, ip.c_str(), &a6->sin6_addr);
-            a6->sin6_port = ::htons(port);
-            addr_len = sizeof(::sockaddr_in6);
-        } else {
-            auto *a4 = reinterpret_cast<::sockaddr_in *>(&addr);
-            a4->sin_family = AF_INET;
-            ::inet_pton(AF_INET, ip.c_str(), &a4->sin_addr);
-            a4->sin_port = ::htons(port);
-            addr_len = sizeof(::sockaddr_in);
-        }
-
-        if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) return false;
-
-        sock_ = _MSTL move(s);
-        connected_ = true;
-        connected_host_ = host;
-        connected_port_ = port;
-        return true;
-    };
-
-    for (auto &ip : ips) if (try_connect(ip, false)) return true;
-    for (auto &ip : ips6) if (try_connect(ip, true)) return true;
+    for (auto &ip : ips) if (try_connect(host, port, ip, false)) return true;
+    for (auto &ip : ips6) if (try_connect(host, port, ip, true)) return true;
 
     return false;
 }
@@ -65,14 +66,15 @@ void http_client::close_connection() noexcept {
     }
 }
 
-string http_client::build_request_str(const http_client_request &req) const {
+string http_client::build_request_str(const http_client_request& req, const url& req_url) const {
     string req_str = req.method.method() + " " + req.path + " " + req.version + HTTP_CRLF;
     req_str += "Host: " + req.host;
 
     if (req.port != 80 && req.port != 443) req_str += ":" + _MSTL to_string(req.port);
     req_str += HTTP_CRLF;
 
-    string cookie_header = build_cookie_header(url(req.host));
+    string cookie_header = build_cookie_header(req_url);
+
     if (!cookie_header.empty()) {
         req_str += "Cookie: " + _MSTL move(cookie_header) + HTTP_CRLF;
     }
@@ -99,7 +101,7 @@ string http_client::build_request_str(const http_client_request &req) const {
     return req_str;
 }
 
-bool http_client::read_response(string &out_data) const {
+bool http_client::read_response(string& out_data) const {
     constexpr size_t buf_size = 8192;
     char buffer[buf_size];
     out_data.clear();
@@ -113,7 +115,7 @@ bool http_client::read_response(string &out_data) const {
     return true;
 }
 
-bool http_client::parse_chunked_body(const string_view chunked, string &decoded) const {
+bool http_client::parse_chunked_body(const string_view chunked, string& decoded) const {
     decoded.clear();
     size_t pos = 0;
     const size_t size = chunked.size();
@@ -138,10 +140,10 @@ bool http_client::parse_chunked_body(const string_view chunked, string &decoded)
 
 cookie http_client::parse_set_cookie(
     const string_view str,
-    const string &default_domain,
-    const string &default_path) const {
+    const string& default_domain,
+    const string& default_path) const {
     vector<string_view> tokens;
-    size_t start = 0, end = 0;
+    size_t start = 0, end;
     while ((end = str.find(';', start)) != string::npos) {
         tokens.push_back(str.substr(start, end - start).trim());
         start = end + 1;
@@ -193,7 +195,7 @@ cookie http_client::parse_set_cookie(
     return c;
 }
 
-void http_client::update_cookies(const vector<cookie> &resp_cookies, const url &request_url) {
+void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& request_url) {
     for (const auto &c : resp_cookies) {
         // 简化：以 name@domain+path 作为key，支持多域名路径cookie隔离
         string key = c.name().cookie_name() + "@" + (c.domain().empty() ? request_url.host : c.domain()) + c.path();
@@ -201,12 +203,11 @@ void http_client::update_cookies(const vector<cookie> &resp_cookies, const url &
     }
 }
 
-string http_client::build_cookie_header(const url &request_url) const {
+string http_client::build_cookie_header(const url& request_url) const {
     string cookie_header;
     for (const auto &kv : cookie_jar_) {
         const auto &c = kv.second;
         // 只发送有效、未过期、作用域匹配的cookie （简化实现，不做完整子域判定）
-        if (c.secure() && request_url.scheme != "https") continue;
         if (c.max_age() == 0) continue;
 
         if (request_url.host == c.domain() || c.domain().empty()) {
@@ -217,7 +218,7 @@ string http_client::build_cookie_header(const url &request_url) const {
     return cookie_header;
 }
 
-bool http_client::parse_response(const string_view resp_str, http_client_response &resp) const {
+bool http_client::parse_response(const string_view resp_str, http_client_response& resp) const {
     const size_t pos = resp_str.find(HTTP_CRLF);
     if (pos == string::npos) return false;
 
@@ -227,10 +228,10 @@ bool http_client::parse_response(const string_view resp_str, http_client_respons
     const size_t sp2 = status_line.find(' ', sp1 + 1);
     if (sp2 == string::npos) return false;
 
-    resp.set_version(string{status_line.substr(0, sp1)});
+    resp.set_version(status_line.substr(0, sp1));
     uint16_t code = to_uint16(status_line.substr(sp1 + 1, sp2 - sp1 - 1));
     resp.set_status(static_cast<HTTP_STATUS>(code));
-    resp.set_status_msg(string{status_line.substr(sp2 + 1)});
+    resp.set_status_msg(status_line.substr(sp2 + 1));
 
     const size_t header_start = pos + 2;
     const size_t header_end = resp_str.find(HTTP_CRLF2, header_start);
@@ -240,8 +241,8 @@ bool http_client::parse_response(const string_view resp_str, http_client_respons
     size_t line_start = 0;
     while (line_start < headers_block.size()) {
         const auto line_end = headers_block.find(HTTP_CRLF, line_start);
-        string_view line = headers_block.substr(line_start, line_end == string::npos ? headers_block.size() - line_start
-                                                                                     : line_end - line_start);
+        string_view line = headers_block.substr(line_start, line_end == string::npos ?
+                headers_block.size() - line_start : line_end - line_start);
         line_start = (line_end == string::npos) ? headers_block.size() : (line_end + 2);
         if (line.empty()) break;
         const size_t colon = line.find(':');
@@ -284,7 +285,12 @@ bool http_client::parse_response(const string_view resp_str, http_client_respons
 
 http_client_response http_client::request(http_client_request req) {
     int redirect_count = 0;
-    url req_url(req.host);
+
+    url req_url;
+    req_url.scheme = (req.port == 443) ? "https" : "http";
+    req_url.host = req.host;
+    req_url.port = req.port;
+    req_url.path = req.path;
 
     while (redirect_count <= max_redirect_) {
         if (!connect_domain(req.host, req.port)) {
@@ -294,7 +300,7 @@ http_client_response http_client::request(http_client_request req) {
             return resp;
         }
 
-        string req_str = build_request_str(req);
+        string req_str = build_request_str(req, req_url);
         const ssize_t total = static_cast<ssize_t>(req_str.size());
         ssize_t sent = 0;
         while (sent < total) {
@@ -334,13 +340,27 @@ http_client_response http_client::request(http_client_request req) {
              resp.status() == HTTP_STATUS::S3_PERMANENT_REDIRECT) &&
              !resp.header("Location").empty()) {
 
-            url new_url(resp.header("Location"));
+            string location = resp.header("Location");
 
-            req.host = new_url.host;
-            req.port = new_url.port ? new_url.port : (new_url.scheme == "https" ? 443 : 80);
-            req.path = new_url.path.empty() ? "/" : new_url.path;
+            if (location.starts_with("http://") || location.starts_with("https://")) {
+                url new_url(location);
+                req.host = new_url.host;
+                req.port = new_url.port ? new_url.port : (new_url.scheme == "https" ? 443 : 80);
+                req.path = new_url.path.empty() ? "/" : new_url.path;
+                req_url = new_url;
+            } else if (location.starts_with("/")) {
+                req.path = location;
+                req_url.path = location;
+            } else {
+                size_t last_slash = req.path.find_last_of('/');
+                if (last_slash != string::npos) {
+                    req.path = req.path.substr(0, last_slash + 1) + location;
+                } else {
+                    req.path = "/" + location;
+                }
+                req_url.path = req.path;
+            }
 
-            req_url = new_url;
             redirect_count++;
             close_connection();
             continue;

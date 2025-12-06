@@ -40,7 +40,7 @@ public:
 
     MSTL_CONSTEXPR20 ~boolean() = default;
 
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
+    MSTL_NODISCARD constexpr operator bool() const noexcept {
         return value_ != _MSTL initialize<value_type>();
     }
     MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
@@ -61,18 +61,16 @@ public:
         self obj;
         string str(lower.trim());
         try {
-            obj = static_cast<bool>(to_int32(str.view(), nullptr, 10));
-        } catch (...) {
-            _MSTL transform(str.begin(), str.end(), str.begin(), [](byte_t c) {
-                return _MSTL to_lowercase(c);
-            });
+            str.lowercase();
             if (str == "true" || str == "yes" || str == "y") {
                 obj = true;
             } else if (str == "false" || str == "no" || str == "n") {
                 obj = false;
             } else {
-                throw_exception(typecast_exception("Convert from string to boolean failed."));
+                obj = static_cast<bool>(to_int32(str.view(), nullptr, 10));
             }
+        } catch (...) {
+            throw_exception(typecast_exception("Convert from string to boolean failed."));
         }
         return obj;
     }

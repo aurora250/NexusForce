@@ -84,18 +84,25 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/compound/any.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_parser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/json/json_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
@@ -107,6 +114,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/iterator/file_line_iterator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp
@@ -195,7 +203,9 @@ configure_compiler_options(MSTL)
 
 # Windows链接系统库
 if(WIN32)
-    target_link_libraries(MSTL PUBLIC ws2_32 wsock32 SetupAPI cfgmgr32 DbgHelp synchronization)
+    target_link_libraries(MSTL PUBLIC
+            ws2_32 wsock32 SetupAPI cfgmgr32
+            DbgHelp synchronization Shell32)
 endif()
 
 

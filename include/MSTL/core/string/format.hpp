@@ -173,16 +173,16 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
 
         switch (options.type) {
             case FORMAT_TYPE::FLOAT_FIX: {
-                number_str = _INNER __to_string_fixed(val, precision);
+                number_str = _MSTL to_string_fixed(val, precision);
                 break;
             }
             case FORMAT_TYPE::FLOAT_EXP: {
-                number_str = _INNER __to_string_scientific(val, precision);
+                number_str = _MSTL to_string_scientific(val, precision);
                 break;
             }
             case FORMAT_TYPE::FLOAT_GEN:
             default: {
-                number_str = _INNER __to_string_general(val, precision);
+                number_str = _MSTL to_string_general(val, precision);
                 break;
             }
         }

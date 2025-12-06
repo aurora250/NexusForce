@@ -2,17 +2,17 @@
 
 #include <MSTL/database/redis/redis_result.hpp>
 
-static const string TEST_FILE = "test_temp_file.txt";
-static const string TEST_DIR = "test_temp_dir";
-static const string TEST_SUB_DIR = TEST_DIR + "/sub_dir";
+static const path TEST_FILE{"test_temp_file.txt"};
+static const path TEST_DIR{"test_temp_dir"};
+static const path TEST_SUB_DIR{TEST_DIR / "sub_dir"};
 static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird line";
 
 void test_file_basic_operations() {
     bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
     assert(create_ok);
-    assert(file::exists(TEST_FILE));
-    assert(file::is_file(TEST_FILE));
-    assert(!file::is_directory(TEST_FILE));
+    assert(TEST_FILE.exists());
+    assert(TEST_FILE.is_file());
+    assert(!TEST_FILE.is_directory());
 
     assert(file::size(TEST_FILE) == TEST_CONTENT.size());
 
@@ -26,7 +26,7 @@ void test_file_basic_operations() {
         assert(!f.opened());
         assert(f.open(TEST_FILE, false, FILE_ACCESS::READ_WRITE));
         assert(f.opened());
-        assert(f.path() == TEST_FILE);
+        assert(f.get_path().view() == TEST_FILE.view());
 
         string line;
         assert(f.read_line(line));
@@ -59,15 +59,15 @@ void test_file_basic_operations() {
 }
 
 void test_directory_operations() {
-    assert(!file::exists(TEST_SUB_DIR));
-    bool dir_ok = file::create_directories(TEST_SUB_DIR);
+    assert(!TEST_SUB_DIR.exists());
+    bool dir_ok = TEST_SUB_DIR.create_directories();
     assert(dir_ok);
-    assert(file::exists(TEST_SUB_DIR));
-    assert(file::is_directory(TEST_SUB_DIR));
+    assert(TEST_SUB_DIR.exists());
+    assert(TEST_SUB_DIR.is_directory());
 
-    string sub_file = TEST_SUB_DIR + "/sub_file.txt";
+    path sub_file = {TEST_SUB_DIR / "sub_file.txt"};
     assert(file::create_and_write(sub_file, "sub content"));
-    assert(file::exists(sub_file));
+    assert(sub_file.exists());
     println("test dictionary operations passed");
 }
 
@@ -103,21 +103,21 @@ void test_file_lock_and_other_operations() {
         assert(unlocked);
     }
 
-    string copy_file = TEST_FILE + ".copy";
-    assert(file::copy(TEST_FILE, copy_file));
-    assert(file::exists(copy_file));
+    path copy_file{TEST_FILE.str() + ".copy"};
+    assert(TEST_FILE.copy(copy_file));
+    assert(copy_file.exists());
     string copy_content;
     file::read(copy_file, copy_content);
 
-    string move_file = TEST_DIR + "/moved_file.txt";
-    assert(file::move(copy_file, move_file));
-    assert(!file::exists(copy_file));
-    assert(file::exists(move_file));
+    path move_file{TEST_DIR / "moved_file.txt"};
+    assert(copy_file.move(move_file));
+    assert(!copy_file.exists());
+    assert(move_file.exists());
 
-    string rename_file = TEST_DIR + "/renamed_file.txt";
-    assert(file::rename(move_file, rename_file));
-    assert(!file::exists(move_file));
-    assert(file::exists(rename_file));
+    path rename_file{TEST_DIR / "renamed_file.txt"};
+    assert(move_file.rename(rename_file));
+    assert(!move_file.exists());
+    assert(rename_file.exists());
     println("test file lock and other operations passed");
 }
 
@@ -127,40 +127,37 @@ void test_move_semantics() {
     file f2 = _MSTL move(f1);
     assert(!f1.opened());
     assert(f2.opened());
-    assert(f2.path() == TEST_FILE);
+    assert(f2.get_path().str() == TEST_FILE.str());
 
     file f3;
     f3 = _MSTL move(f2);
     assert(!f2.opened());
     assert(f3.opened());
-    assert(f3.path() == TEST_FILE);
+    assert(f3.get_path().str() == TEST_FILE.str());
     println("test move semantics passed");
 }
 
 void clean_up() {
-    if (file::exists(TEST_FILE)) {
-        if (file::is_directory(TEST_FILE)) {
-            file::remove_directory(TEST_FILE);
+    if (TEST_FILE.exists()) {
+        if (TEST_FILE.is_directory()) {
+            TEST_FILE.remove_directory();
         } else {
-            file::remove(TEST_FILE);
+            TEST_FILE.remove();
         }
     }
-    if (file::exists(TEST_FILE)) {
-        file::remove(TEST_FILE);
+    path sub_file = TEST_SUB_DIR / "sub_file.txt";
+    if (sub_file.exists()) {
+        sub_file.remove();
     }
-    string sub_file = TEST_SUB_DIR + "/sub_file.txt";
-    if (file::exists(sub_file)) {
-        file::remove(sub_file);
+    path rename_file = TEST_DIR / "renamed_file.txt";
+    if (rename_file.exists()) {
+        rename_file.remove();
     }
-    string rename_file = TEST_DIR + "/renamed_file.txt";
-    if (file::exists(rename_file)) {
-        file::remove(rename_file);
+    if (TEST_SUB_DIR.exists()) {
+        TEST_SUB_DIR.remove_directory();
     }
-    if (file::exists(TEST_SUB_DIR)) {
-        file::remove_directory(TEST_SUB_DIR);
-    }
-    if (file::exists(TEST_DIR)) {
-        file::remove_directory(TEST_DIR);
+    if (TEST_DIR.exists()) {
+        TEST_DIR.remove_directory();
     }
 }
 
@@ -412,7 +409,7 @@ void test_dev() {
 
     if(udisk.volume_label() != "Standby") {
         println("剩余容量", udisk.free_capacity());
-        const string& path = udisk.device_path();
+        path path{udisk.device_path()};
 
         println("正在卸载卷...");
         if (udisk.force_dismount()) {
@@ -430,26 +427,25 @@ void test_dev() {
 
         this_thread::sleep_for_ms(2000);
 
-        bool success = file::copy_directory(
-            R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
+        bool success = path::copy_directory(
+            _MSTL path(R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)"),
             path
         );
-        // 应该失败，但因为WINDOWS的系统权限设置，无法阻止，使用CMD指令代码可能实现
         println("第一次拷贝结果:", success);
         console.pause();
 
         println("正在恢复访问权限...");
         udisk.base_drive().enable();
 
-        success = file::copy_directory(
-            R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)",
+        success = path::copy_directory(
+            _MSTL path(R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)"),
             path
         );
         println("第二次拷贝结果:", success);
         console.pause();
 
         println("正在删除拷贝文件...");
-        file::remove_all_in_directory(path);
+        path.remove_all_in_directory();
         console.pause();
     } else {
         println("无U盘设备");
@@ -609,6 +605,42 @@ void test_enctype() {
     println(aes_decrypted);
 }
 
+void test_ini() {
+    ini_builder builder;
+    builder.add_comment("配置文件")
+           .add_comment("生成时间: 2024-01-01")
+           .add_blank_line()
+           .section("database")
+           .add("host", "localhost")
+           .add("port", 3306)
+           .add("username", "root")
+           .add("password", "secret123")
+           .add("timeout", 30.5, 1)
+           .add_blank_line()
+           .section("application")
+           .add("name", "myapp")
+           .add("version", "1.0.0")
+           .add("debug", true)
+           .add("max_connections", 100)
+           .add_blank_line()
+           .section("logging")
+           .add("level", "info")
+           .add("file", "/var/log/app.log")
+           .add("rotate", true);
+
+    string built = builder.to_string();
+    println(built);
+
+    ini_parser parser;
+    if (parser.try_parse(built)) {
+        println("database.host = ", parser.get_string("database", "host"));
+        println("database.port = ", parser.get_int("database", "port"));
+        println("database.timeout = ", parser.get_double("database", "timeout"));
+        println("application.debug = ", parser.get_bool("application", "debug"));
+        println("application.max_connections = ", parser.get_int("application", "max_connections"));
+    }
+}
+
 void test_json() {
     string json_str = R"(
     {
@@ -682,11 +714,11 @@ void test_json() {
 }
 
 void test_http_server() {
-    static const string res_root =
+    static const path res_root
 #ifdef MSTL_PLATFORM_WINDOWS__
-        R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)";
+        {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #elif defined(MSTL_PLATFORM_LINUX__)
-        R"(/home/huenqi/Workspace/MSTL/tests/resource)";
+        {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
 #endif
 
     try {
@@ -695,7 +727,7 @@ void test_http_server() {
         http_router& r = server.get_router();
         r.use(new logging_filter());
         r.use(new cors_filter("http://127.0.0.1:5500"));
-        r.use(new static_file_filter(res_root));
+        r.use(new static_file_filter(res_root.str()));
 
         r.post("/old-link", [](http_request&, http_response& response) {
             response.set_redirect("/new-link");
@@ -737,40 +769,40 @@ void test_http_server() {
             res.set_body(R"({"status":"success"})");
         });
 
-        r.get("/", [](http_request& req, http_response& res) {
+        r.get("/", [](http_request&, http_response& res) {
             res.set_ok();
             res.set_status_msg("OK");
             res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.set_body(file::read(res_root + "/index.html"));
+            res.set_body(file::read(res_root / "index.html"));
         });
 
-        r.get("/detail", [](http_request& req, http_response& res) {
+        r.get("/detail", [](http_request&, http_response& res) {
             res.set_ok();
             res.set_status_msg("OK");
             res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.set_body(file::read(res_root + "/detail.html"));
+            res.set_body(file::read(res_root / "detail.html"));
         });
 
-        r.get("/new-link", [](http_request& req, http_response& res) {
+        r.get("/new-link", [](http_request&, http_response& res) {
             res.set_ok();
             res.set_status_msg("OK");
             res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.set_body(file::read(res_root + "/index.html"));
+            res.set_body(file::read(res_root / "index.html"));
         });
 
-        r.get("/test", [](http_request& req, http_response& res) {
+        r.get("/test", [](http_request&, http_response& res) {
             res.set_ok();
             res.set_status_msg("OK");
             res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.set_body(file::read(res_root + "/test.html"));
+            res.set_body(file::read(res_root / "test.html"));
         });
 
-        r.set_not_found_handler([](http_request &req, http_response &res) {
+        r.set_not_found_handler([](http_request&, http_response &res) {
             res.set_not_found();
             res.set_status_msg("Not Found");
             res.set_content_type(HTTP_CONTENT::HTML_TEXT);
             try {
-                res.set_body(file::read(res_root + "/404err.html"));
+                res.set_body(file::read(res_root / "404err.html"));
             } catch (...) {
                 res.set_body("<h1>404 - Page Not Found</h1>");
             }
@@ -785,6 +817,39 @@ void test_http_server() {
         printcln(color::red(), "Failed to start server!");
     } catch (...) {}
 }
+
+void test_http_client() {
+    try {
+        http_client client;
+
+        const auto response = client.request(http_client_request("www.example.com"));
+        println("HTTP Version: ", response.version());
+        println("Status Code: ", static_cast<int>(response.status()));
+        println("Status Message: ", response.status_msg());
+        println("Headers:");
+        for (const auto& elem : response.all_headers()) {
+            const auto& key = elem.first;
+            const auto& values = elem.second;
+            for (const auto& val : values) {
+                println("  ", key, ": ", val);
+            }
+        }
+
+        println();
+        println("Body:");
+        println(response.body());
+
+        const auto& cookies = response.cookies();
+        if (!cookies.empty()) {
+            println();
+            println("Cookies received:");
+            for (const auto& c : cookies) {
+                println("  ", c.name().cookie_name(), "=", c.value());
+            }
+        }
+    } catch (...) {}
+}
+
 
 void test_list() {
     list<int> lls{ 1,2,3,4,5,6,7 };
@@ -1993,15 +2058,17 @@ void test_tpool() {
     pool.stop();
     pool.set_mode(THREAD_POOL_MODE::MODE_CACHED);
     pool.start();
-    pool.submit_task(test_string);
+    // pool.submit_task(test_string);
     pool.submit_task(test_math);
-    pool.submit_task(test_timer);
+    // pool.submit_task(test_timer);
     pool.submit_task(test_tuple);
     pool.submit_task(test_variant);
     pool.submit_task(test_option);
     pool.submit_task(test_check);
     pool.submit_task(test_any);
     pool.submit_task(test_datetimes);
+    pool.submit_task(test_json);
+    pool.submit_task(test_ini);
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);

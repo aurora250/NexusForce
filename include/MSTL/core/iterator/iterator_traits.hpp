@@ -53,5 +53,11 @@ using iter_pointer_t    = typename iterator_traits<Iterator>::pointer;
 template <typename Iterator>
 using iter_reference_t  = typename iterator_traits<Iterator>::reference;
 
+
+template <typename Iterator>
+using get_iter_key_t = remove_const_t<typename iterator_traits<Iterator>::value_type::first_type>;
+template <typename Iterator>
+using get_iter_val_t = typename iterator_traits<Iterator>::value_type::second_type;
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ITERATOR_ITERATOR_TRAITS_HPP__
