@@ -4,30 +4,18 @@ MSTL_BEGIN_NAMESPACE__
 
 unique_ptr<json_string> json_parser::parse_string() {
     pos++;
-    string result;
-    bool escaped = false;
+    const size_t start_pos = pos;
 
     while (pos < length) {
         const char c = json[pos++];
-        if (escaped) {
-            escaped = false;
-            switch (c) {
-                case '"':  result += '"'; break;
-                case '\\': result += '\\'; break;
-                case '/':  result += '/'; break;
-                case 'b':  result += '\b'; break;
-                case 'f':  result += '\f'; break;
-                case 'n':  result += '\n'; break;
-                case 'r':  result += '\r'; break;
-                case 't':  result += '\t'; break;
-                default:   result += c;    break;
+        if (c == '\\') {
+            if (pos >= length) {
+                throw_exception(json_exception("Unterminated escape sequence in string"));
             }
+            pos++;
         } else if (c == '"') {
-            return make_unique<json_string>(result);
-        } else if (c == '\\') {
-            escaped = true;
-        } else {
-            result += c;
+            const size_t end_pos = pos - 1;
+            return make_unique<json_string>(json.view(start_pos, end_pos - start_pos));
         }
     }
     throw_exception(json_exception("Unterminated string"));
@@ -216,13 +204,11 @@ unique_ptr<json_value> json_parser::parse() {
 }
 
 optional<unique_ptr<json_value>> json_parser::try_parse() {
-    optional<unique_ptr<json_value>>value (nullopt);
     try {
-        value = _MSTL move(parse());
-    } catch (const exception&) {
-        return value;
+        return parse();
+    } catch (...) {
+        return {};
     }
-    return _MSTL move(value);
 }
 
 MSTL_END_NAMESPACE__

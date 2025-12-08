@@ -29,12 +29,12 @@ MSTL_INLINE17 constexpr char PREFERRED_SEPARATOR =
 
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-using file_underlying_type_t = ::DWORD;
+using fud_t = ::DWORD;
 #elif defined(MSTL_PLATFORM_LINUX__)
-using file_underlying_type_t = int;
+using fud_t = int;
 #endif
 
-enum class FILE_ACCESS : file_underlying_type_t {
+enum class FILE_ACCESS : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     READ = GENERIC_READ,
     WRITE = GENERIC_WRITE,
@@ -49,20 +49,14 @@ enum class FILE_ACCESS : file_underlying_type_t {
 };
 
 constexpr FILE_ACCESS operator |(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(
-        static_cast<file_underlying_type_t>(a) |
-        static_cast<file_underlying_type_t>(b)
-        );
+    return static_cast<FILE_ACCESS>(static_cast<fud_t>(a) | static_cast<fud_t>(b));
 }
 constexpr FILE_ACCESS operator &(FILE_ACCESS a, FILE_ACCESS b) {
-    return static_cast<FILE_ACCESS>(
-        static_cast<file_underlying_type_t>(a) &
-        static_cast<file_underlying_type_t>(b)
-        );
+    return static_cast<FILE_ACCESS>(static_cast<fud_t>(a) & static_cast<fud_t>(b));
 }
 
 
-enum class FILE_SHARED : file_underlying_type_t {
+enum class FILE_SHARED : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARE_READ = FILE_SHARE_READ,
     SHARE_WRITE = FILE_SHARE_WRITE,
@@ -82,19 +76,19 @@ enum class FILE_SHARED : file_underlying_type_t {
 
 constexpr FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
     return static_cast<FILE_SHARED>(
-        static_cast<file_underlying_type_t>(a) |
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) |
+        static_cast<fud_t>(b)
         );
 }
 constexpr FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
     return static_cast<FILE_SHARED>(
-        static_cast<file_underlying_type_t>(a) &
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) &
+        static_cast<fud_t>(b)
         );
 }
 
 
-enum class FILE_CREATION : file_underlying_type_t {
+enum class FILE_CREATION : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     CREATE_FORCE = CREATE_ALWAYS,
     CREATE_NO_EXIST = CREATE_NEW,
@@ -112,19 +106,19 @@ enum class FILE_CREATION : file_underlying_type_t {
 
 constexpr FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
     return static_cast<FILE_CREATION>(
-        static_cast<file_underlying_type_t>(a) |
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) |
+        static_cast<fud_t>(b)
         );
 }
 constexpr FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
     return static_cast<FILE_CREATION>(
-        static_cast<file_underlying_type_t>(a) &
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) &
+        static_cast<fud_t>(b)
         );
 }
 
 
-enum class FILE_ATTRI : file_underlying_type_t {
+enum class FILE_ATTRI : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     NORMAL = FILE_ATTRIBUTE_NORMAL,
     READONLY = FILE_ATTRIBUTE_READONLY,
@@ -152,19 +146,19 @@ enum class FILE_ATTRI : file_underlying_type_t {
 
 constexpr FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
     return static_cast<FILE_ATTRI>(
-        static_cast<file_underlying_type_t>(a) |
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) |
+        static_cast<fud_t>(b)
         );
 }
 constexpr FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
     return static_cast<FILE_ATTRI>(
-        static_cast<file_underlying_type_t>(a) &
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) &
+        static_cast<fud_t>(b)
         );
 }
 
 
-enum class FILE_POINTER : file_underlying_type_t {
+enum class FILE_POINTER : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     BEGIN = FILE_BEGIN,
     CURRENT = FILE_CURRENT,
@@ -176,7 +170,7 @@ enum class FILE_POINTER : file_underlying_type_t {
 #endif
 };
 
-enum class FILE_LOCK : file_underlying_type_t {
+enum class FILE_LOCK : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARED = 0,
     EXCLUSIVE = LOCKFILE_EXCLUSIVE_LOCK,
@@ -190,14 +184,14 @@ enum class FILE_LOCK : file_underlying_type_t {
 
 constexpr FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
     return static_cast<FILE_LOCK>(
-        static_cast<file_underlying_type_t>(a) |
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) |
+        static_cast<fud_t>(b)
         );
 }
 constexpr FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
     return static_cast<FILE_LOCK>(
-        static_cast<file_underlying_type_t>(a) &
-        static_cast<file_underlying_type_t>(b)
+        static_cast<fud_t>(a) &
+        static_cast<fud_t>(b)
         );
 }
 

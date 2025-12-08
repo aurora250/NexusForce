@@ -165,11 +165,11 @@ public: \
         return _INNER __int_to_string_dispatch(value_); \
     } \
     \
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) { \
+    MSTL_NODISCARD static constexpr self parse(const string_view str) { \
         return self{_MSTL to_## SIGN## int## BYTE (str)}; \
     } \
     \
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept { \
+    constexpr bool try_parse(const string_view str) noexcept { \
         try { \
             *this = self::parse(str); \
             return true; \
@@ -385,11 +385,11 @@ public:
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+    MSTL_NODISCARD static constexpr self parse(const string_view str) {
         return self{_MSTL to_float32(str)};
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         try {
             *this = self::parse(str);
             return true;
@@ -534,11 +534,11 @@ public:
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+    MSTL_NODISCARD static constexpr self parse(const string_view str) {
         return self{_MSTL to_float64(str)};
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         try {
             *this = self::parse(str);
             return true;
@@ -683,11 +683,11 @@ public:
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+    MSTL_NODISCARD static constexpr self parse(const string_view str) {
         return self{_MSTL to_decimal(str)};
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         try {
             *this = self::parse(str);
             return true;

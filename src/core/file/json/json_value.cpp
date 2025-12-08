@@ -92,14 +92,7 @@ string json_value_to_indent_string(const json_value* value, const int indent) {
         }
         case json_value::Number: {
             const json_number* num_val = value->as_number();
-            const double val = num_val->get_value();
-
-            if (val == static_cast<double>(static_cast<long long>(val)) &&
-                val >= static_cast<double>(numeric_limits<int64_t>::min()) &&
-                val <= static_cast<double>(numeric_limits<int64_t>::max())) {
-                return to_string(static_cast<long long>(val));
-            }
-            string result = _MSTL to_string(val);
+            string result = float64::to_string(num_val->get_value());
             if (result.find('.') != string::npos) {
                 while (!result.empty() && result.back() == '0') {
                     result.pop_back();
@@ -112,7 +105,7 @@ string json_value_to_indent_string(const json_value* value, const int indent) {
         }
         case json_value::String: {
             const json_string* str_val = value->as_string();
-            return "\"" + _MSTL escape(str_val->get_value()) + "\"";
+            return "\"" + str_val->get_value() + "\"";
         }
         case json_value::Array: {
             const json_array* arr_val = value->as_array();

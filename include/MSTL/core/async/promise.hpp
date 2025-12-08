@@ -230,7 +230,7 @@ struct __future_base::task_setter {
     PtrT* result_ptr;
     Func* function_ptr;
 
-    PtrT operator()() const {
+    PtrT operator ()() const {
         try {
             (*result_ptr)->set((*function_ptr)());
         } catch(...) {
@@ -287,14 +287,16 @@ private:
         auto bound_func = [&]() -> Res {
             return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
-        this->set_result(create_task_setter(this->result_storage, bound_func));
+        state_base::set_result(
+            __future_base::create_task_setter(this->result_storage, bound_func));
     }
 
     void run_delayed(Args&&... args, weak_ptr<state_base> self) override {
         auto bound_function = [&]() -> Res {
             return _MSTL invoke_r<Res>(impl.function_ptr, _MSTL forward<Args>(args)...);
         };
-        this->set_delayed_result(create_task_setter(this->result_storage, bound_function), _MSTL move(self));
+        state_base::set_delayed_result(
+            __future_base::create_task_setter(this->result_storage, bound_function), _MSTL move(self));
     }
 
     shared_ptr<task_state_base<Res(Args...)>>

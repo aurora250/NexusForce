@@ -103,6 +103,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp

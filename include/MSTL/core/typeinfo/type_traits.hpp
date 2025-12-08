@@ -2172,6 +2172,14 @@ template <typename F, typename... Args>
 MSTL_INLINE17 constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<F, Args...>::value;
 
 
+template <typename F, typename... Args>
+MSTL_INLINE17 constexpr bool is_predicate_v = is_invocable_v<F, Args...> &&
+    is_convertible_v<invoke_result_t<F, Args...>, bool>;
+
+template <typename F, typename... Args>
+struct is_predicate : bool_constant<is_predicate_v<F, Args...>> {};
+
+
 #ifdef MSTL_COMPILER_MSVC__
 // layout compatible types have the same layout in memory.
 // that is, their member variables are arranged in the same order and alignment.
@@ -2298,6 +2306,18 @@ concept is_pair_v = requires(T p) {
     p.second;
 };
 #endif // MSTL_STANDARD_20__
+
+
+template <typename, typename = void>
+struct is_allocator : false_type {};
+
+template <typename Alloc>
+struct is_allocator<Alloc, void_t<
+    typename Alloc::value_type, decltype(declval<Alloc&>().allocate(size_t{}))>>
+    : true_type {};
+
+template <typename Alloc>
+MSTL_INLINE17 constexpr bool is_allocator_v = is_allocator<Alloc>::value;
 
 
 // have to compile perform NRVO(Named Return Value Optimization) instead of moving it.

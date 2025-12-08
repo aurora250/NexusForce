@@ -1,0 +1,52 @@
+{
+  "null_value": null,
+  "booleans": {
+    "true": true,
+    "false": false
+  },
+  "numbers": {
+    "zero": 0,
+    "positive_int": 123456789,
+    "negative_int": -987654321,
+    "positive_float": 123.456,
+    "negative_float": -789.012,
+    "scientific_notation": 1e10,
+    "scientific_negative": -2E-5,
+    "fractional_zero": 0.0,
+    "integer_with_fraction": 42.0,
+    "exponent_with_plus": 1e+3,
+    "exponent_with_minus": 1e-3
+  },
+  "strings": {
+    "empty": "",
+    "ascii": "Hello, world!",
+    "unicode_basic": "café naïve résumé",
+    "unicode_escapes": "\u0041\u00E9\u20AC\ud83d\ude00",
+    "escaped_chars": "\" \\ \/ \b \f \n \r \t",
+    "control_char_escapes": "\u0000\u001F",
+    "backslash_escape": "This has a backslash: \\",
+    "quote_escape": "He said: \"Hello!\""
+  },
+  "structures": {
+    "empty_object": {},
+    "empty_array": [],
+    "nested": {
+      "array_of_objects": [
+        {"id": 1, "name": "Alice"},
+        {"id": 2, "name": "Bob"}
+      ],
+      "object_in_array": [
+        {"config": {"debug": true, "port": 8080}},
+        [1, [2, [3]]]
+      ]
+    }
+  },
+  "edge_cases": {
+    "number_edge_1": 0.123456789,
+    "number_edge_2": -0,
+    "number_edge_3": 123e45,
+    "string_with_slash": "http://example.com/path?query=value",
+    "key_with_spaces": "valid key name",
+    "key_with_unicode": "résumé_field"
+  }
+}

@@ -52,42 +52,6 @@ public:
     bool has(const string& long_name) const;
     size_t count(const string& long_name) const;
 
-    template <typename T>
-    T get(const string& long_name) const {
-        const auto it = options_long_.find(long_name);
-        if (it == options_long_.end()) {
-            throw_exception(cmdline_exception("Option not found: " + long_name));
-        }
-
-        const option* opt = it->second;
-
-        if (opt->values.empty()) {
-            if (opt->default_value.empty()) {
-                throw_exception(cmdline_exception("Option not set and no default value: " + long_name));
-            }
-            return convert_value<T>(opt->default_value);
-        }
-
-        return convert_value<T>(opt->values.back());
-    }
-
-    template <typename T>
-    _MSTL vector<T> get_list(const string& long_name) const {
-        const auto it = options_long_.find(long_name);
-        if (it == options_long_.end()) {
-            throw_exception(cmdline_exception("Option not found: " + long_name));
-        }
-
-        const option* opt = it->second;
-        _MSTL vector<T> result;
-
-        for (const auto& val : opt->values) {
-            result.push_back(convert_value<T>(val));
-        }
-
-        return result;
-    }
-
     const _MSTL vector<string>& positional_args() const { return positional_; }
     string program_name() const { return program_name_; }
 
@@ -107,20 +71,6 @@ private:
 
     void parse_long_option(const string& arg, const _MSTL vector<string>& args, size_t& i);
     void parse_short_options(const string& arg, const _MSTL vector<string>& args, size_t& i);
-
-    template <typename T, typename = enable_if_t<is_packaged_v<T>>>
-    T convert_value(const string_view str) const {
-        return static_cast<T>(package_t<T>::parse(str));
-    }
-
-    template <>
-    string convert_value<string, void>(const string_view str) const {
-        return str;
-    }
-    template <>
-    string_view convert_value<string_view, void>(const string_view str) const {
-        return str;
-    }
 };
 
 MSTL_END_NAMESPACE__

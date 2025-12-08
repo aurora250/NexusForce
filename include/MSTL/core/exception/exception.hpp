@@ -20,7 +20,7 @@ MSTL_BEGIN_NAMESPACE__
 	static constexpr auto __type__ = #CLASS;
 
 #define __MSTL_ERROR_WHAT() \
-	const char* what() const { \
+	virtual const char* what() const { \
 		return info; \
 	}
 
@@ -78,7 +78,12 @@ struct CUDAMemoryError final : MemoryError {
 };
 #endif
 
+
+#ifdef MSTL_STATE_DEBUG__
 void MSTL_API throw_exception(const exception& err);
+#else
+MSTL_ALWAYS_INLINE_INLINE void throw_exception(const exception& err) { throw err; }
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONFIG_EXCEPTION_HPP__

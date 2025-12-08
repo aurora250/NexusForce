@@ -68,7 +68,9 @@ public:
     MSTL_NODISCARD constexpr date_type day() const noexcept { return day_; }
 
     static constexpr bool is_valid(date_type y, date_type m, date_type d) noexcept {
-        return y >= 0 && m > 0 && m <= 12 && d > 0 && d <= days_of_month(y, m);
+        if (y < 1900 || y > 9999) return false;
+        if (m < 1 || m > 12) return false;
+        return d > 0 && d <= days_of_month(y, m);
     }
 
 
@@ -191,7 +193,7 @@ public:
         return _MSTL format("{:04d}-{:02d}-{:02d}", year(), month(), day());
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 static self parse(const string_view str) {
+    MSTL_NODISCARD constexpr static self parse(const string_view str) {
         if (str.size() != 10 || str[4] != '-' || str[7] != '-') {
             throw_exception(value_exception("Wrong string formation."));
         }
@@ -201,7 +203,7 @@ public:
         return date(year, month, day);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);
@@ -233,7 +235,7 @@ private:
 public:
     constexpr explicit time(const time_type h = 0,
         const time_type m = 0, const time_type s = 0) noexcept {
-        if (h >= 0 && h < 24 && m >= 0 && m < 60 && s >= 0 && s < 60) {
+        if (is_valid(h, m, s)) {
             hours_ = h;
             minutes_ = m;
             seconds_ = s;
@@ -265,6 +267,10 @@ public:
     MSTL_NODISCARD constexpr time_type hours() const noexcept { return hours_; }
     MSTL_NODISCARD constexpr time_type minutes() const noexcept { return minutes_; }
     MSTL_NODISCARD constexpr time_type seconds() const noexcept { return seconds_; }
+
+    static constexpr bool is_valid(time_type h, time_type m, time_type s) noexcept {
+        return h >= 0 && h < 24 && m >= 0 && m < 60 && s >= 0 && s < 60;
+    }
 
     constexpr void clear() noexcept {
         hours_ = 0;
@@ -363,7 +369,7 @@ public:
         return _MSTL format("{:02d}:{:02d}:{:02d}", hours(), minutes(), seconds());
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 time parse(const string_view str) {
+    MSTL_NODISCARD static constexpr time parse(const string_view str) {
         if (str.size() != 8 || str[2] != ':' || str[5] != ':') {
             throw_exception(value_exception("Wrong string formation."));
         }
@@ -373,7 +379,7 @@ public:
         return time(h, m, s);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);
@@ -419,56 +425,98 @@ public:
 private:
     date date_{};
     time time_{};
+    int32_t offset_seconds_ = 0;
+    bool has_timezone_ = false;
 
 public:
     constexpr datetime() noexcept = default;
 
-    constexpr datetime(const datetime& dt) noexcept : date_(dt.date_), time_(dt.time_) {}
+    constexpr datetime(const datetime& dt) noexcept
+    : date_(dt.date_), time_(dt.time_),
+    offset_seconds_(dt.offset_seconds_), has_timezone_(dt.has_timezone_) {}
+
     constexpr datetime& operator =(const datetime& dt) noexcept {
         date_ = dt.date_;
         time_ = dt.time_;
-        return *this;
-    }
-    constexpr datetime& operator =(const date& dt) noexcept {
-        date_ = dt;
+        offset_seconds_ = dt.offset_seconds_;
+        has_timezone_ = dt.has_timezone_;
         return *this;
     }
 
-    constexpr datetime(datetime&& dt) noexcept : date_(_MSTL move(dt.date_)), time_(_MSTL move(dt.time_)) {}
+    constexpr datetime(datetime&& dt) noexcept
+    : date_(dt.date_), time_(dt.time_), offset_seconds_(dt.offset_seconds_),
+    has_timezone_(dt.has_timezone_) {
+        dt.clear();
+    }
+
     constexpr datetime& operator =(datetime&& dt) noexcept {
-        date_ = _MSTL move(dt.date_);
-        time_ = _MSTL move(dt.time_);
+        date_ = dt.date_;
+        time_ = dt.time_;
+        offset_seconds_ = dt.offset_seconds_;
+        has_timezone_ = dt.has_timezone_;
+        dt.clear();
         return *this;
     }
+
+    constexpr explicit datetime(const date_type year, const date_type month, const date_type day,
+        const time_type hour, const time_type minute, const time_type second) noexcept
+    : date_(year, month, day), time_(hour, minute, second) {}
+
+    constexpr explicit datetime(const date_type year, const date_type month, const date_type day,
+        const time_type hour, const time_type minute, const time_type second, const int32_t offset) noexcept
+    : date_(year, month, day), time_(hour, minute, second), offset_seconds_(offset), has_timezone_(true) {}
 
     constexpr explicit datetime(const date& d, const time& t) noexcept
-        : date_(d), time_(t) {}
+    : date_(d), time_(t) {}
+
+    constexpr explicit datetime(const date& d, const time& t, const int32_t offset) noexcept
+    : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {}
 
     constexpr explicit datetime(date&& d, time&& t) noexcept
-        : date_(_MSTL move(d)), time_(_MSTL move(t)) {}
+    : date_(d), time_(t) {
+        d.clear();
+        t.clear();
+    }
 
+    constexpr explicit datetime(date&& d, time&& t, const int32_t offset) noexcept
+    : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {
+        d.clear();
+        t.clear();
+    }
 
     constexpr explicit datetime(const date& d) noexcept : date_(d) {}
 
-    constexpr explicit datetime(
-        const date& d, const time_type hour, const time_type minute, const time_type second) noexcept
-        : date_(d), time_(hour, minute, second) {}
+    constexpr datetime& operator =(const date& d) noexcept {
+        date_ = d;
+        return *this;
+    }
 
-    constexpr explicit datetime(date&& d) noexcept : date_(_MSTL move(d)) {}
+    constexpr explicit datetime(date&& d) noexcept : date_(d) {
+        d.clear();
+    }
 
-    constexpr explicit datetime(
-        date&& d, const time_type hour, const time_type minute, const time_type second) noexcept
-        : date_(_MSTL move(d)), time_(hour, minute, second) {}
+    constexpr datetime& operator =(date&& d) noexcept {
+        date_ = d;
+        d.clear();
+        return *this;
+    }
 
-    constexpr explicit datetime(
-        const date_type year, const date_type month, const date_type day) noexcept
-        : date_(year, month, day) {}
+    constexpr explicit datetime(const time& t) noexcept : time_(t) {}
 
-    constexpr explicit datetime(
-        const date_type year, const date_type month, const date_type day,
-        const time_type hour, const time_type minute, const time_type second) noexcept
-        : date_(year, month, day), time_(hour, minute, second) {}
+    constexpr datetime& operator =(const time& t) noexcept {
+        time_ = t;
+        return *this;
+    }
 
+    constexpr explicit datetime(time&& t) noexcept : time_(t) {
+        t.clear();
+    }
+
+    constexpr datetime& operator =(time&& t) noexcept {
+        time_ = t;
+        t.clear();
+        return *this;
+    }
 
     MSTL_CONSTEXPR20 ~datetime() = default;
 
@@ -483,12 +531,17 @@ public:
     MSTL_NODISCARD constexpr date_type month() const noexcept { return date_.month(); }
     MSTL_NODISCARD constexpr date_type day() const noexcept { return date_.day(); }
 
+    MSTL_NODISCARD constexpr bool has_timezone() const noexcept { return has_timezone_; }
+    MSTL_NODISCARD constexpr int32_t offset_seconds() const noexcept { return offset_seconds_; }
+
     MSTL_NODISCARD static constexpr datetime epoch() noexcept { return datetime{}; }
     MSTL_NODISCARD static datetime now() noexcept;
 
     constexpr void clear() noexcept {
         date_.clear();
         time_.clear();
+        offset_seconds_ = 0;
+        has_timezone_ = false;
     }
 
 
@@ -587,32 +640,184 @@ public:
     }
 
 
-    MSTL_NODISCARD static datetime from_UTC(const datetime& utc_dt) noexcept;
-    MSTL_NODISCARD static datetime to_UTC(const datetime& local_dt) noexcept;
-
-    MSTL_NODISCARD static datetime parse_RFC1123(string_view str);
-
-    MSTL_NODISCARD string to_string_GMT() const noexcept;
-
-    MSTL_NODISCARD string to_string_ISO_UTC() const {
-        const datetime utc_dt = datetime::to_UTC(*this);
-        return utc_dt.dates().to_string() + "T" + utc_dt.times().to_string() + "Z";
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_offset_string() const {
+        if (!has_timezone_) return {};
+        if (offset_seconds_ == 0) return "Z";
+        int total_sec = offset_seconds_;
+        const char sign = total_sec >= 0 ? '+' : '-';
+        total_sec = total_sec >= 0 ? total_sec : -total_sec;
+        const int hours = total_sec / 3600;
+        const int minutes = (total_sec % 3600) / 60;
+        return _MSTL format("{}{:02d}:{:02d}", sign, hours, minutes);
     }
+
+
+    static constexpr datetime from_UTC(const datetime& utc_dt, const int32_t offset_sec = 0) noexcept {
+        datetime utc_time = utc_dt;
+        if (utc_dt.has_timezone_ && utc_dt.offset_seconds_ != 0) {
+            utc_time = utc_dt.to_UTC();
+        }
+        datetime local = utc_time + offset_sec;
+        local.offset_seconds_ = offset_sec;
+        local.has_timezone_ = true;
+        return local;
+    }
+
+    MSTL_NODISCARD constexpr datetime to_UTC() const noexcept {
+        if (!has_timezone_) {
+            return *this;
+        }
+        datetime utc = *this;
+        utc -= offset_seconds_;
+        utc.offset_seconds_ = 0;
+        utc.has_timezone_ = true;
+        return utc;
+    }
+
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_ISO_UTC() const {
+        if (has_timezone_) {
+            return date_.to_string() + "T" + time_.to_string() + to_offset_string();
+        } else {
+            return date_.to_string() + "T" + time_.to_string();
+        }
+    }
+
+    MSTL_NODISCARD static constexpr datetime parse_ISO_UTC(string_view str) {
+        if (str.size() < 20 || str[10] != 'T') {
+            throw_exception(value_exception("Invalid ISO UTC datetime format."));
+        }
+
+        const date d = date::parse(str.substr(0, 10));
+        const time t = time::parse(str.substr(11, 8));
+
+        if (str.size() > 19 && str[19] == 'Z') {
+            return datetime(d, t, 0);
+        } else if (str.size() > 19 && (str[19] == '+' || str[19] == '-')) {
+            const char sign = str[19];
+            int hours = 0, minutes = 0;
+            size_t pos = 20;
+            if (str.size() >= pos + 2) {
+                hours = integer32::parse(str.substr(pos, 2));
+                pos += 2;
+                if (str.size() >= pos + 3 && str[pos] == ':') {
+                    pos++;
+                    if (str.size() >= pos + 2) {
+                        minutes = integer32::parse(str.substr(pos, 2));
+                    }
+                }
+            }
+
+            int32_t total_offset = hours * 3600 + minutes * 60;
+            if (sign == '-') total_offset = -total_offset;
+            return datetime(d, t, total_offset);
+        }
+        return datetime(d, t);
+    }
+
+    constexpr bool try_parse_ISO_UTC(string_view str) noexcept {
+        try {
+            self tmp = self::parse_ISO_UTC(str);
+            this->swap(tmp);
+        } catch (...) {
+            return false;
+        }
+        return true;
+    }
+
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_GMT() const noexcept {
+        const _MSTL date utc_date = dates();
+        const _MSTL time utc_time = times();
+
+        int wday = utc_date.days_of_week();
+        if (wday < 0 || wday >= 7) wday = 0;
+
+        int mon_idx = utc_date.month() - 1;
+        if (mon_idx < 0 || mon_idx >= 12) mon_idx = 0;
+
+        return _MSTL format("{}, {:02d} {} {} {} GMT",
+            _CONSTANTS WEEKDAYS_STRING[wday],
+            utc_date.day(),
+            _CONSTANTS MONTHS_STRING[mon_idx],
+            utc_date.year(),
+            utc_time.to_string()
+        );
+    }
+
+    MSTL_NODISCARD static constexpr datetime parse_GMT(string_view str) {
+        if (str.size() < 29) {
+            throw_exception(value_exception("Invalid date length."));
+        }
+        if (str.substr(3, 2) != ", ") {
+            throw_exception(value_exception("Invalid date format"));
+        }
+
+        str.remove_prefix(5);
+        const int day = integer32::parse(str.substr(0, 2));
+        str.remove_prefix(3);
+        const int mon = months_to_int(str.substr(0, 3));
+        if (mon == 0) throw_exception(value_exception("Invalid month in date"));
+        str.remove_prefix(4);
+        const int year = integer32::parse(str.substr(0, 4));
+        str.remove_prefix(5);
+        const int hour = integer32::parse(str.substr(0, 2));
+        str.remove_prefix(3);
+        const int minute = integer32::parse(str.substr(0, 2));
+        str.remove_prefix(3);
+        const int second = integer32::parse(str.substr(0, 2));
+        str.remove_prefix(3);
+
+        if (str != "GMT") {
+            throw_exception(value_exception("Invalid timezone in date"));
+        }
+        return datetime(year, mon, day, hour, minute, second);
+    }
+
+    constexpr bool try_parse_GMT(const string_view str) noexcept {
+        try {
+            self tmp = self::parse_GMT(str);
+            this->swap(tmp);
+        } catch (...) {
+            return false;
+        }
+        return true;
+    }
+
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_ISO() const {
         return date_.to_string() + "T" + time_.to_string();
     }
 
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return date_.to_hash() ^ time_.to_hash();
+    MSTL_NODISCARD static constexpr datetime parse_ISO(const string_view str) {
+        if (str.size() < 19 || str[10] != 'T') {
+            throw_exception(value_exception("Invalid ISO datetime format."));
+        }
+        const date d = date::parse(str.substr(0, 10));
+        size_t time_len = 8;
+        if (str.size() >= 19) {
+            time_len = 8;
+        }
+        const time t = time::parse(str.substr(11, time_len));
+        return datetime(d, t);
     }
+
+    constexpr bool try_parse_ISO(const string_view str) noexcept {
+        try {
+            self tmp = self::parse_ISO(str);
+            this->swap(tmp);
+        } catch (...) {
+            return false;
+        }
+        return true;
+    }
+
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return date_.to_string() + " " + time_.to_string();
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 datetime parse(const string_view str) {
+    MSTL_NODISCARD static constexpr datetime parse(const string_view str) {
         if (str.size() != 19 || str[10] != ' ') {
             throw_exception(value_exception("Wrong string formation."));
         }
@@ -621,20 +826,27 @@ public:
         return datetime(d, t);
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
-        self tmp;
+    constexpr bool try_parse(const string_view str) noexcept {
         try {
-            tmp = self::parse(str);
+            self tmp = self::parse(str);
+            this->swap(tmp);
         } catch (...) {
             return false;
         }
-        *this = _MSTL move(tmp);
         return true;
+    }
+
+
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+        return date_.to_hash() ^ time_.to_hash() ^
+            hash<bool>()(has_timezone_) ^ hash<int32_t>()(offset_seconds_);
     }
 
     constexpr void swap(datetime& other) noexcept {
         _MSTL swap(date_, other.date_);
         _MSTL swap(time_, other.time_);
+        _MSTL swap(offset_seconds_, other.offset_seconds_);
+        _MSTL swap(has_timezone_, other.has_timezone_);
     }
 };
 
@@ -693,11 +905,11 @@ public:
         return integer64(sec_since_epoch_).to_string();
     }
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+    MSTL_NODISCARD static constexpr self parse(const string_view str) {
         return self{integer64::parse(str)};
     }
 
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+    constexpr bool try_parse(const string_view str) noexcept {
         self tmp;
         try {
             tmp = self::parse(str);

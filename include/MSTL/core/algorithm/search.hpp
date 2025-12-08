@@ -59,24 +59,21 @@ constexpr iter_difference_t<Iterator> count(Iterator first, Iterator last, const
 	return _MSTL count_if(first, last, value, _MSTL equal_to<iter_value_t<Iterator>>());
 }
 
-template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator find_if(Iterator first, Iterator last, const T& value) {
+template <typename Iterator, typename T>
+MSTL_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T& value) {
 	while (first != last && *first != value) ++first;
 	return first;
 }
 
-template <typename Iterator, typename T>
-MSTL_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T& value) {
-	return _MSTL find_if(first, last, value);
-}
-
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate,
+	enable_if_t<is_ranges_input_iter_v<Iterator> && is_predicate_v<Predicate>, int> = 0>
 constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred) {
 	while (first != last && !pred(*first)) ++first;
 	return first;
 }
 
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate,
+	enable_if_t<is_ranges_input_iter_v<Iterator> && is_predicate_v<Predicate>, int> = 0>
 constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred) {
 	while (first != last && pred(*first)) ++first;
 	return first;

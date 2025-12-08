@@ -7,13 +7,13 @@
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__
 
-void throw_exception(const exception& err) {
 #ifdef MSTL_STATE_DEBUG__
-    printcln(color::red(), "\nException : (", err.type, ") ", err.info);
+void throw_exception(const exception& err) {
+    printcln(color::red(), "\nException : (", err.type, ") ", err.what());
     printcln(color::red(), stacktrace());
-#endif
     throw err;
 }
+#endif
 
 
 static atomic<terminate_handler>& get_terminate_handler() noexcept {

@@ -58,7 +58,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
 
 template <typename T, enable_if_t<is_base_of_v<_MSTL exception, T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& obj) {
-    return string(obj.type) + "(" + obj.info + ")";
+    return string(obj.type) + "(" + obj.what() + ")";
 }
 
 
@@ -191,7 +191,6 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
         rnext = _INNER __uint_to_buff(rnext, unsigned_x);
     }
     const size_t count = buffer_end - rnext;
-    _MSTL memory_zero(buffer, count);
     return basic_string<CharT>(rnext, count);
 }
 
@@ -201,7 +200,6 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     CharT* const buffer_end = buffer + 21;
     CharT* const rnext = _INNER __uint_to_buff(buffer_end, x);
     const size_t count = buffer_end - rnext;
-    _MSTL memory_zero(buffer, count);
     return basic_string<CharT>(rnext, count);
 }
 

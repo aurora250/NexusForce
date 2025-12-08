@@ -92,8 +92,9 @@ public:
     MSTL_CONSTEXPR20 void reset(pointer ptr) noexcept {
 	    const pointer old = get_ptr();
 	    get_ptr() = ptr;
-	    if (old)
+	    if (old) {
 	        get_deleter()(old);
+	    }
     }
 
     MSTL_CONSTEXPR20 pointer release() noexcept {

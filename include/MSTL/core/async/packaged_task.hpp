@@ -95,7 +95,7 @@ private:
     BoundFunc function;
 
     void complete_async() override {
-        set_result(create_task_setter(result_storage, function), true);
+        state_base::set_result(create_task_setter(result_storage, function), true);
     }
     bool is_deferred_future() const override { return true; }
 
@@ -130,11 +130,11 @@ private:
 
     void run() {
         try {
-            this->set_result(create_task_setter(result_storage, function));
+            state_base::set_result(__future_base::create_task_setter(result_storage, function));
         }
         catch (...) {
             if (static_cast<bool>(result_storage))
-                this->break_promise(_MSTL move(result_storage));
+                state_base::break_promise(_MSTL move(result_storage));
             throw;
         }
     }

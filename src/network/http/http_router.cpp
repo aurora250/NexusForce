@@ -123,7 +123,8 @@ http_response http_router::handle_request(http_request& request) {
         (*handler)(request, response);
     } else {
         bool path_exists = false;
-        for (const auto& [method, paths] : routes_) {
+        for (const auto& elm : routes_) {
+            const auto& paths = elm.second;
             if (paths.find(request.path()) != paths.end()) {
                 path_exists = true;
                 break;

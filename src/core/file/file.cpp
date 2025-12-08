@@ -309,16 +309,16 @@ bool file::open(path p, const bool append,
 #ifdef MSTL_PLATFORM_WINDOWS__
     handle_ = ::CreateFileA(
         p.c_str(),
-        static_cast<file_underlying_type_t>(access),
-        static_cast<file_underlying_type_t>(share_mode),
+        static_cast<fud_t>(access),
+        static_cast<fud_t>(share_mode),
         nullptr,
-        static_cast<file_underlying_type_t>(creation),
-        static_cast<file_underlying_type_t>(attributes),
+        static_cast<fud_t>(creation),
+        static_cast<fud_t>(attributes),
         nullptr
     );
 #elif defined(MSTL_PLATFORM_LINUX__)
-    int flags = static_cast<int>(access);
-    flags |= static_cast<int>(creation);
+    fud_t flags = static_cast<fud_t>(access);
+    flags |= static_cast<fud_t>(creation);
     if (append) flags |= O_APPEND;
 
     const ::mode_t mode = convert_attributes(attributes);
@@ -1180,13 +1180,11 @@ bool file::seek(const difference_type distance, FILE_POINTER method) const noexc
     read_buffer_size_ = 0;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::LARGE_INTEGER li;
+    ::LARGE_INTEGER li{};
     li.QuadPart = distance;
-    return ::SetFilePointerEx(handle_, li, nullptr,
-        static_cast<file_underlying_type_t>(method)) != 0;
+    return ::SetFilePointerEx(handle_, li, nullptr, static_cast<fud_t>(method)) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ::off_t ret = ::lseek(handle_, distance,
-        static_cast<file_underlying_type_t>(method));
+    const ::off_t ret = ::lseek(handle_, distance, static_cast<fud_t>(method));
     return ret != static_cast<off_t>(-1);
 #endif
 }
@@ -1243,7 +1241,7 @@ bool file::lock(const difference_type offset,
     ov.OffsetHigh = static_cast<size_type>(offset_64 >> 32);
 
     const uint64_t length_64 = length;
-    return ::LockFileEx(handle_, static_cast<file_underlying_type_t>(mode), 0,
+    return ::LockFileEx(handle_, static_cast<fud_t>(mode), 0,
         length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
@@ -1256,7 +1254,7 @@ bool file::lock(const difference_type offset,
     fl.l_start = offset;
     fl.l_len = length;
 
-    const int cmd = static_cast<int>(mode) & LOCK_NB ? F_SETLK : F_SETLKW;
+    const fud_t cmd = static_cast<fud_t>(mode) & LOCK_NB ? F_SETLK : F_SETLKW;
     return ::fcntl(handle_, cmd, &fl) != -1;
 #endif
 }
@@ -1282,7 +1280,8 @@ bool file::unlock(const difference_type offset, const difference_type length) co
 #endif
 }
 
-bool file::map(size_type offset, size_type size, FILE_ACCESS access, FILE_MAP_HINT hint) {
+bool file::map(size_type offset, size_type size,
+    const FILE_ACCESS access, const FILE_MAP_HINT hint) {
     if (mapped_ptr_) unmap();
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
@@ -1406,8 +1405,7 @@ bool file::set_attributes(FILE_ATTRI attr) const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetFileAttributesA(path_.c_str(),
-        static_cast<file_underlying_type_t>(attr)) != 0;
+    return ::SetFileAttributesA(path_.c_str(), static_cast<fud_t>(attr)) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st_old{};
     if (::fstat64(handle_, &st_old) == -1) return false;
@@ -1520,7 +1518,7 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
     if (!::GetFileTime(handle_, &ft_create, &ft_access, nullptr)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    return set_all_times(last_access_time(), datetime::to_UTC(dt));
+    return set_all_times(last_access_time(), dt.to_UTC());
 #endif
 }
 

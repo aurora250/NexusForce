@@ -11,7 +11,7 @@
 #include "at_thread_exit.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(FutureError, exception, "Future Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(future_exception, exception, "Future Operation Failed.")
 
 
 template <typename Res>
@@ -261,7 +261,7 @@ struct __future_base {
             if (did_set) {
                 status.store_notify_all(status::ready, memory_order_release);
             } else if (!ignore_failure) {
-                throw_exception(FutureError(future_errc_to_string(future_errc::promise_already_satisfied)));
+                throw_exception(future_exception(future_errc_to_string(future_errc::promise_already_satisfied)));
             }
         }
 
@@ -273,7 +273,7 @@ struct __future_base {
             call_once(flag, &state_base::do_set, this,
                 _MSTL addressof(func), _MSTL addressof(did_set));
             if (!did_set) {
-                throw_exception(FutureError(future_errc_to_string(future_errc::promise_already_satisfied)));
+                throw_exception(future_exception(future_errc_to_string(future_errc::promise_already_satisfied)));
             }
             mr->shared_state = _MSTL move(self);
             mr->set();
@@ -283,7 +283,7 @@ struct __future_base {
         void break_promise(PtrType result) {
             if (static_cast<bool>(result)) {
                 result->error_ptr = make_exception_ptr(
-                    FutureError(future_errc_to_string(future_errc::broken_promise)));
+                    future_exception(future_errc_to_string(future_errc::broken_promise)));
                 result_ptr.swap(result);
                 status.store_notify_all(status::ready, memory_order_release);
             }
@@ -291,7 +291,7 @@ struct __future_base {
 
         void set_retrieved_flag() {
             if (retrieved.test_and_set(memory_order_acquire)) {
-                throw_exception(FutureError(future_errc_to_string(future_errc::future_already_retrieved)));
+                throw_exception(future_exception(future_errc_to_string(future_errc::future_already_retrieved)));
             }
         }
 
@@ -363,7 +363,7 @@ struct __future_base {
         template <typename T>
         static void check(const shared_ptr<T>& ptr) {
             if (!static_cast<bool>(ptr)) {
-                throw_exception(FutureError(future_errc_to_string(future_errc::no_state)));
+                throw_exception(future_exception(future_errc_to_string(future_errc::no_state)));
             }
         }
 
@@ -394,6 +394,16 @@ struct __future_base {
         };
     };
 
+private:
+    template <typename Ptr>
+    struct get_result_type {
+        using type = typename Ptr::element_type::result_type;
+    };
+
+    template <typename Ptr>
+    using result_res_t = typename get_result_type<Ptr>::type;
+
+public:
     class async_state_common;
 
     template <typename BoundFunc, typename Res = decltype(_MSTL declval<BoundFunc&>()())>
@@ -408,8 +418,7 @@ struct __future_base {
     template <typename Func, typename Alloc, typename Sign>
     class task_state;
 
-    template <typename ResPtr, typename Func,
-         typename Res = typename ResPtr::element_type::result_type>
+    template <typename ResPtrT, typename Func, typename ResT = result_res_t<ResPtrT>>
     struct task_setter;
 
     template <typename ResPtr, typename BoundFunc>

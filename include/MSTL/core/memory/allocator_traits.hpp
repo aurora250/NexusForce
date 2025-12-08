@@ -225,17 +225,5 @@ struct is_move_insertable<allocator<T>> : is_move_constructible<T> {};
 template <typename Alloc>
 MSTL_INLINE17 constexpr bool is_move_insertable_v = is_move_insertable<Alloc>::value;
 
-
-template <typename, typename = void>
-struct is_allocator : false_type {};
-
-template <typename Alloc>
-struct is_allocator<Alloc, void_t<
-	typename Alloc::value_type, decltype(declval<Alloc&>().allocate(size_t{}))>>
-	: true_type {};
-
-template <typename Alloc>
-MSTL_INLINE17 constexpr bool is_allocator_v = is_allocator<Alloc>::value;
-
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_ALLOCATOR_TRAITS_HPP__

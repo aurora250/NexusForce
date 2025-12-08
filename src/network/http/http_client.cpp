@@ -185,7 +185,7 @@ cookie http_client::parse_set_cookie(
             c.set_same_site(string(attr.substr(9)));
         } else if (lower_attr.starts_with("expires=")) {
             try {
-                c.set_expires(datetime::parse_RFC1123(attr.substr(8)));
+                c.set_expires(datetime::parse_GMT(attr.substr(8)));
             } catch (...) {
                 // ignore
             }

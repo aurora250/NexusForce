@@ -160,18 +160,18 @@ MSTL_ALWAYS_INLINE_INLINE string to_string(const json_value* value) {
 MSTL_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
     return _INNER json_value_to_string(&value);
 }
+MSTL_ALWAYS_INLINE_INLINE string to_string(const json_ptr& value) {
+    return _INNER json_value_to_string(value.get());
+}
 
-MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_ptr& value) {
-    return _INNER json_value_to_indent_string(value.get() ,0);
-}
-MSTL_ALWAYS_INLINE_INLINE string to_indent_string(json_ptr&& value) {
-    return _INNER json_value_to_indent_string(value.get(), 0);
-}
 MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {
     return _INNER json_value_to_indent_string(value, 0);
 }
 MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_value& value) {
     return _INNER json_value_to_indent_string(&value, 0);
+}
+MSTL_ALWAYS_INLINE_INLINE string to_indent_string(const json_ptr& value) {
+    return _INNER json_value_to_indent_string(value.get() ,0);
 }
 
 MSTL_NODISCARD MSTL_ALWAYS_INLINE_INLINE string json_value::to_string() const {

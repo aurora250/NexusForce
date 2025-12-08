@@ -6,13 +6,13 @@
 MSTL_BEGIN_NAMESPACE__
 
 struct expected_exception final : memory_exception {
-    constexpr explicit expected_exception(
+    explicit expected_exception(
         const char *const info = "Expected Operation Failed.",
         const char *const type = __type__) noexcept : memory_exception(info, type) {
     }
 
     template <typename ErrorT>
-    constexpr explicit expected_exception(const ErrorT& err) noexcept
+    explicit expected_exception(const ErrorT& err) noexcept
     : memory_exception(err.what()) {}
     
     ~expected_exception() override = default;
@@ -883,7 +883,7 @@ public:
     }
 
 private:
-    template <typename, typename> friend class expected;
+    template <typename, typename, typename> friend class expected;
 
     template <typename U>
     constexpr void assign_value(U&& val) {
@@ -965,7 +965,7 @@ class expected<T, ErrorT, enable_if_t<is_void_v<T>>> {
     template <typename U>
     static constexpr bool same_error = is_same_v<typename U::error_type, ErrorT>;
 
-    template <typename, typename> friend class expected;
+    template <typename, typename, typename> friend class expected;
 
 private:
     union {

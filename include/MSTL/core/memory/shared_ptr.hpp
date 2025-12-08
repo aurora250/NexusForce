@@ -170,7 +170,7 @@ class weak_ptr;
 template <typename T>
 class shared_ptr {
 public:
-    using element_type  = T;
+    using element_type = T;
 
 private:
     element_type* ptr_ = nullptr;
@@ -609,9 +609,8 @@ shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
 template <typename T>
 struct hash<shared_ptr<T>> {
     MSTL_CONSTEXPR20 size_t operator ()(const shared_ptr<T>& ptr) const
-    noexcept(noexcept(_MSTL declval<_MSTL hash<
-        typename shared_ptr<T>::pointer>>()(_MSTL declval<typename shared_ptr<T>::pointer>()))) {
-        return hash<T>()(ptr.get());
+    noexcept(noexcept(_MSTL declval<_MSTL hash<T*>>()(_MSTL declval<T*>()))) {
+        return hash<T*>()(ptr.get());
     }
 };
 

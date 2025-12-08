@@ -1,0 +1,85 @@
+# TOML v1.0.0 comprehensive test example
+
+title = "TOML Example"
+
+[owner]
+name = "Tom Preston-Werner"  # Inline comment
+dob = 1979-05-27T07:32:00Z   # Date-Time with zone
+
+[database]
+enabled = true
+ports = [8000, 8001, 8002]      # Array of integers
+data = [ ["delta", "phi"], [3.14, 42] ]  # Nested array with strings and floats
+temp_targets = { cpu = 79.5, case = 72.0 }  # Inline table
+
+[servers]
+
+[servers.alpha]
+ip = "10.0.0.1"
+dc = "eqdc10"
+
+[servers.beta]
+ip = "10.0.0.2"
+dc = "eqdc10"
+enabled = false
+
+# Array of tables
+[[products]]
+name = "Hammer"
+sku = 738594937
+
+[[products]]
+name = "Nail"
+sku = 284758393
+color = "gray"
+
+[datatypes]
+# Various datatypes:
+boolean_true = true
+boolean_false = false
+
+integer_decimal = 42
+integer_hex = 0x2A
+integer_octal = 0o52
+integer_binary = 0b101010
+
+float_normal = 3.1415
+float_exp = 1e6
+float_exp_neg = -2.5E-3
+float_inf = +inf
+float_neg_inf = -inf
+float_nan = nan
+
+# Strings
+basic_string = "Hello, World!"
+literal_string = 'C:\Users\Tom\Documents'
+multiline_basic_string = """
+This is a multi-line basic string.
+It can contain "quotes" and \n escape sequences.
+"""
+multiline_literal_string = '''
+This is a multi-line literal string.
+No escaping \n sequences here.
+'''
+
+# Dates and times
+local_date = 1979-05-27
+local_time = 07:32:00
+local_datetime = 1979-05-27T07:32:00
+offset_datetime = 1979-05-27T07:32:00Z
+offset_datetime_offset = 1979-05-27T00:32:00-07:00
+
+# Dotted keys
+physical.color = "red"
+physical.shape = "round"
+plant."common.latin" = "Spearmint"  # Quoted key with dot
+
+# Empty array and empty inline table
+empty_array = []
+empty_table = {}
+
+# Whitespace test — should be ignored
+whitespace_key    =    "value"
+
+# Comment after key-value line
+key_with_comment = 123  # This is a comment

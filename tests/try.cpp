@@ -1,11 +1,17 @@
 #include "try.h"
 
-#include <MSTL/database/redis/redis_result.hpp>
-
 static const path TEST_FILE{"test_temp_file.txt"};
 static const path TEST_DIR{"test_temp_dir"};
 static const path TEST_SUB_DIR{TEST_DIR / "sub_dir"};
 static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird line";
+
+static const path res_root
+#ifdef MSTL_PLATFORM_WINDOWS__
+    {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
+#elif defined(MSTL_PLATFORM_LINUX__)
+    // {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
+    {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
+#endif
 
 void test_file_basic_operations() {
     bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
@@ -292,8 +298,8 @@ void test_timestamp() {
 
 void test_utc_conversion() {
     _MSTL datetime dt(2024, 1, 1, 0, 0, 0);
-    _MSTL datetime utc = _MSTL datetime::to_UTC(dt);
-    _MSTL datetime local = _MSTL datetime::from_UTC(utc);
+    _MSTL datetime utc = dt.to_UTC();
+    _MSTL datetime local = _MSTL datetime::from_UTC(dt);
     assert(local == dt);
 
     println("test_utc_conversion passed");
@@ -641,46 +647,30 @@ void test_ini() {
     }
 }
 
-void test_json() {
-    string json_str = R"(
-    {
-        "name": "John Doe",
-        "age": 30,
-        "isStudent": false,
-        "grades": [90.5, 85.0, 95.5],
-        "address": {
-            "street": "123 Main St",
-            "city": "Anytown"
-        },
-        "hobbies": ["reading", "gaming", null]
-    }
-    )";
+void test_toml() {
+    file fi(res_root / "test.toml");
 
     try {
-        unique_ptr<json_value> root = json_parser(move(json_str)).parse();
+        toml_parser parser(fi.read());
+        unique_ptr<toml_table> root = parser.parse();
+        printcln(color::blue(), root->to_document());
+    } catch (...) {}
+}
+
+void test_json() {
+    file fi(res_root / "test.json");
+
+    try {
+        unique_ptr<json_value> root = json_parser(fi.read()).parse();
         println(*root);
 
         if (root->is_object()) {
             const json_object* obj = root->as_object();
-            const json_value* nameVal = obj->get_member("name");
-            if (nameVal && nameVal->is_string()) {
-                println("Name: ", nameVal->as_string()->get_value());
-            }
-            const json_value* ageVal = obj->get_member("age");
-            if (ageVal && ageVal->is_number()) {
-                println("Age: ", ageVal->as_number()->get_value());
-            }
-            const json_value* gradesVal = obj->get_member("grades");
-            if (gradesVal && gradesVal->is_array()) {
-                const json_array* grades = gradesVal->as_array();
-                print("Grades: ");
-                for (size_t i = 0; i < grades->size(); ++i) {
-                    const json_value* grade = grades->get_element(i);
-                    if (grade && grade->is_number()) {
-                        print(grade->as_number()->get_value(), " ");
-                    }
-                }
-                println();
+            const json_value* number_val = obj->get_member("numbers");
+            if (number_val && number_val->is_object()) {
+                const json_object* number_obj = number_val->as_object();
+                const json_value* sn_val = number_obj->get_member("scientific_notation");
+                println("scientific_notation: ", static_cast<uint64_t>(sn_val->as_number()->get_value()));
             }
         }
 
@@ -708,19 +698,10 @@ void test_json() {
             .build();
         println(*json3);
 
-    } catch (const exception& e) {
-        println(e);
-    }
+    } catch (...) {}
 }
 
 void test_http_server() {
-    static const path res_root
-#ifdef MSTL_PLATFORM_WINDOWS__
-        {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
-#elif defined(MSTL_PLATFORM_LINUX__)
-        {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
-#endif
-
     try {
         http_server server(8080);
 
@@ -2069,6 +2050,7 @@ void test_tpool() {
     pool.submit_task(test_datetimes);
     pool.submit_task(test_json);
     pool.submit_task(test_ini);
+    pool.submit_task(test_toml);
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);

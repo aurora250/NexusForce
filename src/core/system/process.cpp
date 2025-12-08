@@ -11,7 +11,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-string process_creator::build_command_line(
+string process::build_command_line(
     const string& executable, const vector<string>& args) {
     string cmd_line = "\"" + executable + "\"";
     for (const auto& arg : args) {
@@ -21,7 +21,7 @@ string process_creator::build_command_line(
 }
 #endif
 
-process_creator::process_info process_creator::create_process(
+process::process_info process::create_process(
     const string& executable, const vector<string>& args) {
     process_info info = {};
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -33,7 +33,7 @@ process_creator::process_info process_creator::create_process(
     vector<char> cmd_line_buf(cmd_line.begin(), cmd_line.end());
     cmd_line_buf.push_back('\0');
 
-    ::BOOL success = CreateProcessA(
+    ::BOOL success = ::CreateProcessA(
         nullptr, cmd_line_buf.data(),
         nullptr, nullptr, 0, 0,
         nullptr, nullptr, &si, &info.pi
@@ -63,7 +63,7 @@ process_creator::process_info process_creator::create_process(
     return info;
 }
 
-int process_creator::wait_for_process(const process_info& info, int timeout_ms) {
+int process::wait_for_process(const process_info& info, int timeout_ms) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::DWORD timeout = (timeout_ms < 0) ?
         numeric_limits<uint32_t>::max() : static_cast<::DWORD>(timeout_ms);
@@ -115,7 +115,7 @@ int process_creator::wait_for_process(const process_info& info, int timeout_ms) 
 #endif
 }
 
-bool process_creator::terminate_process(const process_info& info) {
+bool process::terminate_process(const process_info& info) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
     if (result) {
@@ -135,7 +135,7 @@ bool process_creator::terminate_process(const process_info& info) {
 #endif
 }
 
-bool process_creator::is_process_running(const process_info& info) {
+bool process::is_process_running(const process_info& info) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
     if (::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
@@ -150,7 +150,7 @@ bool process_creator::is_process_running(const process_info& info) {
 
 #ifdef MSTL_PLATFORM_LINUX__
 
-char** process_creator::build_argv(
+char** process::build_argv(
     const string& executable, const vector<string>& args) {
     const size_t argc = args.size() + 2;
     const auto argv = new char*[argc];
@@ -167,7 +167,7 @@ char** process_creator::build_argv(
     return argv;
 }
 
-void process_creator::free_argv(char** argv) {
+void process::free_argv(char** argv) {
     if (argv) {
         for (int i = 0; argv[i] != nullptr; ++i)
             delete[] argv[i];

@@ -18,37 +18,37 @@ private:
 
     static constexpr uint32_t rotr(const uint32_t x, const uint32_t n) { return (x >> n) | (x << (32 - n)); }
 
-  static constexpr uint32_t ch(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (~x & z); }
-  static constexpr uint32_t maj(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (x & z) ^ (y & z); }
+    static constexpr uint32_t ch(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (~x & z); }
+    static constexpr uint32_t maj(const uint32_t x, const uint32_t y, const uint32_t z) { return (x & y) ^ (x & z) ^ (y & z); }
 
-  static constexpr uint32_t sig0(const uint32_t x) { return rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22); }
-  static constexpr uint32_t sig1(const uint32_t x)  { return rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25); }
+    static constexpr uint32_t sig0(const uint32_t x) { return rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22); }
+    static constexpr uint32_t sig1(const uint32_t x)  { return rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25); }
 
-  static constexpr uint32_t gamma0(const uint32_t x) { return rotr(x, 7) ^ rotr(x, 18) ^ (x >> 3); }
-  static constexpr uint32_t gamma1(const uint32_t x) { return rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10); }
+    static constexpr uint32_t gamma0(const uint32_t x) { return rotr(x, 7) ^ rotr(x, 18) ^ (x >> 3); }
+    static constexpr uint32_t gamma1(const uint32_t x) { return rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10); }
 
 public:
-  static bstring hash(bstring_view data);
-  static string hash_hex(bstring_view data);
+    static bstring hash(bstring_view data);
+    static string hash_hex(bstring_view data);
 };
 
 
 MSTL_ALWAYS_INLINE_INLINE string sha256(const bstring& data) {
-  return SHA256::hash_hex(data.view());
+    return SHA256::hash_hex(data.view());
 }
 MSTL_ALWAYS_INLINE_INLINE string sha256(const string& data) {
-  return sha256(to_bstring(data));
+    return sha256(to_bstring(data));
 }
 
 MSTL_ALWAYS_INLINE_INLINE string sha256(const bstring_view data) {
-  return SHA256::hash_hex(data);
+    return SHA256::hash_hex(data);
 }
 MSTL_ALWAYS_INLINE_INLINE string sha256(const string_view data) {
-  return sha256(to_bstring(data));
+    return sha256(to_bstring(data));
 }
 
 MSTL_ALWAYS_INLINE_INLINE string sha256(const char* data) {
-  return sha256(string_view{data});
+    return sha256(string_view{data});
 }
 
 MSTL_END_NAMESPACE__

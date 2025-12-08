@@ -61,8 +61,8 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
     bool overflow = false;
 
     while (p != end) {
-        int digit = 0;
-        char c = *p;
+        int digit;
+        const char c = *p;
         if (c >= '0' && c <= '9') {
             digit = c - '0';
         } else if (c >= 'a' && c <= 'z') {
@@ -153,8 +153,8 @@ constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
     bool overflow = false;
 
     while (p != end) {
-        unsigned int digit = 0;
-        char c = *p;
+        unsigned int digit;
+        const char c = *p;
         if (c >= '0' && c <= '9') {
             digit = c - '0';
         } else if (c >= 'a' && c <= 'z') {
@@ -242,28 +242,41 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
         ++p;
     }
 
-    if (p != end && _MSTL to_lowercase(*p) == 'i') {
-        if (p + 2 < end && _MSTL string_n_compare_ignore_case(p, "inf", 3) == 0) {
-            p += 3;
-            if (p + 4 < end && _MSTL string_n_compare_ignore_case(p, "inity", 5) == 0) {
-                p += 5;
+    const char* p_start = p;
+
+    if (p != end && (p[0] == 'i' || p[0] == 'I')) {
+        if (p + 3 <= end) {
+            const char c1 = p[1], c2 = p[2];
+            if ((c1 == 'n' || c1 == 'N') && (c2 == 'f' || c2 == 'F')) {
+                if (p + 3 == end || !is_alpha_or_digit(p[3])) {
+                    p += 3;
+                    T inf_val = numeric_limits<T>::infinity();
+                    if (endptr) *endptr = const_cast<char*>(p);
+                    return (sign < 0) ? -inf_val : inf_val;
+                }
             }
-            if (endptr) *endptr = const_cast<char*>(p);
-            return sign * numeric_limits<T>::max();
         }
     }
-    else if (p != end && _MSTL to_lowercase(*p) == 'n') {
-        if (p + 2 < end && _MSTL string_n_compare_ignore_case(p, "nan", 3) == 0) {
-            p += 3;
-            if (p != end && *p == '(') {
-                ++p;
-                while (p != end && *p != ')') ++p;
-                if (p != end && *p == ')') ++p;
+
+    if (p != end && (p[0] == 'n' || p[0] == 'N')) {
+        if (p + 3 <= end) {
+            const char c1 = p[1], c2 = p[2];
+            if ((c1 == 'a' || c1 == 'A') && (c2 == 'n' || c2 == 'N')) {
+                if (p + 3 == end || !is_alpha_or_digit(p[3])) {
+                    p += 3;
+                    if (p != end && *p == '(') {
+                        ++p;
+                        while (p != end && *p != ')') ++p;
+                        if (p != end && *p == ')') ++p;
+                    }
+                    if (endptr) *endptr = const_cast<char*>(p);
+                    return numeric_limits<T>::quiet_nan();
+                }
             }
-            if (endptr) *endptr = const_cast<char*>(p);
-            return numeric_limits<T>::quiet_nan();
         }
     }
+
+    p = p_start;
 
     T significand = 0;
     int exponent = 0;

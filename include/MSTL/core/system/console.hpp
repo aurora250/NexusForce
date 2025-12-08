@@ -4,6 +4,8 @@
 #include "../utility/color.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+class MSTL_API sys_console;
+
 template <typename T, typename = void>
 struct io_base;
 
