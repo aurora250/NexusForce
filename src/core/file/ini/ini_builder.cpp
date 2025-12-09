@@ -1,79 +1,95 @@
 #include <MSTL/core/file/ini/ini_builder.hpp>
-#include <MSTL/core/string/to_string.hpp>
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-ini_builder& ini_builder::add_comment(string comment) {
-    entries_.emplace_back(entry_type::COMMENT, _MSTL move(comment), "");
-    return *this;
-}
-
-ini_builder& ini_builder::add_blank_line() {
-    return add_comment("");
-}
-
-ini_builder& ini_builder::section(string section_name) {
-    entries_.emplace_back(entry_type::SECTION, _MSTL move(section_name), "");
-    return *this;
-}
-
-ini_builder& ini_builder::add(string key, string value) {
-    entries_.emplace_back(entry_type::KEY_VALUE, _MSTL move(key),_MSTL move(value));
-    return *this;
-}
-
-ini_builder& ini_builder::add(string key, const char* value) {
-    return add(_MSTL move(key), string(value));
-}
-
-ini_builder& ini_builder::add(string key, const int32_t value) {
-    return add(_MSTL move(key), _MSTL to_string(value));
-}
-
-ini_builder& ini_builder::add(string key, const int64_t value) {
-    return add(_MSTL move(key), _MSTL to_string(value));
-}
-
-ini_builder& ini_builder::add(string key, const double value) {
-    return add(_MSTL move(key), _MSTL to_string(value));
-}
-
-ini_builder& ini_builder::add(string key, const double value, const int precision) {
-    return add(_MSTL move(key), _MSTL to_string_with_precision(value, precision));
-}
-
-ini_builder& ini_builder::add(string key, const bool value) {
-    return add(_MSTL move(key), _MSTL to_string(value));
-}
-
-string ini_builder::to_string() const {
-    string result;
-    for (const auto& e : entries_) {
-        switch (e.type) {
-            case entry_type::COMMENT: {
-                if (e.data1.empty()) {
-                    result += "\n";
-                } else {
-                    result += "; " + e.data1 + "\n";
-                }
-                break;
-            }
-            case entry_type::SECTION: {
-                result += "[" + e.data1 + "]\n";
-                break;
-            }
-            case entry_type::KEY_VALUE: {
-                result += e.data1 + " = " + e.data2 + "\n";
-                break;
-            }
-        }
+void ini_builder::test_exception() const {
+    if (!current_section_) {
+        throw_exception(ini_exception("No section context for value"));
     }
-    return result;
+    if (current_key_.empty()) {
+        throw_exception(ini_exception("No key set for value"));
+    }
 }
 
-ini_builder& ini_builder::clear() {
-    entries_.clear();
+ini_builder::ini_builder() {
+    root_ = make_unique<ini_document>();
+    current_section_ = root_->get_global_section();
+}
+
+ini_builder& ini_builder::begin_section(const string& section_name) {
+    auto new_section = make_unique<ini_section>(section_name);
+    current_section_ = new_section.get();
+    root_->add_section(section_name, _MSTL move(new_section));
+    current_key_.clear();
     return *this;
+}
+
+ini_builder& ini_builder::end_section() {
+    current_section_ = root_->get_global_section();
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::key(const string& k) {
+    if (!current_section_) {
+        throw_exception(ini_exception("No section context for key"));
+    }
+    current_key_ = k;
+    return *this;
+}
+
+ini_builder& ini_builder::value(const string& v) {
+    test_exception();
+    current_section_->set_property(current_key_, v);
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value(const int v) {
+    test_exception();
+    current_section_->set_property(current_key_, _MSTL to_string(v));
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value(const int64_t v) {
+    test_exception();
+    current_section_->set_property(current_key_, _MSTL to_string(v));
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value(const double v) {
+    test_exception();
+    current_section_->set_property(current_key_, _MSTL to_string(v));
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value(const bool v) {
+    test_exception();
+    current_section_->set_property(current_key_, _MSTL to_string(v));
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value(const double v, const int precision) {
+    test_exception();
+    current_section_->set_property(current_key_, _MSTL to_string_with_precision(v, precision));
+    current_key_.clear();
+    return *this;
+}
+
+ini_builder& ini_builder::value_section(const string& section_name,
+    _MSTL function<void(ini_builder&)>&& build_func) {
+    begin_section(section_name);
+    build_func(*this);
+    end_section();
+    return *this;
+}
+
+unique_ptr<ini_document> ini_builder::build() {
+    return _MSTL move(root_);
 }
 
 MSTL_END_NAMESPACE__

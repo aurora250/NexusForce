@@ -9,8 +9,8 @@ static const path res_root
 #ifdef MSTL_PLATFORM_WINDOWS__
     {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #elif defined(MSTL_PLATFORM_LINUX__)
-    {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
-    // {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
+    // {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
+    {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #endif
 
 void test_file_basic_operations() {
@@ -32,7 +32,7 @@ void test_file_basic_operations() {
         assert(!f.opened());
         assert(f.open(TEST_FILE, false, FILE_ACCESS::READ_WRITE));
         assert(f.opened());
-        assert(f.get_path().view() == TEST_FILE.view());
+        assert(f.get_path() == TEST_FILE);
 
         string line;
         assert(f.read_line(line));
@@ -92,7 +92,7 @@ void test_file_attributes_and_times() {
     bool set_time_ok = f.set_last_write_time(now);
     assert(set_time_ok);
     println(f.last_write_time(), now);
-    assert(f.last_write_time().to_string() == now.to_string());
+    assert(f.last_write_time() == now);
 
     f.close();
     println("test file attributes and times passed");
@@ -139,7 +139,7 @@ void test_move_semantics() {
     f3 = _MSTL move(f2);
     assert(!f2.opened());
     assert(f3.opened());
-    assert(f3.get_path().str() == TEST_FILE.str());
+    assert(f3.get_path() == TEST_FILE);
     println("test move semantics passed");
 }
 
@@ -613,38 +613,63 @@ void test_enctype() {
 
 void test_ini() {
     ini_builder builder;
-    builder.add_comment("配置文件")
-           .add_comment("生成时间: 2024-01-01")
-           .add_blank_line()
-           .section("database")
-           .add("host", "localhost")
-           .add("port", 3306)
-           .add("username", "root")
-           .add("password", "secret123")
-           .add("timeout", 30.5, 1)
-           .add_blank_line()
-           .section("application")
-           .add("name", "myapp")
-           .add("version", "1.0.0")
-           .add("debug", true)
-           .add("max_connections", 100)
-           .add_blank_line()
-           .section("logging")
-           .add("level", "info")
-           .add("file", "/var/log/app.log")
-           .add("rotate", true);
+    builder.key("global_key").value("global_value")
+           .begin_section("database")
+               .key("host").value("localhost")
+               .key("port").value(5432)
+               .key("enabled").value(true)
+           .end_section()
+           .begin_section("logging")
+               .key("level").value("debug")
+               .key("file").value("/var/log/app.log")
+           .end_section();
 
-    string built = builder.to_string();
-    println(built);
+    println(builder.build()->to_string());
 
-    ini_parser parser;
-    if (parser.try_parse(built)) {
-        println("database.host = ", parser.get_string("database", "host"));
-        println("database.port = ", parser.get_int("database", "port"));
-        println("database.timeout = ", parser.get_double("database", "timeout"));
-        println("application.debug = ", parser.get_bool("application", "debug"));
-        println("application.max_connections = ", parser.get_int("application", "max_connections"));
-    }
+
+    file fi(res_root / "test.ini");
+
+    ini_parser parser(fi.read());
+    auto doc = parser.parse();
+
+    string host = doc->get_string("database", "host");
+    int port = doc->get_int("database", "port");
+    bool enabled = doc->get_bool("database", "enabled");
+
+    println(host, ", ", port, ", ", enabled);
+}
+
+void test_env() {
+    env_builder builder;
+    builder.comment("Application Configuration")
+           .blank_line()
+           .add("APP_NAME", "MyApp")
+           .add("APP_VERSION", "1.0.0")
+           .blank_line()
+           .comment("Database Configuration")
+           .add("DB_HOST", "localhost")
+           .add("DB_PORT", 5432)
+           .add("DB_NAME", "mydb")
+           .key("DB_PASSWORD").double_quoted().value("secret123")
+           .blank_line()
+           .comment("Feature Flags")
+           .add("FEATURE_ENABLED", true)
+           .add_export("PATH", "/usr/local/bin:$PATH");
+
+    auto bdoc = builder.build();
+    println(bdoc->to_string());
+
+
+    file fi(res_root / "test.env");
+
+    env_parser parser(fi.read());
+    auto doc = parser.parse();
+
+    string app_name = doc->get_string("APP_NAME");
+    int db_port = doc->get_int("DB_PORT");
+    bool feature_enabled = doc->get_bool("FEATURE_ENABLED");
+
+    println(app_name, ", ", db_port, ", ", feature_enabled);
 }
 
 void test_toml() {
@@ -654,6 +679,22 @@ void test_toml() {
         toml_parser parser(fi.read());
         unique_ptr<toml_table> root = parser.parse();
         printcln(color::blue(), root->to_document());
+
+        toml_builder builder;
+        builder.key("title").value("My Config")
+               .key("owner").value_inline_table([](toml_builder& b) {
+                   b.key("name").value("Tom")
+                    .key("dob").value_datetime("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
+               })
+               .begin_table("database")
+                   .key("server").value("192.168.1.1")
+                   .key("ports").value_array([](toml_builder& b) {
+                       b.value(8001).value(8002).value(8003);
+                   })
+               .end_table();
+
+        unique_ptr<toml_table> broot = builder.build();
+        println(broot->to_document());
     } catch (...) {}
 }
 
@@ -2050,6 +2091,7 @@ void test_tpool() {
     pool.submit_task(test_datetimes);
     pool.submit_task(test_json);
     pool.submit_task(test_ini);
+    pool.submit_task(test_env);
     pool.submit_task(test_toml);
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);

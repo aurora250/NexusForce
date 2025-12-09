@@ -35,7 +35,7 @@ enum class COMPRESS_STRATEGY {
 };
 
 
-class zlib_compressor {
+class MSTL_API zlib_compressor {
 public:
     template <typename Iter, enable_if_t<is_ranges_cot_iter_v<Iter>, int> = 0>
     MSTL_NODISCARD static bvector compress(Iter begin, Iter end,

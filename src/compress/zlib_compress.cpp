@@ -1,4 +1,5 @@
 #include <MSTL/compress/zlib_compress.hpp>
+#ifdef MSTL_SUPPORT_ZLIB__
 MSTL_BEGIN_NAMESPACE__
 
 void zlib_compressor::check_zlib_error(const int ret_code) {
@@ -252,3 +253,4 @@ bvector zlib_compressor::stream_decompressor::finish() {
 }
 
 MSTL_END_NAMESPACE__
+#endif

@@ -2,13 +2,54 @@
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-bool ini_parser::is_comment(const string& line) {
+void ini_parser::skip_whitespace() noexcept {
+    while (pos_ < len_ && is_space(current())) {
+        advance();
+    }
+}
+
+void ini_parser::skip_line() noexcept {
+    while (!eof() && current() != '\n') {
+        advance();
+    }
+    if (current() == '\n') {
+        advance();
+    }
+}
+
+char ini_parser::current() const noexcept {
+    if (pos_ < len_) return ini_[pos_];
+    return '\0';
+}
+
+char ini_parser::peek(const size_t offset) const noexcept {
+    if (pos_ + offset < len_) return ini_[pos_ + offset];
+    return '\0';
+}
+
+bool ini_parser::eof() const noexcept {
+    return pos_ >= len_;
+}
+
+void ini_parser::advance() noexcept {
+    if (pos_ < len_) {
+        if (ini_[pos_] == '\n') {
+            line_++;
+            column_ = 1;
+        } else {
+            column_++;
+        }
+        pos_++;
+    }
+}
+
+bool ini_parser::is_comment_line(const string& line) const noexcept {
     string trimmed = line;
     trimmed.trim();
     return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
 }
 
-bool ini_parser::is_section(const string& line, string& section_name) {
+bool ini_parser::is_section_line(const string& line, string& section_name) const {
     string trimmed = line;
     trimmed.trim();
     if (trimmed.size() >= 2 && trimmed.front() == '[' && trimmed.back() == ']') {
@@ -18,9 +59,10 @@ bool ini_parser::is_section(const string& line, string& section_name) {
     return false;
 }
 
-bool ini_parser::parse_key_value(const string& line, string& key, string& value) {
+bool ini_parser::parse_key_value(const string& line, string& key, string& value) const {
     const size_t pos = line.find('=');
     if (pos == string::npos) return false;
+
     key = line.substr(0, pos).trim();
     value = line.substr(pos + 1).trim();
 
@@ -28,99 +70,65 @@ bool ini_parser::parse_key_value(const string& line, string& key, string& value)
         (value.front() == '\'' && value.back() == '\''))) {
         value = value.substr(1, value.size() - 2);
     }
+
     return !key.empty();
 }
 
-bool ini_parser::try_parse(const string& content) {
+void ini_parser::parse_line(const string& line) {
+    if (is_comment_line(line)) {
+        return;
+    }
+
+    string section_name;
+    if (is_section_line(line, section_name)) {
+        auto new_section = make_unique<ini_section>(section_name);
+        current_section_ = new_section.get();
+        root_->add_section(section_name, _MSTL move(new_section));
+        return;
+    }
+
+    string key, value;
+    if (parse_key_value(line, key, value)) {
+        if (!current_section_) {
+            current_section_ = root_->get_global_section();
+        }
+        current_section_->set_property(key, value);
+    }
+}
+
+unique_ptr<ini_document> ini_parser::parse() {
     string line;
-    string current_section;
-    size_t pos = 0;
-    while (getline(content, pos, line)) {
-        if (is_comment(line)) continue;
+    size_t line_start = 0;
 
-        string section_name;
-        if (is_section(line, section_name)) {
-            current_section = section_name;
-            continue;
+    while (!eof()) {
+        line.clear();
+        line_start = pos_;
+
+        while (!eof() && current() != '\n') {
+            line += current();
+            advance();
         }
 
-        string key, value;
-        if (parse_key_value(line, key, value)) {
-            data_[current_section][key] = value;
+        if (current() == '\n') {
+            advance();
         }
-    }
-    return true;
-}
 
-string ini_parser::get_string(const string& section, const string& key, const string& defaultv) const {
-    const auto s_it = data_.find(section);
-    if (s_it != data_.end()) {
-        const auto k_it = s_it->second.find(key);
-        if (k_it != s_it->second.end()) {
-            return k_it->second;
+        try {
+            parse_line(line);
+        } catch (...) {
+            throw;
         }
     }
-    return defaultv;
+
+    return _MSTL move(root_);
 }
 
-int ini_parser::get_int(const string& section, const string& key, const int defaultv) const {
-    const string v = get_string(section, key);
-    if (v.empty()) return defaultv;
+optional<unique_ptr<ini_document>> ini_parser::try_parse() {
     try {
-        return integer32::parse(v.view());
+        return parse();
     } catch (...) {
-        return defaultv;
+        return {};
     }
-}
-
-double ini_parser::get_double(const string& section, const string& key, const double defaultv) const {
-    const string v = get_string(section, key);
-    if (v.empty()) return defaultv;
-    try {
-        return float64::parse(v.view());
-    } catch (...) {
-        return defaultv;
-    }
-}
-
-bool ini_parser::get_bool(const string& section, const string& key, const bool defaultv) const {
-    const string v = get_string(section, key);
-    if (v.empty()) return defaultv;
-    try {
-        return boolean::parse(v.view());
-    } catch (...) {
-        return defaultv;
-    }
-}
-
-void ini_parser::set_value(const string& section, const string& key, const string& value) {
-    data_[section][key] = value;
-}
-
-bool ini_parser::has_section(const string& section) const {
-    return data_.find(section) != data_.end();
-}
-
-bool ini_parser::has_key(const string& section, const string& key) const {
-    const auto s_it = data_.find(section);
-    if (s_it != data_.end()) {
-        return s_it->second.find(key) != s_it->second.end();
-    }
-    return false;
-}
-
-string ini_parser::to_string() const {
-    string result;
-    for (const auto& section : data_) {
-        if (!section.first.empty()) {
-            result += "[" + section.first + "]\n";
-        }
-        for (const auto& kv : section.second) {
-            result += "  " + kv.first +" = " + kv.second + '\n';
-        }
-        result += '\n';
-    }
-    return result;
 }
 
 MSTL_END_NAMESPACE__

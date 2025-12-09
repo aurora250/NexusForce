@@ -206,6 +206,7 @@ void test_http_client();
 void test_list();
 
 void test_ini();
+void test_env();
 void test_toml();
 void test_json();
 

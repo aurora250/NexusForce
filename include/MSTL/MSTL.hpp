@@ -29,6 +29,8 @@
 #include "core/file/json/json_parser.hpp"
 #include "core/file/ini/ini_builder.hpp"
 #include "core/file/ini/ini_parser.hpp"
+#include "core/file/env/env_builder.hpp"
+#include "core/file/env/env_parser.hpp"
 #include "core/file/toml/toml_builder.hpp"
 #include "core/file/toml/toml_parser.hpp"
 #include "core/memory/builtin_allocator.hpp"

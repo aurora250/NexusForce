@@ -142,6 +142,7 @@ function(find_and_link_zlib target)
         return()
     endif()
 
+    if(MSTL_ARCH STREQUAL "x64")
     find_package(ZLIB QUIET)
 
     if(ZLIB_FOUND)
@@ -239,6 +240,7 @@ function(find_and_link_zlib target)
             endif()
         endif()
     endif()
+    endif()
 endfunction()
 
 
@@ -261,11 +263,16 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
