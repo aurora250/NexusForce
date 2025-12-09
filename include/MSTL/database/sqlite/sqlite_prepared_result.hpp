@@ -41,8 +41,8 @@ public:
     MSTL_NODISCARD _MSTL vector<char> get_blob(size_type n) const override;
     MSTL_NODISCARD _MSTL string get_set(size_type n) const override { return get_string(n); }
     MSTL_NODISCARD uint64_t get_bit(size_type n) const noexcept override;
-    MSTL_NODISCARD _MSTL date get_date(size_type n) const noexcept override { return get_datetime(n).dates(); }
-    MSTL_NODISCARD _MSTL time get_time(size_type n) const noexcept override { return get_datetime(n).times(); }
+    MSTL_NODISCARD _MSTL date get_date(size_type n) const noexcept override { return get_datetime(n).date(); }
+    MSTL_NODISCARD _MSTL time get_time(size_type n) const noexcept override { return get_datetime(n).time(); }
     MSTL_NODISCARD _MSTL datetime get_datetime(size_type n) const override;
     MSTL_NODISCARD _MSTL timestamp get_timestamp(size_type n) const override;
     MSTL_NODISCARD _MSTL string get_string(size_type n) const override { return string{get(n)}; }

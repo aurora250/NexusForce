@@ -150,7 +150,7 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
     if (!::CryptAcquireContext(&hProv, nullptr, nullptr,
         PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
         throw_exception(device_exception("Failed to acquire crypto context"));
-        }
+    }
 
     if (!::CryptGenRandom(hProv, static_cast<DWORD>(length), reinterpret_cast<BYTE*>(buffer))) {
         ::CryptReleaseContext(hProv, 0);
@@ -159,15 +159,19 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
 
     ::CryptReleaseContext(hProv, 0);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const int fd = open("/dev/urandom", O_RDONLY);
-    if(fd == -1) throw_exception(file_exception("Failed to open /dev/urandom"));
+    const int fd = ::open("/dev/urandom", O_RDONLY);
+    if(fd == -1) {
+        throw_exception(file_exception("Failed to open /dev/urandom"));
+    }
 
     ssize_t bytes_read = 0;
     while (bytes_read < static_cast<ssize_t>(length)) {
         const ssize_t result = ::read(fd, buffer + bytes_read, length - bytes_read);
         if (result == -1) {
             ::close(fd);
-            if(fd == -1) throw_exception(file_exception("Failed to open /dev/urandom"));
+            if(fd == -1) {
+                throw_exception(file_exception("Failed to open /dev/urandom"));
+            }
         }
         bytes_read += result;
     }

@@ -752,5 +752,8 @@ template <typename Iterator, typename Alloc>
 vector(Iterator, Iterator, Alloc = Alloc()) -> vector<iter_value_t<Iterator>, Alloc>;
 #endif
 
+using bvector = vector<byte_t>;
+
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONTAINER_VECTOR_HPP__

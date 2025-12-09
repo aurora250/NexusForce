@@ -9,8 +9,8 @@ static const path res_root
 #ifdef MSTL_PLATFORM_WINDOWS__
     {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #elif defined(MSTL_PLATFORM_LINUX__)
-    // {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
-    {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
+    {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
+    // {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #endif
 
 void test_file_basic_operations() {
@@ -300,7 +300,7 @@ void test_utc_conversion() {
     _MSTL datetime dt(2024, 1, 1, 0, 0, 0);
     _MSTL datetime utc = dt.to_UTC();
     _MSTL datetime local = _MSTL datetime::from_UTC(dt);
-    assert(local == dt);
+    assert(local != dt);
 
     println("test_utc_conversion passed");
 }

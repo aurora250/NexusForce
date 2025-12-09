@@ -35,7 +35,7 @@ private:
 
     http_request parse_request(const socket& client_socket);
     static string build_response_str(const http_response& response);
-    void send_response(const socket& client_socket, const http_response& response);
+    static void send_response(const socket& client_socket, const http_response& response);
 
     void add_session_cookie(const http_request& request, http_response& response, session* session) const;
 

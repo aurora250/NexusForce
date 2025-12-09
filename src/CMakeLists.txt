@@ -1,4 +1,3 @@
-# 编译器配置
 function(configure_compiler_options target)
     if(MSVC)
         set_property(TARGET ${target} PROPERTY
@@ -29,7 +28,6 @@ function(configure_compiler_options target)
     endif()
 endfunction()
 
-# 库查找
 function(find_and_link_library target lib_name)
     set(options REQUIRED)
     set(oneValueArgs CONDITION)
@@ -66,7 +64,6 @@ function(find_and_link_library target lib_name)
     endif()
 endfunction()
 
-# 数据库支持检查
 function(enable_database_support target)
     get_target_property(existing_defs ${target} COMPILE_DEFINITIONS)
     if(existing_defs)
@@ -78,6 +75,172 @@ function(enable_database_support target)
         target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_DB__)
     endif()
 endfunction()
+
+function(find_and_link_openssl target)
+    if(NOT MSTL_ENABLE_OPENSSL)
+        message(STATUS "OpenSSL support disabled by option")
+        return()
+    endif()
+
+    if(MSTL_ARCH STREQUAL "x64")
+        find_package(OpenSSL QUIET COMPONENTS Crypto SSL)
+
+        if(OpenSSL_FOUND)
+            target_link_libraries(${target} PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+            target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_OPENSSL__)
+            message(STATUS "OpenSSL linked successfully (Version: ${OpenSSL_VERSION})")
+
+            if(WIN32)
+                find_file(OPENSSL_DLL_SSL
+                        NAMES libssl-3-x64.dll libssl-3.dll libssl-1_1-x64.dll
+                        PATHS
+                        "${OpenSSL_ROOT_DIR}/bin"
+                        "${OpenSSL_ROOT_DIR}"
+                        "$ENV{OPENSSL_ROOT_DIR}/bin"
+                        NO_DEFAULT_PATH
+                )
+                find_file(OPENSSL_DLL_CRYPTO
+                        NAMES libcrypto-3-x64.dll libcrypto-3.dll libcrypto-1_1-x64.dll
+                        PATHS
+                        "${OpenSSL_ROOT_DIR}/bin"
+                        "${OpenSSL_ROOT_DIR}"
+                        "$ENV{OPENSSL_ROOT_DIR}/bin"
+                        NO_DEFAULT_PATH
+                )
+
+                if(OPENSSL_DLL_SSL AND EXISTS ${OPENSSL_DLL_SSL})
+                    add_custom_command(TARGET ${target} POST_BUILD
+                            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                            ${OPENSSL_DLL_SSL}
+                            $<TARGET_FILE_DIR:${target}>
+                            COMMENT "Copying OpenSSL SSL DLL to output directory"
+                    )
+                endif()
+
+                if(OPENSSL_DLL_CRYPTO AND EXISTS ${OPENSSL_DLL_CRYPTO})
+                    add_custom_command(TARGET ${target} POST_BUILD
+                            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                            ${OPENSSL_DLL_CRYPTO}
+                            $<TARGET_FILE_DIR:${target}>
+                            COMMENT "Copying OpenSSL Crypto DLL to output directory"
+                    )
+                endif()
+            endif()
+        else()
+            message(WARNING "OpenSSL not found - OpenSSL components will be unavailable")
+            message(STATUS "  Hint: On Linux, install openssl development package")
+            message(STATUS "        On Windows, set OpenSSL_ROOT_DIR to your OpenSSL installation")
+        endif()
+    else()
+        message(STATUS "OpenSSL support disabled: only x64 architecture supported")
+    endif()
+endfunction()
+
+function(find_and_link_zlib target)
+    if(NOT MSTL_ENABLE_ZLIB)
+        message(STATUS "zlib support disabled by option")
+        return()
+    endif()
+
+    find_package(ZLIB QUIET)
+
+    if(ZLIB_FOUND)
+        target_link_libraries(${target} PUBLIC ZLIB::ZLIB)
+        target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_ZLIB__)
+        message(STATUS "zlib linked successfully (Version: ${ZLIB_VERSION})")
+
+        if(WIN32)
+            get_target_property(zlib_location ZLIB::ZLIB LOCATION)
+            if(zlib_location AND EXISTS ${zlib_location})
+                get_filename_component(zlib_dir ${zlib_location} DIRECTORY)
+                find_file(ZLIB_DLL
+                        NAMES zlib1.dll zlib.dll
+                        PATHS
+                        ${zlib_dir}
+                        "${zlib_dir}/../bin"
+                        "${zlib_dir}/../dll"
+                        NO_DEFAULT_PATH
+                )
+
+                if(ZLIB_DLL AND EXISTS ${ZLIB_DLL})
+                    add_custom_command(TARGET ${target} POST_BUILD
+                            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                            ${ZLIB_DLL}
+                            $<TARGET_FILE_DIR:${target}>
+                            COMMENT "Copying zlib DLL to output directory"
+                    )
+                endif()
+            endif()
+        endif()
+    else()
+        message(STATUS "CMake find_package for zlib failed, trying manual search...")
+
+        if(WIN32)
+            set(ZLIB_ROOT_DIR "D:/zlib" CACHE PATH "zlib root directory")
+
+            find_path(ZLIB_INCLUDE_DIR NAMES zlib.h
+                    HINTS "${ZLIB_ROOT_DIR}/include"
+                    PATHS
+                    "$ENV{ZLIB_ROOT}/include"
+                    "C:/zlib/include"
+                    NO_DEFAULT_PATH
+            )
+
+            find_library(ZLIB_LIBRARY NAMES zlib zlibstatic zlibstaticd
+                    HINTS "${ZLIB_ROOT_DIR}/lib"
+                    PATHS
+                    "$ENV{ZLIB_ROOT}/lib"
+                    "C:/zlib/lib"
+                    NO_DEFAULT_PATH
+            )
+
+            if(ZLIB_INCLUDE_DIR AND ZLIB_LIBRARY)
+                target_include_directories(${target} PUBLIC ${ZLIB_INCLUDE_DIR})
+                target_link_libraries(${target} PUBLIC ${ZLIB_LIBRARY})
+                target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_ZLIB__)
+                message(STATUS "zlib linked manually successfully")
+
+                find_file(ZLIB_DLL
+                        NAMES zlib1.dll zlib.dll
+                        HINTS "${ZLIB_ROOT_DIR}/bin"
+                        "${ZLIB_ROOT_DIR}"
+                        NO_DEFAULT_PATH
+                )
+
+                if(ZLIB_DLL AND EXISTS ${ZLIB_DLL})
+                    add_custom_command(TARGET ${target} POST_BUILD
+                            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                            ${ZLIB_DLL}
+                            $<TARGET_FILE_DIR:${target}>
+                            COMMENT "Copying zlib DLL to output directory"
+                    )
+                endif()
+            else()
+                message(WARNING "zlib not found - zlib components will be unavailable")
+            endif()
+        else()
+            find_path(ZLIB_INCLUDE_DIR NAMES zlib.h
+                    PATHS /usr/include /usr/local/include
+            )
+
+            find_library(ZLIB_LIBRARY NAMES z
+                    PATHS /usr/lib /usr/lib64 /usr/local/lib
+            )
+
+            if(ZLIB_INCLUDE_DIR AND ZLIB_LIBRARY)
+                target_include_directories(${target} PUBLIC ${ZLIB_INCLUDE_DIR})
+                target_link_libraries(${target} PUBLIC ${ZLIB_LIBRARY})
+                target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_ZLIB__)
+                message(STATUS "zlib linked manually successfully")
+            else()
+                message(WARNING "zlib not found - zlib components will be unavailable")
+                message(STATUS "  Hint: On Ubuntu/Debian: sudo apt-get install zlib1g-dev")
+                message(STATUS "        On CentOS/RHEL: sudo yum install zlib-devel")
+            endif()
+        endif()
+    endif()
+endfunction()
+
 
 # 链接文件
 set(CPP_SOURCES
@@ -145,6 +308,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
 )
 
 # 编译为动态库
@@ -208,25 +372,6 @@ if(WIN32)
     target_link_libraries(MSTL PUBLIC
             ws2_32 wsock32 SetupAPI cfgmgr32
             DbgHelp synchronization Shell32)
-endif()
-
-
-# Boost
-if(MSTL_ENABLE_BOOST AND MSTL_ARCH STREQUAL "x64")
-    if(POLICY CMP0167)
-        cmake_policy(SET CMP0167 OLD)
-    endif()
-
-    find_package(Boost QUIET COMPONENTS system filesystem)
-    if(Boost_FOUND)
-        target_link_libraries(MSTL PUBLIC Boost::system)
-        target_compile_definitions(MSTL PUBLIC MSTL_SUPPORT_BOOST__)
-        message(STATUS "Boost linked successfully")
-    else()
-        message(WARNING "Boost not found - Boost components will be unavailable")
-    endif()
-else()
-    message(STATUS "Boost support disabled")
 endif()
 
 
@@ -452,90 +597,6 @@ else()
 endif()
 
 
-# Qt6
-if(MSTL_ENABLE_QT6 AND MSTL_ARCH STREQUAL "x64" AND CMAKE_CXX_STANDARD GREATER_EQUAL 17)
-    set(QT6_SKIP FALSE)
-    if(UNIX AND NOT APPLE)
-        find_package(OpenGL QUIET)
-        if(NOT OpenGL_FOUND)
-            message(WARNING "OpenGL not found. Qt6 requires OpenGL support on Linux")
-            set(QT6_SKIP TRUE)
-        endif()
-    endif()
-
-    if(NOT QT6_SKIP)
-        if(NOT DEFINED QT6_ROOT_DIR)
-            if(MSVC)
-                set(QT6_ROOT_DIR "D:/Qt/6.9.1/msvc2022_64")
-            elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND WIN32)
-                set(QT6_ROOT_DIR "D:/Qt/6.9.1/mingw_64")
-            elseif(UNIX AND NOT APPLE)
-                set(POSSIBLE_QT6_PATHS
-                        "/usr/lib/x86_64-linux-gnu/qt6"
-                        "/usr/lib64/qt6"
-                        "/usr/lib/qt6"
-                        "/opt/qt6"
-                        "/usr/local/qt6")
-                foreach(QT_PATH ${POSSIBLE_QT6_PATHS})
-                    if(EXISTS "${QT_PATH}/lib/cmake/Qt6")
-                        set(QT6_ROOT_DIR "${QT_PATH}")
-                        break()
-                    endif()
-                endforeach()
-            elseif(APPLE)
-                set(QT6_ROOT_DIR "/opt/homebrew/Cellar/qt@6")
-            endif()
-            set(QT6_ROOT_DIR "${QT6_ROOT_DIR}" CACHE PATH "Qt6 root directory")
-        endif()
-
-        if(EXISTS "${QT6_ROOT_DIR}")
-            list(APPEND CMAKE_PREFIX_PATH "${QT6_ROOT_DIR}")
-            if(EXISTS "${QT6_ROOT_DIR}/lib/cmake")
-                list(APPEND CMAKE_PREFIX_PATH "${QT6_ROOT_DIR}/lib/cmake")
-            endif()
-        endif()
-
-        find_package(Qt6 COMPONENTS Core Widgets Gui QUIET)
-        if(Qt6_FOUND)
-            if(MSVC)
-                target_compile_options(MSTL PRIVATE
-                        $<$<COMPILE_LANGUAGE:CXX>:/Zc:__cplusplus>
-                )
-            endif()
-
-            set_target_properties(MSTL PROPERTIES
-                    AUTOMOC ON
-                    AUTOUIC ON
-                    AUTORCC ON
-            )
-
-            target_link_libraries(MSTL PUBLIC Qt6::Core)
-            if(OpenGL_FOUND)
-                target_link_libraries(MSTL PUBLIC OpenGL::GL)
-            endif()
-
-            target_compile_definitions(MSTL PUBLIC MSTL_SUPPORT_QT6__)
-            message(STATUS "Qt6 linked successfully")
-        else()
-            message(WARNING "Qt6 not found.")
-        endif()
-    endif()
-else()
-    set(disable_reasons "")
-    if(NOT MSTL_ARCH STREQUAL "x64")
-        list(APPEND disable_reasons "only x64 supported")
-    endif()
-    if(CMAKE_CXX_STANDARD LESS 17)
-        list(APPEND disable_reasons "requires C++17+")
-    endif()
-    if(NOT MSTL_ENABLE_QT6)
-        list(APPEND disable_reasons "disabled by option")
-    endif()
-    string(JOIN ", " reason_str ${disable_reasons})
-    message(STATUS "Qt6 support disabled: ${reason_str}")
-endif()
-
-
 # CUDA
 if(MSTL_ENABLE_CUDA AND MSTL_ARCH STREQUAL "x64")
     if(MSVC AND DEFINED CMAKE_CUDA_COMPILER)
@@ -559,6 +620,9 @@ if(MSTL_ENABLE_CUDA AND MSTL_ARCH STREQUAL "x64")
 else()
     message(STATUS "CUDA support disabled")
 endif()
+
+find_and_link_zlib(MSTL)
+find_and_link_openssl(MSTL)
 
 # 安装库文件
 install(TARGETS MSTL

@@ -186,10 +186,10 @@ public:
                 return value.to_string_ISO();
             }
             case datetime_type::LocalDate: {
-                return value.dates().to_string();
+                return value.date().to_string();
             }
             case datetime_type::LocalTime: default: {
-                return value.times().to_string();
+                return value.time().to_string();
             }
         }
     }

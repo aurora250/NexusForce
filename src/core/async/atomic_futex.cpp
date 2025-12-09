@@ -60,11 +60,11 @@ bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
 #else
     constexpr int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG | FUTEX_CLOCK_REALTIME;
     if (has_timeout) {
-        ::timespec ts;
+        ::timespec ts{};
         ts.tv_sec = sec.count();
         ts.tv_nsec = ns.count();
     
-        const int ret = ::syscall(
+        const long ret = ::syscall(
             SYS_futex, addr, oper, value, &ts, nullptr,
             FUTEX_BITSET_MATCH_ANY);
     
@@ -126,11 +126,11 @@ bool atomic_futex_base::futex_wait_until_steady(unsigned *addr, const unsigned v
 #else
     constexpr int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG;
     if (has_timeout) {
-        ::timespec ts;
+        ::timespec ts{};
         ts.tv_sec = sec.count();
         ts.tv_nsec = ns.count();
 
-        const int ret = ::syscall(
+        const long ret = ::syscall(
             SYS_futex, addr, oper, value, &ts, nullptr,
             FUTEX_BITSET_MATCH_ANY);
     

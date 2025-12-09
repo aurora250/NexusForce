@@ -8,7 +8,7 @@ MSTL_BEGIN_RANGES__
 
 template <typename R>
 concept Range = requires(R& r) {
-    { r.begin() } -> input_or_output_iterator;
+    { r.begin() } -> input_iterator;
     { r.end() } -> sentinel_for<decltype(r.begin())>;
 };
 

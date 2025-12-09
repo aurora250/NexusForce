@@ -2,13 +2,13 @@
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-bool ini_parser::is_comment(const string& line) const {
+bool ini_parser::is_comment(const string& line) {
     string trimmed = line;
     trimmed.trim();
     return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
 }
 
-bool ini_parser::is_section(const string& line, string& section_name) const {
+bool ini_parser::is_section(const string& line, string& section_name) {
     string trimmed = line;
     trimmed.trim();
     if (trimmed.size() >= 2 && trimmed.front() == '[' && trimmed.back() == ']') {
@@ -18,7 +18,7 @@ bool ini_parser::is_section(const string& line, string& section_name) const {
     return false;
 }
 
-bool ini_parser::parse_key_value(const string& line, string& key, string& value) const {
+bool ini_parser::parse_key_value(const string& line, string& key, string& value) {
     const size_t pos = line.find('=');
     if (pos == string::npos) return false;
     key = line.substr(0, pos).trim();
@@ -27,7 +27,7 @@ bool ini_parser::parse_key_value(const string& line, string& key, string& value)
     if (value.size() >= 2 && ((value.front() == '"' && value.back() == '"') ||
         (value.front() == '\'' && value.back() == '\''))) {
         value = value.substr(1, value.size() - 2);
-        }
+    }
     return !key.empty();
 }
 

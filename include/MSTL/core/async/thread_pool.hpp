@@ -69,7 +69,7 @@ public:
 		size_t total_submitted;
 		size_t total_completed;
 
-		string to_string() const;
+		MSTL_NODISCARD string to_string() const;
 	};
 
     using id_type = manual_thread::id_type;
@@ -82,7 +82,7 @@ private:
 		Task task;
 		unsigned int priority;
 
-		priority_task(Task t, unsigned int p)
+		priority_task(Task t, const unsigned int p)
 		: task(_MSTL move(t)), priority(p) {}
 
 		bool operator <(const priority_task& other) const {
@@ -112,7 +112,7 @@ private:
 	_MSTL atomic_size_t total_submitted_tasks_;
 	_MSTL atomic_size_t total_completed_tasks_;
 
-private:
+
     void thread_function(id_type thread_id);
 
     thread_pool();

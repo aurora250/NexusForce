@@ -90,10 +90,10 @@ int process::wait_for_process(const process_info& info, int timeout_ms) {
         }
     } else {
         int elapsed = 0;
-        constexpr int sleep_interval = 100;
 
         while (elapsed < timeout_ms) {
-            ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
+            constexpr int sleep_interval = 100;
+            const ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
             if (result == -1) {
                 throw_exception(value_exception(::strerror(errno)));
             }
@@ -115,7 +115,7 @@ int process::wait_for_process(const process_info& info, int timeout_ms) {
 #endif
 }
 
-bool process::terminate_process(const process_info& info) {
+bool process::terminate_process(const process_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
     if (result) {
@@ -135,7 +135,7 @@ bool process::terminate_process(const process_info& info) {
 #endif
 }
 
-bool process::is_process_running(const process_info& info) {
+bool process::is_process_running(const process_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
     if (::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
@@ -167,7 +167,7 @@ char** process::build_argv(
     return argv;
 }
 
-void process::free_argv(char** argv) {
+void process::free_argv(char** argv) noexcept{
     if (argv) {
         for (int i = 0; argv[i] != nullptr; ++i)
             delete[] argv[i];

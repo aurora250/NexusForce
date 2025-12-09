@@ -25,16 +25,14 @@ private:
     void close_connection() noexcept;
 
     string build_request_str(const http_client_request& req, const url& req_url) const;
-
     bool read_response(string& out_data) const;
-    bool parse_response(string_view resp_str, http_client_response& resp) const;
+    static bool parse_response(string_view resp_str, http_client_response& resp) ;
 
-    cookie parse_set_cookie(string_view str, const string& default_domain, const string& default_path) const;
-
+    static cookie parse_set_cookie(string_view str, const string& default_domain, const string& default_path) ;
     void update_cookies(const vector<cookie>& resp_cookies, const url& request_url);
+    string build_cookie_header(const url& request_url) const;
 
-    bool parse_chunked_body(string_view chunked, string& decoded) const;
-    string build_cookie_header(const url& ) const;
+    static bool parse_chunked_body(string_view chunked, string& decoded);
 
 public:
     explicit http_client() = default;

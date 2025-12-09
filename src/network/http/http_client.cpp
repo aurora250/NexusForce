@@ -6,7 +6,7 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-bool http_client::try_connect(const string& host, uint16_t port, const string& ip, bool ipv6) {
+bool http_client::try_connect(const string& host, const uint16_t port, const string& ip, const bool ipv6) {
     socket s(
      ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
      SOCKET_TYPE::STREAM,
@@ -43,7 +43,7 @@ bool http_client::try_connect(const string& host, uint16_t port, const string& i
     return true;
 }
 
-bool http_client::connect_domain(const string& host, uint16_t port) {
+bool http_client::connect_domain(const string& host, const uint16_t port) {
     if (connected_ && connected_host_ == host && connected_port_ == port) return true;
     close_connection();
 
@@ -115,7 +115,7 @@ bool http_client::read_response(string& out_data) const {
     return true;
 }
 
-bool http_client::parse_chunked_body(const string_view chunked, string& decoded) const {
+bool http_client::parse_chunked_body(const string_view chunked, string& decoded) {
     decoded.clear();
     size_t pos = 0;
     const size_t size = chunked.size();
@@ -141,7 +141,7 @@ bool http_client::parse_chunked_body(const string_view chunked, string& decoded)
 cookie http_client::parse_set_cookie(
     const string_view str,
     const string& default_domain,
-    const string& default_path) const {
+    const string& default_path) {
     vector<string_view> tokens;
     size_t start = 0, end;
     while ((end = str.find(';', start)) != string::npos) {
@@ -218,7 +218,7 @@ string http_client::build_cookie_header(const url& request_url) const {
     return cookie_header;
 }
 
-bool http_client::parse_response(const string_view resp_str, http_client_response& resp) const {
+bool http_client::parse_response(const string_view resp_str, http_client_response& resp) {
     const size_t pos = resp_str.find(HTTP_CRLF);
     if (pos == string::npos) return false;
 

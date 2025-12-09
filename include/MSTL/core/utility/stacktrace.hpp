@@ -44,12 +44,8 @@ public:
     MSTL_NODISCARD size_t size() const noexcept { return frames_.size(); }
     MSTL_NODISCARD bool empty() const noexcept { return frames_.empty(); }
 
-    MSTL_NODISCARD const frame& operator [](const size_t idx) const noexcept {
-        return frames_[idx];
-    }
-    MSTL_NODISCARD frame& operator [](const size_t idx) noexcept {
-        return frames_[idx];
-    }
+    MSTL_NODISCARD const frame& operator [](const size_t idx) const noexcept { return frames_[idx]; }
+    MSTL_NODISCARD frame& operator [](const size_t idx) noexcept { return frames_[idx]; }
 
     MSTL_NODISCARD auto begin() const noexcept { return frames_.begin(); }
     MSTL_NODISCARD auto end() const noexcept { return frames_.end(); }

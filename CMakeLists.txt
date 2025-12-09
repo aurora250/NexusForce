@@ -48,24 +48,24 @@ message(STATUS "Current Architecture: ${MSTL_ARCH}")
 message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 
 
-option(MSTL_ENABLE_BOOST "Enable Boost library support" ON)
 option(MSTL_ENABLE_POSTGRESQL "Enable PostgreSQL database support" ON)
 option(MSTL_ENABLE_MYSQL "Enable MySQL database support" ON)
 option(MSTL_ENABLE_SQLITE3 "Enable SQLite3 database support" ON)
 option(MSTL_ENABLE_REDIS "Enable Redis database support" ON)
-option(MSTL_ENABLE_QT6 "Enable Qt6 toolchain support" OFF)
+option(MSTL_ENABLE_ZLIB "Enable zlib compression support" ON)
+option(MSTL_ENABLE_OPENSSL "Enable OpenSSL support" ON)
 option(MSTL_ENABLE_CUDA "Enable CUDA GPU acceleration" OFF)
 option(MSTL_BUILD_TESTS "Build unit tests (requires GTest)" ON)
 option(MSTL_BUILD_EXAMPLES "Build example programs" OFF)
 
 
 message(STATUS "Project Configuration:")
-message(STATUS "  MSTL_ENABLE_BOOST:        ${MSTL_ENABLE_BOOST}")
 message(STATUS "  MSTL_ENABLE_POSTGRESQL:   ${MSTL_ENABLE_POSTGRESQL}")
 message(STATUS "  MSTL_ENABLE_MYSQL:        ${MSTL_ENABLE_MYSQL}")
 message(STATUS "  MSTL_ENABLE_SQLITE3:      ${MSTL_ENABLE_SQLITE3}")
 message(STATUS "  MSTL_ENABLE_REDIS:        ${MSTL_ENABLE_REDIS}")
-message(STATUS "  MSTL_ENABLE_QT6:          ${MSTL_ENABLE_QT6}")
+message(STATUS "  MSTL_ENABLE_ZLIB:         ${MSTL_ENABLE_ZLIB}")
+message(STATUS "  MSTL_ENABLE_OPENSSL:      ${MSTL_ENABLE_OPENSSL}")
 message(STATUS "  MSTL_ENABLE_CUDA:         ${MSTL_ENABLE_CUDA}")
 
 message(STATUS "  MSTL_BUILD_TESTS:         ${MSTL_BUILD_TESTS}")
@@ -107,6 +107,8 @@ configure_package_config_file(
         PATH_VARS
             CMAKE_INSTALL_INCLUDEDIR
             CMAKE_INSTALL_LIBDIR
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
 

@@ -418,13 +418,13 @@ constexpr int months_to_int(const string_view sv) {
 
 class MSTL_API datetime : public iobject<datetime> {
 public:
-    using date_type = date::date_type;
-    using time_type = time::time_type;
+    using date_type = _MSTL date::date_type;
+    using time_type = _MSTL time::time_type;
     using self = datetime;
 
 private:
-    date date_{};
-    time time_{};
+    _MSTL date date_{};
+    _MSTL time time_{};
     int32_t offset_seconds_ = 0;
     bool has_timezone_ = false;
 
@@ -466,53 +466,53 @@ public:
         const time_type hour, const time_type minute, const time_type second, const int32_t offset) noexcept
     : date_(year, month, day), time_(hour, minute, second), offset_seconds_(offset), has_timezone_(true) {}
 
-    constexpr explicit datetime(const date& d, const time& t) noexcept
+    constexpr explicit datetime(const _MSTL date& d, const _MSTL time& t) noexcept
     : date_(d), time_(t) {}
 
-    constexpr explicit datetime(const date& d, const time& t, const int32_t offset) noexcept
+    constexpr explicit datetime(const _MSTL date& d, const _MSTL time& t, const int32_t offset) noexcept
     : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {}
 
-    constexpr explicit datetime(date&& d, time&& t) noexcept
+    constexpr explicit datetime(_MSTL date&& d, _MSTL time&& t) noexcept
     : date_(d), time_(t) {
         d.clear();
         t.clear();
     }
 
-    constexpr explicit datetime(date&& d, time&& t, const int32_t offset) noexcept
+    constexpr explicit datetime(_MSTL date&& d, _MSTL time&& t, const int32_t offset) noexcept
     : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {
         d.clear();
         t.clear();
     }
 
-    constexpr explicit datetime(const date& d) noexcept : date_(d) {}
+    constexpr explicit datetime(const _MSTL date& d) noexcept : date_(d) {}
 
-    constexpr datetime& operator =(const date& d) noexcept {
+    constexpr datetime& operator =(const _MSTL date& d) noexcept {
         date_ = d;
         return *this;
     }
 
-    constexpr explicit datetime(date&& d) noexcept : date_(d) {
+    constexpr explicit datetime(_MSTL date&& d) noexcept : date_(d) {
         d.clear();
     }
 
-    constexpr datetime& operator =(date&& d) noexcept {
+    constexpr datetime& operator =(_MSTL date&& d) noexcept {
         date_ = d;
         d.clear();
         return *this;
     }
 
-    constexpr explicit datetime(const time& t) noexcept : time_(t) {}
+    constexpr explicit datetime(const _MSTL time& t) noexcept : time_(t) {}
 
-    constexpr datetime& operator =(const time& t) noexcept {
+    constexpr datetime& operator =(const _MSTL time& t) noexcept {
         time_ = t;
         return *this;
     }
 
-    constexpr explicit datetime(time&& t) noexcept : time_(t) {
+    constexpr explicit datetime(_MSTL time&& t) noexcept : time_(t) {
         t.clear();
     }
 
-    constexpr datetime& operator =(time&& t) noexcept {
+    constexpr datetime& operator =(_MSTL time&& t) noexcept {
         time_ = t;
         t.clear();
         return *this;
@@ -521,8 +521,8 @@ public:
     MSTL_CONSTEXPR20 ~datetime() = default;
 
 
-    MSTL_NODISCARD constexpr const _MSTL date& dates() const noexcept { return date_; }
-    MSTL_NODISCARD constexpr const _MSTL time& times() const noexcept { return time_; }
+    MSTL_NODISCARD constexpr const _MSTL date& date() const noexcept { return date_; }
+    MSTL_NODISCARD constexpr const _MSTL time& time() const noexcept { return time_; }
 
     MSTL_NODISCARD constexpr time_type hours() const noexcept { return time_.hours(); }
     MSTL_NODISCARD constexpr time_type minutes() const noexcept { return time_.minutes(); }
@@ -546,12 +546,24 @@ public:
 
 
     constexpr bool operator ==(const datetime& other) const noexcept {
-        return date_ == other.date_ && time_ == other.time_;
+        return date_ == other.date_ && time_ == other.time_
+            && has_timezone_ == other.has_timezone_
+            && offset_seconds_ == other.offset_seconds_;
     }
 
     constexpr bool operator <(const datetime& other) const noexcept {
-        if (date_ < other.date_) return true;
-        if (date_ == other.date_ && time_ < other.time_) return true;
+        if (date_ < other.date_) {
+            return true;
+        } else if (date_ == other.date_) {
+            if (time_ < other.time_) {
+                return true;
+            } else if (time_ == other.time_) {
+                if (has_timezone_ && other.has_timezone_ &&
+                    offset_seconds_ < other.offset_seconds_) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -574,7 +586,7 @@ public:
         }
 
         date_ += static_cast<date_type>(days_to_add);
-        time_ = time(
+        time_ = _MSTL time(
             static_cast<time_type>(new_total_sec / 3600),
             static_cast<time_type>((new_total_sec % 3600) / 60),
             static_cast<time_type>(new_total_sec % 60)
@@ -599,7 +611,7 @@ public:
         }
 
         date_ -= static_cast<date_type>(days_to_subtract);
-        time_ = time(
+        time_ = _MSTL time(
             static_cast<time_type>(new_total_sec / 3600),
             static_cast<time_type>((new_total_sec % 3600) / 60),
             static_cast<time_type>(new_total_sec % 60)
@@ -683,13 +695,13 @@ public:
         }
     }
 
-    MSTL_NODISCARD static constexpr datetime parse_ISO_UTC(string_view str) {
+    MSTL_NODISCARD static constexpr datetime parse_ISO_UTC(const string_view str) {
         if (str.size() < 20 || str[10] != 'T') {
             throw_exception(value_exception("Invalid ISO UTC datetime format."));
         }
 
-        const date d = date::parse(str.substr(0, 10));
-        const time t = time::parse(str.substr(11, 8));
+        const _MSTL date d = date::parse(str.substr(0, 10));
+        const _MSTL time t = time::parse(str.substr(11, 8));
 
         if (str.size() > 19 && str[19] == 'Z') {
             return datetime(d, t, 0);
@@ -727,8 +739,8 @@ public:
 
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_GMT() const noexcept {
-        const _MSTL date utc_date = dates();
-        const _MSTL time utc_time = times();
+        const _MSTL date utc_date = date();
+        const _MSTL time utc_time = time();
 
         int wday = utc_date.days_of_week();
         if (wday < 0 || wday >= 7) wday = 0;
@@ -793,12 +805,12 @@ public:
         if (str.size() < 19 || str[10] != 'T') {
             throw_exception(value_exception("Invalid ISO datetime format."));
         }
-        const date d = date::parse(str.substr(0, 10));
+        const _MSTL date d = _MSTL date::parse(str.substr(0, 10));
         size_t time_len = 8;
         if (str.size() >= 19) {
             time_len = 8;
         }
-        const time t = time::parse(str.substr(11, time_len));
+        const _MSTL time t = _MSTL time::parse(str.substr(11, time_len));
         return datetime(d, t);
     }
 

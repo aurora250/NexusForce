@@ -30,7 +30,7 @@ void logger::stop_worker() {
     cv_.notify_all();
 
     if (worker_.joinable()) {
-        auto timeout = _MSTL_CHRONO seconds(5);
+        constexpr auto timeout = _MSTL_CHRONO seconds(5);
         if (worker_.joinable()) {
             auto start = _MSTL_CHRONO steady_clock::now();
             while (worker_.joinable() && _MSTL_CHRONO steady_clock::now() - start < timeout) {
@@ -146,7 +146,7 @@ void logger::clear_context() {
     context_.clear();
 }
 
-void logger::enable_async(bool async) {
+void logger::enable_async(const bool async) {
     if (async == async_.load(_MSTL memory_order_acquire)) {
         return;
     }

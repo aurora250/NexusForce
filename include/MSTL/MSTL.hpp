@@ -54,4 +54,5 @@
 #include "logging/file_sink.hpp"
 #include "network/http/http_server.hpp"
 #include "network/http/http_client.hpp"
+#include "compress/zlib_compress.hpp"
 #endif // MSTL_MSTLCPP_HPP__

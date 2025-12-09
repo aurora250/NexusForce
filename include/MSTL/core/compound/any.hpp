@@ -21,7 +21,6 @@ MSTL_ERROR_BUILD_DERIVED_CLASS(anycast_exception, typecast_exception, "Cast From
 
 
 class MSTL_API any : public iswappable<any> {
-private:
     union storage_internal {
 		storage_internal() = default;
 		storage_internal(const storage_internal&) = delete;
@@ -85,7 +84,7 @@ private:
         is_nothrow_move_constructible_v<T> && sizeof(T) <= sizeof(storage_internal) && alignof(T) <= alignof(storage_internal)
         , internal_manage<T>, external_manage<T>>;
 
-private:
+
     void (* manage_)(ANY_INNER_OPERATION, const any*, ArgT*);
     storage_internal storage_;
 

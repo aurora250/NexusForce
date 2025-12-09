@@ -24,19 +24,17 @@ public:
     };
 
     static process_info create_process(const string& executable, const vector<string>& args = {});
-
     static int wait_for_process(const process_info& info, int timeout_ms = -1);
 
-    static bool terminate_process(const process_info& info);
-
-    static bool is_process_running(const process_info& info);
+    static bool terminate_process(const process_info& info) noexcept;
+    static bool is_process_running(const process_info& info) noexcept;
 
 private:
 #ifdef MSTL_PLATFORM_WINDOWS__
     static string build_command_line(const string& executable, const vector<string>& args);
 #else
     static char** build_argv(const string& executable, const vector<string>& args);
-    static void free_argv(char** argv);
+    static void free_argv(char** argv) noexcept;
 #endif
 };
 

@@ -8,10 +8,10 @@ class MSTL_API ini_parser {
 private:
     map<string, map<string, string>> data_;
 
-    bool is_comment(const string& line) const;
-    bool is_section(const string& line, string& section_name) const;
+    static bool is_comment(const string& line) ;
+    static bool is_section(const string& line, string& section_name) ;
 
-    bool parse_key_value(const string& line, string& key, string& value) const;
+    static bool parse_key_value(const string& line, string& key, string& value);
 
 public:
     bool try_parse(const string& content);

@@ -12,10 +12,43 @@ public:
     using iterator_category = forward_iterator_tag;
     using difference_type = ptrdiff_t;
 
-    path_iterator() noexcept
-    : p_(nullptr), start_(0), end_(0), done_(true) {}
+private:
+    const string* p_ = nullptr;
+    size_t start_ = 0;
+    size_t end_ = 0;
+    bool done_ = true;
+    string current_part_;
 
-    explicit path_iterator(const string* path, size_t pos = 0) noexcept
+    void find_next() {
+        const size_t sz = p_->size();
+        const size_t pos = start_;
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+        if (pos == 0 && sz > 1 && (*p_)[1] == ':') {
+            current_part_ = p_->substr(0, 2);
+            start_ = 2;
+            while (start_ < sz && ((*p_)[start_] == '/' || (*p_)[start_] == '\\'))
+                ++start_;
+            end_ = start_ - 1;
+            done_ = false;
+            return;
+        }
+#endif
+
+        const size_t sep_pos = p_->find_first_of(FILE_SPLITER, pos);
+        if (sep_pos == string::npos) {
+            current_part_ = p_->substr(pos);
+            end_ = sz;
+        } else {
+            current_part_ = p_->substr(pos, sep_pos - pos);
+            end_ = sep_pos;
+        }
+    }
+
+public:
+    path_iterator() noexcept = default;
+
+    explicit path_iterator(const string* path, const size_t pos = 0) noexcept
         : p_(path), start_(pos), done_(false) {
         if (!p_ || p_->empty() || start_ >= p_->size()) {
             done_ = true;
@@ -55,39 +88,6 @@ public:
     MSTL_NODISCARD bool operator !=(const path_iterator& b) const noexcept {
         return !(*this == b);
     }
-
-private:
-    void find_next() {
-        const size_t sz = p_->size();
-        size_t pos = start_;
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-        if (pos == 0 && sz > 1 && (*p_)[1] == ':') {
-            current_part_ = p_->substr(0, 2);
-            start_ = 2;
-            while (start_ < sz && ((*p_)[start_] == '/' || (*p_)[start_] == '\\'))
-                ++start_;
-            end_ = start_ - 1;
-            done_ = false;
-            return;
-        }
-#endif
-
-        size_t sep_pos = p_->find_first_of(FILE_SPLITER, pos);
-        if (sep_pos == string::npos) {
-            current_part_ = p_->substr(pos);
-            end_ = sz;
-        } else {
-            current_part_ = p_->substr(pos, sep_pos - pos);
-            end_ = sep_pos;
-        }
-    }
-
-    const string* p_;
-    size_t start_;
-    size_t end_;
-    bool done_;
-    string current_part_;
 };
 
 MSTL_END_NAMESPACE__

@@ -3,6 +3,7 @@
 #include "../iterator/reverse_iterator.hpp"
 #include "../iterator/normal_iterator.hpp"
 #include "../compound/compressed_pair.hpp"
+#include "../container/array.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t dynamic_extent = SIZE_T_MAX_SIZE;

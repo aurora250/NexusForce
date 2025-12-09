@@ -180,7 +180,7 @@ cmdline::option* cmdline::find_option_long(const string& name) {
     return it == options_long_.end() ? nullptr : it->second;
 }
 
-cmdline::option* cmdline::find_option_short(char name) {
+cmdline::option* cmdline::find_option_short(const char name) {
     const auto it = options_short_.find(name);
     return it == options_short_.end() ? nullptr : it->second;
 }

@@ -137,47 +137,30 @@ public:
         FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
         FILE_SHARED share_mode = FILE_SHARED::SHARE_READ_WRITE,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
-        return this->open(path_, append, access, share_mode, creation, attributes);
-    }
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     void close() noexcept;
     bool flush() const noexcept;
 
 
     size_type write(const string& data, size_type size) const;
-    size_type write(const string& data) const { return this->write(data, data.size()); }
+    size_type write(const string& data) const;
 
     size_type read(string& str, size_type size) const;
-    size_type read(string& str) const { return this->read(str, str.size()); }
+    size_type read(string& str) const;
     string read() const;
 
+    size_type read_binary(string& str, size_type size) const;
+    size_type read_binary(string& str) const;
+    string read_binary() const;
+
+    bool read_line(string& line) const;
+    string read_line() const;
+    vector<string> read_lines() const;
 
     vector<string> read_chunks(size_type chunk_size = FILE_BUFFER_SIZE * 16) const;
     bool write_chunks(const vector<string>& chunks);
     vector<chunk_info> get_chunk_info(size_type chunk_size) const;
-
-
-    size_type read_binary(string& str, size_type size) const;
-
-    size_type read_binary(string& str) const {
-        const size_type s = size();
-        str.resize(s);
-        return this->read_binary(str, s);
-    }
-
-    string read_binary() const;
-
-
-    bool read_line(string& line) const;
-
-    string read_line() const {
-        string line;
-        if (!read_line(line)) return {};
-        return line;
-    }
-
-    vector<string> read_lines() const;
 
 
     async_result async_read(string& buffer, size_type size, difference_type offset = -1);
@@ -191,25 +174,20 @@ public:
     MSTL_NODISCARD bool opened() const noexcept { return opened_; }
     MSTL_NODISCARD bool is_append() const noexcept { return append_mode_; }
 
-
-    string last_error() const noexcept { return last_error_msg_; }
-    int last_error_code() const noexcept { return last_error_code_; }
-
-    void clear_error() noexcept {
-        last_error_msg_.clear();
-        last_error_code_ = 0;
-    }
+    MSTL_NODISCARD string last_error() const noexcept { return last_error_msg_; }
+    MSTL_NODISCARD int last_error_code() const noexcept { return last_error_code_; }
+    void clear_error() noexcept { last_error_msg_.clear(); last_error_code_ = 0; }
 
 
-    file_line_iterator begin_lines() const { return file_line_iterator(this); }
-    file_line_iterator end_lines() const { return file_line_iterator(); }
+    MSTL_NODISCARD file_line_iterator begin_lines() const { return file_line_iterator(this); }
+    MSTL_NODISCARD file_line_iterator end_lines() const { return {}; }
 
 
-    static bool compare(const path& file1, const path& file2, bool binary = true);
-    static bool compare_binary(const path& file1, const path& file2);
-    static bool compare_text(const path& file1, const path& file2);
+    MSTL_NODISCARD static bool compare(const path& file1, const path& file2, bool binary = true);
+    MSTL_NODISCARD static bool compare_binary(const path& file1, const path& file2);
+    MSTL_NODISCARD static bool compare_text(const path& file1, const path& file2);
 
-    static vector<binary_diff_entry> binary_diff(
+    MSTL_NODISCARD static vector<binary_diff_entry> binary_diff(
         const path& file1, const path& file2, size_type max_diffs = 100);
 
 
@@ -222,6 +200,7 @@ public:
 
     bool lock(difference_type offset, difference_type length,
         FILE_LOCK mode = FILE_LOCK::EXCLUSIVE) const noexcept;
+
     bool unlock(difference_type offset, difference_type length) const noexcept;
 
 
@@ -265,17 +244,14 @@ public:
 
     static bool create_and_write(const path& p, const string& content, bool append = false);
 
+
     static bool read(const path& p, string& content,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     static string read(const path& p,
-            FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-            FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
-        string content;
-        file::read(p, content, creation, attributes);
-        return content;
-    }
+        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     static bool read_binary(const path& p, string& content,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
@@ -283,11 +259,7 @@ public:
 
     static string read_binary(const path& p,
         FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL) {
-        string content;
-        file::read_binary(p, content, creation, attributes);
-        return content;
-    }
+        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 };
 
 MSTL_END_NAMESPACE__

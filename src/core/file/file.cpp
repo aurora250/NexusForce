@@ -295,8 +295,10 @@ file::~file() {
 }
 
 bool file::open(path p, const bool append,
-    FILE_ACCESS access, FILE_SHARED share_mode,
-    FILE_CREATION creation, FILE_ATTRI attributes) {
+    FILE_ACCESS access,
+    FILE_SHARED share_mode,
+    FILE_CREATION creation,
+    FILE_ATTRI attributes) {
     this->close();
     clear_error();
 
@@ -317,7 +319,7 @@ bool file::open(path p, const bool append,
         nullptr
     );
 #elif defined(MSTL_PLATFORM_LINUX__)
-    fud_t flags = static_cast<fud_t>(access);
+    auto flags = static_cast<fud_t>(access);
     flags |= static_cast<fud_t>(creation);
     if (append) flags |= O_APPEND;
 
@@ -341,6 +343,14 @@ bool file::open(path p, const bool append,
 
     adjust_buffer_size();
     return true;
+}
+
+bool file::open(const bool append,
+    const FILE_ACCESS access,
+    const FILE_SHARED share_mode,
+    const FILE_CREATION creation,
+    const FILE_ATTRI attributes) {
+    return this->open(path_, append, access, share_mode, creation, attributes);
 }
 
 void file::close() noexcept {
@@ -391,7 +401,7 @@ file::size_type file::write(const string& data, const size_type size) const {
             if (bytes_written == 0) break;
             total_written += bytes_written;
 #elif defined(MSTL_PLATFORM_LINUX__)
-            ssize_t written = ::write(
+            const ssize_t written = ::write(
                 handle_, ptr + total_written, real_size - total_written);
             if (written == -1) {
                 if (errno == EINTR) continue;
@@ -427,6 +437,10 @@ file::size_type file::write(const string& data, const size_type size) const {
     return total_written;
 }
 
+file::size_type file::write(const string& data) const {
+    return this->write(data, data.size());
+}
+
 file::size_type file::read(string& str, const size_type size) const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
 
@@ -452,6 +466,10 @@ file::size_type file::read(string& str, const size_type size) const {
     return total_read;
 }
 
+file::size_type file::read(string& str) const {
+    return this->read(str, str.size());
+}
+
 string file::read() const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return {};
 
@@ -471,7 +489,7 @@ string file::read() const {
     return content;
 }
 
-vector<string> file::read_chunks(size_type chunk_size) const {
+vector<string> file::read_chunks(const size_type chunk_size) const {
     vector<string> chunks;
     if (!opened_ || handle_ == INVALID_HANDLE()) return chunks;
 
@@ -529,7 +547,7 @@ vector<file::chunk_info> file::get_chunk_info(size_type chunk_size) const {
     size_type index = 0;
 
     while (offset < static_cast<difference_type>(file_sz)) {
-        chunk_info ci;
+        chunk_info ci{};
         ci.offset = offset;
         ci.chunk_index = index;
 
@@ -576,6 +594,12 @@ file::size_type file::read_binary(string& str, const size_type size) const {
     }
 
     return total_read;
+}
+
+file::size_type file::read_binary(string& str) const {
+    const size_type s = size();
+    str.resize(s);
+    return this->read_binary(str, s);
 }
 
 string file::read_binary() const {
@@ -626,6 +650,12 @@ bool file::read_line(string& line) const {
     return !line.empty() || found_eol;
 }
 
+string file::read_line() const {
+    string line;
+    if (!read_line(line)) return {};
+    return line;
+}
+
 vector<string> file::read_lines() const {
     vector<string> lines;
     if (!opened_ || handle_ == INVALID_HANDLE()) return lines;
@@ -654,7 +684,8 @@ vector<string> file::read_lines() const {
 }
 
 
-file::async_result file::async_read(string& buffer, size_type size, difference_type offset) {
+file::async_result file::async_read(string& buffer,
+    const size_type size, const difference_type offset) {
     async_result result;
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
@@ -726,7 +757,8 @@ file::async_result file::async_read(string& buffer, size_type size, difference_t
     return result;
 }
 
-file::async_result file::async_write(const string& data, size_type size, difference_type offset) {
+file::async_result file::async_write(const string& data,
+    const size_type size, const difference_type offset) {
     async_result result;
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
@@ -774,29 +806,29 @@ file::async_result file::async_write(const string& data, size_type size, differe
         }
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    auto* aiocb = new ::aiocb{};
-    _MSTL fill_n(reinterpret_cast<char*>(aiocb), sizeof(struct ::aiocb), 0);
+    auto* cb = new ::aiocb{};
+    _MSTL fill_n(reinterpret_cast<char*>(cb), sizeof(::aiocb), 0);
 
-    aiocb->aio_fildes = handle_;
-    aiocb->aio_buf = const_cast<char*>(data.data());
-    aiocb->aio_nbytes = real_size;
-    aiocb->aio_offset = offset >= 0 ? offset : this->tell();
-    aiocb->aio_sigevent.sigev_notify = SIGEV_NONE;
+    cb->aio_fildes = handle_;
+    cb->aio_buf = const_cast<char*>(data.data());
+    cb->aio_nbytes = real_size;
+    cb->aio_offset = offset >= 0 ? offset : this->tell();
+    cb->aio_sigevent.sigev_notify = SIGEV_NONE;
 
-    if (::aio_write(aiocb) == 0) {
+    if (::aio_write(cb) == 0) {
         result.completed = false;
-        result.cb = aiocb;
-        async_operations_.push_back(aiocb);
+        result.cb = cb;
+        async_operations_.push_back(cb);
     } else {
         set_last_error();
         result.error_code = last_error_code_;
-        delete aiocb;
+        delete cb;
     }
 #endif
     return result;
 }
 
-bool file::wait_async(async_result& result, uint32_t timeout_ms) {
+bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
     if (result.completed) return true;
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (!result.overlapped) return false;
@@ -835,8 +867,8 @@ bool file::wait_async(async_result& result, uint32_t timeout_ms) {
 
     ::aiocb* target_aiocb = result.cb;
     const ::aiocb* aiocb_list[1] = { target_aiocb };
-    ::timespec timeout;
-    ::timespec* timeout_ptr = nullptr;
+    ::timespec timeout{};
+    const ::timespec* timeout_ptr = nullptr;
 
     if (timeout_ms != 0xFFFFFFFF) {
         timeout.tv_sec = timeout_ms / 1000;
@@ -856,7 +888,11 @@ bool file::wait_async(async_result& result, uint32_t timeout_ms) {
                 result.bytes_transferred = static_cast<size_type>(return_value);
                 result.error_code = 0;
 
-                auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), target_aiocb);
+                const auto it = _MSTL find(
+                    async_operations_.begin(),
+                    async_operations_.end(),
+                    target_aiocb
+                );
                 if (it != async_operations_.end()) {
                     async_operations_.erase(it);
                 }
@@ -868,7 +904,11 @@ bool file::wait_async(async_result& result, uint32_t timeout_ms) {
                 result.error_code = errno;
                 set_last_error();
 
-                auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), target_aiocb);
+                const auto it = _MSTL find(
+                    async_operations_.begin(),
+                    async_operations_.end(),
+                    target_aiocb
+                );
                 if (it != async_operations_.end()) {
                     async_operations_.erase(it);
                 }
@@ -887,7 +927,11 @@ bool file::wait_async(async_result& result, uint32_t timeout_ms) {
 
             ::aio_return(target_aiocb);
 
-            auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), target_aiocb);
+            const auto it = _MSTL find(
+                async_operations_.begin(),
+                async_operations_.end(),
+                target_aiocb
+            );
             if (it != async_operations_.end()) {
                 async_operations_.erase(it);
             }
@@ -928,9 +972,8 @@ void file::cancel_async(async_result& result) {
     if (!result.cb) return;
 
     ::aiocb* target_aiocb = result.cb;
-    const int cancel_result = ::aio_cancel(handle_, target_aiocb);
 
-    switch (cancel_result) {
+    switch (::aio_cancel(handle_, target_aiocb)) {
         case AIO_CANCELED: {
             result.completed = true;
             result.error_code = ECANCELED;
@@ -961,7 +1004,7 @@ void file::cancel_async(async_result& result) {
         }
     }
 
-    auto it = _MSTL find(
+    const auto it = _MSTL find(
         async_operations_.begin(),
         async_operations_.end(),
         target_aiocb);
@@ -994,12 +1037,7 @@ file::size_type file::size() const noexcept {
 
 file::size_type file::size(const path& p) {
     size_type sz = 0;
-    {
-        file f;
-        if (f.open(p, false, FILE_ACCESS::READ)) {
-            sz = f.size();
-        }
-    }
+    file::size(p, sz);
     return sz;
 }
 
@@ -1522,7 +1560,8 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
 #endif
 }
 
-bool file::read(const path& p, string& content, FILE_CREATION creation, FILE_ATTRI attributes) {
+bool file::read(const path& p, string& content,
+    FILE_CREATION creation, FILE_ATTRI attributes) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     file f;
     if (!f.open(p, false,
@@ -1557,8 +1596,14 @@ bool file::read(const path& p, string& content, FILE_CREATION creation, FILE_ATT
 #endif
 }
 
+string file::read(const path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+    string content;
+    file::read(p, content, creation, attributes);
+    return content;
+}
+
 bool file::read_binary(const path& p, string& content,
-    FILE_CREATION creation, FILE_ATTRI attributes) {
+    const FILE_CREATION creation, const FILE_ATTRI attributes) {
     file f;
     if (!f.open(p, false,
         FILE_ACCESS::READ,
@@ -1574,6 +1619,12 @@ bool file::read_binary(const path& p, string& content,
         if (bytes_read != sz) content.resize(bytes_read);
     }
     return true;
+}
+
+string file::read_binary(const path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+    string content;
+    file::read_binary(p, content, creation, attributes);
+    return content;
 }
 
 MSTL_END_NAMESPACE__

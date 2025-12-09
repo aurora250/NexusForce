@@ -44,7 +44,7 @@ file_sink::file_sink(path filename, const size_t max_file_size, const bool enabl
 : base_filename_(move(filename)), max_file_size_(max_file_size),
 current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
     if (enable_date_rotation_) {
-        current_date_ = datetime::now().dates().to_string();
+        current_date_ = datetime::now().date().to_string();
     }
     open_new_file();
 }
@@ -53,7 +53,7 @@ void file_sink::log(const log_event& event) {
     const string formatted = formatter_ ? formatter_->format(event) : default_format(event);
     _MSTL lock_guard<_MSTL recursive_mutex> lock(mutex_);
     if (enable_date_rotation_) {
-        const string today = datetime::now().dates().to_string();
+        const string today = datetime::now().date().to_string();
         if (today != current_date_) {
             rotate_by_date(today);
         }
