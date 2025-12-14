@@ -200,6 +200,7 @@ inline void handle_cookie_api(
     }
 }
 
+void test_https_server();
 void test_http_server();
 void test_http_client();
 

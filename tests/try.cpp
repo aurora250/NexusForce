@@ -9,8 +9,8 @@ static const path res_root
 #ifdef MSTL_PLATFORM_WINDOWS__
     {R"(D:/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #elif defined(MSTL_PLATFORM_LINUX__)
-    // {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
-    {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
+    {R"(/home/huenqi/Workspace/MSTL/tests/resource)"};
+    // {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/MSTL/tests/resource)"};
 #endif
 
 void test_file_basic_operations() {
@@ -744,9 +744,92 @@ void test_json() {
     } catch (...) {}
 }
 
+void test_https_server() {
+    try {
+        http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
+
+        http_router& r = server.router();
+
+        r.get("/", [](http_request& req, http_response& res) {
+            printcln(color::cyan(), "HTTPS Request from: " + req.header("User-Agent"));
+
+            res.set_ok();
+            res.set_status_msg("OK");
+            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+
+            string html = R"(
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTPS Test</title>
+</head>
+<body>
+    <h1>HTTPS Connection Successful!</h1>
+    <p>This is served over HTTPS.</p>
+    <p>SSL/TLS is working correctly.</p>
+    <div id="status"></div>
+
+    <script>
+        document.getElementById('status').textContent =
+            'Protocol: ' + window.location.protocol;
+    </script>
+</body>
+</html>
+            )";
+            res.set_body(html);
+        });
+
+        r.get("/api/info", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_content_type(HTTP_CONTENT::JSON_APP);
+
+            json_builder response;
+            response.begin_object()
+                .key("https").value(req.is_https())
+                .key("method").value(req.method().to_string())
+                .key("path").value(req.path())
+                .key("user_agent").value(req.header("User-Agent"))
+                .end_object();
+
+            res.set_body(response.build()->to_string());
+        });
+
+        r.post("/api/echo", [](http_request& req, http_response& res) {
+            res.set_ok();
+            res.set_content_type(HTTP_CONTENT::JSON_APP);
+
+            json_builder response;
+            response.begin_object()
+                .key("https").value(req.is_https())
+                .key("body").value(req.body())
+                .key("content_type").value(req.content_type())
+                .end_object();
+
+            res.set_body(response.build()->to_string());
+        });
+
+        r.set_not_found_handler([](http_request&, http_response& res) {
+            res.set_not_found();
+            res.set_body("HTTPS 404 - Not Found");
+        });
+
+        if (server.start()) {
+            printcln(color::green(), "HTTPS Server started on port 8443");
+            printcln(color::yellow(), "Note: Using self-signed certificate");
+            printcln(color::yellow(), "Press Ctrl+C to stop");
+
+            while (true) {
+                _MSTL this_thread::sleep_for(_MSTL_CHRONO seconds(1));
+            }
+        }
+    } catch (const exception& e) {
+        printcln(color::red(), "HTTPS Server error: " + string(e.what()));
+    }
+}
+
 void test_http_server() {
     try {
-        http_server server(8080);
+        http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
 
         http_router& r = server.router();
         r.use(new logging_filter());

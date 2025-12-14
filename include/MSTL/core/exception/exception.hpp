@@ -46,9 +46,11 @@ struct MSTL_API exception {
 	constexpr explicit exception(const char* info = __type__, const char* type = __type__) noexcept
 		: info(info), type(type) {}
 
-	__MSTL_ERROR_DERIVED_DESTRUCTOR(exception)
+	virtual ~exception() = default;
+
+    MSTL_NODISCARD virtual const char* what() const noexcept { return info; }
+
 	__MSTL_ERROR_TYPE(exception)
-    __MSTL_ERROR_WHAT()
 };
 
 MSTL_ERROR_BUILD_FINAL_CLASS(assert_exception, exception, "Assertion Failed.")

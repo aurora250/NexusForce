@@ -7,6 +7,8 @@
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__
 
+
+
 #ifdef MSTL_STATE_DEBUG__
 void throw_exception(const exception& err) {
     printcln(color::red(), "\nException : (", err.type, ") ", err.what());
