@@ -7,16 +7,7 @@
 #include <zlib.h>
 MSTL_BEGIN_NAMESPACE__
 
-class zlib_exception final : public exception {
-public:
-    explicit zlib_exception(const char* msg, int zlib_code = 0)
-        : exception(msg), code_(zlib_code) {}
-
-    int code() const noexcept { return code_; }
-
-private:
-    int code_;
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(zlib_exception, system_exception, "Zlib Operation Failed.")
 
 
 enum class COMPRESS_LEVEL {

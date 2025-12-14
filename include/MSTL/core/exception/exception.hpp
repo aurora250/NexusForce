@@ -1,13 +1,13 @@
 #ifndef MSTL_CORE_CONFIG_EXCEPTION_HPP__
 #define MSTL_CORE_CONFIG_EXCEPTION_HPP__
-#include "../config/c++config.hpp"
+#include "../memory/unique_ptr.hpp"
 #ifdef MSTL_SUPPORT_CUDA__
 #include <cuda_runtime.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
 #define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
-	explicit THIS(const char* info = INFO, const char* type = __type__) noexcept \
+	explicit THIS(const char* info = INFO, const char* type = static_type) noexcept \
 		: BASE(info, type) {}
 
 #define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \
@@ -17,12 +17,7 @@ MSTL_BEGIN_NAMESPACE__
 	~CLASS() override = default;
 
 #define __MSTL_ERROR_TYPE(CLASS) \
-	static constexpr auto __type__ = #CLASS;
-
-#define __MSTL_ERROR_WHAT() \
-	virtual const char* what() const { \
-		return info; \
-	}
+	static constexpr auto static_type = #CLASS;
 
 #define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \
 	struct MSTL_API THIS : BASE { \
@@ -40,15 +35,26 @@ MSTL_BEGIN_NAMESPACE__
 
 
 struct MSTL_API exception {
-	const char* info = nullptr;
-	const char* type = nullptr;
+private:
+    struct impl;
+    unique_ptr<impl> ptr_;
 
-	constexpr explicit exception(const char* info = __type__, const char* type = __type__) noexcept
-		: info(info), type(type) {}
+public:
+    explicit exception(const char* info = static_type, const char* type = static_type);
 
-	virtual ~exception() = default;
+    exception(const exception&);
+    exception& operator =(const exception&);
+    exception(exception&&) noexcept = default;
+    exception& operator =(exception&&) noexcept = default;
 
-    MSTL_NODISCARD virtual const char* what() const noexcept { return info; }
+    template <typename Error>
+    explicit exception(const Error& error)
+    : ptr_(make_unique<impl>(*error.ptr_)) {}
+
+	virtual ~exception();
+
+    MSTL_NODISCARD virtual const char* what() const noexcept;
+    MSTL_NODISCARD virtual const char* type() const noexcept;
 
 	__MSTL_ERROR_TYPE(exception)
 };

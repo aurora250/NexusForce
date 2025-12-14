@@ -5,21 +5,7 @@
 #include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct ini_exception final : value_exception {
-    explicit ini_exception(
-        const string& info = "INI Parse Failed",
-        const char *type = __type__) noexcept
-    : value_exception(type, type), msg(info) {}
-
-    ~ini_exception() override = default;
-
-    const char* what() const noexcept override {
-        return msg.c_str();
-    }
-
-    string msg;
-    static constexpr auto __type__ = "ini_exception";
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(ini_exception, value_exception, "INI Operation Failed.")
 
 
 class ini_value;

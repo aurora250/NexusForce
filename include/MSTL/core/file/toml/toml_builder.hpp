@@ -46,7 +46,7 @@ private:
                 throw_exception(toml_exception("No key set for value in table"));
             }
             if (top.table_ptr->has_member(current_key_)) {
-                throw_exception(toml_exception("Duplicate key: " + current_key_));
+                throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
             }
             top.table_ptr->add_member(current_key_, _MSTL move(v));
             current_key_.clear();

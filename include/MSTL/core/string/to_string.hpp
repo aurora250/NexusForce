@@ -58,7 +58,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
 
 template <typename T, enable_if_t<is_base_of_v<_MSTL exception, T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& obj) {
-    return string(obj.type) + "(" + obj.what() + ")";
+    return string(obj.type()) + "(" + obj.what() + ")";
 }
 
 

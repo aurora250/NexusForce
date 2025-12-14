@@ -5,21 +5,7 @@
 #include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct env_exception final : value_exception {
-    explicit env_exception(
-        const string& info = "ENV Parse Failed",
-        const char *type = __type__) noexcept
-    : value_exception(type, type), msg(info) {}
-
-    ~env_exception() override = default;
-
-    const char* what() const noexcept override {
-        return msg.c_str();
-    }
-
-    string msg;
-    static constexpr auto __type__ = "env_exception";
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(env_exception, value_exception, "ENV Operation Failed.")
 
 
 class env_value;

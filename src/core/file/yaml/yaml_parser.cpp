@@ -1646,7 +1646,7 @@ void yaml_parser::throw_parse_error(const string& message) const {
         }
         error_msg += "'";
     }
-    throw_exception(yaml_exception(error_msg));
+    throw_exception(yaml_exception(error_msg.data()));
 }
 
 MSTL_END_NAMESPACE__

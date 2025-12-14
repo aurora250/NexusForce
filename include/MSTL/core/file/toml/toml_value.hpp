@@ -7,23 +7,7 @@
 #include "MSTL/core/time/datetime.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct toml_exception final : value_exception {
-    explicit toml_exception(
-        const string& info = "TOML Parse Failed",
-        const char *type = __type__)
-    : value_exception(type, type), msg(info) {
-        msg = info;
-    }
-
-    ~toml_exception() override = default;
-
-    const char* what() const noexcept override {
-        return msg.c_str();
-    }
-
-    string msg;
-    static constexpr auto __type__ = "toml_exception";
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(toml_exception, value_exception, "TOML Operation Failed.")
 
 
 class toml_value;

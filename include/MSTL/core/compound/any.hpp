@@ -1,10 +1,10 @@
 #ifndef MSTL_CORE_COMPOUND_ANY_HPP__
 #define MSTL_CORE_COMPOUND_ANY_HPP__
-#include <initializer_list>
-#include <typeinfo>
 #include "../exception/exception.hpp"
 #include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
+#include <initializer_list>
+#include <typeinfo>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API any;

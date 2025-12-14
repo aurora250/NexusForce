@@ -27,10 +27,10 @@ void cmdline::add_option(const string& long_name, const char short_name,
         throw_exception(cmdline_exception("Option must have at least one name"));
     }
     if (!long_name.empty() && options_long_.count(long_name)) {
-        throw_exception(cmdline_exception("Duplicate long option: " + long_name));
+        throw_exception(cmdline_exception(("Duplicate long option: " + long_name).data()));
     }
     if (short_name != 0 && options_short_.count(short_name)) {
-        throw_exception(cmdline_exception(string("Duplicate short option: ") + short_name));
+        throw_exception(cmdline_exception(("Duplicate short option: "_s + short_name).data()));
     }
 
     const option opt(long_name, short_name, description, requires_value, allow_multiple, default_value);
@@ -191,7 +191,7 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
 
     option* opt = find_option_long(name);
     if (!opt) {
-        throw_exception(cmdline_exception("Unknown option: " + arg));
+        throw_exception(cmdline_exception(("Unknown option: " + arg).data()));
     }
 
     if (opt->requires_value) {
@@ -201,7 +201,7 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
         }
         else {
             if (i + 1 >= args.size()) {
-                throw_exception(cmdline_exception("Option requires a value: --" + name));
+                throw_exception(cmdline_exception(("Option requires a value: --" + name).data()));
             }
             value = args[++i];
         }
@@ -231,13 +231,13 @@ void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>&
         option* opt = find_option_short(short_name);
 
         if (!opt) {
-            throw_exception(cmdline_exception(string("Unknown short option: -") + short_name));
+            throw_exception(cmdline_exception(("Unknown short option: -"_s + short_name).data()));
         }
 
         if (opt->requires_value) {
             if (j == arg.size() - 1) {
                 if (i + 1 >= args.size()) {
-                    throw_exception(cmdline_exception(string("Option requires a value: -") + short_name));
+                    throw_exception(cmdline_exception(("Option requires a value: -"_s + short_name).data()));
                 }
                 const string value = args[++i];
                 if (opt->allow_multiple) {

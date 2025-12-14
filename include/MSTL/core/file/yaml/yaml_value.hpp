@@ -7,23 +7,8 @@
 #include "MSTL/core/time/datetime.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct yaml_exception final : value_exception {
-    explicit yaml_exception(
-        const string& info = "YAML Operation Failed",
-        const char *type = __type__)
-    : value_exception(type, type), msg(info) {
-        msg = info;
-    }
+MSTL_ERROR_BUILD_FINAL_CLASS(yaml_exception, value_exception, "YAML Operation Failed.")
 
-    ~yaml_exception() override = default;
-
-    const char* what() const noexcept override {
-        return msg.c_str();
-    }
-
-    string msg;
-    static constexpr auto __type__ = "yaml_exception";
-};
 
 class yaml_value;
 class yaml_null;
@@ -73,8 +58,8 @@ public:
     MSTL_NODISCARD bool is_sequence() const noexcept { return type() == Sequence; }
     MSTL_NODISCARD bool is_mapping() const noexcept { return type() == Mapping; }
 
-    void set_anchor(const string& anchor) { this->anchor = anchor; }
-    void set_tag(const string& tag) { this->tag = tag; }
+    void set_anchor(const string& a) { this->anchor = a; }
+    void set_tag(const string& t) { this->tag = t; }
 
     MSTL_NODISCARD string to_string() const;
     MSTL_NODISCARD string to_document() const;
@@ -157,7 +142,7 @@ public:
         if (dt.try_parse_ISO_UTC(v) || dt.try_parse_ISO(v)) {
             value = dt;
         } else {
-            throw yaml_exception("Invalid timestamp format: " + string(v));
+            throw yaml_exception(("Invalid timestamp format: " + string(v)).c_str());
         }
     }
 

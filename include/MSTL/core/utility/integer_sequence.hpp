@@ -1,7 +1,6 @@
 #ifndef MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__
 #define MSTL_CORE_UTILITY_INTEGER_SEQUENCE_HPP__
 #include "../typeinfo/type_traits.hpp"
-#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, T... Values>

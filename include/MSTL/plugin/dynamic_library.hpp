@@ -5,6 +5,7 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(dl_exception, system_exception, "Dynamic Library Operation Failed")
 
+
 class MSTL_API dynamic_library {
 private:
     void* handle_;

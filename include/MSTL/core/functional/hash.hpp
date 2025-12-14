@@ -1,6 +1,5 @@
 #ifndef MSTL_CORE_FUNCTIONAL_HASH_HPP__
 #define MSTL_CORE_FUNCTIONAL_HASH_HPP__
-#include "../typeinfo/types.hpp"
 #include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 

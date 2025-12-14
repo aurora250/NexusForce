@@ -13,7 +13,7 @@ void zlib_compressor::check_zlib_error(const int ret_code) {
             case Z_VERSION_ERROR: msg = "Version mismatch"; break;
             default: msg = "Unknown error"; break;
         }
-        throw_exception(zlib_exception(msg, ret_code));
+        throw_exception(zlib_exception(msg));
     }
 }
 

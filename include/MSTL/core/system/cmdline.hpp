@@ -5,23 +5,7 @@
 #include "../string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-struct cmdline_exception final : value_exception {
-    explicit cmdline_exception(
-        const char* info = "CmdLine Operation Failed.",
-        const char* type = __type__) noexcept : value_exception(info, type) {}
-
-    explicit cmdline_exception(
-            const string& info = "CmdLine Operation Failed.",
-            const char* type = __type__) noexcept
-    : value_exception(type, type), msg(info) {
-        this->info = msg.data();
-    }
-
-    ~cmdline_exception() override = default;
-
-    static constexpr auto __type__ = "cmdline_exception";
-    string msg;
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(cmdline_exception, system_exception, "CmdLine Operation Failed.")
 
 
 class MSTL_API cmdline {

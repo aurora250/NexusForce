@@ -73,7 +73,7 @@ toml_builder& toml_builder::begin_inline_table() {
             throw_exception(toml_exception("No key set for inline table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception("Duplicate key: " + current_key_));
+            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _MSTL move(inline_table));
         current_key_.clear();
@@ -116,7 +116,7 @@ toml_builder& toml_builder::begin_array() {
             throw_exception(toml_exception("No key set for array"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception("Duplicate key: " + current_key_));
+            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _MSTL move(arr));
         current_key_.clear();
@@ -184,7 +184,7 @@ toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& bu
             throw_exception(toml_exception("No key set for table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception("Duplicate key: " + current_key_));
+            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _MSTL move(table));
         current_key_.clear();
@@ -228,7 +228,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
         if (existing) {
             if (!existing->is_table()) {
                 throw_exception(toml_exception(
-                    "Key '" + key + "' already exists and is not a table"));
+                    ("Key '" + key + "' already exists and is not a table").data()));
             }
             current = const_cast<toml_table*>(existing->as_table());
         } else {
@@ -255,7 +255,7 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
     if (existing) {
         if (!existing->is_array()) {
             throw_exception(toml_exception(
-                "Key '" + array_name + "' already exists and is not an array"));
+                ("Key '" + array_name + "' already exists and is not an array").data()));
         }
         return const_cast<toml_array*>(existing->as_array());
     } else {

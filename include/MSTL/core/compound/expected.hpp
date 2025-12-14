@@ -5,20 +5,7 @@
 #ifdef MSTL_STANDARD_20__
 MSTL_BEGIN_NAMESPACE__
 
-struct expected_exception final : memory_exception {
-    explicit expected_exception(
-        const char *const info = "Expected Operation Failed.",
-        const char *const type = __type__) noexcept : memory_exception(info, type) {
-    }
-
-    template <typename ErrorT>
-    explicit expected_exception(const ErrorT& err) noexcept
-    : memory_exception(err.what()) {}
-    
-    ~expected_exception() override = default;
-    
-    static constexpr auto __type__ = "expected_exception";
-};
+MSTL_ERROR_BUILD_FINAL_CLASS(expected_exception, memory_exception, "Expected Operation Failed.")
 
 
 struct unexpect_t {
