@@ -61,7 +61,7 @@ private:
         auto sec = _MSTL_CHRONO time_point_cast<_MSTL_CHRONO seconds>(util);
         auto nanosec = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(util - sec);
 
-        const ::timespec ts = {
+        const std::timespec ts = {
             static_cast<std::time_t>(sec.time_since_epoch().count()),
             static_cast<long>(nanosec.count())
         };
@@ -108,13 +108,13 @@ public:
     template <typename Dur>
     cv_status wait_until(unique_lock<mutex>& lock,
         const _MSTL_CHRONO time_point<steady_clock, Dur>& util) {
-        return __wait_until_impl(lock, util);
+        return this->__wait_until_impl(lock, util);
     }
 
     template <typename Dur>
     cv_status wait_until(unique_lock<mutex>& lock,
         const _MSTL_CHRONO time_point<system_clock, Dur>& util) {
-        return __wait_until_impl(lock, util);
+        return this->__wait_until_impl(lock, util);
     }
 
     template <typename Clock, typename Dur>
@@ -123,7 +123,7 @@ public:
         const typename Clock::time_point entry = Clock::now();
         const auto atime = clock_t::now() + _MSTL_CHRONO ceil<clock_t::duration>(util - entry);
 
-        if (__wait_until_impl(lock, atime) == cv_status::no_timeout) {
+        if (this->__wait_until_impl(lock, atime) == cv_status::no_timeout) {
             return cv_status::no_timeout;
         }
         if (Clock::now() < util) {
@@ -136,7 +136,7 @@ public:
     bool wait_until(unique_lock<mutex>& lock,
         const _MSTL_CHRONO time_point<Clock, Dur>& util, Pred pred) {
         while (!pred()) {
-            if (wait_until(lock, util) == cv_status::timeout) {
+            if (this->wait_until(lock, util) == cv_status::timeout) {
                 return pred();
             }
         }
@@ -147,14 +147,14 @@ public:
     cv_status wait_for(unique_lock<mutex>& lock,
         const _MSTL_CHRONO duration<Rep, Period>& rest) {
         const auto atime = steady_clock::now() + _MSTL_CHRONO ceil<steady_clock::duration>(rest);
-        return wait_until(lock, atime);
+        return this->wait_until(lock, atime);
     }
 
     template <typename Rep, typename Period, typename Pred>
     bool wait_for(unique_lock<mutex>& lock,
         const _MSTL_CHRONO duration<Rep, Period>& rest, Pred pred) {
         const auto atime = steady_clock::now() + _MSTL_CHRONO ceil<steady_clock::duration>(rest);
-        return wait_until(lock, atime, _MSTL move(pred));
+        return this->wait_until(lock, atime, _MSTL move(pred));
     }
 };
 

@@ -59,53 +59,98 @@ string_view path::extension(const string_view path) noexcept {
 }
 
 path path::lexically_normal() const noexcept {
-    if (path_.empty()) return path{};
+    if (path_.empty()) return path(".");
 
     string result;
-    bool absolute_path;
+    vector<string_view> parts;
+
+    size_t start = 0;
+    const size_t length = path_.size();
+
+    bool is_absolute = false;
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (path_.size() >= 2 && path_[1] == ':') {
+    if (length >= 2 && path_[1] == ':') {
         result += path_.substr(0, 2);
-        absolute_path = (path_.size() > 2) && (path_[2] == '\\' || path_[2] == '/');
-    } else {
-        absolute_path = !path_.empty() && (path_[0] == '\\' || path_[0] == '/');
+        start = 2;
+        if (length > 2 && (path_[2] == '\\' || path_[2] == '/')) {
+            is_absolute = true;
+            start = 3;
+        }
+    } else if (length >= 2 && (path_[0] == '\\' && path_[1] == '\\')) {
+        is_absolute = true;
+        result += "\\\\";
+        start = 2;
+    } else if (!path_.empty() && (path_[0] == '\\' || path_[0] == '/')) {
+        is_absolute = true;
+        start = 1;
     }
 #else
-    absolute_path = !path_.empty() && path_[0] == '/';
+    if (!path_.empty() && path_[0] == '/') {
+        is_absolute = true;
+        start = 1;
+    }
 #endif
 
-    vector<string_view> parts;
-    for (auto it = begin(); it != end(); ++it) {
-        auto part = *it;
-        if (part.empty() || part == ".") continue;
-        if (part == "..") {
-            if (!parts.empty() && parts.back() != "..") {
-                parts.pop_back();
-            } else if (!absolute_path) {
-                parts.emplace_back("..");
+    size_t pos = start;
+    while (pos < length) {
+        size_t next_sep = pos;
+        while (next_sep < length && path_[next_sep] != '/' && path_[next_sep] != '\\') {
+            ++next_sep;
+        }
+
+        if (next_sep > pos) {
+            string_view part = path_.view().substr(pos, next_sep - pos);
+            parts.push_back(part);
+        }
+
+        pos = (next_sep < length) ? next_sep + 1 : length;
+    }
+
+    vector<string_view> normalized;
+    for (const auto& part : parts) {
+        if (part.empty() || part == ".") {
+            continue;
+        } else if (part == "..") {
+            if (!normalized.empty() && normalized.back() != "..") {
+                normalized.pop_back();
+            } else if (!is_absolute) {
+                normalized.push_back(part);
             }
         } else {
-            parts.emplace_back(part);
+            normalized.push_back(part);
         }
     }
 
+    if (is_absolute) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!result.empty() && absolute_path && (result.back() != '\\' && result.back() != '/')) {
-        result += PREFERRED_SEPARATOR;
-    }
+        if (result.empty() ||
+            (result.size() == 2 && result[1] == ':') ||
+            result == "\\\\") {
+            result += PREFERRED_SEPARATOR;
+        }
 #else
-    if (absolute_path) {
-        result += PREFERRED_SEPARATOR;
-    }
+        result += '/';
 #endif
-
-    for (size_t i = 0; i < parts.size(); ++i) {
-        if (i > 0) result += PREFERRED_SEPARATOR;
-        result += parts[i];
     }
 
-    if (result.empty()) result = ".";
-    return path{_MSTL move(result)};
+    for (size_t i = 0; i < normalized.size(); ++i) {
+        if (i > 0) result += PREFERRED_SEPARATOR;
+        result += normalized[i];
+    }
+
+    if (result.empty()) {
+        if (is_absolute) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+            return path("C:\\");
+#else
+            return path("/");
+#endif
+        } else {
+            return path(".");
+        }
+    }
+
+    return path(_MSTL move(result));
 }
 
 path path::absolute(const path& base) const {
@@ -123,10 +168,13 @@ path path::absolute(const path& base) const {
     if (::realpath(path_.c_str(), buf) != nullptr) {
         return path(string(buf));
     } else {
-        if (path_.empty()) return base;
-        if (path_[0] == '/') return *this;
-
-        path joined = base / *this;
+        if (path_.empty()) {
+            return base;
+        }
+        if (path_[0] == '/') {
+            return *this;
+        }
+        const path joined = base / *this;
         return joined.lexically_normal();
     }
 #endif
@@ -711,32 +759,39 @@ bool path::rename(const path& old_name, const path& new_name) {
 }
 
 bool path::operator ==(const path& rh) const noexcept {
+    const path lhs_norm = this->lexically_normal();
+    const path rhs_norm = rh.lexically_normal();
+
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto lhs_norm = this->lexically_normal().str();
-    auto rhs_norm = rh.lexically_normal().str();
-    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) == 0;
+    return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) == 0;
 #else
-    return lexically_normal().str() == rh.lexically_normal().str();
+    return lhs_norm.str() == rhs_norm.str();
 #endif
 }
 
 bool path::operator <(const path& rh) const noexcept {
+    const path lhs_norm = lexically_normal();
+    const path rhs_norm = rh.lexically_normal();
+
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto lhs_norm = lexically_normal().str();
-    auto rhs_norm = rh.lexically_normal().str();
-    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) < 0;
+    return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) < 0;
 #else
-    return lexically_normal().str() < rh.lexically_normal().str();
+    return lhs_norm.str() < rhs_norm.str();
 #endif
 }
 
-MSTL_NODISCARD size_t path::to_hash() const {
+size_t path::to_hash() const {
+    const path norm_path = lexically_normal();
+
+    if (norm_path.empty()) {
+        return hash<const char*>()("");
+    }
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto lower_str = lexically_normal().str();
+    auto lower_str = norm_path.str();
     lower_str.lowercase();
     return hash<string>()(lower_str);
 #else
-    return hash<string>()(lexically_normal().str());
+    return hash<string>()(norm_path.str());
 #endif
 }
 

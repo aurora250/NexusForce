@@ -1,6 +1,7 @@
-#include <MSTL/core/system/console.hpp>
+#include <MSTL/core/memory/hexadecimal.hpp>
 #include <MSTL/core/time/datetime.hpp>
 #include <MSTL/network/http/http_client.hpp>
+#include <MSTL/core/string/string_util.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif
@@ -8,15 +9,15 @@ MSTL_BEGIN_NAMESPACE__
 
 bool http_client::try_connect(const string& host, const uint16_t port, const string& ip, const bool ipv6) {
     socket s(
-     ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
-     SOCKET_TYPE::STREAM,
-     SOCKET_PROTOCOL::TCP);
+        ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
+        SOCKET_TYPE::STREAM,
+        SOCKET_PROTOCOL::TCP);
 
     if (!s.is_valid()) return false;
     if (!s.set_send_timeout(connect_timeout_) ||
         !s.set_receive_timeout(read_timeout_)) {
         return false;
-        }
+    }
 
     ::sockaddr_storage addr{};
     ::socklen_t addr_len;
@@ -34,9 +35,30 @@ bool http_client::try_connect(const string& host, const uint16_t port, const str
         addr_len = sizeof(::sockaddr_in);
     }
 
-    if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) return false;
+    if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) {
+        return false;
+    }
 
+#ifdef MSTL_SUPPORT_OPENSSL__
+    if (use_ssl_) {
+        init_ssl_context();
+        ssl_sock_ = ssl_socket(ssl_ctx_.context(), s);
+        if (!ssl_sock_.accept()) {
+            return false;
+        }
+        use_ssl_ = true;
+    } else {
+        sock_ = _MSTL move(s);
+        use_ssl_ = false;
+    }
+#else
+    if (use_ssl) {
+        return false;
+    }
     sock_ = _MSTL move(s);
+    use_ssl_ = false;
+#endif
+
     connected_ = true;
     connected_host_ = host;
     connected_port_ = port;
@@ -44,7 +66,9 @@ bool http_client::try_connect(const string& host, const uint16_t port, const str
 }
 
 bool http_client::connect_domain(const string& host, const uint16_t port) {
-    if (connected_ && connected_host_ == host && connected_port_ == port) return true;
+    if (connected_ && connected_host_ == host && connected_port_ == port) {
+        return true;
+    }
     close_connection();
 
     vector<string> ips = dns_.resolve_a(host);
@@ -59,7 +83,15 @@ bool http_client::connect_domain(const string& host, const uint16_t port) {
 
 void http_client::close_connection() noexcept {
     if (connected_) {
+#ifdef MSTL_SUPPORT_OPENSSL__
+        if (use_ssl_) {
+            ssl_sock_.close();
+        } else {
+            sock_.close();
+        }
+#else
         sock_.close();
+#endif
         connected_ = false;
         connected_host_.clear();
         connected_port_ = 0;
@@ -70,7 +102,9 @@ string http_client::build_request_str(const http_client_request& req, const url&
     string req_str = req.method.method() + " " + req.path + " " + req.version + HTTP_CRLF;
     req_str += "Host: " + req.host;
 
-    if (req.port != 80 && req.port != 443) req_str += ":" + _MSTL to_string(req.port);
+    if (req.port != 80 && req.port != 443) {
+        req_str += ":" + _MSTL to_string(req.port);
+    }
     req_str += HTTP_CRLF;
 
     string cookie_header = build_cookie_header(req_url);
@@ -101,13 +135,44 @@ string http_client::build_request_str(const http_client_request& req, const url&
     return req_str;
 }
 
+bool http_client::send_request(const string& request_str) const {
+    const ssize_t total = static_cast<ssize_t>(request_str.size());
+    ssize_t sent = 0;
+
+    while (sent < total) {
+        ssize_t n;
+#ifdef MSTL_SUPPORT_OPENSSL__
+        if (use_ssl_) {
+            n = ssl_sock_.write(request_str.data() + sent, total - sent);
+        } else {
+            n = sock_.send(request_str.data() + sent, total - sent);
+        }
+#else
+        n = sock_.send(request_str.data() + sent, total - sent);
+#endif
+        if (n <= 0) return false;
+        sent += n;
+    }
+    return true;
+}
+
 bool http_client::read_response(string& out_data) const {
     constexpr size_t buf_size = 8192;
     char buffer[buf_size];
     out_data.clear();
 
     while (true) {
-        const ssize_t n = sock_.receive(buffer, buf_size);
+        ssize_t n;
+#ifdef MSTL_SUPPORT_OPENSSL__
+        if (use_ssl_) {
+            n = ssl_sock_.read(buffer, buf_size);
+        } else {
+            n = sock_.receive(buffer, buf_size);
+        }
+#else
+        n = sock_.receive(buffer, buf_size);
+#endif
+
         if (n == 0) break;
         if (n < 0) return false;
         out_data.append(buffer, n);
@@ -124,19 +189,25 @@ bool http_client::parse_chunked_body(const string_view chunked, string& decoded)
         const auto line_end = chunked.find(HTTP_CRLF, pos);
         if (line_end == string::npos) return false;
         auto size_str = chunked.substr(pos, line_end - pos);
-        auto chunk_size = _MSTL uinteger32::parse(size_str.trim());
+        auto chunk_size = _MSTL hexadecimal::parse(size_str.trim()).to_int64();
         if (!chunk_size) return false;
 
         pos = line_end + 2;
+        if (pos + chunk_size > size) return false;
 
-        if (chunk_size.value() == 0) return true;
-        if (pos + chunk_size.value() > size) return false;
-
-        decoded.append(chunked.substr(pos, chunk_size.value()));
-        pos += chunk_size.value() + 2;
+        decoded.append(chunked.substr(pos, chunk_size));
+        pos += chunk_size + 2;
     }
     return false;
 }
+
+#ifdef MSTL_SUPPORT_OPENSSL__
+void http_client::init_ssl_context() {
+    if (!ssl_ctx_.context()) {
+        ssl_ctx_ = ssl_context();
+    }
+}
+#endif
 
 cookie http_client::parse_set_cookie(
     const string_view str,
@@ -259,19 +330,33 @@ bool http_client::parse_response(const string_view resp_str, http_client_respons
     }
 
     const string_view body_part = resp_str.substr(header_end + 4);
-    const string &encoding = resp.header("Transfer-Encoding");
-    const string &length = resp.header("Content-Length");
-    string encoding_lower = encoding;
-    encoding_lower.lowercase();
+    const string& encoding = resp.header("Transfer-Encoding");
+    const string& length = resp.header("Content-Length");
 
-    if (!encoding.empty() && encoding_lower == "chunked") {
+    bool is_chunked = false;
+    if (!encoding.empty()) {
+        string encoding_lower = encoding;
+        encoding_lower.lowercase();
+        vector<string_view> encodings = _MSTL split(encoding_lower.view(), ","_sv);
+        for (const auto& enc : encodings) {
+            if (enc.trim() == "chunked") {
+                is_chunked = true;
+                break;
+            }
+        }
+    }
+
+    if (is_chunked) {
         string decoded;
-        if (!parse_chunked_body(body_part, decoded)) return false;
-        resp.append_body(_MSTL move(decoded));
+        if (parse_chunked_body(body_part, decoded)) {
+            resp.append_body(_MSTL move(decoded));
+        } else {
+            return false;
+        }
     } else if (!length.empty()) {
-        size_t cl;
+        uint64_t cl;
         try {
-            cl = to_uint64(length.view());
+            cl = uinteger64::parse(length.view()).value();
         } catch (...) {
             return false;
         }
@@ -301,18 +386,12 @@ http_client_response http_client::request(http_client_request req) {
         }
 
         string req_str = build_request_str(req, req_url);
-        const ssize_t total = static_cast<ssize_t>(req_str.size());
-        ssize_t sent = 0;
-        while (sent < total) {
-            const ssize_t n = sock_.send(req_str.data() + sent, total - sent);
-            if (n <= 0) {
-                close_connection();
-                http_client_response resp;
-                resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-                resp.set_status_msg("Send failed");
-                return resp;
-            }
-            sent += n;
+        if (!send_request(req_str)) {
+            close_connection();
+            http_client_response resp;
+            resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
+            resp.set_status_msg("Send failed");
+            return resp;
         }
 
         string resp_str;

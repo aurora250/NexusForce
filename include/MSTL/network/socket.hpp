@@ -37,7 +37,7 @@ enum class SOCKET_PROTOCOL : uint16_t {
 class socket {
 public:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    using socket_t = SOCKET;
+    using socket_t = ::SOCKET;
     static constexpr socket_t INVALID_MARK = INVALID_SOCKET;
 #elif MSTL_PLATFORM_LINUX__
     using socket_t = int;

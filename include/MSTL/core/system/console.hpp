@@ -20,8 +20,6 @@ class MSTL_API sys_console {
 #endif
     mutex mutex_{};
 
-    friend sys_console& get_console();
-
 private:
     void write_string_unsafe(const string& str) const { write_string_unsafe(str.view()); }
     void write_string_unsafe(string_view str) const;
@@ -49,6 +47,11 @@ public:
     sys_console& operator=(sys_console&&) = delete;
 
     ~sys_console() = default;
+
+    static sys_console& instance() {
+        static sys_console console;
+        return console;
+    }
 
     void flush() {
         lock_guard<mutex> lock(mutex_);
@@ -169,7 +172,7 @@ public:
     }
 
     void clear();
-    void pause(string_view msg = "press any key to continue...");
+    void pause(string_view msg = "press enter to continue...");
 
     void set_color(const integer32& color);
     void set_color(const color& color, bool use_256_color = true);
@@ -334,12 +337,7 @@ template<typename... Args> struct io_base<tuple<Args...>> {
 };
 
 
-inline sys_console& get_console() {
-    static sys_console console;
-    return console;
-}
-
-static sys_console& console = get_console();
+static sys_console& console = sys_console::instance();
 
 
 #ifndef MSTL_STANDARD_17__

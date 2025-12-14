@@ -2,7 +2,7 @@
 #include <MSTL/core/async/atomic.hpp>
 #ifdef MSTL_STATE_DEBUG__
 #include <MSTL/core/system/console.hpp>
-#include <MSTL/core/utility/stacktrace.hpp>
+#include <MSTL/core/system/stacktrace.hpp>
 #endif
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__

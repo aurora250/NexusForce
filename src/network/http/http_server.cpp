@@ -1,5 +1,6 @@
 #include <MSTL/network/http/http_server.hpp>
 #include <MSTL/core/system/console.hpp>
+#include <MSTL/network/ssl_socket.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void http_server::start_workers(const int thread_count) {
@@ -18,18 +19,41 @@ void http_server::accept_conns() {
             continue;
         }
 
+#ifdef MSTL_SUPPORT_OPENSSL__
+        ssl_socket* ssl_sock = nullptr;
+        if (ssl_ctx_.context()) {
+            ssl_sock = new ssl_socket(ssl_ctx_.context(), client_socket);
+            if (!ssl_sock->accept()) {
+                delete ssl_sock;
+                client_socket.close();
+                continue;
+            }
+        }
+#endif
+
         try {
-            handle_client(client_socket);
+            handle_client(client_socket, ssl_sock);
         } catch (const exception& e) {
             println(e);
         }
+
+#ifdef MSTL_SUPPORT_OPENSSL__
+        delete ssl_sock;
+#endif
         client_socket.close();
     }
 }
 
-void http_server::handle_client(const socket& client_socket) {
-    http_request request = parse_request(client_socket);
-    session* sess = get_session(request, true);
+void http_server::handle_client(const socket& client_socket
+#ifdef MSTL_SUPPORT_OPENSSL__
+    , const ssl_socket* ssl_sock
+#endif
+    ) {
+    http_request request = parse_request(client_socket, ssl_sock);
+    if (ssl_sock) {
+        request.set_https();
+    }
+    _MSTL session* sess = session(request, true);
     int forward_count = 0;
 
     do {
@@ -46,12 +70,16 @@ void http_server::handle_client(const socket& client_socket) {
             continue;
         }
 
-        send_response(client_socket, response);
+        send_response(client_socket, response
+#ifdef MSTL_SUPPORT_OPENSSL__
+            , ssl_sock
+#endif
+            );
         return;
     } while (true);
 }
 
-void http_server::parse_cookies(const string_view cookie_header, http_request &request) {
+void http_server::parse_cookies(const string_view cookie_header, http_request& request) {
     if (cookie_header.empty()) return;
 
     vector<string_view> cookie_pairs;
@@ -86,7 +114,7 @@ void http_server::parse_parameters(http_request& request) {
     }
 }
 
-void http_server::parse_url_encoded(const string_view data, unordered_map<string, string> &params) {
+void http_server::parse_url_encoded(const string_view data, unordered_map<string, string>& params) {
     if (data.empty()) return;
 
     vector<string_view> pairs;
@@ -129,14 +157,22 @@ string http_server::url_decode(const string_view str) {
     return result;
 }
 
-http_request http_server::parse_request(const socket& client_socket) {
+http_request http_server::parse_request(const socket& client_socket
+#ifdef MSTL_SUPPORT_OPENSSL__
+    , const ssl_socket* ssl_sock
+#endif
+    ) {
     http_request request;
     char buffer[4096];
     string request_data;
 
     ssize_t total_read = 0;
     while (true) {
-        ssize_t bytes_read = client_socket.receive(buffer, sizeof(buffer) - 1);
+        ssize_t bytes_read =
+#ifdef MSTL_SUPPORT_OPENSSL__
+            ssl_sock ? ssl_sock->read(buffer, sizeof(buffer) - 1) :
+#endif
+            client_socket.receive(buffer, sizeof(buffer) - 1);
         if (bytes_read <= 0) break;
 
         buffer[bytes_read] = '\0';
@@ -217,7 +253,7 @@ http_request http_server::parse_request(const socket& client_socket) {
     }
 
     // Parse cookies
-    const auto& cookie_str = request.cookie();
+    const auto& cookie_str = request.header_cookie();
     if (!cookie_str.empty()) {
         parse_cookies(cookie_str.view(), request);
     }
@@ -264,13 +300,21 @@ string http_server::build_response_str(const http_response& response) {
     return result;
 }
 
-void http_server::send_response(const socket& client_socket, const http_response& response) {
+void http_server::send_response(const socket& client_socket, const http_response& response
+#ifdef MSTL_SUPPORT_OPENSSL__
+    , const ssl_socket* ssl_sock
+#endif
+    ) {
     string res_str = build_response_str(response);
     const size_t total = res_str.size();
     size_t sent = 0;
 
     while (sent < total) {
-        const ssize_t bytes_sent = client_socket.send(res_str.data() + sent, total - sent);
+        const ssize_t bytes_sent =
+#ifdef MSTL_SUPPORT_OPENSSL__
+            ssl_sock ? ssl_sock->write(res_str.data() + sent, total - sent) :
+#endif
+            client_socket.send(res_str.data() + sent, total - sent);
         if (bytes_sent <= 0) {
             printcln(color::red(), "send failed");
             break;
@@ -279,8 +323,21 @@ void http_server::send_response(const socket& client_socket, const http_response
     }
 }
 
-session* http_server::get_session(http_request& request, const bool create) {
-    session* session = request.get_session();
+http_server::http_server(const uint16_t port, const int backlog
+#ifdef MSTL_SUPPORT_OPENSSL__
+        , const string& cert_file, const string& key_file
+#endif
+        ) : port_(port), backlog_(backlog) {
+    _MSTL memory_zero(&server_addr_, sizeof(server_addr_));
+#ifdef MSTL_SUPPORT_OPENSSL__
+    if (!cert_file.empty() && !key_file.empty()) {
+        ssl_ctx_.load_certificate(cert_file, key_file);
+    }
+#endif
+}
+
+_MSTL session* http_server::session(http_request& request, const bool create) {
+    _MSTL session* session = request.session();
     if (session) return session;
 
     const auto& session_id = request.cookie(cookie_name_.cookie_name());
@@ -295,7 +352,7 @@ session* http_server::get_session(http_request& request, const bool create) {
     return session;
 }
 
-void http_server::add_session_cookie(const http_request& request, http_response& response, session* session) const {
+void http_server::add_session_cookie(const http_request& request, http_response& response, _MSTL session* session) const {
     if (session && session->is_new()) {
         cookie session_cookie(cookie_name_, session->id());
         session_cookie.set_path("/");
@@ -311,7 +368,7 @@ void http_server::add_session_cookie(const http_request& request, http_response&
 }
 
 bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
-    const SOCKET_PROTOCOL protocol, const uint32_t thread_count) {
+    const SOCKET_PROTOCOL protocol, const uint16_t thread_count) {
     if (running_) return true;
 
 #ifdef MSTL_PLATFORM_WINDOWS__

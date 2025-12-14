@@ -21,7 +21,7 @@ void url::parse(const string_view str) {
     if (colon != string::npos) {
         host = host_port.substr(0, colon);
         const string_view port_str = host_port.substr(colon + 1);
-        port = static_cast<uint16_t>(_MSTL uinteger32::parse(port_str));
+        port = _MSTL uinteger16::parse(port_str).value();
     } else {
         host = host_port;
         port = (scheme == "https") ? 443 : 80;

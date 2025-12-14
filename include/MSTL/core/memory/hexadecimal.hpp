@@ -188,10 +188,16 @@ public:
 
     MSTL_NODISCARD constexpr int64_t to_int64() const noexcept { return value_; }
 
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept { return hash<value_type>()(value_); }
+    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
+        return hash<value_type>()(value_);
+    }
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const;
 
-    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) { return self(str); }
+
+    MSTL_NODISCARD static MSTL_CONSTEXPR20 self parse(const string_view str) {
+        return self(str);
+    }
+
     MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
         try {
             value_ = parse_hex(str);
@@ -221,6 +227,11 @@ struct formatter<hexadecimal> {
 
 MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
     return _MSTL format("{#x}", *this);
+}
+
+
+MSTL_CONSTEXPR20 hexadecimal to_hexadecimal(const string_view sv) {
+    return hexadecimal::parse(sv);
 }
 
 

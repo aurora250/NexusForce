@@ -34,7 +34,7 @@ public:
         id() noexcept = default;
         explicit id(const native_id_type id) noexcept : id_(id) {}
 
-        MSTL_NODISCARD const native_id_type& native() const noexcept { return id_; }
+        MSTL_NODISCARD native_id_type native() const noexcept { return id_; }
 
         MSTL_NODISCARD size_t to_hash() const noexcept {
             return _MSTL FNV_hash(reinterpret_cast<const byte_t*>(&id_), sizeof(id));

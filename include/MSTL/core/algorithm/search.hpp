@@ -66,14 +66,14 @@ MSTL_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T& v
 }
 
 template <typename Iterator, typename Predicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator> && is_predicate_v<Predicate>, int> = 0>
+	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred) {
 	while (first != last && !pred(*first)) ++first;
 	return first;
 }
 
 template <typename Iterator, typename Predicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator> && is_predicate_v<Predicate>, int> = 0>
+	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred) {
 	while (first != last && pred(*first)) ++first;
 	return first;

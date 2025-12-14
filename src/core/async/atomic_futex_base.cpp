@@ -1,4 +1,4 @@
-#include <MSTL/core/async/atomic_futex.hpp>
+#include <MSTL/core/async/atomic_futex_base.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <synchapi.h>
@@ -8,6 +8,7 @@
 #include <cerrno>
 #include <linux/futex.h>
 #include <unistd.h>
+#include <syscall.h>
 #ifndef FUTEX_BITSET_MATCH_ANY
 #define FUTEX_BITSET_MATCH_ANY 0xffffffff
 #endif

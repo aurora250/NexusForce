@@ -2,7 +2,7 @@
 #define MSTL_CORE_MEMORY_TRACE_MEMORY_HPP__
 #include "../container/unordered_map.hpp"
 #include "../system/console.hpp"
-#include "../utility/stacktrace.hpp"
+#include "../system/stacktrace.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

@@ -3,7 +3,7 @@
 static const path TEST_FILE{"test_temp_file.txt"};
 static const path TEST_DIR{"test_temp_dir"};
 static const path TEST_SUB_DIR{TEST_DIR / "sub_dir"};
-static const string TEST_CONTENT = "Hello, File Class!\nSecond line.\r\nThird line";
+static const string TEST_CONTENT = "Hello!\nSecond line.\r\nThird line";
 
 static const path res_root
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -30,13 +30,13 @@ void test_file_basic_operations() {
     {
         file f;
         assert(!f.opened());
-        assert(f.open(TEST_FILE, false, FILE_ACCESS::READ_WRITE));
+        assert(f.open(TEST_FILE));
         assert(f.opened());
         assert(f.get_path() == TEST_FILE);
 
         string line;
         assert(f.read_line(line));
-        assert(line == "Hello, File Class!");
+        assert(line == "Hello!");
         assert(f.read_line(line));
         assert(line == "Second line.");
         assert(f.read_line(line));
@@ -91,7 +91,6 @@ void test_file_attributes_and_times() {
     _MSTL datetime now = _MSTL datetime::now();
     bool set_time_ok = f.set_last_write_time(now);
     assert(set_time_ok);
-    println(f.last_write_time(), now);
     assert(f.last_write_time() == now);
 
     f.close();
@@ -570,17 +569,9 @@ void test_color() {
 
     color custom(128, 64, 192);
 
-    console.set_color(color::red());
-    println("这是红色文本");
-    console.reset_color();
-
-    console.set_color(color::green(), true);
-    println("这是绿色文本");
-    console.reset_color();
-
-    console.set_color(custom, false);
-    println("这是使用基本颜色的文本");
-    console.reset_color();
+    printcln(color::red(), "这是红色文本");
+    printcln(color::green(), "这是绿色文本");
+    printcln(custom, "这是使用基本颜色的文本");
 
     console.set_color(custom, true);
     println("这是使用256色的文本");
@@ -698,6 +689,17 @@ void test_toml() {
     } catch (...) {}
 }
 
+void test_yaml() {
+    try {
+        file fi(res_root / "test.yaml");
+        yaml_parser parser(fi.read());
+        auto docs = parser.parse_documents();
+        for (const auto& doc : docs) {
+            println(doc->to_document());
+        }
+    } catch (...) {}
+}
+
 void test_json() {
     file fi(res_root / "test.json");
 
@@ -746,7 +748,7 @@ void test_http_server() {
     try {
         http_server server(8080);
 
-        http_router& r = server.get_router();
+        http_router& r = server.router();
         r.use(new logging_filter());
         r.use(new cors_filter("http://127.0.0.1:5500"));
         r.use(new static_file_filter(res_root.str()));

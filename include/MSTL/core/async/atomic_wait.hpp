@@ -264,12 +264,12 @@ public:
 	}
 
 	template <typename U, typename Func, typename Spin = default_spin_policy>
-	bool writer_do_spin_v(const U& old, Func f, platform_wait_t& value, Spin spin = Spin{}) {
+	bool waiter_do_spin_v(const U& old, Func f, platform_wait_t& value, Spin spin = Spin{}) {
 		return waiter_base::waiter_do_spin_v(addr_, old, f, value, spin);
 	}
 
 	template <typename Pred, typename Spin = default_spin_policy>
-	static bool writer_do_spin(const platform_wait_t* addr, Pred pred,
+	static bool waiter_do_spin(const platform_wait_t* addr, Pred pred,
 		platform_wait_t& value, Spin spin = Spin{}) {
 #ifdef MSTL_PLATFORM_WINDOWS__
 		value = ::_InterlockedExchangeAdd(const_cast<volatile LONG*>(addr), 0);
@@ -279,9 +279,9 @@ public:
 		return _INNER atomic_spin(pred, spin);
 	}
 
-	template <typename Pred, typename _Spin = default_spin_policy>
-	bool writer_do_spin(Pred pred, platform_wait_t& value, _Spin spin = _Spin{}) {
-		return waiter_base::writer_do_spin(addr_, pred, value, spin);
+	template <typename Pred, typename Spin = default_spin_policy>
+	bool waiter_do_spin(Pred pred, platform_wait_t& value, Spin spin = Spin{}) {
+		return waiter_base::waiter_do_spin(addr_, pred, value, spin);
 	}
 };
 
@@ -314,7 +314,7 @@ public:
 	void waiter_do_wait_v(T old, Func f) {
 		do {
 			platform_wait_t value;
-			if (base_type::writer_do_spin_v(old, f, value)) return;
+			if (base_type::waiter_do_spin_v(old, f, value)) return;
 			waiter_.waiter_do_wait(base_type::addr_, value);
 		} while (_INNER atomic_compare<T>(old, f()));
 	}
@@ -323,7 +323,7 @@ public:
 	void waiter_do_wait(Pred pred) noexcept {
 		do {
 			platform_wait_t value;
-			if (base_type::writer_do_spin(pred, value)) return;
+			if (base_type::waiter_do_spin(pred, value)) return;
 			waiter_.waiter_do_wait(base_type::addr_, value);
 		} while (!pred());
 	}

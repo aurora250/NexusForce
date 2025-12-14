@@ -67,10 +67,14 @@ struct base_char_traits {
     }
 
     MSTL_NODISCARD static constexpr int compare(const char_type* lh,
-        const char_type* str2, size_t count) noexcept {
-        for (; 0 < count; --count, ++lh, ++str2) {
-            if (*lh != *str2)
-                return *lh < *str2 ? -1 : +1;
+        const char_type* rh, size_t count) noexcept {
+        if (lh == nullptr && rh == nullptr) return 0;
+        if (lh == nullptr) return -1;
+        if (rh == nullptr) return 1;
+
+        for (; 0 < count; --count, ++lh, ++rh) {
+            if (*lh != *rh)
+                return *lh < *rh ? -1 : +1;
         }
         return 0;
     }
@@ -282,7 +286,7 @@ public:
 #ifdef MSTL_STANDARD_17__
 #ifdef MSTL_STANDARD_20__
         if constexpr (is_same_v<char_type, char8_t>) {
-#if defined(MSTL_STANDARD_20__) && !defined(MSTL_COMPILER_CLANG__) && !defined(MSTL_COMPILE_WITH_EDG__)
+#if defined(MSTL_STANDARD_20__) && !defined(MSTL_COMPILER_CLANG__)
             return __builtin_u8memchr(str, chr, n);
 #else
             return base_type::find(str, n, chr);

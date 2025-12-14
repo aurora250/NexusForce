@@ -1,5 +1,5 @@
-#ifndef MSTL_NETWORK_HTTP_MESSAGE_HPP__
-#define MSTL_NETWORK_HTTP_MESSAGE_HPP__
+#ifndef MSTL_NETWORK_HTTP_SERVER_MESSAGE_HPP__
+#define MSTL_NETWORK_HTTP_SERVER_MESSAGE_HPP__
 #include "session.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -13,7 +13,7 @@ private:
     unordered_map<string, string> parameters_; // query + body parameters
     string query_{};
     string body_{};
-    session* session_ = nullptr;
+    _MSTL session* session_ = nullptr;
 
     static const string EMPTY_MARK;
 
@@ -50,9 +50,9 @@ public:
         return it != cookies_.end() ? it->second : EMPTY_MARK;
     }
 
-    void set_session(session* session) noexcept { this->session_ = session; }
-    MSTL_NODISCARD const class session* get_session() const noexcept { return session_; }
-    MSTL_NODISCARD class session* get_session() noexcept { return session_; }
+    void set_session(_MSTL session* session) noexcept { this->session_ = session; }
+    MSTL_NODISCARD const _MSTL session* session() const noexcept { return session_; }
+    MSTL_NODISCARD _MSTL session* session() noexcept { return session_; }
 
     void set_header(const string& name, string value) {
         headers_[name] = _MSTL move(value);
@@ -64,7 +64,7 @@ public:
 
     void set_content_type(string value) { cookies_["Content-Type"] = _MSTL move(value); }
     MSTL_NODISCARD const string& content_type() const noexcept { return header("Content-Type"); }
-    MSTL_NODISCARD const string& cookie() const noexcept { return header("Cookie"); }
+    MSTL_NODISCARD const string& header_cookie() const noexcept { return header("Cookie"); }
 
     void set_method(HTTP_METHOD method) noexcept { this->method_ = _MSTL move(method); }
     MSTL_NODISCARD const HTTP_METHOD& method() const noexcept { return method_; }
@@ -78,7 +78,17 @@ public:
     void set_body(string body) noexcept { this->body_ = _MSTL move(body); }
     MSTL_NODISCARD const string& body() const noexcept { return body_; }
 
-    MSTL_NODISCARD bool is_https() const noexcept { return header("X-Forwarded-Proto") == "https"; }
+    MSTL_NODISCARD const string& forward_protocol() const noexcept {
+        return header("X-Forwarded-Proto");
+    }
+    void set_forward_protocol(string proto) {
+        set_header("X-Forwarded-Proto", _MSTL move(proto));
+    }
+
+    MSTL_NODISCARD bool is_https() const noexcept { return forward_protocol() == "https"; }
+    MSTL_NODISCARD bool is_http() const noexcept { return forward_protocol() == "http"; }
+    void set_https() { set_forward_protocol("https"); }
+    void set_http() { set_forward_protocol("http"); }
 };
 
 
@@ -211,4 +221,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_NETWORK_HTTP_MESSAGE_HPP__
+#endif // MSTL_NETWORK_HTTP_SERVER_MESSAGE_HPP__

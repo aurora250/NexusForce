@@ -10,11 +10,10 @@
 #include <netinet/in.h>
 #else
 #include <ws2def.h>
-#include <ws2tcpip.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(dns_exception, link_exception, "DNS Operate Failed");
+MSTL_ERROR_BUILD_FINAL_CLASS(dns_exception, exception, "DNS Operate Failed");
 
 
 class MSTL_API dns_client {
@@ -53,15 +52,11 @@ private:
 public:
     explicit dns_client(
         string dns_server = "8.8.8.8",
-        const uint16_t dns_port = 53,
-        const _MSTL_CHRONO milliseconds timeout = _MSTL_CHRONO milliseconds(5000),
-        const bool use_tcp = false)
-    : dns_server_(_MSTL move(dns_server)), dns_port_(dns_port), timeout_(timeout), use_tcp_(use_tcp) {}
+        uint16_t dns_port = 53,
+        _MSTL_CHRONO milliseconds timeout = _MSTL_CHRONO milliseconds(5000),
+        bool use_tcp = false);
 
-    void set_dns_server(const string& server, const uint16_t port = 53) {
-        dns_server_ = server;
-        dns_port_ = port;
-    }
+    void set_dns_server(const string& server, uint16_t port = 53);
 
     void set_timeout(const _MSTL_CHRONO milliseconds timeout) { timeout_ = timeout; }
     void set_use_tcp(const bool use_tcp) { use_tcp_ = use_tcp; }
@@ -90,11 +85,6 @@ public:
 
     vector<dns_query_result> batch_query(const vector<string>& domains, DNS_RECORD type = DNS_RECORD::A);
 };
-
-MSTL_ALWAYS_INLINE_INLINE unique_ptr<dns_client>
-make_dns_client(string dns_server = "8.8.8.8") {
-    return _MSTL make_unique<dns_client>(_MSTL move(dns_server));
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_NETWORK_DNS_CLIENT_HPP__

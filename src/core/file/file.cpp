@@ -86,7 +86,7 @@ datetime file::filetime_to_datetime(const time_type& ft) noexcept {
     ::localtime_r(&ft, &tm_local);
     return datetime(
         tm_local.tm_year + 1900, tm_local.tm_mon + 1, tm_local.tm_mday,
-        tm_local.tm_hour, tm_local.tm_min, tm_local.tm_sec
+        tm_local.tm_hour, tm_local.tm_min, tm_local.tm_sec, tm_local.tm_gmtoff
     );
 #endif
 }
@@ -120,6 +120,7 @@ file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
     tm_val.tm_hour = dt.hours();
     tm_val.tm_min = dt.minutes();
     tm_val.tm_sec = dt.seconds();
+    tm_val.tm_gmtoff = dt.offset_seconds();
     tm_val.tm_isdst = -1;
     return ::mktime(&tm_val);
 #endif

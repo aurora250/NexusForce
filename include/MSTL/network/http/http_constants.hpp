@@ -3,7 +3,7 @@
 #include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, link_exception, "Http Actions Failed");
+MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, exception, "Http Actions Failed");
 
 
 enum class HTTP_STATUS : uint32_t {

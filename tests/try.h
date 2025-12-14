@@ -15,11 +15,11 @@ void test_enctype();
 
 inline void handle_session_api(
     http_request &request, http_response &response, http_server &server) {
-    session *sess = server.get_session(request);
+    session *sess = server.session(request);
     string action = request.parameter("action");
 
     if (action == "create") {
-        sess = server.get_session(request, true);
+        sess = server.session(request, true);
         response.set_ok();
         response.set_status_msg("OK");
         response.set_content_type(HTTP_CONTENT::JSON_APP);
@@ -90,7 +90,7 @@ inline void handle_session_attribute(http_request &request, http_response &respo
         attrValue = request.parameter("attrValue");
     }
 
-    session *sess = server.get_session(request, true);
+    session *sess = server.session(request, true);
 
     if (!attrName.empty()) {
         (*sess)[attrName] = attrValue;
@@ -208,6 +208,7 @@ void test_list();
 void test_ini();
 void test_env();
 void test_toml();
+void test_yaml();
 void test_json();
 
 class Foo {};

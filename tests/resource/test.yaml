@@ -1,0 +1,111 @@
+%YAML 1.2
+---
+
+string_plain: Hello, world!
+string_quoted_single: 'It''s a string with ''single quotes'''
+string_quoted_double: "It's a \"double quoted\" string\nwith newline"
+string_folded: >
+  This is a folded string.
+  It will be one line with spaces,
+  but newlines are replaced by spaces.
+string_literal: |
+  This is a literal block.
+  Newlines are preserved.
+  Even     extra   whitespace.
+
+int_decimal: 42
+int_hex: 0x2A
+int_octal: 0o52
+int_binary: 0b101010
+float_scientific: 1.23e+4
+float_decimal: 3.14159
+inf: .inf
+neginf: -.inf
+nan: .nan
+
+bool_true: true
+bool_false: false
+
+null_explicit: null
+null_tilde: ~
+null_empty:
+
+list_inline: [1, 2, 3, "four"]
+list_block:
+  - apple
+  - banana
+  - carrot
+  - &anchor_fruit orange
+  - *anchor_fruit
+
+map_inline: {key1: value1, key2: value2}
+map_block:
+  name: John Doe
+  age: 30
+  address:
+    # street: 123 Main St
+    city: Anytown
+    country: Wonderland
+
+nested:
+  - name: Alice
+    scores: [95, 87, 92]
+  - name: Bob
+    scores:
+      math: 88
+      english: 91
+
+multiline_preserve: |2
+    Indented literal block.
+    Second line.
+    Third line.
+
+multiline_fold_strip: >-
+  Folded block with stripping.
+  Trailing newlines removed.
+
+escaped_chars: "\b\t\n\f\r\"\\"
+
+explicit_int: !!int "123"
+explicit_bool: !!bool "true"
+explicit_float: !!float "3.14"
+custom_tag: !mytag "custom data"
+
+base: &base
+  name: Base
+  version: 1.0
+derived:
+  <<: *base
+  name: Derived
+
+...
+---
+second_document: true
+...
+---
+   third_document:
+     - item1
+     - item2
+...
+#   mixed_flow_and_block:
+#      flow_seq_in_block: [a, b, {nested: true}]
+#      block_map_in_flow: {key: [1, 2, 3]}
+#
+#   empty_seq: []
+#   empty_map: {}
+#
+#   ? [complex, key]
+#     : complex value
+#   ? {a: 1, b: 2}
+#     : another complex value
+   binary_data: !!binary "SGVsbG8sIFdvcmxkIQ=="
+   big_int: 123456789012345678901234567890
+   weird_strings:
+     colon_in_value: "key: value"
+     braces: "{ not a map }"
+     brackets: "[ not a seq ]"
+
+---
+  !my!type
+content: tagged node
+...

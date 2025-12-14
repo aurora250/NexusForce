@@ -387,14 +387,10 @@ sudo make install
 ## 待实现功能
 
 lib:
-future
-cuda-matrix
+cuda-matrix /
 xml
-yaml
-ini
-toml
 
 fix:
-strong assert
-strong serialize
+strong assert / 
+strong serialize /
 support macOS

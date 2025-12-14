@@ -2,7 +2,6 @@
 #define MSTL_NETWORK_HTTP_HTTP_CLIENT_MESSAGE_HPP__
 #include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/container/vector.hpp"
-#include "http_constants.hpp"
 #include "session.hpp"
 MSTL_BEGIN_NAMESPACE__
 

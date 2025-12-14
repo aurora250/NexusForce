@@ -51,18 +51,6 @@
 #endif
 
 
-#if defined(_M_CEE)
-	// defined when project is compiled with CRL.
-	#define MSTL_COMPILE_WITH_CRL__		1
-#elif defined(__EDG__)
-	// defined when project is compiled with EDG.
-	#define MSTL_COMPILE_WITH_EDG__		1
-#else
-	// defined when project is compiled with OS.
-	#define MSTL_COMPILE_WITH_OS__		1
-#endif
-
-
 #ifdef MSTL_COMPILER_MSVC__
     #ifdef MSTL_DLLEXPORTS
         #define MSTL_API __declspec(dllexport)

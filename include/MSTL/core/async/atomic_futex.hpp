@@ -1,19 +1,8 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_FUTEX_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_FUTEX_HPP__
+#include "atomic_futex_base.hpp"
 #include "atomic.hpp"
-#include "../time/clocks.hpp"
 MSTL_BEGIN_NAMESPACE__
-
-struct MSTL_API atomic_futex_base {
-	bool futex_wait_until(unsigned* addr, unsigned value, bool has_timeout,
-		_MSTL_CHRONO seconds sec, _MSTL_CHRONO nanoseconds ns);
-
-	bool futex_wait_until_steady(unsigned* addr, unsigned value, bool has_timeout,
-		_MSTL_CHRONO seconds sec, _MSTL_CHRONO nanoseconds ns);
-
-	static void futex_notify_all(unsigned* addr);
-};
-
 
 template <unsigned WaiterBit = 0x80000000>
 class atomic_futex : atomic_futex_base {
@@ -51,7 +40,7 @@ class atomic_futex : atomic_futex_base {
 		}
 	}
 
-	unsigned load_and_test(unsigned assumed, const unsigned operand,
+	unsigned load_and_test(const unsigned assumed, const unsigned operand,
 	    const bool equal, const memory_order mo) {
 		return load_and_test_until(assumed, operand, equal, mo, false, {}, {});
 	}

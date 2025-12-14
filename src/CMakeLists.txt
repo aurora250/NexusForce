@@ -88,7 +88,7 @@ function(find_and_link_openssl target)
         if(OpenSSL_FOUND)
             target_link_libraries(${target} PUBLIC OpenSSL::SSL OpenSSL::Crypto)
             target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_OPENSSL__)
-            message(STATUS "OpenSSL linked successfully (Version: ${OpenSSL_VERSION})")
+            message(STATUS "OpenSSL linked successfully")
 
             if(WIN32)
                 find_file(OPENSSL_DLL_SSL
@@ -148,7 +148,7 @@ function(find_and_link_zlib target)
     if(ZLIB_FOUND)
         target_link_libraries(${target} PUBLIC ZLIB::ZLIB)
         target_compile_definitions(${target} PUBLIC MSTL_SUPPORT_ZLIB__)
-        message(STATUS "zlib linked successfully (Version: ${ZLIB_VERSION})")
+        message(STATUS "zlib linked successfully")
 
         if(WIN32)
             get_target_property(zlib_location ZLIB::ZLIB LOCATION)
@@ -275,14 +275,17 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/exception_ptr.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
@@ -316,6 +319,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
+        network/ssl_context.cpp
+        network/ssl_socket.cpp
+        core/string/string_util.cpp
+        core/system/signal.cpp
 )
 
 # 编译为动态库

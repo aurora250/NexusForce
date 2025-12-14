@@ -1,11 +1,12 @@
-#ifndef MSTL_MSTLCPP_HPP__
-#define MSTL_MSTLCPP_HPP__
+#ifndef MSTL_MSTL_HPP__
+#define MSTL_MSTL_HPP__
 #include "core/algorithm/algorithm.hpp"
 #include "core/algorithm/ext_sort.hpp"
 #include "core/async/lock_free_queue.hpp"
 #include "core/async/thread_pool.hpp"
 #include "core/async/timer.hpp"
 #include "core/async/async.hpp"
+#include "core/async/semaphore.hpp"
 #include "core/compound/any.hpp"
 #include "core/compound/expected.hpp"
 #include "core/compound/variant.hpp"
@@ -33,6 +34,8 @@
 #include "core/file/env/env_parser.hpp"
 #include "core/file/toml/toml_builder.hpp"
 #include "core/file/toml/toml_parser.hpp"
+#include "core/file/yaml/yaml_builder.hpp"
+#include "core/file/yaml/yaml_parser.hpp"
 #include "core/memory/builtin_allocator.hpp"
 #include "core/memory/trace_memory.hpp"
 #include "core/encrypt/encrypt.hpp"
@@ -41,6 +44,7 @@
 #include "core/system/device.hpp"
 #include "core/system/cmdline.hpp"
 #include "core/system/process.hpp"
+#include "core/system/signal.hpp"
 #include "core/file/file_watcher.hpp"
 #include "core/file/temp_file.hpp"
 #include "core/utility/vsprintf.hpp"
@@ -57,4 +61,5 @@
 #include "network/http/http_server.hpp"
 #include "network/http/http_client.hpp"
 #include "compress/zlib_compress.hpp"
-#endif // MSTL_MSTLCPP_HPP__
+#include "plugin/plugin_manager.hpp"
+#endif // MSTL_MSTL_HPP__

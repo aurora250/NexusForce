@@ -356,6 +356,15 @@ dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) 
     return result;
 }
 
+dns_client::dns_client(string dns_server, const uint16_t dns_port,
+    const _MSTL_CHRONO milliseconds timeout, const bool use_tcp)
+: dns_server_(_MSTL move(dns_server)), dns_port_(dns_port), timeout_(timeout), use_tcp_(use_tcp) {}
+
+void dns_client::set_dns_server(const string& server, const uint16_t port) {
+    dns_server_ = server;
+    dns_port_ = port;
+}
+
 dns_query_result dns_client::query(
     const string& domain, const DNS_RECORD type, const DNS_QUERY qclass) {
     const auto start_time = _MSTL_CHRONO steady_clock::now();

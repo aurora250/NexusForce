@@ -147,8 +147,6 @@ public:
     MSTL_NODISCARD const vector<json_ptr>& get_elements() const noexcept { return elements; }
 };
 
-
-
 MSTL_BEGIN_INNER__
 string MSTL_API json_value_to_string(const json_value* value);
 string MSTL_API json_value_to_indent_string(const json_value* value, int indent);

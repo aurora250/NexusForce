@@ -16,7 +16,7 @@ system_clock::time_point system_clock::now() noexcept {
     const uint64_t nanos = ticks_since_unix_epoch * 100;
     rep total_nanos = static_cast<rep>(nanos);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::timespec ts{};
+    std::timespec ts{};
     ::clock_gettime(CLOCK_REALTIME, &ts);
 
     using rep = system_clock::rep;
@@ -42,7 +42,7 @@ steady_clock::time_point steady_clock::now() noexcept {
     const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
     rep total_nanos = ticks * nanos_per_tick + (ticks * remainder) / static_cast<rep>(freq.QuadPart);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::timespec ts{};
+    std::timespec ts{};
     ::clock_gettime(CLOCK_MONOTONIC, &ts);
 
     using rep = steady_clock::rep;
