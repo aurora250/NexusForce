@@ -1,5 +1,5 @@
-#include <MSTL/core/system/stacktrace.hpp>
 #include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/system/stacktrace.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <DbgHelp.h>
 #pragma comment(lib, "DbgHelp.lib")

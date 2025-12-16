@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_COMPOUND_TUPLE_HPP__
 #define MSTL_CORE_COMPOUND_TUPLE_HPP__
-#include "../compound/pair.hpp"
 #include "../functional/hash.hpp"
+#include "pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

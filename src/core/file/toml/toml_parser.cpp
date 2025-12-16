@@ -1,7 +1,7 @@
-#include <MSTL/core/file/toml/toml_parser.hpp>
+#include <MSTL/core/utility/hexadecimal.hpp>
 #include <MSTL/core/utility/packages.hpp>
 #include <MSTL/core/algorithm/erase.hpp>
-#include <MSTL/core/memory/hexadecimal.hpp>
+#include <MSTL/core/file/toml/toml_parser.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void toml_parser::skip_whitespace() noexcept {
@@ -113,7 +113,7 @@ char32_t toml_parser::parse_unicode_escape(const size_t digits) {
 
     const string_view hex_str = toml_.view(start_pos, digits);
     try {
-        const int64_t value = hexadecimal(hex_str).to_int64();
+        const int64_t value = hexadecimal(hex_str).value();
         if (value < 0 || value > 0x10FFFF) {
             throw_parse_error("Unicode codepoint out of range");
         }

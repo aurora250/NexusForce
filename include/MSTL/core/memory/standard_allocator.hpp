@@ -167,7 +167,6 @@ class standard_allocator {
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using device_type = allocate_cpu_tag;
-    using self = standard_allocator<T>;
 
     template <typename U>
     struct rebind {
@@ -178,7 +177,7 @@ public:
     template <typename U>
     MSTL_CONSTEXPR20 standard_allocator(const standard_allocator<U>&) noexcept {}
     MSTL_CONSTEXPR20 ~standard_allocator() noexcept = default;
-    MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
+    MSTL_CONSTEXPR20 standard_allocator& operator =(const standard_allocator&) noexcept = default;
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         constexpr size_t value_size = sizeof(value_type);
@@ -194,7 +193,7 @@ public:
     }
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
-        return self::allocate(1);
+        return standard_allocator::allocate(1);
     }
 
     MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
@@ -204,7 +203,7 @@ public:
     }
 
     MSTL_CONSTEXPR20 void deallocate(pointer p) noexcept {
-        self::deallocate(p, 1);
+        standard_allocator::deallocate(p, 1);
     }
 };
 template <typename T, typename U>

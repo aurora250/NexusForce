@@ -132,11 +132,7 @@ void sys_console::pause(const string_view msg) {
     lock_guard<mutex> lock(mutex_);
     this->flush_unsafe();
     this->write_string_unsafe(msg);
-    char c = read_char_unsafe();
-
-#ifdef MSTL_PLATFORM_WINDOWS__
     this->readln_string_unsafe();
-#endif
 }
 
 void sys_console::set_color(const integer32& color) {

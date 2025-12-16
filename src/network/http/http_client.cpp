@@ -1,7 +1,7 @@
-#include <MSTL/core/memory/hexadecimal.hpp>
+#include <MSTL/core/utility/hexadecimal.hpp>
+#include <MSTL/core/string/string_util.hpp>
 #include <MSTL/core/time/datetime.hpp>
 #include <MSTL/network/http/http_client.hpp>
-#include <MSTL/core/string/string_util.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif
@@ -189,7 +189,7 @@ bool http_client::parse_chunked_body(const string_view chunked, string& decoded)
         const auto line_end = chunked.find(HTTP_CRLF, pos);
         if (line_end == string::npos) return false;
         auto size_str = chunked.substr(pos, line_end - pos);
-        auto chunk_size = _MSTL hexadecimal::parse(size_str.trim()).to_int64();
+        auto chunk_size = _MSTL hexadecimal::parse(size_str.trim()).value();
         if (!chunk_size) return false;
 
         pos = line_end + 2;

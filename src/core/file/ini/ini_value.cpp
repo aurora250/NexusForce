@@ -1,5 +1,5 @@
-#include <MSTL/core/file/ini/ini_value.hpp>
 #include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/file/ini/ini_value.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 int ini_property::get_int(const int default_value) const noexcept {

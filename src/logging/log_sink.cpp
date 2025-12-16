@@ -1,6 +1,5 @@
-#include <MSTL/logging/log_sink.hpp>
 #include <MSTL/core/system/console.hpp>
-#include <MSTL/core/utility/vsprintf.hpp>
+#include <MSTL/logging/log_sink.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 log_formatter::log_formatter(string pattern)

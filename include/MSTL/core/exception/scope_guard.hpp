@@ -5,9 +5,9 @@
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef __COUNTER__
-    #define ANONYMOUS_VAR(prefix) prefix ## __COUNTER__
+    #define MSTL_ANONYMOUS_VAR(prefix) prefix ## __COUNTER__
 #else
-    #define ANONYMOUS_VAR(prefix) prefix ## __LINE__
+    #define MSTL_ANONYMOUS_VAR(prefix) prefix ## __LINE__
 #endif
 
 
@@ -120,13 +120,13 @@ scope_guard_failure<F> make_scope_guard_failure(F&& f) {
 
 
 #define scope_guard(...) \
-    auto ANONYMOUS_VAR(scope_guard_) = make_scope_guard([&]() { __VA_ARGS__; })
+    auto MSTL_ANONYMOUS_VAR(scope_guard_) = make_scope_guard([&]() { __VA_ARGS__; })
 
 #define scope_guard_success(...) \
-    auto ANONYMOUS_VAR(scope_guard_success_) = make_scope_guard_success([&]() { __VA_ARGS__; })
+    auto MSTL_ANONYMOUS_VAR(scope_guard_success_) = make_scope_guard_success([&]() { __VA_ARGS__; })
 
 #define scope_guard_failure(...) \
-    auto ANONYMOUS_VAR(scope_guard_failure_) = make_scope_guard_failure([&]() { __VA_ARGS__; })
+    auto MSTL_ANONYMOUS_VAR(scope_guard_failure_) = make_scope_guard_failure([&]() { __VA_ARGS__; })
 
 #define defer scope_guard
 

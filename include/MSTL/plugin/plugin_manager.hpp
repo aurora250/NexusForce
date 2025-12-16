@@ -34,8 +34,8 @@ public:
     void load_plugin(string_view filepath);
     bool unload_plugin(const string& name);
 
-    iplugin* get_plugin(const string &name);
-    vector<string> list_plugins() const;
+    MSTL_NODISCARD iplugin* get_plugin(const string &name);
+    MSTL_NODISCARD vector<string> list_plugins() const;
 
     void initialize_all();
     void shutdown_all() noexcept;

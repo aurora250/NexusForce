@@ -1,17 +1,13 @@
 #ifndef MSTL_CORE_INTERFACE_ICOMMON_HPP__
 #define MSTL_CORE_INTERFACE_ICOMMON_HPP__
-#include "../typeinfo/type_traits.hpp"
+#include "../functional/hash.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
 struct ihashable {
-public:
-    using self = ihashable<T>;
-    using child_type = T;
-
 private:
-    constexpr const child_type& derived() const noexcept {
-        return static_cast<const child_type&>(*this);
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
     }
 
 public:
@@ -32,17 +28,13 @@ struct hash<T, enable_if_t<is_base_of_v<ihashable<T>, T>>> {
 
 template <typename T>
 struct iswappable {
-public:
-    using self = iswappable<T>;
-    using child_type = T;
-
 private:
-    constexpr child_type& derived() noexcept {
-        return static_cast<child_type&>(*this);
+    constexpr T& derived() noexcept {
+        return static_cast<T&>(*this);
     }
 
 public:
-    constexpr void swap(child_type& other)
+    constexpr void swap(T& other)
     noexcept(noexcept(derived().swap(other))) {
         derived().swap(other);
     }
@@ -57,41 +49,38 @@ noexcept(noexcept(lh.swap(rh))) {
 
 template <typename T>
 struct icomparable {
-    using self = icomparable<T>;
-    using child_type = T;
-
 private:
-    constexpr const child_type& derived() const noexcept {
-        return static_cast<const child_type&>(*this);
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
     }
 
 public:
-    MSTL_NODISCARD constexpr bool operator ==(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator ==(const T& rhs) const
         noexcept(noexcept(derived() == rhs)) {
         return derived() == rhs;
     }
 
-    MSTL_NODISCARD constexpr bool operator !=(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator !=(const T& rhs) const
         noexcept(noexcept(!(*this == rhs))) {
         return !(*this == rhs);
     }
 
-    MSTL_NODISCARD constexpr bool operator <(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator <(const T& rhs) const
         noexcept(noexcept(derived() < rhs)) {
         return derived() < rhs;
     }
 
-    MSTL_NODISCARD constexpr bool operator >(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator >(const T& rhs) const
         noexcept(noexcept(rhs < derived())) {
         return rhs < derived();
     }
 
-    MSTL_NODISCARD constexpr bool operator <=(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator <=(const T& rhs) const
         noexcept(noexcept(!(derived() > rhs))) {
         return !(derived() > rhs);
     }
 
-    MSTL_NODISCARD constexpr bool operator >=(const child_type& rhs) const
+    MSTL_NODISCARD constexpr bool operator >=(const T& rhs) const
         noexcept(noexcept(!(derived() < rhs))) {
         return !(derived() < rhs);
     }

@@ -76,13 +76,14 @@ private:
         void run() override { func_(); }
     };
 
-private:
+public:
 #ifdef MSTL_PLATFORM_WINDOWS__
     using native_handle_type = ::HANDLE;
 #else
     using native_handle_type = ::pthread_t;
 #endif
 
+private:
     native_handle_type handle_{};
     id id_{};
     STATE state_ = NOT_A_THREAD;

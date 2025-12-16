@@ -11,9 +11,9 @@ public:
     ssl_socket(::SSL_CTX* ctx, const socket& sock);
     ~ssl_socket() { close(); }
 
-    bool accept() const;
+    MSTL_NODISCARD bool accept() const;
     void close() const noexcept;
-    bool is_valid() const noexcept { return ssl_ == nullptr; }
+    MSTL_NODISCARD bool is_valid() const noexcept { return ssl_ == nullptr; }
 
     ssize_t read(char* buffer, size_t size) const;
     ssize_t write(const char* buffer, size_t size) const;

@@ -404,60 +404,148 @@ void test_console() {
 }
 
 void test_dev() {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    auto devs = diskdrive::enumerate_all();
-    for (const auto &dev : devs) {
-        println(dev);
+    auto devices = device::enumerate_devices(DEVICE_TYPE::SERIAL_PORT);
+
+    for (size_t i = 0; i < devices.size(); ++i) {
+        println("  [", i, "] ", devices[i].device_path, " - ", devices[i].friendly_name);
     }
-    console.pause();
-    diskdrive& udisk = devs.back();
+    println();
 
-    if(udisk.volume_label() != "Standby") {
-        println("剩余容量", udisk.free_capacity());
-        path path{udisk.device_path()};
+    if (!devices.empty()) {
+        string selected_path;
+        for (const auto& dev : devices) {
+            if (dev.device_path == "/dev/tty" ||
+                dev.device_path == "/dev/console" ||
+                dev.device_path.find("pts") != string::npos) {
+                println("Skipping special terminal: ", dev.device_path);
+                continue;
+                }
 
-        println("正在卸载卷...");
-        if (udisk.force_dismount()) {
-            println("卷卸载成功");
-        } else {
-            println("卷卸载失败");
+            if (dev.device_path.find("ttyUSB") != string::npos ||
+                dev.device_path.find("ttyS") != string::npos ||
+                dev.device_path.find("ttyACM") != string::npos) {
+                selected_path = dev.device_path;
+                println("Selected device: ", selected_path);
+                break;
+                }
         }
 
-        println("正在禁用设备...");
-        if (udisk.base_drive().disable()) {
-            println("设备禁用成功");
-        } else {
-            println("设备禁用失败");
+        if (selected_path.empty() && !devices.empty()) {
+            selected_path = devices[0].device_path;
+            println("Using first device: ", selected_path);
+        }
+        if (selected_path.empty()) {
+            println("No suitable serial devices found.");
+            return;
         }
 
-        this_thread::sleep_for_ms(2000);
+        println("Opening device: ", selected_path);
 
-        bool success = path::copy_directory(
-            _MSTL path(R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)"),
-            path
-        );
-        println("第一次拷贝结果:", success);
-        console.pause();
+        device dev(selected_path);
+        if (!dev.is_open()) {
+            println("Failed to open device");
+            return;
+        }
+        dev.set_blocking(false);
 
-        println("正在恢复访问权限...");
-        udisk.base_drive().enable();
+        char buffer[256];
+        try {
+            size_t bytes = dev.read(buffer, sizeof(buffer), chrono::milliseconds(100));
+            println("Read ", bytes, " bytes");
+        } catch (const device_exception& e) {
+            println(e.what());
+        }
 
-        success = path::copy_directory(
-            _MSTL path(R"(D:\Workspace\Cpp Workspace\CLine Workspace\MSTL\cmake-build-release-msvc-x64\bin)"),
-            path
-        );
-        println("第二次拷贝结果:", success);
-        console.pause();
+        string message = "Test message\n";
+        size_t written = dev.write(message.data(), message.size());
+        println("Written ", written, " bytes");
 
-        println("正在删除拷贝文件...");
-        path.remove_all_in_directory();
-        console.pause();
+        auto info = dev.get_device_info();
+        println("\nDevice Information:");
+        println("  Path:", info.device_path);
+        println("  Type:", to_string(info.type));
+        println("  Size:", info.size_bytes, "bytes");
+
+        bool readable = dev.is_readable(chrono::milliseconds(100));
+        bool writable = dev.is_writable(chrono::milliseconds(100));
+        println("  Readable: ", readable);
+        println("  Writable: ", writable);
+        println("\n=== Using Serial Port Specialization ===");
+
+        serial_port::serial_config config;
+        config.baud_rate = 9600;
+        config.data_bits = 8;
+        config.stop_bits = 1;
+        config.parity = 'N';
+        config.flow_control = true;
+
+        serial_port serial(devices[0].device_path, config);
+
+        serial.configure(config);
+
+        auto modem_status = serial.get_modem_status();
+        println("Modem Status:");
+        println("  CTS: ", modem_status.cts);
+        println("  DSR: ", modem_status.dsr);
+        println("  RI: ", modem_status.ri);
+        println("  DCD: ", modem_status.dcd);
+
+        println("\n=== Using Storage Device Specialization ===");
+        auto storage_devices = device::enumerate_devices(DEVICE_TYPE::STORAGE);
+
+        if (!storage_devices.empty()) {
+            try {
+                storage_device storage(storage_devices[0].device_path);
+
+                println("Storage Device: ", storage.get_device_path());
+                println("Capacity: ", storage.get_capacity_bytes(), " bytes");
+                println("Sector Size: ", storage.get_sector_size(), " bytes");
+                println("Removable: ", storage.is_removable());
+                println("Read Only: ", storage.is_read_only());
+
+                vector<uint8_t> sector(storage.get_sector_size());
+                storage.read_sectors(sector.data(), 0, 1);
+
+                println("First sector data (first 16 bytes):");
+                for (int i = 0; i < 16 && i < sector.size(); ++i) {
+                    print(static_cast<int>(sector[i]));
+                }
+                println();
+
+            } catch (const device_exception& e) {
+                println(e);
+            }
+        }
+
+        println("\n=== Event Callback Example ===");
+        dev.set_event_callback([](DEVICE_EVENT event) {
+            switch (event) {
+                case DEVICE_EVENT::DATA_AVAILABLE:
+                    println("Event: Data available");
+                    break;
+                case DEVICE_EVENT::WRITE_READY:
+                    println("Event: Write ready");
+                    break;
+                case DEVICE_EVENT::ERROR_OCCURRED:
+                    println("Event: Error occurred");
+                    break;
+                case DEVICE_EVENT::DISCONNECTED:
+                    println("Event: Device disconnected");
+                    break;
+            }
+        });
     } else {
-        println("无U盘设备");
+        println("No serial devices found.");
     }
-#endif
-}
 
+    println("\n=== Device Existence Check ===");
+    string test_path = "/dev/ttyUSB0";
+    bool exists = device::exists(test_path);
+    bool is_dev = device::is_device(test_path);
+    println("Path: ", test_path);
+    println("Exists: ", exists);
+    println("Is device: ", is_dev);
+}
 
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));

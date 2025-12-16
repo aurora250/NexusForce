@@ -1,13 +1,11 @@
 #ifndef MSTL_CORE_UTILITY_COLOR_HPP__
 #define MSTL_CORE_UTILITY_COLOR_HPP__
-#include "../memory/hexadecimal.hpp"
+#include "hexadecimal.hpp"
 #include "packages.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class color : public iobject<color> {
+class color : public iobject<color>, public icommon<color> {
 private:
-    using self = color;
-
     int r = 0, g = 0, b = 0, a = 255;
 
     static constexpr int clamp(const int value) noexcept {
@@ -184,31 +182,20 @@ public:
         if (clean_hex[0] == '#') clean_hex = clean_hex.substr(1);
 
         if (clean_hex.length() == 6) {
-            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).to_int64();
-            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).to_int64();
-            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).to_int64();
+            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
+            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
+            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
             return {r, g, b};
         } else if (clean_hex.length() == 8) {
-            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).to_int64();
-            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).to_int64();
-            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).to_int64();
-            const int a = hexadecimal::parse(clean_hex.substr(6, 2)).to_int64();
+            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
+            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
+            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
+            const int a = hexadecimal::parse(clean_hex.substr(6, 2)).value();
             return {r, g, b, a};
         } else {
             throw_exception(value_exception("Invalid hex string"));
         }
         return {};
-    }
-
-    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
-        self tmp;
-        try {
-            tmp = self::parse(str);
-        } catch (...) {
-            return false;
-        }
-        *this = _MSTL move(tmp);
-        return true;
     }
 
     MSTL_NODISCARD constexpr int to_ansi_256() const noexcept {
@@ -280,8 +267,8 @@ public:
         return hasher(r) ^ hasher(g) ^ hasher(b) ^ hasher(a);
     }
 
-    constexpr void swap(self& other) noexcept {
-        self tmp = _MSTL move(other);
+    constexpr void swap(color& other) noexcept {
+        color tmp = _MSTL move(other);
         other = _MSTL move(*this);
         *this = _MSTL move(tmp);
     }

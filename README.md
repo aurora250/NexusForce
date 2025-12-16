@@ -120,7 +120,7 @@ sudo make install
 
 定义操作系统平台、托管平台、总线宽度和C++版本的宏，实现多编译环境适配。
 
-- [vsprintf](include/MSTL/core/utility/vsprintf.hpp)
+- [vsprintf](include/MSTL/core/string/vsprintf.hpp)
 
 定义一系列函数将可变参数列表输出到格式化的字符串。
 
@@ -172,7 +172,7 @@ sudo make install
 
 定义压缩对`compressed_pair`、键值对`pair`及其哈希函数、类型擦除函数、C风格字符串转数字类型函数。
 
-- [tuple](include/MSTL/core/compound/tuple.hpp)
+- [tuple](include/MSTL/core/utility/tuple.hpp)
 
 定义元组类`tuple`及其辅助函数。
 
@@ -200,7 +200,7 @@ sudo make install
 
 定义比较、复制和移动算法。
 
-- [any](include/MSTL/core/compound/any.hpp)
+- [any](include/MSTL/core/utility/any.hpp)
 
 定义任意类any，其可存储任意类型。
 
@@ -272,7 +272,7 @@ sudo make install
 
 定义时间类`time`、日期类`date`、时期类`datetime`和UNIX时间戳类`timestamp`，提供方便操作的工具函数。
 
-- [hexadecimal](include/MSTL/core/memory/hexadecimal.hpp)
+- [hexadecimal](include/MSTL/core/utility/hexadecimal.hpp)
 
 定义十六进制类`hexadecimal`及其格式化辅助类。
 
@@ -284,11 +284,11 @@ sudo make install
 
 定义IO辅助类`io_base`及IO控制台类`console`。
 
-- [variant](include/MSTL/core/compound/variant.hpp)
+- [variant](include/MSTL/core/utility/variant.hpp)
 
 定义变体类`variant`，其可在同一块内存同时托管多个类型。
 
-- [optional](include/MSTL/core/compound/optional.hpp)
+- [optional](include/MSTL/core/utility/optional.hpp)
 
 定义自选类`optional`，其可托管一个类型，设置可选空值nullopt。
 

@@ -5,12 +5,9 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
 struct istringify {
-    using self = istringify<T>;
-    using child_type = T;
-
 private:
-    constexpr const child_type& derived() const noexcept {
-        return static_cast<const child_type&>(*this);
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
     }
 
 public:

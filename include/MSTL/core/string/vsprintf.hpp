@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_UTILITY_VSPRINTF_HPP__
 #define MSTL_CORE_UTILITY_VSPRINTF_HPP__
-#include "../typeinfo/types.hpp"
 #include <cstdarg>
+#include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 int MSTL_API vsprintf(char *buf, const char *fmt, std::va_list args) noexcept;

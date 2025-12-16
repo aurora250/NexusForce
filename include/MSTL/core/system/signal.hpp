@@ -68,6 +68,9 @@ private:
         SIGNAL_EVENT event;
         void* context;
         _MSTL_CHRONO steady_clock::time_point timestamp;
+
+        pending_signal(const SIGNAL_EVENT event, void* context, _MSTL_CHRONO steady_clock::time_point timestamp)
+        : event{event}, context{context}, timestamp{timestamp} {}
     };
     vector<pending_signal> pending_signals_;
 

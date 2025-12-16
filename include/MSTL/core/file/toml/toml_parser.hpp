@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_FILE_TOML_TOML_PARSER_HPP__
 #define MSTL_CORE_FILE_TOML_TOML_PARSER_HPP__
-#include "MSTL/core/compound/optional.hpp"
+#include "../../utility/optional.hpp"
 #include "toml_value.hpp"
 MSTL_BEGIN_NAMESPACE__
 

@@ -3,6 +3,9 @@
 #include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+template <typename Key, typename = void>
+struct hash;
+
 template <typename T>
 struct hash<T*> {
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_t operator()(const T* ptr) const noexcept {

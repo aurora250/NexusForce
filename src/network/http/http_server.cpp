@@ -142,9 +142,7 @@ string http_server::url_decode(const string_view str) {
     for (size_t i = 0; i < str.length(); ++i) {
         if (str[i] == '%' && i + 2 < str.length()) {
             try {
-                result += static_cast<char>(
-                    hexadecimal::parse(str.substr(i + 1, 2)).to_int64()
-                    );
+                result += static_cast<char>(hexadecimal::parse(str.substr(i + 1, 2)).value());
             } catch (...) {
                 result += str[i];
             }

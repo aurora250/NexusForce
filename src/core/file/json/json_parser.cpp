@@ -1,5 +1,5 @@
-#include <MSTL/core/file/json/json_parser.hpp>
 #include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/file/json/json_parser.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 unique_ptr<json_string> json_parser::parse_string() {

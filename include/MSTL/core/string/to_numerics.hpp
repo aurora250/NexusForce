@@ -61,7 +61,7 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
     bool overflow = false;
 
     while (p != end) {
-        int digit;
+        int digit = 0;
         const char c = *p;
         if (c >= '0' && c <= '9') {
             digit = c - '0';
@@ -153,7 +153,7 @@ constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
     bool overflow = false;
 
     while (p != end) {
-        unsigned int digit;
+        unsigned int digit = 0;
         const char c = *p;
         if (c >= '0' && c <= '9') {
             digit = c - '0';

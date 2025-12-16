@@ -1,10 +1,10 @@
 #ifndef MSTL_NETWORK_DNS_CLIENT_HPP__
 #define MSTL_NETWORK_DNS_CLIENT_HPP__
-#include "MSTL/core/compound/optional.hpp"
-#include "MSTL/core/container/unordered_map.hpp"
-#include "MSTL/core/time/clocks.hpp"
+#include "../../core/utility/optional.hpp"
 #include "MSTL/core/async/future.hpp"
+#include "MSTL/core/container/unordered_map.hpp"
 #include "MSTL/core/numeric/random.hpp"
+#include "MSTL/core/time/clocks.hpp"
 #include "dns_message.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
 #include <netinet/in.h>

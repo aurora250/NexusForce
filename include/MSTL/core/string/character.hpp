@@ -188,68 +188,32 @@ MSTL_CONSTEXPR20 void append_ascii_chars(basic_string<T>& result, const U* str, 
 
 MSTL_END_INNER__
 
+#define MSTL_BUILD_PACKAGE_CONSTRUCTOR(T) \
+constexpr T() = default; \
+constexpr T(const T&) noexcept = default; \
+constexpr T(T&&) noexcept = default; \
+constexpr T(value_type val) noexcept : base(val) {} \
+MSTL_CONSTEXPR20 ~T() = default; \
+constexpr T& operator =(const T& other) noexcept { \
+    value_ = other.value_; \
+    return *this; \
+} \
+constexpr T& operator =(T&& other) noexcept { \
+    value_ = other.value_; \
+    other.value_ = initialize<package_type>(); \
+    return *this; \
+} \
+constexpr T& operator =(value_type other) noexcept { \
+    value_ = other; \
+    return *this; \
+}
+
+
 struct character : icharacter<character, char> {
     using value_type = char;
-    using self = character;
     using base = icharacter<character, char>;
 
-private:
-    value_type value_ = _MSTL initialize<value_type>();
-
-public:
-    constexpr character () = default;
-    constexpr character (const self&) noexcept = default;
-    constexpr character (const value_type& val) noexcept : value_(val) {}
-    constexpr character & operator=(const self&) noexcept = default;
-    constexpr character & operator=(const value_type& other) noexcept { value_ = other; return *this; }
-
-    constexpr character (self&& other) noexcept : value_(other. value_) {
-        other. value_ = _MSTL initialize<value_type>();
-    }
-    constexpr character (value_type&& other) noexcept : value_(other) {}
-
-    constexpr self& operator=(self&& other) noexcept {
-        if (this != &other) {
-            value_ = other. value_;
-            other. value_ = 0;
-        }
-        return *this;
-    }
-    constexpr self& operator=(value_type&& other) noexcept {
-        value_ = other; return *this;
-    }
-
-    MSTL_CONSTEXPR20 ~character () = default;
-
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
-        return value_ != _MSTL initialize<value_type>();
-    }
-    MSTL_NODISCARD constexpr operator value_type() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static constexpr size_t bytes() noexcept { return sizeof(value_type); }
-    static constexpr size_t bits() noexcept { return sizeof(value_type) * 8; }
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _MSTL hash<value_type>()(value_);
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(value_, other.value_);
-    }
-
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-
-    constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
-    constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
-    constexpr bool is_digit() const noexcept { return _MSTL is_digit(value_); }
-    constexpr bool is_xdigit() const noexcept { return _MSTL is_xdigit(value_); }
-    constexpr bool is_alpha_or_digit() const noexcept { return _MSTL is_alpha_or_digit(value_); }
-    constexpr bool is_digit_or_alpha() const noexcept { return _MSTL is_digit_or_alpha(value_); }
-
-    constexpr void to_lowercase() noexcept { value_ = _MSTL to_lowercase(value_); }
-    constexpr void to_uppercase() noexcept { value_ = _MSTL to_uppercase(value_); }
-
+    MSTL_BUILD_PACKAGE_CONSTRUCTOR(character)
 
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         return string{obj};
@@ -329,77 +293,20 @@ public:
 };
 
 template <>
-struct package_base<char> {
+struct package<char> {
     using type = character;
 };
 template <>
-struct unpackage_base<character> {
+struct unpackage<character> {
     using type = char;
 };
 
 
 struct wcharacter : icharacter<wcharacter, wchar_t> {
     using value_type = wchar_t;
-    using self = wcharacter;
     using base = icharacter<wcharacter, wchar_t>;
 
-private:
-    value_type value_ = _MSTL initialize<value_type>();
-
-public:
-    constexpr wcharacter () = default;
-    constexpr wcharacter (const self&) noexcept = default;
-    constexpr wcharacter (const value_type& val) noexcept : value_(val) {}
-    constexpr wcharacter & operator=(const self&) noexcept = default;
-    constexpr wcharacter & operator=(const value_type& other) noexcept { value_ = other; return *this; }
-
-    constexpr wcharacter (self&& other) noexcept : value_(other. value_) {
-        other. value_ = _MSTL initialize<value_type>();
-    }
-    constexpr wcharacter (value_type&& other) noexcept : value_(other) {}
-
-    constexpr self& operator=(self&& other) noexcept {
-        if (this != &other) {
-            value_ = other. value_;
-            other. value_ = 0;
-        }
-        return *this;
-    }
-    constexpr self& operator=(value_type&& other) noexcept {
-        value_ = other; return *this;
-    }
-
-    MSTL_CONSTEXPR20 ~wcharacter () = default;
-
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
-        return value_ != _MSTL initialize<value_type>();
-    }
-    MSTL_NODISCARD constexpr operator value_type() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static constexpr size_t bytes() noexcept { return sizeof(value_type); }
-    static constexpr size_t bits() noexcept { return sizeof(value_type) * 8; }
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _MSTL hash<value_type>()(value_);
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(value_, other.value_);
-    }
-
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-
-    constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
-    constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
-    constexpr bool is_digit() const noexcept { return _MSTL is_digit(value_); }
-    constexpr bool is_xdigit() const noexcept { return _MSTL is_xdigit(value_); }
-    constexpr bool is_alpha_or_digit() const noexcept { return _MSTL is_alpha_or_digit(value_); }
-    constexpr bool is_digit_or_alpha() const noexcept { return _MSTL is_digit_or_alpha(value_); }
-
-    constexpr void to_lowercase() noexcept { value_ = _MSTL to_lowercase(value_); }
-    constexpr void to_uppercase() noexcept { value_ = _MSTL to_uppercase(value_); }
-
+    MSTL_BUILD_PACKAGE_CONSTRUCTOR(wcharacter)
 
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
@@ -418,8 +325,8 @@ public:
             }
         }
 #elif defined(MSTL_PLATFORM_LINUX__)
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER append_utf8_char(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER append_utf8_char(result, i);
         }
 #endif
         return result;
@@ -447,8 +354,8 @@ public:
             }
         }
 #elif defined(MSTL_PLATFORM_LINUX__)
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER append_utf8_char(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER append_utf8_char(result, i);
         }
 #endif
         return result;
@@ -466,8 +373,8 @@ public:
         }
 #elif defined(MSTL_PLATFORM_LINUX__)
         result.reserve(obj.size() * 2);
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER codepoint_to_utf16(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER codepoint_to_utf16(result, i);
         }
 #endif
         return result;
@@ -491,8 +398,8 @@ public:
             }
         }
 #elif defined(MSTL_PLATFORM_LINUX__)
-        for (size_t i = 0; i < obj.size(); ++i) {
-            result.push_back(static_cast<char32_t>(obj[i]));
+        for (const value_type i : obj) {
+            result.push_back(static_cast<char32_t>(i));
         }
 #endif
         return result;
@@ -500,11 +407,11 @@ public:
 };
 
 template <>
-struct package_base<wchar_t> {
+struct package<wchar_t> {
     using type = wcharacter;
 };
 template <>
-struct unpackage_base<wcharacter> {
+struct unpackage<wcharacter> {
     using type = wchar_t;
 };
 
@@ -513,66 +420,9 @@ struct unpackage_base<wcharacter> {
 
 struct u8character : icharacter<u8character, char8_t> {
     using value_type = char8_t;
-    using self = u8character;
     using base = icharacter<u8character, char8_t>;
 
-private:
-    value_type value_ = _MSTL initialize<value_type>();
-
-public:
-    constexpr u8character () = default;
-    constexpr u8character (const self&) noexcept = default;
-    constexpr u8character (const value_type& val) noexcept : value_(val) {}
-    constexpr u8character & operator=(const self&) noexcept = default;
-    constexpr u8character & operator=(const value_type& other) noexcept { value_ = other; return *this; }
-
-    constexpr u8character (self&& other) noexcept : value_(other. value_) {
-        other. value_ = _MSTL initialize<value_type>();
-    }
-    constexpr u8character (value_type&& other) noexcept : value_(other) {}
-
-    constexpr self& operator=(self&& other) noexcept {
-        if (this != &other) {
-            value_ = other. value_;
-            other. value_ = 0;
-        }
-        return *this;
-    }
-    constexpr self& operator=(value_type&& other) noexcept {
-        value_ = other; return *this;
-    }
-
-    MSTL_CONSTEXPR20 ~u8character () = default;
-
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
-        return value_ != _MSTL initialize<value_type>();
-    }
-    MSTL_NODISCARD constexpr operator value_type() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static constexpr size_t bytes() noexcept { return sizeof(value_type); }
-    static constexpr size_t bits() noexcept { return sizeof(value_type) * 8; }
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _MSTL hash<value_type>()(value_);
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(value_, other.value_);
-    }
-
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-
-    constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
-    constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
-    constexpr bool is_digit() const noexcept { return _MSTL is_digit(value_); }
-    constexpr bool is_xdigit() const noexcept { return _MSTL is_xdigit(value_); }
-    constexpr bool is_alpha_or_digit() const noexcept { return _MSTL is_alpha_or_digit(value_); }
-    constexpr bool is_digit_or_alpha() const noexcept { return _MSTL is_digit_or_alpha(value_); }
-
-    constexpr void to_lowercase() noexcept { value_ = _MSTL to_lowercase(value_); }
-    constexpr void to_uppercase() noexcept { value_ = _MSTL to_uppercase(value_); }
-
+    MSTL_BUILD_PACKAGE_CONSTRUCTOR(u8character)
 
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
@@ -644,11 +494,11 @@ public:
 };
 
 template <>
-struct package_base<char8_t> {
+struct package<char8_t> {
     using type = u8character;
 };
 template <>
-struct unpackage_base<u8character> {
+struct unpackage<u8character> {
     using type = char8_t;
 };
 
@@ -657,69 +507,9 @@ struct unpackage_base<u8character> {
 
 struct u16character : icharacter<u16character, char16_t> {
     using value_type = char16_t;
-    using self = u16character;
     using base = icharacter<u16character, char16_t>;
 
-private:
-    value_type value_ = _MSTL initialize<value_type>();
-
-public:
-    constexpr u16character () = default;
-    constexpr u16character (const self&) noexcept = default;
-    constexpr u16character (const value_type& val) noexcept : value_(val) {}
-    constexpr u16character & operator=(const self&) noexcept = default;
-    constexpr u16character & operator=(const value_type& other) noexcept { value_ = other; return *this; }
-
-    constexpr u16character (self&& other) noexcept : value_(other. value_) {
-        other. value_ = _MSTL initialize<value_type>();
-    }
-    constexpr u16character (value_type&& other) noexcept : value_(other) {}
-
-    constexpr self& operator=(self&& other) noexcept {
-        if (this != &other) {
-            value_ = other. value_;
-            other. value_ = 0;
-        }
-        return *this;
-    }
-    constexpr self& operator=(value_type&& other) noexcept {
-        value_ = other; return *this;
-    }
-
-    MSTL_CONSTEXPR20 ~u16character () = default;
-
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
-        return value_ != _MSTL initialize<value_type>();
-    }
-    MSTL_NODISCARD constexpr operator value_type() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static constexpr size_t bytes() noexcept { return sizeof(value_type); }
-    static constexpr size_t bits() noexcept { return sizeof(value_type) * 8; }
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _MSTL hash<value_type>()(value_);
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(value_, other.value_);
-    }
-
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-
-    constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
-    constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
-    constexpr bool is_digit() const noexcept { return _MSTL is_digit(value_); }
-    constexpr bool is_xdigit() const noexcept { return _MSTL is_xdigit(value_); }
-    constexpr bool is_alpha_or_digit() const noexcept { return _MSTL is_alpha_or_digit(value_); }
-    constexpr bool is_digit_or_alpha() const noexcept { return _MSTL is_digit_or_alpha(value_); }
-
-    constexpr void to_lowercase() noexcept { value_ = _MSTL to_lowercase(value_); }
-    constexpr void to_uppercase() noexcept { value_ = _MSTL to_uppercase(value_); }
-
-    constexpr bool is_high_surrogate() const noexcept { return _MSTL is_high_surrogate(value_); }
-    constexpr bool is_low_surrogate() const noexcept { return _MSTL is_low_surrogate(value_); }
-
+    MSTL_BUILD_PACKAGE_CONSTRUCTOR(u16character)
 
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
@@ -829,83 +619,26 @@ public:
 };
 
 template <>
-struct package_base<char16_t> {
+struct package<char16_t> {
     using type = u16character;
 };
 template <>
-struct unpackage_base<u16character> {
+struct unpackage<u16character> {
     using type = char16_t;
 };
 
 
 struct u32character : icharacter<u32character, char32_t> {
     using value_type = char32_t;
-    using self = u32character;
     using base = icharacter<u32character, char32_t>;
 
-private:
-    value_type value_ = _MSTL initialize<value_type>();
-
-public:
-    constexpr u32character () = default;
-    constexpr u32character (const self&) noexcept = default;
-    constexpr u32character (const value_type& val) noexcept : value_(val) {}
-    constexpr u32character & operator=(const self&) noexcept = default;
-    constexpr u32character & operator=(const value_type& other) noexcept { value_ = other; return *this; }
-
-    constexpr u32character (self&& other) noexcept : value_(other. value_) {
-        other. value_ = _MSTL initialize<value_type>();
-    }
-    constexpr u32character (value_type&& other) noexcept : value_(other) {}
-
-    constexpr self& operator=(self&& other) noexcept {
-        if (this != &other) {
-            value_ = other. value_;
-            other. value_ = 0;
-        }
-        return *this;
-    }
-    constexpr self& operator=(value_type&& other) noexcept {
-        value_ = other; return *this;
-    }
-
-    MSTL_CONSTEXPR20 ~u32character () = default;
-
-    MSTL_NODISCARD constexpr explicit operator bool() const noexcept {
-        return value_ != _MSTL initialize<value_type>();
-    }
-    MSTL_NODISCARD constexpr operator value_type() const noexcept { return value_; }
-    MSTL_NODISCARD constexpr value_type value() const noexcept { return value_; }
-    static constexpr size_t bytes() noexcept { return sizeof(value_type); }
-    static constexpr size_t bits() noexcept { return sizeof(value_type) * 8; }
-
-    MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _MSTL hash<value_type>()(value_);
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(value_, other.value_);
-    }
-
-    constexpr bool operator ==(const self& other) const noexcept { return value_ == other.value_; }
-    constexpr bool operator <(const self& other) const noexcept { return value_ < other.value_; }
-
-    constexpr bool is_space() const noexcept { return _MSTL is_space(value_); }
-    constexpr bool is_alpha() const noexcept { return _MSTL is_alpha(value_); }
-    constexpr bool is_digit() const noexcept { return _MSTL is_digit(value_); }
-    constexpr bool is_xdigit() const noexcept { return _MSTL is_xdigit(value_); }
-    constexpr bool is_alpha_or_digit() const noexcept { return _MSTL is_alpha_or_digit(value_); }
-    constexpr bool is_digit_or_alpha() const noexcept { return _MSTL is_digit_or_alpha(value_); }
-
-    constexpr void to_lowercase() noexcept { value_ = _MSTL to_lowercase(value_); }
-    constexpr void to_uppercase() noexcept { value_ = _MSTL to_uppercase(value_); }
-
+    MSTL_BUILD_PACKAGE_CONSTRUCTOR(u32character)
 
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER append_utf8_char(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER append_utf8_char(result, i);
         }
         return result;
     }
@@ -914,8 +647,8 @@ public:
         if (obj.empty()) return {};
         wstring result;
         result.reserve(obj.size());
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER codepoint_to_wchar(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER codepoint_to_wchar(result, i);
         }
         return result;
     }
@@ -925,8 +658,8 @@ public:
         if (obj.empty()) return {};
         u8string result;
         result.reserve(obj.size() * 4);
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER append_utf8_char(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER append_utf8_char(result, i);
         }
         return result;
     }
@@ -936,8 +669,8 @@ public:
         if (obj.empty()) return {};
         u16string result;
         result.reserve(obj.size() * 2);
-        for (size_t i = 0; i < obj.size(); ++i) {
-            _INNER codepoint_to_utf16(result, obj[i]);
+        for (const value_type i : obj) {
+            _INNER codepoint_to_utf16(result, i);
         }
         return result;
     }
@@ -948,11 +681,11 @@ public:
 };
 
 template <>
-struct package_base<char32_t> {
+struct package<char32_t> {
     using type = u32character;
 };
 template <>
-struct unpackage_base<u32character> {
+struct unpackage<u32character> {
     using type = char32_t;
 };
 

@@ -5,47 +5,33 @@
 #include "icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename Collector>
-struct icollector : icommon<Collector> {
+template <typename T>
+struct icollector : icommon<T> {
 private:
-    using collector_type    = Collector;
-    using self              = icollector;
-
-    static constexpr collector_type* to_template(const self* o) noexcept {
-        return const_cast<collector_type*>(static_cast<const collector_type*>(o));
-    }
-
-protected:
-    template <typename T>
-    MSTL_NODISCARD static constexpr size_t default_to_hash(const T& c) noexcept {
-        size_t result = FNV_OFFSET_BASIS;
-        if (_MSTL empty(c)) return result;
-
-        constexpr hash<remove_cvref_t<decltype(*_MSTL cbegin(c))>> hasher;
-        for (auto elem : c) result ^= hasher(elem);
-        return result;
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
     }
 
 public:
-    MSTL_CONSTEXPR20 ~icollector() = default;
-
     MSTL_NODISCARD constexpr size_t size() const
-    noexcept(noexcept(self::to_template(this)->size())) {
-        return static_cast<size_t>(self::to_template(this)->size());
+    noexcept(noexcept(derived().size())) {
+        return static_cast<size_t>(derived().size());
     }
 
     MSTL_NODISCARD constexpr bool empty() const
-    noexcept(noexcept(self::to_template(this)->empty())) {
-        return self::to_template(this)->empty();
+    noexcept(noexcept(derived().empty())) {
+        return derived().empty();
     }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-        const auto& c = *self::to_template(this);
+        const auto& c = derived();
         size_t result = FNV_OFFSET_BASIS;
         if (_MSTL empty(c)) return result;
 
-        constexpr hash<remove_cvref_t<decltype(*_MSTL cbegin(c))>> hasher;
-        for (auto elem : c) result ^= hasher(elem);
+        hash<remove_cvref_t<decltype(*_MSTL cbegin(c))>> hasher;
+        for (const auto& elem : c) {
+            result ^= hasher(elem);
+        }
         return result;
     }
 };

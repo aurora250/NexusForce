@@ -124,7 +124,7 @@ The following files are introduced in the order of the hierarchical structure sh
 
 Defines macros for operating system platform, hosting platform, bus width, and C++ version, implementing multi-compilation environment adaptation.
 
-- [vsprintf](include/MSTL/core/utility/vsprintf.hpp)
+- [vsprintf](include/MSTL/core/string/vsprintf.hpp)
 
 Defines a series of functions to output variable argument lists to formatted strings.
 
@@ -176,7 +176,7 @@ Defines common constraints and iterator type judgment trait constants.
 
 Defines `compressed_pair`, `pair` and their hash functions, type erasure functions, and functions to convert C-style strings to numeric types.
 
-- [tuple](include/MSTL/core/compound/tuple.hpp)
+- [tuple](include/MSTL/core/utility/tuple.hpp)
 
 Defines the tuple class `tuple` and its auxiliary functions.
 
@@ -204,7 +204,7 @@ Defines iterator utility functions and iterator adapters.
 
 Defines comparison, copy, and move algorithms.
 
-- [any](include/MSTL/core/compound/any.hpp)
+- [any](include/MSTL/core/utility/any.hpp)
 
 Defines the `any` class, which can store any type.
 
@@ -278,7 +278,7 @@ Defines a series of CRTP base classes for serialization.
 
 Defines time classes (`time`, `date`, `datetime`) and UNIX timestamp class (`timestamp`), providing convenient utility functions.
 
-- [hexadecimal](include/MSTL/core/memory/hexadecimal.hpp)
+- [hexadecimal](include/MSTL/core/utility/hexadecimal.hpp)
 
 Defines the hexadecimal class `hexadecimal` and its formatting helper class.
 
@@ -290,11 +290,11 @@ Defines the color class `color`.
 
 Defines the IO base class `io_base` and the IO console class `console`.
 
-- [variant](include/MSTL/core/compound/variant.hpp)
+- [variant](include/MSTL/core/utility/variant.hpp)
 
 Defines the `variant` class, which can host multiple types in the same memory block.
 
-- [optional](include/MSTL/core/compound/optional.hpp)
+- [optional](include/MSTL/core/utility/optional.hpp)
 
 Defines the `optional` class, which can host a type and optionally set a null value `nullopt`.
 

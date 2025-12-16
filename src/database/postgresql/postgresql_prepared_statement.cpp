@@ -1,8 +1,8 @@
 #include <MSTL/database/postgresql/postgresql_prepared_statement.hpp>
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include <MSTL/core/utility/packages.hpp>
-#include <MSTL/database/postgresql/postgresql_prepared_result.hpp>
 #include <MSTL/core/async/atomic.hpp>
+#include <MSTL/database/postgresql/postgresql_prepared_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 postgresql_prepared_statement::postgresql_prepared_statement(_MSTL_POSTGRESQL PGconn* conn, const string& sql)

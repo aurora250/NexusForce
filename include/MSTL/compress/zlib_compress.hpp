@@ -100,7 +100,7 @@ public:
         stream_compressor(stream_compressor&& other) noexcept;
         stream_compressor& operator=(stream_compressor&& other) noexcept;
 
-        bvector compress(span<const byte_t> data, bool finish = false);
+        bvector compress(const span<const byte_t>& data, bool finish = false);
         bvector compress(string_view data, bool finish = false);
 
         bvector finish();
@@ -124,7 +124,7 @@ public:
         stream_decompressor(stream_decompressor&& other) noexcept;
         stream_decompressor& operator=(stream_decompressor&& other) noexcept;
 
-        bvector decompress(span<const byte_t> data, bool finish = false);
+        bvector decompress(const span<const byte_t>& data, bool finish = false);
 
         bvector finish();
 

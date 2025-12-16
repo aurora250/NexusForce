@@ -5,6 +5,9 @@
 #include "../numeric/numeric_limits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+template <typename T>
+class standard_allocator;
+
 
 struct __allocator_traits_base {
     template <typename T, typename U, typename = void>
@@ -209,7 +212,7 @@ template <typename Alloc>
 struct is_copy_insertable
 	: _INNER __is_alloc_insertable_impl<Alloc, typename Alloc::value_type const&>::type {};
 template <typename T>
-struct is_copy_insertable<allocator<T>> : is_copy_constructible<T> {};
+struct is_copy_insertable<standard_allocator<T>> : is_copy_constructible<T> {};
 
 template <typename Alloc>
 MSTL_INLINE17 constexpr bool is_copy_insertable_v = is_copy_insertable<Alloc>::value;
@@ -220,7 +223,7 @@ struct is_move_insertable
 	: _INNER __is_alloc_insertable_impl<Alloc, typename Alloc::value_type>::type {};
 
 template <typename T>
-struct is_move_insertable<allocator<T>> : is_move_constructible<T> {};
+struct is_move_insertable<standard_allocator<T>> : is_move_constructible<T> {};
 
 template <typename Alloc>
 MSTL_INLINE17 constexpr bool is_move_insertable_v = is_move_insertable<Alloc>::value;

@@ -1,6 +1,6 @@
-#include <MSTL/network/url.hpp>
-#include <MSTL/network/http/http_constants.hpp>
 #include <MSTL/core/utility/packages.hpp>
+#include <MSTL/network/http/http_constants.hpp>
+#include <MSTL/network/url.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void url::parse(const string_view str) {

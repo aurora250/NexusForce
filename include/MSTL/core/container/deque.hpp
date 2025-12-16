@@ -1,10 +1,10 @@
 #ifndef MSTL_CORE_CONTAINER_DEQUE_HPP__
 #define MSTL_CORE_CONTAINER_DEQUE_HPP__
+#include "../algorithm/compare.hpp"
 #include "../interface/icollector.hpp"
 #include "../memory/standard_allocator.hpp"
 #include "../memory/uninitialized.hpp"
-#include "../compound/compressed_pair.hpp"
-#include "../algorithm/compare.hpp"
+#include "../utility/compressed_pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t MAX_DEQUE_BUFFER_THRESHHOLD = 256;

@@ -64,15 +64,15 @@ public:
 
     ~http_server() { stop(); }
 
-    http_router& router() noexcept { return router_; }
-    const http_router& router() const noexcept { return router_; }
+    MSTL_NODISCARD http_router& router() noexcept { return router_; }
+    MSTL_NODISCARD const http_router& router() const noexcept { return router_; }
 
-    _MSTL session* session(http_request& request, bool create = false);
+    MSTL_NODISCARD _MSTL session* session(http_request& request, bool create = false);
 
     void set_cookie_name(HTTP_COOKIE_NAME name) noexcept {
         cookie_name_ = _MSTL move(name);
     }
-    const HTTP_COOKIE_NAME& cookie_name() const noexcept {
+    MSTL_NODISCARD const HTTP_COOKIE_NAME& cookie_name() const noexcept {
         return cookie_name_;
     }
 

@@ -1,4 +1,4 @@
-#include <MSTL/core/memory/hexadecimal.hpp>
+#include <MSTL/core/utility/hexadecimal.hpp>
 #include <MSTL/core/encrypt/encrypt.hpp>
 MSTL_BEGIN_NAMESPACE__
 
@@ -538,7 +538,7 @@ string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
             const auto hex_val = hexadecimal::parse(key_hex.substr(i, 2));
-            key_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
+            key_bytes.push_back(static_cast<byte_t>(hex_val.value()));
         }
     }
 
@@ -558,7 +558,7 @@ string AES256::decrypt_hex(const string_view encrypted_hex, const string_view ke
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
             const auto hex_val = hexadecimal::parse(key_hex.substr(i, 2));
-            key_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
+            key_bytes.push_back(static_cast<byte_t>(hex_val.value()));
         }
     }
 
@@ -566,7 +566,7 @@ string AES256::decrypt_hex(const string_view encrypted_hex, const string_view ke
     for (size_t i = 0; i < encrypted_hex.size(); i += 2) {
         if (i + 1 < encrypted_hex.size()) {
             const auto hex_val = hexadecimal::parse(encrypted_hex.substr(i, 2));
-            encrypted_bytes.push_back(static_cast<byte_t>(hex_val.to_int64()));
+            encrypted_bytes.push_back(static_cast<byte_t>(hex_val.value()));
         }
     }
     bstring decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());

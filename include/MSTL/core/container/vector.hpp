@@ -1,11 +1,11 @@
 #ifndef MSTL_CORE_CONTAINER_VECTOR_HPP__
 #define MSTL_CORE_CONTAINER_VECTOR_HPP__
+#include "../algorithm/compare.hpp"
+#include "../config/undef_cmacro.hpp"
 #include "../interface/icollector.hpp"
 #include "../memory/standard_allocator.hpp"
 #include "../memory/uninitialized.hpp"
-#include "../compound/compressed_pair.hpp"
-#include "../algorithm/compare.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "../utility/compressed_pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, typename Vector>

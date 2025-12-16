@@ -27,9 +27,7 @@ async(launch policy, Func&& function, Args&&... args) {
 template <typename Func, typename... Args>
 MSTL_NODISCARD future<async_result_t<Func, Args...>>
 async(Func&& function, Args&&... args) {
-    return _MSTL async(launch::async | launch::deferred,
-        _MSTL forward<Func>(function), _MSTL forward<Args>(args)...
-        );
+    return _MSTL async(launch::async | launch::deferred, _MSTL forward<Func>(function), _MSTL forward<Args>(args)...);
 }
 
 MSTL_END_NAMESPACE__

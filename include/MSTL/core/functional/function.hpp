@@ -217,7 +217,7 @@ private:
 		is_invocable_r_v<Res, decay_t<F>&, Args...>
 	>> : true_type {};
 
-	template<typename F>
+	template <typename F>
 	using handler_t = _INNER __function_manage_handler<Res(Args...), decay_t<F>>;
 
 	using invoker_type = Res (*)(const _INNER storage_data&, Args&&...);
@@ -225,7 +225,7 @@ private:
 	invoker_type invoker_ = nullptr;
 
 	template <typename F, enable_if_t<is_object_v<F>, int> = 0>
-	const F* __target_impl() const noexcept {
+	MSTL_ALWAYS_INLINE const F* __target_impl() const noexcept {
 		if (manager_ == &_INNER __function_handler_dispatch<Res(Args...), F>::manage
 			|| (manager_ && typeid(F) == target_type())) {
 			_INNER storage_data ptr{};
@@ -235,7 +235,7 @@ private:
 		return nullptr;
 	}
 	template <typename F, enable_if_t<!is_object_v<F>, int> = 0>
-	const F* __target_impl() const noexcept {
+	MSTL_ALWAYS_INLINE const F* __target_impl() const noexcept {
 		return nullptr;
 	}
 

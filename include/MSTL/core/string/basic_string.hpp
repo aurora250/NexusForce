@@ -1,12 +1,12 @@
 #ifndef MSTL_CORE_STRING_BASIC_STRING_HPP__
 #define MSTL_CORE_STRING_BASIC_STRING_HPP__
-#include "../memory/standard_allocator.hpp"
-#include "../memory/allocator_traits.hpp"
-#include "../memory/uninitialized.hpp"
-#include "../compound/compressed_pair.hpp"
-#include "../algorithm/shift.hpp"
-#include "string_view.hpp"
 #include <initializer_list>
+#include "../algorithm/shift.hpp"
+#include "../memory/allocator_traits.hpp"
+#include "../memory/standard_allocator.hpp"
+#include "../memory/uninitialized.hpp"
+#include "../utility/compressed_pair.hpp"
+#include "string_view.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename Traits, typename Alloc>
@@ -215,7 +215,7 @@ public:
     using view_type                 = basic_string_view<CharT, Traits>;
     using allocator_type            = Alloc;
 
-    static constexpr size_type npos = static_cast<size_type>(-1);
+    static constexpr size_type npos = string_view::npos;
 
 private:
     pointer data_ = nullptr;

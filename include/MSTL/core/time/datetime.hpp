@@ -11,7 +11,7 @@ MSTL_INLINE17 static constexpr int32_t MONTH_DAYS[12] = {
 };
 MSTL_END_CONSTANTS__
 
-class MSTL_API date : public iobject<date> {
+class MSTL_API date : public iobject<date>, public icommon<date> {
 public:
     using date_type = int32_t;
     using self = date;
@@ -203,17 +203,6 @@ public:
         return date(year, month, day);
     }
 
-    constexpr bool try_parse(const string_view str) noexcept {
-        self tmp;
-        try {
-            tmp = self::parse(str);
-        } catch (...) {
-            return false;
-        }
-        *this = _MSTL move(tmp);
-        return true;
-    }
-
     constexpr void swap(date& d) noexcept {
         _MSTL swap(year_, d.year_);
         _MSTL swap(month_, d.month_);
@@ -222,7 +211,7 @@ public:
 };
 
 
-class MSTL_API time : public iobject<time> {
+class MSTL_API time : public iobject<time>, public icommon<time> {
 public:
     using time_type = int32_t;
     using self = _MSTL time;
@@ -379,17 +368,6 @@ public:
         return time(h, m, s);
     }
 
-    constexpr bool try_parse(const string_view str) noexcept {
-        self tmp;
-        try {
-            tmp = self::parse(str);
-        } catch (...) {
-            return false;
-        }
-        *this = _MSTL move(tmp);
-        return true;
-    }
-
     constexpr void swap(time& other) noexcept {
         _MSTL swap(hours_, other.hours_);
         _MSTL swap(minutes_, other.minutes_);
@@ -416,7 +394,7 @@ constexpr int months_to_int(const string_view sv) {
 }
 
 
-class MSTL_API datetime : public iobject<datetime> {
+class MSTL_API datetime : public iobject<datetime>, public icommon<datetime> {
 public:
     using date_type = _MSTL date::date_type;
     using time_type = _MSTL time::time_type;
@@ -425,7 +403,7 @@ public:
 private:
     _MSTL date date_{};
     _MSTL time time_{};
-    int32_t offset_seconds_ = 0;
+    int64_t offset_seconds_ = 0;
     bool has_timezone_ = false;
 
 public:
@@ -463,13 +441,13 @@ public:
     : date_(year, month, day), time_(hour, minute, second) {}
 
     constexpr explicit datetime(const date_type year, const date_type month, const date_type day,
-        const time_type hour, const time_type minute, const time_type second, const int32_t offset) noexcept
+        const time_type hour, const time_type minute, const time_type second, const int64_t offset) noexcept
     : date_(year, month, day), time_(hour, minute, second), offset_seconds_(offset), has_timezone_(true) {}
 
     constexpr explicit datetime(const _MSTL date& d, const _MSTL time& t) noexcept
     : date_(d), time_(t) {}
 
-    constexpr explicit datetime(const _MSTL date& d, const _MSTL time& t, const int32_t offset) noexcept
+    constexpr explicit datetime(const _MSTL date& d, const _MSTL time& t, const int64_t offset) noexcept
     : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {}
 
     constexpr explicit datetime(_MSTL date&& d, _MSTL time&& t) noexcept
@@ -478,7 +456,7 @@ public:
         t.clear();
     }
 
-    constexpr explicit datetime(_MSTL date&& d, _MSTL time&& t, const int32_t offset) noexcept
+    constexpr explicit datetime(_MSTL date&& d, _MSTL time&& t, const int64_t offset) noexcept
     : date_(d), time_(t), offset_seconds_(offset), has_timezone_(true) {
         d.clear();
         t.clear();
@@ -532,7 +510,7 @@ public:
     MSTL_NODISCARD constexpr date_type day() const noexcept { return date_.day(); }
 
     MSTL_NODISCARD constexpr bool has_timezone() const noexcept { return has_timezone_; }
-    MSTL_NODISCARD constexpr int32_t offset_seconds() const noexcept { return offset_seconds_; }
+    MSTL_NODISCARD constexpr int64_t offset_seconds() const noexcept { return offset_seconds_; }
 
     MSTL_NODISCARD static constexpr datetime epoch() noexcept { return datetime{}; }
     MSTL_NODISCARD static datetime now() noexcept;
@@ -568,7 +546,7 @@ public:
     }
 
 
-    constexpr datetime& operator +=(const time_type seconds) {
+    constexpr datetime& operator +=(const int64_t seconds) {
         if (seconds < 0) return *this -= -seconds;
 
         const int64_t current_total_sec =
@@ -594,7 +572,7 @@ public:
         return *this;
     }
 
-    constexpr datetime& operator -=(const time_type seconds) noexcept {
+    constexpr datetime& operator -=(const int64_t seconds) noexcept {
         if (seconds < 0) return *this += -seconds;
 
         const int64_t current_total_sec =
@@ -619,13 +597,13 @@ public:
         return *this;
     }
 
-    constexpr datetime operator +(const time_type seconds) const noexcept {
+    constexpr datetime operator +(const int64_t seconds) const noexcept {
         datetime ret(*this);
         ret += seconds;
         return ret;
     }
 
-    constexpr datetime operator -(const time_type seconds) const noexcept {
+    constexpr datetime operator -(const int64_t seconds) const noexcept {
         datetime ret(*this);
         ret -= seconds;
         return ret;
@@ -655,11 +633,11 @@ public:
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_offset_string() const {
         if (!has_timezone_) return {};
         if (offset_seconds_ == 0) return "Z";
-        int total_sec = offset_seconds_;
+        int64_t total_sec = offset_seconds_;
         const char sign = total_sec >= 0 ? '+' : '-';
         total_sec = total_sec >= 0 ? total_sec : -total_sec;
-        const int hours = total_sec / 3600;
-        const int minutes = (total_sec % 3600) / 60;
+        const int64_t hours = total_sec / 3600;
+        const int64_t minutes = (total_sec % 3600) / 60;
         return _MSTL format("{}{:02d}:{:02d}", sign, hours, minutes);
     }
 
@@ -727,7 +705,7 @@ public:
         return datetime(d, t);
     }
 
-    constexpr bool try_parse_ISO_UTC(string_view str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse_ISO_UTC(string_view str) noexcept {
         try {
             self tmp = self::parse_ISO_UTC(str);
             this->swap(tmp);
@@ -786,7 +764,7 @@ public:
         return datetime(year, mon, day, hour, minute, second);
     }
 
-    constexpr bool try_parse_GMT(const string_view str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse_GMT(const string_view str) noexcept {
         try {
             self tmp = self::parse_GMT(str);
             this->swap(tmp);
@@ -814,7 +792,7 @@ public:
         return datetime(d, t);
     }
 
-    constexpr bool try_parse_ISO(const string_view str) noexcept {
+    MSTL_CONSTEXPR20 bool try_parse_ISO(const string_view str) noexcept {
         try {
             self tmp = self::parse_ISO(str);
             this->swap(tmp);
@@ -838,20 +816,9 @@ public:
         return datetime(d, t);
     }
 
-    constexpr bool try_parse(const string_view str) noexcept {
-        try {
-            self tmp = self::parse(str);
-            this->swap(tmp);
-        } catch (...) {
-            return false;
-        }
-        return true;
-    }
-
-
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return date_.to_hash() ^ time_.to_hash() ^
-            hash<bool>()(has_timezone_) ^ hash<int32_t>()(offset_seconds_);
+            hash<bool>()(has_timezone_) ^ hash<int64_t>()(offset_seconds_);
     }
 
     constexpr void swap(datetime& other) noexcept {
@@ -863,120 +830,63 @@ public:
 };
 
 
-class MSTL_API timestamp : public iobject<timestamp> {
+class MSTL_API timestamp : public iobject<timestamp>, public ipackage<timestamp, int64_t> {
 public:
     using value_type = int64_t;
-    using self = timestamp;
 
-private:
-    value_type sec_since_epoch_ = 0;
-
-public:
     constexpr timestamp() noexcept = default;
 
     constexpr timestamp(const timestamp &timestamp) noexcept
-        : sec_since_epoch_(timestamp.sec_since_epoch_) {}
+    : ipackage(timestamp.value_) {}
 
     constexpr timestamp& operator =(const timestamp &timestamp) noexcept {
-        sec_since_epoch_ = timestamp.sec_since_epoch_;
+        value_ = timestamp.value_;
         return *this;
     }
 
     constexpr timestamp(timestamp&& timestamp) noexcept
-        : sec_since_epoch_(timestamp.sec_since_epoch_) {
+    : ipackage(timestamp.value_) {
         timestamp.clear();
     }
 
     constexpr timestamp& operator =(timestamp&& timestamp) noexcept {
-        sec_since_epoch_ = timestamp.sec_since_epoch_;
+        value_ = timestamp.value_;
         timestamp.clear();
         return *this;
     }
 
     constexpr explicit timestamp(const value_type sec) noexcept
-        : sec_since_epoch_(sec) {}
+    : ipackage(sec) {}
 
     constexpr explicit timestamp(const datetime& dt) noexcept {
-        sec_since_epoch_ = dt - datetime::epoch();
+        value_ = dt - datetime::epoch();
     }
 
     MSTL_CONSTEXPR20 ~timestamp() = default;
 
 
-    MSTL_NODISCARD static timestamp now() noexcept { return timestamp(datetime::now()); }
+    MSTL_NODISCARD static timestamp now() noexcept {
+        return timestamp(datetime::now());
+    }
 
     MSTL_NODISCARD constexpr datetime to_datetime() const noexcept {
-        return datetime::epoch() + sec_since_epoch_;
+        return datetime::epoch() + value_;
     }
 
-    constexpr size_t to_hash() const noexcept {
-        return hash<value_type>()(sec_since_epoch_);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
+        return integer64(value_).to_string();
     }
 
-    MSTL_CONSTEXPR20 string to_string() const {
-        return integer64(sec_since_epoch_).to_string();
-    }
-
-    MSTL_NODISCARD static constexpr self parse(const string_view str) {
-        return self{integer64::parse(str)};
-    }
-
-    constexpr bool try_parse(const string_view str) noexcept {
-        self tmp;
-        try {
-            tmp = self::parse(str);
-        } catch (...) {
-            return false;
-        }
-        *this = _MSTL move(tmp);
-        return true;
-    }
-
-    constexpr void swap(self& other) noexcept {
-        _MSTL swap(sec_since_epoch_, other.sec_since_epoch_);
+    MSTL_NODISCARD static constexpr timestamp parse(const string_view str) {
+        return timestamp{integer64::parse(str)};
     }
 
     MSTL_NODISCARD constexpr value_type seconds() const noexcept {
-        return sec_since_epoch_;
+        return value_;
     }
-
-
+    
     constexpr void clear() noexcept {
-        sec_since_epoch_ = 0;
-    }
-
-    constexpr timestamp& operator +=(const value_type sec) noexcept {
-        sec_since_epoch_ += sec;
-        return *this;
-    }
-    constexpr timestamp& operator -=(const value_type sec) noexcept {
-        sec_since_epoch_ -= sec;
-        return *this;
-    }
-
-    constexpr timestamp operator +(const value_type sec) const noexcept {
-        timestamp ret(*this);
-        ret += sec;
-        return ret;
-    }
-
-    constexpr timestamp operator -(const value_type sec) const noexcept {
-        timestamp ret(*this);
-        ret -= sec;
-        return ret;
-    }
-
-    constexpr value_type operator -(const timestamp& other) const noexcept {
-        return sec_since_epoch_ - other.sec_since_epoch_;
-    }
-
-
-    constexpr bool operator ==(const timestamp& other) const noexcept {
-        return sec_since_epoch_ == other.sec_since_epoch_;
-    }
-
-    constexpr bool operator <(const timestamp& other) const noexcept {
-        return sec_since_epoch_ < other.sec_since_epoch_;
+        value_ = 0;
     }
 };
 

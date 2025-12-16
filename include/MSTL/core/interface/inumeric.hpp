@@ -6,134 +6,174 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
 struct iarithmetic {
-public:
-    using self = iarithmetic<T>;
-    using child_type = T;
-
 private:
-    static constexpr child_type* to_template(const self* o) noexcept {
-        return const_cast<T*>(static_cast<const T*>(o));
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
+    }
+    constexpr T& derived() noexcept {
+        return static_cast<T&>(*this);
     }
 
 public:
-    MSTL_CONSTEXPR20 ~iarithmetic() = default;
-
-    MSTL_NODISCARD constexpr child_type operator +(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator+(other))) {
-        return self::to_template(this)->operator+(other);
+    MSTL_NODISCARD constexpr T operator +(const T& other) const
+    noexcept(noexcept(derived().operator+=(other))) {
+        T tmp(derived());
+        tmp += other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator -(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator-(other))) {
-        return self::to_template(this)->operator-(other);
+    
+    MSTL_NODISCARD constexpr T operator -(const T& other) const
+    noexcept(noexcept(derived().operator-=(other))) {
+        T tmp(derived());
+        tmp -= other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator *(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator*(other))) {
-        return self::to_template(this)->operator*(other);
+    
+    MSTL_NODISCARD constexpr T operator *(const T& other) const
+    noexcept(noexcept(derived().operator*=(other))) {
+        T tmp(derived());
+        tmp *= other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator /(const child_type& other) const {
-        return self::to_template(this)->operator/(other);
+    
+    MSTL_NODISCARD constexpr T operator /(const T& other) const
+    noexcept(noexcept(derived().operator/=(other))) {
+        T tmp(derived());
+        tmp /= other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator %(const child_type& other) const {
-        return self::to_template(this)->operator%(other);
-    }
-
-    MSTL_NODISCARD constexpr child_type operator -() const
-    noexcept(noexcept(self::to_template(this)->operator-())) {
-        return self::to_template(this)->operator-();
-    }
-
-    constexpr child_type& operator +=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator+=(other))) {
-        return self::to_template(this)->operator+=(other);
-    }
-    constexpr child_type& operator -=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator-=(other))) {
-        return self::to_template(this)->operator-=(other);
-    }
-    constexpr child_type& operator *=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator*=(other))) {
-        return self::to_template(this)->operator*=(other);
-    }
-    constexpr child_type& operator /=(const child_type& other) {
-        return self::to_template(this)->operator/=(other);
-    }
-    constexpr child_type& operator %=(const child_type& other) {
-        return self::to_template(this)->operator%=(other);
+    
+    MSTL_NODISCARD constexpr T operator %(const T& other) const
+    noexcept(noexcept(derived().operator%=(other))) {
+        T tmp(derived());
+        tmp %= other;
+        return tmp;
     }
 
-    constexpr child_type& operator ++()
-    noexcept(noexcept(self::to_template(this)->operator++())) {
-        return self::to_template(this)->operator++();
+    MSTL_NODISCARD constexpr T operator -() const
+    noexcept(noexcept(derived().operator-())) {
+        return derived().operator-();
     }
-    constexpr child_type operator ++(int)
-    noexcept(noexcept(self::to_template(this)->operator++(int()))) {
-        return self::to_template(this)->operator++(int());
+
+    constexpr T& operator +=(const T& other)
+    noexcept(noexcept(derived().operator+=(other))) {
+        return derived().operator+=(other);
     }
-    constexpr child_type& operator --()
-    noexcept(noexcept(self::to_template(this)->operator--())) {
-        return self::to_template(this)->operator--();
+    
+    constexpr T& operator -=(const T& other)
+    noexcept(noexcept(derived().operator-=(other))) {
+        return derived().operator-=(other);
     }
-    constexpr child_type operator --(int)
-    noexcept(noexcept(self::to_template(this)->operator--(int()))) {
-        return self::to_template(this)->operator--(int());
+    
+    constexpr T& operator *=(const T& other)
+    noexcept(noexcept(derived().operator*=(other))) {
+        return derived().operator*=(other);
+    }
+    
+    constexpr T& operator /=(const T& other) {
+        return derived().operator/=(other);
+    }
+    
+    constexpr T& operator %=(const T& other) {
+        return derived().operator%=(other);
+    }
+
+    constexpr T& operator ++()
+    noexcept(noexcept(derived().operator++())) {
+        return derived().operator++();
+    }
+    
+    constexpr T operator ++(int)
+    noexcept(noexcept(derived().operator++())) {
+        T tmp(*this);
+        ++derived();
+        return tmp;
+    }
+    
+    constexpr T& operator --()
+    noexcept(noexcept(derived().operator--())) {
+        return derived().operator--();
+    }
+    
+    constexpr T operator --(int)
+    noexcept(noexcept(derived().operator--())) {
+        T tmp(*this);
+        --derived();
+        return tmp;
     }
 };
 
 
 template <typename T>
 struct ibinary {
-public:
-    using self = ibinary<T>;
-    using child_type = T;
-
 private:
-    static constexpr child_type* to_template(const self* o) noexcept {
-        return const_cast<T*>(static_cast<const T*>(o));
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
+    }
+    constexpr T& derived() noexcept {
+        return static_cast<T&>(*this);
     }
 
 public:
-    MSTL_CONSTEXPR20 ~ibinary() = default;
-
-    MSTL_NODISCARD constexpr child_type operator &(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator&(other))) {
-        return self::to_template(this)->operator&(other);
-    }
-    MSTL_NODISCARD constexpr child_type operator |(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator|(other))) {
-        return self::to_template(this)->operator|(other);
-    }
-    MSTL_NODISCARD constexpr child_type operator ^(const child_type& other) const
-    noexcept(noexcept(self::to_template(this)->operator^(other))) {
-        return self::to_template(this)->operator^(other);
-    }
-    MSTL_NODISCARD constexpr child_type operator ~() const
-    noexcept(noexcept(self::to_template(this)->operator~())) {
-        return self::to_template(this)->operator~();
-    }
-    MSTL_NODISCARD constexpr child_type operator <<(const uint32_t shift) const {
-        return self::to_template(this)->operator<<(shift);
-    }
-    MSTL_NODISCARD constexpr child_type operator >>(const uint32_t shift) const {
-        return self::to_template(this)->operator>>(shift);
+    MSTL_NODISCARD constexpr T operator &(const T& other) const
+    noexcept(noexcept(derived().operator&=(other))) {
+        T tmp(derived());
+        tmp &= other;
+        return tmp;
     }
 
-    MSTL_NODISCARD constexpr child_type operator &=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator&=(other))) {
-        return self::to_template(this)->operator&=(other);
+    MSTL_NODISCARD constexpr T operator |(const T& other) const
+    noexcept(noexcept(derived().operator|=(other))) {
+        T tmp(derived());
+        tmp |= other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator |=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator|=(other))) {
-        return self::to_template(this)->operator|=(other);
+
+    MSTL_NODISCARD constexpr T operator ^(const T& other) const
+    noexcept(noexcept(derived().operator^=(other))) {
+        T tmp(derived());
+        tmp ^= other;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator ^=(const child_type& other)
-    noexcept(noexcept(self::to_template(this)->operator^=(other))) {
-        return self::to_template(this)->operator^=(other);
+
+    MSTL_NODISCARD constexpr T operator ~() const
+    noexcept(noexcept(derived().operator~())) {
+        return derived().operator~();
     }
-    MSTL_NODISCARD constexpr child_type operator <<=(const uint32_t shift) {
-        return self::to_template(this)->operator<<=(shift);
+
+    MSTL_NODISCARD constexpr T operator <<(const uint32_t shift) const {
+        T tmp(derived());
+        tmp <<= shift;
+        return tmp;
     }
-    MSTL_NODISCARD constexpr child_type operator >>=(const uint32_t shift) {
-        return self::to_template(this)->operator>>=(shift);
+
+    MSTL_NODISCARD constexpr T operator >>(const uint32_t shift) const {
+        T tmp(derived());
+        tmp >>= shift;
+        return tmp;
+    }
+
+    constexpr T& operator &=(const T& other)
+    noexcept(noexcept(derived().operator&=(other))) {
+        return derived().operator&=(other);
+    }
+
+    constexpr T& operator |=(const T& other)
+    noexcept(noexcept(derived().operator|=(other))) {
+        return derived().operator|=(other);
+    }
+
+    constexpr T& operator ^=(const T& other)
+    noexcept(noexcept(derived().operator^=(other))) {
+        return derived().operator^=(other);
+    }
+
+    constexpr T& operator <<=(const uint32_t shift) {
+        return derived().operator<<=(shift);
+    }
+
+    constexpr T& operator >>=(const uint32_t shift) {
+        return derived().operator>>=(shift);
     }
 };
 

@@ -400,24 +400,9 @@ template <typename...>
 using void_t = void;
 
 
-template <typename>
-struct package_base {
-    using type = void;
-};
-
-template <typename T>
-struct package_helper {
-    using type = typename package_base<T>::type;
-};
-
 template <typename T, typename = void>
 struct package {
     using type = T;
-};
-
-template <typename T>
-struct package<T, void_t<typename package_helper<T>::type>> {
-    using type = conditional_t<is_void_v<typename package_helper<T>::type>, T, typename package_helper<T>::type>;
 };
 
 template <typename T>
@@ -427,27 +412,14 @@ template <typename T>
 MSTL_INLINE17 constexpr bool is_packaged_v = !is_same_v<package_t<T>, T>;
 
 
-template <typename>
-struct unpackage_base {
-    using type = void;
-};
-template <typename T>
-struct unpackage_helper {
-    using type = typename unpackage_base<T>::type;
-};
-
 template <typename T, typename = void>
 struct unpackage {
     using type = T;
 };
 
 template <typename T>
-struct unpackage<T, void_t<typename unpackage_helper<T>::type>> {
-    using type = conditional_t<is_void_v<typename unpackage_helper<T>::type>, T, typename unpackage_helper<T>::type>;
-};
-
-template <typename T>
 using unpackage_t = typename unpackage<T>::type;
+
 template <typename T>
 using unpack_remove_cvref_t = unpackage_t<remove_cvref_t<T>>;
 
@@ -2291,10 +2263,6 @@ MSTL_INLINE17 constexpr bool is_nothrow_arrow = is_nothrow_convertible_v<Iterato
 template <typename Iterator, typename Ptr>
 MSTL_INLINE17 constexpr bool is_nothrow_arrow<Iterator, Ptr, false> =
 noexcept(_MSTL declcopy<Ptr>(_MSTL declval<Iterator>().operator->()));
-
-
-template <typename Key, typename = void>
-struct hash;
 
 
 #ifdef MSTL_STANDARD_20__

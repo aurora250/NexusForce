@@ -248,14 +248,16 @@ endfunction()
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/compound/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/stacktrace.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
@@ -280,7 +282,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
@@ -309,6 +310,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/database/redis/redis_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/database/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
@@ -321,10 +324,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
-        network/ssl_context.cpp
-        network/ssl_socket.cpp
-        core/string/string_util.cpp
-        core/system/signal.cpp
 )
 
 # 编译为动态库

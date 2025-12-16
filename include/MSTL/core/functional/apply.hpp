@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_FUNCTIONAL_APPLY_HPP__
 #define MSTL_CORE_FUNCTIONAL_APPLY_HPP__
-#include "../compound/tuple.hpp"
+#include "../utility/tuple.hpp"
 #include "invoke.hpp"
 MSTL_BEGIN_NAMESPACE__
 

@@ -1,11 +1,11 @@
 #ifndef MSTL_CORE_ALGORITHM_SHIFT_HPP__
 #define MSTL_CORE_ALGORITHM_SHIFT_HPP__
-#include "../numeric/math.hpp"
-#include "../memory/memory.hpp"
-#include "../compound/pair.hpp"
 #include "../functional/functor.hpp"
-#include "search.hpp"
+#include "../memory/memory.hpp"
+#include "../numeric/math.hpp"
+#include "../utility/pair.hpp"
 #include "iterator.hpp"
+#include "search.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

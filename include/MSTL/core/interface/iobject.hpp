@@ -4,26 +4,21 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>
-struct iobject : icommon<T>, istringify<T> {
-    using self = iobject<T>;
-    using child_type = T;
-
-private:
-    constexpr const child_type& derived() const noexcept {
-        return static_cast<const child_type&>(*this);
-    }
-    constexpr child_type& derived() noexcept {
-        return static_cast<child_type&>(*this);
-    }
-
+struct iobject : istringify<T> {
 public:
-    MSTL_CONSTEXPR20 ~iobject() = default;
-
-    MSTL_NODISCARD static constexpr child_type parse(const string_view str) {
-        return child_type::parse(str);
+    MSTL_NODISCARD static constexpr T parse(const string_view str) {
+        return T::parse(str);
     }
-    constexpr bool try_parse(const string_view str) noexcept {
-        return derived().try_parse(str);
+
+    MSTL_CONSTEXPR20 bool try_parse(const string_view str) noexcept {
+        T tmp;
+        try {
+            tmp = T::parse(str);
+        } catch (...) {
+            return false;
+        }
+        *this = _MSTL move(tmp);
+        return true;
     }
 };
 

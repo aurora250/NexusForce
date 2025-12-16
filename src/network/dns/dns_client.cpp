@@ -1,8 +1,8 @@
+#include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/async/async.hpp>
+#include <MSTL/core/string/vsprintf.hpp>
 #include <MSTL/network/dns/dns_client.hpp>
 #include <MSTL/network/socket.hpp>
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/utility/vsprintf.hpp>
-#include <MSTL/core/async/async.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif

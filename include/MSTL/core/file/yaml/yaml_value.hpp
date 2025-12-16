@@ -142,7 +142,7 @@ public:
         if (dt.try_parse_ISO_UTC(v) || dt.try_parse_ISO(v)) {
             value = dt;
         } else {
-            throw yaml_exception(("Invalid timestamp format: " + string(v)).c_str());
+            throw_exception(yaml_exception(("Invalid timestamp format: " + string(v)).c_str()));
         }
     }
 

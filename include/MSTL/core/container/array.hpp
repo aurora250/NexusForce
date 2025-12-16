@@ -4,7 +4,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
-struct array_iterator  {
+struct array_iterator {
 private:
     using container_type	= Array;
     using iterator			= array_iterator<false, Size, container_type>;
@@ -21,8 +21,6 @@ public:
     using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
     using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
-
-    using self				= array_iterator<IsConst, Size, container_type>;
 
 private:
     pointer ptr_ = nullptr;
@@ -121,13 +119,12 @@ template <typename T, size_t Size>
 class array : public icollector<array<T, Size>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 
-    using self = array<T, Size>;
-    using base_type = icollector<self>;
+    using base_type = icollector<array>;
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using iterator                  = array_iterator<false, Size, self>;
-    using const_iterator            = array_iterator<true, Size, self>;
+    using iterator                  = array_iterator<false, Size, array>;
+    using const_iterator            = array_iterator<true, Size, array>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -136,8 +133,8 @@ private:
 
 public:
     constexpr array() noexcept = default;
-    constexpr array(const self& rhs) noexcept = default;
-    constexpr array(self&& rhs) noexcept = default;
+    constexpr array(const array& rhs) noexcept = default;
+    constexpr array(array&& rhs) noexcept = default;
     constexpr array(std::initializer_list<T> init) noexcept {
         size_t size = init.size() < Size ? init.size() : Size;
         _MSTL copy(init.begin(), init.begin() + size, array_);
@@ -239,10 +236,10 @@ public:
         _MSTL swap(array_, x.array_);
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator ==(const array& rh) const noexcept {
         return _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
     }
-    MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept {
+    MSTL_NODISCARD constexpr bool operator <(const array& rh) const noexcept {
         return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
     }
 };
@@ -257,13 +254,12 @@ template <typename T>
 class array<T, 0> : public icollector<array<T, 0>> {
     static_assert(is_object_v<T>, "array only containers of object types.");
 
-    using self = array<T, 0>;
-    using base_type = icollector<self>;
+    using base_type = icollector<array>;
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using iterator                  = array_iterator<false, 0, self>;
-    using const_iterator            = array_iterator<true, 0, self>;
+    using iterator                  = array_iterator<false, 0, array>;
+    using const_iterator            = array_iterator<true, 0, array>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -384,8 +380,8 @@ public:
     MSTL_ALWAYS_INLINE constexpr void fill(const T&) {}
     MSTL_ALWAYS_INLINE constexpr void swap(array&) noexcept {}
 
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self&) const noexcept { return true; }
-    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self&) const noexcept { return false; }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const array&) const noexcept { return true; }
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const array&) const noexcept { return false; }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 MSTL_BEGIN_INNER__

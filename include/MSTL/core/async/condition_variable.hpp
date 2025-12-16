@@ -61,7 +61,7 @@ private:
         auto sec = _MSTL_CHRONO time_point_cast<_MSTL_CHRONO seconds>(util);
         auto nanosec = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(util - sec);
 
-        const std::timespec ts = {
+        const ::timespec ts = {
             static_cast<std::time_t>(sec.time_since_epoch().count()),
             static_cast<long>(nanosec.count())
         };

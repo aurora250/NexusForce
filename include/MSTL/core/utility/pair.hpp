@@ -2,7 +2,7 @@
 #define MSTL_CORE_COMPOUND_PAIR_HPP__
 #include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
-#include "../utility/integer_sequence.hpp"
+#include "integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename...>

@@ -1,5 +1,5 @@
-#include <MSTL/core/file/toml/toml_value.hpp>
 #include <MSTL/core/utility/packages.hpp>
+#include <MSTL/core/file/toml/toml_value.hpp>
 #include <MSTL/core/numeric/numeric_types.hpp>
 MSTL_BEGIN_NAMESPACE__
 
@@ -123,7 +123,7 @@ static string toml_table_to_string_with_path(const toml_table* table, const stri
     if (!table) return "";
 
     string result;
-    vector<pair<string, const toml_ptr&>> ordinary_members;
+    vector<pair<string, const toml_value*>> ordinary_members;
     vector<pair<string, const toml_table*>> nested_tables;
     vector<pair<string, const toml_array*>> array_tables;
 
@@ -159,17 +159,21 @@ static string toml_table_to_string_with_path(const toml_table* table, const stri
                 continue;
             }
         }
-        ordinary_members.emplace_back(key, val);
+        ordinary_members.emplace_back(key, val.get());
     }
 
-    for (const auto& [key, val] : ordinary_members) {
+    for (const auto& elm : ordinary_members) {
+        const auto& key = elm.first;
+        const auto& val = elm.second;
         result += toml_quote_key_if_needed(key);
         result += " = ";
-        result += toml_value_document(val.get());
+        result += toml_value_document(val);
         result += "\n";
     }
 
-    for (const auto& [key, nested] : nested_tables) {
+    for (const auto& elm : nested_tables) {
+        const auto& key = elm.first;
+        const auto& nested = elm.second;
         if (!result.empty() && result.back() != '\n') {
             result += "\n";
         }
@@ -181,7 +185,9 @@ static string toml_table_to_string_with_path(const toml_table* table, const stri
         result += toml_table_to_string_with_path(nested, full_path);
     }
 
-    for (const auto& [key, arr] : array_tables) {
+    for (const auto& elm : array_tables) {
+        const auto& key = elm.first;
+        const auto& arr = elm.second;
         string key_str = toml_quote_key_if_needed(key);
         string full_path = path_prefix.empty() ? key_str : path_prefix + "." + key_str;
 

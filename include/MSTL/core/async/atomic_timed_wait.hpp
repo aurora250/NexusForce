@@ -24,7 +24,7 @@ wait_clock_t::time_point to_wait_clock(const chrono::time_point<wait_clock_t, Du
 }
 
 template <typename Dur>
-bool platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old,
+bool __platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old,
     const chrono::time_point<wait_clock_t, Dur>& timeout) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     atomic_futex_base futex;
@@ -72,7 +72,7 @@ bool platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old,
     auto seconds = chrono::time_point_cast<chrono::seconds>(timeout);
     auto nanoseconds = chrono::duration_cast<chrono::nanoseconds>(timeout - seconds);
 
-    std::timespec rt = {
+    ::timespec rt = {
         static_cast<std::time_t>(seconds.time_since_epoch().count()),
         static_cast<long>(nanoseconds.count())
     };
@@ -93,17 +93,25 @@ bool platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old,
 #endif
 }
 
+template <typename Clock, typename Dur ,enable_if_t<is_same_v<wait_clock_t, Clock>, int> = 0>
+bool __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
+    const chrono::time_point<Clock, Dur>& timeout) {
+    return _INNER __platform_wait_until_impl(addr, old, timeout);
+}
+
+template <typename Clock, typename Dur ,enable_if_t<!is_same_v<wait_clock_t, Clock>, int> = 0>
+bool __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
+    const chrono::time_point<Clock, Dur>& timeout) {
+    if (!_INNER __platform_wait_until_impl(addr, old, _INNER to_wait_clock(timeout))) {
+        if (Clock::now() < timeout) return true;
+    }
+    return false;
+}
+
 template <typename Clock, typename Dur>
 bool platform_wait_until(const platform_wait_t* addr, platform_wait_t old,
     const chrono::time_point<Clock, Dur>& timeout) {
-    if constexpr (is_same_v<wait_clock_t, Clock>) {
-        return _INNER platform_wait_until_impl(addr, old, timeout);
-    } else {
-        if (!_INNER platform_wait_until_impl(addr, old, _INNER to_wait_clock(timeout))) {
-            if (Clock::now() < timeout) return true;
-        }
-        return false;
-    }
+    return _INNER __platform_wait_until_dispatch(addr, old, timeout);
 }
 
 struct timed_waiter_pool : waiter_pool_base {
@@ -147,18 +155,25 @@ template <typename EntersWait>
 struct timed_waiter : waiter_base<timed_waiter_pool> {
     using base_type = waiter_base<timed_waiter_pool>;
 
-    template <typename T>
-    explicit timed_waiter(const T* addr) noexcept : base_type(addr) {
-        if constexpr (EntersWait::value) {
-            waiter_.waiter_enter_wait();
-        }
+private:
+    template <bool Wait = EntersWait::value, enable_if_t<Wait, int> = 0>
+    MSTL_ALWAYS_INLINE void enter() const {
+        waiter_.waiter_enter_wait();
     }
+    template <bool Wait = EntersWait::value, enable_if_t<!Wait, int> = 0>
+    MSTL_ALWAYS_INLINE void enter() const noexcept {}
 
-    ~timed_waiter() {
-        if constexpr (EntersWait::value) {
-            waiter_.waiter_leave_wait();
-        }
+    template <bool Wait = EntersWait::value, enable_if_t<Wait, int> = 0>
+    MSTL_ALWAYS_INLINE void leave() const {
+        waiter_.waiter_leave_wait();
     }
+    template <bool Wait = EntersWait::value, enable_if_t<!Wait, int> = 0>
+    MSTL_ALWAYS_INLINE void leave() const noexcept {}
+
+public:
+    template <typename T>
+    explicit timed_waiter(const T* addr) noexcept : base_type(addr) { enter(); }
+    ~timed_waiter() { leave(); }
 
     template <typename T, typename Func, typename Clock, typename Dur>
     bool waiter_do_wait_until_v(T old, Func func,

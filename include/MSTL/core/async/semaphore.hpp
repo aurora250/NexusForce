@@ -75,8 +75,8 @@ MSTL_END_INNER__
 
 template <ptrdiff_t LeastMaxValue = _INNER atomic_semaphore::int_max>
 class counting_semaphore {
-    static_assert(LeastMaxValue >= 0);
-    static_assert(LeastMaxValue <= _INNER atomic_semaphore::int_max);
+    static_assert(LeastMaxValue >= 0, "LeastMaxValue should be upper than zero.");
+    static_assert(LeastMaxValue <= _INNER atomic_semaphore::int_max, "LeastMaxValue should be less than max value of ptrdiff_t.");
     _INNER atomic_semaphore sem_;
 
 public:

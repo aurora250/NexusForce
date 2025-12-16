@@ -292,18 +292,18 @@ public:
 
 private:
 	template <bool Wait = EntersWait::value, enable_if_t<Wait, int> = 0>
-	void enter() const {
+	MSTL_ALWAYS_INLINE void enter() const {
 		waiter_.waiter_enter_wait();
 	}
 	template <bool Wait = EntersWait::value, enable_if_t<!Wait, int> = 0>
-	void enter() const noexcept {}
+	MSTL_ALWAYS_INLINE void enter() const noexcept {}
 
 	template <bool Wait = EntersWait::value, enable_if_t<Wait, int> = 0>
-	void leave() const {
+	MSTL_ALWAYS_INLINE void leave() const {
 		waiter_.waiter_leave_wait();
 	}
 	template <bool Wait = EntersWait::value, enable_if_t<!Wait, int> = 0>
-	void leave() const noexcept {}
+	MSTL_ALWAYS_INLINE void leave() const noexcept {}
 	
 public:
 	template <typename T>

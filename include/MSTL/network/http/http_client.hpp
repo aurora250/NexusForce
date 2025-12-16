@@ -65,7 +65,7 @@ public:
     void set_ssl_context(ssl_context ctx) { ssl_ctx_ = _MSTL move(ctx); }
 #endif
 
-    http_client_response request(http_client_request req);
+    MSTL_NODISCARD http_client_response request(http_client_request req);
 
     void close() noexcept { close_connection(); }
 };

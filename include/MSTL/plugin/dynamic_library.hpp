@@ -29,14 +29,14 @@ public:
         return reinterpret_cast<T>(get_symbol_row(name));
     }
 
-    void* get_symbol_row(const string& name) const;
-    bool has_symbol(const string& name) const noexcept;
+    MSTL_NODISCARD void* get_symbol_row(const string& name) const;
+    MSTL_NODISCARD bool has_symbol(const string& name) const noexcept;
 
-    bool is_open() const noexcept { return handle_ != nullptr; }
+    MSTL_NODISCARD bool is_open() const noexcept { return handle_ != nullptr; }
     void unload() { close(); }
 
-    void* native_handle() const noexcept { return handle_; }
-    const string& path() const noexcept { return path_; }
+    MSTL_NODISCARD void* native_handle() const noexcept { return handle_; }
+    MSTL_NODISCARD const string& path() const noexcept { return path_; }
 };
 
 

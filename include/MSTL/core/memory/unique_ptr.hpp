@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_MEMORY_UNIQUE_PTR_HPP__
 #define MSTL_CORE_MEMORY_UNIQUE_PTR_HPP__
-#include "../compound/tuple.hpp"
 #include "../functional/functor.hpp"
+#include "../utility/tuple.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T>

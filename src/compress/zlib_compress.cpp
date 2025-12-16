@@ -122,7 +122,7 @@ void zlib_compressor::stream_compressor::reset(
 }
 
 bvector zlib_compressor::stream_compressor::compress(
-    const span<const byte_t> data, const bool finish) {
+    const span<const byte_t>& data, const bool finish) {
     
     if (!initialized_) {
         throw_exception(zlib_exception("Compressor not initialized"));
@@ -216,7 +216,7 @@ void zlib_compressor::stream_decompressor::reset() {
 }
 
 bvector zlib_compressor::stream_decompressor::decompress(
-    const span<const byte_t> data, const bool finish) {
+    const span<const byte_t>& data, const bool finish) {
     
     if (!initialized_) {
         throw_exception(zlib_exception("Decompressor not initialized"));
