@@ -30,7 +30,7 @@ void database_pool::produce_connect_task() {
 void database_pool::scanner_connect_task() {
     while (true) {
         if (!running_) break;
-        _MSTL this_thread::sleep_for(_MSTL_CHRONO seconds(max_idle_time_));
+        _MSTL this_thread::sleep_for(seconds(max_idle_time_));
         if (!running_) break;
         _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
 

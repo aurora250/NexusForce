@@ -20,10 +20,10 @@ class MSTL_API dns_client {
 private:
     string dns_server_;
     uint16_t dns_port_;
-    _MSTL_CHRONO milliseconds timeout_;
+    milliseconds timeout_;
     bool use_tcp_;
-    unordered_map<string, pair<dns_query_result, _MSTL_CHRONO steady_clock::time_point>> cache_;
-    _MSTL_CHRONO seconds cache_ttl_{300};
+    unordered_map<string, pair<dns_query_result, steady_clock::time_point>> cache_;
+    seconds cache_ttl_{300};
 
 private:
     static vector<byte_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
@@ -53,14 +53,14 @@ public:
     explicit dns_client(
         string dns_server = "8.8.8.8",
         uint16_t dns_port = 53,
-        _MSTL_CHRONO milliseconds timeout = _MSTL_CHRONO milliseconds(5000),
+        milliseconds timeout = milliseconds(5000),
         bool use_tcp = false);
 
     void set_dns_server(const string& server, uint16_t port = 53);
 
-    void set_timeout(const _MSTL_CHRONO milliseconds timeout) { timeout_ = timeout; }
+    void set_timeout(const milliseconds timeout) { timeout_ = timeout; }
     void set_use_tcp(const bool use_tcp) { use_tcp_ = use_tcp; }
-    void set_cache_ttl(const _MSTL_CHRONO seconds ttl) { cache_ttl_ = ttl; }
+    void set_cache_ttl(const seconds ttl) { cache_ttl_ = ttl; }
 
     void clear_cache() { cache_.clear(); }
 

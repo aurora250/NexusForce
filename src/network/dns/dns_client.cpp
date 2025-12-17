@@ -357,7 +357,7 @@ dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) 
 }
 
 dns_client::dns_client(string dns_server, const uint16_t dns_port,
-    const _MSTL_CHRONO milliseconds timeout, const bool use_tcp)
+    const milliseconds timeout, const bool use_tcp)
 : dns_server_(_MSTL move(dns_server)), dns_port_(dns_port), timeout_(timeout), use_tcp_(use_tcp) {}
 
 void dns_client::set_dns_server(const string& server, const uint16_t port) {
@@ -367,7 +367,7 @@ void dns_client::set_dns_server(const string& server, const uint16_t port) {
 
 dns_query_result dns_client::query(
     const string& domain, const DNS_RECORD type, const DNS_QUERY qclass) {
-    const auto start_time = _MSTL_CHRONO steady_clock::now();
+    const auto start_time = steady_clock::now();
 
     const auto cache_key = create_cache_key(domain, type, qclass);
     auto cached = check_cache(cache_key);
@@ -384,8 +384,8 @@ dns_query_result dns_client::query(
     }
 
     auto result = parse_dns_response(response);
-    const auto end_time = _MSTL_CHRONO steady_clock::now();
-    result.query_time = _MSTL_CHRONO duration_cast<_MSTL_CHRONO milliseconds>(end_time - start_time);
+    const auto end_time = steady_clock::now();
+    result.query_time = duration_cast<milliseconds>(end_time - start_time);
 
     update_cache(cache_key, result);
 
@@ -524,8 +524,8 @@ string dns_client::create_cache_key(
 optional<dns_query_result> dns_client::check_cache(const string& key) {
     const auto it = cache_.find(key);
     if (it != cache_.end()) {
-        const auto now = chrono::steady_clock::now();
-        const auto cache_age = chrono::duration_cast<chrono::seconds>(now - it->second.second);
+        const auto now = steady_clock::now();
+        const auto cache_age = duration_cast<seconds>(now - it->second.second);
 
         if (cache_age < cache_ttl_) {
             return dns_query_result(it->second.first);
@@ -537,7 +537,7 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
 
 void dns_client::update_cache(const string& key, const dns_query_result& result) {
     if (result.is_success()) {
-        cache_[key] = {result, chrono::steady_clock::now()};
+        cache_[key] = {result, steady_clock::now()};
     }
 }
 

@@ -403,148 +403,12 @@ void test_console() {
     println(to_string(fp));
 }
 
-void test_dev() {
-    auto devices = device::enumerate_devices(DEVICE_TYPE::SERIAL_PORT);
+void test_device() {
+    auto devices = device::enumerate();
 
     for (size_t i = 0; i < devices.size(); ++i) {
-        println("  [", i, "] ", devices[i].device_path, " - ", devices[i].friendly_name);
+        println("[", i, "]", devices[i].path, "-", devices[i].description, "-", to_string(devices[i].type));
     }
-    println();
-
-    if (!devices.empty()) {
-        string selected_path;
-        for (const auto& dev : devices) {
-            if (dev.device_path == "/dev/tty" ||
-                dev.device_path == "/dev/console" ||
-                dev.device_path.find("pts") != string::npos) {
-                println("Skipping special terminal: ", dev.device_path);
-                continue;
-                }
-
-            if (dev.device_path.find("ttyUSB") != string::npos ||
-                dev.device_path.find("ttyS") != string::npos ||
-                dev.device_path.find("ttyACM") != string::npos) {
-                selected_path = dev.device_path;
-                println("Selected device: ", selected_path);
-                break;
-                }
-        }
-
-        if (selected_path.empty() && !devices.empty()) {
-            selected_path = devices[0].device_path;
-            println("Using first device: ", selected_path);
-        }
-        if (selected_path.empty()) {
-            println("No suitable serial devices found.");
-            return;
-        }
-
-        println("Opening device: ", selected_path);
-
-        device dev(selected_path);
-        if (!dev.is_open()) {
-            println("Failed to open device");
-            return;
-        }
-        dev.set_blocking(false);
-
-        char buffer[256];
-        try {
-            size_t bytes = dev.read(buffer, sizeof(buffer), chrono::milliseconds(100));
-            println("Read ", bytes, " bytes");
-        } catch (const device_exception& e) {
-            println(e.what());
-        }
-
-        string message = "Test message\n";
-        size_t written = dev.write(message.data(), message.size());
-        println("Written ", written, " bytes");
-
-        auto info = dev.get_device_info();
-        println("\nDevice Information:");
-        println("  Path:", info.device_path);
-        println("  Type:", to_string(info.type));
-        println("  Size:", info.size_bytes, "bytes");
-
-        bool readable = dev.is_readable(chrono::milliseconds(100));
-        bool writable = dev.is_writable(chrono::milliseconds(100));
-        println("  Readable: ", readable);
-        println("  Writable: ", writable);
-        println("\n=== Using Serial Port Specialization ===");
-
-        serial_port::serial_config config;
-        config.baud_rate = 9600;
-        config.data_bits = 8;
-        config.stop_bits = 1;
-        config.parity = 'N';
-        config.flow_control = true;
-
-        serial_port serial(devices[0].device_path, config);
-
-        serial.configure(config);
-
-        auto modem_status = serial.get_modem_status();
-        println("Modem Status:");
-        println("  CTS: ", modem_status.cts);
-        println("  DSR: ", modem_status.dsr);
-        println("  RI: ", modem_status.ri);
-        println("  DCD: ", modem_status.dcd);
-
-        println("\n=== Using Storage Device Specialization ===");
-        auto storage_devices = device::enumerate_devices(DEVICE_TYPE::STORAGE);
-
-        if (!storage_devices.empty()) {
-            try {
-                storage_device storage(storage_devices[0].device_path);
-
-                println("Storage Device: ", storage.get_device_path());
-                println("Capacity: ", storage.get_capacity_bytes(), " bytes");
-                println("Sector Size: ", storage.get_sector_size(), " bytes");
-                println("Removable: ", storage.is_removable());
-                println("Read Only: ", storage.is_read_only());
-
-                vector<uint8_t> sector(storage.get_sector_size());
-                storage.read_sectors(sector.data(), 0, 1);
-
-                println("First sector data (first 16 bytes):");
-                for (int i = 0; i < 16 && i < sector.size(); ++i) {
-                    print(static_cast<int>(sector[i]));
-                }
-                println();
-
-            } catch (const device_exception& e) {
-                println(e);
-            }
-        }
-
-        println("\n=== Event Callback Example ===");
-        dev.set_event_callback([](DEVICE_EVENT event) {
-            switch (event) {
-                case DEVICE_EVENT::DATA_AVAILABLE:
-                    println("Event: Data available");
-                    break;
-                case DEVICE_EVENT::WRITE_READY:
-                    println("Event: Write ready");
-                    break;
-                case DEVICE_EVENT::ERROR_OCCURRED:
-                    println("Event: Error occurred");
-                    break;
-                case DEVICE_EVENT::DISCONNECTED:
-                    println("Event: Device disconnected");
-                    break;
-            }
-        });
-    } else {
-        println("No serial devices found.");
-    }
-
-    println("\n=== Device Existence Check ===");
-    string test_path = "/dev/ttyUSB0";
-    bool exists = device::exists(test_path);
-    bool is_dev = device::is_device(test_path);
-    println("Path: ", test_path);
-    println("Exists: ", exists);
-    println("Is device: ", is_dev);
 }
 
 void test_rnd() {
@@ -834,7 +698,11 @@ void test_json() {
 
 void test_https_server() {
     try {
+#ifdef MSTL_SUPPORT_OPENSSL__
         http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
+#else
+        http_server server(8040, 128);
+#endif
 
         http_router& r = server.router();
 
@@ -907,7 +775,7 @@ void test_https_server() {
             printcln(color::yellow(), "Press Ctrl+C to stop");
 
             while (true) {
-                _MSTL this_thread::sleep_for(_MSTL_CHRONO seconds(1));
+                _MSTL this_thread::sleep_for(seconds(1));
             }
         }
     } catch (const exception& e) {
@@ -917,7 +785,11 @@ void test_https_server() {
 
 void test_http_server() {
     try {
+#ifdef MSTL_SUPPORT_OPENSSL__
         http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
+#else
+        http_server server(8040, 128);
+#endif
 
         http_router& r = server.router();
         r.use(new logging_filter());
@@ -1006,7 +878,7 @@ void test_http_server() {
         if (server.start()) {
             printcln(color::green(), "Press Ctrl+C to stop the server.");
             while (true) {
-                _MSTL this_thread::sleep_for(_MSTL_CHRONO seconds(1));
+                _MSTL this_thread::sleep_for(seconds(1));
             }
         }
         printcln(color::red(), "Failed to start server!");
@@ -1725,14 +1597,14 @@ void test_any() {
 
 void test_timer(){
     _MSTL steady_timer timer1;
-    timer1.expires_after(_MSTL_CHRONO seconds(5));
+    timer1.expires_after(seconds(5));
     timer1.async_wait([]() {
         println("5秒后执行");
     });
 
     _MSTL system_timer timer2;
-    auto now = chrono::system_clock::now();
-    auto target = now + chrono::hours(1);
+    auto now = system_clock::now();
+    auto target = now + hours(1);
     timer2.expires_at(target);
     timer2.async_wait([]() { println("1小时后执行"); });
 
@@ -1744,11 +1616,11 @@ void test_timer(){
 
     timer1.cancel();
 
-    timer1.expires_after(chrono::seconds(3));
+    timer1.expires_after(seconds(3));
     timer1.async_wait([]() { println("3秒后执行");
     });
 
-    this_thread::sleep_for(chrono::seconds(7));
+    this_thread::sleep_for(seconds(7));
 }
 
 void test_log() {
@@ -2062,7 +1934,7 @@ void test_postgre() {
 
 void test_dbpool() {
 #ifdef MSTL_SUPPORT_MYSQL__
-    auto begin = chrono::high_resolution_clock::now();
+    auto begin = high_resolution_clock::now();
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
 
@@ -2071,7 +1943,7 @@ void test_dbpool() {
         for (int i = 0; i < 5000; i++) {
             bool fin = pool.get_connect()->update("SELECT 1");
         }
-        println((begin - chrono::high_resolution_clock::now()).count());
+        println((begin - high_resolution_clock::now()).count());
 
         auto result = pool.get_tb_connect()->query("SELECT * FROM book");
         while (result->next()) {
@@ -2094,7 +1966,7 @@ void test_dbpool() {
         println(result->row_count(), ", ", result->column_count());
     }
 
-    begin = chrono::high_resolution_clock::now();
+    begin = high_resolution_clock::now();
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
         _MSTL sprintf(sql, "SELECT 1");
@@ -2104,7 +1976,7 @@ void test_dbpool() {
         }
         delete conn;
     }
-    println((begin - chrono::high_resolution_clock::now()).count());
+    println((begin - high_resolution_clock::now()).count());
 #endif
 }
 
@@ -2131,13 +2003,13 @@ void test_ext_tpool() {
     pool.submit_task(10, []{ println("High priority task"); });
     pool.submit_task(1, []{ println("Low priority task"); });
     pool.submit_after(1000, 5, []{ println("Delayed high priority"); });
-    this_thread::sleep_for(chrono::seconds(3));
+    this_thread::sleep_for(seconds(3));
 
     println(timestamp::now());
     auto future1 = pool.submit_after(2000, []() {
         println(timestamp::now());
     });
-    this_thread::sleep_for(chrono::seconds(3));
+    this_thread::sleep_for(seconds(3));
 
     auto future2 = pool.submit_after(1000, simple_task, "Task with parameters");
     auto future3 = pool.submit_after(1500, compute_sum, 42, 58);
@@ -2155,14 +2027,14 @@ void test_ext_tpool() {
             pool.cancel_periodic_task(token1);
         }
     });
-    this_thread::sleep_for(chrono::seconds(6));
+    this_thread::sleep_for(seconds(6));
 
     thread_pool::periodic_token token2 = pool.submit_every(500, []() {
         println("Fast periodic task executing...");
     });
-    this_thread::sleep_for(chrono::seconds(3));
+    this_thread::sleep_for(seconds(3));
     pool.cancel_periodic_task(token2);
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(seconds(2));
 
     auto token3 = pool.submit_every(800, []() {
         println("  Task A (800ms interval)");
@@ -2173,14 +2045,14 @@ void test_ext_tpool() {
     auto token5 = pool.submit_every(1500, []() {
         println("  Task C (1500ms interval)");
     });
-    this_thread::sleep_for(chrono::seconds(5));
+    this_thread::sleep_for(seconds(5));
 
     auto state = pool.statistics();
     println(state);
     pool.cancel_periodic_task(token3);
     pool.cancel_periodic_task(token4);
     pool.cancel_periodic_task(token5);
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(seconds(2));
 
     pool.stop();
 }
@@ -2196,17 +2068,17 @@ void test_dns() {
         println(ips);
 
         dns_client client;
-        auto start = chrono::steady_clock::now();
+        auto start = steady_clock::now();
         auto ipv6_addrs = client.resolve_aaaa("www.google.com");
-        auto end = chrono::steady_clock::now();
-        auto duration1 = chrono::duration_cast<chrono::milliseconds>(end - start);
+        auto end = steady_clock::now();
+        auto duration1 = duration_cast<milliseconds>(end - start);
         println("IPv6 addresses:");
         println(ipv6_addrs);
 
-        start = chrono::steady_clock::now();
+        start = steady_clock::now();
         ipv6_addrs = client.resolve_aaaa("www.google.com");
-        end = chrono::steady_clock::now();
-        auto duration2 = chrono::duration_cast<chrono::milliseconds>(end - start);
+        end = steady_clock::now();
+        auto duration2 = duration_cast<milliseconds>(end - start);
         println("First:", duration1.count(), "Second:", duration2.count());
 
         auto mx_records = client.resolve_mx("gmail.com");

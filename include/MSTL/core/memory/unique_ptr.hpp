@@ -12,7 +12,6 @@ struct default_delete {
 	MSTL_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
 
     MSTL_CONSTEXPR20 void operator()(const T* ptr) const {
-	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete ptr;
     }
 
@@ -31,7 +30,6 @@ struct default_delete<T[]> {
 
     template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
     MSTL_CONSTEXPR20 void operator ()(U* ptr) const{
-	    static_assert(is_allocable_v<T>, "can not delete types which can`t be allocated.");
 	    delete [] ptr;
 	}
 

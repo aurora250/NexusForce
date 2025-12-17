@@ -29,16 +29,18 @@ void http_server::accept_conns() {
                 continue;
             }
         }
-#endif
-
         try {
             handle_client(client_socket, ssl_sock);
         } catch (const exception& e) {
             println(e);
         }
-
-#ifdef MSTL_SUPPORT_OPENSSL__
         delete ssl_sock;
+#else
+        try {
+            handle_client(client_socket);
+        } catch (const exception& e) {
+            println(e);
+        }
 #endif
         client_socket.close();
     }
@@ -46,13 +48,15 @@ void http_server::accept_conns() {
 
 void http_server::handle_client(const socket& client_socket
 #ifdef MSTL_SUPPORT_OPENSSL__
-    , const ssl_socket* ssl_sock
-#endif
-    ) {
+    , const ssl_socket* ssl_sock) {
     http_request request = parse_request(client_socket, ssl_sock);
     if (ssl_sock) {
         request.set_https();
     }
+#else
+    ) {
+    http_request request = parse_request(client_socket);
+#endif
     _MSTL session* sess = session(request, true);
     int forward_count = 0;
 

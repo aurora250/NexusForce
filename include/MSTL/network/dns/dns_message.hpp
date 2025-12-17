@@ -28,7 +28,7 @@ struct dns_query_result {
     DNS_RESPONSE response_code;
     bool truncated;
     bool recursive_available;
-    _MSTL_CHRONO milliseconds query_time;
+    milliseconds query_time;
 
     bool is_success() const noexcept {
         return response_code == DNS_RESPONSE::NON_ERROR;

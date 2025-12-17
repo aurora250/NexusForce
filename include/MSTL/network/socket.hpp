@@ -123,7 +123,7 @@ public:
             reinterpret_cast<const char*>(&opt), sizeof(opt)) == 0;
     }
 
-    bool set_receive_timeout(const _MSTL_CHRONO milliseconds timeout) const noexcept {
+    bool set_receive_timeout(const milliseconds timeout) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO,
@@ -137,7 +137,7 @@ public:
 #endif
     }
 
-    bool set_send_timeout(const _MSTL_CHRONO milliseconds timeout) const noexcept {
+    bool set_send_timeout(const milliseconds timeout) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO,

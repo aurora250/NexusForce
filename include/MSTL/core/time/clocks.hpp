@@ -5,10 +5,10 @@ MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_CHRONO__
 
 struct MSTL_API system_clock {
-    using duration = _MSTL_CHRONO nanoseconds;
+    using duration = nanoseconds;
     using rep = duration::rep;
     using period = duration::period;
-    using time_point = _MSTL_CHRONO time_point<system_clock>;
+    using time_point = time_point<system_clock>;
 
     static_assert(system_clock::duration::min() < system_clock::duration::zero(),
         "a clock's minimum duration cannot be less than its epoch");
@@ -20,12 +20,12 @@ struct MSTL_API system_clock {
     static time_point now() noexcept;
 
     static std::time_t to_time_t(const time_point& time_point_value) noexcept {
-        return duration_cast<_MSTL_CHRONO seconds>(time_point_value.time_since_epoch()).count();
+        return duration_cast<seconds>(time_point_value.time_since_epoch()).count();
     }
 
     static time_point from_time_t(const std::time_t time_value) noexcept {
         using from_time_point = _MSTL_CHRONO time_point<system_clock, seconds>;
-        return time_point_cast<system_clock::duration>(from_time_point(_MSTL_CHRONO seconds(time_value)));
+        return time_point_cast<system_clock::duration>(from_time_point(seconds(time_value)));
     }
 };
 
@@ -33,10 +33,10 @@ using high_resolution_clock = system_clock;
 
 
 struct MSTL_API steady_clock {
-    using duration = _MSTL_CHRONO nanoseconds;
+    using duration = nanoseconds;
     using rep = duration::rep;
     using period = duration::period;
-    using time_point = _MSTL_CHRONO time_point<steady_clock, duration>;
+    using time_point = time_point<steady_clock, duration>;
 
     static constexpr bool is_steady = true;
 
@@ -48,9 +48,9 @@ MSTL_END_CHRONO__
 template <typename T>
 struct is_clock;
 template <>
-struct is_clock<_MSTL_CHRONO system_clock> : true_type {};
+struct is_clock<system_clock> : true_type {};
 template <>
-struct is_clock<_MSTL_CHRONO steady_clock> : true_type {};
+struct is_clock<steady_clock> : true_type {};
 
 template <typename T>
 MSTL_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
@@ -59,7 +59,7 @@ MSTL_INLINE17 constexpr bool is_clock_v = is_clock<T>::value;
 MSTL_BEGIN_THIS_THREAD__
 
 template <typename Clock, typename Dur>
-void sleep_until(const _MSTL_CHRONO time_point<Clock, Dur>& time) {
+void sleep_until(const time_point<Clock, Dur>& time) {
     auto current = Clock::now();
     if (Clock::is_steady) {
         if (current < time) {

@@ -95,7 +95,7 @@ SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
     unique_lock<mutex> lock(mutex_);
     
     if (timeout_ms >= 0) {
-        const auto timeout_time = chrono::steady_clock::now() + chrono::milliseconds(timeout_ms);
+        const auto timeout_time = steady_clock::now() + milliseconds(timeout_ms);
         if (!cv_.wait_until(lock, timeout_time, [this]() {
             return !pending_signals_.empty();
         })) {
@@ -118,7 +118,7 @@ SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
 
 void signal_manager::send_signal(SIGNAL_EVENT event, void* context) {
     lock_guard<mutex> lock(mutex_);
-    pending_signals_.emplace_back(event, context, chrono::steady_clock::now());
+    pending_signals_.emplace_back(event, context, steady_clock::now());
     printcln(color::yellow(), "Signal sent: ", static_cast<int>(event));
     cv_.notify_all();
 }
@@ -190,10 +190,10 @@ void signal_manager::signal_thread_func() {
 }
 
 void signal_manager::timeout_monitor_thread() {
-    const auto start_time = chrono::steady_clock::now();
+    const auto start_time = steady_clock::now();
 
     while (running_ && !force_exit_) {
-        this_thread::sleep_for(chrono::milliseconds(100));
+        this_thread::sleep_for(milliseconds(100));
 
         {
             lock_guard<mutex> lock(mutex_);
@@ -202,8 +202,8 @@ void signal_manager::timeout_monitor_thread() {
             }
 
             int timeout = force_exit_timeout_.load();
-            auto now = chrono::steady_clock::now();
-            const auto elapsed = chrono::duration_cast<chrono::milliseconds>(
+            auto now = steady_clock::now();
+            const auto elapsed = duration_cast<milliseconds>(
                 now - start_time).count();
 
             if (elapsed > timeout) {
@@ -213,7 +213,7 @@ void signal_manager::timeout_monitor_thread() {
 
             auto it = remove_if(pending_signals_.begin(), pending_signals_.end(),
                 [timeout, now](const pending_signal& ps) -> bool {
-                    const auto signal_age = chrono::duration_cast<chrono::milliseconds>(
+                    const auto signal_age = duration_cast<milliseconds>(
                         now - ps.timestamp).count();
                     return signal_age > timeout;
                 });

@@ -7,7 +7,7 @@ void test_file();
 void test_datetimes();
 void test_print();
 void test_console();
-void test_dev();
+void test_device();
 void test_rnd();
 void test_format();
 void test_color();

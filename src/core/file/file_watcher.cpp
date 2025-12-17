@@ -183,7 +183,7 @@ void file_watcher::watch_thread_func_linux() {
         const ssize_t len = ::read(inotify_fd_, buffer, BUFFER_SIZE);
         if (len <= 0) {
             if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                this_thread::sleep_for(chrono::milliseconds(100));
+                this_thread::sleep_for(milliseconds(100));
                 continue;
             }
             break;

@@ -239,9 +239,9 @@ public:
     }
 };
 
-using steady_timer = basic_timer<_MSTL_CHRONO steady_clock>;
-using system_timer = basic_timer<_MSTL_CHRONO system_clock>;
-using high_resolution_timer = basic_timer<_MSTL_CHRONO high_resolution_clock>;
+using steady_timer = basic_timer<steady_clock>;
+using system_timer = basic_timer<system_clock>;
+using high_resolution_timer = basic_timer<high_resolution_clock>;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_TIMER_HPP__

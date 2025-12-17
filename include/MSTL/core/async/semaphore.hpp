@@ -41,7 +41,7 @@ struct atomic_semaphore {
     }
 
     template <typename Clock, typename Dur>
-    MSTL_ALWAYS_INLINE bool try_acquire_until(const chrono::time_point<Clock, Dur>& timeout) noexcept {
+    MSTL_ALWAYS_INLINE bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
         auto const pred = [this] { 
             return do_try_acquire(&this->counter_); 
         };
@@ -49,7 +49,7 @@ struct atomic_semaphore {
     }
 
     template <typename Rep, typename Period>
-    MSTL_ALWAYS_INLINE bool try_acquire_for(const chrono::duration<Rep, Period>& relative) noexcept {
+    MSTL_ALWAYS_INLINE bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
         auto const pred = [this] { 
             return do_try_acquire(&this->counter_); 
         };
@@ -105,12 +105,12 @@ public:
     }
 
     template <typename Rep, typename Period>
-    bool try_acquire_for(const chrono::duration<Rep, Period>& relative) { 
+    bool try_acquire_for(const duration<Rep, Period>& relative) {
         return sem_.try_acquire_for(relative); 
     }
 
     template <typename Clock, typename Dur>
-    bool try_acquire_until(const chrono::time_point<Clock, Dur>& timeout) { 
+    bool try_acquire_until(const time_point<Clock, Dur>& timeout) {
         return sem_.try_acquire_until(timeout); 
     }
 };

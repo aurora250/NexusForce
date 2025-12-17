@@ -6,13 +6,13 @@ MSTL_BEGIN_NAMESPACE__
 
 template <unsigned WaiterBit = 0x80000000>
 class atomic_futex : atomic_futex_base {
-    using clock_t = _MSTL_CHRONO steady_clock;
+    using clock_t = steady_clock;
 
     atomic<unsigned> data_;
 
 	unsigned load_and_test_until(unsigned assumed, const unsigned operand,
 	    const bool equal, const memory_order mo, const bool has_timeout,
-	    const _MSTL_CHRONO seconds sec, const _MSTL_CHRONO nanoseconds ns) {
+	    const seconds sec, const nanoseconds ns) {
 		for (;;) {
 			data_.fetch_or(WaiterBit, memory_order_relaxed);
 			const bool ret = futex_wait_until(
@@ -27,7 +27,7 @@ class atomic_futex : atomic_futex_base {
 
 	unsigned load_and_test_until_steady(unsigned assumed, const unsigned operand,
 	    const bool equal, const memory_order mo, const bool has_timeout,
-	    const _MSTL_CHRONO seconds sec, const _MSTL_CHRONO nanoseconds ns) {
+	    const seconds sec, const nanoseconds ns) {
 		for (;;) {
 			data_.fetch_or(WaiterBit, memory_order_relaxed);
 			const bool ret = futex_wait_until_steady(
@@ -48,9 +48,9 @@ class atomic_futex : atomic_futex_base {
 	template <typename Dur>
 	unsigned load_and_test_until_impl(unsigned assumed, unsigned operand,
 	    bool equal, memory_order mo,
-	    const _MSTL_CHRONO time_point<_MSTL_CHRONO system_clock, Dur>& atime) {
-		auto sec = _MSTL_CHRONO time_point_cast<_MSTL_CHRONO seconds>(atime);
-		auto ns = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(atime - sec);
+	    const time_point<system_clock, Dur>& atime) {
+		auto sec = time_point_cast<seconds>(atime);
+		auto ns = duration_cast<nanoseconds>(atime - sec);
 		return this->load_and_test_until(
 			assumed, operand, equal, mo,
 			true, sec.time_since_epoch(), ns);
@@ -59,9 +59,9 @@ class atomic_futex : atomic_futex_base {
 	template <typename Dur>
 	unsigned load_and_test_until_impl(unsigned assumed, unsigned operand,
 	    bool equal, memory_order mo,
-	    const _MSTL_CHRONO time_point<_MSTL_CHRONO steady_clock, Dur>& atime) {
-		auto sec = _MSTL_CHRONO time_point_cast<_MSTL_CHRONO seconds>(atime);
-		auto ns = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(atime - sec);
+	    const time_point<steady_clock, Dur>& atime) {
+		auto sec = time_point_cast<seconds>(atime);
+		auto ns = duration_cast<nanoseconds>(atime - sec);
 		return this->load_and_test_until_steady(
 			assumed, operand, equal, mo,
 		    true, sec.time_since_epoch(), ns);
@@ -96,19 +96,19 @@ public:
 	template <typename Rep, typename Period>
 	MSTL_ALWAYS_INLINE bool
 	load_when_equal_for(const unsigned value, const memory_order mo,
-		const _MSTL_CHRONO duration<Rep, Period>& rtime) {
-		const auto atime = clock_t::now() + _MSTL_CHRONO ceil<clock_t::duration>(rtime);
+		const duration<Rep, Period>& rtime) {
+		const auto atime = clock_t::now() + ceil<clock_t::duration>(rtime);
 		return this->load_when_equal_until(value, mo, atime);
 	}
 
 	template <typename Clock, typename Dur>
 	MSTL_ALWAYS_INLINE bool
 	load_when_equal_until(const unsigned value, const memory_order mo,
-		const _MSTL_CHRONO time_point<Clock, Dur>& atime) {
+		const time_point<Clock, Dur>& atime) {
 		auto now = Clock::now();
 		do {
 			const auto s_atime = clock_t::now() +
-				_MSTL_CHRONO ceil<clock_t::duration>(atime - now);
+				ceil<clock_t::duration>(atime - now);
 			if (this->load_when_equal_until(value, mo, s_atime)) {
 				return true;
 			}
@@ -120,7 +120,7 @@ public:
 	template <typename Dur>
 	MSTL_ALWAYS_INLINE bool
 	load_when_equal_until(const unsigned value, const memory_order mo,
-	    const _MSTL_CHRONO time_point<_MSTL_CHRONO system_clock, Dur>& atime) {
+	    const time_point<system_clock, Dur>& atime) {
 		unsigned old = load(mo);
 		if ((old & ~WaiterBit) == value) {
 			return true;
@@ -132,7 +132,7 @@ public:
 	template <typename Dur>
 	MSTL_ALWAYS_INLINE bool
 	load_when_equal_until(const unsigned value, const memory_order mo,
-	    const chrono::time_point<chrono::steady_clock, Dur>& atime) {
+	    const time_point<steady_clock, Dur>& atime) {
 		unsigned old = load(mo);
 		if ((old & ~WaiterBit) == value) {
 			return true;

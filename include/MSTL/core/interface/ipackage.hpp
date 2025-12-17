@@ -8,6 +8,14 @@ template <typename T, typename PackageT>
 struct ipackage : icommon<T>, iarithmetic<T>, ibinary<T> {
     static_assert(is_arithmetic_v<PackageT>, "PackageT must be arithmetic.");
 
+private:
+    constexpr const T& derived() const noexcept {
+        return static_cast<const T&>(*this);
+    }
+    constexpr T& derived() noexcept {
+        return static_cast<T&>(*this);
+    }
+
 public:
     using package_type = PackageT;
 
@@ -25,6 +33,7 @@ public:
 
     MSTL_NODISCARD constexpr operator package_type() const noexcept { return value_; }
     MSTL_NODISCARD constexpr package_type value() const noexcept { return value_; }
+    MSTL_NODISCARD constexpr int64_t to_int64() const noexcept { return static_cast<int64_t>(value_); }
 
     MSTL_NODISCARD static constexpr size_t bytes() noexcept { return sizeof(package_type); }
     MSTL_NODISCARD static constexpr size_t bits() noexcept { return sizeof(package_type) * 8; }
@@ -46,37 +55,37 @@ public:
 
     constexpr T& operator +=(const T& other) noexcept {
         value_ += other.value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator -=(const T& other) noexcept {
         value_ -= other.value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator *=(const T& other) noexcept {
         value_ *= other.value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator /=(const T& other) {
         if (other.value_ == 0) throw_exception(math_exception("Division by zero"));
         value_ /= other;
-        return *this;
+        return derived();
     }
     constexpr T& operator %=(const T& other) {
         value_ = _MSTL float_mod(value_, other.value_);
-        return *this;
+        return derived();
     }
 
     MSTL_NODISCARD constexpr T operator -() const noexcept {
-        return -value_;
+        return T(-value_);
     }
 
     constexpr T& operator ++() noexcept {
         ++value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator --() noexcept {
         --value_;
-        return *this;
+        return derived();
     }
 
     constexpr T operator ~() const noexcept {
@@ -85,30 +94,26 @@ public:
 
     constexpr T& operator &=(const T& other) noexcept {
         value_ &= other.value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator |=(const T& other) noexcept {
         value_ |= other.value_;
-        return *this;
+        return derived();
     }
     constexpr T& operator ^=(const T& other) noexcept {
         value_ ^= other.value_;
-        return *this;
+        return derived();
     }
 
     constexpr T& operator <<=(const uint32_t shift) {
         if (shift >= 64) throw_exception(value_exception("Shift count out of range"));
         value_ <<= shift;
-        return *this;
+        return derived();
     }
     constexpr T& operator >>=(const uint32_t shift) {
         if (shift >= 64) throw_exception(value_exception("Shift count out of range"));
         value_ >>= shift;
-        return *this;
-    }
-
-    MSTL_NODISCARD constexpr int64_t to_int64() const noexcept {
-        return static_cast<int64_t>(value_);
+        return derived();
     }
 };
 

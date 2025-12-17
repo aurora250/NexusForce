@@ -52,9 +52,6 @@ bool http_client::try_connect(const string& host, const uint16_t port, const str
         use_ssl_ = false;
     }
 #else
-    if (use_ssl) {
-        return false;
-    }
     sock_ = _MSTL move(s);
     use_ssl_ = false;
 #endif

@@ -24,15 +24,16 @@ struct exception::impl {
 };
 
 exception::exception(const char* info, const char* type)
-: ptr_(make_unique<impl>(info, type)) {}
+: ptr_(_MSTL make_unique<impl>(info, type)) {}
 
 exception::~exception() = default;
 
-exception::exception(const exception& e) : ptr_(make_unique<impl>(*e.ptr_)) {}
+exception::exception(const exception& e)
+: ptr_(_MSTL make_unique<impl>(*e.ptr_)) {}
 
 exception& exception::operator =(const exception& e) {
     if (this == addressof(e)) return *this;
-    ptr_ = make_unique<impl>(*e.ptr_);
+    ptr_ = _MSTL make_unique<impl>(*e.ptr_);
     return *this;
 }
 
@@ -43,6 +44,7 @@ const char* exception::what() const noexcept {
 const char* exception::type() const noexcept {
     return ptr_->type_.c_str();
 }
+
 
 #ifdef MSTL_STATE_DEBUG__
 void throw_exception(const exception& err) {

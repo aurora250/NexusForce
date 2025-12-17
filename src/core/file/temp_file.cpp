@@ -23,9 +23,9 @@ path temp_file::generate_temp_path(const string& prefix, const string& suffix) {
     temp_dir = path(tmp);
 #endif
 
-    const auto now = chrono::system_clock::now();
+    const auto now = system_clock::now();
     const auto duration = now.time_since_epoch();
-    const auto millis = chrono::duration_cast<chrono::milliseconds>(duration).count();
+    const auto millis = duration_cast<milliseconds>(duration).count();
 
     const string random_name = prefix
         + "_" + to_string(millis)

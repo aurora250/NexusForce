@@ -114,7 +114,7 @@ void __session_manager::cleanup_expired_sessions() {
                 }
             }
         }
-        _MSTL this_thread::sleep_for(_MSTL_CHRONO minutes(5));
+        _MSTL this_thread::sleep_for(minutes(5));
     }
 }
 

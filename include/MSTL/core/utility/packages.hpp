@@ -105,11 +105,11 @@ struct package<unsigned long long> {
 };
 #else
 template <>
-struct package_base<long> {
+struct package<long> {
     using type = integer32;
 };
 template <>
-struct package_base<unsigned long> {
+struct package<unsigned long> {
     using type = uinteger32;
 };
 #endif

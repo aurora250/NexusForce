@@ -36,23 +36,23 @@ private:
 	>;
 
 public:
-	using type = _MSTL_CHRONO duration<common_rep, typename result_ratio::type>;
+	using type = duration<common_rep, typename result_ratio::type>;
 };
 MSTL_END_INNER__
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-struct common_type<_MSTL_CHRONO duration<Rep1, Period1>, _MSTL_CHRONO duration<Rep2, Period2>>
+struct common_type<duration<Rep1, Period1>, duration<Rep2, Period2>>
     : _INNER __duration_common_type<common_type<Rep1, Rep2>, typename Period1::type, typename Period2::type>
 {};
 
 template <typename Rep, typename Period>
-struct common_type<_MSTL_CHRONO duration<Rep, Period>, _MSTL_CHRONO duration<Rep, Period>> {
-	using type = _MSTL_CHRONO duration<common_type_t<Rep>, typename Period::type>;
+struct common_type<duration<Rep, Period>, duration<Rep, Period>> {
+	using type = duration<common_type_t<Rep>, typename Period::type>;
 };
 
 template <typename Rep, typename Period>
-struct common_type<_MSTL_CHRONO duration<Rep, Period>> {
-	using type = _MSTL_CHRONO duration<common_type_t<Rep>, typename Period::type>;
+struct common_type<duration<Rep, Period>> {
+	using type = duration<common_type_t<Rep>, typename Period::type>;
 };
 
 
@@ -62,23 +62,23 @@ struct __timepoint_common_type {};
 
 template <typename CommonT, typename Clock>
 struct __timepoint_common_type<CommonT, Clock, void_t<typename CommonT::type>> {
-	using type = _MSTL_CHRONO time_point<Clock, typename CommonT::type>;
+	using type = time_point<Clock, typename CommonT::type>;
 };
 MSTL_END_INNER__
 
 template <typename Clock, typename Dur1, typename Dur2>
-struct common_type<_MSTL_CHRONO time_point<Clock, Dur1>, _MSTL_CHRONO time_point<Clock, Dur2>>
+struct common_type<time_point<Clock, Dur1>, time_point<Clock, Dur2>>
     : _INNER __timepoint_common_type<common_type<Dur1, Dur2>, Clock>
 {};
 
 template <typename Clock, typename Dur>
-struct common_type<_MSTL_CHRONO time_point<Clock, Dur>, _MSTL_CHRONO time_point<Clock, Dur>> {
-	using type = _MSTL_CHRONO time_point<Clock, Dur>;
+struct common_type<time_point<Clock, Dur>, time_point<Clock, Dur>> {
+	using type = time_point<Clock, Dur>;
 };
 
 template <typename Clock, typename Dur>
-struct common_type<_MSTL_CHRONO time_point<Clock, Dur>> {
-	using type = _MSTL_CHRONO time_point<Clock, Dur>;
+struct common_type<time_point<Clock, Dur>> {
+	using type = time_point<Clock, Dur>;
 };
 
 
@@ -87,7 +87,7 @@ MSTL_BEGIN_INNER__
 template <typename ToDur, typename ConvFactor, typename CommonRep, bool NumIsOne = false, bool DenIsOne = false>
 struct __duration_cast_impl {
 	template<typename Rep, typename Period>
-	static constexpr ToDur __cast(const _MSTL_CHRONO duration<Rep, Period>& value) {
+	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(static_cast<CommonRep>(value.count())
 		    * static_cast<CommonRep>(ConvFactor::num) / static_cast<CommonRep>(ConvFactor::den)));
 	}
@@ -96,7 +96,7 @@ struct __duration_cast_impl {
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, true> {
 	template <typename Rep, typename Period>
-	static constexpr ToDur __cast(const _MSTL_CHRONO duration<Rep, Period>& value) {
+	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(value.count()));
 	}
 };
@@ -104,7 +104,7 @@ struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, true> {
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
 	template<typename Rep, typename Period>
-	static constexpr ToDur __cast(const _MSTL_CHRONO duration<Rep, Period>& value) {
+	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(
 		    static_cast<CommonRep>(value.count()) / static_cast<CommonRep>(ConvFactor::den)));
 	}
@@ -113,7 +113,7 @@ struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, false, true> {
 	template<typename Rep, typename Period>
-	static constexpr ToDur __cast(const _MSTL_CHRONO duration<Rep, Period>& value) {
+	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(
 		    static_cast<CommonRep>(value.count()) * static_cast<CommonRep>(ConvFactor::num)));
 	}
@@ -126,7 +126,7 @@ template <typename>
 struct is_duration : false_type {};
 
 template <typename Rep, typename Period>
-struct is_duration<_MSTL_CHRONO duration<Rep, Period>> : true_type {};
+struct is_duration<duration<Rep, Period>> : true_type {};
 
 template <typename T>
 MSTL_INLINE17 constexpr bool is_duration_v = is_duration<T>::value;
@@ -387,7 +387,7 @@ constexpr bool operator >=(const duration<Rep1, Period1>& lhs, const duration<Re
 template <typename ToDur, typename Rep, typename Period>
 MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
 floor(const duration<Rep, Period>& dur) {
-	auto to = _MSTL_CHRONO duration_cast<ToDur>(dur);
+	auto to = duration_cast<ToDur>(dur);
 	if (to > dur) {
 		return to - ToDur{1};
 	}
@@ -397,7 +397,7 @@ floor(const duration<Rep, Period>& dur) {
 template <typename ToDur, typename Rep, typename Period>
 MSTL_NODISCARD constexpr enable_if_t<is_duration_v<ToDur>, ToDur>
 ceil(const duration<Rep, Period>& dur) {
-	auto to = _MSTL_CHRONO duration_cast<ToDur>(dur);
+	auto to = duration_cast<ToDur>(dur);
 	if (to < dur) {
 		return to + ToDur{1};
 	}
@@ -420,58 +420,58 @@ MSTL_END_INNER__
 
 MSTL_BEGIN_LITERALS__
 
-constexpr _MSTL_CHRONO duration<decimal_t, ratio<3600, 1>> operator ""_h(const decimal_t hours) noexcept {
-	return _MSTL_CHRONO duration<decimal_t, ratio<3600, 1>>{hours};
+constexpr duration<decimal_t, ratio<3600, 1>> operator ""_h(const decimal_t hours) noexcept {
+	return duration<decimal_t, ratio<3600, 1>>{hours};
 }
 
 template <char... Digits>
-constexpr _MSTL_CHRONO hours operator ""_h() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO hours, Digits...>();
+constexpr hours operator ""_h() noexcept {
+	return _INNER __check_overflow<hours, Digits...>();
 }
 
-constexpr _MSTL_CHRONO duration<decimal_t, ratio<60, 1>> operator ""_min(const decimal_t mins) noexcept {
-	return _MSTL_CHRONO duration<decimal_t, ratio<60,1>>{mins};
-}
-
-template <char... Digits>
-constexpr _MSTL_CHRONO minutes operator ""_min() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO minutes, Digits...>();
-}
-
-constexpr _MSTL_CHRONO duration<decimal_t> operator ""_s(const decimal_t secs) noexcept {
-	return _MSTL_CHRONO duration<decimal_t>{secs};
+constexpr duration<decimal_t, ratio<60, 1>> operator ""_min(const decimal_t mins) noexcept {
+	return duration<decimal_t, ratio<60,1>>{mins};
 }
 
 template <char... Digits>
-constexpr _MSTL_CHRONO seconds operator ""_s() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO seconds, Digits...>();
+constexpr minutes operator ""_min() noexcept {
+	return _INNER __check_overflow<minutes, Digits...>();
 }
 
-constexpr _MSTL_CHRONO duration<decimal_t, milli> operator ""_ms(const decimal_t msecs) noexcept {
-	return _MSTL_CHRONO duration<decimal_t, milli>{msecs};
-}
-
-template <char... Digits>
-constexpr _MSTL_CHRONO milliseconds operator ""_ms() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO milliseconds, Digits...>();
-}
-
-constexpr _MSTL_CHRONO duration<decimal_t, micro> operator ""_us(const decimal_t usecs) noexcept {
-	return _MSTL_CHRONO duration<decimal_t, micro>{usecs};
+constexpr duration<decimal_t> operator ""_s(const decimal_t secs) noexcept {
+	return duration<decimal_t>{secs};
 }
 
 template <char... Digits>
-constexpr _MSTL_CHRONO microseconds operator ""_us() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO microseconds, Digits...>();
+constexpr seconds operator ""_s() noexcept {
+	return _INNER __check_overflow<seconds, Digits...>();
 }
 
-constexpr _MSTL_CHRONO duration<decimal_t, nano> operator ""_nsecs(const decimal_t nsecs) noexcept {
-	return _MSTL_CHRONO duration<decimal_t, nano>{nsecs};
+constexpr duration<decimal_t, milli> operator ""_ms(const decimal_t msecs) noexcept {
+	return duration<decimal_t, milli>{msecs};
 }
 
 template <char... Digits>
-constexpr _MSTL_CHRONO nanoseconds operator ""_ns() noexcept {
-	return _INNER __check_overflow<_MSTL_CHRONO nanoseconds, Digits...>();
+constexpr milliseconds operator ""_ms() noexcept {
+	return _INNER __check_overflow<milliseconds, Digits...>();
+}
+
+constexpr duration<decimal_t, micro> operator ""_us(const decimal_t usecs) noexcept {
+	return duration<decimal_t, micro>{usecs};
+}
+
+template <char... Digits>
+constexpr microseconds operator ""_us() noexcept {
+	return _INNER __check_overflow<microseconds, Digits...>();
+}
+
+constexpr duration<decimal_t, nano> operator ""_nsecs(const decimal_t nsecs) noexcept {
+	return duration<decimal_t, nano>{nsecs};
+}
+
+template <char... Digits>
+constexpr nanoseconds operator ""_ns() noexcept {
+	return _INNER __check_overflow<nanoseconds, Digits...>();
 }
 
 MSTL_END_LITERALS__
@@ -480,11 +480,11 @@ MSTL_END_LITERALS__
 MSTL_BEGIN_THIS_THREAD__
 
 template <typename Rep, typename Period>
-void sleep_for(const _MSTL_CHRONO duration<Rep, Period>& time) {
+void sleep_for(const duration<Rep, Period>& time) {
     if (time <= time.zero()) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto ns = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(time);
+    auto ns = duration_cast<nanoseconds>(time);
     ::LARGE_INTEGER li{};
     li.QuadPart = -(ns.count() / 100);
 
@@ -495,8 +495,8 @@ void sleep_for(const _MSTL_CHRONO duration<Rep, Period>& time) {
         ::CloseHandle(timer);
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    auto s = _MSTL_CHRONO duration_cast<_MSTL_CHRONO seconds>(time);
-    auto ns = _MSTL_CHRONO duration_cast<_MSTL_CHRONO nanoseconds>(time - s);
+    auto s = duration_cast<seconds>(time);
+    auto ns = duration_cast<nanoseconds>(time - s);
     ::timespec ts{static_cast<std::time_t>(s.count()), static_cast<long>(ns.count())};
     while (::nanosleep(&ts, &ts) == -1) {}
 #endif

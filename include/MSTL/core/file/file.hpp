@@ -142,6 +142,7 @@ public:
     void close() noexcept;
     bool flush() const noexcept;
 
+    file_handle native_handle() const noexcept { return handle_; }
 
     size_type write(const string& data, size_type size) const;
     size_type write(const string& data) const;

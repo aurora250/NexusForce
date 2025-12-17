@@ -16,35 +16,35 @@ private:
 
 public:
     MSTL_NODISCARD constexpr T operator +(const T& other) const
-    noexcept(noexcept(derived().operator+=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator+=(other))) {
         T tmp(derived());
         tmp += other;
         return tmp;
     }
     
     MSTL_NODISCARD constexpr T operator -(const T& other) const
-    noexcept(noexcept(derived().operator-=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator-=(other))) {
         T tmp(derived());
         tmp -= other;
         return tmp;
     }
     
     MSTL_NODISCARD constexpr T operator *(const T& other) const
-    noexcept(noexcept(derived().operator*=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator*=(other))) {
         T tmp(derived());
         tmp *= other;
         return tmp;
     }
     
     MSTL_NODISCARD constexpr T operator /(const T& other) const
-    noexcept(noexcept(derived().operator/=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator/=(other))) {
         T tmp(derived());
         tmp /= other;
         return tmp;
     }
     
     MSTL_NODISCARD constexpr T operator %(const T& other) const
-    noexcept(noexcept(derived().operator%=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator%=(other))) {
         T tmp(derived());
         tmp %= other;
         return tmp;
@@ -85,7 +85,7 @@ public:
     
     constexpr T operator ++(int)
     noexcept(noexcept(derived().operator++())) {
-        T tmp(*this);
+        T tmp(derived());
         ++derived();
         return tmp;
     }
@@ -97,7 +97,7 @@ public:
     
     constexpr T operator --(int)
     noexcept(noexcept(derived().operator--())) {
-        T tmp(*this);
+        T tmp(derived());
         --derived();
         return tmp;
     }
@@ -116,21 +116,21 @@ private:
 
 public:
     MSTL_NODISCARD constexpr T operator &(const T& other) const
-    noexcept(noexcept(derived().operator&=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator&=(other))) {
         T tmp(derived());
         tmp &= other;
         return tmp;
     }
 
     MSTL_NODISCARD constexpr T operator |(const T& other) const
-    noexcept(noexcept(derived().operator|=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator|=(other))) {
         T tmp(derived());
         tmp |= other;
         return tmp;
     }
 
     MSTL_NODISCARD constexpr T operator ^(const T& other) const
-    noexcept(noexcept(derived().operator^=(other))) {
+    noexcept(noexcept(const_cast<T&>(derived()).operator^=(other))) {
         T tmp(derived());
         tmp ^= other;
         return tmp;

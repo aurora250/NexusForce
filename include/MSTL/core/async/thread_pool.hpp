@@ -91,7 +91,7 @@ private:
 	};
 
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<manual_thread>> threads_map_;
-	_MSTL timer_scheduler<_MSTL_CHRONO steady_clock> timer_;
+	_MSTL timer_scheduler<steady_clock> timer_;
 
 	id_type init_thread_size_;
 	size_t thread_threshhold_;
@@ -182,7 +182,7 @@ decltype(auto) thread_pool::submit_task(unsigned int priority, Func&& func, Args
 	_MSTL future<Result> res = task->get_future();
 
 	_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
-	if (!not_full_.wait_for(lock, _MSTL_CHRONO seconds(1), [&]()->bool {
+	if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 		return task_queue_.size() < task_threshhold_;
 	})) {
 		auto task_ = _MSTL make_shared<_MSTL packaged_task<Result()>>([]() -> Result { return Result(); });
@@ -216,7 +216,7 @@ decltype(auto) thread_pool::submit_after(const int64_t delay_ms, unsigned int pr
 		});
 	_MSTL future<ResultType> res = task->get_future();
 
-	auto expire_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(delay_ms);
+	auto expire_time = steady_clock::now() + milliseconds(delay_ms);
 	timer_.add_task(expire_time, [this, task = _MSTL move(task), priority]() mutable {
 		this->submit_task(priority, [task]() {
 			(*task)();
@@ -242,11 +242,11 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, unsig
 	    });
 
         if (state->cancelled.load()) return;
-        auto next_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(interval_ms);
+        auto next_time = steady_clock::now() + milliseconds(interval_ms);
         timer_.add_task(next_time, [handler_ptr]() { (*handler_ptr)(); });
     };
 
-    auto first_time = _MSTL_CHRONO steady_clock::now() + _MSTL_CHRONO milliseconds(interval_ms);
+    auto first_time = steady_clock::now() + milliseconds(interval_ms);
     timer_.add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
     return state;
 }

@@ -23,8 +23,8 @@ private:
     unordered_map<string, cookie> cookie_jar_; // key: cookie_name@domain_path
 
     int max_redirect_ = 5;
-    _MSTL_CHRONO milliseconds connect_timeout_{5000};
-    _MSTL_CHRONO milliseconds read_timeout_{5000};
+    milliseconds connect_timeout_{5000};
+    milliseconds read_timeout_{5000};
 
 #ifdef MSTL_SUPPORT_OPENSSL__
     bool verify_peer_ = true;

@@ -189,7 +189,7 @@ MSTL_CONSTEXPR20 void append_ascii_chars(basic_string<T>& result, const U* str, 
 MSTL_END_INNER__
 
 #define MSTL_BUILD_PACKAGE_CONSTRUCTOR(T) \
-constexpr T() = default; \
+constexpr T() noexcept = default; \
 constexpr T(const T&) noexcept = default; \
 constexpr T(T&&) noexcept = default; \
 constexpr T(value_type val) noexcept : base(val) {} \

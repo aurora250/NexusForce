@@ -49,7 +49,7 @@ public:
 
     template <typename Error>
     explicit exception(const Error& error)
-    : ptr_(make_unique<impl>(*error.ptr_)) {}
+    : ptr_(_MSTL make_unique<impl>(*error.ptr_)) {}
 
 	virtual ~exception();
 
