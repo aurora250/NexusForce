@@ -11,7 +11,7 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-class process {
+class MSTL_API process {
 public:
     struct process_info {
 #ifdef MSTL_PLATFORM_WINDOWS__

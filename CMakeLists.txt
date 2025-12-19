@@ -25,6 +25,8 @@ if(MSVC)
 endif()
 
 
+set(CMAKE_CXX_STANDARD 20)
+
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
 elseif(CMAKE_CXX_STANDARD LESS 14)
@@ -50,6 +52,7 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
 else()
     message(FATAL_ERROR "MSTL can only be compiled in X64 or X86 system")
 endif()
+
 message(STATUS "Current Architecture: ${MSTL_ARCH}")
 message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 
@@ -61,6 +64,7 @@ option(MSTL_ENABLE_REDIS "Enable Redis database support" ON)
 option(MSTL_ENABLE_ZLIB "Enable zlib compression support" ON)
 option(MSTL_ENABLE_OPENSSL "Enable OpenSSL support" ON)
 option(MSTL_ENABLE_CUDA "Enable CUDA GPU acceleration" OFF)
+
 option(MSTL_BUILD_TESTS "Build unit tests (requires GTest)" ON)
 option(MSTL_BUILD_EXAMPLES "Build example programs" OFF)
 

@@ -40,6 +40,7 @@ static void free_argv(char** argv) noexcept{
 #endif
 
 #ifdef MSTL_PLATFORM_WINDOWS__
+
 static string build_command_line(
     const string& executable, const vector<string>& args) {
     string cmd_line = "\"" + executable + "\"";
@@ -48,6 +49,7 @@ static string build_command_line(
     }
     return cmd_line;
 }
+
 #endif
 
 
@@ -56,15 +58,16 @@ static void read_pipe_output(process::process_info& info) {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (info.hStdoutRead == nullptr) {
-        return output;
+        info.stdout_output = move(output);
     }
 
-    constexpr DWORD buffer_size = 4096;
+    constexpr ::DWORD buffer_size = 4096;
     char buffer[buffer_size];
-    DWORD bytes_read;
+    ::DWORD bytes_read;
 
     while (true) {
-        if (!::PeekNamedPipe(info.hStdoutRead, nullptr, 0, nullptr, &bytes_read, nullptr)) {
+        if (!::PeekNamedPipe(info.hStdoutRead,
+            nullptr, 0, nullptr, &bytes_read, nullptr)) {
             break;
         }
         if (bytes_read == 0) {
@@ -109,6 +112,7 @@ static void read_pipe_output(process::process_info& info) {
 process::process_info process::create_process(const string& executable,
     const vector<string>& args, bool capture_output) {
     process_info info{};
+
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::STARTUPINFOA si{};
     si.cb = sizeof(si);
@@ -135,7 +139,7 @@ process::process_info process::create_process(const string& executable,
     vector<char> cmd_line_buf(cmd_line.begin(), cmd_line.end());
     cmd_line_buf.push_back('\0');
 
-    ::BOOL success = ::CreateProcessA(
+    const ::BOOL success = ::CreateProcessA(
         nullptr, cmd_line_buf.data(),
         nullptr, nullptr,
         capture_output ? TRUE : FALSE,
@@ -260,7 +264,7 @@ int process::wait_for_process(process_info& info, int timeout_ms) {
 
 bool process::terminate_process(const process_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
+    const ::BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
     if (result) {
         ::CloseHandle(info.pi.hProcess);
         ::CloseHandle(info.pi.hThread);

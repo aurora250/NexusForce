@@ -413,7 +413,12 @@ void test_device() {
 
 void test_process() {
     auto pi = process::create_process(
-        "python3", {(res_root / "test.py").str()}, true);
+#ifdef MSTL_PLATFORM_WINDOWS__
+        "python"
+#else
+        "python3"
+#endif
+        , {(res_root / "test.py").str()}, true);
     int res = process::wait_for_process(pi);
     println(res);
     if (res == 0) {

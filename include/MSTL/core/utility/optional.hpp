@@ -1,9 +1,9 @@
 #ifndef MSTL_CORE_COMPOUND_OPTIONAL_HPP__
 #define MSTL_CORE_COMPOUND_OPTIONAL_HPP__
-#include <initializer_list>
 #include "../exception/exception.hpp"
 #include "../interface/icommon.hpp"
 #include "../memory/construct.hpp"
+#include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(optional_exception, memory_exception, "Access the Null Value of Optional.")
