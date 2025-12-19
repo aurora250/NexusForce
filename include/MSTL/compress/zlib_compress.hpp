@@ -27,6 +27,17 @@ enum class COMPRESS_STRATEGY {
 
 
 class MSTL_API zlib_compressor {
+private:
+    MSTL_NODISCARD static bvector compress_data(
+        const byte_t* data, size_t size,
+        COMPRESS_LEVEL level, COMPRESS_STRATEGY strategy);
+
+    MSTL_NODISCARD static bvector decompress_data(
+        const byte_t* data, size_t size,
+        size_t estimated_original_size);
+
+    static void check_zlib_error(int ret_code);
+
 public:
     template <typename Iter, enable_if_t<is_ranges_cot_iter_v<Iter>, int> = 0>
     MSTL_NODISCARD static bvector compress(Iter begin, Iter end,
@@ -87,7 +98,7 @@ public:
         return decompress_data(data.data(), data.size(), estimated_original_size);
     }
 
-    class stream_compressor {
+    class MSTL_API stream_compressor {
     public:
         explicit stream_compressor(
             COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
@@ -96,9 +107,9 @@ public:
         ~stream_compressor();
 
         stream_compressor(const stream_compressor&) = delete;
-        stream_compressor& operator=(const stream_compressor&) = delete;
+        stream_compressor& operator =(const stream_compressor&) = delete;
         stream_compressor(stream_compressor&& other) noexcept;
-        stream_compressor& operator=(stream_compressor&& other) noexcept;
+        stream_compressor& operator =(stream_compressor&& other) noexcept;
 
         bvector compress(const span<const byte_t>& data, bool finish = false);
         bvector compress(string_view data, bool finish = false);
@@ -107,46 +118,50 @@ public:
 
         void reset(COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
                   COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy);
-        
+
+        MSTL_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
+        MSTL_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
+        MSTL_NODISCARD double compression_ratio() const noexcept {
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+        }
+
     private:
         ::z_stream stream_{};
         bool initialized_ = false;
+        size_t bytes_input_ = 0;
+        size_t bytes_output_ = 0;
     };
 
-    class stream_decompressor {
+    class MSTL_API stream_decompressor {
     public:
         stream_decompressor();
         ~stream_decompressor();
 
         stream_decompressor(const stream_decompressor&) = delete;
-        stream_decompressor& operator=(const stream_decompressor&) = delete;
+        stream_decompressor& operator =(const stream_decompressor&) = delete;
 
         stream_decompressor(stream_decompressor&& other) noexcept;
-        stream_decompressor& operator=(stream_decompressor&& other) noexcept;
+        stream_decompressor& operator =(stream_decompressor&& other) noexcept;
 
         bvector decompress(const span<const byte_t>& data, bool finish = false);
 
         bvector finish();
 
         void reset();
+
+        MSTL_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
+        MSTL_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
+        MSTL_NODISCARD double expansion_ratio() const noexcept {
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+        }
         
     private:
         ::z_stream stream_{};
         bool initialized_ = false;
+        size_t bytes_input_ = 0;
+        size_t bytes_output_ = 0;
     };
-    
-private:
-    MSTL_NODISCARD static bvector compress_data(
-        const byte_t* data, size_t size,
-        COMPRESS_LEVEL level, COMPRESS_STRATEGY strategy);
-    
-    MSTL_NODISCARD static bvector decompress_data(
-        const byte_t* data, size_t size,
-        size_t estimated_original_size);
-    
-    static void check_zlib_error(int ret_code);
 };
-
 
 using compressor = zlib_compressor::stream_compressor;
 using decompressor = zlib_compressor::stream_decompressor;

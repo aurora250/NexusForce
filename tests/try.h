@@ -249,5 +249,6 @@ void test_ext_tpool();
 void test_tpool();
 void test_dns();
 void test_process();
+void test_zlib();
 
 #endif //TRY_H

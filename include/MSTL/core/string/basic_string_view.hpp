@@ -27,8 +27,6 @@ public:
     using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
 
-    using self				= string_view_iterator<Traits>;
-
 private:
     pointer data_ = nullptr;
     size_t size_ = 0;
@@ -52,33 +50,33 @@ public:
         return &operator*();
     }
 
-    constexpr self& operator ++() noexcept {
+    constexpr string_view_iterator& operator ++() noexcept {
         MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         MSTL_DEBUG_VERIFY(idx_ < size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         ++idx_;
         return *this;
     }
 
-    constexpr self operator ++(int) noexcept {
-        self tmp(*this);
+    constexpr string_view_iterator operator ++(int) noexcept {
+        string_view_iterator tmp(*this);
         ++*this;
         return tmp;
     }
 
-    constexpr self& operator --() noexcept {
+    constexpr string_view_iterator& operator --() noexcept {
         MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         MSTL_DEBUG_VERIFY(idx_ != 0, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         --idx_;
         return *this;
     }
 
-    constexpr self operator --(int) noexcept {
-        self tmp(*this);
+    constexpr string_view_iterator operator --(int) noexcept {
+        string_view_iterator tmp(*this);
         --*this;
         return tmp;
     }
 
-    constexpr self& operator +=(const difference_type n) noexcept {
+    constexpr string_view_iterator& operator +=(const difference_type n) noexcept {
         if (n < 0) {
             MSTL_DEBUG_VERIFY(data_ || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
             MSTL_DEBUG_VERIFY(idx_ >= static_cast<size_t>(0) - static_cast<size_t>(n),
@@ -92,25 +90,25 @@ public:
         idx_ += n;
         return *this;
     }
-    MSTL_NODISCARD constexpr self operator +(const difference_type n) const noexcept {
-        self tmp = *this;
+    MSTL_NODISCARD constexpr string_view_iterator operator +(const difference_type n) const noexcept {
+        string_view_iterator tmp = *this;
         tmp += n;
         return tmp;
     }
-    MSTL_NODISCARD friend constexpr self operator +(const difference_type n, const self& iter) noexcept {
+    MSTL_NODISCARD friend constexpr string_view_iterator operator +(const difference_type n, const string_view_iterator& iter) noexcept {
         return iter + n;
     }
 
-    constexpr self& operator -=(const difference_type n) noexcept {
+    constexpr string_view_iterator& operator -=(const difference_type n) noexcept {
         idx_ += -n;
         return *this;
     }
-    MSTL_NODISCARD constexpr self operator -(const difference_type n) const noexcept {
-        self tmp = *this;
+    MSTL_NODISCARD constexpr string_view_iterator operator -(const difference_type n) const noexcept {
+        string_view_iterator tmp = *this;
         tmp -= n;
         return tmp;
     }
-    MSTL_NODISCARD constexpr difference_type operator -(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr difference_type operator -(const string_view_iterator& iter) const noexcept {
         MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
             __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
         return static_cast<difference_type>(idx_ - iter.idx_);
@@ -120,26 +118,26 @@ public:
         return *(*this + n);
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator ==(const string_view_iterator& iter) const noexcept {
         MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
             __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
         return idx_ == iter.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator !=(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator !=(const string_view_iterator& iter) const noexcept {
         return !(*this == iter);
     }
-    MSTL_NODISCARD constexpr bool operator <(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator <(const string_view_iterator& iter) const noexcept {
         MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
             __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
         return idx_ < iter.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator >(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator >(const string_view_iterator& iter) const noexcept {
         return iter < *this;
     }
-    MSTL_NODISCARD constexpr bool operator <=(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator <=(const string_view_iterator& iter) const noexcept {
         return !(iter < *this);
     }
-    MSTL_NODISCARD constexpr bool operator >=(const self& iter) const noexcept {
+    MSTL_NODISCARD constexpr bool operator >=(const string_view_iterator& iter) const noexcept {
         return !(*this < iter);
     }
 };
@@ -155,7 +153,6 @@ class basic_string_view : public icommon<basic_string_view<CharT, Traits>> {
 public:
     MSTL_BUILD_TYPE_ALIAS(CharT)
     using traits_type               = Traits;
-    using self                      = basic_string_view<CharT, Traits>;
 
     using const_iterator            = string_view_iterator<Traits>;
     using iterator                  = const_iterator;
@@ -176,8 +173,8 @@ private:
 public:
     constexpr basic_string_view() noexcept = default;
 
-    constexpr basic_string_view(const self&) noexcept = default;
-    constexpr basic_string_view& operator =(const self&) noexcept = default;
+    constexpr basic_string_view(const basic_string_view&) noexcept = default;
+    constexpr basic_string_view& operator =(const basic_string_view&) noexcept = default;
 
     constexpr basic_string_view(const_pointer str) noexcept
         : data_(str), size_(Traits::length(str)) {}
@@ -244,38 +241,38 @@ public:
         return count;
     }
 
-    MSTL_NODISCARD constexpr self substr(const size_type off = 0, size_type count = npos) const {
+    MSTL_NODISCARD constexpr basic_string_view substr(const size_type off = 0, size_type count = npos) const {
         MSTL_DEBUG_VERIFY(off < size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
-        return self(data_ + off, count);
+        return basic_string_view(data_ + off, count);
     }
     
-    MSTL_NODISCARD constexpr self view(const size_type off, size_type count = npos) const {
+    MSTL_NODISCARD constexpr basic_string_view view(const size_type off, size_type count = npos) const {
         return substr(off, count);
     }
 
-    MSTL_NODISCARD constexpr int compare(const self view) const noexcept {
+    MSTL_NODISCARD constexpr int compare(const basic_string_view view) const noexcept {
         return (char_traits_compare<Traits>)(data_, size_, view.data_, view.size_);
     }
-    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const self view) const {
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const basic_string_view view) const {
         return substr(off, n).compare(view);
     }
-    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const self view,
+    MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const basic_string_view view,
         const size_type roff, const size_type count) const {
         return substr(off, n).compare(view.substr(roff, count));
     }
     MSTL_NODISCARD constexpr int compare(const CharT* const str) const noexcept {
-        return compare(self(str));
+        return compare(basic_string_view(str));
     }
     MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n, const CharT* const str) const {
-        return substr(off, n).compare(self(str));
+        return substr(off, n).compare(basic_string_view(str));
     }
     MSTL_NODISCARD constexpr int compare(const size_type off, const size_type n,
         const CharT* const str, const size_type count) const {
-        return substr(off, n).compare(self(str, count));
+        return substr(off, n).compare(basic_string_view(str, count));
     }
 
-    MSTL_NODISCARD constexpr size_type find(const self view, const size_type n = 0) const noexcept {
+    MSTL_NODISCARD constexpr size_type find(const basic_string_view view, const size_type n = 0) const noexcept {
         return (char_traits_find<Traits>)(data_, size_, n, view.data_, view.size_);
     }
     MSTL_NODISCARD constexpr size_type find(const CharT chr, const size_type n = 0) const noexcept {
@@ -289,7 +286,7 @@ public:
         return (char_traits_find<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
-    MSTL_NODISCARD constexpr size_type rfind(const self view, const size_type off = npos) const noexcept {
+    MSTL_NODISCARD constexpr size_type rfind(const basic_string_view view, const size_type off = npos) const noexcept {
         return (char_traits_rfind<Traits>)(data_, size_, off, view.data_, view.size_);
     }
     MSTL_NODISCARD constexpr size_type rfind(const CharT chr, const size_type n = npos) const noexcept {
@@ -303,7 +300,7 @@ public:
         return (char_traits_rfind<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
-    MSTL_NODISCARD constexpr size_type find_first_of(const self view, const size_type off = 0) const noexcept {
+    MSTL_NODISCARD constexpr size_type find_first_of(const basic_string_view view, const size_type off = 0) const noexcept {
         return (char_traits_find_first_of<Traits>)(data_, size_, off, view.data_, view.size_);
     }
     MSTL_NODISCARD constexpr size_type find_first_of(const CharT chr, const size_type off = 0) const noexcept {
@@ -317,7 +314,7 @@ public:
         return (char_traits_find_first_of<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
-    MSTL_NODISCARD constexpr size_type find_last_of(const self view, const size_type off = npos) const noexcept {
+    MSTL_NODISCARD constexpr size_type find_last_of(const basic_string_view view, const size_type off = npos) const noexcept {
         return (char_traits_find_last_of<Traits>)(data_, size_, off, view.data_, view.size_);
     }
     MSTL_NODISCARD constexpr size_type find_last_of(const CharT chr, const size_type off = npos) const noexcept {
@@ -331,7 +328,7 @@ public:
         return (char_traits_find_last_of<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
-    MSTL_NODISCARD constexpr size_type find_first_not_of(const self view,
+    MSTL_NODISCARD constexpr size_type find_first_not_of(const basic_string_view view,
         const size_type off = 0) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
     }
@@ -346,7 +343,7 @@ public:
         return (char_traits_find_first_not_of<Traits>)(data_, size_, off, str, Traits::length(str));
     }
 
-    MSTL_NODISCARD constexpr size_type find_last_not_of(const self view,
+    MSTL_NODISCARD constexpr size_type find_last_not_of(const basic_string_view view,
         const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data_, size_, off, view.data_, view.size_);
     }
@@ -370,7 +367,7 @@ public:
         return n;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const self view) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const basic_string_view view) const noexcept {
         return view.size() <= size_ && traits_type::compare(data(), view.data(), view.size()) == 0;
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(value_type chr) const noexcept {
@@ -380,7 +377,7 @@ public:
         return this->starts_with(view_type(str));
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const self view) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const basic_string_view view) const noexcept {
         const size_type view_size = view.size();
         return view_size <= size_ && traits_type::compare(data_ + size_ - view_size, view.data(), view_size) == 0;
     }
@@ -391,7 +388,7 @@ public:
         return this->ends_with(view_type(str));
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const self view) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const basic_string_view view) const noexcept {
         return this->find(view) != npos;
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(value_type chr) const noexcept {
@@ -401,18 +398,18 @@ public:
         return this->find(str) != npos;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_left() const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim_left() const noexcept {
         return this->trim_left_if([](value_type ch) { return _MSTL is_space(ch); });
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_right() const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim_right() const noexcept {
         return this->trim_right_if([](value_type ch) { return _MSTL is_space(ch); });
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim() const noexcept { 
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim() const noexcept {
         return this->trim_left().trim_right(); 
     }
 
     template <typename Predicate>
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_left_if(Predicate pred) const
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim_left_if(Predicate pred) const
     noexcept(noexcept(pred(*cbegin()))) {
         if (empty()) return *this;
 
@@ -421,13 +418,13 @@ public:
             ++it;
 
         if (it != cbegin())
-            return self(data_ + (it - cbegin()), size_ - (it - cbegin()));
+            return basic_string_view(data_ + (it - cbegin()), size_ - (it - cbegin()));
         
         return *this;
     }
 
     template <typename Predicate>
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_right_if(Predicate pred) const
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim_right_if(Predicate pred) const
     noexcept(noexcept(pred(*crbegin()))) {
         if (empty()) return *this;
 
@@ -436,18 +433,18 @@ public:
             ++rit;
 
         if (rit != crbegin())
-            return self(data_, size_ - (rit - crbegin()));
+            return basic_string_view(data_, size_ - (rit - crbegin()));
         
         return *this;
     }
 
     template <typename Predicate>
-    MSTL_NODISCARD MSTL_CONSTEXPR20 self trim_if(Predicate pred) const
+    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_view trim_if(Predicate pred) const
     noexcept(noexcept(this->trim_right_if(pred)) && noexcept(this->trim_left_if(pred))) {
         return this->trim_left_if(pred).trim_right_if(pred);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal_to(const self str) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal_to(const basic_string_view str) const noexcept {
         return (char_traits_equal<Traits>)(data_, size_, str.data_, str.size_);
     }
     
@@ -455,14 +452,14 @@ public:
         return equal_to(view_type(str));
     }
 
-    constexpr void swap(self& view) noexcept {
-        const self tmp(view);
+    constexpr void swap(basic_string_view& view) noexcept {
+        const basic_string_view tmp(view);
         view = *this;
         *this = tmp;
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-    MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->compare(rh) < 0; }
+    MSTL_NODISCARD constexpr bool operator ==(const basic_string_view& rh) const noexcept { return this->equal_to(rh); }
+    MSTL_NODISCARD constexpr bool operator <(const basic_string_view& rh) const noexcept { return this->compare(rh) < 0; }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(this->data(), this->length());

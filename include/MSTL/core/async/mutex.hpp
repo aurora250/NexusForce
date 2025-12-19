@@ -3,6 +3,7 @@
 #include "../typeinfo/type_traits.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
+#include "../config/undef_cmacro.hpp"
 #elif defined(MSTL_PLATFORM_LINUX__)
 #include <pthread.h>
 #endif

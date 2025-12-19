@@ -380,13 +380,38 @@ void test_print() {
 }
 
 void test_console() {
+    if (console.confirmation("Save changes? (s/c): ", 's', 'c')) {
+        console.progress_bar(0.7);
+        println("Saving...");
+    } else {
+        println("Cancelled.");
+    }
+
+    auto size = console.get_console_size();
+    println("Terminal size: ", size.width, "x", size.height);
+    println("Supports colors: ", console.supports_colors());
+    println("Supports truecolor: ", console.supports_truecolor());
+    println("Terminal type: ", console.console_type());
+
+    string password = console.password("Enter password (masked): ", '*');
+    console.typewriter_println("This appears character by character...");
+
+    console.fade_in("Welcome to the system!", seconds(2));
+    console.fade_out("Goodbye!", seconds(2));
+    console.fade_in_out("Important Message!", milliseconds(500), seconds(2), milliseconds(500));
+
+    console.beep();
+    // console.flash_screen();
+    console.notification("Download completed!", seconds(3));
+    console.pause();
+
     hexadecimal hex("F");
     println(hex);
     console.readln(hex);
     println(hex);
     int rawi = 3;
     println(rawi);
-    console.read(rawi);
+    console.readln(rawi);
     println(rawi);
     _MSTL boolean b;
     b.try_parse("true");
@@ -394,13 +419,11 @@ void test_console() {
     console.readln(b);
     println(b);
     integer32 i32;
-    console.read(i32);
+    console.readln(i32);
     println(i32);
-    println();
     float32 fp;
-    console.read(fp);
+    console.readln(fp);
     println(fp);
-    println(to_string(fp));
 }
 
 void test_device() {
@@ -423,6 +446,124 @@ void test_process() {
     println(res);
     if (res == 0) {
         println(pi.stdout_output);
+    }
+}
+
+void test_zlib() {
+    {
+        string original = "Hello, World! This is a test string for zlib compression. "
+                        "The quick brown fox jumps over the lazy dog. "
+                        "Repeat: The quick brown fox jumps over the lazy dog.";
+
+        printfln("Original: {} bytes", original.size());
+
+        auto compressed = zlib_compressor::compress(original.view());
+        printfln("Compressed: {} bytes ({:.1f}%)",
+                    compressed.size(),
+                    100.0 * compressed.size() / original.size());
+
+        auto decompressed = zlib_compressor::decompress(
+            span<const byte_t>(compressed.data(), compressed.size())
+        );
+
+        string result(reinterpret_cast<const char*>(decompressed.data()), decompressed.size());
+        printfln("Match: {}\n", result == original ? "✓" : "✗");
+    }
+    {
+        string data(3000, 'A');
+        printfln("Test data: {} bytes", data.size());
+
+        auto test_level = [&](COMPRESS_LEVEL level, const char* name) {
+            auto compressed = zlib_compressor::compress(data.view(), level);
+            printfln("  {:20} : {:5} bytes ({:.1f}%)",
+                        name, compressed.size(),
+                        100.0 * compressed.size() / data.size());
+        };
+
+        test_level(COMPRESS_LEVEL::best_speed, "Best Speed");
+        test_level(COMPRESS_LEVEL::default_level, "Default");
+        test_level(COMPRESS_LEVEL::best_compression, "Best Compression");
+        println();
+    }
+    {
+        compressor comp;
+
+        vector<string_view> chunks = {
+            "First chunk. ",
+            "Second chunk. ",
+            "Third chunk. ",
+            "Final chunk."
+        };
+
+        bvector all_compressed;
+        string original;
+
+        for (size_t i = 0; i < chunks.size(); ++i) {
+            bool is_last = (i == chunks.size() - 1);
+            auto compressed = comp.compress(chunks[i], is_last);
+            all_compressed.insert(all_compressed.end(), compressed.begin(), compressed.end());
+            original += chunks[i];
+        }
+
+        printfln("Input: {} bytes", comp.bytes_input());
+        printfln("Output: {} bytes", comp.bytes_output());
+        printfln("Ratio: {:.2f}%", comp.compression_ratio() * 100);
+
+        decompressor decomp;
+        auto decompressed = decomp.decompress(
+            span<const byte_t>(all_compressed.data(), all_compressed.size()), true
+        );
+
+        string result(reinterpret_cast<const char*>(decompressed.data()),
+                     decompressed.size());
+        printfln("Match: {}\n", result == original ? "✓" : "✗");
+    }
+    {
+        const size_t data_size = 1024 * 1024;
+        bvector large_data(data_size);
+
+        for (size_t i = 0; i < data_size; ++i) {
+            large_data[i] = static_cast<byte_t>(i % 256);
+        }
+
+        auto compressed = zlib_compressor::compress(large_data);
+
+        printfln("Original: {} KB", data_size / 1024);
+        printfln("Compressed: {} KB ({:.2f}%)",
+                    compressed.size() / 1024,
+                    100.0 * compressed.size() / data_size);
+
+        auto decompressed = zlib_compressor::decompress(
+            span<const byte_t>(compressed.data(), compressed.size()),
+            data_size
+        );
+
+        bool match = (decompressed.size() == large_data.size()) &&
+                     equal(decompressed.begin(), decompressed.end(),
+                               large_data.begin());
+        printfln("Match: {}\n", match ? "✓" : "✗");
+    }
+    {
+        compressor comp(COMPRESS_LEVEL::best_compression);
+        decompressor decomp;
+
+        string data = "Test data for statistics. "_s.repeat(10);
+
+        auto compressed = comp.compress(data.view(), true);
+        auto decompressed = decomp.decompress(
+            span<const byte_t>(compressed.data(), compressed.size()), true
+        );
+
+        println("Compression:");
+        printfln("  Input:  {} bytes", comp.bytes_input());
+        printfln("  Output: {} bytes", comp.bytes_output());
+        printfln("  Ratio:  {:.2f}%", comp.compression_ratio() * 100);
+
+        println("Decompression:");
+        printfln("  Input:  {} bytes", decomp.bytes_input());
+        printfln("  Output: {} bytes", decomp.bytes_output());
+        printfln("  Ratio:  {:.2f}x", decomp.expansion_ratio());
+        println();
     }
 }
 
@@ -2169,5 +2310,6 @@ void test_tpool() {
     pool.submit_task(test_color);
     pool.submit_task(test_sql);
     pool.submit_task(test_ranges);
+    pool.submit_task(test_zlib);
     pool.stop();
 }

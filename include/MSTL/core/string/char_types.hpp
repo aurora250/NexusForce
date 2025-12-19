@@ -51,8 +51,7 @@ template <typename CharT>
 MSTL_PURE_FUNCTION constexpr bool is_ctype(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept {
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
 	if (uc > 127) return false;
-
-	if (uc <= 63) (mask_low & (1ULL << uc)) != 0;
+	if (uc <= 63) return (mask_low & (1ULL << uc)) != 0;
 	const auto offset = uc - 64;
 	return (mask_high & (1ULL << offset)) != 0;
 }

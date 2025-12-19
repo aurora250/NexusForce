@@ -20,7 +20,7 @@ public:
     using package_type = PackageT;
 
 protected:
-    package_type value_ = _MSTL initialize<package_type>();
+    package_type value_{_MSTL initialize<package_type>()};
 
 public:
     constexpr ipackage() noexcept = default;

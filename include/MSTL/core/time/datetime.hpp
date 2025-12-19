@@ -21,13 +21,6 @@ private:
     date_type month_ = 1;
     date_type day_ = 1;
 
-    static constexpr int64_t to_julian_day(const date_type y, const date_type m, const date_type d) noexcept {
-        const int64_t a = (14 - m) / 12;
-        const int64_t year = y + 4800 - a;
-        const int64_t month = m + 12 * a - 3;
-        return d + (153 * month + 2) / 5 + 365 * year + year / 4 - year / 100 + year / 400 - 32045;
-    }
-
 public:
     constexpr date() noexcept = default;
 
@@ -131,14 +124,30 @@ public:
     }
 
     constexpr date& operator +=(const date_type day) noexcept {
+        if (day == 0) return *this;
         if (day < 0) return *this -= -day;
 
-        day_ += day;
-        while (day_ > days_of_month(year_, month_)) {
-            day_ -= days_of_month(year_, month_);
-            if (++month_ == 13) {
+        if (day > 365) {
+            const int64_t jd = to_julian_day(year_, month_, day_) + day;
+            *this = from_julian_day(jd);
+            return *this;
+        }
+
+        date_type remaining = day;
+        while (remaining > 0) {
+            const date_type days_in_month = days_of_month(year_, month_);
+            const date_type available = days_in_month - day_ + 1;
+
+            if (remaining < available) {
+                day_ += remaining;
+                break;
+            }
+
+            remaining -= available;
+            day_ = 1;
+            if (++month_ > 12) {
                 month_ = 1;
-                year_++;
+                ++year_;
             }
         }
         return *this;
@@ -207,6 +216,29 @@ public:
         _MSTL swap(year_, d.year_);
         _MSTL swap(month_, d.month_);
         _MSTL swap(day_, d.day_);
+    }
+
+    static constexpr int64_t to_julian_day(
+        const date_type y, const date_type m, const date_type d) noexcept {
+        const int64_t a = (14 - m) / 12;
+        const int64_t year = y + 4800 - a;
+        const int64_t month = m + 12 * a - 3;
+        return d + (153 * month + 2) / 5 + 365 * year + year / 4 - year / 100 + year / 400 - 32045;
+    }
+
+    static constexpr date from_julian_day(const int64_t jd) noexcept {
+        const int64_t a = jd + 32044;
+        const int64_t b = (4 * a + 3) / 146097;
+        const int64_t c = a - (146097 * b) / 4;
+        const int64_t d = (4 * c + 3) / 1461;
+        const int64_t e = c - (1461 * d) / 4;
+        const int64_t m = (5 * e + 2) / 153;
+
+        const date_type day = static_cast<date_type>(e - (153 * m + 2) / 5 + 1);
+        const date_type month = static_cast<date_type>(m + 3 - 12 * (m / 10));
+        const date_type year = static_cast<date_type>(100 * b + d - 4800 + (m / 10));
+
+        return date(year, month, day);
     }
 };
 

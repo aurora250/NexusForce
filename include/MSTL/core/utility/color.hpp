@@ -14,6 +14,17 @@ private:
         return value;
     }
 
+    static constexpr double clamp_double(const double value) noexcept {
+        if (value < 0.0) return 0.0;
+        if (value > 1.0) return 1.0;
+        return value;
+    }
+
+    static constexpr int lerp_component(const int from, const int to, const double t) noexcept {
+        const double result = from + (to - from) * clamp_double(t);
+        return static_cast<int>(_MSTL round(result));
+    }
+
 public:
     constexpr color() noexcept = default;
 
@@ -84,10 +95,21 @@ public:
     constexpr bool is_transparent() const noexcept { return a == 0; }
     constexpr bool is_opaque() const noexcept { return a == 255; }
     constexpr double is_opacity() const noexcept { return a / 255.0; }
+
     constexpr void set_opacity(double opacity) noexcept {
         if (opacity < 0.0) opacity = 0.0;
         if (opacity > 1.0) opacity = 1.0;
         a = static_cast<int>(_MSTL round(opacity * 255));
+    }
+
+    static constexpr color lerp(const color& from, const color& to, double t) noexcept {
+        t = clamp_double(t);
+        return color(
+            lerp_component(from.r, to.r, t),
+            lerp_component(from.g, to.g, t),
+            lerp_component(from.b, to.b, t),
+            lerp_component(from.a, to.a, t)
+        );
     }
 
     constexpr color operator +(const color& other) const noexcept {

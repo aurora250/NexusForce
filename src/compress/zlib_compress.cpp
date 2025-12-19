@@ -44,24 +44,41 @@ bvector zlib_compressor::decompress_data(const byte_t* data,
     }
     
     bvector decompressed(estimated_original_size);
-    auto decompressed_size = static_cast<::uLongf>(decompressed.size());
+    ::uLongf decompressed_size = 0;
+    int result = Z_BUF_ERROR;
+    int attempt = 0;
+    constexpr int MAX_ATTEMPTS = 5;
+    constexpr size_t MAX_BUFFER_SIZE = 1024 * 1024 * 1024;
     
-    int result = ::uncompress(
-        decompressed.data(), &decompressed_size,
-        data, static_cast<::uLong>(size)
-    );
+    do {
+        if (attempt > 0) {
+            estimated_original_size *= 2;
+            if (estimated_original_size > MAX_BUFFER_SIZE) {
+                throw_exception(zlib_exception("Decompression buffer size exceeded maximum limit"));
+            }
+        }
 
-    if (result == Z_BUF_ERROR) {
-        decompressed.resize(decompressed.size() * 2);
+        decompressed.resize(estimated_original_size);
         decompressed_size = static_cast<::uLongf>(decompressed.size());
+
         result = ::uncompress(
             decompressed.data(), &decompressed_size,
             data, static_cast<::uLong>(size)
         );
-    }
-    
-    check_zlib_error(result);
-    decompressed.resize(decompressed_size);
+
+        if (result == Z_OK) {
+            decompressed.resize(decompressed_size);
+            break;
+        } else if (result == Z_BUF_ERROR) {
+            attempt++;
+            if (attempt >= MAX_ATTEMPTS) {
+                throw_exception(zlib_exception("Exceeded maximum decompression buffer attempts"));
+            }
+        } else {
+            check_zlib_error(result);
+        }
+    } while (result == Z_BUF_ERROR);
+
     return decompressed;
 }
 
@@ -79,13 +96,16 @@ zlib_compressor::stream_compressor::~stream_compressor() {
 zlib_compressor::stream_compressor::stream_compressor(
     stream_compressor&& other) noexcept
     : stream_(other.stream_)
-    , initialized_(other.initialized_) {
-    
+    , initialized_(other.initialized_)
+    , bytes_input_(other.bytes_input_)
+    , bytes_output_(other.bytes_output_) {
     other.initialized_ = false;
     other.stream_ = {};
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
 }
 
-zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator=(
+zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator =(
     stream_compressor&& other) noexcept {
     
     if (this != &other) {
@@ -95,9 +115,13 @@ zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator
         
         stream_ = other.stream_;
         initialized_ = other.initialized_;
-        
+        bytes_input_ = other.bytes_input_;
+        bytes_output_ = other.bytes_output_;
+
         other.initialized_ = false;
         other.stream_ = {};
+        other.bytes_input_ = 0;
+        other.bytes_output_ = 0;
     }
     return *this;
 }
@@ -119,6 +143,8 @@ void zlib_compressor::stream_compressor::reset(
     
     check_zlib_error(result);
     initialized_ = true;
+    bytes_input_ = 0;
+    bytes_output_ = 0;
 }
 
 bvector zlib_compressor::stream_compressor::compress(
@@ -130,6 +156,7 @@ bvector zlib_compressor::stream_compressor::compress(
     
     stream_.avail_in = static_cast<::uInt>(data.size());
     stream_.next_in = const_cast<byte_t*>(data.data());
+    bytes_input_ += data.size();
     
     constexpr size_t CHUNK_SIZE = 16384;
     bvector output;
@@ -149,6 +176,7 @@ bvector zlib_compressor::stream_compressor::compress(
 
         const size_t have = CHUNK_SIZE - stream_.avail_out;
         output.resize(output.size() - CHUNK_SIZE + have);
+        bytes_output_ += have;
         
     } while (stream_.avail_out == 0);
     
@@ -181,13 +209,17 @@ zlib_compressor::stream_decompressor::~stream_decompressor() {
 zlib_compressor::stream_decompressor::stream_decompressor(
     stream_decompressor&& other) noexcept
     : stream_(other.stream_)
-    , initialized_(other.initialized_) {
+    , initialized_(other.initialized_)
+    , bytes_input_(other.bytes_input_)
+    , bytes_output_(other.bytes_output_) {
     
     other.initialized_ = false;
     other.stream_ = {};
+    other.bytes_input_ = 0;
+    other.bytes_output_ = 0;
 }
 
-zlib_compressor::stream_decompressor& zlib_compressor::stream_decompressor::operator=(
+zlib_compressor::stream_decompressor& zlib_compressor::stream_decompressor::operator =(
     stream_decompressor&& other) noexcept {
     
     if (this != &other) {
@@ -197,9 +229,13 @@ zlib_compressor::stream_decompressor& zlib_compressor::stream_decompressor::oper
         
         stream_ = other.stream_;
         initialized_ = other.initialized_;
-        
+        bytes_input_ = other.bytes_input_;
+        bytes_output_ = other.bytes_output_;
+
         other.initialized_ = false;
         other.stream_ = {};
+        other.bytes_input_ = 0;
+        other.bytes_output_ = 0;
     }
     return *this;
 }
@@ -213,6 +249,8 @@ void zlib_compressor::stream_decompressor::reset() {
     const int result = ::inflateInit2(&stream_, MAX_WBITS);
     check_zlib_error(result);
     initialized_ = true;
+    bytes_input_ = 0;
+    bytes_output_ = 0;
 }
 
 bvector zlib_compressor::stream_decompressor::decompress(
@@ -224,6 +262,7 @@ bvector zlib_compressor::stream_decompressor::decompress(
     
     stream_.avail_in = static_cast<::uInt>(data.size());
     stream_.next_in = const_cast<byte_t*>(data.data());
+    bytes_input_ += data.size();
     
     constexpr size_t CHUNK_SIZE = 16384;
     bvector output;
@@ -243,13 +282,13 @@ bvector zlib_compressor::stream_decompressor::decompress(
         }
         const size_t have = CHUNK_SIZE - stream_.avail_out;
         output.resize(output.size() - CHUNK_SIZE + have);
-        
+        bytes_output_ += have;
     } while (stream_.avail_out == 0);
     return output;
 }
 
 bvector zlib_compressor::stream_decompressor::finish() {
-    return bvector{};
+    return decompress(span<const byte_t>{}, true);
 }
 
 MSTL_END_NAMESPACE__

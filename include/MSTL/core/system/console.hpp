@@ -2,6 +2,7 @@
 #define MSTL_CORE_SYSTEM_CONSOLE_HPP__
 #include "../async/mutex.hpp"
 #include "../utility/color.hpp"
+#include "../time/duration.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename = void>
@@ -9,33 +10,64 @@ struct io_base;
 
 
 class MSTL_API sys_console {
+public:
+    struct console_size {
+        int width;
+        int height;
+
+        explicit console_size(const int w = 0, const int h = 0)
+        : width(w), height(h) {}
+
+        MSTL_NODISCARD bool operator ==(const console_size& other) const noexcept {
+            return width == other.width && height == other.height;
+        }
+        MSTL_NODISCARD bool operator !=(const console_size& other) const noexcept {
+            return !(*this == other);
+        }
+    };
+
+private:
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::HANDLE out_{INVALID_HANDLE_VALUE};
     ::HANDLE in_{INVALID_HANDLE_VALUE};
+
+    ::COORD saved_cursor_pos_{0, 0};
 #else
     int out_{-1};
     int in_{-1};
 #endif
-    mutex mutex_{};
+    mutable mutex mutex_{};
+    console_size last_size_{0, 0};
 
 private:
-    void write_string_unsafe(const string& str) const { write_string_unsafe(str.view()); }
-    void write_string_unsafe(string_view str) const;
-    void write_string_unsafe(const char* str) const { write_string_unsafe(string_view{str}); }
+    void print_string_unsafe(const string& str) const { print_string_unsafe(str.view()); }
+    void print_string_unsafe(string_view str) const;
+    void print_string_unsafe(const char* str) const { print_string_unsafe(string_view{str}); }
 
-    string readln_string_unsafe() const;
+    void set_color_unsafe(const color& color, bool use_256_color) const;
+    void typewriter_print_unsafe(string_view text, milliseconds delay_per_char, bool with_sound) const;
+
+    string readln_unsafe() const;
+    string read_unsafe() const;
     char read_char_unsafe() const;
 
     void flush_unsafe() const;
+
+    void beep_unsafe() const;
+    void flash_screen_unsafe() const;
+
+    void fade_effect_unsafe(string_view text,
+        const color& from, const color& to,
+        milliseconds duration, bool is_fade_in) const;
 
 private:
     sys_console();
 
 public:
     sys_console(const sys_console&) = delete;
-    sys_console& operator=(const sys_console&) = delete;
+    sys_console& operator =(const sys_console&) = delete;
     sys_console(sys_console&&) = delete;
-    sys_console& operator=(sys_console&&) = delete;
+    sys_console& operator =(sys_console&&) = delete;
 
     ~sys_console() = default;
 
@@ -44,131 +76,133 @@ public:
         return console;
     }
 
-    void flush() {
-        lock_guard<mutex> lock(mutex_);
-        this->flush_unsafe();
-    }
+    void flush();
 
-    void write_string(const string& str) {
-        lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe(str.view());
-    }
-    void write_string(const string_view& str) {
-        lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe(str);
-    }
-    void write_string(const char* str) {
-        lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe(str);
-    }
+    void print_string(const string& str);
+    void print_string(const string_view& str);
+    void print_string(const char* str);
 
+    void println();
 
-    string readln_string()  {
-        lock_guard<mutex> lock(mutex_);
-        return this->readln_string_unsafe();
-    }
-
-    char read_char() {
-        lock_guard<mutex> lock(mutex_);
-        return this->read_char_unsafe();
-    }
-
+    string read();
+    string readln();
+    char read_char();
 
     template <typename T>
     void print(const T& value) {
         io_base<T>::write(*this, value);
     }
+
     template <typename... Args>
     void printf(const string_view fmt, Args&&... args) {
         lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe(_MSTL format(fmt, _MSTL forward<Args>(args)...));
+        this->print_string_unsafe(_MSTL format(fmt, _MSTL forward<Args>(args)...));
     }
+
     template <typename T>
     void printc(const color& color, const T& value) {
-        {
-            lock_guard<mutex> lock(mutex_);
-            this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
-        }
+        set_color(color, false);
         io_base<T>::write(*this, value);
-        {
-            lock_guard<mutex> lock(mutex_);
-            this->write_string_unsafe("\033[0m");
-        }
+        reset_color();
     }
 
-    void println() {
-        lock_guard<mutex> lock(mutex_);
-        this->write_string_unsafe("\n");
-    }
     template <typename T>
-    void println(const T& value) {
-        io_base<T>::write(*this, value);
-        {
-            lock_guard<mutex> lock(mutex_);
-            this->write_string_unsafe("\n");
-        }
-    }
-    template <typename T>
-    void printcln(const color& color, const T& value) {
-        {
-            lock_guard<mutex> lock(mutex_);
-            this->write_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
-        }
-        io_base<T>::write(*this, value);
-        {
-            lock_guard<mutex> lock(mutex_);
-            this->write_string_unsafe("\033[0m\n");
-        }
-    }
-
-    template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
-    T read() {
-        T value;
-        io_base<T>::read(*this, value);
-        return _MSTL move(value);
-    }
-
-    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
     T read() {
         package_t<T> obj;
         io_base<T>::read(*this, obj);
         return obj.value();
     }
 
-    template <typename T>
+    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
+    void read(T& value) {
+        package_t<T> obj;
+        io_base<package_t<T>>::read(*this, obj);
+        value = _MSTL move(static_cast<T>(obj));
+    }
+
+    template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
     void read(T& value) {
         io_base<T>::read(*this, value);
     }
 
-    template <typename T, enable_if_t<!is_packaged_v<T> && !is_base_of_v<iobject<T>, T>, int> = 0>
-    T readln() {
-        return T(this->readln_string());
-    }
-    template <typename T, enable_if_t<!is_packaged_v<T> && is_base_of_v<iobject<T>, T>, int> = 0>
-    T readln() {
-        T obj;
-        obj.try_parse(this->readln_string().view());
-        return _MSTL move(obj);
-    }
-    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
+    template <typename T>
     T readln() {
         package_t<T> obj;
-        obj.try_parse(this->readln_string().view());
-        return static_cast<T>(obj);
+        io_base<T>::readln(*this, obj);
+        return obj.value();
     }
 
-    template <typename T>
+    template <typename T, enable_if_t<is_packaged_v<T>, int> = 0>
     void readln(T& value) {
-        value = _MSTL move(this->readln<T>());
+        package_t<T> obj;
+        io_base<package_t<T>>::readln(*this, obj);
+        value = _MSTL move(static_cast<T>(obj));
+    }
+
+    template <typename T, enable_if_t<!is_packaged_v<T>, int> = 0>
+    void readln(T& value) {
+        io_base<T>::readln(*this, value);
     }
 
     void clear();
-    void pause(string_view msg = "press enter to continue...");
+    void pause(string_view msg = "Press any char to continue...");
+    bool confirmation(string_view prompt = "Are you sure? (y/n): ", char yes = 'y', char no = 'n');
+    string password(string_view prompt = "Password: ",  char mask = '*', bool show_length = false);
 
     void set_color(const integer32& color);
     void set_color(const color& color, bool use_256_color = true);
     void set_background_color(const color& color, bool use_256_color = true);
     void reset_color();
+
+    void progress_bar(
+        double percentage, int width = 50, bool show_percentage = true,
+        char fill_char = '#', char empty_char = ' ');
+
+    void set_cursor_position(int row, int column);
+    void save_cursor_position();
+    void restore_cursor_position();
+    void hide_cursor();
+    void show_cursor();
+
+    console_size get_console_size() const;
+    bool is_terminal_resized();
+
+    bool supports_colors() const;
+    bool supports_truecolor() const;
+    bool supports_unicode() const;
+    bool is_interactive() const;
+
+    string console_type() const;
+
+    void typewriter_print(string_view text,
+        milliseconds delay_per_char = milliseconds(50),
+        bool with_sound = false);
+
+    void typewriter_println(string_view text,
+        milliseconds delay_per_char = milliseconds(50),
+        bool with_sound = false);
+
+    void beep();
+    void flash_screen();
+
+    void notification(string_view message,
+        milliseconds duration = milliseconds(2000),
+        bool play_sound = true);
+
+    void fade_in(string_view text,
+        milliseconds duration = milliseconds(1000),
+        const color& start_color = color::black(),
+        const color& end_color = color::white());
+
+    void fade_out(string_view text,
+        milliseconds duration = milliseconds(1000),
+        const color& start_color = color::white(),
+        const color& end_color = color::black());
+
+    void fade_in_out(string_view text,
+        milliseconds in_duration = milliseconds(500),
+        milliseconds hold_duration = milliseconds(1000),
+        milliseconds out_duration = milliseconds(500));
 };
 
 
@@ -186,41 +220,47 @@ struct io_base<T, enable_if_t<is_base_of_v<_MSTL_RANGES view_base<T>, T>>> {
             }
             result += " ]";
         }
-        console.write_string(result.view());
+        console.print_string(result.view());
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iobject<T>, T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(value.to_string());
+        console.print_string(value.to_string());
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<icollector<T>, T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(to_string(value));
+        console.print_string(to_string(value));
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<iobject<T>, T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(value.to_string());
+        console.print_string(value.to_string());
     }
     static void read(sys_console& console, T& value) {
-        value = iobject<T>::parse(console.readln_string().view());
+        value = iobject<T>::parse(console.read().view());
+    }
+    static void readln(sys_console& console, T& value) {
+        value = iobject<T>::parse(console.readln().view());
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_packaged_v<T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
     static void read(sys_console& console, T& value) {
-        value = package_t<T>::parse(console.readln_string().view());
+        value = package_t<T>::parse(console.read().view());
+    }
+    static void readln(sys_console& console, T& value) {
+        value = package_t<T>::parse(console.readln().view());
     }
 };
 
@@ -228,52 +268,49 @@ struct io_base<T, enable_if_t<is_packaged_v<T>>> {
 template <typename T>
 struct io_base<T, enable_if_t<is_null_pointer_v<T>>> {
     static void write(sys_console& console, nullptr_t) {
-        console.write_string(_MSTL to_string(nullptr));
+        console.print_string(_MSTL to_string(nullptr));
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_pointer_v<T> && !is_cstring_v<T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename T, size_t N>
 struct io_base<T[N], enable_if_t<is_character_v<T>>> {
     static void write(sys_console& console, const T(& value)[N]) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename T, size_t N>
 struct io_base<const T[N], enable_if_t<is_character_v<T>>> {
     static void write(sys_console& console, const T(& value)[N]) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename T>
 struct io_base<T*, enable_if_t<is_character_v<T>>> {
     static void write(sys_console& console, const T* value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename CharT, typename Traits>
 struct io_base<basic_string_view<CharT, Traits>> {
     static void write(sys_console& console, const basic_string_view<CharT, Traits>& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename CharT, typename Traits, typename Alloc>
 struct io_base<basic_string<CharT, Traits, Alloc>> {
     static void write(sys_console& console, const basic_string<CharT, Traits, Alloc>& value) {
-        console.write_string(_MSTL to_string(value));
-    }
-    static void read(sys_console& console, basic_string<CharT, Traits, Alloc>& value) {
-        value = _MSTL move(console.readln_string());
+        console.print_string(_MSTL to_string(value));
     }
 };
 
@@ -281,7 +318,7 @@ struct io_base<basic_string<CharT, Traits, Alloc>> {
 template <typename T>
 struct io_base<T, enable_if_t<is_union_v<T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
@@ -289,14 +326,14 @@ struct io_base<T, enable_if_t<is_union_v<T>>> {
 template <typename T>
 struct io_base<T, enable_if_t<is_unbounded_array_v<T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
 template <typename T>
 struct io_base<T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>>> {
     static void write(sys_console& console, const T& value) {
-        console.write_string(_MSTL to_string(value));
+        console.print_string(_MSTL to_string(value));
     }
 };
 
@@ -436,6 +473,12 @@ void printcln(const color& color, const This& t, const Rests&... r) {
 template <typename... Args>
 void printf(const string_view fmt, Args&&... args) {
     console.printf(fmt, _MSTL forward<Args>(args)...);
+}
+
+template <typename... Args>
+void printfln(const string_view fmt, Args&&... args) {
+    console.printf(fmt, _MSTL forward<Args>(args)...);
+    println();
 }
 
 MSTL_END_NAMESPACE__

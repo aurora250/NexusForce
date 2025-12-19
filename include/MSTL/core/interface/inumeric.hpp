@@ -1,6 +1,5 @@
 #ifndef MSTL_CORE_INTERFACE_INUMERIC_HPP__
 #define MSTL_CORE_INTERFACE_INUMERIC_HPP__
-#include "../typeinfo/type_traits.hpp"
 #include "../typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
