@@ -411,6 +411,16 @@ void test_device() {
     }
 }
 
+void test_process() {
+    auto pi = process::create_process(
+        "python3", {(res_root / "test.py").str()}, true);
+    int res = process::wait_for_process(pi);
+    println(res);
+    if (res == 0) {
+        println(pi.stdout_output);
+    }
+}
+
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
     println(_MSTL random_lcd::next_int(10, 20), random_lcd::next_int(10, 20), random_lcd::next_int(10, 20));
@@ -1995,8 +2005,15 @@ void periodic_work(int counter) {
     println("Periodic task #" + to_string(counter));
 }
 
+
+static thread_pool& thread_pool_instance() {
+    static thread_pool instance;
+    return instance;
+}
+
+
 void test_ext_tpool() {
-    thread_pool& pool = thread_pool::instance();
+    thread_pool& pool = thread_pool_instance();
     pool.start(5);
 
     pool.submit_task([]{ println("Normal task"); });
@@ -2115,7 +2132,7 @@ void test_dns() {
 }
 
 void test_tpool() {
-    thread_pool& pool = thread_pool::instance();
+    thread_pool& pool = thread_pool_instance();
     pool.start(5);
     pool.submit_task(test_vector);
     pool.submit_task(test_list);
@@ -2141,6 +2158,7 @@ void test_tpool() {
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);
+    pool.submit_task(test_process);
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);
     pool.submit_task(test_color);

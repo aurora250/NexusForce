@@ -136,7 +136,7 @@ sudo make install
 
 定义假随机数生成类`random_lcd`、`random_mt`和基于硬件噪声的真随机数生成类`secret`。
 
-- [socket](include/MSTL/network/socket.hpp)
+- [socket](include/MSTL/network/tcp/tcp_socket.hpp)
 
 定义网络套接字类`socket`。
 

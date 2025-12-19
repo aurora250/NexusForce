@@ -248,5 +248,6 @@ void test_dbpool();
 void test_ext_tpool();
 void test_tpool();
 void test_dns();
+void test_process();
 
 #endif //TRY_H

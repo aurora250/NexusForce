@@ -17,25 +17,26 @@ public:
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::PROCESS_INFORMATION pi;
         ::DWORD process_id;
+        ::HANDLE hStdoutRead;
+        ::HANDLE hStdoutWrite;
 #else
         ::pid_t process_id;
+        int stdout_fd[2];  // [0] read，[1] write
 #endif
         bool is_running;
+        string stdout_output;
     };
 
-    static process_info create_process(const string& executable, const vector<string>& args = {});
-    static int wait_for_process(const process_info& info, int timeout_ms = -1);
+    static process_info create_process(
+        const string& executable,
+        const vector<string>& args = {},
+        bool capture_output = false);
+
+    static int wait_for_process(process_info& info, int timeout_ms = -1);
 
     static bool terminate_process(const process_info& info) noexcept;
-    static bool is_process_running(const process_info& info) noexcept;
 
-private:
-#ifdef MSTL_PLATFORM_WINDOWS__
-    static string build_command_line(const string& executable, const vector<string>& args);
-#else
-    static char** build_argv(const string& executable, const vector<string>& args);
-    static void free_argv(char** argv) noexcept;
-#endif
+    static bool is_process_running(const process_info& info) noexcept;
 };
 
 MSTL_END_NAMESPACE__

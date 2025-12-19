@@ -17,6 +17,8 @@ enum class cv_status {
 };
 
 
+MSTL_BEGIN_INNER__
+
 class MSTL_API condition_variable_base {
 public:
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -44,13 +46,15 @@ public:
     void notify_all() noexcept;
 };
 
+MSTL_END_INNER__
+
 
 class condition_variable {
 public:
-    using steady_clock = steady_clock;
-    using system_clock = system_clock;
-    using base_type = condition_variable_base;
-    using clock_t = steady_clock;
+    using steady_clock = _MSTL_CHRONO steady_clock;
+    using system_clock = _MSTL_CHRONO system_clock;
+    using base_type = _INNER condition_variable_base;
+    using clock_t = _MSTL_CHRONO steady_clock;
 
 private:
     base_type cond_;

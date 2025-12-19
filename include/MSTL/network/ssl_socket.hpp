@@ -1,6 +1,6 @@
 #ifndef MSTL_NETWORK_SSL_SOCKET_HPP__
 #define MSTL_NETWORK_SSL_SOCKET_HPP__
-#include "socket.hpp"
+#include "./tcp/tcp_socket.hpp"
 #ifdef MSTL_SUPPORT_OPENSSL__
 #include <openssl/ssl.h>
 MSTL_BEGIN_NAMESPACE__
@@ -8,7 +8,7 @@ MSTL_BEGIN_NAMESPACE__
 class MSTL_API ssl_socket {
 public:
     ssl_socket() noexcept = default;
-    ssl_socket(::SSL_CTX* ctx, const socket& sock);
+    ssl_socket(::SSL_CTX* ctx, const tcp_socket& sock);
     ~ssl_socket() { close(); }
 
     MSTL_NODISCARD bool accept() const;

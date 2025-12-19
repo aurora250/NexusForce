@@ -62,7 +62,7 @@ enum class DEVICE_EVENT {
 
 
 struct device_info {
-    path path;
+    _MSTL path path;
     string friendly_name;
     string hardware_id;
     string manufacturer;

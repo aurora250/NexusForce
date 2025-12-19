@@ -4,7 +4,7 @@
 #include <openssl/err.h>
 MSTL_BEGIN_NAMESPACE__
 
-ssl_socket::ssl_socket(SSL_CTX* ctx, const socket& sock) {
+ssl_socket::ssl_socket(SSL_CTX* ctx, const tcp_socket& sock) {
     ssl_ = ::SSL_new(ctx);
     if (!ssl_) {
         printcln(color::red(), "SSL_new failed: ", ::ERR_error_string(::ERR_get_error(), nullptr));

@@ -140,7 +140,7 @@ Defines error types and quick-invocation macros. All error types in this project
 
 Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardware noise-based true random number generator (`secret`).
 
-- [socket](include/MSTL/network/socket.hpp)
+- [socket](include/MSTL/network/tcp/tcp_socket.hpp)
 
 Defines the network socket class `socket`.
 

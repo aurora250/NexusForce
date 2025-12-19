@@ -10,7 +10,7 @@ MSTL_BEGIN_NAMESPACE__
 class MSTL_API http_client {
 private:
     dns_client dns_{};
-    socket sock_{};
+    tcp_socket sock_{};
 #ifdef MSTL_SUPPORT_OPENSSL__
     ssl_context ssl_ctx_{};
     ssl_socket ssl_sock_{};

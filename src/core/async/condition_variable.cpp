@@ -1,6 +1,7 @@
 #include <MSTL/core/async/condition_variable.hpp>
 #include <MSTL/core/exception/terminate.hpp>
 MSTL_BEGIN_NAMESPACE__
+MSTL_BEGIN_INNER__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 static ::DWORD timespec_to_relative_ms(const timespec& abs, const bool is_monotonic) {
@@ -129,4 +130,5 @@ void condition_variable_base::notify_all() noexcept {
 #endif
 }
 
+MSTL_END_INNER__
 MSTL_END_NAMESPACE__

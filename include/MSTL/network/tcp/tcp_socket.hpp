@@ -1,6 +1,6 @@
 #ifndef MSTL_NETWORK_SOCKET_HPP__
 #define MSTL_NETWORK_SOCKET_HPP__
-#include "../core/time/duration.hpp"
+#include "../../core/time/duration.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <WinSock2.h>
 #pragma comment(lib, "ws2_32.lib")
@@ -34,7 +34,7 @@ enum class SOCKET_PROTOCOL : uint16_t {
 };
 
 
-class socket {
+class tcp_socket {
 public:
 #ifdef MSTL_PLATFORM_WINDOWS__
     using socket_t = ::SOCKET;
@@ -48,22 +48,22 @@ private:
     socket_t sockfd_ = INVALID_MARK;
 
 public:
-    socket() noexcept = default;
-    explicit socket(const socket_t fd) : sockfd_(_MSTL move(fd)) {}
+    tcp_socket() noexcept = default;
+    explicit tcp_socket(const socket_t fd) : sockfd_(_MSTL move(fd)) {}
 
-    explicit socket(const SOCKET_DOMAIN domain,
+    explicit tcp_socket(const SOCKET_DOMAIN domain,
         const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
         const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
         this->open(domain, type, protocol);
     }
 
-    socket(const socket&) = delete;
-    socket& operator =(const socket&) = delete;
+    tcp_socket(const tcp_socket&) = delete;
+    tcp_socket& operator =(const tcp_socket&) = delete;
 
-    socket(socket&& other) noexcept : sockfd_(other.sockfd_) {
+    tcp_socket(tcp_socket&& other) noexcept : sockfd_(other.sockfd_) {
         other.sockfd_ = INVALID_MARK;
     }
-    socket& operator =(socket&& other) noexcept {
+    tcp_socket& operator =(tcp_socket&& other) noexcept {
         if (this != &other) {
             close();
             sockfd_ = other.sockfd_;
@@ -72,7 +72,7 @@ public:
         return *this;
     }
 
-    ~socket() {
+    ~tcp_socket() {
         close();
     }
 
@@ -100,30 +100,30 @@ public:
         }
     }
 
-    MSTL_NODISCARD socket accept() const noexcept {
+    MSTL_NODISCARD tcp_socket accept() const noexcept {
         ::sockaddr_in client_addr{};
         ::socklen_t client_len = sizeof(client_addr);
-        return socket{::accept(
+        return tcp_socket{::accept(
             sockfd_,
             reinterpret_cast<::sockaddr *>(&client_addr),
             &client_len)};
     }
 
-    bool listen(const int backlog) const noexcept {
+    MSTL_NODISCARD bool listen(const int backlog) const noexcept {
         return ::listen(sockfd_, backlog) == 0;
     }
 
-    bool bind(::sockaddr_in& addr) const noexcept {
+    MSTL_NODISCARD bool bind(::sockaddr_in& addr) const noexcept {
         return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) == 0;
     }
 
-    bool reuse_addr() const noexcept {
+    MSTL_NODISCARD bool reuse_addr() const noexcept {
         constexpr int opt = 1;
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR,
             reinterpret_cast<const char*>(&opt), sizeof(opt)) == 0;
     }
 
-    bool set_receive_timeout(const milliseconds timeout) const noexcept {
+    MSTL_NODISCARD bool set_receive_timeout(const milliseconds timeout) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO,
@@ -137,7 +137,7 @@ public:
 #endif
     }
 
-    bool set_send_timeout(const milliseconds timeout) const noexcept {
+    MSTL_NODISCARD bool set_send_timeout(const milliseconds timeout) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO,
@@ -156,7 +156,7 @@ public:
     }
 
     MSTL_NODISCARD bool connect(const ::sockaddr_in& addr) const noexcept {
-        return socket::connect(reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr));
+        return tcp_socket::connect(reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr));
     }
 
     MSTL_NODISCARD ssize_t send(const void* buf, const size_t len, const int flags = 0) const noexcept {

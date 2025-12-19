@@ -87,17 +87,6 @@ void thread_pool::thread_function(const id_type thread_id) {
     }
 }
 
-thread_pool::thread_pool()
-    : init_thread_size_(0),
-    thread_threshhold_(THREAD_POOL_THREAD_MAX_THRESHHOLD),
-    task_size_(0),
-    idle_thread_size_(0),
-    task_threshhold_(THREAD_POOL_TASK_MAX_THRESHHOLD),
-    pool_mode_(THREAD_POOL_MODE::MODE_FIXED),
-    is_running_(false),
-    total_submitted_tasks_(0),
-    total_completed_tasks_(0) {}
-
 bool thread_pool::set_mode(const THREAD_POOL_MODE mode) noexcept {
     if (is_running_) return false;
     pool_mode_ = mode;

@@ -8,7 +8,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 bool http_client::try_connect(const string& host, const uint16_t port, const string& ip, const bool ipv6) {
-    socket s(
+    tcp_socket s(
         ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
         SOCKET_TYPE::STREAM,
         SOCKET_PROTOCOL::TCP);

@@ -85,7 +85,7 @@ void sys_console::flush_unsafe() const {
 #endif
 }
 
-void sys_console::init_console() {
+sys_console::sys_console() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     out_ = ::GetStdHandle(STD_OUTPUT_HANDLE);
     in_ = ::GetStdHandle(STD_INPUT_HANDLE);
@@ -104,10 +104,6 @@ void sys_console::init_console() {
 #elif defined(MSTL_PLATFORM_LINUX__)
     out_ = STDOUT_FILENO;
     in_ = STDIN_FILENO;
-
-    // if (!::isatty(out_) || !::isatty(in_)) {
-    //     Exception(DeviceOperateError("Not a terminal device"));
-    // }
 #endif
 }
 

@@ -678,8 +678,9 @@ public:
 
 	MSTL_CONSTEXPR20 iterator erase(iterator position)
 		noexcept(is_nothrow_move_assignable_v<value_type>) {
-		if (position + 1 != this->end())
-			_MSTL copy(position + 1, this->end(), position);
+		if (position + 1 != this->end()) {
+		    _MSTL move(position + 1, this->end(), position);
+		}
 		--finish_;
 		_MSTL destroy(finish_);
 		return position;

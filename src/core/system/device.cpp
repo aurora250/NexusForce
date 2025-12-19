@@ -13,6 +13,7 @@
 #include <dirent.h>
 #include <libudev.h>
 #include <cstring>
+#include <cerrno>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

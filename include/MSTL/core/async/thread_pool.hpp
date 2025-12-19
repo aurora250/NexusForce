@@ -91,43 +91,38 @@ private:
 	};
 
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<manual_thread>> threads_map_;
-	_MSTL timer_scheduler<steady_clock> timer_;
+	_MSTL timer_scheduler<steady_clock> timer_{};
 
-	id_type init_thread_size_;
-	size_t thread_threshhold_;
+	id_type init_thread_size_{0};
+	size_t thread_threshhold_{THREAD_POOL_THREAD_MAX_THRESHHOLD};
 
-	_MSTL priority_queue<priority_task> task_queue_;
-	_MSTL atomic_uint task_size_;
-	_MSTL atomic_uint idle_thread_size_;
-	size_t task_threshhold_;
+	_MSTL priority_queue<priority_task> task_queue_{};
+	_MSTL atomic_uint task_size_{0};
+	_MSTL atomic_uint idle_thread_size_{0};
+	size_t task_threshhold_{THREAD_POOL_TASK_MAX_THRESHHOLD};
 
-	_MSTL mutex task_queue_mtx_;
-	_MSTL condition_variable not_full_;
-	_MSTL condition_variable not_empty_;
-	_MSTL condition_variable exit_cond_;
+	_MSTL mutex task_queue_mtx_{};
+	_MSTL condition_variable not_full_{};
+	_MSTL condition_variable not_empty_{};
+	_MSTL condition_variable exit_cond_{};
 
-	_MSTL atomic<THREAD_POOL_MODE> pool_mode_;
-	_MSTL atomic_bool is_running_;
+	_MSTL atomic<THREAD_POOL_MODE> pool_mode_{THREAD_POOL_MODE::MODE_FIXED};
+	_MSTL atomic_bool is_running_{false};
 
-	_MSTL atomic_size_t total_submitted_tasks_;
-	_MSTL atomic_size_t total_completed_tasks_;
+	_MSTL atomic_size_t total_submitted_tasks_{0};
+	_MSTL atomic_size_t total_completed_tasks_{0};
 
 
     void thread_function(id_type thread_id);
 
-    thread_pool();
+public:
+    thread_pool() = default;
     ~thread_pool() { if(is_running_) stop(); }
 
-public:
     thread_pool(const thread_pool&) = delete;
-    thread_pool(thread_pool&&) = delete;
     thread_pool& operator =(const thread_pool&) = delete;
+    thread_pool(thread_pool&&) = delete;
     thread_pool& operator =(thread_pool&&) = delete;
-
-	static thread_pool& instance() {
-		static thread_pool instance;
-		return instance;
-	}
 
     bool set_mode(THREAD_POOL_MODE mode) noexcept;
     bool set_task_threshhold(size_t threshhold) noexcept;

@@ -2,9 +2,10 @@
 #define MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #include "../algorithm/compare.hpp"
 #include "../async/atomic.hpp"
-#include "unique_ptr.hpp"
+#include "../exception/exception.hpp"
 #include "construct.hpp"
 #include "allocator_traits.hpp"
+#include <new>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

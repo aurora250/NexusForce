@@ -1,8 +1,5 @@
 function(configure_compiler_options target)
     if(MSVC)
-        set_property(TARGET ${target} PROPERTY
-                MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
-        )
         target_compile_options(${target} PRIVATE
                 $<$<COMPILE_LANGUAGE:CXX>:
                 /utf-8
@@ -313,6 +310,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
@@ -341,29 +340,28 @@ set_target_properties(MSTL PROPERTIES
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS OFF
         LINKER_LANGUAGE CXX
-        VERSION 1.4.0
-        SOVERSION 1
+        VERSION ${MSTL_VERSION}
+        SOVERSION ${MSTL_VERSION_MAJOR}
 
-        BUILD_WITH_INSTALL_RPATH TRUE
-        INSTALL_RPATH "$ORIGIN/../lib"
-        SKIP_BUILD_RPATH FALSE
-        BUILD_RPATH_USE_ORIGIN TRUE
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
 
-        ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
-        LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
-        RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug
+        ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/lib/Debug"
+        LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/lib/Debug"
+        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/bin/Debug"
 
-        ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
-        LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
-        RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release
+        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/lib/Release"
+        LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/lib/Release"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin/Release"
 
-        ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
-        LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
-        RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/bin/RelWithDebInfo
+        ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_BINARY_DIR}/lib/RelWithDebInfo"
+        LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_BINARY_DIR}/lib/RelWithDebInfo"
+        RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_BINARY_DIR}/bin/RelWithDebInfo"
 
-        ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
-        LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
-        RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
+        ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_BINARY_DIR}/lib/MinSizeRel"
+        LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_BINARY_DIR}/lib/MinSizeRel"
+        RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_BINARY_DIR}/bin/MinSizeRel"
 
         $<$<PLATFORM_ID:Windows>:WINDOWS_EXPORT_ALL_SYMBOLS ON>
 )
@@ -377,16 +375,25 @@ target_include_directories(MSTL
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# 定义导出宏
-target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
+# 定义宏
+if(MSVC)
+    target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
+endif()
 
+target_compile_definitions(MSTL
+        PRIVATE
+        $<$<CONFIG:Debug>:MSTL_STATE_DEBUG__>
+)
+
+# 编译选项
 configure_compiler_options(MSTL)
 
 # Windows链接系统库
 if(WIN32)
     target_link_libraries(MSTL PUBLIC
             ws2_32 wsock32 SetupAPI cfgmgr32
-            DbgHelp synchronization Shell32)
+            DbgHelp synchronization Shell32
+    )
 endif()
 
 
@@ -636,24 +643,31 @@ else()
     message(STATUS "CUDA support disabled")
 endif()
 
+
 find_and_link_zlib(MSTL)
+
+
 find_and_link_openssl(MSTL)
+
 
 # 安装库文件
 install(TARGETS MSTL
-        EXPORT MSTLTargets # 导出目标
+        EXPORT MSTLTargets
 
-        LIBRARY
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
-        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
-
-        ARCHIVE
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
-        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
-
-        RUNTIME
-        DESTINATION ${CMAKE_INSTALL_BINDIR}/$<CONFIG>
-        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
+if(UNIX AND NOT APPLE)
+    install(TARGETS MSTL
+            LIBRARY
+                DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                COMPONENT Runtime
+            ARCHIVE
+                DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                COMPONENT Development
+    )
+endif()

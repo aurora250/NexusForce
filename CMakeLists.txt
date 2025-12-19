@@ -1,30 +1,36 @@
 cmake_minimum_required(VERSION 3.17)
-project(MSTL LANGUAGES CXX)
+
+set(MSTL_VERSION_MAJOR 1)
+set(MSTL_VERSION_MINOR 4)
+set(MSTL_VERSION_PATCH 0)
+set(MSTL_VERSION "${MSTL_VERSION_MAJOR}.${MSTL_VERSION_MINOR}.${MSTL_VERSION_PATCH}")
+
+project(MSTL
+        VERSION ${MSTL_VERSION}
+        LANGUAGES CXX
+)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-if(NOT CMAKE_CONFIGURATION_TYPES)
+if(CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_CONFIGURATION_TYPES
-            "Debug;Release;RelWithDebInfo;MinSizeRel")
-    set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
-            "Configurations for MSTL" FORCE)
+            "Debug;Release;RelWithDebInfo;MinSizeRel"
+            CACHE STRING "Configurations for MSTL" FORCE
+    )
 endif()
 
 if(MSVC)
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
-endif()
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if(CMAKE_CXX_STANDARD LESS 14)
+elseif(CMAKE_CXX_STANDARD LESS 14)
     message(FATAL_ERROR "MSTL can only be compiled with C++14 or higher standard")
 endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
@@ -96,7 +102,7 @@ set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/MSTL)
 
 write_basic_package_version_file(
         ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfigVersion.cmake
-        VERSION 1.4.0
+        VERSION ${MSTL_VERSION}
         COMPATIBILITY SameMajorVersion
 )
 

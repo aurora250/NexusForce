@@ -12,11 +12,11 @@ struct io_base;
 
 class MSTL_API sys_console {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::HANDLE out_;
-    ::HANDLE in_;
+    ::HANDLE out_{INVALID_HANDLE_VALUE};
+    ::HANDLE in_{INVALID_HANDLE_VALUE};
 #else
-    int out_;
-    int in_;
+    int out_{-1};
+    int in_{-1};
 #endif
     mutex mutex_{};
 
@@ -30,15 +30,8 @@ private:
 
     void flush_unsafe() const;
 
-    void init_console();
-
 private:
-    sys_console() { this->init_console(); }
-
-    explicit sys_console(const color& color, bool use_256_color = true)  {
-        this->init_console();
-        this->set_color(color, use_256_color);
-    }
+    sys_console();
 
 public:
     sys_console(const sys_console&) = delete;

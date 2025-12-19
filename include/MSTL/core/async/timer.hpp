@@ -8,9 +8,6 @@
 #include "../async/atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class thread_pool;
-
-
 template <typename Clock>
 class timer_scheduler {
 public:
@@ -81,6 +78,7 @@ private:
         }
     }
 
+public:
     timer_scheduler() : next_id_(0), stopped_(false) {
         thread_ = _MSTL thread(&timer_scheduler::run, this);
     }
@@ -93,16 +91,10 @@ private:
         }
     }
 
-public:
-    static timer_scheduler& instance() {
-        static timer_scheduler inst;
-        return inst;
-    }
-
     timer_scheduler(const timer_scheduler&) = delete;
     timer_scheduler& operator=(const timer_scheduler&) = delete;
-    timer_scheduler(timer_scheduler&&) = delete;
-    timer_scheduler& operator=(timer_scheduler&&) = delete;
+    timer_scheduler(timer_scheduler&&) = default;
+    timer_scheduler& operator=(timer_scheduler&&) = default;
 
     token add_task(time_point expire, handler_type&& handler) {
         _MSTL unique_lock<_MSTL mutex> lock(mutex_);
@@ -151,7 +143,7 @@ public:
         cv_.notify_one();
     }
 
-    size_t size() const {
+    MSTL_NODISCARD size_t size() const {
         _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(mutex_));
         return nodes_.size();
     }
@@ -168,22 +160,16 @@ public:
     using handler_type = typename timer_scheduler<Clock>::handler_type;
 
 private:
-    timer_scheduler<Clock>& scheduler_;
-    token task_id_;
-    time_point expire_;
+    timer_scheduler<Clock> scheduler_{};
+    token task_id_ = 0;
+    time_point expire_ = clock_type::now();
 
 public:
-    basic_timer()
-        : scheduler_(timer_scheduler<Clock>::instance())
-        , task_id_(0)
-        , expire_(clock_type::now()) {}
-
-    ~basic_timer() {
-        cancel();
-    }
+    basic_timer() = default;
+    ~basic_timer() { cancel(); }
 
     basic_timer(const basic_timer&) = delete;
-    basic_timer& operator=(const basic_timer&) = delete;
+    basic_timer& operator =(const basic_timer&) = delete;
 
     basic_timer(basic_timer&& other) noexcept
         : scheduler_(other.scheduler_)
@@ -192,7 +178,7 @@ public:
         other.task_id_ = 0;
     }
 
-    basic_timer& operator=(basic_timer&& other) noexcept {
+    basic_timer& operator =(basic_timer&& other) noexcept {
         if (this != &other) {
             cancel();
             task_id_ = other.task_id_;
@@ -216,9 +202,8 @@ public:
         expires_after(_MSTL_CHRONO milliseconds(milliseconds));
     }
 
-    time_point expiry() const {
-        return expire_;
-    }
+    MSTL_NODISCARD time_point expiry() const { return expire_; }
+    MSTL_NODISCARD bool is_active() const { return task_id_ != 0; }
 
     template <typename WaitHandler>
     void async_wait(WaitHandler&& handler) {
@@ -232,10 +217,6 @@ public:
             scheduler_.cancel(task_id_);
             task_id_ = 0;
         }
-    }
-
-    bool is_active() const {
-        return task_id_ != 0;
     }
 };
 

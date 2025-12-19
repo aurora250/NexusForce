@@ -11,7 +11,7 @@ void http_server::start_workers(const int thread_count) {
 
 void http_server::accept_conns() {
     while (running_) {
-        socket client_socket = server_socket_.accept();
+        tcp_socket client_socket = server_socket_.accept();
         if (!client_socket.is_valid()) {
             if (running_) {
                 println("accept failed");
@@ -46,7 +46,7 @@ void http_server::accept_conns() {
     }
 }
 
-void http_server::handle_client(const socket& client_socket
+void http_server::handle_client(const tcp_socket& client_socket
 #ifdef MSTL_SUPPORT_OPENSSL__
     , const ssl_socket* ssl_sock) {
     http_request request = parse_request(client_socket, ssl_sock);
@@ -159,7 +159,7 @@ string http_server::url_decode(const string_view str) {
     return result;
 }
 
-http_request http_server::parse_request(const socket& client_socket
+http_request http_server::parse_request(const tcp_socket& client_socket
 #ifdef MSTL_SUPPORT_OPENSSL__
     , const ssl_socket* ssl_sock
 #endif
@@ -302,7 +302,7 @@ string http_server::build_response_str(const http_response& response) {
     return result;
 }
 
-void http_server::send_response(const socket& client_socket, const http_response& response
+void http_server::send_response(const tcp_socket& client_socket, const http_response& response
 #ifdef MSTL_SUPPORT_OPENSSL__
     , const ssl_socket* ssl_sock
 #endif
@@ -380,7 +380,7 @@ bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
     }
 #endif
 
-    server_socket_ = _MSTL move(socket(domain, type, protocol));
+    server_socket_ = _MSTL move(tcp_socket(domain, type, protocol));
     if (!server_socket_.is_valid()) {
         printcln(color::red(), "socket creation failed");
         return false;

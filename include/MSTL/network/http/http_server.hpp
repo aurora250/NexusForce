@@ -7,7 +7,7 @@ MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API http_server {
 private:
-    socket server_socket_{};
+    tcp_socket server_socket_{};
 #ifdef MSTL_SUPPORT_OPENSSL__
     ssl_context ssl_ctx_{};
 #endif
@@ -22,7 +22,7 @@ private:
     vector<_MSTL thread> worker_threads_;
 
     _INNER __session_manager session_manager_;
-    HTTP_COOKIE_NAME cookie_name_ = HTTP_COOKIE_NAME::JSESSIONID;
+    HTTP_COOKIE_NAME cookie_name_{HTTP_COOKIE_NAME::JSESSIONID};
 
     http_router router_;
 
@@ -30,7 +30,7 @@ private:
     void start_workers(int thread_count);
 
     void accept_conns();
-    void handle_client(const socket& client_socket
+    void handle_client(const tcp_socket& client_socket
 #ifdef MSTL_SUPPORT_OPENSSL__
         , const ssl_socket* ssl_sock
 #endif
@@ -41,13 +41,13 @@ private:
     static void parse_url_encoded(string_view data, unordered_map<string, string>& params);
     static string url_decode(string_view str);
 
-    http_request parse_request(const socket& client_socket
+    http_request parse_request(const tcp_socket& client_socket
 #ifdef MSTL_SUPPORT_OPENSSL__
         , const ssl_socket* ssl_sock
 #endif
     );
     static string build_response_str(const http_response& response);
-    static void send_response(const socket& client_socket, const http_response& response
+    static void send_response(const tcp_socket& client_socket, const http_response& response
 #ifdef MSTL_SUPPORT_OPENSSL__
         , const ssl_socket* ssl_sock
 #endif

@@ -1,8 +1,8 @@
-#include <MSTL/core/utility/packages.hpp>
+#include <MSTL/network/tcp/tcp_socket.hpp>
 #include <MSTL/core/async/async.hpp>
 #include <MSTL/core/string/vsprintf.hpp>
+#include <MSTL/core/utility/packages.hpp>
 #include <MSTL/network/dns/dns_client.hpp>
-#include <MSTL/network/socket.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif
@@ -128,7 +128,7 @@ string dns_client::decode_domain_name(const vector<byte_t>& data, size_t& offset
 vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
     ensure_winsock_initialized();
 
-    const socket udp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::DATAGRAM, SOCKET_PROTOCOL::UDP);
+    const tcp_socket udp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::DATAGRAM, SOCKET_PROTOCOL::UDP);
 
     if (!udp_sock.is_valid()) {
         throw_exception(dns_exception("Failed to create UDP socket"));
@@ -154,7 +154,7 @@ vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
 vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
     ensure_winsock_initialized();
 
-    const socket tcp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::STREAM, SOCKET_PROTOCOL::TCP);
+    const tcp_socket tcp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::STREAM, SOCKET_PROTOCOL::TCP);
 
     if (!tcp_sock.is_valid()) {
         throw_exception(dns_exception("Failed to create TCP socket"));
