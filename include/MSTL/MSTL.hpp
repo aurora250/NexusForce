@@ -46,6 +46,7 @@
 #include "core/system/device/storage_device.hpp"
 #include "core/system/process.hpp"
 #include "core/system/signal.hpp"
+#include "core/system/environment.hpp"
 #include "core/time/clocks.hpp"
 #include "core/typeinfo/check_type.hpp"
 #include "core/utility/any.hpp"

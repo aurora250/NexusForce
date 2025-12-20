@@ -65,6 +65,18 @@ struct allocate_gpu_tag {
 };
 
 
+
+struct defer_lock_tag {
+    constexpr defer_lock_tag() noexcept = default;
+};
+MSTL_INLINE17 constexpr _MSTL_TAG defer_lock_tag defer_lock{};
+
+struct try_lock_tag {
+    constexpr try_lock_tag() noexcept = default;
+};
+MSTL_INLINE17 constexpr _MSTL_TAG try_lock_tag try_lock{};
+
+
 struct string_serializer_tag {};
 struct binary_serializer_tag {};
 struct json_serializer_tag {};

@@ -49,7 +49,7 @@ public:
     template <typename Callable, typename... Args, typename = 
         enable_if_t<!is_same_v<remove_cvref_t<Callable>, jthread>>>
     explicit jthread(Callable&& func, Args&&... args)
-    : thread_{create(stop_source_, forward<Callable>(func), forward<Args>(args)...)} {}
+    : thread_{this->create(stop_source_, _MSTL forward<Callable>(func), _MSTL forward<Args>(args)...)} {}
 
     jthread(const jthread&) = delete;
     jthread(jthread&&) noexcept = default;
@@ -61,9 +61,9 @@ public:
         }
     }
 
-    jthread& operator=(const jthread&) = delete;
+    jthread& operator =(const jthread&) = delete;
 
-    jthread& operator=(jthread&& other) noexcept {
+    jthread& operator =(jthread&& other) noexcept {
         jthread(move(other)).swap(*this);
         return *this;
     }
@@ -89,7 +89,7 @@ public:
         return thread_.get_id();
     }
 
-    MSTL_NODISCARD native_handle_type native_handle() {
+    MSTL_NODISCARD native_handle_type native_handle() const {
         return thread_.native_handle();
     }
 

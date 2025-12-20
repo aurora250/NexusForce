@@ -1,5 +1,6 @@
 #include <MSTL/core/file/path.hpp>
 #include <MSTL/core/container/vector.hpp>
+#include <MSTL/core/system/environment.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -8,10 +9,6 @@
 #include <cstdlib>
 #include <cstdio>
 #include <unistd.h>
-#endif
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -210,36 +207,17 @@ path path::relative(const path& base) const {
 
 
 path path::current_path() {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    char buffer[MAX_PATH];
-    const ::DWORD len = ::GetCurrentDirectoryA(MAX_PATH, buffer);
-    if (len == 0) return path{};
-    return path(string(buffer, len));
-#elif defined(MSTL_PLATFORM_LINUX__)
-    char buffer[PATH_MAX];
-    if (::getcwd(buffer, PATH_MAX) != nullptr) {
-        return path(buffer);
-    }
-    return path{};
-#endif
+    return path(environment::current_directory());
 }
 
 path path::temp_directory_path() {
+    string temp(environment::temp_directory());
 #ifdef MSTL_PLATFORM_WINDOWS__
-    char buffer[MAX_PATH];
-    const ::DWORD len = ::GetTempPathA(MAX_PATH, buffer);
-    if (len == 0 || len > MAX_PATH) return path{};
-
-    string temp(buffer, len);
     if (!temp.empty() && (temp.back() == '\\' || temp.back() == '/')) {
         temp.pop_back();
     }
-    return path(_MSTL move(temp));
-#elif defined(MSTL_PLATFORM_LINUX__)
-    const char* tmp = ::getenv("TMPDIR");
-    if (!tmp) tmp = "/tmp";
-    return path(tmp);
 #endif
+    return path(_MSTL move(temp));
 }
 
 path& path::operator /=(const path& p) {

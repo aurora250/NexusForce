@@ -323,6 +323,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
+        core/system/environment.cpp
 )
 
 # 编译为动态库

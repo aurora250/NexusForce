@@ -1,27 +1,14 @@
 #include <MSTL/core/file/temp_file.hpp>
 #include <MSTL/core/time/clocks.hpp>
 #include <MSTL/core/async/thread.hpp>
+#include <MSTL/core/system/environment.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <cstdlib>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
 path temp_file::generate_temp_path(const string& prefix, const string& suffix) {
-    path temp_dir;
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-    char buffer[MAX_PATH];
-    const ::DWORD len = ::GetTempPathA(MAX_PATH, buffer);
-    if (len > 0 && len < MAX_PATH) {
-        temp_dir = path(string(buffer, len));
-    } else {
-        temp_dir = path("C:\\Temp");
-    }
-#elif defined(MSTL_PLATFORM_LINUX__)
-    const char* tmp = ::getenv("TMPDIR");
-    if (!tmp) tmp = "/tmp";
-    temp_dir = path(tmp);
-#endif
+    const path temp_dir(environment::temp_directory());
 
     const auto now = system_clock::now();
     const auto duration = now.time_since_epoch();

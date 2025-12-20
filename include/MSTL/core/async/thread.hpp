@@ -61,13 +61,13 @@ private:
         DETACHED
     };
 
-    struct thread_data_base {
-        virtual ~thread_data_base() = default;
+    struct data_base {
+        virtual ~data_base() = default;
         virtual void run() = 0;
     };
 
     template <typename Callable>
-    struct thread_data final : thread_data_base {
+    struct thread_data final : data_base {
         Callable func_;
 
         template <typename F>
@@ -88,47 +88,19 @@ private:
     id id_{};
     STATE state_ = NOT_A_THREAD;
 
-private:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    static unsigned int __stdcall thread_entry(void* arg) {
+    static unsigned int __stdcall thread_entry(void* arg);
 #else
-    static void* thread_entry(void* arg) {
+    static void* thread_entry(void* arg);
 #endif
-        const unique_ptr<thread_data_base> data(static_cast<thread_data_base*>(arg));
-        try {
-            data->run();
-        } catch (...) {
-            _MSTL terminate();
-        }
-#ifdef MSTL_PLATFORM_WINDOWS__
-        return 0;
-#else
-        return nullptr;
-#endif
-    }
+
+    void start_thread_impl(void* args);
 
     template <typename F>
     void start_thread(F&& f) {
         using data_type = thread_data<decay_t<F>>;
         unique_ptr<data_type> data = _MSTL make_unique<data_type>(_MSTL forward<F>(f));
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-        unsigned int thread_id;
-        handle_ = reinterpret_cast<native_handle_type>(
-            ::_beginthreadex(nullptr, 0, thread_entry, data.get(), 0, &thread_id)
-        );
-        if (handle_ == nullptr) {
-            throw_exception(thread_exception("Failed to create thread"));
-        }
-        id_ = id(thread_id);
-#else
-        native_handle_type tid;
-        if (::pthread_create(&tid, nullptr, thread_entry, data.get()) != 0) {
-            throw_exception(thread_exception("Failed to create thread"));
-        }
-        handle_ = tid;
-        id_ = id(tid);
-#endif
+        this->start_thread_impl(data.get());
         data.release();
         state_ = CREATED;
     }
@@ -150,11 +122,7 @@ public:
     thread(thread&& other) noexcept;
     thread& operator =(thread&& other) noexcept;
 
-    ~thread() {
-        if (joinable()) {
-            _MSTL terminate();
-        }
-    }
+    ~thread();
 
     MSTL_NODISCARD id get_id() const noexcept { return id_; }
     MSTL_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
@@ -164,22 +132,9 @@ public:
     void join();
     void detach();
 
-    void swap(thread& other) noexcept {
-        _MSTL swap(handle_, other.handle_);
-        _MSTL swap(id_, other.id_);
-        _MSTL swap(state_, other.state_);
-    }
+    void swap(thread& other) noexcept;
 
-    static uint32_t hardware_concurrency() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        ::SYSTEM_INFO sysinfo;
-        ::GetSystemInfo(&sysinfo);
-        return static_cast<uint32_t>(sysinfo.dwNumberOfProcessors);
-#else
-        const long nprocs = ::sysconf(_SC_NPROCESSORS_ONLN);
-        return nprocs > 0 ? static_cast<uint32_t>(nprocs) : 0;
-#endif
-    }
+    static uint32_t hardware_concurrency() noexcept;
 };
 
 

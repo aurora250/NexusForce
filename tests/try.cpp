@@ -434,6 +434,10 @@ void test_device() {
     }
 }
 
+void test_env_var() {
+    println(environment::all_envs());
+}
+
 void test_process() {
     auto pi = process::create_process(
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -450,6 +454,7 @@ void test_process() {
 }
 
 void test_zlib() {
+#ifdef MSTL_SUPPORT_ZLIB__
     {
         string original = "Hello, World! This is a test string for zlib compression. "
                         "The quick brown fox jumps over the lazy dog. "
@@ -565,6 +570,7 @@ void test_zlib() {
         printfln("  Ratio:  {:.2f}x", decomp.expansion_ratio());
         println();
     }
+#endif
 }
 
 void test_rnd() {
@@ -2304,6 +2310,7 @@ void test_tpool() {
     pool.submit_task(test_rnd);
     pool.submit_task(test_print);
     pool.submit_task(test_file);
+    pool.submit_task(test_env_var);
     pool.submit_task(test_process);
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);

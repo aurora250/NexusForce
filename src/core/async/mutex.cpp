@@ -1,4 +1,5 @@
 #include <MSTL/core/async/mutex.hpp>
+#include <MSTL/core/async/shared_mutex.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 mutex::mutex() {
