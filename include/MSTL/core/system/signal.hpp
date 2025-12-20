@@ -11,35 +11,54 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-enum class SIGNAL_EVENT : int32_t {
-    // Universal
-    INTERRUPT      = 1,
-    TERMINATE      = 2,
-    ABORT          = 3,
+enum class SIGNAL_EVENT {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    INTERRUPT      = CTRL_C_EVENT,
+    CTRL_BREAK     = CTRL_BREAK_EVENT,
+    CLOSE          = CTRL_CLOSE_EVENT,
+    LOGOFF         = CTRL_LOGOFF_EVENT,
+    SHUTDOWN       = CTRL_SHUTDOWN_EVENT,
 
-    // POSIX
-    ILLEGAL_INSTR  = 4,    // SIGILL
-    FLOATING_POINT = 5,    // SIGFPE
-    SEGMENT_FAULT  = 6,    // SIGSEGV
-    BUS_ERROR      = 7,    // SIGBUS
-    PIPE_BROKEN    = 8,    // SIGPIPE
-    ALARM          = 9,    // SIGALRM
-    TERM           = 10,   // SIGTERM
-    HANGUP         = 11,   // SIGHUP
-    USER1          = 12,   // SIGUSR1
-    USER2          = 13,   // SIGUSR2
+    TERMINATE      = 1000,
+    ABORT          = 1001,
+    ILLEGAL_INSTR  = 1002,
+    FLOATING_POINT = 1003,
+    SEGMENT_FAULT  = 1004,
+    BUS_ERROR      = 1005,
+    PIPE_BROKEN    = 1006,
+    ALARM          = 1007,
+    HANGUP         = 1008,
+    USER1          = 1009,
+    USER2          = 1010,
 
-    // Windows
-    CTRL_BREAK     = 14,
-    CLOSE          = 15,
-    LOGOFF         = 16,
-    SHUTDOWN       = 17,
+    TIMEOUT        = 2000,
+    CUSTOM_1       = 2001,
+    CUSTOM_2       = 2002,
+    FORCE_EXIT     = 9999
+#else
+    INTERRUPT      = SIGINT,
+    TERMINATE      = SIGTERM,
+    ABORT          = SIGABRT,
+    ILLEGAL_INSTR  = SIGILL,
+    FLOATING_POINT = SIGFPE,
+    SEGMENT_FAULT  = SIGSEGV,
+    BUS_ERROR      = SIGBUS,
+    PIPE_BROKEN    = SIGPIPE,
+    ALARM          = SIGALRM,
+    HANGUP         = SIGHUP,
+    USER1          = SIGUSR1,
+    USER2          = SIGUSR2,
 
-    //
-    TIMEOUT        = 100,
-    CUSTOM_1       = 101,
-    CUSTOM_2       = 102,
-    FORCE_EXIT     = 999
+    CTRL_BREAK     = 1000,
+    CLOSE          = 1001,
+    LOGOFF         = 1002,
+    SHUTDOWN       = 1003,
+
+    TIMEOUT        = SIGALRM,
+    CUSTOM_1       = 2000,
+    CUSTOM_2       = 2001,
+    FORCE_EXIT     = 9999
+#endif
 };
 
 template <>
@@ -50,7 +69,7 @@ struct hash<SIGNAL_EVENT> {
 };
 
 
-class signal_manager {
+class MSTL_API signal_manager {
 public:
     using signal_handler = function<bool(SIGNAL_EVENT, void*)>;
 
@@ -75,17 +94,16 @@ private:
     vector<pending_signal> pending_signals_;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    vector<DWORD> registered_windows_events_;
+    vector<::DWORD> registered_windows_events_;
 #else
     struct ::sigaction old_actions_[64];
     ::timer_t alarm_timer_{nullptr};
+
+    static unordered_map<SIGNAL_EVENT, int> windows_to_posix_map_;
 #endif
 
     thread signal_thread_;
     thread timeout_thread_;
-
-    static MSTL_THREAD_LOCAL SIGNAL_EVENT current_signal_;
-    static MSTL_THREAD_LOCAL void* signal_context_;
 
 private:
     void initialize_platform();
@@ -93,12 +111,8 @@ private:
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     static BOOL WINAPI windows_handler(DWORD event);
-    DWORD convert_to_windows_event(SIGNAL_EVENT event) const;
-    SIGNAL_EVENT convert_from_windows_event(DWORD event) const;
 #else
     static void posix_handler(int sig);
-    int convert_to_posix_signal(SIGNAL_EVENT event) const;
-    SIGNAL_EVENT convert_from_posix_signal(int sig) const;
     static void alarm_handler(int sig);
 #endif
 
@@ -116,7 +130,10 @@ public:
     signal_manager& operator =(const signal_manager&&) = delete;
     ~signal_manager();
 
-    static signal_manager& instance();
+    static signal_manager& instance() {
+        static signal_manager instance;
+        return instance;
+    }
 
     void register_handler(SIGNAL_EVENT event, signal_handler handler);
     void register_handlers(const vector<SIGNAL_EVENT>& events, signal_handler handler);
@@ -134,6 +151,16 @@ public:
 
     bool block_signals(const vector<SIGNAL_EVENT>& signals_to_block) const;
     bool unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unblock) const;
+
+    static bool is_platform_signal(SIGNAL_EVENT event) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        ::DWORD value = static_cast<::DWORD>(event);
+        return value <= CTRL_SHUTDOWN_EVENT;
+#else
+        int value = static_cast<int>(event);
+        return value > 0 && value < 64 && value != SIGALRM;
+#endif
+    }
 };
 
 

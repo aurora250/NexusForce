@@ -9,6 +9,8 @@ void test_print();
 void test_console();
 void test_device();
 void test_env_var();
+void test_signal();
+void test_cmd(int argc, char* argv[]);
 void test_rnd();
 void test_format();
 void test_color();

@@ -82,6 +82,17 @@ void cmdline::parse(const _MSTL vector<string>& args) {
     }
 }
 
+string cmdline::get(const string& long_name, const size_t index) const {
+    const auto it = options_long_.find(long_name);
+    if (it == options_long_.end() || index >= it->second->values.size()) {
+        if (!it->second->default_value.empty()) {
+            return it->second->default_value;
+        }
+        throw_exception(cmdline_exception(("Option not found or no value: " + long_name).data()));
+    }
+    return it->second->values[index];
+}
+
 bool cmdline::has(const string& long_name) const {
     const auto it = options_long_.find(long_name);
     if (it == options_long_.end()) return false;

@@ -20,22 +20,6 @@ enum class THREAD_POOL_MODE {
 	MODE_CACHED  // dynamic number
 };
 
-class manual_thread;
-class thread_pool;
-
-MSTL_BEGIN_INNER__
-struct MSTL_API __thread_pool_id_generator {
-private:
-    static uint32_t& get_id() noexcept;
-    static uint32_t get_new_id() noexcept;
-    static void reset_id() noexcept { get_id() = 0; }
-
-    friend class _MSTL manual_thread;
-    friend class _MSTL thread_pool;
-};
-MSTL_END_INNER__
-
-
 class MSTL_API manual_thread {
 public:
     using id_type = uint32_t;

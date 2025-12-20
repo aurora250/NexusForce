@@ -33,6 +33,7 @@ public:
     void parse(int argc, char* argv[]);
     void parse(const _MSTL vector<string>& args);
 
+    string get(const string& long_name, size_t index = 0) const;
     bool has(const string& long_name) const;
     size_t count(const string& long_name) const;
 

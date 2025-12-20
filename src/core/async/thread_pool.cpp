@@ -2,24 +2,19 @@
 #include <MSTL/core/async/thread_pool.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_INNER__
-
-uint32_t& __thread_pool_id_generator::get_id() noexcept {
-    static uint32_t __pool_thread_id = 0;
-    return __pool_thread_id;
-}
-
-uint32_t __thread_pool_id_generator::get_new_id() noexcept {
-    uint32_t& __pool_thread_id = get_id();
-    return __pool_thread_id++;
-}
-
-MSTL_END_INNER__
+struct pool_id_generator {
+    static uint32_t& get_id() noexcept {
+        static uint32_t pool_thread_id = 0;
+        return pool_thread_id;
+    }
+    static uint32_t get_new_id() noexcept { return get_id()++; }
+    static void reset_id() noexcept { get_id() = 0; }
+};
 
 
 manual_thread::manual_thread(thread_func&& func) noexcept
     : func_(_MSTL move(func)),
-    thread_id_(_INNER __thread_pool_id_generator::get_new_id()) {}
+    thread_id_(pool_id_generator::get_new_id()) {}
 
 void manual_thread::start() {
     _MSTL thread t(_MSTL move(func_), thread_id_);
@@ -140,13 +135,13 @@ void thread_pool::stop() {
 
     _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
     not_empty_.notify_all();
-    exit_cond_.wait(lock, [&]()->bool { return threads_map_.empty(); });
+    exit_cond_.wait(lock, [&] { return threads_map_.empty(); });
 
     while (!task_queue_.empty()) task_queue_.pop();
     task_size_ = 0;
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;
-    _INNER __thread_pool_id_generator::reset_id();
+    pool_id_generator::reset_id();
 }
 
 MSTL_END_NAMESPACE__

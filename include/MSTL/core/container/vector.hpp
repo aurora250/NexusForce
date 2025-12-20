@@ -415,7 +415,7 @@ public:
 
 	MSTL_CONSTEXPR20 self& operator =(std::initializer_list<T> x) {
 		if (x.size() > this->capacity()) {
-			iterator new_ = this->allocate_and_move(x.end() - x.begin(), x.begin(), x.end());
+			pointer new_ = this->allocate_and_move(x.end() - x.begin(), x.begin(), x.end());
 			_MSTL destroy(start_, finish_);
 			this->deallocate();
 			start_ = new_;
@@ -424,7 +424,7 @@ public:
 		}
 		else if (size() >= x.size()) {
 			iterator i = _MSTL copy(x.begin(), x.end(), this->begin());
-			_MSTL destroy(i, finish_);
+			_MSTL destroy(i.base(), finish_);
 		}
 		else {
 			_MSTL copy(x.begin(), x.begin() + this->size(), start_);

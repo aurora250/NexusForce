@@ -438,6 +438,127 @@ void test_env_var() {
     println(environment::all_envs());
 }
 
+bool signal_handler(SIGNAL_EVENT event, void* context) {
+    printcln(color::green(), "处理信号: ", static_cast<int>(event));
+
+    switch (event) {
+        case SIGNAL_EVENT::INTERRUPT: {
+            println("收到中断信号 (Ctrl+C)");
+            return false;
+        }
+        case SIGNAL_EVENT::TERMINATE: {
+            println("收到终止信号");
+            return false;
+        }
+        case SIGNAL_EVENT::USER1: {
+            println("收到用户自定义信号1");
+            if (context) {
+                const int* value = static_cast<int*>(context);
+                println("上下文数据: ", *value);
+            }
+            return true;
+        }
+        case SIGNAL_EVENT::TIMEOUT: {
+            println("超时信号");
+            return false;
+        }
+        default: {
+            println("其他信号");
+            return true;
+        }
+    }
+}
+
+void test_signal() {
+    {
+        signal_guard guard;
+
+        signal_manager::instance().register_handler(
+            SIGNAL_EVENT::INTERRUPT,
+            signal_handler
+        );
+
+        vector<SIGNAL_EVENT> signals = {
+            SIGNAL_EVENT::TERMINATE,
+            SIGNAL_EVENT::USER1,
+            SIGNAL_EVENT::USER2
+        };
+        signal_manager::instance().register_handlers(
+            signals,
+            signal_handler
+        );
+
+        signal_manager::instance().set_force_exit_timeout(10000);
+
+        printcln(color::cyan(), "信号管理器已启动");
+        println("按 Ctrl+C 测试中断信号");
+        println("在另一个终端执行: kill -TERM ", ::getpid(), " 测试终止信号");
+        println("或执行: kill -USR1 ", ::getpid(), " 测试用户信号");
+
+        for (int i = 0; i < 30; ++i) {
+            if (!signal_manager::instance().is_running()) {
+                println("收到退出信号，正在退出...");
+                break;
+            }
+
+            println("工作循环 ", i + 1);
+            this_thread::sleep_for(seconds(1));
+
+            if (i == 5) {
+                int context_data = 42;
+                signal_manager::instance().send_signal(
+                    SIGNAL_EVENT::USER1,
+                    &context_data
+                );
+            }
+        }
+    }
+}
+
+void test_cmd(int argc, char* argv[]) {
+    cmdline parser;
+
+    parser.add_option("help", 'h', "Show help message", false);
+    parser.add_option("verbose", 'v', "Enable verbose output", false, true);
+    parser.add_option("input", 'i', "Input file path", true);
+    parser.add_option("output", 'o', "Output file path", true, false, "output.txt");
+    parser.add_option("count", 'c', "Repeat count", true);
+
+    try {
+        parser.parse(argc, argv);
+
+        if (parser.has("help")) {
+            parser.print_help();
+        }
+
+        if (parser.has("verbose")) {
+            println("Verbosity: ", parser.get("verbose"));
+        }
+
+        if (parser.has("input")) {
+            println("Input file: ", parser.get("input"));
+        }
+
+        if (parser.has("output")) {
+            println("Output file: ", parser.get("output"));
+        }
+
+        if (parser.has("count")) {
+            println("Count option was specified ", parser.get("count"));
+        }
+
+        auto positional = parser.positional_args();
+        if (!positional.empty()) {
+            println("Positional arguments:");
+            for (const auto& arg : positional) {
+                println("  ", arg);
+            }
+        }
+    } catch (const exception& e) {
+        println("Error: ", e.what());
+    }
+}
+
 void test_process() {
     auto pi = process::create_process(
 #ifdef MSTL_PLATFORM_WINDOWS__

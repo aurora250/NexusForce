@@ -2,17 +2,36 @@
 #include <MSTL/core/algorithm/erase.hpp>
 #include <MSTL/core/system/console.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
-
+#include <cstring>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_THREAD_LOCAL SIGNAL_EVENT signal_manager::current_signal_ = SIGNAL_EVENT::TERMINATE;
-MSTL_THREAD_LOCAL void* signal_manager::signal_context_ = nullptr;
+static MSTL_THREAD_LOCAL SIGNAL_EVENT current_signal =
+#ifdef MSTL_PLATFORM_WINDOWS__
+    static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
+#else
+    static_cast<SIGNAL_EVENT>(SIGTERM);
+#endif
 
-signal_manager& signal_manager::instance() {
-    static signal_manager instance;
-    return instance;
+static MSTL_THREAD_LOCAL void* signal_context = nullptr;
+
+#ifdef MSTL_PLATFORM_LINUX__
+unordered_map<SIGNAL_EVENT, int> signal_manager::windows_to_posix_map_ = {
+    {SIGNAL_EVENT::CTRL_BREAK, SIGTERM},
+    {SIGNAL_EVENT::CLOSE,      SIGHUP},
+    {SIGNAL_EVENT::LOGOFF,     SIGTERM},
+    {SIGNAL_EVENT::SHUTDOWN,   SIGTERM}
+};
+
+static bool is_valid_posix_signal(const int sig) {
+    return sig > 0 && sig < 64;
 }
+
+static bool is_windows_simulated_event(SIGNAL_EVENT event) {
+    const int value = static_cast<int>(event);
+    return value >= 1000 && value < 2000;
+}
+#endif
 
 signal_manager::signal_manager() {
     initialize_platform();
@@ -26,6 +45,20 @@ signal_manager::~signal_manager() {
 void signal_manager::initialize_platform() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::SetConsoleCtrlHandler(windows_handler, TRUE);
+
+    handlers_[SIGNAL_EVENT::INTERRUPT]  = nullptr;
+    handlers_[SIGNAL_EVENT::CTRL_BREAK] = nullptr;
+    handlers_[SIGNAL_EVENT::CLOSE]      = nullptr;
+    handlers_[SIGNAL_EVENT::LOGOFF]     = nullptr;
+    handlers_[SIGNAL_EVENT::SHUTDOWN]   = nullptr;
+
+    registered_windows_events_ = {
+        CTRL_C_EVENT,
+        CTRL_BREAK_EVENT,
+        CTRL_CLOSE_EVENT,
+        CTRL_LOGOFF_EVENT,
+        CTRL_SHUTDOWN_EVENT
+    };
 #else
     struct ::sigaction sa_alarm;
     sa_alarm.sa_handler = signal_manager::alarm_handler;
@@ -33,7 +66,21 @@ void signal_manager::initialize_platform() {
     sa_alarm.sa_flags = SA_RESTART;
     ::sigaction(SIGALRM, &sa_alarm, nullptr);
 
-    ::sigevent sev;
+    struct ::sigaction sa;
+    sa.sa_handler = signal_manager::posix_handler;
+    ::sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART;
+
+    const int posix_signals[] = {
+        SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,
+        SIGSEGV, SIGBUS, SIGPIPE, SIGHUP, SIGUSR1, SIGUSR2
+    };
+
+    for (const int sig : posix_signals) {
+        ::sigaction(sig, &sa, &old_actions_[sig]);
+    }
+
+    ::sigevent sev{};
     sev.sigev_notify = SIGEV_SIGNAL;
     sev.sigev_signo = SIGALRM;
     ::timer_create(CLOCK_REALTIME, &sev, &alarm_timer_);
@@ -64,14 +111,20 @@ void signal_manager::register_handler(const SIGNAL_EVENT event, signal_handler h
     }
 
     lock_guard<mutex> lock(mutex_);
-    handlers_[event] = move(handler);
-    
+
+    if (!is_platform_signal(event)) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const ::DWORD win_event = convert_to_windows_event(event);
-    if (win_event != 0) {
-        registered_windows_events_.push_back(win_event);
-    }
+        printcln(color::yellow(), "Registering custom event: ", static_cast<::DWORD>(event));
+#else
+        if (is_windows_simulated_event(event)) {
+            printcln(color::yellow(), "Registering Windows simulated event: ", static_cast<int>(event));
+        } else {
+            printcln(color::yellow(), "Registering custom event: ", static_cast<int>(event));
+        }
 #endif
+    }
+
+    handlers_[event] = move(handler);
 }
 
 void signal_manager::register_handlers(
@@ -82,7 +135,7 @@ void signal_manager::register_handlers(
 
     lock_guard<mutex> lock(mutex_);
     for (auto event : events) {
-        handlers_[event] = move(handler);
+        handlers_[event] = handler;
     }
 }
 
@@ -118,8 +171,42 @@ SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
 
 void signal_manager::send_signal(SIGNAL_EVENT event, void* context) {
     lock_guard<mutex> lock(mutex_);
-    pending_signals_.emplace_back(event, context, steady_clock::now());
-    printcln(color::yellow(), "Signal sent: ", static_cast<int>(event));
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (static_cast<DWORD>(event) == CTRL_C_EVENT ||
+        static_cast<DWORD>(event) == CTRL_BREAK_EVENT) {
+        pending_signals_.emplace_back(event, context, steady_clock::now());
+        printcln(color::yellow(), "Signal sent: ", static_cast<DWORD>(event));
+        } else {
+            pending_signals_.emplace_back(event, context, steady_clock::now());
+            printcln(color::yellow(), "Signal sent: ", static_cast<DWORD>(event));
+        }
+#else
+    const int sig_value = static_cast<int>(event);
+    if (is_valid_posix_signal(sig_value)) {
+        pending_signals_.emplace_back(event, context, steady_clock::now());
+        printcln(color::yellow(), "POSIX signal sent: ", sig_value,
+            " (", ::strsignal(sig_value), ")");
+    } else if (is_windows_simulated_event(event)) {
+        const auto it = windows_to_posix_map_.find(event);
+        if (it != windows_to_posix_map_.end()) {
+            pending_signals_.emplace_back(
+                static_cast<SIGNAL_EVENT>(it->second),
+                context,
+                steady_clock::now()
+            );
+            printcln(color::yellow(), "Windows simulated event sent: ",
+                sig_value, " -> POSIX ", it->second);
+        } else {
+            pending_signals_.emplace_back(event, context, steady_clock::now());
+            printcln(color::yellow(), "Custom event sent: ", sig_value);
+        }
+    } else {
+        pending_signals_.emplace_back(event, context, steady_clock::now());
+        printcln(color::yellow(), "Custom event sent: ", sig_value);
+    }
+#endif
+
     cv_.notify_all();
 }
 
@@ -166,7 +253,7 @@ bool signal_manager::is_running() const {
 void signal_manager::signal_thread_func() {
 #ifdef MSTL_PLATFORM_LINUX__
     ::sched_param param;
-    param.sched_priority = ::sched_get_priority_max(SCHED_FIFO);
+    param.sched_priority = 10;
     ::pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
 #endif
 
@@ -237,28 +324,61 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
     }
     
     if (handler) {
-        if (!handler(move(event), move(context)) && event == SIGNAL_EVENT::FORCE_EXIT) {
+        current_signal = event;
+        signal_context = context;
+
+        const bool should_exit = !handler(move(event), move(context));
+
+        current_signal =
+#ifdef MSTL_PLATFORM_WINDOWS__
+            static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
+#else
+            static_cast<SIGNAL_EVENT>(SIGTERM);
+#endif
+        signal_context = nullptr;
+
+        if (should_exit && event == SIGNAL_EVENT::FORCE_EXIT) {
             terminate();
         }
     } else {
         switch (event) {
+#ifdef MSTL_PLATFORM_WINDOWS__
             case SIGNAL_EVENT::INTERRUPT:
-            case SIGNAL_EVENT::TERMINATE: {
+            case SIGNAL_EVENT::CTRL_BREAK:
+            case SIGNAL_EVENT::CLOSE:
+            case SIGNAL_EVENT::LOGOFF:
+            case SIGNAL_EVENT::SHUTDOWN: {
+#else
+            case SIGNAL_EVENT::INTERRUPT:
+            case SIGNAL_EVENT::TERMINATE:
+            case SIGNAL_EVENT::HANGUP: {
+#endif
                 printcln(color::blue(), "Received termination signal, exiting...");
                 running_ = false;
                 break;
             }
+#ifdef MSTL_PLATFORM_WINDOWS__
             case SIGNAL_EVENT::SEGMENT_FAULT:
             case SIGNAL_EVENT::ILLEGAL_INSTR: {
+                printcln(color::red(), "Simulated critical error!");
+                send_signal(SIGNAL_EVENT::FORCE_EXIT);
+                break;
+            }
+#else
+            case SIGNAL_EVENT::SEGMENT_FAULT:
+            case SIGNAL_EVENT::ILLEGAL_INSTR:
+            case SIGNAL_EVENT::FLOATING_POINT:
+            case SIGNAL_EVENT::BUS_ERROR: {
                 printcln(color::red(), "Critical error detected!");
                 std::abort();
                 break;
             }
+#endif
             case SIGNAL_EVENT::FORCE_EXIT: {
                 terminate();
-                break;
             }
             default: {
+                printcln(color::yellow(), "Unhandled signal: ", static_cast<int>(event));
                 break;
             }
         }
@@ -271,7 +391,7 @@ bool signal_manager::block_signals(const vector<SIGNAL_EVENT>& signals_to_block)
     ::sigemptyset(&mask);
     
     for (const auto event : signals_to_block) {
-        const int sig = convert_to_posix_signal(event);
+        const int sig = static_cast<int>(event);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }
@@ -288,7 +408,7 @@ bool signal_manager::unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unbl
     ::sigemptyset(&mask);
     
     for (const auto event : signals_to_unblock) {
-        const int sig = convert_to_posix_signal(event);
+        const int sig = static_cast<int>(event);
         if (sig > 0) {
             ::sigaddset(&mask, sig);
         }
@@ -301,76 +421,17 @@ bool signal_manager::unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unbl
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 
-BOOL WINAPI signal_manager::windows_handler(const DWORD event) {
+::BOOL WINAPI signal_manager::windows_handler(const ::DWORD event) {
     signal_manager& manager = instance();
-    manager.send_signal(manager.convert_from_windows_event(event));
+    manager.send_signal(static_cast<SIGNAL_EVENT>(event));
     return TRUE;
-}
-
-DWORD signal_manager::convert_to_windows_event(const SIGNAL_EVENT event)const {
-    switch (event) {
-        case SIGNAL_EVENT::INTERRUPT:    return CTRL_C_EVENT;
-        case SIGNAL_EVENT::CTRL_BREAK:   return CTRL_BREAK_EVENT;
-        case SIGNAL_EVENT::CLOSE:        return CTRL_CLOSE_EVENT;
-        case SIGNAL_EVENT::LOGOFF:       return CTRL_LOGOFF_EVENT;
-        case SIGNAL_EVENT::SHUTDOWN:     return CTRL_SHUTDOWN_EVENT;
-        default: return 0;
-    }
-}
-
-SIGNAL_EVENT signal_manager::convert_from_windows_event(const DWORD event) const {
-    switch (event) {
-        case CTRL_C_EVENT:        return SIGNAL_EVENT::INTERRUPT;
-        case CTRL_BREAK_EVENT:    return SIGNAL_EVENT::CTRL_BREAK;
-        case CTRL_CLOSE_EVENT:    return SIGNAL_EVENT::CLOSE;
-        case CTRL_LOGOFF_EVENT:   return SIGNAL_EVENT::LOGOFF;
-        case CTRL_SHUTDOWN_EVENT: return SIGNAL_EVENT::SHUTDOWN;
-        default:                  return SIGNAL_EVENT::TERMINATE;
-    }
 }
 
 #else
 
 void signal_manager::posix_handler(const int sig) {
-    signal_manager& manager = instance();
-    const SIGNAL_EVENT event = manager.convert_from_posix_signal(sig);
-    manager.send_signal(event);
-}
-
-int signal_manager::convert_to_posix_signal(const SIGNAL_EVENT event) const {
-    switch (event) {
-        case SIGNAL_EVENT::INTERRUPT:      return SIGINT;
-        case SIGNAL_EVENT::TERMINATE:      return SIGTERM;
-        case SIGNAL_EVENT::ABORT:          return SIGABRT;
-        case SIGNAL_EVENT::ILLEGAL_INSTR:  return SIGILL;
-        case SIGNAL_EVENT::FLOATING_POINT: return SIGFPE;
-        case SIGNAL_EVENT::SEGMENT_FAULT:  return SIGSEGV;
-        case SIGNAL_EVENT::BUS_ERROR:      return SIGBUS;
-        case SIGNAL_EVENT::PIPE_BROKEN:    return SIGPIPE;
-        case SIGNAL_EVENT::ALARM:          return SIGALRM;
-        case SIGNAL_EVENT::HANGUP:         return SIGHUP;
-        case SIGNAL_EVENT::USER1:          return SIGUSR1;
-        case SIGNAL_EVENT::USER2:          return SIGUSR2;
-        default: return -1;
-    }
-}
-
-SIGNAL_EVENT signal_manager::convert_from_posix_signal(const int sig) const {
-    switch (sig) {
-        case SIGINT:    return SIGNAL_EVENT::INTERRUPT;
-        case SIGTERM:   return SIGNAL_EVENT::TERMINATE;
-        case SIGABRT:   return SIGNAL_EVENT::ABORT;
-        case SIGILL:    return SIGNAL_EVENT::ILLEGAL_INSTR;
-        case SIGFPE:    return SIGNAL_EVENT::FLOATING_POINT;
-        case SIGSEGV:   return SIGNAL_EVENT::SEGMENT_FAULT;
-        case SIGBUS:    return SIGNAL_EVENT::BUS_ERROR;
-        case SIGPIPE:   return SIGNAL_EVENT::PIPE_BROKEN;
-        case SIGALRM:   return SIGNAL_EVENT::ALARM;
-        case SIGHUP:    return SIGNAL_EVENT::HANGUP;
-        case SIGUSR1:   return SIGNAL_EVENT::USER1;
-        case SIGUSR2:   return SIGNAL_EVENT::USER2;
-        default:        return SIGNAL_EVENT::TERMINATE;
-    }
+    signal_manager &manager = instance();
+    manager.send_signal(static_cast<SIGNAL_EVENT>(sig));
 }
 
 void signal_manager::alarm_handler(int sig) {
