@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_VARIANT_HPP__
-#define MSTL_CORE_COMPOUND_VARIANT_HPP__
+#ifndef MSTL_CORE_UTILITY_VARIANT_HPP__
+#define MSTL_CORE_UTILITY_VARIANT_HPP__
 #include "../interface/icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -16,8 +16,6 @@ using variant_alternative_t = typename variant_alternative<Variant, Idx>::type;
 template <typename... Types>
 struct variant : icommon<variant<Types...>> {
 private:
-    using self = variant<Types...>;
-
     size_t index_;
 
     alignas(_MSTL max({ alignof(Types)... })) char union_[_MSTL max({ sizeof(Types)... })]{};
@@ -159,21 +157,21 @@ public:
         new (p) T(value);
     }
 
-    MSTL_CONSTEXPR20 variant(const self& x)
+    MSTL_CONSTEXPR20 variant(const variant& x)
     : index_(x.index_) {
         copy_constructors_table()[index()](union_, x.union_);
     }
-    MSTL_CONSTEXPR20 self& operator =(const self& x) {
+    MSTL_CONSTEXPR20 variant& operator =(const variant& x) {
         if(_MSTL addressof(x) == this) return *this;
         index_ = x.index_;
         copy_assigment_functions_table()[index()](union_, x.union_);
         return *this;
     }
 
-    MSTL_CONSTEXPR20 variant(self&& x) noexcept : index_(x.index_) {
+    MSTL_CONSTEXPR20 variant(variant&& x) noexcept : index_(x.index_) {
         move_constructors_table()[index()](union_, x.union_);
     }
-    MSTL_CONSTEXPR20 self& operator =(self&& x) noexcept {
+    MSTL_CONSTEXPR20 variant& operator =(variant&& x) noexcept {
         if(_MSTL addressof(x) == this) return *this;
         index_ = x.index_;
         move_assigment_functions_table()[index()](union_, x.union_);
@@ -306,19 +304,19 @@ public:
         x.index_ = this_index;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const variant& rh) const {
-        if (index_ != rh.index_) return false;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const variant& rhs) const {
+        if (index_ != rhs.index_) return false;
         return this->visit([&](const auto& value) {
-            return rh.visit([&](const auto& other_value) {
+            return rhs.visit([&](const auto& other_value) {
                 return value == other_value;
             });
         });
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const variant& rh) const {
-        if (index_ != rh.index_) return false;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const variant& rhs) const {
+        if (index_ != rhs.index_) return false;
         return this->visit([&](const auto& value) {
-            return rh.visit([&](const auto& other_value) {
+            return rhs.visit([&](const auto& other_value) {
                 return value < other_value;
             });
         });
@@ -433,4 +431,4 @@ MSTL_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_VARIANT_HPP__
+#endif // MSTL_CORE_UTILITY_VARIANT_HPP__

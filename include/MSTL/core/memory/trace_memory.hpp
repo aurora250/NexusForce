@@ -17,7 +17,6 @@ public:
     using const_reference = const T&;
     using size_type = size_t;
     using difference_type = ptrdiff_t;
-    using self = trace_allocator<T>;
 
     template <typename U>
     struct rebind {
@@ -28,7 +27,7 @@ public:
 
     template <typename U>
     trace_allocator(const trace_allocator<U>& a) : traces_(a.traces_) {}
-    self& operator =(const self& a) {
+    trace_allocator& operator =(const trace_allocator& a) {
         if (_MSTL addressof(a) == this) return *this;
         traces_ = a.traces_;
         return *this;

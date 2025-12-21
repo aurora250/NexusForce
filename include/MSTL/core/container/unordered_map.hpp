@@ -14,8 +14,6 @@ class unordered_map : public icollector<unordered_map<Key, T, HashFcn, EqualKey,
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered map only contains object types.");
 
-    using self = unordered_map<Key, T, HashFcn, EqualKey, Alloc>;
-    using super = icollector<self>;
     using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey, Alloc>;
 
 public:
@@ -46,13 +44,13 @@ public:
     unordered_map(size_type n, const hasher& hf) : ht_(n, hf, key_equal()) {}
     unordered_map(size_type n, const hasher& hf, const key_equal& eql) : ht_(n, hf, eql) {}
 
-    unordered_map(const self& ht) : ht_(ht.ht_) {}
-    self& operator =(const self& x) = default;
+    unordered_map(const unordered_map& ht) : ht_(ht.ht_) {}
+    unordered_map& operator =(const unordered_map& x) = default;
 
-    unordered_map(self&& x) noexcept(noexcept(ht_.swap(x.ht_)))
+    unordered_map(unordered_map&& x) noexcept(noexcept(ht_.swap(x.ht_)))
     : ht_(_MSTL forward<base_type>(x.ht_)) {}
 
-    self& operator =(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
+    unordered_map& operator =(unordered_map&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
         ht_ = _MSTL move(x.ht_);
         return *this;
     }
@@ -155,18 +153,18 @@ public:
         return iter->second;
     }
     MSTL_NODISCARD T& at(const key_type& key) {
-        return const_cast<reference>(static_cast<const self*>(this)->at(key));
+        return const_cast<reference>(static_cast<const unordered_map*>(this)->at(key));
     }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+    void swap(unordered_map& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-     noexcept(noexcept(ht_ == rh.ht_)) {
-        return ht_ == rh.ht_;
+    MSTL_NODISCARD bool operator ==(const unordered_map& rhs) const
+     noexcept(noexcept(ht_ == rhs.ht_)) {
+        return ht_ == rhs.ht_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(ht_ < rh.ht_)) {
-        return ht_ < rh.ht_;
+    MSTL_NODISCARD bool operator <(const unordered_map& rhs) const
+    noexcept(noexcept(ht_ < rhs.ht_)) {
+        return ht_ < rhs.ht_;
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

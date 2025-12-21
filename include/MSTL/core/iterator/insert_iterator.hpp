@@ -12,25 +12,24 @@ public:
     using difference_type   = void;
     using pointer           = void;
     using reference         = void;
-    using self              = back_insert_iterator<Container>;
 
     constexpr explicit back_insert_iterator(Container& x) noexcept
     : container(_MSTL addressof(x)) {}
 
-    constexpr self& operator =(const typename Container::value_type& value) {
+    constexpr back_insert_iterator& operator =(const typename Container::value_type& value) {
         container->push_back(value);
         return *this;
     }
-    constexpr self& operator =(typename Container::value_type&& value) {
+    constexpr back_insert_iterator& operator =(typename Container::value_type&& value) {
         container->push_back(_MSTL move(value));
         return *this;
     }
 
     MSTL_CONSTEXPR20 ~back_insert_iterator() noexcept = default;
 
-    MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
-    constexpr self& operator ++() noexcept { return *this; }
-    constexpr self& operator ++(int) noexcept { return *this; }
+    MSTL_NODISCARD constexpr back_insert_iterator& operator *() noexcept { return *this; }
+    constexpr back_insert_iterator& operator ++() noexcept { return *this; }
+    constexpr back_insert_iterator& operator ++(int) noexcept { return *this; }
 
 private:
     Container* container;
@@ -48,25 +47,24 @@ public:
     using difference_type   = void;
     using pointer           = void;
     using reference         = void;
-    using self              = front_insert_iterator<Container>;
 
     constexpr explicit front_insert_iterator(Container& x) noexcept
     : container(_MSTL addressof(x)) {}
 
-    constexpr self& operator =(const typename Container::value_type& value) {
+    constexpr front_insert_iterator& operator =(const typename Container::value_type& value) {
         container->push_front(value);
         return *this;
     }
-    constexpr self& operator =(typename Container::value_type&& value) {
+    constexpr front_insert_iterator& operator =(typename Container::value_type&& value) {
         container->push_front(_MSTL move(value));
         return *this;
     }
 
     MSTL_CONSTEXPR20 ~front_insert_iterator() noexcept = default;
 
-    MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
-    constexpr self& operator ++() noexcept { return *this; }
-    constexpr self& operator ++(int) noexcept { return *this; }
+    MSTL_NODISCARD constexpr front_insert_iterator& operator *() noexcept { return *this; }
+    constexpr front_insert_iterator& operator ++() noexcept { return *this; }
+    constexpr front_insert_iterator& operator ++(int) noexcept { return *this; }
 
 private:
     Container* container;
@@ -85,17 +83,16 @@ public:
     using difference_type   = void;
     using pointer           = void;
     using reference         = void;
-    using self              = insert_iterator<Container>;
 
     constexpr insert_iterator(Container& x, typename Container::iterator it) noexcept
     : container(_MSTL addressof(x)), iter(_MSTL move(it)) {}
 
-    constexpr self& operator =(const typename Container::value_type& value) {
+    constexpr insert_iterator& operator =(const typename Container::value_type& value) {
         iter = container->insert(iter, value);
         ++iter;
         return *this;
     }
-    constexpr self& operator =(typename Container::value_type&& value) {
+    constexpr insert_iterator& operator =(typename Container::value_type&& value) {
         iter = container->insert(iter, _MSTL move(value));
         ++iter;
         return *this;
@@ -103,9 +100,9 @@ public:
 
     MSTL_CONSTEXPR20 ~insert_iterator() noexcept = default;
 
-    MSTL_NODISCARD constexpr self& operator *() noexcept { return *this; }
-    constexpr self& operator ++() noexcept { return *this; }
-    constexpr self& operator ++(int) noexcept { return *this; }
+    MSTL_NODISCARD constexpr insert_iterator& operator *() noexcept { return *this; }
+    constexpr insert_iterator& operator ++() noexcept { return *this; }
+    constexpr insert_iterator& operator ++(int) noexcept { return *this; }
 
 private:
     Container* container;

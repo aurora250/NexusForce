@@ -458,8 +458,8 @@ public:
         *this = tmp;
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const basic_string_view& rh) const noexcept { return this->equal_to(rh); }
-    MSTL_NODISCARD constexpr bool operator <(const basic_string_view& rh) const noexcept { return this->compare(rh) < 0; }
+    MSTL_NODISCARD constexpr bool operator ==(const basic_string_view& rhs) const noexcept { return this->equal_to(rhs); }
+    MSTL_NODISCARD constexpr bool operator <(const basic_string_view& rhs) const noexcept { return this->compare(rhs) < 0; }
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(this->data(), this->length());

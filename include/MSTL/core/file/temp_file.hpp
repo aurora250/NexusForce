@@ -5,28 +5,57 @@ MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API temp_file {
 public:
-    explicit temp_file(const string& prefix = "tmp", const string& suffix = ".tmp");
+    enum class DELETE_POLICY {
+        AUTO_DELETE,
+        MANUAL_DELETE,
+        KEEP_ON_EXIT
+    };
+
+    explicit temp_file(
+        const string& prefix = "tmp", const string& suffix = ".tmp",
+        FILE_CREATION mode = FILE_CREATION::CREATE_FORCE,
+        DELETE_POLICY policy = DELETE_POLICY::AUTO_DELETE
+    );
+
+    explicit temp_file(
+        const path& existing_path,
+        DELETE_POLICY policy = DELETE_POLICY::AUTO_DELETE
+    );
+
     ~temp_file();
 
     temp_file(const temp_file&) = delete;
-    temp_file& operator=(const temp_file&) = delete;
-
+    temp_file& operator =(const temp_file&) = delete;
     temp_file(temp_file&& other) noexcept;
-    temp_file& operator=(temp_file&& other) noexcept;
+    temp_file& operator =(temp_file&& other) noexcept;
 
-    const path& get_path() const noexcept { return temp_path_; }
-    file& get_file() noexcept { return file_; }
-    const file& get_file() const noexcept { return file_; }
+    _MSTL file& file() noexcept { return file_; }
+    const _MSTL file& file() const noexcept { return file_; }
 
-    void keep() noexcept { auto_delete_ = false; }
+    void keep() noexcept { delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT; }
+    void set_delete_policy(const DELETE_POLICY policy) noexcept { delete_policy_ = policy; }
+    DELETE_POLICY delete_policy() const noexcept { return delete_policy_; }
+
     void cleanup();
+    void release();
+
+    static temp_file create_temp_file(
+            const string& prefix = "tmp",
+            const string& suffix = ".tmp",
+            FILE_CREATION mode = FILE_CREATION::CREATE_FORCE
+    );
+
+    static void cleanup_all_temp_files();
+    static void register_for_cleanup(const path& temp_path);
 
 private:
-    path temp_path_;
-    file file_;
-    bool auto_delete_ = true;
+    _MSTL file file_;
+    DELETE_POLICY delete_policy_ = DELETE_POLICY::AUTO_DELETE;
 
-    static path generate_temp_path(const string& prefix, const string& suffix);
+    static vector<path>& get_temp_registry();
+    static mutex& get_registry_mutex();
+
+    static path generate_unique_path(const string& prefix, const string& suffix);
 };
 
 MSTL_END_NAMESPACE__

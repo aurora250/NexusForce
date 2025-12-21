@@ -3,7 +3,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 file_line_iterator::file_line_iterator(const file* f) : file_(f) {
-    if (file_ && file_->opened()) {
+    if (file_ && file_->is_opened()) {
         ++(*this);
     }
 }

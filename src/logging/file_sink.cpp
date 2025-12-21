@@ -59,7 +59,7 @@ void file_sink::log(const log_event& event) {
         }
     }
 
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         open_new_file();
     }
     if (current_size_ + formatted.size() + 1 > max_file_size_) {

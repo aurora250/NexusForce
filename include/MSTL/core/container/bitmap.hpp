@@ -8,7 +8,6 @@ MSTL_INLINE17 constexpr uint32_t WORD_BIT_SIZE = 8 * sizeof(uint32_t);
 
 struct MSTL_API bit_reference : icommon<bit_reference>, istringify<bit_reference> {
 private:
-    using self = bit_reference;
     using super = iobject<bit_reference>;
 
     uint32_t* ptr_ = nullptr;
@@ -50,17 +49,17 @@ public:
 
     MSTL_CONSTEXPR20 void flip() const noexcept { *ptr_ ^= mask_; }
 
-    MSTL_CONSTEXPR20 void swap(self& x) noexcept {
+    MSTL_CONSTEXPR20 void swap(bit_reference& x) noexcept {
         if (_MSTL addressof(x) == this) return;
         const bool tmp = x;
         x = *this;
         *this = tmp;
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& x) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const bit_reference& x) const noexcept {
         return static_cast<bool>(*this) == static_cast<bool>(x);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const self& x) const noexcept {
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const bit_reference& x) const noexcept {
         return static_cast<bool>(*this) < static_cast<bool>(x);
     }
 
@@ -80,7 +79,6 @@ private:
     using container_type	= BitMap;
     using iterator			= bitmap_iterator<false, container_type>;
     using const_iterator	= bitmap_iterator<true, container_type>;
-    using self              = bitmap_iterator<IsConst, BitMap>;
 
 public:
     using iterator_category = random_access_iterator_tag;
@@ -211,8 +209,7 @@ public:
 
 
 class MSTL_API bitmap : public icollector<bitmap> {
-    using self = bitmap;
-    using super = icollector<self>;
+    using super = icollector<bitmap>;
 
 public:
     using value_type         = bool;
@@ -223,8 +220,8 @@ public:
     using size_type          = size_t;
     using difference_type    = ptrdiff_t;
 
-    using iterator                  = bitmap_iterator<false, self>;
-    using const_iterator            = bitmap_iterator<true, self>;
+    using iterator                  = bitmap_iterator<false, bitmap>;
+    using const_iterator            = bitmap_iterator<true, bitmap>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -532,13 +529,13 @@ public:
         _MSTL swap(capacity_pair_, x.capacity_pair_);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& rh) const
-    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
-        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const bitmap& rhs) const
+    noexcept(noexcept(this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+        return this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const self& rh) const
-    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const bitmap& rhs) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 

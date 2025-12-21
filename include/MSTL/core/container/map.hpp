@@ -13,8 +13,6 @@ class map : public icollector<map<Key, T, Compare, Alloc>> {
 		"allocator type mismatch.");
 	static_assert(is_object_v<T>, "map only contains object types.");
 
-	using self = map<Key, T, Compare, Alloc>;
-	using super = icollector<self>;
 	using base_type = rb_tree<Key, pair<const Key, T>, select1st<pair<const Key, T>>, Compare, Alloc>;
 
 public:
@@ -57,14 +55,14 @@ public:
 	map() : tree_(Compare()) {}
 	explicit map(const key_compare& comp) : tree_(comp) {}
 
-	map(const self& x) : tree_(x.tree_) {}
+	map(const map& x) : tree_(x.tree_) {}
 
-	self& operator =(const self& x) = default;
+	map& operator =(const map& x) = default;
 
-	map(self&& x) noexcept(is_nothrow_move_constructible_v<base_type>) 
+	map(map&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
 		: tree_(_MSTL move(x.tree_)) {}
 
-	self& operator =(self&& x) noexcept(noexcept(swap(x))) {
+	map& operator =(map&& x) noexcept(noexcept(swap(x))) {
 		tree_ = _MSTL move(x.tree_);
 		return *this;
 	}
@@ -81,7 +79,7 @@ public:
 	map(std::initializer_list<value_type> l) : map(l.begin(), l.end()) {}
 	map(std::initializer_list<value_type> l, const key_compare& comp) : map(l.begin(), l.end(), comp) {}
 
-	self& operator =(std::initializer_list<value_type> l) {
+	map& operator =(std::initializer_list<value_type> l) {
 		clear();
 		insert(l.begin(), l.end());
 		return *this;
@@ -179,18 +177,18 @@ public:
 		return iter->second;
 	}
 	MSTL_NODISCARD mapped_type& at(const key_type& k) {
-		return const_cast<mapped_type&>(const_cast<const self*>(this)->at(k));
+		return const_cast<mapped_type&>(const_cast<const map*>(this)->at(k));
 	}
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+	void swap(map& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
 
-	MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(tree_ == rh.tree_)) {
-		return tree_ == rh.tree_;
+	MSTL_NODISCARD bool operator ==(const map& rhs) const
+    noexcept(noexcept(tree_ == rhs.tree_)) {
+		return tree_ == rhs.tree_;
 	}
-	MSTL_NODISCARD bool operator <(const self& rh) const
-	noexcept(noexcept(tree_ < rh.tree_)) {
-		return tree_ < rh.tree_;
+	MSTL_NODISCARD bool operator <(const map& rhs) const
+	noexcept(noexcept(tree_ < rhs.tree_)) {
+		return tree_ < rhs.tree_;
 	}
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

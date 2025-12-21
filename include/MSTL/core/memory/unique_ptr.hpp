@@ -369,105 +369,105 @@ public:
 };
 
 template <typename T, typename Deleter, enable_if_t<is_swappable_v<Deleter> && is_swappable_v<T>, int> = 0>
-void swap(unique_ptr<T, Deleter>& lh, unique_ptr<T, Deleter>& rh) noexcept {
-    lh.swap(rh);
+void swap(unique_ptr<T, Deleter>& lhs, unique_ptr<T, Deleter>& rhs) noexcept {
+    lhs.swap(rhs);
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
-    return lh.get() == rh.get();
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
+    return lhs.get() == rhs.get();
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return !lh;
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return !lhs;
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return !rh;
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return !rhs;
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
-    return lh.get() != rh.get();
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
+    return lhs.get() != rhs.get();
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return static_cast<bool>(lh);
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return static_cast<bool>(lhs);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return static_cast<bool>(rh);
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return static_cast<bool>(rhs);
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
     using common_t = common_type_t<typename unique_ptr<T, D>::pointer, typename unique_ptr<U, E>::pointer>;
-    return _MSTL less<common_t>()(lh.get(), rh.get());
+    return _MSTL less<common_t>()(lhs.get(), rhs.get());
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return _MSTL less<typename unique_ptr<T, D>::pointer>()(lh.get(), nullptr);
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return _MSTL less<typename unique_ptr<T, D>::pointer>()(lhs.get(), nullptr);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, rh.get());
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, rhs.get());
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
-    return rh.get() < lh.get();
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
+    return rhs.get() < lhs.get();
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, lh.get());
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return _MSTL less<typename unique_ptr<T, D>::pointer>()(nullptr, lhs.get());
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return _MSTL less<typename unique_ptr<T, D>::pointer>()(rh.get(), nullptr);
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return _MSTL less<typename unique_ptr<T, D>::pointer>()(rhs.get(), nullptr);
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
-    return !(lh > rh);
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
+    return !(lhs > rhs);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return !(lh > nullptr);
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return !(lhs > nullptr);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return !(nullptr > rh);
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return !(nullptr > rhs);
 }
 
 template <typename T, typename D, typename U, typename E>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const unique_ptr<T, D>& lh, const unique_ptr<U, E>& rh) {
-    return !(lh < rh);
+    const unique_ptr<T, D>& lhs, const unique_ptr<U, E>& rhs) {
+    return !(lhs < rhs);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const unique_ptr<T, D>& lh, nullptr_t) {
-    return !(lh < nullptr);
+    const unique_ptr<T, D>& lhs, nullptr_t) {
+    return !(lhs < nullptr);
 }
 template <typename T, typename D>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    nullptr_t, const unique_ptr<T, D>& rh) {
-    return !(nullptr < rh);
+    nullptr_t, const unique_ptr<T, D>& rhs) {
+    return !(nullptr < rhs);
 }
 
 

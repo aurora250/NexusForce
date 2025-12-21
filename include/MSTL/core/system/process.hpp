@@ -37,6 +37,8 @@ public:
     static bool terminate_process(const process_info& info) noexcept;
 
     static bool is_process_running(const process_info& info) noexcept;
+
+    static int current_process_id() noexcept;
 };
 
 MSTL_END_NAMESPACE__

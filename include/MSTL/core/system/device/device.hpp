@@ -86,7 +86,7 @@ public:
     bool is_blocking() const noexcept { return is_blocking_; }
 
     _MSTL device_info device_info() const;
-    const path& device_path() const noexcept { return file_.get_path(); }
+    const path& device_path() const noexcept { return file_.path(); }
     DEVICE_TYPE device_type() const noexcept { return device_type_; }
 
     void* map_memory(size_t offset, size_t size);

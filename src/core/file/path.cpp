@@ -736,9 +736,9 @@ bool path::rename(const path& old_name, const path& new_name) {
     return path::move(old_name, new_name, true);
 }
 
-bool path::operator ==(const path& rh) const noexcept {
+bool path::operator ==(const path& rhs) const noexcept {
     const path lhs_norm = this->lexically_normal();
-    const path rhs_norm = rh.lexically_normal();
+    const path rhs_norm = rhs.lexically_normal();
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) == 0;
@@ -747,9 +747,9 @@ bool path::operator ==(const path& rh) const noexcept {
 #endif
 }
 
-bool path::operator <(const path& rh) const noexcept {
+bool path::operator <(const path& rhs) const noexcept {
     const path lhs_norm = lexically_normal();
-    const path rhs_norm = rh.lexically_normal();
+    const path rhs_norm = rhs.lexically_normal();
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) < 0;

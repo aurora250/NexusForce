@@ -12,8 +12,6 @@ class set : public icollector<set<Key, Compare, Alloc>> {
 		"allocator type mismatch.");
 	static_assert(is_object_v<Key>, "set only contains object types.");
 
-	using self = set<Key, Compare, Alloc>;
-	using super = icollector<self>;
 	using base_type = rb_tree<Key, Key, identity<Key>, Compare, Alloc>;
 
 public:
@@ -43,14 +41,14 @@ public:
 	set() : tree_(Compare()) {}
 	explicit set(const key_compare& comp) : tree_(comp) {}
 
-	set(const self& x) : tree_(x.tree_) {}
+	set(const set& x) : tree_(x.tree_) {}
 
-	self& operator =(const self& x) = default;
+	set& operator =(const set& x) = default;
 
-	set(self&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
+	set(set&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
 		: tree_(_MSTL move(x.tree_)) {}
 
-	self& operator =(self&& x) noexcept(noexcept(swap(x))) {
+	set& operator =(set&& x) noexcept(noexcept(swap(x))) {
 		tree_ = _MSTL move(x.tree_);
 		return *this;
 	}
@@ -67,7 +65,7 @@ public:
 	set(std::initializer_list<value_type> l) : set(l.begin(), l.end()) {}
 	set(std::initializer_list<value_type> l, const key_compare& comp) : set(l.begin(), l.end(), comp) {}
 
-	self& operator =(std::initializer_list<value_type> l) {
+	set& operator =(std::initializer_list<value_type> l) {
 		clear();
 		insert(l.begin(), l.end());
 		return *this;
@@ -139,15 +137,15 @@ public:
 		return tree_.equal_range(x);
 	}
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+	void swap(set& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
 
-	MSTL_NODISCARD bool operator ==(const self& rh) const
-	noexcept(noexcept(tree_ == rh.tree_)) {
-		return tree_ == rh.tree_;
+	MSTL_NODISCARD bool operator ==(const set& rhs) const
+	noexcept(noexcept(tree_ == rhs.tree_)) {
+		return tree_ == rhs.tree_;
 	}
-	MSTL_NODISCARD bool operator <(const self& rh) const
-	noexcept(noexcept(tree_ < rh.tree_)) {
-		return tree_ < rh.tree_;
+	MSTL_NODISCARD bool operator <(const set& rhs) const
+	noexcept(noexcept(tree_ < rhs.tree_)) {
+		return tree_ < rhs.tree_;
 	}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

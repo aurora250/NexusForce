@@ -75,16 +75,10 @@ enum class FILE_SHARED : fud_t {
 };
 
 constexpr FILE_SHARED operator |(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(
-        static_cast<fud_t>(a) |
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_SHARED>(static_cast<fud_t>(a) | static_cast<fud_t>(b));
 }
 constexpr FILE_SHARED operator &(FILE_SHARED a, FILE_SHARED b) {
-    return static_cast<FILE_SHARED>(
-        static_cast<fud_t>(a) &
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_SHARED>(static_cast<fud_t>(a) & static_cast<fud_t>(b));
 }
 
 
@@ -105,16 +99,10 @@ enum class FILE_CREATION : fud_t {
 };
 
 constexpr FILE_CREATION operator |(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(
-        static_cast<fud_t>(a) |
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_CREATION>(static_cast<fud_t>(a) | static_cast<fud_t>(b));
 }
 constexpr FILE_CREATION operator &(FILE_CREATION a, FILE_CREATION b) {
-    return static_cast<FILE_CREATION>(
-        static_cast<fud_t>(a) &
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_CREATION>(static_cast<fud_t>(a) & static_cast<fud_t>(b));
 }
 
 
@@ -151,16 +139,10 @@ enum class FILE_ATTRI : fud_t {
 };
 
 constexpr FILE_ATTRI operator |(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(
-        static_cast<fud_t>(a) |
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_ATTRI>(static_cast<fud_t>(a) | static_cast<fud_t>(b));
 }
 constexpr FILE_ATTRI operator &(FILE_ATTRI a, FILE_ATTRI b) {
-    return static_cast<FILE_ATTRI>(
-        static_cast<fud_t>(a) &
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_ATTRI>(static_cast<fud_t>(a) & static_cast<fud_t>(b));
 }
 
 
@@ -180,34 +162,33 @@ enum class FILE_LOCK : fud_t {
 #ifdef MSTL_PLATFORM_WINDOWS__
     SHARED = 0,
     EXCLUSIVE = LOCKFILE_EXCLUSIVE_LOCK,
-    FAIL_IMMEDIATELY = LOCKFILE_FAIL_IMMEDIATELY
+    FAIL_IMMEDIATELY = LOCKFILE_FAIL_IMMEDIATELY,
+    SHARED_NB = LOCKFILE_FAIL_IMMEDIATELY,
+    EXCLUSIVE_NB = LOCKFILE_EXCLUSIVE_LOCK | LOCKFILE_FAIL_IMMEDIATELY
 #elif defined(MSTL_PLATFORM_LINUX__)
     SHARED = LOCK_SH,
     EXCLUSIVE = LOCK_EX,
-    FAIL_IMMEDIATELY = LOCK_NB
+    FAIL_IMMEDIATELY = LOCK_NB,
+    SHARED_NB = LOCK_SH | LOCK_NB,
+    EXCLUSIVE_NB = LOCK_EX | LOCK_NB
 #endif
 };
 
 constexpr FILE_LOCK operator |(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(
-        static_cast<fud_t>(a) |
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_LOCK>(static_cast<fud_t>(a) | static_cast<fud_t>(b));
 }
 constexpr FILE_LOCK operator &(FILE_LOCK a, FILE_LOCK b) {
-    return static_cast<FILE_LOCK>(
-        static_cast<fud_t>(a) &
-        static_cast<fud_t>(b)
-        );
+    return static_cast<FILE_LOCK>(static_cast<fud_t>(a) & static_cast<fud_t>(b));
 }
 
 
 enum class FILE_WATCH_EVENT {
-    CREATED,
-    MODIFIED,
-    DELETED,
-    RENAMED,
-    ACCESSED
+    CREATED = 0x01,
+    DELETED = 0x02,
+    MODIFIED = 0x04,
+    RENAMED = 0x08,
+    ACCESSED = 0x10,
+    ALL = CREATED | DELETED | MODIFIED | RENAMED | ACCESSED
 };
 
 

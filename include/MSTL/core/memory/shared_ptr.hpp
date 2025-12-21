@@ -327,46 +327,46 @@ public:
     }
 
     template <typename U>
-    MSTL_NODISCARD bool owner_equal(const shared_ptr<U>& rh) const noexcept {
-        return owner_ == rh.owner_;
+    MSTL_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
+        return owner_ == rhs.owner_;
     }
     template <typename U>
-    MSTL_NODISCARD bool owner_equal(const weak_ptr<U>& rh) const noexcept {
-        return owner_ == rh.owner_;
+    MSTL_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
+        return owner_ == rhs.owner_;
     }
 
     template <typename U>
-    MSTL_NODISCARD bool owner_before(const shared_ptr<U>& rh) const noexcept {
-        return owner_ < rh.owner_;
+    MSTL_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
+        return owner_ < rhs.owner_;
     }
     template <typename U>
-    MSTL_NODISCARD bool owner_before(const weak_ptr<U>& rh) const noexcept {
-        return owner_ < rh.owner_;
+    MSTL_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
+        return owner_ < rhs.owner_;
     }
 };
 template <typename T, typename U>
-MSTL_NODISCARD bool operator ==(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return lh.owner_equal(rh);
+MSTL_NODISCARD bool operator ==(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return lhs.owner_equal(rhs);
 }
 template <typename T, typename U>
-MSTL_NODISCARD bool operator !=(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return !(lh == rh);
+MSTL_NODISCARD bool operator !=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 template <typename T, typename U>
-MSTL_NODISCARD bool operator <(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return lh.owner_before(rh);
+MSTL_NODISCARD bool operator <(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return lhs.owner_before(rhs);
 }
 template <typename T, typename U>
-MSTL_NODISCARD bool operator >(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return rh < lh;
+MSTL_NODISCARD bool operator >(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return rhs < lhs;
 }
 template <typename T, typename U>
-MSTL_NODISCARD bool operator <=(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return !(lh > rh);
+MSTL_NODISCARD bool operator <=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return !(lhs > rhs);
 }
 template <typename T, typename U>
-MSTL_NODISCARD bool operator >=(const shared_ptr<T>& lh, const shared_ptr<U>& rh) noexcept {
-    return !(lh < rh);
+MSTL_NODISCARD bool operator >=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
+    return !(lhs < rhs);
 }
 
 

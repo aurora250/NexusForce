@@ -55,7 +55,6 @@ struct unpackage<boolean> {
 #define __MSTL_BUILD_INTEGER_STRUCT(SIGN, UPPER, BYTE) \
 struct SIGN## integer## BYTE : iobject<SIGN## integer## BYTE>, ipackage<SIGN## integer## BYTE, SIGN## int## BYTE## _t> { \
     using value_type = SIGN## int## BYTE## _t; \
-    using self = SIGN## integer## BYTE; \
     using base = ipackage<SIGN## integer## BYTE, SIGN## int## BYTE## _t>; \
     \
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(SIGN## integer## BYTE) \
@@ -72,8 +71,8 @@ struct SIGN## integer## BYTE : iobject<SIGN## integer## BYTE>, ipackage<SIGN## i
         return _INNER __int_to_string_dispatch(value_); \
     } \
     \
-    MSTL_NODISCARD static constexpr self parse(const string_view str) { \
-        return self{_MSTL to_## SIGN## int## BYTE (str)}; \
+    MSTL_NODISCARD static constexpr SIGN## integer## BYTE parse(const string_view str) { \
+        return SIGN## integer## BYTE{_MSTL to_## SIGN## int## BYTE (str)}; \
     } \
 }; \
 template <> \
@@ -117,7 +116,6 @@ struct package<unsigned long> {
 
 struct float32 : iobject<float32>, ipackage<float32, float32_t> {
     using value_type = float32_t;
-    using self = float32;
     using base = ipackage<float32, float32_t>;
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(float32)
@@ -127,14 +125,14 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 string to_string(const value_type value) {
-        return self(value).to_string();
+        return float32(value).to_string();
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static constexpr self parse(const string_view str) {
-        return self{_MSTL to_float32(str)};
+    MSTL_NODISCARD static constexpr float32 parse(const string_view str) {
+        return float32{_MSTL to_float32(str)};
     }
 };
 
@@ -150,7 +148,6 @@ struct unpackage<float32> {
 
 struct float64 : iobject<float64>, ipackage<float64, float64_t> {
     using value_type = float64_t;
-    using self = float64;
     using base = ipackage<float64, float64_t>;
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(float64)
@@ -160,14 +157,14 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 string to_string(const value_type value) {
-        return self(value).to_string();
+        return float64(value).to_string();
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static constexpr self parse(const string_view str) {
-        return self{_MSTL to_float64(str)};
+    MSTL_NODISCARD static constexpr float64 parse(const string_view str) {
+        return float64{_MSTL to_float64(str)};
     }
 };
 
@@ -183,7 +180,6 @@ struct unpackage<float64> {
 
 struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
     using value_type = decimal_t;
-    using self = decimal;
     using base = ipackage<decimal, decimal_t>;
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(decimal)
@@ -193,14 +189,14 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
     }
 
     MSTL_NODISCARD static MSTL_CONSTEXPR20 string to_string(const value_type value) {
-        return self(value).to_string();
+        return decimal(value).to_string();
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
         return _INNER __float_to_string<char>(value_);
     }
 
-    MSTL_NODISCARD static constexpr self parse(const string_view str) {
-        return self{_MSTL to_decimal(str)};
+    MSTL_NODISCARD static constexpr decimal parse(const string_view str) {
+        return decimal{_MSTL to_decimal(str)};
     }
 };
 

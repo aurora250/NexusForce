@@ -8,21 +8,141 @@
 #include <cerrno>
 #include <unistd.h>
 #endif
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <winioctl.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
+
+file::async_context::async_context(string&& d)
+: data(_MSTL move(d)), is_write(true) {
+    cb = new aiocb_type{};
+    _MSTL memory_zero(cb, sizeof(aiocb_type));
+#ifdef MSTL_PLATFORM_WINDOWS__
+    cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+#endif
+}
+
+file::async_context::async_context(string* buf)
+: buffer(buf), is_write(false) {
+    cb = new aiocb_type{};
+    _MSTL memory_zero(cb, sizeof(aiocb_type));
+#ifdef MSTL_PLATFORM_WINDOWS__
+    cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+#endif
+}
+
+file::async_context::~async_context() {
+    if (cb) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        if (cb->hEvent) ::CloseHandle(cb->hEvent);
+#endif
+        delete cb;
+    }
+}
+
+bool file::complete_async_result(async_result& result, const size_type bytes_transferred) {
+    result.completed = true;
+    result.bytes_transferred = bytes_transferred;
+    result.error_code = 0;
+
+    lock_guard<mutex> lock(async_mutex_);
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (result.cb) {
+        auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+        if (it != async_operations_.end()) {
+            async_operations_.erase(it);
+        }
+
+        auto ctx_it = async_contexts_.find(result.cb);
+        if (ctx_it != async_contexts_.end()) {
+            delete ctx_it->second;
+            async_contexts_.erase(ctx_it);
+        }
+
+        result.cb = nullptr;
+    }
+#elif defined(MSTL_PLATFORM_LINUX__)
+    if (result.cb) {
+        auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+        if (it != async_operations_.end()) {
+            async_operations_.erase(it);
+        }
+
+        auto ctx_it = async_contexts_.find(result.cb);
+        if (ctx_it != async_contexts_.end()) {
+            delete ctx_it->second;
+            async_contexts_.erase(ctx_it);
+        }
+
+        result.cb = nullptr;
+    }
+#endif
+
+    result.user_context = nullptr;
+    return true;
+}
+
+bool file::check_async_completion(async_result& result) {
+#ifdef MSTL_PLATFORM_LINUX__
+    if (!result.cb) {
+        result.error_code = EINVAL;
+        return false;
+    }
+
+    const int error = ::aio_error(result.cb);
+    if (error == 0) {
+        const ssize_t ret = ::aio_return(result.cb);
+        if (ret >= 0) {
+            return complete_async_result(result, static_cast<size_type>(ret));
+        } else {
+            set_last_error();
+            result.error_code = last_error_code_;
+            return false;
+        }
+    } else if (error == EINPROGRESS) {
+        result.error_code = EINPROGRESS;
+        return false;
+    } else {
+        result.error_code = error;
+        last_error_code_ = error;
+        last_error_msg_ = ::strerror(error);
+        return false;
+    }
+#else
+    return false;
+#endif
+}
 
 bool file::flush_write_buffer() const noexcept {
     if (write_buffer_pos_ == 0) return true;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     size_type bytes_written;
-    const ::BOOL success = ::WriteFile(handle_, write_buffer_.data(),
-        write_buffer_pos_, &bytes_written, nullptr);
+    const ::BOOL success = ::WriteFile(
+        handle_,
+        write_buffer_.data(),
+        write_buffer_pos_,
+        &bytes_written,
+        nullptr
+    );
     if (!success || bytes_written != write_buffer_pos_) {
         return false;
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ssize_t bytes_written = ::write(handle_, write_buffer_.data(), write_buffer_pos_);
-    if (bytes_written != static_cast<ssize_t>(write_buffer_pos_)) return false;
+    ssize_t total_written = 0;
+    while (total_written < static_cast<ssize_t>(write_buffer_pos_)) {
+        ssize_t bytes_written = ::write(
+            handle_,
+            write_buffer_.data() + total_written,
+            write_buffer_pos_ - total_written
+        );
+        if (bytes_written == -1) {
+            if (errno == EINTR) continue;
+            return false;
+        }
+        total_written += bytes_written;
+    }
 #endif
 
     write_buffer_pos_ = 0;
@@ -133,7 +253,7 @@ string file::get_last_error_msg() {
         return {};
     }
     ::LPSTR message_buffer = nullptr;
-    const size_t size = ::FormatMessageA(
+    const size_type size = ::FormatMessageA(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
@@ -222,7 +342,7 @@ file::file(file&& other) noexcept
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
-    other.path_ = path{};
+    other.path_ = _MSTL path{};
     other.read_buffer_.clear();
     other.read_buffer_pos_ = 0;
     other.read_buffer_size_ = 0;
@@ -253,7 +373,7 @@ file& file::operator =(file&& other) noexcept {
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
-    other.path_ = path{};
+    other.path_ = _MSTL path{};
     other.read_buffer_.clear();
     other.read_buffer_pos_ = 0;
     other.read_buffer_size_ = 0;
@@ -266,11 +386,20 @@ file& file::operator =(file&& other) noexcept {
 file::~file() {
     unmap();
 
+    lock_guard<mutex> lock(async_mutex_);
+
 #ifdef MSTL_PLATFORM_WINDOWS__
     for (auto* ov : async_operations_) {
         if (ov) {
-            ::DWORD bytes_transferred = 0;
+            ::CancelIoEx(handle_, ov);
+            size_type bytes_transferred = 0;
             ::GetOverlappedResult(handle_, ov, &bytes_transferred, TRUE);
+
+            auto ctx_it = async_contexts_.find(ov);
+            if (ctx_it != async_contexts_.end()) {
+                delete ctx_it->second;
+            }
+
             if (ov->hEvent) {
                 ::CloseHandle(ov->hEvent);
             }
@@ -286,16 +415,22 @@ file::~file() {
             ::aio_suspend(list, 1, nullptr);
             ::aio_return(aiocb);
 
+            auto ctx_it = async_contexts_.find(aiocb);
+            if (ctx_it != async_contexts_.end()) {
+                delete ctx_it->second;
+            }
+
             delete aiocb;
         }
     }
 #endif
     async_operations_.clear();
+    async_contexts_.clear();
 
     this->close();
 }
 
-bool file::open(path p, const bool append,
+bool file::open(_MSTL path p, const bool append,
     FILE_ACCESS access,
     FILE_SHARED share_mode,
     FILE_CREATION creation,
@@ -356,7 +491,7 @@ bool file::open(const bool append,
 
 void file::close() noexcept {
     if (opened_ && handle_ != INVALID_HANDLE()) {
-        this->flush_write_buffer();
+        this->flush();
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::CloseHandle(handle_);
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -365,6 +500,13 @@ void file::close() noexcept {
         handle_ = INVALID_HANDLE();
         opened_ = false;
         append_mode_ = false;
+        read_buffer_.clear();
+        read_buffer_pos_ = 0;
+        read_buffer_size_ = 0;
+        write_buffer_.clear();
+        write_buffer_pos_ = 0;
+        buffer_size_ = FILE_BUFFER_SIZE;
+        async_operations_.clear();
     }
 }
 
@@ -375,15 +517,20 @@ bool file::flush() const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::FlushFileBuffers(handle_) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    return ::fsync(handle_) == 0;
+    return ::fdatasync(handle_) == 0;
 #endif
 }
 
-file::size_type file::write(const string& data, const size_type size) const {
+file::size_type file::write(const string& data, const size_type size) {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
 
     const size_type real_size = size > data.size() ? data.size() : size;
     if (real_size == 0) return 0;
+
+    if (append_mode_ && !seek(0, FILE_POINTER::END)) {
+        set_last_error();
+        return 0;
+    }
 
     if (real_size > buffer_size_ * 4) {
         if (!flush_write_buffer()) return 0;
@@ -394,13 +541,16 @@ file::size_type file::write(const string& data, const size_type size) const {
         while (total_written < real_size) {
 #ifdef MSTL_PLATFORM_WINDOWS__
             size_type bytes_written = 0;
-            const size_type to_write = real_size - total_written;
+            const size_type to_write = _MSTL min<size_type>(
+                real_size - total_written,
+                numeric_limits<size_type>::max()
+            );
             if (!::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr)) {
                 set_last_error();
                 break;
             }
-            if (bytes_written == 0) break;
             total_written += bytes_written;
+            if (bytes_written != to_write) break;
 #elif defined(MSTL_PLATFORM_LINUX__)
             const ssize_t written = ::write(
                 handle_, ptr + total_written, real_size - total_written);
@@ -432,13 +582,20 @@ file::size_type file::write(const string& data, const size_type size) const {
         remaining -= to_copy;
 
         if (write_buffer_pos_ == buffer_size_ && !flush_write_buffer()) {
+            set_last_error();
             break;
         }
     }
+
+    if (append_mode_ && !seek(0, FILE_POINTER::END)) {
+        set_last_error();
+        return false;
+    }
+
     return total_written;
 }
 
-file::size_type file::write(const string& data) const {
+file::size_type file::write(const string& data) {
     return this->write(data, data.size());
 }
 
@@ -490,7 +647,7 @@ string file::read() const {
     return content;
 }
 
-vector<string> file::read_chunks(const size_type chunk_size) const {
+vector<string> file::read_chunks(const size_type chunk_size) {
     vector<string> chunks;
     if (!opened_ || handle_ == INVALID_HANDLE()) return chunks;
 
@@ -498,65 +655,193 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
     if (file_sz == 0) return chunks;
 
     const difference_type original_pos = tell();
-    seek(0, FILE_POINTER::BEGIN);
+    if (original_pos == static_cast<difference_type>(-1)) {
+        set_last_error();
+        return chunks;
+    }
+
+    if (!seek(0, FILE_POINTER::BEGIN)) {
+        set_last_error();
+        return chunks;
+    }
 
     size_type remaining = file_sz;
+    const size_type direct_threshold = chunk_size * 2;
+
     while (remaining > 0) {
         const size_type to_read = remaining < chunk_size ? remaining : chunk_size;
         string chunk;
-        chunk.resize(to_read);
 
-        const size_type bytes_read = read(chunk, to_read);
-        if (bytes_read != to_read) {
-            chunk.resize(bytes_read);
+        if (to_read > direct_threshold) {
+            chunk.resize(to_read);
+            size_type bytes_read = 0;
+
+            read_buffer_pos_ = read_buffer_size_;
+            char* data = chunk.data();
+
+            while (bytes_read < to_read) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+                size_type bytes_read_now = 0;
+                const size_type to_read_now = _MSTL min<size_type>(
+                    to_read - bytes_read,
+                    numeric_limits<size_type>::max()
+                );
+
+                if (!::ReadFile(handle_, data + bytes_read,
+                    to_read_now, &bytes_read_now, nullptr)) {
+                    set_last_error();
+                    break;
+                              }
+                bytes_read += bytes_read_now;
+                if (bytes_read_now == 0) break;
+#elif defined(MSTL_PLATFORM_LINUX__)
+                ssize_t bytes_read_now = ::read(handle_,
+                    data + bytes_read, to_read - bytes_read);
+                if (bytes_read_now == -1) {
+                    if (errno == EINTR) continue;
+                    set_last_error();
+                    break;
+                }
+                if (bytes_read_now == 0) break;
+                bytes_read += static_cast<size_type>(bytes_read_now);
+#endif
+            }
+            if (bytes_read < to_read) {
+                chunk.resize(bytes_read);
+            }
+        } else {
+            chunk.resize(to_read);
+            const size_type bytes_read = read(chunk, to_read);
+            if (bytes_read != to_read) {
+                chunk.resize(bytes_read);
+            }
         }
 
         if (!chunk.empty()) {
-            chunks.emplace_back(_MSTL move(chunk));
+            chunks.push_back(_MSTL move(chunk));
+        } else {
+            break;
         }
 
-        remaining -= bytes_read;
-        if (bytes_read == 0) break;
+        remaining -= chunk.size();
     }
 
-    seek(original_pos, FILE_POINTER::BEGIN);
+    if(!seek(original_pos, FILE_POINTER::BEGIN)) {
+        set_last_error();
+    }
     return chunks;
 }
 
 bool file::write_chunks(const vector<string>& chunks) {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
-    for (const auto& chunk : chunks) {
-        const size_type bytes_written = write(chunk, chunk.size());
-        if (bytes_written != chunk.size()) {
-            set_last_error();
-            return false;
-        }
+    const difference_type original_pos = tell();
+
+    if (append_mode_ && !seek(0, FILE_POINTER::END)) {
+        set_last_error();
+        return false;
+    }
+    if (!flush_write_buffer()) {
+        set_last_error();
+        return false;
     }
 
-    return flush();
+    bool success = true;
+    size_type total_written = 0;
+
+    for (const auto& chunk : chunks) {
+        if (chunk.empty()) continue;
+
+        const char* data = chunk.data();
+        size_type remaining = chunk.size();
+
+        while (remaining > 0) {
+            size_type bytes_written = 0;
+            if (remaining > buffer_size_ * 4) {
+                if (!flush_write_buffer()) {
+                    success = false;
+                    break;
+                }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+                const size_type to_write = _MSTL min<size_type>(
+                    remaining,
+                    numeric_limits<size_type>::max()
+                );
+                size_type written_now = 0;
+
+                if (!::WriteFile(handle_, data + (chunk.size() - remaining),
+                    to_write, &written_now, nullptr)) {
+                    set_last_error();
+                    success = false;
+                    break;
+                }
+                bytes_written = written_now;
+#elif defined(MSTL_PLATFORM_LINUX__)
+                ssize_t written_now = ::write(handle_,
+                                            data + (chunk.size() - remaining),
+                                            remaining);
+                if (written_now == -1) {
+                    if (errno == EINTR) continue;
+                    set_last_error();
+                    success = false;
+                    break;
+                }
+                bytes_written = static_cast<size_type>(written_now);
+#endif
+            } else {
+                bytes_written = write(chunk, remaining);
+            }
+
+            if (bytes_written == 0) {
+                success = false;
+                break;
+            }
+            remaining -= bytes_written;
+            total_written += bytes_written;
+        }
+        if (!success) break;
+    }
+
+    if (!flush()) {
+        success = false;
+    }
+    if (!append_mode_ && original_pos >= 0 &&
+        !seek(original_pos, FILE_POINTER::BEGIN)) {
+        set_last_error();
+    }
+    return success;
 }
 
-vector<file::chunk_info> file::get_chunk_info(size_type chunk_size) const {
+vector<file::chunk_info> file::chunks_info(size_type chunk_size) {
     vector<chunk_info> info;
-    if (!opened_ || handle_ == INVALID_HANDLE()) return info;
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        set_last_error();
+        return info;
+    }
+    if (chunk_size == 0) {
+        chunk_size = FILE_BUFFER_SIZE * 16;
+    }
 
     const size_type file_sz = size();
     if (file_sz == 0) return info;
 
-    difference_type offset = 0;
+    const size_type num_chunks = (file_sz + chunk_size - 1) / chunk_size;
+    info.reserve(num_chunks);
+
+    size_type offset = 0;
     size_type index = 0;
 
-    while (offset < static_cast<difference_type>(file_sz)) {
+    while (offset < file_sz) {
         chunk_info ci{};
         ci.offset = offset;
         ci.chunk_index = index;
 
         const size_type remaining = file_sz - offset;
-        ci.size = remaining < chunk_size ? remaining : chunk_size;
-
+        ci.size = _MSTL min(remaining, chunk_size);
         info.push_back(ci);
 
+        if (file_sz - offset < ci.size) break;
         offset += ci.size;
         ++index;
     }
@@ -565,14 +850,17 @@ vector<file::chunk_info> file::get_chunk_info(size_type chunk_size) const {
 }
 
 file::size_type file::read_binary(string& str, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE() || str.empty() || size == 0) return 0;
-
-    if (str.size() < size) {
-        str.resize(size);
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        return 0;
+    }
+    if (size == 0) {
+        str.clear();
+        return 0;
     }
 
-    size_type total_read = 0;
+    str.resize(size);
     char* buffer = str.data();
+    size_type total_read = 0;
 
     while (total_read < size) {
         if (read_buffer_pos_ >= read_buffer_size_) {
@@ -584,8 +872,7 @@ file::size_type file::read_binary(string& str, const size_type size) const {
         const size_type available = read_buffer_size_ - read_buffer_pos_;
         const size_type to_read = _MSTL min(size - total_read, available);
 
-        _MSTL copy_n(read_buffer_.data() + read_buffer_pos_,
-                     to_read, buffer + total_read);
+        _MSTL memory_copy(buffer + total_read, read_buffer_.data() + read_buffer_pos_, to_read);
         read_buffer_pos_ += to_read;
         total_read += to_read;
     }
@@ -688,373 +975,482 @@ vector<string> file::read_lines() const {
 file::async_result file::async_read(string& buffer,
     const size_type size, const difference_type offset) {
     async_result result;
+
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
         result.error_code = last_error_code_;
         return result;
     }
-
-    buffer.resize(size);
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-    buffer.resize(size);
-
-    auto* ov = new ::OVERLAPPED{};
-    _MSTL fill_n(reinterpret_cast<char*>(ov), sizeof(::OVERLAPPED), 0);
-
-    if (offset >= 0) {
-        const uint64_t offset_64 = static_cast<uint64_t>(offset);
-        ov->Offset = static_cast<::DWORD>(offset_64 & 0xFFFFFFFF);
-        ov->OffsetHigh = static_cast<::DWORD>(offset_64 >> 32);
+    if (size == 0) {
+        buffer.clear();
+        result.completed = true;
+        return result;
     }
 
-    ov->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
-    if (!ov->hEvent) {
-        delete ov;
+    if (buffer.capacity() < size) {
+        try {
+            buffer.reserve(size);
+        } catch (...) {
+            last_error_msg_ = "Not enough memory";
+            return result;
+        }
+    }
+
+    auto* context = new async_context(&buffer);
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (!context->cb->hEvent) {
+        delete context;
         set_last_error();
         result.error_code = last_error_code_;
         return result;
     }
 
-    ::DWORD bytes_read = 0;
-    if (::ReadFile(handle_, buffer.data(), size, &bytes_read, ov)) {
+    if (offset >= 0) {
+        const uint64_t offset_64 = static_cast<uint64_t>(offset);
+        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+        context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+    } else {
+        const difference_type current_pos = tell();
+        if (current_pos >= 0) {
+            const uint64_t offset_64 = static_cast<uint64_t>(current_pos);
+            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+            context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+        }
+    }
+
+    if (buffer.size() < size) {
+        buffer.resize(size);
+    }
+
+    size_type bytes_read = 0;
+    const size_type read_size = _MSTL min<size_type>(size, numeric_limits<size_type>::max());
+
+    if (::ReadFile(handle_, buffer.data(), read_size, &bytes_read, context->cb)) {
         result.completed = true;
         result.bytes_transferred = bytes_read;
-        ::CloseHandle(ov->hEvent);
-        delete ov;
+        delete context;
     } else {
         const ::DWORD error = ::GetLastError();
         if (error == ERROR_IO_PENDING) {
             result.completed = false;
-            result.overlapped = ov;
-            async_operations_.push_back(ov);
+            result.cb = context->cb;
+            result.user_context = context;
+
+            lock_guard<mutex> lock(async_mutex_);
+            async_operations_.push_back(context->cb);
+            async_contexts_[context->cb] = context;
         } else {
             set_last_error();
             result.error_code = last_error_code_;
-            ::CloseHandle(ov->hEvent);
-            delete ov;
+            delete context;
         }
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    auto* aiocb = new ::aiocb{};
-    _MSTL fill_n(reinterpret_cast<char*>(aiocb), sizeof(::aiocb), 0);
+    if (offset >= 0) {
+        context->cb->aio_offset = offset;
+    } else {
+        const difference_type current_pos = tell();
+        if (current_pos >= 0) {
+            context->cb->aio_offset = current_pos;
+        } else {
+            context->cb->aio_offset = 0;
+        }
+    }
 
-    aiocb->aio_fildes = handle_;
-    aiocb->aio_buf = buffer.data();
-    aiocb->aio_nbytes = size;
-    aiocb->aio_offset = offset >= 0 ? offset : this->tell();
-    aiocb->aio_sigevent.sigev_notify = SIGEV_NONE;
+    if (buffer.size() < size) {
+        buffer.resize(size);
+    }
 
-    if (::aio_read(aiocb) == 0) {
+    context->cb->aio_fildes = handle_;
+    context->cb->aio_buf = buffer.data();
+    context->cb->aio_nbytes = size;
+    context->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
+
+    if (::aio_read(context->cb) == 0) {
         result.completed = false;
-        result.cb = aiocb;
-        async_operations_.push_back(aiocb);
+        result.cb = context->cb;
+        result.user_context = context;
+
+        lock_guard<mutex> lock(async_mutex_);
+        async_operations_.push_back(context->cb);
+        async_contexts_[context->cb] = context;
     } else {
         set_last_error();
         result.error_code = last_error_code_;
-        delete aiocb;
+        delete context;
     }
 #endif
+
     return result;
 }
 
-file::async_result file::async_write(const string& data,
+file::async_result file::async_write(string data,
     const size_type size, const difference_type offset) {
     async_result result;
+
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
         result.error_code = last_error_code_;
         return result;
     }
 
-    const size_type real_size = size > data.size() ? data.size() : size;
+    const size_type real_size = (size == numeric_limits<size_type>::max()) ?
+        data.size() : _MSTL min(size, static_cast<size_type>(data.size()));
 
+    auto* context = new async_context(_MSTL move(data));
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto* ov = new ::OVERLAPPED{};
-    _MSTL fill_n(reinterpret_cast<char*>(ov), sizeof(::OVERLAPPED), 0);
-
-    if (offset >= 0) {
-        const uint64_t offset_64 = static_cast<uint64_t>(offset);
-        ov->Offset = static_cast<::DWORD>(offset_64 & 0xFFFFFFFF);
-        ov->OffsetHigh = static_cast<::DWORD>(offset_64 >> 32);
-    }
-
-    ov->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
-    if (!ov->hEvent) {
-        delete ov;
+    if (!context->cb->hEvent) {
+        delete context;
         set_last_error();
         result.error_code = last_error_code_;
         return result;
     }
 
-    ::DWORD bytes_written = 0;
-    if (::WriteFile(handle_, data.data(), real_size, &bytes_written, ov)) {
+    if (offset >= 0) {
+        const uint64_t offset_64 = static_cast<uint64_t>(offset);
+        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+        context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+    } else {
+        const difference_type current_pos = tell();
+        if (current_pos >= 0) {
+            const uint64_t offset_64 = static_cast<uint64_t>(current_pos);
+            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+            context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+        }
+    }
+
+    size_type bytes_written = 0;
+    const size_type write_size = _MSTL min<size_type>(real_size, numeric_limits<size_type>::max());
+
+    if (::WriteFile(handle_, data.data(), write_size, &bytes_written, context->cb)) {
         result.completed = true;
         result.bytes_transferred = bytes_written;
-        ::CloseHandle(ov->hEvent);
-        delete ov;
+        delete context;
     } else {
         const ::DWORD error = ::GetLastError();
         if (error == ERROR_IO_PENDING) {
             result.completed = false;
-            result.overlapped = ov;
-            async_operations_.push_back(ov);
+            result.cb = context->cb;
+            result.user_context = context;
+
+            lock_guard<mutex> lock(async_mutex_);
+            async_operations_.push_back(context->cb);
+            async_contexts_[context->cb] = context;
         } else {
             set_last_error();
             result.error_code = last_error_code_;
-            ::CloseHandle(ov->hEvent);
-            delete ov;
+            delete context;
         }
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    auto* cb = new ::aiocb{};
-    _MSTL fill_n(reinterpret_cast<char*>(cb), sizeof(::aiocb), 0);
+    if (offset >= 0) {
+        context->cb->aio_offset = offset;
+    } else {
+        const difference_type current_pos = tell();
+        if (current_pos >= 0) {
+            context->cb->aio_offset = current_pos;
+        } else {
+            context->cb->aio_offset = 0;
+        }
+    }
 
-    cb->aio_fildes = handle_;
-    cb->aio_buf = const_cast<char*>(data.data());
-    cb->aio_nbytes = real_size;
-    cb->aio_offset = offset >= 0 ? offset : this->tell();
-    cb->aio_sigevent.sigev_notify = SIGEV_NONE;
+    context->cb->aio_fildes = handle_;
+    context->cb->aio_buf = const_cast<char*>(data.data());
+    context->cb->aio_nbytes = real_size;
+    context->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
 
-    if (::aio_write(cb) == 0) {
+    if (::aio_write(context->cb) == 0) {
         result.completed = false;
-        result.cb = cb;
-        async_operations_.push_back(cb);
+        result.cb = context->cb;
+        result.user_context = context;
+
+        lock_guard<mutex> lock(async_mutex_);
+        async_operations_.push_back(context->cb);
+        async_contexts_[context->cb] = context;
     } else {
         set_last_error();
         result.error_code = last_error_code_;
-        delete cb;
+        delete context;
     }
 #endif
+
     return result;
 }
 
 bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
     if (result.completed) return true;
+
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!result.overlapped) return false;
-
-    ::DWORD bytes_transferred = 0;
-    const ::BOOL success = ::GetOverlappedResult(
-        handle_,
-        result.overlapped,
-        &bytes_transferred,
-        TRUE
-    );
-
-    if (success) {
-        result.completed = true;
-        result.bytes_transferred = bytes_transferred;
-        ::CloseHandle(result.overlapped->hEvent);
-
-        auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.overlapped);
-        if (it != async_operations_.end()) {
-            async_operations_.erase(it);
-        }
-
-        delete result.overlapped;
-        result.overlapped = nullptr;
-        return true;
+    if (!result.cb) {
+        result.error_code = ERROR_INVALID_PARAMETER;
+        return false;
     }
 
-    set_last_error();
-    result.error_code = last_error_code_;
-    return false;
+    size_type bytes_transferred = 0;
+
+    if (timeout_ms == numeric_limits<uint32_t>::max()) {
+        if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, TRUE)) {
+            return complete_async_result(result, bytes_transferred);
+        }
+    } else {
+        const ::HANDLE hEvent = result.cb->hEvent;
+        if (hEvent) {
+            const auto wait_result = ::WaitForSingleObject(hEvent, timeout_ms);
+            if (wait_result == WAIT_OBJECT_0) {
+                if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE)) {
+                    return complete_async_result(result, bytes_transferred);
+                }
+            } else if (wait_result == WAIT_TIMEOUT) {
+                result.error_code = WAIT_TIMEOUT;
+                return false;
+            } else if (wait_result == WAIT_FAILED) {
+                set_last_error();
+                result.error_code = last_error_code_;
+                return false;
+            }
+        }
+    }
 #elif defined(MSTL_PLATFORM_LINUX__)
     if (!result.cb) {
         result.error_code = EINVAL;
         return false;
     }
 
-    ::aiocb* target_aiocb = result.cb;
-    const ::aiocb* aiocb_list[1] = { target_aiocb };
-    ::timespec timeout{};
-    const ::timespec* timeout_ptr = nullptr;
+    const ::aiocb* const aiocb_list[1] = { result.cb };
 
-    if (timeout_ms != 0xFFFFFFFF) {
-        timeout.tv_sec = timeout_ms / 1000;
-        timeout.tv_nsec = (timeout_ms % 1000) * 1000000;
-        timeout_ptr = &timeout;
-    }
-
-    const int suspend_result = ::aio_suspend(aiocb_list, 1, timeout_ptr);
-
-    if (suspend_result == 0) {
-        const int error = ::aio_error(target_aiocb);
-
-        if (error == 0) {
-            const ssize_t return_value = ::aio_return(target_aiocb);
-            if (return_value >= 0) {
-                result.completed = true;
-                result.bytes_transferred = static_cast<size_type>(return_value);
-                result.error_code = 0;
-
-                const auto it = _MSTL find(
-                    async_operations_.begin(),
-                    async_operations_.end(),
-                    target_aiocb
-                );
-                if (it != async_operations_.end()) {
-                    async_operations_.erase(it);
-                }
-
-                delete target_aiocb;
-                result.cb = nullptr;
-                return true;
-            } else {
-                result.error_code = errno;
-                set_last_error();
-
-                const auto it = _MSTL find(
-                    async_operations_.begin(),
-                    async_operations_.end(),
-                    target_aiocb
-                );
-                if (it != async_operations_.end()) {
-                    async_operations_.erase(it);
-                }
-
-                delete target_aiocb;
-                result.cb = nullptr;
-                return false;
-            }
-        } else if (error == EINPROGRESS) {
-            result.error_code = EINPROGRESS;
-            return false;
-        } else {
-            result.error_code = error;
-            last_error_code_ = error;
-            last_error_msg_ = ::strerror(error);
-
-            ::aio_return(target_aiocb);
-
-            const auto it = _MSTL find(
-                async_operations_.begin(),
-                async_operations_.end(),
-                target_aiocb
-            );
-            if (it != async_operations_.end()) {
-                async_operations_.erase(it);
-            }
-
-            delete target_aiocb;
-            result.cb = nullptr;
-            return false;
+    if (timeout_ms == 0xFFFFFFFF) {
+        if (::aio_suspend(aiocb_list, 1, nullptr) == 0) {
+            return check_async_completion(result);
         }
     } else {
-        if (errno == EAGAIN) {
-            result.error_code = ETIMEDOUT;
-            return false;
+        ::timespec timeout{};
+        timeout.tv_sec = timeout_ms / 1000;
+        timeout.tv_nsec = (timeout_ms % 1000) * 1000000;
+
+        if (::aio_suspend(aiocb_list, 1, &timeout) == 0) {
+            return check_async_completion(result);
         } else {
-            set_last_error();
-            result.error_code = last_error_code_;
-            return false;
+            const int err = errno;
+            if (err == EAGAIN || err == ETIMEDOUT) {
+                result.error_code = ETIMEDOUT;
+                return false;
+            } else if (err == EINTR) {
+                result.error_code = EINTR;
+                return false;
+            } else {
+                set_last_error();
+                result.error_code = last_error_code_;
+                return false;
+            }
         }
     }
 #endif
+
+    set_last_error();
+    result.error_code = last_error_code_;
+    return false;
 }
 
 void file::cancel_async(async_result& result) {
     if (result.completed) return;
-#ifdef MSTL_PLATFORM_WINDOWS__
-    if (!result.overlapped) return;
-
-    ::CancelIoEx(handle_, result.overlapped);
-    ::CloseHandle(result.overlapped->hEvent);
-
-    auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.overlapped);
-    if (it != async_operations_.end()) {
-        async_operations_.erase(it);
-    }
-
-    delete result.overlapped;
-    result.overlapped = nullptr;
-#elif defined(MSTL_PLATFORM_LINUX__)
+    lock_guard<mutex> lock(async_mutex_);
     if (!result.cb) return;
 
-    ::aiocb* target_aiocb = result.cb;
-
-    switch (::aio_cancel(handle_, target_aiocb)) {
-        case AIO_CANCELED: {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (!::CancelIoEx(handle_, result.cb)) {
+        size_type bytes_transferred = 0;
+        if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE)) {
             result.completed = true;
-            result.error_code = ECANCELED;
-            break;
-        }
-        case AIO_NOTCANCELED: {
-            const ::aiocb* aiocb_list[1] = { target_aiocb };
-            ::aio_suspend(aiocb_list, 1, nullptr);
-            const ssize_t return_value = ::aio_return(target_aiocb);
+            result.bytes_transferred = bytes_transferred;
+        } else {
             result.completed = true;
-            result.bytes_transferred = return_value >= 0 ?
-                static_cast<size_type>(return_value) : 0;
-            result.error_code = return_value >= 0 ? 0 : errno;
-            break;
+            result.error_code = ::GetLastError();
         }
-        case AIO_ALLDONE: {
-            const ssize_t return_value = ::aio_return(target_aiocb);
-            result.completed = true;
-            result.bytes_transferred = return_value >= 0 ?
-                static_cast<size_type>(return_value) : 0;
-            result.error_code = return_value >= 0 ? 0 : errno;
-            break;
-        }
-        default: {
-            set_last_error();
-            result.error_code = last_error_code_;
-            break;
-        }
+    } else {
+        result.completed = true;
+        result.error_code = ERROR_OPERATION_ABORTED;
     }
 
-    const auto it = _MSTL find(
-        async_operations_.begin(),
-        async_operations_.end(),
-        target_aiocb);
-
+    auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
-    delete target_aiocb;
+
+    const auto ctx_it = async_contexts_.find(result.cb);
+    if (ctx_it != async_contexts_.end()) {
+        delete ctx_it->second;
+        async_contexts_.erase(ctx_it);
+    }
+
+    if (result.cb) {
+        if (result.cb->hEvent) {
+            ::CloseHandle(result.cb->hEvent);
+        }
+        delete result.cb;
+        result.cb = nullptr;
+    }
+#elif defined(MSTL_PLATFORM_LINUX__)
+    int cancel_result = ::aio_cancel(handle_, result.cb);
+
+    if (cancel_result == AIO_CANCELED) {
+        result.completed = true;
+        result.error_code = ECANCELED;
+        result.bytes_transferred = 0;
+    } else if (cancel_result == AIO_NOTCANCELED) {
+        const ::aiocb* const aiocb_list[1] = { result.cb };
+        ::aio_suspend(aiocb_list, 1, nullptr);
+
+        const ssize_t ret = ::aio_return(result.cb);
+        result.completed = true;
+        result.bytes_transferred = (ret > 0) ? static_cast<size_type>(ret) : 0;
+        result.error_code = (ret >= 0) ? 0 : errno;
+    } else if (cancel_result == AIO_ALLDONE) {
+        const ssize_t ret = ::aio_return(result.cb);
+        result.completed = true;
+        result.bytes_transferred = (ret > 0) ? static_cast<size_type>(ret) : 0;
+        result.error_code = (ret >= 0) ? 0 : errno;
+    } else {
+        result.completed = true;
+        result.error_code = errno;
+    }
+
+    auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+    if (it != async_operations_.end()) {
+        async_operations_.erase(it);
+    }
+
+    auto ctx_it = async_contexts_.find(result.cb);
+    if (ctx_it != async_contexts_.end()) {
+        delete ctx_it->second;
+        async_contexts_.erase(ctx_it);
+    }
+
+    delete result.cb;
     result.cb = nullptr;
+
 #endif
+
+    result.user_context = nullptr;
 }
 
 
-file::size_type file::size() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
-    if (write_buffer_pos_ > 0 && !flush_write_buffer()) return 0;
+file::size_type file::size() const {
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        last_error_msg_ = "File not opened";
+        return 0;
+    }
+
+    if (write_buffer_pos_ > 0) {
+        const difference_type current_pos = tell();
+        if (current_pos < 0) {
+            set_last_error();
+            return 0;
+        }
+        if (!flush_write_buffer()) {
+            set_last_error();
+            return 0;
+        }
+        if (!seek(current_pos, FILE_POINTER::BEGIN)) {
+            set_last_error();
+            return 0;
+        }
+    }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::LARGE_INTEGER file_size;
     if (!::GetFileSizeEx(handle_, &file_size)) {
+        set_last_error();
         return 0;
     }
+
+    if (file_size.QuadPart > static_cast<::LONGLONG>(numeric_limits<size_type>::max())) {
+        last_error_code_ = ERROR_FILE_TOO_LARGE;
+        last_error_msg_ = "File size exceeds maximum representable size";
+        return 0;
+    }
+
     return static_cast<size_type>(file_size.QuadPart);
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) return 0;
+    if (::fstat64(handle_, &st) == -1) {
+        set_last_error();
+        return 0;
+    }
+
+    if (static_cast<uint64_t>(st.st_size) > numeric_limits<size_type>::max()) {
+        last_error_code_ = EFBIG;
+        last_error_msg_ = "File size exceeds maximum representable size";
+        return 0;
+    }
+
     return static_cast<size_type>(st.st_size);
 #endif
 }
 
-file::size_type file::size(const path& p) {
+bool file::size(size_type& out_size) const {
+    out_size = 0;
+
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        last_error_msg_ = "File not opened";
+        return false;
+    }
+
+    out_size = size();
+    return last_error_code_ == 0;
+}
+
+uint64_t file::size64() const {
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        set_last_error();
+        return 0;
+    }
+
+    if (write_buffer_pos_ > 0) {
+        const difference_type current_pos = tell();
+        if (!flush_write_buffer()) {
+            return 0;
+        }
+        seek(current_pos, FILE_POINTER::BEGIN);
+    }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::LARGE_INTEGER file_size;
+    if (!::GetFileSizeEx(handle_, &file_size)) {
+        set_last_error();
+        return 0;
+    }
+    return static_cast<uint64_t>(file_size.QuadPart);
+
+#elif defined(MSTL_PLATFORM_LINUX__)
+    struct ::stat64 st{};
+    if (::fstat64(handle_, &st) == -1) {
+        set_last_error();
+        return 0;
+    }
+    return static_cast<uint64_t>(st.st_size);
+#endif
+}
+
+file::size_type file::size(const _MSTL path& p) {
     size_type sz = 0;
     file::size(p, sz);
     return sz;
 }
 
-bool file::size(const path& p, size_type& size) {
-    {
-        file f;
-        if (f.open(p, false, FILE_ACCESS::READ)) {
-            size = f.size();
-            return true;
-        }
+bool file::size(const _MSTL path& p, size_type& size) {
+    file f;
+    if (f.open(p, false, FILE_ACCESS::READ)) {
+        size = f.size();
+        return true;
     }
     return false;
 }
 
-bool file::create_and_write(const path& p, const string& content, const bool append) {
-    const path parent = p.parent_path();
+bool file::create_and_write(const _MSTL path& p, const string& content, const bool append) {
+    const _MSTL path parent = p.parent_path();
     if (!parent.empty() && !parent.exists()) {
         if (!parent.create_directories()) {
             return false;
@@ -1090,201 +1486,579 @@ bool file::create_and_write(const path& p, const string& content, const bool app
 #endif
 }
 
-bool file::compare(const path& file1, const path& file2, bool binary) {
+void file::clear_error() noexcept {
+    last_error_msg_.clear();
+    last_error_code_ = 0;
+}
+
+bool file::compare(const _MSTL path& file1, const _MSTL path& file2, const bool binary) {
     return binary ? compare_binary(file1, file2) : compare_text(file1, file2);
 }
 
-bool file::compare_binary(const path& file1, const path& file2) {
-    file f1, f2;
-    if (!f1.open(file1, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
-        return false;
-    }
-    if (!f2.open(file2, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
-        return false;
-    }
-
-    const size_type size1 = f1.size();
-    const size_type size2 = f2.size();
+bool file::compare_binary(const _MSTL path& file1, const _MSTL path& file2) {
+    const size_type size1 = file::size(file1);
+    const size_type size2 = file::size(file2);
     if (size1 != size2) return false;
     if (size1 == 0) return true;
 
-    constexpr size_type COMPARE_BUFFER_SIZE = FILE_BUFFER_SIZE * 4;
-    string buffer1, buffer2;
-
-    while (true) {
-        buffer1.resize(COMPARE_BUFFER_SIZE);
-        buffer2.resize(COMPARE_BUFFER_SIZE);
-
-        const size_type bytes_read1 = f1.read(buffer1, COMPARE_BUFFER_SIZE);
-        const size_type bytes_read2 = f2.read(buffer2, COMPARE_BUFFER_SIZE);
-
-        if (bytes_read1 != bytes_read2) return false;
-        if (bytes_read1 == 0) break;
-
-        buffer1.resize(bytes_read1);
-        buffer2.resize(bytes_read2);
-
-        if (buffer1 != buffer2) return false;
-    }
-
-    return true;
-}
-
-bool file::compare_text(const path& file1, const path& file2) {
     file f1, f2;
     if (!f1.open(file1, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
         return false;
     }
     if (!f2.open(file2, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
+        f1.close();
         return false;
     }
 
-    string line1, line2;
-    while (true) {
-        const bool has_line1 = f1.read_line(line1);
-        const bool has_line2 = f2.read_line(line2);
+    constexpr size_type COMPARE_BUFFER_SIZE = 64 * 1024;
+    string buffer1(COMPARE_BUFFER_SIZE);
+    string buffer2(COMPARE_BUFFER_SIZE);
 
-        if (has_line1 != has_line2) return false;
-        if (!has_line1) break;
+    size_type total_read = 0;
+    bool result = true;
 
-        if (line1 != line2) return false;
+    while (total_read < size1) {
+        const size_type remaining = size1 - total_read;
+        const size_type to_read = _MSTL min(remaining, COMPARE_BUFFER_SIZE);
+
+        const size_type bytes_read1 = f1.read_binary(buffer1, to_read);
+        const size_type bytes_read2 = f2.read_binary(buffer2, to_read);
+
+        if (bytes_read1 != bytes_read2 || bytes_read1 != to_read) {
+            result = false;
+            break;
+        }
+        if (_MSTL memory_compare(buffer1.data(), buffer2.data(), to_read) != 0) {
+            result = false;
+            break;
+        }
+
+        total_read += to_read;
+    }
+
+    return result;
+}
+
+bool file::compare_text(const _MSTL path& file1, const _MSTL path& file2,
+    const bool ignore_case, const bool ignore_whitespace) {
+    if (!ignore_case && !ignore_whitespace) {
+        return compare_binary(file1, file2);
+    }
+
+    file f1, f2;
+    if (!f1.open(file1, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
+        return false;
+    }
+    if (!f2.open(file2, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
+        f1.close();
+        return false;
+    }
+
+    constexpr size_type BUFFER_SIZE = 64 * 1024;
+    string buffer1, buffer2;
+    buffer1.reserve(BUFFER_SIZE);
+    buffer2.reserve(BUFFER_SIZE);
+    bool eof1 = false, eof2 = false;
+
+    auto normalize_string = [ignore_case, ignore_whitespace](string& str) {
+        if (ignore_whitespace) {
+            size_t start = 0;
+            size_t end = str.length();
+
+            while (start < end && _MSTL is_space(str[start])) {
+                ++start;
+            }
+            while (end > start && _MSTL is_space(str[end - 1])) {
+                --end;
+            }
+
+            if (start > 0 || end < str.length()) {
+                str = str.substr(start, end - start);
+            }
+        }
+
+        if (ignore_case) {
+            str.lowercase();
+        }
+    };
+
+    while (!eof1 && !eof2) {
+        buffer1.clear();
+        buffer2.clear();
+
+        const size_type bytes1 = f1.read(buffer1, BUFFER_SIZE);
+        const size_type bytes2 = f2.read(buffer2, BUFFER_SIZE);
+
+        if (bytes1 == 0) eof1 = true;
+        if (bytes2 == 0) eof2 = true;
+        if (eof1 != eof2) return false;
+
+        if (!eof1) {
+            size_t pos1 = 0, pos2 = 0;
+
+            while (pos1 < buffer1.length() && pos2 < buffer2.length()) {
+                size_t line_end1 = buffer1.find('\n', pos1);
+                size_t line_end2 = buffer2.find('\n', pos2);
+
+                if (line_end1 == string::npos) line_end1 = buffer1.length();
+                if (line_end2 == string::npos) line_end2 = buffer2.length();
+
+                string line1 = buffer1.substr(pos1, line_end1 - pos1);
+                string line2 = buffer2.substr(pos2, line_end2 - pos2);
+
+                if (!line1.empty() && line1.back() == '\r') line1.pop_back();
+                if (!line2.empty() && line2.back() == '\r') line2.pop_back();
+
+                normalize_string(line1);
+                normalize_string(line2);
+
+                if (line1 != line2) return false;
+
+                pos1 = line_end1 + 1;
+                pos2 = line_end2 + 1;
+            }
+        }
     }
 
     return true;
 }
 
 vector<file::binary_diff_entry> file::binary_diff(
-    const path& file1, const path& file2, size_type max_diffs) {
+    const _MSTL path& file1, const _MSTL path& file2, const size_type max_diffs) {
     vector<binary_diff_entry> diffs;
+    diffs.reserve(max_diffs);
 
     file f1, f2;
     if (!f1.open(file1, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
         return diffs;
     }
     if (!f2.open(file2, false, FILE_ACCESS::READ, FILE_SHARED::SHARE_READ)) {
+        f1.close();
         return diffs;
     }
 
     const size_type size1 = f1.size();
     const size_type size2 = f2.size();
-    const size_type min_size = size1 < size2 ? size1 : size2;
 
-    constexpr size_type COMPARE_BUFFER_SIZE = FILE_BUFFER_SIZE * 4;
-    string buffer1, buffer2;
+    if (size1 != size2 && diffs.size() < max_diffs) {
+        binary_diff_entry entry;
+        entry.offset = static_cast<difference_type>(_MSTL min(size1, size2));
+        entry.byte1 = 0;
+        entry.byte2 = 0;
+        entry.is_size_diff = true;
+        entry.size_diff = static_cast<int64_t>(size1) - static_cast<int64_t>(size2);
+        diffs.push_back(entry);
+    }
+
+    const size_type min_size = _MSTL min(size1, size2);
+    if (min_size == 0) return diffs;
+
+    constexpr size_type BLOCK_SIZE = 64 * 1024;
+    string buffer1(BLOCK_SIZE);
+    string buffer2(BLOCK_SIZE);
     difference_type offset = 0;
 
-    while (offset < static_cast<difference_type>(min_size) && diffs.size() < max_diffs) {
-        buffer1.resize(COMPARE_BUFFER_SIZE);
-        buffer2.resize(COMPARE_BUFFER_SIZE);
+    while (offset < min_size && diffs.size() < max_diffs) {
+        const size_type remaining = min_size - offset;
+        const size_type to_read = _MSTL min(remaining, BLOCK_SIZE);
+        const size_type bytes1 = f1.read_binary(buffer1, to_read);
+        const size_type bytes2 = f2.read_binary(buffer2, to_read);
 
-        const size_type bytes_read1 = f1.read(buffer1, COMPARE_BUFFER_SIZE);
-        const size_type bytes_read2 = f2.read(buffer2, COMPARE_BUFFER_SIZE);
+        if (bytes1 != to_read || bytes2 != to_read) {
+            break;
+        }
+        if (_MSTL memory_compare(buffer1.data(), buffer2.data(), to_read) == 0) {
+            offset += to_read;
+            continue;
+        }
 
-        if (bytes_read1 == 0 || bytes_read2 == 0) break;
-
-        buffer1.resize(bytes_read1);
-        buffer2.resize(bytes_read2);
-
-        const size_type compare_size = bytes_read1 < bytes_read2 ? bytes_read1 : bytes_read2;
-
-        for (size_type i = 0; i < compare_size && diffs.size() < max_diffs; ++i) {
+        for (size_type i = 0; i < to_read && diffs.size() < max_diffs; ++i) {
             if (buffer1[i] != buffer2[i]) {
                 binary_diff_entry entry;
-                entry.offset = offset + static_cast<difference_type>(i);
+                entry.offset = static_cast<difference_type>(offset + i);
                 entry.byte1 = static_cast<unsigned char>(buffer1[i]);
                 entry.byte2 = static_cast<unsigned char>(buffer2[i]);
                 diffs.push_back(entry);
             }
         }
-
-        offset += static_cast<difference_type>(compare_size);
+        offset += to_read;
     }
-
-    if (size1 != size2 && diffs.size() < max_diffs) {
-        binary_diff_entry entry;
-        entry.offset = static_cast<difference_type>(min_size);
-        entry.byte1 = size1 > size2 ? 0xFF : 0x00;
-        entry.byte2 = size2 > size1 ? 0xFF : 0x00;
-        diffs.push_back(entry);
-    }
-
     return diffs;
 }
 
 bool file::seek(const difference_type distance, FILE_POINTER method) const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
-    if (write_buffer_pos_ > 0 && !flush_write_buffer()) return false;
+
+    if (append_mode_) {
+        if (method != FILE_POINTER::END || distance != 0) {
+            last_error_code_ = EPERM;
+            last_error_msg_ = "Cannot seek in append mode";
+            return false;
+        }
+    }
+    if (write_buffer_pos_ > 0) {
+        if (!flush_write_buffer()) {
+            set_last_error();
+            return false;
+        }
+    }
 
     read_buffer_pos_ = 0;
     read_buffer_size_ = 0;
 
+    if (mapped_ptr_) {
+        last_error_code_ = EPERM;
+        last_error_msg_ = "Cannot seek in mapped file";
+        return false;
+    }
+
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::LARGE_INTEGER li{};
     li.QuadPart = distance;
-    return ::SetFilePointerEx(handle_, li, nullptr, static_cast<fud_t>(method)) != 0;
+
+    ::LARGE_INTEGER new_pointer{};
+    if (!::SetFilePointerEx(
+        handle_, li, &new_pointer, static_cast<fud_t>(method))) {
+        set_last_error();
+        return false;
+    }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ::off_t ret = ::lseek(handle_, distance, static_cast<fud_t>(method));
-    return ret != static_cast<off_t>(-1);
+    const difference_type new_pos = ::lseek(
+        handle_, distance, static_cast<fud_t>(method));
+    if (new_pos == -1) {
+        set_last_error();
+        return false;
+    }
 #endif
+    return true;
 }
 
 file::difference_type file::tell() const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        return -1;
+    }
+    difference_type system_pos;
+#ifdef MSTL_PLATFORM_WINDOWS__
+    constexpr ::LARGE_INTEGER li_zero{};
+    ::LARGE_INTEGER current_pos;
+    if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
+        set_last_error();
+        return -1;
+    }
+    system_pos = current_pos.QuadPart;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
+    if (pos == -1) {
+        set_last_error();
+        return -1;
+    }
+    system_pos = pos;
+#endif
+    difference_type adjusted_pos = system_pos;
+
+    if (write_buffer_pos_ > 0) {
+        adjusted_pos += static_cast<difference_type>(write_buffer_pos_);
+    } else if (read_buffer_size_ > 0) {
+        const size_type unread = read_buffer_size_ - read_buffer_pos_;
+        adjusted_pos -= static_cast<difference_type>(unread);
+    }
+
+    return adjusted_pos;
+}
+
+file::difference_type file::system_tell() const noexcept {
+    if (!opened_ || handle_ == INVALID_HANDLE()) return -1;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    constexpr ::LARGE_INTEGER li = {};
-    ::LARGE_INTEGER new_pos;
-    if (!::SetFilePointerEx(handle_, li, &new_pos, FILE_CURRENT)) {
-        return 0;
+    constexpr ::LARGE_INTEGER li_zero{};
+    ::LARGE_INTEGER current_pos;
+    if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
+        return -1;
     }
-    return static_cast<difference_type>(new_pos.QuadPart);
+    return current_pos.QuadPart;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const ::off_t pos = ::lseek(handle_, 0, SEEK_CUR);
-    return pos == static_cast<::off_t>(-1) ? 0 : pos;
+    const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
+    if (pos == -1) {
+        set_last_error();
+        return -1;
+    }
+    return pos;
 #endif
 }
 
 bool file::prefetch(const size_type hint_size) const noexcept {
-    if (read_buffer_pos_ < read_buffer_size_) return true;
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        return false;
+    }
+    if (read_buffer_pos_ < read_buffer_size_) {
+        return true;
+    }
 
-#ifdef MSTL_PLATFORM_LINUX__
-    const size_type read_size = hint_size > 0 ?
-        _MSTL min(hint_size * 2, buffer_size_) :
-        buffer_size_;
+    size_type prefetch_size = buffer_size_;
+    if (hint_size > 0) {
+        if (hint_size > numeric_limits<size_type>::max() / 2) {
+            prefetch_size = numeric_limits<size_type>::max();
+        } else {
+            prefetch_size = _MSTL min(hint_size * 2, buffer_size_);
+        }
+    }
 
-    ::posix_fadvise(handle_, this->tell(),
-        static_cast<difference_type>(read_size), POSIX_FADV_WILLNEED);
+#ifdef MSTL_PLATFORM_WINDOWS__
+    const difference_type current_pos = tell();
+    if (current_pos < 0) {
+        return false;
+    }
+    ::LARGE_INTEGER file_size;
+    if (!::GetFileSizeEx(handle_, &file_size)) {
+        set_last_error();
+        return false;
+    }
+
+    const ::ULARGE_INTEGER start_offset = {
+        static_cast<size_type>(current_pos & 0xFFFFFFFF),
+        static_cast<size_type>(current_pos >> 32)
+    };
+    const ::ULARGE_INTEGER end_offset = {
+        static_cast<size_type>(file_size.QuadPart & 0xFFFFFFFF),
+        static_cast<size_type>(file_size.QuadPart >> 32)
+    };
+
+    size_type region_size = prefetch_size;
+    if (start_offset.QuadPart + region_size > end_offset.QuadPart) {
+        region_size = static_cast<size_type>(end_offset.QuadPart - start_offset.QuadPart);
+    }
+
+    if (region_size == 0) {
+        return true;
+    }
+
+    const ::HANDLE hMapping = ::CreateFileMapping(
+        handle_,
+        nullptr,
+        PAGE_READONLY,
+        0, 0,
+        nullptr
+    );
+
+    if (!hMapping || hMapping == INVALID_HANDLE_VALUE) {
+        set_last_error();
+        return false;
+    }
+
+    void* pView = ::MapViewOfFile(
+        hMapping,
+        FILE_MAP_READ,
+        start_offset.HighPart,
+        start_offset.LowPart,
+        region_size
+    );
+
+    if (pView) {
+        ::WIN32_MEMORY_RANGE_ENTRY range{pView, region_size};
+        const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
+        if (hKernel32) {
+            typedef ::BOOL(WINAPI* PFN_PrefetchVirtualMemory)(
+                ::HANDLE hProcess,
+                ::ULONG_PTR NumberOfEntries,
+                ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses,
+                ::ULONG Flags
+            );
+
+            static auto pfnPrefetchVirtualMemory =
+                reinterpret_cast<PFN_PrefetchVirtualMemory>(
+                    ::GetProcAddress(hKernel32, "PrefetchVirtualMemory")
+                );
+            if (pfnPrefetchVirtualMemory) {
+                if (pfnPrefetchVirtualMemory(::GetCurrentProcess(), 1, &range, 0)) {
+                    ::UnmapViewOfFile(pView);
+                    ::CloseHandle(hMapping);
+                    return true;
+                }
+            }
+        }
+    } else {
+        set_last_error();
+    }
+    ::CloseHandle(hMapping);
+    return pView != nullptr;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    const difference_type current_pos = tell();
+    if (current_pos >= 0) {
+        const int advice_result = ::posix_fadvise(
+            handle_,
+            current_pos,
+            static_cast<difference_type>(prefetch_size),
+            POSIX_FADV_WILLNEED
+        );
+
+        if (advice_result != 0) {
+            last_error_code_ = advice_result;
+            last_error_msg_ = ::strerror(advice_result);
+        }
+    }
 #endif
     return fill_read_buffer();
 }
 
 bool file::truncate(const difference_type size) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
+if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        return false;
+    }
+
+    if (size < 0) {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Negative file size";
+        return false;
+    }
+
+    if (append_mode_) {
+        last_error_code_ = EPERM;
+        last_error_msg_ = "Cannot truncate file in append mode";
+        return false;
+    }
+
+    bool buffers_cleared = true;
+
+    if (write_buffer_pos_ > 0) {
+        const difference_type current_pos = tell();
+        const difference_type buffer_end_pos =
+            current_pos + static_cast<difference_type>(write_buffer_pos_);
+        if (size >= current_pos && size < buffer_end_pos) {
+            if (!flush_write_buffer()) {
+                buffers_cleared = false;
+            }
+        } else if (size < current_pos) {
+            write_buffer_pos_ = 0;
+        }
+    }
+
+    read_buffer_pos_ = 0;
+    read_buffer_size_ = 0;
+
+    if (mapped_ptr_) {
+        last_error_code_ = EPERM;
+        last_error_msg_ = "Cannot truncate memory-mapped file";
+        return false;
+    }
+    if (!buffers_cleared) {
+        return false;
+    }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!this->seek(size, FILE_POINTER::BEGIN)) return false;
-    return ::SetEndOfFile(handle_) != 0;
+    const difference_type current_pos = tell();
+    if (current_pos < 0) return false;
+
+    if (!seek(size, FILE_POINTER::BEGIN)) {
+        return false;
+    }
+
+    if (!::SetEndOfFile(handle_)) {
+        set_last_error();
+        seek(current_pos, FILE_POINTER::BEGIN);
+        return false;
+    }
+
+    if (size < current_pos) {
+        if (!seek(size, FILE_POINTER::BEGIN)) {
+            set_last_error();
+        }
+    } else {
+        seek(current_pos, FILE_POINTER::BEGIN);
+    }
+
+    return true;
+
 #elif defined(MSTL_PLATFORM_LINUX__)
-    return ::ftruncate(handle_, size) == 0;
+    const difference_type current_pos = tell();
+    if (current_pos < 0) {
+        return false;
+    }
+    if (::ftruncate(handle_, size) != 0) {
+        set_last_error();
+        return false;
+    }
+
+    if (size < current_pos) {
+        if (!seek(size, FILE_POINTER::BEGIN)) {
+            set_last_error();
+        }
+    }
+    return true;
 #endif
 }
 
 bool file::lock(const difference_type offset,
     const difference_type length, FILE_LOCK mode) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        return false;
+    }
+
+    if (offset < 0) {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Negative offset";
+        return false;
+    }
+    if (length < 0) {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Negative length";
+        return false;
+    }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::OVERLAPPED ov = {};
-    const uint64_t offset_64 = offset;
-    ov.Offset = static_cast<size_type>(offset_64 & 0xFFFFFFFF);
-    ov.OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+    if (!flush_write_buffer()) {
+        set_last_error();
+        return false;
+    }
 
-    const uint64_t length_64 = length;
-    return ::LockFileEx(handle_, static_cast<fud_t>(mode), 0,
-        length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
+    ::OVERLAPPED ov = {};
+    const ::ULARGE_INTEGER offset_ul = {
+        static_cast<::DWORD>(offset & 0xFFFFFFFF),
+        static_cast<::DWORD>(offset >> 32)
+    };
+    ov.Offset = offset_ul.LowPart;
+    ov.OffsetHigh = offset_ul.HighPart;
+
+    fud_t flags = 0;
+    if (mode == FILE_LOCK::EXCLUSIVE ||
+        (static_cast<fud_t>(mode) & LOCKFILE_EXCLUSIVE_LOCK) != 0) {
+        flags |= LOCKFILE_EXCLUSIVE_LOCK;
+    }
+
+    if ((static_cast<fud_t>(mode) & LOCKFILE_FAIL_IMMEDIATELY) != 0) {
+        flags |= LOCKFILE_FAIL_IMMEDIATELY;
+    }
+
+    ::DWORD length_low;
+    ::DWORD length_high;
+
+    if (length == 0) {
+        length_low = 0;
+        length_high = 0;
+    } else {
+        const ::ULARGE_INTEGER length_ul = {
+            static_cast<::DWORD>(length & 0xFFFFFFFF),
+            static_cast<::DWORD>(length >> 32)
+        };
+        length_low = length_ul.LowPart;
+        length_high = length_ul.HighPart;
+    }
+
+    if (!::LockFileEx(handle_, flags, 0, length_low, length_high, &ov)) {
+        set_last_error();
+        return false;
+    }
+    return true;
+
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
-    if ((mode & FILE_LOCK::EXCLUSIVE) != FILE_LOCK::SHARED) {
+    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+
+    if (mode == FILE_LOCK::EXCLUSIVE ||
+        (static_cast<fud_t>(mode) & LOCK_EX) != 0) {
         fl.l_type = F_WRLCK;
     } else {
         fl.l_type = F_RDLCK;
@@ -1293,63 +2067,232 @@ bool file::lock(const difference_type offset,
     fl.l_start = offset;
     fl.l_len = length;
 
-    const fud_t cmd = static_cast<fud_t>(mode) & LOCK_NB ? F_SETLK : F_SETLKW;
-    return ::fcntl(handle_, cmd, &fl) != -1;
+    fud_t cmd = F_SETLKW;
+    if ((static_cast<fud_t>(mode) & LOCK_NB) != 0) {
+        cmd = F_SETLK;
+    }
+
+    if (::fcntl(handle_, cmd, &fl) == -1) {
+        set_last_error();
+        return false;
+    }
+    return true;
+
 #endif
 }
 
 bool file::unlock(const difference_type offset, const difference_type length) const noexcept {
-    if (!opened_ || handle_ == INVALID_HANDLE()) return false;
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        return false;
+    }
+
+    if (offset < 0) {
+        last_error_code_ = EINVAL;
+        return false;
+    }
+    if (length < 0) {
+        last_error_code_ = EINVAL;
+        return false;
+    }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::OVERLAPPED ov = {};
-    const uint64_t offset_64 = offset;
-    ov.Offset = static_cast<size_type>(offset_64 & 0xFFFFFFFF);
-    ov.OffsetHigh = static_cast<size_type>(offset_64 >> 32);
+    ::OVERLAPPED ov{};
+    const ::ULARGE_INTEGER offset_ul = {
+        static_cast<::DWORD>(offset & 0xFFFFFFFF),
+        static_cast<::DWORD>(offset >> 32)
+    };
+    ov.Offset = offset_ul.LowPart;
+    ov.OffsetHigh = offset_ul.HighPart;
 
-    const uint64_t length_64 = length;
-    return ::UnlockFileEx(handle_, 0, length_64 & 0xFFFFFFFF, length_64 >> 32, &ov) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::flock fl{};
-    fl.l_type = F_UNLCK;
-    fl.l_whence = SEEK_SET;
-    fl.l_start = offset;
-    fl.l_len = length;
-    return ::fcntl(handle_, F_SETLK, &fl) != -1;
-#endif
-}
+    ::DWORD length_low;
+    ::DWORD length_high;
 
-bool file::map(size_type offset, size_type size,
-    const FILE_ACCESS access, const FILE_MAP_HINT hint) {
-    if (mapped_ptr_) unmap();
-    if (!opened_ || handle_ == INVALID_HANDLE()) {
+    if (length == 0) {
+        length_low = 0;
+        length_high = 0;
+    } else {
+        const ::ULARGE_INTEGER length_ul = {
+            static_cast<::DWORD>(length & 0xFFFFFFFF),
+            static_cast<::DWORD>(length >> 32)
+        };
+        length_low = length_ul.LowPart;
+        length_high = length_ul.HighPart;
+    }
+
+    if (!::UnlockFileEx(handle_, 0, length_low, length_high, &ov)) {
         set_last_error();
         return false;
     }
 
-    if (size == 0) {
-        const size_type file_size = this->size();
-        if (offset >= file_size) {
-            last_error_msg_ = "Offset exceeds file size";
-            return false;
-        }
-        size = file_size - offset;
+#elif defined(MSTL_PLATFORM_LINUX__)
+    struct ::flock fl{};
+    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+
+    fl.l_type = F_UNLCK;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = offset;
+    fl.l_len = length;
+
+    if (::fcntl(handle_, F_SETLK, &fl) == -1) {
+        set_last_error();
+        return false;
+    }
+
+#endif
+    return true;
+}
+
+bool file::try_lock(const difference_type offset,
+    const difference_type length, FILE_LOCK mode) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    auto nonblocking_mode = static_cast<FILE_LOCK>(
+        static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
+#elif defined(MSTL_PLATFORM_LINUX__)
+    auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCK_NB);
+#endif
+    return lock(offset, length, nonblocking_mode);
+}
+
+bool file::is_locked(const difference_type offset,
+    const difference_type length, FILE_LOCK* out_type) const noexcept {
+
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        return false;
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::DWORD protect = PAGE_READONLY;
-    ::DWORD map_access = FILE_MAP_READ;
-
-    if ((access & FILE_ACCESS::WRITE) != static_cast<FILE_ACCESS>(0)) {
-        protect = PAGE_READWRITE;
-        map_access = FILE_MAP_WRITE | FILE_MAP_READ;
+    const bool can_lock = try_lock(offset, length, FILE_LOCK::SHARED);
+    if (can_lock) {
+        unlock(offset, length);
+        if (out_type) *out_type = FILE_LOCK::SHARED;
+        return false;
     }
 
-    const uint64_t map_size = static_cast<uint64_t>(size);
-    mapping_handle_ = ::CreateFileMappingA(
-        handle_, nullptr, protect,
-        static_cast<::DWORD>(map_size >> 32),
-        static_cast<::DWORD>(map_size & 0xFFFFFFFF),
+    if (last_error_code_ == ERROR_LOCK_VIOLATION) {
+        if (out_type) *out_type = FILE_LOCK::EXCLUSIVE;
+        return true;
+    }
+
+    return false;
+
+#elif defined(MSTL_PLATFORM_LINUX__)
+    struct ::flock fl;
+    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+
+    fl.l_type = F_WRLCK;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = offset;
+    fl.l_len = length;
+
+    if (::fcntl(handle_, F_GETLK, &fl) == -1) {
+        set_last_error();
+        return false;
+    }
+
+    if (fl.l_type == F_UNLCK) {
+        if (out_type) *out_type = static_cast<FILE_LOCK>(0);
+        return false;
+    } else if (fl.l_type == F_RDLCK) {
+        if (out_type) *out_type = FILE_LOCK::SHARED;
+        return true;
+    } else if (fl.l_type == F_WRLCK) {
+        if (out_type) *out_type = FILE_LOCK::EXCLUSIVE;
+        return true;
+    }
+
+    return false;
+#endif
+}
+
+bool file::lock_whole(const FILE_LOCK mode) const noexcept {
+    return lock(0, 0, mode);
+}
+
+bool file::unlock_whole() const noexcept {
+    return unlock(0, 0);
+}
+
+bool file::map(size_type offset, size_type size,
+    const FILE_ACCESS access, const FILE_MAP_HINT hint) {
+    lock_guard<mutex> lock(map_mutex_);
+
+    if (mapped_ptr_) {
+        unmap();
+    }
+
+    if (!opened_ || handle_ == INVALID_HANDLE()) {
+        last_error_code_ = EBADF;
+        last_error_msg_ = "File not opened";
+        return false;
+    }
+    const size_type file_size = this->size();
+    if (offset > file_size) {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Offset exceeds file size";
+        return false;
+    }
+
+    if (size == 0) {
+        size = file_size - offset;
+        if (size == 0) {
+            mapped_ptr_ = nullptr;
+            mapped_size_ = 0;
+            return true;
+        }
+    } else if (offset + size > file_size) {
+        if (static_cast<fud_t>(access & FILE_ACCESS::WRITE) == 0) {
+            last_error_code_ = EINVAL;
+            last_error_msg_ = "Mapping extends beyond file size";
+            return false;
+        }
+    }
+
+    if (!flush_write_buffer()) {
+        set_last_error();
+        return false;
+    }
+
+    read_buffer_pos_ = 0;
+    read_buffer_size_ = 0;
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+
+    ::SYSTEM_INFO sys_info;
+    ::GetSystemInfo(&sys_info);
+    const ::DWORD allocation_granularity = sys_info.dwAllocationGranularity;
+
+    const uint64_t aligned_offset = offset & ~(allocation_granularity - 1);
+    const uint64_t offset_delta = offset - aligned_offset;
+    const uint64_t aligned_size = size + offset_delta;
+
+    fud_t protect;
+    fud_t map_access;
+
+    if (static_cast<fud_t>(access & FILE_ACCESS::WRITE)) {
+        protect = PAGE_READWRITE;
+        map_access = FILE_MAP_WRITE | FILE_MAP_READ;
+
+        if (static_cast<fud_t>(access) &
+            (static_cast<fud_t>(FILE_ACCESS::APPEND) & ~static_cast<fud_t>(FILE_ACCESS::WRITE))) {
+            protect = PAGE_READWRITE;
+            map_access = FILE_MAP_WRITE | FILE_MAP_READ;
+        }
+    } else if (static_cast<fud_t>(access & FILE_ACCESS::READ)) {
+        protect = PAGE_READONLY;
+        map_access = FILE_MAP_READ;
+    } else {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Invalid access mode";
+        return false;
+    }
+
+    mapping_handle_ = ::CreateFileMappingW(
+        handle_,
+        nullptr,
+        protect,
+        static_cast<::DWORD>(aligned_size >> 32),
+        static_cast<::DWORD>(aligned_size & 0xFFFFFFFF),
         nullptr
     );
 
@@ -1359,12 +2302,14 @@ bool file::map(size_type offset, size_type size,
         return false;
     }
 
-    const uint64_t offset_64 = static_cast<uint64_t>(offset);
+    const uint64_t offset_high = aligned_offset >> 32;
+    const uint64_t offset_low = aligned_offset & 0xFFFFFFFF;
+
     mapped_ptr_ = ::MapViewOfFile(
         mapping_handle_, map_access,
-        static_cast<::DWORD>(offset_64 >> 32),
-        static_cast<::DWORD>(offset_64 & 0xFFFFFFFF),
-        size
+        static_cast<::DWORD>(offset_high),
+        static_cast<::DWORD>(offset_low),
+        aligned_size
     );
 
     if (!mapped_ptr_) {
@@ -1374,18 +2319,85 @@ bool file::map(size_type offset, size_type size,
         return false;
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
-    int prot = PROT_READ;
-    if ((access & FILE_ACCESS::WRITE) != static_cast<FILE_ACCESS>(0)) {
-        prot |= PROT_WRITE;
+    mapped_ptr_ = static_cast<char*>(mapped_ptr_) + offset_delta;
+    ::WIN32_MEMORY_RANGE_ENTRY range = { mapped_ptr_, size };
+
+    const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
+    if (hKernel32) {
+        typedef ::BOOL(WINAPI* PFN_PrefetchVirtualMemory)(
+            ::HANDLE hProcess,
+            ::ULONG_PTR NumberOfEntries,
+            ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses,
+            ::ULONG Flags
+        );
+
+        static auto pfnPrefetchVirtualMemory =
+            reinterpret_cast<PFN_PrefetchVirtualMemory>(
+                ::GetProcAddress(hKernel32, "PrefetchVirtualMemory")
+            );
+
+        if (pfnPrefetchVirtualMemory) {
+            ::ULONG flags = 0;
+            switch (hint) {
+                case FILE_MAP_HINT::SEQUENTIAL: {
+                    flags = 0;
+                    break;
+                }
+                case FILE_MAP_HINT::RANDOM: {
+                    // Windows没有直接的随机访问提示
+                    break;
+                }
+                default: break;
+            }
+            if (flags != 0) {
+                pfnPrefetchVirtualMemory(::GetCurrentProcess(), 1, &range, flags);
+            }
+        }
     }
 
-    mapped_ptr_ = ::mmap(nullptr, size, prot, MAP_SHARED, handle_, offset);
-    if (mapped_ptr_ == MAP_FAILED) {
-        set_last_error();
-        mapped_ptr_ = nullptr;
+#elif defined(MSTL_PLATFORM_LINUX__)
+
+    const difference_type page_size = ::sysconf(_SC_PAGESIZE);
+    if (page_size < 0) {
+        last_error_code_ = errno;
+        last_error_msg_ = "Failed to get page size";
         return false;
     }
+
+    const difference_type page_mask = page_size - 1;
+    const difference_type aligned_offset = offset & ~page_mask;
+    const difference_type offset_delta = offset - aligned_offset;
+    const size_type aligned_size = size + offset_delta;
+
+    int prot = PROT_READ;
+    const auto access_flags = static_cast<fud_t>(access);
+    if (access_flags & O_RDWR) {
+        prot = PROT_READ | PROT_WRITE;
+    } else if (access_flags & O_RDONLY) {
+        prot = PROT_READ;
+    } else if (access_flags & O_WRONLY) {
+        prot = PROT_WRITE;
+    } else {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "Invalid access mode";
+        return false;
+    }
+
+    void* base_ptr = ::mmap(
+        nullptr,
+        aligned_size,
+        prot,
+        MAP_SHARED,
+        handle_,
+        aligned_offset
+    );
+
+    if (base_ptr == MAP_FAILED) {
+        set_last_error();
+        return false;
+    }
+
+    mapped_ptr_ = static_cast<char*>(base_ptr) + offset_delta;
 
     int advice = MADV_NORMAL;
     switch (hint) {
@@ -1397,33 +2409,190 @@ bool file::map(size_type offset, size_type size,
             advice = MADV_RANDOM;
             break;
         }
-        default: {
+        case FILE_MAP_HINT::NORMAL: default: {
             advice = MADV_NORMAL;
             break;
         }
     }
-    ::madvise(mapped_ptr_, size, advice);
+
+    if (::madvise(base_ptr, aligned_size, advice) != 0) {
+        // 建议失败不是致命错误
+        set_last_error();
+    }
+    if (size > static_cast<size_type>(10 * 1024 * 1024)) {
+        if (::mlock(base_ptr, aligned_size) != 0) {
+            // 锁定失败不是致命错误
+            set_last_error();
+        }
+    }
+
 #endif
 
+    mapped_offset_ = offset;
+    mapped_access_ = access;
     mapped_size_ = size;
+    is_mapped_ = true;
     return true;
 }
 
 void file::unmap() noexcept {
+    lock_guard<mutex> lock(map_mutex_);
+
     if (!mapped_ptr_) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::UnmapViewOfFile(mapped_ptr_);
+    ::SYSTEM_INFO sys_info;
+    ::GetSystemInfo(&sys_info);
+    const ::DWORD allocation_granularity = sys_info.dwAllocationGranularity;
+
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
+        (mapped_offset_ % allocation_granularity);
+
+    if (!::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_address))) {
+        set_last_error();
+    }
     if (mapping_handle_ != INVALID_HANDLE_VALUE) {
         ::CloseHandle(mapping_handle_);
         mapping_handle_ = INVALID_HANDLE_VALUE;
     }
+
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::munmap(mapped_ptr_, mapped_size_);
+
+    const long page_size = ::sysconf(_SC_PAGESIZE);
+    if (page_size > 0) {
+        const difference_type page_mask = page_size - 1;
+        const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
+            (mapped_offset_ & page_mask);
+        const size_type total_size = mapped_size_ + (mapped_offset_ & page_mask);
+
+        if (mapped_size_ > static_cast<size_type>(10 * 1024 * 1024)) {
+            ::munlock(reinterpret_cast<void*>(base_address), total_size);
+        }
+        if (::munmap(reinterpret_cast<void*>(base_address), total_size) != 0) {
+            set_last_error();
+        }
+    }
+
 #endif
 
     mapped_ptr_ = nullptr;
     mapped_size_ = 0;
+    mapped_offset_ = 0;
+    is_mapped_ = false;
+}
+
+bool file::remap(const size_type new_offset, const size_type new_size) {
+    lock_guard<mutex> lock(map_mutex_);
+
+    if (!mapped_ptr_) {
+        return map(new_offset, new_size, mapped_access_);
+    }
+    const FILE_ACCESS current_access = mapped_access_;
+    unmap();
+    return map(new_offset, new_size, current_access);
+}
+
+bool file::flush_mapped(bool async) const {
+    lock_guard<mutex> lock(map_mutex_);
+
+    if (!mapped_ptr_) {
+        last_error_code_ = EINVAL;
+        last_error_msg_ = "No memory mapping";
+        return false;
+    }
+    if ((static_cast<fud_t>(mapped_access_ & FILE_ACCESS::WRITE)) == 0) {
+        return true;
+    }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+
+    if (!::FlushViewOfFile(mapped_ptr_, mapped_size_)) {
+        set_last_error();
+        return false;
+    }
+
+    if (!async && mapping_handle_ != INVALID_HANDLE_VALUE) {
+        if (!::FlushFileBuffers(handle_)) {
+            set_last_error();
+            return false;
+        }
+    }
+    return true;
+
+#elif defined(MSTL_PLATFORM_LINUX__)
+    int flags = MS_SYNC;
+    if (async) {
+        flags = MS_ASYNC;
+    }
+
+    const difference_type page_size = ::sysconf(_SC_PAGESIZE);
+    if (page_size <= 0) {
+        return false;
+    }
+
+    const difference_type page_mask = page_size - 1;
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
+        (mapped_offset_ & page_mask);
+    const size_type total_size = mapped_size_ + (mapped_offset_ & page_mask);
+
+    if (::msync(reinterpret_cast<void*>(base_address), total_size, flags) != 0) {
+        set_last_error();
+        return false;
+    }
+
+    return true;
+#endif
+}
+
+bool file::lock_mapped_pages(bool lock_in_memory) const noexcept {
+    if (!mapped_ptr_) {
+        return false;
+    }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+
+    ::SIZE_T min_working_set, max_working_set;
+    if (!::GetProcessWorkingSetSize(::GetCurrentProcess(), &min_working_set, &max_working_set)) {
+        return false;
+    }
+
+    if (lock_in_memory) {
+        if (!::VirtualLock(mapped_ptr_, mapped_size_)) {
+            return false;
+        }
+    } else {
+        ::VirtualUnlock(mapped_ptr_, mapped_size_);
+    }
+    return true;
+
+#elif defined(MSTL_PLATFORM_LINUX__)
+    const difference_type page_size = ::sysconf(_SC_PAGESIZE);
+    if (page_size <= 0) {
+        return false;
+    }
+
+    const difference_type page_mask = page_size - 1;
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
+        (mapped_offset_ & page_mask);
+    const size_type total_size = mapped_size_ + (mapped_offset_ & page_mask);
+    if (lock_in_memory) {
+        return ::mlock(reinterpret_cast<void *>(base_address), total_size) == 0;
+    }
+    return ::munlock(reinterpret_cast<void*>(base_address), total_size) == 0;
+#endif
+}
+
+file::map_info file::map_infos() const noexcept {
+    lock_guard<mutex> lock(map_mutex_);
+
+    map_info info;
+    info.address = mapped_ptr_;
+    info.size = mapped_size_;
+    info.offset = mapped_offset_;
+    info.access = mapped_access_;
+    info.is_mapped = is_mapped_;
+
+    return info;
 }
 
 FILE_ATTRI file::attributes() const noexcept {
@@ -1561,7 +2730,7 @@ bool file::set_last_write_time(const datetime& dt) const noexcept {
 #endif
 }
 
-bool file::read(const path& p, string& content,
+bool file::read(const _MSTL path& p, string& content,
     FILE_CREATION creation, FILE_ATTRI attributes) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     file f;
@@ -1597,13 +2766,13 @@ bool file::read(const path& p, string& content,
 #endif
 }
 
-string file::read(const path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+string file::read(const _MSTL path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
     string content;
     file::read(p, content, creation, attributes);
     return content;
 }
 
-bool file::read_binary(const path& p, string& content,
+bool file::read_binary(const _MSTL path& p, string& content,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
     file f;
     if (!f.open(p, false,
@@ -1622,10 +2791,33 @@ bool file::read_binary(const path& p, string& content,
     return true;
 }
 
-string file::read_binary(const path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+string file::read_binary(const _MSTL path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
     string content;
     file::read_binary(p, content, creation, attributes);
     return content;
+}
+
+file_lock_guard::file_lock_guard(
+    const file& f, const difference_type offset,
+    const difference_type length, const FILE_LOCK mode)
+: file_(f), offset_(offset), length_(length), locked_(false) {
+    locked_ = file_.lock(offset, length, mode);
+}
+
+file_lock_guard::~file_lock_guard() {
+    if (locked_) {
+        file_.unlock(offset_, length_);
+    }
+}
+
+bool file_lock_guard::unlock() {
+    if (locked_) {
+        if (file_.unlock(offset_, length_)) {
+            locked_ = false;
+            return true;
+        }
+    }
+    return false;
 }
 
 MSTL_END_NAMESPACE__

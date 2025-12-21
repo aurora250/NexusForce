@@ -13,7 +13,6 @@ public:
     using difference_type   = iter_difference_t<Iterator>;
     using pointer           = iter_pointer_t<Iterator>;
     using reference         = iter_reference_t<Iterator>;
-    using self              = reverse_iterator<Iterator>;
 
 private:
     Iterator current;
@@ -38,8 +37,8 @@ public:
         requires(!same_as<U, Iterator> && convertible_to<const U&, Iterator>
     && assignable_from<Iterator&, const U&>)
 #endif // MSTL_STANDARD_20__
-    constexpr self& operator =(const reverse_iterator<U>& x)
-        noexcept(is_nothrow_assignable_v<self&, const U&>) {
+    constexpr reverse_iterator& operator =(const reverse_iterator<U>& x)
+        noexcept(is_nothrow_assignable_v<reverse_iterator&, const U&>) {
         current = x.current;
         return *this;
     }
@@ -64,53 +63,53 @@ public:
         return _MSTL to_pointer(tmp);
     }
 
-    constexpr self& operator ++()
+    constexpr reverse_iterator& operator ++()
          noexcept(noexcept(--current)) {
         --current;
         return *this;
     }
 
-    constexpr self operator ++(int)
+    constexpr reverse_iterator operator ++(int)
         noexcept(is_nothrow_copy_constructible_v<Iterator> && noexcept(--current)) {
-        self tmp = *this;
+        reverse_iterator tmp = *this;
         --current;
         return tmp;
     }
 
-    constexpr self& operator --()
+    constexpr reverse_iterator& operator --()
         noexcept(noexcept(++current)) {
         ++current;
         return *this;
     }
 
-    constexpr self operator --(int)
+    constexpr reverse_iterator operator --(int)
         noexcept(is_nothrow_copy_constructible_v<Iterator> && noexcept(++current)) {
-        self tmp = *this;
+        reverse_iterator tmp = *this;
         ++current;
         return tmp;
     }
 
-    constexpr self operator +(const difference_type n) const
-        noexcept(noexcept(self(current - n))) {
-        return self(current - n);
+    constexpr reverse_iterator operator +(const difference_type n) const
+        noexcept(noexcept(reverse_iterator(current - n))) {
+        return reverse_iterator(current - n);
     }
-    constexpr self& operator +=(const difference_type n)
+    constexpr reverse_iterator& operator +=(const difference_type n)
         noexcept(noexcept(current -= n)) {
         current -= n;
         return *this;
     }
-    constexpr self operator -(const difference_type n) const
-        noexcept(noexcept(self(current + n))) {
-        return self(current + n);
+    constexpr reverse_iterator operator -(const difference_type n) const
+        noexcept(noexcept(reverse_iterator(current + n))) {
+        return reverse_iterator(current + n);
     }
-    constexpr self& operator -=(const difference_type n)
+    constexpr reverse_iterator& operator -=(const difference_type n)
         noexcept(noexcept(current += n)) {
         current += n;
         return *this;
     }
 
     constexpr reference operator [](const difference_type n) const
-        noexcept(noexcept(_MSTL declcopy<reference>(self(current - n)))) {
+        noexcept(noexcept(_MSTL declcopy<reference>(reverse_iterator(current - n)))) {
         return *(*this + n);
     }
 

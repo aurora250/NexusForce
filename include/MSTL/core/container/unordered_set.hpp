@@ -13,8 +13,6 @@ class unordered_set : icollector<unordered_set<Value, HashFcn, EqualKey, Alloc>>
     static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered set only contains object types.");
 
-    using self = unordered_set<Value, HashFcn, EqualKey, Alloc>;
-    using super = icollector<self>;
     using base_type = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
 
 public:
@@ -45,12 +43,12 @@ public:
     unordered_set(size_type n, const hasher& hf) : ht_(n, hf, key_equal()) {}
     unordered_set(size_type n, const hasher& hf, const key_equal& eql) : ht_(n, hf, eql) {}
 
-    unordered_set(const self& ht) : ht_(ht.ht_) {}
-    self& operator =(const self& x) = default;
+    unordered_set(const unordered_set& ht) : ht_(ht.ht_) {}
+    unordered_set& operator =(const unordered_set& x) = default;
 
-    unordered_set(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
-    self& operator =(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
-        ht_ = _MSTL forward<self>(x.ht_);
+    unordered_set(unordered_set&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
+    unordered_set& operator =(unordered_set&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
+        ht_ = _MSTL forward<unordered_set>(x.ht_);
         return *this;
     }
 
@@ -138,15 +136,15 @@ public:
         return ht_.equal_range(key);
     }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+    void swap(unordered_set& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(ht_ == rh.ht_)) {
-        return ht_ == rh.ht_;
+    MSTL_NODISCARD bool operator ==(const unordered_set& rhs) const
+    noexcept(noexcept(ht_ == rhs.ht_)) {
+        return ht_ == rhs.ht_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(ht_ < rh.ht_)) {
-        return ht_ < rh.ht_;
+    MSTL_NODISCARD bool operator <(const unordered_set& rhs) const
+    noexcept(noexcept(ht_ < rhs.ht_)) {
+        return ht_ < rhs.ht_;
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

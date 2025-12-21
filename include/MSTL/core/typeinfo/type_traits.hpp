@@ -2512,11 +2512,11 @@ MSTL_INLINE17 constexpr bool has_base_v = has_base<T>::value;
 
 
 template <typename T, size_t Size, enable_if_t<is_swappable<T>::value, int>>
-constexpr void swap(T(& lh)[Size], T(& rh)[Size]) noexcept(is_nothrow_swappable<T>::value) {
-    if (&lh == &rh) return;
-    T* first1 = lh;
+constexpr void swap(T(& lhs)[Size], T(& rhs)[Size]) noexcept(is_nothrow_swappable<T>::value) {
+    if (&lhs == &rhs) return;
+    T* first1 = lhs;
     T* last1 = first1 + Size;
-    T* first2 = rh;
+    T* first2 = rhs;
     for (; first1 != last1; ++first1, ++first2) {
         _MSTL swap(*first1, *first2);
     }
@@ -2524,18 +2524,18 @@ constexpr void swap(T(& lh)[Size], T(& rh)[Size]) noexcept(is_nothrow_swappable<
 
 MSTL_BEGIN_INNER__
 template <typename T>
-MSTL_ALWAYS_INLINE constexpr void __raw_swap(T& lh, T& rh)
+MSTL_ALWAYS_INLINE constexpr void __raw_swap(T& lhs, T& rhs)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
-    T tmp = _MSTL move(lh);
-    lh = _MSTL move(rh);
-    rh = _MSTL move(tmp);
+    T tmp = _MSTL move(lhs);
+    lhs = _MSTL move(rhs);
+    rhs = _MSTL move(tmp);
 }
 MSTL_END_INNER__
 
 template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int>>
-constexpr void swap(T& lh, T& rh)
+constexpr void swap(T& lhs, T& rhs)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
-    _INNER __raw_swap(lh, rh);
+    _INNER __raw_swap(lhs, rhs);
 }
 
 template <typename T, typename U>

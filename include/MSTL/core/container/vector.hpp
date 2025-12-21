@@ -11,7 +11,6 @@ MSTL_BEGIN_NAMESPACE__
 template <bool IsConst, typename Vector>
 struct vector_iterator {
 private:
-	using self				= vector_iterator;
 	using iterator			= vector_iterator<false, Vector>;
 	using const_iterator	= vector_iterator<true, Vector>;
 
@@ -42,10 +41,10 @@ public:
 	MSTL_CONSTEXPR20 vector_iterator(const iterator& x) noexcept
 	: ptr_(const_cast<pointer>(x.ptr_)), vec_(x.vec_) {}
 
-	MSTL_CONSTEXPR20 self& operator =(const iterator& rh) noexcept {
-		if (_MSTL addressof(rh) == this) return *this;
-		ptr_ = const_cast<pointer>(rh.ptr_);
-		vec_ = rh.vec_;
+	MSTL_CONSTEXPR20 vector_iterator& operator =(const iterator& rhs) noexcept {
+		if (_MSTL addressof(rhs) == this) return *this;
+		ptr_ = const_cast<pointer>(rhs.ptr_);
+		vec_ = rhs.vec_;
 		return *this;
 	}
 
@@ -55,22 +54,22 @@ public:
 		x.vec_ = nullptr;
 	}
 
-	MSTL_CONSTEXPR20 self& operator =(iterator&& rh) noexcept {
-		if (_MSTL addressof(rh) == this) return *this;
-		ptr_ = const_cast<pointer>(rh.ptr_);
-		vec_ = rh.vec_;
-		rh.ptr_ = nullptr;
-		rh.vec_ = nullptr;
+	MSTL_CONSTEXPR20 vector_iterator& operator =(iterator&& rhs) noexcept {
+		if (_MSTL addressof(rhs) == this) return *this;
+		ptr_ = const_cast<pointer>(rhs.ptr_);
+		vec_ = rhs.vec_;
+		rhs.ptr_ = nullptr;
+		rhs.vec_ = nullptr;
 		return *this;
 	}
 
 	MSTL_CONSTEXPR20 vector_iterator(const const_iterator& x) noexcept
 	: ptr_(const_cast<pointer>(x.ptr_)), vec_(x.vec_) {}
 
-	MSTL_CONSTEXPR20 self& operator =(const const_iterator& rh) noexcept {
-		if (_MSTL addressof(rh) == this) return *this;
-		ptr_ = const_cast<pointer>(rh.ptr_);
-		vec_ = rh.vec_;
+	MSTL_CONSTEXPR20 vector_iterator& operator =(const const_iterator& rhs) noexcept {
+		if (_MSTL addressof(rhs) == this) return *this;
+		ptr_ = const_cast<pointer>(rhs.ptr_);
+		vec_ = rhs.vec_;
 		return *this;
 	}
 
@@ -80,12 +79,12 @@ public:
 		x.vec_ = nullptr;
 	}
 
-	MSTL_CONSTEXPR20 self& operator =(const_iterator&& rh) noexcept {
-		if (_MSTL addressof(rh) == this) return *this;
-		ptr_ = const_cast<pointer>(rh.ptr_);
-		vec_ = rh.vec_;
-		rh.ptr_ = nullptr;
-		rh.vec_ = nullptr;
+	MSTL_CONSTEXPR20 vector_iterator& operator =(const_iterator&& rhs) noexcept {
+		if (_MSTL addressof(rhs) == this) return *this;
+		ptr_ = const_cast<pointer>(rhs.ptr_);
+		vec_ = rhs.vec_;
+		rhs.ptr_ = nullptr;
+		rhs.vec_ = nullptr;
 		return *this;
 	}
 
@@ -101,33 +100,33 @@ public:
 		return &operator*();
 	}
 
-	MSTL_CONSTEXPR20 self& operator ++() noexcept {
+	MSTL_CONSTEXPR20 vector_iterator& operator ++() noexcept {
 		MSTL_DEBUG_VERIFY(ptr_ && vec_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
 		MSTL_DEBUG_VERIFY(ptr_ < vec_->finish_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
 		++ptr_;
 		return *this;
 	}
 
-	MSTL_CONSTEXPR20 self operator ++(int) noexcept {
-		self temp = *this;
+	MSTL_CONSTEXPR20 vector_iterator operator ++(int) noexcept {
+		vector_iterator temp = *this;
 		++*this;
 		return temp;
 	}
 
-	MSTL_CONSTEXPR20 self& operator --() noexcept {
+	MSTL_CONSTEXPR20 vector_iterator& operator --() noexcept {
 		MSTL_DEBUG_VERIFY(ptr_ && vec_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
 		MSTL_DEBUG_VERIFY(vec_->start_ < ptr_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
 		--ptr_;
 		return *this;
 	}
 
-	MSTL_CONSTEXPR20 self operator --(int) noexcept {
-		self temp = *this;
+	MSTL_CONSTEXPR20 vector_iterator operator --(int) noexcept {
+		vector_iterator temp = *this;
 		--*this;
 		return temp;
 	}
 
-	MSTL_CONSTEXPR20 self& operator +=(difference_type n) noexcept {
+	MSTL_CONSTEXPR20 vector_iterator& operator +=(difference_type n) noexcept {
 		if (n < 0) {
 			MSTL_DEBUG_VERIFY((ptr_ && vec_) || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
 			MSTL_DEBUG_VERIFY(n >= vec_->start_ - ptr_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
@@ -140,28 +139,28 @@ public:
 		return *this;
 	}
 
-	MSTL_NODISCARD MSTL_CONSTEXPR20 self operator +(difference_type n) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 vector_iterator operator +(difference_type n) const noexcept {
 		auto tmp = *this;
 		tmp += n;
 		return tmp;
 	}
 
-	MSTL_NODISCARD friend MSTL_CONSTEXPR20 self operator +(difference_type n, const self& it) {
+	MSTL_NODISCARD friend MSTL_CONSTEXPR20 vector_iterator operator +(difference_type n, const vector_iterator& it) {
 		return it + n;
 	}
 
-	MSTL_CONSTEXPR20 self& operator -=(difference_type n) noexcept {
+	MSTL_CONSTEXPR20 vector_iterator& operator -=(difference_type n) noexcept {
 		ptr_ += -n;
 		return *this;
 	}
 
-	MSTL_NODISCARD MSTL_CONSTEXPR20 self operator -(difference_type n) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 vector_iterator operator -(difference_type n) const noexcept {
 		auto tmp = *this;
 		tmp -= n;
 		return tmp;
 	}
 
-	MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type operator -(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type operator -(const vector_iterator& x) const noexcept {
 		MSTL_DEBUG_VERIFY(vec_ == x.vec_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
 		return static_cast<difference_type>(ptr_ - x.ptr_);
 	}
@@ -170,24 +169,24 @@ public:
 		return *(*this + n);
 	}
 
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const vector_iterator& x) const noexcept {
 		MSTL_DEBUG_VERIFY(vec_ == x.vec_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
 		return ptr_ == x.ptr_;
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const vector_iterator& x) const noexcept {
 		return !(*this == x);
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const vector_iterator& x) const noexcept {
 		MSTL_DEBUG_VERIFY(vec_ == x.vec_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
 		return ptr_ < x.ptr_;
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const vector_iterator& x) const noexcept {
 		return x < *this;
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const vector_iterator& x) const noexcept {
 		return !(*this > x);
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const self& x) const noexcept {
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const vector_iterator& x) const noexcept {
 		return !(*this < x);
 	}
 
@@ -203,9 +202,6 @@ class vector : public icollector<vector<T, Alloc>> {
 #endif
 	static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
 	static_assert(is_object_v<T>, "vector only contains object types.");
-
-	using self = vector<T, Alloc>;
-	using super = icollector<self>;
 
 public:
 	MSTL_BUILD_TYPE_ALIAS(T)
@@ -382,22 +378,22 @@ public:
 		this->fill_initialize(n, value);
 	}
 
-	MSTL_CONSTEXPR20 vector(const self& x) {
+	MSTL_CONSTEXPR20 vector(const vector& x) {
 		start_ = this->allocate_and_copy(x.cend() - x.cbegin(), x.cbegin(), x.cend());
 		finish_ = start_ + (x.cend() - x.cbegin());
 		pair_.value = finish_;
 	}
-	MSTL_CONSTEXPR20 self& operator =(const self& x) {
+	MSTL_CONSTEXPR20 vector& operator =(const vector& x) {
 		if (_MSTL addressof(x) == this) return *this;
 		this->clear();
 		this->insert(this->end(), x.cbegin(), x.cend());
 		return *this;
 	}
 
-	MSTL_CONSTEXPR20 vector(self&& x) noexcept {
+	MSTL_CONSTEXPR20 vector(vector&& x) noexcept {
 		this->swap(x);
 	}
-	MSTL_CONSTEXPR20 self& operator =(self&& x) noexcept {
+	MSTL_CONSTEXPR20 vector& operator =(vector&& x) noexcept {
 		if (_MSTL addressof(x) == this) return *this;
 		this->clear();
 		this->swap(x);
@@ -413,7 +409,7 @@ public:
 	MSTL_CONSTEXPR20 vector(std::initializer_list<T> x)
 		: vector(x.begin(), x.end()) {}
 
-	MSTL_CONSTEXPR20 self& operator =(std::initializer_list<T> x) {
+	MSTL_CONSTEXPR20 vector& operator =(std::initializer_list<T> x) {
 		if (x.size() > this->capacity()) {
 			pointer new_ = this->allocate_and_move(x.end() - x.begin(), x.begin(), x.end());
 			_MSTL destroy(start_, finish_);
@@ -720,7 +716,7 @@ public:
 		return *(start_ + position);
 	}
 	MSTL_NODISCARD MSTL_CONSTEXPR20 reference at(const size_type position) noexcept {
-		return const_cast<reference>(static_cast<const self*>(this)->at(position));
+		return const_cast<reference>(static_cast<const vector*>(this)->at(position));
 	}
 	MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference operator [](const size_type position) const noexcept {
 		return this->at(position);
@@ -729,20 +725,20 @@ public:
 		return this->at(position);
 	}
 
-	MSTL_CONSTEXPR20 void swap(self& x) noexcept {
+	MSTL_CONSTEXPR20 void swap(vector& x) noexcept {
 		if (_MSTL addressof(x) == this) return;
 		_MSTL swap(start_, x.start_);
 		_MSTL swap(finish_, x.finish_);
 		_MSTL swap(pair_, x.pair_);
 	}
 
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const self& rh) const
-	noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
-		return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const vector& rhs) const
+	noexcept(noexcept(this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+		return this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
 	}
-	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const self& rh) const
-	noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-		return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+	MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const vector& rhs) const
+	noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+		return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
 	}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

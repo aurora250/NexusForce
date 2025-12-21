@@ -12,8 +12,6 @@ class multiset : icollector<multiset<Key, Compare, Alloc>> {
 		"allocator type mismatch.");
 	static_assert(is_object_v<Key>, "multiset only contains object types.");
 
-	using self = multiset<Key, Compare, Alloc>;
-	using super = icollector<self>;
 	using base_type = rb_tree<Key, Key, identity<Key>, Compare, Alloc>;
 
 public:
@@ -43,15 +41,15 @@ public:
 	multiset() : tree_(Compare()) {}
 	explicit multiset(const key_compare& comp) : tree_(comp) {}
 
-	multiset(const self& x) : tree_(x.tree_) {}
+	multiset(const multiset& x) : tree_(x.tree_) {}
 
-	self& operator =(const self& x) = default;
+	multiset& operator =(const multiset& x) = default;
 
-	multiset(self&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
+	multiset(multiset&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
 		: tree_(_MSTL move(x.tree_)) {
 	}
 
-	self& operator =(self&& x) noexcept(noexcept(swap(x))) {
+	multiset& operator =(multiset&& x) noexcept(noexcept(swap(x))) {
 		tree_ = _MSTL move(x.tree_);
 		return *this;
 	}
@@ -68,7 +66,7 @@ public:
 	multiset(std::initializer_list<value_type> l) : multiset(l.begin(), l.end()) {}
 	multiset(std::initializer_list<value_type> l, const key_compare& comp) : multiset(l.begin(), l.end(), comp) {}
 
-	self& operator =(std::initializer_list<value_type> l) {
+	multiset& operator =(std::initializer_list<value_type> l) {
 		clear();
 		insert(l.begin(), l.end());
 		return *this;
@@ -140,15 +138,15 @@ public:
 		return tree_.equal_range(x);
 	}
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+	void swap(multiset& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
 
-	MSTL_NODISCARD bool operator ==(const self& rh) const
-	noexcept(noexcept(tree_ == rh.tree_)) {
-		return tree_ == rh.tree_;
+	MSTL_NODISCARD bool operator ==(const multiset& rhs) const
+	noexcept(noexcept(tree_ == rhs.tree_)) {
+		return tree_ == rhs.tree_;
 	}
-	MSTL_NODISCARD bool operator <(const self& rh) const
-	noexcept(noexcept(tree_ < rh.tree_)) {
-		return tree_ < rh.tree_;
+	MSTL_NODISCARD bool operator <(const multiset& rhs) const
+	noexcept(noexcept(tree_ < rhs.tree_)) {
+		return tree_ < rhs.tree_;
 	}
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

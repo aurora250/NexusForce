@@ -46,10 +46,10 @@ public:
     MSTL_CONSTEXPR20 basic_string_iterator(const iterator& x) noexcept
     : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {}
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const iterator& rh) noexcept {
-        if (_MSTL addressof(rh) == this) return *this;
-        ptr_ = const_cast<pointer>(rh.ptr_);
-        str_ = rh.str_;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const iterator& rhs) noexcept {
+        if (_MSTL addressof(rhs) == this) return *this;
+        ptr_ = const_cast<pointer>(rhs.ptr_);
+        str_ = rhs.str_;
         return *this;
     }
 
@@ -59,22 +59,22 @@ public:
         x.str_ = nullptr;
     }
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(iterator&& rh) noexcept {
-        if (_MSTL addressof(rh) == this) return *this;
-        ptr_ = const_cast<pointer>(rh.ptr_);
-        str_ = rh.str_;
-        rh.ptr_ = nullptr;
-        rh.str_ = nullptr;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(iterator&& rhs) noexcept {
+        if (_MSTL addressof(rhs) == this) return *this;
+        ptr_ = const_cast<pointer>(rhs.ptr_);
+        str_ = rhs.str_;
+        rhs.ptr_ = nullptr;
+        rhs.str_ = nullptr;
         return *this;
     }
 
     MSTL_CONSTEXPR20 basic_string_iterator(const const_iterator& x) noexcept
     : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {}
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const const_iterator& rh) noexcept {
-        if (_MSTL addressof(rh) == this) return *this;
-        ptr_ = const_cast<pointer>(rh.ptr_);
-        str_ = rh.str_;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const const_iterator& rhs) noexcept {
+        if (_MSTL addressof(rhs) == this) return *this;
+        ptr_ = const_cast<pointer>(rhs.ptr_);
+        str_ = rhs.str_;
         return *this;
     }
 
@@ -84,12 +84,12 @@ public:
         x.str_ = nullptr;
     }
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const_iterator&& rh) noexcept {
-        if (_MSTL addressof(rh) == this) return *this;
-        ptr_ = const_cast<pointer>(rh.ptr_);
-        str_ = rh.str_;
-        rh.ptr_ = nullptr;
-        rh.str_ = nullptr;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const_iterator&& rhs) noexcept {
+        if (_MSTL addressof(rhs) == this) return *this;
+        ptr_ = const_cast<pointer>(rhs.ptr_);
+        str_ = rhs.str_;
+        rhs.ptr_ = nullptr;
+        rhs.str_ = nullptr;
         return *this;
     }
 
@@ -159,33 +159,33 @@ public:
         tmp -= n;
         return tmp;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type operator -(const basic_string_iterator& rh) const noexcept {
-        return static_cast<difference_type>(ptr_ - rh.ptr_);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type operator -(const basic_string_iterator& rhs) const noexcept {
+        return static_cast<difference_type>(ptr_ - rhs.ptr_);
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](difference_type n) const noexcept {
         return *(*this + n);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string_iterator& rh) const noexcept {
-		MSTL_DEBUG_VERIFY(str_ == rh.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
-        return ptr_ == rh.ptr_;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string_iterator& rhs) const noexcept {
+		MSTL_DEBUG_VERIFY(str_ == rhs.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
+        return ptr_ == rhs.ptr_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const basic_string_iterator& rh) const noexcept {
-        return !(*this == rh);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const basic_string_iterator& rhs) const noexcept {
+        return !(*this == rhs);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string_iterator& rh) const noexcept {
-		MSTL_DEBUG_VERIFY(str_ == rh.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
-        return ptr_ < rh.ptr_;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string_iterator& rhs) const noexcept {
+		MSTL_DEBUG_VERIFY(str_ == rhs.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
+        return ptr_ < rhs.ptr_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const basic_string_iterator& rh) const noexcept {
-        return rh < *this;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const basic_string_iterator& rhs) const noexcept {
+        return rhs < *this;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const basic_string_iterator& rh) const noexcept {
-        return !(*this > rh);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const basic_string_iterator& rhs) const noexcept {
+        return !(*this > rhs);
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const basic_string_iterator& rh) const noexcept {
-        return !(*this < rh);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const basic_string_iterator& rhs) const noexcept {
+        return !(*this < rhs);
     }
 };
 
@@ -1284,8 +1284,8 @@ public:
         _MSTL swap(capacity_pair_, x.capacity_pair_);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string& rh) const noexcept { return this->equal_to(rh); }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string& rh) const noexcept { return this->compare(rh) < 0; }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string& rhs) const noexcept { return this->equal_to(rhs); }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string& rhs) const noexcept { return this->compare(rhs) < 0; }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(this->data(), this->length());
@@ -1310,256 +1310,256 @@ basic_string(basic_string_view<CharT, Traits>,
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const basic_string<CharT, Traits, Alloc>& lh, const basic_string<CharT, Traits, Alloc>& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(rh);
+    const basic_string<CharT, Traits, Alloc>& lhs, const basic_string<CharT, Traits, Alloc>& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(rhs);
     return _MSTL move(tmp);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const CharT* lh, const basic_string<CharT, Traits, Alloc>& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(rh);
+    const CharT* lhs, const basic_string<CharT, Traits, Alloc>& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(rhs);
     return _MSTL move(tmp);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const basic_string<CharT, Traits, Alloc>& lh, const CharT* rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(rh);
-    return _MSTL move(tmp);
-}
-
-template <typename CharT, typename Traits, typename Alloc>
-MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const string_view& lh, const basic_string<CharT, Traits, Alloc>& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(rh);
-    return _MSTL move(tmp);
-}
-template <typename CharT, typename Traits, typename Alloc>
-MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const basic_string<CharT, Traits, Alloc>& lh, const string_view& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(rh);
+    const basic_string<CharT, Traits, Alloc>& lhs, const CharT* rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(rhs);
     return _MSTL move(tmp);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    CharT lh, const basic_string<CharT, Traits, Alloc>& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(1, lh);
-    tmp.append(rh);
+    const string_view& lhs, const basic_string<CharT, Traits, Alloc>& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(rhs);
     return _MSTL move(tmp);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const basic_string<CharT, Traits, Alloc>& lh, CharT rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(1, rh);
-    return _MSTL move(tmp);
-}
-
-template <typename CharT, typename Traits, typename Alloc>
-MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    basic_string<CharT, Traits, Alloc>&& lh, const basic_string<CharT, Traits, Alloc>& rh) {
-    return _MSTL move(lh.append(rh));
-}
-template <typename CharT, typename Traits, typename Alloc>
-MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const basic_string<CharT, Traits, Alloc>& lh, basic_string<CharT, Traits, Alloc>&& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(_MSTL move(rh));
+    const basic_string<CharT, Traits, Alloc>& lhs, const string_view& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(rhs);
     return _MSTL move(tmp);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    basic_string<CharT, Traits, Alloc>&& lh, basic_string<CharT, Traits, Alloc>&& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(_MSTL move(lh));
-    if (_MSTL addressof(lh) != _MSTL addressof(rh)) {
-        tmp.append(_MSTL move(rh));
+    CharT lhs, const basic_string<CharT, Traits, Alloc>& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(1, lhs);
+    tmp.append(rhs);
+    return _MSTL move(tmp);
+}
+template <typename CharT, typename Traits, typename Alloc>
+MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
+    const basic_string<CharT, Traits, Alloc>& lhs, CharT rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(1, rhs);
+    return _MSTL move(tmp);
+}
+
+template <typename CharT, typename Traits, typename Alloc>
+MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
+    basic_string<CharT, Traits, Alloc>&& lhs, const basic_string<CharT, Traits, Alloc>& rhs) {
+    return _MSTL move(lhs.append(rhs));
+}
+template <typename CharT, typename Traits, typename Alloc>
+MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
+    const basic_string<CharT, Traits, Alloc>& lhs, basic_string<CharT, Traits, Alloc>&& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(_MSTL move(rhs));
+    return _MSTL move(tmp);
+}
+
+template <typename CharT, typename Traits, typename Alloc>
+MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
+    basic_string<CharT, Traits, Alloc>&& lhs, basic_string<CharT, Traits, Alloc>&& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(_MSTL move(lhs));
+    if (_MSTL addressof(lhs) != _MSTL addressof(rhs)) {
+        tmp.append(_MSTL move(rhs));
     } else {
-        tmp.append(lh);
+        tmp.append(lhs);
     }
     return _MSTL move(tmp);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    const CharT* lh, basic_string<CharT, Traits, Alloc>&& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(lh);
-    tmp.append(_MSTL move(rh));
+    const CharT* lhs, basic_string<CharT, Traits, Alloc>&& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(lhs);
+    tmp.append(_MSTL move(rhs));
     return _MSTL move(tmp);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    basic_string<CharT, Traits, Alloc>&& lh, const CharT* rh) {
-    return _MSTL move(lh.append(rh));
+    basic_string<CharT, Traits, Alloc>&& lhs, const CharT* rhs) {
+    return _MSTL move(lhs.append(rhs));
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    CharT lh, basic_string<CharT, Traits, Alloc>&& rh) {
-    basic_string<CharT, Traits, Alloc> tmp(1, lh);
-    tmp.append(_MSTL move(rh));
+    CharT lhs, basic_string<CharT, Traits, Alloc>&& rhs) {
+    basic_string<CharT, Traits, Alloc> tmp(1, lhs);
+    tmp.append(_MSTL move(rhs));
     return _MSTL move(tmp);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_CONSTEXPR20 basic_string<CharT, Traits, Alloc> operator +(
-    basic_string<CharT, Traits, Alloc>&& lh, CharT rh) {
-    return _MSTL move(lh.append(rh));
+    basic_string<CharT, Traits, Alloc>&& lhs, CharT rhs) {
+    return _MSTL move(lhs.append(rhs));
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return rh.equal_to(lh);
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return rhs.equal_to(lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const basic_string<CharT, Traits, Alloc>& lh, 
-    const CharT* const rh) noexcept {
-    return lh.equal_to(rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return lhs.equal_to(rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return rh.equal_to(lh);
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return rhs.equal_to(lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return lh.equal_to(rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return lhs.equal_to(rhs);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(lh == rh);
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const CharT* const rh) noexcept {
-    return !(lh == rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return !(lhs == rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(lh == rh);
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return !(lh == rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return 0 < rh.compare(lh);
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return 0 < rhs.compare(lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const CharT* const rh) noexcept {
-    return lh.compare(rh) < 0;
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return lhs.compare(rhs) < 0;
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return 0 < rh.compare(lh);
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return 0 < rhs.compare(lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return lh.compare(rh) < 0;
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return lhs.compare(rhs) < 0;
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return rh < lh;
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return rhs < lhs;
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const CharT* const rh) noexcept {
-    return rh < lh;
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return rhs < lhs;
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return rh < lh;
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return rhs < lhs;
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return rh < lh;
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return rhs < lhs;
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(lh > rh);
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(lhs > rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const CharT* const rh) noexcept {
-    return !(lh > rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return !(lhs > rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(lh > rh);
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(lhs > rhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return !(lh > rh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return !(lhs > rhs);
 }
 
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const CharT* const lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(rh < lh);
+    const CharT* const lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(rhs < lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const CharT* const rh) noexcept {
-    return !(rh < lh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const CharT* const rhs) noexcept {
+    return !(rhs < lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const basic_string_view<CharT, Traits>& lh,
-    const basic_string<CharT, Traits, Alloc>& rh) noexcept {
-    return !(rh < lh);
+    const basic_string_view<CharT, Traits>& lhs,
+    const basic_string<CharT, Traits, Alloc>& rhs) noexcept {
+    return !(rhs < lhs);
 }
 template <typename CharT, typename Traits, typename Alloc>
 MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
-    const basic_string<CharT, Traits, Alloc>& lh,
-    const basic_string_view<CharT, Traits>& rh) noexcept {
-    return !(rh < lh);
+    const basic_string<CharT, Traits, Alloc>& lhs,
+    const basic_string_view<CharT, Traits>& rhs) noexcept {
+    return !(rhs < lhs);
 }
 
 MSTL_END_NAMESPACE__

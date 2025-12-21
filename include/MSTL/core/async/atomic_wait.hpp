@@ -135,8 +135,8 @@ bool atomic_spin(Pred& pred, Spin spin = Spin{}) noexcept {
 }
 
 template <typename T>
-bool atomic_compare(const T& lh, const T& rh) {
-	return _MSTL memory_compare(&lh, &rh, sizeof(T)) == 0;
+bool atomic_compare(const T& lhs, const T& rhs) {
+	return _MSTL memory_compare(&lhs, &rhs, sizeof(T)) == 0;
 }
 
 

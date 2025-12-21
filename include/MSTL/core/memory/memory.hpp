@@ -21,8 +21,8 @@ namespace masm {
 		void* __cdecl masm_memory_copy(void* dest, const void* src, size_t count);
 		void* __cdecl masm_memory_copy_offset(void* dest, const void* src, size_t count);
 		void* __cdecl masm_memory_char_copy(void* dest, const void* src, int chr, size_t count);
-		int __cdecl masm_memory_compare(const void* lh, const void* rh, size_t count);
-		int __cdecl masm_memory_compare_ignore_case(const void* ptr1, const void* rh, size_t count);
+		int __cdecl masm_memory_compare(const void* lhs, const void* rhs, size_t count);
+		int __cdecl masm_memory_compare_ignore_case(const void* ptr1, const void* rhs, size_t count);
 		void* __cdecl masm_memory_char(const void* dest, int value, size_t count);
 		void* __cdecl masm_memory_move(void* dest, const void* src, size_t count);
 		void* __cdecl masm_memory_set(void* dest, int value, size_t count);
@@ -91,16 +91,16 @@ constexpr void* memory_char_copy(void* dest, const void* src, const int chr, siz
 // return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::memcmp.
-MSTL_PURE_FUNCTION constexpr int memory_compare(const void* lh, const void* rh, size_t count) noexcept {
-	if (lh == nullptr && rh == nullptr) return 0;
-	if (lh == nullptr) return -1;
-    if (rh == nullptr) return 1;
+MSTL_PURE_FUNCTION constexpr int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+	if (lhs == nullptr && rhs == nullptr) return 0;
+	if (lhs == nullptr) return -1;
+    if (rhs == nullptr) return 1;
 
 	while (count--) {
-		if (*static_cast<const byte_t*>(lh) != *static_cast<const byte_t*>(rh))
-			return *static_cast<const byte_t*>(lh) - *static_cast<const byte_t*>(rh);
-		lh = static_cast<const byte_t*>(lh) + 1;
-		rh = static_cast<const byte_t*>(rh) + 1;
+		if (*static_cast<const byte_t*>(lhs) != *static_cast<const byte_t*>(rhs))
+			return *static_cast<const byte_t*>(lhs) - *static_cast<const byte_t*>(rhs);
+		lhs = static_cast<const byte_t*>(lhs) + 1;
+		rhs = static_cast<const byte_t*>(rhs) + 1;
 	}
 	return 0;
 }
@@ -110,13 +110,13 @@ MSTL_PURE_FUNCTION constexpr int memory_compare(const void* lh, const void* rh, 
 // and return zero when they are equal in specific length.
 // it`s similar with std::memicmp.
 MSTL_PURE_FUNCTION MSTL_CONSTEXPR20 int memory_compare_ignore_case(
-	const void* lh, const void *rh, const size_t count) noexcept {
-	if ((lh == nullptr && rh == nullptr) || count == 0) return 0;
-	if (lh == nullptr) return -1;
-	if (rh == nullptr) return 1;
+	const void* lhs, const void *rhs, const size_t count) noexcept {
+	if ((lhs == nullptr && rhs == nullptr) || count == 0) return 0;
+	if (lhs == nullptr) return -1;
+	if (rhs == nullptr) return 1;
 
-	const auto lh_v = static_cast<const volatile byte_t*>(lh);
-	const auto rh_v = static_cast<const volatile byte_t*>(rh);
+	const auto lh_v = static_cast<const volatile byte_t*>(lhs);
+	const auto rh_v = static_cast<const volatile byte_t*>(rhs);
 
     for (size_t i = 0; i < count; ++i) {
         const byte_t c1 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(lh_v[i])));

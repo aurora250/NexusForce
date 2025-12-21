@@ -77,13 +77,13 @@ public:
 
     operator string_view() const noexcept { return path_.view(); }
 
-    MSTL_NODISCARD bool operator ==(const path& rh) const noexcept;
-    MSTL_NODISCARD bool operator <(const path& rh) const noexcept;
+    MSTL_NODISCARD bool operator ==(const path& rhs) const noexcept;
+    MSTL_NODISCARD bool operator <(const path& rhs) const noexcept;
 
     MSTL_NODISCARD size_t to_hash() const;
     MSTL_NODISCARD string to_string() const { return lexically_normal().str(); }
 
-    void swap(path& rh) noexcept { path_.swap(rh.path_); }
+    void swap(path& rhs) noexcept { path_.swap(rhs.path_); }
 };
 
 MSTL_END_NAMESPACE__

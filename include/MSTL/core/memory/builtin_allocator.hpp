@@ -14,7 +14,6 @@ class ctype_allocator {
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using device_type = allocate_cpu_tag;
-    using self = ctype_allocator<T>;
 
     template <typename U>
     struct rebind {
@@ -25,7 +24,7 @@ public:
     template <typename U>
     MSTL_CONSTEXPR20 ctype_allocator(const ctype_allocator<U>&) noexcept {}
     MSTL_CONSTEXPR20 ~ctype_allocator() noexcept = default;
-    MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
+    MSTL_CONSTEXPR20 ctype_allocator& operator =(const ctype_allocator&) noexcept = default;
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         if (n == 0) return nullptr;
@@ -38,7 +37,7 @@ public:
         return ptr;
     }
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
-        return self::allocate(1);
+        return ctype_allocator::allocate(1);
     }
     MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
         if(p) std::free(p);
@@ -62,7 +61,6 @@ class new_allocator {
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using device_type = allocate_cpu_tag;
-    using self = new_allocator<T>;
 
     template <typename U>
     struct rebind {
@@ -73,7 +71,7 @@ public:
     template <typename U>
     MSTL_CONSTEXPR20 new_allocator(const new_allocator<U>&) noexcept {}
     MSTL_CONSTEXPR20 ~new_allocator() noexcept = default;
-    MSTL_CONSTEXPR20 self& operator =(const self&) noexcept = default;
+    MSTL_CONSTEXPR20 new_allocator& operator =(const new_allocator&) noexcept = default;
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         if (n == 0) return nullptr;
@@ -86,7 +84,7 @@ public:
         return ptr;
     }
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
-        return self::allocate(1);
+        return new_allocator::allocate(1);
     }
     MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type = 1) noexcept {
         if(p) operator delete(p);
@@ -113,7 +111,6 @@ class cuda_allocator {
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using device_type = allocate_gpu_tag;
-    using self = cuda_allocator<T>;
 
     template <typename U>
     struct rebind {
@@ -124,7 +121,7 @@ public:
     template <typename U>
     cuda_allocator(const cuda_allocator<U>&) noexcept {}
     ~cuda_allocator() noexcept = default;
-    self& operator =(const self&) noexcept = default;
+    cuda_allocator& operator =(const cuda_allocator&) noexcept = default;
 
     static MSTL_NODISCARD pointer allocate(const size_type n) {
         if (n == 0) return nullptr;

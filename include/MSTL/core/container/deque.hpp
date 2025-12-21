@@ -34,8 +34,6 @@ public:
     using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
 
-    using self              = deque_iterator<IsConst, Deque, BufSize>;
-
 private:
     pointer cur_ = nullptr;
     pointer first_ = nullptr;
@@ -69,7 +67,7 @@ public:
     : cur_(const_cast<pointer>(x.cur_)), first_(const_cast<pointer>(x.first_)),
     last_(const_cast<pointer>(x.last_)), node_(const_cast<pointer*>(x.node_)), deq_(x.deq_) {}
 
-    self& operator =(const iterator& x) noexcept {
+    deque_iterator& operator =(const iterator& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         cur_ = const_cast<pointer>(x.cur_);
         first_ = const_cast<pointer>(x.first_);
@@ -89,7 +87,7 @@ public:
         x.deq_ = nullptr;
     }
 
-    self& operator =(iterator&& x) noexcept {
+    deque_iterator& operator =(iterator&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         swap(x);
         return *this;
@@ -99,7 +97,7 @@ public:
     : cur_(const_cast<pointer>(x.cur_)), first_(const_cast<pointer>(x.first_)),
     last_(const_cast<pointer>(x.last_)), node_(const_cast<pointer*>(x.node_)), deq_(x.deq_) {}
 
-    self& operator =(const const_iterator& x) noexcept {
+    deque_iterator& operator =(const const_iterator& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         cur_ = const_cast<pointer>(x.cur_);
         first_ = const_cast<pointer>(x.first_);
@@ -118,7 +116,7 @@ public:
         x.node_ = nullptr;
         x.deq_ = nullptr;
     }
-    self& operator =(const_iterator&& x) noexcept {
+    deque_iterator& operator =(const_iterator&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         cur_ = const_cast<pointer>(x.cur_);
         first_ = const_cast<pointer>(x.first_);
@@ -147,7 +145,7 @@ public:
         return cur_;
     }
 
-    self& operator ++() noexcept {
+    deque_iterator& operator ++() noexcept {
         MSTL_DEBUG_VERIFY(cur_ && deq_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(deque_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         ++cur_;
         if (cur_ == last_) {
@@ -157,13 +155,13 @@ public:
         return *this;
     }
 
-    self operator ++(int) noexcept {
-        self tmp = *this;
+    deque_iterator operator ++(int) noexcept {
+        deque_iterator tmp = *this;
         ++*this;
         return tmp;
     }
 
-    self& operator --() noexcept {
+    deque_iterator& operator --() noexcept {
         MSTL_DEBUG_VERIFY(cur_ && deq_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(deque_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         if (cur_ == first_) {
             this->change_buff(node_ - 1);
@@ -173,13 +171,13 @@ public:
         return *this;
     }
     
-    self operator --(int) noexcept {
-        self tmp = *this;
+    deque_iterator operator --(int) noexcept {
+        deque_iterator tmp = *this;
         --*this;
         return tmp;
     }
 
-    self& operator +=(const difference_type n) noexcept {
+    deque_iterator& operator +=(const difference_type n) noexcept {
         MSTL_DEBUG_VERIFY(cur_ && deq_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(deque_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         const difference_type offset = n + (cur_ - first_);
         if (offset >= 0 && offset < buffer_size_) {
@@ -194,42 +192,42 @@ public:
         }
         return *this;
     }
-    MSTL_NODISCARD self operator +(const difference_type n) const noexcept {
+    MSTL_NODISCARD deque_iterator operator +(const difference_type n) const noexcept {
         auto tmp = *this;
         return tmp += n;
     }
-    MSTL_NODISCARD friend self operator +(const difference_type n, const self& it) {
+    MSTL_NODISCARD friend deque_iterator operator +(const difference_type n, const deque_iterator& it) {
         return it + n;
     }
 
-    self& operator -=(const difference_type n) noexcept {
+    deque_iterator& operator -=(const difference_type n) noexcept {
         return *this += -n;
     }
-    MSTL_NODISCARD self operator -(const difference_type n) const noexcept {
-        self temp = *this;
+    MSTL_NODISCARD deque_iterator operator -(const difference_type n) const noexcept {
+        deque_iterator temp = *this;
         return temp -= n;
     }
-    difference_type operator -(const self& x) const noexcept {
+    difference_type operator -(const deque_iterator& x) const noexcept {
 		MSTL_DEBUG_VERIFY(deq_ == x.deq_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(deque_iterator));
         return (node_ - x.node_) * buffer_size_ + (cur_ - first_) - (x.cur_ - x.first_);
     }
 
     MSTL_NODISCARD reference operator [](const difference_type n) noexcept { return *(*this + n); }
 
-    MSTL_NODISCARD bool operator ==(const self& x) const noexcept {
+    MSTL_NODISCARD bool operator ==(const deque_iterator& x) const noexcept {
         MSTL_DEBUG_VERIFY(deq_ == x.deq_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(deque_iterator));
         return cur_ == x.cur_;
     }
-    MSTL_NODISCARD bool operator !=(const self& x) const noexcept { return !(*this == x); }
-    MSTL_NODISCARD bool operator <(const self& x) const noexcept {
+    MSTL_NODISCARD bool operator !=(const deque_iterator& x) const noexcept { return !(*this == x); }
+    MSTL_NODISCARD bool operator <(const deque_iterator& x) const noexcept {
         MSTL_DEBUG_VERIFY(deq_ == x.deq_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(deque_iterator));
         return node_ == x.node_ ? cur_ < x.cur_ : node_ < x.node_;
     }
-    MSTL_NODISCARD bool operator >(const self& x) const noexcept { return x < *this; }
-    MSTL_NODISCARD bool operator <=(const self& x) const noexcept { return !(*this > x); }
-    MSTL_NODISCARD bool operator >=(const self& x) const noexcept { return !(*this < x); }
+    MSTL_NODISCARD bool operator >(const deque_iterator& x) const noexcept { return x < *this; }
+    MSTL_NODISCARD bool operator <=(const deque_iterator& x) const noexcept { return !(*this > x); }
+    MSTL_NODISCARD bool operator >=(const deque_iterator& x) const noexcept { return !(*this < x); }
 
-    void swap(self& x) noexcept {
+    void swap(deque_iterator& x) noexcept {
         cur_ = x.cur_;
         first_ = x.first_;
         last_ = x.last_;
@@ -248,9 +246,9 @@ public:
 };
 template <bool IsConst, typename Deque, size_t BufSize>
 void swap (
-    deque_iterator<IsConst, Deque, BufSize>& lh,
-    deque_iterator<IsConst, Deque, BufSize>& rh) noexcept {
-    lh.swap(rh);
+    deque_iterator<IsConst, Deque, BufSize>& lhs,
+    deque_iterator<IsConst, Deque, BufSize>& rhs) noexcept {
+    lhs.swap(rhs);
 }
 
 
@@ -263,15 +261,12 @@ class deque : public icollector<deque<T, Alloc>> {
     static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "deque only contains object types.");
 
-    using self = deque<T, Alloc, BufSize>;
-    using super = icollector<self>;
-
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using allocator_type            = Alloc;
 
-    using iterator                  = deque_iterator<false, self, BufSize>;
-    using const_iterator            = deque_iterator<true, self, BufSize>;
+    using iterator                  = deque_iterator<false, deque, BufSize>;
+    using const_iterator            = deque_iterator<true, deque, BufSize>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -707,17 +702,17 @@ public:
         this->copy_initialize(l.begin(), l.end());
     }
 
-    self& operator =(std::initializer_list<T> l) {
-        self tmp(l);
+    deque& operator =(std::initializer_list<T> l) {
+        deque tmp(l);
         this->swap(tmp);
         return *this;
     }
 
-    deque(const self& x) {
+    deque(const deque& x) {
         this->copy_initialize(x.cbegin(), x.cend());
     }
 
-    self& operator =(const self& x) {
+    deque& operator =(const deque& x) {
         if (_MSTL addressof(x) == this) return *this;
 
         const size_t len = size();
@@ -732,11 +727,11 @@ public:
         return *this;
     }
 
-    deque(self&& x) noexcept {
+    deque(deque&& x) noexcept {
         this->swap(x);
     }
 
-    self& operator =(self&& x) noexcept {
+    deque& operator =(deque&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         this->clear();
         this->swap(x);
@@ -1041,7 +1036,7 @@ public:
         return const_iterator(start_)[position];
     }
     MSTL_NODISCARD reference at(const size_type position) {
-        return const_cast<reference>(static_cast<const self*>(this)->at(position));
+        return const_cast<reference>(static_cast<const deque*>(this)->at(position));
     }
     MSTL_NODISCARD const_reference operator [](const size_type position) const {
         return this->at(position);
@@ -1050,7 +1045,7 @@ public:
         return this->at(position);
     }
 
-    void swap(self& x) noexcept {
+    void swap(deque& x) noexcept {
         if (_MSTL addressof(x) == this) return;
         _MSTL swap(start_, x.start_);
         _MSTL swap(finish_, x.finish_);
@@ -1058,13 +1053,13 @@ public:
         _MSTL swap(map_size_pair_, x.map_size_pair_);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
-        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    MSTL_NODISCARD bool operator ==(const deque& rhs) const
+    noexcept(noexcept(this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+        return this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD bool operator <(const deque& rhs) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

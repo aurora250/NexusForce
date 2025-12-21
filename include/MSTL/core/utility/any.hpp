@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_ANY_HPP__
-#define MSTL_CORE_COMPOUND_ANY_HPP__
+#ifndef MSTL_CORE_UTILITY_ANY_HPP__
+#define MSTL_CORE_UTILITY_ANY_HPP__
 #include <initializer_list>
 #include <typeinfo>
 #include "../exception/exception.hpp"
@@ -109,9 +109,9 @@ class MSTL_API any : public iswappable<any> {
 public:
     any() noexcept : manage_(nullptr) {}
     any(const any& x);
-    any& operator =(const any& rh) { *this = any(rh); return *this; }
+    any& operator =(const any& rhs) { *this = any(rhs); return *this; }
     any(any&& x) noexcept;
-    any& operator =(any&& rh) noexcept;
+    any& operator =(any&& rhs) noexcept;
 
     template <typename T, typename VT = decay_t<T>, typename Manager = manage_t<VT>,
         enable_if_t<is_copy_constructible_v<VT> && !is_same_v<_MSTL_TAG inplace_construct_tag, VT> && !is_same_v<VT, any>, int> = 0>
@@ -121,8 +121,8 @@ public:
 
     template <typename T, typename VT = decay_t<T>,
         enable_if_t<!is_same_v<VT, any> && is_copy_constructible_v<VT>, int> = 0>
-    any& operator =(T&& rh) {
-        *this = any(_MSTL forward<T>(rh));
+    any& operator =(T&& rhs) {
+        *this = any(_MSTL forward<T>(rhs));
         return *this;
     }
 
@@ -162,7 +162,7 @@ public:
     }
     MSTL_NODISCARD bool has_value() const noexcept { return manage_ != nullptr; }
     MSTL_NODISCARD const std::type_info& type() const noexcept;
-    void swap(any& rh) noexcept;
+    void swap(any& rhs) noexcept;
 };
 
 template <typename T, typename... Args,
@@ -301,4 +301,4 @@ void any::external_manage<T>::manage(const ANY_INNER_OPERATION oper, const any* 
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_ANY_HPP__
+#endif // MSTL_CORE_UTILITY_ANY_HPP__

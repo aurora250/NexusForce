@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
-#define MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
+#ifndef MSTL_CORE_UTILITY_HEXADECIMAL_HPP__
+#define MSTL_CORE_UTILITY_HEXADECIMAL_HPP__
 #include "../config/undef_cmacro.hpp"
 #include "../interface/inumeric.hpp"
 #include "../interface/iobject.hpp"
@@ -141,4 +141,4 @@ constexpr hexadecimal operator ""_hex(const unsigned long long value) {
 MSTL_END_LITERALS__
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_MEMORY_HEXADECIMAL_HPP__
+#endif // MSTL_CORE_UTILITY_HEXADECIMAL_HPP__

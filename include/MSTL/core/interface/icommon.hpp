@@ -41,9 +41,9 @@ public:
 };
 
 template <typename T, enable_if_t<is_base_of_v<iswappable<T>, T>, int> = 0>
-constexpr void swap(T& lh, T& rh)
-noexcept(noexcept(lh.swap(rh))) {
-    lh.swap(rh);
+constexpr void swap(T& lhs, T& rhs)
+noexcept(noexcept(lhs.swap(rhs))) {
+    lhs.swap(rhs);
 }
 
 

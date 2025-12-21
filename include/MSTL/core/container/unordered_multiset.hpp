@@ -14,8 +14,6 @@ class unordered_multiset : icollector<unordered_multiset<Value, HashFcn, EqualKe
         "allocator type mismatch.");
     static_assert(is_object_v<Value>, "unordered multiset only contains object types.");
 
-    using self = unordered_multiset<Value, HashFcn, EqualKey, Alloc>;
-    using super = icollector<self>;
     using base_type = hashtable<Value, Value, HashFcn, identity<Value>, EqualKey, Alloc>;
 
 public:
@@ -46,12 +44,12 @@ public:
     unordered_multiset(size_type n, const hasher& hf) : ht_(n, hf, key_equal()) {}
     unordered_multiset(size_type n, const hasher& hf, const key_equal& eql) : ht_(n, hf, eql) {}
 
-    unordered_multiset(const self& ht) : ht_(ht.ht_) {}
-    self& operator =(const self& x) = default;
+    unordered_multiset(const unordered_multiset& ht) : ht_(ht.ht_) {}
+    unordered_multiset& operator =(const unordered_multiset& x) = default;
 
-    unordered_multiset(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
-    self& operator =(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
-        ht_ = _MSTL forward<self>(x.ht_);
+    unordered_multiset(unordered_multiset&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
+    unordered_multiset& operator =(unordered_multiset&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
+        ht_ = _MSTL forward<unordered_multiset>(x.ht_);
         return *this;
     }
 
@@ -131,7 +129,7 @@ public:
     void erase(iterator first, iterator last) noexcept { ht_.erase(first, last); }
     void clear() noexcept { ht_.clear(); }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+    void swap(unordered_multiset& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
 
     MSTL_NODISCARD iterator find(const key_type& key) { return ht_.find(key); }
     MSTL_NODISCARD const_iterator find(const key_type& key) const { return ht_.find(key); }
@@ -141,13 +139,13 @@ public:
         return ht_.equal_range(key);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(ht_ == rh.ht_)) {
-        return ht_ == rh.ht_;
+    MSTL_NODISCARD bool operator ==(const unordered_multiset& rhs) const
+    noexcept(noexcept(ht_ == rhs.ht_)) {
+        return ht_ == rhs.ht_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(ht_ < rh.ht_)) {
-        return ht_ < rh.ht_;
+    MSTL_NODISCARD bool operator <(const unordered_multiset& rhs) const
+    noexcept(noexcept(ht_ < rhs.ht_)) {
+        return ht_ < rhs.ht_;
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

@@ -29,10 +29,10 @@ void test_file_basic_operations() {
 
     {
         file f;
-        assert(!f.opened());
+        assert(!f.is_opened());
         assert(f.open(TEST_FILE));
-        assert(f.opened());
-        assert(f.get_path() == TEST_FILE);
+        assert(f.is_opened());
+        assert(f.path() == TEST_FILE);
 
         string line;
         assert(f.read_line(line));
@@ -59,7 +59,7 @@ void test_file_basic_operations() {
         assert(f.size() == new_content.size());
 
         f.close();
-        assert(!f.opened());
+        assert(!f.is_opened());
     }
     println("test file basic operations passed");
 }
@@ -130,15 +130,15 @@ void test_move_semantics() {
     file f1(TEST_FILE);
     assert(f1.open(TEST_FILE));
     file f2 = _MSTL move(f1);
-    assert(!f1.opened());
-    assert(f2.opened());
-    assert(f2.get_path().str() == TEST_FILE.str());
+    assert(!f1.is_opened());
+    assert(f2.is_opened());
+    assert(f2.path().str() == TEST_FILE.str());
 
     file f3;
     f3 = _MSTL move(f2);
-    assert(!f2.opened());
-    assert(f3.opened());
-    assert(f3.get_path() == TEST_FILE);
+    assert(!f2.is_opened());
+    assert(f3.is_opened());
+    assert(f3.path() == TEST_FILE);
     println("test move semantics passed");
 }
 
@@ -977,6 +977,194 @@ void test_json() {
         println(*json3);
 
     } catch (...) {}
+}
+
+
+void handle_session_api(
+    http_request &request, http_response &response, http_server &server) {
+    session *sess = server.session(request);
+    string action = request.parameter("action");
+
+    if (action == "create") {
+        sess = server.session(request, true);
+        response.set_ok();
+        response.set_status_msg("OK");
+        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_body(R"({"sessionId":")" + sess->id() + R"("})");
+    } else if (action == "invalidate" && sess) {
+        sess->invalidate();
+        response.set_ok();
+        response.set_status_msg("OK");
+        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_body(R"({"message":"Session invalidated"})");
+    } else if (action == "info") {
+        if (sess) {
+            auto json = json_builder()
+                .begin_object()
+                .key("sessionId")
+                .value(sess->id())
+                .key("createTime")
+                .value(sess->create_time().to_string_ISO_UTC())
+                .key("lastAccess")
+                .value(sess->last_access().to_string_ISO_UTC())
+                .key("attributes")
+                .value(sess->get_data()).end_object()
+                .build();
+
+            response.set_ok();
+            response.set_status_msg("OK");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(json->to_string());
+        } else {
+            response.set_bad_request();
+            response.set_status_msg("Bad Request");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(R"({"error":"No active session found"})");
+        }
+    } else {
+        response.set_bad_request();
+        response.set_status_msg("Bad Request");
+        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_body(R"({"error":"Invalid session action"})");
+    }
+}
+
+void handle_session_attribute(http_request &request, http_response &response, http_server &server) {
+    string attrName, attrValue;
+    string content_type = request.content_type();
+
+    if (content_type.find(HTTP_CONTENT::JSON_APP.content()) == 0) {
+        try {
+            auto root = json_parser(request.body()).parse();
+            if (root && root->is_object()) {
+                const json_object *obj = root->as_object();
+
+                const json_value *attrNameVal = obj->get_member("attrName");
+                if (attrNameVal && attrNameVal->is_string()) {
+                    attrName = attrNameVal->as_string()->get_value();
+                }
+
+                const json_value *attrValueVal = obj->get_member("attrValue");
+                if (attrValueVal && attrValueVal->is_string()) {
+                    attrValue = attrValueVal->as_string()->get_value();
+                }
+            }
+        } catch (const exception &e) {
+            println("JSON parse error:", e.what());
+        }
+    } else {
+        attrName = request.parameter("attrName");
+        attrValue = request.parameter("attrValue");
+    }
+
+    session *sess = server.session(request, true);
+
+    if (!attrName.empty()) {
+        (*sess)[attrName] = attrValue;
+
+        auto json = json_builder()
+            .begin_object()
+            .key("attrName")
+            .value(attrName)
+            .key("attrValue")
+            .value(attrValue)
+            .end_object()
+            .build();
+
+        response.set_ok();
+        response.set_status_msg("OK");
+        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_body(json->to_string());
+    } else {
+        response.set_bad_request();
+        response.set_status_msg("Bad Request");
+        response.set_content_type(HTTP_CONTENT::JSON_APP);
+        response.set_body(R"({"error":"Missing attribute name"})");
+    }
+}
+
+void handle_cookie_api(
+    http_request& request, http_response& response) {
+    if (request.method().is_post()) {
+        HTTP_COOKIE_NAME name;
+        string value, max_age_str;
+        string content_type = request.content_type();
+
+        if (content_type.find(HTTP_CONTENT::JSON_APP.content()) != string::npos) {
+            try {
+                auto root = json_parser(request.body()).parse();
+                if (root && root->is_object()) {
+                    const json_object* obj = root->as_object();
+
+                    const json_value* nameVal = obj->get_member("name");
+                    const json_value* valueVal = obj->get_member("value");
+                    const json_value* maxAgeVal = obj->get_member("maxAge");
+
+                    if (nameVal && nameVal->is_string()) {
+                        name = HTTP_COOKIE_NAME(nameVal->as_string()->get_value());
+                    }
+                    if (valueVal && valueVal->is_string()) {
+                        value = valueVal->as_string()->get_value();
+                    }
+                    if (maxAgeVal) {
+                        if (maxAgeVal->is_string()) {
+                            max_age_str = maxAgeVal->as_string()->get_value();
+                        } else if (maxAgeVal->is_number()) {
+                            max_age_str = _MSTL to_string(maxAgeVal->as_number()->get_value());
+                        }
+                    }
+                }
+            } catch (const exception& e) {
+                println("JSON parse error:", e.what());
+            }
+        } else {
+            name = HTTP_COOKIE_NAME(request.parameter("name"));
+            value = request.parameter("value");
+            max_age_str = request.parameter("maxAge");
+        }
+
+        if (!name.cookie_name().empty()) {
+            cookie ck(name, value);
+            if (!max_age_str.empty()) {
+                ck.set_max_age(_MSTL integer32::parse(max_age_str.view()));
+            }
+            response.add_cookie(_MSTL move(ck));
+
+            auto json = json_builder()
+                .begin_object()
+                .key("name").value(name.cookie_name())
+                .key("value").value(value)
+                .end_object().build();
+
+            response.set_ok();
+            response.set_status_msg("OK");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(json->to_string());
+        } else {
+            response.set_bad_request();
+            response.set_status_msg("Bad Request");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(R"({"error":"Missing cookie name"})");
+        }
+    }
+    else if (request.method().is_delete()) {
+        HTTP_COOKIE_NAME name(request.parameter("name"));
+        if (!name.cookie_name().empty()) {
+            cookie ck(name, "");
+            ck.invalidate();
+            response.add_cookie(_MSTL move(ck));
+
+            response.set_ok();
+            response.set_status_msg("OK");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(R"({"name":")" + name.to_string() + R"("})");
+        } else {
+            response.set_bad_request();
+            response.set_status_msg("Bad Request");
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.set_body(R"({"error":"Missing cookie name"})");
+        }
+    }
 }
 
 void test_https_server() {

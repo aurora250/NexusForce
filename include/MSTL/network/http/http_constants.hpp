@@ -200,17 +200,17 @@ public:
     MSTL_NODISCARD const string& method() const & noexcept { return method_; }
     MSTL_NODISCARD string method() && noexcept { return _MSTL move(method_); }
 
-    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rh) const & {
-        return HTTP_METHOD(method_ + ", " + rh.method_);
+    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rhs) const & {
+        return HTTP_METHOD(method_ + ", " + rhs.method_);
     }
-    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rh) const & {
-        return HTTP_METHOD(method_ + ", " + _MSTL move(rh.method_));
+    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rhs) const & {
+        return HTTP_METHOD(method_ + ", " + _MSTL move(rhs.method_));
     }
-    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rh) && {
-        return HTTP_METHOD(_MSTL move(method_) + ", " + rh.method_);
+    MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rhs) && {
+        return HTTP_METHOD(_MSTL move(method_) + ", " + rhs.method_);
     }
-    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rh) && {
-        return HTTP_METHOD(_MSTL move(method_) + ", " + _MSTL move(rh.method_));
+    MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rhs) && {
+        return HTTP_METHOD(_MSTL move(method_) + ", " + _MSTL move(rhs.method_));
     }
 
     MSTL_NODISCARD bool is_get() const noexcept { return method_ == GET.method_; }

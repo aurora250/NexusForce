@@ -258,7 +258,7 @@ string device::read_sysfs_attribute(const string& device_path, const string& att
 void device::open(const path& device_path,
     const DEVICE_OPEN_MODE mode, const DEVICE_OPEN_FLAG flags) {
     lock_guard<mutex> lock(io_mutex_);
-    if (file_.opened()) {
+    if (file_.is_opened()) {
         close();
     }
 
@@ -271,9 +271,9 @@ void device::open(const path& device_path,
 
     if (!success) {
         throw_exception(device_exception(
-            ("Failed to open device: " + file_.get_path().str() + " - " + file_.last_error()).data()));
+            ("Failed to open device: " + file_.path().str() + " - " + file_.last_error()).data()));
     }
-    device_type_ = try_device_type(file_.get_path());
+    device_type_ = try_device_type(file_.path());
 #ifdef MSTL_PLATFORM_LINUX__
     if (!is_blocking_) {
         const int fcntl_flag = ::fcntl(file_.native_handle(), F_GETFL, 0);
@@ -284,20 +284,20 @@ void device::open(const path& device_path,
 
 void device::close() noexcept {
     lock_guard<mutex> lock(io_mutex_);
-    if (file_.opened()) {
+    if (file_.is_opened()) {
         file_.close();
     }
     device_type_ = DEVICE_TYPE::UNKNOWN;
 }
 
 bool device::is_open() const noexcept {
-    return file_.opened();
+    return file_.is_opened();
 }
 
 void device::reopen(const DEVICE_OPEN_MODE new_mode,
     const DEVICE_OPEN_FLAG new_flags) {
     close();
-    open(file_.get_path(), new_mode, new_flags);
+    open(file_.path(), new_mode, new_flags);
 }
 
 size_t device::read(void* buffer, const size_t size,
@@ -306,7 +306,7 @@ size_t device::read(void* buffer, const size_t size,
         return 0;
     }
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return 0;
     }
 
@@ -329,7 +329,7 @@ size_t device::write(const void* buffer, const size_t size,
         return 0;
     }
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return 0;
     }
 
@@ -344,7 +344,7 @@ size_t device::write(const void* buffer, const size_t size,
 device::async_result device::async_read(string& buffer,
     const size_t size, const int64_t offset) {
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return async_result{false, 0, -1};
     }
     return file_.async_read(buffer, size, offset);
@@ -353,7 +353,7 @@ device::async_result device::async_read(string& buffer,
 device::async_result device::async_write(const string& data,
     const size_t size, const int64_t offset) {
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return async_result{false, 0, -1};
     }
     return file_.async_write(data, size, offset);
@@ -369,7 +369,7 @@ void device::cancel_async(async_result& result) {
 
 void device::ioctl(const ioctl_command& cmd) {
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         throw_exception(device_exception("Device not opened"));
     }
 
@@ -420,7 +420,7 @@ void device::flush() {
 void device::sync() noexcept {
     lock_guard<mutex> lock(io_mutex_);
 #ifdef MSTL_PLATFORM_LINUX__
-    if (file_.opened()) {
+    if (file_.is_opened()) {
         ::fsync(file_.native_handle());
     }
 #else
@@ -429,7 +429,7 @@ void device::sync() noexcept {
 }
 
 bool device::wait(DEVICE_IO_DIRECT direction, milliseconds timeout) const {
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return false;
     }
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -475,7 +475,7 @@ void device::set_blocking(const bool blocking) {
     lock_guard<mutex> lock(io_mutex_);
     is_blocking_ = blocking;
 #ifdef MSTL_PLATFORM_LINUX__
-    if (file_.opened()) {
+    if (file_.is_opened()) {
         const int flags = ::fcntl(file_.native_handle(), F_GETFL, 0);
         if (blocking) {
             ::fcntl(file_.native_handle(), F_SETFL, flags & ~O_NONBLOCK);
@@ -488,12 +488,12 @@ void device::set_blocking(const bool blocking) {
 
 _MSTL device_info device::device_info() const {
     _MSTL device_info info;
-    info.path = file_.get_path();
+    info.path = file_.path();
     info.type = device_type_;
-    info.present = file_.opened();
+    info.present = file_.is_opened();
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return info;
     }
 
@@ -545,8 +545,8 @@ _MSTL device_info device::device_info() const {
                     dev_info_set, &dev_info_data, buffer.data(), size, nullptr)) {
                     string instance_id = buffer.data();
 
-                    if (file_.get_path().str().find(instance_id) != string::npos ||
-                        instance_id.find(file_.get_path().str()) != string::npos) {
+                    if (file_.path().str().find(instance_id) != string::npos ||
+                        instance_id.find(file_.path().str()) != string::npos) {
 
                         info.hardware_id = get_device_property(
                             dev_info_set, &dev_info_data, SPDRP_HARDWAREID);
@@ -580,7 +580,7 @@ _MSTL device_info device::device_info() const {
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st;
-    if (::stat64(file_.get_path().c_str(), &st) == 0) {
+    if (::stat64(file_.path().c_str(), &st) == 0) {
         info.device_id = static_cast<uint32_t>(st.st_rdev);
         info.present = true;
 
@@ -589,7 +589,7 @@ _MSTL device_info device::device_info() const {
                 info.type = DEVICE_TYPE::STORAGE;
             }
 
-            if (file_.opened()) {
+            if (file_.is_opened()) {
                 uint64_t size = 0;
                 if (::ioctl(file_.native_handle(), BLKGETSIZE64, &size) == 0) {
                     info.size_bytes = size;
@@ -605,7 +605,7 @@ _MSTL device_info device::device_info() const {
             }
         }
 
-        string_view device_name = file_.get_path().filename();
+        string_view device_name = file_.path().filename();
         path sysfs_base("/sys");
 
         switch (device_type_) {
@@ -700,7 +700,7 @@ _MSTL device_info device::device_info() const {
 
 void* device::map_memory(const size_t offset, const size_t size) {
     lock_guard<mutex> lock(io_mutex_);
-    if (!file_.opened()) {
+    if (!file_.is_opened()) {
         return nullptr;
     }
     if (!file_.map(offset, size, FILE_ACCESS::READ_WRITE)) {

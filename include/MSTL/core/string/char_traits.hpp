@@ -66,15 +66,15 @@ struct base_char_traits {
         return dest;
     }
 
-    MSTL_NODISCARD static constexpr int compare(const char_type* lh,
-        const char_type* rh, size_t count) noexcept {
-        if (lh == nullptr && rh == nullptr) return 0;
-        if (lh == nullptr) return -1;
-        if (rh == nullptr) return 1;
+    MSTL_NODISCARD static constexpr int compare(const char_type* lhs,
+        const char_type* rhs, size_t count) noexcept {
+        if (lhs == nullptr && rhs == nullptr) return 0;
+        if (lhs == nullptr) return -1;
+        if (rhs == nullptr) return 1;
 
-        for (; 0 < count; --count, ++lh, ++rh) {
-            if (*lh != *rh)
-                return *lh < *rh ? -1 : +1;
+        for (; 0 < count; --count, ++lhs, ++rhs) {
+            if (*lhs != *rhs)
+                return *lhs < *rhs ? -1 : +1;
         }
         return 0;
     }
@@ -102,15 +102,15 @@ struct base_char_traits {
         }
         return str;
     }
-    static constexpr void assign(char_type& lh, const char_type& rh) noexcept {
-        lh = rh;
+    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
+        lhs = rhs;
     }
 
-    MSTL_NODISCARD static constexpr bool eq(const char_type lh, const char_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
+        return lhs == rhs;
     }
-    MSTL_NODISCARD static constexpr bool lt(const char_type lh, const char_type rh) noexcept {
-        return lh < rh;
+    MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
+        return lhs < rhs;
     }
     MSTL_NODISCARD static constexpr char_type to_char_type(const int_type str) noexcept {
         return static_cast<char_type>(str);
@@ -118,8 +118,8 @@ struct base_char_traits {
     MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
         return static_cast<int_type>(chr);
     }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lh, const int_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
+        return lhs == rhs;
     }
     MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
         return eq_int_type(rsc, eof()) ? static_cast<int_type>(0) : rsc;
@@ -142,20 +142,20 @@ public:
     using base_type::move;
 
 public:
-    MSTL_NODISCARD static constexpr int compare(const char_type* const lh,
-        const char_type* const rh, const size_t n) noexcept {
+    MSTL_NODISCARD static constexpr int compare(const char_type* const lhs,
+        const char_type* const rhs, const size_t n) noexcept {
 #if MSTL_STANDARD_20__
         if (_MSTL is_constant_evaluated()) {
             if constexpr (is_same_v<char_type, wchar_t>) {
-                return __builtin_wmemcmp(lh, rh, n);
+                return __builtin_wmemcmp(lhs, rhs, n);
             }
             else {
-                return base_type::compare(lh, rh, n);
+                return base_type::compare(lhs, rhs, n);
             }
         }
 #endif // MSTL_STANDARD_20__
-        return _MSTL wchar_memory_compare(reinterpret_cast<const wchar_t*>(lh),
-            reinterpret_cast<const wchar_t*>(rh), n);
+        return _MSTL wchar_memory_compare(reinterpret_cast<const wchar_t*>(lhs),
+            reinterpret_cast<const wchar_t*>(rhs), n);
     }
 
     MSTL_NODISCARD static constexpr size_t length(const char_type* str) noexcept {
@@ -201,20 +201,20 @@ public:
         return reinterpret_cast<char_type*>(_MSTL wchar_memory_set(reinterpret_cast<wchar_t*>(str), chr, n));
     }
 
-    static constexpr void assign(char_type& lh, const char_type& rh) noexcept {
+    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
 #if MSTL_STANDARD_20__
         if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(lh, rh);
+            return base_type::assign(lhs, rhs);
         }
 #endif // MSTL_STANDARD_20__
-        lh = rh;
+        lhs = rhs;
     }
 
-    MSTL_NODISCARD static constexpr bool eq(const char_type lh, const char_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
+        return lhs == rhs;
     }
-    MSTL_NODISCARD static constexpr bool lt(const char_type lh, const char_type rh) noexcept {
-        return lh < rh;
+    MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
+        return lhs < rhs;
     }
     MSTL_NODISCARD static constexpr char_type to_char_type(const int_type rsc) noexcept {
         return rsc;
@@ -222,8 +222,8 @@ public:
     MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
         return chr;
     }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lh, const int_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
+        return lhs == rhs;
     }
 
     MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
@@ -247,12 +247,12 @@ public:
     using base_type::move;
 
 public:
-    MSTL_NODISCARD static constexpr int compare(const char_type* const lh,
-        const char_type* const rh, const size_t n) noexcept {
+    MSTL_NODISCARD static constexpr int compare(const char_type* const lhs,
+        const char_type* const rhs, const size_t n) noexcept {
 #ifdef MSTL_STANDARD_17__
-        return __builtin_memcmp(lh, rh, n);
+        return __builtin_memcmp(lhs, rhs, n);
 #else
-        return _MSTL memory_compare(lh, rh, n);
+        return _MSTL memory_compare(lhs, rhs, n);
 #endif
     }
 
@@ -315,20 +315,20 @@ public:
         return static_cast<char_type*>(_MSTL memory_set(str, chr, n));
     }
 
-    static constexpr void assign(char_type& lh, const char_type& rh) noexcept {
+    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
 #ifdef MSTL_STANDARD_20__
         if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(lh, rh);
+            return base_type::assign(lhs, rhs);
         }
 #endif // MSTL_STANDARD_20__
-        lh = rh;
+        lhs = rhs;
     }
 
-    MSTL_NODISCARD static constexpr bool eq(const char_type lh, const char_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
+        return lhs == rhs;
     }
-    MSTL_NODISCARD static constexpr bool lt(const char_type lh, const char_type rh) noexcept {
-        return static_cast<byte_t>(lh) < static_cast<byte_t>(rh);
+    MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
+        return static_cast<byte_t>(lhs) < static_cast<byte_t>(rhs);
     }
     MSTL_NODISCARD static constexpr char_type to_char_type(const int_type rsc) noexcept {
         return static_cast<char_type>(rsc);
@@ -336,8 +336,8 @@ public:
     MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
         return static_cast<byte_t>(chr);
     }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lh, const int_type rh) noexcept {
-        return lh == rh;
+    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
+        return lhs == rhs;
     }
 
     MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
@@ -402,18 +402,18 @@ MSTL_END_INNER__
 
 
 template <typename Traits>
-constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lh, const size_t lh_size,
-    const char_traits_ptr_t<Traits> rh, const size_t rh_size) noexcept {
+constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lhs, const size_t lh_size,
+    const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
     if (lh_size != rh_size) return false;
     if (lh_size == 0u) return true;
 
-    return Traits::compare(lh, rh, lh_size) == 0;
+    return Traits::compare(lhs, rhs, lh_size) == 0;
 }
 
 template <typename Traits>
-constexpr int char_traits_compare(const char_traits_ptr_t<Traits> lh, const size_t lh_size,
-    const char_traits_ptr_t<Traits> rh, const size_t rh_size) noexcept {
-    const int state = Traits::compare(lh, rh, _MSTL min(lh_size, rh_size));
+constexpr int char_traits_compare(const char_traits_ptr_t<Traits> lhs, const size_t lh_size,
+    const char_traits_ptr_t<Traits> rhs, const size_t rh_size) noexcept {
+    const int state = Traits::compare(lhs, rhs, _MSTL min(lh_size, rh_size));
     if (state != 0) return state;
 
     if (lh_size < rh_size) return -1;

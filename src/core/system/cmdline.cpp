@@ -160,7 +160,7 @@ _MSTL vector<string> cmdline::get_os_argv() {
     ::LocalFree(argv_wide);
 #else
     file cmdline_file(path{"/proc/self/cmdline"});
-    if (!cmdline_file.opened()) {
+    if (!cmdline_file.is_opened()) {
         throw_exception(cmdline_exception("Failed to open /proc/self/cmdline"));
     }
 

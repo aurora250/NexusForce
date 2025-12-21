@@ -37,8 +37,6 @@ public:
     using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
 
-    using self              = list_iterator<IsConst, container_type>;
-
 private:
     using node_type         = list_node<value_type>;
 
@@ -56,7 +54,7 @@ public:
     list_iterator(const iterator& x) noexcept
     : node_(x.node_), list_(x.list_) {}
 
-    self& operator =(const iterator& x) noexcept {
+    list_iterator& operator =(const iterator& x) noexcept {
     	if(_MSTL addressof(x) == this) return *this;
 		node_ = x.node_;
         list_ = x.list_;
@@ -66,7 +64,7 @@ public:
     list_iterator(const const_iterator& x) noexcept
     : node_(x.node_), list_(x.list_) {}
 
-    self& operator =(const const_iterator& x) noexcept {
+    list_iterator& operator =(const const_iterator& x) noexcept {
         if(_MSTL addressof(x) == this) return *this;
         node_ = x.node_;
         list_ = x.list_;
@@ -78,7 +76,7 @@ public:
         x.list_ = nullptr;
     }
 
-    self& operator =(iterator&& x) noexcept {
+    list_iterator& operator =(iterator&& x) noexcept {
         if(_MSTL addressof(x) == this) return *this;
         node_ = x.node_;
         list_ = x.list_;
@@ -93,7 +91,7 @@ public:
         x.list_ = nullptr;
     }
 
-    self& operator =(const_iterator&& x) noexcept {
+    list_iterator& operator =(const_iterator&& x) noexcept {
         if(_MSTL addressof(x) == this) return *this;
         node_ = x.node_;
         list_ = x.list_;
@@ -113,34 +111,34 @@ public:
         return &operator*();
     }
 
-    self& operator ++() noexcept {
+    list_iterator& operator ++() noexcept {
         MSTL_DEBUG_VERIFY(list_ && node_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(list_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         MSTL_DEBUG_VERIFY(node_ != list_->head_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(list_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         node_ = node_->next_;
         return *this;
     }
-    self operator ++(int) noexcept {
-        self old = *this;
+    list_iterator operator ++(int) noexcept {
+        list_iterator old = *this;
         ++*this;
         return old;
     }
-    self& operator --() noexcept {
+    list_iterator& operator --() noexcept {
         MSTL_DEBUG_VERIFY(list_ && node_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(list_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         MSTL_DEBUG_VERIFY(node_->prev_ != list_->head_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(list_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         node_ = node_->prev_;
         return *this;
     }
-    self operator --(int) noexcept {
-        self old = *this;
+    list_iterator operator --(int) noexcept {
+        list_iterator old = *this;
         --*this;
         return old;
     }
 
-    MSTL_NODISCARD bool operator ==(const self& x) noexcept {
+    MSTL_NODISCARD bool operator ==(const list_iterator& x) noexcept {
 		MSTL_DEBUG_VERIFY(list_ == x.list_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(list_iterator));
         return node_ == x.node_;
     }
-    MSTL_NODISCARD bool operator !=(const self& x) noexcept {
+    MSTL_NODISCARD bool operator !=(const list_iterator& x) noexcept {
         return !(*this == x);
     }
 
@@ -158,14 +156,11 @@ class list : public icollector<list<T, Alloc>> {
     static_assert(is_same_v<list_node<T>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<T>, "list only contains object types.");
 
-    using self = list<T, Alloc>;
-    using super = icollector<self>;
-
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using allocator_type            = Alloc;
-    using iterator                  = list_iterator<false, self>;
-    using const_iterator            = list_iterator<true, self>;
+    using iterator                  = list_iterator<false, list>;
+    using const_iterator            = list_iterator<true, list>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -220,15 +215,15 @@ public:
 
     list(std::initializer_list<T> l) : list(l.begin(), l.end()) {}
 
-    self& operator =(std::initializer_list<T> l) {
+    list& operator =(std::initializer_list<T> l) {
         clear();
         insert(begin(), l.begin(), l.end());
         return *this;
     }
 
-    list(const self& x) : list(x.cbegin(), x.cend()) {}
+    list(const list& x) : list(x.cbegin(), x.cend()) {}
 
-    self& operator =(const self& x) {
+    list& operator =(const list& x) {
         if (_MSTL addressof(x) == this) return *this;
         clear();
         link_type p = x.head_->next_;
@@ -244,11 +239,11 @@ public:
         return *this;
     }
 
-    list(self&& x) noexcept {
+    list(list&& x) noexcept {
         empty_init();
         this->swap(x);
     }
-    self& operator =(self&& x) noexcept {
+    list& operator =(list&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         this->swap(x);
         return *this;
@@ -398,7 +393,7 @@ public:
         head_->next_ = head_;
     }
 
-    void swap(self& x) noexcept {
+    void swap(list& x) noexcept {
         _MSTL swap(head_, x.head_);
         _MSTL swap(pair_, x.pair_);
     }
@@ -426,22 +421,22 @@ public:
         return this->remove_if([&](const T& oth) -> bool { return oth == x; });
     }
 
-    void splice(iterator position, self& x) {
+    void splice(iterator position, list& x) {
         if (!x.empty()) 
             transfer(position, x.begin(), x.end());
     }
-    void splice(iterator position, self&, iterator i) {
+    void splice(iterator position, list&, iterator i) {
         iterator j = i;
         ++j;
         if (i == position || j == position) return;
         transfer(position, i, j);
     }
-    void splice(iterator position, self&, iterator first, iterator last) {
+    void splice(iterator position, list&, iterator first, iterator last) {
         if (first != last) transfer(position, first, last);
     }
 
     template <typename Pred>
-    void merge(self& x, Pred pred) {
+    void merge(list& x, Pred pred) {
         iterator first1 = begin(), first2 = x.begin();
         iterator last1 = end(), last2 = x.end();
         while (first1 != last1 && first2 != last2) {
@@ -459,11 +454,11 @@ public:
             transfer(last1, first2, last2);
         }
     }
-    void merge(self& x) {
+    void merge(list& x) {
         this->merge(x, _MSTL less<T>());
     }
     template <typename Pred>
-    void merge(self&& x, Pred pred) {
+    void merge(list&& x, Pred pred) {
         iterator first1 = begin(), first2 = x.begin();
         iterator last1 = end(), last2 = x.end();
         while (first1 != last1 && first2 != last2) {
@@ -482,8 +477,8 @@ public:
         }
         x.clear();
     }
-    void merge(self&& x) {
-        this->merge(_MSTL forward<self>(x), _MSTL less<T>());
+    void merge(list&& x) {
+        this->merge(_MSTL forward<list>(x), _MSTL less<T>());
     }
 
     void reverse() noexcept {
@@ -539,7 +534,7 @@ public:
     }
     MSTL_NODISCARD reference at(const size_type position) {
         return const_cast<reference>(
-            static_cast<const self*>(this)->at(position)
+            static_cast<const list*>(this)->at(position)
             );
     }
     MSTL_NODISCARD const_reference operator [](const size_type position) const {
@@ -549,14 +544,14 @@ public:
         return this->at(position);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
-        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    MSTL_NODISCARD bool operator ==(const list& rhs) const
+    noexcept(noexcept(this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+        return this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
 
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD bool operator <(const list& rhs) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

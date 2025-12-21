@@ -299,4 +299,12 @@ bool process::is_process_running(const process_info& info) noexcept {
 #endif
 }
 
+int process::current_process_id() noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    return ::GetCurrentProcessId();
+#else
+    return ::getpid();
+#endif
+}
+
 MSTL_END_NAMESPACE__

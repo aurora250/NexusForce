@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_STRING_SPLIT_HPP__
-#define MSTL_CORE_STRING_SPLIT_HPP__
+#ifndef MSTL_CORE_STRING_STRING_UTIL_HPP__
+#define MSTL_CORE_STRING_STRING_UTIL_HPP__
 #include "../container/vector.hpp"
 #include "../iterator/insert_iterator.hpp"
 #include "string.hpp"
@@ -36,4 +36,4 @@ vector<string> MSTL_API cartesian_product(const vector<string>& vec1,
     const vector<string>& vec2, const string& connector = "");
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_STRING_SPLIT_HPP__
+#endif // MSTL_CORE_STRING_STRING_UTIL_HPP__

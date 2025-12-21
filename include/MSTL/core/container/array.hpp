@@ -68,8 +68,8 @@ public:
         return *this += -n;
     }
 
-    MSTL_NODISCARD constexpr difference_type operator -(const array_iterator& rh) const noexcept {
-        return static_cast<difference_type>(idx_ - rh.idx_);
+    MSTL_NODISCARD constexpr difference_type operator -(const array_iterator& rhs) const noexcept {
+        return static_cast<difference_type>(idx_ - rhs.idx_);
     }
     MSTL_NODISCARD constexpr array_iterator operator -(const difference_type n) const noexcept {
         array_iterator tmp = *this;
@@ -91,23 +91,23 @@ public:
         return *(*this + n);
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const array_iterator& rh) const noexcept {
-        return idx_ == rh.idx_;
+    MSTL_NODISCARD constexpr bool operator ==(const array_iterator& rhs) const noexcept {
+        return idx_ == rhs.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator!=(const array_iterator& rh) const noexcept {
-        return !(*this == rh);
+    MSTL_NODISCARD constexpr bool operator!=(const array_iterator& rhs) const noexcept {
+        return !(*this == rhs);
     }
-    MSTL_NODISCARD constexpr bool operator <(const array_iterator& rh) const noexcept {
-        return idx_ < rh.idx_;
+    MSTL_NODISCARD constexpr bool operator <(const array_iterator& rhs) const noexcept {
+        return idx_ < rhs.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator >(const array_iterator& rh) const noexcept {
-        return rh < *this;
+    MSTL_NODISCARD constexpr bool operator >(const array_iterator& rhs) const noexcept {
+        return rhs < *this;
     }
-    MSTL_NODISCARD constexpr bool operator <=(const array_iterator& rh) const noexcept {
-        return !(rh < *this);
+    MSTL_NODISCARD constexpr bool operator <=(const array_iterator& rhs) const noexcept {
+        return !(rhs < *this);
     }
-    MSTL_NODISCARD constexpr bool operator >=(const array_iterator& rh) const noexcept {
-        return !(*this < rh);
+    MSTL_NODISCARD constexpr bool operator >=(const array_iterator& rhs) const noexcept {
+        return !(*this < rhs);
     }
 
     MSTL_NODISCARD constexpr pointer base() const noexcept {
@@ -236,11 +236,11 @@ public:
         _MSTL swap(array_, x.array_);
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const array& rh) const noexcept {
-        return _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    MSTL_NODISCARD constexpr bool operator ==(const array& rhs) const noexcept {
+        return _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
-    MSTL_NODISCARD constexpr bool operator <(const array& rh) const noexcept {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD constexpr bool operator <(const array& rhs) const noexcept {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 

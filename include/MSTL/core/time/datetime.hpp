@@ -14,7 +14,6 @@ MSTL_END_CONSTANTS__
 class MSTL_API date : public iobject<date>, public icommon<date> {
 public:
     using date_type = int32_t;
-    using self = date;
 
 private:
     date_type year_ = 1970;
@@ -202,7 +201,7 @@ public:
         return _MSTL format("{:04d}-{:02d}-{:02d}", year(), month(), day());
     }
 
-    MSTL_NODISCARD constexpr static self parse(const string_view str) {
+    MSTL_NODISCARD constexpr static date parse(const string_view str) {
         if (str.size() != 10 || str[4] != '-' || str[7] != '-') {
             throw_exception(value_exception("Wrong string formation."));
         }
@@ -246,7 +245,6 @@ public:
 class MSTL_API time : public iobject<time>, public icommon<time> {
 public:
     using time_type = int32_t;
-    using self = _MSTL time;
 
 private:
     time_type hours_ = 0;
@@ -430,7 +428,6 @@ class MSTL_API datetime : public iobject<datetime>, public icommon<datetime> {
 public:
     using date_type = _MSTL date::date_type;
     using time_type = _MSTL time::time_type;
-    using self = datetime;
 
 private:
     _MSTL date date_{};
@@ -739,7 +736,7 @@ public:
 
     MSTL_CONSTEXPR20 bool try_parse_ISO_UTC(string_view str) noexcept {
         try {
-            self tmp = self::parse_ISO_UTC(str);
+            datetime tmp = datetime::parse_ISO_UTC(str);
             this->swap(tmp);
         } catch (...) {
             return false;
@@ -798,7 +795,7 @@ public:
 
     MSTL_CONSTEXPR20 bool try_parse_GMT(const string_view str) noexcept {
         try {
-            self tmp = self::parse_GMT(str);
+            datetime tmp = datetime::parse_GMT(str);
             this->swap(tmp);
         } catch (...) {
             return false;
@@ -826,7 +823,7 @@ public:
 
     MSTL_CONSTEXPR20 bool try_parse_ISO(const string_view str) noexcept {
         try {
-            self tmp = self::parse_ISO(str);
+            datetime tmp = datetime::parse_ISO(str);
             this->swap(tmp);
         } catch (...) {
             return false;

@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_MEMORY_TEMPORARY_BUFFER_HPP__
 #define MSTL_CORE_MEMORY_TEMPORARY_BUFFER_HPP__
 #include "../memory/uninitialized.hpp"
+#include "../numeric/numeric_limits.hpp"
 #include <cstdlib> // std::malloc
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__

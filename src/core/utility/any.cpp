@@ -19,13 +19,13 @@ any::any(any&& x) noexcept {
     }
 }
 
-any& any::operator =(any&& rh) noexcept {
-    if (!rh.has_value()) reset();
-    else if (this != &rh) {
+any& any::operator =(any&& rhs) noexcept {
+    if (!rhs.has_value()) reset();
+    else if (this != &rhs) {
         reset();
         ArgT arg{};
         arg.any_ptr_ = this;
-        rh.manage_(SWAP, &rh, &arg);
+        rhs.manage_(SWAP, &rhs, &arg);
     }
     return *this;
 }
@@ -37,22 +37,22 @@ MSTL_NODISCARD const std::type_info& any::type() const noexcept {
     return *arg.type_ptr_;
 }
 
-void any::swap(any& rh) noexcept {
-    if (!has_value() && !rh.has_value()) return;
-    if (has_value() && rh.has_value()) {
-        if (this == &rh) return;
+void any::swap(any& rhs) noexcept {
+    if (!has_value() && !rhs.has_value()) return;
+    if (has_value() && rhs.has_value()) {
+        if (this == &rhs) return;
         any tmp;
         ArgT arg{};
         arg.any_ptr_ = &tmp;
-        rh.manage_(SWAP, &rh, &arg);
-        arg.any_ptr_ = &rh;
+        rhs.manage_(SWAP, &rhs, &arg);
+        arg.any_ptr_ = &rhs;
         manage_(SWAP, this, &arg);
         arg.any_ptr_ = this;
         tmp.manage_(SWAP, &tmp, &arg);
     }
     else {
-        any* emp = !has_value() ? this : &rh;
-        any* full = !has_value() ? &rh : this;
+        any* emp = !has_value() ? this : &rhs;
+        any* full = !has_value() ? &rhs : this;
         ArgT arg{};
         arg.any_ptr_ = emp;
         full->manage_(SWAP, full, &arg);

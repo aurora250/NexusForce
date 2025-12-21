@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
-#define MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
+#ifndef MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__
+#define MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__
 #include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -41,9 +41,9 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
         return *this;
     }
 
-    constexpr void swap(compressed_pair& rh)
+    constexpr void swap(compressed_pair& rhs)
         noexcept(is_nothrow_swappable_v<T>) {
-        _MSTL swap(value, rh.value);
+        _MSTL swap(value, rhs.value);
     }
 
 	constexpr size_t to_hash() const
@@ -103,10 +103,10 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 		return no_compressed;
 	}
 
-	constexpr void swap(compressed_pair& rh)
+	constexpr void swap(compressed_pair& rhs)
 	noexcept(conjunction_v<is_nothrow_swappable<IfEmpty>, is_nothrow_swappable<T>>) {
-		_MSTL swap(value, rh.value);
-		_MSTL swap(no_compressed, rh.no_compressed);
+		_MSTL swap(value, rhs.value);
+		_MSTL swap(no_compressed, rhs.no_compressed);
 	}
 
 	constexpr size_t to_hash() const
@@ -131,4 +131,4 @@ compressed_pair(IfEmpty, T) -> compressed_pair<IfEmpty, T>;
 #endif
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_COMPRESSED_PAIR_HPP__
+#endif // MSTL_CORE_UTILITY_COMPRESSED_PAIR_HPP__

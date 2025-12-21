@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_PAIR_HPP__
-#define MSTL_CORE_COMPOUND_PAIR_HPP__
+#ifndef MSTL_CORE_UTILITY_PAIR_HPP__
+#define MSTL_CORE_UTILITY_PAIR_HPP__
 #include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
 #include "integer_sequence.hpp"
@@ -169,9 +169,9 @@ struct pair : icommon<pair<T1, T2>> {
 
 
 	// use identity_t to fasten type information
-	template <typename self = pair, enable_if_t<conjunction_v<
-		is_copy_assignable<typename self::first_type>, is_copy_assignable<typename self::second_type>>, int> = 0>
-	constexpr pair& operator =(type_identity_t<const self&> p) noexcept(conjunction_v<
+	template <typename T = pair, enable_if_t<conjunction_v<
+		is_copy_assignable<typename T::first_type>, is_copy_assignable<typename T::second_type>>, int> = 0>
+	constexpr pair& operator =(type_identity_t<const T&> p) noexcept(conjunction_v<
 		is_nothrow_copy_assignable<T1>, is_nothrow_copy_assignable<T2>>) {
 		first = p.first;
 		second = p.second;
@@ -179,9 +179,9 @@ struct pair : icommon<pair<T1, T2>> {
 	}
 
 	// use identity_t to fasten type information
-	template <typename self = pair, enable_if_t<conjunction_v<
-		is_move_assignable<typename self::first_type>, is_move_assignable<typename self::second_type>>, int> = 0>
-	constexpr pair& operator =(type_identity_t<self&&> p) noexcept(conjunction_v<
+	template <typename T = pair, enable_if_t<conjunction_v<
+		is_move_assignable<typename T::first_type>, is_move_assignable<typename T::second_type>>, int> = 0>
+	constexpr pair& operator =(type_identity_t<T&&> p) noexcept(conjunction_v<
 		is_nothrow_move_assignable<T1>, is_nothrow_move_assignable<T2>>) {
 		first = _MSTL forward<T1>(p.first);
 		second = _MSTL forward<T2>(p.second);
@@ -431,4 +431,4 @@ MSTL_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_PAIR_HPP__
+#endif // MSTL_CORE_UTILITY_PAIR_HPP__

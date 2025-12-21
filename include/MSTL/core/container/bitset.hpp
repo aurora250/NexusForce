@@ -354,28 +354,25 @@ public:
     constexpr void swap(bitset& other) noexcept {
         blocks.swap(other.blocks);
     }
+
+    bitset operator &(const bitset& rhs) {
+        bitset res = *this;
+        res &= rhs;
+        return res;
+    }
+
+    bitset operator |(const bitset& rhs) {
+        bitset res = *this;
+        res |= rhs;
+        return res;
+    }
+
+    bitset operator ^(const bitset& rhs) {
+        bitset res = *this;
+        res ^= rhs;
+        return res;
+    }
 };
-
-template <size_t N>
-bitset<N> operator &(const bitset<N>& lhs, const bitset<N>& rhs) {
-    bitset<N> res = lhs;
-    res &= rhs;
-    return res;
-}
-
-template <size_t N>
-bitset<N> operator |(const bitset<N>& lhs, const bitset<N>& rhs) {
-    bitset<N> res = lhs;
-    res |= rhs;
-    return res;
-}
-
-template <size_t N>
-bitset<N> operator ^(const bitset<N>& lhs, const bitset<N>& rhs) {
-    bitset<N> res = lhs;
-    res ^= rhs;
-    return res;
-}
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONTAINER_BITSET_HPP__

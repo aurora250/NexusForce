@@ -389,7 +389,7 @@ void sys_console::pause(const string_view msg) {
     this->flush_unsafe();
 }
 
-bool sys_console::confirmation(string_view prompt, char yes, char no) {
+bool sys_console::confirmation(const string_view prompt, const char yes, const char no) {
     lock_guard<mutex> lock(mutex_);
     while (true) {
         this->print_string_unsafe(prompt);
@@ -409,8 +409,7 @@ bool sys_console::confirmation(string_view prompt, char yes, char no) {
     }
 }
 
-string sys_console::password(const string_view prompt,
-    const char mask, const bool show_length) {
+string sys_console::password(const string_view prompt, const char mask, const bool show_length) {
     lock_guard<mutex> lock(mutex_);
     if (!is_interactive()) {
         return readln_unsafe();

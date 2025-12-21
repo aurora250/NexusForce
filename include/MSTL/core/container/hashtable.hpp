@@ -38,8 +38,6 @@ public:
     using difference_type   = typename container_type::difference_type;
     using size_type         = typename container_type::size_type;
 
-    using self              = hashtable_iterator<IsConst, container_type>;
-
 private:
     using node_type         = hashtable_node<value_type>;
 
@@ -59,7 +57,7 @@ public:
     hashtable_iterator(const iterator& it)
     : cur_(it.cur_), ht_(it.ht_), bucket_(it.bucket_) {}
 
-    self& operator =(const iterator& it) {
+    hashtable_iterator& operator =(const iterator& it) {
         if(_MSTL addressof(it) == this) return *this;
         cur_ = it.cur_;
         ht_ = it.ht_;
@@ -74,7 +72,7 @@ public:
         it.bucket_ = -1;
     }
 
-    self& operator =(iterator&& it) noexcept {
+    hashtable_iterator& operator =(iterator&& it) noexcept {
         if(_MSTL addressof(it) == this) return *this;
         cur_ = it.cur_;
         ht_ = it.ht_;
@@ -88,7 +86,7 @@ public:
     hashtable_iterator(const const_iterator& it)
     : cur_(it.cur_), ht_(it.ht_), bucket_(it.bucket_) {}
 
-    self& operator =(const const_iterator& it) {
+    hashtable_iterator& operator =(const const_iterator& it) {
         if(_MSTL addressof(it) == this) return *this;
         cur_ = it.cur_;
         ht_ = it.ht_;
@@ -103,7 +101,7 @@ public:
         it.bucket_ = -1;
     }
 
-    self& operator =(const_iterator&& it) {
+    hashtable_iterator& operator =(const_iterator&& it) {
         if(_MSTL addressof(it) == this) return *this;
         cur_ = it.cur_;
         ht_ = it.ht_;
@@ -129,7 +127,7 @@ public:
         return &operator*();
     }
 
-    self& operator ++() {
+    hashtable_iterator& operator ++() {
         MSTL_DEBUG_VERIFY(cur_ && ht_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(hashtable_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         MSTL_DEBUG_VERIFY(bucket_ < ht_->buckets_.size() && !(bucket_ + 1 == ht_->buckets_.size() && cur_->next_ != nullptr),
             __MSTL_DEBUG_MESG_OUT_OF_RANGE(hashtable_iterator, __MSTL_DEBUG_TAG_INCREMENT));
@@ -141,17 +139,17 @@ public:
         }
         return *this;
     }
-    self operator ++(int) {
+    hashtable_iterator operator ++(int) {
         iterator tmp = *this;
         ++*this;
         return tmp;
     }
 
-    MSTL_NODISCARD bool operator ==(const self& x) const noexcept {
+    MSTL_NODISCARD bool operator ==(const hashtable_iterator& x) const noexcept {
 		MSTL_DEBUG_VERIFY(ht_ == x.ht_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(hashtable_iterator));
         return cur_ == x.cur_;
     }
-    MSTL_NODISCARD bool operator !=(const self& x) const noexcept {
+    MSTL_NODISCARD bool operator !=(const hashtable_iterator& x) const noexcept {
         return !(*this == x);
     }
 
@@ -216,8 +214,6 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 size_t hashtable_next_prime(const size_t n) {
 template <typename Value, typename Key, typename HashFcn,
     typename ExtractKey, typename EqualKey, typename Alloc>
 class hashtable : public icollector<hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>> {
-    using self = hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>;
-    using super = icollector<self>;
     using node_type = hashtable_node<Value>;
 
 public:
@@ -227,8 +223,8 @@ public:
 
     MSTL_BUILD_TYPE_ALIAS(Value)
 
-    using iterator          = hashtable_iterator<false, self>;
-    using const_iterator    = hashtable_iterator<true, self>;
+    using iterator          = hashtable_iterator<false, hashtable>;
+    using const_iterator    = hashtable_iterator<true, hashtable>;
 
     using allocator_type    = Alloc;
 
@@ -437,21 +433,21 @@ private:
         return count;
     }
 
-    bool equal_small(const self& rh) const {
+    bool equal_small(const hashtable& rhs) const {
         for (const_iterator it1 = begin(); it1 != end(); ++it1) {
             const key_type& key = extracter_(*it1);
             const size_t count_this = _MSTL count_if(begin(), end(), [&](const value_type& val) {
                 return equals_(extracter_(val), key);
             });
-            const size_t count_rh = _MSTL count_if(rh.begin(), rh.end(), [&](const value_type& val) {
-                return rh.equals_(rh.extracter_(val), key);
+            const size_t count_rh = _MSTL count_if(rhs.begin(), rhs.end(), [&](const value_type& val) {
+                return rhs.equals_(rhs.extracter_(val), key);
             });
             if (count_this != count_rh) return false;
         }
         return true;
     }
 
-    bool equal_large(const self& rh) const {
+    bool equal_large(const hashtable& rhs) const {
         vector<value_type> elements_this, elements_rh;
         elements_this.reserve(size_);
         elements_rh.reserve(size_);
@@ -459,7 +455,7 @@ private:
         for (const_iterator it = begin(); it != end(); ++it) {
             elements_this.push_back(*it);
         }
-        for (const_iterator it = rh.begin(); it != rh.end(); ++it) {
+        for (const_iterator it = rhs.begin(); it != rhs.end(); ++it) {
             elements_rh.push_back(*it);
         }
 
@@ -488,11 +484,11 @@ public:
         initialize_buckets(n);
     }
 
-    hashtable(const self& ht)
+    hashtable(const hashtable& ht)
     : hasher_(ht.hasher_), equals_(ht.equals_), extracter_(ht.extracter_), pair_(ht.pair_) {
         this->copy_from(ht);
     }
-    self& operator =(const self& ht) {
+    hashtable& operator =(const hashtable& ht) {
         if (_MSTL addressof(ht) == this) return *this;
         clear();
         hasher_ = ht.hasher_;
@@ -502,10 +498,10 @@ public:
         return *this;
     }
 
-    hashtable(self&& ht) noexcept(noexcept(this->swap(ht))) {
+    hashtable(hashtable&& ht) noexcept(noexcept(this->swap(ht))) {
         this->swap(ht);
     }
-    self& operator =(self&& ht) noexcept(noexcept(this->swap(ht))) {
+    hashtable& operator =(hashtable&& ht) noexcept(noexcept(this->swap(ht))) {
         if (_MSTL addressof(ht) == this) return *this;
         clear();
         this->swap(ht);
@@ -896,7 +892,7 @@ public:
         };
     }
 
-    void swap(self& ht) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey>) {
+    void swap(hashtable& ht) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey>) {
         if (_MSTL addressof(ht) == this) return;
         _MSTL swap(hasher_, ht.hasher_);
         _MSTL swap(equals_, ht.equals_);
@@ -906,18 +902,18 @@ public:
         pair_.swap(ht.pair_);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const {
-        if (size_ != rh.size_) return false;
+    MSTL_NODISCARD bool operator ==(const hashtable& rhs) const {
+        if (size_ != rhs.size_) return false;
         if (size_ == 0) return true;
-        if (this == &rh) return true;
+        if (this == &rhs) return true;
 
-        if (size_ < 100) return equal_small(rh);
-        return equal_large(rh);
+        if (size_ < 100) return equal_small(rhs);
+        return equal_large(rhs);
     }
 
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD bool operator <(const hashtable& rhs) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 

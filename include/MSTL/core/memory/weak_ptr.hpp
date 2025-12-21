@@ -138,27 +138,27 @@ public:
     }
 
     template <typename U>
-    MSTL_NODISCARD bool owner_equal(const weak_ptr<U>& rh) const noexcept {
-        return owner_ == rh.owner_;
+    MSTL_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
+        return owner_ == rhs.owner_;
     }
     template <typename U>
-    MSTL_NODISCARD bool owner_equal(const shared_ptr<U>& rh) const noexcept {
-        return owner_ == reinterpret_cast<_INNER __smart_ptr_counter*>(rh.owner_);
+    MSTL_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
+        return owner_ == reinterpret_cast<_INNER __smart_ptr_counter*>(rhs.owner_);
     }
 
     template <typename U>
-    MSTL_NODISCARD bool owner_before(const weak_ptr<U>& rh) const noexcept {
-        return owner_ < rh.owner_;
+    MSTL_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
+        return owner_ < rhs.owner_;
     }
     template <typename U>
-    MSTL_NODISCARD bool owner_before(const shared_ptr<U>& rh) const noexcept {
-        return owner_ < reinterpret_cast<_INNER __smart_ptr_counter*>(rh.owner_);
+    MSTL_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
+        return owner_ < reinterpret_cast<_INNER __smart_ptr_counter*>(rhs.owner_);
     }
 };
 
 template <typename T>
-void swap(weak_ptr<T>& lh, weak_ptr<T>& rh) noexcept {
-    lh.swap(rh);
+void swap(weak_ptr<T>& lhs, weak_ptr<T>& rhs) noexcept {
+    lhs.swap(rhs);
 }
 
 

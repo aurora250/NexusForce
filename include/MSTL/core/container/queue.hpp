@@ -5,8 +5,7 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Sequence = deque<T>>
 class queue : public icollector<queue<T, Sequence>> {
-    using self = queue<T, Sequence>;
-    using super = icollector<self>;
+    using super = icollector<queue>;
 
 public:
     using value_type        = typename Sequence::value_type;
@@ -55,17 +54,17 @@ public:
     template <typename... Args>
     decltype(auto) emplace(Args&&... args) { return seq_.emplace_back(_MSTL forward<Args>(args)...); }
 
-    void swap(self& x) noexcept(is_nothrow_swappable_v<Sequence>) {
+    void swap(queue& x) noexcept(is_nothrow_swappable_v<Sequence>) {
         _MSTL swap(seq_, x.seq_);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(seq_ == rh.seq_)) {
-        return seq_ == rh.seq_;
+    MSTL_NODISCARD bool operator ==(const queue& rhs) const
+    noexcept(noexcept(seq_ == rhs.seq_)) {
+        return seq_ == rhs.seq_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(seq_ < rh.seq_)) {
-        return seq_ < rh.seq_;
+    MSTL_NODISCARD bool operator <(const queue& rhs) const
+    noexcept(noexcept(seq_ < rhs.seq_)) {
+        return seq_ < rhs.seq_;
     }
 };
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__

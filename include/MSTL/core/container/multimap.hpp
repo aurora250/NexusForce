@@ -13,8 +13,6 @@ class multimap : public icollector<multimap<Key, T, Compare, Alloc>> {
 		"allocator type mismatch.");
 	static_assert(is_object_v<T>, "multimap only contains object types.");
 
-	using self = multimap<Key, T, Compare, Alloc>;
-	using super = icollector<self>;
 	using base_type			= rb_tree<Key, pair<const Key, T>, select1st<pair<const Key, T>>, Compare, Alloc>;
 
 public:
@@ -64,14 +62,14 @@ public:
 	multimap() : tree_(Compare()) {}
 	explicit multimap(const key_compare& comp) : tree_(comp) {}
 
-	multimap(const self& x) : tree_(x.tree_) {}
+	multimap(const multimap& x) : tree_(x.tree_) {}
 
-	self& operator =(const self& x) = default;
+	multimap& operator =(const multimap& x) = default;
 
-	multimap(self&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
+	multimap(multimap&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
 		: tree_(_MSTL move(x.tree_)) {}
 
-	self& operator =(self&& x) noexcept(noexcept(swap(x))) {
+	multimap& operator =(multimap&& x) noexcept(noexcept(swap(x))) {
 		tree_ = _MSTL move(x.tree_);
 		return *this;
 	}
@@ -88,7 +86,7 @@ public:
 	multimap(std::initializer_list<value_type> l) : multimap(l.begin(), l.end()) {}
 	multimap(std::initializer_list<value_type> l, const key_compare& comp) : multimap(l.begin(), l.end(), comp) {}
 
-	self& operator =(std::initializer_list<value_type> l) {
+	multimap& operator =(std::initializer_list<value_type> l) {
 		clear();
 		insert(l.begin(), l.end());
 		return *this;
@@ -164,15 +162,15 @@ public:
 		return tree_.equal_range(x);
 	}
 
-	void swap(self& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+	void swap(multimap& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
 
-	MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(tree_ == rh.tree_)) {
-		return tree_ == rh.tree_;
+	MSTL_NODISCARD bool operator ==(const multimap& rhs) const
+    noexcept(noexcept(tree_ == rhs.tree_)) {
+		return tree_ == rhs.tree_;
 	}
-	MSTL_NODISCARD bool operator <(const self& rh) const
-	noexcept(noexcept(tree_ < rh.tree_)) {
-		return tree_ < rh.tree_;
+	MSTL_NODISCARD bool operator <(const multimap& rhs) const
+	noexcept(noexcept(tree_ < rhs.tree_)) {
+		return tree_ < rhs.tree_;
 	}
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

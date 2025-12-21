@@ -5,9 +5,6 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Sequence = deque<T>>
 class stack : public icollector<stack<T, Sequence>> {
-    using self = stack<T, Sequence>;
-    using super = icollector<self>;
-
 public:
     using value_type        = typename Sequence::value_type;
     using difference_type   = typename Sequence::difference_type;
@@ -42,17 +39,17 @@ public:
 
     void pop() noexcept(noexcept(seq_.pop_back())) { seq_.pop_back(); }
 
-    void swap(self& x) noexcept(is_nothrow_swappable_v<Sequence>) {
+    void swap(stack& x) noexcept(is_nothrow_swappable_v<Sequence>) {
         _MSTL swap(seq_, x.seq_);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-     noexcept(noexcept(seq_ == rh.seq_)) {
-        return seq_ == rh.seq_;
+    MSTL_NODISCARD bool operator ==(const stack& rhs) const
+     noexcept(noexcept(seq_ == rhs.seq_)) {
+        return seq_ == rhs.seq_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(seq_ < rh.seq_)) {
-        return seq_ < rh.seq_;
+    MSTL_NODISCARD bool operator <(const stack& rhs) const
+    noexcept(noexcept(seq_ < rhs.seq_)) {
+        return seq_ < rhs.seq_;
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

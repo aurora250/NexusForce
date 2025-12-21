@@ -193,13 +193,13 @@
 #endif // MSTL_STANDARD_11__
 
 #ifdef MSTL_STANDARD_14__
-	#define MSTL_CONSTEXPR14 MSTL_CONSTEXPR11
+	#define MSTL_CONSTEXPR14 constexpr
 #else
 	#define MSTL_CONSTEXPR14 inline
 #endif // MSTL_STANDARD_14__
 
 #ifdef MSTL_STANDARD_17__
-	#define MSTL_CONSTEXPR17 MSTL_CONSTEXPR14
+	#define MSTL_CONSTEXPR17 constexpr
 	#define MSTL_INLINE17 inline
 #else
 	#define MSTL_CONSTEXPR17 inline
@@ -207,13 +207,13 @@
 #endif // MSTL_STANDARD_17__
 
 #ifdef MSTL_STANDARD_20__
-	#define MSTL_CONSTEXPR20 MSTL_CONSTEXPR17
+	#define MSTL_CONSTEXPR20 constexpr
 #else
 	#define MSTL_CONSTEXPR20 inline
 #endif // MSTL_STANDARD_20__
 
 #ifdef MSTL_STANDARD_23__
-	#define MSTL_CONSTEXPR23 MSTL_CONSTEXPR20
+	#define MSTL_CONSTEXPR23 constexpr
 #else
 	#define MSTL_CONSTEXPR23 inline
 #endif // MSTL_STANDARD_23__

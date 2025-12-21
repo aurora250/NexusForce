@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_TUPLE_HPP__
-#define MSTL_CORE_COMPOUND_TUPLE_HPP__
+#ifndef MSTL_CORE_UTILITY_TUPLE_HPP__
+#define MSTL_CORE_UTILITY_TUPLE_HPP__
 #include "../functional/hash.hpp"
 #include "pair.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -108,7 +108,6 @@ MSTL_INLINE17 constexpr bool tuple_nothrow_assignable_v =
 
 template <>
 struct tuple<> : icommon<tuple<>> {
-	using self = tuple<>;
 
 	constexpr tuple() noexcept = default;
 	constexpr tuple(const tuple&) noexcept = default;
@@ -122,8 +121,8 @@ struct tuple<> : icommon<tuple<>> {
 
 	MSTL_ALWAYS_INLINE constexpr void swap(tuple&) noexcept {}
 
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const tuple& rhs) const noexcept { return this->equal_to(rhs); }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const tuple& rhs) const noexcept { return this->less_to(rhs); }
 
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
 };
@@ -132,7 +131,6 @@ template <typename This, typename... Rest>
 struct tuple<This, Rest...> : private tuple<Rest...>, icommon<tuple<This, Rest...>> {
 	using this_type = This;
 	using base_type = tuple<Rest...>;
-	using self = tuple<This, Rest...>;
 
 private:
 	this_type data_;
@@ -352,8 +350,8 @@ public:
 		return data_ == t.data_ && base_type::equal_to(t.get_rest());
 	}
 	template <typename... U>
-	MSTL_NODISCARD constexpr bool less_to(const tuple<U...>& rh) const {
-		return data_ < rh.data_ || (!(rh.data_ < data_) && base_type::less_to(rh.get_rest()));
+	MSTL_NODISCARD constexpr bool less_to(const tuple<U...>& rhs) const {
+		return data_ < rhs.data_ || (!(rhs.data_ < data_) && base_type::less_to(rhs.get_rest()));
 	}
 
 	template <size_t Index, typename... Types>
@@ -368,14 +366,14 @@ public:
 	template <size_t Index, typename... Types>
 	friend constexpr tuple_element_t<Index, Types...>&& pair_get_from_tuple(tuple<Types...>&&) noexcept;
 
-	MSTL_NODISCARD constexpr bool operator ==(const self& rh) const noexcept { return this->equal_to(rh); }
-	MSTL_NODISCARD constexpr bool operator <(const self& rh) const noexcept { return this->less_to(rh); }
+	MSTL_NODISCARD constexpr bool operator ==(const tuple& rhs) const noexcept { return this->equal_to(rhs); }
+	MSTL_NODISCARD constexpr bool operator <(const tuple& rhs) const noexcept { return this->less_to(rhs); }
 
 	MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
-		return self::__broaden_tuple(*this, _MSTL index_sequence_for<This, Rest...>());
+		return tuple::__broaden_tuple(*this, _MSTL index_sequence_for<This, Rest...>());
 	}
 
-	constexpr void swap(self& t)
+	constexpr void swap(tuple& t)
 	noexcept(conjunction_v<is_nothrow_swappable<This>, is_nothrow_swappable<Rest>...>) {
 		_MSTL swap(data_, t.data_);
 		base_type::swap(t.get_rest());
@@ -564,4 +562,4 @@ constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_s
 }
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_TUPLE_HPP__
+#endif // MSTL_CORE_UTILITY_TUPLE_HPP__

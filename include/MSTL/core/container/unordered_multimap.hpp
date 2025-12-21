@@ -14,8 +14,6 @@ class unordered_multimap : icollector<unordered_multimap<Key, T, HashFcn, EqualK
         "allocator type mismatch.");
     static_assert(is_object_v<Key>, "unordered multimap only contains object types.");
 
-    using self = unordered_multimap<Key, T, HashFcn, EqualKey, Alloc>;
-    using super = icollector<self>;
     using base_type = hashtable<pair<const Key, T>, Key, HashFcn, select1st<pair<const Key, T>>, EqualKey, Alloc>;
 
 public:
@@ -51,12 +49,12 @@ public:
     unordered_multimap(size_type n, const hasher& hf) : ht_(n, hf, key_equal()) {}
     unordered_multimap(size_type n, const hasher& hf, const key_equal& eql) : ht_(n, hf, eql) {}
 
-    unordered_multimap(const self& ht) : ht_(ht.ht_) {}
-    self& operator =(const self& x) = default;
+    unordered_multimap(const unordered_multimap& ht) : ht_(ht.ht_) {}
+    unordered_multimap& operator =(const unordered_multimap& x) = default;
 
-    unordered_multimap(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
-    self& operator =(self&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
-        ht_ = _MSTL forward<self>(x.ht_);
+    unordered_multimap(unordered_multimap&& x) noexcept(noexcept(ht_.swap(x.ht_))) : ht_(_MSTL forward<base_type>(x.ht_)) {}
+    unordered_multimap& operator =(unordered_multimap&& x) noexcept(noexcept(ht_.swap(x.ht_))) {
+        ht_ = _MSTL forward<unordered_multimap>(x.ht_);
         return *this;
     }
 
@@ -146,15 +144,15 @@ public:
         return ht_.equal_range(key);
     }
 
-    void swap(self& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
+    void swap(unordered_multimap& x) noexcept(noexcept(ht_.swap(x.ht_))) { ht_.swap(x.ht_); }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(ht_ == rh.ht_)) {
-        return ht_ == rh.ht_;
+    MSTL_NODISCARD bool operator ==(const unordered_multimap& rhs) const
+    noexcept(noexcept(ht_ == rhs.ht_)) {
+        return ht_ == rhs.ht_;
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(ht_ < rh.ht_)) {
-        return ht_ < rh.ht_;
+    MSTL_NODISCARD bool operator <(const unordered_multimap& rhs) const
+    noexcept(noexcept(ht_ < rhs.ht_)) {
+        return ht_ < rhs.ht_;
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__

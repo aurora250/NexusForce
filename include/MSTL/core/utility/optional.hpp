@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_OPTIONAL_HPP__
-#define MSTL_CORE_COMPOUND_OPTIONAL_HPP__
+#ifndef MSTL_CORE_UTILITY_OPTIONAL_HPP__
+#define MSTL_CORE_UTILITY_OPTIONAL_HPP__
 #include "../exception/exception.hpp"
 #include "../interface/icommon.hpp"
 #include "../memory/construct.hpp"
@@ -29,7 +29,6 @@ class optional : icommon<optional<T>> {
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
     using null_type     = nullopt_t;
-    using self          = optional<T>;
 
 private:
     template <typename U>
@@ -61,29 +60,29 @@ public:
     constexpr optional() noexcept = default;
 
     constexpr optional(null_type) noexcept {}
-    MSTL_CONSTEXPR20 self& operator =(null_type) noexcept {
+    MSTL_CONSTEXPR20 optional& operator =(null_type) noexcept {
         reset();
         return *this;
     }
 
     template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> &&
+        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
             is_constructible_v<T, U> && is_convertible_v<U, T>, int
     > = 0>
     constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
     : value_(_MSTL forward<U>(value)) {}
 
     template <typename U, enable_if_t<
-        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, self> &&
+        is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
             is_constructible_v<T, U> && !is_convertible_v<U, T>, int
     > = 0>
     constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
     : value_(_MSTL forward<U>(value)) {}
 
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, self>
+    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
         && negation_v<conjunction<is_scalar<T>, is_same<T, decay_t<U>>>>
         && is_constructible_v<T, U> && is_assignable_v<T&, U>, int> = 0>
-    MSTL_CONSTEXPR20 self& operator =(U&& value)
+    MSTL_CONSTEXPR20 optional& operator =(U&& value)
     noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
         if (have_value_)
             value_ = _MSTL forward<U>(value);
@@ -104,10 +103,10 @@ public:
         if (x) emplace(*x);
     }
 
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, self>
+    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
         && is_constructible_v<T, const U&> && is_assignable_v<T&, const U&>
         && !convertible_from_optional<U>::value && !assignable_from_optional<U>::value, int> = 0>
-    MSTL_CONSTEXPR20 self& operator =(const optional<U>& x)
+    MSTL_CONSTEXPR20 optional& operator =(const optional<U>& x)
     noexcept(is_nothrow_constructible_v<T, const U&> && is_nothrow_assignable_v<T&, const U&>) {
         if (_MSTL addressof(x) == this) return *this;
         if (x) {
@@ -159,10 +158,10 @@ public:
         if (x) emplace(_MSTL move(*x));
     }
 
-    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, self>
+    template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
         && is_constructible_v<T, U> && is_assignable_v<T&, U>
         && !convertible_from_optional<U>::value && !assignable_from_optional<U>::value, int> = 0>
-    MSTL_CONSTEXPR20 self& operator =(optional<U>&& x)
+    MSTL_CONSTEXPR20 optional& operator =(optional<U>&& x)
     noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
         if (_MSTL addressof(x) == this) return *this;
         if (x) {
@@ -207,7 +206,7 @@ public:
     }
 
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    MSTL_CONSTEXPR20 self& operator =(const optional<U&>& other) {
+    MSTL_CONSTEXPR20 optional& operator =(const optional<U&>& other) {
         if (other) {
             if (have_value_) value_ = *other;
             else this->emplace(*other);
@@ -291,7 +290,7 @@ public:
     }
 
     template <typename F, enable_if_t<is_invocable_v<F> && is_copy_constructible_v<T>, int> = 0>
-    constexpr self or_else(F&& f) const & {
+    constexpr optional or_else(F&& f) const & {
         if (have_value_) {
             return *this;
         }
@@ -299,7 +298,7 @@ public:
     }
 
     template <typename F, enable_if_t<is_invocable_v<F> && is_move_constructible_v<T>, int> = 0>
-    constexpr self or_else(F&& f) && {
+    constexpr optional or_else(F&& f) && {
         if (have_value_) {
             return _MSTL move(*this);
         }
@@ -376,17 +375,17 @@ public:
     constexpr const value_type&& operator *() const && noexcept { return _MSTL move(value_); }
     constexpr value_type&& operator *() && noexcept { return _MSTL move(value_); }
 
-    constexpr bool operator ==(const self& rh) const noexcept {
-        if (have_value_ != rh.have_value_)
+    constexpr bool operator ==(const optional& rhs) const noexcept {
+        if (have_value_ != rhs.have_value_)
             return false;
         if (have_value_)
-            return value_ == rh.value_;
+            return value_ == rhs.value_;
         return true;
     }
-    constexpr bool operator <(const self& rh) const noexcept {
-        if (!have_value_ || !rh.have_value_)
+    constexpr bool operator <(const optional& rhs) const noexcept {
+        if (!have_value_ || !rhs.have_value_)
             return false;
-        return value_ < rh.value_;
+        return value_ < rhs.value_;
     }
 
     constexpr bool operator ==(nullopt_t) const noexcept { return !have_value_; }
@@ -396,22 +395,22 @@ public:
     constexpr bool operator >=(nullopt_t) const noexcept { return true; }
     constexpr bool operator <=(nullopt_t) const noexcept { return !have_value_; }
 
-    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
-        return !rh.have_value_;
+    friend constexpr bool operator ==(nullopt_t, const optional& rhs) noexcept {
+        return !rhs.have_value_;
     }
-    friend constexpr bool operator !=(nullopt_t, const self& rh) noexcept {
-        return rh.have_value_;
+    friend constexpr bool operator !=(nullopt_t, const optional& rhs) noexcept {
+        return rhs.have_value_;
     }
-    friend constexpr bool operator >(nullopt_t, const self&) noexcept {
+    friend constexpr bool operator >(nullopt_t, const optional&) noexcept {
         return false;
     }
-    friend constexpr bool operator <(nullopt_t, const self& rh) noexcept {
-        return rh.have_value_;
+    friend constexpr bool operator <(nullopt_t, const optional& rhs) noexcept {
+        return rhs.have_value_;
     }
-    friend constexpr bool operator >=(nullopt_t, const self& rh) noexcept {
-        return !rh.have_value_;
+    friend constexpr bool operator >=(nullopt_t, const optional& rhs) noexcept {
+        return !rhs.have_value_;
     }
-    friend constexpr bool operator <=(nullopt_t, const self&) noexcept {
+    friend constexpr bool operator <=(nullopt_t, const optional&) noexcept {
         return true;
     }
 
@@ -419,7 +418,7 @@ public:
         return hash<T>()(this->operator*());
     }
 
-    MSTL_CONSTEXPR20 void swap(self& x)
+    MSTL_CONSTEXPR20 void swap(optional& x)
     noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
         if(_MSTL addressof(x) == this) return;
         if (have_value_ && x.have_value_) {
@@ -455,7 +454,6 @@ public:
     using const_pointer = const T*;
 
     using null_type     = nullopt_t;
-    using self          = optional<T&>;
 
 private:
     T* ptr_ = nullptr;
@@ -477,19 +475,19 @@ public:
     constexpr explicit optional(U& value) noexcept : ptr_(_MSTL addressof(value)) {}
 
     template <typename U, enable_if_t<convertible_from_optional_ref<U>::value, int> = 0>
-    constexpr optional(const optional<U&>& other) noexcept : ptr_(other.ptr_) {}
+    constexpr optional(const _MSTL optional<U&>& other) noexcept : ptr_(other.ptr_) {}
 
     template <typename U, enable_if_t<
         !convertible_from_optional_ref<U>::value && is_constructible_v<T&, U&>, int> = 0>
-    constexpr explicit optional(const optional<U&>& other) noexcept : ptr_(other.ptr_) {}
+    constexpr explicit optional(const _MSTL optional<U&>& other) noexcept : ptr_(other.ptr_) {}
 
-    MSTL_CONSTEXPR20 self& operator=(nullopt_t) noexcept {
+    MSTL_CONSTEXPR20 optional& operator=(nullopt_t) noexcept {
         ptr_ = nullptr;
         return *this;
     }
 
     template <typename U = T, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    MSTL_CONSTEXPR20 self& operator=(U& value) {
+    MSTL_CONSTEXPR20 optional& operator=(U& value) {
         if (ptr_) {
             *ptr_ = value;
         } else {
@@ -499,7 +497,7 @@ public:
     }
 
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    MSTL_CONSTEXPR20 self& operator=(const optional<U&>& other) {
+    MSTL_CONSTEXPR20 optional& operator=(const _MSTL optional<U&>& other) {
         if (this != _MSTL addressof(other)) {
             if (other.ptr_) {
                 if (ptr_) {
@@ -514,11 +512,11 @@ public:
         return *this;
     }
 
-    constexpr optional(const self& other) noexcept = default;
-    MSTL_CONSTEXPR20 self& operator=(const self& other) noexcept = default;
+    constexpr optional(const optional& other) noexcept = default;
+    MSTL_CONSTEXPR20 optional& operator=(const optional& other) noexcept = default;
 
-    constexpr optional(self&& other) noexcept : ptr_(other.ptr_) {}
-    MSTL_CONSTEXPR20 self& operator=(self&& other) noexcept {
+    constexpr optional(optional&& other) noexcept : ptr_(other.ptr_) {}
+    MSTL_CONSTEXPR20 optional& operator=(optional&& other) noexcept {
         ptr_ = other.ptr_;
         return *this;
     }
@@ -574,13 +572,13 @@ public:
     }
 
     template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
-    constexpr self or_else(F&& f) const & {
+    constexpr optional or_else(F&& f) const & {
         if (ptr_) return *this;
         return _MSTL forward<F>(f)();
     }
 
     template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>
-    constexpr self or_else(F&& f) && {
+    constexpr optional or_else(F&& f) && {
         if (ptr_) return _MSTL move(*this);
         return _MSTL forward<F>(f)();
     }
@@ -592,7 +590,7 @@ public:
     }
 
     template <typename F>
-    constexpr auto transform(F&& f) const & -> optional<remove_cvref_t<decltype(f(*ptr_))>> {
+    constexpr auto transform(F&& f) const & -> _MSTL optional<remove_cvref_t<decltype(f(*ptr_))>> {
         if (ptr_) return _MSTL forward<F>(f)(*ptr_);
         return nullopt;
     }
@@ -604,27 +602,27 @@ public:
     constexpr T& operator *() const && noexcept { return *ptr_; }
     constexpr T& operator *() && noexcept { return *ptr_; }
 
-    constexpr bool operator ==(const self& other) const noexcept {
+    constexpr bool operator ==(const optional& other) const noexcept {
         if (ptr_ == nullptr || other.ptr_ == nullptr)
             return ptr_ == other.ptr_;
         return *ptr_ == *other.ptr_;
     }
-    constexpr bool operator <(const self& other) const noexcept {
+    constexpr bool operator <(const optional& other) const noexcept {
         return ptr_ && other.ptr_ && *ptr_ < *other.ptr_;
     }
 
     template <typename U>
-    constexpr bool operator ==(const optional<U&>& other) const noexcept {
+    constexpr bool operator ==(const _MSTL optional<U&>& other) const noexcept {
         if (ptr_ == nullptr || other.ptr_ == nullptr)
             return ptr_ == other.ptr_;
         return *ptr_ == *other.ptr_;
     }
 
-    friend constexpr bool operator ==(nullopt_t, const self& rh) noexcept {
-        return rh.ptr_ == nullptr;
+    friend constexpr bool operator ==(nullopt_t, const optional& rhs) noexcept {
+        return rhs.ptr_ == nullptr;
     }
-    friend constexpr bool operator !=(nullopt_t, const self& rh) noexcept {
-        return rh.ptr_ != nullptr;
+    friend constexpr bool operator !=(nullopt_t, const optional& rhs) noexcept {
+        return rhs.ptr_ != nullptr;
     }
 
     constexpr bool operator ==(nullopt_t) const noexcept { return ptr_ == nullptr; }
@@ -638,7 +636,7 @@ public:
         return ptr_ ? hash<remove_cv_t<T>>()(*ptr_) : 0;
     }
 
-    MSTL_CONSTEXPR20 void swap(self& other) noexcept {
+    MSTL_CONSTEXPR20 void swap(optional& other) noexcept {
         _MSTL swap(ptr_, other.ptr_);
     }
 };
@@ -672,4 +670,4 @@ template <typename T>
 constexpr optional<remove_reference_t<T>&> make_optional(T&&) = delete;
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_COMPOUND_OPTIONAL_HPP__
+#endif // MSTL_CORE_UTILITY_OPTIONAL_HPP__

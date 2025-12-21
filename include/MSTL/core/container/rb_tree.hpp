@@ -94,11 +94,11 @@ protected:
     void decrement() noexcept;
 
 public:
-    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rh) const noexcept {
-        return node_ == rh.node_;
+    MSTL_NODISCARD bool operator ==(const __rb_tree_base_iterator& rhs) const noexcept {
+        return node_ == rhs.node_;
     }
-    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rh) const noexcept {
-        return node_ != rh.node_;
+    MSTL_NODISCARD bool operator !=(const __rb_tree_base_iterator& rhs) const noexcept {
+        return node_ != rhs.node_;
     }
 };
 MSTL_END_INNER__
@@ -117,8 +117,6 @@ public:
     using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
     using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
-
-    using self              = rb_tree_iterator<IsConst, container_type>;
 
 private:
     using link_type         = rb_tree_node<value_type>*;
@@ -139,7 +137,7 @@ public:
         node_ = it.node_;
         tree_ = it.tree_;
     }
-    self& operator =(const iterator& it) {
+    rb_tree_iterator& operator =(const iterator& it) {
         if(_MSTL addressof(it) == this) return *this;
         node_ = it.node_;
         tree_ = it.tree_;
@@ -152,7 +150,7 @@ public:
         it.node_ = nullptr;
         it.tree_ = nullptr;
     }
-    self& operator =(iterator&& it) {
+    rb_tree_iterator& operator =(iterator&& it) {
         if(_MSTL addressof(it) == this) return *this;
         node_ = it.node_;
         tree_ = it.tree_;
@@ -165,7 +163,7 @@ public:
         node_ = it.node_;
         tree_ = it.tree_;
     }
-    self& operator =(const const_iterator& it) {
+    rb_tree_iterator& operator =(const const_iterator& it) {
         if(_MSTL addressof(it) == this) return *this;
         node_ = it.node_;
         tree_ = it.tree_;
@@ -178,7 +176,7 @@ public:
         it.node_ = nullptr;
         it.tree_ = nullptr;
     }
-    self& operator =(const_iterator&& it) {
+    rb_tree_iterator& operator =(const_iterator&& it) {
         if(_MSTL addressof(it) == this) return *this;
         node_ = it.node_;
         tree_ = it.tree_;
@@ -200,40 +198,40 @@ public:
         return &operator*();
     }
 
-    self& operator ++() noexcept {
+    rb_tree_iterator& operator ++() noexcept {
         MSTL_DEBUG_VERIFY(node_ && tree_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(rb_tree_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         MSTL_DEBUG_VERIFY(link_type(node_) != tree_->header_,
             __MSTL_DEBUG_MESG_OUT_OF_RANGE(rb_tree_iterator, __MSTL_DEBUG_TAG_INCREMENT));
         increment();
         return *this;
     }
-    self operator ++(int) noexcept {
-        self tmp = *this;
+    rb_tree_iterator operator ++(int) noexcept {
+        rb_tree_iterator tmp = *this;
         ++*this;
         return tmp;
     }
-    self& operator --() noexcept {
+    rb_tree_iterator& operator --() noexcept {
         MSTL_DEBUG_VERIFY(node_ && tree_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(rb_tree_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         MSTL_DEBUG_VERIFY(node_ != tree_->header_,
             __MSTL_DEBUG_MESG_OUT_OF_RANGE(rb_tree_iterator, __MSTL_DEBUG_TAG_DECREMENT));
         decrement();
         return *this;
     }
-    self operator --(int) noexcept {
-        self tmp = *this;
+    rb_tree_iterator operator --(int) noexcept {
+        rb_tree_iterator tmp = *this;
         --*this;
         return tmp;
     }
 
-    MSTL_NODISCARD bool operator ==(const rb_tree_iterator& rh) const noexcept {
+    MSTL_NODISCARD bool operator ==(const rb_tree_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(node_ && tree_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(rb_tree_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-		MSTL_DEBUG_VERIFY(tree_ == rh.tree_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(rb_tree_iterator));
-        return __rb_tree_base_iterator::operator ==(rh);
+		MSTL_DEBUG_VERIFY(tree_ == rhs.tree_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(rb_tree_iterator));
+        return __rb_tree_base_iterator::operator ==(rhs);
     }
-    MSTL_NODISCARD bool operator !=(const rb_tree_iterator& rh) const noexcept {
+    MSTL_NODISCARD bool operator !=(const rb_tree_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(node_ && tree_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(rb_tree_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-		MSTL_DEBUG_VERIFY(tree_ == rh.tree_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(rb_tree_iterator));
-        return __rb_tree_base_iterator::operator !=(rh);
+		MSTL_DEBUG_VERIFY(tree_ == rhs.tree_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(rb_tree_iterator));
+        return __rb_tree_base_iterator::operator !=(rhs);
     }
 
     MSTL_NODISCARD constexpr pointer base() const noexcept {
@@ -251,9 +249,6 @@ class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
 
-    using self = rb_tree<Key, Value, KeyOfValue, Compare, Alloc>;
-    using super = icollector<self>;
-
     using base_node  = _INNER __rb_tree_node_base;
     using link_node = rb_tree_node<Value>;
     using base_ptr  = base_node*;
@@ -265,8 +260,8 @@ public:
 
     MSTL_BUILD_TYPE_ALIAS(Value)
 
-    using iterator                  = rb_tree_iterator<false, self>;
-    using const_iterator            = rb_tree_iterator<true, self>;
+    using iterator                  = rb_tree_iterator<false, rb_tree>;
+    using const_iterator            = rb_tree_iterator<true, rb_tree>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
 
@@ -314,7 +309,7 @@ private:
     static link_type& right(link_type x) noexcept { return reinterpret_cast<link_type&>(x->right_); }
     static link_type& parent(link_type x) noexcept { return reinterpret_cast<link_type&>(x->parent_); }
     static const Key& key(link_type x) noexcept { return KeyOfValue()(x->data_); }
-    static const Key& key(const base_ptr x) noexcept { return self::key(reinterpret_cast<link_type>(x)); }
+    static const Key& key(const base_ptr x) noexcept { return rb_tree::key(reinterpret_cast<link_type>(x)); }
 
     static link_type minimum(link_type x) noexcept {
         return static_cast<link_type>(base_node::minimum(x));
@@ -394,7 +389,7 @@ private:
         rightmost() = header_;
     }
 
-    void copy_from(const self& x) {
+    void copy_from(const rb_tree& x) {
         if (x.root() == nullptr) {
             root() = nullptr;
             leftmost() = header_;
@@ -454,27 +449,27 @@ public:
         header_init();
     }
 
-    rb_tree(const self& x) :
+    rb_tree(const rb_tree& x) :
     key_compare_(x.key_compare_),
     extracter_(x.extracter_), size_pair_(x.size_pair_) {
         header_init();
         copy_from(x);
     }
-    self& operator =(const self& x) {
+    rb_tree& operator =(const rb_tree& x) {
         if (_MSTL addressof(x) == this) return *this;
         clear();
         copy_from(x);
         return *this;
     }
 
-    rb_tree(self&& x) noexcept :
+    rb_tree(rb_tree&& x) noexcept :
     header_(_MSTL move(x.header_)), key_compare_(_MSTL move(x.key_compare_)),
     extracter_(_MSTL move(x.extracter_)), size_pair_(_MSTL move(x.size_pair_)) {
         x.header_ = nullptr;
         x.size_pair_.value = 0;
     }
 
-    self& operator =(self&& x) noexcept {
+    rb_tree& operator =(rb_tree&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         clear();
         size_pair_.get_base().deallocate(header_);
@@ -728,7 +723,7 @@ public:
         return pair<const_iterator, const_iterator>(this->lower_bound(k), this->upper_bound(k));
     }
 
-    void swap(self& x)
+    void swap(rb_tree& x)
     noexcept(is_nothrow_swappable_v<Compare> &&
     is_nothrow_swappable_v<KeyOfValue> &&
     noexcept(size_pair_.swap(x.size_pair_))) {
@@ -738,13 +733,13 @@ public:
         _MSTL swap(extracter_, x.extracter_);
     }
 
-    MSTL_NODISCARD bool operator ==(const self& rh) const
-    noexcept(noexcept(this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin()))) {
-        return this->size() == rh.size() && _MSTL equal(this->cbegin(), this->cend(), rh.cbegin());
+    MSTL_NODISCARD bool operator ==(const rb_tree& rhs) const
+    noexcept(noexcept(this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin()))) {
+        return this->size() == rhs.size() && _MSTL equal(this->cbegin(), this->cend(), rhs.cbegin());
     }
-    MSTL_NODISCARD bool operator <(const self& rh) const
-    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend()))) {
-        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rh.cbegin(), rh.cend());
+    MSTL_NODISCARD bool operator <(const rb_tree& rhs) const
+    noexcept(noexcept(_MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(this->cbegin(), this->cend(), rhs.cbegin(), rhs.cend());
     }
 };
 

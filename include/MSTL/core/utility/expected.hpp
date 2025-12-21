@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_COMPOUND_EXPECTED_HPP__
-#define MSTL_CORE_COMPOUND_EXPECTED_HPP__
+#ifndef MSTL_CORE_UTILITY_EXPECTED_HPP__
+#define MSTL_CORE_UTILITY_EXPECTED_HPP__
 #include "../exception/exception.hpp"
 #include "../typeinfo/tags.hpp"
 #ifdef MSTL_STANDARD_20__
@@ -1450,4 +1450,4 @@ public:
 
 MSTL_END_NAMESPACE__
 #endif
-#endif // MSTL_CORE_COMPOUND_EXPECTED_HPP__
+#endif // MSTL_CORE_UTILITY_EXPECTED_HPP__
