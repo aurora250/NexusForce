@@ -64,6 +64,7 @@ public:
     MSTL_NODISCARD bool http_only() const noexcept { return this->http_only_; }
 
     void set_same_site(string s) noexcept { this->same_site_ = _MSTL move(s); }
+    void set_same_site(const bool is_https) noexcept { this->same_site_ = is_https ? "Strict" : "Lax"; }
     MSTL_NODISCARD const string& same_site() const noexcept { return this->same_site_; }
 
     void set_expires(datetime expires) noexcept { this->expires_ = _MSTL move(expires); }
@@ -147,7 +148,7 @@ public:
 class MSTL_API http_server;
 
 MSTL_BEGIN_INNER__
-class __session_manager {
+class session_manager {
 private:
     unordered_map<string, session> sessions_;
     _MSTL mutex mutex_;
@@ -158,8 +159,8 @@ private:
 
     MSTL_NODISCARD static string generate_session_id();
 
-    __session_manager();
-    ~__session_manager();
+    session_manager();
+    ~session_manager();
 
     MSTL_NODISCARD session* get_session(const string& session_id, bool create = true);
     MSTL_NODISCARD session* create_session() { return get_session("", true); }

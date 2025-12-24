@@ -13,6 +13,8 @@ public:
     bool load_certificate(const string& cert_file, const string& key_file);
     MSTL_NODISCARD ::SSL_CTX* context() const noexcept { return ctx_; }
 
+    MSTL_NODISCARD bool is_valid() const noexcept { return ctx_ != nullptr; }
+
 private:
     ::SSL_CTX* ctx_ = nullptr;
 };

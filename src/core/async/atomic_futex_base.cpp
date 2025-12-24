@@ -2,7 +2,6 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include <synchapi.h>
-#pragma comment(lib, "synchronization.lib")
 #include <MSTL/core/config/undef_cmacro.hpp>
 #else
 #include <cerrno>

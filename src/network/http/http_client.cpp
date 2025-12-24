@@ -7,94 +7,6 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-bool http_client::try_connect(const string& host, const uint16_t port, const string& ip, const bool ipv6) {
-    tcp_socket s(
-        ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
-        SOCKET_TYPE::STREAM,
-        SOCKET_PROTOCOL::TCP);
-
-    if (!s.is_valid()) return false;
-    if (!s.set_send_timeout(connect_timeout_) ||
-        !s.set_receive_timeout(read_timeout_)) {
-        return false;
-    }
-
-    ::sockaddr_storage addr{};
-    ::socklen_t addr_len;
-    if (ipv6) {
-        auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
-        a6->sin6_family = AF_INET6;
-        ::inet_pton(AF_INET6, ip.c_str(), &a6->sin6_addr);
-        a6->sin6_port = ::htons(port);
-        addr_len = sizeof(::sockaddr_in6);
-    } else {
-        auto *a4 = reinterpret_cast<::sockaddr_in *>(&addr);
-        a4->sin_family = AF_INET;
-        ::inet_pton(AF_INET, ip.c_str(), &a4->sin_addr);
-        a4->sin_port = ::htons(port);
-        addr_len = sizeof(::sockaddr_in);
-    }
-
-    if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) {
-        return false;
-    }
-
-#ifdef MSTL_SUPPORT_OPENSSL__
-    if (use_ssl_) {
-        init_ssl_context();
-        ssl_sock_ = ssl_socket(ssl_ctx_.context(), s);
-        if (!ssl_sock_.accept()) {
-            return false;
-        }
-        use_ssl_ = true;
-    } else {
-        sock_ = _MSTL move(s);
-        use_ssl_ = false;
-    }
-#else
-    sock_ = _MSTL move(s);
-    use_ssl_ = false;
-#endif
-
-    connected_ = true;
-    connected_host_ = host;
-    connected_port_ = port;
-    return true;
-}
-
-bool http_client::connect_domain(const string& host, const uint16_t port) {
-    if (connected_ && connected_host_ == host && connected_port_ == port) {
-        return true;
-    }
-    close_connection();
-
-    vector<string> ips = dns_.resolve_a(host);
-    vector<string> ips6;
-    if (ips.empty()) ips6 = dns_.resolve_aaaa(host);
-
-    for (auto &ip : ips) if (try_connect(host, port, ip, false)) return true;
-    for (auto &ip : ips6) if (try_connect(host, port, ip, true)) return true;
-
-    return false;
-}
-
-void http_client::close_connection() noexcept {
-    if (connected_) {
-#ifdef MSTL_SUPPORT_OPENSSL__
-        if (use_ssl_) {
-            ssl_sock_.close();
-        } else {
-            sock_.close();
-        }
-#else
-        sock_.close();
-#endif
-        connected_ = false;
-        connected_host_.clear();
-        connected_port_ = 0;
-    }
-}
-
 string http_client::build_request_str(const http_client_request& req, const url& req_url) const {
     string req_str = req.method.method() + " " + req.path + " " + req.version + HTTP_CRLF;
     req_str += "Host: " + req.host;
@@ -132,21 +44,12 @@ string http_client::build_request_str(const http_client_request& req, const url&
     return req_str;
 }
 
-bool http_client::send_request(const string& request_str) const {
+bool http_client::send_request(const string_view request_str) {
     const ssize_t total = static_cast<ssize_t>(request_str.size());
     ssize_t sent = 0;
 
     while (sent < total) {
-        ssize_t n;
-#ifdef MSTL_SUPPORT_OPENSSL__
-        if (use_ssl_) {
-            n = ssl_sock_.write(request_str.data() + sent, total - sent);
-        } else {
-            n = sock_.send(request_str.data() + sent, total - sent);
-        }
-#else
-        n = sock_.send(request_str.data() + sent, total - sent);
-#endif
+        ssize_t n = client_.send(request_str.view(sent, total - sent));
         if (n <= 0) return false;
         sent += n;
     }
@@ -159,17 +62,7 @@ bool http_client::read_response(string& out_data) const {
     out_data.clear();
 
     while (true) {
-        ssize_t n;
-#ifdef MSTL_SUPPORT_OPENSSL__
-        if (use_ssl_) {
-            n = ssl_sock_.read(buffer, buf_size);
-        } else {
-            n = sock_.receive(buffer, buf_size);
-        }
-#else
-        n = sock_.receive(buffer, buf_size);
-#endif
-
+        const ssize_t n = client_.receive(buffer, buf_size);
         if (n == 0) break;
         if (n < 0) return false;
         out_data.append(buffer, n);
@@ -198,18 +91,8 @@ bool http_client::parse_chunked_body(const string_view chunked, string& decoded)
     return false;
 }
 
-#ifdef MSTL_SUPPORT_OPENSSL__
-void http_client::init_ssl_context() {
-    if (!ssl_ctx_.context()) {
-        ssl_ctx_ = ssl_context();
-    }
-}
-#endif
-
-cookie http_client::parse_set_cookie(
-    const string_view str,
-    const string& default_domain,
-    const string& default_path) {
+cookie http_client::parse_set_cookie(const string_view str,
+    string default_domain, string default_path) {
     vector<string_view> tokens;
     size_t start = 0, end;
     while ((end = str.find(';', start)) != string::npos) {
@@ -227,8 +110,8 @@ cookie http_client::parse_set_cookie(
     }
     c.set_name(HTTP_COOKIE_NAME(string{tokens[0].substr(0, eq_pos)}));
     c.set_value(string{tokens[0].substr(eq_pos + 1)});
-    c.set_domain(default_domain);
-    c.set_path(default_path.empty() ? "/" : default_path);
+    c.set_domain(move(default_domain));
+    c.set_path(default_path.empty() ? "/" : move(default_path));
 
     for (size_t i = 1; i < tokens.size(); ++i) {
         auto &attr = tokens[i];
@@ -273,8 +156,8 @@ void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& 
 
 string http_client::build_cookie_header(const url& request_url) const {
     string cookie_header;
-    for (const auto &kv : cookie_jar_) {
-        const auto &c = kv.second;
+    for (const auto& kv : cookie_jar_) {
+        const auto& c = kv.second;
         // 只发送有效、未过期、作用域匹配的cookie （简化实现，不做完整子域判定）
         if (c.max_age() == 0) continue;
 
@@ -353,7 +236,7 @@ bool http_client::parse_response(const string_view resp_str, http_client_respons
     } else if (!length.empty()) {
         uint64_t cl;
         try {
-            cl = uinteger64::parse(length.view()).value();
+            cl = uinteger64::parse(length.view());
         } catch (...) {
             return false;
         }
@@ -375,16 +258,16 @@ http_client_response http_client::request(http_client_request req) {
     req_url.path = req.path;
 
     while (redirect_count <= max_redirect_) {
-        if (!connect_domain(req.host, req.port)) {
+        if (!client_.connect(req.host, req.port)) {
             http_client_response resp;
             resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
             resp.set_status_msg("Connect failed");
             return resp;
         }
 
-        string req_str = build_request_str(req, req_url);
-        if (!send_request(req_str)) {
-            close_connection();
+        const string req_str = build_request_str(req, req_url);
+        if (!send_request(req_str.view())) {
+            close();
             http_client_response resp;
             resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
             resp.set_status_msg("Send failed");
@@ -393,7 +276,7 @@ http_client_response http_client::request(http_client_request req) {
 
         string resp_str;
         if (!read_response(resp_str)) {
-            close_connection();
+            close();
             http_client_response resp;
             resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
             resp.set_status_msg("Receive failed");
@@ -402,7 +285,7 @@ http_client_response http_client::request(http_client_request req) {
 
         http_client_response resp;
         if (!parse_response(resp_str.view(), resp)) {
-            close_connection();
+            close();
             resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
             resp.set_status_msg("Parse failed");
             return resp;
@@ -416,7 +299,7 @@ http_client_response http_client::request(http_client_request req) {
              resp.status() == HTTP_STATUS::S3_PERMANENT_REDIRECT) &&
              !resp.header("Location").empty()) {
 
-            string location = resp.header("Location");
+            const string& location = resp.header("Location");
 
             if (location.starts_with("http://") || location.starts_with("https://")) {
                 url new_url(location);
@@ -438,11 +321,11 @@ http_client_response http_client::request(http_client_request req) {
             }
 
             redirect_count++;
-            close_connection();
+            close();
             continue;
         }
 
-        close_connection();
+        close();
         return resp;
     }
 

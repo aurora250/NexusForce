@@ -1,4 +1,4 @@
-#include <MSTL/network/tcp/tcp_socket.hpp>
+#include <MSTL/network/tcp_socket.hpp>
 #include <MSTL/core/async/async.hpp>
 #include <MSTL/core/string/vsprintf.hpp>
 #include <MSTL/core/utility/packages.hpp>
@@ -115,18 +115,10 @@ string dns_client::decode_domain_name(const vector<byte_t>& data, size_t& offset
     return name;
 }
 
-::sockaddr_in dns_client::create_server_address() const {
-    ::sockaddr_in addr{};
-    addr.sin_family = AF_INET;
-    addr.sin_port = ::htons(dns_port_);
-    if (::inet_pton(AF_INET, dns_server_.c_str(), &addr.sin_addr) <= 0) {
-        throw_exception(dns_exception("Invalid DNS server address"));
-    }
-    return addr;
-}
-
 vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
-    ensure_winsock_initialized();
+#ifdef MSTL_PLATFORM_WINDOWS__
+    winsock_initialized();
+#endif
 
     const tcp_socket udp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::DATAGRAM, SOCKET_PROTOCOL::UDP);
 
@@ -137,7 +129,7 @@ vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
         throw_exception(dns_exception("Failed to set socket timeout"));
     }
 
-    const ssize_t sent = udp_sock.send_to(query.data(), query.size(), create_server_address());
+    const ssize_t sent = udp_sock.sendto(query.data(), query.size(), dns_server_.c_str(), dns_port_);
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
         throw_exception(dns_exception("Failed to send UDP query"));
     }
@@ -152,7 +144,9 @@ vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
 }
 
 vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
-    ensure_winsock_initialized();
+#ifdef MSTL_PLATFORM_WINDOWS__
+    winsock_initialized();
+#endif
 
     const tcp_socket tcp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::STREAM, SOCKET_PROTOCOL::TCP);
 
@@ -162,7 +156,7 @@ vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
     if (!tcp_sock.set_receive_timeout(timeout_) || !tcp_sock.set_send_timeout(timeout_)) {
         throw_exception(dns_exception("Failed to set socket timeout"));
     }
-    if (!tcp_sock.connect(create_server_address())) {
+    if (!tcp_sock.connect_ipv4(dns_server_.c_str(), dns_port_)) {
         throw_exception(dns_exception("Failed to connect to DNS server"));
     }
 
@@ -240,26 +234,6 @@ string dns_client::parse_txt_record(const vector<byte_t>& rdata) {
     }
 
     return result;
-}
-
-void dns_client::ensure_winsock_initialized() {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    static bool initialized = []() -> bool {
-        ::WSADATA wsa_data;
-        int result = ::WSAStartup(MAKEWORD(2, 2), &wsa_data);
-        if (result != 0) {
-            return false;
-        }
-        std::atexit([]() {
-            ::WSACleanup();
-        });
-        return true;
-    }();
-
-    if (!initialized) {
-        throw_exception(dns_exception("Failed to initialize Winsock"));
-    }
-#endif
 }
 
 dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t& offset) {

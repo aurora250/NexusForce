@@ -196,9 +196,15 @@ template <>
 struct interlocked_exchange_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedExchange64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
+#else
+		return static_cast<T>(::_interlockedexchange64(
+		    reinterpret_cast<volatile long long*>(target),
+		    static_cast<long long>(value)));
+#endif
 	}
 };
 
@@ -300,9 +306,15 @@ template <>
 struct interlocked_fetch_add_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedExchangeAdd64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
+#else
+		return static_cast<T>(::_interlockedexchangeadd64(
+		    reinterpret_cast<volatile long long*>(target),
+		    static_cast<long long>(value)));
+#endif
 	}
 };
 
@@ -344,9 +356,15 @@ template <>
 struct interlocked_fetch_and_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedAnd64(
 		    reinterpret_cast<volatile long long*>(target),
 		    static_cast<long long>(value)));
+#else
+		return static_cast<T>(::_interlockedand64(
+		    reinterpret_cast<volatile long long*>(target),
+		    static_cast<long long>(value)));
+#endif
 	}
 };
 
@@ -382,8 +400,13 @@ template <>
 struct interlocked_fetch_or_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedOr64(
 		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#else
+		return static_cast<T>(::_interlockedor64(
+		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#endif
 	}
 };
 
@@ -419,8 +442,13 @@ template <>
 struct interlocked_fetch_xor_impl<8> {
 	template<typename T>
 	static T call(volatile T* target, T value) {
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedXor64(
 		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#else
+		return static_cast<T>(::_interlockedxor64(
+		    reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
+#endif
 	}
 };
 
@@ -994,7 +1022,11 @@ public:
 		return __atomic_add_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(sizeof(T))));
 		return reinterpret_cast<value_type>(old_ptr + sizeof(T));
@@ -1009,7 +1041,11 @@ public:
 		return __atomic_sub_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-static_cast<ptrdiff_t>(sizeof(T)))));
 		return reinterpret_cast<value_type>(old_ptr - sizeof(T));
@@ -1024,7 +1060,11 @@ public:
 		return __atomic_add_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(dest * sizeof(T))));
 		return reinterpret_cast<value_type>(old_ptr + dest * sizeof(T));
@@ -1039,7 +1079,11 @@ public:
 		return __atomic_sub_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-dest * static_cast<ptrdiff_t>(sizeof(T)))));
 		return reinterpret_cast<value_type>(old_ptr - dest * sizeof(T));
@@ -1216,7 +1260,11 @@ public:
 		return __atomic_fetch_add(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(dest * sizeof(T))));
 		_INNER apply_memory_order_seq_cst(mo);
@@ -1234,7 +1282,11 @@ public:
 		return __atomic_fetch_sub(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
 #else
 		const char* old_ptr = reinterpret_cast<char*>(
+#ifdef MSTL_DATA_BUS_WIDTH_64__
 		    ::_InterlockedExchangeAdd64(
+#else
+		    ::_interlockedexchangeadd64(
+#endif
 			reinterpret_cast<volatile long long*>(&ptr_),
 			static_cast<long long>(-dest * static_cast<ptrdiff_t>(sizeof(T)))));
 		_INNER apply_memory_order_seq_cst(mo);
@@ -1814,6 +1866,12 @@ public:
 	}
 };
 
+
+#ifdef MSTL_COMPILER_CLANG__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Watomic-alignment"
+#endif
+
 template <typename T>
 struct atomic_ref_base<T*, false, false> {
 private:
@@ -1830,14 +1888,14 @@ public:
 
 	static constexpr bool is_always_lock_free =
 #ifdef MSTL_COMPILER_GNUC__
-	    __atomic_always_lock_free(sizeof(T*), 0);
+	    __atomic_always_lock_free(sizeof(T*), nullptr);
 #else
 	    _INNER atomic_is_always_lock_free<sizeof(T*)>;
 #endif
-	static constexpr size_t required_alignment = alignof(T*);
+	static constexpr size_t required_alignment = sizeof(T*) == 8 ? 8 : alignof(T*);
 
 	atomic_ref_base() = delete;
-	atomic_ref_base& operator=(const atomic_ref_base&) = delete;
+	atomic_ref_base& operator =(const atomic_ref_base&) = delete;
 
 	explicit atomic_ref_base(T*& value) : ptr_(_MSTL addressof(value)) {
 		MSTL_CONSTEXPR_ASSERT((static_cast<uintptr_t>(ptr_) % required_alignment) == 0);
@@ -1934,6 +1992,10 @@ public:
 		return _INNER sub_fetch(ptr_, real_type_sizes(dest));
 	}
 };
+
+#ifdef MSTL_COMPILER_CLANG__
+#pragma clang diagnostic pop
+#endif
 
 #undef ATOMIC_ALWAYS_INLINE
 

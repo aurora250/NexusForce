@@ -26,10 +26,10 @@ public:
 
     template <typename T>
     T get_symbol(const string& name) const {
-        return reinterpret_cast<T>(get_symbol_row(name));
+        return reinterpret_cast<T>(symbol_row(name));
     }
 
-    MSTL_NODISCARD void* get_symbol_row(const string& name) const;
+    MSTL_NODISCARD void* symbol_row(const string& name) const;
     MSTL_NODISCARD bool has_symbol(const string& name) const noexcept;
 
     MSTL_NODISCARD bool is_open() const noexcept { return handle_ != nullptr; }

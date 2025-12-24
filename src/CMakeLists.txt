@@ -16,6 +16,10 @@ function(configure_compiler_options target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE
                 -finput-charset=UTF-8 -fexec-charset=UTF-8
+                # -Watomic-alignment to atomic_base in Clang X86:
+                # misaligned atomic operation may incur significant performance penalty;
+                # the expected alignment (8 bytes) exceeds the actual alignment (4 bytes)
+                -Wno-atomic-alignment
                 $<$<CONFIG:Debug>:-Werror -O0 -g -gdwarf-4>
                 $<$<CONFIG:Release>:-O2>
         )
@@ -311,8 +315,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
@@ -389,11 +394,15 @@ target_compile_definitions(MSTL
 # 编译选项
 configure_compiler_options(MSTL)
 
-# Windows链接系统库
+# 链接系统库
 if(WIN32)
     target_link_libraries(MSTL PUBLIC
             ws2_32 wsock32 SetupAPI cfgmgr32
             DbgHelp synchronization Shell32
+    )
+elseif(UNIX AND NOT APPLE)
+    target_link_libraries(MSTL PUBLIC
+            atomic
     )
 endif()
 

@@ -1170,7 +1170,8 @@ void handle_cookie_api(
 void test_https_server() {
     try {
 #ifdef MSTL_SUPPORT_OPENSSL__
-        http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
+        http_server server(8443, 128);
+        server.load_certificate("/home/huenqi/server.crt", "/home/huenqi/server.key");
 #else
         http_server server(8040, 128);
 #endif
@@ -1256,11 +1257,7 @@ void test_https_server() {
 
 void test_http_server() {
     try {
-#ifdef MSTL_SUPPORT_OPENSSL__
-        http_server server(8443, 128, "/home/huenqi/server.crt", "/home/huenqi/server.key");
-#else
-        http_server server(8040, 128);
-#endif
+        http_server server(8080, 128);
 
         http_router& r = server.router();
         r.use(new logging_filter());

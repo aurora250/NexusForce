@@ -7,7 +7,7 @@
 #include "device_constants.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <SetupAPI.h>
-#pragma comment(lib, "SetupAPI.lib")
+#include <MSTL/core/config/undef_cmacro.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

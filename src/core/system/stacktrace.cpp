@@ -1,10 +1,9 @@
 #include <MSTL/core/utility/packages.hpp>
 #include <MSTL/core/system/stacktrace.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <DbgHelp.h>
-#pragma comment(lib, "DbgHelp.lib")
-#include <MSTL/core/config/undef_cmacro.hpp>
 #include <MSTL/core/async/call_once.hpp>
+#include <DbgHelp.h>
+#include <MSTL/core/config/undef_cmacro.hpp>
 #else
 #include <execinfo.h>
 #include <dlfcn.h>

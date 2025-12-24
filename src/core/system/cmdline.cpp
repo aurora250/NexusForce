@@ -4,7 +4,7 @@
 #include <MSTL/core/string/to_string.hpp>
 #include <Windows.h>
 #include <shellapi.h>
-#pragma comment(lib, "Shell32.lib")
+#include <MSTL/core/config/undef_cmacro.hpp>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/file/file.hpp>

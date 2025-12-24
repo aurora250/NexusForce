@@ -57,7 +57,7 @@ dynamic_library::~dynamic_library() {
     close();
 }
 
-void* dynamic_library::get_symbol_row(const string& name) const {
+void* dynamic_library::symbol_row(const string& name) const {
     if (!is_open()) {
         throw_exception(dl_exception("Library not loaded"));
     }

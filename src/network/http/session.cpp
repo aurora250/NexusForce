@@ -58,7 +58,7 @@ MSTL_NODISCARD string session::to_string() const {
 
 MSTL_BEGIN_INNER__
 
-MSTL_NODISCARD string __session_manager::generate_session_id() {
+MSTL_NODISCARD string session_manager::generate_session_id() {
     string str;
     for (int i = 0; i < 32; ++i) {
         str += format("{x}", random_mt::next_int(0, 15));
@@ -66,19 +66,19 @@ MSTL_NODISCARD string __session_manager::generate_session_id() {
     return _MSTL move(str);
 }
 
-__session_manager::__session_manager() {
+session_manager::session_manager() {
     cleanup_running_ = true;
-    cleanup_thread_ = _MSTL thread(&__session_manager::cleanup_expired_sessions, this);
+    cleanup_thread_ = _MSTL thread(&session_manager::cleanup_expired_sessions, this);
 }
 
-__session_manager::~__session_manager() {
+session_manager::~session_manager() {
     cleanup_running_ = false;
     if (cleanup_thread_.joinable()) {
         cleanup_thread_.join();
     }
 }
 
-MSTL_NODISCARD session* __session_manager::get_session(const string& session_id, const bool create) {
+MSTL_NODISCARD session* session_manager::get_session(const string& session_id, const bool create) {
     _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     if (it != sessions_.end()) {
@@ -98,7 +98,7 @@ MSTL_NODISCARD session* __session_manager::get_session(const string& session_id,
     return nullptr;
 }
 
-void __session_manager::cleanup_expired_sessions() {
+void session_manager::cleanup_expired_sessions() {
     while (cleanup_running_) {
         {
             _MSTL lock_guard<_MSTL mutex> lock(mutex_);
@@ -118,12 +118,12 @@ void __session_manager::cleanup_expired_sessions() {
     }
 }
 
-void __session_manager::remove_session(const string& session_id) noexcept {
+void session_manager::remove_session(const string& session_id) noexcept {
     _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     sessions_.erase(session_id);
 }
 
-MSTL_NODISCARD bool __session_manager::session_exists(const string& session_id) noexcept {
+MSTL_NODISCARD bool session_manager::session_exists(const string& session_id) noexcept {
     _MSTL lock_guard<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     return it != sessions_.end() && it->second.is_valid();

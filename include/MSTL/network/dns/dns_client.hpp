@@ -40,14 +40,11 @@ private:
     void update_cache(const string& key, const dns_query_result& result);
     static string create_cache_key(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
 
-    ::sockaddr_in create_server_address() const;
     static dns_record parse_resource_record(const vector<byte_t>& data, size_t &offset);
     static string parse_a_record(const vector<byte_t>& rdata);
     static string parse_aaaa_record(const vector<byte_t>& rdata);
     static string parse_mx_record(const vector<byte_t>& data, size_t offset, uint16_t rdlength);
     static string parse_txt_record(const vector<byte_t>& rdata);
-
-    static void ensure_winsock_initialized();
 
 public:
     explicit dns_client(

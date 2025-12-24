@@ -1,13 +1,14 @@
 #ifndef MSTL_NETWORK_SOCKET_HPP__
 #define MSTL_NETWORK_SOCKET_HPP__
-#include "../../core/time/duration.hpp"
+#include "MSTL/core/time/duration.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <WinSock2.h>
-#pragma comment(lib, "ws2_32.lib")
 #include <ws2tcpip.h>
+#include "MSTL/core/config/undef_cmacro.hpp"
 #elif defined(MSTL_PLATFORM_LINUX__)
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
@@ -32,6 +33,11 @@ enum class SOCKET_PROTOCOL : uint16_t {
     ICMP = IPPROTO_ICMP, ICMP6 = IPPROTO_ICMPV6,
     SCTP = IPPROTO_SCTP, AUTO = 0
 };
+
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+bool MSTL_API winsock_initialized();
+#endif
 
 
 class tcp_socket {
@@ -79,6 +85,9 @@ public:
     MSTL_NODISCARD const socket_t& sockfd() const noexcept { return sockfd_; }
     MSTL_NODISCARD bool is_valid() const noexcept { return sockfd_ != INVALID_MARK; }
 
+    MSTL_NODISCARD bool ssl_valid() const noexcept { return false; }
+    MSTL_NODISCARD bool tcp_valid() const noexcept { return sockfd_ != INVALID_MARK; }
+
     bool open(const SOCKET_DOMAIN domain, const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
         const SOCKET_PROTOCOL protocol = SOCKET_PROTOCOL::AUTO) noexcept {
         sockfd_ = ::socket(
@@ -90,7 +99,7 @@ public:
     }
 
     void close() noexcept {
-        if (is_valid()) {
+        if (sockfd_ != INVALID_MARK) {
 #ifdef MSTL_PLATFORM_WINDOWS__
             ::closesocket(sockfd_);
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -114,6 +123,14 @@ public:
     }
 
     MSTL_NODISCARD bool bind(::sockaddr_in& addr) const noexcept {
+        return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) == 0;
+    }
+
+    MSTL_NODISCARD bool bind(const uint16_t port) const noexcept {
+        ::sockaddr_in addr{};
+        addr.sin_family = AF_INET;
+        addr.sin_addr.s_addr = INADDR_ANY;
+        addr.sin_port = ::htons(port);
         return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) == 0;
     }
 
@@ -151,12 +168,36 @@ public:
 #endif
     }
 
-    MSTL_NODISCARD bool connect(const ::sockaddr* addr, const ::socklen_t addrlen) const noexcept {
-        return ::connect(sockfd_, addr, addrlen) == 0;
+    MSTL_NODISCARD bool connect(const ::sockaddr* addr, const ::socklen_t addr_len) const noexcept {
+        return ::connect(sockfd_, addr, addr_len) == 0;
     }
 
     MSTL_NODISCARD bool connect(const ::sockaddr_in& addr) const noexcept {
-        return tcp_socket::connect(reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr));
+        return ::connect(sockfd_, reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr)) == 0;
+    }
+
+    MSTL_NODISCARD bool connect_ipv4(const char* ip, const uint16_t port) const noexcept {
+        ::sockaddr_storage addr{};
+        auto *a4 = reinterpret_cast<::sockaddr_in*>(&addr);
+        a4->sin_family = AF_INET;
+        if (::inet_pton(AF_INET, ip, &a4->sin_addr) == -1) {
+            return false;
+        }
+        a4->sin_port = ::htons(port);
+        constexpr ::socklen_t addr_len = sizeof(::sockaddr_in);
+        return ::connect(sockfd_, reinterpret_cast<::sockaddr*>(&addr), addr_len) == 0;
+    }
+
+    MSTL_NODISCARD bool connect_ipv6(const char* ip, const uint16_t port) const noexcept {
+        ::sockaddr_storage addr{};
+        auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
+        a6->sin6_family = AF_INET6;
+        if (::inet_pton(AF_INET6, ip, &a6->sin6_addr) == -1) {
+            return false;
+        }
+        a6->sin6_port = ::htons(port);
+        constexpr ::socklen_t addr_len = sizeof(::sockaddr_in6);
+        return ::connect(sockfd_, reinterpret_cast<::sockaddr*>(&addr), addr_len) == 0;
     }
 
     MSTL_NODISCARD ssize_t send(const void* buf, const size_t len, const int flags = 0) const noexcept {
@@ -167,15 +208,29 @@ public:
         return ::recv(sockfd_, static_cast<char*>(buf), len, flags);
     }
 
-    MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len, const ::sockaddr* dest_addr,
+    MSTL_NODISCARD ssize_t sendto(const void* buf, const size_t len, const ::sockaddr* dest_addr,
         const ::socklen_t addrlen, const int flags = 0) const noexcept {
         return ::sendto(sockfd_, static_cast<const char*>(buf), len, flags, dest_addr, addrlen);
     }
 
-    MSTL_NODISCARD ssize_t send_to(const void* buf, const size_t len,
+    MSTL_NODISCARD ssize_t sendto(const void* buf, const size_t len,
         const ::sockaddr_in& dest_addr, const int flags = 0) const noexcept {
-        return ::sendto(sockfd_, static_cast<const char*>(buf), len, flags,
+        return ::sendto(
+            sockfd_, static_cast<const char*>(buf), len, flags,
             reinterpret_cast<const ::sockaddr*>(&dest_addr), sizeof(dest_addr));
+    }
+
+    MSTL_NODISCARD ssize_t sendto(const void* buf, const size_t len,
+        const char* ip, const uint16_t port, const int flags = 0) const noexcept {
+        ::sockaddr_in addr{};
+        addr.sin_family = AF_INET;
+        addr.sin_port = ::htons(port);
+        if (::inet_pton(AF_INET, ip, &addr.sin_addr) == -1) {
+            return false;
+        }
+        return ::sendto(
+            sockfd_, static_cast<const char*>(buf), len, flags,
+            reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr));
     }
 
     MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, ::sockaddr* src_addr,

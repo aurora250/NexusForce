@@ -1,5 +1,5 @@
-#include <MSTL/network/tcp/tcp_client.hpp>
 #include <MSTL/core/system/console.hpp>
+#include <MSTL/network/tcp_client.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <arpa/inet.h>
 #endif
@@ -11,50 +11,42 @@ bool tcp_client::try_connect(const string& host, const uint16_t port, const stri
         SOCKET_TYPE::STREAM,
         SOCKET_PROTOCOL::TCP);
 
-    if (!s.is_valid()) {
-        printcln(color::red(), "Socket creation failed");
+    if (!s.is_valid()) return false;
+    if (!s.set_send_timeout(send_timeout_) ||
+        !s.set_receive_timeout(receive_timeout_)) {
         return false;
     }
-    if (!s.set_send_timeout(send_timeout_) || !s.set_receive_timeout(read_timeout_)) {
-        printcln(color::yellow(), "Warning: Failed to set socket timeouts");
-    }
 
-    ::sockaddr_storage addr{};
-    ::socklen_t addr_len;
-    
     if (ipv6) {
-        auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
-        a6->sin6_family = AF_INET6;
-        ::inet_pton(AF_INET6, ip.c_str(), &a6->sin6_addr);
-        a6->sin6_port = ::htons(port);
-        addr_len = sizeof(::sockaddr_in6);
+        if (!s.connect_ipv6(ip.c_str(), port)) {
+            return false;
+        }
     } else {
-        auto *a4 = reinterpret_cast<::sockaddr_in *>(&addr);
-        a4->sin_family = AF_INET;
-        ::inet_pton(AF_INET, ip.c_str(), &a4->sin_addr);
-        a4->sin_port = ::htons(port);
-        addr_len = sizeof(::sockaddr_in);
+        if (!s.connect_ipv4(ip.c_str(), port)) {
+            return false;
+        }
     }
 
-    if (!s.connect(reinterpret_cast<::sockaddr *>(&addr), addr_len)) {
-        printcln(color::red(), "Connection to ", ip, ":", port, " failed");
-        return false;
+    socket_ = handle_sock_t(move(s));
+#ifdef MSTL_SUPPORT_OPENSSL__
+    if (ssl_ctx_.context()) {
+        socket_.set_context(ssl_ctx_);
+        if (!socket_.accept()) {
+            return false;
+        }
     }
+#endif
 
-    sock_ = _MSTL move(s);
-    connected_ = true;
     connected_host_ = host;
     connected_port_ = port;
-    
-    println("Connected to ", host, ":", port, " via IP: ", ip);
     return true;
 }
 
-bool tcp_client::connect_domain(const string& host, const uint16_t port) {
-    if (connected_ && connected_host_ == host && connected_port_ == port) {
+bool tcp_client::connect(const string& host, const uint16_t port) {
+    if (is_connected()) {
         return true;
     }
-    close_connection();
+    close();
 
     vector<string> ips = dns_.resolve_a(host);
     for (const auto &ip : ips) {
@@ -68,26 +60,19 @@ bool tcp_client::connect_domain(const string& host, const uint16_t port) {
             return true;
         }
     }
-
-    printcln(color::red(), "Failed to connect to ", host, ":", port);
     return false;
 }
 
-void tcp_client::close_connection() noexcept {
-    if (connected_) {
-        sock_.close();
-        connected_ = false;
+void tcp_client::close() noexcept {
+    if (is_connected()) {
+        socket_.close();
         connected_host_.clear();
         connected_port_ = 0;
     }
 }
 
-bool tcp_client::connect(const string& host, const uint16_t port) {
-    return connect_domain(host, port);
-}
-
 ssize_t tcp_client::send(const void* data, const size_t length) {
-    if (!connected_) {
+    if (!is_connected()) {
         printcln(color::red(), "Not connected");
         return -1;
     }
@@ -96,10 +81,10 @@ ssize_t tcp_client::send(const void* data, const size_t length) {
     const auto buffer = static_cast<const char*>(data);
     
     while (sent < static_cast<ssize_t>(length)) {
-        const ssize_t n = sock_.send(buffer + sent, length - sent);
+        const ssize_t n = socket_.send(buffer + sent, length - sent);
         if (n <= 0) {
             printcln(color::red(), "Send failed");
-            close_connection();
+            close();
             return n;
         }
         sent += n;
@@ -107,20 +92,20 @@ ssize_t tcp_client::send(const void* data, const size_t length) {
     return sent;
 }
 
-ssize_t tcp_client::send(const string& data) {
+ssize_t tcp_client::send(const string_view data) {
     return send(data.data(), data.size());
 }
 
 ssize_t tcp_client::receive(void* buffer, const size_t length) const {
-    if (!connected_) {
+    if (!is_connected()) {
         printcln(color::red(), "Not connected");
         return -1;
     }
-    return sock_.receive(buffer, length);
+    return socket_.receive(buffer, length);
 }
 
 bool tcp_client::receive_all(string& out_data, const size_t expected_length) {
-    if (!connected_) {
+    if (!is_connected()) {
         printcln(color::red(), "Not connected");
         return false;
     }
@@ -135,7 +120,7 @@ bool tcp_client::receive_all(string& out_data, const size_t expected_length) {
         
         while (total_received < expected_length) {
             const size_t to_receive = _MSTL min(BUFFER_SIZE, expected_length - total_received);
-            const ssize_t n = sock_.receive(buffer, to_receive);
+            const ssize_t n = socket_.receive(buffer, to_receive);
             
             if (n <= 0) {
                 if (n == 0) {
@@ -143,7 +128,7 @@ bool tcp_client::receive_all(string& out_data, const size_t expected_length) {
                 } else {
                     printcln(color::red(), "Receive failed");
                 }
-                close_connection();
+                close();
                 return false;
             }
             
@@ -152,13 +137,13 @@ bool tcp_client::receive_all(string& out_data, const size_t expected_length) {
         }
     } else {
         while (true) {
-            const ssize_t n = sock_.receive(buffer, BUFFER_SIZE);
+            const ssize_t n = socket_.receive(buffer, BUFFER_SIZE);
             if (n <= 0) {
                 if (n == 0) {
                     break;
                 } else {
                     printcln(color::red(), "Receive failed");
-                    close_connection();
+                    close();
                     return false;
                 }
             }
@@ -170,37 +155,25 @@ bool tcp_client::receive_all(string& out_data, const size_t expected_length) {
     return true;
 }
 
-tcp_client& tcp_client::operator <<(const string& data) {
-    send(data);
-    return *this;
-}
-
-tcp_client& tcp_client::operator >>(string& data) {
-    string temp;
-    receive_all(temp);
-    data = _MSTL move(temp);
-    return *this;
-}
-
 void tcp_client::receive_with_callback(function<void(const string&)> callback, const size_t buffer_size) {
-    if (!connected_ || !callback) {
+    if (!is_connected() || !callback) {
         return;
     }
     
     vector<char> buffer(buffer_size);
     
-    while (connected_) {
-        const ssize_t n = sock_.receive(buffer.data(), buffer.size());
+    while (is_connected()) {
+        const ssize_t n = socket_.receive(buffer.data(), buffer.size());
         
         if (n > 0) {
             callback(string(buffer.data(), n));
         } else if (n == 0) {
             println("Connection closed by peer");
-            close_connection();
+            close();
             break;
         } else {
             printcln(color::red(), "Receive failed");
-            close_connection();
+            close();
             break;
         }
     }

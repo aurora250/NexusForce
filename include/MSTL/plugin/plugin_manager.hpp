@@ -6,7 +6,7 @@
 #include "dynamic_library.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-class plugin_manager {
+class MSTL_API plugin_manager {
 public:
     using library_ptr = unique_ptr<dynamic_library>;
 

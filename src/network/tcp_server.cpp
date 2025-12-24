@@ -1,5 +1,5 @@
-#include <MSTL/network/tcp/tcp_server.hpp>
 #include <MSTL/core/system/console.hpp>
+#include <MSTL/network/tcp_server.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 void tcp_server::start_workers(const int thread_count) {
@@ -10,37 +10,51 @@ void tcp_server::start_workers(const int thread_count) {
 
 void tcp_server::accept_conns() const {
     while (running_) {
-        tcp_socket client_socket = server_socket_.accept();
-        if (!client_socket.is_valid()) {
+        tcp_socket tcpsock = server_socket_.accept();
+        if (!tcpsock.is_valid()) {
             if (running_) {
                 println("accept failed");
             }
             continue;
         }
-        
-        try {
-            if (client_handler_) {
-                client_handler_(_MSTL move(client_socket));
-            } else {
-                client_socket.close();
+
+#ifdef MSTL_SUPPORT_OPENSSL__
+        handle_sock_t client_sock(move(tcpsock));
+        if (ssl_ctx_.is_valid()) {
+            client_sock.set_context(ssl_ctx_);
+            if (!client_sock.accept()) {
+                continue;
             }
+        }
+#else
+        handle_sock_t client_sock = move(tcpsock);
+#endif
+        try {
+            client_handler_(move(client_sock));
         } catch (const exception& e) {
-            println("Error handling client: ", e);
+            println(e);
         }
     }
 }
 
 tcp_server::tcp_server(const uint16_t port, const int backlog) 
-    : port_(port), backlog_(backlog) {
-    _MSTL memory_zero(&server_addr_, sizeof(server_addr_));
+: port_(port), backlog_(backlog) {}
+
+#ifdef MSTL_SUPPORT_OPENSSL__
+bool tcp_server::load_certificate(const string& cert_file, const string& key_file) {
+    if (!cert_file.empty() && !key_file.empty()) {
+        return ssl_ctx_.load_certificate(cert_file, key_file);
+    }
+    return false;
 }
+#endif
 
 bool tcp_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
     const SOCKET_PROTOCOL protocol, const uint16_t thread_count) {
     if (running_) return true;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (::WSAStartup(MAKEWORD(2, 2), &wsa_data_) != 0) {
+    if (!winsock_initialized()) {
         printcln(color::red(), "WSAStartup failed");
         return false;
     }
@@ -56,16 +70,10 @@ bool tcp_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
         printcln(color::red(), "setsockopt failed");
         return false;
     }
-
-    server_addr_.sin_family = AF_INET;
-    server_addr_.sin_addr.s_addr = INADDR_ANY;
-    server_addr_.sin_port = ::htons(port_);
-
-    if (!server_socket_.bind(server_addr_)) {
+    if (!server_socket_.bind(port_)) {
         printcln(color::red(), "bind failed");
         return false;
     }
-
     if (!server_socket_.listen(backlog_)) {
         printcln(color::red(), "listen failed");
         return false;
@@ -73,7 +81,6 @@ bool tcp_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
 
     running_ = true;
     start_workers(static_cast<int32_t>(thread_count));
-    println("TCP server started on port ", port_);
     return true;
 }
 
@@ -82,17 +89,11 @@ void tcp_server::stop() noexcept {
 
     running_ = false;
     server_socket_.close();
-    
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::WSACleanup();
-#endif
 
     for (auto& t : worker_threads_) {
         if (t.joinable()) t.join();
     }
     worker_threads_.clear();
-    
-    println("TCP server stopped");
 }
 
 MSTL_END_NAMESPACE__

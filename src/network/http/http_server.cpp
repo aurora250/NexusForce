@@ -1,62 +1,12 @@
 #include <MSTL/network/http/http_server.hpp>
 #include <MSTL/core/system/console.hpp>
-#include <MSTL/network/ssl_socket.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-void http_server::start_workers(const int thread_count) {
-    for (int i = 0; i < thread_count; ++i) {
-        worker_threads_.emplace_back(&http_server::accept_conns, this);
-    }
-}
-
-void http_server::accept_conns() {
-    while (running_) {
-        tcp_socket client_socket = server_socket_.accept();
-        if (!client_socket.is_valid()) {
-            if (running_) {
-                println("accept failed");
-            }
-            continue;
-        }
-
-#ifdef MSTL_SUPPORT_OPENSSL__
-        ssl_socket* ssl_sock = nullptr;
-        if (ssl_ctx_.context()) {
-            ssl_sock = new ssl_socket(ssl_ctx_.context(), client_socket);
-            if (!ssl_sock->accept()) {
-                delete ssl_sock;
-                client_socket.close();
-                continue;
-            }
-        }
-        try {
-            handle_client(client_socket, ssl_sock);
-        } catch (const exception& e) {
-            println(e);
-        }
-        delete ssl_sock;
-#else
-        try {
-            handle_client(client_socket);
-        } catch (const exception& e) {
-            println(e);
-        }
-#endif
-        client_socket.close();
-    }
-}
-
-void http_server::handle_client(const tcp_socket& client_socket
-#ifdef MSTL_SUPPORT_OPENSSL__
-    , const ssl_socket* ssl_sock) {
-    http_request request = parse_request(client_socket, ssl_sock);
-    if (ssl_sock) {
+void http_server::handle_client(handle_sock_t client_socket) {
+    http_request request = parse_request(client_socket);
+    if (client_socket.ssl_valid()) {
         request.set_https();
     }
-#else
-    ) {
-    http_request request = parse_request(client_socket);
-#endif
     _MSTL session* sess = session(request, true);
     int forward_count = 0;
 
@@ -74,11 +24,7 @@ void http_server::handle_client(const tcp_socket& client_socket
             continue;
         }
 
-        send_response(client_socket, response
-#ifdef MSTL_SUPPORT_OPENSSL__
-            , ssl_sock
-#endif
-            );
+        send_response(client_socket, response);
         return;
     } while (true);
 }
@@ -97,12 +43,10 @@ void http_server::parse_cookies(const string_view cookie_header, http_request& r
     }
     cookie_pairs.push_back(cookie_header.substr(start).trim());
 
-    for (const auto &pair: cookie_pairs) {
+    for (const auto& pair: cookie_pairs) {
         const size_t eq_pos = pair.find('=');
         if (eq_pos != string::npos) {
-            const string name{pair.substr(0, eq_pos).trim()};
-            const string value{pair.substr(eq_pos + 1).trim()};
-            request.set_cookie(name, value);
+            request.set_cookie(pair.substr(0, eq_pos).trim(), pair.substr(eq_pos + 1).trim());
         }
     }
 }
@@ -159,22 +103,14 @@ string http_server::url_decode(const string_view str) {
     return result;
 }
 
-http_request http_server::parse_request(const tcp_socket& client_socket
-#ifdef MSTL_SUPPORT_OPENSSL__
-    , const ssl_socket* ssl_sock
-#endif
-    ) {
+http_request http_server::parse_request(const handle_sock_t& client_socket) {
     http_request request;
     char buffer[4096];
     string request_data;
 
     ssize_t total_read = 0;
     while (true) {
-        ssize_t bytes_read =
-#ifdef MSTL_SUPPORT_OPENSSL__
-            ssl_sock ? ssl_sock->read(buffer, sizeof(buffer) - 1) :
-#endif
-            client_socket.receive(buffer, sizeof(buffer) - 1);
+        ssize_t bytes_read = client_socket.receive(buffer, sizeof(buffer) - 1);
         if (bytes_read <= 0) break;
 
         buffer[bytes_read] = '\0';
@@ -190,10 +126,10 @@ http_request http_server::parse_request(const tcp_socket& client_socket
             if (cl_pos != string::npos) {
                 const size_t cl_end = request_data.find(HTTP_CRLF, cl_pos);
                 if (cl_end != string::npos) {
-                    const string cl_str = request_data.substr(
+                    const string_view cl_str = request_data.view(
                         cl_pos + 15, cl_end - cl_pos - 15
                         ).trim();
-                    content_length = _MSTL uinteger32::parse(cl_str.view());
+                    content_length = _MSTL uinteger32::parse(cl_str);
                 }
             }
 
@@ -302,21 +238,13 @@ string http_server::build_response_str(const http_response& response) {
     return result;
 }
 
-void http_server::send_response(const tcp_socket& client_socket, const http_response& response
-#ifdef MSTL_SUPPORT_OPENSSL__
-    , const ssl_socket* ssl_sock
-#endif
-    ) {
+void http_server::send_response(const handle_sock_t& client_socket, const http_response& response) {
     string res_str = build_response_str(response);
     const size_t total = res_str.size();
     size_t sent = 0;
 
     while (sent < total) {
-        const ssize_t bytes_sent =
-#ifdef MSTL_SUPPORT_OPENSSL__
-            ssl_sock ? ssl_sock->write(res_str.data() + sent, total - sent) :
-#endif
-            client_socket.send(res_str.data() + sent, total - sent);
+        const ssize_t bytes_sent = client_socket.send(res_str.data() + sent, total - sent);
         if (bytes_sent <= 0) {
             printcln(color::red(), "send failed");
             break;
@@ -325,17 +253,11 @@ void http_server::send_response(const tcp_socket& client_socket, const http_resp
     }
 }
 
-http_server::http_server(const uint16_t port, const int backlog
-#ifdef MSTL_SUPPORT_OPENSSL__
-        , const string& cert_file, const string& key_file
-#endif
-        ) : port_(port), backlog_(backlog) {
-    _MSTL memory_zero(&server_addr_, sizeof(server_addr_));
-#ifdef MSTL_SUPPORT_OPENSSL__
-    if (!cert_file.empty() && !key_file.empty()) {
-        ssl_ctx_.load_certificate(cert_file, key_file);
-    }
-#endif
+http_server::http_server(const uint16_t port, const int backlog)
+: server_(port, backlog) {
+    server_.set_client_handler([this](handle_sock_t sock) {
+        http_server::handle_client(_MSTL move(sock));
+    });
 }
 
 _MSTL session* http_server::session(http_request& request, const bool create) {
@@ -362,67 +284,11 @@ void http_server::add_session_cookie(const http_request& request, http_response&
 
         const bool is_https = request.is_https();
         session_cookie.set_http_only(is_https);
-        session_cookie.set_same_site(is_https ? "Strict" : "Lax");
+        session_cookie.set_same_site(is_https);
 
         response.add_cookie(session_cookie);
         session->set_is_new(false);
     }
-}
-
-bool http_server::start(const SOCKET_DOMAIN domain, const SOCKET_TYPE type,
-    const SOCKET_PROTOCOL protocol, const uint16_t thread_count) {
-    if (running_) return true;
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-    if (::WSAStartup(MAKEWORD(2, 2), &wsa_data_) != 0) {
-        printcln(color::red(), "WSAStartup failed");
-        return false;
-    }
-#endif
-
-    server_socket_ = _MSTL move(tcp_socket(domain, type, protocol));
-    if (!server_socket_.is_valid()) {
-        printcln(color::red(), "socket creation failed");
-        return false;
-    }
-
-    if (!server_socket_.reuse_addr()) {
-        printcln(color::red(), "setsockopt failed");
-        return false;
-    }
-
-    server_addr_.sin_family = AF_INET;
-    server_addr_.sin_addr.s_addr = INADDR_ANY;
-    server_addr_.sin_port = ::htons(port_);
-
-    if (!server_socket_.bind(server_addr_)) {
-        printcln(color::red(), "bind failed");
-        return false;
-        }
-
-    if (!server_socket_.listen(backlog_)) {
-        printcln(color::red(), "listen failed");
-        return false;
-    }
-
-    running_ = true;
-    start_workers(static_cast<int32_t>(thread_count));
-    return true;
-}
-
-void http_server::stop() noexcept {
-    if (!running_) return;
-
-    running_ = false;
-    server_socket_.close();
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::WSACleanup();
-#endif
-
-    for (auto& t : worker_threads_) {
-        if (t.joinable()) t.join();
-    }
-    worker_threads_.clear();
 }
 
 MSTL_END_NAMESPACE__
