@@ -10,6 +10,7 @@
 #endif
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <winioctl.h>
+#include <memoryapi.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
