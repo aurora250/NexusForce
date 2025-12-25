@@ -29,11 +29,11 @@ private:
 
 public:
     explicit tcp_client() = default;
-    explicit tcp_client(dns_client dns) : dns_(_MSTL move(dns)) {}
+    explicit tcp_client(dns_client dns);
 #ifdef MSTL_SUPPORT_OPENSSL__
-    explicit tcp_client(ssl_context ctx) : ssl_ctx_(_MSTL move(ctx)) {}
+    explicit tcp_client(ssl_context ctx);
 #endif
-    ~tcp_client() { close(); }
+    ~tcp_client();
 
     void set_recv_timeout(const milliseconds& timeout) { receive_timeout_ = timeout; }
     void set_send_timeout(const milliseconds& timeout) { send_timeout_ = timeout; }

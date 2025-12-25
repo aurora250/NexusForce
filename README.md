@@ -5,34 +5,30 @@
 
 > 通过其他语言阅读: [English](README.EN.md)
 
-本项目旨在建立一套供学习使用的、阅读性强的、较为健全的标准库及扩展。
+本项目旨在建立功能健全、风格统一、可读性强、社区共建、跨平台兼容的
+现代C++开发库MSTL(Modern Standard Template Library)。
+通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，
+为项目开发提供实用的工具集，同时也为C++学习者提供理解底层原理的实践载体。
 有劳各位多多issue，使本项目趋于健全。如有不足，还望斧正。
 
 本库使用IO设备时默认您的操作系统为代码页为UTF-8，如不是，请尝试设置，否则可能在IO时乱码。
 
 ## 通过阅读和使用MSTL，您能学到什么？
 
-- 使用`constexpr`与`if constexpr`减轻运行期负担；
-- 使用`concept`与`requires`健壮代码；
-- 强化`noexcept`保证；
-- 使用可变参数模板、递归展开和模板特化等模板元技术实现类型萃取并编写功能性容器；
 - 函数式编程设计和类型擦除设计；
-- 使用编译器内置attribute优化代码行为；
-- 区分`decltype`、`auto`与`template`的类型推导退化规则；
+- 使用模板元技术实现类型萃取；
+- 使用`concept`与`requires`约束模板参数行为；
+- 强化`noexcept`保证；
 - 通过`enable_if`实现SFINAF(Substitution Failure Is Not An Error)；
 - 通过`compressed_pair`实现EBCO(Empty Base Class Optimization)；
 - 内存分配与就地构造的配合使用；
-- UTF-8、UTF-16、UTF-32等不同字符编码类型间的转换规则；
-- 使用`format`快速格式化字符串；
-- 使用CRTP(Curiously Recurring Template Pattern)模板模式进行静态多态操作；
-- 使用Windows与Linux原生接口实现`datetime`、`file`等工具类，认识两个OS之间大同小异的数据接口与数据处理方式；
-- 双端队列、红黑树、哈希表等复杂容器的数据操作方式；
-- 实现绝大部分标准算法(包括并发算法)与所有常用标准容器，并拓展部分教学用的非实用算法；
-- 十余种通用排序函数的实现方式；
-- 标准库并发接口的使用(`atomic`/`conditional_variable`/`thread`/`mutex`/`future`/`package_task`等)；
-- MySQL、Redis接口的现代包装与使用；
-- 设计轮询模式的线程池；
-- socket封装现代风格servlet进行Web操作
+- UTF-8、UTF-16、UTF-32间的转换规则；
+- 通过CRTP(Curiously Recurring Template Pattern)实现静态多态；
+- 通过Windows/Linux API实现操作系统操作类，分析并认识不同操作系统之间大同小异的数据处理方式；
+- 双端队列、红黑树、哈希表等复杂容器的实现；
+- PostGreSQL、MySQL、Redis接口的现代包装与使用；
+- 实现定时器、线程池、数据库链接池等调度工具
+- 实现TCP/UDP/DNS/HTTP/HTTPS现代风格网络开发工具
   ......
 
 ## 支持环境
@@ -50,20 +46,21 @@ C++ 14 17 20
 ### 前置依赖
 
 - CMake 3.17+
-- 支持C++14及以上的编译器（GCC 12+、Clang 5+、MSVC 2017+）
+- 支持C++14及以上的编译器
 - 可选依赖：
-  - Boost
+  - PostGreSQL
   - MySQL
   - SQLite3
   - hiredis
-  - Qt6
-  - CUDA Toolkit（仅MSVC）
+  - zlib
+  - OpenSSL
+  - CUDA Toolkit
 
-请注意：本项目已停止对CUDA的支持，它被默认关闭依赖
+请注意：MSTL已停止对CUDA的支持，它被默认关闭依赖
 
 ### 编译步骤
 
-您可以在项目根目录的CMakeLists.txt中开关依赖项并在src\CMakeLists.txt中直接更改您本地的依赖路径
+您可以在项目根目录的CMakeLists.txt中开关依赖项并在src\CMakeLists.txt中直接更改您本地的依赖路径以进行个性化编译
 
 - Windows
 
@@ -110,275 +107,317 @@ make -j$(nproc)
 sudo make install
 ```
 
-## 文件介绍
-
-![文件结构](dependencies_structure.png)
-
-以下按照上述文件结构层级依次介绍。
-
-- [environment](include/MSTL/core/config/c++config.hpp)
-
-定义操作系统平台、托管平台、总线宽度和C++版本的宏，实现多编译环境适配。
-
-- [vsprintf](include/MSTL/core/string/vsprintf.hpp)
-
-定义一系列函数将可变参数列表输出到格式化的字符串。
-
-- [type_traits](include/MSTL/core/typeinfo/type_traits.hpp)
-
-定义类型特征常量，使用模板元技术在编译期推断类型信息。
-
-- [exception](include/MSTL/core/exception/exception.hpp)
-
-定义错误类型和快速调用宏，本项目的所有错误类型都为本文件内的错误类型。
-
-- [random](include/MSTL/core/numeric/random.hpp)
-
-定义假随机数生成类`random_lcd`、`random_mt`和基于硬件噪声的真随机数生成类`secret`。
-
-- [socket](include/MSTL/network/tcp/tcp_socket.hpp)
-
-定义网络套接字类`socket`。
-
-- [functor](include/MSTL/core/functional/functor.hpp)
-
-定义仿函数和仿函数配接器（C++11后被标准弃用）。
-
-- [iterator_traits](include/MSTL/core/iterator/iterator_traits.hpp)
-
-定义迭代器萃取器`iterator_traits`及方便使用的类型别名。
-
-- [interface](include/MSTL/core/interface/interface.hpp)
-
-定义一系列基础CRTP基类和基于其自动生成的全局函数。
-
-- [hash](include/MSTL/core/functional/hash.hpp)
-
-定义基础类型的哈希函数及FNV等工具哈希函数。
-
-- [numeric_limits](include/MSTL/core/numeric/numeric_limits.hpp)
-
-定义数值类型信息类`numeric_limits`，在编译时提供数值类型的数学细节。
-
-- [mutex](include/MSTL/core/async/mutex.hpp)
-
-定义互斥锁`mutex`及作用域锁定类`lock_guard`。
-
-- [concepts](include/MSTL/core/typeinfo/concepts.hpp)
-
-定义常用的约束与迭代器类型判断特征常量。
-
-- [utility](include/MSTL/core/utility/utility.hpp)
-
-定义压缩对`compressed_pair`、键值对`pair`及其哈希函数、类型擦除函数、C风格字符串转数字类型函数。
-
-- [tuple](include/MSTL/core/utility/tuple.hpp)
-
-定义元组类`tuple`及其辅助函数。
-
-- [mathlib](include/MSTL/core/numeric/math.hpp)
-
-定义常用的`constexpr`数学常量与函数。
-
-- [ratio](include/MSTL/core/numeric/ratio.hpp)
-
-定义比率类`ratio`。
-
-- [numeric](include/MSTL/core/algorithm/numeric.hpp)
-
-定义数学算法。
-
-- [heap](include/MSTL/core/algorithm/heap.hpp)
-
-定义普通heap算法。
-
-- [iterator](include/MSTL/core/iterator/iterator.hpp)
-
-定义迭代器工具函数和迭代器配接器。
-
-- [algobase](include/MSTL/core/algorithm/algobase.hpp)
-
-定义比较、复制和移动算法。
-
-- [any](include/MSTL/core/utility/any.hpp)
-
-定义任意类any，其可存储任意类型。
-
-- [cstring](include/MSTL/core/string/cstring.hpp)
-
-定义内存操作函数与C风格字符串操作函数。
-
-- [memory](include/MSTL/core/memory/memories.hpp)
-
-定义内存操作函数、分配器类和智能指针类。
-
-- [functional](include/MSTL/core/functional/function.hpp)
-
-定义托管函数指针和类函数类型的函数类function。
-
-- [algo](include/MSTL/core/algorithm/algo.hpp)
-
-定义判断、集合、查找、合并、移动、变换、绑定、排列等算法。
-
-- [thread](include/MSTL/core/async/thread.hpp)
-
-定义线程类`thread`。
-
-- [sort](include/MSTL/core/algorithm/sort.hpp)
-
-定义冒泡、鸡尾酒、选择、希尔、计数、桶、索引、归并、部分、快速、内省、提姆、猴子等多种排序算法。
-
-- [algorithm](include/MSTL/core/algorithm/algorithm.hpp)
-
-引入基础算法和数学算法，定义并发算法，方便使用者引入。
-
-- [char_traits](include/MSTL/core/string/char_traits.hpp)
-
-定义字符串萃取类`basic_char_traits`及辅助萃取函数。
-
-- [basic_string_view](include/MSTL/core/string/basic_string_view.hpp)
-
-定义字符串视图基础类`basic_string_view`。
-
-- [string_view](include/MSTL/core/string/string_view.hpp)
-
-定义字符串视图类`string_view`。
-
-- [basic_string](include/MSTL/core/string/basic_string.hpp)
-
-定义基础字符串类`basic_string`。
-
-- [string](include/MSTL/core/string/string.hpp)
-
-定义字符串类`string`，提供不同字符编码间的转换函数。
-
-- [format](include/MSTL/core/string/format.hpp)
-
-定义字符串格式化辅助类`formatter`和格式化函数`format`。
-
-- [encrypt](include/MSTL/core/encrypt/encrypt.hpp)
-
-定义字符加密类型及函数`XOR`、`base64`、`MD5`、`SHA1`、`SHA256`、`AES256`。
-
-- [check_type](include/MSTL/core/typeinfo/check_type.hpp)
-
-定义类型信息分析函数`check_type`，在多种编译器中规整类型信息。
-
-- [serialize](include/MSTL/core/interface/iobject.hpp)
-
-定义一系列序列化的CRTP基类。
-
-- [datetime](include/MSTL/core/time/datetime.hpp)
-
-定义时间类`time`、日期类`date`、时期类`datetime`和UNIX时间戳类`timestamp`，提供方便操作的工具函数。
-
-- [hexadecimal](include/MSTL/core/utility/hexadecimal.hpp)
-
-定义十六进制类`hexadecimal`及其格式化辅助类。
-
-- [color](include/MSTL/core/utility/color.hpp)
-
-定义颜色类`color`。
-
-- [console](include/MSTL/core/system/console.hpp)
-
-定义IO辅助类`io_base`及IO控制台类`console`。
-
-- [variant](include/MSTL/core/utility/variant.hpp)
-
-定义变体类`variant`，其可在同一块内存同时托管多个类型。
-
-- [optional](include/MSTL/core/utility/optional.hpp)
-
-定义自选类`optional`，其可托管一个类型，设置可选空值nullopt。
-
-- [array](include/MSTL/core/container/array.hpp)
-
-定义数组类`array`，可以在编译器确定取值并更安全现代地操作数组。
-
-- [bitmap](include/MSTL/core/container/bitmap.hpp)
-
-定义位图类`bitmap`，它不作为`vector<bool>`特化存在。
-
-- [vector](include/MSTL/core/container/vector.hpp)
-
-定义向量类`vector`。
-
-- [list](include/MSTL/core/container/list.hpp)
-
-定义双向链表类`list`。
-
-- [deque](include/MSTL/core/container/deque.hpp)
-
-定义双端队列类`deque`，其可以使数据向前和向后O(1)插入。
-
-- [rb_tree](include/MSTL/core/container/rb_tree.hpp)
-
-定义红黑树类`rb_tree`，它被作为有序容器的代理类。
-
-- [hashtable](include/MSTL/core/container/hashtable.hpp)
-
-定义哈希表类`hashtable`，它被作为无序容器的代理类。
-
-- [unordered_map](include/MSTL/core/container/unordered_map.hpp)
-
-定义无序字典类`unordered_map`和无序多值字典类`unordered_multimap`。
-
-- [unordered_set](include/MSTL/core/container/unordered_set.hpp)
-
-定义无序集合类`unordered_set`和无序多值集合类`unordered_multiset`。
-
-- [leonardo_heap](include/MSTL/core/algorithm/leonardo_heap.hpp)
-
-定义莱昂纳多堆算法leonardo_heap。
-
-- [queue](include/MSTL/core/container/queue.hpp)
-
-定义队列类`queue`和基于普通堆算法heap的优先级队列类`priority_queue`。
-
-- [stack](include/MSTL/core/container/stack.hpp)
-
-定义栈类`stack`。
-
-- [map](include/MSTL/core/container/map.hpp)
-
-定义有序字典类`map`和有序多值字典类`multimap`。
-
-- [set](include/MSTL/core/container/set.hpp)
-
-定义有序集合类`set`和有序多值集合类`multiset`。
-
-- [file](include/MSTL/core/file/file.hpp)
-
-定义文件类`file`，其使用8KB的buffer以适应大批量小数据的读写。
-
-- [json](include/MSTL/core/json.hpp)
-
-定义JSON解析类`json_parser`和JSON构建类`json_builder`。
-
-- [session](include/MSTL/network/http/session.hpp)
-
-定义`cookie`类、会话类`session`和HTTP常量。
-
-- [servlet](include/MSTL/network/http/http_server.hpp)
-
-定义微服务类`servlet`，提供监听端口、配置filter、设置cookie、操作session属性等功能。
-
-- [trace_memory](include/MSTL/core/memory/trace_memory.hpp)
-
-定义基于boost的栈追踪分配器`trace_allocator`。
-
-- [database_pool](include/MSTL/database/database_pool.hpp)
-
-定义支持MySQL、Sqlite3、Redis链接的多态数据库连接及数据库链接池`database_pool`。
-
-- [thread_pool](include/MSTL/core/async/thread_pool.hpp)
-
-定义轮询线程池类`thread_pool`。
-
-- [timer](include/MSTL/core/async/timer.hpp)
-
-定义定时器类`timer`。
+## Include 结构
+
+```bash
+├───include
+│   └───MSTL
+│       │   MSTL.hpp
+│       │
+│       ├───compress
+│       │       zlib_compress.hpp
+│       │
+│       ├───core
+│       │   ├───algorithm
+│       │   │       algorithm.hpp
+│       │   │       bound.hpp
+│       │   │       compare.hpp
+│       │   │       erase.hpp
+│       │   │       ext_sort.hpp
+│       │   │       heap.hpp
+│       │   │       iterator.hpp
+│       │   │       leonardo_heap.hpp
+│       │   │       merge.hpp
+│       │   │       numeric.hpp
+│       │   │       parallel.hpp
+│       │   │       partition.hpp
+│       │   │       permutation.hpp
+│       │   │       search.hpp
+│       │   │       set.hpp
+│       │   │       shift.hpp
+│       │   │       shuffle.hpp
+│       │   │       sort.hpp
+│       │   │       type_erase.hpp
+│       │   │
+│       │   ├───async
+│       │   │       async.hpp
+│       │   │       atomic.hpp
+│       │   │       atomic_base.hpp
+│       │   │       atomic_futex.hpp
+│       │   │       atomic_futex_base.hpp
+│       │   │       atomic_timed_wait.hpp
+│       │   │       atomic_wait.hpp
+│       │   │       at_thread_exit.hpp
+│       │   │       call_once.hpp
+│       │   │       condition_variable.hpp
+│       │   │       future.hpp
+│       │   │       future_base.hpp
+│       │   │       jthread.hpp
+│       │   │       lock_free_queue.hpp
+│       │   │       mutex.hpp
+│       │   │       packaged_task.hpp
+│       │   │       promise.hpp
+│       │   │       semaphore.hpp
+│       │   │       shared_mutex.hpp
+│       │   │       stop_token.hpp
+│       │   │       thread.hpp
+│       │   │       thread_pool.hpp
+│       │   │       timer.hpp
+│       │   │
+│       │   ├───config
+│       │   │       c++config.hpp
+│       │   │       undef_cmacro.hpp
+│       │   │
+│       │   ├───container
+│       │   │       array.hpp
+│       │   │       bitmap.hpp
+│       │   │       bitset.hpp
+│       │   │       deque.hpp
+│       │   │       hashtable.hpp
+│       │   │       list.hpp
+│       │   │       map.hpp
+│       │   │       multimap.hpp
+│       │   │       multiset.hpp
+│       │   │       priority_queue.hpp
+│       │   │       queue.hpp
+│       │   │       rb_tree.hpp
+│       │   │       set.hpp
+│       │   │       stack.hpp
+│       │   │       unordered_map.hpp
+│       │   │       unordered_multimap.hpp
+│       │   │       unordered_multiset.hpp
+│       │   │       unordered_set.hpp
+│       │   │       vector.hpp
+│       │   │
+│       │   ├───encrypt
+│       │   │       aes256.hpp
+│       │   │       base64.hpp
+│       │   │       encrypt.hpp
+│       │   │       md5.hpp
+│       │   │       sha1.hpp
+│       │   │       sha256.hpp
+│       │   │       xor.hpp
+│       │   │
+│       │   ├───exception
+│       │   │       assertion.hpp
+│       │   │       exception.hpp
+│       │   │       exception_ptr.hpp
+│       │   │       scope_guard.hpp
+│       │   │       terminate.hpp
+│       │   │
+│       │   ├───file
+│       │   │   │   file.hpp
+│       │   │   │   file_constants.hpp
+│       │   │   │   file_watcher.hpp
+│       │   │   │   path.hpp
+│       │   │   │   temp_file.hpp
+│       │   │   │
+│       │   │   ├───env
+│       │   │   │       env_builder.hpp
+│       │   │   │       env_parser.hpp
+│       │   │   │       env_value.hpp
+│       │   │   │
+│       │   │   ├───ini
+│       │   │   │       ini_builder.hpp
+│       │   │   │       ini_parser.hpp
+│       │   │   │       ini_value.hpp
+│       │   │   │
+│       │   │   ├───json
+│       │   │   │       json_builder.hpp
+│       │   │   │       json_parser.hpp
+│       │   │   │       json_value.hpp
+│       │   │   │
+│       │   │   ├───toml
+│       │   │   │       toml_builder.hpp
+│       │   │   │       toml_parser.hpp
+│       │   │   │       toml_value.hpp
+│       │   │   │
+│       │   │   └───yaml
+│       │   │           yaml_builder.hpp
+│       │   │           yaml_parser.hpp
+│       │   │           yaml_value.hpp
+│       │   │
+│       │   ├───functional
+│       │   │       apply.hpp
+│       │   │       call_wrapper.hpp
+│       │   │       function.hpp
+│       │   │       functor.hpp
+│       │   │       functor_adapter.hpp
+│       │   │       hash.hpp
+│       │   │       invoke.hpp
+│       │   │
+│       │   ├───interface
+│       │   │       icharacter.hpp
+│       │   │       icollector.hpp
+│       │   │       icommon.hpp
+│       │   │       inumeric.hpp
+│       │   │       iobject.hpp
+│       │   │       ipackage.hpp
+│       │   │       istringify.hpp
+│       │   │
+│       │   ├───iterator
+│       │   │       file_line_iterator.hpp
+│       │   │       insert_iterator.hpp
+│       │   │       iterator_traits.hpp
+│       │   │       normal_iterator.hpp
+│       │   │       path_iterator.hpp
+│       │   │       ranges.hpp
+│       │   │       reverse_iterator.hpp
+│       │   │
+│       │   ├───memory
+│       │   │       aligned_buffer.hpp
+│       │   │       allocated_ptr.hpp
+│       │   │       allocator_traits.hpp
+│       │   │       bit.hpp
+│       │   │       builtin_allocator.hpp
+│       │   │       construct.hpp
+│       │   │       memory.hpp
+│       │   │       memory_view.hpp
+│       │   │       shared_ptr.hpp
+│       │   │       standard_allocator.hpp
+│       │   │       temporary_buffer.hpp
+│       │   │       trace_memory.hpp
+│       │   │       uninitialized.hpp
+│       │   │       unique_ptr.hpp
+│       │   │       weak_ptr.hpp
+│       │   │
+│       │   ├───numeric
+│       │   │       math.hpp
+│       │   │       numeric_limits.hpp
+│       │   │       numeric_types.hpp
+│       │   │       random.hpp
+│       │   │       ratio.hpp
+│       │   │       static_numeric.hpp
+│       │   │
+│       │   ├───serialize
+│       │   │       concepts.hpp
+│       │   │       serialize.hpp
+│       │   │       serialize_traits.hpp
+│       │   │
+│       │   ├───string
+│       │   │       basic_string.hpp
+│       │   │       basic_string_view.hpp
+│       │   │       character.hpp
+│       │   │       char_traits.hpp
+│       │   │       char_types.hpp
+│       │   │       cstring.hpp
+│       │   │       format.hpp
+│       │   │       string.hpp
+│       │   │       string_util.hpp
+│       │   │       string_view.hpp
+│       │   │       to_numerics.hpp
+│       │   │       to_string.hpp
+│       │   │       vsprintf.hpp
+│       │   │
+│       │   ├───system
+│       │   │   │   cmdline.hpp
+│       │   │   │   console.hpp
+│       │   │   │   environment.hpp
+│       │   │   │   process.hpp
+│       │   │   │   signal.hpp
+│       │   │   │   stacktrace.hpp
+│       │   │   │
+│       │   │   └───device
+│       │   │           device.hpp
+│       │   │           device_constants.hpp
+│       │   │           serial_port.hpp
+│       │   │           storage_device.hpp
+│       │   │
+│       │   ├───time
+│       │   │       clocks.hpp
+│       │   │       datetime.hpp
+│       │   │       duration.hpp
+│       │   │       time_point.hpp
+│       │   │
+│       │   ├───typeinfo
+│       │   │       check_type.hpp
+│       │   │       concepts.hpp
+│       │   │       pointer_traits.hpp
+│       │   │       tags.hpp
+│       │   │       types.hpp
+│       │   │       type_traits.hpp
+│       │   │
+│       │   └───utility
+│       │           any.hpp
+│       │           color.hpp
+│       │           compressed_pair.hpp
+│       │           expected.hpp
+│       │           hexadecimal.hpp
+│       │           integer_sequence.hpp
+│       │           optional.hpp
+│       │           packages.hpp
+│       │           pair.hpp
+│       │           tuple.hpp
+│       │           variant.hpp
+│       │
+│       ├───database
+│       │   │   database_pool.hpp
+│       │   │   db_config.hpp
+│       │   │   db_interface.hpp
+│       │   │   sql_builder.hpp
+│       │   │
+│       │   ├───mysql
+│       │   │       mysql_config.hpp
+│       │   │       mysql_connect.hpp
+│       │   │       mysql_prepared_result.hpp
+│       │   │       mysql_prepared_statement.hpp
+│       │   │       mysql_result.hpp
+│       │   │
+│       │   ├───postgresql
+│       │   │       postgresql_config.hpp
+│       │   │       postgresql_connect.hpp
+│       │   │       postgresql_prepared_result.hpp
+│       │   │       postgresql_prepared_statement.hpp
+│       │   │       postgresql_result.hpp
+│       │   │
+│       │   ├───redis
+│       │   │       redis_config.hpp
+│       │   │       redis_connect.hpp
+│       │   │       redis_result.hpp
+│       │   │
+│       │   └───sqlite
+│       │           sqlite_config.hpp
+│       │           sqlite_connect.hpp
+│       │           sqlite_prepared_result.hpp
+│       │           sqlite_prepared_statement.hpp
+│       │           sqlite_result.hpp
+│       │
+│       ├───logging
+│       │       file_sink.hpp
+│       │       logger.hpp
+│       │       log_event.hpp
+│       │       log_formatter.hpp
+│       │       log_sink.hpp
+│       │
+│       ├───network
+│       │   │   ssl_context.hpp
+│       │   │   ssl_socket.hpp
+│       │   │   tcp_client.hpp
+│       │   │   tcp_server.hpp
+│       │   │   tcp_socket.hpp
+│       │   │   url.hpp
+│       │   │
+│       │   ├───dns
+│       │   │       dns_client.hpp
+│       │   │       dns_constants.hpp
+│       │   │       dns_message.hpp
+│       │   │
+│       │   └───http
+│       │           http_client.hpp
+│       │           http_client_message.hpp
+│       │           http_constants.hpp
+│       │           http_filter.hpp
+│       │           http_router.hpp
+│       │           http_server.hpp
+│       │           http_server_message.hpp
+│       │           session.hpp
+│       │
+│       └───plugin
+│               dynamic_library.hpp
+│               iplugin.hpp
+│               plugin_entry.hpp
+│               plugin_manager.hpp
+```
 
 ## 开源协议
 
@@ -386,11 +425,9 @@ sudo make install
 
 ## 待实现功能
 
-lib:
-cuda-matrix /
-xml
-
-fix:
-strong assert / 
-strong serialize /
-support macOS
+- SSO优化
+- 统一的标准注释
+- 统一容器相关assert提示
+- 接入vcpkg
+- 支持yaml、xml配置
+- 支持macOS、嵌入式Linux

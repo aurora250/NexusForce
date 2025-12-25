@@ -35,7 +35,7 @@ public:
     using allocator_type    = typename base_type::allocator_type;
 
 private:
-    base_type ht_{100, hasher(), key_equal()};
+    base_type ht_{100};
 
 public:
     unordered_map() = default;

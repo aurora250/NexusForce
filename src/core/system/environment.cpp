@@ -91,12 +91,12 @@ unordered_map<string, string> environment::all_envs() {
     ::FreeEnvironmentStrings(env_block);
 #else
     for (char** env = ENVIRON_GLOBAL; *env != nullptr; env++) {
-        string env_str(*env);
+        const string_view env_str(*env);
         size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {
-            string name = env_str.substr(0, eq_pos);
-            string value = env_str.substr(eq_pos + 1);
-            env_map[name] = value;
+            const string name = env_str.substr(0, eq_pos);
+            const string value = (env_str.back() == '=') ? "" : env_str.substr(eq_pos + 1);
+            env_map[name] = _MSTL move(value);
         }
     }
 #endif

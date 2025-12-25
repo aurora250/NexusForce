@@ -8,12 +8,14 @@ MSTL_BEGIN_NAMESPACE__
 bool tcp_client::try_connect(
     const string& host, const uint16_t port,
     const string& ip, const bool ipv6) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    winsock_initialized();
+#endif
     tcp_socket s(
         ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
         SOCKET_TYPE::STREAM,
         SOCKET_PROTOCOL::TCP);
 
-    if (!s.is_valid()) return false;
     if (!s.set_send_timeout(send_timeout_) ||
         !s.set_receive_timeout(receive_timeout_)) {
         return false;
@@ -42,6 +44,18 @@ bool tcp_client::try_connect(
     connected_host_ = host;
     connected_port_ = port;
     return true;
+}
+
+tcp_client::tcp_client(dns_client dns)
+: dns_(_MSTL move(dns)) {}
+
+#ifdef MSTL_SUPPORT_OPENSSL__
+tcp_client::tcp_client(ssl_context ctx)
+: ssl_ctx_(_MSTL move(ctx)) {}
+#endif
+
+tcp_client::~tcp_client() {
+    close();
 }
 
 bool tcp_client::connect(const string& host, const uint16_t port) {

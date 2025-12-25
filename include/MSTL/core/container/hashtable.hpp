@@ -247,7 +247,6 @@ private:
     void initialize_buckets(const size_type n) {
         const size_type n_buckets = next_size(n);
         buckets_.assign(n_buckets, nullptr);
-        size_ = 0;
     }
 
     size_type bkt_num_key(const key_type& key, const size_t n) const
@@ -559,9 +558,7 @@ public:
         return equals_;
     }
     MSTL_NODISCARD float load_factor() const noexcept {
-        return bucket_count() == 0 ?
-            0.0 :
-            static_cast<double>(size()) / static_cast<double>(bucket_count());
+        return bucket_count() == 0 ? 0.0f : static_cast<float>(size()) / static_cast<float>(bucket_count());
     }
     MSTL_NODISCARD float max_load_factor() const noexcept {
         return pair_.value;
@@ -571,67 +568,47 @@ public:
         pair_.value = new_max;
     }
 
-    void rehash(const size_type new_size) {
-        const size_type min_buckets_for_size =
-            static_cast<size_type>(_MSTL ceil(static_cast<double>(size_) / pair_.value));
+    void rehash(const size_type new_size)
+    noexcept(is_nothrow_hashable_v<key_type> && is_nothrow_copy_constructible_v<value_type>) {
+        const size_type min_buckets_for_size = static_cast<size_type>(
+            _MSTL ceil(static_cast<double>(size_) / max_load_factor())
+        );
         const size_type target = _MSTL max(new_size, min_buckets_for_size);
         const size_type old_size = buckets_.size();
         if (target <= old_size) return;
 
-        const size_type n = next_size(new_size);
+        const size_type n = next_size(target);
         if (n < target) {
             throw_exception(value_exception("hashtable size exceeds max count"));
         }
 
-        vector<node_type*> new_buckets;
-        new_buckets.reserve(n);
-        new_buckets.resize(n);
-        for (size_type i = 0; i < n; ++i) {
-            new_buckets[i] = nullptr;
-        }
+        vector<node_type*> new_buckets(n, nullptr);
 
-        vector<node_type*> old_buckets = _MSTL move(buckets_);
-        size_ = 0;
+        for (size_type bucket = 0; bucket < old_size; ++bucket) {
+            node_type* cur = buckets_[bucket];
+            while (cur != nullptr) {
+                node_type* next = cur->next_;
+                const size_type new_bucket = bkt_num(cur->data_, n);
 
-        try {
-            for (size_type bucket = 0; bucket < old_size; ++bucket) {
-                node_type* cur = buckets_[bucket];
+                cur->next_ = new_buckets[new_bucket];
+                new_buckets[new_bucket] = cur;
 
-                while (cur != nullptr) {
-                    node_type* next = cur->next_;
-                    const size_type new_bucket = bkt_num(cur->data_, n);
-                    cur->next_ = new_buckets[new_bucket];
-                    new_buckets[new_bucket] = cur;
-                    ++size_;
-                    cur = next;
-                }
+                cur = next;
             }
-            buckets_ = _MSTL move(new_buckets);
+            buckets_[bucket] = nullptr;
         }
-        catch (...) {
-            clear();
-            buckets_ = _MSTL move(old_buckets);
-            size_ = 0;
-            for (size_type i = 0; i < old_buckets.size(); ++i) {
-                node_type* cur = old_buckets[i];
-                while (cur != nullptr) {
-                    ++size_;
-                    cur = cur->next_;
-                }
-            }
-            throw;
-        }
+
+        buckets_.swap(new_buckets);
     }
 
     void reserve(const size_type count) {
         if (count <= size_) return;
 
-        const double needed = static_cast<double>(count) / max_load_factor();
-        if (needed > static_cast<double>(max_bucket_count())) {
+        const float needed = static_cast<float>(count) / max_load_factor();
+        if (needed > static_cast<float>(max_bucket_count())) {
             throw_exception(value_exception("hashtable size exceeds max count"));
         }
-        const size_type n = static_cast<size_type>(_MSTL ceil(needed));
-        rehash(n);
+        rehash(static_cast<size_type>(needed));
     }
 
     template <typename... Args>

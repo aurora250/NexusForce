@@ -3,40 +3,34 @@
 [![Build Status](https://travis-ci.org/aurora250/MSTL.svg?branch=master)](https://travis-ci.org/aurora250/MSTL)
 [![License](https://img.shields.io/badge/License-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
-> Read this in other languages: [Chinese](README.md)
+> Read this in other languages: [中文 (Chinese)](README.md)
 
-This project aims to establish a readable and relatively complete STL library (excluding concurrency libraries) for C++ beginners to learn and use, while providing various functional interfaces.
-It minimizes the use of standard libraries except for concurrency components and attempts to implement simplified versions from scratch.
-We welcome issues to help improve this project. If there are any deficiencies, please feel free to correct them.
+This project aims to establish a feature-complete, stylistically unified, highly readable, community-driven, 
+and cross-platform compatible Modern C++ development library - MSTL (Modern Standard Template Library). 
+Through clear architectural design, standardized code implementation, and rich applications of design patterns,
+it provides a practical toolkit for project development while also serving as a practical learning resource for
+C++ beginners to understand underlying principles. We welcome issues to help improve this project. 
+If there are any deficiencies, please feel free to provide feedback.
 
-Suggested learning approach for beginners: Read and use the files in the order described in the file introduction section below. When in doubt, consult classmates or AI.
-
-This library assumes your operating system uses UTF-8 code page when working with IO devices. If not, please try to configure it; otherwise, garbled characters may occur during IO operations.
-
+This library assumes your operating system uses UTF-8 code page when working with IO devices. 
+If not, please try to configure it; otherwise, garbled characters may occur during IO operations.
 
 ## What can you learn by reading and using MSTL?
 
-- Using `constexpr` and `if constexpr` to reduce runtime overhead;
-- Using `concept` and `requires` to enhance code robustness;
-- Strengthening `noexcept` guarantees;
-- Using template metaprogramming techniques such as variadic templates, recursive expansion, and template specialization to implement type traits and write functional containers;
 - Functional programming design and type erasure design;
-- Using compiler-built-in attributes to optimize code behavior;
-- Distinguishing type deduction and decay rules among `decltype`, `auto`, and templates;
+- Type traits implementation using template metaprogramming;
+- Using `concept` and `requires` to constrain template parameter behavior;
+- Strengthening `noexcept` guarantees;
 - Implementing SFINAE (Substitution Failure Is Not An Error) via `enable_if`;
 - Implementing EBCO (Empty Base Class Optimization) via `compressed_pair`;
 - Coordinating memory allocation with in-place construction;
-- Conversion rules between character encodings like UTF-8, UTF-16, and UTF-32;
-- Using `format` for fast string formatting;
-- Using CRTP (Curiously Recurring Template Pattern) for static polymorphism;
-- Implementing utility classes like `datetime` and `file` using Windows and Linux native interfaces, understanding the similar yet distinct data interfaces and processing methods between the two OSes;
-- Data manipulation methods for complex containers such as deques, red-black trees, and hash tables;
-- Implementing most standard algorithms (including concurrent ones) and all commonly used standard containers, with extensions of some non-practical algorithms for educational purposes;
-- Implementation methods for over ten general sorting functions;
-- Using standard library concurrency interfaces (`atomic`/`conditional_variable`/`thread`/`mutex`/`future`/`packaged_task`, etc.);
-- Modern wrappers and usage for MySQL and Redis interfaces;
-- Designing thread pools with polling patterns;
-- Wrapping sockets into modern-style servlets for web operations;
+- Conversion rules between UTF-8, UTF-16, and UTF-32;
+- Implementing static polymorphism using CRTP (Curiously Recurring Template Pattern);
+- Implementing operating system operation classes using Windows/Linux APIs, analyzing and understanding the similar yet distinct data processing methods across different operating systems;
+- Implementation of complex containers like deques, red-black trees, and hash tables;
+- Modern wrappers and usage for PostgreSQL, MySQL, and Redis interfaces;
+- Implementation of scheduling tools like timers, thread pools, and database connection pools;
+- Implementation of modern-style network development tools for TCP/UDP/DNS/HTTP/HTTPS;
   ......
 
 ## Supporting Environments
@@ -54,20 +48,22 @@ C++ 14 17 20
 ### Prerequisites
 
 - CMake 3.17+
-- Compiler supporting C++14 or higher (GCC 12+, Clang 5+, MSVC 2017+)
+- Compiler supporting C++14 or higher
 - Optional dependencies:
-  - Boost
+  - PostgreSQL
   - MySQL
   - SQLite3
   - hiredis
-  - Qt6
-  - CUDA Toolkit (MSVC only)
+  - zlib
+  - OpenSSL
+  - CUDA Toolkit
 
-Note: This project has discontinued CUDA support, which is disabled by default.
+Note: MSTL has discontinued CUDA support, which is disabled by default.
 
 ### Build Steps
 
-You can toggle dependencies in the root `CMakeLists.txt` and directly modify local dependency paths in `src/CMakeLists.txt`.
+You can toggle dependencies in the project root's `CMakeLists.txt` and directly modify your local dependency paths
+in `src/CMakeLists.txt` for customized builds.
 
 - Windows
 
@@ -79,7 +75,7 @@ cd MSTL
 # Create build directory
 mkdir build && cd build
 
-# Configure build options (can also modify in CMakeLists.txt)
+# Configure build options (can also modify directly in CMakeLists.txt)
 cmake .. -G "Visual Studio 17 2022" -A x64 \
   -DMSTL_ENABLE_QT6=OFF \
   -DMSTL_BUILD_TESTS=ON \
@@ -102,7 +98,7 @@ cd MSTL
 # Create build directory
 mkdir build && cd build
 
-# Configure build options (can also modify in CMakeLists.txt)
+# Configure build options (can also modify directly in CMakeLists.txt)
 cmake .. -DCMAKE_BUILD_TYPE=Release \
   -DMSTL_ENABLE_QT6=OFF \
   -DMSTL_BUILD_TESTS=ON
@@ -114,279 +110,327 @@ make -j$(nproc)
 sudo make install
 ```
 
-## File Introduction
-
-![File Structure](dependencies_structure.png)
-
-The following files are introduced in the order of the hierarchical structure shown above.
-
-- [environment](include/MSTL/core/config/c++config.hpp)
-
-Defines macros for operating system platform, hosting platform, bus width, and C++ version, implementing multi-compilation environment adaptation.
-
-- [vsprintf](include/MSTL/core/string/vsprintf.hpp)
-
-Defines a series of functions to output variable argument lists to formatted strings.
-
-- [type_traits](include/MSTL/core/typeinfo/type_traits.hpp)
-
-Defines type trait constants, using template metaprogramming to deduce type information at compile time.
-
-- [exception](include/MSTL/core/exception/exception.hpp)
-
-Defines error types and quick-invocation macros. All error types in this project are defined in this file.
-
-- [random](include/MSTL/core/numeric/random.hpp)
-
-Defines pseudo-random number generators (`random_lcd`, `random_mt`) and a hardware noise-based true random number generator (`secret`).
-
-- [socket](include/MSTL/network/tcp/tcp_socket.hpp)
-
-Defines the network socket class `socket`.
-
-- [functor](include/MSTL/core/functional/functor.hpp)
-
-Defines functors and functor adapters (deprecated in C++11).
-
-- [iterator_traits](include/MSTL/core/iterator/iterator_traits.hpp)
-
-Defines the iterator extractor `iterator_traits` and convenient type aliases.
-
-- [interface](include/MSTL/core/interface/interface.hpp)
-
-Defines a series of basic CRTP base classes and globally generated functions based on them.
-
-- [hash](include/MSTL/core/functional/hash.hpp)
-
-Defines hash functions for basic types and utility hash functions like FNV.
-
-- [numeric_limits](include/MSTL/core/numeric/numeric_limits.hpp)
-
-Defines the numeric type information class `numeric_limits`, providing mathematical details of numeric types at compile time.
-
-- [mutex](include/MSTL/core/async/mutex.hpp)
-
-Defines the mutex class `mutex` and the scoped locking class `lock_guard`.
-
-- [concepts](include/MSTL/core/typeinfo/concepts.hpp)
-
-Defines common constraints and iterator type judgment trait constants.
-
-- [utility](include/MSTL/core/utility/utility.hpp)
-
-Defines `compressed_pair`, `pair` and their hash functions, type erasure functions, and functions to convert C-style strings to numeric types.
-
-- [tuple](include/MSTL/core/utility/tuple.hpp)
-
-Defines the tuple class `tuple` and its auxiliary functions.
-
-- [mathlib](include/MSTL/core/numeric/math.hpp)
-
-Defines common `constexpr` mathematical constants and functions.
-
-- [ratio](include/MSTL/core/numeric/ratio.hpp)
-
-Defines the ratio class `ratio`.
-
-- [numeric](include/MSTL/core/algorithm/numeric.hpp)
-
-Defines mathematical algorithms.
-
-- [heap](include/MSTL/core/algorithm/heap.hpp)
-
-Defines ordinary heap algorithms.
-
-- [iterator](include/MSTL/core/iterator/iterator.hpp)
-
-Defines iterator utility functions and iterator adapters.
-
-- [algobase](include/MSTL/core/algorithm/algobase.hpp)
-
-Defines comparison, copy, and move algorithms.
-
-- [any](include/MSTL/core/utility/any.hpp)
-
-Defines the `any` class, which can store any type.
-
-- [cstring](include/MSTL/core/string/cstring.hpp)
-
-Defines memory operation functions and C-style string operation functions.
-
-- [memory](include/MSTL/core/memory/memories.hpp)
-
-Defines memory operation functions, allocator classes, and smart pointer classes.
-
-- [functional](include/MSTL/core/functional/function.hpp)
-
-Defines the `function` class that hosts function pointers and function-like types.
-
-- [algo](include/MSTL/core/algorithm/algo.hpp)
-
-Defines algorithms for judgment, set operations, searching, merging, moving, transforming, binding, and permutations.
-
-- [thread](include/MSTL/core/async/thread.hpp)
-
-Defines the thread class `thread`.
-
-- [sort](include/MSTL/core/algorithm/sort.hpp)
-
-Defines multiple sorting algorithms: bubble, cocktail, selection, shell, counting, bucket, index, merge,
-partial, quick, introspective, tim, and monkey sort.
-
-- [algorithm](include/MSTL/core/algorithm/algorithm.hpp)
-
-Includes basic algorithms and mathematical algorithms, 
-and defines concurrent algorithms for convenient inclusion by users.
-
-- [char_traits](include/MSTL/core/string/char_traits.hpp)
-
-Defines the string traits class `basic_char_traits` and auxiliary extraction functions.
-
-- [basic_string_view](include/MSTL/core/string/basic_string_view.hpp)
-
-Defines the base class `basic_string_view` for string views.
-
-- [string_view](include/MSTL/core/string/string_view.hpp)
-
-Defines the string view class `string_view`.
-
-- [basic_string](include/MSTL/core/string/basic_string.hpp)
-
-Defines the base string class `basic_string`.
-
-- [string](include/MSTL/core/string/string.hpp)
-
-Defines the string class `string`, providing conversion functions between different character encodings.
-
-- [format](include/MSTL/core/string/format.hpp)
-
-Defines the string formatting helper class `formatter` and the formatting function `format`.
-
-- [encrypt](include/MSTL/core/encrypt/encrypt.hpp)
-
-Defines character encryption types and functions: `XOR`, `base64`, `MD5`, `SHA1`, `SHA256`, and `AES256`.
-
-- [check_type](include/MSTL/core/typeinfo/check_type.hpp)
-
-Defines the type information analysis function `check_type` to standardize type information across compilers.
-
-- [serialize](include/MSTL/core/interface/iobject.hpp)
-
-Defines a series of CRTP base classes for serialization.
-
-- [datetime](include/MSTL/core/time/datetime.hpp)
-
-Defines time classes (`time`, `date`, `datetime`) and UNIX timestamp class (`timestamp`), providing convenient utility functions.
-
-- [hexadecimal](include/MSTL/core/utility/hexadecimal.hpp)
-
-Defines the hexadecimal class `hexadecimal` and its formatting helper class.
-
-- [color](include/MSTL/core/utility/color.hpp)
-
-Defines the color class `color`.
-
-- [console](include/MSTL/core/system/console.hpp)
-
-Defines the IO base class `io_base` and the IO console class `console`.
-
-- [variant](include/MSTL/core/utility/variant.hpp)
-
-Defines the `variant` class, which can host multiple types in the same memory block.
-
-- [optional](include/MSTL/core/utility/optional.hpp)
-
-Defines the `optional` class, which can host a type and optionally set a null value `nullopt`.
-
-- [array](include/MSTL/core/container/array.hpp)
-
-Defines the array class `array`, which allows compile-time value determination and safer, more modern array operations.
-
-- [bitmap](include/MSTL/core/container/bitmap.hpp)
-
-Defines the bitmap class `bitmap`, which does not exist as a `vector<bool>` specialization.
-
-- [vector](include/MSTL/core/container/vector.hpp)
-
-Defines the vector class `vector`.
-
-- [list](include/MSTL/core/container/list.hpp)
-
-Defines the doubly linked list class `list`.
-
-- [deque](include/MSTL/core/container/deque.hpp)
-
-Defines the deque class `deque`, which supports O(1) insertion at both front and back.
-
-- [rb_tree](include/MSTL/core/container/rb_tree.hpp)
-
-Defines the red-black tree class `rb_tree`, used as a proxy class for ordered containers.
-
-- [hashtable](include/MSTL/core/container/hashtable.hpp)
-
-Defines the hash table class `hashtable`, used as a proxy class for unordered containers.
-
-- [unordered_map](include/MSTL/core/container/unordered_map.hpp)
-
-Defines the unordered dictionary classes `unordered_map` and `unordered_multimap`.
-
-- [unordered_set](include/MSTL/core/container/unordered_set.hpp)
-
-Defines the unordered set classes `unordered_set` and `unordered_multiset`.
-
-- [leonardo_heap](include/MSTL/core/algorithm/leonardo_heap.hpp)
-
-Defines the Leonardo heap algorithm `leonardo_heap`.
-
-- [queue](include/MSTL/core/container/queue.hpp)
-
-Defines the queue class `queue` and the priority queue class `priority_queue` based on ordinary heap algorithms.
-
-- [stack](include/MSTL/core/container/stack.hpp)
-
-Defines the stack class `stack`.
-
-- [map](include/MSTL/core/container/map.hpp)
-
-Defines the ordered dictionary classes `map` and `multimap`.
-
-- [set](include/MSTL/core/container/set.hpp)
-
-Defines the ordered set classes `set` and `multiset`.
-
-- [file](include/MSTL/core/file/file.hpp)
-
-Defines the file class `file`, which uses an 8KB buffer to handle high-volume small data read/write operations.
-
-- [json](include/MSTL/core/json.hpp)
-
-Defines the JSON parser class `json_parser` and JSON builder class `json_builder`.
-
-- [session](include/MSTL/network/http/session.hpp)
-
-Defines the cookie class, session class `session`, and HTTP constants.
-
-- [servlet](include/MSTL/network/http/http_server.hpp)
-
-Defines the microservice class `servlet`, providing port listening, filter configuration, cookie setting, session attribute operations, and other functionalities.
-
-- [trace_memory](include/MSTL/core/memory/trace_memory.hpp)
-
-Defines the Boost-based stack-tracing allocator `trace_allocator`.
-
-- [database_pool](include/MSTL/database/database_pool.hpp)
-
-Defines polymorphic database connections (supporting MySQL, Sqlite3, Redis) and the database connection pool `database_pool`.
-
-- [thread_pool](include/MSTL/core/async/thread_pool.hpp)
-
-Defines the polling thread pool class `thread_pool`.
-
-- [timer](include/MSTL/core/async/timer.hpp)
-
-Defines the timer class `timer`.
-
+## Include Structure
+
+```bash
+├───include
+│   └───MSTL
+│       │   MSTL.hpp
+│       │
+│       ├───compress
+│       │       zlib_compress.hpp
+│       │
+│       ├───core
+│       │   ├───algorithm
+│       │   │       algorithm.hpp
+│       │   │       bound.hpp
+│       │   │       compare.hpp
+│       │   │       erase.hpp
+│       │   │       ext_sort.hpp
+│       │   │       heap.hpp
+│       │   │       iterator.hpp
+│       │   │       leonardo_heap.hpp
+│       │   │       merge.hpp
+│       │   │       numeric.hpp
+│       │   │       parallel.hpp
+│       │   │       partition.hpp
+│       │   │       permutation.hpp
+│       │   │       search.hpp
+│       │   │       set.hpp
+│       │   │       shift.hpp
+│       │   │       shuffle.hpp
+│       │   │       sort.hpp
+│       │   │       type_erase.hpp
+│       │   │
+│       │   ├───async
+│       │   │       async.hpp
+│       │   │       atomic.hpp
+│       │   │       atomic_base.hpp
+│       │   │       atomic_futex.hpp
+│       │   │       atomic_futex_base.hpp
+│       │   │       atomic_timed_wait.hpp
+│       │   │       atomic_wait.hpp
+│       │   │       at_thread_exit.hpp
+│       │   │       call_once.hpp
+│       │   │       condition_variable.hpp
+│       │   │       future.hpp
+│       │   │       future_base.hpp
+│       │   │       jthread.hpp
+│       │   │       lock_free_queue.hpp
+│       │   │       mutex.hpp
+│       │   │       packaged_task.hpp
+│       │   │       promise.hpp
+│       │   │       semaphore.hpp
+│       │   │       shared_mutex.hpp
+│       │   │       stop_token.hpp
+│       │   │       thread.hpp
+│       │   │       thread_pool.hpp
+│       │   │       timer.hpp
+│       │   │
+│       │   ├───config
+│       │   │       c++config.hpp
+│       │   │       undef_cmacro.hpp
+│       │   │
+│       │   ├───container
+│       │   │       array.hpp
+│       │   │       bitmap.hpp
+│       │   │       bitset.hpp
+│       │   │       deque.hpp
+│       │   │       hashtable.hpp
+│       │   │       list.hpp
+│       │   │       map.hpp
+│       │   │       multimap.hpp
+│       │   │       multiset.hpp
+│       │   │       priority_queue.hpp
+│       │   │       queue.hpp
+│       │   │       rb_tree.hpp
+│       │   │       set.hpp
+│       │   │       stack.hpp
+│       │   │       unordered_map.hpp
+│       │   │       unordered_multimap.hpp
+│       │   │       unordered_multiset.hpp
+│       │   │       unordered_set.hpp
+│       │   │       vector.hpp
+│       │   │
+│       │   ├───encrypt
+│       │   │       aes256.hpp
+│       │   │       base64.hpp
+│       │   │       encrypt.hpp
+│       │   │       md5.hpp
+│       │   │       sha1.hpp
+│       │   │       sha256.hpp
+│       │   │       xor.hpp
+│       │   │
+│       │   ├───exception
+│       │   │       assertion.hpp
+│       │   │       exception.hpp
+│       │   │       exception_ptr.hpp
+│       │   │       scope_guard.hpp
+│       │   │       terminate.hpp
+│       │   │
+│       │   ├───file
+│       │   │   │   file.hpp
+│       │   │   │   file_constants.hpp
+│       │   │   │   file_watcher.hpp
+│       │   │   │   path.hpp
+│       │   │   │   temp_file.hpp
+│       │   │   │
+│       │   │   ├───env
+│       │   │   │       env_builder.hpp
+│       │   │   │       env_parser.hpp
+│       │   │   │       env_value.hpp
+│       │   │   │
+│       │   │   ├───ini
+│       │   │   │       ini_builder.hpp
+│       │   │   │       ini_parser.hpp
+│       │   │   │       ini_value.hpp
+│       │   │   │
+│       │   │   ├───json
+│       │   │   │       json_builder.hpp
+│       │   │   │       json_parser.hpp
+│       │   │   │       json_value.hpp
+│       │   │   │
+│       │   │   ├───toml
+│       │   │   │       toml_builder.hpp
+│       │   │   │       toml_parser.hpp
+│       │   │   │       toml_value.hpp
+│       │   │   │
+│       │   │   └───yaml
+│       │   │           yaml_builder.hpp
+│       │   │           yaml_parser.hpp
+│       │   │           yaml_value.hpp
+│       │   │
+│       │   ├───functional
+│       │   │       apply.hpp
+│       │   │       call_wrapper.hpp
+│       │   │       function.hpp
+│       │   │       functor.hpp
+│       │   │       functor_adapter.hpp
+│       │   │       hash.hpp
+│       │   │       invoke.hpp
+│       │   │
+│       │   ├───interface
+│       │   │       icharacter.hpp
+│       │   │       icollector.hpp
+│       │   │       icommon.hpp
+│       │   │       inumeric.hpp
+│       │   │       iobject.hpp
+│       │   │       ipackage.hpp
+│       │   │       istringify.hpp
+│       │   │
+│       │   ├───iterator
+│       │   │       file_line_iterator.hpp
+│       │   │       insert_iterator.hpp
+│       │   │       iterator_traits.hpp
+│       │   │       normal_iterator.hpp
+│       │   │       path_iterator.hpp
+│       │   │       ranges.hpp
+│       │   │       reverse_iterator.hpp
+│       │   │
+│       │   ├───memory
+│       │   │       aligned_buffer.hpp
+│       │   │       allocated_ptr.hpp
+│       │   │       allocator_traits.hpp
+│       │   │       bit.hpp
+│       │   │       builtin_allocator.hpp
+│       │   │       construct.hpp
+│       │   │       memory.hpp
+│       │   │       memory_view.hpp
+│       │   │       shared_ptr.hpp
+│       │   │       standard_allocator.hpp
+│       │   │       temporary_buffer.hpp
+│       │   │       trace_memory.hpp
+│       │   │       uninitialized.hpp
+│       │   │       unique_ptr.hpp
+│       │   │       weak_ptr.hpp
+│       │   │
+│       │   ├───numeric
+│       │   │       math.hpp
+│       │   │       numeric_limits.hpp
+│       │   │       numeric_types.hpp
+│       │   │       random.hpp
+│       │   │       ratio.hpp
+│       │   │       static_numeric.hpp
+│       │   │
+│       │   ├───serialize
+│       │   │       concepts.hpp
+│       │   │       serialize.hpp
+│       │   │       serialize_traits.hpp
+│       │   │
+│       │   ├───string
+│       │   │       basic_string.hpp
+│       │   │       basic_string_view.hpp
+│       │   │       character.hpp
+│       │   │       char_traits.hpp
+│       │   │       char_types.hpp
+│       │   │       cstring.hpp
+│       │   │       format.hpp
+│       │   │       string.hpp
+│       │   │       string_util.hpp
+│       │   │       string_view.hpp
+│       │   │       to_numerics.hpp
+│       │   │       to_string.hpp
+│       │   │       vsprintf.hpp
+│       │   │
+│       │   ├───system
+│       │   │   │   cmdline.hpp
+│       │   │   │   console.hpp
+│       │   │   │   environment.hpp
+│       │   │   │   process.hpp
+│       │   │   │   signal.hpp
+│       │   │   │   stacktrace.hpp
+│       │   │   │
+│       │   │   └───device
+│       │   │           device.hpp
+│       │   │           device_constants.hpp
+│       │   │           serial_port.hpp
+│       │   │           storage_device.hpp
+│       │   │
+│       │   ├───time
+│       │   │       clocks.hpp
+│       │   │       datetime.hpp
+│       │   │       duration.hpp
+│       │   │       time_point.hpp
+│       │   │
+│       │   ├───typeinfo
+│       │   │       check_type.hpp
+│       │   │       concepts.hpp
+│       │   │       pointer_traits.hpp
+│       │   │       tags.hpp
+│       │   │       types.hpp
+│       │   │       type_traits.hpp
+│       │   │
+│       │   └───utility
+│       │           any.hpp
+│       │           color.hpp
+│       │           compressed_pair.hpp
+│       │           expected.hpp
+│       │           hexadecimal.hpp
+│       │           integer_sequence.hpp
+│       │           optional.hpp
+│       │           packages.hpp
+│       │           pair.hpp
+│       │           tuple.hpp
+│       │           variant.hpp
+│       │
+│       ├───database
+│       │   │   database_pool.hpp
+│       │   │   db_config.hpp
+│       │   │   db_interface.hpp
+│       │   │   sql_builder.hpp
+│       │   │
+│       │   ├───mysql
+│       │   │       mysql_config.hpp
+│       │   │       mysql_connect.hpp
+│       │   │       mysql_prepared_result.hpp
+│       │   │       mysql_prepared_statement.hpp
+│       │   │       mysql_result.hpp
+│       │   │
+│       │   ├───postgresql
+│       │   │       postgresql_config.hpp
+│       │   │       postgresql_connect.hpp
+│       │   │       postgresql_prepared_result.hpp
+│       │   │       postgresql_prepared_statement.hpp
+│       │   │       postgresql_result.hpp
+│       │   │
+│       │   ├───redis
+│       │   │       redis_config.hpp
+│       │   │       redis_connect.hpp
+│       │   │       redis_result.hpp
+│       │   │
+│       │   └───sqlite
+│       │           sqlite_config.hpp
+│       │           sqlite_connect.hpp
+│       │           sqlite_prepared_result.hpp
+│       │           sqlite_prepared_statement.hpp
+│       │           sqlite_result.hpp
+│       │
+│       ├───logging
+│       │       file_sink.hpp
+│       │       logger.hpp
+│       │       log_event.hpp
+│       │       log_formatter.hpp
+│       │       log_sink.hpp
+│       │
+│       ├───network
+│       │   │   ssl_context.hpp
+│       │   │   ssl_socket.hpp
+│       │   │   tcp_client.hpp
+│       │   │   tcp_server.hpp
+│       │   │   tcp_socket.hpp
+│       │   │   url.hpp
+│       │   │
+│       │   ├───dns
+│       │   │       dns_client.hpp
+│       │   │       dns_constants.hpp
+│       │   │       dns_message.hpp
+│       │   │
+│       │   └───http
+│       │           http_client.hpp
+│       │           http_client_message.hpp
+│       │           http_constants.hpp
+│       │           http_filter.hpp
+│       │           http_router.hpp
+│       │           http_server.hpp
+│       │           http_server_message.hpp
+│       │           session.hpp
+│       │
+│       └───plugin
+│               dynamic_library.hpp
+│               iplugin.hpp
+│               plugin_entry.hpp
+│               plugin_manager.hpp
+```
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## To-Do Features
+
+- SSO optimization
+- Unified standard documentation
+- Unified container-related assert messages
+- vcpkg integration
+- Support for yaml and xml configurations
+- Support for macOS and embedded Linux

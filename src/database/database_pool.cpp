@@ -1,10 +1,10 @@
 #include <MSTL/database/database_pool.hpp>
+#include <MSTL/core/system/console.hpp>
 #ifdef MSTL_SUPPORT_DB__
 #include <MSTL/database/mysql/mysql_connect.hpp>
 #include <MSTL/database/postgresql/postgresql_connect.hpp>
 #include <MSTL/database/redis/redis_connect.hpp>
 #include <MSTL/database/sqlite/sqlite_connect.hpp>
-#include <MSTL/core/system/console.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -80,7 +80,6 @@ connect_timeout_(connect_timeout), running_(true) {
         }
 #endif
         default: {
-            // never run:
             throw_exception(value_exception("Useless Database Type"));
             break;
         }
