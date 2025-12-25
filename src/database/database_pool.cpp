@@ -4,6 +4,7 @@
 #include <MSTL/database/postgresql/postgresql_connect.hpp>
 #include <MSTL/database/redis/redis_connect.hpp>
 #include <MSTL/database/sqlite/sqlite_connect.hpp>
+#include <MSTL/core/system/console.hpp>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -85,6 +86,8 @@ connect_timeout_(connect_timeout), running_(true) {
         }
     }
 
+    size_t record = 0;
+    size_t threshhold = 0;
     for (size_t i = 0; i < init_size_; i++) {
         auto* p = factory_->create_connect();
         if (p != nullptr) {
@@ -92,6 +95,14 @@ connect_timeout_(connect_timeout), running_(true) {
             connect_queue_.push(p);
         }
         else {
+            if (record == i) {
+                ++threshhold;
+                if (threshhold == 5) {
+                    printcln(color::red(), "Retry connecting database in the same loop failed");
+                    stop();
+                }
+            }
+            record = i;
             --i;
         }
     }
@@ -99,7 +110,7 @@ connect_timeout_(connect_timeout), running_(true) {
     scanner_ = _MSTL thread([this] { scanner_connect_task(); });
 }
 
-database_pool::~database_pool() {
+void database_pool::stop() {
     running_ = false;
     cv_.notify_all();
 

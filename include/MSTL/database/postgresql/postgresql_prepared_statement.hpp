@@ -7,10 +7,10 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
 struct __pgsql_pstmt_data {
-    vector<string> param_values;
-    vector<const char*> param_ptrs;
-    vector<int> param_lengths;
-    vector<int> param_formats;
+    vector<string> param_values{};
+    vector<const char*> param_ptrs{};
+    vector<int> param_lengths{};
+    vector<int> param_formats{};
 };
 MSTL_END_INNER__
 
@@ -20,7 +20,7 @@ private:
     string stmt_name_{};
     string sql_{};
     uint32_t param_count_ = 0;
-    unique_ptr<_INNER __pgsql_pstmt_data> data_ = make_unique<_INNER __pgsql_pstmt_data>();
+    _INNER __pgsql_pstmt_data* data_ = new _INNER __pgsql_pstmt_data();
     vector<vector<char>> param_buffers_{};
     string last_error_{};
     uint32_t last_errno_ = 0;

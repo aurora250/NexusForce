@@ -387,7 +387,7 @@ if(MSVC)
 endif()
 
 target_compile_definitions(MSTL
-        PRIVATE
+        PUBLIC
         $<$<CONFIG:Debug>:MSTL_STATE_DEBUG__>
 )
 

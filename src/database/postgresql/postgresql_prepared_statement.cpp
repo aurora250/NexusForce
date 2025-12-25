@@ -38,6 +38,7 @@ postgresql_prepared_statement::~postgresql_prepared_statement() {
         if (result) {
             _MSTL_POSTGRESQL PQclear(result);
         }
+        delete data_;
     }
 }
 
@@ -163,8 +164,10 @@ unique_ptr<idb_prepared_result> postgresql_prepared_statement::execute_query() {
 
     _MSTL_POSTGRESQL PGresult* result = _MSTL_POSTGRESQL PQexecPrepared(
         conn_, stmt_name_.c_str(), param_count_,
-        data_->param_ptrs.data(), data_->param_lengths.data(),
-        data_->param_formats.data(), 0);
+        data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
+        data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
+        data_->param_formats.empty() ? nullptr : data_->param_formats.data(),
+        0);
 
     if (!result) {
         set_error("Failed to execute prepared statement query", 6);

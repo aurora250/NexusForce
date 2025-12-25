@@ -11,12 +11,12 @@ struct default_delete {
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
 	MSTL_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
 
-    MSTL_CONSTEXPR20 void operator()(const T* ptr) const {
+    MSTL_CONSTEXPR20 void operator()(const T* ptr) const noexcept {
 	    delete ptr;
     }
 
     template <typename U>
-    MSTL_CONSTEXPR20 default_delete<U> rebind() && {
+    MSTL_CONSTEXPR20 default_delete<U> rebind() && noexcept {
         return default_delete<U>();
     }
 };
@@ -29,12 +29,12 @@ struct default_delete<T[]> {
     MSTL_CONSTEXPR20 default_delete(const default_delete<U[]>&) noexcept {}
 
     template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
-    MSTL_CONSTEXPR20 void operator ()(U* ptr) const{
+    MSTL_CONSTEXPR20 void operator ()(U* ptr) const noexcept {
 	    delete [] ptr;
 	}
 
     template <typename U>
-    MSTL_CONSTEXPR20 default_delete<U[]> rebind() && {
+    MSTL_CONSTEXPR20 default_delete<U[]> rebind() && noexcept {
         return default_delete<U[]>();
     }
 };

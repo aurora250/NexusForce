@@ -5,7 +5,9 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-bool tcp_client::try_connect(const string& host, const uint16_t port, const string& ip, const bool ipv6) {
+bool tcp_client::try_connect(
+    const string& host, const uint16_t port,
+    const string& ip, const bool ipv6) {
     tcp_socket s(
         ipv6 ? SOCKET_DOMAIN::IPV6 : SOCKET_DOMAIN::IPV4,
         SOCKET_TYPE::STREAM,
@@ -48,16 +50,26 @@ bool tcp_client::connect(const string& host, const uint16_t port) {
     }
     close();
 
-    vector<string> ips = dns_.resolve_a(host);
-    for (const auto &ip : ips) {
-        if (try_connect(host, port, ip, false)) {
+    if (tcp_socket::is_ipv4(host.data())) {
+        if (try_connect(host, port, host, false)) {
             return true;
         }
-    }
-    vector<string> ips6 = dns_.resolve_aaaa(host);
-    for (const auto &ip : ips6) {
-        if (try_connect(host, port, ip, true)) {
+    } else if (tcp_socket::is_ipv6(host.data())) {
+        if (try_connect(host, port, host, true)) {
             return true;
+        }
+    } else {
+        vector<string> ips = dns_.resolve_a(host);
+        for (const auto &ip : ips) {
+            if (try_connect(host, port, ip, false)) {
+                return true;
+            }
+        }
+        vector<string> ips6 = dns_.resolve_aaaa(host);
+        for (const auto &ip : ips6) {
+            if (try_connect(host, port, ip, true)) {
+                return true;
+            }
         }
     }
     return false;

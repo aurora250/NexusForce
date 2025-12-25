@@ -36,12 +36,14 @@ public:
         size_t init_size = 50, size_t max_size = 1024,
         size_t max_idle_time = 30, size_t connect_timeout = 100);
 
-    ~database_pool();
+    ~database_pool() { stop(); }
 
     database_pool(const database_pool&) = delete;
     database_pool& operator =(const database_pool&) = delete;
     database_pool(database_pool&&) = delete;
     database_pool& operator =(database_pool&&) = delete;
+
+    void stop();
 
     _MSTL shared_ptr<idb_connect> get_connect() {
         return get_connect_impl<idb_connect>();

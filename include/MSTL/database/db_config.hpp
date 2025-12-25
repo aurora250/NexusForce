@@ -31,7 +31,7 @@ struct MSTL_API db_config {
     uint16_t port = 0;
 
 #ifdef MSTL_SUPPORT_POSTGRESQL__
-    static db_config for_postgresql(const string& db);
+    static db_config for_postgresql(const string& db = "postgres");
 #endif
 
 #ifdef MSTL_SUPPORT_MYSQL__

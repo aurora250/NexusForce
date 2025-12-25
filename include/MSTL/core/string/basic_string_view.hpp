@@ -162,7 +162,7 @@ public:
     static constexpr auto npos = static_cast<size_type>(-1);
 
 private:
-    const_pointer data_ = nullptr;
+    const_pointer data_ = "";
     size_type size_ = 0;
 
     MSTL_NODISCARD MSTL_ALWAYS_INLINE

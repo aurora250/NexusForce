@@ -2350,12 +2350,14 @@ void test_mysql() {
         pool.get_tb_connect())->prepare_statement(sql);
     pstmt->bind_param(0, 10);
     auto res = pstmt->execute_query();
-    println(res->column_names());
-    while (res->next()) {
-        for (int i = 0; i < res->column_count(); ++i) {
-            print(res->get(i), " ");
+    if (res) {
+        println(res->column_names());
+        while (res->next()) {
+            for (int i = 0; i < res->column_count(); ++i) {
+                print(res->get(i), " ");
+            }
+            println();
         }
-        println();
     }
 #endif
 }
@@ -2368,41 +2370,46 @@ void test_redis() {
     println(conn->is_valid());
     println(conn->update("SET age 20"));
     auto res = dynamic_pointer_cast<redis_result>(conn->get("age"));
-    println(res->empty());
-    while (res->next()) {
-        println(res->value());
+    if (res) {
+        println(res->empty());
+        while (res->next()) {
+            println(res->value());
+        }
     }
 #endif
 }
 
 void test_postgre() {
 #ifdef MSTL_SUPPORT_POSTGRESQL__
-    db_config postgre_config = db_config::for_postgresql("user");
+    db_config postgre_config = db_config::for_postgresql();
     postgre_config.password = "483674";
-    database_pool pool(DB_TYPE::POSTGRESQL, postgre_config);
+    database_pool pool(DB_TYPE::POSTGRESQL, postgre_config, 10, 20, 2);
 
     const auto sql = sql_builder()
         .select({"username", "email"})
-        .from("user")
-        .where_le("age", to_string(30))
+        .from("dbuser")
+        .where_le("age", "$1")
         .build();
     auto pstmt = dynamic_pointer_cast<postgresql_connect>(
         pool.get_tb_connect())->prepare_statement(sql);
-    pstmt->bind_param(0, 10);
+    pstmt->bind_param(1, 30);
     auto res = pstmt->execute_query();
-    println(res->column_names());
-    while (res->next()) {
-        for (int i = 0; i < res->column_count(); ++i) {
-            print(res->get(i), " ");
+    if (res) {
+        println(res->column_names());
+        println(res->column_count());
+        while (res->next()) {
+            for (int i = 0; i < res->column_count(); ++i) {
+                print(res->get(i), " ");
+            }
+            println();
         }
-        println();
     }
 #endif
 }
 
 void test_dbpool() {
 #ifdef MSTL_SUPPORT_MYSQL__
-    auto begin = high_resolution_clock::now();
+    auto begin = timestamp::now();
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
 
@@ -2411,7 +2418,7 @@ void test_dbpool() {
         for (int i = 0; i < 5000; i++) {
             bool fin = pool.get_connect()->update("SELECT 1");
         }
-        println((begin - high_resolution_clock::now()).count());
+        println(timestamp::now() - begin);
 
         auto result = pool.get_tb_connect()->query("SELECT * FROM book");
         while (result->next()) {
@@ -2434,7 +2441,7 @@ void test_dbpool() {
         println(result->row_count(), ", ", result->column_count());
     }
 
-    begin = high_resolution_clock::now();
+    begin = timestamp::now();
     for (int i = 0; i < 5000; i++) {
         char sql[power(2, 10)] = {};
         _MSTL sprintf(sql, "SELECT 1");
@@ -2444,7 +2451,7 @@ void test_dbpool() {
         }
         delete conn;
     }
-    println((begin - high_resolution_clock::now()).count());
+    println(timestamp::now() - begin);
 #endif
 }
 

@@ -55,7 +55,7 @@ private:
 
 public:
     tcp_socket() noexcept = default;
-    explicit tcp_socket(const socket_t fd) : sockfd_(_MSTL move(fd)) {}
+    explicit tcp_socket(const socket_t fd) : sockfd_(fd) {}
 
     explicit tcp_socket(const SOCKET_DOMAIN domain,
         const SOCKET_TYPE type = SOCKET_TYPE::STREAM,
@@ -180,7 +180,7 @@ public:
         ::sockaddr_storage addr{};
         auto *a4 = reinterpret_cast<::sockaddr_in*>(&addr);
         a4->sin_family = AF_INET;
-        if (::inet_pton(AF_INET, ip, &a4->sin_addr) == -1) {
+        if (::inet_pton(AF_INET, ip, &a4->sin_addr) != 1) {
             return false;
         }
         a4->sin_port = ::htons(port);
@@ -192,7 +192,7 @@ public:
         ::sockaddr_storage addr{};
         auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
         a6->sin6_family = AF_INET6;
-        if (::inet_pton(AF_INET6, ip, &a6->sin6_addr) == -1) {
+        if (::inet_pton(AF_INET6, ip, &a6->sin6_addr) != 1) {
             return false;
         }
         a6->sin6_port = ::htons(port);
@@ -225,8 +225,8 @@ public:
         ::sockaddr_in addr{};
         addr.sin_family = AF_INET;
         addr.sin_port = ::htons(port);
-        if (::inet_pton(AF_INET, ip, &addr.sin_addr) == -1) {
-            return false;
+        if (::inet_pton(AF_INET, ip, &addr.sin_addr) != 1) {
+            return -1;
         }
         return ::sendto(
             sockfd_, static_cast<const char*>(buf), len, flags,
@@ -242,6 +242,16 @@ public:
         ::sockaddr_in from_addr{};
         ::socklen_t from_len = sizeof(from_addr);
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
+    }
+
+    MSTL_NODISCARD static bool is_ipv4(const char* host) noexcept {
+        ::sockaddr_in a4;
+        return ::inet_pton(AF_INET, host, &(a4.sin_addr)) == 1;
+    }
+
+    MSTL_NODISCARD static bool is_ipv6(const char* host) noexcept {
+        ::sockaddr_in6 a6;
+        return ::inet_pton(AF_INET6, host, &(a6.sin6_addr)) == 1;
     }
 };
 

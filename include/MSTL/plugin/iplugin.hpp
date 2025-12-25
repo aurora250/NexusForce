@@ -25,12 +25,28 @@ private:
     void(* func_)(iplugin*) = nullptr;
 
 public:
-    plugin_deleter() = default;
-    explicit plugin_deleter(void(* func)(iplugin*)) : func_(func) {}
+    plugin_deleter() noexcept = default;
     ~plugin_deleter() = default;
+
+    explicit plugin_deleter(void(* func)(iplugin*)) noexcept : func_(func) {}
+
+    plugin_deleter(const plugin_deleter&) = delete;
+    plugin_deleter& operator =(const plugin_deleter&) = delete;
+    plugin_deleter(plugin_deleter&& pd) noexcept : func_(pd.func_) {
+        pd.func_ = nullptr;
+    }
+    plugin_deleter& operator =(plugin_deleter&& pd) noexcept {
+        func_ = pd.func_;
+        pd.func_ = nullptr;
+        return *this;
+    }
 
     void operator ()(iplugin* p) const {
         if (p) func_(p);
+    }
+
+    plugin_deleter rebind() && noexcept {
+        return plugin_deleter(move(*this));
     }
 };
 

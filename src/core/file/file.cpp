@@ -607,7 +607,7 @@ file::size_type file::read(string& str, const size_type size) const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
     str.clear();
     if (size == 0) return 0;
-    str.reserve(size);
+    str.resize(size);
     return file::read(str.data(), size);
 }
 
