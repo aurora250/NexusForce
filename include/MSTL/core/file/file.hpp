@@ -88,10 +88,10 @@ private:
     bool opened_ = false;
     bool append_mode_ = false;
 
-    mutable vector<char> read_buffer_{};
+    mutable vector<byte_t> read_buffer_{};
     mutable size_type read_buffer_pos_ = 0;
     mutable size_type read_buffer_size_ = 0;
-    mutable vector<char> write_buffer_{};
+    mutable vector<byte_t> write_buffer_{};
     mutable size_type write_buffer_pos_ = 0;
 
     mutable mutex map_mutex_;
@@ -174,11 +174,14 @@ public:
 
     size_type write(const string& data, size_type size);
     size_type write(const string& data);
+    size_type write(const void* data, size_type size);
 
+    size_type read(void* buffer, size_type size) const;
     size_type read(string& str, size_type size) const;
     size_type read(string& str) const;
     MSTL_NODISCARD string read() const;
 
+    size_type read_binary(void* buffer, size_type size) const;
     size_type read_binary(string& str, size_type size) const;
     size_type read_binary(string& str) const;
     MSTL_NODISCARD string read_binary() const;
@@ -189,7 +192,7 @@ public:
 
     vector<string> read_chunks(size_type chunk_size = FILE_BUFFER_SIZE * 16);
     bool write_chunks(const vector<string>& chunks);
-    MSTL_NODISCARD vector<chunk_info> chunks_info(size_type chunk_size);
+    MSTL_NODISCARD vector<chunk_info> chunks_info(size_type chunk_size) const;
 
     async_result async_read(string& buffer, size_type size, difference_type offset = -1);
     async_result async_write(string data, size_type size, difference_type offset = -1);
@@ -238,7 +241,7 @@ public:
 
     bool try_lock(difference_type offset,
         difference_type length, FILE_LOCK mode) const noexcept;
-    bool is_locked(difference_type offset,
+    MSTL_NODISCARD bool is_locked(difference_type offset,
         difference_type length, FILE_LOCK* out_type) const noexcept;
 
     bool lock_whole(FILE_LOCK mode) const noexcept;

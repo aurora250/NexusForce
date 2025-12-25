@@ -133,7 +133,7 @@ bool file::flush_write_buffer() const noexcept {
 #elif defined(MSTL_PLATFORM_LINUX__)
     ssize_t total_written = 0;
     while (total_written < static_cast<ssize_t>(write_buffer_pos_)) {
-        ssize_t bytes_written = ::write(
+        const ssize_t bytes_written = ::write(
             handle_,
             write_buffer_.data() + total_written,
             write_buffer_pos_ - total_written
@@ -524,26 +524,34 @@ bool file::flush() const noexcept {
 
 file::size_type file::write(const string& data, const size_type size) {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
-
     const size_type real_size = size > data.size() ? data.size() : size;
-    if (real_size == 0) return 0;
+    return file::write(data.data(), real_size);
+}
+
+file::size_type file::write(const string& data) {
+    return this->write(data, data.size());
+}
+
+file::size_type file::write(const void* data, const size_type size) {
+    if (!opened_ || handle_ == INVALID_HANDLE() || !data) return 0;
+    if (size == 0) return 0;
 
     if (append_mode_ && !seek(0, FILE_POINTER::END)) {
         set_last_error();
         return 0;
     }
 
-    if (real_size > buffer_size_ * 4) {
+    if (size > buffer_size_ * 4) {
         if (!flush_write_buffer()) return 0;
 
         size_type total_written = 0;
-        const char* ptr = data.data();
+        const auto ptr = static_cast<const byte_t*>(data);
 
-        while (total_written < real_size) {
+        while (total_written < size) {
 #ifdef MSTL_PLATFORM_WINDOWS__
             size_type bytes_written = 0;
             const size_type to_write = _MSTL min<size_type>(
-                real_size - total_written,
+                size - total_written,
                 numeric_limits<size_type>::max()
             );
             if (!::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr)) {
@@ -554,7 +562,7 @@ file::size_type file::write(const string& data, const size_type size) {
             if (bytes_written != to_write) break;
 #elif defined(MSTL_PLATFORM_LINUX__)
             const ssize_t written = ::write(
-                handle_, ptr + total_written, real_size - total_written);
+                handle_, ptr + total_written, size - total_written);
             if (written == -1) {
                 if (errno == EINTR) continue;
                 set_last_error();
@@ -567,16 +575,15 @@ file::size_type file::write(const string& data, const size_type size) {
         return total_written;
     }
 
-    const char* ptr = data.data();
+    auto ptr = static_cast<const char*>(data);
     size_type total_written = 0;
-    size_type remaining = real_size;
+    size_type remaining = size;
 
     while (remaining > 0) {
         const size_type available = buffer_size_ - write_buffer_pos_;
         const size_type to_copy = _MSTL min(remaining, available);
 
-        _MSTL copy_n(ptr, to_copy,
-                     write_buffer_.begin() + write_buffer_pos_);
+        _MSTL copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
         write_buffer_pos_ += to_copy;
         total_written += to_copy;
         ptr += to_copy;
@@ -590,24 +597,29 @@ file::size_type file::write(const string& data, const size_type size) {
 
     if (append_mode_ && !seek(0, FILE_POINTER::END)) {
         set_last_error();
-        return false;
+        return 0;
     }
 
     return total_written;
 }
 
-file::size_type file::write(const string& data) {
-    return this->write(data, data.size());
-}
-
 file::size_type file::read(string& str, const size_type size) const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
-
     str.clear();
+    if (size == 0) return 0;
     str.reserve(size);
-    size_type total_read = 0;
+    return file::read(str.data(), size);
+}
 
-    while (total_read < size) {
+file::size_type file::read(void* buffer, const size_type size) const {
+    if (!opened_ || handle_ == INVALID_HANDLE() || !buffer) return 0;
+    if (size == 0) return 0;
+
+    auto ptr = static_cast<char*>(buffer);
+    size_type total_read = 0;
+    size_type remaining = size;
+
+    while (remaining > 0) {
         if (read_buffer_pos_ >= read_buffer_size_) {
             if (!fill_read_buffer() || read_buffer_size_ == 0) {
                 break;
@@ -615,13 +627,15 @@ file::size_type file::read(string& str, const size_type size) const {
         }
 
         const size_type available_in_buffer = read_buffer_size_ - read_buffer_pos_;
-        const size_type needed = size - total_read;
-        const size_type to_read = (needed < available_in_buffer) ? needed : available_in_buffer;
+        const size_type to_read = _MSTL min(remaining, available_in_buffer);
 
-        str.append(read_buffer_.data() + read_buffer_pos_, to_read);
+        _MSTL copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
         read_buffer_pos_ += to_read;
+        ptr += to_read;
         total_read += to_read;
+        remaining -= to_read;
     }
+
     return total_read;
 }
 
@@ -696,7 +710,7 @@ vector<string> file::read_chunks(const size_type chunk_size) {
                 bytes_read += bytes_read_now;
                 if (bytes_read_now == 0) break;
 #elif defined(MSTL_PLATFORM_LINUX__)
-                ssize_t bytes_read_now = ::read(handle_,
+                const ssize_t bytes_read_now = ::read(handle_,
                     data + bytes_read, to_read - bytes_read);
                 if (bytes_read_now == -1) {
                     if (errno == EINTR) continue;
@@ -779,7 +793,7 @@ bool file::write_chunks(const vector<string>& chunks) {
                 }
                 bytes_written = written_now;
 #elif defined(MSTL_PLATFORM_LINUX__)
-                ssize_t written_now = ::write(handle_,
+                const ssize_t written_now = ::write(handle_,
                                             data + (chunk.size() - remaining),
                                             remaining);
                 if (written_now == -1) {
@@ -814,7 +828,7 @@ bool file::write_chunks(const vector<string>& chunks) {
     return success;
 }
 
-vector<file::chunk_info> file::chunks_info(size_type chunk_size) {
+vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
     vector<chunk_info> info;
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         set_last_error();
@@ -850,20 +864,15 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) {
     return info;
 }
 
-file::size_type file::read_binary(string& str, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE()) {
-        return 0;
-    }
-    if (size == 0) {
-        str.clear();
-        return 0;
-    }
+file::size_type file::read_binary(void* buffer, const size_type size) const {
+    if (!opened_ || handle_ == INVALID_HANDLE() || !buffer) return 0;
+    if (size == 0) return 0;
 
-    str.resize(size);
-    char* buffer = str.data();
+    auto ptr = static_cast<byte_t*>(buffer);
     size_type total_read = 0;
+    size_type remaining = size;
 
-    while (total_read < size) {
+    while (remaining > 0) {
         if (read_buffer_pos_ >= read_buffer_size_) {
             if (!fill_read_buffer() || read_buffer_size_ == 0) {
                 break;
@@ -871,17 +880,28 @@ file::size_type file::read_binary(string& str, const size_type size) const {
         }
 
         const size_type available = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read = _MSTL min(size - total_read, available);
+        const size_type to_read = _MSTL min(remaining, available);
 
-        _MSTL memory_copy(buffer + total_read, read_buffer_.data() + read_buffer_pos_, to_read);
+        _MSTL memory_copy(ptr, read_buffer_.data() + read_buffer_pos_, to_read);
         read_buffer_pos_ += to_read;
+        ptr += to_read;
         total_read += to_read;
+        remaining -= to_read;
     }
+    return total_read;
+}
 
+file::size_type file::read_binary(string& str, const size_type size) const {
+    if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
+    if (size == 0) {
+        str.clear();
+        return 0;
+    }
+    str.resize(size);
+    const size_type total_read = file::read_binary(str.data(), size);
     if (total_read < size) {
         str.resize(total_read);
     }
-
     return total_read;
 }
 
@@ -919,11 +939,11 @@ bool file::read_line(string& line) const {
         }
 
         while (read_buffer_pos_ < read_buffer_size_ && !found_eol) {
-            const char ch = read_buffer_[read_buffer_pos_++];
+            const char ch = static_cast<char>(read_buffer_[read_buffer_pos_++]);
 
             if (ch == '\r') {
                 if (read_buffer_pos_ < read_buffer_size_) {
-                    if (read_buffer_[read_buffer_pos_] == '\n') {
+                    if (static_cast<char>(read_buffer_[read_buffer_pos_]) == '\n') {
                         read_buffer_pos_++;
                     }
                 }
@@ -1292,7 +1312,7 @@ void file::cancel_async(async_result& result) {
         result.cb = nullptr;
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    int cancel_result = ::aio_cancel(handle_, result.cb);
+    const int cancel_result = ::aio_cancel(handle_, result.cb);
 
     if (cancel_result == AIO_CANCELED) {
         result.completed = true;
@@ -1316,12 +1336,12 @@ void file::cancel_async(async_result& result) {
         result.error_code = errno;
     }
 
-    auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+    const auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
 
-    auto ctx_it = async_contexts_.find(result.cb);
+    const auto ctx_it = async_contexts_.find(result.cb);
     if (ctx_it != async_contexts_.end()) {
         delete ctx_it->second;
         async_contexts_.erase(ctx_it);
@@ -2150,7 +2170,7 @@ bool file::try_lock(const difference_type offset,
     auto nonblocking_mode = static_cast<FILE_LOCK>(
         static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
 #elif defined(MSTL_PLATFORM_LINUX__)
-    auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCK_NB);
+    const auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCK_NB);
 #endif
     return lock(offset, length, nonblocking_mode);
 }
@@ -2493,7 +2513,7 @@ bool file::remap(const size_type new_offset, const size_type new_size) {
     return map(new_offset, new_size, current_access);
 }
 
-bool file::flush_mapped(bool async) const {
+bool file::flush_mapped(const bool async) const {
     lock_guard<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
@@ -2545,7 +2565,7 @@ bool file::flush_mapped(bool async) const {
 #endif
 }
 
-bool file::lock_mapped_pages(bool lock_in_memory) const noexcept {
+bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
     if (!mapped_ptr_) {
         return false;
     }
@@ -2792,7 +2812,8 @@ bool file::read_binary(const _MSTL path& p, string& content,
     return true;
 }
 
-string file::read_binary(const _MSTL path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+string file::read_binary(const _MSTL path& p,
+    const FILE_CREATION creation, const FILE_ATTRI attributes) {
     string content;
     file::read_binary(p, content, creation, attributes);
     return content;
