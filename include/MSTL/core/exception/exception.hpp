@@ -87,10 +87,12 @@ struct CUDAMemoryError final : MemoryError {
 #endif
 
 
-#ifdef MSTL_STATE_DEBUG__
-void MSTL_API throw_exception(const exception& err);
+void MSTL_API throw_with_stack(const exception& err);
+
+#if defined(MSTL_STATE_DEBUG__) || (defined(MSTL_COMPILER_GNUC__) && !defined(NDEBUG))
+#define throw_exception(err) throw_with_stack(err)
 #else
-MSTL_ALWAYS_INLINE_INLINE void throw_exception(const exception& err) { throw err; }
+#define throw_exception(err) { throw err; }
 #endif
 
 MSTL_END_NAMESPACE__

@@ -1,10 +1,8 @@
 #include <MSTL/core/exception/exception.hpp>
 #include <MSTL/core/async/atomic.hpp>
 #include <MSTL/core/string/string.hpp>
-#ifdef MSTL_STATE_DEBUG__
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/system/stacktrace.hpp>
-#endif
 #include <cstdlib> // std::abort
 MSTL_BEGIN_NAMESPACE__
 
@@ -46,14 +44,11 @@ const char* exception::type() const noexcept {
 }
 
 
-#ifdef MSTL_STATE_DEBUG__
-void throw_exception(const exception& err) {
+void throw_with_stack(const exception& err) {
     printcln(color::red(), "\nException : (", err.type(), ") ", err.what());
     printcln(color::red(), stacktrace());
     throw err;
 }
-#endif
-
 
 static atomic<terminate_handler>& get_terminate_handler() noexcept {
     static atomic<terminate_handler> handler{nullptr};

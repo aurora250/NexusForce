@@ -568,8 +568,7 @@ public:
         pair_.value = new_max;
     }
 
-    void rehash(const size_type new_size)
-    noexcept(is_nothrow_hashable_v<key_type> && is_nothrow_copy_constructible_v<value_type>) {
+    void rehash(const size_type new_size) {
         const size_type min_buckets_for_size = static_cast<size_type>(
             _MSTL ceil(static_cast<double>(size_) / max_load_factor())
         );
