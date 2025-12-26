@@ -41,8 +41,8 @@ public:
     void set_ssl_context(ssl_context ctx) { ssl_ctx_ = _MSTL move(ctx); }
 #endif
 
-    milliseconds recv_timeout() const { return receive_timeout_; }
-    milliseconds send_timeout() const { return send_timeout_; }
+    MSTL_NODISCARD milliseconds recv_timeout() const { return receive_timeout_; }
+    MSTL_NODISCARD milliseconds send_timeout() const { return send_timeout_; }
 
     bool connect(const string& host, uint16_t port);
     void close() noexcept;
@@ -57,6 +57,9 @@ public:
 
     bool receive_all(string& out_data, size_t expected_length = 0);
     void receive_with_callback(function<void(const string&)> callback, size_t buffer_size = 8192);
+
+    MSTL_NODISCARD const handle_sock_t& socket() const noexcept { return socket_; }
+    MSTL_NODISCARD handle_sock_t& socket() noexcept { return socket_; }
 };
 
 MSTL_END_NAMESPACE__

@@ -18,7 +18,6 @@ public:
     ssl_socket() noexcept = default;
     ~ssl_socket() { close(); }
 
-    explicit ssl_socket(const ssl_context& ctx);
     explicit ssl_socket(tcp_socket sock);
     explicit ssl_socket(const ssl_context& ctx, tcp_socket sock);
 
@@ -28,7 +27,7 @@ public:
     ssl_socket& operator =(ssl_socket&& other) noexcept = default;
     
     MSTL_NODISCARD bool accept();
-    void close() const noexcept;
+    void close() noexcept;
     
     MSTL_NODISCARD bool ssl_valid() const noexcept {
         return ssl_ != nullptr;
@@ -45,10 +44,18 @@ public:
     ssize_t receive(void* buffer, size_t size) const;
     ssize_t send(const void* buffer, size_t size) const;
     
-    const tcp_socket& socket() const noexcept { return socket_; }
-    tcp_socket& socket() noexcept { return socket_; }
+    MSTL_NODISCARD const tcp_socket& socket() const noexcept { return socket_; }
+    MSTL_NODISCARD tcp_socket& socket() noexcept { return socket_; }
+    MSTL_NODISCARD tcp_socket::socket_t sockfd() const noexcept { return socket_.sockfd(); }
 
-    const string& last_error() const noexcept { return last_error_; }
+    MSTL_NODISCARD const string& last_error() const noexcept { return last_error_; }
+
+    MSTL_NODISCARD bool operator ==(const ssl_socket& other) const noexcept {
+        return socket_ == other.socket_ && ssl_ == other.ssl_;
+    }
+    MSTL_NODISCARD bool operator !=(const ssl_socket& other) const noexcept {
+        return socket_ != other.socket_ || ssl_ != other.ssl_;
+    }
 };
 
 MSTL_END_NAMESPACE__

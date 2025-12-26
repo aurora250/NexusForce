@@ -1,7 +1,9 @@
-#include <MSTL/network/tcp_server.hpp>
-#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/async/condition_variable.hpp>
 #include <MSTL/core/container/map.hpp>
+#include <MSTL/core/memory/shared_ptr.hpp>
+#include <MSTL/core/system/console.hpp>
+#include <MSTL/network/tcp_server.hpp>
+#include "message_protocol.hpp"
 
 using namespace MSTL;
 
@@ -12,9 +14,11 @@ struct task_result {
 };
 
 class worker_manager {
+    using handle_sock_t = tcp_server::handle_sock_t;
+
 private:
     struct worker_info {
-        tcp_socket::socket_t socket;
+        shared_ptr<handle_sock_t> socket;
         string id;
         bool ready = false;
         bool has_result = false;
@@ -28,14 +32,14 @@ private:
     atomic_int results_received_{0};
 
 public:
-    void register_worker(tcp_socket::socket_t client, const string& id) {
+    void register_worker(const shared_ptr<handle_sock_t>& client, const string& id) {
         lock_guard<mutex> lock(mtx_);
         workers_.push_back({client, id, true, false});
         ++connected_workers_;
-        println("Worker registered:", id, "socket:", client);
+        println("Worker registered:", id, "socket:", client->sockfd());
     }
 
-    void remove_worker(tcp_socket::socket_t client) {
+    void remove_worker(const shared_ptr<handle_sock_t>& client) {
         lock_guard<mutex> lock(mtx_);
         for (auto it = workers_.begin(); it != workers_.end(); ++it) {
             if (it->socket == client) {
@@ -53,6 +57,9 @@ public:
         vector<size_t> disconnected;
         results_received_.store(0);
 
+        string task_msg = "TASK:" + task_data;
+        vector<char> packet = message_protocol::serialize(task_msg);
+
         for (auto& worker : workers_) {
             worker.has_result = false;
             worker.ready = false;
@@ -60,27 +67,37 @@ public:
 
         for (size_t i = 0; i < workers_.size(); ++i) {
             auto& worker = workers_[i];
-            string task_msg = "TASK:" + task_data;
-            const auto sent = tcp_socket(worker.socket).send(task_msg.data(), task_msg.size());
-            if (sent <= 0) {
-                println("Failed to send task to worker:", worker.id);
-                disconnected.push_back(i);
-            } else {
+            try {
+                size_t total_sent = 0;
+                while (total_sent < packet.size()) {
+                    ssize_t sent = worker.socket->send(packet.data() + total_sent, packet.size() - total_sent);
+                    if (sent <= 0) {
+                        printcln(color::red(), "send failed");
+                        throw_exception(exception("send failed"));
+                    }
+                    total_sent += sent;
+                }
                 println("Task sent to worker:", worker.id);
                 worker.ready = true;
+            } catch (const exception& e) {
+                println("Failed to send task to worker:", worker.id, "error:", e.what());
+                disconnected.push_back(i);
             }
         }
 
         for (auto it = disconnected.rbegin(); it != disconnected.rend(); ++it) {
-            workers_.erase(workers_.begin() + *it);
-            --connected_workers_;
+            if (*it < workers_.size()) {
+                println("Removing disconnected worker:", workers_[*it].id);
+                workers_.erase(workers_.begin() + *it);
+                --connected_workers_;
+            }
         }
     }
 
-    void record_result(tcp_socket::socket_t client, const string& result) {
+    void record_result(const handle_sock_t& client, const string& result) {
         lock_guard<mutex> lock(mtx_);
         for (auto& worker : workers_) {
-            if (worker.socket == client) {
+            if (*(worker.socket) == client) {
                 worker.result = {worker.id, result, steady_clock::now()};
                 worker.has_result = true;
                 ++results_received_;
@@ -95,9 +112,9 @@ public:
         vector<task_result> results;
         unique_lock<mutex> lock(mtx_);
 
-        if (cv_.wait_for(lock, seconds(timeout_seconds),
-            [this]() { return results_received_ >= connected_workers_; })) {
-
+        if (cv_.wait_for(lock, seconds(timeout_seconds), [this]() {
+                return results_received_ >= connected_workers_;
+            })) {
             for (const auto& worker : workers_) {
                 if (worker.has_result) {
                     results.push_back(worker.result);
@@ -115,7 +132,7 @@ public:
         return connected_workers_;
     }
 
-    void print_results_analysis(const vector<task_result>& results) const {
+    static void print_results_analysis(const vector<task_result>& results) {
         if (results.empty()) {
             println("No results received");
             return;
@@ -150,6 +167,8 @@ public:
 };
 
 class task_server {
+    using handle_sock_t = tcp_server::handle_sock_t;
+
 private:
     tcp_server server_;
     worker_manager manager_;
@@ -157,36 +176,56 @@ private:
     atomic_bool running_{false};
 
 private:
-    void handle_worker(tcp_server::handle_sock_t client) {
-        char buffer[1024];
+    static bool receive_from_client(handle_sock_t& client, string& msg) {
+        try {
+            return message_protocol::receive_message(client, msg);
+        } catch (const exception& e) {
+            printcln(color::red(), "receive error:", e.what());
+        }
+        return false;
+    }
 
-        ssize_t n = client.receive(buffer, sizeof(buffer) - 1);
-        if (n <= 0) {
+    static bool send_to_client(handle_sock_t& client, const string& msg) {
+        try {
+            return message_protocol::send_message(client, msg);
+        } catch (const exception& e) {
+            printcln(color::red(), "send error:", e.what());
+        }
+        return false;
+    }
+
+    void handle_worker(shared_ptr<handle_sock_t> client) {
+        string worker_id;
+        if (!receive_from_client(*client, worker_id)) {
+            printcln(color::red(), "failed to receive worker ID");
             return;
         }
-        buffer[n] = '\0';
-        string worker_id(buffer, n);
 
-        manager_.register_worker(client.socket().sockfd(), worker_id);
+        manager_.register_worker(client, worker_id);
 
         while (true) {
-            n = client.receive(buffer, sizeof(buffer) - 1);
-            if (n <= 0) {
+            string msg;
+            if (!receive_from_client(*client, msg)) {
                 break;
             }
-            buffer[n] = '\0';
-            string msg(buffer, n);
 
             if (msg.find("RESULT:") == 0) {
                 string result = msg.substr(7);
-                manager_.record_result(client.socket().sockfd(), result);
+                manager_.record_result(*client, result);
+                if (send_to_client(*client, "RESULT_ACK")) {
+                    println("Sent RESULT_ACK to worker");
+                } else {
+                    println("Failed to send RESULT_ACK to worker");
+                }
             } else if (msg == "HEARTBEAT") {
-                constexpr string_view A = "ALIVE";
-                auto sent = client.send(A.data(), 5);
+                if (!send_to_client(*client, "ALIVE")) {
+                    break;
+                }
+                println("Received HEARTBEAT");
             }
         }
 
-        manager_.remove_worker(client.socket().sockfd());
+        manager_.remove_worker(client);
     }
 
     void console_loop() {
@@ -201,18 +240,9 @@ private:
                 println("Connected workers:", manager_.get_connected_count());
             } else if (cmd.find("send ") == 0) {
                 string task_data = cmd.substr(5);
-                if (manager_.get_connected_count() == 0) {
-                    println("No workers connected");
-                    continue;
+                if (!send(task_data)) {
+                    break;
                 }
-
-                println("Sending task to all workers...");
-                manager_.send_task_to_all(task_data);
-
-                println("Waiting for results...");
-                auto results = manager_.wait_for_all_results();
-
-                manager_.print_results_analysis(results);
             } else if (cmd == "help") {
                 println("Available commands:");
                 println("  status          - Show connected workers");
@@ -226,9 +256,9 @@ private:
     }
 
 public:
-    explicit task_server(uint16_t port) : server_(port) {
-        server_.set_client_handler([this](tcp_server::handle_sock_t client) {
-            handle_worker(move(client));
+    explicit task_server(const uint16_t port) : server_(port) {
+        server_.set_client_handler([this](handle_sock_t client) {
+            handle_worker(make_shared<handle_sock_t>(move(client)));
         });
     }
 
@@ -243,12 +273,14 @@ public:
         }
         running_.store(true);
 
-        console_thread_ = thread([this]() {
-            console_loop();
-        });
+        // console_thread_ = thread([this]() {
+        //     console_loop();
+        // });
 
-        printcln(color::green(), "Task server started on port:", server_.port());
-        println("Type 'help' for available commands");
+        printcln(color::green(),
+            "Task server started on port:" + to_string(server_.port()) +
+            "\nType 'help' for available commands");
+        console.flush();
         return true;
     }
 
@@ -263,6 +295,22 @@ public:
         server_.stop();
         printcln(color::yellow(), "Task server stopped");
     }
+
+    bool send(const string& msg) {
+        if (manager_.get_connected_count() == 0) {
+            println("No workers connected");
+            return false;
+        }
+
+        println("Sending task to all workers...");
+        manager_.send_task_to_all(msg);
+
+        println("Waiting for results...");
+        const auto results = manager_.wait_for_all_results();
+
+        worker_manager::print_results_analysis(results);
+        return true;
+    }
 };
 
 int main() {
@@ -271,7 +319,10 @@ int main() {
         printcln(color::red(), "Failed to start server");
         return 1;
     }
+
+    int count = 0;
     while (true) {
-        this_thread::sleep_for(seconds(1));
+        this_thread::sleep_for(seconds(10));
+        server.send("TEST" + to_string(++count));
     }
 }

@@ -68,6 +68,9 @@ private:
 public:
     explicit constexpr hexadecimal(const int16_t v) noexcept : base(v) {}
     explicit constexpr hexadecimal(const int32_t v) noexcept : base(v) {}
+    explicit constexpr hexadecimal(const uint16_t v) noexcept : base(v) {}
+    explicit constexpr hexadecimal(const uint32_t v) noexcept : base(v) {}
+    explicit constexpr hexadecimal(const uint64_t v) noexcept : base(v) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const string_view s) : base(parse_hex(s)) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const char* s) : hexadecimal(string_view(s)) {}
     MSTL_CONSTEXPR20 explicit hexadecimal(const string& s) : hexadecimal(s.view()) {}

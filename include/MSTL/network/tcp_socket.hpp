@@ -109,7 +109,7 @@ public:
         }
     }
 
-    MSTL_NODISCARD tcp_socket accept() const noexcept {
+    MSTL_NODISCARD tcp_socket accept() const {
         ::sockaddr_in client_addr{};
         ::socklen_t client_len = sizeof(client_addr);
         return tcp_socket{::accept(
@@ -126,7 +126,7 @@ public:
         return ::bind(sockfd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) == 0;
     }
 
-    MSTL_NODISCARD bool bind(const uint16_t port) const noexcept {
+    MSTL_NODISCARD bool bind(const uint16_t port) const {
         ::sockaddr_in addr{};
         addr.sin_family = AF_INET;
         addr.sin_addr.s_addr = INADDR_ANY;
@@ -140,7 +140,7 @@ public:
             reinterpret_cast<const char*>(&opt), sizeof(opt)) == 0;
     }
 
-    MSTL_NODISCARD bool set_receive_timeout(const milliseconds timeout) const noexcept {
+    MSTL_NODISCARD bool set_receive_timeout(const milliseconds timeout) const {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_RCVTIMEO,
@@ -154,7 +154,7 @@ public:
 #endif
     }
 
-    MSTL_NODISCARD bool set_send_timeout(const milliseconds timeout) const noexcept {
+    MSTL_NODISCARD bool set_send_timeout(const milliseconds timeout) const {
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::DWORD tv = static_cast<::DWORD>(timeout.count());
         return ::setsockopt(sockfd_, SOL_SOCKET, SO_SNDTIMEO,
@@ -176,7 +176,7 @@ public:
         return ::connect(sockfd_, reinterpret_cast<const ::sockaddr*>(&addr), sizeof(addr)) == 0;
     }
 
-    MSTL_NODISCARD bool connect_ipv4(const char* ip, const uint16_t port) const noexcept {
+    MSTL_NODISCARD bool connect_ipv4(const char* ip, const uint16_t port) const {
         ::sockaddr_storage addr{};
         auto *a4 = reinterpret_cast<::sockaddr_in*>(&addr);
         a4->sin_family = AF_INET;
@@ -188,7 +188,7 @@ public:
         return ::connect(sockfd_, reinterpret_cast<::sockaddr*>(&addr), addr_len) == 0;
     }
 
-    MSTL_NODISCARD bool connect_ipv6(const char* ip, const uint16_t port) const noexcept {
+    MSTL_NODISCARD bool connect_ipv6(const char* ip, const uint16_t port) const {
         ::sockaddr_storage addr{};
         auto *a6 = reinterpret_cast<::sockaddr_in6 *>(&addr);
         a6->sin6_family = AF_INET6;
@@ -221,7 +221,7 @@ public:
     }
 
     MSTL_NODISCARD ssize_t sendto(const void* buf, const size_t len,
-        const char* ip, const uint16_t port, const int flags = 0) const noexcept {
+        const char* ip, const uint16_t port, const int flags = 0) const {
         ::sockaddr_in addr{};
         addr.sin_family = AF_INET;
         addr.sin_port = ::htons(port);
@@ -238,20 +238,27 @@ public:
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, src_addr, addrlen);
     }
 
-    MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, const int flags = 0) const noexcept {
+    MSTL_NODISCARD ssize_t receive_from(void* buf, const size_t len, const int flags = 0) const {
         ::sockaddr_in from_addr{};
         ::socklen_t from_len = sizeof(from_addr);
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
     }
 
-    MSTL_NODISCARD static bool is_ipv4(const char* host) noexcept {
-        ::sockaddr_in a4;
+    MSTL_NODISCARD static bool is_ipv4(const char* host) {
+        ::sockaddr_in a4{};
         return ::inet_pton(AF_INET, host, &(a4.sin_addr)) == 1;
     }
 
-    MSTL_NODISCARD static bool is_ipv6(const char* host) noexcept {
-        ::sockaddr_in6 a6;
+    MSTL_NODISCARD static bool is_ipv6(const char* host) {
+        ::sockaddr_in6 a6{};
         return ::inet_pton(AF_INET6, host, &(a6.sin6_addr)) == 1;
+    }
+
+    MSTL_NODISCARD bool operator ==(const tcp_socket& other) const noexcept {
+        return sockfd_ == other.sockfd_;
+    }
+    MSTL_NODISCARD bool operator !=(const tcp_socket& other) const noexcept {
+        return sockfd_ != other.sockfd_;
     }
 };
 

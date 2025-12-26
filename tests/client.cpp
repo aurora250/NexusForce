@@ -2,10 +2,11 @@
 #include <MSTL/core/async/thread.hpp>
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/numeric/random.hpp>
+#include "message_protocol.hpp"
 using namespace MSTL;
 
 string generate_worker_id() {
-    int rnd = random_mt::next_int(1000, 9999);
+    const int rnd = random_mt::next_int(1000, 9999);
     return "WORKER_" + to_string(rnd);
 }
 
@@ -16,14 +17,12 @@ public:
 
         if (task_data.find("reverse") == 0) {
             string data = task_data.substr(8);
-            return "REVERSED_" + string(data.rbegin(), data.rend());
+            data.reverse();
+            return "REVERSED_" + data;
         } else if (task_data.find("uppercase") == 0) {
             string data = task_data.substr(10);
-            string result;
-            for (char c : data) {
-                result += toupper(c);
-            }
-            return "UPPERCASE_" + result;
+            data.uppercase();
+            return "UPPERCASE_" + data;
         } else if (task_data.find("count") == 0) {
             string data = task_data.substr(6);
             return "LENGTH_" + to_string(data.length());
@@ -40,52 +39,78 @@ private:
     atomic_bool running_{false};
     thread receive_thread_;
     thread heartbeat_thread_;
+    mutex socket_mtx_;
 
 private:
     void heartbeat_loop() {
         while (running_) {
             this_thread::sleep_for(seconds(3));
             if (client_.is_connected()) {
-                constexpr string_view HB = "HEARTBEAT";
-                client_.send(HB.data(), 8);
+                lock_guard<mutex> lock(socket_mtx_);
+                try {
+                    if (!message_protocol::send_message(client_.socket(), "HEARTBEAT")) {
+                        printcln(color::yellow(), "Heartbeat send failed");
+                        running_.store(false);
+                        break;
+                    }
+                } catch (const exception& e) {
+                    printcln(color::red(), "Heartbeat send failed:", e.what());
+                    running_.store(false);
+                    break;
+                }
             }
         }
     }
 
     void receive_loop() {
-        char buffer[1024];
-
         while (running_) {
-            if (!client_.is_connected()) {
-                break;
+            string msg;
+            bool success = false;
+            {
+                lock_guard<mutex> lock(socket_mtx_);
+                try {
+                    success = message_protocol::receive_message(client_.socket(), msg, 10000);
+                } catch (const exception& e) {
+                    printcln(color::red(), "Receive error:", e.what());
+                    success = false;
+                }
             }
 
-            ssize_t n = client_.receive(buffer, sizeof(buffer) - 1);
-            if (n <= 0) {
-                printcln(color::red(), "Connection lost");
+            if (!success) {
+                printcln(color::red(), "Connection lost or timeout");
                 running_.store(false);
                 break;
+            } else {
+                println("Client receive message:", msg);
             }
-
-            buffer[n] = '\0';
-            string msg(buffer, n);
 
             if (msg == "ALIVE") {
                 // Heartbeat response, do nothing
+                println("Receive ALIVE");
                 continue;
-            }
-
-            if (msg.find("TASK:") == 0) {
+            } else if (msg == "RESULT_ACK") {
+                println("Receive RESULT_ACK");
+                continue;
+            } else if (msg.find("TASK:") == 0) {
                 string task_data = msg.substr(5);
                 printcln(color::cyan(), "Received task:", task_data);
 
-                // Process the task
                 string result = processing_task::process_task(task_data);
-
-                // Send result back
                 string result_msg = "RESULT:" + result;
-                client_.send(result_msg.data(), result_msg.size());
-                printcln(color::green(), "Sent result:", result);
+                {
+                    lock_guard<mutex> lock(socket_mtx_);
+                    try {
+                        if (message_protocol::send_message(client_.socket(), result_msg)) {
+                            printcln(color::green(), "Result sent:", result);
+                        } else {
+                            printcln(color::red(), "Failed to send result");
+                            running_.store(false);
+                        }
+                    } catch (const exception& e) {
+                        printcln(color::red(), "Failed to send result:", e.what());
+                        running_.store(false);
+                    }
+                }
             } else {
                 printcln(color::yellow(), "Unknown message:", msg);
             }
@@ -101,14 +126,19 @@ public:
         worker_id_ = generate_worker_id();
 
         // Register with server
-        client_.send(worker_id_.data(), worker_id_.size());
+        {
+            lock_guard<mutex> lock(socket_mtx_);
+            if (!message_protocol::send_message(client_.socket(), worker_id_)) {
+                printcln(color::red(), "Failed to send worker ID");
+                return false;
+            }
+        }
 
         running_.store(true);
 
         receive_thread_ = thread([this]() {
             receive_loop();
         });
-
         heartbeat_thread_ = thread([this]() {
             heartbeat_loop();
         });
@@ -117,7 +147,7 @@ public:
         return true;
     }
 
-    void interactive_mode() {
+    void interactive_mode() const {
         println("Worker", worker_id_, "ready. Type 'quit' to exit.");
 
         while (running_) {
@@ -163,7 +193,9 @@ int main() {
         return 1;
     }
 
-    client.interactive_mode();
+    while (client.is_connected()) {
+        this_thread::sleep_for(seconds(1));
+    }
     client.close();
 
     return 0;

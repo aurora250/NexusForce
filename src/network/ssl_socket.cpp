@@ -21,7 +21,7 @@ bool ssl_socket::accept() {
     return true;
 }
 
-void ssl_socket::close() const noexcept {
+void ssl_socket::close() noexcept {
     if (ssl_valid()) {
         ::SSL_shutdown(ssl_);
         ::SSL_free(ssl_);
