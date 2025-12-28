@@ -431,4 +431,21 @@ MSTL_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
 }
 
 MSTL_END_NAMESPACE__
+
+namespace std {
+	template <typename T>
+	struct tuple_size;
+
+	template <_MSTL size_t I, typename T>
+	struct tuple_element;
+
+	template <typename T1, typename T2>
+	struct tuple_size<_MSTL pair<T1, T2>> : _MSTL integral_constant<_MSTL size_t, 2> {};
+
+	template <_MSTL size_t I, typename T1, typename T2>
+	struct tuple_element<I, _MSTL pair<T1, T2>> {
+		using type = _MSTL tuple_element_t<I, _MSTL pair<T1, T2>>;
+	};
+}
+
 #endif // MSTL_CORE_UTILITY_PAIR_HPP__

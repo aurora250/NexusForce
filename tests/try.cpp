@@ -434,6 +434,27 @@ void test_device() {
     }
 }
 
+void test_sysinfo() {
+    auto& sysinfo = sysinfo::instance();
+
+    const auto& os_info = sysinfo.get_os_version_info();
+    printfln("OS: {} {}", os_info.product_name, os_info.version());
+
+    const auto& cpu_info = sysinfo.get_CPU_info();
+    printfln("CPU: {} ({} cores)", cpu_info.brand, cpu_info.cores);
+
+    const auto &mem_info = sysinfo.get_memory_info();
+    printfln("Memory: {:.1f}% used", mem_info.physical_memory_usage());
+    printfln("RAM: {} / {}",
+        sysinfo::format_bytes(mem_info.total_physical - mem_info.available_physical),
+        sysinfo::format_bytes(mem_info.total_physical));
+
+    const auto arch = sysinfo.get_architecture();
+    printfln("Architecture: {}",
+        arch == sysinfo::architecture::X64 ? "x64" :
+        arch == sysinfo::architecture::X86 ? "x86" : "Other");
+}
+
 void test_env_var() {
     println(environment::all_envs());
 }
@@ -492,8 +513,8 @@ void test_signal() {
 
         printcln(color::cyan(), "信号管理器已启动");
         println("按 Ctrl+C 测试中断信号");
-        println("在另一个终端执行: kill -TERM ", ::getpid(), " 测试终止信号");
-        println("或执行: kill -USR1 ", ::getpid(), " 测试用户信号");
+        println("在另一个终端执行: kill -TERM ", process::current_process_id(), " 测试终止信号");
+        println("或执行: kill -USR1 ", process::current_process_id(), " 测试用户信号");
 
         for (int i = 0; i < 30; ++i) {
             if (!signal_manager::instance().is_running()) {
@@ -1659,7 +1680,10 @@ void test_tuple() {
     println(MSTL::get<1>(t));
     auto forw = MSTL::make_tuple(9, 0);
 
-    tuple<int, double> tuple1(1, 3.14);
+    pair<int, double> pair1(1, 3.14);
+    auto [p1, p2] = pair1;
+    println(p1, p2);
+    tuple<int, double> tuple1(pair1);
     tuple<MSTL::string> tuple2("hello");
     tuple<char> tuple3('A');
 
@@ -1672,7 +1696,10 @@ void test_tuple() {
     println(MSTL::get<2>(combinedTuple));
     println(MSTL::get<3>(combinedTuple));
 
-    tuple<int, int, int> args(1, 2, 3);
+    constexpr tuple<int, int, int> args(1, 2, 3);
+    auto [av, bv, cv] = args;
+    println(av, bv, cv);
+
     int sum = MSTL::apply([](int a, int b, int c) {
         return a + b + c;
     }, args);
@@ -1817,6 +1844,14 @@ void test_variant() {
 
     hash<variant<int, string>> hasher{};
     println(hasher(v1));
+
+    variant<monostate, int> v;
+    v = monostate{};
+
+    if (v.holds_alternative<monostate>()) {
+        println("hold monostate");
+    }
+    println(v.to_hash());
 }
 
 
@@ -1900,7 +1935,8 @@ void test_string_search_replace(size_t str_length, size_t pattern_count) {
 
 void test_max_memory_string() {
     try {
-        size_t available_memory = get_available_memory();
+        size_t available_memory = sysinfo::instance()
+            .get_memory_info().available_memory();
         size_t max_test_size = available_memory / 2;
 
         const size_t upper_limit =
@@ -1954,11 +1990,15 @@ void test_string() {
 
 
 void test_option() {
-    optional<int> opt1;
+    optional<int> opt1{0};
     println(opt1.value());
 
     optional<int> opt2(nullopt);
-    println(opt2.value());
+    try {
+        println(opt2.value());
+    } catch (const exception& e) {
+        println(e.what());
+    }
 
     optional<int> opt3(42);
     println(opt3.value());
@@ -1979,7 +2019,11 @@ void test_option() {
     println(opt1.value());
 
     opt1.reset();
-    println(opt1.value());
+    try {
+        println(opt1.value());
+    } catch (const exception& e) {
+        println(e.what());
+    }
 
     if (opt3.has_value()) {
         println("opt3 has a value.");
@@ -2074,7 +2118,9 @@ void test_timer(){
     auto now = system_clock::now();
     auto target = now + hours(1);
     timer2.expires_at(target);
-    timer2.async_wait([]() { println("1小时后执行"); });
+    timer2.async_wait([]() {
+        println("1小时后执行");
+    });
 
     _MSTL steady_timer timer3;
     timer3.expires_from_now(1000);
@@ -2085,7 +2131,8 @@ void test_timer(){
     timer1.cancel();
 
     timer1.expires_after(seconds(3));
-    timer1.async_wait([]() { println("3秒后执行");
+    timer1.async_wait([]() {
+        println("3秒后执行");
     });
 
     this_thread::sleep_for(seconds(7));
@@ -2624,6 +2671,7 @@ void test_tpool() {
     pool.submit_task(test_print);
     pool.submit_task(test_file);
     pool.submit_task(test_env_var);
+    pool.submit_task(test_sysinfo);
     pool.submit_task(test_process);
     pool.submit_task(test_format);
     pool.submit_task(test_enctype);

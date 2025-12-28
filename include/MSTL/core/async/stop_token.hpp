@@ -1,6 +1,8 @@
 #ifndef MSTL_CORE_ASYNC_STOP_TOKEN_HPP__
 #define MSTL_CORE_ASYNC_STOP_TOKEN_HPP__
 #include "semaphore.hpp"
+#include "thread.hpp"
+#include "atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct nostopstate_t {

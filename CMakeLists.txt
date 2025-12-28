@@ -20,10 +20,6 @@ if(CMAKE_CONFIGURATION_TYPES)
     )
 endif()
 
-if(MSVC)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-endif()
-
 
 set(CMAKE_CXX_STANDARD 20)
 

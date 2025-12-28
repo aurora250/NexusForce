@@ -385,7 +385,7 @@ void sys_console::pause(const string_view msg) {
     lock_guard<mutex> lock(mutex_);
     this->flush_unsafe();
     this->print_string_unsafe(msg);
-    this->readln_unsafe();
+    MSTL_IGNORE this->readln_unsafe();
     this->flush_unsafe();
 }
 
@@ -451,8 +451,8 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                         print_string_unsafe("\b \b");
                     } else if (show_length) {
                         size_t display_length = password.length() + 1;
-                        if (password.length() > 9) display_length += 1;
-                        if (password.length() > 99) display_length += 1;
+                        if (password.length() > 9) ++display_length;
+                        if (password.length() > 99) ++display_length;
 
                         print_string_unsafe("\r");
                         print_string_unsafe(prompt);

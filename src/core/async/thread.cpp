@@ -1,4 +1,8 @@
 #include <MSTL/core/async/thread.hpp>
+#include <MSTL/core/system/sysinfo.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <process.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -119,14 +123,7 @@ void thread::swap(thread& other) noexcept {
 }
 
 uint32_t thread::hardware_concurrency() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    ::SYSTEM_INFO sysinfo;
-    ::GetSystemInfo(&sysinfo);
-    return static_cast<uint32_t>(sysinfo.dwNumberOfProcessors);
-#else
-    const long nprocs = ::sysconf(_SC_NPROCESSORS_ONLN);
-    return nprocs > 0 ? static_cast<uint32_t>(nprocs) : 0;
-#endif
+    return sysinfo::instance().get_system_info().processor_numbers;
 }
 
 MSTL_END_NAMESPACE__

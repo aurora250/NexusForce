@@ -6,9 +6,6 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include "../config/undef_cmacro.hpp"
-#else
-#include <bits/gthr.h>
-#include <cerrno>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -161,6 +158,9 @@ public:
         return this->wait_until(lock, atime, _MSTL move(pred));
     }
 };
+
+
+
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_CONDITION_VARIABLE_HPP__

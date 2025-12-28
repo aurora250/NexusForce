@@ -1,4 +1,5 @@
 #include <MSTL/core/file/file.hpp>
+#include <MSTL/core/system/sysinfo.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/file.h>
 #include <sys/time.h>
@@ -492,7 +493,7 @@ bool file::open(const bool append,
 
 void file::close() noexcept {
     if (opened_ && handle_ != INVALID_HANDLE()) {
-        this->flush();
+        MSTL_IGNORE this->flush();
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::CloseHandle(handle_);
 #elif defined(MSTL_PLATFORM_LINUX__)
@@ -771,7 +772,7 @@ bool file::write_chunks(const vector<string>& chunks) {
         size_type remaining = chunk.size();
 
         while (remaining > 0) {
-            size_type bytes_written = 0;
+            size_type bytes_written;
             if (remaining > buffer_size_ * 4) {
                 if (!flush_write_buffer()) {
                     success = false;
@@ -1434,7 +1435,7 @@ uint64_t file::size64() const {
         if (!flush_write_buffer()) {
             return 0;
         }
-        seek(current_pos, FILE_POINTER::BEGIN);
+        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -1697,8 +1698,8 @@ vector<file::binary_diff_entry> file::binary_diff(
             if (buffer1[i] != buffer2[i]) {
                 binary_diff_entry entry;
                 entry.offset = static_cast<difference_type>(offset + i);
-                entry.byte1 = static_cast<unsigned char>(buffer1[i]);
-                entry.byte2 = static_cast<unsigned char>(buffer2[i]);
+                entry.byte1 = static_cast<byte_t>(buffer1[i]);
+                entry.byte2 = static_cast<byte_t>(buffer2[i]);
                 diffs.push_back(entry);
             }
         }
@@ -1919,8 +1920,8 @@ bool file::prefetch(const size_type hint_size) const noexcept {
             last_error_msg_ = ::strerror(advice_result);
         }
     }
-#endif
     return fill_read_buffer();
+#endif
 }
 
 bool file::truncate(const difference_type size) const noexcept {
@@ -1978,7 +1979,7 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
 
     if (!::SetEndOfFile(handle_)) {
         set_last_error();
-        seek(current_pos, FILE_POINTER::BEGIN);
+        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
         return false;
     }
 
@@ -1987,7 +1988,7 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
             set_last_error();
         }
     } else {
-        seek(current_pos, FILE_POINTER::BEGIN);
+        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
     }
 
     return true;
@@ -2185,7 +2186,7 @@ bool file::is_locked(const difference_type offset,
 #ifdef MSTL_PLATFORM_WINDOWS__
     const bool can_lock = try_lock(offset, length, FILE_LOCK::SHARED);
     if (can_lock) {
-        unlock(offset, length);
+        MSTL_IGNORE unlock(offset, length);
         if (out_type) *out_type = FILE_LOCK::SHARED;
         return false;
     }
@@ -2279,9 +2280,8 @@ bool file::map(size_type offset, size_type size,
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 
-    ::SYSTEM_INFO sys_info;
-    ::GetSystemInfo(&sys_info);
-    const ::DWORD allocation_granularity = sys_info.dwAllocationGranularity;
+    const uint32_t allocation_granularity =
+        sysinfo::instance().get_system_info().allocation_granularity;;
 
     const uint64_t aligned_offset = offset & ~(allocation_granularity - 1);
     const uint64_t offset_delta = offset - aligned_offset;
@@ -2462,9 +2462,8 @@ void file::unmap() noexcept {
     if (!mapped_ptr_) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::SYSTEM_INFO sys_info;
-    ::GetSystemInfo(&sys_info);
-    const ::DWORD allocation_granularity = sys_info.dwAllocationGranularity;
+    const uint32_t allocation_granularity =
+        sysinfo::instance().get_system_info().allocation_granularity;
 
     const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
         (mapped_offset_ % allocation_granularity);
@@ -2828,7 +2827,7 @@ file_lock_guard::file_lock_guard(
 
 file_lock_guard::~file_lock_guard() {
     if (locked_) {
-        file_.unlock(offset_, length_);
+        MSTL_IGNORE file_.unlock(offset_, length_);
     }
 }
 

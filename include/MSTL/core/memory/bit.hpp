@@ -16,7 +16,7 @@ MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
 };
 MSTL_END_CONSTANTS__
 
-constexpr int popcountll(const uint64_t x) noexcept {
+constexpr int popcount64(const uint64_t x) noexcept {
     return
         _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
         _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
@@ -28,7 +28,7 @@ constexpr int popcountll(const uint64_t x) noexcept {
         _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
 }
 
-constexpr int clzll(uint64_t x) noexcept {
+constexpr int clz64(uint64_t x) noexcept {
     if (x == 0) return 64;
     int n = 0;
     if (x <= 0x00000000FFFFFFFFULL) { n += 32; x <<= 32; }
@@ -40,12 +40,31 @@ constexpr int clzll(uint64_t x) noexcept {
     return n;
 }
 
+constexpr int popcount32(const uint32_t x) noexcept {
+    return
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
+        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
+}
+
+constexpr int clz32(uint32_t x) noexcept {
+    if (x == 0) return 32;
+    int n = 0;
+    if (x <= 0x0000FFFFU) { n += 16; x <<= 16; }
+    if (x <= 0x00FFFFFFU) { n += 8; x <<= 8; }
+    if (x <= 0x0FFFFFFFU) { n += 4; x <<= 4; }
+    if (x <= 0x3FFFFFFFU) { n += 2; x <<= 2; }
+    if (x <= 0x7FFFFFFFU) { n += 1; }
+    return n;
+}
+
 constexpr int popcount(const uint64_t x) noexcept {
-    return popcountll(x);
+    return popcount64(x);
 }
 
 constexpr int countl_zero(const uint64_t x) noexcept {
-    return clzll(x);
+    return clz64(x);
 }
 
 constexpr int countl_one(const uint64_t x) noexcept {
@@ -53,7 +72,7 @@ constexpr int countl_one(const uint64_t x) noexcept {
 }
 
 constexpr int countr_zero(const uint64_t x) noexcept {
-    return popcountll((x & (~x + 1)) - 1);
+    return popcount64((x & (~x + 1)) - 1);
 }
 
 constexpr int countr_one(const uint64_t x) noexcept {

@@ -414,7 +414,7 @@ void device::ioctl(const ioctl_command& cmd) {
 
 void device::flush() {
     lock_guard<mutex> lock(io_mutex_);
-    file_.flush();
+    MSTL_IGNORE file_.flush();
 }
 
 void device::sync() noexcept {
@@ -424,7 +424,7 @@ void device::sync() noexcept {
         ::fsync(file_.native_handle());
     }
 #else
-    file_.flush();
+    MSTL_IGNORE file_.flush();
 #endif
 }
 

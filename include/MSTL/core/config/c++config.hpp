@@ -356,7 +356,25 @@
 #endif
 
 
-#define MSTL_RESTRICT __restrict
+#if defined(MSTL_COMPILER_GNUC__)
+	#define MSTL_RESTRICT __restrict__
+#elif defined(MSTL_COMPILER_MSVC__)
+	#define MSTL_RESTRICT __restrict
+#else
+	#define MSTL_RESTRICT restrict
+#endif
+
+
+#define MSTL_IGNORE (void)
+
+
+#if defined(__GNUC__)
+    #define MSTL_UNREACHABLE __builtin_unreachable()
+#elif defined(_MSC_VER)
+    #define MSTL_UNREACHABLE __assume(false)
+#else
+    #define MSTL_UNREACHABLE ((void)0)
+#endif
 
 
 #ifdef MSTL_STANDARD_20__

@@ -115,7 +115,7 @@ struct big_div {
 private:
     static_assert(Den != 0, "Internal library error");
     static_assert(sizeof (uintmax_t) == sizeof (unsigned long long), "clzll is unsafe on your platform.");
-    static constexpr int leading_zeros = _MSTL clzll(Den);
+    static constexpr int leading_zeros = _MSTL clz64(Den);
     static constexpr int complement_shift = sizeof(uintmax_t) * 8 - leading_zeros;
     static constexpr int actual_shift = (leading_zeros != 0) ? complement_shift : 0;
     static constexpr uintmax_t shift_factor1 = static_cast<uintmax_t>(1) << leading_zeros;

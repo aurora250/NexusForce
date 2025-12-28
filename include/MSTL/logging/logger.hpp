@@ -91,15 +91,12 @@ public:
     void flush();
 };
 
-static logger& logging = logger::instance();
-
-
-#define MSTL_LOG_TRACE(msg) logging.trace(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_DEBUG(msg) logging.debug(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_INFO(msg)  logging.info(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_WARN(msg)  logging.warn(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_ERROR(msg) logging.error(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_FATAL(msg) logging.fatal(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_TRACE(msg) _MSTL logger::instance().trace(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_DEBUG(msg) _MSTL logger::instance().debug(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_INFO(msg)  _MSTL logger::instance().info(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_WARN(msg)  _MSTL logger::instance().warn(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_ERROR(msg) _MSTL logger::instance().error(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_FATAL(msg) _MSTL logger::instance().fatal(msg, __FILE__, __func__, __LINE__);
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_LOGGING_LOGGER_HPP__

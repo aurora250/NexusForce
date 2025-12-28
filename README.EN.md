@@ -77,7 +77,7 @@ mkdir build && cd build
 
 # Configure build options (can also modify directly in CMakeLists.txt)
 cmake .. -G "Visual Studio 17 2022" -A x64 \
-  -DMSTL_ENABLE_QT6=OFF \
+  -DMSTL_ENABLE_MYSQL=OFF \
   -DMSTL_BUILD_TESTS=ON \
   -DMYSQL_ROOT_DIR="C:/Program Files/MySQL/MySQL Server 8.0"
 
@@ -100,7 +100,7 @@ mkdir build && cd build
 
 # Configure build options (can also modify directly in CMakeLists.txt)
 cmake .. -DCMAKE_BUILD_TYPE=Release \
-  -DMSTL_ENABLE_QT6=OFF \
+  -DMSTL_ENABLE_MYSQL=OFF \
   -DMSTL_BUILD_TESTS=ON
 
 # Build

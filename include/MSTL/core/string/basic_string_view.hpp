@@ -374,7 +374,7 @@ public:
         return !empty() && traits_type::eq(front(), chr);
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const_pointer str) const noexcept {
-        return this->starts_with(view_type(str));
+        return this->starts_with(basic_string_view(str));
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const basic_string_view view) const noexcept {
@@ -385,7 +385,7 @@ public:
         return !empty() && traits_type::eq(back(), chr);
     }
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const_pointer str) const noexcept {
-        return this->ends_with(view_type(str));
+        return this->ends_with(basic_string_view(str));
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const basic_string_view view) const noexcept {

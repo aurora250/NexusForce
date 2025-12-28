@@ -3,6 +3,18 @@
 #include "../interface/icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+struct monostate : icommon<monostate> {
+    constexpr monostate() noexcept = default;
+
+    constexpr bool operator ==(const monostate&) const noexcept { return true; }
+    constexpr bool operator <(const monostate&) const noexcept { return false; }
+
+    constexpr size_t to_hash() const noexcept { return 0; }
+
+    constexpr void swap(monostate&) noexcept {}
+};
+
+
 template <typename, typename>
 struct variant_index;
 template <typename Variant, typename T>
@@ -68,7 +80,7 @@ private:
 
     static move_assignment_function* move_assigment_functions_table() noexcept {
         static move_assignment_function function_ptrs[sizeof...(Types)] = {
-            [](char* union_dst, const char* union_src) noexcept {
+            [](char* union_dst, char* union_src) noexcept {
                 *reinterpret_cast<Types*>(union_dst) = _MSTL move(*reinterpret_cast<Types*>(union_src));
             }...
         };

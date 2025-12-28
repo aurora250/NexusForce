@@ -245,7 +245,7 @@ struct character : icharacter<character, char> {
         u8string result;
         result.reserve(obj.size());
         for (const char c : obj) {
-            result.push_back(static_cast<char8_t>(static_cast<unsigned char>(c)));
+            result.push_back(static_cast<char8_t>(static_cast<byte_t>(c)));
         }
         return result;
     }

@@ -1,5 +1,5 @@
-#include <MSTL/core/exception/exception_ptr.hpp>
 #include <MSTL/core/exception/exception.hpp>
+#include <MSTL/core/exception/exception_ptr.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 static MSTL_THREAD_LOCAL exception_ptr current_exception_ptr;

@@ -1315,7 +1315,7 @@ template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
 load(const T* ptr, memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
-	alignas(T) unsigned char buffer[sizeof(T)];
+	alignas(T) byte_t buffer[sizeof(T)];
 	auto* dest = reinterpret_cast<__atomic_raw_value<T>*>(buffer);
 	__atomic_load(ptr, dest, static_cast<int32_t>(mo));
 	return *dest;
@@ -1331,7 +1331,7 @@ template <typename T>
 ATOMIC_ALWAYS_INLINE __atomic_raw_value<T>
 exchange(T* ptr, __atomic_raw_value<T> desired, memory_order mo) noexcept {
 #ifdef MSTL_COMPILER_GNUC__
-	alignas(T) unsigned char buffer[sizeof(T)];
+	alignas(T) byte_t buffer[sizeof(T)];
 	auto* dest = reinterpret_cast<__atomic_raw_value<T>*>(buffer);
 	__atomic_exchange(ptr, _MSTL addressof(desired), dest, static_cast<int32_t>(mo));
 	return *dest;
@@ -1342,6 +1342,16 @@ exchange(T* ptr, __atomic_raw_value<T> desired, memory_order mo) noexcept {
 	}
 	return old;
 #endif
+}
+
+template <typename T>
+MSTL_ALWAYS_INLINE void notify_one(const T* ptr) noexcept {
+	_MSTL atomic_notify_address(ptr, false);
+}
+
+template <typename T>
+MSTL_ALWAYS_INLINE void notify_all(const T* ptr) noexcept {
+	_MSTL atomic_notify_address(ptr, true);
 }
 
 template <typename T>

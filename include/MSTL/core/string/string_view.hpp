@@ -54,5 +54,27 @@ constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
     return true;
 }
 
+template <typename CharT, typename Pred>
+constexpr bool getline(const basic_string_view<CharT> data, size_t& pos,
+    basic_string_view<CharT>& str, Pred split = [](const CharT ch) {
+        return ch == static_cast<CharT>('\n');
+    }) {
+
+    if (pos >= data.size()) {
+        str = basic_string_view<CharT>();
+        return false;
+    }
+
+    size_t start = pos;
+    size_t end = pos;
+    while (end < data.size() && !split(data[end])) {
+        ++end;
+    }
+    str = data.substr(start, end - start);
+    pos = (end < data.size()) ? end + 1 : end;
+
+    return true;
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_STRING_VIEW_HPP__

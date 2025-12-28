@@ -3,9 +3,6 @@
 #include "../string/char_types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_API size_t get_available_memory() noexcept;
-
-
 #ifdef MSTL_COMPILER_GNUC__
 	#define MSTL_MEMORY_BARRIER(p) __asm__ volatile ("" : : "m" (*p) : "memory");
 #elif defined(MSTL_COMPILER_MSVC__)

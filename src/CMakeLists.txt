@@ -12,6 +12,13 @@ function(configure_compiler_options target)
                 /W3
                 >
         )
+
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+        add_compile_options(
+                "$<$<CONFIG:Debug>:/MDd>"
+                "$<$<NOT:$<CONFIG:Debug>>:/MD>"
+        )
+
         message(STATUS "Configured MSVC compiler options for ${target} (${CMAKE_BUILD_TYPE})")
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE
@@ -255,6 +262,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
@@ -283,8 +291,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
@@ -292,6 +298,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/iterator/file_line_iterator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
@@ -412,8 +419,8 @@ configure_compiler_options(MSTL)
 # 链接系统库
 if(WIN32)
     target_link_libraries(MSTL PUBLIC
-            ws2_32 wsock32 SetupAPI cfgmgr32
-            DbgHelp synchronization Shell32
+            ws2_32 wsock32 SetupAPI cfgmgr32 pdh
+            DbgHelp synchronization Shell32 Psapi
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(MSTL PUBLIC

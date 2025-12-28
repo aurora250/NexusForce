@@ -1,7 +1,6 @@
 #ifndef MSTL_CORE_INTERFACE_ICOLLECTOR_HPP__
 #define MSTL_CORE_INTERFACE_ICOLLECTOR_HPP__
 #include "../algorithm/type_erase.hpp"
-#include "../functional/hash.hpp"
 #include "icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 

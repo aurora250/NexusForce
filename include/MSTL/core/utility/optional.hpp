@@ -18,6 +18,14 @@ static constexpr nullopt_t nullopt;
 template <typename T>
 class optional;
 
+template <typename T>
+struct is_optional : false_type {};
+template <typename T>
+struct is_optional<optional<T>> : true_type {};
+
+template <typename T>
+MSTL_INLINE17 bool is_optional_v = is_optional<T>::value;
+
 
 template <typename T>
 class optional : icommon<optional<T>> {
@@ -28,7 +36,7 @@ class optional : icommon<optional<T>> {
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using null_type     = nullopt_t;
+    using null_type = nullopt_t;
 
 private:
     template <typename U>
@@ -54,12 +62,33 @@ private:
         is_assignable<T&, optional<U>&&>>;
 
     bool have_value_ = false;
-    union { T value_ = _MSTL initialize<T>(); };
+    aligned_storage_t<sizeof(T), alignof(T)> storage_;
+
+    constexpr T* get_ptr() noexcept {
+        return reinterpret_cast<T*>(&storage_);
+    }
+    constexpr const T* get_ptr() const noexcept {
+        return reinterpret_cast<const T*>(&storage_);
+    }
+
+    template <typename... Args>
+    void construct_value(Args&&... args) {
+        _MSTL construct(get_ptr(), _MSTL forward<Args>(args)...);
+        have_value_ = true;
+    }
+
+    void destroy_value() noexcept {
+        if (have_value_) {
+            _MSTL destroy(get_ptr());
+            have_value_ = false;
+        }
+    }
 
 public:
     constexpr optional() noexcept = default;
 
     constexpr optional(null_type) noexcept {}
+
     MSTL_CONSTEXPR20 optional& operator =(null_type) noexcept {
         reset();
         return *this;
@@ -70,37 +99,49 @@ public:
             is_constructible_v<T, U> && is_convertible_v<U, T>, int
     > = 0>
     constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
-    : value_(_MSTL forward<U>(value)) {}
+    : have_value_(true) {
+        _MSTL construct(get_ptr(), _MSTL forward<U>(value));
+    }
 
     template <typename U, enable_if_t<
         is_valid_optional<U>::value && !is_same_v<remove_cvref_t<U>, optional> &&
             is_constructible_v<T, U> && !is_convertible_v<U, T>, int
     > = 0>
     constexpr optional(U&& value) noexcept(is_nothrow_constructible_v<T, U>)
-    : value_(_MSTL forward<U>(value)) {}
+    : have_value_(true) {
+        _MSTL construct(get_ptr(), _MSTL forward<U>(value));
+    }
 
     template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
         && negation_v<conjunction<is_scalar<T>, is_same<T, decay_t<U>>>>
         && is_constructible_v<T, U> && is_assignable_v<T&, U>, int> = 0>
     MSTL_CONSTEXPR20 optional& operator =(U&& value)
     noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
-        if (have_value_)
-            value_ = _MSTL forward<U>(value);
-        else
-            _MSTL construct(&value_ ,_MSTL forward<U>(value));
+        if (have_value_) {
+            *get_ptr() = _MSTL forward<U>(value);
+        } else {
+            _MSTL construct(get_ptr(), _MSTL forward<U>(value));
+            have_value_ = true;
+        }
         return *this;
     }
 
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
         is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(const optional<U>& x) noexcept(is_nothrow_constructible_v<T, const U&>) {
-        if (x) emplace(*x);
+        if (x) {
+            _MSTL construct(get_ptr(), *x);
+            have_value_ = true;
+        }
     }
 
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
         !is_convertible_v<const U&, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr explicit optional(const optional<U>& x) noexcept(is_nothrow_constructible_v<T, const U&>) {
-        if (x) emplace(*x);
+        if (x) {
+            _MSTL construct(get_ptr(), *x);
+            have_value_ = true;
+        }
     }
 
     template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
@@ -111,13 +152,12 @@ public:
         if (_MSTL addressof(x) == this) return *this;
         if (x) {
             if (have_value_) {
-                value_ = *x;
+                *get_ptr() = *x;
+            } else {
+                _MSTL construct(get_ptr(), *x);
+                have_value_ = true;
             }
-            else {
-                _MSTL construct(&value_, *x);
-            }
-        }
-        else {
+        } else {
             reset();
         }
         return *this;
@@ -125,7 +165,7 @@ public:
 
     optional(const optional& other) {
         if (other.have_value_) {
-            _MSTL construct(&value_, other.value_);
+            _MSTL construct(get_ptr(), *other);
             have_value_ = true;
         }
     }
@@ -134,9 +174,9 @@ public:
         if (this != &other) {
             if (other.have_value_) {
                 if (have_value_) {
-                    value_ = other.value_;
+                    *get_ptr() = *other;
                 } else {
-                    _MSTL construct(&value_, other.value_);
+                    _MSTL construct(get_ptr(), *other);
                     have_value_ = true;
                 }
             } else {
@@ -149,13 +189,19 @@ public:
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
         is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(optional<U>&& x) noexcept(is_nothrow_constructible_v<T, U>) {
-        if (x) emplace(_MSTL move(*x));
+        if (x) {
+            _MSTL construct(get_ptr(), _MSTL move(*x));
+            have_value_ = true;
+        }
     }
 
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, U> &&
         !is_convertible_v<U, T> && convertible_from_optional<U>::value, int> = 0>
     constexpr optional(optional<U>&& x) noexcept(is_nothrow_constructible_v<T, U>) {
-        if (x) emplace(_MSTL move(*x));
+        if (x) {
+            _MSTL construct(get_ptr(), _MSTL move(*x));
+            have_value_ = true;
+        }
     }
 
     template <typename U = T, enable_if_t<!is_same_v<remove_cvref_t<U>, optional>
@@ -165,19 +211,21 @@ public:
     noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
         if (_MSTL addressof(x) == this) return *this;
         if (x) {
-            if (have_value_)
-                value_ = _MSTL move(*x);
-            else
-                _MSTL construct(&value_, _MSTL move(*x));
-        }
-        else
+            if (have_value_) {
+                *get_ptr() = _MSTL move(*x);
+            } else {
+                _MSTL construct(get_ptr(), _MSTL move(*x));
+                have_value_ = true;
+            }
+        } else {
             reset();
+        }
         return *this;
     }
 
     optional(optional&& other) noexcept {
         if (other.have_value_) {
-            _MSTL construct(&value_, _MSTL move(other.value_));
+            _MSTL construct(get_ptr(), _MSTL move(*other));
             have_value_ = true;
             other.reset();
         }
@@ -187,9 +235,9 @@ public:
         if (this != &other) {
             if (other.have_value_) {
                 if (have_value_) {
-                    value_ = _MSTL move(other.value_);
+                    *get_ptr() = _MSTL move(*other);
                 } else {
-                    _MSTL construct(&value_, _MSTL move(other.value_));
+                    _MSTL construct(get_ptr(), _MSTL move(*other));
                     have_value_ = true;
                 }
                 other.reset();
@@ -202,14 +250,21 @@ public:
 
     template <typename U, enable_if_t<is_constructible_v<T, U&>, int> = 0>
     constexpr optional(const optional<U&>& other) {
-        if (other) this->emplace(*other);
+        if (other) {
+            _MSTL construct(get_ptr(), *other);
+            have_value_ = true;
+        }
     }
 
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
     MSTL_CONSTEXPR20 optional& operator =(const optional<U&>& other) {
         if (other) {
-            if (have_value_) value_ = *other;
-            else this->emplace(*other);
+            if (have_value_) {
+                *get_ptr() = *other;
+            } else {
+                _MSTL construct(get_ptr(), *other);
+                have_value_ = true;
+            }
         } else {
             reset();
         }
@@ -219,12 +274,16 @@ public:
     template <typename ...Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
     constexpr explicit optional(_MSTL_TAG inplace_construct_tag, Types&&... args)
     noexcept(is_nothrow_constructible_v<T, Types...>)
-    : have_value_(true), value_(_MSTL forward<Types>(args)...) {}
+    : have_value_(true) {
+        _MSTL construct(get_ptr(), _MSTL forward<Types>(args)...);
+    }
 
     template <typename U, typename ...Types, enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
     constexpr explicit optional(_MSTL_TAG inplace_construct_tag, std::initializer_list<U> ilist, Types &&...args)
     noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>)
-    : have_value_(true), value_(ilist, _MSTL forward<Types>(args)...) {}
+    : have_value_(true) {
+        _MSTL construct(get_ptr(), ilist, _MSTL forward<Types>(args)...);
+    }
 
     MSTL_CONSTEXPR20 ~optional() noexcept {
         reset();
@@ -234,7 +293,7 @@ public:
     MSTL_CONSTEXPR20 void emplace(Types&&... args)
     noexcept(is_nothrow_constructible_v<T, Types...>) {
         reset();
-        _MSTL construct(&value_, _MSTL forward<Types>(args)...);
+        _MSTL construct(get_ptr(), _MSTL forward<Types>(args)...);
         have_value_ = true;
     }
 
@@ -243,15 +302,12 @@ public:
     MSTL_CONSTEXPR20 void emplace(std::initializer_list<U> ilist, Types&&... args)
     noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) {
         reset();
-        _MSTL construct(&value_, ilist, _MSTL forward<Types>(args)...);
+        _MSTL construct(get_ptr(), ilist, _MSTL forward<Types>(args)...);
         have_value_ = true;
     }
 
     MSTL_CONSTEXPR20 void reset() noexcept {
-        if (have_value_) {
-            _MSTL destroy(&value_);
-            have_value_ = false;
-        }
+        destroy_value();
     }
 
     MSTL_NODISCARD constexpr bool has_value() const noexcept {
@@ -262,31 +318,41 @@ public:
     }
 
     constexpr const_reference value() const & {
-        if (!have_value_) throw_exception(optional_exception());
-        return value_;
+        if (!have_value_) {
+            throw_exception(optional_exception());
+        }
+        return *get_ptr();
     }
     constexpr reference value() & {
-        if (!have_value_) throw_exception(optional_exception());
-        return value_;
+        if (!have_value_) {
+            throw_exception(optional_exception());
+        }
+        return *get_ptr();
     }
     constexpr const value_type&& value() const && {
-        if (!have_value_) throw_exception(optional_exception());
-        return _MSTL move(value_);
+        if (!have_value_) {
+            throw_exception(optional_exception());
+        }
+        return _MSTL move(*get_ptr());
     }
     constexpr value_type&& value() && {
-        if (!have_value_) throw_exception(optional_exception());
-        return _MSTL move(value_);
+        if (!have_value_) {
+            throw_exception(optional_exception());
+        }
+        return _MSTL move(*get_ptr());
     }
 
     constexpr value_type value_or(value_type value) const & {
-        if (!have_value_)
+        if (!have_value_) {
             return value;
-        return value_;
+        }
+        return *get_ptr();
     }
     constexpr value_type value_or(value_type value) && noexcept {
-        if (!have_value_)
+        if (!have_value_) {
             return value;
-        return _MSTL move(value_);
+        }
+        return _MSTL move(*get_ptr());
     }
 
     template <typename F, enable_if_t<is_invocable_v<F> && is_copy_constructible_v<T>, int> = 0>
@@ -308,84 +374,83 @@ public:
     template <typename F>
     constexpr decltype(auto) and_then(F&& f) const & {
         if (have_value_) {
-            return _MSTL forward<F>(f)(value_);
+            return _MSTL forward<F>(f)(*get_ptr());
         }
-        return remove_cvref_t<decltype(f(value_))>{};
+        return remove_cvref_t<decltype(f(*get_ptr()))>{};
     }
     template <typename F>
     constexpr decltype(auto) and_then(F&& f) & {
         if (have_value_) {
-            return _MSTL forward<F>(f)(value_);
+            return _MSTL forward<F>(f)(*get_ptr());
         }
-        return remove_cvref_t<decltype(f(value_))>{};
+        return remove_cvref_t<decltype(f(*get_ptr()))>{};
     }
     template <typename F>
     constexpr decltype(auto) and_then(F&& f) const && {
         if (have_value_) {
-            return _MSTL forward<F>(f)(_MSTL move(value_));
+            return _MSTL forward<F>(f)(_MSTL move(*get_ptr()));
         }
-        return remove_cvref_t<decltype(f(_MSTL move(value_)))>{};
+        return remove_cvref_t<decltype(f(_MSTL move(*get_ptr())))>{};
     }
     template <typename F>
     constexpr decltype(auto) and_then(F&& f) && {
         if (have_value_) {
-            return _MSTL forward<F>(f)(_MSTL move(value_));
+            return _MSTL forward<F>(f)(_MSTL move(*get_ptr()));
         }
-        return remove_cvref_t<decltype(f(_MSTL move(value_)))>{};
+        return remove_cvref_t<decltype(f(_MSTL move(*get_ptr())))>{};
     }
 
     template <typename F>
-    constexpr auto transform(F&& f) const & -> optional<remove_cvref_t<decltype(f(value_))>> {
+    constexpr auto transform(F&& f) const & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
-            return _MSTL forward<F>(f)(value_);
+            return _MSTL forward<F>(f)(*get_ptr());
         }
         return nullopt;
     }
     template <typename F>
-    constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(value_))>> {
+    constexpr auto transform(F&& f) & -> optional<remove_cvref_t<decltype(f(*get_ptr()))>> {
         if (have_value_) {
-            return _MSTL forward<F>(f)(value_);
+            return _MSTL forward<F>(f)(*get_ptr());
         }
         return nullopt;
     }
     template <typename F>
-    constexpr auto transform(F&& f) const && -> optional<remove_cvref_t<decltype(f(_MSTL move(value_)))>> {
+    constexpr auto transform(F&& f) const && -> optional<remove_cvref_t<decltype(f(_MSTL move(*get_ptr())))>> {
         if (have_value_) {
-            return _MSTL forward<F>(f)(_MSTL move(value_));
+            return _MSTL forward<F>(f)(_MSTL move(*get_ptr()));
         }
         return nullopt;
     }
     template <typename F>
-    constexpr auto transform(F&& f) && -> optional<remove_cvref_t<decltype(f(_MSTL move(value_)))>> {
+    constexpr auto transform(F&& f) && -> optional<remove_cvref_t<decltype(f(_MSTL move(*get_ptr())))>> {
         if (have_value_) {
-            return _MSTL forward<F>(f)(_MSTL move(value_));
+            return _MSTL forward<F>(f)(_MSTL move(*get_ptr()));
         }
         return nullopt;
     }
 
-    constexpr const_pointer operator ->() const noexcept {
-        return _MSTL addressof(value_);
-    }
-    constexpr pointer operator ->() noexcept {
-        return _MSTL addressof(value_);
-    }
+    constexpr const_pointer operator ->() const noexcept { return get_ptr(); }
+    constexpr pointer operator ->() noexcept { return get_ptr(); }
 
-    constexpr const_reference operator *() const & noexcept { return value_; }
-    constexpr reference operator *() & noexcept { return value_; }
-    constexpr const value_type&& operator *() const && noexcept { return _MSTL move(value_); }
-    constexpr value_type&& operator *() && noexcept { return _MSTL move(value_); }
+    constexpr const_reference operator *() const & noexcept { return *get_ptr(); }
+    constexpr reference operator *() & noexcept { return *get_ptr(); }
+    constexpr const value_type&& operator *() const && noexcept { return _MSTL move(*get_ptr()); }
+    constexpr value_type&& operator *() && noexcept { return _MSTL move(*get_ptr()); }
 
     constexpr bool operator ==(const optional& rhs) const noexcept {
-        if (have_value_ != rhs.have_value_)
+        if (have_value_ != rhs.have_value_) {
             return false;
-        if (have_value_)
-            return value_ == rhs.value_;
+        }
+        if (have_value_) {
+            return *get_ptr() == *rhs.get_ptr();
+        }
         return true;
     }
     constexpr bool operator <(const optional& rhs) const noexcept {
-        if (!have_value_ || !rhs.have_value_)
+        if (!have_value_ || !rhs.have_value_) {
             return false;
-        return value_ < rhs.value_;
+        }
+        return *get_ptr() < *rhs.get_ptr();
     }
 
     constexpr bool operator ==(nullopt_t) const noexcept { return !have_value_; }
@@ -415,31 +480,24 @@ public:
     }
 
     constexpr size_t to_hash() const noexcept {
-        return hash<T>()(this->operator*());
+        return have_value_ ? hash<T>()(*get_ptr()) : 0;
     }
 
     MSTL_CONSTEXPR20 void swap(optional& x)
     noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
         if(_MSTL addressof(x) == this) return;
         if (have_value_ && x.have_value_) {
-            _MSTL swap(value_, x.value_);
-        }
-        else if (!have_value_ && !x.have_value_) {}
-        else if (have_value_) {
-            x.emplace(_MSTL move(value_));
+            _MSTL swap(*get_ptr(), *x.get_ptr());
+        } else if (!have_value_ && !x.have_value_) {
+        } else if (have_value_) {
+            x.emplace(_MSTL move(storage_));
             reset();
-        }
-        else {
+        } else {
             emplace(_MSTL move(x.value_));
             x.reset();
         }
     }
 };
-#ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename T>
-optional(T) -> optional<T>;
-#endif
-
 
 
 template <typename T>
@@ -640,6 +698,11 @@ public:
         _MSTL swap(ptr_, other.ptr_);
     }
 };
+
+#ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
+template <typename T>
+optional(T) -> optional<T>;
+#endif
 
 
 template <typename T, enable_if_t<is_constructible_v<decay_t<T>, T>, int> = 0>

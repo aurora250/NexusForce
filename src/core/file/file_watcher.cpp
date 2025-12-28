@@ -388,7 +388,7 @@ void file_watcher::watch_thread_func() {
 #endif
 }
 
-bool file_watcher::update_watch(FILE_WATCH_EVENT events) {
+bool file_watcher::update_watch(const FILE_WATCH_EVENT events) {
     if (current_events_ == events) {
         return true;
     }

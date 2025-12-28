@@ -65,7 +65,6 @@ struct allocate_gpu_tag {
 };
 
 
-
 struct defer_lock_tag {
     constexpr defer_lock_tag() noexcept = default;
 };
@@ -76,19 +75,6 @@ struct try_lock_tag {
 };
 MSTL_INLINE17 constexpr _MSTL_TAG try_lock_tag try_lock{};
 
-
-struct string_serializer_tag {};
-struct binary_serializer_tag {};
-struct json_serializer_tag {};
-struct xml_serializer_tag {};
-struct yaml_serializer_tag {};
-
-struct serialize_tag {};
-struct deserialize_tag {};
-
-struct compact_tag {};
-struct human_readable_tag {};
-struct versioned_tag { unsigned int version; };
 
 MSTL_END_TAG__
 MSTL_END_NAMESPACE__

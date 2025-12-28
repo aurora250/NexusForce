@@ -29,8 +29,7 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     }
     lock_guard<mutex> lock(flag.mtx_);
     if (!flag.state_.load(memory_order_relaxed)) {
-        _MSTL invoke_r<invoke_result_t<Callable, Args...>, Callable, Args...>(
-            _MSTL forward<Callable>(func), _MSTL forward<Args>(args)...);
+        _MSTL invoke_ra<Callable, Args...>(_MSTL forward<Callable>(func), _MSTL forward<Args>(args)...);
         flag.state_.store(true, memory_order_release);
     }
 }

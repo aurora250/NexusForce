@@ -463,7 +463,7 @@ public:
 	}
 	T load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
-		alignas(T) unsigned char buffer[sizeof(T)];
+		alignas(T) byte_t buffer[sizeof(T)];
 		T* ptr = reinterpret_cast<T*>(buffer);
 		__atomic_load(_MSTL addressof(value_), ptr, static_cast<int32_t>(mo));
 		return *ptr;
@@ -477,7 +477,7 @@ public:
     }
 	T exchange(T value, const memory_order mo = memory_order_seq_cst) volatile noexcept {
 #ifdef MSTL_COMPILER_GNUC__
-		alignas(T) unsigned char buffer[sizeof(T)];
+		alignas(T) byte_t buffer[sizeof(T)];
 		T* ptr = reinterpret_cast<T*>(buffer);
 		__atomic_exchange(_MSTL addressof(value_), _MSTL addressof(value), ptr, static_cast<int32_t>(mo));
 		return *ptr;

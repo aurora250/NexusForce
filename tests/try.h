@@ -7,6 +7,7 @@ void test_file();
 void test_datetimes();
 void test_print();
 void test_console();
+void test_sysinfo();
 void test_device();
 void test_env_var();
 void test_signal();

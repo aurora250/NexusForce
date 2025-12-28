@@ -139,7 +139,7 @@ process::process_info process::create_process(const string& executable,
     vector<char> cmd_line_buf(cmd_line.begin(), cmd_line.end());
     cmd_line_buf.push_back('\0');
 
-    const ::BOOL success = ::CreateProcessA(
+    const ::BOOL success = ::CreateProcess(
         nullptr, cmd_line_buf.data(),
         nullptr, nullptr,
         capture_output ? TRUE : FALSE,

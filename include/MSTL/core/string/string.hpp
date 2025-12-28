@@ -117,7 +117,7 @@ MSTL_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& pos,
 }
 
 template <typename CharT>
-MSTL_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
+MSTL_CONSTEXPR20 bool getline(const basic_string<CharT> data, size_t& pos,
     basic_string<CharT>& str, CharT delim = static_cast<CharT>('\n')) {
     str.clear();
     bool has_read = false;
@@ -125,6 +125,38 @@ MSTL_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
         has_read = true;
         const CharT c = data[pos++];
         if (c == delim) break;
+        str.push_back(c);
+    }
+    return has_read;
+}
+
+template <typename CharT, typename Pred>
+MSTL_CONSTEXPR20 bool getline(const basic_string_view<CharT> data, size_t& pos,
+    basic_string<CharT>& str, Pred split = [](const CharT c) {
+        return c == static_cast<CharT>('\n');
+    }) {
+    str.clear();
+    bool has_read = false;
+    while (pos < data.size()) {
+        has_read = true;
+        const CharT c = data[pos++];
+        if (split(c)) break;
+        str.push_back(c);
+    }
+    return has_read;
+}
+
+template <typename CharT, typename Pred>
+MSTL_CONSTEXPR20 bool getline(const basic_string<CharT> data, size_t& pos,
+    basic_string<CharT>& str, Pred split = [](const CharT c) {
+        return c == static_cast<CharT>('\n');
+    }) {
+    str.clear();
+    bool has_read = false;
+    while (pos < data.size()) {
+        has_read = true;
+        const CharT c = data[pos++];
+        if (split(c)) break;
         str.push_back(c);
     }
     return has_read;

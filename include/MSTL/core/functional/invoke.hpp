@@ -75,5 +75,17 @@ noexcept(is_nothrow_invocable_v<Callable, Args...>) {
 	);
 }
 
+template <typename Callable, typename... Args, typename Res = invoke_result_t<Callable, Args...>>
+constexpr enable_if_t<is_invocable_r_v<Res, Callable, Args...>, Res>
+invoke_ra(Callable&& f, Args&&... args)
+noexcept(is_nothrow_invocable_v<Callable, Args...>) {
+    using result = _INNER  __invoke_result_aux<Callable, Args...>;
+    using type = typename result::type;
+    using tag = typename result::invoke_type;
+    return _INNER __invoke_r_dispatch<type, tag, Res, Callable, Args...>(
+        _MSTL forward<Callable>(f), _MSTL forward<Args>(args)...
+    );
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FUNCTIONAL_INVOKE_HPP__

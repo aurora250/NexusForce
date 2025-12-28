@@ -453,7 +453,6 @@ shared_ptr<T> allocate_shared(Alloc& alloc, Args&&... args) {
     const size_t total_size = offset + sizeof(T);
     const size_t raw_size = total_size + align - 1;
 
-    using byte_t = unsigned char;
     using alloc_traits = allocator_traits<remove_cv_t<Alloc>>;
     using byte_allocator = typename alloc_traits::template alloc_rebind_t<Alloc, byte_t>;
     byte_allocator byte_alloc(alloc);
@@ -527,7 +526,6 @@ shared_ptr<T> allocate_shared_for_overwrite(Alloc& alloc) {
     const size_t total_size = offset + sizeof(T);
     const size_t raw_size = total_size + align - 1;
 
-    using byte_t = unsigned char;
     using alloc_traits = allocator_traits<Alloc>;
     using byte_allocator = typename alloc_traits::template alloc_rebind_t<Alloc, byte_t>;
     byte_allocator byte_alloc(alloc);

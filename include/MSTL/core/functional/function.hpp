@@ -35,7 +35,7 @@ union storage_data {
 	MSTL_NODISCARD const T& access() const noexcept { return *static_cast<const T*>(access()); }
 
 	__nocopy_type unused_;
-	unsigned char data_[sizeof(__nocopy_type)];
+	byte_t data_[sizeof(__nocopy_type)];
 };
 
 

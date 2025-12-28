@@ -413,6 +413,20 @@ MSTL_NODISCARD constexpr const tuple_element_t<Index, Types...>&& get(const tupl
 	return static_cast<const T&&>(static_cast<const tuple_type&&>(t).data_);
 }
 
+MSTL_END_NAMESPACE__
+
+namespace std {
+	template <typename... Types>
+	struct tuple_size<_MSTL tuple<Types...>> : _MSTL integral_constant<_MSTL size_t, sizeof...(Types)> {};
+
+	template <_MSTL size_t I, typename... Types>
+	struct tuple_element<I, _MSTL tuple<Types...>> {
+		using type = _MSTL tuple_element_t<I, _MSTL tuple<Types...>>;
+	};
+}
+
+MSTL_BEGIN_NAMESPACE__
+
 MSTL_BEGIN_INNER__
 template <size_t Index, typename... Types>
 MSTL_NODISCARD constexpr tuple_element_t<Index, Types...>&& __pair_get_from_tuple(tuple<Types...>&& t) noexcept {

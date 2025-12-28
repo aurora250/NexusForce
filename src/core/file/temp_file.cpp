@@ -33,9 +33,9 @@ void temp_file::cleanup_all_temp_files() {
         if (temp_path.exists()) {
             try {
                 if (temp_path.is_directory()) {
-                    temp_path.remove_all();
+                    MSTL_IGNORE temp_path.remove_all();
                 } else {
-                    temp_path.remove();
+                    MSTL_IGNORE temp_path.remove();
                 }
             } catch (...) {}
         }
@@ -86,7 +86,7 @@ temp_file::temp_file(
         }
     } catch (...) {
         if (file_.path().exists()) {
-            file_.path().remove();
+            MSTL_IGNORE file_.path().remove();
         }
         throw;
     }
