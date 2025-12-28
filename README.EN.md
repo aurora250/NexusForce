@@ -15,7 +15,7 @@ If there are any deficiencies, please feel free to provide feedback.
 This library assumes your operating system uses UTF-8 code page when working with IO devices. 
 If not, please try to configure it; otherwise, garbled characters may occur during IO operations.
 
-## What can you learn by reading and using MSTL?
+## What techs can you learn by reading, using and maintaining MSTL?
 
 - Functional programming design and type erasure design;
 - Type traits implementation using template metaprogramming;

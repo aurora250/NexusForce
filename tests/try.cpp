@@ -2518,14 +2518,14 @@ void periodic_work(int counter) {
 }
 
 
-static thread_pool& thread_pool_instance() {
+static auto& thread_pool_instance() {
     static thread_pool instance;
     return instance;
 }
 
 
 void test_ext_tpool() {
-    thread_pool& pool = thread_pool_instance();
+    auto& pool = thread_pool_instance();
     pool.start(5);
 
     pool.submit_task([]{ println("Normal task"); });
@@ -2644,7 +2644,7 @@ void test_dns() {
 }
 
 void test_tpool() {
-    thread_pool& pool = thread_pool_instance();
+    auto& pool = thread_pool_instance();
     pool.start(5);
     pool.submit_task(test_vector);
     pool.submit_task(test_list);

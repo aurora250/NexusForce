@@ -1,8 +1,8 @@
+#include <MSTL/threadpool/pool.hpp>
 #include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/async/thread_pool.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-struct pool_id_generator {
+struct thread_pool_id_generator {
     static uint32_t& get_id() noexcept {
         static uint32_t pool_thread_id = 0;
         return pool_thread_id;
@@ -14,7 +14,7 @@ struct pool_id_generator {
 
 manual_thread::manual_thread(thread_func&& func) noexcept
     : func_(_MSTL move(func)),
-    thread_id_(pool_id_generator::get_new_id()) {}
+    thread_id_(thread_pool_id_generator::get_new_id()) {}
 
 void manual_thread::start() {
     _MSTL thread t(_MSTL move(func_), thread_id_);
@@ -141,7 +141,7 @@ void thread_pool::stop() {
     task_size_ = 0;
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;
-    pool_id_generator::reset_id();
+    thread_pool_id_generator::reset_id();
 }
 
 MSTL_END_NAMESPACE__
