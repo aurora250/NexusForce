@@ -4,7 +4,8 @@
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename... Args>
-MSTL_CONSTEXPR20 void* construct(T* ptr, Args&&... args)
+MSTL_CONSTEXPR20 enable_if_t<is_constructible_v<T, Args...>, void*>
+construct(T* ptr, Args&&... args)
 noexcept(is_nothrow_constructible_v<T, Args...>) {
     return new (static_cast<void*>(ptr)) T(_MSTL forward<Args>(args)...);
 }

@@ -1,5 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_FUTURE_HPP__
 #define MSTL_CORE_ASYNC_FUTURE_HPP__
+#include "../utility/monostate.hpp"
 #include "future_base.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -217,6 +218,35 @@ shared_future<Res&> future<Res&>::share() noexcept {
 
 inline shared_future<void> future<void>::share() noexcept {
     return shared_future<void>(_MSTL move(*this));
+}
+
+
+template <typename T>
+struct future_result {
+    using type = T;
+};
+template <>
+struct future_result<void> {
+    using type = monostate;
+};
+
+template <typename T>
+using future_result_t = typename future_result<T>::type;
+
+
+template <typename T>
+MSTL_ALWAYS_INLINE
+enable_if_t<is_void_v<T>, future_result_t<T>>
+get(future<T>& f) {
+    f.get();
+    return monostate{};
+}
+
+template <typename T>
+MSTL_ALWAYS_INLINE
+enable_if_t<!is_void_v<T>, future_result_t<T>>
+get(future<T>& f) {
+    return f.get();
 }
 
 MSTL_END_NAMESPACE__

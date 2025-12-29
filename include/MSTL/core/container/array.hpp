@@ -1,6 +1,8 @@
 #ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
 #define MSTL_CORE_CONTAINER_ARRAY_HPP__
 #include "../interface/icollector.hpp"
+#include "../algorithm/shift.hpp"
+#include "../algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
@@ -133,13 +135,17 @@ private:
 
 public:
     constexpr array() noexcept = default;
+    MSTL_CONSTEXPR20 ~array() noexcept = default;
+
     constexpr array(const array& rhs) noexcept = default;
+    constexpr array& operator =(const array& rhs) noexcept = default;
     constexpr array(array&& rhs) noexcept = default;
+    constexpr array& operator =(array&& rhs) noexcept = default;
+
     constexpr array(std::initializer_list<T> init) noexcept {
         size_t size = init.size() < Size ? init.size() : Size;
         _MSTL copy(init.begin(), init.begin() + size, array_);
     }
-    MSTL_CONSTEXPR20 ~array() noexcept = default;
 
     MSTL_NODISCARD constexpr iterator begin() noexcept {
         return iterator(array_, 0);

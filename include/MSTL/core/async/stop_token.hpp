@@ -331,11 +331,11 @@ public:
         return static_cast<bool>(state_ref_);
     }
 
-    MSTL_NODISCARD bool stop_requested() const noexcept {
-        return static_cast<bool>(state_ref_) && state_ref_->stop_requested();
+    MSTL_NODISCARD bool stop_requested() noexcept {
+        return stop_possible() && state_ref_->stop_requested();
     }
 
-    bool request_stop() const noexcept {
+    bool request_stop() noexcept {
         if (stop_possible()) {
             return state_ref_->request_stop();
         }
@@ -352,6 +352,9 @@ public:
 
     MSTL_NODISCARD bool operator ==(const stop_source& rhs) const noexcept {
         return state_ref_ == rhs.state_ref_;
+    }
+    MSTL_NODISCARD bool operator !=(const stop_source& rhs) const noexcept {
+        return state_ref_ != rhs.state_ref_;
     }
 
 private:

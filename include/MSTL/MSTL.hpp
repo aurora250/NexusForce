@@ -8,6 +8,7 @@
 #include "core/async/latch.hpp"
 #include "core/async/lock_free_queue.hpp"
 #include "core/async/jthread.hpp"
+#include "core/async/thread_pool.hpp"
 #include "core/async/timer.hpp"
 #include "core/container/bitmap.hpp"
 #include "core/container/bitset.hpp"
@@ -66,5 +67,4 @@
 #include "network/http/http_server.hpp"
 #include "network/http/http_server.hpp"
 #include "plugin/plugin_manager.hpp"
-#include "threadpool/pool.hpp"
 #endif // MSTL_MSTL_HPP__

@@ -1,19 +1,7 @@
 #ifndef MSTL_CORE_UTILITY_VARIANT_HPP__
 #define MSTL_CORE_UTILITY_VARIANT_HPP__
-#include "../interface/icommon.hpp"
+#include "monostate.hpp"
 MSTL_BEGIN_NAMESPACE__
-
-struct monostate : icommon<monostate> {
-    constexpr monostate() noexcept = default;
-
-    constexpr bool operator ==(const monostate&) const noexcept { return true; }
-    constexpr bool operator <(const monostate&) const noexcept { return false; }
-
-    constexpr size_t to_hash() const noexcept { return 0; }
-
-    constexpr void swap(monostate&) noexcept {}
-};
-
 
 template <typename, typename>
 struct variant_index;

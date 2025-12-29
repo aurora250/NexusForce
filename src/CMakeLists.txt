@@ -296,6 +296,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/iterator/file_line_iterator.cpp
@@ -335,7 +336,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/threadpool/pool.cpp
 )
 
 # 编译为动态库
