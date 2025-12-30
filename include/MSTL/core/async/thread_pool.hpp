@@ -17,9 +17,8 @@ MSTL_INLINE17 constexpr int64_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
 static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = _MSTL thread::hardware_concurrency();
 
 
-enum class THREAD_POOL_MODE {
-	MODE_FIXED,  // static number
-	MODE_CACHED  // dynamic number
+enum class THREAD_POOL_MODE : uint8_t {
+	MODE_FIXED, MODE_CACHED
 };
 
 
@@ -50,17 +49,17 @@ struct task_group {
 
 	_MSTL atomic<size_t> running_count{0};
 
-	void increment() {
+	void increment() noexcept {
 		running_count.fetch_add(1, _MSTL memory_order_relaxed);
 	}
 
-	void decrement() {
+	void decrement() noexcept {
 		if (running_count.fetch_sub(1, _MSTL memory_order_release) == 1) {
 			running_count.notify_all();
 		}
 	}
 
-	void wait() const {
+	void wait() const noexcept {
 		size_t count = running_count.load(_MSTL memory_order_acquire);
 		while (count != 0) {
 			running_count.wait(count);
@@ -285,10 +284,10 @@ private:
 		Task task;
 		priority_type priority;
 
-		priority_task(Task t, const priority_type p)
+		priority_task(Task t, const priority_type p) noexcept
 		: task(_MSTL move(t)), priority(p) {}
 
-		bool operator <(const priority_task& other) const {
+		bool operator <(const priority_task& other) const noexcept {
 			return priority < other.priority;
 		}
 	};
@@ -325,8 +324,8 @@ private:
 	_MSTL optional<Task> try_steal_task(_INNER worker_context& ctx);
 
 public:
-    thread_pool() = default;
-    ~thread_pool() { if(is_running_) stop(); }
+    thread_pool();
+    ~thread_pool();
 
     thread_pool(const thread_pool&) = delete;
     thread_pool& operator =(const thread_pool&) = delete;

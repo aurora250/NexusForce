@@ -16,7 +16,7 @@ MSTL_BEGIN_NAMESPACE__
 MSTL_ERROR_BUILD_FINAL_CLASS(thread_exception, memory_exception, "Thread Operation Failed.")
 
 
-class MSTL_API thread : public iswappable<thread> {
+class MSTL_API thread {
 public:
     class id : public ihashable<id> {
     private:

@@ -27,27 +27,6 @@ struct hash<T, enable_if_t<is_base_of_v<ihashable<T>, T>>> {
 
 
 template <typename T>
-struct iswappable {
-private:
-    constexpr T& derived() noexcept {
-        return static_cast<T&>(*this);
-    }
-
-public:
-    constexpr void swap(T& other)
-    noexcept(noexcept(derived().swap(other))) {
-        derived().swap(other);
-    }
-};
-
-template <typename T, enable_if_t<is_base_of_v<iswappable<T>, T>, int> = 0>
-constexpr void swap(T& lhs, T& rhs)
-noexcept(noexcept(lhs.swap(rhs))) {
-    lhs.swap(rhs);
-}
-
-
-template <typename T>
 struct icomparable {
 private:
     constexpr const T& derived() const noexcept {
@@ -88,7 +67,7 @@ public:
 
 
 template <typename T>
-struct icommon : icomparable<T>, iswappable<T>, ihashable<T> {};
+struct icommon : icomparable<T>, ihashable<T> {};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_INTERFACE_ICOMMON_HPP__

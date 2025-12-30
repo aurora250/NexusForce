@@ -20,7 +20,7 @@ MSTL_END_INNER__
 MSTL_ERROR_BUILD_DERIVED_CLASS(anycast_exception, typecast_exception, "Cast From any Type Failed.")
 
 
-class MSTL_API any : public iswappable<any> {
+class MSTL_API any {
     union storage_internal {
 		storage_internal() = default;
 		storage_internal(const storage_internal&) = delete;

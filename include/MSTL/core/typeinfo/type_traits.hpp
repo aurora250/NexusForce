@@ -2175,16 +2175,13 @@ struct is_swappable;
 template <typename>
 struct is_nothrow_swappable;
 
-template <typename T>
-struct iswappable;
-
 MSTL_BEGIN_INNER__
 template <typename T>
 MSTL_ALWAYS_INLINE constexpr void __raw_swap(T&, T&)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
 MSTL_END_INNER__
 
-template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int> = 0>
+template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>>, int> = 0>
 constexpr void swap(T&, T&)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>);
 
@@ -2522,20 +2519,12 @@ constexpr void swap(T(& lhs)[Size], T(& rhs)[Size]) noexcept(is_nothrow_swappabl
     }
 }
 
-MSTL_BEGIN_INNER__
-template <typename T>
-MSTL_ALWAYS_INLINE constexpr void __raw_swap(T& lhs, T& rhs)
+template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>>, int>>
+constexpr void swap(T& lhs, T& rhs)
 noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
     T tmp = _MSTL move(lhs);
     lhs = _MSTL move(rhs);
     rhs = _MSTL move(tmp);
-}
-MSTL_END_INNER__
-
-template <typename T, enable_if_t<conjunction_v<is_move_constructible<T>, is_move_assignable<T>> && !is_base_of_v<iswappable<T>, T>, int>>
-constexpr void swap(T& lhs, T& rhs)
-noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>) {
-    _INNER __raw_swap(lhs, rhs);
 }
 
 template <typename T, typename U>

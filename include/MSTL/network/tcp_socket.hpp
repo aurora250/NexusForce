@@ -204,20 +204,34 @@ public:
     }
 
     MSTL_NODISCARD bool shutdown_send() const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        return ::shutdown(sockfd_, SD_SEND) == 0;
+#else
         return ::shutdown(sockfd_, SHUT_WR) == 0;
+#endif
     }
+
     MSTL_NODISCARD bool shutdown_receive() const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        return ::shutdown(sockfd_, SD_RECEIVE) == 0;
+#else
         return ::shutdown(sockfd_, SHUT_RD) == 0;
+#endif
     }
+
     MSTL_NODISCARD bool shutdown_both() const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        return ::shutdown(sockfd_, SD_BOTH) == 0;
+#else
         return ::shutdown(sockfd_, SHUT_RDWR) == 0;
+#endif
     }
 
     MSTL_NODISCARD bool set_nonblocking(bool nonblocking) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
         u_long mode = nonblocking ? 1 : 0;
         return ::ioctlsocket(sockfd_, FIONBIO, &mode) == 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#else
         int flags = ::fcntl(sockfd_, F_GETFL, 0);
         if (flags == -1) {
             return false;

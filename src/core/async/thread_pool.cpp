@@ -140,7 +140,7 @@ _MSTL optional<thread_pool::Task> thread_pool::try_steal_task(_INNER worker_cont
     if (steal_worker_count_.load(_MSTL memory_order_acquire) >=
         worker_contexts_ptr_.size() / 2) {
         return _MSTL nullopt;
-        }
+    }
 
     steal_worker_count_.fetch_add(1, _MSTL memory_order_release);
     ctx.is_stealing.store(true, _MSTL memory_order_release);
@@ -171,6 +171,22 @@ _MSTL optional<thread_pool::Task> thread_pool::try_steal_task(_INNER worker_cont
 
     return result;
 }
+
+thread_pool::thread_pool() {
+    worker_contexts_ptr_.reserve(THREAD_POOL_THREAD_MAX_THRESHHOLD);
+    for (size_t i = 0; i < THREAD_POOL_THREAD_MAX_THRESHHOLD; ++i) {
+        atomic<_INNER worker_context*> tmp;
+        tmp.store(nullptr, memory_order_relaxed);
+        worker_contexts_ptr_.emplace_back(move(tmp));
+    }
+}
+
+thread_pool::~thread_pool() {
+    if(is_running_) {
+        stop();
+    }
+}
+
 
 bool thread_pool::set_mode(const THREAD_POOL_MODE mode) noexcept {
     if (is_running_) return false;

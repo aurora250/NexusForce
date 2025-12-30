@@ -203,7 +203,7 @@ MSTL_END_INNER__
 
 
 template <typename Res, typename... Args>
-class function<Res(Args...)> : _INNER __function_base, public iswappable<function<Res(Args...)>> {
+class function<Res(Args...)> : _INNER __function_base {
 private:
 	template <typename F, bool IsSelf = is_same_v<remove_cvref_t<F>, function>>
 	using enable_decay_t = typename enable_if_t<!IsSelf, decay<F>>::type;

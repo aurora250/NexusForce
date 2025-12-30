@@ -50,7 +50,7 @@ MSTL_END_INNER__
 
 
 template <typename ErrorT>
-class unexpected : public iswappable<unexpected<ErrorT>>{
+class unexpected {
     static_assert(_INNER can_be_unexpected<ErrorT>, "ErrorT should be non-array, unexpected, const or volatile type");
 
 private:

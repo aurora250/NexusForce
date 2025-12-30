@@ -9,9 +9,9 @@ private:
     template <typename>
     struct result_t;
 
-    template <typename _Fn, typename... _Args>
-    struct result_t<tuple<_Fn, _Args...>>
-        : _INNER __invoke_result_aux<_Fn, _Args...> {};
+    template <typename Func, typename... Args>
+    struct result_t<tuple<Func, Args...>>
+        : _INNER __invoke_result_aux<Func, Args...> {};
 
     Tuple tup_;
 

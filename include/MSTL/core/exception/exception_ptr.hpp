@@ -67,7 +67,7 @@ struct exception_control_block {
 };
 
 
-class exception_ptr : public iswappable<exception_ptr> {
+class exception_ptr {
 private:
     exception_control_block* ecb_{nullptr};
 

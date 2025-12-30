@@ -2645,15 +2645,16 @@ void test_dns() {
 
 void test_tpool() {
     auto& pool = thread_pool_instance();
-    pool.start(5);
+    pool.set_mode(THREAD_POOL_MODE::MODE_FIXED);
+    pool.start();
     pool.submit_task(test_vector);
     pool.submit_task(test_list);
     pool.submit_task(test_deque);
     pool.submit_task(test_hashtable);
     pool.submit_task(test_rbtree);
-    pool.stop();
-    pool.set_mode(THREAD_POOL_MODE::MODE_CACHED);
-    pool.start();
+    // pool.stop();
+    // pool.set_mode(THREAD_POOL_MODE::MODE_CACHED);
+    // pool.start();
     // pool.submit_task(test_string);
     pool.submit_task(test_math);
     // pool.submit_task(test_timer);
