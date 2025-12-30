@@ -23,13 +23,18 @@ function(configure_compiler_options target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE
                 -finput-charset=UTF-8 -fexec-charset=UTF-8
-                # -Watomic-alignment to atomic_base in Clang X86:
-                # misaligned atomic operation may incur significant performance penalty;
-                # the expected alignment (8 bytes) exceeds the actual alignment (4 bytes)
-                -Wno-atomic-alignment
+                -Wno-unused-result
                 $<$<CONFIG:Debug>:-Werror -O0 -g -gdwarf-4>
                 $<$<CONFIG:Release>:-O2>
         )
+        if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            target_compile_options(${target} PRIVATE
+                    # -Watomic-alignment to atomic_base in Clang X86:
+                    # misaligned atomic operation may incur significant performance penalty;
+                    # the expected alignment (8 bytes) exceeds the actual alignment (4 bytes)
+                    -Wno-atomic-alignment
+            )
+        endif()
         message(STATUS "Configured GNU/Clang compiler options for ${target} (${CMAKE_BUILD_TYPE})")
     else()
         message(FATAL_ERROR "Unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")

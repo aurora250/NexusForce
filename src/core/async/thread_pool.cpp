@@ -56,8 +56,8 @@ void thread_pool::thread_function(const id_type thread_id) {
         _MSTL optional<Task> task = _MSTL nullopt;
 
         // 从本地队列获取任务
-        if (!_INNER t_worker_ctx->local_queue.empty()) {
-            task = _INNER t_worker_ctx->local_queue.try_pop();
+        if (!_INNER t_worker_ctx->queue.empty()) {
+            task = _INNER t_worker_ctx->queue.try_pop();
         }
 
         // 从全局队列获取任务
@@ -154,7 +154,7 @@ _MSTL optional<thread_pool::Task> thread_pool::try_steal_task(_INNER worker_cont
         if (other == nullptr || other->id == ctx.id) continue;
         if (other->is_stealing.load(_MSTL memory_order_acquire)) continue;
 
-        size_t other_size = other->local_queue.size();
+        size_t other_size = other->queue.size();
         if (other_size > max_size) {
             max_size = other_size;
             target = other;
@@ -163,7 +163,7 @@ _MSTL optional<thread_pool::Task> thread_pool::try_steal_task(_INNER worker_cont
 
     _MSTL optional<Task> result = _MSTL nullopt;
     if (target != nullptr && max_size > 0) {
-        result = target->local_queue.be_stolen_by(ctx.local_queue);
+        result = target->queue.be_stolen_by(ctx.queue);
     }
 
     steal_worker_count_.fetch_sub(1, _MSTL memory_order_release);

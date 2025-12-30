@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <unistd.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
@@ -82,6 +83,8 @@ public:
         close();
     }
 
+    MSTL_NODISCARD const tcp_socket& socket() const noexcept { return *this; }
+    MSTL_NODISCARD tcp_socket& socket() noexcept { return *this; }
     MSTL_NODISCARD socket_t sockfd() const noexcept { return sockfd_; }
     MSTL_NODISCARD bool is_valid() const noexcept { return sockfd_ != INVALID_MARK; }
 
@@ -200,6 +203,34 @@ public:
         return ::connect(sockfd_, reinterpret_cast<::sockaddr*>(&addr), addr_len) == 0;
     }
 
+    MSTL_NODISCARD bool shutdown_send() const noexcept {
+        return ::shutdown(sockfd_, SHUT_WR) == 0;
+    }
+    MSTL_NODISCARD bool shutdown_receive() const noexcept {
+        return ::shutdown(sockfd_, SHUT_RD) == 0;
+    }
+    MSTL_NODISCARD bool shutdown_both() const noexcept {
+        return ::shutdown(sockfd_, SHUT_RDWR) == 0;
+    }
+
+    MSTL_NODISCARD bool set_nonblocking(bool nonblocking) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        u_long mode = nonblocking ? 1 : 0;
+        return ::ioctlsocket(sockfd_, FIONBIO, &mode) == 0;
+#elif defined(MSTL_PLATFORM_LINUX__)
+        int flags = ::fcntl(sockfd_, F_GETFL, 0);
+        if (flags == -1) {
+            return false;
+        }
+        if (nonblocking) {
+            flags |= O_NONBLOCK;
+        } else {
+            flags &= ~O_NONBLOCK;
+        }
+        return ::fcntl(sockfd_, F_SETFL, flags) == 0;
+#endif
+    }
+
     MSTL_NODISCARD ssize_t send(const void* buf, const size_t len, const int flags = 0) const noexcept {
         return ::send(sockfd_, static_cast<const char*>(buf), len, flags);
     }
@@ -244,14 +275,49 @@ public:
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
     }
 
+    MSTL_NODISCARD bool has_data_available(const milliseconds timeout = milliseconds(0)) const noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+        fd_set readfds;
+        FD_ZERO(&readfds);
+        FD_SET(sockfd_, &readfds);
+
+        ::timeval tv;
+        tv.tv_sec = timeout.count() / 1000;
+        tv.tv_usec = (timeout.count() % 1000) * 1000;
+
+        const int result = ::select(static_cast<int>(sockfd_) + 1, &readfds, nullptr, nullptr,
+                                    timeout.count() >= 0 ? &tv : nullptr);
+        return result > 0 && FD_ISSET(sockfd_, &readfds);
+#elif defined(MSTL_PLATFORM_LINUX__)
+        ::fd_set readfds{};
+        FD_ZERO(&readfds);
+        FD_SET(sockfd_, &readfds);
+
+        ::timeval tv{};
+        tv.tv_sec = timeout.count() / 1000;
+        tv.tv_usec = (timeout.count() % 1000) * 1000;
+
+        const int result = ::select(sockfd_ + 1, &readfds, nullptr, nullptr,
+                                    timeout.count() >= 0 ? &tv : nullptr);
+        return result > 0 && FD_ISSET(sockfd_, &readfds);
+#endif
+    }
+
     MSTL_NODISCARD static bool is_ipv4(const char* host) noexcept {
-        ::sockaddr_in a4;
+        ::sockaddr_in a4{};
         return ::inet_pton(AF_INET, host, &(a4.sin_addr)) == 1;
     }
 
     MSTL_NODISCARD static bool is_ipv6(const char* host) noexcept {
-        ::sockaddr_in6 a6;
+        ::sockaddr_in6 a6{};
         return ::inet_pton(AF_INET6, host, &(a6.sin6_addr)) == 1;
+    }
+
+    MSTL_NODISCARD bool operator ==(const tcp_socket& other) const noexcept {
+        return sockfd_ == other.sockfd_;
+    }
+    MSTL_NODISCARD bool operator !=(const tcp_socket& other) const noexcept {
+        return sockfd_ != other.sockfd_;
     }
 };
 

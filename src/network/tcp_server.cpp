@@ -8,7 +8,7 @@ void tcp_server::start_workers(const int thread_count) {
     }
 }
 
-void tcp_server::accept_conns() const {
+void tcp_server::accept_conns() {
     while (running_) {
         tcp_socket tcpsock = server_socket_.accept();
         if (!tcpsock.is_valid()) {

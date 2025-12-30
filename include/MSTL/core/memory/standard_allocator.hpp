@@ -10,6 +10,13 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
 
+#ifdef MSTL_COMPILER_GCC__
+using alloc_size_t = uint32_t;
+#else
+using alloc_size_t = size_t;
+#endif
+
+
 #ifdef MSTL_COMPILER_MSVC__
 MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32UL;
 
@@ -28,7 +35,7 @@ MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL = 0xFAFAFAFAUL;
 
 
 template <size_t Align>
-MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
+MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
@@ -50,7 +57,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_aux(const size_t bytes) {
 
 #ifdef MSTL_STANDARD_17__
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD) ,int> = 0>
-MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t bytes) {
+MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
     size_t align = Align;
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD)
@@ -64,7 +71,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
 }
 
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
-MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t bytes) {
+MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
     return _INNER __allocate_aux<Align>(bytes);
 }
 #endif
@@ -72,7 +79,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* __allocate_dispatch(const size_t byte
 MSTL_END_INNER__
 
 template <size_t Align>
-MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
+MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const _INNER alloc_size_t bytes) {
     if (bytes == 0) return nullptr;
 #ifdef MSTL_STANDARD_20__
     if (_MSTL is_constant_evaluated())
@@ -90,7 +97,7 @@ MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const size_t bytes) {
 MSTL_BEGIN_INNER__
 
 template <size_t>
-void __deallocate_aux(void*& ptr, size_t& bytes) noexcept {
+void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         bytes += MEMORY_NO_USER_SIZE;
@@ -116,7 +123,7 @@ void __deallocate_aux(void*& ptr, size_t& bytes) noexcept {
 
 #ifdef MSTL_STANDARD_17__
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
-MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept {
+MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
     size_t align = Align;
 #ifdef MSTL_COMPILER_MSVC__
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD)
@@ -131,7 +138,7 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept 
 }
 
 template<size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
-MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept {
+MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
     _INNER __deallocate_aux<Align>(ptr, bytes);
 }
 #endif // MSTL_STANDARD_17__
@@ -139,7 +146,7 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, size_t& bytes) noexcept 
 MSTL_END_INNER__
 
 template <size_t Align>
-MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
+MSTL_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexcept {
 #ifdef MSTL_STANDARD_20__
     if (_MSTL is_constant_evaluated()) {
         operator delete(ptr);
@@ -156,7 +163,7 @@ MSTL_CONSTEXPR20 void deallocate(void* ptr, size_t bytes) noexcept {
 
 MSTL_BEGIN_INNER__
 template <typename T>
-constexpr size_t __FINAL_ALIGN_SIZE = alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T) : MEMORY_ALIGN_THRESHHOLD;
+constexpr alloc_size_t __FINAL_ALIGN_SIZE = alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T) : MEMORY_ALIGN_THRESHHOLD;
 MSTL_END_INNER__
 
 
@@ -165,7 +172,9 @@ class standard_allocator {
     static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
 
 public:
-    MSTL_BUILD_TYPE_ALIAS(T)
+    using value_type = T;
+    using pointer    = T*;
+    using size_type  = _INNER alloc_size_t;
     using device_type = allocate_cpu_tag;
 
     template <typename U>
@@ -180,10 +189,10 @@ public:
     MSTL_CONSTEXPR20 standard_allocator& operator =(const standard_allocator&) noexcept = default;
 
     MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
-        constexpr size_t value_size = sizeof(value_type);
+        constexpr size_type value_size = sizeof(value_type);
         static_assert(value_size > 0, "value type must be complete before allocation called.");
-        const size_t alloc_size = value_size * n;
-        MSTL_DEBUG_VERIFY(alloc_size <= static_cast<size_t>(-1), "allocation will cause memory overflow.");
+        const size_type alloc_size = value_size * n;
+        MSTL_DEBUG_VERIFY(alloc_size <= static_cast<size_type>(-1), "allocation will cause memory overflow.");
         try {
             return static_cast<T*>(_MSTL allocate<_INNER __FINAL_ALIGN_SIZE<T>>(alloc_size));
         } catch (...) {
@@ -197,7 +206,7 @@ public:
     }
 
     MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
-        constexpr size_t value_size = sizeof(value_type);
+        constexpr size_type value_size = sizeof(value_type);
         MSTL_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
         _MSTL deallocate<_INNER __FINAL_ALIGN_SIZE<T>>(p, n * value_size);
     }

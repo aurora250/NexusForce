@@ -46,9 +46,9 @@ public:
     };
 
     struct binary_diff_entry {
-        difference_type offset;
-        byte_t byte1;
-        byte_t byte2;
+        difference_type offset = 0;
+        byte_t byte1 = 0;
+        byte_t byte2 = 0;
         int64_t size_diff = 0;
         bool is_size_diff = false;
     };

@@ -118,7 +118,8 @@ public:
     MSTL_CONSTEXPR20 optional& operator =(U&& value)
     noexcept(is_nothrow_constructible_v<T, U> && is_nothrow_assignable_v<T&, U>) {
         if (have_value_) {
-            *get_ptr() = _MSTL forward<U>(value);
+            auto temp = T(_MSTL forward<U>(value));
+            *get_ptr() = _MSTL move(temp);
         } else {
             _MSTL construct(get_ptr(), _MSTL forward<U>(value));
             have_value_ = true;
@@ -487,13 +488,12 @@ public:
     noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
         if(_MSTL addressof(x) == this) return;
         if (have_value_ && x.have_value_) {
-            _MSTL swap(*get_ptr(), *x.get_ptr());
-        } else if (!have_value_ && !x.have_value_) {
+            _INNER __raw_swap(*this, x);
         } else if (have_value_) {
-            x.emplace(_MSTL move(storage_));
+            x.emplace(move(**this));
             reset();
-        } else {
-            emplace(_MSTL move(x.value_));
+        } else if (x.have_value_) {
+            emplace(move(*x));
             x.reset();
         }
     }
@@ -620,13 +620,13 @@ public:
     template <typename U>
     constexpr T value_or(U&& default_value) const & {
         if (ptr_) return *ptr_;
-        return static_cast<T>(_MSTL forward<U>(default_value));
+        return _MSTL forward<U>(default_value);
     }
 
     template <typename U>
     constexpr T value_or(U&& default_value) && {
         if (ptr_) return _MSTL move(*ptr_);
-        return static_cast<T>(_MSTL forward<U>(default_value));
+        return _MSTL forward<U>(default_value);
     }
 
     template <typename F, enable_if_t<is_invocable_v<F>, int> = 0>

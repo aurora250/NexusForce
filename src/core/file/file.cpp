@@ -303,16 +303,6 @@ void file::adjust_buffer_size() {
 ::mode_t file::convert_attributes(const FILE_ATTRI attr) {
     ::mode_t mode = 0;
 
-    if ((attr & FILE_ATTRI::DIRECTORY) != FILE_ATTRI::OTHERS) {
-        mode |= S_IFDIR;
-    } else if ((attr & FILE_ATTRI::DEVICE) != FILE_ATTRI::OTHERS) {
-        mode |= S_IFBLK | S_IFCHR;
-    } else if ((attr & FILE_ATTRI::REPARSE_POINT) != FILE_ATTRI::OTHERS) {
-        mode |= S_IFLNK;
-    } else {
-        mode |= S_IFREG;
-    }
-
     if ((attr & FILE_ATTRI::READONLY) != FILE_ATTRI::OTHERS) {
         mode |= S_IRUSR | S_IRGRP | S_IROTH;
     } else {
@@ -458,17 +448,52 @@ bool file::open(_MSTL path p, const bool append,
     );
 #elif defined(MSTL_PLATFORM_LINUX__)
     auto flags = static_cast<fud_t>(access);
-    flags |= static_cast<fud_t>(creation);
-    if (append) flags |= O_APPEND;
+    const auto creation_flags = static_cast<fud_t>(creation);
 
-    const ::mode_t mode = convert_attributes(attributes);
-    handle_ = ::open(p.c_str(), flags, mode);
+    if ((creation_flags & O_CREAT) && !(flags & (O_RDONLY | O_WRONLY | O_RDWR))) {
+        flags |= O_RDWR;
+    }
+    flags |= creation_flags;
+
+    if (append) {
+        flags |= O_APPEND;
+        if (creation_flags & O_TRUNC) {
+            flags &= ~O_TRUNC;
+        }
+    }
+
+    ::mode_t mode = 0;
+    if (creation_flags & O_CREAT) {
+        if (attributes == FILE_ATTRI::OTHERS) {
+            mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+        } else {
+            mode = convert_attributes(attributes);
+            if (mode == 0) {
+                mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+            }
+        }
+    }
+
+    if (creation_flags & O_CREAT) {
+        handle_ = ::open(p.c_str(), flags, mode);
+    } else {
+        handle_ = ::open(p.c_str(), flags);
+    }
 #endif
 
     if (handle_ == INVALID_HANDLE()) {
         set_last_error();
         return false;
     }
+#ifdef MSTL_PLATFORM_LINUX__
+    else {
+        const int fd_flags = ::fcntl(handle_, F_GETFD);
+        if (fd_flags != -1) {
+            // close-on-exec
+            ::fcntl(handle_, F_SETFD, fd_flags | FD_CLOEXEC);
+        }
+    }
+#endif
 
     path_ = _MSTL move(p);
     opened_ = true;

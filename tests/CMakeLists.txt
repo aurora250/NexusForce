@@ -11,5 +11,5 @@ set_target_properties(MSTL_TEST PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
 )
 
-target_link_libraries(MSTL_TEST PRIVATE MSTL)
+target_link_libraries(MSTL_TEST PRIVATE MSTL::MSTL)
 configure_compiler_options(MSTL_TEST)

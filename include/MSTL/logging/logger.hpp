@@ -91,12 +91,19 @@ public:
     void flush();
 };
 
-#define MSTL_LOG_TRACE(msg) _MSTL logger::instance().trace(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_DEBUG(msg) _MSTL logger::instance().debug(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_INFO(msg)  _MSTL logger::instance().info(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_WARN(msg)  _MSTL logger::instance().warn(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_ERROR(msg) _MSTL logger::instance().error(msg, __FILE__, __func__, __LINE__);
-#define MSTL_LOG_FATAL(msg) _MSTL logger::instance().fatal(msg, __FILE__, __func__, __LINE__);
+#define MSTL_LOG_TRACE(msg) _MSTL logger::instance().trace(msg, __FILE__, __func__, __LINE__)
+#define MSTL_LOG_DEBUG(msg) _MSTL logger::instance().debug(msg, __FILE__, __func__, __LINE__)
+#define MSTL_LOG_INFO(msg)  _MSTL logger::instance().info(msg,  __FILE__, __func__, __LINE__)
+#define MSTL_LOG_WARN(msg)  _MSTL logger::instance().warn(msg,  __FILE__, __func__, __LINE__)
+#define MSTL_LOG_ERROR(msg) _MSTL logger::instance().error(msg, __FILE__, __func__, __LINE__)
+#define MSTL_LOG_FATAL(msg) _MSTL logger::instance().fatal(msg, __FILE__, __func__, __LINE__)
+
+#define MSTL_LOGF_TRACE(msg, ...) _MSTL logger::instance().trace(_MSTL format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define MSTL_LOGF_DEBUG(msg, ...) _MSTL logger::instance().debug(_MSTL format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define MSTL_LOGF_INFO(msg, ...)  _MSTL logger::instance().info(_MSTL format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)
+#define MSTL_LOGF_WARN(msg, ...)  _MSTL logger::instance().warn(_MSTL format(msg, __VA_ARGS__),  __FILE__, __func__, __LINE__)
+#define MSTL_LOGF_ERROR(msg, ...) _MSTL logger::instance().error(_MSTL format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
+#define MSTL_LOGF_FATAL(msg, ...) _MSTL logger::instance().fatal(_MSTL format(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_LOGGING_LOGGER_HPP__

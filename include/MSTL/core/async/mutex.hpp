@@ -23,10 +23,12 @@ private:
 
 public:
     mutex();
+    ~mutex();
 
     mutex(const mutex&) = delete;
-    mutex& operator=(const mutex&) = delete;
-    ~mutex();
+    mutex& operator =(const mutex&) = delete;
+    mutex(mutex&&) noexcept = default;
+    mutex& operator =(mutex&&) noexcept = default;
 
     native_handle_type* native_handle() noexcept { return &mutex_; }
     const native_handle_type* native_handle() const noexcept { return &mutex_; }

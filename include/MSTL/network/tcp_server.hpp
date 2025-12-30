@@ -32,7 +32,7 @@ private:
 
 private:
     void start_workers(int thread_count);
-    void accept_conns() const;
+    void accept_conns();
 
 public:
     explicit tcp_server(uint16_t port, int backlog = 128);

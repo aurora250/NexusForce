@@ -747,8 +747,8 @@ public:
 	atomic_base() noexcept = default;
 	~atomic_base() noexcept = default;
 	atomic_base(const atomic_base&) = delete;
-	atomic_base& operator=(const atomic_base&) = delete;
-	atomic_base& operator=(const atomic_base&) volatile = delete;
+	atomic_base& operator =(const atomic_base&) = delete;
+	atomic_base& operator =(const atomic_base&) volatile = delete;
 
 	constexpr atomic_base(value_type value) noexcept : value_ (value) { }
 
@@ -983,7 +983,7 @@ struct atomic_base<T*> {
 private:
 	value_type ptr_ = nullptr;
 
-	constexpr ptrdiff_t real_type_sizes(const ptrdiff_t dest) const noexcept {
+    static constexpr ptrdiff_t real_type_sizes(const ptrdiff_t dest) noexcept {
 		return dest * sizeof(T);
 	}
 
@@ -1345,12 +1345,12 @@ exchange(T* ptr, __atomic_raw_value<T> desired, memory_order mo) noexcept {
 }
 
 template <typename T>
-MSTL_ALWAYS_INLINE void notify_one(const T* ptr) noexcept {
+void notify_one(const T* ptr) noexcept {
 	_MSTL atomic_notify_address(ptr, false);
 }
 
 template <typename T>
-MSTL_ALWAYS_INLINE void notify_all(const T* ptr) noexcept {
+void notify_all(const T* ptr) noexcept {
 	_MSTL atomic_notify_address(ptr, true);
 }
 
@@ -1576,7 +1576,7 @@ public:
 	atomic_ref_base(const atomic_ref_base&) noexcept = default;
 	atomic_ref_base& operator =(const atomic_ref_base&) = delete;
 
-	T operator =(T value) const noexcept {
+	T operator =(T value) noexcept {
 		this->store(value);
 		return value;
 	}
@@ -1587,7 +1587,7 @@ public:
 		return _INNER is_lock_free_impl<sizeof(T), required_alignment>();
 	}
 
-	void store(T value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T value, const memory_order mo = memory_order_seq_cst) noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
@@ -1595,27 +1595,27 @@ public:
 		return _INNER load(ptr_, mo);
 	}
 
-	T exchange(T desire, const memory_order mo = memory_order_seq_cst) const noexcept {
+	T exchange(T desire, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
@@ -1627,11 +1627,11 @@ public:
 		});
 	}
 
-	MSTL_ALWAYS_INLINE void notify_one() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_one() noexcept {
 		_MSTL atomic_notify_address(ptr_, false);
 	}
 
-	MSTL_ALWAYS_INLINE void notify_all() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_all() noexcept {
 		_MSTL atomic_notify_address(ptr_, true);
 	}
 };
@@ -1664,18 +1664,18 @@ public:
 
 	atomic_ref_base(const atomic_ref_base&) noexcept = default;
 
-	T operator=(T value) const noexcept {
+	T operator =(T value) noexcept {
 		this->store(value);
 		return value;
 	}
 
-	operator T() const noexcept { return this->load(); }
+	MSTL_NODISCARD operator T() const noexcept { return this->load(); }
 
-	bool is_lock_free() const noexcept {
+	MSTL_NODISCARD bool is_lock_free() const noexcept {
 		return _INNER is_lock_free_impl<sizeof(T), required_alignment>();
 	}
 
-	void store(T value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T value, const memory_order mo = memory_order_seq_cst) noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
@@ -1683,27 +1683,27 @@ public:
 		return _INNER load(ptr_, mo);
 	}
 
-	T exchange(T desire, const memory_order mo = memory_order_seq_cst) const noexcept {
+	T exchange(T desire, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T& expected, T desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T& expected, T desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
@@ -1715,58 +1715,54 @@ public:
 		});
 	}
 
-	MSTL_ALWAYS_INLINE void notify_one() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_one() noexcept {
 		_MSTL atomic_notify_address(ptr_, false);
 	}
 
-	MSTL_ALWAYS_INLINE void notify_all() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_all() noexcept {
 		_MSTL atomic_notify_address(ptr_, true);
 	}
 
 
-	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_add(ptr_, value, mo);
 	}
 
-	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_sub(ptr_, value, mo);
 	}
 
-	value_type fetch_and(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_and(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_and(ptr_, value, mo);
 	}
 
-	value_type fetch_or(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_or(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_or(ptr_, value, mo);
 	}
 
-	value_type fetch_xor(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_xor(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_xor(ptr_, value, mo);
 	}
 
-	MSTL_ALWAYS_INLINE value_type operator ++(int) const noexcept { return fetch_add(1); }
-	MSTL_ALWAYS_INLINE value_type operator --(int) const noexcept { return fetch_sub(1); }
+	MSTL_ALWAYS_INLINE value_type operator ++(int) noexcept { return fetch_add(1); }
+	MSTL_ALWAYS_INLINE value_type operator --(int) noexcept { return fetch_sub(1); }
 
-	value_type operator ++() const noexcept {
-		return _INNER add_fetch(ptr_, value_type(1));
-	}
-	value_type operator --() const noexcept {
-		return _INNER sub_fetch(ptr_, value_type(1));
-	}
+	value_type operator ++() noexcept { return _INNER add_fetch(ptr_, value_type(1)); }
+	value_type operator --() noexcept { return _INNER sub_fetch(ptr_, value_type(1)); }
 
-	value_type operator +=(value_type value) const noexcept {
+	value_type operator +=(value_type value) noexcept {
 		return _INNER add_fetch(ptr_, value);
 	}
-	value_type operator -=(value_type value) const noexcept {
+	value_type operator -=(value_type value) noexcept {
 		return _INNER sub_fetch(ptr_, value);
 	}
-	value_type operator &=(value_type value) const noexcept {
+	value_type operator &=(value_type value) noexcept {
 		return _INNER and_fetch(ptr_, value);
 	}
-	value_type operator |=(value_type value) const noexcept {
+	value_type operator |=(value_type value) noexcept {
 		return _INNER or_fetch(ptr_, value);
 	}
-	value_type operator ^=(value_type value) const noexcept {
+	value_type operator ^=(value_type value) noexcept {
 		return _INNER xor_fetch(ptr_, value);
 	}
 };
@@ -1799,7 +1795,7 @@ public:
 
 	atomic_ref_base(const atomic_ref_base&) noexcept = default;
 
-	Float operator=(Float value) const noexcept {
+	Float operator =(Float value) noexcept {
 		this->store(value);
 		return value;
 	}
@@ -1810,7 +1806,7 @@ public:
 		return _INNER is_lock_free_impl<sizeof(Float), required_alignment>();
 	}
 
-	void store(Float value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(Float value, const memory_order mo = memory_order_seq_cst) noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
@@ -1818,27 +1814,27 @@ public:
 		return _INNER load(ptr_, mo);
 	}
 
-	Float exchange(Float desire, const memory_order mo = memory_order_seq_cst) const noexcept {
+	Float exchange(Float desire, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(Float& expected, Float desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(Float& expected, Float desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
@@ -1850,27 +1846,25 @@ public:
 		});
 	}
 
-	MSTL_ALWAYS_INLINE void notify_one() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_one() noexcept {
 		_MSTL atomic_notify_address(ptr_, false);
 	}
 
-	MSTL_ALWAYS_INLINE void notify_all() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_all() noexcept {
 		_MSTL atomic_notify_address(ptr_, true);
 	}
 
 
-	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_add(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_add_float(ptr_, value, mo);
 	}
-
-	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	value_type fetch_sub(value_type value, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_sub_float(ptr_, value, mo);
 	}
 
 	value_type operator+=(value_type value) const noexcept {
 		return _INNER add_fetch_float(ptr_, value);
 	}
-
 	value_type operator-=(value_type value) const noexcept {
 		return _INNER sub_fetch_float(ptr_, value);
 	}
@@ -1913,7 +1907,7 @@ public:
 
 	atomic_ref_base(const atomic_ref_base&) noexcept = default;
 
-	T* operator =(T* value) const noexcept {
+	T* operator =(T* value) noexcept {
 		this->store(value);
 		return value;
 	}
@@ -1924,7 +1918,7 @@ public:
 		return _INNER is_lock_free_impl<sizeof(T*), required_alignment>();
 	}
 
-	void store(T* value, const memory_order mo = memory_order_seq_cst) const noexcept {
+	void store(T* value, const memory_order mo = memory_order_seq_cst) noexcept {
 		_INNER store(ptr_, value, mo);
 	}
 
@@ -1932,27 +1926,27 @@ public:
 		return _INNER load(ptr_, mo);
 	}
 
-	T* exchange(T* desire, const memory_order mo = memory_order_seq_cst) const noexcept {
+	T* exchange(T* desire, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER exchange(ptr_, desire, mo);
 	}
 
 	bool compare_exchange_weak(T*& expected, T* desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_weak(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_strong(T*& expected, T* desire,
-		const memory_order success, const memory_order failure) const noexcept {
+		const memory_order success, const memory_order failure) noexcept {
 		return _INNER compare_exchange_strong(ptr_, expected, desire, success, failure);
 	}
 
 	bool compare_exchange_weak(T*& expected, T* desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_weak(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	bool compare_exchange_strong(T*& expected, T* desire,
-		const memory_order mo = memory_order_seq_cst) const noexcept {
+		const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER compare_exchange_strong(expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
@@ -1964,42 +1958,36 @@ public:
 		});
 	}
 
-	MSTL_ALWAYS_INLINE void notify_one() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_one() noexcept {
 		_MSTL atomic_notify_address(ptr_, false);
 	}
 
-	MSTL_ALWAYS_INLINE void notify_all() const noexcept {
+	MSTL_ALWAYS_INLINE void notify_all() noexcept {
 		_MSTL atomic_notify_address(ptr_, true);
 	}
 
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_add(const difference_type dest, const memory_order mo = memory_order_seq_cst) const noexcept {
+	fetch_add(const difference_type dest, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_add(ptr_, real_type_sizes(dest), mo);
 	}
 
 	MSTL_ALWAYS_INLINE value_type
-	fetch_sub(const difference_type dest, const memory_order mo = memory_order_seq_cst) const noexcept {
+	fetch_sub(const difference_type dest, const memory_order mo = memory_order_seq_cst) noexcept {
 		return _INNER fetch_sub(ptr_, real_type_sizes(dest), mo);
 	}
 
-	value_type operator ++(int) const noexcept { return fetch_add(1); }
-	value_type operator --(int) const noexcept { return fetch_sub(1); }
+	value_type operator ++(int) noexcept { return fetch_add(1); }
+	value_type operator --(int) noexcept { return fetch_sub(1); }
+	value_type operator ++() noexcept { return _INNER add_fetch(ptr_, real_type_sizes(1)); }
+	value_type operator --() noexcept { return _INNER sub_fetch(ptr_, real_type_sizes(1)); }
 
-	value_type operator ++() const noexcept {
-		return _INNER add_fetch(ptr_, real_type_sizes(1));
+	value_type operator +=(const difference_type dest) noexcept {
+	    return _INNER add_fetch(ptr_, real_type_sizes(dest));
 	}
 
-	value_type operator --() const noexcept {
-		return _INNER sub_fetch(ptr_, real_type_sizes(1));
-	}
-
-	value_type operator +=(const difference_type dest) const noexcept {
-		return _INNER add_fetch(ptr_, real_type_sizes(dest));
-	}
-
-	value_type operator -=(const difference_type dest) const noexcept {
-		return _INNER sub_fetch(ptr_, real_type_sizes(dest));
+	value_type operator -=(const difference_type dest) noexcept {
+	    return _INNER sub_fetch(ptr_, real_type_sizes(dest));
 	}
 };
 

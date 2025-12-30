@@ -13,14 +13,19 @@ MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API process {
 public:
+#ifdef MSTL_PLATFORM_WINDOWS__
+    using process_id_t = ::DWORD;
+#else
+    using process_id_t = ::pid_t;
+#endif
+
     struct process_info {
+        process_id_t process_id;
 #ifdef MSTL_PLATFORM_WINDOWS__
         ::PROCESS_INFORMATION pi;
-        ::DWORD process_id;
         ::HANDLE hStdoutRead;
         ::HANDLE hStdoutWrite;
 #else
-        ::pid_t process_id;
         int stdout_fd[2];  // [0] read，[1] write
 #endif
         bool is_running;

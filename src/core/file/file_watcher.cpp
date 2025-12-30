@@ -145,7 +145,7 @@ void file_watcher::stop() {
 #elif defined(MSTL_PLATFORM_LINUX__)
     if (event_fd_ != -1) {
         constexpr uint64_t value = 1;
-        ::write(event_fd_, &value, sizeof(value));
+        MSTL_IGNORE ::write(event_fd_, &value, sizeof(value));
     }
 #endif
 
@@ -343,7 +343,7 @@ void file_watcher::watch_thread_func() {
 
         if (fds[1].revents & POLLIN) {
             uint64_t value;
-            ::read(event_fd_, &value, sizeof(value));
+            MSTL_IGNORE ::read(event_fd_, &value, sizeof(value));
             break;
         }
 

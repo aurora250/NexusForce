@@ -368,9 +368,9 @@
 #define MSTL_IGNORE (void)
 
 
-#if defined(__GNUC__)
+#ifdef MSTL_COMPILER_GNUC__
     #define MSTL_UNREACHABLE __builtin_unreachable()
-#elif defined(_MSC_VER)
+#elif defined(MSTL_COMPILER_MSVC__)
     #define MSTL_UNREACHABLE __assume(false)
 #else
     #define MSTL_UNREACHABLE ((void)0)

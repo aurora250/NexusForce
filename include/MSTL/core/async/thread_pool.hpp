@@ -170,11 +170,11 @@ public:
 private:
 	constexpr static inline size_t mask_ = CAPACITY - 1;
 
-	MSTL_NODISCARD static auto pack(const uint32_t steal, const uint32_t local_head) noexcept -> uint64_t {
+	MSTL_NODISCARD static uint64_t pack(const uint32_t steal, const uint32_t local_head) noexcept {
 		return static_cast<uint64_t>(steal) << 32 | static_cast<uint64_t>(local_head);
 	}
 
-	MSTL_NODISCARD static auto unpack(const uint64_t head) noexcept -> _MSTL pair<uint32_t, uint32_t> {
+	MSTL_NODISCARD static pair<uint32_t, uint32_t> unpack(const uint64_t head) noexcept {
 		return {static_cast<uint32_t>(head >> 32), static_cast<uint32_t>(head)};
 	}
 
@@ -222,8 +222,8 @@ private:
 
 private:
 	_MSTL array<_MSTL function<void()>, CAPACITY> tasks_{};
-	_MSTL atomic<uint64_t> head_{};
-	_MSTL atomic<uint32_t> tail_{};
+	_MSTL atomic<uint64_t> head_{0};
+	_MSTL atomic<uint32_t> tail_{0};
 };
 
 
@@ -235,13 +235,13 @@ struct worker_context {
 	worker_context& operator =(const worker_context&) = delete;
 
 	worker_context(worker_context&& other) noexcept
-	: local_queue(_MSTL move(other.local_queue))
+	: queue(_MSTL move(other.queue))
 	, id(other.id)
 	, is_stealing(other.is_stealing.load(_MSTL memory_order_relaxed)) {}
 
 	worker_context& operator =(worker_context&& other) noexcept {
 		if (this != &other) {
-			local_queue = _MSTL move(other.local_queue);
+			queue = _MSTL move(other.queue);
 			id = other.id;
 			is_stealing.store(other.is_stealing.load(
 				_MSTL memory_order_relaxed), _MSTL memory_order_relaxed);
@@ -249,7 +249,7 @@ struct worker_context {
 		return *this;
 	}
 
-	local_queue<> local_queue{};
+	local_queue<> queue{};
 	id_type id{0};
 	_MSTL atomic<bool> is_stealing{false};
 };
@@ -434,15 +434,15 @@ decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& fun
 			return dummy_task->get_future();
 		}
 
-		task_queue_.emplace(priority_task(_MSTL move(job), priority));
+		task_queue_.emplace(_MSTL move(job), priority);
 		++task_size_;
 		++total_submitted_tasks_;
 		not_empty_.notify_all();
 	} else {
 		// 普通优先级任务
-		if (_INNER t_worker_ctx != nullptr && _INNER t_worker_ctx->local_queue.remain_size() > 0) {
+		if (_INNER t_worker_ctx != nullptr && _INNER t_worker_ctx->queue.remain_size() > 0) {
 			// 当前线程是工作线程且本地队列未满，提交到本地队列
-			_INNER t_worker_ctx->local_queue.push_back(_MSTL move(job));
+			_INNER t_worker_ctx->queue.push_back(_MSTL move(job));
 			++total_submitted_tasks_;
 		} else {
 			// 否则提交到全局队列

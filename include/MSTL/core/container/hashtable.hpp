@@ -569,7 +569,7 @@ public:
     }
 
     void rehash(const size_type new_size) {
-        const size_type min_buckets_for_size = static_cast<size_type>(
+        const auto min_buckets_for_size = static_cast<size_type>(
             _MSTL ceil(static_cast<double>(size_) / max_load_factor())
         );
         const size_type target = _MSTL max(new_size, min_buckets_for_size);
