@@ -187,7 +187,6 @@ thread_pool::~thread_pool() {
     }
 }
 
-
 bool thread_pool::set_mode(const THREAD_POOL_MODE mode) noexcept {
     if (is_running_) return false;
     pool_mode_ = mode;
@@ -260,6 +259,7 @@ void thread_pool::stop() {
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;
     steal_worker_count_ = 0;
+    next_task_id_.store(0, memory_order_relaxed);
     thread_pool_id_generator::reset_id();
 }
 

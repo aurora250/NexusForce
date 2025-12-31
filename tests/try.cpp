@@ -2542,7 +2542,7 @@ void test_ext_tpool() {
 
     auto future2 = pool.submit_after(1000, simple_task, "Task with parameters");
     auto future3 = pool.submit_after(1500, compute_sum, 42, 58);
-    println(future3.get());
+    println(future3.future.get());
 
     auto counter = make_shared<atomic_int>(0);
     thread_pool::periodic_token token1;

@@ -8,6 +8,7 @@
 #include "MSTL/core/async/packaged_task.hpp"
 #include "MSTL/core/async/timer.hpp"
 #include "MSTL/core/utility/optional.hpp"
+#include "MSTL/core/time/datetime.hpp"
 #include "MSTL/core/config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -256,6 +257,62 @@ struct worker_context {
 MSTL_END_INNER__
 
 
+enum class TASK_STATUS {
+	PENDING,
+	RUNNING,
+	COMPLETED,
+	FAILED
+};
+
+MSTL_CONSTEXPR20 string to_string(const TASK_STATUS status) {
+	switch (status) {
+		case TASK_STATUS::PENDING: return "PENDING";
+		case TASK_STATUS::RUNNING: return "RUNNING";
+		case TASK_STATUS::COMPLETED: return "COMPLETED";
+		case TASK_STATUS::FAILED: return "FAILED";
+		default: MSTL_UNREACHABLE;
+	}
+}
+
+
+struct task_info {
+	using priority_type = uint32_t;
+
+	const uint64_t id;
+	atomic<TASK_STATUS> status{TASK_STATUS::PENDING};
+	timestamp submit_time{timestamp::now()};
+	timestamp start_time{0};
+	timestamp finish_time{0};
+	_INNER manual_thread::id_type worker_thread_id{0};
+	string error{};
+	priority_type priority;
+
+	explicit task_info(const uint64_t task_id, const priority_type priority)
+	: id(task_id), priority(priority) {}
+
+	bool is_finished() const noexcept {
+		const auto s = status.load(_MSTL memory_order_acquire);
+		return s == TASK_STATUS::COMPLETED || s == TASK_STATUS::FAILED;
+	}
+
+	int64_t exec_time() const noexcept {
+		if (start_time.value() == 0 || finish_time.value() == 0) {
+			return -1;
+		}
+		return finish_time - start_time;
+	}
+};
+
+using task_info_ptr = _MSTL shared_ptr<task_info>;
+
+
+template <typename T>
+struct submit_result {
+	_MSTL future<T> future;
+	task_info_ptr task_info;
+};
+
+
 class MSTL_API thread_pool {
 public:
 	struct periodic_task_state {
@@ -275,7 +332,7 @@ public:
 
     using id_type = _INNER manual_thread::id_type;
 	using periodic_token = shared_ptr<periodic_task_state>;
-	using priority_type = uint32_t;
+	using priority_type = task_info::priority_type;
 
 private:
 	using Task = _MSTL function<void()>;
@@ -283,9 +340,10 @@ private:
 	struct priority_task {
 		Task task;
 		priority_type priority;
+		task_info_ptr task_info;
 
-		priority_task(Task t, const priority_type p) noexcept
-		: task(_MSTL move(t)), priority(p) {}
+		priority_task(Task t, const priority_type p, task_info_ptr info) noexcept
+		: task(_MSTL move(t)), priority(p), task_info(_MSTL move(info)) {}
 
 		bool operator <(const priority_task& other) const noexcept {
 			return priority < other.priority;
@@ -319,7 +377,13 @@ private:
 	_MSTL atomic_size_t total_completed_tasks_{0};
 	_MSTL atomic_size_t steal_worker_count_{0};
 
+	_MSTL atomic_uint64_t next_task_id_{0};
+
 private:
+	uint64_t generate_task_id() {
+		return next_task_id_.fetch_add(1, _MSTL memory_order_relaxed);
+	}
+
     void thread_function(id_type thread_id);
 	_MSTL optional<Task> try_steal_task(_INNER worker_context& ctx);
 
@@ -345,18 +409,18 @@ public:
     void stop();
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_task(priority_type priority, Func&& func, Args&&... args);
+	submit_result<invoke_result_t<Func, Args...>> submit_task(priority_type priority, Func&& func, Args&&... args);
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_task(Func&& func, Args&&... args) {
+	submit_result<invoke_result_t<Func, Args...>> submit_task(Func&& func, Args&&... args) {
 		return this->submit_task(0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
 	}
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_after(int64_t delay_ms, priority_type priority, Func&& func, Args&&... args);
+	submit_result<invoke_result_t<Func, Args...>> submit_after(int64_t delay_ms, priority_type priority, Func&& func, Args&&... args);
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
-	decltype(auto) submit_after(int64_t delay_ms, Func&& func, Args&&... args) {
+	submit_result<invoke_result_t<Func, Args...>> submit_after(int64_t delay_ms, Func&& func, Args&&... args) {
 		return this->submit_after(delay_ms, 0, _MSTL forward<Func>(func), _MSTL forward<Args>(args)...);
 	}
 
@@ -386,8 +450,11 @@ MSTL_END_INNER__
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
-decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... args) {
+submit_result<invoke_result_t<Func, Args...>>
+thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... args) {
 	using Result = decltype(func(_MSTL forward<Args>(args)...));
+
+	auto info = _MSTL make_shared<task_info>(generate_task_id(), priority);
 
 	const auto current_group = _INNER t_current_task_group;
 	if (current_group) {
@@ -397,24 +464,42 @@ decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& fun
 	auto task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
 		[func = _MSTL forward<Func>(func),
 		 args = _MSTL make_tuple(_MSTL forward<Args>(args)...),
-		 group = current_group]() mutable {
+		 group = current_group,
+		 info]() mutable -> Result {
 		 	struct context_guard {
-				 _MSTL shared_ptr<_INNER task_group> group_inner;
-				 _MSTL shared_ptr<_INNER task_group> prev_group_inner;
+				task_info_ptr info;
+		 		_MSTL shared_ptr<_INNER task_group> group_inner;
+		 		_MSTL shared_ptr<_INNER task_group> prev_group_inner;
 
-				 explicit context_guard(_MSTL shared_ptr<_INNER task_group> g) : group_inner(move(g)) {
-					 prev_group_inner = _INNER t_current_task_group;
-					 _INNER t_current_task_group = group_inner;
-				 }
+		 		explicit context_guard(task_info_ptr i, _MSTL shared_ptr<_INNER task_group> g)
+		 		: info(move(i)), group_inner(move(g)) {
+				 	info->status.store(TASK_STATUS::RUNNING, _MSTL memory_order_release);
+				 	info->start_time = timestamp::now();
+				 	info->worker_thread_id = _INNER t_worker_ctx ? _INNER t_worker_ctx->id : 0;
 
-				 ~context_guard() noexcept {
-					 _INNER t_current_task_group = prev_group_inner;
-					 if (group_inner) group_inner->decrement();
-				 }
+				 	prev_group_inner = _INNER t_current_task_group;
+		 			_INNER t_current_task_group = group_inner;
+		 		}
+
+		 		~context_guard() noexcept {
+				 	info->finish_time = timestamp::now();
+				 	auto expected = TASK_STATUS::RUNNING;
+					info->status.compare_exchange_strong(expected,
+						TASK_STATUS::COMPLETED, _MSTL memory_order_release);
+
+		 			_INNER t_current_task_group = prev_group_inner;
+		 			if (group_inner) group_inner->decrement();
+		 		}
 		 	};
 
-			context_guard guard(group);
-			return _MSTL apply(func, args);
+			context_guard guard(info, group);
+			try {
+				return _MSTL apply(func, args);
+			} catch (const exception& e) {
+				info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
+				info->error = e.what();
+				throw;
+			}
 		}
 	);
 
@@ -427,13 +512,17 @@ decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& fun
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 			return task_queue_.size() < task_threshhold_;
 		})) {
+			// 队列满，返回失败的任务信息
+			info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
+			info->error = "Task queue is full";
+
 			auto dummy_task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
 				[]() -> Result { return Result(); });
 			(*dummy_task)();
-			return dummy_task->get_future();
+			return submit_result<Result>{dummy_task->get_future(), info};
 		}
 
-		task_queue_.emplace(_MSTL move(job), priority);
+		task_queue_.emplace(_MSTL move(job), priority, info);
 		++task_size_;
 		++total_submitted_tasks_;
 		not_empty_.notify_all();
@@ -449,13 +538,16 @@ decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& fun
 			if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 				return task_queue_.size() < task_threshhold_;
 			})) {
+				info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
+				info->error = "Task queue is full";
+
 				auto dummy_task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
 					[]() -> Result { return Result(); });
 				(*dummy_task)();
-				return dummy_task->get_future();
+				return submit_result<Result>{dummy_task->get_future(), info};
 			}
 
-			task_queue_.emplace(priority_task(_MSTL move(job), 0));
+			task_queue_.emplace(_MSTL move(job), 0, info);
 			++task_size_;
 			++total_submitted_tasks_;
 			not_empty_.notify_all();
@@ -476,17 +568,50 @@ decltype(auto) thread_pool::submit_task(const priority_type priority, Func&& fun
 		threads_map_[thread_id]->start();
 		++idle_thread_size_;
 	}
-	return res;
+
+	return submit_result<Result>{_MSTL move(res), info};
 }
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
-decltype(auto) thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, Func&& func, Args&&... args) {
-	using ResultType = decltype(func(args...));
-	auto task = _MSTL make_shared<_MSTL packaged_task<ResultType()>>(
-		[func = _MSTL forward<Func>(func), tup = _MSTL make_tuple(_MSTL forward<Args>(args)...)]() mutable {
-			return _MSTL apply(func, tup);
+submit_result<invoke_result_t<Func, Args...>>
+thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, Func&& func, Args&&... args) {
+	using Result = decltype(func(args...));
+
+	auto info = _MSTL make_shared<task_info>(generate_task_id(), priority);
+
+	auto task = _MSTL make_shared<_MSTL packaged_task<Result()>>(
+		[func = _MSTL forward<Func>(func),
+		 tup = _MSTL make_tuple(_MSTL forward<Args>(args)...),
+		 info]() mutable {
+			struct context_guard {
+				task_info_ptr info;
+
+		 		explicit context_guard(task_info_ptr i) : info(move(i)) {
+				 	info->status.store(TASK_STATUS::RUNNING, _MSTL memory_order_release);
+				 	info->start_time = timestamp::now();
+				 	info->worker_thread_id = _INNER t_worker_ctx ? _INNER t_worker_ctx->id : 0;
+		 		}
+
+		 		~context_guard() noexcept {
+				 	info->finish_time = timestamp::now();
+				 	auto expected = TASK_STATUS::RUNNING;
+					info->status.compare_exchange_strong(expected,
+						TASK_STATUS::COMPLETED, _MSTL memory_order_release);
+		 		}
+		 	};
+
+			context_guard guard(info);
+
+			try {
+				return _MSTL apply(func, tup);
+			} catch (const _MSTL exception& e) {
+				info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
+				info->error = e.what();
+				throw;
+			}
 		});
-	_MSTL future<ResultType> res = task->get_future();
+
+	_MSTL future<Result> res = task->get_future();
 
 	auto expire_time = steady_clock::now() + milliseconds(delay_ms);
 	timer_.add_task(expire_time, [this, task = _MSTL move(task), priority]() mutable {
@@ -494,7 +619,8 @@ decltype(auto) thread_pool::submit_after(const int64_t delay_ms, const priority_
 			(*task)();
 	    });
 	});
-	return res;
+
+	return submit_result<Result>{_MSTL move(res), info};
 }
 
 template<typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>

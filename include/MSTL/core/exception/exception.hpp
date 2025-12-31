@@ -8,7 +8,8 @@ MSTL_BEGIN_NAMESPACE__
 
 #define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
 	explicit THIS(const char* info = INFO, const char* type = static_type) noexcept \
-		: BASE(info, type) {}
+		: BASE(info, type) {} \
+	explicit THIS(const exception& e) : BASE(e) {}
 
 #define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \
 	virtual ~CLASS() = default;
@@ -59,7 +60,6 @@ public:
 	__MSTL_ERROR_TYPE(exception)
 };
 
-MSTL_ERROR_BUILD_FINAL_CLASS(assert_exception, exception, "Assertion Failed.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, "Memory Operation Failed.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, "System Operation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
@@ -89,7 +89,7 @@ struct CUDAMemoryError final : MemoryError {
 
 void MSTL_API throw_with_stack(const exception& err);
 
-#if defined(MSTL_STATE_DEBUG__) || (defined(MSTL_COMPILER_GNUC__) && !defined(NDEBUG))
+#if defined(MSTL_STATE_DEBUG__) || !defined(NDEBUG)
 #define throw_exception(err) throw_with_stack(err)
 #else
 #define throw_exception(err) { throw err; }
