@@ -280,7 +280,7 @@ void test_datetime() {
 void test_timestamp() {
     _MSTL datetime epoch = _MSTL datetime::epoch();
     _MSTL timestamp ts1(epoch);
-    assert(ts1.seconds() == 0);
+    assert(ts1 == 0);
     assert(ts1.to_datetime() == epoch);
 
     _MSTL timestamp ts2(86400);
@@ -2644,41 +2644,90 @@ void test_dns() {
 }
 
 void test_tpool() {
+    constexpr int count = 5;
     auto& pool = thread_pool_instance();
     pool.set_mode(THREAD_POOL_MODE::MODE_FIXED);
+    pool.set_steal_mode(STEAL_STRATEGY::FIXED_BATCH);
     pool.start();
-    pool.submit_task(test_vector);
-    pool.submit_task(test_list);
-    pool.submit_task(test_deque);
-    pool.submit_task(test_hashtable);
-    pool.submit_task(test_rbtree);
-    // pool.stop();
-    // pool.set_mode(THREAD_POOL_MODE::MODE_CACHED);
-    // pool.start();
-    // pool.submit_task(test_string);
-    pool.submit_task(test_math);
-    // pool.submit_task(test_timer);
-    pool.submit_task(test_tuple);
-    pool.submit_task(test_variant);
-    pool.submit_task(test_option);
-    pool.submit_task(test_check);
-    pool.submit_task(test_any);
-    pool.submit_task(test_datetimes);
-    pool.submit_task(test_json);
-    pool.submit_task(test_ini);
-    pool.submit_task(test_env);
-    pool.submit_task(test_toml);
-    pool.submit_task(test_rnd);
-    pool.submit_task(test_print);
-    pool.submit_task(test_file);
-    pool.submit_task(test_env_var);
-    pool.submit_task(test_sysinfo);
-    pool.submit_task(test_process);
-    pool.submit_task(test_format);
-    pool.submit_task(test_enctype);
-    pool.submit_task(test_color);
-    pool.submit_task(test_sql);
-    pool.submit_task(test_ranges);
-    pool.submit_task(test_zlib);
-    pool.stop();
+    click clk;
+    {
+        scoped_click grd(clk);
+        for (int i = 0; i < count; i++) {
+            pool.submit_task([&pool] {
+                pool.submit_task(test_vector);
+                pool.submit_task(test_list);
+                pool.submit_task(test_deque);
+                pool.submit_task(test_hashtable);
+                pool.submit_task(test_rbtree);
+                pool.submit_task(test_math);
+                pool.submit_task(test_tuple);
+                pool.submit_task(test_variant);
+                pool.submit_task(test_option);
+                pool.submit_task(test_check);
+                pool.submit_task(test_any);
+                pool.submit_task(test_datetimes);
+                pool.submit_task(test_json);
+                pool.submit_task(test_ini);
+                pool.submit_task(test_env);
+                pool.submit_task(test_toml);
+                pool.submit_task(test_rnd);
+                pool.submit_task(test_print);
+                pool.submit_task(test_env_var);
+                pool.submit_task(test_sysinfo);
+                pool.submit_task(test_process);
+                pool.submit_task(test_format);
+                pool.submit_task(test_enctype);
+                pool.submit_task(test_color);
+                pool.submit_task(test_sql);
+                pool.submit_task(test_ranges);
+                pool.submit_task(test_zlib);
+            });
+        }
+    }
+    auto first_stat = pool.stop();
+    auto first_cost = clk.during().count();
+
+    pool.start();
+    clk.reset();
+
+    {
+        scoped_click grd(clk);
+        for (int i = 0; i < count; i++) {
+            pool.submit_task(test_vector);
+            pool.submit_task(test_list);
+            pool.submit_task(test_deque);
+            pool.submit_task(test_hashtable);
+            pool.submit_task(test_rbtree);
+            pool.submit_task(test_math);
+            pool.submit_task(test_tuple);
+            pool.submit_task(test_variant);
+            pool.submit_task(test_option);
+            pool.submit_task(test_check);
+            pool.submit_task(test_any);
+            pool.submit_task(test_datetimes);
+            pool.submit_task(test_json);
+            pool.submit_task(test_ini);
+            pool.submit_task(test_env);
+            pool.submit_task(test_toml);
+            pool.submit_task(test_rnd);
+            pool.submit_task(test_print);
+            pool.submit_task(test_env_var);
+            pool.submit_task(test_sysinfo);
+            pool.submit_task(test_process);
+            pool.submit_task(test_format);
+            pool.submit_task(test_enctype);
+            pool.submit_task(test_color);
+            pool.submit_task(test_sql);
+            pool.submit_task(test_ranges);
+            pool.submit_task(test_zlib);
+        }
+    }
+    auto second_stat = pool.stop();
+    auto second_cost = clk.during().count();
+
+    println(first_cost);
+    println(first_stat);
+    println("=========");
+    println(second_cost);
+    println(second_stat);
 }

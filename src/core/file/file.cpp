@@ -2733,9 +2733,9 @@ bool file::set_all_times(const datetime& access, const datetime& write) const no
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
     ::timeval times[2];
-    times[0].tv_sec = timestamp(access).seconds();
+    times[0].tv_sec = timestamp(access);
     times[0].tv_usec = 0;
-    times[1].tv_sec = timestamp(write).seconds();
+    times[1].tv_sec = timestamp(write);
     times[1].tv_usec = 0;
     return ::futimes(handle_, times) == 0;
 }

@@ -65,10 +65,10 @@ MSTL_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, "System Operation Fa
 MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
 MSTL_ERROR_BUILD_FINAL_CLASS(iterator_exception, memory_exception, "Iterator or Pointer Access Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(typecast_exception, memory_exception, "Type Cast Mismatch.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, "Function or Template Argument Invalid.")
+MSTL_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, "Variable Operation Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(device_exception, system_exception, "Device Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(file_exception, device_exception, "Device File Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Function Argument Invalid.")
+MSTL_ERROR_BUILD_FINAL_CLASS(file_exception, system_exception, "File Operation Failed.")
+MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Calculation Invalid.")
 MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, "Database Operation Failed.")
 
 

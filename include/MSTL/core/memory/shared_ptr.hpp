@@ -3,7 +3,6 @@
 #include "../algorithm/compare.hpp"
 #include "../async/atomic.hpp"
 #include "../exception/exception.hpp"
-#include "construct.hpp"
 #include "allocator_traits.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__

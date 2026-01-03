@@ -13,7 +13,7 @@ MSTL_BEGIN_NAMESPACE__
 
 void random_lcd::set_seed(const seed_type seed) {
     if (seed == 0) {
-        get_seed() = static_cast<seed_type>(_MSTL timestamp::now().seconds());
+        get_seed() = static_cast<seed_type>(_MSTL timestamp::now());
     } else {
         get_seed() = seed;
     }
@@ -46,7 +46,7 @@ random_mt::seed_type* random_mt::get_state() {
 void random_mt::set_seed(const seed_type seed) {
     seed_type init_seed = seed;
     if (init_seed == 0) {
-        init_seed = static_cast<seed_type>(_MSTL timestamp::now().seconds());
+        init_seed = static_cast<seed_type>(_MSTL timestamp::now());
     }
 
     state()[0] = init_seed;

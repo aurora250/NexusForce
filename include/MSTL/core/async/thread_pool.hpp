@@ -1,25 +1,29 @@
 #ifndef MSTL_CORE_ASYNC_THREAD_POOL_HPP__
 #define MSTL_CORE_ASYNC_THREAD_POOL_HPP__
-#include "MSTL/core/container/array.hpp"
-#include "MSTL/core/container/priority_queue.hpp"
-#include "MSTL/core/container/unordered_map.hpp"
-#include "MSTL/core/interface/istringify.hpp"
-#include "MSTL/core/async/condition_variable.hpp"
-#include "MSTL/core/async/packaged_task.hpp"
-#include "MSTL/core/async/timer.hpp"
-#include "MSTL/core/utility/optional.hpp"
-#include "MSTL/core/time/datetime.hpp"
-#include "MSTL/core/config/undef_cmacro.hpp"
+#include "../container/array.hpp"
+#include "../container/priority_queue.hpp"
+#include "../container/unordered_map.hpp"
+#include "../utility/optional.hpp"
+#include "../time/datetime.hpp"
+#include "packaged_task.hpp"
+#include "timer.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = numeric_limits<int32_t>::max();
-MSTL_INLINE17 constexpr int64_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
-
+MSTL_INLINE17 constexpr size_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
+MSTL_INLINE17 constexpr size_t THREAD_POOL_LOCAL_QUEUE_SIZE = 256;
 static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = _MSTL thread::hardware_concurrency();
 
 
 enum class THREAD_POOL_MODE : uint8_t {
 	MODE_FIXED, MODE_CACHED
+};
+
+enum class STEAL_STRATEGY {
+	HALF,
+	FIXED_BATCH,
+	SINGLE,
+	ADAPTIVE
 };
 
 
@@ -42,6 +46,8 @@ public:
     MSTL_NODISCARD id_type id() const noexcept { return thread_id_; }
     void start();
 };
+
+MSTL_END_INNER__
 
 
 struct task_group {
@@ -70,105 +76,17 @@ struct task_group {
 };
 
 
-template <size_t CAPACITY = 256>
-class local_queue {
-	static_assert((CAPACITY & (CAPACITY - 1)) == 0, "CAPACITY must be power of 2");
-	static_assert(CAPACITY > 0, "CAPACITY must be greater than 0");
+class MSTL_API local_queue {
+private:
+	static STEAL_STRATEGY steal_strategy_;
+	static uint32_t fixed_batch_size_;
 
-public:
-	local_queue() = default;
-	~local_queue() = default;
-
-	local_queue(local_queue&& other) noexcept
-	: tasks_(_MSTL move(other.tasks_))
-    , head_(other.head_.load(_MSTL memory_order_relaxed))
-    , tail_(other.tail_.load(_MSTL memory_order_relaxed)) {}
-
-	local_queue& operator =(local_queue&& other) noexcept {
-		if (this != &other) {
-			tasks_ = _MSTL move(other.tasks_);
-			head_.store(other.head_.load(_MSTL memory_order_relaxed), _MSTL memory_order_relaxed);
-			tail_.store(other.tail_.load(_MSTL memory_order_relaxed), _MSTL memory_order_relaxed);
-		}
-		return *this;
-	}
-
-	MSTL_NODISCARD size_t capacity() const noexcept { return CAPACITY; }
-
-	MSTL_NODISCARD size_t remain_size() const noexcept {
-		const auto tail = tail_.load(_MSTL memory_order_acquire);
-		const auto head = head_.load(_MSTL memory_order_acquire);
-		auto [steal, local_head] = unpack(head);
-		return CAPACITY - static_cast<uint64_t>(tail - steal);
-	}
-
-	MSTL_NODISCARD size_t size() const noexcept {
-		const auto tail = tail_.load(_MSTL memory_order_acquire);
-		const auto head = head_.load(_MSTL memory_order_acquire);
-		auto [steal, local_head] = unpack(head);
-		return static_cast<size_t>(tail - local_head);
-	}
-
-	MSTL_NODISCARD bool empty() const noexcept {
-		return size() == 0u;
-	}
-
-	void push_back(_MSTL function<void()> task) {
-		const uint32_t tail = tail_.load(_MSTL memory_order_relaxed);
-		tasks_[tail & mask_] = _MSTL move(task);
-		tail_.store(tail + 1, _MSTL memory_order_release);
-	}
-
-	_MSTL optional<_MSTL function<void()>> try_pop() {
-		auto cur_head = head_.load(_MSTL memory_order_acquire);
-		size_t index = 0;
-		while (true) {
-			auto [cur_steal, cur_local_head] = unpack(cur_head);
-			const auto tail = tail_.load(_MSTL memory_order_acquire);
-			if (cur_local_head == tail) {
-				return _MSTL nullopt;
-			}
-			const auto next_local_head = cur_local_head + 1;
-			const auto next_head = (cur_local_head == cur_steal)
-				? pack(next_local_head, next_local_head)
-				: pack(cur_steal, next_local_head);
-
-			if (head_.compare_exchange_weak(cur_head, next_head,
-				_MSTL memory_order_acq_rel, _MSTL memory_order_acquire)) {
-				index = static_cast<size_t>(cur_local_head) & mask_;
-				break;
-			}
-		}
-		auto task = _MSTL move(tasks_[index]);
-		tasks_[index] = nullptr;
-		return task;
-	}
-
-	_MSTL optional<_MSTL function<void()>> be_stolen_by(local_queue& dst_queue) {
-		_MSTL optional<_MSTL function<void()>> result{_MSTL nullopt};
-		auto [dst_steal, dst_local_head] = unpack(dst_queue.head_.load(_MSTL memory_order_acquire));
-		auto dst_tail = dst_queue.tail_.load(_MSTL memory_order_acquire);
-
-		if (dst_tail - dst_steal > static_cast<uint32_t>(CAPACITY) / 2) {
-			return result;
-		}
-
-		auto steal_num = be_stolen_by_impl(dst_queue, dst_tail);
-		if (steal_num == 0) return result;
-
-		steal_num = steal_num - 1;
-		auto next_dst_tail = dst_tail + steal_num;
-		auto idx = static_cast<size_t>(next_dst_tail) & mask_;
-		result.emplace(_MSTL move(dst_queue.tasks_[idx]));
-
-		if (steal_num > 0) {
-			dst_queue.tail_.store(next_dst_tail, _MSTL memory_order_release);
-		}
-		return result;
-	}
+	_MSTL array<_MSTL function<void()>, THREAD_POOL_LOCAL_QUEUE_SIZE> tasks_{};
+	_MSTL atomic<uint64_t> head_{0};
+	_MSTL atomic<uint32_t> tail_{0};
 
 private:
-	constexpr static inline size_t mask_ = CAPACITY - 1;
+	constexpr static inline size_t mask_ = THREAD_POOL_LOCAL_QUEUE_SIZE - 1;
 
 	MSTL_NODISCARD static uint64_t pack(const uint32_t steal, const uint32_t local_head) noexcept {
 		return static_cast<uint64_t>(steal) << 32 | static_cast<uint64_t>(local_head);
@@ -178,83 +96,65 @@ private:
 		return {static_cast<uint32_t>(head >> 32), static_cast<uint32_t>(head)};
 	}
 
-	uint32_t be_stolen_by_impl(local_queue& dst, const uint32_t dst_tail) {
-		uint64_t cur_src_head = head_.load(_MSTL memory_order_acquire);
-		uint64_t next_src_head = 0;
-		uint32_t steal_num = 0;
+	uint32_t be_stolen_by_impl(local_queue& dst, uint32_t dst_tail);
 
-		while (true) {
-			auto [cur_src_steal, cur_src_local_head] = unpack(cur_src_head);
-			const auto cur_src_tail = tail_.load(_MSTL memory_order_acquire);
-			const auto cur_src_size = cur_src_tail - cur_src_local_head;
+public:
+	local_queue() = default;
+	~local_queue() = default;
+	local_queue(const local_queue&) = delete;
+	local_queue& operator =(const local_queue&) = delete;
+	local_queue(local_queue&& other) noexcept;
+	local_queue& operator =(local_queue&& other) noexcept;
 
-			if (cur_src_steal != cur_src_local_head) return 0;
+	MSTL_NODISCARD size_t capacity() const noexcept { return tasks_.size(); }
+	MSTL_NODISCARD bool empty() const noexcept { return size() == 0u; }
 
-			steal_num = cur_src_size / 2;
-			if (steal_num == 0) return 0;
-
-			const auto next_src_local_head = cur_src_local_head + steal_num;
-			next_src_head = pack(cur_src_steal, next_src_local_head);
-
-			if (head_.compare_exchange_weak(cur_src_head, next_src_head,
-				_MSTL memory_order_acq_rel, _MSTL memory_order_acquire)) {
-				break;
-			}
-		}
-
-		auto [next_src_steal, next_src_local_head] = unpack(next_src_head);
-		for (uint32_t i = 0; i < steal_num; i++) {
-			auto src_idx = static_cast<uint32_t>(next_src_steal + i) & mask_;
-			auto dst_idx = static_cast<uint32_t>(dst_tail + i) & mask_;
-			dst.tasks_[dst_idx] = _MSTL move(tasks_[src_idx]);
-		}
-
-		cur_src_head = next_src_head;
-		while (true) {
-			auto [cur_src_steal, cur_src_local_head] = unpack(cur_src_head);
-			next_src_head = pack(cur_src_local_head, cur_src_local_head);
-			if (head_.compare_exchange_weak(cur_src_head, next_src_head,
-				_MSTL memory_order_acq_rel, _MSTL memory_order_acquire)) {
-				return steal_num;
-			}
-		}
+	MSTL_NODISCARD size_t remain_size() const noexcept {
+		const auto tail = tail_.load(_MSTL memory_order_acquire);
+		const auto head = head_.load(_MSTL memory_order_acquire);
+		auto [steal, local_head] = unpack(head);
+		const size_t used = static_cast<size_t>(tail - steal);
+		const size_t remain = capacity() - used;
+		return remain;
+	}
+	MSTL_NODISCARD size_t size() const noexcept {
+		const auto tail = tail_.load(_MSTL memory_order_acquire);
+		const auto head = head_.load(_MSTL memory_order_acquire);
+		auto [steal, local_head] = unpack(head);
+		return static_cast<size_t>(tail - local_head);
 	}
 
-private:
-	_MSTL array<_MSTL function<void()>, CAPACITY> tasks_{};
-	_MSTL atomic<uint64_t> head_{0};
-	_MSTL atomic<uint32_t> tail_{0};
+	static void set_steal_strategy(const STEAL_STRATEGY strategy, const uint32_t batch_size = 4) {
+		steal_strategy_ = strategy;
+		fixed_batch_size_ = batch_size;
+	}
+
+	void push_back(_MSTL function<void()> task) {
+		const uint32_t tail = tail_.load(_MSTL memory_order_relaxed);
+		tasks_[tail & mask_] = _MSTL move(task);
+		tail_.store(tail + 1, _MSTL memory_order_release);
+	}
+
+	_MSTL optional<_MSTL function<void()>> try_pop();
+
+	_MSTL optional<_MSTL function<void()>> be_stolen_by(local_queue& dst_queue);
 };
 
 
-struct worker_context {
-    using id_type = manual_thread::id_type;
+struct MSTL_API worker_context {
+    using id_type = _INNER manual_thread::id_type;
+
+	local_queue queue{};
+	id_type id{0};
+	_MSTL atomic<bool> is_stealing{false};
+    size_t consecutive_idle_count = 0;
 
 	worker_context() = default;
 	worker_context(const worker_context&) = delete;
 	worker_context& operator =(const worker_context&) = delete;
-
-	worker_context(worker_context&& other) noexcept
-	: queue(_MSTL move(other.queue))
-	, id(other.id)
-	, is_stealing(other.is_stealing.load(_MSTL memory_order_relaxed)) {}
-
-	worker_context& operator =(worker_context&& other) noexcept {
-		if (this != &other) {
-			queue = _MSTL move(other.queue);
-			id = other.id;
-			is_stealing.store(other.is_stealing.load(
-				_MSTL memory_order_relaxed), _MSTL memory_order_relaxed);
-		}
-		return *this;
-	}
-
-	local_queue<> queue{};
-	id_type id{0};
-	_MSTL atomic<bool> is_stealing{false};
+	worker_context(worker_context&& other) noexcept;
+	worker_context& operator =(worker_context&& other) noexcept;
 };
-
-MSTL_END_INNER__
 
 
 enum class TASK_STATUS {
@@ -290,12 +190,12 @@ struct task_info {
 	explicit task_info(const uint64_t task_id, const priority_type priority)
 	: id(task_id), priority(priority) {}
 
-	bool is_finished() const noexcept {
+	MSTL_NODISCARD bool is_finished() const noexcept {
 		const auto s = status.load(_MSTL memory_order_acquire);
 		return s == TASK_STATUS::COMPLETED || s == TASK_STATUS::FAILED;
 	}
 
-	int64_t exec_time() const noexcept {
+	MSTL_NODISCARD int64_t exec_time() const noexcept {
 		if (start_time.value() == 0 || finish_time.value() == 0) {
 			return -1;
 		}
@@ -310,6 +210,10 @@ template <typename T>
 struct submit_result {
 	_MSTL future<T> future;
 	task_info_ptr task_info;
+
+	MSTL_NODISCARD explicit operator bool() const noexcept {
+		return future.valid() && task_info;
+	}
 };
 
 
@@ -325,6 +229,7 @@ public:
 		size_t busy_threads;
 		size_t queue_size;
 		size_t total_submitted;
+		size_t total_stolen;
 		size_t total_completed;
 
 		MSTL_NODISCARD string to_string() const;
@@ -351,8 +256,8 @@ private:
 	};
 
 	_MSTL unordered_map<id_type, _MSTL unique_ptr<_INNER manual_thread>> threads_map_;
-	_MSTL unordered_map<id_type, _INNER worker_context> worker_contexts_;
-	_MSTL vector<_MSTL atomic<_INNER worker_context*>> worker_contexts_ptr_;
+	_MSTL unordered_map<id_type, worker_context> worker_contexts_;
+	_MSTL vector<_MSTL atomic<worker_context*>> worker_contexts_ptr_;
 	_MSTL mutex worker_contexts_mtx_;
 
 	_MSTL timer_scheduler<steady_clock> timer_{};
@@ -375,8 +280,9 @@ private:
 
 	_MSTL atomic_size_t total_submitted_tasks_{0};
 	_MSTL atomic_size_t total_completed_tasks_{0};
-	_MSTL atomic_size_t steal_worker_count_{0};
+	_MSTL atomic_size_t total_stolen_tasks_{0};
 
+	_MSTL atomic_size_t steal_worker_count_{0};
 	_MSTL atomic_uint64_t next_task_id_{0};
 
 private:
@@ -385,7 +291,9 @@ private:
 	}
 
     void thread_function(id_type thread_id);
-	_MSTL optional<Task> try_steal_task(_INNER worker_context& ctx);
+	_MSTL optional<Task> try_steal_task(worker_context& ctx);
+
+	pool_statistics statistics_unsafe() const;
 
 public:
     thread_pool();
@@ -397,6 +305,7 @@ public:
     thread_pool& operator =(thread_pool&&) = delete;
 
     bool set_mode(THREAD_POOL_MODE mode) noexcept;
+	bool set_steal_mode(STEAL_STRATEGY strategy, uint32_t steal_batch = 4) noexcept;
     bool set_task_threshhold(size_t threshhold) noexcept;
     bool set_thread_threshhold(size_t threshhold) noexcept;
 
@@ -406,7 +315,7 @@ public:
 	MSTL_NODISCARD pool_statistics statistics() const;
 
     bool start(size_t init_thread_size = 3);
-    void stop();
+    pool_statistics stop();
 
 	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
 	submit_result<invoke_result_t<Func, Args...>> submit_task(priority_type priority, Func&& func, Args&&... args);
@@ -442,11 +351,9 @@ public:
 	}
 };
 
+MSTL_ALWAYS_INLINE MSTL_API worker_context*& get_worker_context() noexcept;
 
-MSTL_BEGIN_INNER__
-static thread_local worker_context* t_worker_ctx = nullptr;
-static thread_local _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
-MSTL_END_INNER__
+MSTL_ALWAYS_INLINE MSTL_API _MSTL shared_ptr<task_group>& get_current_task_group() noexcept;
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
@@ -456,7 +363,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 
 	auto info = _MSTL make_shared<task_info>(generate_task_id(), priority);
 
-	const auto current_group = _INNER t_current_task_group;
+	const auto current_group = get_current_task_group();
 	if (current_group) {
 		current_group->increment();
 	}
@@ -468,27 +375,31 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		 info]() mutable -> Result {
 		 	struct context_guard {
 				task_info_ptr info;
-		 		_MSTL shared_ptr<_INNER task_group> group_inner;
-		 		_MSTL shared_ptr<_INNER task_group> prev_group_inner;
+		 		_MSTL shared_ptr<task_group> group_inner;
+		 		_MSTL shared_ptr<task_group> prev_group_inner;
 
-		 		explicit context_guard(task_info_ptr i, _MSTL shared_ptr<_INNER task_group> g)
+		 		explicit context_guard(task_info_ptr i, _MSTL shared_ptr<task_group> g)
 		 		: info(move(i)), group_inner(move(g)) {
 				 	info->status.store(TASK_STATUS::RUNNING, _MSTL memory_order_release);
 				 	info->start_time = timestamp::now();
-				 	info->worker_thread_id = _INNER t_worker_ctx ? _INNER t_worker_ctx->id : 0;
+				 	info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
 
-				 	prev_group_inner = _INNER t_current_task_group;
-		 			_INNER t_current_task_group = group_inner;
+				 	prev_group_inner = get_current_task_group();
+		 			get_current_task_group() = group_inner;
 		 		}
 
 		 		~context_guard() noexcept {
-				 	info->finish_time = timestamp::now();
-				 	auto expected = TASK_STATUS::RUNNING;
-					info->status.compare_exchange_strong(expected,
-						TASK_STATUS::COMPLETED, _MSTL memory_order_release);
+		 			try {
+		 				info->finish_time = timestamp::now();
+						auto expected = TASK_STATUS::RUNNING;
+					       info->status.compare_exchange_strong(expected,
+						       TASK_STATUS::COMPLETED, _MSTL memory_order_release);
 
-		 			_INNER t_current_task_group = prev_group_inner;
-		 			if (group_inner) group_inner->decrement();
+		 				get_current_task_group() = prev_group_inner;
+						if (group_inner) group_inner->decrement();
+		 			} catch (...) {
+		 				/* ignore */
+		 			}
 		 		}
 		 	};
 
@@ -499,6 +410,10 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 				info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
 				info->error = e.what();
 				throw;
+			} catch (...) {
+				info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
+				info->error = "Unknown exception";
+				throw;
 			}
 		}
 	);
@@ -507,12 +422,11 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 	Task job([task] { (*task)(); });
 
 	if (priority > 0) {
-		// 高优先级任务提交到全局队列
 		_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 			return task_queue_.size() < task_threshhold_;
 		})) {
-			// 队列满，返回失败的任务信息
 			info->status.store(TASK_STATUS::FAILED, _MSTL memory_order_release);
 			info->error = "Task queue is full";
 
@@ -525,15 +439,15 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		task_queue_.emplace(_MSTL move(job), priority, info);
 		++task_size_;
 		++total_submitted_tasks_;
-		not_empty_.notify_all();
+		not_empty_.notify_one();
+
 	} else {
-		// 普通优先级任务
-		if (_INNER t_worker_ctx != nullptr && _INNER t_worker_ctx->queue.remain_size() > 0) {
-			// 当前线程是工作线程且本地队列未满，提交到本地队列
-			_INNER t_worker_ctx->queue.push_back(_MSTL move(job));
+		auto* ctx = get_worker_context();
+
+		if (ctx != nullptr && ctx->queue.remain_size() > 0) {
+			ctx->queue.push_back(move(job));
 			++total_submitted_tasks_;
 		} else {
-			// 否则提交到全局队列
 			_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
 			if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 				return task_queue_.size() < task_threshhold_;
@@ -550,7 +464,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 			task_queue_.emplace(_MSTL move(job), 0, info);
 			++task_size_;
 			++total_submitted_tasks_;
-			not_empty_.notify_all();
+			not_empty_.notify_one();
 		}
 	}
 
@@ -589,7 +503,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 		 		explicit context_guard(task_info_ptr i) : info(move(i)) {
 				 	info->status.store(TASK_STATUS::RUNNING, _MSTL memory_order_release);
 				 	info->start_time = timestamp::now();
-				 	info->worker_thread_id = _INNER t_worker_ctx ? _INNER t_worker_ctx->id : 0;
+				 	info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
 		 		}
 
 		 		~context_guard() noexcept {

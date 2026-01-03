@@ -28,7 +28,9 @@
 
 
 #ifdef MSTL_PLATFORM_WINDOWS__
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
 #endif
 
 
@@ -160,23 +162,23 @@
 	#define MSTL_STANDARD_23__	1
 #endif
 #if _HAS_CXX20 || (__cplusplus >= 202002L) || (_MSVC_LANG >= 202002L)
-	// defined when project compiled by using C++20 or upper version of standard library.
+	// defined when project compiled by using C++20 or upper standard.
 	#define MSTL_STANDARD_20__	1
 #endif
 #if _HAS_CXX17 || (__cplusplus >= 201703L) || defined(MSTL_STANDARD_20__) || (_MSVC_LANG >= 201703L)
-	// defined when project compiled by using C++17 or upper version of standard library.
+	// defined when project compiled by using C++17 or upper standard.
 	#define MSTL_STANDARD_17__	1
 #endif
 #if (__cplusplus >= 201402L) || defined(MSTL_STANDARD_17__) || (_MSVC_LANG >= 201402L)
-	// defined when project compiled by using C++14 or upper version of standard library.
+	// defined when project compiled by using C++14 or upper standard.
 	#define MSTL_STANDARD_14__	1
 #endif
 #if (__cplusplus >= 201103L) || defined(MSTL_STANDARD_14__) || (_MSVC_LANG >= 201103L)
-	// defined when project compiled by using C++11 or upper version of standard library.
+	// defined when project compiled by using C++11 or upper standard.
 	#define MSTL_STANDARD_11__	1
 #endif
 #if (__cplusplus >= 199711L) || defined(MSTL_STANDARD_11__) || (_MSVC_LANG >= 199711L)
-	// defined when project compiled by using C++98 or upper version of standard library.
+	// defined when project compiled by using C++98 or upper standard.
 	#define MSTL_STANDARD_98__	1
 #endif
 

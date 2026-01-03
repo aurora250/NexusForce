@@ -909,10 +909,6 @@ public:
     MSTL_NODISCARD static constexpr timestamp parse(const string_view str) {
         return timestamp{integer64::parse(str)};
     }
-
-    MSTL_NODISCARD constexpr value_type seconds() const noexcept {
-        return value_;
-    }
     
     constexpr void clear() noexcept {
         value_ = 0;

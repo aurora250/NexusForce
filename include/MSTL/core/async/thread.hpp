@@ -1,6 +1,5 @@
 #ifndef MSTL_CORE_ASYNC_THREAD_HPP__
 #define MSTL_CORE_ASYNC_THREAD_HPP__
-#include "../memory/unique_ptr.hpp"
 #include "../functional/apply.hpp"
 #include "../exception/terminate.hpp"
 #include "../exception/exception.hpp"
@@ -89,7 +88,7 @@ private:
     STATE state_ = NOT_A_THREAD;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    static unsigned int __stdcall thread_entry(void* arg);
+    static unsigned int WINAPI thread_entry(void* arg);
 #else
     static void* thread_entry(void* arg);
 #endif

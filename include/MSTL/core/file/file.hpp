@@ -8,6 +8,7 @@
 #include "path.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
+#include "MSTL/core/config/undef_cmacro.hpp"
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/stat.h>

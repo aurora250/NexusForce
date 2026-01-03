@@ -5,8 +5,8 @@
 #include "string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-vector<string_view> MSTL_API split(string_view str, string_view delimiters, bool skipEmpty = true);
-vector<string> MSTL_API split(const string& str, const string& delimiters, bool skipEmpty = true);
+vector<string_view> MSTL_API split(string_view str, string_view delimiters, bool skip_empty = true);
+vector<string> MSTL_API split(const string& str, const string& delimiters, bool skip_empty = true);
 
 string MSTL_API join(const vector<string>& vec, const string& delimiter = "");
 string MSTL_API join_fast(const vector<string>& vec, const string& delimiter = "");

@@ -54,6 +54,16 @@ constexpr iter_difference_t<Iterator> count_if(Iterator first, Iterator last, co
 	return n;
 }
 
+template <typename Iterator, typename Predicate,
+	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+constexpr iter_difference_t<Iterator> count_if(Iterator first, Iterator last, Predicate pred) {
+	iter_difference_t<Iterator> n = 0;
+	for (; first != last; ++first) {
+		if (pred(*first)) ++n;
+	}
+	return n;
+}
+
 template <typename Iterator, typename T>
 constexpr iter_difference_t<Iterator> count(Iterator first, Iterator last, const T& value) {
 	return _MSTL count_if(first, last, value, _MSTL equal_to<iter_value_t<Iterator>>());

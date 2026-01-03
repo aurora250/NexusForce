@@ -3,9 +3,9 @@
 #include "../container/map.hpp"
 #include "../container/set.hpp"
 #include "../functional/function.hpp"
-#include "../async/thread.hpp"
-#include "../async/condition_variable.hpp"
-#include "../async/atomic.hpp"
+#include "thread.hpp"
+#include "condition_variable.hpp"
+#include "atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Clock>

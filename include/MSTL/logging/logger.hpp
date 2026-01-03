@@ -4,7 +4,6 @@
 #include "MSTL/core/functional/function.hpp"
 #include "MSTL/core/memory/shared_ptr.hpp"
 #include "MSTL/core/async/condition_variable.hpp"
-#include "MSTL/core/async/atomic.hpp"
 #include "log_sink.hpp"
 MSTL_BEGIN_NAMESPACE__
 

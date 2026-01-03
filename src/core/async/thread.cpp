@@ -6,7 +6,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-unsigned int __stdcall thread::thread_entry(void* arg) {
+unsigned int WINAPI thread::thread_entry(void* arg) {
 #else
 void* thread::thread_entry(void* arg) {
 #endif

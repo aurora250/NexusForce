@@ -1,6 +1,5 @@
 #ifndef MSTL_LOGGING_LOG_SINK_HPP__
 #define MSTL_LOGGING_LOG_SINK_HPP__
-#include "MSTL/core/memory/unique_ptr.hpp"
 #include "log_event.hpp"
 #include "log_formatter.hpp"
 MSTL_BEGIN_NAMESPACE__

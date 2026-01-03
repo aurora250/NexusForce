@@ -4,46 +4,46 @@
 MSTL_BEGIN_NAMESPACE__
 
 vector<string_view> split(const string_view str,
-    const string_view delimiters, const bool skipEmpty) {
+    const string_view delimiters, const bool skip_empty) {
     vector<string_view> tokens;
     size_t start = 0;
     size_t end = str.find_first_of(delimiters);
 
     while (end != string_view::npos) {
         string_view token = str.substr(start, end - start);
-        if (!skipEmpty || !token.empty()) {
+        if (!skip_empty || !token.empty()) {
             tokens.push_back(token);
         }
         start = end + 1;
         end = str.find_first_of(delimiters, start);
     }
 
-    const string_view lastToken = str.substr(start);
-    if (!skipEmpty || !lastToken.empty()) {
-        tokens.push_back(lastToken);
+    const string_view last_token = str.substr(start);
+    if (!skip_empty || !last_token.empty()) {
+        tokens.push_back(last_token);
     }
 
     return tokens;
 }
 
 vector<string> split(const string& str,
-    const string& delimiters, const bool skipEmpty) {
+    const string& delimiters, const bool skip_empty) {
     vector<string> tokens;
     size_t start = 0;
     size_t end = str.find_first_of(delimiters);
 
     while (end != string::npos) {
         string token = str.substr(start, end - start);
-        if (!skipEmpty || !token.empty()) {
+        if (!skip_empty || !token.empty()) {
             tokens.push_back(token);
         }
         start = end + 1;
         end = str.find_first_of(delimiters, start);
     }
 
-    const string lastToken = str.substr(start);
-    if (!skipEmpty || !lastToken.empty()) {
-        tokens.push_back(lastToken);
+    const string last_token = str.substr(start);
+    if (!skip_empty || !last_token.empty()) {
+        tokens.push_back(last_token);
     }
 
     return tokens;
