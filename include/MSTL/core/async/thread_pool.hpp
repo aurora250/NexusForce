@@ -351,9 +351,15 @@ public:
 	}
 };
 
-MSTL_ALWAYS_INLINE MSTL_API worker_context*& get_worker_context() noexcept;
-
-MSTL_ALWAYS_INLINE MSTL_API _MSTL shared_ptr<task_group>& get_current_task_group() noexcept;
+#ifdef MSTL_COMPILER_MSVC__
+MSTL_ALWAYS_INLINE_INLINE MSTL_API worker_context*& get_worker_context() noexcept;
+MSTL_ALWAYS_INLINE_INLINE MSTL_API _MSTL shared_ptr<task_group>& get_current_task_group() noexcept;
+#else
+extern MSTL_THREAD_LOCAL worker_context* t_worker_ctx;
+extern MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group;
+MSTL_ALWAYS_INLINE_INLINE worker_context*& get_worker_context() noexcept { return t_worker_ctx; }
+MSTL_ALWAYS_INLINE_INLINE _MSTL shared_ptr<task_group>& get_current_task_group() noexcept { return t_current_task_group; }
+#endif
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
@@ -477,6 +483,15 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 				thread_function(id);
 			});
 		id_type thread_id = ptr->id();
+
+	    if (thread_id >= worker_contexts_ptr_.size()) {
+	        worker_contexts_ptr_.reserve(thread_id + 1);
+	        for (size_t i = worker_contexts_ptr_.size() - 1; i <= thread_id; i++) {
+	            atomic<worker_context*> tmp;
+	            tmp.store(nullptr, memory_order_relaxed);
+	            worker_contexts_ptr_.emplace_back(move(tmp));
+	        }
+	    }
 
 		threads_map_.emplace(thread_id, _MSTL move(ptr));
 		threads_map_[thread_id]->start();

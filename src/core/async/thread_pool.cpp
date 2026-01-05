@@ -2,7 +2,7 @@
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-STEAL_STRATEGY local_queue::steal_strategy_ = STEAL_STRATEGY::HALF;
+STEAL_STRATEGY local_queue::steal_strategy_ = STEAL_STRATEGY::ADAPTIVE;
 uint32_t local_queue::fixed_batch_size_ = 4;
 
 uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tail) {
@@ -153,16 +153,20 @@ worker_context& worker_context::operator =(worker_context&& other) noexcept {
     return *this;
 }
 
+#ifdef MSTL_COMPILER_MSVC__
 MSTL_THREAD_LOCAL worker_context* t_worker_ctx = nullptr;
 MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
 
 worker_context*& get_worker_context() noexcept {
     return t_worker_ctx;
 }
-
 _MSTL shared_ptr<task_group>& get_current_task_group() noexcept {
     return t_current_task_group;
 }
+#else
+MSTL_THREAD_LOCAL worker_context* t_worker_ctx = nullptr;
+MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
+#endif
 
 struct thread_pool_id_generator {
     static uint32_t& get_id() noexcept {
@@ -419,14 +423,36 @@ thread_pool::pool_statistics thread_pool::statistics() const {
 
 bool thread_pool::start(const size_t init_thread_size) {
     if(is_running_) return false;
+
+    {
+        _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
+        worker_contexts_.clear();
+    }
+
+    for (auto& ptr : worker_contexts_ptr_) {
+        ptr.store(nullptr, _MSTL memory_order_release);
+    }
+
     is_running_ = true;
     init_thread_size_ = init_thread_size;
+    idle_thread_size_ = 0;
+
     for (id_type i = 0; i < init_thread_size_; i++) {
         auto ptr = _MSTL make_unique<_INNER manual_thread>(
             [this](const int id) {
                 thread_function(id);
             });
-        threads_map_.emplace(ptr->id(), _MSTL move(ptr));
+        id_type thread_id = ptr->id();
+
+        if (thread_id >= worker_contexts_ptr_.size()) {
+            worker_contexts_ptr_.reserve(thread_id + 1);
+            for (size_t j = worker_contexts_ptr_.size() - 1; j <= thread_id; j++) {
+                atomic<worker_context*> tmp;
+                tmp.store(nullptr, memory_order_relaxed);
+                worker_contexts_ptr_.emplace_back(move(tmp));
+            }
+        }
+        threads_map_.emplace(thread_id, _MSTL move(ptr));
     }
     for (id_type i = 0; i < init_thread_size_; i++) {
         threads_map_[i]->start();
@@ -439,29 +465,36 @@ thread_pool::pool_statistics thread_pool::stop() {
     if (!is_running_) return {};
     is_running_ = false;
 
-    _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
-    not_empty_.notify_all();
-    exit_cond_.wait(lock, [&] { return threads_map_.empty(); });
-
-    while (!task_queue_.empty()) task_queue_.pop();
-
     {
+        _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+        not_empty_.notify_all();
+        exit_cond_.wait(lock, [&] { return threads_map_.empty(); });
+
+        while (!task_queue_.empty()) {
+            task_queue_.pop();
+        }
+        task_size_ = 0;
+
         _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
         worker_contexts_.clear();
     }
+
     for (auto& ptr : worker_contexts_ptr_) {
         ptr.store(nullptr, _MSTL memory_order_release);
     }
 
     const auto stat = statistics_unsafe();
 
-    task_size_ = 0;
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;
     total_stolen_tasks_ = 0;
     steal_worker_count_ = 0;
     next_task_id_.store(0, memory_order_relaxed);
     thread_pool_id_generator::reset_id();
+
+    threads_map_.clear();
+    init_thread_size_ = 0;
+    idle_thread_size_ = 0;
 
     return stat;
 }

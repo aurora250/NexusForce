@@ -313,7 +313,9 @@ public:
 
 	Res operator ()(Args&&... args) const
     noexcept(noexcept(invoker_(func_, _MSTL forward<Args>(args)...))) {
-		if (empty()) throw_exception(memory_exception("functional pointing to null."));
+		if (empty()) {
+		    throw_exception(memory_exception("functional pointing to null."));
+		}
 		return invoker_(func_, _MSTL forward<Args>(args)...);
 	}
 
