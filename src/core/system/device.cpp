@@ -4,7 +4,7 @@
 #include <devguid.h>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/algorithm/erase.hpp>
+#include <MSTL/core/algorithm/remove.hpp>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
 #include <sys/select.h>

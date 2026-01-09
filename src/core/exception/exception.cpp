@@ -35,6 +35,9 @@ exception& exception::operator =(const exception& e) {
     return *this;
 }
 
+exception::exception(exception&&) noexcept = default;
+exception& exception::operator =(exception&&) noexcept = default;
+
 const char* exception::what() const noexcept {
     return ptr_->info_.c_str();
 }

@@ -21,14 +21,14 @@ public:
     latch& operator =(const latch&) = delete;
 
     MSTL_ALWAYS_INLINE void count_down(const ptrdiff_t update = 1) {
-        auto const old_value =
-            _INNER fetch_sub(&counter_, update, memory_order::release);
-        if (old_value == update)
+        auto const old_value = _INNER fetch_sub(&counter_, update, memory_order_release);
+        if (old_value == update) {
             _INNER notify_all(&counter_);
+        }
     }
 
     MSTL_ALWAYS_INLINE bool try_wait() const noexcept {
-        return _INNER load(&counter_, memory_order::acquire) == 0;
+        return _INNER load(&counter_, memory_order_acquire) == 0;
     }
 
     MSTL_ALWAYS_INLINE void wait() const noexcept {

@@ -33,11 +33,11 @@ MSTL_INLINE17 constexpr uint64_t FIBONACCI_LIST[FIBONACCI_COUNT] = {
 MSTL_END_CONSTANTS__
 
 
-MSTL_PURE_FUNCTION constexpr uint64_t fibonacci(const uint16_t n) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t fibonacci(const uint16_t n) {
 	if (n < _CONSTANTS FIBONACCI_COUNT) return _CONSTANTS FIBONACCI_LIST[n];
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
-MSTL_PURE_FUNCTION constexpr uint64_t leonardo(const uint16_t n) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t leonardo(const uint16_t n) {
 	return 2 * fibonacci(n + 1) - 1;
 }
 
@@ -64,12 +64,13 @@ MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
 
 
 template <typename T>
-MSTL_CONST_FUNCTION constexpr decltype(auto) sum(const T& x) noexcept {
+MSTL_CONST_FUNCTION constexpr T sum(const T& x) noexcept {
 	return x;
 }
 
 template <typename First, typename... Rests, enable_if_t<(sizeof...(Rests) > 0), int> = 0>
-MSTL_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) noexcept {
+MSTL_CONST_FUNCTION constexpr auto sum(First first, Rests... args)
+noexcept -> decltype(first + _MSTL sum(args...)) {
 	return first + _MSTL sum(args...);
 }
 
@@ -79,7 +80,7 @@ MSTL_CONST_FUNCTION constexpr decimal_t average(Args... args) noexcept {
 }
 
 template <typename T, enable_if_t<is_arithmetic<T>::value, int> = 0>
-constexpr int sign(const T& value) {
+MSTL_CONSTEXPR14 int sign(const T& value) {
 	constexpr T zero = T(0);
 	if (value > zero) return 1;
 	if (value < zero) return -1;
@@ -87,7 +88,7 @@ constexpr int sign(const T& value) {
 }
 
 template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
 	while (n != 0) {
 		T t = m % n;
 		m = n;
@@ -97,12 +98,12 @@ MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
 }
 
 template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T lcm(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
 
 template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
 	T x = _MSTL absolute(m), y = _MSTL absolute(n);
 	constexpr T zero = T(0);
 	while (y != zero) {
@@ -114,12 +115,12 @@ MSTL_CONST_FUNCTION constexpr T gcd(const T& m, const T& n) noexcept {
 }
 
 template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T lcm(const T& m, const T& n) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
 
 
-MSTL_CONST_FUNCTION constexpr decimal_t float_mod(const decimal_t x, const decimal_t y) {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t float_mod(const decimal_t x, const decimal_t y) {
 	if (y == 0) throw_exception(math_exception("zero can not be dividend."));
 	const decimal_t result = x - static_cast<int>(x / y) * y;
 	return result;
@@ -132,8 +133,8 @@ MSTL_CONST_FUNCTION constexpr T square(const T& x) noexcept { return x * x; }
 template <typename T>
 MSTL_CONST_FUNCTION constexpr T cube(const T& x) noexcept { return _MSTL square(x) * x; }
 
-template <typename T, typename UT, enable_if_t<conjunction_v<is_arithmetic<T>, is_integral<UT>>, int> = 0>
-MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
+template <typename T, typename UT, enable_if_t<conjunction<is_arithmetic<T>, is_integral<UT>>::value, int> = 0>
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T power(const T& x, UT n) noexcept {
 	constexpr UT zero = UT(0);
 	constexpr UT one = UT(1);
 	constexpr UT two = UT(2);
@@ -150,12 +151,12 @@ MSTL_CONST_FUNCTION constexpr T power(const T& x, UT n) noexcept {
 	return result;
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t exponential(const uint32_t n) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t exponential(const uint32_t n) noexcept {
 	return power(_CONSTANTS EULER, n);
 }
 
 
-MSTL_PURE_FUNCTION constexpr decimal_t logarithm_e(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noexcept {
 	uint32_t N = _CONSTANTS TAYLOR_CONVERGENCE;
 	const decimal_t a = (x - 1) / (x + 1);
 	const decimal_t a_sqrt = a * a;
@@ -168,27 +169,27 @@ MSTL_PURE_FUNCTION constexpr decimal_t logarithm_e(const decimal_t x) noexcept {
 	return 2.0 * a * y;
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t logarithm(const decimal_t x, const uint32_t base) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm(const decimal_t x, const uint32_t base) noexcept {
 	return logarithm_e(x) / logarithm_e(base);
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t logarithm_2(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_2(const decimal_t x) noexcept {
 	return logarithm(x, 2);
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t logarithm_10(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_10(const decimal_t x) noexcept {
 	return logarithm(x, 10);
 }
 
 
-MSTL_CONST_FUNCTION constexpr uint64_t logarithm_2_integer(uint64_t x) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 uint64_t logarithm_2_integer(uint64_t x) noexcept {
 	uint64_t k = 0;
 	for (; x > 1; x >>= 1) ++k;
 	return k;
 }
 
 
-MSTL_PURE_FUNCTION constexpr decimal_t
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t
 square_root(const decimal_t x, const decimal_t precise = _CONSTANTS PRECISE_TOLERANCE) noexcept {
 	decimal_t t = 0.0;
 	decimal_t result = x;
@@ -199,7 +200,7 @@ square_root(const decimal_t x, const decimal_t precise = _CONSTANTS PRECISE_TOLE
 	return result;
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t
 cube_root(const decimal_t x, const decimal_t precise = _CONSTANTS PRECISE_TOLERANCE) noexcept {
 	decimal_t t = 0.0;
 	decimal_t result = x;
@@ -210,7 +211,7 @@ cube_root(const decimal_t x, const decimal_t precise = _CONSTANTS PRECISE_TOLERA
 	return result;
 }
 
-MSTL_CONST_FUNCTION constexpr uint64_t factorial(const uint32_t n) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 uint64_t factorial(const uint32_t n) noexcept {
 	uint64_t h = 1;
 	for (uint32_t i = 1; i <= n; i++)
 		h *= i;
@@ -219,7 +220,7 @@ MSTL_CONST_FUNCTION constexpr uint64_t factorial(const uint32_t n) noexcept {
 
 
 // a bit down to the nearest digit, > 0 operates on decimal places, and 0 on integer places.
-MSTL_CONST_FUNCTION constexpr decimal_t floor_bit(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t floor_bit(const decimal_t x, const uint32_t bit) noexcept {
 	const decimal_t times = power(10.0, bit);
 	const auto int_part = x * times;
 	if (x < 0 && x * times * 10 / 10.0 != int_part)
@@ -227,7 +228,7 @@ MSTL_CONST_FUNCTION constexpr decimal_t floor_bit(const decimal_t x, const uint3
 	return int_part / times;
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t ceil_bit(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t ceil_bit(const decimal_t x, const uint32_t bit) noexcept {
 	const decimal_t times = power(10.0, bit);
 	const auto int_part = x * times;
 	if (x > 0 && x * times * 10 / 10.0 != int_part)
@@ -235,53 +236,53 @@ MSTL_CONST_FUNCTION constexpr decimal_t ceil_bit(const decimal_t x, const uint32
 	return int_part / times;
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t round_bit(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t round_bit(const decimal_t x, const uint32_t bit) noexcept {
 	return x < 0 ? ceil_bit(x - 0.5 / power(10.0, bit), bit)
 		: floor_bit(x + 0.5 / power(10.0, bit), bit);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t truncate_bit(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t truncate_bit(const decimal_t x, const uint32_t bit) noexcept {
 	return x < 0 ? ceil_bit(x, bit) : floor_bit(x, bit);
 }
 
 
-MSTL_CONST_FUNCTION constexpr decimal_t floor(const decimal_t x) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t floor(const decimal_t x) noexcept {
     return (x >= 0) ? static_cast<int64_t>(x) : static_cast<int64_t>(x - 1);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t floor(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t floor(const decimal_t x, const uint32_t bit) noexcept {
     const decimal_t factor = power(10.0, bit);
     return floor(x * factor) / factor;
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t ceil(const decimal_t x) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t ceil(const decimal_t x) noexcept {
     return (x >= 0) ? static_cast<int64_t>(x + 1) : static_cast<int64_t>(x);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t ceil(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t ceil(const decimal_t x, const uint32_t bit) noexcept {
     const decimal_t factor = power(10.0, bit);
     return ceil(x * factor) / factor;
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t round(const decimal_t x) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t round(const decimal_t x) noexcept {
     return (x >= 0) ? floor(x + 0.5) : ceil(x - 0.5);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t round(const decimal_t x, const uint32_t bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t round(const decimal_t x, const uint32_t bit) noexcept {
     const decimal_t factor = power(10.0, bit);
     return round(x * factor) / factor;
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t truncate(const decimal_t x, const int bit) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t truncate(const decimal_t x, const int bit) noexcept {
 	return x < 0 ? ceil(x, bit) : floor(x, bit);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t truncate(const decimal_t x) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t truncate(const decimal_t x) noexcept {
     return truncate(x, 0);
 }
 
 
-MSTL_CONST_FUNCTION constexpr bool around_multiple(const decimal_t x, const decimal_t axis,
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool around_multiple(const decimal_t x, const decimal_t axis,
 	const decimal_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 	if (absolute(axis) < _CONSTANTS PRECISE_TOLERANCE)
 	    throw_exception(math_exception("Axis Cannot be 0"));
@@ -290,18 +291,18 @@ MSTL_CONST_FUNCTION constexpr bool around_multiple(const decimal_t x, const deci
 	return absolute(x - multi) < toler;
 }
 
-MSTL_CONST_FUNCTION constexpr bool around_pi(const decimal_t x,
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool around_pi(const decimal_t x,
 	const decimal_t toler = _CONSTANTS LOW_PRECISE_TOLERANCE) {
 	return around_multiple(x, _CONSTANTS PI, toler);
 }
 
-MSTL_CONST_FUNCTION constexpr bool around_zero(const decimal_t x,
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool around_zero(const decimal_t x,
 	const decimal_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 	return absolute(x) < toler;
 }
 
 
-MSTL_CONST_FUNCTION constexpr decimal_t remainder(const decimal_t x, const decimal_t y) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t remainder(const decimal_t x, const decimal_t y) noexcept {
     return x - y * _MSTL round(x / y);
 }
 
@@ -309,14 +310,14 @@ MSTL_CONST_FUNCTION constexpr decimal_t float_part(const decimal_t x) noexcept {
 	return x - static_cast<int64_t>(x);
 }
 
-MSTL_CONST_FUNCTION constexpr decimal_t float_apart(decimal_t x, int64_t* int_ptr) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t float_apart(decimal_t x, int64_t* int_ptr) noexcept {
 	*int_ptr = static_cast<int64_t>(x);
 	x -= *int_ptr;
 	return x;
 }
 
 
-MSTL_PURE_FUNCTION constexpr decimal_t sine(decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t sine(decimal_t x) noexcept {
     decimal_t sign = 1.0;
     if (x < 0) {
         sign = -1.0;
@@ -351,11 +352,11 @@ MSTL_PURE_FUNCTION constexpr decimal_t sine(decimal_t x) noexcept {
     return around_zero(fin) ? 0 : fin;
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t cosine(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t cosine(const decimal_t x) noexcept {
 	return sine(_CONSTANTS PI / 2.0 - x);
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t tangent(const decimal_t x) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t tangent(const decimal_t x) {
     const decimal_t multiple = (2 * _MSTL round((2 * x - _CONSTANTS PI)
         / (2 * _CONSTANTS PI)) + 1) * (_CONSTANTS PI / 2);
     if (absolute(x - multiple) < _CONSTANTS LOW_PRECISE_TOLERANCE) {
@@ -364,12 +365,12 @@ MSTL_PURE_FUNCTION constexpr decimal_t tangent(const decimal_t x) {
 	return sine(x) / cosine(x);
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t cotangent(const decimal_t x) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t cotangent(const decimal_t x) {
 	return 1 / tangent(x);
 }
 
 MSTL_BEGIN_INNER__
-MSTL_PURE_FUNCTION constexpr decimal_t __arctangent_taylor(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t __arctangent_taylor(const decimal_t x) noexcept {
     const decimal_t x_sq = x * x;
     decimal_t term = x;
     decimal_t sum = x;
@@ -383,7 +384,7 @@ MSTL_PURE_FUNCTION constexpr decimal_t __arctangent_taylor(const decimal_t x) no
 }
 MSTL_END_INNER__
 
-MSTL_PURE_FUNCTION constexpr decimal_t arctangent(const decimal_t x) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t arctangent(const decimal_t x) noexcept {
     if (absolute(x) > 1) {
         const decimal_t sign = x > 0 ? 1.0 : -1.0;
         return sign * (_CONSTANTS PI / 2 - _INNER __arctangent_taylor(1 / absolute(x)));
@@ -391,12 +392,12 @@ MSTL_PURE_FUNCTION constexpr decimal_t arctangent(const decimal_t x) noexcept {
 	return _INNER __arctangent_taylor(x);
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t arcsine(const decimal_t x) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t arcsine(const decimal_t x) {
     if (x > 1 || x < -1) throw_exception(math_exception("Arcsine Range Exceeded"));
     return arctangent(x / square_root(1 - x * x));
 }
 
-MSTL_PURE_FUNCTION constexpr decimal_t arccosine(const decimal_t x) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t arccosine(const decimal_t x) {
     if (x > 1 || x < -1) throw_exception(math_exception("Arccosine Range Exceeded"));
     return _CONSTANTS PI / 2.0 - arcsine(x);
 }

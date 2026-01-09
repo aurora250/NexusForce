@@ -6,9 +6,10 @@ MSTL_BEGIN_NAMESPACE__
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void shuffle(Iterator first, Iterator last) {
 	if (first == last) return;
+	random_lcd rand;
     for (Iterator i = _MSTL next(first); i != last; ++i) {
         auto distance = _MSTL distance(first, i);
-        Iterator j = _MSTL next(first, random_lcd::next_int(0, static_cast<int>(distance)));
+        Iterator j = _MSTL next(first, rand.next_int(0, static_cast<int>(distance)));
         _MSTL iter_swap(i, j);
     }
 }

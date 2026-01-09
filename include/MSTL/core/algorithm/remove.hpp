@@ -43,7 +43,7 @@ constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
 
 template <typename Container, typename U,
 	enable_if_t<is_same_v<typename Container::value_type, U>, int> = 0>
-constexpr decltype(auto) erase(Container& cont, const U& value) {
+constexpr size_t erase(Container& cont, const U& value) {
 	const auto old_size = cont.size();
 	const auto end = cont.end();
 	auto removed = _MSTL remove_if(cont.begin(), end,
@@ -53,7 +53,7 @@ constexpr decltype(auto) erase(Container& cont, const U& value) {
 }
 
 template <typename Container, typename Predicate>
-constexpr decltype(auto) erase_if(Container& cont, Predicate pred) {
+constexpr size_t erase_if(Container& cont, Predicate pred) {
 	const auto old_size = cont.size();
 	const auto end = cont.end();
 	auto removed = _MSTL remove_if(cont.begin(), end,

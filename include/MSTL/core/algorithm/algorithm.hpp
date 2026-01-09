@@ -1,7 +1,7 @@
 ﻿#ifndef MSTL_CORE_ALGORITHM_ALGORITHM_HPP__
 #define MSTL_CORE_ALGORITHM_ALGORITHM_HPP__
 #include "parallel.hpp"
-#include "erase.hpp"
+#include "remove.hpp"
 #include "numeric.hpp"
 #include "permutation.hpp"
 #include "set.hpp"

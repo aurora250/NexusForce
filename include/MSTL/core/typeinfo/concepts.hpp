@@ -2,6 +2,7 @@
 #define MSTL_CORE_TYPEINFO_CONCEPTS_HPP__
 #include "../iterator/iterator_traits.hpp"
 #include "../typeinfo/pointer_traits.hpp"
+#include "../functional/invoke.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_STANDARD_20__

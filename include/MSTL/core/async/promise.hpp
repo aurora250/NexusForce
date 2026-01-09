@@ -314,8 +314,7 @@ private:
 template <typename Sign, typename Func, typename Alloc = _MSTL allocator<int>>
 static shared_ptr<__future_base::task_state_base<Sign>>
 create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
-    typedef typename decay<Func>::type Function2;
-    typedef __future_base::task_state<Function2, Alloc, Sign> State;
+    typedef __future_base::task_state<decay_t<Func>, Alloc, Sign> State;
     return _MSTL allocate_shared<State>(alloc, _MSTL forward<Func>(func), alloc);
 }
 

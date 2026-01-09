@@ -194,7 +194,6 @@ public:
         new (union_) variant_alternative_t<variant, Idx>(ilist, _MSTL forward<Args>(args)...);
     }
 
-#ifdef MSTL_STANDARD_20__
     template <typename... Args, enable_if_t<disjunction_v<is_constructible<Types, Args...>...>, int> = 0>
     variant(Args&&... args) {
         if (!try_construct(_MSTL forward<Args>(args)...)) {
@@ -202,7 +201,6 @@ public:
             new (union_) variant_alternative_t<variant, 0>();
         }
     }
-#endif
 
     MSTL_CONSTEXPR20 ~variant() noexcept {
         destructors_table()[index()](union_);

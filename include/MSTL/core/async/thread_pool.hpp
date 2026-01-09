@@ -86,7 +86,7 @@ private:
 	_MSTL atomic<uint32_t> tail_{0};
 
 private:
-	constexpr static inline size_t mask_ = THREAD_POOL_LOCAL_QUEUE_SIZE - 1;
+	constexpr static size_t mask_ = THREAD_POOL_LOCAL_QUEUE_SIZE - 1;
 
 	MSTL_NODISCARD static uint64_t pack(const uint32_t steal, const uint32_t local_head) noexcept {
 		return static_cast<uint64_t>(steal) << 32 | static_cast<uint64_t>(local_head);
@@ -112,7 +112,7 @@ public:
 	MSTL_NODISCARD size_t remain_size() const noexcept {
 		const auto tail = tail_.load(_MSTL memory_order_acquire);
 		const auto head = head_.load(_MSTL memory_order_acquire);
-		auto [steal, local_head] = unpack(head);
+		const auto steal = unpack(head).first;
 		const size_t used = static_cast<size_t>(tail - steal);
 		const size_t remain = capacity() - used;
 		return remain;
@@ -120,7 +120,7 @@ public:
 	MSTL_NODISCARD size_t size() const noexcept {
 		const auto tail = tail_.load(_MSTL memory_order_acquire);
 		const auto head = head_.load(_MSTL memory_order_acquire);
-		auto [steal, local_head] = unpack(head);
+		const auto local_head = unpack(head).second;
 		return static_cast<size_t>(tail - local_head);
 	}
 
@@ -355,8 +355,8 @@ public:
 MSTL_ALWAYS_INLINE_INLINE MSTL_API worker_context*& get_worker_context() noexcept;
 MSTL_ALWAYS_INLINE_INLINE MSTL_API _MSTL shared_ptr<task_group>& get_current_task_group() noexcept;
 #else
-extern MSTL_THREAD_LOCAL worker_context* t_worker_ctx;
-extern MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group;
+extern thread_local worker_context* t_worker_ctx;
+extern thread_local _MSTL shared_ptr<task_group> t_current_task_group;
 MSTL_ALWAYS_INLINE_INLINE worker_context*& get_worker_context() noexcept { return t_worker_ctx; }
 MSTL_ALWAYS_INLINE_INLINE _MSTL shared_ptr<task_group>& get_current_task_group() noexcept { return t_current_task_group; }
 #endif

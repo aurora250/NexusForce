@@ -45,8 +45,8 @@ public:
 
     exception(const exception&);
     exception& operator =(const exception&);
-    exception(exception&&) noexcept = default;
-    exception& operator =(exception&&) noexcept = default;
+    exception(exception&&) noexcept;
+    exception& operator =(exception&&) noexcept;
 
     template <typename Error>
     explicit exception(const Error& error)
@@ -92,7 +92,7 @@ void MSTL_API throw_with_stack(const exception& err);
 #if defined(MSTL_STATE_DEBUG__) || !defined(NDEBUG)
 #define throw_exception(err) throw_with_stack(err)
 #else
-#define throw_exception(err) { throw err; }
+#define throw_exception(err) throw err
 #endif
 
 MSTL_END_NAMESPACE__

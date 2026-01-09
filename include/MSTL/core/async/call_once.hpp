@@ -6,6 +6,13 @@
 MSTL_BEGIN_NAMESPACE__
 
 class once_flag {
+private:
+    atomic_bool state_;
+    mutex mtx_;
+
+    template <typename Callable, typename... Args>
+    friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
+
 public:
     once_flag() noexcept : state_(false) {}
 
@@ -13,13 +20,6 @@ public:
     once_flag& operator=(const once_flag&) = delete;
     once_flag(once_flag&&) = delete;
     once_flag& operator=(once_flag&&) = delete;
-
-private:
-    template <typename Callable, typename... Args>
-    friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
-
-    atomic_bool state_;
-    mutex mtx_;
 };
 
 template <typename Callable, typename... Args>

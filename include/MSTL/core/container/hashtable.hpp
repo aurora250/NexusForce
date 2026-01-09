@@ -203,14 +203,6 @@ MSTL_INLINE17 constexpr size_t HASH_PRIMER_COUNT = extent_v<decltype(HASH_PRIME_
 MSTL_END_CONSTANTS__
 
 
-MSTL_NODISCARD MSTL_CONSTEXPR20 size_t hashtable_next_prime(const size_t n) {
-    const size_t* first = _CONSTANTS HASH_PRIME_LIST;
-    const size_t* last = _CONSTANTS HASH_PRIME_LIST + _CONSTANTS HASH_PRIMER_COUNT;
-    const size_t* pos = _MSTL lower_bound(first, last, n);
-    return pos == last ? *(last - 1) : *pos;
-}
-
-
 template <typename Value, typename Key, typename HashFcn,
     typename ExtractKey, typename EqualKey, typename Alloc>
 class hashtable : public icollector<hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>> {
@@ -241,7 +233,10 @@ private:
 
 private:
     MSTL_NODISCARD static size_type next_size(const size_type n) noexcept {
-        return hashtable_next_prime(n);
+        const size_t* first = _CONSTANTS HASH_PRIME_LIST;
+        const size_t* last = _CONSTANTS HASH_PRIME_LIST + _CONSTANTS HASH_PRIMER_COUNT;
+        const size_t* pos = _MSTL lower_bound(first, last, n);
+        return pos == last ? *(last - 1) : *pos;
     }
 
     void initialize_buckets(const size_type n) {
@@ -266,8 +261,7 @@ private:
         n->next_ = nullptr;
         try {
             _MSTL construct(&n->data_, _MSTL forward<Args>(args)...);
-        }
-        catch (...) {
+        } catch (...) {
             this->delete_node(n);
             throw_exception(memory_exception("hashtable construct node failed."));
         }

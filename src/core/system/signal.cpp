@@ -1,19 +1,19 @@
 #include <MSTL/core/system/signal.hpp>
-#include <MSTL/core/algorithm/erase.hpp>
+#include <MSTL/core/algorithm/remove.hpp>
 #include <MSTL/core/system/console.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <cstring>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-static MSTL_THREAD_LOCAL SIGNAL_EVENT current_signal =
+static thread_local SIGNAL_EVENT current_signal =
 #ifdef MSTL_PLATFORM_WINDOWS__
     static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
 #else
     static_cast<SIGNAL_EVENT>(SIGTERM);
 #endif
 
-static MSTL_THREAD_LOCAL void* signal_context = nullptr;
+static thread_local void* signal_context = nullptr;
 
 #ifdef MSTL_PLATFORM_LINUX__
 unordered_map<SIGNAL_EVENT, int> signal_manager::windows_to_posix_map_ = {

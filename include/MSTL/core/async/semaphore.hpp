@@ -6,6 +6,11 @@ MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_INNER__
 
 struct atomic_semaphore {
+private:
+    alignas(_INNER PLATFORM_WAIT_ALIGN)
+    _INNER platform_wait_t counter_;
+
+public:
     static constexpr ptrdiff_t int_max = numeric_limits<int>::max();
     
     explicit atomic_semaphore(const _INNER platform_wait_t count) noexcept
@@ -66,9 +71,6 @@ struct atomic_semaphore {
             _MSTL atomic_notify_address(&counter_, true);
         }
     }
-
-private:
-    alignas(_INNER PLATFORM_WAIT_ALIGN) _INNER platform_wait_t counter_;
 };
 
 MSTL_END_INNER__

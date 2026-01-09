@@ -2,6 +2,7 @@
 #define MSTL_CORE_UTILITY_PAIR_HPP__
 #include "../interface/icommon.hpp"
 #include "../typeinfo/tags.hpp"
+#include "../utility/reference_wrapper.hpp"
 #include "integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -10,8 +11,11 @@ struct tuple;
 
 template <typename>
 struct tuple_size;
+
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 constexpr size_t tuple_size_v = tuple_size<remove_cvref_t<T>>::value;
+#endif
 
 template <size_t, typename...>
 struct tuple_element;
@@ -82,75 +86,75 @@ struct pair : icommon<pair<T1, T2>> {
 		: first(_MSTL forward<U1>(p.first)), second(_MSTL forward<U2>(p.second)) {}
 #else
 	template <typename U1 = T1, typename U2 = T2, enable_if_t<
-		conjunction_v<is_default_constructible<U1>, is_default_constructible<U2>> &&
-		!conjunction_v<is_implicitly_default_constructible<U1>,
-		is_implicitly_default_constructible<U2>>, int> = 0>
-	explicit pair() noexcept(conjunction_v<
-		is_nothrow_default_constructible<U1>, is_nothrow_default_constructible<U2>>)
+		conjunction<is_default_constructible<U1>, is_default_constructible<U2>>::value &&
+		!conjunction<is_implicitly_default_constructible<U1>,
+		is_implicitly_default_constructible<U2>>::value, int> = 0>
+	explicit pair() noexcept(conjunction<
+		is_nothrow_default_constructible<U1>, is_nothrow_default_constructible<U2>>::value)
 		: first(), second() {}
 
 	template <typename U1 = T1, typename U2 = T2, enable_if_t<
-		conjunction_v<is_default_constructible<U1>, is_default_constructible<U2>>&&
-		conjunction_v<is_implicitly_default_constructible<U1>,
-		is_implicitly_default_constructible<U2>>, int> = 0>
-	pair() noexcept(conjunction_v<
-		is_nothrow_default_constructible<U1>, is_nothrow_default_constructible<U2>>)
+		conjunction<is_default_constructible<U1>, is_default_constructible<U2>>::value &&
+		conjunction<is_implicitly_default_constructible<U1>,
+		is_implicitly_default_constructible<U2>>::value, int> = 0>
+	pair() noexcept(conjunction<
+		is_nothrow_default_constructible<U1>, is_nothrow_default_constructible<U2>>::value)
 		: first(), second() {}
 
 	template <typename U1 = T1, typename U2 = T2, enable_if_t<
-		conjunction_v<is_copy_constructible<U1>, is_copy_constructible<U2>> &&
-		!conjunction_v<is_convertible<const U1&, U1>, is_convertible<const U2&, U2>>, int> = 0>
-	explicit pair(const T1& a, const T2& b) noexcept(conjunction_v<
-		is_nothrow_copy_constructible<U1>, is_nothrow_copy_constructible<U2>>)
+		conjunction<is_copy_constructible<U1>, is_copy_constructible<U2>>::value &&
+		!conjunction<is_convertible<const U1&, U1>, is_convertible<const U2&, U2>>::value, int> = 0>
+	explicit pair(const T1& a, const T2& b) noexcept(conjunction<
+		is_nothrow_copy_constructible<U1>, is_nothrow_copy_constructible<U2>>::value)
 		: first(a), second(b) {}
 
 	template <typename U1 = T1, typename U2 = T2, enable_if_t<
-		conjunction_v<is_copy_constructible<U1>, is_copy_constructible<U2>>&&
-		conjunction_v<is_convertible<const U1&, U1>, is_convertible<const U2&, U2>>, int> = 0>
-	pair(const T1& a, const T2& b) noexcept(conjunction_v<
-		is_nothrow_copy_constructible<U1>, is_nothrow_copy_constructible<U2>>)
+		conjunction<is_copy_constructible<U1>, is_copy_constructible<U2>>::value &&
+		conjunction<is_convertible<const U1&, U1>, is_convertible<const U2&, U2>>::value, int> = 0>
+	pair(const T1& a, const T2& b) noexcept(conjunction<
+		is_nothrow_copy_constructible<U1>, is_nothrow_copy_constructible<U2>>::value)
 		: first(a), second(b) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, U1>, is_constructible<T2, U2>> &&
-		!conjunction_v<is_convertible<U1, T1>, is_convertible<U2, T2>>, int> = 0>
-	explicit pair(U1&& a, U2&& b) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>)
+		conjunction<is_constructible<T1, U1>, is_constructible<T2, U2>>::value &&
+		!conjunction<is_convertible<U1, T1>, is_convertible<U2, T2>>::value, int> = 0>
+	explicit pair(U1&& a, U2&& b) noexcept(conjunction<
+		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>::value)
 		: first(_MSTL forward<U1>(a)), second(_MSTL forward<U2>(b)) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, U1>, is_constructible<T2, U2>> &&
-		conjunction_v<is_convertible<U1, T1>, is_convertible<U2, T2>>, int> = 0>
-	pair(U1&& a, U2&& b) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>)
+		conjunction<is_constructible<T1, U1>, is_constructible<T2, U2>>::value &&
+		conjunction<is_convertible<U1, T1>, is_convertible<U2, T2>>::value, int> = 0>
+	pair(U1&& a, U2&& b) noexcept(conjunction<
+		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>::value)
 		: first(_MSTL forward<U1>(a)), second(_MSTL forward<U2>(b)) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, const U1&>, is_constructible<T2, const U2&>> &&
-		!conjunction_v<is_convertible<const U1&, T1>, is_convertible<const U2&, T2>>, int> = 0>
-	explicit pair(const pair<U1, U2>& p) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, const U1&>, is_nothrow_constructible<T2, const U2&>>)
+		conjunction<is_constructible<T1, const U1&>, is_constructible<T2, const U2&>>::value &&
+		!conjunction<is_convertible<const U1&, T1>, is_convertible<const U2&, T2>>::value, int> = 0>
+	explicit pair(const pair<U1, U2>& p) noexcept(conjunction<
+		is_nothrow_constructible<T1, const U1&>, is_nothrow_constructible<T2, const U2&>>::value)
 		: first(p.first), second(p.second) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, const U1&>, is_constructible<T2, const U2&>>&&
-		conjunction_v<is_convertible<const U1&, T1>, is_convertible<const U2&, T2>>, int> = 0>
-	pair(const pair<U1, U2>& p) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, const U1&>, is_nothrow_constructible<T2, const U2&>>)
+		conjunction<is_constructible<T1, const U1&>, is_constructible<T2, const U2&>>::value &&
+		conjunction<is_convertible<const U1&, T1>, is_convertible<const U2&, T2>>::value, int> = 0>
+	pair(const pair<U1, U2>& p) noexcept(conjunction<
+		is_nothrow_constructible<T1, const U1&>, is_nothrow_constructible<T2, const U2&>>::value)
 		: first(p.first), second(p.second) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, U1>, is_constructible<T2, U2>> &&
-		!conjunction_v<is_convertible<U1, T1>, is_convertible<U2, T2>>, int> = 0>
-	explicit pair(pair<U1, U2>&& p) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>)
+		conjunction<is_constructible<T1, U1>, is_constructible<T2, U2>>::value &&
+		!conjunction<is_convertible<U1, T1>, is_convertible<U2, T2>>::value, int> = 0>
+	explicit pair(pair<U1, U2>&& p) noexcept(conjunction<
+		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>::value)
 		: first(_MSTL forward<U1>(p.first)), second(_MSTL forward<U2>(p.second)) {}
 
 	template <typename U1, typename U2, enable_if_t<
-		conjunction_v<is_constructible<T1, U1>, is_constructible<T2, U2>>&&
-		conjunction_v<is_convertible<U1, T1>, is_convertible<U2, T2>>, int> = 0>
-	pair(pair<U1, U2>&& p) noexcept(conjunction_v<
-		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>)
+		conjunction<is_constructible<T1, U1>, is_constructible<T2, U2>>::value &&
+		conjunction<is_convertible<U1, T1>, is_convertible<U2, T2>>::value, int> = 0>
+	pair(pair<U1, U2>&& p) noexcept(conjunction<
+		is_nothrow_constructible<T1, U1>, is_nothrow_constructible<T2, U2>>::value)
 		: first(_MSTL forward<U1>(p.first)), second(_MSTL forward<U2>(p.second)) {}
 #endif
 
@@ -169,38 +173,38 @@ struct pair : icommon<pair<T1, T2>> {
 
 
 	// use identity_t to fasten type information
-	template <typename T = pair, enable_if_t<conjunction_v<
-		is_copy_assignable<typename T::first_type>, is_copy_assignable<typename T::second_type>>, int> = 0>
-	constexpr pair& operator =(type_identity_t<const T&> p) noexcept(conjunction_v<
-		is_nothrow_copy_assignable<T1>, is_nothrow_copy_assignable<T2>>) {
+	template <typename T = pair, enable_if_t<conjunction<
+		is_copy_assignable<typename T::first_type>, is_copy_assignable<typename T::second_type>>::value, int> = 0>
+	MSTL_CONSTEXPR14 pair& operator =(type_identity_t<const T&> p) noexcept(conjunction<
+		is_nothrow_copy_assignable<T1>, is_nothrow_copy_assignable<T2>>::value) {
 		first = p.first;
 		second = p.second;
 		return *this;
 	}
 
 	// use identity_t to fasten type information
-	template <typename T = pair, enable_if_t<conjunction_v<
-		is_move_assignable<typename T::first_type>, is_move_assignable<typename T::second_type>>, int> = 0>
-	constexpr pair& operator =(type_identity_t<T&&> p) noexcept(conjunction_v<
-		is_nothrow_move_assignable<T1>, is_nothrow_move_assignable<T2>>) {
+	template <typename T = pair, enable_if_t<conjunction<
+		is_move_assignable<typename T::first_type>, is_move_assignable<typename T::second_type>>::value, int> = 0>
+	MSTL_CONSTEXPR14 pair& operator =(type_identity_t<T&&> p) noexcept(conjunction<
+		is_nothrow_move_assignable<T1>, is_nothrow_move_assignable<T2>>::value) {
 		first = _MSTL forward<T1>(p.first);
 		second = _MSTL forward<T2>(p.second);
 		return *this;
 	}
 
-	template <typename U1, typename U2, enable_if_t<conjunction_v<negation<
-		is_same<pair, pair<U1, U2>>>, is_assignable<T1&, const U1&>, is_assignable<T2&, const U2&>>, int> = 0>
-	constexpr pair& operator =(const pair<U1, U2>& p) noexcept(conjunction_v<
-		is_nothrow_assignable<T1&, const U1&>, is_nothrow_assignable<T2&, const U2&>>) {
+	template <typename U1, typename U2, enable_if_t<conjunction<negation<
+		is_same<pair, pair<U1, U2>>>, is_assignable<T1&, const U1&>, is_assignable<T2&, const U2&>>::value, int> = 0>
+	MSTL_CONSTEXPR14 pair& operator =(const pair<U1, U2>& p) noexcept(conjunction<
+		is_nothrow_assignable<T1&, const U1&>, is_nothrow_assignable<T2&, const U2&>>::value) {
 		first = p.first;
 		second = p.second;
 		return *this;
 	}
 
-	template <typename U1, typename U2, enable_if_t<conjunction_v<negation<
-		is_same<pair, pair<U1, U2>>>, is_assignable<T1&, U1>, is_assignable<T2&, U2>>, int> = 0>
-	constexpr pair& operator =(pair<U1, U2>&& p) noexcept(conjunction_v<
-		is_nothrow_assignable<T1&, U1>, is_nothrow_assignable<T2&, U2>>) {
+	template <typename U1, typename U2, enable_if_t<conjunction<negation<
+		is_same<pair, pair<U1, U2>>>, is_assignable<T1&, U1>, is_assignable<T2&, U2>>::value, int> = 0>
+	MSTL_CONSTEXPR14 pair& operator =(pair<U1, U2>&& p) noexcept(conjunction<
+		is_nothrow_assignable<T1&, U1>, is_nothrow_assignable<T2&, U2>>::value) {
 		first = _MSTL forward<U1>(p.first);
 		second = _MSTL forward<U2>(p.second);
 		return *this;
@@ -224,8 +228,8 @@ struct pair : icommon<pair<T1, T2>> {
 		return hash<remove_cvref_t<T1>>()(first) ^ hash<remove_cvref_t<T2>>()(second);
 	}
 
-	constexpr void swap(pair& p)
-	noexcept(conjunction_v<is_nothrow_swappable<T1>, is_nothrow_swappable<T2>>) {
+	MSTL_CONSTEXPR14 void swap(pair& p)
+	noexcept(conjunction<is_nothrow_swappable<T1>, is_nothrow_swappable<T2>>::value) {
 		_MSTL swap(first, p.first);
 		_MSTL swap(second, p.second);
 	}
@@ -238,8 +242,8 @@ pair(T1, T2) -> pair<T1, T2>;
 
 template <typename T1, typename T2>
 constexpr pair<unwrap_ref_decay_t<T1>, unwrap_ref_decay_t<T2>> make_pair(T1&& x, T2&& y)
-noexcept(conjunction_v<is_nothrow_constructible<unwrap_ref_decay_t<T1>, T1>,
-	is_nothrow_constructible<unwrap_ref_decay_t<T2>, T2>>) {
+noexcept(conjunction<is_nothrow_constructible<unwrap_ref_decay_t<T1>, T1>,
+	is_nothrow_constructible<unwrap_ref_decay_t<T2>, T2>>::value) {
 	using unwrap_pair = pair<unwrap_ref_decay_t<T1>, unwrap_ref_decay_t<T2>>;
 	return unwrap_pair(_MSTL forward<T1>(x), _MSTL forward<T2>(y));
 }

@@ -11,7 +11,9 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
     uint32_t steal_num;
 
     while (true) {
-        auto [cur_src_steal, cur_src_local_head] = unpack(cur_src_head);
+        const auto pir = unpack(cur_src_head);
+        const auto cur_src_steal = pir.first;
+        const auto cur_src_local_head = pir.second;
         const auto cur_src_tail = tail_.load(_MSTL memory_order_acquire);
         const auto cur_src_size = cur_src_tail - cur_src_local_head;
         if (cur_src_size == 0) return 0;
@@ -55,7 +57,7 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
         }
     }
 
-    auto [next_src_steal, next_src_local_head] = unpack(next_src_head);
+    const auto next_src_steal = unpack(next_src_head).first;
     for (uint32_t i = 0; i < steal_num; i++) {
         const auto src_idx = static_cast<uint32_t>(next_src_steal + i) & mask_;
         const auto dst_idx = static_cast<uint32_t>(dst_tail + i) & mask_;
@@ -64,7 +66,7 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
 
     cur_src_head = next_src_head;
     while (true) {
-        auto [cur_src_steal, cur_src_local_head] = unpack(cur_src_head);
+        const auto cur_src_local_head = unpack(cur_src_head).second;
         next_src_head = pack(cur_src_local_head, cur_src_local_head);
         if (head_.compare_exchange_weak(cur_src_head, next_src_head,
             _MSTL memory_order_acq_rel, _MSTL memory_order_acquire)) {
@@ -89,13 +91,16 @@ local_queue& local_queue::operator =(local_queue&& other) noexcept {
 
 _MSTL optional<_MSTL function<void()>> local_queue::try_pop() {
     auto cur_head = head_.load(_MSTL memory_order_acquire);
-    size_t index = 0;
+    size_t index;
     while (true) {
-        auto [cur_steal, cur_local_head] = unpack(cur_head);
-        const auto tail = tail_.load(_MSTL memory_order_acquire);
-        if (cur_local_head == tail) {
+        const auto pir = unpack(cur_head);
+        const auto cur_steal = pir.first;
+        const auto cur_local_head = pir.second;
+
+        if (cur_local_head == tail_.load(_MSTL memory_order_acquire)) {
             return _MSTL nullopt;
         }
+
         const auto next_local_head = cur_local_head + 1;
         const auto next_head = (cur_local_head == cur_steal)
             ? pack(next_local_head, next_local_head)
@@ -105,7 +110,7 @@ _MSTL optional<_MSTL function<void()>> local_queue::try_pop() {
             _MSTL memory_order_acq_rel, _MSTL memory_order_acquire)) {
             index = static_cast<size_t>(cur_local_head) & mask_;
             break;
-            }
+        }
     }
     auto task = _MSTL move(tasks_[index]);
     tasks_[index] = nullptr;
@@ -115,8 +120,7 @@ _MSTL optional<_MSTL function<void()>> local_queue::try_pop() {
 _MSTL optional<_MSTL function<void()>> local_queue::be_stolen_by(local_queue& dst_queue) {
     _MSTL optional<_MSTL function<void()>> result{_MSTL nullopt};
 
-    auto [dst_steal, dst_local_head] =
-        local_queue::unpack(dst_queue.head_.load(_MSTL memory_order_acquire));
+    const auto dst_steal = local_queue::unpack(dst_queue.head_.load(_MSTL memory_order_acquire)).first;
     const auto dst_tail = dst_queue.tail_.load(_MSTL memory_order_acquire);
     if (dst_tail - dst_steal > static_cast<uint32_t>(capacity()) / 2) {
         return result;
@@ -154,8 +158,8 @@ worker_context& worker_context::operator =(worker_context&& other) noexcept {
 }
 
 #ifdef MSTL_COMPILER_MSVC__
-MSTL_THREAD_LOCAL worker_context* t_worker_ctx = nullptr;
-MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
+thread_local worker_context* t_worker_ctx = nullptr;
+thread_local _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
 
 worker_context*& get_worker_context() noexcept {
     return t_worker_ctx;
@@ -164,8 +168,8 @@ _MSTL shared_ptr<task_group>& get_current_task_group() noexcept {
     return t_current_task_group;
 }
 #else
-MSTL_THREAD_LOCAL worker_context* t_worker_ctx = nullptr;
-MSTL_THREAD_LOCAL _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
+thread_local worker_context* t_worker_ctx = nullptr;
+thread_local _MSTL shared_ptr<task_group> t_current_task_group = nullptr;
 #endif
 
 struct thread_pool_id_generator {

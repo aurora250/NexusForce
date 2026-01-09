@@ -54,7 +54,8 @@ path temp_file::generate_unique_path(const string& prefix, const string& suffix)
     const auto nanos = duration_cast<nanoseconds>(duration).count();
 
     const int pid = process::current_process_id();
-    const uint64_t random_part = random_mt::next_int();
+    random_mt rand;
+    const uint64_t random_part = rand.next_int();
     const string filename = format(
         "{}_{}_{}_{}_{}{}",
         prefix,

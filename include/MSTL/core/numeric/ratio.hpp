@@ -27,8 +27,10 @@ struct is_ratio : false_type {};
 template <intmax_t Numerator, intmax_t Denominator>
 struct is_ratio<ratio<Numerator, Denominator>> : true_type {};
 
+#ifdef MSTL_STANDARD_14__
 template <typename T>
 MSTL_INLINE17 constexpr bool is_ratio_v = is_ratio<T>::value;
+#endif
 
 
 MSTL_BEGIN_INNER__
@@ -119,6 +121,7 @@ template <typename ratio1, typename ratio2>
 struct ratio_greater_equal : integral_constant<bool, !ratio_less<ratio1, ratio2>::value> {};
 
 
+#ifdef MSTL_STANDARD_14__
 template <typename ratio1, typename ratio2>
 MSTL_INLINE17 constexpr bool ratio_equal_v = ratio_equal<ratio1, ratio2>::value;
 template <typename ratio1, typename ratio2>
@@ -131,6 +134,7 @@ template <typename ratio1, typename ratio2>
 MSTL_INLINE17 constexpr bool ratio_greater_v = ratio_greater<ratio1, ratio2>::value;
 template <typename ratio1, typename ratio2>
 MSTL_INLINE17 constexpr bool ratio_greater_equal_v = ratio_greater_equal<ratio1, ratio2>::value;
+#endif
 
 
 MSTL_BEGIN_INNER__

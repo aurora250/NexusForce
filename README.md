@@ -13,24 +13,6 @@
 
 本库使用IO设备时默认您的操作系统为代码页为UTF-8，如不是，请尝试设置，否则可能在IO时乱码。
 
-## 通过阅读、使用和维护MSTL，您能学到哪些技术
-
-- 函数式编程设计和类型擦除设计；
-- 使用模板元技术实现类型萃取；
-- 使用`concept`与`requires`约束模板参数行为；
-- 强化`noexcept`保证；
-- 通过`enable_if`实现SFINAF(Substitution Failure Is Not An Error)；
-- 通过`compressed_pair`实现EBCO(Empty Base Class Optimization)；
-- 内存分配与就地构造的配合使用；
-- UTF-8、UTF-16、UTF-32间的转换规则；
-- 通过CRTP(Curiously Recurring Template Pattern)实现静态多态；
-- 通过Windows/Linux API实现操作系统操作类，分析并认识不同操作系统之间大同小异的数据处理方式；
-- 双端队列、红黑树、哈希表等复杂容器的实现；
-- PostGreSQL、MySQL、Redis接口的现代包装与使用；
-- 实现定时器、线程池、数据库链接池等调度工具
-- 实现TCP/UDP/DNS/HTTP/HTTPS现代风格网络开发工具
-  ......
-
 ## 支持环境
 
 WINDOWS LINUX

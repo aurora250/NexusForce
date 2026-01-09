@@ -8,10 +8,6 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-#ifdef MSTL_PLATFORM_LINUX__
-char** ENVIRON_GLOBAL = ::environ;
-#endif
-
 static shared_mutex& get_mutex() {
     static shared_mutex mutex;
     return mutex;
@@ -90,7 +86,7 @@ unordered_map<string, string> environment::all_envs() {
     }
     ::FreeEnvironmentStrings(env_block);
 #else
-    for (char** env = ENVIRON_GLOBAL; *env != nullptr; env++) {
+    for (char** env = ::environ; *env != nullptr; env++) {
         const string_view env_str(*env);
         size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {

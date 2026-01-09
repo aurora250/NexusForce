@@ -48,7 +48,7 @@ MSTL_END_CONSTANTS__
 
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_ctype(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_ctype(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept {
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
 	if (uc > 127) return false;
 	if (uc <= 63) return (mask_low & (1ULL << uc)) != 0;
@@ -57,60 +57,60 @@ MSTL_PURE_FUNCTION constexpr bool is_ctype(const CharT c, uint64_t mask_low, uin
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_punct(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_punct(const CharT c) noexcept {
 	return _MSTL is_ctype(c, _CONSTANTS PUNCT_MASK_LOW, _CONSTANTS PUNCT_MASK_HIGH);
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_cntrl(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept {
 	return _MSTL is_ctype(c, _CONSTANTS CNTRL_MASK_LOW, _CONSTANTS CNTRL_MASK_HIGH);
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_print(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_print(const CharT c) noexcept {
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
 	return uc <= 127 && !_MSTL is_cntrl(c);
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_blank(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
 	return uc < 64 && (_CONSTANTS BLANK_MASK & (1ULL << uc)) != 0;
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_graph(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_graph(const CharT c) noexcept {
 	return _MSTL is_print(c) && !_MSTL is_blank(c);
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_ascii(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_ascii(const CharT c) noexcept {
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
 	return uc <= 127;
 }
 
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr bool is_space(const CharT c) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 bool is_space(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     return uc < 64 && (_CONSTANTS SPACE_MASK & (1ULL << uc)) != 0;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_alpha(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_alpha(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     return (uc & 0xDF) >= 'A' && (uc & 0xDF) <= 'Z';
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_digit(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_digit(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     return (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 9;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_xdigit(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_xdigit(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc > 127) return false;
     const bool is_09 = (uc & 0xF0) == 0x30 && (uc & 0x0F) <= 0x09;
@@ -120,12 +120,12 @@ MSTL_CONST_FUNCTION constexpr bool is_xdigit(const CharT c) noexcept {
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_alpha_or_digit(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_alpha_or_digit(const CharT c) noexcept {
     return _MSTL is_alpha(c) || _MSTL is_digit(c);
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr bool is_digit_or_alpha(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 bool is_digit_or_alpha(const CharT c) noexcept {
     return _MSTL is_digit(c) || _MSTL is_alpha(c);
 }
 
@@ -143,14 +143,14 @@ MSTL_CONST_FUNCTION constexpr uint32_t combine_surrogates(const char16_t high, c
 
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr CharT to_lowercase(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 CharT to_lowercase(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc >= 'A' && uc <= 'Z') return static_cast<CharT>(uc | 0x20);
     return c;
 }
 
 template <typename CharT>
-MSTL_CONST_FUNCTION constexpr CharT to_uppercase(const CharT c) noexcept {
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept {
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
     if (uc >= 'a' && uc <= 'z') return static_cast<CharT>(uc & 0xDF);
     return c;

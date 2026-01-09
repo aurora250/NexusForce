@@ -9,7 +9,7 @@ struct thread_exit_registry {
     }
 };
 
-static MSTL_THREAD_LOCAL thread_exit_registry thread_registry;
+static thread_local thread_exit_registry thread_registry;
 
 void at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) {
     elt->next = thread_registry.thread_exit_list;

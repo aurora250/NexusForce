@@ -28,7 +28,7 @@ constexpr int popcount64(const uint64_t x) noexcept {
         _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
 }
 
-constexpr int clz64(uint64_t x) noexcept {
+MSTL_CONSTEXPR14 int clz64(uint64_t x) noexcept {
     if (x == 0) return 64;
     int n = 0;
     if (x <= 0x00000000FFFFFFFFULL) { n += 32; x <<= 32; }
@@ -48,7 +48,7 @@ constexpr int popcount32(const uint32_t x) noexcept {
         _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
 }
 
-constexpr int clz32(uint32_t x) noexcept {
+MSTL_CONSTEXPR14 int clz32(uint32_t x) noexcept {
     if (x == 0) return 32;
     int n = 0;
     if (x <= 0x0000FFFFU) { n += 16; x <<= 16; }
@@ -87,7 +87,7 @@ constexpr uint64_t bit_floor(const uint64_t x) noexcept {
     return x == 0 ? 0 : uint64_t{1} << (bit_width(x) - 1);
 }
 
-constexpr uint64_t bit_ceil(const uint64_t x) noexcept {
+MSTL_CONSTEXPR14 uint64_t bit_ceil(const uint64_t x) noexcept {
     if (x <= 1) return 1;
     const uint64_t floor = bit_floor(x);
     return floor == x ? x : floor << 1;
@@ -97,14 +97,14 @@ constexpr bool has_single_bit(const uint64_t x) noexcept {
     return x != 0 && (x & (x - 1)) == 0;
 }
 
-constexpr uint64_t rotate_l(const uint64_t x, const int s) noexcept {
+MSTL_CONSTEXPR14 uint64_t rotate_l(const uint64_t x, const int s) noexcept {
     int shift = s % 64;
     if (shift < 0) shift += 64;
     if (shift == 0) return x;
     return (x << shift) | (x >> (64 - shift));
 }
 
-constexpr uint64_t rotate_r(const uint64_t x, const int s) noexcept {
+MSTL_CONSTEXPR14 uint64_t rotate_r(const uint64_t x, const int s) noexcept {
     int shift = s % 64;
     if (shift < 0) shift += 64;
     if (shift == 0) return x;
@@ -123,12 +123,12 @@ constexpr uint64_t bit_extract(const uint64_t x, const int pos, const int len) n
     return (x >> pos) & ((uint64_t{1} << len) - 1);
 }
 
-constexpr uint64_t bit_insert(const uint64_t x, const uint64_t bits, const int pos, const int len) noexcept {
+MSTL_CONSTEXPR14 uint64_t bit_insert(const uint64_t x, const uint64_t bits, const int pos, const int len) noexcept {
     const uint64_t mask = ((uint64_t{1} << len) - 1) << pos;
     return (x & ~mask) | ((bits << pos) & mask);
 }
 
-constexpr uint64_t reverse_bits(uint64_t x) noexcept {
+MSTL_CONSTEXPR14 uint64_t reverse_bits(uint64_t x) noexcept {
     x = ((x >> 1) & 0x5555555555555555ULL) | ((x & 0x5555555555555555ULL) << 1);
     x = ((x >> 2) & 0x3333333333333333ULL) | ((x & 0x3333333333333333ULL) << 2);
     x = ((x >> 4) & 0x0F0F0F0F0F0F0F0FULL) | ((x & 0x0F0F0F0F0F0F0F0FULL) << 4);
@@ -138,7 +138,7 @@ constexpr uint64_t reverse_bits(uint64_t x) noexcept {
     return x;
 }
 
-constexpr bool parity(uint64_t x) noexcept {
+MSTL_CONSTEXPR14 bool parity(uint64_t x) noexcept {
     x ^= x >> 32;
     x ^= x >> 16;
     x ^= x >> 8;

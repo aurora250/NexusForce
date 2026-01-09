@@ -29,7 +29,7 @@ struct iterator_traits : _INNER __iterator_traits_base<Iterator> {};
 
 template <typename T>
 struct iterator_traits<T*> {
-    static_assert(is_object_v<T>, "iterator traits requires object types.");
+    static_assert(is_object<T>::value, "iterator traits requires object types.");
 
 #ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;

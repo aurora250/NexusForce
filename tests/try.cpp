@@ -717,8 +717,8 @@ void test_zlib() {
 
 void test_rnd() {
     println(_MSTL secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
-    println(_MSTL random_lcd::next_int(10, 20), random_lcd::next_int(10, 20), random_lcd::next_int(10, 20));
-    println(_MSTL random_mt::next_int(10, 20), random_mt::next_int(10, 20), random_mt::next_int(10, 20));
+    println(_MSTL random_lcd().next_int(10, 20), random_lcd().next_int(10, 20), random_lcd().next_int(10, 20));
+    println(_MSTL random_mt().next_int(10, 20), random_mt().next_int(10, 20), random_mt().next_int(10, 20));
 }
 
 void test_format() {
@@ -1587,8 +1587,9 @@ void test_pqueue() {
 
     priority_queue<int> long_pque;
     constexpr MSTL::size_t element_count = 100000;
+    random_lcd rand;
     for (int i = 0; i < element_count; ++i) {
-        long_pque.push(random_lcd::next_int(10000));
+        long_pque.push(rand.next_int(10000));
     }
     for (int i = 0; i < element_count; ++i) {
         long_pque.pop();
@@ -1609,9 +1610,10 @@ void test_rbtree() {
     m.clear();
 
     map<int, float> long_map;
+    random_lcd rand;
     for (int i = 0; i < 100000; ++i) {
         int key = i;
-        long_map.insert({key, random_lcd::next_double(0, 10000)});
+        long_map.insert({key, rand.next_double(0, 10000)});
     }
     for (int i = 0; i < 100000; ++i) {
         long_map.erase(i);
@@ -1632,7 +1634,7 @@ void test_rbtree() {
     multimap<int, float> long_multimap;
     for (int i = 0; i < 100000; ++i) {
         int key = i;
-        long_multimap.insert({key, random_lcd::next_double(0, 10000)});
+        long_multimap.insert({key, rand.next_double(0, 10000)});
     }
     for (int i = 0; i < 100000; ++i) {
         long_multimap.erase(i);
@@ -1681,8 +1683,10 @@ void test_tuple() {
     auto forw = MSTL::make_tuple(9, 0);
 
     pair<int, double> pair1(1, 3.14);
+#ifdef MSTL_STANDARD_17__
     auto [p1, p2] = pair1;
     println(p1, p2);
+#endif
     tuple<int, double> tuple1(pair1);
     tuple<MSTL::string> tuple2("hello");
     tuple<char> tuple3('A');
@@ -1696,9 +1700,11 @@ void test_tuple() {
     println(MSTL::get<2>(combinedTuple));
     println(MSTL::get<3>(combinedTuple));
 
-    constexpr tuple<int, int, int> args(1, 2, 3);
+    tuple<int, int, int> args(1, 2, 3);
+#ifdef MSTL_STANDARD_17__
     auto [av, bv, cv] = args;
     println(av, bv, cv);
+#endif
 
     int sum = MSTL::apply([](int a, int b, int c) {
         return a + b + c;
@@ -1856,11 +1862,12 @@ void test_variant() {
 
 
 string generate_random_string(MSTL::size_t length) {
-    const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    constexpr string_view chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     string s;
     s.reserve(length);
+    random_lcd rand;
     for (size_t i = 0; i < length; ++i) {
-        s += chars[random_lcd::next_int() % chars.size()];
+        s += chars[rand.next_int() % chars.size()];
     }
     return s;
 }
@@ -1895,14 +1902,14 @@ void test_long_string_concat(size_t iterations, size_t chunk_size) {
 
 void test_string_modification(size_t initial_length, size_t operations) {
     string str = generate_random_string(initial_length);
-
+    random_lcd rand;
     for (size_t i = 0; i < operations; ++i) {
         if (i % 2 == 0) {
-            size_t pos = random_lcd::next_int() % (str.size() + 1);
+            size_t pos = rand.next_int() % (str.size() + 1);
             str.insert(pos, 1, 'X');
         } else {
             if (str.empty()) break;
-            size_t pos = random_lcd::next_int() % str.size();
+            size_t pos = rand.next_int() % str.size();
             str.erase(pos, 1);
         }
     }
@@ -1915,9 +1922,9 @@ void test_string_search_replace(size_t str_length, size_t pattern_count) {
     string str = generate_random_string(str_length);
     const string pattern = "ABC";
     const string replacement = "XYZ";
-
+    random_lcd rand;
     for (size_t i = 0; i < pattern_count; ++i) {
-        size_t pos = random_lcd::next_int() % (str.size() - pattern.size() + 1);
+        size_t pos = rand.next_int() % (str.size() - pattern.size() + 1);
         str.replace(pos, pattern.size(), pattern);
     }
 

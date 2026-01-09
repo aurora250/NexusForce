@@ -36,6 +36,7 @@
 #include "core/file/yaml/yaml_builder.hpp"
 #include "core/file/yaml/yaml_parser.hpp"
 #include "core/functional/functor_adapter.hpp"
+#include "core/functional/bind.hpp"
 #include "core/iterator/insert_iterator.hpp"
 #include "core/iterator/ranges.hpp"
 #include "core/memory/builtin_allocator.hpp"

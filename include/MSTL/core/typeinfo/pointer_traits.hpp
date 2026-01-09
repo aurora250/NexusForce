@@ -22,7 +22,8 @@ struct get_ptr_difference_type {
 };
 
 template <typename T>
-struct get_ptr_difference_type<T, enable_if_t<is_same_v<typename T::difference_type, typename T::difference_type>>> {
+struct get_ptr_difference_type<T, enable_if_t<
+    is_same<typename T::difference_type, typename T::difference_type>::value>> {
     using type = typename T::difference_type;
 };
 
@@ -48,7 +49,8 @@ struct get_rebind_type {
 };
 
 template <typename T, typename U>
-struct get_rebind_type<T, U, enable_if_t<is_same_v<typename T::template rebind<U>, typename T::template rebind<U>>>> {
+struct get_rebind_type<T, U, enable_if_t<
+    is_same<typename T::template rebind<U>, typename T::template rebind<U>>::value>> {
     using type = typename T::template rebind<U>;
 };
 
@@ -63,7 +65,7 @@ struct __ptr_traits_base {
     using pointer = Ptr;
     using element_type = Elem;
     using difference_type = get_ptr_difference_type_t<Ptr>;
-    using reference = conditional_t<is_void_v<Elem>, char, Elem>&;
+    using reference = conditional_t<is_void<Elem>::value, char, Elem>&;
 
     template <typename U>
     using rebind = typename get_rebind_type<Ptr, U>::type;
@@ -97,7 +99,7 @@ struct pointer_traits<T*> {
     using pointer = T*;
     using element_type = T;
     using difference_type = ptrdiff_t;
-    using reference = conditional_t<is_void_v<T>, char, T>&;
+    using reference = conditional_t<is_void<T>::value, char, T>&;
 
     template <typename U>
     using rebind = U*;
@@ -128,7 +130,7 @@ MSTL_BEGIN_INNER__
 
 template <typename T>
 constexpr T* __to_address(T* ptr) noexcept {
-    static_assert(!is_function_v<T>, "not a function pointer");
+    static_assert(!is_function<T>::value, "not a function pointer");
     return ptr;
 }
 
@@ -137,12 +139,12 @@ constexpr decltype(auto) __to_address(const Ptr& ptr) noexcept {
     return pointer_traits<Ptr>::to_address(ptr);
 }
 
-template <typename Ptr, typename... None, enable_if_t<!has_base_v<Ptr>, int> = 0>
+template <typename Ptr, typename... None, enable_if_t<!has_base<Ptr>::value, int> = 0>
 constexpr decltype(auto) __to_address(const Ptr& ptr, None...) noexcept {
     return __to_address(ptr.operator->());
 }
 
-template <typename Ptr, typename... None, enable_if_t<has_base_v<Ptr>, int> = 0>
+template <typename Ptr, typename... None, enable_if_t<has_base<Ptr>::value, int> = 0>
 constexpr decltype(auto) __to_address(const Ptr& ptr, None...) noexcept {
     return __to_address(ptr.base().operator->());
 }

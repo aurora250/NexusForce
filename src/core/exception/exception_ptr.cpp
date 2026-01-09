@@ -2,7 +2,7 @@
 #include <MSTL/core/exception/exception_ptr.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-static MSTL_THREAD_LOCAL exception_ptr current_exception_ptr;
+static thread_local exception_ptr current_exception_ptr;
 
 
 exception_ptr current_exception() noexcept {

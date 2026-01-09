@@ -24,7 +24,7 @@ MSTL_INLINE17 constexpr size_t FNV_PRIME = 16777619U;
 // the FNV (Fowler-Noll-Vo) is a non-cryptographic hash algorithm
 // with a good avalanche effect and a low collision rate.
 // FNV_hash function is FNV-1a version.
-constexpr size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
+MSTL_CONSTEXPR14 size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
     size_t result = FNV_OFFSET_BASIS;
     for (size_t i = 0; i < count; i++) {
         result ^= static_cast<size_t>(first[i]);
@@ -36,8 +36,8 @@ constexpr size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
 
 MSTL_BEGIN_INNER__
 
-template <typename T, enable_if_t<is_integral_v<T>, int> = 0>
-constexpr size_t FNV_hash_integer(const T& value) noexcept {
+template <typename T, enable_if_t<is_integral<T>::value, int> = 0>
+MSTL_CONSTEXPR14 size_t FNV_hash_integer(const T& value) noexcept {
     size_t result = FNV_OFFSET_BASIS;
     for (size_t i = 0; i < sizeof(T); ++i) {
         const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
@@ -48,7 +48,7 @@ constexpr size_t FNV_hash_integer(const T& value) noexcept {
 }
 
 template <typename CharT>
-constexpr size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
+MSTL_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
     size_t result = FNV_OFFSET_BASIS;
     for (size_t i = 0; i < len; ++i) {
         result ^= static_cast<size_t>(static_cast<byte_t>(str[i]));
@@ -78,12 +78,17 @@ MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_INTEGER_HASH_STRUCT)
 MSTL_MACRO_RANGE_INT(__MSTL_BUILD_INTEGER_HASH_STRUCT)
 #undef FLOAT_HASH_STRUCT__
 
+MSTL_BEGIN_INNER__
+template <typename T>
+union __float_converter { T f; uint64_t i; };
+MSTL_END_INNER__
+
 #define __MSTL_BUILD_FLOAT_HASH_STRUCT(OPT) \
 template <> \
 struct hash<OPT> { \
-    MSTL_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { \
+    MSTL_NODISCARD MSTL_CONSTEXPR14 size_t operator()(const OPT x) const noexcept { \
         if (x == 0.0f) return 0; \
-        union { OPT f; uint64_t i; } converter{}; \
+        _INNER __float_converter<OPT> converter{}; \
         converter.f = x; \
         return _INNER FNV_hash_integer(converter.i); \
     } \
@@ -96,7 +101,7 @@ MSTL_MACRO_RANGE_FLOAT(__MSTL_BUILD_FLOAT_HASH_STRUCT)
 // DJB2 is a non-cryptographic hash algorithm
 // with simple implement, fast speed and evenly distributed.
 // but in some special cases, there will still occur hash conflicts.
-constexpr size_t DJB2_hash(const char* str, const size_t len) noexcept {
+MSTL_CONSTEXPR14 size_t DJB2_hash(const char* str, const size_t len) noexcept {
     size_t hash = 5381;
     for (size_t i = 0; i < len; ++i) {
         hash = (hash << 5) + hash + static_cast<byte_t>(str[i]);
@@ -134,7 +139,7 @@ MSTL_INLINE17 constexpr uint64_t FINAL_MIX_MULTIPLIER64_2 = 0xc4ceb9fe1a85ec53UL
 MSTL_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_1 = 0x52dce729;
 MSTL_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_2 = 0x38495ab5;
 
-constexpr uint64_t hash_mix_x64(uint64_t k) noexcept {
+MSTL_CONSTEXPR14 uint64_t hash_mix_x64(uint64_t k) noexcept {
     k ^= k >> 33;
     k *= FINAL_MIX_MULTIPLIER64_1;
     k ^= k >> 33;
@@ -168,8 +173,11 @@ struct is_nothrow_hashable : false_type {};
 template <typename Key>
 struct is_nothrow_hashable<Key, void_t<decltype(_MSTL hash<Key>{}(_MSTL declval<const Key&>()))>>
     : bool_constant<noexcept(_MSTL hash<Key>{}(_MSTL declval<const Key&>()))> {};
+
+#ifdef MSTL_STANDARD_14__
 template <typename Key>
 MSTL_INLINE17 constexpr bool is_nothrow_hashable_v = is_nothrow_hashable<Key>::value;
+#endif
 
 
 template <typename, typename, typename = void>
@@ -177,11 +185,13 @@ struct is_hash : false_type {};
 
 template <typename Func, typename Arg>
 struct is_hash<Func, Arg, enable_if_t<
-    is_convertible_v<decltype(_MSTL declval<Func>()(_MSTL declval<Arg>())), size_t>
+    is_convertible<decltype(_MSTL declval<Func>()(_MSTL declval<Arg>())), size_t>::value
 >> : true_type {};
 
+#ifdef MSTL_STANDARD_14__
 template <typename Func, typename Arg>
 constexpr bool is_hash_v = is_hash<Func, Arg>::value;
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FUNCTIONAL_HASH_HPP__

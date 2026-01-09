@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_MEMORY_UNIQUE_PTR_HPP__
 #define MSTL_CORE_MEMORY_UNIQUE_PTR_HPP__
 #include "../functional/functor.hpp"
+#include "../functional/invoke.hpp"
 #include "../utility/tuple.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -8,7 +9,7 @@ template <typename T>
 struct default_delete {
     constexpr default_delete() noexcept = default;
 
-    template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
+    template <typename U, enable_if_t<is_convertible<U*, T*>::value, int> = 0>
 	MSTL_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
 
     MSTL_CONSTEXPR20 void operator()(const T* ptr) const noexcept {
@@ -25,10 +26,10 @@ template <typename T>
 struct default_delete<T[]> {
     constexpr default_delete() noexcept = default;
 
-    template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
+    template <typename U, enable_if_t<is_convertible<U(*)[], T(*)[]>::value, int> = 0>
     MSTL_CONSTEXPR20 default_delete(const default_delete<U[]>&) noexcept {}
 
-    template <typename U, enable_if_t<is_convertible_v<U(*)[], T(*)[]>, int> = 0>
+    template <typename U, enable_if_t<is_convertible<U(*)[], T(*)[]>::value, int> = 0>
     MSTL_CONSTEXPR20 void operator ()(U* ptr) const noexcept {
 	    delete [] ptr;
 	}
@@ -55,14 +56,13 @@ private:
 	};
 
 public:
-    using DeleterConstraint = enable_if<is_default_constructible_v<Deleter>>;
-
+    using DeleterConstraint = enable_if<is_default_constructible<Deleter>::value>;
     using pointer = typename inner_ptr<T, Deleter>::type;
 
 private:
     _MSTL tuple<pointer, Deleter> tup{};
 
-    static_assert(!is_rvalue_reference_v<Deleter>,
+    static_assert(!is_rvalue_reference<Deleter>::value,
         "deleter type of unique_ptr must be a function object type or an lvalue reference type");
 
 public:
@@ -108,8 +108,8 @@ public:
 };
 
 template <typename T, typename Deleter,
-    bool = is_move_constructible_v<Deleter>,
-    bool = is_move_assignable_v<Deleter>>
+    bool = is_move_constructible<Deleter>::value,
+    bool = is_move_assignable<Deleter>::value>
 struct __unique_ptr_data : __unique_ptr_impl<T, Deleter> {
     using base_type = __unique_ptr_impl<T, Deleter>;
     using pointer = typename base_type::pointer;
@@ -194,27 +194,27 @@ public:
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
     MSTL_CONSTEXPR20 unique_ptr(pointer p) noexcept : data_(p) {}
 
-    template <typename Del = deleter_type, enable_if_t<is_copy_constructible_v<Del>, int> = 0>
+    template <typename Del = deleter_type, enable_if_t<is_copy_constructible<Del>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(pointer ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
 
-    template <typename Del = deleter_type, enable_if_t<is_move_constructible_v<Del>, int> = 0>
+    template <typename Del = deleter_type, enable_if_t<is_move_constructible<Del>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(pointer ptr, Del&& del) noexcept : data_(ptr, _MSTL move(del)) {}
 
     template<typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>>
-    MSTL_CONSTEXPR20 unique_ptr(pointer, enable_if_t<is_lvalue_reference_v<Del>, DelMoveRef&&>) = delete;
+    MSTL_CONSTEXPR20 unique_ptr(pointer, enable_if_t<is_lvalue_reference<Del>::value, DelMoveRef&&>) = delete;
 
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
 	constexpr unique_ptr(nullptr_t = nullptr) noexcept : data_() {}
 
     MSTL_CONSTEXPR20 unique_ptr(unique_ptr&&) = default;
 
-    template <typename U, typename E, enable_if_t<conjunction_v<safe_conversion<U, E>,
-        conditional_t<is_reference_v<Deleter>, is_same<E, Deleter>, is_convertible<E, Deleter>>>, int> = 0>
+    template <typename U, typename E, enable_if_t<conjunction<safe_conversion<U, E>,
+        conditional_t<is_reference<Deleter>::value, is_same<E, Deleter>, is_convertible<E, Deleter>>>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(unique_ptr<U, E>&& x) noexcept
 	    : data_(x.release(), _MSTL forward<E>(x.get_deleter())) {}
 
     ~unique_ptr() noexcept {
-	    static_assert(is_invocable_v<deleter_type&, pointer>, "deleter of unique_ptr must be invocable with a pointer");
+	    static_assert(is_invocable<deleter_type&, pointer>::value, "deleter of unique_ptr must be invocable with a pointer");
 	    auto& ptr = data_.get_ptr();
 	    if (ptr != nullptr)
 	        get_deleter()(_MSTL move(ptr));
@@ -223,8 +223,8 @@ public:
 
     unique_ptr& operator =(unique_ptr&&) = default;
 
-    template <typename U, typename E, enable_if_t<conjunction_v<
-        safe_conversion<U, E>, is_assignable<deleter_type&, E&&>>, int> = 0>
+    template <typename U, typename E, enable_if_t<conjunction<
+        safe_conversion<U, E>, is_assignable<deleter_type&, E&&>>::value, int> = 0>
 	MSTL_CONSTEXPR20 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
 	    reset(x.release());
 	    get_deleter() = _MSTL forward<E>(x.get_deleter());
@@ -254,13 +254,13 @@ public:
 
     MSTL_CONSTEXPR20 pointer release() noexcept { return data_.release(); }
     MSTL_CONSTEXPR20 void reset(pointer ptr = pointer()) noexcept {
-	    static_assert(is_invocable_v<deleter_type&, pointer>,
+	    static_assert(is_invocable<deleter_type&, pointer>::value,
 	        "deleter of unique_ptr must be invocable with a pointer");
 	    data_.reset(_MSTL move(ptr));
     }
 
     MSTL_CONSTEXPR20 void swap(unique_ptr& x) noexcept {
-	    static_assert(is_swappable_v<Deleter>, "deleter must be swappable.");
+	    static_assert(is_swappable<Deleter>::value, "deleter must be swappable.");
 	    data_.swap(x.data_);
     }
 
@@ -296,25 +296,25 @@ public:
     MSTL_CONSTEXPR20 explicit unique_ptr(U ptr) noexcept : data_(ptr) {}
 
     template <typename U, typename Del = deleter_type,
-        enable_if_t<conjunction_v<safe_conversion_raw<U>, is_copy_constructible<Del>>, int> = 0>
+        enable_if_t<conjunction<safe_conversion_raw<U>, is_copy_constructible<Del>>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(U ptr, const deleter_type& del) noexcept : data_(ptr, del) {}
 
     template <typename U, typename Del = deleter_type,
-        enable_if_t<conjunction_v<safe_conversion_raw<U>, is_move_constructible<Del>>, int> = 0>
-    MSTL_CONSTEXPR20 unique_ptr(U ptr, enable_if_t<!is_lvalue_reference_v<Del>, Del&&> del) noexcept
+        enable_if_t<conjunction<safe_conversion_raw<U>, is_move_constructible<Del>>::value, int> = 0>
+    MSTL_CONSTEXPR20 unique_ptr(U ptr, enable_if_t<!is_lvalue_reference<Del>::value, Del&&> del) noexcept
     	: data_(_MSTL move(ptr), _MSTL move(del)) {}
 
     template <typename U, typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>,
         enable_if_t<safe_conversion_raw<U>::value, int> = 0>
-	unique_ptr(U, enable_if_t<is_lvalue_reference_v<Del>, DelMoveRef&&>) = delete;
+	unique_ptr(U, enable_if_t<is_lvalue_reference<Del>::value, DelMoveRef&&>) = delete;
 
     unique_ptr(unique_ptr&&) = default;
 
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
 	constexpr unique_ptr(nullptr_t = nullptr) noexcept : data_() {}
 
-    template <typename U, typename E, enable_if_t<conjunction_v<safe_conversion<U, E>,
-	       conditional_t<is_reference_v<Deleter>, is_same<E, Deleter>, is_convertible<E, Deleter>>>, int> = 0>
+    template <typename U, typename E, enable_if_t<conjunction<safe_conversion<U, E>,
+	       conditional_t<is_reference<Deleter>::value, is_same<E, Deleter>, is_convertible<E, Deleter>>>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(unique_ptr<U, E>&& x) noexcept
 	    : data_(x.release(), _MSTL forward<E>(x.get_deleter())) {}
 
@@ -327,8 +327,8 @@ public:
 
     unique_ptr& operator =(unique_ptr&&) = default;
 
-    template <typename U, typename E, enable_if_t<conjunction_v<
-        safe_conversion<U, E>, is_assignable<deleter_type&, E&&>, int>> = 0>
+    template <typename U, typename E, enable_if_t<conjunction<
+        safe_conversion<U, E>, is_assignable<deleter_type&, E&&>, int>::value> = 0>
     MSTL_CONSTEXPR20 unique_ptr& operator =(unique_ptr<U, E>&& x) noexcept {
 	    reset(x.release());
 	    get_deleter() = _MSTL forward<E>(x.get_deleter());
@@ -354,13 +354,17 @@ public:
     }
 
     MSTL_CONSTEXPR20 pointer release() noexcept { return data_.release(); }
-    template <typename U, enable_if_t<conjunction_v<disjunction<is_same<U, pointer>, conjunction<
-        is_same<pointer, element_type*>, is_pointer<U>, is_convertible<remove_pointer_t<U>(*)[],element_type(*)[]>>>>, int> = 0>
+    template <typename U, enable_if_t<
+        conjunction<disjunction<is_same<U, pointer>,
+            conjunction<is_same<pointer, element_type*>,
+                is_pointer<U>,
+                is_convertible<remove_pointer_t<U>(*)[],element_type(*)[]>>>
+        >::value, int> = 0>
     MSTL_CONSTEXPR20 void reset(U ptr) noexcept { data_.reset(_MSTL move(ptr)); }
     MSTL_CONSTEXPR20 void reset(nullptr_t = nullptr) noexcept { reset(pointer()); }
 
     MSTL_CONSTEXPR20 void swap(unique_ptr& x) noexcept {
-	    static_assert(is_swappable_v<Deleter>, "deleter must be swappable");
+	    static_assert(is_swappable<Deleter>::value, "deleter must be swappable");
 	    data_.swap(x.data_);
     }
 
@@ -368,7 +372,7 @@ public:
     unique_ptr& operator =(const unique_ptr&) = delete;
 };
 
-template <typename T, typename Deleter, enable_if_t<is_swappable_v<Deleter> && is_swappable_v<T>, int> = 0>
+template <typename T, typename Deleter, enable_if_t<is_swappable<Deleter>::value && is_swappable<T>::value, int> = 0>
 void swap(unique_ptr<T, Deleter>& lhs, unique_ptr<T, Deleter>& rhs) noexcept {
     lhs.swap(rhs);
 }
@@ -519,27 +523,27 @@ struct hash<unique_ptr<T, Deleter>> {
 };
 
 
-template <typename T, typename... Args, enable_if_t<!is_array_v<T>, int> = 0>
+template <typename T, typename... Args, enable_if_t<!is_array<T>::value, int> = 0>
 MSTL_CONSTEXPR20 unique_ptr<T> make_unique(Args&&... args) {
     return unique_ptr<T>(new T(_MSTL forward<Args>(args)...));
 }
-template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
+template <typename T, enable_if_t<is_unbounded_array<T>::value, int> = 0>
 MSTL_CONSTEXPR20 unique_ptr<T> make_unique(const size_t len) {
     return unique_ptr<T>(new remove_extent_t<T>[len]());
 }
-template <typename T, typename... Args, enable_if_t<is_bounded_array_v<T>, int> = 0>
+template <typename T, typename... Args, enable_if_t<is_bounded_array<T>::value, int> = 0>
 unique_ptr<T> make_unique(Args&&...) = delete;
 
 
-template <typename T, enable_if_t<!is_array_v<T>, int> = 0>
+template <typename T, enable_if_t<!is_array<T>::value, int> = 0>
 MSTL_CONSTEXPR20 unique_ptr<T> make_unique_for_overwrite() {
     return unique_ptr<T>(new T());
 }
-template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
+template <typename T, enable_if_t<is_unbounded_array<T>::value, int> = 0>
 MSTL_CONSTEXPR20 unique_ptr<T> make_unique_for_overwrite(const size_t len) {
     return unique_ptr<T>(new remove_extent_t<T>[len]());
 }
-template <typename T, typename... Args, enable_if_t<is_bounded_array_v<T>, int> = 0>
+template <typename T, typename... Args, enable_if_t<is_bounded_array<T>::value, int> = 0>
 unique_ptr<T> make_unique_for_overwrite(Args&&...) = delete;
 
 MSTL_END_NAMESPACE__

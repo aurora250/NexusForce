@@ -666,9 +666,7 @@ struct atomic_flag {
 #ifdef MSTL_COMPILER_GNUC__
 		return __atomic_test_and_set(&flag_, static_cast<int32_t>(mo));
 #else
-		const long old_val = ::_InterlockedExchange(
-			reinterpret_cast<volatile value_type*>(&flag_),
-			static_cast<long>(1));
+		const long old_val = ::_InterlockedExchange(&flag_, 1);
 		if (mo == memory_order_seq_cst) ::_ReadWriteBarrier();
 		return old_val != 0;
 #endif
@@ -703,7 +701,7 @@ struct atomic_flag {
 		_MSTL atomic_wait_address_v(
 			const_cast<const value_type*>(&flag_), value,
 			[this, mo] { return this->test(mo); }
-			);
+		);
 	}
 
 

@@ -38,7 +38,7 @@ public:
     && assignable_from<Iterator&, const U&>)
 #endif // MSTL_STANDARD_20__
     constexpr reverse_iterator& operator =(const reverse_iterator<U>& x)
-        noexcept(is_nothrow_assignable_v<reverse_iterator&, const U&>) {
+        noexcept(is_nothrow_assignable<reverse_iterator&, const U&>::value) {
         current = x.current;
         return *this;
     }
@@ -46,14 +46,14 @@ public:
     MSTL_CONSTEXPR20 ~reverse_iterator() noexcept = default;
 
     MSTL_NODISCARD constexpr reference operator *() const
-        noexcept(is_nothrow_copy_assignable_v<Iterator> && noexcept(*--(_MSTL declval<Iterator&>()))) {
+        noexcept(is_nothrow_copy_assignable<Iterator>::value && noexcept(*--(_MSTL declval<Iterator&>()))) {
         Iterator iter = current;
         return *--iter;
     }
 
     MSTL_NODISCARD constexpr pointer operator ->() const
-        noexcept(is_nothrow_copy_constructible_v<Iterator> && noexcept(--(_MSTL declval<Iterator&>()))
-            && is_nothrow_arrow<Iterator&, pointer>)
+        noexcept(is_nothrow_copy_constructible<Iterator>::value && noexcept(--(_MSTL declval<Iterator&>()))
+            && is_nothrow_arrow<Iterator&, pointer>::value)
 #ifdef MSTL_STANDARD_20__
         requires (is_pointer_v<Iterator> || requires(const Iterator it) { it.operator->(); })
 #endif // MSTL_STANDARD_20__

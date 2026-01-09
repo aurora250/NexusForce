@@ -1,6 +1,6 @@
 #include <MSTL/core/utility/hexadecimal.hpp>
 #include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/algorithm/erase.hpp>
+#include <MSTL/core/algorithm/remove.hpp>
 #include <MSTL/core/file/toml/toml_parser.hpp>
 MSTL_BEGIN_NAMESPACE__
 

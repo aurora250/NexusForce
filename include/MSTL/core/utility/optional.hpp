@@ -488,7 +488,7 @@ public:
     noexcept(is_nothrow_move_constructible_v<T> && is_nothrow_swappable_v<T>) {
         if(_MSTL addressof(x) == this) return;
         if (have_value_ && x.have_value_) {
-            _INNER __raw_swap(*this, x);
+            _MSTL swap(*this, x);
         } else if (have_value_) {
             x.emplace(move(**this));
             reset();

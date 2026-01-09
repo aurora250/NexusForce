@@ -4,11 +4,6 @@
 #include "../string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-#ifdef MSTL_PLATFORM_LINUX__
-extern char** ENVIRON_GLOBAL;
-#endif
-
-
 class MSTL_API environment {
 private:
     static string get_unsafe(const string& name);

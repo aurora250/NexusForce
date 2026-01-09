@@ -34,7 +34,7 @@ namespace masm {
 // copy from source memory to destination memory with specific length.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memcpy.
-constexpr void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	if (count == 0) return dest;
 
@@ -50,7 +50,7 @@ constexpr void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT 
 }
 
 // it`s similar with std::mempcpy
-constexpr void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 	auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -66,7 +66,7 @@ constexpr void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RE
 // copy from source memory to destination memory with specific length if not encounter target character.
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memccpy.
-constexpr void* memory_char_copy(void* dest, const void* src, const int chr, size_t count) noexcept {
+MSTL_CONSTEXPR14 void* memory_char_copy(void* dest, const void* src, const int chr, size_t count) noexcept {
     if (dest == nullptr || src == nullptr) return nullptr;
     const auto target = static_cast<byte_t>(chr);
     auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -88,7 +88,7 @@ constexpr void* memory_char_copy(void* dest, const void* src, const int chr, siz
 // return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
 // and return zero when they are equal in specific length.
 // it`s similar with std::memcmp.
-MSTL_PURE_FUNCTION constexpr int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
 	if (lhs == nullptr && rhs == nullptr) return 0;
 	if (lhs == nullptr) return -1;
     if (rhs == nullptr) return 1;
@@ -128,7 +128,7 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR20 int memory_compare_ignore_case(
 // return a pointer which is pointing to the first place that equal to target value in a specific length.
 // if parameter pointer is nullptr, return nullptr. if not found, return nullptr.
 // it`s similar with std::memchr.
-MSTL_PURE_FUNCTION constexpr void* memory_char(const void* dest, const int value, size_t count) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 void* memory_char(const void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 	auto p = static_cast<const byte_t *>(dest);
 	while (count--) {
@@ -141,7 +141,7 @@ MSTL_PURE_FUNCTION constexpr void* memory_char(const void* dest, const int value
 
 // if any parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memmove.
-constexpr void* memory_move(void* dest, const void* src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 
 	void* res = dest;
@@ -164,7 +164,7 @@ constexpr void* memory_move(void* dest, const void* src, size_t count) noexcept 
 // fill the destination memory with target value in the specific length.
 // if parameter pointer is nullptr, return nullptr.
 // it`s similar with std::memset.
-constexpr void* memory_set(void* dest, const int value, size_t count) noexcept {
+MSTL_CONSTEXPR14 void* memory_set(void* dest, const int value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 
 	void* ret = static_cast<byte_t *>(dest);
@@ -179,7 +179,7 @@ constexpr void* memory_set(void* dest, const int value, size_t count) noexcept {
 // clear the destination memory with zero in the specific length.
 // if parameter pointer is nullptr, do nothing.
 // it`s similar with std::bzero.
-constexpr void memory_zero(void* dest, const size_t count) noexcept {
+MSTL_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
 	if (dest == nullptr) return;
 
 	const auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -189,7 +189,7 @@ constexpr void memory_zero(void* dest, const size_t count) noexcept {
 }
 
 // std::memmem
-constexpr void* memory_in_memory(const void * data, const size_t data_len,
+MSTL_CONSTEXPR14 void* memory_in_memory(const void * data, const size_t data_len,
 	const void* pattern, const size_t pattern_len) noexcept {
 	if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
 		return nullptr;
@@ -216,7 +216,7 @@ constexpr void* memory_in_memory(const void * data, const size_t data_len,
 }
 
 // std::memfrob
-constexpr void* memory_frobnicate(void* s, const size_t n) noexcept {
+MSTL_CONSTEXPR14 void* memory_frobnicate(void* s, const size_t n) noexcept {
 	if (s == nullptr || n == 0) return s;
 	const auto s_v = static_cast<volatile byte_t*>(s);
 	for (size_t i = 0; i < n; i++) {

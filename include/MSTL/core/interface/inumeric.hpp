@@ -14,87 +14,87 @@ private:
     }
 
 public:
-    MSTL_NODISCARD constexpr T operator +(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator +(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator+=(other))) {
         T tmp(derived());
         tmp += other;
         return tmp;
     }
     
-    MSTL_NODISCARD constexpr T operator -(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator -(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator-=(other))) {
         T tmp(derived());
         tmp -= other;
         return tmp;
     }
     
-    MSTL_NODISCARD constexpr T operator *(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator *(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator*=(other))) {
         T tmp(derived());
         tmp *= other;
         return tmp;
     }
     
-    MSTL_NODISCARD constexpr T operator /(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator /(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator/=(other))) {
         T tmp(derived());
         tmp /= other;
         return tmp;
     }
     
-    MSTL_NODISCARD constexpr T operator %(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator %(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator%=(other))) {
         T tmp(derived());
         tmp %= other;
         return tmp;
     }
 
-    MSTL_NODISCARD constexpr T operator -() const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator -() const
     noexcept(noexcept(derived().operator-())) {
         return derived().operator-();
     }
 
-    constexpr T& operator +=(const T& other)
+    MSTL_CONSTEXPR14 T& operator +=(const T& other)
     noexcept(noexcept(derived().operator+=(other))) {
         return derived().operator+=(other);
     }
     
-    constexpr T& operator -=(const T& other)
+    MSTL_CONSTEXPR14 T& operator -=(const T& other)
     noexcept(noexcept(derived().operator-=(other))) {
         return derived().operator-=(other);
     }
     
-    constexpr T& operator *=(const T& other)
+    MSTL_CONSTEXPR14 T& operator *=(const T& other)
     noexcept(noexcept(derived().operator*=(other))) {
         return derived().operator*=(other);
     }
     
-    constexpr T& operator /=(const T& other) {
+    MSTL_CONSTEXPR14 T& operator /=(const T& other) {
         return derived().operator/=(other);
     }
     
-    constexpr T& operator %=(const T& other) {
+    MSTL_CONSTEXPR14 T& operator %=(const T& other) {
         return derived().operator%=(other);
     }
 
-    constexpr T& operator ++()
+    MSTL_CONSTEXPR14 T& operator ++()
     noexcept(noexcept(derived().operator++())) {
         return derived().operator++();
     }
     
-    constexpr T operator ++(int)
+    MSTL_CONSTEXPR14 T operator ++(int)
     noexcept(noexcept(derived().operator++())) {
         T tmp(derived());
         ++derived();
         return tmp;
     }
     
-    constexpr T& operator --()
+    MSTL_CONSTEXPR14 T& operator --()
     noexcept(noexcept(derived().operator--())) {
         return derived().operator--();
     }
     
-    constexpr T operator --(int)
+    MSTL_CONSTEXPR14 T operator --(int)
     noexcept(noexcept(derived().operator--())) {
         T tmp(derived());
         --derived();
@@ -114,64 +114,64 @@ private:
     }
 
 public:
-    MSTL_NODISCARD constexpr T operator &(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator &(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator&=(other))) {
         T tmp(derived());
         tmp &= other;
         return tmp;
     }
 
-    MSTL_NODISCARD constexpr T operator |(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator |(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator|=(other))) {
         T tmp(derived());
         tmp |= other;
         return tmp;
     }
 
-    MSTL_NODISCARD constexpr T operator ^(const T& other) const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator ^(const T& other) const
     noexcept(noexcept(const_cast<T&>(derived()).operator^=(other))) {
         T tmp(derived());
         tmp ^= other;
         return tmp;
     }
 
-    MSTL_NODISCARD constexpr T operator ~() const
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator ~() const
     noexcept(noexcept(derived().operator~())) {
         return derived().operator~();
     }
 
-    MSTL_NODISCARD constexpr T operator <<(const uint32_t shift) const {
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator <<(const uint32_t shift) const {
         T tmp(derived());
         tmp <<= shift;
         return tmp;
     }
 
-    MSTL_NODISCARD constexpr T operator >>(const uint32_t shift) const {
+    MSTL_NODISCARD MSTL_CONSTEXPR14 T operator >>(const uint32_t shift) const {
         T tmp(derived());
         tmp >>= shift;
         return tmp;
     }
 
-    constexpr T& operator &=(const T& other)
+    MSTL_CONSTEXPR14 T& operator &=(const T& other)
     noexcept(noexcept(derived().operator&=(other))) {
         return derived().operator&=(other);
     }
 
-    constexpr T& operator |=(const T& other)
+    MSTL_CONSTEXPR14 T& operator |=(const T& other)
     noexcept(noexcept(derived().operator|=(other))) {
         return derived().operator|=(other);
     }
 
-    constexpr T& operator ^=(const T& other)
+    MSTL_CONSTEXPR14 T& operator ^=(const T& other)
     noexcept(noexcept(derived().operator^=(other))) {
         return derived().operator^=(other);
     }
 
-    constexpr T& operator <<=(const uint32_t shift) {
+    MSTL_CONSTEXPR14 T& operator <<=(const uint32_t shift) {
         return derived().operator<<=(shift);
     }
 
-    constexpr T& operator >>=(const uint32_t shift) {
+    MSTL_CONSTEXPR14 T& operator >>=(const uint32_t shift) {
         return derived().operator>>=(shift);
     }
 };

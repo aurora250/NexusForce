@@ -446,7 +446,7 @@ public:
 
 
 template <typename T>
-class numeric_limits<T, enable_if_t<is_unpackaged_v<T>>> : public numeric_limits<unpackage_t<T>> {};
+class numeric_limits<T, enable_if_t<is_unpackaged<T>::value>> : public numeric_limits<unpackage_t<T>> {};
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__

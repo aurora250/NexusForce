@@ -15,24 +15,6 @@ If there are any deficiencies, please feel free to provide feedback.
 This library assumes your operating system uses UTF-8 code page when working with IO devices. 
 If not, please try to configure it; otherwise, garbled characters may occur during IO operations.
 
-## What techs can you learn by reading, using and maintaining MSTL?
-
-- Functional programming design and type erasure design;
-- Type traits implementation using template metaprogramming;
-- Using `concept` and `requires` to constrain template parameter behavior;
-- Strengthening `noexcept` guarantees;
-- Implementing SFINAE (Substitution Failure Is Not An Error) via `enable_if`;
-- Implementing EBCO (Empty Base Class Optimization) via `compressed_pair`;
-- Coordinating memory allocation with in-place construction;
-- Conversion rules between UTF-8, UTF-16, and UTF-32;
-- Implementing static polymorphism using CRTP (Curiously Recurring Template Pattern);
-- Implementing operating system operation classes using Windows/Linux APIs, analyzing and understanding the similar yet distinct data processing methods across different operating systems;
-- Implementation of complex containers like deques, red-black trees, and hash tables;
-- Modern wrappers and usage for PostgreSQL, MySQL, and Redis interfaces;
-- Implementation of scheduling tools like timers, thread pools, and database connection pools;
-- Implementation of modern-style network development tools for TCP/UDP/DNS/HTTP/HTTPS;
-  ......
-
 ## Supporting Environments
 
 WINDOWS LINUX

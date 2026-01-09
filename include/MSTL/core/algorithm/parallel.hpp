@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_ALGORITHM_PARALLEL_HPP__
 #define MSTL_CORE_ALGORITHM_PARALLEL_HPP__
-#include "iterator.hpp"
 #include "../async/thread.hpp"
+#include "iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename Iterator, typename BinaryOperation, typename Result,

@@ -18,7 +18,7 @@ public:
 };
 
 template <typename T>
-struct hash<T, enable_if_t<is_base_of_v<ihashable<T>, T>>> {
+struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
     MSTL_NODISCARD constexpr size_t operator ()(const T& obj) const
     noexcept(noexcept(obj.to_hash())) {
         return obj.to_hash();

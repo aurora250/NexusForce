@@ -1,31 +1,81 @@
 #ifndef MSTL_CORE_CONFIG_CPPCONFIG_HPP__
 #define MSTL_CORE_CONFIG_CPPCONFIG_HPP__
+
+/**
+ * @file c++config.hpp
+ * @brief MSTL核心配置头文件
+ * @namespace MSTL
+ * @mainpage MSTL (My Standard Template Library)
+ *
+ * @section intro_sec 简介
+ * MSTL是一个跨平台的C++标准模板库实现，提供了STL的替代实现和扩展功能
+ * 此头文件定义了整个库的平台、编译器和语言特性的配置宏
+ *
+ * @section usage_sec 使用说明
+ * 包含此头文件以获取所有配置定义
+ * 利用条件编译宏处理平台差异
+ */
+
 #include "undef_cmacro.hpp"
 
+/**
+ * @defgroup PlatformDetection 平台检测
+ * @brief 检测和定义目标平台的宏
+ * @{
+ */
+
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(_M_X86)
-	// defined when project compiled in windows, whether in 32bits or 64bits.
+    /**
+     * @def MSTL_PLATFORM_WINDOWS__
+     * @brief 定义在Windows平台编译（32位或64位）
+     */
 	#define MSTL_PLATFORM_WINDOWS__		1
-	// defined when project compiled in windows of 32bits system.
+    /**
+     * @def MSTL_PLATFORM_WIN32__
+     * @brief 定义在32位Windows平台编译
+     */
 	#define MSTL_PLATFORM_WIN32__		1
 	#if defined(WIN64) || defined(_WIN64) || defined(_WIN64_) || defined(_M_X64)
-		// defined when project compiled in windows of 64bits system.
+        /**
+         * @def MSTL_PLATFORM_WIN64__
+         * @brief 定义在64位Windows平台编译
+         */
 		#define MSTL_PLATFORM_WIN64__	1
 	#endif
 #elif defined(__linux__)
-	// defined when project compiled in linux, whether in 32bits or 64bits.
+    /**
+     * @def MSTL_PLATFORM_LINUX__
+     * @brief 定义在Linux平台编译（32位或64位）
+     */
 	#define MSTL_PLATFORM_LINUX__		1
 	#if (__WORDSIZE == 64) || (__SIZEOF_POINTER__ == 8)
-		// defined when project compiled in linux of 64bits system.
+        /**
+         * @def MSTL_PLATFORM_LINUX64__
+         * @brief 定义在64位Linux平台编译
+         */
 		#define MSTL_PLATFORM_LINUX64__ 1
 	#elif (__WORDSIZE == 32) || (__SIZEOF_POINTER__ == 4) || defined(MSTL_PLATFORM_LINUX64__)
-		// defined when project compiled in linux of 32bits system.
+        /**
+         * @def MSTL_PLATFORM_LINUX32__
+         * @brief 定义在32位Linux平台编译
+         */
 		#define MSTL_PLATFORM_LINUX32__ 1
 	#endif
 #else
-	// defined when project compiled in not supported systems.
-	#define MSTL_PLATFORM_UNSUPPORT__	1
+    /**
+     * @def MSTL_PLATFORM_UNSUPPORTED__
+     * @brief 定义在不支持的平台编译
+     */
+	#define MSTL_PLATFORM_UNSUPPORTED__	1
 #endif
 
+/** @} */ // PlatformDetection
+
+/**
+ * @defgroup CompilerDetection 编译器检测
+ * @brief 检测和定义编译器的宏
+ * @{
+ */
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 #ifndef WIN32_LEAN_AND_MEAN
@@ -35,42 +85,69 @@
 
 
 #if defined(__GNUC__)
-	// defined when project compiled by gnuc compilers.
+    /**
+     * @def MSTL_COMPILER_GNUC__
+     * @brief 定义使用GNU编译器（GCC或Clang）编译
+     */
 	#define MSTL_COMPILER_GNUC__		1
 	#if defined(__clang__)
-		// defined when project compiled by clang compiler.
+        /**
+         * @def MSTL_COMPILER_CLANG__
+         * @brief 定义使用Clang编译器编译
+         */
 		#define MSTL_COMPILER_CLANG__	1
 	#else
-		// defined when project compiled by gcc compilers.
+        /**
+         * @def MSTL_COMPILER_GCC__
+         * @brief 定义使用GCC编译器编译
+         */
 		#define MSTL_COMPILER_GCC__		1
 	#endif
 #elif defined(_MSC_VER)
-	// defined when project compiled by msvc compilers.
+    /**
+     * @def MSTL_COMPILER_MSVC__
+     * @brief 定义使用Microsoft Visual C++编译器编译
+     */
 	#define MSTL_COMPILER_MSVC__		1
 #else
-	// defined when project compiled by not supported compilers.
-	#define MSTL_COMPILER_UNSUPPORT__	1
+    /**
+     * @def MSTL_COMPILER_UNSUPPORTED__
+     * @brief 定义使用不支持的编译器编译
+     */
+	#define MSTL_COMPILER_UNSUPPORTED__	1
 #endif
 
+/** @} */ // CompilerDetection
+
+/**
+ * @defgroup APIDeclSpec API声明规范
+ * @brief 动态库导入导出声明
+ * @{
+ */
 
 #ifdef MSTL_COMPILER_MSVC__
     #ifdef MSTL_DLLEXPORTS
+        /**
+         * @def MSTL_API
+         * @brief 动态库导出声明（MSVC）
+         */
         #define MSTL_API __declspec(dllexport)
     #else
+        /**
+         * @def MSTL_API
+         * @brief 动态库导入声明（MSVC）
+         */
         #define MSTL_API __declspec(dllimport)
     #endif
 #else
+    /**
+     * @def MSTL_API
+     * @brief 空定义（非MSVC）
+     */
     #define MSTL_API
 #endif
 
-
-#ifdef MSTL_COMPILER_MSVC__
-	#define MSTL_THREAD_LOCAL __declspec(thread)
-#elif defined(MSTL_COMPILER_GNUC__)
-	#define MSTL_THREAD_LOCAL thread_local
-#else
-	#define MSTL_THREAD_LOCAL
-#endif
+/** @} */ // APIDeclSpec
 
 
 #if defined(MSTL_PLATFORM_WIN64__) || defined(MSTL_PLATFORM_LINUX64__) || defined(__amd64__) || defined(__x86_64__) || defined(__aarch64__)
@@ -127,6 +204,7 @@
 #define MSTL_BEGIN_TAG__ inline namespace __MSTL_TAG_NAMESPACE__ {
 #define MSTL_END_TAG__ }
 #define _MSTL_TAG __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_TAG_NAMESPACE__ ::
+
 
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #define __MSTL_POSTGRESQL_NAMESPACE__ postgresql
@@ -383,20 +461,6 @@
 	#define MSTL_NO_UNIQUE_ADDRESS [[no_unique_address]]
 #else
 	#define MSTL_NO_UNIQUE_ADDRESS
-#endif
-
-
-#ifdef MSTL_SUPPORT_CUDA__
-	#define MSTL_KERNEL __global__
-	#define MSTL_FOR_GPU __device__
-	// all functions are defined at host by default.
-	#define MSTL_FOR_CPU __host__
-	#define MSTL_FOR_ALL_DEVICES MSTL_FOR_CPU MSTL_FOR_GPU
-#else
-	#define MSTL_KERNEL
-	#define MSTL_FOR_GPU
-	#define MSTL_FOR_CPU
-	#define MSTL_FOR_ALL_DEVICES
 #endif
 
 

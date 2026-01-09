@@ -24,9 +24,10 @@ private:
     bool use_tcp_;
     unordered_map<string, pair<dns_query_result, steady_clock::time_point>> cache_;
     seconds cache_ttl_{300};
+    random_mt random_;
 
 private:
-    static vector<byte_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
+    vector<byte_t> build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass);
     static vector<byte_t> encode_domain_name(const string& domain);
     static string decode_domain_name(const vector<byte_t>& data, size_t& offset);
 
@@ -34,7 +35,7 @@ private:
     vector<byte_t> send_tcp_query(const vector<byte_t>& query)const;
 
     static dns_query_result parse_dns_response(const vector<byte_t>& response);
-    static uint16_t generate_query_id() { return random_mt::next_int(1, 65535); }
+    uint16_t generate_query_id() { return random_.next_int(1, 65535); }
 
     optional<dns_query_result> check_cache(const string& key);
     void update_cache(const string& key, const dns_query_result& result);

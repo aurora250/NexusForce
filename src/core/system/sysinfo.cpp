@@ -12,7 +12,6 @@
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/file/file.hpp>
-#include <MSTL/core/algorithm/erase.hpp>
 #include <sys/sysinfo.h>
 #include <sys/utsname.h>
 #include <unistd.h>
