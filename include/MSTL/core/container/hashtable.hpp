@@ -226,7 +226,7 @@ private:
     hasher hasher_{};
     key_equal equals_{};
     ExtractKey extracter_{};
-    compressed_pair<allocator_type, float> pair_{ _MSTL_TAG default_construct_tag{}, 1.0f };
+    compressed_pair<allocator_type, float> pair_{ default_construct_tag{}, 1.0f };
 
     template <bool, typename>
     friend struct hashtable_iterator;

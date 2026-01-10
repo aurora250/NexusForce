@@ -199,7 +199,7 @@ public:
     }
 
     void expires_from_now(const int64_t milliseconds) {
-        expires_after(_MSTL_CHRONO milliseconds(milliseconds));
+        expires_after(_MSTL milliseconds(milliseconds));
     }
 
     MSTL_NODISCARD time_point expiry() const { return expire_; }

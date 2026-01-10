@@ -271,7 +271,7 @@ private:
     link_type header_ = nullptr;
     Compare key_compare_{};
     KeyOfValue extracter_{};
-    compressed_pair<allocator_type, size_t> size_pair_{ _MSTL_TAG default_construct_tag{}, 0 }; // size
+    compressed_pair<allocator_type, size_t> size_pair_{ default_construct_tag{}, 0 }; // size
 
     template <bool, typename> friend struct rb_tree_iterator;
 

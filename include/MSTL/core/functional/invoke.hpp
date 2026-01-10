@@ -3,7 +3,6 @@
 #include "../utility/reference_wrapper.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_TAG__
 struct invoke_memfun_ref_tag {
     constexpr invoke_memfun_ref_tag() noexcept = default;
 };
@@ -19,7 +18,6 @@ struct invoke_memobj_deref_tag {
 struct invoke_other_tag {
     constexpr invoke_other_tag() noexcept = default;
 };
-MSTL_END_TAG__
 
 
 template <typename Sign>
@@ -40,7 +38,7 @@ struct __invoke_result_memfun_ref {
 private:
     template <typename F, typename T, typename... Args1>
     static invoke_result_true<decltype((_MSTL declval<T>().*_MSTL declval<F>())(_MSTL declval<Args1>()...)),
-        _MSTL_TAG invoke_memfun_ref_tag> __test(int);
+        invoke_memfun_ref_tag> __test(int);
 
     template <typename...>
     static invoke_result_false __test(...);
@@ -54,7 +52,7 @@ struct __invoke_result_memfun_deref {
 private:
     template <typename F, typename T, typename... Args1>
     static invoke_result_true<decltype((*_MSTL declval<T>().*_MSTL declval<F>())(_MSTL declval<Args1>()...)),
-        _MSTL_TAG invoke_memfun_deref_tag> __test(int);
+        invoke_memfun_deref_tag> __test(int);
 
     template <typename...>
     static invoke_result_false __test(...);
@@ -68,7 +66,7 @@ struct __invoke_result_memobj_ref {
 private:
     template <typename F, typename T>
     static invoke_result_true<decltype(_MSTL declval<T>().*_MSTL declval<F>()),
-        _MSTL_TAG invoke_memobj_ref_tag> __test(int);
+        invoke_memobj_ref_tag> __test(int);
 
     template <typename, typename>
     static invoke_result_false __test(...);
@@ -82,7 +80,7 @@ struct __invoke_result_memobj_deref {
 private:
     template <typename F, typename T>
     static invoke_result_true<decltype(*_MSTL declval<T>().*_MSTL declval<F>()),
-        _MSTL_TAG invoke_memobj_deref_tag> __test(int);
+        invoke_memobj_deref_tag> __test(int);
 
     template <typename, typename>
     static invoke_result_false __test(...);
@@ -133,7 +131,7 @@ struct __invoke_result_dispatch<false, false, F, Args...> {
 private:
     template<typename F1, typename... Args1>
     static invoke_result_true<
-        decltype(_MSTL declval<F1>()(_MSTL declval<Args1>()...)), _MSTL_TAG invoke_other_tag> __test(int);
+        decltype(_MSTL declval<F1>()(_MSTL declval<Args1>()...)), invoke_other_tag> __test(int);
 
     template <typename...>
     static invoke_result_false __test(...);
@@ -239,23 +237,23 @@ MSTL_INLINE17 constexpr bool is_invocable_r_v = is_invocable_r<Ret, F, Args...>:
 MSTL_BEGIN_INNER__
 
 template <typename F, typename T, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(_MSTL_TAG invoke_memfun_ref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_ref_tag) {
     return noexcept((_MSTL declval<unwrap_reference_t<T>>().*_MSTL declval<F>())(_MSTL declval<Args>()...));
 }
 template <typename F, typename T, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(_MSTL_TAG invoke_memfun_deref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_deref_tag) {
     return noexcept((*_MSTL declval<T>().*_MSTL declval<F>())(_MSTL declval<Args>()...));
 }
 template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(_MSTL_TAG invoke_memobj_ref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_ref_tag) {
     return noexcept(_MSTL declval<unwrap_reference_t<T>>().*_MSTL declval<F>());
 }
 template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(_MSTL_TAG invoke_memobj_deref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_deref_tag) {
     return noexcept(*_MSTL declval<T>().*_MSTL declval<F>());
 }
 template <typename F, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(_MSTL_TAG invoke_other_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag) {
     return noexcept(_MSTL declval<F>()(_MSTL declval<Args>()...));
 }
 
@@ -297,23 +295,23 @@ constexpr U&& __invoke_forward(remove_reference_t<T>& t) noexcept {
 }
 
 template <typename Res, typename F, typename... Args>
-MSTL_CONSTEXPR14 Res __invoke_dispatch(_MSTL_TAG invoke_other_tag, F&& f, Args&&... args) {
+MSTL_CONSTEXPR14 Res __invoke_dispatch(invoke_other_tag, F&& f, Args&&... args) {
     return _MSTL forward<F>(f)(_MSTL forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
-MSTL_CONSTEXPR14 Res __invoke_dispatch(_MSTL_TAG invoke_memfun_ref_tag, MemFun&& f, T&& t, Args&&... args) {
+MSTL_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_ref_tag, MemFun&& f, T&& t, Args&&... args) {
     return (_INNER __invoke_forward<T>(t).*f)(_MSTL forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
-MSTL_CONSTEXPR14 Res __invoke_dispatch(_MSTL_TAG invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args){
+MSTL_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args){
     return (*_MSTL forward<T>(t).*f)(_MSTL forward<Args>(args)...);
 }
 template <typename Res, typename MemPtr, typename T>
-MSTL_CONSTEXPR14 Res __invoke_dispatch(_MSTL_TAG invoke_memobj_ref_tag, MemPtr&& f, T&& t) {
+MSTL_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_ref_tag, MemPtr&& f, T&& t) {
     return _INNER __invoke_forward<T>(t).*f;
 }
 template <typename Res, typename MemPtr, typename T>
-MSTL_CONSTEXPR14 Res __invoke_dispatch(_MSTL_TAG invoke_memobj_deref_tag, MemPtr&& f, T&& t) {
+MSTL_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_deref_tag, MemPtr&& f, T&& t) {
     return *_MSTL forward<T>(t).*f;
 }
 

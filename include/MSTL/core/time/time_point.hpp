@@ -2,7 +2,6 @@
 #define MSTL_CORE_TIME_TIME_POINT_HPP__
 #include "duration.hpp"
 MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_CHRONO__
 
 template <typename Clock, typename Dur>
 struct time_point {
@@ -132,6 +131,5 @@ constexpr bool operator >=(const time_point<Clock, Dur1>& lhs, const time_point<
     return !(lhs < rhs);
 }
 
-MSTL_END_CHRONO__
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_TIME_TIME_POINT_HPP__

@@ -50,10 +50,10 @@ public:
         mutex_->lock_shared();
     }
 
-    shared_lock(mutex_type& m, _MSTL_TAG defer_lock_tag) noexcept
+    shared_lock(mutex_type& m, defer_lock_tag) noexcept
     : mutex_(&m) {}
 
-    shared_lock(mutex_type& m, _MSTL_TAG try_lock_tag) noexcept
+    shared_lock(mutex_type& m, try_lock_tag) noexcept
     : mutex_(&m), owns_lock_(m.try_lock_shared()) {}
 
     shared_lock(const shared_lock&) = delete;

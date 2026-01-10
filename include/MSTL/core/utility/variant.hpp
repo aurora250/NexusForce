@@ -180,7 +180,7 @@ public:
 
     template <size_t Idx, typename... Args,
         enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, Args...>, int> = 0>
-    MSTL_CONSTEXPR20 explicit variant(_MSTL_TAG inplace_construct_tag, Args&&... args)
+    MSTL_CONSTEXPR20 explicit variant(inplace_construct_tag, Args&&... args)
     noexcept(is_nothrow_constructible_v<variant_alternative_t<variant, Idx>, Args...>)
     : index_(Idx) {
         new (union_) variant_alternative_t<variant, Idx>(_MSTL forward<Args>(args)...);
@@ -188,7 +188,7 @@ public:
 
     template <size_t Idx, typename U, typename... Args,
         enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, std::initializer_list<U>&, Args...>, int> = 0>
-    MSTL_CONSTEXPR20 explicit variant(_MSTL_TAG inplace_construct_tag, std::initializer_list<U> ilist, Args&&... args)
+    MSTL_CONSTEXPR20 explicit variant(inplace_construct_tag, std::initializer_list<U> ilist, Args&&... args)
     noexcept(is_nothrow_constructible_v<variant_alternative_t<variant, Idx>, std::initializer_list<U>&, Args...>)
     : index_(Idx) {
         new (union_) variant_alternative_t<variant, Idx>(ilist, _MSTL forward<Args>(args)...);

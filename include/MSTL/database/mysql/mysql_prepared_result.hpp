@@ -3,31 +3,34 @@
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "mysql_config.hpp"
+#ifdef CR_OUT_OF_MEMORY
+#undef CR_OUT_OF_MEMORY
+#endif
+#include <mysql.h>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API mysql_prepared_result final : public idb_prepared_result {
 private:
-    _MSTL_MYSQL MYSQL_STMT* stmt_ = nullptr;
-    _MSTL_MYSQL MYSQL_RES* metadata_ = nullptr;
+    ::MYSQL_STMT* stmt_ = nullptr;
+    ::MYSQL_RES* metadata_ = nullptr;
     uint32_t column_count_ = 0;
     uint64_t row_count_ = 0;
     bool has_current_row_ = false;
 
     unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();
-    unique_ptr<vector<_MSTL_MYSQL enum_field_types>> column_types_ = make_unique<vector<_MSTL_MYSQL enum_field_types>>();
+    unique_ptr<vector<::enum_field_types>> column_types_ = make_unique<vector<::enum_field_types>>();
 
-    unique_ptr<vector<_MSTL_MYSQL MYSQL_BIND>> bind_results_ = make_unique<vector<_MSTL_MYSQL MYSQL_BIND>>();
+    unique_ptr<vector<::MYSQL_BIND>> bind_results_ = make_unique<vector<::MYSQL_BIND>>();
     unique_ptr<vector<vector<char>>> buffers_ = make_unique<vector<vector<char>>>();
     unique_ptr<vector<unsigned long>> lengths_ = make_unique<vector<unsigned long>>();
     unique_ptr<vector<bool>> is_null_ = make_unique<vector<bool>>();
     unique_ptr<vector<bool>> is_error_ = make_unique<vector<bool>>();
 
     void initialize_bindings() const;
-    static size_t get_buffer_size(_MSTL_MYSQL enum_field_types type);
+    static size_t get_buffer_size(::enum_field_types type);
 
 public:
-    explicit mysql_prepared_result(_MSTL_MYSQL MYSQL_STMT* stmt);
+    explicit mysql_prepared_result(::MYSQL_STMT* stmt);
     ~mysql_prepared_result() override;
 
     mysql_prepared_result(const mysql_prepared_result&) = delete;
@@ -40,7 +43,7 @@ public:
     size_type column_count() const override { return column_count_; }
 
     const vector<string_view>& column_names() const override { return *column_names_; }
-    const vector<_MSTL_MYSQL enum_field_types>& column_types() const { return *column_types_; }
+    const vector<::enum_field_types>& column_types() const { return *column_types_; }
 
     string_view get(size_type n) const override;
     bool get_bool(size_type n) const override;

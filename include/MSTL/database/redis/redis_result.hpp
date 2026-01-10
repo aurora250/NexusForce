@@ -3,12 +3,12 @@
 #ifdef MSTL_SUPPORT_REDIS__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "redis_config.hpp"
+#include <hiredis.h>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API redis_result final : idb_kv_result {
 private:
-    _MSTL_REDIS redisReply* reply_ = nullptr;
+    ::redisReply* reply_ = nullptr;
     size_type cursor_ = 0;
     size_type rows_ = 0;
     unique_ptr<vector<string>> column_names_ =
@@ -19,20 +19,20 @@ private:
     size_type kv_cursor_ = 0;
     bool is_array_ = false;
 
-    static string format_redis_reply_element(_MSTL_REDIS redisReply* element);
+    static string format_redis_reply_element(::redisReply* element);
     void process_reply();
     string get_string() const;
 
 public:
     redis_result() noexcept = default;
 
-    explicit redis_result(_MSTL_REDIS redisReply* reply) noexcept
+    explicit redis_result(::redisReply* reply) noexcept
     : reply_(reply) {
         process_reply();
     }
 
     ~redis_result() override {
-        if (reply_) _MSTL_REDIS freeReplyObject(reply_);
+        if (reply_) ::freeReplyObject(reply_);
     }
 
     MSTL_NODISCARD bool empty() const noexcept override { return !reply_ || (rows_ == 0 && kv_pairs_->empty()); }

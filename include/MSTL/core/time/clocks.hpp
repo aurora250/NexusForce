@@ -2,13 +2,12 @@
 #define MSTL_CORE_TIME_CLOCKS_HPP__
 #include "time_point.hpp"
 MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_CHRONO__
 
 struct MSTL_API system_clock {
-    using duration = _MSTL_CHRONO nanoseconds;
+    using duration = _MSTL nanoseconds;
     using rep = duration::rep;
     using period = duration::period;
-    using time_point = _MSTL_CHRONO time_point<system_clock>;
+    using time_point = _MSTL time_point<system_clock>;
 
     static_assert(system_clock::duration::min() < system_clock::duration::zero(),
         "a clock's minimum duration cannot be less than its epoch");
@@ -24,7 +23,7 @@ struct MSTL_API system_clock {
     }
 
     static time_point from_time_t(const std::time_t time_value) noexcept {
-        using from_time_point = _MSTL_CHRONO time_point<system_clock, seconds>;
+        using from_time_point = _MSTL time_point<system_clock, seconds>;
         return time_point_cast<system_clock::duration>(from_time_point(seconds(time_value)));
     }
 };
@@ -33,17 +32,15 @@ using high_resolution_clock = system_clock;
 
 
 struct MSTL_API steady_clock {
-    using duration = _MSTL_CHRONO nanoseconds;
+    using duration = _MSTL nanoseconds;
     using rep = duration::rep;
     using period = duration::period;
-    using time_point = _MSTL_CHRONO time_point<steady_clock, duration>;
+    using time_point = _MSTL time_point<steady_clock, duration>;
 
     static constexpr bool is_steady = true;
 
     static time_point now() noexcept;
 };
-
-MSTL_END_CHRONO__
 
 template <typename T>
 struct is_clock;

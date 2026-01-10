@@ -2,13 +2,13 @@
 #define MSTL_DATABASE_SQLITE_PREPARED_STATEMENT_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
 #include "MSTL/database/db_interface.hpp"
-#include "MSTL/database/sqlite/sqlite_config.hpp"
+#include <sqlite3.h>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API sqlite_prepared_statement final : public idb_prepared_statement {
 private:
-    _MSTL_SQLITE sqlite3* db_ = nullptr;
-    _MSTL_SQLITE sqlite3_stmt* stmt_ = nullptr;
+    ::sqlite3* db_ = nullptr;
+    ::sqlite3_stmt* stmt_ = nullptr;
 
     uint32_t param_count_ = 0;
     vector<vector<char>> param_buffers_;
@@ -19,7 +19,7 @@ private:
     void reset_statement() noexcept;
 
 public:
-    explicit sqlite_prepared_statement(_MSTL_SQLITE sqlite3* db, const string& sql);
+    explicit sqlite_prepared_statement(::sqlite3* db, const string& sql);
 
     sqlite_prepared_statement(const sqlite_prepared_statement&) = delete;
     sqlite_prepared_statement& operator =(const sqlite_prepared_statement&) = delete;
@@ -44,7 +44,7 @@ public:
 
     MSTL_NODISCARD string_view get_error() const noexcept override { return last_error_.view(); }
     MSTL_NODISCARD uint32_t get_errno() const noexcept override {
-        return db_ ? _MSTL_SQLITE sqlite3_errcode(db_) : 0;
+        return db_ ? ::sqlite3_errcode(db_) : 0;
     }
 };
 

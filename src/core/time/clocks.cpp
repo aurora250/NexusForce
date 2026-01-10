@@ -3,7 +3,6 @@
 #include <Windows.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_CHRONO__
 
 system_clock::time_point system_clock::now() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -51,6 +50,5 @@ steady_clock::time_point steady_clock::now() noexcept {
     return time_point(duration(total_nanos));
 }
 
-MSTL_END_CHRONO__
 MSTL_END_NAMESPACE__
 

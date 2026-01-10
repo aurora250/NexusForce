@@ -18,7 +18,7 @@ public:
     static_assert(is_same_v<T, value_type>, "priority queue require consistent types.");
 
 private:
-    compressed_pair<Compare, Sequence> pair_{ _MSTL_TAG default_construct_tag{} };
+    compressed_pair<Compare, Sequence> pair_{ default_construct_tag{} };
 
     void make_heap_inside() {
         _MSTL make_heap(pair_.value.begin(), pair_.value.end(), pair_.get_base());
@@ -29,48 +29,48 @@ public:
 
     explicit priority_queue(const Compare& comp)
         noexcept(is_nothrow_default_constructible_v<Sequence> && is_nothrow_copy_constructible_v<Compare>)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp) {}
+        : pair_(exact_arg_construct_tag{}, comp) {}
 
     priority_queue(const Compare& comp, const Sequence& seq)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp, seq) {
+        : pair_(exact_arg_construct_tag{}, comp, seq) {
         make_heap_inside();
     }
 
     priority_queue(const Compare& comp, Sequence&& seq)
         noexcept(is_nothrow_move_constructible_v<Sequence> && is_nothrow_copy_constructible_v<Compare>)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp, _MSTL move(seq)) {
+        : pair_(exact_arg_construct_tag{}, comp, _MSTL move(seq)) {
         make_heap_inside();
     }
 
     template <typename Iterator>
     priority_queue(Iterator first, Iterator last, const Sequence& seq)
-        : pair_(_MSTL_TAG default_construct_tag{}, seq) {
+        : pair_(default_construct_tag{}, seq) {
         pair_.value.insert(pair_.value.end(), first, last);
         make_heap_inside();
     }
 
     template <typename Iterator>
     priority_queue(Iterator first, Iterator last)
-        : pair_(_MSTL_TAG default_construct_tag{}, first, last) {
+        : pair_(default_construct_tag{}, first, last) {
         make_heap_inside();
     }
 
     template <typename Iterator>
     priority_queue(Iterator first, Iterator last, const Compare& comp)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp, first, last) {
+        : pair_(exact_arg_construct_tag{}, comp, first, last) {
         make_heap_inside();
     }
 
     template <typename Iterator>
     priority_queue(Iterator first, Iterator last, const Compare& comp, const Sequence& seq)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp, seq) {
+        : pair_(exact_arg_construct_tag{}, comp, seq) {
         pair_.value.insert(pair_.value.end(), first, last);
         make_heap_inside();
     }
 
     template <typename Iterator>
     priority_queue(Iterator first, Iterator last, const Compare& comp, Sequence&& seq)
-        : pair_(_MSTL_TAG exact_arg_construct_tag{}, comp, _MSTL move(seq)) {
+        : pair_(exact_arg_construct_tag{}, comp, _MSTL move(seq)) {
         pair_.value.insert(pair_.value.end(), first, last);
         make_heap_inside();
     }

@@ -3,8 +3,9 @@
 #include "../config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-using nullptr_t	= decltype(nullptr);
-using byte_t    = unsigned char;
+using nullptr_t	  = decltype(nullptr);
+using max_align_t = double;
+using byte_t      = unsigned char;
 
 using int8_t	= signed char;
 using int16_t	= short;

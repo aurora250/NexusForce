@@ -214,7 +214,7 @@ public:
 private:
 	pointer start_ = nullptr;
 	pointer finish_ = nullptr;
-	compressed_pair<allocator_type, pointer> pair_{ _MSTL_TAG default_construct_tag{}, nullptr };
+	compressed_pair<allocator_type, pointer> pair_{ default_construct_tag{}, nullptr };
 
 	template <bool, typename> friend struct vector_iterator;
 

@@ -1727,7 +1727,7 @@ template <size_t Len>
 struct __aligned_storage_aux {
     union type {
         unsigned char data[Len];
-        struct MSTL_ALIGNOF_DEFAULT() {} align;
+        struct MSTL_ALIGNED_DEFAULT() {} align;
     };
 };
 MSTL_END_INNER__
@@ -1736,7 +1736,7 @@ template <size_t Len, size_t Align = alignof(typename _INNER __aligned_storage_a
 struct aligned_storage {
     union type {
         unsigned char data[Len];
-        struct MSTL_ALIGNOF(Align) {} align;
+        struct MSTL_ALIGNED(Align) {} align;
     };
 };
 

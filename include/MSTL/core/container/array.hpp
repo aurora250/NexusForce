@@ -250,11 +250,9 @@ public:
     }
 };
 
-MSTL_BEGIN_TAG__
 struct empty_array_element_tag {
     constexpr explicit empty_array_element_tag() noexcept = default;
 };
-MSTL_END_TAG__
 
 template <typename T>
 class array<T, 0> : public icollector<array<T, 0>> {
@@ -271,7 +269,7 @@ public:
 
 private:
     conditional_t<disjunction_v<is_default_constructible<T>, is_implicitly_default_constructible<T>>,
-        T, _MSTL_TAG empty_array_element_tag> array_[1]{};
+        T, empty_array_element_tag> array_[1]{};
 
 public:
     MSTL_NODISCARD MSTL_CONST_FUNCTION MSTL_ALWAYS_INLINE

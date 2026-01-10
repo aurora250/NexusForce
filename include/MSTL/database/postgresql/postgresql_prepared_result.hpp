@@ -9,7 +9,7 @@ private:
     unique_ptr<postgresql_tb_result> impl_ = nullptr;
 
 public:
-    explicit postgresql_prepared_result(_MSTL_POSTGRESQL PGresult* result) noexcept
+    explicit postgresql_prepared_result(::PGresult* result) noexcept
     : impl_(make_unique<postgresql_tb_result>(result, true)) {}
 
     ~postgresql_prepared_result() override = default;

@@ -809,7 +809,7 @@ void test_color() {
     println(red);
     println(semiRed);
     println(transRed);
-    println(semiRed.is_opacity());
+    println(semiRed.opacity());
     println(semiRed.transparent());
     println(semiRed.is_opaque());
 

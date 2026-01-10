@@ -2,7 +2,6 @@
 #define MSTL_CORE_UTILITY_TAGS_HPP__
 #include "../config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_TAG__
 
 struct input_iterator_tag {
     constexpr input_iterator_tag() = default;
@@ -68,14 +67,12 @@ struct allocate_gpu_tag {
 struct defer_lock_tag {
     constexpr defer_lock_tag() noexcept = default;
 };
-MSTL_INLINE17 constexpr _MSTL_TAG defer_lock_tag defer_lock{};
+MSTL_INLINE17 constexpr defer_lock_tag defer_lock{};
 
 struct try_lock_tag {
     constexpr try_lock_tag() noexcept = default;
 };
-MSTL_INLINE17 constexpr _MSTL_TAG try_lock_tag try_lock{};
+MSTL_INLINE17 constexpr try_lock_tag try_lock{};
 
-
-MSTL_END_TAG__
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_UTILITY_TAGS_HPP__

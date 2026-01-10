@@ -3,7 +3,7 @@
 #include <MSTL/core/utility/packages.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-_MSTL string redis_result::format_redis_reply_element(_MSTL_REDIS redisReply* element) {
+_MSTL string redis_result::format_redis_reply_element(::redisReply* element) {
     switch (element->type) {
         case REDIS_REPLY_STRING:
         case REDIS_REPLY_STATUS:
@@ -73,7 +73,7 @@ string redis_result::get_string() const {
         return string(value());
     }
     if (is_array_ && cursor_ > 0) {
-        _MSTL_REDIS redisReply* element = reply_->element[cursor_ - 1];
+        ::redisReply* element = reply_->element[cursor_ - 1];
         return format_redis_reply_element(element);
     }
     return format_redis_reply_element(reply_);

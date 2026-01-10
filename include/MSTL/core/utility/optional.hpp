@@ -29,8 +29,8 @@ MSTL_INLINE17 bool is_optional_v = is_optional<T>::value;
 
 template <typename T>
 class optional : icommon<optional<T>> {
-    static_assert(!is_any_of_v<remove_cv_t<T>, nullopt_t, _MSTL_TAG inplace_construct_tag>,
-        "optional do not contains _MSTL_TAG nullopt_t and inplace_construct_tag types.");
+    static_assert(!is_any_of_v<remove_cv_t<T>, nullopt_t, inplace_construct_tag>,
+        "optional do not contains nullopt_t and inplace_construct_tag types.");
     static_assert(is_object_v<T> && !is_array_v<T>, "optional only contains non-array object types.");
     static_assert(!is_reference_v<T>, "optional of reference type should use optional<T&> specialization.");
 
@@ -41,7 +41,7 @@ public:
 private:
     template <typename U>
     using is_valid_optional = bool_constant<!is_any_of_v<
-        remove_cv_t<U>, nullopt_t, _MSTL_TAG inplace_construct_tag> && is_object_v<U> && !is_array_v<U>>;
+        remove_cv_t<U>, nullopt_t, inplace_construct_tag> && is_object_v<U> && !is_array_v<U>>;
 
     template <typename U>
     using convertible_from_optional = disjunction<
@@ -273,14 +273,14 @@ public:
     }
 
     template <typename ...Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
-    constexpr explicit optional(_MSTL_TAG inplace_construct_tag, Types&&... args)
+    constexpr explicit optional(inplace_construct_tag, Types&&... args)
     noexcept(is_nothrow_constructible_v<T, Types...>)
     : have_value_(true) {
         _MSTL construct(get_ptr(), _MSTL forward<Types>(args)...);
     }
 
     template <typename U, typename ...Types, enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
-    constexpr explicit optional(_MSTL_TAG inplace_construct_tag, std::initializer_list<U> ilist, Types &&...args)
+    constexpr explicit optional(inplace_construct_tag, std::initializer_list<U> ilist, Types &&...args)
     noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>)
     : have_value_(true) {
         _MSTL construct(get_ptr(), ilist, _MSTL forward<Types>(args)...);
@@ -580,7 +580,7 @@ public:
     }
 
     template <typename... Types>
-    constexpr optional(_MSTL_TAG inplace_construct_tag, Types&&...) = delete;
+    constexpr optional(inplace_construct_tag, Types&&...) = delete;
 
     ~optional() noexcept = default;
 
@@ -714,14 +714,14 @@ noexcept(is_nothrow_constructible_v<optional<decay_t<T>>, T>) {
 template <typename T, typename... Args, enable_if_t<is_constructible_v<T, Args...>, int> = 0>
 constexpr optional<T> make_optional(Args&&... args)
 noexcept(is_nothrow_constructible_v<T, Args...>) {
-    return optional<T>{ _MSTL_TAG inplace_construct_tag{}, _MSTL forward<Args>(args)... };
+    return optional<T>{ inplace_construct_tag{}, _MSTL forward<Args>(args)... };
 }
 
 template <typename T, typename U, typename... Args>
 constexpr enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Args...>,
 optional<T>> make_optional(std::initializer_list<U> ilist, Args&&... args)
 noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) {
-    return optional<T>{ _MSTL_TAG inplace_construct_tag{}, ilist, _MSTL forward<Args>(args)... };
+    return optional<T>{ inplace_construct_tag{}, ilist, _MSTL forward<Args>(args)... };
 }
 
 template <typename T>

@@ -2,16 +2,19 @@
 #define MSTL_DATABASE_MYSQL_PREPARED_STATEMENT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "MSTL/database/db_interface.hpp"
-#include "mysql_config.hpp"
+#ifdef CR_OUT_OF_MEMORY
+#undef CR_OUT_OF_MEMORY
+#endif
+#include <mysql.h>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API mysql_prepared_statement final : public idb_prepared_statement {
 private:
-    _MSTL_MYSQL MYSQL_STMT* stmt_ = nullptr;
-    _MSTL_MYSQL MYSQL* conn_ = nullptr;
+    ::MYSQL_STMT* stmt_ = nullptr;
+    ::MYSQL* conn_ = nullptr;
     uint32_t param_count_ = 0;
 
-    vector<_MSTL_MYSQL MYSQL_BIND> bind_params_;
+    vector<::MYSQL_BIND> bind_params_;
     vector<vector<char>> param_buffers_;
 
     MSTL_ALWAYS_INLINE void throw_if_stmt_null() const {
@@ -21,12 +24,12 @@ private:
     }
 
 public:
-    explicit mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, string_view sql);
+    explicit mysql_prepared_statement(::MYSQL* conn, string_view sql);
 
-    explicit mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, const string& sql)
+    explicit mysql_prepared_statement(::MYSQL* conn, const string& sql)
     : mysql_prepared_statement(conn, sql.view()) {}
 
-    explicit mysql_prepared_statement(_MSTL_MYSQL MYSQL* conn, const char* sql)
+    explicit mysql_prepared_statement(::MYSQL* conn, const char* sql)
    : mysql_prepared_statement(conn, string_view{sql}) {}
 
     mysql_prepared_statement(mysql_prepared_statement&& other) noexcept;

@@ -3,7 +3,7 @@
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "postgresql_config.hpp"
+#include <libpq-fe.h>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API postgresql_connect final : public idb_tb_connect {
@@ -13,7 +13,7 @@ private:
     string charset_ = "utf8";
     clock_type last_alive_ = 0;
     uint32_t last_errno_ = 0;
-    _MSTL_POSTGRESQL PGconn* conn_ = nullptr;
+    ::PGconn* conn_ = nullptr;
 
     void clear_error() noexcept;
     void set_error(string error, uint32_t errno_val = 0);

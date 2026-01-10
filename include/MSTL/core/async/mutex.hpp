@@ -104,10 +104,10 @@ public:
         mutex_->lock();
     }
 
-    unique_lock(mutex_type& m, _MSTL_TAG defer_lock_tag) noexcept
+    unique_lock(mutex_type& m, defer_lock_tag) noexcept
     : mutex_(&m) {}
 
-    unique_lock(mutex_type& m, _MSTL_TAG try_lock_tag) noexcept
+    unique_lock(mutex_type& m, try_lock_tag) noexcept
     : mutex_(&m), owns_lock_(m.try_lock()) {}
 
     unique_lock(const unique_lock&) = delete;

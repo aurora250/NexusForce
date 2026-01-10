@@ -168,7 +168,7 @@ struct pair : icommon<pair<T1, T2>> {
 
 	// construct from tuple
 	template <typename... Types1, typename... Types2>
-	constexpr pair(_MSTL_TAG unpack_utility_construct_tag, tuple<Types1...> t1, tuple<Types2...> t2)
+	constexpr pair(unpack_utility_construct_tag, tuple<Types1...> t1, tuple<Types2...> t2)
 		: pair(t1, t2, index_sequence_for<Types1...>{}, index_sequence_for<Types2...>{}) {}
 
 

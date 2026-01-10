@@ -87,7 +87,7 @@
 #if defined(__GNUC__)
     /**
      * @def MSTL_COMPILER_GNUC__
-     * @brief 定义使用GNU编译器（GCC或Clang）编译
+     * @brief 定义使用GNU编译器编译
      */
 	#define MSTL_COMPILER_GNUC__		1
 	#if defined(__clang__)
@@ -129,395 +129,917 @@
     #ifdef MSTL_DLLEXPORTS
         /**
          * @def MSTL_API
-         * @brief 动态库导出声明（MSVC）
+         * @brief MSVC动态库导出声明
          */
         #define MSTL_API __declspec(dllexport)
     #else
         /**
          * @def MSTL_API
-         * @brief 动态库导入声明（MSVC）
+         * @brief MSVC动态库导入声明
          */
         #define MSTL_API __declspec(dllimport)
     #endif
 #else
     /**
      * @def MSTL_API
-     * @brief 空定义（非MSVC）
+     * @brief 空定义
      */
     #define MSTL_API
 #endif
 
 /** @} */ // APIDeclSpec
 
+/**
+ * @defgroup DataBusWidth 数据总线宽度
+ * @brief 系统架构位宽检测
+ * @{
+ */
 
 #if defined(MSTL_PLATFORM_WIN64__) || defined(MSTL_PLATFORM_LINUX64__) || defined(__amd64__) || defined(__x86_64__) || defined(__aarch64__)
-	// defined when project compiled in 64bits systems.
+	/**
+     * @def MSTL_DATA_BUS_WIDTH_64__
+     * @brief 定义在64位系统编译
+     */
 	#define MSTL_DATA_BUS_WIDTH_64__	1
+	/**
+     * @def MSTL_POINTER_SIZE
+     * @brief 指针大小
+     */
+	#define MSTL_POINTER_SIZE 8
 #endif
 #if defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__) || defined(__i386__)
-	// defined when project compiled in 32bits systems.
+	/**
+     * @def MSTL_DATA_BUS_WIDTH_32__
+     * @brief 定义在32位系统编译
+     */
 	#define MSTL_DATA_BUS_WIDTH_32__	1
+#ifndef MSTL_POINTER_SIZE
+	/**
+     * @def MSTL_POINTER_SIZE
+     * @brief 指针大小
+     */
+	#define MSTL_POINTER_SIZE 4
+#endif
 #endif
 
+/** @} */ // DataBusWidth
 
+/**
+ * @defgroup NamespaceMacros 命名空间宏
+ * @brief 定义MSTL库的命名空间结构
+ * @{
+ */
+
+/**
+ * @def __MSTL_GLOBAL_NAMESPACE__
+ * @brief 全局命名空间MSTL名称
+ */
 #define __MSTL_GLOBAL_NAMESPACE__ MSTL
+
+/**
+ * @def MSTL_BEGIN_NAMESPACE__
+ * @brief 开始全局命名空间MSTL
+ */
 #define MSTL_BEGIN_NAMESPACE__ namespace __MSTL_GLOBAL_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_NAMESPACE__
+ * @brief 结束全局命名空间MSTL
+ */
 #define MSTL_END_NAMESPACE__ }
+
+/**
+ * @def _MSTL
+ * @brief 全局命名空间MSTL前缀
+ */
 #define _MSTL __MSTL_GLOBAL_NAMESPACE__ ::
 
+
+/**
+ * @def __MSTL_INNER_NAMESPACE__
+ * @brief inner命名空间名称
+ */
 #define __MSTL_INNER_NAMESPACE__ inner
+
+/**
+ * @def MSTL_BEGIN_INNER__
+ * @brief 开始inner命名空间
+ */
 #define MSTL_BEGIN_INNER__ namespace __MSTL_INNER_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_INNER__
+ * @brief 结束inner命名空间
+ */
 #define MSTL_END_INNER__ }
+
+/**
+ * @def _INNER
+ * @brief inner命名空间前缀
+ */
 #define _INNER __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_INNER_NAMESPACE__ ::
 
+
+/**
+ * @def __MSTL_CONSTANTS_NAMESPACE__
+ * @brief constants命名空间名称
+ */
 #define __MSTL_CONSTANTS_NAMESPACE__ constants
+
+/**
+ * @def MSTL_BEGIN_CONSTANTS__
+ * @brief 开始constants命名空间
+ */
 #define MSTL_BEGIN_CONSTANTS__ namespace __MSTL_CONSTANTS_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_CONSTANTS__
+ * @brief 结束constants命名空间
+ */
 #define MSTL_END_CONSTANTS__ }
+
+/**
+ * @def _CONSTANTS
+ * @brief constants命名空间前缀
+ */
 #define _CONSTANTS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_CONSTANTS_NAMESPACE__ ::
 
-#define __MSTL_CHRONO_NAMESPACE__ chrono
-#define MSTL_BEGIN_CHRONO__ inline namespace __MSTL_CHRONO_NAMESPACE__ {
-#define MSTL_END_CHRONO__ }
-#define _MSTL_CHRONO __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_CHRONO_NAMESPACE__ ::
 
+/**
+ * @def __MSTL_THIS_THREAD_NAMESPACE__
+ * @brief this_thread命名空间名称
+ */
 #define __MSTL_THIS_THREAD_NAMESPACE__ this_thread
+
+/**
+ * @def MSTL_BEGIN_THIS_THREAD__
+ * @brief this_thread命名空间
+ */
 #define MSTL_BEGIN_THIS_THREAD__ namespace __MSTL_THIS_THREAD_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_THIS_THREAD__
+ * @brief 结束this_thread命名空间
+ */
 #define MSTL_END_THIS_THREAD__ }
+
+/**
+ * @def _THIS_THREAD
+ * @brief this_thread命名空间前缀
+ */
 #define _THIS_THREAD __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_THIS_THREAD_NAMESPACE__ ::
 
+
+/**
+ * @def __MSTL_RANGES_NAMESPACE__
+ * @brief ranges命名空间名称
+ */
 #define __MSTL_RANGES_NAMESPACE__ ranges
+
+/**
+ * @def MSTL_BEGIN_RANGES__
+ * @brief 开始ranges命名空间
+ */
 #define MSTL_BEGIN_RANGES__ namespace __MSTL_RANGES_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_RANGES__
+ * @brief 结束ranges命名空间
+ */
 #define MSTL_END_RANGES__ }
+
+/**
+ * @def _MSTL_RANGES
+ * @brief ranges命名空间前缀
+ */
 #define _MSTL_RANGES __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_RANGES_NAMESPACE__ ::
 
+/**
+ * @def __MSTL_RANGES_VIEWS_NAMESPACE__
+ * @brief ranges::view命名空间名称
+ */
 #define __MSTL_RANGES_VIEWS_NAMESPACE__ views
+
+/**
+ * @def MSTL_BEGIN_RANGES_VIEWS__
+ * @brief 开始ranges::view命名空间
+ */
 #define MSTL_BEGIN_RANGES_VIEWS__ namespace __MSTL_RANGES_VIEWS_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_RANGES_VIEWS__
+ * @brief 结束ranges::view命名空间
+ */
 #define MSTL_END_RANGES_VIEWS__ }
+
+/**
+ * @def _RANGES_VIEWS
+ * @brief ranges::view命名空间前缀
+ */
 #define _RANGES_VIEWS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_RANGES_NAMESPACE__ :: __MSTL_RANGES_VIEWS_NAMESPACE__ ::
 
+
+/**
+ * @def __MSTL_LITERALS_NAMESPACE__
+ * @brief literals命名空间名称
+ */
 #define __MSTL_LITERALS_NAMESPACE__ literals
+
+/**
+ * @def MSTL_BEGIN_LITERALS__
+ * @brief 开始literals命名空间（内联）
+ */
 #define MSTL_BEGIN_LITERALS__ inline namespace __MSTL_LITERALS_NAMESPACE__ {
+
+/**
+ * @def MSTL_END_LITERALS__
+ * @brief 结束literals命名空间
+ */
 #define MSTL_END_LITERALS__ }
+
+/**
+ * @def _LITERALS
+ * @brief literals命名空间前缀
+ */
 #define _LITERALS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_LITERALS_NAMESPACE__ ::
 
-#define __MSTL_TAG_NAMESPACE__ tags
-#define MSTL_BEGIN_TAG__ inline namespace __MSTL_TAG_NAMESPACE__ {
-#define MSTL_END_TAG__ }
-#define _MSTL_TAG __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_TAG_NAMESPACE__ ::
+/** @} */ // NamespaceMacros
 
-
-#ifdef MSTL_SUPPORT_POSTGRESQL__
-#define __MSTL_POSTGRESQL_NAMESPACE__ postgresql
-#define MSTL_BEGIN_POSTGRESQL__ namespace __MSTL_POSTGRESQL_NAMESPACE__ {
-#define MSTL_END_POSTGRESQL__ }
-#define _MSTL_POSTGRESQL __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_POSTGRESQL_NAMESPACE__ ::
-#endif
-
-#ifdef MSTL_SUPPORT_MYSQL__
-#define __MSTL_MYSQL_NAMESPACE__ mysql
-#define MSTL_BEGIN_MYSQL__ namespace __MSTL_MYSQL_NAMESPACE__ {
-#define MSTL_END_MYSQL__ }
-#define _MSTL_MYSQL __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_MYSQL_NAMESPACE__ ::
-#endif
-
-#ifdef MSTL_SUPPORT_SQLITE3__
-#define __MSTL_SQLITE_NAMESPACE__ sqlite
-#define MSTL_BEGIN_SQLITE__ namespace __MSTL_SQLITE_NAMESPACE__ {
-#define MSTL_END_SQLITE__ }
-#define _MSTL_SQLITE __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_SQLITE_NAMESPACE__ ::
-#endif
-
-#ifdef MSTL_SUPPORT_REDIS__
-#define __MSTL_REDIS_NAMESPACE__ redis
-#define MSTL_BEGIN_REDIS__ namespace __MSTL_REDIS_NAMESPACE__ {
-#define MSTL_END_REDIS__ }
-#define _MSTL_REDIS __MSTL_GLOBAL_NAMESPACE__ :: __MSTL_REDIS_NAMESPACE__ ::
-#endif
-
+/**
+ * @defgroup CxxStandardDetection C++标准检测
+ * @brief 检测和定义C++语言标准的宏
+ * @{
+ */
 
 #if _HAS_CXX23 || (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L)
-	// defined when project compiled by using C++23 or upper version of standard library.
+    /**
+     * @def MSTL_STANDARD_23__
+     * @brief 定义使用C++23或更高标准编译
+     */
 	#define MSTL_STANDARD_23__	1
 #endif
 #if _HAS_CXX20 || (__cplusplus >= 202002L) || (_MSVC_LANG >= 202002L)
-	// defined when project compiled by using C++20 or upper standard.
+    /**
+     * @def MSTL_STANDARD_20__
+     * @brief 定义使用C++20或更高标准编译
+     */
 	#define MSTL_STANDARD_20__	1
 #endif
 #if _HAS_CXX17 || (__cplusplus >= 201703L) || defined(MSTL_STANDARD_20__) || (_MSVC_LANG >= 201703L)
-	// defined when project compiled by using C++17 or upper standard.
+    /**
+     * @def MSTL_STANDARD_17__
+     * @brief 定义使用C++17或更高标准编译
+     */
 	#define MSTL_STANDARD_17__	1
 #endif
 #if (__cplusplus >= 201402L) || defined(MSTL_STANDARD_17__) || (_MSVC_LANG >= 201402L)
-	// defined when project compiled by using C++14 or upper standard.
+    /**
+     * @def MSTL_STANDARD_14__
+     * @brief 定义使用C++14或更高标准编译
+     */
 	#define MSTL_STANDARD_14__	1
 #endif
 #if (__cplusplus >= 201103L) || defined(MSTL_STANDARD_14__) || (_MSVC_LANG >= 201103L)
-	// defined when project compiled by using C++11 or upper standard.
+    /**
+     * @def MSTL_STANDARD_11__
+     * @brief 定义使用C++11或更高标准编译
+     */
 	#define MSTL_STANDARD_11__	1
 #endif
 #if (__cplusplus >= 199711L) || defined(MSTL_STANDARD_11__) || (_MSVC_LANG >= 199711L)
-	// defined when project compiled by using C++98 or upper standard.
+    /**
+     * @def MSTL_STANDARD_98__
+     * @brief 定义使用C++98或更高标准编译
+     */
 	#define MSTL_STANDARD_98__	1
 #endif
 
+/** @} */ // CxxStandardDetection
+
+/**
+ * @defgroup LanguageFeatures 语言特性
+ * @brief C++不同标准下的语言特性支持
+ * @{
+ */
 
 #ifdef MSTL_STANDARD_17__
+    /**
+     * @def MSTL_SUPPORT_DEDUCTION_GUIDES__
+     * @brief 支持C++17的模板参数推导
+     */
 	#define MSTL_SUPPORT_DEDUCTION_GUIDES__ 1
 #endif
 
 
 #ifdef MSTL_STANDARD_11__
+    /**
+     * @def MSTL_CONSTEXPR11
+     * @brief C++11的constexpr，降级为inline
+     */
 	#define MSTL_CONSTEXPR11 constexpr
 #else
+    /**
+     * @def MSTL_CONSTEXPR11
+     * @brief C++11之前的版本使用inline
+     */
 	#define MSTL_CONSTEXPR11 inline
 #endif // MSTL_STANDARD_11__
 
 #ifdef MSTL_STANDARD_14__
-	#define MSTL_CONSTEXPR14 constexpr
+    /**
+     * @def MSTL_CONSTEXPR14
+     * @brief C++14的constexpr，降级为inline
+     */
+    #define MSTL_CONSTEXPR14 constexpr
 #else
-	#define MSTL_CONSTEXPR14 inline
+    /**
+     * @def MSTL_CONSTEXPR14
+     * @brief C++14之前的版本使用inline
+     */
+    #define MSTL_CONSTEXPR14 inline
 #endif // MSTL_STANDARD_14__
 
 #ifdef MSTL_STANDARD_17__
-	#define MSTL_CONSTEXPR17 constexpr
-	#define MSTL_INLINE17 inline
+    /**
+     * @def MSTL_CONSTEXPR17
+     * @brief C++17的constexpr，降级为inline
+     */
+    #define MSTL_CONSTEXPR17 constexpr
+
+    /**
+     * @def MSTL_INLINE17
+     * @brief C++17的inline标记
+     */
+    #define MSTL_INLINE17 inline
 #else
-	#define MSTL_CONSTEXPR17 inline
-	#define MSTL_INLINE17
+    /**
+     * @def MSTL_CONSTEXPR17
+     * @brief C++17之前的版本使用inline
+     */
+    #define MSTL_CONSTEXPR17 inline
+
+    /**
+     * @def MSTL_INLINE17
+     * @brief C++17之前的版本为空
+     */
+    #define MSTL_INLINE17
 #endif // MSTL_STANDARD_17__
 
 #ifdef MSTL_STANDARD_20__
-	#define MSTL_CONSTEXPR20 constexpr
+    /**
+     * @def MSTL_CONSTEXPR20
+     * @brief C++20的constexpr，降级为inline
+     */
+    #define MSTL_CONSTEXPR20 constexpr
 #else
-	#define MSTL_CONSTEXPR20 inline
+    /**
+     * @def MSTL_CONSTEXPR20
+     * @brief C++20之前的版本使用inline
+     */
+    #define MSTL_CONSTEXPR20 inline
 #endif // MSTL_STANDARD_20__
 
 #ifdef MSTL_STANDARD_23__
-	#define MSTL_CONSTEXPR23 constexpr
+    /**
+     * @def MSTL_CONSTEXPR23
+     * @brief C++23的constexpr，降级为inline
+     */
+    #define MSTL_CONSTEXPR23 constexpr
 #else
-	#define MSTL_CONSTEXPR23 inline
+    /**
+     * @def MSTL_CONSTEXPR23
+     * @brief C++23之前的版本使用inline
+     */
+    #define MSTL_CONSTEXPR23 inline
 #endif // MSTL_STANDARD_23__
 
 
 #ifdef MSTL_STANDARD_17__
-	#define MSTL_IF_CONSTEXPR if constexpr
+    /**
+     * @def MSTL_IF_CONSTEXPR
+     * @brief C++17的if constexpr
+     */
+    #define MSTL_IF_CONSTEXPR if constexpr
 #else
-	// this macro will be used with caution, as it may break static overload under C++17.
-	#define MSTL_IF_CONSTEXPR if
+    /**
+     * @def MSTL_IF_CONSTEXPR
+     * @brief C++17之前的版本使用普通if
+     * @warning 此宏需谨慎使用，因其会在C++17之前破坏静态重载
+     */
+    #define MSTL_IF_CONSTEXPR if
 #endif
 
+/** @} */ // LanguageFeatures
 
-#ifdef MSTL_STANDARD_20__
-	#define MSTL_CONSTEVAL consteval
-#else
-	#define MSTL_CONSTEVAL MSTL_CONSTEXPR
-#endif
-
+/**
+ * @defgroup Attributes 属性
+ * @brief C++和编译器特定的属性
+ * @{
+ */
 
 #ifdef MSTL_STANDARD_17__
-	#define MSTL_NODISCARD [[nodiscard]]
-	#define MSTL_ALLOC_NODISCARD \
-		[[nodiscard("discard the return of allocators will cause memory leaks.")]]
+    /**
+     * @def MSTL_NODISCARD
+     * @brief [[nodiscard]]属性，禁止丢弃返回值
+     */
+    #define MSTL_NODISCARD [[nodiscard]]
+
+    /**
+     * @def MSTL_ALLOC_NODISCARD
+     * @brief 分配器的nodiscard属性，丢弃返回值会导致内存泄漏
+     */
+    #define MSTL_ALLOC_NODISCARD \
+        [[nodiscard("discard the return of allocators will cause memory leaks.")]]
 #else
-	#define MSTL_NODISCARD
-	#define MSTL_ALLOC_NODISCARD
+    /**
+     * @def MSTL_NODISCARD
+     * @brief C++17之前的版本为空
+     */
+    #define MSTL_NODISCARD
+
+    /**
+     * @def MSTL_ALLOC_NODISCARD
+     * @brief C++17之前的版本为空
+     */
+    #define MSTL_ALLOC_NODISCARD
 #endif
 
 
 #ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_ALIGNOF_DEFAULT() __attribute__((__aligned__))
-	#define MSTL_ALIGNOF(ALIGN) __attribute__((__aligned__((ALIGN))))
-#elif defined(MSTL_COMPILER_MSVC__) && defined(MSTL_STANDARD_11__)
-	#define MSTL_ALIGNOF_DEFAULT() [[aligned]]
-	#define MSTL_ALIGNOF(ALIGN) [[aligned(ALIGN)]]
-#else
-	#define MSTL_ALIGNOF_DEFAULT()
-	#define MSTL_ALIGNOF(ALIGN)
-#endif
-
-
-#ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_ALWAYS_INLINE __attribute__((always_inline))
-	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
+    /**
+     * @def MSTL_ALIGNED_DEFAULT
+     * @brief 默认对齐属性（GNU编译器）
+     */
+	#define MSTL_ALIGNED_DEFAULT() __attribute__((__aligned__))
+    /**
+     * @def MSTL_ALIGNED
+     * @brief 指定对齐属性（GNU编译器）
+     * @param ALIGN 对齐字节数
+     */
+	#define MSTL_ALIGNED(ALIGN) __attribute__((__aligned__((ALIGN))))
 #elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_ALWAYS_INLINE __forceinline
-	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
+    /**
+     * @def MSTL_ALIGNED_DEFAULT
+     * @brief 默认对齐属性（MSVC）
+     */
+	#define MSTL_ALIGNED_DEFAULT() __declspec(align(MSTL_POINTER_SIZE))
+    /**
+     * @def MSTL_ALIGNED
+     * @brief 指定对齐属性（MSVC）
+     * @param ALIGN 对齐字节数
+     */
+	#define MSTL_ALIGNED(ALIGN) __declspec(align(ALIGN))
+#else
+    /**
+     * @def MSTL_ALIGNED_DEFAULT
+     * @brief 空定义
+     */
+	#define MSTL_ALIGNED_DEFAULT()
+    /**
+     * @def MSTL_ALIGNED
+     * @brief 空定义
+     * @param ALIGN 对齐字节数（未使用）
+     */
+	#define MSTL_ALIGNED(ALIGN)
+#endif
+
+
+#ifdef MSTL_COMPILER_GNUC__
+    /**
+     * @def MSTL_ALWAYS_INLINE
+     * @brief 强制内联（GNU编译器）
+     */
+    #define MSTL_ALWAYS_INLINE __attribute__((always_inline))
+
+    /**
+     * @def MSTL_ALWAYS_INLINE_INLINE
+     * @brief 强制内联加inline（GNU编译器）
+     */
+    #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
+#elif defined(MSTL_COMPILER_MSVC__)
+    /**
+     * @def MSTL_ALWAYS_INLINE
+     * @brief 强制内联（MSVC）
+     */
+    #define MSTL_ALWAYS_INLINE __forceinline
+
+    /**
+     * @def MSTL_ALWAYS_INLINE_INLINE
+     * @brief 强制内联（MSVC）
+     */
+    #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
 #elif defined(MSTL_STANDARD_17__)
-	#define MSTL_ALWAYS_INLINE [[always_inline]]
-	#define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
+    /**
+     * @def MSTL_ALWAYS_INLINE
+     * @brief 强制内联（C++17）
+     */
+    #define MSTL_ALWAYS_INLINE [[always_inline]]
+
+    /**
+     * @def MSTL_ALWAYS_INLINE_INLINE
+     * @brief 强制内联加inline（C++17）
+     */
+    #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #else
-	#define MSTL_ALWAYS_INLINE
-	#define MSTL_ALWAYS_INLINE_INLINE
+    /**
+     * @def MSTL_ALWAYS_INLINE
+     * @brief 空定义
+     */
+    #define MSTL_ALWAYS_INLINE
+
+    /**
+     * @def MSTL_ALWAYS_INLINE_INLINE
+     * @brief 空定义
+     */
+    #define MSTL_ALWAYS_INLINE_INLINE
 #endif
 
 
 #ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_UNUSED __attribute__((unused))
+    /**
+     * @def MSTL_UNUSED
+     * @brief 未使用变量警告抑制（GNU编译器）
+     */
+    #define MSTL_UNUSED __attribute__((unused))
 #else
-	#define MSTL_UNUSED
+    /**
+     * @def MSTL_UNUSED
+     * @brief 空定义
+     */
+    #define MSTL_UNUSED
 #endif
 
 
 #ifdef MSTL_STANDARD_17__
-	#define MSTL_UNLIKELY [[unlikely]]
+    /**
+     * @def MSTL_UNLIKELY
+     * @brief 分支预测：不太可能执行（C++17）
+     */
+    #define MSTL_UNLIKELY [[unlikely]]
 #else
-	#define MSTL_UNLIKELY
+    /**
+     * @def MSTL_UNLIKELY
+     * @brief 空定义
+     */
+    #define MSTL_UNLIKELY
 #endif
 
 
 #ifdef MSTL_STANDARD_20__
-	#define MSTL_LIKELY [[likely]]
+    /**
+     * @def MSTL_LIKELY
+     * @brief 分支预测：很可能执行（C++20）
+     */
+    #define MSTL_LIKELY [[likely]]
 #else
-	#define MSTL_LIKELY
+    /**
+     * @def MSTL_LIKELY
+     * @brief 空定义
+     */
+    #define MSTL_LIKELY
 #endif
 
 
 #ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_NORETURN __attribute__((noreturn))
+    /**
+     * @def MSTL_NORETURN
+     * @brief 无返回值函数属性（GNU编译器）
+     */
+    #define MSTL_NORETURN __attribute__((noreturn))
 #elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_NORETURN __declspec(noreturn)
+    /**
+     * @def MSTL_NORETURN
+     * @brief 无返回值函数属性（MSVC）
+     */
+    #define MSTL_NORETURN __declspec(noreturn)
 #elif defined(MSTL_STANDARD_11__)
-	#define MSTL_NORETURN [[noreturn]]
+    /**
+     * @def MSTL_NORETURN
+     * @brief 无返回值函数属性（C++11）
+     */
+    #define MSTL_NORETURN [[noreturn]]
 #else
-	#define MSTL_NORETURN
+    /**
+     * @def MSTL_NORETURN
+     * @brief 空定义
+     */
+    #define MSTL_NORETURN
 #endif
 
 
 #ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_PURE_FUNCTION __attribute__((__pure__))
-	#define MSTL_MALLOC_FUNCTION __attribute__((__malloc__))
-	#define MSTL_CONST_FUNCTION __attribute__((__const__))
-	#define MSTL_NONNULL_FUNCTION(PARAMS) __attribute__((__nonnull__ PARAMS))
-#elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_PURE_FUNCTION
-	#define MSTL_MALLOC_FUNCTION
-	#define MSTL_CONST_FUNCTION
-	#define MSTL_NOTNULL_FUNCTION(PARAMS) _Check_return_ _In_ PARAMS
+    /**
+     * @def MSTL_PURE_FUNCTION
+     * @brief 纯函数属性（只读内存）
+     */
+    #define MSTL_PURE_FUNCTION __attribute__((__pure__))
+
+    /**
+     * @def MSTL_MALLOC_FUNCTION
+     * @brief malloc类函数属性（返回新内存）
+     */
+    #define MSTL_MALLOC_FUNCTION __attribute__((__malloc__))
+
+    /**
+     * @def MSTL_CONST_FUNCTION
+     * @brief 常量函数属性（无副作用）
+     */
+    #define MSTL_CONST_FUNCTION __attribute__((__const__))
+
+    /**
+     * @def MSTL_NONNULL_FUNCTION
+     * @brief 非空参数函数属性
+     * @param PARAMS 非空参数列表
+     */
+    #define MSTL_NONNULL_FUNCTION(PARAMS) __attribute__((__nonnull__ PARAMS))
 #else
+    /**
+     * @def MSTL_PURE_FUNCTION
+     * @brief 空定义
+     */
     #define MSTL_PURE_FUNCTION
+
+    /**
+     * @def MSTL_MALLOC_FUNCTION
+     * @brief 空定义
+     */
     #define MSTL_MALLOC_FUNCTION
+
+    /**
+     * @def MSTL_CONST_FUNCTION
+     * @brief 空定义
+     */
     #define MSTL_CONST_FUNCTION
+
+    /**
+     * @def MSTL_NOTNULL_FUNCTION
+     * @brief 空定义
+     * @param PARAMS 参数（未使用）
+     */
     #define MSTL_NOTNULL_FUNCTION(PARAMS)
 #endif
 
 
 #ifdef MSTL_STANDARD_14__
-	#define MSTL_DEPRECATED [[deprecated]]
+    /**
+     * @def MSTL_DEPRECATED
+     * @brief 弃用标记
+     */
+    #define MSTL_DEPRECATED [[deprecated]]
+
+    /**
+     * @def MSTL_DEPRECATE_FOR
+     * @brief 带消息的弃用标记
+     * @param MSG 弃用消息
+     */
     #define MSTL_DEPRECATE_FOR(MSG) [[deprecated(MSG)]]
-	// after C++ 11, we can use lambda expressions to quickly build closures
-	// instead of using functor adapters.
-	#define MSTL_FUNC_ADAPTER_DEPRECATE \
-		MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use functor base types and functor adapters.")
-	#define MSTL_TRAITS_DEPRECATE \
-		MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use iterator traits functions.")
+
+    /**
+     * @def MSTL_FUNC_ADAPTER_DEPRECATE
+     * @brief 函数适配器弃用消息
+     */
+    #define MSTL_FUNC_ADAPTER_DEPRECATE \
+    MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use functor base types and functor adapters.")
+
+    /**
+     * @def MSTL_TRAITS_DEPRECATE
+     * @brief 迭代器特性弃用消息
+     */
+    #define MSTL_TRAITS_DEPRECATE \
+    MSTL_DEPRECATE_FOR("C++ 11 and later versions no longer use iterator traits functions.")
 #else
-	#define MSTL_DEPRECATED
+    /**
+     * @def MSTL_DEPRECATED
+     * @brief 空定义
+     */
+    #define MSTL_DEPRECATED
+
+    /**
+     * @def MSTL_DEPRECATE_FOR
+     * @brief 空定义
+     * @param MSG 消息（未使用）
+     */
     #define MSTL_DEPRECATE_FOR(MSG)
-	#define MSTL_FUNC_ADAPTER_DEPRECATE
-	#define MSTL_TRAITS_DEPRECATE
+
+    /**
+     * @def MSTL_FUNC_ADAPTER_DEPRECATE
+     * @brief 空定义
+     */
+    #define MSTL_FUNC_ADAPTER_DEPRECATE
+
+    /**
+     * @def MSTL_TRAITS_DEPRECATE
+     * @brief 空定义
+     */
+    #define MSTL_TRAITS_DEPRECATE
 #endif
 
 
 #if defined(MSTL_COMPILER_GNUC__)
-	#define MSTL_NOVTABLE __attribute__((novtable))
+    /**
+     * @def MSTL_NOVTABLE
+     * @brief 无虚函数表属性（GNU编译器）
+     */
+    #define MSTL_NOVTABLE __attribute__((novtable))
 #elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_NOVTABLE __declspec(novtable)
+    /**
+     * @def MSTL_NOVTABLE
+     * @brief 无虚函数表属性（MSVC）
+     */
+    #define MSTL_NOVTABLE __declspec(novtable)
 #else
-	#define MSTL_NOVTABLE
+    /**
+     * @def MSTL_NOVTABLE
+     * @brief 空定义
+     */
+    #define MSTL_NOVTABLE
 #endif
 
 
 #if defined(MSTL_COMPILER_GNUC__)
-	#define MSTL_ALLOC_OPTIMIZE MSTL_ALWAYS_INLINE
+    /**
+     * @def MSTL_ALLOC_OPTIMIZE
+     * @brief 分配器优化标记（GNU编译器）
+     */
+    #define MSTL_ALLOC_OPTIMIZE MSTL_ALWAYS_INLINE
 #elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_ALLOC_OPTIMIZE __declspec(allocator)
+    /**
+     * @def MSTL_ALLOC_OPTIMIZE
+     * @brief 分配器优化标记（MSVC）
+     */
+    #define MSTL_ALLOC_OPTIMIZE __declspec(allocator)
 #else
-	#define MSTL_ALLOC_OPTIMIZE
+    /**
+     * @def MSTL_ALLOC_OPTIMIZE
+     * @brief 空定义
+     */
+    #define MSTL_ALLOC_OPTIMIZE
 #endif
 
 
 #if defined(MSTL_COMPILER_GNUC__)
-	#define MSTL_RESTRICT __restrict__
+    /**
+     * @def MSTL_RESTRICT
+     * @brief 限制指针别名（GNU编译器）
+     */
+    #define MSTL_RESTRICT __restrict__
 #elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_RESTRICT __restrict
+    /**
+     * @def MSTL_RESTRICT
+     * @brief 限制指针别名（MSVC）
+     */
+    #define MSTL_RESTRICT __restrict
 #else
-	#define MSTL_RESTRICT restrict
+    /**
+     * @def MSTL_RESTRICT
+     * @brief 限制指针别名（C标准）
+     */
+    #define MSTL_RESTRICT restrict
 #endif
-
-
-#define MSTL_IGNORE (void)
 
 
 #ifdef MSTL_COMPILER_GNUC__
+    /**
+     * @def MSTL_UNREACHABLE
+     * @brief 不可达代码标记（GNU编译器）
+     */
     #define MSTL_UNREACHABLE __builtin_unreachable()
 #elif defined(MSTL_COMPILER_MSVC__)
+    /**
+     * @def MSTL_UNREACHABLE
+     * @brief 不可达代码标记（MSVC）
+     */
     #define MSTL_UNREACHABLE __assume(false)
 #else
+    /**
+     * @def MSTL_UNREACHABLE
+     * @brief 空操作
+     */
     #define MSTL_UNREACHABLE ((void)0)
 #endif
 
 
 #ifdef MSTL_STANDARD_20__
-	#define MSTL_NO_UNIQUE_ADDRESS [[no_unique_address]]
+    /**
+     * @def MSTL_NO_UNIQUE_ADDRESS
+     * @brief 无唯一地址属性（C++20）
+     */
+    #define MSTL_NO_UNIQUE_ADDRESS [[no_unique_address]]
 #else
-	#define MSTL_NO_UNIQUE_ADDRESS
+    /**
+     * @def MSTL_NO_UNIQUE_ADDRESS
+     * @brief 空定义
+     */
+    #define MSTL_NO_UNIQUE_ADDRESS
 #endif
 
+/** @} */ // Attributes
 
-// expand macro with basic char types.
+/**
+ * @defgroup TypeMacros 类型宏
+ * @brief 类型相关的宏展开
+ * @{
+ */
+
+/**
+ * @def MSTL_MACRO_RANGE_BASIC_CHARS
+ * @brief 展开基本字符类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_BASIC_CHARS(MAC) \
 	MAC(char) \
 	MAC(signed char) \
 	MAC(unsigned char) \
 
 #ifdef MSTL_STANDARD_20__
-// expand macro with Unicode char types.
+/**
+ * @def MSTL_MACRO_RANGES_UNICODE_CHARS
+ * @brief 展开Unicode字符类型（C++20）
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGES_UNICODE_CHARS(MAC) \
 	MAC(char8_t) \
 	MAC(char16_t) \
 	MAC(char32_t)
 #else
-// expand macro with Unicode char types.
+/**
+ * @def MSTL_MACRO_RANGES_UNICODE_CHARS
+ * @brief 展开Unicode字符类型（C++20之前）
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGES_UNICODE_CHARS(MAC) \
 	MAC(char16_t) \
 	MAC(char32_t)
 #endif
 
-// expand macro with all char types.
+/**
+ * @def MSTL_MACRO_RANGE_CHARS
+ * @brief 展开所有字符类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_CHARS(MAC) \
 	MSTL_MACRO_RANGE_BASIC_CHARS(MAC) \
 	MAC(wchar_t) \
 	MSTL_MACRO_RANGES_UNICODE_CHARS(MAC)
 
-// expand macro with signed integral types.
+/**
+ * @def MSTL_MACRO_RANGE_SINT
+ * @brief 展开有符号整数类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_SINT(MAC) \
 	MAC(short) \
 	MAC(int) \
 	MAC(long) \
 	MAC(long long)
 
-// expand macro with unsigned integral types.
+/**
+ * @def MSTL_MACRO_RANGE_USINT
+ * @brief 展开无符号整数类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_USINT(MAC) \
 	MAC(unsigned short) \
 	MAC(unsigned int) \
 	MAC(unsigned long) \
 	MAC(unsigned long long)
 
-// expand macro with integral types.
+/**
+ * @def MSTL_MACRO_RANGE_INT
+ * @brief 展开所有整数类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_INT(MAC) \
 	MSTL_MACRO_RANGE_SINT(MAC) \
 	MSTL_MACRO_RANGE_USINT(MAC)
 
-// expand macro with floating point types.
+/**
+ * @def MSTL_MACRO_RANGE_FLOAT
+ * @brief 展开浮点数类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGE_FLOAT(MAC) \
 	MAC(float) \
 	MAC(double) \
 	MAC(long double)
 
-
+/**
+ * @def MSTL_MACRO_RANGES_ALL
+ * @brief 展开所有基本类型
+ * @param MAC 宏处理器
+ */
 #define MSTL_MACRO_RANGES_ALL(MAC) \
 	MSTL_MACRO_RANGE_CHARS(MAC) \
 	MSTL_MACRO_RANGE_INT(MAC) \
 	MSTL_MACRO_RANGE_FLOAT(MAC)
+
+/** @} */ // TypeMacros
+
+
+/**
+ * @def MSTL_IGNORE
+ * @brief 忽略表达式结果
+ */
+#define MSTL_IGNORE (void)
 
 #endif // MSTL_CORE_CONFIG_CPPCONFIG_HPP__

@@ -169,7 +169,7 @@ private:
     using link_type = node_type*;
 
     link_type head_ = nullptr;
-    compressed_pair<allocator_type, size_type> pair_{ _MSTL_TAG default_construct_tag{}, 0 };
+    compressed_pair<allocator_type, size_type> pair_{ default_construct_tag{}, 0 };
 
     template <bool, typename> friend struct list_iterator;
 

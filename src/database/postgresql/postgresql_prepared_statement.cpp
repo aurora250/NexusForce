@@ -5,7 +5,7 @@
 #include <MSTL/database/postgresql/postgresql_prepared_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-postgresql_prepared_statement::postgresql_prepared_statement(_MSTL_POSTGRESQL PGconn* conn, const string& sql)
+postgresql_prepared_statement::postgresql_prepared_statement(::PGconn* conn, const string& sql)
 : conn_(conn), sql_(sql) {
     static _MSTL atomic<uint64_t> stmt_counter{0};
     stmt_name_ = "pstmt_" + _MSTL to_string(stmt_counter++);
@@ -34,9 +34,9 @@ postgresql_prepared_statement::postgresql_prepared_statement(_MSTL_POSTGRESQL PG
 postgresql_prepared_statement::~postgresql_prepared_statement() {
     if (conn_) {
         const string deallocate_sql = "DEALLOCATE " + _MSTL move(stmt_name_);
-        _MSTL_POSTGRESQL PGresult* result = _MSTL_POSTGRESQL PQexec(conn_, deallocate_sql.c_str());
+        ::PGresult* result = ::PQexec(conn_, deallocate_sql.c_str());
         if (result) {
-            _MSTL_POSTGRESQL PQclear(result);
+            ::PQclear(result);
         }
         delete data_;
     }
@@ -52,7 +52,7 @@ void postgresql_prepared_statement::init_params() const {
 bool postgresql_prepared_statement::prepare() {
     clear_error();
 
-    _MSTL_POSTGRESQL PGresult* result = _MSTL_POSTGRESQL PQprepare(
+    ::PGresult* result = ::PQprepare(
         conn_, stmt_name_.c_str(), sql_.c_str(), param_count_, nullptr);
 
     if (!result) {
@@ -60,11 +60,11 @@ bool postgresql_prepared_statement::prepare() {
         return false;
     }
 
-    const _MSTL_POSTGRESQL ExecStatusType status = _MSTL_POSTGRESQL PQresultStatus(result);
-    _MSTL_POSTGRESQL PQclear(result);
+    const ::ExecStatusType status = ::PQresultStatus(result);
+    ::PQclear(result);
 
-    if (status != _MSTL_POSTGRESQL PGRES_COMMAND_OK) {
-        set_error(_MSTL_POSTGRESQL PQerrorMessage(conn_), 2);
+    if (status != ::PGRES_COMMAND_OK) {
+        set_error(::PQerrorMessage(conn_), 2);
         return false;
     }
 
@@ -138,7 +138,7 @@ bool postgresql_prepared_statement::bind_param(const uint32_t index, const void*
 bool postgresql_prepared_statement::execute() {
     clear_error();
 
-    _MSTL_POSTGRESQL PGresult* result = _MSTL_POSTGRESQL PQexecPrepared(
+    ::PGresult* result = ::PQexecPrepared(
         conn_, stmt_name_.c_str(), param_count_,
         data_->param_ptrs.data(), data_->param_lengths.data(),
         data_->param_formats.data(), 0);
@@ -148,11 +148,11 @@ bool postgresql_prepared_statement::execute() {
         return false;
     }
 
-    const _MSTL_POSTGRESQL ExecStatusType status = _MSTL_POSTGRESQL PQresultStatus(result);
-    _MSTL_POSTGRESQL PQclear(result);
+    const ::ExecStatusType status = ::PQresultStatus(result);
+    ::PQclear(result);
 
-    if (status != _MSTL_POSTGRESQL PGRES_COMMAND_OK && status != _MSTL_POSTGRESQL PGRES_TUPLES_OK) {
-        set_error(_MSTL_POSTGRESQL PQerrorMessage(conn_), 5);
+    if (status != ::PGRES_COMMAND_OK && status != ::PGRES_TUPLES_OK) {
+        set_error(::PQerrorMessage(conn_), 5);
         return false;
     }
 
@@ -162,7 +162,7 @@ bool postgresql_prepared_statement::execute() {
 unique_ptr<idb_prepared_result> postgresql_prepared_statement::execute_query() {
     clear_error();
 
-    _MSTL_POSTGRESQL PGresult* result = _MSTL_POSTGRESQL PQexecPrepared(
+    ::PGresult* result = ::PQexecPrepared(
         conn_, stmt_name_.c_str(), param_count_,
         data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
         data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
@@ -174,10 +174,10 @@ unique_ptr<idb_prepared_result> postgresql_prepared_statement::execute_query() {
         return nullptr;
     }
 
-    const _MSTL_POSTGRESQL ExecStatusType status = _MSTL_POSTGRESQL PQresultStatus(result);
-    if (status != _MSTL_POSTGRESQL PGRES_TUPLES_OK) {
-        set_error(_MSTL_POSTGRESQL PQerrorMessage(conn_), 7);
-        _MSTL_POSTGRESQL PQclear(result);
+    const ::ExecStatusType status = ::PQresultStatus(result);
+    if (status != ::PGRES_TUPLES_OK) {
+        set_error(::PQerrorMessage(conn_), 7);
+        ::PQclear(result);
         return nullptr;
     }
 

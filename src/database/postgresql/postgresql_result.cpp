@@ -4,17 +4,17 @@
 MSTL_BEGIN_NAMESPACE__
 
 postgresql_tb_result::postgresql_tb_result(
-    _MSTL_POSTGRESQL PGresult* result, const bool owns) noexcept
+    ::PGresult* result, const bool owns) noexcept
 : result_(result), owns_result_(owns) {
     if (result_) {
-        row_count_ = _MSTL_POSTGRESQL PQntuples(result_);
-        column_count_ = _MSTL_POSTGRESQL PQnfields(result_);
+        row_count_ = ::PQntuples(result_);
+        column_count_ = ::PQnfields(result_);
     }
 }
 
 postgresql_tb_result::~postgresql_tb_result() {
     if (owns_result_ && result_) {
-        _MSTL_POSTGRESQL PQclear(result_);
+        ::PQclear(result_);
     }
 }
 
@@ -33,7 +33,7 @@ bool postgresql_tb_result::is_null(const size_type index) const {
     if (static_cast<int>(index) >= column_count_) {
         throw_exception(database_exception("Column index out of range"));
     }
-    return _MSTL_POSTGRESQL PQgetisnull(
+    return ::PQgetisnull(
         result_, current_row_, static_cast<int>(index)) != 0;
 }
 
@@ -54,7 +54,7 @@ string_view postgresql_tb_result::get(const size_type index) const {
     if (is_null(index)) {
         return string_view();
     }
-    const char* value = _MSTL_POSTGRESQL PQgetvalue(
+    const char* value = ::PQgetvalue(
         result_, current_row_, static_cast<int>(index));
     return string_view(value);
 }
@@ -95,21 +95,21 @@ vector<char> postgresql_tb_result::get_blob(const size_type index) const {
     if (is_null(index)) {
         return {};
     }
-    const char* value = _MSTL_POSTGRESQL PQgetvalue(
+    const char* value = ::PQgetvalue(
         result_, current_row_, static_cast<int>(index));
-    const int length = _MSTL_POSTGRESQL PQgetlength(
+    const int length = ::PQgetlength(
         result_, current_row_, static_cast<int>(index));
 
     if (length > 2 && value[0] == '\\' && value[1] == 'x') {
         size_t unescaped_length = 0;
-        byte_t* unescaped = _MSTL_POSTGRESQL PQunescapeBytea(
+        byte_t* unescaped = ::PQunescapeBytea(
             reinterpret_cast<const byte_t*>(value),
             &unescaped_length
         );
 
         if (unescaped) {
             vector<char> result(unescaped, unescaped + unescaped_length);
-            _MSTL_POSTGRESQL PQfreemem(unescaped);
+            ::PQfreemem(unescaped);
             return result;
         }
     }

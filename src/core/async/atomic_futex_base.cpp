@@ -24,8 +24,6 @@ bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
             numeric_limits<uint32_t>::max());
         return ret == 1;
     } else {
-        using namespace chrono;
-
         const auto tp = system_clock::from_time_t(0) + sec + ns;
         const auto now = system_clock::now();
 
@@ -90,7 +88,6 @@ bool atomic_futex_base::futex_wait_until_steady(unsigned *addr, const unsigned v
             numeric_limits<uint32_t>::max());
         return ret == 1;
     } else {
-        using namespace chrono;
         const steady_clock::time_point tp = steady_clock::time_point(sec) + ns;
         const auto now = steady_clock::now();
 

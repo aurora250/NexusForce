@@ -2,12 +2,12 @@
 #define MSTL_DATABASE_SQLITE_PREPARED_RESULT_HPP__
 #ifdef MSTL_SUPPORT_SQLITE3__
 #include "MSTL/database/db_interface.hpp"
-#include "sqlite_config.hpp"
+#include <sqlite3.h>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API sqlite_prepared_result final : idb_prepared_result {
 private:
-    _MSTL_SQLITE sqlite3_stmt* stmt_ = nullptr;
+    ::sqlite3_stmt* stmt_ = nullptr;
     size_type cursor_ = 0;
     size_type columns_ = 0;
     unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();
@@ -15,9 +15,9 @@ private:
 
 public:
     sqlite_prepared_result() noexcept = default;
-    explicit sqlite_prepared_result(_MSTL_SQLITE sqlite3_stmt* statement) noexcept;
+    explicit sqlite_prepared_result(::sqlite3_stmt* statement) noexcept;
 
-    ~sqlite_prepared_result() override { if (stmt_) _MSTL_SQLITE sqlite3_reset(stmt_); }
+    ~sqlite_prepared_result() override { if (stmt_) ::sqlite3_reset(stmt_); }
 
     MSTL_NODISCARD MSTL_DEPRECATE_FOR("use COUNT * instead of using this function")
     size_type row_count() const noexcept override { return 0; }

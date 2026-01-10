@@ -3,16 +3,19 @@
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "mysql_config.hpp"
+#ifdef CR_OUT_OF_MEMORY
+#undef CR_OUT_OF_MEMORY
+#endif
+#include <mysql.h>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API mysql_connect final : idb_tb_connect {
 private:
-    _MSTL_MYSQL MYSQL* mysql_ = nullptr;
+    ::MYSQL* mysql_ = nullptr;
     clock_type alive_time_ = 0;
 
 public:
-    mysql_connect() noexcept { mysql_ = _MSTL_MYSQL mysql_init(nullptr); }
+    mysql_connect() noexcept { mysql_ = ::mysql_init(nullptr); }
     ~mysql_connect() noexcept override { this->close(); }
 
     MSTL_NODISCARD bool connect_to(
@@ -33,24 +36,24 @@ public:
     MSTL_NODISCARD bool reset_connect(const db_config& config) override;
 
     MSTL_NODISCARD bool set_character_set(const _MSTL string& encoding) const noexcept override {
-        return connected() && !_MSTL_MYSQL mysql_set_character_set(mysql_, encoding.data());
+        return connected() && !::mysql_set_character_set(mysql_, encoding.data());
     }
-    MSTL_NODISCARD bool set_options(const _MSTL_MYSQL mysql_option option, const _MSTL string& str) const noexcept {
-        return connected() && !_MSTL_MYSQL mysql_options(mysql_, option, str.data());
+    MSTL_NODISCARD bool set_options(const ::mysql_option option, const _MSTL string& str) const noexcept {
+        return connected() && !::mysql_options(mysql_, option, str.data());
     }
 
     MSTL_NODISCARD string_view get_character_set() const noexcept override {
-        return _MSTL_MYSQL mysql_character_set_name(mysql_);
+        return ::mysql_character_set_name(mysql_);
     }
     MSTL_NODISCARD string_view get_error() const noexcept override {
-        return _MSTL_MYSQL mysql_error(mysql_);
+        return ::mysql_error(mysql_);
     }
     MSTL_NODISCARD uint32_t get_errno() const noexcept override {
-        return _MSTL_MYSQL mysql_errno(mysql_);
+        return ::mysql_errno(mysql_);
     }
 
     MSTL_NODISCARD bool update(const _MSTL string& sql) const noexcept override {
-        return !_MSTL_MYSQL mysql_query(mysql_, sql.c_str());
+        return !::mysql_query(mysql_, sql.c_str());
     }
     MSTL_NODISCARD unique_ptr<idb_tb_result> query(const string& sql) const noexcept override;
     MSTL_NODISCARD unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const override;

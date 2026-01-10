@@ -2,7 +2,7 @@
 #define MSTL_DATABASE_POSTGRESQL_PREPARED_STATEMENT_HPP__
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include "MSTL/database/db_interface.hpp"
-#include "postgresql_config.hpp"
+#include <libpq-fe.h>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
@@ -16,7 +16,7 @@ MSTL_END_INNER__
 
 class MSTL_API postgresql_prepared_statement final : public idb_prepared_statement {
 private:
-    _MSTL_POSTGRESQL PGconn* conn_ = nullptr;
+    ::PGconn* conn_ = nullptr;
     string stmt_name_{};
     string sql_{};
     uint32_t param_count_ = 0;

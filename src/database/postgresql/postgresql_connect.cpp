@@ -59,9 +59,9 @@ bool postgresql_connect::connect_to(
         conn_str += "client_encoding=" + character_set;
     }
 
-    conn_ = _MSTL_POSTGRESQL PQconnectdb(conn_str.c_str());
+    conn_ = ::PQconnectdb(conn_str.c_str());
 
-    if (!conn_ || _MSTL_POSTGRESQL PQstatus(conn_) != _MSTL_POSTGRESQL CONNECTION_OK) {
+    if (!conn_ || ::PQstatus(conn_) != ::CONNECTION_OK) {
         update_error();
         close();
         return false;
@@ -92,45 +92,45 @@ bool postgresql_connect::connect_to(const db_config& config) {
 
 bool postgresql_connect::set_character_set(const string& encoding) const {
     if (!conn_) return false;
-    _MSTL_POSTGRESQL PGresult* res = _MSTL_POSTGRESQL PQexec(
+    ::PGresult* res = ::PQexec(
         conn_, ("SET client_encoding TO " + encoding).c_str());
     if (!res) return false;
-    const _MSTL_POSTGRESQL ExecStatusType status = _MSTL_POSTGRESQL PQresultStatus(res);
-    _MSTL_POSTGRESQL PQclear(res);
-    return status == _MSTL_POSTGRESQL PGRES_COMMAND_OK;
+    const ::ExecStatusType status = ::PQresultStatus(res);
+    ::PQclear(res);
+    return status == ::PGRES_COMMAND_OK;
 }
 
 string_view postgresql_connect::get_character_set() const {
     if (!conn_) return {};
-    _MSTL_POSTGRESQL PGresult* res = _MSTL_POSTGRESQL PQexec(conn_, "SHOW client_encoding");
+    ::PGresult* res = ::PQexec(conn_, "SHOW client_encoding");
     if (!res) return {};
-    if (_MSTL_POSTGRESQL PQresultStatus(res) != _MSTL_POSTGRESQL PGRES_TUPLES_OK) {
-        _MSTL_POSTGRESQL PQclear(res);
+    if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
+        ::PQclear(res);
         return {};
     }
-    char* encoding = _MSTL_POSTGRESQL PQgetvalue(res, 0, 0);
+    char* encoding = ::PQgetvalue(res, 0, 0);
     const string_view ret = encoding ? string_view(encoding) : string_view{};
-    _MSTL_POSTGRESQL PQclear(res);
+    ::PQclear(res);
     return ret;
 }
 
 bool postgresql_connect::update(const string& sql) const {
     if (!conn_) return false;
-    _MSTL_POSTGRESQL PGresult* res = _MSTL_POSTGRESQL PQexec(conn_, sql.c_str());
+    ::PGresult* res = ::PQexec(conn_, sql.c_str());
     if (!res) return false;
-    const _MSTL_POSTGRESQL ExecStatusType status = _MSTL_POSTGRESQL PQresultStatus(res);
-    _MSTL_POSTGRESQL PQclear(res);
-    return status == _MSTL_POSTGRESQL PGRES_COMMAND_OK;
+    const ::ExecStatusType status = ::PQresultStatus(res);
+    ::PQclear(res);
+    return status == ::PGRES_COMMAND_OK;
 }
 
 bool postgresql_connect::connected() const {
     return conn_ != nullptr &&
-        _MSTL_POSTGRESQL PQstatus(conn_) == _MSTL_POSTGRESQL CONNECTION_OK;
+        ::PQstatus(conn_) == ::CONNECTION_OK;
 }
 
 void postgresql_connect::close() {
     if (conn_) {
-        _MSTL_POSTGRESQL PQfinish(conn_);
+        ::PQfinish(conn_);
         conn_ = nullptr;
     }
     clear_error();
@@ -143,10 +143,10 @@ bool postgresql_connect::reset_connect(const db_config& config) {
 
 unique_ptr<idb_tb_result> postgresql_connect::query(const string& sql) const {
     if (!conn_) return nullptr;
-    _MSTL_POSTGRESQL PGresult* res = _MSTL_POSTGRESQL PQexec(conn_, sql.c_str());
+    ::PGresult* res = ::PQexec(conn_, sql.c_str());
     if (!res) return nullptr;
-    if (_MSTL_POSTGRESQL PQresultStatus(res) != _MSTL_POSTGRESQL PGRES_TUPLES_OK) {
-        _MSTL_POSTGRESQL PQclear(res);
+    if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
+        ::PQclear(res);
         return nullptr;
     }
     return make_unique<postgresql_tb_result>(res, true);
@@ -173,7 +173,7 @@ idb_connect* postgresql_factory::create_connect() {
 
 idb_result* postgresql_factory::create_result(void* native_result) {
     if (!native_result) return nullptr;
-    _MSTL_POSTGRESQL PGresult* res = static_cast<_MSTL_POSTGRESQL PGresult*>(native_result);
+    ::PGresult* res = static_cast<::PGresult*>(native_result);
     return new postgresql_tb_result(res, false);
 }
 

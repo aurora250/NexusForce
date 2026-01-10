@@ -9,7 +9,6 @@ MSTL_BEGIN_INNER__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 static ::DWORD timespec_to_relative_ms(const timespec& abs, const bool is_monotonic) {
-    using namespace chrono;
     const nanoseconds abs_ns {
         static_cast<int64_t>(abs.tv_sec) * 1'000'000'000LL + abs.tv_nsec
     };

@@ -3,13 +3,13 @@
 #ifdef MSTL_SUPPORT_POSTGRESQL__
 #include "MSTL/core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "postgresql_config.hpp"
+#include <libpq-fe.h>
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API postgresql_tb_result final : public idb_tb_result {
 private:
     mutable vector<string_view> column_names_;
-    _MSTL_POSTGRESQL PGresult* result_ = nullptr;
+    ::PGresult* result_ = nullptr;
     size_type current_row_ = 0;
     size_type row_count_ = 0;
     size_type column_count_ = 0;
@@ -20,7 +20,7 @@ protected:
     bool is_null(size_type index) const;
 
 public:
-    explicit postgresql_tb_result(_MSTL_POSTGRESQL PGresult* result, bool owns = true) noexcept;
+    explicit postgresql_tb_result(::PGresult* result, bool owns = true) noexcept;
     ~postgresql_tb_result() override;
 
     postgresql_tb_result(const postgresql_tb_result&) = delete;

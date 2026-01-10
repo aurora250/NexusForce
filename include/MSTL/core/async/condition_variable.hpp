@@ -48,10 +48,10 @@ MSTL_END_INNER__
 
 class condition_variable {
 public:
-    using steady_clock = _MSTL_CHRONO steady_clock;
-    using system_clock = _MSTL_CHRONO system_clock;
+    using steady_clock = _MSTL steady_clock;
+    using system_clock = _MSTL system_clock;
     using base_type = _INNER condition_variable_base;
-    using clock_t = _MSTL_CHRONO steady_clock;
+    using clock_t = _MSTL steady_clock;
 
 private:
     base_type cond_;

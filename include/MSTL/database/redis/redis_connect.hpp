@@ -3,16 +3,16 @@
 #ifdef MSTL_SUPPORT_REDIS__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "redis_config.hpp"
+#include <hiredis.h>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API redis_connect final : idb_kv_connect {
 private:
-    _MSTL_REDIS redisContext* context_ = nullptr;
+    ::redisContext* context_ = nullptr;
     clock_type alive_time_ = 0;
     mutable string last_error_{};
 
-    _MSTL_REDIS redisReply* execute_command(string_view command, const vector<string_view>& args = {}) const;
+    ::redisReply* execute_command(string_view command, const vector<string_view>& args = {}) const;
     bool authenticate(const string& password) const;
     bool select_database(const string& db_index) const;
     bool connect_to_host(const string& host, uint16_t port, const string& password, const string& dbname);

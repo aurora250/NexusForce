@@ -3,33 +3,36 @@
 #ifdef MSTL_SUPPORT_MYSQL__
 #include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
-#include "mysql_config.hpp"
+#ifdef CR_OUT_OF_MEMORY
+#undef CR_OUT_OF_MEMORY
+#endif
+#include <mysql.h>
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API mysql_result final : idb_tb_result {
 private:
-    _MSTL_MYSQL MYSQL_RES* result_ = nullptr;
+    ::MYSQL_RES* result_ = nullptr;
     size_type rows_ = 0;
     size_type columns_ = 0;
-    _MSTL_MYSQL MYSQL_ROW cursor_ = nullptr;
+    ::MYSQL_ROW cursor_ = nullptr;
 
     unique_ptr<vector<string_view>> column_name_ = make_unique<vector<string_view>>();
 
-    unique_ptr<vector<_MSTL_MYSQL enum_field_types>> column_types_ =
-        make_unique<vector<_MSTL_MYSQL enum_field_types>>();
+    unique_ptr<vector<::enum_field_types>> column_types_ =
+        make_unique<vector<::enum_field_types>>();
 
 public:
     mysql_result() noexcept = default;
-    explicit mysql_result(_MSTL_MYSQL MYSQL_RES* result) noexcept;
+    explicit mysql_result(::MYSQL_RES* result) noexcept;
 
-    ~mysql_result() override { if (result_) _MSTL_MYSQL mysql_free_result(result_); }
+    ~mysql_result() override { if (result_) ::mysql_free_result(result_); }
 
     MSTL_NODISCARD bool empty() const noexcept override { return result_ == nullptr; }
     MSTL_NODISCARD size_type row_count() const noexcept override { return rows_; }
     MSTL_NODISCARD size_type column_count() const noexcept override { return columns_; }
 
     MSTL_NODISCARD const vector<string_view>& column_names() const noexcept override { return *column_name_; }
-    MSTL_NODISCARD const vector<_MSTL_MYSQL enum_field_types>& column_types() const noexcept { return *column_types_; }
+    MSTL_NODISCARD const vector<::enum_field_types>& column_types() const noexcept { return *column_types_; }
 
     MSTL_NODISCARD bool next() noexcept override;
 

@@ -9,15 +9,11 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_CHRONO__
-
 template <typename Rep, typename Period = ratio<1>>
 struct duration;
 
 template <typename Clock, typename Dur = typename Clock::duration>
 struct time_point;
-
-MSTL_END_CHRONO__
 
 
 MSTL_BEGIN_INNER__
@@ -131,8 +127,6 @@ struct is_duration<duration<Rep, Period>> : true_type {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_duration_v = is_duration<T>::value;
 
-
-MSTL_BEGIN_CHRONO__
 
 template <typename ToDur, typename Rep, typename Period, enable_if_t<is_duration<ToDur>::value, int> = 0>
 constexpr ToDur duration_cast(const duration<Rep, Period>& value) {
@@ -274,15 +268,15 @@ using weeks			= duration<int64_t, ratio<604800>>;
 using years			= duration<int64_t, ratio<31556952>>;
 using months		= duration<int64_t, ratio<2629746>>;
 
-MSTL_END_CHRONO__
 
 MSTL_BEGIN_INNER__
+
 template <typename Rep1, typename Rep2,
     typename CommonRep = common_type_t<Rep1, Rep2>>
 using __common_rep_t = enable_if_t<is_convertible_v<const Rep2&, CommonRep>, CommonRep>;
+
 MSTL_END_INNER__
 
-MSTL_BEGIN_CHRONO__
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr common_type_t<duration<Rep1, Period1>, duration<Rep2, Period2>>
@@ -403,8 +397,6 @@ ceil(const duration<Rep, Period>& dur) {
 	}
 	return to;
 }
-
-MSTL_END_CHRONO__
 
 
 MSTL_BEGIN_INNER__

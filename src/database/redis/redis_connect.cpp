@@ -3,7 +3,7 @@
 #include <MSTL/database/redis/redis_result.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-_MSTL_REDIS redisReply* redis_connect::execute_command(
+::redisReply* redis_connect::execute_command(
     const string_view command, const vector<string_view>& args) const {
     if (!context_) return nullptr;
 
@@ -18,8 +18,8 @@ _MSTL_REDIS redisReply* redis_connect::execute_command(
         argvlen.push_back(arg.length());
     }
 
-    return static_cast<_MSTL_REDIS redisReply*>(
-        _MSTL_REDIS redisCommandArgv(context_, argv.size(), argv.data(), argvlen.data())
+    return static_cast<::redisReply*>(
+        ::redisCommandArgv(context_, argv.size(), argv.data(), argvlen.data())
     );
 }
 
@@ -29,11 +29,11 @@ bool redis_connect::authenticate(const string& password) const {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Authentication failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -44,11 +44,11 @@ bool redis_connect::select_database(const string& db_index) const {
         if (!reply || reply->type == REDIS_REPLY_ERROR) {
             if (reply) {
                 last_error_ = reply->str ? reply->str : "SELECT failed";
-                _MSTL_REDIS freeReplyObject(reply);
+                ::freeReplyObject(reply);
             }
             return false;
         }
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return true;
     } catch (...) {
         last_error_ = "Invalid database index";
@@ -59,11 +59,11 @@ bool redis_connect::select_database(const string& db_index) const {
 bool redis_connect::connect_to_host(
     const string& host, const uint16_t port,
     const string& password, const string& dbname) {
-    context_ = _MSTL_REDIS redisConnect(host.c_str(), port);
+    context_ = ::redisConnect(host.c_str(), port);
     if (!context_ || context_->err) {
         if (context_) {
             last_error_ = context_->errstr;
-            _MSTL_REDIS redisFree(context_);
+            ::redisFree(context_);
             context_ = nullptr;
         } else {
             last_error_ = "Connection failed";
@@ -94,28 +94,28 @@ string_view redis_connect::get_error() const noexcept {
 }
 
 bool redis_connect::update(const string& sql) const noexcept {
-    const auto reply = static_cast<_MSTL_REDIS redisReply*>(
-        _MSTL_REDIS redisCommand(context_, sql.c_str())
+    const auto reply = static_cast<::redisReply*>(
+        ::redisCommand(context_, sql.c_str())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Command failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
 unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
-    const auto reply = static_cast<_MSTL_REDIS redisReply*>(
-        _MSTL_REDIS redisCommand(context_, sql.c_str())
+    const auto reply = static_cast<::redisReply*>(
+        ::redisCommand(context_, sql.c_str())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "Query failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return nullptr;
     }
@@ -127,16 +127,16 @@ bool redis_connect::is_valid() const noexcept {
     const auto reply = execute_command("PING");
     if (!reply || reply->type != REDIS_REPLY_STATUS ||
         string_compare(reply->str, "PONG") != 0) {
-        if (reply) _MSTL_REDIS freeReplyObject(reply);
+        if (reply) ::freeReplyObject(reply);
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
 void redis_connect::close() noexcept {
     if (!context_) return;
-    _MSTL_REDIS redisFree(context_);
+    ::redisFree(context_);
     context_ = nullptr;
 }
 
@@ -145,11 +145,11 @@ bool redis_connect::set(const string& key, const string& value) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "SET failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -159,11 +159,11 @@ bool redis_connect::setex(const string& key, const string& value, const int seco
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "SETEX failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -175,7 +175,7 @@ unique_ptr<idb_kv_result> redis_connect::get(const string& key) {
     }
     if (reply->type == REDIS_REPLY_ERROR) {
         last_error_ = reply->str ? reply->str : "GET failed";
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return nullptr;
     }
     return make_unique<redis_result>(reply);
@@ -186,12 +186,12 @@ bool redis_connect::del(const string& key) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "DEL failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
     const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return result;
 }
 
@@ -200,12 +200,12 @@ bool redis_connect::exists(const string& key) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "EXISTS failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
     const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return result;
 }
 
@@ -215,12 +215,12 @@ bool redis_connect::expire(const string& key, const int seconds) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "EXPIRE failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
     const bool result = reply->type == REDIS_REPLY_INTEGER && reply->integer > 0;
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return result;
 }
 
@@ -229,11 +229,11 @@ bool redis_connect::hset(const string& key, const string& field, const string& v
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "HSET failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -245,7 +245,7 @@ unique_ptr<idb_kv_result> redis_connect::hget(const string& key, const string& f
     }
     if (reply->type == REDIS_REPLY_ERROR) {
         last_error_ = reply->str ? reply->str : "HGET failed";
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return nullptr;
     }
     return make_unique<redis_result>(reply);
@@ -259,7 +259,7 @@ unique_ptr<idb_kv_result> redis_connect::hgetall(const string& key) {
     }
     if (reply->type == REDIS_REPLY_ERROR) {
         last_error_ = reply->str ? reply->str : "HGETALL failed";
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return nullptr;
     }
     return make_unique<redis_result>(reply);
@@ -270,11 +270,11 @@ bool redis_connect::lpush(const string& key, const string& value) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "LPUSH failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -283,11 +283,11 @@ bool redis_connect::rpush(const string& key, const string& value) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "RPUSH failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -301,7 +301,7 @@ unique_ptr<idb_kv_result> redis_connect::lrange(const string& key, const int sta
     }
     if (reply->type == REDIS_REPLY_ERROR) {
         last_error_ = reply->str ? reply->str : "LRANGE failed";
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return nullptr;
     }
     return make_unique<redis_result>(reply);
@@ -312,11 +312,11 @@ bool redis_connect::sadd(const string& key, const string& member) {
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
             last_error_ = reply->str ? reply->str : "SADD failed";
-            _MSTL_REDIS freeReplyObject(reply);
+            ::freeReplyObject(reply);
         }
         return false;
     }
-    _MSTL_REDIS freeReplyObject(reply);
+    ::freeReplyObject(reply);
     return true;
 }
 
@@ -328,7 +328,7 @@ unique_ptr<idb_kv_result> redis_connect::smembers(const string& key) {
     }
     if (reply->type == REDIS_REPLY_ERROR) {
         last_error_ = reply->str ? reply->str : "SMEMBERS failed";
-        _MSTL_REDIS freeReplyObject(reply);
+        ::freeReplyObject(reply);
         return nullptr;
     }
     return make_unique<redis_result>(reply);
@@ -344,7 +344,7 @@ idb_connect* redis_factory::create_connect() {
 }
 
 idb_result* redis_factory::create_result(void* native_result) {
-    return new redis_result(static_cast<_MSTL_REDIS redisReply*>(native_result));
+    return new redis_result(static_cast<::redisReply*>(native_result));
 }
 
 MSTL_END_NAMESPACE__

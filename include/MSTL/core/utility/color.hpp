@@ -94,7 +94,8 @@ public:
 
     constexpr bool is_transparent() const noexcept { return a == 0; }
     constexpr bool is_opaque() const noexcept { return a == 255; }
-    constexpr double is_opacity() const noexcept { return a / 255.0; }
+    
+    constexpr double opacity() const noexcept { return a / 255.0; }
 
     constexpr void set_opacity(double opacity) noexcept {
         if (opacity < 0.0) opacity = 0.0;
