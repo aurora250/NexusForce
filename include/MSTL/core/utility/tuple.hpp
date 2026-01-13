@@ -10,20 +10,17 @@ struct __tuple_constructible_aux : false_type {};
 template <typename... Dests, typename... Srcs>
 struct __tuple_constructible_aux<true, tuple<Dests...>, Srcs...> :
 	bool_constant<conjunction<is_constructible<Dests, Srcs>...>::value> {};
-MSTL_END_INNER__
 
 template <typename Dest, typename... Srcs>
 struct tuple_constructible : bool_constant<
 	_INNER __tuple_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
-MSTL_BEGIN_INNER__
 template <bool Same, typename Dest, typename... Srcs>
 struct __tuple_explicitly_convertible_aux : false_type {};
 template <typename... Dests, typename... Srcs>
 struct __tuple_explicitly_convertible_aux<true, tuple<Dests...>, Srcs...> : bool_constant<
 	!conjunction<is_convertible<Srcs, Dests>...>::value> {};
-MSTL_END_INNER__
 
 template <typename Dest, typename... Srcs>
 struct tuple_explicitly_convertible : bool_constant<
@@ -46,57 +43,50 @@ struct tuple_perfect_forward<tuple<T1, T2, T3>, U1, U2, U3> : bool_constant<
 		is_same<remove_cvref_t<T1>, allocator_arg_tag>>::value> {};
 
 
-MSTL_BEGIN_INNER__
 template <bool Same, typename Dest, typename... Srcs>
 struct __tuple_nothrow_constructible_aux : false_type {};
 template <typename... Dests, typename... Srcs>
 struct __tuple_nothrow_constructible_aux<true, tuple<Dests...>, Srcs...> : bool_constant<
 	conjunction<is_nothrow_constructible<Dests, Srcs>...>::value> {};
-MSTL_END_INNER__
 
 template <typename Dest, typename... Srcs>
 struct tuple_nothrow_constructible : bool_constant<
 	_INNER __tuple_nothrow_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
-MSTL_BEGIN_INNER__
 template <typename Self, typename Tuple, typename... U>
 struct __tuple_convertible_aux : true_type {};
 template <typename Self, typename Tuple, typename U>
 struct __tuple_convertible_aux<tuple<Self>, Tuple, U>
 	: bool_constant<!disjunction<
 	is_same<Self, U>, is_constructible<Self, Tuple>, is_convertible<Tuple, Self>>::value> {};
-MSTL_END_INNER__
 
 template <typename Self, typename Tuple, typename... U>
 struct tuple_convertible : bool_constant<
 	_INNER __tuple_convertible_aux<Self, Tuple, U...>::value> {};
 
 
-MSTL_BEGIN_INNER__
 template <bool Same, typename Dest, typename... Srcs>
 struct __tuple_assignable_aux : false_type {};
 template <typename... Dests, typename... Srcs>
 struct __tuple_assignable_aux<true, tuple<Dests...>, Srcs...> : bool_constant<
 	conjunction<is_assignable<Dests&, Srcs>...>::value> {};
-MSTL_END_INNER__
 
 template <typename Dest, typename... Srcs>
 struct tuple_assignable : bool_constant<
 	_INNER __tuple_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
-MSTL_BEGIN_INNER__
 template <bool Same, typename Dest, typename... Srcs>
 struct __tuple_nothrow_assignable_aux : false_type {};
 template <typename... Dests, typename... Srcs>
 struct __tuple_nothrow_assignable_aux<true, tuple<Dests...>, Srcs...> : bool_constant<
 	conjunction<is_nothrow_assignable<Dests&, Srcs>...>::value> {};
-MSTL_END_INNER__
 
 template <typename Dest, typename... Srcs>
 struct tuple_nothrow_assignable : bool_constant<
 	_INNER __tuple_nothrow_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+MSTL_END_INNER__
 
 
 template <>
@@ -157,39 +147,39 @@ public:
 		: base_type(), data_() {}
 
 	template <typename T = This, enable_if_t<
-		tuple_constructible<tuple, const T&, const Rest&...>::value, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value)
+		_INNER tuple_constructible<tuple, const T&, const Rest&...>::value, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value)
 		tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction_v<
 			is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
 
-	template <typename U1, typename... U2, enable_if_t<conjunction_v<tuple_perfect_forward<tuple, U1, U2...>, 
-		tuple_constructible<tuple, U1, U2...>>, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, U1, U2...>::value)
-		tuple(U1&& this_arg, U2&&... rest_arg) noexcept(tuple_nothrow_constructible<tuple, U1, U2...>::value)
+	template <typename U1, typename... U2, enable_if_t<conjunction_v<_INNER tuple_perfect_forward<tuple, U1, U2...>,
+		_INNER tuple_constructible<tuple, U1, U2...>>, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value)
+		tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _MSTL forward<U1>(this_arg), _MSTL forward<U2>(rest_arg)...) {}
 
-	template <typename... U, enable_if_t<conjunction_v<tuple_constructible<tuple, const U&...>,
-		tuple_convertible<tuple, const tuple<U...>&, U...>>, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, const U&...>::value)
-		tuple(const tuple<U...>& tup) noexcept(tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction_v<_INNER tuple_constructible<tuple, const U&...>,
+		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const U&...>::value)
+		tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
-	template <typename... U, enable_if_t<conjunction_v<tuple_constructible<tuple, U...>, 
-		tuple_convertible<tuple, tuple<U...>, U...>>, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, U...>::value)
-		tuple(tuple<U...>&& tup) noexcept(tuple_nothrow_constructible<tuple, U...>::value)
+	template <typename... U, enable_if_t<conjunction_v<_INNER tuple_constructible<tuple, U...>,
+		_INNER tuple_convertible<tuple, tuple<U...>, U...>>, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, U...>::value)
+		tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _MSTL move(tup)) {}
 
 	template <typename T1, typename T2, enable_if_t<
-		tuple_constructible<tuple, const T1&, const T2&>::value, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, const T1&, const T2&>::value)
-        tuple(const pair<T1, T2>& pir) noexcept(tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+		_INNER tuple_constructible<tuple, const T1&, const T2&>::value, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value)
+        tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
         : tuple(unpack_utility_construct_tag{}, pir) {}
 
-    template <typename T1, typename T2, enable_if_t<tuple_constructible<tuple, T1, T2>::value, int> = 0>
-	constexpr explicit(tuple_explicitly_convertible<tuple, T1, T2>::value)
-		tuple(pair<T1, T2>&& pir) noexcept(tuple_nothrow_constructible<tuple, T1, T2>::value)
+    template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, T1, T2>::value, int> = 0>
+	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, T1, T2>::value)
+		tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
         : tuple(unpack_utility_construct_tag{}, _MSTL move(pir)) {}
 #else
 	template <typename T = This, enable_if_t<
@@ -208,72 +198,72 @@ public:
 		is_nothrow_default_constructible<T>, is_nothrow_default_constructible<Rest>...>::value)
 		: base_type(), data_() {}
 
-	template <typename T = This, enable_if_t<tuple_constructible<tuple, const T&, const Rest&...>::value &&
-		tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
+	template <typename T = This, enable_if_t<_INNER tuple_constructible<tuple, const T&, const Rest&...>::value &&
+		_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
 	explicit tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction<
 		is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>::value)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
 
-	template <typename T = This, enable_if_t<tuple_constructible<tuple, const T&, const Rest&...>::value &&
-		!tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
+	template <typename T = This, enable_if_t<_INNER tuple_constructible<tuple, const T&, const Rest&...>::value &&
+		!_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
 	tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction<
 		is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>::value)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
 
 	template <typename U1, typename... U2, enable_if_t<
-		conjunction<tuple_constructible<tuple, U1, U2...>, tuple_convertible<tuple, U1, U2...>>::value &&
-		tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
-	explicit tuple(U1&& this_arg, U2&&... rest_arg) noexcept(tuple_nothrow_constructible<tuple, U1, U2...>::value)
+		conjunction<_INNER tuple_constructible<tuple, U1, U2...>, _INNER tuple_convertible<tuple, U1, U2...>>::value &&
+		_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
+	explicit tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _MSTL forward<U1>(this_arg), _MSTL forward<U2>(rest_arg)...) {}
 
 	template <typename U1, typename... U2, enable_if_t<
-		conjunction<tuple_constructible<tuple, U1, U2...>, tuple_convertible<tuple, U1, U2...>>::value &&
-		!tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
-	tuple(U1&& this_arg, U2&&... rest_arg) noexcept(tuple_nothrow_constructible<tuple, U1, U2...>::value)
+		conjunction<_INNER tuple_constructible<tuple, U1, U2...>, _INNER tuple_convertible<tuple, U1, U2...>>::value &&
+		!_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
+	tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _MSTL forward<U1>(this_arg), _MSTL forward<U2>(rest_arg)...) {}
 
-	template <typename... U, enable_if_t<conjunction<tuple_constructible<tuple, const U&...>,
-		tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
-		tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
-	explicit tuple(const tuple<U...>& tup) noexcept(tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction<_INNER tuple_constructible<tuple, const U&...>,
+		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
+		_INNER tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
+	explicit tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
-	template <typename... U, enable_if_t<conjunction<tuple_constructible<tuple, const U&...>,
-		tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
-		!tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
-	tuple(const tuple<U...>& tup) noexcept(tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction<_INNER tuple_constructible<tuple, const U&...>,
+		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
+		!_INNER tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
+	tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
 	template <typename... U, enable_if_t<
-		conjunction<tuple_constructible<tuple, U...>, tuple_convertible<tuple, tuple<U...>, U...>>::value &&
-		tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
-	explicit tuple(tuple<U...>&& tup) noexcept(tuple_nothrow_constructible<tuple, U...>::value)
+		conjunction<_INNER tuple_constructible<tuple, U...>, _INNER tuple_convertible<tuple, tuple<U...>, U...>>::value &&
+		_INNER tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
+	explicit tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _MSTL move(tup)) {}
 
 	template <typename... U, enable_if_t<
-		conjunction<tuple_constructible<tuple, U...>, tuple_convertible<tuple, tuple<U...>, U...>>::value &&
-		!tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
-	tuple(tuple<U...>&& tup) noexcept(tuple_nothrow_constructible<tuple, U...>::value)
+		conjunction<_INNER tuple_constructible<tuple, U...>, _INNER tuple_convertible<tuple, tuple<U...>, U...>>::value &&
+		!_INNER tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
+	tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _MSTL move(tup)) {}
 
-	template <typename T1, typename T2, enable_if_t<tuple_constructible<tuple, const T1&, const T2&>::value &&
-		tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
-	explicit tuple(const pair<T1, T2>& pir) noexcept(tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+	template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, const T1&, const T2&>::value &&
+		_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
+	explicit tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
 		: tuple(unpack_utility_construct_tag{}, pir) {}
 
-	template <typename T1, typename T2, enable_if_t<tuple_constructible<tuple, const T1&, const T2&>::value &&
-		!tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
-	tuple(const pair<T1, T2>& pir) noexcept(tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+	template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, const T1&, const T2&>::value &&
+		!_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
+	tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
 		: tuple(unpack_utility_construct_tag{}, pir) {}
 
 	template <typename T1, typename T2, enable_if_t<
-		tuple_constructible<tuple, T1, T2>::value && tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
-	explicit tuple(pair<T1, T2>&& pir) noexcept(tuple_nothrow_constructible<tuple, T1, T2>::value)
+		_INNER tuple_constructible<tuple, T1, T2>::value && _INNER tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
+	explicit tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
 		: tuple(unpack_utility_construct_tag{}, _MSTL move(pir)) {}
 
 	template <typename T1, typename T2, enable_if_t<
-		tuple_constructible<tuple, T1, T2>::value && !tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
-	tuple(pair<T1, T2>&& pir) noexcept(tuple_nothrow_constructible<tuple, T1, T2>::value)
+		_INNER tuple_constructible<tuple, T1, T2>::value && !_INNER tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
+	tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
 		: tuple(unpack_utility_construct_tag{}, _MSTL move(pir)) {}
 #endif
 
@@ -299,34 +289,34 @@ public:
 	}
 
 	template <typename... U, enable_if_t<
-		conjunction<negation<is_same<tuple, tuple<U...>>>, tuple_assignable<tuple, const U&...>>::value, int> = 0>
-	MSTL_CONSTEXPR14 tuple& operator =(const tuple<U...>& tup) noexcept(tuple_nothrow_assignable<tuple, const U&...>::value) {
+		conjunction<negation<is_same<tuple, tuple<U...>>>, _INNER tuple_assignable<tuple, const U&...>>::value, int> = 0>
+	MSTL_CONSTEXPR14 tuple& operator =(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_assignable<tuple, const U&...>::value) {
 		data_ = tup.data_;
 		get_rest() = tup.get_rest();
 		return *this;
 	}
 
 	template <typename... U, enable_if_t<
-		conjunction<negation<is_same<tuple, tuple<U...>>>, tuple_assignable<tuple, U...>>::value, int> = 0>
-	MSTL_CONSTEXPR14 tuple& operator =(tuple<U...>&& tup) noexcept(tuple_nothrow_assignable<tuple, U...>::value) {
+		conjunction<negation<is_same<tuple, tuple<U...>>>, _INNER tuple_assignable<tuple, U...>>::value, int> = 0>
+	MSTL_CONSTEXPR14 tuple& operator =(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_assignable<tuple, U...>::value) {
 		data_ = _MSTL forward<typename tuple<U...>::this_type>(tup.data_);
 		get_rest() = _MSTL forward<typename tuple<U...>::super>(tup.get_rest());
 		return *this;
 	}
 
 	template <typename T1, typename T2, enable_if_t<
-		tuple_assignable<tuple, const T1&, const T2&>::value, int> = 0>
+		_INNER tuple_assignable<tuple, const T1&, const T2&>::value, int> = 0>
 	MSTL_CONSTEXPR14 tuple& operator =(const pair<T1, T2>& pir) noexcept(
-		tuple_nothrow_assignable<tuple, const T1&, const T2&>::value) {
+		_INNER tuple_nothrow_assignable<tuple, const T1&, const T2&>::value) {
 		data_ = pir.first;
 		get_rest().data_ = pir.second;
 		return *this;
 	}
 
 	template <typename T1, typename T2, enable_if_t<
-		tuple_assignable<tuple, T1, T2>::value, int> = 0>
+		_INNER tuple_assignable<tuple, T1, T2>::value, int> = 0>
 	MSTL_CONSTEXPR14 tuple& operator =(pair<T1, T2>&& pir) noexcept(
-		tuple_nothrow_assignable<tuple, T1, T2>::value) {
+		_INNER tuple_nothrow_assignable<tuple, T1, T2>::value) {
 		data_ = _MSTL forward<T1>(pir.first);
 		get_rest().data_ = _MSTL forward<T2>(pir.second);
 		return *this;

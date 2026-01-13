@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: hash.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('hash_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">hash.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="hash_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_FUNCTIONAL_HASH_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_FUNCTIONAL_HASH_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="type__traits_8hpp.html">../typeinfo/type_traits.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Dummy = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1hash.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1hash_3_01_t_01_5_01_4.html">   38</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a>&lt;T*&gt; {</div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1hash_3_01_t_01_5_01_4.html#aba801a625f0670b8bc724f2bc01c5af5">   44</a></span>    MSTL_NODISCARD MSTL_CONSTEXPR20 <span class="keywordtype">size_t</span> operator ()(<span class="keyword">const</span> T* ptr) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<span class="keyword">reinterpret_cast&lt;</span><a class="code hl_typedef" href="group___platform_dependent_types.html#gaa819092ec1c77fc712f5ad68a57f3503">uintptr_t</a><span class="keyword">&gt;</span>(ptr));</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> <span class="comment">// HashPrimary</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><a class="code hl_define" href="group___namespace_macros.html#ga8256e91c9f9db765e31fefdb1f67d890">MSTL_BEGIN_CONSTANTS__</a></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="hash_8hpp.html#a743e1a90f2b8603feffb13e065a36aa8">   63</a></span>MSTL_INLINE17 <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="hash_8hpp.html#a743e1a90f2b8603feffb13e065a36aa8">FNV_OFFSET_BASIS</a> =</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#ifdef MSTL_DATA_BUS_WIDTH_64__</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    14695981039346656037ULL;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    2166136261U</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="hash_8hpp.html#adafb05171be8cffc05ea707d0b2faa85">   74</a></span>MSTL_INLINE17 <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="hash_8hpp.html#adafb05171be8cffc05ea707d0b2faa85">FNV_PRIME</a></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#ifdef MSTL_DATA_BUS_WIDTH_64__</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     = 1099511628211ULL;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     = 16777619U;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><a class="code hl_define" href="group___namespace_macros.html#ga208ddcbc552de9327a7f923ba8980fda">MSTL_END_CONSTANTS__</a></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group___f_n_v_hash.html#ga9d305ddfdb14f92e48c71f0eff9d9208">   95</a></span>MSTL_CONSTEXPR14 <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___f_n_v_hash.html#ga9d305ddfdb14f92e48c71f0eff9d9208">FNV_hash</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#gaf6c09c1401d579c4be4001587052309e">byte_t</a>* first, <span class="keyword">const</span> <span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">size_t</span> result = <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> FNV_OFFSET_BASIS;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; i++) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        result ^= <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(first[i]);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        result *= <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> FNV_PRIME;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
+</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>MSTL_CONSTEXPR14 <span class="keywordtype">size_t</span> FNV_hash_integer(<span class="keyword">const</span> T&amp; value) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">static_assert</span>(is_integral&lt;T&gt;::value, <span class="stringliteral">&quot;T must be integral&quot;</span>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">size_t</span> result = <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> FNV_OFFSET_BASIS;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <span class="keyword">sizeof</span>(T); ++i) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keyword">const</span> byte_t byte_val = <span class="keyword">static_cast&lt;</span>byte_t<span class="keyword">&gt;</span>((value &gt;&gt; (i * 8)) &amp; 0xFF);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        result ^= <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(byte_val);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        result *= <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> FNV_PRIME;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT&gt;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>MSTL_CONSTEXPR14 <span class="keywordtype">size_t</span> FNV_hash_string(<span class="keyword">const</span> CharT* str, <span class="keyword">const</span> <span class="keywordtype">size_t</span> len) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keyword">static_assert</span>(is_character&lt;CharT&gt;::value, <span class="stringliteral">&quot;CharT must be character types&quot;</span>);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">size_t</span> result = <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> <a class="code hl_variable" href="hash_8hpp.html#a743e1a90f2b8603feffb13e065a36aa8">FNV_OFFSET_BASIS</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; len; ++i) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        result ^= <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#gaf6c09c1401d579c4be4001587052309e">byte_t</a><span class="keyword">&gt;</span>(str[i]));</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        result *= <a class="code hl_define" href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a> <a class="code hl_variable" href="hash_8hpp.html#adafb05171be8cffc05ea707d0b2faa85">FNV_PRIME</a>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> <span class="comment">// FNVHash</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">struct </span>hash&lt;bool&gt; {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> operator ()(<span class="keyword">const</span> <span class="keywordtype">bool</span> x) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">return</span> x ? 0x9e3779b9 : 0x7f4a7c15;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>};</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#define __MSTL_BUILD_INTEGER_HASH_STRUCT(OPT) \</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">template &lt;&gt; struct hash&lt;OPT&gt; { \</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">    MSTL_NODISCARD constexpr size_t operator ()(const OPT&amp; x) const noexcept { \</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">        return x == 0.0f ? 0 : _INNER FNV_hash_integer(x); \</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">};</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>MSTL_MACRO_RANGE_CHARS(__MSTL_BUILD_INTEGER_HASH_STRUCT)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>MSTL_MACRO_RANGE_INT(__MSTL_BUILD_INTEGER_HASH_STRUCT)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#undef FLOAT_HASH_STRUCT__</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">union </span>__float_converter { T f; <a class="code hl_typedef" href="group___core_types.html#ga9e5a8d0f2a8ccc05b1f02cbd1f48e8ed">uint64_t</a> i; };</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#define __MSTL_BUILD_FLOAT_HASH_STRUCT(OPT) \</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">template &lt;&gt; \</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="preprocessor">struct hash&lt;OPT&gt; { \</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">    MSTL_NODISCARD MSTL_CONSTEXPR14 size_t operator ()(const OPT x) const noexcept { \</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">        if (x == 0.0f) return 0; \</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">        _INNER __float_converter&lt;OPT&gt; converter{}; \</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="preprocessor">        converter.f = x; \</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">        return _INNER FNV_hash_integer(converter.i); \</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="preprocessor">    } \</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">};</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>MSTL_MACRO_RANGE_FLOAT(__MSTL_BUILD_FLOAT_HASH_STRUCT)</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="preprocessor">#undef __MSTL_BUILD_FLOAT_HASH_STRUCT</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span></div>
+<div class="foldopen" id="foldopen00211" data-start="{" data-end="}">
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="group___d_j_b2_hash.html#ga840e8c62a35334fc3a8a28c85d12dac9">  211</a></span>MSTL_CONSTEXPR14 <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___d_j_b2_hash.html#ga840e8c62a35334fc3a8a28c85d12dac9">DJB2_hash</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keyword">const</span> <span class="keywordtype">size_t</span> len) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordtype">size_t</span> <a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a> = 5381;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; len; ++i) {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a> = (hash &lt;&lt; 5) + hash + static_cast&lt;byte_t&gt;(str[i]);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
+</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> <span class="comment">// DJB2Hash</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="preprocessor">#ifdef MSTL_DATA_BUS_WIDTH_64__</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span></div>
+<div class="foldopen" id="foldopen00235" data-start="{" data-end="};">
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1murmur__hash.html">  235</a></span><span class="keyword">struct </span>murmur_hash {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1murmur__hash.html#aca35490055af78f26d4121f1ec5277c7">  236</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="struct_m_s_t_l_1_1murmur__hash.html#aca35490055af78f26d4121f1ec5277c7">low</a> = 0;  </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1murmur__hash.html#a8052ecc9004780bae02e0068282205e2">  237</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="struct_m_s_t_l_1_1murmur__hash.html#a8052ecc9004780bae02e0068282205e2">high</a> = 0; </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    murmur_hash() noexcept = default;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    ~murmur_hash() noexcept = default;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="foldopen" id="foldopen00247" data-start="{" data-end="}">
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1murmur__hash.html#a1367514936d44744b0f41d11a7172d95">  247</a></span>    murmur_hash(const <span class="keywordtype">size_t</span> l, const <span class="keywordtype">size_t</span> h) noexcept</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    : <a class="code hl_variable" href="struct_m_s_t_l_1_1murmur__hash.html#aca35490055af78f26d4121f1ec5277c7">low</a>(l), <a class="code hl_variable" href="struct_m_s_t_l_1_1murmur__hash.html#a8052ecc9004780bae02e0068282205e2">high</a>(h) {}</div>
+</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>};</div>
+</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="group___murmur_hash.html#gaa2737d5fa875e0a2e7ab121a1b1c7c81">  267</a></span><a class="code hl_struct" href="struct_m_s_t_l_1_1murmur__hash.html">murmur_hash</a> <a class="code hl_function" href="group___murmur_hash.html#gaa2737d5fa875e0a2e7ab121a1b1c7c81">MurmurHash_x64</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* key, <span class="keywordtype">size_t</span> len, <a class="code hl_typedef" href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">uint32_t</a> seed) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="group___murmur_hash.html#ga4e661463372484f308f0d46146bf5a1e">  280</a></span><a class="code hl_typedef" href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">uint32_t</a> <a class="code hl_function" href="group___murmur_hash.html#ga4e661463372484f308f0d46146bf5a1e">MurmurHash_x32</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* key, <span class="keywordtype">size_t</span> len, <a class="code hl_typedef" href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">uint32_t</a> seed) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> <span class="comment">// MurmurHash</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Dummy = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1is__nothrow__hashable.html">  297</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1is__nothrow__hashable.html">is_nothrow_hashable</a> : <a class="code hl_typedef" href="group___type_traits_utilities.html#gae4ca0ae0cb41ccd3887c312f3f9b347e">false_type</a> {};</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key&gt;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1is__nothrow__hashable.html">is_nothrow_hashable</a>&lt;Key, <a class="code hl_typedef" href="group___type_traits_utilities.html#gac7d108b842bab8a0b4b716bcfac22d81">void_t</a>&lt;decltype(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_struct" href="struct_m_s_t_l_1_1hash.html">hash</a>&lt;Key&gt;{}(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> declval&lt;const Key&amp;&gt;()))&gt;&gt;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    : bool_constant&lt;noexcept(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> hash&lt;Key&gt;{}(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> declval&lt;const Key&amp;&gt;()))&gt; {};</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="preprocessor">#ifdef MSTL_STANDARD_14__</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key&gt;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="group___hash_traits.html#ga2b6bb68d19cdee24ee32e1c079c69205">  311</a></span>MSTL_INLINE17 <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="group___hash_traits.html#ga2b6bb68d19cdee24ee32e1c079c69205">is_nothrow_hashable_v</a> = <a class="code hl_variable" href="struct_m_s_t_l_1_1integral__constant.html#a484faa6621b0517bd4b172ddb53d72e7">is_nothrow_hashable&lt;Key&gt;::value</a>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> Arg, <span class="keyword">typename</span> Dummy = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1is__hash.html">  325</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1is__hash.html">is_hash</a> : <a class="code hl_typedef" href="group___type_traits_utilities.html#gae4ca0ae0cb41ccd3887c312f3f9b347e">false_type</a> {};</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> Arg&gt;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_m_s_t_l_1_1is__hash.html">is_hash</a>&lt;Func, Arg, <a class="code hl_typedef" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <a class="code hl_struct" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt;decltype(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___declval_tools.html#ga15a809a4d267f12776417173035d298f">declval</a>&lt;Func&gt;()(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___declval_tools.html#ga15a809a4d267f12776417173035d298f">declval</a>&lt;Arg&gt;())), <a class="code hl_typedef" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&gt;::value</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>&gt;&gt; : <a class="code hl_typedef" href="group___type_traits_utilities.html#ga0fdbd1076bfada90af67922b4d6aeae7">true_type</a> {};</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="preprocessor">#ifdef MSTL_STANDARD_14__</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> Arg&gt;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno"><a class="line" href="group___hash_traits.html#ga0873ccaf650ced3e79dd80f0f4945f47">  340</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="group___hash_traits.html#ga0873ccaf650ced3e79dd80f0f4945f47">is_hash_v</a> = <a class="code hl_variable" href="struct_m_s_t_l_1_1integral__constant.html#a484faa6621b0517bd4b172ddb53d72e7">is_hash&lt;Func, Arg&gt;::value</a>;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> <span class="comment">// HashTraits</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_FUNCTIONAL_HASH_HPP__</span></div>
+<div class="ttc" id="agroup___core_types_html_ga345d54be2f996584ff8d8362b3dfeb18"><div class="ttname"><a href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">MSTL::uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00086">types.hpp:86</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga9e5a8d0f2a8ccc05b1f02cbd1f48e8ed"><div class="ttname"><a href="group___core_types.html#ga9e5a8d0f2a8ccc05b1f02cbd1f48e8ed">MSTL::uint64_t</a></div><div class="ttdeci">unsigned long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00094">types.hpp:94</a></div></div>
+<div class="ttc" id="agroup___core_types_html_gaf6c09c1401d579c4be4001587052309e"><div class="ttname"><a href="group___core_types.html#gaf6c09c1401d579c4be4001587052309e">MSTL::byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00036">types.hpp:36</a></div></div>
+<div class="ttc" id="agroup___d_j_b2_hash_html_ga840e8c62a35334fc3a8a28c85d12dac9"><div class="ttname"><a href="group___d_j_b2_hash.html#ga840e8c62a35334fc3a8a28c85d12dac9">MSTL::DJB2_hash</a></div><div class="ttdeci">constexpr size_t DJB2_hash(const char *str, const size_t len) noexcept</div><div class="ttdoc">DJB2哈希算法</div><div class="ttdef"><b>定义</b> <a href="#l00211">hash.hpp:211</a></div></div>
+<div class="ttc" id="agroup___declval_tools_html_ga15a809a4d267f12776417173035d298f"><div class="ttname"><a href="group___declval_tools.html#ga15a809a4d267f12776417173035d298f">MSTL::declval</a></div><div class="ttdeci">add_rvalue_reference_t&lt; T &gt; declval() noexcept</div><div class="ttdoc">获取类型的右值引用，仅用于非求值上下文</div></div>
+<div class="ttc" id="agroup___f_n_v_hash_html_ga9d305ddfdb14f92e48c71f0eff9d9208"><div class="ttname"><a href="group___f_n_v_hash.html#ga9d305ddfdb14f92e48c71f0eff9d9208">MSTL::FNV_hash</a></div><div class="ttdeci">constexpr size_t FNV_hash(const byte_t *first, const size_t count) noexcept</div><div class="ttdoc">FNV-1a哈希算法</div><div class="ttdef"><b>定义</b> <a href="#l00095">hash.hpp:95</a></div></div>
+<div class="ttc" id="agroup___hash_traits_html_ga0873ccaf650ced3e79dd80f0f4945f47"><div class="ttname"><a href="group___hash_traits.html#ga0873ccaf650ced3e79dd80f0f4945f47">MSTL::is_hash_v</a></div><div class="ttdeci">constexpr bool is_hash_v</div><div class="ttdoc">is_hash的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="#l00340">hash.hpp:340</a></div></div>
+<div class="ttc" id="agroup___hash_traits_html_ga2b6bb68d19cdee24ee32e1c079c69205"><div class="ttname"><a href="group___hash_traits.html#ga2b6bb68d19cdee24ee32e1c079c69205">MSTL::is_nothrow_hashable_v</a></div><div class="ttdeci">constexpr bool is_nothrow_hashable_v</div><div class="ttdoc">is_nothrow_hashable的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="#l00311">hash.hpp:311</a></div></div>
+<div class="ttc" id="agroup___murmur_hash_html_ga4e661463372484f308f0d46146bf5a1e"><div class="ttname"><a href="group___murmur_hash.html#ga4e661463372484f308f0d46146bf5a1e">MSTL::MurmurHash_x32</a></div><div class="ttdeci">uint32_t MurmurHash_x32(const void *key, size_t len, uint32_t seed) noexcept</div><div class="ttdoc">MurmurHash3_x86_32算法</div></div>
+<div class="ttc" id="agroup___murmur_hash_html_gaa2737d5fa875e0a2e7ab121a1b1c7c81"><div class="ttname"><a href="group___murmur_hash.html#gaa2737d5fa875e0a2e7ab121a1b1c7c81">MSTL::MurmurHash_x64</a></div><div class="ttdeci">murmur_hash MurmurHash_x64(const void *key, size_t len, uint32_t seed) noexcept</div><div class="ttdoc">MurmurHash3_x64_128算法</div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga208ddcbc552de9327a7f923ba8980fda"><div class="ttname"><a href="group___namespace_macros.html#ga208ddcbc552de9327a7f923ba8980fda">MSTL_END_CONSTANTS__</a></div><div class="ttdeci">#define MSTL_END_CONSTANTS__</div><div class="ttdoc">结束constants命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00261">c++config.hpp:261</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga338d51fe45d14dce2326fd31299a045d"><div class="ttname"><a href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div><div class="ttdeci">#define MSTL_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00236">c++config.hpp:236</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga55ab48c89d9f1d61c656ef06bbc7891f"><div class="ttname"><a href="group___namespace_macros.html#ga55ab48c89d9f1d61c656ef06bbc7891f">_CONSTANTS</a></div><div class="ttdeci">#define _CONSTANTS</div><div class="ttdoc">constants命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00267">c++config.hpp:267</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga8256e91c9f9db765e31fefdb1f67d890"><div class="ttname"><a href="group___namespace_macros.html#ga8256e91c9f9db765e31fefdb1f67d890">MSTL_BEGIN_CONSTANTS__</a></div><div class="ttdeci">#define MSTL_BEGIN_CONSTANTS__</div><div class="ttdoc">开始constants命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00255">c++config.hpp:255</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gae231c5cb21608c74e6e1ff2651894959"><div class="ttname"><a href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div><div class="ttdeci">#define MSTL_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00230">c++config.hpp:230</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_ga00d7fd2b04a7ff4df689b2f6bae8a5da"><div class="ttname"><a href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">MSTL::size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00138">types.hpp:138</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_gaa819092ec1c77fc712f5ad68a57f3503"><div class="ttname"><a href="group___platform_dependent_types.html#gaa819092ec1c77fc712f5ad68a57f3503">MSTL::uintptr_t</a></div><div class="ttdeci">uint64_t uintptr_t</div><div class="ttdoc">可容纳指针的无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00170">types.hpp:170</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_ga0fdbd1076bfada90af67922b4d6aeae7"><div class="ttname"><a href="group___type_traits_utilities.html#ga0fdbd1076bfada90af67922b4d6aeae7">MSTL::true_type</a></div><div class="ttdeci">bool_constant&lt; true &gt; true_type</div><div class="ttdoc">表示true的类型</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00062">type_traits.hpp:62</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_ga5fb34e6944aa6edc666ade6a94377a06"><div class="ttname"><a href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">MSTL::enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gac7d108b842bab8a0b4b716bcfac22d81"><div class="ttname"><a href="group___type_traits_utilities.html#gac7d108b842bab8a0b4b716bcfac22d81">MSTL::void_t</a></div><div class="ttdeci">void void_t</div><div class="ttdoc">将任意类型映射为void</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00090">type_traits.hpp:90</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gae4ca0ae0cb41ccd3887c312f3f9b347e"><div class="ttname"><a href="group___type_traits_utilities.html#gae4ca0ae0cb41ccd3887c312f3f9b347e">MSTL::false_type</a></div><div class="ttdeci">bool_constant&lt; false &gt; false_type</div><div class="ttdoc">表示false的类型</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00063">type_traits.hpp:63</a></div></div>
+<div class="ttc" id="ahash_8hpp_html_a743e1a90f2b8603feffb13e065a36aa8"><div class="ttname"><a href="hash_8hpp.html#a743e1a90f2b8603feffb13e065a36aa8">MSTL::constants::FNV_OFFSET_BASIS</a></div><div class="ttdeci">constexpr size_t FNV_OFFSET_BASIS</div><div class="ttdoc">FNV哈希算法的偏移基础值</div><div class="ttdef"><b>定义</b> <a href="#l00063">hash.hpp:63</a></div></div>
+<div class="ttc" id="ahash_8hpp_html_adafb05171be8cffc05ea707d0b2faa85"><div class="ttname"><a href="hash_8hpp.html#adafb05171be8cffc05ea707d0b2faa85">MSTL::constants::FNV_PRIME</a></div><div class="ttdeci">constexpr size_t FNV_PRIME</div><div class="ttdoc">FNV哈希算法的质数乘数</div><div class="ttdef"><b>定义</b> <a href="#l00074">hash.hpp:76</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1hash_html"><div class="ttname"><a href="struct_m_s_t_l_1_1hash.html">MSTL::hash</a></div><div class="ttdoc">哈希函数的主模板</div><div class="ttdef"><b>定义</b> <a href="#l00031">hash.hpp:31</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1integral__constant_html_a484faa6621b0517bd4b172ddb53d72e7"><div class="ttname"><a href="struct_m_s_t_l_1_1integral__constant.html#a484faa6621b0517bd4b172ddb53d72e7">MSTL::integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00031">type_traits.hpp:31</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1is__convertible_html"><div class="ttname"><a href="struct_m_s_t_l_1_1is__convertible.html">MSTL::is_convertible</a></div><div class="ttdoc">判断类型From是否可以隐式转换为类型To</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03051">type_traits.hpp:3053</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1is__hash_html"><div class="ttname"><a href="struct_m_s_t_l_1_1is__hash.html">MSTL::is_hash</a></div><div class="ttdoc">判断类型是否为有效的哈希函数</div><div class="ttdef"><b>定义</b> <a href="#l00325">hash.hpp:325</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1is__nothrow__hashable_html"><div class="ttname"><a href="struct_m_s_t_l_1_1is__nothrow__hashable.html">MSTL::is_nothrow_hashable</a></div><div class="ttdoc">判断类型是否可无异常哈希</div><div class="ttdef"><b>定义</b> <a href="#l00297">hash.hpp:297</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1murmur__hash_html"><div class="ttname"><a href="struct_m_s_t_l_1_1murmur__hash.html">MSTL::murmur_hash</a></div><div class="ttdoc">MurmurHash_x64的128位哈希结果容器</div><div class="ttdef"><b>定义</b> <a href="#l00235">hash.hpp:235</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1murmur__hash_html_a8052ecc9004780bae02e0068282205e2"><div class="ttname"><a href="struct_m_s_t_l_1_1murmur__hash.html#a8052ecc9004780bae02e0068282205e2">MSTL::murmur_hash::high</a></div><div class="ttdeci">size_t high</div><div class="ttdoc">哈希值的高64位</div><div class="ttdef"><b>定义</b> <a href="#l00237">hash.hpp:237</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1murmur__hash_html_aca35490055af78f26d4121f1ec5277c7"><div class="ttname"><a href="struct_m_s_t_l_1_1murmur__hash.html#aca35490055af78f26d4121f1ec5277c7">MSTL::murmur_hash::low</a></div><div class="ttdeci">size_t low</div><div class="ttdoc">哈希值的低64位</div><div class="ttdef"><b>定义</b> <a href="#l00236">hash.hpp:236</a></div></div>
+<div class="ttc" id="atype__traits_8hpp_html"><div class="ttname"><a href="type__traits_8hpp.html">type_traits.hpp</a></div><div class="ttdoc">MSTL类型特性库</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>functional</b></li><li class="navelem"><a href="hash_8hpp.html">hash.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>
