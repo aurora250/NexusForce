@@ -1,14 +1,12 @@
-#ifndef MSTL_CORE_UTILITY_POINTER_TRAITS_HPP__
-#define MSTL_CORE_UTILITY_POINTER_TRAITS_HPP__
+#ifndef MSTL_CORE_TYPEINFO_POINTER_TRAITS_HPP__
+#define MSTL_CORE_TYPEINFO_POINTER_TRAITS_HPP__
 
 /**
  * @file pointer_traits.hpp
- * @brief MSTL指针特性库
- * @namespace MSTL
- * @ingroup PointerTraits
+ * @brief MSTL指针萃取
  *
- * 此文件提供了指针特性的实现，用于抽象和操作不同类型的指针。
- * 支持标准指针、智能指针、分配器指针等各种指针类型的统一操作。
+ * 此文件提供了指针萃取的实现，用于抽象和操作不同类型的指针，
+ * 以支持各种指针类型的统一操作。
  */
 
 #include "type_traits.hpp"
@@ -16,7 +14,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup PointerTraitsUtilities 指针特性工具
+ * @defgroup PointerTraitsUtilities 指针信息辅助工具
  * @brief 提取和操作指针类型元信息的辅助工具
  * @{
  */
@@ -128,12 +126,17 @@ using get_rebind_type_t = typename get_rebind_type<T, U>::type;
 
 /** @} */ // PointerTraitsUtilities
 
-MSTL_BEGIN_INNER__
+/**
+ * @defgroup PointerTraits 指针萃取
+ * @brief 统一处理各种指针类型的特性
+ * @{
+ */
 
 /// @cond
+MSTL_BEGIN_INNER__
 
 /**
- * @struct __ptr_traits_base
+ * @struct pointer_traits_base
  * @brief 指针特性的基础实现类
  * @tparam Ptr 指针类型
  * @tparam Elem 元素类型
@@ -147,7 +150,7 @@ MSTL_BEGIN_INNER__
  * - pointer_to: 从引用创建指针的静态方法
  */
 template <typename Ptr, typename Elem>
-struct __ptr_traits_base {
+struct pointer_traits_base {
     using pointer = Ptr;  ///< 指针类型
     using element_type = Elem;  ///< 元素类型
     using difference_type = get_ptr_difference_type_t<Ptr>;  ///< 差值类型
@@ -176,22 +179,17 @@ struct __ptr_traits_extract {};
 
 template <typename T, typename U>
 struct __ptr_traits_extract<T, U, void_t<get_first_parameter_t<T>>>
-    : __ptr_traits_base<T, typename get_first_parameter<T>::type> {
+    : pointer_traits_base<T, typename get_first_parameter<T>::type> {
 };
 
 template <typename T>
 struct __ptr_traits_extract<T, void_t<typename T::element_type>, void>
-    : __ptr_traits_base<T, typename T::element_type> {
+    : pointer_traits_base<T, typename T::element_type> {
 };
-/// @endcond
 
 MSTL_END_INNER__
+/// @endcond
 
-/**
- * @defgroup PointerTraits 指针特性操作
- * @brief 统一处理各种指针类型的特性
- * @{
- */
 
 /**
  * @struct pointer_traits
@@ -273,8 +271,9 @@ constexpr decltype(auto) ptr_const_cast(T* ptr) noexcept {
     return const_cast<remove_const_t<T>*>(ptr);
 }
 
-MSTL_BEGIN_INNER__
+
 /// @cond
+MSTL_BEGIN_INNER__
 
 template <typename T>
 constexpr T* __to_address(T* ptr) noexcept {
@@ -297,8 +296,9 @@ constexpr decltype(auto) __to_address(const Ptr& ptr, None...) noexcept {
     return __to_address(ptr.base().operator->());
 }
 
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
+
 
 /**
  * @brief 安全地获取原始指针指向的地址
@@ -325,8 +325,8 @@ constexpr decltype(auto) to_address(const Ptr& ptr) noexcept {
 /** @} */ // PointerTraits
 
 /**
- * @defgroup AllocatorTraitsExtractors 分配器特性提取器
- * @brief 从分配器类型中提取相关特性
+ * @defgroup AllocatorTraitsExtractors 分配器特性萃取器
+ * @brief 从分配器类型中萃取相关特性
  * @{
  */
 
@@ -392,4 +392,4 @@ struct get_size_type<T, void_t<typename T::size_type>> {
 /** @} */ // AllocatorTraitsExtractors
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_UTILITY_POINTER_TRAITS_HPP__
+#endif // MSTL_CORE_TYPEINFO_POINTER_TRAITS_HPP__

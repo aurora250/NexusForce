@@ -4,8 +4,6 @@
 /**
  * @file types.hpp
  * @brief MSTL核心类型定义
- * @namespace MSTL
- * @ingroup TypeAlias
  *
  * 此文件定义了MSTL库中的基本类型别名、固定大小类型和平台相关的类型定义，提供统一和跨平台的基本类型。
  */
@@ -37,13 +35,6 @@ using max_align_t = double;
  */
 using byte_t      = unsigned char;
 
-/** @} */ // CoreTypes
-
-/**
- * @defgroup FixedWidthIntegers 固定宽度整数类型
- * @brief 精确宽度的整数类型定义
- * @{
- */
 
 /**
  * @typedef int8_t
@@ -63,18 +54,17 @@ using int16_t	= short;
  */
 using int32_t	= int;
 
+/**
+ * @typedef int64_t
+ * @brief 64位有符号整数类型
+ *
+ * Linux为long，Windows为long long
+ */
+using int64_t	=
 #ifdef MSTL_PLATFORM_LINUX64__
-/**
- * @typedef int64_t
- * @brief 64位有符号整数类型
- */
-using int64_t	= long;
+    long;
 #else
-/**
- * @typedef int64_t
- * @brief 64位有符号整数类型
- */
-using int64_t	= long long;
+    long long;
 #endif
 
 /**
@@ -95,27 +85,19 @@ using uint16_t	= unsigned short;
  */
 using uint32_t	= unsigned int;
 
+/**
+ * @typedef uint64_t
+ * @brief 64位无符号整数类型
+ *
+ * Linux为unsigned long，Windows为unsigned long long
+ */
+using uint64_t	=
 #ifdef MSTL_PLATFORM_LINUX64__
-/**
- * @typedef uint64_t
- * @brief 64位无符号整数类型
- */
-using uint64_t	= unsigned long;
+    unsigned long;
 #else
-/**
- * @typedef uint64_t
- * @brief 64位无符号整数类型
- */
-using uint64_t	= unsigned long long;
+    unsigned long long;
 #endif
 
-/** @} */ // FixedWidthIntegers
-
-/**
- * @defgroup FloatingPointTypes 浮点数类型
- * @brief 浮点数类型定义
- * @{
- */
 
 /**
  * @typedef float32_t
@@ -137,7 +119,7 @@ using float64_t	= double;
  */
 using decimal_t = long double;
 
-/** @} */ // FloatingPointTypes
+/** @} */ // CoreTypes
 
 /**
  * @defgroup PlatformDependentTypes 平台相关类型
@@ -145,35 +127,45 @@ using decimal_t = long double;
  * @{
  */
 
-#ifdef MSTL_DATA_BUS_WIDTH_64__
+#if defined(MSTL_DATA_BUS_WIDTH_64__) || defined(MSTL_DOXYGEN_GENERATE)
 
 /**
  * @typedef size_t
  * @brief 无符号大小类型
+ *
+ * 64位下为为uint64_t，32位下为uint32_t。文档以64位平台为例。
  */
 using size_t	= uint64_t;
 
 /**
  * @typedef ssize_t
  * @brief 有符号大小类型
+ *
+ * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
  */
 using ssize_t	= int64_t;
 
 /**
  * @typedef ptrdiff_t
  * @brief 指针差类型
+ *
+ * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
  */
 using ptrdiff_t = int64_t;
 
 /**
  * @typedef intptr_t
  * @brief 可容纳指针的有符号整数类型
+ *
+ * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
  */
 using intptr_t	= int64_t;
 
 /**
  * @typedef uintptr_t
  * @brief 可容纳指针的无符号整数类型
+ *
+ * 64位下为为uint64_t，32位下为uint32_t。文档以64位平台为例。
  */
 using uintptr_t = uint64_t;
 
@@ -211,13 +203,6 @@ using uintptr_t = uint32_t;
 
 #endif
 
-/** @} */ // PlatformDependentTypes
-
-/**
- * @defgroup LeastFastTypes 最小和最快类型
- * @brief 至少指定宽度和最快访问的类型定义
- * @{
- */
 
 /**
  * @typedef int_least8_t
@@ -275,13 +260,13 @@ using int_fast8_t    = int8_t;
 
 /**
  * @typedef int_fast16_t
- * @brief 快速16位有符号整数类型（使用ssize_t）
+ * @brief 快速16位有符号整数类型
  */
 using int_fast16_t   = ssize_t;
 
 /**
  * @typedef int_fast32_t
- * @brief 快速32位有符号整数类型（使用ssize_t）
+ * @brief 快速32位有符号整数类型
  */
 using int_fast32_t   = ssize_t;
 
@@ -299,13 +284,13 @@ using uint_fast8_t   = uint8_t;
 
 /**
  * @typedef uint_fast16_t
- * @brief 快速16位无符号整数类型（使用size_t）
+ * @brief 快速16位无符号整数类型
  */
 using uint_fast16_t  = size_t;
 
 /**
  * @typedef uint_fast32_t
- * @brief 快速32位无符号整数类型（使用size_t）
+ * @brief 快速32位无符号整数类型
  */
 using uint_fast32_t  = size_t;
 
@@ -315,13 +300,6 @@ using uint_fast32_t  = size_t;
  */
 using uint_fast64_t  = uint64_t;
 
-/** @} */ // LeastFastTypes
-
-/**
- * @defgroup MaxWidthIntegers 最大宽度整数类型
- * @brief 能够容纳最大整数值的类型
- * @{
- */
 
 /**
  * @typedef intmax_t
@@ -335,13 +313,6 @@ using intmax_t	= int64_t;
  */
 using uintmax_t = uint64_t;
 
-/** @} */ // MaxWidthIntegers
-
-/**
- * @defgroup TypeAliasMacros 类型别名宏
- * @brief 用于快速定义标准类型别名的宏
- * @{
- */
 
 /**
  * @def MSTL_BUILD_TYPE_ALIAS
@@ -354,20 +325,9 @@ using uintmax_t = uint64_t;
  * - reference: 引用类型
  * - const_pointer: 常量指针类型
  * - const_reference: 常量引用类型
- * - size_type: 大小类型（使用size_t）
- * - difference_type: 差值类型（使用ptrdiff_t）
- *
- * @code
- * // 使用示例：
- * template <typename T>
- * class MyContainer {
- *     MSTL_BUILD_TYPE_ALIAS(T);
- *     // 现在可以快速使用value_type、pointer等类型别名
- * };
- * @endcode
+ * - size_type: 大小类型，使用size_t
+ * - difference_type: 差值类型，使用ptrdiff_t
  */
-
-// quickly define standard type alias.
 #define MSTL_BUILD_TYPE_ALIAS(TYPE) \
 using value_type        = TYPE; \
 using pointer           = TYPE*; \
@@ -377,7 +337,7 @@ using const_reference   = const TYPE&; \
 using size_type         = size_t; \
 using difference_type   = ptrdiff_t;
 
-/** @} */ // TypeAliasMacros
+/** @} */ // PlatformDependentTypes
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_TYPEINFO_TYPES_HPP__

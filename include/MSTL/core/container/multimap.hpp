@@ -175,9 +175,9 @@ public:
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Compare, typename Alloc
-	= allocator<pair<const get_iter_key_t<Iterator>, get_iter_val_t<Iterator>>>>
+	= allocator<pair<const iter_map_key_t<Iterator>, iter_map_value_t<Iterator>>>>
 multimap(Iterator, Iterator, Compare = Compare(), Alloc = Alloc()) ->
-	multimap<get_iter_key_t<Iterator>, get_iter_val_t<Iterator>, Compare, Alloc>;
+	multimap<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, Compare, Alloc>;
 
 template <typename Key, typename T, typename Compare = less<Key>, typename Alloc
 	= allocator<pair<const Key, T>>>
@@ -186,7 +186,7 @@ multimap(std::initializer_list<pair<Key, T>>, Compare = Compare(), Alloc = Alloc
 
 template <typename Iterator, typename Alloc>
 multimap(Iterator, Iterator, Alloc) ->
-multimap<get_iter_key_t<Iterator>, get_iter_val_t<Iterator>, less<get_iter_key_t<Iterator>>, Alloc>;
+multimap<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, less<iter_map_key_t<Iterator>>, Alloc>;
 
 template <typename Key, typename T, typename Alloc>
 multimap(std::initializer_list<pair<Key, T>>, Alloc) -> multimap<Key, T, less<Key>, Alloc>;

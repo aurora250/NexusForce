@@ -4,8 +4,6 @@
 /**
  * @file integer_sequence.hpp
  * @brief MSTL整数序列工具
- * @namespace MSTL
- * @ingroup IntegerSequence
  *
  * 此文件提供了编译时整数序列的实现，用于模板元编程和可变模板参数展开，
  * 支持相关工具，以及编译器特定的优化实现。

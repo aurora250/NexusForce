@@ -366,7 +366,7 @@ void test_print() {
     println(pir, cp);
     println('c', nullptr);
     println(&RB_TREE_RED, &RB_TREE_BLACK);
-    println(f, static_cast<size_t>(enu), uni);
+    println(f, static_cast<size_t>(enu));
     println(escape("\n\\\"\v"), cs, err);
     println(p, c_arr, arr);
     println(lls);

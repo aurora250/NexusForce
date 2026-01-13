@@ -4,8 +4,6 @@
 /**
  * @file hash.hpp
  * @brief MSTL哈希函数库
- * @namespace MSTL
- * @ingroup Hash
  *
  * 此文件提供了各种哈希算法的实现，包括FNV-1a、DJB2和MurmurHash等，
  * 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。
@@ -60,7 +58,7 @@ MSTL_BEGIN_CONSTANTS__
 /**
  * @var FNV_OFFSET_BASIS
  * @brief FNV哈希算法的偏移基础值
- * @note 根据平台位数使用不同的值
+ * @note 根据平台位数使用不同的值，文档以64位为例。
  */
 MSTL_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
 #ifdef MSTL_DATA_BUS_WIDTH_64__
@@ -71,13 +69,13 @@ MSTL_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
 /**
  * @var FNV_PRIME
  * @brief FNV哈希算法的质数乘数
- * @note 根据平台位数使用不同的值
+ * @note 根据平台位数使用不同的值，文档以64位为例。
  */
-MSTL_INLINE17 constexpr size_t FNV_PRIME =
+MSTL_INLINE17 constexpr size_t FNV_PRIME
 #ifdef MSTL_DATA_BUS_WIDTH_64__
-    1099511628211ULL;
+     = 1099511628211ULL;
 #else
-    16777619U;
+     = 16777619U;
 #endif
 MSTL_END_CONSTANTS__
 
@@ -104,8 +102,8 @@ MSTL_CONSTEXPR14 size_t FNV_hash(const byte_t* first, const size_t count) noexce
 }
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 
 /**
  * @brief 整数类型的FNV哈希
@@ -113,8 +111,10 @@ MSTL_BEGIN_INNER__
  * @param value 要哈希的整数值
  * @return 整数的哈希值
  */
-template <typename T, enable_if_t<is_integral<T>::value, int> = 0>
+template <typename T>
 MSTL_CONSTEXPR14 size_t FNV_hash_integer(const T& value) noexcept {
+    static_assert(is_integral<T>::value, "T must be integral");
+
     size_t result = _CONSTANTS FNV_OFFSET_BASIS;
     for (size_t i = 0; i < sizeof(T); ++i) {
         const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
@@ -133,6 +133,8 @@ MSTL_CONSTEXPR14 size_t FNV_hash_integer(const T& value) noexcept {
  */
 template <typename CharT>
 MSTL_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
+    static_assert(is_character<CharT>::value, "CharT must be character types");
+
     size_t result = _CONSTANTS FNV_OFFSET_BASIS;
     for (size_t i = 0; i < len; ++i) {
         result ^= static_cast<size_t>(static_cast<byte_t>(str[i]));
@@ -141,8 +143,8 @@ MSTL_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noex
     return result;
 }
 
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /** @} */ // FNVHash
 

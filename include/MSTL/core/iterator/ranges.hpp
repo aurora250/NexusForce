@@ -21,12 +21,6 @@ concept common_range = Range<R> && same_as<
 template <typename V>
 concept View = Range<V> && move_constructible<V>;
 
-template <typename F, typename T>
-concept Predicate = predicate<F, T>;
-
-template <typename F, typename T>
-concept UnaryFunction = invocable<F, T>;
-
 
 template <Range R, typename Adaptor>
 constexpr auto operator |(R&& range, Adaptor&& adaptor) {
@@ -1744,12 +1738,12 @@ struct take_adaptor_closure : range_adaptor_closure<take_adaptor_closure<DiffTyp
 };
 
 struct take_adaptor {
-    template <integral N>
+    template <typename N> requires is_integral_v<N>
     constexpr auto operator ()(N count) const {
         return take_adaptor_closure<N>{count};
     }
 
-    template <Range R, integral N>
+    template <Range R, typename N> requires is_integral_v<N>
     constexpr auto operator ()(R&& range, N count) const {
         return take_view{all(_MSTL forward<R>(range)), count};
     }
@@ -1798,12 +1792,12 @@ struct drop_adaptor_closure : range_adaptor_closure<drop_adaptor_closure<DiffTyp
 };
 
 struct drop_adaptor {
-    template <integral N>
+    template <typename N> requires is_integral_v<N>
     constexpr auto operator ()(N count) const {
         return drop_adaptor_closure<N>{count};
     }
 
-    template <Range R, integral N>
+    template <Range R, typename N> requires is_integral_v<N>
     constexpr auto operator ()(R&& range, N count) const {
         return drop_view{all(_MSTL forward<R>(range)), count};
     }
@@ -1883,7 +1877,7 @@ struct repeat_adaptor {
         return repeat_view<T>{_MSTL move(value)};
     }
 
-    template <typename T, integral N>
+    template <typename T, typename N> requires is_integral_v<N>
     constexpr auto operator ()(T value, N count) const {
         return repeat_view<T>{_MSTL move(value), static_cast<ptrdiff_t>(count)};
     }
@@ -1976,7 +1970,7 @@ MSTL_INLINE17 constexpr common_adaptor common;
 
 
 struct counted_adaptor {
-    template <typename Iter, integral N>
+    template <typename Iter, typename N> requires is_integral_v<N>
     constexpr auto operator ()(Iter iter, N count) const {
         return counted_view{iter, static_cast<iter_difference_t<Iter>>(count)};
     }

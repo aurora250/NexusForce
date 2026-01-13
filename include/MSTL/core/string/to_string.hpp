@@ -10,22 +10,18 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& value) {
     return to_string(package_t<T>(value));
 }
 
-
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(nullptr_t) {
     return {"nullptr"};
 }
+
 template <typename T, enable_if_t<is_pointer_v<T> && !is_cstring_v<T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
     return _MSTL address_string(x);
 }
 
-template <typename T, enable_if_t<is_union_v<T>, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
-    return _MSTL address_string(&x);
-}
-
 
 MSTL_BEGIN_INNER__
+
 template <typename Collector>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string collector_to_string(const Collector& c) {
     if (_MSTL empty(c)) return {"[]"};
@@ -38,6 +34,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string collector_to_string(const Collector& c) {
     result += " ]";
     return result;
 }
+
 MSTL_END_INNER__
 
 template <typename T, enable_if_t<is_base_of_v<icollector<T>, T>, int> = 0>
@@ -50,27 +47,102 @@ template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T&) {
     return {"[]"};
 }
+
 template <typename T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
     return _INNER collector_to_string(x);
 }
 
+MSTL_BEGIN_INNER__
+
+template <typename T, T N>
+constexpr const char* __get_enum_name_raw() {
+#ifdef MSTL_COMPILER_MSVC__
+    return __FUNCSIG__;
+#else
+    return __PRETTY_FUNCTION__;
+#endif
+}
+
+template <ssize_t Beg, ssize_t End, typename F, enable_if_t<Beg == End, int> = 0>
+MSTL_CONSTEXPR20 void static_for(const F&) {}
+
+template <ssize_t Beg, ssize_t End, typename F, enable_if_t<Beg != End, int> = 0>
+MSTL_CONSTEXPR20 void static_for(const F& func) {
+    func.template call<Beg>();
+    _INNER static_for<Beg + 1, End>(func);
+}
+
+template <typename T>
+struct __enum_name_functor {
+    using UT = underlying_type_t<T>;
+
+    UT n;
+    string &s;
+
+    __enum_name_functor(UT n, string &s) : n(n), s(s) {}
+
+    template <UT I>
+    MSTL_CONSTEXPR20 void call() const {
+        if (n == I) {
+            s = __get_enum_name_raw<T, static_cast<T>(I)>();
+        }
+    }
+};
+
+MSTL_END_INNER__
+
+template <typename T, T Beg, T End>
+MSTL_CONSTEXPR20 string enum_name(T n) {
+    static_assert(is_enum_v<T>, "T must be an enumeration");
+    string s;
+    using UT = underlying_type_t<T>;
+    _INNER static_for<static_cast<UT>(Beg), static_cast<UT>(End) + 1>(
+        _INNER __enum_name_functor<T>(static_cast<UT>(n), s));
+    if (s.empty()) {
+        return "";
+    }
+#ifdef MSTL_COMPILER_MSVC__
+    size_t pos = s.find(',');
+    pos += 1;
+    size_t pos2 = s.find('>', pos);
+#else
+    size_t pos = s.find("N = ");
+    pos += 4;
+    size_t pos2 = s.find_first_of(";]", pos);
+#endif
+    s = s.substr(pos, pos2 - pos);
+    const size_t pos3 = s.rfind("::");
+    if (pos3 != s.npos) {
+        s = s.substr(pos3 + 2);
+    }
+    return s;
+}
+
+template <typename T>
+MSTL_CONSTEXPR20 string enum_name(T n) {
+    return _MSTL enum_name<T, static_cast<T>(0), static_cast<T>(256)>(n);
+}
+
+template <typename T, enable_if_t<is_enum_v<T>, int> = 0>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
+    return _MSTL enum_name(x);
+}
 
 template <typename T, enable_if_t<is_base_of_v<_MSTL exception, T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& obj) {
     return string(obj.type()) + "(" + obj.what() + ")";
 }
 
-
 template <typename IfEmpty, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const compressed_pair<IfEmpty, T, true>& obj) {
     return to_string(obj.value);
 }
+
 template <typename IfEmpty, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const compressed_pair<IfEmpty, T, false>& obj) {
     return "{ " + to_string(obj.value) + ", " + to_string(obj.no_compressed) + " }";
 }
-
 
 template <typename T1, typename T2>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
@@ -79,19 +151,23 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
 
 
 MSTL_BEGIN_INNER__
+
 template <typename Tuple, size_t I, enable_if_t<I == tuple_size_v<Tuple> - 1, int> = 0>
 MSTL_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& result) {
     result += to_string(_MSTL get<I>(t));
 }
+
 template <typename Tuple, size_t I, enable_if_t<I < tuple_size_v<Tuple> - 1, int> = 0>
 MSTL_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& result) {
     result += to_string(_MSTL get<I>(t)) + ", ";
     _INNER __to_string_tuple_elements<Tuple, I + 1>(t, result);
 }
+
 template <typename... UArgs, enable_if_t<sizeof...(UArgs) == 0, int> = 0>
 MSTL_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>&) {
     return {"()"};
 }
+
 template <typename... UArgs, enable_if_t<sizeof...(UArgs) != 0, int> = 0>
 MSTL_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>& t) {
     string result;
@@ -100,6 +176,7 @@ MSTL_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>& t) {
     result += " )";
     return result;
 }
+
 MSTL_END_INNER__
 
 template <typename... Args>
@@ -110,9 +187,11 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const tuple<Args...>& t) {
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const bstring& x) {
     return string(x.begin(), x.end());
 }
+
 MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string& x) {
     return bstring(x.begin(), x.end());
 }
+
 MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string_view x) {
     return bstring(x.begin(), x.end());
 }

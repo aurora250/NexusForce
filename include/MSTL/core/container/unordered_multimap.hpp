@@ -156,10 +156,10 @@ public:
     }
 };
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
-template <typename Iterator, typename HashFcn = hash<get_iter_key_t<Iterator>>,
-    typename Compare = equal_to<get_iter_key_t<Iterator>>, typename Alloc>
+template <typename Iterator, typename HashFcn = hash<iter_map_key_t<Iterator>>,
+    typename Compare = equal_to<iter_map_key_t<Iterator>>, typename Alloc>
 unordered_multimap(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
--> unordered_multimap<get_iter_key_t<Iterator>, get_iter_val_t<Iterator>, HashFcn, Compare, Alloc>;
+-> unordered_multimap<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>,
     typename Alloc = allocator<pair<const Key, T>>>
@@ -167,12 +167,12 @@ unordered_multimap(std::initializer_list<pair<Key, T>>, HashFcn = HashFcn(), Com
 -> unordered_multimap<Key, T, HashFcn, Compare, Alloc>;
 
 template <typename Iterator, typename Alloc>
-unordered_multimap(Iterator, Iterator, Alloc) -> unordered_multimap<get_iter_key_t<Iterator>, get_iter_val_t<Iterator>,
-    hash<get_iter_key_t<Iterator>>, equal_to<get_iter_key_t<Iterator>>, Alloc>;
+unordered_multimap(Iterator, Iterator, Alloc) -> unordered_multimap<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>,
+    hash<iter_map_key_t<Iterator>>, equal_to<iter_map_key_t<Iterator>>, Alloc>;
 
 template <typename Iterator, typename HashFcn, typename Alloc>
-unordered_multimap(Iterator, Iterator, HashFcn, Alloc) -> unordered_multimap<get_iter_key_t<Iterator>,
-    get_iter_val_t<Iterator>, HashFcn, equal_to<get_iter_key_t<Iterator>>, Alloc>;
+unordered_multimap(Iterator, Iterator, HashFcn, Alloc) -> unordered_multimap<iter_map_key_t<Iterator>,
+    iter_map_value_t<Iterator>, HashFcn, equal_to<iter_map_key_t<Iterator>>, Alloc>;
 
 template <typename Key, typename T, typename Alloc>
 unordered_multimap(std::initializer_list<pair<Key, T>>, Alloc)

@@ -206,6 +206,7 @@ public:
 };
 
 
+#ifdef MSTL_STANDARD_20__
 template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<_MSTL_RANGES view_base<T>, T>>> {
     static void write(sys_console& console, const T& value) {
@@ -223,6 +224,7 @@ struct io_base<T, enable_if_t<is_base_of_v<_MSTL_RANGES view_base<T>, T>>> {
         console.print_string(result.view());
     }
 };
+#endif
 
 template <typename T>
 struct io_base<T, enable_if_t<is_base_of_v<istringify<T>, T> && !is_base_of_v<iobject<T>, T>>> {
@@ -263,7 +265,6 @@ struct io_base<T, enable_if_t<is_packaged_v<T>>> {
         value = package_t<T>::parse(console.readln().view());
     }
 };
-
 
 template <typename T>
 struct io_base<T, enable_if_t<is_null_pointer_v<T>>> {
@@ -313,15 +314,6 @@ struct io_base<basic_string<CharT, Traits, Alloc>> {
         console.print_string(_MSTL to_string(value));
     }
 };
-
-
-template <typename T>
-struct io_base<T, enable_if_t<is_union_v<T>>> {
-    static void write(sys_console& console, const T& value) {
-        console.print_string(_MSTL to_string(value));
-    }
-};
-
 
 template <typename T>
 struct io_base<T, enable_if_t<is_unbounded_array_v<T>>> {

@@ -4,8 +4,6 @@
 /**
  * @file reference_wrapper.hpp
  * @brief MSTL引用包装器
- * @namespace MSTL
- * @ingroup ReferenceWrapper
  *
  * 此文件提供了引用包装器的实现，用于在容器和算法中存储引用，提供类型安全的引用包装功能。
  */
@@ -13,66 +11,28 @@
 #include "../typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-/**
- * @defgroup RefWrapperConstruction 引用包装器构造检查
- * @brief 检查类型是否可以构造引用包装器的辅助工具
- * @{
- */
-
 MSTL_BEGIN_INNER__
 /// @cond
 
-// 引用包装器构造检查的辅助函数
-/**
- * @brief 检查是否可以构造左值引用包装器
- * @tparam T 目标类型
- * @note 仅用于SFINAE检测，不实现函数体
- */
 template <typename T>
 void __ref_wrapper_construct_aux(type_identity_t<T&>) noexcept;
-
-/**
- * @brief 禁止构造右值引用包装器
- * @tparam T 目标类型
- * @note 删除右值版本，防止悬垂引用
- */
 template <typename T>
 void __ref_wrapper_construct_aux(type_identity_t<T&&>) = delete;
 
-/// @endcond
-MSTL_END_INNER__
 
-/**
- * @struct ref_wrapper_constructable_from
- * @brief 检查是否可以从类型U构造reference_wrapper<T>
- * @tparam T 引用包装的目标类型
- * @tparam U 源类型
- * @tparam Dummy SFINAE参数，默认为void
- */
 template <typename T, typename U, typename Dummy = void>
 struct ref_wrapper_constructable_from : false_type {};
 
-/// @cond
 template <typename T, typename U>
 struct ref_wrapper_constructable_from<T, U, void_t<
     decltype(_INNER __ref_wrapper_construct_aux<T>(_MSTL declval<U>()))>>
     : true_type {};
-/// @endcond
 
-#ifdef MSTL_STANDARD_14__
-/**
- * @var ref_wrapper_constructable_from_v
- * @brief ref_wrapper_constructable_from的便捷变量模板
- */
-template <typename T, typename U>
-MSTL_INLINE17 constexpr bool ref_wrapper_constructable_from_v = ref_wrapper_constructable_from<T, U>::value;
-#endif
 
-/** @} */ // RefWrapperConstruction
-
-MSTL_BEGIN_INNER__
 template <typename F, typename... Args>
 struct __invoke_result_aux;
+
+/// @endcond
 MSTL_END_INNER__
 
 template <typename F, typename... Args>
@@ -84,8 +44,8 @@ invoke(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable<Callable, Args...>::value);
 
 /**
- * @defgroup ReferenceWrapper 引用包装器类
- * @brief reference_wrapper类的定义和实现
+ * @defgroup ReferenceWrapper 引用包装
+ * @brief 引用包装相关的类和辅助函数的实现
  * @{
  */
 
@@ -95,6 +55,7 @@ noexcept(is_nothrow_invocable<Callable, Args...>::value);
  * @tparam T 被包装的类型
  *
  * 将引用包装为可复制的值类型，可以在容器中存储引用。
+ *
  * 支持隐式转换为原始引用，以及函数调用运算符。
  */
 template <typename T>
@@ -120,7 +81,7 @@ public:
      */
     template <typename U, enable_if_t<
         conjunction<negation<is_same<remove_cvref_t<U>, reference_wrapper>>,
-            ref_wrapper_constructable_from<T, U>>::value, int> = 0>
+            _INNER ref_wrapper_constructable_from<T, U>>::value, int> = 0>
     MSTL_CONSTEXPR14 reference_wrapper(U&& x)
         noexcept(noexcept(_INNER __ref_wrapper_construct_aux<T>(_MSTL declval<U>()))) {
         T& ref = static_cast<U&&>(x);
@@ -165,13 +126,6 @@ template <typename T>
 reference_wrapper(T&) -> reference_wrapper<T>;
 #endif
 
-/** @} */ // ReferenceWrapper
-
-/**
- * @defgroup RefHelperFunctions 引用辅助函数
- * @brief 创建引用包装器的便捷函数
- * @{
- */
 
 /**
  * @brief 创建引用包装器
@@ -236,13 +190,6 @@ MSTL_NODISCARD constexpr reference_wrapper<const T> cref(reference_wrapper<T> wr
     return wrapper;
 }
 
-/** @} */ // RefHelperFunctions
-
-/**
- * @defgroup UnwrapReference 引用解包
- * @brief 解包引用包装器的类型特性
- * @{
- */
 
 /**
  * @struct unwrap_reference
@@ -272,7 +219,7 @@ using unwrap_reference_t = typename unwrap_reference<T>::type;
 
 
 /**
- * @typedef unwrap_ref_decay
+ * @struct unwrap_ref_decay
  * @brief 先退化类型，再解包引用包装器
  * @tparam T 输入类型
  */
@@ -288,7 +235,7 @@ struct unwrap_ref_decay {
 template <typename T>
 using unwrap_ref_decay_t = typename unwrap_ref_decay<T>::type;
 
-/** @} */ // UnwrapReference
+/** @} */ // ReferenceWrapper
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_UTILITY_REFERENCE_WRAPPER_HPP__

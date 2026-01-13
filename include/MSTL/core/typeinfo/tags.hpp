@@ -4,10 +4,9 @@
 /**
  * @file tags.hpp
  * @brief MSTL核心标签类型定义
- * @namespace MSTL
- * @ingroup Tags
  *
  * 此文件定义了MSTL库中使用的各种标签类型，用于标签分发和类型选择。
+ *
  * 标签类型是空结构体，仅通过类型本身携带信息，不包含数据成员。
  */
 
@@ -18,8 +17,7 @@ MSTL_BEGIN_NAMESPACE__
  * @defgroup IteratorTags 迭代器标签
  * @brief 迭代器类别标签，用于区分不同类型的迭代器
  *
- * 这些标签遵循C++标准迭代器分类体系，通过继承关系表示迭代器能力的层级关系。
- * 在算法中用于选择最优的实现或进行编译时检查。
+ * 这些标签通过继承关系表示迭代器能力的层级关系，在算法中用于选择最优的实现或进行编译时检查。
  * @{
  */
 
@@ -140,12 +138,6 @@ struct contiguous_iterator_tag : random_access_iterator_tag {
  *
  * 用于标记使用分配器作为函数参数的情况。
  * 通常在构造函数中与分配器一起使用，遵循"uses-allocator"构造模式。
- *
- * @example
- * @code
- * // 使用分配器构造对象
- * MyType obj(allocator_arg_tag{}, allocator);
- * @endcode
  */
 struct allocator_arg_tag {
     constexpr allocator_arg_tag() noexcept = default;
@@ -156,12 +148,6 @@ struct allocator_arg_tag {
  * @brief 默认构造标签
  *
  * 表示使用默认构造函数构造对象，不提供任何参数。
- *
- * @example
- * @code
- * // 默认构造对象
- * MyType obj(default_construct_tag{});
- * @endcode
  */
 struct default_construct_tag {
     constexpr default_construct_tag() noexcept = default;
@@ -172,12 +158,6 @@ struct default_construct_tag {
  * @brief 精确参数构造标签
  *
  * 表示使用提供的参数精确构造对象，直接传递参数给构造函数。
- *
- * @example
- * @code
- * // 使用精确参数构造对象
- * MyType obj(exact_arg_construct_tag{}, arg1, arg2);
- * @endcode
  */
 struct exact_arg_construct_tag {
     constexpr exact_arg_construct_tag() noexcept  = default;
@@ -189,12 +169,6 @@ struct exact_arg_construct_tag {
  *
  * 表示在原位置构造对象，避免不必要的拷贝或移动。
  * 通常用于容器中的元素构造。
- *
- * @example
- * @code
- * // 在指定位置原位构造对象
- * container.emplace_back(inplace_construct_tag{}, arg1, arg2);
- * @endcode
  */
 struct inplace_construct_tag {
     constexpr inplace_construct_tag() noexcept  = default;
@@ -205,13 +179,6 @@ struct inplace_construct_tag {
  * @brief 解包工具构造标签
  *
  * 表示通过解包tuple或pair类型的参数来构造对象。
- *
- * @example
- * @code
- * // 通过解包tuple构造对象
- * auto args = make_tuple(arg1, arg2);
- * MyType obj(unpack_utility_construct_tag{}, args);
- * @endcode
  */
 struct unpack_utility_construct_tag {
     constexpr unpack_utility_construct_tag() noexcept = default;

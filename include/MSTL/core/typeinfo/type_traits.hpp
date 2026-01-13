@@ -4,8 +4,6 @@
 /**
  * @file type_traits.hpp
  * @brief MSTL类型特性库
- * @namespace MSTL
- * @ingroup TypeTraits
  *
  * 此文件提供了完整的类型特性实现，用于在编译时查询和操作类型信息。
  */
@@ -14,8 +12,8 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup IntegralConstant 整数常量包装
- * @brief 将整数值包装为类型，用于编译时计算
+ * @defgroup TypeTraitsUtilities 类型推导辅助工具
+ * @brief 类型推导辅助工具类
  * @{
  */
 
@@ -80,13 +78,6 @@ using uint32_constant = integral_constant<uint32_t, Value>;
 template <uint64_t Value>
 using uint64_constant = integral_constant<uint64_t, Value>;
 
-/** @} */ // IntegralConstant
-
-/**
- * @defgroup TypeTraitsUtilities 类型推导辅助工具
- * @brief 类型推导辅助工具类
- * @{
- */
 
 /**
  * @typedef void_t
@@ -102,7 +93,7 @@ using void_t = void;
  * @struct enable_if
  * @brief 条件启用模板
  * @tparam Test 布尔测试条件
- * @tparam T 如果Test为true时启用的类型
+ * @tparam T 如果Test为true时启用的类型，默认为void
  *
  * 当Test为false时，主模板没有::type成员，触发SFINAE。
  * 当Test为true时，特化版本提供::type成员。
@@ -151,13 +142,6 @@ struct conditional<false, T1, T2> {
 template <bool Test, typename T1, typename T2>
 using conditional_t = typename conditional<Test, T1, T2>::type;
 
-/** @} */ // TypeTraitsUtilities
-
-/**
- * @defgroup TypeRelations 类型关系
- * @brief 判断类型间关系的特性
- * @{
- */
 
 /**
  * @struct negation
@@ -267,8 +251,8 @@ MSTL_INLINE17 constexpr bool is_any_of_v = is_any_of<T, Types...>::value;
 
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 // 析取辅助实现
 template <bool, typename first, typename...>
 struct __disjunction_aux {
@@ -278,8 +262,8 @@ template <typename Curr, typename Next, typename... Rest>
 struct __disjunction_aux<false, Curr, Next, Rest...> {
     using type = typename __disjunction_aux<static_cast<bool>(Next::value), Next, Rest...>::type;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct disjunction
@@ -308,8 +292,8 @@ MSTL_INLINE17 constexpr bool disjunction_v = disjunction<Args...>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 // 合取辅助实现
 template <bool, typename First, typename...>
 struct __conjunction_aux {
@@ -319,8 +303,8 @@ template <typename Curr, typename Next, typename... Rest>
 struct __conjunction_aux<true, Curr, Next, Rest...> {
     using type = typename __conjunction_aux<static_cast<bool>(Next::value), Next, Rest...>::type;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct conjunction
@@ -348,10 +332,10 @@ template <typename... Args>
 MSTL_INLINE17 constexpr bool conjunction_v = conjunction<Args...>::value;
 #endif
 
-/** @} */ // TypeRelations
+/** @} */ // TypeTraitsUtilities
 
 /**
- * @defgroup RemoveQualifiers 移除类型限定符
+ * @defgroup RemoveQualifiers 类型修饰移除
  * @brief 移除类型限定符
  * @{
  */
@@ -738,20 +722,20 @@ using remove_function_qualifiers_t = typename remove_function_qualifiers<T>::typ
 /** @} */ // RemoveQualifiers
 
 /**
- * @defgroup TypeProperties 类型属性查询
+ * @defgroup BaseTypeProperties 类型基本属性查询
  * @brief 查询类型的基本属性
  * @{
  */
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename>
 struct __is_void_helper : false_type {};
 
 template <>
 struct __is_void_helper<void> : true_type {};
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct is_void
@@ -933,12 +917,11 @@ struct is_standard_integral : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
 
 #ifdef MSTL_STANDARD_14__
 /**
- * @var is_standard_integer_v
+ * @var is_standard_integral_v
  * @brief is_standard_integral的便捷变量模板
- * @note 注意变量名与类型名不一致
  */
 template <typename T>
-MSTL_INLINE17 constexpr bool is_standard_integer_v = is_standard_integral<T>::value;
+MSTL_INLINE17 constexpr bool is_standard_integral_v = is_standard_integral<T>::value;
 #endif
 
 
@@ -999,8 +982,8 @@ MSTL_INLINE17 constexpr bool is_arithmetic_v = is_arithmetic<T>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T, bool = is_integral<T>::value>
 struct __check_sign_aux {
     static constexpr bool is_signed = static_cast<remove_cvref_t<T>>(-1) < static_cast<remove_cv_t<T>>(0);
@@ -1012,8 +995,8 @@ struct __check_sign_aux<T, false> {
     static constexpr bool is_signed = is_floating_point<T>::value;
     static constexpr bool is_unsigned = false;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct is_signed
@@ -1052,7 +1035,7 @@ MSTL_INLINE17 constexpr bool is_unsigned_v = is_unsigned<T>::value;
 /** @} */ // TypeProperties
 
 /**
- * @defgroup AddQualifiers 添加类型限定符
+ * @defgroup AddQualifiers 类型限定符添加
  * @brief 添加类型限定符
  * @{
  */
@@ -1211,8 +1194,8 @@ using add_pointer_t = typename add_pointer<T>::type;
 /** @} */ // AddQualifiers
 
 /**
- * @defgroup DeclvalTools 声明值工具
- * @brief 用于decltype等无求值上下文中的工具
+ * @defgroup DeclvalTools 非求值辅助工具
+ * @brief 用于decltype等非求值上下文中的工具
  * @{
  */
 
@@ -1312,8 +1295,8 @@ MSTL_INLINE17 constexpr size_t extent_v = extent<T, Idx>::value;
 /** @} */ // ArrayProperties
 
 /**
- * @defgroup BaseTypeInfos 类型基本信息检查
- * @brief 检查基本的类型信息
+ * @defgroup BaseTypeQualifierCheck 类型修饰基本检查
+ * @brief 检查类型的基本修饰信息
  * @{
  */
 
@@ -1767,32 +1750,30 @@ constexpr bool is_cstring_v = is_cstring<T>::value;
 #endif
 
 
-#ifdef MSTL_COMPILER_CLANG__
 /**
  * @struct is_member_function_pointer
  * @brief 判断类型是否为成员函数指针
  * @tparam T 要检查的类型
  */
+template <typename T>
+struct is_member_function_pointer;
+
+/// @cond
+#ifdef MSTL_COMPILER_CLANG__
 template <typename T>
 struct is_member_function_pointer : bool_constant<__is_member_function_pointer(T)> {};
 #else
 MSTL_BEGIN_INNER__
-/// @cond
 template <typename>
 struct __is_member_function_pointer_aux : false_type {};
 template <typename T, typename C>
 struct __is_member_function_pointer_aux<T C::*> : is_function<T> {};
-/// @endcond
 MSTL_END_INNER__
 
-/**
- * @struct is_member_function_pointer
- * @brief 判断类型是否为成员函数指针
- * @tparam T 要检查的类型
- */
 template <typename T>
 struct is_member_function_pointer : _INNER __is_member_function_pointer_aux<remove_cv_t<T>> {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -1804,30 +1785,25 @@ MSTL_INLINE17 constexpr bool is_member_function_pointer_v = is_member_function_p
 #endif
 
 
-#ifdef MSTL_COMPILER_CLANG__
 /**
  * @struct is_member_object_pointer
  * @brief 判断类型是否为成员对象指针
  * @tparam T 要检查的类型
  */
+template <typename T>
+struct is_member_object_pointer;
+
+/// @cond
+#ifdef MSTL_COMPILER_CLANG__
 template <typename T>
 struct is_member_object_pointer : bool_constant<__is_member_object_pointer(T)> {};
 #else
-/**
- * @struct is_member_object_pointer
- * @brief 判断类型是否为成员对象指针
- * @tparam T 要检查的类型
- *
- * 成员对象指针指向类的非静态数据成员。
- */
 template <typename T>
 struct is_member_object_pointer : false_type {};
-
-/// @cond
 template <typename T, typename C>
 struct is_member_object_pointer<T C::*> : bool_constant<!is_function<T>::value> {};
-/// @endcond
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -1839,23 +1815,23 @@ MSTL_INLINE17 constexpr bool is_member_object_pointer_v = is_member_object_point
 #endif
 
 
-#ifdef MSTL_COMPILER_CLANG__
 /**
  * @struct is_member_pointer
  * @brief 判断类型是否为成员指针
  * @tparam T 要检查的类型
  */
+template <typename T>
+struct is_member_pointer;
+
+/// @cond
+#ifdef MSTL_COMPILER_CLANG__
 template <typename T>
 struct is_member_pointer : bool_constant<__is_member_pointer(T)> {};
 #else
-/**
- * @struct is_member_pointer
- * @brief 判断类型是否为成员指针
- * @tparam T 要检查的类型
- */
 template <typename T>
 struct is_member_pointer : bool_constant<is_member_object_pointer<T>::value || is_member_function_pointer<T>::value> {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -1977,16 +1953,16 @@ MSTL_INLINE17 constexpr bool is_final_v = is_final<T>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T, bool = is_enum<T>::value>
 struct __underlying_type_aux {
     using type = __underlying_type(T);
 };
 template <typename T>
 struct __underlying_type_aux<T, false> {};
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct underlying_type
@@ -2075,7 +2051,6 @@ MSTL_INLINE17 constexpr bool has_unique_object_representations_v = has_unique_ob
 #endif
 
 
-#ifdef MSTL_COMPILER_MSVC__
 /**
  * @struct is_aggregate
  * @brief 判断类型是否为聚合类型
@@ -2088,24 +2063,18 @@ MSTL_INLINE17 constexpr bool has_unique_object_representations_v = has_unique_ob
  *    - 所有非静态数据成员都是public
  *    - 没有虚函数和虚基类
  */
+template <typename T>
+struct is_aggregate;
+
+/// @cond
+#ifdef MSTL_COMPILER_MSVC__
 template <typename T>
 struct is_aggregate : bool_constant<is_array<T>::value || __is_aggregate(T)> {};
 #else
-/**
- * @struct is_aggregate
- * @brief 判断类型是否为聚合类型
- * @tparam T 要检查的类型
- *
- * 聚合类型具有以下特征：
- * 1. 数组类型是聚合类型
- * 2. 满足以下条件的类类型：
- *    - 没有用户定义的构造函数
- *    - 所有非静态数据成员都是public
- *    - 没有虚函数和虚基类
- */
 template <typename T>
 struct is_aggregate : bool_constant<__is_aggregate(remove_cv_t<T>)> {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -2216,10 +2185,10 @@ constexpr bool is_corresponding_member(M1 S1::* m1, M2 S2::* m2) noexcept {
 }
 #endif
 
-/** @} */ // BaseTypeInfos
+/** @} */ // BaseTypeQualifierCheck
 
 /**
- * @defgroup TypeConstructChecks 类型构造/析构信息检查
+ * @defgroup TypeSpecialMemberFunctionChecks 类型特殊成员函数信息检查
  * @brief 检查类型的构造/析构信息
  * @{
  */
@@ -2341,12 +2310,12 @@ MSTL_INLINE17 constexpr bool is_default_constructible_v = is_default_constructib
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T>
 void __implicitly_default_construct_aux(const T&) noexcept;
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct is_implicitly_default_constructible
@@ -2453,17 +2422,25 @@ MSTL_INLINE17 constexpr bool is_move_assignable_v = is_move_assignable<T>::value
 #endif
 
 
-#ifdef MSTL_COMPILER_MSVC__
 /**
  * @struct is_destructible
  * @brief 判断类型是否可析构
  * @tparam T 要检查的类型
+ *
+ * 检查类型是否具有可访问的析构函数。
+ * 特殊情况：
+ * 1. void、无界数组和函数类型不可析构
+ * 2. 引用和标量类型总是可析构
  */
+template <typename T>
+struct is_destructible;
+
+/// @cond
+#ifdef MSTL_COMPILER_MSVC__
 template <typename T>
 struct is_destructible : bool_constant<__is_destructible(T)> {};
 #else
 MSTL_BEGIN_INNER__
-/// @cond
 template <typename T>
 struct __destructible_aux {
 private:
@@ -2490,22 +2467,13 @@ struct __is_destructible_dispatch<T, true, false> : false_type {};
 
 template <typename T>
 struct __is_destructible_dispatch<T, false, true> : true_type {};
-/// @endcond
+
 MSTL_END_INNER__
 
-/**
- * @struct is_destructible
- * @brief 判断类型是否可析构
- * @tparam T 要检查的类型
- *
- * 检查类型是否具有可访问的析构函数。
- * 特殊情况处理：
- * 1. void、无界数组和函数类型不可析构
- * 2. 引用和标量类型总是可析构
- */
 template <typename T>
 struct is_destructible : _INNER __is_destructible_dispatch<T>::type {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -2675,7 +2643,6 @@ MSTL_INLINE17 constexpr bool is_trivially_destructible_v = is_trivially_destruct
 #endif
 
 
-#ifdef MSTL_COMPILER_MSVC__
 /**
  * @struct is_nothrow_constructible
  * @brief 判断类型是否可以使用指定参数无异常构造
@@ -2683,10 +2650,22 @@ MSTL_INLINE17 constexpr bool is_trivially_destructible_v = is_trivially_destruct
  * @tparam Args 构造参数类型
  */
 template <typename T, typename... Args>
+struct is_nothrow_constructible;
+
+/**
+ * @struct is_nothrow_default_constructible
+ * @brief 判断类型是否可无异常默认构造
+ * @tparam T 要检查的类型
+ */
+template <typename T>
+struct is_nothrow_default_constructible;
+
+/// @cond
+#ifdef MSTL_COMPILER_MSVC__
+template <typename T, typename... Args>
 struct is_nothrow_constructible : bool_constant<__is_nothrow_constructible(T, Args...)> {};
 #else
 MSTL_BEGIN_INNER__
-/// @cond
 template <typename T, bool = is_array<T>::value>
 struct __is_nothrow_default_constructible_dispatch;
 
@@ -2697,30 +2676,15 @@ struct __is_nothrow_default_constructible_dispatch<T, true> : conjunction<
 template <typename T>
 struct __is_nothrow_default_constructible_dispatch<T, false>
     : bool_constant<noexcept(T())> {};
-/// @endcond
+
 MSTL_END_INNER__
 
-/**
- * @struct is_nothrow_default_constructible
- * @brief 判断类型是否可无异常默认构造
- * @tparam T 要检查的类型
- */
 template <typename T>
 struct is_nothrow_default_constructible : conjunction<
     is_default_constructible<T>, _INNER __is_nothrow_default_constructible_dispatch<T>> {};
 
-#ifdef MSTL_STANDARD_14__
-/**
- * @var is_nothrow_default_constructible_v
- * @brief is_nothrow_default_constructible的便捷变量模板
- */
-template <typename T>
-MSTL_INLINE17 constexpr bool is_nothrow_default_constructible_v = is_nothrow_default_constructible<T>::value;
-#endif
-
-
 MSTL_BEGIN_INNER__
-/// @cond
+
 template <typename T, typename... Args>
 struct __is_nothrow_constructible_dispatch
     : bool_constant<noexcept(T(_MSTL declval<Args>()...))> {};
@@ -2728,19 +2692,14 @@ struct __is_nothrow_constructible_dispatch
 template <typename T>
 struct __is_nothrow_constructible_dispatch<T>
     : is_nothrow_default_constructible<T> {};
-/// @endcond
+
 MSTL_END_INNER__
 
-/**
- * @struct is_nothrow_constructible
- * @brief 判断类型是否可以使用指定参数无异常构造
- * @tparam T 要构造的类型
- * @tparam Args 构造参数类型
- */
 template <typename T, typename... Args>
 struct is_nothrow_constructible : conjunction<
     is_constructible<T, Args...>, _INNER __is_nothrow_constructible_dispatch<T, Args...>> {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -2771,15 +2730,15 @@ MSTL_INLINE17 constexpr bool is_nothrow_copy_constructible_v = is_nothrow_copy_c
 #endif
 
 
+/// @cond
 #ifdef MSTL_COMPILER_MSVC__
-/**
- * @struct is_nothrow_default_constructible
- * @brief 判断类型是否可无异常默认构造
- * @tparam T 要检查的类型
- */
 template <typename T>
 struct is_nothrow_default_constructible : bool_constant<is_nothrow_constructible_v<T>> {};
+#endif
+/// @endcond
 
+
+#ifdef MSTL_STANDARD_14__
 /**
  * @var is_nothrow_default_constructible_v
  * @brief is_nothrow_default_constructible的便捷变量模板
@@ -2814,6 +2773,10 @@ MSTL_INLINE17 constexpr bool is_nothrow_move_constructible_v = is_nothrow_move_c
  * @tparam From 源类型
  */
 template <typename To, typename From>
+struct is_nothrow_assignable;
+
+/// @cond
+template <typename To, typename From>
 struct is_nothrow_assignable :
 #ifdef MSTL_COMPILER_MSVC__
     bool_constant<__is_nothrow_assignable(To, From)> {};
@@ -2821,6 +2784,7 @@ struct is_nothrow_assignable :
     conjunction<is_assignable<To, From>, bool_constant<
         noexcept(_MSTL declval<To>() = _MSTL declval<From>())>> {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -2871,8 +2835,8 @@ MSTL_INLINE17 constexpr bool is_nothrow_move_assignable_v = is_nothrow_move_assi
 
 
 #ifndef MSTL_COMPILER_MSVC__
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T>
 struct __is_nothrow_destructible_aux {
 private:
@@ -2900,8 +2864,8 @@ struct __is_nothrow_destructible_dispatch<T, true, false> : false_type {};
 
 template <typename T>
 struct __is_nothrow_destructible_dispatch<T, false, true> : true_type {};
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 #endif
 
 
@@ -2911,12 +2875,17 @@ MSTL_END_INNER__
  * @tparam T 要检查的类型
  */
 template <typename T>
+struct is_nothrow_destructible;
+
+/// @cond
+template <typename T>
 struct is_nothrow_destructible :
 #ifdef MSTL_COMPILER_MSVC__
     bool_constant<__is_nothrow_destructible(T)> {};
 #else
     _INNER __is_nothrow_destructible_dispatch<T>::type {};
 #endif
+/// @endcond
 
 #ifdef MSTL_STANDARD_14__
 /**
@@ -2927,11 +2896,32 @@ template <typename T>
 MSTL_INLINE17 constexpr bool is_nothrow_destructible_v = is_nothrow_destructible<T>::value;
 #endif
 
-/** @} */ // TypeConstructChecks
 
 /**
- * @defgroup UtilityFunctions 实用函数
- * @brief 标准库实用函数实现
+ * @struct is_location_invariant
+ * @brief 判断类型是否是位置不变的
+ * @tparam T 要检查的类型
+ *
+ * 位置不变意味着类型可以在内存中自由移动而不影响其行为。
+ * 默认情况下，平凡可复制的类型是位置不变的。
+ */
+template <typename T>
+struct is_location_invariant : is_trivially_copyable<T>::type {};
+
+#ifdef MSTL_STANDARD_14__
+/**
+ * @var is_location_invariant_v
+ * @brief is_location_invariant的便捷变量模板
+ */
+template <typename T>
+MSTL_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<T>::value;
+#endif
+
+/** @} */ // TypeSpecialMemberFunctionChecks
+
+/**
+ * @defgroup ArgsForwardFunctions 参数转发函数
+ * @brief 参数转发函数实现
  * @{
  */
 
@@ -3019,7 +3009,7 @@ MSTL_NODISCARD constexpr bool is_constant_evaluated() noexcept {
 }
 #endif
 
-/** @} */ // UtilityFunctions
+/** @} */ // ArgsForwardFunctions
 
 /**
  * @defgroup ConvertibleChecks 可转换性检查
@@ -3028,8 +3018,8 @@ MSTL_NODISCARD constexpr bool is_constant_evaluated() noexcept {
  */
 
 #if !defined(MSTL_COMPILER_MSVC__) && !defined(MSTL_COMPILER_CLANG__)
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename From, typename To, bool = disjunction_v<is_void<From>, is_function<To>, is_array<To>>>
 struct __is_convertible_helper {
     using type = typename is_void<To>::type;
@@ -3047,8 +3037,8 @@ private:
 public:
     using type = decltype(__test<From, To>(0));
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 #endif
 
 /**
@@ -3076,7 +3066,7 @@ template <typename From, typename To>
 MSTL_INLINE17 constexpr bool is_convertible_v = is_convertible<From, To>::value;
 #endif
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /**
  * @concept convertible_to
  * @brief 检查类型From是否可以转换为类型To
@@ -3139,6 +3129,32 @@ template <typename From, typename To>
 MSTL_INLINE17 constexpr bool is_nothrow_convertible_v = is_nothrow_convertible<From, To>::value;
 #endif
 
+
+/**
+ * @struct is_nothrow_arrow
+ * @brief 判断迭代器的箭头运算符是否不会抛出异常
+ * @tparam Iterator 迭代器类型
+ * @tparam Ptr 期望的指针类型
+ * @tparam IsPtr Iterator是否为指针类型
+ */
+template <typename Iterator, typename Ptr, bool IsPtr = is_pointer<remove_cvref_t<Iterator>>::value>
+struct is_nothrow_arrow : bool_constant<is_nothrow_convertible<Iterator, Ptr>::value> {};
+
+/// @cond
+template <typename Iterator, typename Ptr>
+struct is_nothrow_arrow<Iterator, Ptr, false> : bool_constant<
+    noexcept(_MSTL declcopy<Ptr>(_MSTL declval<Iterator>().operator->()))> {};
+/// @endcond
+
+#ifdef MSTL_STANDARD_14__
+/**
+ * @var is_nothrow_arrow_v
+ * @brief is_nothrow_arrow的便捷变量模板
+ */
+template <typename Iterator, typename Ptr>
+MSTL_INLINE17 constexpr bool is_nothrow_arrow_v = is_nothrow_arrow<Iterator, Ptr>::value;
+#endif
+
 /** @} */ // ConvertibleChecks
 
 /**
@@ -3147,8 +3163,8 @@ MSTL_INLINE17 constexpr bool is_nothrow_convertible_v = is_nothrow_convertible<F
  * @{
  */
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <size_t>
 struct __sign_byte_aux;
 
@@ -3214,11 +3230,11 @@ struct __set_sign {
     using signed_type   = copy_cv_t<T, __set_signed_byte<T>>;
     using unsigned_type = copy_cv_t<T, __set_unsigned_byte<T>>;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
- * @typedef make_signed
+ * @struct make_signed
  * @brief 将类整数类型转换为对应的有符号类型
  * @tparam T 输入类型
  *
@@ -3237,7 +3253,7 @@ template <typename T>
 using make_signed_t = typename make_signed<T>::type;
 
 /**
- * @typedef make_unsigned
+ * @struct make_unsigned
  * @brief 将类整数类型转换为对应的无符号类型
  * @tparam T 输入类型
  *
@@ -3256,8 +3272,8 @@ template <typename T>
 using make_unsigned_t = typename make_unsigned<T>::type;
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <size_t Size, bool IsSigned>
 struct __make_integer_impl;
 
@@ -3270,8 +3286,8 @@ template <size_t Size>
 struct __make_integer_impl<Size, false> {
     using type = typename __sign_byte_aux<Size>::template unsigned_t<int>;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct make_integer
@@ -3438,7 +3454,7 @@ constexpr size_t aligned_union_v = aligned_union<Len, Types...>::align_value;
 /** @} */ // Alignment
 
 /**
- * @defgroup TypeOperations 类型操作
+ * @defgroup TypeAttributeOperations 类型属性操作
  * @brief 进行类型退化、公共化等操作
  * @{
  */
@@ -3471,8 +3487,8 @@ template <typename T>
 using decay_t = typename decay<T>::type;
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename Default, typename, template <typename...> class, typename...>
 struct __detector {
     using value_t = false_type;
@@ -3483,8 +3499,8 @@ struct __detector<Default, void_t<Op<Args...>>, Op, Args...> {
     using value_t = true_type;
     using type = Op<Args...>;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @typedef detected_or
@@ -3519,16 +3535,16 @@ template <typename T1, typename T2>
 using common_ternary_operator_t = decltype(true ? _MSTL declval<T1>() : _MSTL declval<T2>());
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename, typename, typename = void>
 struct __oper_decay_aux {};
 template <typename T1, typename T2>
 struct __oper_decay_aux<T1, T2, void_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>> {
     using type = decay_t<common_ternary_operator_t<decay_t<T1>, decay_t<T2>>>;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct common_type
@@ -3720,11 +3736,11 @@ constexpr bool is_specialization_v() {
 }
 #endif
 
-/** @} */ // TypeOperations
+/** @} */ // TypeAttributeOperations
 
 /**
- * @defgroup SwappableChecks 可交换性检查
- * @brief 检查类型是否可以交换
+ * @defgroup SwapUtility 交换性工具
+ * @brief 实现类型交换相关操作
  * @{
  */
 
@@ -3948,43 +3964,10 @@ noexcept(conjunction<is_nothrow_move_constructible<T>, is_nothrow_assignable<T&,
     return old_val;
 }
 
-/** @} */ // SwappableChecks
+/** @} */ // SwapUtility
 
 /**
- * @defgroup ArrowOperator 箭头运算符检查
- * @brief 检查迭代器的箭头运算符
- * @{
- */
-
-/**
- * @struct is_nothrow_arrow
- * @brief 判断迭代器的箭头运算符是否不会抛出异常
- * @tparam Iterator 迭代器类型
- * @tparam Ptr 期望的指针类型
- * @tparam IsPtr Iterator是否为指针类型
- */
-template <typename Iterator, typename Ptr, bool IsPtr = is_pointer<remove_cvref_t<Iterator>>::value>
-struct is_nothrow_arrow : bool_constant<is_nothrow_convertible<Iterator, Ptr>::value> {};
-
-/// @cond
-template <typename Iterator, typename Ptr>
-struct is_nothrow_arrow<Iterator, Ptr, false> : bool_constant<
-    noexcept(_MSTL declcopy<Ptr>(_MSTL declval<Iterator>().operator->()))> {};
-/// @endcond
-
-#ifdef MSTL_STANDARD_14__
-/**
- * @var is_nothrow_arrow_v
- * @brief is_nothrow_arrow的便捷变量模板
- */
-template <typename Iterator, typename Ptr>
-MSTL_INLINE17 constexpr bool is_nothrow_arrow_v = is_nothrow_arrow<Iterator, Ptr>::value;
-#endif
-
-/** @} */ // ArrowOperator
-
-/**
- * @defgroup TypeLikeCheck 类型行为的类型检查
+ * @defgroup TypeActionCheck 类型行为检查
  * @brief 检查类型的行为是否符合要求
  * @{
  */
@@ -4039,8 +4022,8 @@ MSTL_INLINE17 constexpr bool is_allocator_v = is_allocator<Alloc>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T>
 struct __has_valid_begin_end {
 private:
@@ -4057,8 +4040,8 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 
 /**
@@ -4147,8 +4130,8 @@ MSTL_INLINE17 constexpr bool is_iterable_v = is_iterable<T>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T>
 struct __has_first_and_second {
 private:
@@ -4164,8 +4147,8 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct is_maplike
@@ -4192,8 +4175,8 @@ MSTL_INLINE17 constexpr bool is_maplike_v = is_maplike<Map>::value;
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename Alloc, typename T, typename... Args>
 struct __has_construct_impl {
 private:
@@ -4207,8 +4190,8 @@ private:
 public:
     using type = decltype(__test<Alloc>(0));
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct has_construct
@@ -4230,8 +4213,8 @@ MSTL_INLINE17 constexpr bool has_construct_v = has_construct<Alloc, T, Args...>:
 #endif
 
 
-MSTL_BEGIN_INNER__
 /// @cond
+MSTL_BEGIN_INNER__
 template <typename T>
 struct __has_base_impl {
 private:
@@ -4243,8 +4226,8 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
-/// @endcond
 MSTL_END_INNER__
+/// @endcond
 
 /**
  * @struct has_base
@@ -4263,10 +4246,10 @@ template <typename T>
 MSTL_INLINE17 constexpr bool has_base_v = has_base<T>::value;
 #endif
 
-/** @} */ // TypeLikeCheck
+/** @} */ // TypeActionCheck
 
 /**
- * @defgroup InitializeFunction 初始化函数
+ * @defgroup TypeInitializeFunction 类型初始化函数
  * @brief 返回类型T的默认初始化值
  * @{
  */
@@ -4294,7 +4277,7 @@ MSTL_MACRO_RANGE_INT(INITIALIZE_BASIC_FUNCTION__)
 
 #undef INITIALIZE_BASIC_FUNCTION__
 
-/** @} */ // InitializeFunction
+/** @} */ // TypeInitializeFunction
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_TYPEINFO_TYPE_TRAITS_HPP__
