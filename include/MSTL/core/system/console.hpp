@@ -358,7 +358,7 @@ struct io_base<pair<T1, T2>> {
     }
 };
 
-template<typename... Args> struct io_base<tuple<Args...>> {
+template <typename... Args> struct io_base<tuple<Args...>> {
     static void write(sys_console &console, const tuple<Args...> &value) {
         io_base<string>::write(console, _MSTL to_string(value));
     }

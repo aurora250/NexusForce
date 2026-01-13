@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_UTILITY_VARIANT_HPP__
 #define MSTL_CORE_UTILITY_VARIANT_HPP__
-#include "monostate.hpp"
+#include "non.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename, typename>

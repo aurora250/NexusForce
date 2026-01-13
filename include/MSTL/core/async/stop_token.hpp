@@ -42,7 +42,7 @@ public:
 
 private:
     friend class stop_source;
-    template<typename Callback>
+    template <typename Callback>
     friend class stop_callback;
 
     static void yield() noexcept {

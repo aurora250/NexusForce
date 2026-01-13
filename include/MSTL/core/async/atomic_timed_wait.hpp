@@ -69,8 +69,8 @@ bool __platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old
     }
     return result;
 #else
-    auto seconds = time_point_cast<seconds>(timeout);
-    auto nanoseconds = duration_cast<nanoseconds>(timeout - seconds);
+    auto seconds = time_point_cast<_MSTL seconds>(timeout);
+    auto nanoseconds = duration_cast<_MSTL nanoseconds>(timeout - seconds);
 
     ::timespec rt = {
         static_cast<std::time_t>(seconds.time_since_epoch().count()),

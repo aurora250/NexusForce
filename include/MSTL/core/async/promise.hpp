@@ -245,7 +245,7 @@ struct __future_base::task_setter<PtrT, Func, void> {
     PtrT* result_ptr;
     Func* function_ptr;
 
-    PtrT operator()() const {
+    PtrT operator ()() const {
         try {
             (*function_ptr)();
         } catch(...) {

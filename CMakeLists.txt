@@ -20,6 +20,10 @@ if(CMAKE_CONFIGURATION_TYPES)
     )
 endif()
 
+set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
+set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY ON)
+set(CMAKE_FIND_USE_PACKAGE_REGISTRY OFF)
+
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -29,17 +33,6 @@ elseif(CMAKE_CXX_STANDARD LESS 14)
     message(FATAL_ERROR "MSTL can only be compiled with C++14 or higher standard")
 endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
-set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
-set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY ON)
-set(CMAKE_FIND_USE_PACKAGE_REGISTRY OFF)
-
-if(DEFINED ENV{CONDA_PREFIX})
-    message(STATUS "Conda environment detected, adjusting library search paths")
-    set(CMAKE_IGNORE_PATH "$ENV{CONDA_PREFIX}/lib" "$ENV{CONDA_PREFIX}/include")
-endif()
-
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(MSTL_ARCH "x64")
@@ -54,15 +47,16 @@ message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 
 
 option(MSTL_ENABLE_POSTGRESQL "Enable PostgreSQL database support" ON)
-option(MSTL_ENABLE_MYSQL "Enable MySQL database support" ON)
-option(MSTL_ENABLE_SQLITE3 "Enable SQLite3 database support" ON)
-option(MSTL_ENABLE_REDIS "Enable Redis database support" ON)
-option(MSTL_ENABLE_ZLIB "Enable zlib compression support" ON)
-option(MSTL_ENABLE_OPENSSL "Enable OpenSSL support" ON)
-option(MSTL_ENABLE_CUDA "Enable CUDA GPU acceleration" OFF)
+option(MSTL_ENABLE_MYSQL      "Enable MySQL database support"      ON)
+option(MSTL_ENABLE_SQLITE3    "Enable SQLite3 database support"    ON)
+option(MSTL_ENABLE_REDIS      "Enable Redis database support"      ON)
+option(MSTL_ENABLE_ZLIB       "Enable zlib compression support"    ON)
+option(MSTL_ENABLE_OPENSSL    "Enable OpenSSL support"             ON)
+option(MSTL_ENABLE_CUDA       "Enable CUDA GPU acceleration"       OFF)
 
-option(MSTL_BUILD_TESTS "Build unit tests (requires GTest)" ON)
-option(MSTL_BUILD_EXAMPLES "Build example programs" OFF)
+option(MSTL_BUILD_TESTS       "Build unit tests"                   ON)
+option(MSTL_BUILD_EXAMPLES    "Build example programs"             OFF)
+option(MSTL_BUILD_DOCS        "Build documentation with Doxygen"   ON)
 
 
 message(STATUS "Project Configuration:")
@@ -76,6 +70,7 @@ message(STATUS "  MSTL_ENABLE_CUDA:         ${MSTL_ENABLE_CUDA}")
 
 message(STATUS "  MSTL_BUILD_TESTS:         ${MSTL_BUILD_TESTS}")
 message(STATUS "  MSTL_BUILD_EXAMPLES:      ${MSTL_BUILD_EXAMPLES}")
+message(STATUS "  MSTL_BUILD_DOCS:          ${MSTL_BUILD_DOCS}")
 
 
 add_subdirectory(src)
@@ -90,6 +85,12 @@ if(MSTL_BUILD_EXAMPLES)
     add_subdirectory(examples)
 else()
     message(STATUS "Skipping examples build (MSTL_BUILD_EXAMPLES=OFF)")
+endif()
+
+if(MSTL_BUILD_DOCS)
+    add_subdirectory(docs)
+else()
+    message(STATUS "Skipping documentation build (MSTL_BUILD_DOCS=OFF)")
 endif()
 
 

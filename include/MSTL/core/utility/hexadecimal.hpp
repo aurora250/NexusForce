@@ -117,7 +117,7 @@ struct unpackage<hexadecimal> {
 
 template <>
 struct formatter<hexadecimal> {
-    MSTL_CONSTEXPR20 string operator()(const hexadecimal& value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const hexadecimal& value, const format_options& options) const {
         return formatter<int64_t>()(value.value(), options);
     }
 };

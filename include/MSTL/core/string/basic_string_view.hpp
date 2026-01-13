@@ -16,11 +16,7 @@ private:
     using const_iterator	= string_view_iterator<Traits>;
 
 public:
-#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
-#else
-    using iterator_category = random_access_iterator_tag;
-#endif // MSTL_STANDARD_20__
     using value_type		= typename container_type::value_type;
     using reference			= typename container_type::const_reference;
     using pointer			= typename container_type::const_pointer;
@@ -198,7 +194,7 @@ public:
 
     MSTL_NODISCARD constexpr size_type size() const noexcept { return size_; }
     MSTL_NODISCARD constexpr size_type max_size() const noexcept {
-        return (npos - sizeof(size_type) - POINTER_SIZE) / sizeof(value_type) / 4;
+        return (npos - sizeof(size_type) - sizeof(void*)) / sizeof(value_type) / 4;
     }
     MSTL_NODISCARD constexpr size_type length() const noexcept { return size_; }
     MSTL_NODISCARD constexpr bool empty() const noexcept { return size_ == 0; }

@@ -12,7 +12,7 @@ struct default_delete {
     template <typename U, enable_if_t<is_convertible<U*, T*>::value, int> = 0>
 	MSTL_CONSTEXPR20 default_delete(const default_delete<U>&) noexcept {}
 
-    MSTL_CONSTEXPR20 void operator()(const T* ptr) const noexcept {
+    MSTL_CONSTEXPR20 void operator ()(const T* ptr) const noexcept {
 	    delete ptr;
     }
 
@@ -200,7 +200,7 @@ public:
     template <typename Del = deleter_type, enable_if_t<is_move_constructible<Del>::value, int> = 0>
     MSTL_CONSTEXPR20 unique_ptr(pointer ptr, Del&& del) noexcept : data_(ptr, _MSTL move(del)) {}
 
-    template<typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>>
+    template <typename Del = deleter_type, typename DelMoveRef = remove_reference_t<Del>>
     MSTL_CONSTEXPR20 unique_ptr(pointer, enable_if_t<is_lvalue_reference<Del>::value, DelMoveRef&&>) = delete;
 
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>

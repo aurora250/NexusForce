@@ -82,7 +82,7 @@ MSTL_BEGIN_INNER__
 
 template <typename ToDur, typename ConvFactor, typename CommonRep, bool NumIsOne = false, bool DenIsOne = false>
 struct __duration_cast_impl {
-	template<typename Rep, typename Period>
+	template <typename Rep, typename Period>
 	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(static_cast<CommonRep>(value.count())
 		    * static_cast<CommonRep>(ConvFactor::num) / static_cast<CommonRep>(ConvFactor::den)));
@@ -99,7 +99,7 @@ struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, true> {
 
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
-	template<typename Rep, typename Period>
+	template <typename Rep, typename Period>
 	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(
 		    static_cast<CommonRep>(value.count()) / static_cast<CommonRep>(ConvFactor::den)));
@@ -108,7 +108,7 @@ struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, true, false> {
 
 template <typename ToDur, typename ConvFactor, typename CommonRep>
 struct __duration_cast_impl<ToDur, ConvFactor, CommonRep, false, true> {
-	template<typename Rep, typename Period>
+	template <typename Rep, typename Period>
 	static constexpr ToDur __cast(const duration<Rep, Period>& value) {
 		return ToDur(static_cast<typename ToDur::rep>(
 		    static_cast<CommonRep>(value.count()) * static_cast<CommonRep>(ConvFactor::num)));
@@ -354,7 +354,7 @@ constexpr bool operator !=(const duration<Rep1, Period1>& lhs, const duration<Re
     return !(lhs == rhs);
 }
 
-template<typename Rep1, typename Period1, typename Rep2, typename Period2>
+template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr bool operator <(const duration<Rep1, Period1>& lhs, const duration<Rep2, Period2>& rhs) {
     using duration1 = duration<Rep1, Period1>;
     using duration2 = duration<Rep2, Period2>;

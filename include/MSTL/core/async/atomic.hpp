@@ -784,7 +784,7 @@ public:
 	}
 };
 
-template<>
+template <>
 struct atomic<char> : atomic_base<char> {
 	using integral_type = char;
 	using base_type = atomic_base<char>;
@@ -805,7 +805,7 @@ struct atomic<char> : atomic_base<char> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<signed char> : atomic_base<signed char> {
 	using integral_type = signed char;
 	using base_type = atomic_base<signed char>;
@@ -826,7 +826,7 @@ struct atomic<signed char> : atomic_base<signed char> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<unsigned char> : atomic_base<unsigned char> {
 	using integral_type = unsigned char;
 	using base_type = atomic_base<unsigned char>;
@@ -847,7 +847,7 @@ struct atomic<unsigned char> : atomic_base<unsigned char> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<short> : atomic_base<short> {
 	using integral_type = short;
 	using base_type = atomic_base<short>;
@@ -868,7 +868,7 @@ struct atomic<short> : atomic_base<short> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<unsigned short> : atomic_base<unsigned short> {
 	using integral_type = unsigned short;
 	using base_type = atomic_base<unsigned short>;
@@ -889,7 +889,7 @@ struct atomic<unsigned short> : atomic_base<unsigned short> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<int> : atomic_base<int> {
 	using integral_type = int;
 	using base_type = atomic_base<int>;
@@ -910,7 +910,7 @@ struct atomic<int> : atomic_base<int> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<unsigned int> : atomic_base<unsigned int> {
 	using integral_type = unsigned int;
 	using base_type = atomic_base<unsigned int>;
@@ -931,7 +931,7 @@ struct atomic<unsigned int> : atomic_base<unsigned int> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<long> : atomic_base<long> {
 	using integral_type = long;
 	using base_type = atomic_base<long>;
@@ -952,7 +952,7 @@ struct atomic<long> : atomic_base<long> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<unsigned long> : atomic_base<unsigned long> {
 	using integral_type = unsigned long;
 	using base_type = atomic_base<unsigned long>;
@@ -973,7 +973,7 @@ struct atomic<unsigned long> : atomic_base<unsigned long> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<long long> : atomic_base<long long> {
 	using integral_type = long long;
 	using base_type = atomic_base<long long>;
@@ -994,7 +994,7 @@ struct atomic<long long> : atomic_base<long long> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<unsigned long long> : atomic_base<unsigned long long> {
 	using integral_type = unsigned long long;
 	using base_type = atomic_base<unsigned long long>;
@@ -1015,7 +1015,7 @@ struct atomic<unsigned long long> : atomic_base<unsigned long long> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<wchar_t> : atomic_base<wchar_t> {
 	using integral_type = wchar_t;
 	using base_type = atomic_base<wchar_t>;
@@ -1037,7 +1037,7 @@ struct atomic<wchar_t> : atomic_base<wchar_t> {
 };
 
 #ifdef MSTL_STANDARD_20__
-template<>
+template <>
 struct atomic<char8_t> : atomic_base<char8_t> {
 	using integral_type = char8_t;
 	using base_type = atomic_base<char8_t>;
@@ -1059,7 +1059,7 @@ struct atomic<char8_t> : atomic_base<char8_t> {
 };
 #endif
 
-template<>
+template <>
 struct atomic<char16_t> : atomic_base<char16_t> {
 	using integral_type = char16_t;
 	using base_type = atomic_base<char16_t>;
@@ -1080,7 +1080,7 @@ struct atomic<char16_t> : atomic_base<char16_t> {
 	static constexpr bool is_always_lock_free = true;
 };
 
-template<>
+template <>
 struct atomic<char32_t> : atomic_base<char32_t> {
 	using integral_type = char32_t;
 	using base_type = atomic_base<char32_t>;
@@ -1102,7 +1102,7 @@ struct atomic<char32_t> : atomic_base<char32_t> {
 };
 
 
-template<>
+template <>
 struct atomic<float> : atomic_float_base<float> {
 	atomic() noexcept = default;
 
@@ -1116,7 +1116,7 @@ struct atomic<float> : atomic_float_base<float> {
 	using atomic_float_base<float>::operator=;
 };
 
-template<>
+template <>
 struct atomic<double> : atomic_float_base<double> {
 	atomic() noexcept = default;
 
@@ -1130,7 +1130,7 @@ struct atomic<double> : atomic_float_base<double> {
 	using atomic_float_base<double>::operator=;
 };
 
-template<>
+template <>
 struct atomic<long double> : atomic_float_base<long double> {
 	atomic() noexcept = default;
 

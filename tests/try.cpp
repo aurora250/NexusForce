@@ -1825,8 +1825,8 @@ void test_sort() {
 }
 
 struct var_visitor {
-    int operator()(int arg) const { return arg * 2; }
-    int operator()(const string& arg) const { return arg.length(); }
+    int operator ()(int arg) const { return arg * 2; }
+    int operator ()(const string& arg) const { return arg.length(); }
 };
 
 void test_variant() {
@@ -1851,11 +1851,11 @@ void test_variant() {
     hash<variant<int, string>> hasher{};
     println(hasher(v1));
 
-    variant<monostate, int> v;
-    v = monostate{};
+    variant<non, int> v;
+    v = non{};
 
-    if (v.holds_alternative<monostate>()) {
-        println("hold monostate");
+    if (v.holds_alternative<non>()) {
+        println("hold non");
     }
     println(v.to_hash());
 }

@@ -7,6 +7,12 @@ MSTL_BEGIN_NAMESPACE__
 
 MSTL_ERROR_BUILD_FINAL_CLASS(expected_exception, memory_exception, "Expected Operation Failed.")
 
+struct inplace_invoke_tag {
+    constexpr inplace_invoke_tag() noexcept  = default;
+};
+struct unexpect_invoke_tag {
+    constexpr unexpect_invoke_tag() noexcept  = default;
+};
 
 struct unexpect_t {
     explicit unexpect_t() noexcept = default;

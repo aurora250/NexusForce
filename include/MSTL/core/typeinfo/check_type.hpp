@@ -33,9 +33,9 @@ public:
     }
 
     template <typename T1, typename... T>
-    MSTL_CONSTEXPR20 output& operator()(const T1& val, const T&... args) {
+    MSTL_CONSTEXPR20 output& operator ()(const T1& val, const T&... args) {
         this->out(val);
-        return operator()(args...);
+        return operator ()(args...);
     }
 };
 

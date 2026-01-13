@@ -27,7 +27,7 @@
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(_M_X86)
     /**
      * @def MSTL_PLATFORM_WINDOWS__
-     * @brief 定义在Windows平台编译（32位或64位）
+     * @brief 定义在Windows平台编译
      */
 	#define MSTL_PLATFORM_WINDOWS__		1
     /**
@@ -45,7 +45,7 @@
 #elif defined(__linux__)
     /**
      * @def MSTL_PLATFORM_LINUX__
-     * @brief 定义在Linux平台编译（32位或64位）
+     * @brief 定义在Linux平台编译
      */
 	#define MSTL_PLATFORM_LINUX__		1
 	#if (__WORDSIZE == 64) || (__SIZEOF_POINTER__ == 8)
@@ -62,11 +62,7 @@
 		#define MSTL_PLATFORM_LINUX32__ 1
 	#endif
 #else
-    /**
-     * @def MSTL_PLATFORM_UNSUPPORTED__
-     * @brief 定义在不支持的平台编译
-     */
-	#define MSTL_PLATFORM_UNSUPPORTED__	1
+    #error "不支持的平台"
 #endif
 
 /** @} */ // PlatformDetection
@@ -110,11 +106,7 @@
      */
 	#define MSTL_COMPILER_MSVC__		1
 #else
-    /**
-     * @def MSTL_COMPILER_UNSUPPORTED__
-     * @brief 定义使用不支持的编译器编译
-     */
-	#define MSTL_COMPILER_UNSUPPORTED__	1
+    #error "不支持的编译器"
 #endif
 
 /** @} */ // CompilerDetection
@@ -161,11 +153,6 @@
      * @brief 定义在64位系统编译
      */
 	#define MSTL_DATA_BUS_WIDTH_64__	1
-	/**
-     * @def MSTL_POINTER_SIZE
-     * @brief 指针大小
-     */
-	#define MSTL_POINTER_SIZE 8
 #endif
 #if defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__) || defined(__i386__)
 	/**
@@ -173,13 +160,6 @@
      * @brief 定义在32位系统编译
      */
 	#define MSTL_DATA_BUS_WIDTH_32__	1
-#ifndef MSTL_POINTER_SIZE
-	/**
-     * @def MSTL_POINTER_SIZE
-     * @brief 指针大小
-     */
-	#define MSTL_POINTER_SIZE 4
-#endif
 #endif
 
 /** @} */ // DataBusWidth
@@ -374,42 +354,42 @@
 #if _HAS_CXX23 || (__cplusplus >= 202100L) || (_MSVC_LANG >= 202100L)
     /**
      * @def MSTL_STANDARD_23__
-     * @brief 定义使用C++23或更高标准编译
+     * @brief 使用C++23或更高标准编译
      */
 	#define MSTL_STANDARD_23__	1
 #endif
 #if _HAS_CXX20 || (__cplusplus >= 202002L) || (_MSVC_LANG >= 202002L)
     /**
      * @def MSTL_STANDARD_20__
-     * @brief 定义使用C++20或更高标准编译
+     * @brief 使用C++20或更高标准编译
      */
 	#define MSTL_STANDARD_20__	1
 #endif
 #if _HAS_CXX17 || (__cplusplus >= 201703L) || defined(MSTL_STANDARD_20__) || (_MSVC_LANG >= 201703L)
     /**
      * @def MSTL_STANDARD_17__
-     * @brief 定义使用C++17或更高标准编译
+     * @brief 使用C++17或更高标准编译
      */
 	#define MSTL_STANDARD_17__	1
 #endif
 #if (__cplusplus >= 201402L) || defined(MSTL_STANDARD_17__) || (_MSVC_LANG >= 201402L)
     /**
      * @def MSTL_STANDARD_14__
-     * @brief 定义使用C++14或更高标准编译
+     * @brief 使用C++14或更高标准编译
      */
 	#define MSTL_STANDARD_14__	1
 #endif
 #if (__cplusplus >= 201103L) || defined(MSTL_STANDARD_14__) || (_MSVC_LANG >= 201103L)
     /**
      * @def MSTL_STANDARD_11__
-     * @brief 定义使用C++11或更高标准编译
+     * @brief 使用C++11或更高标准编译
      */
 	#define MSTL_STANDARD_11__	1
 #endif
 #if (__cplusplus >= 199711L) || defined(MSTL_STANDARD_11__) || (_MSVC_LANG >= 199711L)
     /**
      * @def MSTL_STANDARD_98__
-     * @brief 定义使用C++98或更高标准编译
+     * @brief 使用C++98或更高标准编译
      */
 	#define MSTL_STANDARD_98__	1
 #endif
@@ -434,13 +414,13 @@
 #ifdef MSTL_STANDARD_11__
     /**
      * @def MSTL_CONSTEXPR11
-     * @brief C++11的constexpr，降级为inline
+     * @brief C++11的constexpr
      */
 	#define MSTL_CONSTEXPR11 constexpr
 #else
     /**
      * @def MSTL_CONSTEXPR11
-     * @brief C++11之前的版本使用inline
+     * @brief C++11之前降级为inline
      */
 	#define MSTL_CONSTEXPR11 inline
 #endif // MSTL_STANDARD_11__
@@ -448,13 +428,13 @@
 #ifdef MSTL_STANDARD_14__
     /**
      * @def MSTL_CONSTEXPR14
-     * @brief C++14的constexpr，降级为inline
+     * @brief C++14的constexpr
      */
     #define MSTL_CONSTEXPR14 constexpr
 #else
     /**
      * @def MSTL_CONSTEXPR14
-     * @brief C++14之前的版本使用inline
+     * @brief C++14之前降级为inline
      */
     #define MSTL_CONSTEXPR14 inline
 #endif // MSTL_STANDARD_14__
@@ -462,7 +442,7 @@
 #ifdef MSTL_STANDARD_17__
     /**
      * @def MSTL_CONSTEXPR17
-     * @brief C++17的constexpr，降级为inline
+     * @brief C++17的constexpr
      */
     #define MSTL_CONSTEXPR17 constexpr
 
@@ -474,13 +454,13 @@
 #else
     /**
      * @def MSTL_CONSTEXPR17
-     * @brief C++17之前的版本使用inline
+     * @brief C++17之前降级为inline
      */
     #define MSTL_CONSTEXPR17 inline
 
     /**
      * @def MSTL_INLINE17
-     * @brief C++17之前的版本为空
+     * @brief C++17之前为空
      */
     #define MSTL_INLINE17
 #endif // MSTL_STANDARD_17__
@@ -488,13 +468,13 @@
 #ifdef MSTL_STANDARD_20__
     /**
      * @def MSTL_CONSTEXPR20
-     * @brief C++20的constexpr，降级为inline
+     * @brief C++20的constexpr
      */
     #define MSTL_CONSTEXPR20 constexpr
 #else
     /**
      * @def MSTL_CONSTEXPR20
-     * @brief C++20之前的版本使用inline
+     * @brief C++20之前降级为inline
      */
     #define MSTL_CONSTEXPR20 inline
 #endif // MSTL_STANDARD_20__
@@ -502,13 +482,13 @@
 #ifdef MSTL_STANDARD_23__
     /**
      * @def MSTL_CONSTEXPR23
-     * @brief C++23的constexpr，降级为inline
+     * @brief C++23的constexpr
      */
     #define MSTL_CONSTEXPR23 constexpr
 #else
     /**
      * @def MSTL_CONSTEXPR23
-     * @brief C++23之前的版本使用inline
+     * @brief C++23之前降级为inline
      */
     #define MSTL_CONSTEXPR23 inline
 #endif // MSTL_STANDARD_23__
@@ -568,76 +548,76 @@
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_ALIGNED_DEFAULT
-     * @brief 默认对齐属性（GNU编译器）
+     * @brief 默认对齐属性
      */
 	#define MSTL_ALIGNED_DEFAULT() __attribute__((__aligned__))
     /**
      * @def MSTL_ALIGNED
-     * @brief 指定对齐属性（GNU编译器）
+     * @brief 指定对齐属性
      * @param ALIGN 对齐字节数
      */
 	#define MSTL_ALIGNED(ALIGN) __attribute__((__aligned__((ALIGN))))
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_ALIGNED_DEFAULT
-     * @brief 默认对齐属性（MSVC）
+     * @brief 默认对齐属性
      */
-	#define MSTL_ALIGNED_DEFAULT() __declspec(align(MSTL_POINTER_SIZE))
+	#define MSTL_ALIGNED_DEFAULT() __declspec(align(alignof(_MSTL max_align_t)))
     /**
      * @def MSTL_ALIGNED
-     * @brief 指定对齐属性（MSVC）
+     * @brief 指定对齐属性
      * @param ALIGN 对齐字节数
      */
 	#define MSTL_ALIGNED(ALIGN) __declspec(align(ALIGN))
 #else
     /**
      * @def MSTL_ALIGNED_DEFAULT
-     * @brief 空定义
+     * @brief 默认对齐属性
      */
-	#define MSTL_ALIGNED_DEFAULT()
+	#define MSTL_ALIGNED_DEFAULT() alignas(alignof(_MSTL max_align_t))
     /**
      * @def MSTL_ALIGNED
      * @brief 空定义
-     * @param ALIGN 对齐字节数（未使用）
+     * @param ALIGN 对齐字节数
      */
-	#define MSTL_ALIGNED(ALIGN)
+	#define MSTL_ALIGNED(ALIGN) alignas(ALIGN)
 #endif
 
 
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_ALWAYS_INLINE
-     * @brief 强制内联（GNU编译器）
+     * @brief 强制内联
      */
     #define MSTL_ALWAYS_INLINE __attribute__((always_inline))
 
     /**
      * @def MSTL_ALWAYS_INLINE_INLINE
-     * @brief 强制内联加inline（GNU编译器）
+     * @brief 强制内联加inline
      */
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_ALWAYS_INLINE
-     * @brief 强制内联（MSVC）
+     * @brief 强制内联
      */
     #define MSTL_ALWAYS_INLINE __forceinline
 
     /**
      * @def MSTL_ALWAYS_INLINE_INLINE
-     * @brief 强制内联（MSVC）
+     * @brief 强制内联
      */
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
 #elif defined(MSTL_STANDARD_17__)
     /**
      * @def MSTL_ALWAYS_INLINE
-     * @brief 强制内联（C++17）
+     * @brief 强制内联
      */
     #define MSTL_ALWAYS_INLINE [[always_inline]]
 
     /**
      * @def MSTL_ALWAYS_INLINE_INLINE
-     * @brief 强制内联加inline（C++17）
+     * @brief 强制内联加inline
      */
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #else
@@ -658,7 +638,7 @@
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_UNUSED
-     * @brief 未使用变量警告抑制（GNU编译器）
+     * @brief 未使用变量警告抑制
      */
     #define MSTL_UNUSED __attribute__((unused))
 #else
@@ -673,7 +653,7 @@
 #ifdef MSTL_STANDARD_17__
     /**
      * @def MSTL_UNLIKELY
-     * @brief 分支预测：不太可能执行（C++17）
+     * @brief 分支预测：不太可能执行
      */
     #define MSTL_UNLIKELY [[unlikely]]
 #else
@@ -688,7 +668,7 @@
 #ifdef MSTL_STANDARD_20__
     /**
      * @def MSTL_LIKELY
-     * @brief 分支预测：很可能执行（C++20）
+     * @brief 分支预测：很可能执行
      */
     #define MSTL_LIKELY [[likely]]
 #else
@@ -703,19 +683,19 @@
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_NORETURN
-     * @brief 无返回值函数属性（GNU编译器）
+     * @brief 无返回值函数属性
      */
     #define MSTL_NORETURN __attribute__((noreturn))
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_NORETURN
-     * @brief 无返回值函数属性（MSVC）
+     * @brief 无返回值函数属性
      */
     #define MSTL_NORETURN __declspec(noreturn)
 #elif defined(MSTL_STANDARD_11__)
     /**
      * @def MSTL_NORETURN
-     * @brief 无返回值函数属性（C++11）
+     * @brief 无返回值函数属性
      */
     #define MSTL_NORETURN [[noreturn]]
 #else
@@ -730,19 +710,19 @@
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_PURE_FUNCTION
-     * @brief 纯函数属性（只读内存）
+     * @brief 纯函数属性
      */
     #define MSTL_PURE_FUNCTION __attribute__((__pure__))
 
     /**
      * @def MSTL_MALLOC_FUNCTION
-     * @brief malloc类函数属性（返回新内存）
+     * @brief malloc类函数属性
      */
     #define MSTL_MALLOC_FUNCTION __attribute__((__malloc__))
 
     /**
      * @def MSTL_CONST_FUNCTION
-     * @brief 常量函数属性（无副作用）
+     * @brief 常量函数属性
      */
     #define MSTL_CONST_FUNCTION __attribute__((__const__))
 
@@ -838,13 +818,13 @@
 #if defined(MSTL_COMPILER_GNUC__)
     /**
      * @def MSTL_NOVTABLE
-     * @brief 无虚函数表属性（GNU编译器）
+     * @brief 无虚函数表属性
      */
     #define MSTL_NOVTABLE __attribute__((novtable))
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_NOVTABLE
-     * @brief 无虚函数表属性（MSVC）
+     * @brief 无虚函数表属性
      */
     #define MSTL_NOVTABLE __declspec(novtable)
 #else
@@ -859,13 +839,13 @@
 #if defined(MSTL_COMPILER_GNUC__)
     /**
      * @def MSTL_ALLOC_OPTIMIZE
-     * @brief 分配器优化标记（GNU编译器）
+     * @brief 分配器优化标记
      */
     #define MSTL_ALLOC_OPTIMIZE MSTL_ALWAYS_INLINE
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_ALLOC_OPTIMIZE
-     * @brief 分配器优化标记（MSVC）
+     * @brief 分配器优化标记
      */
     #define MSTL_ALLOC_OPTIMIZE __declspec(allocator)
 #else
@@ -880,13 +860,13 @@
 #if defined(MSTL_COMPILER_GNUC__)
     /**
      * @def MSTL_RESTRICT
-     * @brief 限制指针别名（GNU编译器）
+     * @brief 限制指针别名
      */
     #define MSTL_RESTRICT __restrict__
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_RESTRICT
-     * @brief 限制指针别名（MSVC）
+     * @brief 限制指针别名
      */
     #define MSTL_RESTRICT __restrict
 #else
@@ -901,13 +881,13 @@
 #ifdef MSTL_COMPILER_GNUC__
     /**
      * @def MSTL_UNREACHABLE
-     * @brief 不可达代码标记（GNU编译器）
+     * @brief 不可达代码标记
      */
     #define MSTL_UNREACHABLE __builtin_unreachable()
 #elif defined(MSTL_COMPILER_MSVC__)
     /**
      * @def MSTL_UNREACHABLE
-     * @brief 不可达代码标记（MSVC）
+     * @brief 不可达代码标记
      */
     #define MSTL_UNREACHABLE __assume(false)
 #else
@@ -922,7 +902,7 @@
 #ifdef MSTL_STANDARD_20__
     /**
      * @def MSTL_NO_UNIQUE_ADDRESS
-     * @brief 无唯一地址属性（C++20）
+     * @brief 无唯一地址属性
      */
     #define MSTL_NO_UNIQUE_ADDRESS [[no_unique_address]]
 #else
@@ -954,7 +934,7 @@
 #ifdef MSTL_STANDARD_20__
 /**
  * @def MSTL_MACRO_RANGES_UNICODE_CHARS
- * @brief 展开Unicode字符类型（C++20）
+ * @brief 展开Unicode字符类型
  * @param MAC 宏处理器
  */
 #define MSTL_MACRO_RANGES_UNICODE_CHARS(MAC) \
@@ -964,7 +944,7 @@
 #else
 /**
  * @def MSTL_MACRO_RANGES_UNICODE_CHARS
- * @brief 展开Unicode字符类型（C++20之前）
+ * @brief 展开Unicode字符类型
  * @param MAC 宏处理器
  */
 #define MSTL_MACRO_RANGES_UNICODE_CHARS(MAC) \

@@ -8,6 +8,10 @@
 #include <new>
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_INLINE17 constexpr size_t MEMORY_ALIGN_THRESHHOLD = 16UL;
+MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_THRESHHOLD = 4096UL;
+
+
 MSTL_BEGIN_INNER__
 
 #ifdef MSTL_COMPILER_GCC__
@@ -21,9 +25,9 @@ using alloc_size_t = size_t;
 MSTL_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32UL;
 
 #ifdef MSTL_STATE_DEBUG__
-MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = 2 * POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
+MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = 2 * sizeof(void*) + MEMORY_BIG_ALLOC_ALIGN - 1;
 #else
-MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = POINTER_SIZE + MEMORY_BIG_ALLOC_ALIGN - 1;
+MSTL_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = sizeof(void*) + MEMORY_BIG_ALLOC_ALIGN - 1;
 #endif
 
 #ifdef MSTL_DATA_BUS_WIDTH_64__
@@ -105,9 +109,9 @@ void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
         const uintptr_t holder = user_ptr[-1];
         MSTL_DEBUG_VERIFY(user_ptr[-2] == MEMORY_BIG_ALLOC_SENTINEL, "invalid sentinel.");
 #ifdef MSTL_STATE_DEBUG__
-        constexpr uintptr_t min_shift = 2 * POINTER_SIZE;
+        constexpr uintptr_t min_shift = 2 * sizeof(void*);
 #else
-        constexpr uintptr_t min_shift = POINTER_SIZE;
+        constexpr uintptr_t min_shift = sizeof(void*);
 #endif // MSTL_STATE_DEBUG__
         const uintptr_t shift = reinterpret_cast<uintptr_t>(ptr) - holder;
         MSTL_DEBUG_VERIFY(shift >= min_shift && shift <= MEMORY_NO_USER_SIZE, "invalid argument.");
@@ -137,7 +141,7 @@ MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& byt
         );
 }
 
-template<size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
+template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
 MSTL_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
     _INNER __deallocate_aux<Align>(ptr, bytes);
 }
@@ -175,7 +179,6 @@ public:
     using value_type = T;
     using pointer    = T*;
     using size_type  = _INNER alloc_size_t;
-    using device_type = allocate_cpu_tag;
 
     template <typename U>
     struct rebind {

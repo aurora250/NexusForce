@@ -87,6 +87,17 @@ public:
 };
 
 
+struct defer_lock_tag {
+    constexpr defer_lock_tag() noexcept = default;
+};
+MSTL_INLINE17 constexpr defer_lock_tag defer_lock{};
+
+struct try_lock_tag {
+    constexpr try_lock_tag() noexcept = default;
+};
+MSTL_INLINE17 constexpr try_lock_tag try_lock{};
+
+
 template <typename Mutex>
 class unique_lock {
 public:

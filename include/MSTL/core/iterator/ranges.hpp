@@ -86,19 +86,19 @@ public:
 
 struct all_view_factory {
     template <typename V> requires View<remove_cvref_t<V>>
-    constexpr auto operator()(V&& v) const noexcept {
+    constexpr auto operator ()(V&& v) const noexcept {
         return _MSTL forward<V>(v);
     }
 
     template <typename R>
         requires Range<R> && (!View<remove_cvref_t<R>>)
-    constexpr auto operator()(R& r) const noexcept {
+    constexpr auto operator ()(R& r) const noexcept {
         return ref_view<remove_cvref_t<R>>{r};
     }
 
     template <typename R>
         requires Range<R> && (!View<remove_cvref_t<R>>)
-    constexpr auto operator()(R&& r) const
+    constexpr auto operator ()(R&& r) const
     noexcept(is_nothrow_move_constructible_v<remove_cvref_t<R>>) {
         return owning_view<remove_cvref_t<R>>{_MSTL move(r)};
     }
@@ -1669,7 +1669,7 @@ MSTL_BEGIN_RANGES_VIEWS__
 
 struct all_adaptor {
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return all(_MSTL forward<R>(range));
     }
 };
@@ -1684,19 +1684,19 @@ struct filter_adaptor_closure : range_adaptor_closure<filter_adaptor_closure<Pre
     constexpr explicit filter_adaptor_closure(Pred p) : pred(_MSTL move(p)) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return filter_view{all(_MSTL forward<R>(range)), pred};
     }
 };
 
 struct filter_adaptor {
     template <typename Pred>
-    constexpr auto operator()(Pred pred) const {
+    constexpr auto operator ()(Pred pred) const {
         return filter_adaptor_closure<Pred>{_MSTL move(pred)};
     }
 
     template <Range R, typename Pred>
-    constexpr auto operator()(R&& range, Pred pred) const {
+    constexpr auto operator ()(R&& range, Pred pred) const {
         return filter_view{all(_MSTL forward<R>(range)), _MSTL move(pred)};
     }
 };
@@ -1711,19 +1711,19 @@ struct transform_adaptor_closure : range_adaptor_closure<transform_adaptor_closu
     constexpr explicit transform_adaptor_closure(Func f) : func(_MSTL move(f)) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return transform_view{all(_MSTL forward<R>(range)), func};
     }
 };
 
 struct transform_adaptor {
     template <typename Func>
-    constexpr auto operator()(Func func) const {
+    constexpr auto operator ()(Func func) const {
         return transform_adaptor_closure<Func>{_MSTL move(func)};
     }
 
     template <Range R, typename Func>
-    constexpr auto operator()(R&& range, Func func) const {
+    constexpr auto operator ()(R&& range, Func func) const {
         return transform_view{all(_MSTL forward<R>(range)), _MSTL move(func)};
     }
 };
@@ -1738,19 +1738,19 @@ struct take_adaptor_closure : range_adaptor_closure<take_adaptor_closure<DiffTyp
     constexpr explicit take_adaptor_closure(DiffType n) : count(n) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return take_view{all(_MSTL forward<R>(range)), count};
     }
 };
 
 struct take_adaptor {
     template <integral N>
-    constexpr auto operator()(N count) const {
+    constexpr auto operator ()(N count) const {
         return take_adaptor_closure<N>{count};
     }
 
     template <Range R, integral N>
-    constexpr auto operator()(R&& range, N count) const {
+    constexpr auto operator ()(R&& range, N count) const {
         return take_view{all(_MSTL forward<R>(range)), count};
     }
 };
@@ -1765,19 +1765,19 @@ struct take_while_adaptor_closure : range_adaptor_closure<take_while_adaptor_clo
     constexpr explicit take_while_adaptor_closure(Pred p) : pred(_MSTL move(p)) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return take_while_view{all(_MSTL forward<R>(range)), pred};
     }
 };
 
 struct take_while_adaptor {
     template <typename Pred>
-    constexpr auto operator()(Pred pred) const {
+    constexpr auto operator ()(Pred pred) const {
         return take_while_adaptor_closure<Pred>{_MSTL move(pred)};
     }
 
     template <Range R, typename Pred>
-    constexpr auto operator()(R&& range, Pred pred) const {
+    constexpr auto operator ()(R&& range, Pred pred) const {
         return take_while_view{all(_MSTL forward<R>(range)), _MSTL move(pred)};
     }
 };
@@ -1792,19 +1792,19 @@ struct drop_adaptor_closure : range_adaptor_closure<drop_adaptor_closure<DiffTyp
     constexpr explicit drop_adaptor_closure(DiffType n) : count(n) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return drop_view{all(_MSTL forward<R>(range)), count};
     }
 };
 
 struct drop_adaptor {
     template <integral N>
-    constexpr auto operator()(N count) const {
+    constexpr auto operator ()(N count) const {
         return drop_adaptor_closure<N>{count};
     }
 
     template <Range R, integral N>
-    constexpr auto operator()(R&& range, N count) const {
+    constexpr auto operator ()(R&& range, N count) const {
         return drop_view{all(_MSTL forward<R>(range)), count};
     }
 };
@@ -1819,19 +1819,19 @@ struct drop_while_adaptor_closure : range_adaptor_closure<drop_while_adaptor_clo
     constexpr explicit drop_while_adaptor_closure(Pred p) : pred(_MSTL move(p)) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return drop_while_view{all(_MSTL forward<R>(range)), pred};
     }
 };
 
 struct drop_while_adaptor {
     template <typename Pred>
-    constexpr auto operator()(Pred pred) const {
+    constexpr auto operator ()(Pred pred) const {
         return drop_while_adaptor_closure<Pred>{_MSTL move(pred)};
     }
 
     template <Range R, typename Pred>
-    constexpr auto operator()(R&& range, Pred pred) const {
+    constexpr auto operator ()(R&& range, Pred pred) const {
         return drop_while_view{all(_MSTL forward<R>(range)), _MSTL move(pred)};
     }
 };
@@ -1842,19 +1842,19 @@ MSTL_INLINE17 constexpr drop_while_adaptor drop_while;
 struct reverse_adaptor_closure : range_adaptor_closure<reverse_adaptor_closure> {
     template <Range R>
         requires bidirectional_iterator<decltype(_MSTL declval<R>().begin())>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return reverse_view{all(_MSTL forward<R>(range))};
     }
 };
 
 struct reverse_adaptor {
-    constexpr auto operator()() const {
+    constexpr auto operator ()() const {
         return reverse_adaptor_closure{};
     }
 
     template <Range R>
         requires bidirectional_iterator<decltype(_MSTL declval<R>().begin())>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return reverse_view{all(_MSTL forward<R>(range))};
     }
 };
@@ -1864,12 +1864,12 @@ MSTL_INLINE17 constexpr reverse_adaptor reverse;
 
 struct iota_adaptor {
     template <typename T>
-    constexpr auto operator()(T start) const {
+    constexpr auto operator ()(T start) const {
         return iota_view<T>{start};
     }
 
     template <typename T>
-    constexpr auto operator()(T start, T bound) const {
+    constexpr auto operator ()(T start, T bound) const {
         return iota_view<T>{start, bound};
     }
 };
@@ -1879,12 +1879,12 @@ MSTL_INLINE17 constexpr iota_adaptor iota;
 
 struct repeat_adaptor {
     template <typename T>
-    constexpr auto operator()(T value) const {
+    constexpr auto operator ()(T value) const {
         return repeat_view<T>{_MSTL move(value)};
     }
 
     template <typename T, integral N>
-    constexpr auto operator()(T value, N count) const {
+    constexpr auto operator ()(T value, N count) const {
         return repeat_view<T>{_MSTL move(value), static_cast<ptrdiff_t>(count)};
     }
 };
@@ -1895,19 +1895,19 @@ MSTL_INLINE17 constexpr repeat_adaptor repeat;
 struct join_adaptor_closure : range_adaptor_closure<join_adaptor_closure> {
     template <Range R>
         requires Range<iter_reference_t<decltype(_MSTL declval<R>().begin())>>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return join_view{all(_MSTL forward<R>(range))};
     }
 };
 
 struct join_adaptor {
-    constexpr auto operator()() const {
+    constexpr auto operator ()() const {
         return join_adaptor_closure{};
     }
 
     template <Range R>
         requires Range<iter_reference_t<decltype(_MSTL declval<R>().begin())>>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return join_view{all(_MSTL forward<R>(range))};
     }
 };
@@ -1918,7 +1918,7 @@ MSTL_INLINE17 constexpr join_adaptor join;
 template <size_t N>
 struct elements_adaptor_closure : range_adaptor_closure<elements_adaptor_closure<N>> {
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return element_view<N, decltype(all(_MSTL forward<R>(range)))>{
             all(_MSTL forward<R>(range))
         };
@@ -1927,12 +1927,12 @@ struct elements_adaptor_closure : range_adaptor_closure<elements_adaptor_closure
 
 template <size_t N>
 struct elements_adaptor {
-    constexpr auto operator()() const {
+    constexpr auto operator ()() const {
         return elements_adaptor_closure<N>{};
     }
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return element_view<N, decltype(all(_MSTL forward<R>(range)))>{
             all(_MSTL forward<R>(range))
         };
@@ -1948,7 +1948,7 @@ MSTL_INLINE17 constexpr auto values = elements<1>;
 
 struct common_adaptor_closure : range_adaptor_closure<common_adaptor_closure> {
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         if constexpr (common_range<R>) {
             return all(_MSTL forward<R>(range));
         } else {
@@ -1958,12 +1958,12 @@ struct common_adaptor_closure : range_adaptor_closure<common_adaptor_closure> {
 };
 
 struct common_adaptor {
-    constexpr auto operator()() const {
+    constexpr auto operator ()() const {
         return common_adaptor_closure{};
     }
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         if constexpr (common_range<R>) {
             return all(_MSTL forward<R>(range));
         } else {
@@ -1977,7 +1977,7 @@ MSTL_INLINE17 constexpr common_adaptor common;
 
 struct counted_adaptor {
     template <typename Iter, integral N>
-    constexpr auto operator()(Iter iter, N count) const {
+    constexpr auto operator ()(Iter iter, N count) const {
         return counted_view{iter, static_cast<iter_difference_t<Iter>>(count)};
     }
 };
@@ -1995,19 +1995,19 @@ struct concat_adaptor_closure : range_adaptor_closure<concat_adaptor_closure<V2>
 
     template <typename V>
     requires Range<V>
-    constexpr auto operator()(V&& v) const {
+    constexpr auto operator ()(V&& v) const {
         return concat_view{ all(_MSTL forward<V>(v)), view_ };
     }
 };
 
 struct concat_adaptor {
     template <typename V2>
-    constexpr auto operator()(V2&& v2) const {
+    constexpr auto operator ()(V2&& v2) const {
         return concat_adaptor_closure<V2>{_MSTL forward<V2>(v2)};
     }
 
     template <typename V1, typename V2>
-    constexpr auto operator()(V1&& v1, V2&& v2) const {
+    constexpr auto operator ()(V1&& v1, V2&& v2) const {
         return concat_view{ all(_MSTL forward<V1>(v1)), all(_MSTL forward<V2>(v2)) };
     }
 };
@@ -2022,19 +2022,19 @@ struct split_adaptor_closure : range_adaptor_closure<split_adaptor_closure<T>> {
     constexpr explicit split_adaptor_closure(T d) : delim_(d) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return split_view{all(_MSTL forward<R>(range)), delim_};
     }
 };
 
 struct split_adaptor {
     template <typename T>
-    constexpr auto operator()(T delim) const {
+    constexpr auto operator ()(T delim) const {
         return split_adaptor_closure<T>{delim};
     }
 
     template <Range R, typename T>
-    constexpr auto operator()(R&& range, T delim) const {
+    constexpr auto operator ()(R&& range, T delim) const {
         return split_view{all(_MSTL forward<R>(range)), delim};
     }
 };
@@ -2049,18 +2049,18 @@ struct slice_adaptor_closure : range_adaptor_closure<slice_adaptor_closure> {
      : offset_(o), length_(l) {}
 
     template <Range R>
-    constexpr auto operator()(R&& range) const {
+    constexpr auto operator ()(R&& range) const {
         return slice_view{all(_MSTL forward<R>(range)), offset_, length_};
     }
 };
 
 struct slice_adaptor {
-    constexpr auto operator()(ptrdiff_t offset, ptrdiff_t length) const {
+    constexpr auto operator ()(ptrdiff_t offset, ptrdiff_t length) const {
         return slice_adaptor_closure{offset, length};
     }
 
     template <Range R>
-    constexpr auto operator()(R&& range, ptrdiff_t offset, ptrdiff_t length) const {
+    constexpr auto operator ()(R&& range, ptrdiff_t offset, ptrdiff_t length) const {
         return slice_view{all(_MSTL forward<R>(range)), offset, length};
     }
 };

@@ -143,7 +143,7 @@ public:
     explicit constexpr mem_func_base(MemberPtr pmf) noexcept : ptr_(pmf) {}
 
     template <typename... Args>
-    MSTL_CONSTEXPR20 auto operator()(Args&&... args) const
+    MSTL_CONSTEXPR20 auto operator ()(Args&&... args) const
     noexcept(noexcept(_MSTL invoke(ptr_, _MSTL forward<Args>(args)...)))
     -> decltype(_MSTL invoke(ptr_, _MSTL forward<Args>(args)...)) {
         return _MSTL invoke(ptr_, _MSTL forward<Args>(args)...);
@@ -164,7 +164,7 @@ public:
     explicit constexpr mem_func_base(MemberObjPtr pm) noexcept : ptr_(pm) {}
 
     template <typename T>
-    MSTL_CONSTEXPR20 auto operator()(T&& obj) const
+    MSTL_CONSTEXPR20 auto operator ()(T&& obj) const
     noexcept(noexcept(_MSTL invoke(ptr_, _MSTL forward<T>(obj))))
     -> decltype(_MSTL invoke(ptr_, _MSTL forward<T>(obj))) {
         return _MSTL invoke(ptr_, _MSTL forward<T>(obj));
@@ -244,7 +244,7 @@ template <typename T>
 class mu<reference_wrapper<T>, false, false> {
 public:
     template <typename CVRef, typename Tuple>
-    MSTL_CONSTEXPR20 T& operator()(CVRef& arg, Tuple&) const volatile {
+    MSTL_CONSTEXPR20 T& operator ()(CVRef& arg, Tuple&) const volatile {
         return arg.get();
     }
 };
@@ -253,7 +253,7 @@ template <typename Arg>
 class mu<Arg, true, false> {
 public:
     template <typename CVArg, typename... Args>
-    MSTL_CONSTEXPR20 auto operator()(CVArg& arg, tuple<Args...>& tuple_ref) const volatile
+    MSTL_CONSTEXPR20 auto operator ()(CVArg& arg, tuple<Args...>& tuple_ref) const volatile
     -> decltype(arg(declval<Args>()...)) {
         using Indexes = build_index_tuple_t<sizeof...(Args)>;
         return call(arg, tuple_ref, Indexes());
@@ -277,7 +277,7 @@ class mu<Arg, false, true> {
 public:
     template <typename Tuple>
     MSTL_CONSTEXPR20 safe_tuple_element_t<(is_placeholder<Arg>::value - 1), Tuple>&&
-    operator()(const volatile Arg&, Tuple& tuple_ref) const volatile {
+    operator ()(const volatile Arg&, Tuple& tuple_ref) const volatile {
         return _MSTL get<(is_placeholder<Arg>::value - 1)>(_MSTL move(tuple_ref));
     }
 };
@@ -286,7 +286,7 @@ template <typename Arg>
 class mu<Arg, false, false> {
 public:
     template <typename CVArg, typename Tuple>
-    MSTL_CONSTEXPR20 CVArg&& operator()(CVArg&& arg, Tuple&) const volatile {
+    MSTL_CONSTEXPR20 CVArg&& operator ()(CVArg&& arg, Tuple&) const volatile {
         return _MSTL forward<CVArg>(arg);
     }
 };
@@ -362,7 +362,7 @@ public:
     binder(binder&&) = default;
 
     template <typename... Args>
-    MSTL_CONSTEXPR20 auto operator()(Args&&... args)
+    MSTL_CONSTEXPR20 auto operator ()(Args&&... args)
     -> result_type<tuple<Args&&...>> {
         using Res = result_type<tuple<Args&&...>>;
         return binder::call<Res>(
@@ -371,7 +371,7 @@ public:
     }
 
     template <typename... Args>
-    MSTL_CONSTEXPR20 auto operator()(Args&&... args) const
+    MSTL_CONSTEXPR20 auto operator ()(Args&&... args) const
     -> result_type_const<tuple<Args&&...>> {
         using Res = result_type_const<tuple<Args&&...>>;
         return binder::call_const<Res>(
@@ -420,21 +420,21 @@ public:
     bindrer(bindrer&&) = default;
 
     template <typename... Args>
-    MSTL_CONSTEXPR20 result_type operator()(Args&&... args) {
+    MSTL_CONSTEXPR20 result_type operator ()(Args&&... args) {
         return bindrer::call<Res>(
             _MSTL forward_as_tuple(_MSTL forward<Args>(args)...),
             BoundIndexes());
     }
 
     template <typename... Args>
-    MSTL_CONSTEXPR20 result_type operator()(Args&&... args) const {
+    MSTL_CONSTEXPR20 result_type operator ()(Args&&... args) const {
         return bindrer::call<Res>(
             _MSTL forward_as_tuple(_MSTL forward<Args>(args)...),
             BoundIndexes());
     }
 
     template <typename... Args>
-    void operator()(Args&&...) const volatile = delete;
+    void operator ()(Args&&...) const volatile = delete;
 };
 
 template <typename Sign>
@@ -568,28 +568,28 @@ public:
 
     template <typename... CallArgs>
     constexpr invoke_result_t<Func&, BoundArgs&..., CallArgs...>
-    operator()(CallArgs&&... call_args) &
+    operator ()(CallArgs&&... call_args) &
     noexcept(is_nothrow_invocable_v<Func&, BoundArgs&..., CallArgs...>) {
         return binder_front::call(*this, BoundIndices(), _MSTL forward<CallArgs>(call_args)...);
     }
 
     template <typename... CallArgs>
     constexpr invoke_result_t<const Func&, const BoundArgs&..., CallArgs...>
-    operator()(CallArgs&&... call_args) const &
+    operator ()(CallArgs&&... call_args) const &
     noexcept(is_nothrow_invocable_v<const Func&, const BoundArgs&..., CallArgs...>) {
         return binder_front::call(*this, BoundIndices(), _MSTL forward<CallArgs>(call_args)...);
     }
 
     template <typename... CallArgs>
     constexpr invoke_result_t<Func, BoundArgs..., CallArgs...>
-    operator()(CallArgs&&... call_args) &&
+    operator ()(CallArgs&&... call_args) &&
     noexcept(is_nothrow_invocable_v<Func, BoundArgs..., CallArgs...>) {
         return binder_front::call(_MSTL move(*this), BoundIndices(), _MSTL forward<CallArgs>(call_args)...);
     }
 
     template <typename... CallArgs>
     constexpr invoke_result_t<const Func, const BoundArgs..., CallArgs...>
-    operator()(CallArgs&&... call_args) const &&
+    operator ()(CallArgs&&... call_args) const &&
     noexcept(is_nothrow_invocable_v<const Func, const BoundArgs..., CallArgs...>) {
         return binder_front::call(_MSTL move(*this), BoundIndices(), _MSTL forward<CallArgs>(call_args)...);
     }

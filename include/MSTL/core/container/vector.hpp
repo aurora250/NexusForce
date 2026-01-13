@@ -15,12 +15,7 @@ private:
 	using const_iterator	= vector_iterator<true, Vector>;
 
 public:
-	using iterator_category =
-#ifdef MSTL_STANDARD_20__
-		contiguous_iterator_tag;
-#else
-		random_access_iterator_tag;
-#endif
+	using iterator_category = contiguous_iterator_tag;
 	using value_type		= typename Vector::value_type;
 	using reference			= conditional_t<IsConst, typename Vector::const_reference, typename Vector::reference>;
 	using pointer			= conditional_t<IsConst, typename Vector::const_pointer, typename Vector::pointer>;

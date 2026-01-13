@@ -4,9 +4,10 @@
 #include "../iterator/normal_iterator.hpp"
 #include "../iterator/reverse_iterator.hpp"
 #include "../utility/compressed_pair.hpp"
+#include "../numeric/numeric_limits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_INLINE17 constexpr size_t dynamic_extent = SIZE_T_MAX_SIZE;
+MSTL_INLINE17 constexpr size_t dynamic_extent = numeric_limits<size_t>::max();
 
 
 MSTL_BEGIN_INNER__

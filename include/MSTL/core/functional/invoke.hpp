@@ -129,7 +129,7 @@ struct __invoke_result_dispatch<false, true, MemPtr, Arg, Args...>
 template <typename F, typename... Args>
 struct __invoke_result_dispatch<false, false, F, Args...> {
 private:
-    template<typename F1, typename... Args1>
+    template <typename F1, typename... Args1>
     static invoke_result_true<
         decltype(_MSTL declval<F1>()(_MSTL declval<Args1>()...)), invoke_other_tag> __test(int);
 

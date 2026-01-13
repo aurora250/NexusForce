@@ -74,22 +74,22 @@ template <typename ratio1, typename ratio2>
 constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::den;
 MSTL_END_INNER__
 
-template<typename ratio1, typename ratio2>
+template <typename ratio1, typename ratio2>
 using ratio_divide = typename _INNER __ratio_divide_impl<ratio1, ratio2>::type;
 
 
 template <typename ratio1, typename ratio2>
-struct ratio_equal : integral_constant<bool, ratio1::num == ratio2::num && ratio1::den == ratio2::den> {};
+struct ratio_equal : bool_constant<ratio1::num == ratio2::num && ratio1::den == ratio2::den> {};
 
 template <typename ratio1, typename ratio2>
-struct ratio_not_equal : integral_constant<bool, !ratio_equal<ratio1, ratio2>::value> {};
+struct ratio_not_equal : bool_constant<!ratio_equal<ratio1, ratio2>::value> {};
 
 
 MSTL_BEGIN_INNER__
 template <typename ratio1, typename ratio2,
     typename left_product = big_mul<ratio1::num, ratio2::den>,
     typename right_product = big_mul<ratio2::num, ratio1::den>>
-struct __ratio_less_impl_base : integral_constant<bool, big_less<
+struct __ratio_less_impl_base : bool_constant<big_less<
     left_product::result_high, left_product::result_low, right_product::result_high, right_product::result_low>::value
 > {};
 
@@ -99,7 +99,7 @@ template <typename ratio1, typename ratio2,
 struct __ratio_less_impl : __ratio_less_impl_base<ratio1, ratio2>::type {};
 
 template <typename ratio1, typename ratio2>
-struct __ratio_less_impl<ratio1, ratio2, true, false> : integral_constant<bool, ratio1::num < ratio2::num> {};
+struct __ratio_less_impl<ratio1, ratio2, true, false> : bool_constant<ratio1::num < ratio2::num> {};
 
 template <typename ratio1, typename ratio2>
 struct __ratio_less_impl<ratio1, ratio2, false, true>
@@ -111,14 +111,14 @@ template <typename ratio1, typename ratio2>
 struct ratio_less : _INNER __ratio_less_impl<ratio1, ratio2>::type {};
 
 template <typename ratio1, typename ratio2>
-struct ratio_less_equal : integral_constant<bool, !ratio_less<ratio2, ratio1>::value> {};
+struct ratio_less_equal : bool_constant<!ratio_less<ratio2, ratio1>::value> {};
 
 
 template <typename ratio1, typename ratio2>
-struct ratio_greater : integral_constant<bool, ratio_less<ratio2, ratio1>::value> {};
+struct ratio_greater : bool_constant<ratio_less<ratio2, ratio1>::value> {};
 
 template <typename ratio1, typename ratio2>
-struct ratio_greater_equal : integral_constant<bool, !ratio_less<ratio1, ratio2>::value> {};
+struct ratio_greater_equal : bool_constant<!ratio_less<ratio1, ratio2>::value> {};
 
 
 #ifdef MSTL_STANDARD_14__

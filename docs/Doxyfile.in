@@ -1,0 +1,88 @@
+PROJECT_NAME           = "@PROJECT_NAME@"
+PROJECT_NUMBER         = @PROJECT_VERSION@
+PROJECT_BRIEF          = "A Modern C++ Library with extended functionality, web components, and utility libraries"
+OUTPUT_DIRECTORY       = "@DOXYGEN_OUTPUT_DIR@"
+
+INPUT                  = "@DOXYGEN_INPUT_DIRS@"
+RECURSIVE              = YES
+
+FILE_PATTERNS          = *.hpp \
+                         *.cpp \
+                         *.md
+
+ENCODING               = UTF-8
+OUTPUT_LANGUAGE        = Chinese
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+EXTRACT_ALL            = NO  # 只提取有文档的内容
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_ANON_NSPACES   = NO
+
+HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_CLASSES     = YES
+HIDE_FRIEND_COMPOUNDS  = YES
+HIDE_IN_BODY_DOCS      = NO
+
+HAVE_DOT               = @HAVE_DOT@
+DOT_NUM_THREADS        = 0       # 使用所有 CPU 核心
+
+# 只启用继承层次图和类图
+CLASS_GRAPHS           = YES     # 类图
+GRAPHICAL_HIERARCHY    = YES     # 图形化继承层次
+COLLABORATION_GRAPH    = NO      # 协作图
+CALL_GRAPHS            = NO      # 函数调用图
+CALLER_GRAPHS          = NO      # 被调用图
+INCLUDE_GRAPH          = NO      # 包含关系图
+INCLUDED_BY_GRAPH      = NO      # 被包含关系图
+
+UML_LOOK               = NO      # 简化 UML 样式
+DOT_GRAPH_MAX_NODES    = 50      # 限制节点数量
+MAX_DOT_GRAPH_DEPTH    = 2       # 限制图表深度
+DOT_IMAGE_FORMAT       = svg     # 使用 SVG，更小更清晰
+DOT_TRANSPARENT        = NO      # 禁用透明背景
+
+SOURCE_BROWSER         = YES     # 源代码浏览
+INLINE_SOURCES         = YES     # 在文档中嵌入源代码
+REFERENCED_BY_RELATION = YES     # 显示被引用关系
+REFERENCES_RELATION    = YES     # 显示引用关系
+
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
+
+ALPHABETICAL_INDEX     = YES
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 250
+DISABLE_INDEX          = NO
+
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+
+FULL_PATH_NAMES        = NO      # 使用相对路径
+STRIP_FROM_PATH        = "@CMAKE_CURRENT_SOURCE_DIR@"
+
+AUTOLINK_SUPPORT       = YES
+TYPEDEF_HIDES_STRUCT   = YES
+
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO      # 不警告未文档化的内容
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = NO      # 不警告缺少参数文档
+
+# 禁用不常用的功能
+MACRO_EXPANSION        = NO
+EXPAND_ONLY_PREDEF     = NO
+PREDEFINED             = 
+SKIP_FUNCTION_MACROS   = YES
+
+# 限制解析深度
+LOOKUP_CACHE_SIZE      = 0       # 0 表示自动调整

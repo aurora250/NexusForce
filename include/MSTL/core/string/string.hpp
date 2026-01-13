@@ -177,7 +177,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string address_string(const void* p) {
     if (p == nullptr) return {"nullptr"};
     
     const uintptr_t addr_val = reinterpret_cast<uintptr_t>(p);
-    constexpr size_t hex_digit_count = POINTER_SIZE * 2;
+    constexpr size_t hex_digit_count = sizeof(void*) * 2;
     constexpr char hex_digits[] = "0123456789abcdef";
     uintptr_t mask = _INNER ADDRESS_MASK;
     int shift = _INNER ADDRESS_SHIFT;

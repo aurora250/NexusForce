@@ -1,7 +1,3 @@
-if(NOT MSTL_BUILD_TESTS)
-    return()
-endif()
-
 add_executable(MSTL_TEST main.cpp try.cpp try.h)
 
 set_target_properties(MSTL_TEST PROPERTIES

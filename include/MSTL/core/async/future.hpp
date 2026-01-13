@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_FUTURE_HPP__
 #define MSTL_CORE_ASYNC_FUTURE_HPP__
-#include "../utility/monostate.hpp"
+#include "../utility/non.hpp"
 #include "future_base.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -227,7 +227,7 @@ struct future_result {
 };
 template <>
 struct future_result<void> {
-    using type = monostate;
+    using type = non;
 };
 
 template <typename T>
@@ -239,7 +239,7 @@ MSTL_ALWAYS_INLINE
 enable_if_t<is_void_v<T>, future_result_t<T>>
 get(future<T>& f) {
     f.get();
-    return monostate{};
+    return non{};
 }
 
 template <typename T>

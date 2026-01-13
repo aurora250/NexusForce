@@ -116,7 +116,7 @@ struct tuple<> : icommon<tuple<>> {
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator ==(const tuple& rhs) const noexcept { return this->equal_to(rhs); }
 	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool operator <(const tuple& rhs) const noexcept { return this->less_to(rhs); }
 
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t to_hash() const noexcept { return FNV_OFFSET_BASIS; }
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t to_hash() const noexcept { return _CONSTANTS FNV_OFFSET_BASIS; }
 };
 
 template <typename This, typename... Rest>

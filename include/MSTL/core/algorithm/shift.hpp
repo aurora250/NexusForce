@@ -159,7 +159,7 @@ constexpr Function for_each(Iterator first, Iterator last, Function f) {
 	return f;
 }
 
-template<typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator for_each_n(Iterator first, const size_t n, Function f) {
 	for (size_t i = 0; i < n; i++) {
 		f(*first);
@@ -374,7 +374,7 @@ constexpr void shift_left(Iterator first, Iterator last, size_t n) {
 	}
 }
 
-template<typename Iterator,
+template <typename Iterator,
 	enable_if_t<is_ranges_bid_iter_v<Iterator> && is_default_constructible_v<iter_value_t<Iterator>>, int> = 0>
 constexpr void shift_right(Iterator first, Iterator last, size_t n) {
 	if (first == last || n == 0) return;

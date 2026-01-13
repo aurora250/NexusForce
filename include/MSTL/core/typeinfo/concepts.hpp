@@ -31,11 +31,11 @@ template <typename Derived, typename Base>
 concept derived_from = is_base_of_v<Base, Derived> && convertible_to<const volatile Derived*, const volatile Base*>;
 
 
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 concept constructible_from = is_constructible_v<T, Args...>;
 template <typename T>
 concept move_constructible = is_move_constructible_v<T>;
-template<typename T>
+template <typename T>
 concept copy_constructible = move_constructible<T>
 && constructible_from<T, T&>&& convertible_to<T&, T>
 && constructible_from<T, const T&>&& convertible_to<const T&, T>
@@ -301,11 +301,8 @@ is_ranges_rnd_iter_v<Iterator>;
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_ranges_cot_iter_v =
-#ifdef MSTL_STANDARD_20__
 is_convertible_v<iter_category_t<Iterator>, contiguous_iterator_tag>;
-#else
-is_pointer_v<Iterator>;
-#endif // MSTL_STANDARD_20__
+
 
 template <typename Iterator>
 MSTL_INLINE17 constexpr bool is_cot_iter_v =

@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_ALGORITHM_SEARCH_HPP__
 #define MSTL_CORE_ALGORITHM_SEARCH_HPP__
 #include "../iterator/reverse_iterator.hpp"
+#include "../functional/functor.hpp"
 #include "bound.hpp"
 MSTL_BEGIN_NAMESPACE__
 

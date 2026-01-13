@@ -1,12 +1,18 @@
+#include <MSTL/core/algorithm/remove.hpp>
+#include <MSTL/core/async/mutex.hpp>
 #include <MSTL/core/system/process.hpp>
-#include <MSTL/core/system/console.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
+#include <MSTL/core/system/console.hpp>
+#include <MSTL/core/file/file.hpp>
+#include <sys/wait.h>
+#include <sys/resource.h>
 #include <unistd.h>
 #include <cerrno>
 #include <cstring>
-#include <cstdlib>
 #include <csignal>
-#include <sys/wait.h>
+#endif
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <psapi.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -107,7 +113,6 @@ static void read_pipe_output(process::process_info& info) {
 
     info.stdout_output = move(output);
 }
-
 
 process::process_info process::create_process(const string& executable,
     const vector<string>& args, bool capture_output) {
@@ -284,6 +289,24 @@ bool process::terminate_process(const process_info& info) noexcept {
 #endif
 }
 
+bool process::suspend_process(const process_info& info) noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (info.pi.hThread == nullptr) return false;
+    return ::SuspendThread(info.pi.hThread) != static_cast<DWORD>(-1);
+#else
+    return ::kill(info.process_id, SIGSTOP) == 0;
+#endif
+}
+
+bool process::resume_process(const process_info& info) noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    if (info.pi.hThread == nullptr) return false;
+    return ::ResumeThread(info.pi.hThread) != static_cast<DWORD>(-1);
+#else
+    return ::kill(info.process_id, SIGCONT) == 0;
+#endif
+}
+
 bool process::is_process_running(const process_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
@@ -297,12 +320,184 @@ bool process::is_process_running(const process_info& info) noexcept {
 #endif
 }
 
-int process::current_process_id() noexcept {
+process::process_id_t process::current_process_id() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::GetCurrentProcessId();
 #else
     return ::getpid();
 #endif
+}
+
+process_memory_info process::get_process_memory_info(const process_info& info) noexcept {
+    process_memory_info mem_info = {0, 0, 0, 0};
+#ifdef MSTL_PLATFORM_WINDOWS__
+    PROCESS_MEMORY_COUNTERS pmc;
+    if (::GetProcessMemoryInfo(info.pi.hProcess, &pmc, sizeof(pmc))) {
+        mem_info.working_set_size = pmc.WorkingSetSize;
+        mem_info.peak_working_set_size = pmc.PeakWorkingSetSize;
+        mem_info.pagefile_usage = pmc.PagefileUsage;
+        mem_info.peak_pagefile_usage = pmc.PeakPagefileUsage;
+    }
+#else
+    const path path("/proc/" + to_string(info.process_id) + "/statm");
+    const file statm(path);
+    if (!statm.is_opened()) {
+        return mem_info;
+    }
+    const string text = statm.read();
+    if (statm.is_opened()) {
+        string tmp;
+        size_t pos;
+        getline(text, pos, tmp, [](char c) { return is_space(c); });
+        size_t size MSTL_UNUSED = to_uint64(tmp.view());
+        getline(text, pos, tmp, [](char c) { return is_space(c); });
+        const size_t rss = to_uint64(tmp.view());
+        mem_info.working_set_size = rss * sysconf(_SC_PAGE_SIZE);
+        // Peak memory not directly available
+    }
+#endif
+    return mem_info;
+}
+
+process_state process::get_process_state(const process_info& info) noexcept {
+    if (!is_process_running(info)) {
+        return process_state::exited;
+    }
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::DWORD exit_code;
+    if (::GetExitCodeProcess(info.pi.hProcess, &exit_code) && exit_code == STILL_ACTIVE) {
+        if (::SuspendThread(info.pi.hThread) != static_cast<::DWORD>(-1)) {
+            ::ResumeThread(info.pi.hThread);
+            return process_state::suspended;
+        }
+        return process_state::running;
+    }
+#else
+    const path path("/proc/" + to_string(info.process_id) + "/stat");
+    const file stat(path);
+    if (stat.is_opened()) {
+        string state;
+        size_t pos = 0;
+        getline(stat.read(), pos, state, [](char c) { return is_space(c); });
+        if (state == "T") return process_state::suspended;
+        if (state == "Z") return process_state::exited;
+        return process_state::running;
+    }
+#endif
+    return process_state::unknown;
+}
+
+bool process::check_process_permission(
+    const process_info& info, process_permission permission) noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::DWORD desired_access = 0;
+
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::read)) != 0) {
+        desired_access |= PROCESS_VM_READ;
+    }
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::write)) != 0) {
+        desired_access |= PROCESS_VM_WRITE;
+    }
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::terminate)) != 0) {
+        desired_access |= PROCESS_TERMINATE;
+    }
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::query_info)) != 0) {
+        desired_access |= PROCESS_QUERY_INFORMATION;
+    }
+
+    ::HANDLE hProcess = ::OpenProcess(desired_access, FALSE, info.process_id);
+    if (hProcess != nullptr) {
+        ::CloseHandle(hProcess);
+        return true;
+    }
+    return false;
+
+#else
+    const string proc_path = "/proc/" + to_string(info.process_id);
+
+    int access_mode = 0;
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::read)) != 0) {
+        access_mode |= R_OK;
+    }
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::write)) != 0) {
+        access_mode |= W_OK;
+    }
+    if ((static_cast<int>(permission) & static_cast<int>(process_permission::execute)) != 0) {
+        access_mode |= X_OK;
+    }
+
+    if (access_mode == 0) {
+        access_mode = F_OK;
+    }
+
+    return ::access(proc_path.c_str(), access_mode) == 0;
+#endif
+}
+
+string process::get_process_name(process_id_t process_id) noexcept {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::HANDLE hProcess = ::OpenProcess(
+        PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+        FALSE,
+        process_id);
+
+    if (hProcess == nullptr) {
+        return "";
+    }
+
+    char process_name[MAX_PATH] = {0};
+    ::HMODULE hMod;
+    ::DWORD cbNeeded;
+
+    if (::EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
+        ::GetModuleBaseNameA(hProcess, hMod, process_name, sizeof(process_name));
+    }
+
+    ::CloseHandle(hProcess);
+    return string(process_name);
+#else
+    const path path("/proc/" + to_string(process_id) + "/comm");
+    const file comm_file(path);
+
+    if (!comm_file.is_opened()) {
+        return "";
+    }
+
+    string name = comm_file.read_line();
+
+    if (!name.empty() && name.back() == '\n') {
+        name.pop_back();
+    }
+
+    return name;
+#endif
+}
+
+void process_group::add_process(process::process_info info) {
+    processes.emplace_back(_MSTL move(info));
+}
+
+bool process_group::terminate_all() {
+    bool success = true;
+    for (auto& info : processes) {
+        if (!process::terminate_process(info)) {
+            success = false;
+        }
+    }
+    return success;
+}
+
+bool process_group::wait_all(const int timeout_ms) {
+    bool all_done = true;
+    for (auto& info : processes) {
+        if (process::is_process_running(info)) {
+            if (process::wait_for_process(info, timeout_ms) == -1) {
+                all_done = false;
+            }
+        }
+    }
+    return all_done;
 }
 
 MSTL_END_NAMESPACE__

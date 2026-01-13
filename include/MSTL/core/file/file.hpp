@@ -131,10 +131,6 @@ private:
 
     void adjust_buffer_size();
 
-#ifdef MSTL_PLATFORM_LINUX__
-    static ::mode_t convert_attributes(FILE_ATTRI attr);
-#endif
-
 public:
     file() = default;
 
@@ -169,7 +165,7 @@ public:
         FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
 
     void close() noexcept;
-    bool flush() const noexcept;
+    bool flush() noexcept;
 
     MSTL_NODISCARD file_handle native_handle() const noexcept { return handle_; }
 
@@ -191,11 +187,11 @@ public:
     MSTL_NODISCARD string read_line() const;
     MSTL_NODISCARD vector<string> read_lines() const;
 
-    vector<string> read_chunks(size_type chunk_size = FILE_BUFFER_SIZE * 16);
+    vector<string> read_chunks(size_type chunk_size = FILE_BUFFER_SIZE * 16) const;
     bool write_chunks(const vector<string>& chunks);
     MSTL_NODISCARD vector<chunk_info> chunks_info(size_type chunk_size) const;
 
-    async_result async_read(string& buffer, size_type size, difference_type offset = -1);
+    async_result async_read(string& buffer, size_type size, difference_type offset = -1) const;
     async_result async_write(string data, size_type size, difference_type offset = -1);
     bool wait_async(async_result& result, uint32_t timeout_ms = numeric_limits<uint32_t>::max());
     void cancel_async(async_result& result);
@@ -236,14 +232,15 @@ public:
     bool prefetch(size_type hint_size = 0) const noexcept;
     bool truncate(difference_type size) const noexcept;
 
-    bool lock(difference_type offset, difference_type length,
-        FILE_LOCK mode = FILE_LOCK::EXCLUSIVE) const noexcept;
+    bool lock(difference_type offset, difference_type length, FILE_LOCK mode = FILE_LOCK::EXCLUSIVE) const noexcept;
     bool unlock(difference_type offset, difference_type length) const noexcept;
 
-    bool try_lock(difference_type offset,
-        difference_type length, FILE_LOCK mode) const noexcept;
-    MSTL_NODISCARD bool is_locked(difference_type offset,
-        difference_type length, FILE_LOCK* out_type) const noexcept;
+    bool try_lock(difference_type offset, difference_type length, FILE_LOCK mode) const noexcept;
+    
+    MSTL_NODISCARD bool is_locked(
+        difference_type offset,
+        difference_type length,
+        FILE_LOCK* out_type) const noexcept;
 
     bool lock_whole(FILE_LOCK mode) const noexcept;
     bool unlock_whole() const noexcept;
@@ -253,7 +250,7 @@ public:
         FILE_MAP_HINT hint = FILE_MAP_HINT::SEQUENTIAL);
     void unmap() noexcept;
     bool remap(size_type new_offset, size_type new_size);
-    bool flush_mapped(bool async = false) const;
+    bool flush_mapped(bool async = false);
 
     bool lock_mapped_pages(bool lock_in_memory) const noexcept;
     MSTL_NODISCARD map_info map_infos() const noexcept;
@@ -265,7 +262,7 @@ public:
     MSTL_NODISCARD bool is_mapped() const noexcept { return mapped_ptr_ != nullptr; }
 
     MSTL_NODISCARD FILE_ATTRI attributes() const noexcept;
-    bool set_attributes(FILE_ATTRI attr) const noexcept;
+    bool set_attributes(FILE_ATTRI attr) noexcept;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     MSTL_NODISCARD datetime creation_time() const noexcept;
@@ -274,17 +271,16 @@ public:
     MSTL_NODISCARD datetime last_write_time() const noexcept;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    bool set_all_times(const datetime& create, const datetime& access,
-        const datetime& write) const noexcept;
+    bool set_all_times(const datetime& create, const datetime& access, const datetime& write) noexcept;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    bool set_all_times(const datetime& access, const datetime& write) const noexcept;
+    bool set_all_times(const datetime& access, const datetime& write) noexcept;
 #endif
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    bool set_creation_time(const datetime& dt) const noexcept;
+    bool set_creation_time(const datetime& dt) noexcept;
 #endif
-    bool set_last_access_time(const datetime& dt) const noexcept;
-    bool set_last_write_time(const datetime& dt) const noexcept;
+    bool set_last_access_time(const datetime& dt) noexcept;
+    bool set_last_write_time(const datetime& dt) noexcept;
 
     MSTL_NODISCARD static size_type size(const _MSTL path& p);
     static bool size(const _MSTL path& p, size_type& size);
@@ -314,15 +310,13 @@ public:
     using difference_type = file::difference_type;
 
 private:
-    const file& file_;
+    file& file_;
     difference_type offset_;
     difference_type length_;
     bool locked_;
 
 public:
-    file_lock_guard(const file& f, difference_type offset,
-        difference_type length, FILE_LOCK mode);
-
+    file_lock_guard(file& f, difference_type offset, difference_type length, FILE_LOCK mode);
     ~file_lock_guard();
 
     file_lock_guard(const file_lock_guard&) = delete;

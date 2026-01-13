@@ -113,7 +113,7 @@ struct __future_base {
         virtual void destroy() = 0;
 
         struct Deleter {
-            void operator()(result_base* result) const { result->destroy(); }
+            void operator ()(result_base* result) const { result->destroy(); }
         };
     };
 
@@ -302,7 +302,7 @@ struct __future_base {
         struct setter<Res, Arg&> {
             static_assert(is_same_v<Res, Arg&> || is_same_v<const Res, Arg>, "Invalid specialisation");
 
-            typename promise<Res>::PtrType operator()() const {
+            typename promise<Res>::PtrType operator ()() const {
                 promise_ptr->storage->set(*arg_ptr);
                 return _MSTL move(promise_ptr->storage);
             }
@@ -312,7 +312,7 @@ struct __future_base {
 
         template <typename Res>
         struct setter<Res, Res&&> {
-            typename promise<Res>::PtrType operator()() const {
+            typename promise<Res>::PtrType operator ()() const {
                 promise_ptr->storage->set(_MSTL move(*arg_ptr));
                 return _MSTL move(promise_ptr->storage);
             }
@@ -324,7 +324,7 @@ struct __future_base {
         struct setter<Res, void> {
             static_assert(is_void_v<Res>, "Only used for promise<void>");
 
-            typename promise<Res>::ptr_type operator()() const {
+            typename promise<Res>::ptr_type operator ()() const {
                 return _MSTL move(promise_ptr->storage);
             }
             promise<Res>* promise_ptr;
@@ -334,7 +334,7 @@ struct __future_base {
 
         template <typename Res>
         struct setter<Res, exception_ptr_tag> {
-            typename promise<Res>::ptr_type operator()() const {
+            typename promise<Res>::ptr_type operator ()() const {
                 promise_ptr->storage->error_ptr = *exp_ptr;
                 return _MSTL move(promise_ptr->storage);
             }
@@ -449,7 +449,7 @@ public:
     }
 };
 
-template<>
+template <>
 struct __future_base::basic_result<void> : __future_base::result_base {
     using result_type = void;
 

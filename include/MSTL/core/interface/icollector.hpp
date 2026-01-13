@@ -24,7 +24,7 @@ public:
 
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         const auto& c = derived();
-        size_t result = FNV_OFFSET_BASIS;
+        size_t result = _CONSTANTS FNV_OFFSET_BASIS;
         if (_MSTL empty(c)) return result;
 
         hash<remove_cvref_t<decltype(*_MSTL cbegin(c))>> hasher;

@@ -23,7 +23,7 @@ struct plus {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<T>(x + y))) {
 		return x + y;
 	}
@@ -34,7 +34,7 @@ struct plus<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) + static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) + static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) + static_cast<T2&&>(y);
@@ -47,7 +47,7 @@ struct minus {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<T>(x - y))) {
 		return x - y;
 	}
@@ -58,7 +58,7 @@ struct minus<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) - static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) - static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) - static_cast<T2&&>(y);
@@ -71,7 +71,7 @@ struct multiplies {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<T>(x * y))) {
 		return x * y;
 	}
@@ -82,7 +82,7 @@ struct multiplies<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) * static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) * static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) * static_cast<T2&&>(y);
@@ -95,7 +95,7 @@ struct divides {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<T>(x / y))) {
 		return x / y;
 	}
@@ -106,7 +106,7 @@ struct divides<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) / static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) / static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) / static_cast<T2&&>(y);
@@ -119,7 +119,7 @@ struct modulus {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x, const T& y) const
 	noexcept(noexcept(_MSTL declcopy<T>(x % y))) {
 		return x % y;
 	}
@@ -130,7 +130,7 @@ struct modulus<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) % static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) % static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) % static_cast<T2&&>(y);
@@ -142,7 +142,7 @@ struct negate {
 	using argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 
-	MSTL_NODISCARD constexpr T operator()(const T& x) const
+	MSTL_NODISCARD constexpr T operator ()(const T& x) const
 		noexcept(noexcept(_MSTL declcopy<T>(-x))) {
 		return -x;
 	}
@@ -153,7 +153,7 @@ struct negate<void> {
     using is_transparent = void;
 
 	template <typename T1>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x) const
 	noexcept(noexcept(-static_cast<T1&&>(x)))
 	-> decltype(-static_cast<T1&&>(x)) {
 		return -static_cast<T1&&>(x);
@@ -167,7 +167,7 @@ struct equal_to {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x == y))) {
 		return x == y;
 	}
@@ -178,7 +178,7 @@ struct equal_to<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) == static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) == static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) == static_cast<T2&&>(y);
@@ -191,7 +191,7 @@ struct not_equal_to {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x != y))) {
 		return x != y;
 	}
@@ -202,7 +202,7 @@ struct not_equal_to<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) != static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) != static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) != static_cast<T2&&>(y);
@@ -215,7 +215,7 @@ struct greater {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x > y))) {
 		return x > y;
 	}
@@ -226,7 +226,7 @@ struct greater<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) > static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) > static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) > static_cast<T2&&>(y);
@@ -239,7 +239,7 @@ struct less {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x < y))) {
 		return x < y;
 	}
@@ -250,7 +250,7 @@ struct less<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) < static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) < static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) < static_cast<T2&&>(y);
@@ -263,7 +263,7 @@ struct greater_equal {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x >= y))) {
 		return x >= y;
 	}
@@ -274,7 +274,7 @@ struct greater_equal<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) >= static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) >= static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) >= static_cast<T2&&>(y);
@@ -287,7 +287,7 @@ struct less_equal {
 	using second_argument_type MSTL_FUNC_ADAPTER_DEPRECATE	= T;
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= bool;
 
-	MSTL_NODISCARD constexpr bool operator()(const T& x, const T& y) const
+	MSTL_NODISCARD constexpr bool operator ()(const T& x, const T& y) const
 		noexcept(noexcept(_MSTL declcopy<bool>(x <= y))) {
 		return x <= y;
 	}
@@ -298,7 +298,7 @@ struct less_equal<void> {
     using is_transparent = void;
 
 	template <typename T1, typename T2>
-	MSTL_NODISCARD constexpr auto operator()(T1&& x, T2&& y) const
+	MSTL_NODISCARD constexpr auto operator ()(T1&& x, T2&& y) const
 	noexcept(noexcept(static_cast<T1&&>(x) <= static_cast<T2&&>(y)))
 	-> decltype(static_cast<T1&&>(x) <= static_cast<T2&&>(y)) {
 		return static_cast<T1&&>(x) <= static_cast<T2&&>(y);
@@ -309,7 +309,7 @@ struct less_equal<void> {
 template <typename T>
 struct identity {
 	template <typename U = T>
-	MSTL_NODISCARD constexpr U&& operator()(U&& x) const noexcept {
+	MSTL_NODISCARD constexpr U&& operator ()(U&& x) const noexcept {
 		return _MSTL forward<U>(x);
 	}
 };
@@ -325,7 +325,7 @@ struct select1st {
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE	= typename Pair::first_type;
 
 	MSTL_NODISCARD constexpr const typename Pair::first_type&
-		operator()(const Pair& x) const noexcept {
+		operator ()(const Pair& x) const noexcept {
 		return x.first;
 	}
 };
@@ -340,7 +340,7 @@ struct select2nd {
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE	= typename Pair::second_type;
 
 	MSTL_NODISCARD constexpr const typename Pair::second_type&
-		operator()(const Pair& x) const noexcept {
+		operator ()(const Pair& x) const noexcept {
 		return x.second;
 	}
 };

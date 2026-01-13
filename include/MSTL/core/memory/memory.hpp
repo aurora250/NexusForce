@@ -225,5 +225,31 @@ MSTL_CONSTEXPR14 void* memory_frobnicate(void* s, const size_t n) noexcept {
 	return s;
 }
 
+
+/**
+ * @brief 执行位级别的类型转换
+ * @tparam To 目标类型
+ * @tparam From 源类型
+ * @param value 要转换的值
+ * @return 转换后的值
+ *
+ * 将源类型的位表示重新解释为目标类型的表示。
+ * 要求两个类型大小相同且都是平凡可复制的。
+ */
+template <typename To, typename From>
+MSTL_NODISCARD MSTL_CONSTEXPR20 To bit_cast(const From& value) noexcept {
+	static_assert(sizeof(To) == sizeof(From), "bit_cast: types must have the same size");
+	static_assert(is_trivially_copyable_v<To>, "bit_cast: To type must be trivially copyable");
+	static_assert(is_trivially_copyable_v<From>, "bit_cast: From type must be trivially copyable");
+
+#ifdef MSTL_STANDARD_20__
+	return __builtin_bit_cast(To, value);
+#else
+	To result{};
+	_MSTL memory_copy(&result, &value, sizeof(To));
+	return result;
+#endif
+}
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_MEMORY_HPP__

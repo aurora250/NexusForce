@@ -552,7 +552,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 	return submit_result<Result>{_MSTL move(res), info};
 }
 
-template<typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
 thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const priority_type priority, Func &&func, Args &&...args) {
     auto state = _MSTL make_shared<periodic_task_state>();
 	auto task = _MSTL make_shared<_MSTL function<void()>>(

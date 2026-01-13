@@ -18,7 +18,7 @@ struct __apply_unpack_tuple<Trait, T, tuple<U...>&> : bool_constant<Trait<T, U&.
 template <template <typename...> class Trait, typename T, typename... U>
 struct __apply_unpack_tuple<Trait, T, const tuple<U...>> : bool_constant<Trait<T, const U...>::value> {};
 
-template<template<typename...> class Trait, typename T, typename... U>
+template <template <typename...> class Trait, typename T, typename... U>
 struct __apply_unpack_tuple<Trait, T, const tuple<U...>&> : bool_constant<Trait<T, const U&...>::value> {};
 
 

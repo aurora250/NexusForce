@@ -50,7 +50,7 @@ public:
         return future<Res>(state_ptr);
     }
 
-    void operator()(Args... args) {
+    void operator ()(Args... args) {
         __future_base::state_base::check(state_ptr);
         state_ptr->run(_MSTL forward<Args>(args)...);
     }
@@ -73,7 +73,7 @@ template <typename Res, typename... Args>
 packaged_task(Res(*)(Args...)) -> packaged_task<Res(Args...)>;
 
 template <typename Func, typename Sign = typename
-    _INNER __function_guide_helper<decltype(&Func::operator())>::type>
+    _INNER __function_guide_helper<decltype(&Func::operator ())>::type>
 packaged_task(Func) -> packaged_task<Sign>;
 #endif
 

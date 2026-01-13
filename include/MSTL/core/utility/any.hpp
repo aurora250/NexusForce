@@ -66,7 +66,7 @@ class MSTL_API any {
     struct external_manage {
         static void manage(ANY_INNER_OPERATION, const any*, ArgT*);
 
-        template<typename U>
+        template <typename U>
         static void create(storage_internal& storage, U&& value) {
             storage.ptr_ = ::new T(_MSTL forward<U>(value));
         }
@@ -269,7 +269,7 @@ void any::internal_manage<T>::manage(const ANY_INNER_OPERATION oper, const any* 
     }
 }
 
-template<typename T>
+template <typename T>
 void any::external_manage<T>::manage(const ANY_INNER_OPERATION oper, const any* value, ArgT* arg) {
     auto ptr = static_cast<const T*>(value->storage_.ptr_);
     switch (oper) {

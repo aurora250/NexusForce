@@ -114,7 +114,7 @@ MSTL_ALWAYS_INLINE void apply_memory_order_seq_cst(const memory_order mo) noexce
 
 
 #ifdef MSTL_COMPILER_GNUC__
-template<size_t Size>
+template <size_t Size>
 struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = __atomic_always_lock_free(Size, nullptr);
 };
@@ -164,7 +164,7 @@ struct interlocked_exchange_impl;
 
 template <>
 struct interlocked_exchange_impl<1> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchange8(
 		    reinterpret_cast<volatile char*>(target),
@@ -174,7 +174,7 @@ struct interlocked_exchange_impl<1> {
 
 template <>
 struct interlocked_exchange_impl<2> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchange16(
 		    reinterpret_cast<volatile short*>(target),
@@ -184,7 +184,7 @@ struct interlocked_exchange_impl<2> {
 
 template <>
 struct interlocked_exchange_impl<4> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchange(
 		    reinterpret_cast<volatile long*>(target),
@@ -194,7 +194,7 @@ struct interlocked_exchange_impl<4> {
 
 template <>
 struct interlocked_exchange_impl<8> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedExchange64(
@@ -228,7 +228,7 @@ struct interlocked_compare_exchange_impl<1> {
 
 template <>
 struct interlocked_compare_exchange_impl<2> {
-	template<typename T>
+	template <typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
 		short old = ::_InterlockedCompareExchange16(
 		    reinterpret_cast<volatile short*>(target),
@@ -242,7 +242,7 @@ struct interlocked_compare_exchange_impl<2> {
 
 template <>
 struct interlocked_compare_exchange_impl<4> {
-	template<typename T>
+	template <typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
 		long old = ::_InterlockedCompareExchange(
 		    reinterpret_cast<volatile long*>(target),
@@ -256,7 +256,7 @@ struct interlocked_compare_exchange_impl<4> {
 
 template <>
 struct interlocked_compare_exchange_impl<8> {
-	template<typename T>
+	template <typename T>
 	static bool call(volatile T* target, T* expected, T desired) {
 		long long old = ::_InterlockedCompareExchange64(
 		    reinterpret_cast<volatile long long*>(target),
@@ -274,7 +274,7 @@ struct interlocked_fetch_add_impl;
 
 template <>
 struct interlocked_fetch_add_impl<1> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchangeAdd8(
 		    reinterpret_cast<volatile char*>(target),
@@ -284,7 +284,7 @@ struct interlocked_fetch_add_impl<1> {
 
 template <>
 struct interlocked_fetch_add_impl<2> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchangeAdd16(
 		    reinterpret_cast<volatile short*>(target),
@@ -294,7 +294,7 @@ struct interlocked_fetch_add_impl<2> {
 
 template <>
 struct interlocked_fetch_add_impl<4> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedExchangeAdd(
 		    reinterpret_cast<volatile long*>(target),
@@ -304,7 +304,7 @@ struct interlocked_fetch_add_impl<4> {
 
 template <>
 struct interlocked_fetch_add_impl<8> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedExchangeAdd64(
@@ -324,7 +324,7 @@ struct interlocked_fetch_and_impl;
 
 template <>
 struct interlocked_fetch_and_impl<1> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedAnd8(
 		    reinterpret_cast<volatile char*>(target),
@@ -334,7 +334,7 @@ struct interlocked_fetch_and_impl<1> {
 
 template <>
 struct interlocked_fetch_and_impl<2> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedAnd16(
 		    reinterpret_cast<volatile short*>(target),
@@ -344,7 +344,7 @@ struct interlocked_fetch_and_impl<2> {
 
 template <>
 struct interlocked_fetch_and_impl<4> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedAnd(
 		    reinterpret_cast<volatile long*>(target),
@@ -354,7 +354,7 @@ struct interlocked_fetch_and_impl<4> {
 
 template <>
 struct interlocked_fetch_and_impl<8> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedAnd64(
@@ -374,7 +374,7 @@ struct interlocked_fetch_or_impl;
 
 template <>
 struct interlocked_fetch_or_impl<1> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedOr8(
 		    reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
@@ -382,7 +382,7 @@ struct interlocked_fetch_or_impl<1> {
 };
 template <>
 struct interlocked_fetch_or_impl<2> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedOr16(
 		    reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
@@ -390,7 +390,7 @@ struct interlocked_fetch_or_impl<2> {
 };
 template <>
 struct interlocked_fetch_or_impl<4> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedOr(
 		    reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
@@ -398,7 +398,7 @@ struct interlocked_fetch_or_impl<4> {
 };
 template <>
 struct interlocked_fetch_or_impl<8> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedOr64(
@@ -416,7 +416,7 @@ struct interlocked_fetch_xor_impl;
 
 template <>
 struct interlocked_fetch_xor_impl<1> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedXor8(
 		    reinterpret_cast<volatile char*>(target), static_cast<char>(value)));
@@ -424,7 +424,7 @@ struct interlocked_fetch_xor_impl<1> {
 };
 template <>
 struct interlocked_fetch_xor_impl<2> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedXor16(
 		    reinterpret_cast<volatile short*>(target), static_cast<short>(value)));
@@ -432,7 +432,7 @@ struct interlocked_fetch_xor_impl<2> {
 };
 template <>
 struct interlocked_fetch_xor_impl<4> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 		return static_cast<T>(::_InterlockedXor(
 		    reinterpret_cast<volatile long*>(target), static_cast<long>(value)));
@@ -440,7 +440,7 @@ struct interlocked_fetch_xor_impl<4> {
 };
 template <>
 struct interlocked_fetch_xor_impl<8> {
-	template<typename T>
+	template <typename T>
 	static T call(volatile T* target, T value) {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 		return static_cast<T>(::_InterlockedXor64(

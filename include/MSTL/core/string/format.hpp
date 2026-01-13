@@ -219,7 +219,7 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
 
 template <typename T>
 struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
-    MSTL_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
         const int64_t val = static_cast<int64_t>(value);
         const bool is_negative = val < 0;
         uint64_t abs_value = is_negative ? static_cast<uint64_t>(-val) : static_cast<uint64_t>(val);
@@ -307,7 +307,7 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
 
 template <typename T>
 struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
-    MSTL_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
         string digits;
         int base;
         bool uppercase = false;
@@ -387,7 +387,7 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
 
 template <>
 struct formatter<string> {
-    MSTL_CONSTEXPR20 string operator()(const string& value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const string& value, const format_options& options) const {
         if (options.width <= 0 || value.size() >= static_cast<size_t>(options.width)) {
             return value;
         }
@@ -414,28 +414,28 @@ struct formatter<string> {
 
 template <>
 struct formatter<const char*> {
-    MSTL_CONSTEXPR20 string operator()(const char* value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const char* value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
 };
 
 template <>
 struct formatter<string_view> {
-    MSTL_CONSTEXPR20 string operator()(const string_view value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const string_view value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
 };
 
 template <>
 struct formatter<char*> {
-    MSTL_CONSTEXPR20 string operator()(char* value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(char* value, const format_options& options) const {
         return formatter<string>()(string(value), options);
     }
 };
 
 template <>
 struct formatter<char> {
-    MSTL_CONSTEXPR20 string operator()(const char value, const format_options& options) const {
+    MSTL_CONSTEXPR20 string operator ()(const char value, const format_options& options) const {
         return formatter<string>()(string(1, value), options);
     }
 };

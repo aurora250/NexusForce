@@ -169,15 +169,15 @@ template <typename T>
 struct owner_less<shared_ptr<T>> {
     using is_transparent = void;
 
-    MSTL_NODISCARD bool operator()(const shared_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
-    MSTL_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
-    MSTL_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };
@@ -186,15 +186,15 @@ template <typename T>
 struct owner_less<weak_ptr<T>> {
     using is_transparent = void;
 
-    MSTL_NODISCARD bool operator()(const weak_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
-    MSTL_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
-    MSTL_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };
@@ -204,22 +204,22 @@ struct owner_less<void> {
     using is_transparent = void;
 
     template <typename T, typename U>
-    MSTL_NODISCARD bool operator()(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     template <typename T, typename U>
-    MSTL_NODISCARD bool operator()(const shared_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const shared_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     template <typename T, typename U>
-    MSTL_NODISCARD bool operator()(const weak_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const shared_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 
     template <typename T, typename U>
-    MSTL_NODISCARD bool operator()(const weak_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
+    MSTL_NODISCARD bool operator ()(const weak_ptr<T>& lhs, const weak_ptr<U>& rhs) const noexcept {
         return lhs.owner_before(rhs);
     }
 };

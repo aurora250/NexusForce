@@ -300,7 +300,7 @@ void file::adjust_buffer_size() {
 }
 
 #ifdef MSTL_PLATFORM_LINUX__
-::mode_t file::convert_attributes(const FILE_ATTRI attr) {
+static ::mode_t convert_attributes(const FILE_ATTRI attr) {
     ::mode_t mode = 0;
 
     if ((attr & FILE_ATTRI::READONLY) != FILE_ATTRI::OTHERS) {
@@ -537,7 +537,7 @@ void file::close() noexcept {
     }
 }
 
-bool file::flush() const noexcept {
+bool file::flush() noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
     if (!flush_write_buffer()) return false;
 
@@ -688,7 +688,7 @@ string file::read() const {
     return content;
 }
 
-vector<string> file::read_chunks(const size_type chunk_size) {
+vector<string> file::read_chunks(const size_type chunk_size) const {
     vector<string> chunks;
     if (!opened_ || handle_ == INVALID_HANDLE()) return chunks;
 
@@ -1019,8 +1019,10 @@ vector<string> file::read_lines() const {
 }
 
 
-file::async_result file::async_read(string& buffer,
-    const size_type size, const difference_type offset) {
+file::async_result file::async_read(
+    string& buffer,
+    const size_type size,
+    const difference_type offset) const {
     async_result result;
 
     if (!opened_ || handle_ == INVALID_HANDLE()) {
@@ -2037,8 +2039,10 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
 #endif
 }
 
-bool file::lock(const difference_type offset,
-    const difference_type length, FILE_LOCK mode) const noexcept {
+bool file::lock(
+    const difference_type offset,
+    const difference_type length,
+    FILE_LOCK mode) const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         last_error_code_ = EBADF;
         return false;
@@ -2190,8 +2194,10 @@ bool file::unlock(const difference_type offset, const difference_type length) co
     return true;
 }
 
-bool file::try_lock(const difference_type offset,
-    const difference_type length, FILE_LOCK mode) const noexcept {
+bool file::try_lock(
+    const difference_type offset,
+    const difference_type length,
+    FILE_LOCK mode) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     auto nonblocking_mode = static_cast<FILE_LOCK>(
         static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
@@ -2537,7 +2543,7 @@ bool file::remap(const size_type new_offset, const size_type new_size) {
     return map(new_offset, new_size, current_access);
 }
 
-bool file::flush_mapped(const bool async) const {
+bool file::flush_mapped(const bool async) {
     lock_guard<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
@@ -2654,7 +2660,7 @@ FILE_ATTRI file::attributes() const noexcept {
 #endif
 }
 
-bool file::set_attributes(FILE_ATTRI attr) const noexcept {
+bool file::set_attributes(FILE_ATTRI attr) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -2720,7 +2726,7 @@ datetime file::last_write_time() const noexcept {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 bool file::set_all_times(const datetime& create,
-    const datetime& access, const datetime& write) const noexcept {
+    const datetime& access, const datetime& write) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
     const time_type ft_create = datetime_to_filetime(create);
@@ -2729,7 +2735,7 @@ bool file::set_all_times(const datetime& create,
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 }
 #elif defined(MSTL_PLATFORM_LINUX__)
-bool file::set_all_times(const datetime& access, const datetime& write) const noexcept {
+bool file::set_all_times(const datetime& access, const datetime& write) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
     ::timeval times[2];
@@ -2742,7 +2748,7 @@ bool file::set_all_times(const datetime& access, const datetime& write) const no
 #endif
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-bool file::set_creation_time(const datetime& dt) const noexcept {
+bool file::set_creation_time(const datetime& dt) noexcept {
     const time_type ft_create = datetime_to_filetime(dt);
     time_type ft_access, ft_write;
 
@@ -2751,7 +2757,7 @@ bool file::set_creation_time(const datetime& dt) const noexcept {
 }
 #endif
 
-bool file::set_last_access_time(const datetime& dt) const noexcept {
+bool file::set_last_access_time(const datetime& dt) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const time_type ft_access = datetime_to_filetime(dt);
     time_type ft_create, ft_write;
@@ -2763,7 +2769,7 @@ bool file::set_last_access_time(const datetime& dt) const noexcept {
 #endif
 }
 
-bool file::set_last_write_time(const datetime& dt) const noexcept {
+bool file::set_last_write_time(const datetime& dt) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const time_type ft_write = datetime_to_filetime(dt);
     time_type ft_create, ft_access;
@@ -2844,8 +2850,10 @@ string file::read_binary(const _MSTL path& p,
 }
 
 file_lock_guard::file_lock_guard(
-    const file& f, const difference_type offset,
-    const difference_type length, const FILE_LOCK mode)
+    file& f,
+    const difference_type offset,
+    const difference_type length,
+    const FILE_LOCK mode)
 : file_(f), offset_(offset), length_(length), locked_(false) {
     locked_ = file_.lock(offset, length, mode);
 }

@@ -697,13 +697,13 @@ struct hash<const OPT*> { \
 }; \
 template <size_t N> \
 struct hash<OPT[N]> { \
-    MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+    MSTL_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
         return _INNER FNV_hash_string(str, N - 1); \
     } \
 }; \
 template <size_t N> \
 struct hash<const OPT[N]> { \
-    MSTL_NODISCARD constexpr size_t operator()(const OPT (&str)[N]) const noexcept { \
+    MSTL_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
         return _INNER FNV_hash_string(str, N - 1); \
     } \
 };

@@ -202,7 +202,7 @@ MSTL_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
 }
 
 // bucket sort : Ot(N + k)~(N^2) Om(N + k) stable
-template<typename Iterator>
+template <typename Iterator>
 MSTL_CONSTEXPR20 void bucket_sort(Iterator first, Iterator last) {
     _MSTL bucket_sort_less(first, last);
 }

@@ -13,7 +13,6 @@ class ctype_allocator {
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using device_type = allocate_cpu_tag;
 
     template <typename U>
     struct rebind {
@@ -60,7 +59,6 @@ class new_allocator {
 
 public:
     MSTL_BUILD_TYPE_ALIAS(T)
-    using device_type = allocate_cpu_tag;
 
     template <typename U>
     struct rebind {
@@ -100,60 +98,6 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(
     const new_allocator<T>&, const new_allocator<U>&) noexcept {
     return false;
 }
-
-
-#ifdef MSTL_SUPPORT_CUDA__
-// manage memories on GPU
-template <typename T>
-class cuda_allocator {
-    static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
-
-public:
-    MSTL_BUILD_TYPE_ALIAS(T)
-    using device_type = allocate_gpu_tag;
-
-    template <typename U>
-    struct rebind {
-        using other = cuda_allocator<U>;
-    };
-
-    cuda_allocator() noexcept = default;
-    template <typename U>
-    cuda_allocator(const cuda_allocator<U>&) noexcept {}
-    ~cuda_allocator() noexcept = default;
-    cuda_allocator& operator =(const cuda_allocator&) noexcept = default;
-
-    static MSTL_NODISCARD pointer allocate(const size_type n) {
-        if (n == 0) return nullptr;
-
-        pointer data_device = nullptr;
-        const size_t bytes = n * sizeof(T);
-        cudaError_t err = cudaMalloc(reinterpret_cast<void**>(&data_device), bytes);
-        if (err != cudaSuccess || !data_device) {
-            Exception(CUDAMemoryError(err));
-        }
-        return data_device;
-    }
-    static MSTL_NODISCARD pointer allocate() {
-        return allocate(1);
-    }
-
-    static void deallocate(pointer p, size_type n = 0) noexcept {
-        if (p) cudaFree(p);
-    }
-};
-template <typename T, typename U>
-MSTL_NODISCARD bool operator ==(
-    const cuda_allocator<T>&, const cuda_allocator<U>&) noexcept {
-    return true;
-}
-template <typename T, typename U>
-MSTL_NODISCARD bool operator !=(
-    const cuda_allocator<T>&, const cuda_allocator<U>&) noexcept {
-    return false;
-}
-#endif
-
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_BUILTIN_ALLOCATOR_HPP__

@@ -345,53 +345,53 @@ MSTL_BEGIN_INNER__
 template <typename>
 struct __function_guide_helper {};
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...)> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) noexcept> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) &> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) & noexcept> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) const> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) const noexcept> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) const &> {
 	using type = Result(Args...);
 };
 
-template<typename Result, typename Class, typename... Args>
+template <typename Result, typename Class, typename... Args>
 struct __function_guide_helper<Result (Class::*)(Args...) const & noexcept> {
 	using type = Result(Args...);
 };
 
 MSTL_END_INNER__
 
-template<typename Res, typename... Args>
+template <typename Res, typename... Args>
 function(Res(*)(Args...)) -> function<Res(Args...)>;
 
-template<typename Func, typename Sign = typename
-_INNER __function_guide_helper<decltype(&Func::operator())>::type>
+template <typename Func, typename Sign = typename
+_INNER __function_guide_helper<decltype(&Func::operator ())>::type>
 function(Func) -> function<Sign>;
 
 #endif

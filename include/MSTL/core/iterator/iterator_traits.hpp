@@ -31,11 +31,7 @@ template <typename T>
 struct iterator_traits<T*> {
     static_assert(is_object<T>::value, "iterator traits requires object types.");
 
-#ifdef MSTL_STANDARD_20__
     using iterator_category = contiguous_iterator_tag;
-#else
-    using iterator_category = random_access_iterator_tag;
-#endif // MSTL_STANDARD_20__
     using value_type        = remove_cv_t<T>;
     using difference_type   = ptrdiff_t;
     using pointer           = T*;

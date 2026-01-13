@@ -89,7 +89,7 @@ public:
 	constexpr explicit binder2nd(
 		const Operation& x, const typename Operation::second_argument_type& y) : op(x), value(y) {
 	}
-	constexpr typename Operation::result_type operator()(
+	constexpr typename Operation::result_type operator ()(
 		const typename Operation::first_argument_type& x) const {
 		return op(x, value);
 	}
@@ -113,7 +113,7 @@ public:
 	constexpr explicit unary_compose(
 		const Operation1& x, const Operation2& y) : op1(x), op2(y) {
 	}
-	constexpr typename Operation1::result_type operator()(
+	constexpr typename Operation1::result_type operator ()(
 		const typename Operation2::argument_type& x) const {
 		return op1(op2(x));
 	}
@@ -139,7 +139,7 @@ public:
 		const Operation1& x, const Operation2& y, const Operation3& z) :
 		op1(x), op2(y), op3(z) {
 	}
-	constexpr typename Operation1::result_type operator()(
+	constexpr typename Operation1::result_type operator ()(
 		const typename Operation2::argument_type& x) const {
 		return op1(op2(x), op3(x));
 	}
@@ -163,7 +163,7 @@ public:
 
 	constexpr pointer_to_unary_function() : ptr(nullptr) {}
 	constexpr explicit pointer_to_unary_function(Result(*x)(Arg)) : ptr(x) {}
-	constexpr Result operator()(Arg x) const {
+	constexpr Result operator ()(Arg x) const {
 		if (ptr == nullptr) return Result();
 		return ptr(x);
 	}
@@ -185,7 +185,7 @@ public:
 
 	constexpr pointer_to_binary_function() : ptr(nullptr) {}
 	constexpr explicit pointer_to_binary_function(Result(*x)(Arg1, Arg2)) : ptr(x) {}
-	constexpr Result operator()(Arg1 x, Arg2 y) const {
+	constexpr Result operator ()(Arg1 x, Arg2 y) const {
 		if (ptr == nullptr) return Result();
 		return ptr(x, y);
 	}
@@ -275,7 +275,7 @@ public:
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= S;
 
 	constexpr explicit mem_fun1_t(S(T::* pf)(A)) : f(pf) {}
-	constexpr S operator()(T* p, A x) const { return (p->*f)(x); }
+	constexpr S operator ()(T* p, A x) const { return (p->*f)(x); }
 };
 template <typename S, typename T, typename A>
 MSTL_FUNC_ADAPTER_DEPRECATE constexpr mem_fun1_t<S, T, A> mem_fun1(S(T::* f)(A)) {
@@ -293,7 +293,7 @@ public:
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= S;
 
 	MSTL_FUNC_ADAPTER_DEPRECATE constexpr explicit const_mem_fun1_t(S(T::* pf)(A) const) : f(pf) {}
-	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator()(const T* p, A x) const { return (p->*f)(x); }
+	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator ()(const T* p, A x) const { return (p->*f)(x); }
 };
 template <typename S, typename T, typename A>
 MSTL_FUNC_ADAPTER_DEPRECATE constexpr const_mem_fun1_t<S, T, A> mem_fun1(S(T::* f)(A) const) {
@@ -311,7 +311,7 @@ public:
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= S;
 
 	MSTL_FUNC_ADAPTER_DEPRECATE constexpr explicit mem_fun1_ref_t(S(T::* pf)(A)) : f(pf) {}
-	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator()(T& r, A x) const { return (r.*f)(x); }
+	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator ()(T& r, A x) const { return (r.*f)(x); }
 };
 template <typename S, typename T, typename A>
 MSTL_FUNC_ADAPTER_DEPRECATE constexpr mem_fun1_ref_t<S, T, A> mem_fun1_ref(S(T::* f)(A)) {
@@ -329,7 +329,7 @@ public:
 	using result_type MSTL_FUNC_ADAPTER_DEPRECATE			= S;
 
 	MSTL_FUNC_ADAPTER_DEPRECATE constexpr explicit const_mem_fun1_ref_t(S(T::* pf)(A) const) : f(pf) {}
-	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator()(const T& r, A x) const { return (r.*f)(x); }
+	MSTL_FUNC_ADAPTER_DEPRECATE constexpr S operator ()(const T& r, A x) const { return (r.*f)(x); }
 };
 template <typename S, typename T, typename A>
 MSTL_FUNC_ADAPTER_DEPRECATE constexpr const_mem_fun1_ref_t<S, T, A> mem_fun1_ref(S(T::* f)(A) const) {
