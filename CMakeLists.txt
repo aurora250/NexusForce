@@ -88,7 +88,7 @@ else()
 endif()
 
 if(MSTL_BUILD_DOCS)
-    add_subdirectory(docs)
+    add_subdirectory(docsconfig)
 else()
     message(STATUS "Skipping documentation build (MSTL_BUILD_DOCS=OFF)")
 endif()
