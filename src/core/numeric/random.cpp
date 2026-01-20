@@ -67,7 +67,7 @@ double random_mt::next_double() {
     y ^= (y << t) & c;
     y ^= (y >> l);
 
-    return static_cast<double>(y) / numeric_limits<uint32_t>::max();
+    return static_cast<double>(y) / numeric_traits<uint32_t>::max();
 }
 
 int32_t secret::next_int(const int32_t min, const int32_t max) {

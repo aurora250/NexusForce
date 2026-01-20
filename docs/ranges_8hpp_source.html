@@ -158,7 +158,7 @@ $(function(){initNavTree('ranges_8hpp_source.html','',''); });
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    owning_view&amp; operator =(owning_view&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    owning_view(<span class="keyword">const</span> owning_view&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    owning_view&amp; operator= (<span class="keyword">const</span> owning_view&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    owning_view&amp; operator = (<span class="keyword">const</span> owning_view&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> begin()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> obj_.begin(); }</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> end()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> obj_.end(); }</div>
@@ -1026,10 +1026,10 @@ $(function(){initNavTree('ranges_8hpp_source.html','',''); });
 <div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> reverse_view(V base) : base_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> move(base)) {}</div>
 <div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span> </div>
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>    <span class="keyword">constexpr</span> reverse_view(reverse_view&amp;&amp;) <span class="keyword">requires</span> movable&lt;V&gt; = default;</div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>    constexpr reverse_view&amp; operator=(reverse_view&amp;&amp;) requires movable&lt;V&gt; = default;</div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>    constexpr reverse_view&amp; operator =(reverse_view&amp;&amp;) requires movable&lt;V&gt; = default;</div>
 <div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span> </div>
 <div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    constexpr reverse_view(const reverse_view&amp;) requires copy_constructible&lt;V&gt; = default;</div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    constexpr reverse_view&amp; operator=(const reverse_view&amp;) requires copyable&lt;V&gt; = default;</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    constexpr reverse_view&amp; operator =(const reverse_view&amp;) requires copyable&lt;V&gt; = default;</div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span> </div>
 <div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    constexpr iterator begin() {</div>
 <div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>        <span class="keywordflow">return</span> iterator(base_.end());</div>

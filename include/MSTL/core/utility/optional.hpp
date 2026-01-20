@@ -539,13 +539,13 @@ public:
         !convertible_from_optional_ref<U>::value && is_constructible_v<T&, U&>, int> = 0>
     constexpr explicit optional(const _MSTL optional<U&>& other) noexcept : ptr_(other.ptr_) {}
 
-    MSTL_CONSTEXPR20 optional& operator=(nullopt_t) noexcept {
+    MSTL_CONSTEXPR20 optional& operator =(nullopt_t) noexcept {
         ptr_ = nullptr;
         return *this;
     }
 
     template <typename U = T, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    MSTL_CONSTEXPR20 optional& operator=(U& value) {
+    MSTL_CONSTEXPR20 optional& operator =(U& value) {
         if (ptr_) {
             *ptr_ = value;
         } else {
@@ -555,7 +555,7 @@ public:
     }
 
     template <typename U, enable_if_t<is_assignable_v<T&, U&>, int> = 0>
-    MSTL_CONSTEXPR20 optional& operator=(const _MSTL optional<U&>& other) {
+    MSTL_CONSTEXPR20 optional& operator =(const _MSTL optional<U&>& other) {
         if (this != _MSTL addressof(other)) {
             if (other.ptr_) {
                 if (ptr_) {
@@ -571,10 +571,10 @@ public:
     }
 
     constexpr optional(const optional& other) noexcept = default;
-    MSTL_CONSTEXPR20 optional& operator=(const optional& other) noexcept = default;
+    MSTL_CONSTEXPR20 optional& operator =(const optional& other) noexcept = default;
 
     constexpr optional(optional&& other) noexcept : ptr_(other.ptr_) {}
-    MSTL_CONSTEXPR20 optional& operator=(optional&& other) noexcept {
+    MSTL_CONSTEXPR20 optional& operator =(optional&& other) noexcept {
         ptr_ = other.ptr_;
         return *this;
     }

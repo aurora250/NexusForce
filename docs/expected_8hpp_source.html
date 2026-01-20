@@ -183,8 +183,8 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">noexcept</span>(is_nothrow_constructible_v&lt;ErrorT, std::initializer_list&lt;U&gt;&amp;, Args...&gt;)</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        : error_(list, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#gae35e75d0d5ad399f4f806a18c6e0f228">forward</a>&lt;Args&gt;(args)...) {}</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">constexpr</span> unexpected&amp; operator=(<span class="keyword">const</span> unexpected&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">constexpr</span> unexpected&amp; operator=(unexpected&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">constexpr</span> unexpected&amp; operator =(<span class="keyword">const</span> unexpected&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">constexpr</span> unexpected&amp; operator =(unexpected&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keyword">const</span> ErrorT&amp; error() const &amp; noexcept { </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> error_; </div>
@@ -239,7 +239,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    temporary_guard(<span class="keyword">const</span> temporary_guard&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    temporary_guard&amp; operator=(<span class="keyword">const</span> temporary_guard&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    temporary_guard&amp; operator =(<span class="keyword">const</span> temporary_guard&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">constexpr</span> T&amp;&amp; release() noexcept {</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        guarded_ptr = <span class="keyword">nullptr</span>;</div>
@@ -444,7 +444,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> destroy(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(error_));</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    }</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keyword">constexpr</span> expected&amp; operator=(<span class="keyword">const</span> expected&amp; other)</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keyword">constexpr</span> expected&amp; operator =(<span class="keyword">const</span> expected&amp; other)</div>
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keyword">noexcept</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt;</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        is_nothrow_copy_constructible&lt;T&gt;,</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        is_nothrow_copy_constructible&lt;ErrorT&gt;,</div>
@@ -464,7 +464,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    }</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keyword">constexpr</span> expected&amp; operator=(expected&amp;&amp; other)</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keyword">constexpr</span> expected&amp; operator =(expected&amp;&amp; other)</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keyword">noexcept</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt;</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        is_nothrow_move_constructible&lt;T&gt;,</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        is_nothrow_move_constructible&lt;ErrorT&gt;,</div>
@@ -1178,7 +1178,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> destroy(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(error_));</div>
 <div class="line"><a id="l01085" name="l01085"></a><span class="lineno"> 1085</span>    }</div>
 <div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span> </div>
-<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span>    <span class="keyword">constexpr</span> expected&amp; operator=(<span class="keyword">const</span> expected&amp; other)</div>
+<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span>    <span class="keyword">constexpr</span> expected&amp; operator =(<span class="keyword">const</span> expected&amp; other)</div>
 <div class="line"><a id="l01088" name="l01088"></a><span class="lineno"> 1088</span>    <span class="keyword">noexcept</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt;</div>
 <div class="line"><a id="l01089" name="l01089"></a><span class="lineno"> 1089</span>        is_nothrow_copy_constructible&lt;ErrorT&gt;,</div>
 <div class="line"><a id="l01090" name="l01090"></a><span class="lineno"> 1090</span>        is_nothrow_copy_assignable&lt;ErrorT&gt;</div>
@@ -1192,7 +1192,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l01098" name="l01098"></a><span class="lineno"> 1098</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span>    }</div>
 <div class="line"><a id="l01100" name="l01100"></a><span class="lineno"> 1100</span> </div>
-<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span>    <span class="keyword">constexpr</span> expected&amp; operator=(expected&amp;&amp; other)</div>
+<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span>    <span class="keyword">constexpr</span> expected&amp; operator =(expected&amp;&amp; other)</div>
 <div class="line"><a id="l01102" name="l01102"></a><span class="lineno"> 1102</span>    <span class="keyword">noexcept</span>(<a class="code hl_variable" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt;</div>
 <div class="line"><a id="l01103" name="l01103"></a><span class="lineno"> 1103</span>        is_nothrow_move_constructible&lt;ErrorT&gt;,</div>
 <div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span>        is_nothrow_move_assignable&lt;ErrorT&gt;</div>
@@ -1209,7 +1209,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l01115" name="l01115"></a><span class="lineno"> 1115</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Gr&gt;</div>
 <div class="line"><a id="l01116" name="l01116"></a><span class="lineno"> 1116</span>    <span class="keyword">requires</span> is_constructible_v&lt;ErrorT, const Gr&amp;&gt;</div>
 <div class="line"><a id="l01117" name="l01117"></a><span class="lineno"> 1117</span>        &amp;&amp; is_assignable_v&lt;ErrorT&amp;, const Gr&amp;&gt;</div>
-<div class="line"><a id="l01118" name="l01118"></a><span class="lineno"> 1118</span>    <span class="keyword">constexpr</span> expected&amp; operator=(<span class="keyword">const</span> unexpected&lt;Gr&gt;&amp; unex) {</div>
+<div class="line"><a id="l01118" name="l01118"></a><span class="lineno"> 1118</span>    <span class="keyword">constexpr</span> expected&amp; operator =(<span class="keyword">const</span> unexpected&lt;Gr&gt;&amp; unex) {</div>
 <div class="line"><a id="l01119" name="l01119"></a><span class="lineno"> 1119</span>        assign_error(unex.error());</div>
 <div class="line"><a id="l01120" name="l01120"></a><span class="lineno"> 1120</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l01121" name="l01121"></a><span class="lineno"> 1121</span>    }</div>
@@ -1217,7 +1217,7 @@ $(function(){initNavTree('expected_8hpp_source.html','',''); });
 <div class="line"><a id="l01123" name="l01123"></a><span class="lineno"> 1123</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Gr&gt;</div>
 <div class="line"><a id="l01124" name="l01124"></a><span class="lineno"> 1124</span>    <span class="keyword">requires</span> is_constructible_v&lt;ErrorT, Gr&gt;</div>
 <div class="line"><a id="l01125" name="l01125"></a><span class="lineno"> 1125</span>        &amp;&amp; is_assignable_v&lt;ErrorT&amp;, Gr&gt;</div>
-<div class="line"><a id="l01126" name="l01126"></a><span class="lineno"> 1126</span>    <span class="keyword">constexpr</span> expected&amp; operator=(unexpected&lt;Gr&gt;&amp;&amp; unex) {</div>
+<div class="line"><a id="l01126" name="l01126"></a><span class="lineno"> 1126</span>    <span class="keyword">constexpr</span> expected&amp; operator =(unexpected&lt;Gr&gt;&amp;&amp; unex) {</div>
 <div class="line"><a id="l01127" name="l01127"></a><span class="lineno"> 1127</span>        assign_error(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> move(unex.error()));</div>
 <div class="line"><a id="l01128" name="l01128"></a><span class="lineno"> 1128</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l01129" name="l01129"></a><span class="lineno"> 1129</span>    }</div>

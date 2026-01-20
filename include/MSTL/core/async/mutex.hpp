@@ -53,7 +53,7 @@ private:
 public:
     recursive_mutex();
     recursive_mutex(const recursive_mutex&) = delete;
-    recursive_mutex& operator=(const recursive_mutex&) = delete;
+    recursive_mutex& operator =(const recursive_mutex&) = delete;
     ~recursive_mutex();
 
     native_handle_type* native_handle() noexcept { return &recursive_mutex_; }
@@ -79,7 +79,7 @@ public:
     }
 
     lock_guard(const lock_guard&) = delete;
-    lock_guard& operator=(const lock_guard&) = delete;
+    lock_guard& operator =(const lock_guard&) = delete;
 
     ~lock_guard() {
         mutex_.unlock();
@@ -122,7 +122,7 @@ public:
     : mutex_(&m), owns_lock_(m.try_lock()) {}
 
     unique_lock(const unique_lock&) = delete;
-    unique_lock& operator=(const unique_lock&) = delete;
+    unique_lock& operator =(const unique_lock&) = delete;
 
     unique_lock(unique_lock&& other) noexcept
         : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {

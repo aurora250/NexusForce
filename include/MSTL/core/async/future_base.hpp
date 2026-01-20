@@ -108,7 +108,7 @@ struct __future_base {
 
     public:
         result_base(const result_base&) = delete;
-        result_base& operator=(const result_base&) = delete;
+        result_base& operator =(const result_base&) = delete;
 
         virtual void destroy() = 0;
 
@@ -156,10 +156,10 @@ struct __future_base {
 
     template <typename Res, typename Alloc>
     struct allocated_result final : basic_result<Res>, Alloc {
-        using allocator_type = __allocator_traits_base::alloc_rebind_t<Alloc, allocated_result>;
+        using allocator_type = _INNER __allocator_traits_base::alloc_rebind_t<Alloc, allocated_result>;
 
-        explicit allocated_result(const Alloc& alloc) :
-            basic_result<Res>(), Alloc(alloc) { }
+        explicit allocated_result(const Alloc& alloc)
+        : basic_result<Res>(), Alloc(alloc) {}
 
     private:
         void destroy() override {
@@ -207,7 +207,7 @@ struct __future_base {
         }
 
         state_base(const state_base&) = delete;
-        state_base& operator=(const state_base&) = delete;
+        state_base& operator =(const state_base&) = delete;
         virtual ~state_base() = default;
 
         result_base& wait() {
@@ -476,7 +476,7 @@ private:
 
 public:
     __basic_future(const __basic_future&) = delete;
-    __basic_future& operator=(const __basic_future&) = delete;
+    __basic_future& operator =(const __basic_future&) = delete;
 
     bool valid() const noexcept {
         return static_cast<bool>(state_ptr);

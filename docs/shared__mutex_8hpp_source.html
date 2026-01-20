@@ -111,7 +111,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    shared_mutex();</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    shared_mutex(<span class="keyword">const</span> shared_mutex&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    shared_mutex&amp; operator=(<span class="keyword">const</span> shared_mutex&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    shared_mutex&amp; operator =(<span class="keyword">const</span> shared_mutex&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    ~shared_mutex();</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    native_handle_type* native_handle() noexcept { <span class="keywordflow">return</span> &amp;shared_mutex_; }</div>
@@ -151,7 +151,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    : mutex_(&amp;m), owns_lock_(m.try_lock_shared()) {}</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    shared_lock(<span class="keyword">const</span> shared_lock&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    shared_lock&amp; operator=(<span class="keyword">const</span> shared_lock&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    shared_lock&amp; operator =(<span class="keyword">const</span> shared_lock&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    shared_lock(shared_lock&amp;&amp; other) noexcept</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {</div>
@@ -159,7 +159,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        other.owns_lock_ = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    shared_lock&amp; operator=(shared_lock&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    shared_lock&amp; operator =(shared_lock&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(other) == <span class="keyword">this</span>) <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span> (owns_lock_) mutex_-&gt;unlock_shared();</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        mutex_ = other.mutex_;</div>

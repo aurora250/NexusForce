@@ -15,9 +15,9 @@ private:
 public:
     ini_builder();
     ini_builder(const ini_builder&) = delete;
-    ini_builder& operator=(const ini_builder&) = delete;
+    ini_builder& operator =(const ini_builder&) = delete;
     ini_builder(ini_builder&&) = default;
-    ini_builder& operator=(ini_builder&&) = default;
+    ini_builder& operator =(ini_builder&&) = default;
 
     ini_builder& begin_section(const string& section_name);
     ini_builder& end_section();

@@ -11,7 +11,7 @@ private:
     _INNER platform_wait_t counter_;
 
 public:
-    static constexpr ptrdiff_t int_max = numeric_limits<int>::max();
+    static constexpr ptrdiff_t int_max = numeric_traits<int>::max();
     
     explicit atomic_semaphore(const _INNER platform_wait_t count) noexcept
         : counter_(count) {

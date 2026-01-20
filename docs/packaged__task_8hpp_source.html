@@ -121,13 +121,13 @@ $(function(){initNavTree('packaged__task_8hpp_source.html','',''); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    packaged_task(<span class="keyword">const</span> packaged_task&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    packaged_task&amp; operator=(<span class="keyword">const</span> packaged_task&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    packaged_task&amp; operator =(<span class="keyword">const</span> packaged_task&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    packaged_task(packaged_task&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        this-&gt;swap(other);</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    packaged_task&amp; operator=(packaged_task&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    packaged_task&amp; operator =(packaged_task&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        packaged_task(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> move(other)).swap(*<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>

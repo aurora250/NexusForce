@@ -20,9 +20,9 @@ private:
 public:
     http_request() = default;
     http_request(const http_request&) = delete;
-    http_request& operator=(const http_request&) = delete;
+    http_request& operator =(const http_request&) = delete;
     http_request(http_request&& req) noexcept = default;
-    http_request& operator=(http_request&& req) noexcept = default;
+    http_request& operator =(http_request&& req) noexcept = default;
     ~http_request() = default;
 
     void set_version(string version) noexcept { this->version_ = _MSTL move(version); }
@@ -113,9 +113,9 @@ public:
     }
 
     http_response(const http_response&) = delete;
-    http_response& operator=(const http_response&) = delete;
+    http_response& operator =(const http_response&) = delete;
     http_response(http_response&& res) noexcept = default;
-    http_response& operator=(http_response&& res) noexcept = default;
+    http_response& operator =(http_response&& res) noexcept = default;
 
     void set_version(string version) noexcept { this->version_ = _MSTL move(version); }
     MSTL_NODISCARD const string& version() const noexcept { return version_; }

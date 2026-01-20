@@ -37,7 +37,7 @@ static ::DWORD timespec_to_relative_ms(const timespec& abs, const bool is_monoto
     if (diff_ns <= 0) return 0;
 
     const uint64_t diff_ms = static_cast<uint64_t>(diff_ns) / 1'000'000ULL;
-    constexpr uint64_t MAX_DWORD = numeric_limits<::DWORD>::max();
+    constexpr uint64_t MAX_DWORD = numeric_traits<::DWORD>::max();
     if (diff_ms > MAX_DWORD - 1) {
         return static_cast<::DWORD>(MAX_DWORD - 1);
     }

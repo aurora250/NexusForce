@@ -3,7 +3,7 @@
 
 /**
  * @file tags.hpp
- * @brief MSTL核心标签类型定义
+ * @brief MSTL核心标签类型
  *
  * 此文件定义了MSTL库中使用的各种标签类型，用于标签分发和类型选择。
  *
@@ -35,7 +35,7 @@ MSTL_BEGIN_NAMESPACE__
  * @note 输入迭代器只能读取，不能写入。
  */
 struct input_iterator_tag {
-    constexpr input_iterator_tag() = default;
+    constexpr explicit input_iterator_tag() = default;
 };
 
 /**
@@ -51,7 +51,7 @@ struct input_iterator_tag {
  * @note 输出迭代器只能写入，不能读取。
  */
 struct output_iterator_tag {
-    constexpr output_iterator_tag() = default;
+    constexpr explicit output_iterator_tag() = default;
 };
 
 /**
@@ -68,7 +68,7 @@ struct output_iterator_tag {
  * @note 继承自input_iterator_tag，表示前向迭代器也是有效的输入迭代器。
  */
 struct forward_iterator_tag : input_iterator_tag {
-    constexpr forward_iterator_tag() = default;
+    constexpr explicit forward_iterator_tag() = default;
 };
 
 /**
@@ -84,7 +84,7 @@ struct forward_iterator_tag : input_iterator_tag {
  * @note 继承自forward_iterator_tag，表示双向迭代器也是有效的前向迭代器。
  */
 struct bidirectional_iterator_tag : forward_iterator_tag {
-    constexpr bidirectional_iterator_tag() = default;
+    constexpr explicit bidirectional_iterator_tag() = default;
 };
 
 /**
@@ -102,7 +102,7 @@ struct bidirectional_iterator_tag : forward_iterator_tag {
  * @note 继承自bidirectional_iterator_tag，表示随机访问迭代器也是有效的双向迭代器。
  */
 struct random_access_iterator_tag : bidirectional_iterator_tag {
-    constexpr random_access_iterator_tag() = default;
+    constexpr explicit random_access_iterator_tag() = default;
 };
 
 /**
@@ -119,7 +119,7 @@ struct random_access_iterator_tag : bidirectional_iterator_tag {
  * @note 继承自random_access_iterator_tag，表示连续迭代器也是有效的随机访问迭代器。
  */
 struct contiguous_iterator_tag : random_access_iterator_tag {
-    constexpr contiguous_iterator_tag() = default;
+    constexpr explicit contiguous_iterator_tag() = default;
 };
 
 /** @} */ // IteratorTags
@@ -140,7 +140,7 @@ struct contiguous_iterator_tag : random_access_iterator_tag {
  * 通常在构造函数中与分配器一起使用，遵循"uses-allocator"构造模式。
  */
 struct allocator_arg_tag {
-    constexpr allocator_arg_tag() noexcept = default;
+    constexpr explicit allocator_arg_tag() noexcept = default;
 };
 
 /**
@@ -150,7 +150,7 @@ struct allocator_arg_tag {
  * 表示使用默认构造函数构造对象，不提供任何参数。
  */
 struct default_construct_tag {
-    constexpr default_construct_tag() noexcept = default;
+    constexpr explicit default_construct_tag() noexcept = default;
 };
 
 /**
@@ -160,7 +160,7 @@ struct default_construct_tag {
  * 表示使用提供的参数精确构造对象，直接传递参数给构造函数。
  */
 struct exact_arg_construct_tag {
-    constexpr exact_arg_construct_tag() noexcept  = default;
+    constexpr explicit exact_arg_construct_tag() noexcept  = default;
 };
 
 /**
@@ -171,7 +171,7 @@ struct exact_arg_construct_tag {
  * 通常用于容器中的元素构造。
  */
 struct inplace_construct_tag {
-    constexpr inplace_construct_tag() noexcept  = default;
+    constexpr explicit inplace_construct_tag() noexcept  = default;
 };
 
 /**
@@ -181,7 +181,7 @@ struct inplace_construct_tag {
  * 表示通过解包tuple或pair类型的参数来构造对象。
  */
 struct unpack_utility_construct_tag {
-    constexpr unpack_utility_construct_tag() noexcept = default;
+    constexpr explicit unpack_utility_construct_tag() noexcept = default;
 };
 
 /** @} */ // ConstructionTags

@@ -1,9 +1,18 @@
 #ifndef MSTL_CORE_MEMORY_TRACE_MEMORY_HPP__
 #define MSTL_CORE_MEMORY_TRACE_MEMORY_HPP__
+#ifdef MTL_STATE_DEBUG__
 #include "../container/unordered_map.hpp"
 #include "../system/console.hpp"
 #include "../system/stacktrace.hpp"
+#else
+#include "standard_allocator.hpp"
+#endif
 MSTL_BEGIN_NAMESPACE__
+
+template <typename T>
+class trace_allocator;
+
+#ifdef MTL_STATE_DEBUG__
 
 template <typename T>
 class trace_allocator {
@@ -34,12 +43,10 @@ public:
     }
 
     ~trace_allocator() {
-#ifdef MSTL_STATE_DEBUG__
         if (!traces_.empty()) {
             _MSTL printcln(color::red(), "Memory leaks detected! \n");
             print_stacktrace();
         }
-#endif
     }
 
     void print_stacktrace() const {
@@ -58,17 +65,9 @@ public:
     }
 
     MSTL_NODISCARD MSTL_ALLOC_OPTIMIZE pointer allocate() {
-        return _MSTL allocator<T>().allocate(sizeof(value_type));
+        return this->allocate(1);
     }
-
-    void deallocate(pointer p) noexcept {
-        auto it = traces_.find(p);
-        if (it != traces_.end()) {
-            traces_.erase(it);
-        }
-        _MSTL allocator<T>().deallocate(p, sizeof(value_type));
-    }
-
+    
     void deallocate(pointer p, const size_type n) noexcept {
         auto it = traces_.find(p);
         if (it != traces_.end()) {
@@ -76,18 +75,31 @@ public:
         }
         _MSTL allocator<T>().deallocate(p, n);
     }
+    
+    void deallocate(pointer p) noexcept {
+        this->deallocate(p, 1);
+    }
 
 private:
     _MSTL unordered_map<T*, _MSTL stacktrace> traces_;
 };
+
 template <typename T, typename U>
 bool operator ==(const trace_allocator<T>&, const trace_allocator<U>&) noexcept {
     return true;
 }
+
 template <typename T, typename U>
 bool operator !=(const trace_allocator<T>&, const trace_allocator<U>&) noexcept {
     return false;
 }
+
+#else
+
+template <typename T>
+class trace_allocator : public standard_allocator<T> {};
+
+#endif
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_TRACE_MEMORY_HPP__

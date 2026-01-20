@@ -75,7 +75,7 @@ public:
     using arrival_token = byte_t;
 
     static constexpr ptrdiff_t max() noexcept {
-        return numeric_limits<ptrdiff_t>::max();
+        return numeric_traits<ptrdiff_t>::max();
     }
 
     tree_barrier(const ptrdiff_t expected, CmplFunc completion)
@@ -131,7 +131,7 @@ public:
     class arrival_token final {
     public:
         arrival_token(arrival_token&&) = default;
-        arrival_token& operator=(arrival_token&&) = default;
+        arrival_token& operator =(arrival_token&&) = default;
         ~arrival_token() = default;
 
     private:
@@ -149,7 +149,7 @@ public:
         : barrier_impl_(count, _MSTL move(completion)) { }
 
     barrier(barrier const&) = delete;
-    barrier& operator=(barrier const&) = delete;
+    barrier& operator =(barrier const&) = delete;
 
     MSTL_NODISCARD arrival_token arrive(ptrdiff_t update = 1) {
         return arrival_token{barrier_impl_.arrive(update)};

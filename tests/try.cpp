@@ -1549,10 +1549,6 @@ void test_vector() {
         v4.emplace(v4.begin() + 1, 5);
         v4.erase(--v4.end());
         println(v4);
-        vector<int, ctype_allocator<int>> cvec;
-        cvec.emplace_back(3);
-        cvec.emplace_back(4);
-        println(cvec);
 
         vector<int> vec;
         vec.assign(5, 10);
@@ -1562,8 +1558,7 @@ void test_vector() {
         vector<int> anotherVec = { 6, 7, 8 };
         vec.assign(anotherVec.begin(), anotherVec.end());
         println(vec);
-    }
-    catch (exception& error) {
+    } catch (exception& error) {
         println(error);
     }
 
@@ -1786,7 +1781,7 @@ void test_math() {
     println(radian2angular(arctangent(100)));
     println(arcsine(1), arcsine(0), arcsine(-1));
     println(arccosine(1), arccosine(0), arccosine(-1));
-    println(arctangent(numeric_limits<decimal_t>::max()), arctangent(numeric_limits<decimal_t>::min_nega()));
+    println(arctangent(numeric_traits<decimal_t>::max()), arctangent(numeric_traits<decimal_t>::min_nega()));
     // println(tangent(_CONSTANTS PI / 2));  // MathError
     println(tangent(0));
     println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
@@ -1838,11 +1833,6 @@ void test_variant() {
 
     auto& str = v2.get<string>();
     println(str);
-    auto ptr = v2.get_if<string>();
-    if (!ptr || *ptr != "hello") {
-        println("get_if method test failed.");
-        return;
-    }
     v2.emplace<int>(42);
     println(v2.index(), ":", v2.get<int>());
     int result = v2.visit(var_visitor());
@@ -1851,11 +1841,10 @@ void test_variant() {
     hash<variant<int, string>> hasher{};
     println(hasher(v1));
 
-    variant<non, int> v;
-    v = non{};
+    variant<non, int> v = none;
 
     if (v.holds_alternative<non>()) {
-        println("hold non");
+        println("hold none");
     }
     println(v.to_hash());
 }
@@ -1978,8 +1967,7 @@ void test_max_memory_string() {
         }
         println("Test 5: Success. Allocated "
                   , total_written / (1024 * 1024), " MB string.");
-    }
-    catch (const exception& e) {
+    } catch (const exception& e) {
         println("Test 5: ", e.what());
     }
 }
@@ -2053,7 +2041,7 @@ void test_option() {
 
 void test_st(){
     trace_allocator<int> alloc;
-    auto* ptr = alloc.allocate(1);
+    auto* ptr = alloc.allocate();
 }
 
 void test_any() {

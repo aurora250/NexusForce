@@ -1,8 +1,45 @@
 #ifndef MSTL_CORE_ALGORITHM_MERGE_HPP__
 #define MSTL_CORE_ALGORITHM_MERGE_HPP__
+
+/**
+ * @file merge.hpp
+ * @brief MSTL合并算法
+ *
+ * 此文件提供了合并算法实现，
+ * 用于将两个已排序的序列合并成一个有序序列。
+ */
+
 #include "../memory/temporary_buffer.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup MergeAlgorithms 合并算法
+ * @brief MSTL合并算法的实现
+ * @{
+ */
+
+/**
+ * @brief 合并两个已排序序列
+ * @tparam Iterator1 第一个输入迭代器类型
+ * @tparam Iterator2 第二个输入迭代器类型
+ * @tparam Iterator3 输出迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first1 第一个范围起始
+ * @param last1 第一个范围结束
+ * @param first2 第二个范围起始
+ * @param last2 第二个范围结束
+ * @param result 输出范围起始
+ * @param comp 比较函数对象
+ * @return 输出范围结束迭代器
+ *
+ * 将两个已排序的范围 [first1, last1) 和 [first2, last2) 合并到以 result 开始的范围。
+ * 结果范围包含来自两个输入范围的所有元素，并保持排序顺序。
+ *
+ * 前提条件：
+ * 1. 两个输入范围都已按照 comp 排序
+ * 2. 输出范围不与任一输入范围重叠
+ * 3. 输出范围有足够的空间容纳所有元素
+ */
 template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare,
 	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
@@ -20,13 +57,40 @@ constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 	return _MSTL copy(first2, last2, _MSTL copy(first1, last1, result));
 }
 
+/**
+ * @brief 合并两个已排序序列
+ * @tparam Iterator1 第一个输入迭代器类型
+ * @tparam Iterator2 第二个输入迭代器类型
+ * @tparam Iterator3 输出迭代器类型
+ * @param first1 第一个范围起始
+ * @param last1 第一个范围结束
+ * @param first2 第二个范围起始
+ * @param last2 第二个范围结束
+ * @param result 输出范围起始
+ * @return 输出范围结束迭代器
+ */
 template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
 	return _MSTL merge(first1, last1, first2, last2, result, _MSTL less<iter_value_t<Iterator1>>());
 }
 
+/// @cond
 MSTL_BEGIN_INNER__
 
+/**
+ * @brief 原地合并辅助函数（不使用缓冲区）
+ * @tparam Iterator 迭代器类型
+ * @tparam Distance 距离类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param middle 范围中间分割点
+ * @param last 范围结束
+ * @param len1 前半部分长度
+ * @param len2 后半部分长度
+ * @param comp 比较函数对象
+ *
+ * 使用旋转和递归在原地合并两个已排序的子范围。
+ */
 template <typename Iterator, typename Distance, typename Compare>
 constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Iterator last,
 	Distance len1, Distance len2, Compare comp) {
@@ -57,6 +121,22 @@ constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Itera
 	_INNER __merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
 }
 
+/**
+ * @brief 带缓冲区的旋转辅助函数
+ * @tparam Iterator1 主迭代器类型
+ * @tparam Iterator2 缓冲区迭代器类型
+ * @tparam Distance 距离类型
+ * @param first 范围起始
+ * @param middle 旋转中心
+ * @param last 范围结束
+ * @param len1 前半部分长度
+ * @param len2 后半部分长度
+ * @param buffer 缓冲区起始
+ * @param buffer_size 缓冲区大小
+ * @return 旋转后新的中间位置
+ *
+ * 使用缓冲区优化旋转操作，选择最小的部分放入缓冲区。
+ */
 template <typename Iterator1, typename Iterator2, typename Distance>
 constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, Iterator1 last,
 	Distance len1, Distance len2, Iterator2 buffer, Distance buffer_size) {
@@ -76,6 +156,23 @@ constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, 
 	return first;
 }
 
+/**
+ * @brief 原地合并辅助函数（使用缓冲区）
+ * @tparam Iterator 主迭代器类型
+ * @tparam Distance 距离类型
+ * @tparam Pointer 缓冲区指针类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param middle 范围中间分割点
+ * @param last 范围结束
+ * @param len1 前半部分长度
+ * @param len2 后半部分长度
+ * @param buffer 缓冲区指针
+ * @param buffer_size 缓冲区大小
+ * @param comp 比较函数对象
+ *
+ * 使用临时缓冲区优化原地合并算法。
+ */
 template <typename Iterator, typename Distance, typename Pointer, typename Compare>
 constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator last,
 	Distance len1, Distance len2, Pointer buffer, Distance buffer_size, Compare comp) {
@@ -141,26 +238,52 @@ constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @brief 原地合并两个已排序的连续范围
+ * @tparam Iterator 迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param middle 范围中间分割点
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 将两个已排序的连续子范围 [first, middle) 和 [middle, last) 原地合并，
+ * 使得整个范围 [first, last) 成为有序的。
+ *
+ * 算法尝试分配临时缓冲区以提高性能，如果分配失败则使用无缓冲区的算法。
+ */
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
 	if (first == middle || middle == last) return;
 	using Distance = iter_difference_t<Iterator>;
 	Distance len1 = _MSTL distance(first, middle);
 	Distance len2 = _MSTL distance(middle, last);
-	temporary_buffer<Iterator> buffer(first, last);
-	if (buffer.begin() == 0) {
+	try {
+		temporary_buffer<Iterator> buffer(first, last);
+		_INNER __merge_with_buffer_aux(
+			first, middle, last, len1, len2,
+			buffer.begin(), Distance(buffer.size()), comp
+		);
+	} catch (...) {
 		_INNER __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
-	} else {
-		_INNER __merge_with_buffer_aux(first, middle, last, len1, len2,
-			buffer.begin(), Distance(buffer.size()), comp);
 	}
 }
 
+/**
+ * @brief 原地合并两个已排序的连续范围
+ * @tparam Iterator 迭代器类型
+ * @param first 范围起始
+ * @param middle 范围中间分割点
+ * @param last 范围结束
+ */
 template <typename Iterator>
 constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last) {
 	return _MSTL inplace_merge(first, middle, last, _MSTL less<iter_value_t<Iterator>>());
 }
+
+/** @} */ // MergeAlgorithms
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_MERGE_HPP__

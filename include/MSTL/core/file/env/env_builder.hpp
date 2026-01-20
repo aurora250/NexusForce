@@ -13,9 +13,9 @@ private:
 public:
     env_builder();
     env_builder(const env_builder&) = delete;
-    env_builder& operator=(const env_builder&) = delete;
+    env_builder& operator =(const env_builder&) = delete;
     env_builder(env_builder&&) = default;
-    env_builder& operator=(env_builder&&) = default;
+    env_builder& operator =(env_builder&&) = default;
 
     env_builder& key(const string& k);
 

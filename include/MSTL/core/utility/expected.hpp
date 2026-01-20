@@ -89,8 +89,8 @@ public:
     noexcept(is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>)
         : error_(list, _MSTL forward<Args>(args)...) {}
 
-    constexpr unexpected& operator=(const unexpected&) = default;
-    constexpr unexpected& operator=(unexpected&&) = default;
+    constexpr unexpected& operator =(const unexpected&) = default;
+    constexpr unexpected& operator =(unexpected&&) = default;
 
     MSTL_NODISCARD constexpr const ErrorT& error() const & noexcept { 
         return error_; 
@@ -145,7 +145,7 @@ public:
     }
 
     temporary_guard(const temporary_guard&) = delete;
-    temporary_guard& operator=(const temporary_guard&) = delete;
+    temporary_guard& operator =(const temporary_guard&) = delete;
 
     constexpr T&& release() noexcept {
         guarded_ptr = nullptr;
@@ -350,7 +350,7 @@ public:
             _MSTL destroy(_MSTL addressof(error_));
     }
 
-    constexpr expected& operator=(const expected& other)
+    constexpr expected& operator =(const expected& other)
     noexcept(conjunction_v<
         is_nothrow_copy_constructible<T>,
         is_nothrow_copy_constructible<ErrorT>,
@@ -370,7 +370,7 @@ public:
         return *this;
     }
 
-    constexpr expected& operator=(expected&& other)
+    constexpr expected& operator =(expected&& other)
     noexcept(conjunction_v<
         is_nothrow_move_constructible<T>,
         is_nothrow_move_constructible<ErrorT>,
@@ -398,7 +398,7 @@ public:
         && (is_nothrow_constructible_v<T, U>
             || is_nothrow_move_constructible_v<T>
             || is_nothrow_move_constructible_v<ErrorT>)
-    constexpr expected& operator=(U&& val) {
+    constexpr expected& operator =(U&& val) {
         assign_value(_MSTL forward<U>(val));
         return *this;
     }
@@ -409,7 +409,7 @@ public:
         && (is_nothrow_constructible_v<ErrorT, const Gr&>
             || is_nothrow_move_constructible_v<T>
             || is_nothrow_move_constructible_v<ErrorT>)
-    constexpr expected& operator=(const unexpected<Gr>& unex) {
+    constexpr expected& operator =(const unexpected<Gr>& unex) {
         assign_error(unex.error());
         return *this;
     }
@@ -420,7 +420,7 @@ public:
         && (is_nothrow_constructible_v<ErrorT, Gr>
             || is_nothrow_move_constructible_v<T>
             || is_nothrow_move_constructible_v<ErrorT>)
-    constexpr expected& operator=(unexpected<Gr>&& unex) {
+    constexpr expected& operator =(unexpected<Gr>&& unex) {
         assign_error(_MSTL move(unex).error());
         return *this;
     }
@@ -1084,7 +1084,7 @@ public:
             _MSTL destroy(_MSTL addressof(error_));
     }
 
-    constexpr expected& operator=(const expected& other)
+    constexpr expected& operator =(const expected& other)
     noexcept(conjunction_v<
         is_nothrow_copy_constructible<ErrorT>,
         is_nothrow_copy_assignable<ErrorT>
@@ -1098,7 +1098,7 @@ public:
         return *this;
     }
 
-    constexpr expected& operator=(expected&& other)
+    constexpr expected& operator =(expected&& other)
     noexcept(conjunction_v<
         is_nothrow_move_constructible<ErrorT>,
         is_nothrow_move_assignable<ErrorT>
@@ -1115,7 +1115,7 @@ public:
     template <typename Gr>
     requires is_constructible_v<ErrorT, const Gr&>
         && is_assignable_v<ErrorT&, const Gr&>
-    constexpr expected& operator=(const unexpected<Gr>& unex) {
+    constexpr expected& operator =(const unexpected<Gr>& unex) {
         assign_error(unex.error());
         return *this;
     }
@@ -1123,7 +1123,7 @@ public:
     template <typename Gr>
     requires is_constructible_v<ErrorT, Gr>
         && is_assignable_v<ErrorT&, Gr>
-    constexpr expected& operator=(unexpected<Gr>&& unex) {
+    constexpr expected& operator =(unexpected<Gr>&& unex) {
         assign_error(_MSTL move(unex.error()));
         return *this;
     }

@@ -188,9 +188,9 @@ private:
 public:
     toml_array() = default;
     toml_array(const toml_array&) = delete;
-    toml_array& operator=(const toml_array&) = delete;
+    toml_array& operator =(const toml_array&) = delete;
     toml_array(toml_array&&) = default;
-    toml_array& operator=(toml_array&&) = default;
+    toml_array& operator =(toml_array&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Array; }
     MSTL_NODISCARD const toml_array* as_array() const noexcept override { return this; }
@@ -218,9 +218,9 @@ public:
     explicit toml_table(const bool is_inline) : is_inline_table(is_inline) {}
 
     toml_table(const toml_table&) = delete;
-    toml_table& operator=(const toml_table&) = delete;
+    toml_table& operator =(const toml_table&) = delete;
     toml_table(toml_table&&) = default;
-    toml_table& operator=(toml_table&&) = default;
+    toml_table& operator =(toml_table&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Table; }
     MSTL_NODISCARD const toml_table* as_table() const noexcept override { return this; }

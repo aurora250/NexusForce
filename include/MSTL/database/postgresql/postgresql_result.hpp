@@ -24,7 +24,7 @@ public:
     ~postgresql_tb_result() override;
 
     postgresql_tb_result(const postgresql_tb_result&) = delete;
-    postgresql_tb_result& operator=(const postgresql_tb_result&) = delete;
+    postgresql_tb_result& operator =(const postgresql_tb_result&) = delete;
 
     MSTL_NODISCARD bool empty() const noexcept override { return row_count_ == 0; }
     MSTL_NODISCARD bool next() noexcept override;

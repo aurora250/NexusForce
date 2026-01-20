@@ -250,10 +250,10 @@ public:
 		return duration(rep(0));
 	}
 	static constexpr duration min() noexcept {
-		return duration(numeric_limits<Rep>::lowest());
+		return duration(numeric_traits<Rep>::lowest());
 	}
 	static constexpr duration max() noexcept {
-		return duration(numeric_limits<Rep>::max());
+		return duration(numeric_traits<Rep>::max());
 	}
 };
 

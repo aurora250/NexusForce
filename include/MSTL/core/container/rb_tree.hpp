@@ -281,8 +281,7 @@ private:
         link_type tmp = size_pair_.get_base().allocate();
         try {
             _MSTL construct(&tmp->data_, _MSTL forward<Args>(args)...);
-        }
-        catch (...) {
+        } catch (...) {
             destroy_node(tmp);
             throw_exception(memory_exception("rb tree construct node failed."));
         }
@@ -366,8 +365,7 @@ private:
                 leftmost() = header_;
                 rightmost() = header_;
             }
-        }
-        catch (...) {
+        } catch (...) {
             this->erase_under_node(top);
             throw;
         }

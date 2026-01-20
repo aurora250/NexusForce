@@ -1,40 +1,33 @@
 #ifndef MSTL_CORE_MEMORY_MEMORY_HPP__
 #define MSTL_CORE_MEMORY_MEMORY_HPP__
+
+/**
+ * @file memory.hpp
+ * @brief MSTL内存操作函数
+ *
+ * 此文件提供了低级别内存操作函数的实现，包括内存拷贝、移动、比较、填充等操作。
+ * 这些函数类似于标准C库的memory函数，但提供constexpr支持和其他增强功能。
+ */
+
 #include "../string/char_types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-#ifdef MSTL_COMPILER_GNUC__
-	#define MSTL_MEMORY_BARRIER(p) __asm__ volatile ("" : : "m" (*p) : "memory");
-#elif defined(MSTL_COMPILER_MSVC__)
-	#define MSTL_MEMORY_BARRIER(p) ::_ReadWriteBarrier();
-#else
-	#define MSTL_MEMORY_BARRIER(p)
-#endif
+/**
+ * @defgroup MemoryFunctions 内存操作函数
+ * @brief 低级内存操作函数集合
+ * @{
+ */
 
-#ifdef MSTL_COMPILER_MSVC__
-namespace masm {
-	// These functions are defined in memory.asm and be packaged in masm namespace
-	extern "C" {
-		void* __cdecl masm_memory_copy(void* dest, const void* src, size_t count);
-		void* __cdecl masm_memory_copy_offset(void* dest, const void* src, size_t count);
-		void* __cdecl masm_memory_char_copy(void* dest, const void* src, int chr, size_t count);
-		int __cdecl masm_memory_compare(const void* lhs, const void* rhs, size_t count);
-		int __cdecl masm_memory_compare_ignore_case(const void* ptr1, const void* rhs, size_t count);
-		void* __cdecl masm_memory_char(const void* dest, int value, size_t count);
-		void* __cdecl masm_memory_move(void* dest, const void* src, size_t count);
-		void* __cdecl masm_memory_set(void* dest, int value, size_t count);
-		void __cdecl masm_memory_zero(void* dest, size_t count);
-		void __cdecl masm_explicit_memory_zero(void* dest, size_t count);
-		void* __cdecl masm_memory_in_memory(void* data, size_t data_len, const void* pattern, size_t pattern_len);
-		void* __cdecl masm_memory_frobnicate(void* s, size_t n);
-	}
-}
-#endif
-
-// copy from source memory to destination memory with specific length.
-// if any parameter pointer is nullptr, return nullptr.
-// it`s similar with std::memcpy.
-MSTL_CONSTEXPR14 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+/**
+ * @brief 从源内存复制到目标内存
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @param count 要复制的字节数
+ * @return 目标内存的起始指针，如果参数无效则返回nullptr
+ * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
+ */
+MSTL_CONSTEXPR14 void* memory_copy(
+	void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	if (count == 0) return dest;
 
@@ -49,8 +42,16 @@ MSTL_CONSTEXPR14 void* memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RE
 	return res;
 }
 
-// it`s similar with std::mempcpy
-MSTL_CONSTEXPR14 void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+/**
+ * @brief 从源内存复制到目标内存并返回复制结束位置
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @param count 要复制的字节数
+ * @return 目标内存复制结束后的下一个位置指针，如果参数无效则返回nullptr
+ * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
+ */
+MSTL_CONSTEXPR14 void* memory_copy_offset(
+	void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 	auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -63,19 +64,25 @@ MSTL_CONSTEXPR14 void* memory_copy_offset(void* MSTL_RESTRICT dest, const void* 
 	return (void*) dest_v;
 }
 
-// copy from source memory to destination memory with specific length if not encounter target character.
-// if any parameter pointer is nullptr, return nullptr.
-// it`s similar with std::memccpy.
-MSTL_CONSTEXPR14 void* memory_char_copy(void* dest, const void* src, const int chr, size_t count) noexcept {
+/**
+ * @brief 从源内存复制到目标内存，直到遇到特定字节
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @param value 停止字节
+ * @param count 最大复制字节数
+ * @return 目标内存中停止字符后的下一个位置指针，如果没有找到字节则返回nullptr
+ */
+MSTL_CONSTEXPR14 void* memory_copy_until(
+	void* dest, const void* src, const byte_t value, size_t count) noexcept {
     if (dest == nullptr || src == nullptr) return nullptr;
-    const auto target = static_cast<byte_t>(chr);
+
     auto dest_v = static_cast<volatile byte_t*>(dest);
     auto src_v = static_cast<const volatile byte_t*>(src);
 
     while (count--) {
         const byte_t current = *src_v;
         *dest_v = current;
-        if (current == target) {
+        if (current == value) {
             return (void*) (++dest_v);
         }
         dest_v++;
@@ -84,11 +91,18 @@ MSTL_CONSTEXPR14 void* memory_char_copy(void* dest, const void* src, const int c
     return nullptr;
 }
 
-// compare with left-hand memory and right-hand memory in a specific length.
-// return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
-// and return zero when they are equal in specific length.
-// it`s similar with std::memcmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+/**
+ * @brief 比较两个内存区域的内容
+ * @param lhs 左侧内存指针
+ * @param rhs 右侧内存指针
+ * @param count 要比较的字节数
+ * @return 比较结果：
+ *         - 正数：左侧内存大于右侧内存
+ *         - 负数：左侧内存小于右侧内存
+ *         - 0：两个内存区域相等
+ */
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(
+	const void* lhs, const void* rhs, size_t count) noexcept {
 	if (lhs == nullptr && rhs == nullptr) return 0;
 	if (lhs == nullptr) return -1;
     if (rhs == nullptr) return 1;
@@ -102,45 +116,14 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(const void* lhs, const vo
 	return 0;
 }
 
-// compare with left-hand memory and right-hand memory in a specific length but ignored case of characters.
-// return a positive number when left-hand memory is greater, a negative number when right-hand memory is greater
-// and return zero when they are equal in specific length.
-// it`s similar with std::memicmp.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR20 int memory_compare_ignore_case(
-	const void* lhs, const void *rhs, const size_t count) noexcept {
-	if ((lhs == nullptr && rhs == nullptr) || count == 0) return 0;
-	if (lhs == nullptr) return -1;
-	if (rhs == nullptr) return 1;
-
-	const auto lh_v = static_cast<const volatile byte_t*>(lhs);
-	const auto rh_v = static_cast<const volatile byte_t*>(rhs);
-
-    for (size_t i = 0; i < count; ++i) {
-        const byte_t c1 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(lh_v[i])));
-        const byte_t c2 = static_cast<byte_t>(_MSTL to_lowercase(static_cast<char>(rh_v[i])));
-        if (c1 != c2) {
-            return static_cast<int>(c1) - static_cast<int>(c2);
-        }
-    }
-    return 0;
-}
-
-// return a pointer which is pointing to the first place that equal to target value in a specific length.
-// if parameter pointer is nullptr, return nullptr. if not found, return nullptr.
-// it`s similar with std::memchr.
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 void* memory_char(const void* dest, const int value, size_t count) noexcept {
-	if(dest == nullptr) return nullptr;
-	auto p = static_cast<const byte_t *>(dest);
-	while (count--) {
-		if (*p == static_cast<byte_t>(value))
-			return const_cast<byte_t*>(p);
-		p++;
-	}
-	return nullptr;
-}
-
-// if any parameter pointer is nullptr, return nullptr.
-// it`s similar with std::memmove.
+/**
+ * @brief 从源内存移动数据到目标内存
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @param count 要移动的字节数
+ * @return 目标内存的起始指针，如果参数无效则返回nullptr
+ * @note 支持重叠区域，当dest < src时从前向后复制，当dest > src时从后向前复制。
+ */
 MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 
@@ -161,37 +144,74 @@ MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) no
 	return res;
 }
 
-// fill the destination memory with target value in the specific length.
-// if parameter pointer is nullptr, return nullptr.
-// it`s similar with std::memset.
-MSTL_CONSTEXPR14 void* memory_set(void* dest, const int value, size_t count) noexcept {
+/**
+ * @brief 使用指定字节填充内存区域
+ * @param dest 目标内存指针
+ * @param value 填充字节
+ * @param count 要填充的字节数
+ * @return 目标内存的起始指针，如果参数无效则返回nullptr
+ */
+MSTL_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 
-	void* ret = static_cast<byte_t *>(dest);
-	auto dest_v = static_cast<volatile byte_t *>(dest);
+	void* ret = static_cast<byte_t*>(dest);
+	auto dest_v = static_cast<volatile byte_t*>(dest);
 	while (count--) {
-		*dest_v = static_cast<byte_t>(value);
+		*dest_v = value;
 		dest_v = dest_v + 1;
 	}
 	return ret;
 }
 
-// clear the destination memory with zero in the specific length.
-// if parameter pointer is nullptr, do nothing.
-// it`s similar with std::bzero.
+/**
+ * @brief 将内存区域清零
+ * @param dest 目标内存指针
+ * @param count 要清零的字节数
+ *
+ * 清零内存区域。如果参数无效则不执行任何操作。
+ */
 MSTL_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
 	if (dest == nullptr) return;
 
 	const auto dest_v = static_cast<volatile byte_t*>(dest);
 	for (size_t i = 0; i < count; ++i) {
-		dest_v[i] = 0;
+		dest_v[i] = static_cast<byte_t>(0);
 	}
 }
 
-// std::memmem
-MSTL_CONSTEXPR14 void* memory_in_memory(const void * data, const size_t data_len,
+/**
+ * @brief 在内存中搜索特定字节
+ * @param dest 要搜索的内存指针
+ * @param value 要搜索的字节
+ * @param count 要搜索的字节数
+ * @return 指向第一个匹配字节的指针，如果没有找到则返回nullptr
+ */
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const void* memory_find(
+	const void* dest, const byte_t value, size_t count) noexcept {
+	if(dest == nullptr) return nullptr;
+	auto p = static_cast<const byte_t*>(dest);
+	while (count--) {
+		if (*p == value) {
+			return p;
+		}
+		p++;
+	}
+	return nullptr;
+}
+
+/**
+ * @brief 在内存中搜索子模式
+ * @param data 要搜索的内存指针
+ * @param data_len 要搜索的内存长度
+ * @param pattern 要搜索的模式指针
+ * @param pattern_len 模式长度
+ * @return 指向第一个匹配模式起始位置的指针，如果没有找到则返回nullptr
+ */
+MSTL_CONSTEXPR14 void* memory_find_pattern(
+	const void* data, const size_t data_len,
 	const void* pattern, const size_t pattern_len) noexcept {
-	if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
+	if (data == nullptr || pattern == nullptr ||
+		data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
 		return nullptr;
 	}
 	const auto data_ptr = static_cast<const byte_t*>(data);
@@ -215,32 +235,21 @@ MSTL_CONSTEXPR14 void* memory_in_memory(const void * data, const size_t data_len
 	return nullptr;
 }
 
-// std::memfrob
-MSTL_CONSTEXPR14 void* memory_frobnicate(void* s, const size_t n) noexcept {
-	if (s == nullptr || n == 0) return s;
-	const auto s_v = static_cast<volatile byte_t*>(s);
-	for (size_t i = 0; i < n; i++) {
-		s_v[i] ^= 42;
-	}
-	return s;
-}
-
-
 /**
- * @brief 执行位级别的类型转换
+ * @brief 执行内存层的类型转换
  * @tparam To 目标类型
  * @tparam From 源类型
  * @param value 要转换的值
  * @return 转换后的值
+ * @note 要求两个类型大小相同且都是平凡可复制的。
  *
  * 将源类型的位表示重新解释为目标类型的表示。
- * 要求两个类型大小相同且都是平凡可复制的。
  */
 template <typename To, typename From>
-MSTL_NODISCARD MSTL_CONSTEXPR20 To bit_cast(const From& value) noexcept {
-	static_assert(sizeof(To) == sizeof(From), "bit_cast: types must have the same size");
-	static_assert(is_trivially_copyable_v<To>, "bit_cast: To type must be trivially copyable");
-	static_assert(is_trivially_copyable_v<From>, "bit_cast: From type must be trivially copyable");
+MSTL_NODISCARD MSTL_CONSTEXPR20 To memory_cast(const From& value) noexcept {
+	static_assert(sizeof(To) == sizeof(From), "types must have the same size");
+	static_assert(is_trivially_copyable_v<To>, "To type must be trivially copyable");
+	static_assert(is_trivially_copyable_v<From>, "From type must be trivially copyable");
 
 #ifdef MSTL_STANDARD_20__
 	return __builtin_bit_cast(To, value);
@@ -250,6 +259,8 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 To bit_cast(const From& value) noexcept {
 	return result;
 #endif
 }
+
+/** @} */ // MemoryFunctions
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_MEMORY_HPP__

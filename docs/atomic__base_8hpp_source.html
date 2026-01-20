@@ -744,7 +744,7 @@ $(function(){initNavTree('atomic__base_8hpp_source.html','',''); });
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    atomic_flag&amp; operator =(const atomic_flag&amp;) = delete;</div>
 <div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    atomic_flag&amp; operator =(const atomic_flag&amp;) volatile = delete;</div>
 <div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    atomic_flag(atomic_flag&amp;&amp;) noexcept = default;</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    atomic_flag&amp; operator=(atomic_flag&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    atomic_flag&amp; operator =(atomic_flag&amp;&amp;) noexcept = default;</div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    ~atomic_flag() noexcept = default;</div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span> </div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    constexpr atomic_flag(const value_type flag) noexcept</div>
@@ -844,7 +844,7 @@ $(function(){initNavTree('atomic__base_8hpp_source.html','',''); });
 <div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    atomic_base&amp; operator =(const atomic_base&amp;) = delete;</div>
 <div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    atomic_base&amp; operator =(const atomic_base&amp;) volatile = delete;</div>
 <div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>    atomic_base(atomic_base&amp;&amp;) noexcept = default;</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    atomic_base&amp; operator=(atomic_base&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    atomic_base&amp; operator =(atomic_base&amp;&amp;) noexcept = default;</div>
 <div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span> </div>
 <div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>    constexpr atomic_base(value_type value) noexcept : value_ (value) { }</div>
 <div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
@@ -1086,10 +1086,10 @@ $(function(){initNavTree('atomic__base_8hpp_source.html','',''); });
 <div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>    atomic_base() noexcept = default;</div>
 <div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>    atomic_base(const atomic_base&amp;) = delete;</div>
-<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>    atomic_base&amp; operator=(const atomic_base&amp;) = delete;</div>
-<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>    atomic_base&amp; operator=(const atomic_base&amp;) volatile = delete;</div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>    atomic_base&amp; operator =(const atomic_base&amp;) = delete;</div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>    atomic_base&amp; operator =(const atomic_base&amp;) volatile = delete;</div>
 <div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>    atomic_base(atomic_base&amp;&amp;) noexcept = default;</div>
-<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>    atomic_base&amp; operator=(atomic_base&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>    atomic_base&amp; operator =(atomic_base&amp;&amp;) noexcept = default;</div>
 <div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>    ~atomic_base() noexcept = default;</div>
 <div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span> </div>
 <div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>    constexpr atomic_base(const value_type ptr) noexcept : ptr_(ptr) {}</div>
@@ -1521,7 +1521,7 @@ $(function(){initNavTree('atomic__base_8hpp_source.html','',''); });
 <div class="line"><a id="l01427" name="l01427"></a><span class="lineno"> 1427</span>    atomic_float_base&amp; operator =(<span class="keyword">const</span> atomic_float_base&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l01428" name="l01428"></a><span class="lineno"> 1428</span>    atomic_float_base&amp; operator =(<span class="keyword">const</span> atomic_float_base&amp;) <span class="keyword">volatile</span> = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l01429" name="l01429"></a><span class="lineno"> 1429</span>    atomic_float_base(atomic_float_base&amp;&amp;) noexcept = default;</div>
-<div class="line"><a id="l01430" name="l01430"></a><span class="lineno"> 1430</span>    atomic_float_base&amp; operator=(atomic_float_base&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l01430" name="l01430"></a><span class="lineno"> 1430</span>    atomic_float_base&amp; operator =(atomic_float_base&amp;&amp;) noexcept = default;</div>
 <div class="line"><a id="l01431" name="l01431"></a><span class="lineno"> 1431</span> </div>
 <div class="line"><a id="l01432" name="l01432"></a><span class="lineno"> 1432</span>    Float operator =(Float value) volatile noexcept {</div>
 <div class="line"><a id="l01433" name="l01433"></a><span class="lineno"> 1433</span>        this-&gt;store(value);</div>

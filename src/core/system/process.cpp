@@ -212,7 +212,7 @@ process::process_info process::create_process(const string& executable,
 int process::wait_for_process(process_info& info, int timeout_ms) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::DWORD timeout = (timeout_ms < 0) ?
-        numeric_limits<::DWORD>::max() : static_cast<::DWORD>(timeout_ms);
+        numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout_ms);
     ::DWORD result = ::WaitForSingleObject(info.pi.hProcess, timeout);
 
     if (result == WAIT_TIMEOUT) {

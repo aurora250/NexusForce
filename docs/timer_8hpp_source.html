@@ -186,9 +186,9 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    timer_scheduler(<span class="keyword">const</span> timer_scheduler&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    timer_scheduler&amp; operator=(<span class="keyword">const</span> timer_scheduler&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    timer_scheduler&amp; operator =(<span class="keyword">const</span> timer_scheduler&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    timer_scheduler(timer_scheduler&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    timer_scheduler&amp; operator=(timer_scheduler&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    timer_scheduler&amp; operator =(timer_scheduler&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    token add_task(time_point expire, handler_type&amp;&amp; handler) {</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(mutex_);</div>

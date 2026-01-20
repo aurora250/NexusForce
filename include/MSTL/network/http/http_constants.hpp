@@ -85,7 +85,7 @@ private:
 public:
     HTTP_CONTENT() = default;
     HTTP_CONTENT(const HTTP_CONTENT&) = default;
-    HTTP_CONTENT& operator=(const HTTP_CONTENT&) = default;
+    HTTP_CONTENT& operator =(const HTTP_CONTENT&) = default;
 
     HTTP_CONTENT(HTTP_CONTENT&& content) noexcept : content_(_MSTL move(content.content_)) {}
 

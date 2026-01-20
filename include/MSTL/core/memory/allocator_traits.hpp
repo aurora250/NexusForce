@@ -1,24 +1,58 @@
 #ifndef MSTL_CORE_MEMORY_ALLOCATOR_TRAITS_HPP__
 #define MSTL_CORE_MEMORY_ALLOCATOR_TRAITS_HPP__
+
+/**
+ * @file allocator_traits.hpp
+ * @brief MSTL分配器特性
+ *
+ * 此文件提供了分配器特性模板实现，
+ * 用于统一不同分配器的接口，提供分配器的标准访问和操作方式。
+ */
+
 #include "../typeinfo/pointer_traits.hpp"
 #include "../memory/construct.hpp"
-#include "../numeric/numeric_limits.hpp"
+#include "../numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename T>
-class standard_allocator;
+/**
+ * @defgroup AllocationTraits 分配器特性
+ * @brief 实现通用的分配器特性
+ * @{
+ */
 
+/// @cond
+MSTL_BEGIN_INNER__
 
+/**
+ * @struct __allocator_traits_base
+ * @brief 分配器特性基类
+ *
+ * 提供分配器特性的基础类型提取和元函数。
+ */
 struct __allocator_traits_base {
+	/**
+	 * @brief 分配器重新绑定元函数
+	 * @tparam T 新的元素类型
+	 * @tparam U 原始分配器类型
+	 */
     template <typename T, typename U, typename = void>
     struct alloc_rebind {
-        using type = typename replace_first_parameter<U, T>::type;
+        using type = replace_first_para_t<U, T>;
     };
+
+	/**
+	 * @brief 分配器重新绑定元函数
+	 * @tparam T 新的元素类型
+	 * @tparam U 原始分配器类型
+	 */
     template <typename T, typename U>
     struct alloc_rebind<T, U, void_t<typename T::template rebind<U>::other>> {
         using type = typename T::template rebind<U>::other;
     };
 
+	/**
+	 * @brief 分配器重新绑定类型别名
+	 */
     template <typename T, typename U>
     using alloc_rebind_t = typename alloc_rebind<T, U>::type;
 
@@ -27,88 +61,79 @@ protected:
     using __pointer = typename T::pointer;
     template <typename T>
     using __c_pointer = typename T::const_pointer;
-    template <typename T>
-    using __v_pointer = typename T::void_pointer;
-    template <typename T>
-    using __cv_pointer = typename T::const_void_pointer;
-    template <typename T>
-    using __pocca = typename T::propagate_on_container_copy_assignment;
-    template <typename T>
-    using __pocma = typename T::propagate_on_container_move_assignment;
-    template <typename T>
-    using __pocs = typename T::propagate_on_container_swap;
-    template <typename T>
-    using __equal = typename T::is_always_equal;
 };
 
+MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @struct allocator_traits
+ * @brief 分配器特性模板
+ * @tparam Alloc 分配器类型
+ *
+ * 提供对分配器类型的统一访问接口，即使分配器不提供某些成员类型或函数。
+ *
+ * 主要功能：
+ * 1. 提取分配器的各种类型特征
+ * 2. 提供分配器操作的统一接口
+ * 3. 为不完整的分配器接口提供默认实现
+ * 4. 支持分配器的重新绑定
+ */
 template <typename Alloc>
-struct allocator_traits : __allocator_traits_base {
-	typedef Alloc allocator_type;
-	typedef typename Alloc::value_type value_type;
-
-	using pointer = detected_or_t<value_type*, __pointer, Alloc>;
+struct allocator_traits : _INNER __allocator_traits_base {
+	using allocator_type = Alloc;
+	using value_type	 = typename Alloc::value_type;
+	using pointer		 = detected_or_t<value_type*, __pointer, Alloc>;
 
 private:
-	template <template <typename> class, typename T, typename = void>
+	template <template <typename> class Func, typename T, typename = void>
 	struct real_ptr {
 		using type = typename pointer_traits<pointer>::template rebind<T>;
 	};
 
-	template <template <typename> class _Func, typename T>
-	struct real_ptr<_Func, T, void_t<_Func<Alloc>>> {
-		using type = _Func<Alloc>;
+	template <template <typename> class Func, typename T>
+	struct real_ptr<Func, T, void_t<Func<Alloc>>> {
+		using type = Func<Alloc>;
 	};
 
-	template <typename, typename _PtrT, typename = void>
+	template <typename, typename Ptr, typename = void>
 	struct real_diff {
-		using type = typename pointer_traits<_PtrT>::difference_type;
+		using type = typename pointer_traits<Ptr>::difference_type;
 	};
 
-	template <typename _A2, typename _PtrT>
-	struct real_diff<_A2, _PtrT, void_t<typename _A2::difference_type>> {
-		using type = typename _A2::difference_type;
+	template <typename AllocU, typename Ptr>
+	struct real_diff<AllocU, Ptr, void_t<typename AllocU::difference_type>> {
+		using type = typename AllocU::difference_type;
 	};
 
-	template <typename, typename _DiffT, typename = void>
-	struct real_size : make_unsigned<_DiffT> {};
+	template <typename, typename Diff, typename = void>
+	struct real_size : make_unsigned<Diff> {};
 
-	template <typename _A2, typename _DiffT>
-	struct real_size<_A2, _DiffT, void_t<typename _A2::size_type>> {
-		using type = typename _A2::size_type;
+	template <typename AllocU, typename Diff>
+	struct real_size<AllocU, Diff, void_t<typename AllocU::size_type>> {
+		using type = typename AllocU::size_type;
 	};
 
 public:
-	using const_pointer = typename real_ptr<__c_pointer, const value_type>::type;
-	using void_pointer = typename real_ptr<__v_pointer, void>::type;
-	using const_void_pointer = typename real_ptr<__cv_pointer, const void>::type;
-	using difference_type = typename real_diff<Alloc, pointer>::type;
-	using size_type = typename real_size<Alloc, difference_type>::type;
-	using propagate_on_container_copy_assignment = detected_or_t<false_type, __pocca, Alloc>;
-	using propagate_on_container_move_assignment = detected_or_t<false_type, __pocma, Alloc>;
-	using propagate_on_container_swap = detected_or_t<false_type, __pocs, Alloc>;
-	using is_always_equal = detected_or_t<typename is_empty<Alloc>::type, __equal, Alloc>;
+	using const_pointer = typename real_ptr<__c_pointer, const value_type>::type;   ///< 常量指针类型
+	using difference_type = typename real_diff<Alloc, pointer>::type;     ///< 指针差异类型
+	using size_type = typename real_size<Alloc, difference_type>::type;   ///< 大小类型
 
+	/**
+	 * @brief 重新绑定分配器类型
+	 * @tparam T 新的元素类型
+	 */
 	template <typename T>
 	using rebind_alloc = alloc_rebind<Alloc, T>;
 
+	/**
+	 * @brief 重新绑定分配器特性类型
+	 * @tparam T 新的元素类型
+	 */
 	template <typename T>
 	using rebind_traits = allocator_traits<rebind_alloc<T>>;
 
 private:
-	template <typename Alloc2>
-	static constexpr auto
-	__allocate_aux(Alloc2& alloc, size_type n, const_void_pointer hint, int)
-	-> decltype(alloc.allocate(n, hint)) {
-		return alloc.allocate(n, hint);
-	}
-
-	template <typename Alloc2>
-	static constexpr pointer
-	__allocate_aux(Alloc2& alloc, size_type n, const_void_pointer, ...) {
-		return alloc.allocate(n);
-	}
-
 	template <typename T, typename... Args>
 	static constexpr enable_if_t<has_construct_v<Alloc, T, Args...>>
 	__construct_aux(Alloc& alloc, T* ptr, Args&&... args)
@@ -138,95 +163,75 @@ private:
 
 	template <typename Alloc2>
 	static constexpr auto __max_size_aux(Alloc2& alloc, int)
+	noexcept(noexcept(alloc.max_size()))
 	-> decltype(alloc.max_size()) {
 		return alloc.max_size();
 	}
 
 	template <typename Alloc2>
-	static constexpr size_type __max_size_aux(Alloc2&, ...) {
-		return _MSTL numeric_limits<size_type>::max() / sizeof(value_type);
-	}
-
-	template <typename Alloc2>
-	static constexpr auto __select_aux(Alloc2& alloc, int)
-	-> decltype(alloc.select_on_container_copy_construction()) {
-		return alloc.select_on_container_copy_construction();
-	}
-
-	template <typename Alloc2>
-	static constexpr Alloc2 __select_aux(Alloc2& alloc, ...) {
-		return alloc;
+	static constexpr size_type __max_size_aux(Alloc2&, ...) noexcept {
+		return _MSTL numeric_traits<size_type>::max() / sizeof(value_type);
 	}
 
 public:
+	/**
+	 * @brief 分配内存
+	 * @param alloc 分配器对象
+	 * @param n 要分配的元素数量
+	 * @return 指向分配内存的指针
+	 */
 	MSTL_NODISCARD static MSTL_CONSTEXPR20 pointer allocate(Alloc& alloc, size_type n) {
 		return alloc.allocate(n);
 	}
-	MSTL_NODISCARD static MSTL_CONSTEXPR20 pointer allocate(Alloc& alloc, size_type n, const_void_pointer hint) {
-		return __allocate_aux(alloc, n, hint, 0);
-	}
 
+	/**
+	 * @brief 释放内存
+	 * @param alloc 分配器对象
+	 * @param ptr 要释放的内存指针
+	 * @param n 先前分配的元素数量
+	 */
 	static MSTL_CONSTEXPR20 void deallocate(Alloc& alloc, pointer ptr, size_type n) {
 		alloc.deallocate(ptr, n);
 	}
 
+	/**
+	 * @brief 在已分配内存上构造对象
+	 * @tparam T 要构造的对象类型
+	 * @tparam Args 构造函数参数类型
+	 * @param alloc 分配器对象
+	 * @param ptr 指向已分配内存的指针
+	 * @param args 构造函数参数
+	 */
 	template <typename T, typename... Args>
 	static MSTL_CONSTEXPR20 void construct(Alloc& alloc, T* ptr, Args&&... args)
-	noexcept(noexcept(__construct_aux(alloc, ptr, _MSTL forward<Args>(args)...))) {
-		__construct_aux(alloc, ptr, _MSTL forward<Args>(args)...);
+	noexcept(noexcept(allocator_traits::__construct_aux(alloc, ptr, _MSTL forward<Args>(args)...))) {
+		allocator_traits::__construct_aux(alloc, ptr, _MSTL forward<Args>(args)...);
 	}
 
+	/**
+	 * @brief 销毁对象
+	 * @tparam T 要销毁的对象类型
+	 * @param alloc 分配器对象
+	 * @param ptr 指向要销毁对象的指针
+	 */
 	template <typename T>
 	static MSTL_CONSTEXPR20 void destroy(Alloc& alloc, T* ptr)
-	noexcept(noexcept(__destroy_aux(alloc, ptr, 0))) {
-		__destroy_aux(alloc, ptr, 0);
+	noexcept(noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0))) {
+		allocator_traits::__destroy_aux(alloc, ptr, 0);
 	}
 
-	static MSTL_CONSTEXPR20 size_type max_size(const Alloc& alloc) noexcept {
-		return __max_size_aux(alloc, 0);
-	}
-
-	static MSTL_CONSTEXPR20 Alloc select_on_container_copy_construction(const Alloc& __rhs) {
-		return __select_aux(__rhs, 0);
+	/**
+	 * @brief 获取分配器支持的最大大小
+	 * @param alloc 分配器对象
+	 * @return 分配器可以分配的最大元素数量
+	 */
+	static MSTL_CONSTEXPR20 size_type max_size(const Alloc& alloc)
+	noexcept(noexcept(allocator_traits::__max_size_aux(alloc, 0))) {
+		return allocator_traits::__max_size_aux(alloc, 0);
 	}
 };
 
-
-MSTL_BEGIN_INNER__
-
-template <typename Alloc, typename,
-	typename = remove_cvref_t<typename Alloc::value_type>,
-	typename = void>
-struct __is_alloc_insertable_impl : false_type {};
-
-template <typename Alloc, typename T, typename Value>
-struct __is_alloc_insertable_impl<Alloc, T, Value,
-	void_t<decltype(allocator_traits<Alloc>::construct(
-		declval<Alloc&>(), declval<Value*>(), declval<T>()))>>
-
-	: true_type {};
-MSTL_END_INNER__
-
-
-template <typename Alloc>
-struct is_copy_insertable
-	: _INNER __is_alloc_insertable_impl<Alloc, typename Alloc::value_type const&>::type {};
-template <typename T>
-struct is_copy_insertable<standard_allocator<T>> : is_copy_constructible<T> {};
-
-template <typename Alloc>
-MSTL_INLINE17 constexpr bool is_copy_insertable_v = is_copy_insertable<Alloc>::value;
-
-
-template <typename Alloc>
-struct is_move_insertable
-	: _INNER __is_alloc_insertable_impl<Alloc, typename Alloc::value_type>::type {};
-
-template <typename T>
-struct is_move_insertable<standard_allocator<T>> : is_move_constructible<T> {};
-
-template <typename Alloc>
-MSTL_INLINE17 constexpr bool is_move_insertable_v = is_move_insertable<Alloc>::value;
+/** @} */ // AllocationTraits
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_ALLOCATOR_TRAITS_HPP__

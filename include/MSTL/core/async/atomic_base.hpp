@@ -650,7 +650,7 @@ struct atomic_flag {
 	atomic_flag& operator =(const atomic_flag&) = delete;
 	atomic_flag& operator =(const atomic_flag&) volatile = delete;
 	atomic_flag(atomic_flag&&) noexcept = default;
-	atomic_flag& operator=(atomic_flag&&) noexcept = default;
+	atomic_flag& operator =(atomic_flag&&) noexcept = default;
 	~atomic_flag() noexcept = default;
 
 	constexpr atomic_flag(const value_type flag) noexcept
@@ -750,7 +750,7 @@ public:
 	atomic_base& operator =(const atomic_base&) = delete;
 	atomic_base& operator =(const atomic_base&) volatile = delete;
 	atomic_base(atomic_base&&) noexcept = default;
-	atomic_base& operator=(atomic_base&&) noexcept = default;
+	atomic_base& operator =(atomic_base&&) noexcept = default;
 
 	constexpr atomic_base(value_type value) noexcept : value_ (value) { }
 
@@ -992,10 +992,10 @@ private:
 public:
 	atomic_base() noexcept = default;
 	atomic_base(const atomic_base&) = delete;
-	atomic_base& operator=(const atomic_base&) = delete;
-	atomic_base& operator=(const atomic_base&) volatile = delete;
+	atomic_base& operator =(const atomic_base&) = delete;
+	atomic_base& operator =(const atomic_base&) volatile = delete;
 	atomic_base(atomic_base&&) noexcept = default;
-	atomic_base& operator=(atomic_base&&) noexcept = default;
+	atomic_base& operator =(atomic_base&&) noexcept = default;
 	~atomic_base() noexcept = default;
 
 	constexpr atomic_base(const value_type ptr) noexcept : ptr_(ptr) {}
@@ -1427,7 +1427,7 @@ public:
 	atomic_float_base& operator =(const atomic_float_base&) = delete;
 	atomic_float_base& operator =(const atomic_float_base&) volatile = delete;
 	atomic_float_base(atomic_float_base&&) noexcept = default;
-	atomic_float_base& operator=(atomic_float_base&&) noexcept = default;
+	atomic_float_base& operator =(atomic_float_base&&) noexcept = default;
 
 	Float operator =(Float value) volatile noexcept {
 		this->store(value);

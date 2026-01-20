@@ -172,9 +172,9 @@ public:
     explicit yaml_sequence(const sequence_style s = Block) : style(s) {}
 
     yaml_sequence(const yaml_sequence&) = delete;
-    yaml_sequence& operator=(const yaml_sequence&) = delete;
+    yaml_sequence& operator =(const yaml_sequence&) = delete;
     yaml_sequence(yaml_sequence&&) = default;
-    yaml_sequence& operator=(yaml_sequence&&) = default;
+    yaml_sequence& operator =(yaml_sequence&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Sequence; }
     MSTL_NODISCARD const yaml_sequence* as_sequence() const noexcept override { return this; }
@@ -214,9 +214,9 @@ public:
     explicit yaml_mapping(const mapping_style s = Block) : style(s) {}
 
     yaml_mapping(const yaml_mapping&) = delete;
-    yaml_mapping& operator=(const yaml_mapping&) = delete;
+    yaml_mapping& operator =(const yaml_mapping&) = delete;
     yaml_mapping(yaml_mapping&&) = default;
-    yaml_mapping& operator=(yaml_mapping&&) = default;
+    yaml_mapping& operator =(yaml_mapping&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Mapping; }
     MSTL_NODISCARD const yaml_mapping* as_mapping() const noexcept override { return this; }

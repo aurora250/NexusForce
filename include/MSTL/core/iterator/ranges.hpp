@@ -64,7 +64,7 @@ public:
     owning_view& operator =(owning_view&&) = delete;
 
     owning_view(const owning_view&) = delete;
-    owning_view& operator= (const owning_view&) = delete;
+    owning_view& operator = (const owning_view&) = delete;
 
     constexpr auto begin() const { return obj_.begin(); }
     constexpr auto end() const { return obj_.end(); }
@@ -201,53 +201,53 @@ public:
         return it.current_ != s;
     }
 
-    constexpr bool operator<(const filter_iterator& other) const
+    constexpr bool operator <(const filter_iterator& other) const
         requires totally_ordered<BaseIter> {
         return current_ < other.current_;
     }
-    constexpr bool operator>(const filter_iterator& other) const
+    constexpr bool operator >(const filter_iterator& other) const
         requires totally_ordered<BaseIter> {
         return current_ > other.current_;
     }
-    constexpr bool operator<=(const filter_iterator& other) const
+    constexpr bool operator <=(const filter_iterator& other) const
         requires totally_ordered<BaseIter> {
         return current_ <= other.current_;
     }
-    constexpr bool operator>=(const filter_iterator& other) const
+    constexpr bool operator >=(const filter_iterator& other) const
         requires totally_ordered<BaseIter> {
         return current_ >= other.current_;
     }
 
-    constexpr bool operator<(Sentinel s) const
+    constexpr bool operator <(Sentinel s) const
         requires totally_ordered_with<BaseIter, Sentinel> {
         return current_ < s;
     }
-    constexpr bool operator>(Sentinel s) const
+    constexpr bool operator >(Sentinel s) const
         requires totally_ordered_with<BaseIter, Sentinel> {
         return current_ > s;
     }
-    constexpr bool operator<=(Sentinel s) const
+    constexpr bool operator <=(Sentinel s) const
         requires totally_ordered_with<BaseIter, Sentinel> {
         return current_ <= s;
     }
-    constexpr bool operator>=(Sentinel s) const
+    constexpr bool operator >=(Sentinel s) const
         requires totally_ordered_with<BaseIter, Sentinel> {
         return current_ >= s;
     }
 
-    friend constexpr bool operator<(Sentinel s, const filter_iterator& it)
+    friend constexpr bool operator <(Sentinel s, const filter_iterator& it)
         requires totally_ordered_with<BaseIter, Sentinel> {
         return s < it.current_;
     }
-    friend constexpr bool operator>(Sentinel s, const filter_iterator& it)
+    friend constexpr bool operator >(Sentinel s, const filter_iterator& it)
         requires totally_ordered_with<BaseIter, Sentinel> {
         return s > it.current_;
     }
-    friend constexpr bool operator<=(Sentinel s, const filter_iterator& it)
+    friend constexpr bool operator <=(Sentinel s, const filter_iterator& it)
         requires totally_ordered_with<BaseIter, Sentinel> {
         return s <= it.current_;
     }
-    friend constexpr bool operator>=(Sentinel s, const filter_iterator& it)
+    friend constexpr bool operator >=(Sentinel s, const filter_iterator& it)
         requires totally_ordered_with<BaseIter, Sentinel> {
         return s >= it.current_;
     }
@@ -932,10 +932,10 @@ public:
     constexpr explicit reverse_view(V base) : base_(_MSTL move(base)) {}
 
     constexpr reverse_view(reverse_view&&) requires movable<V> = default;
-    constexpr reverse_view& operator=(reverse_view&&) requires movable<V> = default;
+    constexpr reverse_view& operator =(reverse_view&&) requires movable<V> = default;
 
     constexpr reverse_view(const reverse_view&) requires copy_constructible<V> = default;
-    constexpr reverse_view& operator=(const reverse_view&) requires copyable<V> = default;
+    constexpr reverse_view& operator =(const reverse_view&) requires copyable<V> = default;
 
     constexpr iterator begin() {
         return iterator(base_.end());
@@ -998,7 +998,7 @@ public:
         return value_ != other.value_;
     }
 
-    constexpr bool operator<(const iota_iterator& other) const
+    constexpr bool operator <(const iota_iterator& other) const
     requires totally_ordered<T> {
         return value_ < other.value_;
     }

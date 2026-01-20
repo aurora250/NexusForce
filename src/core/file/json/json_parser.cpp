@@ -74,7 +74,7 @@ unique_ptr<json_number> json_parser::parse_number() {
     } catch (...) {
         throw_exception(json_exception("Invalid number value"));
     }
-    return make_unique<json_number>(numeric_limits<float64_t>::max());
+    return make_unique<json_number>(numeric_traits<float64_t>::max());
 }
 
 unique_ptr<json_value> json_parser::parse_keyword() {

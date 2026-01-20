@@ -69,7 +69,7 @@ public:
     sql_builder& operator =(const sql_builder& other);
 
     sql_builder(sql_builder&&) noexcept = default;
-    sql_builder& operator=(sql_builder&&) noexcept = default;
+    sql_builder& operator =(sql_builder&&) noexcept = default;
 
     sql_builder& select(vector<string> fields);
     sql_builder& select(std::initializer_list<string> fields);

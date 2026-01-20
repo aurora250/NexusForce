@@ -2,8 +2,8 @@
 #define MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #include "../algorithm/compare.hpp"
 #include "../async/atomic.hpp"
-#include "../exception/exception.hpp"
 #include "allocator_traits.hpp"
+#include "unique_ptr.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__
 
@@ -427,8 +427,7 @@ shared_ptr<T> make_shared(Args&&... args) {
     T* object = reinterpret_cast<T*>(reinterpret_cast<byte_t*>(counter) + offset);
     try {
         _MSTL construct(object, _MSTL forward<Args>(args)...);
-    }
-    catch (...) {
+    } catch (...) {
 #if MSTL_STANDARD_17__
         operator delete(mem, static_cast<std::align_val_t>(align));
 #else
@@ -501,8 +500,7 @@ shared_ptr<T> make_shared_for_overwrite() {
     T* object = reinterpret_cast<T*>(reinterpret_cast<char*>(counter) + offset);
     try{
         _MSTL construct(object);
-    }
-    catch (...) {
+    } catch (...) {
 #if MSTL_STANDARD_17__
         operator delete(mem, static_cast<std::align_val_t>(align));
 #else
@@ -562,8 +560,7 @@ shared_ptr<T> make_shared(const size_t len) {
     auto* tmp = new value[len]();
     try {
         return shared_ptr<T>(tmp);
-    }
-    catch (...) {
+    } catch (...) {
         delete[] tmp;
         throw_exception(memory_exception("shared ptr construction failed."));
     }
@@ -576,8 +573,7 @@ shared_ptr<T> make_shared_for_overwrite(const size_t len) {
     auto* tmp = new value[len];
     try {
         return shared_ptr<T>(tmp);
-    }
-    catch (...) {
+    } catch (...) {
         delete[] tmp;
         throw_exception(memory_exception("shared ptr construction failed."));
     }

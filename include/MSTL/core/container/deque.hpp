@@ -304,8 +304,7 @@ private:
         try {
             for (cur = nstart; cur <= nfinish; ++cur)
                 *cur = map_size_pair_.get_base().allocate(buffer_size_);
-        }
-        catch (...) {
+        } catch (...) {
             while (cur != nstart) {
                 --cur;
                 map_size_pair_.get_base().deallocate(*cur, buffer_size_);
@@ -329,8 +328,7 @@ private:
 
         try {
             map_pair_.value = this->create_map(map_size_pair_.value);
-        }
-        catch (...) {
+        } catch (...) {
             map_pair_.value = nullptr;
             map_size_pair_.value = 0;
             throw;
@@ -341,8 +339,7 @@ private:
 
         try {
             this->create_nodes(nstart, nfinish);
-        }
-        catch (...) {
+        } catch (...) {
             this->destroy_nodes(map_pair_.value, map_pair_.value + map_size_pair_.value - 1);
             map_pair_.get_base().deallocate(map_pair_.value, map_size_pair_.value);
             map_pair_.value = nullptr;
@@ -496,8 +493,7 @@ private:
                     start_ = new_start;
                     _MSTL copy(mid, last, old_start);
                 }
-            }
-            catch(...) {
+            } catch (...) {
                 if (new_start.node_ != start_.node_) {
                     this->destroy_nodes(new_start.node_, start_.node_ - 1);
                 }
@@ -526,8 +522,7 @@ private:
                     finish_ = new_finish;
                     _MSTL copy(first, mid, position);
                 }
-            }
-            catch(...) {
+            } catch (...) {
                 if (new_finish.node_ != finish_.node_) {
                     this->destroy_nodes(finish_.node_ + 1, new_finish.node_);
                 }
@@ -565,8 +560,7 @@ private:
             try {
                 _MSTL uninitialized_copy(first, last, new_start);
                 start_ = new_start;
-            }
-            catch(...) {
+            } catch (...) {
                 if (new_start.node_ != start_.node_) {
                     this->destroy_nodes(new_start.node_, start_.node_ - 1);
                 }
@@ -614,8 +608,7 @@ private:
                     start_ = new_start;
                     _MSTL fill(old_start, position, x);
                 }
-            }
-            catch(...) {
+            } catch (...) {
                 if (new_start.node_ != start_.node_) {
                     this->destroy_nodes(new_start.node_, start_.node_ - 1);
                 }
@@ -643,8 +636,7 @@ private:
                     finish_ = new_finish;
                     _MSTL fill(position, old_finish, x);
                 }
-            }
-            catch(...) {
+            } catch (...) {
                 if (new_finish.node_ != finish_.node_) {
                     this->destroy_nodes(finish_.node_ + 1, new_finish.node_);
                 }

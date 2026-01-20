@@ -98,9 +98,9 @@ private:
 public:
     json_object() = default;
     json_object(const json_object&) = delete;
-    json_object& operator=(const json_object&) = delete;
+    json_object& operator =(const json_object&) = delete;
     json_object(json_object&&) = default;
-    json_object& operator=(json_object&&) = default;
+    json_object& operator =(json_object&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Object; }
     MSTL_NODISCARD const json_object* as_object() const noexcept override { return this; }
@@ -127,9 +127,9 @@ private:
 public:
     json_array() = default;
     json_array(const json_array&) = delete;
-    json_array& operator=(const json_array&) = delete;
+    json_array& operator =(const json_array&) = delete;
     json_array(json_array&&) = default;
-    json_array& operator=(json_array&&) = default;
+    json_array& operator =(json_array&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Array; }
     MSTL_NODISCARD const json_array* as_array() const noexcept override { return this; }

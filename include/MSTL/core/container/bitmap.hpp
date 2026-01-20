@@ -455,7 +455,7 @@ public:
 
     template <typename Iterator>
     MSTL_CONSTEXPR20 void insert(iterator position, Iterator first, Iterator last) {
-        insert_range(position, first, last, iterator_category(first));
+        this->insert_range(position, first, last);
     }
 
     MSTL_CONSTEXPR20 void insert(const iterator& position, const bool* first, const bool* last) {

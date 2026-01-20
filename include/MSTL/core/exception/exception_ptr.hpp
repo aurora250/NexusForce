@@ -103,7 +103,7 @@ public:
         if (ecb_) ecb_->release();
     }
 
-    exception_ptr& operator=(const exception_ptr& other) noexcept {
+    exception_ptr& operator =(const exception_ptr& other) noexcept {
         if (this != &other) {
             exception_ptr temp(other);
             swap(temp);
@@ -111,7 +111,7 @@ public:
         return *this;
     }
 
-    exception_ptr& operator=(exception_ptr&& other) noexcept {
+    exception_ptr& operator =(exception_ptr&& other) noexcept {
         if (this != &other) {
             exception_ptr temp(_MSTL move(other));
             swap(temp);

@@ -225,7 +225,7 @@ $(function(){initNavTree('barrier_8hpp_source.html','',''); });
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">class </span>arrival_token final {</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        arrival_token(arrival_token&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        arrival_token&amp; operator=(arrival_token&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        arrival_token&amp; operator =(arrival_token&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        ~arrival_token() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">private</span>:</div>
@@ -243,7 +243,7 @@ $(function(){initNavTree('barrier_8hpp_source.html','',''); });
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        : barrier_impl_(count, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> move(completion)) { }</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    barrier(barrier <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    barrier&amp; operator=(barrier <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    barrier&amp; operator =(barrier <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    MSTL_NODISCARD arrival_token arrive(ptrdiff_t update = 1) {</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">return</span> arrival_token{barrier_impl_.arrive(update)};</div>

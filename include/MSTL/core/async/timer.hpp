@@ -92,9 +92,9 @@ public:
     }
 
     timer_scheduler(const timer_scheduler&) = delete;
-    timer_scheduler& operator=(const timer_scheduler&) = delete;
+    timer_scheduler& operator =(const timer_scheduler&) = delete;
     timer_scheduler(timer_scheduler&&) = default;
-    timer_scheduler& operator=(timer_scheduler&&) = default;
+    timer_scheduler& operator =(timer_scheduler&&) = default;
 
     token add_task(time_point expire, handler_type&& handler) {
         _MSTL unique_lock<_MSTL mutex> lock(mutex_);

@@ -34,7 +34,7 @@ public:
     ~mysql_prepared_result() override;
 
     mysql_prepared_result(const mysql_prepared_result&) = delete;
-    mysql_prepared_result& operator=(const mysql_prepared_result&) = delete;
+    mysql_prepared_result& operator =(const mysql_prepared_result&) = delete;
 
     bool empty() const override { return row_count_ == 0; }
     bool next() override;

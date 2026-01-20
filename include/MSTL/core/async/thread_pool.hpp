@@ -9,7 +9,7 @@
 #include "timer.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_INLINE17 constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = numeric_limits<int32_t>::max();
+MSTL_INLINE17 constexpr size_t THREAD_POOL_TASK_MAX_THRESHHOLD = numeric_traits<int32_t>::max();
 MSTL_INLINE17 constexpr size_t THREAD_POOL_MAX_IDLE_SECONDS = 60;
 MSTL_INLINE17 constexpr size_t THREAD_POOL_LOCAL_QUEUE_SIZE = 256;
 static const size_t THREAD_POOL_THREAD_MAX_THRESHHOLD = _MSTL thread::hardware_concurrency();

@@ -147,7 +147,7 @@ $(function(){initNavTree('mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    recursive_mutex();</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    recursive_mutex(<span class="keyword">const</span> recursive_mutex&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    recursive_mutex&amp; operator=(<span class="keyword">const</span> recursive_mutex&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    recursive_mutex&amp; operator =(<span class="keyword">const</span> recursive_mutex&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ~recursive_mutex();</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    native_handle_type* native_handle() noexcept { <span class="keywordflow">return</span> &amp;recursive_mutex_; }</div>
@@ -173,7 +173,7 @@ $(function(){initNavTree('mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    lock_guard(<span class="keyword">const</span> lock_guard&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    lock_guard&amp; operator=(<span class="keyword">const</span> lock_guard&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    lock_guard&amp; operator =(<span class="keyword">const</span> lock_guard&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ~lock_guard() {</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        mutex_.unlock();</div>
@@ -216,7 +216,7 @@ $(function(){initNavTree('mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    : mutex_(&amp;m), owns_lock_(m.try_lock()) {}</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    unique_lock(<span class="keyword">const</span> unique_lock&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    unique_lock&amp; operator=(<span class="keyword">const</span> unique_lock&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    unique_lock&amp; operator =(<span class="keyword">const</span> unique_lock&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    unique_lock(unique_lock&amp;&amp; other) noexcept</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {</div>

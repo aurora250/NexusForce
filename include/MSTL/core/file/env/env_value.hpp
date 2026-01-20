@@ -71,9 +71,9 @@ public:
     env_document() = default;
 
     env_document(const env_document&) = delete;
-    env_document& operator=(const env_document&) = delete;
+    env_document& operator =(const env_document&) = delete;
     env_document(env_document&&) = default;
-    env_document& operator=(env_document&&) = default;
+    env_document& operator =(env_document&&) = default;
 
     void add_variable(const string& name, unique_ptr<env_variable> variable) {
         variables_[name] = _MSTL move(variable);

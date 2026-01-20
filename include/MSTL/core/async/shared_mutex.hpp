@@ -17,7 +17,7 @@ private:
 public:
     shared_mutex();
     shared_mutex(const shared_mutex&) = delete;
-    shared_mutex& operator=(const shared_mutex&) = delete;
+    shared_mutex& operator =(const shared_mutex&) = delete;
     ~shared_mutex();
 
     native_handle_type* native_handle() noexcept { return &shared_mutex_; }
@@ -57,7 +57,7 @@ public:
     : mutex_(&m), owns_lock_(m.try_lock_shared()) {}
 
     shared_lock(const shared_lock&) = delete;
-    shared_lock& operator=(const shared_lock&) = delete;
+    shared_lock& operator =(const shared_lock&) = delete;
 
     shared_lock(shared_lock&& other) noexcept
         : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {
@@ -65,7 +65,7 @@ public:
         other.owns_lock_ = false;
     }
 
-    shared_lock& operator=(shared_lock&& other) noexcept {
+    shared_lock& operator =(shared_lock&& other) noexcept {
         if (_MSTL addressof(other) == this) return *this;
         if (owns_lock_) mutex_->unlock_shared();
         mutex_ = other.mutex_;

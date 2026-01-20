@@ -289,8 +289,7 @@ private:
                 }
             }
             size_ = ht.size_;
-        }
-        catch (...) {
+        } catch (...) {
             clear();
             throw;
         }

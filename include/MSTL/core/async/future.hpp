@@ -28,9 +28,9 @@ public:
     future(future&& other) noexcept : base_type(_MSTL move(other)) {}
 
     future(const future&) = delete;
-    future& operator=(const future&) = delete;
+    future& operator =(const future&) = delete;
 
-    future& operator=(future&& other) noexcept {
+    future& operator =(future&& other) noexcept {
         future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -63,9 +63,9 @@ public:
     future(future&& other) noexcept : base_type(_MSTL move(other)) {}
 
     future(const future&) = delete;
-    future& operator=(const future&) = delete;
+    future& operator =(const future&) = delete;
 
-    future& operator=(future&& other) noexcept {
+    future& operator =(future&& other) noexcept {
         future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -98,9 +98,9 @@ public:
     future(future&& other) noexcept : base_type(_MSTL move(other)) {}
 
     future(const future&) = delete;
-    future& operator=(const future&) = delete;
+    future& operator =(const future&) = delete;
 
-    future& operator=(future&& other) noexcept {
+    future& operator =(future&& other) noexcept {
         future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -127,12 +127,12 @@ public:
     shared_future(future<Res>&& other) noexcept : base_type(_MSTL move(other)) {}
     shared_future(shared_future&& other) noexcept : base_type(_MSTL move(other)) {}
 
-    shared_future& operator=(const shared_future& other) noexcept {
+    shared_future& operator =(const shared_future& other) noexcept {
         shared_future(other).swap(*this);
         return *this;
     }
 
-    shared_future& operator=(shared_future&& other) noexcept {
+    shared_future& operator =(shared_future&& other) noexcept {
         shared_future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -152,12 +152,12 @@ public:
     shared_future(future<Res&>&& other) noexcept : base_type(_MSTL move(other)) {}
     shared_future(shared_future&& other) noexcept : base_type(_MSTL move(other)) {}
 
-    shared_future& operator=(const shared_future& other) {
+    shared_future& operator =(const shared_future& other) {
         shared_future(other).swap(*this);
         return *this;
     }
 
-    shared_future& operator=(shared_future&& other) noexcept {
+    shared_future& operator =(shared_future&& other) noexcept {
         shared_future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -177,12 +177,12 @@ public:
     shared_future(future<void>&& other) noexcept : base_type(_MSTL move(other)) {}
     shared_future(shared_future&& other) noexcept : base_type(_MSTL move(other)) {}
 
-    shared_future& operator=(const shared_future& other) {
+    shared_future& operator =(const shared_future& other) {
         shared_future(other).swap(*this);
         return *this;
     }
 
-    shared_future& operator=(shared_future&& other) noexcept {
+    shared_future& operator =(shared_future&& other) noexcept {
         shared_future(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -239,7 +239,7 @@ MSTL_ALWAYS_INLINE
 enable_if_t<is_void_v<T>, future_result_t<T>>
 get(future<T>& f) {
     f.get();
-    return non{};
+    return none;
 }
 
 template <typename T>

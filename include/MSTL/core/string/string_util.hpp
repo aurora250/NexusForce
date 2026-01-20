@@ -15,7 +15,7 @@ string MSTL_API join_accumulate(const vector<string> &vec, const string &delimit
 template <typename Pred>
 vector<string> filter_if(const vector<string>& vec, Pred pred) {
     vector<string> result;
-    _MSTL copy_if(vec.begin(), vec.end(), back_inserter(result), pred);
+    _MSTL copy_if(vec.begin(), vec.end(), make_back_inserter(result), pred);
     return result;
 }
 

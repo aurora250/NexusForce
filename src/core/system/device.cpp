@@ -56,7 +56,7 @@ device::device(device&& other) noexcept
       timeout_(other.timeout_),
       is_blocking_(other.is_blocking_) {}
 
-device& device::operator=(device&& other) noexcept {
+device& device::operator =(device&& other) noexcept {
     if (this != &other) {
         close();
         lock_guard<mutex> lock(io_mutex_);
@@ -434,7 +434,7 @@ bool device::wait(DEVICE_IO_DIRECT direction, milliseconds timeout) const {
     }
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::DWORD wait_time = (timeout.count() < 0) ?
-        numeric_limits<::DWORD>::max() : static_cast<::DWORD>(timeout.count());
+        numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout.count());
     const ::DWORD result = ::WaitForSingleObject(file_.native_handle(), wait_time);
     return result == WAIT_OBJECT_0;
 #elif defined(MSTL_PLATFORM_LINUX__)

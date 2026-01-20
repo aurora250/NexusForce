@@ -20,8 +20,8 @@ string json_value_to_string(const json_value* value) {
             const double val = num_val->get_value();
 
             if (val == static_cast<double>(static_cast<long long>(val)) &&
-                val >= static_cast<double>(numeric_limits<int64_t>::min()) &&
-                val <= static_cast<double>(numeric_limits<int64_t>::max())) {
+                val >= static_cast<double>(numeric_traits<int64_t>::min()) &&
+                val <= static_cast<double>(numeric_traits<int64_t>::max())) {
                 return _MSTL to_string(static_cast<long long>(val));
             }
             string result = _MSTL to_string(val);

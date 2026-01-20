@@ -21,7 +21,7 @@ bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
     if (!has_timeout) {
         ::BOOL ret = ::WaitOnAddress(
             addr, const_cast<unsigned*>(&value), sizeof(unsigned),
-            numeric_limits<uint32_t>::max());
+            numeric_traits<uint32_t>::max());
         return ret == 1;
     } else {
         const auto tp = system_clock::from_time_t(0) + sec + ns;
@@ -37,8 +37,8 @@ bool atomic_futex_base::futex_wait_until(unsigned *addr, const unsigned value,
         if (dur.count() < 0) {
             ms = 0;
         } else if (static_cast<unsigned long long>(
-            dur.count()) > numeric_limits<uint32_t>::max() - 1) {
-            ms = numeric_limits<uint32_t>::max() - 1;
+            dur.count()) > numeric_traits<uint32_t>::max() - 1) {
+            ms = numeric_traits<uint32_t>::max() - 1;
         } else {
             ms = static_cast<::DWORD>(dur.count());
         }
@@ -85,7 +85,7 @@ bool atomic_futex_base::futex_wait_until_steady(unsigned *addr, const unsigned v
     if (!has_timeout) {
         ::BOOL ret = ::WaitOnAddress(
             addr, const_cast<unsigned*>(&value), sizeof(unsigned),
-            numeric_limits<uint32_t>::max());
+            numeric_traits<uint32_t>::max());
         return ret == 1;
     } else {
         const steady_clock::time_point tp = steady_clock::time_point(sec) + ns;
@@ -101,8 +101,8 @@ bool atomic_futex_base::futex_wait_until_steady(unsigned *addr, const unsigned v
         if (dur.count() < 0) {
             ms = 0;
         } else if (static_cast<unsigned long long>(
-            dur.count()) > numeric_limits<uint32_t>::max() - 1) {
-            ms = numeric_limits<uint32_t>::max() - 1;
+            dur.count()) > numeric_traits<uint32_t>::max() - 1) {
+            ms = numeric_traits<uint32_t>::max() - 1;
         } else {
             ms = static_cast<::DWORD>(dur.count());
         }
@@ -148,7 +148,7 @@ void atomic_futex_base::futex_notify_all(unsigned* addr) {
     ::WakeByAddressAll(addr);
 #else
     constexpr int oper = FUTEX_WAKE | FUTEX_PRIVATE_FLAG;
-    ::syscall(SYS_futex, addr, oper, numeric_limits<int>::max(), nullptr, nullptr, 0);
+    ::syscall(SYS_futex, addr, oper, numeric_traits<int>::max(), nullptr, nullptr, 0);
 #endif
 }
 

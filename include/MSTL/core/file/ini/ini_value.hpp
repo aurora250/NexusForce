@@ -62,9 +62,9 @@ public:
     explicit ini_section(string name = "") noexcept : name_(_MSTL move(name)) {}
 
     ini_section(const ini_section&) = delete;
-    ini_section& operator=(const ini_section&) = delete;
+    ini_section& operator =(const ini_section&) = delete;
     ini_section(ini_section&&) = default;
-    ini_section& operator=(ini_section&&) = default;
+    ini_section& operator =(ini_section&&) = default;
 
     MSTL_NODISCARD types type() const noexcept override { return Section; }
     MSTL_NODISCARD const ini_section* as_section() const noexcept override { return this; }
@@ -130,9 +130,9 @@ public:
     ini_document() : global_section_(make_unique<ini_section>("")) {}
 
     ini_document(const ini_document&) = delete;
-    ini_document& operator=(const ini_document&) = delete;
+    ini_document& operator =(const ini_document&) = delete;
     ini_document(ini_document&&) = default;
-    ini_document& operator=(ini_document&&) = default;
+    ini_document& operator =(ini_document&&) = default;
 
     void add_section(const string& name, unique_ptr<ini_section> section) {
         if (name.empty()) {

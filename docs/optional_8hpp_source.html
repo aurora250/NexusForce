@@ -633,13 +633,13 @@ $(function(){initNavTree('optional_8hpp_source.html','',''); });
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>        !convertible_from_optional_ref&lt;U&gt;::value &amp;&amp; is_constructible_v&lt;T&amp;, U&amp;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> optional(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> optional&lt;U&amp;&gt;&amp; other) noexcept : ptr_(other.ptr_) {}</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    MSTL_CONSTEXPR20 optional&amp; operator=(nullopt_t) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    MSTL_CONSTEXPR20 optional&amp; operator =(nullopt_t) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        ptr_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    }</div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span> </div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T, enable_if_t&lt;is_assignable_v&lt;T&amp;, U&amp;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    MSTL_CONSTEXPR20 optional&amp; operator=(U&amp; value) {</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    MSTL_CONSTEXPR20 optional&amp; operator =(U&amp; value) {</div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        <span class="keywordflow">if</span> (ptr_) {</div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>            *ptr_ = value;</div>
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        } <span class="keywordflow">else</span> {</div>
@@ -649,7 +649,7 @@ $(function(){initNavTree('optional_8hpp_source.html','',''); });
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    }</div>
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, enable_if_t&lt;is_assignable_v&lt;T&amp;, U&amp;&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    MSTL_CONSTEXPR20 optional&amp; operator=(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> optional&lt;U&amp;&gt;&amp; other) {</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    MSTL_CONSTEXPR20 optional&amp; operator =(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> optional&lt;U&amp;&gt;&amp; other) {</div>
 <div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(other)) {</div>
 <div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>            <span class="keywordflow">if</span> (other.ptr_) {</div>
 <div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                <span class="keywordflow">if</span> (ptr_) {</div>
@@ -665,10 +665,10 @@ $(function(){initNavTree('optional_8hpp_source.html','',''); });
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    }</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    <span class="keyword">constexpr</span> optional(<span class="keyword">const</span> optional&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    MSTL_CONSTEXPR20 optional&amp; operator=(<span class="keyword">const</span> optional&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    MSTL_CONSTEXPR20 optional&amp; operator =(<span class="keyword">const</span> optional&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span> </div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    <span class="keyword">constexpr</span> optional(optional&amp;&amp; other) noexcept : ptr_(other.ptr_) {}</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    MSTL_CONSTEXPR20 optional&amp; operator=(optional&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    MSTL_CONSTEXPR20 optional&amp; operator =(optional&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>        ptr_ = other.ptr_;</div>
 <div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    }</div>

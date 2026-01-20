@@ -10,7 +10,7 @@ private:
 
 public:
     static constexpr ptrdiff_t max() noexcept {
-        return numeric_limits<_INNER platform_wait_t>::max();
+        return numeric_traits<_INNER platform_wait_t>::max();
     }
 
     constexpr explicit latch(const ptrdiff_t expected) noexcept

@@ -1,14 +1,82 @@
 #ifndef MSTL_CORE_STRING_VSPRINTF_HPP__
 #define MSTL_CORE_STRING_VSPRINTF_HPP__
+
+/**
+ * @file vsprintf.hpp
+ * @brief MSTL兼容C格式化函数
+ *
+ * 此文件提供了格式化函数的声明，包括可变参数版本的格式化。
+ */
+
 #include "../typeinfo/types.hpp"
 #include <cstdarg>
 MSTL_BEGIN_NAMESPACE__
 
-int MSTL_API vsprintf(char *buf, const char *fmt, std::va_list args) noexcept;
-int MSTL_API vsnprintf(char *buf, size_t size, const char *fmt, std::va_list args) noexcept;
-int MSTL_API sprintf(char *buf, const char *fmt, ...) noexcept;
-int MSTL_API snprintf(char *buf, size_t size, const char *fmt, ...) noexcept;
-int MSTL_API scprintf(const char *fmt, ...) noexcept;
+/**
+ * @defgroup CLikeFormatFunctions C风格格式化函数
+ * @brief 格式化的字符串函数
+ * @{
+ */
+
+/**
+ * @brief 格式化到缓冲区
+ * @param buf 输出缓冲区
+ * @param fmt 格式字符串
+ * @param args 可变参数列表
+ * @return 写入缓冲区的字符数，不包括终止字符
+ *
+ * 不检查缓冲区大小。
+ *
+ * @note 使用 MEMORY_BIG_ALLOC_THRESHHOLD 作为缓冲区大小限制
+ */
+int MSTL_API vsprintf(char* buf, const char* fmt, std::va_list args) noexcept;
+
+/**
+ * @brief 安全格式化到缓冲区
+ * @param buf 输出缓冲区
+ * @param size 缓冲区大小
+ * @param fmt 格式字符串
+ * @param args 可变参数列表
+ * @return 应该写入缓冲区的字符数，不包括终止空字符
+ *
+ * 确保不会写入超过size-1个字符。如果size为0，则返回应该写入的字符数。
+ */
+int MSTL_API vsnprintf(char* buf, size_t size, const char* fmt, std::va_list args) noexcept;
+
+/**
+ * @brief 格式化到缓冲区
+ * @param buf 输出缓冲区
+ * @param fmt 格式字符串
+ * @param ... 可变参数
+ * @return 写入缓冲区的字符数，不包括终止空字符
+ *
+ * 不检查缓冲区大小。
+ */
+int MSTL_API sprintf(char* buf, const char* fmt, ...) noexcept;
+
+/**
+ * @brief 安全格式化到缓冲区
+ * @param buf 输出缓冲区
+ * @param size 缓冲区大小
+ * @param fmt 格式字符串
+ * @param ... 可变参数
+ * @return 应该写入缓冲区的字符数，不包括终止空字符
+ *
+ * 确保不会写入超过size-1个字符。
+ */
+int MSTL_API snprintf(char* buf, size_t size, const char* fmt, ...) noexcept;
+
+/**
+ * @brief 计算格式化字符串所需缓冲区大小
+ * @param fmt 格式字符串
+ * @param ... 可变参数
+ * @return 格式化结果所需的字符数，不包括终止空字符
+ *
+ * 计算将格式字符串和参数格式化后所需的缓冲区大小。
+ */
+int MSTL_API scprintf(const char* fmt, ...) noexcept;
+
+/** @} */ // CLikeFormatFunctions
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_VSPRINTF_HPP__

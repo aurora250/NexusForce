@@ -3,6 +3,7 @@
 #include "../functional/apply.hpp"
 #include "../exception/terminate.hpp"
 #include "../exception/exception.hpp"
+#include "../memory/unique_ptr.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
 #include "../config/undef_cmacro.hpp"

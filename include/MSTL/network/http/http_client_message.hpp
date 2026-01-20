@@ -17,9 +17,9 @@ private:
 public:
     http_client_response() = default;
     http_client_response(const http_client_response &) = delete;
-    http_client_response &operator=(const http_client_response &) = delete;
+    http_client_response &operator =(const http_client_response &) = delete;
     http_client_response(http_client_response &&) noexcept = default;
-    http_client_response &operator=(http_client_response &&) noexcept = default;
+    http_client_response &operator =(http_client_response &&) noexcept = default;
 
     void set_version(string v) noexcept { version_ = _MSTL move(v); }
     void set_status(const HTTP_STATUS s) noexcept { status_ = s; }

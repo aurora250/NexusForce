@@ -3,9 +3,9 @@
 
 /**
  * @file type_traits.hpp
- * @brief MSTL类型特性库
+ * @brief MSTL类型萃取
  *
- * 此文件提供了完整的类型特性实现，用于在编译时查询和操作类型信息。
+ * 此文件提供了完整的类型萃取实现，用于在编译时查询和操作类型信息。
  */
 
 #include "../typeinfo/types.hpp"
@@ -207,8 +207,6 @@ template <typename T>
 using type_identity_t = typename type_identity<T>::type;
 
 
-#ifdef MSTL_STANDARD_17__
-
 /**
  * @struct is_any_of
  * @brief 判断类型是否在类型集合中
@@ -216,16 +214,12 @@ using type_identity_t = typename type_identity<T>::type;
  * @tparam Types 类型集合
  */
 template <typename T, typename... Types>
+struct is_any_of;
+
+#ifdef MSTL_STANDARD_17__
+template <typename T, typename... Types>
 struct is_any_of : bool_constant<(is_same_v<T, Types> || ...)> {};
-
 #else
-
-/**
- * @struct is_any_of
- * @brief 判断类型是否在类型集合中
- * @tparam T 要查找的类型
- * @tparam Types 类型集合
- */
 template <typename T, typename... Types>
 struct is_any_of : false_type {};
 
@@ -237,7 +231,6 @@ template <typename T, typename U, typename... Types>
 struct is_any_of<T, U, Types...> 
     : conditional<is_same<T, U>::value, true_type, is_any_of<T, Types...>>::type {};
 /// @endcond
-
 #endif // MSTL_STANDARD_17__
 
 #ifdef MSTL_STANDARD_14__
@@ -674,42 +667,23 @@ struct remove_function_qualifiers {
 };
 
 /// @cond
+
 template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) const> {
+struct remove_function_qualifiers<Ret(Args...)> {
     using type = Ret(Args...);
 };
 
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) volatile> {
-    using type = Ret(Args...);
+#define __MSTL_EXPAND_REM_FUNC_QULF(QUF) \
+template <typename Ret, typename... Args> \
+struct remove_function_qualifiers<Ret(Args...) QUF> { \
+    using type = Ret(Args...); \
 };
 
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) const volatile> {
-    using type = Ret(Args...);
-};
+MSTL_MACRO_RANGES_CV(__MSTL_EXPAND_REM_FUNC_QULF)
+MSTL_MACRO_RANGES_CV_REF(__MSTL_EXPAND_REM_FUNC_QULF)
+MSTL_MACRO_RANGES_CV_REF_NOEXCEPT(__MSTL_EXPAND_REM_FUNC_QULF)
+#undef __MSTL_EXPAND_REM_FUNC_QULF
 
-#ifdef MSTL_STANDARD_17__
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) noexcept> {
-    using type = Ret(Args...);
-};
-
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) const noexcept> {
-    using type = Ret(Args...);
-};
-
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) volatile noexcept> {
-    using type = Ret(Args...);
-};
-
-template <typename Ret, typename... Args>
-struct remove_function_qualifiers<Ret(Args...) const volatile noexcept> {
-    using type = Ret(Args...);
-};
-#endif
 /// @endcond
 
 /**
@@ -1195,7 +1169,7 @@ using add_pointer_t = typename add_pointer<T>::type;
 
 /**
  * @defgroup DeclvalTools 非求值辅助工具
- * @brief 用于decltype等非求值上下文中的工具
+ * @brief 用于非求值上下文中的辅助工具
  * @{
  */
 
@@ -1293,6 +1267,142 @@ MSTL_INLINE17 constexpr size_t extent_v = extent<T, Idx>::value;
 #endif
 
 /** @} */ // ArrayProperties
+
+/**
+ * @defgroup TemplateTraitsUtilities 模板操作工具
+ * @brief 提取和操作指针类型元信息的辅助工具
+ * @{
+ */
+
+/**
+ * @struct get_first_temp_para
+ * @brief 提取模板的第一个类型参数
+ * @tparam T 模板类型
+ */
+template <typename T>
+struct get_first_temp_para;
+
+/// @cond
+template <template <typename, typename...> class T, typename First, typename... Rest>
+struct get_first_temp_para<T<First, Rest...>> {
+    using type = First;
+};
+/// @endcond
+
+/**
+ * @typedef get_first_temp_para_t
+ * @brief get_first_temp_para的便捷别名
+ */
+template <typename Tmp>
+using get_first_temp_para_t = typename get_first_temp_para<Tmp>::type;
+
+
+/**
+ * @struct get_first_para
+ * @brief 提取参数列表的第一个类型参数
+ * @tparam Types 参数列表
+ */
+template <typename... Types>
+struct get_first_para;
+
+/// @cond
+template <typename First, typename... Rest>
+struct get_first_para<First, Rest...> {
+    using type = First;
+};
+/// @endcond
+
+/**
+ * @typedef get_first_para_t
+ * @brief get_first_para的便捷别名
+ */
+template <typename... Types>
+using get_first_para_t = typename get_first_para<Types...>::type;
+
+
+/**
+ * @struct get_ptr_difference
+ * @brief 获取指针的差值类型
+ * @tparam T 指针类型
+ * @tparam Dummy SFINAE参数，默认为void
+ *
+ * 如果指针类型定义了difference_type，则使用该类型，否则使用默认的ptrdiff_t。
+ */
+template <typename T, typename Dummy = void>
+struct get_ptr_difference {
+    using type = ptrdiff_t;
+};
+
+/// @cond
+template <typename T>
+struct get_ptr_difference<T, enable_if_t<
+    is_same<typename T::difference_type, typename T::difference_type>::value>> {
+    using type = typename T::difference_type;
+};
+/// @endcond
+
+/**
+ * @typedef get_ptr_difference_t
+ * @brief get_ptr_difference的便捷别名
+ */
+template <typename T>
+using get_ptr_difference_t = typename get_ptr_difference<T>::type;
+
+
+/**
+ * @struct replace_first_para
+ * @brief 替换模板的第一个类型参数
+ * @tparam NewFirst 新的第一个参数
+ * @tparam T 原始模板类型
+ */
+template <typename NewFirst, typename T>
+struct replace_first_para;
+
+/// @cond
+template <typename NewFirst, template <typename, typename...> class T, typename First, typename... Rest>
+struct replace_first_para<NewFirst, T<First, Rest...>> {
+    using type = T<NewFirst, Rest...>;
+};
+/// @endcond
+
+/**
+ * @typedef replace_first_para_t
+ * @brief replace_first_para的便捷别名
+ */
+template <typename T, typename U>
+using replace_first_para_t = typename replace_first_para<T, U>::type;
+
+
+/**
+ * @struct get_rebind_type
+ * @brief 获取指针的重新绑定类型
+ * @tparam T 原始指针类型
+ * @tparam U 新元素类型
+ * @tparam Dummy SFINAE参数，默认为void
+ *
+ * 如果指针类型定义了rebind模板，则使用该模板，否则通过替换第一个参数来创建新类型。
+ */
+template <typename T, typename U, typename Dummy = void>
+struct get_rebind_type {
+    using type = replace_first_para_t<U, T>;
+};
+
+/// @cond
+template <typename T, typename U>
+struct get_rebind_type<T, U, enable_if_t<
+    is_same<typename T::template rebind<U>, typename T::template rebind<U>>::value>> {
+    using type = typename T::template rebind<U>;
+};
+/// @endcond
+
+/**
+ * @typedef get_rebind_type_t
+ * @brief get_rebind_type的便捷别名
+ */
+template <typename T, typename U>
+using get_rebind_type_t = typename get_rebind_type<T, U>::type;
+
+/** @} */ // TemplateTraitsUtilities
 
 /**
  * @defgroup BaseTypeQualifierCheck 类型修饰基本检查
@@ -2930,7 +3040,8 @@ MSTL_INLINE17 constexpr bool is_location_invariant_v = is_location_invariant<T>:
  * @tparam T 目标类型
  * @param x 要转发的左值
  * @return 转发后的引用
- * @note 用于实现完美转发，保持值的类别
+ *
+ * 用于实现完美转发，保持值的类别
  */
 template <typename T>
 MSTL_NODISCARD constexpr T&& forward(remove_reference_t<T>& x) noexcept {
@@ -2942,8 +3053,9 @@ MSTL_NODISCARD constexpr T&& forward(remove_reference_t<T>& x) noexcept {
  * @tparam T 目标类型
  * @param x 要转发的右值
  * @return 转发后的引用
- * @throws 如果T是左值引用类型，触发静态断言
- * @note 用于实现完美转发，保持值的类别
+ * @note 如果T是左值引用类型，触发静态断言
+ *
+ * 用于实现完美转发，保持值的类别
  */
 template <typename T>
 MSTL_NODISCARD constexpr T&& forward(remove_reference_t<T>&& x) noexcept {
@@ -2956,7 +3068,8 @@ MSTL_NODISCARD constexpr T&& forward(remove_reference_t<T>&& x) noexcept {
  * @tparam T 参数类型
  * @param x 要转换的值
  * @return 转换后的右值引用
- * @note 用于实现移动语义
+ *
+ * 用于实现移动语义
  */
 template <typename T>
 MSTL_NODISCARD constexpr remove_reference_t<T>&& move(T&& x) noexcept {
@@ -2968,7 +3081,8 @@ MSTL_NODISCARD constexpr remove_reference_t<T>&& move(T&& x) noexcept {
  * @tparam T 参数类型
  * @param x 要移动的值
  * @return 如果可以安全移动则返回右值引用，否则返回const左值引用
- * @note 如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常
+ *
+如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常
  */
 template <typename T>
 MSTL_NODISCARD constexpr
@@ -2982,7 +3096,8 @@ move_if_noexcept(T& x) noexcept {
  * @tparam T 对象类型
  * @param x 对象引用
  * @return 对象的指针
- * @note 可避免重载的operator&干扰
+ *
+ * 可避免重载的operator&干扰
  */
 template <typename T>
 MSTL_NODISCARD constexpr T* addressof(T& x) noexcept {
@@ -3002,7 +3117,8 @@ const T* addressof(const T&&) = delete;
 /**
  * @brief 检查当前上下文是否在常量求值中
  * @return 如果在常量求值上下文中返回true，否则返回false
- * @note 用于区分编译时和运行时
+ *
+ * 用于区分编译时和运行时
  */
 MSTL_NODISCARD constexpr bool is_constant_evaluated() noexcept {
     return __builtin_is_constant_evaluated();
@@ -3576,6 +3692,8 @@ struct common_type<T1, T2, Rest...> : common_type<common_type_t<T1, T2>, Rest...
 /// @endcond
 
 
+#ifdef MSTL_STANDARD_20__
+
 /**
  * @struct common_reference
  * @brief 查找多个类型的公共引用类型
@@ -3698,6 +3816,7 @@ template <typename T1, typename T2, typename T3, typename... Rest>
 struct common_reference<T1, T2, T3, Rest...> : common_reference<common_reference_t<T1, T2>, T3, Rest...> {};
 
 /// @endcond
+#endif
 
 
 /**
@@ -3708,11 +3827,11 @@ struct common_reference<T1, T2, T3, Rest...> : common_reference<common_reference
  *
  * 用于检查某个类型是否是特定模板的特化版本。
  */
-template <typename T, template <typename...> typename Template>
+template <typename T, template <typename...> class Template>
 struct is_specialization : false_type {};
 
 /// @cond
-template <template <typename...> typename Template, typename... Args>
+template <template <typename...> class Template, typename... Args>
 struct is_specialization<Template<Args...>, Template> : true_type {};
 /// @endcond
 
@@ -3721,7 +3840,7 @@ struct is_specialization<Template<Args...>, Template> : true_type {};
  * @var is_specialization_v
  * @brief is_specialization的便捷变量模板
  */
-template <typename T, template <typename...> typename Template>
+template <typename T, template <typename...> class Template>
 MSTL_INLINE17 constexpr bool is_specialization_v = is_specialization<T, Template>::value;
 #else
 /**
@@ -3730,7 +3849,7 @@ MSTL_INLINE17 constexpr bool is_specialization_v = is_specialization<T, Template
  * @tparam Template 要检查的模板
  * @return 如果T是Template的特化返回true，否则返回false
  */
-template <typename T, template <typename...> typename Template>
+template <typename T, template <typename...> class Template>
 constexpr bool is_specialization_v() {
     return is_specialization<T, Template>::value;
 }
@@ -3756,7 +3875,6 @@ struct is_nothrow_swappable;
  * @tparam T 值的类型
  * @param lhs 左操作数
  * @param rhs 右操作数
- * @throws 如果移动构造或移动赋值抛出异常
  */
 template <typename T>
 MSTL_CONSTEXPR14 enable_if_t<conjunction<is_move_constructible<T>, is_move_assignable<T>>::value>
@@ -3769,7 +3887,6 @@ noexcept(is_nothrow_move_constructible<T>::value && is_nothrow_move_assignable<T
  * @tparam Size 数组大小
  * @param lhs 左操作数数组
  * @param rhs 右操作数数组
- * @throws 如果元素交换抛出异常
  */
 template <typename T, size_t Size>
 MSTL_CONSTEXPR14 enable_if_t<is_swappable<T>::value>
@@ -3788,7 +3905,6 @@ void swap() = delete;
  * @param val 要替换的对象
  * @param new_val 新值
  * @return 对象的旧值
- * @throws 如果移动构造或赋值抛出异常
  */
 template <typename T, typename U = T>
 MSTL_CONSTEXPR14 T exchange(T& val, U&& new_val)

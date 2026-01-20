@@ -399,9 +399,9 @@ public:
     }
 
     stop_callback(const stop_callback&) = delete;
-    stop_callback& operator=(const stop_callback&) = delete;
+    stop_callback& operator =(const stop_callback&) = delete;
     stop_callback(stop_callback&&) = delete;
-    stop_callback& operator=(stop_callback&&) = delete;
+    stop_callback& operator =(stop_callback&&) = delete;
 
 private:
     struct callback_impl : stop_token::stop_callback_node {

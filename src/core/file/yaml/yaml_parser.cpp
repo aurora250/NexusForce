@@ -762,10 +762,10 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
 
         if (lower_special == ".inf" || lower_special == ".infinity") {
             double val = is_negative ?
-                -numeric_limits<double>::infinity() : numeric_limits<double>::infinity();
+                -numeric_traits<double>::infinity() : numeric_traits<double>::infinity();
             return make_shared<yaml_float>(val);
         } else if (lower_special == ".nan") {
-            return make_shared<yaml_float>(numeric_limits<double>::quiet_nan());
+            return make_shared<yaml_float>(numeric_traits<double>::quiet_nan());
         } else {
             pos_ = saved_pos;
             line_ = saved_line;

@@ -4,10 +4,10 @@
 #include "../iterator/normal_iterator.hpp"
 #include "../iterator/reverse_iterator.hpp"
 #include "../utility/compressed_pair.hpp"
-#include "../numeric/numeric_limits.hpp"
+#include "../numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_INLINE17 constexpr size_t dynamic_extent = numeric_limits<size_t>::max();
+MSTL_INLINE17 constexpr size_t dynamic_extent = numeric_traits<size_t>::max();
 
 
 MSTL_BEGIN_INNER__
@@ -40,7 +40,7 @@ public:
     using reference         = element_type&;
     using const_reference   = const element_type&;
     
-    using iterator          = normal_iterator<pointer, memory_view>;
+    using iterator          = normal_iterator<pointer>;
     using reverse_iterator  = _MSTL reverse_iterator<iterator>;
 
 private:

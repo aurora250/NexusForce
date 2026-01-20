@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
-#include "../numeric/numeric_limits.hpp"
+#include "../numeric/numeric_traits.hpp"
 #include "../memory/memory.hpp"
 #include "../exception/terminate.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -59,7 +59,7 @@ void platform_wait(const T* addr, const platform_wait_t val) noexcept {
 	const ::BOOL result = ::WaitOnAddress(
 		p, const_cast<platform_wait_t*>(&val),
 		sizeof(platform_wait_t),
-		_MSTL numeric_limits<uint32_t>::max());
+		_MSTL numeric_traits<uint32_t>::max());
 
 	if (result == 0) {
 		::DWORD err = ::GetLastError();
@@ -92,7 +92,7 @@ void platform_notify(const T* addr, const bool all) noexcept {
 	::syscall(
 		SYS_futex, static_cast<const void*>(addr),
 		static_cast<int32_t>(futex_wait_flags::wake_private),
-		all ? numeric_limits<int32_t>::max() : 1);
+		all ? numeric_traits<int32_t>::max() : 1);
 #endif
 }
 

@@ -3,7 +3,7 @@
 
 /**
  * @file c++config.hpp
- * @brief MSTL核心配置头文件
+ * @brief MSTL核心配置
  *
  * 此头文件定义了整个库的平台、编译器和语言特性的配置宏
  *
@@ -149,14 +149,14 @@
     #define MSTL_API_EXPORT
 #endif
 
-#if defined(MSTL_COMPILER_MSVC__)
+#if defined(MSTL_COMPILER_GNUC__)
+    #define MSTL_API MSTL_API_EXPORT
+#else
     #if defined(MSTL_DLLEXPORTS)
         #define MSTL_API MSTL_API_EXPORT_DLL
     #else
         #define MSTL_API MSTL_API_IMPORT_DLL
     #endif
-#else
-    #define MSTL_API MSTL_API_EXPORT
 #endif
 
 /** @} */ // APIImpExpSpec
@@ -484,18 +484,18 @@
 #endif
 
 
-#ifdef MSTL_COMPILER_GNUC__
+#ifdef MSTL_DOXYGEN_GENERATE
+    #define MSTL_ALWAYS_INLINE
+    #define MSTL_ALWAYS_INLINE_INLINE inline
+#elif defined(MSTL_COMPILER_GNUC__)
     #define MSTL_ALWAYS_INLINE __attribute__((always_inline))
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #elif defined(MSTL_COMPILER_MSVC__)
     #define MSTL_ALWAYS_INLINE __forceinline
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
-#elif defined(MSTL_STANDARD_17__)
-    #define MSTL_ALWAYS_INLINE [[always_inline]]
-    #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE inline
 #else
     #define MSTL_ALWAYS_INLINE
-    #define MSTL_ALWAYS_INLINE_INLINE
+    #define MSTL_ALWAYS_INLINE_INLINE inline
 #endif
 
 
@@ -520,27 +520,27 @@
 #endif
 
 
-#ifdef MSTL_COMPILER_GNUC__
+#if defined(MSTL_STANDARD_11__)
+    #define MSTL_NORETURN [[noreturn]]
+#elif defined(MSTL_COMPILER_GNUC__)
     #define MSTL_NORETURN __attribute__((noreturn))
 #elif defined(MSTL_COMPILER_MSVC__)
     #define MSTL_NORETURN __declspec(noreturn)
-#elif defined(MSTL_STANDARD_11__)
-    #define MSTL_NORETURN [[noreturn]]
 #else
     #define MSTL_NORETURN
 #endif
 
 
-#ifdef MSTL_COMPILER_GNUC__
-    #define MSTL_PURE_FUNCTION __attribute__((__pure__))
-    #define MSTL_MALLOC_FUNCTION __attribute__((__malloc__))
-    #define MSTL_CONST_FUNCTION __attribute__((__const__))
-    #define MSTL_NONNULL_FUNCTION(PARAMS) __attribute__((__nonnull__ PARAMS))
-#else
+#if !defined(MSTL_COMPILER_GNUC__) || defined(MSTL_DOXYGEN_GENERATE)
     #define MSTL_PURE_FUNCTION
     #define MSTL_MALLOC_FUNCTION
     #define MSTL_CONST_FUNCTION
     #define MSTL_NOTNULL_FUNCTION(PARAMS)
+#else
+    #define MSTL_PURE_FUNCTION __attribute__((__pure__))
+    #define MSTL_MALLOC_FUNCTION __attribute__((__malloc__))
+    #define MSTL_CONST_FUNCTION __attribute__((__const__))
+    #define MSTL_NONNULL_FUNCTION(PARAMS) __attribute__((__nonnull__ PARAMS))
 #endif
 
 
@@ -581,10 +581,8 @@
 
 #if defined(MSTL_COMPILER_GNUC__)
     #define MSTL_RESTRICT __restrict__
-#elif defined(MSTL_COMPILER_MSVC__)
-    #define MSTL_RESTRICT __restrict
 #else
-    #define MSTL_RESTRICT restrict
+    #define MSTL_RESTRICT __restrict
 #endif
 
 
@@ -651,6 +649,36 @@
 	MSTL_MACRO_RANGE_CHARS(MAC) \
 	MSTL_MACRO_RANGE_INT(MAC) \
 	MSTL_MACRO_RANGE_FLOAT(MAC)
+
+
+#define MSTL_MACRO_RANGES_CV(MAC) \
+	MAC(const) \
+	MAC(volatile) \
+	MAC(const volatile)
+
+#define MSTL_MACRO_RANGES_CV_REF(MAC) \
+    MAC(&) \
+	MAC(const &) \
+	MAC(volatile &) \
+	MAC(const volatile &) \
+    MAC(&&) \
+	MAC(const &&) \
+	MAC(volatile &&) \
+	MAC(const volatile &&)
+
+#define MSTL_MACRO_RANGES_CV_REF_NOEXCEPT(MAC) \
+    MAC(noexcept) \
+    MAC(const noexcept) \
+    MAC(volatile noexcept) \
+    MAC(const volatile noexcept) \
+	MAC(& noexcept) \
+	MAC(const & noexcept) \
+	MAC(volatile & noexcept) \
+	MAC(const volatile & noexcept) \
+	MAC(&& noexcept) \
+	MAC(const && noexcept) \
+	MAC(volatile && noexcept) \
+	MAC(const volatile && noexcept) \
 
 
 #define MSTL_IGNORE (void)

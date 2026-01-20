@@ -14,119 +14,6 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup PointerTraitsUtilities 指针信息辅助工具
- * @brief 提取和操作指针类型元信息的辅助工具
- * @{
- */
-
-/**
- * @struct get_first_parameter
- * @brief 提取模板的第一个类型参数
- * @tparam T 模板类型
- */
-template <typename T>
-struct get_first_parameter;
-
-/// @cond
-template <template <typename, typename...> class T, typename First, typename... Rest>
-struct get_first_parameter<T<First, Rest...>> {
-    using type = First;
-};
-/// @endcond
-
-/**
- * @typedef get_first_parameter_t
- * @brief get_first_parameter的便捷别名
- */
-template <typename Ptr>
-using get_first_parameter_t = typename get_first_parameter<Ptr>::type;
-
-
-/**
- * @struct get_ptr_difference_type
- * @brief 获取指针的差值类型
- * @tparam T 指针类型
- * @tparam Dummy SFINAE参数，默认为void
- *
- * 如果指针类型定义了difference_type，则使用该类型，否则使用默认的ptrdiff_t。
- */
-template <typename T, typename Dummy = void>
-struct get_ptr_difference_type {
-    using type = ptrdiff_t;
-};
-
-/// @cond
-template <typename T>
-struct get_ptr_difference_type<T, enable_if_t<
-    is_same<typename T::difference_type, typename T::difference_type>::value>> {
-    using type = typename T::difference_type;
-};
-/// @endcond
-
-/**
- * @typedef get_ptr_difference_type_t
- * @brief get_ptr_difference_type的便捷别名
- */
-template <typename T>
-using get_ptr_difference_type_t = typename get_ptr_difference_type<T>::type;
-
-
-/**
- * @struct replace_first_parameter
- * @brief 替换模板的第一个类型参数
- * @tparam NewFirst 新的第一个参数
- * @tparam T 原始模板类型
- */
-template <typename NewFirst, typename T>
-struct replace_first_parameter;
-
-/// @cond
-template <typename NewFirst, template <typename, typename...> class T, typename First, typename... Rest>
-struct replace_first_parameter<NewFirst, T<First, Rest...>> {
-    using type = T<NewFirst, Rest...>;
-};
-/// @endcond
-
-/**
- * @typedef replace_first_parameter_t
- * @brief replace_first_parameter的便捷别名
- */
-template <typename T, typename U>
-using replace_first_parameter_t = typename replace_first_parameter<T, U>::type;
-
-
-/**
- * @struct get_rebind_type
- * @brief 获取指针的重新绑定类型
- * @tparam T 原始指针类型
- * @tparam U 新元素类型
- * @tparam Dummy SFINAE参数，默认为void
- *
- * 如果指针类型定义了rebind模板，则使用该模板，否则通过替换第一个参数来创建新类型。
- */
-template <typename T, typename U, typename Dummy = void>
-struct get_rebind_type {
-    using type = replace_first_parameter_t<U, T>;
-};
-
-/// @cond
-template <typename T, typename U>
-struct get_rebind_type<T, U, enable_if_t<
-    is_same<typename T::template rebind<U>, typename T::template rebind<U>>::value>> {
-    using type = typename T::template rebind<U>;
-};
-/// @endcond
-
-/**
- * @typedef get_rebind_type_t
- * @brief get_rebind_type的便捷别名
- */
-template <typename T, typename U>
-using get_rebind_type_t = typename get_rebind_type<T, U>::type;
-
-/** @} */ // PointerTraitsUtilities
-
-/**
  * @defgroup PointerTraits 指针萃取
  * @brief 统一处理各种指针类型的特性
  * @{
@@ -153,7 +40,7 @@ template <typename Ptr, typename Elem>
 struct pointer_traits_base {
     using pointer = Ptr;  ///< 指针类型
     using element_type = Elem;  ///< 元素类型
-    using difference_type = get_ptr_difference_type_t<Ptr>;  ///< 差值类型
+    using difference_type = get_ptr_difference_t<Ptr>;  ///< 差值类型
     using reference = conditional_t<is_void<Elem>::value, char, Elem>&;  ///< 引用类型
 
     /**
@@ -178,8 +65,8 @@ template <typename, typename = void, typename = void>
 struct __ptr_traits_extract {};
 
 template <typename T, typename U>
-struct __ptr_traits_extract<T, U, void_t<get_first_parameter_t<T>>>
-    : pointer_traits_base<T, typename get_first_parameter<T>::type> {
+struct __ptr_traits_extract<T, U, void_t<get_first_temp_para_t<T>>>
+    : pointer_traits_base<T, typename get_first_temp_para<T>::type> {
 };
 
 template <typename T>

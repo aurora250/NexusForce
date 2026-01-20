@@ -27,13 +27,13 @@ public:
     }
 
     packaged_task(const packaged_task&) = delete;
-    packaged_task& operator=(const packaged_task&) = delete;
+    packaged_task& operator =(const packaged_task&) = delete;
 
     packaged_task(packaged_task&& other) noexcept {
         this->swap(other);
     }
 
-    packaged_task& operator=(packaged_task&& other) noexcept {
+    packaged_task& operator =(packaged_task&& other) noexcept {
         packaged_task(_MSTL move(other)).swap(*this);
         return *this;
     }
@@ -131,8 +131,7 @@ private:
     void run() {
         try {
             state_base::set_result(__future_base::create_task_setter(result_storage, function));
-        }
-        catch (...) {
+        } catch (...) {
             if (static_cast<bool>(result_storage))
                 state_base::break_promise(_MSTL move(result_storage));
             throw;

@@ -265,8 +265,7 @@ private:
             size_ = n;
             capacity_pair_.value = init_size;
             null_terminate();
-        }
-        catch (...) {
+        } catch (...) {
             if (temp_data) {
                 _MSTL destroy(temp_data, temp_data + n);
                 capacity_pair_.get_base().deallocate(temp_data, capacity_pair_.value);
@@ -378,7 +377,7 @@ private:
             data_ = new_buffer;
             capacity_pair_.value = new_cap;
             null_terminate();
-        } catch(...) {
+        } catch (...) {
             if (new_buffer) {
                 capacity_pair_.get_base().deallocate(new_buffer, capacity_pair_.value);
             }
@@ -901,8 +900,7 @@ public:
             }
             size_ = actual_size;
             null_terminate();
-        }
-        catch (...) {
+        } catch (...) {
             size_ = old_size;
             null_terminate();
             throw;

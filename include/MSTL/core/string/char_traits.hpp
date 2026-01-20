@@ -11,202 +11,43 @@ struct base_char_traits {
     using char_type = CharT;
     using int_type  = IntT;
 
-    static_assert(sizeof(int_type) >= sizeof(char_type),
+    static_assert(
+        sizeof(int_type) >= sizeof(char_type),
         "int_type must be able to represent all char_type values plus EOF"
-        );
+    );
 
-    static constexpr char_type* copy(char_type* const dest,
-        const char_type* const srcs, const size_t count) noexcept {
-#ifdef MSTL_COMPILER_CLANG__
-        __builtin_memcpy(dest, srcs, count * sizeof(char_type));
-#else
-#ifdef MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            for (size_t i = 0; i != count; ++i)
-                dest[i] = srcs[i];
-            return dest;
-        }
-#endif // MSTL_STANDARD_20__
+    static constexpr char_type* copy(
+        char_type* const dest, const char_type* const srcs, const size_t count) noexcept {
         _MSTL memory_copy(dest, srcs, count * sizeof(char_type));
-#endif // MSTL_COMPILER_CLANG__
         return dest;
     }
 
-    static constexpr char_type* move(char_type* const dest,
-        const char_type* const srcs, const size_t count) noexcept {
-#if defined(MSTL_COMPILER_CLANG__)
-#if __has_builtin(__builtin_memmove)
-        __builtin_memmove(dest, srcs, count * sizeof(char_type));
-#else
+    static constexpr char_type* move(
+        char_type* const dest, const char_type* const srcs, const size_t count) noexcept {
         _MSTL memory_move(dest, srcs, count * sizeof(char_type));
-#endif
-#else
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            bool not_same = true;
-            for (const char_type* src = srcs; src != srcs + count; ++src) {
-                if (dest == src) {
-                    not_same = false;
-                    break;
-                }
-            }
-            if (not_same) {
-                for (size_t i = 0; i != count; ++i)
-                    dest[i] = srcs[i];
-            }
-            else {
-                for (size_t i = count; i != 0; --i)
-                    dest[i - 1] = srcs[i - 1];
-            }
-            return dest;
-        }
-#endif // MSTL_STANDARD_20__
-        _MSTL memory_move(dest, srcs, count * sizeof(char_type));
-#endif // MSTL_SUPPORT_MEM_INTRINSICS__
         return dest;
     }
 
-    MSTL_NODISCARD static constexpr int compare(const char_type* lhs,
-        const char_type* rhs, size_t count) noexcept {
-        if (lhs == nullptr && rhs == nullptr) return 0;
-        if (lhs == nullptr) return -1;
-        if (rhs == nullptr) return 1;
-
-        for (; 0 < count; --count, ++lhs, ++rhs) {
-            if (*lhs != *rhs)
-                return *lhs < *rhs ? -1 : +1;
-        }
-        return 0;
+    MSTL_NODISCARD static constexpr int compare(
+        const char_type* lhs, const char_type* rhs, size_t count) noexcept {
+        return _MSTL string_compare_n(lhs, rhs, count);
     }
 
     MSTL_NODISCARD static constexpr size_t length(const char_type* str) noexcept {
-        size_t count = 0;
-        while (*str != static_cast<char_type>(0)) {
-            ++count;
-            ++str;
-        }
-        return count;
-    }
-
-    MSTL_NODISCARD static constexpr const char_type* find(const char_type* str,
-        size_t count, const char_type& target) noexcept {
-        for (; 0 < count; --count, ++str) {
-            if (*str == target) return str;
-        }
-        return nullptr;
-    }
-
-    static constexpr char_type* assign(char_type* const str, size_t count, const char_type chr) noexcept {
-        for (char_type* next = str; count > 0; --count, ++next) {
-            *next = chr;
-        }
-        return str;
-    }
-    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
-        lhs = rhs;
-    }
-
-    MSTL_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
-        return lhs == rhs;
-    }
-    MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
-        return lhs < rhs;
-    }
-    MSTL_NODISCARD static constexpr char_type to_char_type(const int_type str) noexcept {
-        return static_cast<char_type>(str);
-    }
-    MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
-        return static_cast<int_type>(chr);
-    }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
-        return lhs == rhs;
-    }
-    MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
-        return eq_int_type(rsc, eof()) ? static_cast<int_type>(0) : rsc;
-    }
-    MSTL_NODISCARD static constexpr int_type eof() noexcept {
-        return static_cast<int_type>(-1);
-    }
-};
-
-template <typename CharT, typename IntT = uint32_t>
-struct wide_char_traits : private base_char_traits<CharT, IntT> {
-private:
-    using base_type = base_char_traits<CharT, IntT>;
-
-public:
-    using char_type = CharT;
-    using int_type  = IntT;
-
-    using base_type::copy;
-    using base_type::move;
-
-public:
-    MSTL_NODISCARD static constexpr int compare(const char_type* const lhs,
-        const char_type* const rhs, const size_t n) noexcept {
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            if constexpr (is_same_v<char_type, wchar_t>) {
-                return __builtin_wmemcmp(lhs, rhs, n);
-            }
-            else {
-                return base_type::compare(lhs, rhs, n);
-            }
-        }
-#endif // MSTL_STANDARD_20__
-        return _MSTL wchar_memory_compare(reinterpret_cast<const wchar_t*>(lhs),
-            reinterpret_cast<const wchar_t*>(rhs), n);
-    }
-
-    MSTL_NODISCARD static constexpr size_t length(const char_type* str) noexcept {
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            if constexpr (is_same_v<char_type, wchar_t>) {
-#if defined(MSTL_COMPILER_MSVC__) || defined(MSTL_COMPILER_CLANG__)
-                return __builtin_wcslen(str);
-#else
-                return _MSTL wstring_length(str);
-#endif
-            }
-            else {
-                return base_type::length(str);
-            }
-        }
-#endif // MSTL_STANDARD_20__
-        return _MSTL wstring_length(reinterpret_cast<const wchar_t*>(str));
+        return _MSTL string_length(str);
     }
 
     MSTL_NODISCARD static constexpr const char_type* find(
-        const char_type* str, const size_t n, const char_type& chr) noexcept {
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            if constexpr (is_same_v<char_type, wchar_t>) {
-                return __builtin_wmemchr(str, chr, n);
-            }
-            else {
-                return base_type::find(str, n, chr);
-            }
-        }
-#endif // MSTL_STANDARD_20__
-        return reinterpret_cast<const char_type*>(
-            _MSTL wchar_memory_char(reinterpret_cast<const wchar_t*>(str), chr, n));
+        const char_type* str, const size_t count, const char_type target) noexcept {
+        return _MSTL string_find_n<char_type>(str, target, count);
     }
 
-    static constexpr char_type* assign(char_type* const str, size_t n, const char_type chr) noexcept {
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(str, n, chr);
-        }
-#endif // MSTL_STANDARD_20__
-        return reinterpret_cast<char_type*>(_MSTL wchar_memory_set(reinterpret_cast<wchar_t*>(str), chr, n));
+    static constexpr char_type* assign(
+        char_type* const str, const size_t count, const char_type chr) noexcept {
+        return _MSTL string_set_n<char_type>(str, chr, count);
     }
 
-    static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
-#if MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(lhs, rhs);
-        }
-#endif // MSTL_STANDARD_20__
+    static constexpr void assign(char_type& lhs, const char_type rhs) noexcept {
         lhs = rhs;
     }
 
@@ -216,26 +57,20 @@ public:
     MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
         return lhs < rhs;
     }
-    MSTL_NODISCARD static constexpr char_type to_char_type(const int_type rsc) noexcept {
-        return rsc;
-    }
-    MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
-        return chr;
-    }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
-        return lhs == rhs;
-    }
 
     MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
-        return eq_int_type(rsc, eof()) ? static_cast<int_type>(0) : rsc;
+        return rsc == eof() ? static_cast<int_type>(0) : rsc;
     }
     MSTL_NODISCARD static constexpr int_type eof() noexcept {
         return static_cast<int_type>(-1);
     }
 };
 
+
 template <typename CharT, typename IntT>
 struct narrow_char_traits : private base_char_traits<CharT, IntT> {
+    static_assert(sizeof(CharT) == sizeof(byte_t), "size of CharT must be the same as byte type");
+
 private:
     using base_type = base_char_traits<CharT, IntT>;
 
@@ -245,106 +80,30 @@ public:
 
     using base_type::copy;
     using base_type::move;
+    using base_type::length;
+    using base_type::eq;
+    using base_type::lt;
+    using base_type::not_eof;
+    using base_type::eof;
 
 public:
-    MSTL_NODISCARD static constexpr int compare(const char_type* const lhs,
-        const char_type* const rhs, const size_t n) noexcept {
-#ifdef MSTL_STANDARD_17__
-        return __builtin_memcmp(lhs, rhs, n);
-#else
+    MSTL_NODISCARD static constexpr int compare(
+        const char_type* const lhs, const char_type* const rhs, const size_t n) noexcept {
         return _MSTL memory_compare(lhs, rhs, n);
-#endif
     }
 
-    MSTL_NODISCARD static constexpr size_t length(const char_type* const str) noexcept {
-        if (!str) return 0;
-#ifdef MSTL_STANDARD_17__
-#ifdef MSTL_STANDARD_20__
-        if constexpr (is_same_v<char_type, char8_t>) {
-#if defined(MSTL_STANDARD_20__) && !defined(MSTL_COMPILER_CLANG__)
-#ifdef MSTL_COMPILER_MSVC__
-            return __builtin_u8strlen(str);
-#else
-            return _MSTL u8string_length(str);
-#endif
-#else
-            return base_type::length(str);
-#endif
-        }
-        else
-#endif // MSTL_STANDARD_20__
-        {
-            return __builtin_strlen(str);
-        }
-#else
-        return _MSTL string_length(str);
-#endif // MSTL_STANDARD_17__
+    MSTL_NODISCARD static constexpr const char_type* find(
+        const char_type* const str, const size_t n, const char_type chr) noexcept {
+        return static_cast<const char_type*>(_MSTL memory_find(str, chr, n));
     }
 
-    MSTL_NODISCARD static constexpr const char_type* find(const char_type* const str,
-        const size_t n, const char_type& chr) noexcept {
-#ifdef MSTL_STANDARD_17__
-#ifdef MSTL_STANDARD_20__
-        if constexpr (is_same_v<char_type, char8_t>) {
-#if defined(MSTL_STANDARD_20__) && !defined(MSTL_COMPILER_CLANG__)
-            return __builtin_u8memchr(str, chr, n);
-#else
-            return base_type::find(str, n, chr);
-#endif // MSTL_SUPPORT_U8_INTRINSICS__
-        }
-        else
-#endif // MSTL_STANDARD_20__
-        {
-#ifdef MSTL_COMPILER_MSVC__
-            return __builtin_char_memchr(str, chr, n);
-#else
-            return base_type::find(str, n, chr);
-#endif
-        }
-#else
-        return static_cast<const char_type*>(_MSTL memory_char(str, chr, n));
-#endif // MSTL_STANDARD_17__
-    }
-
-    static constexpr char_type* assign(char_type* const str, size_t n, const char_type chr) noexcept {
-#ifdef MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(str, n, chr);
-        }
-#endif // MSTL_STANDARD_20__
+    static constexpr char_type* assign(
+        char_type* const str, size_t n, const char_type chr) noexcept {
         return static_cast<char_type*>(_MSTL memory_set(str, chr, n));
     }
 
     static constexpr void assign(char_type& lhs, const char_type& rhs) noexcept {
-#ifdef MSTL_STANDARD_20__
-        if (_MSTL is_constant_evaluated()) {
-            return base_type::assign(lhs, rhs);
-        }
-#endif // MSTL_STANDARD_20__
         lhs = rhs;
-    }
-
-    MSTL_NODISCARD static constexpr bool eq(const char_type lhs, const char_type rhs) noexcept {
-        return lhs == rhs;
-    }
-    MSTL_NODISCARD static constexpr bool lt(const char_type lhs, const char_type rhs) noexcept {
-        return static_cast<byte_t>(lhs) < static_cast<byte_t>(rhs);
-    }
-    MSTL_NODISCARD static constexpr char_type to_char_type(const int_type rsc) noexcept {
-        return static_cast<char_type>(rsc);
-    }
-    MSTL_NODISCARD static constexpr int_type to_int_type(const char_type chr) noexcept {
-        return static_cast<byte_t>(chr);
-    }
-    MSTL_NODISCARD static constexpr bool eq_int_type(const int_type lhs, const int_type rhs) noexcept {
-        return lhs == rhs;
-    }
-
-    MSTL_NODISCARD static constexpr int_type not_eof(const int_type rsc) noexcept {
-        return eq_int_type(rsc, eof()) ? static_cast<int_type>(0) : rsc;
-    }
-    MSTL_NODISCARD static constexpr int_type eof() noexcept {
-        return static_cast<int_type>(-1);
     }
 };
 
@@ -352,21 +111,14 @@ public:
 template <typename CharT>
 struct char_traits : base_char_traits<CharT, int64_t> {};
 
-template <> struct char_traits<char>
-    : narrow_char_traits<char, conditional_t<numeric_limits<char>::is_signed, int32_t, uint32_t>>
-{};
+template <> struct char_traits<char>     : narrow_char_traits<char,
+    conditional_t<numeric_traits<char>::is_signed, int32_t, uint32_t>> {};
+template <> struct char_traits<wchar_t>  : base_char_traits<wchar_t, uint32_t> {};
 #ifdef MSTL_STANDARD_20__
-template <> struct char_traits<char8_t> : narrow_char_traits<char8_t, uint32_t> {};
+template <> struct char_traits<char8_t>  : narrow_char_traits<char8_t, uint32_t> {};
 #endif
-#ifdef MSTL_PLATFORM_WINDOWS__
-template <> struct char_traits<wchar_t>  : wide_char_traits<wchar_t> {};
-template <> struct char_traits<char16_t> : wide_char_traits<char16_t> {};
-template <> struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> {};
-#elif defined(MSTL_PLATFORM_LINUX__)
-template <> struct char_traits<wchar_t>  : wide_char_traits<wchar_t> {};
 template <> struct char_traits<char16_t> : base_char_traits<char16_t, uint32_t> {};
-template <> struct char_traits<char32_t> : wide_char_traits<char32_t> {};
-#endif
+template <> struct char_traits<char32_t> : base_char_traits<char32_t, uint32_t> {};
 
 
 template <typename Traits>
@@ -380,7 +132,7 @@ MSTL_BEGIN_INNER__
 template <typename CharT, bool = is_character_v<CharT>>
 class __string_bitmap {
 private:
-    bool matches_[numeric_limits<byte_t>::max() + 1] = {};
+    bool matches_[numeric_traits<byte_t>::max() + 1] = {};
 
 public:
     constexpr __string_bitmap() = default;

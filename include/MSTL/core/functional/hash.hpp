@@ -54,7 +54,9 @@ struct hash<T*> {
  * @{
  */
 
+/// @cond
 MSTL_BEGIN_CONSTANTS__
+
 /**
  * @var FNV_OFFSET_BASIS
  * @brief FNV哈希算法的偏移基础值
@@ -66,6 +68,7 @@ MSTL_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
 #else
     2166136261U
 #endif
+
 /**
  * @var FNV_PRIME
  * @brief FNV哈希算法的质数乘数
@@ -77,7 +80,9 @@ MSTL_INLINE17 constexpr size_t FNV_PRIME
 #else
      = 16777619U;
 #endif
+
 MSTL_END_CONSTANTS__
+/// @endcond
 
 /**
  * @brief FNV-1a哈希算法

@@ -25,7 +25,7 @@ public:
     sqlite_prepared_statement& operator =(const sqlite_prepared_statement&) = delete;
 
     sqlite_prepared_statement(sqlite_prepared_statement&& other) noexcept;
-    sqlite_prepared_statement& operator=(sqlite_prepared_statement&& other) noexcept;
+    sqlite_prepared_statement& operator =(sqlite_prepared_statement&& other) noexcept;
 
     ~sqlite_prepared_statement() override;
 

@@ -268,7 +268,7 @@ sudo make install
 │       │   │
 │       │   ├───numeric
 │       │   │       math.hpp
-│       │   │       numeric_limits.hpp
+│       │   │       numeric_traits.hpp
 │       │   │       numeric_types.hpp
 │       │   │       random.hpp
 │       │   │       ratio.hpp

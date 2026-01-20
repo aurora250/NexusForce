@@ -17,9 +17,9 @@ public:
     once_flag() noexcept : state_(false) {}
 
     once_flag(const once_flag&) = delete;
-    once_flag& operator=(const once_flag&) = delete;
+    once_flag& operator =(const once_flag&) = delete;
     once_flag(once_flag&&) = delete;
-    once_flag& operator=(once_flag&&) = delete;
+    once_flag& operator =(once_flag&&) = delete;
 };
 
 template <typename Callable, typename... Args>

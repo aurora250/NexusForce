@@ -1,10 +1,9 @@
 #ifndef MSTL_CORE_UTILITY_ANY_HPP__
 #define MSTL_CORE_UTILITY_ANY_HPP__
+#include "../exception/exception.hpp"
+#include "../typeinfo/tags.hpp"
 #include <initializer_list>
 #include <typeinfo>
-#include "../exception/exception.hpp"
-#include "../interface/icommon.hpp"
-#include "../typeinfo/tags.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class MSTL_API any;
@@ -24,7 +23,7 @@ class MSTL_API any {
     union storage_internal {
 		storage_internal() = default;
 		storage_internal(const storage_internal&) = delete;
-		storage_internal& operator=(const storage_internal&) = delete;
+		storage_internal& operator =(const storage_internal&) = delete;
 
 		void* ptr_ = nullptr;
 		aligned_storage_t<sizeof(ptr_), alignof(void*)> buffer_;

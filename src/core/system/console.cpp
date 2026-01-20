@@ -780,8 +780,8 @@ bool sys_console::supports_unicode() const {
     const char* encoding = lc_ctype ? lc_ctype : (lc_all ? lc_all : lang);
     if (!encoding) return false;
 
-    return string_in_string(encoding, "UTF-8") != nullptr ||
-           string_in_string(encoding, "utf8") != nullptr;
+    return string_find_pattern(encoding, "UTF-8") != nullptr ||
+           string_find_pattern(encoding, "utf8") != nullptr;
 #endif
 }
 

@@ -578,7 +578,7 @@ file::size_type file::write(const void* data, const size_type size) {
             size_type bytes_written = 0;
             const size_type to_write = _MSTL min<size_type>(
                 size - total_written,
-                numeric_limits<size_type>::max()
+                numeric_traits<size_type>::max()
             );
             if (!::WriteFile(handle_, ptr + total_written, to_write, &bytes_written, nullptr)) {
                 set_last_error();
@@ -725,7 +725,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
                 size_type bytes_read_now = 0;
                 const size_type to_read_now = _MSTL min<size_type>(
                     to_read - bytes_read,
-                    numeric_limits<size_type>::max()
+                    numeric_traits<size_type>::max()
                 );
 
                 if (!::ReadFile(handle_, data + bytes_read,
@@ -807,7 +807,7 @@ bool file::write_chunks(const vector<string>& chunks) {
 #ifdef MSTL_PLATFORM_WINDOWS__
                 const size_type to_write = _MSTL min<size_type>(
                     remaining,
-                    numeric_limits<size_type>::max()
+                    numeric_traits<size_type>::max()
                 );
                 size_type written_now = 0;
 
@@ -1057,13 +1057,13 @@ file::async_result file::async_read(
 
     if (offset >= 0) {
         const uint64_t offset_64 = static_cast<uint64_t>(offset);
-        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_traits<size_type>::max());
         context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
     } else {
         const difference_type current_pos = tell();
         if (current_pos >= 0) {
             const uint64_t offset_64 = static_cast<uint64_t>(current_pos);
-            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_traits<size_type>::max());
             context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
         }
     }
@@ -1073,7 +1073,7 @@ file::async_result file::async_read(
     }
 
     size_type bytes_read = 0;
-    const size_type read_size = _MSTL min<size_type>(size, numeric_limits<size_type>::max());
+    const size_type read_size = _MSTL min<size_type>(size, numeric_traits<size_type>::max());
 
     if (::ReadFile(handle_, buffer.data(), read_size, &bytes_read, context->cb)) {
         result.completed = true;
@@ -1144,7 +1144,7 @@ file::async_result file::async_write(string data,
         return result;
     }
 
-    const size_type real_size = (size == numeric_limits<size_type>::max()) ?
+    const size_type real_size = (size == numeric_traits<size_type>::max()) ?
         data.size() : _MSTL min(size, static_cast<size_type>(data.size()));
 
     auto* context = new async_context(_MSTL move(data));
@@ -1158,19 +1158,19 @@ file::async_result file::async_write(string data,
 
     if (offset >= 0) {
         const uint64_t offset_64 = static_cast<uint64_t>(offset);
-        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+        context->cb->Offset = static_cast<size_type>(offset_64 & numeric_traits<size_type>::max());
         context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
     } else {
         const difference_type current_pos = tell();
         if (current_pos >= 0) {
             const uint64_t offset_64 = static_cast<uint64_t>(current_pos);
-            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_limits<size_type>::max());
+            context->cb->Offset = static_cast<size_type>(offset_64 & numeric_traits<size_type>::max());
             context->cb->OffsetHigh = static_cast<size_type>(offset_64 >> 32);
         }
     }
 
     size_type bytes_written = 0;
-    const size_type write_size = _MSTL min<size_type>(real_size, numeric_limits<size_type>::max());
+    const size_type write_size = _MSTL min<size_type>(real_size, numeric_traits<size_type>::max());
 
     if (::WriteFile(handle_, data.data(), write_size, &bytes_written, context->cb)) {
         result.completed = true;
@@ -1238,7 +1238,7 @@ bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
 
     size_type bytes_transferred = 0;
 
-    if (timeout_ms == numeric_limits<uint32_t>::max()) {
+    if (timeout_ms == numeric_traits<uint32_t>::max()) {
         if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, TRUE)) {
             return complete_async_result(result, bytes_transferred);
         }
@@ -1414,7 +1414,7 @@ file::size_type file::size() const {
         return 0;
     }
 
-    if (file_size.QuadPart > static_cast<::LONGLONG>(numeric_limits<size_type>::max())) {
+    if (file_size.QuadPart > static_cast<::LONGLONG>(numeric_traits<size_type>::max())) {
         last_error_code_ = ERROR_FILE_TOO_LARGE;
         last_error_msg_ = "File size exceeds maximum representable size";
         return 0;
@@ -1428,7 +1428,7 @@ file::size_type file::size() const {
         return 0;
     }
 
-    if (static_cast<uint64_t>(st.st_size) > numeric_limits<size_type>::max()) {
+    if (static_cast<uint64_t>(st.st_size) > numeric_traits<size_type>::max()) {
         last_error_code_ = EFBIG;
         last_error_msg_ = "File size exceeds maximum representable size";
         return 0;
@@ -1847,8 +1847,8 @@ bool file::prefetch(const size_type hint_size) const noexcept {
 
     size_type prefetch_size = buffer_size_;
     if (hint_size > 0) {
-        if (hint_size > numeric_limits<size_type>::max() / 2) {
-            prefetch_size = numeric_limits<size_type>::max();
+        if (hint_size > numeric_traits<size_type>::max() / 2) {
+            prefetch_size = numeric_traits<size_type>::max();
         } else {
             prefetch_size = _MSTL min(hint_size * 2, buffer_size_);
         }

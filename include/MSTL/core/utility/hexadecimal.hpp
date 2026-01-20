@@ -54,12 +54,12 @@ private:
         }
 
         if (negative) {
-            if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max()) + 1) {
+            if (raw > static_cast<uint64_t>(numeric_traits<int64_t>::max()) + 1) {
                 throw_exception(value_exception("Hexadecimal value out of range"));
             }
             return -static_cast<int64_t>(raw);
         }
-        if (raw > static_cast<uint64_t>(numeric_limits<int64_t>::max())) {
+        if (raw > static_cast<uint64_t>(numeric_traits<int64_t>::max())) {
             throw_exception(value_exception("Hexadecimal value out of range"));
         }
         return static_cast<value_type>(raw);

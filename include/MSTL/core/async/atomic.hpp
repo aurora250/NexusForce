@@ -429,10 +429,10 @@ public:
 	atomic() = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(T value) noexcept : value_(value) {}
 
@@ -563,18 +563,18 @@ public:
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(value_type ptr) noexcept : base_(ptr) { }
 
 	operator value_type() const noexcept { return value_type(base_); }
 	operator value_type() const volatile noexcept { return value_type(base_); }
 
-	value_type operator =(value_type ptr) noexcept { return base_.operator=(ptr); }
-	value_type operator =(value_type ptr) volatile noexcept { return base_.operator=(ptr); }
+	value_type operator =(value_type ptr) noexcept { return base_.operator =(ptr); }
+	value_type operator =(value_type ptr) volatile noexcept { return base_.operator =(ptr); }
 
 	value_type operator ++(int) noexcept { return base_++; }
 	value_type operator ++(int) volatile noexcept { return base_++; }
@@ -697,15 +697,15 @@ public:
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const bool value) noexcept : base_(value) { }
 
-	bool operator=(const bool value) noexcept { return base_.operator=(value); }
-	bool operator=(const bool value) volatile noexcept { return base_.operator=(value); }
+	bool operator =(const bool value) noexcept { return base_.operator =(value); }
+	bool operator =(const bool value) volatile noexcept { return base_.operator =(value); }
 
 	operator bool() const noexcept { return base_.load(); }
 	operator bool() const volatile noexcept { return base_.load(); }
@@ -792,15 +792,15 @@ struct atomic<char> : atomic_base<char> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -813,15 +813,15 @@ struct atomic<signed char> : atomic_base<signed char> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -834,15 +834,15 @@ struct atomic<unsigned char> : atomic_base<unsigned char> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -855,15 +855,15 @@ struct atomic<short> : atomic_base<short> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -876,15 +876,15 @@ struct atomic<unsigned short> : atomic_base<unsigned short> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -897,15 +897,15 @@ struct atomic<int> : atomic_base<int> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -918,15 +918,15 @@ struct atomic<unsigned int> : atomic_base<unsigned int> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -939,15 +939,15 @@ struct atomic<long> : atomic_base<long> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -960,15 +960,15 @@ struct atomic<unsigned long> : atomic_base<unsigned long> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -981,15 +981,15 @@ struct atomic<long long> : atomic_base<long long> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1002,15 +1002,15 @@ struct atomic<unsigned long long> : atomic_base<unsigned long long> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1023,15 +1023,15 @@ struct atomic<wchar_t> : atomic_base<wchar_t> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1045,15 +1045,15 @@ struct atomic<char8_t> : atomic_base<char8_t> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1067,15 +1067,15 @@ struct atomic<char16_t> : atomic_base<char16_t> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1088,15 +1088,15 @@ struct atomic<char32_t> : atomic_base<char32_t> {
 	atomic() noexcept = default;
 	~atomic() noexcept = default;
 	atomic(const atomic&) = delete;
-	atomic& operator=(const atomic&) = delete;
-	atomic& operator=(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
 	using base_type::operator integral_type;
-	using base_type::operator=;
+	using base_type::operator =;
 
 	static constexpr bool is_always_lock_free = true;
 };
@@ -1108,12 +1108,12 @@ struct atomic<float> : atomic_float_base<float> {
 
 	constexpr atomic(const float value) noexcept : atomic_float_base<float>(value) {}
 
-	atomic& operator=(const atomic&) volatile = delete;
-	atomic& operator=(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
-	using atomic_float_base<float>::operator=;
+	using atomic_float_base<float>::operator =;
 };
 
 template <>
@@ -1122,12 +1122,12 @@ struct atomic<double> : atomic_float_base<double> {
 
 	constexpr atomic(const double value) noexcept : atomic_float_base<double>(value) {}
 
-	atomic& operator=(const atomic&) volatile = delete;
-	atomic& operator=(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
-	using atomic_float_base<double>::operator=;
+	using atomic_float_base<double>::operator =;
 };
 
 template <>
@@ -1136,23 +1136,23 @@ struct atomic<long double> : atomic_float_base<long double> {
 
 	constexpr atomic(const long double value) noexcept : atomic_float_base<long double>(value) {}
 
-	atomic& operator=(const atomic&) volatile = delete;
-	atomic& operator=(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic& operator =(const atomic&) = delete;
 	atomic(atomic&&) noexcept = default;
-	atomic& operator=(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
-	using atomic_float_base<long double>::operator=;
+	using atomic_float_base<long double>::operator =;
 };
 
 template <typename T>
 struct atomic_ref : atomic_ref_base<T> {
 	explicit atomic_ref(T& value) noexcept : atomic_ref_base<T>(value) {}
 
-	atomic_ref& operator=(const atomic_ref&) = delete;
+	atomic_ref& operator =(const atomic_ref&) = delete;
 
 	atomic_ref(const atomic_ref&) = default;
 
-	using atomic_ref_base<T>::operator=;
+	using atomic_ref_base<T>::operator =;
 };
 
 

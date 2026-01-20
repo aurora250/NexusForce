@@ -90,8 +90,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
                     return nullptr;
                 }
             }
-        }
-        catch (...) {
+        } catch (...) {
             delete raw_conn;
             cv_.notify_all();
             return nullptr;

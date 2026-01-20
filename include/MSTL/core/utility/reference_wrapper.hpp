@@ -74,7 +74,6 @@ public:
      * @brief 构造函数
      * @tparam U 源类型
      * @param x 要包装的引用
-     * @throws 如果地址获取操作抛出异常
      *
      * 从任意可以转换为T引用的类型构造引用包装器。
      * 禁止从右值构造，防止悬垂引用。
@@ -132,7 +131,7 @@ reference_wrapper(T&) -> reference_wrapper<T>;
  * @tparam T 引用类型
  * @param val 要包装的左值引用
  * @return reference_wrapper<T>包装器
- * @note 禁止对右值使用，防止悬垂引用
+ * @note 禁止对右值使用
  */
 template <typename T>
 MSTL_NODISCARD constexpr reference_wrapper<T> ref(T& val) noexcept {
@@ -163,7 +162,9 @@ MSTL_NODISCARD constexpr reference_wrapper<T> ref(reference_wrapper<T> wrapper) 
  * @tparam T 引用类型
  * @param val 要包装的const左值引用
  * @return reference_wrapper<const T>包装器
- * @note 用于创建只读引用包装
+ * @note 禁止对右值使用
+ *
+ * 用于创建只读引用包装
  */
 template <typename T>
 MSTL_NODISCARD constexpr reference_wrapper<const T> cref(const T& val) noexcept {
@@ -173,6 +174,7 @@ MSTL_NODISCARD constexpr reference_wrapper<const T> cref(const T& val) noexcept 
 /**
  * @brief 删除const右值的cref重载
  * @tparam T 类型
+ * @note 防止对const右值创建只读引用包装器
  */
 template <typename T>
 void cref(const T&&) = delete;

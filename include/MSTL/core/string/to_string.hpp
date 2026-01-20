@@ -314,8 +314,8 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string_with_precision(
     T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
-    if (x == numeric_limits<T>::quiet_nan()) return basic_string<CharT>{"nan"};
-    constexpr T inf = numeric_limits<T>::infinity();
+    if (x == numeric_traits<T>::quiet_nan()) return basic_string<CharT>{"nan"};
+    constexpr T inf = numeric_traits<T>::infinity();
     if (x == inf || x == -inf) {
         return (x < 0) ? basic_string<CharT>{"-inf"} : basic_string<CharT>{"inf"};
     }

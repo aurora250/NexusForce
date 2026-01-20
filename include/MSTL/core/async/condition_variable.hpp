@@ -30,7 +30,7 @@ private:
 public:
     condition_variable_base() noexcept;
     condition_variable_base(const condition_variable_base&) = delete;
-    condition_variable_base& operator=(const condition_variable_base&) = delete;
+    condition_variable_base& operator =(const condition_variable_base&) = delete;
     ~condition_variable_base();
 
     native_handle_type* native_handle() noexcept { return &cond_; }
@@ -89,7 +89,7 @@ public:
 
     condition_variable() noexcept = default;
     condition_variable(const condition_variable&) = delete;
-    condition_variable& operator=(const condition_variable&) = delete;
+    condition_variable& operator =(const condition_variable&) = delete;
     ~condition_variable() noexcept = default;
 
     native_handle_type* native_handle() { return cond_.native_handle(); }

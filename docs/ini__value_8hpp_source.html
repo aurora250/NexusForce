@@ -156,9 +156,9 @@ $(function(){initNavTree('ini__value_8hpp_source.html','',''); });
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">explicit</span> ini_section(<span class="keywordtype">string</span> name = <span class="stringliteral">&quot;&quot;</span>) noexcept : name_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> move(name)) {}</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    ini_section(<span class="keyword">const</span> ini_section&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ini_section&amp; operator=(<span class="keyword">const</span> ini_section&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ini_section&amp; operator =(<span class="keyword">const</span> ini_section&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    ini_section(ini_section&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ini_section&amp; operator=(ini_section&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ini_section&amp; operator =(ini_section&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    MSTL_NODISCARD types type() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> Section; }</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    MSTL_NODISCARD <span class="keyword">const</span> ini_section* as_section() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="keyword">this</span>; }</div>
@@ -224,9 +224,9 @@ $(function(){initNavTree('ini__value_8hpp_source.html','',''); });
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    ini_document() : global_section_(make_unique&lt;ini_section&gt;(<span class="stringliteral">&quot;&quot;</span>)) {}</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    ini_document(<span class="keyword">const</span> ini_document&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    ini_document&amp; operator=(<span class="keyword">const</span> ini_document&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    ini_document&amp; operator =(<span class="keyword">const</span> ini_document&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    ini_document(ini_document&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    ini_document&amp; operator=(ini_document&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    ini_document&amp; operator =(ini_document&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">void</span> add_section(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, unique_ptr&lt;ini_section&gt; section) {</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">if</span> (name.empty()) {</div>

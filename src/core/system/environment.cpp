@@ -5,6 +5,7 @@
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <unistd.h>
+#include <cstdlib>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

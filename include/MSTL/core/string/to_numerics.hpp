@@ -1,6 +1,5 @@
 #ifndef MSTL_CORE_STRING_TO_NUMERICS_HPP__
 #define MSTL_CORE_STRING_TO_NUMERICS_HPP__
-#include "../string/cstring.hpp"
 #include "../string/string_view.hpp"
 #include "../numeric/math.hpp"
 #include "../exception/exception.hpp"
@@ -54,8 +53,8 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
         p += 2;
     }
 
-    const T cutoff = numeric_limits<T>::min() / base;
-    const T cutlim = numeric_limits<T>::min() % base;
+    const T cutoff = numeric_traits<T>::min() / base;
+    const T cutlim = numeric_traits<T>::min() % base;
     T result = 0;
     bool any_converted = false;
     bool overflow = false;
@@ -91,11 +90,11 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
 
     if (!any_converted) return 0;
     if (overflow)
-        return (sign > 0) ? numeric_limits<T>::max() : numeric_limits<T>::min();
+        return (sign > 0) ? numeric_traits<T>::max() : numeric_traits<T>::min();
 
     if (sign > 0) {
-        if (result == numeric_limits<T>::min())
-            return numeric_limits<T>::max();
+        if (result == numeric_traits<T>::min())
+            return numeric_traits<T>::max();
         return -result;
     }
     return result;
@@ -146,8 +145,8 @@ constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
         p += 2;
     }
 
-    const T cutoff = numeric_limits<T>::max() / base;
-    const T cutlim = numeric_limits<T>::max() % base;
+    const T cutoff = numeric_traits<T>::max() / base;
+    const T cutlim = numeric_traits<T>::max() % base;
     T result = 0;
     bool any_converted = false;
     bool overflow = false;
@@ -182,7 +181,7 @@ constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
     }
 
     if (!any_converted) return 0;
-    if (overflow) return numeric_limits<T>::max();
+    if (overflow) return numeric_traits<T>::max();
 
     if (sign < 0) {
         // for unsigned, negative sign yields two's complement wrap,
@@ -250,7 +249,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
             if ((c1 == 'n' || c1 == 'N') && (c2 == 'f' || c2 == 'F')) {
                 if (p + 3 == end || !is_alpha_or_digit(p[3])) {
                     p += 3;
-                    T inf_val = numeric_limits<T>::infinity();
+                    T inf_val = numeric_traits<T>::infinity();
                     if (endptr) *endptr = const_cast<char*>(p);
                     return (sign < 0) ? -inf_val : inf_val;
                 }
@@ -270,7 +269,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
                         if (p != end && *p == ')') ++p;
                     }
                     if (endptr) *endptr = const_cast<char*>(p);
-                    return numeric_limits<T>::quiet_nan();
+                    return numeric_traits<T>::quiet_nan();
                 }
             }
         }
@@ -285,7 +284,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
 
     while (p != end && *p >= '0' && *p <= '9') {
         has_digits = true;
-        if (digits_count < numeric_limits<T>::digits10) {
+        if (digits_count < numeric_traits<T>::digits10) {
             significand = significand * 10 + (*p - '0');
         } else {
             exponent++;
@@ -298,7 +297,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
         ++p;
         while (p != end && *p >= '0' && *p <= '9') {
             has_digits = true;
-            if (digits_count < numeric_limits<T>::digits10) {
+            if (digits_count < numeric_traits<T>::digits10) {
                 significand = significand * 10 + (*p - '0');
                 exponent--;
             }
@@ -342,7 +341,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
     if (exponent != 0) {
         if (exponent > 400) {
             if (endptr) *endptr = const_cast<char*>(p);
-            return sign * numeric_limits<T>::max();
+            return sign * numeric_traits<T>::max();
         } else if (exponent < -400) {
             if (endptr) *endptr = const_cast<char*>(p);
             return T(0);
@@ -352,9 +351,9 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
     }
 
     result *= sign;
-    const T inf = numeric_limits<T>::infinity();
+    const T inf = numeric_traits<T>::infinity();
     if (result == inf || result == -inf) {
-        result = sign * numeric_limits<T>::max();
+        result = sign * numeric_traits<T>::max();
     }
 
     if (endptr) *endptr = const_cast<char*>(p);

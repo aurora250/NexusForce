@@ -41,7 +41,7 @@ public:
     ~file_watcher();
 
     file_watcher(const file_watcher&) = delete;
-    file_watcher& operator=(const file_watcher&) = delete;
+    file_watcher& operator =(const file_watcher&) = delete;
 
     bool start(callback_t callback, FILE_WATCH_EVENT events = FILE_WATCH_EVENT::ALL);
     void stop();

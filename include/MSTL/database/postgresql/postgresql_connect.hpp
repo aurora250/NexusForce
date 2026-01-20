@@ -28,7 +28,7 @@ public:
     ~postgresql_connect() override { close(); }
 
     postgresql_connect(const postgresql_connect&) = delete;
-    postgresql_connect& operator=(const postgresql_connect&) = delete;
+    postgresql_connect& operator =(const postgresql_connect&) = delete;
 
     MSTL_NODISCARD bool connect_to(
         const string& user, const string& password,

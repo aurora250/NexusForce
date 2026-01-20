@@ -42,12 +42,12 @@ public:
         }
     }
 
-    promise& operator=(promise&& other) noexcept {
+    promise& operator =(promise&& other) noexcept {
         promise(_MSTL move(other)).swap(*this);
         return *this;
     }
 
-    promise& operator=(const promise&) = delete;
+    promise& operator =(const promise&) = delete;
 
     void swap(promise& other) noexcept {
         future_ptr.swap(other.future_ptr);
@@ -124,12 +124,12 @@ public:
         }
     }
 
-    promise& operator=(promise&& other) noexcept {
+    promise& operator =(promise&& other) noexcept {
         promise(_MSTL move(other)).swap(*this);
         return *this;
     }
 
-    promise& operator=(const promise&) = delete;
+    promise& operator =(const promise&) = delete;
 
     void swap(promise& other) noexcept {
         future_ptr.swap(other.future_ptr);
@@ -191,12 +191,12 @@ public:
         }
     }
 
-    promise& operator=(promise&& other) noexcept {
+    promise& operator =(promise&& other) noexcept {
         promise(_MSTL move(other)).swap(*this);
         return *this;
     }
 
-    promise& operator=(const promise&) = delete;
+    promise& operator =(const promise&) = delete;
 
     void swap(promise& other) noexcept {
         future_ptr.swap(other.future_ptr);
@@ -233,7 +233,7 @@ struct __future_base::task_setter {
     PtrT operator ()() const {
         try {
             (*result_ptr)->set((*function_ptr)());
-        } catch(...) {
+        } catch (...) {
             (*result_ptr)->error_ptr = current_exception();
         }
         return _MSTL move(*result_ptr);
@@ -248,7 +248,7 @@ struct __future_base::task_setter<PtrT, Func, void> {
     PtrT operator ()() const {
         try {
             (*function_ptr)();
-        } catch(...) {
+        } catch (...) {
             (*result_ptr)->error_ptr = current_exception();
         }
         return _MSTL move(*result_ptr);

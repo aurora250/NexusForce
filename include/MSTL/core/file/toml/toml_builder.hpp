@@ -21,9 +21,9 @@ private:
         frame(const RANGE_TYPE t, toml_array* arr) : type(t), array_ptr(arr) {}
 
         frame(const frame&) = default;
-        frame& operator=(const frame&) = default;
+        frame& operator =(const frame&) = default;
         frame(frame&&) = default;
-        frame& operator=(frame&&) = default;
+        frame& operator =(frame&&) = default;
         ~frame() = default;
     };
 

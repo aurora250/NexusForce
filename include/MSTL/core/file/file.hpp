@@ -193,7 +193,7 @@ public:
 
     async_result async_read(string& buffer, size_type size, difference_type offset = -1) const;
     async_result async_write(string data, size_type size, difference_type offset = -1);
-    bool wait_async(async_result& result, uint32_t timeout_ms = numeric_limits<uint32_t>::max());
+    bool wait_async(async_result& result, uint32_t timeout_ms = numeric_traits<uint32_t>::max());
     void cancel_async(async_result& result);
 
     MSTL_NODISCARD size_type size() const;

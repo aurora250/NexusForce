@@ -3,6 +3,7 @@
 #include "../utility/packages.hpp"
 #ifdef MSTL_COMPILER_GNUC__
 #include <cxxabi.h>
+#include <cstdlib> // std::free
 #endif // MSTL_COMPILER_GNUC__
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_INNER__

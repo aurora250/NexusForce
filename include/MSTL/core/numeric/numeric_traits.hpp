@@ -1,103 +1,230 @@
-#ifndef MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__
-#define MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__
+#ifndef MSTL_CORE_NUMERIC_NUMERIC_TRAITS_HPP__
+#define MSTL_CORE_NUMERIC_NUMERIC_TRAITS_HPP__
+
+/**
+ * @file numeric_traits.hpp
+ * @brief MSTL数值特征
+ *
+ * 此文件提供了数值类型的数值范围、精度、特殊值等特性信息。
+ */
+
 #include "../typeinfo/types.hpp"
 #include "../typeinfo/type_traits.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup NumericTraits 数值特征
+ * @brief 数值类型特性的主模板和特化
+ * @{
+ */
+
+/**
+ * @enum FLOAT_DENORM_TYPE
+ * @brief 浮点数次正规化状态
+ *
+ * 描述浮点数类型是否支持次正规化（denormalized）值。
+ */
 enum class FLOAT_DENORM_TYPE {
-    INDETERMINATE = -1, ABSENT, PRESENT
+    INDETERMINATE = -1,  ///< 状态不确定
+    ABSENT,              ///< 不支持次正规化
+    PRESENT              ///< 支持次正规化
 };
 
+/**
+ * @enum FLOAT_ROUND_TYPE
+ * @brief 浮点数舍入模式
+ *
+ * 描述浮点数类型的舍入方式。
+ */
 enum class FLOAT_ROUND_TYPE {
-    INDETERMINATE = -1, TOWARD_ZERO, TO_NEAREST, TOWARD_INFINITY, TOWARD_NEG_INFINITY
+    INDETERMINATE = -1,     ///< 舍入方式不确定
+    TOWARD_ZERO,            ///< 向零舍入（截断）
+    TO_NEAREST,             ///< 向最近值舍入（四舍五入）
+    TOWARD_INFINITY,        ///< 向正无穷舍入（向上取整）
+    TOWARD_NEG_INFINITY     ///< 向负无穷舍入（向下取整）
 };
 
-
+/// @cond
 MSTL_BEGIN_INNER__
 
-struct __numeric_base {
-    static constexpr auto has_denorm        = FLOAT_DENORM_TYPE::ABSENT;
-    static constexpr bool has_denorm_loss   = false;
-    static constexpr bool has_infinity      = false;
-    static constexpr bool has_quiet_nan     = false;
-    static constexpr bool has_signaling_nan = false;
-    static constexpr bool is_bounded        = false;
-    static constexpr bool is_exact          = false;
-    static constexpr bool is_iec559         = false;
-    static constexpr bool is_integer        = false;
-    static constexpr bool is_modulo         = false;
-    static constexpr bool is_signed         = false;
-    static constexpr bool is_specialized    = false;
-    static constexpr bool tinyness_before   = false;
-    static constexpr bool traps             = false;
-    static constexpr auto round_style       = FLOAT_ROUND_TYPE::TOWARD_ZERO;
-    static constexpr int digits             = 0;
-    static constexpr int digits10           = 0;
-    static constexpr int max_digits10       = 0;
-    static constexpr int max_exponent       = 0;
-    static constexpr int max_exponent10     = 0;
-    static constexpr int min_exponent       = 0;
-    static constexpr int min_exponent10     = 0;
-    static constexpr int radix              = 0;
-    // traps
+/**
+ * @struct numeric_base
+ * @brief 数值特征的基类
+ *
+ * 提供数值类型的默认特性值，大多数特性初始化为false或0。
+ */
+struct numeric_base {
+    static constexpr auto has_denorm        = FLOAT_DENORM_TYPE::ABSENT;      ///< 是否支持次正规化值
+    static constexpr auto round_style       = FLOAT_ROUND_TYPE::TOWARD_ZERO;  ///< 舍入方式
+    static constexpr bool has_denorm_loss   = false;  ///< 精度损失时是否可能产生次正规化值
+    static constexpr bool has_infinity      = false;  ///< 是否有无穷大表示
+    static constexpr bool has_quiet_nan     = false;  ///< 是否有安静NaN表示
+    static constexpr bool has_signaling_nan = false;  ///< 是否有信号NaN表示
+    static constexpr bool is_bounded        = false;  ///< 值的集合是否有界
+    static constexpr bool is_exact          = false;  ///< 表示是否精确
+    static constexpr bool is_iec559         = false;  ///< 是否符合IEC 559 / IEEE 754 标准
+    static constexpr bool is_integer        = false;  ///< 是否为整数类型
+    static constexpr bool is_modulo         = false;  ///< 是否为模运算类型
+    static constexpr bool is_signed         = false;  ///< 是否为有符号类型
+    static constexpr bool is_specialized    = false;  ///< 是否为特化版本
+    static constexpr bool tinyness_before   = false;  ///< 是否在舍入前检测下溢
+    static constexpr bool traps             = false;  ///< 是否捕获算术异常
+    static constexpr int digits             = 0;  ///< 基数位数
+    static constexpr int digits10           = 0;  ///< 十进制位数
+    static constexpr int max_digits10       = 0;  ///< 保证精度的最大十进制位数
+    static constexpr int max_exponent       = 0;  ///< 最大指数
+    static constexpr int max_exponent10     = 0;  ///< 最大十进制指数
+    static constexpr int min_exponent       = 0;  ///< 最小指数
+    static constexpr int min_exponent10     = 0;  ///< 最小十进制指数
+    static constexpr int radix              = 0;  ///< 基数
 };
 
-struct __numeric_int_base : __numeric_base {
-    static constexpr bool is_bounded     = true;
-    static constexpr bool is_exact       = true;
-    static constexpr bool is_integer     = true;
-    static constexpr bool is_specialized = true;
-    static constexpr int radix           = 2;
+/**
+ * @struct numeric_int_base
+ * @brief 整数类型的数值特征基类
+ * @extends numeric_base
+ *
+ * 继承自numeric_base，为整数类型设置适当的默认值。
+ */
+struct numeric_int_base : numeric_base {
+    static constexpr bool is_bounded     = true;  ///< 整数类型是有界的
+    static constexpr bool is_exact       = true;  ///< 整数类型是精确的
+    static constexpr bool is_integer     = true;  ///< 是整数类型
+    static constexpr bool is_specialized = true;  ///< 是特化版本
+    static constexpr int radix           = 2;     ///< 整数类型的基数为2
 #ifdef MSTL_COMPILER_GNUC__
-    static constexpr bool traps          = true;
+    static constexpr bool traps          = true;  ///< GCC编译器通常捕获算术异常
 #endif
 };
 
-struct __numeric_float_base : __numeric_base {
-    static constexpr auto has_denorm            = FLOAT_DENORM_TYPE::PRESENT;
-    static constexpr bool has_infinity          = true;
-    static constexpr bool has_quiet_nan         = true;
-    static constexpr bool has_signaling_nan     = true;
-    static constexpr bool is_bounded            = true;
-    static constexpr bool is_iec559             = true;
-    static constexpr bool is_signed             = true;
-    static constexpr bool is_specialized        = true;
-    static constexpr auto round_style           = FLOAT_ROUND_TYPE::TO_NEAREST;
-    static constexpr int radix                  = 2;
+/**
+ * @struct numeric_float_base
+ * @brief 浮点数类型的数值特征基类
+ * @extends numeric_base
+ *
+ * numeric_base，为浮点数类型设置适当的默认值。
+ */
+struct numeric_float_base : numeric_base {
+    static constexpr auto has_denorm            = FLOAT_DENORM_TYPE::PRESENT;    ///< 浮点数支持次正规化
+    static constexpr auto round_style           = FLOAT_ROUND_TYPE::TO_NEAREST;  ///< 浮点数通常向最近值舍入
+    static constexpr bool has_infinity          = true;  ///< 浮点数有无穷大表示
+    static constexpr bool has_quiet_nan         = true;  ///< 浮点数有安静nan表示
+    static constexpr bool has_signaling_nan     = true;  ///< 浮点数有信号nan表示
+    static constexpr bool is_bounded            = true;  ///< 浮点数类型是有界的
+    static constexpr bool is_iec559             = true;  ///< 浮点数符合IEC 559标准
+    static constexpr bool is_signed             = true;  ///< 浮点数是有符号的
+    static constexpr bool is_specialized        = true;  ///< 是特化版本
+    static constexpr int radix                  = 2;     ///< 浮点数的基数为2
 };
 
 MSTL_END_INNER__
+/// @endcond
 
-
-template <typename T, typename = void>
-class numeric_limits : public _INNER __numeric_base {
+/**
+ * @class numeric_traits
+ * @brief 数值类型极限特性主模板
+ * @tparam T 数值类型
+ * @tparam Dummy SFINAE参数
+ * @extends inner::numeric_base
+ *
+ * 主模板提供默认实现，返回类型T的默认值。
+ * 特定类型的特化将提供该类型的具体数值特性。
+ */
+template <typename T, typename Dummy = void>
+class numeric_traits : public _INNER numeric_base {
 public:
+    /**
+     * @brief 获取类型的最小值
+     * @return 类型的最小值
+     * @note 对于浮点数为最小正值，对于整数为最小值
+     */
     MSTL_NODISCARD static constexpr T min() noexcept { return T(); }
+    /**
+     * @brief 获取类型的最大值
+     * @return 类型的最大值
+     */
     MSTL_NODISCARD static constexpr T max() noexcept { return T(); }
 
+    /**
+     * @brief 获取类型的最低值
+     * @return 类型的最低值
+     * @note 对于浮点数为负无穷方向，对于整数与min相同
+     */
     MSTL_NODISCARD static constexpr T lowest() noexcept { return T(); }
+    /**
+     * @brief 获取机器精度
+     * @return 机器精度
+     *
+     * 类型可表示的1与大于1的最小值之差
+     */
     MSTL_NODISCARD static constexpr T epsilon() noexcept { return T(); }
+    /**
+     * @brief 获取最大舍入误差
+     * @return 最大舍入误差
+     */
     MSTL_NODISCARD static constexpr T round_error() noexcept { return T(); }
+    /**
+     * @brief 获取最小的次正规化正值
+     * @return 最小的次正规化正值
+     */
     MSTL_NODISCARD static constexpr T denorm_min() noexcept { return T(); }
 
+    /**
+     * @brief 获取正无穷大表示
+     * @return 正无穷大
+     */
     MSTL_NODISCARD static constexpr T infinity() noexcept { return T(); }
+    /**
+     * @brief 获取安静nan表示
+     * @return 安静nan
+     *
+     * 安静nan在大多数算术操作中不会触发浮点异常，具体特点如下：
+     *   - 参与算术运算时，结果通常仍然是安静nan。
+     *   - 传播到后续计算中，不会立即中断程序。
+     * 其用于表示“无效但可继续运行”的结果
+     */
     MSTL_NODISCARD static constexpr T quiet_nan() noexcept { return T(); }
+    /**
+     * @brief 获取信号nan表示
+     * @return 信号nan
+     *
+     * 信号nan在大多数算术操作中会触发浮点异常，如SIGFPE或浮点无效操作异常。
+     * 一旦参与运算，如果硬件/系统启用了浮点异常捕获，可能触发陷阱。
+     * 其用于调试和诊断，可以捕获未初始化的浮点数使用。
+     *
+     * @note 主流编译器默认禁用浮点异常，因此可能不会立即崩溃，而是转换为quiet_nan。
+     */
     MSTL_NODISCARD static constexpr T signaling_nan() noexcept { return T(); }
 };
 
+/**
+ * @brief numeric_limits的const特化版本
+ * @tparam T 数值类型
+ */
 template <typename T>
-class numeric_limits<const T> : public numeric_limits<T> {};
+class numeric_traits<const T> : public numeric_traits<T> {};
 
+/**
+ * @brief numeric_limits的volatile特化版本
+ * @tparam T 数值类型
+ */
 template <typename T>
-class numeric_limits<volatile T> : public numeric_limits<T> {};
+class numeric_traits<volatile T> : public numeric_traits<T> {};
 
+/**
+ * @brief numeric_limits的const volatile特化版本
+ * @tparam T 数值类型
+ */
 template <typename T>
-class numeric_limits<const volatile T> : public numeric_limits<T> {};
+class numeric_traits<const volatile T> : public numeric_traits<T> {};
 
 
+/**
+ * @brief bool类型的数值特征特化
+ */
 template <>
-class numeric_limits<bool> : public _INNER __numeric_int_base {
+class numeric_traits<bool> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr bool min() noexcept { return false; }
     MSTL_NODISCARD static constexpr bool max() noexcept { return true; }
@@ -114,9 +241,11 @@ public:
     static constexpr int digits = 1;
 };
 
-
+/**
+ * @brief int8_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<int8_t> : public _INNER __numeric_int_base {
+class numeric_traits<int8_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr int8_t min() noexcept { return -128; }
     MSTL_NODISCARD static constexpr int8_t max() noexcept { return 127; }
@@ -135,8 +264,11 @@ public:
     static constexpr int digits10   = 2;
 };
 
+/**
+ * @brief int16_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<int16_t> : public _INNER __numeric_int_base {
+class numeric_traits<int16_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr int16_t min() noexcept { return -32768; }
     MSTL_NODISCARD static constexpr int16_t max() noexcept { return 32767; }
@@ -155,8 +287,11 @@ public:
     static constexpr int digits10   = 4;
 };
 
+/**
+ * @brief int32_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<int32_t> : public _INNER __numeric_int_base {
+class numeric_traits<int32_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr int32_t min() noexcept { return -2147483647 - 1; }
     MSTL_NODISCARD static constexpr int32_t max() noexcept { return 2147483647; }
@@ -175,8 +310,11 @@ public:
     static constexpr int digits10   = 9;
 };
 
+/**
+ * @brief int64_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<int64_t> : public _INNER __numeric_int_base {
+class numeric_traits<int64_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr int64_t min() noexcept { return -9223372036854775807LL - 1; }
     MSTL_NODISCARD static constexpr int64_t max() noexcept { return 9223372036854775807LL; }
@@ -197,14 +335,17 @@ public:
 
 #ifdef MSTL_PLATFORM_LINUX64__
 template <>
-class numeric_limits<long long> : public numeric_limits<int64_t> {};
+class numeric_traits<long long> : public numeric_traits<int64_t> {};
 #else
 template <>
-class numeric_limits<long> : public numeric_limits<int32_t> {};
+class numeric_traits<long> : public numeric_traits<int32_t> {};
 #endif
 
+/**
+ * @brief uint8_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<uint8_t> : public _INNER __numeric_int_base {
+class numeric_traits<uint8_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr uint8_t min() noexcept { return 0; }
     MSTL_NODISCARD static constexpr uint8_t max() noexcept { return 0xffU; }
@@ -223,8 +364,11 @@ public:
     static constexpr int digits10   = 2;
 };
 
+/**
+ * @brief uint16_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<uint16_t> : public _INNER __numeric_int_base {
+class numeric_traits<uint16_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr uint16_t min() noexcept { return 0; }
     MSTL_NODISCARD static constexpr uint16_t max() noexcept { return 0xffffU; }
@@ -243,8 +387,11 @@ public:
     static constexpr int digits10   = 4;
 };
 
+/**
+ * @brief uint32_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<uint32_t> : public _INNER __numeric_int_base {
+class numeric_traits<uint32_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr uint32_t min() noexcept { return 0; }
     MSTL_NODISCARD static constexpr uint32_t max() noexcept { return 0xffffffffU; }
@@ -263,8 +410,11 @@ public:
     static constexpr int digits10   = 9;
 };
 
+/**
+ * @brief uint64_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<uint64_t> : public _INNER __numeric_int_base {
+class numeric_traits<uint64_t> : public _INNER numeric_int_base {
 public:
     MSTL_NODISCARD static constexpr uint64_t min() noexcept { return 0; }
     MSTL_NODISCARD static constexpr uint64_t max() noexcept { return 0xffffffffffffffffULL; }
@@ -285,43 +435,80 @@ public:
 
 #ifdef MSTL_PLATFORM_LINUX64__
 template <>
-class numeric_limits<unsigned long long> : public numeric_limits<uint64_t> {};
+class numeric_traits<unsigned long long> : public numeric_traits<uint64_t> {};
 #else
 template <>
-class numeric_limits<unsigned long> : public numeric_limits<uint32_t> {};
+class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
 #endif
 
 
+/**
+ * @brief char类型的数值特征特化
+ */
 template <>
-class numeric_limits<char> : public numeric_limits<
-    conditional_t<static_cast<char>(128) < 0, int8_t, uint8_t>
-> {};
+class numeric_traits<char> : public numeric_traits<int8_t> {};
 
 #ifdef MSTL_STANDARD_20__
+/**
+ * @brief char8_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<char8_t> : public numeric_limits<uint8_t> {};
+class numeric_traits<char8_t> : public numeric_traits<uint8_t> {};
 #endif
 
+/**
+ * @brief char16_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<char16_t> : public numeric_limits<uint16_t> {};
+class numeric_traits<char16_t> : public numeric_traits<uint16_t> {};
+
+/**
+ * @brief char32_t类型的数值特征特化
+ */
 template <>
-class numeric_limits<char32_t> : public numeric_limits<uint32_t> {};
+class numeric_traits<char32_t> : public numeric_traits<uint32_t> {};
+
+/**
+ * @brief wchar_t类型的数值特征特化
+ * @note wchar_t在Windows平台为16位，在Linux平台为32位
+ */
+template <>
+class numeric_traits<wchar_t>;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 template <>
-class numeric_limits<wchar_t> : public numeric_limits<uint16_t> {};
+class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
 #elif defined(MSTL_PLATFORM_LINUX__)
 template <>
-class numeric_limits<wchar_t> : public numeric_limits<int32_t> {};
+class numeric_traits<wchar_t> : public numeric_traits<int32_t> {};
 #endif
 
 
+/**
+ * @brief 单精度浮点数类型的数值特征特化
+ */
 template <>
-class numeric_limits<float32_t> : public _INNER __numeric_float_base {
+class numeric_traits<float32_t> : public _INNER numeric_float_base {
 public:
+    /**
+     * @brief 获取最小正规范值
+     * @return 最小正规范值
+     */
     MSTL_NODISCARD static constexpr float32_t min_posi() noexcept { return 1.175494351e-38f; }
+    /**
+     * @brief 获取最大正规范值
+     * @return 最大正规范值
+     */
     MSTL_NODISCARD static constexpr float32_t max_posi() noexcept { return 3.402823466e+38f; }
+    /**
+     * @brief 获取最小负规范值
+     * @return 最小负规范值
+     */
     MSTL_NODISCARD static constexpr float32_t min_nega() noexcept { return -3.402823466e+38f; }
+    /**
+     * @brief 获取最大负规范值
+     * @return 最大负规范值
+     */
     MSTL_NODISCARD static constexpr float32_t max_nega() noexcept { return -1.175494351e-38f; }
 
     MSTL_NODISCARD static constexpr float32_t min() noexcept { return min_posi(); }
@@ -348,17 +535,20 @@ public:
 #endif
     }
 
-    static constexpr int digits         = 24;
-    static constexpr int digits10       = 6;
-    static constexpr int max_digits10   = 9;
-    static constexpr int max_exponent   = 128;
-    static constexpr int max_exponent10 = 38;
-    static constexpr int min_exponent   = -125;
-    static constexpr int min_exponent10 = -37;
+    static constexpr int digits         = 24;   ///< 尾数位数，包括隐藏位
+    static constexpr int digits10       = 6;    ///< 十进制有效位数
+    static constexpr int max_digits10   = 9;    ///< 保证精度的最大十进制位数
+    static constexpr int max_exponent   = 128;  ///< 最大指数
+    static constexpr int max_exponent10 = 38;   ///< 最大十进制指数
+    static constexpr int min_exponent   = -125; ///< 最小指数
+    static constexpr int min_exponent10 = -37;  ///< 最小十进制指数
 };
 
+/**
+ * @brief 双精度浮点数类型的数值特征特化
+ */
 template <>
-class numeric_limits<float64_t> : public _INNER __numeric_float_base {
+class numeric_traits<float64_t> : public _INNER numeric_float_base {
 public:
     MSTL_NODISCARD static constexpr float64_t min_posi() noexcept { return 2.2250738585072014e-308; }
     MSTL_NODISCARD static constexpr float64_t max_posi() noexcept { return 1.7976931348623157e+308; }
@@ -398,12 +588,13 @@ public:
     static constexpr int min_exponent10 = -307;
 };
 
-#ifdef MSTL_COMPILER_MSVC__
+#ifdef MSTL_COMPILER_GNUC__
+/**
+ * @brief 扩展精度浮点数类型的数值特征特化
+ * @note MSVC的long double等同于double；GNUC则使用更大的数值范围特征。
+ */
 template <>
-class numeric_limits<decimal_t> : public numeric_limits<float64_t> {};
-#else
-template <>
-class numeric_limits<decimal_t> : public _INNER __numeric_float_base {
+class numeric_traits<decimal_t> : public _INNER numeric_float_base {
 public:
     MSTL_NODISCARD static constexpr decimal_t min_posi() noexcept { return 3.36210314311209350626267781732175260e-4932L; }
     MSTL_NODISCARD static constexpr decimal_t max_posi() noexcept { return 1.18973149535723176502126385303097021e+4932L; }
@@ -419,20 +610,8 @@ public:
     MSTL_NODISCARD static constexpr decimal_t denorm_min() noexcept { return 3.64519953188247460253e-4951L; }
 
     MSTL_NODISCARD static constexpr decimal_t infinity() noexcept { return __builtin_huge_val(); }
-    MSTL_NODISCARD static constexpr decimal_t quiet_nan() noexcept {
-#ifdef MSTL_COMPILER_GCC__
-        return __builtin_nanl("");
-#else
-        return __builtin_nan("0");
-#endif
-    }
-    MSTL_NODISCARD static constexpr decimal_t signaling_nan() noexcept {
-#ifdef MSTL_COMPILER_GCC__
-        return __builtin_nansl("");
-#else
-        return __builtin_nans("1");
-#endif
-    }
+    MSTL_NODISCARD static constexpr decimal_t quiet_nan() noexcept { return __builtin_nanl(""); }
+    MSTL_NODISCARD static constexpr decimal_t signaling_nan() noexcept { return __builtin_nansl(""); }
 
     static constexpr int digits         = 64;
     static constexpr int digits10       = 18;
@@ -442,11 +621,22 @@ public:
     static constexpr int min_exponent   = -16381;
     static constexpr int min_exponent10 = -4931;
 };
+#else
+template <>
+class numeric_traits<decimal_t> : public numeric_traits<float64_t> {};
 #endif
 
 
+/**
+ * @brief 解包类型的数值特征特化
+ * @tparam T 解包类型
+ *
+ * 对于已包装的类型，提供其底层类型的数值特征。
+ */
 template <typename T>
-class numeric_limits<T, enable_if_t<is_unpackaged<T>::value>> : public numeric_limits<unpackage_t<T>> {};
+class numeric_traits<T, enable_if_t<is_unpackaged<T>::value>> : public numeric_traits<unpackage_t<T>> {};
+
+/** @} */ // NumericTraits
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_NUMERIC_NUMERIC_LIMITS_HPP__
+#endif // MSTL_CORE_NUMERIC_NUMERIC_TRAITS_HPP__

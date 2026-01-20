@@ -1,11 +1,37 @@
 #ifndef MSTL_CORE_ALGORITHM_SORT_HPP__
 #define MSTL_CORE_ALGORITHM_SORT_HPP__
+
+/**
+ * @file sort.hpp
+ * @brief MSTL排序算法
+ *
+ * 此文件提供了标准排序算法实现，
+ * 包括多种排序算法、排序检查和部分排序功能。
+ */
+
 #include "merge.hpp"
 #include "heap.hpp"
 #include "partition.hpp"
 #include "compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup SortAlgorithms 排序算法
+ * @brief MSTL排序算法的实现
+ * @{
+ */
+
+/**
+ * @brief 检查范围是否已排序
+ * @tparam Iterator 迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ * @return 如果范围已按comp排序则返回true，否则返回false
+ *
+ * 检查范围 [first, last) 是否按照比较函数 comp 排序。
+ */
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 bool is_sorted(Iterator first, Iterator last, Compare comp) {
 	if (first == last) return true;
@@ -18,11 +44,29 @@ bool is_sorted(Iterator first, Iterator last, Compare comp) {
 	return true;
 }
 
+/**
+ * @brief 检查范围是否已排序
+ * @tparam Iterator 迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @return 如果范围已排序则返回true，否则返回false
+ */
 template <typename Iterator>
 bool is_sorted(Iterator first, Iterator last) {
 	return is_sorted(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
+/**
+ * @brief 查找首个破坏排序的元素
+ * @tparam Iterator 迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ * @return 指向首个破坏排序的元素的迭代器，如果整个范围已排序则返回last
+ *
+ * 在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。
+ */
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
 	if (first == last) return last;
@@ -34,13 +78,32 @@ Iterator is_sorted_until(Iterator first, Iterator last, Compare comp) {
 	return last;
 }
 
+/**
+ * @brief 查找首个破坏排序的元素
+ * @tparam Iterator 迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @return 指向首个破坏排序的元素的迭代器
+ */
 template <typename Iterator>
 Iterator is_sorted_until(Iterator first, Iterator last) {
 	return is_sorted_until(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
 
-// merge sort : Ot(NlogN) Om(logN) stable
+/**
+ * @brief 归并排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 使用分治策略的稳定排序算法：
+ * 1. 递归地将序列分成两半
+ * 2. 分别对两半进行排序
+ * 3. 合并两个已排序的子序列
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void merge_sort(Iterator first, Iterator last, Compare comp) {
@@ -52,12 +115,30 @@ void merge_sort(Iterator first, Iterator last, Compare comp) {
     _MSTL inplace_merge(first, mid, last, comp);
 }
 
+/**
+ * @brief 归并排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void merge_sort(Iterator first, Iterator last) {
     return _MSTL merge_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// partial sort / heap sort : Ot(NlogN) Om(1) unstable
+/**
+ * @brief 部分排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param middle 部分排序的边界
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 对范围 [first, last) 进行部分排序，使得 [first, middle) 包含整个范围中最小的元素，
+ * 并且这个子范围是已排序的。使用堆排序算法实现。
+ * 适用只需要前k个最小（或最大）元素的情况。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) {
@@ -65,17 +146,38 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
     _MSTL make_heap(first, middle, comp);
     for (Iterator i = middle; i < last; ++i) {
         if (comp(*i, *first)) {
-	        _MSTL pop_heap_aux(first, middle, i, *i, comp);
+	        _INNER pop_heap_aux(first, middle, i, *i, comp);
         }
     }
     _MSTL sort_heap(first, middle, comp);
 }
 
+/**
+ * @brief 部分排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param middle 部分排序的边界
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void partial_sort(Iterator first, Iterator middle, Iterator last) {
     return _MSTL partial_sort(first, middle, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
+/**
+ * @brief 部分排序并复制到另一个范围
+ * @tparam Iterator1 输入迭代器类型
+ * @tparam Iterator2 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 输入范围起始
+ * @param last 输入范围结束
+ * @param result_first 输出范围起始
+ * @param result_last 输出范围结束
+ * @param comp 比较函数对象
+ * @return 输出范围的实际结束位置
+ *
+ * 从输入范围中选取最小的元素，部分排序后复制到输出范围。
+ */
 template <typename Iterator1, typename Iterator2, typename Compare, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_rnd_iter_v<Iterator2>, int> = 0>
 Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
@@ -99,12 +201,35 @@ Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last,
 	return result_real_last;
 }
 
+/**
+ * @brief 部分排序并复制
+ * @tparam Iterator1 输入迭代器类型
+ * @tparam Iterator2 随机访问迭代器类型
+ * @param first 输入范围起始
+ * @param last 输入范围结束
+ * @param result_first 输出范围起始
+ * @param result_last 输出范围结束
+ * @return 输出范围的实际结束位置
+ */
 template <typename Iterator1, typename Iterator2>
-Iterator2 partial_sort_copy(Iterator1 first, Iterator1, Iterator2 result_first, Iterator2 result_last) {
+Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last) {
     return _MSTL partial_sort_copy(first, result_first, result_last, _MSTL less<iter_value_t<Iterator1>>());
 }
 
+/// @cond
 MSTL_BEGIN_INNER__
+
+/**
+ * @brief 插入排序辅助函数
+ * @tparam Iterator 迭代器类型
+ * @tparam T 值类型
+ * @tparam Compare 比较函数类型
+ * @param last 插入位置
+ * @param value 要插入的值
+ * @param comp 比较函数对象
+ *
+ * 在已排序的子序列 [first, last) 中找到合适位置插入新元素。
+ */
 template <typename Iterator, typename T, typename Compare>
 void __insertion_sort_aux(Iterator last, T value, Compare comp) {
     Iterator next = last;
@@ -116,9 +241,22 @@ void __insertion_sort_aux(Iterator last, T value, Compare comp) {
     }
     *last = value;
 }
-MSTL_END_INNER__
 
-// insertion sort : Ot(N)~(N^2) Om(1) stable
+MSTL_END_INNER__
+/// @endcond
+
+/**
+ * @brief 插入排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 简单的稳定排序算法，适用于小规模或基本有序的数据。
+ *
+ * 将每个元素插入到前面已排序子序列的正确位置。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void insertion_sort(Iterator first, Iterator last, Compare comp) {
@@ -134,15 +272,31 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 插入排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void insertion_sort(Iterator first, Iterator last) {
     return _MSTL insertion_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-
-static constexpr size_t SORT_DISPATCH_THRESHOLD = 16;
-
-// introspective sort : Ot(NlogN) Om(logN) unstable
+/**
+ * @brief 内省排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param depth_limit 递归深度限制
+ * @param comp 比较函数对象
+ *
+ * 结合了快速排序、堆排序和插入排序的混合排序算法：
+ * 1. 使用快速排序递归分区
+ * 2. 当递归深度过大时切换到堆排序，避免快速排序的最坏情况
+ * 3. 对小规模子序列使用插入排序
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare comp) {
@@ -159,12 +313,33 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare 
     }
 }
 
+/**
+ * @brief 内省排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param depth_limit 递归深度限制
+ */
 template <typename Iterator>
 void introspective_sort(Iterator first, Iterator last, int depth_limit) {
     return _MSTL introspective_sort(first, last, depth_limit, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// quick sort : Ot(NlogN) Om(1) unstable
+/**
+ * @brief 快速排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 经典的分治排序算法：
+ * 1. 选择基准值，这里选择最后一个元素
+ * 2. 分区：将小于基准值的放在左边，大于等于的放在右边
+ * 3. 递归排序左右两部分
+ *
+ * @note 此实现容易在已排序数据上出现最坏情况。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void quick_sort(Iterator first, Iterator last, Compare comp) {
@@ -177,16 +352,34 @@ void quick_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 快速排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void quick_sort(Iterator first, Iterator last) {
     return _MSTL quick_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-
+/// @cond
 MSTL_BEGIN_INNER__
+
+/**
+ * @brief 内省排序分发函数
+ * @tparam Iterator 迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param depth_limit 递归深度限制
+ * @param comp 比较函数对象
+ *
+ * 标准排序的内部实现，处理大规模数据的分区递归。
+ */
 template <typename Iterator, typename Compare>
 void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compare comp) {
-    while (last - first > SORT_DISPATCH_THRESHOLD) {
+    while (last - first > MEMORY_ALIGN_THRESHHOLD) {
         if (depth_limit == 0) {
             _MSTL partial_sort(first, last, last, comp);
             return;
@@ -198,17 +391,44 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
         last = cut;
     }
 }
-MSTL_END_INNER__
 
-// standard sort : Ot(NlogN) Om(logN) unstable
+/**
+ * @brief 计算以2为底的对数整数部分
+ * @param x 正整数
+ * @return ⌊log₂(x)⌋
+ *
+ * 用于计算递归深度限制。
+ */
+MSTL_CONST_FUNCTION constexpr int __log2_int(int x) noexcept {
+    int k = 0;
+    for (; x > 1; x >>= 1) ++k;
+    return k;
+}
+
+MSTL_END_INNER__
+/// @endcond
+
+/**
+ * @brief 标准排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * MSTL的标准排序算法，基于内省排序实现：
+ * 1. 对大规模数据使用内省排序（快速排序+堆排序）
+ * 2. 对阈值内的小规模数据使用插入排序
+ * 3. 对大规模数据中的小尾部使用优化的插入排序
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
-    _INNER __intro_sort_dispatch(first, last, static_cast<int>(_MSTL logarithm_2_integer(last - first)) * 2, comp);
-    if (last - first > SORT_DISPATCH_THRESHOLD) {
-        _MSTL insertion_sort(first, first + SORT_DISPATCH_THRESHOLD, comp);
-        for (Iterator i = first + SORT_DISPATCH_THRESHOLD; i != last; ++i) {
+    _INNER __intro_sort_dispatch(first, last, _INNER __log2_int(last - first) * 2, comp);
+    if (last - first > MEMORY_ALIGN_THRESHHOLD) {
+        _MSTL insertion_sort(first, first + MEMORY_ALIGN_THRESHHOLD, comp);
+        for (Iterator i = first + MEMORY_ALIGN_THRESHHOLD; i != last; ++i) {
 	        _INNER __insertion_sort_aux(i, *i, comp);
         }
     }
@@ -217,13 +437,30 @@ void sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 标准排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void sort(Iterator first, Iterator last) {
     return _MSTL sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-
-// nth element : Ot(N)~(N^2) Om(1) unstable
+/**
+ * @brief 第n个元素选择
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 范围起始
+ * @param nth 目标位置（0-based）
+ * @param last 范围结束
+ * @param comp 比较函数对象
+ *
+ * 重新排列范围 [first, last)，使得位置 nth 的元素是排序后的正确元素，
+ * 并且 nth 之前的元素都不大于它，之后的元素都不小于它。
+ * 使用快速选择算法实现。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
@@ -236,10 +473,19 @@ void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp) {
     _MSTL insertion_sort(first, last, comp);
 }
 
+/**
+ * @brief 第n个元素选择
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 范围起始
+ * @param nth 目标位置
+ * @param last 范围结束
+ */
 template <typename Iterator>
 void nth_element(Iterator first, Iterator nth, Iterator last) {
     return _MSTL nth_element(first, nth, last, _MSTL less<iter_value_t<Iterator>>());
 }
+
+/** @} */ // SortAlgorithms
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_SORT_HPP__

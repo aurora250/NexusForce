@@ -82,9 +82,9 @@ private:
 public:
     json_builder() = default;
     json_builder(const json_builder&) = delete;
-    json_builder& operator=(const json_builder&) = delete;
+    json_builder& operator =(const json_builder&) = delete;
     json_builder(json_builder&&) = default;
-    json_builder& operator=(json_builder&&) = default;
+    json_builder& operator =(json_builder&&) = default;
 
     json_builder& begin_object();
     json_builder& begin_array();
