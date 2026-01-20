@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
+  ['压缩对_0',['压缩对',['../group___compressed_pair.html',1,'']]]
 ];

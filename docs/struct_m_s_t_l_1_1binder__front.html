@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: MSTL::binder_front&lt; Func, BoundArgs &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('struct_m_s_t_l_1_1binder__front.html','','struct_m_s_t_l_1_1binder__front-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">MSTL::binder_front&lt; Func, BoundArgs &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___function_binders.html">绑定函数</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>前向参数绑定器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="bind_8hpp_source.html">bind.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a0c0c091c46600909da4caf007493908f" id="r_a0c0c091c46600909da4caf007493908f"><td class="memTemplParams" colspan="2">template&lt;typename Fn, typename... Args&gt; </td></tr>
+<tr class="memitem:a0c0c091c46600909da4caf007493908f template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0c0c091c46600909da4caf007493908f">binder_front</a> (int p, Fn &amp;&amp;func, Args &amp;&amp;... args) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__constructible.html">is_nothrow_constructible</a>&lt; Func, Fn &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__constructible.html">is_nothrow_constructible</a>&lt; BoundArgs, Args &gt;... &gt;::value)</td></tr>
+<tr class="memdesc:a0c0c091c46600909da4caf007493908f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a9cfdcc95c93dd746f091f3ce9acbebb7" id="r_a9cfdcc95c93dd746f091f3ce9acbebb7"><td class="memItemLeft"><a id="a9cfdcc95c93dd746f091f3ce9acbebb7" name="a9cfdcc95c93dd746f091f3ce9acbebb7"></a>
+&#160;</td><td class="memItemRight"><b>binder_front</b> (const binder_front &amp;)=default</td></tr>
+<tr class="memdesc:a9cfdcc95c93dd746f091f3ce9acbebb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制构造函数 <br /></td></tr>
+<tr class="memitem:ae23e57d88a23eac9f1e5a25b39679be4" id="r_ae23e57d88a23eac9f1e5a25b39679be4"><td class="memItemLeft"><a id="ae23e57d88a23eac9f1e5a25b39679be4" name="ae23e57d88a23eac9f1e5a25b39679be4"></a>
+<a class="el" href="#a0c0c091c46600909da4caf007493908f">binder_front</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#a0c0c091c46600909da4caf007493908f">binder_front</a> &amp;)=default</td></tr>
+<tr class="memdesc:ae23e57d88a23eac9f1e5a25b39679be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制赋值运算符 <br /></td></tr>
+<tr class="memitem:a2666c6729d7404cde50a76f37cac85da" id="r_a2666c6729d7404cde50a76f37cac85da"><td class="memItemLeft"><a id="a2666c6729d7404cde50a76f37cac85da" name="a2666c6729d7404cde50a76f37cac85da"></a>
+&#160;</td><td class="memItemRight"><b>binder_front</b> (binder_front &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a2666c6729d7404cde50a76f37cac85da"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数 <br /></td></tr>
+<tr class="memitem:acdc1e50d8cac336be07b9356889f9b17" id="r_acdc1e50d8cac336be07b9356889f9b17"><td class="memItemLeft"><a id="acdc1e50d8cac336be07b9356889f9b17" name="acdc1e50d8cac336be07b9356889f9b17"></a>
+<a class="el" href="#a0c0c091c46600909da4caf007493908f">binder_front</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#a0c0c091c46600909da4caf007493908f">binder_front</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:acdc1e50d8cac336be07b9356889f9b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
+<tr class="memitem:aa8ce199c10b5e3988e4d56e18059cc56" id="r_aa8ce199c10b5e3988e4d56e18059cc56"><td class="memItemLeft"><a id="aa8ce199c10b5e3988e4d56e18059cc56" name="aa8ce199c10b5e3988e4d56e18059cc56"></a>
+&#160;</td><td class="memItemRight"><b>~binder_front</b> ()=default</td></tr>
+<tr class="memdesc:aa8ce199c10b5e3988e4d56e18059cc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a5d8bf5fc0f18e66131e011d03f7489c7" id="r_a5d8bf5fc0f18e66131e011d03f7489c7"><td class="memTemplParams" colspan="2">template&lt;typename... CallArgs&gt; </td></tr>
+<tr class="memitem:a5d8bf5fc0f18e66131e011d03f7489c7 template"><td class="memItemLeft">constexpr <a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; Func &amp;, BoundArgs &amp;..., CallArgs... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5d8bf5fc0f18e66131e011d03f7489c7">operator()</a> (CallArgs &amp;&amp;... call_args) &amp;noexcept(<a class="el" href="group___invocable_checks.html#ga865dbe16cb81f2e8b16393c1322cae03">is_nothrow_invocable_v</a>&lt; Func &amp;, BoundArgs &amp;..., CallArgs... &gt;)</td></tr>
+<tr class="memdesc:a5d8bf5fc0f18e66131e011d03f7489c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">左值调用操作符  <br /></td></tr>
+<tr class="memitem:a0efd7d0f20e157ed564659f7c89dcd05" id="r_a0efd7d0f20e157ed564659f7c89dcd05"><td class="memTemplParams" colspan="2">template&lt;typename... CallArgs&gt; </td></tr>
+<tr class="memitem:a0efd7d0f20e157ed564659f7c89dcd05 template"><td class="memItemLeft">constexpr <a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; const Func &amp;, const BoundArgs &amp;..., CallArgs... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0efd7d0f20e157ed564659f7c89dcd05">operator()</a> (CallArgs &amp;&amp;... call_args) const &amp;noexcept(<a class="el" href="group___invocable_checks.html#ga865dbe16cb81f2e8b16393c1322cae03">is_nothrow_invocable_v</a>&lt; const Func &amp;, const BoundArgs &amp;..., CallArgs... &gt;)</td></tr>
+<tr class="memdesc:a0efd7d0f20e157ed564659f7c89dcd05"><td class="mdescLeft">&#160;</td><td class="mdescRight">const左值调用操作符  <br /></td></tr>
+<tr class="memitem:a0a2b5427001dd5ade047355e372e2e81" id="r_a0a2b5427001dd5ade047355e372e2e81"><td class="memTemplParams" colspan="2">template&lt;typename... CallArgs&gt; </td></tr>
+<tr class="memitem:a0a2b5427001dd5ade047355e372e2e81 template"><td class="memItemLeft">constexpr <a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; Func, BoundArgs..., CallArgs... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0a2b5427001dd5ade047355e372e2e81">operator()</a> (CallArgs &amp;&amp;... call_args) &amp;&amp;noexcept(<a class="el" href="group___invocable_checks.html#ga865dbe16cb81f2e8b16393c1322cae03">is_nothrow_invocable_v</a>&lt; Func, BoundArgs..., CallArgs... &gt;)</td></tr>
+<tr class="memdesc:a0a2b5427001dd5ade047355e372e2e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">右值调用操作符  <br /></td></tr>
+<tr class="memitem:aff17d0f41757490211a7bef4a1cb1653" id="r_aff17d0f41757490211a7bef4a1cb1653"><td class="memTemplParams" colspan="2">template&lt;typename... CallArgs&gt; </td></tr>
+<tr class="memitem:aff17d0f41757490211a7bef4a1cb1653 template"><td class="memItemLeft">constexpr <a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; const Func, const BoundArgs..., CallArgs... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aff17d0f41757490211a7bef4a1cb1653">operator()</a> (CallArgs &amp;&amp;... call_args) const &amp;&amp;noexcept(<a class="el" href="group___invocable_checks.html#ga865dbe16cb81f2e8b16393c1322cae03">is_nothrow_invocable_v</a>&lt; const Func, const BoundArgs..., CallArgs... &gt;)</td></tr>
+<tr class="memdesc:aff17d0f41757490211a7bef4a1cb1653"><td class="mdescLeft">&#160;</td><td class="mdescRight">const右值调用操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Func, typename... BoundArgs&gt;<br />
+class MSTL::binder_front&lt; Func, BoundArgs &gt;</div><p>前向参数绑定器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">BoundArgs</td><td>绑定的参数类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将参数绑定到函数的前几个位置，不支持占位符参数重排。 </p>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00838">838</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a0c0c091c46600909da4caf007493908f" name="a0c0c091c46600909da4caf007493908f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c0c091c46600909da4caf007493908f">&#9670;&#160;</a></span>binder_front()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... BoundArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename Fn, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1binder__front.html">MSTL::binder_front</a>&lt; Func, BoundArgs &gt;::binder_front </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Fn &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>函数类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>绑定参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>占位符参数 </td></tr>
+    <tr><td class="paramname">func</td><td>要绑定的函数对象 </td></tr>
+    <tr><td class="paramname">args</td><td>绑定的参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00880">880</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a0a2b5427001dd5ade047355e372e2e81" name="a0a2b5427001dd5ade047355e372e2e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a2b5427001dd5ade047355e372e2e81">&#9670;&#160;</a></span>operator()() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... BoundArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename... CallArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; Func, BoundArgs..., CallArgs... &gt; <a class="el" href="struct_m_s_t_l_1_1binder__front.html">MSTL::binder_front</a>&lt; Func, BoundArgs &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">CallArgs &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>call_args</em></span></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>右值调用操作符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CallArgs</td><td>调用参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">call_args</td><td>调用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>函数调用结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00929">929</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5d8bf5fc0f18e66131e011d03f7489c7" name="a5d8bf5fc0f18e66131e011d03f7489c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8bf5fc0f18e66131e011d03f7489c7">&#9670;&#160;</a></span>operator()() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... BoundArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename... CallArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; Func &amp;, BoundArgs &amp;..., CallArgs... &gt; <a class="el" href="struct_m_s_t_l_1_1binder__front.html">MSTL::binder_front</a>&lt; Func, BoundArgs &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">CallArgs &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>call_args</em></span></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>左值调用操作符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CallArgs</td><td>调用参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">call_args</td><td>调用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>函数调用结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00903">903</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aff17d0f41757490211a7bef4a1cb1653" name="aff17d0f41757490211a7bef4a1cb1653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff17d0f41757490211a7bef4a1cb1653">&#9670;&#160;</a></span>operator()() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... BoundArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename... CallArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; const Func, const BoundArgs..., CallArgs... &gt; <a class="el" href="struct_m_s_t_l_1_1binder__front.html">MSTL::binder_front</a>&lt; Func, BoundArgs &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">CallArgs &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>call_args</em></span></td><td>)</td>
+          <td> const &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>const右值调用操作符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CallArgs</td><td>调用参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">call_args</td><td>调用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>函数调用结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00942">942</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0efd7d0f20e157ed564659f7c89dcd05" name="a0efd7d0f20e157ed564659f7c89dcd05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0efd7d0f20e157ed564659f7c89dcd05">&#9670;&#160;</a></span>operator()() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... BoundArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename... CallArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___invoke_result.html#ga067f87a29f8312c1ec3a298da9e10ce4">invoke_result_t</a>&lt; const Func &amp;, const BoundArgs &amp;..., CallArgs... &gt; <a class="el" href="struct_m_s_t_l_1_1binder__front.html">MSTL::binder_front</a>&lt; Func, BoundArgs &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">CallArgs &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>call_args</em></span></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>const左值调用操作符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CallArgs</td><td>调用参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">call_args</td><td>调用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>函数调用结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bind_8hpp_source.html">bind.hpp</a> 第 <a class="el" href="bind_8hpp_source.html#l00916">916</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="bind_8hpp_source.html">bind.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>MSTL</b></li><li class="navelem"><a href="struct_m_s_t_l_1_1binder__front.html">binder_front</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -184,35 +184,34 @@ $(function(){initNavTree('database__pool_8hpp_source.html','',''); });
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">catch</span> (...) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keyword">delete</span> raw_conn;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            cv_.notify_all();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">auto</span> conn_ptr = <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> shared_ptr&lt;T&gt;(</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw_conn),</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        [<span class="keyword">this</span>](T* p) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock1(queue_mtx_);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">if</span> (p-&gt;is_valid()) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                p-&gt;refresh_alive();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                connect_queue_.push(p);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keyword">delete</span> p;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            cv_.notify_all();</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    );</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    cv_.notify_all();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> conn_ptr;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_DATABASE_DATABASE_POOL_HPP__</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keyword">delete</span> raw_conn;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            cv_.notify_all();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">auto</span> conn_ptr = <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> shared_ptr&lt;T&gt;(</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw_conn),</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        [<span class="keyword">this</span>](T* p) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock1(queue_mtx_);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">if</span> (p-&gt;is_valid()) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                p-&gt;refresh_alive();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                connect_queue_.push(p);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keyword">delete</span> p;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            cv_.notify_all();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    );</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    cv_.notify_all();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> conn_ptr;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_DATABASE_DATABASE_POOL_HPP__</span></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>

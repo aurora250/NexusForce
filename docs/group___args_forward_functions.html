@@ -156,7 +156,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>删除const右值重载以防止悬垂引用 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02988">addressof()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03103">addressof()</a>.</p>
 
 </div>
 </div>
@@ -198,14 +198,14 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>对象的指针 </dd></dl>
-<dl class="section note"><dt>注解</dt><dd>可避免重载的operator&amp;干扰 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>对象的指针</dd></dl>
+<p>可避免重载的operator&amp;干扰 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l02988">2988</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03103">3103</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02988">addressof()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03103">addressof()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#ga338dedb8806a2e3cbd33318a307b0cb2">addressof()</a>, <a class="el" href="type__traits_8hpp_source.html#l02988">addressof()</a>, <a class="el" href="pointer__traits_8hpp_source.html#l00232">MSTL::pointer_traits&lt; T * &gt;::pointer_to()</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00085">MSTL::reference_wrapper&lt; T &gt;::reference_wrapper()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#ga338dedb8806a2e3cbd33318a307b0cb2">addressof()</a>, <a class="el" href="type__traits_8hpp_source.html#l03103">addressof()</a>, <a class="el" href="allocated__ptr_8hpp_source.html#l00045">MSTL::allocated_ptr&lt; Alloc &gt;::allocated_ptr()</a>, <a class="el" href="allocated__ptr_8hpp_source.html#l00057">MSTL::allocated_ptr&lt; Alloc &gt;::allocated_ptr()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00045">MSTL::back_insert_iterator&lt; Container &gt;::back_insert_iterator()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00112">MSTL::front_insert_iterator&lt; Container &gt;::front_insert_iterator()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00181">MSTL::insert_iterator&lt; Container &gt;::insert_iterator()</a>, <a class="el" href="variant_8hpp_source.html#l00297">MSTL::variant&lt; Types &gt;::operator=()</a>, <a class="el" href="variant_8hpp_source.html#l00321">MSTL::variant&lt; Types &gt;::operator=()</a>, <a class="el" href="pointer__traits_8hpp_source.html#l00119">MSTL::pointer_traits&lt; T * &gt;::pointer_to()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00084">MSTL::reference_wrapper&lt; T &gt;::reference_wrapper()</a> , 以及 <a class="el" href="variant_8hpp_source.html#l00561">MSTL::variant&lt; Types &gt;::swap()</a>.</p>
 
 </div>
 </div>
@@ -248,17 +248,12 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>转发后的引用 </dd></dl>
-<dl class="exception"><dt>异常</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">如果T是左值引用类型，触发静态断言</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>注解</dt><dd>用于实现完美转发，保持值的类别 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果T是左值引用类型，触发静态断言</dd></dl>
+<p>用于实现完美转发，保持值的类别 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l02949">2949</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03061">3061</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02936">forward()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l00031">MSTL::integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l00031">MSTL::integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a>.</p>
 
 </div>
 </div>
@@ -300,14 +295,14 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>转发后的引用 </dd></dl>
-<dl class="section note"><dt>注解</dt><dd>用于实现完美转发，保持值的类别 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>转发后的引用</dd></dl>
+<p>用于实现完美转发，保持值的类别 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l02936">2936</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03047">3047</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02936">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="type__traits_8hpp_source.html#l03960">exchange()</a>, <a class="el" href="type__traits_8hpp_source.html#l02949">forward()</a>, <a class="el" href="type__traits_8hpp_source.html#l02936">forward()</a>, <a class="el" href="invoke_8hpp_source.html#l00559">invoke()</a>, <a class="el" href="invoke_8hpp_source.html#l00603">invoke_r()</a>, <a class="el" href="call__wrapper_8hpp_source.html#l00062">MSTL::invoker&lt; tuple&lt; decay_t&lt; Types &gt;... &gt; &gt;::invoker()</a> , 以及 <a class="el" href="reference__wrapper_8hpp_source.html#l00119">MSTL::reference_wrapper&lt; T &gt;::operator()()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="bind_8hpp_source.html#l00778">bind()</a>, <a class="el" href="bind_8hpp_source.html#l00969">bind_front()</a>, <a class="el" href="bind_8hpp_source.html#l00541">MSTL::binder&lt; Func(BoundArgs...)&gt;::binder()</a>, <a class="el" href="bind_8hpp_source.html#l00880">MSTL::binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::binder_front()</a>, <a class="el" href="bind_8hpp_source.html#l00648">MSTL::bindrer&lt; Res, Func(BoundArgs...)&gt;::bindrer()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00087">MSTL::compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00102">MSTL::compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00236">MSTL::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00250">MSTL::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair()</a>, <a class="el" href="allocator__traits_8hpp_source.html#l00206">MSTL::allocator_traits&lt; rebind_alloc&lt; T &gt; &gt;::construct()</a>, <a class="el" href="construct_8hpp_source.html#l00034">construct()</a>, <a class="el" href="variant_8hpp_source.html#l00550">MSTL::variant&lt; Types &gt;::emplace()</a>, <a class="el" href="variant_8hpp_source.html#l00534">MSTL::variant&lt; Types &gt;::emplace()</a>, <a class="el" href="type__traits_8hpp_source.html#l04076">exchange()</a>, <a class="el" href="struct_m_s_t_l_1_1pair.html#a9d02d0c80596bcadd472f820c5ee044d">MSTL::pair&lt; const Key, T &gt;::explicit()</a>, <a class="el" href="struct_m_s_t_l_1_1pair.html#a439bf8dad65acef1091c140ae5b6beac">MSTL::pair&lt; const Key, T &gt;::explicit()</a>, <a class="el" href="struct_m_s_t_l_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4.html#ac2921e0cc09f842454893910f5bd900c">MSTL::tuple&lt; This, Rest... &gt;::explicit()</a>, <a class="el" href="type__traits_8hpp_source.html#l03061">forward()</a>, <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00749">forward_as_tuple()</a>, <a class="el" href="function_8hpp_source.html#l00362">MSTL::function&lt; Res(Args...)&gt;::function()</a>, <a class="el" href="pair_8hpp_source.html#l00712">get()</a>, <a class="el" href="pair_8hpp_source.html#l00670">get()</a>, <a class="el" href="invoke_8hpp_source.html#l00559">invoke()</a>, <a class="el" href="invoke_8hpp_source.html#l00603">invoke_r()</a>, <a class="el" href="call__wrapper_8hpp_source.html#l00062">MSTL::invoker&lt; tuple&lt; decay_t&lt; Types &gt;... &gt; &gt;::invoker()</a>, <a class="el" href="tuple_8hpp_source.html#l00791">make_from_tuple()</a>, <a class="el" href="pair_8hpp_source.html#l00442">make_pair()</a>, <a class="el" href="tuple_8hpp_source.html#l00725">make_tuple()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01011">make_unique()</a>, <a class="el" href="bind_8hpp_source.html#l00554">MSTL::binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00569">MSTL::binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00929">MSTL::binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00903">MSTL::binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00942">MSTL::binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00916">MSTL::binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00661">MSTL::bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00674">MSTL::bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="function_8hpp_source.html#l00457">MSTL::function&lt; Res(Args...)&gt;::operator()()</a>, <a class="el" href="reference__wrapper_8hpp_source.html#l00118">MSTL::reference_wrapper&lt; T &gt;::operator()()</a>, <a class="el" href="function_8hpp_source.html#l00418">MSTL::function&lt; Res(Args...)&gt;::operator=()</a>, <a class="el" href="pair_8hpp_source.html#l00368">MSTL::pair&lt; const Key, T &gt;::operator=()</a>, <a class="el" href="pair_8hpp_source.html#l00336">MSTL::pair&lt; const Key, T &gt;::operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00546">MSTL::tuple&lt; This, Rest... &gt;::operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00515">MSTL::tuple&lt; This, Rest... &gt;::operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00486">MSTL::tuple&lt; This, Rest... &gt;::operator=()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00357">MSTL::unique_ptr&lt; Res, result_base::Deleter &gt;&lt; result_base &gt;::operator=()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00544">MSTL::unique_ptr&lt; T[], Deleter &gt;::operator=()</a>, <a class="el" href="tuple_8hpp_source.html#l00286">MSTL::tuple&lt; This, Rest... &gt;::tuple()</a>, <a class="el" href="tuple_8hpp_source.html#l00263">MSTL::tuple&lt; This, Rest... &gt;::tuple()</a>, <a class="el" href="tuple_8hpp_source.html#l00851">tuple_cat()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00332">MSTL::unique_ptr&lt; Res, result_base::Deleter &gt;&lt; result_base &gt;::unique_ptr()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00519">MSTL::unique_ptr&lt; T[], Deleter &gt;::unique_ptr()</a>, <a class="el" href="variant_8hpp_source.html#l00370">MSTL::variant&lt; Types &gt;::variant()</a>, <a class="el" href="variant_8hpp_source.html#l00338">MSTL::variant&lt; Types &gt;::variant()</a>, <a class="el" href="variant_8hpp_source.html#l00356">MSTL::variant&lt; Types &gt;::variant()</a>, <a class="el" href="variant_8hpp_source.html#l00272">MSTL::variant&lt; Types &gt;::variant()</a>, <a class="el" href="variant_8hpp_source.html#l00409">MSTL::variant&lt; Types &gt;::visit()</a> , 以及 <a class="el" href="variant_8hpp_source.html#l00395">MSTL::variant&lt; Types &gt;::visit()</a>.</p>
 
 </div>
 </div>
@@ -335,14 +330,14 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>检查当前上下文是否在常量求值中 </p>
-<dl class="section return"><dt>返回</dt><dd>如果在常量求值上下文中返回true，否则返回false </dd></dl>
-<dl class="section note"><dt>注解</dt><dd>用于区分编译时和运行时 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>如果在常量求值上下文中返回true，否则返回false</dd></dl>
+<p>用于区分编译时和运行时 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03007">3007</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03123">3123</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">is_constant_evaluated()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03123">is_constant_evaluated()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="type__traits_8hpp_source.html#l03007">is_constant_evaluated()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="standard__allocator_8hpp_source.html#l00178">allocate()</a>, <a class="el" href="standard__allocator_8hpp_source.html#l00280">deallocate()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03123">is_constant_evaluated()</a>.</p>
 
 </div>
 </div>
@@ -384,10 +379,12 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>转换后的右值引用 </dd></dl>
-<dl class="section note"><dt>注解</dt><dd>用于实现移动语义 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>转换后的右值引用</dd></dl>
+<p>用于实现移动语义 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l02962">2962</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03075">3075</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00276">move()</a>.</p>
 
 </div>
 </div>
@@ -429,14 +426,14 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>如果可以安全移动则返回右值引用，否则返回const左值引用 </dd></dl>
-<dl class="section note"><dt>注解</dt><dd>如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>如果可以安全移动则返回右值引用，否则返回const左值引用</dd></dl>
+<p>如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常 </p>
 
-<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l02976">2976</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 第 <a class="el" href="type__traits_8hpp_source.html#l03090">3090</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l02976">move_if_noexcept()</a>.</p>
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00276">move()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03090">move_if_noexcept()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="type__traits_8hpp_source.html#l02976">move_if_noexcept()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="type__traits_8hpp_source.html#l03090">move_if_noexcept()</a>.</p>
 
 </div>
 </div>

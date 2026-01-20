@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]]
+  ['元组应用函数_0',['元组应用函数',['../group___apply_function.html',1,'']]],
+  ['元组_1',['元组',['../group___tuple.html',1,'']]]
 ];

@@ -105,13 +105,13 @@ $(function(){initNavTree('xor_8hpp_source.html','',''); });
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>MSTL_ALWAYS_INLINE_INLINE bstring xor_encrypt(<span class="keyword">const</span> bstring&amp; data, <span class="keyword">const</span> bstring&amp; key) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">return</span> XOR::encrypt(data.view(), key.view());</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">return</span> XOR::encrypt(<a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>.view(), key.view());</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> xor_encrypt(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; data, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> to_string(xor_encrypt(to_bstring(data), to_bstring(key)));</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>MSTL_ALWAYS_INLINE_INLINE bstring xor_decrypt(<span class="keyword">const</span> bstring&amp; data, <span class="keyword">const</span> bstring&amp; key) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> XOR::decrypt(data.view(), key.view());</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> XOR::decrypt(<a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>.view(), key.view());</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> xor_decrypt(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; data, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) {</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> to_string(xor_decrypt(to_bstring(data), to_bstring(key)));</div>
@@ -128,6 +128,7 @@ $(function(){initNavTree('xor_8hpp_source.html','',''); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ENCRYPT_XOR_HPP__</span></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gadd573cfd63b0a7c52e40c5beace90159"><div class="ttname"><a href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

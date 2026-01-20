@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['size_5ft_0',['size_t',['../group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da',1,'MSTL']]],
-  ['ssize_5ft_1',['ssize_t',['../group___platform_dependent_types.html#ga134a8512d3e04fab23eebc9dba3cff14',1,'MSTL']]]
+  ['package_5ft_0',['package_t',['../group___base_type_properties.html#ga95f59a612024e47f98b2eda489c924ae',1,'MSTL']]],
+  ['peta_1',['peta',['../group___s_i_units.html#gaf53c1f612cfd2827fc3f561cf3af71df',1,'MSTL']]],
+  ['pico_2',['pico',['../group___s_i_units.html#ga70734bbda57ebbceb2dee648396685a5',1,'MSTL']]],
+  ['pointer_3',['pointer',['../group___insert_iterators.html#gadf2186c10a752206d2f29fd8d691713c',1,'MSTL::back_insert_iterator::pointer'],['../group___insert_iterators.html#ga801de446d768833950d88d311e8870b4',1,'MSTL::front_insert_iterator::pointer'],['../group___insert_iterators.html#gaab8f977c74b68865a3de332543db52bc',1,'MSTL::insert_iterator::pointer'],['../struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ac38b90bf64f7a0e3bb3c53a47473d27e',1,'MSTL::iterator_traits&lt; T * &gt;::pointer'],['../class_m_s_t_l_1_1normal__iterator.html#aa39d50ece167c5de853d9305e356ea4f',1,'MSTL::normal_iterator::pointer'],['../class_m_s_t_l_1_1reverse__iterator.html#abeb7c79c7549b18e4d15ee3ae620926b',1,'MSTL::reverse_iterator::pointer'],['../struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0',1,'MSTL::allocated_ptr::pointer'],['../class_m_s_t_l_1_1standard__allocator.html#ae406987891618f2fb3c44e4ba95c0c9c',1,'MSTL::standard_allocator::pointer'],['../struct_m_s_t_l_1_1temporary__buffer.html#aed7fedfe06ebc8cd94c7722f05373f19',1,'MSTL::temporary_buffer::pointer'],['../class_m_s_t_l_1_1unique__ptr.html#af61386b39d7178247d28b31cf88a47f1',1,'MSTL::unique_ptr::pointer'],['../class_m_s_t_l_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a7837967ad6ca8c29077b0bd89a6510de',1,'MSTL::unique_ptr&lt; T[], Deleter &gt;::pointer'],['../struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a6f0634f259943d6932db8d232ecc722b',1,'MSTL::pointer_traits&lt; T * &gt;::pointer']]],
+  ['pointer_5frebind_4',['pointer_rebind',['../group___pointer_traits.html#gae3f62d93e57334ca0569e91f2db0b7b7',1,'MSTL']]],
+  ['ptrdiff_5ft_5',['ptrdiff_t',['../group___platform_dependent_types.html#gaef2ae7625283dcdcc22274c5a6afdf95',1,'MSTL']]]
 ];

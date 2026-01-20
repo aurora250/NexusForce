@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]]
+  ['位操作函数_0',['位操作函数',['../group___bit_manipulation.html',1,'']]],
+  ['位计数函数_1',['位计数函数',['../group___bit_counting.html',1,'']]]
 ];

@@ -94,8 +94,8 @@ $(function(){initNavTree('ipackage_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;icommon.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;inumeric.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="icommon_8hpp.html">icommon.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="inumeric_8hpp.html">inumeric.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> PackageT&gt;</div>
@@ -165,7 +165,7 @@ $(function(){initNavTree('ipackage_8hpp_source.html','',''); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> derived();</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">constexpr</span> T&amp; operator %=(<span class="keyword">const</span> T&amp; other) {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        value_ = <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> float_mod(value_, other.value_);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        value_ = <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___math_functions.html#gaf462ad49f7c6d20e6b8fa9042e743404">float_mod</a>(value_, other.value_);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">return</span> derived();</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
@@ -214,9 +214,12 @@ $(function(){initNavTree('ipackage_8hpp_source.html','',''); });
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
 <div class="ttc" id="agroup___core_types_html_ga8903a30b280266dc3760702758fa876a"><div class="ttname"><a href="group___core_types.html#ga8903a30b280266dc3760702758fa876a">MSTL::int64_t</a></div><div class="ttdeci">long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00063">types.hpp:63</a></div></div>
+<div class="ttc" id="agroup___math_functions_html_gaf462ad49f7c6d20e6b8fa9042e743404"><div class="ttname"><a href="group___math_functions.html#gaf462ad49f7c6d20e6b8fa9042e743404">MSTL::float_mod</a></div><div class="ttdeci">constexpr decimal_t float_mod(const decimal_t x, const decimal_t y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00256">math.hpp:256</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="aicommon_8hpp_html"><div class="ttname"><a href="icommon_8hpp.html">icommon.hpp</a></div><div class="ttdoc">基本接口基类</div></div>
+<div class="ttc" id="ainumeric_8hpp_html"><div class="ttname"><a href="inumeric_8hpp.html">inumeric.hpp</a></div><div class="ttdoc">MSTL数值操作接口</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

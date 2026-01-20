@@ -1,5 +1,27 @@
 var searchData=
 [
-  ['addressof_0',['addressof',['../group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c',1,'MSTL::addressof(T &amp;x) noexcept'],['../group___args_forward_functions.html#ga338dedb8806a2e3cbd33318a307b0cb2',1,'MSTL::addressof(const T &amp;&amp;)=delete']]],
-  ['as_5fconst_1',['as_const',['../group___add_qualifiers.html#ga844276e06e16c6f4104f7882efad37e7',1,'MSTL']]]
+  ['absolute_0',['absolute',['../group___math_functions.html#ga0707a1dfc1adc9de2b8789c68f6c16e4',1,'MSTL::absolute(const T &amp;x) noexcept'],['../math_8hpp.html#ga0707a1dfc1adc9de2b8789c68f6c16e4',1,'MSTL::absolute(const T &amp;x) noexcept']]],
+  ['accumulate_1',['accumulate',['../group___numeric_algorithms.html#ga02d03e260608e0a5ddba1c5836b5e6d0',1,'MSTL::accumulate(Iterator first, Iterator second, T init, BinaryOperation binary_op)'],['../group___numeric_algorithms.html#ga746aed8814525c9e78f941d6048d9212',1,'MSTL::accumulate(Iterator first, Iterator second, T init)']]],
+  ['addr_2',['addr',['../struct_m_s_t_l_1_1aligned__buffer.html#af66207bbaad4481fd32a8c742fac6c17',1,'MSTL::aligned_buffer::addr() noexcept'],['../struct_m_s_t_l_1_1aligned__buffer.html#abb753de94c9689e2d6a0b5b8d766e271',1,'MSTL::aligned_buffer::addr() const noexcept']]],
+  ['addressof_3',['addressof',['../group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c',1,'MSTL::addressof(T &amp;x) noexcept'],['../group___args_forward_functions.html#ga338dedb8806a2e3cbd33318a307b0cb2',1,'MSTL::addressof(const T &amp;&amp;)=delete']]],
+  ['adjacent_5fdifference_4',['adjacent_difference',['../group___numeric_algorithms.html#ga1b204c8e853c078bba76b02a7a831305',1,'MSTL::adjacent_difference(Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op)'],['../group___numeric_algorithms.html#ga03a5a3f90a7375332c736aeadeefe2d8',1,'MSTL::adjacent_difference(Iterator1 first, Iterator1 last, Iterator2 result)']]],
+  ['adjacent_5ffind_5',['adjacent_find',['../group___adjacent_algorithms.html#ga4f0f7034f0ef9adab29d78fc4d7a5201',1,'MSTL::adjacent_find(Iterator first, Iterator last, BinaryPredicate binary_pred)'],['../group___adjacent_algorithms.html#ga1c3915a3e669bca284cb67a52badb1b9',1,'MSTL::adjacent_find(Iterator first, Iterator last)']]],
+  ['adjust_5fheap_6',['adjust_heap',['../group___heap_algorithms.html#ga78cc13eecada7ddaf034e53164df0b5f',1,'MSTL::adjust_heap(Iterator first, Distance hole_index, Distance len, T value, Compare comp)'],['../group___heap_algorithms.html#ga573ae21e4562c2e1f86bcd0d3ede8efa',1,'MSTL::adjust_heap(Iterator first, Distance hole_index, Distance len, T value)']]],
+  ['advance_7',['advance',['../group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c',1,'MSTL']]],
+  ['aligned_5fbuffer_8',['aligned_buffer',['../struct_m_s_t_l_1_1aligned__buffer.html#a67ec9b2e9d16be460c8d8eca968604f6',1,'MSTL::aligned_buffer::aligned_buffer()=default'],['../struct_m_s_t_l_1_1aligned__buffer.html#a8a6e0d62e8c207a5406b2d6f5469365c',1,'MSTL::aligned_buffer::aligned_buffer(nullptr_t null)']]],
+  ['all_5fof_9',['all_of',['../group___quantifier_algorithms.html#ga5a6069d2aab8a760639e5f142787b8ba',1,'MSTL']]],
+  ['allocate_10',['allocate',['../struct_m_s_t_l_1_1allocator__traits.html#ac6afa81e87a85a3a0ade3015dc295ace',1,'MSTL::allocator_traits::allocate()'],['../class_m_s_t_l_1_1standard__allocator.html#a769357b05b39e7acb037babd251c189e',1,'MSTL::standard_allocator::allocate(const size_type n)'],['../class_m_s_t_l_1_1standard__allocator.html#a057e00c12d541e2cd1b0c82b458f7d25',1,'MSTL::standard_allocator::allocate()'],['../group___memory_allocator.html#ga3749a0a8716fd03615513cc90f5410ea',1,'MSTL::allocate(const MSTL::inner::alloc_size_t bytes)']]],
+  ['allocate_5fguarded_11',['allocate_guarded',['../group___allocated_ptr.html#gadb2bc9a57e6ec651bbc12e979d173e8d',1,'MSTL']]],
+  ['allocated_5fptr_12',['allocated_ptr',['../struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712',1,'MSTL::allocated_ptr::allocated_ptr(Alloc &amp;alloc, pointer ptr) noexcept'],['../struct_m_s_t_l_1_1allocated__ptr.html#a99c7c60316ac188e02239d92c5738905',1,'MSTL::allocated_ptr::allocated_ptr(Alloc &amp;alloc, Ptr ptr)'],['../struct_m_s_t_l_1_1allocated__ptr.html#ac9d2487c8ac703499ecc7417ab558799',1,'MSTL::allocated_ptr::allocated_ptr(allocated_ptr &amp;&amp;guard) noexcept']]],
+  ['angular2radian_13',['angular2radian',['../group___math_functions.html#gac0179852a01f677723ccb7a7ac01958e',1,'MSTL']]],
+  ['any_5fof_14',['any_of',['../group___quantifier_algorithms.html#ga40bea820d58476797353ce7787033fbd',1,'MSTL']]],
+  ['apply_15',['apply',['../group___apply_function.html#ga31590119e0888c700145a4df32d8c802',1,'MSTL']]],
+  ['arccosine_16',['arccosine',['../group___math_functions.html#ga737c032a7c703ba2543e3e05c0739951',1,'MSTL']]],
+  ['arcsine_17',['arcsine',['../group___math_functions.html#gaccfca410919fe0f3883217760b54bf0a',1,'MSTL']]],
+  ['arctangent_18',['arctangent',['../group___math_functions.html#ga634ccbfa5afc962d40b0d351538f9c37',1,'MSTL']]],
+  ['around_5fmultiple_19',['around_multiple',['../group___math_functions.html#ga9b7f52b23b860cc9a6fbf6e6542a27bf',1,'MSTL']]],
+  ['around_5fpi_20',['around_pi',['../group___math_functions.html#ga41e3a8f6952fb1df2a2cc17255d74fdf',1,'MSTL']]],
+  ['around_5fzero_21',['around_zero',['../group___math_functions.html#ga09d42fc54e44ce0dd6e5c1303e630e3f',1,'MSTL']]],
+  ['as_5fconst_22',['as_const',['../group___add_qualifiers.html#ga844276e06e16c6f4104f7882efad37e7',1,'MSTL']]],
+  ['average_23',['average',['../group___math_functions.html#gaff12043e8048b61ce2f54472a5c4bf38',1,'MSTL']]]
 ];

@@ -92,28 +92,36 @@ $(function(){initNavTree('terminate_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">terminate.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_CONFIG_TERMINATE_HPP__</span></div>
+<a href="terminate_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_CONFIG_TERMINATE_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_CONFIG_TERMINATE_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="c_09_09config_8hpp.html">../config/c++config.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span>terminate_handler = void(*)();</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> MSTL_API set_terminate(terminate_handler handler) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>MSTL_NORETURN <span class="keywordtype">void</span> MSTL_API terminate() noexcept;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_CONFIG_TERMINATE_HPP__</span></div>
-<div class="ttc" id="ac_09_09config_8hpp_html"><div class="ttname"><a href="c_09_09config_8hpp.html">c++config.hpp</a></div><div class="ttdoc">MSTL核心配置头文件</div></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="c_09_09config_8hpp.html">../config/c++config.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">   27</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">terminate_handler</a> = void(*)();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___termination_functions.html#ga493930a849fe0f21b5ab333e7d44e58e">   35</a></span><span class="keywordtype">void</span> MSTL_API <a class="code hl_function" href="group___termination_functions.html#ga493930a849fe0f21b5ab333e7d44e58e">set_terminate</a>(<a class="code hl_typedef" href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">terminate_handler</a> handler) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___termination_functions.html#ga2de2acb748151205f868925803fb3105">   44</a></span>MSTL_NORETURN <span class="keywordtype">void</span> MSTL_API <a class="code hl_function" href="group___termination_functions.html#ga2de2acb748151205f868925803fb3105">terminate</a>() noexcept;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> <span class="comment">// TerminationFunctions</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_CONFIG_TERMINATE_HPP__</span></div>
+<div class="ttc" id="ac_09_09config_8hpp_html"><div class="ttname"><a href="c_09_09config_8hpp.html">c++config.hpp</a></div><div class="ttdoc">MSTL核心配置</div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___termination_functions_html_ga182f5defebceeaae0e1d2be2465bda7f"><div class="ttname"><a href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">MSTL::terminate_handler</a></div><div class="ttdeci">void(*)() terminate_handler</div><div class="ttdoc">终止处理函数指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00027">terminate.hpp:27</a></div></div>
+<div class="ttc" id="agroup___termination_functions_html_ga2de2acb748151205f868925803fb3105"><div class="ttname"><a href="group___termination_functions.html#ga2de2acb748151205f868925803fb3105">MSTL::terminate</a></div><div class="ttdeci">void terminate() noexcept</div><div class="ttdoc">调用当前终止处理函数</div></div>
+<div class="ttc" id="agroup___termination_functions_html_ga493930a849fe0f21b5ab333e7d44e58e"><div class="ttname"><a href="group___termination_functions.html#ga493930a849fe0f21b5ab333e7d44e58e">MSTL::set_terminate</a></div><div class="ttdeci">void set_terminate(terminate_handler handler) noexcept</div><div class="ttdoc">设置终止处理函数</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><b>terminate.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><a href="terminate_8hpp.html">terminate.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

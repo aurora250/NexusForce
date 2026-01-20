@@ -131,7 +131,7 @@ $(function(){initNavTree('md5_8hpp_source.html','',''); });
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> md5(<span class="keyword">const</span> bstring&amp; data) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> MD5::hash_hex(data.view());</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> MD5::hash_hex(<a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>.view());</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> md5(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; data) {</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> md5(to_bstring(data));</div>
@@ -145,7 +145,7 @@ $(function(){initNavTree('md5_8hpp_source.html','',''); });
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> md5(<span class="keyword">const</span> <span class="keywordtype">char</span>* data) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> md5(string_view{data});</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> md5(string_view{<a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>});</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
@@ -153,6 +153,7 @@ $(function(){initNavTree('md5_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___core_types_html_ga345d54be2f996584ff8d8362b3dfeb18"><div class="ttname"><a href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">MSTL::uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00086">types.hpp:86</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gadd573cfd63b0a7c52e40c5beace90159"><div class="ttname"><a href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

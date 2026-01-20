@@ -112,7 +112,7 @@ $(function(){initNavTree('hash_8hpp.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga9d305ddfdb14f92e48c71f0eff9d9208" id="r_ga9d305ddfdb14f92e48c71f0eff9d9208"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___f_n_v_hash.html#ga9d305ddfdb14f92e48c71f0eff9d9208">MSTL::FNV_hash</a> (const <a class="el" href="group___core_types.html#gaf6c09c1401d579c4be4001587052309e">byte_t</a> *first, const <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> count) noexcept</td></tr>
+<tr class="memitem:ga9d305ddfdb14f92e48c71f0eff9d9208" id="r_ga9d305ddfdb14f92e48c71f0eff9d9208"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___f_n_v_hash.html#ga9d305ddfdb14f92e48c71f0eff9d9208">MSTL::FNV_hash</a> (const <a class="el" href="group___core_types.html#gaf6c09c1401d579c4be4001587052309e">byte_t</a> *first, const <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> <a class="el" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>) noexcept</td></tr>
 <tr class="memdesc:ga9d305ddfdb14f92e48c71f0eff9d9208"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV-1a哈希算法  <br /></td></tr>
 <tr class="memitem:ga840e8c62a35334fc3a8a28c85d12dac9" id="r_ga840e8c62a35334fc3a8a28c85d12dac9"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___d_j_b2_hash.html#ga840e8c62a35334fc3a8a28c85d12dac9">MSTL::DJB2_hash</a> (const char *str, const <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> len) noexcept</td></tr>
 <tr class="memdesc:ga840e8c62a35334fc3a8a28c85d12dac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">DJB2哈希算法  <br /></td></tr>
@@ -123,10 +123,6 @@ $(function(){initNavTree('hash_8hpp.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 变量</h2></td></tr>
-<tr class="memitem:a743e1a90f2b8603feffb13e065a36aa8" id="r_a743e1a90f2b8603feffb13e065a36aa8"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a743e1a90f2b8603feffb13e065a36aa8">MSTL::constants::FNV_OFFSET_BASIS</a></td></tr>
-<tr class="memdesc:a743e1a90f2b8603feffb13e065a36aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的偏移基础值  <br /></td></tr>
-<tr class="memitem:adafb05171be8cffc05ea707d0b2faa85" id="r_adafb05171be8cffc05ea707d0b2faa85"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#adafb05171be8cffc05ea707d0b2faa85">MSTL::constants::FNV_PRIME</a> = 1099511628211ULL</td></tr>
-<tr class="memdesc:adafb05171be8cffc05ea707d0b2faa85"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的质数乘数  <br /></td></tr>
 <tr class="memitem:ga2b6bb68d19cdee24ee32e1c079c69205" id="r_ga2b6bb68d19cdee24ee32e1c079c69205"><td class="memTemplParams" colspan="2">
 template&lt;typename Key&gt; </td></tr>
 <tr class="memitem:ga2b6bb68d19cdee24ee32e1c079c69205 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><b>MSTL::is_nothrow_hashable_v</b> = <a class="el" href="struct_m_s_t_l_1_1is__nothrow__hashable.html">is_nothrow_hashable</a>&lt;Key&gt;::value</td></tr>
@@ -141,65 +137,7 @@ template&lt;typename Func, typename Arg&gt; </td></tr>
 <p>此文件提供了各种哈希算法的实现，包括FNV-1a、DJB2和MurmurHash等， 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。 </p>
 
 <p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 中定义.</p>
-</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">变量说明</h2>
-<a id="a743e1a90f2b8603feffb13e065a36aa8" name="a743e1a90f2b8603feffb13e065a36aa8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a743e1a90f2b8603feffb13e065a36aa8">&#9670;&#160;</a></span>FNV_OFFSET_BASIS</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t MSTL::constants::FNV_OFFSET_BASIS</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>初始值:</b><div class="fragment"><div class="line">                                      =</div>
-<div class="line"> </div>
-<div class="line">14695981039346656037ULL</div>
-</div><!-- fragment -->
-<p>FNV哈希算法的偏移基础值 </p>
-<dl class="section note"><dt>注解</dt><dd>根据平台位数使用不同的值，文档以64位为例。 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00063">63</a> 行定义.</p>
-
-</div>
-</div>
-<a id="adafb05171be8cffc05ea707d0b2faa85" name="adafb05171be8cffc05ea707d0b2faa85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adafb05171be8cffc05ea707d0b2faa85">&#9670;&#160;</a></span>FNV_PRIME</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t MSTL::constants::FNV_PRIME = 1099511628211ULL</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>FNV哈希算法的质数乘数 </p>
-<dl class="section note"><dt>注解</dt><dd>根据平台位数使用不同的值，文档以64位为例。 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00074">74</a> 行定义.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

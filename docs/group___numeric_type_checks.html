@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 数值类型检查</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___numeric_type_checks.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">数值类型检查 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>浮点数特性检查和特殊值判断  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga01b3ea85419167da0e1db1864d314b8e" id="r_ga01b3ea85419167da0e1db1864d314b8e"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga01b3ea85419167da0e1db1864d314b8e template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga01b3ea85419167da0e1db1864d314b8e">MSTL::signbit</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga01b3ea85419167da0e1db1864d314b8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取浮点数的符号位  <br /></td></tr>
+<tr class="memitem:ga9cd325a9932fe42f581445dc6b3a9070" id="r_ga9cd325a9932fe42f581445dc6b3a9070"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9cd325a9932fe42f581445dc6b3a9070 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9cd325a9932fe42f581445dc6b3a9070">MSTL::is_nan</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga9cd325a9932fe42f581445dc6b3a9070"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为NaN  <br /></td></tr>
+<tr class="memitem:ga9ba3daaaae4a479ce233006e973a4eb6" id="r_ga9ba3daaaae4a479ce233006e973a4eb6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9ba3daaaae4a479ce233006e973a4eb6 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9ba3daaaae4a479ce233006e973a4eb6">MSTL::is_pos_infinity</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga9ba3daaaae4a479ce233006e973a4eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为正无穷大  <br /></td></tr>
+<tr class="memitem:gad4558ba0cbda8e3a88cf47230f773b74" id="r_gad4558ba0cbda8e3a88cf47230f773b74"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad4558ba0cbda8e3a88cf47230f773b74 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gad4558ba0cbda8e3a88cf47230f773b74">MSTL::is_neg_infinity</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:gad4558ba0cbda8e3a88cf47230f773b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为负无穷大  <br /></td></tr>
+<tr class="memitem:gaaf37bcd8a7cfbfcc659ba06d5ad48269" id="r_gaaf37bcd8a7cfbfcc659ba06d5ad48269"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaaf37bcd8a7cfbfcc659ba06d5ad48269 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gaaf37bcd8a7cfbfcc659ba06d5ad48269">MSTL::is_infinity</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:gaaf37bcd8a7cfbfcc659ba06d5ad48269"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为无穷大  <br /></td></tr>
+<tr class="memitem:gac245a79a354eabed1aef8219d5234143" id="r_gac245a79a354eabed1aef8219d5234143"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac245a79a354eabed1aef8219d5234143 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gac245a79a354eabed1aef8219d5234143">MSTL::is_finite</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:gac245a79a354eabed1aef8219d5234143"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为有限值  <br /></td></tr>
+<tr class="memitem:ga1b099f6c5fe63bd50cd0c31d096513c9" id="r_ga1b099f6c5fe63bd50cd0c31d096513c9"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1b099f6c5fe63bd50cd0c31d096513c9 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga1b099f6c5fe63bd50cd0c31d096513c9">MSTL::is_normal</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga1b099f6c5fe63bd50cd0c31d096513c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为正规数  <br /></td></tr>
+<tr class="memitem:ga414fed8959bae5c06ed4c2eef5c487df" id="r_ga414fed8959bae5c06ed4c2eef5c487df"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga414fed8959bae5c06ed4c2eef5c487df template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga414fed8959bae5c06ed4c2eef5c487df">MSTL::is_subnormal</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga414fed8959bae5c06ed4c2eef5c487df"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为次正规数  <br /></td></tr>
+<tr class="memitem:ga6a5b75e3fdd5bd66577b3155f26734e1" id="r_ga6a5b75e3fdd5bd66577b3155f26734e1"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga6a5b75e3fdd5bd66577b3155f26734e1 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga6a5b75e3fdd5bd66577b3155f26734e1">MSTL::is_positive</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga6a5b75e3fdd5bd66577b3155f26734e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为正数  <br /></td></tr>
+<tr class="memitem:ga54bb6c0b93f74264d543b389bf9a3fb9" id="r_ga54bb6c0b93f74264d543b389bf9a3fb9"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga54bb6c0b93f74264d543b389bf9a3fb9 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga54bb6c0b93f74264d543b389bf9a3fb9">MSTL::is_negative</a> (const T x) noexcept</td></tr>
+<tr class="memdesc:ga54bb6c0b93f74264d543b389bf9a3fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查浮点数是否为负数  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>浮点数特性检查和特殊值判断 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gac245a79a354eabed1aef8219d5234143" name="gac245a79a354eabed1aef8219d5234143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac245a79a354eabed1aef8219d5234143">&#9670;&#160;</a></span>is_finite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_finite </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为有限值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是有限值则返回true，否则返回false</dd></dl>
+<p>有限值包括：正常数、负零、正零、次正规数、正规数。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00098">98</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00085">is_infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00051">is_nan()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00112">is_normal()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00128">is_subnormal()</a>.</p>
+
+</div>
+</div>
+<a id="gaaf37bcd8a7cfbfcc659ba06d5ad48269" name="gaaf37bcd8a7cfbfcc659ba06d5ad48269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaf37bcd8a7cfbfcc659ba06d5ad48269">&#9670;&#160;</a></span>is_infinity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_infinity </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为无穷大 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是无穷大则返回true，否则返回false </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>此函数不区分正无穷和负无穷 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="numeric__types_8hpp_source.html#l00085">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00073">is_neg_infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00062">is_pos_infinity()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00085">is_infinity()</a>.</p>
+
+</div>
+</div>
+<a id="ga9cd325a9932fe42f581445dc6b3a9070" name="ga9cd325a9932fe42f581445dc6b3a9070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9cd325a9932fe42f581445dc6b3a9070">&#9670;&#160;</a></span>is_nan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_nan </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为NaN </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是NaN则返回true，否则返回false</dd></dl>
+<p>NaN的特性：NaN != NaN 总是成立。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00051">51</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00051">is_nan()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00051">is_nan()</a>.</p>
+
+</div>
+</div>
+<a id="gad4558ba0cbda8e3a88cf47230f773b74" name="gad4558ba0cbda8e3a88cf47230f773b74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad4558ba0cbda8e3a88cf47230f773b74">&#9670;&#160;</a></span>is_neg_infinity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_neg_infinity </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为负无穷大 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是负无穷大则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00073">73</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00177">MSTL::numeric_traits&lt; T, Dummy &gt;::infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00073">is_neg_infinity()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00085">is_infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00073">is_neg_infinity()</a>.</p>
+
+</div>
+</div>
+<a id="ga54bb6c0b93f74264d543b389bf9a3fb9" name="ga54bb6c0b93f74264d543b389bf9a3fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54bb6c0b93f74264d543b389bf9a3fb9">&#9670;&#160;</a></span>is_negative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_negative </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为负数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是负数则返回true，否则返回false</dd></dl>
+<p>包括：负正规数、负次正规数、负无穷大、负零。</p>
+<dl class="section note"><dt>注解</dt><dd>此函数区分正零和负零。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00160">160</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="numeric__types_8hpp_source.html#l00160">is_negative()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00033">signbit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00160">is_negative()</a>.</p>
+
+</div>
+</div>
+<a id="ga1b099f6c5fe63bd50cd0c31d096513c9" name="ga1b099f6c5fe63bd50cd0c31d096513c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1b099f6c5fe63bd50cd0c31d096513c9">&#9670;&#160;</a></span>is_normal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_normal </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为正规数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是正规数则返回true，否则返回false</dd></dl>
+<p>正规数：绝对值大于等于最小正正规数的有限非零浮点数。 不包括：零、次正规数、无穷大、NaN。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00112">112</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="math_8hpp_source.html#l00119">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00112">is_normal()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00142">MSTL::numeric_traits&lt; T, Dummy &gt;::min()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00112">is_normal()</a>.</p>
+
+</div>
+</div>
+<a id="ga9ba3daaaae4a479ce233006e973a4eb6" name="ga9ba3daaaae4a479ce233006e973a4eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9ba3daaaae4a479ce233006e973a4eb6">&#9670;&#160;</a></span>is_pos_infinity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_pos_infinity </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为正无穷大 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是正无穷大则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00062">62</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00177">MSTL::numeric_traits&lt; T, Dummy &gt;::infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00062">is_pos_infinity()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00085">is_infinity()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00062">is_pos_infinity()</a>.</p>
+
+</div>
+</div>
+<a id="ga6a5b75e3fdd5bd66577b3155f26734e1" name="ga6a5b75e3fdd5bd66577b3155f26734e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6a5b75e3fdd5bd66577b3155f26734e1">&#9670;&#160;</a></span>is_positive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_positive </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为正数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是正数则返回true，否则返回false</dd></dl>
+<p>包括：正正规数、正次正规数、正无穷大、正零。</p>
+<dl class="section note"><dt>注解</dt><dd>此函数区分正零和负零。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00145">145</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="numeric__types_8hpp_source.html#l00145">is_positive()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00033">signbit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00145">is_positive()</a>.</p>
+
+</div>
+</div>
+<a id="ga414fed8959bae5c06ed4c2eef5c487df" name="ga414fed8959bae5c06ed4c2eef5c487df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga414fed8959bae5c06ed4c2eef5c487df">&#9670;&#160;</a></span>is_subnormal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_subnormal </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查浮点数是否为次正规数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x是次正规数则返回true，否则返回false</dd></dl>
+<p>次正规数（非正规数）：绝对值小于最小正正规数的非零浮点数。 用于表示接近零的非常小的数值。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00128">128</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="math_8hpp_source.html#l00119">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00098">is_finite()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00128">is_subnormal()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00142">MSTL::numeric_traits&lt; T, Dummy &gt;::min()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00128">is_subnormal()</a>.</p>
+
+</div>
+</div>
+<a id="ga01b3ea85419167da0e1db1864d314b8e" name="ga01b3ea85419167da0e1db1864d314b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga01b3ea85419167da0e1db1864d314b8e">&#9670;&#160;</a></span>signbit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga7bd8a76b5c201bf0354597ceee72bc39">is_floating_point_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::signbit </td>
+          <td>(</td>
+          <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取浮点数的符号位 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>浮点数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>待检查的浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果x为负数或负零则返回true，否则返回false</dd></dl>
+<p>通过检查浮点数的二进制表示中的符号位来判断其符号。</p>
+<dl class="section note"><dt>注解</dt><dd>此函数区分正零和负零。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="numeric__types_8hpp_source.html">numeric_types.hpp</a> 第 <a class="el" href="numeric__types_8hpp_source.html#l00033">33</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00033">signbit()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric__types_8hpp_source.html#l00160">is_negative()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00145">is_positive()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00033">signbit()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

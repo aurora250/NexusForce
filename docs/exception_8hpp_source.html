@@ -92,115 +92,168 @@ $(function(){initNavTree('exception_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">exception.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_CONFIG_EXCEPTION_HPP__</span></div>
+<a href="exception_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_CONFIG_EXCEPTION_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_CONFIG_EXCEPTION_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../memory/unique_ptr.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifdef MSTL_SUPPORT_CUDA__</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cuda_runtime.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">    explicit THIS(const char* info = INFO, const char* type = static_type) noexcept \</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">        : BASE(info, type) {} \</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">    explicit THIS(const exception&amp; e) : BASE(e) {}</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">    virtual ~CLASS() = default;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define __MSTL_ERROR_FINAL_DESTRUCTOR(CLASS) \</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">    ~CLASS() override = default;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define __MSTL_ERROR_TYPE(CLASS) \</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">    static constexpr auto static_type = #CLASS;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">    struct MSTL_API THIS : BASE { \</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">        __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">        __MSTL_ERROR_DERIVED_DESTRUCTOR(THIS) \</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">        __MSTL_ERROR_TYPE(THIS) \</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">    };</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="cstring_8hpp.html">../string/cstring.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="memory_8hpp.html">../memory/memory.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">    explicit THIS(const char* info = INFO, const char* type = static_type) noexcept \</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">        : BASE(info, type) {} \</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">    explicit THIS(const exception&amp; e) : BASE(e) {}</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">    virtual ~CLASS() = default;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define MSTL_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO) \</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">    struct MSTL_API THIS final : BASE { \</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">        __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">        __MSTL_ERROR_FINAL_DESTRUCTOR(THIS) \</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">        __MSTL_ERROR_TYPE(THIS) \</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">    };</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">struct </span>MSTL_API exception {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">struct </span>impl;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    unique_ptr&lt;impl&gt; ptr_;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">explicit</span> exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = static_type, <span class="keyword">const</span> <span class="keywordtype">char</span>* type = static_type);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    exception(<span class="keyword">const</span> exception&amp;);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    exception&amp; operator =(<span class="keyword">const</span> exception&amp;);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    exception(exception&amp;&amp;) noexcept;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    exception&amp; operator =(exception&amp;&amp;) noexcept;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    template &lt;typename Error&gt;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    explicit exception(const Error&amp; error)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    : ptr_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> make_unique&lt;impl&gt;(*error.ptr_)) {}</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">virtual</span> ~exception();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    MSTL_NODISCARD <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* what() const noexcept;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    MSTL_NODISCARD virtual const <span class="keywordtype">char</span>* type() const noexcept;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    __MSTL_ERROR_TYPE(exception)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>MSTL_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, <span class="stringliteral">&quot;Memory Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>MSTL_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, <span class="stringliteral">&quot;System Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, <span class="stringliteral">&quot;Memory Allocation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>MSTL_ERROR_BUILD_FINAL_CLASS(iterator_exception, memory_exception, <span class="stringliteral">&quot;Iterator or Pointer Access Invalid.&quot;</span>)</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>MSTL_ERROR_BUILD_DERIVED_CLASS(typecast_exception, memory_exception, <span class="stringliteral">&quot;Type Cast Mismatch.&quot;</span>)</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>MSTL_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, <span class="stringliteral">&quot;Variable Operation Invalid.&quot;</span>)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>MSTL_ERROR_BUILD_DERIVED_CLASS(device_exception, system_exception, <span class="stringliteral">&quot;Device Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>MSTL_ERROR_BUILD_FINAL_CLASS(file_exception, system_exception, <span class="stringliteral">&quot;File Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, <span class="stringliteral">&quot;Math Calculation Invalid.&quot;</span>)</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, <span class="stringliteral">&quot;Database Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#ifdef MSTL_SUPPORT_CUDA__</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">// specialization of MSTL_ERROR_BUILD_FINAL_CLASS for CUDA</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">struct </span>CUDAMemoryError final : MemoryError {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    __MSTL_ERROR_CONSTRUCTOR(CUDAMemoryError, MemoryError, <span class="stringliteral">&quot;CUDA GPU Memory Operation Failed.&quot;</span>)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    constexpr explicit CUDAMemoryError(const cudaError_t err) noexcept</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        : MemoryError(cudaGetErrorString(err), __type__) {}</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    __MSTL_ERROR_FINAL_DESTRUCTOR(CUDAMemoryError)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    __MSTL_ERROR_TYPE(CUDAMemoryError)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    __MSTL_ERROR_WHAT()</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordtype">void</span> MSTL_API throw_with_stack(<span class="keyword">const</span> exception&amp; err);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#if defined(MSTL_STATE_DEBUG__) || !defined(NDEBUG)</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#define throw_exception(err) throw_with_stack(err)</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#define throw_exception(err) throw err</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_CONFIG_EXCEPTION_HPP__</span></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define __MSTL_ERROR_FINAL_DESTRUCTOR(CLASS) \</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">    ~CLASS() override = default;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define __MSTL_ERROR_TYPE(CLASS) \</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">    static constexpr auto static_type = #CLASS;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00045" data-start="" data-end="">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">   45</a></span><span class="preprocessor">#define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">    struct MSTL_API THIS : BASE { \</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">        __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">        __MSTL_ERROR_DERIVED_DESTRUCTOR(THIS) \</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">        __MSTL_ERROR_TYPE(THIS) \</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">    };</span></div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="foldopen" id="foldopen00061" data-start="" data-end="">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">   61</a></span><span class="preprocessor">#define MSTL_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO) \</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">    struct MSTL_API THIS final : BASE { \</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">        __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">        __MSTL_ERROR_FINAL_DESTRUCTOR(THIS) \</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">        __MSTL_ERROR_TYPE(THIS) \</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">    };</span></div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="};">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html">   73</a></span><span class="keyword">struct </span>MSTL_API <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a> {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> INFO_SIZE = 256;  <span class="comment">// 错误信息长度</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> TYPE_SIZE = 48;   <span class="comment">// 类型名称长度</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">char</span> info_[INFO_SIZE];  <span class="comment">// 错误信息</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">char</span> type_[TYPE_SIZE];  <span class="comment">// 类型名称</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">   87</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <a class="code hl_variable" href="struct_m_s_t_l_1_1exception.html#a251a864c0cfb90857d3e0cf3e54d2ffb">static_type</a>, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">type</a> = <a class="code hl_variable" href="struct_m_s_t_l_1_1exception.html#a251a864c0cfb90857d3e0cf3e54d2ffb">static_type</a>) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_function" href="group___string_operations.html#ga0b2036e65c5d7443a5f23f13d9cfe733">string_copy_n</a>(info_, info, INFO_SIZE - 1);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_function" href="group___string_operations.html#ga0b2036e65c5d7443a5f23f13d9cfe733">string_copy_n</a>(type_, <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">type</a>, TYPE_SIZE - 1);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        info_[INFO_SIZE - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        type_[TYPE_SIZE - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a58f01c6c3791a88b9bfd828a6ec608e7">   97</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a58f01c6c3791a88b9bfd828a6ec608e7">exception</a>(<span class="keyword">const</span> <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(info_, other.info_, INFO_SIZE);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(type_, other.type_, TYPE_SIZE);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#aa3bf1e7a6cd9700cb5742197777766bc">  105</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(info_, other.info_, INFO_SIZE);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(type_, other.type_, TYPE_SIZE);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a073eed43bb8f2188dc0ed29f500410f1">  116</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a073eed43bb8f2188dc0ed29f500410f1">exception</a>(<a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(<span class="keyword">this</span>, &amp;other, <span class="keyword">sizeof</span>(*<span class="keyword">this</span>));</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        other.info_[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        other.type_[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#ad8e078c9249dae0fecbabf149fac21ec">  125</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp; operator =(<a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(info_, other.info_, INFO_SIZE);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <a class="code hl_function" href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">memory_copy</a>(type_, other.type_, TYPE_SIZE);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            other.info_[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            other.type_[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Error&gt;</div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#ac9527c58293c3602c25eb7080be9d543">  143</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#ac9527c58293c3602c25eb7080be9d543">exception</a>(<span class="keyword">const</span> Error&amp; error)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    : <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>(error.<a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a2380c92fd5275bdc1e1ef35b6122928e">what</a>(), error.<a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">type</a>()) {}</div>
+</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a7f88c7417ee88264d3251792c654a661">  149</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a7f88c7417ee88264d3251792c654a661">~exception</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a2380c92fd5275bdc1e1ef35b6122928e">  155</a></span>    MSTL_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a2380c92fd5275bdc1e1ef35b6122928e">what</a>() const noexcept { <span class="keywordflow">return</span> info_; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">  161</a></span>    MSTL_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">type</a>() const noexcept { <span class="keywordflow">return</span> type_; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1exception.html#a251a864c0cfb90857d3e0cf3e54d2ffb">  163</a></span>    __MSTL_ERROR_TYPE(<a class="code hl_function" href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">exception</a>)  </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>};</div>
+</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(memory_exception, <a class="code hl_struct" href="struct_m_s_t_l_1_1exception.html">exception</a>, <span class="stringliteral">&quot;Memory Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(system_exception, <a class="code hl_struct" href="struct_m_s_t_l_1_1exception.html">exception</a>, <span class="stringliteral">&quot;System Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><a class="code hl_define" href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">MSTL_ERROR_BUILD_FINAL_CLASS</a>(allocate_exception, memory_exception, <span class="stringliteral">&quot;Memory Allocation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><a class="code hl_define" href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">MSTL_ERROR_BUILD_FINAL_CLASS</a>(iterator_exception, memory_exception, <span class="stringliteral">&quot;Iterator or Pointer Access Invalid.&quot;</span>)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(typecast_exception, memory_exception, <span class="stringliteral">&quot;Type Cast Mismatch.&quot;</span>)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(value_exception, <a class="code hl_struct" href="struct_m_s_t_l_1_1exception.html">exception</a>, <span class="stringliteral">&quot;Variable Operation Invalid.&quot;</span>)</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(device_exception, system_exception, <span class="stringliteral">&quot;Device Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><a class="code hl_define" href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">MSTL_ERROR_BUILD_FINAL_CLASS</a>(file_exception, system_exception, <span class="stringliteral">&quot;File Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><a class="code hl_define" href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">MSTL_ERROR_BUILD_FINAL_CLASS</a>(math_exception, value_exception, <span class="stringliteral">&quot;Math Calculation Invalid.&quot;</span>)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><a class="code hl_define" href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a>(database_exception, system_exception, <span class="stringliteral">&quot;Database Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="group___exception_handling.html#ga130bd7ded5301b06b3b058a66f63d430">  182</a></span><span class="keywordtype">void</span> MSTL_API <a class="code hl_function" href="group___exception_handling.html#ga130bd7ded5301b06b3b058a66f63d430">throw_with_stack</a>(const <a class="code hl_struct" href="struct_m_s_t_l_1_1exception.html">exception</a>&amp; err);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="preprocessor">#if defined(MSTL_STATE_DEBUG__) || !defined(NDEBUG)</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#define throw_exception(err) throw_with_stack(err)</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#define throw_exception(err) throw err</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> <span class="comment">// ExceptionHandling</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_CONFIG_EXCEPTION_HPP__</span></div>
+<div class="ttc" id="acstring_8hpp_html"><div class="ttname"><a href="cstring_8hpp.html">cstring.hpp</a></div><div class="ttdoc">MSTL字符串操作</div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga130bd7ded5301b06b3b058a66f63d430"><div class="ttname"><a href="group___exception_handling.html#ga130bd7ded5301b06b3b058a66f63d430">MSTL::throw_with_stack</a></div><div class="ttdeci">void throw_with_stack(const exception &amp;err)</div><div class="ttdoc">抛出异常并打印堆栈信息</div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga4735814633bd1c68f251bc702e7d0fd7"><div class="ttname"><a href="group___exception_handling.html#ga4735814633bd1c68f251bc702e7d0fd7">MSTL_ERROR_BUILD_FINAL_CLASS</a></div><div class="ttdeci">#define MSTL_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建最终异常类宏</div><div class="ttdef"><b>定义</b> <a href="#l00061">exception.hpp:61</a></div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga56b6eeeea356c1cf6fd8a056dc632026"><div class="ttname"><a href="group___exception_handling.html#ga56b6eeeea356c1cf6fd8a056dc632026">MSTL_ERROR_BUILD_DERIVED_CLASS</a></div><div class="ttdeci">#define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建可派生的异常类宏</div><div class="ttdef"><b>定义</b> <a href="#l00045">exception.hpp:45</a></div></div>
+<div class="ttc" id="agroup___memory_functions_html_ga492d330a5c18063d6d7f2f0b209f911c"><div class="ttname"><a href="group___memory_functions.html#ga492d330a5c18063d6d7f2f0b209f911c">MSTL::memory_copy</a></div><div class="ttdeci">constexpr void * memory_copy(void *__restrict__ dest, const void *__restrict__ src, size_t count) noexcept</div><div class="ttdoc">从源内存复制到目标内存</div><div class="ttdef"><b>定义</b> <a href="memory_8hpp_source.html#l00029">memory.hpp:29</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___string_operations_html_ga0b2036e65c5d7443a5f23f13d9cfe733"><div class="ttname"><a href="group___string_operations.html#ga0b2036e65c5d7443a5f23f13d9cfe733">MSTL::string_copy_n</a></div><div class="ttdeci">constexpr CharT * string_copy_n(CharT *__restrict__ dest, const CharT *__restrict__ src, const size_t count) noexcept</div><div class="ttdoc">复制指定长度的字符串</div><div class="ttdef"><b>定义</b> <a href="cstring_8hpp_source.html#l00127">cstring.hpp:127</a></div></div>
+<div class="ttc" id="amemory_8hpp_html"><div class="ttname"><a href="memory_8hpp.html">memory.hpp</a></div><div class="ttdoc">MSTL内存操作函数</div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html">MSTL::exception</a></div><div class="ttdoc">异常基类</div><div class="ttdef"><b>定义</b> <a href="#l00073">exception.hpp:73</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a073eed43bb8f2188dc0ed29f500410f1"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a073eed43bb8f2188dc0ed29f500410f1">MSTL::exception::exception</a></div><div class="ttdeci">exception(exception &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00116">exception.hpp:116</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a2380c92fd5275bdc1e1ef35b6122928e"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a2380c92fd5275bdc1e1ef35b6122928e">MSTL::exception::what</a></div><div class="ttdeci">const char * what() const noexcept</div><div class="ttdoc">获取错误信息</div><div class="ttdef"><b>定义</b> <a href="#l00155">exception.hpp:155</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a251a864c0cfb90857d3e0cf3e54d2ffb"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a251a864c0cfb90857d3e0cf3e54d2ffb">MSTL::exception::static_type</a></div><div class="ttdeci">static constexpr auto static_type</div><div class="ttdoc">静态类型字符串</div><div class="ttdef"><b>定义</b> <a href="#l00163">exception.hpp:163</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a58f01c6c3791a88b9bfd828a6ec608e7"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a58f01c6c3791a88b9bfd828a6ec608e7">MSTL::exception::exception</a></div><div class="ttdeci">exception(const exception &amp;other) noexcept</div><div class="ttdoc">复制构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00097">exception.hpp:97</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a67ea2a2cca0b77a4092f80cda08bb5b6"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a67ea2a2cca0b77a4092f80cda08bb5b6">MSTL::exception::type</a></div><div class="ttdeci">const char * type() const noexcept</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="#l00161">exception.hpp:161</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_a7f88c7417ee88264d3251792c654a661"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#a7f88c7417ee88264d3251792c654a661">MSTL::exception::~exception</a></div><div class="ttdeci">virtual ~exception()=default</div><div class="ttdoc">虚析构函数</div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_ac9527c58293c3602c25eb7080be9d543"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#ac9527c58293c3602c25eb7080be9d543">MSTL::exception::exception</a></div><div class="ttdeci">exception(const Error &amp;error)</div><div class="ttdoc">模板构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00143">exception.hpp:143</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1exception_html_adfd1e267ddbb419ab25cdb3e62c42356"><div class="ttname"><a href="struct_m_s_t_l_1_1exception.html#adfd1e267ddbb419ab25cdb3e62c42356">MSTL::exception::exception</a></div><div class="ttdeci">exception(const char *info=static_type, const char *type=static_type)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00087">exception.hpp:87</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><b>exception.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><a href="exception_8hpp.html">exception.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

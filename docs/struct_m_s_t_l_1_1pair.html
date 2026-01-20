@@ -1,0 +1,912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: MSTL::pair&lt; T1, T2 &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('struct_m_s_t_l_1_1pair.html','','struct_m_s_t_l_1_1pair-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">MSTL::pair&lt; T1, T2 &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___pair.html">键值对</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>存储两个值的元组对  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pair_8hpp_source.html">pair.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 MSTL::pair&lt; T1, T2 &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="struct_m_s_t_l_1_1pair__inherit__graph.svg" width="331" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a1bc37b2d40c4da445371746cafa52f5d" id="r_a1bc37b2d40c4da445371746cafa52f5d"><td class="memItemLeft"><a id="a1bc37b2d40c4da445371746cafa52f5d" name="a1bc37b2d40c4da445371746cafa52f5d"></a>
+using&#160;</td><td class="memItemRight"><b>first_type</b> = T1</td></tr>
+<tr class="memdesc:a1bc37b2d40c4da445371746cafa52f5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">第一个元素的类型 <br /></td></tr>
+<tr class="memitem:afcdb84ad1a02e174e1cb3971a9604c62" id="r_afcdb84ad1a02e174e1cb3971a9604c62"><td class="memItemLeft"><a id="afcdb84ad1a02e174e1cb3971a9604c62" name="afcdb84ad1a02e174e1cb3971a9604c62"></a>
+using&#160;</td><td class="memItemRight"><b>second_type</b> = T2</td></tr>
+<tr class="memdesc:afcdb84ad1a02e174e1cb3971a9604c62"><td class="mdescLeft">&#160;</td><td class="mdescRight">第二个元素的类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:adc4242741cae44efcddabc59c310ae5f" id="r_adc4242741cae44efcddabc59c310ae5f"><td class="memTemplParams" colspan="2">template&lt;typename U1 = T1, typename U2 = T2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__default__constructible.html">is_default_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__default__constructible.html">is_default_constructible</a>&lt; U2 &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:adc4242741cae44efcddabc59c310ae5f template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adc4242741cae44efcddabc59c310ae5f">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; U2 &gt; &gt;) <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>() noexcept(<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__default__constructible.html">is_nothrow_default_constructible</a>&lt; U2 &gt; &gt;)</td></tr>
+<tr class="memdesc:adc4242741cae44efcddabc59c310ae5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ae2513c24190ee82ee97a46190e1bbdf1" id="r_ae2513c24190ee82ee97a46190e1bbdf1"><td class="memTemplParams" colspan="2">template&lt;typename U1 = T1, typename U2 = T2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__copy__constructible.html">is_copy_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__copy__constructible.html">is_copy_constructible</a>&lt; U2 &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ae2513c24190ee82ee97a46190e1bbdf1 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ae2513c24190ee82ee97a46190e1bbdf1">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U1 &amp;, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U2 &amp;, U2 &gt; &gt;) <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>(const T1 &amp;a</td></tr>
+<tr class="memdesc:ae2513c24190ee82ee97a46190e1bbdf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:a439bf8dad65acef1091c140ae5b6beac" id="r_a439bf8dad65acef1091c140ae5b6beac"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, U2 &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a439bf8dad65acef1091c140ae5b6beac template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a439bf8dad65acef1091c140ae5b6beac">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U1, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U2, T2 &gt; &gt;) <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>(U1 &amp;&amp;a</td></tr>
+<tr class="memdesc:a439bf8dad65acef1091c140ae5b6beac"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用值构造函数  <br /></td></tr>
+<tr class="memitem:a6d0a7b330dbf1c24f9ccabefb5fa846a" id="r_a6d0a7b330dbf1c24f9ccabefb5fa846a"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, const U1 &amp; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, const U2 &amp; &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a6d0a7b330dbf1c24f9ccabefb5fa846a template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6d0a7b330dbf1c24f9ccabefb5fa846a">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U1 &amp;, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U2 &amp;, T2 &gt; &gt;) <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>(const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1</td></tr>
+<tr class="memdesc:a6d0a7b330dbf1c24f9ccabefb5fa846a"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝pair构造函数  <br /></td></tr>
+<tr class="memitem:a9d02d0c80596bcadd472f820c5ee044d" id="r_a9d02d0c80596bcadd472f820c5ee044d"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, U2 &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a9d02d0c80596bcadd472f820c5ee044d template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a9d02d0c80596bcadd472f820c5ee044d">explicit</a> (!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U1, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U2, T2 &gt; &gt;) <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>(<a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1</td></tr>
+<tr class="memdesc:a9d02d0c80596bcadd472f820c5ee044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动pair构造函数  <br /></td></tr>
+<tr class="memitem:ab2e2bdf1097f82e753eafa32620b43fb" id="r_ab2e2bdf1097f82e753eafa32620b43fb"><td class="memItemLeft"><a id="ab2e2bdf1097f82e753eafa32620b43fb" name="ab2e2bdf1097f82e753eafa32620b43fb"></a>
+&#160;</td><td class="memItemRight"><b>pair</b> (const pair &amp;p)=default</td></tr>
+<tr class="memdesc:ab2e2bdf1097f82e753eafa32620b43fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认拷贝构造函数 <br /></td></tr>
+<tr class="memitem:a33c80009615af040b88d9ee248eed370" id="r_a33c80009615af040b88d9ee248eed370"><td class="memItemLeft"><a id="a33c80009615af040b88d9ee248eed370" name="a33c80009615af040b88d9ee248eed370"></a>
+&#160;</td><td class="memItemRight"><b>pair</b> (pair &amp;&amp;p)=default</td></tr>
+<tr class="memdesc:a33c80009615af040b88d9ee248eed370"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认移动构造函数 <br /></td></tr>
+<tr class="memitem:a3b48247fd9b27ccb40e8acfe16cd364f" id="r_a3b48247fd9b27ccb40e8acfe16cd364f"><td class="memTemplParams" colspan="2">template&lt;typename Tuple1, typename Tuple2, size_t... Index1, size_t... Index2&gt; </td></tr>
+<tr class="memitem:a3b48247fd9b27ccb40e8acfe16cd364f template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3b48247fd9b27ccb40e8acfe16cd364f">pair</a> (Tuple1 &amp;t1, Tuple2 &amp;t2, <a class="el" href="group___integer_sequence.html#ga4f7e6be982b5c063f61a29df421c2cbc">index_sequence</a>&lt; Index1... &gt; idx1, <a class="el" href="group___integer_sequence.html#ga4f7e6be982b5c063f61a29df421c2cbc">index_sequence</a>&lt; Index2... &gt; idx2)</td></tr>
+<tr class="memdesc:a3b48247fd9b27ccb40e8acfe16cd364f"><td class="mdescLeft">&#160;</td><td class="mdescRight">从两个tuple构造pair  <br /></td></tr>
+<tr class="memitem:a322ccd85f8457195a1cac35af088ae48" id="r_a322ccd85f8457195a1cac35af088ae48"><td class="memTemplParams" colspan="2">template&lt;typename... Types1, typename... Types2&gt; </td></tr>
+<tr class="memitem:a322ccd85f8457195a1cac35af088ae48 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a322ccd85f8457195a1cac35af088ae48">pair</a> (<a class="el" href="struct_m_s_t_l_1_1unpack__utility__construct__tag.html">unpack_utility_construct_tag</a>, tuple&lt; Types1... &gt; t1, tuple&lt; Types2... &gt; t2)</td></tr>
+<tr class="memdesc:a322ccd85f8457195a1cac35af088ae48"><td class="mdescLeft">&#160;</td><td class="mdescRight">从两个tuple构造pair  <br /></td></tr>
+<tr class="memitem:a2936b02217f5f0add45199f75d6b48b1" id="r_a2936b02217f5f0add45199f75d6b48b1"><td class="memTemplParams" colspan="2">template&lt;typename T = pair, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__copy__assignable.html">is_copy_assignable</a>&lt; typename T::first_type &gt;, <a class="el" href="struct_m_s_t_l_1_1is__copy__assignable.html">is_copy_assignable</a>&lt; typename T::second_type &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a2936b02217f5f0add45199f75d6b48b1 template"><td class="memItemLeft">constexpr <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2936b02217f5f0add45199f75d6b48b1">operator=</a> (<a class="el" href="group___type_traits_utilities.html#gadc6b7369183f1a0af610a74cd8182f1f">type_identity_t</a>&lt; const T &amp; &gt; p) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__copy__assignable.html">is_nothrow_copy_assignable</a>&lt; T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__copy__assignable.html">is_nothrow_copy_assignable</a>&lt; T2 &gt; &gt;::value)</td></tr>
+<tr class="memdesc:a2936b02217f5f0add45199f75d6b48b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a8fdfbcc4db2f7a917ab6da5e8ecd67fa" id="r_a8fdfbcc4db2f7a917ab6da5e8ecd67fa"><td class="memTemplParams" colspan="2">template&lt;typename T = pair, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__move__assignable.html">is_move_assignable</a>&lt; typename T::first_type &gt;, <a class="el" href="struct_m_s_t_l_1_1is__move__assignable.html">is_move_assignable</a>&lt; typename T::second_type &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a8fdfbcc4db2f7a917ab6da5e8ecd67fa template"><td class="memItemLeft">constexpr <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8fdfbcc4db2f7a917ab6da5e8ecd67fa">operator=</a> (<a class="el" href="group___type_traits_utilities.html#gadc6b7369183f1a0af610a74cd8182f1f">type_identity_t</a>&lt; T &amp;&amp; &gt; p) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt; T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__move__assignable.html">is_nothrow_move_assignable</a>&lt; T2 &gt; &gt;::value)</td></tr>
+<tr class="memdesc:a8fdfbcc4db2f7a917ab6da5e8ecd67fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:a4b6b79cc885336c56b6c390d7f2f9c70" id="r_a4b6b79cc885336c56b6c390d7f2f9c70"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1negation.html">negation</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__same.html">is_same</a>&lt; <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>, <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &gt; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T1 &amp;, const U1 &amp; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T2 &amp;, const U2 &amp; &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a4b6b79cc885336c56b6c390d7f2f9c70 template"><td class="memItemLeft">constexpr <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4b6b79cc885336c56b6c390d7f2f9c70">operator=</a> (const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &amp;p) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__assignable.html">is_nothrow_assignable</a>&lt; T1 &amp;, const U1 &amp; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__assignable.html">is_nothrow_assignable</a>&lt; T2 &amp;, const U2 &amp; &gt; &gt;::value)</td></tr>
+<tr class="memdesc:a4b6b79cc885336c56b6c390d7f2f9c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">从不同类型pair的拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:ab19233da30aeafb79c77aa77aae33a58" id="r_ab19233da30aeafb79c77aa77aae33a58"><td class="memTemplParams" colspan="2">template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1negation.html">negation</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__same.html">is_same</a>&lt; <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>, <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &gt; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T1 &amp;, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T2 &amp;, U2 &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ab19233da30aeafb79c77aa77aae33a58 template"><td class="memItemLeft">constexpr <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab19233da30aeafb79c77aa77aae33a58">operator=</a> (<a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &amp;&amp;p) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__assignable.html">is_nothrow_assignable</a>&lt; T1 &amp;, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__assignable.html">is_nothrow_assignable</a>&lt; T2 &amp;, U2 &gt; &gt;::value)</td></tr>
+<tr class="memdesc:ab19233da30aeafb79c77aa77aae33a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">从不同类型pair的移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ab5efcaac335e62f0b7ae56f5a56aa2bc" id="r_ab5efcaac335e62f0b7ae56f5a56aa2bc"><td class="memItemLeft"><a id="ab5efcaac335e62f0b7ae56f5a56aa2bc" name="ab5efcaac335e62f0b7ae56f5a56aa2bc"></a>
+<a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const volatile <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;)=delete</td></tr>
+<tr class="memdesc:ab5efcaac335e62f0b7ae56f5a56aa2bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止volatile拷贝赋值 <br /></td></tr>
+<tr class="memitem:ae07a707ec0289bf35cfe859f7ab89d9f" id="r_ae07a707ec0289bf35cfe859f7ab89d9f"><td class="memItemLeft"><a id="ae07a707ec0289bf35cfe859f7ab89d9f" name="ae07a707ec0289bf35cfe859f7ab89d9f"></a>
+constexpr&#160;</td><td class="memItemRight"><b>~pair</b> ()=default</td></tr>
+<tr class="memdesc:ae07a707ec0289bf35cfe859f7ab89d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:ab4eb89e52ff6463416d3a9c7439038c9" id="r_ab4eb89e52ff6463416d3a9c7439038c9"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4eb89e52ff6463416d3a9c7439038c9">operator==</a> (const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;y) const noexcept(noexcept(this-&gt;<a class="el" href="#a99d26cd6cf2b426d59a15ed77a9a58d5">first</a>==y.first &amp;&amp;this-&gt;<a class="el" href="#aef8c3f25be26c301a67d4e37cd4902f8">second</a>==y.second))</td></tr>
+<tr class="memdesc:ab4eb89e52ff6463416d3a9c7439038c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:a323480b18d667907bf4c663e0e217120" id="r_a323480b18d667907bf4c663e0e217120"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a323480b18d667907bf4c663e0e217120">operator&lt;</a> (const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;y) const noexcept(noexcept(this-&gt;<a class="el" href="#a99d26cd6cf2b426d59a15ed77a9a58d5">first</a>&lt; y.first||(!(y.first&lt; this-&gt;<a class="el" href="#a99d26cd6cf2b426d59a15ed77a9a58d5">first</a>) &amp;&amp;this-&gt;<a class="el" href="#aef8c3f25be26c301a67d4e37cd4902f8">second</a>&lt; y.second)))</td></tr>
+<tr class="memdesc:a323480b18d667907bf4c663e0e217120"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:a3eeaf80e5f9f1e31f7f6c6dc413b4a6d" id="r_a3eeaf80e5f9f1e31f7f6c6dc413b4a6d"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3eeaf80e5f9f1e31f7f6c6dc413b4a6d">to_hash</a> () const noexcept(noexcept(<a class="el" href="struct_m_s_t_l_1_1hash.html">hash</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga95818de68a7cbe1cabecac794d1672b3">remove_cvref_t</a>&lt; T1 &gt; &gt;()(<a class="el" href="#a99d26cd6cf2b426d59a15ed77a9a58d5">first</a>) ^ <a class="el" href="struct_m_s_t_l_1_1hash.html">hash</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga95818de68a7cbe1cabecac794d1672b3">remove_cvref_t</a>&lt; T2 &gt; &gt;()(<a class="el" href="#aef8c3f25be26c301a67d4e37cd4902f8">second</a>)))</td></tr>
+<tr class="memdesc:a3eeaf80e5f9f1e31f7f6c6dc413b4a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算hash值  <br /></td></tr>
+<tr class="memitem:a5bb7e0a616d74782371833d5aabb4356" id="r_a5bb7e0a616d74782371833d5aabb4356"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a5bb7e0a616d74782371833d5aabb4356">swap</a> (<a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp;p) noexcept(<a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__nothrow__swappable.html">is_nothrow_swappable</a>&lt; T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__nothrow__swappable.html">is_nothrow_swappable</a>&lt; T2 &gt; &gt;::value)</td></tr>
+<tr class="memdesc:a5bb7e0a616d74782371833d5aabb4356"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个pair的内容  <br /></td></tr>
+<tr class="inherit_header pub_methods_struct_m_s_t_l_1_1icomparable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_struct_m_s_t_l_1_1icomparable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="struct_m_s_t_l_1_1icomparable.html">MSTL::icomparable&lt; pair&lt; T1, T2 &gt; &gt;</a></td></tr>
+<tr class="memitem:ab36b7973fef6a4bc805db851bbbee8e6 inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_ab36b7973fef6a4bc805db851bbbee8e6"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#ab36b7973fef6a4bc805db851bbbee8e6">operator==</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(derived()==rhs))</td></tr>
+<tr class="memdesc:ab36b7973fef6a4bc805db851bbbee8e6 inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:a782c92fc6c8437e64b378cb1578da0eb inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_a782c92fc6c8437e64b378cb1578da0eb"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#a782c92fc6c8437e64b378cb1578da0eb">operator!=</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(!(*this==rhs)))</td></tr>
+<tr class="memdesc:a782c92fc6c8437e64b378cb1578da0eb inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较运算符  <br /></td></tr>
+<tr class="memitem:a71677f7ace2c4cde5496ca74e2a690bb inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_a71677f7ace2c4cde5496ca74e2a690bb"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#a71677f7ace2c4cde5496ca74e2a690bb">operator&lt;</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(derived()&lt; rhs))</td></tr>
+<tr class="memdesc:a71677f7ace2c4cde5496ca74e2a690bb inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:a3977939893797c1500dca762fc041900 inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_a3977939893797c1500dca762fc041900"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#a3977939893797c1500dca762fc041900">operator&gt;</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(rhs&lt; derived()))</td></tr>
+<tr class="memdesc:a3977939893797c1500dca762fc041900 inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于比较运算符  <br /></td></tr>
+<tr class="memitem:a43824fee0af2a5d743bdb06eb0b25835 inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_a43824fee0af2a5d743bdb06eb0b25835"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#a43824fee0af2a5d743bdb06eb0b25835">operator&lt;=</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(!(derived() &gt; rhs)))</td></tr>
+<tr class="memdesc:a43824fee0af2a5d743bdb06eb0b25835 inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:a9a9c4420efee3915194e0e1f36936202 inherit pub_methods_struct_m_s_t_l_1_1icomparable" id="r_a9a9c4420efee3915194e0e1f36936202"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1icomparable.html#a9a9c4420efee3915194e0e1f36936202">operator&gt;=</a> (const <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; T1, T2 &gt; &amp;rhs) const noexcept(noexcept(!(derived()&lt; rhs)))</td></tr>
+<tr class="memdesc:a9a9c4420efee3915194e0e1f36936202 inherit pub_methods_struct_m_s_t_l_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符  <br /></td></tr>
+<tr class="inherit_header pub_methods_struct_m_s_t_l_1_1ihashable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_struct_m_s_t_l_1_1ihashable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="struct_m_s_t_l_1_1ihashable.html">MSTL::ihashable&lt; pair&lt; T1, T2 &gt; &gt;</a></td></tr>
+<tr class="memitem:a60e1ea7d06e930a622d2820c3625a740 inherit pub_methods_struct_m_s_t_l_1_1ihashable" id="r_a60e1ea7d06e930a622d2820c3625a740"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1ihashable.html#a60e1ea7d06e930a622d2820c3625a740">to_hash</a> () const noexcept(noexcept(derived().to_hash()))</td></tr>
+<tr class="memdesc:a60e1ea7d06e930a622d2820c3625a740 inherit pub_methods_struct_m_s_t_l_1_1ihashable"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取对象的哈希值  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a99d26cd6cf2b426d59a15ed77a9a58d5" id="r_a99d26cd6cf2b426d59a15ed77a9a58d5"><td class="memItemLeft"><a id="a99d26cd6cf2b426d59a15ed77a9a58d5" name="a99d26cd6cf2b426d59a15ed77a9a58d5"></a>
+T1&#160;</td><td class="memItemRight"><b>first</b></td></tr>
+<tr class="memdesc:a99d26cd6cf2b426d59a15ed77a9a58d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">第一个元素 <br /></td></tr>
+<tr class="memitem:aef8c3f25be26c301a67d4e37cd4902f8" id="r_aef8c3f25be26c301a67d4e37cd4902f8"><td class="memItemLeft"><a id="aef8c3f25be26c301a67d4e37cd4902f8" name="aef8c3f25be26c301a67d4e37cd4902f8"></a>
+T2&#160;</td><td class="memItemRight"><b>second</b></td></tr>
+<tr class="memdesc:aef8c3f25be26c301a67d4e37cd4902f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">第二个元素 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T1, typename T2&gt;<br />
+class MSTL::pair&lt; T1, T2 &gt;</div><p>存储两个值的元组对 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T1</td><td>第一个元素的类型 </td></tr>
+    <tr><td class="paramname">T2</td><td>第二个元素的类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>pair是一个可以存储两个不同类型的值的模板类，常用于返回多个值。 支持tuple-like接口，可用于结构化绑定。 </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00091">91</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a3b48247fd9b27ccb40e8acfe16cd364f" name="a3b48247fd9b27ccb40e8acfe16cd364f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b48247fd9b27ccb40e8acfe16cd364f">&#9670;&#160;</a></span>pair() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename Tuple1, typename Tuple2, size_t... Index1, size_t... Index2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::pair </td>
+          <td>(</td>
+          <td class="paramtype">Tuple1 &amp;</td>          <td class="paramname"><span class="paramname"><em>t1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Tuple2 &amp;</td>          <td class="paramname"><span class="paramname"><em>t2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___integer_sequence.html#ga4f7e6be982b5c063f61a29df421c2cbc">index_sequence</a>&lt; Index1... &gt;</td>          <td class="paramname"><span class="paramname"><em>idx1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___integer_sequence.html#ga4f7e6be982b5c063f61a29df421c2cbc">index_sequence</a>&lt; Index2... &gt;</td>          <td class="paramname"><span class="paramname"><em>idx2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从两个tuple构造pair </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Tuple1</td><td>第一个tuple的类型 </td></tr>
+    <tr><td class="paramname">Tuple2</td><td>第二个tuple的类型 </td></tr>
+    <tr><td class="paramname">Index1</td><td>第一个tuple的索引序列 </td></tr>
+    <tr><td class="paramname">Index2</td><td>第二个tuple的索引序列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t1</td><td>第一个tuple </td></tr>
+    <tr><td class="paramname">t2</td><td>第二个tuple </td></tr>
+    <tr><td class="paramname">idx1</td><td>第一个tuple的索引序列 </td></tr>
+    <tr><td class="paramname">idx2</td><td>第二个tuple的索引序列</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>内部构造函数，用于从tuple构造pair </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00296">296</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a322ccd85f8457195a1cac35af088ae48" name="a322ccd85f8457195a1cac35af088ae48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a322ccd85f8457195a1cac35af088ae48">&#9670;&#160;</a></span>pair() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Types1, typename... Types2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::pair </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_s_t_l_1_1unpack__utility__construct__tag.html">unpack_utility_construct_tag</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">tuple&lt; Types1... &gt;</td>          <td class="paramname"><span class="paramname"><em>t1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">tuple&lt; Types2... &gt;</td>          <td class="paramname"><span class="paramname"><em>t2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从两个tuple构造pair </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Types1</td><td>第一个tuple的元素类型 </td></tr>
+    <tr><td class="paramname">Types2</td><td>第二个tuple的元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t1</td><td>第一个tuple </td></tr>
+    <tr><td class="paramname">t2</td><td>第二个tuple</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>标签分发构造函数，用于从tuple构造pair </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00310">310</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a6d0a7b330dbf1c24f9ccabefb5fa846a" name="a6d0a7b330dbf1c24f9ccabefb5fa846a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d0a7b330dbf1c24f9ccabefb5fa846a">&#9670;&#160;</a></span>explicit() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, const U1 &amp; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, const U2 &amp; &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U1 &amp;, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U2 &amp;, T2 &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝pair构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>源pair第一个元素的类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>源pair第二个元素的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>从另一个pair构造，进行元素拷贝 </p>
+
+</div>
+</div>
+<a id="ae2513c24190ee82ee97a46190e1bbdf1" name="ae2513c24190ee82ee97a46190e1bbdf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2513c24190ee82ee97a46190e1bbdf1">&#9670;&#160;</a></span>explicit() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1 = T1, typename U2 = T2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__copy__constructible.html">is_copy_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__copy__constructible.html">is_copy_constructible</a>&lt; U2 &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U1 &amp;, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; const U2 &amp;, U2 &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>第一个元素的推导类型，默认为T1 </td></tr>
+    <tr><td class="paramname">U2</td><td>第二个元素的推导类型，默认为T2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个元素的值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个元素的值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>从两个同类型值构造pair </p>
+
+</div>
+</div>
+<a id="a9d02d0c80596bcadd472f820c5ee044d" name="a9d02d0c80596bcadd472f820c5ee044d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d02d0c80596bcadd472f820c5ee044d">&#9670;&#160;</a></span>explicit() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, U2 &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U1, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U2, T2 &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动pair构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>源pair第一个元素的类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>源pair第二个元素的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>从另一个pair构造，进行元素移动 </p>
+
+</div>
+</div>
+<a id="a439bf8dad65acef1091c140ae5b6beac" name="a439bf8dad65acef1091c140ae5b6beac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439bf8dad65acef1091c140ae5b6beac">&#9670;&#160;</a></span>explicit() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T1, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__constructible.html">is_constructible</a>&lt; T2, U2 &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U1, T1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__convertible.html">is_convertible</a>&lt; U2, T2 &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>通用值构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>第一个元素的类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>第二个元素的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个元素的值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个元素的值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>从两个任意类型的值构造pair </p>
+
+</div>
+</div>
+<a id="adc4242741cae44efcddabc59c310ae5f" name="adc4242741cae44efcddabc59c310ae5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc4242741cae44efcddabc59c310ae5f">&#9670;&#160;</a></span>explicit() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1 = T1, typename U2 = T2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__default__constructible.html">is_default_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__default__constructible.html">is_default_constructible</a>&lt; U2 &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!<a class="el" href="group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc">conjunction_v</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__implicitly__default__constructible.html">is_implicitly_default_constructible</a>&lt; U2 &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>第一个元素的推导类型，默认为T1 </td></tr>
+    <tr><td class="paramname">U2</td><td>第二个元素的推导类型，默认为T2</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>当T1和T2都可默认构造时可用，根据是否可隐式构造决定explicit </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00108">108</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a323480b18d667907bf4c663e0e217120" name="a323480b18d667907bf4c663e0e217120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a323480b18d667907bf4c663e0e217120">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; T1, T2 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>y</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>要比较的pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>比较结果</dd></dl>
+<p>先比较first，如果相等则比较second </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00398">398</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4b6b79cc885336c56b6c390d7f2f9c70" name="a4b6b79cc885336c56b6c390d7f2f9c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b6b79cc885336c56b6c390d7f2f9c70">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1negation.html">negation</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__same.html">is_same</a>&lt; <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>, <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &gt; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T1 &amp;, const U1 &amp; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T2 &amp;, const U2 &amp; &gt; &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp; <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从不同类型pair的拷贝赋值运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>源pair第一个元素的类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>源pair第二个元素的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前pair的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00352">352</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab19233da30aeafb79c77aa77aae33a58" name="ab19233da30aeafb79c77aa77aae33a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19233da30aeafb79c77aa77aae33a58">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename U1, typename U2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1negation.html">negation</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__same.html">is_same</a>&lt; <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>, <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &gt; &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T1 &amp;, U1 &gt;, <a class="el" href="struct_m_s_t_l_1_1is__assignable.html">is_assignable</a>&lt; T2 &amp;, U2 &gt; &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp; <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; U1, U2 &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从不同类型pair的移动赋值运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U1</td><td>源pair第一个元素的类型 </td></tr>
+    <tr><td class="paramname">U2</td><td>源pair第二个元素的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前pair的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00368">368</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2936b02217f5f0add45199f75d6b48b1" name="a2936b02217f5f0add45199f75d6b48b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2936b02217f5f0add45199f75d6b48b1">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename T = pair, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__copy__assignable.html">is_copy_assignable</a>&lt; typename T::first_type &gt;, <a class="el" href="struct_m_s_t_l_1_1is__copy__assignable.html">is_copy_assignable</a>&lt; typename T::second_type &gt; &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp; <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___type_traits_utilities.html#gadc6b7369183f1a0af610a74cd8182f1f">type_identity_t</a>&lt; const T &amp; &gt;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>pair类型，用于SFINAE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前pair的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00321">321</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8fdfbcc4db2f7a917ab6da5e8ecd67fa" name="a8fdfbcc4db2f7a917ab6da5e8ecd67fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fdfbcc4db2f7a917ab6da5e8ecd67fa">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<div class="memtemplate">
+template&lt;typename T = pair, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1conjunction.html">conjunction</a>&lt; <a class="el" href="struct_m_s_t_l_1_1is__move__assignable.html">is_move_assignable</a>&lt; typename T::first_type &gt;, <a class="el" href="struct_m_s_t_l_1_1is__move__assignable.html">is_move_assignable</a>&lt; typename T::second_type &gt; &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a> &amp; <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___type_traits_utilities.html#gadc6b7369183f1a0af610a74cd8182f1f">type_identity_t</a>&lt; T &amp;&amp; &gt;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>pair类型，用于SFINAE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>源pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前pair的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00336">336</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab4eb89e52ff6463416d3a9c7439038c9" name="ab4eb89e52ff6463416d3a9c7439038c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4eb89e52ff6463416d3a9c7439038c9">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; T1, T2 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>y</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>要比较的pair </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>比较结果</dd></dl>
+<p>如果两个pair的所有元素都相等则返回true </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00386">386</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5bb7e0a616d74782371833d5aabb4356" name="a5bb7e0a616d74782371833d5aabb4356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb7e0a616d74782371833d5aabb4356">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ab2e2bdf1097f82e753eafa32620b43fb">pair</a>&lt; T1, T2 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个pair的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>要交换的pair </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00418">418</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3eeaf80e5f9f1e31f7f6c6dc413b4a6d" name="a3eeaf80e5f9f1e31f7f6c6dc413b4a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eeaf80e5f9f1e31f7f6c6dc413b4a6d">&#9670;&#160;</a></span>to_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1, typename T2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> <a class="el" href="struct_m_s_t_l_1_1pair.html">MSTL::pair</a>&lt; T1, T2 &gt;::to_hash </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算hash值 </p>
+<dl class="section return"><dt>返回</dt><dd>pair的hash值</dd></dl>
+<p>使用两个元素的hash值进行异或操作 </p>
+
+<p class="definition">在文件 <a class="el" href="pair_8hpp_source.html">pair.hpp</a> 第 <a class="el" href="pair_8hpp_source.html#l00409">409</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="pair_8hpp_source.html">pair.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>MSTL</b></li><li class="navelem"><a href="struct_m_s_t_l_1_1pair.html">pair</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

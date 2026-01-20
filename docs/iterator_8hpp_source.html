@@ -92,150 +92,151 @@ $(function(){initNavTree('iterator_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">iterator.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_ALGORITHM_ITERATOR_HPP__</span></div>
+<a href="iterator_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_ALGORITHM_ITERATOR_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_ALGORITHM_ITERATOR_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="iterator__traits_8hpp.html">../iterator/iterator_traits.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="concepts_8hpp.html">../typeinfo/concepts.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../exception/assertion.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>MSTL_TRAITS_DEPRECATE MSTL_NODISCARD <span class="keyword">constexpr</span> iter_category_t&lt;Iterator&gt;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>iterator_category(<span class="keyword">const</span> Iterator&amp;) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordflow">return</span> iter_category_t&lt;Iterator&gt;();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>MSTL_TRAITS_DEPRECATE MSTL_NODISCARD <span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt;*</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>distance_type(<span class="keyword">const</span> Iterator&amp;) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>MSTL_TRAITS_DEPRECATE MSTL_NODISCARD <span class="keyword">constexpr</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>iter_value_t&lt;Iterator&gt;* value_type(<span class="keyword">const</span> Iterator&amp;) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ptr, enable_if_t&lt;is_po<span class="keywordtype">int</span>er_v&lt;Ptr&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Ptr&gt; __to_pointer_aux(Ptr iter) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> iter;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;!is_po<span class="keywordtype">int</span>er_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Iterator&gt; __to_pointer_aux(Iterator iter) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> iter.operator-&gt;();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Iterator&gt; to_pointer(Iterator iter) {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __to_pointer_aux(iter);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="iterator__traits_8hpp.html">../iterator/iterator_traits.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="concepts_8hpp.html">../typeinfo/concepts.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;../exception/assertion.hpp&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ptr, enable_if_t&lt;is_po<span class="keywordtype">int</span>er_v&lt;Ptr&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Ptr&gt; __to_pointer_aux(Ptr iter) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">return</span> iter;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;!is_po<span class="keywordtype">int</span>er_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Iterator&gt; __to_pointer_aux(Iterator iter) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">return</span> iter.operator-&gt;();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">constexpr</span> iter_pointer_t&lt;Iterator&gt; to_pointer(Iterator tmp) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_pointer_v&lt;Iterator&gt;)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> tmp.operator-&gt;();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> __advance_aux(Iterator&amp; i, Distance n) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    i += n;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt; &amp;&amp; is_ranges_b<span class="keywordtype">id</span>_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> __advance_aux(Iterator&amp; i, Distance n) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">for</span> (; n &lt; 0; ++n) --i;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">for</span> (; 0 &lt; n; --n) ++i;</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___iterator_operation.html#ga3efc05a3e52fb888f9fce49e5da6bfda">   45</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d">iter_pointer_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___iterator_operation.html#ga3efc05a3e52fb888f9fce49e5da6bfda">to_pointer</a>(Iterator iter) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#ifdef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___base_type_qualifier_check.html#gad978a82b22a6e01dcaf3625a56be5e42">is_pointer_v&lt;Iterator&gt;</a>) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">return</span> iter;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> iter.operator -&gt;();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __to_pointer_aux(iter);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> __advance_aux(Iterator&amp; i, Distance n) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    i += n;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt; &amp;&amp; !is_ranges_b<span class="keywordtype">id</span>_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt; &amp;&amp; is_ranges_b<span class="keywordtype">id</span>_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> __advance_aux(Iterator&amp; i, Distance n) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    MSTL_DEBUG_VERIFY__(is_signed_v&lt;Distance&gt; &amp;&amp; n &gt;= 0, <span class="stringliteral">&quot;negative advance of non-bidirectional iterator&quot;</span>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (; n &lt; 0; ++n) --i;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">for</span> (; 0 &lt; n; --n) ++i;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> advance(Iterator&amp; i, Distance n) {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __advance_aux(i, n);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> advance(Iterator&amp; i, Distance n) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_rnd_iter_v&lt;Iterator&gt;) {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        i += n;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_signed&lt;Distance&gt;::value &amp;&amp; !is_bid_iter_v&lt;Iterator&gt;) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            MSTL_DEBUG_VERIFY(n &gt;= 0, <span class="stringliteral">&quot;negative advance of non-bidirectional iterator&quot;</span>);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_signed&lt;Distance&gt;::value &amp;&amp; is_bid_iter_v&lt;Iterator&gt;) {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">for</span> (; n &lt; 0; ++n)</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                --i;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">for</span> (; 0 &lt; n; --n)</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            ++i;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">constexpr</span> Iterator prev(Iterator iter, iter_difference_t&lt;Iterator&gt; n = -1) {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    MSTL_DEBUG_VERIFY(n &lt;= 0, <span class="stringliteral">&quot;negative advance in previous operation function.&quot;</span>);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> advance(iter, n);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> iter;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">constexpr</span> Iterator next(Iterator iter, iter_difference_t&lt;Iterator&gt; n = 1) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    MSTL_DEBUG_VERIFY(n &gt;= 0, <span class="stringliteral">&quot;positive advance in next operation function.&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> advance(iter, n);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">return</span> iter;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt; &amp;&amp; !is_ranges_b<span class="keywordtype">id</span>_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> __advance_aux(Iterator&amp; i, Distance n) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    MSTL_DEBUG_VERIFY__(is_signed_v&lt;Distance&gt; &amp;&amp; n &gt;= 0, <span class="stringliteral">&quot;negative advance of non-bidirectional iterator&quot;</span>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">for</span> (; 0 &lt; n; --n) ++i;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Distance, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c">   92</a></span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c">advance</a>(Iterator&amp; i, Distance n) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#ifdef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___iterator_category_checks.html#gadea1fff329d8204e89f282f6654cd5c8">is_rnd_iter_v&lt;Iterator&gt;</a>) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        i += n;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___base_type_properties.html#gab0ae1578880c7ca025e2260263c9c610">is_signed_v&lt;Distance&gt;</a> &amp;&amp; !<a class="code hl_variable" href="group___iterator_category_checks.html#ga4482da606e883faf3443538c7cea84e6">is_bid_iter_v&lt;Iterator&gt;</a>) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            MSTL_DEBUG_VERIFY(n &gt;= 0, <span class="stringliteral">&quot;negative advance of non-bidirectional iterator&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___base_type_properties.html#gab0ae1578880c7ca025e2260263c9c610">is_signed_v&lt;Distance&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga4482da606e883faf3443538c7cea84e6">is_bid_iter_v&lt;Iterator&gt;</a>) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">for</span> (; n &lt; 0; ++n) --i;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">for</span> (; 0 &lt; n; --n) ++i;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __advance_aux(i, n);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; __distance_aux(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> last - first;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; __distance_aux(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    iter_difference_t&lt;Iterator&gt; n = 0;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">while</span> (first != last) { ++first; ++n; }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">return</span> n;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>}</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; distance(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __distance_aux(first, last);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; distance(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_rnd_iter_v&lt;Iterator&gt;)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> last - first;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        iter_difference_t&lt;Iterator&gt; n = 0;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">while</span> (first != last) { ++first; ++n; }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span> n;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="group___iterator_operation.html#ga60ed3005d582e2b2a6b851f3d4cf7f15">  120</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___iterator_operation.html#ga60ed3005d582e2b2a6b851f3d4cf7f15">prev</a>(Iterator iter, <a class="code hl_typedef" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t&lt;Iterator&gt;</a> n = -1) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    MSTL_DEBUG_VERIFY(n &lt;= 0, <span class="stringliteral">&quot;negative advance in previous operation function.&quot;</span>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c">advance</a>(iter, n);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">return</span> iter;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">  136</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">next</a>(Iterator iter, <a class="code hl_typedef" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t&lt;Iterator&gt;</a> n = 1) {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    MSTL_DEBUG_VERIFY(n &gt;= 0, <span class="stringliteral">&quot;positive advance in next operation function.&quot;</span>);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c">advance</a>(iter, n);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">return</span> iter;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
+</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ALGORITHM_ITERATOR_HPP__</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#ifndef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><a class="code hl_define" href="group___namespace_macros.html#gae231c5cb21608c74e6e1ff2651894959">MSTL_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; __distance_aux(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">return</span> last - first;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>}</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;!is_rnd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keyword">constexpr</span> iter_difference_t&lt;Iterator&gt; __distance_aux(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    iter_difference_t&lt;Iterator&gt; n = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">while</span> (first != last) { ++first; ++n; }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">return</span> n;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><a class="code hl_define" href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, enable_if_t&lt;is_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="group___iterator_operation.html#ga8dae4236ef628d59b2ec3f1278601419">  172</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___iterator_operation.html#ga8dae4236ef628d59b2ec3f1278601419">distance</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#ifdef MSTL_STANDARD_17__</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___iterator_category_checks.html#gadea1fff329d8204e89f282f6654cd5c8">is_rnd_iter_v&lt;Iterator&gt;</a>) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">return</span> last - first;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <a class="code hl_typedef" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t&lt;Iterator&gt;</a> n = 0;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">while</span> (first != last) { ++first; ++n; }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">return</span> n;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __distance_aux(first, last);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> <span class="comment">// IteratorOperation</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ALGORITHM_ITERATOR_HPP__</span></div>
 <div class="ttc" id="aconcepts_8hpp_html"><div class="ttname"><a href="concepts_8hpp.html">concepts.hpp</a></div><div class="ttdoc">MSTL概念和类型约束</div></div>
+<div class="ttc" id="agroup___base_type_properties_html_gab0ae1578880c7ca025e2260263c9c610"><div class="ttname"><a href="group___base_type_properties.html#gab0ae1578880c7ca025e2260263c9c610">MSTL::is_signed_v</a></div><div class="ttdeci">constexpr bool is_signed_v</div><div class="ttdoc">is_signed的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00989">type_traits.hpp:989</a></div></div>
+<div class="ttc" id="agroup___base_type_qualifier_check_html_gad978a82b22a6e01dcaf3625a56be5e42"><div class="ttname"><a href="group___base_type_qualifier_check.html#gad978a82b22a6e01dcaf3625a56be5e42">MSTL::is_pointer_v</a></div><div class="ttdeci">constexpr bool is_pointer_v</div><div class="ttdoc">is_pointer的便捷变量模板</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l01591">type_traits.hpp:1591</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_ga4482da606e883faf3443538c7cea84e6"><div class="ttname"><a href="group___iterator_category_checks.html#ga4482da606e883faf3443538c7cea84e6">MSTL::is_bid_iter_v</a></div><div class="ttdeci">constexpr bool is_bid_iter_v</div><div class="ttdoc">检查是否为双向迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00608">concepts.hpp:608</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_gadea1fff329d8204e89f282f6654cd5c8"><div class="ttname"><a href="group___iterator_category_checks.html#gadea1fff329d8204e89f282f6654cd5c8">MSTL::is_rnd_iter_v</a></div><div class="ttdeci">constexpr bool is_rnd_iter_v</div><div class="ttdoc">检查是否为随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00627">concepts.hpp:627</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga3efc05a3e52fb888f9fce49e5da6bfda"><div class="ttname"><a href="group___iterator_operation.html#ga3efc05a3e52fb888f9fce49e5da6bfda">MSTL::to_pointer</a></div><div class="ttdeci">constexpr iter_pointer_t&lt; Iterator &gt; to_pointer(Iterator iter)</div><div class="ttdoc">将迭代器转换为原始指针</div><div class="ttdef"><b>定义</b> <a href="#l00045">iterator.hpp:45</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga4d5681ffa110c2607ab37a252e4f4c11"><div class="ttname"><a href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">MSTL::next</a></div><div class="ttdeci">constexpr Iterator next(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</div><div class="ttdoc">获取迭代器的后一个位置</div><div class="ttdef"><b>定义</b> <a href="#l00136">iterator.hpp:136</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga60ed3005d582e2b2a6b851f3d4cf7f15"><div class="ttname"><a href="group___iterator_operation.html#ga60ed3005d582e2b2a6b851f3d4cf7f15">MSTL::prev</a></div><div class="ttdeci">constexpr Iterator prev(Iterator iter, iter_difference_t&lt; Iterator &gt; n=-1)</div><div class="ttdoc">获取迭代器的前一个位置</div><div class="ttdef"><b>定义</b> <a href="#l00120">iterator.hpp:120</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga8c50e39438f8c7fcd0349792de05206c"><div class="ttname"><a href="group___iterator_operation.html#ga8c50e39438f8c7fcd0349792de05206c">MSTL::advance</a></div><div class="ttdeci">constexpr void advance(Iterator &amp;i, Distance n)</div><div class="ttdoc">将迭代器前进指定距离</div><div class="ttdef"><b>定义</b> <a href="#l00092">iterator.hpp:92</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga8dae4236ef628d59b2ec3f1278601419"><div class="ttname"><a href="group___iterator_operation.html#ga8dae4236ef628d59b2ec3f1278601419">MSTL::distance</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; distance(Iterator first, Iterator last)</div><div class="ttdoc">计算两个迭代器之间的距离</div><div class="ttdef"><b>定义</b> <a href="#l00172">iterator.hpp:172</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_ga2c0ee93928e6f4d6929966fcb611567d"><div class="ttname"><a href="group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d">MSTL::iter_pointer_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::pointer iter_pointer_t</div><div class="ttdoc">获取迭代器的指针类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00107">iterator_traits.hpp:107</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_ga6cc361c86e963571dccf20d41b940621"><div class="ttname"><a href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">MSTL::iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00099">iterator_traits.hpp:99</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga338d51fe45d14dce2326fd31299a045d"><div class="ttname"><a href="group___namespace_macros.html#ga338d51fe45d14dce2326fd31299a045d">MSTL_END_INNER__</a></div><div class="ttdeci">#define MSTL_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00236">c++config.hpp:236</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00242">c++config.hpp:242</a></div></div>
@@ -249,7 +250,7 @@ $(function(){initNavTree('iterator_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><b>iterator.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="iterator_8hpp.html">iterator.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

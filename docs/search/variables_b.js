@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_0',['value',['../struct_m_s_t_l_1_1integral__constant.html#a484faa6621b0517bd4b172ddb53d72e7',1,'MSTL::integral_constant']]]
+  ['quotient_5fhigh_0',['quotient_high',['../struct_m_s_t_l_1_1big__div.html#a8877cd8346d964557d7e90020d841735',1,'MSTL::big_div']]],
+  ['quotient_5flow_1',['quotient_low',['../struct_m_s_t_l_1_1big__div.html#ad60c0d7b1b31bb4ace3de688b534466a',1,'MSTL::big_div']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

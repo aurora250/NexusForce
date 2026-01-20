@@ -128,13 +128,13 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">struct </span>chunk_info {</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        difference_type offset;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        size_type size;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        size_type <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        size_type chunk_index;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    };</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">struct </span>map_info {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">void</span>* address = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        size_type size = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        size_type <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a> = 0;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        size_type offset = 0;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        FILE_ACCESS access = FILE_ACCESS::READ;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">bool</span> is_mapped = <span class="keyword">false</span>;</div>
@@ -149,7 +149,7 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    };</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">struct </span>async_context {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">string</span> data{};</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">string</span> <a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>{};</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">string</span>* buffer = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        aiocb_type* cb = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">bool</span> is_write;</div>
@@ -287,11 +287,11 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    async_result async_read(<span class="keywordtype">string</span>&amp; buffer, size_type size, difference_type offset = -1) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    async_result async_write(<span class="keywordtype">string</span> data, size_type size, difference_type offset = -1);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">bool</span> wait_async(async_result&amp; result, uint32_t timeout_ms = numeric_limits&lt;uint32_t&gt;::max());</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">bool</span> wait_async(async_result&amp; result, uint32_t timeout_ms = numeric_traits&lt;uint32_t&gt;::max());</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordtype">void</span> cancel_async(async_result&amp; result);</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    MSTL_NODISCARD size_type size() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordtype">bool</span> size(size_type&amp; out_size) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    MSTL_NODISCARD size_type <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>(size_type&amp; out_size) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    MSTL_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga9e5a8d0f2a8ccc05b1f02cbd1f48e8ed">uint64_t</a> size64() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    MSTL_NODISCARD <span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; path() const noexcept { <span class="keywordflow">return</span> path_; }</div>
@@ -376,8 +376,8 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordtype">bool</span> set_last_access_time(<span class="keyword">const</span> datetime&amp; dt) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keywordtype">bool</span> set_last_write_time(<span class="keyword">const</span> datetime&amp; dt) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    MSTL_NODISCARD <span class="keyword">static</span> size_type size(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; p);</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> size(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; p, size_type&amp; size);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    MSTL_NODISCARD <span class="keyword">static</span> size_type <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; p);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; p, size_type&amp; size);</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> create_and_write(<span class="keyword">const</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> path&amp; p, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; content, <span class="keywordtype">bool</span> append = <span class="keyword">false</span>);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
@@ -430,6 +430,8 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga00d7fd2b04a7ff4df689b2f6bae8a5da"><div class="ttname"><a href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">MSTL::size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00138">types.hpp:138</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gadd573cfd63b0a7c52e40c5beace90159"><div class="ttname"><a href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaf631c74a77ff5174b7fc9258abe98f47"><div class="ttname"><a href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">MSTL::size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

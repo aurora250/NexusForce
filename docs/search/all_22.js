@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['标准检测_0',['C++标准检测',['../group___cxx_standard_detection.html',1,'']]]
+  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

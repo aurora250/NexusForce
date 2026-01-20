@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['decay_5ft_0',['decay_t',['../group___type_attribute_operations.html#ga4db9118cb5e23f02015a07d9d7a9fe08',1,'MSTL']]],
-  ['decimal_5ft_1',['decimal_t',['../group___core_types.html#gaf2228674029d4e7ecdefe5a1529332bd',1,'MSTL']]],
-  ['detected_5for_2',['detected_or',['../group___type_attribute_operations.html#ga1ab354afbf60f6a53903f59d078c03be',1,'MSTL']]],
-  ['detected_5for_5ft_3',['detected_or_t',['../group___type_attribute_operations.html#gac1e9501d25d0d01e9352d0a73b89090b',1,'MSTL']]],
-  ['difference_5ftype_4',['difference_type',['../struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ae8f6b0ebb48372ab07d47263dbc26eee',1,'MSTL::iterator_traits&lt; T * &gt;::difference_type'],['../struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a2bd8e11a7979ff65a04d78ab3c2db642',1,'MSTL::pointer_traits&lt; T * &gt;::difference_type']]]
+  ['deca_0',['deca',['../group___s_i_units.html#ga3bf77c715d12f98d7602e061289d1b36',1,'MSTL']]],
+  ['decay_5ft_1',['decay_t',['../group___type_attribute_operations.html#ga4db9118cb5e23f02015a07d9d7a9fe08',1,'MSTL']]],
+  ['deci_2',['deci',['../group___s_i_units.html#gaafa721e90ea0063ea31d9aa2ef0a4dcd',1,'MSTL']]],
+  ['decimal_5ft_3',['decimal_t',['../group___core_types.html#gaf2228674029d4e7ecdefe5a1529332bd',1,'MSTL']]],
+  ['deleter_5ftype_4',['deleter_type',['../class_m_s_t_l_1_1unique__ptr.html#a37f402d145836b9e7b8b9a3e3feac67f',1,'MSTL::unique_ptr::deleter_type'],['../class_m_s_t_l_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#adfb1bc97fc9a5d85fc8acb5cabe60ca4',1,'MSTL::unique_ptr&lt; T[], Deleter &gt;::deleter_type']]],
+  ['detected_5for_5',['detected_or',['../group___type_attribute_operations.html#ga1ab354afbf60f6a53903f59d078c03be',1,'MSTL']]],
+  ['detected_5for_5ft_6',['detected_or_t',['../group___type_attribute_operations.html#gac1e9501d25d0d01e9352d0a73b89090b',1,'MSTL']]],
+  ['difference_5ftype_7',['difference_type',['../group___insert_iterators.html#ga65f0cefd9fca227fdb375fd256f7e344',1,'MSTL::back_insert_iterator::difference_type'],['../group___insert_iterators.html#ga3700a17e13f671dc983d8251dd35c3f2',1,'MSTL::front_insert_iterator::difference_type'],['../group___insert_iterators.html#gaecb1781d04ddff0a828d86c9fefba2ea',1,'MSTL::insert_iterator::difference_type'],['../struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ae8f6b0ebb48372ab07d47263dbc26eee',1,'MSTL::iterator_traits&lt; T * &gt;::difference_type'],['../class_m_s_t_l_1_1normal__iterator.html#a4ea5a5ce37a72f7270789e3ff961ab11',1,'MSTL::normal_iterator::difference_type'],['../class_m_s_t_l_1_1reverse__iterator.html#ae8ac8286d1cbd31c26467e83d5725abc',1,'MSTL::reverse_iterator::difference_type'],['../struct_m_s_t_l_1_1allocator__traits.html#ac3fe0d612bc5cd469042b40ad265ce5e',1,'MSTL::allocator_traits::difference_type'],['../struct_m_s_t_l_1_1temporary__buffer.html#ac0725efdca2c7237fe5c7d1cc413f014',1,'MSTL::temporary_buffer::difference_type'],['../struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a2bd8e11a7979ff65a04d78ab3c2db642',1,'MSTL::pointer_traits&lt; T * &gt;::difference_type']]]
 ];

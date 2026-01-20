@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: sort.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sort_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sort.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL排序算法  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="merge_8hpp_source.html">merge.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="heap_8hpp_source.html">heap.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="partition_8hpp_source.html">partition.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="compare_8hpp_source.html">compare.hpp</a>&quot;</code><br />
+</div>
+<p><a href="sort_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga62024a2faf4426996f20035de97a38df" id="r_ga62024a2faf4426996f20035de97a38df"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga62024a2faf4426996f20035de97a38df template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga62024a2faf4426996f20035de97a38df">MSTL::is_sorted</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga62024a2faf4426996f20035de97a38df"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:gad7a3117f9c2230b570b82b968204d186" id="r_gad7a3117f9c2230b570b82b968204d186"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gad7a3117f9c2230b570b82b968204d186 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gad7a3117f9c2230b570b82b968204d186">MSTL::is_sorted</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gad7a3117f9c2230b570b82b968204d186"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:ga08d08757832d3067691c2f7ce6296eee" id="r_ga08d08757832d3067691c2f7ce6296eee"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga08d08757832d3067691c2f7ce6296eee template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga08d08757832d3067691c2f7ce6296eee">MSTL::is_sorted_until</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga08d08757832d3067691c2f7ce6296eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:gab802efcbc557277132c7378a28d86efe" id="r_gab802efcbc557277132c7378a28d86efe"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gab802efcbc557277132c7378a28d86efe template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gab802efcbc557277132c7378a28d86efe">MSTL::is_sorted_until</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab802efcbc557277132c7378a28d86efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:gaf1944b88fa6d213a05775a9e101ea5a9" id="r_gaf1944b88fa6d213a05775a9e101ea5a9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf1944b88fa6d213a05775a9e101ea5a9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaf1944b88fa6d213a05775a9e101ea5a9">MSTL::merge_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaf1944b88fa6d213a05775a9e101ea5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:ga2fdd89de050ade321f248df72a493b09" id="r_ga2fdd89de050ade321f248df72a493b09"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga2fdd89de050ade321f248df72a493b09 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga2fdd89de050ade321f248df72a493b09">MSTL::merge_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga2fdd89de050ade321f248df72a493b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:gaeca88bec174f94aadf19297aa4ab648d" id="r_gaeca88bec174f94aadf19297aa4ab648d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaeca88bec174f94aadf19297aa4ab648d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaeca88bec174f94aadf19297aa4ab648d">MSTL::partial_sort</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaeca88bec174f94aadf19297aa4ab648d"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga8d8e1cdbcb88ef886ff817bea59f5150" id="r_ga8d8e1cdbcb88ef886ff817bea59f5150"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga8d8e1cdbcb88ef886ff817bea59f5150 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga8d8e1cdbcb88ef886ff817bea59f5150">MSTL::partial_sort</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:ga8d8e1cdbcb88ef886ff817bea59f5150"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga43e9c16595da5ceed5f189a82f373250" id="r_ga43e9c16595da5ceed5f189a82f373250"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga43e9c16595da5ceed5f189a82f373250 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga43e9c16595da5ceed5f189a82f373250">MSTL::partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</td></tr>
+<tr class="memdesc:ga43e9c16595da5ceed5f189a82f373250"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制到另一个范围  <br /></td></tr>
+<tr class="memitem:ga4901b5f950695e55490e51a1e7964726" id="r_ga4901b5f950695e55490e51a1e7964726"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga4901b5f950695e55490e51a1e7964726 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga4901b5f950695e55490e51a1e7964726">MSTL::partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</td></tr>
+<tr class="memdesc:ga4901b5f950695e55490e51a1e7964726"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制  <br /></td></tr>
+<tr class="memitem:gab242f53a4c60effa0142f4db091dc7e2" id="r_gab242f53a4c60effa0142f4db091dc7e2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab242f53a4c60effa0142f4db091dc7e2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gab242f53a4c60effa0142f4db091dc7e2">MSTL::insertion_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gab242f53a4c60effa0142f4db091dc7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga929941c1bcb753004acd80542c86ff8c" id="r_ga929941c1bcb753004acd80542c86ff8c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga929941c1bcb753004acd80542c86ff8c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga929941c1bcb753004acd80542c86ff8c">MSTL::insertion_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga929941c1bcb753004acd80542c86ff8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga280d8ed94855286eb99d31201c3536e5" id="r_ga280d8ed94855286eb99d31201c3536e5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga280d8ed94855286eb99d31201c3536e5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga280d8ed94855286eb99d31201c3536e5">MSTL::introspective_sort</a> (Iterator first, Iterator last, int depth_limit, Compare comp)</td></tr>
+<tr class="memdesc:ga280d8ed94855286eb99d31201c3536e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:gaabe73919366455861f1f246224894f8a" id="r_gaabe73919366455861f1f246224894f8a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaabe73919366455861f1f246224894f8a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaabe73919366455861f1f246224894f8a">MSTL::introspective_sort</a> (Iterator first, Iterator last, int depth_limit)</td></tr>
+<tr class="memdesc:gaabe73919366455861f1f246224894f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:ga04289835f382b3b5890ee5f869ff3417" id="r_ga04289835f382b3b5890ee5f869ff3417"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga04289835f382b3b5890ee5f869ff3417 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga04289835f382b3b5890ee5f869ff3417">MSTL::quick_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga04289835f382b3b5890ee5f869ff3417"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga218a79e82176353eb9cdce859aba58d2" id="r_ga218a79e82176353eb9cdce859aba58d2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga218a79e82176353eb9cdce859aba58d2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga218a79e82176353eb9cdce859aba58d2">MSTL::quick_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga218a79e82176353eb9cdce859aba58d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga230ecce8f942d1063eaaf59c455af292" id="r_ga230ecce8f942d1063eaaf59c455af292"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga230ecce8f942d1063eaaf59c455af292 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga230ecce8f942d1063eaaf59c455af292">MSTL::sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga230ecce8f942d1063eaaf59c455af292"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:gab3d1f0ee3ce3e6fccab3ce900d98f7ef" id="r_gab3d1f0ee3ce3e6fccab3ce900d98f7ef"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gab3d1f0ee3ce3e6fccab3ce900d98f7ef template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gab3d1f0ee3ce3e6fccab3ce900d98f7ef">MSTL::sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab3d1f0ee3ce3e6fccab3ce900d98f7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga980e83b413124ddec02347188782bc29" id="r_ga980e83b413124ddec02347188782bc29"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga980e83b413124ddec02347188782bc29 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga980e83b413124ddec02347188782bc29">MSTL::nth_element</a> (Iterator first, Iterator nth, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga980e83b413124ddec02347188782bc29"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+<tr class="memitem:gaca18559108cf00a647da457512040ed1" id="r_gaca18559108cf00a647da457512040ed1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaca18559108cf00a647da457512040ed1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaca18559108cf00a647da457512040ed1">MSTL::nth_element</a> (Iterator first, Iterator nth, Iterator last)</td></tr>
+<tr class="memdesc:gaca18559108cf00a647da457512040ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL排序算法 </p>
+<p>此文件提供了标准排序算法实现， 包括多种排序算法、排序检查和部分排序功能。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="sort_8hpp.html">sort.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

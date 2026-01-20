@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: compare.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('compare_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">compare.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL比较算法  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="memory_8hpp_source.html">../memory/memory.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pair_8hpp_source.html">../utility/pair.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="search_8hpp_source.html">search.hpp</a>&quot;</code><br />
+<code>#include &lt;initializer_list&gt;</code><br />
+<code>#include &quot;../config/undef_cmacro.hpp&quot;</code><br />
+</div>
+<p><a href="compare_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga647005a94917c344d4aa0534ab41d978" id="r_ga647005a94917c344d4aa0534ab41d978"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga647005a94917c344d4aa0534ab41d978 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga647005a94917c344d4aa0534ab41d978">MSTL::equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2)))</td></tr>
+<tr class="memdesc:ga647005a94917c344d4aa0534ab41d978"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:gae5b2057570e795ef86db5bf0bd6f6ae2" id="r_gae5b2057570e795ef86db5bf0bd6f6ae2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:gae5b2057570e795ef86db5bf0bd6f6ae2 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gae5b2057570e795ef86db5bf0bd6f6ae2">MSTL::equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(MSTL::equal(first1, last1, first2, <a class="el" href="struct_m_s_t_l_1_1equal__to.html">MSTL::equal_to</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator1 &gt; &gt;())))</td></tr>
+<tr class="memdesc:gae5b2057570e795ef86db5bf0bd6f6ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:gad85a819bfd7cfe7e795e8efba5c26973" id="r_gad85a819bfd7cfe7e795e8efba5c26973"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad85a819bfd7cfe7e795e8efba5c26973 template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gad85a819bfd7cfe7e795e8efba5c26973">MSTL::equal_range</a> (Iterator first, Iterator last, const T &amp;value, Compare comp)</td></tr>
+<tr class="memdesc:gad85a819bfd7cfe7e795e8efba5c26973"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
+<tr class="memitem:gacb0f74e01594b270d97cc8e72cd19d3d" id="r_gacb0f74e01594b270d97cc8e72cd19d3d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
+<tr class="memitem:gacb0f74e01594b270d97cc8e72cd19d3d template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gacb0f74e01594b270d97cc8e72cd19d3d">MSTL::equal_range</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
+<tr class="memdesc:gacb0f74e01594b270d97cc8e72cd19d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
+<tr class="memitem:ga19845c5c64a1b1b876e3e5dba6023d9a" id="r_ga19845c5c64a1b1b876e3e5dba6023d9a"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga19845c5c64a1b1b876e3e5dba6023d9a template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga19845c5c64a1b1b876e3e5dba6023d9a">MSTL::max</a> (const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
+<tr class="memdesc:ga19845c5c64a1b1b876e3e5dba6023d9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较大者  <br /></td></tr>
+<tr class="memitem:ga89469d990859d557ba0cd17e5b08f9d0" id="r_ga89469d990859d557ba0cd17e5b08f9d0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga89469d990859d557ba0cd17e5b08f9d0 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga89469d990859d557ba0cd17e5b08f9d0">MSTL::max</a> (const T &amp;a, const T &amp;b) noexcept(noexcept(a&lt; b))</td></tr>
+<tr class="memdesc:ga89469d990859d557ba0cd17e5b08f9d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较大者  <br /></td></tr>
+<tr class="memitem:ga4356be7cf5f435558aeb08a7873de1af" id="r_ga4356be7cf5f435558aeb08a7873de1af"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga4356be7cf5f435558aeb08a7873de1af template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga4356be7cf5f435558aeb08a7873de1af">MSTL::min</a> (const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(b, a)))</td></tr>
+<tr class="memdesc:ga4356be7cf5f435558aeb08a7873de1af"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较小者  <br /></td></tr>
+<tr class="memitem:ga21631f519c1373c7972e0e650889fd87" id="r_ga21631f519c1373c7972e0e650889fd87"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga21631f519c1373c7972e0e650889fd87 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga21631f519c1373c7972e0e650889fd87">MSTL::min</a> (const T &amp;a, const T &amp;b) noexcept(noexcept(b&lt; a))</td></tr>
+<tr class="memdesc:ga21631f519c1373c7972e0e650889fd87"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较小者  <br /></td></tr>
+<tr class="memitem:gad84f37c99120a0197292fdad7333336f" id="r_gad84f37c99120a0197292fdad7333336f"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:gad84f37c99120a0197292fdad7333336f template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gad84f37c99120a0197292fdad7333336f">MSTL::median</a> (const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
+<tr class="memdesc:gad84f37c99120a0197292fdad7333336f"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:gafc275f6532bbfaaed31074ceb73d0dd7" id="r_gafc275f6532bbfaaed31074ceb73d0dd7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gafc275f6532bbfaaed31074ceb73d0dd7 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gafc275f6532bbfaaed31074ceb73d0dd7">MSTL::median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(MSTL::median(a, b, c, <a class="el" href="struct_m_s_t_l_1_1less.html">MSTL::less</a>&lt; T &gt;())))</td></tr>
+<tr class="memdesc:gafc275f6532bbfaaed31074ceb73d0dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:ga64064fe400c2eb84110c8e612f1d5b73" id="r_ga64064fe400c2eb84110c8e612f1d5b73"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga64064fe400c2eb84110c8e612f1d5b73 template"><td class="memItemLeft"><a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt; &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga64064fe400c2eb84110c8e612f1d5b73">MSTL::minmax</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga64064fe400c2eb84110c8e612f1d5b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
+<tr class="memitem:ga8ab710035a9259724210918b95d8fe25" id="r_ga8ab710035a9259724210918b95d8fe25"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga8ab710035a9259724210918b95d8fe25 template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga8ab710035a9259724210918b95d8fe25">MSTL::minmax</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga8ab710035a9259724210918b95d8fe25"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
+<tr class="memitem:ga869ca0a5205c419e789bf2b160e1577c" id="r_ga869ca0a5205c419e789bf2b160e1577c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga869ca0a5205c419e789bf2b160e1577c template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga869ca0a5205c419e789bf2b160e1577c">MSTL::max_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga869ca0a5205c419e789bf2b160e1577c"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
+<tr class="memitem:gaa12a5b0e5abc2fb346011902b5252a23" id="r_gaa12a5b0e5abc2fb346011902b5252a23"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaa12a5b0e5abc2fb346011902b5252a23 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gaa12a5b0e5abc2fb346011902b5252a23">MSTL::max_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gaa12a5b0e5abc2fb346011902b5252a23"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
+<tr class="memitem:gad6844e9cbc771087edf4bfc2c196b2fe" id="r_gad6844e9cbc771087edf4bfc2c196b2fe"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad6844e9cbc771087edf4bfc2c196b2fe template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gad6844e9cbc771087edf4bfc2c196b2fe">MSTL::max</a> (std::initializer_list&lt; T &gt; list)</td></tr>
+<tr class="memdesc:gad6844e9cbc771087edf4bfc2c196b2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最大值  <br /></td></tr>
+<tr class="memitem:ga651ecff7f5b7575b47f1dabb0d6b237d" id="r_ga651ecff7f5b7575b47f1dabb0d6b237d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga651ecff7f5b7575b47f1dabb0d6b237d template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga651ecff7f5b7575b47f1dabb0d6b237d">MSTL::min_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga651ecff7f5b7575b47f1dabb0d6b237d"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
+<tr class="memitem:gad0152ee6c7ab9f40b94aca8613d3ac99" id="r_gad0152ee6c7ab9f40b94aca8613d3ac99"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gad0152ee6c7ab9f40b94aca8613d3ac99 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gad0152ee6c7ab9f40b94aca8613d3ac99">MSTL::min_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gad0152ee6c7ab9f40b94aca8613d3ac99"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
+<tr class="memitem:ga8ea60b269e86a22bd4004459e48773c0" id="r_ga8ea60b269e86a22bd4004459e48773c0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga8ea60b269e86a22bd4004459e48773c0 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga8ea60b269e86a22bd4004459e48773c0">MSTL::min</a> (std::initializer_list&lt; T &gt; list)</td></tr>
+<tr class="memdesc:ga8ea60b269e86a22bd4004459e48773c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最小值  <br /></td></tr>
+<tr class="memitem:ga574399820d65861cf1e46a8d65affc64" id="r_ga574399820d65861cf1e46a8d65affc64"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga574399820d65861cf1e46a8d65affc64 template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga574399820d65861cf1e46a8d65affc64">MSTL::minmax_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga574399820d65861cf1e46a8d65affc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
+<tr class="memitem:gacccc2ebcb0a82a086e6fffa653bf25ce" id="r_gacccc2ebcb0a82a086e6fffa653bf25ce"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gacccc2ebcb0a82a086e6fffa653bf25ce template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gacccc2ebcb0a82a086e6fffa653bf25ce">MSTL::minmax_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gacccc2ebcb0a82a086e6fffa653bf25ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
+<tr class="memitem:ga495c5d0b5e45fbbc5c36d76028f14433" id="r_ga495c5d0b5e45fbbc5c36d76028f14433"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga495c5d0b5e45fbbc5c36d76028f14433 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga495c5d0b5e45fbbc5c36d76028f14433">MSTL::clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper, Compare comp) noexcept(noexcept(comp(value, lower)))</td></tr>
+<tr class="memdesc:ga495c5d0b5e45fbbc5c36d76028f14433"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:ga2e0f7c2836af7ca8e9e3d831b9f343c3" id="r_ga2e0f7c2836af7ca8e9e3d831b9f343c3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga2e0f7c2836af7ca8e9e3d831b9f343c3 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga2e0f7c2836af7ca8e9e3d831b9f343c3">MSTL::clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(MSTL::clamp(value, lower, upper, <a class="el" href="struct_m_s_t_l_1_1less.html">MSTL::less</a>&lt; T &gt;())))</td></tr>
+<tr class="memdesc:ga2e0f7c2836af7ca8e9e3d831b9f343c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:ga3b4e7142ebfd7ab46c73315f05c60065" id="r_ga3b4e7142ebfd7ab46c73315f05c60065"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3b4e7142ebfd7ab46c73315f05c60065 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga3b4e7142ebfd7ab46c73315f05c60065">MSTL::lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))</td></tr>
+<tr class="memdesc:ga3b4e7142ebfd7ab46c73315f05c60065"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:ga4c0b03048958edf210c9281a9908875d" id="r_ga4c0b03048958edf210c9281a9908875d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga4c0b03048958edf210c9281a9908875d template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga4c0b03048958edf210c9281a9908875d">MSTL::lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(MSTL::inner::__lexicographical_compare_aux(first1, last1, first2, last2)))</td></tr>
+<tr class="memdesc:ga4c0b03048958edf210c9281a9908875d"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:ga4c20d3df72433b3aa4db8b924f2402b6" id="r_ga4c20d3df72433b3aa4db8b924f2402b6"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga4c20d3df72433b3aa4db8b924f2402b6 template"><td class="memItemLeft"><a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator1, Iterator2 &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#ga4c20d3df72433b3aa4db8b924f2402b6">MSTL::mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare comp)</td></tr>
+<tr class="memdesc:ga4c20d3df72433b3aa4db8b924f2402b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
+<tr class="memitem:gab43bcc93648a88de32954508cfce2707" id="r_gab43bcc93648a88de32954508cfce2707"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:gab43bcc93648a88de32954508cfce2707 template"><td class="memItemLeft">constexpr <a class="el" href="struct_m_s_t_l_1_1pair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___compare_algorithms.html#gab43bcc93648a88de32954508cfce2707">MSTL::mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2)</td></tr>
+<tr class="memdesc:gab43bcc93648a88de32954508cfce2707"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL比较算法 </p>
+<p>此文件提供了比较算法实现， 包括相等性比较、范围比较、极值查找、字典序比较等功能。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="compare_8hpp.html">compare.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

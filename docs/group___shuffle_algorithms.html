@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 随机重排算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___shuffle_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">随机重排算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL随机重排算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga378bdfb8e26f837abfffd9a9067faef5" id="r_ga378bdfb8e26f837abfffd9a9067faef5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga378bdfb8e26f837abfffd9a9067faef5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga378bdfb8e26f837abfffd9a9067faef5">MSTL::shuffle</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga378bdfb8e26f837abfffd9a9067faef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列  <br /></td></tr>
+<tr class="memitem:ga686805a6f552bcdaaaaa05c3eb6497bf" id="r_ga686805a6f552bcdaaaaa05c3eb6497bf"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga686805a6f552bcdaaaaa05c3eb6497bf template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga686805a6f552bcdaaaaa05c3eb6497bf">MSTL::shuffle</a> (Iterator first, Iterator last, Generator &amp;rand)</td></tr>
+<tr class="memdesc:ga686805a6f552bcdaaaaa05c3eb6497bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列（使用自定义随机数生成器）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL随机重排算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga378bdfb8e26f837abfffd9a9067faef5" name="ga378bdfb8e26f837abfffd9a9067faef5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga378bdfb8e26f837abfffd9a9067faef5">&#9670;&#160;</a></span>shuffle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::shuffle </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>随机重排序列 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用Fisher-Yates洗牌算法（Knuth洗牌）将范围 [first, last) 中的元素随机重排。 算法对每个位置 i（从第二个元素开始），在 [first, i] 范围内随机选择一个位置 j， 然后交换位置 i 和 j 的元素。</p>
+<dl class="section note"><dt>注解</dt><dd>要求 Iterator 满足随机访问迭代器概念 </dd>
+<dd>
+使用默认的 <a class="el" href="class_m_s_t_l_1_1random__lcd.html" title="线性同余随机数生成器">random_lcd</a> 线性同余随机数生成器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shuffle_8hpp_source.html">shuffle.hpp</a> 第 <a class="el" href="shuffle_8hpp_source.html#l00034">34</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="iterator_8hpp_source.html#l00172">distance()</a>, <a class="el" href="shift_8hpp_source.html#l00382">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>, <a class="el" href="random_8hpp_source.html#l00061">MSTL::random_lcd::next_int()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00063">shuffle()</a>.</p>
+
+</div>
+</div>
+<a id="ga686805a6f552bcdaaaaa05c3eb6497bf" name="ga686805a6f552bcdaaaaa05c3eb6497bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga686805a6f552bcdaaaaa05c3eb6497bf">&#9670;&#160;</a></span>shuffle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::shuffle </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Generator &amp;</td>          <td class="paramname"><span class="paramname"><em>rand</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>随机重排序列（使用自定义随机数生成器） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Generator</td><td>随机数生成器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">rand</td><td>自定义随机数生成器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用Fisher-Yates洗牌算法将范围 [first, last) 中的元素随机重排。 允许使用自定义的随机数生成器，提供更大的灵活性。</p>
+<p>随机数生成器需要满足以下要求：</p><ul>
+<li>可调用，接受一个整数参数 n</li>
+<li>返回 [0, n) 范围内的随机整数</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>要求 Iterator 满足随机访问迭代器概念 </dd>
+<dd>
+随机数生成器必须提供 operator()(integer) -&gt; integer 方法 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shuffle_8hpp_source.html">shuffle.hpp</a> 第 <a class="el" href="shuffle_8hpp_source.html#l00063">63</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00382">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00136">next()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

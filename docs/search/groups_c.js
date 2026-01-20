@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
-  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
+  ['内存分配器_0',['内存分配器',['../group___memory_allocator.html',1,'']]],
+  ['内存就地操作函数_1',['内存就地操作函数',['../group___inplace_memory_function.html',1,'']]],
+  ['内存操作函数_2',['内存操作函数',['../group___memory_functions.html',1,'']]]
 ];

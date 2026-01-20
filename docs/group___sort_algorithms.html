@@ -1,0 +1,1208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 排序算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___sort_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">排序算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL排序算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga62024a2faf4426996f20035de97a38df" id="r_ga62024a2faf4426996f20035de97a38df"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga62024a2faf4426996f20035de97a38df template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga62024a2faf4426996f20035de97a38df">MSTL::is_sorted</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga62024a2faf4426996f20035de97a38df"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:gad7a3117f9c2230b570b82b968204d186" id="r_gad7a3117f9c2230b570b82b968204d186"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gad7a3117f9c2230b570b82b968204d186 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#gad7a3117f9c2230b570b82b968204d186">MSTL::is_sorted</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gad7a3117f9c2230b570b82b968204d186"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:ga08d08757832d3067691c2f7ce6296eee" id="r_ga08d08757832d3067691c2f7ce6296eee"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga08d08757832d3067691c2f7ce6296eee template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga08d08757832d3067691c2f7ce6296eee">MSTL::is_sorted_until</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga08d08757832d3067691c2f7ce6296eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:gab802efcbc557277132c7378a28d86efe" id="r_gab802efcbc557277132c7378a28d86efe"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gab802efcbc557277132c7378a28d86efe template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gab802efcbc557277132c7378a28d86efe">MSTL::is_sorted_until</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab802efcbc557277132c7378a28d86efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:gaf1944b88fa6d213a05775a9e101ea5a9" id="r_gaf1944b88fa6d213a05775a9e101ea5a9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf1944b88fa6d213a05775a9e101ea5a9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaf1944b88fa6d213a05775a9e101ea5a9">MSTL::merge_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaf1944b88fa6d213a05775a9e101ea5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:ga2fdd89de050ade321f248df72a493b09" id="r_ga2fdd89de050ade321f248df72a493b09"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga2fdd89de050ade321f248df72a493b09 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga2fdd89de050ade321f248df72a493b09">MSTL::merge_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga2fdd89de050ade321f248df72a493b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:gaeca88bec174f94aadf19297aa4ab648d" id="r_gaeca88bec174f94aadf19297aa4ab648d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaeca88bec174f94aadf19297aa4ab648d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaeca88bec174f94aadf19297aa4ab648d">MSTL::partial_sort</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaeca88bec174f94aadf19297aa4ab648d"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga8d8e1cdbcb88ef886ff817bea59f5150" id="r_ga8d8e1cdbcb88ef886ff817bea59f5150"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga8d8e1cdbcb88ef886ff817bea59f5150 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8d8e1cdbcb88ef886ff817bea59f5150">MSTL::partial_sort</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:ga8d8e1cdbcb88ef886ff817bea59f5150"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga43e9c16595da5ceed5f189a82f373250" id="r_ga43e9c16595da5ceed5f189a82f373250"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga43e9c16595da5ceed5f189a82f373250 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga43e9c16595da5ceed5f189a82f373250">MSTL::partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</td></tr>
+<tr class="memdesc:ga43e9c16595da5ceed5f189a82f373250"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制到另一个范围  <br /></td></tr>
+<tr class="memitem:ga4901b5f950695e55490e51a1e7964726" id="r_ga4901b5f950695e55490e51a1e7964726"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga4901b5f950695e55490e51a1e7964726 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga4901b5f950695e55490e51a1e7964726">MSTL::partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</td></tr>
+<tr class="memdesc:ga4901b5f950695e55490e51a1e7964726"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制  <br /></td></tr>
+<tr class="memitem:gab242f53a4c60effa0142f4db091dc7e2" id="r_gab242f53a4c60effa0142f4db091dc7e2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab242f53a4c60effa0142f4db091dc7e2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab242f53a4c60effa0142f4db091dc7e2">MSTL::insertion_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gab242f53a4c60effa0142f4db091dc7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga929941c1bcb753004acd80542c86ff8c" id="r_ga929941c1bcb753004acd80542c86ff8c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga929941c1bcb753004acd80542c86ff8c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga929941c1bcb753004acd80542c86ff8c">MSTL::insertion_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga929941c1bcb753004acd80542c86ff8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga280d8ed94855286eb99d31201c3536e5" id="r_ga280d8ed94855286eb99d31201c3536e5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga280d8ed94855286eb99d31201c3536e5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga280d8ed94855286eb99d31201c3536e5">MSTL::introspective_sort</a> (Iterator first, Iterator last, int depth_limit, Compare comp)</td></tr>
+<tr class="memdesc:ga280d8ed94855286eb99d31201c3536e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:gaabe73919366455861f1f246224894f8a" id="r_gaabe73919366455861f1f246224894f8a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaabe73919366455861f1f246224894f8a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaabe73919366455861f1f246224894f8a">MSTL::introspective_sort</a> (Iterator first, Iterator last, int depth_limit)</td></tr>
+<tr class="memdesc:gaabe73919366455861f1f246224894f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:ga04289835f382b3b5890ee5f869ff3417" id="r_ga04289835f382b3b5890ee5f869ff3417"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga04289835f382b3b5890ee5f869ff3417 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga04289835f382b3b5890ee5f869ff3417">MSTL::quick_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga04289835f382b3b5890ee5f869ff3417"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga218a79e82176353eb9cdce859aba58d2" id="r_ga218a79e82176353eb9cdce859aba58d2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga218a79e82176353eb9cdce859aba58d2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga218a79e82176353eb9cdce859aba58d2">MSTL::quick_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga218a79e82176353eb9cdce859aba58d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga230ecce8f942d1063eaaf59c455af292" id="r_ga230ecce8f942d1063eaaf59c455af292"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga230ecce8f942d1063eaaf59c455af292 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga230ecce8f942d1063eaaf59c455af292">MSTL::sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga230ecce8f942d1063eaaf59c455af292"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:gab3d1f0ee3ce3e6fccab3ce900d98f7ef" id="r_gab3d1f0ee3ce3e6fccab3ce900d98f7ef"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gab3d1f0ee3ce3e6fccab3ce900d98f7ef template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab3d1f0ee3ce3e6fccab3ce900d98f7ef">MSTL::sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab3d1f0ee3ce3e6fccab3ce900d98f7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga980e83b413124ddec02347188782bc29" id="r_ga980e83b413124ddec02347188782bc29"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga980e83b413124ddec02347188782bc29 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga980e83b413124ddec02347188782bc29">MSTL::nth_element</a> (Iterator first, Iterator nth, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga980e83b413124ddec02347188782bc29"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+<tr class="memitem:gaca18559108cf00a647da457512040ed1" id="r_gaca18559108cf00a647da457512040ed1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaca18559108cf00a647da457512040ed1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaca18559108cf00a647da457512040ed1">MSTL::nth_element</a> (Iterator first, Iterator nth, Iterator last)</td></tr>
+<tr class="memdesc:gaca18559108cf00a647da457512040ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL排序算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga929941c1bcb753004acd80542c86ff8c" name="ga929941c1bcb753004acd80542c86ff8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga929941c1bcb753004acd80542c86ff8c">&#9670;&#160;</a></span>insertion_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>插入排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00282">282</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00262">insertion_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gab242f53a4c60effa0142f4db091dc7e2" name="gab242f53a4c60effa0142f4db091dc7e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab242f53a4c60effa0142f4db091dc7e2">&#9670;&#160;</a></span>insertion_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>插入排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>简单的稳定排序算法，适用于小规模或基本有序的数据。</p>
+<p>将每个元素插入到前面已排序子序列的正确位置。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00262">262</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00219">copy_backward()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00262">insertion_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00282">insertion_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00262">insertion_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00466">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00426">sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaabe73919366455861f1f246224894f8a" name="gaabe73919366455861f1f246224894f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaabe73919366455861f1f246224894f8a">&#9670;&#160;</a></span>introspective_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::introspective_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>depth_limit</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内省排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">depth_limit</td><td>递归深度限制 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00324">324</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00302">introspective_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga280d8ed94855286eb99d31201c3536e5" name="ga280d8ed94855286eb99d31201c3536e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga280d8ed94855286eb99d31201c3536e5">&#9670;&#160;</a></span>introspective_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::introspective_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>depth_limit</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内省排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">depth_limit</td><td>递归深度限制 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>结合了快速排序、堆排序和插入排序的混合排序算法：</p><ol type="1">
+<li>使用快速排序递归分区</li>
+<li>当递归深度过大时切换到堆排序，避免快速排序的最坏情况</li>
+<li>对小规模子序列使用插入排序 </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00302">302</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="sort_8hpp_source.html#l00302">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a>, <a class="el" href="compare_8hpp_source.html#l00198">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00144">partial_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00324">introspective_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00302">introspective_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gad7a3117f9c2230b570b82b968204d186" name="gad7a3117f9c2230b570b82b968204d186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7a3117f9c2230b570b82b968204d186">&#9670;&#160;</a></span>is_sorted() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否已排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围已排序则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00055">55</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a>.</p>
+
+</div>
+</div>
+<a id="ga62024a2faf4426996f20035de97a38df" name="ga62024a2faf4426996f20035de97a38df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62024a2faf4426996f20035de97a38df">&#9670;&#160;</a></span>is_sorted() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSTL::is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否已排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围已按comp排序则返回true，否则返回false</dd></dl>
+<p>检查范围 [first, last) 是否按照比较函数 comp 排序。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00055">is_sorted()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a>.</p>
+
+</div>
+</div>
+<a id="gab802efcbc557277132c7378a28d86efe" name="gab802efcbc557277132c7378a28d86efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab802efcbc557277132c7378a28d86efe">&#9670;&#160;</a></span>is_sorted_until() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator MSTL::is_sorted_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找首个破坏排序的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向首个破坏排序的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00071">is_sorted_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga08d08757832d3067691c2f7ce6296eee" name="ga08d08757832d3067691c2f7ce6296eee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga08d08757832d3067691c2f7ce6296eee">&#9670;&#160;</a></span>is_sorted_until() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator MSTL::is_sorted_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找首个破坏排序的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向首个破坏排序的元素的迭代器，如果整个范围已排序则返回last</dd></dl>
+<p>在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="sort_8hpp_source.html#l00071">is_sorted_until()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00089">is_sorted_until()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00071">is_sorted_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga2fdd89de050ade321f248df72a493b09" name="ga2fdd89de050ade321f248df72a493b09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2fdd89de050ade321f248df72a493b09">&#9670;&#160;</a></span>merge_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::merge_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>归并排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00125">125</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00109">merge_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaf1944b88fa6d213a05775a9e101ea5a9" name="gaf1944b88fa6d213a05775a9e101ea5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf1944b88fa6d213a05775a9e101ea5a9">&#9670;&#160;</a></span>merge_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::merge_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>归并排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用分治策略的稳定排序算法：</p><ol type="1">
+<li>递归地将序列分成两半</li>
+<li>分别对两半进行排序</li>
+<li>合并两个已排序的子序列 </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00109">109</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="iterator_8hpp_source.html#l00172">distance()</a>, <a class="el" href="merge_8hpp_source.html#l00258">inplace_merge()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00109">merge_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00125">merge_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00109">merge_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaca18559108cf00a647da457512040ed1" name="gaca18559108cf00a647da457512040ed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca18559108cf00a647da457512040ed1">&#9670;&#160;</a></span>nth_element() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::nth_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>nth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>第n个元素选择 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">nth</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00484">484</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00466">nth_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga980e83b413124ddec02347188782bc29" name="ga980e83b413124ddec02347188782bc29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga980e83b413124ddec02347188782bc29">&#9670;&#160;</a></span>nth_element() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::nth_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>nth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>第n个元素选择 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">nth</td><td>目标位置（0-based） </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>重新排列范围 [first, last)，使得位置 nth 的元素是排序后的正确元素， 并且 nth 之前的元素都不大于它，之后的元素都不小于它。 使用快速选择算法实现。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00466">466</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="sort_8hpp_source.html#l00262">insertion_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a>, <a class="el" href="compare_8hpp_source.html#l00198">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00466">nth_element()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00484">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00466">nth_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga8d8e1cdbcb88ef886ff817bea59f5150" name="ga8d8e1cdbcb88ef886ff817bea59f5150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8d8e1cdbcb88ef886ff817bea59f5150">&#9670;&#160;</a></span>partial_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::partial_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>部分排序的边界 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00144">partial_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaeca88bec174f94aadf19297aa4ab648d" name="gaeca88bec174f94aadf19297aa4ab648d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeca88bec174f94aadf19297aa4ab648d">&#9670;&#160;</a></span>partial_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::partial_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>部分排序的边界 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>对范围 [first, last) 进行部分排序，使得 [first, middle) 包含整个范围中最小的元素， 并且这个子范围是已排序的。使用堆排序算法实现。 适用只需要前k个最小（或最大）元素的情况。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00144">144</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="heap_8hpp_source.html#l00299">make_heap()</a>, <a class="el" href="sort_8hpp_source.html#l00144">partial_sort()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00273">sort_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00302">introspective_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00163">partial_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00144">partial_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga4901b5f950695e55490e51a1e7964726" name="ga4901b5f950695e55490e51a1e7964726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4901b5f950695e55490e51a1e7964726">&#9670;&#160;</a></span>partial_sort_copy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 MSTL::partial_sort_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序并复制 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result_first</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">result_last</td><td>输出范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围的实际结束位置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00215">215</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00183">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga43e9c16595da5ceed5f189a82f373250" name="ga43e9c16595da5ceed5f189a82f373250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga43e9c16595da5ceed5f189a82f373250">&#9670;&#160;</a></span>partial_sort_copy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gaea013084179728e88ad31e91b2da8b47">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 MSTL::partial_sort_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序并复制到另一个范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result_first</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">result_last</td><td>输出范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围的实际结束位置</dd></dl>
+<p>从输入范围中选取最小的元素，部分排序后复制到输出范围。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00183">183</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="heap_8hpp_source.html#l00173">adjust_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00299">make_heap()</a>, <a class="el" href="sort_8hpp_source.html#l00183">partial_sort_copy()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00273">sort_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00215">partial_sort_copy()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00183">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga218a79e82176353eb9cdce859aba58d2" name="ga218a79e82176353eb9cdce859aba58d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga218a79e82176353eb9cdce859aba58d2">&#9670;&#160;</a></span>quick_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::quick_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>快速排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00362">362</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00345">quick_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga04289835f382b3b5890ee5f869ff3417" name="ga04289835f382b3b5890ee5f869ff3417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04289835f382b3b5890ee5f869ff3417">&#9670;&#160;</a></span>quick_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::quick_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>快速排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>经典的分治排序算法：</p><ol type="1">
+<li>选择基准值，这里选择最后一个元素</li>
+<li>分区：将小于基准值的放在左边，大于等于的放在右边</li>
+<li>递归排序左右两部分</li>
+</ol>
+<dl class="section note"><dt>注解</dt><dd>此实现容易在已排序数据上出现最坏情况。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00345">345</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00382">iter_swap()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00345">quick_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00362">quick_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00345">quick_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gab3d1f0ee3ce3e6fccab3ce900d98f7ef" name="gab3d1f0ee3ce3e6fccab3ce900d98f7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab3d1f0ee3ce3e6fccab3ce900d98f7ef">&#9670;&#160;</a></span>sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标准排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00447">447</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00426">sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga230ecce8f942d1063eaaf59c455af292" name="ga230ecce8f942d1063eaaf59c455af292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga230ecce8f942d1063eaaf59c455af292">&#9670;&#160;</a></span>sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga955f710168e2299f48f15564515e36a4">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标准排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>MSTL的标准排序算法，基于内省排序实现：</p><ol type="1">
+<li>对大规模数据使用内省排序（快速排序+堆排序）</li>
+<li>对阈值内的小规模数据使用插入排序</li>
+<li>对大规模数据中的小尾部使用优化的插入排序 </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00426">426</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="sort_8hpp_source.html#l00262">insertion_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00426">sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00447">sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00426">sort()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

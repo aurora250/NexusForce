@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 插入迭代器</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___insert_iterators.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">插入迭代器 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>用于向容器插入元素的输出迭代器  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:MSTL_3A_3Aback_5Finsert_5Fiterator_3C_20Container_20_3E" id="r_MSTL_3A_3Aback_5Finsert_5Fiterator_3C_20Container_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">MSTL::back_insert_iterator&lt; Container &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">尾部插入迭代器  <a href="class_m_s_t_l_1_1back__insert__iterator.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MSTL_3A_3Afront_5Finsert_5Fiterator_3C_20Container_20_3E" id="r_MSTL_3A_3Afront_5Finsert_5Fiterator_3C_20Container_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">MSTL::front_insert_iterator&lt; Container &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">头部插入迭代器  <a href="class_m_s_t_l_1_1front__insert__iterator.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MSTL_3A_3Ainsert_5Fiterator_3C_20Container_20_3E" id="r_MSTL_3A_3Ainsert_5Fiterator_3C_20Container_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_m_s_t_l_1_1insert__iterator.html">MSTL::insert_iterator&lt; Container &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定位置插入迭代器  <a href="class_m_s_t_l_1_1insert__iterator.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:gadd602b8bd7af14aeb760552ec020ff05" id="r_gadd602b8bd7af14aeb760552ec020ff05"><td class="memItemLeft"><a id="gadd602b8bd7af14aeb760552ec020ff05" name="gadd602b8bd7af14aeb760552ec020ff05"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::iterator_category</b> = <a class="el" href="struct_m_s_t_l_1_1output__iterator__tag.html">output_iterator_tag</a></td></tr>
+<tr class="memdesc:gadd602b8bd7af14aeb760552ec020ff05"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:ga0df62ac955b390b3be3e6ecee74736f0" id="r_ga0df62ac955b390b3be3e6ecee74736f0"><td class="memItemLeft"><a id="ga0df62ac955b390b3be3e6ecee74736f0" name="ga0df62ac955b390b3be3e6ecee74736f0"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::value_type</b> = void</td></tr>
+<tr class="memdesc:ga0df62ac955b390b3be3e6ecee74736f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ga65f0cefd9fca227fdb375fd256f7e344" id="r_ga65f0cefd9fca227fdb375fd256f7e344"><td class="memItemLeft"><a id="ga65f0cefd9fca227fdb375fd256f7e344" name="ga65f0cefd9fca227fdb375fd256f7e344"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::difference_type</b> = void</td></tr>
+<tr class="memdesc:ga65f0cefd9fca227fdb375fd256f7e344"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:gadf2186c10a752206d2f29fd8d691713c" id="r_gadf2186c10a752206d2f29fd8d691713c"><td class="memItemLeft"><a id="gadf2186c10a752206d2f29fd8d691713c" name="gadf2186c10a752206d2f29fd8d691713c"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::pointer</b> = void</td></tr>
+<tr class="memdesc:gadf2186c10a752206d2f29fd8d691713c"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:ga1ff32eac6768f17535c54c61cb6ecc90" id="r_ga1ff32eac6768f17535c54c61cb6ecc90"><td class="memItemLeft"><a id="ga1ff32eac6768f17535c54c61cb6ecc90" name="ga1ff32eac6768f17535c54c61cb6ecc90"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::reference</b> = void</td></tr>
+<tr class="memdesc:ga1ff32eac6768f17535c54c61cb6ecc90"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:gafd16c3fa5c4f648eeb4aadb1f94a2972" id="r_gafd16c3fa5c4f648eeb4aadb1f94a2972"><td class="memItemLeft"><a id="gafd16c3fa5c4f648eeb4aadb1f94a2972" name="gafd16c3fa5c4f648eeb4aadb1f94a2972"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::iterator_category</b> = <a class="el" href="struct_m_s_t_l_1_1output__iterator__tag.html">output_iterator_tag</a></td></tr>
+<tr class="memdesc:gafd16c3fa5c4f648eeb4aadb1f94a2972"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:gaeef2902c45ffc8da2a094fa40448917c" id="r_gaeef2902c45ffc8da2a094fa40448917c"><td class="memItemLeft"><a id="gaeef2902c45ffc8da2a094fa40448917c" name="gaeef2902c45ffc8da2a094fa40448917c"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::value_type</b> = void</td></tr>
+<tr class="memdesc:gaeef2902c45ffc8da2a094fa40448917c"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ga3700a17e13f671dc983d8251dd35c3f2" id="r_ga3700a17e13f671dc983d8251dd35c3f2"><td class="memItemLeft"><a id="ga3700a17e13f671dc983d8251dd35c3f2" name="ga3700a17e13f671dc983d8251dd35c3f2"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::difference_type</b> = void</td></tr>
+<tr class="memdesc:ga3700a17e13f671dc983d8251dd35c3f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:ga801de446d768833950d88d311e8870b4" id="r_ga801de446d768833950d88d311e8870b4"><td class="memItemLeft"><a id="ga801de446d768833950d88d311e8870b4" name="ga801de446d768833950d88d311e8870b4"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::pointer</b> = void</td></tr>
+<tr class="memdesc:ga801de446d768833950d88d311e8870b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:gaf7e247937f3671ba062ebee6cf5ebd80" id="r_gaf7e247937f3671ba062ebee6cf5ebd80"><td class="memItemLeft"><a id="gaf7e247937f3671ba062ebee6cf5ebd80" name="gaf7e247937f3671ba062ebee6cf5ebd80"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::reference</b> = void</td></tr>
+<tr class="memdesc:gaf7e247937f3671ba062ebee6cf5ebd80"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:gaa61c8bb177fa59a6921a383493909d80" id="r_gaa61c8bb177fa59a6921a383493909d80"><td class="memItemLeft"><a id="gaa61c8bb177fa59a6921a383493909d80" name="gaa61c8bb177fa59a6921a383493909d80"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::iterator_category</b> = <a class="el" href="struct_m_s_t_l_1_1output__iterator__tag.html">output_iterator_tag</a></td></tr>
+<tr class="memdesc:gaa61c8bb177fa59a6921a383493909d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:ga6dfc848df448688d432ace324045dccd" id="r_ga6dfc848df448688d432ace324045dccd"><td class="memItemLeft"><a id="ga6dfc848df448688d432ace324045dccd" name="ga6dfc848df448688d432ace324045dccd"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::value_type</b> = void</td></tr>
+<tr class="memdesc:ga6dfc848df448688d432ace324045dccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:gaecb1781d04ddff0a828d86c9fefba2ea" id="r_gaecb1781d04ddff0a828d86c9fefba2ea"><td class="memItemLeft"><a id="gaecb1781d04ddff0a828d86c9fefba2ea" name="gaecb1781d04ddff0a828d86c9fefba2ea"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::difference_type</b> = void</td></tr>
+<tr class="memdesc:gaecb1781d04ddff0a828d86c9fefba2ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:gaab8f977c74b68865a3de332543db52bc" id="r_gaab8f977c74b68865a3de332543db52bc"><td class="memItemLeft"><a id="gaab8f977c74b68865a3de332543db52bc" name="gaab8f977c74b68865a3de332543db52bc"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::pointer</b> = void</td></tr>
+<tr class="memdesc:gaab8f977c74b68865a3de332543db52bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:ga8fd04ec3e38b5a986125677fa3ff5baa" id="r_ga8fd04ec3e38b5a986125677fa3ff5baa"><td class="memItemLeft"><a id="ga8fd04ec3e38b5a986125677fa3ff5baa" name="ga8fd04ec3e38b5a986125677fa3ff5baa"></a>
+using&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::reference</b> = void</td></tr>
+<tr class="memdesc:ga8fd04ec3e38b5a986125677fa3ff5baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga59be4bf264971e2637e9e738809a0539" id="r_ga59be4bf264971e2637e9e738809a0539"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga59be4bf264971e2637e9e738809a0539">MSTL::back_insert_iterator&lt; Container &gt;::back_insert_iterator</a> (Container &amp;x) noexcept</td></tr>
+<tr class="memdesc:ga59be4bf264971e2637e9e738809a0539"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ga28577bbaed93d0c57e9ba28815b0b67d" id="r_ga28577bbaed93d0c57e9ba28815b0b67d"><td class="memItemLeft">constexpr <a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga28577bbaed93d0c57e9ba28815b0b67d">MSTL::back_insert_iterator&lt; Container &gt;::operator=</a> (const typename Container::value_type &amp;value)</td></tr>
+<tr class="memdesc:ga28577bbaed93d0c57e9ba28815b0b67d"><td class="mdescLeft">&#160;</td><td class="mdescRight">赋值操作符，插入元素到容器尾部  <br /></td></tr>
+<tr class="memitem:gab1df26d38a80ce74fb4ae7fb553d92b5" id="r_gab1df26d38a80ce74fb4ae7fb553d92b5"><td class="memItemLeft">constexpr <a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gab1df26d38a80ce74fb4ae7fb553d92b5">MSTL::back_insert_iterator&lt; Container &gt;::operator=</a> (typename Container::value_type &amp;&amp;value)</td></tr>
+<tr class="memdesc:gab1df26d38a80ce74fb4ae7fb553d92b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值操作符，插入元素到容器尾部  <br /></td></tr>
+<tr class="memitem:gaa0562e0c66df39d7b7945ae46e1b4399" id="r_gaa0562e0c66df39d7b7945ae46e1b4399"><td class="memItemLeft"><a id="gaa0562e0c66df39d7b7945ae46e1b4399" name="gaa0562e0c66df39d7b7945ae46e1b4399"></a>
+constexpr&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::~back_insert_iterator</b> () noexcept=default</td></tr>
+<tr class="memdesc:gaa0562e0c66df39d7b7945ae46e1b4399"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:gad1f8576e35aa3b8f17d32d8176c8cf96" id="r_gad1f8576e35aa3b8f17d32d8176c8cf96"><td class="memItemLeft"><a id="gad1f8576e35aa3b8f17d32d8176c8cf96" name="gad1f8576e35aa3b8f17d32d8176c8cf96"></a>
+constexpr <a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::operator*</b> () noexcept</td></tr>
+<tr class="memdesc:gad1f8576e35aa3b8f17d32d8176c8cf96"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符 <br /></td></tr>
+<tr class="memitem:ga33f9149904405f5e4e44e77485a1c67e" id="r_ga33f9149904405f5e4e44e77485a1c67e"><td class="memItemLeft"><a id="ga33f9149904405f5e4e44e77485a1c67e" name="ga33f9149904405f5e4e44e77485a1c67e"></a>
+constexpr <a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::operator++</b> () noexcept</td></tr>
+<tr class="memdesc:ga33f9149904405f5e4e44e77485a1c67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置自增操作符 <br /></td></tr>
+<tr class="memitem:gaad6958afc945c682a2aab0a46245308c" id="r_gaad6958afc945c682a2aab0a46245308c"><td class="memItemLeft"><a id="gaad6958afc945c682a2aab0a46245308c" name="gaad6958afc945c682a2aab0a46245308c"></a>
+constexpr <a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::back_insert_iterator&lt; Container &gt;::operator++</b> (int) noexcept</td></tr>
+<tr class="memdesc:gaad6958afc945c682a2aab0a46245308c"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置自增操作符 <br /></td></tr>
+<tr class="memitem:ga7f6e949b56a222e08f3b5a2d2a9977d9" id="r_ga7f6e949b56a222e08f3b5a2d2a9977d9"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga7f6e949b56a222e08f3b5a2d2a9977d9 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">back_insert_iterator</a>&lt; Container &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga7f6e949b56a222e08f3b5a2d2a9977d9">MSTL::make_back_inserter</a> (Container &amp;x) noexcept</td></tr>
+<tr class="memdesc:ga7f6e949b56a222e08f3b5a2d2a9977d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建back_insert_iterator的辅助函数  <br /></td></tr>
+<tr class="memitem:gaa34e25d414c74a8f4a2abdff5abbdb01" id="r_gaa34e25d414c74a8f4a2abdff5abbdb01"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">MSTL::front_insert_iterator&lt; Container &gt;::front_insert_iterator</a> (Container &amp;x) noexcept</td></tr>
+<tr class="memdesc:gaa34e25d414c74a8f4a2abdff5abbdb01"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ga56ed9d31dd4e59c888de344595834960" id="r_ga56ed9d31dd4e59c888de344595834960"><td class="memItemLeft">constexpr <a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga56ed9d31dd4e59c888de344595834960">MSTL::front_insert_iterator&lt; Container &gt;::operator=</a> (const typename Container::value_type &amp;value)</td></tr>
+<tr class="memdesc:ga56ed9d31dd4e59c888de344595834960"><td class="mdescLeft">&#160;</td><td class="mdescRight">赋值操作符，插入元素到容器头部  <br /></td></tr>
+<tr class="memitem:ga3646b98a5535b821abbe2bbc856ce938" id="r_ga3646b98a5535b821abbe2bbc856ce938"><td class="memItemLeft">constexpr <a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga3646b98a5535b821abbe2bbc856ce938">MSTL::front_insert_iterator&lt; Container &gt;::operator=</a> (typename Container::value_type &amp;&amp;value)</td></tr>
+<tr class="memdesc:ga3646b98a5535b821abbe2bbc856ce938"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值操作符，插入元素到容器头部  <br /></td></tr>
+<tr class="memitem:ga6665b26e2bc99fd14757400acb05a629" id="r_ga6665b26e2bc99fd14757400acb05a629"><td class="memItemLeft"><a id="ga6665b26e2bc99fd14757400acb05a629" name="ga6665b26e2bc99fd14757400acb05a629"></a>
+constexpr&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::~front_insert_iterator</b> () noexcept=default</td></tr>
+<tr class="memdesc:ga6665b26e2bc99fd14757400acb05a629"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:gabd6d6a3cff58799869223b20a45e6687" id="r_gabd6d6a3cff58799869223b20a45e6687"><td class="memItemLeft"><a id="gabd6d6a3cff58799869223b20a45e6687" name="gabd6d6a3cff58799869223b20a45e6687"></a>
+constexpr <a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::operator*</b> () noexcept</td></tr>
+<tr class="memdesc:gabd6d6a3cff58799869223b20a45e6687"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符 <br /></td></tr>
+<tr class="memitem:ga6b373c9f4661f2affca9f1d2d8570aa3" id="r_ga6b373c9f4661f2affca9f1d2d8570aa3"><td class="memItemLeft"><a id="ga6b373c9f4661f2affca9f1d2d8570aa3" name="ga6b373c9f4661f2affca9f1d2d8570aa3"></a>
+constexpr <a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::operator++</b> () noexcept</td></tr>
+<tr class="memdesc:ga6b373c9f4661f2affca9f1d2d8570aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置自增操作符 <br /></td></tr>
+<tr class="memitem:ga64585a8c68dc0ff71685b0d05a2673d1" id="r_ga64585a8c68dc0ff71685b0d05a2673d1"><td class="memItemLeft"><a id="ga64585a8c68dc0ff71685b0d05a2673d1" name="ga64585a8c68dc0ff71685b0d05a2673d1"></a>
+constexpr <a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::front_insert_iterator&lt; Container &gt;::operator++</b> (int) noexcept</td></tr>
+<tr class="memdesc:ga64585a8c68dc0ff71685b0d05a2673d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置自增操作符 <br /></td></tr>
+<tr class="memitem:gacfdc25d847eb18c29f4afd0cc2bf57c6" id="r_gacfdc25d847eb18c29f4afd0cc2bf57c6"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gacfdc25d847eb18c29f4afd0cc2bf57c6 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">front_insert_iterator</a>&lt; Container &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gacfdc25d847eb18c29f4afd0cc2bf57c6">MSTL::make_front_inserter</a> (Container &amp;x) noexcept</td></tr>
+<tr class="memdesc:gacfdc25d847eb18c29f4afd0cc2bf57c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建front_insert_iterator的辅助函数  <br /></td></tr>
+<tr class="memitem:gaa51487e78f0f1fd275c19602124ef2fc" id="r_gaa51487e78f0f1fd275c19602124ef2fc"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">MSTL::insert_iterator&lt; Container &gt;::insert_iterator</a> (Container &amp;x, typename Container::iterator it) noexcept</td></tr>
+<tr class="memdesc:gaa51487e78f0f1fd275c19602124ef2fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:gac2e1920ce59162047a4b1c55042c5da7" id="r_gac2e1920ce59162047a4b1c55042c5da7"><td class="memItemLeft">constexpr <a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gac2e1920ce59162047a4b1c55042c5da7">MSTL::insert_iterator&lt; Container &gt;::operator=</a> (const typename Container::value_type &amp;value)</td></tr>
+<tr class="memdesc:gac2e1920ce59162047a4b1c55042c5da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">赋值操作符，在指定位置插入元素  <br /></td></tr>
+<tr class="memitem:gaf7f4a04c56475120c4fea82f89803cd8" id="r_gaf7f4a04c56475120c4fea82f89803cd8"><td class="memItemLeft">constexpr <a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaf7f4a04c56475120c4fea82f89803cd8">MSTL::insert_iterator&lt; Container &gt;::operator=</a> (typename Container::value_type &amp;&amp;value)</td></tr>
+<tr class="memdesc:gaf7f4a04c56475120c4fea82f89803cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值操作符，在指定位置插入元素  <br /></td></tr>
+<tr class="memitem:gab0a7f77f59489ba067d30d4ee0119168" id="r_gab0a7f77f59489ba067d30d4ee0119168"><td class="memItemLeft"><a id="gab0a7f77f59489ba067d30d4ee0119168" name="gab0a7f77f59489ba067d30d4ee0119168"></a>
+constexpr&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::~insert_iterator</b> () noexcept=default</td></tr>
+<tr class="memdesc:gab0a7f77f59489ba067d30d4ee0119168"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:ga6ca348d1b1399d0b6d35cabc64e2912d" id="r_ga6ca348d1b1399d0b6d35cabc64e2912d"><td class="memItemLeft"><a id="ga6ca348d1b1399d0b6d35cabc64e2912d" name="ga6ca348d1b1399d0b6d35cabc64e2912d"></a>
+constexpr <a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::operator*</b> () noexcept</td></tr>
+<tr class="memdesc:ga6ca348d1b1399d0b6d35cabc64e2912d"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符 <br /></td></tr>
+<tr class="memitem:gaf5bde45e438d1c54ce0344deb1063825" id="r_gaf5bde45e438d1c54ce0344deb1063825"><td class="memItemLeft"><a id="gaf5bde45e438d1c54ce0344deb1063825" name="gaf5bde45e438d1c54ce0344deb1063825"></a>
+constexpr <a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::operator++</b> () noexcept</td></tr>
+<tr class="memdesc:gaf5bde45e438d1c54ce0344deb1063825"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置自增操作符 <br /></td></tr>
+<tr class="memitem:gafa048c80669050263ad1fa3c639478a7" id="r_gafa048c80669050263ad1fa3c639478a7"><td class="memItemLeft"><a id="gafa048c80669050263ad1fa3c639478a7" name="gafa048c80669050263ad1fa3c639478a7"></a>
+constexpr <a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp;&#160;</td><td class="memItemRight"><b>MSTL::insert_iterator&lt; Container &gt;::operator++</b> (int) noexcept</td></tr>
+<tr class="memdesc:gafa048c80669050263ad1fa3c639478a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置自增操作符 <br /></td></tr>
+<tr class="memitem:gaa543c71a654cc023041f9e62be87c05f" id="r_gaa543c71a654cc023041f9e62be87c05f"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gaa543c71a654cc023041f9e62be87c05f template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1insert__iterator.html">insert_iterator</a>&lt; Container &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaa543c71a654cc023041f9e62be87c05f">MSTL::make_inserter</a> (Container &amp;x, typename Container::iterator it) noexcept</td></tr>
+<tr class="memdesc:gaa543c71a654cc023041f9e62be87c05f"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建insert_iterator的辅助函数  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>用于向容器插入元素的输出迭代器 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga59be4bf264971e2637e9e738809a0539" name="ga59be4bf264971e2637e9e738809a0539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59be4bf264971e2637e9e738809a0539">&#9670;&#160;</a></span>back_insert_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">MSTL::back_insert_iterator</a>&lt; Container &gt;::back_insert_iterator </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>要插入的容器引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00045">45</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03103">MSTL::addressof()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00070">operator*()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00071">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00072">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00053">operator=()</a> , 以及 <a class="el" href="insert__iterator_8hpp_source.html#l00063">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="gaa34e25d414c74a8f4a2abdff5abbdb01" name="gaa34e25d414c74a8f4a2abdff5abbdb01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa34e25d414c74a8f4a2abdff5abbdb01">&#9670;&#160;</a></span>front_insert_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">MSTL::front_insert_iterator</a>&lt; Container &gt;::front_insert_iterator </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>目标容器的引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00112">112</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03103">MSTL::addressof()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00137">operator*()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00138">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00139">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00120">operator=()</a> , 以及 <a class="el" href="insert__iterator_8hpp_source.html#l00130">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="gaa51487e78f0f1fd275c19602124ef2fc" name="gaa51487e78f0f1fd275c19602124ef2fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa51487e78f0f1fd275c19602124ef2fc">&#9670;&#160;</a></span>insert_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1insert__iterator.html">MSTL::insert_iterator</a>&lt; Container &gt;::insert_iterator </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename Container::iterator</td>          <td class="paramname"><span class="paramname"><em>it</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>目标容器的引用 </td></tr>
+    <tr><td class="paramname">it</td><td>插入位置的迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00181">181</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="type__traits_8hpp_source.html#l03103">MSTL::addressof()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00276">MSTL::move()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00208">operator*()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00209">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00210">operator++()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00189">operator=()</a> , 以及 <a class="el" href="insert__iterator_8hpp_source.html#l00200">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="ga7f6e949b56a222e08f3b5a2d2a9977d9" name="ga7f6e949b56a222e08f3b5a2d2a9977d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7f6e949b56a222e08f3b5a2d2a9977d9">&#9670;&#160;</a></span>make_back_inserter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">back_insert_iterator</a>&lt; Container &gt; MSTL::make_back_inserter </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建back_insert_iterator的辅助函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Container</td><td>容器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>目标容器的引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>构造的back_insert_iterator </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00083">83</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00083">make_back_inserter()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00083">make_back_inserter()</a>.</p>
+
+</div>
+</div>
+<a id="gacfdc25d847eb18c29f4afd0cc2bf57c6" name="gacfdc25d847eb18c29f4afd0cc2bf57c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacfdc25d847eb18c29f4afd0cc2bf57c6">&#9670;&#160;</a></span>make_front_inserter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">front_insert_iterator</a>&lt; Container &gt; MSTL::make_front_inserter </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建front_insert_iterator的辅助函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Container</td><td>容器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>目标容器的引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>构造的front_insert_iterator </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00150">150</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00150">make_front_inserter()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00150">make_front_inserter()</a>.</p>
+
+</div>
+</div>
+<a id="gaa543c71a654cc023041f9e62be87c05f" name="gaa543c71a654cc023041f9e62be87c05f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa543c71a654cc023041f9e62be87c05f">&#9670;&#160;</a></span>make_inserter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_s_t_l_1_1insert__iterator.html">insert_iterator</a>&lt; Container &gt; MSTL::make_inserter </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename Container::iterator</td>          <td class="paramname"><span class="paramname"><em>it</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建insert_iterator的辅助函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Container</td><td>容器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>目标容器的引用 </td></tr>
+    <tr><td class="paramname">it</td><td>插入位置的迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>构造的insert_iterator </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00222">222</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00222">make_inserter()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="insert__iterator_8hpp_source.html#l00222">make_inserter()</a>.</p>
+
+</div>
+</div>
+<a id="ga28577bbaed93d0c57e9ba28815b0b67d" name="ga28577bbaed93d0c57e9ba28815b0b67d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga28577bbaed93d0c57e9ba28815b0b67d">&#9670;&#160;</a></span>operator=() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">MSTL::back_insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const typename Container::value_type &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>赋值操作符，插入元素到容器尾部 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00053">53</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00045">back_insert_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="gab1df26d38a80ce74fb4ae7fb553d92b5" name="gab1df26d38a80ce74fb4ae7fb553d92b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab1df26d38a80ce74fb4ae7fb553d92b5">&#9670;&#160;</a></span>operator=() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ga59be4bf264971e2637e9e738809a0539">back_insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1back__insert__iterator.html">MSTL::back_insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">typename Container::value_type &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值操作符，插入元素到容器尾部 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00063">63</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00045">back_insert_iterator()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00276">MSTL::move()</a>.</p>
+
+</div>
+</div>
+<a id="ga56ed9d31dd4e59c888de344595834960" name="ga56ed9d31dd4e59c888de344595834960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga56ed9d31dd4e59c888de344595834960">&#9670;&#160;</a></span>operator=() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">MSTL::front_insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const typename Container::value_type &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>赋值操作符，插入元素到容器头部 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00120">120</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00112">front_insert_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="ga3646b98a5535b821abbe2bbc856ce938" name="ga3646b98a5535b821abbe2bbc856ce938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3646b98a5535b821abbe2bbc856ce938">&#9670;&#160;</a></span>operator=() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gaa34e25d414c74a8f4a2abdff5abbdb01">front_insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1front__insert__iterator.html">MSTL::front_insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">typename Container::value_type &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值操作符，插入元素到容器头部 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00112">front_insert_iterator()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00276">MSTL::move()</a>.</p>
+
+</div>
+</div>
+<a id="gac2e1920ce59162047a4b1c55042c5da7" name="gac2e1920ce59162047a4b1c55042c5da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2e1920ce59162047a4b1c55042c5da7">&#9670;&#160;</a></span>operator=() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1insert__iterator.html">MSTL::insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const typename Container::value_type &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>赋值操作符，在指定位置插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00189">189</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="insert__iterator_8hpp_source.html#l00181">insert_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="gaf7f4a04c56475120c4fea82f89803cd8" name="gaf7f4a04c56475120c4fea82f89803cd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf7f4a04c56475120c4fea82f89803cd8">&#9670;&#160;</a></span>operator=() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gaa51487e78f0f1fd275c19602124ef2fc">insert_iterator</a> &amp; <a class="el" href="class_m_s_t_l_1_1insert__iterator.html">MSTL::insert_iterator</a>&lt; Container &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">typename Container::value_type &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值操作符，在指定位置插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的元素值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>迭代器自身的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="insert__iterator_8hpp_source.html">insert_iterator.hpp</a> 第 <a class="el" href="insert__iterator_8hpp_source.html#l00200">200</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00181">insert_iterator()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00276">MSTL::move()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

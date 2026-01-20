@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['命名空间宏_0',['命名空间宏',['../group___namespace_macros.html',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

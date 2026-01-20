@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['合并算法_0',['合并算法',['../group___merge_algorithms.html',1,'']]]
 ];

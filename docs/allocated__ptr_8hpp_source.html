@@ -92,68 +92,102 @@ $(function(){initNavTree('allocated__ptr_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">allocated_ptr.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_MEMORY_ALLOCATED_PTR_HPP__</span></div>
+<a href="allocated__ptr_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_MEMORY_ALLOCATED_PTR_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_MEMORY_ALLOCATED_PTR_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;allocator_traits.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">struct </span>allocated_ptr {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> allocator_traits&lt;Alloc&gt;::pointer;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">using </span>value_type = <span class="keyword">typename</span> allocator_traits&lt;Alloc&gt;::value_type;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    Alloc* alloc_;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    pointer ptr_;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    allocated_ptr(Alloc&amp; alloc, pointer ptr) noexcept</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    : alloc_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(alloc)), ptr_(ptr) {}</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ptr, <span class="keyword">typename</span> = enable_if_t&lt;is_same_v&lt;Ptr, value_type*&gt;&gt;&gt;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    allocated_ptr(Alloc&amp; alloc, Ptr ptr)</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    : alloc_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(alloc)), ptr_(pointer_traits&lt;pointer&gt;::pointer_to(*ptr)) {}</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    allocated_ptr(allocated_ptr&amp;&amp; guard) noexcept</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    : alloc_(guard.alloc_), ptr_(guard.ptr_) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        guard.ptr_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    ~allocated_ptr() {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">if</span> (ptr_ != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>          <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> allocator_traits&lt;Alloc&gt;::deallocate(*alloc_, ptr_, 1);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    allocated_ptr&amp; operator =(nullptr_t) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        ptr_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    value_type* get() {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___pointer_traits.html#ga33f2b15537ae43937d5b3eb7018d77a7">to_address</a>(ptr_);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>allocated_ptr&lt;Alloc&gt; allocate_guarded(Alloc&amp; alloc) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> { alloc, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> allocator_traits&lt;Alloc&gt;::allocate(alloc, 1) };</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_MEMORY_ALLOCATED_PTR_HPP__</span></div>
-<div class="ttc" id="agroup___args_forward_functions_html_ga3375afcb7cccf217c11b995a0e32583c"><div class="ttname"><a href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">MSTL::addressof</a></div><div class="ttdeci">constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02988">type_traits.hpp:2988</a></div></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="allocator__traits_8hpp.html">allocator_traits.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html">   28</a></span><span class="keyword">struct </span><a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">allocated_ptr</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">   29</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">pointer</a> = <span class="keyword">typename</span> allocator_traits&lt;Alloc&gt;::pointer;   </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#a4da5e621e6cbec62e7b5f190f7c02035">   30</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a4da5e621e6cbec62e7b5f190f7c02035">value_type</a> = <span class="keyword">typename</span> allocator_traits&lt;Alloc&gt;::value_type; </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    Alloc* alloc_; </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">pointer</a> ptr_;  </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">   45</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">allocated_ptr</a>(Alloc&amp; alloc, <a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">pointer</a> ptr) noexcept</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    : alloc_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(alloc)), ptr_(ptr) {}</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ptr, <span class="keyword">typename</span> = enable_if_t&lt;is_same_v&lt;Ptr, value_type*&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#a99c7c60316ac188e02239d92c5738905">   57</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a99c7c60316ac188e02239d92c5738905">allocated_ptr</a>(Alloc&amp; alloc, Ptr ptr)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    : alloc_(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">addressof</a>(alloc)), ptr_(<a class="code hl_struct" href="struct_m_s_t_l_1_1pointer__traits.html">pointer_traits</a>&lt;<a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">pointer</a>&gt;::pointer_to(*ptr)) {}</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#ac9d2487c8ac703499ecc7417ab558799">   64</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#ac9d2487c8ac703499ecc7417ab558799">allocated_ptr</a>(<a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">allocated_ptr</a>&amp;&amp; guard) noexcept</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    : alloc_(guard.alloc_), ptr_(guard.ptr_) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        guard.ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#ad0536c0a221402eb39a1b64111f8dacf">   72</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#ad0536c0a221402eb39a1b64111f8dacf">~allocated_ptr</a>() {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">if</span> (ptr_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>          <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="struct_m_s_t_l_1_1allocator__traits.html#a3a1c173b76b48bc842d53400a882d74a">allocator_traits&lt;Alloc&gt;::deallocate</a>(*alloc_, ptr_, 1);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#ae5c607f7aca13e70a505e3f9c9753feb">   85</a></span>    <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">allocated_ptr</a>&amp; operator =(<a class="code hl_typedef" href="group___core_types.html#ga95c7af1d699ad4299880efc8f31e5aad">nullptr_t</a> null) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="struct_m_s_t_l_1_1allocated__ptr.html#a45fa2e5861745cc3651808d770b2ad52">   96</a></span>    <a class="code hl_typedef" href="struct_m_s_t_l_1_1allocated__ptr.html#a4da5e621e6cbec62e7b5f190f7c02035">value_type</a>* <a class="code hl_function" href="struct_m_s_t_l_1_1allocated__ptr.html#a45fa2e5861745cc3651808d770b2ad52">get</a>() {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___pointer_traits.html#ga33f2b15537ae43937d5b3eb7018d77a7">to_address</a>(ptr_);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>};</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="group___allocated_ptr.html#gadb2bc9a57e6ec651bbc12e979d173e8d">  110</a></span><a class="code hl_struct" href="struct_m_s_t_l_1_1allocated__ptr.html">allocated_ptr&lt;Alloc&gt;</a> <a class="code hl_function" href="group___allocated_ptr.html#gadb2bc9a57e6ec651bbc12e979d173e8d">allocate_guarded</a>(Alloc&amp; alloc) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="struct_m_s_t_l_1_1allocated__ptr.html">allocated_ptr&lt;Alloc&gt;</a>{alloc, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="struct_m_s_t_l_1_1allocator__traits.html#ac6afa81e87a85a3a0ade3015dc295ace">allocator_traits&lt;Alloc&gt;::allocate</a>(alloc, 1)};</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> <span class="comment">// AllocatedPtr</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_MEMORY_ALLOCATED_PTR_HPP__</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div><div class="ttdoc">MSTL分配器特性</div></div>
+<div class="ttc" id="agroup___allocated_ptr_html_gadb2bc9a57e6ec651bbc12e979d173e8d"><div class="ttname"><a href="group___allocated_ptr.html#gadb2bc9a57e6ec651bbc12e979d173e8d">MSTL::allocate_guarded</a></div><div class="ttdeci">allocated_ptr&lt; Alloc &gt; allocate_guarded(Alloc &amp;alloc)</div><div class="ttdoc">分配内存并创建allocated_ptr</div><div class="ttdef"><b>定义</b> <a href="#l00110">allocated_ptr.hpp:110</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga3375afcb7cccf217c11b995a0e32583c"><div class="ttname"><a href="group___args_forward_functions.html#ga3375afcb7cccf217c11b995a0e32583c">MSTL::addressof</a></div><div class="ttdeci">constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03103">type_traits.hpp:3103</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga95c7af1d699ad4299880efc8f31e5aad"><div class="ttname"><a href="group___core_types.html#ga95c7af1d699ad4299880efc8f31e5aad">MSTL::nullptr_t</a></div><div class="ttdeci">decltype(nullptr) nullptr_t</div><div class="ttdoc">空指针类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00024">types.hpp:24</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
-<div class="ttc" id="agroup___pointer_traits_html_ga33f2b15537ae43937d5b3eb7018d77a7"><div class="ttname"><a href="group___pointer_traits.html#ga33f2b15537ae43937d5b3eb7018d77a7">MSTL::to_address</a></div><div class="ttdeci">constexpr T * to_address(T *ptr) noexcept</div><div class="ttdoc">安全地获取原始指针指向的地址</div><div class="ttdef"><b>定义</b> <a href="pointer__traits_8hpp_source.html#l00310">pointer_traits.hpp:310</a></div></div>
+<div class="ttc" id="agroup___pointer_traits_html_ga33f2b15537ae43937d5b3eb7018d77a7"><div class="ttname"><a href="group___pointer_traits.html#ga33f2b15537ae43937d5b3eb7018d77a7">MSTL::to_address</a></div><div class="ttdeci">constexpr T * to_address(T *ptr) noexcept</div><div class="ttdoc">安全地获取原始指针指向的地址</div><div class="ttdef"><b>定义</b> <a href="pointer__traits_8hpp_source.html#l00197">pointer_traits.hpp:197</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html">MSTL::allocated_ptr</a></div><div class="ttdoc">分配内存指针</div><div class="ttdef"><b>定义</b> <a href="#l00028">allocated_ptr.hpp:28</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_a45fa2e5861745cc3651808d770b2ad52"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#a45fa2e5861745cc3651808d770b2ad52">MSTL::allocated_ptr::get</a></div><div class="ttdeci">value_type * get()</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="#l00096">allocated_ptr.hpp:96</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_a4da5e621e6cbec62e7b5f190f7c02035"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#a4da5e621e6cbec62e7b5f190f7c02035">MSTL::allocated_ptr::value_type</a></div><div class="ttdeci">typename allocator_traits&lt; Alloc &gt;::value_type value_type</div><div class="ttdoc">元素类型</div><div class="ttdef"><b>定义</b> <a href="#l00030">allocated_ptr.hpp:30</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_a65382914f58e6d3bc0505278e26a22a0"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#a65382914f58e6d3bc0505278e26a22a0">MSTL::allocated_ptr::pointer</a></div><div class="ttdeci">typename allocator_traits&lt; Alloc &gt;::pointer pointer</div><div class="ttdoc">分配器指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00029">allocated_ptr.hpp:29</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_a99c7c60316ac188e02239d92c5738905"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#a99c7c60316ac188e02239d92c5738905">MSTL::allocated_ptr::allocated_ptr</a></div><div class="ttdeci">allocated_ptr(Alloc &amp;alloc, Ptr ptr)</div><div class="ttdoc">原始指针转换</div><div class="ttdef"><b>定义</b> <a href="#l00057">allocated_ptr.hpp:57</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_a9e61806976781b5fa9d23c87c1d24712"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#a9e61806976781b5fa9d23c87c1d24712">MSTL::allocated_ptr::allocated_ptr</a></div><div class="ttdeci">allocated_ptr(Alloc &amp;alloc, pointer ptr) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00045">allocated_ptr.hpp:45</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_ac9d2487c8ac703499ecc7417ab558799"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#ac9d2487c8ac703499ecc7417ab558799">MSTL::allocated_ptr::allocated_ptr</a></div><div class="ttdeci">allocated_ptr(allocated_ptr &amp;&amp;guard) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00064">allocated_ptr.hpp:64</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocated__ptr_html_ad0536c0a221402eb39a1b64111f8dacf"><div class="ttname"><a href="struct_m_s_t_l_1_1allocated__ptr.html#ad0536c0a221402eb39a1b64111f8dacf">MSTL::allocated_ptr::~allocated_ptr</a></div><div class="ttdeci">~allocated_ptr()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00072">allocated_ptr.hpp:72</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocator__traits_html_a3a1c173b76b48bc842d53400a882d74a"><div class="ttname"><a href="struct_m_s_t_l_1_1allocator__traits.html#a3a1c173b76b48bc842d53400a882d74a">MSTL::allocator_traits::deallocate</a></div><div class="ttdeci">static constexpr void deallocate(Alloc &amp;alloc, pointer ptr, size_type n)</div><div class="ttdoc">释放内存</div><div class="ttdef"><b>定义</b> <a href="allocator__traits_8hpp_source.html#l00193">allocator_traits.hpp:193</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1allocator__traits_html_ac6afa81e87a85a3a0ade3015dc295ace"><div class="ttname"><a href="struct_m_s_t_l_1_1allocator__traits.html#ac6afa81e87a85a3a0ade3015dc295ace">MSTL::allocator_traits::allocate</a></div><div class="ttdeci">static constexpr pointer allocate(Alloc &amp;alloc, size_type n)</div><div class="ttdoc">分配内存</div><div class="ttdef"><b>定义</b> <a href="allocator__traits_8hpp_source.html#l00183">allocator_traits.hpp:183</a></div></div>
+<div class="ttc" id="astruct_m_s_t_l_1_1pointer__traits_html"><div class="ttname"><a href="struct_m_s_t_l_1_1pointer__traits.html">MSTL::pointer_traits</a></div><div class="ttdoc">指针特性主模板</div><div class="ttdef"><b>定义</b> <a href="pointer__traits_8hpp_source.html#l00093">pointer_traits.hpp:93</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>memory</b></li><li class="navelem"><b>allocated_ptr.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>memory</b></li><li class="navelem"><a href="allocated__ptr_8hpp.html">allocated_ptr.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

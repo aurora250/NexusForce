@@ -108,7 +108,7 @@ $(function(){initNavTree('sha1_8hpp_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> sha1(<span class="keyword">const</span> bstring&amp; data) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> SHA1::hash_hex(data.view());</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> SHA1::hash_hex(<a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>.view());</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>MSTL_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> sha1(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; data) {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> sha1(to_bstring(data));</div>
@@ -126,6 +126,7 @@ $(function(){initNavTree('sha1_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___core_types_html_ga345d54be2f996584ff8d8362b3dfeb18"><div class="ttname"><a href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">MSTL::uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00086">types.hpp:86</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gadd573cfd63b0a7c52e40c5beace90159"><div class="ttname"><a href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

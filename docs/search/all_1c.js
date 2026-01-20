@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___invoker.html',1,'']]]
+  ['元组应用函数_0',['元组应用函数',['../group___apply_function.html',1,'']]],
+  ['元组_1',['元组',['../group___tuple.html',1,'']]]
 ];

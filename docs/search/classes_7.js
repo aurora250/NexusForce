@@ -5,6 +5,11 @@ var searchData=
   ['has_5funique_5fobject_5frepresentations_2',['has_unique_object_representations',['../struct_m_s_t_l_1_1has__unique__object__representations.html',1,'MSTL']]],
   ['has_5fvirtual_5fdestructor_3',['has_virtual_destructor',['../struct_m_s_t_l_1_1has__virtual__destructor.html',1,'MSTL']]],
   ['hash_4',['hash',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]],
-  ['hash_3c_20t_20_2a_20_3e_5',['hash&lt; T * &gt;',['../struct_m_s_t_l_1_1hash_3_01_t_01_5_01_4.html',1,'MSTL']]],
-  ['hash_3c_20value_20_3e_6',['hash&lt; Value &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]]
+  ['hash_3c_20aiocb_5ftype_20_2a_20_3e_5',['hash&lt; aiocb_type * &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]],
+  ['hash_3c_20char_20_3e_6',['hash&lt; char &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]],
+  ['hash_3c_20id_5ftype_20_3e_7',['hash&lt; id_type &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]],
+  ['hash_3c_20string_20_3e_8',['hash&lt; string &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]],
+  ['hash_3c_20t_20_2a_20_3e_9',['hash&lt; T * &gt;',['../struct_m_s_t_l_1_1hash_3_01_t_01_5_01_4.html',1,'MSTL']]],
+  ['hash_3c_20unique_5fptr_3c_20t_2c_20deleter_20_3e_20_3e_10',['hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;',['../struct_m_s_t_l_1_1hash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html',1,'MSTL']]],
+  ['hash_3c_20value_20_3e_11',['hash&lt; Value &gt;',['../struct_m_s_t_l_1_1hash.html',1,'MSTL']]]
 ];

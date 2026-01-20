@@ -94,7 +94,7 @@ $(function(){initNavTree('bitset_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_CONTAINER_BITSET_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_CONTAINER_BITSET_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../memory/bit.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="bit_8hpp.html">../memory/bit.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;array.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
@@ -242,8 +242,8 @@ $(function(){initNavTree('bitset_8hpp_source.html','',''); });
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> reference(*<span class="keyword">this</span>, pos);</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size() const noexcept { <span class="keywordflow">return</span> N; }</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> empty() const noexcept { <span class="keywordflow">return</span> N == 0; }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>() const noexcept { <span class="keywordflow">return</span> N; }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga0e30232902a0cd9a020346ebaf691707">empty</a>() const noexcept { <span class="keywordflow">return</span> N == 0; }</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> test(<span class="keyword">const</span> <span class="keywordtype">size_t</span> pos) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        check_range(pos);</div>
@@ -329,10 +329,10 @@ $(function(){initNavTree('bitset_8hpp_source.html','',''); });
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> count() const noexcept {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>() const noexcept {</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">size_t</span> cnt = 0;</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; block_count; ++i) {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            cnt += <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> popcount(blocks[i]);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            cnt += <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___bit_counting.html#ga48a4848b9134e1ac2e54c030166fc2ff">popcount</a>(blocks[i]);</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        }</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">return</span> cnt;</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
@@ -350,7 +350,7 @@ $(function(){initNavTree('bitset_8hpp_source.html','',''); });
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> none() const noexcept {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    MSTL_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="group___non.html#ga50b87bdff378b6f1b6cb4d75a169a4d6">none</a>() const noexcept {</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">return</span> !any();</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
@@ -470,10 +470,16 @@ $(function(){initNavTree('bitset_8hpp_source.html','',''); });
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_CONTAINER_BITSET_HPP__</span></div>
+<div class="ttc" id="abit_8hpp_html"><div class="ttname"><a href="bit_8hpp.html">bit.hpp</a></div><div class="ttdoc">MSTL位操作函数</div></div>
+<div class="ttc" id="agroup___bit_counting_html_ga48a4848b9134e1ac2e54c030166fc2ff"><div class="ttname"><a href="group___bit_counting.html#ga48a4848b9134e1ac2e54c030166fc2ff">MSTL::popcount</a></div><div class="ttdeci">constexpr int popcount(const uintptr_t x) noexcept</div><div class="ttdoc">计算整数中1的个数</div><div class="ttdef"><b>定义</b> <a href="bit_8hpp_source.html#l00127">bit.hpp:127</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_gaf93fc708b7c3ee66a06109be093eaf43"><div class="ttname"><a href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">MSTL::count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00350">search.hpp:350</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___non_html_ga50b87bdff378b6f1b6cb4d75a169a4d6"><div class="ttname"><a href="group___non.html#ga50b87bdff378b6f1b6cb4d75a169a4d6">MSTL::none</a></div><div class="ttdeci">constexpr non none</div><div class="ttdoc">默认空表示</div><div class="ttdef"><b>定义</b> <a href="non_8hpp_source.html#l00073">non.hpp:73</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga00d7fd2b04a7ff4df689b2f6bae8a5da"><div class="ttname"><a href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">MSTL::size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00138">types.hpp:138</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga0e30232902a0cd9a020346ebaf691707"><div class="ttname"><a href="group___type_erasure_functions.html#ga0e30232902a0cd9a020346ebaf691707">MSTL::empty</a></div><div class="ttdeci">constexpr bool empty(const Container &amp;cont) noexcept(noexcept(cont.empty()))</div><div class="ttdoc">检查容器是否为空</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00383">type_erase.hpp:383</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaf631c74a77ff5174b7fc9258abe98f47"><div class="ttname"><a href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">MSTL::size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

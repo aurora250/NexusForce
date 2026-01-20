@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 迭代器操作</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___iterator_operation.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">迭代器操作 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>迭代器操作函数的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga3efc05a3e52fb888f9fce49e5da6bfda" id="r_ga3efc05a3e52fb888f9fce49e5da6bfda"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga3efc05a3e52fb888f9fce49e5da6bfda template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d">iter_pointer_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3efc05a3e52fb888f9fce49e5da6bfda">MSTL::to_pointer</a> (Iterator iter)</td></tr>
+<tr class="memdesc:ga3efc05a3e52fb888f9fce49e5da6bfda"><td class="mdescLeft">&#160;</td><td class="mdescRight">将迭代器转换为原始指针  <br /></td></tr>
+<tr class="memitem:ga8c50e39438f8c7fcd0349792de05206c" id="r_ga8c50e39438f8c7fcd0349792de05206c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Distance, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8c50e39438f8c7fcd0349792de05206c template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga8c50e39438f8c7fcd0349792de05206c">MSTL::advance</a> (Iterator &amp;i, Distance n)</td></tr>
+<tr class="memdesc:ga8c50e39438f8c7fcd0349792de05206c"><td class="mdescLeft">&#160;</td><td class="mdescRight">将迭代器前进指定距离  <br /></td></tr>
+<tr class="memitem:ga60ed3005d582e2b2a6b851f3d4cf7f15" id="r_ga60ed3005d582e2b2a6b851f3d4cf7f15"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga60ed3005d582e2b2a6b851f3d4cf7f15 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga60ed3005d582e2b2a6b851f3d4cf7f15">MSTL::prev</a> (Iterator iter, <a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt; n=-1)</td></tr>
+<tr class="memdesc:ga60ed3005d582e2b2a6b851f3d4cf7f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的前一个位置  <br /></td></tr>
+<tr class="memitem:ga4d5681ffa110c2607ab37a252e4f4c11" id="r_ga4d5681ffa110c2607ab37a252e4f4c11"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga4d5681ffa110c2607ab37a252e4f4c11 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga4d5681ffa110c2607ab37a252e4f4c11">MSTL::next</a> (Iterator iter, <a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt; n=1)</td></tr>
+<tr class="memdesc:ga4d5681ffa110c2607ab37a252e4f4c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的后一个位置  <br /></td></tr>
+<tr class="memitem:ga8dae4236ef628d59b2ec3f1278601419" id="r_ga8dae4236ef628d59b2ec3f1278601419"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8dae4236ef628d59b2ec3f1278601419 template"><td class="memItemLeft">constexpr <a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8dae4236ef628d59b2ec3f1278601419">MSTL::distance</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga8dae4236ef628d59b2ec3f1278601419"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个迭代器之间的距离  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>迭代器操作函数的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga8c50e39438f8c7fcd0349792de05206c" name="ga8c50e39438f8c7fcd0349792de05206c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8c50e39438f8c7fcd0349792de05206c">&#9670;&#160;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Distance, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSTL::advance </td>
+          <td>(</td>
+          <td class="paramtype">Iterator &amp;</td>          <td class="paramname"><span class="paramname"><em>i</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将迭代器前进指定距离 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Distance</td><td>距离类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>迭代器引用 </td></tr>
+    <tr><td class="paramname">n</td><td>前进距离</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>根据迭代器类型使用不同的前进策略：</p><ul>
+<li>随机访问迭代器：直接使用 += 操作</li>
+<li>双向迭代器：支持正负距离</li>
+<li>前向迭代器：只支持非负距离 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a> 第 <a class="el" href="iterator_8hpp_source.html#l00092">92</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="iterator_8hpp_source.html#l00092">advance()</a>, <a class="el" href="concepts_8hpp_source.html#l00608">is_bid_iter_v</a>, <a class="el" href="concepts_8hpp_source.html#l00627">is_rnd_iter_v</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l00989">is_signed_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="iterator_8hpp_source.html#l00092">advance()</a>, <a class="el" href="compare_8hpp_source.html#l00080">equal_range()</a>, <a class="el" href="search_8hpp_source.html#l00579">find_end()</a>, <a class="el" href="search_8hpp_source.html#l00037">lower_bound()</a>, <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>, <a class="el" href="iterator_8hpp_source.html#l00120">prev()</a> , 以及 <a class="el" href="search_8hpp_source.html#l00087">upper_bound()</a>.</p>
+
+</div>
+</div>
+<a id="ga8dae4236ef628d59b2ec3f1278601419" name="ga8dae4236ef628d59b2ec3f1278601419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8dae4236ef628d59b2ec3f1278601419">&#9670;&#160;</a></span>distance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt; MSTL::distance </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算两个迭代器之间的距离 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个迭代器之间的距离</dd></dl>
+<p>根据迭代器类型使用不同的计算策略：</p><ul>
+<li>随机访问迭代器：直接使用减法</li>
+<li>其他迭代器：遍历计数 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a> 第 <a class="el" href="iterator_8hpp_source.html#l00172">172</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="iterator_8hpp_source.html#l00172">distance()</a> , 以及 <a class="el" href="concepts_8hpp_source.html#l00627">is_rnd_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="iterator_8hpp_source.html#l00172">distance()</a>, <a class="el" href="compare_8hpp_source.html#l00080">equal_range()</a>, <a class="el" href="search_8hpp_source.html#l00579">find_end()</a>, <a class="el" href="merge_8hpp_source.html#l00258">inplace_merge()</a>, <a class="el" href="permutation_8hpp_source.html#l00041">is_permutation()</a>, <a class="el" href="search_8hpp_source.html#l00037">lower_bound()</a>, <a class="el" href="sort_8hpp_source.html#l00109">merge_sort()</a>, <a class="el" href="search_8hpp_source.html#l00431">search()</a>, <a class="el" href="shift_8hpp_source.html#l00789">shift_left()</a>, <a class="el" href="shift_8hpp_source.html#l00818">shift_right()</a>, <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a>, <a class="el" href="temporary__buffer_8hpp_source.html#l00117">MSTL::temporary_buffer&lt; Iterator &gt;::temporary_buffer()</a> , 以及 <a class="el" href="search_8hpp_source.html#l00087">upper_bound()</a>.</p>
+
+</div>
+</div>
+<a id="ga4d5681ffa110c2607ab37a252e4f4c11" name="ga4d5681ffa110c2607ab37a252e4f4c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d5681ffa110c2607ab37a252e4f4c11">&#9670;&#160;</a></span>next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator MSTL::next </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>iter</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt;</td>          <td class="paramname"><span class="paramname"><em>n</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取迭代器的后一个位置 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>当前迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>前进距离，默认为1 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前进n个位置后的迭代器</dd></dl>
+<p>将迭代器前进n个位置，n必须为非负数。 </p>
+
+<p class="definition">在文件 <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a> 第 <a class="el" href="iterator_8hpp_source.html#l00136">136</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="iterator_8hpp_source.html#l00092">advance()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="search_8hpp_source.html#l00270">adjacent_find()</a>, <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a>, <a class="el" href="sort_8hpp_source.html#l00071">is_sorted_until()</a>, <a class="el" href="iterator_8hpp_source.html#l00136">next()</a>, <a class="el" href="remove_8hpp_source.html#l00091">remove()</a>, <a class="el" href="remove_8hpp_source.html#l00113">remove_if()</a>, <a class="el" href="shift_8hpp_source.html#l00789">shift_left()</a>, <a class="el" href="shift_8hpp_source.html#l00818">shift_right()</a>, <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00063">shuffle()</a>.</p>
+
+</div>
+</div>
+<a id="ga60ed3005d582e2b2a6b851f3d4cf7f15" name="ga60ed3005d582e2b2a6b851f3d4cf7f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60ed3005d582e2b2a6b851f3d4cf7f15">&#9670;&#160;</a></span>prev()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator MSTL::prev </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>iter</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">iter_difference_t</a>&lt; Iterator &gt;</td>          <td class="paramname"><span class="paramname"><em>n</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取迭代器的前一个位置 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>当前迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>后退距离，默认为1 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>后退n个位置后的迭代器</dd></dl>
+<p>将迭代器后退n个位置，n必须为非正数。 </p>
+
+<p class="definition">在文件 <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a> 第 <a class="el" href="iterator_8hpp_source.html#l00120">120</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="iterator_8hpp_source.html#l00092">advance()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00120">prev()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="iterator_8hpp_source.html#l00120">prev()</a>, <a class="el" href="shift_8hpp_source.html#l00789">shift_left()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00818">shift_right()</a>.</p>
+
+</div>
+</div>
+<a id="ga3efc05a3e52fb888f9fce49e5da6bfda" name="ga3efc05a3e52fb888f9fce49e5da6bfda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3efc05a3e52fb888f9fce49e5da6bfda">&#9670;&#160;</a></span>to_pointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d">iter_pointer_t</a>&lt; Iterator &gt; MSTL::to_pointer </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>iter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将迭代器转换为原始指针 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>原始指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a> 第 <a class="el" href="iterator_8hpp_source.html#l00045">45</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="type__traits_8hpp_source.html#l01591">is_pointer_v</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00045">to_pointer()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="iterator_8hpp_source.html#l00045">to_pointer()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

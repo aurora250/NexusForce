@@ -1,0 +1,26 @@
+var group___string_operations =
+[
+    [ "MSTL::string_compare", "group___string_operations.html#ga02d5de39137eed0f4177a51b51ade3e0", null ],
+    [ "MSTL::string_compare_ignore_case", "group___string_operations.html#gabc0035414e39b8f9845dc3133cc01be1", null ],
+    [ "MSTL::string_compare_n", "group___string_operations.html#ga3e8b7e9723a3a668e1623e3a81d4a5c8", null ],
+    [ "MSTL::string_compare_n_ignore_case", "group___string_operations.html#ga632cb9e3e47c3bb2b397e50de49d767d", null ],
+    [ "MSTL::string_concatenate", "group___string_operations.html#ga61f3b29918c39248785524024de6286a", null ],
+    [ "MSTL::string_concatenate_n", "group___string_operations.html#ga0f7db85f8689d3fc4d4be3b617bd6acb", null ],
+    [ "MSTL::string_copy", "group___string_operations.html#ga80bd8e5a9395653d56fa4cd26900e837", null ],
+    [ "MSTL::string_copy_n", "group___string_operations.html#ga0b2036e65c5d7443a5f23f13d9cfe733", null ],
+    [ "MSTL::string_copy_n_offset", "group___string_operations.html#ga5a0b406b0c2485c1cc15f2491f1c2366", null ],
+    [ "MSTL::string_copy_offset", "group___string_operations.html#ga93dbf32d9bf5a22d528c51be2d0557ed", null ],
+    [ "MSTL::string_find", "group___string_operations.html#ga449fc7836daa319c302a9b7aee5eba0f", null ],
+    [ "MSTL::string_find_any", "group___string_operations.html#gaae9dd6b563cdba2e651e0831afd250c8", null ],
+    [ "MSTL::string_find_last", "group___string_operations.html#gac15aba5a44405a0d665cea148246ac5b", null ],
+    [ "MSTL::string_find_n", "group___string_operations.html#ga7d201ed9ac651807bc7dc8a279875f61", null ],
+    [ "MSTL::string_find_pattern", "group___string_operations.html#ga38b9e69cb8dd6690d985ccafaaf30f39", null ],
+    [ "MSTL::string_find_pattern_ignored_case", "group___string_operations.html#ga8a9da50716f6c84ed56c5c2fed8ea8f2", null ],
+    [ "MSTL::string_length", "group___string_operations.html#gab495988950a0d9ecea6927382f8b92ef", null ],
+    [ "MSTL::string_length_n", "group___string_operations.html#gaa7b2005fb7be674fb2e925da508221c2", null ],
+    [ "MSTL::string_reverse", "group___string_operations.html#ga0269f9e4168bee2cb95b360f1ca3b7ac", null ],
+    [ "MSTL::string_set", "group___string_operations.html#ga0123a86050cad024a31a991b9bd2ee21", null ],
+    [ "MSTL::string_set_n", "group___string_operations.html#ga95faf4466e37c43d6ffe5f9eb81100cd", null ],
+    [ "MSTL::string_span_in", "group___string_operations.html#gad9b9b6499a4666665ef45061ecce608a", null ],
+    [ "MSTL::string_span_not_in", "group___string_operations.html#gafd6761fbe58aa05adaa753055a9d89dc", null ]
+];

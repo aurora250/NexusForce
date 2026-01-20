@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hash_2ehpp_0',['hash.hpp',['../hash_8hpp.html',1,'']]]
+  ['bind_2ehpp_0',['bind.hpp',['../bind_8hpp.html',1,'']]],
+  ['bit_2ehpp_1',['bit.hpp',['../bit_8hpp.html',1,'']]]
 ];

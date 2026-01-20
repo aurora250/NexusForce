@@ -1,0 +1,567 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 元组</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___tuple.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">元组 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>元组的主模板、特化实现和辅助函数  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:MSTL_3A_3Atuple_3C_3E" id="r_MSTL_3A_3Atuple_3C_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1tuple_3_4.html">MSTL::tuple&lt;&gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">空元组特化  <a href="struct_m_s_t_l_1_1tuple_3_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MSTL_3A_3Atuple_3C_20This_2C_20Rest_2E_2E_2E_20_3E" id="r_MSTL_3A_3Atuple_3C_20This_2C_20Rest_2E_2E_2E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4.html">MSTL::tuple&lt; This, Rest... &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">元组主模板  <a href="struct_m_s_t_l_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga51cca78118ed62191c113a739c9431ae" id="r_ga51cca78118ed62191c113a739c9431ae"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </td></tr>
+<tr class="memitem:ga51cca78118ed62191c113a739c9431ae template"><td class="memItemLeft">constexpr <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga51cca78118ed62191c113a739c9431ae">MSTL::get</a> (tuple&lt; Types... &gt; &amp;t)</td></tr>
+<tr class="memdesc:ga51cca78118ed62191c113a739c9431ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元组中指定位置的元素引用  <br /></td></tr>
+<tr class="memitem:gad14a6e4b393420542d720f15f7bd014c" id="r_gad14a6e4b393420542d720f15f7bd014c"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </td></tr>
+<tr class="memitem:gad14a6e4b393420542d720f15f7bd014c template"><td class="memItemLeft">constexpr const <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gad14a6e4b393420542d720f15f7bd014c">MSTL::get</a> (const tuple&lt; Types... &gt; &amp;t)</td></tr>
+<tr class="memdesc:gad14a6e4b393420542d720f15f7bd014c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元组中指定位置的元素常量引用  <br /></td></tr>
+<tr class="memitem:gafdb00dfca57aa6178e4685c58479f3a6" id="r_gafdb00dfca57aa6178e4685c58479f3a6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </td></tr>
+<tr class="memitem:gafdb00dfca57aa6178e4685c58479f3a6 template"><td class="memItemLeft">constexpr <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="#gafdb00dfca57aa6178e4685c58479f3a6">MSTL::get</a> (tuple&lt; Types... &gt; &amp;&amp;t)</td></tr>
+<tr class="memdesc:gafdb00dfca57aa6178e4685c58479f3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元组中指定位置的元素右值引用  <br /></td></tr>
+<tr class="memitem:ga7edce0ae7480953e02dcd9f368b89741" id="r_ga7edce0ae7480953e02dcd9f368b89741"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </td></tr>
+<tr class="memitem:ga7edce0ae7480953e02dcd9f368b89741 template"><td class="memItemLeft">constexpr const <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga7edce0ae7480953e02dcd9f368b89741">MSTL::get</a> (const tuple&lt; Types... &gt; &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga7edce0ae7480953e02dcd9f368b89741"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元组中指定位置的元素常量右值引用  <br /></td></tr>
+<tr class="memitem:ga3010d6de79b740e2a2993cdeb4745c7c" id="r_ga3010d6de79b740e2a2993cdeb4745c7c"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga3010d6de79b740e2a2993cdeb4745c7c template"><td class="memItemLeft">constexpr tuple&lt; <a class="el" href="group___reference_wrapper.html#ga7a1d71bb42db79d13d3a8120ee9878ca">unwrap_ref_decay_t</a>&lt; Types &gt;... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3010d6de79b740e2a2993cdeb4745c7c">MSTL::make_tuple</a> (Types &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ga3010d6de79b740e2a2993cdeb4745c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">从参数创建元组  <br /></td></tr>
+<tr class="memitem:ga9be965e8e75644195ba78d5a9f824f64" id="r_ga9be965e8e75644195ba78d5a9f824f64"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga9be965e8e75644195ba78d5a9f824f64 template"><td class="memItemLeft">constexpr tuple&lt; Types &amp;... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga9be965e8e75644195ba78d5a9f824f64">MSTL::tie</a> (Types &amp;... args) noexcept</td></tr>
+<tr class="memdesc:ga9be965e8e75644195ba78d5a9f824f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建引用元组  <br /></td></tr>
+<tr class="memitem:ga9a2d7e45a9ee5d184d10e5f3acd9d86d" id="r_ga9a2d7e45a9ee5d184d10e5f3acd9d86d"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga9a2d7e45a9ee5d184d10e5f3acd9d86d template"><td class="memItemLeft">constexpr tuple&lt; Types &amp;&amp;... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga9a2d7e45a9ee5d184d10e5f3acd9d86d">MSTL::forward_as_tuple</a> (Types &amp;&amp;... args) noexcept</td></tr>
+<tr class="memdesc:ga9a2d7e45a9ee5d184d10e5f3acd9d86d"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建转发引用元组  <br /></td></tr>
+<tr class="memitem:ga5e3a749a423d011fd882915e972c8709" id="r_ga5e3a749a423d011fd882915e972c8709"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Tuple, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; MSTL::inner::constructible_from_tuple&lt; T, Tuple &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga5e3a749a423d011fd882915e972c8709 template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#ga5e3a749a423d011fd882915e972c8709">MSTL::make_from_tuple</a> (Tuple &amp;&amp;tup) noexcept(noexcept(MSTL::inner::__broaden_make_from_tuple&lt; T &gt;(<a class="el" href="group___args_forward_functions.html#gae35e75d0d5ad399f4f806a18c6e0f228">MSTL::forward</a>&lt; Tuple &gt;(tup), <a class="el" href="group___integer_sequence.html#ga9fd54dfe4d6f88dfad502386d5ba395d">make_index_sequence</a>&lt; <a class="el" href="struct_m_s_t_l_1_1tuple__size.html">tuple_size</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga08159e0a7a2bf0566af9806bc46f9af6">remove_reference_t</a>&lt; Tuple &gt; &gt;::value &gt;{})))</td></tr>
+<tr class="memdesc:ga5e3a749a423d011fd882915e972c8709"><td class="mdescLeft">&#160;</td><td class="mdescRight">从元组构造对象  <br /></td></tr>
+<tr class="memitem:ga42b542c578c17724209feb83e3e6364d" id="r_ga42b542c578c17724209feb83e3e6364d"><td class="memTemplParams" colspan="2">template&lt;typename... Tuples&gt; </td></tr>
+<tr class="memitem:ga42b542c578c17724209feb83e3e6364d template"><td class="memItemLeft">constexpr MSTL::inner::tuple_cat_bind_t&lt; Tuples... &gt;::Ret&#160;</td><td class="memItemRight"><a class="el" href="#ga42b542c578c17724209feb83e3e6364d">MSTL::tuple_cat</a> (Tuples &amp;&amp;... tuples)</td></tr>
+<tr class="memdesc:ga42b542c578c17724209feb83e3e6364d"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接多个元组  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>元组的主模板、特化实现和辅助函数 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga9a2d7e45a9ee5d184d10e5f3acd9d86d" name="ga9a2d7e45a9ee5d184d10e5f3acd9d86d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9a2d7e45a9ee5d184d10e5f3acd9d86d">&#9670;&#160;</a></span>forward_as_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple&lt; Types &amp;&amp;... &gt; MSTL::forward_as_tuple </td>
+          <td>(</td>
+          <td class="paramtype">Types &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建转发引用元组 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Types</td><td>转发引用类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>转发引用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>创建的转发引用元组 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00749">749</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="bind_8hpp_source.html#l00554">MSTL::binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00569">MSTL::binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00661">MSTL::bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00674">MSTL::bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00851">tuple_cat()</a>.</p>
+
+</div>
+</div>
+<a id="ga7edce0ae7480953e02dcd9f368b89741" name="ga7edce0ae7480953e02dcd9f368b89741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7edce0ae7480953e02dcd9f368b89741">&#9670;&#160;</a></span>get() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&amp; MSTL::get </td>
+          <td>(</td>
+          <td class="paramtype">const tuple&lt; Types... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元组中指定位置的元素常量右值引用 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Index</td><td>元素索引 </td></tr>
+    <tr><td class="paramname">Types</td><td>元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的常量右值引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00687">687</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad14a6e4b393420542d720f15f7bd014c" name="gad14a6e4b393420542d720f15f7bd014c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad14a6e4b393420542d720f15f7bd014c">&#9670;&#160;</a></span>get() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp; MSTL::get </td>
+          <td>(</td>
+          <td class="paramtype">const tuple&lt; Types... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元组中指定位置的元素常量引用 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Index</td><td>元素索引 </td></tr>
+    <tr><td class="paramname">Types</td><td>元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00659">659</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gafdb00dfca57aa6178e4685c58479f3a6" name="gafdb00dfca57aa6178e4685c58479f3a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafdb00dfca57aa6178e4685c58479f3a6">&#9670;&#160;</a></span>get() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&amp; MSTL::get </td>
+          <td>(</td>
+          <td class="paramtype">tuple&lt; Types... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元组中指定位置的元素右值引用 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Index</td><td>元素索引 </td></tr>
+    <tr><td class="paramname">Types</td><td>元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的右值引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00673">673</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga51cca78118ed62191c113a739c9431ae" name="ga51cca78118ed62191c113a739c9431ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga51cca78118ed62191c113a739c9431ae">&#9670;&#160;</a></span>get() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Index, typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pair_8hpp.html#ad575e9f42f9bbca384f0439ce6d9afa5">tuple_element_t</a>&lt; Index, Types... &gt; &amp; MSTL::get </td>
+          <td>(</td>
+          <td class="paramtype">tuple&lt; Types... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元组中指定位置的元素引用 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Index</td><td>元素索引 </td></tr>
+    <tr><td class="paramname">Types</td><td>元组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00645">645</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga5e3a749a423d011fd882915e972c8709" name="ga5e3a749a423d011fd882915e972c8709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5e3a749a423d011fd882915e972c8709">&#9670;&#160;</a></span>make_from_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Tuple, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; MSTL::inner::constructible_from_tuple&lt; T, Tuple &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T MSTL::make_from_tuple </td>
+          <td>(</td>
+          <td class="paramtype">Tuple &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>tup</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从元组构造对象 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">Tuple</td><td>源元组类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tup</td><td>源元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>构造的对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00791">791</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a>.</p>
+
+</div>
+</div>
+<a id="ga3010d6de79b740e2a2993cdeb4745c7c" name="ga3010d6de79b740e2a2993cdeb4745c7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3010d6de79b740e2a2993cdeb4745c7c">&#9670;&#160;</a></span>make_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple&lt; <a class="el" href="group___reference_wrapper.html#ga7a1d71bb42db79d13d3a8120ee9878ca">unwrap_ref_decay_t</a>&lt; Types &gt;... &gt; MSTL::make_tuple </td>
+          <td>(</td>
+          <td class="paramtype">Types &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从参数创建元组 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Types</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>创建的元组 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00725">725</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a>.</p>
+
+</div>
+</div>
+<a id="ga9be965e8e75644195ba78d5a9f824f64" name="ga9be965e8e75644195ba78d5a9f824f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9be965e8e75644195ba78d5a9f824f64">&#9670;&#160;</a></span>tie()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple&lt; Types &amp;... &gt; MSTL::tie </td>
+          <td>(</td>
+          <td class="paramtype">Types &amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建引用元组 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Types</td><td>引用类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>引用参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>创建的引用元组 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00737">737</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga42b542c578c17724209feb83e3e6364d" name="ga42b542c578c17724209feb83e3e6364d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga42b542c578c17724209feb83e3e6364d">&#9670;&#160;</a></span>tuple_cat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Tuples&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL::inner::tuple_cat_bind_t&lt; Tuples... &gt;::Ret MSTL::tuple_cat </td>
+          <td>(</td>
+          <td class="paramtype">Tuples &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>tuples</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>连接多个元组 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Tuples</td><td>要连接的元组类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tuples</td><td>要连接的元组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>连接后的元组 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00851">851</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00242">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00749">forward_as_tuple()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

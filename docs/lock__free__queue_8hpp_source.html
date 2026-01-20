@@ -94,7 +94,7 @@ $(function(){initNavTree('lock__free__queue_8hpp_source.html','',''); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../memory/unique_ptr.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">../memory/unique_ptr.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../async/atomic.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
@@ -116,31 +116,31 @@ $(function(){initNavTree('lock__free__queue_8hpp_source.html','',''); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    };</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">struct </span>node {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;T*&gt; data;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;node_counter&gt; count;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;counted_node_ptr&gt; next;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;T*&gt; <a class="code hl_function" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">data</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;node_counter&gt; <a class="code hl_function" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic&lt;counted_node_ptr&gt; <a class="code hl_function" href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">next</a>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">explicit</span> node(<span class="keywordtype">int</span> external_count = 2) {</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            node_counter new_count;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            new_count.internal_count = 0;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            new_count.external_counters = external_count;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            count.store(new_count);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <a class="code hl_function" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>.store(new_count);</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            counted_node_ptr node_ptr;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            node_ptr.ptr = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            node_ptr.external_count = 0;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            next.store(node_ptr);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <a class="code hl_function" href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">next</a>.store(node_ptr);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">void</span> release_ref() {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            node_counter old_counter = count.load(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> memory_order_relaxed);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            node_counter old_counter = <a class="code hl_function" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>.load(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> memory_order_relaxed);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            node_counter new_counter;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">do</span> {</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                new_counter = old_counter;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                --new_counter.internal_count;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">while</span> (!count.compare_exchange_strong(old_counter, new_counter,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">while</span> (!<a class="code hl_function" href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">count</a>.compare_exchange_strong(old_counter, new_counter,</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> memory_order_acquire, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> memory_order_relaxed));</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">if</span> (!new_counter.internal_count &amp;&amp; !new_counter.external_counters) {</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keyword">delete</span> <span class="keyword">this</span>;</div>
@@ -251,7 +251,7 @@ $(function(){initNavTree('lock__free__queue_8hpp_source.html','',''); });
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                ptr-&gt;release_ref();</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> make_unique&lt;T&gt;();</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            }</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            counted_node_ptr next = ptr-&gt;next.load();</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            counted_node_ptr <a class="code hl_function" href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">next</a> = ptr-&gt;next.load();</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">if</span> (head.compare_exchange_strong(old_head, next)) {</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                T* <span class="keyword">const</span> res = ptr-&gt;data.exchange(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                lock_free_queue::free_external_counter(old_head);</div>
@@ -271,9 +271,13 @@ $(function(){initNavTree('lock__free__queue_8hpp_source.html','',''); });
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__</span></div>
 <div class="ttc" id="agroup___core_types_html_ga345d54be2f996584ff8d8362b3dfeb18"><div class="ttname"><a href="group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18">MSTL::uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00086">types.hpp:86</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_gaf93fc708b7c3ee66a06109be093eaf43"><div class="ttname"><a href="group___counting_algorithms.html#gaf93fc708b7c3ee66a06109be093eaf43">MSTL::count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00350">search.hpp:350</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga4d5681ffa110c2607ab37a252e4f4c11"><div class="ttname"><a href="group___iterator_operation.html#ga4d5681ffa110c2607ab37a252e4f4c11">MSTL::next</a></div><div class="ttdeci">constexpr Iterator next(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</div><div class="ttdoc">获取迭代器的后一个位置</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00136">iterator.hpp:136</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gadd573cfd63b0a7c52e40c5beace90159"><div class="ttname"><a href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">MSTL独占智能指针</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

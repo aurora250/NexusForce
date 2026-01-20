@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['package_5ft_0',['package_t',['../group___base_type_properties.html#ga95f59a612024e47f98b2eda489c924ae',1,'MSTL']]],
-  ['pointer_1',['pointer',['../struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ac38b90bf64f7a0e3bb3c53a47473d27e',1,'MSTL::iterator_traits&lt; T * &gt;::pointer'],['../struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a6f0634f259943d6932db8d232ecc722b',1,'MSTL::pointer_traits&lt; T * &gt;::pointer']]],
-  ['pointer_5frebind_2',['pointer_rebind',['../group___pointer_traits.html#gae3f62d93e57334ca0569e91f2db0b7b7',1,'MSTL']]],
-  ['ptrdiff_5ft_3',['ptrdiff_t',['../group___platform_dependent_types.html#gaef2ae7625283dcdcc22274c5a6afdf95',1,'MSTL']]]
+  ['make_5findex_5fsequence_0',['make_index_sequence',['../group___integer_sequence.html#ga9fd54dfe4d6f88dfad502386d5ba395d',1,'MSTL']]],
+  ['make_5finteger_5fsequence_1',['make_integer_sequence',['../group___integer_sequence.html#ga549b9aad2ac81be3a74b746b8db9ec7f',1,'MSTL']]],
+  ['make_5finteger_5ft_2',['make_integer_t',['../group___sign_manipulation.html#ga2712dd1094988e69c13de6896b1f49ee',1,'MSTL']]],
+  ['make_5fsigned_5ft_3',['make_signed_t',['../group___sign_manipulation.html#ga5918bc09834f723bbd3d948812e08a95',1,'MSTL']]],
+  ['make_5funsigned_5ft_4',['make_unsigned_t',['../group___sign_manipulation.html#gace1f0802cae363363831b3b86b85b842',1,'MSTL']]],
+  ['max_5falign_5ft_5',['max_align_t',['../group___core_types.html#gabbc2ab186ddffc6268f98b987bc8ad57',1,'MSTL']]],
+  ['mega_6',['mega',['../group___s_i_units.html#ga9e7fe0ae0aa3fa9f9b4de82215fb1a24',1,'MSTL']]],
+  ['micro_7',['micro',['../group___s_i_units.html#ga0c68ca93bc66f179afc9a39307f0a1e5',1,'MSTL']]],
+  ['milli_8',['milli',['../group___s_i_units.html#gab4e40c93e0206266c7a011974fd81d3c',1,'MSTL']]]
 ];

@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: 集合算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___set_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">集合算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL集合算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gadc802dae108ed7c0d7b964eb542d62c2" id="r_gadc802dae108ed7c0d7b964eb542d62c2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gadc802dae108ed7c0d7b964eb542d62c2 template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#gadc802dae108ed7c0d7b964eb542d62c2">MSTL::set_union</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</td></tr>
+<tr class="memdesc:gadc802dae108ed7c0d7b964eb542d62c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个已排序范围的并集  <br /></td></tr>
+<tr class="memitem:gadeee7d1fa68b200590b2b6cbb7425f95" id="r_gadeee7d1fa68b200590b2b6cbb7425f95"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gadeee7d1fa68b200590b2b6cbb7425f95 template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#gadeee7d1fa68b200590b2b6cbb7425f95">MSTL::set_intersection</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</td></tr>
+<tr class="memdesc:gadeee7d1fa68b200590b2b6cbb7425f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个已排序范围的交集  <br /></td></tr>
+<tr class="memitem:ga3a983c2d55e76e1f4e2513885e77098f" id="r_ga3a983c2d55e76e1f4e2513885e77098f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3a983c2d55e76e1f4e2513885e77098f template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#ga3a983c2d55e76e1f4e2513885e77098f">MSTL::set_difference</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</td></tr>
+<tr class="memdesc:ga3a983c2d55e76e1f4e2513885e77098f"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个已排序范围的差集  <br /></td></tr>
+<tr class="memitem:gac3b14b815065822ce393096b2a22d394" id="r_gac3b14b815065822ce393096b2a22d394"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac3b14b815065822ce393096b2a22d394 template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#gac3b14b815065822ce393096b2a22d394">MSTL::set_symmetric_difference</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</td></tr>
+<tr class="memdesc:gac3b14b815065822ce393096b2a22d394"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算两个已排序范围的对称差集  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL集合算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga3a983c2d55e76e1f4e2513885e77098f" name="ga3a983c2d55e76e1f4e2513885e77098f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3a983c2d55e76e1f4e2513885e77098f">&#9670;&#160;</a></span>set_difference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator3 MSTL::set_difference </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator3</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算两个已排序范围的差集 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator3</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算两个已排序范围 [first1, last1) 和 [first2, last2) 的差集。 结果包含出现在第一个范围但不出现在第二个范围中的元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="algorithm_2set_8hpp_source.html">algorithm/set.hpp</a> 第 <a class="el" href="algorithm_2set_8hpp_source.html#l00109">109</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00082">copy()</a> , 以及 <a class="el" href="algorithm_2set_8hpp_source.html#l00109">set_difference()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="algorithm_2set_8hpp_source.html#l00109">set_difference()</a>.</p>
+
+</div>
+</div>
+<a id="gadeee7d1fa68b200590b2b6cbb7425f95" name="gadeee7d1fa68b200590b2b6cbb7425f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadeee7d1fa68b200590b2b6cbb7425f95">&#9670;&#160;</a></span>set_intersection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator3 MSTL::set_intersection </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator3</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算两个已排序范围的交集 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator3</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算两个已排序范围 [first1, last1) 和 [first2, last2) 的交集。 结果包含同时出现在两个输入范围中的元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="algorithm_2set_8hpp_source.html">algorithm/set.hpp</a> 第 <a class="el" href="algorithm_2set_8hpp_source.html#l00076">76</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="algorithm_2set_8hpp_source.html#l00076">set_intersection()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="algorithm_2set_8hpp_source.html#l00076">set_intersection()</a>.</p>
+
+</div>
+</div>
+<a id="gac3b14b815065822ce393096b2a22d394" name="gac3b14b815065822ce393096b2a22d394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac3b14b815065822ce393096b2a22d394">&#9670;&#160;</a></span>set_symmetric_difference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator3 MSTL::set_symmetric_difference </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator3</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算两个已排序范围的对称差集 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator3</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算两个已排序范围 [first1, last1) 和 [first2, last2) 的对称差集。 结果包含出现在任一输入范围但不同时出现在两个范围中的元素。 即：并集减去交集。 </p>
+
+<p class="definition">在文件 <a class="el" href="algorithm_2set_8hpp_source.html">algorithm/set.hpp</a> 第 <a class="el" href="algorithm_2set_8hpp_source.html#l00143">143</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00082">copy()</a> , 以及 <a class="el" href="algorithm_2set_8hpp_source.html#l00143">set_symmetric_difference()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="algorithm_2set_8hpp_source.html#l00143">set_symmetric_difference()</a>.</p>
+
+</div>
+</div>
+<a id="gadc802dae108ed7c0d7b964eb542d62c2" name="gadc802dae108ed7c0d7b964eb542d62c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadc802dae108ed7c0d7b964eb542d62c2">&#9670;&#160;</a></span>set_union()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Iterator3, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga1047afb356a1aa0ae218ed3206c89599">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator3 MSTL::set_union </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator3</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算两个已排序范围的并集 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator3</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算两个已排序范围 [first1, last1) 和 [first2, last2) 的并集。 结果包含所有出现在任一输入范围中的元素，重复元素只出现一次。</p>
+<p>前提条件：</p><ol type="1">
+<li>两个输入范围都已按升序排序</li>
+<li>输出范围不与输入范围重叠 </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="algorithm_2set_8hpp_source.html">algorithm/set.hpp</a> 第 <a class="el" href="algorithm_2set_8hpp_source.html#l00042">42</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00217">_MSTL</a>, <a class="el" href="shift_8hpp_source.html#l00082">copy()</a> , 以及 <a class="el" href="algorithm_2set_8hpp_source.html#l00042">set_union()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="algorithm_2set_8hpp_source.html#l00042">set_union()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

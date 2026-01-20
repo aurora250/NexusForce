@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
+  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

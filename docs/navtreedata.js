@@ -25,17 +25,22 @@
 var NAVTREE =
 [
   [ "MSTL", "index.html", [
+    [ "弃用列表", "deprecated.html", null ],
     [ "专题", "topics.html", "topics" ],
+    [ "命名空间", "namespaces.html", [
+      [ "命名空间列表", "namespaces.html", "namespaces_dup" ]
+    ] ],
     [ "概念", "concepts.html", "concepts" ],
     [ "类", "annotated.html", [
       [ "类列表", "annotated.html", "annotated_dup" ],
       [ "类索引", "classes.html", null ],
       [ "类继承关系", "hierarchy.html", "hierarchy" ],
       [ "类成员", "functions.html", [
-        [ "全部", "functions.html", null ],
-        [ "函数", "functions_func.html", null ],
+        [ "全部", "functions.html", "functions_dup" ],
+        [ "函数", "functions_func.html", "functions_func" ],
         [ "变量", "functions_vars.html", null ],
-        [ "类型定义", "functions_type.html", null ]
+        [ "类型定义", "functions_type.html", null ],
+        [ "相关符号", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "文件", "files.html", [
@@ -51,9 +56,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_m_s_t_l_8hpp_source.html",
-"group___base_type_qualifier_check.html#gae70104e19d7c902d9fda35901303691e",
-"group___type_special_member_function_checks.html#gaf2b183f7864916912904283ce375e5c0",
-"struct_m_s_t_l_1_1is__lvalue__reference.html"
+"click_8hpp_source.html",
+"group___base_type_qualifier_check.html#ga7240f9a096f5b52dc69392409ea68ae0",
+"group___insert_iterators.html#gafa048c80669050263ad1fa3c639478a7",
+"group___platform_dependent_types.html#ga543885994cb29ac6f472589ce6594079",
+"group___type_erasure_functions.html#ga2d6b8d7109afdc0c4ab0e6c917600043",
+"sha256_8hpp_source.html",
+"struct_m_s_t_l_1_1is__any__of.html",
+"struct_m_s_t_l_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4.html#a9f5b3b0abb7676d56346f1f12d8cb769"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

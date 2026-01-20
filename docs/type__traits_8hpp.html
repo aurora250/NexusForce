@@ -93,7 +93,7 @@ $(function(){initNavTree('type__traits_8hpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>MSTL类型特性库  
+<p>MSTL类型萃取  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="types_8hpp_source.html">../typeinfo/types.hpp</a>&quot;</code><br />
 </div>
@@ -183,6 +183,10 @@ $(function(){initNavTree('type__traits_8hpp.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询数组的维度数  <a href="struct_m_s_t_l_1_1rank.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:MSTL_3A_3Aextent_3C_20T_2C_20Idx_20_3E" id="r_MSTL_3A_3Aextent_3C_20T_2C_20Idx_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1extent.html">MSTL::extent&lt; T, Idx &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询数组指定维度的大小  <a href="struct_m_s_t_l_1_1extent.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MSTL_3A_3Aget_5Fptr_5Fdifference_3C_20T_2C_20Dummy_20_3E" id="r_MSTL_3A_3Aget_5Fptr_5Fdifference_3C_20T_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1get__ptr__difference.html">MSTL::get_ptr_difference&lt; T, Dummy &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指针的差值类型  <a href="struct_m_s_t_l_1_1get__ptr__difference.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:MSTL_3A_3Aget_5Frebind_5Ftype_3C_20T_2C_20U_2C_20Dummy_20_3E" id="r_MSTL_3A_3Aget_5Frebind_5Ftype_3C_20T_2C_20U_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1get__rebind__type.html">MSTL::get_rebind_type&lt; T, U, Dummy &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指针的重新绑定类型  <a href="struct_m_s_t_l_1_1get__rebind__type.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:MSTL_3A_3Ais_5Fbounded_5Farray_3C_20T_20_3E" id="r_MSTL_3A_3Ais_5Fbounded_5Farray_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1is__bounded__array.html">MSTL::is_bounded_array&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否为有界数组  <a href="struct_m_s_t_l_1_1is__bounded__array.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:MSTL_3A_3Ais_5Funbounded_5Farray_3C_20T_20_3E" id="r_MSTL_3A_3Ais_5Funbounded_5Farray_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1is__unbounded__array.html">MSTL::is_unbounded_array&lt; T &gt;</a></td></tr>
@@ -475,6 +479,26 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gabb4fa49903a3771f18505b6430cb3b7d template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::add_pointer_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1add__pointer.html">add_pointer</a>&lt;T&gt;::type</td></tr>
 <tr class="memdesc:gabb4fa49903a3771f18505b6430cb3b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">add_pointer的便捷别名 <br /></td></tr>
+<tr class="memitem:gad5c2b44cbe7771b8885ce4cb0b5da19b" id="r_gad5c2b44cbe7771b8885ce4cb0b5da19b"><td class="memTemplParams" colspan="2">
+template&lt;typename Tmp&gt; </td></tr>
+<tr class="memitem:gad5c2b44cbe7771b8885ce4cb0b5da19b template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::get_first_temp_para_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1get__first__temp__para.html">get_first_temp_para</a>&lt;Tmp&gt;::type</td></tr>
+<tr class="memdesc:gad5c2b44cbe7771b8885ce4cb0b5da19b"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_first_temp_para的便捷别名 <br /></td></tr>
+<tr class="memitem:ga8f0aae80840a3b67eacc4aea5245fd0e" id="r_ga8f0aae80840a3b67eacc4aea5245fd0e"><td class="memTemplParams" colspan="2">
+template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ga8f0aae80840a3b67eacc4aea5245fd0e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::get_first_para_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1get__first__para.html">get_first_para</a>&lt;Types...&gt;::type</td></tr>
+<tr class="memdesc:ga8f0aae80840a3b67eacc4aea5245fd0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_first_para的便捷别名 <br /></td></tr>
+<tr class="memitem:ga586792cba52f7e15ddcd318a026b418c" id="r_ga586792cba52f7e15ddcd318a026b418c"><td class="memTemplParams" colspan="2">
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga586792cba52f7e15ddcd318a026b418c template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::get_ptr_difference_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1get__ptr__difference.html">get_ptr_difference</a>&lt;T&gt;::type</td></tr>
+<tr class="memdesc:ga586792cba52f7e15ddcd318a026b418c"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_ptr_difference的便捷别名 <br /></td></tr>
+<tr class="memitem:gae6afe7cc22f9546d37fd5abcb9d2b700" id="r_gae6afe7cc22f9546d37fd5abcb9d2b700"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gae6afe7cc22f9546d37fd5abcb9d2b700 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::replace_first_para_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1replace__first__para.html">replace_first_para</a>&lt;T, U&gt;::type</td></tr>
+<tr class="memdesc:gae6afe7cc22f9546d37fd5abcb9d2b700"><td class="mdescLeft">&#160;</td><td class="mdescRight">replace_first_para的便捷别名 <br /></td></tr>
+<tr class="memitem:gaeefaab40b5fb13472ecb0404d48dc0f4" id="r_gaeefaab40b5fb13472ecb0404d48dc0f4"><td class="memTemplParams" colspan="2">
+template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gaeefaab40b5fb13472ecb0404d48dc0f4 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::get_rebind_type_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1get__rebind__type.html">get_rebind_type</a>&lt;T, U&gt;::type</td></tr>
+<tr class="memdesc:gaeefaab40b5fb13472ecb0404d48dc0f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_rebind_type的便捷别名 <br /></td></tr>
 <tr class="memitem:ga7f26c1b7f03cf3ff62849170fd25b0c7" id="r_ga7f26c1b7f03cf3ff62849170fd25b0c7"><td class="memTemplParams" colspan="2">
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga7f26c1b7f03cf3ff62849170fd25b0c7 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::underlying_type_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1underlying__type.html">underlying_type</a>&lt;T&gt;::type</td></tr>
@@ -940,7 +964,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b
 <tr class="memitem:gaeb266575a5d8c0bf0c5d8bd551d0beb6 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><b>MSTL::aligned_union_v</b> = <a class="el" href="struct_m_s_t_l_1_1aligned__union.html">aligned_union</a>&lt;Len, Types...&gt;::align_value</td></tr>
 <tr class="memdesc:gaeb266575a5d8c0bf0c5d8bd551d0beb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取aligned_union的对齐要求值 <br /></td></tr>
 <tr class="memitem:gace4dacc82eb281a550a2765284ba830f" id="r_gace4dacc82eb281a550a2765284ba830f"><td class="memTemplParams" colspan="2">
-template&lt;typename T, template&lt; typename... &gt; typename Template&gt; </td></tr>
+template&lt;typename T, template&lt; typename... &gt; class Template&gt; </td></tr>
 <tr class="memitem:gace4dacc82eb281a550a2765284ba830f template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><b>MSTL::is_specialization_v</b> = <a class="el" href="struct_m_s_t_l_1_1is__specialization.html">is_specialization</a>&lt;T, Template&gt;::value</td></tr>
 <tr class="memdesc:gace4dacc82eb281a550a2765284ba830f"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_specialization的便捷变量模板 <br /></td></tr>
 <tr class="memitem:ga378c9cb4b29b4dcaf33a4f2c6e07c986" id="r_ga378c9cb4b29b4dcaf33a4f2c6e07c986"><td class="memTemplParams" colspan="2">
@@ -985,8 +1009,8 @@ template&lt;typename T&gt; </td></tr>
 <tr class="memdesc:ga1fe19b34216f1ed9950da921895245b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">has_base的便捷变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>MSTL类型特性库 </p>
-<p>此文件提供了完整的类型特性实现，用于在编译时查询和操作类型信息。 </p>
+<div class="textblock"><p>MSTL类型萃取 </p>
+<p>此文件提供了完整的类型萃取实现，用于在编译时查询和操作类型信息。 </p>
 
 <p class="definition">在文件 <a class="el" href="type__traits_8hpp_source.html">type_traits.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

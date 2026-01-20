@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['命名空间宏_0',['命名空间宏',['../group___namespace_macros.html',1,'']]]
 ];

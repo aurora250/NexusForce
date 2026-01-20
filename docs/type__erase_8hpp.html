@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: type_erase.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('type__erase_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">type_erase.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSTL类型擦除辅助函数  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="reverse__iterator_8hpp_source.html">../iterator/reverse_iterator.hpp</a>&quot;</code><br />
+<code>#include &lt;initializer_list&gt;</code><br />
+</div>
+<p><a href="type__erase_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga045e55db2cb3e83e805eb56131628d2c" id="r_ga045e55db2cb3e83e805eb56131628d2c"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga045e55db2cb3e83e805eb56131628d2c template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga045e55db2cb3e83e805eb56131628d2c">MSTL::begin</a> (Container &amp;cont) noexcept(noexcept(cont.begin()))</td></tr>
+<tr class="memdesc:ga045e55db2cb3e83e805eb56131628d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的起始迭代器  <br /></td></tr>
+<tr class="memitem:gabe16d74c060a3e97b7235b2d3cf89aca" id="r_gabe16d74c060a3e97b7235b2d3cf89aca"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gabe16d74c060a3e97b7235b2d3cf89aca template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gabe16d74c060a3e97b7235b2d3cf89aca">MSTL::end</a> (Container &amp;cont) noexcept(noexcept(cont.end()))</td></tr>
+<tr class="memdesc:gabe16d74c060a3e97b7235b2d3cf89aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的结束迭代器  <br /></td></tr>
+<tr class="memitem:gab891937d9b505335fe825d1143e3fa12" id="r_gab891937d9b505335fe825d1143e3fa12"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gab891937d9b505335fe825d1143e3fa12 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gab891937d9b505335fe825d1143e3fa12">MSTL::begin</a> (const Container &amp;cont) noexcept(noexcept(cont.begin()))</td></tr>
+<tr class="memdesc:gab891937d9b505335fe825d1143e3fa12"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的起始迭代器  <br /></td></tr>
+<tr class="memitem:gae48dd262b2d027fe3b95dc21494c3ac2" id="r_gae48dd262b2d027fe3b95dc21494c3ac2"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gae48dd262b2d027fe3b95dc21494c3ac2 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gae48dd262b2d027fe3b95dc21494c3ac2">MSTL::end</a> (const Container &amp;cont) noexcept(noexcept(cont.end()))</td></tr>
+<tr class="memdesc:gae48dd262b2d027fe3b95dc21494c3ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的结束迭代器  <br /></td></tr>
+<tr class="memitem:gaf2d00c52f233a3f63b55f5c121c9634b" id="r_gaf2d00c52f233a3f63b55f5c121c9634b"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:gaf2d00c52f233a3f63b55f5c121c9634b template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaf2d00c52f233a3f63b55f5c121c9634b">MSTL::begin</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:gaf2d00c52f233a3f63b55f5c121c9634b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的起始指针  <br /></td></tr>
+<tr class="memitem:gae4947c9a6798e83f958078cd7b1c0f44" id="r_gae4947c9a6798e83f958078cd7b1c0f44"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:gae4947c9a6798e83f958078cd7b1c0f44 template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gae4947c9a6798e83f958078cd7b1c0f44">MSTL::end</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:gae4947c9a6798e83f958078cd7b1c0f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的结束指针  <br /></td></tr>
+<tr class="memitem:ga626a918c2aa2a0c875e150a9d92fb4b3" id="r_ga626a918c2aa2a0c875e150a9d92fb4b3"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga626a918c2aa2a0c875e150a9d92fb4b3 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga626a918c2aa2a0c875e150a9d92fb4b3">MSTL::cbegin</a> (const Container &amp;cont) noexcept(noexcept(cont.cbegin()))</td></tr>
+<tr class="memdesc:ga626a918c2aa2a0c875e150a9d92fb4b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的const起始迭代器  <br /></td></tr>
+<tr class="memitem:ga7cc47835ce1f7ff173df9fceb6f969c4" id="r_ga7cc47835ce1f7ff173df9fceb6f969c4"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga7cc47835ce1f7ff173df9fceb6f969c4 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga7cc47835ce1f7ff173df9fceb6f969c4">MSTL::cend</a> (const Container &amp;cont) noexcept(noexcept(cont.cend()))</td></tr>
+<tr class="memdesc:ga7cc47835ce1f7ff173df9fceb6f969c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的const结束迭代器  <br /></td></tr>
+<tr class="memitem:ga5395d9df81349810d0b0764eadef755e" id="r_ga5395d9df81349810d0b0764eadef755e"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga5395d9df81349810d0b0764eadef755e template"><td class="memItemLeft">constexpr const T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga5395d9df81349810d0b0764eadef755e">MSTL::cbegin</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga5395d9df81349810d0b0764eadef755e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const数组的const起始指针  <br /></td></tr>
+<tr class="memitem:ga3af861792cf2221f0892349a905bf604" id="r_ga3af861792cf2221f0892349a905bf604"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga3af861792cf2221f0892349a905bf604 template"><td class="memItemLeft">constexpr const T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga3af861792cf2221f0892349a905bf604">MSTL::cend</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga3af861792cf2221f0892349a905bf604"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const数组的const结束指针  <br /></td></tr>
+<tr class="memitem:ga5afd832803f31aa6cf6dd6e252727871" id="r_ga5afd832803f31aa6cf6dd6e252727871"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga5afd832803f31aa6cf6dd6e252727871 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga5afd832803f31aa6cf6dd6e252727871">MSTL::rbegin</a> (Container &amp;cont) noexcept(noexcept(cont.rbegin()))</td></tr>
+<tr class="memdesc:ga5afd832803f31aa6cf6dd6e252727871"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的反向起始迭代器  <br /></td></tr>
+<tr class="memitem:gaa3bdbe8aced5519ba0aa5314b269fd62" id="r_gaa3bdbe8aced5519ba0aa5314b269fd62"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gaa3bdbe8aced5519ba0aa5314b269fd62 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaa3bdbe8aced5519ba0aa5314b269fd62">MSTL::rend</a> (Container &amp;cont) noexcept(noexcept(cont.rend()))</td></tr>
+<tr class="memdesc:gaa3bdbe8aced5519ba0aa5314b269fd62"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的反向起始迭代器  <br /></td></tr>
+<tr class="memitem:ga5ac9fd21f02e5a59b8fcab458c075f68" id="r_ga5ac9fd21f02e5a59b8fcab458c075f68"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga5ac9fd21f02e5a59b8fcab458c075f68 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga5ac9fd21f02e5a59b8fcab458c075f68">MSTL::rbegin</a> (const Container &amp;cont) noexcept(noexcept(cont.rbegin()))</td></tr>
+<tr class="memdesc:ga5ac9fd21f02e5a59b8fcab458c075f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的反向结束迭代器  <br /></td></tr>
+<tr class="memitem:ga2ce902c716468c2ab77b9b5bb8896867" id="r_ga2ce902c716468c2ab77b9b5bb8896867"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga2ce902c716468c2ab77b9b5bb8896867 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga2ce902c716468c2ab77b9b5bb8896867">MSTL::rend</a> (const Container &amp;cont) noexcept(noexcept(cont.rend()))</td></tr>
+<tr class="memdesc:ga2ce902c716468c2ab77b9b5bb8896867"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的反向结束迭代器  <br /></td></tr>
+<tr class="memitem:ga96dbdfffa67bb9306c4ed7f94e101851" id="r_ga96dbdfffa67bb9306c4ed7f94e101851"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga96dbdfffa67bb9306c4ed7f94e101851 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga96dbdfffa67bb9306c4ed7f94e101851">MSTL::rbegin</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga96dbdfffa67bb9306c4ed7f94e101851"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的反向起始迭代器  <br /></td></tr>
+<tr class="memitem:gaf5677838763cadaa82425264e443283b" id="r_gaf5677838763cadaa82425264e443283b"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:gaf5677838763cadaa82425264e443283b template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaf5677838763cadaa82425264e443283b">MSTL::rend</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:gaf5677838763cadaa82425264e443283b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的反向结束迭代器  <br /></td></tr>
+<tr class="memitem:gab86b9b822b1b014bd04fc8139eac8794" id="r_gab86b9b822b1b014bd04fc8139eac8794"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gab86b9b822b1b014bd04fc8139eac8794 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; const T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gab86b9b822b1b014bd04fc8139eac8794">MSTL::rbegin</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:gab86b9b822b1b014bd04fc8139eac8794"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取初始化列表的反向起始迭代器  <br /></td></tr>
+<tr class="memitem:gaf8bb0ddad1adca4b802f53c648cfb05e" id="r_gaf8bb0ddad1adca4b802f53c648cfb05e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf8bb0ddad1adca4b802f53c648cfb05e template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; const T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaf8bb0ddad1adca4b802f53c648cfb05e">MSTL::rend</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:gaf8bb0ddad1adca4b802f53c648cfb05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取初始化列表的反向结束迭代器  <br /></td></tr>
+<tr class="memitem:ga03d373384636c158c38c96fb2bc475cc" id="r_ga03d373384636c158c38c96fb2bc475cc"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga03d373384636c158c38c96fb2bc475cc template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga03d373384636c158c38c96fb2bc475cc">MSTL::crbegin</a> (const Container &amp;cont) noexcept(noexcept(cont.crbegin()))</td></tr>
+<tr class="memdesc:ga03d373384636c158c38c96fb2bc475cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的const反向起始迭代器  <br /></td></tr>
+<tr class="memitem:ga2d6b8d7109afdc0c4ab0e6c917600043" id="r_ga2d6b8d7109afdc0c4ab0e6c917600043"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga2d6b8d7109afdc0c4ab0e6c917600043 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga2d6b8d7109afdc0c4ab0e6c917600043">MSTL::crend</a> (const Container &amp;cont) noexcept(noexcept(cont.crend()))</td></tr>
+<tr class="memdesc:ga2d6b8d7109afdc0c4ab0e6c917600043"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的const反向结束迭代器  <br /></td></tr>
+<tr class="memitem:ga39135bbfecf3618ec04175344d6e3de3" id="r_ga39135bbfecf3618ec04175344d6e3de3"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga39135bbfecf3618ec04175344d6e3de3 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; const T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga39135bbfecf3618ec04175344d6e3de3">MSTL::crbegin</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga39135bbfecf3618ec04175344d6e3de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const数组的const反向起始迭代器  <br /></td></tr>
+<tr class="memitem:ga03195933eb4c85f4e8d12aaf748c8f43" id="r_ga03195933eb4c85f4e8d12aaf748c8f43"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga03195933eb4c85f4e8d12aaf748c8f43 template"><td class="memItemLeft">constexpr <a class="el" href="class_m_s_t_l_1_1reverse__iterator.html">reverse_iterator</a>&lt; const T * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga03195933eb4c85f4e8d12aaf748c8f43">MSTL::crend</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga03195933eb4c85f4e8d12aaf748c8f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const数组的const反向结束迭代器  <br /></td></tr>
+<tr class="memitem:gaf631c74a77ff5174b7fc9258abe98f47" id="r_gaf631c74a77ff5174b7fc9258abe98f47"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gaf631c74a77ff5174b7fc9258abe98f47 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">MSTL::size</a> (const Container &amp;cont) noexcept(noexcept(cont.size()))</td></tr>
+<tr class="memdesc:gaf631c74a77ff5174b7fc9258abe98f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的大小  <br /></td></tr>
+<tr class="memitem:ga0f2873847aa5f2b5f1a0fda24e9ddb68" id="r_ga0f2873847aa5f2b5f1a0fda24e9ddb68"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga0f2873847aa5f2b5f1a0fda24e9ddb68 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga0f2873847aa5f2b5f1a0fda24e9ddb68">MSTL::size</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga0f2873847aa5f2b5f1a0fda24e9ddb68"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的大小  <br /></td></tr>
+<tr class="memitem:ga0c2f9ae242700a6bc8dadf21a4fef1c7" id="r_ga0c2f9ae242700a6bc8dadf21a4fef1c7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga0c2f9ae242700a6bc8dadf21a4fef1c7 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga0c2f9ae242700a6bc8dadf21a4fef1c7">MSTL::size</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:ga0c2f9ae242700a6bc8dadf21a4fef1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取初始化列表的大小  <br /></td></tr>
+<tr class="memitem:ga1e2176f972e4ff2dc494237d0171a8aa" id="r_ga1e2176f972e4ff2dc494237d0171a8aa"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga1e2176f972e4ff2dc494237d0171a8aa template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga1e2176f972e4ff2dc494237d0171a8aa">MSTL::ssize</a> (const Container &amp;cont) noexcept(noexcept(cont.size()))</td></tr>
+<tr class="memdesc:ga1e2176f972e4ff2dc494237d0171a8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的有符号大小  <br /></td></tr>
+<tr class="memitem:ga2da5df0b70d39e0ba1a4ac53c7bb2ec3" id="r_ga2da5df0b70d39e0ba1a4ac53c7bb2ec3"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga2da5df0b70d39e0ba1a4ac53c7bb2ec3 template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#gaef2ae7625283dcdcc22274c5a6afdf95">ptrdiff_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga2da5df0b70d39e0ba1a4ac53c7bb2ec3">MSTL::ssize</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga2da5df0b70d39e0ba1a4ac53c7bb2ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的有符号大小  <br /></td></tr>
+<tr class="memitem:ga28bc7fab01ab2bd2c24432461d34649e" id="r_ga28bc7fab01ab2bd2c24432461d34649e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga28bc7fab01ab2bd2c24432461d34649e template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#gaef2ae7625283dcdcc22274c5a6afdf95">ptrdiff_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga28bc7fab01ab2bd2c24432461d34649e">MSTL::ssize</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:ga28bc7fab01ab2bd2c24432461d34649e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取初始化列表的有符号大小  <br /></td></tr>
+<tr class="memitem:ga0e30232902a0cd9a020346ebaf691707" id="r_ga0e30232902a0cd9a020346ebaf691707"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga0e30232902a0cd9a020346ebaf691707 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga0e30232902a0cd9a020346ebaf691707">MSTL::empty</a> (const Container &amp;cont) noexcept(noexcept(cont.empty()))</td></tr>
+<tr class="memdesc:ga0e30232902a0cd9a020346ebaf691707"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查容器是否为空  <br /></td></tr>
+<tr class="memitem:ga5a09fd57ad517f55264ab18a19a5ba77" id="r_ga5a09fd57ad517f55264ab18a19a5ba77"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga5a09fd57ad517f55264ab18a19a5ba77 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga5a09fd57ad517f55264ab18a19a5ba77">MSTL::empty</a> (const T *ptr) noexcept</td></tr>
+<tr class="memdesc:ga5a09fd57ad517f55264ab18a19a5ba77"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查指针是否非空  <br /></td></tr>
+<tr class="memitem:gabfcc6369e85c11a0738c46da0bfb1f93" id="r_gabfcc6369e85c11a0738c46da0bfb1f93"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabfcc6369e85c11a0738c46da0bfb1f93 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gabfcc6369e85c11a0738c46da0bfb1f93">MSTL::empty</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:gabfcc6369e85c11a0738c46da0bfb1f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查初始化列表是否为空  <br /></td></tr>
+<tr class="memitem:gadd573cfd63b0a7c52e40c5beace90159" id="r_gadd573cfd63b0a7c52e40c5beace90159"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:gadd573cfd63b0a7c52e40c5beace90159 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gadd573cfd63b0a7c52e40c5beace90159">MSTL::data</a> (Container &amp;cont) noexcept(noexcept(cont.data()))</td></tr>
+<tr class="memdesc:gadd573cfd63b0a7c52e40c5beace90159"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取容器的底层数据指针  <br /></td></tr>
+<tr class="memitem:ga74e562de9e46d4213b2bab5d5bc54f44" id="r_ga74e562de9e46d4213b2bab5d5bc54f44"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ga74e562de9e46d4213b2bab5d5bc54f44 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga74e562de9e46d4213b2bab5d5bc54f44">MSTL::data</a> (const Container &amp;cont) noexcept(noexcept(cont.data()))</td></tr>
+<tr class="memdesc:ga74e562de9e46d4213b2bab5d5bc54f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取const容器的const底层数据指针  <br /></td></tr>
+<tr class="memitem:ga6aa8feac3ae8d69051451ece81bccce6" id="r_ga6aa8feac3ae8d69051451ece81bccce6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Size&gt; </td></tr>
+<tr class="memitem:ga6aa8feac3ae8d69051451ece81bccce6 template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga6aa8feac3ae8d69051451ece81bccce6">MSTL::data</a> (T(&amp;arr)[Size]) noexcept</td></tr>
+<tr class="memdesc:ga6aa8feac3ae8d69051451ece81bccce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数组的底层数据指针  <br /></td></tr>
+<tr class="memitem:ga0e688e3136955083418ccb2773e12fce" id="r_ga0e688e3136955083418ccb2773e12fce"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga0e688e3136955083418ccb2773e12fce template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#ga0e688e3136955083418ccb2773e12fce">MSTL::data</a> (T *ptr) noexcept</td></tr>
+<tr class="memdesc:ga0e688e3136955083418ccb2773e12fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指针本身  <br /></td></tr>
+<tr class="memitem:gaf5b2444be2974fa8435de1dbc9abbd64" id="r_gaf5b2444be2974fa8435de1dbc9abbd64"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf5b2444be2974fa8435de1dbc9abbd64 template"><td class="memItemLeft">constexpr const T *&#160;</td><td class="memItemRight"><a class="el" href="group___type_erasure_functions.html#gaf5b2444be2974fa8435de1dbc9abbd64">MSTL::data</a> (std::initializer_list&lt; T &gt; lls) noexcept</td></tr>
+<tr class="memdesc:gaf5b2444be2974fa8435de1dbc9abbd64"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取初始化列表的底层数据指针  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSTL类型擦除辅助函数 </p>
+<p>此文件提供了类型擦除辅助函数实现， 用于统一访问不同容器的迭代器、大小、数据等接口。 </p>
+
+<p class="definition">在文件 <a class="el" href="type__erase_8hpp_source.html">type_erase.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>MSTL</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="type__erase_8hpp.html">type_erase.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

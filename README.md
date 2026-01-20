@@ -86,6 +86,10 @@ make -j$(nproc)
 sudo make install
 ```
 
+## 文档
+
+文档请参见 [MSTL文档 - 专题首页](https://aurora250.github.io/MSTL/topics.html)
+
 ## 开源协议
 
 本项目基于 [MIT 开源协议](LICENSE) 。

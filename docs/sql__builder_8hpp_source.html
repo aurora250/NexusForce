@@ -96,7 +96,7 @@ $(function(){initNavTree('sql__builder_8hpp_source.html','',''); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MSTL_DATABASE_SQL_BUILDER_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../core/config/undef_cmacro.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../core/container/vector.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../core/memory/unique_ptr.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">../core/memory/unique_ptr.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef DELETE</span></div>
@@ -266,7 +266,7 @@ $(function(){initNavTree('sql__builder_8hpp_source.html','',''); });
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    MSTL_NODISCARD SQL_OPERATE_TYPE get_type() const noexcept { <span class="keywordflow">return</span> sql_type_; }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    MSTL_NODISCARD string_view get_table() const noexcept { <span class="keywordflow">return</span> table_.view(); }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    MSTL_NODISCARD <span class="keywordtype">bool</span> empty() const noexcept { <span class="keywordflow">return</span> table_.empty(); }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    MSTL_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga0e30232902a0cd9a020346ebaf691707">empty</a>() const noexcept { <span class="keywordflow">return</span> table_.empty(); }</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    MSTL_NODISCARD <span class="keywordtype">string</span> build() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>};</div>
@@ -275,6 +275,8 @@ $(function(){initNavTree('sql__builder_8hpp_source.html','',''); });
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_DATABASE_SQL_BUILDER_HPP__</span></div>
 <div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
 <div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga0e30232902a0cd9a020346ebaf691707"><div class="ttname"><a href="group___type_erasure_functions.html#ga0e30232902a0cd9a020346ebaf691707">MSTL::empty</a></div><div class="ttdeci">constexpr bool empty(const Container &amp;cont) noexcept(noexcept(cont.empty()))</div><div class="ttdoc">检查容器是否为空</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00383">type_erase.hpp:383</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">MSTL独占智能指针</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
