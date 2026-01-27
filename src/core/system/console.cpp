@@ -325,47 +325,47 @@ sys_console::sys_console() {
 }
 
 void sys_console::flush() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->flush_unsafe();
 }
 
 void sys_console::print_string(const string& str) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe(str.view());
 }
 
 void sys_console::print_string(const string_view& str) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe(str);
 }
 
 void sys_console::print_string(const char* str) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe(str);
 }
 
 string sys_console::read() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     return this->read_unsafe();
 }
 
 string sys_console::readln() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     return this->readln_unsafe();
 }
 
 char sys_console::read_char() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     return this->read_char_unsafe();
 }
 
 void sys_console::println() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe("\n");
 }
 
 void sys_console::clear() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     constexpr ::COORD top_left = { 0, 0 };
     ::CONSOLE_SCREEN_BUFFER_INFO screen;
@@ -382,7 +382,7 @@ void sys_console::clear() {
 }
 
 void sys_console::pause(const string_view msg) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->flush_unsafe();
     this->print_string_unsafe(msg);
     MSTL_IGNORE this->readln_unsafe();
@@ -390,7 +390,7 @@ void sys_console::pause(const string_view msg) {
 }
 
 bool sys_console::confirmation(const string_view prompt, const char yes, const char no) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     while (true) {
         this->print_string_unsafe(prompt);
         this->flush_unsafe();
@@ -410,7 +410,7 @@ bool sys_console::confirmation(const string_view prompt, const char yes, const c
 }
 
 string sys_console::password(const string_view prompt, const char mask, const bool show_length) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     if (!is_interactive()) {
         return readln_unsafe();
     }
@@ -592,17 +592,17 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 }
 
 void sys_console::set_color(const integer32& color) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe("\033[" + color.to_string() + "m");
 }
 
 void sys_console::set_color(const color& color, const bool use_256_color) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     set_color_unsafe(color, use_256_color);
 }
 
 void sys_console::set_background_color(const color& color, const bool use_256_color) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     if (use_256_color) {
         this->print_string_unsafe("\033[48;5;" + _MSTL to_string(color.to_ansi_256()) + "m");
     } else {
@@ -611,13 +611,13 @@ void sys_console::set_background_color(const color& color, const bool use_256_co
 }
 
 void sys_console::reset_color() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     this->print_string_unsafe("\033[0m");
 }
 
 void sys_console::progress_bar(double percentage, const int width,
     const bool show_percentage, const char fill_char, const char empty_char) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
     double display_percentage = percentage;
     if (percentage > 1.0 && percentage <= 100.0) {
@@ -647,7 +647,7 @@ void sys_console::progress_bar(double percentage, const int width,
 }
 
 void sys_console::set_cursor_position(int row, int column) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::COORD pos{static_cast<::SHORT>(column), static_cast<::SHORT>(row)};
     ::SetConsoleCursorPosition(out_, pos);
@@ -657,7 +657,7 @@ void sys_console::set_cursor_position(int row, int column) {
 }
 
 void sys_console::save_cursor_position() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
@@ -668,7 +668,7 @@ void sys_console::save_cursor_position() {
 }
 
 void sys_console::restore_cursor_position() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::SetConsoleCursorPosition(out_, saved_cursor_pos_);
 #else
@@ -677,7 +677,7 @@ void sys_console::restore_cursor_position() {
 }
 
 void sys_console::hide_cursor() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_CURSOR_INFO cursorInfo{};
     ::GetConsoleCursorInfo(out_, &cursorInfo);
@@ -689,7 +689,7 @@ void sys_console::hide_cursor() {
 }
 
 void sys_console::show_cursor() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_CURSOR_INFO cursorInfo{};
     ::GetConsoleCursorInfo(out_, &cursorInfo);
@@ -701,7 +701,7 @@ void sys_console::show_cursor() {
 }
 
 sys_console::console_size sys_console::get_console_size() const {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
@@ -728,7 +728,7 @@ sys_console::console_size sys_console::get_console_size() const {
 }
 
 bool sys_console::is_terminal_resized() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     const console_size current = get_console_size();
     if (current != last_size_) {
         last_size_ = current;
@@ -804,30 +804,30 @@ string sys_console::console_type() const {
 
 void sys_console::typewriter_print(const string_view text,
     const milliseconds delay_per_char, const bool with_sound) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     typewriter_print_unsafe(text, delay_per_char, with_sound);
 }
 
 void sys_console::typewriter_println(const string_view text,
     const milliseconds delay_per_char, const bool with_sound) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     typewriter_print_unsafe(text, delay_per_char, with_sound);
     print_string_unsafe("\n");
 }
 
 void sys_console::beep() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     beep_unsafe();
 }
 
 void sys_console::flash_screen() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     flash_screen_unsafe();
 }
 
 void sys_console::notification(const string_view message,
     const milliseconds duration, const bool play_sound) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
     if (play_sound) {
         beep_unsafe();
@@ -845,19 +845,19 @@ void sys_console::notification(const string_view message,
 
 void sys_console::fade_in(const string_view text, const milliseconds duration,
     const color& start_color, const color& end_color) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     fade_effect_unsafe(text, start_color, end_color, duration, true);
 }
 
 void sys_console::fade_out(const string_view text, const milliseconds duration,
     const color& start_color, const color& end_color) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     fade_effect_unsafe(text, start_color, end_color, duration, false);
 }
 
 void sys_console::fade_in_out(const string_view text, const milliseconds in_duration,
     const milliseconds hold_duration, const milliseconds out_duration) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};

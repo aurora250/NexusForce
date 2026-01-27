@@ -9,7 +9,7 @@
  * 包括排列检查、下一个排列和上一个排列的生成。
  */
 
-#include "shift.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

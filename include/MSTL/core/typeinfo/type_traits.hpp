@@ -8,7 +8,7 @@
  * 此文件提供了完整的类型萃取实现，用于在编译时查询和操作类型信息。
  */
 
-#include "../typeinfo/types.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

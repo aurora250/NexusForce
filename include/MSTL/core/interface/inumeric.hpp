@@ -9,7 +9,7 @@
  * 用于简化数值类型运算符的实现。
  */
 
-#include "../typeinfo/types.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

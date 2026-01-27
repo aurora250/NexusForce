@@ -359,7 +359,7 @@ dns_query_result dns_client::query(
 
     auto result = parse_dns_response(response);
     const auto end_time = steady_clock::now();
-    result.query_time = duration_cast<milliseconds>(end_time - start_time);
+    result.query_time = time_cast<milliseconds>(end_time - start_time);
 
     update_cache(cache_key, result);
 
@@ -499,14 +499,14 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
     const auto it = cache_.find(key);
     if (it != cache_.end()) {
         const auto now = steady_clock::now();
-        const auto cache_age = duration_cast<seconds>(now - it->second.second);
+        const auto cache_age = time_cast<seconds>(now - it->second.second);
 
         if (cache_age < cache_ttl_) {
             return dns_query_result(it->second.first);
         }
         cache_.erase(it);
     }
-    return nullopt;
+    return none;
 }
 
 void dns_client::update_cache(const string& key, const dns_query_result& result) {

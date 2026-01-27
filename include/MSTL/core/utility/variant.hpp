@@ -9,7 +9,7 @@
  * 可以存储和操作多种不同类型的值
  */
 
-#include "non.hpp"
+#include "MSTL/core/utility/none.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -73,8 +73,8 @@ struct variant : icommon<variant<Types...>> {
     static_assert(sizeof...(Types) > 0, "variant must have at least one type");
 
     static_assert(
-        !is_any_of<non, Types...>::value ||
-        (is_any_of<non, Types...>::value && is_same<get_first_para_t<Types...>, non>::value),
+        !is_any_of<none_t, Types...>::value ||
+        (is_any_of<none_t, Types...>::value && is_same<get_first_para_t<Types...>, none_t>::value),
         "if variant holds non, it should be at the first place");
 
 private:

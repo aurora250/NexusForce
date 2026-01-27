@@ -7,6 +7,32 @@
 #endif
 MSTL_BEGIN_NAMESPACE__
 
+MSTL_BEGIN_INNER__
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+
+static ::BOOL __stdcall windows_handler(const ::DWORD event) {
+    signal_manager& manager = signal_manager::instance();
+    manager.send_signal(static_cast<SIGNAL_EVENT>(event));
+    return TRUE;
+}
+
+#else
+
+static void posix_handler(const int sig) {
+    signal_manager &manager = signal_manager::instance();
+    manager.send_signal(static_cast<SIGNAL_EVENT>(sig));
+}
+
+static void alarm_handler(int sig) {
+    signal_manager::instance().send_signal(SIGNAL_EVENT::TIMEOUT);
+}
+
+#endif
+
+MSTL_END_INNER__
+
+
 static thread_local SIGNAL_EVENT current_signal =
 #ifdef MSTL_PLATFORM_WINDOWS__
     static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
@@ -45,7 +71,7 @@ signal_manager::~signal_manager() {
 
 void signal_manager::initialize_platform() {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::SetConsoleCtrlHandler(windows_handler, TRUE);
+    ::SetConsoleCtrlHandler(_INNER windows_handler, TRUE);
 
     handlers_[SIGNAL_EVENT::INTERRUPT]  = nullptr;
     handlers_[SIGNAL_EVENT::CTRL_BREAK] = nullptr;
@@ -62,13 +88,13 @@ void signal_manager::initialize_platform() {
     };
 #else
     struct ::sigaction sa_alarm;
-    sa_alarm.sa_handler = signal_manager::alarm_handler;
+    sa_alarm.sa_handler = _INNER alarm_handler;
     ::sigemptyset(&sa_alarm.sa_mask);
     sa_alarm.sa_flags = SA_RESTART;
     ::sigaction(SIGALRM, &sa_alarm, nullptr);
 
     struct ::sigaction sa;
-    sa.sa_handler = signal_manager::posix_handler;
+    sa.sa_handler = _INNER posix_handler;
     ::sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 
@@ -90,7 +116,7 @@ void signal_manager::initialize_platform() {
 
 void signal_manager::cleanup_platform() const {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::SetConsoleCtrlHandler(windows_handler, FALSE);
+    ::SetConsoleCtrlHandler(_INNER windows_handler, FALSE);
 #else
     for (int sig = 1; sig < 64; ++sig) {
         if (old_actions_[sig].sa_handler != SIG_DFL &&
@@ -111,7 +137,7 @@ void signal_manager::register_handler(const SIGNAL_EVENT event, signal_handler h
         throw_exception(system_exception("Signal handler cannot be null"));
     }
 
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
     if (!is_platform_signal(event)) {
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -134,19 +160,19 @@ void signal_manager::register_handlers(
         throw_exception(system_exception("Signal handler cannot be null"));
     }
 
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     for (auto event : events) {
         handlers_[event] = handler;
     }
 }
 
 void signal_manager::remove_handler(const SIGNAL_EVENT event) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     handlers_.erase(event);
 }
 
 SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
-    unique_lock<mutex> lock(mutex_);
+    smart_lock<mutex> lock(mutex_);
     
     if (timeout_ms >= 0) {
         const auto timeout_time = steady_clock::now() + milliseconds(timeout_ms);
@@ -171,7 +197,7 @@ SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
 }
 
 void signal_manager::send_signal(SIGNAL_EVENT event, void* context) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (static_cast<DWORD>(event) == CTRL_C_EVENT ||
@@ -265,7 +291,7 @@ void signal_manager::signal_thread_func() {
         }
         void* context = nullptr;
         {
-            lock_guard<mutex> lock(mutex_);
+            lock<mutex> lock(mutex_);
             if (!pending_signals_.empty()) {
                 context = pending_signals_.front().context;
             }
@@ -284,15 +310,14 @@ void signal_manager::timeout_monitor_thread() {
         this_thread::sleep_for(milliseconds(100));
 
         {
-            lock_guard<mutex> lock(mutex_);
+            lock<mutex> lock(mutex_);
             if (pending_signals_.empty()) {
                 continue;
             }
 
             int timeout = force_exit_timeout_.load();
             auto now = steady_clock::now();
-            const auto elapsed = duration_cast<milliseconds>(
-                now - start_time).count();
+            const auto elapsed = time_cast<milliseconds>(now - start_time).count();
 
             if (elapsed > timeout) {
                 send_signal(SIGNAL_EVENT::FORCE_EXIT);
@@ -301,8 +326,7 @@ void signal_manager::timeout_monitor_thread() {
 
             auto it = remove_if(pending_signals_.begin(), pending_signals_.end(),
                 [timeout, now](const pending_signal& ps) -> bool {
-                    const auto signal_age = duration_cast<milliseconds>(
-                        now - ps.timestamp).count();
+                    const auto signal_age = time_cast<milliseconds>(now - ps.timestamp).count();
                     return signal_age > timeout;
                 });
 
@@ -317,7 +341,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
     signal_handler handler;
     
     {
-        lock_guard<mutex> lock(mutex_);
+        lock<mutex> lock(mutex_);
         const auto it = handlers_.find(event);
         if (it != handlers_.end()) {
             handler = it->second;
@@ -419,26 +443,5 @@ bool signal_manager::unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unbl
 #endif
     return true;
 }
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-
-::BOOL WINAPI signal_manager::windows_handler(const ::DWORD event) {
-    signal_manager& manager = instance();
-    manager.send_signal(static_cast<SIGNAL_EVENT>(event));
-    return TRUE;
-}
-
-#else
-
-void signal_manager::posix_handler(const int sig) {
-    signal_manager &manager = instance();
-    manager.send_signal(static_cast<SIGNAL_EVENT>(sig));
-}
-
-void signal_manager::alarm_handler(int sig) {
-    instance().send_signal(SIGNAL_EVENT::TIMEOUT);
-}
-
-#endif
 
 MSTL_END_NAMESPACE__

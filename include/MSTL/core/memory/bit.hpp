@@ -9,16 +9,13 @@
  * 支持32位和64位平台，使用查表法和位运算技巧优化性能。
  */
 
-#include "../typeinfo/types.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup BitCounting 位计数函数
- * @brief 计算位中1的个数和前导零个数
- * @{
+ * @namespace constants
+ * @brief 计算用常量命名空间
  */
-
-/// @cond
 MSTL_BEGIN_CONSTANTS__
 
 /**
@@ -40,7 +37,12 @@ MSTL_INLINE17 constexpr byte_t POPCOUNT_TABLE[256] = {
 };
 
 MSTL_END_CONSTANTS__
-/// @endcond
+
+/**
+ * @defgroup BitCounting 位计数函数
+ * @brief 计算位中1的个数和前导零个数
+ * @{
+ */
 
 #ifdef MSTL_DATA_BUS_WIDTH_64__
 

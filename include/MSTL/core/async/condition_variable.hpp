@@ -1,12 +1,7 @@
 #ifndef MSTL_CORE_ASYNC_CONDITION_VARIABLE_HPP__
 #define MSTL_CORE_ASYNC_CONDITION_VARIABLE_HPP__
-#include "../async/mutex.hpp"
-#include "../time/clocks.hpp"
-#include "../exception/assertion.hpp"
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
-#include "../config/undef_cmacro.hpp"
-#endif
+#include "MSTL/core/async/mutex.hpp"
+#include "MSTL/core/time/clocks.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 enum class cv_status {
@@ -36,8 +31,8 @@ public:
     native_handle_type* native_handle() noexcept { return &cond_; }
 
     void wait(mutex& mtx);
-    cv_status wait_until(mutex& mtx, const ::timespec& abs);
-    cv_status wait_until(mutex& mtx, int clock, const ::timespec& abs);
+    cv_status wait_until(mutex& mtx, int64_t sec, int64_t ns);
+    cv_status wait_until(mutex& mtx, int clock, int64_t sec, int64_t ns);
 
     void notify_one() noexcept;
     void notify_all() noexcept;
@@ -57,31 +52,25 @@ private:
     base_type cond_;
 
     template <typename Dur>
-    cv_status __wait_until_impl(unique_lock<mutex>& lock,
+    cv_status __wait_until_impl(smart_lock<mutex>& lock,
         const time_point<steady_clock, Dur>& util) {
-        auto sec = time_point_cast<seconds>(util);
-        auto nanosec = duration_cast<nanoseconds>(util - sec);
-
-        const ::timespec ts = {
-            static_cast<std::time_t>(sec.time_since_epoch().count()),
-            static_cast<long>(nanosec.count())
-        };
-        cond_.wait_until(*lock.mutex(), 1, ts);
-        return (steady_clock::now() < util ? cv_status::no_timeout : cv_status::timeout);
+        auto s = util.to_sec();
+        const nanoseconds ns(util - s);
+        cond_.wait_until(*lock.mutex(), 1, s.since_epoch().count(), ns.count());
+        return steady_clock::now() < util ?
+            cv_status::no_timeout :
+            cv_status::timeout;
     }
 
     template <typename Dur>
-    cv_status __wait_until_impl(unique_lock<mutex>& lock,
+    cv_status __wait_until_impl(smart_lock<mutex>& lock,
         const time_point<system_clock, Dur>& util) {
-        auto sec = time_point_cast<seconds>(util);
-        auto nanosec = duration_cast<nanoseconds>(util - sec);
-
-        const ::timespec ts = {
-            static_cast<std::time_t>(sec.time_since_epoch().count()),
-            static_cast<long>(nanosec.count())
-        };
-        cond_.wait_until(*lock.mutex(), ts);
-        return (system_clock::now() < util ? cv_status::no_timeout : cv_status::timeout);
+        auto sec = util.to_sec();
+        const nanoseconds nanosec(util - sec);
+        cond_.wait_until(*lock.mutex(), sec.since_epoch().count(), nanosec.count());
+        return system_clock::now() < util ?
+            cv_status::no_timeout :
+            cv_status::timeout;
     }
 
 public:
@@ -97,29 +86,29 @@ public:
     void notify_one() noexcept { cond_.notify_one(); }
     void notify_all() noexcept { cond_.notify_all(); }
 
-    void wait(unique_lock<mutex>& lock) {
+    void wait(smart_lock<mutex>& lock) {
         cond_.wait(*lock.mutex());
     }
 
     template <typename Pred>
-    void wait(unique_lock<mutex>& lock, Pred pred) {
+    void wait(smart_lock<mutex>& lock, Pred pred) {
         while (!pred()) wait(lock);
     }
 
     template <typename Dur>
-    cv_status wait_until(unique_lock<mutex>& lock,
+    cv_status wait_until(smart_lock<mutex>& lock,
         const time_point<steady_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
     template <typename Dur>
-    cv_status wait_until(unique_lock<mutex>& lock,
+    cv_status wait_until(smart_lock<mutex>& lock,
         const time_point<system_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
     template <typename Clock, typename Dur>
-    cv_status wait_until(unique_lock<mutex>& lock,
+    cv_status wait_until(smart_lock<mutex>& lock,
         const time_point<Clock, Dur>& util) {
         const typename Clock::time_point entry = Clock::now();
         const auto atime = clock_t::now() + ceil<clock_t::duration>(util - entry);
@@ -134,7 +123,7 @@ public:
     }
 
     template <typename Clock, typename Dur, typename Pred>
-    bool wait_until(unique_lock<mutex>& lock,
+    bool wait_until(smart_lock<mutex>& lock,
         const time_point<Clock, Dur>& util, Pred pred) {
         while (!pred()) {
             if (this->wait_until(lock, util) == cv_status::timeout) {
@@ -145,22 +134,19 @@ public:
     }
 
     template <typename Rep, typename Period>
-    cv_status wait_for(unique_lock<mutex>& lock,
+    cv_status wait_for(smart_lock<mutex>& lock,
         const duration<Rep, Period>& rest) {
         const auto atime = steady_clock::now() + ceil<steady_clock::duration>(rest);
         return this->wait_until(lock, atime);
     }
 
     template <typename Rep, typename Period, typename Pred>
-    bool wait_for(unique_lock<mutex>& lock,
+    bool wait_for(smart_lock<mutex>& lock,
         const duration<Rep, Period>& rest, Pred pred) {
         const auto atime = steady_clock::now() + ceil<steady_clock::duration>(rest);
         return this->wait_until(lock, atime, _MSTL move(pred));
     }
 };
-
-
-
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_CONDITION_VARIABLE_HPP__

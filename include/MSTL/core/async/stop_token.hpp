@@ -1,14 +1,10 @@
 #ifndef MSTL_CORE_ASYNC_STOP_TOKEN_HPP__
 #define MSTL_CORE_ASYNC_STOP_TOKEN_HPP__
+#include "MSTL/core/utility/none.hpp"
 #include "semaphore.hpp"
 #include "thread.hpp"
 #include "atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
-
-struct nostopstate_t {
-    constexpr explicit nostopstate_t() = default;
-};
-MSTL_INLINE17 constexpr nostopstate_t nostopstate{};
 
 class stop_source;
 
@@ -46,7 +42,7 @@ private:
     friend class stop_callback;
 
     static void yield() noexcept {
-        _INNER thread_relax();
+        this_thread::relax();
     }
 
     struct stop_callback_node {
@@ -119,7 +115,7 @@ private:
                     return false;
             } while (!try_lock_and_stop(old_value));
 
-            requester_thread_id = this_thread::get_id();
+            requester_thread_id = this_thread::id();
 
             while (head) {
                 bool last_callback;
@@ -188,7 +184,7 @@ private:
 
             unlock();
 
-            if (requester_thread_id != this_thread::get_id()) {
+            if (requester_thread_id != this_thread::id()) {
                 callback_node->done_semaphore.acquire();
                 return;
             }
@@ -297,7 +293,7 @@ class stop_source {
 public:
     stop_source() : state_ref_(*this) {}
 
-    explicit stop_source(nostopstate_t) noexcept {}
+    explicit stop_source(none_t) noexcept {}
 
     stop_source(const stop_source& other) noexcept
         : state_ref_(other.state_ref_) {

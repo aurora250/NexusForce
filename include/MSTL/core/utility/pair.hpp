@@ -8,10 +8,9 @@
  * 此文件提供了键值对及相关工具的实现
  */
 
-#include "../interface/icommon.hpp"
-#include "../typeinfo/tags.hpp"
-#include "../utility/reference_wrapper.hpp"
-#include "integer_sequence.hpp"
+#include "MSTL/core/interface/icommon.hpp"
+#include "MSTL/core/utility/reference_wrapper.hpp"
+#include "MSTL/core/utility/integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename...>

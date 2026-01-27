@@ -9,13 +9,12 @@
  * 包括异常基类、各种特定异常类型以及相关的辅助宏和工具函数。
  */
 
-#include "../string/cstring.hpp"
-#include "../memory/memory.hpp"
+#include "MSTL/core/memory/memory.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
  * @defgroup ExceptionHandling 异常处理
- * @brief MSTL异常处理框架的实现
+ * @brief MSTL异常处理类与工具
  * @{
  */
 
@@ -65,6 +64,13 @@ MSTL_BEGIN_NAMESPACE__
 		__MSTL_ERROR_TYPE(THIS) \
 	};
 
+/** @} */ // ExceptionHandling
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
 
 /**
  * @struct exception
@@ -163,17 +169,76 @@ public:
 	__MSTL_ERROR_TYPE(exception)  ///< 静态类型字符串
 };
 
+/**
+ * @struct memory_exception
+ * @extends exception
+ * @brief 内存操作异常
+ */
 MSTL_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, "Memory Operation Failed.")
-MSTL_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, "System Operation Failed.")
-MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
+
+/**
+ * @struct system_exception
+ * @extends exception
+ * @brief 系统访问异常
+ */
+MSTL_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, "System Access Failed.")
+
+/**
+ * @struct iterator_exception
+ * @extends memory_exception
+ * @brief 指针或迭代器行为异常
+ */
 MSTL_ERROR_BUILD_FINAL_CLASS(iterator_exception, memory_exception, "Iterator or Pointer Access Invalid.")
+
+/**
+ * @struct typecast_exception
+ * @extends memory_exception
+ * @brief 类型转换异常
+ */
 MSTL_ERROR_BUILD_DERIVED_CLASS(typecast_exception, memory_exception, "Type Cast Mismatch.")
+
+/**
+ * @struct value_exception
+ * @extends exception
+ * @brief 变量处理异常
+ */
 MSTL_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, "Variable Operation Invalid.")
+
+/**
+ * @struct device_exception
+ * @extends system_exception
+ * @brief 设备行为异常
+ */
 MSTL_ERROR_BUILD_DERIVED_CLASS(device_exception, system_exception, "Device Operation Failed.")
+
+/**
+ * @struct file_exception
+ * @extends system_exception
+ * @brief 文件处理异常
+ */
 MSTL_ERROR_BUILD_FINAL_CLASS(file_exception, system_exception, "File Operation Failed.")
+
+/**
+ * @struct math_exception
+ * @extends value_exception
+ * @brief 数学计算异常
+ */
 MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Calculation Invalid.")
+
+/**
+ * @struct database_exception
+ * @extends system_exception
+ * @brief 数据库行为异常
+ */
 MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, "Database Operation Failed.")
 
+/** @} */ // Exceptions
+
+/**
+ * @defgroup ExceptionHandling 异常处理
+ * @brief MSTL异常处理类与工具
+ * @{
+ */
 
 /**
  * @brief 抛出异常并打印堆栈信息

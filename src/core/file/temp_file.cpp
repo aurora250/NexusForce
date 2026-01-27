@@ -21,12 +21,12 @@ mutex& temp_file::get_registry_mutex() {
 }
 
 void temp_file::register_for_cleanup(const path& temp_path) {
-    lock_guard<mutex> lock(get_registry_mutex());
+    lock<mutex> lock(get_registry_mutex());
     get_temp_registry().push_back(temp_path);
 }
 
 void temp_file::cleanup_all_temp_files() {
-    lock_guard<mutex> lock(get_registry_mutex());
+    lock<mutex> lock(get_registry_mutex());
     auto& registry = get_temp_registry();
 
     for (const auto& temp_path : registry) {
@@ -49,19 +49,16 @@ path temp_file::generate_unique_path(const string& prefix, const string& suffix)
     static atomic<uint64_t> counter{0};
     counter.fetch_add(1, memory_order_relaxed);
 
-    const auto now = system_clock::now();
-    const auto duration = now.time_since_epoch();
-    const auto nanos = duration_cast<nanoseconds>(duration).count();
-
+    const auto nanos = system_clock::now().since_epoch().to_nano();
     const int pid = process::current_process_id();
     random_mt rand;
     const uint64_t random_part = rand.next_int();
     const string filename = format(
         "{}_{}_{}_{}_{}{}",
         prefix,
-        nanos,
+        nanos.count(),
         pid,
-        this_thread::get_id().native(),
+        this_thread::id().native_handle(),
         random_part,
         suffix
     );
@@ -131,7 +128,7 @@ void temp_file::cleanup() {
     }
 
     if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
-        lock_guard<mutex> lock(get_registry_mutex());
+        lock<mutex> lock(get_registry_mutex());
         auto& registry = get_temp_registry();
         const auto it = _MSTL find(registry.begin(), registry.end(), file_.path());
         if (it != registry.end()) {
@@ -144,7 +141,7 @@ void temp_file::cleanup() {
 void temp_file::release() {
     delete_policy_ = DELETE_POLICY::MANUAL_DELETE;
 
-    lock_guard<mutex> lock(get_registry_mutex());
+    lock<mutex> lock(get_registry_mutex());
     auto& registry = get_temp_registry();
     const auto it = _MSTL find(registry.begin(), registry.end(), file_.path());
     if (it != registry.end()) {

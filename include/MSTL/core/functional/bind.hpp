@@ -8,7 +8,7 @@
  * 此文件提供了函数绑定相关的实现，用于创建可调用对象的适配器，支持参数绑定和占位符。
  */
 
-#include "invoke.hpp"
+#include "MSTL/core/functional/invoke.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /// @cond
@@ -682,6 +682,8 @@ public:
 };
 
 
+/// @cond
+
 template <typename Sign>
 struct is_bind_expression<binder<Sign>> : true_type {};
 template <typename Res, typename Sign>
@@ -696,7 +698,6 @@ struct is_bind_expression<CV bindrer<Res, Sign>> : true_type {};
 MSTL_MACRO_RANGES_CV(__MSTL_EXPAND_BIND_EXP)
 #undef __MSTL_EXPAND_BIND_EXP
 
-/// @cond
 MSTL_BEGIN_INNER__
 
 /**

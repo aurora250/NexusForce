@@ -24,12 +24,14 @@ class exception_wrapper {
 public:
     virtual ~exception_wrapper() = default;
     virtual void rethrow() const = 0;
-    virtual const std::type_info& type() const noexcept = 0;
+    virtual const char* type() const noexcept = 0;
     virtual unique_ptr<exception_wrapper> clone() const = 0;
 };
 
 template <typename Ex>
 class typed_exception_wrapper final : public exception_wrapper {
+    static_assert(is_base_of_v<exception, Ex>, "exception type must be derived from exception");
+
     Ex exception_;
 
 public:
@@ -39,8 +41,8 @@ public:
     MSTL_ALWAYS_INLINE void rethrow() const override {
         throw exception_;
     }
-    MSTL_ALWAYS_INLINE const std::type_info& type() const noexcept override {
-        return typeid(Ex);
+    MSTL_ALWAYS_INLINE const char* type() const noexcept override {
+        return Ex::static_type;
     }
     MSTL_ALWAYS_INLINE unique_ptr<exception_wrapper> clone() const override {
         return _MSTL make_unique<typed_exception_wrapper>(exception_);
@@ -148,11 +150,11 @@ public:
         return static_cast<bool>(ptr);
     }
 
-    MSTL_NODISCARD const std::type_info* exception_type() const noexcept {
+    MSTL_NODISCARD const char* exception_type() const noexcept {
         if (!ecb_ || !ecb_->wrapper) {
             return nullptr;
         }
-        return &ecb_->wrapper->type();
+        return ecb_->wrapper->type();
     }
 };
 

@@ -5,6 +5,7 @@
 #include <sys/inotify.h>
 #include <sys/eventfd.h>
 #include <poll.h>
+#include <cerrno>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -47,7 +48,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
     if (watching_.load()) return false;
 
     {
-        lock_guard<mutex> lock(callback_mutex_);
+        lock<mutex> lock(callback_mutex_);
         callback_ = _MSTL move(callback);
         current_events_ = events;
     }
@@ -174,7 +175,7 @@ void file_watcher::stop() {
 #endif
 
     {
-        lock_guard<mutex> lock(callback_mutex_);
+        lock<mutex> lock(callback_mutex_);
         callback_ = nullptr;
     }
 }
@@ -274,7 +275,7 @@ void file_watcher::watch_thread_func() {
                 }
 
                 if (callback_) {
-                    lock_guard<mutex> lock(callback_mutex_);
+                    lock<mutex> lock(callback_mutex_);
                     if (callback_) {
                         callback_(full_path, move(event_type));
                     }
@@ -376,7 +377,7 @@ void file_watcher::watch_thread_func() {
 
                 if (callback_ && event->len > 0) {
                     path full_path = watch_path_ / path(event->name);
-                    lock_guard<mutex> lock(callback_mutex_);
+                    lock<mutex> lock(callback_mutex_);
                     if (callback_) {
                         callback_(full_path, move(evt));
                     }
@@ -400,7 +401,7 @@ bool file_watcher::update_watch(const FILE_WATCH_EVENT events) {
     callback_t saved_callback;
 
     {
-        lock_guard<mutex> lock(callback_mutex_);
+        lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;
     }
 
@@ -425,7 +426,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     callback_t saved_callback;
     FILE_WATCH_EVENT saved_events;
     {
-        lock_guard<mutex> lock(callback_mutex_);
+        lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;
         saved_events = current_events_;
     }

@@ -1,31 +1,31 @@
 #include <MSTL/core/utility/any.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-any::any(const any& x) {
-    if (!x.has_value()) manage_ = nullptr;
+any::any(const any& other) {
+    if (!other.has_value()) manage_ = nullptr;
     else {
         ArgT arg{};
         arg.any_ptr_ = this;
-        x.manage_(COPY, &x, &arg);
+        other.manage_(COPY, &other, &arg);
     }
 }
 
-any::any(any&& x) noexcept {
-    if (!x.has_value()) manage_ = nullptr;
+any::any(any&& other) noexcept {
+    if (!other.has_value()) manage_ = nullptr;
     else {
         ArgT arg{};
         arg.any_ptr_ = this;
-        x.manage_(SWAP, &x, &arg);
+        other.manage_(SWAP, &other, &arg);
     }
 }
 
-any& any::operator =(any&& rhs) noexcept {
-    if (!rhs.has_value()) reset();
-    else if (this != &rhs) {
+any& any::operator =(any&& other) noexcept {
+    if (!other.has_value()) reset();
+    else if (this != &other) {
         reset();
         ArgT arg{};
         arg.any_ptr_ = this;
-        rhs.manage_(SWAP, &rhs, &arg);
+        other.manage_(SWAP, &other, &arg);
     }
     return *this;
 }

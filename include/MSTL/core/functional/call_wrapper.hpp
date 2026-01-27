@@ -8,25 +8,25 @@
  * 此文件提供了调用包装器的实现，用于延迟执行函数调用和参数打包。
  */
 
-#include "../utility/integer_sequence.hpp"
+#include "MSTL/core/utility/integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Invoker 延迟调用包装
+ * @defgroup CallWrapper 延迟调用包装
  * @brief 延迟函数调用的包装器及辅助工具
  * @{
  */
 
 /**
- * @struct invoker
+ * @struct call_wrapper
  * @brief 延迟调用包装器
- * @tparam Tuple 包含函数和参数的元组类型
+ * @tparam Types 存储元组的参数列表
  *
  * 将函数对象和其参数打包到一个元组中，可以延迟执行函数调用。
  * 当调用operator() 时，会展开元组并执行函数调用。
  */
-template <typename Tuple>
-struct invoker {
+template <typename... Types>
+struct call_wrapper {
 private:
     template <typename>
     struct result_t;
@@ -34,6 +34,8 @@ private:
     template <typename Func, typename... Args>
     struct result_t<tuple<Func, Args...>>
         : _INNER __invoke_result_aux<Func, Args...> {};
+
+    using Tuple = tuple<decay_t<Types>...>;
 
     Tuple tup_; ///< 存储函数和参数的元组
 
@@ -59,7 +61,7 @@ public:
      * 将传入的函数和参数完美转发到内部元组中存储。
      */
     template <typename... Args>
-    explicit invoker(Args&&... args)
+    explicit call_wrapper(Args&&... args)
     : tup_(_MSTL forward<Args>(args)...) {}
 
     /**
@@ -76,21 +78,10 @@ public:
 
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename... Types>
-invoker(Types...) -> invoker<tuple<decay_t<Types>...>>;
+call_wrapper(Types...) -> call_wrapper<Types...>;
 #endif
 
-
-/**
- * @typedef call_wrapper
- * @brief 延迟调用包装器的便捷类型别名
- * @tparam Types 函数和参数类型
- *
- * 自动推导函数和参数类型，并创建对应的invoker实例。
- */
-template <typename... Types>
-using call_wrapper = invoker<tuple<decay_t<Types>...>>;
-
-/** @} */ // Invoker
+/** @} */ // CallWrapper
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FUNCTIONAL_CALL_WRAPPER_HPP__

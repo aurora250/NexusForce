@@ -9,9 +9,8 @@
  * 用于统一不同分配器的接口，提供分配器的标准访问和操作方式。
  */
 
-#include "../typeinfo/pointer_traits.hpp"
-#include "../memory/construct.hpp"
-#include "../numeric/numeric_traits.hpp"
+#include "MSTL/core/memory/construct.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

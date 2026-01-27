@@ -9,8 +9,8 @@
  * 包括符号位检测、特殊值判断、正规性检查等功能。
  */
 
-#include "math.hpp"
-#include "numeric_traits.hpp"
+#include "MSTL/core/numeric/math.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

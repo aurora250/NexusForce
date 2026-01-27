@@ -5,12 +5,11 @@ MSTL_BEGIN_NAMESPACE__
 
 class latch {
 private:
-    alignas(alignof(_INNER platform_wait_t))
-    _INNER platform_wait_t counter_;
+    alignas(alignof(platform_wait_t)) platform_wait_t counter_;
 
 public:
     static constexpr ptrdiff_t max() noexcept {
-        return numeric_traits<_INNER platform_wait_t>::max();
+        return numeric_traits<platform_wait_t>::max();
     }
 
     constexpr explicit latch(const ptrdiff_t expected) noexcept

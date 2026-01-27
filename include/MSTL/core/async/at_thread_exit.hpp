@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_AT_THREAD_EXIT_HPP__
 #define MSTL_CORE_ASYNC_AT_THREAD_EXIT_HPP__
-#include "../config/c++config.hpp"
+#include "MSTL/core/config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct at_thread_exit_elt {

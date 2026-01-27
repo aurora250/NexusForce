@@ -9,9 +9,9 @@
  * 大整数算术运算和整数解析等功能。所有计算都在编译期完成。
  */
 
-#include "../memory/bit.hpp"
-#include "numeric_traits.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
+#include "MSTL/core/memory/bit.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

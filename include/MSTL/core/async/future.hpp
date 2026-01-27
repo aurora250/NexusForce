@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_FUTURE_HPP__
 #define MSTL_CORE_ASYNC_FUTURE_HPP__
-#include "../utility/non.hpp"
+#include "../utility/none.hpp"
 #include "future_base.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -227,7 +227,7 @@ struct future_result {
 };
 template <>
 struct future_result<void> {
-    using type = non;
+    using type = none_t;
 };
 
 template <typename T>

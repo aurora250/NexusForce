@@ -8,7 +8,7 @@
  * 此文件提供了分配器指针的RAII包装，用于安全管理通过分配器分配的内存。
  */
 
-#include "allocator_traits.hpp"
+#include "MSTL/core/memory/allocator_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

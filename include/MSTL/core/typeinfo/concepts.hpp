@@ -8,9 +8,7 @@
  * 此文件提供了C++20概念的实现，以及用于类型约束和编译时检查的工具。
  */
 
-#include "../iterator/iterator_traits.hpp"
-#include "../typeinfo/pointer_traits.hpp"
-#include "../functional/invoke.hpp"
+#include "MSTL/core/iterator/iterator_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_STANDARD_20__
@@ -423,26 +421,18 @@ concept sized_sentinel_for =
 		{ i + (s - i) } -> same_as<Iterator>;
     };
 
-
-/**
- * @concept predicate
- * @brief 检查类型是否可以作为谓词
- * @tparam F 可调用对象类型
- * @tparam Args 参数类型
- *
- * 谓词要求可调用并且返回可转换为bool的类型。
- */
-template <typename F, typename... Args>
-concept predicate = is_invocable_v<F, Args...> && convertible_to<invoke_result_t<F, Args...>, bool>;
-
 /** @} */ // Concepts
 
 /**
- * @defgroup ViewChecks 视图检查
- * @brief 检查类型是否为视图的工具
+ * @defgroup View 视图
+ * @brief 视图及辅助工具
  * @{
  */
 
+/**
+ * @namespace ranges
+ * @brief MSTL范围操作命名空间
+ */
 MSTL_BEGIN_RANGES__
 
 /**
@@ -509,7 +499,7 @@ struct is_view<_MSTL_RANGES view_base<D>> : true_type {};
 template <typename T>
 MSTL_INLINE17 constexpr bool is_view_v = is_base_of_v<_MSTL_RANGES view_base<T>, T>;
 
-/** @} */ // ViewChecks
+/** @} */ // View
 
 #endif // MSTL_STANDARD_20__
 

@@ -1,11 +1,7 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_TIMED_WAIT_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_TIMED_WAIT_HPP__
 #include "atomic_wait.hpp"
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include "atomic_futex_base.hpp"
-#endif
 MSTL_BEGIN_NAMESPACE__
-
 MSTL_BEGIN_INNER__
 
 using wait_clock_t = steady_clock;
@@ -24,73 +20,41 @@ wait_clock_t::time_point to_wait_clock(const time_point<wait_clock_t, Dur>& time
 }
 
 template <typename Dur>
-bool __platform_wait_until_impl(const platform_wait_t* addr, platform_wait_t old,
+bool __platform_wait_until_impl(const platform_wait_t* addr, const platform_wait_t old,
     const time_point<wait_clock_t, Dur>& timeout) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    atomic_futex_base futex;
-    const auto tp = wait_clock_t::time_point(
-        duration_cast<wait_clock_t::duration>(timeout.time_since_epoch()));
-
-    const auto sec = duration_cast<seconds>(tp.time_since_epoch());
-    const auto ns = duration_cast<nanoseconds>(tp.time_since_epoch() - sec);
-
-    const auto futex_addr = reinterpret_cast<unsigned*>(const_cast<platform_wait_t*>(addr));
-    const unsigned expected_value = static_cast<unsigned>(old);
-    bool result = false;
     const bool has_timeout = (timeout != wait_clock_t::time_point::max());
 
-    if (has_timeout) {
-        const auto now = wait_clock_t::now();
-        if (timeout <= now) {
-            errno = ETIMEDOUT;
-            return false;
-        }
-
-        result = futex.futex_wait_until_steady(
-            futex_addr, expected_value,
-            true,
-            seconds(sec.count()),
-            nanoseconds(ns.count()));
-    } else {
-        result = futex.futex_wait_until_steady(
-            futex_addr, expected_value,
-            false,
-            seconds(0),
-            nanoseconds(0));
+    if (!has_timeout) {
+        _MSTL futex_wait(const_cast<void*>(static_cast<const void*>(addr)), old);
+        return true;
     }
 
-    if (!result && has_timeout) {
-        const auto now = wait_clock_t::now();
-        if (now >= timeout) {
-            errno = ETIMEDOUT;
-            return false;
-        }
-        errno = EAGAIN;
+    const auto now = wait_clock_t::now();
+    if (timeout <= now) {
+        return false;
     }
-    return result;
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+    const auto dur = timeout - now;
+    const auto sec = _MSTL time_cast<seconds>(dur);
+    const auto ns = _MSTL time_cast<nanoseconds>(dur - sec);
 #else
-    auto seconds = time_point_cast<_MSTL seconds>(timeout);
-    auto nanoseconds = duration_cast<_MSTL nanoseconds>(timeout - seconds);
-
-    ::timespec rt = {
-        static_cast<std::time_t>(seconds.time_since_epoch().count()),
-        static_cast<long>(nanoseconds.count())
-    };
-
-    const auto error = ::syscall(SYS_futex, addr,
-        static_cast<int>(futex_wait_flags::wait_bitset_private),
-        old, &rt, nullptr,
-        static_cast<int>(futex_wait_flags::bitset_match_any));
-    
-    if (error) {
-        if (errno == ETIMEDOUT) {
-            return false;
-        } else if (errno != EINTR && errno != EAGAIN) {
-            throw_exception(system_exception());
-        }
+    const auto sys_timeout = steady_clock::to_system<Dur>(timeout);
+    const auto sys_now = system_clock::now();
+    if (sys_timeout <= sys_now) {
+        return false;
     }
-    return true;
+    const auto sys_dur = sys_timeout - sys_now;
+    const auto sec = _MSTL time_cast<seconds>(sys_dur);
+    const auto ns = _MSTL time_cast<nanoseconds>(sys_dur - sec);
 #endif
+
+    return _MSTL futex_wait_until_steady(
+        const_cast<void*>(static_cast<const void*>(addr)),
+        old,
+        true,
+        sec.count(),
+        ns.count());
 }
 
 template <typename Clock, typename Dur ,enable_if_t<is_same_v<wait_clock_t, Clock>, int> = 0>
@@ -108,17 +72,21 @@ bool __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t
     return false;
 }
 
+MSTL_END_INNER__
+
 template <typename Clock, typename Dur>
-bool platform_wait_until(const platform_wait_t* addr, platform_wait_t old,
+bool futex_wait_until(const platform_wait_t* addr, platform_wait_t old,
     const time_point<Clock, Dur>& timeout) {
     return _INNER __platform_wait_until_dispatch(addr, old, timeout);
 }
+
+MSTL_BEGIN_INNER__
 
 struct timed_waiter_pool : waiter_pool_base {
     template <typename Clock, typename Dur>
     bool do_wait_until(platform_wait_t* addr, platform_wait_t old,
         const time_point<Clock, Dur>& timeout) {
-        return _INNER platform_wait_until(addr, old, timeout);
+        return _MSTL futex_wait_until(addr, old, timeout);
     }
 };
 
@@ -127,15 +95,17 @@ struct timed_backoff_spin_policy {
     wait_clock_t::time_point start_time;
 
     template <typename Clock, typename Dur>
-    timed_backoff_spin_policy(time_point<Clock, Dur> deadline_time = Clock::time_point::max(),
+    timed_backoff_spin_policy(
+        time_point<Clock, Dur> deadline_time = Clock::time_point::max(),
         time_point<Clock, Dur> start_time_point = Clock::now()) noexcept
     : deadline(_INNER to_wait_clock(deadline_time)),
-    start_time(_INNER to_wait_clock(start_time_point)) {}
+      start_time(_INNER to_wait_clock(start_time_point)) {}
 
     bool operator ()() const noexcept {
         const auto now = wait_clock_t::now();
-        if (deadline <= now)
+        if (deadline <= now) {
             return false;
+        }
         
         const auto elapsed = now - start_time;
         if (elapsed > 128_ms) {
@@ -143,7 +113,7 @@ struct timed_backoff_spin_policy {
         } else if (elapsed > 64_us) {
             this_thread::sleep_for(elapsed / 2);
         } else if (elapsed > 4_us) {
-            _INNER thread_yield();
+            this_thread::yield();
         } else {
             return false;
         }
@@ -257,7 +227,7 @@ bool atomic_wait_address_until(const T* addr, Pred pred,
 }
 
 template <typename Pred, typename Clock, typename Dur>
-bool atomic_wait_address_until(const _INNER platform_wait_t* addr, Pred pred,
+bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred,
     const time_point<Clock, Dur>& timeout) noexcept {
     _INNER bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until(pred, timeout);
@@ -278,7 +248,7 @@ bool atomic_wait_address_for(const T* addr, Pred pred,
 }
 
 template <typename Pred, typename Rep, typename Period>
-bool atomic_wait_address_for(const _INNER platform_wait_t* addr, Pred pred,
+bool atomic_wait_address_for(const platform_wait_t* addr, Pred pred,
     const duration<Rep, Period>& rt) noexcept {
     _INNER bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for(pred, rt);

@@ -9,9 +9,9 @@
  * 包括复制、移动、填充、替换、旋转、反转等序列操作。
  */
 
-#include "../numeric/math.hpp"
-#include "../utility/pair.hpp"
-#include "search.hpp"
+#include "MSTL/core/numeric/math.hpp"
+#include "MSTL/core/utility/pair.hpp"
+#include "MSTL/core/algorithm/search.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

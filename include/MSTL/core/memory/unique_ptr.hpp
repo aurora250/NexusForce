@@ -9,9 +9,9 @@
  * 用于管理动态分配对象的生命周期，确保资源的唯一所有权和自动释放。
  */
 
-#include "../functional/functor.hpp"
-#include "../functional/invoke.hpp"
-#include "../utility/tuple.hpp"
+#include "MSTL/core/functional/functor.hpp"
+#include "MSTL/core/functional/invoke.hpp"
+#include "MSTL/core/utility/tuple.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

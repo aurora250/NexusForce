@@ -2,7 +2,6 @@
 #define MSTL_CORE_STRING_CHAR_TRAITS_HPP__
 #include "../algorithm/compare.hpp"
 #include "../functional/hash.hpp"
-#include "../string/cstring.hpp"
 #include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 

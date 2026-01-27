@@ -9,7 +9,7 @@
  * 即可自动获得补全的完整功能。
  */
 
-#include "../functional/hash.hpp"
+#include "MSTL/core/functional/hash.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

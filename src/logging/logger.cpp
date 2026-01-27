@@ -4,7 +4,7 @@ MSTL_BEGIN_NAMESPACE__
 
 void logger::enqueue(log_event&& ev) {
     {
-        _MSTL lock_guard<_MSTL mutex> lock(queue_mutex_);
+        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
         queue_.push(_MSTL move(ev));
     }
     cv_.notify_one();
@@ -12,7 +12,7 @@ void logger::enqueue(log_event&& ev) {
 
 void logger::enqueue(const log_event& ev) {
     {
-        _MSTL lock_guard<_MSTL mutex> lock(queue_mutex_);
+        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
         queue_.push(ev);
     }
     cv_.notify_one();
@@ -51,7 +51,7 @@ void logger::worker_loop() {
         bool should_flush = false;
 
         {
-            _MSTL unique_lock<_MSTL mutex> lock(queue_mutex_);
+            _MSTL smart_lock<_MSTL mutex> lock(queue_mutex_);
             cv_.wait_for(lock, milliseconds(100), [this] {
                 return !queue_.empty() ||
                        flush_requested_.load(_MSTL memory_order_acquire);
@@ -68,7 +68,7 @@ void logger::worker_loop() {
         }
 
         if (!events.empty()) {
-            _MSTL lock_guard<_MSTL mutex> sl(sinks_mutex_);
+            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
             for (const auto& ev : events) {
                 for (const auto& sink : sinks_) {
                     sink->log(ev);
@@ -77,11 +77,11 @@ void logger::worker_loop() {
         }
 
         if (should_flush) {
-            _MSTL lock_guard<_MSTL mutex> sl(sinks_mutex_);
+            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
             for (const auto& sink : sinks_) {
                 sink->flush();
             }
-            _MSTL lock_guard<_MSTL mutex> fl(flush_mutex_);
+            _MSTL lock<_MSTL mutex> fl(flush_mutex_);
             flush_cv_.notify_all();
         }
     }
@@ -105,12 +105,12 @@ logger::~logger() {
         }
     }
     {
-        _MSTL lock_guard<_MSTL mutex> lock(sinks_mutex_);
+        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
         sinks_.clear();
     }
 
     {
-        _MSTL lock_guard<_MSTL mutex> lock(queue_mutex_);
+        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
             queue_.pop();
         }
@@ -118,7 +118,7 @@ logger::~logger() {
 }
 
 void logger::add_sink(shared_ptr<log_sink> sink) {
-    _MSTL lock_guard<_MSTL mutex> lock(sinks_mutex_);
+    _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
     sinks_.push_back(move(sink));
 }
 
@@ -127,22 +127,22 @@ void logger::set_level(const LOG_LEVEL level) {
 }
 
 void logger::set_filter(function<bool(const log_event&)> filter) {
-    _MSTL lock_guard<_MSTL mutex> lock(filter_mutex_);
+    _MSTL lock<_MSTL mutex> lock(filter_mutex_);
     filter_ = move(filter);
 }
 
 void logger::add_context(const string& key, string value) {
-    _MSTL lock_guard<_MSTL mutex> lock(context_mutex_);
+    _MSTL lock<_MSTL mutex> lock(context_mutex_);
     context_[key] = move(value);
 }
 
 void logger::remove_context(const string& key) {
-    _MSTL lock_guard<_MSTL mutex> lock(context_mutex_);
+    _MSTL lock<_MSTL mutex> lock(context_mutex_);
     context_.erase(key);
 }
 
 void logger::clear_context() {
-    _MSTL lock_guard<_MSTL mutex> lock(context_mutex_);
+    _MSTL lock<_MSTL mutex> lock(context_mutex_);
     context_.clear();
 }
 
@@ -156,11 +156,11 @@ void logger::enable_async(const bool async) {
     if (async) {
         start_worker();
     } else {
-        _MSTL lock_guard<_MSTL mutex> lock(queue_mutex_);
+        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
             log_event ev = _MSTL move(queue_.front());
             queue_.pop();
-            _MSTL lock_guard<_MSTL mutex> sl(sinks_mutex_);
+            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
             for (const auto& sink : sinks_) {
                 sink->log(ev);
             }
@@ -179,15 +179,15 @@ void logger::log(const LOG_LEVEL level, string msg,
     ev.file = move(file);
     ev.line = line;
     ev.func = move(func);
-    ev.thread_id = this_thread::get_id();
+    ev.thread_id = this_thread::id();
     ev.message = move(msg);
 
     {
-        _MSTL lock_guard<_MSTL mutex> lock(context_mutex_);
+        _MSTL lock<_MSTL mutex> lock(context_mutex_);
         ev.context = context_;
     }
     {
-        _MSTL lock_guard<_MSTL mutex> lock(filter_mutex_);
+        _MSTL lock<_MSTL mutex> lock(filter_mutex_);
         if (filter_ && !filter_(ev)) {
             return;
         }
@@ -196,7 +196,7 @@ void logger::log(const LOG_LEVEL level, string msg,
     if (async_) {
         enqueue(ev);
     } else {
-        _MSTL lock_guard<_MSTL mutex> lock(sinks_mutex_);
+        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
         for (const auto& sink : sinks_) {
             sink->log(ev);
         }
@@ -208,12 +208,12 @@ void logger::flush() {
         flush_requested_.store(true, _MSTL memory_order_release);
         cv_.notify_one();
 
-        _MSTL unique_lock<_MSTL mutex> lock(flush_mutex_);
+        _MSTL smart_lock<_MSTL mutex> lock(flush_mutex_);
         flush_cv_.wait(lock, [this] {
             return !flush_requested_.load(_MSTL memory_order_acquire);
         });
     } else {
-        _MSTL lock_guard<_MSTL mutex> lock(sinks_mutex_);
+        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
         for (const auto& sink : sinks_) {
             sink->flush();
         }

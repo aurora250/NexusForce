@@ -1,7 +1,9 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_BASE_HPP__
-#include "../exception/assertion.hpp"
 #include "atomic_wait.hpp"
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <intrin0.h>
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 enum class memory_order : int32_t {
@@ -37,19 +39,61 @@ constexpr memory_order operator &(memory_order mo, memory_order_modifier mod) no
 }
 
 
-constexpr memory_order cmpexch_failure_order2(const memory_order mo) noexcept {
+MSTL_BEGIN_INNER__
+
+constexpr memory_order cmpexch_failure_order_aux(const memory_order mo) noexcept {
     return mo == memory_order_acq_rel ? memory_order_acquire
          : mo == memory_order_release ? memory_order_relaxed : mo;
 }
 
+#ifdef MSTL_COMPILER_MSVC__
+inline void __cdecl atomic_thread_fence_aux(const memory_order mo) noexcept {
+#if defined(MSTL_ARCH_X86__)
+	::_ReadWriteBarrier();
+	if (mo == memory_order_seq_cst) {
+		volatile long guard;
+		::_InterlockedIncrement(&guard);
+		::_ReadWriteBarrier();
+	}
+#elif defined(MSTL_ARCH_ARM__)
+	if (mo == memory_order_acquire || mo == memory_order_consume) {
+		::_Memory_load_acquire_barrier();
+	} else {
+		::_ReadWriteBarrier();
+	}
+#else
+#warning "不支持的指令集操作"
+#endif
+}
+#endif
+
+MSTL_END_INNER__
+
 constexpr memory_order cmpexch_failure_order(const memory_order mo) noexcept {
-    return cmpexch_failure_order2(mo & memory_order_modifier::memory_order_mask) |
+    return _INNER cmpexch_failure_order_aux(mo & memory_order_modifier::memory_order_mask) |
         static_cast<memory_order_modifier>(mo & memory_order_modifier::memory_order_modifier_mask);
 }
 
 constexpr bool is_valid_cmpexch_failure_order(const memory_order mo) noexcept {
     return (mo & memory_order_modifier::memory_order_mask) != memory_order_release
         && (mo & memory_order_modifier::memory_order_mask) != memory_order_acq_rel;
+}
+
+MSTL_ALWAYS_INLINE_INLINE void atomic_thread_fence(const memory_order mo) noexcept {
+#ifdef MSTL_COMPILER_MSVC__
+	if (mo == memory_order_relaxed) return;
+	_INNER atomic_thread_fence_aux(mo);
+#else
+	__atomic_thread_fence(static_cast<int32_t>(mo));
+#endif
+}
+
+MSTL_ALWAYS_INLINE_INLINE void atomic_signal_fence(const memory_order mo) noexcept {
+#ifdef MSTL_COMPILER_MSVC__
+	if (mo != memory_order_relaxed) ::_ReadWriteBarrier();
+#else
+	__atomic_signal_fence(static_cast<int32_t>(mo));
+#endif
 }
 
 

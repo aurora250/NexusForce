@@ -7,13 +7,12 @@ MSTL_BEGIN_INNER__
 
 struct atomic_semaphore {
 private:
-    alignas(_INNER PLATFORM_WAIT_ALIGN)
-    _INNER platform_wait_t counter_;
+    alignas(alignof(platform_wait_t)) platform_wait_t counter_;
 
 public:
     static constexpr ptrdiff_t int_max = numeric_traits<int>::max();
     
-    explicit atomic_semaphore(const _INNER platform_wait_t count) noexcept
+    explicit atomic_semaphore(const platform_wait_t count) noexcept
         : counter_(count) {
         MSTL_CONSTEXPR_ASSERT(count >= 0 && count <= int_max);
     }
@@ -22,7 +21,7 @@ public:
     atomic_semaphore& operator =(const atomic_semaphore&) = delete;
 
     static MSTL_ALWAYS_INLINE bool
-    do_try_acquire(_INNER platform_wait_t* counter) noexcept {
+    do_try_acquire(platform_wait_t* counter) noexcept {
         auto old_value = _INNER load(counter, memory_order::acquire);
         if (old_value == 0) {
             return false;
@@ -42,7 +41,7 @@ public:
         auto const pred = [this] { 
             return do_try_acquire(&this->counter_); 
         };
-        return _INNER atomic_spin(pred);
+        return _INNER atomic_spin(pred, [] { return false; });
     }
 
     template <typename Clock, typename Dur>

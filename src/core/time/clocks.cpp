@@ -1,8 +1,33 @@
 #include <MSTL/core/time/clocks.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
+#include <MSTL/core/config/undef_cmacro.hpp>
+#endif
+#ifdef MSTL_PLATFORM_LINUX__
+#include <ctime>
 #endif
 MSTL_BEGIN_NAMESPACE__
+
+MSTL_BEGIN_INNER__
+
+void sleep_for_aux(int64_t s, int64_t ns) {
+#ifdef MSTL_PLATFORM_WINDOWS__
+    ::LARGE_INTEGER li{};
+    li.QuadPart = -(ns / 100);
+
+    const ::HANDLE timer = ::CreateWaitableTimerW(nullptr, 1, nullptr);
+    if (timer) {
+        ::SetWaitableTimer(timer, &li, 0, nullptr, nullptr, 0);
+        ::WaitForSingleObject(timer, numeric_traits<::DWORD>::max());
+        ::CloseHandle(timer);
+    }
+#elif defined(MSTL_PLATFORM_LINUX__)
+    ::timespec ts{s, ns};
+    while (::nanosleep(&ts, &ts) == -1) {}
+#endif
+}
+
+MSTL_END_INNER__
 
 system_clock::time_point system_clock::now() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__

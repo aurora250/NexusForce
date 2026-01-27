@@ -11,7 +11,7 @@ MSTL_BEGIN_NAMESPACE__
 void database_pool::produce_connect_task() {
     while (true) {
         if (!running_) break;
-        _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
+        _MSTL smart_lock<_MSTL mutex> lock(queue_mtx_);
         while (!connect_queue_.empty()) {
             cv_.wait(lock);
             if (!running_) break;
@@ -33,7 +33,7 @@ void database_pool::scanner_connect_task() {
         if (!running_) break;
         _MSTL this_thread::sleep_for(seconds(max_idle_time_));
         if (!running_) break;
-        _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
+        _MSTL lock<_MSTL mutex> lock(queue_mtx_);
 
         while (connect_queue_.size() > init_size_) {
             const idb_connect* ptr = connect_queue_.front();

@@ -8,7 +8,7 @@
  * 此文件提供了标准迭代器适配器的实现，用于包装底层迭代器并为其提供标准迭代器接口。
  */
 
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

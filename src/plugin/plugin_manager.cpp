@@ -40,7 +40,7 @@ size_t plugin_manager::load_plugins(const string& dir_path) {
 }
 
 void plugin_manager::load_plugin(const string_view filepath) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
 
     if (libraries_.count(filepath)) {
         throw_exception(exception("Plugin already loaded"));
@@ -71,7 +71,7 @@ void plugin_manager::load_plugin(const string_view filepath) {
 }
 
 bool plugin_manager::unload_plugin(const string& name) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     const auto it = plugins_.find(name);
     if (it == plugins_.end()) return false;
 
@@ -87,13 +87,13 @@ bool plugin_manager::unload_plugin(const string& name) {
 }
 
 iplugin* plugin_manager::get_plugin(const string &name) {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     const auto it = plugins_.find(name);
     return (it != plugins_.end()) ? it->second.get() : nullptr;
 }
 
 vector<string> plugin_manager::list_plugins() const {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     vector<string> names;
     names.reserve(plugins_.size());
     for (const auto& pair : plugins_) {
@@ -103,14 +103,14 @@ vector<string> plugin_manager::list_plugins() const {
 }
 
 void plugin_manager::initialize_all() {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     for (const auto& pair : plugins_) {
         pair.second->initialize();
     }
 }
 
 void plugin_manager::shutdown_all() noexcept {
-    lock_guard<mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     for (const auto& pair : plugins_) {
         try {
             pair.second->shutdown();

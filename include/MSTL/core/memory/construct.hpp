@@ -9,7 +9,7 @@
  * 以及批量销毁对象。包括对平凡可析构类型的优化。
  */
 
-#include "../typeinfo/concepts.hpp"
+#include "MSTL/core/typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

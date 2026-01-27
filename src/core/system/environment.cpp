@@ -45,12 +45,12 @@ string environment::get(const string& name) {
 }
 
 bool environment::set(const string& name, const string& value, const bool overwrite) {
-    unique_lock<shared_mutex> lock(get_mutex());
+    lock<shared_mutex> lock(get_mutex());
     return set_unsafe(name, value, overwrite);
 }
 
 bool environment::unset(const string& name) {
-    unique_lock<shared_mutex> lock(get_mutex());
+    lock<shared_mutex> lock(get_mutex());
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::SetEnvironmentVariable(name.c_str(), nullptr) != 0;
 #else
@@ -123,7 +123,7 @@ vector<string> environment::path_list() {
 }
 
 bool environment::add_to_path(const string& path, const int position) {
-    unique_lock<shared_mutex> lock(get_mutex());
+    lock<shared_mutex> lock(get_mutex());
     const string original_path = get_unsafe("PATH");
 
     if (original_path.empty()) {

@@ -49,17 +49,16 @@ HIDE_UNDOC_CLASSES     = YES     # 隐藏未文档化的类
 HIDE_FRIEND_COMPOUNDS  = YES
 HIDE_IN_BODY_DOCS      = YES     # 隐藏所有初始值，适用于宏、变量
 
+GRAPHICAL_HIERARCHY    = YES     # 图形化继承层次
+INCLUDE_GRAPH          = YES     # 包含关系图
+INCLUDED_BY_GRAPH      = NO      # 被包含关系图
+COLLABORATION_GRAPH    = NO      # 协作图
+UML_LOOK               = NO      # 简化 UML 样式
+
 HAVE_DOT               = @HAVE_DOT@
 DOT_NUM_THREADS        = 0       # 使用所有 CPU 核心
-
-GRAPHICAL_HIERARCHY    = YES     # 图形化继承层次
-COLLABORATION_GRAPH    = NO      # 协作图
-INCLUDE_GRAPH          = NO      # 包含关系图
-INCLUDED_BY_GRAPH      = NO      # 被包含关系图
-
-UML_LOOK               = NO      # 简化 UML 样式
-DOT_GRAPH_MAX_NODES    = 50      # 限制节点数量
-MAX_DOT_GRAPH_DEPTH    = 2       # 限制图表深度
+DOT_GRAPH_MAX_NODES    = 100     # 限制节点数量
+MAX_DOT_GRAPH_DEPTH    = 10      # 限制图表深度
 DOT_IMAGE_FORMAT       = svg     # 使用 SVG，更小更清晰
 
 SEARCHENGINE           = YES
@@ -81,9 +80,9 @@ AUTOLINK_SUPPORT       = YES
 TYPEDEF_HIDES_STRUCT   = YES
 
 WARNINGS               = YES
-WARN_IF_UNDOCUMENTED   = NO      # 不警告未文档化的内容
+WARN_IF_UNDOCUMENTED   = NO      # 警告未文档化的内容
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO      # 不警告缺少参数文档
+WARN_NO_PARAMDOC       = NO      # 警告缺少参数文档=
 
 ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES

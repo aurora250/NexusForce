@@ -1,8 +1,7 @@
 #include <MSTL/core/string/vsprintf.hpp>
-#include <MSTL/core/memory/memory.hpp>
 #include <MSTL/core/numeric/numeric_types.hpp>
-#include <MSTL/core/string/cstring.hpp>
 #include <MSTL/core/memory/standard_allocator.hpp>
+#include <MSTL/core/string/char_types.hpp>
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__

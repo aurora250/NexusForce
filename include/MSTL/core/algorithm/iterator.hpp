@@ -9,9 +9,7 @@
  * 包括获取迭代器特性、指针转换、前进/后退、距离计算等辅助函数。
  */
 
-#include "../iterator/iterator_traits.hpp"
-#include "../typeinfo/concepts.hpp"
-#include "../exception/assertion.hpp"
+#include "MSTL/core/typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

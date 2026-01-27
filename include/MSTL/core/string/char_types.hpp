@@ -9,8 +9,7 @@
  * 字符类型判断、大小写转换等功能。使用位掩码技术高效实现。
  */
 
-#include "../typeinfo/types.hpp"
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

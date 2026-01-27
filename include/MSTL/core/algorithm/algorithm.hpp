@@ -1,5 +1,13 @@
 ﻿#ifndef MSTL_CORE_ALGORITHM_ALGORITHM_HPP__
 #define MSTL_CORE_ALGORITHM_ALGORITHM_HPP__
+
+/**
+ * @file algorithm.hpp
+ * @brief MSTL常用算法集
+ *
+ * 此文件提供了所有常用算法的头文件集合。
+ */
+
 #include "parallel.hpp"
 #include "remove.hpp"
 #include "numeric.hpp"

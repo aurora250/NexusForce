@@ -47,7 +47,7 @@ private:
 private:
     void run() {
         while (!stopped_.load()) {
-            _MSTL unique_lock<_MSTL mutex> lock(mutex_);
+            _MSTL smart_lock<_MSTL mutex> lock(mutex_);
 
             if (nodes_.empty()) {
                 cv_.wait(lock, [this] {
@@ -63,11 +63,11 @@ private:
                 nodes_.erase(it);
                 node_map_.erase(current_node.id);
 
-                lock.unlock();
+                lock.unlock_quiet();
                 if (!stopped_.load()) {
                     current_node.handler();
                 }
-                lock.lock();
+                lock.lock_quiet();
                 now = clock_type::now();
             }
 
@@ -97,7 +97,7 @@ public:
     timer_scheduler& operator =(timer_scheduler&&) = default;
 
     token add_task(time_point expire, handler_type&& handler) {
-        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
+        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
         token id = next_id_++;
 
         const bool is_earliest = nodes_.empty() || expire < nodes_.begin()->expire;
@@ -106,7 +106,7 @@ public:
         auto result = nodes_.insert(new_node);
         node_map_[id] = result.first;
 
-        lock.unlock();
+        lock.unlock_quiet();
 
         if (is_earliest) {
             cv_.notify_one();
@@ -116,7 +116,7 @@ public:
     }
 
     bool cancel(token id) {
-        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
+        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
         auto it_map = node_map_.find(id);
         if (it_map == node_map_.end()) {
             return false;
@@ -126,7 +126,7 @@ public:
         nodes_.erase(it_map->second);
         node_map_.erase(it_map);
 
-        lock.unlock();
+        lock.unlock_quiet();
 
         if (is_earliest) {
             cv_.notify_one();
@@ -136,15 +136,15 @@ public:
     }
 
     void cancel_all() {
-        _MSTL unique_lock<_MSTL mutex> lock(mutex_);
+        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
         nodes_.clear();
         node_map_.clear();
-        lock.unlock();
+        lock.unlock_quiet();
         cv_.notify_one();
     }
 
     MSTL_NODISCARD size_t size() const {
-        _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(mutex_));
+        _MSTL lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(mutex_));
         return nodes_.size();
     }
 };
@@ -222,7 +222,6 @@ public:
 
 using steady_timer = basic_timer<steady_clock>;
 using system_timer = basic_timer<system_clock>;
-using high_resolution_timer = basic_timer<high_resolution_clock>;
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_TIMER_HPP__

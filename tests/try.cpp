@@ -1766,25 +1766,29 @@ void test_hashtable() {
 }
 
 void test_math() {
-    println(power(2, 10));
-    println(power(3, 10));
-    println(factorial(10));
-    println(sine(1));
-    println(cosine(angular2radian(270)));
-    println(remainder(73.263, 0.9973));
-    println(float_part(_CONSTANTS PI));
-    println(exponential(3));
-    println(logarithm_e(165));
-    println(logarithm_10(147));
-    println(logarithm_2(500));
-    println(arctangent(100));
-    println(radian2angular(arctangent(100)));
-    println(arcsine(1), arcsine(0), arcsine(-1));
-    println(arccosine(1), arccosine(0), arccosine(-1));
-    println(arctangent(numeric_traits<decimal_t>::max()), arctangent(numeric_traits<decimal_t>::min_nega()));
-    // println(tangent(_CONSTANTS PI / 2));  // MathError
-    println(tangent(0));
-    println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
+    try {
+        println(power(2, 10));
+        println(power(3, 10));
+        println(factorial(10));
+        println(sine(1));
+        println(cosine(angular2radian(270)));
+        println(remainder(73.263, 0.9973));
+        println(float_part(_CONSTANTS PI));
+        println(exponential(3));
+        println(logarithm_e(165.f));
+        println(logarithm_10(147.f));
+        println(logarithm_2(500.f));
+        println(arctangent(100));
+        println(radian2angular(arctangent(100)));
+        println(arcsine(1), arcsine(0), arcsine(-1));
+        println(arccosine(1), arccosine(0), arccosine(-1));
+        println(arctangent(numeric_traits<decimal_t>::max()), arctangent(numeric_traits<decimal_t>::min_nega()));
+        // println(tangent(_CONSTANTS PI / 2));  // MathError
+        println(tangent(0));
+        println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
+    } catch (const exception& e) {
+        println(e);
+    }
 }
 
 void test_sort() {
@@ -1841,9 +1845,9 @@ void test_variant() {
     hash<variant<int, string>> hasher{};
     println(hasher(v1));
 
-    variant<non, int> v = none;
+    variant<none_t, int> v = none;
 
-    if (v.holds_alternative<non>()) {
+    if (v.holds_alternative<none_t>()) {
         println("hold none");
     }
     println(v.to_hash());
@@ -1988,7 +1992,7 @@ void test_option() {
     optional<int> opt1{0};
     println(opt1.value());
 
-    optional<int> opt2(nullopt);
+    optional<int> opt2(none);
     try {
         println(opt2.value());
     } catch (const exception& e) {
@@ -2595,14 +2599,14 @@ void test_dns() {
         auto start = steady_clock::now();
         auto ipv6_addrs = client.resolve_aaaa("www.google.com");
         auto end = steady_clock::now();
-        auto duration1 = duration_cast<milliseconds>(end - start);
+        auto duration1 = time_cast<milliseconds>(end - start);
         println("IPv6 addresses:");
         println(ipv6_addrs);
 
         start = steady_clock::now();
         ipv6_addrs = client.resolve_aaaa("www.google.com");
         end = steady_clock::now();
-        auto duration2 = duration_cast<milliseconds>(end - start);
+        auto duration2 = time_cast<milliseconds>(end - start);
         println("First:", duration1.count(), "Second:", duration2.count());
 
         auto mx_records = client.resolve_mx("gmail.com");
@@ -2643,7 +2647,7 @@ void test_tpool() {
     pool.start();
     click clk;
     {
-        scoped_click grd(clk);
+        click_guard grd(clk);
         pool.submit_task([&pool] {
             pool.submit_task(test_vector);
             pool.submit_task(test_list);

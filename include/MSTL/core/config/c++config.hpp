@@ -10,7 +10,8 @@
  * 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
  */
 
-#include "undef_cmacro.hpp"
+#include "MSTL/core/config/undef_cmacro.hpp"
+#include <assert.h>
 
 /**
  * @defgroup PlatformDetection 平台检测
@@ -161,27 +162,83 @@
 
 /** @} */ // APIImpExpSpec
 
+
+#if defined(__i386__) || defined(__i386) || defined(_M_IX86) || \
+    defined(__X86__) || defined(_X86_) || defined(__I86__)
+    #define MSTL_ARCH_X86_32__ 1
+#endif
+
+#if defined(__x86_64__) || defined(__x86_64) || defined(_M_X64) || \
+    defined(__amd64__) || defined(__amd64) || defined(_M_AMD64)
+    #define MSTL_ARCH_X86_64__ 1
+#endif
+
+#if defined(MSTL_ARCH_X86_32__) || defined(MSTL_ARCH_X86_64__)
+    #define MSTL_ARCH_X86__ 1
+#endif
+
+
+#if defined(__arm__) || defined(__arm) || defined(_ARM_) || \
+    defined(_M_ARM) || defined(__ARM_ARCH) || defined(__TARGET_ARCH_ARM)
+    #define MSTL_ARCH_ARM32__ 1
+#endif
+
+#if defined(__aarch64__) || defined(__aarch64) || defined(_M_ARM64) || \
+    defined(__ARM64_ARCH_8__) || defined(__ARM_ARCH_ISA_A64)
+    #define MSTL_ARCH_AARCH64__ 1
+#endif
+
+#if defined(MSTL_ARCH_ARM32__) || defined(MSTL_ARCH_AARCH64__)
+    #define MSTL_ARCH_ARM__ 1
+#endif
+
+
+#if defined(__riscv) || defined(__riscv__) || defined(riscv)
+    #define MSTL_ARCH_RISCV__ 1
+    #if __riscv_xlen == 32
+        #define MSTL_ARCH_RISCV32__ 1
+    #elif __riscv_xlen == 64
+        #define MSTL_ARCH_RISCV64__ 1
+    #endif
+#endif
+
+
+#if defined(__loongarch__) || defined(__loongarch) || \
+    defined(__loongarch32) || defined(__loongarch64) || \
+    defined(_LOONGARCH_SIM) || defined(_LOONGARCH)
+    #define MSTL_ARCH_LOONGARCH__ 1
+    #if defined(__loongarch32) || defined(_LOONGARCH_SIM == _ABILP32_SIM)
+        #define MSTL_ARCH_LOONGARCH32__ 1
+    #elif defined(__loongarch64) || defined(_LOONGARCH_SIM == _ABILP64_SIM)
+        #define MSTL_ARCH_LOONGARCH64__ 1
+    #endif
+#endif
+
 /**
  * @defgroup DataBusWidth 数据总线宽度
  * @brief 系统架构位宽检测
  * @{
  */
 
-#if defined(MSTL_PLATFORM_WIN64__) || defined(MSTL_PLATFORM_LINUX64__) \
-    || defined(__amd64__) || defined(__x86_64__) || defined(__aarch64__) || defined(MSTL_DOXYGEN_GENERATE)
+#if defined(MSTL_ARCH_X86_64__) || defined(MSTL_ARCH_AARCH64__) || defined(MSTL_ARCH_RISCV64__) \
+    || defined(MSTL_ARCH_LOONGARCH64__) || defined(MSTL_DOXYGEN_GENERATE)
 	/**
      * @def MSTL_DATA_BUS_WIDTH_64__
      * @brief 定义在64位系统编译
      */
 	#define MSTL_DATA_BUS_WIDTH_64__	1
 #endif
-#if defined(MSTL_PLATFORM_WIN32__) || defined(MSTL_PLATFORM_LINUX32__) \
-    || defined(__i386__) || defined(MSTL_DOXYGEN_GENERATE)
+#if defined(MSTL_ARCH_X86_32__) || defined(MSTL_ARCH_ARM32__) || defined(MSTL_ARCH_RISCV32__) \
+    || defined(MSTL_ARCH_LOONGARCH32__) || defined(MSTL_DOXYGEN_GENERATE)
 	/**
      * @def MSTL_DATA_BUS_WIDTH_32__
      * @brief 定义在32位系统编译
      */
 	#define MSTL_DATA_BUS_WIDTH_32__	1
+#endif
+
+#if !(defined(MSTL_DATA_BUS_WIDTH_64__) || defined(MSTL_DATA_BUS_WIDTH_32__))
+#error "MSTL: 不支持的架构"
 #endif
 
 /** @} */ // DataBusWidth
@@ -682,5 +739,38 @@
 
 
 #define MSTL_IGNORE (void)
+
+
+#ifdef MSTL_STATE_DEBUG__
+#define MSTL_DEBUG_VERIFY(CON, MESG) \
+    { if (CON) {} else { assert(false && MESG); } }
+#else
+#define MSTL_DEBUG_VERIFY(CON, MESG)
+#endif
+
+#define __MSTL_DEBUG_MESG_OPERATE_NULLPTR(ITER, ACT) "can`t " ACT ": " #ITER " is pointing to nullptr."
+#define __MSTL_DEBUG_MESG_OUT_OF_RANGE(CLASS, ACT) "can`t " ACT ": " #CLASS " out of ranges."
+#define __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(ITER) "not comparable :" #ITER " container incompatible."
+
+#define __MSTL_DEBUG_TAG_DEREFERENCE "dereference"
+#define __MSTL_DEBUG_TAG_INCREMENT "increment"
+#define __MSTL_DEBUG_TAG_DECREMENT "decrement"
+
+
+#if defined(MSTL_STANDARD_20__) && defined(MSTL_COMPILER_GNUC__)
+#define MSTL_CONSTEXPR_ASSERT(COND) \
+do { \
+    if (__builtin_is_constant_evaluated() && !bool(COND)) \
+        __builtin_unreachable(); \
+} while (false);
+#elif defined(MSTL_STATE_DEBUG__)
+#define MSTL_CONSTEXPR_ASSERT(COND) \
+do { \
+    if (!bool(COND)) \
+        assert(false); \
+} while (false);
+#else
+#define MSTL_CONSTEXPR_ASSERT(COND)
+#endif
 
 #endif // MSTL_CORE_CONFIG_CPPCONFIG_HPP__

@@ -62,7 +62,7 @@ string log_formatter::resolve_placeholder(string ph, const log_event& event) con
     } else if (ph == "func") {
         return event.func;
     } else if (ph == "thread") {
-        return to_string(event.thread_id.native());
+        return to_string(event.thread_id.native_handle());
     } else if (ph == "message") {
         return event.message;
     }

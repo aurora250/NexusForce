@@ -1,7 +1,6 @@
 #ifndef MSTL_CORE_UTILITY_EXPECTED_HPP__
 #define MSTL_CORE_UTILITY_EXPECTED_HPP__
 #include "../exception/exception.hpp"
-#include "../typeinfo/tags.hpp"
 #ifdef MSTL_STANDARD_20__
 MSTL_BEGIN_NAMESPACE__
 

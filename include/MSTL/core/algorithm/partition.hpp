@@ -9,7 +9,7 @@
  * 用于根据谓词或基准值将序列划分为满足条件和不满足条件的两部分。
  */
 
-#include "shift.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

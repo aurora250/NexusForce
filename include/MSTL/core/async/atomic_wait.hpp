@@ -1,130 +1,28 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_WAIT_HPP__
-#include "../numeric/numeric_traits.hpp"
-#include "../memory/memory.hpp"
-#include "../exception/terminate.hpp"
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
-#include <intrin.h>
-#include "../config/undef_cmacro.hpp"
-#else
-#include <unistd.h>
-#include <cerrno>
-#include <syscall.h>
-#include <sched.h>
-#endif
+#include "MSTL/core/memory/memory.hpp"
+#include "MSTL/core/exception/terminate.hpp"
+#include "MSTL/core/async/this_thread.hpp"
+#include "MSTL/core/async/futex.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_BEGIN_INNER__
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-using platform_wait_t = ::LONG;
-#else
-using platform_wait_t = int;
-#endif
-
-MSTL_INLINE17 constexpr size_t PLATFORM_WAIT_ALIGN = alignof(platform_wait_t);
-
-template <typename T>
-MSTL_INLINE17 constexpr bool PLATFORM_WAIT_USE_T = is_scalar_v<T>
-	&& ((sizeof(T) == sizeof(_INNER platform_wait_t))
-	&& (alignof(T*) >= _INNER PLATFORM_WAIT_ALIGN));
-
-MSTL_INLINE17 constexpr auto ATOMIC_SPIN_COUNT_RELAX = 12;
-MSTL_INLINE17 constexpr auto ATOMIC_SPIN_COUNT = 16;
-
-
-enum class futex_wait_flags : int32_t {
-	private_flag = 0,
-	wait = 0,
-	wake = 1,
-	wait_bitset = 9,
-	wake_bitset = 10,
-	wait_private = wait | private_flag,
-	wake_private = wake | private_flag,
-	wait_bitset_private = wait_bitset | private_flag,
-	wake_bitset_private = wake_bitset | private_flag,
-	bitset_match_any = -1
-};
 
 struct default_spin_policy {
 	bool operator ()() const noexcept { return false; }
 };
 
 
-template <typename T>
-void platform_wait(const T* addr, const platform_wait_t val) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    auto p = reinterpret_cast<volatile platform_wait_t*>(const_cast<T*>(addr));
-	const ::BOOL result = ::WaitOnAddress(
-		p, const_cast<platform_wait_t*>(&val),
-		sizeof(platform_wait_t),
-		_MSTL numeric_traits<uint32_t>::max());
-
-	if (result == 0) {
-		::DWORD err = ::GetLastError();
-		if (err != 0 && err != ERROR_TIMEOUT) {
-			_MSTL terminate();
-		}
-	}
-#else
-    const auto err = ::syscall(
-		SYS_futex, static_cast<const void*>(addr),
-		static_cast<int32_t>(futex_wait_flags::wait_private),
-		val, nullptr);
-
-	if (!err) return;
-	if (errno == EAGAIN) return;
-	_MSTL terminate();
-#endif
-}
-
-template <typename T>
-void platform_notify(const T* addr, const bool all) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    const auto p = reinterpret_cast<volatile platform_wait_t*>(const_cast<T*>(addr));
-	if (all) {
-		::WakeByAddressAll(const_cast<platform_wait_t*>(p));
-	} else {
-		::WakeByAddressSingle(const_cast<platform_wait_t*>(p));
-	}
-#else
-	::syscall(
-		SYS_futex, static_cast<const void*>(addr),
-		static_cast<int32_t>(futex_wait_flags::wake_private),
-		all ? numeric_traits<int32_t>::max() : 1);
-#endif
-}
-
-MSTL_ALWAYS_INLINE_INLINE void thread_yield() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-	::SwitchToThread();
-#else
-	::sched_yield();
-#endif
-}
-
-MSTL_ALWAYS_INLINE_INLINE void thread_relax() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-	::YieldProcessor();
-#else
-#if __has_builtin(__builtin_ia32_pause)
-	__builtin_ia32_pause();
-#else
-	thread_yield();
-#endif
-#endif
-}
-
-template <typename Pred, typename Spin = default_spin_policy>
+template <typename Pred, typename Spin>
 bool atomic_spin(Pred& pred, Spin spin = Spin{}) noexcept {
-	for (auto idx = 0; idx < ATOMIC_SPIN_COUNT; ++idx) {
+	constexpr auto atomic_spin_count = 16;
+	constexpr auto atomic_spin_count_relax = 12;
+	for (auto idx = 0; idx < atomic_spin_count; ++idx) {
 		if (pred()) return true;
-
-		if (idx < ATOMIC_SPIN_COUNT_RELAX) {
-			thread_relax();
+		if (idx < atomic_spin_count_relax) {
+			this_thread::relax();
 		} else {
-			thread_yield();
+			this_thread::yield();
 		}
 	}
 
@@ -185,7 +83,7 @@ struct waiter_pool_base {
 			all = true;
 		}
 		if (bare || waiter_waiting()) {
-			platform_notify(addr, all);
+			_MSTL futex_notify(addr, all);
 		}
 	}
 
@@ -198,8 +96,8 @@ struct waiter_pool_base {
 };
 
 struct waiter_pool : waiter_pool_base {
-	void waiter_do_wait(const platform_wait_t* addr, const platform_wait_t old) const noexcept {
-		platform_wait(addr, old);
+	MSTL_ALWAYS_INLINE void waiter_do_wait(platform_wait_t* addr, const platform_wait_t old) const noexcept {
+		futex_wait(addr, old);
 	}
 };
 
@@ -207,12 +105,12 @@ struct waiter_pool : waiter_pool_base {
 template <typename T>
 struct waiter_base {
 private:
-	template <typename U, enable_if_t<PLATFORM_WAIT_USE_T<U>, int> = 0>
+	template <typename U, enable_if_t<platform_wait_valid_v<U>, int> = 0>
 	MSTL_ALWAYS_INLINE static void waiter_do_spin_v_impl(
 		platform_wait_t*, const U& old, platform_wait_t& value) {
 		_MSTL memory_copy(&value, &old, sizeof(value));
 	}
-	template <typename U, enable_if_t<!PLATFORM_WAIT_USE_T<U>, int> = 0>
+	template <typename U, enable_if_t<!platform_wait_valid_v<U>, int> = 0>
 	MSTL_ALWAYS_INLINE static void waiter_do_spin_v_impl(
 		platform_wait_t* addr, const U&, platform_wait_t& value) {
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -228,11 +126,11 @@ public:
 	waiter_type& waiter_;
 	platform_wait_t* addr_;
 
-	template <typename U, enable_if_t<PLATFORM_WAIT_USE_T<U>, int> = 0>
+	template <typename U, enable_if_t<platform_wait_valid_v<U>, int> = 0>
 	static platform_wait_t* waiter_wait_addr(const U* addr, platform_wait_t*) {
 		return reinterpret_cast<platform_wait_t*>(const_cast<U*>(addr));
 	}
-	template <typename U, enable_if_t<!PLATFORM_WAIT_USE_T<U>, int> = 0>
+	template <typename U, enable_if_t<!platform_wait_valid_v<U>, int> = 0>
 	static platform_wait_t* waiter_wait_addr(const U*, platform_wait_t* wait) {
 		return wait;
 	}

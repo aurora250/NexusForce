@@ -80,7 +80,7 @@ session_manager::~session_manager() {
 }
 
 MSTL_NODISCARD session* session_manager::get_session(const string& session_id, const bool create) {
-    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
+    _MSTL lock<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     if (it != sessions_.end()) {
         if (it->second.is_valid()) {
@@ -102,7 +102,7 @@ MSTL_NODISCARD session* session_manager::get_session(const string& session_id, c
 void session_manager::cleanup_expired_sessions() {
     while (cleanup_running_) {
         {
-            _MSTL lock_guard<_MSTL mutex> lock(mutex_);
+            _MSTL lock<_MSTL mutex> lock(mutex_);
             datetime now = datetime::now();
             auto it = sessions_.begin();
             while (it != sessions_.end()) {
@@ -120,12 +120,12 @@ void session_manager::cleanup_expired_sessions() {
 }
 
 void session_manager::remove_session(const string& session_id) noexcept {
-    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
+    _MSTL lock<_MSTL mutex> lock(mutex_);
     sessions_.erase(session_id);
 }
 
 MSTL_NODISCARD bool session_manager::session_exists(const string& session_id) noexcept {
-    _MSTL lock_guard<_MSTL mutex> lock(mutex_);
+    _MSTL lock<_MSTL mutex> lock(mutex_);
     const auto it = sessions_.find(session_id);
     return it != sessions_.end() && it->second.is_valid();
 }

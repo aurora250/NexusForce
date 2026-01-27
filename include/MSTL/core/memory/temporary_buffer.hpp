@@ -9,9 +9,9 @@
  * 用于在算法执行期间分配和自动管理临时内存。
  */
 
-#include "../memory/standard_allocator.hpp"
-#include "../memory/uninitialized.hpp"
-#include "../utility/compressed_pair.hpp"
+#include "MSTL/core/memory/standard_allocator.hpp"
+#include "MSTL/core/memory/uninitialized.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -38,21 +38,14 @@ public:
     using const_pointer     = const value_type*;        ///< 常量指针类型
     using reference         = value_type&;              ///< 引用类型
     using const_reference   = const value_type&;        ///< 常量引用类型
-    using size_type         = ptrdiff_t;                ///< 大小类型
+    using size_type         = size_t;                ///< 大小类型
     using difference_type   = ptrdiff_t;                ///< 差异类型
     using allocator_type    = standard_allocator<value_type>;    ///< 分配器类型
 
 private:
     size_type original_len_ = 0;  ///< 请求的缓冲区大小
     size_type len_ = 0;           ///< 实际分配的缓冲区大小
-
-    /**
-     * @brief 缓冲区指针压缩对
-     *
-     * 使用compressed_pair存储分配器和指针，优化空间使用。
-     * 当分配器是空类时，不会占用额外空间。
-     */
-    compressed_pair<allocator_type, pointer> buffer_pir_{default_construct_tag{}, nullptr};
+    pointer buffer_ = nullptr;    ///< 缓冲区指针
 
 private:
     /**
@@ -64,14 +57,15 @@ private:
      */
     MSTL_CONSTEXPR20 void allocate_buffer() {
         original_len_ = len_;
-        buffer_pir_.value = 0;
-        if (len_ > static_cast<size_type>(numeric_traits<uint32_t>::max() / sizeof(value_type))) {
-            len_ = numeric_traits<uint32_t>::max() / sizeof(value_type);
+        buffer_ = 0;
+        constexpr size_t max = numeric_traits<uint32_t>::max() / sizeof(value_type);
+        if (len_ > max) {
+            len_ = max;
         }
 
         while (len_ > 0) {
-            buffer_pir_.value = buffer_pir_.get_base().allocate(len_);
-            if (buffer_pir_.value) break;
+            buffer_ = allocator_type::allocate(len_);
+            if (buffer_) break;
             len_ /= 2;
         }
     }
@@ -84,7 +78,7 @@ private:
      * 对于平凡可复制类型，不需要初始化缓冲区。
      */
     template <typename U = value_type, enable_if_t<is_trivially_copy_assignable_v<U>, int> = 0>
-    MSTL_CONSTEXPR20 void initialize_buffer(const U& val) noexcept {}
+    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void initialize_buffer(const U& val) noexcept {}
 
     /**
      * @brief 初始化缓冲区（非平凡可复制类型）
@@ -95,8 +89,8 @@ private:
      * 对于非平凡可复制类型，使用未初始化填充算法初始化缓冲区。
      */
     template <typename U = value_type, enable_if_t<!is_trivially_copy_assignable_v<U>, int> = 0>
-    MSTL_CONSTEXPR20 void initialize_buffer(const U& val) {
-        _MSTL uninitialized_fill_n(buffer_pir_.value, len_, val);
+    MSTL_ALWAYS_INLINE MSTL_CONSTEXPR20 void initialize_buffer(const U& val) {
+        _MSTL uninitialized_fill_n(buffer_, len_, val);
     }
 
 public:
@@ -120,8 +114,8 @@ public:
             this->allocate_buffer();
             if (len_ > 0) this->initialize_buffer(*first);
         } catch (...) {
-            buffer_pir_.get_base().deallocate(buffer_pir_.value);
-            buffer_pir_.value = 0;
+            allocator_type::deallocate(buffer_);
+            buffer_ = 0;
             len_ = 0;
             throw;
         }
@@ -133,8 +127,8 @@ public:
      * 销毁缓冲区中的对象并释放内存。
      */
     MSTL_CONSTEXPR20 ~temporary_buffer() {
-        _MSTL destroy(buffer_pir_.value, buffer_pir_.value + len_);
-        buffer_pir_.get_base().deallocate(buffer_pir_.value);
+        _MSTL destroy(buffer_, buffer_ + len_);
+        allocator_type::deallocate(buffer_);
     }
 
     /**
@@ -158,7 +152,7 @@ public:
      * @return 指向缓冲区首元素的指针
      */
     MSTL_NODISCARD MSTL_CONSTEXPR20 pointer begin() noexcept {
-        return buffer_pir_.value;
+        return buffer_;
     }
 
     /**
@@ -166,7 +160,7 @@ public:
      * @return 指向缓冲区末尾的指针
      */
     MSTL_NODISCARD MSTL_CONSTEXPR20 pointer end() noexcept {
-        return buffer_pir_.value + len_;
+        return buffer_ + len_;
     }
 
     /**
@@ -174,7 +168,7 @@ public:
      * @return 指向缓冲区首元素的常量指针
      */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_pointer cbegin() const noexcept {
-        return buffer_pir_.value;
+        return buffer_;
     }
 
     /**
@@ -182,7 +176,7 @@ public:
      * @return 指向缓冲区末尾的常量指针
      */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_pointer cend() const noexcept {
-        return buffer_pir_.value + len_;
+        return buffer_ + len_;
     }
 
     /**

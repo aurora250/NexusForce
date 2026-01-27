@@ -428,7 +428,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 	Task job([task] { (*task)(); });
 
 	if (priority > 0) {
-		_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+		_MSTL smart_lock<_MSTL mutex> lock(task_queue_mtx_);
 
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 			return task_queue_.size() < task_threshhold_;
@@ -454,7 +454,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 			ctx->queue.push_back(move(job));
 			++total_submitted_tasks_;
 		} else {
-			_MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+			_MSTL smart_lock<_MSTL mutex> lock(task_queue_mtx_);
 			if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 				return task_queue_.size() < task_threshhold_;
 			})) {

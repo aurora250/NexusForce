@@ -196,7 +196,7 @@ static void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
     if (ntdll) {
-        using RtlGetVersionPtr = ::NTSTATUS(WINAPI*)(::LPOSVERSIONINFOW);
+        using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
         const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(
             ::GetProcAddress(ntdll, "RtlGetVersion"));
 
@@ -296,7 +296,7 @@ static void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
 
 sysinfo::sysinfo() {
     try {
-        lock_guard<mutex> lock(sysinfo_mutex());
+        lock<mutex> lock(sysinfo_mutex());
         init();
     } catch (...) {
         initialized_.store(false);
@@ -461,7 +461,7 @@ void sysinfo::init() {
 }
 
 void sysinfo::refresh() {
-    lock_guard<mutex> lock(sysinfo_mutex());
+    lock<mutex> lock(sysinfo_mutex());
     initialized_.store(false, memory_order_release);
     init();
 }

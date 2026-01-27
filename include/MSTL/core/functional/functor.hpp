@@ -8,7 +8,7 @@
  * 此文件提供了各种仿函数的实现，包括算术运算、比较运算、选择运算等。
  */
 
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

@@ -47,7 +47,7 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
     result.bytes_transferred = bytes_transferred;
     result.error_code = 0;
 
-    lock_guard<mutex> lock(async_mutex_);
+    _MSTL lock<mutex> lk(async_mutex_);
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (result.cb) {
@@ -378,7 +378,7 @@ file& file::operator =(file&& other) noexcept {
 file::~file() {
     unmap();
 
-    lock_guard<mutex> lock(async_mutex_);
+    _MSTL lock<mutex> lk(async_mutex_);
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     for (auto* ov : async_operations_) {
@@ -1086,7 +1086,7 @@ file::async_result file::async_read(
             result.cb = context->cb;
             result.user_context = context;
 
-            lock_guard<mutex> lock(async_mutex_);
+            _MSTL lock<mutex> lock(async_mutex_);
             async_operations_.push_back(context->cb);
             async_contexts_[context->cb] = context;
         } else {
@@ -1121,7 +1121,7 @@ file::async_result file::async_read(
         result.cb = context->cb;
         result.user_context = context;
 
-        lock_guard<mutex> lock(async_mutex_);
+        _MSTL lock<mutex> lock(async_mutex_);
         async_operations_.push_back(context->cb);
         async_contexts_[context->cb] = context;
     } else {
@@ -1183,7 +1183,7 @@ file::async_result file::async_write(string data,
             result.cb = context->cb;
             result.user_context = context;
 
-            lock_guard<mutex> lock(async_mutex_);
+            _MSTL lock<mutex> lock(async_mutex_);
             async_operations_.push_back(context->cb);
             async_contexts_[context->cb] = context;
         } else {
@@ -1214,7 +1214,7 @@ file::async_result file::async_write(string data,
         result.cb = context->cb;
         result.user_context = context;
 
-        lock_guard<mutex> lock(async_mutex_);
+        _MSTL lock<mutex> lock(async_mutex_);
         async_operations_.push_back(context->cb);
         async_contexts_[context->cb] = context;
     } else {
@@ -1303,7 +1303,7 @@ bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
 
 void file::cancel_async(async_result& result) {
     if (result.completed) return;
-    lock_guard<mutex> lock(async_mutex_);
+    _MSTL lock<mutex> lock(async_mutex_);
     if (!result.cb) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -1908,7 +1908,7 @@ bool file::prefetch(const size_type hint_size) const noexcept {
         ::WIN32_MEMORY_RANGE_ENTRY range{pView, region_size};
         const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
         if (hKernel32) {
-            typedef ::BOOL(WINAPI* PFN_PrefetchVirtualMemory)(
+            using PFN_PrefetchVirtualMemory = ::BOOL(__stdcall*)(
                 ::HANDLE hProcess,
                 ::ULONG_PTR NumberOfEntries,
                 ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses,
@@ -2268,7 +2268,7 @@ bool file::unlock_whole() const noexcept {
 
 bool file::map(size_type offset, size_type size,
     const FILE_ACCESS access, const FILE_MAP_HINT hint) {
-    lock_guard<mutex> lock(map_mutex_);
+    _MSTL lock<mutex> lock(map_mutex_);
 
     if (mapped_ptr_) {
         unmap();
@@ -2376,7 +2376,7 @@ bool file::map(size_type offset, size_type size,
 
     const ::HMODULE hKernel32 = ::GetModuleHandleA("kernel32.dll");
     if (hKernel32) {
-        typedef ::BOOL(WINAPI* PFN_PrefetchVirtualMemory)(
+        using PFN_PrefetchVirtualMemory = ::BOOL(__stdcall*)(
             ::HANDLE hProcess,
             ::ULONG_PTR NumberOfEntries,
             ::PWIN32_MEMORY_RANGE_ENTRY VirtualAddresses,
@@ -2488,7 +2488,7 @@ bool file::map(size_type offset, size_type size,
 }
 
 void file::unmap() noexcept {
-    lock_guard<mutex> lock(map_mutex_);
+    _MSTL lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) return;
 
@@ -2533,7 +2533,7 @@ void file::unmap() noexcept {
 }
 
 bool file::remap(const size_type new_offset, const size_type new_size) {
-    lock_guard<mutex> lock(map_mutex_);
+    _MSTL lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
         return map(new_offset, new_size, mapped_access_);
@@ -2544,7 +2544,7 @@ bool file::remap(const size_type new_offset, const size_type new_size) {
 }
 
 bool file::flush_mapped(const bool async) {
-    lock_guard<mutex> lock(map_mutex_);
+    _MSTL lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
         last_error_code_ = EINVAL;
@@ -2634,7 +2634,7 @@ bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
 }
 
 file::map_info file::map_infos() const noexcept {
-    lock_guard<mutex> lock(map_mutex_);
+    _MSTL lock<mutex> lock(map_mutex_);
 
     map_info info;
     info.address = mapped_ptr_;

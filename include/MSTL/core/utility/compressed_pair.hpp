@@ -9,8 +9,7 @@
  * 当第一个类型为空时进行存储优化，减少内存占用。
  */
 
-#include "../interface/icommon.hpp"
-#include "../typeinfo/tags.hpp"
+#include "MSTL/core/interface/icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

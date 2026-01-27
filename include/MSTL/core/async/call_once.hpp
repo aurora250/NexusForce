@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_ASYNC_CALL_ONCE_HPP__
 #define MSTL_CORE_ASYNC_CALL_ONCE_HPP__
-#include "../functional/invoke.hpp"
+#include "MSTL/core/functional/invoke.hpp"
 #include "mutex.hpp"
 #include "atomic.hpp"
 MSTL_BEGIN_NAMESPACE__
@@ -27,7 +27,7 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     if (flag.state_.load(memory_order_acquire)) {
         return;
     }
-    lock_guard<mutex> lock(flag.mtx_);
+    lock<mutex> lock(flag.mtx_);
     if (!flag.state_.load(memory_order_relaxed)) {
         _MSTL invoke<Callable, Args...>(_MSTL forward<Callable>(func), _MSTL forward<Args>(args)...);
         flag.state_.store(true, memory_order_release);

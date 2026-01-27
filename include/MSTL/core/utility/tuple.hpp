@@ -8,8 +8,7 @@
  * 此文件提供了元组及其辅助函数的实现。
  */
 
-#include "../functional/hash.hpp"
-#include "pair.hpp"
+#include "MSTL/core/utility/pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /// @cond

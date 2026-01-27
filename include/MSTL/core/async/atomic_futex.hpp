@@ -1,23 +1,20 @@
 #ifndef MSTL_CORE_ASYNC_ATOMIC_FUTEX_HPP__
 #define MSTL_CORE_ASYNC_ATOMIC_FUTEX_HPP__
-#include "atomic_futex_base.hpp"
-#include "atomic.hpp"
+#include "MSTL/core/async/atomic.hpp"
+#include "MSTL/core/time/clocks.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <unsigned WaiterBit = 0x80000000>
-class atomic_futex : atomic_futex_base {
-    using clock_t = steady_clock;
+template <uint32_t WaiterBit = 0x80000000>
+class atomic_futex {
+    atomic<uint32_t> data_;
 
-    atomic<unsigned> data_;
-
-	unsigned load_and_test_until(unsigned assumed, const unsigned operand,
+	uint32_t load_and_test_until(uint32_t assumed, const uint32_t operand,
 	    const bool equal, const memory_order mo, const bool has_timeout,
-	    const seconds sec, const nanoseconds ns) {
+	    const int64_t sec, const int64_t ns) {
 		for (;;) {
 			data_.fetch_or(WaiterBit, memory_order_relaxed);
-			const bool ret = futex_wait_until(
-				static_cast<unsigned*>(static_cast<void*>(&data_)),
-				assumed | WaiterBit, has_timeout, sec, ns);
+			const bool ret = _MSTL futex_wait_until(
+				&data_, assumed | WaiterBit, has_timeout, sec, ns);
 			assumed = load(mo);
 			if (!ret || ((operand == assumed) == equal)) {
 				return assumed;
@@ -25,14 +22,13 @@ class atomic_futex : atomic_futex_base {
 		}
 	}
 
-	unsigned load_and_test_until_steady(unsigned assumed, const unsigned operand,
+	uint32_t load_and_test_until_steady(uint32_t assumed, const uint32_t operand,
 	    const bool equal, const memory_order mo, const bool has_timeout,
-	    const seconds sec, const nanoseconds ns) {
+	    const int64_t sec, const int64_t ns) {
 		for (;;) {
 			data_.fetch_or(WaiterBit, memory_order_relaxed);
-			const bool ret = futex_wait_until_steady(
-				static_cast<unsigned*>(static_cast<void*>(&data_)),
-				assumed | WaiterBit, has_timeout, sec, ns);
+			const bool ret = _MSTL futex_wait_until_steady(
+				&data_, assumed | WaiterBit, has_timeout, sec, ns);
 			assumed = load(mo);
 			if (!ret || ((operand == assumed) == equal)) {
 				return assumed;
@@ -40,44 +36,45 @@ class atomic_futex : atomic_futex_base {
 		}
 	}
 
-	unsigned load_and_test(const unsigned assumed, const unsigned operand,
+	uint32_t load_and_test(const uint32_t assumed, const uint32_t operand,
 	    const bool equal, const memory_order mo) {
-		return load_and_test_until(assumed, operand, equal, mo, false, {}, {});
+		return load_and_test_until(
+			assumed, operand, equal, mo, false, 0, 0);
 	}
 
 	template <typename Dur>
-	unsigned load_and_test_until_impl(unsigned assumed, unsigned operand,
+	uint32_t load_and_test_until_impl(uint32_t assumed, uint32_t operand,
 	    bool equal, memory_order mo,
 	    const time_point<system_clock, Dur>& atime) {
-		auto sec = time_point_cast<seconds>(atime);
-		auto ns = duration_cast<nanoseconds>(atime - sec);
+		auto sec = atime.to_sec();
+		const auto ns = nanoseconds(atime - sec).count();
 		return this->load_and_test_until(
 			assumed, operand, equal, mo,
-			true, sec.time_since_epoch(), ns);
+			true, sec.since_epoch().count(), ns);
 	}
 
 	template <typename Dur>
-	unsigned load_and_test_until_impl(unsigned assumed, unsigned operand,
+	uint32_t load_and_test_until_impl(uint32_t assumed, uint32_t operand,
 	    bool equal, memory_order mo,
 	    const time_point<steady_clock, Dur>& atime) {
-		auto sec = time_point_cast<seconds>(atime);
-		auto ns = duration_cast<nanoseconds>(atime - sec);
+		auto sec = atime.to_sec();
+		const auto ns = nanoseconds(atime - sec).count();
 		return this->load_and_test_until_steady(
 			assumed, operand, equal, mo,
-		    true, sec.time_since_epoch(), ns);
+		    true, sec.since_epoch().count(), ns);
 	}
 
 public:
-	explicit atomic_futex(const unsigned data) : data_(data) {}
+	explicit atomic_futex(const uint32_t data) : data_(data) {}
 
-	MSTL_NODISCARD MSTL_ALWAYS_INLINE unsigned
+	MSTL_NODISCARD MSTL_ALWAYS_INLINE uint32_t
     load(const memory_order mo) const {
 		return data_.load(mo) & ~WaiterBit;
 	}
 	
-	MSTL_ALWAYS_INLINE unsigned
-	load_when_not_equal(const unsigned value, const memory_order mo) {
-		const unsigned old = load(mo);
+	MSTL_ALWAYS_INLINE uint32_t
+	load_when_not_equal(const uint32_t value, const memory_order mo) {
+		const uint32_t old = load(mo);
 		if ((old & ~WaiterBit) != value) {
 			return (old & ~WaiterBit);
 		}
@@ -85,8 +82,8 @@ public:
 	}
 
 	MSTL_ALWAYS_INLINE void
-	load_when_equal(const unsigned value, const memory_order mo) {
-		const unsigned old = load(mo);
+	load_when_equal(const uint32_t value, const memory_order mo) {
+		const uint32_t old = load(mo);
 		if ((old & ~WaiterBit) == value) {
 			return;
 		}
@@ -95,20 +92,19 @@ public:
 
 	template <typename Rep, typename Period>
 	MSTL_ALWAYS_INLINE bool
-	load_when_equal_for(const unsigned value, const memory_order mo,
+	load_when_equal_for(const uint32_t value, const memory_order mo,
 		const duration<Rep, Period>& rtime) {
-		const auto atime = clock_t::now() + ceil<clock_t::duration>(rtime);
+		const auto atime = steady_clock::now() + ceil<steady_clock::duration>(rtime);
 		return this->load_when_equal_until(value, mo, atime);
 	}
 
 	template <typename Clock, typename Dur>
 	MSTL_ALWAYS_INLINE bool
-	load_when_equal_until(const unsigned value, const memory_order mo,
+	load_when_equal_until(const uint32_t value, const memory_order mo,
 		const time_point<Clock, Dur>& atime) {
 		auto now = Clock::now();
 		do {
-			const auto s_atime = clock_t::now() +
-				ceil<clock_t::duration>(atime - now);
+			const auto s_atime = steady_clock::now() + ceil<steady_clock::duration>(atime - now);
 			if (this->load_when_equal_until(value, mo, s_atime)) {
 				return true;
 			}
@@ -119,9 +115,9 @@ public:
 
 	template <typename Dur>
 	MSTL_ALWAYS_INLINE bool
-	load_when_equal_until(const unsigned value, const memory_order mo,
+	load_when_equal_until(const uint32_t value, const memory_order mo,
 	    const time_point<system_clock, Dur>& atime) {
-		unsigned old = load(mo);
+		uint32_t old = load(mo);
 		if ((old & ~WaiterBit) == value) {
 			return true;
 		}
@@ -131,9 +127,9 @@ public:
 
 	template <typename Dur>
 	MSTL_ALWAYS_INLINE bool
-	load_when_equal_until(const unsigned value, const memory_order mo,
+	load_when_equal_until(const uint32_t value, const memory_order mo,
 	    const time_point<steady_clock, Dur>& atime) {
-		unsigned old = load(mo);
+		uint32_t old = load(mo);
 		if ((old & ~WaiterBit) == value) {
 			return true;
 		}
@@ -141,10 +137,10 @@ public:
 		return (old & ~WaiterBit) == value;
 	}
 
-	MSTL_ALWAYS_INLINE void store_notify_all(const unsigned value, const memory_order mo) {
-        const auto futex = static_cast<unsigned*>(static_cast<void*>(&data_));
+	MSTL_ALWAYS_INLINE void store_notify_all(const uint32_t value, const memory_order mo) {
+        const auto futex = static_cast<uint32_t*>(static_cast<void*>(&data_));
 		if (data_.exchange(value, mo) & WaiterBit) {
-			futex_notify_all(futex);
+			_MSTL futex_notify(futex, true);
 		}
 	}
 };

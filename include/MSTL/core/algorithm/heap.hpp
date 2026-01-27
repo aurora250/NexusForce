@@ -8,8 +8,8 @@
  * 此文件提供了堆算法实现，用于在随机访问容器上创建和操作二叉堆数据结构。
  */
 
-#include "../functional/functor.hpp"
-#include "iterator.hpp"
+#include "MSTL/core/functional/functor.hpp"
+#include "MSTL/core/algorithm/iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

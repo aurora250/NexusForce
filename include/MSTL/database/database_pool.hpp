@@ -59,7 +59,7 @@ public:
 
 template <typename T>
 _MSTL shared_ptr<T> database_pool::get_connect_impl() {
-    _MSTL unique_lock<_MSTL mutex> lock(queue_mtx_);
+    _MSTL smart_lock<_MSTL mutex> lock(queue_mtx_);
 
     while (connect_queue_.empty() && running_) {
         if (cv_.wait_for(lock, milliseconds(connect_timeout_)) == _MSTL cv_status::timeout) {
@@ -100,7 +100,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
     auto conn_ptr = _MSTL shared_ptr<T>(
         dynamic_cast<T*>(raw_conn),
         [this](T* p) {
-            _MSTL unique_lock<_MSTL mutex> lock1(queue_mtx_);
+            _MSTL lock<_MSTL mutex> lock1(queue_mtx_);
             if (p->is_valid()) {
                 p->refresh_alive();
                 connect_queue_.push(p);

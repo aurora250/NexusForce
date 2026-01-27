@@ -9,7 +9,7 @@
  * 用于在已排序的序列上执行集合操作，如并集、交集、差集和对称差集。
  */
 
-#include "shift.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

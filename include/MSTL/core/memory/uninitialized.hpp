@@ -9,8 +9,8 @@
  * 用于在未初始化的内存区域上进行构造、复制、移动和填充操作。
  */
 
-#include "../algorithm/shift.hpp"
-#include "construct.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
+#include "MSTL/core/memory/construct.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

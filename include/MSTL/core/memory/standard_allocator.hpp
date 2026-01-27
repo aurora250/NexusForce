@@ -9,11 +9,24 @@
  * 用于管理动态内存分配和释放，支持不同对齐要求和编译器优化。
  */
 
-#include "../numeric/numeric_traits.hpp"
-#include "../exception/exception.hpp"
-#include "../exception/assertion.hpp"
+#include "MSTL/core/exception/exception.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
+
+/**
+ * @struct allocate_exception
+ * @extends memory_exception
+ * @brief 内存分配异常
+ */
+MSTL_ERROR_BUILD_FINAL_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
+
+/** @} */ // Exceptions
 
 /**
  * @defgroup MemoryAllocator 内存分配器
@@ -171,8 +184,7 @@ MSTL_END_INNER__
  * @param bytes 要分配的字节数
  * @return 分配的内存指针，如果bytes为0则返回nullptr
  *
- * 内存分配的统一入口，根据C++标准版本选择不同的实现。
- * 支持编译期常量求值优化。
+ * 内存分配的统一入口。
  */
 template <size_t Align>
 MSTL_ALLOC_OPTIMIZE MSTL_CONSTEXPR20 void* allocate(const _INNER alloc_size_t bytes) {
@@ -273,8 +285,7 @@ MSTL_END_INNER__
  * @param ptr 要释放的内存指针
  * @param bytes 要释放的字节数
  *
- * 内存释放的统一入口，根据C++标准版本选择不同的实现。
- * 支持编译期常量求值优化。
+ * 内存释放的统一入口。
  */
 template <size_t Align>
 MSTL_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexcept {
@@ -350,10 +361,10 @@ public:
      *
      * 分配 n 个 T 类型的连续内存空间。
      */
-    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE static pointer allocate(const size_type n) {
         const size_type alloc_size = VALUE_SIZE * n;
         MSTL_DEBUG_VERIFY(
-            alloc_size <= numeric_traits<size_type>::max(),
+            alloc_size <= static_cast<size_type>(-1),
             "allocation will cause memory overflow.");
         try {
             return static_cast<T*>(_MSTL allocate<FINAL_ALIGN_SIZE>(alloc_size));
@@ -368,7 +379,7 @@ public:
      * @return 指向分配内存的指针
      * @throws allocate_exception 如果内存分配失败
      */
-    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE pointer allocate() {
+    MSTL_ALLOC_NODISCARD MSTL_CONSTEXPR20 MSTL_ALLOC_OPTIMIZE static pointer allocate() {
         return standard_allocator::allocate(1);
     }
 
@@ -378,7 +389,7 @@ public:
      * @param n 先前分配的元素数量
      * @note p 必须为 nullptr 或先前由 allocate() 返回的指针
      */
-    MSTL_CONSTEXPR20 void deallocate(pointer p, const size_type n) noexcept {
+    MSTL_CONSTEXPR20 static void deallocate(pointer p, const size_type n) noexcept {
         MSTL_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
         _MSTL deallocate<FINAL_ALIGN_SIZE>(p, n * VALUE_SIZE);
     }
@@ -387,7 +398,7 @@ public:
      * @brief 释放单个元素内存
      * @param p 要释放的内存指针
      */
-    MSTL_CONSTEXPR20 void deallocate(pointer p) noexcept {
+    MSTL_CONSTEXPR20 static void deallocate(pointer p) noexcept {
         standard_allocator::deallocate(p, 1);
     }
 };

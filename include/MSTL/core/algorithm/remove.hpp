@@ -9,7 +9,8 @@
  * 用于从序列中移除满足特定条件的元素。
  */
 
-#include "search.hpp"
+#include "MSTL/core/algorithm/search.hpp"
+#include "MSTL/core/utility/reference_wrapper.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

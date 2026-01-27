@@ -9,7 +9,7 @@
  * 以及基本数据类型的哈希函数特化。支持编译时哈希计算和运行时高效哈希。
  */
 
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

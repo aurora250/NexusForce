@@ -9,10 +9,10 @@
  * 包括多种排序算法、排序检查和部分排序功能。
  */
 
-#include "merge.hpp"
-#include "heap.hpp"
-#include "partition.hpp"
-#include "compare.hpp"
+#include "MSTL/core/algorithm/merge.hpp"
+#include "MSTL/core/algorithm/heap.hpp"
+#include "MSTL/core/algorithm/partition.hpp"
+#include "MSTL/core/algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

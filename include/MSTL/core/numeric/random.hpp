@@ -9,7 +9,7 @@
  * 包括线性同余法、梅森旋转算法和硬件真随机数生成器。
  */
 
-#include "../numeric/numeric_traits.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

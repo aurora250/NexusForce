@@ -8,8 +8,8 @@
  * 此文件提供了元组应用函数的实现，用于将元组中的元素解包作为参数调用函数。
  */
 
-#include "../utility/tuple.hpp"
-#include "invoke.hpp"
+#include "MSTL/core/utility/tuple.hpp"
+#include "MSTL/core/functional/invoke.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /// @cond
@@ -43,8 +43,8 @@ MSTL_END_INNER__
 /// @endcond
 
 /**
- * @defgroup ApplyFunction 元组应用函数
- * @brief 将元组元素解包作为参数调用的主函数
+ * @defgroup Tuple 元组
+ * @brief 元组的主模板、特化实现和辅助函数
  * @{
  */
 
@@ -66,7 +66,7 @@ noexcept(_INNER __apply_unpack_tuple<_MSTL is_nothrow_invocable, Func, Tuple>::v
     return _INNER __apply_impl(_MSTL forward<Func>(f), _MSTL forward<Tuple>(t), Indices{});
 }
 
-/** @} */ // ApplyFunction
+/** @} */ // Tuple
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FUNCTIONAL_APPLY_HPP__

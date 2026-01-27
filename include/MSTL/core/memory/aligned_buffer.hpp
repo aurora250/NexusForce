@@ -9,7 +9,7 @@
  * 适用于需要在栈上分配对齐内存的场景，如小型对象优化等。
  */
 
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

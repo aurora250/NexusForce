@@ -98,7 +98,7 @@ _MSTL optional<_MSTL function<void()>> local_queue::try_pop() {
         const auto cur_local_head = pir.second;
 
         if (cur_local_head == tail_.load(_MSTL memory_order_acquire)) {
-            return _MSTL nullopt;
+            return _MSTL none;
         }
 
         const auto next_local_head = cur_local_head + 1;
@@ -118,7 +118,7 @@ _MSTL optional<_MSTL function<void()>> local_queue::try_pop() {
 }
 
 _MSTL optional<_MSTL function<void()>> local_queue::be_stolen_by(local_queue& dst_queue) {
-    _MSTL optional<_MSTL function<void()>> result{_MSTL nullopt};
+    _MSTL optional<_MSTL function<void()>> result{_MSTL none};
 
     const auto dst_steal = local_queue::unpack(dst_queue.head_.load(_MSTL memory_order_acquire)).first;
     const auto dst_tail = dst_queue.tail_.load(_MSTL memory_order_acquire);
@@ -211,7 +211,7 @@ void thread_pool::thread_function(const id_type thread_id) {
     ctx.id = thread_id;
 
     {
-        _MSTL lock_guard<_MSTL mutex> lock(worker_contexts_mtx_);
+        _MSTL lock<_MSTL mutex> lock(worker_contexts_mtx_);
         worker_contexts_.emplace(thread_id, _MSTL move(ctx));
         if (thread_id < worker_contexts_ptr_.size()) {
             worker_contexts_ptr_[thread_id].store(
@@ -221,14 +221,14 @@ void thread_pool::thread_function(const id_type thread_id) {
     }
 
     t_worker_ctx = &worker_contexts_[thread_id];
-    auto last = high_resolution_clock::now();
+    auto last = system_clock::now();
 
     constexpr size_t MIN_WAIT_MS = 1;      // 最小等待 1ms
     constexpr size_t MAX_WAIT_MS = 100;    // 最大等待 100ms
     constexpr size_t MAX_IDLE_SHIFT = 7;   // 最多 2^7 = 128 倍
 
     for (;;) {
-        _MSTL optional<Task> task = _MSTL nullopt;
+        _MSTL optional<Task> task = _MSTL none;
 
         // 从本地队列获取任务
         if (!t_worker_ctx->queue.empty()) {
@@ -237,7 +237,7 @@ void thread_pool::thread_function(const id_type thread_id) {
 
         // 从全局队列获取任务
         if (!task) {
-            _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+            _MSTL lock<_MSTL mutex> lock(task_queue_mtx_);
             if (!task_queue_.empty()) {
                 task = task_queue_.top().task;
                 task_queue_.pop();
@@ -258,7 +258,7 @@ void thread_pool::thread_function(const id_type thread_id) {
             (*task)();
             ++total_completed_tasks_;
             ++idle_thread_size_;
-            last = high_resolution_clock::now();
+            last = system_clock::now();
         } else {
             ++t_worker_ctx->consecutive_idle_count;
 
@@ -266,7 +266,7 @@ void thread_pool::thread_function(const id_type thread_id) {
             const size_t shift = _MSTL min(t_worker_ctx->consecutive_idle_count, MAX_IDLE_SHIFT);
             size_t wait_ms = _MSTL min(MIN_WAIT_MS << shift, MAX_WAIT_MS);
 
-            _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+            _MSTL smart_lock<_MSTL mutex> lock(task_queue_mtx_);
 
             if (!is_running_) {
                 --idle_thread_size_;
@@ -276,7 +276,7 @@ void thread_pool::thread_function(const id_type thread_id) {
                 }
 
                 {
-                    _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
+                    _MSTL lock<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
                     worker_contexts_.erase(thread_id);
                 }
 
@@ -289,11 +289,11 @@ void thread_pool::thread_function(const id_type thread_id) {
             if (not_empty_.wait_for(lock, milliseconds(wait_ms), [this] {
                 return !is_running_ || !task_queue_.empty();
             })) {
-                last = high_resolution_clock::now();
+                last = system_clock::now();
             } else if (pool_mode_ == THREAD_POOL_MODE::MODE_CACHED) {
                 if (_MSTL cv_status::timeout == not_empty_.wait_for(lock, seconds(1))) {
-                    auto now = high_resolution_clock::now();
-                    const auto sub = duration_cast<seconds>(now - last);
+                    auto now = system_clock::now();
+                    const auto sub = time_cast<seconds>(now - last);
 
                     if (sub.count() >= THREAD_POOL_MAX_IDLE_SECONDS
                         && threads_map_.size() > init_thread_size_) {
@@ -302,7 +302,7 @@ void thread_pool::thread_function(const id_type thread_id) {
                             worker_contexts_ptr_[thread_id].store(nullptr, _MSTL memory_order_release);
                         }
                         {
-                            _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
+                            _MSTL lock<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
                             worker_contexts_.erase(thread_id);
                         }
 
@@ -319,10 +319,10 @@ void thread_pool::thread_function(const id_type thread_id) {
 
 optional<thread_pool::Task> thread_pool::try_steal_task(worker_context& ctx) {
     if (ctx.consecutive_idle_count > 10 && ctx.consecutive_idle_count % 4 != 0) {
-        return nullopt;
+        return none;
     }
     if (steal_worker_count_.load(memory_order_acquire) >= worker_contexts_ptr_.size() / 2) {
-        return nullopt;
+        return none;
     }
 
     steal_worker_count_.fetch_add(1, memory_order_release);
@@ -332,7 +332,7 @@ optional<thread_pool::Task> thread_pool::try_steal_task(worker_context& ctx) {
     worker_context* target = nullptr;
 
     {
-        lock_guard<mutex> lock(worker_contexts_mtx_);
+        lock<mutex> lock(worker_contexts_mtx_);
 
         for (size_t i = 0; i < worker_contexts_ptr_.size(); ++i) {
             worker_context* other = worker_contexts_ptr_[i].load(memory_order_acquire);
@@ -352,7 +352,7 @@ optional<thread_pool::Task> thread_pool::try_steal_task(worker_context& ctx) {
         }
     }
 
-    optional<Task> result = nullopt;
+    optional<Task> result = none;
 
     if (target != nullptr && max_size > 0) {
         result = target->queue.be_stolen_by(ctx.queue);
@@ -421,7 +421,7 @@ bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
 }
 
 thread_pool::pool_statistics thread_pool::statistics() const {
-    _MSTL unique_lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(task_queue_mtx_));
+    _MSTL lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(task_queue_mtx_));
     return statistics_unsafe();
 }
 
@@ -429,7 +429,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     if(is_running_) return false;
 
     {
-        _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
+        _MSTL lock<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
         worker_contexts_.clear();
     }
 
@@ -470,7 +470,7 @@ thread_pool::pool_statistics thread_pool::stop() {
     is_running_ = false;
 
     {
-        _MSTL unique_lock<_MSTL mutex> lock(task_queue_mtx_);
+        _MSTL smart_lock<_MSTL mutex> lock(task_queue_mtx_);
         not_empty_.notify_all();
         exit_cond_.wait(lock, [&] { return threads_map_.empty(); });
 
@@ -479,7 +479,7 @@ thread_pool::pool_statistics thread_pool::stop() {
         }
         task_size_ = 0;
 
-        _MSTL lock_guard<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
+        _MSTL lock<_MSTL mutex> ctx_lock(worker_contexts_mtx_);
         worker_contexts_.clear();
     }
 

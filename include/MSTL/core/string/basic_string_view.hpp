@@ -2,6 +2,7 @@
 #define MSTL_CORE_STRING_BASIC_STRING_VIEW_HPP__
 #include "../iterator/reverse_iterator.hpp"
 #include "char_traits.hpp"
+#include "char_types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename Traits = char_traits<CharT>>

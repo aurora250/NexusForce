@@ -109,13 +109,6 @@ private:
     void initialize_platform();
     void cleanup_platform() const;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
-    static BOOL WINAPI windows_handler(DWORD event);
-#else
-    static void posix_handler(int sig);
-    static void alarm_handler(int sig);
-#endif
-
     void signal_thread_func();
     void timeout_monitor_thread();
 

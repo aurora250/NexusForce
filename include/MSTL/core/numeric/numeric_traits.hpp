@@ -8,9 +8,15 @@
  * 此文件提供了数值类型的数值范围、精度、特殊值等特性信息。
  */
 
-#include "../typeinfo/types.hpp"
-#include "../typeinfo/type_traits.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
+#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -625,16 +631,6 @@ public:
 template <>
 class numeric_traits<decimal_t> : public numeric_traits<float64_t> {};
 #endif
-
-
-/**
- * @brief 解包类型的数值特征特化
- * @tparam T 解包类型
- *
- * 对于已包装的类型，提供其底层类型的数值特征。
- */
-template <typename T>
-class numeric_traits<T, enable_if_t<is_unpackaged<T>::value>> : public numeric_traits<unpackage_t<T>> {};
 
 /** @} */ // NumericTraits
 

@@ -1,9 +1,37 @@
 #ifndef MSTL_CORE_ALGORITHM_PARALLEL_HPP__
 #define MSTL_CORE_ALGORITHM_PARALLEL_HPP__
-#include "../async/thread.hpp"
-#include "iterator.hpp"
+
+/**
+ * @file parallel.hpp
+ * @brief MSTL并行算法
+ *
+ * 此文件提供了并行版本的算法，利用多线程加速计算。
+ */
+
+#include "MSTL/core/async/thread.hpp"
+#include "MSTL/core/algorithm/iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup ParallelAlgorithms 并行算法
+ * @brief 并行计算算法
+ * @{
+ */
+
+/**
+ * @brief 并行归约操作
+ * @tparam Iterator 迭代器类型
+ * @tparam BinaryOperation 二元操作类型
+ * @tparam Result 结果类型
+ * @tparam Threshhold 并行阈值，小于等于此值时使用串行算法
+ * @param first 范围的起始迭代器
+ * @param last 范围的结束迭代器
+ * @param op 归约操作的二元函数
+ * @param res 归约结果的引用
+ *
+ * 使用分治法的并行归约算法。将范围分成两半，分别在不同线程中计算，最后合并结果。
+ * 当元素数量小于阈值时，使用串行算法。
+ */
 template <typename Iterator, typename BinaryOperation, typename Result,
     size_t Threshhold = 10, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
@@ -22,6 +50,22 @@ void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
     }
 }
 
+/**
+ * @brief 并行变换归约操作
+ * @tparam Iterator 迭代器类型
+ * @tparam UnaryOperation 一元变换操作类型
+ * @tparam BinaryOp 二元归约操作类型
+ * @tparam Result 结果类型
+ * @tparam Threshhold 并行阈值，小于等于此值时使用串行算法
+ * @param first 范围的起始迭代器
+ * @param last 范围的结束迭代器
+ * @param transform 变换操作的一元函数
+ * @param reduce 归约操作的二元函数
+ * @param res 归约结果的引用
+ *
+ * 先对每个元素应用变换操作，然后进行归约。使用分治法的并行算法。
+ * 当元素数量小于阈值时，使用串行算法。
+ */
 template <typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result,
     size_t Threshhold = 10, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, BinaryOp reduce, Result& res) {
@@ -40,6 +84,8 @@ void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, B
         res = reduce(res, reduce(l_res, r_res));
     }
 }
+
+/** @} */ // ParallelAlgorithms
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_PARALLEL_HPP__

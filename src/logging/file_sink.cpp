@@ -51,7 +51,7 @@ current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
 
 void file_sink::log(const log_event& event) {
     const string formatted = formatter_ ? formatter_->format(event) : default_format(event);
-    _MSTL lock_guard<_MSTL recursive_mutex> lock(mutex_);
+    _MSTL lock<_MSTL recursive_mutex> lock(mutex_);
     if (enable_date_rotation_) {
         const string today = datetime::now().date().to_string();
         if (today != current_date_) {
@@ -70,7 +70,7 @@ void file_sink::log(const log_event& event) {
 }
 
 void file_sink::flush() {
-    _MSTL lock_guard<_MSTL recursive_mutex> lock(mutex_);
+    _MSTL lock<_MSTL recursive_mutex> lock(mutex_);
     file_.flush();
 }
 

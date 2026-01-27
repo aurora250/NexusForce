@@ -191,7 +191,7 @@ struct __future_base {
         using PtrType = Ptr<result_base>;
 
     private:
-        enum status : unsigned {
+        enum status : uint32_t {
             not_ready,
             ready
         };

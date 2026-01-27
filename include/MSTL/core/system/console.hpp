@@ -95,7 +95,7 @@ public:
 
     template <typename... Args>
     void printf(const string_view fmt, Args&&... args) {
-        lock_guard<mutex> lock(mutex_);
+        lock<mutex> lock(mutex_);
         this->print_string_unsafe(_MSTL format(fmt, _MSTL forward<Args>(args)...));
     }
 

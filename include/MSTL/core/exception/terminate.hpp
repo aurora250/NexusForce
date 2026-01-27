@@ -9,7 +9,7 @@
  * 用于处理未捕获的异常和程序异常终止。
  */
 
-#include "../config/c++config.hpp"
+#include "MSTL/core/config/c++config.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -41,7 +41,14 @@ void MSTL_API set_terminate(terminate_handler handler) noexcept;
  *
  * @note 此函数不会返回，进程将在执行终止处理函数后终止。
  */
-MSTL_NORETURN void MSTL_API terminate() noexcept;
+MSTL_NORETURN void MSTL_API terminate();
+
+/**
+ * @brief 强制终止进程
+ *
+ * 强制终止调用进程，不会进行任何析构行为
+ */
+MSTL_NORETURN void MSTL_API abort();
 
 /** @} */ // TerminationFunctions
 

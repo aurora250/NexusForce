@@ -9,7 +9,7 @@
  * 包括基本数学运算、三角函数、对数函数、数值计算等常用数学功能。
  */
 
-#include "../exception/exception.hpp"
+#include "MSTL/core/exception/exception.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /// @cond
@@ -51,7 +51,7 @@ MSTL_INLINE17 constexpr uint64_t FIBONACCI_LIST[] = {
 	1134903170, 1836311903, 2971215073, 4807526976, 7778742049
 };
 
-MSTL_INLINE17 constexpr uint16_t FIBONACCI_COUNT = extent_v<decltype(FIBONACCI_LIST)>;   ///< 斐波那契数列预计算数量
+MSTL_INLINE17 constexpr uint32_t FIBONACCI_COUNT = extent_v<decltype(FIBONACCI_LIST)>;   ///< 斐波那契数列预计算数量
 
 /** @} */ // MathConstants
 
@@ -73,7 +73,7 @@ MSTL_END_CONSTANTS__
  * 如果n小于预计算的数量，直接返回预计算结果；
  * 否则递归计算。
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t fibonacci(const uint16_t n) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t fibonacci(const uint32_t n) {
 	if (n < _CONSTANTS FIBONACCI_COUNT) {
 		return _CONSTANTS FIBONACCI_LIST[n];
 	}
@@ -87,25 +87,31 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t fibonacci(const uint16_t n) {
  *
  * 莱昂纳多数：L(n) = 2 * F(n+1) - 1
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t leonardo(const uint16_t n) {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 uint64_t leonardo(const uint32_t n) {
 	return 2 * fibonacci(n + 1) - 1;
 }
 
 /**
  * @brief 角度转弧度
+ * @tparam T 运算类型
  * @param angular 角度值
  * @return 对应的弧度值
  */
-MSTL_PURE_FUNCTION constexpr decimal_t angular2radian(const decimal_t angular) noexcept {
+template <typename T>
+MSTL_PURE_FUNCTION constexpr T angular2radian(const T angular) noexcept {
+	static_assert(is_arithmetic_v<T>, "arithmetic required");
 	return angular * _CONSTANTS PI / _CONSTANTS SEMI_CIRCLE;
 }
 
 /**
  * @brief 弧度转角度
+ * @tparam T 运算类型
  * @param radian 弧度值
  * @return 对应的角度值
  */
-MSTL_PURE_FUNCTION constexpr decimal_t radian2angular(const decimal_t radian) noexcept {
+template <typename T>
+MSTL_PURE_FUNCTION constexpr T radian2angular(const T radian) noexcept {
+	static_assert(is_arithmetic_v<T>, "arithmetic required");
 	return radian * (_CONSTANTS SEMI_CIRCLE / _CONSTANTS PI);
 }
 
@@ -115,8 +121,9 @@ MSTL_PURE_FUNCTION constexpr decimal_t radian2angular(const decimal_t radian) no
  * @param x 原数值
  * @return 绝对值
  */
-template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
+template <typename T>
+MSTL_CONST_FUNCTION constexpr enable_if_t<is_signed_v<T>, T>
+absolute(const T x) noexcept {
 	return x > T(0) ? x : -x;
 }
 
@@ -126,8 +133,10 @@ MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
  * @param x 原数值
  * @return 原数值
  */
-template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
+
+template <typename T>
+MSTL_CONST_FUNCTION constexpr enable_if_t<is_unsigned_v<T>, T>
+absolute(const T x) noexcept {
 	return x;
 }
 
@@ -140,7 +149,7 @@ MSTL_CONST_FUNCTION constexpr T absolute(const T& x) noexcept {
  * 递归sum的终止位置
  */
 template <typename T>
-MSTL_CONST_FUNCTION constexpr T sum(const T& x) noexcept {
+MSTL_CONST_FUNCTION constexpr const T& sum(const T& x) noexcept {
 	return x;
 }
 
@@ -153,8 +162,7 @@ MSTL_CONST_FUNCTION constexpr T sum(const T& x) noexcept {
  * @return 所有参数的和
  */
 template <typename First, typename... Rests, enable_if_t<(sizeof...(Rests) > 0), int> = 0>
-MSTL_CONST_FUNCTION constexpr auto sum(First first, Rests... args)
-noexcept -> decltype(first + _MSTL sum(args...)) {
+MSTL_CONST_FUNCTION constexpr decltype(auto) sum(First first, Rests... args) {
 	return first + _MSTL sum(args...);
 }
 
@@ -165,8 +173,8 @@ noexcept -> decltype(first + _MSTL sum(args...)) {
  * @return 平均值
  */
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
-MSTL_CONST_FUNCTION constexpr decimal_t average(Args... args) noexcept {
-	return _MSTL sum(args...) * 1.0 / sizeof...(Args);
+MSTL_CONST_FUNCTION constexpr decltype(auto) average(Args... args) {
+	return _MSTL sum(args...) / sizeof...(Args);
 }
 
 /**
@@ -175,8 +183,9 @@ MSTL_CONST_FUNCTION constexpr decimal_t average(Args... args) noexcept {
  * @param value 原数值
  * @return 符号值：正数返回1，负数返回-1，零返回0
  */
-template <typename T, enable_if_t<is_arithmetic<T>::value, int> = 0>
-MSTL_CONSTEXPR14 int sign(const T& value) {
+template <typename T>
+MSTL_CONSTEXPR14 int sign(const T& value) noexcept {
+	static_assert(is_arithmetic_v<T>, "arithmetic required");
 	constexpr T zero = T(0);
 	if (value > zero) return 1;
 	if (value < zero) return -1;
@@ -184,44 +193,13 @@ MSTL_CONSTEXPR14 int sign(const T& value) {
 }
 
 /**
- * @brief 计算最大公约数（无符号数版本）
- * @tparam T 数值类型（必须无符号）
- * @param m 第一个数
- * @param n 第二个数
- * @return 最大公约数
- *
- * 使用欧几里得算法计算。
- */
-template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
-	while (n != 0) {
-		T t = m % n;
-		m = n;
-		n = t;
-	}
-	return m;
-}
-
-/**
- * @brief 计算最小公倍数（无符号数版本）
- * @tparam T 数值类型（必须无符号）
- * @param m 第一个数
- * @param n 第二个数
- * @return 最小公倍数
- */
-template <typename T, enable_if_t<is_unsigned<T>::value, int> = 0>
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
-	return m * n / _MSTL gcd(m, n);
-}
-
-/**
- * @brief 计算最大公约数（有符号数版本）
- * @tparam T 数值类型（必须有符号）
+ * @brief 计算最大公约数
+ * @tparam T 数值类型
  * @param m 第一个数
  * @param n 第二个数
  * @return 最大公约数
  */
-template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
+template <typename T>
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
 	T x = _MSTL absolute(m), y = _MSTL absolute(n);
 	constexpr T zero = T(0);
@@ -234,13 +212,13 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T gcd(const T& m, const T& n) noexcept {
 }
 
 /**
- * @brief 计算最小公倍数（有符号数版本）
- * @tparam T 数值类型（必须有符号）
+ * @brief 计算最小公倍数
+ * @tparam T 数值类型
  * @param m 第一个数
  * @param n 第二个数
  * @return 最小公倍数
  */
-template <typename T, enable_if_t<is_signed<T>::value, int> = 0>
+template <typename T>
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
 	return m * n / _MSTL gcd(m, n);
 }
@@ -248,42 +226,41 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
 
 /**
  * @brief 浮点数取模运算
+ * @tparam T 浮点类型
  * @param x 被除数
  * @param y 除数
  * @return x除以y的余数
  * @exception math_exception 当除数为0时抛出
  */
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 decimal_t float_mod(const decimal_t x, const decimal_t y) {
+template <typename T>
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T float_mod(const T x, const T y) {
+	static_assert(is_arithmetic_v<T>, "arithmetic required");
 	if (y == 0) throw_exception(math_exception("zero can not be dividend."));
-	const decimal_t result = x - static_cast<int>(x / y) * y;
+	const T result = x - static_cast<make_integer_t<sizeof(T)>>(x / y) * y;
 	return result;
 }
 
 /**
  * @brief 幂运算
  * @tparam T 底数类型
- * @tparam UT 指数类型
  * @param x 底数
  * @param n 指数
  * @return x的n次幂
  *
  * 使用快速幂算法实现。
  */
-template <typename T, typename UT, enable_if_t<conjunction<is_arithmetic<T>, is_integral<UT>>::value, int> = 0>
-MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T power(const T& x, UT n) noexcept {
-	constexpr UT zero = UT(0);
-	constexpr UT one = UT(1);
-	constexpr UT two = UT(2);
-
-	if (n == zero) return 1;
+template <typename T>
+MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T power(const T& x, uint32_t n) noexcept {
+	static_assert(is_arithmetic_v<T>, "arithmetic required");
+	if (n == 0) return 1;
 	T result(1);
 	T base = x;
-	while (n > zero) {
-		if (n % two == one) {
+	while (n > 0) {
+		if (n % 2 == 1) {
 			result *= base;
 		}
 		base *= base;
-		n /= two;
+		n /= 2;
 	}
 	return result;
 }
@@ -299,17 +276,20 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t exponential(const uint32_t n) noex
 
 /**
  * @brief 计算自然对数
+ * @tparam T 运算类型
  * @param x 真数
  * @return ln(x)
  *
  * 使用反正切泰勒展开计算。
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noexcept {
+template <typename T>
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 T logarithm_e(const T x) noexcept {
+	static_assert(is_floating_point_v<T>, "floating point required");
 	uint32_t N = _CONSTANTS TAYLOR_CONVERGENCE;
-	const decimal_t a = (x - 1) / (x + 1);
-	const decimal_t a_sqrt = a * a;
-	decimal_t nk = 2 * N + 1;
-	decimal_t y = 1.0 / nk;
+	const T a = (x - 1) / (x + 1);
+	const T a_sqrt = a * a;
+	T nk = 2 * N + 1;
+	T y = 1.0 / nk;
 	while (N--) {
 		nk -= 2;
 		y = 1.0 / nk + a_sqrt * y;
@@ -319,30 +299,40 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noe
 
 /**
  * @brief 计算任意底数的对数
+ * @tparam T 运算类型
  * @param x 真数
  * @param base 底数
  * @return 以base为底x的对数
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm(const decimal_t x, const uint32_t base) noexcept {
-	return logarithm_e(x) / logarithm_e(base);
+template <typename T>
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
+	const auto under = _MSTL logarithm_e(static_cast<float64_t>(base));
+	if (under == 0) {
+		throw_exception(math_exception("zero can not be dividend."));
+	}
+	return _MSTL logarithm_e(x) / under;
 }
 
 /**
  * @brief 计算以2为底的对数
+ * @tparam T 运算类型
  * @param x 真数
  * @return log₂(x)
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_2(const decimal_t x) noexcept {
-	return logarithm(x, 2);
+template <typename T>
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 T logarithm_2(const T x) {
+	return _MSTL logarithm(x, 2);
 }
 
 /**
  * @brief 计算以10为底的对数
+ * @tparam T 运算类型
  * @param x 真数
  * @return log₁₀(x)
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 decimal_t logarithm_10(const decimal_t x) noexcept {
-	return logarithm(x, 10);
+template <typename T>
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 T logarithm_10(const T x) {
+	return _MSTL logarithm(x, 10);
 }
 
 /**
@@ -390,8 +380,9 @@ cube_root(const decimal_t x, const decimal_t precise = _CONSTANTS PRECISE_TOLERA
  */
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 uint64_t factorial(const uint32_t n) noexcept {
 	uint64_t h = 1;
-	for (uint32_t i = 1; i <= n; i++)
+	for (uint32_t i = 1; i <= n; i++) {
 		h *= i;
+	}
 	return h;
 }
 

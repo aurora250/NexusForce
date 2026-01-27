@@ -36,7 +36,7 @@ string stacktrace::frame::name() const {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ensure_initialized();
 
-    lock_guard<mutex> lock(dbghelp_mutex());
+    lock<mutex> lock(dbghelp_mutex());
 
     char buffer[sizeof(::SYMBOL_INFO) + MAX_SYM_NAME * sizeof(::TCHAR)];
     const auto symbol = reinterpret_cast<::PSYMBOL_INFO>(buffer);

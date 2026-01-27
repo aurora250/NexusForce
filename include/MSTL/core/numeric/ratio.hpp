@@ -9,7 +9,7 @@
  * 支持比率的各种运算，包括加减乘除、比较、化简等操作。
  */
 
-#include "static_numeric.hpp"
+#include "MSTL/core/numeric/static_numeric.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

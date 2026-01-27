@@ -40,8 +40,9 @@ class tree_barrier {
             if (current_expected <= 1)
                 return true;
             
-            size_t const end_node = ((current_expected + 1) >> 1),
-                         last_node = end_node - 1;
+            size_t const end_node =
+                ((current_expected + 1) >> 1),
+                last_node = end_node - 1;
             
             for ( ; ; ++current_index) {
                 if (current_index == end_node)
@@ -89,7 +90,7 @@ public:
 
     MSTL_NODISCARD arrival_token arrive(ptrdiff_t update) {
         constexpr hash<thread::id> hasher;
-        const size_t current_index = hasher(this_thread::get_id());
+        const size_t current_index = hasher(this_thread::id());
         phase_ref_t phase_ref(current_phase_);
         const auto old_phase = phase_ref.load(memory_order_relaxed);
         const auto current_phase_value = static_cast<byte_t>(old_phase);

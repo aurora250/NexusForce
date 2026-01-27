@@ -9,8 +9,8 @@
  * 包括累加、内积、差分、前缀和等数值计算相关的通用算法。
  */
 
-#include "../functional/functor.hpp"
-#include "../typeinfo/concepts.hpp"
+#include "MSTL/core/functional/functor.hpp"
+#include "MSTL/core/typeinfo/concepts.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -207,6 +207,8 @@ MSTL_CONSTEXPR20 void sequence_fill(Iterator first, Iterator last, T value) {
 		++value;
 	}
 }
+
+/** @} */ // NumericAlgorithms
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_NUMERIC_HPP__

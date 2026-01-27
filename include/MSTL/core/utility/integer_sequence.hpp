@@ -9,7 +9,7 @@
  * 支持相关工具，以及编译器特定的优化实现。
  */
 
-#include "../typeinfo/type_traits.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

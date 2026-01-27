@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_ASYNC_JTHREAD_HPP__
-#define MSTL_CORE_ASYNC_JTHREAD_HPP__
+#ifndef MSTL_CORE_ASYNC_SCOPED_THREAD_HPP__
+#define MSTL_CORE_ASYNC_SCOPED_THREAD_HPP__
 #include "stop_token.hpp"
 MSTL_BEGIN_NAMESPACE__
 
@@ -12,13 +12,13 @@ constexpr bool pmf_expects_stop_token<Callable, Object, Args...> = conjunction_v
     is_invocable<Callable, Object, stop_token, Args...>>;
 
 
-class jthread {
+class scoped_thread {
 public:
     using id = thread::id;
     using native_handle_type = thread::native_handle_type;
 
 private:
-    stop_source stop_source_{nostopstate};
+    stop_source stop_source_{none};
     thread thread_{};
 
     template <typename Callable, typename Object, typename... Args,
@@ -44,31 +44,31 @@ private:
     }
 
 public:
-    jthread() noexcept = default;
+    scoped_thread() noexcept = default;
 
     template <typename Callable, typename... Args, typename = 
-        enable_if_t<!is_same_v<remove_cvref_t<Callable>, jthread>>>
-    explicit jthread(Callable&& func, Args&&... args)
+        enable_if_t<!is_same_v<remove_cvref_t<Callable>, scoped_thread>>>
+    explicit scoped_thread(Callable&& func, Args&&... args)
     : thread_{this->create(stop_source_, _MSTL forward<Callable>(func), _MSTL forward<Args>(args)...)} {}
 
-    jthread(const jthread&) = delete;
-    jthread(jthread&&) noexcept = default;
+    scoped_thread(const scoped_thread&) = delete;
+    scoped_thread(scoped_thread&&) noexcept = default;
 
-    ~jthread() {
+    ~scoped_thread() {
         if (joinable()) {
             request_stop();
             join();
         }
     }
 
-    jthread& operator =(const jthread&) = delete;
+    scoped_thread& operator =(const scoped_thread&) = delete;
 
-    jthread& operator =(jthread&& other) noexcept {
-        jthread(move(other)).swap(*this);
+    scoped_thread& operator =(scoped_thread&& other) noexcept {
+        scoped_thread(move(other)).swap(*this);
         return *this;
     }
 
-    void swap(jthread& other) noexcept {
+    void swap(scoped_thread& other) noexcept {
         _MSTL swap(stop_source_, other.stop_source_);
         _MSTL swap(thread_, other.thread_);
     }
@@ -111,4 +111,4 @@ public:
 };
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_ASYNC_JTHREAD_HPP__
+#endif // MSTL_CORE_ASYNC_SCOPED_THREAD_HPP__

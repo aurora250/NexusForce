@@ -9,8 +9,8 @@
  * 包括区间查询、元素查找、模式匹配等常用算法。
  */
 
-#include "../iterator/reverse_iterator.hpp"
-#include "../functional/functor.hpp"
+#include "MSTL/core/iterator/reverse_iterator.hpp"
+#include "MSTL/core/functional/functor.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

@@ -296,7 +296,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/atomic_futex_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
@@ -341,6 +340,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
+        core/async/atomic.cpp
 )
 
 # 编译为动态库
@@ -655,34 +655,7 @@ else()
     message(STATUS "Redis support disabled")
 endif()
 
-
-# CUDA
-if(MSTL_ENABLE_CUDA AND MSTL_ARCH STREQUAL "x64")
-    if(MSVC AND DEFINED CMAKE_CUDA_COMPILER)
-        enable_language(CUDA)
-        find_package(CUDAToolkit QUIET)
-
-        if(CUDAToolkit_FOUND)
-            set_target_properties(MSTL PROPERTIES
-                    CUDA_SEPARABLE_COMPILATION ON
-                    CUDA_RESOLVE_DEVICE_SYMBOLS ON
-            )
-            target_link_libraries(MSTL PUBLIC CUDA::cudart)
-            target_compile_definitions(MSTL PUBLIC MSTL_SUPPORT_CUDA__)
-            message(STATUS "CUDA linked successfully")
-        else()
-            message(WARNING "CUDA Toolkit not found - CUDA components will be unavailable")
-        endif()
-    else()
-        message(STATUS "CUDA support disabled: requires MSVC and CUDA compiler")
-    endif()
-else()
-    message(STATUS "CUDA support disabled")
-endif()
-
-
 find_and_link_zlib(MSTL)
-
 
 find_and_link_openssl(MSTL)
 

@@ -9,7 +9,7 @@
  * 用于将两个已排序的序列合并成一个有序序列。
  */
 
-#include "../memory/temporary_buffer.hpp"
+#include "MSTL/core/memory/temporary_buffer.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

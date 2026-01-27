@@ -8,7 +8,7 @@
  * 此文件提供了格式化函数的声明，包括可变参数版本的格式化。
  */
 
-#include "../typeinfo/types.hpp"
+#include "MSTL/core/typeinfo/types.hpp"
 #include <cstdarg>
 MSTL_BEGIN_NAMESPACE__
 

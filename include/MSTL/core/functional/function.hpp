@@ -8,8 +8,8 @@
  * 此文件提供了通用函数包装器，支持存储、复制和调用任意可调用对象。
  */
 
-#include "../exception/exception.hpp"
-#include "invoke.hpp"
+#include "MSTL/core/exception/exception.hpp"
+#include "MSTL/core/functional/invoke.hpp"
 #include <typeinfo>
 MSTL_BEGIN_NAMESPACE__
 

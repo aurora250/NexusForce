@@ -1,10 +1,9 @@
 #ifndef MSTL_CORE_UTILITY_HEXADECIMAL_HPP__
 #define MSTL_CORE_UTILITY_HEXADECIMAL_HPP__
-#include "../config/undef_cmacro.hpp"
-#include "../interface/inumeric.hpp"
 #include "../interface/iobject.hpp"
 #include "../string/format.hpp"
 #include "../string/to_numerics.hpp"
+#include "../config/undef_cmacro.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 struct MSTL_API hexadecimal : iobject<hexadecimal>, ipackage<hexadecimal, int64_t> {

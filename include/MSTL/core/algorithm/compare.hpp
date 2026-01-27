@@ -9,11 +9,18 @@
  * 包括相等性比较、范围比较、极值查找、字典序比较等功能。
  */
 
-#include "../memory/memory.hpp"
-#include "../utility/pair.hpp"
-#include "search.hpp"
+#include "MSTL/core/memory/memory.hpp"
+#include "MSTL/core/utility/pair.hpp"
+#include "MSTL/core/algorithm/search.hpp"
 #include <initializer_list>
-#include "../config/undef_cmacro.hpp"
+#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+#endif
 MSTL_BEGIN_NAMESPACE__
 
 /**

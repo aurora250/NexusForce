@@ -8,8 +8,7 @@
  * 此文件提供了插入迭代器的实现，用于将元素插入到容器中。
  */
 
-#include "../typeinfo/type_traits.hpp"
-#include "../typeinfo/tags.hpp"
+#include "MSTL/core/typeinfo/type_traits.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -222,6 +221,8 @@ MSTL_NODISCARD constexpr insert_iterator<Container>
 make_inserter(Container& x, typename Container::iterator it) noexcept {
     return insert_iterator<Container>(x, it);
 }
+
+/** @} */ // InsertIterators
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ITERATOR_INSERT_ITERATOR_HPP__

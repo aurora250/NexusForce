@@ -8,7 +8,7 @@
  * 此文件提供了随机重排算法实现，用于将序列中的元素随机重新排列。
  */
 
-#include "../numeric/random.hpp"
+#include "MSTL/core/numeric/random.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

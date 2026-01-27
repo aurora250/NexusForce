@@ -59,7 +59,7 @@ device::device(device&& other) noexcept
 device& device::operator =(device&& other) noexcept {
     if (this != &other) {
         close();
-        lock_guard<mutex> lock(io_mutex_);
+        lock<mutex> lock(io_mutex_);
         file_ = move(other.file_);
         device_type_ = other.device_type_;
         timeout_ = other.timeout_;
@@ -257,7 +257,7 @@ string device::read_sysfs_attribute(const string& device_path, const string& att
 
 void device::open(const path& device_path,
     const DEVICE_OPEN_MODE mode, const DEVICE_OPEN_FLAG flags) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (file_.is_opened()) {
         close();
     }
@@ -283,7 +283,7 @@ void device::open(const path& device_path,
 }
 
 void device::close() noexcept {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (file_.is_opened()) {
         file_.close();
     }
@@ -305,7 +305,7 @@ size_t device::read(void* buffer, const size_t size,
     if (!buffer || size == 0) {
         return 0;
     }
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         return 0;
     }
@@ -328,7 +328,7 @@ size_t device::write(const void* buffer, const size_t size,
     if (!buffer || size == 0) {
         return 0;
     }
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         return 0;
     }
@@ -343,7 +343,7 @@ size_t device::write(const void* buffer, const size_t size,
 
 device::async_result device::async_read(string& buffer,
     const size_t size, const int64_t offset) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         return async_result{false, 0, -1};
     }
@@ -352,7 +352,7 @@ device::async_result device::async_read(string& buffer,
 
 device::async_result device::async_write(const string& data,
     const size_t size, const int64_t offset) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         return async_result{false, 0, -1};
     }
@@ -368,7 +368,7 @@ void device::cancel_async(async_result& result) {
 }
 
 void device::ioctl(const ioctl_command& cmd) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         throw_exception(device_exception("Device not opened"));
     }
@@ -413,12 +413,12 @@ void device::ioctl(const ioctl_command& cmd) {
 }
 
 void device::flush() {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     MSTL_IGNORE file_.flush();
 }
 
 void device::sync() noexcept {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
 #ifdef MSTL_PLATFORM_LINUX__
     if (file_.is_opened()) {
         ::fsync(file_.native_handle());
@@ -467,12 +467,12 @@ bool device::is_writable(const milliseconds timeout) const {
 }
 
 void device::set_timeout(const milliseconds timeout) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     timeout_ = timeout;
 }
 
 void device::set_blocking(const bool blocking) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     is_blocking_ = blocking;
 #ifdef MSTL_PLATFORM_LINUX__
     if (file_.is_opened()) {
@@ -699,7 +699,7 @@ _MSTL device_info device::device_info() const {
 }
 
 void* device::map_memory(const size_t offset, const size_t size) {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (!file_.is_opened()) {
         return nullptr;
     }
@@ -710,7 +710,7 @@ void* device::map_memory(const size_t offset, const size_t size) {
 }
 
 void device::unmap_memory() noexcept {
-    lock_guard<mutex> lock(io_mutex_);
+    lock<mutex> lock(io_mutex_);
     if (file_.is_mapped()) {
         file_.unmap();
     }
