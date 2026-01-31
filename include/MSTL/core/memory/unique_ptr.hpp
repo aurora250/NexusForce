@@ -16,7 +16,7 @@ MSTL_BEGIN_NAMESPACE__
 
 /**
  * @defgroup UniquePointer 独占智能指针
- * @brief 独占所有权智能指针的实现
+ * @brief 独占智能指针类和辅助工具
  * @{
  */
 

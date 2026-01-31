@@ -55,6 +55,7 @@ void test_option();
 void test_st();
 void test_any();
 void test_timer();
+void test_vthread();
 void test_log();
 void test_ranges();
 void test_sql();

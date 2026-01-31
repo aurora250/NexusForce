@@ -17,6 +17,9 @@ MSTL_BEGIN_NAMESPACE__
  * @{
  */
 
+struct MSTL_API steady_clock;
+
+
 /**
  * @struct system_clock
  * @brief 系统时钟
@@ -96,6 +99,7 @@ struct MSTL_API steady_clock {
 
     /**
      * @brief 将稳定时钟转为系统时钟
+     * @param tp 稳定时钟时间点
      * @return 系统时钟时间点
      */
     template <typename Dur>
@@ -108,6 +112,24 @@ struct MSTL_API steady_clock {
         return sys_now + _MSTL time_cast<system_clock::duration>(diff);
     }
 };
+
+/**
+ * @brief 将绝对时间戳转换为相对延迟毫秒数
+ *
+ * @param sec 绝对时间戳的秒部分
+ * @param nsec 绝对时间戳的纳秒部分，取值范围为
+ * @param is_monotonic 是否使用单调时钟
+ * @return 相对延迟时间
+*
+ * 此函数接收一个绝对时间戳和时钟类型标志，
+ * 计算从当前时刻到该时间点之间的时间差，并以毫秒形式返回。
+ * 返回的毫秒数会被限制在 0 到 2^32-2 的范围内，
+ * 适用于需要有限范围内延迟值的定时器或调度场景。
+ *
+ * @note 输入支持纳秒精度，但输出仅保留毫秒精度
+ */
+milliseconds MSTL_API relative_time(int64_t sec, int64_t nsec, bool is_monotonic = false);
+
 
 /**
  * @struct is_clock

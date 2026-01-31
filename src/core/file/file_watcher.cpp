@@ -187,7 +187,7 @@ void file_watcher::watch_thread_func() {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 
-    _MSTL memory_zero(&overlapped_, sizeof(::OVERLAPPED));
+    _MSTL memory_zero(&overlapped_);
     overlapped_.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
     if (!overlapped_.hEvent) {
         watching_.store(false);

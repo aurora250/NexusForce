@@ -18,7 +18,7 @@ MSTL_BEGIN_NAMESPACE__
 file::async_context::async_context(string&& d)
 : data(_MSTL move(d)), is_write(true) {
     cb = new aiocb_type{};
-    _MSTL memory_zero(cb, sizeof(aiocb_type));
+    _MSTL memory_zero(cb);
 #ifdef MSTL_PLATFORM_WINDOWS__
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
@@ -27,7 +27,7 @@ file::async_context::async_context(string&& d)
 file::async_context::async_context(string* buf)
 : buffer(buf), is_write(false) {
     cb = new aiocb_type{};
-    _MSTL memory_zero(cb, sizeof(aiocb_type));
+    _MSTL memory_zero(cb);
 #ifdef MSTL_PLATFORM_WINDOWS__
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
@@ -2106,7 +2106,7 @@ bool file::lock(
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
-    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+    _MSTL memory_zero(&fl);
 
     if (mode == FILE_LOCK::EXCLUSIVE ||
         (static_cast<fud_t>(mode) & LOCK_EX) != 0) {
@@ -2178,7 +2178,7 @@ bool file::unlock(const difference_type offset, const difference_type length) co
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl{};
-    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+    _MSTL memory_zero(&fl);
 
     fl.l_type = F_UNLCK;
     fl.l_whence = SEEK_SET;
@@ -2231,7 +2231,7 @@ bool file::is_locked(const difference_type offset,
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::flock fl;
-    _MSTL memory_zero(&fl, sizeof(struct ::flock));
+    _MSTL memory_zero(&fl);
 
     fl.l_type = F_WRLCK;
     fl.l_whence = SEEK_SET;

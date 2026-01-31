@@ -542,7 +542,7 @@
 
 
 #ifdef MSTL_DOXYGEN_GENERATE
-    #define MSTL_ALWAYS_INLINE
+    #define MSTL_ALWAYS_INLINE inline
     #define MSTL_ALWAYS_INLINE_INLINE inline
 #elif defined(MSTL_COMPILER_GNUC__)
     #define MSTL_ALWAYS_INLINE __attribute__((always_inline))
@@ -551,7 +551,7 @@
     #define MSTL_ALWAYS_INLINE __forceinline
     #define MSTL_ALWAYS_INLINE_INLINE MSTL_ALWAYS_INLINE
 #else
-    #define MSTL_ALWAYS_INLINE
+    #define MSTL_ALWAYS_INLINE inline
     #define MSTL_ALWAYS_INLINE_INLINE inline
 #endif
 
@@ -757,11 +757,11 @@
 #define __MSTL_DEBUG_TAG_DECREMENT "decrement"
 
 
-#if defined(MSTL_STANDARD_20__) && defined(MSTL_COMPILER_GNUC__)
+#if defined(MSTL_STANDARD_20__)
 #define MSTL_CONSTEXPR_ASSERT(COND) \
 do { \
     if (__builtin_is_constant_evaluated() && !bool(COND)) \
-        __builtin_unreachable(); \
+        MSTL_UNREACHABLE; \
 } while (false);
 #elif defined(MSTL_STATE_DEBUG__)
 #define MSTL_CONSTEXPR_ASSERT(COND) \

@@ -1,6 +1,5 @@
 #include <MSTL/core/async/condition_variable.hpp>
 #include <MSTL/core/exception/terminate.hpp>
-#include <ctime>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <bits/gthr.h>
 #include <cerrno>
@@ -8,53 +7,13 @@
 MSTL_BEGIN_NAMESPACE__
 MSTL_BEGIN_INNER__
 
+condition_variable_base::condition_variable_base()
 #ifdef MSTL_PLATFORM_WINDOWS__
-static ::DWORD timespec_to_relative_ms(const ::timespec& abs, const bool is_monotonic) {
-    const nanoseconds abs_ns {
-        static_cast<int64_t>(abs.tv_sec) * 1'000'000'000LL + abs.tv_nsec
-    };
-    time_point<system_clock> abs_sys_time;
-    time_point<steady_clock> abs_steady_time;
-
-    if (is_monotonic) {
-        abs_steady_time = time_point<steady_clock>{ abs_ns };
-    } else {
-        abs_sys_time = system_clock::from_seconds(0_s) + abs_ns;
-    }
-
-    nanoseconds now_ns;
-    if (is_monotonic) {
-        now_ns = steady_clock::now().since_epoch();
-    } else {
-        now_ns = system_clock::now().since_epoch();
-    }
-
-    int64_t diff_ns;
-    if (is_monotonic) {
-        diff_ns = (abs_steady_time.since_epoch() - now_ns).count();
-    } else {
-        diff_ns = (abs_sys_time.since_epoch() - now_ns).count();
-    }
-    if (diff_ns <= 0) return 0;
-
-    const uint64_t diff_ms = static_cast<uint64_t>(diff_ns) / 1'000'000ULL;
-    constexpr uint64_t MAX_DWORD = numeric_traits<::DWORD>::max();
-    if (diff_ms > MAX_DWORD - 1) {
-        return static_cast<::DWORD>(MAX_DWORD - 1);
-    }
-    return static_cast<::DWORD>(diff_ms);
-}
-#endif
-
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-condition_variable_base::condition_variable_base() noexcept {
-    ::InitializeConditionVariable(&cond_);
-}
+{ ::InitializeConditionVariable(&cond_);
 #else
-condition_variable_base::condition_variable_base() noexcept
-: cond_(__GTHREAD_COND_INIT) {}
+: cond_(__GTHREAD_COND_INIT) {
 #endif
+}
 
 condition_variable_base::~condition_variable_base() {
 #ifdef MSTL_PLATFORM_LINUX__
@@ -79,12 +38,11 @@ void condition_variable_base::wait(mutex& mtx) {
 cv_status condition_variable_base::wait_until(
     mutex& mtx, const int64_t sec, const int64_t ns) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const ::timespec ts { sec, static_cast<long>(ns) };
-    const ::DWORD timeout_ms = timespec_to_relative_ms(ts, false);
-    ::BOOL result = ::SleepConditionVariableSRW(
-        &cond_, mtx.native_handle(), timeout_ms, 0);
+    const milliseconds timeout_ms = relative_time(sec, ns, false);
+    const ::BOOL result = ::SleepConditionVariableSRW(
+        &cond_, mtx.native_handle(), timeout_ms.count(), 0);
     if (result) {
-        return cv_status::no_timeout;
+        return cv_status::success;
     }
     const::DWORD err = ::GetLastError();
     if (err == ERROR_TIMEOUT) {
@@ -94,31 +52,29 @@ cv_status condition_variable_base::wait_until(
 #else
     const ::timespec ts { sec, ns };
     const int result = ::__gthread_cond_timedwait(&cond_, mtx.native_handle(), &ts);
-    return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::no_timeout;
+    return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::success;
 #endif
 }
 
 cv_status condition_variable_base::wait_until(
-    mutex& mtx, const int clock, const int64_t sec, const int64_t ns) {
+    mutex& mtx, const bool is_monotonic, const int64_t sec, const int64_t ns) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const ::timespec ts { sec, static_cast<long>(ns) };
-    const bool is_monotonic = (clock == 1); // CLOCK_MONOTONIC = 1
-    const ::DWORD timeout_ms = timespec_to_relative_ms(ts, is_monotonic);
+    const milliseconds timeout_ms = relative_time(sec, ns, is_monotonic);
     ::BOOL result = ::SleepConditionVariableSRW(
-        &cond_, mtx.native_handle(), timeout_ms, 0);
+        &cond_, mtx.native_handle(), timeout_ms.count(), 0);
     if (result) {
-        return cv_status::no_timeout;
+        return cv_status::success;
     }
     const ::DWORD err = ::GetLastError();
     if (err == ERROR_TIMEOUT) {
         return cv_status::timeout;
     }
     _MSTL terminate();
-    return cv_status::timeout;
 #else
     const ::timespec ts { sec, ns };
-    const int result = ::pthread_cond_clockwait(&cond_, mtx.native_handle(), clock, &ts);
-    return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::no_timeout;
+    const int result = ::pthread_cond_clockwait(
+        &cond_, mtx.native_handle(), static_cast<int>(is_monotonic), &ts);
+    return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::success;
 #endif
 }
 

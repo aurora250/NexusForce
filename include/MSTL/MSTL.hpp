@@ -17,6 +17,7 @@
 #include "MSTL/core/async/lock_free_queue.hpp"
 #include "MSTL/core/async/scoped_thread.hpp"
 #include "MSTL/core/async/thread_pool.hpp"
+#include "MSTL/core/async/virtual_thread.hpp"
 #include "MSTL/core/async/timer.hpp"
 #include "MSTL/core/container/bitmap.hpp"
 #include "MSTL/core/container/bitset.hpp"

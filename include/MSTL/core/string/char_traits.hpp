@@ -1,8 +1,7 @@
 #ifndef MSTL_CORE_STRING_CHAR_TRAITS_HPP__
 #define MSTL_CORE_STRING_CHAR_TRAITS_HPP__
-#include "../algorithm/compare.hpp"
-#include "../functional/hash.hpp"
-#include "../config/undef_cmacro.hpp"
+#include "MSTL/core/algorithm/compare.hpp"
+#include "MSTL/core/functional/hash.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename IntT>
@@ -29,7 +28,7 @@ struct base_char_traits {
 
     MSTL_NODISCARD static constexpr int compare(
         const char_type* lhs, const char_type* rhs, size_t count) noexcept {
-        return _MSTL string_compare_n(lhs, rhs, count);
+        return _MSTL string_compare(lhs, rhs, count);
     }
 
     MSTL_NODISCARD static constexpr size_t length(const char_type* str) noexcept {
@@ -38,12 +37,12 @@ struct base_char_traits {
 
     MSTL_NODISCARD static constexpr const char_type* find(
         const char_type* str, const size_t count, const char_type target) noexcept {
-        return _MSTL string_find_n<char_type>(str, target, count);
+        return _MSTL string_find<char_type>(str, target, count);
     }
 
     static constexpr char_type* assign(
         char_type* const str, const size_t count, const char_type chr) noexcept {
-        return _MSTL string_set_n<char_type>(str, chr, count);
+        return _MSTL string_set<char_type>(str, chr, count);
     }
 
     static constexpr void assign(char_type& lhs, const char_type rhs) noexcept {

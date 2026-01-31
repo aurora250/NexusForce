@@ -2137,6 +2137,34 @@ void test_timer(){
     this_thread::sleep_for(seconds(7));
 }
 
+void test_vthread() {
+    virtual_thread::initialize(4);
+
+    auto vt1 = virtual_thread::start([] {
+        for (int i = 0; i < 5; ++i) {
+            println("VT-1: Task", i);
+            this_thread::sleep_for(milliseconds(100));
+        }
+    });
+
+    auto vt2 = virtual_thread::start([] {
+        for (int i = 0; i < 5; ++i) {
+            println("VT-2: Task", i);
+            this_thread::sleep_for(milliseconds(150));
+        }
+    });
+
+    auto vt3 = virtual_thread::start([] {
+        for (int i = 0; i < 3; ++i) {
+            println("VT-3: Task", i);
+            this_thread::sleep_for(milliseconds(200));
+        }
+    });
+
+    this_thread::sleep_for(seconds(2));
+    virtual_thread::shutdown();
+}
+
 void test_log() {
     auto& logger = logger::instance();
     logger.set_level(LOG_LEVEL::DEBUG);

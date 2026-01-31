@@ -1,8 +1,8 @@
 #ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
 #define MSTL_CORE_CONTAINER_ARRAY_HPP__
-#include "../interface/icollector.hpp"
-#include "../algorithm/shift.hpp"
-#include "../algorithm/compare.hpp"
+#include "MSTL/core/interface/icollector.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
+#include "MSTL/core/algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>

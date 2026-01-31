@@ -99,7 +99,7 @@ MSTL_ALWAYS_INLINE_INLINE void relax() noexcept {
  * - 中等计数：调用一次relax()
  * - 大计数：直接让出时间片
  */
-MSTL_ALWAYS_INLINE_INLINE void relax_n(const int count) noexcept {
+MSTL_ALWAYS_INLINE_INLINE void relax(const int count) noexcept {
     if (count < 4) {
         for (int i = 0; i < (1 << count); ++i) {
             this_thread::relax();

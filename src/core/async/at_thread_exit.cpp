@@ -11,7 +11,7 @@ struct thread_exit_registry {
 
 static thread_local thread_exit_registry thread_registry;
 
-void at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) {
+void at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept {
     elt->next = thread_registry.thread_exit_list;
     elt->cb = callback;
     thread_registry.thread_exit_list = elt;

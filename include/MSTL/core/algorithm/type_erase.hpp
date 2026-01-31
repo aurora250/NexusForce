@@ -14,7 +14,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup TypeErasureFunctions 类型擦除函数
+ * @defgroup TypeErasureFunctions 类型擦除
  * @brief 容器和数组的通用访问函数
  * @{
  */

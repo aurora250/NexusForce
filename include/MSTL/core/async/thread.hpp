@@ -292,20 +292,17 @@ public:
         _MSTL swap(id_, other.id_);
         _MSTL swap(state_, other.state_);
     }
-
-    /**
-     * @brief 获取硬件支持的并发线程数
-     * @return 硬件并发线程数
-     *
-     * 返回系统支持的并发线程数，通常等于CPU核心数。
-     *
-     * @note 效果等同于使用MSTL::sysinfo获取的CPU核心数
-     */
-    static uint32_t hardware_concurrency() noexcept;
 };
 
+/** @} */ // Thread
 
 MSTL_BEGIN_THIS_THREAD__
+
+/**
+ * @defgroup Thread 线程
+ * @brief 线程管理和相关操作
+ * @{
+ */
 
 /**
  * @brief 获取当前线程标识符
@@ -319,9 +316,9 @@ MSTL_ALWAYS_INLINE_INLINE thread::id id() noexcept {
 #endif
 }
 
-MSTL_END_THIS_THREAD__
-
 /** @} */ // Thread
+
+MSTL_END_THIS_THREAD__
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_THREAD_HPP__

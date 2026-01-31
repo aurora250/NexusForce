@@ -1,30 +1,84 @@
 #ifndef MSTL_CORE_MEMORY_SHARED_PTR_HPP__
 #define MSTL_CORE_MEMORY_SHARED_PTR_HPP__
-#include "../algorithm/compare.hpp"
-#include "../async/atomic.hpp"
-#include "allocator_traits.hpp"
-#include "unique_ptr.hpp"
+
+/**
+ * @file shared_ptr.hpp
+ * @brief MSTL共享智能指针实现
+ *
+ * 此文件提供了共享智能指针的完整实现，
+ * 支持引用计数、自定义删除器、分配器等功能。
+ */
+
+#include "MSTL/core/algorithm/compare.hpp"
+#include "MSTL/core/async/atomic.hpp"
+#include "MSTL/core/memory/allocator_traits.hpp"
+#include "MSTL/core/memory/unique_ptr.hpp"
 #include <new>
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup SharedPointer 共享智能指针
+ * @brief 共享智能指针类和辅助工具
+ * @{
+ */
+
+/// @cond
 MSTL_BEGIN_INNER__
 
+/**
+ * @struct __smart_ptr_counter
+ * @brief 智能指针计数器基类
+ *
+ * 管理共享指针和弱指针的引用计数，提供原子操作保证线程安全。
+ */
 struct __smart_ptr_counter {
-    _MSTL atomic_ulong strong_count_;
-    _MSTL atomic_ulong weak_count_;
+public:
+    _MSTL atomic_ulong strong_count_;  ///< 强引用计数
+    _MSTL atomic_ulong weak_count_;    ///< 弱引用计数
 
-    __smart_ptr_counter() noexcept : strong_count_(1), weak_count_(1) {}
-    __smart_ptr_counter(__smart_ptr_counter&&) = delete;
-    virtual ~__smart_ptr_counter() = default;
+protected:
+    /**
+     * @brief 删除管理的对象
+     */
+    virtual void delete_object() noexcept = 0;
 
+    /**
+     * @brief 删除控制块自身
+     */
+    virtual void delete_this() noexcept {
+        delete this;
+    }
+
+public:
+    /**
+     * @brief 构造函数
+     * @note 初始强引用计数为1（对象存在），弱引用计数为1（控制块存在）
+     */
+    __smart_ptr_counter() noexcept
+    : strong_count_(1), weak_count_(1) {}
+
+    __smart_ptr_counter(__smart_ptr_counter&&) = delete;  ///< 禁止移动构造
+
+    virtual ~__smart_ptr_counter() = default;  ///< 虚析构函数
+
+    /**
+     * @brief 增加强引用计数
+     */
     void incref_strong() noexcept {
         strong_count_.fetch_add(1, _MSTL memory_order_relaxed);
     }
 
+    /**
+     * @brief 增加弱引用计数
+     */
     void incref_weak() noexcept {
         weak_count_.fetch_add(1, _MSTL memory_order_relaxed);
     }
 
+    /**
+     * @brief 减少强引用计数
+     * @note 当强引用计数为0时删除对象，并减少弱引用计数
+     */
     void decref_strong() noexcept {
         if (strong_count_.fetch_sub(1, _MSTL memory_order_acq_rel) == 1) {
             delete_object();
@@ -32,12 +86,22 @@ struct __smart_ptr_counter {
         }
     }
 
+    /**
+     * @brief 减少弱引用计数
+     * @note 当弱引用计数为0时删除控制块
+     */
     void decref_weak() noexcept {
         if (weak_count_.fetch_sub(1, _MSTL memory_order_acq_rel) == 1) {
             delete_this();
         }
     }
 
+    /**
+     * @brief 尝试增加强引用计数
+     * @return 是否成功增加（当强引用计数不为0时）
+     *
+     * @note 用于从弱指针升级到强指针的场景
+     */
     bool try_incref_strong() noexcept {
         auto strong = strong_count_.load(_MSTL memory_order_relaxed);
         do {
@@ -50,30 +114,40 @@ struct __smart_ptr_counter {
         return true;
     }
 
+    /**
+     * @brief 获取强引用计数
+     * @return 强引用计数值
+     */
     MSTL_NODISCARD uint64_t use_count() const noexcept {
         return strong_count_.load(_MSTL memory_order_relaxed);
     }
 
+    /**
+     * @brief 获取弱引用计数
+     * @return 弱引用计数值
+     */
     MSTL_NODISCARD uint64_t weak_count() const noexcept {
         return weak_count_.load(_MSTL memory_order_relaxed);
     }
-
-protected:
-    virtual void delete_object() noexcept = 0;
-    virtual void delete_this() noexcept {
-        delete this;
-    }
 };
 
+/**
+ * @brief 智能指针计数器实现（分离分配）
+ * @tparam T 对象类型
+ * @tparam Deleter 删除器类型
+ *
+ * 对象和控制块分别分配内存的计数器实现。
+ */
 template <typename T, typename Deleter>
 struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     T* ptr_;
-    MSTL_NO_UNIQUE_ADDRESS Deleter deleter_;
+    Deleter deleter_;
 
-    explicit __smart_ptr_counter_impl(T* ptr) noexcept : ptr_(ptr) {}
+    explicit __smart_ptr_counter_impl(T* ptr) noexcept
+    : ptr_(ptr) {}
 
-    explicit __smart_ptr_counter_impl(T* ptr, Deleter deleter) noexcept
-        : ptr_(ptr), deleter_(_MSTL move(deleter)) {}
+    explicit __smart_ptr_counter_impl(T* ptr, Deleter&& deleter) noexcept
+    : ptr_(ptr), deleter_(_MSTL forward<Deleter>(deleter)) {}
 
     void delete_object() noexcept override {
         deleter_(ptr_);
@@ -81,14 +155,21 @@ struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     }
 };
 
+/**
+ * @brief 智能指针计数器实现（融合分配）
+ * @tparam T 对象类型
+ * @tparam Deleter 删除器类型
+ *
+ * 对象和控制块分配在同一块内存中的计数器实现，提高内存局部性。
+ */
 template <typename T, typename Deleter>
 struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     T* ptr_;
     void* mem_;
-    MSTL_NO_UNIQUE_ADDRESS Deleter deleter_;
+    Deleter deleter_;
 
     explicit __smart_ptr_counter_impl_fused(T* ptr, void* mem, Deleter deleter) noexcept
-        : ptr_(ptr), mem_(mem), deleter_(_MSTL move(deleter)) {}
+    : ptr_(ptr), mem_(mem), deleter_(_MSTL move(deleter)) {}
 
     void delete_object() noexcept override {
         deleter_(ptr_);
@@ -96,28 +177,37 @@ struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     }
 
     void delete_this() noexcept override {
+        operator delete(mem_
 #if MSTL_STANDARD_17__
-        operator delete(mem_, static_cast<std::align_val_t>(
-            _MSTL max(alignof(T), alignof(__smart_ptr_counter_impl_fused))));
-#else
-        operator delete(mem_);
+            , static_cast<std::align_val_t>(
+                _MSTL max(alignof(T), alignof(__smart_ptr_counter_impl_fused)))
 #endif
+        );
     }
 };
 
+/**
+ * @brief 智能指针计数器实现（带分配器）
+ * @tparam T 对象类型
+ * @tparam Deleter 删除器类型
+ * @tparam Alloc 分配器类型
+ *
+ * 使用分配器进行内存管理的计数器实现。
+ */
 template <typename T, typename Deleter, typename Alloc>
 struct __smart_ptr_counter_impl_allocated final : __smart_ptr_counter {
     T* ptr_;
     void* mem_;
     size_t size_;
-    MSTL_NO_UNIQUE_ADDRESS Deleter deleter_;
-    MSTL_NO_UNIQUE_ADDRESS Alloc allocator_;
+    Deleter deleter_;
+    Alloc allocator_;
 
-    explicit __smart_ptr_counter_impl_allocated(T* ptr, void* mem,
-        const size_t size, Deleter deleter, Alloc alloc) noexcept
+    explicit __smart_ptr_counter_impl_allocated(
+        T* ptr, void* mem, const size_t size,
+        Deleter deleter, Alloc alloc) noexcept
     : ptr_(ptr), mem_(mem), size_(size),
-    deleter_(_MSTL move(deleter)),
-    allocator_(_MSTL move(alloc)) {}
+      deleter_(_MSTL move(deleter)),
+      allocator_(_MSTL move(alloc)) {}
 
     void delete_object() noexcept override {
         deleter_(ptr_);
@@ -133,6 +223,7 @@ struct __smart_ptr_counter_impl_allocated final : __smart_ptr_counter {
 };
 
 MSTL_END_INNER__
+/// @endcond
 
 
 template <typename T>
@@ -141,41 +232,56 @@ struct enable_shared_from_this;
 template <typename T>
 class shared_ptr;
 
+template <typename T>
+class weak_ptr;
 
+/// @cond
 MSTL_BEGIN_INNER__
 
 template <typename T>
-void __set_enable_shared_from(_MSTL enable_shared_from_this<T>* ptr, __smart_ptr_counter* owner) {
-    ptr->owner_ = owner;
+MSTL_ALWAYS_INLINE enable_if_t<is_base_of_v<enable_shared_from_this<T>, T>>
+__setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) {
+    static_cast<_MSTL enable_shared_from_this<T>*>(ptr)->owner_ = owner;
+    return;
 }
-template <typename T, _MSTL enable_if_t<_MSTL is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
-void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) {
-    (__set_enable_shared_from)(static_cast<_MSTL enable_shared_from_this<T>*>(ptr), owner);
-}
-template <typename T, _MSTL enable_if_t<!_MSTL is_base_of_v<enable_shared_from_this<T>, T>, int> = 0>
-void __setup_enable_shared_from(T*, __smart_ptr_counter*) {}
 
 template <typename T>
-_MSTL shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
+MSTL_ALWAYS_INLINE enable_if_t<!is_base_of_v<enable_shared_from_this<T>, T>>
+__setup_enable_shared_from(T*, __smart_ptr_counter*) {
+    return;
+}
+
+template <typename T>
+MSTL_ALWAYS_INLINE shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
     return _MSTL shared_ptr<T>(ptr, owner);
 }
 
 MSTL_END_INNER__
+/// @endcond
 
 
-template <typename T>
-class weak_ptr;
-
-
+/**
+ * @class shared_ptr
+ * @brief 共享智能指针类模板
+ * @tparam T 对象类型
+ *
+ * 实现引用计数的智能指针，多个实例可以共享同一对象的所有权。
+ * 当最后一个共享智能指针被销毁时，对象会被自动删除。
+ */
 template <typename T>
 class shared_ptr {
 public:
-    using element_type = T;
+    using element_type = T;  ///< 元素类型
 
 private:
-    element_type* ptr_ = nullptr;
-    _INNER __smart_ptr_counter* owner_ = nullptr;
+    element_type* ptr_ = nullptr;   ///< 管理的对象指针
+    _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
 
+    /**
+     * @brief 私有构造函数
+     * @param ptr 对象指针
+     * @param owner 控制块指针
+     */
     explicit shared_ptr(T* ptr, _INNER __smart_ptr_counter* owner) noexcept
     : ptr_(ptr), owner_(owner) {}
 
@@ -189,27 +295,62 @@ private:
     friend shared_ptr<U> _INNER __make_shared_fused(U*, _INNER __smart_ptr_counter*) noexcept;
 
 public:
-    shared_ptr(nullptr_t = nullptr) noexcept {}
+    /**
+     * @brief 默认构造函数
+     * @param np 空指针字面量
+     *
+     * 创建空的共享指针，不管理任何对象。
+     */
+    shared_ptr(nullptr_t np = nullptr) noexcept {}
 
+    /**
+     * @brief 从原始指针构造函数
+     * @tparam U 可转换为T*的类型
+     * @param ptr 原始指针
+     */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr(U* ptr)
     : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr)) {
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
+    /**
+     * @brief 从原始指针和自定义删除器构造函数
+     * @tparam U 可转换为T*的类型
+     * @tparam Deleter 删除器类型
+     * @param ptr 原始指针
+     * @param deleter 删除器
+     */
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    explicit shared_ptr(U* ptr, Deleter deleter)
-    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL move(deleter))) {
+    explicit shared_ptr(U* ptr, Deleter&& deleter)
+    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _MSTL forward<Deleter>(deleter))) {
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
+    /**
+     * @brief 独享智能指针构造函数
+     * @tparam U 可转换为T*的类型
+     * @tparam Deleter 删除器类型
+     * @param ptr 独享智能指针
+     */
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(unique_ptr<U, Deleter>&& ptr)
     : shared_ptr(ptr.release(), ptr.get_deleter()) {}
 
-    shared_ptr(const shared_ptr& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
+    /**
+     * @brief 拷贝构造函数
+     * @param x 要拷贝的共享指针
+     */
+    shared_ptr(const shared_ptr& x) noexcept
+    : ptr_(x.ptr_), owner_(x.owner_) {
         if (owner_) owner_->incref_strong();
     }
+
+    /**
+     * @brief 拷贝赋值运算符
+     * @param x 要拷贝的共享指针
+     * @return 当前共享指针的引用
+     */
     shared_ptr& operator =(const shared_ptr& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         if (owner_) owner_->decref_strong();
@@ -218,15 +359,33 @@ public:
         if (owner_) owner_->incref_strong();
         return *this;
     }
+
+    /**
+     * @brief 类型转换拷贝构造函数
+     * @tparam U 可转换为T*的类型
+     * @param x 要拷贝的共享指针
+     */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    shared_ptr(const shared_ptr<U>& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
+    shared_ptr(const shared_ptr<U>& x) noexcept
+    : ptr_(x.ptr_), owner_(x.owner_) {
         if (owner_) owner_->incref_strong();
     }
 
-    shared_ptr(shared_ptr&& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
+    /**
+     * @brief 移动构造函数
+     * @param x 要移动的共享指针
+     */
+    shared_ptr(shared_ptr&& x) noexcept
+    : ptr_(x.ptr_), owner_(x.owner_) {
         x.ptr_ = nullptr;
         x.owner_ = nullptr;
     }
+
+    /**
+     * @brief 移动赋值运算符
+     * @param x 要移动的共享指针
+     * @return 当前共享指针的引用
+     */
     shared_ptr& operator =(shared_ptr&& x) noexcept {
         if (_MSTL addressof(x) == this) return *this;
         if (owner_) owner_->decref_strong();
@@ -236,22 +395,45 @@ public:
         x.owner_ = nullptr;
         return *this;
     }
+
+    /**
+     * @brief 类型转换移动构造函数
+     * @tparam U 可转换为T*的类型
+     * @param x 要移动的共享指针
+     */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
-    explicit shared_ptr(shared_ptr<U>&& x) noexcept : ptr_(x.ptr_), owner_(x.owner_) {
+    explicit shared_ptr(shared_ptr<U>&& x) noexcept
+    : ptr_(x.ptr_), owner_(x.owner_) {
         x.ptr_ = nullptr;
         x.owner_ = nullptr;
     }
 
+    /**
+     * @brief 从共享指针和别名指针别名构造函数
+     * @tparam U 原始共享指针的类型
+     * @param x 原始共享指针
+     * @param ptr 别名指针
+     * @note 创建的共享指针与参数共享智能指针共享所有权，但指向不同的对象
+     */
     template <typename U>
-    shared_ptr(const shared_ptr<U>& x, T* ptr) noexcept : ptr_(ptr), owner_(x.owner_) {
+    shared_ptr(const shared_ptr<U>& x, T* ptr) noexcept
+    : ptr_(ptr), owner_(x.owner_) {
         if (owner_) owner_->incref_strong();
     }
+
+    /**
+     * @brief 移动别名构造函数
+     */
     template <typename U>
-    shared_ptr(shared_ptr<U>&& x, T* ptr) noexcept : ptr_(ptr), owner_(x.owner_) {
+    shared_ptr(shared_ptr<U>&& x, T* ptr) noexcept
+    : ptr_(ptr), owner_(x.owner_) {
         x.ptr_ = nullptr;
         x.owner_ = nullptr;
     }
 
+    /**
+     * @brief 类型转换拷贝赋值运算符
+     */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr& operator =(const shared_ptr<U>& x) noexcept {
         if (owner_) owner_->decref_strong();
@@ -260,6 +442,10 @@ public:
         if (owner_) owner_->incref_strong();
         return *this;
     }
+
+    /**
+     * @brief 类型转换移动赋值运算符
+     */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr& operator =(shared_ptr<U>&& x) noexcept {
         if (owner_) owner_->decref_strong();
@@ -270,15 +456,28 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 析构函数
+     * @note 减少强引用计数，当计数为0时删除对象
+     */
     ~shared_ptr() noexcept {
         reset();
     }
 
+    /**
+     * @brief 重置共享指针
+     */
     void reset() noexcept {
         if (owner_) owner_->decref_strong();
         owner_ = nullptr;
         ptr_ = nullptr;
     }
+
+    /**
+     * @brief 重置共享指针并管理新对象
+     * @tparam U 可转换为T*的类型
+     * @param ptr 新的原始指针
+     */
     template <typename U>
     void reset(U* ptr) {
         if (owner_) owner_->decref_strong();
@@ -288,6 +487,14 @@ public:
         owner_ = new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr);
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
+
+    /**
+     * @brief 带自定义删除器重置共享指针并管理新对象
+     * @tparam U 可转换为T*的类型
+     * @tparam Deleter 删除器类型
+     * @param ptr 新的原始指针
+     * @param deleter 删除器
+     */
     template <typename U, typename Deleter>
     void reset(U* ptr, Deleter deleter) {
         if (owner_) owner_->decref_strong();
@@ -298,119 +505,236 @@ public:
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
+    /**
+     * @brief 获取引用计数
+     * @return 强引用计数
+     */
     MSTL_NODISCARD long use_count() const noexcept {
         return owner_ ? owner_->use_count() : 0;
     }
+
+    /**
+     * @brief 检查是否独占所有权
+     * @return 是否只有当前共享指针引用对象
+     */
     MSTL_NODISCARD bool unique() const noexcept {
         return owner_ ? owner_->use_count() == 1 : true;
     }
 
+    /**
+     * @brief 交换两个共享指针
+     * @param x 要交换的共享指针
+     */
     void swap(shared_ptr& x) noexcept {
         if (_MSTL addressof(x) == this) return;
         _MSTL swap(ptr_, x.ptr_);
         _MSTL swap(owner_, x.owner_);
     }
 
+    /**
+     * @brief 获取原始指针
+     * @return 管理的对象指针
+     */
     MSTL_NODISCARD T* get() const noexcept {
         return ptr_;
     }
+
+    /**
+     * @brief 指针解引用运算符
+     * @return 管理的对象指针
+     */
     MSTL_NODISCARD T* operator ->() const noexcept {
         return ptr_;
     }
+
+    /**
+     * @brief 解引用运算符
+     * @return 对象的左值引用
+     */
     MSTL_NODISCARD add_lvalue_reference_t<T> operator *() const noexcept {
         return *ptr_;
     }
 
+    /**
+     * @brief 布尔转换运算符
+     * @return 是否管理对象
+     */
     MSTL_NODISCARD explicit operator bool() const noexcept {
         return ptr_ != nullptr;
     }
 
+    /**
+     * @brief 检查所有权是否相等
+     * @tparam U 比较的共享指针类型
+     * @param rhs 要比较的共享指针
+     * @return 是否共享同一控制块
+     */
     template <typename U>
     MSTL_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
+
+    /**
+     * @brief 与弱指针检查所有权是否相等
+     */
     template <typename U>
     MSTL_NODISCARD bool owner_equal(const weak_ptr<U>& rhs) const noexcept {
         return owner_ == rhs.owner_;
     }
 
+    /**
+     * @brief 比较所有权顺序
+     * @tparam U 比较的共享指针类型
+     * @param rhs 要比较的共享指针
+     * @return 当前控制块地址是否小于rhs的控制块地址
+     */
     template <typename U>
     MSTL_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
+
+    /**
+     * @brief 与弱指针比较所有权顺序
+     */
     template <typename U>
     MSTL_NODISCARD bool owner_before(const weak_ptr<U>& rhs) const noexcept {
         return owner_ < rhs.owner_;
     }
 };
+
+/**
+ * @brief 相等比较运算符
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator ==(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return lhs.owner_equal(rhs);
 }
+
+/**
+ * @brief 不等比较运算符
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator !=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/**
+ * @brief 小于比较运算符（基于所有权顺序）
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator <(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return lhs.owner_before(rhs);
 }
+
+/**
+ * @brief 大于比较运算符
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator >(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return rhs < lhs;
 }
+
+/**
+ * @brief 小于等于比较运算符
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator <=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return !(lhs > rhs);
 }
+
+/**
+ * @brief 大于等于比较运算符
+ */
 template <typename T, typename U>
 MSTL_NODISCARD bool operator >=(const shared_ptr<T>& lhs, const shared_ptr<U>& rhs) noexcept {
     return !(lhs < rhs);
 }
 
 
+/**
+ * @brief 数组特化的共享指针
+ * @tparam T 数组元素类型
+ */
 template <typename T>
 class shared_ptr<T[]> : shared_ptr<T> {
 public:
     using shared_ptr<T>::shared_ptr;
 
+    /**
+     * @brief 数组下标运算符
+     * @param idx 索引
+     * @return 数组元素的引用
+     */
     add_lvalue_reference_t<T> operator [](size_t idx) {
         return this->get()[idx];
     }
 };
 
 
+/**
+ * @struct enable_shared_from_this
+ * @brief 启用从this创建共享指针的基类
+ * @tparam T 派生类类型
+ *
+ * 允许在类的成员函数中安全地获取指向自身的共享智能指针。
+ */
 template <typename T>
 struct enable_shared_from_this {
 private:
-    _INNER __smart_ptr_counter* owner_;
+    _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+
+    template <typename U>
+    friend void __set_enable_shared_from(enable_shared_from_this<U>*, _INNER __smart_ptr_counter*);
 
 protected:
-    enable_shared_from_this() noexcept : owner_(nullptr) {}
+    /**
+     * @brief 构造函数
+     */
+    enable_shared_from_this() noexcept {}
 
+    /**
+     * @brief 获取指向自身的共享指针
+     * @return 指向当前对象的共享指针
+     * @throw memory_exception 如果对象不由shared_ptr管理
+     */
     shared_ptr<T> shared_from_this() {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
-        if (!owner_) throw_exception(memory_exception("smart pointer share failed."));
+        if (!owner_) {
+            throw_exception(memory_exception("smart pointer share failed."));
+        }
         owner_->incref_strong();
         return _INNER __make_shared_fused(static_cast<T*>(this), owner_);
     }
 
+    /**
+     * @brief 获取指向自身的常量共享指针
+     * @return 指向当前对象的常量共享指针
+     * @throw memory_exception 如果对象不由shared_ptr管理
+     */
     shared_ptr<T const> shared_from_this() const {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
-        if (!owner_) throw_exception(memory_exception("smart pointer share failed."));
+        if (!owner_) {
+            throw_exception(memory_exception("smart pointer share failed."));
+        }
         owner_->incref_strong();
         return _INNER __make_shared_fused(static_cast<T const*>(this), owner_);
     }
-
-    template <typename U>
-    friend void __set_enable_shared_from(enable_shared_from_this<U>*, _INNER __smart_ptr_counter*);
 };
 
 
-template <typename T, typename... Args, enable_if_t<
-    !is_unbounded_array_v<T> && is_constructible_v<T, Args...>, int> = 0
->
-shared_ptr<T> make_shared(Args&&... args) {
+/**
+ * @brief 融合分配创建共享指针
+ * @tparam T 对象类型
+ * @tparam Args 参数类型
+ * @param args 构造参数
+ * @return 共享指针
+ * @throw memory_exception 如果构造对象时抛出错误
+ *
+ * 在单块内存中同时分配控制块和对象，提高内存局部性和性能。
+ */
+template <typename T, typename... Args>
+enable_if_t<!is_unbounded_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>>
+make_shared(Args&&... args) {
     auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
     using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
     constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
@@ -418,7 +742,7 @@ shared_ptr<T> make_shared(Args&&... args) {
     constexpr size_t size = offset + sizeof(T);
 #if MSTL_STANDARD_17__
     void* mem = ::operator new(size, static_cast<std::align_val_t>(align));
-    auto* counter = static_cast<Counter*>(mem);
+    Counter* counter = static_cast<Counter*>(mem);
 #else
     void* mem = ::operator new(size + align - 1);
     size_t aligned_addr = (reinterpret_cast<size_t>(mem) + (align - 1)) & ~(align - 1);
@@ -440,9 +764,40 @@ shared_ptr<T> make_shared(Args&&... args) {
     return _INNER __make_shared_fused(object, counter);
 }
 
-template <typename T, typename Alloc, typename... Args, enable_if_t<
-    !is_array_v<T> && is_constructible_v<T, Args...>, int> = 0>
-shared_ptr<T> allocate_shared(Alloc& alloc, Args&&... args) {
+/**
+ * @brief 创建动态数组的共享指针
+ * @tparam T 数组类型
+ * @param len 数组长度
+ * @return 共享指针
+ * @throw memory_exception 如果构造对象时抛出错误
+ */
+template <typename T>
+enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>>
+make_shared(const size_t len) {
+    using value = remove_extent_t<T>;
+    auto* tmp = new value[len]();
+    try {
+        return shared_ptr<T>(tmp);
+    } catch (...) {
+        delete[] tmp;
+        throw_exception(memory_exception("shared ptr construction failed."));
+    }
+    MSTL_UNREACHABLE;
+}
+
+/**
+ * @brief 使用分配器创建共享指针
+ * @tparam T 对象类型
+ * @tparam Alloc 分配器类型
+ * @tparam Args 参数类型
+ * @param alloc 分配器
+ * @param args 构造参数
+ * @return 共享指针
+ * @throw memory_exception 如果构造对象或控制块时抛出错误
+ */
+template <typename T, typename Alloc, typename... Args>
+enable_if_t<!is_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>>
+allocate_shared(Alloc& alloc, Args&&... args) {
     auto deleter = [](T* p) { p->~T(); };
     using ControlBlock = _INNER __smart_ptr_counter_impl_allocated<T, decltype(deleter), Alloc>;
 
@@ -466,7 +821,7 @@ shared_ptr<T> allocate_shared(Alloc& alloc, Args&&... args) {
         allocator_traits<Alloc>::construct(alloc, object_ptr, _MSTL forward<Args>(args)...);
     } catch (...) {
         allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw;
+        throw_exception(memory_exception("shared ptr ref object construction failed."));
     }
 
     ControlBlock* ctrl_block = nullptr;
@@ -475,130 +830,64 @@ shared_ptr<T> allocate_shared(Alloc& alloc, Args&&... args) {
     } catch (...) {
         allocator_traits<Alloc>::destroy(alloc, object_ptr);
         allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw;
+        throw_exception(memory_exception("shared ptr control block construction failed."));
     }
 
     _INNER __setup_enable_shared_from(object_ptr, ctrl_block);
     return _INNER __make_shared_fused(object_ptr, ctrl_block);
 }
 
-template <typename T, enable_if_t<!is_unbounded_array_v<T>, int> = 0>
-shared_ptr<T> make_shared_for_overwrite() {
-    auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
-    using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
-    constexpr size_t align = _MSTL max(alignof(T), alignof(Counter));
-    constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
-    constexpr size_t size = offset + sizeof(T);
-#if MSTL_STANDARD_17__
-    void* mem = operator new(size, static_cast<std::align_val_t>(align));
-    auto* counter = static_cast<Counter*>(mem);
-#else
-    void* mem = ::operator new(size + align - 1);
-    size_t aligned_addr = (reinterpret_cast<size_t>(mem) + (align - 1)) & ~(align - 1);
-    Counter* counter = reinterpret_cast<Counter*>(aligned_addr);
-#endif
-    T* object = reinterpret_cast<T*>(reinterpret_cast<char*>(counter) + offset);
-    try{
-        _MSTL construct(object);
-    } catch (...) {
-#if MSTL_STANDARD_17__
-        operator delete(mem, static_cast<std::align_val_t>(align));
-#else
-        operator delete(mem);
-#endif
-        throw_exception(memory_exception("shared ptr construction failed."));
-    }
-    new (counter) Counter(object, mem, deleter);
-    _INNER __setup_enable_shared_from(object, counter);
-    return _INNER __make_shared_fused(object, counter);
-}
 
-template <typename T, typename Alloc, enable_if_t<!is_array_v<T>, int> = 0>
-shared_ptr<T> allocate_shared_for_overwrite(Alloc& alloc) {
-    auto deleter = [](T* p) { p->~T(); };
-    using ControlBlock = _INNER __smart_ptr_counter_impl_allocated<T, decltype(deleter), Alloc>;
-
-    const size_t align = _MSTL max(alignof(ControlBlock), alignof(T));
-    const size_t offset = (sizeof(ControlBlock) + align - 1) & ~(align - 1);
-    const size_t total_size = offset + sizeof(T);
-    const size_t raw_size = total_size + align - 1;
-
-    using alloc_traits = allocator_traits<Alloc>;
-    using byte_allocator = typename alloc_traits::template alloc_rebind_t<Alloc, byte_t>;
-    byte_allocator byte_alloc(alloc);
-
-    byte_t *raw_mem = allocator_traits<byte_allocator>::allocate(byte_alloc, raw_size);
-
-    const uintptr_t raw_addr = reinterpret_cast<uintptr_t>(raw_mem);
-    const uintptr_t aligned_addr = (raw_addr + align - 1) & ~static_cast<uintptr_t>(align - 1);
-    auto aligned_mem = reinterpret_cast<byte_t*>(aligned_addr);
-    T* object_ptr = reinterpret_cast<T*>(aligned_mem + offset);
-
-    try {
-        ::new (object_ptr) T;
-    } catch (...) {
-        allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw;
-    }
-
-    ControlBlock* ctrl_block = nullptr;
-    try {
-        ctrl_block = ::new (aligned_mem) ControlBlock(object_ptr, raw_mem, raw_size, deleter, alloc);
-    } catch (...) {
-        object_ptr->~T();
-        allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw;
-    }
-
-    _INNER __setup_enable_shared_from(object_ptr, ctrl_block);
-    return _INNER __make_shared_fused(object_ptr, ctrl_block);
-}
-
-template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
-shared_ptr<T> make_shared(const size_t len) {
-    using value = remove_extent_t<T>;
-    auto* tmp = new value[len]();
-    try {
-        return shared_ptr<T>(tmp);
-    } catch (...) {
-        delete[] tmp;
-        throw_exception(memory_exception("shared ptr construction failed."));
-    }
-    return nullptr;
-}
-
-template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
-shared_ptr<T> make_shared_for_overwrite(const size_t len) {
-    using value = remove_extent_t<T>;
-    auto* tmp = new value[len];
-    try {
-        return shared_ptr<T>(tmp);
-    } catch (...) {
-        delete[] tmp;
-        throw_exception(memory_exception("shared ptr construction failed."));
-    }
-    return nullptr;
-}
-
-
+/**
+ * @brief 静态类型转换
+ * @tparam T 目标类型
+ * @tparam U 源类型
+ * @param ptr 源共享指针
+ * @return 转换后的共享指针
+ */
 template <typename T, typename U>
 shared_ptr<T> static_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, static_cast<T*>(ptr.get()));
 }
+
+/**
+ * @brief CV类型转换
+ * @tparam T 目标类型
+ * @tparam U 源类型
+ * @param ptr 源共享指针
+ * @return 转换后的共享指针
+ */
 template <typename T, typename U>
 shared_ptr<T> const_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, const_cast<T*>(ptr.get()));
 }
+
+/**
+ * @brief 重解释类型转换
+ * @tparam T 目标类型
+ * @tparam U 源类型
+ * @param ptr 源共享指针
+ * @return 转换后的共享指针
+ */
 template <typename T, typename U>
 shared_ptr<T> reinterpret_pointer_cast(const shared_ptr<U>& ptr) {
     return shared_ptr<T>(ptr, reinterpret_cast<T*>(ptr.get()));
 }
+
+/**
+ * @brief 动态类型转换
+ * @tparam T 目标类型
+ * @tparam U 源类型
+ * @param ptr 源共享指针
+ * @return 转换后的共享指针
+ */
 template <typename T, typename U>
 shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
     T* tmp = dynamic_cast<T*>(ptr.get());
     if (tmp != nullptr) return shared_ptr<T>(ptr, tmp);
     return nullptr;
 }
+
 
 template <typename T>
 struct hash<shared_ptr<T>> {
@@ -607,6 +896,8 @@ struct hash<shared_ptr<T>> {
         return hash<T*>()(ptr.get());
     }
 };
+
+/** @} */ // SharedPointer
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_MEMORY_SHARED_PTR_HPP__

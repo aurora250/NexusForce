@@ -50,7 +50,7 @@ void mysql_prepared_result::initialize_bindings() const {
     const MYSQL_FIELD* fields = mysql_fetch_fields(metadata_);
 
     for (uint32_t i = 0; i < column_count_; ++i) {
-        memory_set(&(*bind_results_)[i], 0, sizeof(MYSQL_BIND));
+        memory_zero(&(*bind_results_)[i]);
 
         const size_t buffer_size = get_buffer_size(fields[i].type);
         (*buffers_)[i].resize(buffer_size);

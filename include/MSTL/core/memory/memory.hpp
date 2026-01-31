@@ -26,8 +26,8 @@ MSTL_BEGIN_NAMESPACE__
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-MSTL_CONSTEXPR14 void* memory_copy(
-	void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void*
+memory_copy(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 	if (count == 0) return dest;
 
@@ -43,6 +43,20 @@ MSTL_CONSTEXPR14 void* memory_copy(
 }
 
 /**
+ * @brief 从源内存复制到目标内存
+ * @tparam T 目标类型
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @return 目标内存的起始指针，如果参数无效则返回nullptr
+ * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
+ */
+template <typename T>
+MSTL_CONSTEXPR14 void*
+memory_copy(T* MSTL_RESTRICT dest, const T* MSTL_RESTRICT src) noexcept {
+	return _MSTL memory_copy(dest, src, sizeof(T));
+}
+
+/**
  * @brief 从源内存复制到目标内存并返回复制结束位置
  * @param dest 目标内存指针
  * @param src 源内存指针
@@ -50,8 +64,8 @@ MSTL_CONSTEXPR14 void* memory_copy(
  * @return 目标内存复制结束后的下一个位置指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-MSTL_CONSTEXPR14 void* memory_copy_offset(
-	void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void*
+memory_copy_offset(void* MSTL_RESTRICT dest, const void* MSTL_RESTRICT src, size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 	auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -72,8 +86,8 @@ MSTL_CONSTEXPR14 void* memory_copy_offset(
  * @param count 最大复制字节数
  * @return 目标内存中停止字符后的下一个位置指针，如果没有找到字节则返回nullptr
  */
-MSTL_CONSTEXPR14 void* memory_copy_until(
-	void* dest, const void* src, const byte_t value, size_t count) noexcept {
+MSTL_CONSTEXPR14 void*
+memory_copy_until(void* dest, const void* src, const byte_t value, size_t count) noexcept {
     if (dest == nullptr || src == nullptr) return nullptr;
 
     auto dest_v = static_cast<volatile byte_t*>(dest);
@@ -101,8 +115,8 @@ MSTL_CONSTEXPR14 void* memory_copy_until(
  *         - 负数：左侧内存小于右侧内存
  *         - 0：两个内存区域相等
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(
-	const void* lhs, const void* rhs, size_t count) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int
+memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
 	if (lhs == nullptr && rhs == nullptr) return 0;
 	if (lhs == nullptr) return -1;
     if (rhs == nullptr) return 1;
@@ -117,6 +131,22 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(
 }
 
 /**
+ * @brief 比较两个内存区域的内容
+ * @tparam T 比较类型
+ * @param lhs 左侧内存指针
+ * @param rhs 右侧内存指针
+ * @return 比较结果：
+ *         - 正数：左侧内存大于右侧内存
+ *         - 负数：左侧内存小于右侧内存
+ *         - 0：两个内存区域相等
+ */
+template <typename T>
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int
+memory_compare(const T& lhs, const T& rhs) noexcept {
+	return _MSTL memory_compare(&lhs, &rhs, sizeof(T));
+}
+
+/**
  * @brief 从源内存移动数据到目标内存
  * @param dest 目标内存指针
  * @param src 源内存指针
@@ -124,7 +154,8 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 int memory_compare(
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 支持重叠区域，当dest < src时从前向后复制，当dest > src时从后向前复制。
  */
-MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
+MSTL_CONSTEXPR14 void*
+memory_move(void* dest, const void* src, size_t count) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 
 	void* res = dest;
@@ -151,7 +182,8 @@ MSTL_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) no
  * @param count 要填充的字节数
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  */
-MSTL_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
+MSTL_CONSTEXPR14 void*
+memory_set(void* dest, const byte_t value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 
 	void* ret = static_cast<byte_t*>(dest);
@@ -180,14 +212,26 @@ MSTL_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
 }
 
 /**
+ * @brief 将内存区域清零
+ * @tparam T 目标类型
+ * @param dest 目标内存指针
+ *
+ * 清零内存区域。如果参数无效则不执行任何操作。
+ */
+template <typename T>
+MSTL_CONSTEXPR14 void memory_zero(T* dest) noexcept {
+	_MSTL memory_zero(dest, sizeof(T));
+}
+
+/**
  * @brief 在内存中搜索特定字节
  * @param dest 要搜索的内存指针
  * @param value 要搜索的字节
  * @param count 要搜索的字节数
  * @return 指向第一个匹配字节的指针，如果没有找到则返回nullptr
  */
-MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const void* memory_find(
-	const void* dest, const byte_t value, size_t count) noexcept {
+MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const void*
+memory_find(const void* dest, const byte_t value, size_t count) noexcept {
 	if(dest == nullptr) return nullptr;
 	auto p = static_cast<const byte_t*>(dest);
 	while (count--) {
@@ -207,13 +251,14 @@ MSTL_PURE_FUNCTION MSTL_CONSTEXPR14 const void* memory_find(
  * @param pattern_len 模式长度
  * @return 指向第一个匹配模式起始位置的指针，如果没有找到则返回nullptr
  */
-MSTL_CONSTEXPR14 void* memory_find_pattern(
-	const void* data, const size_t data_len,
-	const void* pattern, const size_t pattern_len) noexcept {
+MSTL_CONSTEXPR14 const void*
+memory_find_pattern(const void* data, const size_t data_len,
+	                const void* pattern, const size_t pattern_len) noexcept {
 	if (data == nullptr || pattern == nullptr ||
 		data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
 		return nullptr;
 	}
+
 	const auto data_ptr = static_cast<const byte_t*>(data);
 	const auto pattern_ptr = static_cast<const byte_t*>(pattern);
 	const size_t last_possible = data_len - pattern_len + 1;
@@ -228,7 +273,7 @@ MSTL_CONSTEXPR14 void* memory_find_pattern(
 				}
 			}
 			if (match) {
-				return const_cast<byte_t*>(data_ptr + i);
+				return data_ptr + i;
 			}
 		}
 	}
@@ -246,7 +291,8 @@ MSTL_CONSTEXPR14 void* memory_find_pattern(
  * 将源类型的位表示重新解释为目标类型的表示。
  */
 template <typename To, typename From>
-MSTL_NODISCARD MSTL_CONSTEXPR20 To memory_cast(const From& value) noexcept {
+MSTL_NODISCARD MSTL_CONSTEXPR20 To
+memory_cast(const From& value) noexcept {
 	static_assert(sizeof(To) == sizeof(From), "types must have the same size");
 	static_assert(is_trivially_copyable_v<To>, "To type must be trivially copyable");
 	static_assert(is_trivially_copyable_v<From>, "From type must be trivially copyable");
@@ -254,6 +300,8 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 To memory_cast(const From& value) noexcept {
 #ifdef MSTL_STANDARD_20__
 	return __builtin_bit_cast(To, value);
 #else
+	static_assert(is_default_constructible_v<To>, "To type must be default constructible");
+
 	To result{};
 	_MSTL memory_copy(&result, &value, sizeof(To));
 	return result;
@@ -327,7 +375,8 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 CharT to_uppercase(const CharT c) noexcept 
  */
 template <typename CharT>
 constexpr CharT*
-string_copy(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src) noexcept {
+string_copy(CharT* MSTL_RESTRICT dest,
+			const CharT* MSTL_RESTRICT src) noexcept {
 	if(dest == nullptr || src == nullptr) return nullptr;
 	CharT* ret = dest;
 	while (*src != static_cast<CharT>(0)) {
@@ -337,27 +386,6 @@ string_copy(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src) noexcept 
 	}
 	*dest = *src;
 	return ret;
-}
-
-/**
- * @brief 复制字符串并返回指向结尾的指针
- * @tparam CharT 字符类型
- * @param dest 目标字符串指针
- * @param src 源字符串指针
- * @return 指向目标字符串结尾的指针，终止空字符之前
- * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
- */
-template <typename CharT>
-constexpr CharT*
-string_copy_offset(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src) noexcept {
-	if (dest == nullptr || src == nullptr) return nullptr;
-	while (*src != static_cast<CharT>(0)) {
-		*dest = *src;
-		++dest;
-		++src;
-	}
-	*dest = *src;
-	return dest - 1;
 }
 
 /**
@@ -375,11 +403,12 @@ string_copy_offset(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src) no
  */
 template <typename CharT>
 constexpr CharT*
-string_copy_n(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src,
-              const size_t count) noexcept {
+string_copy(CharT* MSTL_RESTRICT dest,
+			const CharT* MSTL_RESTRICT src,
+			const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
-	CharT* ret = dest;
 
+	CharT* ret = dest;
 	size_t i = 0;
 	while (i < count && *src != static_cast<CharT>(0)) {
 		*dest = *src;
@@ -397,6 +426,28 @@ string_copy_n(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src,
 }
 
 /**
+ * @brief 复制字符串并返回指向结尾的指针
+ * @tparam CharT 字符类型
+ * @param dest 目标字符串指针
+ * @param src 源字符串指针
+ * @return 指向目标字符串结尾的指针，终止空字符之前
+ * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
+ */
+template <typename CharT>
+constexpr CharT*
+string_copy_offset(CharT* MSTL_RESTRICT dest,
+				   const CharT* MSTL_RESTRICT src) noexcept {
+	if (dest == nullptr || src == nullptr) return nullptr;
+	while (*src != static_cast<CharT>(0)) {
+		*dest = *src;
+		++dest;
+		++src;
+	}
+	*dest = *src;
+	return dest - 1;
+}
+
+/**
  * @brief 复制指定长度的字符串并返回指向结尾的指针
  * @tparam CharT 字符类型
  * @param dest 目标字符串指针
@@ -407,8 +458,9 @@ string_copy_n(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src,
  */
 template <typename CharT>
 constexpr CharT*
-string_copy_n_offset(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src,
-	                 const size_t count) noexcept {
+string_copy_offset(CharT* MSTL_RESTRICT dest,
+				   const CharT* MSTL_RESTRICT src,
+				   const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 	size_t i = 0;
@@ -456,6 +508,34 @@ string_compare(const CharT* dest, const CharT* src) noexcept {
 }
 
 /**
+ * @brief 比较两个字符串的前n个字符
+ * @tparam CharT 字符类型
+ * @param dest 第一个字符串指针
+ * @param src 第二个字符串指针
+ * @param count 要比较的字符数
+ * @return 比较结果
+ */
+template <typename CharT>
+MSTL_PURE_FUNCTION constexpr int
+string_compare(const CharT* dest, const CharT* src, const size_t count) noexcept {
+	if (dest == nullptr && src == nullptr) return 0;
+	if (dest == nullptr) return -1;
+	if (src == nullptr) return 1;
+
+	if (count == 0) return 0;
+	size_t i = 0;
+	while (*dest == *src &&
+		   *dest != static_cast<CharT>(0) &&
+		   i < count - 1) {
+		++dest;
+		++src;
+		++i;
+	}
+	if (i == count - 1) return 0;
+	return *dest < *src ? -1 : *dest > *src ? 1 : 0;
+}
+
+/**
  * @brief 忽略大小写比较两个字符串
  * @tparam CharT 字符类型
  * @param s1 第一个字符串指针
@@ -484,34 +564,6 @@ string_compare_ignore_case(const CharT* s1, const CharT* s2) {
 }
 
 /**
- * @brief 比较两个字符串的前n个字符
- * @tparam CharT 字符类型
- * @param dest 第一个字符串指针
- * @param src 第二个字符串指针
- * @param count 要比较的字符数
- * @return 比较结果
- */
-template <typename CharT>
-MSTL_PURE_FUNCTION constexpr int
-string_compare_n(const CharT* dest, const CharT* src, const size_t count) noexcept {
-	if (dest == nullptr && src == nullptr) return 0;
-	if (dest == nullptr) return -1;
-	if (src == nullptr) return 1;
-
-	if (count == 0) return 0;
-	size_t i = 0;
-	while (*dest == *src &&
-		   *dest != static_cast<CharT>(0) &&
-		   i < count - 1) {
-		++dest;
-		++src;
-		++i;
-	}
-	if (i == count - 1) return 0;
-	return *dest < *src ? -1 : *dest > *src ? 1 : 0;
-}
-
-/**
  * @brief 忽略大小写比较两个字符串的前n个字符
  * @tparam CharT 字符类型
  * @param s1 第一个字符串指针
@@ -521,7 +573,7 @@ string_compare_n(const CharT* dest, const CharT* src, const size_t count) noexce
  */
 template <typename CharT>
 MSTL_PURE_FUNCTION constexpr int
-string_compare_n_ignore_case(const CharT* s1, const CharT* s2, const size_t count) noexcept {
+string_compare_ignore_case(const CharT* s1, const CharT* s2, const size_t count) noexcept {
 	if ((s1 == nullptr && s2 == nullptr) || count == 0) return 0;
 	if (s1 == nullptr) return -1;
 	if (s2 == nullptr) return 1;
@@ -550,7 +602,8 @@ string_compare_n_ignore_case(const CharT* s1, const CharT* s2, const size_t coun
  * @return 字符串长度，不包含终止空字符
  */
 template <typename CharT>
-MSTL_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
+MSTL_PURE_FUNCTION constexpr size_t
+string_length(const CharT* str) noexcept {
 	static_assert(is_character_v<CharT>, "CharT must be a character");
 	if (str == nullptr) return 0;
 	const CharT* p = str;
@@ -571,7 +624,7 @@ MSTL_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
  */
 template <typename CharT>
 MSTL_PURE_FUNCTION constexpr size_t
-string_length_n(const CharT* str, const size_t max_len) noexcept {
+string_length(const CharT* str, const size_t max_len) noexcept {
 	const CharT* p = str;
 	ptrdiff_t len = 0;
 	while (*p != static_cast<CharT>(0) && len < max_len) {
@@ -614,7 +667,7 @@ string_find(const CharT* str, const CharT chr) noexcept {
  */
 template <typename CharT>
 MSTL_PURE_FUNCTION constexpr const CharT*
-string_find_n(const CharT* str, const CharT chr, const size_t count) noexcept {
+string_find(const CharT* str, const CharT chr, const size_t count) noexcept {
 	if (str == nullptr || count == 0) return nullptr;
 
 	for (size_t i = 0; i < count; ++i) {
@@ -807,7 +860,8 @@ string_span_not_in(const CharT* str, const CharT* reject) noexcept {
  * @return 原字符串指针
  */
 template <typename CharT>
-constexpr CharT* string_set(CharT* str, const CharT value) noexcept {
+constexpr CharT*
+string_set(CharT* str, const CharT value) noexcept {
 	if (str == nullptr) return nullptr;
 	CharT* original = str;
 	while (*str != static_cast<CharT>(0)) {
@@ -827,7 +881,7 @@ constexpr CharT* string_set(CharT* str, const CharT value) noexcept {
  */
 template <typename CharT>
 constexpr CharT*
-string_set_n(CharT* str, const CharT value, const size_t count) noexcept {
+string_set(CharT* str, const CharT value, const size_t count) noexcept {
 	if (str == nullptr || count == 0) return str;
 	CharT* original = str;
 	size_t processed = 0;
@@ -846,7 +900,8 @@ string_set_n(CharT* str, const CharT value, const size_t count) noexcept {
  * @return 反转后的字符串指针
  */
 template <typename CharT>
-constexpr CharT* string_reverse(CharT* str) noexcept {
+constexpr CharT*
+string_reverse(CharT* str) noexcept {
 	if (str == nullptr || *str == static_cast<CharT>(0)) return str;
 
 	CharT* end = str;
@@ -900,9 +955,9 @@ string_concatenate(CharT* MSTL_RESTRICT dest, const CharT* MSTL_RESTRICT src) no
  */
 template <typename CharT>
 constexpr CharT*
-string_concatenate_n(CharT* MSTL_RESTRICT dest,
-	                 const CharT* MSTL_RESTRICT src,
-	                 const size_t count) noexcept {
+string_concatenate(CharT* MSTL_RESTRICT dest,
+				   const CharT* MSTL_RESTRICT src,
+				   const size_t count) noexcept {
 	if (dest == nullptr || src == nullptr) return nullptr;
 
 	CharT* original_dest = dest;

@@ -1,6 +1,6 @@
 #include <MSTL/core/async/thread.hpp>
-#include <MSTL/core/system/sysinfo.hpp>
 #include <MSTL/core/time/clocks.hpp>
+#include <MSTL/core/exception/terminate.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <process.h>
 #endif
@@ -127,10 +127,6 @@ void thread::detach() {
     handle_ = native_handle_type{};
 #endif
     state_ = DETACHED;
-}
-
-uint32_t thread::hardware_concurrency() noexcept {
-    return sysinfo::instance().get_system_info().processor_numbers;
 }
 
 MSTL_BEGIN_THIS_THREAD__

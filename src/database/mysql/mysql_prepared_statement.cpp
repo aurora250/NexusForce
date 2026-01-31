@@ -24,7 +24,7 @@ mysql_prepared_statement::mysql_prepared_statement(::MYSQL* conn, const string_v
     bind_params_.resize(param_count_);
     param_buffers_.resize(param_count_);
     for (unsigned int i = 0; i < param_count_; ++i) {
-        memory_zero(&bind_params_[i], sizeof(::MYSQL_BIND));
+        memory_zero(&bind_params_[i]);
     }
 }
 
@@ -61,7 +61,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const string_vie
         buffer.push_back('\0');
 
         ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind, sizeof(::MYSQL_BIND));
+        memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_STRING;
         bind.buffer = buffer.data();
         bind.buffer_length = buffer.size();
@@ -83,7 +83,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int32_t va
         memory_copy(buffer.data(), &value, sizeof(int32_t));
 
         ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind, sizeof(::MYSQL_BIND));
+        memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_LONG;
         bind.buffer = buffer.data();
         bind.is_unsigned = false;
@@ -103,7 +103,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int64_t va
         memory_copy(buffer.data(), &value, sizeof(int64_t));
 
         ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind, sizeof(::MYSQL_BIND));
+        memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_LONGLONG;
         bind.buffer = buffer.data();
         bind.is_unsigned = false;
@@ -123,7 +123,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t 
         memory_copy(buffer.data(), &value, sizeof(float64_t));
 
         ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind, sizeof(::MYSQL_BIND));
+        memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_DOUBLE;
         bind.buffer = buffer.data();
         return true;
@@ -142,7 +142,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const void* data
         memory_copy(buffer.data(), data, length);
 
         ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind, sizeof(::MYSQL_BIND));
+        memory_zero(&bind);
         bind.buffer_type = ::MYSQL_TYPE_BLOB;
         bind.buffer = buffer.data();
         bind.buffer_length = length;

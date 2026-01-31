@@ -29,7 +29,7 @@ private:
     void scanner_connect_task();
 
     template <typename T>
-    _MSTL shared_ptr<T> get_connect_impl();
+    shared_ptr<T> get_connect_impl();
 
 public:
     database_pool(DB_TYPE type, const db_config& config,
@@ -58,7 +58,7 @@ public:
 
 
 template <typename T>
-_MSTL shared_ptr<T> database_pool::get_connect_impl() {
+shared_ptr<T> database_pool::get_connect_impl() {
     _MSTL smart_lock<_MSTL mutex> lock(queue_mtx_);
 
     while (connect_queue_.empty() && running_) {
@@ -97,7 +97,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
         }
     }
 
-    auto conn_ptr = _MSTL shared_ptr<T>(
+    shared_ptr<T> conn_ptr {
         dynamic_cast<T*>(raw_conn),
         [this](T* p) {
             _MSTL lock<_MSTL mutex> lock1(queue_mtx_);
@@ -110,7 +110,7 @@ _MSTL shared_ptr<T> database_pool::get_connect_impl() {
             }
             cv_.notify_all();
         }
-    );
+    };
 
     cv_.notify_all();
     return conn_ptr;

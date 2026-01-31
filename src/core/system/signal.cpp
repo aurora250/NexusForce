@@ -1,6 +1,7 @@
 #include <MSTL/core/system/signal.hpp>
 #include <MSTL/core/algorithm/remove.hpp>
 #include <MSTL/core/system/console.hpp>
+#include <MSTL/core/exception/terminate.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <cstring>
 #include <cstdlib>
@@ -363,7 +364,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
         signal_context = nullptr;
 
         if (should_exit && event == SIGNAL_EVENT::FORCE_EXIT) {
-            terminate();
+            _MSTL terminate();
         }
     } else {
         switch (event) {

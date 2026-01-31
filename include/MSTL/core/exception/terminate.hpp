@@ -47,6 +47,8 @@ MSTL_NORETURN void MSTL_API terminate();
  * @brief 强制终止进程
  *
  * 强制终止调用进程，不会进行任何析构行为
+ *
+ * @note 此函数不会返回，进程将在执行终止处理函数后终止。
  */
 MSTL_NORETURN void MSTL_API abort();
 

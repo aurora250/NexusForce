@@ -8,7 +8,7 @@
  * 此文件提供了调用包装器的实现，用于延迟执行函数调用和参数打包。
  */
 
-#include "MSTL/core/utility/integer_sequence.hpp"
+#include "MSTL/core/utility/tuple.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -28,14 +28,14 @@ MSTL_BEGIN_NAMESPACE__
 template <typename... Types>
 struct call_wrapper {
 private:
-    template <typename>
+    template <typename Tuple>
     struct result_t;
 
     template <typename Func, typename... Args>
-    struct result_t<tuple<Func, Args...>>
+    struct result_t<_MSTL tuple<Func, Args...>>
         : _INNER __invoke_result_aux<Func, Args...> {};
 
-    using Tuple = tuple<decay_t<Types>...>;
+    using Tuple = _MSTL tuple<decay_t<Types>...>;
 
     Tuple tup_; ///< 存储函数和参数的元组
 

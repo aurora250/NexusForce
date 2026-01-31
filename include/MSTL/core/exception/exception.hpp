@@ -64,8 +64,6 @@ MSTL_BEGIN_NAMESPACE__
 		__MSTL_ERROR_TYPE(THIS) \
 	};
 
-/** @} */ // ExceptionHandling
-
 /**
  * @defgroup Exceptions 异常类集
  * @brief MSTL异常类集
@@ -78,21 +76,26 @@ MSTL_BEGIN_NAMESPACE__
  */
 struct MSTL_API exception {
 private:
-	static constexpr size_t INFO_SIZE = 256;  // 错误信息长度
+	static constexpr size_t INFO_SIZE = 256;  // 异常信息长度
 	static constexpr size_t TYPE_SIZE = 48;   // 类型名称长度
 
-	char info_[INFO_SIZE];  // 错误信息
-	char type_[TYPE_SIZE];  // 类型名称
+	char info_[INFO_SIZE];  // 异常信息
+	char type_[TYPE_SIZE];  // 异常类型
+	int code_{0};
 
 public:
 	/**
 	 * @brief 构造函数
-	 * @param info 错误信息
+	 * @param info 异常信息
 	 * @param type 异常类型
+	 * @param code 异常码
 	 */
-    explicit exception(const char* info = static_type, const char* type = static_type) {
-    	string_copy_n(info_, info, INFO_SIZE - 1);
-    	string_copy_n(type_, type, TYPE_SIZE - 1);
+    explicit exception(
+    	const char* info = static_type,
+    	const char* type = static_type,
+    	const int code = 0) : code_(code) {
+    	string_copy(info_, info, INFO_SIZE - 1);
+    	string_copy(type_, type, TYPE_SIZE - 1);
     	info_[INFO_SIZE - 1] = '\0';
     	type_[TYPE_SIZE - 1] = '\0';
     }
@@ -103,16 +106,19 @@ public:
 	exception(const exception& other) noexcept {
     	memory_copy(info_, other.info_, INFO_SIZE);
     	memory_copy(type_, other.type_, TYPE_SIZE);
+    	code_ = other.code_;
     }
 
 	/**
 	 * @brief 复制赋值运算符
 	 */
 	exception& operator =(const exception& other) noexcept {
-    	if (this != &other) {
-    		memory_copy(info_, other.info_, INFO_SIZE);
-    		memory_copy(type_, other.type_, TYPE_SIZE);
-    	}
+    	if (_MSTL addressof(other) == this) return *this;
+    	
+    	memory_copy(info_, other.info_, INFO_SIZE);
+    	memory_copy(type_, other.type_, TYPE_SIZE);
+    	code_ = other.code_;
+    	
     	return *this;
     }
 
@@ -120,21 +126,24 @@ public:
 	 * @brief 移动构造函数
 	 */
 	exception(exception&& other) noexcept {
-		memory_copy(this, &other, sizeof(*this));
+		memory_copy(this, &other);
 		other.info_[0] = '\0';
 		other.type_[0] = '\0';
+    	other.code_ = 0;
 	}
 
 	/**
 	 * @brief 移动赋值运算符
 	 */
 	exception& operator =(exception&& other) noexcept {
-    	if (this != &other) {
-    		memory_copy(info_, other.info_, INFO_SIZE);
-    		memory_copy(type_, other.type_, TYPE_SIZE);
-    		other.info_[0] = '\0';
-    		other.type_[0] = '\0';
-    	}
+    	if (_MSTL addressof(other) == this) return *this;
+    	
+    	memory_copy(info_, other.info_, INFO_SIZE);
+    	memory_copy(type_, other.type_, TYPE_SIZE);
+    	other.info_[0] = '\0';
+    	other.type_[0] = '\0';
+    	other.code_ = 0;
+    	
     	return *this;
     }
 
@@ -147,7 +156,7 @@ public:
 	 */
     template <typename Error>
     explicit exception(const Error& error)
-    : exception(error.what(), error.type()) {}
+    : exception(error.what(), error.type(), error.code()) {}
 
 	/**
 	 * @brief 虚析构函数
@@ -165,6 +174,12 @@ public:
 	 * @return 异常类型字符串
 	 */
     MSTL_NODISCARD const char* type() const noexcept { return type_; }
+	
+	/**
+	 * @brief 获取异常码
+	 * @return 异常类型码
+	 */
+	MSTL_NODISCARD int code() const noexcept { return code_; }
 
 	__MSTL_ERROR_TYPE(exception)  ///< 静态类型字符串
 };
@@ -233,12 +248,6 @@ MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Calculation 
 MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, "Database Operation Failed.")
 
 /** @} */ // Exceptions
-
-/**
- * @defgroup ExceptionHandling 异常处理
- * @brief MSTL异常处理类与工具
- * @{
- */
 
 /**
  * @brief 抛出异常并打印堆栈信息

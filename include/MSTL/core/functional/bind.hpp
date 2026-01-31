@@ -775,7 +775,7 @@ using bind_helper_t = typename bind_helper<IntLike, Func, BoundArgs...>::type;
  */
 template <typename Func, typename... BoundArgs>
 MSTL_DEPRECATE_FOR("use lambda or bind_front instead of bind")
-MSTL_NODISCARD constexpr bind_helper_t<is_integral_like<Func>::value, Func, BoundArgs...>
+MSTL_NODISCARD constexpr bind_helper_t<is_integral_like_v<Func>, Func, BoundArgs...>
 bind(Func&& func, BoundArgs&&... args) {
     return bind_helper_t<false, Func, BoundArgs...>(
             _MSTL forward<Func>(func),

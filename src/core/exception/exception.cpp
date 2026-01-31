@@ -2,7 +2,9 @@
 #include <MSTL/core/async/atomic.hpp>
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/system/stacktrace.hpp>
+#include <MSTL/core/exception/terminate.hpp>
 #include <stdio.h>
+#include <stdlib.h>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <signal.h>
 #endif
@@ -26,7 +28,7 @@ void set_terminate(terminate_handler handler) noexcept {
 void terminate() {
     const auto handler = get_terminate_handler().load(memory_order_acquire);
     if (handler) handler();
-    _MSTL abort();
+    std::abort();
 }
 
 void abort() {
