@@ -1,26 +1,26 @@
 var group___function_wrapper =
 [
-    [ "MSTL::function&lt; Sign &gt;", "class_m_s_t_l_1_1function.html", null ],
-    [ "MSTL::function&lt; Res(Args...)&gt;", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html", [
-      [ "result_type", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#aea6d172fe6787a29339114be32bf6da5", null ],
-      [ "function", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#ab169c4d9adb778d741b34fda672fb11b", null ],
-      [ "function", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#aedb69f65adf376036b092b256f2059c7", null ],
-      [ "function", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#ad3467aba22aebbe0ed463c5093fcfe11", null ],
-      [ "function", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a73a83e0908ea80d3ff4a566bc245b516", null ],
-      [ "operator bool", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a0b2eb5ef0537b5bb6a8e74ddf6ce741b", null ],
-      [ "operator()", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#aba12acc35a3494c1fa76d569302ef55a", null ],
-      [ "operator=", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a883ee3b9913b2207afeb5e87fbd13d81", null ],
-      [ "operator=", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a2bd63cbfcc218593688e012e9219fd3a", null ],
-      [ "operator=", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#ad16f917b59038988101c1270f3b558d5", null ],
-      [ "operator=", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a0b52291abc42932b1ab32c43484b5233", null ],
-      [ "operator=", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#aedacbd2e379cc0b2bd1279c4794dc003", null ],
-      [ "swap", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#af82e693113bd406da6a7f44b1f90e635", null ],
-      [ "target", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a7af3ff8bb8196fc4207c9f89d95dc8c3", null ],
-      [ "target", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a14947743f90bf06fd68f1655445991dc", null ],
-      [ "target_type", "class_m_s_t_l_1_1function_3_01_res_07_args_8_8_8_08_4.html#a32e8b665861016b1b3d44677537ad82a", null ]
+    [ "function&lt; Sign &gt;", "classfunction.html", null ],
+    [ "function&lt; Res(Args...)&gt;", "classfunction_3_01_res_07_args_8_8_8_08_4.html", [
+      [ "result_type", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a31c65b4bba8c6e7beffc751b9ea42119", null ],
+      [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ad363bb49cdcc1541546551459cf6a3aa", null ],
+      [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a7b21b831badaa9c8297a279fd11eee78", null ],
+      [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a8b9dc23b4970726bc5fce8925231bcbf", null ],
+      [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a00a42cb04712495047a9e75f93b652f4", null ],
+      [ "operator bool", "classfunction_3_01_res_07_args_8_8_8_08_4.html#abdac020efb6e509d72cb4cc1df3a9e79", null ],
+      [ "operator()", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a1bf3cbe37436666a8394141a26273df2", null ],
+      [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ab6b0bd781f10045fa435effb4ee02080", null ],
+      [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a48dd723febb49c87663b95c36cd07d21", null ],
+      [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a50c953c7dde267ae8e8112538865392d", null ],
+      [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a1cb18ead26cfffe1367bdade3762a7c0", null ],
+      [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a65dbdcfecc55b71a8e6838d44e1f4ada", null ],
+      [ "swap", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a236718e96a3d4a998d92c452628658f4", null ],
+      [ "target", "classfunction_3_01_res_07_args_8_8_8_08_4.html#abf41cd8f894b26ca15f60ca767ca54ae", null ],
+      [ "target", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ac79c561099903e52b9d9f73858642020", null ],
+      [ "target_type", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a303644f96f6c090a9102f13a0f08249e", null ]
     ] ],
-    [ "MSTL::operator!=", "group___function_wrapper.html#ga75ada584eb7ab375dcea49c136c16947", null ],
-    [ "MSTL::operator!=", "group___function_wrapper.html#ga89907c345ef4aacfe7fc4b86a4576edd", null ],
-    [ "MSTL::operator==", "group___function_wrapper.html#ga6ef6ac0ca8b9c152c68dd65ad6e5bb06", null ],
-    [ "MSTL::operator==", "group___function_wrapper.html#ga169c542bc679120feebcbb3c4785e7f3", null ]
+    [ "operator!=", "group___function_wrapper.html#ga02cbb5757685881974ec0e705a9cc4f6", null ],
+    [ "operator!=", "group___function_wrapper.html#gaa601830da70ee8e10258a44b29266e10", null ],
+    [ "operator==", "group___function_wrapper.html#ga1fb8c74ea1abc8e6c7f2e6ebb157939d", null ],
+    [ "operator==", "group___function_wrapper.html#ga330b81e6cea5df2226b6c4dfb3f7b6f7", null ]
 ];

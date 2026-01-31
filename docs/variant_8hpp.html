@@ -95,43 +95,41 @@ $(function(){initNavTree('variant_8hpp.html','',''); });
 
 <p>MSTL变体类型实现  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="non_8hpp_source.html">non.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="none_8hpp_source.html">MSTL/core/utility/none.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+variant.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="variant_8hpp__incl.svg" width="264" height="656"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <p><a href="variant_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:MSTL_3A_3Avariant_3C_20Types_20_3E" id="r_MSTL_3A_3Avariant_3C_20Types_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1variant.html">MSTL::variant&lt; Types &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">变体类型主模板  <a href="struct_m_s_t_l_1_1variant.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:variant_3C_20Types_20_3E" id="r_variant_3C_20Types_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvariant.html">variant&lt; Types &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">变体类型主模板  <a href="structvariant.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:ga57bfa98535cc0ddff0c865441af2f9a5" id="r_ga57bfa98535cc0ddff0c865441af2f9a5"><td class="memTemplParams" colspan="2">
-template&lt;typename Variant, <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Idx&gt; </td></tr>
-<tr class="memitem:ga57bfa98535cc0ddff0c865441af2f9a5 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>MSTL::variant_alternative_t</b> = typename <a class="el" href="struct_m_s_t_l_1_1variant__alternative.html">variant_alternative</a>&lt;Variant, Idx&gt;::type</td></tr>
-<tr class="memdesc:ga57bfa98535cc0ddff0c865441af2f9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">variant_alternative的便捷别名，获取变体中指定索引位置的类型 <br /></td></tr>
+<tr class="memitem:gac276a03687a0669787a73fafe9ffedef" id="r_gac276a03687a0669787a73fafe9ffedef"><td class="memTemplParams" colspan="2">
+template&lt;typename Variant, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx&gt; </td></tr>
+<tr class="memitem:gac276a03687a0669787a73fafe9ffedef template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>variant_alternative_t</b> = typename <a class="el" href="structvariant__alternative.html">variant_alternative</a>&lt;Variant, Idx&gt;::type</td></tr>
+<tr class="memdesc:gac276a03687a0669787a73fafe9ffedef"><td class="mdescLeft">&#160;</td><td class="mdescRight">variant_alternative的便捷别名，获取变体中指定索引位置的类型 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:gae52cfe2093d7f0d2e1be5ac17b9484e9" id="r_gae52cfe2093d7f0d2e1be5ac17b9484e9"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Idx, typename... Types&gt; </td></tr>
-<tr class="memitem:gae52cfe2093d7f0d2e1be5ac17b9484e9 template"><td class="memItemLeft">constexpr <a class="el" href="group___variant_type_traits.html#ga57bfa98535cc0ddff0c865441af2f9a5">variant_alternative_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#gae52cfe2093d7f0d2e1be5ac17b9484e9">MSTL::get</a> (<a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt; &amp;v)</td></tr>
-<tr class="memdesc:gae52cfe2093d7f0d2e1be5ac17b9484e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的引用  <br /></td></tr>
-<tr class="memitem:ga58366dd1446ea1494828663e16dc0a2b" id="r_ga58366dd1446ea1494828663e16dc0a2b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Idx, typename... Types&gt; </td></tr>
-<tr class="memitem:ga58366dd1446ea1494828663e16dc0a2b template"><td class="memItemLeft">constexpr const <a class="el" href="group___variant_type_traits.html#ga57bfa98535cc0ddff0c865441af2f9a5">variant_alternative_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#ga58366dd1446ea1494828663e16dc0a2b">MSTL::get</a> (const <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt; &amp;v)</td></tr>
-<tr class="memdesc:ga58366dd1446ea1494828663e16dc0a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的常量引用  <br /></td></tr>
-<tr class="memitem:ga5456d001eac31f19018b8d5b02ed5b35" id="r_ga5456d001eac31f19018b8d5b02ed5b35"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Idx, typename... Types&gt; </td></tr>
-<tr class="memitem:ga5456d001eac31f19018b8d5b02ed5b35 template"><td class="memItemLeft">constexpr <a class="el" href="group___variant_type_traits.html#ga57bfa98535cc0ddff0c865441af2f9a5">variant_alternative_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#ga5456d001eac31f19018b8d5b02ed5b35">MSTL::get</a> (<a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt; &amp;&amp;v)</td></tr>
-<tr class="memdesc:ga5456d001eac31f19018b8d5b02ed5b35"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的右值引用  <br /></td></tr>
-<tr class="memitem:gaf32a952b8493613937f1bcc1d6955bdc" id="r_gaf32a952b8493613937f1bcc1d6955bdc"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a> Idx, typename... Types&gt; </td></tr>
-<tr class="memitem:gaf32a952b8493613937f1bcc1d6955bdc template"><td class="memItemLeft">constexpr const <a class="el" href="group___variant_type_traits.html#ga57bfa98535cc0ddff0c865441af2f9a5">variant_alternative_t</a>&lt; <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#gaf32a952b8493613937f1bcc1d6955bdc">MSTL::get</a> (const <a class="el" href="struct_m_s_t_l_1_1variant.html">variant</a>&lt; Types... &gt; &amp;&amp;v)</td></tr>
-<tr class="memdesc:gaf32a952b8493613937f1bcc1d6955bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的常量右值引用  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-变量</h2></td></tr>
-<tr class="memitem:gac6a3a0b4b4db1ec3d61f11cc1555f42f" id="r_gac6a3a0b4b4db1ec3d61f11cc1555f42f"><td class="memTemplParams" colspan="2">
-template&lt;typename Variant, typename T&gt; </td></tr>
-<tr class="memitem:gac6a3a0b4b4db1ec3d61f11cc1555f42f template"><td class="memItemLeft">constexpr <a class="el" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>&#160;</td><td class="memItemRight"><b>MSTL::variant_index_v</b> = <a class="el" href="struct_m_s_t_l_1_1variant__index.html">variant_index</a>&lt;Variant, T&gt;::value</td></tr>
-<tr class="memdesc:gac6a3a0b4b4db1ec3d61f11cc1555f42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">variant_index的便捷别名，获取类型在变体中的索引值 <br /></td></tr>
+<tr class="memitem:ga1531c7fe79103d53a875e902c92f65c6" id="r_ga1531c7fe79103d53a875e902c92f65c6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx, typename... Types&gt; </td></tr>
+<tr class="memitem:ga1531c7fe79103d53a875e902c92f65c6 template"><td class="memItemLeft">MSTL_CONSTEXPR20 <a class="el" href="group___variant_type_traits.html#gac276a03687a0669787a73fafe9ffedef">variant_alternative_t</a>&lt; <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#ga1531c7fe79103d53a875e902c92f65c6">get</a> (<a class="el" href="structvariant.html">variant</a>&lt; Types... &gt; &amp;v)</td></tr>
+<tr class="memdesc:ga1531c7fe79103d53a875e902c92f65c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的引用  <br /></td></tr>
+<tr class="memitem:gaf579dcd8cb81817ebd6fa2fbcdb3e505" id="r_gaf579dcd8cb81817ebd6fa2fbcdb3e505"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx, typename... Types&gt; </td></tr>
+<tr class="memitem:gaf579dcd8cb81817ebd6fa2fbcdb3e505 template"><td class="memItemLeft">MSTL_CONSTEXPR20 const <a class="el" href="group___variant_type_traits.html#gac276a03687a0669787a73fafe9ffedef">variant_alternative_t</a>&lt; <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#gaf579dcd8cb81817ebd6fa2fbcdb3e505">get</a> (const <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt; &amp;v)</td></tr>
+<tr class="memdesc:gaf579dcd8cb81817ebd6fa2fbcdb3e505"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的常量引用  <br /></td></tr>
+<tr class="memitem:ga8d491e41aa9c2aa57a5dca51617ec1a6" id="r_ga8d491e41aa9c2aa57a5dca51617ec1a6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx, typename... Types&gt; </td></tr>
+<tr class="memitem:ga8d491e41aa9c2aa57a5dca51617ec1a6 template"><td class="memItemLeft">MSTL_CONSTEXPR20 <a class="el" href="group___variant_type_traits.html#gac276a03687a0669787a73fafe9ffedef">variant_alternative_t</a>&lt; <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#ga8d491e41aa9c2aa57a5dca51617ec1a6">get</a> (<a class="el" href="structvariant.html">variant</a>&lt; Types... &gt; &amp;&amp;v)</td></tr>
+<tr class="memdesc:ga8d491e41aa9c2aa57a5dca51617ec1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的右值引用  <br /></td></tr>
+<tr class="memitem:ga7354064c9a0b5105cb654bcff44e9e1c" id="r_ga7354064c9a0b5105cb654bcff44e9e1c"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx, typename... Types&gt; </td></tr>
+<tr class="memitem:ga7354064c9a0b5105cb654bcff44e9e1c template"><td class="memItemLeft">MSTL_CONSTEXPR20 const <a class="el" href="group___variant_type_traits.html#gac276a03687a0669787a73fafe9ffedef">variant_alternative_t</a>&lt; <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt;, Idx &gt; &amp;&amp;&#160;</td><td class="memItemRight"><a class="el" href="group___variant.html#ga7354064c9a0b5105cb654bcff44e9e1c">get</a> (const <a class="el" href="structvariant.html">variant</a>&lt; Types... &gt; &amp;&amp;v)</td></tr>
+<tr class="memdesc:ga7354064c9a0b5105cb654bcff44e9e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变体中指定索引位置的常量右值引用  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>MSTL变体类型实现 </p>

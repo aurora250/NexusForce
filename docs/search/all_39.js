@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

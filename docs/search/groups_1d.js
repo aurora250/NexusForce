@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___invoker.html',1,'']]]
+  ['命名空间宏_0',['命名空间宏',['../group___namespace_macros.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['删除算法_0',['删除算法',['../group___remove_algorithms.html',1,'']]]
+  ['信号量_0',['信号量',['../group___semaphores.html',1,'']]]
 ];

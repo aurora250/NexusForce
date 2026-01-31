@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['基本接口_0',['基本接口',['../group___base_interfaces.html',1,'']]]
+  ['参数转发函数_0',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

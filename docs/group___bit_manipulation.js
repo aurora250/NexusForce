@@ -1,19 +1,16 @@
 var group___bit_manipulation =
 [
-    [ "MSTL::bit_ceil", "group___bit_manipulation.html#ga7e6daf36c7dc866bd8c44d2ae0c963a6", null ],
-    [ "MSTL::bit_extract", "group___bit_manipulation.html#ga40b4e81cebc2f33dae5d23076ba67a3d", null ],
-    [ "MSTL::bit_floor", "group___bit_manipulation.html#ga90694822ecd046ba71c4fd7342ceb53e", null ],
-    [ "MSTL::bit_insert", "group___bit_manipulation.html#ga7d79032046b3cae7cd6b4d3e4c7be828", null ],
-    [ "MSTL::bit_width", "group___bit_manipulation.html#gae4a63793036327e576dee85f4c45f547", null ],
-    [ "MSTL::has_single_bit", "group___bit_manipulation.html#ga52af463d99fce7b8bd3754f38ddc48f9", null ],
-    [ "MSTL::mask_from_to", "group___bit_manipulation.html#gad9da2a09ac7a9c22c3ee54a7064d7dd7", null ],
-    [ "MSTL::reverse_bits", "group___bit_manipulation.html#ga3fe35e2b214c7aa7f6f8f8a5694326eb", null ],
-    [ "MSTL::reverse_bits32", "group___bit_manipulation.html#ga593f681c891395e5350d6ed4fa2dd987", null ],
-    [ "MSTL::reverse_bits64", "group___bit_manipulation.html#gabbef0e679447e60d96f3aa5560e84d07", null ],
-    [ "MSTL::rotate_l", "group___bit_manipulation.html#gaa8ec38cc19b0b4df399e85f153459a2a", null ],
-    [ "MSTL::rotate_l32", "group___bit_manipulation.html#ga9bdd61ba37325bff7410c9681d1aeef8", null ],
-    [ "MSTL::rotate_l64", "group___bit_manipulation.html#ga7f7daf8e665d5eebc3aaa5f975e15e49", null ],
-    [ "MSTL::rotate_r", "group___bit_manipulation.html#gac939c271bcc57a5f87da48ad29f09c72", null ],
-    [ "MSTL::rotate_r32", "group___bit_manipulation.html#gaca06474bc65d3dc747872389cffed448", null ],
-    [ "MSTL::rotate_r64", "group___bit_manipulation.html#gacb7a7f86310fea5e7472193fca5987d9", null ]
+    [ "bit_ceil", "group___bit_manipulation.html#ga86c464e43893955f4be6398fefebcf78", null ],
+    [ "bit_extract", "group___bit_manipulation.html#gaca5121f02918b2cea077eb25512cb83c", null ],
+    [ "bit_floor", "group___bit_manipulation.html#gace6550d923413b36d07c574320cff214", null ],
+    [ "bit_insert", "group___bit_manipulation.html#gaf6e2956e058dcdc72ac04576b370d06d", null ],
+    [ "bit_width", "group___bit_manipulation.html#gae781ff6a7fad2bc8db38b0c3b371658e", null ],
+    [ "has_single_bit", "group___bit_manipulation.html#gaca7d03246c48e209e00c3355d632e1da", null ],
+    [ "mask_from_to", "group___bit_manipulation.html#ga502c62305af2c0eb853c3d7d755933bd", null ],
+    [ "reverse_bits", "group___bit_manipulation.html#ga6d479a2f9fba29a8fc0109f60c2b4254", null ],
+    [ "reverse_bits32", "group___bit_manipulation.html#ga6de5f0119aba8d2ada54869eb926022b", null ],
+    [ "rotate_l", "group___bit_manipulation.html#ga9fc1b61f90be002a9967a8fa16e4508a", null ],
+    [ "rotate_l32", "group___bit_manipulation.html#gad57600849ab32842d69766bd47ee9fca", null ],
+    [ "rotate_r", "group___bit_manipulation.html#ga942943169f9c35e404f16eb1f336a428", null ],
+    [ "rotate_r32", "group___bit_manipulation.html#gacb73da1b17237c801c47b796ad1c1955", null ]
 ];

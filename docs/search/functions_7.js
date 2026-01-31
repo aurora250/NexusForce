@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['has_5fsingle_5fbit_0',['has_single_bit',['../group___bit_manipulation.html#ga52af463d99fce7b8bd3754f38ddc48f9',1,'MSTL']]],
-  ['highest_5fset_5fbit_5fpos_1',['highest_set_bit_pos',['../group___bit_counting.html#gaaccd4c50180520ad862414a46ed4f89d',1,'MSTL']]],
-  ['holds_5falternative_2',['holds_alternative',['../struct_m_s_t_l_1_1variant.html#ae227839dd8431388b42d903a404b6d26',1,'MSTL::variant']]]
+  ['has_5fsingle_5fbit_0',['has_single_bit',['../group___bit_manipulation.html#gaca7d03246c48e209e00c3355d632e1da',1,'bit.hpp']]],
+  ['has_5fvalue_1',['has_value',['../classoptional.html#a957d58febe936cffc2289c9de67439ce',1,'optional::has_value()'],['../classoptional_3_01_t_01_6_01_4.html#a70d0525a01ad5e871c6124f38458a108',1,'optional&lt; T &amp; &gt;::has_value()']]],
+  ['highest_5fset_5fbit_5fpos_2',['highest_set_bit_pos',['../group___bit_counting.html#ga8483ba5677444e4fb1c44079cb584439',1,'bit.hpp']]],
+  ['holds_5falternative_3',['holds_alternative',['../structvariant.html#a06b344f17172ebd0b828c4de4f2d55c3',1,'variant']]]
 ];

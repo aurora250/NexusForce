@@ -1,31 +1,26 @@
 var group___type_traits_utilities =
 [
-    [ "MSTL::integral_constant&lt; T, Value &gt;", "struct_m_s_t_l_1_1integral__constant.html", [
-      [ "type", "struct_m_s_t_l_1_1integral__constant.html#ab16db61ebc224c408ed57e05ed6bf8ea", null ],
-      [ "value_type", "struct_m_s_t_l_1_1integral__constant.html#aa04772a8dfbe62b0067b840e83e844e3", null ],
-      [ "operator value_type", "struct_m_s_t_l_1_1integral__constant.html#affb4296d28ed340814c344ce88bee808", null ],
-      [ "operator()", "struct_m_s_t_l_1_1integral__constant.html#a1de6201db15fdaf6e639ebac8fbe5c82", null ]
+    [ "integral_constant&lt; T, Value &gt;", "structintegral__constant.html", [
+      [ "type", "structintegral__constant.html#a24446c10796b5f7a335245fa783edb29", null ],
+      [ "value_type", "structintegral__constant.html#a6bc197dec912ffb591ae56c78832e531", null ],
+      [ "operator value_type", "structintegral__constant.html#a4ff4207945e493620ae49f128339f711", null ],
+      [ "operator()", "structintegral__constant.html#af720d955a191967bfac4d29a4b2b6ba6", null ]
     ] ],
-    [ "MSTL::enable_if&lt; Test, T &gt;", "struct_m_s_t_l_1_1enable__if.html", null ],
-    [ "MSTL::conditional&lt; Test, T1, T2 &gt;", "struct_m_s_t_l_1_1conditional.html", null ],
-    [ "MSTL::negation&lt; T &gt;", "struct_m_s_t_l_1_1negation.html", null ],
-    [ "MSTL::is_same&lt; T1, T2 &gt;", "struct_m_s_t_l_1_1is__same.html", null ],
-    [ "MSTL::type_identity&lt; T &gt;", "struct_m_s_t_l_1_1type__identity.html", null ],
-    [ "MSTL::is_any_of&lt; T, Types &gt;", "struct_m_s_t_l_1_1is__any__of.html", null ],
-    [ "MSTL::disjunction&lt; Args &gt;", "struct_m_s_t_l_1_1disjunction.html", null ],
-    [ "MSTL::conjunction&lt; Args &gt;", "struct_m_s_t_l_1_1conjunction.html", null ],
-    [ "MSTL::bool_constant", "group___type_traits_utilities.html#ga6807153293c6887da9558dd142e3b08d", null ],
-    [ "MSTL::conditional_t", "group___type_traits_utilities.html#ga40bf78624178935be6ea58fd05b01f32", null ],
-    [ "MSTL::enable_if_t", "group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06", null ],
-    [ "MSTL::false_type", "group___type_traits_utilities.html#gae4ca0ae0cb41ccd3887c312f3f9b347e", null ],
-    [ "MSTL::true_type", "group___type_traits_utilities.html#ga0fdbd1076bfada90af67922b4d6aeae7", null ],
-    [ "MSTL::type_identity_t", "group___type_traits_utilities.html#gadc6b7369183f1a0af610a74cd8182f1f", null ],
-    [ "MSTL::uint32_constant", "group___type_traits_utilities.html#gac37b7433905515ae7b61e4d5c951bbd6", null ],
-    [ "MSTL::uint64_constant", "group___type_traits_utilities.html#ga0ac161ce54b070736379bf20c0f2736f", null ],
-    [ "MSTL::void_t", "group___type_traits_utilities.html#gac7d108b842bab8a0b4b716bcfac22d81", null ],
-    [ "MSTL::conjunction_v", "group___type_traits_utilities.html#gafc6cdbaa9b1d552db70360fdeceb91cc", null ],
-    [ "MSTL::disjunction_v", "group___type_traits_utilities.html#ga60997efc0cf48dde287fadc287faafcc", null ],
-    [ "MSTL::is_any_of_v", "group___type_traits_utilities.html#ga6dd33e0f0612d951762f2fae85e66d78", null ],
-    [ "MSTL::is_same_v", "group___type_traits_utilities.html#ga7d6c2e219f1fc199dfca2fd823d80b3c", null ],
-    [ "MSTL::negation_v", "group___type_traits_utilities.html#gaaac8f9f65a01e829018c094ef21a18d1", null ]
+    [ "enable_if&lt; Test, T &gt;", "structenable__if.html", null ],
+    [ "conditional&lt; Test, T1, T2 &gt;", "structconditional.html", null ],
+    [ "negation&lt; T &gt;", "structnegation.html", null ],
+    [ "is_same&lt; T1, T2 &gt;", "structis__same.html", null ],
+    [ "type_identity&lt; T &gt;", "structtype__identity.html", null ],
+    [ "is_any_of&lt; T, Types &gt;", "structis__any__of.html", null ],
+    [ "disjunction&lt; Args &gt;", "structdisjunction.html", null ],
+    [ "conjunction&lt; Args &gt;", "structconjunction.html", null ],
+    [ "bool_constant", "group___type_traits_utilities.html#gaecd67118189edfc6436511ce3f23aef1", null ],
+    [ "conditional_t", "group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568", null ],
+    [ "enable_if_t", "group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0", null ],
+    [ "false_type", "group___type_traits_utilities.html#gad15d3ff5d80b8c8c22e9ce862353ba55", null ],
+    [ "true_type", "group___type_traits_utilities.html#gaa4e9c28fa52ab73ef48e5cbed20c66fd", null ],
+    [ "type_identity_t", "group___type_traits_utilities.html#gaca42c1976d1b12998afcabf8f39e8c23", null ],
+    [ "uint32_constant", "group___type_traits_utilities.html#ga99d0f13212900f3166c091716cf02e79", null ],
+    [ "uint64_constant", "group___type_traits_utilities.html#ga22c6a829369b68d4cce75ec06f938e16", null ],
+    [ "void_t", "group___type_traits_utilities.html#gab8ddf9531fc4ac7ce28574db20c8f20e", null ]
 ];

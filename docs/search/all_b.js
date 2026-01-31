@@ -1,26 +1,4 @@
 var searchData=
 [
-  ['lcm_0',['lcm',['../group___math_functions.html#gaf33e1026291cd89f1b90b21fe1e84a61',1,'MSTL::lcm(const T &amp;m, const T &amp;n) noexcept'],['../math_8hpp.html#gaf33e1026291cd89f1b90b21fe1e84a61',1,'MSTL::lcm(const T &amp;m, const T &amp;n) noexcept']]],
-  ['leonardo_1',['leonardo',['../group___math_functions.html#gae4bb091c70b4aaf592c75264fa068985',1,'MSTL']]],
-  ['less_2',['less',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20key_20_3e_3',['less&lt; Key &gt;',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20node_20_3e_4',['less&lt; node &gt;',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20token_20_3e_5',['less&lt; token &gt;',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20typename_20vector_3c_20priority_5ftask_20_3e_3a_3avalue_5ftype_20_3e_6',['less&lt; typename vector&lt; priority_task &gt;::value_type &gt;',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20typename_20vector_3c_20t_20_3e_3a_3avalue_5ftype_20_3e_7',['less&lt; typename vector&lt; T &gt;::value_type &gt;',['../struct_m_s_t_l_1_1less.html',1,'MSTL']]],
-  ['less_3c_20void_20_3e_8',['less&lt; void &gt;',['../struct_m_s_t_l_1_1less_3_01void_01_4.html',1,'MSTL']]],
-  ['less_5fequal_9',['less_equal',['../struct_m_s_t_l_1_1less__equal.html',1,'MSTL']]],
-  ['less_5fequal_3c_20void_20_3e_10',['less_equal&lt; void &gt;',['../struct_m_s_t_l_1_1less__equal_3_01void_01_4.html',1,'MSTL']]],
-  ['less_5fto_11',['less_to',['../struct_m_s_t_l_1_1tuple_3_4.html#aa63881326523c31e7a33862db7b0fc4a',1,'MSTL::tuple&lt;&gt;::less_to()'],['../struct_m_s_t_l_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4.html#a6876f4c78cdeb7bd31d294f70912df93',1,'MSTL::tuple&lt; This, Rest... &gt;::less_to()']]],
-  ['lexicographical_5fcompare_12',['lexicographical_compare',['../group___compare_algorithms.html#ga3b4e7142ebfd7ab46c73315f05c60065',1,'MSTL::lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))'],['../group___compare_algorithms.html#ga4c0b03048958edf210c9281a9908875d',1,'MSTL::lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(MSTL::inner::__lexicographical_compare_aux(first1, last1, first2, last2)))']]],
-  ['logarithm_13',['logarithm',['../group___math_functions.html#ga8dd92f5bbf46bd3f087ae51660757bcb',1,'MSTL']]],
-  ['logarithm_5f10_14',['logarithm_10',['../group___math_functions.html#ga511fe80bcfd5f83c01ecdf3e24a2063b',1,'MSTL']]],
-  ['logarithm_5f2_15',['logarithm_2',['../group___math_functions.html#ga242eb71a507d6165392a128153b883c8',1,'MSTL']]],
-  ['logarithm_5fe_16',['logarithm_e',['../group___math_functions.html#ga99cb1c861484b56fe0ef0532b5ef70a2',1,'MSTL']]],
-  ['lomuto_5fpartition_17',['lomuto_partition',['../group___partition_algorithms.html#ga7903fec941e4ebcc9139b8136253aec9',1,'MSTL::lomuto_partition(Iterator first, Iterator last, const T &amp;pivot, Compare comp)'],['../group___partition_algorithms.html#gae522d9f5e4004248bb5c1b1c5a667ca7',1,'MSTL::lomuto_partition(Iterator first, Iterator last, const T &amp;pivot)']]],
-  ['low_18',['low',['../struct_m_s_t_l_1_1murmur__hash.html#aca35490055af78f26d4121f1ec5277c7',1,'MSTL::murmur_hash']]],
-  ['low_5fprecise_5ftolerance_19',['LOW_PRECISE_TOLERANCE',['../group___math_constants.html#gab6b42ef8aae68588cd16c4d70bed7dac',1,'MSTL']]],
-  ['lower_5fbound_20',['lower_bound',['../group___bound_algorithms.html#gad071c0512449ad437eb0f201125ba07a',1,'MSTL::lower_bound(Iterator first, Iterator last, const T &amp;value, Compare comp)'],['../group___bound_algorithms.html#gad7bc86b742e8a93ce92d8cdfc9b0f5c8',1,'MSTL::lower_bound(Iterator first, Iterator last, const T &amp;value)']]],
-  ['lowest_21',['lowest',['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; T, enable_if_t&lt; is_unpackaged&lt; T &gt;::value &gt; &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; char &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; char16_t &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; char32_t &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; char8_t &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; const T &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; const volatile T &gt;::lowest()'],['../class_m_s_t_l_1_1numeric__traits.html#abe18592084e0bc0c48e954d0dc266c83',1,'MSTL::numeric_traits&lt; volatile T &gt;::lowest()']]],
-  ['lowest_5fset_5fbit_5fpos_22',['lowest_set_bit_pos',['../group___bit_counting.html#gab7689a29d580dcdcd42ee567c41c6416',1,'MSTL']]]
+  ['kilo_0',['kilo',['../group___s_i_units.html#gac8220edab6ecc279c4882841b0ae32d6',1,'ratio.hpp']]]
 ];

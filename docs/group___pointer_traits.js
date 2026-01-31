@@ -1,16 +1,16 @@
 var group___pointer_traits =
 [
-    [ "MSTL::pointer_traits&lt; T &gt;", "struct_m_s_t_l_1_1pointer__traits.html", null ],
-    [ "MSTL::pointer_traits&lt; T * &gt;", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html", [
-      [ "difference_type", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a2bd8e11a7979ff65a04d78ab3c2db642", null ],
-      [ "element_type", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a77bd0446711fb949daa8612f14016e8f", null ],
-      [ "pointer", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a6f0634f259943d6932db8d232ecc722b", null ],
-      [ "rebind", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#a62d64b6abd9bc2e84d5c25aa572523c7", null ],
-      [ "reference", "struct_m_s_t_l_1_1pointer__traits_3_01_t_01_5_01_4.html#ac8a65eceeb182d32de3fcd164667ce55", null ]
+    [ "pointer_traits&lt; T &gt;", "structpointer__traits.html", null ],
+    [ "pointer_traits&lt; T * &gt;", "structpointer__traits_3_01_t_01_5_01_4.html", [
+      [ "difference_type", "structpointer__traits_3_01_t_01_5_01_4.html#a4f8a26381661c28f169ba9b1856d5a87", null ],
+      [ "element_type", "structpointer__traits_3_01_t_01_5_01_4.html#af69c4c4ad6c009196b46eaaf9691c685", null ],
+      [ "pointer", "structpointer__traits_3_01_t_01_5_01_4.html#a9279da31908621c9cd86e995d2bf4a3b", null ],
+      [ "rebind", "structpointer__traits_3_01_t_01_5_01_4.html#a4804e24dfe8e2275531a989e1fe63754", null ],
+      [ "reference", "structpointer__traits_3_01_t_01_5_01_4.html#aecfe1813684c5108ca655ec39cb0f689", null ]
     ] ],
-    [ "MSTL::pointer_rebind", "group___pointer_traits.html#gae3f62d93e57334ca0569e91f2db0b7b7", null ],
-    [ "MSTL::ptr_const_cast", "group___pointer_traits.html#ga81ff717e02e2a6b37e0af4a563ba556b", null ],
-    [ "MSTL::ptr_const_cast", "group___pointer_traits.html#gabc5e0ede6c9383f35b7c9294038d655d", null ],
-    [ "MSTL::to_address", "group___pointer_traits.html#ga47764db29423f21559e9b08642fee57a", null ],
-    [ "MSTL::to_address", "group___pointer_traits.html#ga33f2b15537ae43937d5b3eb7018d77a7", null ]
+    [ "pointer_rebind", "group___pointer_traits.html#gaad81bc9519e268839715728fedfea51e", null ],
+    [ "ptr_const_cast", "group___pointer_traits.html#gac0004e8b2ceae8ef1ca7f782adc45122", null ],
+    [ "ptr_const_cast", "group___pointer_traits.html#gae5389a2c211913bf9c5700224a7eb73e", null ],
+    [ "to_address", "group___pointer_traits.html#ga27751f364a156df0d2465257f9cac040", null ],
+    [ "to_address", "group___pointer_traits.html#gadb8bf52434b9d43029ced34d272de32d", null ]
 ];

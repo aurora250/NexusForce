@@ -5,7 +5,6 @@ var dir_572327a7647488f8e93418b2c56139e6 =
     [ "char_traits.hpp", "char__traits_8hpp_source.html", null ],
     [ "char_types.hpp", "char__types_8hpp.html", "char__types_8hpp" ],
     [ "character.hpp", "character_8hpp_source.html", null ],
-    [ "cstring.hpp", "cstring_8hpp.html", "cstring_8hpp" ],
     [ "format.hpp", "format_8hpp_source.html", null ],
     [ "string.hpp", "string_8hpp_source.html", null ],
     [ "string_util.hpp", "string__util_8hpp_source.html", null ],

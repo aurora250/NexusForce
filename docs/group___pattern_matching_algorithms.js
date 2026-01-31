@@ -1,10 +1,10 @@
 var group___pattern_matching_algorithms =
 [
-    [ "MSTL::find_end", "group___pattern_matching_algorithms.html#ga2a6ff5e64364fc07dc47ed1662104a22", null ],
-    [ "MSTL::find_first_of", "group___pattern_matching_algorithms.html#gaa57d0a7bf379f53f7cba7c4b7b71af53", null ],
-    [ "MSTL::find_first_of", "group___pattern_matching_algorithms.html#ga74d56e2cd7c51e8c283be60a61f75903", null ],
-    [ "MSTL::search", "group___pattern_matching_algorithms.html#ga5010b3a1c35ecd6a6a45fdfb4e616c89", null ],
-    [ "MSTL::search", "group___pattern_matching_algorithms.html#ga8896ea04ac25e7259e30d3059a317cc9", null ],
-    [ "MSTL::search_n", "group___pattern_matching_algorithms.html#ga6d347005775e71be1ab3fc671f8661cf", null ],
-    [ "MSTL::search_n", "group___pattern_matching_algorithms.html#ga3c6eed8de257692eaf5fd4480be303b6", null ]
+    [ "find_end", "group___pattern_matching_algorithms.html#ga5cc06e2d8f1fa6f43dc95ddb37c5997f", null ],
+    [ "find_first_of", "group___pattern_matching_algorithms.html#ga6f541ef8f79986ada39f65ec055de358", null ],
+    [ "find_first_of", "group___pattern_matching_algorithms.html#gae037fe27c8833387e6361c8e18fb6229", null ],
+    [ "search", "group___pattern_matching_algorithms.html#gab41c0b2c56fb167b4a8677560491b3c3", null ],
+    [ "search", "group___pattern_matching_algorithms.html#ga20e9ef4ca8cca9a7e2c132fe434af6e0", null ],
+    [ "search_n", "group___pattern_matching_algorithms.html#ga84eb53aa59f50aaba06dcc3aa27009e6", null ],
+    [ "search_n", "group___pattern_matching_algorithms.html#gacbf8bfd211d3ff1e1a0369b92c5a65e7", null ]
 ];

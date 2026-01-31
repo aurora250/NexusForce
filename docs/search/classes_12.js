@@ -1,26 +1,7 @@
 var searchData=
 [
-  ['variant_0',['variant',['../struct_m_s_t_l_1_1variant.html',1,'MSTL']]],
-  ['variant_5falternative_1',['variant_alternative',['../struct_m_s_t_l_1_1variant__alternative.html',1,'MSTL']]],
-  ['variant_5findex_2',['variant_index',['../struct_m_s_t_l_1_1variant__index.html',1,'MSTL']]],
-  ['view_5fbase_3',['view_base',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20common_5fview_3c_20v_20_3e_20_3e_4',['view_base&lt; common_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20concat_5fview_3c_20v1_2c_20v2_20_3e_20_3e_5',['view_base&lt; concat_view&lt; V1, V2 &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20counted_5fview_3c_20iter_20_3e_20_3e_6',['view_base&lt; counted_view&lt; Iter &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20drop_5fview_3c_20v_20_3e_20_3e_7',['view_base&lt; drop_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20drop_5fwhile_5fview_3c_20v_2c_20pred_20_3e_20_3e_8',['view_base&lt; drop_while_view&lt; V, Pred &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20element_5fview_3c_20n_2c_20v_20_3e_20_3e_9',['view_base&lt; element_view&lt; N, V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20filter_5fview_3c_20v_2c_20pred_20_3e_20_3e_10',['view_base&lt; filter_view&lt; V, Pred &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20iota_5fview_3c_20t_20_3e_20_3e_11',['view_base&lt; iota_view&lt; T &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20join_5fview_3c_20v_20_3e_20_3e_12',['view_base&lt; join_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20owning_5fview_3c_20r_20_3e_20_3e_13',['view_base&lt; owning_view&lt; R &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20ref_5fview_3c_20r_20_3e_20_3e_14',['view_base&lt; ref_view&lt; R &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20repeat_5fview_3c_20t_20_3e_20_3e_15',['view_base&lt; repeat_view&lt; T &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20reverse_5fview_3c_20v_20_3e_20_3e_16',['view_base&lt; reverse_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20slice_5fview_3c_20v_20_3e_20_3e_17',['view_base&lt; slice_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20split_5fview_3c_20v_2c_20t_20_3e_20_3e_18',['view_base&lt; split_view&lt; V, T &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20subrange_5fview_3c_20iterator_20_3e_20_3e_19',['view_base&lt; subrange_view&lt; Iterator &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20take_5fview_3c_20v_20_3e_20_3e_20',['view_base&lt; take_view&lt; V &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20take_5fwhile_5fview_3c_20v_2c_20pred_20_3e_20_3e_21',['view_base&lt; take_while_view&lt; V, Pred &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]],
-  ['view_5fbase_3c_20transform_5fview_3c_20v_2c_20func_20_3e_20_3e_22',['view_base&lt; transform_view&lt; V, Func &gt; &gt;',['../struct_m_s_t_l_1_1ranges_1_1view__base.html',1,'MSTL::ranges']]]
+  ['value_5fexception_0',['value_exception',['../structvalue__exception.html',1,'']]],
+  ['variant_1',['variant',['../structvariant.html',1,'']]],
+  ['variant_5falternative_2',['variant_alternative',['../structvariant__alternative.html',1,'']]],
+  ['variant_5findex_3',['variant_index',['../structvariant__index.html',1,'']]]
 ];

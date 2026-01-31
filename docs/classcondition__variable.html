@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: condition_variable类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classcondition__variable.html','','classcondition__variable-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">condition_variable类 参考<div class="ingroups"><a class="el" href="group___condition_variables.html">条件变量</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>条件变量类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ac0ab9486de601ed66e3005e71f257f29" id="r_ac0ab9486de601ed66e3005e71f257f29"><td class="memItemLeft"><a id="ac0ab9486de601ed66e3005e71f257f29" name="ac0ab9486de601ed66e3005e71f257f29"></a>
+using&#160;</td><td class="memItemRight"><b>base_type</b> = <a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> condition_variable_base</td></tr>
+<tr class="memdesc:ac0ab9486de601ed66e3005e71f257f29"><td class="mdescLeft">&#160;</td><td class="mdescRight">基类类型 <br /></td></tr>
+<tr class="memitem:a8e92e9247eb5b17b5c1005a309b918fd" id="r_a8e92e9247eb5b17b5c1005a309b918fd"><td class="memItemLeft"><a id="a8e92e9247eb5b17b5c1005a309b918fd" name="a8e92e9247eb5b17b5c1005a309b918fd"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b> = base_type::native_handle_type</td></tr>
+<tr class="memdesc:a8e92e9247eb5b17b5c1005a309b918fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">原生句柄类型 <br /></td></tr>
+<tr class="memitem:a7ac3bfbf74229d157266d54abeb709a9" id="r_a7ac3bfbf74229d157266d54abeb709a9"><td class="memItemLeft"><a id="a7ac3bfbf74229d157266d54abeb709a9" name="a7ac3bfbf74229d157266d54abeb709a9"></a>
+using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="el" href="structsteady__clock.html">steady_clock</a></td></tr>
+<tr class="memdesc:a7ac3bfbf74229d157266d54abeb709a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认时钟类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a3fa23f3899d9569d104864fee8c1c963" id="r_a3fa23f3899d9569d104864fee8c1c963"><td class="memItemLeft"><a id="a3fa23f3899d9569d104864fee8c1c963" name="a3fa23f3899d9569d104864fee8c1c963"></a>
+&#160;</td><td class="memItemRight"><b>condition_variable</b> ()=default</td></tr>
+<tr class="memdesc:a3fa23f3899d9569d104864fee8c1c963"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数 <br /></td></tr>
+<tr class="memitem:a24ae4b2804df6489903feddbca590fe4" id="r_a24ae4b2804df6489903feddbca590fe4"><td class="memItemLeft"><a id="a24ae4b2804df6489903feddbca590fe4" name="a24ae4b2804df6489903feddbca590fe4"></a>
+&#160;</td><td class="memItemRight"><b>~condition_variable</b> ()=default</td></tr>
+<tr class="memdesc:a24ae4b2804df6489903feddbca590fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a1bb81f7a91f494a865006f56ca8aeb24" id="r_a1bb81f7a91f494a865006f56ca8aeb24"><td class="memItemLeft"><a class="el" href="#a8e92e9247eb5b17b5c1005a309b918fd">native_handle_type</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a1bb81f7a91f494a865006f56ca8aeb24">native_handle</a> () noexcept</td></tr>
+<tr class="memdesc:a1bb81f7a91f494a865006f56ca8aeb24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生句柄  <br /></td></tr>
+<tr class="memitem:a49a67464825ba41a1418f500255a67b3" id="r_a49a67464825ba41a1418f500255a67b3"><td class="memItemLeft"><a id="a49a67464825ba41a1418f500255a67b3" name="a49a67464825ba41a1418f500255a67b3"></a>
+void&#160;</td><td class="memItemRight"><b>notify_one</b> () noexcept</td></tr>
+<tr class="memdesc:a49a67464825ba41a1418f500255a67b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知一个等待线程 <br /></td></tr>
+<tr class="memitem:a42440b9c820cc1ba89ca992f5b974345" id="r_a42440b9c820cc1ba89ca992f5b974345"><td class="memItemLeft"><a id="a42440b9c820cc1ba89ca992f5b974345" name="a42440b9c820cc1ba89ca992f5b974345"></a>
+void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
+<tr class="memdesc:a42440b9c820cc1ba89ca992f5b974345"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知所有等待线程 <br /></td></tr>
+<tr class="memitem:a96f5df2d336697dc06d6ba8b5251bd59" id="r_a96f5df2d336697dc06d6ba8b5251bd59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a96f5df2d336697dc06d6ba8b5251bd59">wait</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>)</td></tr>
+<tr class="memdesc:a96f5df2d336697dc06d6ba8b5251bd59"><td class="mdescLeft">&#160;</td><td class="mdescRight">无限期等待  <br /></td></tr>
+<tr class="memitem:a4b2561fdd79f972fb16fbba861b26386" id="r_a4b2561fdd79f972fb16fbba861b26386"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a4b2561fdd79f972fb16fbba861b26386 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4b2561fdd79f972fb16fbba861b26386">wait</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, Pred pred)</td></tr>
+<tr class="memdesc:a4b2561fdd79f972fb16fbba861b26386"><td class="mdescLeft">&#160;</td><td class="mdescRight">带谓词的无限期等待  <br /></td></tr>
+<tr class="memitem:a0c3b6339860491e918ded220d578b19f" id="r_a0c3b6339860491e918ded220d578b19f"><td class="memTemplParams" colspan="2">template&lt;typename Dur&gt; </td></tr>
+<tr class="memitem:a0c3b6339860491e918ded220d578b19f template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0c3b6339860491e918ded220d578b19f">wait_until</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsteady__clock.html">steady_clock</a>, Dur &gt; &amp;util)</td></tr>
+<tr class="memdesc:a0c3b6339860491e918ded220d578b19f"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到稳定时钟时间点  <br /></td></tr>
+<tr class="memitem:a5796cbf36301d4c0e6f623c3a0544123" id="r_a5796cbf36301d4c0e6f623c3a0544123"><td class="memTemplParams" colspan="2">template&lt;typename Dur&gt; </td></tr>
+<tr class="memitem:a5796cbf36301d4c0e6f623c3a0544123 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5796cbf36301d4c0e6f623c3a0544123">wait_until</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsystem__clock.html">system_clock</a>, Dur &gt; &amp;util)</td></tr>
+<tr class="memdesc:a5796cbf36301d4c0e6f623c3a0544123"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到系统时钟时间点  <br /></td></tr>
+<tr class="memitem:ac79112eb87b65db858171e559ba0b732" id="r_ac79112eb87b65db858171e559ba0b732"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur&gt; </td></tr>
+<tr class="memitem:ac79112eb87b65db858171e559ba0b732 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac79112eb87b65db858171e559ba0b732">wait_until</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;util)</td></tr>
+<tr class="memdesc:ac79112eb87b65db858171e559ba0b732"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到任意时钟时间点  <br /></td></tr>
+<tr class="memitem:a62d80a8ab679b28f5f79465f413c76a7" id="r_a62d80a8ab679b28f5f79465f413c76a7"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur, typename Pred&gt; </td></tr>
+<tr class="memitem:a62d80a8ab679b28f5f79465f413c76a7 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a62d80a8ab679b28f5f79465f413c76a7">wait_until</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;util, Pred pred)</td></tr>
+<tr class="memdesc:a62d80a8ab679b28f5f79465f413c76a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">带谓词的等待直到时间点  <br /></td></tr>
+<tr class="memitem:a1d704306dc9b595e6ec9deb2f9da7ed7" id="r_a1d704306dc9b595e6ec9deb2f9da7ed7"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
+<tr class="memitem:a1d704306dc9b595e6ec9deb2f9da7ed7 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1d704306dc9b595e6ec9deb2f9da7ed7">wait_for</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;rest)</td></tr>
+<tr class="memdesc:a1d704306dc9b595e6ec9deb2f9da7ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待指定的持续时间  <br /></td></tr>
+<tr class="memitem:a1a40944c79e9a463506d09ce216820a8" id="r_a1a40944c79e9a463506d09ce216820a8"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period, typename Pred&gt; </td></tr>
+<tr class="memitem:a1a40944c79e9a463506d09ce216820a8 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1a40944c79e9a463506d09ce216820a8">wait_for</a> (<a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;rest, Pred pred)</td></tr>
+<tr class="memdesc:a1a40944c79e9a463506d09ce216820a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">带谓词的等待指定持续时间  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>条件变量类 </p>
+<p>条件变量允许线程等待某个条件成立，或通知其他线程条件已满足。 </p>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00119">119</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a1bb81f7a91f494a865006f56ca8aeb24" name="a1bb81f7a91f494a865006f56ca8aeb24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb81f7a91f494a865006f56ca8aeb24">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8e92e9247eb5b17b5c1005a309b918fd">native_handle_type</a> * condition_variable::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>指向条件变量原生句柄的指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00182">182</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a96f5df2d336697dc06d6ba8b5251bd59" name="a96f5df2d336697dc06d6ba8b5251bd59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f5df2d336697dc06d6ba8b5251bd59">&#9670;&#160;</a></span>wait() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void condition_variable::wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>无限期等待 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的互斥锁</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>原子地解锁互斥锁并等待条件变量，被唤醒后重新锁定互斥锁。 </p>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00206">206</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4b2561fdd79f972fb16fbba861b26386" name="a4b2561fdd79f972fb16fbba861b26386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b2561fdd79f972fb16fbba861b26386">&#9670;&#160;</a></span>wait() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void condition_variable::wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>带谓词的无限期等待 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的互斥锁 </td></tr>
+    <tr><td class="paramname">pred</td><td>等待条件谓词，当返回true时停止等待</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>等待直到谓词返回true。防止虚假唤醒。 </p>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00219">219</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="futex_8hpp_source.html#l00055">wait</a>.</p>
+
+</div>
+</div>
+<a id="a1d704306dc9b595e6ec9deb2f9da7ed7" name="a1d704306dc9b595e6ec9deb2f9da7ed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d704306dc9b595e6ec9deb2f9da7ed7">&#9670;&#160;</a></span>wait_for() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep, typename Period&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_for </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rest</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待指定的持续时间 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>时间表示类型 </td></tr>
+    <tr><td class="paramname">Period</td><td>时间单位比例 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">rest</td><td>要等待的持续时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>等待结果状态 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00302">302</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00466">ceil()</a>, <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00231">wait_until()</a>.</p>
+
+</div>
+</div>
+<a id="a1a40944c79e9a463506d09ce216820a8" name="a1a40944c79e9a463506d09ce216820a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a40944c79e9a463506d09ce216820a8">&#9670;&#160;</a></span>wait_for() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep, typename Period, typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool condition_variable::wait_for </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>带谓词的等待指定持续时间 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>时间表示类型 </td></tr>
+    <tr><td class="paramname">Period</td><td>时间单位比例 </td></tr>
+    <tr><td class="paramname">Pred</td><td>谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">rest</td><td>要等待的持续时间 </td></tr>
+    <tr><td class="paramname">pred</td><td>等待条件谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>谓词是否成立 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00318">318</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="math_8hpp_source.html#l00466">ceil()</a>, <a class="el" href="shift_8hpp_source.html#l00276">move()</a>, <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00231">wait_until()</a>.</p>
+
+</div>
+</div>
+<a id="ac79112eb87b65db858171e559ba0b732" name="ac79112eb87b65db858171e559ba0b732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79112eb87b65db858171e559ba0b732">&#9670;&#160;</a></span>wait_until() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock, typename Dur&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>util</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待直到任意时钟时间点 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td>时钟类型 </td></tr>
+    <tr><td class="paramname">Dur</td><td>持续时间类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">util</td><td>目标时间点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>等待结果状态</dd></dl>
+<p>支持任意时钟类型的等待，通过转换到稳定时钟实现。 </p>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00258">258</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00466">ceil()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00028">success</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a>.</p>
+
+</div>
+</div>
+<a id="a62d80a8ab679b28f5f79465f413c76a7" name="a62d80a8ab679b28f5f79465f413c76a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62d80a8ab679b28f5f79465f413c76a7">&#9670;&#160;</a></span>wait_until() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock, typename Dur, typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool condition_variable::wait_until </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>util</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>带谓词的等待直到时间点 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td>时钟类型 </td></tr>
+    <tr><td class="paramname">Dur</td><td>持续时间类型 </td></tr>
+    <tr><td class="paramname">Pred</td><td>谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">util</td><td>目标时间点 </td></tr>
+    <tr><td class="paramname">pred</td><td>等待条件谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>谓词是否成立</dd></dl>
+<p>等待直到谓词成立或超时，防止虚假唤醒。 </p>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00284">284</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00029">timeout</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00231">wait_until()</a>.</p>
+
+</div>
+</div>
+<a id="a0c3b6339860491e918ded220d578b19f" name="a0c3b6339860491e918ded220d578b19f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c3b6339860491e918ded220d578b19f">&#9670;&#160;</a></span>wait_until() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Dur&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsteady__clock.html">steady_clock</a>, Dur &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>util</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待直到稳定时钟时间点 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Dur</td><td>持续时间类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">util</td><td>目标时间点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>等待结果状态 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="condition__variable_8hpp_source.html#l00302">wait_for()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00318">wait_for()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00284">wait_until()</a>.</p>
+
+</div>
+</div>
+<a id="a5796cbf36301d4c0e6f623c3a0544123" name="a5796cbf36301d4c0e6f623c3a0544123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5796cbf36301d4c0e6f623c3a0544123">&#9670;&#160;</a></span>wait_until() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Dur&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsystem__clock.html">system_clock</a>, Dur &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>util</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待直到系统时钟时间点 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Dur</td><td>持续时间类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>已锁定的智能锁 </td></tr>
+    <tr><td class="paramname">util</td><td>目标时间点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>等待结果状态 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a> 第 <a class="el" href="condition__variable_8hpp_source.html#l00243">243</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="condition__variable_8hpp_source.html">condition_variable.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classcondition__variable.html">condition_variable</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

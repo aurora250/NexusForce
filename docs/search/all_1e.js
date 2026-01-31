@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
+  ['任意类_0',['任意类',['../group___any.html',1,'']]]
 ];

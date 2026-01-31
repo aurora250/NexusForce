@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['空状态_0',['空状态',['../group___non.html',1,'']]]
+  ['旧式函数适配器_0',['旧式函数适配器',['../group___legacy_function_adapters.html',1,'']]]
 ];

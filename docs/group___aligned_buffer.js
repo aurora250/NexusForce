@@ -1,12 +1,12 @@
 var group___aligned_buffer =
 [
-    [ "MSTL::aligned_buffer&lt; T &gt;", "struct_m_s_t_l_1_1aligned__buffer.html", [
-      [ "aligned_buffer", "struct_m_s_t_l_1_1aligned__buffer.html#a67ec9b2e9d16be460c8d8eca968604f6", null ],
-      [ "aligned_buffer", "struct_m_s_t_l_1_1aligned__buffer.html#a8a6e0d62e8c207a5406b2d6f5469365c", null ],
-      [ "addr", "struct_m_s_t_l_1_1aligned__buffer.html#abb753de94c9689e2d6a0b5b8d766e271", null ],
-      [ "addr", "struct_m_s_t_l_1_1aligned__buffer.html#af66207bbaad4481fd32a8c742fac6c17", null ],
-      [ "ptr", "struct_m_s_t_l_1_1aligned__buffer.html#a8ed91024d81b73f2e125d0a18bb66bbb", null ],
-      [ "ptr", "struct_m_s_t_l_1_1aligned__buffer.html#a76725dbb51ff313ed5f1143e3de147ef", null ],
-      [ "storage", "struct_m_s_t_l_1_1aligned__buffer.html#a325fc298480aeae4c99ca0a199a85739", null ]
+    [ "aligned_buffer&lt; T &gt;", "structaligned__buffer.html", [
+      [ "aligned_buffer", "structaligned__buffer.html#ae61b06e86bd1c848afdff91a5fce7ec2", null ],
+      [ "aligned_buffer", "structaligned__buffer.html#ad96888c87722dfcb664ff73b040704de", null ],
+      [ "addr", "structaligned__buffer.html#a1538125b6653047828fdf2742ea8eb2e", null ],
+      [ "addr", "structaligned__buffer.html#a494d346aa1b135e5fe3a46e535ad8877", null ],
+      [ "ptr", "structaligned__buffer.html#a2355149523199ddc541b3458cd8235ee", null ],
+      [ "ptr", "structaligned__buffer.html#afd9256f6fcebef2484ba3e269526b26b", null ],
+      [ "storage", "structaligned__buffer.html#a11fe9f35ed332d433dd01208e0bb2f51", null ]
     ] ]
 ];

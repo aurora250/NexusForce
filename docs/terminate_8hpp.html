@@ -95,21 +95,28 @@ $(function(){initNavTree('terminate_8hpp.html','',''); });
 
 <p>MSTL程序终止处理  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="c_09_09config_8hpp_source.html">../config/c++config.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="c_09_09config_8hpp_source.html">MSTL/core/config/c++config.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+terminate.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="terminate_8hpp__incl.svg" width="264" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <p><a href="terminate_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:ga182f5defebceeaae0e1d2be2465bda7f" id="r_ga182f5defebceeaae0e1d2be2465bda7f"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">MSTL::terminate_handler</a> = void(*)()</td></tr>
-<tr class="memdesc:ga182f5defebceeaae0e1d2be2465bda7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止处理函数指针类型  <br /></td></tr>
+<tr class="memitem:ga6940f19ddf8615084b7fc5e1a11d5757" id="r_ga6940f19ddf8615084b7fc5e1a11d5757"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#ga6940f19ddf8615084b7fc5e1a11d5757">terminate_handler</a> = void(*)()</td></tr>
+<tr class="memdesc:ga6940f19ddf8615084b7fc5e1a11d5757"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止处理函数指针类型  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga493930a849fe0f21b5ab333e7d44e58e" id="r_ga493930a849fe0f21b5ab333e7d44e58e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#ga493930a849fe0f21b5ab333e7d44e58e">MSTL::set_terminate</a> (<a class="el" href="group___termination_functions.html#ga182f5defebceeaae0e1d2be2465bda7f">terminate_handler</a> handler) noexcept</td></tr>
-<tr class="memdesc:ga493930a849fe0f21b5ab333e7d44e58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置终止处理函数  <br /></td></tr>
-<tr class="memitem:ga2de2acb748151205f868925803fb3105" id="r_ga2de2acb748151205f868925803fb3105"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#ga2de2acb748151205f868925803fb3105">MSTL::terminate</a> () noexcept</td></tr>
-<tr class="memdesc:ga2de2acb748151205f868925803fb3105"><td class="mdescLeft">&#160;</td><td class="mdescRight">调用当前终止处理函数  <br /></td></tr>
+<tr class="memitem:gab401eb256b5c3788f47ef9b85c1a2c74" id="r_gab401eb256b5c3788f47ef9b85c1a2c74"><td class="memItemLeft">void MSTL_API&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#gab401eb256b5c3788f47ef9b85c1a2c74">set_terminate</a> (<a class="el" href="group___termination_functions.html#ga6940f19ddf8615084b7fc5e1a11d5757">terminate_handler</a> handler) noexcept</td></tr>
+<tr class="memdesc:gab401eb256b5c3788f47ef9b85c1a2c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置终止处理函数  <br /></td></tr>
+<tr class="memitem:ga131f5961d2360322afc3b5e4d6fa4d7e" id="r_ga131f5961d2360322afc3b5e4d6fa4d7e"><td class="memItemLeft">MSTL_NORETURN void MSTL_API&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#ga131f5961d2360322afc3b5e4d6fa4d7e">terminate</a> ()</td></tr>
+<tr class="memdesc:ga131f5961d2360322afc3b5e4d6fa4d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">调用当前终止处理函数  <br /></td></tr>
+<tr class="memitem:gad3aff173cf9904c39b4ec7b9d313e855" id="r_gad3aff173cf9904c39b4ec7b9d313e855"><td class="memItemLeft">MSTL_NORETURN void MSTL_API&#160;</td><td class="memItemRight"><a class="el" href="group___termination_functions.html#gad3aff173cf9904c39b4ec7b9d313e855">abort</a> ()</td></tr>
+<tr class="memdesc:gad3aff173cf9904c39b4ec7b9d313e855"><td class="mdescLeft">&#160;</td><td class="mdescRight">强制终止进程  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>MSTL程序终止处理 </p>

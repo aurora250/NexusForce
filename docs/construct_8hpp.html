@@ -95,24 +95,29 @@ $(function(){initNavTree('construct_8hpp.html','',''); });
 
 <p>MSTL内存构造和销毁函数  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="concepts_8hpp_source.html">../typeinfo/concepts.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="concepts_8hpp_source.html">MSTL/core/typeinfo/concepts.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+construct.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="construct_8hpp__incl.svg" width="264" height="582"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <p><a href="construct_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:gac3472a503294dcd10281735d34458b3b" id="r_gac3472a503294dcd10281735d34458b3b"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:gac3472a503294dcd10281735d34458b3b template"><td class="memItemLeft">constexpr <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#ga39d0ad42ffc0c01fc63c1ecdff623c45">is_constructible_v</a>&lt; T, Args... &gt;, void * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#gac3472a503294dcd10281735d34458b3b">MSTL::construct</a> (T *ptr, Args &amp;&amp;... args) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gae5ebcba06b307029e6220eb124ea3857">is_nothrow_constructible_v</a>&lt; T, Args... &gt;)</td></tr>
-<tr class="memdesc:gac3472a503294dcd10281735d34458b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定内存位置构造对象  <br /></td></tr>
-<tr class="memitem:gaaa296034c1abf24338f6f55832ffac01" id="r_gaaa296034c1abf24338f6f55832ffac01"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaaa296034c1abf24338f6f55832ffac01 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#gaaa296034c1abf24338f6f55832ffac01">MSTL::destroy</a> (T *pointer) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gaa3ba5b1d44257b955e3898764d0051c6">is_nothrow_destructible_v</a>&lt; T &gt;)</td></tr>
-<tr class="memdesc:gaaa296034c1abf24338f6f55832ffac01"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁单个对象  <br /></td></tr>
-<tr class="memitem:ga905e83cc8b84f819515945d6284ccfcf" id="r_ga905e83cc8b84f819515945d6284ccfcf"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt; &amp;&amp;!<a class="el" href="group___type_special_member_function_checks.html#gab99f4fb1764d90c18d8ced09e7b24595">is_trivially_destructible_v</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga905e83cc8b84f819515945d6284ccfcf template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#ga905e83cc8b84f819515945d6284ccfcf">MSTL::destroy</a> (Iterator first, Iterator last) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gaa3ba5b1d44257b955e3898764d0051c6">is_nothrow_destructible_v</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt; &gt;)</td></tr>
-<tr class="memdesc:ga905e83cc8b84f819515945d6284ccfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁迭代器范围内的对象序列  <br /></td></tr>
-<tr class="memitem:ga905e83cc8b84f819515945d6284ccfcf" id="r_ga905e83cc8b84f819515945d6284ccfcf"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga5fb34e6944aa6edc666ade6a94377a06">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga8c610204db67dc1677afbf8ed96ffb61">is_iter_v</a>&lt; Iterator &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gab99f4fb1764d90c18d8ced09e7b24595">is_trivially_destructible_v</a>&lt; <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga905e83cc8b84f819515945d6284ccfcf template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga905e83cc8b84f819515945d6284ccfcf">MSTL::destroy</a> (Iterator first, Iterator last) noexcept</td></tr>
-<tr class="memdesc:ga905e83cc8b84f819515945d6284ccfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁迭代器范围内的对象序列  <br /></td></tr>
+<tr class="memitem:ga935de3b82a50903e12b624d8d5b46acd" id="r_ga935de3b82a50903e12b624d8d5b46acd"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:ga935de3b82a50903e12b624d8d5b46acd template"><td class="memItemLeft">MSTL_CONSTEXPR20 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_constructible_v&lt; T, Args... &gt;, void * &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#ga935de3b82a50903e12b624d8d5b46acd">construct</a> (T *ptr, Args &amp;&amp;... args) noexcept(is_nothrow_constructible_v&lt; T, Args... &gt;)</td></tr>
+<tr class="memdesc:ga935de3b82a50903e12b624d8d5b46acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定内存位置构造对象  <br /></td></tr>
+<tr class="memitem:gad7e04986d1e34f136d2a706005c94ff4" id="r_gad7e04986d1e34f136d2a706005c94ff4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad7e04986d1e34f136d2a706005c94ff4 template"><td class="memItemLeft">MSTL_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#gad7e04986d1e34f136d2a706005c94ff4">destroy</a> (T *pointer) noexcept(is_nothrow_destructible_v&lt; T &gt;)</td></tr>
+<tr class="memdesc:gad7e04986d1e34f136d2a706005c94ff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁单个对象  <br /></td></tr>
+<tr class="memitem:ga7545f6197fb0ed3863d5c2e985821be9" id="r_ga7545f6197fb0ed3863d5c2e985821be9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga2c1023929c537a2621fef66a6c6d4bd5">is_iter_v</a>&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7545f6197fb0ed3863d5c2e985821be9 template"><td class="memItemLeft">MSTL_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="group___inplace_memory_function.html#ga7545f6197fb0ed3863d5c2e985821be9">destroy</a> (Iterator first, Iterator last) noexcept(is_nothrow_destructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;)</td></tr>
+<tr class="memdesc:ga7545f6197fb0ed3863d5c2e985821be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁迭代器范围内的对象序列  <br /></td></tr>
+<tr class="memitem:ga7545f6197fb0ed3863d5c2e985821be9" id="r_ga7545f6197fb0ed3863d5c2e985821be9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga2c1023929c537a2621fef66a6c6d4bd5">is_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_trivially_destructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7545f6197fb0ed3863d5c2e985821be9 template"><td class="memItemLeft">MSTL_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga7545f6197fb0ed3863d5c2e985821be9">destroy</a> (Iterator first, Iterator last) noexcept</td></tr>
+<tr class="memdesc:ga7545f6197fb0ed3863d5c2e985821be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁迭代器范围内的对象序列  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>MSTL内存构造和销毁函数 </p>
@@ -120,19 +125,19 @@ $(function(){initNavTree('construct_8hpp.html','',''); });
 
 <p class="definition">在文件 <a class="el" href="construct_8hpp_source.html">construct.hpp</a> 中定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga905e83cc8b84f819515945d6284ccfcf" name="ga905e83cc8b84f819515945d6284ccfcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga905e83cc8b84f819515945d6284ccfcf">&#9670;&#160;</a></span>destroy()</h2>
+<a id="ga7545f6197fb0ed3863d5c2e985821be9" name="ga7545f6197fb0ed3863d5c2e985821be9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7545f6197fb0ed3863d5c2e985821be9">&#9670;&#160;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </div>
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga2c1023929c537a2621fef66a6c6d4bd5">is_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_trivially_destructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MSTL::destroy </td>
+          <td class="memname">MSTL_CONSTEXPR20 void destroy </td>
           <td>(</td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -144,7 +149,7 @@ template&lt;typename Iterator, enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -166,8 +171,6 @@ template&lt;typename Iterator, enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;
 <p>对于平凡可析构的类型，不需要执行任何操作，直接返回。 这是对平凡可析构类型的优化。 </p>
 
 <p class="definition">在文件 <a class="el" href="construct_8hpp_source.html">construct.hpp</a> 第 <a class="el" href="construct_8hpp_source.html#l00079">79</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="construct_8hpp_source.html#l00047">destroy()</a>.</p>
 
 </div>
 </div>

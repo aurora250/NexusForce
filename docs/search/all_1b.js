@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

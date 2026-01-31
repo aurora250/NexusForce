@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
+  ['插入迭代器_0',['插入迭代器',['../group___insert_iterators.html',1,'']]]
 ];

@@ -1,9 +1,9 @@
 var standard__allocator_8hpp =
 [
-    [ "MSTL::standard_allocator&lt; T &gt;::rebind&lt; U &gt;", "struct_m_s_t_l_1_1standard__allocator_1_1rebind.html", null ],
-    [ "MSTL::allocator", "group___memory_allocator.html#gabfc5022a55020eafff49e0f15c434e96", null ],
-    [ "MSTL::allocate", "group___memory_allocator.html#ga3749a0a8716fd03615513cc90f5410ea", null ],
-    [ "MSTL::deallocate", "group___memory_allocator.html#ga4576b3cbe51381c4cfe4624ba2eb666b", null ],
-    [ "MSTL::operator!=", "group___memory_allocator.html#ga7541eeda593b5160cbdde6da901542b0", null ],
-    [ "MSTL::operator==", "group___memory_allocator.html#ga90c93514864a0a113e643eedf00207a6", null ]
+    [ "standard_allocator&lt; T &gt;::rebind&lt; U &gt;", "structstandard__allocator_1_1rebind.html", null ],
+    [ "allocator", "group___memory_allocator.html#ga3dfc367f99e4622b5a17628bb6777e54", null ],
+    [ "allocate", "group___memory_allocator.html#ga4add25ecf08cb7297a47b3cac914acdb", null ],
+    [ "deallocate", "group___memory_allocator.html#ga9162698de02d01049680f6836504bfa4", null ],
+    [ "operator!=", "group___memory_allocator.html#ga493a52f6d7cb1d1f606fd1871b64b38b", null ],
+    [ "operator==", "group___memory_allocator.html#ga168bf84043a77b663eaf4cb3671dacf3", null ]
 ];

@@ -1,16 +1,16 @@
 var group___char_type_checking =
 [
-    [ "MSTL::is_alpha", "group___char_type_checking.html#gacf53d1349cca30c0dd65b0458b57ceec", null ],
-    [ "MSTL::is_alpha_or_digit", "group___char_type_checking.html#ga3a1c8ca5ff020e116b17e1727ebee6b1", null ],
-    [ "MSTL::is_ascii", "group___char_type_checking.html#gaee2f61ce4f86285d141bbb193809b71f", null ],
-    [ "MSTL::is_blank", "group___char_type_checking.html#ga45df9a57318af2b7c58954ed33dc8698", null ],
-    [ "MSTL::is_cntrl", "group___char_type_checking.html#ga99ded3b14d30a2cc7163ff15da1d4bdb", null ],
-    [ "MSTL::is_ctype", "group___char_type_checking.html#ga859133ef72ae289efae585b2df883c0b", null ],
-    [ "MSTL::is_digit", "group___char_type_checking.html#gad0bafc559a965db838e6a76d35b58cb9", null ],
-    [ "MSTL::is_digit_or_alpha", "group___char_type_checking.html#ga7355d96d4b7722c421cedca63457e8da", null ],
-    [ "MSTL::is_graph", "group___char_type_checking.html#ga3dbc8da072aa55172a41d5424feafd45", null ],
-    [ "MSTL::is_print", "group___char_type_checking.html#ga4bfabbf456291df261990e1d42203aa8", null ],
-    [ "MSTL::is_punct", "group___char_type_checking.html#ga765cdc1bd602d6791a870af578565958", null ],
-    [ "MSTL::is_space", "group___char_type_checking.html#gaf3a567987f7855643c942aa78906a521", null ],
-    [ "MSTL::is_xdigit", "group___char_type_checking.html#ga5ed2264ba68d769b85cdd7fe6091931b", null ]
+    [ "is_alpha", "group___char_type_checking.html#gab863547f967e9f7b70b4fbbadeb199f2", null ],
+    [ "is_alpha_or_digit", "group___char_type_checking.html#gae1c6c697e0e7497e14f53af476fe65c0", null ],
+    [ "is_ascii", "group___char_type_checking.html#ga803ec3f835108761eecafe18593c759a", null ],
+    [ "is_blank", "group___char_type_checking.html#ga03eeb16d4af54f207f009f04273957f0", null ],
+    [ "is_cntrl", "group___char_type_checking.html#ga39daa71832e7b7c4ab8685bdc4fbc6fc", null ],
+    [ "is_ctype", "group___char_type_checking.html#gac549c69b209d71cccb2161c49da8275c", null ],
+    [ "is_digit", "group___char_type_checking.html#gaf0507d8d99ce2a6ebf38c07ebc3c783b", null ],
+    [ "is_digit_or_alpha", "group___char_type_checking.html#gaaa6c807f622f87e000aa6cda67c793d2", null ],
+    [ "is_graph", "group___char_type_checking.html#ga177bd4e3ea86d128e449db8e45996b32", null ],
+    [ "is_print", "group___char_type_checking.html#gac3f8ece439a7cf89dda29b04646c4fd0", null ],
+    [ "is_punct", "group___char_type_checking.html#gad27fa7d1054b75893c99cd7824189253", null ],
+    [ "is_space", "group___char_type_checking.html#gac6a316c8453f93c1a7a083b1c91af9fd", null ],
+    [ "is_xdigit", "group___char_type_checking.html#gaf27ed0ed6ffb8fb0d646651256591b7c", null ]
 ];

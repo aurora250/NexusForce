@@ -1,9 +1,9 @@
 var group___uninitialized_memory_operations =
 [
-    [ "MSTL::uninitialized_copy", "group___uninitialized_memory_operations.html#ga79efe35a53440729451b519a2e5ab49e", null ],
-    [ "MSTL::uninitialized_copy_n", "group___uninitialized_memory_operations.html#ga6b7c94c7c8cf6219b632dd1ca16a0053", null ],
-    [ "MSTL::uninitialized_fill", "group___uninitialized_memory_operations.html#gaf2458b2080401f75d30d9057cf31c9ca", null ],
-    [ "MSTL::uninitialized_fill_n", "group___uninitialized_memory_operations.html#ga77667aad85b4a4caeedb97463b18022f", null ],
-    [ "MSTL::uninitialized_move", "group___uninitialized_memory_operations.html#ga0a8555350a9f36a7e0dc6bdf9436b628", null ],
-    [ "MSTL::uninitialized_move_n", "group___uninitialized_memory_operations.html#ga4a93d9062018fd66ab032c6618b00ba6", null ]
+    [ "uninitialized_copy", "group___uninitialized_memory_operations.html#ga76b8cc1d9858470099cbb54f7ca3b576", null ],
+    [ "uninitialized_copy_n", "group___uninitialized_memory_operations.html#ga116c6bc77835145a183806d8eb771f75", null ],
+    [ "uninitialized_fill", "group___uninitialized_memory_operations.html#ga45981579952db55451aa9d8cad37d1c5", null ],
+    [ "uninitialized_fill_n", "group___uninitialized_memory_operations.html#ga2ba2c0a540b401f77b03366fd9657e90", null ],
+    [ "uninitialized_move", "group___uninitialized_memory_operations.html#ga1ec397d580e841dd0075e5ae469ad4d6", null ],
+    [ "uninitialized_move_n", "group___uninitialized_memory_operations.html#ga391a65c86570632f9ff49b9e6a98738e", null ]
 ];

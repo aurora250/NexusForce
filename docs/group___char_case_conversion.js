@@ -1,5 +1,5 @@
 var group___char_case_conversion =
 [
-    [ "MSTL::to_lowercase", "group___char_case_conversion.html#gaa63dab426bc3545ec02330745e85c700", null ],
-    [ "MSTL::to_uppercase", "group___char_case_conversion.html#ga0830d63737efdc9dd2d3879dcc73089c", null ]
+    [ "to_lowercase", "group___char_case_conversion.html#gae37e6331cda5ad0f4ef44876b14276b1", null ],
+    [ "to_uppercase", "group___char_case_conversion.html#ga837cbec26979811082dcff29694d5f2d", null ]
 ];

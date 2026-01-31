@@ -27,6 +27,7 @@ MSTL_BEGIN_NAMESPACE__
 
 /**
  * @class future_exception
+ * @extends exception
  * @brief 期望值操作异常
  */
 MSTL_ERROR_BUILD_FINAL_CLASS(future_exception, exception, "Future Operation Failed.")
@@ -1131,6 +1132,7 @@ public:
     }
 };
 
+/// @cond
 
 template <typename Res>
 _INNER __basic_future<Res>::__basic_future(const shared_future<Res>& other) noexcept
@@ -1159,6 +1161,7 @@ inline shared_future<void> future<void>::share() noexcept {
     return shared_future<void>(_MSTL move(*this));
 }
 
+/// @endcond
 
 /**
  * @brief future结果类型转换

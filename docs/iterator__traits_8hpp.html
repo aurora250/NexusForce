@@ -93,47 +93,80 @@ $(function(){initNavTree('iterator__traits_8hpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>MSTL迭代器萃取  
+<p>MSTL迭代器萃取和指针萃取  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="type__traits_8hpp_source.html">../typeinfo/type_traits.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="tags_8hpp_source.html">../typeinfo/tags.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="type__traits_8hpp_source.html">MSTL/core/typeinfo/type_traits.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+iterator_traits.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="iterator__traits_8hpp__incl.svg" width="264" height="400"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <p><a href="iterator__traits_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:MSTL_3A_3Aiterator_5Ftraits_3C_20Iterator_20_3E" id="r_MSTL_3A_3Aiterator_5Ftraits_3C_20Iterator_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">MSTL::iterator_traits&lt; Iterator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器特性主模板  <a href="struct_m_s_t_l_1_1iterator__traits.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:MSTL_3A_3Aiterator_5Ftraits_3C_20T_20_2A_20_3E" id="r_MSTL_3A_3Aiterator_5Ftraits_3C_20T_20_2A_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html">MSTL::iterator_traits&lt; T * &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始指针的迭代器特性特化  <a href="struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:iterator_5Ftraits_3C_20Iterator_20_3E" id="r_iterator_5Ftraits_3C_20Iterator_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiterator__traits.html">iterator_traits&lt; Iterator &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器特性主模板  <a href="structiterator__traits.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:iterator_5Ftraits_3C_20T_20_2A_20_3E" id="r_iterator_5Ftraits_3C_20T_20_2A_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiterator__traits_3_01_t_01_5_01_4.html">iterator_traits&lt; T * &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始指针的迭代器特性特化  <a href="structiterator__traits_3_01_t_01_5_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:pointer_5Ftraits_3C_20T_20_3E" id="r_pointer_5Ftraits_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structpointer__traits.html">pointer_traits&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针特性主模板  <a href="structpointer__traits.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:pointer_5Ftraits_3C_20T_20_2A_20_3E" id="r_pointer_5Ftraits_3C_20T_20_2A_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structpointer__traits_3_01_t_01_5_01_4.html">pointer_traits&lt; T * &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始指针的特化版本  <a href="structpointer__traits_3_01_t_01_5_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:get_5Fpointer_5Ftype_3C_20T_2C_20Dummy_20_3E" id="r_get_5Fpointer_5Ftype_3C_20T_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structget__pointer__type.html">get_pointer_type&lt; T, Dummy &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分配器的指针类型  <a href="structget__pointer__type.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:get_5Fdifference_5Ftype_3C_20T_2C_20Dummy_20_3E" id="r_get_5Fdifference_5Ftype_3C_20T_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structget__difference__type.html">get_difference_type&lt; T, Dummy &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分配器的差值类型  <a href="structget__difference__type.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:get_5Fsize_5Ftype_3C_20T_2C_20Dummy_20_3E" id="r_get_5Fsize_5Ftype_3C_20T_2C_20Dummy_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structget__size__type.html">get_size_type&lt; T, Dummy &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分配器的大小类型  <a href="structget__size__type.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:gac61cc1c3fa32101e3b8bd845018c3774" id="r_gac61cc1c3fa32101e3b8bd845018c3774"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:gac61cc1c3fa32101e3b8bd845018c3774 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gac61cc1c3fa32101e3b8bd845018c3774">MSTL::iter_category_t</a> = typename <a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::iterator_category</td></tr>
-<tr class="memdesc:gac61cc1c3fa32101e3b8bd845018c3774"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的类别标签  <br /></td></tr>
-<tr class="memitem:ga013c6f420db2562168315254ea290a5c" id="r_ga013c6f420db2562168315254ea290a5c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:ga013c6f420db2562168315254ea290a5c template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">MSTL::iter_value_t</a> = typename <a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::value_type</td></tr>
-<tr class="memdesc:ga013c6f420db2562168315254ea290a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的值类型  <br /></td></tr>
-<tr class="memitem:ga6cc361c86e963571dccf20d41b940621" id="r_ga6cc361c86e963571dccf20d41b940621"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:ga6cc361c86e963571dccf20d41b940621 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621">MSTL::iter_difference_t</a> = typename <a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::difference_type</td></tr>
-<tr class="memdesc:ga6cc361c86e963571dccf20d41b940621"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的差值类型  <br /></td></tr>
-<tr class="memitem:ga2c0ee93928e6f4d6929966fcb611567d" id="r_ga2c0ee93928e6f4d6929966fcb611567d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:ga2c0ee93928e6f4d6929966fcb611567d template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d">MSTL::iter_pointer_t</a> = typename <a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::pointer</td></tr>
-<tr class="memdesc:ga2c0ee93928e6f4d6929966fcb611567d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的指针类型  <br /></td></tr>
-<tr class="memitem:ga9b5aa946b86f3c441650589e0cd88283" id="r_ga9b5aa946b86f3c441650589e0cd88283"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:ga9b5aa946b86f3c441650589e0cd88283 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga9b5aa946b86f3c441650589e0cd88283">MSTL::iter_reference_t</a> = typename <a class="el" href="struct_m_s_t_l_1_1iterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::reference</td></tr>
-<tr class="memdesc:ga9b5aa946b86f3c441650589e0cd88283"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的引用类型  <br /></td></tr>
-<tr class="memitem:gae3b72a6c89f4bc082999f5b2437180e4" id="r_gae3b72a6c89f4bc082999f5b2437180e4"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:gae3b72a6c89f4bc082999f5b2437180e4 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gae3b72a6c89f4bc082999f5b2437180e4">MSTL::iter_map_key_t</a> = <a class="el" href="group___remove_qualifiers.html#ga08f7ce6f8ac385581c66b678447a3203">remove_const_t</a>&lt;typename <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt;Iterator&gt;::first_type&gt;</td></tr>
-<tr class="memdesc:gae3b72a6c89f4bc082999f5b2437180e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">从映射迭代器中提取键类型  <br /></td></tr>
-<tr class="memitem:gaef0bdc67dff1f4d57472c44b9ccd3aec" id="r_gaef0bdc67dff1f4d57472c44b9ccd3aec"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:gaef0bdc67dff1f4d57472c44b9ccd3aec template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gaef0bdc67dff1f4d57472c44b9ccd3aec">MSTL::iter_map_value_t</a> = typename <a class="el" href="group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c">iter_value_t</a>&lt;Iterator&gt;::second_type</td></tr>
-<tr class="memdesc:gaef0bdc67dff1f4d57472c44b9ccd3aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">从映射迭代器中提取值类型  <br /></td></tr>
+<tr class="memitem:ga72a1e059640b5b980f882da92f94dd12" id="r_ga72a1e059640b5b980f882da92f94dd12"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga72a1e059640b5b980f882da92f94dd12 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga72a1e059640b5b980f882da92f94dd12">iter_category_t</a> = typename <a class="el" href="structiterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::iterator_category</td></tr>
+<tr class="memdesc:ga72a1e059640b5b980f882da92f94dd12"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的类别标签  <br /></td></tr>
+<tr class="memitem:gad620992f7bf5c8c7b5dfae7a3dd55781" id="r_gad620992f7bf5c8c7b5dfae7a3dd55781"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gad620992f7bf5c8c7b5dfae7a3dd55781 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a> = typename <a class="el" href="structiterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::value_type</td></tr>
+<tr class="memdesc:gad620992f7bf5c8c7b5dfae7a3dd55781"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的值类型  <br /></td></tr>
+<tr class="memitem:gaf61f58aa2abc24434e0b77340ddf2cfa" id="r_gaf61f58aa2abc24434e0b77340ddf2cfa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaf61f58aa2abc24434e0b77340ddf2cfa template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a> = typename <a class="el" href="structiterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::difference_type</td></tr>
+<tr class="memdesc:gaf61f58aa2abc24434e0b77340ddf2cfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的差值类型  <br /></td></tr>
+<tr class="memitem:gaf6942166677058c886c9f50e90b2e44a" id="r_gaf6942166677058c886c9f50e90b2e44a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaf6942166677058c886c9f50e90b2e44a template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gaf6942166677058c886c9f50e90b2e44a">iter_pointer_t</a> = typename <a class="el" href="structiterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::pointer</td></tr>
+<tr class="memdesc:gaf6942166677058c886c9f50e90b2e44a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的指针类型  <br /></td></tr>
+<tr class="memitem:ga213268e516d5934afda281661d30db20" id="r_ga213268e516d5934afda281661d30db20"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga213268e516d5934afda281661d30db20 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga213268e516d5934afda281661d30db20">iter_reference_t</a> = typename <a class="el" href="structiterator__traits.html">iterator_traits</a>&lt;Iterator&gt;::reference</td></tr>
+<tr class="memdesc:ga213268e516d5934afda281661d30db20"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取迭代器的引用类型  <br /></td></tr>
+<tr class="memitem:ga9cd98c1a9691055745b5fefddf920bfd" id="r_ga9cd98c1a9691055745b5fefddf920bfd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga9cd98c1a9691055745b5fefddf920bfd template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#ga9cd98c1a9691055745b5fefddf920bfd">iter_map_key_t</a> = <a class="el" href="group___remove_qualifiers.html#ga75ab6c9a804ec997a6e8cb9c5b36c3e4">remove_const_t</a>&lt;typename <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt;Iterator&gt;::first_type&gt;</td></tr>
+<tr class="memdesc:ga9cd98c1a9691055745b5fefddf920bfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">从映射迭代器中提取键类型  <br /></td></tr>
+<tr class="memitem:gaf3cd69194a21e743c359d0d68f90ae32" id="r_gaf3cd69194a21e743c359d0d68f90ae32"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaf3cd69194a21e743c359d0d68f90ae32 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___iterator_traits.html#gaf3cd69194a21e743c359d0d68f90ae32">iter_map_value_t</a> = typename <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt;Iterator&gt;::second_type</td></tr>
+<tr class="memdesc:gaf3cd69194a21e743c359d0d68f90ae32"><td class="mdescLeft">&#160;</td><td class="mdescRight">从映射迭代器中提取值类型  <br /></td></tr>
+<tr class="memitem:gaad81bc9519e268839715728fedfea51e" id="r_gaad81bc9519e268839715728fedfea51e"><td class="memTemplParams" colspan="2">template&lt;typename Ptr, typename T&gt; </td></tr>
+<tr class="memitem:gaad81bc9519e268839715728fedfea51e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___pointer_traits.html#gaad81bc9519e268839715728fedfea51e">pointer_rebind</a> = typename <a class="el" href="structpointer__traits.html">pointer_traits</a>&lt;Ptr&gt;::template rebind&lt;T&gt;</td></tr>
+<tr class="memdesc:gaad81bc9519e268839715728fedfea51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针重新绑定的便捷别名  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gac0004e8b2ceae8ef1ca7f782adc45122" id="r_gac0004e8b2ceae8ef1ca7f782adc45122"><td class="memTemplParams" colspan="2">template&lt;typename Ptr&gt; </td></tr>
+<tr class="memitem:gac0004e8b2ceae8ef1ca7f782adc45122 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___pointer_traits.html#gac0004e8b2ceae8ef1ca7f782adc45122">ptr_const_cast</a> (Ptr ptr) noexcept</td></tr>
+<tr class="memdesc:gac0004e8b2ceae8ef1ca7f782adc45122"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除指针的const限定符  <br /></td></tr>
+<tr class="memitem:gae5389a2c211913bf9c5700224a7eb73e" id="r_gae5389a2c211913bf9c5700224a7eb73e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gae5389a2c211913bf9c5700224a7eb73e template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___pointer_traits.html#gae5389a2c211913bf9c5700224a7eb73e">ptr_const_cast</a> (T *ptr) noexcept</td></tr>
+<tr class="memdesc:gae5389a2c211913bf9c5700224a7eb73e"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除原始指针的const限定符  <br /></td></tr>
+<tr class="memitem:gadb8bf52434b9d43029ced34d272de32d" id="r_gadb8bf52434b9d43029ced34d272de32d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gadb8bf52434b9d43029ced34d272de32d template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="group___pointer_traits.html#gadb8bf52434b9d43029ced34d272de32d">to_address</a> (T *ptr) noexcept</td></tr>
+<tr class="memdesc:gadb8bf52434b9d43029ced34d272de32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">安全地获取原始指针指向的地址  <br /></td></tr>
+<tr class="memitem:ga27751f364a156df0d2465257f9cac040" id="r_ga27751f364a156df0d2465257f9cac040"><td class="memTemplParams" colspan="2">template&lt;typename Ptr&gt; </td></tr>
+<tr class="memitem:ga27751f364a156df0d2465257f9cac040 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group___pointer_traits.html#ga27751f364a156df0d2465257f9cac040">to_address</a> (const Ptr &amp;ptr) noexcept</td></tr>
+<tr class="memdesc:ga27751f364a156df0d2465257f9cac040"><td class="mdescLeft">&#160;</td><td class="mdescRight">安全地获取任意指针类型指向的地址  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>MSTL迭代器萃取 </p>
-<p>此文件提供了迭代器萃取实现，用于在编译时查询迭代器的各种属性， 为算法提供统一的迭代器信息访问接口。 </p>
+<div class="textblock"><p>MSTL迭代器萃取和指针萃取 </p>
+<p>此文件提供了迭代器萃取实现，用于在编译时查询迭代器的各种属性， 为算法提供统一的迭代器信息访问接口；</p>
+<p>提供了指针萃取的实现，用于抽象和操作不同类型的指针， 以支持各种指针类型的统一操作。 </p>
 
 <p class="definition">在文件 <a class="el" href="iterator__traits_8hpp_source.html">iterator_traits.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

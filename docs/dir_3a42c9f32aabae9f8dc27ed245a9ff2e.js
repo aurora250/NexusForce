@@ -1,6 +1,6 @@
 var dir_3a42c9f32aabae9f8dc27ed245a9ff2e =
 [
-    [ "algorithm.hpp", "algorithm_8hpp_source.html", null ],
+    [ "algorithm.hpp", "algorithm_8hpp.html", null ],
     [ "compare.hpp", "compare_8hpp.html", "compare_8hpp" ],
     [ "ext_sort.hpp", "ext__sort_8hpp_source.html", null ],
     [ "heap.hpp", "heap_8hpp.html", "heap_8hpp" ],
@@ -8,7 +8,7 @@ var dir_3a42c9f32aabae9f8dc27ed245a9ff2e =
     [ "leonardo_heap.hpp", "leonardo__heap_8hpp_source.html", null ],
     [ "merge.hpp", "merge_8hpp.html", "merge_8hpp" ],
     [ "numeric.hpp", "numeric_8hpp.html", "numeric_8hpp" ],
-    [ "parallel.hpp", "parallel_8hpp_source.html", null ],
+    [ "parallel.hpp", "parallel_8hpp.html", "parallel_8hpp" ],
     [ "partition.hpp", "partition_8hpp.html", "partition_8hpp" ],
     [ "permutation.hpp", "permutation_8hpp.html", "permutation_8hpp" ],
     [ "remove.hpp", "remove_8hpp.html", "remove_8hpp" ],

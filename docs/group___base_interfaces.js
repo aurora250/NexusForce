@@ -1,45 +1,33 @@
 var group___base_interfaces =
 [
-    [ "MSTL::ihashable&lt; T &gt;", "struct_m_s_t_l_1_1ihashable.html", [
-      [ "to_hash", "struct_m_s_t_l_1_1ihashable.html#a60e1ea7d06e930a622d2820c3625a740", null ]
+    [ "iarithmetic&lt; T &gt;", "structiarithmetic.html", [
+      [ "operator%", "structiarithmetic.html#ab212878672b63248b0a0937fbf568221", null ],
+      [ "operator%=", "structiarithmetic.html#a0f5d6a8ae34f8b7c5214e95f0bcca3ed", null ],
+      [ "operator*", "structiarithmetic.html#af1c4f2dd6d50d8bba7f94b02b236039f", null ],
+      [ "operator*=", "structiarithmetic.html#ab063928b7a0b0c718caedefe76b8d42f", null ],
+      [ "operator+", "structiarithmetic.html#a8c12c1ab0c841099a4c2e5e8ccff8ffc", null ],
+      [ "operator++", "structiarithmetic.html#a9cf86137943a6e8b4d594dabdaf1c65e", null ],
+      [ "operator++", "structiarithmetic.html#a7919f9861dc3f955237051346ee91849", null ],
+      [ "operator+=", "structiarithmetic.html#a86d815c74c78941cbe34bf88e4aba8bb", null ],
+      [ "operator-", "structiarithmetic.html#a0afa9a773728ff2ca721f5b419c45f96", null ],
+      [ "operator-", "structiarithmetic.html#a5cd90d99df162df02da50e7687232d88", null ],
+      [ "operator--", "structiarithmetic.html#a8b55387df5113d8f1f85ae70f119a468", null ],
+      [ "operator--", "structiarithmetic.html#ac27187dd990ea3284797189a66bffc8e", null ],
+      [ "operator-=", "structiarithmetic.html#a1f6b4b245e9feae81c3afff7b4f5d7c6", null ],
+      [ "operator/", "structiarithmetic.html#a554f329851a6b9e550b73a25945aabd8", null ],
+      [ "operator/=", "structiarithmetic.html#ab280849dae1007995cb61e767c44f6b7", null ]
     ] ],
-    [ "MSTL::icomparable&lt; T &gt;", "struct_m_s_t_l_1_1icomparable.html", [
-      [ "operator!=", "struct_m_s_t_l_1_1icomparable.html#a782c92fc6c8437e64b378cb1578da0eb", null ],
-      [ "operator<", "struct_m_s_t_l_1_1icomparable.html#a71677f7ace2c4cde5496ca74e2a690bb", null ],
-      [ "operator<=", "struct_m_s_t_l_1_1icomparable.html#a43824fee0af2a5d743bdb06eb0b25835", null ],
-      [ "operator==", "struct_m_s_t_l_1_1icomparable.html#ab36b7973fef6a4bc805db851bbbee8e6", null ],
-      [ "operator>", "struct_m_s_t_l_1_1icomparable.html#a3977939893797c1500dca762fc041900", null ],
-      [ "operator>=", "struct_m_s_t_l_1_1icomparable.html#a9a9c4420efee3915194e0e1f36936202", null ]
-    ] ],
-    [ "MSTL::icommon&lt; T &gt;", "struct_m_s_t_l_1_1icommon.html", null ],
-    [ "MSTL::iarithmetic&lt; T &gt;", "struct_m_s_t_l_1_1iarithmetic.html", [
-      [ "operator%", "struct_m_s_t_l_1_1iarithmetic.html#ac7a13e2a818693a867efaa52c65fb22f", null ],
-      [ "operator%=", "struct_m_s_t_l_1_1iarithmetic.html#acab95be9fc9f0ff3d63a0097e7d04d20", null ],
-      [ "operator*", "struct_m_s_t_l_1_1iarithmetic.html#ac372610e506b023e0f9d9ef4cccd63c5", null ],
-      [ "operator*=", "struct_m_s_t_l_1_1iarithmetic.html#a4ecb4e7c9a2ea1bc2946ddd15e2682bd", null ],
-      [ "operator+", "struct_m_s_t_l_1_1iarithmetic.html#af91af69764d4f109009026e982a5af86", null ],
-      [ "operator++", "struct_m_s_t_l_1_1iarithmetic.html#a5fecd930d4798695d2d057690110181c", null ],
-      [ "operator++", "struct_m_s_t_l_1_1iarithmetic.html#a472c63faa539a5c21d95f8d83c98dbb9", null ],
-      [ "operator+=", "struct_m_s_t_l_1_1iarithmetic.html#a64a120a2dafa5c3da712f44f5eb5ee82", null ],
-      [ "operator-", "struct_m_s_t_l_1_1iarithmetic.html#a66fa12339884e7f174e01eb872dd0cb3", null ],
-      [ "operator-", "struct_m_s_t_l_1_1iarithmetic.html#ae232d8dcca69f197c14a1467261973de", null ],
-      [ "operator--", "struct_m_s_t_l_1_1iarithmetic.html#a8b6ae7deb01de561bae4d9902aca7790", null ],
-      [ "operator--", "struct_m_s_t_l_1_1iarithmetic.html#a5d52c6ea361a2f24f69e5980b04f191e", null ],
-      [ "operator-=", "struct_m_s_t_l_1_1iarithmetic.html#a52dc728c0159a9212f3b051fbb031894", null ],
-      [ "operator/", "struct_m_s_t_l_1_1iarithmetic.html#aadedef1a6dbfc1c085d18a326f3fea7e", null ],
-      [ "operator/=", "struct_m_s_t_l_1_1iarithmetic.html#af760c4111564178f0bb33579bf34de25", null ]
-    ] ],
-    [ "MSTL::ibinary&lt; T &gt;", "struct_m_s_t_l_1_1ibinary.html", [
-      [ "operator&", "struct_m_s_t_l_1_1ibinary.html#a78190c4d771db5d3f5555b3647523e7c", null ],
-      [ "operator&=", "struct_m_s_t_l_1_1ibinary.html#a338715ea4672628eb23687c7856f6c0d", null ],
-      [ "operator<<", "struct_m_s_t_l_1_1ibinary.html#a1c2fe05af44bbd45bc996dcd1efd3bec", null ],
-      [ "operator<<=", "struct_m_s_t_l_1_1ibinary.html#a6beb940ab3fdb4f9a0aa180827b6e46a", null ],
-      [ "operator>>", "struct_m_s_t_l_1_1ibinary.html#a1100915cf3ee5f16cb2118575ddacb37", null ],
-      [ "operator>>=", "struct_m_s_t_l_1_1ibinary.html#a915c35d65b37fa5ef07f8a5ef6eb785d", null ],
-      [ "operator^", "struct_m_s_t_l_1_1ibinary.html#a460455522915fe09d0aad1c999541abc", null ],
-      [ "operator^=", "struct_m_s_t_l_1_1ibinary.html#a5985ab8843fc6790dd4ecdfaffae059f", null ],
-      [ "operator|", "struct_m_s_t_l_1_1ibinary.html#a9f73414644654e7d26fd6d299281930a", null ],
-      [ "operator|=", "struct_m_s_t_l_1_1ibinary.html#ad9c99c0ccfe451e0cba7c669cce8bd4c", null ],
-      [ "operator~", "struct_m_s_t_l_1_1ibinary.html#a64e70bc5126c5380409dae71c7f3229f", null ]
+    [ "ibinary&lt; T &gt;", "structibinary.html", [
+      [ "operator&", "structibinary.html#af07e1d56bf7359809ad41ba47d7950ca", null ],
+      [ "operator&=", "structibinary.html#ab7deb3c8c4ebc68f644f131f60f5aa9e", null ],
+      [ "operator<<", "structibinary.html#afa38c4b0a67188a83e933b0c989c01d0", null ],
+      [ "operator<<=", "structibinary.html#ab522f19dfecf41478173fa30f41d6822", null ],
+      [ "operator>>", "structibinary.html#aceddf7d1b31fd42bae49d13ec37049e6", null ],
+      [ "operator>>=", "structibinary.html#ae7157ce77851ae278dc8dba5a410a3f1", null ],
+      [ "operator^", "structibinary.html#a555ed61450106b76ec3092ede268ff3a", null ],
+      [ "operator^=", "structibinary.html#a94b2bc23d7c74ea8469b35946dcc1883", null ],
+      [ "operator|", "structibinary.html#ab25fd2b9c5bb8a1278af50346b5eb3da", null ],
+      [ "operator|=", "structibinary.html#a56e1e02aa6ec5895aa6a61b800fefd08", null ],
+      [ "operator~", "structibinary.html#af911e5029d49eaefcd05be67fca81706", null ]
     ] ]
 ];

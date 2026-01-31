@@ -1,8 +1,8 @@
 var group___c_like_format_functions =
 [
-    [ "MSTL::scprintf", "group___c_like_format_functions.html#ga0c721889e2d7e14d7d0a3f055c297884", null ],
-    [ "MSTL::snprintf", "group___c_like_format_functions.html#ga867f7e238a74c0aac121f3cf48b3fa72", null ],
-    [ "MSTL::sprintf", "group___c_like_format_functions.html#gac1f02263e5e33b1e016644dfe9e7269a", null ],
-    [ "MSTL::vsnprintf", "group___c_like_format_functions.html#gac5a99e424368c5d6602e85d0a0c8cf80", null ],
-    [ "MSTL::vsprintf", "group___c_like_format_functions.html#gadfdf69f5f71e0e9bb3f5edbb7b14d3d8", null ]
+    [ "scprintf", "group___c_like_format_functions.html#ga35fce34e32d8bc7aae6d77ecaba830f2", null ],
+    [ "snprintf", "group___c_like_format_functions.html#ga4494afedb6328de25c6e7f618eef8e59", null ],
+    [ "sprintf", "group___c_like_format_functions.html#gafa775d267c388f9e45038f45e9d5dd21", null ],
+    [ "vsnprintf", "group___c_like_format_functions.html#gaac68f4e177a9c36675f35305bde140dc", null ],
+    [ "vsprintf", "group___c_like_format_functions.html#ga1a9b974bb8d6d6b223fa697be81e75d9", null ]
 ];

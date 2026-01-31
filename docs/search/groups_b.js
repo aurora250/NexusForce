@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['元组应用函数_0',['元组应用函数',['../group___apply_function.html',1,'']]],
-  ['元组_1',['元组',['../group___tuple.html',1,'']]]
+  ['位操作函数_0',['位操作函数',['../group___bit_manipulation.html',1,'']]],
+  ['位计数函数_1',['位计数函数',['../group___bit_counting.html',1,'']]]
 ];

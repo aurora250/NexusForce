@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['索引元组_0',['索引元组',['../group___index_tuple.html',1,'']]]
+  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
 ];

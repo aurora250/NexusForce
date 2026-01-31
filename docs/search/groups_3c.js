@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]]
+  ['空状态_0',['空状态',['../group___none.html',1,'']]]
 ];

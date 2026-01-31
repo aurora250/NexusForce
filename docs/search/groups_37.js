@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['编译器检测_0',['编译器检测',['../group___compiler_detection.html',1,'']]]
+  ['核心类型_0',['核心类型',['../group___core_types.html',1,'']]]
 ];

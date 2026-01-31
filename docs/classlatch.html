@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: latch类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classlatch.html','','classlatch-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">latch类 参考<div class="ingroups"><a class="el" href="group___latches.html">闩锁</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>闩锁类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="latch_8hpp_source.html">latch.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a50bee6b3588a817ac476fe217741cc67" id="r_a50bee6b3588a817ac476fe217741cc67"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a50bee6b3588a817ac476fe217741cc67">latch</a> (const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> expected) noexcept</td></tr>
+<tr class="memdesc:a50bee6b3588a817ac476fe217741cc67"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a65fbf24cb0b126f05d13f8242a4f96bb" id="r_a65fbf24cb0b126f05d13f8242a4f96bb"><td class="memItemLeft"><a id="a65fbf24cb0b126f05d13f8242a4f96bb" name="a65fbf24cb0b126f05d13f8242a4f96bb"></a>
+&#160;</td><td class="memItemRight"><b>~latch</b> ()=default</td></tr>
+<tr class="memdesc:a65fbf24cb0b126f05d13f8242a4f96bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a00355a36c48695412e0ae6e8634f534f" id="r_a00355a36c48695412e0ae6e8634f534f"><td class="memItemLeft"><a id="a00355a36c48695412e0ae6e8634f534f" name="a00355a36c48695412e0ae6e8634f534f"></a>
+&#160;</td><td class="memItemRight"><b>latch</b> (const <a class="el" href="classlatch.html">latch</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a00355a36c48695412e0ae6e8634f534f"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝构造 <br /></td></tr>
+<tr class="memitem:a33b76e8739418ed6b0ffffc7811b7ccd" id="r_a33b76e8739418ed6b0ffffc7811b7ccd"><td class="memItemLeft"><a id="a33b76e8739418ed6b0ffffc7811b7ccd" name="a33b76e8739418ed6b0ffffc7811b7ccd"></a>
+<a class="el" href="classlatch.html">latch</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="classlatch.html">latch</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a33b76e8739418ed6b0ffffc7811b7ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
+<tr class="memitem:a87c43a14c6d375fb10c987b4213b1604" id="r_a87c43a14c6d375fb10c987b4213b1604"><td class="memItemLeft">MSTL_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a87c43a14c6d375fb10c987b4213b1604">count_down</a> (const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> update=1)</td></tr>
+<tr class="memdesc:a87c43a14c6d375fb10c987b4213b1604"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
+<tr class="memitem:a8d71278870e662f4be34254217451120" id="r_a8d71278870e662f4be34254217451120"><td class="memItemLeft">MSTL_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a8d71278870e662f4be34254217451120">try_wait</a> () const noexcept</td></tr>
+<tr class="memdesc:a8d71278870e662f4be34254217451120"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
+<tr class="memitem:a91855d239d3a77268eb6aeed9327825b" id="r_a91855d239d3a77268eb6aeed9327825b"><td class="memItemLeft">MSTL_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a91855d239d3a77268eb6aeed9327825b">wait</a> () const noexcept</td></tr>
+<tr class="memdesc:a91855d239d3a77268eb6aeed9327825b"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待计数器为零  <br /></td></tr>
+<tr class="memitem:a4df8fae6d5455e355a6b716b0bd25c19" id="r_a4df8fae6d5455e355a6b716b0bd25c19"><td class="memItemLeft">MSTL_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a4df8fae6d5455e355a6b716b0bd25c19">arrive_and_wait</a> (const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> update=1) noexcept</td></tr>
+<tr class="memdesc:a4df8fae6d5455e355a6b716b0bd25c19"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器并等待  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:aefa9e036b3465180cff7ca28d1f37905" id="r_aefa9e036b3465180cff7ca28d1f37905"><td class="memItemLeft">static constexpr <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aefa9e036b3465180cff7ca28d1f37905">max</a> () noexcept</td></tr>
+<tr class="memdesc:aefa9e036b3465180cff7ca28d1f37905"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取闩锁的最大计数值  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>闩锁类 </p>
+<p>闩锁是一种同步原语，用于协调多个线程的执行。 线程可以等待闩锁的计数器减为零，或者减少计数器并等待。 闩锁是一次性的，计数器减为零后不能被重置。 </p>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00029">29</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a50bee6b3588a817ac476fe217741cc67" name="a50bee6b3588a817ac476fe217741cc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50bee6b3588a817ac476fe217741cc67">&#9670;&#160;</a></span>latch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">latch::latch </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a></td>          <td class="paramname"><span class="paramname"><em>expected</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expected</td><td>初始计数值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建闩锁并设置初始计数值。计数值必须为非负。 </p>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00048">48</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a00355a36c48695412e0ae6e8634f534f">latch()</a> , 以及 <a class="el" href="#a33b76e8739418ed6b0ffffc7811b7ccd">operator=()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a4df8fae6d5455e355a6b716b0bd25c19" name="a4df8fae6d5455e355a6b716b0bd25c19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df8fae6d5455e355a6b716b0bd25c19">&#9670;&#160;</a></span>arrive_and_wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_ALWAYS_INLINE void latch::arrive_and_wait </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a></td>          <td class="paramname"><span class="paramname"><em>update</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>减少计数器并等待 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">update</td><td>减少的数量，默认为1</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>原子地减少计数器，然后等待计数器变为零。 这是一个组合操作，等价于先调用count_down()再调用wait()。</p>
+<dl class="section note"><dt>注解</dt><dd>如果计数器变为负值，行为未定义 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00103">103</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="latch_8hpp_source.html#l00065">count_down()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00089">wait()</a>.</p>
+
+</div>
+</div>
+<a id="a87c43a14c6d375fb10c987b4213b1604" name="a87c43a14c6d375fb10c987b4213b1604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87c43a14c6d375fb10c987b4213b1604">&#9670;&#160;</a></span>count_down()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_ALWAYS_INLINE void latch::count_down </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a></td>          <td class="paramname"><span class="paramname"><em>update</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>减少计数器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">update</td><td>减少的数量，默认为1</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>原子地减少闩锁的计数器。如果计数器减为零，则通知所有等待线程。</p>
+<dl class="section note"><dt>注解</dt><dd>如果计数器变为负值，行为未定义 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00065">65</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="atomic__base_8hpp_source.html#l00819">atomic_fetch_sub()</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00429">atomic_notify_address()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00045">memory_order_release</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00103">arrive_and_wait()</a>.</p>
+
+</div>
+</div>
+<a id="aefa9e036b3465180cff7ca28d1f37905" name="aefa9e036b3465180cff7ca28d1f37905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefa9e036b3465180cff7ca28d1f37905">&#9670;&#160;</a></span>max()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> latch::max </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取闩锁的最大计数值 </p>
+<dl class="section return"><dt>返回</dt><dd>最大可能的计数值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00038">38</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a>.</p>
+
+</div>
+</div>
+<a id="a8d71278870e662f4be34254217451120" name="a8d71278870e662f4be34254217451120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d71278870e662f4be34254217451120">&#9670;&#160;</a></span>try_wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_ALWAYS_INLINE bool latch::try_wait </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试等待 </p>
+<dl class="section return"><dt>返回</dt><dd>计数器是否为零</dd></dl>
+<p>非阻塞地检查闩锁的计数器是否为零。 </p>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00078">78</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="atomic__base_8hpp_source.html#l00579">atomic_load()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00043">memory_order_acquire</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00089">wait()</a>.</p>
+
+</div>
+</div>
+<a id="a91855d239d3a77268eb6aeed9327825b" name="a91855d239d3a77268eb6aeed9327825b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91855d239d3a77268eb6aeed9327825b">&#9670;&#160;</a></span>wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_ALWAYS_INLINE void latch::wait </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待计数器为零 </p>
+<p>阻塞当前线程，直到闩锁的计数器减为零。</p>
+<dl class="section note"><dt>注解</dt><dd>如果计数器已经为零，则立即返回 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00414">atomic_wait_address()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00078">try_wait()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00103">arrive_and_wait()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="latch_8hpp_source.html">latch.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classlatch.html">latch</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

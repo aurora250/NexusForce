@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exception_2ehpp_0',['exception.hpp',['../exception_8hpp.html',1,'']]]
+  ['duration_2ehpp_0',['duration.hpp',['../duration_8hpp.html',1,'']]]
 ];

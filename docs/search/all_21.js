@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['压缩对_0',['压缩对',['../group___compressed_pair.html',1,'']]]
+  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
 ];

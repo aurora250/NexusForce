@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['排列算法_0',['排列算法',['../group___permutation_algorithms.html',1,'']]],
+  ['排序算法_1',['排序算法',['../group___sort_algorithms.html',1,'']]]
 ];

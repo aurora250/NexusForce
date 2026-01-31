@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['核心类型_0',['核心类型',['../group___core_types.html',1,'']]]
+  ['指针萃取_0',['指针萃取',['../group___pointer_traits.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['旧式函数适配器_0',['旧式函数适配器',['../group___legacy_function_adapters.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

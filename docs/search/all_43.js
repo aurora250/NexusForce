@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
 ];

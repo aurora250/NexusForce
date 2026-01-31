@@ -97,9 +97,9 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../container/map.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../container/set.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="function_8hpp.html">../functional/function.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;thread.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;condition_variable.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;atomic.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="condition__variable_8hpp.html">condition_variable.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">atomic.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><a class="code hl_define" href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Clock&gt;</div>
@@ -108,19 +108,19 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">using </span>clock_type = Clock;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">using </span>time_point = <span class="keyword">typename</span> clock_type::time_point;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">using </span>duration = <span class="keyword">typename</span> clock_type::duration;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span>token = <a class="code hl_typedef" href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">size_t</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span>token = <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">using </span>handler_type = <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> function&lt;void()&gt;;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">struct </span>node {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        time_point expire;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        token id;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        token <a class="code hl_function" href="group___thread.html#gab92eb1130daf70b251149ea2ad0dbca4">id</a>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        handler_type handler;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        node(time_point exp, <span class="keyword">const</span> token tid, handler_type&amp;&amp; h)</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            : expire(exp), id(tid), handler(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___shift_algorithms.html#gac8815ad13ec491e3de029c5f511934c7">move</a>(h)) {}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            : expire(exp), <a class="code hl_function" href="group___thread.html#gab92eb1130daf70b251149ea2ad0dbca4">id</a>(tid), handler(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___shift_algorithms.html#gaaf2bab5d46fedeed83de142c452e682e">move</a>(h)) {}</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordtype">bool</span> operator &lt;(<span class="keyword">const</span> node&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="group___normal_iterators.html#gafc04867207c90ea3db4b182d574ec9bf">operator &lt;</a>(<span class="keyword">const</span> node&amp; other)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keywordflow">if</span> (expire &lt; other.expire) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (expire &gt; other.expire) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">return</span> <span class="keywordtype">id</span> &lt; other.id;</div>
@@ -134,14 +134,14 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> mutex mutex_;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> condition_variable cv_;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    token next_id_;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> atomic_bool stopped_;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56">atomic_bool</a> stopped_;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">friend</span> <span class="keyword">class </span>thread_pool;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> run() {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">while</span> (!stopped_.load()) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock&lt;_MSTL mutex&gt;</a> lock(mutex_);</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">if</span> (nodes_.empty()) {</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                cv_.wait(lock, [<span class="keyword">this</span>] {</div>
@@ -157,11 +157,11 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                nodes_.erase(it);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                node_map_.erase(current_node.id);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                lock.unlock();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                lock.unlock_quiet();</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keywordflow">if</span> (!stopped_.load()) {</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    current_node.handler();</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                lock.lock();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                lock.lock_quiet();</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                now = clock_type::now();</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
@@ -191,26 +191,26 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    timer_scheduler&amp; operator =(timer_scheduler&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    token add_task(time_point expire, handler_type&amp;&amp; handler) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock&lt;_MSTL mutex&gt;</a> lock(mutex_);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        token <span class="keywordtype">id</span> = next_id_++;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is_earliest = nodes_.empty() || expire &lt; nodes_.begin()-&gt;expire;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        node new_node(expire, <span class="keywordtype">id</span>, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___shift_algorithms.html#gac8815ad13ec491e3de029c5f511934c7">move</a>(handler));</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        node new_node(expire, <span class="keywordtype">id</span>, <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___shift_algorithms.html#gaaf2bab5d46fedeed83de142c452e682e">move</a>(handler));</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keyword">auto</span> result = nodes_.insert(new_node);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        node_map_[id] = result.first;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        node_map_[<a class="code hl_function" href="group___thread.html#gab92eb1130daf70b251149ea2ad0dbca4">id</a>] = result.first;</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        lock.unlock();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        lock.unlock_quiet();</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">if</span> (is_earliest) {</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            cv_.notify_one();</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> id;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="group___thread.html#gab92eb1130daf70b251149ea2ad0dbca4">id</a>;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">bool</span> cancel(token <span class="keywordtype">id</span>) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock&lt;_MSTL mutex&gt;</a> lock(mutex_);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keyword">auto</span> it_map = node_map_.find(<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span> (it_map == node_map_.end()) {</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -220,7 +220,7 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        nodes_.erase(it_map-&gt;second);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        node_map_.erase(it_map);</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        lock.unlock();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        lock.unlock_quiet();</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">if</span> (is_earliest) {</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            cv_.notify_one();</div>
@@ -230,15 +230,15 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">void</span> cancel_all() {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock&lt;_MSTL mutex&gt;</a> lock(mutex_);</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        nodes_.clear();</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        node_map_.clear();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        lock.unlock();</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        lock.unlock_quiet();</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        cv_.notify_one();</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    MSTL_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">size</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> unique_lock&lt;_MSTL mutex&gt; lock(<span class="keyword">const_cast&lt;</span><a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> mutex&amp;<span class="keyword">&gt;</span>(mutex_));</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    MSTL_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga5b2bd0888ac6bc15c7a7ec25f790aab3">size</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> lock&lt;_MSTL mutex&gt; lock(<span class="keyword">const_cast&lt;</span><a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> mutex&amp;<span class="keyword">&gt;</span>(mutex_));</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> nodes_.size();</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>};</div>
@@ -292,8 +292,8 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        expire_ = clock_type::now() + expiry_duration;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">void</span> expires_from_now(<span class="keyword">const</span> int64_t milliseconds) {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        expires_after(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> milliseconds(milliseconds));</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">void</span> expires_from_now(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        expires_after(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>));</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    MSTL_NODISCARD time_point expiry()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> expire_; }</div>
@@ -303,7 +303,7 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">void</span> async_wait(WaitHandler&amp;&amp; handler) {</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        cancel();</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        task_id_ = scheduler_.add_task(expire_,</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            handler_type(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> forward&lt;WaitHandler&gt;(handler)));</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            handler_type(<a class="code hl_define" href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a> <a class="code hl_function" href="group___args_forward_functions.html#ga7c4f8791d3bb8fee97a8fb80e2e687fc">forward&lt;WaitHandler&gt;</a>(handler)));</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> cancel() {</div>
@@ -316,17 +316,26 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="keyword">using </span>steady_timer = basic_timer&lt;steady_clock&gt;;</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">using </span>system_timer = basic_timer&lt;system_clock&gt;;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">using </span>high_resolution_timer = basic_timer&lt;high_resolution_clock&gt;;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ASYNC_TIMER_HPP__</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><a class="code hl_define" href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="preprocessor">#endif </span><span class="comment">// MSTL_CORE_ASYNC_TIMER_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">MSTL原子类型完整实现</div></div>
+<div class="ttc" id="acondition__variable_8hpp_html"><div class="ttname"><a href="condition__variable_8hpp.html">condition_variable.hpp</a></div><div class="ttdoc">MSTL条件变量行为</div></div>
 <div class="ttc" id="afunction_8hpp_html"><div class="ttname"><a href="function_8hpp.html">function.hpp</a></div><div class="ttdoc">MSTL通用函数包装器</div></div>
-<div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00217">c++config.hpp:217</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00211">c++config.hpp:211</a></div></div>
-<div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00205">c++config.hpp:205</a></div></div>
-<div class="ttc" id="agroup___platform_dependent_types_html_ga00d7fd2b04a7ff4df689b2f6bae8a5da"><div class="ttname"><a href="group___platform_dependent_types.html#ga00d7fd2b04a7ff4df689b2f6bae8a5da">MSTL::size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00138">types.hpp:138</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_gac8815ad13ec491e3de029c5f511934c7"><div class="ttname"><a href="group___shift_algorithms.html#gac8815ad13ec491e3de029c5f511934c7">MSTL::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result)</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00276">shift.hpp:276</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_gaf631c74a77ff5174b7fc9258abe98f47"><div class="ttname"><a href="group___type_erasure_functions.html#gaf631c74a77ff5174b7fc9258abe98f47">MSTL::size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga7c4f8791d3bb8fee97a8fb80e2e687fc"><div class="ttname"><a href="group___args_forward_functions.html#ga7c4f8791d3bb8fee97a8fb80e2e687fc">forward</a></div><div class="ttdeci">MSTL_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03047">type_traits.hpp:3047</a></div></div>
+<div class="ttc" id="agroup___atomic_operations_html_ga0d0e16e0a3616ac69b5870d3d9f0be56"><div class="ttname"><a href="group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56">atomic_bool</a></div><div class="ttdeci">atomic&lt; bool &gt; atomic_bool</div><div class="ttdoc">布尔原子类型</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00786">atomic.hpp:786</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00068">types.hpp:68</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00160">duration.hpp:160</a></div></div>
+<div class="ttc" id="agroup___mutex_html_gadf5336b46ae26180658ab90be7509a2c"><div class="ttname"><a href="group___mutex.html#gadf5336b46ae26180658ab90be7509a2c">smart_lock</a></div><div class="ttdeci">lock&lt; Mutex, true &gt; smart_lock</div><div class="ttdoc">智能锁管理器的便捷类型别名</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00418">mutex.hpp:418</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga09ad65f96ceede4728a4988b76d48b84"><div class="ttname"><a href="group___namespace_macros.html#ga09ad65f96ceede4728a4988b76d48b84">_MSTL</a></div><div class="ttdeci">#define _MSTL</div><div class="ttdoc">全局命名空间MSTL前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00274">c++config.hpp:274</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaaa8dc0a671998368df81f813cfa9864d"><div class="ttname"><a href="group___namespace_macros.html#gaaa8dc0a671998368df81f813cfa9864d">MSTL_END_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00268">c++config.hpp:268</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gab333891debe6cda860d02533f5b8cbbc"><div class="ttname"><a href="group___namespace_macros.html#gab333891debe6cda860d02533f5b8cbbc">MSTL_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define MSTL_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间MSTL</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00262">c++config.hpp:262</a></div></div>
+<div class="ttc" id="agroup___normal_iterators_html_gafc04867207c90ea3db4b182d574ec9bf"><div class="ttname"><a href="group___normal_iterators.html#gafc04867207c90ea3db4b182d574ec9bf">operator&lt;</a></div><div class="ttdeci">MSTL_NODISCARD constexpr bool operator&lt;(const normal_iterator&lt; LeftIter &gt; &amp;lhs, const normal_iterator&lt; RightIter &gt; &amp;rhs) noexcept</div><div class="ttdoc">小于比较运算符</div><div class="ttdef"><b>定义</b> <a href="normal__iterator_8hpp_source.html#l00227">normal_iterator.hpp:227</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_ga2d35ca4f92b748b22e8674ea36a6c875"><div class="ttname"><a href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00143">types.hpp:143</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gaaf2bab5d46fedeed83de142c452e682e"><div class="ttname"><a href="group___shift_algorithms.html#gaaf2bab5d46fedeed83de142c452e682e">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result)</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00276">shift.hpp:276</a></div></div>
+<div class="ttc" id="agroup___thread_html_gab92eb1130daf70b251149ea2ad0dbca4"><div class="ttname"><a href="group___thread.html#gab92eb1130daf70b251149ea2ad0dbca4">id</a></div><div class="ttdeci">MSTL_ALWAYS_INLINE_INLINE thread::id id() noexcept</div><div class="ttdoc">获取当前线程标识符</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00311">thread.hpp:311</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga5b2bd0888ac6bc15c7a7ec25f790aab3"><div class="ttname"><a href="group___type_erasure_functions.html#ga5b2bd0888ac6bc15c7a7ec25f790aab3">size</a></div><div class="ttdeci">MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">MSTL线程支持</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

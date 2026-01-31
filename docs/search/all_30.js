@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['合并算法_0',['合并算法',['../group___merge_algorithms.html',1,'']]]
 ];

@@ -1,17 +1,17 @@
 var group___core_types =
 [
-    [ "MSTL::byte_t", "group___core_types.html#gaf6c09c1401d579c4be4001587052309e", null ],
-    [ "MSTL::decimal_t", "group___core_types.html#gaf2228674029d4e7ecdefe5a1529332bd", null ],
-    [ "MSTL::float32_t", "group___core_types.html#ga31e1a806f4b0aa17abdb0ac584a1c66f", null ],
-    [ "MSTL::float64_t", "group___core_types.html#ga97b9bc9ff86100f8c26527aea84ed732", null ],
-    [ "MSTL::int16_t", "group___core_types.html#ga23df1b28b4ad559b4810fb15e2048c2d", null ],
-    [ "MSTL::int32_t", "group___core_types.html#ga56b2299e6c5db203881252f307db93f4", null ],
-    [ "MSTL::int64_t", "group___core_types.html#ga8903a30b280266dc3760702758fa876a", null ],
-    [ "MSTL::int8_t", "group___core_types.html#ga70bf439656a8e4d2de27556eb3e724a7", null ],
-    [ "MSTL::max_align_t", "group___core_types.html#gabbc2ab186ddffc6268f98b987bc8ad57", null ],
-    [ "MSTL::nullptr_t", "group___core_types.html#ga95c7af1d699ad4299880efc8f31e5aad", null ],
-    [ "MSTL::uint16_t", "group___core_types.html#ga47203613cc6daff2c5f56567ec1db62b", null ],
-    [ "MSTL::uint32_t", "group___core_types.html#ga345d54be2f996584ff8d8362b3dfeb18", null ],
-    [ "MSTL::uint64_t", "group___core_types.html#ga9e5a8d0f2a8ccc05b1f02cbd1f48e8ed", null ],
-    [ "MSTL::uint8_t", "group___core_types.html#ga7b2d50a1f1787d44357773697095d42a", null ]
+    [ "byte_t", "group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f", null ],
+    [ "decimal_t", "group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a", null ],
+    [ "float32_t", "group___core_types.html#ga3068631062aaf7da4cc0371da9e7a377", null ],
+    [ "float64_t", "group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b", null ],
+    [ "int16_t", "group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19", null ],
+    [ "int32_t", "group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb", null ],
+    [ "int64_t", "group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807", null ],
+    [ "int8_t", "group___core_types.html#gaef0a181fd471ee04962c9ce581a83ca0", null ],
+    [ "max_align_t", "group___core_types.html#ga682e63d2daefd96d4e75e4239210e233", null ],
+    [ "nullptr_t", "group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40", null ],
+    [ "uint16_t", "group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6", null ],
+    [ "uint32_t", "group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82", null ],
+    [ "uint64_t", "group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca", null ],
+    [ "uint8_t", "group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879", null ]
 ];

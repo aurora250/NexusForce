@@ -1,18 +1,18 @@
 var group___iterator_traits =
 [
-    [ "MSTL::iterator_traits&lt; Iterator &gt;", "struct_m_s_t_l_1_1iterator__traits.html", null ],
-    [ "MSTL::iterator_traits&lt; T * &gt;", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html", [
-      [ "difference_type", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ae8f6b0ebb48372ab07d47263dbc26eee", null ],
-      [ "iterator_category", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ac063a17eeb307e841c7fc291c10bb12d", null ],
-      [ "pointer", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ac38b90bf64f7a0e3bb3c53a47473d27e", null ],
-      [ "reference", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#ab068d13432b5c666128d557dff5cc379", null ],
-      [ "value_type", "struct_m_s_t_l_1_1iterator__traits_3_01_t_01_5_01_4.html#a3e6e8c4446dfa52eb296b58dac80dd02", null ]
+    [ "iterator_traits&lt; Iterator &gt;", "structiterator__traits.html", null ],
+    [ "iterator_traits&lt; T * &gt;", "structiterator__traits_3_01_t_01_5_01_4.html", [
+      [ "difference_type", "structiterator__traits_3_01_t_01_5_01_4.html#a6db8837585a558f0c47b0c1a3009f049", null ],
+      [ "iterator_category", "structiterator__traits_3_01_t_01_5_01_4.html#a4d66ba4e9eebaa21bab2797607e1c481", null ],
+      [ "pointer", "structiterator__traits_3_01_t_01_5_01_4.html#a7f43dce454ddc5222f65671fde6b867c", null ],
+      [ "reference", "structiterator__traits_3_01_t_01_5_01_4.html#aa2ac953224f304243e94178db1be7c93", null ],
+      [ "value_type", "structiterator__traits_3_01_t_01_5_01_4.html#ad034e43d50f1f2b24f09a26dd3b3be11", null ]
     ] ],
-    [ "MSTL::iter_category_t", "group___iterator_traits.html#gac61cc1c3fa32101e3b8bd845018c3774", null ],
-    [ "MSTL::iter_difference_t", "group___iterator_traits.html#ga6cc361c86e963571dccf20d41b940621", null ],
-    [ "MSTL::iter_map_key_t", "group___iterator_traits.html#gae3b72a6c89f4bc082999f5b2437180e4", null ],
-    [ "MSTL::iter_map_value_t", "group___iterator_traits.html#gaef0bdc67dff1f4d57472c44b9ccd3aec", null ],
-    [ "MSTL::iter_pointer_t", "group___iterator_traits.html#ga2c0ee93928e6f4d6929966fcb611567d", null ],
-    [ "MSTL::iter_reference_t", "group___iterator_traits.html#ga9b5aa946b86f3c441650589e0cd88283", null ],
-    [ "MSTL::iter_value_t", "group___iterator_traits.html#ga013c6f420db2562168315254ea290a5c", null ]
+    [ "iter_category_t", "group___iterator_traits.html#ga72a1e059640b5b980f882da92f94dd12", null ],
+    [ "iter_difference_t", "group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa", null ],
+    [ "iter_map_key_t", "group___iterator_traits.html#ga9cd98c1a9691055745b5fefddf920bfd", null ],
+    [ "iter_map_value_t", "group___iterator_traits.html#gaf3cd69194a21e743c359d0d68f90ae32", null ],
+    [ "iter_pointer_t", "group___iterator_traits.html#gaf6942166677058c886c9f50e90b2e44a", null ],
+    [ "iter_reference_t", "group___iterator_traits.html#ga213268e516d5934afda281661d30db20", null ],
+    [ "iter_value_t", "group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781", null ]
 ];

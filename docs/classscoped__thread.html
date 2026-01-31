@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSTL: scoped_thread类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MSTL<span id="projectnumber">&#160;1.4.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classscoped__thread.html','','classscoped__thread-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">scoped_thread类 参考<div class="ingroups"><a class="el" href="group___thread.html">线程</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>作用域线程类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a6dec7b5a66f0c65ae0ae5dd6feac3c90" id="r_a6dec7b5a66f0c65ae0ae5dd6feac3c90"><td class="memItemLeft"><a id="a6dec7b5a66f0c65ae0ae5dd6feac3c90" name="a6dec7b5a66f0c65ae0ae5dd6feac3c90"></a>
+using&#160;</td><td class="memItemRight"><b>id</b> = <a class="el" href="structthread_1_1id.html">thread::id</a></td></tr>
+<tr class="memdesc:a6dec7b5a66f0c65ae0ae5dd6feac3c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程ID类型 <br /></td></tr>
+<tr class="memitem:afed8753476507e8b7b0ec0ecf17c1306" id="r_afed8753476507e8b7b0ec0ecf17c1306"><td class="memItemLeft"><a id="afed8753476507e8b7b0ec0ecf17c1306" name="afed8753476507e8b7b0ec0ecf17c1306"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b> = <a class="el" href="classthread.html#a892af261639992f04c59a3cdf167356d">thread::native_handle_type</a></td></tr>
+<tr class="memdesc:afed8753476507e8b7b0ec0ecf17c1306"><td class="mdescLeft">&#160;</td><td class="mdescRight">原生句柄类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a74dd6a794512c5f395201f2dacbef906" id="r_a74dd6a794512c5f395201f2dacbef906"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread</a> () noexcept=default</td></tr>
+<tr class="memdesc:a74dd6a794512c5f395201f2dacbef906"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:a4b4982c79ece8c71a780c9dd581bf81b" id="r_a4b4982c79ece8c71a780c9dd581bf81b"><td class="memTemplParams" colspan="2">template&lt;typename Callable, typename... Args, typename = enable_if_t&lt;        !is_same_v&lt;remove_cvref_t&lt;Callable&gt;, scoped_thread&gt;&gt;&gt; </td></tr>
+<tr class="memitem:a4b4982c79ece8c71a780c9dd581bf81b template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4b4982c79ece8c71a780c9dd581bf81b">scoped_thread</a> (Callable &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a4b4982c79ece8c71a780c9dd581bf81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ad3a9909fbf85aa4887f5364f87ba619f" id="r_ad3a9909fbf85aa4887f5364f87ba619f"><td class="memItemLeft"><a id="ad3a9909fbf85aa4887f5364f87ba619f" name="ad3a9909fbf85aa4887f5364f87ba619f"></a>
+&#160;</td><td class="memItemRight"><b>scoped_thread</b> (const <a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;)=delete</td></tr>
+<tr class="memdesc:ad3a9909fbf85aa4887f5364f87ba619f"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝构造 <br /></td></tr>
+<tr class="memitem:a12fe79e3dcb2c903dc0a7ec2580d393f" id="r_a12fe79e3dcb2c903dc0a7ec2580d393f"><td class="memItemLeft"><a id="a12fe79e3dcb2c903dc0a7ec2580d393f" name="a12fe79e3dcb2c903dc0a7ec2580d393f"></a>
+<a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a12fe79e3dcb2c903dc0a7ec2580d393f"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
+<tr class="memitem:a910ba59e32a548473d3913138c591e62" id="r_a910ba59e32a548473d3913138c591e62"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a910ba59e32a548473d3913138c591e62">scoped_thread</a> (<a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:a910ba59e32a548473d3913138c591e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a214ea3238403c6fbef2ee13eb906608c" id="r_a214ea3238403c6fbef2ee13eb906608c"><td class="memItemLeft"><a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a214ea3238403c6fbef2ee13eb906608c">operator=</a> (<a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a214ea3238403c6fbef2ee13eb906608c"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:aba6039d5cf3715b9fc269be84846e0f3" id="r_aba6039d5cf3715b9fc269be84846e0f3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aba6039d5cf3715b9fc269be84846e0f3">~scoped_thread</a> ()</td></tr>
+<tr class="memdesc:aba6039d5cf3715b9fc269be84846e0f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a0a9ff2b109a329646c3854daa70a1ae9" id="r_a0a9ff2b109a329646c3854daa70a1ae9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0a9ff2b109a329646c3854daa70a1ae9">swap</a> (<a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a0a9ff2b109a329646c3854daa70a1ae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个scoped_thread对象  <br /></td></tr>
+<tr class="memitem:a0975a380a526682b186bf1ea08964998" id="r_a0975a380a526682b186bf1ea08964998"><td class="memItemLeft">MSTL_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a0975a380a526682b186bf1ea08964998">joinable</a> () const noexcept</td></tr>
+<tr class="memdesc:a0975a380a526682b186bf1ea08964998"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查线程是否可被等待  <br /></td></tr>
+<tr class="memitem:a99313e97ef705a915e7a71856c93a912" id="r_a99313e97ef705a915e7a71856c93a912"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a99313e97ef705a915e7a71856c93a912">join</a> ()</td></tr>
+<tr class="memdesc:a99313e97ef705a915e7a71856c93a912"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待线程结束  <br /></td></tr>
+<tr class="memitem:a29bf3f8afe4f3362e381a7013b44f05c" id="r_a29bf3f8afe4f3362e381a7013b44f05c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a29bf3f8afe4f3362e381a7013b44f05c">detach</a> ()</td></tr>
+<tr class="memdesc:a29bf3f8afe4f3362e381a7013b44f05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">分离线程  <br /></td></tr>
+<tr class="memitem:a9a688125d289969766475fba952408fb" id="r_a9a688125d289969766475fba952408fb"><td class="memItemLeft">MSTL_NODISCARD <a class="el" href="#a6dec7b5a66f0c65ae0ae5dd6feac3c90">id</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9a688125d289969766475fba952408fb">get_id</a> () const noexcept</td></tr>
+<tr class="memdesc:a9a688125d289969766475fba952408fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程ID  <br /></td></tr>
+<tr class="memitem:a9fabd7df5618774b71a28a8f75582060" id="r_a9fabd7df5618774b71a28a8f75582060"><td class="memItemLeft">MSTL_NODISCARD <a class="el" href="#afed8753476507e8b7b0ec0ecf17c1306">native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9fabd7df5618774b71a28a8f75582060">native_handle</a> () const</td></tr>
+<tr class="memdesc:a9fabd7df5618774b71a28a8f75582060"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生线程句柄  <br /></td></tr>
+<tr class="memitem:afeed2a5a9bc19f40377b1b0e45bbed1d" id="r_afeed2a5a9bc19f40377b1b0e45bbed1d"><td class="memItemLeft">MSTL_NODISCARD <a class="el" href="classstop__source.html">stop_source</a>&#160;</td><td class="memItemRight"><a class="el" href="#afeed2a5a9bc19f40377b1b0e45bbed1d">get_stop_source</a> () noexcept</td></tr>
+<tr class="memdesc:afeed2a5a9bc19f40377b1b0e45bbed1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取停止源  <br /></td></tr>
+<tr class="memitem:a58b8e4113bac6624b0e720b6f3457d5f" id="r_a58b8e4113bac6624b0e720b6f3457d5f"><td class="memItemLeft">MSTL_NODISCARD <a class="el" href="classstop__token.html">stop_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a58b8e4113bac6624b0e720b6f3457d5f">get_stop_token</a> () const noexcept</td></tr>
+<tr class="memdesc:a58b8e4113bac6624b0e720b6f3457d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取停止令牌  <br /></td></tr>
+<tr class="memitem:a6580ea47c0b858252ce209745f06b194" id="r_a6580ea47c0b858252ce209745f06b194"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6580ea47c0b858252ce209745f06b194">request_stop</a> () noexcept</td></tr>
+<tr class="memdesc:a6580ea47c0b858252ce209745f06b194"><td class="mdescLeft">&#160;</td><td class="mdescRight">请求线程停止  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>作用域线程类 </p>
+<p>提供自动停止和清理功能，在析构时会自动请求停止并等待线程结束，避免资源泄漏。</p>
+<dl class="section note"><dt>注解</dt><dd>支持stop_token参数自动传递 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00028">28</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a74dd6a794512c5f395201f2dacbef906" name="a74dd6a794512c5f395201f2dacbef906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74dd6a794512c5f395201f2dacbef906">&#9670;&#160;</a></span>scoped_thread() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">scoped_thread::scoped_thread </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>创建一个不表示任何线程的scoped_thread对象。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a12fe79e3dcb2c903dc0a7ec2580d393f">operator=()</a>, <a class="el" href="scoped__thread_8hpp_source.html#l00129">operator=()</a>, <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a>, <a class="el" href="scoped__thread_8hpp_source.html#l00112">scoped_thread()</a>, <a class="el" href="#ad3a9909fbf85aa4887f5364f87ba619f">scoped_thread()</a>, <a class="el" href="#a910ba59e32a548473d3913138c591e62">scoped_thread()</a> , 以及 <a class="el" href="scoped__thread_8hpp_source.html#l00150">swap()</a>.</p>
+
+</div>
+</div>
+<a id="a4b4982c79ece8c71a780c9dd581bf81b" name="a4b4982c79ece8c71a780c9dd581bf81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b4982c79ece8c71a780c9dd581bf81b">&#9670;&#160;</a></span>scoped_thread() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Callable, typename... Args, typename = enable_if_t&lt;        !is_same_v&lt;remove_cvref_t&lt;Callable&gt;, scoped_thread&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">scoped_thread::scoped_thread </td>
+          <td>(</td>
+          <td class="paramtype">Callable &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Callable</td><td>可调用类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>要在线程中执行的函数 </td></tr>
+    <tr><td class="paramname">args</td><td>传递给函数的参数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建新线程并开始执行。如果函数接受stop_token参数，会自动传递。 </p>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00112">112</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="type__traits_8hpp_source.html#l03047">forward()</a> , 以及 <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="a910ba59e32a548473d3913138c591e62" name="a910ba59e32a548473d3913138c591e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a910ba59e32a548473d3913138c591e62">&#9670;&#160;</a></span>scoped_thread() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">scoped_thread::scoped_thread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的scoped_thread </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="aba6039d5cf3715b9fc269be84846e0f3" name="aba6039d5cf3715b9fc269be84846e0f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba6039d5cf3715b9fc269be84846e0f3">&#9670;&#160;</a></span>~scoped_thread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">scoped_thread::~scoped_thread </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>如果线程可被等待结束，自动请求停止并等待线程结束。 </p>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00139">139</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="scoped__thread_8hpp_source.html#l00168">join()</a>, <a class="el" href="scoped__thread_8hpp_source.html#l00159">joinable()</a> , 以及 <a class="el" href="scoped__thread_8hpp_source.html#l00220">request_stop()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a29bf3f8afe4f3362e381a7013b44f05c" name="a29bf3f8afe4f3362e381a7013b44f05c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bf3f8afe4f3362e381a7013b44f05c">&#9670;&#160;</a></span>detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scoped_thread::detach </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>分离线程 </p>
+<p>允许线程独立执行，不再与其关联。 分离后不能再加入或请求停止。 </p>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00178">178</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9a688125d289969766475fba952408fb" name="a9a688125d289969766475fba952408fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a688125d289969766475fba952408fb">&#9670;&#160;</a></span>get_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_NODISCARD <a class="el" href="#a6dec7b5a66f0c65ae0ae5dd6feac3c90">id</a> scoped_thread::get_id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取线程ID </p>
+<dl class="section return"><dt>返回</dt><dd>线程ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00186">186</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afeed2a5a9bc19f40377b1b0e45bbed1d" name="afeed2a5a9bc19f40377b1b0e45bbed1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeed2a5a9bc19f40377b1b0e45bbed1d">&#9670;&#160;</a></span>get_stop_source()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_NODISCARD <a class="el" href="classstop__source.html">stop_source</a> scoped_thread::get_stop_source </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取停止源 </p>
+<dl class="section return"><dt>返回</dt><dd>关联的stop_source </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00202">202</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a58b8e4113bac6624b0e720b6f3457d5f" name="a58b8e4113bac6624b0e720b6f3457d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b8e4113bac6624b0e720b6f3457d5f">&#9670;&#160;</a></span>get_stop_token()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_NODISCARD <a class="el" href="classstop__token.html">stop_token</a> scoped_thread::get_stop_token </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取停止令牌 </p>
+<dl class="section return"><dt>返回</dt><dd>关联的stop_token </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00210">210</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a99313e97ef705a915e7a71856c93a912" name="a99313e97ef705a915e7a71856c93a912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99313e97ef705a915e7a71856c93a912">&#9670;&#160;</a></span>join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scoped_thread::join </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待线程结束 </p>
+<p>阻塞当前线程，直到目标线程执行完成。 </p>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00168">168</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="scoped__thread_8hpp_source.html#l00139">~scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="a0975a380a526682b186bf1ea08964998" name="a0975a380a526682b186bf1ea08964998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0975a380a526682b186bf1ea08964998">&#9670;&#160;</a></span>joinable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_NODISCARD bool scoped_thread::joinable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查线程是否可被等待 </p>
+<dl class="section return"><dt>返回</dt><dd>是否可被等待 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00159">159</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="scoped__thread_8hpp_source.html#l00139">~scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="a9fabd7df5618774b71a28a8f75582060" name="a9fabd7df5618774b71a28a8f75582060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fabd7df5618774b71a28a8f75582060">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSTL_NODISCARD <a class="el" href="#afed8753476507e8b7b0ec0ecf17c1306">native_handle_type</a> scoped_thread::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生线程句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>原生线程句柄 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00194">194</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a214ea3238403c6fbef2ee13eb906608c" name="a214ea3238403c6fbef2ee13eb906608c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a214ea3238403c6fbef2ee13eb906608c">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classscoped__thread.html">scoped_thread</a> &amp; scoped_thread::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的scoped_thread </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00276">move()</a> , 以及 <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="a6580ea47c0b858252ce209745f06b194" name="a6580ea47c0b858252ce209745f06b194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6580ea47c0b858252ce209745f06b194">&#9670;&#160;</a></span>request_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool scoped_thread::request_stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>请求线程停止 </p>
+<dl class="section return"><dt>返回</dt><dd>是否成功请求停止</dd></dl>
+<p>设置停止标志，线程可以通过检查stop_token来响应停止请求。 </p>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00220">220</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="scoped__thread_8hpp_source.html#l00139">~scoped_thread()</a>.</p>
+
+</div>
+</div>
+<a id="a0a9ff2b109a329646c3854daa70a1ae9" name="a0a9ff2b109a329646c3854daa70a1ae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a9ff2b109a329646c3854daa70a1ae9">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scoped_thread::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classscoped__thread.html">scoped_thread</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个scoped_thread对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的scoped_thread </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a> 第 <a class="el" href="scoped__thread_8hpp_source.html#l00150">150</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00274">_MSTL</a>, <a class="el" href="#a74dd6a794512c5f395201f2dacbef906">scoped_thread()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="scoped__thread_8hpp_source.html">scoped_thread.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classscoped__thread.html">scoped_thread</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

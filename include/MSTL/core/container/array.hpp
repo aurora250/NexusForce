@@ -1,6 +1,7 @@
 #ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
 #define MSTL_CORE_CONTAINER_ARRAY_HPP__
 #include "MSTL/core/interface/icollector.hpp"
+#include "MSTL/core/interface/iiterator.hpp"
 #include "MSTL/core/algorithm/shift.hpp"
 #include "MSTL/core/algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__

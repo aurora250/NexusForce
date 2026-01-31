@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['迭代器操作_0',['迭代器操作',['../group___iterator_operation.html',1,'']]],
-  ['迭代器标签_1',['迭代器标签',['../group___iterator_tags.html',1,'']]],
-  ['迭代器类型检查_2',['迭代器类型检查',['../group___iterator_category_checks.html',1,'']]],
-  ['迭代器萃取_3',['迭代器萃取',['../group___iterator_traits.html',1,'']]]
+  ['模式匹配算法_0',['模式匹配算法',['../group___pattern_matching_algorithms.html',1,'']]],
+  ['模板操作工具_1',['模板操作工具',['../group___template_traits_utilities.html',1,'']]]
 ];

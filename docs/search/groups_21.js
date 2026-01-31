@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['排列算法_0',['排列算法',['../group___permutation_algorithms.html',1,'']]],
-  ['排序算法_1',['排序算法',['../group___sort_algorithms.html',1,'']]]
+  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]],
+  ['对齐缓冲区_1',['对齐缓冲区',['../group___aligned_buffer.html',1,'']]]
 ];

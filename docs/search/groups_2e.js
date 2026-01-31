@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['整数序列_0',['整数序列',['../group___integer_sequence.html',1,'']]]
 ];

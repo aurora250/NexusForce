@@ -1,22 +1,18 @@
 var group___memory_allocator =
 [
-    [ "MSTL::standard_allocator&lt; T &gt;", "class_m_s_t_l_1_1standard__allocator.html", [
-      [ "rebind", "struct_m_s_t_l_1_1standard__allocator_1_1rebind.html", null ],
-      [ "pointer", "class_m_s_t_l_1_1standard__allocator.html#ae406987891618f2fb3c44e4ba95c0c9c", null ],
-      [ "size_type", "class_m_s_t_l_1_1standard__allocator.html#a706da85fd29018f026b959661215be2a", null ],
-      [ "value_type", "class_m_s_t_l_1_1standard__allocator.html#a67bd49c5eaf98a38fa94a85d50c0b9f8", null ],
-      [ "standard_allocator", "class_m_s_t_l_1_1standard__allocator.html#aaf182cccc56ad0a75e61194af8628f34", null ],
-      [ "standard_allocator", "class_m_s_t_l_1_1standard__allocator.html#a7af6318e9937369b77f20fa2d3586031", null ],
-      [ "~standard_allocator", "class_m_s_t_l_1_1standard__allocator.html#a90e7c638b88037c420cc731dc30df060", null ],
-      [ "allocate", "class_m_s_t_l_1_1standard__allocator.html#a057e00c12d541e2cd1b0c82b458f7d25", null ],
-      [ "allocate", "class_m_s_t_l_1_1standard__allocator.html#a769357b05b39e7acb037babd251c189e", null ],
-      [ "deallocate", "class_m_s_t_l_1_1standard__allocator.html#a6a135116e8537a4145b3bfd9fd11e0db", null ],
-      [ "deallocate", "class_m_s_t_l_1_1standard__allocator.html#af87bf212aef1f3dc451607d7794383fa", null ],
-      [ "operator=", "class_m_s_t_l_1_1standard__allocator.html#ac565b1e420759fa40f4d796077c9bee3", null ]
+    [ "standard_allocator&lt; T &gt;", "classstandard__allocator.html", [
+      [ "rebind", "structstandard__allocator_1_1rebind.html", null ],
+      [ "pointer", "classstandard__allocator.html#afc904b1c0247278fb86c21525f66b7ae", null ],
+      [ "size_type", "classstandard__allocator.html#a3d31da231ceb7b953c3e17c559d479d7", null ],
+      [ "value_type", "classstandard__allocator.html#acc6f596422997bf646cc9341539c7d70", null ],
+      [ "standard_allocator", "classstandard__allocator.html#aa334777b453cb7a736f49a7bdf727285", null ],
+      [ "standard_allocator", "classstandard__allocator.html#a847a0eb61cec68d044983fd6564b2de3", null ],
+      [ "~standard_allocator", "classstandard__allocator.html#ab2c8dd98ed81e389cf5fd0d4057f7b5b", null ],
+      [ "operator=", "classstandard__allocator.html#acf287ae71aa35012f802521dc5e7533a", null ]
     ] ],
-    [ "MSTL::allocator", "group___memory_allocator.html#gabfc5022a55020eafff49e0f15c434e96", null ],
-    [ "MSTL::allocate", "group___memory_allocator.html#ga3749a0a8716fd03615513cc90f5410ea", null ],
-    [ "MSTL::deallocate", "group___memory_allocator.html#ga4576b3cbe51381c4cfe4624ba2eb666b", null ],
-    [ "MSTL::operator!=", "group___memory_allocator.html#ga7541eeda593b5160cbdde6da901542b0", null ],
-    [ "MSTL::operator==", "group___memory_allocator.html#ga90c93514864a0a113e643eedf00207a6", null ]
+    [ "allocator", "group___memory_allocator.html#ga3dfc367f99e4622b5a17628bb6777e54", null ],
+    [ "allocate", "group___memory_allocator.html#ga4add25ecf08cb7297a47b3cac914acdb", null ],
+    [ "deallocate", "group___memory_allocator.html#ga9162698de02d01049680f6836504bfa4", null ],
+    [ "operator!=", "group___memory_allocator.html#ga493a52f6d7cb1d1f606fd1871b64b38b", null ],
+    [ "operator==", "group___memory_allocator.html#ga168bf84043a77b663eaf4cb3671dacf3", null ]
 ];

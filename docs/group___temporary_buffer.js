@@ -1,24 +1,24 @@
 var group___temporary_buffer =
 [
-    [ "MSTL::temporary_buffer&lt; Iterator &gt;", "struct_m_s_t_l_1_1temporary__buffer.html", [
-      [ "allocator_type", "struct_m_s_t_l_1_1temporary__buffer.html#a9ff048e7e22e78238cd068bb27f92e01", null ],
-      [ "const_pointer", "struct_m_s_t_l_1_1temporary__buffer.html#ae2abcc158b6b97f36d22c294e5904734", null ],
-      [ "const_reference", "struct_m_s_t_l_1_1temporary__buffer.html#a3af44cc92c01971c5a472745072f587b", null ],
-      [ "difference_type", "struct_m_s_t_l_1_1temporary__buffer.html#ac0725efdca2c7237fe5c7d1cc413f014", null ],
-      [ "pointer", "struct_m_s_t_l_1_1temporary__buffer.html#aed7fedfe06ebc8cd94c7722f05373f19", null ],
-      [ "reference", "struct_m_s_t_l_1_1temporary__buffer.html#a5c2d41360e160e27308f28dc9174bdb4", null ],
-      [ "size_type", "struct_m_s_t_l_1_1temporary__buffer.html#a73f2d912463490ebc151636d66229cd4", null ],
-      [ "value_type", "struct_m_s_t_l_1_1temporary__buffer.html#a9d4a0c199e21003181eed3cb17f35db8", null ],
-      [ "temporary_buffer", "struct_m_s_t_l_1_1temporary__buffer.html#ab0e04262c2cae3f2172beff347e943de", null ],
-      [ "temporary_buffer", "struct_m_s_t_l_1_1temporary__buffer.html#a674b1e2ef3074ebd13788aa321188704", null ],
-      [ "~temporary_buffer", "struct_m_s_t_l_1_1temporary__buffer.html#a612636e95710af53b30804cfa7e37dbe", null ],
-      [ "begin", "struct_m_s_t_l_1_1temporary__buffer.html#a34eeddf8c3b0ba7a1a1342780cf7b370", null ],
-      [ "cbegin", "struct_m_s_t_l_1_1temporary__buffer.html#acdc5174c989856e891e78762e60275fe", null ],
-      [ "cend", "struct_m_s_t_l_1_1temporary__buffer.html#a274ff3da5588ccd6716aaea46704272c", null ],
-      [ "empty", "struct_m_s_t_l_1_1temporary__buffer.html#ab93a68632393bb51f66b536e8cb8cc90", null ],
-      [ "end", "struct_m_s_t_l_1_1temporary__buffer.html#a514693c217eabb68b40323c595e31693", null ],
-      [ "operator=", "struct_m_s_t_l_1_1temporary__buffer.html#aaacb0110ab822f190ffe76e9870e8875", null ],
-      [ "requested_size", "struct_m_s_t_l_1_1temporary__buffer.html#a1bfe6c5f264070626e3121d7e7c08d5c", null ],
-      [ "size", "struct_m_s_t_l_1_1temporary__buffer.html#a157994006231b2efe29c7ff2d870607c", null ]
+    [ "temporary_buffer&lt; Iterator &gt;", "structtemporary__buffer.html", [
+      [ "allocator_type", "structtemporary__buffer.html#a09ca72489cf8adf85a0c0a5335d2254e", null ],
+      [ "const_pointer", "structtemporary__buffer.html#afcbce0ee8840a441d09cadc5e0015376", null ],
+      [ "const_reference", "structtemporary__buffer.html#a3b46d5d5da0495eaa59bf76d7d54ed89", null ],
+      [ "difference_type", "structtemporary__buffer.html#a1c2e316a064cd7f5ec9b631d39ee1a38", null ],
+      [ "pointer", "structtemporary__buffer.html#a7419e9ca260f0ba16780f37b60cea817", null ],
+      [ "reference", "structtemporary__buffer.html#a5532ade36bb5f95f29d718aa3d45a121", null ],
+      [ "size_type", "structtemporary__buffer.html#a60b5ccc0c3cd1482b838a131978d4580", null ],
+      [ "value_type", "structtemporary__buffer.html#aecdf7a97fb943e6ff763da6821d91560", null ],
+      [ "temporary_buffer", "structtemporary__buffer.html#a13917bbbd05ebb2bdea18a249e944a93", null ],
+      [ "temporary_buffer", "structtemporary__buffer.html#af8279e2f494bdb04fb3e74d0e62a5220", null ],
+      [ "~temporary_buffer", "structtemporary__buffer.html#a620f8af42fec0b3acd259f6b2b7b8a19", null ],
+      [ "begin", "structtemporary__buffer.html#ad0f8bfe8008fe91e7d3143c19438d8d7", null ],
+      [ "cbegin", "structtemporary__buffer.html#aa53244e66ff7fc8542004e057a2b9079", null ],
+      [ "cend", "structtemporary__buffer.html#a2fbf0de19cffcd864638261735f112d1", null ],
+      [ "empty", "structtemporary__buffer.html#aecb919108f706a0d869a27cc276b800c", null ],
+      [ "end", "structtemporary__buffer.html#a599d74505502056b9e60edb6254bf1a1", null ],
+      [ "operator=", "structtemporary__buffer.html#a2ff5f51dd9e1f6e682910ecab6d3fbc4", null ],
+      [ "requested_size", "structtemporary__buffer.html#a9aafea30e6ffa4a8e63fa5431c163b63", null ],
+      [ "size", "structtemporary__buffer.html#a09d1758edf3fa18331f9804ca32d1f27", null ]
     ] ]
 ];

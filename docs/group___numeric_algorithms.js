@@ -1,12 +1,12 @@
 var group___numeric_algorithms =
 [
-    [ "MSTL::accumulate", "group___numeric_algorithms.html#ga746aed8814525c9e78f941d6048d9212", null ],
-    [ "MSTL::accumulate", "group___numeric_algorithms.html#ga02d03e260608e0a5ddba1c5836b5e6d0", null ],
-    [ "MSTL::adjacent_difference", "group___numeric_algorithms.html#ga03a5a3f90a7375332c736aeadeefe2d8", null ],
-    [ "MSTL::adjacent_difference", "group___numeric_algorithms.html#ga1b204c8e853c078bba76b02a7a831305", null ],
-    [ "MSTL::inner_product", "group___numeric_algorithms.html#ga64b39ed9f966127853de4cee509ad8fa", null ],
-    [ "MSTL::inner_product", "group___numeric_algorithms.html#gaca007c254a17f0bb7f85de1e542008e6", null ],
-    [ "MSTL::partial_sum", "group___numeric_algorithms.html#ga6ab5725fa2705f3d01488614ec7805c0", null ],
-    [ "MSTL::partial_sum", "group___numeric_algorithms.html#ga5d4e799c799134b54508a18b7dc2eed2", null ],
-    [ "MSTL::sequence_fill", "group___numeric_algorithms.html#gaf735d570c8be23dd53602d867511c9c0", null ]
+    [ "accumulate", "group___numeric_algorithms.html#ga62cf55ab0954455e9e920f4c006575e7", null ],
+    [ "accumulate", "group___numeric_algorithms.html#gad714b590aa85decfdf58239e440b2969", null ],
+    [ "adjacent_difference", "group___numeric_algorithms.html#gabec2683e69c7cd01a33befc95db0db1d", null ],
+    [ "adjacent_difference", "group___numeric_algorithms.html#gab32c9c3b1163a320675abcfb9d7f31f4", null ],
+    [ "inner_product", "group___numeric_algorithms.html#gac25330bb341f088df1990e8a33565f84", null ],
+    [ "inner_product", "group___numeric_algorithms.html#gaf676478af8f7abd3bf65f1e54b348971", null ],
+    [ "partial_sum", "group___numeric_algorithms.html#gab26ff43c9d70764ade020aa3ed097aee", null ],
+    [ "partial_sum", "group___numeric_algorithms.html#ga63b6441c64e7d120f7c944b2ee30c2e3", null ],
+    [ "sequence_fill", "group___numeric_algorithms.html#ga5e419d69a3b8b930e8f95941942dfa74", null ]
 ];

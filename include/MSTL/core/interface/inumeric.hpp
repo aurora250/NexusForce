@@ -13,7 +13,8 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup BaseInterfaces 基本接口
+ * @defgroup CRTPInterfaces CRTP接口
+ * @brief 提供基本功能的CRTP基类
  * @{
  */
 
@@ -347,7 +348,7 @@ public:
     }
 };
 
-/** @} */ // BaseInterfaces
+/** @} */ // CRTPInterfaces
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_INTERFACE_INUMERIC_HPP__

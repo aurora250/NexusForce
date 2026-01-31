@@ -1,15 +1,17 @@
 var searchData=
 [
-  ['make_5finteger_0',['make_integer',['../struct_m_s_t_l_1_1make__integer.html',1,'MSTL']]],
-  ['make_5fsigned_1',['make_signed',['../struct_m_s_t_l_1_1make__signed.html',1,'MSTL']]],
-  ['make_5funsigned_2',['make_unsigned',['../struct_m_s_t_l_1_1make__unsigned.html',1,'MSTL']]],
-  ['make_5funsigned_3c_20diff_20_3e_3',['make_unsigned&lt; Diff &gt;',['../struct_m_s_t_l_1_1make__unsigned.html',1,'MSTL']]],
-  ['max_5fvalue_4',['max_value',['../struct_m_s_t_l_1_1max__value.html',1,'MSTL']]],
-  ['minus_5',['minus',['../struct_m_s_t_l_1_1minus.html',1,'MSTL']]],
-  ['minus_3c_20void_20_3e_6',['minus&lt; void &gt;',['../struct_m_s_t_l_1_1minus_3_01void_01_4.html',1,'MSTL']]],
-  ['modulus_7',['modulus',['../struct_m_s_t_l_1_1modulus.html',1,'MSTL']]],
-  ['modulus_3c_20void_20_3e_8',['modulus&lt; void &gt;',['../struct_m_s_t_l_1_1modulus_3_01void_01_4.html',1,'MSTL']]],
-  ['multiplies_9',['multiplies',['../struct_m_s_t_l_1_1multiplies.html',1,'MSTL']]],
-  ['multiplies_3c_20void_20_3e_10',['multiplies&lt; void &gt;',['../struct_m_s_t_l_1_1multiplies_3_01void_01_4.html',1,'MSTL']]],
-  ['murmur_5fhash_11',['murmur_hash',['../struct_m_s_t_l_1_1murmur__hash.html',1,'MSTL']]]
+  ['make_5finteger_0',['make_integer',['../structmake__integer.html',1,'']]],
+  ['make_5fsigned_1',['make_signed',['../structmake__signed.html',1,'']]],
+  ['make_5funsigned_2',['make_unsigned',['../structmake__unsigned.html',1,'']]],
+  ['make_5funsigned_3c_20diff_20_3e_3',['make_unsigned&lt; Diff &gt;',['../structmake__unsigned.html',1,'']]],
+  ['math_5fexception_4',['math_exception',['../structmath__exception.html',1,'']]],
+  ['max_5fvalue_5',['max_value',['../structmax__value.html',1,'']]],
+  ['memory_5fexception_6',['memory_exception',['../structmemory__exception.html',1,'']]],
+  ['minus_7',['minus',['../structminus.html',1,'']]],
+  ['minus_3c_20void_20_3e_8',['minus&lt; void &gt;',['../structminus_3_01void_01_4.html',1,'']]],
+  ['modulus_9',['modulus',['../structmodulus.html',1,'']]],
+  ['modulus_3c_20void_20_3e_10',['modulus&lt; void &gt;',['../structmodulus_3_01void_01_4.html',1,'']]],
+  ['multiplies_11',['multiplies',['../structmultiplies.html',1,'']]],
+  ['multiplies_3c_20void_20_3e_12',['multiplies&lt; void &gt;',['../structmultiplies_3_01void_01_4.html',1,'']]],
+  ['mutex_13',['mutex',['../classmutex.html',1,'']]]
 ];

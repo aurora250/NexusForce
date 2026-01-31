@@ -1,4 +1,4 @@
 var apply_8hpp =
 [
-    [ "MSTL::apply", "group___apply_function.html#ga31590119e0888c700145a4df32d8c802", null ]
+    [ "apply", "group___tuple.html#ga7285c226430fd247a3b3ccc147089b8a", null ]
 ];

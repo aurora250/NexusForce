@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['键值对辅助工具_0',['键值对辅助工具',['../group___pair_utilities.html',1,'']]],
-  ['键值对_1',['键值对',['../group___pair.html',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

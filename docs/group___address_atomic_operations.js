@@ -1,0 +1,26 @@
+var group___address_atomic_operations =
+[
+    [ "address_atomic_diff_t", "group___address_atomic_operations.html#ga99c18f2575b7f1ff7f742c1248540d2c", null ],
+    [ "address_add_fetch", "group___address_atomic_operations.html#ga44ba83ab21e09ab17230f74d7bdddf56", null ],
+    [ "address_add_fetch_any", "group___address_atomic_operations.html#gabe20783ceef4932403973bf0a803a9ba", null ],
+    [ "address_and_fetch", "group___address_atomic_operations.html#gacf09fac589d78c2732b29ca607ae46d7", null ],
+    [ "address_cmpexch_strong", "group___address_atomic_operations.html#ga430f2b1ebcd0b9a5be6a5ad396bd3ee6", null ],
+    [ "address_cmpexch_weak", "group___address_atomic_operations.html#ga3a9a77e131b05ea5f63ef83b528bf6a2", null ],
+    [ "address_exchange", "group___address_atomic_operations.html#gafb0d6dda67b63d4747dadd94065bd259", null ],
+    [ "address_exchange_any", "group___address_atomic_operations.html#gadefbd53e3ab85e323b57c53d34d81309", null ],
+    [ "address_fetch_add", "group___address_atomic_operations.html#gafb7cac88191753863e4d6bab5c27d6df", null ],
+    [ "address_fetch_add_any", "group___address_atomic_operations.html#gae00ef083a909cd6194153345b309f7f1", null ],
+    [ "address_fetch_and", "group___address_atomic_operations.html#gadae4e4d355f4b75e450c191826382936", null ],
+    [ "address_fetch_or", "group___address_atomic_operations.html#ga14fcb96c59fc8f96b37243f6efeccc29", null ],
+    [ "address_fetch_sub", "group___address_atomic_operations.html#ga7e69a4ed30cfdff050720a1895101489", null ],
+    [ "address_fetch_sub_any", "group___address_atomic_operations.html#ga9685f107c432c4dc2f30dd5fbeb685d9", null ],
+    [ "address_fetch_xor", "group___address_atomic_operations.html#ga2a9c2cd6e28998b4de13ddacc3929484", null ],
+    [ "address_load", "group___address_atomic_operations.html#gadf349954cb43642420da2b6585abb9a9", null ],
+    [ "address_load_any", "group___address_atomic_operations.html#ga2f49b33adfeafa6b2aa20ec14384c216", null ],
+    [ "address_or_fetch", "group___address_atomic_operations.html#gaf3a938d70cbac3df2fc7ea12030b00ba", null ],
+    [ "address_store", "group___address_atomic_operations.html#ga25b478fff3d200392d081b71001090ab", null ],
+    [ "address_store_any", "group___address_atomic_operations.html#gac26ac7e71c70f16bffb6cdeafe0129f2", null ],
+    [ "address_sub_fetch", "group___address_atomic_operations.html#gad0da27e67ed5963b322a0445fe881899", null ],
+    [ "address_sub_fetch_any", "group___address_atomic_operations.html#ga5e09469ef32afe76e1bc25cb28ca13f0", null ],
+    [ "address_xor_fetch", "group___address_atomic_operations.html#gaf39baa8903a815ecf03876862982cf1a", null ]
+];

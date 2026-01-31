@@ -1,17 +1,14 @@
 var group___bit_counting =
 [
-    [ "MSTL::clz32", "group___bit_counting.html#gaa01444828d823a04926f6aaa844b01d7", null ],
-    [ "MSTL::clz64", "group___bit_counting.html#ga0b7a66b9db5ba6c63307f911def4b0a9", null ],
-    [ "MSTL::countl_one", "group___bit_counting.html#ga81db2f355b4ff7c0ced133f40c476964", null ],
-    [ "MSTL::countl_zero", "group___bit_counting.html#gaa2cff654c355be1e3a980d33e39135b5", null ],
-    [ "MSTL::countr_one", "group___bit_counting.html#gac25d86bd450f842ba6f542234bbf045d", null ],
-    [ "MSTL::countr_zero", "group___bit_counting.html#gaa639eb72d650ec052afb099dbd3a557c", null ],
-    [ "MSTL::highest_set_bit_pos", "group___bit_counting.html#gaaccd4c50180520ad862414a46ed4f89d", null ],
-    [ "MSTL::lowest_set_bit_pos", "group___bit_counting.html#gab7689a29d580dcdcd42ee567c41c6416", null ],
-    [ "MSTL::parity", "group___bit_counting.html#ga682808dcfd1b9d530c7382932b0de1ca", null ],
-    [ "MSTL::parity32", "group___bit_counting.html#ga6773b78dbbb446e2333f199c5f0c7334", null ],
-    [ "MSTL::parity64", "group___bit_counting.html#ga70a11e2c88d13c7d8ecf9037dae1d964", null ],
-    [ "MSTL::popcount", "group___bit_counting.html#ga48a4848b9134e1ac2e54c030166fc2ff", null ],
-    [ "MSTL::popcount32", "group___bit_counting.html#gadb52f9b5f8fc6c3c2106b6ee52e7bf07", null ],
-    [ "MSTL::popcount64", "group___bit_counting.html#gaf05f02d83c6396b6264b2be06a9d6049", null ]
+    [ "clz32", "group___bit_counting.html#ga0b9e4c418676a8cc342b723f3ea9460a", null ],
+    [ "countl_one", "group___bit_counting.html#ga1da158bf3815ab2e7503f8cd52d9ca96", null ],
+    [ "countl_zero", "group___bit_counting.html#gaccd54859db374262f5c36034b8669abb", null ],
+    [ "countr_one", "group___bit_counting.html#gab8f133d4b23b52b75fd0c952d85af189", null ],
+    [ "countr_zero", "group___bit_counting.html#gaf2706acea69cb92b45211c361b3cd40b", null ],
+    [ "highest_set_bit_pos", "group___bit_counting.html#ga8483ba5677444e4fb1c44079cb584439", null ],
+    [ "lowest_set_bit_pos", "group___bit_counting.html#ga68513d991c2a3a4be5f5d3bbd9827913", null ],
+    [ "parity", "group___bit_counting.html#ga1a1649ec9d3f0fb2aad2df2550467318", null ],
+    [ "parity32", "group___bit_counting.html#ga95663d68b8efcf5aec31a87051a77e0c", null ],
+    [ "popcount", "group___bit_counting.html#ga7493eb3d8ac54b313025c16119a3e9df", null ],
+    [ "popcount32", "group___bit_counting.html#ga2e8de9ca6e14827b422486dc3ed35706", null ]
 ];

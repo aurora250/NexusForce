@@ -1,9 +1,8 @@
 var variant_8hpp =
 [
-    [ "MSTL::variant_alternative_t", "group___variant_type_traits.html#ga57bfa98535cc0ddff0c865441af2f9a5", null ],
-    [ "MSTL::get", "group___variant.html#gaf32a952b8493613937f1bcc1d6955bdc", null ],
-    [ "MSTL::get", "group___variant.html#ga58366dd1446ea1494828663e16dc0a2b", null ],
-    [ "MSTL::get", "group___variant.html#ga5456d001eac31f19018b8d5b02ed5b35", null ],
-    [ "MSTL::get", "group___variant.html#gae52cfe2093d7f0d2e1be5ac17b9484e9", null ],
-    [ "MSTL::variant_index_v", "group___variant_type_traits.html#gac6a3a0b4b4db1ec3d61f11cc1555f42f", null ]
+    [ "variant_alternative_t", "group___variant_type_traits.html#gac276a03687a0669787a73fafe9ffedef", null ],
+    [ "get", "group___variant.html#ga7354064c9a0b5105cb654bcff44e9e1c", null ],
+    [ "get", "group___variant.html#gaf579dcd8cb81817ebd6fa2fbcdb3e505", null ],
+    [ "get", "group___variant.html#ga8d491e41aa9c2aa57a5dca51617ec1a6", null ],
+    [ "get", "group___variant.html#ga1531c7fe79103d53a875e902c92f65c6", null ]
 ];

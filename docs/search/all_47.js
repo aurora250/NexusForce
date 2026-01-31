@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
+  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
 ];

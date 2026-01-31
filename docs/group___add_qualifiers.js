@@ -1,17 +1,17 @@
 var group___add_qualifiers =
 [
-    [ "MSTL::add_const&lt; T &gt;", "struct_m_s_t_l_1_1add__const.html", null ],
-    [ "MSTL::add_volatile&lt; T &gt;", "struct_m_s_t_l_1_1add__volatile.html", null ],
-    [ "MSTL::add_cv&lt; T &gt;", "struct_m_s_t_l_1_1add__cv.html", null ],
-    [ "MSTL::add_reference&lt; T, Dummy &gt;", "struct_m_s_t_l_1_1add__reference.html", null ],
-    [ "MSTL::add_lvalue_reference&lt; T &gt;", "struct_m_s_t_l_1_1add__lvalue__reference.html", null ],
-    [ "MSTL::add_rvalue_reference&lt; T &gt;", "struct_m_s_t_l_1_1add__rvalue__reference.html", null ],
-    [ "MSTL::add_pointer&lt; T, Dummy &gt;", "struct_m_s_t_l_1_1add__pointer.html", null ],
-    [ "MSTL::add_const_t", "group___add_qualifiers.html#gafa5fc289d30af5e33866ae88715c3a88", null ],
-    [ "MSTL::add_cv_t", "group___add_qualifiers.html#ga9d74fc966ad1b895e2f5301d111628dd", null ],
-    [ "MSTL::add_lvalue_reference_t", "group___add_qualifiers.html#ga74870b4ce892fec8a920ef6e1adfea00", null ],
-    [ "MSTL::add_pointer_t", "group___add_qualifiers.html#gabb4fa49903a3771f18505b6430cb3b7d", null ],
-    [ "MSTL::add_rvalue_reference_t", "group___add_qualifiers.html#ga8e4461652922972a362ce2bbbe767933", null ],
-    [ "MSTL::add_volatile_t", "group___add_qualifiers.html#ga8f8de17988cad5fbe9b4d995c5848846", null ],
-    [ "MSTL::as_const", "group___add_qualifiers.html#ga844276e06e16c6f4104f7882efad37e7", null ]
+    [ "add_const&lt; T &gt;", "structadd__const.html", null ],
+    [ "add_volatile&lt; T &gt;", "structadd__volatile.html", null ],
+    [ "add_cv&lt; T &gt;", "structadd__cv.html", null ],
+    [ "add_reference&lt; T, Dummy &gt;", "structadd__reference.html", null ],
+    [ "add_lvalue_reference&lt; T &gt;", "structadd__lvalue__reference.html", null ],
+    [ "add_rvalue_reference&lt; T &gt;", "structadd__rvalue__reference.html", null ],
+    [ "add_pointer&lt; T, Dummy &gt;", "structadd__pointer.html", null ],
+    [ "add_const_t", "group___add_qualifiers.html#ga9c558ffe7355932ea12b66ec6bcf06db", null ],
+    [ "add_cv_t", "group___add_qualifiers.html#gabd425af3389983b31809f14e839b0cff", null ],
+    [ "add_lvalue_reference_t", "group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f", null ],
+    [ "add_pointer_t", "group___add_qualifiers.html#ga895a26b8692afd426fdc2d82c36a9951", null ],
+    [ "add_rvalue_reference_t", "group___add_qualifiers.html#gafff9620423f5041502738bac7eee689e", null ],
+    [ "add_volatile_t", "group___add_qualifiers.html#ga26cf51b3af2f725f40633e333332bc5a", null ],
+    [ "as_const", "group___add_qualifiers.html#ga6c37749cf7b64fffdffca88fbb0c3b04", null ]
 ];

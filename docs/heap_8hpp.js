@@ -1,17 +1,17 @@
 var heap_8hpp =
 [
-    [ "MSTL::adjust_heap", "group___heap_algorithms.html#ga573ae21e4562c2e1f86bcd0d3ede8efa", null ],
-    [ "MSTL::adjust_heap", "group___heap_algorithms.html#ga78cc13eecada7ddaf034e53164df0b5f", null ],
-    [ "MSTL::is_heap", "group___heap_algorithms.html#ga0332820ad64adce5279ada6d57d47cef", null ],
-    [ "MSTL::is_heap", "group___heap_algorithms.html#ga0a2bec6ea442164122917b6ec9468287", null ],
-    [ "MSTL::is_heap_until", "group___heap_algorithms.html#ga314d52d308d6410e410f6df9cefe1cfd", null ],
-    [ "MSTL::is_heap_until", "group___heap_algorithms.html#gae930a0ec425469cebbc40136e37f81b8", null ],
-    [ "MSTL::make_heap", "group___heap_algorithms.html#gac029d99ca8bebf97a1a5288a03ce2173", null ],
-    [ "MSTL::make_heap", "group___heap_algorithms.html#gae7308f7238ae4b56ca6039533d1d9b43", null ],
-    [ "MSTL::pop_heap", "group___heap_algorithms.html#ga0e3a4465ee14856037af75572eade0ae", null ],
-    [ "MSTL::pop_heap", "group___heap_algorithms.html#gaa5024bbad0e1e7d84d941fe05cae78e9", null ],
-    [ "MSTL::push_heap", "group___heap_algorithms.html#ga8cbf0d110bee85b279cb79797a2f44b6", null ],
-    [ "MSTL::push_heap", "group___heap_algorithms.html#ga70ada204bccb6167b45f8cabd7bf3589", null ],
-    [ "MSTL::sort_heap", "group___heap_algorithms.html#ga39090ecb9e471dd10d178ca460ad1227", null ],
-    [ "MSTL::sort_heap", "group___heap_algorithms.html#ga7d793fc7c29d58949c0c3923cd15dd8f", null ]
+    [ "adjust_heap", "group___heap_algorithms.html#gad1a4dbf88c234645c7b74deb09a73f9e", null ],
+    [ "adjust_heap", "group___heap_algorithms.html#ga083247ef5fd52a5b7a45d689975966bc", null ],
+    [ "is_heap", "group___heap_algorithms.html#ga1d7ab35703ac0ca1a7ddc47c425e6950", null ],
+    [ "is_heap", "group___heap_algorithms.html#gad8f1c9a8db90b50bcb59b1557f8ac2ac", null ],
+    [ "is_heap_until", "group___heap_algorithms.html#ga43c16cf85c208784907cc1066a19c892", null ],
+    [ "is_heap_until", "group___heap_algorithms.html#ga82cc6b980cff756bc30617b459b96328", null ],
+    [ "make_heap", "group___heap_algorithms.html#ga5a7e7256530942c5c009d161d8e66bb0", null ],
+    [ "make_heap", "group___heap_algorithms.html#ga18cead13eee0ace26acb7264b26401bc", null ],
+    [ "pop_heap", "group___heap_algorithms.html#gaac6363ef835d7ba825d279b6041d0ae4", null ],
+    [ "pop_heap", "group___heap_algorithms.html#ga2b135c99bb3658edc0c0cb893b4f10f7", null ],
+    [ "push_heap", "group___heap_algorithms.html#gae07ec27fe57fe03af065b47fc433db0a", null ],
+    [ "push_heap", "group___heap_algorithms.html#ga3170fa7d515a7d52f70ef70d4aa6ddff", null ],
+    [ "sort_heap", "group___heap_algorithms.html#ga4cb045f6b48185ea4e9524739cc148a4", null ],
+    [ "sort_heap", "group___heap_algorithms.html#ga7ca9ed75bbc37617a560285d0ebef212", null ]
 ];
