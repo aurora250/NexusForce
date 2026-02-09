@@ -4,7 +4,12 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <WinSock2.h>
 #include <ws2tcpip.h>
-#include "MSTL/core/config/undef_cmacro.hpp"
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #elif defined(MSTL_PLATFORM_LINUX__)
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -287,34 +292,6 @@ public:
         ::sockaddr_in from_addr{};
         ::socklen_t from_len = sizeof(from_addr);
         return ::recvfrom(sockfd_, static_cast<char*>(buf), len, flags, reinterpret_cast<sockaddr*>(&from_addr), &from_len);
-    }
-
-    MSTL_NODISCARD bool has_data_available(const milliseconds timeout = milliseconds(0)) const noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-        fd_set readfds;
-        FD_ZERO(&readfds);
-        FD_SET(sockfd_, &readfds);
-
-        ::timeval tv;
-        tv.tv_sec = timeout.count() / 1000;
-        tv.tv_usec = (timeout.count() % 1000) * 1000;
-
-        const int result = ::select(static_cast<int>(sockfd_) + 1, &readfds, nullptr, nullptr,
-                                    timeout.count() >= 0 ? &tv : nullptr);
-        return result > 0 && FD_ISSET(sockfd_, &readfds);
-#elif defined(MSTL_PLATFORM_LINUX__)
-        ::fd_set readfds{};
-        FD_ZERO(&readfds);
-        FD_SET(sockfd_, &readfds);
-
-        ::timeval tv{};
-        tv.tv_sec = timeout.count() / 1000;
-        tv.tv_usec = (timeout.count() % 1000) * 1000;
-
-        const int result = ::select(sockfd_ + 1, &readfds, nullptr, nullptr,
-                                    timeout.count() >= 0 ? &tv : nullptr);
-        return result > 0 && FD_ISSET(sockfd_, &readfds);
-#endif
     }
 
     MSTL_NODISCARD static bool is_ipv4(const char* host) noexcept {

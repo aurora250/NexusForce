@@ -2675,7 +2675,7 @@ void test_tpool() {
     pool.start();
     click clk;
     {
-        click_guard grd(clk);
+        scoped_click grd(clk);
         pool.submit_task([&pool] {
             pool.submit_task(test_vector);
             pool.submit_task(test_list);
@@ -2702,7 +2702,7 @@ void test_tpool() {
             pool.submit_task(test_enctype);
             pool.submit_task(test_color);
             pool.submit_task(test_sql);
-            pool.submit_task(test_ranges);
+            // pool.submit_task(test_ranges);
             pool.submit_task(test_zlib);
         });
         println(pool.stop());

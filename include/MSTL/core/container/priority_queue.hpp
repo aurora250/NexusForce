@@ -4,10 +4,12 @@
 #include "vector.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename T, typename Sequence = vector<T>,
-    typename Compare = less<typename Sequence::value_type>>
+template <
+    typename T,
+    typename Sequence = vector<T>,
+    typename Compare = less<typename Sequence::value_type>
+>
 class priority_queue : public icollector<priority_queue<T, Sequence, Compare>> {
-
 public:
     using value_type        = typename Sequence::value_type;
     using size_type         = typename Sequence::size_type;

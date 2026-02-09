@@ -445,33 +445,43 @@ MSTL_BEGIN_RANGES__
  */
 template <typename Derived>
 struct view_base {
+private:
+     constexpr const Derived& derived() const noexcept {
+        return static_cast<const Derived&>(*this);
+     }
+
+     constexpr Derived& derived() noexcept {
+        return static_cast<Derived&>(*this);
+     }
+
+public:
     /**
      * @brief 获取范围的起始const迭代器
      * @return 起始迭代器
      */
-	constexpr auto begin() const {
-		return static_cast<const Derived*>(this)->begin();
+	constexpr decltype(auto) begin() const {
+		return derived().begin();
 	}
     /**
      * @brief 获取范围的结束const迭代器
      * @return 结束迭代器
      */
-	constexpr auto end() const {
-		return static_cast<const Derived*>(this)->end();
+	constexpr decltype(auto) end() const {
+		return derived().end();
 	}
     /**
      * @brief 获取范围的起始迭代器
      * @return 起始迭代器
      */
-	constexpr auto begin() {
-		return static_cast<Derived*>(this)->begin();
+	constexpr decltype(auto) begin() {
+		return derived().begin();
 	}
     /**
      * @brief 获取范围的结束迭代器
      * @return 结束迭代器
      */
-	constexpr auto end() {
-		return static_cast<Derived*>(this)->end();
+	constexpr decltype(auto) end() {
+		return derived().end();
 	}
 };
 

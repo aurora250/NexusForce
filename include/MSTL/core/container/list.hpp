@@ -1,149 +1,90 @@
 #ifndef MSTL_CORE_CONTAINER_LIST_HPP__
 #define MSTL_CORE_CONTAINER_LIST_HPP__
-#include "../interface/icollector.hpp"
+#include "MSTL/core/interface/icollector.hpp"
+#include "MSTL/core/interface/iiterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Alloc>
 class list;
-template <bool IsConst, typename List>
-struct list_iterator;
+
 
 template <typename T>
 struct list_node {
-private:
-    using value_type    = T;
-    using node_type     = list_node<value_type>;
+    T data;
+    list_node* prev = nullptr;
+    list_node* next = nullptr;
 
-    value_type data_{};
-    node_type* prev_ = nullptr;
-    node_type* next_ = nullptr;
+    list_node()
+    noexcept(is_nothrow_default_constructible_v<T>)
+    : data() {}
 
-    template <typename, typename> friend class list;
-    template <bool, typename> friend struct list_iterator;
+    explicit list_node(T&& value)
+    noexcept(is_nothrow_constructible_v<T, T&&>)
+    : data(_MSTL forward<T>(value)) {}
 };
 
+
 template <bool IsConst, typename List>
-struct list_iterator {
-private:
-    using container_type	= List;
-    using iterator			= list_iterator<false, container_type>;
-    using const_iterator	= list_iterator<true, container_type>;
-
+struct list_iterator : iiterator<list_iterator<IsConst, List>> {
 public:
-    using iterator_category = bidirectional_iterator_tag;
+    using container_type	= List;
     using value_type		= typename container_type::value_type;
-    using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-    using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
-    using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
+    using difference_type	= typename container_type::difference_type;
+    using iterator_category = bidirectional_iterator_tag;
+    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
+    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
 
 private:
-    using node_type         = list_node<value_type>;
+    using node_type = list_node<value_type>;
 
-    node_type* node_ = nullptr;
-    const container_type* list_ = nullptr;
+    node_type* current_ = nullptr;
+    const container_type* container_ = nullptr;
 
-    template <typename, typename> friend class list;
-    template <bool, typename> friend struct list_iterator;
+    template <typename, typename>
+    friend class list;
 
 public:
     list_iterator() noexcept = default;
-    list_iterator(node_type* x, const container_type* list) noexcept
-    : node_(x), list_(list) {}
-
-    list_iterator(const iterator& x) noexcept
-    : node_(x.node_), list_(x.list_) {}
-
-    list_iterator& operator =(const iterator& x) noexcept {
-    	if(_MSTL addressof(x) == this) return *this;
-		node_ = x.node_;
-        list_ = x.list_;
-		return *this;
-	}
-
-    list_iterator(const const_iterator& x) noexcept
-    : node_(x.node_), list_(x.list_) {}
-
-    list_iterator& operator =(const const_iterator& x) noexcept {
-        if(_MSTL addressof(x) == this) return *this;
-        node_ = x.node_;
-        list_ = x.list_;
-        return *this;
-    }
-
-    list_iterator(iterator&& x) noexcept : node_(x.node_), list_(x.list_) {
-        x.node_ = nullptr;
-        x.list_ = nullptr;
-    }
-
-    list_iterator& operator =(iterator&& x) noexcept {
-        if(_MSTL addressof(x) == this) return *this;
-        node_ = x.node_;
-        list_ = x.list_;
-        x.node_ = nullptr;
-        x.list_ = nullptr;
-        return *this;
-    }
-
-    list_iterator(const_iterator&& x) noexcept
-    : node_(x.node_), list_(x.list_) {
-        x.node_ = nullptr;
-        x.list_ = nullptr;
-    }
-
-    list_iterator& operator =(const_iterator&& x) noexcept {
-        if(_MSTL addressof(x) == this) return *this;
-        node_ = x.node_;
-        list_ = x.list_;
-        x.node_ = nullptr;
-        x.list_ = nullptr;
-        return *this;
-    }
-
     ~list_iterator() = default;
 
-    MSTL_NODISCARD reference operator *() const noexcept {
-        MSTL_DEBUG_VERIFY(list_ && node_ && node_ != list_->head_,
-            __MSTL_DEBUG_MESG_OPERATE_NULLPTR(list_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-        return node_->data_;
-    }
-    MSTL_NODISCARD pointer operator->() const noexcept {
-        return &operator*();
+    list_iterator(const list_iterator&) noexcept = default;
+    list_iterator& operator =(const list_iterator&) noexcept = default;
+    list_iterator(list_iterator&&) noexcept = default;
+    list_iterator& operator =(list_iterator&&) noexcept = default;
+
+    list_iterator(node_type* ptr, const container_type* list) noexcept
+    : current_(ptr), container_(list) {}
+
+    MSTL_NODISCARD reference dereference() const noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to dereference on a null pointer");
+        MSTL_DEBUG_VERIFY(current_ != container_->head_, "Attempting to dereference out of boundary");
+        return current_->data;
     }
 
-    list_iterator& operator ++() noexcept {
-        MSTL_DEBUG_VERIFY(list_ && node_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(list_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        MSTL_DEBUG_VERIFY(node_ != list_->head_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(list_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        node_ = node_->next_;
-        return *this;
-    }
-    list_iterator operator ++(int) noexcept {
-        list_iterator old = *this;
-        ++*this;
-        return old;
-    }
-    list_iterator& operator --() noexcept {
-        MSTL_DEBUG_VERIFY(list_ && node_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(list_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        MSTL_DEBUG_VERIFY(node_->prev_ != list_->head_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(list_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        node_ = node_->prev_;
-        return *this;
-    }
-    list_iterator operator --(int) noexcept {
-        list_iterator old = *this;
-        --*this;
-        return old;
+    void increment() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to increment a null pointer");
+        MSTL_DEBUG_VERIFY(current_ != container_->head_, "Attempting to increment out of boundary");
+        current_ = current_->next;
     }
 
-    MSTL_NODISCARD bool operator ==(const list_iterator& x) noexcept {
-		MSTL_DEBUG_VERIFY(list_ == x.list_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(list_iterator));
-        return node_ == x.node_;
+    void decrement() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to decrement a null pointer");
+        MSTL_DEBUG_VERIFY(current_->prev != container_->head_, "Attempting to decrement out of boundary");
+        current_ = current_->prev;
     }
-    MSTL_NODISCARD bool operator !=(const list_iterator& x) noexcept {
-        return !(*this == x);
+
+    MSTL_NODISCARD bool equal(const list_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
+        return current_ == rhs.current_;
     }
 
     MSTL_NODISCARD pointer base() const noexcept {
-        return node_;
+        return current_;
+    }
+
+    MSTL_NODISCARD const container_type* container() const noexcept {
+        return container_;
     }
 };
 
@@ -177,7 +118,7 @@ private:
     template <typename... Args>
     link_type create_node(Args&&... args) {
         link_type p = pair_.get_base().allocate();
-        _MSTL construct(&p->data_, _MSTL forward<Args>(args)...);
+        _MSTL construct(&p->data, _MSTL forward<Args>(args)...);
         return p;
     }
     void destroy_node(link_type p) noexcept {
@@ -187,7 +128,7 @@ private:
 
     void empty_init() {
         head_ = create_node();
-        head_->prev_ = head_->next_ = head_;
+        head_->prev = head_->next = head_;
     }
 
 public:
@@ -226,14 +167,14 @@ public:
     list& operator =(const list& x) {
         if (_MSTL addressof(x) == this) return *this;
         clear();
-        link_type p = x.head_->next_;
+        link_type p = x.head_->next;
         while (p != x.head_) {
-            link_type q = this->create_node(p->data_);
-            q->prev_ = head_->prev_;
-            q->next_ = head_;
-            head_->prev_->next_ = q;
-            head_->prev_ = q;
-            p = p->next_;
+            link_type q = this->create_node(p->data);
+            q->prev = head_->prev;
+            q->next = head_;
+            head_->prev->next = q;
+            head_->prev = q;
+            p = p->next;
         }
         pair_.value = x.pair_.value;
         return *this;
@@ -250,20 +191,20 @@ public:
     }
 
     ~list() {
-        link_type p = head_->next_;
+        link_type p = head_->next;
         while (p != head_) {
             link_type q = p;
-            p = p->next_;
+            p = p->next;
             this->destroy_node(q);
         }
         this->destroy_node(head_);
     }
 
-    MSTL_NODISCARD iterator begin() noexcept { return {head_->next_, this}; }
+    MSTL_NODISCARD iterator begin() noexcept { return {head_->next, this}; }
     MSTL_NODISCARD iterator end() noexcept { return {head_, this}; }
     MSTL_NODISCARD const_iterator begin() const noexcept { return cbegin(); }
     MSTL_NODISCARD const_iterator end() const noexcept { return cend(); }
-    MSTL_NODISCARD const_iterator cbegin() const noexcept { return {head_->next_, this}; }
+    MSTL_NODISCARD const_iterator cbegin() const noexcept { return {head_->next, this}; }
     MSTL_NODISCARD const_iterator cend() const noexcept { return {head_, this}; }
     MSTL_NODISCARD reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
     MSTL_NODISCARD reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
@@ -274,34 +215,34 @@ public:
 
     MSTL_NODISCARD size_type size() const noexcept { return pair_.value; }
     MSTL_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
-    MSTL_NODISCARD bool empty() const noexcept { return head_->next_ == head_; }
+    MSTL_NODISCARD bool empty() const noexcept { return head_->next == head_; }
 
     MSTL_NODISCARD allocator_type get_allocator() { return allocator_type(); }
 
     MSTL_NODISCARD reference front() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty list");
-        return head_->next_->data_;
+        return head_->next->data;
     }
     MSTL_NODISCARD const_reference front() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty list");
-        return head_->next_->data_;
+        return head_->next->data;
     }
     MSTL_NODISCARD reference back() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty list");
-        return head_->prev_->data_;
+        return head_->prev->data;
     }
     MSTL_NODISCARD const_reference back() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty list");
-        return head_->prev_->data_;
+        return head_->prev->data;
     }
 
     template <typename... U>
     iterator emplace(iterator position, U&&... args) {
         link_type temp = (create_node)(_MSTL forward<U>(args)...);
-        temp->next_ = position.node_;
-        temp->prev_ = position.node_->prev_;
-        position.node_->prev_->next_ = temp;
-        position.node_->prev_ = temp;
+        temp->next = position.current_;
+        temp->prev = position.current_->prev;
+        position.current_->prev->next = temp;
+        position.current_->prev = temp;
         ++pair_.value;
         return {temp, this};
     }
@@ -321,7 +262,7 @@ public:
     void push_back(T&& x) { insert(end(), _MSTL forward<T>(x)); }
 
     void pop_front() noexcept { erase(begin()); }
-    void pop_back() noexcept { erase({head_->prev_, this}); }
+    void pop_back() noexcept { erase({head_->prev, this}); }
 
     void assign(size_type count, const T& value) {
         clear();
@@ -356,13 +297,13 @@ public:
     }
 
     void insert(iterator position, size_type n, const T& x) {
-        link_type prev = position.node_->prev_;
+        link_type prev = position.current_->prev;
         while (n--) {
             link_type temp = this->create_node(x);
-            temp->prev_ = prev;
-            temp->next_ = prev->next_;
-            prev->next_->prev_ = temp;
-            prev->next_ = temp;
+            temp->prev = prev;
+            temp->next = prev->next;
+            prev->next->prev = temp;
+            prev->next = temp;
             prev = temp;
             ++pair_.value;
         }
@@ -370,10 +311,10 @@ public:
 
     iterator erase(iterator position) noexcept {
         if (empty()) return end();
-        link_type ret = position.node_->next_;
-        position.node_->prev_->next_ = position.node_->next_;
-        position.node_->next_->prev_ = position.node_->prev_;
-        destroy_node(position.node_);
+        link_type ret = position.current_->next;
+        position.current_->prev->next = position.current_->next;
+        position.current_->next->prev = position.current_->prev;
+        destroy_node(position.current_);
         --pair_.value;
         return {ret, this};
     }
@@ -382,15 +323,15 @@ public:
         return first;
     }
     void clear() noexcept {
-        link_type cur = head_->next_;
+        link_type cur = head_->next;
         while (cur != head_) {
             link_type temp = cur;
-            cur = cur->next_;
+            cur = cur->next;
             destroy_node(temp);
             --pair_.value;
         }
-        head_->prev_ = head_;
-        head_->next_ = head_;
+        head_->prev = head_;
+        head_->next = head_;
     }
 
     void swap(list& x) noexcept {
@@ -400,13 +341,13 @@ public:
 
     void transfer(iterator position, iterator first, iterator last) {
         if (position == last) return;
-        last.node_->prev_->next_ = position.node_;
-        first.node_->prev_->next_ = last.node_;
-        position.node_->prev_->next_ = first.node_;
-        link_type tmp = position.node_->prev_;
-        position.node_->prev_ = last.node_->prev_;
-        last.node_->prev_ = first.node_->prev_;
-        first.node_->prev_ = tmp;
+        last.current_->prev->next = position.current_;
+        first.current_->prev->next = last.current_;
+        position.current_->prev->next = first.current_;
+        link_type tmp = position.current_->prev;
+        position.current_->prev = last.current_->prev;
+        last.current_->prev = first.current_->prev;
+        first.current_->prev = tmp;
     }
 
     template <typename Pred>
@@ -485,8 +426,8 @@ public:
         if (empty()) return;
         link_type current = head_;
         do {
-            _MSTL swap(current->prev_, current->next_);
-            current = current->prev_;
+            _MSTL swap(current->prev, current->next);
+            current = current->prev;
         } while (current != head_);
     }
 
@@ -511,16 +452,16 @@ public:
     template <typename Pred>
     void sort(Pred pred) {
         if (empty()) return;
-        link_type p = head_->next_->next_;
+        link_type p = head_->next->next;
         while (p != head_) {
-            T temp = p->data_;
-            link_type prev = p->prev_;
-            while (prev != head_ && pred(temp, prev->data_)) {
-                prev->next_->data_ = prev->data_;
-                prev = prev->prev_;
+            T temp = p->data;
+            link_type prev = p->prev;
+            while (prev != head_ && pred(temp, prev->data)) {
+                prev->next->data = prev->data;
+                prev = prev->prev;
             }
-            prev->next_->data_ = temp;
-            p = p->next_;
+            prev->next->data = temp;
+            p = p->next;
         }
     }
     void sort() {
@@ -530,7 +471,7 @@ public:
     MSTL_NODISCARD const_reference at(size_type position) const {
         const_iterator iter = cbegin();
         while (position--) ++iter;
-        return iter.node_->data_;
+        return iter.current_->data;
     }
     MSTL_NODISCARD reference at(const size_type position) {
         return const_cast<reference>(

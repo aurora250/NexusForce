@@ -1,118 +1,98 @@
 #ifndef MSTL_CORE_CONTAINER_ARRAY_HPP__
 #define MSTL_CORE_CONTAINER_ARRAY_HPP__
+#include "MSTL/core/algorithm/compare.hpp"
+#include "MSTL/core/algorithm/shift.hpp"
 #include "MSTL/core/interface/icollector.hpp"
 #include "MSTL/core/interface/iiterator.hpp"
-#include "MSTL/core/algorithm/shift.hpp"
-#include "MSTL/core/algorithm/compare.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, size_t Size, typename Array>
-struct array_iterator {
-private:
-    using container_type	= Array;
-    using iterator			= array_iterator<false, Size, container_type>;
-    using const_iterator	= array_iterator<true, Size, container_type>;
-
+struct array_iterator : iiterator<array_iterator<IsConst, Size, Array>> {
 public:
-    using iterator_category = contiguous_iterator_tag;
+    using container_type	= Array;
     using value_type		= typename container_type::value_type;
-    using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-    using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
-    using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
+    using difference_type	= typename container_type::difference_type;
+    using iterator_category = contiguous_iterator_tag;
+    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
+    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
 
 private:
-    pointer ptr_ = nullptr;
-    size_t idx_ = 0;
+    pointer current_ = nullptr;
+    const container_type* container_ = nullptr;
 
 public:
     constexpr array_iterator() noexcept = default;
-    constexpr array_iterator(pointer ptr, const size_t off = 0) noexcept
-    : ptr_(ptr), idx_(off) {}
+    constexpr ~array_iterator() = default;
 
-    MSTL_NODISCARD constexpr reference operator *() const noexcept {
-        return *operator->();
-    }
-    MSTL_NODISCARD constexpr pointer operator ->() const noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && idx_ < Size, "cannot dereference out of range array iterator");
-        return ptr_ + idx_;
-    }
+    constexpr array_iterator(const array_iterator&) noexcept = default;
+    constexpr array_iterator& operator =(const array_iterator&) noexcept = default;
+    constexpr array_iterator(array_iterator&&) noexcept = default;
+    constexpr array_iterator& operator =(array_iterator&&) noexcept = default;
 
-    constexpr array_iterator& operator ++() noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && idx_ < Size, "cannot increment array iterator past end");
-        ++idx_;
-        return *this;
-    }
-    constexpr array_iterator operator ++(int) noexcept {
-        array_iterator tmp = *this;
-        ++*this;
-        return tmp;
-    }
-    constexpr array_iterator& operator --() noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && idx_ != 0, "cannot decrement array iterator before begin");
-        --idx_;
-        return *this;
-    }
-    constexpr array_iterator operator --(int) noexcept {
-        array_iterator tmp = *this;
-        --*this;
-        return tmp;
+    constexpr array_iterator(pointer ptr, const container_type* vec) noexcept
+    : current_(ptr), container_(vec) {}
+
+    MSTL_NODISCARD constexpr reference dereference() const noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to dereference on a null pointer");
+        MSTL_DEBUG_VERIFY(
+            current_ >= container_->data() && current_ < container_->data() + Size,
+            "Attempting to dereference out of boundary");
+        return *current_;
     }
 
-    constexpr array_iterator& operator +=(const difference_type n) noexcept {
-        idx_ += static_cast<size_t>(n);
-        return *this;
-    }
-    constexpr array_iterator& operator -=(const difference_type n) noexcept {
-        return *this += -n;
-    }
-
-    MSTL_NODISCARD constexpr difference_type operator -(const array_iterator& rhs) const noexcept {
-        return static_cast<difference_type>(idx_ - rhs.idx_);
-    }
-    MSTL_NODISCARD constexpr array_iterator operator -(const difference_type n) const noexcept {
-        array_iterator tmp = *this;
-        tmp -= n;
-        return tmp;
-    }
-    MSTL_NODISCARD constexpr array_iterator operator +(const difference_type n) const noexcept {
-        array_iterator tmp = *this;
-        tmp += n;
-        return tmp;
-    }
-    MSTL_NODISCARD friend constexpr array_iterator operator +(
-        const difference_type n, array_iterator iter) noexcept {
-        iter += n;
-        return iter;
+    constexpr void increment() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to increment a null pointer");
+        MSTL_DEBUG_VERIFY(
+            current_ < container_->data() + Size - 1,
+            "Attempting to increment out of boundary");
+        ++current_;
     }
 
-    MSTL_NODISCARD constexpr reference operator [](const difference_type n) const noexcept {
-        return *(*this + n);
+    constexpr void decrement() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && container_, "Attempting to decrement a null pointer");
+        MSTL_DEBUG_VERIFY(
+            current_ > container_->data(),
+            "Attempting to decrement out of boundary");
+        --current_;
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const array_iterator& rhs) const noexcept {
-        return idx_ == rhs.idx_;
+    constexpr void advance(difference_type off) noexcept {
+        MSTL_DEBUG_VERIFY((current_ && container_) || off == 0, "Attempting to advance a null pointer");
+        MSTL_DEBUG_VERIFY(
+            current_ + off >= container_->data() && current_ + off <= container_->data() + Size,
+            "Attempting to advance out of boundary");
+        current_ += off;
     }
-    MSTL_NODISCARD constexpr bool operator!=(const array_iterator& rhs) const noexcept {
-        return !(*this == rhs);
+
+    MSTL_NODISCARD constexpr difference_type distance_to(const array_iterator& other) const noexcept {
+        MSTL_DEBUG_VERIFY(container_ == other.container_, "Attempting to distance to a different container");
+        return static_cast<difference_type>(other.current_ - current_);
     }
-    MSTL_NODISCARD constexpr bool operator <(const array_iterator& rhs) const noexcept {
-        return idx_ < rhs.idx_;
+
+    MSTL_NODISCARD constexpr reference operator [](const difference_type off) const noexcept {
+        return *(*this + off);
     }
-    MSTL_NODISCARD constexpr bool operator >(const array_iterator& rhs) const noexcept {
-        return rhs < *this;
+
+    MSTL_NODISCARD constexpr bool equal(const array_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
+        return current_ == rhs.current_;
     }
-    MSTL_NODISCARD constexpr bool operator <=(const array_iterator& rhs) const noexcept {
-        return !(rhs < *this);
-    }
-    MSTL_NODISCARD constexpr bool operator >=(const array_iterator& rhs) const noexcept {
-        return !(*this < rhs);
+
+    MSTL_NODISCARD constexpr bool less_than(const array_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to less than a different container");
+        return current_ < rhs.current_;
     }
 
     MSTL_NODISCARD constexpr pointer base() const noexcept {
-        return ptr_;
+        return current_;
+    }
+
+    MSTL_NODISCARD constexpr const container_type* container() const noexcept {
+        return container_;
     }
 };
+
 
 template <typename T, size_t Size>
 class array : public icollector<array<T, Size>> {
@@ -145,16 +125,16 @@ public:
     }
 
     MSTL_NODISCARD constexpr iterator begin() noexcept {
-        return iterator(array_, 0);
+        return iterator(array_, this);
     }
     MSTL_NODISCARD constexpr iterator end() noexcept {
-        return iterator(array_, Size);
+        return iterator(array_, this);
     }
     MSTL_NODISCARD constexpr const_iterator begin() const noexcept {
-        return const_iterator(array_, 0);
+        return const_iterator(array_, this);
     }
     MSTL_NODISCARD constexpr const_iterator end() const noexcept {
-        return const_iterator(array_, Size);
+        return const_iterator(array_, this);
     }
     MSTL_NODISCARD constexpr reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
@@ -169,10 +149,10 @@ public:
         return const_reverse_iterator(begin());
     }
     MSTL_NODISCARD constexpr const_iterator cbegin() const noexcept {
-        return const_iterator(array_, 0);
+        return const_iterator(array_, this);
     }
     MSTL_NODISCARD constexpr const_iterator cend() const noexcept {
-        return const_iterator(array_, Size);
+        return const_iterator(array_, this);
     }
     MSTL_NODISCARD constexpr const_reverse_iterator crbegin() const noexcept {
         return reverse_iterator(cend());

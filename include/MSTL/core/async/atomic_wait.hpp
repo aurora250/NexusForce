@@ -184,6 +184,20 @@ struct waiter_pool : waiter_pool_base {
 template <typename T>
 struct waiter_base {
 private:
+	/**
+	* @brief 检查类型是否适用于平台等待操作
+	* @tparam U 要检查的类型
+	*
+	* 类型必须满足以下条件：
+	* 1. 标量类型
+	* 2. 大小等于平台等待类型的大小
+	* 3. 对齐要求不低于平台等待类型的对齐要求
+	*/
+	template <typename U>
+	static constexpr bool platform_wait_valid_v = is_scalar_v<U>
+		&& sizeof(U) == sizeof(platform_wait_t)
+		&& alignof(U*) >= alignof(platform_wait_t);
+
 	template <typename U, enable_if_t<platform_wait_valid_v<U>, int> = 0>
 	MSTL_ALWAYS_INLINE static void waiter_do_spin_v_impl(
 		platform_wait_t*, const U& old, platform_wait_t& value) {

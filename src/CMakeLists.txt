@@ -274,8 +274,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/rb_tree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/container/bitmap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp

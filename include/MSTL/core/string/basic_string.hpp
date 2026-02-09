@@ -1,203 +1,117 @@
 #ifndef MSTL_CORE_STRING_BASIC_STRING_HPP__
 #define MSTL_CORE_STRING_BASIC_STRING_HPP__
+#include "MSTL/core/algorithm/shift.hpp"
+#include "MSTL/core/memory/allocator_traits.hpp"
+#include "MSTL/core/memory/standard_allocator.hpp"
+#include "MSTL/core/memory/uninitialized.hpp"
+#include "MSTL/core/string/string_view.hpp"
+#include "MSTL/core/utility/compressed_pair.hpp"
 #include <initializer_list>
-#include "../algorithm/shift.hpp"
-#include "../memory/allocator_traits.hpp"
-#include "../memory/standard_allocator.hpp"
-#include "../memory/uninitialized.hpp"
-#include "../utility/compressed_pair.hpp"
-#include "string_view.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-template <typename CharT, typename Traits, typename Alloc>
-class basic_string;
-
 template <bool IsConst, typename String>
-struct basic_string_iterator {
-private:
-    using container_type	= String;
-    using iterator			= basic_string_iterator<false, container_type>;
-    using const_iterator	= basic_string_iterator<true, container_type>;
-
+struct basic_string_iterator : iiterator<basic_string_iterator<IsConst, String>> {
 public:
-    using iterator_category = contiguous_iterator_tag;
+    using container_type	= String;
     using value_type		= typename container_type::value_type;
-    using reference			= conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-    using pointer			= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
-    using difference_type	= typename container_type::difference_type;
     using size_type			= typename container_type::size_type;
+    using difference_type	= typename container_type::difference_type;
+    using iterator_category = contiguous_iterator_tag;
+    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
+    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
 
 private:
-    pointer ptr_ = nullptr;
+    pointer current_ = nullptr;
     const container_type* str_ = nullptr;
 
-    template <typename, typename, typename> friend class basic_string;
     template <bool, typename> friend struct basic_string_iterator;
+    template <typename, typename, typename> friend class basic_string;
 
 public:
-    MSTL_CONSTEXPR20 basic_string_iterator() = default;
-    MSTL_CONSTEXPR20 basic_string_iterator(pointer ptr) : ptr_(ptr) {}
-    MSTL_CONSTEXPR20 basic_string_iterator(pointer ptr, const container_type* vec) : ptr_(ptr), str_(vec) {}
+    MSTL_CONSTEXPR20 basic_string_iterator() noexcept = default;
+    MSTL_CONSTEXPR20 ~basic_string_iterator() = default;
 
-    MSTL_CONSTEXPR20 basic_string_iterator(const iterator& x) noexcept
-    : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {}
+    MSTL_CONSTEXPR20 basic_string_iterator(const basic_string_iterator&) noexcept = default;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const basic_string_iterator&) noexcept = default;
+    MSTL_CONSTEXPR20 basic_string_iterator(basic_string_iterator&&) noexcept = default;
+    MSTL_CONSTEXPR20 basic_string_iterator& operator =(basic_string_iterator&&) noexcept = default;
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const iterator& rhs) noexcept {
-        if (_MSTL addressof(rhs) == this) return *this;
-        ptr_ = const_cast<pointer>(rhs.ptr_);
-        str_ = rhs.str_;
-        return *this;
-    }
+    MSTL_CONSTEXPR20 basic_string_iterator(pointer ptr, const container_type* str) noexcept
+    : current_(ptr), str_(str) {}
 
-    MSTL_CONSTEXPR20 basic_string_iterator(iterator&& x) noexcept
-    : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {
-        x.ptr_ = nullptr;
-        x.str_ = nullptr;
-    }
+    template <bool IsConst2>
+    explicit basic_string_iterator(const basic_string_iterator<IsConst2, String>& other) noexcept
+    : current_(other.current_), str_(other.str_) {}
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(iterator&& rhs) noexcept {
-        if (_MSTL addressof(rhs) == this) return *this;
-        ptr_ = const_cast<pointer>(rhs.ptr_);
-        str_ = rhs.str_;
-        rhs.ptr_ = nullptr;
-        rhs.str_ = nullptr;
-        return *this;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 reference dereference() const noexcept {
+        MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to dereference on a null pointer");
+        MSTL_DEBUG_VERIFY(
+            str_->data() <= current_ && current_ <= str_->data() + str_->size_,
+            "Attempting to dereference out of boundary");
+        return *current_;
     }
 
-    MSTL_CONSTEXPR20 basic_string_iterator(const const_iterator& x) noexcept
-    : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {}
-
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const const_iterator& rhs) noexcept {
-        if (_MSTL addressof(rhs) == this) return *this;
-        ptr_ = const_cast<pointer>(rhs.ptr_);
-        str_ = rhs.str_;
-        return *this;
+    MSTL_CONSTEXPR20 void increment() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to increment a null pointer");
+        MSTL_DEBUG_VERIFY(current_ < str_->data() + str_->size_, "Attempting to increment out of boundary");
+        ++current_;
     }
 
-    MSTL_CONSTEXPR20 basic_string_iterator(const_iterator&& x) noexcept
-    : ptr_(const_cast<pointer>(x.ptr_)), str_(x.str_) {
-        x.ptr_ = nullptr;
-        x.str_ = nullptr;
+    MSTL_CONSTEXPR20 void decrement() noexcept {
+        MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to decrement a null pointer");
+        MSTL_DEBUG_VERIFY(str_->data() < current_, "Attempting to decrement out of boundary");
+        --current_;
     }
 
-    MSTL_CONSTEXPR20 basic_string_iterator& operator =(const_iterator&& rhs) noexcept {
-        if (_MSTL addressof(rhs) == this) return *this;
-        ptr_ = const_cast<pointer>(rhs.ptr_);
-        str_ = rhs.str_;
-        rhs.ptr_ = nullptr;
-        rhs.str_ = nullptr;
-        return *this;
+    MSTL_CONSTEXPR20 void advance(difference_type off) noexcept {
+        MSTL_DEBUG_VERIFY((current_ && str_) || off == 0, "Attempting to advance a null pointer");
+        MSTL_DEBUG_VERIFY(
+            (off < 0 ? off >= str_->data() - current_ : off <= str_->data() + str_->size_ - current_),
+            "Attempting to advance out of boundary");
+        current_ += off;
     }
 
-    MSTL_CONSTEXPR20 ~basic_string_iterator() noexcept = default;
-
-    MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator *()  const noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && str_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(basic_string_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-        MSTL_DEBUG_VERIFY(str_->data() <= ptr_ && ptr_ <= str_->data() + str_->size_,
-            __MSTL_DEBUG_MESG_OUT_OF_RANGE(basic_string_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-        return *ptr_;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 pointer operator ->() const noexcept {
-        return &operator*();
-    }
-
-    MSTL_CONSTEXPR20 basic_string_iterator& operator ++() noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && str_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(basic_string_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        MSTL_DEBUG_VERIFY(ptr_ < str_->data() + str_->size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(basic_string_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        ++ptr_;
-        return *this;
-    }
-    MSTL_CONSTEXPR20 basic_string_iterator  operator ++(int) noexcept {
-        basic_string_iterator tmp = *this;
-        ++*this;
-        return tmp;
-    }
-
-    MSTL_CONSTEXPR20 basic_string_iterator& operator --() noexcept {
-        MSTL_DEBUG_VERIFY(ptr_ && str_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(basic_string_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        MSTL_DEBUG_VERIFY(str_->data() < ptr_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(basic_string_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        --ptr_; 
-        return *this;
-    }
-    MSTL_CONSTEXPR20 basic_string_iterator  operator --(int) noexcept {
-        basic_string_iterator tmp = *this;
-        --*this;
-        return tmp;
-    }
-
-    MSTL_CONSTEXPR20 basic_string_iterator& operator +=(difference_type n) noexcept {
-        if (n < 0) {
-            MSTL_DEBUG_VERIFY((ptr_ && str_) || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(basic_string_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-            MSTL_DEBUG_VERIFY(n >= str_->data() - ptr_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(basic_string_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        }
-        else if (n > 0) {
-            MSTL_DEBUG_VERIFY((ptr_ && str_) || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(basic_string_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-            MSTL_DEBUG_VERIFY(n <= str_->data() + str_->size_ - ptr_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(basic_string_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        }
-        ptr_ += n;
-        return *this;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_iterator operator +(const difference_type n) const noexcept {
-        basic_string_iterator tmp = *this;
-        tmp += n;
-        return tmp;
-    }
-    MSTL_NODISCARD friend MSTL_CONSTEXPR20 basic_string_iterator operator +(const difference_type n, const basic_string_iterator& it) noexcept {
-        return it + n;
-    }
-
-    MSTL_CONSTEXPR20 basic_string_iterator& operator -=(difference_type n) noexcept {
-        ptr_ += -n;
-        return *this;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string_iterator operator -(difference_type n) const noexcept {
-        auto tmp = *this;
-        tmp -= n;
-        return tmp;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type operator -(const basic_string_iterator& rhs) const noexcept {
-        return static_cast<difference_type>(ptr_ - rhs.ptr_);
+    MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type distance_to(const basic_string_iterator& other) const noexcept {
+        MSTL_DEBUG_VERIFY(str_ == other.str_, "Attempting to distance to a different container");
+        return static_cast<difference_type>(current_ - other.current_);
     }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](difference_type n) const noexcept {
         return *(*this + n);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string_iterator& rhs) const noexcept {
-		MSTL_DEBUG_VERIFY(str_ == rhs.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
-        return ptr_ == rhs.ptr_;
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal(const basic_string_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(str_ == rhs.str_, "Attempting to equal to a different container");
+        return current_ == rhs.current_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator !=(const basic_string_iterator& rhs) const noexcept {
-        return !(*this == rhs);
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool less_than(const basic_string_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(str_ == rhs.str_, "Attempting to less than a different container");
+        return current_ < rhs.current_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string_iterator& rhs) const noexcept {
-		MSTL_DEBUG_VERIFY(str_ == rhs.str_, __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(vector_iterator));
-        return ptr_ < rhs.ptr_;
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 pointer base() const noexcept {
+        return current_;
     }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >(const basic_string_iterator& rhs) const noexcept {
-        return rhs < *this;
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <=(const basic_string_iterator& rhs) const noexcept {
-        return !(*this > rhs);
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(const basic_string_iterator& rhs) const noexcept {
-        return !(*this < rhs);
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const container_type* container() const noexcept {
+        return str_;
     }
 };
 
+
 template <typename CharT, typename Traits = char_traits<CharT>, typename Alloc = allocator<CharT>>
 class basic_string : public icommon<basic_string<CharT, Traits, Alloc>> {
-#ifdef MSTL_STANDARD_20__
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
-#endif
     static_assert(is_same_v<CharT, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_same_v<CharT, typename Traits::char_type>, "trait type mismatch.");
-    static_assert(!is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>, 
+
+    static_assert(
+        !is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
         "basic string only contains non-array trivial standard-layout types.");
     
 public:
     MSTL_BUILD_TYPE_ALIAS(CharT)
-    
     using iterator                  = basic_string_iterator<false, basic_string>;
     using const_iterator            = basic_string_iterator<true, basic_string>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
@@ -221,13 +135,14 @@ private:
         if (data_ && size_ < capacity_pair_.value) {
             traits_type::assign(data_ + size_, 1, value_type());
         } else if (size_ == capacity_pair_.value) {
-            this->reserve(capacity_pair_.value * 1.5);
+            basic_string::reserve(capacity_pair_.value * 1.5);
             traits_type::assign(data_ + size_, 1, value_type());
         }
     }
 
-    template <typename Iterator, enable_if_t<!is_ranges_fwd_iter_v<Iterator>, int> = 0>
-    MSTL_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
+    template <typename Iterator>
+    MSTL_CONSTEXPR20 enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
+    construct_from_iter(Iterator first, Iterator last) {
         size_type n = _MSTL distance(first, last);
         const size_type init_size = _MSTL max(MEMORY_ALIGN_THRESHHOLD, n + 1);
         pointer temp_data = nullptr;
@@ -248,10 +163,12 @@ private:
             destroy_buffer();
             throw;
         }
+        return;
     }
 
-    template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
-    MSTL_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
+    template <typename Iterator>
+    MSTL_CONSTEXPR20 enable_if_t<is_ranges_fwd_iter_v<Iterator>>
+    construct_from_iter(Iterator first, Iterator last) {
         const size_type n = _MSTL distance(first, last);
         const size_type init_size = _MSTL max(MEMORY_ALIGN_THRESHHOLD, n + 1);
         pointer temp_data = nullptr;
@@ -273,6 +190,7 @@ private:
             destroy_buffer();
             throw;
         }
+        return;
     }
 
     MSTL_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position, size_type n) {
@@ -333,34 +251,38 @@ private:
         return *this;
     }
 
-    template <typename Iterator,
-        enable_if_t<is_iter_v<Iterator> && is_same_v<iter_value_t<Iterator>, value_type>, int> = 0>
+    template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& replace_copy(iterator first1, iterator last1, Iterator first2, Iterator last2) {
+        static_assert(is_iter_v<Iterator> && is_same_v<iter_value_t<Iterator>, value_type>, "Iterator type mismatch.");
+
         size_type len1 = _MSTL distance(first1, last1);
         size_type len2 = _MSTL distance(first2, last2);
+
         if (len1 < len2) {
             const size_type diff = len2 - len1;
             MSTL_DEBUG_VERIFY(size_ + diff < max_size(), "basic_string replace_copy index out of range.");
-            if (size_ > capacity_pair_.value - diff)
+            if (size_ > capacity_pair_.value - diff) {
                 reallocate(diff);
+            }
+
             pointer raw_ptr = &*first1;
             traits_type::move(raw_ptr + len2, raw_ptr + len1, end() - (first1 + len1));
             traits_type::copy(raw_ptr, &*first2, len2);
             size_ += diff;
-        }
-        else {
+        } else {
             pointer raw_ptr = &*first1;
             traits_type::move(raw_ptr + len2, raw_ptr + len1, end() - (first1 + len1));
             traits_type::copy(raw_ptr, &*first2, len2);
             size_ -= len1 - len2;
         }
+
         null_terminate();
         return *this;
     }
 
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& replace_copy(iterator first1, const size_type n1, Iterator first2, const size_type n2) {
-        return this->replace_copy(first1, first1 + n1, first2, _MSTL next(first2, n2));
+        return basic_string::replace_copy(first1, first1 + n1, first2, _MSTL next(first2, n2));
     }
 
     MSTL_CONSTEXPR20 void reallocate(size_type n) {
@@ -401,8 +323,9 @@ private:
         return iterator(data_ + diff, this);
     }
 
-    MSTL_CONSTEXPR20 iterator reallocate_and_copy(iterator position, const_iterator first, const_iterator last) {
-        const difference_type diff = position - data_;
+    template <typename Iterator>
+    MSTL_CONSTEXPR20 iterator reallocate_and_copy(iterator position, Iterator first, Iterator last) {
+        const difference_type diff = position - begin();
         const size_type old_cap = capacity_pair_.value;
         const size_type n = _MSTL distance(first, last);
         const size_t new_cap = _MSTL max(old_cap + n, old_cap + (old_cap >> 1));
@@ -574,8 +497,6 @@ public:
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type length()   const noexcept { return size_; }
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool empty() const noexcept { return size_ == 0; }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 allocator_type get_allocator() const noexcept { return allocator_type(); }
-
     MSTL_CONSTEXPR20 void reserve_exact(const size_type n) {
         MSTL_DEBUG_VERIFY(n < max_size(), "basic_string reserve index out of range.");
         if (capacity_pair_.value >= n) return;
@@ -718,7 +639,10 @@ public:
         null_terminate();
         return *this;
     }
-    MSTL_CONSTEXPR20 basic_string& append(value_type chr) { return this->append(1, chr); }
+
+    MSTL_CONSTEXPR20 basic_string& append(value_type chr) {
+        return this->append(1, chr);
+    }
 
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& str, size_type position, size_type n) {
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
@@ -734,6 +658,7 @@ public:
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& str) {
         return this->append(str, 0, str.size_);
     }
+
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& str, size_type position) {
         return this->append(str, position, str.size_ - position);
     }
@@ -753,6 +678,7 @@ public:
         const size_type len = str.size_;
         return this->append(_MSTL move(str), 0, len);
     }
+
     MSTL_CONSTEXPR20 basic_string& append(basic_string&& str, size_type position) {
         const size_type len = str.size_;
         return this->append(_MSTL move(str), position, len - position);
@@ -761,6 +687,7 @@ public:
     MSTL_CONSTEXPR20 basic_string& append(view_type str, size_type n) {
         return this->append(str.data(), n);
     }
+
     MSTL_CONSTEXPR20 basic_string& append(view_type str) {
         return this->append(str.data(), str.size());
     }
@@ -773,6 +700,7 @@ public:
         null_terminate();
         return *this;
     }
+
     MSTL_CONSTEXPR20 basic_string& append(const_pointer str) {
         return this->append(str, traits_type::length(str));
     }
@@ -801,10 +729,12 @@ public:
         this->clear();
         return this->append(str, n);
     }
+
     MSTL_CONSTEXPR20 basic_string& assign(const size_type n, value_type chr) {
         this->clear();
         return this->append(n, chr);
     }
+
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& assign(Iterator first, Iterator last) {
         this->clear();
@@ -814,6 +744,7 @@ public:
     MSTL_CONSTEXPR20 basic_string& assign(std::initializer_list<value_type> ilist) {
         return *this = ilist;
     }
+
     MSTL_CONSTEXPR20 basic_string& assign(const view_type& view) {
         return *this = view;
     }
@@ -886,6 +817,7 @@ public:
     template <typename Operation>
     MSTL_CONSTEXPR20 void resize_and_overwrite(size_type count, Operation op) {
         MSTL_DEBUG_VERIFY(count < max_size(), "resize_and_overwrite: count too large");
+
         if (count >= capacity_pair_.value) {
             this->reserve(count + 1);
         }
@@ -1024,6 +956,7 @@ public:
 
     MSTL_CONSTEXPR20 void reverse() noexcept {
         if (size() < 2) return;
+
         for (iterator first = begin(), last = end(); first < last; ) {
             _MSTL iter_swap(first++, --last);
         }
@@ -1197,41 +1130,48 @@ public:
         return this->find(str) != npos;
     }
 
-
     MSTL_CONSTEXPR20 basic_string& trim_left() noexcept {
-        return this->trim_left_if([](value_type ch) { return _MSTL is_space(ch); });
+        return this->trim_left_if([](value_type ch) {
+            return _MSTL is_space(ch);
+        });
     }
-    MSTL_CONSTEXPR20 basic_string& trim_right() noexcept {
-        return this->trim_right_if([](value_type ch) { return _MSTL is_space(ch); });
-    }
-    MSTL_CONSTEXPR20 basic_string& trim() noexcept { return this->trim_left().trim_right(); }
 
-    template <typename Predicate>
-    MSTL_CONSTEXPR20 basic_string& trim_left_if(Predicate pred)
-    noexcept(noexcept(pred(*cbegin()))) {
+    MSTL_CONSTEXPR20 basic_string& trim_right() noexcept {
+        return this->trim_right_if([](value_type ch) {
+            return _MSTL is_space(ch);
+        });
+    }
+
+    MSTL_CONSTEXPR20 basic_string& trim() noexcept {
+        return this->trim_left().trim_right();
+    }
+
+    template <typename Pred>
+    MSTL_CONSTEXPR20 basic_string& trim_left_if(Pred pred) {
         if (empty()) return *this;
 
-        const_iterator it = cbegin();
-        while (it != cend() && pred(*it))
+        iterator it = begin();
+        while (it != end() && pred(*it)) {
             ++it;
-
-        if (it != cbegin())
-            this->erase(begin(), it - begin());
+        }
+        if (it != begin()) {
+            basic_string::erase(begin(), it - begin());
+        }
 
         return *this;
     }
 
-    template <typename Predicate>
-    MSTL_CONSTEXPR20 basic_string& trim_right_if(Predicate pred)
-    noexcept(noexcept(pred(*crbegin()))) {
+    template <typename Pred>
+    MSTL_CONSTEXPR20 basic_string& trim_right_if(Pred pred) {
         if (empty()) return *this;
 
-        const_reverse_iterator rit = crbegin();
-        while (rit != crend() && pred(*rit))
+        reverse_iterator rit = rbegin();
+        while (rit != rend() && pred(*rit)) {
             ++rit;
-
-        if (rit != crbegin())
-            this->erase(end() - (rit - crbegin()), end());
+        }
+        if (rit != rbegin()) {
+            basic_string::erase(end() - (rit - rbegin()), end());
+        }
 
         return *this;
     }
@@ -1252,20 +1192,11 @@ public:
         return this->equal_to(view_type(str));
     }
 
-    MSTL_CONSTEXPR20 bool iequal_to(const basic_string& str) const noexcept {
-        return this->iequal_to(str.view());
-    }
-    MSTL_CONSTEXPR20 bool iequal_to(const view_type str) const noexcept {
-        return _MSTL char_traits_equal<Traits>(data(), size_, str.data(), str.size());
-    }
-    MSTL_CONSTEXPR20 bool iequal_to(const CharT* str) const noexcept {
-        return this->iequal_to(view_type(str));
-    }
-
     MSTL_CONSTEXPR20 void lowercase()
     noexcept(noexcept(_MSTL transform(begin(), end(), begin(), _MSTL to_lowercase<CharT>))) {
         _MSTL transform(begin(), end(), begin(), _MSTL to_lowercase<CharT>);
     }
+
     MSTL_CONSTEXPR20 void uppercase()
     noexcept(noexcept(_MSTL transform(begin(), end(), begin(), _MSTL to_uppercase<CharT>))) {
         _MSTL transform(begin(), end(), begin(), _MSTL to_uppercase<CharT>);
@@ -1278,13 +1209,19 @@ public:
         _MSTL swap(capacity_pair_, x.capacity_pair_);
     }
 
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string& rhs) const noexcept { return this->equal_to(rhs); }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string& rhs) const noexcept { return this->compare(rhs) < 0; }
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string& rhs) const noexcept {
+        return this->equal_to(rhs);
+    }
+
+    MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string& rhs) const noexcept {
+        return this->compare(rhs) < 0;
+    }
 
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(this->data(), this->length());
     }
 };
+
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Alloc = allocator<iter_value_t<Iterator>>>
 basic_string(Iterator, Iterator, Alloc = Alloc())

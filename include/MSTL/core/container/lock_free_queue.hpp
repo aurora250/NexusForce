@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
-#define MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
+#ifndef MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__
+#define MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__
 
 /**
  * @file lock_free_queue.hpp
@@ -368,4 +368,4 @@ _MSTL atomic<int> lock_free_queue<T>::construct_count{0};
 /** @} */ // LockFreeQueue
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
+#endif // MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__

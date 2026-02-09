@@ -120,11 +120,15 @@ public:
     pair<iterator, bool> insert(const value_type& obj) {
         return ht_.insert_unique(obj);
     }
+
     pair<iterator, bool> insert(value_type&& obj) { 
         return ht_.insert_unique(_MSTL forward<value_type>(obj));
     }
+
     template <typename Iterator>
-    void insert(Iterator first, Iterator last) { ht_.insert_unique(first, last); }
+    void insert(Iterator first, Iterator last) {
+        ht_.insert_unique(first, last);
+    }
 
     size_type erase(const key_type& key) noexcept { return ht_.erase(key); }
     iterator erase(iterator it) noexcept { return ht_.erase(it); }

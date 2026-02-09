@@ -10,6 +10,7 @@
 
 #include "MSTL/core/functional/apply.hpp"
 #include "MSTL/core/exception/exception.hpp"
+#include "MSTL/core/exception/terminate.hpp"
 #include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/async/this_thread.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
@@ -165,7 +166,19 @@ private:
 #else
     static void*
 #endif
-    thread_entry(void* arg);
+    thread_entry(void* arg) {
+        const unique_ptr<data_base> data(static_cast<data_base*>(arg));
+        try {
+            data->run();
+        } catch (...) {
+            _MSTL terminate();
+        }
+#ifdef MSTL_PLATFORM_WINDOWS__
+        return 0;
+#else
+        return nullptr;
+#endif
+    }
 
     /**
      * @brief 启动线程实现

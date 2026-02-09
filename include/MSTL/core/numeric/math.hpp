@@ -12,9 +12,7 @@
 #include "MSTL/core/exception/exception.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-/// @cond
 MSTL_BEGIN_CONSTANTS__
-/// @endcond
 
 /**
  * @defgroup MathConstants 数学常量
@@ -55,9 +53,9 @@ MSTL_INLINE17 constexpr uint32_t FIBONACCI_COUNT = extent_v<decltype(FIBONACCI_L
 
 /** @} */ // MathConstants
 
-/// @cond
+MSTL_INLINE17 constexpr size_t EZ_CONSTANT = 591'60'15'3;
+
 MSTL_END_CONSTANTS__
-/// @endcond
 
 /**
  * @defgroup MathFunctions 数学函数

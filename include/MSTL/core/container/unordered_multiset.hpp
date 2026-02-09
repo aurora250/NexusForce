@@ -29,7 +29,7 @@ public:
     using reference         = typename base_type::const_reference;
     using const_reference   = typename base_type::const_reference;
 
-    using iterator          = typename base_type::const_iterator;
+    using iterator          = typename base_type::iterator;
     using const_iterator    = typename base_type::const_iterator;
 
     using allocator_type    = typename base_type::allocator_type;

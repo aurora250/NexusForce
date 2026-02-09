@@ -1,8 +1,9 @@
 #ifndef MSTL_CORE_STRING_TO_STRING_HPP__
 #define MSTL_CORE_STRING_TO_STRING_HPP__
-#include "../interface/istringify.hpp"
-#include "../interface/icollector.hpp"
-#include "character.hpp"
+#include "MSTL/core/interface/istringify.hpp"
+#include "MSTL/core/interface/icollector.hpp"
+#include "MSTL/core/algorithm/type_erase.hpp"
+#include "MSTL/core/string/character.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename P = package_t<T>, enable_if_t<is_packaged_v<T> && is_base_of_v<istringify<P>, P>, int> = 0>

@@ -106,13 +106,13 @@ struct click {
 
 
 /**
- * @class click_guard
+ * @class scoped_click
  * @brief 作用域计时器
  *
  * 在构造时开始计时，在析构时停止计时，
  * 用于在指定作用域内自动测量代码块执行时间。
  */
-class click_guard {
+class scoped_click {
     click& clk_;  ///< 引用的计时器
 
 public:
@@ -123,19 +123,19 @@ public:
      *
      * 构造时自动开始计时。
      */
-    explicit click_guard(click& clk) noexcept : clk_(clk) {
+    explicit scoped_click(click& clk) noexcept : clk_(clk) {
         clk_.start();
     }
 
     /**
      * @brief 禁止复制构造
      */
-    click_guard(const click_guard&) = delete;
+    scoped_click(const scoped_click&) = delete;
 
     /**
      * @brief 禁止复制赋值
      */
-    click_guard& operator =(const click_guard&) = delete;
+    scoped_click& operator =(const scoped_click&) = delete;
 
     /**
      * @brief 析构函数
@@ -143,7 +143,7 @@ public:
      *
      * 析构时自动停止计时。
      */
-    ~click_guard() noexcept {
+    ~scoped_click() noexcept {
         clk_.stop();
     }
 };

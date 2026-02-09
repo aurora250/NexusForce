@@ -5,8 +5,6 @@ MSTL_BEGIN_NAMESPACE__
 
 template <typename T, typename Sequence = deque<T>>
 class queue : public icollector<queue<T, Sequence>> {
-    using super = icollector<queue>;
-
 public:
     using value_type        = typename Sequence::value_type;
     using difference_type   = typename Sequence::difference_type;

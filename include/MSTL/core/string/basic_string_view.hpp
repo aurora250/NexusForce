@@ -1,8 +1,9 @@
 #ifndef MSTL_CORE_STRING_BASIC_STRING_VIEW_HPP__
 #define MSTL_CORE_STRING_BASIC_STRING_VIEW_HPP__
-#include "../iterator/reverse_iterator.hpp"
-#include "char_traits.hpp"
-#include "char_types.hpp"
+#include "MSTL/core/interface/iiterator.hpp"
+#include "MSTL/core/iterator/reverse_iterator.hpp"
+#include "MSTL/core/string/char_traits.hpp"
+#include "MSTL/core/string/char_types.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 template <typename CharT, typename Traits = char_traits<CharT>>
@@ -10,132 +11,86 @@ class basic_string_view;
 
 
 template <typename Traits>
-class string_view_iterator {
-private:
-    using container_type	= basic_string_view<typename Traits::char_type, Traits>;
-    using iterator			= string_view_iterator<Traits>;
-    using const_iterator	= string_view_iterator<Traits>;
-
+struct string_view_iterator : iiterator<string_view_iterator<Traits>> {
 public:
-    using iterator_category = contiguous_iterator_tag;
+    using container_type	= basic_string_view<typename Traits::char_type, Traits>;
     using value_type		= typename container_type::value_type;
+    using size_type			= typename container_type::size_type;
+    using difference_type	= typename container_type::difference_type;
+    using iterator_category = contiguous_iterator_tag;
     using reference			= typename container_type::const_reference;
     using pointer			= typename container_type::const_pointer;
-    using difference_type	= typename container_type::difference_type;
-    using size_type			= typename container_type::size_type;
 
 private:
     pointer data_ = nullptr;
     size_t size_ = 0;
     size_t idx_ = 0;
 
-    friend basic_string_view<value_type, Traits>;
+    friend class basic_string_view<value_type, Traits>;
 
 public:
     constexpr string_view_iterator() noexcept = default;
+    MSTL_CONSTEXPR20 ~string_view_iterator() = default;
+
+    constexpr string_view_iterator(const string_view_iterator&) noexcept = default;
+    constexpr string_view_iterator& operator =(const string_view_iterator&) noexcept = default;
+    constexpr string_view_iterator(string_view_iterator&&) noexcept = default;
+    constexpr string_view_iterator& operator =(string_view_iterator&&) noexcept = default;
 
     constexpr string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept
-        : data_(data), size_(size), idx_(off) {}
+    : data_(data), size_(size), idx_(off) {}
 
-    MSTL_NODISCARD constexpr reference operator *() const noexcept {
-        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
-        MSTL_DEBUG_VERIFY(idx_ < size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_DEREFERENCE));
+    MSTL_NODISCARD constexpr reference dereference() const noexcept {
+        MSTL_DEBUG_VERIFY(data_, "Attempting to dereference on a null pointer");
+        MSTL_DEBUG_VERIFY(idx_ < size_, "Attempting to dereference out of boundary");
         return data_[idx_];
     }
 
-    MSTL_NODISCARD constexpr pointer operator ->() const noexcept {
-        return &operator*();
-    }
-
-    constexpr string_view_iterator& operator ++() noexcept {
-        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        MSTL_DEBUG_VERIFY(idx_ < size_, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_INCREMENT));
+    constexpr void increment() noexcept {
+        MSTL_DEBUG_VERIFY(data_, "Attempting to increment a null pointer");
+        MSTL_DEBUG_VERIFY(idx_ < size_, "Attempting to increment out of boundary");
         ++idx_;
-        return *this;
     }
 
-    constexpr string_view_iterator operator ++(int) noexcept {
-        string_view_iterator tmp(*this);
-        ++*this;
-        return tmp;
-    }
-
-    constexpr string_view_iterator& operator --() noexcept {
-        MSTL_DEBUG_VERIFY(data_, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        MSTL_DEBUG_VERIFY(idx_ != 0, __MSTL_DEBUG_MESG_OUT_OF_RANGE(string_view_iterator, __MSTL_DEBUG_TAG_DECREMENT));
+    constexpr void decrement() noexcept {
+        MSTL_DEBUG_VERIFY(data_, "Attempting to decrement a null pointer");
+        MSTL_DEBUG_VERIFY(idx_ != 0, "Attempting to decrement out of boundary");
         --idx_;
-        return *this;
     }
 
-    constexpr string_view_iterator operator --(int) noexcept {
-        string_view_iterator tmp(*this);
-        --*this;
-        return tmp;
+    constexpr void advance(difference_type off) noexcept {
+        MSTL_DEBUG_VERIFY(data_ || off == 0, "Attempting to advance a null pointer");
+        MSTL_DEBUG_VERIFY(
+            (off < 0 ? idx_ >= -off : size_ - idx_ >= off),
+            "Attempting to advance out of boundary");
+        idx_ += off;
     }
 
-    constexpr string_view_iterator& operator +=(const difference_type n) noexcept {
-        if (n < 0) {
-            MSTL_DEBUG_VERIFY(data_ || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-            MSTL_DEBUG_VERIFY(idx_ >= static_cast<size_t>(0) - static_cast<size_t>(n),
-                __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_DECREMENT));
-        }
-        else if (n > 0) {
-            MSTL_DEBUG_VERIFY(data_ || n == 0, __MSTL_DEBUG_MESG_OPERATE_NULLPTR(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-            MSTL_DEBUG_VERIFY(size_ - idx_ >= static_cast<size_t>(n),
-                __MSTL_DEBUG_MESG_OUT_OF_RANGE(vector_iterator, __MSTL_DEBUG_TAG_INCREMENT));
-        }
-        idx_ += n;
-        return *this;
-    }
-    MSTL_NODISCARD constexpr string_view_iterator operator +(const difference_type n) const noexcept {
-        string_view_iterator tmp = *this;
-        tmp += n;
-        return tmp;
-    }
-    MSTL_NODISCARD friend constexpr string_view_iterator operator +(const difference_type n, const string_view_iterator& iter) noexcept {
-        return iter + n;
-    }
-
-    constexpr string_view_iterator& operator -=(const difference_type n) noexcept {
-        idx_ += -n;
-        return *this;
-    }
-    MSTL_NODISCARD constexpr string_view_iterator operator -(const difference_type n) const noexcept {
-        string_view_iterator tmp = *this;
-        tmp -= n;
-        return tmp;
-    }
-    MSTL_NODISCARD constexpr difference_type operator -(const string_view_iterator& iter) const noexcept {
-        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
-            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
-        return static_cast<difference_type>(idx_ - iter.idx_);
+    MSTL_NODISCARD constexpr difference_type distance_to(const string_view_iterator& other) const noexcept {
+        MSTL_DEBUG_VERIFY(
+            data_ == other.data_ && size_ == other.size_,
+            "Attempting to distance to a different container");
+        return static_cast<difference_type>(idx_ - other.idx_);
     }
 
     MSTL_NODISCARD constexpr reference operator [](const difference_type n) const noexcept {
         return *(*this + n);
     }
 
-    MSTL_NODISCARD constexpr bool operator ==(const string_view_iterator& iter) const noexcept {
-        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
-            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
-        return idx_ == iter.idx_;
+    MSTL_NODISCARD constexpr bool equal(const string_view_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(data_ == rhs.data_ && size_ == rhs.size_, "Attempting to equal to a different container");
+        return idx_ == rhs.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator !=(const string_view_iterator& iter) const noexcept {
-        return !(*this == iter);
+
+    MSTL_NODISCARD constexpr bool less_than(const string_view_iterator& rhs) const noexcept {
+        MSTL_DEBUG_VERIFY(
+            data_ == rhs.data_ && size_ == rhs.size_,
+            "Attempting to less than a different container");
+        return idx_ < rhs.idx_;
     }
-    MSTL_NODISCARD constexpr bool operator <(const string_view_iterator& iter) const noexcept {
-        MSTL_DEBUG_VERIFY(data_ == iter.data_ && size_ == iter.size_,
-            __MSTL_DEBUG_MESG_CONTAINER_INCOMPATIBLE(string_view_iterator));
-        return idx_ < iter.idx_;
-    }
-    MSTL_NODISCARD constexpr bool operator >(const string_view_iterator& iter) const noexcept {
-        return iter < *this;
-    }
-    MSTL_NODISCARD constexpr bool operator <=(const string_view_iterator& iter) const noexcept {
-        return !(iter < *this);
-    }
-    MSTL_NODISCARD constexpr bool operator >=(const string_view_iterator& iter) const noexcept {
-        return !(*this < iter);
+
+    MSTL_NODISCARD constexpr pointer base() const noexcept {
+        return data_ + idx_;
     }
 };
 

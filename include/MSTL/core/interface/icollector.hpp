@@ -8,7 +8,6 @@
  * 此文件定义了集合器的接口，为容器类型提供统一的集合操作接口。
  */
 
-#include "MSTL/core/algorithm/type_erase.hpp"
 #include "MSTL/core/interface/icommon.hpp"
 MSTL_BEGIN_NAMESPACE__
 

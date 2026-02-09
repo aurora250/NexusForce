@@ -169,7 +169,7 @@ MSTL_END_INNER__
 template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
 constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
 #ifdef MSTL_STANDARD_17__
-    if constexpr (is_rnd_iter_v<Iterator>) {
+    if constexpr (is_ranges_rnd_iter_v<Iterator>) {
         return last - first;
     } else {
         iter_difference_t<Iterator> n = 0;

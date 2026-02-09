@@ -264,10 +264,14 @@ public:
 template <View V, typename Pred>
 class filter_view : public view_base<filter_view<V, Pred>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
-    using base_sentinel = decltype(_MSTL declval<V>().end());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using base_sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_base_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
     using iterator = filter_iterator<base_iterator, base_sentinel, Pred>;
+    using const_iterator = filter_iterator<const_base_iterator, const_base_sentinel, Pred>;
     using sentinel = base_sentinel;
+    using const_sentinel = const_base_sentinel;
 
 private:
     V base_;
@@ -309,11 +313,11 @@ public:
         return base_.end();
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.begin(), base_.begin(), base_.end(), &pred_);
+        return const_iterator(base_.begin(), base_.begin(), base_.end(), &pred_);
     }
-    constexpr sentinel end() const
+    constexpr const_sentinel end() const
     requires Range<const V> {
         return base_.end();
     }
@@ -321,8 +325,8 @@ public:
     constexpr iterator end() requires common_range<V> {
         return iterator(base_.begin(), base_.end(), base_.end(), &pred_);
     }
-    constexpr iterator end() const requires common_range<const V> {
-        return iterator(base_.begin(), base_.end(), base_.end(), &pred_);
+    constexpr const_iterator end() const requires common_range<const V> {
+        return const_iterator(base_.begin(), base_.end(), base_.end(), &pred_);
     }
 
     constexpr V base() const & requires copy_constructible<V> { return base_; }
@@ -394,9 +398,12 @@ private:
 template <View V, typename Func>
 class transform_view : public view_base<transform_view<V, Func>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
     using iterator = transform_iterator<base_iterator, Func>;
-    using sentinel = decltype(_MSTL declval<V>().end());
+    using const_iterator = transform_iterator<const_base_iterator, Func>;
+    using sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
 
 private:
     V base_;
@@ -439,13 +446,13 @@ public:
         return base_.end();
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.begin(), &func_);
+        return const_iterator(base_.begin(), &func_);
     }
 
-    constexpr sentinel end() const
-    requires Range<const V> {
+    constexpr const_sentinel end() const
+    requires Range <const V> {
         return base_.end();
     }
 
@@ -517,8 +524,10 @@ private:
 template <View V>
 class take_view : public view_base<take_view<V>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
     using iterator = take_iterator<base_iterator>;
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_iterator = take_iterator<const_base_iterator>;
     using difference_type = iter_difference_t<base_iterator>;
 
 private:
@@ -547,16 +556,16 @@ public:
         return iterator(it, 0);
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.begin(), count_);
+        return const_iterator(base_.begin(), count_);
     }
 
-    constexpr iterator end() const
+    constexpr const_iterator end() const
     requires Range<const V> {
         auto it = base_.begin();
         _MSTL advance(it, _MSTL min(count_, _MSTL distance(base_.begin(), base_.end())));
-        return iterator(it, 0);
+        return const_iterator(it, 0);
     }
 
     constexpr V base() const & requires copy_constructible<V> { return base_; }
@@ -639,10 +648,14 @@ private:
 template <View V, typename Pred>
 class take_while_view : public view_base<take_while_view<V, Pred>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
-    using base_sentinel = decltype(_MSTL declval<V>().end());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using base_sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_base_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
     using iterator = take_while_iterator<base_iterator, base_sentinel, Pred>;
+    using const_iterator = take_while_iterator<const_base_iterator, const_base_sentinel, Pred>;
     using sentinel = base_sentinel;
+    using const_sentinel = const_base_sentinel;
 
 private:
     V base_;
@@ -661,11 +674,11 @@ public:
         return base_.end();
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.begin(), base_.end(), &pred_);
+        return const_iterator(base_.begin(), base_.end(), &pred_);
     }
-    constexpr sentinel end() const
+    constexpr const_sentinel end() const
     requires Range<const V> {
         return base_.end();
     }
@@ -681,8 +694,10 @@ take_while_view(V&&, Pred) -> take_while_view<V, Pred>;
 template <View V>
 class drop_view : public view_base<drop_view<V>> {
 public:
-    using iterator = decltype(_MSTL declval<V>().begin());
-    using sentinel = decltype(_MSTL declval<V>().end());
+    using iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
     using difference_type = iter_difference_t<iterator>;
 
 private:
@@ -716,7 +731,7 @@ public:
         return base_.end();
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
         auto it = base_.begin();
         auto end = base_.end();
@@ -728,7 +743,7 @@ public:
         return it;
     }
 
-    constexpr sentinel end() const
+    constexpr const_sentinel end() const
     requires Range<const V> {
         return base_.end();
     }
@@ -822,10 +837,14 @@ private:
 template <View V, typename Pred>
 class drop_while_view : public view_base<drop_while_view<V, Pred>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
-    using base_sentinel = decltype(_MSTL declval<V>().end());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using base_sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_base_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
     using iterator = drop_while_iterator<base_iterator, base_sentinel, Pred>;
+    using const_iterator = drop_while_iterator<const_base_iterator, const_base_sentinel, Pred>;
     using sentinel = base_sentinel;
+    using const_sentinel = const_base_sentinel;
 
 private:
     V base_;
@@ -844,11 +863,11 @@ public:
         return base_.end();
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.begin(), base_.end(), &pred_);
+        return const_iterator(base_.begin(), base_.end(), &pred_);
     }
-    constexpr sentinel end() const
+    constexpr const_sentinel end() const
     requires Range<const V> {
         return base_.end();
     }
@@ -921,8 +940,10 @@ template <View V>
     requires bidirectional_iterator<decltype(_MSTL declval<V>().begin())> && common_range<V>
 class reverse_view : public view_base<reverse_view<V>> {
 public:
-    using base_iterator = decltype(_MSTL declval<V>().begin());
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
     using iterator = reverse_iterator<base_iterator>;
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_iterator = reverse_iterator<const_base_iterator>;
 
 private:
     V base_;
@@ -944,13 +965,13 @@ public:
         return iterator(base_.begin());
     }
 
-    constexpr iterator begin() const
+    constexpr const_iterator begin() const
     requires Range<const V> {
-        return iterator(base_.end());
+        return const_iterator(base_.end());
     }
-    constexpr iterator end() const
+    constexpr const_iterator end() const
     requires Range<const V> {
-        return iterator(base_.begin());
+        return const_iterator(base_.begin());
     }
 
     constexpr V base() const & requires copy_constructible<V> { return base_; }
@@ -1417,75 +1438,82 @@ template <typename Iter, typename N>
 counted_view(Iter, N) -> counted_view<Iter>;
 
 
-template <View V1, View V2>
-class concat_view : public view_base<concat_view<V1, V2>> {
-    V1 v1_;
-    V2 v2_;
+template <bool IsConst, View V1, View V2>
+struct concat_iterator {
+    using iter1_t = decltype(_MSTL declval<remove_const_t<V1>>().begin());
+    using iter2_t = decltype(_MSTL declval<remove_const_t<V2>>().begin());
+    using const_iter1_t = decltype(_MSTL declval<add_const_t<V1>>().begin());
+    using const_iter2_t = decltype(_MSTL declval<add_const_t<V2>>().begin());
+    using iterator1 = conditional_t<IsConst, const_iter1_t, iter1_t>;
+    using iterator2 = conditional_t<IsConst, const_iter2_t, iter2_t>;
 
-public:
-    concat_view() = default;
-    concat_view(V1 v1, V2 v2) : v1_(_MSTL move(v1)), v2_(_MSTL move(v2)) {}
+    using iterator_category = forward_iterator_tag;
+    using value_type = common_type_t<iter_value_t<iterator1>, iter_value_t<iterator2>>;
+    using difference_type = common_type_t<iter_difference_t<iterator1>, iter_difference_t<iterator2>>;
+    using pointer = void;
+    using reference = common_reference_t<iter_reference_t<iterator1>, iter_reference_t<iterator2>>;
 
-    struct iterator {
-        using iter1_t = decltype(_MSTL declval<V1>().begin());
-        using iter2_t = decltype(_MSTL declval<V2>().begin());
+    iterator1 current1_;
+    iterator1 end1_;
+    iterator2 current2_;
+    iterator2 end2_;
+    bool in_first_ = true;
 
-        using iterator_category = forward_iterator_tag;
-        using value_type = common_type_t<
-            iter_value_t<iter1_t>, iter_value_t<iter2_t>>;
-        using difference_type = common_type_t<
-            iter_difference_t<iter1_t>, iter_difference_t<iter2_t>>;
-        using pointer = void;
-        using reference = common_reference_t<
-            iter_reference_t<iter1_t>, iter_reference_t<iter2_t>>;
+    concat_iterator() = default;
 
-        iter1_t current1_;
-        iter1_t end1_;
-        iter2_t current2_;
-        iter2_t end2_;
-        bool in_first_ = true;
+    concat_iterator(iterator1 first1, iterator1 last1, iterator2 first2, iterator2 last2)
+        : current1_(first1), end1_(last1), current2_(first2), end2_(last2) {
+        if (current1_ == end1_) {
+            in_first_ = false;
+        }
+    }
 
-        iterator() = default;
+    reference operator*() const {
+        return in_first_ ? *current1_ : *current2_;
+    }
 
-        iterator(iter1_t first1, iter1_t last1, iter2_t first2, iter2_t last2)
-            : current1_(first1), end1_(last1), current2_(first2), end2_(last2) {
+    concat_iterator& operator++() {
+        if (in_first_) {
+            ++current1_;
             if (current1_ == end1_) {
                 in_first_ = false;
             }
+        } else {
+            ++current2_;
         }
+        return *this;
+    }
 
-        reference operator*() const {
-            return in_first_ ? *current1_ : *current2_;
-        }
+    concat_iterator operator++(int) {
+        auto tmp = *this;
+        ++*this;
+        return tmp;
+    }
 
-        iterator& operator++() {
-            if (in_first_) {
-                ++current1_;
-                if (current1_ == end1_) {
-                    in_first_ = false;
-                }
-            } else {
-                ++current2_;
-            }
-            return *this;
-        }
+    bool operator==(const concat_iterator& other) const {
+        if (in_first_ != other.in_first_) return false;
+        if (in_first_) return current1_ == other.current1_;
+        return current2_ == other.current2_;
+    }
 
-        iterator operator++(int) {
-            auto tmp = *this;
-            ++*this;
-            return tmp;
-        }
+    bool operator!=(const concat_iterator& other) const {
+        return !(*this == other);
+    }
+};
 
-        bool operator==(const iterator& other) const {
-            if (in_first_ != other.in_first_) return false;
-            if (in_first_) return current1_ == other.current1_;
-            return current2_ == other.current2_;
-        }
+template <View V1, View V2>
+class concat_view : public view_base<concat_view<V1, V2>> {
+    remove_const_t<V1> v1_;
+    remove_const_t<V2> v2_;
 
-        bool operator!=(const iterator& other) const {
-            return !(*this == other);
-        }
-    };
+    using iterator = concat_iterator<false, V1, V2>;
+    using const_iterator = concat_iterator<true, V1, V2>;
+
+public:
+    concat_view() = default;
+    concat_view(V1 v1, V2 v2)
+    : v1_(_MSTL move(v1)),
+      v2_(_MSTL move(v2)) {}
 
     auto begin() {
         return iterator(v1_.begin(), v1_.end(), v2_.begin(), v2_.end());
@@ -1494,10 +1522,10 @@ public:
         return iterator(v1_.end(), v1_.end(), v2_.end(), v2_.end());
     }
     auto begin() const {
-        return iterator(v1_.begin(), v1_.end(), v2_.begin(), v2_.end());
+        return const_iterator(v1_.begin(), v1_.end(), v2_.begin(), v2_.end());
     }
     auto end() const {
-        return iterator(v1_.end(), v1_.end(), v2_.end(), v2_.end());
+        return const_iterator(v1_.end(), v1_.end(), v2_.end(), v2_.end());
     }
 };
 
@@ -1515,57 +1543,68 @@ public:
     Iterator end() const { return last_; }
 };
 
+
+template <bool IsConst, View V, typename T>
+struct split_iterator {
+private:
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using base_sentinel = decltype(_MSTL declval<remove_const_t<V>>().end());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using const_base_sentinel = decltype(_MSTL declval<add_const_t<V>>().end());
+    using iterator = conditional_t<IsConst, const_base_iterator, base_iterator>;
+    using sentinel = conditional_t<IsConst, const_base_sentinel, base_sentinel>;
+
+public:
+    iterator current_;
+    sentinel end_;
+    T delimiter_;
+
+    using iterator_category = forward_iterator_tag;
+    using value_type = subrange_view<iterator>;
+    using difference_type = iter_difference_t<iterator>;
+    using pointer = void;
+    using reference = value_type;
+
+    split_iterator() = default;
+    split_iterator(iterator cur, sentinel end, T delim)
+    : current_(cur), end_(end), delimiter_(delim) {}
+
+    value_type operator*() const {
+        iterator start = current_;
+        iterator iter = current_;
+        while (iter != end_ && !(*iter == delimiter_)) ++iter;
+        return value_type{start, iter};
+    }
+
+    split_iterator& operator++() {
+        if (current_ == end_) return *this;
+        while (current_ != end_ && !(*current_ == delimiter_)) ++current_;
+        if (current_ != end_) ++current_;
+        return *this;
+    }
+
+    split_iterator operator++(int) {
+        auto tmp = *this;
+        ++(*this);
+        return tmp;
+    }
+
+    bool operator==(const split_iterator& other) const {
+        return current_ == other.current_;
+    }
+    bool operator!=(const split_iterator& other) const {
+        return !(*this == other);
+    }
+};
+
 template <View V, typename T>
 class split_view : public view_base<split_view<V, T>> {
     V base_;
     T delimiter_;
 
-    using base_iterator = decltype(_MSTL declval<V>().begin());
-    using base_sentinel = decltype(_MSTL declval<V>().end());
-
 public:
-    struct iterator {
-        base_iterator current_;
-        base_sentinel end_;
-        T delimiter_;
-
-        using iterator_category = forward_iterator_tag;
-        using value_type = subrange_view<base_iterator>;
-        using difference_type = iter_difference_t<base_iterator>;
-        using pointer = void;
-        using reference = value_type;
-
-        iterator() = default;
-        iterator(base_iterator cur, base_sentinel end, T delim)
-        : current_(cur), end_(end), delimiter_(delim) {}
-
-        value_type operator*() const {
-            base_iterator start = current_;
-            base_iterator iter = current_;
-            while (iter != end_ && !(*iter == delimiter_)) ++iter;
-            return value_type{start, iter};
-        }
-
-        iterator& operator++() {
-            if (current_ == end_) return *this;
-            while (current_ != end_ && !(*current_ == delimiter_)) ++current_;
-            if (current_ != end_) ++current_;
-            return *this;
-        }
-
-        iterator operator++(int) {
-            auto tmp = *this;
-            ++(*this);
-            return tmp;
-        }
-
-        bool operator==(const iterator& other) const {
-            return current_ == other.current_;
-        }
-        bool operator!=(const iterator& other) const {
-            return !(*this == other);
-        }
-    };
+    using iterator = split_iterator<false, V, T>;
+    using const_iterator = split_iterator<true, V, T>;
 
     split_view() = default;
 
@@ -1578,20 +1617,30 @@ public:
     iterator end() {
         return iterator{base_.end(), base_.end(), delimiter_};
     }
+
+    const_iterator begin() const {
+        return const_iterator{base_.begin(), base_.end(), delimiter_};
+    }
+    const_iterator end() const {
+        return const_iterator{base_.end(), base_.end(), delimiter_};
+    }
 };
 
 
 template <View V>
 class slice_view : public view_base<slice_view<V>> {
-    V base_;
-    iter_difference_t<decltype(_MSTL declval<V>().begin())> offset_;
-    iter_difference_t<decltype(_MSTL declval<V>().begin())> length_;
+    using base_iterator = decltype(_MSTL declval<remove_const_t<V>>().begin());
+    using const_base_iterator = decltype(_MSTL declval<add_const_t<V>>().begin());
+    using iterator = conditional_t<is_const_v<V>, const_base_iterator, base_iterator>;
+    using difference_type = iter_difference_t<base_iterator>;
 
-    using base_iterator = decltype(_MSTL declval<V>().begin());
+    V base_;
+    difference_type offset_;
+    difference_type length_;
 
     struct cache_t {
-        base_iterator begin_;
-        base_iterator end_;
+        iterator begin_;
+        iterator end_;
     };
     mutable cache_t cache_;
     mutable bool has_value_ = false;
@@ -1599,8 +1648,8 @@ class slice_view : public view_base<slice_view<V>> {
     void ensure_cache() const {
         if (has_value_) return;
 
-        auto b = base_.begin();
-        auto e = base_.end();
+        auto b = const_cast<remove_const_t<V>&>(base_).begin();
+        auto e = const_cast<remove_const_t<V>&>(base_).end();
 
         for (auto i = 0; i < offset_ && b != e; ++i, ++b);
         auto begin_it = b;
@@ -1617,25 +1666,25 @@ public:
 
     slice_view(V base, iter_difference_t<base_iterator> offset,
                iter_difference_t<base_iterator> length)
-        : base_(_MSTL move(base)), offset_(offset), length_(length) {}
+    : base_(_MSTL move(base)), offset_(offset), length_(length) {}
 
-    base_iterator begin() {
+    iterator begin() {
         ensure_cache();
         return cache_.begin_;
     }
 
-    base_iterator end() {
+    iterator end() {
         ensure_cache();
         return cache_.end_;
     }
 
-    base_iterator begin() const
+    iterator begin() const
     requires Range<const V> {
         ensure_cache();
         return cache_.begin_;
     }
 
-    base_iterator end() const
+    iterator end() const
     requires Range<const V> {
         ensure_cache();
         return cache_.end_;

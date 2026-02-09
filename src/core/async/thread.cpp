@@ -1,6 +1,5 @@
 #include <MSTL/core/async/thread.hpp>
 #include <MSTL/core/time/clocks.hpp>
-#include <MSTL/core/exception/terminate.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <process.h>
 #endif
@@ -14,25 +13,6 @@
 #endif
 #endif
 MSTL_BEGIN_NAMESPACE__
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-unsigned int __stdcall
-#else
-void*
-#endif
-thread::thread_entry(void* arg) {
-    const unique_ptr<data_base> data(static_cast<data_base*>(arg));
-    try {
-        data->run();
-    } catch (...) {
-        _MSTL terminate();
-    }
-#ifdef MSTL_PLATFORM_WINDOWS__
-    return 0;
-#else
-    return nullptr;
-#endif
-}
 
 void thread::start_thread_impl(void* args) {
 #ifdef MSTL_PLATFORM_WINDOWS__

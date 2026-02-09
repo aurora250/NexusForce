@@ -30,19 +30,6 @@ using platform_wait_t =
     int;
 #endif
 
-/**
- * @brief 检查类型是否适用于平台等待操作
- * @tparam T 要检查的类型
- *
- * 类型必须满足以下条件：
- * 1. 标量类型
- * 2. 大小等于平台等待类型的大小
- * 3. 对齐要求不低于平台等待类型的对齐要求
- */
-template <typename T>
-MSTL_INLINE17 constexpr bool platform_wait_valid_v = is_scalar_v<T>
-    && sizeof(T) == sizeof(platform_wait_t)
-    && alignof(T*) >= alignof(platform_wait_t);
 
 /**
  * @enum futex_wait_flags
