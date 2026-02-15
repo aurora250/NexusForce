@@ -27,7 +27,7 @@ MSTL_BEGIN_NAMESPACE__
  */
 template <typename Iterator>
 class reverse_iterator {
-    static_assert(is_bid_iter_v<Iterator>, "reverse iterator requires bidirectional iterator.");
+    static_assert(is_ranges_bid_iter_v<Iterator>, "reverse iterator requires bidirectional iterator.");
 
 public:
     using iterator_category = iter_category_t<Iterator>;    ///< 迭代器类别

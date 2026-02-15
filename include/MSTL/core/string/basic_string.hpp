@@ -6,7 +6,6 @@
 #include "MSTL/core/memory/uninitialized.hpp"
 #include "MSTL/core/string/string_view.hpp"
 #include "MSTL/core/utility/compressed_pair.hpp"
-#include <initializer_list>
 MSTL_BEGIN_NAMESPACE__
 
 template <bool IsConst, typename String>

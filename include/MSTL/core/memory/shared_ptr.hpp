@@ -239,20 +239,20 @@ class weak_ptr;
 MSTL_BEGIN_INNER__
 
 template <typename T>
-MSTL_ALWAYS_INLINE enable_if_t<is_base_of_v<enable_shared_from_this<T>, T>>
+enable_if_t<is_base_of_v<enable_shared_from_this<T>, T>>
 __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) {
     static_cast<_MSTL enable_shared_from_this<T>*>(ptr)->owner_ = owner;
     return;
 }
 
 template <typename T>
-MSTL_ALWAYS_INLINE enable_if_t<!is_base_of_v<enable_shared_from_this<T>, T>>
+enable_if_t<!is_base_of_v<enable_shared_from_this<T>, T>>
 __setup_enable_shared_from(T*, __smart_ptr_counter*) {
     return;
 }
 
 template <typename T>
-MSTL_ALWAYS_INLINE shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
+shared_ptr<T> __make_shared_fused(T* ptr, __smart_ptr_counter* owner) noexcept {
     return _MSTL shared_ptr<T>(ptr, owner);
 }
 

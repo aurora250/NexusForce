@@ -10,7 +10,7 @@
 
 #include "atomic_wait.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <intrin0.h>
+#include <intrin.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

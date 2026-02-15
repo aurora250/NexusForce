@@ -1,21 +1,23 @@
 #ifndef MSTL_CORE_MEMORY_MEMORY_VIEW_HPP__
 #define MSTL_CORE_MEMORY_MEMORY_VIEW_HPP__
-#include "../container/array.hpp"
-#include "../iterator/normal_iterator.hpp"
-#include "../iterator/reverse_iterator.hpp"
-#include "../utility/compressed_pair.hpp"
-#include "../numeric/numeric_traits.hpp"
+#include "MSTL/core/container/array.hpp"
+#include "MSTL/core/iterator/normal_iterator.hpp"
+#include "MSTL/core/iterator/reverse_iterator.hpp"
+#include "MSTL/core/numeric/numeric_traits.hpp"
+#include "MSTL/core/utility/compressed_pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 MSTL_INLINE17 constexpr size_t dynamic_extent = numeric_traits<size_t>::max();
 
 
 MSTL_BEGIN_INNER__
+
 template <size_t Extent>
 struct extent_storage {
     constexpr extent_storage(size_t) noexcept {}
     static constexpr size_t extent() noexcept { return Extent; }
 };
+
 template <>
 struct extent_storage<dynamic_extent> {
 private:
@@ -24,6 +26,7 @@ public:
     constexpr extent_storage(const size_t extent_value) noexcept : extent_value_(extent_value) {}
     constexpr size_t extent() const noexcept { return extent_value_; }
 };
+
 MSTL_END_INNER__
 
 
@@ -39,7 +42,6 @@ public:
     using const_pointer     = const Element*;
     using reference         = element_type&;
     using const_reference   = const element_type&;
-    
     using iterator          = normal_iterator<pointer>;
     using reverse_iterator  = _MSTL reverse_iterator<iterator>;
 
@@ -56,19 +58,19 @@ private:
     
     template <size_t, size_t Count, enable_if_t<
         Count != dynamic_extent, int> = 0>
-    static constexpr size_t subspan_extent() noexcept {
+    static constexpr size_t view_extent() noexcept {
         return Count;
     }
 
     template <size_t Offset, size_t Count, enable_if_t<
         Count == dynamic_extent && Extent != dynamic_extent, int> = 0>
-    static constexpr size_t subspan_extent() noexcept {
+    static constexpr size_t view_extent() noexcept {
         return Extent - Offset;
     }
 
     template <size_t, size_t Count, enable_if_t<
         Count == dynamic_extent && Extent == dynamic_extent, int> =0>
-    static constexpr size_t subspan_extent()  noexcept{
+    static constexpr size_t view_extent()  noexcept{
         return dynamic_extent;
     }
     
@@ -89,13 +91,13 @@ private:
     }
 
     template <size_t Offset, size_t Count, enable_if_t<Count == dynamic_extent, int> = 0>
-    constexpr decltype(auto) subspan_aux() const noexcept {
-        using view = memory_view<element_type, subspan_extent<Offset, Count>()>;
+    constexpr decltype(auto) view_aux() const noexcept {
+        using view = memory_view<element_type, view_extent<Offset, Count>()>;
         return view{data() + Offset, size() - Offset};
     }
     template <size_t Offset, size_t Count, enable_if_t<Count != dynamic_extent, int> = 0>
-    constexpr decltype(auto) subspan_aux() const noexcept {
-        using view = memory_view<element_type, subspan_extent<Offset, Count>()>;
+    constexpr decltype(auto) view_aux() const noexcept {
+        using view = memory_view<element_type, view_extent<Offset, Count>()>;
         memory_view::check_count<Extent>(Count);
         memory_view::check_count<Extent>(Count + Offset);
         return view{data() + Offset, Count};
@@ -233,8 +235,7 @@ public:
         return view{ data(), Count };
     }
 
-    constexpr memory_view<element_type>
-    first(size_type count) const noexcept {
+    constexpr memory_view<element_type> first(size_type count) const noexcept {
         MSTL_CONSTEXPR_ASSERT(count <= size());
         return { data(), count };
     }
@@ -246,25 +247,24 @@ public:
         return view{ data() + (size() - Count), Count };
     }
 
-    constexpr memory_view<element_type>
-    last(size_type count) const noexcept {
+    constexpr memory_view<element_type> last(size_type count) const noexcept {
         MSTL_CONSTEXPR_ASSERT(count <= size());
         return { data() + (size() - count), count };
     }
 
     template <size_t Offset, size_t Count = dynamic_extent>
-    constexpr auto subspan() const noexcept
-    -> memory_view<element_type, subspan_extent<Offset, Count>()> {
+    constexpr auto view() const noexcept
+    -> memory_view<element_type, view_extent<Offset, Count>()> {
         memory_view::check_count<Extent>(Offset);
-        return this->template subspan_aux<Offset, Count>();
+        return this->template view_aux<Offset, Count>();
     }
 
     constexpr memory_view<element_type>
-    subspan(size_type offset, size_type count = dynamic_extent) const noexcept {
+    view(size_type offset, size_type count = dynamic_extent) const noexcept {
         MSTL_CONSTEXPR_ASSERT(offset <= size());
-        if (count == dynamic_extent)
+        if (count == dynamic_extent) {
             count = size() - offset;
-        else {
+        } else {
             MSTL_CONSTEXPR_ASSERT(count <= size());
             MSTL_CONSTEXPR_ASSERT(offset + count <= size());
         }
@@ -290,28 +290,8 @@ template <typename Iter, typename End>
 memory_view(Iter, End) -> memory_view<remove_reference_t<iter_reference_t<Iter>>>;
 #endif
 
-template <typename T, size_t Extent = dynamic_extent>
-using span = memory_view<T, Extent>;
-
-
-template <typename T, size_t Extent>
-memory_view<const byte_t, Extent == dynamic_extent ? dynamic_extent : Extent * sizeof(T)>
-as_bytes(memory_view<T, Extent> sp) noexcept {
-    auto data_ptr = reinterpret_cast<const byte_t*>(sp.data());
-    auto size_bytes = sp.size_bytes();
-    constexpr auto extent = Extent == dynamic_extent ? dynamic_extent : Extent * sizeof(T);
-    return memory_view<const byte_t, extent>{data_ptr, size_bytes};
-}
-
-template <typename T, size_t Extent, typename = enable_if_t<!is_const_v<T>>>
-memory_view<byte_t, Extent == dynamic_extent ? dynamic_extent : Extent * sizeof(T)>
-as_writable_bytes(memory_view<T, Extent> sp) noexcept {
-    auto data_ptr = reinterpret_cast<byte_t*>(sp.data());
-    auto size_bytes = sp.size_bytes();
-    constexpr auto extent = Extent == dynamic_extent ? dynamic_extent : Extent * sizeof(T);
-    return memory_view<byte_t, extent>{data_ptr, size_bytes};
-}
+using byte_view = memory_view<byte_t>;
+using cbyte_view = memory_view<const byte_t>;
 
 MSTL_END_NAMESPACE__
-
 #endif // MSTL_CORE_MEMORY_MEMORY_VIEW_HPP__

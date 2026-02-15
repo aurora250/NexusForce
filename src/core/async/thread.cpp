@@ -2,6 +2,7 @@
 #include <MSTL/core/time/clocks.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <process.h>
+#include <intrin.h>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <linux/futex.h>

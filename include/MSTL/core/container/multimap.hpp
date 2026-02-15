@@ -1,178 +1,558 @@
 #ifndef MSTL_CORE_CONTAINER_MULTIMAP_HPP__
 #define MSTL_CORE_CONTAINER_MULTIMAP_HPP__
-#include "rb_tree.hpp"
+
+/**
+ * @file multimap.hpp
+ * @brief MSTL多重映射容器
+ *
+ * 此文件提供了多重映射容器的实现。
+ * multimap是一种有序关联容器，包含键值对，允许重复键。
+ * 键按严格弱序排序，支持对数时间复杂度的查找、插入和删除操作。
+ * 底层使用红黑树实现。
+ */
+
+#include "MSTL/core/container/rb_tree.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup MultiMap 多重映射
+ * @brief 基于红黑树的有序键值对容器
+ * @{
+ */
+
+/**
+ * @class multimap
+ * @brief 多重映射容器
+ * @tparam Key 键类型
+ * @tparam T 值类型
+ * @tparam Compare 键比较函数类型，默认为less<Key>
+ * @tparam Alloc 分配器类型
+ *
+ * multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。
+ * 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。
+ * 支持快速的键查找，但键可以重复出现。底层使用红黑树实现。
+ */
 template <typename Key, typename T, typename Compare = less<Key>,
 	typename Alloc = allocator<rb_tree_node<pair<const Key, T>>>>
 class multimap : public icollector<multimap<Key, T, Compare, Alloc>> {
-#ifdef MSTL_STANDARD_20__
 	static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
-#endif
-	static_assert(is_same_v<rb_tree_node<pair<const Key, T>>, typename Alloc::value_type>,
+	static_assert(
+		is_same_v<rb_tree_node<pair<const Key, T>>, typename Alloc::value_type>,
 		"allocator type mismatch.");
 	static_assert(is_object_v<T>, "multimap only contains object types.");
 
-	using base_type			= rb_tree<Key, pair<const Key, T>, select1st<pair<const Key, T>>, Compare, Alloc>;
-
 public:
-	using key_type		= Key;
-	using data_type		= T;
-	using mapped_type	= T;
-	using value_type	= pair<const Key, T>;
-	using key_compare	= Compare;
+	using key_type      = Key;  ///< 键类型
+	using data_type     = T;  ///< 数据类型
+	using mapped_type   = T;  ///< 映射值类型
+	using value_type    = pair<const Key, T>;  ///< 值类型
+	using key_compare   = Compare;  ///< 键比较函数类型
 
+	/**
+	 * @struct value_compare
+	 * @brief 值比较函数对象
+	 *
+	 * 用于比较两个键值对，实际是比较它们的键。
+	 */
 	struct value_compare {
 	private:
-		Compare comp_;
+		Compare comp_;  ///< 键比较函数
 		friend class multimap;
 
 	public:
-		bool operator ()(const value_type& x, const value_type& y) const noexcept {
-			return comp_(x.first, y.first);
+		/**
+		 * @brief 比较两个键值对
+		 * @param lhs 左侧值
+		 * @param rhs 右侧值
+		 * @return 如果lhs的键小于rhs的键返回true
+		 */
+		bool operator ()(const value_type& lhs, const value_type& rhs) const noexcept {
+			return comp_(lhs.first, rhs.first);
 		}
 	};
 
+private:
+	using base_type	= rb_tree<Key, pair<const Key, T>, select1st<pair<const Key, T>>, Compare, Alloc>;  ///< 底层红黑树类型
+
 public:
-	using size_type			= typename base_type::size_type;
-	using difference_type	= typename base_type::difference_type;
-	using pointer			= typename base_type::pointer;
-	using const_pointer		= typename base_type::const_pointer;
-	using reference			= typename base_type::reference;
-	using const_reference	= typename base_type::const_reference;
-
-	using iterator					= typename base_type::iterator;
-	using const_iterator			= typename base_type::const_iterator;
-	using reverse_iterator			= typename base_type::reverse_iterator;
-	using const_reverse_iterator	= typename base_type::const_reverse_iterator;
-
-	using allocator_type	= typename base_type::allocator_type;
+	using size_type             = typename base_type::size_type;  ///< 大小类型
+	using difference_type       = typename base_type::difference_type;  ///< 差值类型
+	using pointer               = typename base_type::pointer;  ///< 指针类型
+	using const_pointer         = typename base_type::const_pointer;  ///< 常量指针类型
+	using reference             = typename base_type::reference;  ///< 引用类型
+	using const_reference       = typename base_type::const_reference;  ///< 常量引用类型
+	using iterator                      = typename base_type::iterator;  ///< 迭代器类型
+	using const_iterator                = typename base_type::const_iterator;  ///< 常量迭代器类型
+	using reverse_iterator              = typename base_type::reverse_iterator;  ///< 反向迭代器类型
+	using const_reverse_iterator        = typename base_type::const_reverse_iterator;  ///< 常量反向迭代器类型
+	using allocator_type                = typename base_type::allocator_type;  ///< 分配器类型
 
 private:
-	base_type tree_;
-
-	template <typename Key1, typename T1, typename Compare1, typename Alloc1>
-	friend bool operator ==(const multimap<Key1, T1, Compare1, Alloc1>&,
-		const multimap<Key1, T1, Compare1, Alloc1>&) noexcept;
-	template <typename Key1, typename T1, typename Compare1, typename Alloc1>
-	friend bool operator <(const multimap<Key1, T1, Compare1, Alloc1>&,
-		const multimap<Key1, T1, Compare1, Alloc1>&) noexcept;
+	base_type tree_;  ///< 底层红黑树实例
 
 public:
-	multimap() : tree_(Compare()) {}
-	explicit multimap(const key_compare& comp) : tree_(comp) {}
+	/**
+	 * @brief 默认构造函数
+	 *
+	 * 构造一个空multimap，使用默认的比较函数。
+	 */
+	multimap()
+	: tree_(Compare()) {}
 
-	multimap(const multimap& x) : tree_(x.tree_) {}
+	/**
+	 * @brief 构造函数，指定比较函数
+	 * @param comp 比较函数对象
+	 */
+	explicit multimap(const key_compare& comp)
+	: tree_(comp) {}
 
-	multimap& operator =(const multimap& x) = default;
+	/**
+	 * @brief 拷贝构造函数
+	 * @param other 源multimap
+	 */
+	multimap(const multimap& other)
+	: tree_(other.tree_) {}
 
-	multimap(multimap&& x) noexcept(is_nothrow_move_constructible_v<base_type>)
-		: tree_(_MSTL move(x.tree_)) {}
-
-	multimap& operator =(multimap&& x) noexcept(noexcept(swap(x))) {
-		tree_ = _MSTL move(x.tree_);
+	/**
+	 * @brief 拷贝赋值运算符
+	 * @param other 源multimap
+	 * @return 自身引用
+	 */
+	multimap& operator =(const multimap& other) {
+		tree_ = other.tree_;
 		return *this;
 	}
 
-	template <typename Iterator>
-	multimap(Iterator first, Iterator last) : tree_(Compare()) {
-		tree_.insert_equal(first, last);
+	/**
+	 * @brief 移动构造函数
+	 * @param other 源multimap
+	 */
+	multimap(multimap&& other)
+	noexcept(is_nothrow_move_constructible_v<base_type>)
+	: tree_(_MSTL move(other.tree_)) {}
+
+	/**
+	 * @brief 移动赋值运算符
+	 * @param other 源multimap
+	 * @return 自身引用
+	 */
+	multimap& operator =(multimap&& other)
+	noexcept(is_nothrow_move_assignable_v<base_type>) {
+		tree_ = _MSTL move(other.tree_);
+		return *this;
 	}
+
+	/**
+	 * @brief 范围构造函数
+	 * @tparam Iterator 迭代器类型
+	 * @param first 起始迭代器
+	 * @param last 结束迭代器
+	 */
 	template <typename Iterator>
-	multimap(Iterator first, Iterator last, const key_compare& comp) : tree_(comp) {
+	multimap(Iterator first, Iterator last)
+	: tree_(Compare()) {
 		tree_.insert_equal(first, last);
 	}
 
-	multimap(std::initializer_list<value_type> l) : multimap(l.begin(), l.end()) {}
-	multimap(std::initializer_list<value_type> l, const key_compare& comp) : multimap(l.begin(), l.end(), comp) {}
+	/**
+	 * @brief 范围构造函数，指定比较函数
+	 * @tparam Iterator 迭代器类型
+	 * @param first 起始迭代器
+	 * @param last 结束迭代器
+	 * @param comp 比较函数对象
+	 */
+	template <typename Iterator>
+	multimap(Iterator first, Iterator last, const key_compare& comp)
+	: tree_(comp) {
+		tree_.insert_equal(first, last);
+	}
 
-	multimap& operator =(std::initializer_list<value_type> l) {
+	/**
+	 * @brief 初始化列表构造函数
+	 * @param ilist 初始化列表
+	 */
+	multimap(std::initializer_list<value_type> ilist)
+	: multimap(ilist.begin(), ilist.end()) {}
+
+	/**
+	 * @brief 初始化列表构造函数，指定比较函数
+	 * @param ilist 初始化列表
+	 * @param comp 比较函数对象
+	 */
+	multimap(std::initializer_list<value_type> ilist, const key_compare& comp)
+	: multimap(ilist.begin(), ilist.end(), comp) {}
+
+	/**
+	 * @brief 初始化列表赋值运算符
+	 * @param ilist 初始化列表
+	 * @return 自身引用
+	 */
+	multimap& operator =(std::initializer_list<value_type> ilist) {
 		clear();
-		insert(l.begin(), l.end());
+		insert(ilist.begin(), ilist.end());
 		return *this;
 	}
+
+	/**
+	 * @brief 析构函数
+	 */
 	~multimap() = default;
 
-	MSTL_NODISCARD iterator begin() noexcept { return tree_.begin(); }
-    MSTL_NODISCARD iterator end() noexcept { return tree_.end(); }
-    MSTL_NODISCARD const_iterator begin() const noexcept { return tree_.cbegin(); }
-    MSTL_NODISCARD const_iterator end() const noexcept { return tree_.cend(); }
-	MSTL_NODISCARD const_iterator cbegin() const noexcept { return tree_.cbegin(); }
-	MSTL_NODISCARD const_iterator cend() const noexcept { return tree_.cend(); }
-	MSTL_NODISCARD reverse_iterator rbegin() noexcept { return tree_.rbegin(); }
-    MSTL_NODISCARD reverse_iterator rend() noexcept { return tree_.rend(); }
-    MSTL_NODISCARD const_reverse_iterator rbegin() const noexcept { return tree_.rbegin(); }
-    MSTL_NODISCARD const_reverse_iterator rend() const noexcept { return tree_.rend(); }
-	MSTL_NODISCARD const_reverse_iterator crbegin() const noexcept { return tree_.crbegin(); }
-	MSTL_NODISCARD const_reverse_iterator crend() const noexcept { return tree_.crend(); }
+    /**
+     * @brief 获取起始迭代器
+     * @return 指向最小元素的迭代器
+     */
+    MSTL_NODISCARD iterator begin() noexcept {
+	    return tree_.begin();
+    }
 
-	MSTL_NODISCARD size_type size() const noexcept { return tree_.size(); }
-	MSTL_NODISCARD size_type max_size() const noexcept { return tree_.max_size(); }
-	MSTL_NODISCARD bool empty() const noexcept { return tree_.empty(); }
+    /**
+     * @brief 获取结束迭代器
+     * @return 指向最后一个元素之后位置的迭代器
+     */
+    MSTL_NODISCARD iterator end() noexcept {
+	    return tree_.end();
+    }
 
-	MSTL_NODISCARD allocator_type get_allocator() const noexcept { return allocator_type(); }
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向最小元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator begin() const noexcept {
+    return tree_.cbegin(); }
 
-	MSTL_NODISCARD key_compare key_comp() const noexcept { return tree_.key_comp(); }
-	MSTL_NODISCARD value_compare value_comp() const noexcept { return value_compare(tree_.key_comp()); }
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向最后一个元素之后位置的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator end() const noexcept {
+	    return tree_.cend();
+    }
 
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向最小元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator cbegin() const noexcept {
+	    return tree_.cbegin();
+    }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向最后一个元素之后位置的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator cend() const noexcept {
+	    return tree_.cend();
+    }
+
+    /**
+     * @brief 获取反向起始迭代器
+     * @return 指向最大元素的反向迭代器
+     */
+    MSTL_NODISCARD reverse_iterator rbegin() noexcept {
+	    return tree_.rbegin();
+    }
+
+    /**
+     * @brief 获取反向结束迭代器
+     * @return 指向最小元素之前位置的反向迭代器
+     */
+    MSTL_NODISCARD reverse_iterator rend() noexcept {
+	    return tree_.rend();
+    }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最大元素的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator rbegin() const noexcept {
+	    return tree_.rbegin();
+    }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向最小元素之前位置的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator rend() const noexcept {
+	    return tree_.rend();
+    }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最大元素的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator crbegin() const noexcept {
+	    return tree_.crbegin();
+    }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向最小元素之前位置的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator crend() const noexcept {
+	    return tree_.crend();
+    }
+
+    /**
+     * @brief 获取元素数量
+     * @return multimap中的元素数量
+     */
+    MSTL_NODISCARD size_type size() const noexcept {
+	    return tree_.size();
+    }
+
+    /**
+     * @brief 获取最大可能大小
+     * @return 最大元素数量
+     */
+    MSTL_NODISCARD size_type max_size() const noexcept {
+	    return tree_.max_size();
+    }
+
+    /**
+     * @brief 检查是否为空
+     * @return 是否为空
+     */
+    MSTL_NODISCARD bool empty() const noexcept {
+	    return tree_.empty();
+    }
+
+    /**
+     * @brief 获取键比较函数对象
+     * @return 键比较函数对象的副本
+     */
+    MSTL_NODISCARD key_compare key_comp() const noexcept {
+	    return tree_.key_comp();
+    }
+
+    /**
+     * @brief 获取值比较函数对象
+     * @return 值比较函数对象的副本
+     */
+    MSTL_NODISCARD value_compare value_comp() const noexcept {
+	    return value_compare(tree_.key_comp());
+    }
+
+	/**
+	 * @brief 在multimap中就地构造元素
+	 * @tparam Args 构造参数类型
+	 * @param args 构造参数
+	 * @return 指向插入元素的迭代器
+	 */
 	template <typename... Args>
 	iterator emplace(Args&&... args) {
 		return tree_.emplace_equal(_MSTL forward<Args>(args)...);
 	}
-	iterator insert(const value_type& x) {
-		return tree_.insert_equal(x);
-	}
-	iterator insert(value_type&& x) {
-		return tree_.insert_equal(_MSTL move(x));
+
+	/**
+	 * @brief 拷贝插入元素
+	 * @param value 要插入的值
+	 * @return 指向插入元素的迭代器
+	 */
+	iterator insert(const value_type& value) {
+		return tree_.insert_equal(value);
 	}
 
+	/**
+	 * @brief 移动插入元素
+	 * @param value 要插入的值
+	 * @return 指向插入元素的迭代器
+	 */
+	iterator insert(value_type&& value) {
+		return tree_.insert_equal(_MSTL move(value));
+	}
+
+	/**
+	 * @brief 在提示位置附近就地构造元素
+	 * @tparam Args 构造参数类型
+	 * @param position 插入位置提示
+	 * @param args 构造参数
+	 * @return 指向插入元素的迭代器
+	 */
 	template <typename... Args>
 	iterator emplace_hint(iterator position, Args&&... args) {
 		return tree_.emplace_equal_hint(position, _MSTL forward<Args>(args)...);
 	}
-	iterator insert(iterator position, const value_type& x) {
-		return tree_.insert_equal(position, x);
-	}
-	iterator insert(iterator position, value_type&& x) {
-		return tree_.insert_equal(position, _MSTL move(x));
+
+	/**
+	 * @brief 在提示位置附近拷贝插入元素
+	 * @param position 插入位置提示
+	 * @param value 要插入的值
+	 * @return 指向插入元素的迭代器
+	 */
+	iterator insert(iterator position, const value_type& value) {
+		return tree_.insert_equal(position, value);
 	}
 
+	/**
+	 * @brief 在提示位置附近移动插入元素
+	 * @param position 插入位置提示
+	 * @param value 要插入的值
+	 * @return 指向插入元素的迭代器
+	 */
+	iterator insert(iterator position, value_type&& value) {
+		return tree_.insert_equal(position, _MSTL move(value));
+	}
+
+	/**
+	 * @brief 范围插入元素
+	 * @tparam Iterator 迭代器类型
+	 * @param first 起始迭代器
+	 * @param last 结束迭代器
+	 */
 	template <typename Iterator>
 	void insert(Iterator first, Iterator last) {
 		tree_.insert_equal(first, last);
 	}
 
-	void erase(iterator position) noexcept { tree_.erase(position); }
-	size_type erase(const key_type& x) noexcept { return tree_.erase(x); }
-	void erase(iterator first, iterator last) noexcept { tree_.erase(first, last); }
-
-	void clear() noexcept { tree_.clear(); }
-
-	MSTL_NODISCARD iterator find(const key_type& x) { return tree_.find(x); }
-	MSTL_NODISCARD const_iterator find(const key_type& x) const { return tree_.find(x); }
-	MSTL_NODISCARD size_type count(const key_type& x) const { return tree_.count(x); }
-
-	MSTL_NODISCARD iterator lower_bound(const key_type& x) { return tree_.lower_bound(x); }
-	MSTL_NODISCARD const_iterator lower_bound(const key_type& x) const { return tree_.lower_bound(x); }
-	MSTL_NODISCARD iterator upper_bound(const key_type& x) { return tree_.upper_bound(x); }
-	MSTL_NODISCARD const_iterator upper_bound(const key_type& x) const { return tree_.upper_bound(x); }
-
-	MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& x) { return tree_.equal_range(x); }
-	MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& x) const {
-		return tree_.equal_range(x);
+	/**
+	 * @brief 删除指定位置的元素
+	 * @param position 要删除的位置
+	 */
+	void erase(iterator position)
+	noexcept(noexcept(tree_.erase(position))) {
+		tree_.erase(position);
 	}
 
-	void swap(multimap& x) noexcept(noexcept(tree_.swap(x.tree_))) { tree_.swap(x.tree_); }
+	/**
+	 * @brief 删除所有具有指定键的元素
+	 * @param key 要删除的键
+	 * @return 删除的元素数量
+	 */
+	size_type erase(const key_type& key)
+	noexcept(noexcept(tree_.erase(key))) {
+		return tree_.erase(key);
+	}
 
+	/**
+	 * @brief 删除指定范围内的元素
+	 * @param first 起始迭代器
+	 * @param last 结束迭代器
+	 */
+	void erase(iterator first, iterator last)
+	noexcept(noexcept(tree_.erase(first, last))) {
+		tree_.erase(first, last);
+	}
+
+	/**
+	 * @brief 清空multimap
+	 */
+	void clear()
+	noexcept(noexcept(tree_.clear())) {
+		tree_.clear();
+	}
+
+	/**
+	 * @brief 查找具有指定键的元素
+	 * @param key 要查找的键
+	 * @return 指向第一个匹配元素的迭代器，未找到则返回end()
+	 */
+	MSTL_NODISCARD iterator find(const key_type& key) {
+	    return tree_.find(key);
+    }
+
+	/**
+	 * @brief 查找具有指定键的常量元素
+	 * @param key 要查找的键
+	 * @return 指向第一个匹配元素的常量迭代器，未找到则返回cend()
+	 */
+	MSTL_NODISCARD const_iterator find(const key_type& key) const {
+	    return tree_.find(key);
+    }
+
+	/**
+	 * @brief 统计具有指定键的元素数量
+	 * @param key 要统计的键
+	 * @return 匹配的元素数量
+	 */
+	MSTL_NODISCARD size_type count(const key_type& key) const {
+	    return tree_.count(key);
+    }
+
+	/**
+	 * @brief 获取第一个不小于指定键的元素位置
+	 * @param key 键值
+	 * @return 指向第一个不小于key的元素的迭代器
+	 */
+	MSTL_NODISCARD iterator lower_bound(const key_type& key) {
+	    return tree_.lower_bound(key);
+    }
+
+	/**
+	 * @brief 获取第一个不小于指定键的常量元素位置
+	 * @param key 键值
+	 * @return 指向第一个不小于key的元素的常量迭代器
+	 */
+	MSTL_NODISCARD const_iterator lower_bound(const key_type& key) const {
+	    return tree_.lower_bound(key);
+    }
+
+	/**
+	 * @brief 获取第一个大于指定键的元素位置
+	 * @param key 键值
+	 * @return 指向第一个大于key的元素的迭代器
+	 */
+	MSTL_NODISCARD iterator upper_bound(const key_type& key) {
+	    return tree_.upper_bound(key);
+    }
+
+	/**
+	 * @brief 获取第一个大于指定键的常量元素位置
+	 * @param key 键值
+	 * @return 指向第一个大于key的元素的常量迭代器
+	 */
+	MSTL_NODISCARD const_iterator upper_bound(const key_type& key) const {
+    	return tree_.upper_bound(key);
+    }
+
+	/**
+	 * @brief 获取等于指定键的元素范围
+	 * @param key 键值
+	 * @return 包含lower_bound和upper_bound的pair
+	 */
+	MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& key) {
+    	return tree_.equal_range(key);
+    }
+
+	/**
+	 * @brief 获取等于指定键的常量元素范围
+	 * @param key 键值
+	 * @return 包含lower_bound和upper_bound的pair
+	 */
+	MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
+    	return tree_.equal_range(key);
+    }
+
+	/**
+	 * @brief 交换两个multimap的内容
+	 * @param other 要交换的另一个multimap
+	 */
+	void swap(multimap& other)
+	noexcept(is_nothrow_swappable_v<base_type>) {
+		tree_.swap(other.tree_);
+	}
+
+	/**
+	 * @brief 相等比较操作符
+	 * @param rhs 右侧multimap
+	 * @return 如果两个multimap大小相等且对应元素相等返回true
+	 */
 	MSTL_NODISCARD bool operator ==(const multimap& rhs) const
     noexcept(noexcept(tree_ == rhs.tree_)) {
 		return tree_ == rhs.tree_;
 	}
+
+	/**
+	 * @brief 小于比较操作符
+	 * @param rhs 右侧multimap
+	 * @return 按字典序比较结果
+	 */
 	MSTL_NODISCARD bool operator <(const multimap& rhs) const
 	noexcept(noexcept(tree_ < rhs.tree_)) {
 		return tree_ < rhs.tree_;
 	}
 };
+
 #ifdef MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename Iterator, typename Compare, typename Alloc
 	= allocator<pair<const iter_map_key_t<Iterator>, iter_map_value_t<Iterator>>>>
@@ -191,6 +571,8 @@ multimap<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, less<iter_map_key
 template <typename Key, typename T, typename Alloc>
 multimap(std::initializer_list<pair<Key, T>>, Alloc) -> multimap<Key, T, less<Key>, Alloc>;
 #endif
+
+/** @} */ // MultiMap
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONTAINER_MULTIMAP_HPP__

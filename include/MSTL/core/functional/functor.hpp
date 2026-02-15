@@ -23,12 +23,11 @@ MSTL_BEGIN_NAMESPACE__
  * @brief 一元函数适配器基类
  * @tparam Arg 参数类型
  * @tparam Result 返回值类型
- * @deprecated 已弃用
  *
  * 提供标准的一元函数类型定义，用于旧式函数适配器。
  */
 template <typename Arg, typename Result>
-struct MSTL_FUNC_ADAPTER_DEPRECATE unary_function {
+struct unary_function {
 	using argument_type = Arg;     ///< 参数类型
 	using result_type   = Result;  ///< 返回值类型
 };
@@ -39,12 +38,11 @@ struct MSTL_FUNC_ADAPTER_DEPRECATE unary_function {
  * @tparam Arg1 第一个参数类型
  * @tparam Arg2 第二个参数类型
  * @tparam Result 返回值类型
- * @deprecated 已弃用
  *
  * 提供标准的二元函数类型定义，用于旧式函数适配器。
  */
 template <typename Arg1, typename Arg2, typename Result>
-struct MSTL_FUNC_ADAPTER_DEPRECATE binary_function {
+struct binary_function {
 	using first_argument_type  = Arg1;    ///< 第一个参数类型
 	using second_argument_type = Arg2;    ///< 第二个参数类型
 	using result_type          = Result;  ///< 返回值类型

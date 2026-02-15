@@ -388,7 +388,6 @@ struct output_iterator_tag {
 /**
  * @struct forward_iterator_tag
  * @brief 前向迭代器标签
- * @extends input_iterator_tag
  *
  * 表示前向迭代器类别，在输入迭代器基础上增加功能。
  * 支持：
@@ -405,7 +404,6 @@ struct forward_iterator_tag : input_iterator_tag {
 /**
  * @struct bidirectional_iterator_tag
  * @brief 双向迭代器标签
- * @extends forward_iterator_tag
  *
  * 表示双向迭代器类别，在前向迭代器基础上增加反向移动能力。
  * 支持：
@@ -421,7 +419,6 @@ struct bidirectional_iterator_tag : forward_iterator_tag {
 /**
  * @struct random_access_iterator_tag
  * @brief 随机访问迭代器标签
- * @extends bidirectional_iterator_tag
  *
  * 表示随机访问迭代器类别，在双向迭代器基础上增加随机访问能力。
  * 支持：
@@ -439,7 +436,6 @@ struct random_access_iterator_tag : bidirectional_iterator_tag {
 /**
  * @struct contiguous_iterator_tag
  * @brief 连续迭代器标签
- * @extends random_access_iterator_tag
  *
  * 表示连续迭代器类别，在随机访问迭代器基础上保证元素在内存中连续存储。
  * 支持：

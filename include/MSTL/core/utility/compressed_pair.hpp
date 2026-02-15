@@ -31,20 +31,22 @@ template <typename IfEmpty, typename T, bool Compressed = is_empty_v<IfEmpty> &&
 struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Compressed>> {
     using base_type = IfEmpty;  ///< 基类类型
 
-    T value{};  ///< 存储的值
+    T value;  ///< 存储的值
 
 	/**
 	 * @brief 默认构造函数
 	 */
     constexpr compressed_pair()
-	noexcept(is_nothrow_default_constructible_v<T>) = default;
+	noexcept(is_nothrow_default_constructible_v<T>)
+	: value() {}
 
 	/**
 	 * @brief 拷贝构造函数
 	 * @param p 要拷贝的压缩对
 	 */
     constexpr compressed_pair(const compressed_pair& p)
-	noexcept(is_nothrow_copy_constructible_v<T>) : value(p.value) {}
+	noexcept(is_nothrow_copy_constructible_v<T>)
+	: value(p.value) {}
 
 	/**
 	 * @brief 拷贝赋值运算符
@@ -62,7 +64,8 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
 	 * @param p 要移动的压缩对
 	 */
     constexpr compressed_pair(compressed_pair&& p)
-	noexcept(is_nothrow_move_constructible_v<T>) : value(_MSTL move(p.value)) {}
+	noexcept(is_nothrow_move_constructible_v<T>)
+	: value(_MSTL move(p.value)) {}
 
 	/**
 	 * @brief 移动赋值运算符
@@ -123,7 +126,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
 	 * @param rhs 要交换的压缩对
 	 */
     constexpr void swap(compressed_pair& rhs)
-        noexcept(is_nothrow_swappable_v<T>) {
+	noexcept(is_nothrow_swappable_v<T>) {
         _MSTL swap(value, rhs.value);
     }
 
@@ -157,6 +160,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
     }
 };
 
+
 /**
  * @brief 压缩对特化，未启用EBCO优化
  * @tparam IfEmpty 第一个类型
@@ -176,7 +180,7 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 	noexcept(conjunction_v<
 		is_nothrow_default_constructible<IfEmpty>,
 		is_nothrow_default_constructible<T>>)
-	= default;
+	: no_compressed(), value() {}
 
 	/**
 	 * @brief 拷贝构造函数
@@ -250,8 +254,7 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 	noexcept(conjunction_v<
 		is_nothrow_constructible<IfEmpty, ToEmpty>,
 		is_nothrow_constructible<T, Args...>>)
-	: no_compressed(_MSTL forward<ToEmpty>(first)),
-	  value(_MSTL forward<Args>(args)...) {}
+	: no_compressed(_MSTL forward<ToEmpty>(first)), value(_MSTL forward<Args>(args)...) {}
 
 	/**
      * @brief 获取基类引用
@@ -308,7 +311,6 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
 		return this->no_compressed < y.no_compressed || (!(y.no_compressed < this->no_compressed) && this->value < y.value);
 	}
 };
-
 
 #if MSTL_SUPPORT_DEDUCTION_GUIDES__
 template <typename IfEmpty, typename T>

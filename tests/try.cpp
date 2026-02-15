@@ -610,7 +610,7 @@ void test_zlib() {
                     100.0 * compressed.size() / original.size());
 
         auto decompressed = zlib_compressor::decompress(
-            span<const byte_t>(compressed.data(), compressed.size())
+            cbyte_view(compressed.data(), compressed.size())
         );
 
         string result(reinterpret_cast<const char*>(decompressed.data()), decompressed.size());
@@ -642,7 +642,7 @@ void test_zlib() {
             "Final chunk."
         };
 
-        bvector all_compressed;
+        byte_vector all_compressed;
         string original;
 
         for (size_t i = 0; i < chunks.size(); ++i) {
@@ -658,7 +658,7 @@ void test_zlib() {
 
         decompressor decomp;
         auto decompressed = decomp.decompress(
-            span<const byte_t>(all_compressed.data(), all_compressed.size()), true
+            cbyte_view(all_compressed.data(), all_compressed.size()), true
         );
 
         string result(reinterpret_cast<const char*>(decompressed.data()),
@@ -667,7 +667,7 @@ void test_zlib() {
     }
     {
         const size_t data_size = 1024 * 1024;
-        bvector large_data(data_size);
+        byte_vector large_data(data_size);
 
         for (size_t i = 0; i < data_size; ++i) {
             large_data[i] = static_cast<byte_t>(i % 256);
@@ -681,7 +681,7 @@ void test_zlib() {
                     100.0 * compressed.size() / data_size);
 
         auto decompressed = zlib_compressor::decompress(
-            span<const byte_t>(compressed.data(), compressed.size()),
+            cbyte_view(compressed.data(), compressed.size()),
             data_size
         );
 
@@ -698,7 +698,7 @@ void test_zlib() {
 
         auto compressed = comp.compress(data.view(), true);
         auto decompressed = decomp.decompress(
-            span<const byte_t>(compressed.data(), compressed.size()), true
+            cbyte_view(compressed.data(), compressed.size()), true
         );
 
         println("Compression:");

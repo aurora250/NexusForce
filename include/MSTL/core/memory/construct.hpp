@@ -58,11 +58,15 @@ noexcept(is_nothrow_destructible_v<T>) {
  * 遍历迭代器范围，对每个元素调用析构函数。
  * 仅当迭代器值类型非平凡可析构时才启用此重载。
  */
-template <typename Iterator, enable_if_t<
-    is_iter_v<Iterator> && !is_trivially_destructible_v<iter_value_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 void destroy(Iterator first, Iterator last)
+template <typename Iterator>
+MSTL_CONSTEXPR20
+enable_if_t<is_iter_v<Iterator> && !is_trivially_destructible_v<iter_value_t<Iterator>>>
+destroy(Iterator first, Iterator last)
 noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
-    for (; first < last; ++first) _MSTL destroy(&*first);
+    for (; first < last; ++first) {
+        _MSTL destroy(&*first);
+    }
+    return;
 }
 
 /**
@@ -74,9 +78,12 @@ noexcept(is_nothrow_destructible_v<iter_value_t<Iterator>>) {
  * 对于平凡可析构的类型，不需要执行任何操作，直接返回。
  * 这是对平凡可析构类型的优化。
  */
-template <typename Iterator, enable_if_t<
-    is_iter_v<Iterator> && is_trivially_destructible_v<iter_value_t<Iterator>>, int> = 0>
-MSTL_CONSTEXPR20 void destroy(Iterator first, Iterator last) noexcept {}
+template <typename Iterator>
+MSTL_CONSTEXPR20
+enable_if_t<is_iter_v<Iterator> && is_trivially_destructible_v<iter_value_t<Iterator>>>
+destroy(Iterator first, Iterator last) noexcept {
+    return;
+}
 
 /** @} */ // InplaceMemoryFunction
 

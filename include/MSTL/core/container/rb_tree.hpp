@@ -1,5 +1,15 @@
 #ifndef MSTL_CORE_CONTAINER_RB_TREE_HPP__
 #define MSTL_CORE_CONTAINER_RB_TREE_HPP__
+
+/**
+ * @file rb_tree.hpp
+ * @brief MSTL红黑树容器
+ *
+ * 此文件提供了红黑树容器的实现。
+ * 红黑树是一种自平衡二叉搜索树，保证了插入、删除和查找操作的对数时间复杂度。
+ * 作为关联式容器的底层实现。
+ */
+
 #include "MSTL/core/algorithm/compare.hpp"
 #include "MSTL/core/interface/icollector.hpp"
 #include "MSTL/core/interface/iiterator.hpp"
@@ -9,125 +19,182 @@
 #include "MSTL/core/utility/pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup RBTree 红黑树
+ * @brief 自平衡二叉搜索树实现
+ * @{
+ */
+
+/// 红黑树节点颜色常量：红色
 MSTL_INLINE17 constexpr bool RB_TREE_RED = false;
+
+/// 红黑树节点颜色常量：黑色
 MSTL_INLINE17 constexpr bool RB_TREE_BLACK = true;
 
 
+/**
+ * @struct rb_tree_node_base
+ * @brief 红黑树节点基类
+ *
+ * 包含红黑树节点所需的指针和颜色信息，不包含具体数据。
+ * 提供最小值和最大值的静态辅助函数。
+ */
 struct rb_tree_node_base {
-    using color_type = bool;
-    using base_ptr = rb_tree_node_base*;
+    using color_type = bool;  ///< 颜色类型
+    using base_ptr = rb_tree_node_base*;  ///< 基类指针类型
 
-    color_type color_ = RB_TREE_RED;
-    base_ptr parent_ = nullptr;
-    base_ptr left_ = nullptr;
-    base_ptr right_ = nullptr;
+    color_type color_ = RB_TREE_RED;  ///< 节点颜色，默认为红色
+    base_ptr parent_ = nullptr;       ///< 父节点指针
+    base_ptr left_ = nullptr;         ///< 左子节点指针
+    base_ptr right_ = nullptr;        ///< 右子节点指针
 
-    static base_ptr minimum(base_ptr x) noexcept {
-        while (x->left_ != nullptr) {
-            x = x->left_;
+    /**
+     * @brief 获取子树中的最小节点
+     * @param root 子树根节点
+     * @return 最小节点指针
+     */
+    static base_ptr minimum(base_ptr root) noexcept {
+        while (root->left_ != nullptr) {
+            root = root->left_;
         }
-        return x;
+        return root;
     }
 
-    static base_ptr maximum(base_ptr x) noexcept {
-        while (x->right_ != nullptr) {
-            x = x->right_;
+    /**
+     * @brief 获取子树中的最大节点
+     * @param root 子树根节点
+     * @return 最大节点指针
+     */
+    static base_ptr maximum(base_ptr root) noexcept {
+        while (root->right_ != nullptr) {
+            root = root->right_;
         }
-        return x;
+        return root;
     }
 };
 
 
+/**
+ * @brief 红黑树左旋转
+ * @param axis 旋转轴节点
+ * @param root 树根节点引用
+ *
+ * 执行左旋转操作，保持红黑树性质。
+ */
 MSTL_ALWAYS_INLINE_INLINE void
-rb_tree_rotate_left(rb_tree_node_base* x, rb_tree_node_base*& root) noexcept {
-    rb_tree_node_base* y = x->right_;
-    x->right_ = y->left_;
+rb_tree_rotate_left(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
+    rb_tree_node_base* y = axis->right_;
+    axis->right_ = y->left_;
     if (y->left_ != nullptr) {
-        y->left_->parent_ = x;
+        y->left_->parent_ = axis;
     }
 
-    y->parent_ = x->parent_;
+    y->parent_ = axis->parent_;
 
-    if (x == root) {
+    if (axis == root) {
         root = y;
-    } else if (x == x->parent_->left_) {
-        x->parent_->left_ = y;
+    } else if (axis == axis->parent_->left_) {
+        axis->parent_->left_ = y;
     } else {
-        x->parent_->right_ = y;
+        axis->parent_->right_ = y;
     }
 
-    y->left_ = x;
-    x->parent_ = y;
+    y->left_ = axis;
+    axis->parent_ = y;
 }
 
+/**
+ * @brief 红黑树右旋转
+ * @param axis 旋转轴节点
+ * @param root 树根节点引用
+ *
+ * 执行右旋转操作，保持红黑树性质。
+ */
 MSTL_ALWAYS_INLINE_INLINE void
-rb_tree_rotate_right(rb_tree_node_base* x, rb_tree_node_base*& root) noexcept {
-    rb_tree_node_base* y = x->left_;
-    x->left_ = y->right_;
+rb_tree_rotate_right(rb_tree_node_base* axis, rb_tree_node_base*& root) noexcept {
+    rb_tree_node_base* y = axis->left_;
+    axis->left_ = y->right_;
     if (y->right_ != nullptr) {
-        y->right_->parent_ = x;
+        y->right_->parent_ = axis;
     }
-    y->parent_ = x->parent_;
+    y->parent_ = axis->parent_;
 
-    if (x == root) {
+    if (axis == root) {
         root = y;
-    } else if (x == x->parent_->right_) {
-        x->parent_->right_ = y;
+    } else if (axis == axis->parent_->right_) {
+        axis->parent_->right_ = y;
     } else {
-        x->parent_->left_ = y;
+        axis->parent_->left_ = y;
     }
 
-    y->right_ = x;
-    x->parent_ = y;
+    y->right_ = axis;
+    axis->parent_ = y;
 }
 
+/**
+ * @brief 插入节点后重新平衡红黑树
+ * @param insert 新插入的节点
+ * @param root 树根节点引用
+ *
+ * 通过旋转和重新着色恢复红黑树的平衡性质。
+ */
 MSTL_ALWAYS_INLINE_INLINE void
-rb_tree_rebalance(rb_tree_node_base* x, rb_tree_node_base*& root) noexcept {
-    x->color_ = RB_TREE_RED;
+rb_tree_insert_rebalance(rb_tree_node_base* insert, rb_tree_node_base*& root) noexcept {
+    insert->color_ = RB_TREE_RED;
 
-    while (x != root && x->parent_->color_ == RB_TREE_RED) {
-        if (x->parent_ == x->parent_->parent_->left_) {
-            rb_tree_node_base* y = x->parent_->parent_->right_;
+    while (insert != root && insert->parent_->color_ == RB_TREE_RED) {
+        if (insert->parent_ == insert->parent_->parent_->left_) {
+            rb_tree_node_base* y = insert->parent_->parent_->right_;
 
             if (y != nullptr && y->color_ == RB_TREE_RED) {
-                x->parent_->color_ = RB_TREE_BLACK;
+                insert->parent_->color_ = RB_TREE_BLACK;
                 y->color_ = RB_TREE_BLACK;
-                x->parent_->parent_->color_ = RB_TREE_RED;
-                x = x->parent_->parent_;
+                insert->parent_->parent_->color_ = RB_TREE_RED;
+                insert = insert->parent_->parent_;
             } else {
-                if (x == x->parent_->right_) {
-                    x = x->parent_;
-                    _MSTL rb_tree_rotate_left(x, root);
+                if (insert == insert->parent_->right_) {
+                    insert = insert->parent_;
+                    _MSTL rb_tree_rotate_left(insert, root);
                 }
-                x->parent_->color_ = RB_TREE_BLACK;
-                x->parent_->parent_->color_ = RB_TREE_RED;
-                _MSTL rb_tree_rotate_right(x->parent_->parent_, root);
+                insert->parent_->color_ = RB_TREE_BLACK;
+                insert->parent_->parent_->color_ = RB_TREE_RED;
+                _MSTL rb_tree_rotate_right(insert->parent_->parent_, root);
             }
         } else {
-            rb_tree_node_base* y = x->parent_->parent_->left_;
+            rb_tree_node_base* y = insert->parent_->parent_->left_;
             if (y != nullptr && y->color_ == RB_TREE_RED) {
-                x->parent_->color_ = RB_TREE_BLACK;
+                insert->parent_->color_ = RB_TREE_BLACK;
                 y->color_ = RB_TREE_BLACK;
-                x->parent_->parent_->color_ = RB_TREE_RED;
-                x = x->parent_->parent_;
+                insert->parent_->parent_->color_ = RB_TREE_RED;
+                insert = insert->parent_->parent_;
             } else {
-                if (x == x->parent_->left_) {
-                    x = x->parent_;
-                    _MSTL rb_tree_rotate_right(x, root);
+                if (insert == insert->parent_->left_) {
+                    insert = insert->parent_;
+                    _MSTL rb_tree_rotate_right(insert, root);
                 }
-                x->parent_->color_ = RB_TREE_BLACK;
-                x->parent_->parent_->color_ = RB_TREE_RED;
-                _MSTL rb_tree_rotate_left(x->parent_->parent_, root);
+                insert->parent_->color_ = RB_TREE_BLACK;
+                insert->parent_->parent_->color_ = RB_TREE_RED;
+                _MSTL rb_tree_rotate_left(insert->parent_->parent_, root);
             }
         }
     }
     root->color_ = RB_TREE_BLACK;
 }
 
+/**
+ * @brief 删除节点后重新平衡红黑树
+ * @param erase 要删除的节点
+ * @param root 树根节点引用
+ * @param leftmost 最左节点引用
+ * @param rightmost 最右节点引用
+ * @return 实际被删除的节点
+ *
+ * 执行节点删除后的重新平衡操作，并更新最左最右节点。
+ */
 MSTL_ALWAYS_INLINE_INLINE rb_tree_node_base*
-rb_tree_rebalance_for_erase(rb_tree_node_base* z, rb_tree_node_base*& root,
+rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
                             rb_tree_node_base*& leftmost, rb_tree_node_base*& rightmost) noexcept {
-    rb_tree_node_base* y = z;
+    rb_tree_node_base* y = erase;
     rb_tree_node_base* x;
     rb_tree_node_base* x_parent;
 
@@ -145,61 +212,61 @@ rb_tree_rebalance_for_erase(rb_tree_node_base* z, rb_tree_node_base*& root,
         }
     }
 
-    if (y != z) {
-        z->left_->parent_ = y;
-        y->left_ = z->left_;
+    if (y != erase) {
+        erase->left_->parent_ = y;
+        y->left_ = erase->left_;
 
-        if (y != z->right_) {
+        if (y != erase->right_) {
             x_parent = y->parent_;
             if (x != nullptr) {
                 x->parent_ = y->parent_;
             }
 
             y->parent_->left_ = x;
-            y->right_ = z->right_;
-            z->right_->parent_ = y;
+            y->right_ = erase->right_;
+            erase->right_->parent_ = y;
         } else {
             x_parent = y;
         }
 
-        if (root == z) {
+        if (root == erase) {
             root = y;
-        } else if (z->parent_->left_ == z) {
-            z->parent_->left_ = y;
+        } else if (erase->parent_->left_ == erase) {
+            erase->parent_->left_ = y;
         } else {
-            z->parent_->right_ = y;
+            erase->parent_->right_ = y;
         }
 
-        y->parent_ = z->parent_;
-        _MSTL swap(y->color_, z->color_);
-        y = z;
+        y->parent_ = erase->parent_;
+        _MSTL swap(y->color_, erase->color_);
+        y = erase;
     } else {
         x_parent = y->parent_;
         if (x != nullptr) {
             x->parent_ = y->parent_;
         }
 
-        if (root == z) {
+        if (root == erase) {
             root = x;
         } else {
-            if (z->parent_->left_ == z) {
-                z->parent_->left_ = x;
+            if (erase->parent_->left_ == erase) {
+                erase->parent_->left_ = x;
             } else {
-                z->parent_->right_ = x;
+                erase->parent_->right_ = x;
             }
         }
 
-        if (leftmost == z) {
-            if (z->right_ == nullptr) {
-                leftmost = z->parent_;
+        if (leftmost == erase) {
+            if (erase->right_ == nullptr) {
+                leftmost = erase->parent_;
             } else {
                 leftmost = rb_tree_node_base::minimum(x);
             }
         }
 
-        if (rightmost == z) {
-            if (z->left_ == nullptr) {
-                rightmost = z->parent_;
+        if (rightmost == erase) {
+            if (erase->left_ == nullptr) {
+                rightmost = erase->parent_;
             } else {
                 rightmost = rb_tree_node_base::maximum(x);
             }
@@ -210,7 +277,12 @@ rb_tree_rebalance_for_erase(rb_tree_node_base* z, rb_tree_node_base*& root,
         while (x != root && (x == nullptr || x->color_ == RB_TREE_BLACK)) {
             if (x == x_parent->left_) {
                 rb_tree_node_base* w = x_parent->right_;
-                if (!w) continue;
+
+                if (w == nullptr) {
+                    x = x_parent;
+                    x_parent = x_parent->parent_;
+                    continue;
+                }
 
                 if (w->color_ == RB_TREE_RED) {
                     w->color_ = RB_TREE_BLACK;
@@ -239,6 +311,13 @@ rb_tree_rebalance_for_erase(rb_tree_node_base* z, rb_tree_node_base*& root,
                 }
             } else {
                 rb_tree_node_base* w = x_parent->left_;
+
+                if (w == nullptr) {
+                    x = x_parent;
+                    x_parent = x_parent->parent_;
+                    continue;
+                }
+
                 if (w->color_ == RB_TREE_RED) {
                     w->color_ = RB_TREE_BLACK;
                     x_parent->color_ = RB_TREE_RED;
@@ -281,25 +360,44 @@ rb_tree_rebalance_for_erase(rb_tree_node_base* z, rb_tree_node_base*& root,
 }
 
 
+/**
+ * @struct rb_tree_node
+ * @brief 红黑树数据节点
+ * @tparam T 数据类型
+ *
+ * 继承自节点基类，添加数据成员。
+ */
 template <typename T>
 struct rb_tree_node : rb_tree_node_base {
-    T data;
+    T data;  ///< 节点存储的数据
 
+    /**
+     * @brief 默认构造函数
+     */
     rb_tree_node()
     noexcept(is_nothrow_default_constructible_v<T>)
     : data() {}
 };
 
 
+/**
+ * @struct rb_tree_base_iterator
+ * @brief 红黑树迭代器基类
+ *
+ * 提供递增和递减操作的基本实现。
+ */
 struct rb_tree_base_iterator {
 public:
-    using iterator_category = bidirectional_iterator_tag;
+    using iterator_category = bidirectional_iterator_tag;  ///< 双向迭代器
 
 protected:
-    using base_ptr = rb_tree_node_base::base_ptr;
+    using base_ptr = rb_tree_node_base::base_ptr;  ///< 基类指针类型
 
-    base_ptr node_ = nullptr;
+    base_ptr node_ = nullptr;  ///< 当前节点指针
 
+    /**
+     * @brief 递增操作（移动到中序遍历的后继节点）
+     */
     void increment() noexcept {
         if (node_->right_ != nullptr) {
             node_ = node_->right_;
@@ -318,6 +416,9 @@ protected:
         }
     }
 
+    /**
+     * @brief 递减操作（移动到中序遍历的前驱节点）
+     */
     void decrement() noexcept {
         if (node_->color_ == RB_TREE_RED &&
             node_->parent_ != nullptr &&
@@ -341,23 +442,31 @@ protected:
 };
 
 
+/**
+ * @struct rb_tree_iterator
+ * @brief 红黑树迭代器
+ * @tparam IsConst 是否常量迭代器
+ * @tparam RbTree 红黑树类型
+ *
+ * 提供对红黑树元素的迭代访问。
+ */
 template <bool IsConst, typename RbTree>
 struct rb_tree_iterator : rb_tree_base_iterator, iiterator<rb_tree_iterator<IsConst, RbTree>> {
 public:
-    using container_type	= RbTree;
-    using value_type		= typename container_type::value_type;
-    using size_type			= typename container_type::size_type;
-    using difference_type	= typename container_type::difference_type;
-    using iterator_category = rb_tree_base_iterator::iterator_category;
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
+    using container_type	= RbTree;  ///< 容器类型
+    using value_type		= typename container_type::value_type;  ///< 值类型
+    using size_type			= typename container_type::size_type;  ///< 大小类型
+    using difference_type	= typename container_type::difference_type;  ///< 差值类型
+    using iterator_category = rb_tree_base_iterator::iterator_category;  ///< 迭代器类别（双向）
+    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
+    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
 
 private:
-    using base_type = rb_tree_base_iterator;
-    using node_type = rb_tree_node<value_type>;
-    using link_type = node_type*;
+    using base_type = rb_tree_base_iterator;  ///< 基类类型
+    using node_type = rb_tree_node<value_type>;  ///< 节点类型
+    using link_type = node_type*;  ///< 节点指针类型
 
-    const container_type* container_ = nullptr;
+    const container_type* container_ = nullptr;  ///< 关联容器指针
 
     template <typename, typename, typename, typename, typename>
     friend class rb_tree;
@@ -371,9 +480,18 @@ public:
     rb_tree_iterator(rb_tree_iterator&&) noexcept = default;
     rb_tree_iterator& operator =(rb_tree_iterator&&) noexcept = default;
 
+    /**
+     * @brief 构造函数
+     * @param ptr 节点指针
+     * @param tree 容器指针
+     */
     rb_tree_iterator(node_type* ptr, const container_type* tree) noexcept
     : container_(tree) { node_ = ptr; }
 
+    /**
+     * @brief 解引用操作
+     * @return 当前元素的引用
+     */
     MSTL_NODISCARD reference dereference() const noexcept {
         MSTL_DEBUG_VERIFY(node_ && container_, "Attempting to dereference on a null pointer");
         link_type link = link_type(node_);
@@ -383,159 +501,289 @@ public:
         return link->data;
     }
 
+    /**
+     * @brief 递增操作
+     */
     MSTL_CONSTEXPR20 void increment() noexcept {
         MSTL_DEBUG_VERIFY(node_ && container_, "Attempting to increment a null pointer");
         MSTL_DEBUG_VERIFY(link_type(node_) != container_->header_, "Attempting to increment out of boundary");
         base_type::increment();
     }
 
+    /**
+     * @brief 递减操作
+     */
     MSTL_CONSTEXPR20 void decrement() noexcept {
         MSTL_DEBUG_VERIFY(node_ && container_, "Attempting to decrement a null pointer");
         MSTL_DEBUG_VERIFY(node_ != container_->header_, "Attempting to decrement out of boundary");
         base_type::decrement();
     }
 
+    /**
+     * @brief 相等比较
+     * @param rhs 右侧迭代器
+     * @return 是否相等
+     */
     MSTL_NODISCARD bool equal(const rb_tree_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return node_ == rhs.node_;
     }
 
+    /**
+     * @brief 获取底层指针
+     * @return 当前节点指针
+     */
     MSTL_NODISCARD pointer base() const noexcept {
         return node_;
     }
 
+    /**
+     * @brief 获取关联容器
+     * @return 关联容器指针
+     */
     MSTL_NODISCARD const container_type* container() const noexcept {
         return container_;
     }
 };
 
 
-template <
-    typename Key, typename Value,
+/**
+ * @class rb_tree
+ * @brief 红黑树容器
+ * @tparam Key 键类型
+ * @tparam Value 值类型
+ * @tparam KeyOfValue 从值中提取键的函数对象
+ * @tparam Compare 键比较函数对象
+ * @tparam Alloc 分配器类型
+ *
+ * 红黑树是一种自平衡二叉搜索树，作为关联式容器的底层实现。
+ */
+template <typename Key, typename Value,
     typename KeyOfValue, typename Compare,
-    typename Alloc = allocator<rb_tree_node<Value>>
->
+    typename Alloc = allocator<rb_tree_node<Value>>>
 class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
 
-private:
-    using base_node = rb_tree_node_base;
-    using link_node = rb_tree_node<Value>;
-    using base_ptr  = base_node*;
-    using link_type = link_node*;
-
 public:
-    using key_type = Key;
-    using color_type = bool;
+    using key_type = Key;  ///< 键类型
+    using color_type = bool;  ///< 颜色类型
 
-    MSTL_BUILD_TYPE_ALIAS(Value)
-    using iterator                  = rb_tree_iterator<false, rb_tree>;
-    using const_iterator            = rb_tree_iterator<true, rb_tree>;
-    using reverse_iterator          = _MSTL reverse_iterator<iterator>;
-    using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
-
-    using allocator_type = Alloc;
+    using value_type = Value;  ///< 值类型
+    using pointer = Value*;  ///< 指针类型
+    using reference = Value&;  ///< 引用类型
+    using const_pointer = const Value*;  ///< 常量指针类型
+    using const_reference = const Value&;  ///< 常量引用类型
+    using size_type = size_t;  ///< 大小类型
+    using difference_type = ptrdiff_t;  ///< 差值类型
+    using iterator                  = rb_tree_iterator<false, rb_tree>;  ///< 迭代器类型
+    using const_iterator            = rb_tree_iterator<true, rb_tree>;   ///< 常量迭代器类型
+    using reverse_iterator          = _MSTL reverse_iterator<iterator>;  ///< 反向迭代器类型
+    using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
+    using allocator_type            = Alloc;  ///< 分配器类型
 
 private:
-    link_type header_ = nullptr;
-    Compare key_compare_{};
-    KeyOfValue extracter_{};
-    compressed_pair<allocator_type, size_t> size_pair_{ default_construct_tag{}, 0 };
+    using base_node = rb_tree_node_base;  ///< 节点基类类型
+    using link_node = rb_tree_node<Value>;  ///< 数据节点类型
+    using base_ptr  = base_node*;  ///< 基类指针类型
+    using link_type = link_node*;  ///< 数据节点指针类型
+
+    link_type header_ = nullptr;  ///< 头节点
+    Compare key_compare_{};  ///< 键比较函数对象
+    KeyOfValue extracter_{};  ///< 值提取键函数对象
+    compressed_pair<allocator_type, size_t> size_pair_{ default_construct_tag{}, 0 };  ///< 压缩存储分配器和大小
 
     template <bool, typename> friend struct rb_tree_iterator;
 
 private:
+    /**
+     * @brief 获取根节点
+     * @return 根节点引用
+     */
+    link_type& root() const noexcept {
+        return reinterpret_cast<link_type&>(header_->parent_);
+    }
+
+    /**
+     * @brief 获取最左节点
+     * @return 最左节点引用
+     */
+    link_type& leftmost() const noexcept {
+        return reinterpret_cast<link_type&>(header_->left_);
+    }
+
+    /**
+     * @brief 获取最右节点
+     * @return 最右节点引用
+     */
+    link_type& rightmost() const noexcept {
+        return reinterpret_cast<link_type&>(header_->right_);
+    }
+
+    /**
+     * @brief 获取节点的左子节点
+     * @param ptr 节点指针
+     * @return 左子节点引用
+     */
+    static link_type& left(link_type ptr) noexcept {
+        return reinterpret_cast<link_type&>(ptr->left_);
+    }
+
+    /**
+     * @brief 获取节点的右子节点
+     * @param ptr 节点指针
+     * @return 右子节点引用
+     */
+    static link_type& right(link_type ptr) noexcept {
+        return reinterpret_cast<link_type&>(ptr->right_);
+    }
+
+    /**
+     * @brief 获取节点的父节点
+     * @param ptr 节点指针
+     * @return 父节点引用
+     */
+    static link_type& parent(link_type ptr) noexcept {
+        return reinterpret_cast<link_type&>(ptr->parent_);
+    }
+
+    /**
+     * @brief 从节点提取键
+     * @param ptr 节点指针
+     * @return 节点的键
+     */
+    static const Key& key(link_type ptr) noexcept {
+        return KeyOfValue()(ptr->data);
+    }
+
+    /**
+     * @brief 从基类指针节点提取键
+     * @param ptr 基类指针
+     * @return 节点的键
+     */
+    static const Key& key(base_ptr ptr) noexcept {
+        return rb_tree::key(reinterpret_cast<link_type>(ptr));
+    }
+
+    /**
+     * @brief 获取子树的最小节点
+     * @param ptr 子树根节点
+     * @return 最小节点指针
+     */
+    static link_type minimum(link_type ptr) noexcept {
+        return static_cast<link_type>(base_node::minimum(ptr));
+    }
+
+    /**
+     * @brief 获取子树的最大节点
+     * @param ptr 子树根节点
+     * @return 最大节点指针
+     */
+    static link_type maximum(link_type ptr) noexcept {
+        return static_cast<link_type>(base_node::maximum(ptr));
+    }
+
+    /**
+     * @brief 创建节点
+     * @tparam Args 构造参数类型
+     * @param args 构造参数
+     * @return 新创建的节点指针
+     */
     template <typename... Args>
-    link_type create_node(Args... args) {
+    link_type create_node(Args&&... args) {
         link_type tmp = size_pair_.get_base().allocate();
         try {
             _MSTL construct(&tmp->data, _MSTL forward<Args>(args)...);
         } catch (...) {
             rb_tree::destroy_node(tmp);
-            throw_exception(memory_exception("rb tree construct node failed."));
+            throw;
         }
         return tmp;
     }
 
-    link_type copy_node(link_type x) {
-        link_type tmp = rb_tree::create_node(x->data);
-        tmp->color_ = x->color_;
+    /**
+     * @brief 拷贝节点
+     * @param ptr 源节点指针
+     * @return 新拷贝的节点指针
+     */
+    link_type copy_node(link_type ptr) {
+        link_type tmp = rb_tree::create_node(ptr->data);
+        tmp->color_ = ptr->color_;
         tmp->left_ = nullptr;
         tmp->right_ = nullptr;
         return tmp;
     }
 
-    void destroy_node(link_type p) noexcept {
-        if (p == nullptr) return;
-        _MSTL destroy(&p->data);
-        size_pair_.get_base().deallocate(p);
+    /**
+     * @brief 销毁节点
+     * @param ptr 要销毁的节点指针
+     */
+    void destroy_node(link_type ptr)
+    noexcept(is_nothrow_destructible_v<link_node>) {
+        if (ptr == nullptr) return;
+        _MSTL destroy(&ptr->data);
+        size_pair_.get_base().deallocate(ptr);
     }
 
-    link_type& root() const noexcept { return reinterpret_cast<link_type&>(header_->parent_); }
-    link_type& leftmost() const noexcept { return reinterpret_cast<link_type&>(header_->left_); }
-    link_type& rightmost() const noexcept { return reinterpret_cast<link_type&>(header_->right_); }
-
-    static link_type& left(link_type x) noexcept { return reinterpret_cast<link_type&>(x->left_); }
-    static link_type& right(link_type x) noexcept { return reinterpret_cast<link_type&>(x->right_); }
-    static link_type& parent(link_type x) noexcept { return reinterpret_cast<link_type&>(x->parent_); }
-
-    static const Key& key(link_type x) noexcept { return KeyOfValue()(x->data); }
-    static const Key& key(const base_ptr x) noexcept { return rb_tree::key(reinterpret_cast<link_type>(x)); }
-
-    static link_type minimum(link_type x) noexcept {
-        return static_cast<link_type>(base_node::minimum(x));
-    }
-    static link_type maximum(link_type x) noexcept {
-        return static_cast<link_type>(base_node::maximum(x));
-    }
-
-    iterator insert_node_into(base_ptr bx, base_ptr by, link_type p) {
-        auto x = static_cast<link_type>(bx);
-        auto y = static_cast<link_type>(by);
-        if (y == header_ || x != nullptr || key_compare_(rb_tree::key(p), rb_tree::key(y))) {
-            rb_tree::left(y) = p;
+    /**
+     * @brief 将节点插入到指定位置
+     * @param child 插入位置的子节点
+     * @param parent 插入位置的父节点
+     * @param ptr 要插入的节点
+     * @return 指向插入位置的迭代器
+     */
+    iterator insert_into(base_ptr child, base_ptr parent, link_type ptr) {
+        auto x = static_cast<link_type>(child);
+        auto y = static_cast<link_type>(parent);
+        if (y == header_ || x != nullptr || key_compare_(rb_tree::key(ptr), rb_tree::key(y))) {
+            rb_tree::left(y) = ptr;
             if (y == header_) {
-                root() = p;
-                leftmost() = p;
-                rightmost() = p;
+                root() = ptr;
+                leftmost() = ptr;
+                rightmost() = ptr;
             } else if (y == leftmost()) {
-                leftmost() = p;
+                leftmost() = ptr;
             }
         }
         else {
-            rb_tree::right(y) = p;
+            rb_tree::right(y) = ptr;
             if (y == rightmost()) {
-                rightmost() = p;
+                rightmost() = ptr;
             }
         }
-        rb_tree::parent(p) = y;
-        rb_tree::left(p) = nullptr;
-        rb_tree::right(p) = nullptr;
-        _MSTL rb_tree_rebalance(p, header_->parent_);
+        rb_tree::parent(ptr) = y;
+        rb_tree::left(ptr) = nullptr;
+        rb_tree::right(ptr) = nullptr;
+        _MSTL rb_tree_insert_rebalance(ptr, header_->parent_);
         ++size_pair_.value;
-        return iterator(p, this);
+        return iterator(ptr, this);
     }
 
-    link_type copy_under_node(link_type x, link_type parent) {
-        link_type top = copy_node(x);
+    /**
+     * @brief 递归拷贝子树
+     * @param src_root 源子树根节点
+     * @param parent 父节点指针
+     * @return 拷贝得到的子树根节点
+     */
+    link_type copy_under(link_type src_root, link_type parent) {
+        link_type top = rb_tree::copy_node(src_root);
         top->parent_ = parent;
         try{
-            if (x->right_ != nullptr) {
-                top->right_ = rb_tree::copy_under_node(rb_tree::right(x), top);
+            if (src_root->right_ != nullptr) {
+                top->right_ = rb_tree::copy_under(rb_tree::right(src_root), top);
             }
             parent = top;
-            x = rb_tree::left(x);
-            while (x != nullptr) {
-                link_type y = rb_tree::copy_node(x);
+            src_root = rb_tree::left(src_root);
+            while (src_root != nullptr) {
+                link_type y = rb_tree::copy_node(src_root);
                 parent->left_ = y;
                 y->parent_ = parent;
-                if (x->right_ != nullptr) {
-                    y->right_ = rb_tree::copy_under_node(rb_tree::right(x), y);
+                if (src_root->right_ != nullptr) {
+                    y->right_ = rb_tree::copy_under(rb_tree::right(src_root), y);
                 }
                 parent = y;
-                x = rb_tree::left(x);
+                src_root = rb_tree::left(src_root);
             }
             if (root() != nullptr) {
                 leftmost() = rb_tree::minimum(root());
@@ -545,124 +793,179 @@ private:
                 rightmost() = header_;
             }
         } catch (...) {
-            rb_tree::erase_under_node(top);
+            rb_tree::erase_under(top);
             throw;
         }
         return top;
     }
 
-    void erase_under_node(link_type x) noexcept {
-        if (x == nullptr) return;
-        rb_tree::erase_under_node(rb_tree::right(x));
-        rb_tree::erase_under_node(rb_tree::left(x));
-        rb_tree::destroy_node(x);
+    /**
+     * @brief 递归销毁子树
+     * @param root 子树根节点
+     */
+    void erase_under(link_type root)
+    noexcept(is_nothrow_destructible_v<link_node>) {
+        if (root == nullptr) return;
+        rb_tree::erase_under(rb_tree::right(root));
+        rb_tree::erase_under(rb_tree::left(root));
+        rb_tree::destroy_node(root);
     }
 
+    /**
+     * @brief 初始化头节点
+     */
     void header_init() {
-        header_ = size_pair_.get_base().allocate();
+        header_ = size_pair_.get_base().allocate(1);
         header_->color_ = RB_TREE_RED;
         root() = nullptr;
         leftmost() = header_;
         rightmost() = header_;
     }
 
-    void copy_from(const rb_tree& x) {
-        if (x.root() == nullptr) {
+    /**
+     * @brief 从另一个红黑树拷贝
+     * @param other 源红黑树
+     */
+    void copy_from(const rb_tree& other) {
+        if (other.root() == nullptr) {
             root() = nullptr;
             leftmost() = header_;
             rightmost() = header_;
         } else {
             try {
-              root() = rb_tree::copy_under_node(x.root(), header_);
+              root() = rb_tree::copy_under(other.root(), header_);
             } catch (...) {
                 size_pair_.get_base().deallocate(header_);
+                header_ = nullptr;
                 throw;
             }
             leftmost() = rb_tree::minimum(root());
             rightmost() = rb_tree::maximum(root());
         }
-        size_pair_.value = x.size_pair_.value;
+        size_pair_.value = other.size_pair_.value;
     }
 
-    pair<iterator, bool> insert_unique_node(link_type p) {
+    /**
+     * @brief 插入唯一键节点
+     * @param node 要插入的节点
+     * @return 插入结果（迭代器和是否成功）
+     */
+    pair<iterator, bool> insert_unique(link_type node) {
         link_type y = header_;
         link_type x = root();
         bool comp = true;
         while (x != nullptr) {
             y = x;
-            comp = key_compare_(rb_tree::key(p), rb_tree::key(x));
+            comp = key_compare_(rb_tree::key(node), rb_tree::key(x));
             x = comp ? rb_tree::left(x) : rb_tree::right(x);
         }
 
         iterator j(y, this);
         if (comp) {
             if (j == begin()) {
-                return pair<iterator, bool>(rb_tree::insert_node_into(x, y, p), true);
+                return pair<iterator, bool>(rb_tree::insert_into(x, y, node), true);
             }
             --j;
         }
 
-        if (key_compare_(rb_tree::key(link_type(j.node_)), rb_tree::key(p))) {
-            return pair<iterator, bool>(rb_tree::insert_node_into(x, y, p), true);
+        if (key_compare_(rb_tree::key(link_type(j.node_)), rb_tree::key(node))) {
+            return pair<iterator, bool>(rb_tree::insert_into(x, y, node), true);
         }
-        rb_tree::destroy_node(p);
+        rb_tree::destroy_node(node);
         return pair<iterator, bool>(j, false);
     }
 
-    iterator insert_equal_node(link_type p) {
+    /**
+     * @brief 插入允许重复键的节点
+     * @param node 要插入的节点
+     * @return 指向插入位置的迭代器
+     */
+    iterator insert_equal(link_type node) {
         link_type y = header_;
         link_type x = root();
         while (x != nullptr) {
             y = x;
-            x = key_compare_(rb_tree::key(p), rb_tree::key(x)) ?
+            x = key_compare_(rb_tree::key(node), rb_tree::key(x)) ?
                 rb_tree::left(x) :
                 rb_tree::right(x);
         }
-        return rb_tree::insert_node_into(x, y, p);
+        return rb_tree::insert_into(x, y, node);
     }
 
 public:
+    /**
+     * @brief 默认构造函数
+     */
     rb_tree() {
         header_init();
     }
 
-    explicit rb_tree(const Compare& comp) : key_compare_(comp) {
+    /**
+     * @brief 构造函数，指定比较函数
+     * @param comp 比较函数对象
+     */
+    explicit rb_tree(const Compare& comp)
+    : key_compare_(comp) {
         header_init();
     }
 
-    rb_tree(const rb_tree& x) :
-    key_compare_(x.key_compare_),
-    extracter_(x.extracter_), size_pair_(x.size_pair_) {
+    /**
+     * @brief 拷贝构造函数
+     * @param other 源红黑树
+     */
+    rb_tree(const rb_tree& other)
+    : key_compare_(other.key_compare_),
+      extracter_(other.extracter_),
+      size_pair_(other.size_pair_) {
         header_init();
-        rb_tree::copy_from(x);
+        rb_tree::copy_from(other);
     }
 
-    rb_tree& operator =(const rb_tree& x) {
-        if (_MSTL addressof(x) == this) return *this;
-        clear();
-        rb_tree::copy_from(x);
+    /**
+     * @brief 拷贝赋值运算符
+     * @param other 源红黑树
+     * @return 自身引用
+     */
+    rb_tree& operator =(const rb_tree& other) {
+        if (_MSTL addressof(other) == this) return *this;
+        rb_tree tmp(other);
+        rb_tree::swap(tmp);
         return *this;
     }
 
-    rb_tree(rb_tree&& x) noexcept
-    : header_(_MSTL move(x.header_)), key_compare_(_MSTL move(x.key_compare_)),
-      extracter_(_MSTL move(x.extracter_)), size_pair_(_MSTL move(x.size_pair_)) {
-        x.header_ = nullptr;
-        x.size_pair_.value = 0;
+    /**
+     * @brief 移动构造函数
+     * @param other 源红黑树
+     */
+    rb_tree(rb_tree&& other)
+    noexcept(
+        is_nothrow_move_constructible_v<Compare> &&
+        is_nothrow_move_constructible_v<KeyOfValue> &&
+        is_nothrow_move_constructible_v<allocator_type>)
+    : header_(_MSTL move(other.header_)), key_compare_(_MSTL move(other.key_compare_)),
+      extracter_(_MSTL move(other.extracter_)), size_pair_(_MSTL move(other.size_pair_)) {
+        other.header_ = nullptr;
+        other.size_pair_.value = 0;
     }
 
-    rb_tree& operator =(rb_tree&& x) noexcept {
-        if (_MSTL addressof(x) == this) return *this;
-        clear();
-        size_pair_.get_base().deallocate(header_);
-        header_ = x.header_;
-        key_compare_ = _MSTL move(x.key_compare_);
-        size_pair_ = _MSTL move(x.size_pair_);
-        x.header_ = nullptr;
-        x.size_pair_.value = 0;
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源红黑树
+     * @return 自身引用
+     */
+    rb_tree& operator =(rb_tree&& other)
+    noexcept(
+        is_nothrow_move_constructible_v<rb_tree> &&
+        is_nothrow_swappable_v<rb_tree>) {
+        if (_MSTL addressof(other) == this) return *this;
+        rb_tree tmp(_MSTL move(other));
+        rb_tree::swap(tmp);
         return *this;
     }
 
+    /**
+     * @brief 析构函数
+     */
     ~rb_tree() {
         clear();
         if (header_) {
@@ -670,119 +973,292 @@ public:
         }
     }
 
-    MSTL_NODISCARD iterator begin() noexcept { return {leftmost(), this}; }
-    MSTL_NODISCARD iterator end() noexcept { return {header_, this}; }
-    MSTL_NODISCARD const_iterator begin() const noexcept { return cbegin(); }
-    MSTL_NODISCARD const_iterator end() const noexcept { return cend(); }
-    MSTL_NODISCARD const_iterator cbegin() const noexcept { return {leftmost(), this}; }
-    MSTL_NODISCARD const_iterator cend() const noexcept { return {header_, this}; }
-    MSTL_NODISCARD reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
-    MSTL_NODISCARD reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
-    MSTL_NODISCARD const_reverse_iterator rbegin() const noexcept { return crbegin(); }
-    MSTL_NODISCARD const_reverse_iterator rend() const noexcept { return crend(); }
-    MSTL_NODISCARD const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(cend()); }
-    MSTL_NODISCARD const_reverse_iterator crend() const noexcept { return const_reverse_iterator(cbegin()); }
+    /**
+     * @brief 获取起始迭代器
+     * @return 指向最小元素的迭代器
+     */
+    MSTL_NODISCARD iterator begin() noexcept {
+        return {leftmost(), this};
+    }
 
-    MSTL_NODISCARD size_type size() const noexcept { return size_pair_.value; }
-    MSTL_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
-    MSTL_NODISCARD bool empty() const noexcept { return size_pair_.value == 0; }
+    /**
+     * @brief 获取结束迭代器
+     * @return 指向头节点的迭代器
+     */
+    MSTL_NODISCARD iterator end() noexcept {
+        return {header_, this};
+    }
 
-    MSTL_NODISCARD Compare key_comp() const
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向最小元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator begin() const noexcept {
+        return cbegin();
+    }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向头节点的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator end() const noexcept {
+        return cend();
+    }
+
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向最小元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator cbegin() const noexcept {
+        return {leftmost(), this};
+    }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向头节点的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator cend() const noexcept {
+        return {header_, this};
+    }
+
+    /**
+     * @brief 获取反向起始迭代器
+     * @return 指向最大元素的反向迭代器
+     */
+    MSTL_NODISCARD reverse_iterator rbegin() noexcept {
+        return reverse_iterator(end());
+    }
+
+    /**
+     * @brief 获取反向结束迭代器
+     * @return 指向最小元素之前位置的反向迭代器
+     */
+    MSTL_NODISCARD reverse_iterator rend() noexcept {
+        return reverse_iterator(begin());
+    }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最大元素的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator rbegin() const noexcept {
+        return crbegin();
+    }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向最小元素之前位置的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator rend() const noexcept {
+        return crend();
+    }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最大元素的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator crbegin() const noexcept {
+        return const_reverse_iterator(cend());
+    }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向最小元素之前位置的常量反向迭代器
+     */
+    MSTL_NODISCARD const_reverse_iterator crend() const noexcept {
+        return const_reverse_iterator(cbegin());
+    }
+
+    /**
+     * @brief 获取元素数量
+     * @return 树中元素数量
+     */
+    MSTL_NODISCARD size_type size() const noexcept {
+        return size_pair_.value;
+    }
+
+    /**
+     * @brief 获取最大可能大小
+     * @return 最大元素数量
+     */
+    MSTL_NODISCARD size_type max_size() const noexcept {
+        return static_cast<size_type>(-1);
+    }
+
+    /**
+     * @brief 检查是否为空
+     * @return 是否为空
+     */
+    MSTL_NODISCARD bool empty() const noexcept {
+        return size_pair_.value == 0;
+    }
+
+    /**
+     * @brief 获取键比较函数对象
+     * @return 键比较函数对象的副本
+     */
+    MSTL_NODISCARD Compare key_compare() const
     noexcept(is_nothrow_copy_constructible_v<Compare>) {
         return key_compare_;
     }
 
+    /**
+     * @brief 在树中构造元素（唯一键版本）
+     * @tparam Args 构造参数类型
+     * @param args 构造参数
+     * @return 插入结果（迭代器和是否成功）
+     */
     template <typename... Args>
     pair<iterator, bool> emplace_unique(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_MSTL forward<Args>(args)...);
-        return rb_tree::insert_unique_node(tmp);
+        return rb_tree::insert_unique(tmp);
     }
 
-    pair<iterator, bool> insert_unique(const value_type& v) {
-        return rb_tree::emplace_unique(v);
+    /**
+     * @brief 插入元素（唯一键版本）
+     * @param value 要插入的值
+     * @return 插入结果（迭代器和是否成功）
+     */
+    pair<iterator, bool> insert_unique(const value_type& value) {
+        return rb_tree::emplace_unique(value);
     }
 
-    pair<iterator, bool> insert_unique(value_type&& v) {
-        return rb_tree::emplace_unique(_MSTL move(v));
+    /**
+     * @brief 移动插入元素（唯一键版本）
+     * @param value 要插入的值
+     * @return 插入结果（迭代器和是否成功）
+     */
+    pair<iterator, bool> insert_unique(value_type&& value) {
+        return rb_tree::emplace_unique(_MSTL move(value));
     }
 
+    /**
+     * @brief 在提示位置附近构造元素（唯一键版本）
+     * @tparam Args 构造参数类型
+     * @param position 插入位置提示
+     * @param args 构造参数
+     * @return 指向插入元素的迭代器
+     */
     template <typename... Args>
     iterator emplace_unique_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_MSTL forward<Args>(args)...);
+
         if (position.node_ == header_->left_) {
             if (size() > 0 && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
-                return rb_tree::insert_node_into(position.node_, position.node_, tmp);
+                return rb_tree::insert_into(position.node_, position.node_, tmp);
             }
-            return rb_tree::insert_unique_node(tmp).first;
+            return rb_tree::insert_unique(tmp).first;
         }
 
         if (position.node_ == header_) {
             if (key_compare_(rb_tree::key(rightmost()), rb_tree::key(tmp))) {
-                return rb_tree::insert_node_into(nullptr, rightmost(), tmp);
+                return rb_tree::insert_into(nullptr, rightmost(), tmp);
             }
-            return rb_tree::insert_unique_node(tmp).first;
+            return rb_tree::insert_unique(tmp).first;
         }
 
         iterator before = position;
         --before;
+
         if (key_compare_(rb_tree::key(before.node_), rb_tree::key(tmp)) &&
             key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
             if (rb_tree::right(link_type(before.node_)) == nullptr) {
-                return rb_tree::insert_node_into(nullptr, before.node_, tmp);
+                return rb_tree::insert_into(nullptr, before.node_, tmp);
             }
-            return rb_tree::insert_node_into(position.node_, position.node_, tmp);
+            if (rb_tree::left(link_type(position.node_)) == nullptr) {
+                return rb_tree::insert_into(position.node_, position.node_, tmp);
+            }
         }
 
-        return rb_tree::insert_unique_node(tmp).first;
+        return rb_tree::insert_unique(tmp).first;
     }
 
-    iterator insert_unique(iterator position, const value_type& v) {
-        return rb_tree::emplace_unique_hint(position, v);
+    /**
+     * @brief 在提示位置附近插入元素（唯一键版本）
+     * @param position 插入位置提示
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_unique(iterator position, const value_type& value) {
+        return rb_tree::emplace_unique_hint(position, value);
     }
 
-    iterator insert_unique(iterator position, value_type&& v) {
-        return rb_tree::emplace_unique_hint(position, _MSTL move(v));
+    /**
+     * @brief 在提示位置附近移动插入元素（唯一键版本）
+     * @param position 插入位置提示
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_unique(iterator position, value_type&& value) {
+        return rb_tree::emplace_unique_hint(position, _MSTL move(value));
     }
 
-    template <typename Iterator>
-    enable_if_t<is_ranges_input_iter_v<Iterator>>
-    insert_unique(Iterator first, Iterator last) {
+    /**
+     * @brief 范围插入元素（唯一键版本）
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    void insert_unique(Iterator first, Iterator last) {
         for (; first != last; ++first) {
             rb_tree::insert_unique(*first);
         }
-        return;
     }
 
+    /**
+     * @brief 在树中构造元素（允许重复键版本）
+     * @tparam Args 构造参数类型
+     * @param args 构造参数
+     * @return 指向插入元素的迭代器
+     */
     template <typename... Args>
     iterator emplace_equal(Args&&... args) {
         const link_type tmp = rb_tree::create_node(_MSTL forward<Args>(args)...);
-        return rb_tree::insert_equal_node(tmp);
+        return rb_tree::insert_equal(tmp);
     }
 
-    iterator insert_equal(const value_type& v) {
-        return rb_tree::emplace_equal(v);
+    /**
+     * @brief 插入元素（允许重复键版本）
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_equal(const value_type& value) {
+        return rb_tree::emplace_equal(value);
     }
 
-    iterator insert_equal(value_type&& v) {
-        return rb_tree::emplace_equal(_MSTL move(v));
+    /**
+     * @brief 移动插入元素（允许重复键版本）
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_equal(value_type&& value) {
+        return rb_tree::emplace_equal(_MSTL move(value));
     }
 
+    /**
+     * @brief 在提示位置附近构造元素（允许重复键版本）
+     * @tparam Args 构造参数类型
+     * @param position 插入位置提示
+     * @param args 构造参数
+     * @return 指向插入元素的迭代器
+     */
     template <typename... Args>
     iterator emplace_equal_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_MSTL forward<Args>(args)...);
 
         if (position.node_ == header_->left_) {
             if (size() > 0 && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
-                return rb_tree::insert_node_into(position.node_, position.node_, tmp);
+                return rb_tree::insert_into(position.node_, position.node_, tmp);
             }
-            return rb_tree::insert_equal_node(tmp);
+            return rb_tree::insert_equal(tmp);
         }
 
         if (position.node_ == header_) {
             if (!key_compare_(rb_tree::key(tmp), rb_tree::key(rightmost()))) {
-                return rb_tree::insert_node_into(nullptr, rightmost(), tmp);
+                return rb_tree::insert_into(nullptr, rightmost(), tmp);
             }
-            return rb_tree::insert_equal_node(tmp);
+            return rb_tree::insert_equal(tmp);
         }
 
         iterator before = position;
@@ -790,43 +1266,78 @@ public:
         if (!key_compare_(rb_tree::key(tmp), rb_tree::key(before.node_)) &&
             !key_compare_(rb_tree::key(position.node_), rb_tree::key(tmp))) {
             if (rb_tree::right(link_type(before.node_)) == nullptr) {
-                return rb_tree::insert_node_into(nullptr, before.node_, tmp);
+                return rb_tree::insert_into(nullptr, before.node_, tmp);
             }
-            return rb_tree::insert_node_into(position.node_, position.node_, tmp);
+            return rb_tree::insert_into(position.node_, position.node_, tmp);
         }
-        return rb_tree::insert_equal_node(tmp);
+        return rb_tree::insert_equal(tmp);
     }
 
-    iterator insert_equal(iterator position, const value_type& v) {
-        return rb_tree::emplace_equal_hint(position, v);
+    /**
+     * @brief 在提示位置附近插入元素（允许重复键版本）
+     * @param position 插入位置提示
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_equal(iterator position, const value_type& value) {
+        return rb_tree::emplace_equal_hint(position, value);
     }
 
-    iterator insert_equal(iterator position, value_type&& v) {
-        return rb_tree::emplace_equal_hint(position, _MSTL move(v));
+    /**
+     * @brief 在提示位置附近移动插入元素（允许重复键版本）
+     * @param position 插入位置提示
+     * @param value 要插入的值
+     * @return 指向插入元素的迭代器
+     */
+    iterator insert_equal(iterator position, value_type&& value) {
+        return rb_tree::emplace_equal_hint(position, _MSTL move(value));
     }
 
-    template <typename Iterator>
-    enable_if_t<is_ranges_input_iter_v<Iterator>>
-    insert_equal(Iterator first, Iterator last) {
+    /**
+     * @brief 范围插入元素（允许重复键版本）
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    void insert_equal(Iterator first, Iterator last) {
         for (; first != last; ++first) {
             rb_tree::insert_equal(*first);
         }
-        return;
     }
 
-    size_type erase(const key_type& k) noexcept {
-        pair<iterator, iterator> p = rb_tree::equal_range(k);
+    /**
+     * @brief 删除所有具有指定键的元素
+     * @param key 要删除的键
+     * @return 删除的元素数量
+     */
+    size_type erase(const key_type& key)
+    noexcept(is_nothrow_destructible_v<link_node>) {
+        pair<iterator, iterator> p = rb_tree::equal_range(key);
         const size_type n = _MSTL distance(p.first, p.second);
         rb_tree::erase(p.first, p.second);
         return n;
     }
-    void erase(iterator position) noexcept {
-        auto y = reinterpret_cast<link_type>(_MSTL rb_tree_rebalance_for_erase(
+
+    /**
+     * @brief 删除指定位置的元素
+     * @param position 要删除的位置
+     */
+    void erase(iterator position)
+    noexcept(is_nothrow_destructible_v<link_node>) {
+        auto y = reinterpret_cast<link_type>(_MSTL rb_tree_erase_rebalance(
             position.node_, header_->parent_, header_->left_, header_->right_));
         rb_tree::destroy_node(y);
         --size_pair_.value;
     }
-    void erase(iterator first, iterator last) noexcept {
+
+    /**
+     * @brief 删除指定范围内的元素
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    void erase(iterator first, iterator last)
+    noexcept(is_nothrow_destructible_v<link_node>) {
         if (first == begin() && last == end()) {
             clear();
         } else {
@@ -836,21 +1347,30 @@ public:
         }
     }
 
-    void clear() noexcept {
+    /**
+     * @brief 清空树
+     */
+    void clear()
+    noexcept(is_nothrow_destructible_v<link_node>) {
         if (size_pair_.value == 0) return;
-        rb_tree::erase_under_node(root());
+        rb_tree::erase_under(root());
         leftmost() = header_;
         root() = nullptr;
         rightmost() = header_;
         size_pair_.value = 0;
     }
 
-    MSTL_NODISCARD iterator find(const key_type& k) {
+    /**
+     * @brief 查找具有指定键的元素
+     * @param key 要查找的键
+     * @return 指向第一个匹配元素的迭代器，未找到则返回end()
+     */
+    MSTL_NODISCARD iterator find(const key_type& key) {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (!key_compare_(rb_tree::key(x), k)) {
+            if (!key_compare_(rb_tree::key(x), key)) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -862,15 +1382,20 @@ public:
         if (j == end()) {
             return end();
         }
-        return key_compare_(k, rb_tree::key(y)) ? end() : j;
+        return key_compare_(key, rb_tree::key(y)) ? end() : j;
     }
 
-    MSTL_NODISCARD const_iterator find(const key_type& k) const {
+    /**
+     * @brief 查找具有指定键的元素（常量版本）
+     * @param key 要查找的键
+     * @return 指向第一个匹配元素的常量迭代器，未找到则返回cend()
+     */
+    MSTL_NODISCARD const_iterator find(const key_type& key) const {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (!key_compare_(rb_tree::key(x), k)) {
+            if (!key_compare_(rb_tree::key(x), key)) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -882,21 +1407,31 @@ public:
         if (j == cend()) {
             return cend();
         }
-        return key_compare_(k, rb_tree::key(y)) ? cend() : j;
+        return key_compare_(key, rb_tree::key(y)) ? cend() : j;
     }
 
-    MSTL_NODISCARD size_type count(const key_type& k) const {
-        pair<const_iterator, const_iterator> p = rb_tree::equal_range(k);
+    /**
+     * @brief 统计具有指定键的元素数量
+     * @param key 要统计的键
+     * @return 匹配的元素数量
+     */
+    MSTL_NODISCARD size_type count(const key_type& key) const {
+        pair<const_iterator, const_iterator> p = rb_tree::equal_range(key);
         const size_type n = _MSTL distance(p.first, p.second);
         return n;
     }
 
-    MSTL_NODISCARD iterator lower_bound(const key_type& k) {
+    /**
+     * @brief 获取第一个不小于指定键的元素位置
+     * @param key 键值
+     * @return 指向第一个不小于key的元素的迭代器
+     */
+    MSTL_NODISCARD iterator lower_bound(const key_type& key) {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (!key_compare_(rb_tree::key(x), k)) {
+            if (!key_compare_(rb_tree::key(x), key)) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -907,12 +1442,17 @@ public:
         return iterator(y, this);
     }
 
-    MSTL_NODISCARD const_iterator lower_bound(const key_type& k) const {
+    /**
+     * @brief 获取第一个不小于指定键的元素位置（常量版本）
+     * @param key 键值
+     * @return 指向第一个不小于key的元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator lower_bound(const key_type& key) const {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (!key_compare_(rb_tree::key(x), k)) {
+            if (!key_compare_(rb_tree::key(x), key)) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -923,12 +1463,17 @@ public:
         return const_iterator(y, this);
     }
 
-    MSTL_NODISCARD iterator upper_bound(const key_type& k) {
+    /**
+     * @brief 获取第一个大于指定键的元素位置
+     * @param key 键值
+     * @return 指向第一个大于key的元素的迭代器
+     */
+    MSTL_NODISCARD iterator upper_bound(const key_type& key) {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (key_compare_(k, rb_tree::key(x))) {
+            if (key_compare_(key, rb_tree::key(x))) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -939,12 +1484,17 @@ public:
         return iterator(y, this);
     }
 
-    MSTL_NODISCARD const_iterator upper_bound(const key_type& k) const {
+    /**
+     * @brief 获取第一个大于指定键的元素位置（常量版本）
+     * @param key 键值
+     * @return 指向第一个大于key的元素的常量迭代器
+     */
+    MSTL_NODISCARD const_iterator upper_bound(const key_type& key) const {
         link_type y = header_;
         link_type x = root();
 
         while (x != nullptr) {
-            if (key_compare_(k, rb_tree::key(x))) {
+            if (key_compare_(key, rb_tree::key(x))) {
                 y = x;
                 x = rb_tree::left(x);
             } else {
@@ -955,35 +1505,61 @@ public:
         return const_iterator(y, this);
     }
 
-    MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& k) {
-        return pair<iterator, iterator>(rb_tree::lower_bound(k), rb_tree::upper_bound(k));
+    /**
+     * @brief 获取等于指定键的元素范围
+     * @param key 键值
+     * @return 包含lower_bound和upper_bound的pair
+     */
+    MSTL_NODISCARD pair<iterator, iterator> equal_range(const key_type& key) {
+        return pair<iterator, iterator>(rb_tree::lower_bound(key), rb_tree::upper_bound(key));
     }
 
-    MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
-        return pair<const_iterator, const_iterator>(rb_tree::lower_bound(k), rb_tree::upper_bound(k));
+    /**
+     * @brief 获取等于指定键的元素范围（常量版本）
+     * @param key 键值
+     * @return 包含lower_bound和upper_bound的pair
+     */
+    MSTL_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
+        return pair<const_iterator, const_iterator>(rb_tree::lower_bound(key), rb_tree::upper_bound(key));
     }
 
-    void swap(rb_tree& x)
+    /**
+     * @brief 交换两个红黑树的内容
+     * @param other 要交换的另一个红黑树
+     */
+    void swap(rb_tree& other)
     noexcept(
         is_nothrow_swappable_v<Compare> &&
         is_nothrow_swappable_v<KeyOfValue> &&
-        noexcept(size_pair_.swap(x.size_pair_))) {
-        _MSTL swap(header_, x.header_);
-        _MSTL swap(size_pair_, x.size_pair_);
-        _MSTL swap(key_compare_, x.key_compare_);
-        _MSTL swap(extracter_, x.extracter_);
+        is_nothrow_swappable_v<allocator_type>) {
+        _MSTL swap(header_, other.header_);
+        _MSTL swap(size_pair_, other.size_pair_);
+        _MSTL swap(key_compare_, other.key_compare_);
+        _MSTL swap(extracter_, other.extracter_);
     }
 
+    /**
+     * @brief 相等比较操作符
+     * @param rhs 右侧红黑树
+     * @return 如果两个红黑树大小相等且对应元素相等返回true
+     */
     MSTL_NODISCARD bool operator ==(const rb_tree& rhs) const
-    noexcept(noexcept(rb_tree::size() == rhs.size() && _MSTL equal(rb_tree::cbegin(), rb_tree::cend(), rhs.cbegin()))) {
-        return rb_tree::size() == rhs.size() && _MSTL equal(rb_tree::cbegin(), rb_tree::cend(), rhs.cbegin());
+    noexcept(noexcept(_MSTL equal(cbegin(), cend(), rhs.cbegin()))) {
+        return size() == rhs.size() && _MSTL equal(cbegin(), cend(), rhs.cbegin());
     }
 
+    /**
+     * @brief 小于比较操作符
+     * @param rhs 右侧红黑树
+     * @return 按字典序比较结果
+     */
     MSTL_NODISCARD bool operator <(const rb_tree& rhs) const
-    noexcept(noexcept(_MSTL lexicographical_compare(rb_tree::cbegin(), rb_tree::cend(), rhs.cbegin(), rhs.cend()))) {
-        return _MSTL lexicographical_compare(rb_tree::cbegin(), rb_tree::cend(), rhs.cbegin(), rhs.cend());
+    noexcept(noexcept(_MSTL lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))) {
+        return _MSTL lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }
 };
+
+/** @} */ // RBTree
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONTAINER_RB_TREE_HPP__

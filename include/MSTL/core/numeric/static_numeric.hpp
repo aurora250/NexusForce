@@ -222,7 +222,7 @@ struct big_div {
 private:
     static_assert(Den != 0, "Internal library error");
     static_assert(sizeof (uintmax_t) == sizeof (unsigned long long), "clzll is unsafe on your platform.");
-    static constexpr int leading_zeros = _MSTL clz64(Den);  ///< 除数前导零个数
+    static constexpr int leading_zeros = _MSTL countl_zero(Den);  ///< 除数前导零个数
     static constexpr int complement_shift = sizeof(uintmax_t) * 8 - leading_zeros;  ///< 补码位移
     static constexpr int actual_shift = (leading_zeros != 0) ? complement_shift : 0;  ///< 实际位移
     static constexpr uintmax_t shift_factor1 = static_cast<uintmax_t>(1) << leading_zeros;  ///< 位移因子1

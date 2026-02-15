@@ -20,15 +20,6 @@ MSTL_BEGIN_NAMESPACE__
 template <typename T>
 struct atomic;
 
-#define __MSTL_ATOMIC_CONSTRUCTIONS \
-	atomic() = default; \
-	~atomic() noexcept = default; \
-	atomic(const atomic&) = delete; \
-	atomic& operator =(const atomic&) = delete; \
-	atomic& operator =(const atomic&) volatile = delete; \
-	atomic(atomic&&) noexcept = default; \
-	atomic& operator =(atomic&&) noexcept = default;
-
 /**
  * @struct atomic
  * @brief 通用原子类型模板
@@ -57,7 +48,13 @@ public:
 	/// @brief 是否总是无锁
 	static constexpr bool is_always_lock_free = _MSTL is_always_lock_free<sizeof(value_), align_inner>();
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	/**
 	 * @brief 构造函数
@@ -260,7 +257,13 @@ public:
  */
 template <typename T>
 struct atomic<T*> : atomic_base<T*> {
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	explicit atomic(T* value) noexcept : atomic_base<T*>(value) {}
 
@@ -273,7 +276,13 @@ struct atomic<T*> : atomic_base<T*> {
  */
 template <typename T>
 struct atomic<T&> : atomic_ref_base<T> {
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	explicit atomic(T& value) noexcept : atomic_ref_base<T>(value) {}
 
@@ -296,7 +305,13 @@ public:
 	/// @brief 是否总是无锁
 	static constexpr bool is_always_lock_free = true;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	/**
 	 * @brief 构造函数
@@ -512,7 +527,13 @@ struct atomic<char> : atomic_base<char> {
 	using integral_type = char;
 	using base_type = atomic_base<char>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -528,7 +549,13 @@ struct atomic<signed char> : atomic_base<signed char> {
 	using integral_type = signed char;
 	using base_type = atomic_base<signed char>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -544,7 +571,13 @@ struct atomic<unsigned char> : atomic_base<unsigned char> {
 	using integral_type = unsigned char;
 	using base_type = atomic_base<unsigned char>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -560,7 +593,13 @@ struct atomic<short> : atomic_base<short> {
 	using integral_type = short;
 	using base_type = atomic_base<short>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -576,7 +615,13 @@ struct atomic<unsigned short> : atomic_base<unsigned short> {
 	using integral_type = unsigned short;
 	using base_type = atomic_base<unsigned short>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -592,7 +637,13 @@ struct atomic<int> : atomic_base<int> {
 	using integral_type = int;
 	using base_type = atomic_base<int>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -608,7 +659,13 @@ struct atomic<unsigned int> : atomic_base<unsigned int> {
 	using integral_type = unsigned int;
 	using base_type = atomic_base<unsigned int>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -624,7 +681,13 @@ struct atomic<long> : atomic_base<long> {
 	using integral_type = long;
 	using base_type = atomic_base<long>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -640,7 +703,13 @@ struct atomic<unsigned long> : atomic_base<unsigned long> {
 	using integral_type = unsigned long;
 	using base_type = atomic_base<unsigned long>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -656,7 +725,13 @@ struct atomic<long long> : atomic_base<long long> {
 	using integral_type = long long;
 	using base_type = atomic_base<long long>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -672,7 +747,13 @@ struct atomic<unsigned long long> : atomic_base<unsigned long long> {
 	using integral_type = unsigned long long;
 	using base_type = atomic_base<unsigned long long>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -688,7 +769,13 @@ struct atomic<wchar_t> : atomic_base<wchar_t> {
 	using integral_type = wchar_t;
 	using base_type = atomic_base<wchar_t>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -705,7 +792,13 @@ struct atomic<char8_t> : atomic_base<char8_t> {
 	using integral_type = char8_t;
 	using base_type = atomic_base<char8_t>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -722,7 +815,13 @@ struct atomic<char16_t> : atomic_base<char16_t> {
 	using integral_type = char16_t;
 	using base_type = atomic_base<char16_t>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -738,7 +837,13 @@ struct atomic<char32_t> : atomic_base<char32_t> {
 	using integral_type = char32_t;
 	using base_type = atomic_base<char32_t>;
 
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const integral_type value) noexcept : base_type(value) {}
 
@@ -751,7 +856,13 @@ struct atomic<char32_t> : atomic_base<char32_t> {
 /// @brief float类型的原子特化
 template <>
 struct atomic<float> : atomic_float_base<float> {
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const float value) noexcept
 	: atomic_float_base<float>(value) {}
@@ -762,7 +873,13 @@ struct atomic<float> : atomic_float_base<float> {
 /// @brief double类型的原子特化
 template <>
 struct atomic<double> : atomic_float_base<double> {
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const double value) noexcept
 	: atomic_float_base<double>(value) {}
@@ -773,7 +890,13 @@ struct atomic<double> : atomic_float_base<double> {
 /// @brief long double类型的原子特化
 template <>
 struct atomic<long double> : atomic_float_base<long double> {
-	__MSTL_ATOMIC_CONSTRUCTIONS
+	atomic() = default;
+	~atomic() noexcept = default;
+	atomic(const atomic&) = delete;
+	atomic& operator =(const atomic&) = delete;
+	atomic& operator =(const atomic&) volatile = delete;
+	atomic(atomic&&) noexcept = default;
+	atomic& operator =(atomic&&) noexcept = default;
 
 	constexpr atomic(const long double value) noexcept
 	: atomic_float_base<long double>(value) {}
@@ -781,7 +904,6 @@ struct atomic<long double> : atomic_float_base<long double> {
 	using atomic_float_base<long double>::operator =;
 };
 
-#undef __MSTL_ATOMIC_CONSTRUCTIONS
 
 using atomic_bool     = atomic<bool>;			///< 布尔原子类型
 using atomic_schar    = atomic<signed char>;	///< 有符号字符原子类型

@@ -35,7 +35,8 @@ MSTL_BEGIN_INNER__
  * 使用循环逐个元素复制。
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(is_nothrow_assignable_v<iter_value_t<Iterator2>, iter_value_t<Iterator1>>) {
 	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
 	for (; n > 0; --n, ++first, ++result) {
 		*result = *first;
@@ -55,7 +56,7 @@ constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result
  * 使用内存移动优化复制操作。
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	const auto bytes = n * sizeof(iter_value_t<Iterator1>);
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), bytes);
@@ -79,7 +80,8 @@ MSTL_END_INNER__
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_iter_v<Iterator1> && is_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 copy(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 copy(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(noexcept(_INNER __copy_aux(first, last, result))) {
 	if (first == last) return result;
 	return _INNER __copy_aux(first, last, result);
 }
@@ -113,8 +115,9 @@ constexpr pair<Iterator1, Iterator2> __copy_n_aux(Iterator1 first, size_t count,
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
 constexpr pair<Iterator1, Iterator2> __copy_n_aux(Iterator1 first, size_t count, Iterator2 result) {
-	for (; count > 0; --count, ++first, ++result)
+	for (; count > 0; --count, ++first, ++result) {
 		*result = *first;
+	}
 	return pair<Iterator1, Iterator2>(first, result);
 }
 MSTL_END_INNER__
@@ -142,20 +145,21 @@ constexpr pair<Iterator1, Iterator2> copy_n(Iterator1 first, size_t count, Itera
  * @brief 复制满足谓词的元素
  * @tparam Iterator1 输入迭代器类型
  * @tparam Iterator2 输出迭代器类型
- * @tparam UnaryPredicate 一元谓词类型
+ * @tparam Pred 一元谓词类型
  * @param first 输入范围起始
  * @param last 输入范围结束
  * @param result 输出范围起始
- * @param unary_pred 一元谓词
+ * @param pred 一元谓词
  * @return 输出范围结束迭代器
  *
  * 复制范围 [first, last) 中满足谓词 unary_pred 的所有元素。
  */
-template <typename Iterator1, typename Iterator2, typename UnaryPredicate>
-constexpr Iterator2 copy_if(Iterator1 first, Iterator1 last, Iterator2 result, UnaryPredicate unary_pred) {
+template <typename Iterator1, typename Iterator2, typename Pred>
+constexpr Iterator2 copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Pred pred) {
 	for (; first != last; ++first) {
-		if (unary_pred(*first))
+		if (pred(*first)) {
 			*result++ = *first;
+		}
 	}
 	return result;
 }
@@ -175,10 +179,12 @@ MSTL_BEGIN_INNER__
  * 从后向前逐个元素复制。
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(is_nothrow_copy_assignable_v<iter_value_t<Iterator1>>) {
 	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
-	for (; n > 0; --n)
+	for (; n > 0; --n) {
 		*--result = *--last;
+	}
 	return result;
 }
 
@@ -194,7 +200,7 @@ constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterato
  * 使用内存移动优化反向复制。
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
@@ -216,7 +222,8 @@ MSTL_END_INNER__
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(noexcept(_INNER __copy_backward_aux(first, last, result))) {
 	if (first == last) return result;
 	return _INNER __copy_backward_aux(first, last, result);
 }
@@ -234,10 +241,12 @@ MSTL_BEGIN_INNER__
  * @return 输出范围结束
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(is_nothrow_move_assignable_v<iter_value_t<Iterator1>>) {
 	iter_difference_t<Iterator1> n = _MSTL distance(first, last);
-	for (; n > 0; --n, ++first, ++result)
+	for (; n > 0; --n, ++first, ++result) {
 		*result = _MSTL move(*first);
+	}
 	return result;
 }
 
@@ -251,7 +260,7 @@ constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result
  * @return 输出范围结束
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result + n;
@@ -273,7 +282,8 @@ MSTL_END_INNER__
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<
 	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result)
+noexcept(noexcept(_INNER __move_aux(first, last, result))) {
 	if (first == last) return result;
 	return _INNER __move_aux(first, last, result);
 }
@@ -292,8 +302,9 @@ MSTL_BEGIN_INNER__
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
 constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
-	for (size_t n = _MSTL distance(first, last); n > 0; --n)
+	for (size_t n = _MSTL distance(first, last); n > 0; --n) {
 		*--result = _MSTL move(*--last);
+	}
 	return result;
 }
 
@@ -307,7 +318,7 @@ constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterato
  * @return 输出范围起始
  */
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_MSTL memory_move(_MSTL addressof(*result), _MSTL addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
@@ -346,7 +357,8 @@ constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 res
  * 将范围 [first, last) 的所有元素设置为 value。
  */
 template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr void fill(Iterator first, Iterator last, const T& value) {
+constexpr void fill(Iterator first, Iterator last, const T& value)
+noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
 	for (; first != last; ++first) {
 		*first = value;
 	}
@@ -362,8 +374,11 @@ constexpr void fill(Iterator first, Iterator last, const T& value) {
  * @return 填充后的结束迭代器
  */
 template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator fill_n(Iterator first, size_t n, const T& value) {
-	for (; n > 0; --n, ++first) *first = value;
+constexpr Iterator fill_n(Iterator first, size_t n, const T& value)
+noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
+	for (; n > 0; --n, ++first) {
+		*first = value;
+	}
 	return first;
 }
 
@@ -418,7 +433,9 @@ constexpr Iterator2 swap_ranges(Iterator1 first1, Iterator1 last1, Iterator2 fir
  */
 template <typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Function for_each(Iterator first, Iterator last, Function f) {
-	for (; first != last; ++first) f(*first);
+	for (; first != last; ++first) {
+		f(*first);
+	}
 	return f;
 }
 

@@ -75,7 +75,7 @@ static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
                 for (::DWORD i = 0; i < buffer_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++) {
                     if (buffer[i].Relationship == ::RelationProcessorCore) {
                         processor_core_count++;
-                        logical_processor_count += _MSTL popcount64(buffer[i].ProcessorMask);
+                        logical_processor_count += _MSTL popcount(buffer[i].ProcessorMask);
                     }
                 }
 

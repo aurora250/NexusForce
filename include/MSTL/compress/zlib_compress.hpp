@@ -28,11 +28,11 @@ enum class COMPRESS_STRATEGY {
 
 class MSTL_API zlib_compressor {
 private:
-    MSTL_NODISCARD static bvector compress_data(
+    MSTL_NODISCARD static byte_vector compress_data(
         const byte_t* data, size_t size,
         COMPRESS_LEVEL level, COMPRESS_STRATEGY strategy);
 
-    MSTL_NODISCARD static bvector decompress_data(
+    MSTL_NODISCARD static byte_vector decompress_data(
         const byte_t* data, size_t size,
         size_t estimated_original_size);
 
@@ -40,7 +40,7 @@ private:
 
 public:
     template <typename Iter, enable_if_t<is_ranges_cot_iter_v<Iter>, int> = 0>
-    MSTL_NODISCARD static bvector compress(Iter begin, Iter end,
+    MSTL_NODISCARD static byte_vector compress(Iter begin, Iter end,
         const COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
         const COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy) {
         
@@ -51,7 +51,7 @@ public:
         return compress_data(data, data_size, level, strategy);
     }
     
-    MSTL_NODISCARD static bvector compress(const string_view data,
+    MSTL_NODISCARD static byte_vector compress(const string_view data,
         const COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
         const COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy) {
         
@@ -64,14 +64,14 @@ public:
     }
     
     template <typename T>
-    MSTL_NODISCARD static bvector compress(
+    MSTL_NODISCARD static byte_vector compress(
         const vector<T>& data,
         const COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
         const COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy) {
         
         static_assert(sizeof(T) == 1, "Vector must contain byte-sized elements");
         
-        return compress_data(
+        return zlib_compressor::compress_data(
             reinterpret_cast<const byte_t*>(data.data()),
             data.size() * sizeof(T),
             level,
@@ -80,19 +80,19 @@ public:
     }
 
     template <typename Iter, enable_if_t<is_ranges_cot_iter_v<Iter>, int> = 0>
-    MSTL_NODISCARD static bvector decompress(Iter begin, Iter end,
+    MSTL_NODISCARD static byte_vector decompress(Iter begin, Iter end,
         const size_t estimated_original_size = 0) {
         
         static_assert(sizeof(*begin) == 1, "Iterator must point to byte-sized elements");
         
         const auto* data = reinterpret_cast<const byte_t*>(&*begin);
-        const size_t data_size = distance(begin, end);
+        const size_t data_size = _MSTL distance(begin, end);
         
         return decompress_data(data, data_size, estimated_original_size);
     }
     
-    MSTL_NODISCARD static bvector decompress(
-        const span<const byte_t>& data,
+    MSTL_NODISCARD static byte_vector decompress(
+        const cbyte_view& data,
         const size_t estimated_original_size = 0) {
         
         return decompress_data(data.data(), data.size(), estimated_original_size);
@@ -111,13 +111,13 @@ public:
         stream_compressor(stream_compressor&& other) noexcept;
         stream_compressor& operator =(stream_compressor&& other) noexcept;
 
-        bvector compress(const span<const byte_t>& data, bool finish = false);
-        bvector compress(string_view data, bool finish = false);
+        byte_vector compress(const cbyte_view& data, bool finish = false);
+        byte_vector compress(string_view data, bool finish = false);
 
-        bvector finish();
+        byte_vector finish();
 
         void reset(COMPRESS_LEVEL level = COMPRESS_LEVEL::default_level,
-                  COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy);
+                   COMPRESS_STRATEGY strategy = COMPRESS_STRATEGY::default_strategy);
 
         MSTL_NODISCARD size_t bytes_input() const noexcept { return bytes_input_; }
         MSTL_NODISCARD size_t bytes_output() const noexcept { return bytes_output_; }
@@ -143,9 +143,9 @@ public:
         stream_decompressor(stream_decompressor&& other) noexcept;
         stream_decompressor& operator =(stream_decompressor&& other) noexcept;
 
-        bvector decompress(const span<const byte_t>& data, bool finish = false);
+        byte_vector decompress(const cbyte_view& data, bool finish = false);
 
-        bvector finish();
+        byte_vector finish();
 
         void reset();
 

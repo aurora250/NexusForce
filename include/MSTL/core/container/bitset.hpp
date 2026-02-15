@@ -1,49 +1,172 @@
 #ifndef MSTL_CORE_CONTAINER_BITSET_HPP__
 #define MSTL_CORE_CONTAINER_BITSET_HPP__
-#include "../memory/bit.hpp"
-#include "array.hpp"
+
+/**
+ * @file bitset.hpp
+ * @brief MSTL固定大小位集容器
+ *
+ * 此文件提供了固定大小位集容器的实现。
+ * bitset是一个固定大小的位序列，支持各种位操作，
+ * 如设置、重置、翻转、移位以及逻辑运算。其大小在编译时确定。
+ */
+
+#include "MSTL/core/container/array.hpp"
+#include "MSTL/core/interface/istringify.hpp"
+#include "MSTL/core/memory/bit.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup Bitset 位集
+ * @brief 固定大小的位序列容器
+ * @{
+ */
+
+/**
+ * @class bitset
+ * @brief 固定大小的位集
+ * @tparam N 位数，在编译时确定
+ *
+ * bitset表示一个固定大小的二进制位序列，提供对每个位的独立访问
+ * 以及常见的位操作（与、或、异或、移位等）。存储效率高，操作速度快。
+ * 位数N在编译时确定，因此不能动态改变大小。
+ */
 template <size_t N>
-class bitset : public icommon<bitset<N>>, public istringify<bitset<N>> {
+class bitset : public icommon<bitset<N>>, public ibinary<bitset<N>>, public istringify<bitset<N>> {
+public:
+    /**
+     * @class reference
+     * @brief 位引用类，用于返回可修改的引用
+     *
+     * 模拟对单个位的引用，允许赋值、转换和翻转操作。
+     */
+    class reference {
+    private:
+        bitset& set_;  ///< 关联的bitset对象
+        size_t position_;  ///< 位位置
+
+    public:
+        /**
+         * @brief 构造函数
+         * @param set bitset引用
+         * @param position 位位置
+         */
+        constexpr reference(bitset& set, const size_t position) noexcept
+        : set_(set), position_(position) {}
+
+        /**
+         * @brief 赋值操作符（bool版本）
+         * @param value 要赋的值
+         * @return 自身引用
+         */
+        constexpr reference& operator =(const bool value) noexcept {
+            set_.set(position_, value);
+            return *this;
+        }
+
+        /**
+         * @brief 赋值操作符（引用版本）
+         * @param value 另一个引用
+         * @return 自身引用
+         */
+        constexpr reference& operator =(const reference& value) noexcept {
+            return *this = static_cast<bool>(value);
+        }
+
+        /**
+         * @brief 转换为bool
+         * @return 位的值
+         */
+        explicit constexpr operator bool() const noexcept {
+            return set_.test(position_);
+        }
+
+        /**
+         * @brief 翻转该位
+         * @return 自身引用
+         */
+        constexpr reference& flip() noexcept {
+            set_.flip(position_);
+            return *this;
+        }
+    };
+
 private:
-    using block_type = size_t;
-    static constexpr size_t bits_per_block = sizeof(block_type) * 8;
-    static constexpr size_t block_count = (N + bits_per_block - 1) / bits_per_block;
+    using block_type = size_t;  ///< 底层存储单元类型
+    static constexpr size_t bits_per_block = sizeof(block_type) * 8;  ///< 每个存储单元的位数
+    static constexpr size_t block_count = (N + bits_per_block - 1) / bits_per_block;  ///< 所需存储单元数量
 
-    array<block_type, block_count> blocks{};
+    array<block_type, block_count> blocks{};  ///< 存储单元的数组
 
+    /**
+     * @brief 获取最后一个存储单元的掩码
+     * @return 掩码值，用于清除超出N的位
+     */
     static constexpr block_type last_block_mask() noexcept {
         const size_t excess = block_count * bits_per_block - N;
         if (excess == 0) return static_cast<block_type>(~0ULL);
         return (static_cast<block_type>(1ULL) << (bits_per_block - excess)) - 1;
     }
 
+    /**
+     * @brief 检查位置是否有效
+     * @param pos 要检查的位置
+     */
     MSTL_ALWAYS_INLINE constexpr void check_range(const size_t pos) const noexcept {
         MSTL_DEBUG_VERIFY(pos < N, "bitset position out of range");
     }
 
+    /**
+     * @brief 计算位置所在的存储单元索引
+     * @param pos 位位置
+     * @return 存储单元索引
+     */
     MSTL_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept {
         return pos / bits_per_block;
     }
+
+    /**
+     * @brief 计算位置在存储单元内的位偏移
+     * @param pos 位位置
+     * @return 位偏移
+     */
     MSTL_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept {
         return pos % bits_per_block;
     }
 
 public:
+    /**
+     * @brief 默认构造函数，所有位初始化为0
+     */
     constexpr bitset() noexcept {
         blocks.fill(0);
     }
 
-    constexpr explicit bitset(const block_type val) noexcept {
+    /**
+     * @brief 整数初始化
+     * @param value 无符号整数值，用于初始化低位
+     *
+     * 将二进制位复制到bitset的低位，超出N的高位被忽略。
+     */
+    constexpr explicit bitset(const block_type value) noexcept {
         blocks.fill(0);
         MSTL_IF_CONSTEXPR (block_count > 0) {
-            blocks[0] = val & last_block_mask();
+            blocks[0] = value & last_block_mask();
         }
     }
 
+    /**
+     * @brief 用字符串初始化bitset
+     * @param str 字符串视图
+     * @param zero 表示0的字符，默认为'0'
+     * @param one 表示1的字符，默认为'1'
+     * @throw value_exception 如果字符串包含无效字符
+     *
+     * 字符串从左到右对应从高位到低位。如果字符串长度小于N，高位补0；
+     * 如果长度大于N，只使用前N个字符。
+     */
     constexpr explicit bitset(const string_view str,
-        const char zero = '0', const char one = '1') {
+                              const char zero = '0',
+                              const char one = '1') {
         blocks.fill(0);
         const size_t str_len = str.length();
         const size_t M = (str_len < N) ? str_len : N;
@@ -61,35 +184,66 @@ public:
         }
     }
 
+    /**
+     * @brief string初始化
+     * @param str string对象
+     * @param zero 表示0的字符
+     * @param one 表示1的字符
+     */
     constexpr explicit bitset(const string& str, const char zero = '0', const char one = '1')
     : bitset(str.view(), zero, one) {}
 
+    /**
+     * @brief C风格字符串初始化
+     * @param str C风格字符串
+     * @param zero 表示0的字符
+     * @param one 表示1的字符
+     */
     constexpr explicit bitset(const char* str, const char zero = '0', const char one = '1')
     : bitset(string_view{str}, zero, one) {}
 
-
+    /**
+     * @brief 将所有位设置为1
+     * @return 自身引用
+     */
     constexpr bitset& set() noexcept {
         for (auto& b : blocks) b = ~static_cast<block_type>(0ULL);
         blocks[block_count - 1] &= last_block_mask();
         return *this;
     }
 
+    /**
+     * @brief 将指定位置的位设置为指定值
+     * @param pos 位位置
+     * @param value 要设置的值，默认为true
+     * @return 自身引用
+     */
     constexpr bitset& set(const size_t pos, const bool value = true) noexcept {
         check_range(pos);
         const size_t idx = block_index(pos);
         const size_t bit = bit_index(pos);
-        if (value)
+        if (value) {
             blocks[idx] |= (static_cast<block_type>(1) << bit);
-        else
+        } else {
             blocks[idx] &= ~(static_cast<block_type>(1) << bit);
+        }
         return *this;
     }
 
+    /**
+     * @brief 将所有位重置为0
+     * @return 自身引用
+     */
     constexpr bitset& reset() noexcept {
         blocks.fill(0);
         return *this;
     }
 
+    /**
+     * @brief 将指定位置的位重置为0
+     * @param pos 位位置
+     * @return 自身引用
+     */
     constexpr bitset& reset(const size_t pos) noexcept {
         check_range(pos);
         const size_t idx = block_index(pos);
@@ -98,6 +252,10 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 翻转所有位
+     * @return 自身引用
+     */
     constexpr bitset& flip() noexcept {
         for (auto& b : blocks) {
             b = ~b;
@@ -106,6 +264,11 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 翻转指定位置的位
+     * @param pos 位位置
+     * @return 自身引用
+     */
     constexpr bitset& flip(const size_t pos) noexcept {
         check_range(pos);
         const size_t idx = block_index(pos);
@@ -114,75 +277,104 @@ public:
         return *this;
     }
 
-
-    class reference {
-    private:
-        bitset& bs;
-        size_t pos;
-    public:
-        constexpr reference(bitset& b, const size_t p) noexcept
-        : bs(b), pos(p) {}
-
-        constexpr reference& operator =(const bool x) noexcept {
-            bs.set(pos, x);
-            return *this;
-        }
-        constexpr reference& operator =(const reference& x) noexcept {
-            return *this = static_cast<bool>(x);
-        }
-        constexpr operator bool() const noexcept {
-            return bs.test(pos);
-        }
-        constexpr reference& flip() noexcept {
-            bs.flip(pos);
-            return *this;
-        }
-        constexpr void flip() volatile noexcept = delete;
-    };
-
+    /**
+     * @brief 常量下标访问
+     * @param pos 位位置
+     * @return 该位的bool值
+     */
     MSTL_NODISCARD constexpr bool operator [](const size_t pos) const noexcept {
         return test(pos);
     }
+
+    /**
+     * @brief 非常量下标访问
+     * @param pos 位位置
+     * @return 位引用对象，可用于修改
+     */
     MSTL_NODISCARD constexpr reference operator [](size_t pos) noexcept {
         check_range(pos);
         return reference(*this, pos);
     }
 
-    MSTL_NODISCARD constexpr size_t size() const noexcept { return N; }
-    MSTL_NODISCARD constexpr bool empty() const noexcept { return N == 0; }
+    /**
+     * @brief 获取位数
+     * @return 模板参数N
+     */
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr size_t size() const noexcept {
+        return N;
+    }
 
-    MSTL_NODISCARD constexpr bool test(const size_t pos) const noexcept {
-        check_range(pos);
-        const size_t idx = block_index(pos);
-        const size_t bit = bit_index(pos);
+    /**
+     * @brief 检查是否为空
+     * @return 如果N为0返回true
+     */
+    MSTL_NODISCARD MSTL_ALWAYS_INLINE constexpr bool empty() const noexcept {
+        return N == 0;
+    }
+
+    /**
+     * @brief 测试指定位置的位
+     * @param position 位位置
+     * @return 位的值
+     */
+    MSTL_NODISCARD constexpr bool test(const size_t position) const noexcept {
+        check_range(position);
+        const size_t idx = block_index(position);
+        const size_t bit = bit_index(position);
         return (blocks[idx] & (static_cast<block_type>(1) << bit)) != 0;
     }
 
+    /**
+     * @brief 按位与赋值
+     * @param other 另一个bitset
+     * @return 自身引用
+     */
     MSTL_NODISCARD constexpr bitset& operator &=(const bitset& other) noexcept {
-        for (size_t i = 0; i < block_count; ++i)
+        for (size_t i = 0; i < block_count; ++i) {
             blocks[i] &= other.blocks[i];
+        }
         return *this;
     }
 
+    /**
+     * @brief 按位或赋值
+     * @param other 另一个bitset
+     * @return 自身引用
+     */
     MSTL_NODISCARD constexpr bitset& operator |=(const bitset& other) noexcept {
         for (size_t i = 0; i < block_count; ++i)
             blocks[i] |= other.blocks[i];
         return *this;
     }
 
+    /**
+     * @brief 按位异或赋值
+     * @param other 另一个bitset
+     * @return 自身引用
+     */
     MSTL_NODISCARD constexpr bitset& operator ^=(const bitset& other) noexcept {
-        for (size_t i = 0; i < block_count; ++i)
+        for (size_t i = 0; i < block_count; ++i) {
             blocks[i] ^= other.blocks[i];
+        }
         return *this;
     }
 
+    /**
+     * @brief 按位取反
+     * @return 取反后的新bitset
+     */
     MSTL_NODISCARD constexpr bitset operator ~() const noexcept {
         bitset res = *this;
         res.flip();
         return res;
     }
 
-    MSTL_NODISCARD constexpr bitset& operator <<=(const size_t pos) noexcept {
+    /**
+     * @brief 左移赋值
+     * @param pos 左移位数
+     * @return 自身引用
+     */
+    MSTL_NODISCARD constexpr bitset& operator <<=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -209,7 +401,12 @@ public:
         return *this;
     }
 
-    MSTL_NODISCARD constexpr bitset& operator >>=(const size_t pos) noexcept {
+    /**
+     * @brief 右移赋值
+     * @param pos 右移位数
+     * @return 自身引用
+     */
+    MSTL_NODISCARD constexpr bitset& operator >>=(const uint32_t pos) noexcept {
         if (pos >= N) {
             reset();
             return *this;
@@ -235,6 +432,10 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 统计值为1的位的数量
+     * @return 1的位数
+     */
     MSTL_NODISCARD constexpr size_t count() const noexcept {
         size_t cnt = 0;
         for (size_t i = 0; i < block_count; ++i) {
@@ -243,6 +444,10 @@ public:
         return cnt;
     }
 
+    /**
+     * @brief 检查所有位是否都为1
+     * @return 如果所有位都是1返回true
+     */
     MSTL_NODISCARD constexpr bool all() const noexcept {
         for (size_t i = 0; i < block_count - 1; ++i) {
             if (blocks[i] != ~static_cast<block_type>(0ULL)) return false;
@@ -250,16 +455,29 @@ public:
         return blocks[block_count - 1] == last_block_mask();
     }
 
+    /**
+     * @brief 检查是否存在值为1的位
+     * @return 如果至少有一个1返回true
+     */
     MSTL_NODISCARD constexpr bool any() const noexcept {
         for (auto b : blocks)
             if (b != 0) return true;
         return false;
     }
 
+    /**
+     * @brief 检查是否所有位都是0
+     * @return 如果没有1返回true
+     */
     MSTL_NODISCARD constexpr bool none() const noexcept {
         return !any();
     }
 
+    /**
+     * @brief 转换为unsigned long
+     * @return unsigned long表示的位值
+     * @throw value_exception 如果值超出unsigned long范围
+     */
     MSTL_NODISCARD constexpr unsigned long to_ulong() const noexcept {
         MSTL_IF_CONSTEXPR (N > sizeof(unsigned long) * 8) {
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
@@ -293,7 +511,11 @@ public:
         }
     }
 
-
+    /**
+     * @brief 转换为unsigned long long
+     * @return unsigned long long表示的位值
+     * @throw value_exception 如果值超出unsigned long long范围
+     */
     MSTL_NODISCARD constexpr unsigned long long to_ullong() const noexcept {
         MSTL_IF_CONSTEXPR (N > sizeof(unsigned long long) * 8) {
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
@@ -327,17 +549,38 @@ public:
         }
     }
 
+    /**
+     * @brief 相等比较操作符
+     * @param other 另一个bitset
+     * @return 如果所有位相等返回true
+     */
     MSTL_NODISCARD constexpr bool operator ==(const bitset& other) const noexcept {
         return blocks == other.blocks;
     }
+
+    /**
+     * @brief 小于比较操作符（按字典序）
+     * @param other 另一个bitset
+     * @return 比较结果
+     */
     MSTL_NODISCARD constexpr bool operator <(const bitset& other) const noexcept {
         return blocks < other.blocks;
     }
 
+    /**
+     * @brief 计算哈希值
+     * @return 哈希值
+     */
     MSTL_NODISCARD constexpr size_t to_hash() const noexcept {
         return blocks.to_hash();
     }
 
+    /**
+     * @brief 转换为字符串
+     * @param zero 表示0的字符
+     * @param one 表示1的字符
+     * @return 字符串表示，高位在左
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const char zero, const char one) const {
         string result;
         result.reserve(N);
@@ -347,32 +590,24 @@ public:
         return result;
     }
 
+    /**
+     * @brief 转换为字符串（默认使用'0'和'1'）
+     * @return 字符串表示
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string() const {
-        return this->to_string('0', '1');
+        return bitset::to_string('0', '1');
     }
 
+    /**
+     * @brief 交换两个bitset的内容
+     * @param other 另一个bitset
+     */
     constexpr void swap(bitset& other) noexcept {
         blocks.swap(other.blocks);
     }
-
-    bitset operator &(const bitset& rhs) {
-        bitset res = *this;
-        res &= rhs;
-        return res;
-    }
-
-    bitset operator |(const bitset& rhs) {
-        bitset res = *this;
-        res |= rhs;
-        return res;
-    }
-
-    bitset operator ^(const bitset& rhs) {
-        bitset res = *this;
-        res ^= rhs;
-        return res;
-    }
 };
+
+/** @} */ // Bitset
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_CONTAINER_BITSET_HPP__

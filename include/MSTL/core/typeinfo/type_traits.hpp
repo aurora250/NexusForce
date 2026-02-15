@@ -1182,6 +1182,9 @@ using add_pointer_t = typename add_pointer<T>::type;
 template <typename T>
 add_rvalue_reference_t<T> declval() noexcept;
 
+template <typename T>
+add_lvalue_reference_t<T> ldeclval() noexcept;
+
 /**
  * @brief 获取类型的副本，仅用于非求值上下文
  * @tparam T 目标类型
@@ -2887,13 +2890,7 @@ struct is_nothrow_assignable;
 
 /// @cond
 template <typename To, typename From>
-struct is_nothrow_assignable :
-#ifdef MSTL_COMPILER_MSVC__
-    bool_constant<__is_nothrow_assignable(To, From)> {};
-#else
-    conjunction<is_assignable<To, From>, bool_constant<
-        noexcept(_MSTL declval<To>() = _MSTL declval<From>())>> {};
-#endif
+struct is_nothrow_assignable : bool_constant<__is_nothrow_assignable(To, From)> {};
 /// @endcond
 
 #ifdef MSTL_STANDARD_14__
@@ -3170,7 +3167,7 @@ struct is_convertible :
 #elif defined(MSTL_COMPILER_CLANG__)
     bool_constant<__is_convertible(From, To)> {};
 #else
-    __is_convertible_helper<From, To>::type {};
+    _INNER __is_convertible_helper<From, To>::type {};
 #endif
 
 #ifdef MSTL_STANDARD_14__
@@ -4380,16 +4377,23 @@ MSTL_INLINE17 constexpr bool has_base_v = has_base<T>::value;
  *   - 函数返回类类型对象且该对象是函数的局部对象。
  *   - 函数的return语句直接返回该局部对象。
  */
-template <typename T, enable_if_t<is_default_constructible<T>::value, int> = 0>
-constexpr T initialize() noexcept(is_nothrow_default_constructible<T>::value) {
+template <typename T>
+MSTL_ALWAYS_INLINE constexpr T initialize()
+noexcept(is_nothrow_default_constructible<T>::value) {
+    static_assert(is_default_constructible<T>::value, "T must be default constructible");
     return T();
 }
 
-#define INITIALIZE_BASIC_FUNCTION__(OPT) \
-template <> constexpr OPT initialize() noexcept { return static_cast<OPT>(0); }
-MSTL_MACRO_RANGE_CHARS(INITIALIZE_BASIC_FUNCTION__)
-MSTL_MACRO_RANGE_FLOAT(INITIALIZE_BASIC_FUNCTION__)
-MSTL_MACRO_RANGE_INT(INITIALIZE_BASIC_FUNCTION__)
+#define MSTL_INITIALIZE_BASIC_FUNCTION__(OPT) \
+template <> \
+MSTL_ALWAYS_INLINE constexpr OPT \
+initialize() noexcept { \
+    return static_cast<OPT>(0); \
+}
+
+MSTL_MACRO_RANGE_CHARS(MSTL_INITIALIZE_BASIC_FUNCTION__)
+MSTL_MACRO_RANGE_FLOAT(MSTL_INITIALIZE_BASIC_FUNCTION__)
+MSTL_MACRO_RANGE_INT(MSTL_INITIALIZE_BASIC_FUNCTION__)
 
 #undef INITIALIZE_BASIC_FUNCTION__
 

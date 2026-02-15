@@ -18,12 +18,12 @@ void zlib_compressor::check_zlib_error(const int ret_code) {
 }
 
 
-bvector zlib_compressor::compress_data(
+byte_vector zlib_compressor::compress_data(
     const byte_t* data, const size_t size,
     COMPRESS_LEVEL level, COMPRESS_STRATEGY strategy) {
 
     ::uLongf compressed_size = ::compressBound(static_cast<::uLong>(size));
-    bvector compressed(compressed_size);
+    byte_vector compressed(compressed_size);
 
     const int result = ::compress2(
         compressed.data(), &compressed_size,
@@ -36,14 +36,14 @@ bvector zlib_compressor::compress_data(
     return compressed;
 }
 
-bvector zlib_compressor::decompress_data(const byte_t* data,
+byte_vector zlib_compressor::decompress_data(const byte_t* data,
     const size_t size, size_t estimated_original_size) {
 
     if (estimated_original_size == 0) {
         estimated_original_size = size * 4;
     }
     
-    bvector decompressed(estimated_original_size);
+    byte_vector decompressed(estimated_original_size);
     ::uLongf decompressed_size = 0;
     int result = Z_BUF_ERROR;
     int attempt = 0;
@@ -147,8 +147,8 @@ void zlib_compressor::stream_compressor::reset(
     bytes_output_ = 0;
 }
 
-bvector zlib_compressor::stream_compressor::compress(
-    const span<const byte_t>& data, const bool finish) {
+byte_vector zlib_compressor::stream_compressor::compress(
+    const cbyte_view& data, const bool finish) {
     
     if (!initialized_) {
         throw_exception(zlib_exception("Compressor not initialized"));
@@ -159,7 +159,7 @@ bvector zlib_compressor::stream_compressor::compress(
     bytes_input_ += data.size();
     
     constexpr size_t CHUNK_SIZE = 16384;
-    bvector output;
+    byte_vector output;
     output.reserve(CHUNK_SIZE);
     
     do {
@@ -183,17 +183,17 @@ bvector zlib_compressor::stream_compressor::compress(
     return output;
 }
 
-bvector zlib_compressor::stream_compressor::compress(
+byte_vector zlib_compressor::stream_compressor::compress(
     const string_view data, const bool finish) {
     
-    return compress(span<const byte_t>(
+    return compress(cbyte_view(
         reinterpret_cast<const byte_t*>(data.data()),
         data.size()
     ), finish);
 }
 
-bvector zlib_compressor::stream_compressor::finish() {
-    return compress(span<const byte_t>{}, true);
+byte_vector zlib_compressor::stream_compressor::finish() {
+    return compress(cbyte_view{}, true);
 }
 
 zlib_compressor::stream_decompressor::stream_decompressor() {
@@ -253,8 +253,8 @@ void zlib_compressor::stream_decompressor::reset() {
     bytes_output_ = 0;
 }
 
-bvector zlib_compressor::stream_decompressor::decompress(
-    const span<const byte_t>& data, const bool finish) {
+byte_vector zlib_compressor::stream_decompressor::decompress(
+    const cbyte_view& data, const bool finish) {
     
     if (!initialized_) {
         throw_exception(zlib_exception("Decompressor not initialized"));
@@ -265,7 +265,7 @@ bvector zlib_compressor::stream_decompressor::decompress(
     bytes_input_ += data.size();
     
     constexpr size_t CHUNK_SIZE = 16384;
-    bvector output;
+    byte_vector output;
     output.reserve(CHUNK_SIZE);
     
     int result = Z_OK;
@@ -287,8 +287,8 @@ bvector zlib_compressor::stream_decompressor::decompress(
     return output;
 }
 
-bvector zlib_compressor::stream_decompressor::finish() {
-    return decompress(span<const byte_t>{}, true);
+byte_vector zlib_compressor::stream_decompressor::finish() {
+    return decompress(cbyte_view{}, true);
 }
 
 MSTL_END_NAMESPACE__

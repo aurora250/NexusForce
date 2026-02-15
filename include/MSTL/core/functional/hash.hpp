@@ -66,7 +66,7 @@ MSTL_INLINE17 constexpr size_t FNV_OFFSET_BASIS =
 #ifdef MSTL_DATA_BUS_WIDTH_64__
     14695981039346656037ULL;
 #else
-    2166136261U
+    2166136261U;
 #endif
 
 /**
@@ -269,7 +269,7 @@ struct murmur_hash {
  *
  * @note 仅64位系统可用
  */
-murmur_hash MurmurHash_x64(const void* key, size_t len, uint32_t seed) noexcept;
+murmur_hash MSTL_API MurmurHash_x64(const void* key, size_t len, uint32_t seed) noexcept;
 #endif
 
 /**
@@ -282,7 +282,7 @@ murmur_hash MurmurHash_x64(const void* key, size_t len, uint32_t seed) noexcept;
  * MurmurHash3的32位版本，产生32位哈希值。
  * 适用于32位系统或需要32位哈希的场景。
  */
-uint32_t MurmurHash_x32(const void* key, size_t len, uint32_t seed) noexcept;
+uint32_t MSTL_API MurmurHash_x32(const void* key, size_t len, uint32_t seed) noexcept;
 
 /** @} */ // MurmurHash
 

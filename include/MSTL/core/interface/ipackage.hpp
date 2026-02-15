@@ -24,13 +24,16 @@ protected:
 
 public:
     constexpr ipackage() noexcept = default;
-    constexpr ipackage(package_type val) noexcept : value_(val) {}
+    explicit constexpr ipackage(package_type value) noexcept : value_(value) {}
     constexpr ipackage(const ipackage& other) noexcept : value_(other.value_) {}
     constexpr ipackage(ipackage&& other) noexcept : value_(other.value_) {
         other.value_ = initialize<package_type>();
     }
+
+protected:
     MSTL_CONSTEXPR20 ~ipackage() = default;
 
+public:
     MSTL_NODISCARD constexpr operator package_type() const noexcept { return value_; }
     MSTL_NODISCARD constexpr package_type value() const noexcept { return value_; }
     MSTL_NODISCARD constexpr int64_t to_int64() const noexcept { return static_cast<int64_t>(value_); }

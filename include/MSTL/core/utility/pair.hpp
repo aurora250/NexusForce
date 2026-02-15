@@ -13,6 +13,12 @@
 #include "MSTL/core/utility/integer_sequence.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup Tuple 元组
+ * @brief 元组的主模板、特化实现和辅助函数
+ * @{
+ */
+
 template <typename...>
 struct tuple;
 
@@ -70,10 +76,11 @@ __pair_get_from_tuple(tuple<Types...>&& t) noexcept;
 MSTL_END_INNER__
 /// @endcond
 
+/** @} */ // Tuple
 
 /**
  * @defgroup Pair 键值对
- * @brief 键值对实现
+ * @brief 键值对及辅助函数实现
  * @{
  */
 
@@ -448,8 +455,8 @@ noexcept(conjunction<is_nothrow_constructible<unwrap_ref_decay_t<T1>, T1>,
 /** @} */ // Pair
 
 /**
- * @defgroup PairUtilities 键值对辅助工具
- * @brief 与键值对相关的辅助函数
+ * @defgroup Tuple 元组
+ * @brief 元组的主模板、特化实现和辅助函数
  * @{
  */
 
@@ -522,6 +529,13 @@ struct tuple_element<Index, pair<T1, T2>> {
 	using tuple_type = tuple<T1, T2>;                ///< 对应的tuple类型
 };
 
+/** @} */ // Tuple
+
+/**
+ * @defgroup Pair 键值对
+ * @brief 键值对及辅助函数实现
+ * @{
+ */
 
 #ifndef MSTL_STANDARD_17__
 /// @cond
@@ -739,7 +753,7 @@ MSTL_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
 	return _MSTL forward<const T2>(pir.second);
 }
 
-/** @} */ // PairUtilities
+/** @} */ // Pair
 
 MSTL_END_NAMESPACE__
 
