@@ -23,9 +23,6 @@ private:
     pointer current_ = nullptr;
     const container_type* str_ = nullptr;
 
-    template <bool, typename> friend struct basic_string_iterator;
-    template <typename, typename, typename> friend class basic_string;
-
 public:
     MSTL_CONSTEXPR20 basic_string_iterator() noexcept = default;
     MSTL_CONSTEXPR20 ~basic_string_iterator() = default;
@@ -38,21 +35,17 @@ public:
     MSTL_CONSTEXPR20 basic_string_iterator(pointer ptr, const container_type* str) noexcept
     : current_(ptr), str_(str) {}
 
-    template <bool IsConst2>
-    explicit basic_string_iterator(const basic_string_iterator<IsConst2, String>& other) noexcept
-    : current_(other.current_), str_(other.str_) {}
-
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference dereference() const noexcept {
         MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to dereference on a null pointer");
         MSTL_DEBUG_VERIFY(
-            str_->data() <= current_ && current_ <= str_->data() + str_->size_,
+            str_->data() <= current_ && current_ <= str_->data() + str_->size(),
             "Attempting to dereference out of boundary");
         return *current_;
     }
 
     MSTL_CONSTEXPR20 void increment() noexcept {
         MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to increment a null pointer");
-        MSTL_DEBUG_VERIFY(current_ < str_->data() + str_->size_, "Attempting to increment out of boundary");
+        MSTL_DEBUG_VERIFY(current_ < str_->data() + str_->size(), "Attempting to increment out of boundary");
         ++current_;
     }
 
@@ -65,7 +58,7 @@ public:
     MSTL_CONSTEXPR20 void advance(difference_type off) noexcept {
         MSTL_DEBUG_VERIFY((current_ && str_) || off == 0, "Attempting to advance a null pointer");
         MSTL_DEBUG_VERIFY(
-            (off < 0 ? off >= str_->data() - current_ : off <= str_->data() + str_->size_ - current_),
+            (off < 0 ? off >= str_->data() - current_ : off <= str_->data() + str_->size() - current_),
             "Attempting to advance out of boundary");
         current_ += off;
     }
@@ -104,18 +97,23 @@ class basic_string : public icommon<basic_string<CharT, Traits, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<CharT, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_same_v<CharT, typename Traits::char_type>, "trait type mismatch.");
-
     static_assert(
         !is_array_v<CharT> && is_trivial_v<CharT> && is_standard_layout_v<CharT>,
         "basic string only contains non-array trivial standard-layout types.");
-    
+
 public:
-    MSTL_BUILD_TYPE_ALIAS(CharT)
+    using value_type        = CharT;  ///< 值类型
+    using pointer           = CharT*;  ///< 指针类型
+    using reference         = CharT&;  ///< 引用类型
+    using const_pointer     = const CharT*;  ///< 常量指针类型
+    using const_reference   = const CharT&;  ///< 常量引用类型
+    using size_type         = size_t;  ///< 大小类型
+    using difference_type   = ptrdiff_t;  ///< 差值类型
     using iterator                  = basic_string_iterator<false, basic_string>;
     using const_iterator            = basic_string_iterator<true, basic_string>;
     using reverse_iterator          = _MSTL reverse_iterator<iterator>;
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
-    
+
     using traits_type               = Traits;
     using view_type                 = basic_string_view<CharT, Traits>;
     using allocator_type            = Alloc;
@@ -127,18 +125,7 @@ private:
     size_type size_ = 0;
     compressed_pair<allocator_type, size_type> capacity_pair_{ default_construct_tag{}, 0 };
 
-    template <bool, typename> friend struct basic_string_iterator;
-
 private:
-    MSTL_CONSTEXPR20 void null_terminate() {
-        if (data_ && size_ < capacity_pair_.value) {
-            traits_type::assign(data_ + size_, 1, value_type());
-        } else if (size_ == capacity_pair_.value) {
-            basic_string::reserve(capacity_pair_.value * 1.5);
-            traits_type::assign(data_ + size_, 1, value_type());
-        }
-    }
-
     template <typename Iterator>
     MSTL_CONSTEXPR20 enable_if_t<!is_ranges_fwd_iter_v<Iterator>>
     construct_from_iter(Iterator first, Iterator last) {
@@ -153,7 +140,7 @@ private:
             data_ = temp_data;
             size_ = n;
             capacity_pair_.value = init_size;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
         } catch (...) {
             if (temp_data) {
                 _MSTL destroy(temp_data, temp_data + n);
@@ -180,7 +167,7 @@ private:
             data_ = temp_data;
             size_ = n;
             capacity_pair_.value = init_size;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
         } catch (...) {
             if (temp_data) {
                 _MSTL destroy(temp_data, temp_data + n);
@@ -203,7 +190,7 @@ private:
             data_ = temp_data;
             size_ = n;
             capacity_pair_.value = temp_capacity;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
         } catch (...) {
             if (temp_data) {
                 capacity_pair_.get_base().deallocate(temp_data, capacity_pair_.value);
@@ -230,11 +217,14 @@ private:
         if (static_cast<size_type>(end() - first) < n1) {
             n1 = cend() - first;
         }
+
         if (n1 < n2) {
             const size_type diff = n2 - n1;
             MSTL_DEBUG_VERIFY(size_ + diff < max_size(), "basic_string index out of range.");
-            if (size_ > capacity_pair_.value - diff)
+            if (size_ > capacity_pair_.value - diff) {
                 reallocate(diff);
+            }
+
             pointer raw_ptr = &*first;
             traits_type::move(raw_ptr + n2, raw_ptr + n1, end() - (first + n1));
             traits_type::assign(raw_ptr, n2, chr);
@@ -246,7 +236,8 @@ private:
             traits_type::assign(raw_ptr, n2, chr);
             size_ -= n1 - n2;
         }
-        null_terminate();
+
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -275,7 +266,7 @@ private:
             size_ -= len1 - len2;
         }
 
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -297,7 +288,7 @@ private:
             capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
             data_ = new_buffer;
             capacity_pair_.value = new_cap;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
         } catch (...) {
             if (new_buffer) {
                 capacity_pair_.get_base().deallocate(new_buffer, capacity_pair_.value);
@@ -318,7 +309,7 @@ private:
         data_ = new_buffer;
         size_ += n;
         capacity_pair_.value = new_cap;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return iterator(data_ + diff, this);
     }
 
@@ -336,13 +327,13 @@ private:
         data_ = new_buffer;
         size_ += n;
         capacity_pair_.value = new_cap;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return iterator(data_ + diff, this);
     }
 
 public:
     MSTL_CONSTEXPR20 basic_string() {
-        null_terminate();
+        basic_string::reserve(MEMORY_ALIGN_THRESHHOLD);
     }
 
     MSTL_CONSTEXPR20 explicit basic_string(size_type n)
@@ -357,11 +348,11 @@ public:
         traits_type::assign(data_, n, chr);
         size_ = n;
         capacity_pair_.value = init_size;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
     }
 
     MSTL_CONSTEXPR20 basic_string& operator =(value_type chr) {
-        if (capacity_pair_.value < 1) {
+        if (capacity_pair_.value < 2) {
             pointer new_buffer = capacity_pair_.get_base().allocate(2);
             capacity_pair_.get_base().deallocate(data_);
             data_ = new_buffer;
@@ -369,7 +360,7 @@ public:
         }
         *data_ = chr;
         size_ = 1;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -429,7 +420,7 @@ public:
         }
         traits_type::copy(data_, str.data(), len);
         size_ = len;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -459,7 +450,7 @@ public:
         }
         traits_type::copy(data_, str, len);
         size_ = len;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -506,7 +497,7 @@ public:
 
         data_ = new_buffer;
         capacity_pair_.value = n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
     }
 
     MSTL_CONSTEXPR20 void reserve(const size_type n) {
@@ -566,7 +557,7 @@ public:
 
         *p = chr;
         ++size_;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return iterator(p, this);
     }
 
@@ -591,7 +582,7 @@ public:
         traits_type::assign(p, n, chr);
 
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return iterator(p, this);
     }
 
@@ -616,7 +607,7 @@ public:
         }
 
         size_ += len;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return position;
     }
 
@@ -627,15 +618,17 @@ public:
     MSTL_CONSTEXPR20 void pop_back() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "pop_back called on empty basic_string");
         --size_;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
     }
 
     MSTL_CONSTEXPR20 basic_string& append(size_type n, value_type chr) {
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
-        if (capacity_pair_.value - size_ <= n) reallocate(n);
+        if (capacity_pair_.value - size_ <= n) {
+            reallocate(n);
+        }
         traits_type::assign(data_ + size_, n, chr);
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -646,11 +639,12 @@ public:
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& str, size_type position, size_type n) {
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
-
-        if (capacity_pair_.value - size_ <= n) reallocate(n);
+        if (capacity_pair_.value - size_ <= n) {
+            reallocate(n);
+        }
         traits_type::copy(data_ + size_, str.data_ + position, n);
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -665,11 +659,12 @@ public:
     MSTL_CONSTEXPR20 basic_string& append(basic_string&& str, size_type position, size_type n) {
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
-
-        if (capacity_pair_.value - size_ <= n) reallocate(n);
+        if (capacity_pair_.value - size_ <= n) {
+            reallocate(n);
+        }
         traits_type::move(data_ + size_, str.data_ + position, n);
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -693,10 +688,12 @@ public:
 
     MSTL_CONSTEXPR20 basic_string& append(const_pointer str, size_type n) {
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
-        if (capacity_pair_.value - size_ <= n) reallocate(n);
+        if (capacity_pair_.value - size_ <= n) {
+            reallocate(n);
+        }
         traits_type::copy(data_ + size_, str, n);
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -708,11 +705,12 @@ public:
     MSTL_CONSTEXPR20 basic_string& append(Iterator first, Iterator last) {
         const size_type n = _MSTL distance(first, last);
         MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
-
-        if (capacity_pair_.value - size_ <= n) reallocate(n);
+        if (capacity_pair_.value - size_ <= n) {
+            reallocate(n);
+        }
         _MSTL uninitialized_copy_n(first, n, data_ + size_);
         size_ += n;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return *this;
     }
 
@@ -765,7 +763,7 @@ public:
         }
 
         --size_;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return position;
     }
 
@@ -797,16 +795,17 @@ public:
         }
 
         size_ -= erase_count;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
         return first;
     }
 
 
     MSTL_CONSTEXPR20 void resize(size_type count, value_type chr) {
-        if (count < size_)
+        if (count < size_) {
             this->erase({data_ + count, this}, {data_ + size_, this});
-        else
+        } else {
             this->append(count - size_, chr);
+        }
     }
 
     MSTL_CONSTEXPR20 void resize(const size_type count) {
@@ -830,17 +829,17 @@ public:
                 throw_exception(value_exception("resize_and_overwrite: operation returned invalid size"));
             }
             size_ = actual_size;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
         } catch (...) {
             size_ = old_size;
-            null_terminate();
+            traits_type::assign(data_ + size_, 1, value_type());
             throw;
         }
     }
 
     MSTL_CONSTEXPR20 void clear() noexcept {
         size_ = 0;
-        null_terminate();
+        traits_type::assign(data_ + size_, 1, value_type());
     }
 
     MSTL_CONSTEXPR20 void shrink_to_fit() {

@@ -29,7 +29,7 @@ class basic_string_view;
 
 
 /**
- * @struct string_view_iterator
+ * @struct basic_string_view_iterator
  * @brief 字符串视图迭代器
  * @tparam Traits 字符特征类型
  *
@@ -37,7 +37,7 @@ class basic_string_view;
  * 所有操作都是const的，因为string_view是只读的。
  */
 template <typename Traits>
-struct string_view_iterator : iiterator<string_view_iterator<Traits>> {
+struct basic_string_view_iterator : iiterator<basic_string_view_iterator<Traits>> {
 public:
     using container_type	= basic_string_view<typename Traits::char_type, Traits>;  ///< 容器类型
     using value_type		= typename container_type::value_type;  ///< 值类型
@@ -53,13 +53,13 @@ private:
     size_t idx_ = 0;  ///< 当前索引
 
 public:
-    constexpr string_view_iterator() noexcept = default;
-    MSTL_CONSTEXPR20 ~string_view_iterator() = default;
+    constexpr basic_string_view_iterator() noexcept = default;
+    MSTL_CONSTEXPR20 ~basic_string_view_iterator() = default;
 
-    constexpr string_view_iterator(const string_view_iterator&) noexcept = default;
-    constexpr string_view_iterator& operator =(const string_view_iterator&) noexcept = default;
-    constexpr string_view_iterator(string_view_iterator&&) noexcept = default;
-    constexpr string_view_iterator& operator =(string_view_iterator&&) noexcept = default;
+    constexpr basic_string_view_iterator(const basic_string_view_iterator&) noexcept = default;
+    constexpr basic_string_view_iterator& operator =(const basic_string_view_iterator&) noexcept = default;
+    constexpr basic_string_view_iterator(basic_string_view_iterator&&) noexcept = default;
+    constexpr basic_string_view_iterator& operator =(basic_string_view_iterator&&) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -67,7 +67,7 @@ public:
      * @param size 总大小
      * @param off 初始偏移
      */
-    constexpr string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept
+    constexpr basic_string_view_iterator(const pointer data, const size_t size, const size_t off) noexcept
     : data_(data), size_(size), idx_(off) {}
 
     /**
@@ -115,7 +115,7 @@ public:
      * @param other 另一个迭代器
      * @return 两个迭代器之间的距离
      */
-    MSTL_NODISCARD constexpr difference_type distance_to(const string_view_iterator& other) const noexcept {
+    MSTL_NODISCARD constexpr difference_type distance_to(const basic_string_view_iterator& other) const noexcept {
         MSTL_DEBUG_VERIFY(
             data_ == other.data_ && size_ == other.size_,
             "Attempting to distance to a different container");
@@ -136,7 +136,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    MSTL_NODISCARD constexpr bool equal(const string_view_iterator& rhs) const noexcept {
+    MSTL_NODISCARD constexpr bool equal(const basic_string_view_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(data_ == rhs.data_ && size_ == rhs.size_, "Attempting to equal to a different container");
         return idx_ == rhs.idx_;
     }
@@ -146,7 +146,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 当前迭代器是否在rhs之前
      */
-    MSTL_NODISCARD constexpr bool less_than(const string_view_iterator& rhs) const noexcept {
+    MSTL_NODISCARD constexpr bool less_than(const basic_string_view_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(
             data_ == rhs.data_ && size_ == rhs.size_,
             "Attempting to less than a different container");
@@ -190,7 +190,7 @@ public:
     using const_reference   = const CharT&;  ///< 常量引用类型
     using size_type         = size_t;  ///< 大小类型
     using difference_type   = ptrdiff_t;  ///< 差值类型
-    using const_iterator            = string_view_iterator<Traits>;  ///< 常量迭代器类型
+    using const_iterator            = basic_string_view_iterator<Traits>;  ///< 常量迭代器类型
     using iterator                  = const_iterator;  ///< 迭代器类型
     using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
     using reverse_iterator          = const_reverse_iterator;  ///< 反向迭代器类型
