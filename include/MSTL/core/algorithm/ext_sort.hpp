@@ -1,9 +1,37 @@
 #ifndef MSTL_CORE_ALGORITHM_EXT_SORT_HPP__
 #define MSTL_CORE_ALGORITHM_EXT_SORT_HPP__
-#include "leonardo_heap.hpp"
+
+/**
+ * @file ext_sort.hpp
+ * @brief 扩展排序算法集合
+ *
+ * 此文件提供了各种排序算法的实现，
+ * 包括基础排序、线性时间排序、混合排序和娱乐性排序算法。
+ */
+
+#include "MSTL/core/algorithm/leonardo_heap.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-// bubble sort : Ot(N)~(N^2) Om(1) stable
+/**
+ * @defgroup SortAlgorithms 排序算法
+ * @brief MSTL排序算法的实现
+ * @{
+ */
+
+/**
+ * @brief 冒泡排序
+ * @tparam Iterator 双向迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：平均O(N²)，最优O(N)，最差O(N²)
+ * 空间复杂度：O(1)
+ * 稳定性：稳定
+ *
+ * 通过重复交换相邻的逆序元素将最大元素冒泡到末尾。
+ */
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
@@ -24,12 +52,31 @@ MSTL_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 冒泡排序（默认升序）
+ * @tparam Iterator 双向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last) {
     return _MSTL bubble_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// cocktail sort : Ot(N)~(N^2) Om(1) stable
+/**
+ * @brief 鸡尾酒排序（双向冒泡排序）
+ * @tparam Iterator 双向迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：平均O(N²)，最优O(N)，最差O(N²)
+ * 空间复杂度：O(1)
+ * 稳定性：稳定
+ *
+ * 冒泡排序的改进版本，同时从两端进行冒泡，减少循环次数。
+ */
 template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
@@ -62,12 +109,31 @@ MSTL_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last, Compare comp)
     }
 }
 
+/**
+ * @brief 鸡尾酒排序（默认升序）
+ * @tparam Iterator 双向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last) {
     return _MSTL cocktail_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// select sort : Ot(N^2) Om(1) unstable 
+/**
+ * @brief 选择排序
+ * @tparam Iterator 前向迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：O(N²)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
+ *
+ * 每次从未排序部分选择元素放到已排序部分的末尾。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp) {
@@ -84,12 +150,31 @@ MSTL_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 选择排序（默认升序）
+ * @tparam Iterator 前向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void select_sort(Iterator first, Iterator last) {
     return _MSTL select_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// shell sort : Ot(NlogN)~(N^2) Om(1) unstable
+/**
+ * @brief 希尔排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：平均O(N log N)，最差O(N²)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
+ *
+ * 插入排序的改进版本，通过比较相距一定间隔的元素来工作。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void shell_sort(Iterator first, Iterator last, Compare comp) {
@@ -108,12 +193,33 @@ MSTL_CONSTEXPR20 void shell_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 希尔排序（默认升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void shell_sort(Iterator first, Iterator last) {
     return _MSTL shell_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// counting sort : Ot(N + k) Om(k) stable
+/**
+ * @brief 计数排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @tparam IndexMapper 索引映射函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ * @param mapper 将元素映射为整数索引的函数
+ *
+ * 时间复杂度：O(N + k)，其中k是元素范围
+ * 空间复杂度：O(k)
+ * 稳定性：稳定
+ *
+ * 适用于整数或可映射为整数的类型，范围不宜过大。
+ */
 template <typename Iterator, typename Compare, typename IndexMapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapper) {
@@ -147,12 +253,30 @@ MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp,
     _MSTL copy(sorted.begin(), sorted.end(), first);
 }
 
+/**
+ * @brief 计数排序（默认升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
     _MSTL counting_sort(first, last, 
         _MSTL less<iter_value_t<Iterator>>(), _MSTL identity<iter_value_t<Iterator>>());
 }
 
+/**
+ * @brief 桶排序（升序）
+ * @tparam Iterator 前向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ *
+ * 时间复杂度：平均O(N + k)，最差O(N²)
+ * 空间复杂度：O(N + k)
+ * 稳定性：稳定
+ *
+ * 适用于均匀分布的整数或浮点数。
+ */
 template <typename Iterator, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
@@ -177,6 +301,12 @@ MSTL_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
     }
 }
 
+/**
+ * @brief 桶排序（降序）
+ * @tparam Iterator 前向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator, enable_if_t<
     is_ranges_fwd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
@@ -201,12 +331,18 @@ MSTL_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
     }
 }
 
-// bucket sort : Ot(N + k)~(N^2) Om(N + k) stable
+/**
+ * @brief 桶排序（默认升序）
+ * @tparam Iterator 前向迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void bucket_sort(Iterator first, Iterator last) {
     _MSTL bucket_sort_less(first, last);
 }
 
+/// @cond
 MSTL_BEGIN_INNER__
 
 template <typename Iterator>
@@ -230,7 +366,22 @@ int __get_number_aux(T num, T d) {
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @brief 基数排序（升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Mapper 映射函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param mapper 将元素映射为整数的函数
+ *
+ * 时间复杂度：O(d * (N + k))，d是位数
+ * 空间复杂度：O(N + k)
+ * 稳定性：稳定
+ *
+ * 适用于整数或可分解为固定数位的类型。
+ */
 template <typename Iterator, typename Mapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
@@ -269,6 +420,14 @@ MSTL_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper mapp
     }
 }
 
+/**
+ * @brief 基数排序（降序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Mapper 映射函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param mapper 将元素映射为整数的函数
+ */
 template <typename Iterator, typename Mapper, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
@@ -307,20 +466,52 @@ MSTL_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mapper m
     }
 }
 
-// radix sort : Ot(d(n + k)) Om(N + k) stable
+/**
+ * @brief 基数排序（默认升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Mapper 映射函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param mapper 将元素映射为整数的函数
+ */
 template <typename Iterator, typename Mapper = _MSTL identity<iter_value_t<Iterator>>>
 MSTL_CONSTEXPR20 void radix_sort(Iterator first, Iterator last, Mapper mapper = Mapper()) {
     _MSTL radix_sort_less(first, last, mapper);
 }
 
-// smooth sort : Ot(NlogN) Om(1) unstable
+/**
+ * @brief 平滑排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
+ *
+ * 基于莱昂纳多堆的排序算法，是堆排序的改进版本，
+ * 在部分有序的序列上表现优异。
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
     _MSTL make_leonardo_heap(first, last);
     _MSTL sort_leonardo_heap(first, last);
 }
 
-// tim sort : Ot(NlogN) Om(N) stable
+/**
+ * @brief Tim排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(N)
+ * 稳定性：稳定
+ *
+ * 混合排序算法，结合了归并排序和插入排序。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 MSTL_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
@@ -341,12 +532,32 @@ MSTL_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief Tim排序（默认升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 MSTL_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
     return _MSTL tim_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
 
-// monkey sort : Ot-avg((N + 1)!) Om(1) unstable
+/**
+ * @brief 猴子排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @tparam Compare 比较函数类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ * @param comp 比较函数对象
+ *
+ * 时间复杂度：平均O((N+1)!)，理论上无限
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
+ *
+ * 通过随机打乱并检查是否有序来进行排序。
+ * 仅用于教学和娱乐目的，切勿用于实际生产环境。
+ */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void monkey_sort(Iterator first, Iterator last, Compare comp) {
@@ -355,10 +566,18 @@ void monkey_sort(Iterator first, Iterator last, Compare comp) {
     }
 }
 
+/**
+ * @brief 猴子排序（默认升序）
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 序列起始迭代器
+ * @param last 序列结束迭代器
+ */
 template <typename Iterator>
 void monkey_sort(Iterator first, Iterator last) {
     return _MSTL monkey_sort(first, last, _MSTL less<iter_value_t<Iterator>>());
 }
+
+/** @} */ // SortAlgorithms
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_EXT_SORT_HPP__

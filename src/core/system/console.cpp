@@ -1,10 +1,11 @@
 #include <MSTL/core/system/console.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
+#include <MSTL/core/system/environment.hpp>
+#include <sys/ioctl.h>
 #include <termios.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
 #include <cerrno>
-#include <cstdlib> // ::getenv
+#include <cstdlib>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -334,9 +335,9 @@ void sys_console::print_string(const string& str) {
     this->print_string_unsafe(str.view());
 }
 
-void sys_console::print_string(const string_view& str) {
+void sys_console::print_string(const string_view& view) {
     lock<mutex> lock(mutex_);
-    this->print_string_unsafe(str);
+    this->print_string_unsafe(view);
 }
 
 void sys_console::print_string(const char* str) {
@@ -718,10 +719,13 @@ sys_console::console_size sys_console::get_console_size() const {
     if (::ioctl(out_, TIOCGWINSZ, &ws) == 0) {
         return console_size{ws.ws_col, ws.ws_row};
     }
-    const char* cols = ::getenv("COLUMNS");
-    const char* rows = ::getenv("LINES");
-    if (cols && rows) {
-        return console_size{_MSTL to_int32(cols), _MSTL to_int32(rows)};
+    const string cols = environment::get("COLUMNS");
+    const string rows = environment::get("LINES");
+    if (!cols.empty() && !rows.empty()) {
+        return console_size{
+            _MSTL to_int32(cols.view()),
+            _MSTL to_int32(rows.view())
+        };
     }
     return console_size{80, 24};
 #endif
@@ -743,7 +747,7 @@ bool sys_console::supports_colors() const {
     ::GetConsoleMode(out_, &mode);
     return (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const string_view term = ::getenv("TERM");
+    const string term = environment::get("TERM");
     if (term.empty()) return false;
     return (::isatty(out_) && (
         term.find("xterm") != string::npos ||
@@ -761,7 +765,7 @@ bool sys_console::supports_truecolor() const {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return true;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const string_view colorterm = ::getenv("COLORTERM");
+    const string colorterm = environment::get("COLORTERM");
     return !colorterm.empty() && (
         colorterm.find("truecolor") != string::npos ||
         colorterm.find("24bit") != string::npos
@@ -773,15 +777,15 @@ bool sys_console::supports_unicode() const {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::GetConsoleOutputCP() == CP_UTF8;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const char* lang = ::getenv("LANG");
-    const char* lc_all = ::getenv("LC_ALL");
-    const char* lc_ctype = ::getenv("LC_CTYPE");
+    const string lang = environment::get("LANG");
+    const string lc_all = environment::get("LC_ALL");
+    const string lc_ctype = environment::get("LC_CTYPE");
 
-    const char* encoding = lc_ctype ? lc_ctype : (lc_all ? lc_all : lang);
-    if (!encoding) return false;
+    const string encoding = lc_ctype ? lc_ctype : (lc_all ? lc_all : lang);
+    if (encoding.empty()) return false;
 
-    return string_find_pattern(encoding, "UTF-8") != nullptr ||
-           string_find_pattern(encoding, "utf8") != nullptr;
+    return string_find_pattern(encoding.data(), "UTF-8") != nullptr ||
+           string_find_pattern(encoding.data(), "utf8") != nullptr;
 #endif
 }
 
@@ -797,8 +801,8 @@ string sys_console::console_type() const {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return "windows_console";
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const char* term = ::getenv("TERM");
-    return term ? string(term) : "unknown";
+    const string term = environment::get("TERM");
+    return !term.empty() ? term : "unknown";
 #endif
 }
 

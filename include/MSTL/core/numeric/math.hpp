@@ -228,7 +228,7 @@ MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T lcm(const T& m, const T& n) noexcept {
  * @param x 被除数
  * @param y 除数
  * @return x除以y的余数
- * @exception math_exception 当除数为0时抛出
+ * @exception math_exception 除数为0时
  */
 template <typename T>
 MSTL_CONST_FUNCTION MSTL_CONSTEXPR14 T float_mod(const T x, const T y) {

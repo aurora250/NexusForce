@@ -3,8 +3,7 @@
 #include <MSTL/core/container/unordered_set.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-vector<string_view> split(const string_view str,
-    const string_view delimiters, const bool skip_empty) {
+vector<string_view> split(const string_view str, const string_view delimiters, const bool skip_empty) {
     vector<string_view> tokens;
     size_t start = 0;
     size_t end = str.find_first_of(delimiters);
@@ -26,8 +25,7 @@ vector<string_view> split(const string_view str,
     return tokens;
 }
 
-vector<string> split(const string& str,
-    const string& delimiters, const bool skip_empty) {
+vector<string> split(const string& str, const string& delimiters, const bool skip_empty) {
     vector<string> tokens;
     size_t start = 0;
     size_t end = str.find_first_of(delimiters);
@@ -78,7 +76,7 @@ string join_fast(const vector<string>& vec, const string& delimiter) {
     return result;
 }
 
-string join_accumulate(const vector<string> &vec, const string &delimiter) {
+string join_accumulate(const vector<string>& vec, const string& delimiter) {
     if (vec.empty()) return "";
     return _MSTL accumulate(next(vec.begin()), vec.end(), vec[0],
          [&delimiter](const string& a, const string& b) {
@@ -95,36 +93,6 @@ vector<string> unique(const vector<string>& vec) {
             result.push_back(s);
         }
     }
-    return result;
-}
-
-vector<string> concatenate(const vector<vector<string>>& vectors) {
-    vector<string> result;
-
-    size_t total_size = 0;
-    for (const auto& vec : vectors) {
-        total_size += vec.size();
-    }
-    result.reserve(total_size);
-
-    for (const auto& vec : vectors) {
-        result.insert(result.end(), vec.begin(), vec.end());
-    }
-
-    return result;
-}
-
-vector<string> cartesian_product(const vector<string>& vec1,
-    const vector<string>& vec2, const string& connector) {
-    vector<string> result;
-    result.reserve(vec1.size() * vec2.size());
-
-    for (const auto& s1 : vec1) {
-        for (const auto& s2 : vec2) {
-            result.push_back(s1 + connector + s2);
-        }
-    }
-
     return result;
 }
 

@@ -13,8 +13,8 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
- * @defgroup CLikeFormatFunctions C风格格式化函数
- * @brief 格式化的字符串函数
+ * @defgroup StringFormat 字符串格式化
+ * @brief 字符串格式化功能
  * @{
  */
 
@@ -76,7 +76,7 @@ int MSTL_API snprintf(char* buf, size_t size, const char* fmt, ...) noexcept;
  */
 int MSTL_API scprintf(const char* fmt, ...) noexcept;
 
-/** @} */ // CLikeFormatFunctions
+/** @} */ // StringFormat
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_VSPRINTF_HPP__

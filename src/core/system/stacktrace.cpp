@@ -2,8 +2,8 @@
 #include <MSTL/core/system/stacktrace.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/async/call_once.hpp>
+#include <MSTL/core/async/mutex.hpp>
 #include <DbgHelp.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
 #else
 #include <execinfo.h>
 #include <dlfcn.h>
@@ -14,18 +14,16 @@ MSTL_BEGIN_NAMESPACE__
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 
-void stacktrace::frame::ensure_initialized() {
-    static once_flag init_flag;
+static void ensure_initialized() noexcept {
+    static once_flag init_flag{};
     call_once(init_flag, [](){
         ::SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
-        if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {
-
-        }
+        if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {}
     });
 }
 
-mutex& stacktrace::frame::dbghelp_mutex() {
-    static mutex mtx;
+static mutex& dbghelp_mutex() {
+    static mutex mtx{};
     return mtx;
 }
 

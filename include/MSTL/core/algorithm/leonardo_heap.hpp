@@ -1,9 +1,35 @@
 #ifndef MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__
 #define MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__
-#include "../container/vector.hpp"
-#include "../numeric/math.hpp"
+
+/**
+ * @file leonardo_heap.hpp
+ * @brief 莱昂纳多堆算法实现
+ *
+ * 此文件提供了莱昂纳多堆的实现，这是一种用于平滑排序的数据结构。
+ * 莱昂纳多堆基于莱昂纳多数，具有自平衡特性。
+ */
+
+#include "MSTL/core/container/vector.hpp"
+#include "MSTL/core/numeric/math.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup LeonardoHeap 莱昂纳多堆
+ * @brief 莱昂纳多堆算法实现
+ * @{
+ */
+
+/**
+ * @brief 调整莱昂纳多堆
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 指向堆起始的迭代器
+ * @param current_heap 当前堆的根位置
+ * @param level_index 当前层级索引
+ * @param levels 层级数组
+ *
+ * 调整指定位置的莱昂纳多堆，确保堆性质得以维护。
+ * 如果父节点小于子节点，则进行交换并递归调整。
+ */
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, vector<int>& levels) {
 	size_t child_heap1;
@@ -50,6 +76,14 @@ void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, 
 	}
 }
 
+/**
+ * @brief 向莱昂纳多堆中推入元素
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 指向堆起始的迭代器
+ * @param last 指向堆末尾的迭代器
+ *
+ * 将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。
+ */
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void push_leonardo_heap(Iterator first, Iterator last) {
 	if (first == last) return;
@@ -85,6 +119,14 @@ void push_leonardo_heap(Iterator first, Iterator last) {
 	_MSTL adjust_leonardo_heap(first, size - 1, toplevel, levels);
 }
 
+/**
+ * @brief 从莱昂纳多堆中弹出最大元素
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 指向堆起始的迭代器
+ * @param last 指向堆末尾的迭代器
+ *
+ * 移除堆顶元素，并重新调整堆。
+ */
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void pop_leonardo_heap(Iterator first, Iterator last) {
 	if (first == last) return;
@@ -118,6 +160,14 @@ void pop_leonardo_heap(Iterator first, Iterator last) {
 	}
 }
 
+/**
+ * @brief 使用莱昂纳多堆进行排序
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 指向序列起始的迭代器
+ * @param last 指向序列末尾的迭代器
+ *
+ * 实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。
+ */
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void sort_leonardo_heap(Iterator first, Iterator last) {
 	if (first == last) return;
@@ -154,6 +204,14 @@ void sort_leonardo_heap(Iterator first, Iterator last) {
 	}
 }
 
+/**
+ * @brief 构建莱昂纳多堆
+ * @tparam Iterator 随机访问迭代器类型
+ * @param first 指向序列起始的迭代器
+ * @param last 指向序列末尾的迭代器
+ *
+ * 将指定范围内的元素构建成一个莱昂纳多堆。
+ */
 template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
 void make_leonardo_heap(Iterator first, Iterator last) {
 	if (first == last) return;
@@ -177,6 +235,8 @@ void make_leonardo_heap(Iterator first, Iterator last) {
 		_MSTL adjust_leonardo_heap(first, i, toplevel, levels);
 	}
 }
+
+/** @} */ // LeonardoHeap
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ALGORITHM_LEONARDO_HEAP_HPP__

@@ -1,23 +1,57 @@
 #ifndef MSTL_CORE_STRING_CHARACTER_HPP__
 #define MSTL_CORE_STRING_CHARACTER_HPP__
-#include "../interface/icharacter.hpp"
+
+/**
+ * @file character.hpp
+ * @brief 字符类型包装类
+ *
+ * 此文件提供了各种字符类型的包装类。
+ * 每个包装类都支持字符到各种UTF字符串类型的转换。
+ */
+
+#include "MSTL/core/interface/icharacter.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/// @cond
 MSTL_BEGIN_INNER__
 
+/**
+ * @brief 辅助函数：在UTF-8字符串中追加无效字符的替换符
+ * @tparam T 字符串类型
+ * @param result 目标字符串
+ */
 template <typename T>
-MSTL_ALWAYS_INLINE constexpr void __append_utf8_char_aux(T&) {}
+MSTL_ALWAYS_INLINE constexpr void __append_utf8_char_aux(T& result) {}
+
+/**
+ * @brief string类型的特化：追加UTF-8替换符
+ * @param result 目标普通字符串
+ */
 template <>
 MSTL_CONSTEXPR20 void __append_utf8_char_aux<string>(string& result) {
     result.append("\xEF\xBF\xBD", 3);
 }
+
 #ifdef MSTL_STANDARD_20__
+/**
+ * @brief u8string类型的特化：追加UTF-8替换符
+ * @param result 目标UTF-8字符串
+ */
 template <>
 MSTL_CONSTEXPR20 void __append_utf8_char_aux<u8string>(u8string& result) {
     result.append(u8"\xEF\xBF\xBD", 3);
 }
 #endif
 
+/**
+ * @brief 将Unicode码点追加到UTF-8字符串
+ * @tparam T 字符串字符类型
+ * @param result 目标字符串
+ * @param cp Unicode码点
+ *
+ * 将给定的Unicode码点编码为UTF-8序列并追加到字符串中。
+ * 如果码点无效，则追加替换符U+FFFD。
+ */
 template <typename T>
 MSTL_CONSTEXPR20 void append_utf8_char(basic_string<T>& result, uint32_t cp) {
     if (cp > 0x10FFFF || _MSTL is_high_surrogate(cp) || _MSTL is_low_surrogate(cp)) {
@@ -42,6 +76,17 @@ MSTL_CONSTEXPR20 void append_utf8_char(basic_string<T>& result, uint32_t cp) {
     }
 }
 
+/**
+ * @brief 解码UTF-8字符
+ * @param data UTF-8字节数据
+ * @param i 当前解析位置
+ * @param len 数据长度
+ * @param cp 输出的Unicode码点
+ * @return 解码是否成功
+ *
+ * 从UTF-8字节序列中解码一个字符，返回对应的Unicode码点。
+ * 如果解码失败，cp设置为0xFFFD并返回false。
+ */
 constexpr bool decode_utf8_char(const byte_t* data, size_t& i, const size_t len, uint32_t& cp) noexcept {
     if (i >= len) {
         cp = 0xFFFD;
@@ -79,17 +124,29 @@ constexpr bool decode_utf8_char(const byte_t* data, size_t& i, const size_t len,
     return false;
 }
 
+/**
+ * @brief 从UTF-16序列获取Unicode码点
+ * @tparam T 字符类型
+ * @param obj UTF-16字符数组
+ * @param index 当前位置
+ * @param len 数组长度
+ * @param cp 输出的Unicode码点
+ * @param consumed 消耗的字符数
+ * @return 是否成功获取
+ *
+ * 处理UTF-16的代理对，返回对应的Unicode码点。
+ */
 template <typename T>
-constexpr bool get_utf16_codepoint(const T* obj, size_t i, const size_t len, uint32_t& cp, size_t& chars_consumed) {
-    const auto c1 = static_cast<uint32_t>(obj[i]);
-    chars_consumed = 1;
+constexpr bool get_utf16_codepoint(const T* obj, size_t index, const size_t len, uint32_t& cp, size_t& consumed) {
+    const auto c1 = static_cast<uint32_t>(obj[index]);
+    consumed = 1;
 
     if (_MSTL is_high_surrogate(c1)) {
-        if (i + 1 < len) {
-            const auto c2 = static_cast<uint32_t>(obj[i + 1]);
+        if (index + 1 < len) {
+            const auto c2 = static_cast<uint32_t>(obj[index + 1]);
             if (_MSTL is_low_surrogate(c2)) {
                 cp = _MSTL combine_surrogates(c1, c2);
-                chars_consumed = 2;
+                consumed = 2;
                 return true;
             }
         }
@@ -104,36 +161,60 @@ constexpr bool get_utf16_codepoint(const T* obj, size_t i, const size_t len, uin
     return true;
 }
 
+/**
+ * @brief 处理UTF-16代理对并更新位置
+ * @tparam T 字符类型
+ * @param obj UTF-16字符数组
+ * @param index 当前位置
+ * @param len 数组长度
+ * @param cp 输出的Unicode码点
+ * @return 是否成功处理
+ */
 template <typename T>
 constexpr bool handle_utf16_surrogate_pair(
-    const T* obj, size_t& i, const size_t len, uint32_t& cp) noexcept {
-    const auto c1 = static_cast<uint32_t>(obj[i]);
+    const T* obj, size_t& index, const size_t len, uint32_t& cp) noexcept {
+    const auto c1 = static_cast<uint32_t>(obj[index]);
     if (_MSTL is_high_surrogate(c1)) {
-        if (i + 1 < len) {
-            const auto c2 = static_cast<uint32_t>(obj[i + 1]);
+        if (index + 1 < len) {
+            const auto c2 = static_cast<uint32_t>(obj[index + 1]);
             if (_MSTL is_low_surrogate(c2)) {
                 cp = _MSTL combine_surrogates(c1, c2);
-                i += 2;
+                index += 2;
                 return true;
             }
         }
         cp = 0xFFFD;
-        i += 1;
+        index += 1;
         return true;
     } else if (_MSTL is_low_surrogate(c1)) {
         cp = 0xFFFD;
-        i += 1;
+        index += 1;
         return true;
     }
     cp = c1;
-    i += 1;
+    index += 1;
     return true;
 }
 
+/**
+ * @brief 检查Unicode码点是否有效
+ * @param cp Unicode码点
+ * @return 是否有效
+ *
+ * 有效范围：0x0-0x10FFFF，且不能是代理项。
+ */
 constexpr bool is_valid_unicode_codepoint(const uint32_t cp) noexcept {
     return cp <= 0x10FFFF && !_MSTL is_high_surrogate(cp) && !_MSTL is_low_surrogate(cp);
 }
 
+/**
+ * @brief 将Unicode码点转换为UTF-16序列
+ * @tparam T 字符串字符类型
+ * @param result 目标UTF-16字符串
+ * @param cp Unicode码点
+ *
+ * 将Unicode码点编码为UTF-16序列并追加到字符串中。
+ */
 template <typename T>
 MSTL_CONSTEXPR20 void codepoint_to_utf16(basic_string<T>& result, uint32_t cp) {
     if (!_INNER is_valid_unicode_codepoint(cp)) {
@@ -156,6 +237,16 @@ MSTL_CONSTEXPR20 void codepoint_to_utf16(basic_string<T>& result, uint32_t cp) {
     }
 }
 
+/**
+ * @brief 将Unicode码点转换为宽字符序列
+ * @tparam T 字符串字符类型
+ * @param result 目标宽字符串
+ * @param cp Unicode码点
+ *
+ * 根据平台特性进行转换：
+ * - Windows: 使用UTF-16
+ * - Linux: 使用UTF-32
+ */
 template <typename T>
 MSTL_CONSTEXPR20 void codepoint_to_wchar(basic_string<T>& result, uint32_t cp) {
     if (!_INNER is_valid_unicode_codepoint(cp)) {
@@ -178,6 +269,16 @@ MSTL_CONSTEXPR20 void codepoint_to_wchar(basic_string<T>& result, uint32_t cp) {
 #endif
 }
 
+/**
+ * @brief 追加ASCII字符序列
+ * @tparam T 目标字符串字符类型
+ * @tparam U 源字符类型
+ * @param result 目标字符串
+ * @param str 源字符串
+ * @param len 长度
+ *
+ * 直接将ASCII字符复制到目标字符串。
+ */
 template <typename T, typename U>
 MSTL_CONSTEXPR20 void append_ascii_chars(basic_string<T>& result, const U* str, size_t len) {
     result.reserve(result.size() + len);
@@ -187,12 +288,13 @@ MSTL_CONSTEXPR20 void append_ascii_chars(basic_string<T>& result, const U* str, 
 }
 
 MSTL_END_INNER__
+/// @endcond
 
 #define MSTL_BUILD_PACKAGE_CONSTRUCTOR(T) \
 constexpr T() noexcept = default; \
 constexpr T(const T&) noexcept = default; \
 constexpr T(T&&) noexcept = default; \
-constexpr T(value_type val) noexcept : base(val) {} \
+constexpr T(const value_type value) noexcept : base(value) {} \
 MSTL_CONSTEXPR20 ~T() = default; \
 constexpr T& operator =(const T& other) noexcept { \
     value_ = other.value_; \
@@ -203,22 +305,45 @@ constexpr T& operator =(T&& other) noexcept { \
     other.value_ = initialize<package_type>(); \
     return *this; \
 } \
-constexpr T& operator =(value_type other) noexcept { \
-    value_ = other; \
+constexpr T& operator =(const value_type value) noexcept { \
+    value_ = value; \
     return *this; \
 }
 
 
+/**
+ * @defgroup Packages 数值包装
+ * @brief 数值类型的包装类集合
+ * @{
+ */
+
+/**
+ * @struct character
+ * @brief char类型包装类
+ *
+ * 提供char字符的包装，支持到各种字符串类型的转换。
+ * char字符串被视为UTF-8编码。
+ */
 struct character : icharacter<character, char> {
-    using value_type = char;
-    using base = icharacter<character, char>;
+    using value_type = char;                    ///< 值类型
+    using base = icharacter<character, char>;   ///< 基类类型
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(character)
 
+    /**
+     * @brief 转换为普通字符串
+     * @param obj 字符视图
+     * @return 普通字符串
+     */
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         return string{obj};
     }
 
+    /**
+     * @brief 转换为宽字符串
+     * @param obj 字符视图
+     * @return 宽字符串（UTF-8转wchar_t）
+     */
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         wstring result;
@@ -240,6 +365,11 @@ struct character : icharacter<character, char> {
     }
 
 #ifdef MSTL_STANDARD_20__
+    /**
+     * @brief 转换为UTF-8字符串
+     * @param obj 字符视图
+     * @return UTF-8字符串
+     */
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -251,6 +381,11 @@ struct character : icharacter<character, char> {
     }
 #endif
 
+    /**
+     * @brief 转换为UTF-16字符串
+     * @param obj 字符视图
+     * @return UTF-16字符串（UTF-8转UTF-16）
+     */
     static MSTL_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u16string result;
@@ -271,6 +406,11 @@ struct character : icharacter<character, char> {
         return result;
     }
 
+    /**
+     * @brief 转换为UTF-32字符串
+     * @param obj 字符视图
+     * @return UTF-32字符串（UTF-8转UTF-32）
+     */
     static MSTL_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u32string result;
@@ -301,13 +441,24 @@ struct unpackage<character> {
     using type = char;
 };
 
-
+/**
+ * @struct wcharacter
+ * @brief wchar_t类型包装类
+ *
+ * 提供wchar_t字符的包装，支持到各种字符串类型的转换。
+ * 根据平台特性处理编码转换。
+ */
 struct wcharacter : icharacter<wcharacter, wchar_t> {
-    using value_type = wchar_t;
-    using base = icharacter<wcharacter, wchar_t>;
+    using value_type = wchar_t;                       ///< 值类型
+    using base = icharacter<wcharacter, wchar_t>;     ///< 基类类型
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(wcharacter)
 
+    /**
+     * @brief 转换为普通字符串
+     * @param obj 字符视图
+     * @return 普通字符串（wchar_t转UTF-8）
+     */
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
@@ -332,11 +483,21 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为宽字符串
+     * @param obj 字符视图
+     * @return 宽字符串
+     */
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         return wstring{obj};
     }
 
 #ifdef MSTL_STANDARD_20__
+    /**
+     * @brief 转换为UTF-8字符串
+     * @param obj 字符视图
+     * @return UTF-8字符串（wchar_t转UTF-8）
+     */
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -362,6 +523,11 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
     }
 #endif
 
+    /**
+     * @brief 转换为UTF-16字符串
+     * @param obj 字符视图
+     * @return UTF-16字符串（wchar_t转UTF-16）
+     */
     static MSTL_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u16string result;
@@ -380,6 +546,11 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为UTF-32字符串
+     * @param obj 字符视图
+     * @return UTF-32字符串（wchar_t转UTF-32）
+     */
     static MSTL_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u32string result;
@@ -418,12 +589,24 @@ struct unpackage<wcharacter> {
 
 #ifdef MSTL_STANDARD_20__
 
+/**
+ * @struct u8character
+ * @brief char8_t类型包装类
+ *
+ * 提供char8_t字符的包装，支持到各种字符串类型的转换。
+ * char8_t字符串为UTF-8编码。
+ */
 struct u8character : icharacter<u8character, char8_t> {
-    using value_type = char8_t;
-    using base = icharacter<u8character, char8_t>;
+    using value_type = char8_t;                       ///< 值类型
+    using base = icharacter<u8character, char8_t>;    ///< 基类类型
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(u8character)
 
+    /**
+     * @brief 转换为普通字符串
+     * @param obj 字符视图
+     * @return 普通字符串
+     */
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
@@ -431,6 +614,11 @@ struct u8character : icharacter<u8character, char8_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为宽字符串
+     * @param obj 字符视图
+     * @return 宽字符串（UTF-8转wchar_t）
+     */
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         wstring result;
@@ -450,10 +638,20 @@ struct u8character : icharacter<u8character, char8_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为UTF-8字符串
+     * @param obj 字符视图
+     * @return UTF-8字符串
+     */
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         return u8string{obj};
     }
 
+    /**
+     * @brief 转换为UTF-16字符串
+     * @param obj 字符视图
+     * @return UTF-16字符串（UTF-8转UTF-16）
+     */
     static MSTL_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u16string result;
@@ -473,6 +671,11 @@ struct u8character : icharacter<u8character, char8_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为UTF-32字符串
+     * @param obj 字符视图
+     * @return UTF-32字符串（UTF-8转UTF-32）
+     */
     static MSTL_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u32string result;
@@ -504,13 +707,24 @@ struct unpackage<u8character> {
 
 #endif
 
-
+/**
+ * @struct u16character
+ * @brief char16_t类型包装类
+ *
+ * 提供char16_t字符的包装，支持到各种字符串类型的转换。
+ * char16_t字符串为UTF-16编码，自动处理字节序标记（BOM）。
+ */
 struct u16character : icharacter<u16character, char16_t> {
-    using value_type = char16_t;
-    using base = icharacter<u16character, char16_t>;
+    using value_type = char16_t;                      ///< 值类型
+    using base = icharacter<u16character, char16_t>;  ///< 基类类型
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(u16character)
 
+    /**
+     * @brief 转换为普通字符串
+     * @param obj 字符视图
+     * @return 普通字符串（UTF-16转UTF-8）
+     */
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
@@ -539,6 +753,11 @@ struct u16character : icharacter<u16character, char16_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为宽字符串
+     * @param obj 字符视图
+     * @return 宽字符串（UTF-16转wchar_t）
+     */
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         wstring result;
@@ -564,6 +783,11 @@ struct u16character : icharacter<u16character, char16_t> {
     }
 
 #ifdef MSTL_STANDARD_20__
+    /**
+     * @brief 转换为UTF-8字符串
+     * @param obj 字符视图
+     * @return UTF-8字符串（UTF-16转UTF-8）
+     */
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -589,10 +813,20 @@ struct u16character : icharacter<u16character, char16_t> {
     }
 #endif
 
+    /**
+     * @brief 转换为UTF-16字符串
+     * @param obj 字符视图
+     * @return UTF-16字符串
+     */
     static MSTL_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
         return u16string{obj};
     }
 
+    /**
+     * @brief 转换为UTF-32字符串
+     * @param obj 字符视图
+     * @return UTF-32字符串（UTF-16转UTF-32）
+     */
     static MSTL_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u32string result;
@@ -627,13 +861,24 @@ struct unpackage<u16character> {
     using type = char16_t;
 };
 
-
+/**
+ * @struct u32character
+ * @brief char32_t类型包装类
+ *
+ * 提供char32_t字符的包装，支持到各种字符串类型的转换。
+ * char32_t字符串为UTF-32编码。
+ */
 struct u32character : icharacter<u32character, char32_t> {
-    using value_type = char32_t;
-    using base = icharacter<u32character, char32_t>;
+    using value_type = char32_t;                      ///< 值类型
+    using base = icharacter<u32character, char32_t>;  ///< 基类类型
 
     MSTL_BUILD_PACKAGE_CONSTRUCTOR(u32character)
 
+    /**
+     * @brief 转换为普通字符串
+     * @param obj 字符视图
+     * @return 普通字符串（UTF-32转UTF-8）
+     */
     static MSTL_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
@@ -643,6 +888,11 @@ struct u32character : icharacter<u32character, char32_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为宽字符串
+     * @param obj 字符视图
+     * @return 宽字符串（UTF-32转wchar_t）
+     */
     static MSTL_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         wstring result;
@@ -654,6 +904,11 @@ struct u32character : icharacter<u32character, char32_t> {
     }
 
 #ifdef MSTL_STANDARD_20__
+    /**
+     * @brief 转换为UTF-8字符串
+     * @param obj 字符视图
+     * @return UTF-8字符串（UTF-32转UTF-8）
+     */
     static MSTL_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u8string result;
@@ -665,6 +920,11 @@ struct u32character : icharacter<u32character, char32_t> {
     }
 #endif
 
+    /**
+     * @brief 转换为UTF-16字符串
+     * @param obj 字符视图
+     * @return UTF-16字符串（UTF-32转UTF-16）
+     */
     static MSTL_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         u16string result;
@@ -675,6 +935,11 @@ struct u32character : icharacter<u32character, char32_t> {
         return result;
     }
 
+    /**
+     * @brief 转换为UTF-32字符串
+     * @param obj 字符视图
+     * @return UTF-32字符串
+     */
     static MSTL_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
         return u32string{obj};
     }
@@ -688,6 +953,8 @@ template <>
 struct unpackage<u32character> {
     using type = char32_t;
 };
+
+/** @} */ // Packages
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_CHARACTER_HPP__

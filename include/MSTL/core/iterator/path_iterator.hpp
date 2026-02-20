@@ -1,7 +1,7 @@
 #ifndef MSTL_CORE_ITERATOR_PATH_ITERATOR_HPP__
 #define MSTL_CORE_ITERATOR_PATH_ITERATOR_HPP__
-#include "../string/string.hpp"
-#include "../file/file_constants.hpp"
+#include "MSTL/core/file/file_constants.hpp"
+#include "MSTL/core/string/string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 class path_iterator {

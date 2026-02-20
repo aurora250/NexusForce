@@ -103,6 +103,10 @@ Iterator is_sorted_until(Iterator first, Iterator last) {
  * 1. 递归地将序列分成两半
  * 2. 分别对两半进行排序
  * 3. 合并两个已排序的子序列
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(N)
+ * 稳定性：稳定
  */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
@@ -138,6 +142,8 @@ void merge_sort(Iterator first, Iterator last) {
  * 对范围 [first, last) 进行部分排序，使得 [first, middle) 包含整个范围中最小的元素，
  * 并且这个子范围是已排序的。使用堆排序算法实现。
  * 适用只需要前k个最小（或最大）元素的情况。
+ *
+ * 时间复杂度：O(N log k)，其中k = middle - first
  */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
@@ -177,6 +183,8 @@ void partial_sort(Iterator first, Iterator middle, Iterator last) {
  * @return 输出范围的实际结束位置
  *
  * 从输入范围中选取最小的元素，部分排序后复制到输出范围。
+ *
+ * 时间复杂度：O(N log M)，其中M = result_last - result_first
  */
 template <typename Iterator1, typename Iterator2, typename Compare, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_rnd_iter_v<Iterator2>, int> = 0>
@@ -254,8 +262,11 @@ MSTL_END_INNER__
  * @param comp 比较函数对象
  *
  * 简单的稳定排序算法，适用于小规模或基本有序的数据。
- *
  * 将每个元素插入到前面已排序子序列的正确位置。
+ *
+ * 时间复杂度：最优O(N)，最差O(N²)
+ * 空间复杂度：O(1)
+ * 稳定性：稳定
  */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
@@ -296,6 +307,10 @@ void insertion_sort(Iterator first, Iterator last) {
  * 1. 使用快速排序递归分区
  * 2. 当递归深度过大时切换到堆排序，避免快速排序的最坏情况
  * 3. 对小规模子序列使用插入排序
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(log N)
+ * 稳定性：不稳定
  */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
@@ -337,6 +352,10 @@ void introspective_sort(Iterator first, Iterator last, int depth_limit) {
  * 1. 选择基准值，这里选择最后一个元素
  * 2. 分区：将小于基准值的放在左边，大于等于的放在右边
  * 3. 递归排序左右两部分
+ *
+ * 时间复杂度：平均O(N log N)，最差O(N²)
+ * 空间复杂度：O(log N)（递归栈）
+ * 稳定性：不稳定
  *
  * @note 此实现容易在已排序数据上出现最坏情况。
  */
@@ -420,6 +439,10 @@ MSTL_END_INNER__
  * 1. 对大规模数据使用内省排序（快速排序+堆排序）
  * 2. 对阈值内的小规模数据使用插入排序
  * 3. 对大规模数据中的小尾部使用优化的插入排序
+ *
+ * 时间复杂度：O(N log N)
+ * 空间复杂度：O(log N)
+ * 稳定性：不稳定
  */
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>

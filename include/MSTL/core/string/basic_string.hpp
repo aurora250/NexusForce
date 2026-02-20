@@ -1,5 +1,13 @@
 #ifndef MSTL_CORE_STRING_BASIC_STRING_HPP__
 #define MSTL_CORE_STRING_BASIC_STRING_HPP__
+
+/**
+ * @file basic_string.hpp
+ * @brief MSTL动态字符串容器
+ *
+ * 此文件提供了动态字符串容器的实现。
+ */
+
 #include "MSTL/core/algorithm/shift.hpp"
 #include "MSTL/core/memory/allocator_traits.hpp"
 #include "MSTL/core/memory/standard_allocator.hpp"
@@ -8,20 +16,34 @@
 #include "MSTL/core/utility/compressed_pair.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup String 字符串
+ * @brief 动态字符序列容器
+ * @{
+ */
+
+/**
+ * @struct basic_string_iterator
+ * @brief 字符串迭代器
+ * @tparam IsConst 是否常量迭代器
+ * @tparam String 字符串类型
+ *
+ * 为basic_string提供随机访问迭代器支持。
+ */
 template <bool IsConst, typename String>
 struct basic_string_iterator : iiterator<basic_string_iterator<IsConst, String>> {
 public:
-    using container_type	= String;
-    using value_type		= typename container_type::value_type;
-    using size_type			= typename container_type::size_type;
-    using difference_type	= typename container_type::difference_type;
-    using iterator_category = contiguous_iterator_tag;
-    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;
-    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;
+    using container_type	= String;  ///< 容器类型
+    using value_type		= typename container_type::value_type;  ///< 值类型
+    using size_type			= typename container_type::size_type;  ///< 大小类型
+    using difference_type	= typename container_type::difference_type;  ///< 差值类型
+    using iterator_category = contiguous_iterator_tag;  ///< 迭代器类别
+    using reference = conditional_t<IsConst, typename container_type::const_reference, typename container_type::reference>;  ///< 引用类型
+    using pointer	= conditional_t<IsConst, typename container_type::const_pointer, typename container_type::pointer>;  ///< 指针类型
 
 private:
-    pointer current_ = nullptr;
-    const container_type* str_ = nullptr;
+    pointer current_ = nullptr;  ///< 当前指针位置
+    const container_type* str_ = nullptr;  ///< 关联字符串指针
 
 public:
     MSTL_CONSTEXPR20 basic_string_iterator() noexcept = default;
@@ -32,9 +54,18 @@ public:
     MSTL_CONSTEXPR20 basic_string_iterator(basic_string_iterator&&) noexcept = default;
     MSTL_CONSTEXPR20 basic_string_iterator& operator =(basic_string_iterator&&) noexcept = default;
 
+    /**
+     * @brief 构造函数
+     * @param ptr 初始指针位置
+     * @param str 关联字符串指针
+     */
     MSTL_CONSTEXPR20 basic_string_iterator(pointer ptr, const container_type* str) noexcept
     : current_(ptr), str_(str) {}
 
+    /**
+     * @brief 解引用操作
+     * @return 当前元素的引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference dereference() const noexcept {
         MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to dereference on a null pointer");
         MSTL_DEBUG_VERIFY(
@@ -43,18 +74,28 @@ public:
         return *current_;
     }
 
+    /**
+     * @brief 递增操作
+     */
     MSTL_CONSTEXPR20 void increment() noexcept {
         MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to increment a null pointer");
         MSTL_DEBUG_VERIFY(current_ < str_->data() + str_->size(), "Attempting to increment out of boundary");
         ++current_;
     }
 
+    /**
+     * @brief 递减操作
+     */
     MSTL_CONSTEXPR20 void decrement() noexcept {
         MSTL_DEBUG_VERIFY(current_ && str_, "Attempting to decrement a null pointer");
         MSTL_DEBUG_VERIFY(str_->data() < current_, "Attempting to decrement out of boundary");
         --current_;
     }
 
+    /**
+     * @brief 前进操作
+     * @param off 前进距离
+     */
     MSTL_CONSTEXPR20 void advance(difference_type off) noexcept {
         MSTL_DEBUG_VERIFY((current_ && str_) || off == 0, "Attempting to advance a null pointer");
         MSTL_DEBUG_VERIFY(
@@ -63,35 +104,73 @@ public:
         current_ += off;
     }
 
+    /**
+     * @brief 计算距离操作
+     * @param other 另一个迭代器
+     * @return 两个迭代器之间的距离
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 difference_type distance_to(const basic_string_iterator& other) const noexcept {
         MSTL_DEBUG_VERIFY(str_ == other.str_, "Attempting to distance to a different container");
         return static_cast<difference_type>(current_ - other.current_);
     }
 
+    /**
+     * @brief 下标访问操作符
+     * @param n 偏移量
+     * @return 偏移位置元素的引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](difference_type n) const noexcept {
         return *(*this + n);
     }
 
+    /**
+     * @brief 相等比较
+     * @param rhs 右侧迭代器
+     * @return 是否相等
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool equal(const basic_string_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(str_ == rhs.str_, "Attempting to equal to a different container");
         return current_ == rhs.current_;
     }
 
+    /**
+     * @brief 小于比较
+     * @param rhs 右侧迭代器
+     * @return 当前迭代器是否在rhs之前
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool less_than(const basic_string_iterator& rhs) const noexcept {
         MSTL_DEBUG_VERIFY(str_ == rhs.str_, "Attempting to less than a different container");
         return current_ < rhs.current_;
     }
 
+    /**
+     * @brief 获取底层指针
+     * @return 当前指针
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 pointer base() const noexcept {
         return current_;
     }
 
+    /**
+     * @brief 获取关联容器
+     * @return 关联字符串指针
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const container_type* container() const noexcept {
         return str_;
     }
 };
 
 
+/**
+ * @class basic_string
+ * @brief 基础字符串模板
+ * @tparam CharT 字符类型
+ * @tparam Traits 字符特征类型，默认为char_traits<CharT>
+ * @tparam Alloc 分配器类型，默认为allocator<CharT>
+ *
+ * basic_string是一个动态字符序列容器，针对字符串操作进行了优化。
+ * 支持小字符串优化（SSO）减少动态分配。
+ */
 template <typename CharT, typename Traits = char_traits<CharT>, typename Alloc = allocator<CharT>>
 class basic_string : public icommon<basic_string<CharT, Traits, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
@@ -109,50 +188,70 @@ public:
     using const_reference   = const CharT&;  ///< 常量引用类型
     using size_type         = size_t;  ///< 大小类型
     using difference_type   = ptrdiff_t;  ///< 差值类型
-    using iterator                  = basic_string_iterator<false, basic_string>;
-    using const_iterator            = basic_string_iterator<true, basic_string>;
-    using reverse_iterator          = _MSTL reverse_iterator<iterator>;
-    using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;
+    using iterator                  = basic_string_iterator<false, basic_string>;  ///< 迭代器类型
+    using const_iterator            = basic_string_iterator<true, basic_string>;   ///< 常量迭代器类型
+    using reverse_iterator          = _MSTL reverse_iterator<iterator>;  ///< 反向迭代器类型
+    using const_reverse_iterator    = _MSTL reverse_iterator<const_iterator>;  ///< 常量反向迭代器类型
 
-    using traits_type               = Traits;
-    using view_type                 = basic_string_view<CharT, Traits>;
-    using allocator_type            = Alloc;
+    using traits_type               = Traits;  ///< 字符特征类型
+    using view_type                 = basic_string_view<CharT, Traits>;  ///< 字符串视图类型
+    using allocator_type            = Alloc;  ///< 分配器类型
 
+    /// 特殊值，表示未找到或"直到末尾"
     static constexpr size_type npos = string_view::npos;
 
 private:
 #ifdef MSTL_USING_SSO__
+    /// SSO缓冲区字节数
     static constexpr size_type sso_buffer_bytes = MEMORY_ALIGN_THRESHHOLD;
+    /// SSO缓冲区可容纳的字符数
     static constexpr size_type sso_buffer_size = (sso_buffer_bytes + sizeof(CharT) - 1) / sizeof(CharT);
+    /// SSO最大容量
     static constexpr size_type sso_capacity = sso_buffer_size - 1;
+    /// 长字符串标志（最高位）
     static constexpr size_type long_flag = static_cast<size_type>(1) << (sizeof(size_type) * 8 - 1);
 
+    /// 压缩存储：分配器和大小
     compressed_pair<allocator_type, size_type> size_pair_{
         default_construct_tag{}, 0
     };
+    /// 联合存储：长字符串指针/容量 或 短字符串缓冲区
     union storage {
         struct long_pointer {
-            pointer ptr;
-            size_type cap;
+            pointer ptr;  ///< 长字符串指针
+            size_type cap;  ///< 容量
         } long_;
-        CharT short_[sso_buffer_size];
+        CharT short_[sso_buffer_size];  ///< 短字符串缓冲区
     } storage_;
 #else
-    pointer data_ = nullptr;
-    size_type size_ = 0;
+    pointer data_ = nullptr;  ///< 数据指针
+    size_type size_ = 0;  ///< 当前大小
+    /// 压缩存储：分配器和容量
     compressed_pair<allocator_type, size_type> capacity_pair_{ default_construct_tag{}, 0 };
 #endif
 
 private:
 #ifdef MSTL_USING_SSO__
+    /**
+     * @brief 判断是否为长字符串模式
+     * @return 是否为长字符串
+     */
     MSTL_CONSTEXPR20 bool is_long() const noexcept {
         return (size_pair_.value & long_flag) != 0;
     }
 
+    /**
+     * @brief 设置大小
+     * @param new_size 新大小
+     */
     MSTL_CONSTEXPR20 void set_size(size_type new_size) noexcept {
         size_pair_.value = (is_long() ? (new_size | long_flag) : new_size);
     }
 
+    /**
+     * @brief 切换到长字符串模式
+     * @param new_cap 新容量
+     */
     MSTL_CONSTEXPR20 void switch_to_long(size_type new_cap) {
         MSTL_DEBUG_VERIFY(new_cap >= sso_buffer_size, "switch_to_long: new_cap too small");
         pointer new_ptr = size_pair_.get_base().allocate(new_cap);
@@ -165,6 +264,9 @@ private:
         size_pair_.value = old_size | long_flag;
     }
 
+    /**
+     * @brief 销毁长字符串
+     */
     MSTL_CONSTEXPR20 void destroy_long() noexcept {
         if (storage_.long_.ptr) {
             size_pair_.get_base().deallocate(storage_.long_.ptr, storage_.long_.cap);
@@ -174,6 +276,12 @@ private:
     }
 #endif
 
+    /**
+     * @brief 从迭代器范围构造
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
         const size_type n = _MSTL distance(first, last);
@@ -223,6 +331,12 @@ private:
 #endif
     }
 
+    /**
+     * @brief 从字符指针构造
+     * @param str 源指针
+     * @param position 起始位置
+     * @param n 字符数
+     */
     MSTL_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position, size_type n) {
 #ifdef MSTL_USING_SSO__
         if (n < sso_capacity) {
@@ -263,6 +377,9 @@ private:
 #endif
     }
 
+    /**
+     * @brief 销毁缓冲区
+     */
     MSTL_CONSTEXPR20 void destroy_buffer() noexcept {
 #ifdef MSTL_USING_SSO__
         if (is_long()) {
@@ -282,6 +399,14 @@ private:
 #endif
     }
 
+    /**
+     * @brief 替换填充
+     * @param first 起始位置
+     * @param n1 原长度
+     * @param n2 新长度
+     * @param value 填充值
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& replace_fill(iterator first, size_type n1, const size_type n2, const value_type value) {
 #ifdef MSTL_USING_SSO__
         const size_type offset = first - begin();
@@ -350,6 +475,15 @@ private:
 #endif
     }
 
+    /**
+     * @brief 替换复制
+     * @tparam Iterator 迭代器类型
+     * @param first1 起始位置
+     * @param last1 结束位置
+     * @param first2 源起始
+     * @param last2 源结束
+     * @return 自身引用
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& replace_copy(iterator first1, iterator last1, Iterator first2, Iterator last2) {
         static_assert(is_iter_v<Iterator> && is_same_v<iter_value_t<Iterator>, value_type>, "Iterator type mismatch.");
@@ -418,11 +552,24 @@ private:
 #endif
     }
 
+    /**
+     * @brief 替换复制
+     * @tparam Iterator 迭代器类型
+     * @param first1 起始位置
+     * @param n1 原长度
+     * @param first2 源起始
+     * @param n2 源长度
+     * @return 自身引用
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& replace_copy(iterator first1, const size_type n1, Iterator first2, const size_type n2) {
         return replace_copy(first1, first1 + n1, first2, _MSTL next(first2, n2));
     }
 
+    /**
+     * @brief 重新分配内存
+     * @param n 需要增加的空间
+     */
     MSTL_CONSTEXPR20 void reallocate(size_type n) {
 #ifdef MSTL_USING_SSO__
         if (!is_long()) {
@@ -465,6 +612,13 @@ private:
 #endif
     }
 
+    /**
+     * @brief 重新分配并填充插入
+     * @param position 插入位置
+     * @param n 插入数量
+     * @param value 插入值
+     * @return 指向插入起始的迭代器
+     */
     MSTL_CONSTEXPR20 iterator reallocate_fill(iterator position, size_type n, value_type value) {
 #ifdef MSTL_USING_SSO__
         const size_type offset = position - begin();
@@ -514,6 +668,14 @@ private:
 #endif
     }
 
+    /**
+     * @brief 重新分配并复制插入
+     * @tparam Iterator 迭代器类型
+     * @param position 插入位置
+     * @param first 源起始
+     * @param last 源结束
+     * @return 指向插入起始的迭代器
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 iterator reallocate_copy(iterator position, Iterator first, Iterator last) {
 #ifdef MSTL_USING_SSO__
@@ -570,6 +732,11 @@ private:
     }
 
 public:
+    /**
+     * @brief 默认构造函数
+     *
+     * 构造一个空字符串。
+     */
     MSTL_CONSTEXPR20 basic_string() {
 #ifdef MSTL_USING_SSO__
         traits_type::assign(storage_.short_, 1, value_type());
@@ -579,15 +746,34 @@ public:
 #endif
     }
 
+    /**
+     * @brief 构造函数，指定大小
+     * @param n 字符数
+     */
     MSTL_CONSTEXPR20 explicit basic_string(size_type n)
     : basic_string(n, static_cast<value_type>(0)) {}
 
+    /**
+     * @brief 构造函数，指定大小和32位整数值
+     * @param n 字符数
+     * @param value 整数值
+     */
     MSTL_CONSTEXPR20 explicit basic_string(size_type n, int32_t value)
     : basic_string(n, static_cast<value_type>(value)) {}
 
+    /**
+     * @brief 构造函数，指定大小和64位整数值
+     * @param n 字符数
+     * @param value 整数值
+     */
     MSTL_CONSTEXPR20 explicit basic_string(size_type n, int64_t value)
     : basic_string(n, static_cast<value_type>(value)) {}
 
+    /**
+     * @brief 构造函数，指定大小和填充字符
+     * @param n 字符数
+     * @param value 填充字符
+     */
     MSTL_CONSTEXPR20 explicit basic_string(size_type n, value_type value) {
 #ifdef MSTL_USING_SSO__
         if (n < sso_capacity) {
@@ -614,6 +800,10 @@ public:
 #endif
     }
 
+    /**
+     * @brief 拷贝构造函数
+     * @param other 源字符串
+     */
     MSTL_CONSTEXPR20 basic_string(const basic_string& other) {
 #ifdef MSTL_USING_SSO__
         const size_type len = other.size();
@@ -636,6 +826,11 @@ public:
 #endif
     }
 
+    /**
+     * @brief 拷贝赋值运算符
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& operator =(const basic_string& other) {
         if (_MSTL addressof(other) == this) return *this;
 
@@ -674,6 +869,10 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 移动构造函数
+     * @param other 源字符串
+     */
     MSTL_CONSTEXPR20 basic_string(basic_string&& other) noexcept
 #ifdef MSTL_USING_SSO__
     : size_pair_(_MSTL move(other.size_pair_)) {
@@ -700,6 +899,11 @@ public:
 #endif
     }
 
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& operator =(basic_string&& other) noexcept {
         if (_MSTL addressof(other) == this) return *this;
 
@@ -740,14 +944,28 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 从字符串视图构造
+     * @param view 字符串视图
+     */
     MSTL_CONSTEXPR20 basic_string(view_type view) {
         construct_from_ptr(view.data(), 0, view.size());
     }
 
+    /**
+     * @brief 从字符串视图构造（指定长度）
+     * @param view 字符串视图
+     * @param n 字符数
+     */
     MSTL_CONSTEXPR20 basic_string(view_type view, const size_type n) {
         construct_from_ptr(view.data(), 0, n);
     }
 
+    /**
+     * @brief 字符串视图赋值运算符
+     * @param view 字符串视图
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& operator =(view_type view) {
         const size_type len = view.size();
 
@@ -790,25 +1008,50 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 从子串构造
+     * @param other 源字符串
+     * @param position 起始位置
+     */
     MSTL_CONSTEXPR20 basic_string(const basic_string& other, size_type position) {
         MSTL_DEBUG_VERIFY(position <= other.size(), "basic_string index out of range");
         construct_from_ptr(other.data(), position, other.size() - position);
     }
 
+    /**
+     * @brief 从子串构造（指定长度）
+     * @param other 源字符串
+     * @param position 起始位置
+     * @param n 字符数
+     */
     MSTL_CONSTEXPR20 basic_string(const basic_string& other, size_type position, size_type n) {
         MSTL_DEBUG_VERIFY(position <= other.size(), "basic_string index out of range");
         n = _MSTL min(n, other.size() - position);
         construct_from_ptr(other.data(), position, n);
     }
 
+    /**
+     * @brief 从C风格字符串构造
+     * @param str C风格字符串
+     */
     MSTL_CONSTEXPR20 basic_string(const_pointer str) {
         construct_from_ptr(str, 0, traits_type::length(str));
     }
 
+    /**
+     * @brief 从字符数组构造（指定长度）
+     * @param str 字符指针
+     * @param n 字符数
+     */
     MSTL_CONSTEXPR20 basic_string(const_pointer str, const size_type n) {
         construct_from_ptr(str, 0, n);
     }
 
+    /**
+     * @brief C风格字符串赋值运算符
+     * @param str C风格字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& operator =(const_pointer str) {
         const size_type len = traits_type::length(str);
 #ifdef MSTL_USING_SSO__
@@ -849,61 +1092,142 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 从迭代器范围构造
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
     template <typename Iterator, enable_if_t<!is_convertible_v<Iterator, value_type>, int> = 0>
     MSTL_CONSTEXPR20 basic_string(Iterator first, Iterator last) {
         construct_from_iter(first, last);
     }
 
+    /**
+     * @brief 从初始化列表构造
+     * @param ilist 初始化列表
+     */
     MSTL_CONSTEXPR20 basic_string(std::initializer_list<value_type> ilist)
     : basic_string(ilist.begin(), ilist.end()) {}
 
+    /**
+     * @brief 初始化列表赋值运算符
+     * @param ilist 初始化列表
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& operator =(std::initializer_list<value_type> ilist) {
         clear();
         insert(begin(), ilist.begin(), ilist.end());
         return *this;
     }
 
+    /**
+     * @brief 析构函数
+     */
     MSTL_CONSTEXPR20 ~basic_string() {
         destroy_buffer();
     }
 
+    /**
+     * @brief 获取起始迭代器
+     * @return 指向第一个字符的迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 iterator begin() noexcept {
         return {data(), this};
     }
+
+    /**
+     * @brief 获取结束迭代器
+     * @return 指向最后一个字符之后位置的迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 iterator end() noexcept {
         return {data() + size(), this};
     }
+
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向第一个字符的常量迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_iterator begin() const noexcept {
         return cbegin();
     }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向最后一个字符之后位置的常量迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_iterator end() const noexcept {
         return cend();
     }
+
+    /**
+     * @brief 获取常量起始迭代器
+     * @return 指向第一个字符的常量迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_iterator cbegin() const noexcept {
         return {data(), this};
     }
+
+    /**
+     * @brief 获取常量结束迭代器
+     * @return 指向最后一个字符之后位置的常量迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_iterator cend() const noexcept {
         return {data() + size(), this};
     }
+
+    /**
+     * @brief 获取反向起始迭代器
+     * @return 指向最后一个字符的反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
     }
+
+    /**
+     * @brief 获取反向结束迭代器
+     * @return 指向第一个字符之前位置的反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reverse_iterator rend() noexcept {
         return reverse_iterator(begin());
     }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最后一个字符的常量反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reverse_iterator rbegin() const noexcept {
         return crbegin();
     }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向第一个字符之前位置的常量反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reverse_iterator rend() const noexcept {
         return crend();
     }
+
+    /**
+     * @brief 获取常量反向起始迭代器
+     * @return 指向最后一个字符的常量反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reverse_iterator crbegin() const noexcept {
         return const_reverse_iterator(cend());
     }
+
+    /**
+     * @brief 获取常量反向结束迭代器
+     * @return 指向第一个字符之前位置的常量反向迭代器
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reverse_iterator crend() const noexcept {
         return const_reverse_iterator(cbegin());
     }
 
+    /**
+     * @brief 获取字符数
+     * @return 字符串长度
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type size() const noexcept {
 #ifdef MSTL_USING_SSO__
         return size_pair_.value & ~long_flag;
@@ -911,9 +1235,19 @@ public:
         return size_;
 #endif
     }
+
+    /**
+     * @brief 获取最大可能大小
+     * @return 最大长度
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type max_size() const noexcept {
         return npos;
     }
+
+    /**
+     * @brief 获取容量
+     * @return 当前分配的存储可容纳的字符数
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type capacity() const noexcept {
 #ifdef MSTL_USING_SSO__
         return is_long() ? storage_.long_.cap : sso_buffer_size;
@@ -921,13 +1255,27 @@ public:
         return capacity_pair_.value;
 #endif
     }
+
+    /**
+     * @brief 获取字符串长度
+     * @return 字符串长度
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type length() const noexcept {
         return size();
     }
+
+    /**
+     * @brief 检查是否为空
+     * @return 是否为空
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool empty() const noexcept {
         return size() == 0;
     }
 
+    /**
+     * @brief 预留容量
+     * @param n 要预留的字符数
+     */
     MSTL_CONSTEXPR20 void reserve(const size_type n) {
         MSTL_DEBUG_VERIFY(n < max_size(), "basic_string reserve index out of range.");
         const size_type new_cap = n + 1;
@@ -955,39 +1303,84 @@ public:
 #endif
     }
 
+    /**
+     * @brief 下标访问操作符
+     * @param n 索引
+     * @return 指定位置的字符引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference operator [](const size_type n) noexcept {
-        MSTL_DEBUG_VERIFY(n <= size_, "basic_string [] index out of range.");
-        return *(data() + n);
-    }
-    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference operator [](const size_type n) const noexcept {
-        MSTL_DEBUG_VERIFY(n <= size_, "basic_string [] index out of range.");
+        MSTL_DEBUG_VERIFY(n <= size(), "basic_string [] index out of range.");
         return *(data() + n);
     }
 
+    /**
+     * @brief 常量下标访问操作符
+     * @param n 索引
+     * @return 指定位置的字符常量引用
+     */
+    MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference operator [](const size_type n) const noexcept {
+        MSTL_DEBUG_VERIFY(n <= size(), "basic_string [] index out of range.");
+        return *(data() + n);
+    }
+
+    /**
+     * @brief 带边界检查的访问
+     * @param n 索引
+     * @return 指定位置的字符引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference at(const size_type n) noexcept {
         return (*this)[n];
     }
+
+    /**
+     * @brief 带边界检查的常量访问
+     * @param n 索引
+     * @return 指定位置的字符常量引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference at(const size_type n) const noexcept {
         return (*this)[n];
     }
 
+    /**
+     * @brief 访问第一个字符
+     * @return 第一个字符的引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference front() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty basic_string");
         return *data();
     }
+
+    /**
+     * @brief 常量访问第一个字符
+     * @return 第一个字符的常量引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference front() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "front called on empty basic_string");
         return *data();
     }
+
+    /**
+     * @brief 访问最后一个字符
+     * @return 最后一个字符的引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 reference back() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty basic_string");
         return *(data() + size() - 1);
     }
+
+    /**
+     * @brief 常量访问最后一个字符
+     * @return 最后一个字符的常量引用
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_reference back() const noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "back called on empty basic_string");
         return *(data() + size() - 1);
     }
 
+    /**
+     * @brief 获取数据指针
+     * @return 指向底层字符数组的指针
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 pointer data() noexcept {
 #ifdef MSTL_USING_SSO__
         if (!is_long()) {
@@ -999,6 +1392,10 @@ public:
 #endif
     }
 
+    /**
+     * @brief 获取常量数据指针
+     * @return 指向底层字符数组的常量指针
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 const_pointer data() const noexcept {
 #ifdef MSTL_USING_SSO__
         if (!is_long()) {
@@ -1010,6 +1407,12 @@ public:
 #endif
     }
 
+    /**
+     * @brief 插入单个字符
+     * @param position 插入位置
+     * @param value 要插入的字符
+     * @return 指向插入字符的迭代器
+     */
     MSTL_CONSTEXPR20 iterator insert(iterator position, value_type value) {
 #ifdef MSTL_USING_SSO__
         const size_type offset = position - begin();
@@ -1041,6 +1444,13 @@ public:
 #endif
     }
 
+    /**
+     * @brief 在指定位置插入多个相同字符
+     * @param position 插入位置
+     * @param n 插入数量
+     * @param value 插入字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& insert(size_type position, size_type n, value_type value) {
         insert(begin() + position, n, value);
         return *this;
@@ -1081,6 +1491,14 @@ public:
 #endif
     }
 
+    /**
+     * @brief 插入迭代器范围
+     * @tparam Iterator 迭代器类型
+     * @param position 插入位置
+     * @param first 源起始
+     * @param last 源结束
+     * @return 指向插入起始的迭代器
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 iterator insert(iterator position, Iterator first, Iterator last) {
         const size_type len = _MSTL distance(first, last);
@@ -1122,10 +1540,17 @@ public:
 #endif
     }
 
+    /**
+     * @brief 在末尾插入字符
+     * @param value 要插入的字符
+     */
     MSTL_CONSTEXPR20 void push_back(value_type value) {
         append(1, value);
     }
 
+    /**
+     * @brief 删除末尾字符
+     */
     MSTL_CONSTEXPR20 void pop_back() noexcept {
         MSTL_DEBUG_VERIFY(!empty(), "pop_back called on empty basic_string");
 #ifdef MSTL_USING_SSO__
@@ -1143,8 +1568,14 @@ public:
 #endif
     }
 
+    /**
+     * @brief 追加多个相同字符
+     * @param n 字符数量
+     * @param value 要追加的字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(size_type n, value_type value) {
-        MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
+        MSTL_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
 
 #ifdef MSTL_USING_SSO__
@@ -1181,27 +1612,57 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 追加单个字符
+     * @param value 要追加的字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(value_type value) {
         return append(1, value);
     }
 
+    /**
+     * @brief 追加另一个字符串的子串
+     * @param other 源字符串
+     * @param position 起始位置
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& other, size_type position, size_type n) {
-        MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
+        MSTL_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
         n = _MSTL min(n, other.size() - position);
         return basic_string::append(other.data() + position, n);
     }
 
+    /**
+     * @brief 追加另一个字符串
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& other) {
         return append(other, 0, other.size());
     }
 
+    /**
+     * @brief 追加另一个字符串的子串
+     * @param other 源字符串
+     * @param position 起始位置
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(const basic_string& other, size_type position) {
         return append(other, position, other.size() - position);
     }
 
+    /**
+     * @brief 追加移动字符串的子串
+     * @param other 源字符串
+     * @param position 起始位置
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(basic_string&& other, size_type position, size_type n) {
-        MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
+        MSTL_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
         n = _MSTL min(n, other.size() - position);
         basic_string::append(other.data() + position, n);
@@ -1209,26 +1670,54 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 追加移动字符串
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(basic_string&& other) {
         const size_type len = other.size();
         return basic_string::append(_MSTL move(other), 0, len);
     }
 
+    /**
+     * @brief 追加移动字符串的子串
+     * @param other 源字符串
+     * @param position 起始位置
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(basic_string&& other, size_type position) {
         const size_type len = other.size();
         return basic_string::append(_MSTL move(other), position, len - position);
     }
 
+    /**
+     * @brief 追加字符串视图的指定长度
+     * @param view 字符串视图
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(view_type view, size_type n) {
         return append(view.data(), n);
     }
 
+    /**
+     * @brief 追加字符串视图
+     * @param view 字符串视图
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(view_type view) {
         return append(view.data(), view.size());
     }
 
+    /**
+     * @brief 追加字符数组的指定长度
+     * @param str 字符指针
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(const_pointer str, size_type n) {
-        MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
+        MSTL_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
        if (n == 0) return *this;
 
 #ifdef MSTL_USING_SSO__
@@ -1262,14 +1751,26 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 追加C风格字符串
+     * @param str C风格字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(const_pointer str) {
         return append(str, traits_type::length(str));
     }
 
+    /**
+     * @brief 追加迭代器范围
+     * @tparam Iterator 迭代器类型
+     * @param first 源起始
+     * @param last 源结束
+     * @return 自身引用
+     */
     template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
     MSTL_CONSTEXPR20 basic_string& append(Iterator first, Iterator last) {
         const size_type n = _MSTL distance(first, last);
-        MSTL_DEBUG_VERIFY(size_ + n < max_size(), "basic_string append iterator out of ranges.");
+        MSTL_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) return *this;
 
 #ifdef MSTL_USING_SSO__
@@ -1312,65 +1813,130 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 追加初始化列表
+     * @param ilist 初始化列表
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& append(std::initializer_list<value_type> ilist) {
         return append(ilist.begin(), ilist.end());
     }
 
+    /// 追加另一个字符串
     MSTL_CONSTEXPR20 basic_string& operator +=(const basic_string& other) {
         return basic_string::append(other);
     }
+
+    /// 追加移动字符串
     MSTL_CONSTEXPR20 basic_string& operator +=(basic_string&& other) {
         return basic_string::append(_MSTL move(other));
     }
+
+    /// 追加单个字符
     MSTL_CONSTEXPR20 basic_string& operator +=(const value_type value) {
         return basic_string::append(value);
     }
+
+    /// 追加C风格字符串
     MSTL_CONSTEXPR20 basic_string& operator +=(const_pointer str) {
         return basic_string::append(str);
     }
+
+    /// 追加初始化列表
     MSTL_CONSTEXPR20 basic_string& operator +=(std::initializer_list<value_type> ilist) {
         return basic_string::append(ilist);
     }
+
+    /// 追加字符串视图
     MSTL_CONSTEXPR20 basic_string& operator +=(view_type view) {
         return basic_string::append(view);
     }
 
+    /**
+     * @brief 赋值另一个字符串
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(const basic_string& other) {
         return *this = other;
     }
 
+    /**
+     * @brief 赋值移动字符串
+     * @param other 源字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(basic_string&& other) {
         return *this = _MSTL move(other);
     }
 
+    /**
+     * @brief 赋值C风格字符串
+     * @param str C风格字符串
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(const_pointer str) {
         return *this = str;
     }
 
+    /**
+     * @brief 赋值字符数组的指定长度
+     * @param str 字符指针
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(const_pointer str, const size_type n) {
         clear();
         return append(str, n);
     }
 
+    /**
+     * @brief 赋值多个相同字符
+     * @param n 字符数
+     * @param value 填充字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(const size_type n, value_type value) {
         clear();
         return append(n, value);
     }
 
+    /**
+     * @brief 赋值迭代器范围
+     * @tparam Iterator 迭代器类型
+     * @param first 源起始
+     * @param last 源结束
+     * @return 自身引用
+     */
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& assign(Iterator first, Iterator last) {
         clear();
         return append(first, last);
     }
 
+    /**
+     * @brief 赋值初始化列表
+     * @param ilist 初始化列表
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(std::initializer_list<value_type> ilist) {
         return *this = ilist;
     }
 
+    /**
+     * @brief 赋值字符串视图
+     * @param view 字符串视图
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& assign(const view_type& view) {
         return *this = view;
     }
 
+    /**
+     * @brief 删除指定位置的字符
+     * @param position 要删除的位置
+     * @return 指向被删除字符之后位置的迭代器
+     */
     MSTL_CONSTEXPR20 iterator erase(iterator position) noexcept {
         MSTL_DEBUG_VERIFY(position != end(), "erase: cannot erase end() iterator");
 
@@ -1401,6 +1967,12 @@ public:
         return position;
     }
 
+    /**
+     * @brief 删除指定范围内的字符
+     * @param position 起始位置
+     * @param n 字符数
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& erase(size_type position = 0, size_type n = npos) noexcept {
         if (position >= size()) return *this;
         n = _MSTL min(n, size() - position);
@@ -1408,12 +1980,24 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 删除指定数量的字符
+     * @param first 起始位置
+     * @param n 字符数
+     * @return 指向被删除区域之后位置的迭代器
+     */
     MSTL_CONSTEXPR20 iterator erase(iterator first, const size_type n) noexcept {
         if (n == 0) return first;
         iterator last = first + _MSTL min(n, static_cast<size_type>(end() - first));
         return erase(first, last);
     }
 
+    /**
+     * @brief 删除迭代器范围
+     * @param first 起始位置
+     * @param last 结束位置
+     * @return 指向被删除区域之后位置的迭代器
+     */
     MSTL_CONSTEXPR20 iterator erase(iterator first, iterator last) noexcept {
         if (first == last) return first;
 
@@ -1449,6 +2033,11 @@ public:
     }
 
 
+    /**
+     * @brief 调整大小
+     * @param n 新大小
+     * @param value 填充值
+     */
     MSTL_CONSTEXPR20 void resize(size_type n, value_type value) {
         if (n < size()) {
             basic_string::erase(begin() + n, end());
@@ -1457,10 +2046,17 @@ public:
         }
     }
 
+    /**
+     * @brief 调整大小（默认填充0）
+     * @param n 新大小
+     */
     MSTL_CONSTEXPR20 void resize(const size_type n) {
         basic_string::resize(n, value_type());
     }
 
+    /**
+     * @brief 清空字符串
+     */
     MSTL_CONSTEXPR20 void clear() noexcept {
 #ifdef MSTL_USING_SSO__
         if (is_long()) {
@@ -1477,6 +2073,9 @@ public:
 #endif
     }
 
+    /**
+     * @brief 收缩容量以适应当前大小
+     */
     MSTL_CONSTEXPR20 void shrink_to_fit() {
 #ifdef MSTL_USING_SSO__
         if (!is_long()) return;
@@ -1510,6 +2109,11 @@ public:
 #endif
     }
 
+    /**
+     * @brief 重复当前字符串n次
+     * @param n 重复次数
+     * @return 新字符串
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string repeat(size_type n) const noexcept {
         basic_string result;
         result.reserve(size() * n);
@@ -1517,23 +2121,45 @@ public:
         return _MSTL move(result);
     }
 
+    /**
+     * @brief 获取子串
+     * @param off 起始偏移
+     * @param count 长度
+     * @return 子串
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string substr(const size_type off = 0, size_type count = npos) const {
         MSTL_DEBUG_VERIFY(off < size(), "basic_string index out of ranges.");
         count = _MSTL min(count, size() - off);
         return basic_string(data() + off, count);
     }
 
+    /**
+     * @brief 获取字符串视图
+     * @return 字符串视图
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 view_type view() const noexcept {
         return view_type(data(), size());
     }
 
+    /**
+     * @brief 获取子串视图
+     * @param off 起始偏移
+     * @param count 长度
+     * @return 字符串视图
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 view_type view(const size_type off, size_type count = npos) const noexcept {
         MSTL_DEBUG_VERIFY(off < size(), "basic_string index out of ranges.");
         count = _MSTL min(count, size() - off);
         return view_type(data() + off, count);
     }
 
-
+    /**
+     * @brief 复制字符到目标缓冲区
+     * @param dest 目标缓冲区
+     * @param count 要复制的字符数
+     * @param position 起始位置
+     * @return 实际复制的字符数
+     */
     MSTL_CONSTEXPR20 size_type copy(pointer dest, const size_type count, size_type position = 0) const {
         MSTL_DEBUG_VERIFY(position <= size(), "basic_string copy position out of range");
         const size_type len = _MSTL min(count, size() - position);
@@ -1541,74 +2167,147 @@ public:
         return len;
     }
 
-
+    /**
+     * @brief 比较另一个字符串
+     * @param other 另一个字符串
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const basic_string& other) const noexcept {
         return compare(other.view());
     }
+
+    /**
+     * @brief 比较子串与另一个字符串
+     * @param off 起始偏移
+     * @param n 长度
+     * @param other 另一个字符串
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const size_type off, const size_type n, const basic_string& other) const {
         return view(off, n).compare(other);
     }
+
+    /**
+     * @brief 比较子串与另一个字符串的子串
+     * @param off 起始偏移
+     * @param n 长度
+     * @param other 另一个字符串
+     * @param roff 目标起始偏移
+     * @param count 目标长度
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const size_type off, const size_type n, const basic_string& other,
                                                 const size_type roff, const size_type count) const {
         return view(off, n).compare(other.view(roff, count));
     }
+
+    /**
+     * @brief 比较C风格字符串
+     * @param str C风格字符串
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const CharT* str) const noexcept {
         return compare(view_type(str));
     }
+
+    /**
+     * @brief 比较字符串视图
+     * @param view 字符串视图
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const string_view& view) const noexcept {
         return _MSTL char_traits_compare<Traits>(data(), size(), view.data(), view.size());
     }
+
+    /**
+     * @brief 比较子串与C风格字符串
+     * @param off 起始偏移
+     * @param n 长度
+     * @param str C风格字符串
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const size_type off, const size_type n, const CharT* str) const {
         return view(off, n).compare(view_type(str));
     }
+
+    /**
+     * @brief 比较子串与指定长度的字符数组
+     * @param off 起始偏移
+     * @param n 长度
+     * @param str 字符指针
+     * @param count 字符数组长度
+     * @return 比较结果
+     */
     MSTL_NODISCARD MSTL_CONSTEXPR20 int compare(const size_type off, const size_type n, const CharT* str, size_type count) const {
         return view(off, n).compare(view_type(str, count));
     }
 
+    /// 替换子串为另一个字符串
     MSTL_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n, const basic_string& other) {
         MSTL_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
         return replace_copy(begin() + position, n, other.data(), other.size());
     }
+
+    /// 替换迭代器范围为另一个字符串
     MSTL_CONSTEXPR20 basic_string& replace(iterator first, iterator last, const basic_string& other) {
         MSTL_DEBUG_VERIFY(begin() <= first && last <= end() && first <= last, "basic_string replace iterator out of ranges.");
         return replace_copy(first, last - first, other.data(), other.size());
     }
+
+    /// 替换子串为C风格字符串
     MSTL_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n, const_pointer str) {
         MSTL_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
         return replace_copy({data() + position, this}, n, str, traits_type::length(str));
     }
+
+    /// 替换迭代器范围为C风格字符串
     MSTL_CONSTEXPR20 basic_string& replace(iterator first, iterator last, const_pointer str) {
         MSTL_DEBUG_VERIFY(begin() <= first && last <= end() && first <= last, "basic_string replace iterator out of ranges.");
         return replace_copy(first, last - first, str, traits_type::length(str));
     }
+
+    /// 替换子串为指定长度的字符数组
     MSTL_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n1, const_pointer str, const size_type n2) {
         MSTL_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
         return replace_copy(data() + position, n1, str, n2);
     }
+
+    /// 替换迭代器范围为指定长度的字符数组
     MSTL_CONSTEXPR20 basic_string& replace(iterator first, iterator last, const_pointer str, const size_type n) {
         MSTL_DEBUG_VERIFY(begin() <= first && last <= end() && first <= last, "basic_string replace iterator out of ranges.");
         return replace_copy(first, last - first, str, n);
     }
+
+    /// 替换子串为多个相同字符
     MSTL_CONSTEXPR20 basic_string& replace(const size_type position, const size_type n1, const size_type n2, const value_type value) {
         MSTL_DEBUG_VERIFY(position < size(), "basic_string index out of ranges.");
         return replace_fill(data() + position, n1, n2, value);
     }
+
+    /// 替换迭代器范围为多个相同字符
     MSTL_CONSTEXPR20 basic_string& replace(iterator first, iterator last, const size_type n, const value_type value) {
         MSTL_DEBUG_VERIFY(begin() <= first && last <= end() && first <= last, "basic_string replace iterator out of ranges.");
         return replace_fill(first, static_cast<size_type>(last - first), n, value);
     }
+
+    /// 替换子串为另一个字符串的子串
     MSTL_CONSTEXPR20 basic_string& replace(const size_type position1, const size_type n1, const basic_string& str,
                                            const size_type position2, const size_type n2 = npos) {
         MSTL_DEBUG_VERIFY(position1 < size(), "basic_string index out of ranges.");
         MSTL_DEBUG_VERIFY(position2 < size(), "basic_string index out of ranges.");
         return replace_copy(data() + position1, n1, str.data() + position2, n2);
     }
+
+    /// 替换迭代器范围为另一个迭代器范围
     template <typename Iterator>
     MSTL_CONSTEXPR20 basic_string& replace(iterator first, iterator last, Iterator first2, Iterator last2) {
         MSTL_DEBUG_VERIFY(begin() <= first && last <= end() && first <= last, "basic_string replace iterator out of ranges.");
         return replace_copy(first, last, first2, last2);
     }
 
+    /**
+     * @brief 反转字符串
+     */
     MSTL_CONSTEXPR20 void reverse() noexcept {
         if (size() < 2) return;
 
@@ -1617,120 +2316,192 @@ public:
         }
     }
 
+    /// 查找子串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const basic_string& other, const size_type n = 0) const noexcept {
         return (char_traits_find<Traits>)(data(), size(), n, other.data(), other.size());
     }
+
+    /// 查找字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const CharT value, const size_type n = 0) const noexcept {
         return (char_traits_find_char<Traits>)(data(), size(), n, value);
     }
+
+    /// 查找指定长度的子串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const CharT* str, const size_type off, const size_type count) const noexcept {
         return (char_traits_find<Traits>)(data(), size(), off, str, count);
     }
+
+    /// 查找C风格字符串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const CharT* str, const size_type off = 0) const noexcept {
         return (char_traits_find<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 查找指定长度的字符串视图
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const string_view& view, const size_type off, const size_type count) const noexcept {
         return (char_traits_find<Traits>)(data(), size(), off, view.data(), count);
     }
+
+    /// 查找字符串视图
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find(const string_view& view, const size_type off = 0) const noexcept {
         return _MSTL char_traits_find<Traits>(data(), size(), off, view.data(), view.size());
     }
 
+    /// 从后向前查找子串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const basic_string& other, const size_type off = npos) const noexcept {
         return (char_traits_rfind<Traits>)(data(), size(), off, other.data(), other.size());
     }
+
+    /// 从后向前查找字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const CharT value, const size_type n = npos) const noexcept {
         return (char_traits_rfind_char<Traits>)(data(), size(), n, value);
     }
+
+    /// 从后向前查找指定长度的子串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const CharT* str, const size_type off, const size_type n) const noexcept {
         return (char_traits_rfind<Traits>)(data(), size(), off, str, n);
     }
+
+    /// 从后向前查找C风格字符串
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const CharT* str, const size_type off = npos) const noexcept {
         return (char_traits_rfind<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 从后向前查找指定长度的字符串视图
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const string_view& view, const size_type off, const size_type count) const noexcept {
         return (char_traits_rfind<Traits>)(data(), size(), off, view.data(), count);
     }
+
+    /// 从后向前查找字符串视图
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type rfind(const string_view& view, const size_type off = 0) const noexcept {
         return (char_traits_rfind<Traits>)(data(), size(), off, view.data(), view.size());
     }
 
+    /// 查找第一个出现在字符集合中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const basic_string& other, const size_type off = 0) const noexcept {
         return (char_traits_find_first_of<Traits>)(data(), size(), off, other.data(), other.size());
     }
+
+    /// 查找第一个等于指定字符的位置
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const CharT value, const size_type off = 0) const noexcept {
         return (char_traits_find_char<Traits>)(data(), size(), off, value);
     }
+
+    /// 查找第一个出现在指定字符数组中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const CharT* str, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_first_of<Traits>)(data(), size(), off, str, n);
     }
+
+    /// 查找第一个出现在C风格字符串中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const CharT* str, const size_type off = 0) const noexcept {
         return (char_traits_find_first_of<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 查找第一个出现在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const string_view& view, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_first_of<Traits>)(data(), size(), off, view.data(), n);
     }
+
+    /// 查找第一个出现在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_of(const string_view& view, const size_type off = 0) const noexcept {
         return (char_traits_find_first_of<Traits>)(data(), size(), off, view.data(), view.size());
     }
 
+    /// 查找最后一个出现在字符集合中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const basic_string& other, const size_type off = npos) const noexcept {
         return (char_traits_find_last_of<Traits>)(data(), size(), off, other.data(), other.size());
     }
+
+    /// 查找最后一个等于指定字符的位置
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const CharT value, const size_type off = npos) const noexcept {
         return (char_traits_rfind_char<Traits>)(data(), size(), off, value);
     }
+
+    /// 查找最后一个出现在指定字符数组中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const CharT* str, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_last_of<Traits>)(data(), size(), off, str, n);
     }
+
+    /// 查找最后一个出现在C风格字符串中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const CharT* str, const size_type off = npos) const noexcept {
         return (char_traits_find_last_of<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 查找最后一个出现在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const string_view& view, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_last_of<Traits>)(data(), size(), off, view.data(), n);
     }
+
+    /// 查找最后一个出现在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_of(const string_view& view, const size_type off = npos) const noexcept {
         return (char_traits_find_last_of<Traits>)(data(), size(), off, view.data(), view.size());
     }
 
+    /// 查找第一个不在字符集合中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const basic_string& other, const size_type off = 0) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data(), size(), off, other.data(), other.size());
     }
+
+    /// 查找第一个不等于指定字符的位置
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const CharT value, const size_type off = 0) const noexcept {
         return (char_traits_find_not_char<Traits>)(data(), size(), off, value);
     }
+
+    /// 查找第一个不在指定字符数组中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const CharT* str, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data(), size(), off, str, n);
     }
+
+    /// 查找第一个不在C风格字符串中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const CharT* str, const size_type off = 0) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 查找第一个不在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const string_view& view, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data(), size(), off, view.data(), n);
     }
+
+    /// 查找第一个不在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_first_not_of(const string_view& view, const size_type off = 0) const noexcept {
         return (char_traits_find_first_not_of<Traits>)(data(), size(), off, view.data(), view.size());
     }
 
+    /// 查找最后一个不在字符集合中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const basic_string& other, const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data(), size(), off, other.data(), other.size());
     }
+
+    /// 查找最后一个不等于指定字符的位置
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const CharT value, const size_type off = npos) const noexcept {
         return (char_traits_rfind_not_char<Traits>)(data(), size(), off, value);
     }
+
+    /// 查找最后一个不在指定字符数组中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const CharT* str, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data(), size(), off, str, n);
     }
+
+    /// 查找最后一个不在C风格字符串中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const CharT* str, const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data(), size(), off, str, Traits::length(str));
     }
+
+    /// 查找最后一个不在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const string_view& view, const size_type off, const size_type n) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data(), size(), off, view.data(), n);
     }
+
+    /// 查找最后一个不在字符串视图中的字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_type find_last_not_of(const string_view& view, const size_type off = npos) const noexcept {
         return (char_traits_find_last_not_of<Traits>)(data(), size(), off, view.data(), view.size());
     }
 
+    /**
+     * @brief 统计指定字符出现的次数
+     * @param value 要统计的字符
+     * @param position 起始位置
+     * @return 字符出现的次数
+     */
     MSTL_CONSTEXPR20 size_type count(value_type value, const size_type position = 0) const noexcept {
         size_type n = 0;
         for (size_type idx = position; idx < size(); ++idx) {
@@ -1739,63 +2510,102 @@ public:
         return n;
     }
 
+    /// 检查是否以另一个字符串开头
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const basic_string& other) const noexcept {
         return other.size() <= size() && traits_type::compare(data(), other.data(), other.size()) == 0;
     }
+
+    /// 检查是否以字符串视图开头
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(view_type view) const noexcept {
         return view.size() <= size() && traits_type::compare(data(), view.data(), view.size()) == 0;
     }
+
+    /// 检查是否以指定字符开头
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const value_type value) const noexcept {
         return !empty() && traits_type::eq(front(), value);
     }
+
+    /// 检查是否以C风格字符串开头
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool starts_with(const_pointer str) const noexcept {
         return starts_with(view_type(str));
     }
 
+    /// 检查是否以另一个字符串结尾
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const basic_string& other) const noexcept {
         const size_type other_size = other.size();
         return other_size <= size() && traits_type::compare(data() + size() - other_size, other.data(), other_size) == 0;
     }
+
+    /// 检查是否以字符串视图结尾
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(view_type view) const noexcept {
         const size_type view_size = view.size();
         return view_size <= size() && traits_type::compare(data() + size() - view_size, view.data(), view_size) == 0;
     }
+
+    /// 检查是否以指定字符结尾
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(value_type value) const noexcept {
         return !empty() && traits_type::eq(back(), value);
     }
+
+    /// 检查是否以C风格字符串结尾
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool ends_with(const_pointer str) const noexcept {
         return ends_with(view_type(str));
     }
 
+    /// 检查是否包含另一个字符串
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const basic_string& other) const noexcept {
         return find(other) != npos;
     }
+
+    /// 检查是否包含字符串视图
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(view_type view) const noexcept {
         return find(view) != npos;
     }
+
+    /// 检查是否包含指定字符
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(value_type value) const noexcept {
         return find(value) != npos;
     }
+
+    /// 检查是否包含C风格字符串
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool contains(const_pointer str) const noexcept {
         return find(str) != npos;
     }
 
+    /**
+     * @brief 去除左侧空白字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& trim_left() noexcept {
         return trim_left_if([](value_type value) {
             return _MSTL is_space(value);
         });
     }
 
+    /**
+     * @brief 去除右侧空白字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& trim_right() noexcept {
         return trim_right_if([](value_type value) {
             return _MSTL is_space(value);
         });
     }
 
+    /**
+     * @brief 去除两侧空白字符
+     * @return 自身引用
+     */
     MSTL_CONSTEXPR20 basic_string& trim() noexcept {
         return trim_left().trim_right();
     }
 
+    /**
+     * @brief 根据谓词去除左侧字符
+     * @tparam Pred 谓词类型
+     * @param pred 谓词函数
+     * @return 自身引用
+     */
     template <typename Pred>
     MSTL_CONSTEXPR20 basic_string& trim_left_if(Pred pred) {
         if (empty()) return *this;
@@ -1811,6 +2621,12 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 根据谓词去除右侧字符
+     * @tparam Pred 谓词类型
+     * @param pred 谓词函数
+     * @return 自身引用
+     */
     template <typename Pred>
     MSTL_CONSTEXPR20 basic_string& trim_right_if(Pred pred) {
         if (empty()) return *this;
@@ -1826,31 +2642,64 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 根据谓词去除两侧字符
+     * @tparam Predicate 谓词类型
+     * @param pred 谓词函数
+     * @return 自身引用
+     */
     template <typename Predicate>
     MSTL_CONSTEXPR20 basic_string& trim_if(Predicate pred) {
         return trim_left_if(pred).trim_right_if(pred);
     }
 
+    /**
+     * @brief 相等比较
+     * @param other 另一个字符串
+     * @return 是否相等
+     */
     MSTL_CONSTEXPR20 bool equal_to(const basic_string& other) const noexcept {
         return equal_to(other.view());
     }
+
+    /**
+     * @brief 与字符串视图相等比较
+     * @param view 字符串视图
+     * @return 是否相等
+     */
     MSTL_CONSTEXPR20 bool equal_to(const view_type view) const noexcept {
         return _MSTL char_traits_equal<Traits>(data(), size(), view.data(), view.size());
     }
+
+    /**
+     * @brief 与C风格字符串相等比较
+     * @param str C风格字符串
+     * @return 是否相等
+     */
     MSTL_CONSTEXPR20 bool equal_to(const CharT* str) const noexcept {
         return equal_to(view_type(str));
     }
 
+    /**
+     * @brief 转换为小写
+     */
     MSTL_CONSTEXPR20 void lowercase()
     noexcept(noexcept(_MSTL transform(begin(), end(), begin(), _MSTL to_lowercase<CharT>))) {
         _MSTL transform(begin(), end(), begin(), _MSTL to_lowercase<CharT>);
     }
 
+    /**
+     * @brief 转换为大写
+     */
     MSTL_CONSTEXPR20 void uppercase()
     noexcept(noexcept(_MSTL transform(begin(), end(), begin(), _MSTL to_uppercase<CharT>))) {
         _MSTL transform(begin(), end(), begin(), _MSTL to_uppercase<CharT>);
     }
 
+    /**
+     * @brief 交换两个字符串
+     * @param other 另一个字符串
+     */
     MSTL_CONSTEXPR20 void swap(basic_string& other) noexcept {
         if (_MSTL addressof(other) == this) return;
 #ifdef MSTL_USING_SSO__
@@ -1863,14 +2712,17 @@ public:
 #endif
     }
 
+    /// 相等比较操作符
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator ==(const basic_string& rhs) const noexcept {
         return equal_to(rhs);
     }
 
+    /// 小于比较操作符
     MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator <(const basic_string& rhs) const noexcept {
         return compare(rhs) < 0;
     }
 
+    /// 计算哈希值
     MSTL_NODISCARD MSTL_CONSTEXPR20 size_t to_hash() const noexcept {
         return _INNER FNV_hash_string(data(), size());
     }
@@ -2146,6 +2998,8 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 bool operator >=(
     const basic_string_view<CharT, Traits>& rhs) noexcept {
     return !(rhs < lhs);
 }
+
+/** @} */ // String
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_BASIC_STRING_HPP__

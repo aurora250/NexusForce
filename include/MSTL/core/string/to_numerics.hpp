@@ -1,13 +1,39 @@
 #ifndef MSTL_CORE_STRING_TO_NUMERICS_HPP__
 #define MSTL_CORE_STRING_TO_NUMERICS_HPP__
-#include "../string/string_view.hpp"
-#include "../numeric/math.hpp"
-#include "../exception/exception.hpp"
-#include "../config/undef_cmacro.hpp"
+
+/**
+ * @file to_numerics.hpp
+ * @brief 字符串到数值的转换函数
+ *
+ * 此文件提供了将字符串转换为各种数值类型的函数。
+ * 支持整数、浮点数的转换，包括进制转换和错误处理。
+ */
+
+#include "MSTL/core/exception/exception.hpp"
+#include "MSTL/core/numeric/math.hpp"
+#include "MSTL/core/string/string_view.hpp"
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 MSTL_BEGIN_NAMESPACE__
 
+/// @cond
 MSTL_BEGIN_INNER__
 
+/**
+ * @brief 将字符串转换为有符号整数
+ * @tparam T 有符号整数类型
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的有符号整数
+ *
+ * 支持自动检测进制：0x或0X前缀表示十六进制，0前缀表示八进制，否则十进制。
+ * 支持空格跳过、正负号处理、溢出检测。
+ */
 template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
 constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
     const char* start = sv.data();
@@ -100,6 +126,17 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
     return result;
 }
 
+/**
+ * @brief 将字符串转换为无符号整数
+ * @tparam T 无符号整数类型
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的无符号整数
+ *
+ * 支持自动检测进制：0x或0X前缀表示十六进制，0前缀表示八进制，否则十进制。
+ * 支持空格跳过、正负号处理、溢出检测。负数会按照C标准转换为最大值。
+ */
 template <typename T, enable_if_t<is_unsigned_v<T>, int> = 0>
 constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
     const char* start = sv.data();
@@ -192,6 +229,14 @@ constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
     return result;
 }
 
+/**
+ * @brief 快速计算10的幂
+ * @tparam T 浮点数类型
+ * @param exp 指数
+ * @return 10的exp次幂
+ *
+ * 使用预计算表加速常用指数的计算，超出范围时使用通用幂函数。
+ */
 template <typename T>
 MSTL_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     constexpr T pow10_table[] = {
@@ -200,7 +245,6 @@ MSTL_CONST_FUNCTION constexpr T fast_pow10(int exp) {
         1e20, 1e21, 1e22, 1e23, 1e24, 1e25, 1e26, 1e27, 1e28, 1e29,
         1e30, 1e31, 1e32
     };
-
     constexpr T neg_pow10_table[] = {
         1e0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9,
         1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19,
@@ -218,6 +262,16 @@ MSTL_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     return static_cast<T>(_MSTL power(10.0, exp));
 }
 
+/**
+ * @brief 将字符串转换为浮点数
+ * @tparam T 浮点数类型
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @return 转换后的浮点数
+ *
+ * 支持：正负号、小数点、科学计数法(e/E)、inf/infinity、nan。
+ * 处理精度损失和溢出情况。
+ */
 template <typename T>
 constexpr T str_to_floats(const string_view sv, char** endptr) {
     const char* start = sv.data();
@@ -361,32 +415,95 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @defgroup StringNumerics 字符串数值转换
+ * @brief 字符串与数值之间的转换功能
+ * @{
+ */
+
+/**
+ * @brief 将字符串转换为64位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的64位有符号整数
+ */
 constexpr int64_t strtoll(const string_view sv, char** endptr, const int base) {
     return _INNER str_to_ints<int64_t>(sv, endptr, base);
 }
+
+/**
+ * @brief 将字符串转换为长整型有符号整数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的长整型有符号整数
+ */
 constexpr long strtol(const string_view sv, char** endptr, const int base) {
     return _INNER str_to_ints<long>(sv, endptr, base);
 }
 
+/**
+ * @brief 将字符串转换为64位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的64位无符号整数
+ */
 constexpr uint64_t strtoull(const string_view sv, char** endptr, const int base) {
     return _INNER str_to_uints<uint64_t>(sv, endptr, base);
 }
+
+/**
+ * @brief 将字符串转换为无符号长整型
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的无符号长整型
+ */
 constexpr unsigned long strtoul(const string_view sv, char** endptr, const int base) {
     return _INNER str_to_uints<unsigned long>(sv, endptr, base);
 }
 
+/**
+ * @brief 将字符串转换为单精度浮点数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @return 转换后的单精度浮点数
+ */
 constexpr float strtof(const string_view sv, char** endptr) {
     return _INNER str_to_floats<float>(sv, endptr);
 }
+
+/**
+ * @brief 将字符串转换为双精度浮点数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @return 转换后的双精度浮点数
+ */
 constexpr double strtod(const string_view sv, char** endptr) {
     return _INNER str_to_floats<double>(sv, endptr);
 }
+
+/**
+ * @brief 将字符串转换为长双精度浮点数
+ * @param sv 要转换的字符串视图
+ * @param endptr 指向转换结束位置的指针
+ * @return 转换后的长双精度浮点数
+ */
 constexpr long double strtold(const string_view sv, char** endptr) {
     return _INNER str_to_floats<long double>(sv, endptr);
 }
 
-
+/**
+ * @brief 将字符串转换为32位浮点数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @return 转换后的32位浮点数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr float32_t
 to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
@@ -398,6 +515,13 @@ to_float32(const string_view sv, size_t* idx = nullptr) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为64位浮点数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @return 转换后的64位浮点数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr float64_t
 to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
@@ -409,6 +533,13 @@ to_float64(const string_view sv, size_t* idx = nullptr) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为decimal浮点数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @return 转换后的十进制浮点数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr decimal_t
 to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
@@ -420,6 +551,14 @@ to_decimal(const string_view sv, size_t* idx = nullptr) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为64位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的64位有符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr int64_t
 to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
@@ -431,6 +570,14 @@ to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为64位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的64位无符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr uint64_t
 to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
@@ -442,6 +589,14 @@ to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为32位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的32位有符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr int32_t
 to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
@@ -453,6 +608,14 @@ to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为32位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的32位无符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr uint32_t
 to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
@@ -464,25 +627,59 @@ to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return num;
 }
 
+/**
+ * @brief 将字符串转换为16位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的16位有符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr int16_t
 to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return static_cast<int16_t>(to_int32(sv, idx, base));
 }
 
+/**
+ * @brief 将字符串转换为16位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的16位无符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr uint16_t
 to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return static_cast<uint16_t>(to_uint32(sv, idx, base));
 }
 
+/**
+ * @brief 将字符串转换为8位有符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的8位有符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr int8_t
 to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return static_cast<int8_t>(to_int32(sv, idx, base));
 }
 
+/**
+ * @brief 将字符串转换为8位无符号整数
+ * @param sv 要转换的字符串视图
+ * @param idx 可选参数，存储转换结束位置索引
+ * @param base 进制基数（0表示自动检测）
+ * @return 转换后的8位无符号整数
+ * @throws typecast_exception 转换失败时
+ */
 MSTL_NODISCARD constexpr uint8_t
 to_uint8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     return static_cast<uint8_t>(to_uint32(sv, idx, base));
 }
+
+/** @} */ // StringNumerics
 
 MSTL_END_NAMESPACE__
 

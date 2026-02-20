@@ -313,18 +313,9 @@ void sysinfo::init() {
     system_info_.page_size = system_info.dwPageSize;
     system_info_.allocation_granularity = system_info.dwAllocationGranularity;
 
-#ifdef MSTL_DATA_BUS_WIDTH_64__
-    system_info_.min_app_address = system_info.lpMinimumApplicationAddress;
-    system_info_.max_app_address = system_info.lpMaximumApplicationAddress;
-    system_info_.active_processor_mask = system_info.dwActiveProcessorMask;
-#else
-    system_info_.min_app_address = reinterpret_cast<uint32_t>(
-        system_info.lpMinimumApplicationAddress);
-    system_info_.max_app_address = reinterpret_cast<uint32_t>(
-        system_info.lpMaximumApplicationAddress);
-    system_info_.active_processor_mask = static_cast<uint32_t>(
-        system_info.dwActiveProcessorMask);
-#endif
+    system_info_.min_app_address = reinterpret_cast<uintptr_t>(system_info.lpMinimumApplicationAddress);
+    system_info_.max_app_address = reinterpret_cast<uintptr_t>(system_info.lpMaximumApplicationAddress);
+    system_info_.active_processor_mask = static_cast<uintptr_t>(system_info.dwActiveProcessorMask);
 
     system_info_.processor_level = system_info.wProcessorLevel;
     system_info_.processor_revision = system_info.wProcessorRevision;
@@ -379,8 +370,8 @@ void sysinfo::init() {
     system_info_.allocation_granularity = system_info_.page_size;
 
 #ifdef MSTL_DATA_BUS_WIDTH_64__
-    system_info_.min_app_address = reinterpret_cast<void*>(0x400000);
-    system_info_.max_app_address = reinterpret_cast<void*>(0x7fffffffffff);
+    system_info_.min_app_address = 0x400000;
+    system_info_.max_app_address = 0x7fffffffffff;
 #else
     system_info_.min_app_address = 0x08048000;
     system_info_.max_app_address = 0xC0000000;

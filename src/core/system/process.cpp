@@ -474,30 +474,4 @@ string process::get_process_name(process_id_t process_id) noexcept {
 #endif
 }
 
-void process_group::add_process(process::process_info info) {
-    processes.emplace_back(_MSTL move(info));
-}
-
-bool process_group::terminate_all() {
-    bool success = true;
-    for (auto& info : processes) {
-        if (!process::terminate_process(info)) {
-            success = false;
-        }
-    }
-    return success;
-}
-
-bool process_group::wait_all(const int timeout_ms) {
-    bool all_done = true;
-    for (auto& info : processes) {
-        if (process::is_process_running(info)) {
-            if (process::wait_for_process(info, timeout_ms) == -1) {
-                all_done = false;
-            }
-        }
-    }
-    return all_done;
-}
-
 MSTL_END_NAMESPACE__

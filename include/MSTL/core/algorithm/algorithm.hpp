@@ -16,4 +16,5 @@
 #include "shuffle.hpp"
 #include "sort.hpp"
 #include "type_erase.hpp"
+
 #endif // MSTL_CORE_ALGORITHM_ALGORITHM_HPP__

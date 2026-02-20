@@ -1,26 +1,62 @@
 #ifndef MSTL_CORE_STRING_TO_STRING_HPP__
 #define MSTL_CORE_STRING_TO_STRING_HPP__
+
+/**
+ * @file to_string.hpp
+ * @brief 类型到字符串的转换函数
+ *
+ * 此文件提供了将各种类型转换为字符串的通用函数。
+ * 支持基本类型、容器、元组、枚举、异常等多种类型的字符串表示。
+ */
+
 #include "MSTL/core/interface/istringify.hpp"
 #include "MSTL/core/interface/icollector.hpp"
 #include "MSTL/core/algorithm/type_erase.hpp"
 #include "MSTL/core/string/character.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup ToString 转换字符串
+ * @brief 各类型到字符串的转换函数
+ * @{
+ */
+
+/**
+ * @brief 将可包装类型转换为字符串
+ * @tparam T 可包装类型
+ * @param value 要转换的值
+ * @return 字符串表示
+ *
+ * 通过包装类型进行字符串转换，要求包装类型实现了istringify接口。
+ */
 template <typename T, typename P = package_t<T>, enable_if_t<is_packaged_v<T> && is_base_of_v<istringify<P>, P>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& value) {
     return to_string(package_t<T>(value));
 }
 
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(nullptr_t) {
+/**
+ * @brief 将空指针转换为字符串
+ * @param np 空指针
+ * @return 字符串"nullptr"
+ */
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(nullptr_t np) {
     return {"nullptr"};
 }
 
+/**
+ * @brief 将指针转换为字符串
+ * @tparam T 指针类型
+ * @param ptr 指针
+ * @return 指针的地址字符串
+ *
+ * 将指针转换为地址字符串，排除C风格字符串。
+ */
 template <typename T, enable_if_t<is_pointer_v<T> && !is_cstring_v<T>, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
-    return _MSTL address_string(x);
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& ptr) {
+    return _MSTL address_string(ptr);
 }
 
-
+/// @cond
 MSTL_BEGIN_INNER__
 
 template <typename Collector>
@@ -37,120 +73,88 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string collector_to_string(const Collector& c) {
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @brief 将容器转换为字符串
+ * @tparam T 容器类型
+ * @param c 容器
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_base_of_v<icollector<T>, T>, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
-    return _INNER collector_to_string(x);
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& c) {
+    return _INNER collector_to_string(c);
 }
 
-
+/**
+ * @brief 将无界数组转换为字符串
+ * @tparam T 数组类型
+ * @return 空数组字符串"[]"
+ */
 template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T&) {
     return {"[]"};
 }
 
+/**
+ * @brief 将有界数组转换为字符串
+ * @tparam T 数组类型
+ * @param arr 数组
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
-    return _INNER collector_to_string(x);
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& arr) {
+    return _INNER collector_to_string(arr);
 }
 
-MSTL_BEGIN_INNER__
-
-template <typename T, T N>
-constexpr const char* __get_enum_name_raw() {
-#ifdef MSTL_COMPILER_MSVC__
-    return __FUNCSIG__;
-#else
-    return __PRETTY_FUNCTION__;
-#endif
-}
-
-template <ssize_t Beg, ssize_t End, typename F, enable_if_t<Beg == End, int> = 0>
-MSTL_CONSTEXPR20 void static_for(const F&) {}
-
-template <ssize_t Beg, ssize_t End, typename F, enable_if_t<Beg != End, int> = 0>
-MSTL_CONSTEXPR20 void static_for(const F& func) {
-    func.template call<Beg>();
-    _INNER static_for<Beg + 1, End>(func);
-}
-
-template <typename T>
-struct __enum_name_functor {
-    using UT = underlying_type_t<T>;
-
-    UT n;
-    string &s;
-
-    __enum_name_functor(UT n, string &s) : n(n), s(s) {}
-
-    template <UT I>
-    MSTL_CONSTEXPR20 void call() const {
-        if (n == I) {
-            s = __get_enum_name_raw<T, static_cast<T>(I)>();
-        }
-    }
-};
-
-MSTL_END_INNER__
-
-template <typename T, T Beg, T End>
-MSTL_CONSTEXPR20 string enum_name(T n) {
-    static_assert(is_enum_v<T>, "T must be an enumeration");
-    string s;
-    using UT = underlying_type_t<T>;
-    _INNER static_for<static_cast<UT>(Beg), static_cast<UT>(End) + 1>(
-        _INNER __enum_name_functor<T>(static_cast<UT>(n), s));
-    if (s.empty()) {
-        return "";
-    }
-#ifdef MSTL_COMPILER_MSVC__
-    size_t pos = s.find(',');
-    pos += 1;
-    size_t pos2 = s.find('>', pos);
-#else
-    size_t pos = s.find("N = ");
-    pos += 4;
-    size_t pos2 = s.find_first_of(";]", pos);
-#endif
-    s = s.substr(pos, pos2 - pos);
-    const size_t pos3 = s.rfind("::");
-    if (pos3 != s.npos) {
-        s = s.substr(pos3 + 2);
-    }
-    return s;
-}
-
-template <typename T>
-MSTL_CONSTEXPR20 string enum_name(T n) {
-    return _MSTL enum_name<T, static_cast<T>(0), static_cast<T>(256)>(n);
-}
-
-template <typename T, enable_if_t<is_enum_v<T>, int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& x) {
-    return _MSTL enum_name(x);
-}
-
+/**
+ * @brief 将异常转换为字符串
+ * @tparam T 异常类型
+ * @param obj 异常对象
+ * @return 格式为"类型(what)"的字符串
+ */
 template <typename T, enable_if_t<is_base_of_v<_MSTL exception, T>, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const T& obj) {
     return string(obj.type()) + "(" + obj.what() + ")";
 }
 
+/**
+ * @brief 将压缩对（已压缩版本）转换为字符串
+ * @tparam IfEmpty 空基类类型
+ * @tparam T 值类型
+ * @param obj 压缩对
+ * @return 值的字符串表示
+ */
 template <typename IfEmpty, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const compressed_pair<IfEmpty, T, true>& obj) {
     return to_string(obj.value);
 }
 
+/**
+ * @brief 将压缩对（未压缩版本）转换为字符串
+ * @tparam IfEmpty 空基类类型
+ * @tparam T 值类型
+ * @param obj 压缩对
+ * @return 格式为"{ value, empty }"的字符串
+ */
 template <typename IfEmpty, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const compressed_pair<IfEmpty, T, false>& obj) {
     return "{ " + to_string(obj.value) + ", " + to_string(obj.no_compressed) + " }";
 }
 
+/**
+ * @brief 将对转换为字符串
+ * @tparam T1 第一个类型
+ * @tparam T2 第二个类型
+ * @param obj 对
+ * @return 格式为"{ first, second }"的字符串
+ */
 template <typename T1, typename T2>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const pair<T1, T2>& obj) {
     return "{ " + to_string(obj.first) + ", " + to_string(obj.second) + " }";
 }
 
-
+/// @cond
 MSTL_BEGIN_INNER__
 
 template <typename Tuple, size_t I, enable_if_t<I == tuple_size_v<Tuple> - 1, int> = 0>
@@ -179,10 +183,17 @@ MSTL_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>& t) {
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @brief 将元组转换为字符串
+ * @tparam Args 元组元素类型
+ * @param tup 元组
+ * @return 字符串表示
+ */
 template <typename... Args>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const tuple<Args...>& t) {
-    return _INNER __to_string_tuple_dispatch(t);
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
+    return _INNER __to_string_tuple_dispatch(tup);
 }
 
 MSTL_NODISCARD inline string to_string(const bstring& x) {
@@ -199,7 +210,7 @@ MSTL_NODISCARD inline bstring to_bstring(const string_view x) {
 
 
 #ifndef MSTL_STANDARD_17__
-
+/// @cond
 MSTL_BEGIN_INNER__
 template <typename T>
 string to_string_concat(T&& t) {
@@ -210,25 +221,32 @@ string to_string_concat(First&& first, Rest&&... rest) {
     return to_string(_MSTL forward<First>(first)) + to_string_concat(_MSTL forward<Rest>(rest)...);
 }
 MSTL_END_INNER__
-
-template <typename... Args, enable_if_t<(sizeof...(Args) > 1), int> = 0>
-MSTL_NODISCARD string to_string(Args&&... args) {
-    return _INNER to_string_concat(_MSTL forward<Args>(args)...);
-}
-
-#else
-template <typename... Args, enable_if_t<(sizeof...(Args) > 1), int> = 0>
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(Args&&... args) {
-    return (to_string(_MSTL forward<Args>(args)) + ...);
-}
+/// @endcond
 #endif
 
+/**
+ * @brief 将多个参数转换为字符串并连接
+ * @tparam Args 参数类型
+ * @param args 参数
+ * @return 连接后的字符串
+ */
+template <typename... Args, enable_if_t<(sizeof...(Args) > 1), int> = 0>
+MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(Args&&... args) {
+#ifdef MSTL_STANDARD_17__
+    return (to_string(_MSTL forward<Args>(args)) + ...);
+#else
+    return _INNER to_string_concat(_MSTL forward<Args>(args)...);
+#endif
+}
 
+/// @cond
 MSTL_BEGIN_INNER__
 
-#ifndef MSTL_DATA_BUS_WIDTH_64__
-template <typename CharT, typename UT, enable_if_t<(sizeof(UT) > 4), int> = 0>
-constexpr void __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
+#ifdef MSTL_DATA_BUS_WIDTH_32__
+
+template <typename CharT, typename UT>
+constexpr enable_if_t<(sizeof(UT) > 4)>
+__uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
     while (ux > static_cast<UT>(0xFFFFFFFFU)) {
         auto chunk = static_cast<uint32_t>(ux % static_cast<UT>(1000000000));
         ux /= static_cast<UT>(1000000000);
@@ -238,10 +256,21 @@ constexpr void __uint_to_buff_aux(CharT* riter, UT& ux) noexcept {
         }
     }
 }
-template <typename CharT, typename UT, enable_if_t<sizeof(UT) <= 4, int> = 0>
-constexpr void __uint_to_buff_aux(CharT*, UT&) noexcept {}
-#endif // MSTL_DATA_BUS_WIDTH_64__
 
+template <typename CharT, typename UT>
+constexpr enable_if_t<(sizeof(UT) <= 4)>
+__uint_to_buff_aux(CharT*, UT&) noexcept {}
+
+#endif
+
+/**
+ * @brief 将无符号整数转换为字符缓冲区
+ * @tparam CharT 字符类型
+ * @tparam UT 无符号整数类型
+ * @param riter 反向迭代器
+ * @param ux 要转换的值
+ * @return 指向转换后字符串起始位置的迭代器
+ */
 template <typename CharT, typename UT, enable_if_t<is_unsigned<UT>::value, int> = 0>
 MSTL_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
 #ifdef MSTL_DATA_BUS_WIDTH_64__
@@ -257,6 +286,13 @@ MSTL_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
     return riter;
 }
 
+/**
+ * @brief 将有符号整数转换为字符串
+ * @tparam CharT 字符类型
+ * @tparam T 整数类型
+ * @param x 要转换的值
+ * @return 字符串表示
+ */
 template <typename CharT, typename T, enable_if_t<is_integral<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
     CharT buffer[21];
@@ -274,6 +310,13 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
     return basic_string<CharT>(rnext, count);
 }
 
+/**
+ * @brief 将无符号整数转换为字符串
+ * @tparam CharT 字符类型
+ * @tparam T 无符号整数类型
+ * @param x 要转换的值
+ * @return 字符串表示
+ */
 template <typename CharT, typename T, enable_if_t<conjunction<is_integral<T>, is_unsigned<T>>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     CharT buffer[21];
@@ -283,6 +326,13 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     return basic_string<CharT>(rnext, count);
 }
 
+/**
+ * @brief 将无符号整数转换为指定进制的字符串
+ * @param value 要转换的值
+ * @param base 进制基数（2-36）
+ * @param uppercase 是否使用大写字母
+ * @return 进制字符串
+ */
 MSTL_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
     if (value == 0) {
         return "0";
@@ -311,7 +361,16 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
     return _INNER __uint_to_string<char>(x);
 }
 
-
+/**
+ * @brief 将浮点数转换为字符串
+ * @tparam CharT 字符类型
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @param precision 精度
+ * @param force_scientific 强制科学计数法
+ * @param force_fixed 强制固定小数表示
+ * @return 字符串表示
+ */
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string_with_precision(
     T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
@@ -406,32 +465,71 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string_with_preci
     return result;
 }
 
+/**
+ * @brief 将浮点数转换为字符串
+ * @tparam CharT 字符类型
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @return 字符串表示
+ */
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string(T x) {
     return _INNER __float_to_string_with_precision<CharT>(x, 6, false, false);
 }
 
 MSTL_END_INNER__
+/// @endcond
 
+/**
+ * @brief 将浮点数转换为字符串（带精度控制）
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @param precision 精度
+ * @param scientific 是否使用科学计数法
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_with_precision(T x, int precision, bool scientific = false) {
     return _INNER __float_to_string_with_precision<char>(x, precision, scientific, scientific);
 }
 
+/**
+ * @brief 将浮点数转换为字符串（通用格式）
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @param precision 精度
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_general(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, false, false);
 }
 
+/**
+ * @brief 将浮点数转换为字符串（固定小数格式）
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @param precision 精度
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_fixed(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, false, true);
 }
 
+/**
+ * @brief 将浮点数转换为字符串（科学计数法格式）
+ * @tparam T 浮点数类型
+ * @param x 要转换的值
+ * @param precision 精度
+ * @return 字符串表示
+ */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string_scientific(T x, int precision = 6) {
     return _INNER __float_to_string_with_precision<char>(x, precision, true, false);
 }
+
+/** @} */ // ToString
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_TO_STRING_HPP__

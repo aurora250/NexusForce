@@ -1,14 +1,19 @@
 #ifndef MSTL_CORE_FILE_FILE_HPP__
 #define MSTL_CORE_FILE_FILE_HPP__
+#include "MSTL/core/async/mutex.hpp"
 #include "MSTL/core/container/vector.hpp"
 #include "MSTL/core/container/unordered_map.hpp"
-#include "MSTL/core/time/datetime.hpp"
 #include "MSTL/core/iterator/file_line_iterator.hpp"
-#include "MSTL/core/async/mutex.hpp"
-#include "path.hpp"
+#include "MSTL/core/file/path.hpp"
+#include "MSTL/core/time/datetime.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
-#include "MSTL/core/config/undef_cmacro.hpp"
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/stat.h>

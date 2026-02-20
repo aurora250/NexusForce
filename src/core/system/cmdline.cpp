@@ -4,7 +4,6 @@
 #include <MSTL/core/string/to_string.hpp>
 #include <Windows.h>
 #include <shellapi.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/file/file.hpp>
@@ -93,14 +92,14 @@ string cmdline::get(const string& long_name, const size_t index) const {
     return it->second->values[index];
 }
 
-bool cmdline::has(const string& long_name) const {
-    const auto it = options_long_.find(long_name);
+bool cmdline::has(const string& name) const {
+    const auto it = options_long_.find(name);
     if (it == options_long_.end()) return false;
     return !it->second->values.empty();
 }
 
-size_t cmdline::count(const string& long_name) const {
-    const auto it = options_long_.find(long_name);
+size_t cmdline::count(const string& name) const {
+    const auto it = options_long_.find(name);
     if (it == options_long_.end()) return 0;
     return it->second->values.size();
 }
@@ -196,7 +195,7 @@ cmdline::option* cmdline::find_option_short(const char name) {
     return it == options_short_.end() ? nullptr : it->second;
 }
 
-void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& args, size_t& i) {
+void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& args, size_t& index) {
     const size_t eq_pos = arg.find('=');
     const string name = arg.substr(2, eq_pos == string::npos ? string::npos : eq_pos - 2);
 
@@ -211,10 +210,10 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
             value = arg.substr(eq_pos + 1);
         }
         else {
-            if (i + 1 >= args.size()) {
+            if (index + 1 >= args.size()) {
                 throw_exception(cmdline_exception(("Option requires a value: --" + name).data()));
             }
-            value = args[++i];
+            value = args[++index];
         }
 
         if (opt->allow_multiple) {
@@ -236,7 +235,7 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
     }
 }
 
-void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>& args, size_t& i) {
+void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>& args, size_t& index) {
     for (size_t j = 1; j < arg.size(); ++j) {
         const char short_name = arg[j];
         option* opt = find_option_short(short_name);
@@ -247,10 +246,10 @@ void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>&
 
         if (opt->requires_value) {
             if (j == arg.size() - 1) {
-                if (i + 1 >= args.size()) {
+                if (index + 1 >= args.size()) {
                     throw_exception(cmdline_exception(("Option requires a value: -"_s + short_name).data()));
                 }
-                const string value = args[++i];
+                const string value = args[++index];
                 if (opt->allow_multiple) {
                     opt->values.push_back(_MSTL move(value));
                 }

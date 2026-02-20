@@ -3,15 +3,17 @@
 #include "MSTL/core/config/c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <Windows.h>
-#include "MSTL/core/config/undef_cmacro.hpp"
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <fcntl.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
-
-class file;
-
 
 MSTL_INLINE17 constexpr auto FILE_SPLITER =
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -27,11 +29,14 @@ MSTL_INLINE17 constexpr char PREFERRED_SEPARATOR =
     '/';
 #endif
 
+MSTL_INLINE17 constexpr size_t FILE_BUFFER_SIZE = 8192; // 8KB Buffer
 
+
+using fud_t =
 #ifdef MSTL_PLATFORM_WINDOWS__
-using fud_t = ::DWORD;
+    ::DWORD;
 #elif defined(MSTL_PLATFORM_LINUX__)
-using fud_t = int;
+    int;
 #endif
 
 enum class FILE_ACCESS : fud_t {
@@ -191,15 +196,11 @@ enum class FILE_WATCH_EVENT {
     ALL = CREATED | DELETED | MODIFIED | RENAMED | ACCESSED
 };
 
-
 enum class FILE_MAP_HINT {
     NORMAL = 0,
     SEQUENTIAL,
     RANDOM
 };
-
-
-MSTL_INLINE17 constexpr size_t FILE_BUFFER_SIZE = 8192; // 8KB Buffer
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FILE_FILE_CONSTANTS_HPP__

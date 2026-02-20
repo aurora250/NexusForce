@@ -14,7 +14,7 @@ static shared_mutex& get_mutex() {
     return mutex;
 }
 
-string environment::get_unsafe(const string& name) {
+static string get_unsafe(const string& name) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     char* value = nullptr;
     size_t size = 0;
@@ -31,7 +31,7 @@ string environment::get_unsafe(const string& name) {
 #endif
 }
 
-bool environment::set_unsafe(const string& name, const string& value, const bool overwrite) {
+static bool set_unsafe(const string& name, const string& value, const bool overwrite = true) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::_putenv_s(name.data(), value.data()) == 0;
 #else
@@ -52,7 +52,7 @@ bool environment::set(const string& name, const string& value, const bool overwr
 bool environment::unset(const string& name) {
     lock<shared_mutex> lock(get_mutex());
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetEnvironmentVariable(name.data(), nullptr) != 0;
+    return ::SetEnvironmentVariableA(name.data(), nullptr) != 0;
 #else
     return ::unsetenv(name.data()) == 0;
 #endif
@@ -85,7 +85,7 @@ unordered_map<string, string> environment::all_envs() {
         }
         current += env_str.length() + 1;
     }
-    ::FreeEnvironmentStrings(env_block);
+    ::FreeEnvironmentStringsA(env_block);
 #else
     for (char** env = ::environ; *env != nullptr; env++) {
         const string_view env_str(*env);
@@ -147,7 +147,7 @@ string environment::current_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
 #ifdef MSTL_PLATFORM_WINDOWS__
     char buffer[MAX_PATH];
-    const ::DWORD length = ::GetCurrentDirectory(MAX_PATH, buffer);
+    const ::DWORD length = ::GetCurrentDirectoryA(MAX_PATH, buffer);
     if (length == 0) {
         throw_exception(system_exception("Failed to get current directory"));
     }
@@ -168,7 +168,7 @@ string environment::current_user() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     char username[256];
     ::DWORD size = sizeof(username);
-    if (::GetUserName(username, &size)) {
+    if (::GetUserNameA(username, &size)) {
         return string(username);
     }
     return "";
@@ -185,7 +185,7 @@ string environment::temp_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
 #ifdef MSTL_PLATFORM_WINDOWS__
     char buffer[MAX_PATH];
-    const DWORD length = ::GetTempPath(MAX_PATH, buffer);
+    const DWORD length = ::GetTempPathA(MAX_PATH, buffer);
     if (length == 0) {
         return "C:\\Temp";
     }

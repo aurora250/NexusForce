@@ -1,40 +1,82 @@
 #ifndef MSTL_CORE_STRING_FORMAT_HPP__
 #define MSTL_CORE_STRING_FORMAT_HPP__
-#include "to_string.hpp"
+
+/**
+ * @file format.hpp
+ * @brief 字符串格式化功能
+ *
+ * 此文件提供字符串格式化功能。
+ * 支持数值的格式化选项，包括对齐、填充、进制、精度等。
+ */
+
+#include "MSTL/core/string/to_string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup StringFormat 字符串格式化
+ * @brief 字符串格式化功能
+ * @{
+ */
+
+/**
+ * @enum FORMAT_ALIGN
+ * @brief 对齐方式枚举
+ */
 enum class FORMAT_ALIGN {
-    LEFT        = '<',
-    RIGHT       = '>',
-    INTERNAL    = '=',
-    CENTER      = '^'
+    LEFT        = '<',  ///< 左对齐
+    RIGHT       = '>',  ///< 右对齐
+    INTERNAL    = '=',  ///< 内部对齐
+    CENTER      = '^'   ///< 居中对齐
 };
 
+/**
+ * @enum FORMAT_TYPE
+ * @brief 数值类型格式枚举
+ */
 enum class FORMAT_TYPE {
-    BINARY      = 'b',
-    OCTAL       = 'o',
-    DECIMAL     = 'd',
-    HEX_LOW     = 'x',
-    HEX_UP      = 'X',
-    FLOAT_FIX   = 'f',
-    FLOAT_EXP   = 'e',
-    FLOAT_GEN   = 'g'
+    BINARY      = 'b',  ///< 二进制
+    OCTAL       = 'o',  ///< 八进制
+    DECIMAL     = 'd',  ///< 十进制
+    HEX_LOW     = 'x',  ///< 十六进制小写
+    HEX_UP      = 'X',  ///< 十六进制大写
+    FLOAT_FIX   = 'f',  ///< 固定小数位浮点数
+    FLOAT_EXP   = 'e',  ///< 科学计数法
+    FLOAT_GEN   = 'g'   ///< 通用格式
 };
 
-struct MSTL_API format_options {
-    char fill = ' ';
-    int width = 0;
-    int precision = -1;
-    FORMAT_ALIGN alignment = FORMAT_ALIGN::RIGHT;
-    char sign_mode = 0;  // 0: default, '+': always show, '-': only nega, ' ': posi space
-    bool show_base = false;
-    FORMAT_TYPE type = FORMAT_TYPE::DECIMAL;
-    bool zero_pad = false;
+/**
+ * @struct format_options
+ * @brief 格式化选项结构体
+ *
+ * 包含所有格式化相关的选项：
+ * - fill: 填充字符
+ * - width: 总宽度
+ * - precision: 精度（浮点数有效位）
+ * - alignment: 对齐方式
+ * - sign_mode: 符号显示模式
+ * - show_base: 是否显示进制前缀
+ * - type: 数值类型格式
+ * - zero_pad: 是否用0填充
+ */
+struct format_options {
+    char fill = ' ';                     ///< 填充字符
+    int width = 0;                        ///< 总宽度
+    int precision = -1;                    ///< 精度（-1表示默认）
+    FORMAT_ALIGN alignment = FORMAT_ALIGN::RIGHT;  ///< 对齐方式
+    char sign_mode = 0;  ///< 符号模式：0默认，+总是显示，-只显示负数，空格正数显示空格
+    bool show_base = false;                ///< 是否显示进制前缀
+    FORMAT_TYPE type = FORMAT_TYPE::DECIMAL;  ///< 数值类型格式
+    bool zero_pad = false;                 ///< 是否用0填充
 };
 
-
+/// @cond
 MSTL_BEGIN_INNER__
 
+/**
+ * @brief 将字符转换为对齐方式枚举
+ * @param c 字符
+ * @return 对应的对齐方式
+ */
 constexpr FORMAT_ALIGN to_number_alignment(const char c) {
     switch (c) {
         case '<': return FORMAT_ALIGN::LEFT;
@@ -45,6 +87,11 @@ constexpr FORMAT_ALIGN to_number_alignment(const char c) {
     }
 }
 
+/**
+ * @brief 将字符转换为数值类型格式枚举
+ * @param c 字符
+ * @return 对应的数值类型格式
+ */
 constexpr FORMAT_TYPE to_number_type(const char c) {
     switch (c) {
         case 'b': return FORMAT_TYPE::BINARY;
@@ -59,6 +106,14 @@ constexpr FORMAT_TYPE to_number_type(const char c) {
     }
 }
 
+/**
+ * @brief 解析数字格式字符串
+ * @param fmt_str 格式字符串
+ * @return 解析后的格式化选项
+ *
+ * 支持的格式语法：[填充字符]对齐方式[符号][#][0][宽度][.精度][类型]
+ * 例如：":#010x" 表示用0填充，宽度10，显示进制前缀，十六进制
+ */
 MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) {
     format_options options;
     size_t pos = 0;
@@ -93,14 +148,6 @@ MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) 
         const char c = fmt_str[pos];
         if (c == '+' || c == '-' || c == ' ') {
             options.sign_mode = c;
-            ++pos;
-        }
-    }
-
-    if (!found_align && pos < fmt_str.size()) {
-        const char c = fmt_str[pos];
-        if (c == '<' || c == '>' || c == '^' || c == '=') {
-            options.alignment = to_number_alignment(c);
             ++pos;
         }
     }
@@ -146,14 +193,31 @@ MSTL_CONSTEXPR20 format_options parse_number_format(const string_view& fmt_str) 
 }
 
 MSTL_END_INNER__
+/// @endcond
 
-
-template <typename Number, typename = void>
+/**
+ * @struct formatter
+ * @brief 格式化器主模板
+ * @tparam Number 要格式化的类型
+ * @tparam Dummy 用于SFINAE
+ *
+ * 通过特化实现不同类型值的格式化。
+ */
+template <typename Number, typename Dummy = void>
 struct formatter;
 
-
+/**
+ * @brief 浮点数类型的格式化器特化
+ * @tparam T 浮点数类型
+ */
 template <typename T>
 struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
+    /**
+     * @brief 格式化浮点数
+     * @param value 要格式化的值
+     * @param options 格式化选项
+     * @return 格式化后的字符串
+     */
     MSTL_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
         double val = static_cast<double>(value);
         const bool is_negative = val < 0;
@@ -200,25 +264,39 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case FORMAT_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT: {
                 return result + fill_str;
-            case FORMAT_ALIGN::RIGHT:
+            }
+            case FORMAT_ALIGN::RIGHT: {
                 return fill_str + result;
-            case FORMAT_ALIGN::INTERNAL:
+            }
+            case FORMAT_ALIGN::INTERNAL: {
                 return prefix + fill_str + number_str;
+            }
             case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + result + string(right_fill, options.fill);
             }
-            default:
+            default: {
                 return fill_str + result;
+            }
         }
     }
 };
 
+/**
+ * @brief 有符号整数类型的格式化器特化
+ * @tparam T 有符号整数类型
+ */
 template <typename T>
 struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
+    /**
+     * @brief 格式化有符号整数
+     * @param value 要格式化的值
+     * @param options 格式化选项
+     * @return 格式化后的字符串
+     */
     MSTL_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
         const int64_t val = static_cast<int64_t>(value);
         const bool is_negative = val < 0;
@@ -262,11 +340,11 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
 
         string prefix;
         if (is_negative) {
-            prefix += "-";
+            prefix = "-";
         } else if (options.sign_mode == '+') {
-            prefix += "+";
+            prefix = "+";
         } else if (options.sign_mode == ' ') {
-            prefix += " ";
+            prefix = " ";
         }
 
         if (options.show_base && base != 10) {
@@ -288,25 +366,39 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_signed_v<T>>> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case FORMAT_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT: {
                 return result + fill_str;
-            case FORMAT_ALIGN::RIGHT:
+            }
+            case FORMAT_ALIGN::RIGHT: {
                 return fill_str + result;
-            case FORMAT_ALIGN::INTERNAL:
+            }
+            case FORMAT_ALIGN::INTERNAL: {
                 return prefix + fill_str + number_str;
+            }
             case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + result + string(right_fill, options.fill);
             }
-            default:
+            default: {
                 return fill_str + result;
+            }
         }
     }
 };
 
+/**
+ * @brief 无符号整数类型的格式化器特化
+ * @tparam T 无符号整数类型
+ */
 template <typename T>
 struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
+    /**
+     * @brief 格式化无符号整数
+     * @param value 要格式化的值
+     * @param options 格式化选项
+     * @return 格式化后的字符串
+     */
     MSTL_CONSTEXPR20 string operator ()(const T& value, const format_options& options) const {
         string digits;
         int base;
@@ -364,10 +456,12 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         const size_t fill_count = options.width - number_str.size();
 
         switch (options.alignment) {
-            case FORMAT_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT: {
                 return number_str + string(fill_count, options.fill);
-            case FORMAT_ALIGN::RIGHT:
+            }
+            case FORMAT_ALIGN::RIGHT: {
                 return string(fill_count, options.fill) + number_str;
+            }
             case FORMAT_ALIGN::INTERNAL: {
                 if (!base_prefix.empty()) {
                     return base_prefix + string(fill_count, options.fill) + digits;
@@ -379,14 +473,24 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + number_str + string(right_fill, options.fill);
             }
-            default:
+            default: {
                 return string(fill_count, options.fill) + number_str;
+            }
         }
     }
 };
 
+/**
+ * @brief 字符串类型的格式化器特化
+ */
 template <>
 struct formatter<string> {
+    /**
+     * @brief 格式化字符串
+     * @param value 要格式化的字符串
+     * @param options 格式化选项
+     * @return 格式化后的字符串
+     */
     MSTL_CONSTEXPR20 string operator ()(const string& value, const format_options& options) const {
         if (options.width <= 0 || value.size() >= static_cast<size_t>(options.width)) {
             return value;
@@ -396,22 +500,27 @@ struct formatter<string> {
         const string fill_str(fill_count, options.fill);
 
         switch (options.alignment) {
-            case FORMAT_ALIGN::LEFT:
+            case FORMAT_ALIGN::LEFT: {
                 return value + fill_str;
-            case FORMAT_ALIGN::RIGHT:
+            }
+            case FORMAT_ALIGN::RIGHT: {
                 return fill_str + value;
+            }
             case FORMAT_ALIGN::CENTER: {
                 const size_t left_fill = fill_count / 2;
                 const size_t right_fill = fill_count - left_fill;
                 return string(left_fill, options.fill) + value + string(right_fill, options.fill);
             }
-            case FORMAT_ALIGN::INTERNAL:
-                default:
-                    return fill_str + value;
+            case FORMAT_ALIGN::INTERNAL: default: {
+                return fill_str + value;
+            }
         }
     }
 };
 
+/**
+ * @brief C风格字符串的格式化器特化
+ */
 template <>
 struct formatter<const char*> {
     MSTL_CONSTEXPR20 string operator ()(const char* value, const format_options& options) const {
@@ -419,6 +528,9 @@ struct formatter<const char*> {
     }
 };
 
+/**
+ * @brief 字符串视图的格式化器特化
+ */
 template <>
 struct formatter<string_view> {
     MSTL_CONSTEXPR20 string operator ()(const string_view value, const format_options& options) const {
@@ -426,6 +538,9 @@ struct formatter<string_view> {
     }
 };
 
+/**
+ * @brief 非const C风格字符串的格式化器特化
+ */
 template <>
 struct formatter<char*> {
     MSTL_CONSTEXPR20 string operator ()(char* value, const format_options& options) const {
@@ -433,6 +548,9 @@ struct formatter<char*> {
     }
 };
 
+/**
+ * @brief 单个字符的格式化器特化
+ */
 template <>
 struct formatter<char> {
     MSTL_CONSTEXPR20 string operator ()(const char value, const format_options& options) const {
@@ -440,8 +558,16 @@ struct formatter<char> {
     }
 };
 
-
+/// @cond
 MSTL_BEGIN_INNER__
+
+/**
+ * @brief 格式化实现（无参数版本）
+ * @param fmt 格式字符串
+ * @param pos 当前解析位置
+ * @return 格式化后的字符串
+ * @throws value_exception 如果格式错误
+ */
 MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos) {
     string result;
     while (pos < fmt.size()) {
@@ -467,6 +593,17 @@ MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos) {
     return result;
 }
 
+/**
+ * @brief 格式化实现（带参数版本）
+ * @tparam First 第一个参数类型
+ * @tparam Rest 剩余参数类型
+ * @param fmt 格式字符串
+ * @param pos 当前解析位置
+ * @param first 第一个参数
+ * @param rest 剩余参数
+ * @return 格式化后的字符串
+ * @throws value_exception 如果格式错误
+ */
 template <typename First, typename... Rest>
 MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First&& first, Rest&&... rest) {
     string result;
@@ -519,14 +656,25 @@ MSTL_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First&& 
     }
     return result;
 }
+
 MSTL_END_INNER__
+/// @endcond
 
-
+/**
+ * @brief 格式化字符串
+ * @tparam Args 参数类型
+ * @param fmt 格式字符串
+ * @param args 要格式化的参数
+ * @return 格式化后的字符串
+ * @throws value_exception 如果格式错误
+ */
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 MSTL_NODISCARD MSTL_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     size_t pos = 0;
     return _INNER format_impl(fmt, pos, _MSTL forward<Args>(args)...);
 }
+
+/** @} */ // StringFormat
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_STRING_FORMAT_HPP__
