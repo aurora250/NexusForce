@@ -53,7 +53,7 @@ public:
     }
 
     MSTL_NODISCARD bool update(const _MSTL string& sql) const noexcept override {
-        return !::mysql_query(mysql_, sql.c_str());
+        return !::mysql_query(mysql_, sql.data());
     }
     MSTL_NODISCARD unique_ptr<idb_tb_result> query(const string& sql) const noexcept override;
     MSTL_NODISCARD unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const override;

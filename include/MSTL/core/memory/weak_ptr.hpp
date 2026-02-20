@@ -9,7 +9,7 @@
  * 但不增加引用计数，避免循环引用问题。
  */
 
-#include "shared_ptr.hpp"
+#include "MSTL/core/memory/shared_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

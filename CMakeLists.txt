@@ -53,6 +53,8 @@ option(MSTL_ENABLE_REDIS      "Enable Redis database support"      ON)
 option(MSTL_ENABLE_ZLIB       "Enable zlib compression support"    ON)
 option(MSTL_ENABLE_OPENSSL    "Enable OpenSSL support"             ON)
 
+option(MSTL_USING_SSO         "Using SSO string"                   ON)
+
 option(MSTL_BUILD_TESTS       "Build unit tests"                   ON)
 option(MSTL_BUILD_EXAMPLES    "Build example programs"             OFF)
 option(MSTL_BUILD_DOCS        "Build documentation with Doxygen"   ON)
@@ -66,12 +68,15 @@ message(STATUS "  MSTL_ENABLE_REDIS:        ${MSTL_ENABLE_REDIS}")
 message(STATUS "  MSTL_ENABLE_ZLIB:         ${MSTL_ENABLE_ZLIB}")
 message(STATUS "  MSTL_ENABLE_OPENSSL:      ${MSTL_ENABLE_OPENSSL}")
 
+message(STATUS "  MSTL_USING_SSO:           ${MSTL_USING_SSO}")
+
 message(STATUS "  MSTL_BUILD_TESTS:         ${MSTL_BUILD_TESTS}")
 message(STATUS "  MSTL_BUILD_EXAMPLES:      ${MSTL_BUILD_EXAMPLES}")
 message(STATUS "  MSTL_BUILD_DOCS:          ${MSTL_BUILD_DOCS}")
 
 
 add_subdirectory(src)
+
 
 if(MSTL_BUILD_TESTS)
     add_subdirectory(tests)

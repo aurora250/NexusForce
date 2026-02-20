@@ -155,14 +155,14 @@ path path::absolute(const path& base) const {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     char buffer[MAX_PATH];
-    if (::GetFullPathNameA(path_.c_str(), MAX_PATH, buffer, nullptr) == 0) {
+    if (::GetFullPathNameA(path_.data(), MAX_PATH, buffer, nullptr) == 0) {
         return *this;
     }
     return path(string(buffer));
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     char buf[PATH_MAX];
-    if (::realpath(path_.c_str(), buf) != nullptr) {
+    if (::realpath(path_.data(), buf) != nullptr) {
         return path(string(buf));
     } else {
         if (path_.empty()) {
@@ -389,7 +389,7 @@ bool path::remove_all_in_directory(const string& directory_path, const bool recu
 #ifdef MSTL_PLATFORM_WINDOWS__
     const string search_pattern = directory_path + "\\*";
     ::WIN32_FIND_DATAA find_data;
-    const ::HANDLE find_handle = ::FindFirstFileA(search_pattern.c_str(), &find_data);
+    const ::HANDLE find_handle = ::FindFirstFileA(search_pattern.data(), &find_data);
     if (find_handle == INVALID_HANDLE_VALUE) return false;
 
     do {
@@ -402,7 +402,7 @@ bool path::remove_all_in_directory(const string& directory_path, const bool recu
                 if (!remove_all_in_directory(full_path, true)) {
                     success = false;
                 }
-                if (!::RemoveDirectoryA(full_path.c_str())) {
+                if (!::RemoveDirectoryA(full_path.data())) {
                     if (::GetLastError() != ERROR_DIR_NOT_EMPTY) {
                         success = false;
                     }
@@ -410,14 +410,14 @@ bool path::remove_all_in_directory(const string& directory_path, const bool recu
             }
         } else {
             if (find_data.dwFileAttributes & FILE_ATTRIBUTE_READONLY) {
-                ::SetFileAttributesA(full_path.c_str(),
+                ::SetFileAttributesA(full_path.data(),
                     find_data.dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
             }
-            if (!::DeleteFileA(full_path.c_str())) {
+            if (!::DeleteFileA(full_path.data())) {
                 const ::DWORD error = ::GetLastError();
                 if (error == ERROR_ACCESS_DENIED) {
-                    ::SetFileAttributesA(full_path.c_str(), FILE_ATTRIBUTE_NORMAL);
-                    if (!::DeleteFileA(full_path.c_str())) {
+                    ::SetFileAttributesA(full_path.data(), FILE_ATTRIBUTE_NORMAL);
+                    if (!::DeleteFileA(full_path.data())) {
                         success = false;
                     }
                 } else {
@@ -429,7 +429,7 @@ bool path::remove_all_in_directory(const string& directory_path, const bool recu
     ::FindClose(find_handle);
 
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::DIR* dir = ::opendir(directory_path.c_str());
+    ::DIR* dir = ::opendir(directory_path.data());
     if (dir == nullptr) return false;
 
     ::dirent* entry;
@@ -444,15 +444,15 @@ bool path::remove_all_in_directory(const string& directory_path, const bool recu
                 if (!remove_all_in_directory(full_path, true)) {
                     success = false;
                 }
-                if (::rmdir(full_path.c_str()) != 0 && errno != ENOTEMPTY) {
+                if (::rmdir(full_path.data()) != 0 && errno != ENOTEMPTY) {
                     success = false;
                 }
             }
         } else {
-            if (::unlink(full_path.c_str()) != 0) {
+            if (::unlink(full_path.data()) != 0) {
                 if (errno == EACCES) {
-                    ::chmod(full_path.c_str(), 0644);
-                    if (::unlink(full_path.c_str()) != 0) {
+                    ::chmod(full_path.data(), 0644);
+                    if (::unlink(full_path.data()) != 0) {
                         success = false;
                     }
                 } else {
@@ -481,11 +481,11 @@ bool path::remove_all(const string& path) noexcept {
 
     bool success = remove_all_in_directory(path, true);
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (!::RemoveDirectoryA(path.c_str())) {
+    if (!::RemoveDirectoryA(path.data())) {
         success = false;
     }
 #elif defined(MSTL_PLATFORM_LINUX__)
-    if (::rmdir(path.c_str()) != 0) {
+    if (::rmdir(path.data()) != 0) {
         success = false;
     }
 #endif
@@ -515,20 +515,20 @@ bool path::copy(const path& from, const path& to, const bool overwrite) {
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (overwrite && actual_to.exists()) {
-        const ::DWORD attrs = ::GetFileAttributesA(actual_to.c_str());
+        const ::DWORD attrs = ::GetFileAttributesA(actual_to.data());
         if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_READONLY)) {
-            ::SetFileAttributesA(actual_to.c_str(), attrs & ~FILE_ATTRIBUTE_READONLY);
+            ::SetFileAttributesA(actual_to.data(), attrs & ~FILE_ATTRIBUTE_READONLY);
         }
     }
 
-    if (::CopyFileA(from.c_str(), actual_to.c_str(), !overwrite)) {
+    if (::CopyFileA(from.data(), actual_to.data(), !overwrite)) {
         return true;
     }
 
     return false;
 
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const int source_fd = ::open(from.c_str(), O_RDONLY);
+    const int source_fd = ::open(from.data(), O_RDONLY);
     if (source_fd == -1) return false;
 
     struct ::stat64 st{};
@@ -544,7 +544,7 @@ bool path::copy(const path& from, const path& to, const bool overwrite) {
         flags |= O_EXCL;
     }
 
-    const int dest_fd = ::open(actual_to.c_str(), flags, 0644);
+    const int dest_fd = ::open(actual_to.data(), flags, 0644);
     if (dest_fd == -1) {
         ::close(source_fd);
         return false;
@@ -579,7 +579,7 @@ bool path::copy(const path& from, const path& to, const bool overwrite) {
     ::close(dest_fd);
 
     if (!success) {
-        ::unlink(actual_to.c_str());
+        ::unlink(actual_to.data());
     }
 
     return success;
@@ -600,7 +600,7 @@ bool path::copy_directory(const path& source, const path& destination, const boo
 #ifdef MSTL_PLATFORM_WINDOWS__
     const string search_pattern = source.str() + "\\*";
     ::WIN32_FIND_DATAA find_data;
-    const ::HANDLE hFind = ::FindFirstFileA(search_pattern.c_str(), &find_data);
+    const ::HANDLE hFind = ::FindFirstFileA(search_pattern.data(), &find_data);
 
     if (hFind == INVALID_HANDLE_VALUE) {
         if (::GetLastError() == ERROR_FILE_NOT_FOUND) return true;
@@ -631,7 +631,7 @@ bool path::copy_directory(const path& source, const path& destination, const boo
     return success;
 
 #elif defined(MSTL_PLATFORM_LINUX__)
-    ::DIR* dir = ::opendir(source.c_str());
+    ::DIR* dir = ::opendir(source.data());
     if (dir == nullptr) return false;
 
     bool success = true;
@@ -673,7 +673,7 @@ bool path::move(const path& from, const path& to, const bool overwrite) noexcept
         flags |= MOVEFILE_REPLACE_EXISTING;
     }
 
-    if (::MoveFileExA(from.c_str(), to.c_str(), flags)) {
+    if (::MoveFileExA(from.data(), to.data(), flags)) {
         return true;
     }
 
@@ -708,7 +708,7 @@ bool path::move(const path& from, const path& to, const bool overwrite) noexcept
         }
     }
 
-    if (::rename(from.c_str(), to.c_str()) == 0) {
+    if (::rename(from.data(), to.data()) == 0) {
         return true;
     }
 
@@ -741,7 +741,7 @@ bool path::operator ==(const path& rhs) const noexcept {
     const path rhs_norm = rhs.lexically_normal();
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) == 0;
+    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) == 0;
 #else
     return lhs_norm.str() == rhs_norm.str();
 #endif
@@ -752,7 +752,7 @@ bool path::operator <(const path& rhs) const noexcept {
     const path rhs_norm = rhs.lexically_normal();
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return string_compare_ignore_case(lhs_norm.c_str(), rhs_norm.c_str()) < 0;
+    return string_compare_ignore_case(lhs_norm.data(), rhs_norm.data()) < 0;
 #else
     return lhs_norm.str() < rhs_norm.str();
 #endif

@@ -59,7 +59,7 @@ bool redis_connect::select_database(const string& db_index) const {
 bool redis_connect::connect_to_host(
     const string& host, const uint16_t port,
     const string& password, const string& dbname) {
-    context_ = ::redisConnect(host.c_str(), port);
+    context_ = ::redisConnect(host.data(), port);
     if (!context_ || context_->err) {
         if (context_) {
             last_error_ = context_->errstr;
@@ -95,7 +95,7 @@ string_view redis_connect::get_error() const noexcept {
 
 bool redis_connect::update(const string& sql) const noexcept {
     const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(context_, sql.c_str())
+        ::redisCommand(context_, sql.data())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
@@ -110,7 +110,7 @@ bool redis_connect::update(const string& sql) const noexcept {
 
 unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
     const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(context_, sql.c_str())
+        ::redisCommand(context_, sql.data())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {

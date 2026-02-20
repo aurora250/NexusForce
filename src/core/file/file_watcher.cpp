@@ -58,7 +58,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 #ifdef MSTL_PLATFORM_WINDOWS__
 
     dir_handle_ = ::CreateFile(
-        watch_path_.c_str(),
+        watch_path_.data(),
         FILE_LIST_DIRECTORY,
         FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
         nullptr,
@@ -113,7 +113,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 
     watch_descriptor_ = ::inotify_add_watch(
         inotify_fd_,
-        watch_path_.c_str(),
+        watch_path_.data(),
         mask
     );
     if (watch_descriptor_ == -1) {

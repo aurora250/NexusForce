@@ -438,7 +438,7 @@ bool file::open(_MSTL path p, const bool append,
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     handle_ = ::CreateFileA(
-        p.c_str(),
+        p.data(),
         static_cast<fud_t>(access),
         static_cast<fud_t>(share_mode),
         nullptr,
@@ -475,9 +475,9 @@ bool file::open(_MSTL path p, const bool append,
     }
 
     if (creation_flags & O_CREAT) {
-        handle_ = ::open(p.c_str(), flags, mode);
+        handle_ = ::open(p.data(), flags, mode);
     } else {
-        handle_ = ::open(p.c_str(), flags);
+        handle_ = ::open(p.data(), flags);
     }
 #endif
 
@@ -1526,10 +1526,10 @@ bool file::create_and_write(const _MSTL path& p, const string& content, const bo
         flags |= O_TRUNC;
     }
 
-    const int fd = ::open(p.c_str(), flags, 0644);
+    const int fd = ::open(p.data(), flags, 0644);
     if (fd == -1) return false;
 
-    const ssize_t written = ::write(fd, content.c_str(), content.size());
+    const ssize_t written = ::write(fd, content.data(), content.size());
     ::close(fd);
     return written == static_cast<ssize_t>(content.size());
 #endif
@@ -2664,7 +2664,7 @@ bool file::set_attributes(FILE_ATTRI attr) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetFileAttributesA(path_.c_str(), static_cast<fud_t>(attr)) != 0;
+    return ::SetFileAttributesA(path_.data(), static_cast<fud_t>(attr)) != 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st_old{};
     if (::fstat64(handle_, &st_old) == -1) return false;
@@ -2801,7 +2801,7 @@ bool file::read(const _MSTL path& p, string& content,
     const size_type bytes_read = f.read(content, sz);
     return bytes_read == sz;
 #elif defined(MSTL_PLATFORM_LINUX__)
-    const int fd = ::open(p.c_str(), O_RDONLY);
+    const int fd = ::open(p.data(), O_RDONLY);
     if (fd == -1) return false;
 
     struct ::stat64 st{};

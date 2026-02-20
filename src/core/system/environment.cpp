@@ -19,23 +19,23 @@ string environment::get_unsafe(const string& name) {
     char* value = nullptr;
     size_t size = 0;
 
-    if (::_dupenv_s(&value, &size, name.c_str()) == 0 && value != nullptr) {
+    if (::_dupenv_s(&value, &size, name.data()) == 0 && value != nullptr) {
         string result(value);
         ::free(value);
         return result;
     }
     return "";
 #else
-    const char* value = ::getenv(name.c_str());
+    const char* value = ::getenv(name.data());
     return value ? string(value) : "";
 #endif
 }
 
 bool environment::set_unsafe(const string& name, const string& value, const bool overwrite) {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::_putenv_s(name.c_str(), value.c_str()) == 0;
+    return ::_putenv_s(name.data(), value.data()) == 0;
 #else
-    return ::setenv(name.c_str(), value.c_str(), overwrite ? 1 : 0) == 0;
+    return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
 #endif
 }
 
@@ -52,9 +52,9 @@ bool environment::set(const string& name, const string& value, const bool overwr
 bool environment::unset(const string& name) {
     lock<shared_mutex> lock(get_mutex());
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::SetEnvironmentVariable(name.c_str(), nullptr) != 0;
+    return ::SetEnvironmentVariable(name.data(), nullptr) != 0;
 #else
-    return ::unsetenv(name.c_str()) == 0;
+    return ::unsetenv(name.data()) == 0;
 #endif
 }
 

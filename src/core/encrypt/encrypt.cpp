@@ -542,7 +542,7 @@ string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
         }
     }
 
-    const bstring data_bytes(data.begin(), data.end());
+    const bstring data_bytes(reinterpret_cast<const byte_t*>(data.data()), data.size());
     bstring encrypted = encrypt_pkcs7(data_bytes.view(), key_bytes.view());
 
     string result;
@@ -570,7 +570,7 @@ string AES256::decrypt_hex(const string_view encrypted_hex, const string_view ke
         }
     }
     bstring decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());
-    return string(decrypted.begin(), decrypted.end());
+    return string(reinterpret_cast<const char*>(decrypted.data()), decrypted.size());
 }
 
 constexpr byte_t AES256::sbox[256];

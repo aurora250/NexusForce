@@ -47,7 +47,7 @@ struct base_char_traits {
      * @return dest指针
      */
     static constexpr char_type* copy(
-        char_type* const dest, const char_type* const srcs, const size_t count) noexcept {
+        char_type* dest, const char_type* srcs, const size_t count) noexcept {
         _MSTL memory_copy(dest, srcs, count * sizeof(char_type));
         return dest;
     }
@@ -60,7 +60,7 @@ struct base_char_traits {
      * @return dest指针
      */
     static constexpr char_type* move(
-        char_type* const dest, const char_type* const srcs, const size_t count) noexcept {
+        char_type* dest, const char_type* srcs, const size_t count) noexcept {
         _MSTL memory_move(dest, srcs, count * sizeof(char_type));
         return dest;
     }
@@ -193,7 +193,7 @@ public:
      * @return 比较结果
      */
     MSTL_NODISCARD static constexpr int compare(
-        const char_type* const lhs, const char_type* const rhs, const size_t n) noexcept {
+        const char_type* lhs, const char_type* rhs, const size_t n) noexcept {
         return _MSTL memory_compare(lhs, rhs, n);
     }
 
@@ -205,7 +205,7 @@ public:
      * @return 指向第一个匹配字符的指针
      */
     MSTL_NODISCARD static constexpr const char_type* find(
-        const char_type* const str, const size_t n, const char_type chr) noexcept {
+        const char_type* str, const size_t n, const char_type chr) noexcept {
         return static_cast<const char_type*>(_MSTL memory_find(str, chr, n));
     }
 
@@ -217,7 +217,7 @@ public:
      * @return str指针
      */
     static constexpr char_type* assign(
-        char_type* const str, size_t n, const char_type chr) noexcept {
+        char_type* str, size_t n, const char_type chr) noexcept {
         return static_cast<char_type*>(_MSTL memory_set(str, chr, n));
     }
 

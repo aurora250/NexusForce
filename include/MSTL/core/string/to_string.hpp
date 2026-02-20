@@ -185,16 +185,16 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const tuple<Args...>& t) {
     return _INNER __to_string_tuple_dispatch(t);
 }
 
-MSTL_NODISCARD MSTL_CONSTEXPR20 string to_string(const bstring& x) {
-    return string(x.begin(), x.end());
+MSTL_NODISCARD inline string to_string(const bstring& x) {
+    return string(reinterpret_cast<const char*>(x.data()), x.size());
 }
 
-MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string& x) {
-    return bstring(x.begin(), x.end());
+MSTL_NODISCARD inline bstring to_bstring(const string& x) {
+    return bstring(reinterpret_cast<const byte_t*>(x.data()), x.size());
 }
 
-MSTL_NODISCARD MSTL_CONSTEXPR20 bstring to_bstring(const string_view x) {
-    return bstring(x.begin(), x.end());
+MSTL_NODISCARD inline bstring to_bstring(const string_view x) {
+    return bstring(reinterpret_cast<const byte_t*>(x.data()), x.size());
 }
 
 

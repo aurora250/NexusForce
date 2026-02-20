@@ -34,7 +34,7 @@ postgresql_prepared_statement::postgresql_prepared_statement(::PGconn* conn, con
 postgresql_prepared_statement::~postgresql_prepared_statement() {
     if (conn_) {
         const string deallocate_sql = "DEALLOCATE " + _MSTL move(stmt_name_);
-        ::PGresult* result = ::PQexec(conn_, deallocate_sql.c_str());
+        ::PGresult* result = ::PQexec(conn_, deallocate_sql.data());
         if (result) {
             ::PQclear(result);
         }
@@ -53,7 +53,7 @@ bool postgresql_prepared_statement::prepare() {
     clear_error();
 
     ::PGresult* result = ::PQprepare(
-        conn_, stmt_name_.c_str(), sql_.c_str(), param_count_, nullptr);
+        conn_, stmt_name_.data(), sql_.data(), param_count_, nullptr);
 
     if (!result) {
         set_error("Failed to prepare statement", 1);
@@ -89,7 +89,7 @@ bool postgresql_prepared_statement::bind_param(const uint32_t index, const strin
 
     const size_t idx = index - 1;
     data_->param_values[idx] = value;
-    data_->param_ptrs[idx] = data_->param_values[idx].c_str();
+    data_->param_ptrs[idx] = data_->param_values[idx].data();
     data_->param_lengths[idx] = static_cast<int>(data_->param_values[idx].length());
     data_->param_formats[idx] = 0;
 
@@ -139,7 +139,7 @@ bool postgresql_prepared_statement::execute() {
     clear_error();
 
     ::PGresult* result = ::PQexecPrepared(
-        conn_, stmt_name_.c_str(), param_count_,
+        conn_, stmt_name_.data(), param_count_,
         data_->param_ptrs.data(), data_->param_lengths.data(),
         data_->param_formats.data(), 0);
 
@@ -163,7 +163,7 @@ unique_ptr<idb_prepared_result> postgresql_prepared_statement::execute_query() {
     clear_error();
 
     ::PGresult* result = ::PQexecPrepared(
-        conn_, stmt_name_.c_str(), param_count_,
+        conn_, stmt_name_.data(), param_count_,
         data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
         data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
         data_->param_formats.empty() ? nullptr : data_->param_formats.data(),

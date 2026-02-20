@@ -234,7 +234,7 @@ DEVICE_TYPE device::guess_device_type_from_path(const path& pth) {
     }
 
     struct ::stat64 st;
-    if (::stat64(pth.c_str(), &st) == 0) {
+    if (::stat64(pth.data(), &st) == 0) {
         if (S_ISBLK(st.st_mode)) {
             return DEVICE_TYPE::STORAGE;
         } else if (S_ISCHR(st.st_mode)) {
@@ -407,7 +407,7 @@ void device::ioctl(const ioctl_command& cmd) {
 
     if (ret == -1) {
         throw_exception(device_exception(
-            ("ioctl failed with error code: " + string(::strerror(errno))).c_str()));
+            ("ioctl failed with error code: " + string(::strerror(errno))).data()));
     }
 #endif
 }
@@ -580,7 +580,7 @@ _MSTL device_info device::device_info() const {
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st;
-    if (::stat64(file_.path().c_str(), &st) == 0) {
+    if (::stat64(file_.path().data(), &st) == 0) {
         info.device_id = static_cast<uint32_t>(st.st_rdev);
         info.present = true;
 
@@ -674,7 +674,7 @@ _MSTL device_info device::device_info() const {
                 path usb_device_path("/sys/bus/usb/devices/"_s + entry->d_name);
                 path check_path = usb_device_path / "tty" / device_name;
                 struct ::stat64 check_st;
-                if (::stat64(check_path.c_str(), &check_st) == 0) {
+                if (::stat64(check_path.data(), &check_st) == 0) {
                     string vid_str = read_sysfs(usb_device_path / "idVendor");
                     string pid_str = read_sysfs(usb_device_path / "idProduct");
                     if (!vid_str.empty() && !pid_str.empty()) {
@@ -786,7 +786,7 @@ vector<_MSTL device_info> device::enumerate(const string& filter) {
         path dev_path("/dev/"_s + entry->d_name);
 
         struct ::stat64 st;
-        if (::stat64(dev_path.c_str(), &st) != 0) {
+        if (::stat64(dev_path.data(), &st) != 0) {
             continue;
         }
 
@@ -929,7 +929,7 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
             info.description = read_sysfs_file(usb_dev_path / "product");
             info.manufacturer = read_sysfs_file(usb_dev_path / "manufacturer");
             info.hardware_id = read_sysfs_file(usb_dev_path / "serial");
-            ::DIR* dev_dir = ::opendir(usb_dev_path.c_str());
+            ::DIR* dev_dir = ::opendir(usb_dev_path.data());
             if (dev_dir) {
                 ::dirent* dev_entry;
                 while ((dev_entry = ::readdir(dev_dir)) != nullptr) {
@@ -969,7 +969,7 @@ optional<_MSTL device_info> device::find_by_path(path pth) {
     }
 
     const ::HANDLE handle = ::CreateFileA(
-        info.path.c_str(),
+        info.path.data(),
         0,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
         nullptr,
@@ -992,7 +992,7 @@ optional<_MSTL device_info> device::find_by_path(path pth) {
 
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st;
-    if (::stat64(pth.c_str(), &st) < 0) {
+    if (::stat64(pth.data(), &st) < 0) {
         return {};
     }
 
@@ -1031,7 +1031,7 @@ bool device::is_device(const string& path) {
     return path.find("\\\\.\\") == 0 || path.find("\\\\\\\\.\\") == 0;
 #elif defined(MSTL_PLATFORM_LINUX__)
     struct ::stat64 st;
-    if (::stat64(path.c_str(), &st) == 0) {
+    if (::stat64(path.data(), &st) == 0) {
         return S_ISCHR(st.st_mode) || S_ISBLK(st.st_mode);
     }
     return false;

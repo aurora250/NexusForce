@@ -44,7 +44,7 @@ void abort() {
     constexpr ::ULONG_PTR args[1] = { 0xC0000409 }; // STATUS_STACK_BUFFER_OVERRUN
 
     ::RaiseException(0xC0000409, EXCEPTION_NONCONTINUABLE, 1, args);
-    ::TerminateProcess(GetCurrentProcess(), 3);
+    ::TerminateProcess(::GetCurrentProcess(), 3);
     if (handlers[0]) ::RemoveVectoredExceptionHandler(handlers[0]);
 #else
     ::sigset_t mask;

@@ -15,14 +15,14 @@ bool ssl_context::load_certificate(const string& cert_file, const string& key_fi
         return false;
     }
 
-    if (::SSL_CTX_use_certificate_file(ctx_, cert_file.c_str(), SSL_FILETYPE_PEM) <= 0) {
+    if (::SSL_CTX_use_certificate_file(ctx_, cert_file.data(), SSL_FILETYPE_PEM) <= 0) {
         printcln(color::red(), "Certificate load failed: ", ::ERR_error_string(::ERR_get_error(), nullptr));
         ::SSL_CTX_free(ctx_);
         ctx_ = nullptr;
         return false;
     }
 
-    if (::SSL_CTX_use_PrivateKey_file(ctx_, key_file.c_str(), SSL_FILETYPE_PEM) <= 0) {
+    if (::SSL_CTX_use_PrivateKey_file(ctx_, key_file.data(), SSL_FILETYPE_PEM) <= 0) {
         printcln(color::red(), "Private key load failed: ", ::ERR_error_string(::ERR_get_error(), nullptr));
         ::SSL_CTX_free(ctx_);
         ctx_ = nullptr;

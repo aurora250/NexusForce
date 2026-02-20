@@ -339,16 +339,23 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
+        ../include/MSTL/core/string/basic_string.hpp
 )
 
 # 编译为动态库
 add_library(MSTL SHARED ${CPP_SOURCES})
 add_library(MSTL::MSTL ALIAS MSTL)
 
+
 target_compile_definitions(MSTL
-        PRIVATE
+        PUBLIC
         $<$<CONFIG:Debug>:MSTL_STATE_DEBUG__>
 )
+
+if(MSTL_USING_SSO)
+    target_compile_definitions(MSTL PUBLIC MSTL_USING_SSO__)
+endif()
+
 
 # 编译设置
 if (WIN32)
@@ -410,11 +417,6 @@ target_include_directories(MSTL
 if(MSVC)
     target_compile_definitions(MSTL PRIVATE MSTL_DLLEXPORTS)
 endif()
-
-target_compile_definitions(MSTL
-        PUBLIC
-        $<$<CONFIG:Debug>:MSTL_STATE_DEBUG__>
-)
 
 # 编译选项
 configure_compiler_options(MSTL)

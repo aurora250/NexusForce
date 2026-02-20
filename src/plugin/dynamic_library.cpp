@@ -10,12 +10,12 @@ void dynamic_library::open() {
     if (handle_) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    handle_ = ::LoadLibraryA(path_.c_str());
+    handle_ = ::LoadLibraryA(path_.data());
     if (!handle_) {
         throw_exception(dl_exception());
     }
 #else
-    handle_ = ::dlopen(path_.c_str(), RTLD_LAZY | RTLD_LOCAL);
+    handle_ = ::dlopen(path_.data(), RTLD_LAZY | RTLD_LOCAL);
     if (!handle_) {
         throw_exception(dl_exception(::dlerror()));
     }
@@ -63,14 +63,14 @@ void* dynamic_library::symbol_row(const string& name) const {
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.c_str());
+    const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data());
     if (!proc) {
         throw_exception(dl_exception("GetProcAddress failed"));
     }
     return reinterpret_cast<void*>(proc);
 #else
     ::dlerror();
-    void* sym = ::dlsym(handle_, name.c_str());
+    void* sym = ::dlsym(handle_, name.data());
     const char* error = ::dlerror();
     if (error) {
         throw_exception(dl_exception(error));
@@ -83,10 +83,10 @@ bool dynamic_library::has_symbol(const string& name) const noexcept {
     if (!is_open()) return false;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    return ::GetProcAddress(static_cast<::HMODULE>(handle_), name.c_str()) != nullptr;
+    return ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data()) != nullptr;
 #else
     ::dlerror();
-    ::dlsym(handle_, name.c_str());
+    ::dlsym(handle_, name.data());
     return ::dlerror() == nullptr;
 #endif
 }

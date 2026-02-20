@@ -59,7 +59,7 @@ bool postgresql_connect::connect_to(
         conn_str += "client_encoding=" + character_set;
     }
 
-    conn_ = ::PQconnectdb(conn_str.c_str());
+    conn_ = ::PQconnectdb(conn_str.data());
 
     if (!conn_ || ::PQstatus(conn_) != ::CONNECTION_OK) {
         update_error();
@@ -93,7 +93,7 @@ bool postgresql_connect::connect_to(const db_config& config) {
 bool postgresql_connect::set_character_set(const string& encoding) const {
     if (!conn_) return false;
     ::PGresult* res = ::PQexec(
-        conn_, ("SET client_encoding TO " + encoding).c_str());
+        conn_, ("SET client_encoding TO " + encoding).data());
     if (!res) return false;
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
@@ -116,7 +116,7 @@ string_view postgresql_connect::get_character_set() const {
 
 bool postgresql_connect::update(const string& sql) const {
     if (!conn_) return false;
-    ::PGresult* res = ::PQexec(conn_, sql.c_str());
+    ::PGresult* res = ::PQexec(conn_, sql.data());
     if (!res) return false;
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
@@ -143,7 +143,7 @@ bool postgresql_connect::reset_connect(const db_config& config) {
 
 unique_ptr<idb_tb_result> postgresql_connect::query(const string& sql) const {
     if (!conn_) return nullptr;
-    ::PGresult* res = ::PQexec(conn_, sql.c_str());
+    ::PGresult* res = ::PQexec(conn_, sql.data());
     if (!res) return nullptr;
     if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
         ::PQclear(res);

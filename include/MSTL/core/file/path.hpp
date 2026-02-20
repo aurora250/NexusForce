@@ -21,7 +21,7 @@ public:
 
     MSTL_NODISCARD const string& str() const noexcept { return path_; }
     MSTL_NODISCARD string_view view() const noexcept { return path_.view(); }
-    MSTL_NODISCARD const char* c_str() const noexcept { return path_.c_str(); }
+    MSTL_NODISCARD const char* data() const noexcept { return path_.data(); }
     MSTL_NODISCARD bool empty() const noexcept { return path_.empty(); }
 
     MSTL_NODISCARD path_iterator begin() const noexcept { return path_iterator(&path_, 0); }

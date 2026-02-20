@@ -1,6 +1,6 @@
 #ifndef MSTL_CORE_STRING_STRING_HPP__
 #define MSTL_CORE_STRING_STRING_HPP__
-#include "basic_string.hpp"
+#include "MSTL/core/string/basic_string.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 using string    = basic_string<char>;

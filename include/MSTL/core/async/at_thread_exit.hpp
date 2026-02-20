@@ -49,7 +49,7 @@ void MSTL_API at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(
  * 2. 线程局部存储的析构函数中
  * 按照注册的逆序执行回调。
  */
-void MSTL_API execute_thread_exit_callbacks();
+void MSTL_API at_thread_exit_callbacks();
 
 /** @} */ // ThreadExit
 

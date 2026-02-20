@@ -5,7 +5,7 @@ struct thread_exit_registry {
     at_thread_exit_elt* thread_exit_list = nullptr;
 
     ~thread_exit_registry() {
-        execute_thread_exit_callbacks();
+        at_thread_exit_callbacks();
     }
 };
 
@@ -17,7 +17,7 @@ void at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) n
     thread_registry.thread_exit_list = elt;
 }
 
-void execute_thread_exit_callbacks() {
+void at_thread_exit_callbacks() {
     at_thread_exit_elt* current = thread_registry.thread_exit_list;
     while (current != nullptr) {
         at_thread_exit_elt* next = current->next;

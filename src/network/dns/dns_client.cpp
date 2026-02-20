@@ -129,7 +129,7 @@ vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
         throw_exception(dns_exception("Failed to set socket timeout"));
     }
 
-    const ssize_t sent = udp_sock.sendto(query.data(), query.size(), dns_server_.c_str(), dns_port_);
+    const ssize_t sent = udp_sock.sendto(query.data(), query.size(), dns_server_.data(), dns_port_);
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
         throw_exception(dns_exception("Failed to send UDP query"));
     }
@@ -156,7 +156,7 @@ vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
     if (!tcp_sock.set_receive_timeout(timeout_) || !tcp_sock.set_send_timeout(timeout_)) {
         throw_exception(dns_exception("Failed to set socket timeout"));
     }
-    if (!tcp_sock.connect_ipv4(dns_server_.c_str(), dns_port_)) {
+    if (!tcp_sock.connect_ipv4(dns_server_.data(), dns_port_)) {
         throw_exception(dns_exception("Failed to connect to DNS server"));
     }
 

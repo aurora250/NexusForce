@@ -35,7 +35,7 @@ using terminate_handler = void(*)();
 void MSTL_API set_terminate(terminate_handler handler) noexcept;
 
 /**
- * @brief 调用当前终止处理函数
+ * @brief 终止处理
  *
  * 调用当前设置的终止处理函数。
  *
@@ -44,11 +44,11 @@ void MSTL_API set_terminate(terminate_handler handler) noexcept;
 MSTL_NORETURN void MSTL_API terminate();
 
 /**
- * @brief 强制终止进程
+ * @brief 终止进程
  *
  * 强制终止调用进程，不会进行任何析构行为
  *
- * @note 此函数不会返回，进程将在执行终止处理函数后终止。
+ * @note 此函数不会返回，进程将在执行函数后终止。
  */
 MSTL_NORETURN void MSTL_API abort();
 

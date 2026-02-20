@@ -22,11 +22,11 @@ bool tcp_client::try_connect(
     }
 
     if (ipv6) {
-        if (!s.connect_ipv6(ip.c_str(), port)) {
+        if (!s.connect_ipv6(ip.data(), port)) {
             return false;
         }
     } else {
-        if (!s.connect_ipv4(ip.c_str(), port)) {
+        if (!s.connect_ipv4(ip.data(), port)) {
             return false;
         }
     }

@@ -24,11 +24,11 @@ static char** build_argv(
     const auto argv = new char*[argc];
 
     argv[0] = new char[executable.length() + 1];
-    _MSTL string_copy(argv[0], executable.c_str());
+    _MSTL string_copy(argv[0], executable.data());
 
     for (size_t i = 0; i < args.size(); ++i) {
         argv[i + 1] = new char[args[i].length() + 1];
-        _MSTL string_copy(argv[i + 1], args[i].c_str());
+        _MSTL string_copy(argv[i + 1], args[i].data());
     }
 
     argv[argc - 1] = nullptr;
@@ -193,7 +193,7 @@ process::process_info process::create_process(const string& executable,
             ::close(info.stdout_fd[1]);
         }
         char** argv = build_argv(executable, args);
-        ::execvp(executable.c_str(), argv);
+        ::execvp(executable.data(), argv);
 
         printcln(color::red(), "execvp failed: ", ::strerror(errno));
         free_argv(argv);
@@ -431,7 +431,7 @@ bool process::check_process_permission(
         access_mode = F_OK;
     }
 
-    return ::access(proc_path.c_str(), access_mode) == 0;
+    return ::access(proc_path.data(), access_mode) == 0;
 #endif
 }
 

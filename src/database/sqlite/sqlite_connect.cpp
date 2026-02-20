@@ -7,12 +7,12 @@ MSTL_BEGIN_NAMESPACE__
 bool sqlite_connect::connect_to(const _MSTL string&, const _MSTL string&,
         const _MSTL string& dbname, const _MSTL string&,
         uint32_t, const _MSTL string&) {
-    ::sqlite3_open(dbname.c_str(), &db);
+    ::sqlite3_open(dbname.data(), &db);
     return connect_to_file(dbname);
 }
 
 bool sqlite_connect::connect_to(const db_config& config) {
-    ::sqlite3_open(config.database.c_str(), &db);
+    ::sqlite3_open(config.database.data(), &db);
     return connect_to_file(config.database);
 }
 
@@ -43,7 +43,7 @@ bool sqlite_connect::update(const string& sql) const {
     if (!connected()) return false;
 
     char* error_msg = nullptr;
-    if (::sqlite3_exec(db, sql.c_str(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
+    if (::sqlite3_exec(db, sql.data(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
         if (error_msg) {
             last_error_ = error_msg;
             ::sqlite3_free(error_msg);
@@ -57,7 +57,7 @@ unique_ptr<idb_tb_result> sqlite_connect::query(const string& sql) const {
     if (!connected()) return {};
 
     ::sqlite3_stmt* stmt = nullptr;
-    if (::sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+    if (::sqlite3_prepare_v2(db, sql.data(), -1, &stmt, nullptr) != SQLITE_OK) {
         return {};
     }
     return make_unique<sqlite_result>(stmt);
@@ -90,7 +90,7 @@ bool sqlite_connect::connect_to_file(const string& file_path) {
         close();
     }
 
-    if (::sqlite3_open(file_path.c_str(), &db) != SQLITE_OK) {
+    if (::sqlite3_open(file_path.data(), &db) != SQLITE_OK) {
         last_error_ = ::sqlite3_errmsg(db);
         close();
         return false;
