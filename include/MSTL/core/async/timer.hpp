@@ -1,31 +1,63 @@
 #ifndef MSTL_CORE_ASYNC_TIMER_HPP__
 #define MSTL_CORE_ASYNC_TIMER_HPP__
-#include "../container/map.hpp"
-#include "../container/set.hpp"
-#include "../functional/function.hpp"
-#include "thread.hpp"
-#include "condition_variable.hpp"
-#include "atomic.hpp"
+
+/**
+ * @file timer.hpp
+ * @brief 异步定时器
+ *
+ * 此文件提供了异步定时器功能，支持单次定时、重复定时和定时任务调度。
+ * 使用独立的调度线程管理所有定时任务，支持任务的取消和重新调度。
+ */
+
+#include "MSTL/core/async/atomic.hpp"
+#include "MSTL/core/async/condition_variable.hpp"
+#include "MSTL/core/async/thread.hpp"
+#include "MSTL/core/container/map.hpp"
+#include "MSTL/core/container/set.hpp"
+#include "MSTL/core/functional/function.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup AsyncTimer 定时调度器
+ * @brief 异步定时器工具
+ * @{
+ */
+
+/**
+ * @class timer_scheduler
+ * @brief 定时任务调度器
+ * @tparam Clock 时钟类型
+ *
+ * 管理所有定时任务的调度和执行。使用独立的线程运行调度循环，
+ * 基于时间点对任务进行排序，并在任务到期时执行回调函数。
+ */
 template <typename Clock>
 class timer_scheduler {
 public:
-    using clock_type = Clock;
-    using time_point = typename clock_type::time_point;
-    using duration = typename clock_type::duration;
-    using token = size_t;
-    using handler_type = _MSTL function<void()>;
+    using clock_type = Clock;                    ///< 时钟类型
+    using time_point = typename clock_type::time_point;   ///< 时间点类型
+    using duration = typename clock_type::duration;       ///< 时长类型
+    using token = size_t;                         ///< 任务标识符类型
+    using handler_type = _MSTL function<void()>;  ///< 回调函数类型
 
 private:
+    /**
+     * @struct node
+     * @brief 定时任务节点
+     *
+     * 包含任务的到期时间、唯一标识符和回调函数。
+     */
     struct node {
-        time_point expire;
-        token id;
-        handler_type handler;
+        time_point expire;     ///< 到期时间
+        token id;              ///< 任务ID
+        handler_type handler;  ///< 回调函数
 
         node(time_point exp, const token tid, handler_type&& h)
-            : expire(exp), id(tid), handler(_MSTL move(h)) {}
+        : expire(exp), id(tid), handler(_MSTL move(h)) {}
 
+        /**
+         * @brief 比较操作符，按到期时间和ID排序
+         */
         bool operator <(const node& other) const {
             if (expire < other.expire) return true;
             if (expire > other.expire) return false;
@@ -33,21 +65,29 @@ private:
         }
     };
 
-    _MSTL set<node> nodes_;
-    _MSTL map<token, typename _MSTL set<node>::iterator> node_map_;
+    set<node> nodes_;   ///< 按时间排序的任务集合
+    map<token, typename set<node>::iterator> node_map_;  ///< ID到迭代器的映射
 
-    _MSTL thread thread_;
-    _MSTL mutex mutex_;
-    _MSTL condition_variable cv_;
-    token next_id_;
-    _MSTL atomic_bool stopped_;
+    thread thread_;          ///< 调度线程
+    mutex mutex_;            ///< 互斥锁
+    condition_variable cv_;  ///< 条件变量
+    token next_id_;          ///< 下一个可用的任务ID
+    atomic_bool stopped_;    ///< 停止标志
 
     friend class thread_pool;
 
 private:
+    /**
+     * @brief 调度线程的主循环
+     *
+     * 循环执行：
+     * 1. 等待直到有任务到达或停止信号
+     * 2. 执行所有到期的任务
+     * 3. 等待下一个任务的到期时间
+     */
     void run() {
         while (!stopped_.load()) {
-            _MSTL smart_lock<_MSTL mutex> lock(mutex_);
+            smart_lock<mutex> lock(mutex_);
 
             if (nodes_.empty()) {
                 cv_.wait(lock, [this] {
@@ -79,10 +119,17 @@ private:
     }
 
 public:
-    timer_scheduler() : next_id_(0), stopped_(false) {
-        thread_ = _MSTL thread(&timer_scheduler::run, this);
+    /**
+     * @brief 构造函数，启动调度线程
+     */
+    timer_scheduler()
+    : next_id_(0), stopped_(false) {
+        thread_ = thread(&timer_scheduler::run, this);
     }
 
+    /**
+     * @brief 析构函数，停止调度线程并等待其结束
+     */
     ~timer_scheduler() {
         stopped_.store(true);
         cv_.notify_one();
@@ -96,8 +143,16 @@ public:
     timer_scheduler(timer_scheduler&&) = default;
     timer_scheduler& operator =(timer_scheduler&&) = default;
 
+    /**
+     * @brief 添加定时任务
+     * @param expire 任务到期时间点
+     * @param handler 任务回调函数
+     * @return 任务标识符，可用于取消任务
+     *
+     * 如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。
+     */
     token add_task(time_point expire, handler_type&& handler) {
-        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
+        smart_lock<mutex> lock(mutex_);
         token id = next_id_++;
 
         const bool is_earliest = nodes_.empty() || expire < nodes_.begin()->expire;
@@ -115,8 +170,15 @@ public:
         return id;
     }
 
+    /**
+     * @brief 取消定时任务
+     * @param id 任务标识符
+     * @return 是否成功取消
+     *
+     * 如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。
+     */
     bool cancel(token id) {
-        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
+        smart_lock<mutex> lock(mutex_);
         auto it_map = node_map_.find(id);
         if (it_map == node_map_.end()) {
             return false;
@@ -135,49 +197,73 @@ public:
         return true;
     }
 
+    /**
+     * @brief 取消所有定时任务
+     */
     void cancel_all() {
-        _MSTL smart_lock<_MSTL mutex> lock(mutex_);
+        smart_lock<mutex> lock(mutex_);
         nodes_.clear();
         node_map_.clear();
         lock.unlock_quiet();
         cv_.notify_one();
     }
 
+    /**
+     * @brief 获取当前待处理的任务数量
+     * @return 任务数量
+     */
     MSTL_NODISCARD size_t size() const {
-        _MSTL lock<_MSTL mutex> lock(const_cast<_MSTL mutex&>(mutex_));
+        lock<mutex> lock(const_cast<mutex&>(mutex_));
         return nodes_.size();
     }
 };
 
-
+/**
+ * @class basic_timer
+ * @brief 基本定时器
+ * @tparam Clock 时钟类型
+ *
+ * 封装一个定时任务，提供简单的设置和等待接口。
+ * 支持一次性定时和取消操作。
+ */
 template <typename Clock>
 class basic_timer {
 public:
-    using clock_type = Clock;
-    using time_point = typename clock_type::time_point;
-    using duration = typename clock_type::duration;
-    using token = typename timer_scheduler<Clock>::token;
-    using handler_type = typename timer_scheduler<Clock>::handler_type;
+    using clock_type = Clock;                               ///< 时钟类型
+    using time_point = typename clock_type::time_point;     ///< 时间点类型
+    using duration = typename clock_type::duration;         ///< 时长类型
+    using token = typename timer_scheduler<Clock>::token;   ///< 任务标识符类型
+    using handler_type = typename timer_scheduler<Clock>::handler_type;  ///< 回调函数类型
 
 private:
-    timer_scheduler<Clock> scheduler_{};
-    token task_id_ = 0;
-    time_point expire_ = clock_type::now();
+    timer_scheduler<Clock> scheduler_{};    ///< 共享的调度器
+    token task_id_ = 0;                     ///< 当前任务的ID
+    time_point expire_ = clock_type::now(); ///< 到期时间点
 
 public:
     basic_timer() = default;
-    ~basic_timer() { cancel(); }
+
+    /**
+     * @brief 析构函数，自动取消未完成的任务
+     */
+    ~basic_timer() {
+        cancel();
+    }
 
     basic_timer(const basic_timer&) = delete;
     basic_timer& operator =(const basic_timer&) = delete;
 
+    /**
+     * @brief 移动构造函数
+     */
     basic_timer(basic_timer&& other) noexcept
-        : scheduler_(other.scheduler_)
-        , task_id_(other.task_id_)
-        , expire_(other.expire_) {
+    : scheduler_(other.scheduler_), task_id_(other.task_id_), expire_(other.expire_) {
         other.task_id_ = 0;
     }
 
+    /**
+     * @brief 移动赋值运算符
+     */
     basic_timer& operator =(basic_timer&& other) noexcept {
         if (this != &other) {
             cancel();
@@ -188,23 +274,60 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 设置绝对到期时间
+     * @param expiry_time 到期时间点
+     *
+     * 如果之前有未完成的任务，会自动取消。
+     */
     void expires_at(const time_point& expiry_time) {
         cancel();
         expire_ = expiry_time;
     }
 
+    /**
+     * @brief 设置相对到期时间
+     * @param expiry_duration 从当前时间开始的时长
+     *
+     * 如果之前有未完成的任务，会自动取消。
+     */
     void expires_after(const duration& expiry_duration) {
         cancel();
         expire_ = clock_type::now() + expiry_duration;
     }
 
-    void expires_from_now(const int64_t milliseconds) {
-        expires_after(_MSTL milliseconds(milliseconds));
+    /**
+     * @brief 设置从当前时间开始的毫秒数
+     * @param ms 毫秒数
+     */
+    void expires_from_now(const int64_t ms) {
+        expires_after(milliseconds(ms));
     }
 
-    MSTL_NODISCARD time_point expiry() const { return expire_; }
-    MSTL_NODISCARD bool is_active() const { return task_id_ != 0; }
+    /**
+     * @brief 获取到期时间点
+     * @return 到期时间点
+     */
+    MSTL_NODISCARD time_point expiry() const {
+        return expire_;
+    }
 
+    /**
+     * @brief 检查定时器是否活跃（有待执行的任务）
+     * @return 是否活跃
+     */
+    MSTL_NODISCARD bool is_active() const {
+        return task_id_ != 0;
+    }
+
+    /**
+     * @brief 异步等待定时器到期
+     * @tparam WaitHandler 回调函数类型
+     * @param handler 到期时执行的回调函数
+     *
+     * 如果之前有未完成的任务，会自动取消。
+     * 回调函数会在调度线程中执行，不应包含耗时操作。
+     */
     template <typename WaitHandler>
     void async_wait(WaitHandler&& handler) {
         cancel();
@@ -212,6 +335,11 @@ public:
             handler_type(_MSTL forward<WaitHandler>(handler)));
     }
 
+    /**
+     * @brief 取消定时任务
+     *
+     * 如果任务尚未执行，会从调度器中移除。
+     */
     void cancel() {
         if (task_id_ != 0) {
             scheduler_.cancel(task_id_);
@@ -220,8 +348,17 @@ public:
     }
 };
 
+/**
+ * @brief 基于稳定时钟的定时器
+ */
 using steady_timer = basic_timer<steady_clock>;
+
+/**
+ * @brief 基于系统时钟的定时器
+ */
 using system_timer = basic_timer<system_clock>;
+
+/** @} */ // AsyncTimer
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_ASYNC_TIMER_HPP__

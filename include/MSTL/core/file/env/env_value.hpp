@@ -1,14 +1,20 @@
 #ifndef MSTL_CORE_FILE_ENV_ENV_VALUE_HPP__
 #define MSTL_CORE_FILE_ENV_ENV_VALUE_HPP__
 #include "MSTL/core/container/unordered_map.hpp"
-#include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/interface/istringify.hpp"
+#include "MSTL/core/memory/unique_ptr.hpp"
 MSTL_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
 
 MSTL_ERROR_BUILD_FINAL_CLASS(env_exception, value_exception, "ENV Operation Failed.")
 
+/** @} */ // Exceptions
 
-class env_value;
 class env_variable;
 
 class MSTL_API env_value : public istringify<env_value> {

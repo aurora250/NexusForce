@@ -26,7 +26,7 @@ using bstring   = basic_string<byte_t>;
 /// 宽字符字符串
 using wstring   = basic_string<wchar_t>;
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /// UTF-8字符串
 using u8string  = basic_string<char8_t>;
 #endif
@@ -67,7 +67,7 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 wstring operator ""_s(const wchar_t* str, size_t
     return {str, len};
 }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /**
  * @brief 创建char8_t字符串的字面量操作符
  * @param str UTF-8字符串字面量

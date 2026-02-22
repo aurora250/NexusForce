@@ -1,90 +1,617 @@
 #ifndef MSTL_CORE_FILE_PATH_HPP__
 #define MSTL_CORE_FILE_PATH_HPP__
+
+/**
+ * @file path.hpp
+ * @brief 文件路径类
+ *
+ * 此文件提供了跨平台的文件路径操作类，
+ * 支持路径的解析、规范化、组合、比较以及文件系统操作。
+ */
+
 #include "MSTL/core/interface/istringify.hpp"
-#include "MSTL/core/iterator/path_iterator.hpp"
 MSTL_BEGIN_NAMESPACE__
 
+/**
+ * @defgroup File 文件
+ * @brief 文件操作
+ * @{
+ */
+
+/**
+ * @brief 文件路径分隔符集合
+ *
+ * 用于路径分割操作，包含所有可能的路径分隔符。
+ */
+MSTL_INLINE17 constexpr auto FILE_SPLITER =
+#ifdef MSTL_PLATFORM_WINDOWS__
+    "\\/";
+#elif defined(MSTL_PLATFORM_LINUX__)
+     "/";
+#endif
+
+/**
+ * @brief 系统首选路径分隔符
+ *
+ * 用于构建系统原生路径。
+ */
+MSTL_INLINE17 constexpr char PREFERRED_SEPARATOR =
+#ifdef MSTL_PLATFORM_WINDOWS__
+    '\\';
+#elif defined(MSTL_PLATFORM_LINUX__)
+     '/';
+#endif
+
+/**
+ * @brief 文件操作缓冲区大小
+ *
+ * 默认的I/O缓冲区大小，设置为8KB以获得较好的性能平衡。
+ */
+MSTL_INLINE17 constexpr size_t FILE_BUFFER_SIZE = 8192;
+
+
+/**
+ * @class path
+ * @brief 文件路径类
+ *
+ * 提供跨平台的文件路径操作，包括：
+ * - 路径组件访问（父路径、文件名、扩展名）
+ * - 路径规范化（解析.和..）
+ * - 路径组合（/操作符）
+ * - 文件系统操作（创建、删除、复制、移动）
+ * - 路径比较和哈希
+ */
 class MSTL_API path : public icommon<path>, public istringify<path> {
+    /**
+     * @class split_iterator
+     * @brief 路径分割迭代器
+     *
+     * 将文件路径分割为各个组件（如目录名、文件名）的迭代器。
+     * 支持Windows和Linux的路径格式：
+     * - Windows: "C:\Windows\System32" -> "C:", "Windows", "System32"
+     * - Linux: "/usr/local/bin" -> "", "usr", "local", "bin"
+     *
+     * 使用前向迭代器接口，适用于范围for循环和标准算法。
+     */
+    class split_iterator {
+    public:
+        using value_type = string_view;           ///< 值类型
+        using reference = value_type;             ///< 引用类型
+        using pointer = void;                     ///< 指针类型
+        using iterator_category = forward_iterator_tag; ///< 迭代器类别
+        using difference_type = ptrdiff_t;        ///< 差值类型
+
+    private:
+        const string* path_ = nullptr;    ///< 被遍历的路径字符串
+        size_t start_ = 0;             ///< 当前组件的起始位置
+        size_t end_ = 0;               ///< 当前组件的结束位置
+        bool done_ = true;             ///< 是否已完成遍历
+        string current_part_;          ///< 当前组件的字符串
+
+        /**
+         * @brief 查找下一个路径组件
+         *
+         * 从当前位置开始查找下一个路径组件。
+         */
+        void find_next() {
+            const size_t sz = path_->size();
+            const size_t pos = start_;
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+            if (pos == 0 && sz > 1 && (*path_)[1] == ':') {
+                current_part_ = path_->substr(0, 2);
+                start_ = 2;
+                while (start_ < sz && ((*path_)[start_] == '/' || (*path_)[start_] == '\\')) {
+                    ++start_;
+                }
+                end_ = start_ - 1;
+                done_ = false;
+                return;
+            }
+#endif
+            const size_t sep_pos = path_->find_first_of(FILE_SPLITER, pos);
+            if (sep_pos == string::npos) {
+                current_part_ = path_->substr(pos);
+                end_ = sz;
+            } else {
+                current_part_ = path_->substr(pos, sep_pos - pos);
+                end_ = sep_pos;
+            }
+       }
+
+    public:
+        /**
+         * @brief 默认构造函数
+         *
+         * 构造一个结束迭代器。
+         */
+        split_iterator() noexcept = default;
+
+        /**
+         * @brief 构造函数
+         * @param path 要遍历的路径字符串指针
+         * @param pos 起始位置（默认为0）
+         *
+         * 构造一个从指定位置开始遍历路径的迭代器。
+         * 如果路径为空或起始位置无效，则构造为结束迭代器。
+         */
+        explicit split_iterator(const string* path, const size_t pos = 0) noexcept
+        : path_(path), start_(pos), done_(false) {
+            if (!path_ || path_->empty() || start_ >= path_->size()) {
+                done_ = true;
+                return;
+            }
+            find_next();
+        }
+
+        /**
+         * @brief 解引用操作符
+         * @return 当前路径组件的字符串视图
+         *
+         * 返回当前组件的字符串视图，不包含路径分隔符。
+         */
+        reference operator *() const noexcept {
+            return current_part_.view();
+        }
+
+        /**
+         * @brief 前置递增操作符
+         * @return 递增后的迭代器引用
+         *
+         * 移动到下一个路径组件。
+         */
+        split_iterator& operator ++() {
+            if (done_) return *this;
+            start_ = end_ + 1;
+            if (start_ >= path_->size()) {
+                done_ = true;
+                current_part_ = {};
+            } else {
+                find_next();
+            }
+            return *this;
+        }
+
+        /**
+         * @brief 后置递增操作符
+         * @return 递增前的迭代器副本
+         */
+        split_iterator operator ++(int) {
+            split_iterator tmp = *this;
+            ++*this;
+            return tmp;
+        }
+
+        /**
+         * @brief 相等比较操作符
+         * @param b 另一个迭代器
+         * @return 两个迭代器是否相等
+         *
+         * 两个迭代器相等当且仅当：
+         * - 两者都处于结束状态，或者
+         * - 指向同一个路径且当前位置相同
+         */
+        MSTL_NODISCARD bool operator ==(const split_iterator& b) const noexcept {
+            if (done_ && b.done_) return true;
+            if (path_ != b.path_) return false;
+            return start_ == b.start_;
+        }
+
+        /**
+         * @brief 不等比较操作符
+         * @param b 另一个迭代器
+         * @return 两个迭代器是否不等
+         */
+        MSTL_NODISCARD bool operator !=(const split_iterator& b) const noexcept {
+            return !(*this == b);
+        }
+    };
+
 private:
-    string path_;
+    string path_{};  ///< 存储的路径字符串
 
 public:
+    /**
+     * @brief 默认构造函数，创建空路径
+     */
     path() = default;
-    explicit path(string p) : path_(_MSTL move(p)) {}
-    explicit path(const string_view p) : path_(p) {}
-    explicit path(const char* p) : path_(p) {}
+
+    /**
+     * @brief 从字符串构造路径
+     * @param str 路径字符串
+     */
+    explicit path(string str)
+    : path_(_MSTL move(str)) {}
+
+    /**
+     * @brief 从字符串视图构造路径
+     * @param view 路径字符串视图
+     */
+    explicit path(const string_view view)
+    : path_(view) {}
+
+    /**
+     * @brief 从C风格字符串构造路径
+     * @param str 路径C字符串
+     */
+    explicit path(const char* str)
+    : path_(str) {}
 
     path(const path&) = default;
     path(path&&) noexcept = default;
     path& operator =(const path&) = default;
     path& operator =(path&&) noexcept = default;
 
-    MSTL_NODISCARD const string& str() const noexcept { return path_; }
-    MSTL_NODISCARD string_view view() const noexcept { return path_.view(); }
-    MSTL_NODISCARD const char* data() const noexcept { return path_.data(); }
-    MSTL_NODISCARD bool empty() const noexcept { return path_.empty(); }
+    /**
+     * @brief 获取路径字符串
+     * @return 路径字符串常量引用
+     */
+    MSTL_NODISCARD const string& str() const noexcept {
+        return path_;
+    }
 
-    MSTL_NODISCARD path_iterator begin() const noexcept { return path_iterator(&path_, 0); }
-    MSTL_NODISCARD path_iterator end() const noexcept { return path_iterator(); }
+    /**
+     * @brief 获取路径字符串视图
+     * @return 路径字符串视图
+     */
+    MSTL_NODISCARD string_view view() const noexcept {
+        return path_.view();
+    }
 
+    /**
+     * @brief 获取C风格字符串
+     * @return 路径C字符串指针
+     */
+    MSTL_NODISCARD const char* data() const noexcept {
+        return path_.data();
+    }
+
+    /**
+     * @brief 检查路径是否为空
+     * @return 是否为空
+     */
+    MSTL_NODISCARD bool empty() const noexcept {
+        return path_.empty();
+    }
+
+    /**
+     * @brief 获取起始路径组件迭代器
+     * @return 指向第一个组件的迭代器
+     */
+    MSTL_NODISCARD split_iterator begin() const noexcept {
+        return split_iterator(&path_, 0);
+    }
+
+    /**
+     * @brief 获取结束路径组件迭代器
+     * @return 结束迭代器
+     */
+    MSTL_NODISCARD split_iterator end() const noexcept {
+        return split_iterator();
+    }
+
+    /**
+     * @brief 获取父路径
+     * @return 父路径对象
+     */
     MSTL_NODISCARD path parent_path() const;
+
+    /**
+     * @brief 获取文件名
+     * @return 文件名字符串视图
+     *
+     * 返回路径的最后一部分。
+     */
     MSTL_NODISCARD string_view filename() const noexcept;
+
+    /**
+     * @brief 获取文件主名（不含扩展名）
+     * @return 文件主名字符串视图
+     *
+     * 返回文件名去除最后一个点及之后的部分。
+     */
     MSTL_NODISCARD string_view stem() const noexcept;
+
+    /**
+     * @brief 获取文件扩展名
+     * @return 扩展名字符串视图
+     *
+     * 返回文件名的最后一个点之后的部分。
+     */
     MSTL_NODISCARD string_view extension() const noexcept;
 
+    /**
+     * @brief 规范化路径
+     * @return 规范化后的路径
+     *
+     * 解析路径中的"."和".."，移除多余的分隔符。
+     */
     MSTL_NODISCARD path lexically_normal() const noexcept;
+
+    /**
+     * @brief 获取绝对路径
+     * @param base 基础路径
+     * @return 绝对路径
+     *
+     * 将相对路径转换为绝对路径。
+     */
     MSTL_NODISCARD path absolute(const path& base = current_path()) const;
+
+    /**
+     * @brief 获取相对于另一路径的路径
+     * @param base 基础路径
+     * @return 相对路径
+     *
+     * 计算当前路径相对于base路径的相对路径。
+     */
     MSTL_NODISCARD path relative(const path& base) const;
 
+    /**
+     * @brief 获取当前工作目录
+     * @return 当前工作目录路径
+     */
     static path current_path();
+
+    /**
+     * @brief 获取临时目录路径
+     * @return 临时目录路径
+     */
     static path temp_directory_path();
 
+    /**
+     * @brief 路径连接赋值操作符
+     * @param p 要连接的路径
+     * @return 自身引用
+     *
+     * 将另一个路径连接到当前路径，自动处理分隔符。
+     */
     path& operator /=(const path& p);
+
+    /**
+     * @brief 路径连接赋值操作符（字符串视图版本）
+     * @param p 要连接的路径字符串视图
+     * @return 自身引用
+     */
     path& operator /=(string_view p);
+
+    /**
+     * @brief 路径连接操作符
+     * @param p 要连接的路径
+     * @return 连接后的新路径
+     */
     path operator /(const path& p) const;
+
+    /**
+     * @brief 路径连接操作符（字符串视图版本）
+     * @param p 要连接的路径字符串视图
+     * @return 连接后的新路径
+     */
     path operator /(string_view p) const;
 
+    /**
+     * @brief 检查路径是否存在
+     * @return 是否存在
+     */
     MSTL_NODISCARD bool exists() const noexcept;
+
+    /**
+     * @brief 检查路径是否为目录
+     * @return 是否为目录
+     */
     MSTL_NODISCARD bool is_directory() const noexcept;
+
+    /**
+     * @brief 检查路径是否为普通文件
+     * @return 是否为文件
+     */
     MSTL_NODISCARD bool is_file() const noexcept;
 
+    /**
+     * @brief 创建目录（包括所有父目录）
+     * @return 是否创建成功
+     */
     bool create_directories() const;
+
+    /**
+     * @brief 删除文件
+     * @return 是否删除成功
+     */
     bool remove() const noexcept;
+
+    /**
+     * @brief 删除空目录
+     * @return 是否删除成功
+     */
     bool remove_directory() const noexcept;
+
+    /**
+     * @brief 删除目录中的所有内容
+     * @param recursive 是否递归删除子目录
+     * @return 是否全部删除成功
+     */
     bool remove_all_in_directory(bool recursive = true) const noexcept;
+
+    /**
+     * @brief 删除文件或目录
+     * @return 是否全部删除成功
+     */
     bool remove_all() const noexcept;
 
+    /**
+     * @brief 复制文件到目标位置
+     * @param to 目标路径
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否复制成功
+     */
     bool copy(const path& to, bool overwrite = true) const;
+
+    /**
+     * @brief 复制目录到目标位置
+     * @param destination 目标路径
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否复制成功
+     */
     bool copy_directory(const path& destination, bool overwrite = true) const;
+
+    /**
+     * @brief 移动文件或目录到目标位置
+     * @param to 目标路径
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否移动成功
+     */
     bool move(const path& to, bool overwrite = true) const noexcept;
+
+    /**
+     * @brief 重命名文件或目录
+     * @param new_name 新名称
+     * @return 是否重命名成功
+     */
     bool rename(const path& new_name) const;
 
+    /**
+     * @brief 检查路径是否存在
+     * @param path 要检查的路径字符串
+     * @return 是否存在
+     */
     MSTL_NODISCARD static bool exists(const string& path) noexcept;
+
+    /**
+     * @brief 检查路径是否为目录
+     * @param path 要检查的路径字符串
+     * @return 是否为目录
+     */
     MSTL_NODISCARD static bool is_directory(const string& path) noexcept;
+
+    /**
+     * @brief 检查路径是否为文件
+     * @param path 要检查的路径字符串
+     * @return 是否为文件
+     */
     MSTL_NODISCARD static bool is_file(const string& path) noexcept;
+
+    /**
+     * @brief 获取文件扩展名
+     * @param path 路径字符串视图
+     * @return 扩展名字符串视图
+     */
     MSTL_NODISCARD static string_view extension(string_view path) noexcept;
 
+    /**
+     * @brief 创建目录
+     * @param path 要创建的路径
+     * @return 是否创建成功
+     */
     static bool create_directories(const string& path);
+
+    /**
+     * @brief 删除文件
+     * @param path 要删除的文件路径
+     * @return 是否删除成功
+     */
     static bool remove(const string& path) noexcept;
+
+    /**
+     * @brief 删除空目录
+     * @param path 要删除的目录路径
+     * @return 是否删除成功
+     */
     static bool remove_directory(const string& path) noexcept;
+
+    /**
+     * @brief 删除目录中的所有内容
+     * @param directory_path 目录路径
+     * @param recursive 是否递归删除子目录
+     * @return 是否全部删除成功
+     */
     static bool remove_all_in_directory(const string& directory_path, bool recursive = true) noexcept;
+
+    /**
+     * @brief 删除文件或目录
+     * @param path 要删除的路径
+     * @return 是否全部删除成功
+     */
     static bool remove_all(const string& path) noexcept;
 
+    /**
+     * @brief 复制文件
+     * @param from 源路径
+     * @param to 目标路径
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否复制成功
+     */
     static bool copy(const path& from, const path& to, bool overwrite = true);
+
+    /**
+     * @brief 复制目录
+     * @param source 源目录
+     * @param destination 目标目录
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否复制成功
+     */
     static bool copy_directory(const path& source, const path& destination, bool overwrite = true);
+
+    /**
+     * @brief 移动文件或目录
+     * @param from 源路径
+     * @param to 目标路径
+     * @param overwrite 是否覆盖已存在的文件
+     * @return 是否移动成功
+     */
     static bool move(const path& from, const path& to, bool overwrite = true) noexcept;
+
+    /**
+     * @brief 重命名文件或目录
+     * @param old_name 原名称
+     * @param new_name 新名称
+     * @return 是否重命名成功
+     */
     static bool rename(const path& old_name, const path& new_name);
 
-    operator string_view() const noexcept { return path_.view(); }
+    /**
+     * @brief 转换为字符串视图
+     */
+    operator string_view() const noexcept {
+        return path_.view();
+    }
 
+    /**
+     * @brief 相等比较
+     * @param rhs 另一个路径
+     * @return 是否相等
+     */
     MSTL_NODISCARD bool operator ==(const path& rhs) const noexcept;
+
+    /**
+     * @brief 小于比较
+     * @param rhs 另一个路径
+     * @return 是否小于
+     */
     MSTL_NODISCARD bool operator <(const path& rhs) const noexcept;
 
+    /**
+     * @brief 计算哈希值
+     * @return 哈希值
+     */
     MSTL_NODISCARD size_t to_hash() const;
-    MSTL_NODISCARD string to_string() const { return lexically_normal().str(); }
 
-    void swap(path& rhs) noexcept { path_.swap(rhs.path_); }
+    /**
+     * @brief 转换为字符串
+     * @return 规范化后的路径字符串
+     */
+    MSTL_NODISCARD string to_string() const {
+        return lexically_normal().str();
+    }
+
+    /**
+     * @brief 交换两个路径
+     * @param rhs 要交换的路径
+     */
+    void swap(path& rhs) noexcept {
+        path_.swap(rhs.path_);
+    }
 };
+
+/** @} */ // File
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_FILE_PATH_HPP__

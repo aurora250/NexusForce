@@ -5,19 +5,37 @@
 #include <MSTL/core/system/environment.hpp>
 #include <MSTL/core/system/process.hpp>
 #include <MSTL/core/numeric/random.hpp>
-#ifdef MSTL_PLATFORM_LINUX__
-#include <cstdlib>
-#endif
 MSTL_BEGIN_NAMESPACE__
 
-vector<path>& temp_file::get_temp_registry() {
+static vector<path>& get_temp_registry() {
     static vector<path> registry;
     return registry;
 }
 
-mutex& temp_file::get_registry_mutex() {
+static mutex& get_registry_mutex() {
     static mutex mutex;
     return mutex;
+}
+
+static path generate_unique_path(const string& prefix, const string& suffix) {
+    const path temp_dir{environment::temp_directory()};
+    static atomic<uint64_t> counter{0};
+    counter.fetch_add(1, memory_order_relaxed);
+
+    const auto nanos = system_clock::now().since_epoch().to_nano();
+    const int pid = process::current_id();
+    random_mt rand;
+    const uint64_t random_part = rand.next_int();
+    const string filename = format(
+        "{}_{}_{}_{}_{}{}",
+        prefix,
+        nanos.count(),
+        pid,
+        this_thread::id().native_handle(),
+        random_part,
+        suffix
+    );
+    return temp_dir / path(filename);
 }
 
 void temp_file::register_for_cleanup(const path& temp_path) {
@@ -44,36 +62,9 @@ void temp_file::cleanup_all_temp_files() {
     registry.clear();
 }
 
-path temp_file::generate_unique_path(const string& prefix, const string& suffix) {
-    const path temp_dir{environment::temp_directory()};
-    static atomic<uint64_t> counter{0};
-    counter.fetch_add(1, memory_order_relaxed);
-
-    const auto nanos = system_clock::now().since_epoch().to_nano();
-    const int pid = process::current_process_id();
-    random_mt rand;
-    const uint64_t random_part = rand.next_int();
-    const string filename = format(
-        "{}_{}_{}_{}_{}{}",
-        prefix,
-        nanos.count(),
-        pid,
-        this_thread::id().native_handle(),
-        random_part,
-        suffix
-    );
-    return temp_dir / path(filename);
-}
-
-temp_file::temp_file(
-    const string& prefix, const string& suffix,
-    const FILE_CREATION mode, const DELETE_POLICY policy)
-: file_(
-    generate_unique_path(prefix, suffix),
-    FILE_ACCESS::READ_WRITE,
-    FILE_SHARED::SHARE_READ,
-    mode)
-, delete_policy_(policy) {
+temp_file::temp_file(const string& prefix, const string& suffix, const FILE_CREATION mode, const DELETE_POLICY policy)
+: file_(generate_unique_path(prefix, suffix), FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ, mode),
+  delete_policy_(policy) {
     try {
         if (file_.is_opened()) {
             if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
@@ -91,11 +82,8 @@ temp_file::temp_file(
 }
 
 temp_file::temp_file(const path& existing_path, const DELETE_POLICY policy)
-: file_(existing_path,
-    FILE_ACCESS::READ_WRITE,
-    FILE_SHARED::SHARE_READ_WRITE,
-    FILE_CREATION::OPEN_EXIST)
-, delete_policy_(policy) {
+: file_(existing_path, FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ_WRITE, FILE_CREATION::OPEN_EXIST),
+  delete_policy_(policy) {
     if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
         register_for_cleanup(file_.path());
     }
@@ -106,7 +94,7 @@ temp_file::~temp_file() {
 }
 
 temp_file::temp_file(temp_file&& other) noexcept
-: file_(move(other.file_)), delete_policy_(other.delete_policy_) {
+: file_(_MSTL move(other.file_)), delete_policy_(other.delete_policy_) {
     other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
 }
 

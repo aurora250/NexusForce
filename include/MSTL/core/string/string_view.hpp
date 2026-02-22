@@ -17,7 +17,7 @@ using bstring_view   = basic_string_view<byte_t>;
 /// 宽字符字符串视图
 using wstring_view   = basic_string_view<wchar_t>;
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /// UTF-8字符串视图
 using u8string_view  = basic_string_view<char8_t>;
 #endif // MSTL_STANDARD_20__
@@ -59,7 +59,7 @@ MSTL_NODISCARD constexpr wstring_view operator ""_sv(const wchar_t* str, size_t 
     return {str, len};
 }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /**
  * @brief 创建char8_t字符串视图的字面量操作符
  * @param str UTF-8字符串字面量

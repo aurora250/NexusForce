@@ -2,31 +2,29 @@
 #include <MSTL/core/system/console.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-void logger::enqueue(log_event&& ev) {
+void logger::enqueue(log_event&& event) {
     {
-        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
-        queue_.push(_MSTL move(ev));
+        lock<mutex> lock(queue_mutex_);
+        queue_.push(_MSTL move(event));
     }
     cv_.notify_one();
 }
 
-void logger::enqueue(const log_event& ev) {
+void logger::enqueue(const log_event& event) {
     {
-        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
-        queue_.push(ev);
+        lock<mutex> lock(queue_mutex_);
+        queue_.push(event);
     }
     cv_.notify_one();
 }
 
 void logger::start_worker() {
     running_ = true;
-    worker_ = _MSTL thread([this] {
-        worker_loop();
-    });
+    worker_ = thread([this] { worker_loop(); });
 }
 
 void logger::stop_worker() {
-    running_.store(false, _MSTL memory_order_release);
+    running_.store(false, memory_order_release);
     cv_.notify_all();
 
     if (worker_.joinable()) {
@@ -34,7 +32,7 @@ void logger::stop_worker() {
         if (worker_.joinable()) {
             auto start = steady_clock::now();
             while (worker_.joinable() && steady_clock::now() - start < timeout) {
-                _MSTL this_thread::sleep_for(milliseconds(10));
+                this_thread::sleep_for(milliseconds(10));
             }
 
             if (worker_.joinable()) {
@@ -46,15 +44,15 @@ void logger::stop_worker() {
 }
 
 void logger::worker_loop() {
-    while (running_.load(_MSTL memory_order_acquire)) {
+    while (running_.load(memory_order_acquire)) {
         vector<log_event> events;
         bool should_flush = false;
 
         {
-            _MSTL smart_lock<_MSTL mutex> lock(queue_mutex_);
+            smart_lock<mutex> lock(queue_mutex_);
             cv_.wait_for(lock, milliseconds(100), [this] {
                 return !queue_.empty() ||
-                       flush_requested_.load(_MSTL memory_order_acquire);
+                       flush_requested_.load(memory_order_acquire);
             });
 
             while (!queue_.empty()) {
@@ -62,13 +60,13 @@ void logger::worker_loop() {
                 queue_.pop();
             }
 
-            if (flush_requested_.exchange(false, _MSTL memory_order_acq_rel)) {
+            if (flush_requested_.exchange(false, memory_order_acq_rel)) {
                 should_flush = true;
             }
         }
 
         if (!events.empty()) {
-            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
+            lock<mutex> sl(sinks_mutex_);
             for (const auto& ev : events) {
                 for (const auto& sink : sinks_) {
                     sink->log(ev);
@@ -77,11 +75,11 @@ void logger::worker_loop() {
         }
 
         if (should_flush) {
-            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
+            lock<mutex> sl(sinks_mutex_);
             for (const auto& sink : sinks_) {
                 sink->flush();
             }
-            _MSTL lock<_MSTL mutex> fl(flush_mutex_);
+            lock<mutex> fl(flush_mutex_);
             flush_cv_.notify_all();
         }
     }
@@ -96,7 +94,7 @@ logger::logger(const LOG_LEVEL level, const bool async)
 
 logger::~logger() {
     if (async_) {
-        running_.store(false, _MSTL memory_order_release);
+        running_.store(false, memory_order_release);
         cv_.notify_all();
         flush_cv_.notify_all();
 
@@ -105,12 +103,12 @@ logger::~logger() {
         }
     }
     {
-        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
+        lock<mutex> lock(sinks_mutex_);
         sinks_.clear();
     }
 
     {
-        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
+        lock<mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
             queue_.pop();
         }
@@ -118,7 +116,7 @@ logger::~logger() {
 }
 
 void logger::add_sink(shared_ptr<log_sink> sink) {
-    _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
+    lock<mutex> lock(sinks_mutex_);
     sinks_.push_back(move(sink));
 }
 
@@ -127,40 +125,40 @@ void logger::set_level(const LOG_LEVEL level) {
 }
 
 void logger::set_filter(function<bool(const log_event&)> filter) {
-    _MSTL lock<_MSTL mutex> lock(filter_mutex_);
+    lock<mutex> lock(filter_mutex_);
     filter_ = move(filter);
 }
 
 void logger::add_context(const string& key, string value) {
-    _MSTL lock<_MSTL mutex> lock(context_mutex_);
+    lock<mutex> lock(context_mutex_);
     context_[key] = move(value);
 }
 
 void logger::remove_context(const string& key) {
-    _MSTL lock<_MSTL mutex> lock(context_mutex_);
+    lock<mutex> lock(context_mutex_);
     context_.erase(key);
 }
 
 void logger::clear_context() {
-    _MSTL lock<_MSTL mutex> lock(context_mutex_);
+    lock<mutex> lock(context_mutex_);
     context_.clear();
 }
 
 void logger::enable_async(const bool async) {
-    if (async == async_.load(_MSTL memory_order_acquire)) {
+    if (async == async_.load(memory_order_acquire)) {
         return;
     }
 
-    async_.store(async, _MSTL memory_order_release);
+    async_.store(async, memory_order_release);
 
     if (async) {
         start_worker();
     } else {
-        _MSTL lock<_MSTL mutex> lock(queue_mutex_);
+        lock<mutex> lk(queue_mutex_);
         while (!queue_.empty()) {
             log_event ev = _MSTL move(queue_.front());
             queue_.pop();
-            _MSTL lock<_MSTL mutex> sl(sinks_mutex_);
+            lock<mutex> slk(sinks_mutex_);
             for (const auto& sink : sinks_) {
                 sink->log(ev);
             }
@@ -169,8 +167,7 @@ void logger::enable_async(const bool async) {
     }
 }
 
-void logger::log(const LOG_LEVEL level, string msg,
-    string file, string func, const int line) {
+void logger::log(const LOG_LEVEL level, string msg, string file, string func, const int line) {
     if (level < level_) return;
 
     log_event ev;
@@ -183,11 +180,11 @@ void logger::log(const LOG_LEVEL level, string msg,
     ev.message = move(msg);
 
     {
-        _MSTL lock<_MSTL mutex> lock(context_mutex_);
+        lock<mutex> lock(context_mutex_);
         ev.context = context_;
     }
     {
-        _MSTL lock<_MSTL mutex> lock(filter_mutex_);
+        lock<mutex> lock(filter_mutex_);
         if (filter_ && !filter_(ev)) {
             return;
         }
@@ -196,7 +193,7 @@ void logger::log(const LOG_LEVEL level, string msg,
     if (async_) {
         enqueue(ev);
     } else {
-        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
+        lock<mutex> lock(sinks_mutex_);
         for (const auto& sink : sinks_) {
             sink->log(ev);
         }
@@ -205,15 +202,15 @@ void logger::log(const LOG_LEVEL level, string msg,
 
 void logger::flush() {
     if (async_) {
-        flush_requested_.store(true, _MSTL memory_order_release);
+        flush_requested_.store(true, memory_order_release);
         cv_.notify_one();
 
-        _MSTL smart_lock<_MSTL mutex> lock(flush_mutex_);
+        smart_lock<mutex> lock(flush_mutex_);
         flush_cv_.wait(lock, [this] {
-            return !flush_requested_.load(_MSTL memory_order_acquire);
+            return !flush_requested_.load(memory_order_acquire);
         });
     } else {
-        _MSTL lock<_MSTL mutex> lock(sinks_mutex_);
+        lock<mutex> lock(sinks_mutex_);
         for (const auto& sink : sinks_) {
             sink->flush();
         }

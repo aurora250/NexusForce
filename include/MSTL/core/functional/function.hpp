@@ -322,44 +322,44 @@ public:
 
 	/**
 	 * @brief 默认构造函数
-	 * @param null 空指针字面量
+	 * @param np 空指针字面量
 	 */
-	function(nullptr_t null = nullptr) noexcept
+	function(nullptr_t np = nullptr) noexcept
 	: __function_base() {}
 
 	/**
 	 * @brief 复制构造函数
-	 * @param x 要复制的function对象
+	 * @param other 要复制的function对象
 	 */
-	function(const function& x) : __function_base() {
-		if (static_cast<bool>(x)) {
-			x.manager_(func_, x.func_, _INNER FUNCTION_OPERATE::COPY_PTR);
-			invoker_ = x.invoker_;
-			manager_ = x.manager_;
+	function(const function& other) : __function_base() {
+		if (static_cast<bool>(other)) {
+			other.manager_(func_, other.func_, _INNER FUNCTION_OPERATE::COPY_PTR);
+			invoker_ = other.invoker_;
+			manager_ = other.manager_;
 		}
 	}
 
 	/**
 	 * @brief 移动构造函数
-	 * @param x 要移动的function对象
+	 * @param other 要移动的function对象
 	 */
-	function(function&& x) noexcept
-	: __function_base(), invoker_(x.invoker_) {
-		if (static_cast<bool>(x)) {
-			func_ = x.func_;
-			manager_ = x.manager_;
-			x.manager_ = nullptr;
-			x.invoker_ = nullptr;
+	function(function&& other) noexcept
+	: __function_base(), invoker_(other.invoker_) {
+		if (static_cast<bool>(other)) {
+			func_ = other.func_;
+			manager_ = other.manager_;
+			other.manager_ = nullptr;
+			other.invoker_ = nullptr;
 		}
 	}
 
 	/**
 	 * @brief 从任意可调用对象构造
 	 * @tparam F 可调用对象类型
-	 * @param f 可调用对象
+	 * @param callable 可调用对象
 	 */
 	template <typename F, enable_if_t<callable_t<F>::value, int> = 0>
-	function(F&& f) noexcept(handler_t<F>::template nothrow_init<F>())
+	function(F&& callable) noexcept(handler_t<F>::template nothrow_init<F>())
 	: __function_base() {
 		static_assert(
 			is_copy_constructible_v<decay_t<F>> &&
@@ -367,8 +367,8 @@ public:
 			"target of function must be constructible");
 
 		using handler = handler_t<F>;
-		if (handler::not_empty_function(f)) {
-			handler::init_func(func_, _MSTL forward<F>(f));
+		if (handler::not_empty_function(callable)) {
+			handler::init_func(func_, _MSTL forward<F>(callable));
 			invoker_ = &handler::invoke;
 			manager_ = &handler::manage;
 	    }
@@ -376,30 +376,30 @@ public:
 
 	/**
 	 * @brief 复制赋值运算符
-	 * @param x 要赋值的function对象
+	 * @param other 要赋值的function对象
 	 * @return 当前对象的引用
 	 */
-	function& operator =(const function& x) {
-		function(x).swap(*this);
+	function& operator =(const function& other) {
+		function(other).swap(*this);
 		return *this;
 	}
 
 	/**
 	 * @brief 移动赋值运算符
-	 * @param x 要移动的function对象
+	 * @param other 要移动的function对象
 	 * @return 当前对象的引用
 	 */
-	function& operator =(function&& x) noexcept {
-		function(_MSTL move(x)).swap(*this);
+	function& operator =(function&& other) noexcept {
+		function(_MSTL move(other)).swap(*this);
 		return *this;
 	}
 
 	/**
 	 * @brief 空指针赋值运算符
-	 * @param null 空指针字面量
+	 * @param np 空指针字面量
 	 * @return 当前对象的引用
 	 */
-	function& operator =(nullptr_t null) noexcept {
+	function& operator =(nullptr_t np) noexcept {
 		if (manager_) {
 			manager_(func_, func_, _INNER FUNCTION_OPERATE::DESTROY_PTR);
 			manager_ = nullptr;
@@ -411,42 +411,44 @@ public:
 	/**
 	 * @brief 从任意可调用对象赋值
 	 * @tparam F 可调用对象类型
-	 * @param f 可调用对象
+	 * @param callable 可调用对象
 	 * @return 当前对象的引用
 	 */
 	template <typename F, enable_if_t<callable_t<F>::value, int> = 0>
-	function& operator =(F&& f) noexcept(handler_t<F>::template nothrow_init<F>()) {
-		function(_MSTL forward<F>(f)).swap(*this);
+	function& operator =(F&& callable) noexcept(handler_t<F>::template nothrow_init<F>()) {
+		function(_MSTL forward<F>(callable)).swap(*this);
 		return *this;
 	}
 
 	/**
 	 * @brief 从引用包装器赋值
 	 * @tparam F 可调用对象类型
-	 * @param f 引用包装器
+	 * @param wrapper 引用包装器
 	 * @return 当前对象的引用
 	 */
 	template <typename F>
-	function& operator =(reference_wrapper<F> f) noexcept {
-		function(f).swap(*this);
+	function& operator =(reference_wrapper<F> wrapper) noexcept {
+		function(wrapper).swap(*this);
 		return *this;
 	}
 
 	/**
 	 * @brief 交换两个function对象
-	 * @param x 要交换的function对象
+	 * @param other 要交换的function对象
 	 */
-	void swap(function& x) noexcept {
-		_MSTL swap(func_, x.func_);
-		_MSTL swap(manager_, x.manager_);
-		_MSTL swap(invoker_, x.invoker_);
+	void swap(function& other) noexcept {
+		_MSTL swap(func_, other.func_);
+		_MSTL swap(manager_, other.manager_);
+		_MSTL swap(invoker_, other.invoker_);
 	}
 
 	/**
 	 * @brief 转换为布尔值
 	 * @return 是否非空
 	 */
-	explicit operator bool() const noexcept { return !empty(); }
+	explicit operator bool() const noexcept {
+		return !empty();
+	}
 
 	/**
 	 * @brief 函数调用运算符
@@ -529,11 +531,11 @@ function(Func) -> function<Sign>;
  * @tparam Res 返回类型
  * @tparam Args 参数类型
  * @param f function对象
- * @param null 空指针字面量
+ * @param np 空指针字面量
  * @return function是否为空
  */
 template <typename Res, typename... Args>
-bool operator ==(const function<Res(Args...)>& f, nullptr_t null) noexcept {
+bool operator ==(const function<Res(Args...)>& f, nullptr_t np) noexcept {
 	return !static_cast<bool>(f);
 }
 
@@ -541,12 +543,12 @@ bool operator ==(const function<Res(Args...)>& f, nullptr_t null) noexcept {
  * @brief 等于空指针比较
  * @tparam Res 返回类型
  * @tparam Args 参数类型
- * @param null 空指针字面量
+ * @param np 空指针字面量
  * @param f function对象
  * @return function是否为空
  */
 template <typename Res, typename... Args>
-bool operator ==(nullptr_t null, const function<Res(Args...)>& f) noexcept {
+bool operator ==(nullptr_t np, const function<Res(Args...)>& f) noexcept {
 	return !static_cast<bool>(f);
 }
 
@@ -555,11 +557,11 @@ bool operator ==(nullptr_t null, const function<Res(Args...)>& f) noexcept {
  * @tparam Res 返回类型
  * @tparam Args 参数类型
  * @param f function对象
- * @param null 空指针字面量
+ * @param np 空指针字面量
  * @return function是否非空
  */
 template <typename Res, typename... Args>
-bool operator !=(const function<Res(Args...)>& f, nullptr_t null) noexcept {
+bool operator !=(const function<Res(Args...)>& f, nullptr_t np) noexcept {
 	return static_cast<bool>(f);
 }
 
@@ -567,12 +569,12 @@ bool operator !=(const function<Res(Args...)>& f, nullptr_t null) noexcept {
  * @brief 不等于空指针比较
  * @tparam Res 返回类型
  * @tparam Args 参数类型
- * @param null 空指针字面量
+ * @param np 空指针字面量
  * @param f function对象
  * @return function是否非空
  */
 template <typename Res, typename... Args>
-bool operator !=(nullptr_t null, const function<Res(Args...)>& f) noexcept {
+bool operator !=(nullptr_t np, const function<Res(Args...)>& f) noexcept {
 	return static_cast<bool>(f);
 }
 

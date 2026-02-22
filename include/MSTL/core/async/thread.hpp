@@ -9,7 +9,6 @@
  */
 
 #include "MSTL/core/functional/apply.hpp"
-#include "MSTL/core/exception/exception.hpp"
 #include "MSTL/core/exception/terminate.hpp"
 #include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/async/this_thread.hpp"

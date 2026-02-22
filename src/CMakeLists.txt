@@ -264,6 +264,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
@@ -304,7 +305,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/iterator/file_line_iterator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp

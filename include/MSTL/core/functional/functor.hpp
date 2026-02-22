@@ -14,7 +14,6 @@ MSTL_BEGIN_NAMESPACE__
 /**
  * @defgroup LegacyFunctionAdapters 旧式函数适配器
  * @brief 为兼容性提供的旧式函数适配器基类
- * @deprecated 已弃用，使用lambda表达式代替之
  * @{
  */
 

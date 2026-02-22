@@ -12,9 +12,9 @@ void file_sink::open_new_file() {
     }
 
     if (!file_.open(path(filename), true,
-        FILE_ACCESS::WRITE,
-        FILE_SHARED::SHARE_WRITE,
-        FILE_CREATION::OPEN_FORCE)) {
+                    FILE_ACCESS::WRITE,
+                    FILE_SHARED::SHARE_WRITE,
+                    FILE_CREATION::OPEN_FORCE)) {
         throw_exception(file_exception("Failed to open log file"));
     }
     current_size_ = file_.size();
@@ -34,15 +34,15 @@ void file_sink::rotate_by_date(string today) {
     open_new_file();
 }
 
-string file_sink::default_format(log_event ev) {
+static string default_format(log_event event) {
     string result;
-    result += "["_s + to_string(ev.level) + "] " + move(ev.message);
+    result += "["_s + to_string(event.level) + "] " + _MSTL move(event.message);
     return result;
 }
 
 file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation)
-: base_filename_(move(filename)), max_file_size_(max_file_size),
-current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
+: base_filename_(_MSTL move(filename)), max_file_size_(max_file_size),
+  current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
     if (enable_date_rotation_) {
         current_date_ = datetime::now().date().to_string();
     }
@@ -51,7 +51,7 @@ current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
 
 void file_sink::log(const log_event& event) {
     const string formatted = formatter_ ? formatter_->format(event) : default_format(event);
-    _MSTL lock<_MSTL recursive_mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     if (enable_date_rotation_) {
         const string today = datetime::now().date().to_string();
         if (today != current_date_) {
@@ -70,7 +70,7 @@ void file_sink::log(const log_event& event) {
 }
 
 void file_sink::flush() {
-    _MSTL lock<_MSTL recursive_mutex> lock(mutex_);
+    lock<mutex> lock(mutex_);
     file_.flush();
 }
 

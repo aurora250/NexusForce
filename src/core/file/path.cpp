@@ -1,6 +1,15 @@
 #include <MSTL/core/file/path.hpp>
 #include <MSTL/core/container/vector.hpp>
 #include <MSTL/core/system/environment.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <Windows.h>
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -9,6 +18,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <unistd.h>
+#include <fcntl.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 

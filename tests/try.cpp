@@ -513,8 +513,8 @@ void test_signal() {
 
         printcln(color::cyan(), "信号管理器已启动");
         println("按 Ctrl+C 测试中断信号");
-        println("在另一个终端执行: kill -TERM ", process::current_process_id(), " 测试终止信号");
-        println("或执行: kill -USR1 ", process::current_process_id(), " 测试用户信号");
+        println("在另一个终端执行: kill -TERM ", process::current_id(), " 测试终止信号");
+        println("或执行: kill -USR1 ", process::current_id(), " 测试用户信号");
 
         for (int i = 0; i < 30; ++i) {
             if (!signal_manager::instance().is_running()) {
@@ -581,14 +581,14 @@ void test_cmd(int argc, char* argv[]) {
 }
 
 void test_process() {
-    auto pi = process::create_process(
+    auto pi = process::create(
 #ifdef MSTL_PLATFORM_WINDOWS__
         "python"
 #else
         "python3"
 #endif
         , {(res_root / "test.py").str()}, true);
-    int res = process::wait_for_process(pi);
+    int res = process::wait_for(pi);
     println(res);
     if (res == 0) {
         println(pi.stdout_output);

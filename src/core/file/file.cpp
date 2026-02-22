@@ -1,5 +1,9 @@
 #include <MSTL/core/file/file.hpp>
 #include <MSTL/core/system/sysinfo.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <winioctl.h>
+#include <memoryapi.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/file.h>
 #include <sys/time.h>
@@ -9,11 +13,27 @@
 #include <cerrno>
 #include <unistd.h>
 #endif
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <winioctl.h>
-#include <memoryapi.h>
-#endif
 MSTL_BEGIN_NAMESPACE__
+
+file::line_iterator::line_iterator(const file* f) : file_(f) {
+    if (file_ && file_->is_opened()) {
+        ++(*this);
+    }
+}
+
+file::line_iterator& file::line_iterator::operator++() {
+    if (file_ && !file_->read_line(current_line_)) {
+        file_ = nullptr;
+    }
+    return *this;
+}
+
+file::line_iterator file::line_iterator::operator++(int) {
+    line_iterator tmp = {*this};
+    ++(*this);
+    return tmp;
+}
+
 
 file::async_context::async_context(string&& d)
 : data(_MSTL move(d)), is_write(true) {
@@ -2194,22 +2214,16 @@ bool file::unlock(const difference_type offset, const difference_type length) co
     return true;
 }
 
-bool file::try_lock(
-    const difference_type offset,
-    const difference_type length,
-    FILE_LOCK mode) const noexcept {
+bool file::try_lock(const difference_type offset, const difference_type length, FILE_LOCK mode) const noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    auto nonblocking_mode = static_cast<FILE_LOCK>(
-        static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
+    auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
 #elif defined(MSTL_PLATFORM_LINUX__)
     const auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCK_NB);
 #endif
     return lock(offset, length, nonblocking_mode);
 }
 
-bool file::is_locked(const difference_type offset,
-    const difference_type length, FILE_LOCK* out_type) const noexcept {
-
+bool file::is_locked(const difference_type offset, const difference_type length, FILE_LOCK* lock_out) const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) {
         return false;
     }
@@ -2218,19 +2232,19 @@ bool file::is_locked(const difference_type offset,
     const bool can_lock = try_lock(offset, length, FILE_LOCK::SHARED);
     if (can_lock) {
         MSTL_IGNORE unlock(offset, length);
-        if (out_type) *out_type = FILE_LOCK::SHARED;
+        if (lock_out) *lock_out = FILE_LOCK::SHARED;
         return false;
     }
 
     if (last_error_code_ == ERROR_LOCK_VIOLATION) {
-        if (out_type) *out_type = FILE_LOCK::EXCLUSIVE;
+        if (lock_out) *lock_out = FILE_LOCK::EXCLUSIVE;
         return true;
     }
 
     return false;
 
-#elif defined(MSTL_PLATFORM_LINUX__)
-    struct ::flock fl;
+#else
+    struct ::flock fl{};
     _MSTL memory_zero(&fl);
 
     fl.l_type = F_WRLCK;
@@ -2244,13 +2258,13 @@ bool file::is_locked(const difference_type offset,
     }
 
     if (fl.l_type == F_UNLCK) {
-        if (out_type) *out_type = static_cast<FILE_LOCK>(0);
+        if (lock_out) *lock_out = static_cast<FILE_LOCK>(0);
         return false;
     } else if (fl.l_type == F_RDLCK) {
-        if (out_type) *out_type = FILE_LOCK::SHARED;
+        if (lock_out) *lock_out = FILE_LOCK::SHARED;
         return true;
     } else if (fl.l_type == F_WRLCK) {
-        if (out_type) *out_type = FILE_LOCK::EXCLUSIVE;
+        if (lock_out) *lock_out = FILE_LOCK::EXCLUSIVE;
         return true;
     }
 
@@ -2266,8 +2280,7 @@ bool file::unlock_whole() const noexcept {
     return unlock(0, 0);
 }
 
-bool file::map(size_type offset, size_type size,
-    const FILE_ACCESS access, const FILE_MAP_HINT hint) {
+bool file::map(size_type offset, size_type size, const FILE_ACCESS access, const FILE_MAP_HINT hint) {
     _MSTL lock<mutex> lock(map_mutex_);
 
     if (mapped_ptr_) {
@@ -2493,22 +2506,18 @@ void file::unmap() noexcept {
     if (!mapped_ptr_) return;
 
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const uint32_t allocation_granularity =
-        sysinfo::instance().get_system_info().allocation_granularity;
-
-    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
-        (mapped_offset_ % allocation_granularity);
+    const uint32_t allocation_granularity = sysinfo::instance().get_system_info().allocation_granularity;
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) - (mapped_offset_ % allocation_granularity);
 
     if (!::UnmapViewOfFile(reinterpret_cast<::LPVOID>(base_address))) {
         set_last_error();
     }
+
     if (mapping_handle_ != INVALID_HANDLE_VALUE) {
         ::CloseHandle(mapping_handle_);
         mapping_handle_ = INVALID_HANDLE_VALUE;
     }
-
 #elif defined(MSTL_PLATFORM_LINUX__)
-
     const long page_size = ::sysconf(_SC_PAGESIZE);
     if (page_size > 0) {
         const difference_type page_mask = page_size - 1;
@@ -2523,7 +2532,6 @@ void file::unmap() noexcept {
             set_last_error();
         }
     }
-
 #endif
 
     mapped_ptr_ = nullptr;
@@ -2582,8 +2590,7 @@ bool file::flush_mapped(const bool async) {
     }
 
     const difference_type page_mask = page_size - 1;
-    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
-        (mapped_offset_ & page_mask);
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) - (mapped_offset_ & page_mask);
     const size_type total_size = mapped_size_ + (mapped_offset_ & page_mask);
 
     if (::msync(reinterpret_cast<void*>(base_address), total_size, flags) != 0) {
@@ -2623,8 +2630,7 @@ bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
     }
 
     const difference_type page_mask = page_size - 1;
-    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) -
-        (mapped_offset_ & page_mask);
+    const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) - (mapped_offset_ & page_mask);
     const size_type total_size = mapped_size_ + (mapped_offset_ & page_mask);
     if (lock_in_memory) {
         return ::mlock(reinterpret_cast<void *>(base_address), total_size) == 0;

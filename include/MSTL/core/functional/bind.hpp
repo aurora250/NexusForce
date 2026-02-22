@@ -770,8 +770,6 @@ using bind_helper_t = typename bind_helper<IntLike, Func, BoundArgs...>::type;
  * @return 绑定后的函数对象
  *
  * 创建函数绑定器，支持占位符参数重排。返回的绑定器可以存储并稍后调用。
- *
- * @deprecated 此函数已被标记为弃用，建议使用lambda表达式或bind_front替代。
  */
 template <typename Func, typename... BoundArgs>
 MSTL_DEPRECATE_FOR("use lambda or bind_front instead of bind")

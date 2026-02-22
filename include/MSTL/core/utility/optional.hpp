@@ -39,6 +39,17 @@ MSTL_ERROR_BUILD_FINAL_CLASS(optional_exception, memory_exception, "Access the N
 template <typename T>
 class optional;
 
+
+template <typename T>
+struct is_optional : false_type {};
+
+template <typename T>
+struct is_optional<optional<T>> : true_type {};
+
+template <typename T>
+MSTL_INLINE17 bool is_optional_v = is_optional<T>::value;
+
+
 /**
  * @class optional
  * @brief 可选值类

@@ -71,6 +71,46 @@ public:
                bool req_val, bool allow_multi, string def_val);
     };
 
+private:
+    string program_name_;                     ///< 程序名称
+    vector<option> options_;                  ///< 选项列表
+    unordered_map<string, option*> options_long_;  ///< 长选项名到选项的映射
+    unordered_map<char, option*> options_short_;   ///< 短选项字符到选项的映射
+    vector<string> positional_;               ///< 位置参数
+
+    /**
+     * @brief 根据长选项名查找选项
+     * @param name 长选项名
+     * @return 选项指针，未找到返回nullptr
+     */
+    option* find_option_long(const string& name);
+
+    /**
+     * @brief 根据短选项字符查找选项
+     * @param name 短选项字符
+     * @return 选项指针，未找到返回nullptr
+     */
+    option* find_option_short(char name);
+
+    /**
+     * @brief 解析长选项（--option）
+     * @param arg 当前参数
+     * @param args 所有参数列表
+     * @param index 当前索引
+     * @throws cmdline_exception 解析失败时抛出
+     */
+    void parse_long_option(const string& arg, const vector<string>& args, size_t& index);
+
+    /**
+     * @brief 解析短选项组合（-abc）
+     * @param arg 当前参数
+     * @param args 所有参数列表
+     * @param index 当前索引
+     * @throws cmdline_exception 解析失败时抛出
+     */
+    void parse_short_options(const string& arg, const vector<string>& args, size_t& index);
+
+public:
     /**
      * @brief 添加选项定义
      * @param long_name 长选项名称
@@ -158,45 +198,6 @@ public:
      * @throws cmdline_exception 获取失败时抛出
      */
     static vector<string> get_os_argv();
-
-private:
-    string program_name_;                     ///< 程序名称
-    vector<option> options_;                  ///< 选项列表
-    unordered_map<string, option*> options_long_;  ///< 长选项名到选项的映射
-    unordered_map<char, option*> options_short_;   ///< 短选项字符到选项的映射
-    vector<string> positional_;               ///< 位置参数
-
-    /**
-     * @brief 根据长选项名查找选项
-     * @param name 长选项名
-     * @return 选项指针，未找到返回nullptr
-     */
-    option* find_option_long(const string& name);
-
-    /**
-     * @brief 根据短选项字符查找选项
-     * @param name 短选项字符
-     * @return 选项指针，未找到返回nullptr
-     */
-    option* find_option_short(char name);
-
-    /**
-     * @brief 解析长选项（--option）
-     * @param arg 当前参数
-     * @param args 所有参数列表
-     * @param index 当前索引
-     * @throws cmdline_exception 解析失败时抛出
-     */
-    void parse_long_option(const string& arg, const vector<string>& args, size_t& index);
-
-    /**
-     * @brief 解析短选项组合（-abc）
-     * @param arg 当前参数
-     * @param args 所有参数列表
-     * @param index 当前索引
-     * @throws cmdline_exception 解析失败时抛出
-     */
-    void parse_short_options(const string& arg, const vector<string>& args, size_t& index);
 };
 
 /** @} */ // CommandLine

@@ -1,18 +1,14 @@
-#include <MSTL/core/algorithm/remove.hpp>
-#include <MSTL/core/async/mutex.hpp>
 #include <MSTL/core/system/process.hpp>
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/file/file.hpp>
 #include <sys/wait.h>
-#include <sys/resource.h>
-#include <unistd.h>
 #include <cerrno>
 #include <cstring>
 #include <csignal>
 #endif
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <psapi.h>
+#include <Psapi.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -59,85 +55,19 @@ static string build_command_line(
 #endif
 
 
-static void read_pipe_output(process::process_info& info) {
-    string output;
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-    if (info.hStdoutRead == nullptr) {
-        info.stdout_output = move(output);
-    }
-
-    constexpr ::DWORD buffer_size = 4096;
-    char buffer[buffer_size];
-    ::DWORD bytes_read;
-
-    while (true) {
-        if (!::PeekNamedPipe(info.hStdoutRead,
-            nullptr, 0, nullptr, &bytes_read, nullptr)) {
-            break;
-        }
-        if (bytes_read == 0) {
-            break;
-        }
-        if (!::ReadFile(info.hStdoutRead, buffer, buffer_size - 1, &bytes_read, nullptr)) {
-            break;
-        }
-
-        if (bytes_read > 0) {
-            buffer[bytes_read] = '\0';
-            output.append(buffer, bytes_read);
-        }
-    }
-#else
-    if (info.stdout_fd[0] < 0) {
-        info.stdout_output = move(output);
-        return;
-    }
-
-    char buffer[4096];
-    const int flags = ::fcntl(info.stdout_fd[0], F_GETFL, 0);
-    ::fcntl(info.stdout_fd[0], F_SETFL, flags | O_NONBLOCK);
-
-    while (true) {
-        const ssize_t bytes = ::read(info.stdout_fd[0], buffer, sizeof(buffer) - 1);
-        if (bytes > 0) {
-            buffer[bytes] = '\0';
-            output.append(buffer, bytes);
-        } else {
-            break;
-        }
-    }
-
-    ::fcntl(info.stdout_fd[0], F_SETFL, flags);
-#endif
-
-    info.stdout_output = move(output);
-}
-
-process::process_info process::create_process(const string& executable,
-    const vector<string>& args, bool capture_output) {
-    process_info info{};
+process::info process::create(const string& executable, const vector<string>& args, bool capture_output) {
+    info info{};
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::STARTUPINFOA si{};
-    si.cb = sizeof(si);
-
-    ::SECURITY_ATTRIBUTES sa{};
-    sa.nLength = sizeof(sa);
-    sa.bInheritHandle = TRUE;
-    sa.lpSecurityDescriptor = nullptr;
+    si.cb = sizeof(::STARTUPINFOA);
 
     if (capture_output) {
-        if (!::CreatePipe(&info.hStdoutRead, &info.hStdoutWrite, &sa, 0)) {
-            throw_exception(system_exception("CreatePipe failed"));
-        }
-        if (!::SetHandleInformation(info.hStdoutRead, HANDLE_FLAG_INHERIT, 0)) {
-            throw_exception(system_exception("SetHandleInformation failed"));
-        }
+        info.stdout_pipe = pipe(true);
 
         si.dwFlags |= STARTF_USESTDHANDLES;
-        si.hStdOutput = info.hStdoutWrite;
-        si.hStdError = info.hStdoutWrite;
+        si.hStdOutput = info.stdout_pipe.native_write_handle();
+        si.hStdError = info.stdout_pipe.native_write_handle();
     }
 
     string cmd_line = build_command_line(executable, args);
@@ -150,48 +80,39 @@ process::process_info process::create_process(const string& executable,
     );
 
     if (!success) {
-        if (capture_output) {
-            ::CloseHandle(info.hStdoutRead);
-            ::CloseHandle(info.hStdoutWrite);
-        }
         throw_exception(system_exception("CreateProcess failed"));
     }
     info.process_id = info.pi.dwProcessId;
     if (capture_output) {
-        ::CloseHandle(info.hStdoutWrite);
+        info.stdout_pipe.close_write();
     }
-
 #else
     if (capture_output) {
-        if (::pipe(info.stdout_fd) == -1) {
-            throw_exception(system_exception(::strerror(errno)));
-        }
+        info.stdout_pipe = pipe(true);
     }
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
-        if (capture_output) {
-            ::close(info.stdout_fd[0]);
-            ::close(info.stdout_fd[1]);
-        }
         throw_exception(system_exception(::strerror(errno)));
     }
 
     if (pid == 0) {
         if (capture_output) {
-            ::close(info.stdout_fd[0]);
-            if (::dup2(info.stdout_fd[1], STDOUT_FILENO) == -1) {
+            info.stdout_pipe.close_read();
+
+            if (::dup2(info.stdout_pipe.native_write_handle(), STDOUT_FILENO) == -1) {
                 printcln(color::red(), "dup2 stdout failed: ", ::strerror(errno));
                 ::_exit(1);
             }
 
-            if (::dup2(info.stdout_fd[1], STDERR_FILENO) == -1) {
+            if (::dup2(info.stdout_pipe.native_write_handle(), STDERR_FILENO) == -1) {
                 printcln(color::red(), "dup2 stderr failed: ", ::strerror(errno));
                 ::_exit(1);
             }
 
-            ::close(info.stdout_fd[1]);
+            info.stdout_pipe.close_write();
         }
+
         char** argv = build_argv(executable, args);
         ::execvp(executable.data(), argv);
 
@@ -202,17 +123,19 @@ process::process_info process::create_process(const string& executable,
 
     info.process_id = pid;
     if (capture_output) {
-        ::close(info.stdout_fd[1]);
+        info.stdout_pipe.close_write();
     }
 #endif
+
     info.is_running = true;
     return info;
 }
 
-int process::wait_for_process(process_info& info, int timeout_ms) {
+int process::wait_for(info& info, int timeout_ms) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::DWORD timeout = (timeout_ms < 0) ?
-        numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout_ms);
+        numeric_traits<::DWORD>::max() :
+        static_cast<::DWORD>(timeout_ms);
     ::DWORD result = ::WaitForSingleObject(info.pi.hProcess, timeout);
 
     if (result == WAIT_TIMEOUT) {
@@ -221,7 +144,7 @@ int process::wait_for_process(process_info& info, int timeout_ms) {
     if (result == WAIT_FAILED) {
         throw_exception(system_exception("WaitForSingleObject failed"));
     }
-    read_pipe_output(info);
+    info.stdout_output = info.stdout_pipe.read_available();
 
     ::DWORD exit_code;
     if (!::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
@@ -255,9 +178,10 @@ int process::wait_for_process(process_info& info, int timeout_ms) {
         }
     }
 
-    if (info.stdout_fd[0] >= 0) {
-        read_pipe_output(info);
-    }
+    info.stdout_output = info.stdout_pipe.read_available();
+    info.stdout_pipe.close();
+    info.is_running = false;
+
     if (WIFEXITED(status)) {
         return WEXITSTATUS(status);
     }
@@ -265,31 +189,27 @@ int process::wait_for_process(process_info& info, int timeout_ms) {
 #endif
 }
 
-bool process::terminate_process(const process_info& info) noexcept {
+bool process::terminate(const info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
     if (result) {
         ::CloseHandle(info.pi.hProcess);
         ::CloseHandle(info.pi.hThread);
-        if (info.hStdoutRead) ::CloseHandle(info.hStdoutRead);
-        if (info.hStdoutWrite) ::CloseHandle(info.hStdoutWrite);
     }
     return result != 0;
 #else
     if (::kill(info.process_id, SIGTERM) == 0) {
         ::usleep(100000);
-        if (is_process_running(info)) {
+        if (is_running(info)) {
             ::kill(info.process_id, SIGKILL);
         }
-        if (info.stdout_fd[0] >= 0) ::close(info.stdout_fd[0]);
-        if (info.stdout_fd[1] >= 0) ::close(info.stdout_fd[1]);
         return true;
     }
     return false;
 #endif
 }
 
-bool process::suspend_process(const process_info& info) noexcept {
+bool process::suspend(const info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (info.pi.hThread == nullptr) return false;
     return ::SuspendThread(info.pi.hThread) != static_cast<DWORD>(-1);
@@ -298,7 +218,7 @@ bool process::suspend_process(const process_info& info) noexcept {
 #endif
 }
 
-bool process::resume_process(const process_info& info) noexcept {
+bool process::resume(const info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (info.pi.hThread == nullptr) return false;
     return ::ResumeThread(info.pi.hThread) != static_cast<DWORD>(-1);
@@ -307,7 +227,7 @@ bool process::resume_process(const process_info& info) noexcept {
 #endif
 }
 
-bool process::is_process_running(const process_info& info) noexcept {
+bool process::is_running(const info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
     if (::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
@@ -320,7 +240,7 @@ bool process::is_process_running(const process_info& info) noexcept {
 #endif
 }
 
-process::process_id_t process::current_process_id() noexcept {
+process::native_id_type process::current_id() noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     return ::GetCurrentProcessId();
 #else
@@ -328,7 +248,7 @@ process::process_id_t process::current_process_id() noexcept {
 #endif
 }
 
-process_memory_info process::get_process_memory_info(const process_info& info) noexcept {
+process_memory_info process::memory_info(const info& info) noexcept {
     process_memory_info mem_info = {0, 0, 0, 0};
 #ifdef MSTL_PLATFORM_WINDOWS__
     PROCESS_MEMORY_COUNTERS pmc;
@@ -359,8 +279,8 @@ process_memory_info process::get_process_memory_info(const process_info& info) n
     return mem_info;
 }
 
-process_state process::get_process_state(const process_info& info) noexcept {
-    if (!is_process_running(info)) {
+process_state process::state(const info& info) noexcept {
+    if (!is_running(info)) {
         return process_state::exited;
     }
 
@@ -388,8 +308,7 @@ process_state process::get_process_state(const process_info& info) noexcept {
     return process_state::unknown;
 }
 
-bool process::check_process_permission(
-    const process_info& info, process_permission permission) noexcept {
+bool process::check_permission(const info& info, process_permission permission) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD desired_access = 0;
 
@@ -406,7 +325,7 @@ bool process::check_process_permission(
         desired_access |= PROCESS_QUERY_INFORMATION;
     }
 
-    ::HANDLE hProcess = ::OpenProcess(desired_access, FALSE, info.process_id);
+    const ::HANDLE hProcess = ::OpenProcess(desired_access, FALSE, info.process_id);
     if (hProcess != nullptr) {
         ::CloseHandle(hProcess);
         return true;
@@ -435,9 +354,9 @@ bool process::check_process_permission(
 #endif
 }
 
-string process::get_process_name(process_id_t process_id) noexcept {
+string process::name(native_id_type process_id) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::HANDLE hProcess = ::OpenProcess(
+    const ::HANDLE hProcess = ::OpenProcess(
         PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
         FALSE,
         process_id);

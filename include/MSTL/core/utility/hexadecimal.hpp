@@ -239,11 +239,19 @@ struct formatter<hexadecimal> {
     }
 };
 
+/** @} */ // Packages
+
+/**
+ * @defgroup ToString 转换字符串
+ * @brief 各类型到字符串的转换函数
+ * @{
+ */
+
 MSTL_CONSTEXPR20 string hexadecimal::to_string() const {
     return _MSTL format("{#x}", *this);
 }
 
-/** @} */ // Packages
+/** @} */ // ToString
 
 MSTL_BEGIN_LITERALS__
 

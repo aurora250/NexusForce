@@ -10,7 +10,6 @@
  */
 
 #include "MSTL/core/interface/iobject.hpp"
-#include "MSTL/core/interface/ipackage.hpp"
 #include "MSTL/core/string/to_numerics.hpp"
 #include "MSTL/core/string/to_string.hpp"
 MSTL_BEGIN_NAMESPACE__

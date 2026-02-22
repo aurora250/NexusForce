@@ -248,7 +248,7 @@ template <> struct char_traits<char>     : narrow_char_traits<char, int32_t> {};
 /// wchar_t类型的特化
 template <> struct char_traits<wchar_t>  : base_char_traits<wchar_t, uint32_t> {};
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 /// char8_t类型的特化
 template <> struct char_traits<char8_t>  : narrow_char_traits<char8_t, uint32_t> {};
 #endif

@@ -781,7 +781,7 @@ bool sys_console::supports_unicode() const {
     const string lc_all = environment::get("LC_ALL");
     const string lc_ctype = environment::get("LC_CTYPE");
 
-    const string encoding = lc_ctype ? lc_ctype : (lc_all ? lc_all : lang);
+    const string encoding = !lc_ctype.empty() ? lc_ctype : (!lc_all.empty() ? lc_all : lang);
     if (encoding.empty()) return false;
 
     return string_find_pattern(encoding.data(), "UTF-8") != nullptr ||

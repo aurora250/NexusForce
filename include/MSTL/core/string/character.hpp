@@ -364,7 +364,7 @@ struct character : icharacter<character, char> {
         return result;
     }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -492,7 +492,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         return wstring{obj};
     }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -587,7 +587,7 @@ struct unpackage<wcharacter> {
 };
 
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
 
 /**
  * @struct u8character
@@ -782,7 +782,7 @@ struct u16character : icharacter<u16character, char16_t> {
         return result;
     }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图
@@ -903,7 +903,7 @@ struct u32character : icharacter<u32character, char32_t> {
         return result;
     }
 
-#ifdef MSTL_STANDARD_20__
+#if defined(MSTL_STANDARD_20__) || defined(MSTL_DOXYGEN_GENERATE)
     /**
      * @brief 转换为UTF-8字符串
      * @param obj 字符视图

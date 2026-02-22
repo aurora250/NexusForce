@@ -9,12 +9,12 @@
  * 支持轻量级并发编程，提供任务调度和协作式多任务支持。
  */
 
+#ifdef MSTL_STANDARD_20__
 #include "MSTL/core/container/queue.hpp"
 #include "MSTL/core/utility/optional.hpp"
 #include "MSTL/core/async/condition_variable.hpp"
 #include "MSTL/core/async/atomic.hpp"
-#ifdef MSTL_STANDARD_20__
-#include <coroutine>
+#include "MSTL/core/async/coroutine.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**
@@ -37,7 +37,7 @@ struct virtual_thread_task {
      * 定义协程的行为和状态管理。
      */
     struct promise_type {
-        _MSTL exception_ptr exception_;  ///< 异常存储
+        exception_ptr exception_;  ///< 异常存储
 
         /**
          * @brief 获取返回对象
@@ -45,7 +45,7 @@ struct virtual_thread_task {
          */
         virtual_thread_task get_return_object() {
             return virtual_thread_task{
-                std::coroutine_handle<promise_type>::from_promise(*this)
+                coroutine_handle<promise_type>::from_promise(*this)
             };
         }
 
@@ -53,16 +53,16 @@ struct virtual_thread_task {
          * @brief 初始挂起点
          * @return 立即恢复的挂起器
          */
-        std::suspend_never initial_suspend() {
-            return std::suspend_never{};
+        suspend_never initial_suspend() {
+            return suspend_never{};
         }
 
         /**
          * @brief 最终挂起点
          * @return 总是挂起的挂起器
          */
-        std::suspend_always final_suspend() noexcept {
-            return std::suspend_always{};
+        suspend_always final_suspend() noexcept {
+            return suspend_always{};
         }
 
         /**
@@ -80,13 +80,13 @@ struct virtual_thread_task {
         }
     };
 
-    std::coroutine_handle<promise_type> handle_;  ///< 协程句柄
+    coroutine_handle<promise_type> handle_;  ///< 协程句柄
 
     /**
      * @brief 构造函数
      * @param h 协程句柄
      */
-    virtual_thread_task(std::coroutine_handle<promise_type> h)
+    virtual_thread_task(coroutine_handle<promise_type> h)
     : handle_(h) {}
 
     /**
@@ -134,7 +134,7 @@ struct virtual_thread_task {
  */
 class virtual_thread_scheduler {
 private:
-    queue<std::coroutine_handle<>> task_queue_;  ///< 任务队列
+    queue<coroutine_handle<>> task_queue_;  ///< 任务队列
     vector<thread> workers_;  ///< 工作线程集合
     mutex mutex_;  ///< 队列保护互斥锁
     condition_variable cv_;  ///< 条件变量
@@ -153,7 +153,7 @@ private:
      */
     void worker_loop() {
         while (true) {
-            std::coroutine_handle<> handle;
+            coroutine_handle<> handle;
 
             {
                 smart_lock<mutex> lock(mutex_);
@@ -193,7 +193,7 @@ public:
      *
      * 将协程任务加入任务队列，唤醒工作线程执行。
      */
-    void schedule(std::coroutine_handle<> handle) {
+    void schedule(coroutine_handle<> handle) {
         {
             lock<mutex> lock(mutex_);
             task_queue_.push(handle);
@@ -249,7 +249,7 @@ public:
  * 用于协程挂起和调度的等待器类型。
  */
 struct virtual_thread_awaiter {
-    std::coroutine_handle<> handle_;  ///< 协程句柄
+    coroutine_handle<> handle_;  ///< 协程句柄
 
     /**
      * @brief 检查是否准备就绪
@@ -265,7 +265,7 @@ struct virtual_thread_awaiter {
      *
      * 将协程提交给调度器执行。
      */
-    void await_suspend(std::coroutine_handle<> handle) {
+    void await_suspend(coroutine_handle<> handle) {
         virtual_thread_scheduler::get_instance().schedule(handle);
     }
 
@@ -297,7 +297,7 @@ private:
      */
     template<typename Func>
     static virtual_thread_task create_task(Func func) {
-        co_await std::suspend_never{};
+        co_await suspend_never{};
         func();
     }
 
