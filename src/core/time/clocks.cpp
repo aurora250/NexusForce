@@ -1,7 +1,16 @@
 #include <MSTL/core/time/clocks.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
+#include <MSTL/core/config/windef.hpp>
+#include <handleapi.h>
+#include <profileapi.h>
+#include <synchapi.h>
+#include <sysinfoapi.h>
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <ctime>

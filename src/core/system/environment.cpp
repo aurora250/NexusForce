@@ -1,7 +1,8 @@
 #include <MSTL/core/system/environment.hpp>
 #include <MSTL/core/async/shared_mutex.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <processenv.h>
+#include <urlmon.h>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <unistd.h>

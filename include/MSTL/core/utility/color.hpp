@@ -113,7 +113,7 @@ public:
 
     /**
      * @brief 从十六进制字符串构造
-     * @param str 十六进制字符串（格式：#RRGGBB 或 #RRGGBBAA）
+     * @param str 十六进制字符串（格式：RRGGBB 或 RRGGBBAA）
      */
     MSTL_CONSTEXPR20 explicit color(const string_view str) {
         try_parse(str);

@@ -1,4 +1,10 @@
 #include <MSTL/core/system/console.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <consoleapi.h>
+#include <consoleapi2.h>
+#include <WinBase.h>
+#include <WinNls.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/system/environment.hpp>
 #include <sys/ioctl.h>
@@ -303,13 +309,19 @@ void sys_console::fade_effect_unsafe(
     flush_unsafe();
 }
 
-sys_console::sys_console() {
+sys_console::sys_console()
+#ifdef MSTL_PLATFORM_WINDOWS__
+: out_(INVALID_HANDLE_VALUE), in_(INVALID_HANDLE_VALUE)
+#else
+: out_(STDOUT_FILENO), in_(STDIN_FILENO)
+#endif
+{
 #ifdef MSTL_PLATFORM_WINDOWS__
     out_ = ::GetStdHandle(STD_OUTPUT_HANDLE);
     in_ = ::GetStdHandle(STD_INPUT_HANDLE);
 
     if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
-        throw_exception(device_exception("Failed to get console handles"));
+        throw_exception(console_exception("Failed to get console handles"));
     }
 
     ::SetConsoleOutputCP(CP_UTF8);
@@ -319,9 +331,6 @@ sys_console::sys_console() {
     ::GetConsoleMode(out_, &mode);
     mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     ::SetConsoleMode(out_, mode);
-#elif defined(MSTL_PLATFORM_LINUX__)
-    out_ = STDOUT_FILENO;
-    in_ = STDIN_FILENO;
 #endif
 }
 
@@ -423,14 +432,14 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 
     ::DWORD original_mode = 0;
     if (!::GetConsoleMode(in_, &original_mode)) {
-        throw_exception(device_exception("Failed to get console mode"));
+        throw_exception(console_exception("Failed to get console mode"));
     }
     ::DWORD new_mode = original_mode;
     new_mode &= ~ENABLE_ECHO_INPUT;
     new_mode &= ~ENABLE_LINE_INPUT;
     new_mode |= ENABLE_PROCESSED_INPUT;
     if (!::SetConsoleMode(in_, new_mode)) {
-        throw_exception(device_exception("Failed to set console mode"));
+        throw_exception(console_exception("Failed to set console mode"));
     }
 
     try {
@@ -467,7 +476,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
             } else if (ch == '\x03') {
                 print_string_unsafe("^C\n");
                 ::SetConsoleMode(in_, original_mode);
-                throw_exception(system_exception("Interrupted by user"));
+                throw_exception(console_exception("Interrupted by user"));
             } else if (ch == '\x00' || ch == '\xe0') {
                 ::ReadConsoleA(in_, &ch, 1, &read, nullptr);
                 continue;
@@ -532,7 +541,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                 }
             } else if (ch == '\x03') {
                 print_string_unsafe("^C\n");
-                throw_exception(system_exception("Interrupted by user"));
+                throw_exception(console_exception("Interrupted by user"));
             } else if (ch == '\x15') {
                 while (!password.empty()) {
                     password.pop_back();
@@ -662,7 +671,8 @@ void sys_console::save_cursor_position() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
-    saved_cursor_pos_ = csbi.dwCursorPosition;
+    const auto pos = csbi.dwCursorPosition;
+    saved_cursor_pos_ = console_size{pos.X, pos.Y};
 #else
     this->print_string_unsafe("\033[s");
 #endif
@@ -671,7 +681,10 @@ void sys_console::save_cursor_position() {
 void sys_console::restore_cursor_position() {
     lock<mutex> lock(mutex_);
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::SetConsoleCursorPosition(out_, saved_cursor_pos_);
+    ::SetConsoleCursorPosition(out_, ::COORD{
+        static_cast<::SHORT>(saved_cursor_pos_.width),
+        static_cast<::SHORT>(saved_cursor_pos_.height)
+    });
 #else
     this->print_string_unsafe("\033[u");
 #endif

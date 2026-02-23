@@ -1,6 +1,8 @@
 #include <MSTL/core/system/pipe.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <windef.h>
+#include <WinBase.h>
 #ifdef max
 #undef max
 #endif
@@ -23,19 +25,19 @@ pipe::pipe(bool inheritable) {
     sa.lpSecurityDescriptor = nullptr;
 
     if (!::CreatePipe(&read_handle_, &write_handle_, &sa, 0)) {
-        throw_exception(system_exception("CreatePipe failed"));
+        throw_exception(pipe_exception("CreatePipe failed"));
     }
 
     if (!inheritable) {
         if (!::SetHandleInformation(read_handle_, HANDLE_FLAG_INHERIT, 0)) {
             ::CloseHandle(read_handle_);
             ::CloseHandle(write_handle_);
-            throw_exception(system_exception("SetHandleInformation failed"));
+            throw_exception(pipe_exception("SetHandleInformation failed"));
         }
     }
 #else
     if (::pipe(fds_) == -1) {
-        throw_exception(system_exception(::strerror(errno)));
+        throw_exception(pipe_exception(::strerror(errno)));
     }
 
     if (!inheritable) {

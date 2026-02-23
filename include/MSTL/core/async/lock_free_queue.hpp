@@ -1,5 +1,5 @@
-#ifndef MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__
-#define MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__
+#ifndef MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
+#define MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__
 
 /**
  * @file lock_free_queue.hpp
@@ -221,7 +221,7 @@ public:
      * 使用CAS操作保证线程安全。
      */
     void push(T new_value) {
-        _MSTL unique_ptr<T> new_data(new T(new_value));
+        unique_ptr<T> new_data(new T(new_value));
         counted_node_ptr new_next;
         new_next.ptr = new node;
         new_next.external_count = 1;
@@ -248,7 +248,7 @@ public:
             this->set_new_tail(old_tail, old_next);
         }
         ++construct_count;
-        push_count_.fetch_add(1, _MSTL memory_order_relaxed);
+        push_count_.fetch_add(1, memory_order_relaxed);
     }
 
     /**
@@ -259,7 +259,7 @@ public:
      * 使用CAS操作保证线程安全。
      */
     unique_ptr<T> pop() {
-        counted_node_ptr old_head = head.load(_MSTL memory_order_relaxed);
+        counted_node_ptr old_head = head.load(memory_order_relaxed);
         for (;;) {
             lock_free_queue::increase_external_count(head, old_head);
             node* const ptr = old_head.ptr;
@@ -271,7 +271,7 @@ public:
             if (head.compare_exchange_strong(old_head, next)) {
                 T* res = ptr->data.exchange(nullptr);
                 lock_free_queue::free_external_counter(old_head);
-                pop_count_.fetch_add(1, _MSTL memory_order_relaxed);
+                pop_count_.fetch_add(1, memory_order_relaxed);
                 return unique_ptr<T>(res);
             }
             ptr->release_ref();
@@ -291,13 +291,13 @@ public:
         counted_node_ptr old_head{};
 
         for (int retry = 0; retry < 3; ++retry) {
-            old_head = head.load(_MSTL memory_order_relaxed);
+            old_head = head.load(memory_order_relaxed);
             lock_free_queue::increase_external_count(head, old_head);
             node* ptr = old_head.ptr;
 
             if (ptr == tail.load().ptr) {
                 ptr->release_ref();
-                return _MSTL make_unique<T>();
+                return make_unique<T>();
             }
 
             counted_node_ptr next = ptr->next.load();
@@ -305,13 +305,13 @@ public:
                 T* res = ptr->data.exchange(nullptr);
                 lock_free_queue::free_external_counter(old_head);
                 pop_count_.fetch_add(1, _MSTL memory_order_relaxed);
-                return _MSTL unique_ptr<T>(res);
+                return unique_ptr<T>(res);
             }
 
             ptr->release_ref();
         }
 
-        return _MSTL make_unique<T>();
+        return make_unique<T>();
     }
 
     /**
@@ -322,8 +322,8 @@ public:
      *       仅用于监控和统计，不应用于同步控制。
      */
     bool empty() const noexcept {
-        const counted_node_ptr head_ptr = head.load(_MSTL memory_order_acquire);
-        const counted_node_ptr tail_ptr = tail.load(_MSTL memory_order_acquire);
+        const counted_node_ptr head_ptr = head.load(memory_order_acquire);
+        const counted_node_ptr tail_ptr = tail.load(memory_order_acquire);
         return head_ptr.ptr == tail_ptr.ptr;
     }
 
@@ -336,8 +336,8 @@ public:
      *       仅用于监控和统计，不应用于同步控制。
      */
     size_t size() const noexcept {
-        const size_t push_cnt = push_count_.load(_MSTL memory_order_relaxed);
-        const size_t pop_cnt = pop_count_.load(_MSTL memory_order_relaxed);
+        const size_t push_cnt = push_count_.load(memory_order_relaxed);
+        const size_t pop_cnt = pop_count_.load(memory_order_relaxed);
         return push_cnt - pop_cnt;
     }
 
@@ -353,19 +353,19 @@ public:
      * @note 建议在单线程环境或确保独占访问时调用此方法。
      */
     void clear() {
-        while (_MSTL unique_ptr<T> ptr = this->pop()) {
+        while (unique_ptr<T> ptr = this->pop()) {
             this_thread::relax();
         }
     }
 };
 
 template <typename T>
-_MSTL atomic<int> lock_free_queue<T>::destruct_count{0};
+atomic<int> lock_free_queue<T>::destruct_count{0};
 
 template <typename T>
-_MSTL atomic<int> lock_free_queue<T>::construct_count{0};
+atomic<int> lock_free_queue<T>::construct_count{0};
 
 /** @} */ // LockFreeQueue
 
 MSTL_END_NAMESPACE__
-#endif // MSTL_CORE_CONTAINER_LOCK_FREE_QUEUE_HPP__
+#endif // MSTL_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__

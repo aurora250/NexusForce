@@ -115,8 +115,7 @@ MSTL_END_LITERALS__
  * @return 转义后的字符串
  *
  * 将字符串中的特殊字符转换为转义序列。
- * 支持的标准转义：\"、\'、\、\b、\f、\n、\r、\t、\v
- * 对于不可打印的控制字符（<0x20），转换为 \u00xx 格式的Unicode转义。
+ * 对于不可打印的控制字符（<0x20），转换为Unicode转义。
  */
 MSTL_CONSTEXPR20 string escape(const string_view str) {
     string result;

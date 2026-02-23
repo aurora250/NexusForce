@@ -3,7 +3,10 @@
 #include <MSTL/core/exception/terminate.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/time/clocks.hpp>
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <errhandlingapi.h>
+#include <synchapi.h>
+#include <winerror.h>
 #ifdef max
 #undef max
 #endif

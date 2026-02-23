@@ -1,7 +1,6 @@
 #ifndef MSTL_DATABASE_MYSQL_RESULT_HPP__
 #define MSTL_DATABASE_MYSQL_RESULT_HPP__
 #ifdef MSTL_SUPPORT_MYSQL__
-#include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
 #ifdef CR_OUT_OF_MEMORY
 #undef CR_OUT_OF_MEMORY

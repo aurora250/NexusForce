@@ -2,7 +2,6 @@
 #include <MSTL/core/file/toml/toml_value.hpp>
 #include <MSTL/core/numeric/numeric_types.hpp>
 MSTL_BEGIN_NAMESPACE__
-
 MSTL_BEGIN_INNER__
 
 string MSTL_API toml_value_to_string(const toml_value* value) {
@@ -299,5 +298,4 @@ string MSTL_API toml_value_document(const toml_value* value) {
 }
 
 MSTL_END_INNER__
-
 MSTL_END_NAMESPACE__

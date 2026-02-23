@@ -2,7 +2,9 @@
 #include <MSTL/core/container/vector.hpp>
 #include <MSTL/core/system/environment.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <windef.h>
+#include <WinBase.h>
 #ifdef max
 #undef max
 #endif

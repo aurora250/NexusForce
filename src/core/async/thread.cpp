@@ -1,8 +1,9 @@
 #include <MSTL/core/async/thread.hpp>
 #include <MSTL/core/time/clocks.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
+#include <windef.h>
 #include <process.h>
-#include <intrin.h>
+#include <WinBase.h>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <linux/futex.h>
@@ -22,13 +23,13 @@ void thread::start_thread_impl(void* args) {
         ::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id)
     );
     if (handle_ == nullptr) {
-        throw_exception(system_exception("Failed to create thread"));
+        throw_exception(thread_exception("Failed to create thread"));
     }
     id_ = id(thread_id);
 #else
     native_handle_type tid;
     if (::pthread_create(&tid, nullptr, thread_entry, args) != 0) {
-        throw_exception(system_exception("Failed to create thread"));
+        throw_exception(thread_exception("Failed to create thread"));
     }
     handle_ = tid;
     id_ = id(tid);
@@ -74,18 +75,18 @@ thread::~thread() {
 
 void thread::join() {
     if (!joinable()) {
-        throw_exception(system_exception("Thread is not joinable"));
+        throw_exception(thread_exception("Thread is not joinable"));
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::WaitForSingleObject(handle_, numeric_traits<::DWORD>::max()) != WAIT_OBJECT_0) {
-        throw_exception(system_exception("Fail to join thread"));
+        throw_exception(thread_exception("Fail to join thread"));
     }
     ::CloseHandle(handle_);
     handle_ = nullptr;
 #else
     if (::pthread_join(handle_, nullptr) != 0) {
-        throw_exception(system_exception("Thread is not joinable"));
+        throw_exception(thread_exception("Thread is not joinable"));
     }
     handle_ = native_handle_type{};
 #endif
@@ -94,16 +95,16 @@ void thread::join() {
 
 void thread::detach() {
     if (!joinable()) {
-        throw_exception(system_exception("Thread is not detachable"));
+        throw_exception(thread_exception("Thread is not detachable"));
     }
 #ifdef MSTL_PLATFORM_WINDOWS__
     if (::CloseHandle(handle_) == FALSE) {
-        throw_exception(system_exception("Fail to detach thread"));
+        throw_exception(thread_exception("Fail to detach thread"));
     }
     handle_ = nullptr;
 #else
     if (::pthread_detach(handle_) != 0) {
-        throw_exception(system_exception("Fail to detach thread"));
+        throw_exception(thread_exception("Fail to detach thread"));
     }
     handle_ = native_handle_type{};
 #endif

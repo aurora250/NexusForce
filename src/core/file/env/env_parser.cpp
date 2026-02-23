@@ -3,7 +3,7 @@
 MSTL_BEGIN_NAMESPACE__
 
 void env_parser::skip_whitespace() noexcept {
-    while (pos_ < len_ && (env_[pos_] == ' ' || env_[pos_] == '	')) {
+    while (pos_ < len_ && (text_[pos_] == ' ' || text_[pos_] == '	')) {
         advance();
     }
 }
@@ -18,12 +18,12 @@ void env_parser::skip_line() noexcept {
 }
 
 char env_parser::current() const noexcept {
-    if (pos_ < len_) return env_[pos_];
+    if (pos_ < len_) return text_[pos_];
     return '\0';
 }
 
 char env_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return env_[pos_ + offset];
+    if (pos_ + offset < len_) return text_[pos_ + offset];
     return '\0';
 }
 
@@ -33,7 +33,7 @@ bool env_parser::eof() const noexcept {
 
 void env_parser::advance() noexcept {
     if (pos_ < len_) {
-        if (env_[pos_] == '\n') {
+        if (text_[pos_] == '\n') {
             line_++;
             column_ = 1;
         } else {
@@ -211,12 +211,7 @@ unique_ptr<env_document> env_parser::parse() {
         if (current() == '\n') {
             advance();
         }
-
-        try {
-            parse_line(line);
-        } catch (...) {
-            throw;
-        }
+        parse_line(line);
     }
 
     return _MSTL move(root_);

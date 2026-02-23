@@ -6,6 +6,9 @@
 #include "../functional/function.hpp"
 #include "../container/unordered_map.hpp"
 #include "../container/vector.hpp"
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <consoleapi.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <csignal>
 #endif

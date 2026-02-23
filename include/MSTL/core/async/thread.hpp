@@ -10,12 +10,28 @@
 
 #include "MSTL/core/functional/apply.hpp"
 #include "MSTL/core/exception/terminate.hpp"
+#include "MSTL/core/exception/exception.hpp"
 #include "MSTL/core/memory/unique_ptr.hpp"
 #include "MSTL/core/async/this_thread.hpp"
 #ifdef MSTL_PLATFORM_LINUX__
 #include <pthread.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
+
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
+
+/**
+ * @struct thread_exception
+ * @extends system_exception
+ * @brief 线程操作异常
+ */
+MSTL_ERROR_BUILD_FINAL_CLASS(thread_exception, system_exception, "Thread Operation Failed.")
+
+/** @} */ // Exceptions
 
 /**
  * @defgroup Thread 线程
@@ -182,7 +198,7 @@ private:
     /**
      * @brief 启动线程实现
      * @param args 线程数据指针
-     * @throw system_exception 如果线程创建失败
+     * @throw thread_exception 如果线程创建失败
      * @note 线程的执行目标报错将导致进程终止
      */
     void start_thread_impl(void* args);
@@ -191,7 +207,7 @@ private:
      * @brief 启动线程
      * @tparam F 可调用对象类型
      * @param f 要执行的可调用对象
-     * @throw system_exception 如果线程创建失败
+     * @throw thread_exception 如果线程创建失败
      * @note 线程的执行目标报错将导致进程终止
      */
     template <typename F>
@@ -216,7 +232,7 @@ public:
      * @tparam Args 参数类型
      * @param f 要执行的可调用对象
      * @param args 传递给可调用对象的参数
-     * @throw system_exception 如果线程创建失败
+     * @throw thread_exception 如果线程创建失败
      *
      * 创建一个新线程，并在线程中执行带参数的可调用对象。
      *
@@ -281,7 +297,7 @@ public:
 
     /**
      * @brief 等待线程结束
-     * @throw system_exception 如果线程不可被等待或等待失败
+     * @throw thread_exception 如果线程不可被等待或等待失败
      *
      * 阻塞当前线程，直到目标线程执行完毕。
      */
@@ -289,7 +305,7 @@ public:
 
     /**
      * @brief 分离线程
-     * @throw system_exception 如果线程不可被等待或分离失败
+     * @throw thread_exception 如果线程不可被等待或分离失败
      *
      * 使线程在后台独立运行，线程结束后自动释放资源。
      */

@@ -1,17 +1,16 @@
 #include <MSTL/core/utility/packages.hpp>
-#include <MSTL/network/http/http_constants.hpp>
 #include <MSTL/network/url.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-void url::parse(const string_view str) {
-    scheme.clear(); host.clear(); port = 0; path.clear(); query.clear();
+url url::parse(const string_view str) {
+    url target{};
     const size_t len = str.size();
 
     const auto scheme_end = str.find("://");
     if (scheme_end == string::npos) {
-        throw_exception(http_exception("Invalid URL: missing scheme"));
+        throw_exception(network_exception("Invalid URL: missing scheme"));
     }
-    scheme = str.substr(0, scheme_end);
+    target.scheme = str.substr(0, scheme_end);
     size_t pos = scheme_end + 3;
 
     const size_t path_pos = str.find('/', pos);
@@ -19,12 +18,12 @@ void url::parse(const string_view str) {
 
     const size_t colon = host_port.find(':');
     if (colon != string::npos) {
-        host = host_port.substr(0, colon);
+        target.host = host_port.substr(0, colon);
         const string_view port_str = host_port.substr(colon + 1);
-        port = _MSTL uinteger16::parse(port_str).value();
+        target.port = _MSTL uinteger16::parse(port_str).value();
     } else {
-        host = host_port;
-        port = (scheme == "https") ? 443 : 80;
+        target.host = host_port;
+        target.port = (target.scheme == "https") ? 443 : 80;
     }
 
     pos = (path_pos == string::npos) ? len : path_pos;
@@ -32,14 +31,16 @@ void url::parse(const string_view str) {
     if (pos < len) {
         const size_t qpos = str.find('?', pos);
         if (qpos == string::npos) {
-            path = str.substr(pos);
+            target.path = str.substr(pos);
         } else {
-            path = str.substr(pos, qpos - pos);
-            query = str.substr(qpos + 1);
+            target.path = str.substr(pos, qpos - pos);
+            target.query = str.substr(qpos + 1);
         }
     } else {
-        path = "/";
+        target.path = "/";
     }
+
+    return target;
 }
 
 string url::to_string() const {

@@ -1,6 +1,7 @@
-#include <MSTL/plugin/dynamic_library.hpp>
+#include <MSTL/core/system/dynamic_library.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <libloaderapi.h>
 #else
 #include <dlfcn.h>
 #endif
@@ -12,12 +13,12 @@ void dynamic_library::open() {
 #ifdef MSTL_PLATFORM_WINDOWS__
     handle_ = ::LoadLibraryA(path_.data());
     if (!handle_) {
-        throw_exception(dl_exception());
+        throw_exception(dynamic_library_exception("dynamic library load failed."));
     }
 #else
     handle_ = ::dlopen(path_.data(), RTLD_LAZY | RTLD_LOCAL);
     if (!handle_) {
-        throw_exception(dl_exception(::dlerror()));
+        throw_exception(dynamic_library_exception(::dlerror()));
     }
 #endif
 }
@@ -33,13 +34,13 @@ void dynamic_library::close() {
     }
 }
 
-dynamic_library::dynamic_library(const string& path)
-        : handle_(nullptr), path_(path) {
+dynamic_library::dynamic_library(const string& pth)
+: handle_(nullptr), path_(pth) {
     open();
 }
 
 dynamic_library::dynamic_library(dynamic_library&& other) noexcept
-        : handle_(other.handle_), path_(move(other.path_)) {
+: handle_(other.handle_), path_(move(other.path_)) {
     other.handle_ = nullptr;
 }
 
@@ -57,15 +58,15 @@ dynamic_library::~dynamic_library() {
     close();
 }
 
-void* dynamic_library::symbol_row(const string& name) const {
+void* dynamic_library::symbol(const string& name) const {
     if (!is_open()) {
-        throw_exception(dl_exception("Library not loaded"));
+        throw_exception(dynamic_library_exception("Library not loaded"));
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data());
     if (!proc) {
-        throw_exception(dl_exception("GetProcAddress failed"));
+        throw_exception(dynamic_library_exception("GetProcAddress failed"));
     }
     return reinterpret_cast<void*>(proc);
 #else
@@ -73,7 +74,7 @@ void* dynamic_library::symbol_row(const string& name) const {
     void* sym = ::dlsym(handle_, name.data());
     const char* error = ::dlerror();
     if (error) {
-        throw_exception(dl_exception(error));
+        throw_exception(dynamic_library_exception(error));
     }
     return sym;
 #endif

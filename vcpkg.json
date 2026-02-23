@@ -1,0 +1,47 @@
+{
+  "name": "mstl",
+  "version": "1.4.0",
+  "description": "A Modern C++ Library with extended functionality",
+  "homepage": "https://github.com/aurora250/MSTL",
+  "dependencies": [
+    {
+      "name": "openssl",
+      "features": ["tools"]
+    },
+    {
+      "name": "libpq",
+      "features": ["ssl"]
+    },
+    "zlib",
+    "libmysql",
+    "sqlite3",
+    "hiredis"
+  ],
+  "features": {
+    "postgresql": {
+      "description": "PostgreSQL support",
+      "dependencies": ["libpq"]
+    },
+    "mysql": {
+      "description": "MySQL support",
+      "dependencies": ["libmysql"]
+    },
+    "sqlite3": {
+      "description": "SQLite3 support",
+      "dependencies": ["sqlite3"]
+    },
+    "redis": {
+      "description": "Redis support",
+      "dependencies": ["hiredis"]
+    },
+    "zlib": {
+      "description": "zlib compression support",
+      "dependencies": ["zlib"]
+    },
+    "openssl": {
+      "description": "OpenSSL support",
+      "dependencies": ["openssl"]
+    }
+  },
+  "default-features": ["postgresql", "mysql", "sqlite3", "redis", "zlib", "openssl"]
+}

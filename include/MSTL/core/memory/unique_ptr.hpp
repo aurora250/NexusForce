@@ -217,7 +217,8 @@ public:
      * @param p 要管理的指针
      */
     template <typename Del = Deleter, typename = DeleterConstraint<Del>>
-    MSTL_CONSTEXPR20 unique_ptr(pointer p) noexcept : data_(p) {}
+    MSTL_CONSTEXPR20 unique_ptr(pointer p) noexcept
+    : data_(p) {}
 
     /**
      * @brief 从指针和复制删除器复制构造
@@ -227,8 +228,8 @@ public:
      */
     template <typename Del = deleter_type,
         enable_if_t<is_copy_constructible<Del>::value, int> = 0>
-    MSTL_CONSTEXPR20 unique_ptr(pointer ptr, const deleter_type& del)
-    noexcept : data_(ptr, del) {}
+    MSTL_CONSTEXPR20 unique_ptr(pointer ptr, const deleter_type& del) noexcept
+    : data_(ptr, del) {}
 
     /**
      * @brief 从指针和移动删除器移动构造

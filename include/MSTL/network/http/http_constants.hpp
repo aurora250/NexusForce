@@ -1,102 +1,264 @@
 #ifndef MSTL_NETWORK_HTTP_CONSTANTS_HPP__
 #define MSTL_NETWORK_HTTP_CONSTANTS_HPP__
+
+/**
+ * @file http_constants.hpp
+ * @brief HTTP协议常量定义
+ *
+ * 此文件提供了HTTP协议相关的常量定义，包括：
+ * - HTTP状态码枚举
+ * - HTTP方法定义
+ * - 内容类型定义
+ * - Cookie名称常量
+ * - 协议分隔符
+ */
+
 #include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
-MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, exception, "Http Actions Failed");
+/**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
 
+/**
+ * @struct http_exception
+ * @extends network_exception
+ * @brief HTTP操作异常
+ */
+MSTL_ERROR_BUILD_FINAL_CLASS(http_exception, network_exception, "Http Actions Failed");
 
+/** @} */ // Exceptions
+
+/**
+ * @defgroup Http Http
+ * @brief HTTP协议及操作
+ * @{
+ */
+
+/**
+ * @enum HTTP_STATUS
+ * @brief HTTP状态码枚举
+ *
+ * 定义了标准的HTTP状态码，按响应类别分组：
+ * - 1xx：信息性状态码
+ * - 2xx：成功状态码
+ * - 3xx：重定向状态码
+ * - 4xx：客户端错误状态码
+ * - 5xx：服务器错误状态码
+ */
 enum class HTTP_STATUS : uint32_t {
-    // 1xx Message Codes
-
-    // Server received the request header and can continue to send the request body
+    /**
+     * @brief 100 Continue
+     * 服务器收到请求头，客户端可以继续发送请求体
+     */
     S1_CONTINUE = 100,
-    // Consent to switch protocols
+
+    /**
+     * @brief 101 Switching Protocols
+     * 同意切换协议
+     */
     S1_SWITCH_PROTOCOL = 101,
 
-    // 2xx Success Codes
-
-    // Request succeed
+    /**
+     * @brief 200 OK
+     * 请求成功
+     */
     S2_OK = 200,
-    // Request succeed and created new resources
+
+    /**
+     * @brief 201 Created
+     * 请求成功并创建了新资源
+     */
     S2_CREATED = 201,
-    // Request succeed but no content is returned
+
+    /**
+     * @brief 204 No Content
+     * 请求成功但无内容返回
+     */
     S2_NO_CONTENT = 204,
-    // Partial request succeed
+
+    /**
+     * @brief 206 Partial Content
+     * 部分请求成功（范围请求）
+     */
     S2_PARTIAL_CONTENT = 206,
 
-    // 3xx Redirect Codes
-
-    // Resources are permanently migrated to the new URL
+    /**
+     * @brief 301 Moved Permanently
+     * 资源已永久迁移到新URL
+     */
     S3_MOVED_PERMANENT = 301,
-    // Resources are temporarily migrated to the new URL
+
+    /**
+     * @brief 302 Found
+     * 资源临时迁移到新URL
+     */
     S3_FOUND = 302,
-    // Resources are unmodified and use the local cache to save
+
+    /**
+     * @brief 304 Not Modified
+     * 资源未修改，可使用本地缓存
+     */
     S3_NO_MODIFIED = 304,
-    // Temporary redirect
+
+    /**
+     * @brief 307 Temporary Redirect
+     * 临时重定向
+     */
     S3_TEMPORARY_REDIRECT = 307,
-    // Permanent redirect
+
+    /**
+     * @brief 308 Permanent Redirect
+     * 永久重定向
+     */
     S3_PERMANENT_REDIRECT = 308,
 
-    // 4xx Client Error Codes
-
-    // Request is in the wrong format
+    /**
+     * @brief 400 Bad Request
+     * 请求格式错误
+     */
     S4_BAD_REQUEST = 400,
-    // Identity verification is required
+
+    /**
+     * @brief 401 Unauthorized
+     * 需要身份验证
+     */
     S4_UNAUTHORIZED = 401,
-    // Server rejects request
+
+    /**
+     * @brief 403 Forbidden
+     * 服务器拒绝请求
+     */
     S4_FORBIDDEN = 403,
-    // The requested resource does not exist
+
+    /**
+     * @brief 404 Not Found
+     * 请求的资源不存在
+     */
     S4_NOT_FOUNT = 404,
-    // The request method is not allowed or not existed
+
+    /**
+     * @brief 405 Method Not Allowed
+     * 请求方法不允许
+     */
     S4_METHOD_NOT_ALLOWED = 405,
-    // Client request timeout
+
+    /**
+     * @brief 408 Request Timeout
+     * 客户端请求超时
+     */
     S4_REQUEST_TIMEOUT = 408,
-    // The request is too large
+
+    /**
+     * @brief 413 Payload Too Large
+     * 请求体过大
+     */
     S4_PAYLOAD_LARGE = 413,
-    // The URL of the request is too long
+
+    /**
+     * @brief 414 URI Too Long
+     * 请求URL过长
+     */
     S4_URL_LONG = 414,
-    // Excessive number of requests
+
+    /**
+     * @brief 429 Too Many Requests
+     * 请求次数过多
+     */
     S4_MANY_REQUESTS = 429,
 
-    // 5xx Server Error Codes
-
-    // Internal server error
+    /**
+     * @brief 500 Internal Server Error
+     * 服务器内部错误
+     */
     S5_INTERNAL_ERROR = 500,
-    // Invalid upstream server response
+
+    /**
+     * @brief 502 Bad Gateway
+     * 上游服务器响应无效
+     */
     S5_BAD_GATEWAY = 502,
-    // The service is temporarily unavailable
+
+    /**
+     * @brief 503 Service Unavailable
+     * 服务暂时不可用
+     */
     S5_SERVICE_UNAVAILABLE = 503,
-    // The upstream server responds too slowly
+
+    /**
+     * @brief 504 Gateway Timeout
+     * 上游服务器响应超时
+     */
     S5_GATEWAY_TIMEOUT = 504,
-    // The HTTP version of the request is not supported
+
+    /**
+     * @brief 505 HTTP Version Not Supported
+     * 不支持的HTTP版本
+     */
     S5_HTTP_VERSION_NOT_SUPPORT = 505
 };
 
 
+/**
+ * @brief HTTP协议行分隔符
+ * 用于分隔HTTP请求/响应行和头部
+ */
 MSTL_INLINE17 constexpr string_view HTTP_CRLF = "\r\n";
+
+/**
+ * @brief HTTP协议头部结束分隔符
+ * 用于标记HTTP头部结束，后跟消息体
+ */
 MSTL_INLINE17 constexpr string_view HTTP_CRLF2 = "\r\n\r\n";
 
 
+/**
+ * @struct HTTP_CONTENT
+ * @brief HTTP内容类型定义
+ *
+ * 定义了标准的HTTP Content-Type值，并提供类型判断方法。
+ */
 struct MSTL_API HTTP_CONTENT : istringify<HTTP_CONTENT> {
 private:
-    string content_{"UNKNOWN"};
+    string content_{"UNKNOWN"};  ///< 内容类型字符串
 
 public:
     HTTP_CONTENT() = default;
     HTTP_CONTENT(const HTTP_CONTENT&) = default;
     HTTP_CONTENT& operator =(const HTTP_CONTENT&) = default;
 
-    HTTP_CONTENT(HTTP_CONTENT&& content) noexcept : content_(_MSTL move(content.content_)) {}
+    /**
+     * @brief 移动构造函数
+     * @param other 源对象
+     */
+    HTTP_CONTENT(HTTP_CONTENT&& other) noexcept
+    : content_(_MSTL move(other.content_)) {}
 
-    HTTP_CONTENT& operator =(HTTP_CONTENT&& content) noexcept {
-        if (addressof(content) == this) return *this;
-        content_ = _MSTL move(content.content_);
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
+     */
+    HTTP_CONTENT& operator =(HTTP_CONTENT&& other) noexcept {
+        if (addressof(other) == this) return *this;
+        content_ = _MSTL move(other.content_);
         return *this;
     }
 
-    explicit HTTP_CONTENT(const string& content) : content_(content) {}
+    /**
+     * @brief 字符串构造函数
+     * @param content 内容类型字符串
+     */
+    explicit HTTP_CONTENT(const string& content)
+    : content_(content) {}
 
+    /**
+     * @brief 字符串赋值运算符
+     * @param content 内容类型字符串
+     * @return 自身引用
+     */
     HTTP_CONTENT& operator =(const string& content) {
         content_ = content;
         return *this;
@@ -104,18 +266,17 @@ public:
 
     ~HTTP_CONTENT() = default;
 
-
-    static const HTTP_CONTENT HTML_TEXT;
-    static const HTTP_CONTENT XML_TEXT;
-    static const HTTP_CONTENT CSS_TEXT;
-    static const HTTP_CONTENT PLAIN_TEXT;
-    static const HTTP_CONTENT JSON_APP;
-    static const HTTP_CONTENT FORM_APP;
-    static const HTTP_CONTENT JPEG_IMG;
-    static const HTTP_CONTENT PNG_IMG;
-    static const HTTP_CONTENT BMP_IMG;
-    static const HTTP_CONTENT WEBP_IMG;
-    static const HTTP_CONTENT HTML_MSG;
+    static const HTTP_CONTENT HTML_TEXT;   ///< text/html
+    static const HTTP_CONTENT XML_TEXT;    ///< text/xml
+    static const HTTP_CONTENT CSS_TEXT;    ///< text/css
+    static const HTTP_CONTENT PLAIN_TEXT;  ///< text/plain
+    static const HTTP_CONTENT JSON_APP;    ///< application/json
+    static const HTTP_CONTENT FORM_APP;    ///< application/x-www-form-urlencoded
+    static const HTTP_CONTENT JPEG_IMG;    ///< image/jpeg
+    static const HTTP_CONTENT PNG_IMG;     ///< image/png
+    static const HTTP_CONTENT BMP_IMG;     ///< image/bmp
+    static const HTTP_CONTENT WEBP_IMG;    ///< image/webp
+    static const HTTP_CONTENT HTML_MSG;    ///< message/html
 
     MSTL_NODISCARD bool is_html_text() const noexcept { return content_ == HTML_TEXT.content_; }
     MSTL_NODISCARD bool is_xml_text() const noexcept { return content_ == XML_TEXT.content_; }
@@ -141,10 +302,29 @@ public:
     MSTL_NODISCARD static bool is_webp_img(const string_view view) noexcept { return view == WEBP_IMG.content_; }
     MSTL_NODISCARD static bool is_html_msg(const string_view view) noexcept { return view == HTML_MSG.content_; }
 
+    /**
+     * @brief 获取左值内容
+     * @return 内容类型字符串
+     */
+    MSTL_NODISCARD const string& content() const & noexcept {
+        return content_;
+    }
 
-    MSTL_NODISCARD string_view content() const & noexcept { return content_.view(); }
-    MSTL_NODISCARD string content() && noexcept { return _MSTL move(content_); }
-    MSTL_NODISCARD string to_string() const { return content_; }
+    /**
+     * @brief 获取右值内容
+     * @return 内容类型字符串
+     */
+    MSTL_NODISCARD string content() && noexcept {
+        return _MSTL move(content_);
+    }
+
+    /**
+     * @brief 转换为字符串
+     * @return 内容类型字符串
+     */
+    MSTL_NODISCARD string to_string() const {
+        return content_;
+    }
 };
 
 
@@ -152,33 +332,68 @@ public:
 #undef DELETE
 #endif
 
+/**
+ * @struct HTTP_METHOD
+ * @brief HTTP方法定义
+ *
+ * 定义了标准的HTTP请求方法，支持方法组合操作。
+ */
 struct MSTL_API HTTP_METHOD : istringify<HTTP_METHOD> {
 private:
-    string method_{"UNKNOWN"};
+    string method_{"UNKNOWN"};  ///< HTTP方法字符串
 
 public:
     HTTP_METHOD() = default;
     HTTP_METHOD(const HTTP_METHOD&) = default;
     HTTP_METHOD& operator =(const HTTP_METHOD&) = default;
 
-    HTTP_METHOD(HTTP_METHOD&& method) noexcept : method_(_MSTL move(method.method_)) {}
-    HTTP_METHOD& operator =(HTTP_METHOD&& method) noexcept {
-        if (_MSTL addressof(method) == this) return *this;
-        method_ = _MSTL move(method.method_);
+    /**
+     * @brief 移动构造函数
+     * @param other 源对象
+     */
+    HTTP_METHOD(HTTP_METHOD&& other) noexcept
+    : method_(_MSTL move(other.method_)) {}
+
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
+     */
+    HTTP_METHOD& operator =(HTTP_METHOD&& other) noexcept {
+        if (_MSTL addressof(other) == this) return *this;
+        method_ = _MSTL move(other.method_);
         return *this;
     }
 
+    /**
+     * @brief 左值字符串构造函数
+     * @param method HTTP方法字符串
+     */
     explicit HTTP_METHOD(const string& method)
     : method_(method) {}
 
+    /**
+     * @brief 左值字符串赋值运算符
+     * @param method HTTP方法字符串
+     * @return 自身引用
+     */
     HTTP_METHOD& operator =(const string& method) {
         method_ = method;
         return *this;
     }
 
+    /**
+     * @brief 右值字符串构造函数
+     * @param method HTTP方法字符串
+     */
     explicit HTTP_METHOD(string&& method)
     : method_(_MSTL move(method)) {}
 
+    /**
+     * @brief 右值字符串赋值运算符
+     * @param method HTTP方法字符串
+     * @return 自身引用
+     */
     HTTP_METHOD& operator =(string&& method) {
         method_ = _MSTL move(method);
         return *this;
@@ -186,29 +401,51 @@ public:
 
     ~HTTP_METHOD() = default;
 
-    static const HTTP_METHOD GET;
-    static const HTTP_METHOD POST;
-    static const HTTP_METHOD HEAD;
-    static const HTTP_METHOD PUT;
-    static const HTTP_METHOD DELETE;
-    static const HTTP_METHOD OPTIONS;
-    static const HTTP_METHOD TRACE;
-    static const HTTP_METHOD CONNECT;
-    static const HTTP_METHOD DEFAULT;
+    static const HTTP_METHOD GET;       ///< GET方法
+    static const HTTP_METHOD POST;      ///< POST方法
+    static const HTTP_METHOD HEAD;      ///< HEAD方法
+    static const HTTP_METHOD PUT;       ///< PUT方法
+    static const HTTP_METHOD DELETE;    ///< DELETE方法
+    static const HTTP_METHOD OPTIONS;   ///< OPTIONS方法
+    static const HTTP_METHOD TRACE;     ///< TRACE方法
+    static const HTTP_METHOD CONNECT;   ///< CONNECT方法
+    static const HTTP_METHOD DEFAULT;   ///< 默认方法
 
+    /**
+     * @brief 获取左值方法
+     * @return 方法字符串引用
+     */
+    MSTL_NODISCARD const string& method() const & noexcept {
+        return method_;
+    }
 
-    MSTL_NODISCARD const string& method() const & noexcept { return method_; }
-    MSTL_NODISCARD string method() && noexcept { return _MSTL move(method_); }
+    /**
+     * @brief 获取右值方法
+     * @return 方法字符串
+     */
+    MSTL_NODISCARD string method() && noexcept {
+        return _MSTL move(method_);
+    }
 
+    /**
+     * @brief 方法组合操作符
+     * @param rhs 右侧方法
+     * @return 组合后的方法（使用逗号分隔）
+     *
+     * 用于表示允许多种方法的场景，如"GET, POST"
+     */
     MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rhs) const & {
         return HTTP_METHOD(method_ + ", " + rhs.method_);
     }
+
     MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rhs) const & {
         return HTTP_METHOD(method_ + ", " + _MSTL move(rhs.method_));
     }
+
     MSTL_NODISCARD HTTP_METHOD operator &(const HTTP_METHOD& rhs) && {
         return HTTP_METHOD(_MSTL move(method_) + ", " + rhs.method_);
     }
+
     MSTL_NODISCARD HTTP_METHOD operator &(HTTP_METHOD&& rhs) && {
         return HTTP_METHOD(_MSTL move(method_) + ", " + _MSTL move(rhs.method_));
     }
@@ -222,27 +459,61 @@ public:
     MSTL_NODISCARD bool is_trace() const noexcept { return method_ == TRACE.method_; }
     MSTL_NODISCARD bool is_connect() const noexcept { return method_ == CONNECT.method_; }
 
-    MSTL_NODISCARD string to_string() const { return method_; }
+    /**
+     * @brief 转换为字符串
+     * @return 方法字符串
+     */
+    MSTL_NODISCARD string to_string() const {
+        return method_;
+    }
 };
 
 
+/**
+ * @struct HTTP_COOKIE_NAME
+ * @brief HTTP Cookie名称定义
+ *
+ * 定义了常见的Cookie名称常量，用于会话管理。
+ */
 struct MSTL_API HTTP_COOKIE_NAME : istringify<HTTP_COOKIE_NAME> {
 private:
-    string cookie_{"UNKNOWN"};
+    string cookie_{"UNKNOWN"};  ///< Cookie名称字符串
 
 public:
     HTTP_COOKIE_NAME() = default;
     HTTP_COOKIE_NAME(const HTTP_COOKIE_NAME&) = default;
     HTTP_COOKIE_NAME& operator =(const HTTP_COOKIE_NAME&) = default;
 
-    HTTP_COOKIE_NAME(HTTP_COOKIE_NAME&& cookie) noexcept : cookie_(_MSTL move(cookie.cookie_)) {}
-    HTTP_COOKIE_NAME& operator =(HTTP_COOKIE_NAME&& cookie) noexcept {
-        if (_MSTL addressof(cookie) == this) return *this;
-        cookie_ = _MSTL move(cookie.cookie_);
+    /**
+     * @brief 移动构造函数
+     * @param other 源对象
+     */
+    HTTP_COOKIE_NAME(HTTP_COOKIE_NAME&& other) noexcept
+    : cookie_(_MSTL move(other.cookie_)) {}
+
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
+     */
+    HTTP_COOKIE_NAME& operator =(HTTP_COOKIE_NAME&& other) noexcept {
+        if (_MSTL addressof(other) == this) return *this;
+        cookie_ = _MSTL move(other.cookie_);
         return *this;
     }
 
-    explicit HTTP_COOKIE_NAME(const string& cookie) : cookie_(cookie) {}
+    /**
+     * @brief 字符串构造函数
+     * @param cookie Cookie名称
+     */
+    explicit HTTP_COOKIE_NAME(const string& cookie)
+    : cookie_(cookie) {}
+
+    /**
+     * @brief 字符串赋值运算符
+     * @param cookie Cookie名称
+     * @return 自身引用
+     */
     HTTP_COOKIE_NAME& operator =(const string& cookie) {
         cookie_ = cookie;
         return *this;
@@ -250,16 +521,37 @@ public:
 
     ~HTTP_COOKIE_NAME() = default;
 
-    static const HTTP_COOKIE_NAME JSESSIONID;
-    static const HTTP_COOKIE_NAME SESSIONID;
-    static const HTTP_COOKIE_NAME PHPSESSID;
-    static const HTTP_COOKIE_NAME ASPSESSIONID;
+    static const HTTP_COOKIE_NAME JSESSIONID;    ///< Java/JSP会话ID
+    static const HTTP_COOKIE_NAME SESSIONID;     ///< 通用会话ID
+    static const HTTP_COOKIE_NAME PHPSESSID;     ///< PHP会话ID
+    static const HTTP_COOKIE_NAME ASPSESSIONID;  ///< ASP会话ID
 
-    MSTL_NODISCARD const string& cookie_name() const & noexcept { return cookie_; }
-    MSTL_NODISCARD string cookie_name() && noexcept { return _MSTL move(cookie_); }
+    /**
+     * @brief 获取左值Cookie名称
+     * @return Cookie名称引用
+     */
+    MSTL_NODISCARD const string& cookie_name() const & noexcept {
+        return cookie_;
+    }
 
-    MSTL_NODISCARD string to_string() const { return cookie_; }
+    /**
+     * @brief 获取右值Cookie名称
+     * @return Cookie名称字符串
+     */
+    MSTL_NODISCARD string cookie_name() && noexcept {
+        return _MSTL move(cookie_);
+    }
+
+    /**
+     * @brief 转换为字符串
+     * @return Cookie名称字符串
+     */
+    MSTL_NODISCARD string to_string() const {
+        return cookie_;
+    }
 };
+
+/** @} */ // Http
 
 MSTL_END_NAMESPACE__
 #endif // MSTL_NETWORK_HTTP_CONSTANTS_HPP__

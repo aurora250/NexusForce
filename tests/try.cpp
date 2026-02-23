@@ -620,16 +620,16 @@ void test_zlib() {
         string data(3000, 'A');
         printfln("Test data: {} bytes", data.size());
 
-        auto test_level = [&](COMPRESS_LEVEL level, const char* name) {
+        auto test_level = [&](compress_level level, const char* name) {
             auto compressed = zlib_compressor::compress(data.view(), level);
             printfln("  {:20} : {:5} bytes ({:.1f}%)",
                         name, compressed.size(),
                         100.0 * compressed.size() / data.size());
         };
 
-        test_level(COMPRESS_LEVEL::best_speed, "Best Speed");
-        test_level(COMPRESS_LEVEL::default_level, "Default");
-        test_level(COMPRESS_LEVEL::best_compression, "Best Compression");
+        test_level(compress_level::best_speed, "Best Speed");
+        test_level(compress_level::default_level, "Default");
+        test_level(compress_level::best_compression, "Best Compression");
         println();
     }
     {
@@ -691,7 +691,7 @@ void test_zlib() {
         printfln("Match: {}\n", match ? "✓" : "✗");
     }
     {
-        compressor comp(COMPRESS_LEVEL::best_compression);
+        compressor comp(compress_level::best_compression);
         decompressor decomp;
 
         string data = "Test data for statistics. "_s.repeat(10);

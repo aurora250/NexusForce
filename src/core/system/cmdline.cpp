@@ -2,8 +2,10 @@
 #include <MSTL/core/system/console.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/string/to_string.hpp>
-#include <Windows.h>
+#include <processthreadsapi.h>
+#include <windef.h>
 #include <shellapi.h>
+#include <WinBase.h>
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/file/file.hpp>

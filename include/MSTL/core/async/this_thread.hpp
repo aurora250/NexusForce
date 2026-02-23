@@ -8,9 +8,11 @@
  * 此文件提供了跨平台的当前线程操作函数。
  */
 
-#include "MSTL/core/config/c++config.hpp"
+#include "MSTL/core/config/windef.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <emmintrin.h>
+#include <processthreadsapi.h>
+#include <synchapi.h>
 #ifdef max
 #undef max
 #endif

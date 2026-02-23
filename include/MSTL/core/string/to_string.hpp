@@ -271,8 +271,10 @@ __uint_to_buff_aux(CharT*, UT&) noexcept {}
  * @param ux 要转换的值
  * @return 指向转换后字符串起始位置的迭代器
  */
-template <typename CharT, typename UT, enable_if_t<is_unsigned<UT>::value, int> = 0>
+template <typename CharT, typename UT>
 MSTL_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
+    static_assert(is_unsigned_v<UT>, "UT must be a unsigned integer type");
+
 #ifdef MSTL_DATA_BUS_WIDTH_64__
     UT holder = ux;
 #else
@@ -293,8 +295,10 @@ MSTL_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept {
  * @param x 要转换的值
  * @return 字符串表示
  */
-template <typename CharT, typename T, enable_if_t<is_integral<T>::value, int> = 0>
+template <typename CharT, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
+    static_assert(is_integral_v<T>, "T must be a integral type");
+
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
     CharT* rnext = buffer_end;
@@ -317,8 +321,10 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __int_to_string(const T x) {
  * @param x 要转换的值
  * @return 字符串表示
  */
-template <typename CharT, typename T, enable_if_t<conjunction<is_integral<T>, is_unsigned<T>>::value, int> = 0>
+template <typename CharT, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
+    static_assert(is_unsigned_v<T>, "T must be a integral type");
+
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
     CharT* const rnext = _INNER __uint_to_buff(buffer_end, x);
@@ -371,9 +377,11 @@ MSTL_NODISCARD MSTL_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
  * @param force_fixed 强制固定小数表示
  * @return 字符串表示
  */
-template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
+template <typename CharT, typename T>
 MSTL_NODISCARD MSTL_CONSTEXPR20 basic_string<CharT> __float_to_string_with_precision(
     T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
+    static_assert(is_floating_point_v<T>, "T must be a floating point type");
+
     if (x == numeric_traits<T>::quiet_nan()) return basic_string<CharT>{"nan"};
     constexpr T inf = numeric_traits<T>::infinity();
     if (x == inf || x == -inf) {

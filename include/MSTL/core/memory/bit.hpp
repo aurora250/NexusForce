@@ -315,8 +315,7 @@ constexpr bool has_single_bit(const uintptr_t x) noexcept {
  */
 MSTL_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept {
     constexpr int bits = 32;
-    int shift = s % bits;
-    if (shift < 0) shift += bits;
+    const int shift = ((s % bits) + bits) % bits;
     if (shift == 0) return x;
     return (x << shift) | (x >> (bits - shift));
 }
@@ -328,11 +327,7 @@ MSTL_CONSTEXPR14 uint32_t rotate_l32(const uint32_t x, const int s) noexcept {
  * @return 循环右移后的结果
  */
 MSTL_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept {
-    constexpr int bits = 32;
-    int shift = s % bits;
-    if (shift < 0) shift += bits;
-    if (shift == 0) return x;
-    return (x >> shift) | (x << (bits - shift));
+    return rotate_l32(x, -s);
 }
 
 #ifdef MSTL_DATA_BUS_WIDTH_64__
@@ -345,8 +340,7 @@ MSTL_CONSTEXPR14 uint32_t rotate_r32(const uint32_t x, const int s) noexcept {
  */
 MSTL_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept {
     constexpr int bits = 64;
-    int shift = s % bits;
-    if (shift < 0) shift += bits;
+    const int shift = ((s % bits) + bits) % bits;
     if (shift == 0) return x;
     return (x << shift) | (x >> (bits - shift));
 }
@@ -358,11 +352,7 @@ MSTL_CONSTEXPR14 uint64_t rotate_l64(const uint64_t x, const int s) noexcept {
  * @return 循环右移后的结果
  */
 MSTL_CONSTEXPR14 uint64_t rotate_r64(const uint64_t x, const int s) noexcept {
-    constexpr int bits = 64;
-    int shift = s % bits;
-    if (shift < 0) shift += bits;
-    if (shift == 0) return x;
-    return (x >> shift) | (x << (bits - shift));
+    return rotate_l64(x, -s);
 }
 
 #endif

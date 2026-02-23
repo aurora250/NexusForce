@@ -1,9 +1,17 @@
 #include <MSTL/core/numeric/random.hpp>
 #include <MSTL/core/time/datetime.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <minwindef.h>
+#include <minwinbase.h>
+#include <windef.h>
 #include <wincrypt.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <sys/fcntl.h>
@@ -129,7 +137,7 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
         throw_exception(device_exception("Failed to acquire crypto context"));
     }
 
-    if (!::CryptGenRandom(hProv, static_cast<DWORD>(length), reinterpret_cast<BYTE*>(buffer))) {
+    if (!::CryptGenRandom(hProv, static_cast<::DWORD>(length), reinterpret_cast<::BYTE*>(buffer))) {
         ::CryptReleaseContext(hProv, 0);
         throw_exception(device_exception("Failed to generate random bytes"));
     }

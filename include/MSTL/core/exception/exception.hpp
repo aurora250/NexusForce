@@ -19,9 +19,13 @@ MSTL_BEGIN_NAMESPACE__
  */
 
 #define __MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
-	explicit THIS(const char* info = INFO, const char* type = static_type) noexcept \
-		: BASE(info, type) {} \
-	explicit THIS(const exception& e) : BASE(e) {}
+	explicit THIS(const char* info = INFO, \
+				  const char* type = static_type, \
+				  const int code = 0) noexcept \
+	: BASE(info, type, code) {} \
+	\
+	explicit THIS(const exception& e) \
+	: BASE(e) {}
 
 #define __MSTL_ERROR_DERIVED_DESTRUCTOR(CLASS) \
 	virtual ~CLASS() = default;
@@ -42,7 +46,7 @@ MSTL_BEGIN_NAMESPACE__
  * 快速定义可进一步派生的异常类。
  */
 #define MSTL_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \
-	struct MSTL_API THIS : BASE { \
+	struct THIS : BASE { \
 		__MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
 		__MSTL_ERROR_DERIVED_DESTRUCTOR(THIS) \
 		__MSTL_ERROR_TYPE(THIS) \
@@ -58,7 +62,7 @@ MSTL_BEGIN_NAMESPACE__
  * 快速定义不可派生的异常类。
  */
 #define MSTL_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO) \
-	struct MSTL_API THIS final : BASE { \
+	struct THIS final : BASE { \
 		__MSTL_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
 		__MSTL_ERROR_FINAL_DESTRUCTOR(THIS) \
 		__MSTL_ERROR_TYPE(THIS) \
@@ -74,7 +78,7 @@ MSTL_BEGIN_NAMESPACE__
  * @struct exception
  * @brief 异常基类
  */
-struct MSTL_API exception {
+struct exception {
 private:
 	static constexpr size_t INFO_SIZE = 256;  // 异常信息长度
 	static constexpr size_t TYPE_SIZE = 48;   // 类型名称长度
@@ -237,6 +241,12 @@ MSTL_ERROR_BUILD_FINAL_CLASS(math_exception, value_exception, "Math Calculation 
  * @brief 数据库行为异常
  */
 MSTL_ERROR_BUILD_DERIVED_CLASS(database_exception, system_exception, "Database Operation Failed.")
+
+/**
+ * @struct network_exception
+ * @brief 网络操作或行为异常
+ */
+MSTL_ERROR_BUILD_DERIVED_CLASS(network_exception, exception, "Network Operation or Action Failed.")
 
 /** @} */ // Exceptions
 

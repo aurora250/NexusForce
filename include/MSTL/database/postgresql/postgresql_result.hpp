@@ -1,7 +1,6 @@
 #ifndef MSTL_DATABASE_POSTGRESQL_RESULT_HPP__
 #define MSTL_DATABASE_POSTGRESQL_RESULT_HPP__
 #ifdef MSTL_SUPPORT_POSTGRESQL__
-#include "MSTL/core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
 #include <libpq-fe.h>
 MSTL_BEGIN_NAMESPACE__

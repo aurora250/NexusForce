@@ -1,5 +1,9 @@
 #include <MSTL/core/async/condition_variable.hpp>
 #include <MSTL/core/exception/terminate.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <errhandlingapi.h>
+#include <winerror.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <bits/gthr.h>
 #include <cerrno>

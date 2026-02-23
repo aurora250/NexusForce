@@ -624,7 +624,7 @@ public:
      * @tparam Func 回调函数类型
      * @tparam Filter 过滤器类型
      * @param callback 回调函数
-     * @param filter 过滤器（返回optional<新参数>）
+     * @param filter 过滤器
      * @param priority 优先级
      * @return 连接句柄
      *

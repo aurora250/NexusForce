@@ -60,8 +60,8 @@ MSTL_END_INNER__
  * 支持完美转发，可以处理元组的不同引用和常量限定。
  */
 template <typename Func, typename Tuple>
-constexpr auto apply(Func&& f, Tuple&& t)
-noexcept(_INNER __apply_unpack_tuple<_MSTL is_nothrow_invocable, Func, Tuple>::value) -> decltype(auto) {
+constexpr decltype(auto) apply(Func&& f, Tuple&& t)
+noexcept(_INNER __apply_unpack_tuple<_MSTL is_nothrow_invocable, Func, Tuple>::value) {
     using Indices = make_index_sequence<tuple_size<remove_reference_t<Tuple>>::value>;
     return _INNER __apply_impl(_MSTL forward<Func>(f), _MSTL forward<Tuple>(t), Indices{});
 }

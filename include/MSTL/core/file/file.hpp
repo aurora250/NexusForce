@@ -11,17 +11,7 @@
 #include "MSTL/core/file/file_constants.hpp"
 #include "MSTL/core/file/path.hpp"
 #include "MSTL/core/time/datetime.hpp"
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
-#ifdef max
-#undef max
-#endif
-#ifdef min
-#undef min
-#endif
-#endif
 #ifdef MSTL_PLATFORM_LINUX__
-#include <sys/stat.h>
 #include <aio.h>
 #endif
 MSTL_BEGIN_NAMESPACE__

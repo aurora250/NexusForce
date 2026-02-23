@@ -11,7 +11,10 @@
 
 #include "MSTL/core/config/c++config.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <windef.h>
+#include <winreg.h>
+#include <WinUser.h>
+#include <WinBase.h>
 #ifdef max
 #undef max
 #endif

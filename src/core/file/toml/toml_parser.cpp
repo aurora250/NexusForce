@@ -43,7 +43,7 @@ void toml_parser::skip_newlines() noexcept {
 
 void toml_parser::skip_whitespace_no_newline() noexcept {
     while (pos_ < len_) {
-        const char ch = toml_[pos_];
+        const char ch = text_[pos_];
         if (ch == ' ' || ch == '\t') {
             advance();
         } else {
@@ -53,12 +53,12 @@ void toml_parser::skip_whitespace_no_newline() noexcept {
 }
 
 char toml_parser::current() const noexcept {
-    if (pos_ < len_) return toml_[pos_];
+    if (pos_ < len_) return text_[pos_];
     return '\0';
 }
 
 char toml_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return toml_[pos_ + offset];
+    if (pos_ + offset < len_) return text_[pos_ + offset];
     return '\0';
 }
 
@@ -68,7 +68,7 @@ bool toml_parser::eof() const noexcept {
 
 void toml_parser::advance() noexcept {
     if (pos_ < len_) {
-        if (toml_[pos_] == '\n') {
+        if (text_[pos_] == '\n') {
             line_++;
             column_ = 1;
         } else {
@@ -111,7 +111,7 @@ char32_t toml_parser::parse_unicode_escape(const size_t digits) {
         advance();
     }
 
-    const string_view hex_str = toml_.view(start_pos, digits);
+    const string_view hex_str = text_.view(start_pos, digits);
     try {
         const int64_t value = hexadecimal(hex_str).value();
         if (value < 0 || value > 0x10FFFF) {
@@ -318,7 +318,7 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         while (!eof() && is_alpha(current())) {
             advance();
         }
-        const string_view num_str = toml_.view(start_pos, pos_ - start_pos);
+        const string_view num_str = text_.view(start_pos, pos_ - start_pos);
 
         try {
             double val = to_float64(num_str);
@@ -375,7 +375,7 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         }
     }
 
-    string num_str = toml_.substr(start_pos, pos_ - start_pos);
+    string num_str = text_.substr(start_pos, pos_ - start_pos);
     num_str.erase(_MSTL remove(num_str.begin(), num_str.end(), '_'), num_str.end());
 
     try {
@@ -426,7 +426,7 @@ unique_ptr<toml_integer> toml_parser::parse_integer(const int base) {
         throw_parse_error("Expected digit in integer");
     }
 
-    string num_str = toml_.substr(start_pos, pos_ - start_pos);
+    string num_str = text_.substr(start_pos, pos_ - start_pos);
     num_str.erase(_MSTL remove(num_str.begin(), num_str.end(), '_'), num_str.end());
 
     try {
@@ -466,7 +466,7 @@ unique_ptr<toml_datetime> toml_parser::parse_datetime() {
         advance();
     }
 
-    const string_view dt_str = toml_.view(start_pos, pos_ - start_pos);
+    const string_view dt_str = text_.view(start_pos, pos_ - start_pos);
 
     const bool has_date_sep = dt_str.find('-') != string::npos;
     const bool has_time_sep = dt_str.find(':') != string::npos;
@@ -575,7 +575,7 @@ string toml_parser::parse_bare_key() {
     if (pos_ == start_pos) {
         throw_parse_error("Expected key");
     }
-    return toml_.substr(start_pos, pos_ - start_pos);
+    return text_.substr(start_pos, pos_ - start_pos);
 }
 
 string toml_parser::parse_quoted_key() {

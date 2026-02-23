@@ -1,7 +1,5 @@
 #ifndef MSTL_CORE_SYSTEM_STACKTRACE_HPP__
 #define MSTL_CORE_SYSTEM_STACKTRACE_HPP__
-#include "MSTL/core/container/vector.hpp"
-#include "MSTL/core/interface/istringify.hpp"
 
 /**
  * @file stacktrace.hpp
@@ -11,6 +9,8 @@
  * 支持跨平台获取当前调用堆栈，并解析函数符号名称。
  */
 
+#include "MSTL/core/container/vector.hpp"
+#include "MSTL/core/interface/istringify.hpp"
 MSTL_BEGIN_NAMESPACE__
 
 /**

@@ -42,6 +42,29 @@ using byte_t      = unsigned char;
 
 
 /**
+ * @typedef native_id_type
+ * @brief 系统ID类型
+ */
+using native_id_type =
+#ifdef MSTL_PLATFORM_WINDOWS__
+    unsigned long;
+#else
+    int;
+#endif
+
+/**
+ * @typedef native_id_type
+ * @brief 系统句柄类型
+ */
+using native_handle_type =
+#ifdef MSTL_PLATFORM_WINDOWS__
+    void*;
+#else
+    int;
+#endif
+
+
+/**
  * @typedef int8_t
  * @brief 8位有符号整数类型
  */

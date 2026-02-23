@@ -1,5 +1,4 @@
 #include <MSTL/plugin/plugin_manager.hpp>
-#include <MSTL/core/system/console.hpp>
 #include <MSTL/core/file/path.hpp>
 MSTL_BEGIN_NAMESPACE__
 
@@ -16,44 +15,39 @@ plugin_manager::~plugin_manager() {
     shutdown_all();
 }
 
-
-size_t plugin_manager::load_plugins(const string& dir_path) {
+size_t plugin_manager::load_plugins(const string& pth) {
     size_t count = 0;
 
-    if (!path::exists(dir_path) || !path::is_directory(dir_path)) {
+    if (!path::exists(pth) || !path::is_directory(pth)) {
         throw_exception(value_exception("Invalid plugin directory"));
     }
 
-    const path pth(dir_path);
+    const path pths(pth);
 
-    for (const auto& entry : pth) {
+    for (const auto& entry : pths) {
         if (is_plugin_file(entry)) {
-            try {
-                load_plugin(entry);
-                ++count;
-            } catch (const exception& e) {
-                printcln(color::red(), e.what());
-            }
+            load_plugin(entry);
+            ++count;
         }
     }
     return count;
 }
 
-void plugin_manager::load_plugin(const string_view filepath) {
+void plugin_manager::load_plugin(const string_view pth) {
     lock<mutex> lock(mutex_);
 
-    if (libraries_.count(filepath)) {
-        throw_exception(exception("Plugin already loaded"));
+    if (libraries_.count(pth)) {
+        throw_exception(system_exception("Plugin already loaded"));
     }
 
-    auto lib = make_unique<dynamic_library>(filepath);
+    auto lib = make_unique<dynamic_library>(pth);
 
-    const auto create_func = lib->get_symbol<iplugin*(*)()>(MSTL_PLUGIN_CREATE_FUNC);
-    auto destroy_func = lib->get_symbol<void(*)(iplugin*)>(MSTL_PLUGIN_DESTROY_FUNC);
+    const auto create_func = lib->to_symbol<iplugin*(*)()>(MSTL_PLUGIN_CREATE_FUNC);
+    auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(MSTL_PLUGIN_DESTROY_FUNC);
 
     iplugin* raw_ptr = create_func();
     if (!raw_ptr) {
-        throw_exception(exception("Plugin creation returned null"));
+        throw_exception(system_exception("Plugin creation returned null"));
     }
 
     plugin_deleter deleter(destroy_func);
@@ -61,10 +55,10 @@ void plugin_manager::load_plugin(const string_view filepath) {
 
     const string& name = plugin->get_info().name;
     if (plugins_.count(name)) {
-        throw_exception(exception("Plugin already exists"));
+        throw_exception(system_exception("Plugin already exists"));
     }
 
-    const string lib_path = filepath;
+    const string lib_path = pth;
     libraries_[lib_path] = move(lib);
     plugin_to_library_[name] = move(lib_path);
     plugins_[name] = move(plugin);
@@ -86,7 +80,7 @@ bool plugin_manager::unload_plugin(const string& name) {
     return true;
 }
 
-iplugin* plugin_manager::get_plugin(const string &name) {
+iplugin* plugin_manager::get_plugin(const string& name) {
     lock<mutex> lock(mutex_);
     const auto it = plugins_.find(name);
     return (it != plugins_.end()) ? it->second.get() : nullptr;

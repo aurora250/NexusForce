@@ -360,5 +360,7 @@ exception_ptr MSTL_API current_exception() noexcept;
  */
 void MSTL_API rethrow_exception(const exception_ptr& p);
 
+/** @} */ // ExceptionHandling
+
 MSTL_END_NAMESPACE__
 #endif // MSTL_CORE_EXCEPTION_EXCEPTION_PTR_HPP__

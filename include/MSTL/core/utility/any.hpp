@@ -502,6 +502,9 @@ T any_cast(const any& value) {
     MSTL_UNREACHABLE;
 }
 
+
+/// @cond
+
 template <typename T>
 void any::internal_manage<T>::manage(const any_operation op, const any* value, ArgT* arg) {
     auto ptr = reinterpret_cast<const T*>(&value->storage_.buffer_);
@@ -568,6 +571,8 @@ void any::external_manage<T>::manage(const any_operation op, const any* value, A
         }
     }
 }
+
+/// @endcond
 
 /** @} */ // Any
 

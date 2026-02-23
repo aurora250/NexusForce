@@ -264,6 +264,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
@@ -305,6 +306,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp
@@ -339,7 +341,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/plugin/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
 )
 

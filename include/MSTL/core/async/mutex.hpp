@@ -10,7 +10,8 @@
 
 #include "MSTL/core/typeinfo/type_traits.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include "MSTL/core/config/windef.hpp"
+#include <synchapi.h>
 #ifdef max
 #undef max
 #endif

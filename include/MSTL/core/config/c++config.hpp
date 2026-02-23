@@ -10,7 +10,7 @@
  * 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
  */
 
-#include "MSTL/core/config/undef_cmacro.hpp"
+#include "MSTL/core/config/mainpage.hpp"
 #include <assert.h>
 
 /**
@@ -70,6 +70,35 @@
 #error "MSTL: 不支持的操作系统"
 #endif
 
+
+#ifdef MSTL_PLATFORM_WINDOWS__
+
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#ifdef bool
+#undef bool
+#endif
+
+#ifdef true
+#undef true
+#endif
+
+#ifdef false
+#undef false
+#endif
+
+#ifdef max
+#undef max
+#endif
+
+#ifdef min
+#undef min
+#endif
+
+#endif
+
 /** @} */ // PlatformDetection
 
 /**
@@ -77,13 +106,6 @@
  * @brief 检测和定义编译器的宏
  * @{
  */
-
-#ifdef MSTL_PLATFORM_WINDOWS__
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#endif
-
 
 #if defined(__GNUC__) || defined(MSTL_DOXYGEN_GENERATE)
     /**

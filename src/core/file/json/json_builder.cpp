@@ -5,25 +5,25 @@ json_builder& json_builder::begin_object() {
     auto new_object = make_unique<json_object>();
     json_object* obj_ptr = new_object.get();
 
-    if (contexts.empty()) {
-        if (root) {
+    if (contexts_.empty()) {
+        if (root_) {
             throw_exception(json_exception("Root value already set"));
         }
-        root = _MSTL move(new_object);
+        root_ = _MSTL move(new_object);
     } else {
-        const auto & current = contexts.top();
-        if (current.type == ARRAY) {
+        const auto & current = contexts_.top();
+        if (current.type == array) {
             current.array_ptr->add_element(_MSTL move(new_object));
-        } else if (current.type == OBJECT) {
-            if (current_key.empty()) {
+        } else if (current.type == object) {
+            if (current_key_.empty()) {
                 throw_exception(json_exception("No key set for object value"));
             }
-            current.object_ptr->add_member(current_key, _MSTL move(new_object));
-            current_key.clear();
+            current.object_ptr->add_member(current_key_, _MSTL move(new_object));
+            current_key_.clear();
         }
     }
 
-    contexts.push(frame(OBJECT, obj_ptr));
+    contexts_.push(frame(object, obj_ptr));
     return *this;
 }
 
@@ -31,55 +31,55 @@ json_builder& json_builder::begin_array() {
     auto new_array = make_unique<json_array>();
     json_array* arr_ptr = new_array.get();
 
-    if (contexts.empty()) {
-        if (root) {
+    if (contexts_.empty()) {
+        if (root_) {
             throw_exception(json_exception("Root value already set"));
         }
-        root = _MSTL move(new_array);
+        root_ = _MSTL move(new_array);
     } else {
-        const auto & current = contexts.top();
-        if (current.type == ARRAY) {
+        const auto & current = contexts_.top();
+        if (current.type == array) {
             current.array_ptr->add_element(_MSTL move(new_array));
-        } else if (current.type == OBJECT) {
-            if (current_key.empty()) {
+        } else if (current.type == object) {
+            if (current_key_.empty()) {
                 throw_exception(json_exception("No key set for array value"));
             }
-            current.object_ptr->add_member(current_key, _MSTL move(new_array));
-            current_key.clear();
+            current.object_ptr->add_member(current_key_, _MSTL move(new_array));
+            current_key_.clear();
         }
     }
 
-    contexts.push(frame(ARRAY, arr_ptr));
+    contexts_.push(frame(array, arr_ptr));
     return *this;
 }
 
 json_builder& json_builder::end_object() {
-    if (contexts.empty() || contexts.top().type != OBJECT) {
+    if (contexts_.empty() || contexts_.top().type != object) {
         throw_exception(json_exception("No object to close or context mismatch"));
     }
-    if (!current_key.empty()) {
+    if (!current_key_.empty()) {
         throw_exception(json_exception("Incomplete key-value pair in object"));
     }
-    contexts.pop();
+    contexts_.pop();
     return *this;
 }
 
 json_builder& json_builder::end_array() {
-    if (contexts.empty() || contexts.top().type != ARRAY) {
+    if (contexts_.empty() || contexts_.top().type != array) {
         throw_exception(json_exception("No array to close or context mismatch"));
     }
-    contexts.pop();
+    contexts_.pop();
     return *this;
 }
 
-json_builder& json_builder::key(const string& k) {
-    if (contexts.empty() || contexts.top().type != OBJECT) {
+json_builder& json_builder::key(const string& key) {
+    if (contexts_.empty() || contexts_.top().type != object) {
         throw_exception(json_exception("Key can only be set inside an object"));
     }
-    if (!current_key.empty()) {
+    if (!current_key_.empty()) {
         throw_exception(json_exception("Key already set without corresponding value"));
     }
-    current_key = k;
+    current_key_ = key;
     return *this;
 }
 
@@ -102,16 +102,16 @@ json_builder& json_builder::value_array(_MSTL function<void(json_builder&)>&& bu
 }
 
 unique_ptr<json_value> json_builder::build() {
-    if (!contexts.empty()) {
+    if (!contexts_.empty()) {
         throw_exception(json_exception("Incomplete JSON structure - unclosed objects or arrays"));
     }
-    if (!current_key.empty()) {
+    if (!current_key_.empty()) {
         throw_exception(json_exception("Incomplete key-value pair"));
     }
-    if (!root) {
+    if (!root_) {
         throw_exception(json_exception("No JSON value built"));
     }
-    return _MSTL move(root);
+    return _MSTL move(root_);
 }
 
 MSTL_END_NAMESPACE__

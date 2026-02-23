@@ -71,8 +71,7 @@ private:
     template <typename U>
     using is_valid_optional = bool_constant<
         !is_any_of_v<remove_cv_t<U>, none_t, inplace_construct_tag> &&
-        is_object_v<U> &&
-        !is_array_v<U>>;
+        is_object_v<U> && !is_array_v<U>>;
 
     template <typename U>
     using convertible_from_optional = disjunction<
@@ -358,7 +357,6 @@ public:
      * @brief 从引用可选值赋值
      * @tparam U 源引用类型
      * @param other 源可选值
-     * @return 当前对象的引用
      */
     template <typename U, enable_if_t<is_constructible_v<T, U&>, int> = 0>
     constexpr optional(const optional<U&>& other) {

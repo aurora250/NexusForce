@@ -3,35 +3,35 @@ MSTL_BEGIN_NAMESPACE__
 
 toml_builder::toml_builder() {
     root_ = make_unique<toml_table>();
-    contexts_.push(frame(TABLE, root_.get()));
+    contexts_.push(frame(table, root_.get()));
 }
 
-toml_builder& toml_builder::key(const string& k) {
+toml_builder& toml_builder::key(string key) {
     if (contexts_.empty()) {
         throw_exception(toml_exception("Cannot set key outside of a table context"));
     }
 
     const auto& top = contexts_.top();
-    if (top.type != TABLE && top.type != INLINE_TABLE) {
+    if (top.type != table && top.type != inline_table) {
         throw_exception(toml_exception("Cannot set key in non-table context"));
     }
 
-    current_key_ = k;
+    current_key_ = _MSTL move(key);
     return *this;
 }
 
-toml_builder& toml_builder::begin_table(const string& table_name) {
-    return begin_table(vector<string>{table_name});
+toml_builder& toml_builder::begin_table(const string& name) {
+    return begin_table(vector<string>{name});
 }
 
-toml_builder& toml_builder::begin_table(const vector<string>& table_path) {
-    if (table_path.empty()) {
+toml_builder& toml_builder::begin_table(const vector<string>& path) {
+    if (path.empty()) {
         throw_exception(toml_exception("Table path cannot be empty"));
     }
 
-    toml_table* table = get_or_create_table_path(table_path);
+    toml_table* table_ptr = get_or_create_table_path(path);
 
-    contexts_.push(frame(TABLE, table));
+    contexts_.push(frame(table, table_ptr));
     current_key_.clear();
 
     return *this;
@@ -43,7 +43,7 @@ toml_builder& toml_builder::end_table() {
     }
 
     const auto& top = contexts_.top();
-    if (top.type != TABLE) {
+    if (top.type != table) {
         throw_exception(toml_exception("Current context is not a table"));
     }
 
@@ -62,24 +62,24 @@ toml_builder& toml_builder::begin_inline_table() {
         throw_exception(toml_exception("Cannot create inline table at root"));
     }
 
-    auto inline_table = make_unique<toml_table>(true);
-    toml_table* inline_table_ptr = inline_table.get();
+    auto table_ptr = make_unique<toml_table>(true);
+    toml_table* inline_table_ptr = table_ptr.get();
 
     const auto& top = contexts_.top();
-    if (top.type == ARRAY) {
-        top.array_ptr->add_element(_MSTL move(inline_table));
-    } else if (top.type == TABLE || top.type == INLINE_TABLE) {
+    if (top.type == array) {
+        top.array_ptr->add_element(_MSTL move(table_ptr));
+    } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for inline table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
             throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
-        top.table_ptr->add_member(current_key_, _MSTL move(inline_table));
+        top.table_ptr->add_member(current_key_, _MSTL move(table_ptr));
         current_key_.clear();
     }
 
-    contexts_.push(frame(INLINE_TABLE, inline_table_ptr));
+    contexts_.push(frame(inline_table, inline_table_ptr));
 
     return *this;
 }
@@ -90,7 +90,7 @@ toml_builder& toml_builder::end_inline_table() {
     }
 
     const auto& top = contexts_.top();
-    if (top.type != INLINE_TABLE) {
+    if (top.type != inline_table) {
         throw_exception(toml_exception("Current context is not an inline table"));
     }
 
@@ -109,9 +109,9 @@ toml_builder& toml_builder::begin_array() {
     toml_array* arr_ptr = arr.get();
 
     const auto& top = contexts_.top();
-    if (top.type == ARRAY) {
+    if (top.type == array) {
         top.array_ptr->add_element(_MSTL move(arr));
-    } else if (top.type == TABLE || top.type == INLINE_TABLE) {
+    } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for array"));
         }
@@ -122,7 +122,7 @@ toml_builder& toml_builder::begin_array() {
         current_key_.clear();
     }
 
-    contexts_.push(frame(ARRAY, arr_ptr));
+    contexts_.push(frame(array, arr_ptr));
 
     return *this;
 }
@@ -133,7 +133,7 @@ toml_builder& toml_builder::end_array() {
     }
 
     const auto& top = contexts_.top();
-    if (top.type != ARRAY) {
+    if (top.type != array) {
         throw_exception(toml_exception("Current context is not an array"));
     }
 
@@ -143,22 +143,22 @@ toml_builder& toml_builder::end_array() {
     return *this;
 }
 
-toml_builder& toml_builder::begin_array_table(const string& array_table_name) {
-    return begin_array_table(vector<string>{array_table_name});
+toml_builder& toml_builder::begin_array_table(const string& name) {
+    return begin_array_table(vector<string>{name});
 }
 
-toml_builder& toml_builder::begin_array_table(const vector<string>& array_table_path) {
-    if (array_table_path.empty()) {
+toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
+    if (path.empty()) {
         throw_exception(toml_exception("Array table path cannot be empty"));
     }
 
-    toml_array* arr = get_or_create_array_for_array_table(array_table_path);
+    toml_array* arr = get_or_create_array_for_array_table(path);
     auto new_table = make_unique<toml_table>();
     toml_table* new_table_ptr = new_table.get();
     arr->add_element(_MSTL move(new_table));
 
     // 压入新的上下文
-    contexts_.push(frame(TABLE, new_table_ptr));
+    contexts_.push(frame(table, new_table_ptr));
     current_key_.clear();
 
     return *this;
@@ -173,24 +173,24 @@ toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& bu
         throw_exception(toml_exception("Cannot create table at root using value_table"));
     }
 
-    auto table = make_unique<toml_table>();
-    toml_table* table_ptr = table.get();
+    auto unique_table = make_unique<toml_table>();
+    toml_table* table_ptr = unique_table.get();
 
     const auto& top = contexts_.top();
-    if (top.type == ARRAY) {
-        top.array_ptr->add_element(_MSTL move(table));
-    } else if (top.type == TABLE || top.type == INLINE_TABLE) {
+    if (top.type == array) {
+        top.array_ptr->add_element(_MSTL move(unique_table));
+    } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
             throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
-        top.table_ptr->add_member(current_key_, _MSTL move(table));
+        top.table_ptr->add_member(current_key_, _MSTL move(unique_table));
         current_key_.clear();
     }
 
-    contexts_.push(frame(TABLE, table_ptr));
+    contexts_.push(frame(table, table_ptr));
     build_func(*this);
     contexts_.pop();
 

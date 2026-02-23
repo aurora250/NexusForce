@@ -3,6 +3,9 @@
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <MSTL/core/async/call_once.hpp>
 #include <MSTL/core/async/mutex.hpp>
+#include <windef.h>
+#include <WinBase.h>
+#include <verrsrc.h>
 #include <DbgHelp.h>
 #else
 #include <execinfo.h>

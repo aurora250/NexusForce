@@ -2,88 +2,103 @@
 #include <MSTL/core/file/json/json_parser.hpp>
 MSTL_BEGIN_NAMESPACE__
 
-unique_ptr<json_string> json_parser::parse_string() {
-    pos++;
-    const size_t start_pos = pos;
+void json_parser::skip_space() noexcept {
+    while (pos_ < len_ && _MSTL is_space(text_[pos_])) {
+        pos_++;
+    }
+}
 
-    while (pos < length) {
-        const char c = json[pos++];
+char json_parser::current() const noexcept {
+    if (pos_ < len_) return text_[pos_];
+    return '\0';
+}
+
+bool json_parser::eof() const noexcept {
+    return pos_ >= len_;
+}
+
+unique_ptr<json_string> json_parser::parse_string() {
+    pos_++;
+    const size_t start_pos = pos_;
+
+    while (pos_ < len_) {
+        const char c = text_[pos_++];
         if (c == '\\') {
-            if (pos >= length) {
+            if (pos_ >= len_) {
                 throw_exception(json_exception("Unterminated escape sequence in string"));
             }
-            pos++;
+            pos_++;
         } else if (c == '"') {
-            const size_t end_pos = pos - 1;
-            return make_unique<json_string>(json.view(start_pos, end_pos - start_pos));
+            const size_t end_pos = pos_ - 1;
+            return make_unique<json_string>(text_.view(start_pos, end_pos - start_pos));
         }
     }
     throw_exception(json_exception("Unterminated string"));
-    return make_unique<json_string>("");
+    MSTL_UNREACHABLE;
 }
 
 unique_ptr<json_number> json_parser::parse_number() {
-    const size_t start = pos;
+    const size_t start = pos_;
     if (current() == '-') {
-        pos++;
+        pos_++;
     }
     if (current() == '0') {
-        pos++;
-        if (pos < length && json[pos] == '.') {
-            pos++;
-            if (pos >= length || !_MSTL is_digit(json[pos])) {
+        pos_++;
+        if (pos_ < len_ && text_[pos_] == '.') {
+            pos_++;
+            if (pos_ >= len_ || !_MSTL is_digit(text_[pos_])) {
                 throw_exception(json_exception("Invalid decimal part"));
             }
-            while (pos < length && _MSTL is_digit(json[pos])) {
-                pos++;
+            while (pos_ < len_ && _MSTL is_digit(text_[pos_])) {
+                pos_++;
             }
         }
     } else if (_MSTL is_digit(current())) {
-        while (pos < length && _MSTL is_digit(json[pos])) {
-            pos++;
+        while (pos_ < len_ && _MSTL is_digit(text_[pos_])) {
+            pos_++;
         }
-        if (pos < length && json[pos] == '.') {
-            pos++;
-            if (pos >= length || !_MSTL is_digit(json[pos])) {
+        if (pos_ < len_ && text_[pos_] == '.') {
+            pos_++;
+            if (pos_ >= len_ || !_MSTL is_digit(text_[pos_])) {
                 throw_exception(json_exception("Invalid decimal part"));
             }
-            while (pos < length && _MSTL is_digit(json[pos])) {
-                pos++;
+            while (pos_ < len_ && _MSTL is_digit(text_[pos_])) {
+                pos_++;
             }
         }
     } else {
         throw_exception(json_exception("Invalid number format"));
     }
 
-    if (pos < length && (json[pos] == 'e' || json[pos] == 'E')) {
-        pos++;
-        if (pos < length && (json[pos] == '+' || json[pos] == '-')) {
-            pos++;
+    if (pos_ < len_ && (text_[pos_] == 'e' || text_[pos_] == 'E')) {
+        pos_++;
+        if (pos_ < len_ && (text_[pos_] == '+' || text_[pos_] == '-')) {
+            pos_++;
         }
-        if (pos >= length || !_MSTL is_digit(json[pos])) {
+        if (pos_ >= len_ || !_MSTL is_digit(text_[pos_])) {
             throw_exception(json_exception("Invalid exponent part"));
         }
-        while (pos < length && _MSTL is_digit(json[pos])) {
-            pos++;
+        while (pos_ < len_ && _MSTL is_digit(text_[pos_])) {
+            pos_++;
         }
     }
 
     try {
-        double value = float64::parse(json.view(start, pos - start));
+        double value = float64::parse(text_.view(start, pos_ - start));
         return make_unique<json_number>(value);
     } catch (...) {
         throw_exception(json_exception("Invalid number value"));
     }
-    return make_unique<json_number>(numeric_traits<float64_t>::max());
+    MSTL_UNREACHABLE;
 }
 
 unique_ptr<json_value> json_parser::parse_keyword() {
-    const size_t start = pos;
-    while (pos < length && _MSTL is_alpha(json[pos])) {
-        pos++;
+    const size_t start = pos_;
+    while (pos_ < len_ && _MSTL is_alpha(text_[pos_])) {
+        pos_++;
     }
 
-    const string_view keyword = json.view(start, pos - start);
+    const string_view keyword = text_.view(start, pos_ - start);
     if (keyword == "true") {
         return make_unique<json_bool>(true);
     } else if (keyword == "false") {
@@ -96,12 +111,12 @@ unique_ptr<json_value> json_parser::parse_keyword() {
 }
 
 unique_ptr<json_array> json_parser::parse_array() {
-    pos++;
+    pos_++;
     auto array = make_unique<json_array>();
 
     skip_space();
     if (current() == ']') {
-        pos++;
+        pos_++;
         return array;
     }
 
@@ -112,10 +127,10 @@ unique_ptr<json_array> json_parser::parse_array() {
         skip_space();
 
         if (current() == ']') {
-            pos++;
+            pos_++;
             break;
         } else if (current() == ',') {
-            pos++;
+            pos_++;
             skip_space();
         } else {
             throw_exception(json_exception("Expected comma or closing bracket in array"));
@@ -125,12 +140,12 @@ unique_ptr<json_array> json_parser::parse_array() {
 }
 
 unique_ptr<json_object> json_parser::parse_object() {
-    pos++;
+    pos_++;
     auto object = make_unique<json_object>();
 
     skip_space();
     if (current() == '}') {
-        pos++;
+        pos_++;
         return object;
     }
 
@@ -146,7 +161,7 @@ unique_ptr<json_object> json_parser::parse_object() {
         if (current() != ':') {
             throw_exception(json_exception("Expected colon after key in object"));
         }
-        pos++;
+        pos_++;
         skip_space();
 
         auto value = parse_value();
@@ -154,10 +169,10 @@ unique_ptr<json_object> json_parser::parse_object() {
 
         skip_space();
         if (current() == '}') {
-            pos++;
+            pos_++;
             break;
         } else if (current() == ',') {
-            pos++;
+            pos_++;
             skip_space();
         } else {
             throw_exception(json_exception("Expected comma or closing brace in object"));
@@ -190,7 +205,7 @@ unique_ptr<json_value> json_parser::parse_value() {
         default:
             throw_exception(json_exception("Unexpected character"));
     }
-    return parse_object();
+    MSTL_UNREACHABLE;
 }
 
 

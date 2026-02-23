@@ -12,6 +12,21 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
+
+/**
+ * @struct pipe_exception
+ * @extends system_exception
+ * @brief 管道操作异常
+ */
+MSTL_ERROR_BUILD_FINAL_CLASS(pipe_exception, system_exception, "Pipe Operation Failed.")
+
+/** @} */ // Exceptions
+
+/**
  * @defgroup Pipe 管道
  * @brief 管道管理工具
  * @{
@@ -25,12 +40,7 @@ MSTL_BEGIN_NAMESPACE__
  */
 class MSTL_API pipe {
 public:
-    using native_handle_type =
-#ifdef MSTL_PLATFORM_WINDOWS__
-        void*;
-#else
-        int;
-#endif
+    using native_handle_type = _MSTL native_handle_type;
 
 private:
 #ifdef MSTL_PLATFORM_WINDOWS__
@@ -51,7 +61,7 @@ public:
     /**
      * @brief 创建管道
      * @param inheritable 子进程是否可继承（仅Windows）
-     * @throws system_exception 创建失败时抛出
+     * @throws pipe_exception 创建失败时抛出
      */
     explicit pipe(bool inheritable);
 

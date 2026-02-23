@@ -1,4 +1,16 @@
 #include <MSTL/core/system/process.hpp>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <MSTL/core/config/windef.hpp>
+#include <windef.h>
+#include <WinBase.h>
+#include <Psapi.h>
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/file/file.hpp>
@@ -6,9 +18,6 @@
 #include <cerrno>
 #include <cstring>
 #include <csignal>
-#endif
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <Psapi.h>
 #endif
 MSTL_BEGIN_NAMESPACE__
 
@@ -43,8 +52,7 @@ static void free_argv(char** argv) noexcept{
 
 #ifdef MSTL_PLATFORM_WINDOWS__
 
-static string build_command_line(
-    const string& executable, const vector<string>& args) {
+static string build_command_line(const string& executable, const vector<string>& args) {
     string cmd_line = "\"" + executable + "\"";
     for (const auto& arg : args) {
         cmd_line += " \"" + arg + "\"";
@@ -55,8 +63,9 @@ static string build_command_line(
 #endif
 
 
-process::info process::create(const string& executable, const vector<string>& args, bool capture_output) {
-    info info{};
+process::state_info process::create(
+    const string& executable, const vector<string>& args, bool capture_output) {
+    state_info info{};
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::STARTUPINFOA si{};
@@ -72,17 +81,23 @@ process::info process::create(const string& executable, const vector<string>& ar
 
     string cmd_line = build_command_line(executable, args);
 
+    ::PROCESS_INFORMATION pi;
     const ::BOOL success = ::CreateProcessA(
         nullptr, cmd_line.data(),
         nullptr, nullptr,
         capture_output ? TRUE : FALSE,
-        0, nullptr, nullptr, &si, &info.pi
+        0, nullptr, nullptr, &si, &pi
     );
 
     if (!success) {
-        throw_exception(system_exception("CreateProcess failed"));
+        throw_exception(process_exception("CreateProcess failed"));
     }
-    info.process_id = info.pi.dwProcessId;
+
+    info.process_handle = pi.hProcess;
+    info.thread_handle = pi.hThread;
+    info.process_id = pi.dwProcessId;
+    info.thread_id = pi.dwThreadId;
+
     if (capture_output) {
         info.stdout_pipe.close_write();
     }
@@ -93,7 +108,7 @@ process::info process::create(const string& executable, const vector<string>& ar
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
-        throw_exception(system_exception(::strerror(errno)));
+        throw_exception(process_exception(::strerror(errno)));
     }
 
     if (pid == 0) {
@@ -131,24 +146,24 @@ process::info process::create(const string& executable, const vector<string>& ar
     return info;
 }
 
-int process::wait_for(info& info, int timeout_ms) {
+int process::wait_for(state_info& info, int timeout_ms) {
 #ifdef MSTL_PLATFORM_WINDOWS__
     const ::DWORD timeout = (timeout_ms < 0) ?
         numeric_traits<::DWORD>::max() :
         static_cast<::DWORD>(timeout_ms);
-    ::DWORD result = ::WaitForSingleObject(info.pi.hProcess, timeout);
+    ::DWORD result = ::WaitForSingleObject(info.process_handle, timeout);
 
     if (result == WAIT_TIMEOUT) {
         return -1;
     }
     if (result == WAIT_FAILED) {
-        throw_exception(system_exception("WaitForSingleObject failed"));
+        throw_exception(process_exception("WaitForSingleObject failed"));
     }
     info.stdout_output = info.stdout_pipe.read_available();
 
     ::DWORD exit_code;
-    if (!::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
-        throw_exception(system_exception("GetExitCodeProcess failed"));
+    if (!::GetExitCodeProcess(info.process_handle, &exit_code)) {
+        throw_exception(process_exception("GetExitCodeProcess failed"));
     }
     return static_cast<int>(exit_code);
 #else
@@ -156,7 +171,7 @@ int process::wait_for(info& info, int timeout_ms) {
 
     if (timeout_ms < 0) {
         if (::waitpid(info.process_id, &status, 0) == -1) {
-            throw_exception(system_exception(::strerror(errno)));
+            throw_exception(process_exception(::strerror(errno)));
         }
     } else {
         int elapsed = 0;
@@ -165,7 +180,7 @@ int process::wait_for(info& info, int timeout_ms) {
             constexpr int sleep_interval = 100;
             const ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
             if (result == -1) {
-                throw_exception(system_exception(::strerror(errno)));
+                throw_exception(process_exception(::strerror(errno)));
             }
             if (result > 0) break;
 
@@ -189,12 +204,12 @@ int process::wait_for(info& info, int timeout_ms) {
 #endif
 }
 
-bool process::terminate(const info& info) noexcept {
+bool process::terminate(const state_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    const ::BOOL result = ::TerminateProcess(info.pi.hProcess, 1);
+    const ::BOOL result = ::TerminateProcess(info.process_handle, 1);
     if (result) {
-        ::CloseHandle(info.pi.hProcess);
-        ::CloseHandle(info.pi.hThread);
+        ::CloseHandle(info.process_handle);
+        ::CloseHandle(info.thread_handle);
     }
     return result != 0;
 #else
@@ -209,28 +224,28 @@ bool process::terminate(const info& info) noexcept {
 #endif
 }
 
-bool process::suspend(const info& info) noexcept {
+bool process::suspend(const state_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (info.pi.hThread == nullptr) return false;
-    return ::SuspendThread(info.pi.hThread) != static_cast<DWORD>(-1);
+    if (info.thread_handle == nullptr) return false;
+    return ::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
     return ::kill(info.process_id, SIGSTOP) == 0;
 #endif
 }
 
-bool process::resume(const info& info) noexcept {
+bool process::resume(const state_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
-    if (info.pi.hThread == nullptr) return false;
-    return ::ResumeThread(info.pi.hThread) != static_cast<DWORD>(-1);
+    if (info.thread_handle == nullptr) return false;
+    return ::ResumeThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
     return ::kill(info.process_id, SIGCONT) == 0;
 #endif
 }
 
-bool process::is_running(const info& info) noexcept {
+bool process::is_running(const state_info& info) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
-    if (::GetExitCodeProcess(info.pi.hProcess, &exit_code)) {
+    if (::GetExitCodeProcess(info.process_handle, &exit_code)) {
         return exit_code == STILL_ACTIVE;
     }
     return false;
@@ -248,11 +263,11 @@ process::native_id_type process::current_id() noexcept {
 #endif
 }
 
-process_memory_info process::memory_info(const info& info) noexcept {
-    process_memory_info mem_info = {0, 0, 0, 0};
+process::memory_info process::get_memory_info(const state_info& info) noexcept {
+    memory_info mem_info = {0, 0, 0, 0};
 #ifdef MSTL_PLATFORM_WINDOWS__
-    PROCESS_MEMORY_COUNTERS pmc;
-    if (::GetProcessMemoryInfo(info.pi.hProcess, &pmc, sizeof(pmc))) {
+    ::PROCESS_MEMORY_COUNTERS pmc;
+    if (::GetProcessMemoryInfo(info.process_handle, &pmc, sizeof(pmc))) {
         mem_info.working_set_size = pmc.WorkingSetSize;
         mem_info.peak_working_set_size = pmc.PeakWorkingSetSize;
         mem_info.pagefile_usage = pmc.PagefileUsage;
@@ -279,19 +294,19 @@ process_memory_info process::memory_info(const info& info) noexcept {
     return mem_info;
 }
 
-process_state process::state(const info& info) noexcept {
+process::state process::get_state(const state_info& info) noexcept {
     if (!is_running(info)) {
-        return process_state::exited;
+        return state::exited;
     }
 
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD exit_code;
-    if (::GetExitCodeProcess(info.pi.hProcess, &exit_code) && exit_code == STILL_ACTIVE) {
-        if (::SuspendThread(info.pi.hThread) != static_cast<::DWORD>(-1)) {
-            ::ResumeThread(info.pi.hThread);
-            return process_state::suspended;
+    if (::GetExitCodeProcess(info.process_handle, &exit_code) && exit_code == STILL_ACTIVE) {
+        if (::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1)) {
+            ::ResumeThread(info.thread_handle);
+            return state::suspended;
         }
-        return process_state::running;
+        return state::running;
     }
 #else
     const path path("/proc/" + to_string(info.process_id) + "/stat");
@@ -300,28 +315,28 @@ process_state process::state(const info& info) noexcept {
         string state;
         size_t pos = 0;
         getline(stat.read(), pos, state, [](char c) { return is_space(c); });
-        if (state == "T") return process_state::suspended;
-        if (state == "Z") return process_state::exited;
-        return process_state::running;
+        if (state == "T") return state::suspended;
+        if (state == "Z") return state::exited;
+        return state::running;
     }
 #endif
-    return process_state::unknown;
+    return state::unknown;
 }
 
-bool process::check_permission(const info& info, process_permission permission) noexcept {
+bool process::check_permission(const state_info& info, permission permission) noexcept {
 #ifdef MSTL_PLATFORM_WINDOWS__
     ::DWORD desired_access = 0;
 
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::read)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::read)) != 0) {
         desired_access |= PROCESS_VM_READ;
     }
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::write)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::write)) != 0) {
         desired_access |= PROCESS_VM_WRITE;
     }
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::terminate)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::terminate)) != 0) {
         desired_access |= PROCESS_TERMINATE;
     }
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::query_info)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::query_info)) != 0) {
         desired_access |= PROCESS_QUERY_INFORMATION;
     }
 
@@ -336,13 +351,13 @@ bool process::check_permission(const info& info, process_permission permission) 
     const string proc_path = "/proc/" + to_string(info.process_id);
 
     int access_mode = 0;
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::read)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::read)) != 0) {
         access_mode |= R_OK;
     }
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::write)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::write)) != 0) {
         access_mode |= W_OK;
     }
-    if ((static_cast<int>(permission) & static_cast<int>(process_permission::execute)) != 0) {
+    if ((static_cast<int>(permission) & static_cast<int>(permission::execute)) != 0) {
         access_mode |= X_OK;
     }
 

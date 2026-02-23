@@ -13,6 +13,7 @@ MSTL_BEGIN_NAMESPACE__
 
 /**
  * @struct cmdline_exception
+ * @extends system_exception
  * @brief 命令行解析异常
  */
 MSTL_ERROR_BUILD_FINAL_CLASS(cmdline_exception, system_exception, "CmdLine Operation Failed.")

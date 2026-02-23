@@ -70,7 +70,7 @@ struct base_char_traits {
      * @param lhs 左序列
      * @param rhs 右序列
      * @param count 要比较的字符数
-     * @return 负值（lhs<rhs）、0（相等）、正值（lhs>rhs）
+     * @return 负值（lhs < rhs）、0（相等）、正值（lhs > rhs）
      */
     MSTL_NODISCARD static constexpr int compare(
         const char_type* lhs, const char_type* rhs, size_t count) noexcept {
@@ -351,7 +351,7 @@ constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lhs, const size
  * @param lh_size 左序列长度
  * @param rhs 右序列
  * @param rh_size 右序列长度
- * @return 负值（lhs<rhs）、0（相等）、正值（lhs>rhs）
+ * @return 负值（lhs < rhs）、0（相等）、正值（lhs > rhs）
  */
 template <typename Traits>
 constexpr int char_traits_compare(const char_traits_ptr_t<Traits> lhs, const size_t lh_size,

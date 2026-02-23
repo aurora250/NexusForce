@@ -7,7 +7,12 @@
 #include "device_constants.hpp"
 #ifdef MSTL_PLATFORM_WINDOWS__
 #include <SetupAPI.h>
-#include <MSTL/core/config/undef_cmacro.hpp>
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
 #endif
 MSTL_BEGIN_NAMESPACE__
 

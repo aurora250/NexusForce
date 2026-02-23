@@ -3,8 +3,11 @@
 #include <MSTL/core/system/console.hpp>
 #include <MSTL/core/system/stacktrace.hpp>
 #include <MSTL/core/exception/terminate.hpp>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
+#ifdef MSTL_PLATFORM_WINDOWS__
+#include <errhandlingapi.h>
+#endif
 #ifdef MSTL_PLATFORM_LINUX__
 #include <signal.h>
 #endif

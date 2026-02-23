@@ -1,7 +1,6 @@
 #ifndef MSTL_DATABASE_REDIS_CONNECT_HPP__
 #define MSTL_DATABASE_REDIS_CONNECT_HPP__
 #ifdef MSTL_SUPPORT_REDIS__
-#include "../../core/config/undef_cmacro.hpp"
 #include "MSTL/database/db_interface.hpp"
 #include <hiredis.h>
 MSTL_BEGIN_NAMESPACE__

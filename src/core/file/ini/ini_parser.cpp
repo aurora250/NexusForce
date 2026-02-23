@@ -18,12 +18,12 @@ void ini_parser::skip_line() noexcept {
 }
 
 char ini_parser::current() const noexcept {
-    if (pos_ < len_) return ini_[pos_];
+    if (pos_ < len_) return text_[pos_];
     return '\0';
 }
 
 char ini_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) return ini_[pos_ + offset];
+    if (pos_ + offset < len_) return text_[pos_ + offset];
     return '\0';
 }
 
@@ -33,7 +33,7 @@ bool ini_parser::eof() const noexcept {
 
 void ini_parser::advance() noexcept {
     if (pos_ < len_) {
-        if (ini_[pos_] == '\n') {
+        if (text_[pos_] == '\n') {
             line_++;
             column_ = 1;
         } else {

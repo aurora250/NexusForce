@@ -1,6 +1,7 @@
 #include <MSTL/core/time/datetime.hpp>
 #ifdef MSTL_PLATFORM_WINDOWS__
-#include <Windows.h>
+#include <MSTL/core/config/windef.hpp>
+#include <sysinfoapi.h>
 #else
 #include <ctime>
 #endif

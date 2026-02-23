@@ -8,6 +8,7 @@
 #include <sys/file.h>
 #include <sys/time.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 #include <ctime>
 #include <cstring>
 #include <cerrno>

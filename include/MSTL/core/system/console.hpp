@@ -12,6 +12,21 @@
 MSTL_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup Exceptions 异常类集
+ * @brief MSTL异常类集
+ * @{
+ */
+
+/**
+ * @struct console_exception
+ * @extends device_exception
+ * @brief 控制台行为异常
+ */
+MSTL_ERROR_BUILD_FINAL_CLASS(console_exception, device_exception, "Pipe Operation Failed.")
+
+/** @} */ // Exceptions
+
+/**
  * @defgroup ConsoleIO 控制台IO
  * @brief 控制台输入输出工具
  * @{
@@ -65,9 +80,9 @@ public:
 
 private:
 #ifdef MSTL_PLATFORM_WINDOWS__
-    ::HANDLE out_{INVALID_HANDLE_VALUE};  ///< 标准输出句柄
-    ::HANDLE in_{INVALID_HANDLE_VALUE};   ///< 标准输入句柄
-    ::COORD saved_cursor_pos_{0, 0};      ///< 保存的光标位置
+    void* out_;  ///< 标准输出句柄
+    void* in_;   ///< 标准输入句柄
+    console_size saved_cursor_pos_{0, 0};  ///< 保存的光标位置
 #else
     int out_{-1};  ///< 标准输出文件描述符
     int in_{-1};   ///< 标准输入文件描述符
@@ -99,6 +114,7 @@ private:
 private:
     /**
      * @brief 私有构造函数
+     * @throws console_exception Windows中如果获取控制台句柄失败
      */
     sys_console();
 
@@ -294,6 +310,7 @@ public:
      * @param mask 掩码字符（'\0'表示不显示）
      * @param show_length 是否显示已输入长度
      * @return 输入的密码
+     * @throws console_exception Windows中如果设置控制台模式失败 / Linux中如果进程被终止
      */
     string password(string_view prompt = "Password: ",  char mask = '*', bool show_length = false);
 
