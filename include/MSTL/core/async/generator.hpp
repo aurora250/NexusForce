@@ -854,10 +854,13 @@ task<void> when_all_helper(Tuple& results, Tasks&&... tasks) {
     auto& current_task = _MSTL get<I>(_MSTL forward_as_tuple(_MSTL forward<Tasks>(tasks)...));
     _MSTL get<I>(results) = co_await _MSTL move(current_task);
     co_await when_all_helper<I + 1>(results, _MSTL forward<Tasks>(tasks)...);
+    co_return;
 }
 
 template <size_t I, typename Tuple, typename... Tasks, enable_if_t<I == sizeof...(Tasks), int> = 0>
-task<void> when_all_helper(Tuple&, Tasks&&...) {}
+task<void> when_all_helper(Tuple&, Tasks&&...) {
+    co_return;
+}
 
 MSTL_END_INNER__
 /// @endcond
