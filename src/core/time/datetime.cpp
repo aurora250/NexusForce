@@ -1,18 +1,18 @@
-#include <MSTL/core/time/datetime.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/time/datetime.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <sysinfoapi.h>
 #else
 #include <ctime>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
-MSTL_NODISCARD datetime datetime::now() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+NEFORCE_NODISCARD datetime datetime::now() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SYSTEMTIME st{};
     ::GetLocalTime(&st);
     return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const std::time_t now_time = std::time(nullptr);
     std::tm local_tm{};
     ::localtime_r(&now_time, &local_tm);
@@ -23,4 +23,4 @@ MSTL_NODISCARD datetime datetime::now() noexcept {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

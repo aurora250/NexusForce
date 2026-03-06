@@ -1,10 +1,10 @@
-#include <MSTL/core/system/device/device.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/system/device/device.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #include <winioctl.h>
 #include <devguid.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/algorithm/remove.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <NeForce/core/algorithm/remove.hpp>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
 #include <sys/select.h>
@@ -16,7 +16,7 @@
 #include <cstring>
 #include <cerrno>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef DEVICE_TYPE
 #undef DEVICE_TYPE
@@ -100,7 +100,7 @@ FILE_CREATION device::dflags_to_fcreation(const DEVICE_OPEN_FLAG flags) const {
 
 FILE_ATTRI device::dflags_to_fattri(DEVICE_OPEN_FLAG flags) const {
     auto attr = FILE_ATTRI::NORMAL;
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if ((flags & DEVICE_OPEN_FLAG::ASYNC) != DEVICE_OPEN_FLAG::NONE) {
         attr = attr | FILE_ATTRI::OVERLAPPED;
     }
@@ -110,7 +110,7 @@ FILE_ATTRI device::dflags_to_fattri(DEVICE_OPEN_FLAG flags) const {
     if ((flags & DEVICE_OPEN_FLAG::SYNC) != DEVICE_OPEN_FLAG::NONE) {
         attr = attr | FILE_ATTRI::WRITE_THROUGH;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if ((flags & DEVICE_OPEN_FLAG::DIRECT_IO) != DEVICE_OPEN_FLAG::NONE) {
         attr = attr | FILE_ATTRI::NO_BUFFERING;
     }
@@ -122,7 +122,7 @@ FILE_ATTRI device::dflags_to_fattri(DEVICE_OPEN_FLAG flags) const {
 }
 
 DEVICE_TYPE device::try_device_type(const path& pth) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (pth.view().find("\\\\.\\COM") != string::npos) {
         return DEVICE_TYPE::SERIAL_PORT;
     } else if (pth.view().find("\\\\.\\PhysicalDrive") != string::npos) {
@@ -170,7 +170,7 @@ DEVICE_TYPE device::try_device_type(const path& pth) {
 #endif
 }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 DEVICE_TYPE device::try_device_type_from_guid(const GUID& guid) {
     if (::IsEqualGUID(guid, ::GUID_DEVCLASS_PORTS)) {
         return DEVICE_TYPE::SERIAL_PORT;
@@ -275,7 +275,7 @@ void device::open(const path& device_path,
             ("Failed to open device: " + file_.path().str() + " - " + file_.last_error()).data()));
     }
     device_type_ = try_device_type(file_.path());
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     if (!is_blocking_) {
         const int fcntl_flag = ::fcntl(file_.native_handle(), F_GETFL, 0);
         ::fcntl(file_.native_handle(), F_SETFL, fcntl_flag | O_NONBLOCK);
@@ -374,7 +374,7 @@ void device::ioctl(const ioctl_command& cmd) {
         throw_exception(device_exception("Device not opened"));
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD bytes_returned = 0;
     const ::BOOL success = ::DeviceIoControl(
         file_.native_handle(),
@@ -390,10 +390,10 @@ void device::ioctl(const ioctl_command& cmd) {
     if (!success) {
         const ::DWORD error = ::GetLastError();
         throw_exception(device_exception(
-            ("DeviceIoControl failed with error code: " + _MSTL to_string(error)).data()));
+            ("DeviceIoControl failed with error code: " + _NEFORCE to_string(error)).data()));
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     int ret;
 
     if (cmd.in_data() != nullptr && cmd.out_data() != nullptr) {
@@ -415,17 +415,17 @@ void device::ioctl(const ioctl_command& cmd) {
 
 void device::flush() {
     lock<mutex> lock(io_mutex_);
-    MSTL_IGNORE file_.flush();
+    NEFORCE_IGNORE file_.flush();
 }
 
 void device::sync() noexcept {
     lock<mutex> lock(io_mutex_);
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     if (file_.is_opened()) {
         ::fsync(file_.native_handle());
     }
 #else
-    MSTL_IGNORE file_.flush();
+    NEFORCE_IGNORE file_.flush();
 #endif
 }
 
@@ -433,12 +433,12 @@ bool device::wait(DEVICE_IO_DIRECT direction, milliseconds timeout) const {
     if (!file_.is_opened()) {
         return false;
     }
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD wait_time = (timeout.count() < 0) ?
         numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout.count());
     const ::DWORD result = ::WaitForSingleObject(file_.native_handle(), wait_time);
     return result == WAIT_OBJECT_0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::fd_set fds;
     FD_ZERO(&fds);
     FD_SET(file_.native_handle(), &fds);
@@ -475,7 +475,7 @@ void device::set_timeout(const milliseconds timeout) {
 void device::set_blocking(const bool blocking) {
     lock<mutex> lock(io_mutex_);
     is_blocking_ = blocking;
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     if (file_.is_opened()) {
         const int flags = ::fcntl(file_.native_handle(), F_GETFL, 0);
         if (blocking) {
@@ -487,13 +487,13 @@ void device::set_blocking(const bool blocking) {
 #endif
 }
 
-_MSTL device_info device::device_info() const {
-    _MSTL device_info info;
+_NEFORCE device_info device::device_info() const {
+    _NEFORCE device_info info;
     info.path = file_.path();
     info.type = device_type_;
     info.present = file_.is_opened();
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!file_.is_opened()) {
         return info;
     }
@@ -579,7 +579,7 @@ _MSTL device_info device::device_info() const {
         ::SetupDiDestroyDeviceInfoList(dev_info_set);
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st;
     if (::stat64(file_.path().data(), &st) == 0) {
         info.device_id = static_cast<uint32_t>(st.st_rdev);
@@ -718,17 +718,17 @@ void device::unmap_memory() noexcept {
 }
 
 bool device::supports_direct_io() const noexcept {
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     return device_type_ == DEVICE_TYPE::STORAGE;
 #else
     return false;
 #endif
 }
 
-vector<_MSTL device_info> device::enumerate(const string& filter) {
-    vector<_MSTL device_info> devices;
+vector<_NEFORCE device_info> device::enumerate(const string& filter) {
+    vector<_NEFORCE device_info> devices;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HDEVINFO dev_info_set = ::SetupDiGetClassDevsA(
         nullptr,
         nullptr,
@@ -744,7 +744,7 @@ vector<_MSTL device_info> device::enumerate(const string& filter) {
     dev_info_data.cbSize = sizeof(::SP_DEVINFO_DATA);
 
     for (::DWORD i = 0; ::SetupDiEnumDeviceInfo(dev_info_set, i, &dev_info_data); i++) {
-        _MSTL device_info info;
+        _NEFORCE device_info info;
 
         ::DWORD size = 0;
         ::SetupDiGetDeviceInstanceIdA(dev_info_set, &dev_info_data, nullptr, 0, &size);
@@ -772,7 +772,7 @@ vector<_MSTL device_info> device::enumerate(const string& filter) {
 
     ::SetupDiDestroyDeviceInfoList(dev_info_set);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::DIR* dir = ::opendir("/dev");
     if (!dir) {
         return devices;
@@ -795,7 +795,7 @@ vector<_MSTL device_info> device::enumerate(const string& filter) {
             continue;
         }
 
-        _MSTL device_info info;
+        _NEFORCE device_info info;
         info.path = dev_path;
         info.type = guess_device_type_from_path(dev_path);
         info.device_id = st.st_rdev;
@@ -810,10 +810,10 @@ vector<_MSTL device_info> device::enumerate(const string& filter) {
     return devices;
 }
 
-vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
-    vector<_MSTL device_info> devices;
+vector<_NEFORCE device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
+    vector<_NEFORCE device_info> devices;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HDEVINFO dev_info_set = ::SetupDiGetClassDevsA(
         &GUID_DEVCLASS_USB,
         nullptr,
@@ -839,7 +839,7 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
             hwid_upper.find(vid_pattern) != string::npos &&
             hwid_upper.find(pid_pattern) != string::npos) {
 
-            _MSTL device_info info;
+            _NEFORCE device_info info;
 
             ::DWORD size = 0;
             ::SetupDiGetDeviceInstanceIdA(dev_info_set, &dev_info_data, nullptr, 0, &size);
@@ -876,7 +876,7 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
     }
     ::SetupDiDestroyDeviceInfoList(dev_info_set);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::DIR* usb_devices_dir = ::opendir("/sys/bus/usb/devices");
     if (!usb_devices_dir) {
         return devices;
@@ -910,7 +910,7 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
         }
 
         if (device_vid == vid && device_pid == pid) {
-            _MSTL device_info info;
+            _NEFORCE device_info info;
             info.vendor_id = vid;
             info.product_id = pid;
             info.type = DEVICE_TYPE::GENERIC;
@@ -936,7 +936,7 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
                 while ((dev_entry = ::readdir(dev_dir)) != nullptr) {
                     string_view dname = dev_entry->d_name;
                     if (dname.find("tty") == 0) {
-                        _MSTL device_info tty_info = info;
+                        _NEFORCE device_info tty_info = info;
                         tty_info.path = path("/dev") / dname;
                         tty_info.friendly_name = dname;
                         tty_info.type = DEVICE_TYPE::SERIAL_PORT;
@@ -955,16 +955,16 @@ vector<_MSTL device_info> device::find_by_vid_pid(uint16_t vid, uint16_t pid) {
     return devices;
 }
 
-optional<_MSTL device_info> device::find_by_path(path pth) {
+optional<_NEFORCE device_info> device::find_by_path(path pth) {
     if (pth.empty()) {
         return {};
     }
 
-    _MSTL device_info info;
+    _NEFORCE device_info info;
     info.path = move(pth);
     info.present = info.path.exists();
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!info.present) {
         return {};
     }
@@ -991,7 +991,7 @@ optional<_MSTL device_info> device::find_by_path(path pth) {
         info.type = DEVICE_TYPE::GENERIC;
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st;
     if (::stat64(pth.data(), &st) < 0) {
         return {};
@@ -1028,9 +1028,9 @@ bool device::is_device(const string& path) {
     if (path.empty()) {
         return false;
     }
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return path.find("\\\\.\\") == 0 || path.find("\\\\\\\\.\\") == 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st;
     if (::stat64(path.data(), &st) == 0) {
         return S_ISCHR(st.st_mode) || S_ISBLK(st.st_mode);
@@ -1039,4 +1039,4 @@ bool device::is_device(const string& path) {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

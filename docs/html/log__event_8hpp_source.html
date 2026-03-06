@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: log_event.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('log__event_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">log_event.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="log__event_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_LOGGING_LOG_EVENT_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_LOGGING_LOG_EVENT_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="datetime_8hpp.html">NeForce/core/time/datetime.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifdef ERROR</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#undef ERROR</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">   33</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6">   34</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6">TRACE</a> = 0,  </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15">   35</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15">DEBUG</a>,      </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">   36</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">INFO</a>,       </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277">   37</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277">WARN</a>,       </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5">   38</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5">ERROR</a>,      </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc">   39</a></span>    <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc">FATAL</a>       </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> to_string(<span class="keyword">const</span> <a class="code hl_enumeration" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> level) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">switch</span>(level) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6">LOG_LEVEL::TRACE</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;TRACE&quot;</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15">LOG_LEVEL::DEBUG</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;DEBUG&quot;</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">LOG_LEVEL::INFO</a>:  <span class="keywordflow">return</span> <span class="stringliteral">&quot;INFO&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277">LOG_LEVEL::WARN</a>:  <span class="keywordflow">return</span> <span class="stringliteral">&quot;WARN&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5">LOG_LEVEL::ERROR</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ERROR&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc">LOG_LEVEL::FATAL</a>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;FATAL&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">default</span>: NEFORCE_UNREACHABLE;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structlog__event.html">   63</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structlog__event.html">log_event</a> {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structlog__event.html#a7bebc182c9d81a466c92e77f5f4ad22f">   64</a></span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, string&gt;</a> <a class="code hl_variable" href="structlog__event.html#a7bebc182c9d81a466c92e77f5f4ad22f">context</a>;  </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structlog__event.html#a150662d306c9c1bb8c9a65c7da663520">   65</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structlog__event.html#a150662d306c9c1bb8c9a65c7da663520">file</a>;                            </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structlog__event.html#a4476afcf1a7d3cb5c57007bfde09c788">   66</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structlog__event.html#a4476afcf1a7d3cb5c57007bfde09c788">func</a>;                            </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structlog__event.html#a4d92e5e2e9ad9e2cc0c007cd4ba15d7d">   67</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structlog__event.html#a4d92e5e2e9ad9e2cc0c007cd4ba15d7d">message</a>;                         </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structlog__event.html#a661ad84d9d08d7873df51f27c398108a">   68</a></span>    <a class="code hl_class" href="classdatetime.html">datetime</a> <a class="code hl_variable" href="structlog__event.html#a661ad84d9d08d7873df51f27c398108a">dt</a>;                            </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="structlog__event.html#a53b14a83bf184849eadebdf9ccebcada">   69</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structlog__event.html#a53b14a83bf184849eadebdf9ccebcada">line</a>;                               </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structlog__event.html#acc7f525ed9549f109a271a5f9687d01b">   70</a></span>    thread::id <a class="code hl_variable" href="structlog__event.html#acc7f525ed9549f109a271a5f9687d01b">thread_id</a>;                   </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structlog__event.html#a64d041537fc3416d067f0315e564812c">   71</a></span>    <a class="code hl_enumeration" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> <a class="code hl_variable" href="structlog__event.html#a64d041537fc3416d067f0315e564812c">level</a>;                        </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> <span class="comment">// Logging</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_LOGGING_LOG_EVENT_HPP__</span></div>
+<div class="ttc" id="aclassdatetime_html"><div class="ttname"><a href="classdatetime.html">datetime</a></div><div class="ttdoc">日期时间类</div><div class="ttdef"><b>定义</b> <a href="datetime_8hpp_source.html#l00662">datetime.hpp:662</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="adatetime_8hpp_html"><div class="ttname"><a href="datetime_8hpp.html">datetime.hpp</a></div><div class="ttdoc">日期时间处理库</div></div>
+<div class="ttc" id="agroup___logging_html_gaa5a9053636a30269210c54e734e0d583"><div class="ttname"><a href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a></div><div class="ttdeci">LOG_LEVEL</div><div class="ttdoc">日志级别枚举</div><div class="ttdef"><b>定义</b> <a href="#l00033">log_event.hpp:33</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a19da7170bea36556dde582519795f3fc">LOG_LEVEL::FATAL</a></div><div class="ttdeci">@ FATAL</div><div class="ttdoc">致命级别，表示不可恢复的错误</div><div class="ttdef"><b>定义</b> <a href="#l00039">log_event.hpp:39</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a2d3e4144aa384b18849ab9a8abad74d6">LOG_LEVEL::TRACE</a></div><div class="ttdeci">@ TRACE</div><div class="ttdoc">跟踪级别，最详细的调试信息</div><div class="ttdef"><b>定义</b> <a href="#l00034">log_event.hpp:34</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a32bd8a1db2275458673903bdb84cb277">LOG_LEVEL::WARN</a></div><div class="ttdeci">@ WARN</div><div class="ttdoc">警告级别，表示潜在问题</div><div class="ttdef"><b>定义</b> <a href="#l00037">log_event.hpp:37</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583a551b723eafd6a31d444fcb2f5920fbd3">LOG_LEVEL::INFO</a></div><div class="ttdeci">@ INFO</div><div class="ttdoc">信息级别，普通信息</div><div class="ttdef"><b>定义</b> <a href="#l00036">log_event.hpp:36</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583abb1ca97ec761fc37101737ba0aa2e7c5">LOG_LEVEL::ERROR</a></div><div class="ttdeci">@ ERROR</div><div class="ttdoc">错误级别，表示可恢复的错误</div><div class="ttdef"><b>定义</b> <a href="#l00038">log_event.hpp:38</a></div></div>
+<div class="ttc" id="agroup___logging_html_ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15"><div class="ttname"><a href="group___logging.html#ggaa5a9053636a30269210c54e734e0d583adc30ec20708ef7b0f641ef78b7880a15">LOG_LEVEL::DEBUG</a></div><div class="ttdeci">@ DEBUG</div><div class="ttdoc">调试级别，用于开发调试</div><div class="ttdef"><b>定义</b> <a href="#l00035">log_event.hpp:35</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="astructlog__event_html"><div class="ttname"><a href="structlog__event.html">log_event</a></div><div class="ttdoc">日志事件结构体</div><div class="ttdef"><b>定义</b> <a href="#l00063">log_event.hpp:63</a></div></div>
+<div class="ttc" id="astructlog__event_html_a150662d306c9c1bb8c9a65c7da663520"><div class="ttname"><a href="structlog__event.html#a150662d306c9c1bb8c9a65c7da663520">log_event::file</a></div><div class="ttdeci">string file</div><div class="ttdoc">源文件名</div><div class="ttdef"><b>定义</b> <a href="#l00065">log_event.hpp:65</a></div></div>
+<div class="ttc" id="astructlog__event_html_a4476afcf1a7d3cb5c57007bfde09c788"><div class="ttname"><a href="structlog__event.html#a4476afcf1a7d3cb5c57007bfde09c788">log_event::func</a></div><div class="ttdeci">string func</div><div class="ttdoc">函数名</div><div class="ttdef"><b>定义</b> <a href="#l00066">log_event.hpp:66</a></div></div>
+<div class="ttc" id="astructlog__event_html_a4d92e5e2e9ad9e2cc0c007cd4ba15d7d"><div class="ttname"><a href="structlog__event.html#a4d92e5e2e9ad9e2cc0c007cd4ba15d7d">log_event::message</a></div><div class="ttdeci">string message</div><div class="ttdoc">日志消息</div><div class="ttdef"><b>定义</b> <a href="#l00067">log_event.hpp:67</a></div></div>
+<div class="ttc" id="astructlog__event_html_a53b14a83bf184849eadebdf9ccebcada"><div class="ttname"><a href="structlog__event.html#a53b14a83bf184849eadebdf9ccebcada">log_event::line</a></div><div class="ttdeci">int line</div><div class="ttdoc">行号</div><div class="ttdef"><b>定义</b> <a href="#l00069">log_event.hpp:69</a></div></div>
+<div class="ttc" id="astructlog__event_html_a64d041537fc3416d067f0315e564812c"><div class="ttname"><a href="structlog__event.html#a64d041537fc3416d067f0315e564812c">log_event::level</a></div><div class="ttdeci">LOG_LEVEL level</div><div class="ttdoc">日志级别</div><div class="ttdef"><b>定义</b> <a href="#l00071">log_event.hpp:71</a></div></div>
+<div class="ttc" id="astructlog__event_html_a661ad84d9d08d7873df51f27c398108a"><div class="ttname"><a href="structlog__event.html#a661ad84d9d08d7873df51f27c398108a">log_event::dt</a></div><div class="ttdeci">datetime dt</div><div class="ttdoc">时间戳</div><div class="ttdef"><b>定义</b> <a href="#l00068">log_event.hpp:68</a></div></div>
+<div class="ttc" id="astructlog__event_html_a7bebc182c9d81a466c92e77f5f4ad22f"><div class="ttname"><a href="structlog__event.html#a7bebc182c9d81a466c92e77f5f4ad22f">log_event::context</a></div><div class="ttdeci">unordered_map&lt; string, string &gt; context</div><div class="ttdoc">上下文信息键值对</div><div class="ttdef"><b>定义</b> <a href="#l00064">log_event.hpp:64</a></div></div>
+<div class="ttc" id="astructlog__event_html_acc7f525ed9549f109a271a5f9687d01b"><div class="ttname"><a href="structlog__event.html#acc7f525ed9549f109a271a5f9687d01b">log_event::thread_id</a></div><div class="ttdeci">thread::id thread_id</div><div class="ttdoc">线程ID</div><div class="ttdef"><b>定义</b> <a href="#l00070">log_event.hpp:70</a></div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程支持</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>logging</b></li><li class="navelem"><a href="log__event_8hpp.html">log_event.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

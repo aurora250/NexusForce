@@ -1,5 +1,5 @@
-#include <MSTL/core/async/at_thread_exit.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/async/at_thread_exit.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 struct thread_exit_registry {
     at_thread_exit_elt* thread_exit_list = nullptr;
@@ -27,4 +27,4 @@ void at_thread_exit_callbacks() {
     thread_registry.thread_exit_list = nullptr;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

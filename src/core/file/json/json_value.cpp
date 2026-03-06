@@ -1,7 +1,7 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/json/json_value.hpp>
-MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_INNER__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/json/json_value.hpp>
+NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_INNER__
 
 string json_value_to_string(const json_value* value) {
     if (!value) {
@@ -22,9 +22,9 @@ string json_value_to_string(const json_value* value) {
             if (val == static_cast<double>(static_cast<long long>(val)) &&
                 val >= static_cast<double>(numeric_traits<int64_t>::min()) &&
                 val <= static_cast<double>(numeric_traits<int64_t>::max())) {
-                return _MSTL to_string(static_cast<long long>(val));
+                return _NEFORCE to_string(static_cast<long long>(val));
             }
-            string result = _MSTL to_string(val);
+            string result = _NEFORCE to_string(val);
             if (result.find('.') != string::npos) {
                 while (!result.empty() && result.back() == '0') {
                     result.pop_back();
@@ -147,5 +147,5 @@ string json_value_to_indent_string(const json_value* value, const int indent) {
     }
 }
 
-MSTL_END_INNER__
-MSTL_END_NAMESPACE__
+NEFORCE_END_INNER__
+NEFORCE_END_NAMESPACE__

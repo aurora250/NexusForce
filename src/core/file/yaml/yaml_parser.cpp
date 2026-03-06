@@ -1,5 +1,5 @@
-#include <MSTL/core/file/yaml/yaml_parser.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/file/yaml/yaml_parser.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 char yaml_parser::current() const noexcept {
     return eof() ? '\0' : yaml_[pos_];
@@ -423,7 +423,7 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
     if (result.empty()) {
         throw_parse_error("Empty plain string");
     }
-    return make_shared<yaml_string>(_MSTL move(result), yaml_string::Plain);
+    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::Plain);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
@@ -448,7 +448,7 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
         }
     }
     
-    return make_shared<yaml_string>(_MSTL move(result), yaml_string::SingleQuoted);
+    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::SingleQuoted);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
@@ -542,7 +542,7 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
     }
 
     expect('"');
-    return make_shared<yaml_string>(_MSTL move(result), yaml_string::DoubleQuoted);
+    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::DoubleQuoted);
 }
 
 string yaml_parser::parse_multiline_string(const bool is_literal) {
@@ -692,12 +692,12 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
 
 shared_ptr<yaml_string> yaml_parser::parse_literal_string() {
     string content = parse_multiline_string(true);
-    return make_shared<yaml_string>(_MSTL move(content), yaml_string::Literal);
+    return make_shared<yaml_string>(_NEFORCE move(content), yaml_string::Literal);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_folded_string() {
     string content = parse_multiline_string(false);
-    return make_shared<yaml_string>(_MSTL move(content), yaml_string::Folded);
+    return make_shared<yaml_string>(_NEFORCE move(content), yaml_string::Folded);
 }
 
 
@@ -980,7 +980,7 @@ shared_ptr<yaml_sequence> yaml_parser::parse_flow_sequence() {
         }
 
         auto value = parse_inline_value();
-        seq->add_element(_MSTL move(value));
+        seq->add_element(_NEFORCE move(value));
         skip_whitespace_inline();
         
         if (current() == ',') {
@@ -1034,7 +1034,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_flow_mapping() {
         skip_whitespace_inline();
 
         auto value = parse_inline_value();
-        map->add_member(key, _MSTL move(value));
+        map->add_member(key, _NEFORCE move(value));
 
         skip_whitespace_inline();
 
@@ -1124,7 +1124,7 @@ shared_ptr<yaml_sequence> yaml_parser::parse_block_sequence() {
 
             skip_to_next_line();
         }
-        seq->add_element(_MSTL move(value));
+        seq->add_element(_NEFORCE move(value));
     }
     return seq;
 }
@@ -1306,7 +1306,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 }
             }
         } else {
-            map->add_member(key, _MSTL move(value));
+            map->add_member(key, _NEFORCE move(value));
         }
     }
     return map;
@@ -1649,4 +1649,4 @@ void yaml_parser::throw_parse_error(const string& message) const {
     throw_exception(yaml_exception(error_msg.data()));
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

@@ -1,0 +1,2367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classunordered__multimap.html','','classunordered__multimap-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___unordered_multi_map.html">无序多重映射</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>无序多重映射容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a2eece86abca0846cd96e81014acd5758" id="r_a2eece86abca0846cd96e81014acd5758"><td class="memItemLeft"><a id="a2eece86abca0846cd96e81014acd5758" name="a2eece86abca0846cd96e81014acd5758"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = typename <a class="el" href="classhashtable.html#aae291f880b71bf248fa077e9aa7e9940">base_type::key_type</a></td></tr>
+<tr class="memdesc:a2eece86abca0846cd96e81014acd5758"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:a11f2cf024dfa875a85caaf74b15f9e11" id="r_a11f2cf024dfa875a85caaf74b15f9e11"><td class="memItemLeft"><a id="a11f2cf024dfa875a85caaf74b15f9e11" name="a11f2cf024dfa875a85caaf74b15f9e11"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = typename <a class="el" href="classhashtable.html#a938c4e2cb0e775c00a9ffa0bb433b4d3">base_type::value_type</a></td></tr>
+<tr class="memdesc:a11f2cf024dfa875a85caaf74b15f9e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:afc6ca319e81bc9ca78493226527be4db" id="r_afc6ca319e81bc9ca78493226527be4db"><td class="memItemLeft"><a id="afc6ca319e81bc9ca78493226527be4db" name="afc6ca319e81bc9ca78493226527be4db"></a>
+using&#160;</td><td class="memItemRight"><b>hasher</b> = typename <a class="el" href="classhashtable.html#a283933168f42e039508f8c756c5d0124">base_type::hasher</a></td></tr>
+<tr class="memdesc:afc6ca319e81bc9ca78493226527be4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">哈希函数类型 <br /></td></tr>
+<tr class="memitem:a98d034a85c6c740ca18b40be64313604" id="r_a98d034a85c6c740ca18b40be64313604"><td class="memItemLeft"><a id="a98d034a85c6c740ca18b40be64313604" name="a98d034a85c6c740ca18b40be64313604"></a>
+using&#160;</td><td class="memItemRight"><b>key_equal</b> = typename <a class="el" href="classhashtable.html#acc0ee670388f0cd08557180388bf3f18">base_type::key_equal</a></td></tr>
+<tr class="memdesc:a98d034a85c6c740ca18b40be64313604"><td class="mdescLeft">&#160;</td><td class="mdescRight">键相等比较函数类型 <br /></td></tr>
+<tr class="memitem:a9585ab3a436c853091ba89c2cad0da17" id="r_a9585ab3a436c853091ba89c2cad0da17"><td class="memItemLeft"><a id="a9585ab3a436c853091ba89c2cad0da17" name="a9585ab3a436c853091ba89c2cad0da17"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = typename <a class="el" href="classhashtable.html#a943ab934a2ae3aee17931f48d5435d62">base_type::size_type</a></td></tr>
+<tr class="memdesc:a9585ab3a436c853091ba89c2cad0da17"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a6438336510d9df7d63bff895a5ed0e4e" id="r_a6438336510d9df7d63bff895a5ed0e4e"><td class="memItemLeft"><a id="a6438336510d9df7d63bff895a5ed0e4e" name="a6438336510d9df7d63bff895a5ed0e4e"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename <a class="el" href="classhashtable.html#a384b9b4e9ed2153582c4f6f118542fa9">base_type::difference_type</a></td></tr>
+<tr class="memdesc:a6438336510d9df7d63bff895a5ed0e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a1efebf04ea755630aa815f696666fea8" id="r_a1efebf04ea755630aa815f696666fea8"><td class="memItemLeft"><a id="a1efebf04ea755630aa815f696666fea8" name="a1efebf04ea755630aa815f696666fea8"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = typename <a class="el" href="classhashtable.html#a4c3e2ca33edeb50042e2f250abaff685">base_type::pointer</a></td></tr>
+<tr class="memdesc:a1efebf04ea755630aa815f696666fea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a11e8ec33c7940ffb64fdced2fc08e8df" id="r_a11e8ec33c7940ffb64fdced2fc08e8df"><td class="memItemLeft"><a id="a11e8ec33c7940ffb64fdced2fc08e8df" name="a11e8ec33c7940ffb64fdced2fc08e8df"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = typename <a class="el" href="classhashtable.html#a2776dd83d03ad5a303d786f90cf394e1">base_type::const_pointer</a></td></tr>
+<tr class="memdesc:a11e8ec33c7940ffb64fdced2fc08e8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:a05ec97927f1f8b71b02a038eeb5635d2" id="r_a05ec97927f1f8b71b02a038eeb5635d2"><td class="memItemLeft"><a id="a05ec97927f1f8b71b02a038eeb5635d2" name="a05ec97927f1f8b71b02a038eeb5635d2"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = typename <a class="el" href="classhashtable.html#a832269fbb741721437d43754623d7290">base_type::reference</a></td></tr>
+<tr class="memdesc:a05ec97927f1f8b71b02a038eeb5635d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a8268603c5b658c4706c8377196f33356" id="r_a8268603c5b658c4706c8377196f33356"><td class="memItemLeft"><a id="a8268603c5b658c4706c8377196f33356" name="a8268603c5b658c4706c8377196f33356"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = typename <a class="el" href="classhashtable.html#a6b95bd41b2d19b8ad99a1fdefade3fc4">base_type::const_reference</a></td></tr>
+<tr class="memdesc:a8268603c5b658c4706c8377196f33356"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:aae2c24b62b7387c90f085a32ffe2500a" id="r_aae2c24b62b7387c90f085a32ffe2500a"><td class="memItemLeft"><a id="aae2c24b62b7387c90f085a32ffe2500a" name="aae2c24b62b7387c90f085a32ffe2500a"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = typename <a class="el" href="classhashtable.html#a8a8736c15142a779db875a0ab1c4d15a">base_type::iterator</a></td></tr>
+<tr class="memdesc:aae2c24b62b7387c90f085a32ffe2500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a05ae498b684f87d2da26ecba4efc4da5" id="r_a05ae498b684f87d2da26ecba4efc4da5"><td class="memItemLeft"><a id="a05ae498b684f87d2da26ecba4efc4da5" name="a05ae498b684f87d2da26ecba4efc4da5"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = typename <a class="el" href="classhashtable.html#a7187950e0d6060fc8ee371fb3ac1ad6a">base_type::const_iterator</a></td></tr>
+<tr class="memdesc:a05ae498b684f87d2da26ecba4efc4da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:a8e2640169b16a77486e5cc7a78808585" id="r_a8e2640169b16a77486e5cc7a78808585"><td class="memItemLeft"><a id="a8e2640169b16a77486e5cc7a78808585" name="a8e2640169b16a77486e5cc7a78808585"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = typename <a class="el" href="classhashtable.html#a7dfad262d218f67878950a8044718468">base_type::allocator_type</a></td></tr>
+<tr class="memdesc:a8e2640169b16a77486e5cc7a78808585"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:af9c844706091b379b1544fc88bd96727" id="r_af9c844706091b379b1544fc88bd96727"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap</a> ()=default</td></tr>
+<tr class="memdesc:af9c844706091b379b1544fc88bd96727"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:a731219e571e335fb4b832cf596326b54" id="r_a731219e571e335fb4b832cf596326b54"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a731219e571e335fb4b832cf596326b54">unordered_multimap</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n)</td></tr>
+<tr class="memdesc:a731219e571e335fb4b832cf596326b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始桶数  <br /></td></tr>
+<tr class="memitem:a895858f30357bc936d47c3fe17d2c02f" id="r_a895858f30357bc936d47c3fe17d2c02f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a895858f30357bc936d47c3fe17d2c02f">unordered_multimap</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf)</td></tr>
+<tr class="memdesc:a895858f30357bc936d47c3fe17d2c02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始桶数和哈希函数  <br /></td></tr>
+<tr class="memitem:a8b036a24a4dd95096a71f488445b322e" id="r_a8b036a24a4dd95096a71f488445b322e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8b036a24a4dd95096a71f488445b322e">unordered_multimap</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf, const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;eql)</td></tr>
+<tr class="memdesc:a8b036a24a4dd95096a71f488445b322e"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定初始桶数、哈希函数和键相等比较函数  <br /></td></tr>
+<tr class="memitem:a775d6ddab4de216506149b16f54eab2c" id="r_a775d6ddab4de216506149b16f54eab2c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a775d6ddab4de216506149b16f54eab2c">unordered_multimap</a> (const <a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;other)</td></tr>
+<tr class="memdesc:a775d6ddab4de216506149b16f54eab2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:a69630e0c2c18093e9ef74e50b895f86e" id="r_a69630e0c2c18093e9ef74e50b895f86e"><td class="memItemLeft"><a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a69630e0c2c18093e9ef74e50b895f86e">operator=</a> (const <a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;other)</td></tr>
+<tr class="memdesc:a69630e0c2c18093e9ef74e50b895f86e"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a2ea94f6df51bf05246851aadc312cfe8" id="r_a2ea94f6df51bf05246851aadc312cfe8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2ea94f6df51bf05246851aadc312cfe8">unordered_multimap</a> (<a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;&amp;other) noexcept(is_nothrow_move_constructible_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a2ea94f6df51bf05246851aadc312cfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a6ee24848260b936f04522634cef7705e" id="r_a6ee24848260b936f04522634cef7705e"><td class="memItemLeft"><a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6ee24848260b936f04522634cef7705e">operator=</a> (<a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;&amp;other) noexcept(is_nothrow_move_assignable_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a6ee24848260b936f04522634cef7705e"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ad011a31b5a3fe903ad34a1b877b604c2" id="r_ad011a31b5a3fe903ad34a1b877b604c2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ad011a31b5a3fe903ad34a1b877b604c2 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad011a31b5a3fe903ad34a1b877b604c2">unordered_multimap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ad011a31b5a3fe903ad34a1b877b604c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数  <br /></td></tr>
+<tr class="memitem:a96894bfed496bf703e610469561d89fa" id="r_a96894bfed496bf703e610469561d89fa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:a96894bfed496bf703e610469561d89fa template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a96894bfed496bf703e610469561d89fa">unordered_multimap</a> (Iterator first, Iterator <a class="el" href="classlist.html">list</a>, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n)</td></tr>
+<tr class="memdesc:a96894bfed496bf703e610469561d89fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数，指定初始桶数  <br /></td></tr>
+<tr class="memitem:a98ab626d5f7384d70b699d0fc7b836eb" id="r_a98ab626d5f7384d70b699d0fc7b836eb"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:a98ab626d5f7384d70b699d0fc7b836eb template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a98ab626d5f7384d70b699d0fc7b836eb">unordered_multimap</a> (Iterator first, Iterator last, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf)</td></tr>
+<tr class="memdesc:a98ab626d5f7384d70b699d0fc7b836eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数，指定初始桶数和哈希函数  <br /></td></tr>
+<tr class="memitem:ab84f42b0ff9193d7f22dcf827744ae0b" id="r_ab84f42b0ff9193d7f22dcf827744ae0b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ab84f42b0ff9193d7f22dcf827744ae0b template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab84f42b0ff9193d7f22dcf827744ae0b">unordered_multimap</a> (Iterator first, Iterator last, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf, const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;eql)</td></tr>
+<tr class="memdesc:ab84f42b0ff9193d7f22dcf827744ae0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数，指定初始桶数、哈希函数和键相等比较函数  <br /></td></tr>
+<tr class="memitem:a6bba7da233f3a4c649d51fa34f674d59" id="r_a6bba7da233f3a4c649d51fa34f674d59"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6bba7da233f3a4c649d51fa34f674d59">unordered_multimap</a> (std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:a6bba7da233f3a4c649d51fa34f674d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数  <br /></td></tr>
+<tr class="memitem:ae73a8744c23b60d4c0f7177702cb6a44" id="r_ae73a8744c23b60d4c0f7177702cb6a44"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae73a8744c23b60d4c0f7177702cb6a44">unordered_multimap</a> (std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt; ilist, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n)</td></tr>
+<tr class="memdesc:ae73a8744c23b60d4c0f7177702cb6a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数，指定初始桶数  <br /></td></tr>
+<tr class="memitem:adf6105b06549f96a30e329ea50f440da" id="r_adf6105b06549f96a30e329ea50f440da"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adf6105b06549f96a30e329ea50f440da">unordered_multimap</a> (std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt; ilist, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf)</td></tr>
+<tr class="memdesc:adf6105b06549f96a30e329ea50f440da"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数，指定初始桶数和哈希函数  <br /></td></tr>
+<tr class="memitem:ade898a36fab46a4f633f725e4177da58" id="r_ade898a36fab46a4f633f725e4177da58"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ade898a36fab46a4f633f725e4177da58">unordered_multimap</a> (std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt; ilist, <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n, const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;hf, const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;eql)</td></tr>
+<tr class="memdesc:ade898a36fab46a4f633f725e4177da58"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数  <br /></td></tr>
+<tr class="memitem:adad5e0c929e9a984c65f2c0855ac9e06" id="r_adad5e0c929e9a984c65f2c0855ac9e06"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#adad5e0c929e9a984c65f2c0855ac9e06">begin</a> () noexcept</td></tr>
+<tr class="memdesc:adad5e0c929e9a984c65f2c0855ac9e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:a6468a4e9fb20091634592f31cb768cba" id="r_a6468a4e9fb20091634592f31cb768cba"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6468a4e9fb20091634592f31cb768cba">end</a> () noexcept</td></tr>
+<tr class="memdesc:a6468a4e9fb20091634592f31cb768cba"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a145c7176e0b7dc290dcd6e5c3dcf299b" id="r_a145c7176e0b7dc290dcd6e5c3dcf299b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a145c7176e0b7dc290dcd6e5c3dcf299b">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a145c7176e0b7dc290dcd6e5c3dcf299b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a80a7f4bb9e3792ed261071e398f158f8" id="r_a80a7f4bb9e3792ed261071e398f158f8"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a80a7f4bb9e3792ed261071e398f158f8">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a80a7f4bb9e3792ed261071e398f158f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:aaf6d99b9eb78542f58ff520e65644c81" id="r_aaf6d99b9eb78542f58ff520e65644c81"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaf6d99b9eb78542f58ff520e65644c81">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:aaf6d99b9eb78542f58ff520e65644c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:aa8a79a89b21041f24212ba67cb828ef6" id="r_aa8a79a89b21041f24212ba67cb828ef6"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa8a79a89b21041f24212ba67cb828ef6">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:aa8a79a89b21041f24212ba67cb828ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:a39c67c1b08119c08c335e8bb15bab06f" id="r_a39c67c1b08119c08c335e8bb15bab06f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a39c67c1b08119c08c335e8bb15bab06f">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a39c67c1b08119c08c335e8bb15bab06f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元素数量  <br /></td></tr>
+<tr class="memitem:ab76f2b77809cf674287a944d7f23d10c" id="r_ab76f2b77809cf674287a944d7f23d10c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab76f2b77809cf674287a944d7f23d10c">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:ab76f2b77809cf674287a944d7f23d10c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:a691b8dd49926d27401e511682b8cfd3b" id="r_a691b8dd49926d27401e511682b8cfd3b"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a691b8dd49926d27401e511682b8cfd3b">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a691b8dd49926d27401e511682b8cfd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:a254e46eb1fdbe9d1a2f096a97519f344" id="r_a254e46eb1fdbe9d1a2f096a97519f344"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a254e46eb1fdbe9d1a2f096a97519f344">count</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key) const noexcept(noexcept(ht_.count(key)))</td></tr>
+<tr class="memdesc:a254e46eb1fdbe9d1a2f096a97519f344"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计具有指定键的元素数量  <br /></td></tr>
+<tr class="memitem:a3e4caa260a4371835852f92dd9c3377c" id="r_a3e4caa260a4371835852f92dd9c3377c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3e4caa260a4371835852f92dd9c3377c">buckets_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a3e4caa260a4371835852f92dd9c3377c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取桶数量  <br /></td></tr>
+<tr class="memitem:aa7f1f60d766c74e4f4d84c0c9dde6dbc" id="r_aa7f1f60d766c74e4f4d84c0c9dde6dbc"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa7f1f60d766c74e4f4d84c0c9dde6dbc">buckets_max_count</a> () const noexcept</td></tr>
+<tr class="memdesc:aa7f1f60d766c74e4f4d84c0c9dde6dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大桶数量  <br /></td></tr>
+<tr class="memitem:a502b6d45f1dea783020fd6a74f4001b8" id="r_a502b6d45f1dea783020fd6a74f4001b8"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a502b6d45f1dea783020fd6a74f4001b8">bucket_size</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n) const noexcept</td></tr>
+<tr class="memdesc:a502b6d45f1dea783020fd6a74f4001b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定桶的大小  <br /></td></tr>
+<tr class="memitem:aa6c7af27be0cdfd652b7da5b75b4b11d" id="r_aa6c7af27be0cdfd652b7da5b75b4b11d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa6c7af27be0cdfd652b7da5b75b4b11d">hash_func</a> () const noexcept(noexcept(ht_.hash_func()))</td></tr>
+<tr class="memdesc:aa6c7af27be0cdfd652b7da5b75b4b11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取哈希函数对象  <br /></td></tr>
+<tr class="memitem:aeb22fb6a7644511d3b0150b196027c98" id="r_aeb22fb6a7644511d3b0150b196027c98"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a>&#160;</td><td class="memItemRight"><a class="el" href="#aeb22fb6a7644511d3b0150b196027c98">key_eql</a> () const noexcept(noexcept(ht_.key_eql()))</td></tr>
+<tr class="memdesc:aeb22fb6a7644511d3b0150b196027c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键相等比较函数对象  <br /></td></tr>
+<tr class="memitem:ad8ea8c4262a1059018ef21c4553369c8" id="r_ad8ea8c4262a1059018ef21c4553369c8"><td class="memItemLeft">NEFORCE_NODISCARD float&#160;</td><td class="memItemRight"><a class="el" href="#ad8ea8c4262a1059018ef21c4553369c8">load_factor</a> () const noexcept</td></tr>
+<tr class="memdesc:ad8ea8c4262a1059018ef21c4553369c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前负载因子  <br /></td></tr>
+<tr class="memitem:a95b4071909a5879d93d5a2db204a8b83" id="r_a95b4071909a5879d93d5a2db204a8b83"><td class="memItemLeft">NEFORCE_NODISCARD float&#160;</td><td class="memItemRight"><a class="el" href="#a95b4071909a5879d93d5a2db204a8b83">max_load_factor</a> () const noexcept</td></tr>
+<tr class="memdesc:a95b4071909a5879d93d5a2db204a8b83"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大负载因子  <br /></td></tr>
+<tr class="memitem:a38457e9fa8a1c255a007d13831eafb6b" id="r_a38457e9fa8a1c255a007d13831eafb6b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a38457e9fa8a1c255a007d13831eafb6b">max_load_factor</a> (float lf) noexcept</td></tr>
+<tr class="memdesc:a38457e9fa8a1c255a007d13831eafb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置最大负载因子  <br /></td></tr>
+<tr class="memitem:aaeb7e18b064d958dadbc6308b25add1b" id="r_aaeb7e18b064d958dadbc6308b25add1b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaeb7e18b064d958dadbc6308b25add1b">rehash</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n)</td></tr>
+<tr class="memdesc:aaeb7e18b064d958dadbc6308b25add1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新哈希，调整桶数量  <br /></td></tr>
+<tr class="memitem:a09220b72b7797b5fe7885a93d5cdb6eb" id="r_a09220b72b7797b5fe7885a93d5cdb6eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a09220b72b7797b5fe7885a93d5cdb6eb">reserve</a> (<a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> n)</td></tr>
+<tr class="memdesc:a09220b72b7797b5fe7885a93d5cdb6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留空间  <br /></td></tr>
+<tr class="memitem:aee0eaa558b6df5d8a1e63c17e828be73" id="r_aee0eaa558b6df5d8a1e63c17e828be73"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:aee0eaa558b6df5d8a1e63c17e828be73 template"><td class="memItemLeft"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aee0eaa558b6df5d8a1e63c17e828be73">emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aee0eaa558b6df5d8a1e63c17e828be73"><td class="mdescLeft">&#160;</td><td class="mdescRight">在unordered_multimap中就地构造元素  <br /></td></tr>
+<tr class="memitem:a35f66d7afc952e4e482d42f618f2f418" id="r_a35f66d7afc952e4e482d42f618f2f418"><td class="memItemLeft"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a35f66d7afc952e4e482d42f618f2f418">insert</a> (const <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a35f66d7afc952e4e482d42f618f2f418"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a5377c211e163e4839921694fb7ec4697" id="r_a5377c211e163e4839921694fb7ec4697"><td class="memItemLeft"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5377c211e163e4839921694fb7ec4697">insert</a> (<a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a5377c211e163e4839921694fb7ec4697"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动插入元素  <br /></td></tr>
+<tr class="memitem:a34fb5dd50003d3704904cd3e0a6b726d" id="r_a34fb5dd50003d3704904cd3e0a6b726d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:a34fb5dd50003d3704904cd3e0a6b726d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a34fb5dd50003d3704904cd3e0a6b726d">insert</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a34fb5dd50003d3704904cd3e0a6b726d"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素  <br /></td></tr>
+<tr class="memitem:a3052da5a6737b7ef788793523420c2ed" id="r_a3052da5a6737b7ef788793523420c2ed"><td class="memItemLeft"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3052da5a6737b7ef788793523420c2ed">erase</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key) noexcept</td></tr>
+<tr class="memdesc:a3052da5a6737b7ef788793523420c2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除所有具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a2d1c1c33fe12e7511598e27b710402d0" id="r_a2d1c1c33fe12e7511598e27b710402d0"><td class="memItemLeft"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2d1c1c33fe12e7511598e27b710402d0">erase</a> (<a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> position) noexcept</td></tr>
+<tr class="memdesc:a2d1c1c33fe12e7511598e27b710402d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:a2a1d8b3cf321c2430776aa5509b18d85" id="r_a2a1d8b3cf321c2430776aa5509b18d85"><td class="memItemLeft"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2a1d8b3cf321c2430776aa5509b18d85">erase</a> (<a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> first, <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> last) noexcept</td></tr>
+<tr class="memdesc:a2a1d8b3cf321c2430776aa5509b18d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:af1675f892f4a7729aa052c9317a12d53" id="r_af1675f892f4a7729aa052c9317a12d53"><td class="memItemLeft"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#af1675f892f4a7729aa052c9317a12d53">erase</a> (<a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> position) noexcept</td></tr>
+<tr class="memdesc:af1675f892f4a7729aa052c9317a12d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的常量元素  <br /></td></tr>
+<tr class="memitem:a7b2fd0f3defd4dcec2ed4fd0e9f6c01b" id="r_a7b2fd0f3defd4dcec2ed4fd0e9f6c01b"><td class="memItemLeft"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b2fd0f3defd4dcec2ed4fd0e9f6c01b">erase</a> (<a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> first, <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> last) noexcept</td></tr>
+<tr class="memdesc:a7b2fd0f3defd4dcec2ed4fd0e9f6c01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的常量元素  <br /></td></tr>
+<tr class="memitem:a9ff42cd8b3ca0fa43e7d5f80b5a3a974" id="r_a9ff42cd8b3ca0fa43e7d5f80b5a3a974"><td class="memItemLeft"><a id="a9ff42cd8b3ca0fa43e7d5f80b5a3a974" name="a9ff42cd8b3ca0fa43e7d5f80b5a3a974"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
+<tr class="memdesc:a9ff42cd8b3ca0fa43e7d5f80b5a3a974"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空unordered_multimap <br /></td></tr>
+<tr class="memitem:a949c1eee57b3ee354c0fb5d045725a4e" id="r_a949c1eee57b3ee354c0fb5d045725a4e"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a949c1eee57b3ee354c0fb5d045725a4e">find</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a949c1eee57b3ee354c0fb5d045725a4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a573651dbd7fea79423fc6fd9ed24dc6b" id="r_a573651dbd7fea79423fc6fd9ed24dc6b"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a573651dbd7fea79423fc6fd9ed24dc6b">find</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a573651dbd7fea79423fc6fd9ed24dc6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的常量元素  <br /></td></tr>
+<tr class="memitem:af740afeec659c6e04f38bea8a5f15e1f" id="r_af740afeec659c6e04f38bea8a5f15e1f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>, <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af740afeec659c6e04f38bea8a5f15e1f">equal_range</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:af740afeec659c6e04f38bea8a5f15e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围  <br /></td></tr>
+<tr class="memitem:a0ad6a39c7ccff20e7c1d2d33005ffdb5" id="r_a0ad6a39c7ccff20e7c1d2d33005ffdb5"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>, <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0ad6a39c7ccff20e7c1d2d33005ffdb5">equal_range</a> (const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a0ad6a39c7ccff20e7c1d2d33005ffdb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的常量元素范围  <br /></td></tr>
+<tr class="memitem:a6c4a7ced9a0f2d1e906343a1d6621e3f" id="r_a6c4a7ced9a0f2d1e906343a1d6621e3f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6c4a7ced9a0f2d1e906343a1d6621e3f">swap</a> (<a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a6c4a7ced9a0f2d1e906343a1d6621e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个unordered_multimap的内容  <br /></td></tr>
+<tr class="memitem:ae707d59d6622acde9a4e2aae8c0d5eab" id="r_ae707d59d6622acde9a4e2aae8c0d5eab"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ae707d59d6622acde9a4e2aae8c0d5eab">operator==</a> (const <a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;rhs) const noexcept(noexcept(ht_==rhs.ht_))</td></tr>
+<tr class="memdesc:ae707d59d6622acde9a4e2aae8c0d5eab"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:aae9a789971018e52689a9631c09c1401" id="r_aae9a789971018e52689a9631c09c1401"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#aae9a789971018e52689a9631c09c1401">operator&lt;</a> (const <a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp;rhs) const noexcept(noexcept(ht_&lt; rhs.ht_))</td></tr>
+<tr class="memdesc:aae9a789971018e52689a9631c09c1401"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt;<br />
+class unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;</div><p>无序多重映射容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">HashFcn</td><td>哈希函数类型，默认为hash&lt;Key&gt; </td></tr>
+    <tr><td class="paramname">EqualKey</td><td>键相等比较函数类型，默认为equal_to&lt;Key&gt; </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>unordered_multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。 元素无序存储，由哈希函数将键映射到桶中。 支持快速的键查找，且允许重复键。底层使用哈希表实现。 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00038">38</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="af9c844706091b379b1544fc88bd96727" name="af9c844706091b379b1544fc88bd96727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c844706091b379b1544fc88bd96727">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[1/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>构造一个空unordered_multimap。 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__multimap_8hpp_source.html#l00545">operator&lt;()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00112">operator=()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00130">operator=()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00535">operator==()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00525">swap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00104">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00194">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00202">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00211">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00221">unordered_multimap()</a> , 以及 <a class="el" href="unordered__multimap_8hpp_source.html#l00121">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a731219e571e335fb4b832cf596326b54" name="a731219e571e335fb4b832cf596326b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a731219e571e335fb4b832cf596326b54">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[2/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始桶数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00080">80</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a895858f30357bc936d47c3fe17d2c02f" name="a895858f30357bc936d47c3fe17d2c02f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a895858f30357bc936d47c3fe17d2c02f">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[3/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始桶数和哈希函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00088">88</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8b036a24a4dd95096a71f488445b322e" name="a8b036a24a4dd95096a71f488445b322e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b036a24a4dd95096a71f488445b322e">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[4/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>eql</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定初始桶数、哈希函数和键相等比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+    <tr><td class="paramname">eql</td><td>键相等比较函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00097">97</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a775d6ddab4de216506149b16f54eab2c" name="a775d6ddab4de216506149b16f54eab2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a775d6ddab4de216506149b16f54eab2c">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[5/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00104">104</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a2ea94f6df51bf05246851aadc312cfe8" name="a2ea94f6df51bf05246851aadc312cfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea94f6df51bf05246851aadc312cfe8">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[6/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00121">121</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="ad011a31b5a3fe903ad34a1b877b604c2" name="ad011a31b5a3fe903ad34a1b877b604c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad011a31b5a3fe903ad34a1b877b604c2">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[7/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00143">143</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a96894bfed496bf703e610469561d89fa" name="a96894bfed496bf703e610469561d89fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96894bfed496bf703e610469561d89fa">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[8/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>list</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数，指定初始桶数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">list</td><td>结束迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00156">156</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a98ab626d5f7384d70b699d0fc7b836eb" name="a98ab626d5f7384d70b699d0fc7b836eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98ab626d5f7384d70b699d0fc7b836eb">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[9/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数，指定初始桶数和哈希函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00170">170</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab84f42b0ff9193d7f22dcf827744ae0b" name="ab84f42b0ff9193d7f22dcf827744ae0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab84f42b0ff9193d7f22dcf827744ae0b">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[10/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>eql</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数，指定初始桶数、哈希函数和键相等比较函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+    <tr><td class="paramname">eql</td><td>键相等比较函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00185">185</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6bba7da233f3a4c649d51fa34f674d59" name="a6bba7da233f3a4c649d51fa34f674d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bba7da233f3a4c649d51fa34f674d59">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[11/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00194">194</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00228">begin()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00236">end()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="ae73a8744c23b60d4c0f7177702cb6a44" name="ae73a8744c23b60d4c0f7177702cb6a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73a8744c23b60d4c0f7177702cb6a44">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[12/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数，指定初始桶数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00202">202</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00228">begin()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00236">end()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="adf6105b06549f96a30e329ea50f440da" name="adf6105b06549f96a30e329ea50f440da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6105b06549f96a30e329ea50f440da">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[13/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数，指定初始桶数和哈希函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00211">211</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00228">begin()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00236">end()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="ade898a36fab46a4f633f725e4177da58" name="ade898a36fab46a4f633f725e4177da58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade898a36fab46a4f633f725e4177da58">&#9670;&#160;</a></span>unordered_multimap() <span class="overload">[14/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>eql</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+    <tr><td class="paramname">n</td><td>初始桶数 </td></tr>
+    <tr><td class="paramname">hf</td><td>哈希函数 </td></tr>
+    <tr><td class="paramname">eql</td><td>键相等比较函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00221">221</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00228">begin()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00236">end()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a145c7176e0b7dc290dcd6e5c3dcf299b" name="a145c7176e0b7dc290dcd6e5c3dcf299b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a145c7176e0b7dc290dcd6e5c3dcf299b">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00244">244</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adad5e0c929e9a984c65f2c0855ac9e06" name="adad5e0c929e9a984c65f2c0855ac9e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad5e0c929e9a984c65f2c0855ac9e06">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00228">228</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__multimap_8hpp_source.html#l00194">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00202">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00211">unordered_multimap()</a> , 以及 <a class="el" href="unordered__multimap_8hpp_source.html#l00221">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a502b6d45f1dea783020fd6a74f4001b8" name="a502b6d45f1dea783020fd6a74f4001b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a502b6d45f1dea783020fd6a74f4001b8">&#9670;&#160;</a></span>bucket_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::bucket_size </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定桶的大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>桶索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>桶中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00327">327</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa7f1f60d766c74e4f4d84c0c9dde6dbc" name="aa7f1f60d766c74e4f4d84c0c9dde6dbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f1f60d766c74e4f4d84c0c9dde6dbc">&#9670;&#160;</a></span>buckets_max_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_max_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大桶数量 </p>
+<dl class="section return"><dt>返回</dt><dd>最大桶数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00318">318</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3e4caa260a4371835852f92dd9c3377c" name="a3e4caa260a4371835852f92dd9c3377c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e4caa260a4371835852f92dd9c3377c">&#9670;&#160;</a></span>buckets_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取桶数量 </p>
+<dl class="section return"><dt>返回</dt><dd>桶数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00310">310</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aaf6d99b9eb78542f58ff520e65644c81" name="aaf6d99b9eb78542f58ff520e65644c81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6d99b9eb78542f58ff520e65644c81">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00260">260</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa8a79a89b21041f24212ba67cb828ef6" name="aa8a79a89b21041f24212ba67cb828ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8a79a89b21041f24212ba67cb828ef6">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00268">268</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a254e46eb1fdbe9d1a2f096a97519f344" name="a254e46eb1fdbe9d1a2f096a97519f344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a254e46eb1fdbe9d1a2f096a97519f344">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>统计具有指定键的元素数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要统计的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00301">301</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aee0eaa558b6df5d8a1e63c17e828be73" name="aee0eaa558b6df5d8a1e63c17e828be73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee0eaa558b6df5d8a1e63c17e828be73">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在unordered_multimap中就地构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00398">398</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+
+</div>
+</div>
+<a id="a691b8dd49926d27401e511682b8cfd3b" name="a691b8dd49926d27401e511682b8cfd3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a691b8dd49926d27401e511682b8cfd3b">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00292">292</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a80a7f4bb9e3792ed261071e398f158f8" name="a80a7f4bb9e3792ed261071e398f158f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a7f4bb9e3792ed261071e398f158f8">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00252">252</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6468a4e9fb20091634592f31cb768cba" name="a6468a4e9fb20091634592f31cb768cba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6468a4e9fb20091634592f31cb768cba">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00236">236</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__multimap_8hpp_source.html#l00194">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00202">unordered_multimap()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00211">unordered_multimap()</a> , 以及 <a class="el" href="unordered__multimap_8hpp_source.html#l00221">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="af740afeec659c6e04f38bea8a5f15e1f" name="af740afeec659c6e04f38bea8a5f15e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af740afeec659c6e04f38bea8a5f15e1f">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a>, <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> &gt; <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含范围起始和结束的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00508">508</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0ad6a39c7ccff20e7c1d2d33005ffdb5" name="a0ad6a39c7ccff20e7c1d2d33005ffdb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad6a39c7ccff20e7c1d2d33005ffdb5">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a>, <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> &gt; <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的常量元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含范围起始和结束的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00517">517</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3052da5a6737b7ef788793523420c2ed" name="a3052da5a6737b7ef788793523420c2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3052da5a6737b7ef788793523420c2ed">&#9670;&#160;</a></span>erase() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除所有具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要删除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00436">436</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7b2fd0f3defd4dcec2ed4fd0e9f6c01b" name="a7b2fd0f3defd4dcec2ed4fd0e9f6c01b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b2fd0f3defd4dcec2ed4fd0e9f6c01b">&#9670;&#160;</a></span>erase() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的常量元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00474">474</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af1675f892f4a7729aa052c9317a12d53" name="af1675f892f4a7729aa052c9317a12d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1675f892f4a7729aa052c9317a12d53">&#9670;&#160;</a></span>erase() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的常量元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00464">464</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2a1d8b3cf321c2430776aa5509b18d85" name="a2a1d8b3cf321c2430776aa5509b18d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a1d8b3cf321c2430776aa5509b18d85">&#9670;&#160;</a></span>erase() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00455">455</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2d1c1c33fe12e7511598e27b710402d0" name="a2d1c1c33fe12e7511598e27b710402d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d1c1c33fe12e7511598e27b710402d0">&#9670;&#160;</a></span>erase() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00445">445</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a949c1eee57b3ee354c0fb5d045725a4e" name="a949c1eee57b3ee354c0fb5d045725a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949c1eee57b3ee354c0fb5d045725a4e">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00490">490</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a573651dbd7fea79423fc6fd9ed24dc6b" name="a573651dbd7fea79423fc6fd9ed24dc6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a573651dbd7fea79423fc6fd9ed24dc6b">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a05ae498b684f87d2da26ecba4efc4da5">const_iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a2eece86abca0846cd96e81014acd5758">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的常量元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00499">499</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa6c7af27be0cdfd652b7da5b75b4b11d" name="aa6c7af27be0cdfd652b7da5b75b4b11d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c7af27be0cdfd652b7da5b75b4b11d">&#9670;&#160;</a></span>hash_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#afc6ca319e81bc9ca78493226527be4db">hasher</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_func </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取哈希函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>哈希函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00335">335</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00335">hash_func()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__multimap_8hpp_source.html#l00335">hash_func()</a>.</p>
+
+</div>
+</div>
+<a id="a35f66d7afc952e4e482d42f618f2f418" name="a35f66d7afc952e4e482d42f618f2f418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f66d7afc952e4e482d42f618f2f418">&#9670;&#160;</a></span>insert() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00407">407</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a34fb5dd50003d3704904cd3e0a6b726d" name="a34fb5dd50003d3704904cd3e0a6b726d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fb5dd50003d3704904cd3e0a6b726d">&#9670;&#160;</a></span>insert() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00427">427</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5377c211e163e4839921694fb7ec4697" name="a5377c211e163e4839921694fb7ec4697"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5377c211e163e4839921694fb7ec4697">&#9670;&#160;</a></span>insert() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aae2c24b62b7387c90f085a32ffe2500a">iterator</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a11f2cf024dfa875a85caaf74b15f9e11">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00416">416</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="aeb22fb6a7644511d3b0150b196027c98" name="aeb22fb6a7644511d3b0150b196027c98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb22fb6a7644511d3b0150b196027c98">&#9670;&#160;</a></span>key_eql()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a98d034a85c6c740ca18b40be64313604">key_equal</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键相等比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>键相等比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00344">344</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__multimap_8hpp_source.html#l00344">key_eql()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__multimap_8hpp_source.html#l00344">key_eql()</a>.</p>
+
+</div>
+</div>
+<a id="ad8ea8c4262a1059018ef21c4553369c8" name="ad8ea8c4262a1059018ef21c4553369c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ea8c4262a1059018ef21c4553369c8">&#9670;&#160;</a></span>load_factor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD float <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::load_factor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前负载因子 </p>
+<dl class="section return"><dt>返回</dt><dd>负载因子 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00353">353</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a95b4071909a5879d93d5a2db204a8b83" name="a95b4071909a5879d93d5a2db204a8b83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95b4071909a5879d93d5a2db204a8b83">&#9670;&#160;</a></span>max_load_factor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD float <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大负载因子 </p>
+<dl class="section return"><dt>返回</dt><dd>最大负载因子 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a38457e9fa8a1c255a007d13831eafb6b" name="a38457e9fa8a1c255a007d13831eafb6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38457e9fa8a1c255a007d13831eafb6b">&#9670;&#160;</a></span>max_load_factor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>lf</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置最大负载因子 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lf</td><td>新的最大负载因子 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00369">369</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab76f2b77809cf674287a944d7f23d10c" name="ab76f2b77809cf674287a944d7f23d10c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab76f2b77809cf674287a944d7f23d10c">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00284">284</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aae9a789971018e52689a9631c09c1401" name="aae9a789971018e52689a9631c09c1401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9a789971018e52689a9631c09c1401">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00545">545</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a69630e0c2c18093e9ef74e50b895f86e" name="a69630e0c2c18093e9ef74e50b895f86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69630e0c2c18093e9ef74e50b895f86e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp; <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00112">112</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a6ee24848260b936f04522634cef7705e" name="a6ee24848260b936f04522634cef7705e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ee24848260b936f04522634cef7705e">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunordered__multimap.html">unordered_multimap</a> &amp; <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="ae707d59d6622acde9a4e2aae8c0d5eab" name="ae707d59d6622acde9a4e2aae8c0d5eab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae707d59d6622acde9a4e2aae8c0d5eab">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个unordered_multimap大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00535">535</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<a id="aaeb7e18b064d958dadbc6308b25add1b" name="aaeb7e18b064d958dadbc6308b25add1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeb7e18b064d958dadbc6308b25add1b">&#9670;&#160;</a></span>rehash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::rehash </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重新哈希，调整桶数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>目标桶数量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00377">377</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a09220b72b7797b5fe7885a93d5cdb6eb" name="a09220b72b7797b5fe7885a93d5cdb6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09220b72b7797b5fe7885a93d5cdb6eb">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留空间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>期望的元素数量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>确保unordered_multimap至少能容纳n个元素而不触发rehash。 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00387">387</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a39c67c1b08119c08c335e8bb15bab06f" name="a39c67c1b08119c08c335e8bb15bab06f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c67c1b08119c08c335e8bb15bab06f">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a9585ab3a436c853091ba89c2cad0da17">size_type</a> <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>unordered_multimap中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00276">276</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6c4a7ced9a0f2d1e906343a1d6621e3f" name="a6c4a7ced9a0f2d1e906343a1d6621e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c4a7ced9a0f2d1e906343a1d6621e3f">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunordered__multimap.html">unordered_multimap</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个unordered_multimap的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个unordered_multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a> 第 <a class="el" href="unordered__multimap_8hpp_source.html#l00525">525</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#af9c844706091b379b1544fc88bd96727">unordered_multimap()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="unordered__multimap_8hpp_source.html">unordered_multimap.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classunordered__multimap.html">unordered_multimap</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

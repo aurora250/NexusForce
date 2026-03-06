@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: json_builder类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classjson__builder.html','','classjson__builder-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">json_builder类 参考<div class="ingroups"><a class="el" href="group___json_config.html">json配置</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>json配置构建器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a2741c71f0b269a7f75d1c9053ab6ef28" id="r_a2741c71f0b269a7f75d1c9053ab6ef28"><td class="memItemLeft"><a id="a2741c71f0b269a7f75d1c9053ab6ef28" name="a2741c71f0b269a7f75d1c9053ab6ef28"></a>
+&#160;</td><td class="memItemRight"><b>json_builder</b> ()=default</td></tr>
+<tr class="memdesc:a2741c71f0b269a7f75d1c9053ab6ef28"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:af6a7a828e3a28c7c156c6ae2a1557693" id="r_af6a7a828e3a28c7c156c6ae2a1557693"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af6a7a828e3a28c7c156c6ae2a1557693">json_builder</a> (<a class="el" href="classjson__builder.html">json_builder</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:af6a7a828e3a28c7c156c6ae2a1557693"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a72f9824ec1a9f68a9db26f092e9793dc" id="r_a72f9824ec1a9f68a9db26f092e9793dc"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a72f9824ec1a9f68a9db26f092e9793dc">operator=</a> (<a class="el" href="classjson__builder.html">json_builder</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a72f9824ec1a9f68a9db26f092e9793dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:a736bbd94f6b0c5481d07432662c7d84b" id="r_a736bbd94f6b0c5481d07432662c7d84b"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a736bbd94f6b0c5481d07432662c7d84b">begin_object</a> ()</td></tr>
+<tr class="memdesc:a736bbd94f6b0c5481d07432662c7d84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个json对象  <br /></td></tr>
+<tr class="memitem:af7854cbd3be409a911df6570b64ad24b" id="r_af7854cbd3be409a911df6570b64ad24b"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af7854cbd3be409a911df6570b64ad24b">begin_array</a> ()</td></tr>
+<tr class="memdesc:af7854cbd3be409a911df6570b64ad24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个json数组  <br /></td></tr>
+<tr class="memitem:a08532efdc612a36ce50446523a64d853" id="r_a08532efdc612a36ce50446523a64d853"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a08532efdc612a36ce50446523a64d853">end_object</a> ()</td></tr>
+<tr class="memdesc:a08532efdc612a36ce50446523a64d853"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前json对象  <br /></td></tr>
+<tr class="memitem:ab7534d8d54ab74042688e0f0ba920def" id="r_ab7534d8d54ab74042688e0f0ba920def"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab7534d8d54ab74042688e0f0ba920def">end_array</a> ()</td></tr>
+<tr class="memdesc:ab7534d8d54ab74042688e0f0ba920def"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前json数组  <br /></td></tr>
+<tr class="memitem:a6365d6639f7a9af43d5c561a4d259087" id="r_a6365d6639f7a9af43d5c561a4d259087"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6365d6639f7a9af43d5c561a4d259087">key</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key)</td></tr>
+<tr class="memdesc:a6365d6639f7a9af43d5c561a4d259087"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置当前对象的键名  <br /></td></tr>
+<tr class="memitem:a08a2dee2721ab807b4b229ff236c0086" id="r_a08a2dee2721ab807b4b229ff236c0086"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a08a2dee2721ab807b4b229ff236c0086">value</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> np)</td></tr>
+<tr class="memdesc:a08a2dee2721ab807b4b229ff236c0086"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置null值  <br /></td></tr>
+<tr class="memitem:a15a2246641769184910e0eae719abe19" id="r_a15a2246641769184910e0eae719abe19"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a15a2246641769184910e0eae719abe19">value</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;value)</td></tr>
+<tr class="memdesc:a15a2246641769184910e0eae719abe19"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串值  <br /></td></tr>
+<tr class="memitem:a3c97f938b11dcbae62eb957c53ee8a53" id="r_a3c97f938b11dcbae62eb957c53ee8a53"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3c97f938b11dcbae62eb957c53ee8a53">value</a> (const char *value)</td></tr>
+<tr class="memdesc:a3c97f938b11dcbae62eb957c53ee8a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置C字符串值  <br /></td></tr>
+<tr class="memitem:a16cb2e444deed3078fd29c5b5820a457" id="r_a16cb2e444deed3078fd29c5b5820a457"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a16cb2e444deed3078fd29c5b5820a457">value</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> value)</td></tr>
+<tr class="memdesc:a16cb2e444deed3078fd29c5b5820a457"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串视图值  <br /></td></tr>
+<tr class="memitem:a373ac9793050a11087fd203e749a37ee" id="r_a373ac9793050a11087fd203e749a37ee"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a373ac9793050a11087fd203e749a37ee">value</a> (const double value)</td></tr>
+<tr class="memdesc:a373ac9793050a11087fd203e749a37ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置双精度浮点数值  <br /></td></tr>
+<tr class="memitem:a70b6826772f8cce0872431dd92cbc74a" id="r_a70b6826772f8cce0872431dd92cbc74a"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a70b6826772f8cce0872431dd92cbc74a">value</a> (const int value)</td></tr>
+<tr class="memdesc:a70b6826772f8cce0872431dd92cbc74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置整数值  <br /></td></tr>
+<tr class="memitem:a4fe5ea7a3f044eff8283e0445c9135bc" id="r_a4fe5ea7a3f044eff8283e0445c9135bc"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4fe5ea7a3f044eff8283e0445c9135bc">value</a> (const bool value)</td></tr>
+<tr class="memdesc:a4fe5ea7a3f044eff8283e0445c9135bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置布尔值  <br /></td></tr>
+<tr class="memitem:a70896afbe5b4768759a4d233eb2db145" id="r_a70896afbe5b4768759a4d233eb2db145"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a70896afbe5b4768759a4d233eb2db145">value</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classjson__value.html">json_value</a> &gt; &amp;&amp;value)</td></tr>
+<tr class="memdesc:a70896afbe5b4768759a4d233eb2db145"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置已构建的json值  <br /></td></tr>
+<tr class="memitem:af78f88961167305cd359fe1521b11f50" id="r_af78f88961167305cd359fe1521b11f50"><td class="memTemplParams" colspan="2">template&lt;typename Iterable&gt; </td></tr>
+<tr class="memitem:af78f88961167305cd359fe1521b11f50 template"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af78f88961167305cd359fe1521b11f50">value</a> (const Iterable &amp;iterable)</td></tr>
+<tr class="memdesc:af78f88961167305cd359fe1521b11f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可迭代对象的值  <br /></td></tr>
+<tr class="memitem:a396e106b358d4647c47310e6668f6a58" id="r_a396e106b358d4647c47310e6668f6a58"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a396e106b358d4647c47310e6668f6a58">value_object</a> (<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classjson__builder.html">json_builder</a> &amp;)&gt; &amp;&amp;build_func)</td></tr>
+<tr class="memdesc:a396e106b358d4647c47310e6668f6a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建对象值  <br /></td></tr>
+<tr class="memitem:ac3efe9500c0e98d37e785e5c6b2b20d3" id="r_ac3efe9500c0e98d37e785e5c6b2b20d3"><td class="memItemLeft"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac3efe9500c0e98d37e785e5c6b2b20d3">value_array</a> (<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classjson__builder.html">json_builder</a> &amp;)&gt; &amp;&amp;build_func)</td></tr>
+<tr class="memdesc:ac3efe9500c0e98d37e785e5c6b2b20d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建数组值  <br /></td></tr>
+<tr class="memitem:afd9ecd6dcc26bb765290d45b30cd9739" id="r_afd9ecd6dcc26bb765290d45b30cd9739"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classjson__value.html">json_value</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afd9ecd6dcc26bb765290d45b30cd9739">build</a> ()</td></tr>
+<tr class="memdesc:afd9ecd6dcc26bb765290d45b30cd9739"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建json文档  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>json配置构建器 </p>
+<p>提供流式接口构建json配置格式，支持以下特性：</p><ul>
+<li>链式调用构建对象和数组</li>
+<li>自动类型转换（整数、浮点数、布尔值、字符串）</li>
+<li>函数式构建嵌套结构</li>
+<li>集合类型自动转换（可迭代对象、映射表）</li>
+<li>上下文管理（自动维护当前对象/数组状态） </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00034">34</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="af6a7a828e3a28c7c156c6ae2a1557693" name="af6a7a828e3a28c7c156c6ae2a1557693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6a7a828e3a28c7c156c6ae2a1557693">&#9670;&#160;</a></span>json_builder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">json_builder::json_builder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源构建器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="af7854cbd3be409a911df6570b64ad24b" name="af7854cbd3be409a911df6570b64ad24b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7854cbd3be409a911df6570b64ad24b">&#9670;&#160;</a></span>begin_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::begin_array </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个json数组 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当根节点已存在或键名缺失时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建一个新的json数组，并压入上下文栈。 如果当前在顶层，该数组将成为根节点； 否则作为当前上下文的值添加。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a736bbd94f6b0c5481d07432662c7d84b" name="a736bbd94f6b0c5481d07432662c7d84b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736bbd94f6b0c5481d07432662c7d84b">&#9670;&#160;</a></span>begin_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::begin_object </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个json对象 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当根节点已存在或键名缺失时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建一个新的json对象，并压入上下文栈。 如果当前在顶层，该对象将成为根节点； 否则作为当前上下文的值添加。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="afd9ecd6dcc26bb765290d45b30cd9739" name="afd9ecd6dcc26bb765290d45b30cd9739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd9ecd6dcc26bb765290d45b30cd9739">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classjson__value.html">json_value</a> &gt; json_builder::build </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建json文档 </p>
+<dl class="section return"><dt>返回</dt><dd>构建完成的json值根节点 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当存在未闭合的结构或未完成的键值对时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>完成构建过程，返回构建好的json值。 调用前必须确保所有对象/数组都已闭合，且没有未完成的键值对。 </p>
+
+</div>
+</div>
+<a id="ab7534d8d54ab74042688e0f0ba920def" name="ab7534d8d54ab74042688e0f0ba920def"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7534d8d54ab74042688e0f0ba920def">&#9670;&#160;</a></span>end_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::end_array </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前json数组 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当没有数组可关闭时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>弹出上下文栈顶的数组，返回上一层。 必须与 begin_array 配对使用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a08532efdc612a36ce50446523a64d853" name="a08532efdc612a36ce50446523a64d853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08532efdc612a36ce50446523a64d853">&#9670;&#160;</a></span>end_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::end_object </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前json对象 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当没有对象可关闭或存在未完成的键值对时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>弹出上下文栈顶的对象，返回上一层。 必须与 begin_object 配对使用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a6365d6639f7a9af43d5c561a4d259087" name="a6365d6639f7a9af43d5c561a4d259087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6365d6639f7a9af43d5c561a4d259087">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::key </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置当前对象的键名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当不在对象上下文中或键名已设置时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>为后续的值设置键名，仅在对象上下文中有效。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a> , 以及 <a class="el" href="#a6365d6639f7a9af43d5c561a4d259087">key()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6365d6639f7a9af43d5c561a4d259087">key()</a>.</p>
+
+</div>
+</div>
+<a id="a72f9824ec1a9f68a9db26f092e9793dc" name="a72f9824ec1a9f68a9db26f092e9793dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72f9824ec1a9f68a9db26f092e9793dc">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classjson__builder.html">json_builder</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源构建器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a4fe5ea7a3f044eff8283e0445c9135bc" name="a4fe5ea7a3f044eff8283e0445c9135bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe5ea7a3f044eff8283e0445c9135bc">&#9670;&#160;</a></span>value() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置布尔值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>布尔值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00291">291</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01008">make_unique()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="a3c97f938b11dcbae62eb957c53ee8a53" name="a3c97f938b11dcbae62eb957c53ee8a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c97f938b11dcbae62eb957c53ee8a53">&#9670;&#160;</a></span>value() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置C字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>C字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00251">251</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="a373ac9793050a11087fd203e749a37ee" name="a373ac9793050a11087fd203e749a37ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373ac9793050a11087fd203e749a37ee">&#9670;&#160;</a></span>value() <span class="overload">[3/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置双精度浮点数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>双精度浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00271">271</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01008">make_unique()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="a70b6826772f8cce0872431dd92cbc74a" name="a70b6826772f8cce0872431dd92cbc74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70b6826772f8cce0872431dd92cbc74a">&#9670;&#160;</a></span>value() <span class="overload">[4/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00281">281</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01008">make_unique()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="af78f88961167305cd359fe1521b11f50" name="af78f88961167305cd359fe1521b11f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78f88961167305cd359fe1521b11f50">&#9670;&#160;</a></span>value() <span class="overload">[5/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterable&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const Iterable &amp;</td>          <td class="paramname"><span class="paramname"><em>iterable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置可迭代对象的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterable</td><td>可迭代类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iterable</td><td>可迭代对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>根据类型自动转换为json对象或数组：</p><ul>
+<li>映射表类型转换为对象</li>
+<li>其他可迭代类型转换为数组 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00316">316</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a15a2246641769184910e0eae719abe19" name="a15a2246641769184910e0eae719abe19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15a2246641769184910e0eae719abe19">&#9670;&#160;</a></span>value() <span class="overload">[6/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>字符串值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00241">241</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l01008">make_unique()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="a16cb2e444deed3078fd29c5b5820a457" name="a16cb2e444deed3078fd29c5b5820a457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16cb2e444deed3078fd29c5b5820a457">&#9670;&#160;</a></span>value() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串视图值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00261">261</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="a08a2dee2721ab807b4b229ff236c0086" name="a08a2dee2721ab807b4b229ff236c0086"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a2dee2721ab807b4b229ff236c0086">&#9670;&#160;</a></span>value() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em>np</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置null值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">np</td><td>空指针标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l01008">make_unique()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="json__builder_8hpp_source.html#l00291">value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00251">value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00271">value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00281">value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00241">value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00261">value()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00301">value()</a>.</p>
+
+</div>
+</div>
+<a id="a70896afbe5b4768759a4d233eb2db145" name="a70896afbe5b4768759a4d233eb2db145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70896afbe5b4768759a4d233eb2db145">&#9670;&#160;</a></span>value() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classjson__value.html">json_value</a> &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置已构建的json值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>json值指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structjson__exception.html" title="json格式操作失败">json_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a> 第 <a class="el" href="json__builder_8hpp_source.html#l00301">301</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="json__builder_8hpp_source.html#l00231">value()</a>.</p>
+
+</div>
+</div>
+<a id="ac3efe9500c0e98d37e785e5c6b2b20d3" name="ac3efe9500c0e98d37e785e5c6b2b20d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3efe9500c0e98d37e785e5c6b2b20d3">&#9670;&#160;</a></span>value_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value_array </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classjson__builder.html">json_builder</a> &amp;)&gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建数组值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数，接收json_builder引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>在独立的作用域内构建一个数组，构建完成后自动闭合。 </p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a396e106b358d4647c47310e6668f6a58" name="a396e106b358d4647c47310e6668f6a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a396e106b358d4647c47310e6668f6a58">&#9670;&#160;</a></span>value_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classjson__builder.html">json_builder</a> &amp; json_builder::value_object </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classjson__builder.html">json_builder</a> &amp;)&gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建对象值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数，接收json_builder引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>在独立的作用域内构建一个对象，构建完成后自动闭合。 </p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="#a2741c71f0b269a7f75d1c9053ab6ef28">json_builder()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="json__builder_8hpp_source.html">json_builder.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classjson__builder.html">json_builder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

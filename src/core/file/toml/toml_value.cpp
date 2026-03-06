@@ -1,21 +1,21 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/toml/toml_value.hpp>
-#include <MSTL/core/numeric/numeric_types.hpp>
-MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_INNER__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/toml/toml_value.hpp>
+#include <NeForce/core/numeric/numeric_types.hpp>
+NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_INNER__
 
-string MSTL_API toml_value_to_string(const toml_value* value) {
+string NEFORCE_API toml_value_to_string(const toml_value* value) {
     if (!value) return "";
 
     switch (value->type()) {
         case toml_value::Boolean: {
-            return _MSTL to_string(value->as_boolean()->get_value());
+            return _NEFORCE to_string(value->as_boolean()->get_value());
         }
         case toml_value::Integer: {
-            return _MSTL to_string(value->as_integer()->get_value());
+            return _NEFORCE to_string(value->as_integer()->get_value());
         }
         case toml_value::Float: {
-            return _MSTL to_string(value->as_float()->get_value());
+            return _NEFORCE to_string(value->as_float()->get_value());
         }
         case toml_value::String: {
             const toml_string* str_val = value->as_string();
@@ -24,7 +24,7 @@ string MSTL_API toml_value_to_string(const toml_value* value) {
 
             switch (str_type) {
                 case toml_string::Basic: {
-                    return "\"" + _MSTL escape(str) + "\"";
+                    return "\"" + _NEFORCE escape(str) + "\"";
                 }
                 case toml_string::Literal: {
                     string lit;
@@ -37,7 +37,7 @@ string MSTL_API toml_value_to_string(const toml_value* value) {
                     return lit;
                 }
                 case toml_string::MultiBasic: {
-                    string escaped = _MSTL escape(str);
+                    string escaped = _NEFORCE escape(str);
                     if (!escaped.empty() && escaped.back() == '"') {
                         escaped.pop_back();
                         escaped += "\\\"";
@@ -48,7 +48,7 @@ string MSTL_API toml_value_to_string(const toml_value* value) {
                     return "'''" + str + "'''";
                 }
                 default: {
-                    return "\"" + _MSTL escape(str) + "\"";
+                    return "\"" + _NEFORCE escape(str) + "\"";
                 }
             }
         }
@@ -85,7 +85,7 @@ string MSTL_API toml_value_to_string(const toml_value* value) {
                     }
 
                     if (needs_quotes) {
-                        result += "\"" + _MSTL escape(key) + "\"";
+                        result += "\"" + _NEFORCE escape(key) + "\"";
                     } else {
                         result += key;
                     }
@@ -103,7 +103,7 @@ string MSTL_API toml_value_to_string(const toml_value* value) {
     }
 }
 
-static MSTL_ALWAYS_INLINE_INLINE string toml_quote_key_if_needed(const string& key) {
+static NEFORCE_ALWAYS_INLINE_INLINE string toml_quote_key_if_needed(const string& key) {
     bool needs_quotes = false;
     for (const char c : key) {
         if (!is_alpha_or_digit(c) && c != '_' && c != '-') {
@@ -113,7 +113,7 @@ static MSTL_ALWAYS_INLINE_INLINE string toml_quote_key_if_needed(const string& k
     }
 
     if (needs_quotes) {
-        return "\"" + _MSTL escape(key) + "\"";
+        return "\"" + _NEFORCE escape(key) + "\"";
     }
     return key;
 }
@@ -203,24 +203,24 @@ static string toml_table_to_string_with_path(const toml_table* table, const stri
     return result;
 }
 
-string MSTL_API toml_value_document(const toml_value* value) {
+string NEFORCE_API toml_value_document(const toml_value* value) {
     if (!value) return "";
 
     switch (value->type()) {
         case toml_value::Boolean: {
-            return _MSTL to_string(value->as_boolean()->get_value());
+            return _NEFORCE to_string(value->as_boolean()->get_value());
         }
         case toml_value::Integer: {
-            return _MSTL to_string(value->as_integer()->get_value());
+            return _NEFORCE to_string(value->as_integer()->get_value());
         }
         case toml_value::Float: {
             const double val = value->as_float()->get_value();
             if (is_nan(val)) {
                 return "nan";
             } else if (is_infinity(val)) {
-                return _MSTL signbit(val) ? "-inf" : "inf";
+                return _NEFORCE signbit(val) ? "-inf" : "inf";
             } else {
-                return _MSTL to_string(val);
+                return _NEFORCE to_string(val);
             }
         }
         case toml_value::String: {
@@ -230,7 +230,7 @@ string MSTL_API toml_value_document(const toml_value* value) {
 
             switch (str_type) {
                 case toml_string::Basic: {
-                    return "\"" + _MSTL escape(str) + "\"";
+                    return "\"" + _NEFORCE escape(str) + "\"";
                 }
                 case toml_string::Literal: {
                     string lit = "'";
@@ -242,7 +242,7 @@ string MSTL_API toml_value_document(const toml_value* value) {
                     return lit;
                 }
                 case toml_string::MultiBasic: {
-                    string escaped = _MSTL escape(str);
+                    string escaped = _NEFORCE escape(str);
                     if (!escaped.empty() && escaped.back() == '"') {
                         escaped.pop_back();
                         escaped += "\\\"";
@@ -253,7 +253,7 @@ string MSTL_API toml_value_document(const toml_value* value) {
                     return "'''" + str + "'''";
                 }
                 default: {
-                    return "\"" + _MSTL escape(str) + "\"";
+                    return "\"" + _NEFORCE escape(str) + "\"";
                 }
             }
         }
@@ -297,5 +297,5 @@ string MSTL_API toml_value_document(const toml_value* value) {
     }
 }
 
-MSTL_END_INNER__
-MSTL_END_NAMESPACE__
+NEFORCE_END_INNER__
+NEFORCE_END_NAMESPACE__

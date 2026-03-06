@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: futex.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('futex_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">futex.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="futex_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_FUTEX_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_FUTEX_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="type__traits_8hpp.html">NeForce/core/typeinfo/type_traits.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">   26</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> =</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    long;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    int;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___futex.html#gab7057283120da679629ce8fb1238219b">   40</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="group___futex.html#gab7057283120da679629ce8fb1238219b">futex_wait_flags</a> : <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">   41</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">private_flag</a> = 0,                  </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">   42</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">wait</a> = 0,                          </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">   43</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">wake</a> = 1,                          </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d">   44</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d">wait_bitset</a> = 9,                   </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc">   45</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc">wake_bitset</a> = 10,                  </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef">   46</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef">wait_private</a> = <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">wait</a> | <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">private_flag</a>,    </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95">   47</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95">wake_private</a> = <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">wake</a> | <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">private_flag</a>,    </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945">   48</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945">wait_bitset_private</a> = <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d">wait_bitset</a> | <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">private_flag</a>,  </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49">   49</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49">wake_bitset_private</a> = <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc">wake_bitset</a> | <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">private_flag</a>,  </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8">   50</a></span>    <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8">bitset_match_any</a> = -1              </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">   64</a></span><span class="keywordtype">void</span> NEFORCE_API <a class="code hl_function" href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a>(<span class="keywordtype">void</span>* addr, <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> value) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keywordtype">bool</span> NEFORCE_API</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___futex.html#ga48d2abd213cbed922449fad6f05638ed">   89</a></span><a class="code hl_function" href="group___futex.html#ga48d2abd213cbed922449fad6f05638ed">futex_wait_until</a>(<span class="keywordtype">void</span>* addr, <a class="code hl_typedef" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> value,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                 <span class="keywordtype">bool</span> has_timeout, <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> sec, <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ns,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                 <span class="keywordtype">bool</span> is_monotonic = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19">  103</a></span><span class="keywordtype">void</span> NEFORCE_API <a class="code hl_function" href="group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify</a>(<span class="keywordtype">void</span>* addr, <span class="keywordtype">bool</span> all) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> <span class="comment">// Futex</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_FUTEX_HPP__</span></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___futex_html_ga05f2a678e4c7a16ecc3ba93dba798e19"><div class="ttname"><a href="group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify</a></div><div class="ttdeci">void NEFORCE_API futex_notify(void *addr, bool all) noexcept</div><div class="ttdoc">通知等待的线程</div></div>
+<div class="ttc" id="agroup___futex_html_ga26f36b601d9ad2d293b3345e1eaf5306"><div class="ttname"><a href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a></div><div class="ttdeci">void NEFORCE_API futex_wait(void *addr, platform_wait_t value) noexcept</div><div class="ttdoc">无限期等待FUTEX</div></div>
+<div class="ttc" id="agroup___futex_html_ga48d2abd213cbed922449fad6f05638ed"><div class="ttname"><a href="group___futex.html#ga48d2abd213cbed922449fad6f05638ed">futex_wait_until</a></div><div class="ttdeci">bool NEFORCE_API futex_wait_until(void *addr, platform_wait_t value, bool has_timeout, int64_t sec, int64_t ns, bool is_monotonic=false)</div><div class="ttdoc">等待FUTEX直到指定时间点或条件满足</div></div>
+<div class="ttc" id="agroup___futex_html_ga4e69cddccd65383e4497831dc239b6a9"><div class="ttname"><a href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a></div><div class="ttdeci">int platform_wait_t</div><div class="ttdoc">平台等待类型别名</div><div class="ttdef"><b>定义</b> <a href="#l00026">futex.hpp:26</a></div></div>
+<div class="ttc" id="agroup___futex_html_gab7057283120da679629ce8fb1238219b"><div class="ttname"><a href="group___futex.html#gab7057283120da679629ce8fb1238219b">futex_wait_flags</a></div><div class="ttdeci">futex_wait_flags</div><div class="ttdoc">FUTEX操作标志枚举</div><div class="ttdef"><b>定义</b> <a href="#l00040">futex.hpp:40</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">futex_wait_flags::private_flag</a></div><div class="ttdeci">@ private_flag</div><div class="ttdoc">私有标志位</div><div class="ttdef"><b>定义</b> <a href="#l00041">futex.hpp:41</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8">futex_wait_flags::bitset_match_any</a></div><div class="ttdeci">@ bitset_match_any</div><div class="ttdoc">匹配任何等待集合的位掩码</div><div class="ttdef"><b>定义</b> <a href="#l00050">futex.hpp:50</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">futex_wait_flags::wake</a></div><div class="ttdeci">@ wake</div><div class="ttdoc">唤醒操作</div><div class="ttdef"><b>定义</b> <a href="#l00043">futex.hpp:43</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49">futex_wait_flags::wake_bitset_private</a></div><div class="ttdeci">@ wake_bitset_private</div><div class="ttdoc">私有位集唤醒操作</div><div class="ttdef"><b>定义</b> <a href="#l00049">futex.hpp:49</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">futex_wait_flags::wait</a></div><div class="ttdeci">@ wait</div><div class="ttdoc">等待操作</div><div class="ttdef"><b>定义</b> <a href="#l00042">futex.hpp:42</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945">futex_wait_flags::wait_bitset_private</a></div><div class="ttdeci">@ wait_bitset_private</div><div class="ttdoc">私有位集等待操作</div><div class="ttdef"><b>定义</b> <a href="#l00048">futex.hpp:48</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95">futex_wait_flags::wake_private</a></div><div class="ttdeci">@ wake_private</div><div class="ttdoc">私有唤醒操作</div><div class="ttdef"><b>定义</b> <a href="#l00047">futex.hpp:47</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc">futex_wait_flags::wake_bitset</a></div><div class="ttdeci">@ wake_bitset</div><div class="ttdoc">位集唤醒操作</div><div class="ttdef"><b>定义</b> <a href="#l00045">futex.hpp:45</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d">futex_wait_flags::wait_bitset</a></div><div class="ttdeci">@ wait_bitset</div><div class="ttdoc">位集等待操作</div><div class="ttdef"><b>定义</b> <a href="#l00044">futex.hpp:44</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef">futex_wait_flags::wait_private</a></div><div class="ttdeci">@ wait_private</div><div class="ttdoc">私有等待操作</div><div class="ttdef"><b>定义</b> <a href="#l00046">futex.hpp:46</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="atype__traits_8hpp_html"><div class="ttname"><a href="type__traits_8hpp.html">type_traits.hpp</a></div><div class="ttdoc">类型萃取</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="futex_8hpp.html">futex.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

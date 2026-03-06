@@ -1,14 +1,14 @@
-#include <MSTL/core/system/environment.hpp>
-#include <MSTL/core/async/shared_mutex.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/system/environment.hpp>
+#include <NeForce/core/async/shared_mutex.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #include <processenv.h>
 #include <urlmon.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <unistd.h>
 #include <cstdlib>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 static shared_mutex& get_mutex() {
     static shared_mutex mutex;
@@ -16,7 +16,7 @@ static shared_mutex& get_mutex() {
 }
 
 static string get_unsafe(const string& name) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_COMPILER_MSVC
     char* value = nullptr;
     size_t size = 0;
 
@@ -33,7 +33,7 @@ static string get_unsafe(const string& name) {
 }
 
 static bool set_unsafe(const string& name, const string& value, const bool overwrite = true) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::_putenv_s(name.data(), value.data()) == 0;
 #else
     return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
@@ -52,7 +52,7 @@ bool environment::set(const string& name, const string& value, const bool overwr
 
 bool environment::unset(const string& name) {
     lock<shared_mutex> lock(get_mutex());
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetEnvironmentVariableA(name.data(), nullptr) != 0;
 #else
     return ::unsetenv(name.data()) == 0;
@@ -69,7 +69,7 @@ unordered_map<string, string> environment::all_envs() {
 
     unordered_map<string, string> env_map;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     char* env_block = ::GetEnvironmentStrings();
     if (env_block == nullptr) {
         return env_map;
@@ -94,7 +94,7 @@ unordered_map<string, string> environment::all_envs() {
         if (eq_pos != string::npos) {
             const string name = env_str.substr(0, eq_pos);
             const string value = (env_str.back() == '=') ? "" : env_str.substr(eq_pos + 1);
-            env_map[name] = _MSTL move(value);
+            env_map[name] = _NEFORCE move(value);
         }
     }
 #endif
@@ -146,7 +146,7 @@ bool environment::add_to_path(const string& path, const int position) {
 
 string environment::current_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     char buffer[MAX_PATH];
     const ::DWORD length = ::GetCurrentDirectoryA(MAX_PATH, buffer);
     if (length == 0) {
@@ -166,7 +166,7 @@ string environment::current_directory() {
 
 string environment::current_user() {
     shared_lock<shared_mutex> lock(get_mutex());
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     char username[256];
     ::DWORD size = sizeof(username);
     if (::GetUserNameA(username, &size)) {
@@ -184,7 +184,7 @@ string environment::current_user() {
 
 string environment::temp_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     char buffer[MAX_PATH];
     const DWORD length = ::GetTempPathA(MAX_PATH, buffer);
     if (length == 0) {
@@ -207,7 +207,7 @@ string environment::temp_directory() {
 
 string environment::home_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_COMPILER_MSVC
     char* value = nullptr;
     size_t size = 0;
     string result;
@@ -239,4 +239,4 @@ string environment::home_directory() {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

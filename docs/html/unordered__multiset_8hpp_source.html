@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: unordered_multiset.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('unordered__multiset_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">unordered_multiset.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="unordered__multiset_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_CONTAINER_UNORDERED_MULTISET_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_CONTAINER_UNORDERED_MULTISET_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="hashtable_8hpp.html">NeForce/core/container/hashtable.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> HashFcn = hash&lt;Value&gt;, <span class="keyword">typename</span> EqualKey = equal_to&lt;Value&gt;,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">typename</span> Alloc = allocator&lt;hashtable_node&lt;Value&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classunordered__multiset.html">   37</a></span><span class="keyword">class </span><a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a> : <a class="code hl_struct" href="structicollector.html">icollector</a>&lt;unordered_multiset&lt;Value, HashFcn, EqualKey, Alloc&gt;&gt; {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">static_assert</span>(is_hash_v&lt;HashFcn, Value&gt;, <span class="stringliteral">&quot;unordered multiset requires valid hash function.&quot;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static_assert</span>(is_allocator_v&lt;Alloc&gt;, <span class="stringliteral">&quot;Alloc type is not a standard allocator type.&quot;</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        is_same_v&lt;hashtable_node&lt;Value&gt;, <span class="keyword">typename</span> Alloc::value_type&gt;,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="stringliteral">&quot;allocator type mismatch.&quot;</span>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static_assert</span>(is_object_v&lt;Value&gt;, <span class="stringliteral">&quot;unordered multiset only contains object types.&quot;</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">using </span>base_type = <a class="code hl_class" href="classhashtable.html">hashtable&lt;Value, Value, HashFcn, identity&lt;Value&gt;</a>, EqualKey, Alloc&gt;;  </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">   49</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>          = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#aae291f880b71bf248fa077e9aa7e9940">base_type::key_type</a>;  </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#abb3a6669aadb8fbcbceccc5c0fdedf0d">   50</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#abb3a6669aadb8fbcbceccc5c0fdedf0d">value_type</a>        = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a938c4e2cb0e775c00a9ffa0bb433b4d3">base_type::value_type</a>;  </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">   51</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>            = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a283933168f42e039508f8c756c5d0124">base_type::hasher</a>;  </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">   52</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>         = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#acc0ee670388f0cd08557180388bf3f18">base_type::key_equal</a>;  </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">   54</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a>         = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a943ab934a2ae3aee17931f48d5435d62">base_type::size_type</a>;  </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#aa03ce861320b22b3ed0666f3dc157f2f">   55</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#aa03ce861320b22b3ed0666f3dc157f2f">difference_type</a>   = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a384b9b4e9ed2153582c4f6f118542fa9">base_type::difference_type</a>;  </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a636695fc654c69a9c4de74037dd729e1">   56</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a636695fc654c69a9c4de74037dd729e1">pointer</a>           = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a2776dd83d03ad5a303d786f90cf394e1">base_type::const_pointer</a>;  </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#af396cf8572d6081de7a331e3802efbb8">   57</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#af396cf8572d6081de7a331e3802efbb8">const_pointer</a>     = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a2776dd83d03ad5a303d786f90cf394e1">base_type::const_pointer</a>;  </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a21e954496237acfdc4b3aa17612ec0b8">   58</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a21e954496237acfdc4b3aa17612ec0b8">reference</a>         = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a6b95bd41b2d19b8ad99a1fdefade3fc4">base_type::const_reference</a>;  </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a3320e11dc146c1dd7caea1a05a2bed20">   59</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a3320e11dc146c1dd7caea1a05a2bed20">const_reference</a>   = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a6b95bd41b2d19b8ad99a1fdefade3fc4">base_type::const_reference</a>;  </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">   60</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a>          = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a8a8736c15142a779db875a0ab1c4d15a">base_type::iterator</a>;  </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">   61</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a>    = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a7187950e0d6060fc8ee371fb3ac1ad6a">base_type::const_iterator</a>;  </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a4eec354946af6356e926640f86d60b13">   62</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunordered__multiset.html#a4eec354946af6356e926640f86d60b13">allocator_type</a>    = <span class="keyword">typename</span> <a class="code hl_typedef" href="classhashtable.html#a7dfad262d218f67878950a8044718468">base_type::allocator_type</a>;  </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    base_type ht_{100};  </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">   73</a></span>    <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>()</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    : ht_(100, <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>(), <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>()) {}</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a9a1a1bc3b036023bed6c209f99e8fe56">   80</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classunordered__multiset.html#a9a1a1bc3b036023bed6c209f99e8fe56">unordered_multiset</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    : ht_(n) {}</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="foldopen" id="foldopen00088" data-start="{" data-end="}">
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a071942972a8d472cb4a0836c6e2d53ba">   88</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a071942972a8d472cb4a0836c6e2d53ba">unordered_multiset</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    : ht_(n, hf, <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>()) {}</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#aa86842cd1118aa626afac34f2d805b35">   97</a></span>    <a class="code hl_function" href="classunordered__multiset.html#aa86842cd1118aa626afac34f2d805b35">unordered_multiset</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>&amp; eql)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    : ht_(n, hf, eql) {}</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a5863ecba294836b1555e3df9b05efb49">  104</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a5863ecba294836b1555e3df9b05efb49">unordered_multiset</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; other)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    : ht_(other.ht_) {}</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a47c6d3c57bd302b464112057237f5a6f">  112</a></span>    <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; <a class="code hl_function" href="classunordered__multiset.html#a47c6d3c57bd302b464112057237f5a6f">operator =</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; other) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        ht_ = other.ht_;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#abd1af0581b147d63d25099ba3225b690">  121</a></span>    <a class="code hl_function" href="classunordered__multiset.html#abd1af0581b147d63d25099ba3225b690">unordered_multiset</a>(<a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp;&amp; other)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">noexcept</span>(is_nothrow_move_constructible_v&lt;base_type&gt;)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    : ht_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(other.ht_)) {}</div>
+</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#afcfe7f9dfa7226fb19f87b4c1531547b">  130</a></span>    <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; <a class="code hl_function" href="classunordered__multiset.html#a47c6d3c57bd302b464112057237f5a6f">operator =</a>(<a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp;&amp; other)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">noexcept</span>(is_nothrow_move_assignable_v&lt;base_type&gt;) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        ht_ = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(other.ht_);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a9e738e2b47ecc2169d41433254afc571">  143</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a9e738e2b47ecc2169d41433254afc571">unordered_multiset</a>(Iterator first, Iterator last)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    : ht_(100, <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>(), <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>()) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        ht_.insert_equal(first, last);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#aa18dc620744dff82deb1e81dd31810fc">  156</a></span>    <a class="code hl_function" href="classunordered__multiset.html#aa18dc620744dff82deb1e81dd31810fc">unordered_multiset</a>(Iterator first, Iterator <a class="code hl_class" href="classlist.html">list</a>, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    : ht_(n, <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>(), <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>()) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        ht_.insert_equal(first, <a class="code hl_class" href="classlist.html">list</a>);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
+</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#affd3161cec595ce804cc0d16aded1246">  170</a></span>    <a class="code hl_function" href="classunordered__multiset.html#affd3161cec595ce804cc0d16aded1246">unordered_multiset</a>(Iterator first, Iterator last, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    : ht_(n, hf, <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>()) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        ht_.insert_equal(first, last);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00185" data-start="{" data-end="}">
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a46180465fa811d284b34b426aa353bba">  185</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a46180465fa811d284b34b426aa353bba">unordered_multiset</a>(Iterator first, Iterator last, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>&amp; eql)</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    : ht_(n, hf, eql) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        ht_.insert_equal(first, last);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span></div>
+<div class="foldopen" id="foldopen00194" data-start="{" data-end="}">
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a221a9a272c6e511f1489206440f39886">  194</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a221a9a272c6e511f1489206440f39886">unordered_multiset</a>(std::initializer_list&lt;value_type&gt; ilist)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    : <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>(ilist.<a class="code hl_function" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">begin</a>(), ilist.<a class="code hl_function" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">end</a>()) {}</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span></div>
+<div class="foldopen" id="foldopen00202" data-start="{" data-end="}">
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a9d34a001d9765fcb39b2661a8dc3b233">  202</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a9d34a001d9765fcb39b2661a8dc3b233">unordered_multiset</a>(std::initializer_list&lt;value_type&gt; ilist, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    : <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>(ilist.<a class="code hl_function" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">begin</a>(), ilist.<a class="code hl_function" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">end</a>(), n) {}</div>
+</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="foldopen" id="foldopen00211" data-start="{" data-end="}">
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a5e2e94d704231bbc5d3e07a55601b06e">  211</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a5e2e94d704231bbc5d3e07a55601b06e">unordered_multiset</a>(std::initializer_list&lt;value_type&gt; ilist, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    : <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>(ilist.<a class="code hl_function" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">begin</a>(), ilist.<a class="code hl_function" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">end</a>(), n, hf) {}</div>
+</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span></div>
+<div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a61c17e47336a4445746f361879d9253d">  221</a></span>    <a class="code hl_function" href="classunordered__multiset.html#a61c17e47336a4445746f361879d9253d">unordered_multiset</a>(std::initializer_list&lt;value_type&gt; ilist, <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a>&amp; hf, <span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a>&amp; eql)</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    : <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>(ilist.<a class="code hl_function" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">begin</a>(), ilist.<a class="code hl_function" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">end</a>(), n, hf, eql) {}</div>
+</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span></div>
+<div class="foldopen" id="foldopen00228" data-start="{" data-end="}">
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">  228</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">begin</a>() noexcept {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">return</span> ht_.begin();</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
+</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span></div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">  236</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">end</a>() noexcept {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordflow">return</span> ht_.end();</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
+</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span></div>
+<div class="foldopen" id="foldopen00244" data-start="{" data-end="}">
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a20ad28e73442f4626a2459f416bd56df">  244</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a20ad28e73442f4626a2459f416bd56df">begin</a>() const noexcept {</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">return</span> ht_.begin();</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span></div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a279964503ed53a465ec01357f1993852">  252</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a279964503ed53a465ec01357f1993852">end</a>() const noexcept {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">return</span> ht_.end();</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    }</div>
+</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span></div>
+<div class="foldopen" id="foldopen00260" data-start="{" data-end="}">
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a9863e676b83d35e553a9285bfae939c5">  260</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a9863e676b83d35e553a9285bfae939c5">cbegin</a>() const noexcept {</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keywordflow">return</span> ht_.cbegin();</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
+</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span></div>
+<div class="foldopen" id="foldopen00268" data-start="{" data-end="}">
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a548e9aadb8da709394bb55609adf7cd3">  268</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a548e9aadb8da709394bb55609adf7cd3">cend</a>() const noexcept {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span> ht_.cend();</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
+</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span></div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a7135a0043e29d16626c5bd79910376be">  276</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#a7135a0043e29d16626c5bd79910376be">size</a>() const noexcept {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">return</span> ht_.size();</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span></div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a33414909c3c42eafd52378eef1b98364">  284</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#a33414909c3c42eafd52378eef1b98364">max_size</a>() const noexcept {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordflow">return</span> ht_.max_size();</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    }</div>
+</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span></div>
+<div class="foldopen" id="foldopen00292" data-start="{" data-end="}">
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a84a8bf29b50d91b0cf2653526697b0d2">  292</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classunordered__multiset.html#a84a8bf29b50d91b0cf2653526697b0d2">empty</a>() const noexcept {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">return</span> ht_.empty();</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    }</div>
+</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span></div>
+<div class="foldopen" id="foldopen00301" data-start="{" data-end="}">
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a0f3e0981180f8b7c37928a6dfdda2c7c">  301</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#a0f3e0981180f8b7c37928a6dfdda2c7c">count</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key) <span class="keyword">const</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(ht_.count(key))) {</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">return</span> ht_.count(key);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
+</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span></div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="}">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a7896067031d362eef7a62055888c5e26">  310</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#a7896067031d362eef7a62055888c5e26">buckets_size</a>() const noexcept {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">return</span> ht_.buckets_size();</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
+</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span></div>
+<div class="foldopen" id="foldopen00318" data-start="{" data-end="}">
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#aabd6c5843a90d41ce823e012c6d7c9ae">  318</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#aabd6c5843a90d41ce823e012c6d7c9ae">buckets_max_count</a>() const noexcept {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">return</span> ht_.buckets_max_count();</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    }</div>
+</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span></div>
+<div class="foldopen" id="foldopen00327" data-start="{" data-end="}">
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a92c71287edd9c95300e462136598c031">  327</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#a92c71287edd9c95300e462136598c031">bucket_size</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        <span class="keywordflow">return</span> ht_.bucket_size(n);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    }</div>
+</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
+<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a843f0c54fb99dc4c6a11b324e19c7bc9">  335</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">hasher</a> <a class="code hl_function" href="classunordered__multiset.html#a843f0c54fb99dc4c6a11b324e19c7bc9">hash_func</a>() const</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    noexcept(noexcept(ht_.<a class="code hl_function" href="classunordered__multiset.html#a843f0c54fb99dc4c6a11b324e19c7bc9">hash_func</a>())) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">return</span> ht_.hash_func();</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    }</div>
+</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span></div>
+<div class="foldopen" id="foldopen00344" data-start="{" data-end="}">
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a8d5921038ceeb8ab2e136d99d58e91fb">  344</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">key_equal</a> <a class="code hl_function" href="classunordered__multiset.html#a8d5921038ceeb8ab2e136d99d58e91fb">key_eql</a>() const</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    noexcept(noexcept(ht_.<a class="code hl_function" href="classunordered__multiset.html#a8d5921038ceeb8ab2e136d99d58e91fb">key_eql</a>())) {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keywordflow">return</span> ht_.key_eql();</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    }</div>
+</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span></div>
+<div class="foldopen" id="foldopen00353" data-start="{" data-end="}">
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a780dc88fd47f8676917177767f796d76">  353</a></span>    NEFORCE_NODISCARD <span class="keywordtype">float</span> <a class="code hl_function" href="classunordered__multiset.html#a780dc88fd47f8676917177767f796d76">load_factor</a>() const noexcept {</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keywordflow">return</span> ht_.load_factor();</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    }</div>
+</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span></div>
+<div class="foldopen" id="foldopen00361" data-start="{" data-end="}">
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ae41ff2e0b53c80194bb574cd98a92b1b">  361</a></span>    NEFORCE_NODISCARD <span class="keywordtype">float</span> <a class="code hl_function" href="classunordered__multiset.html#ae41ff2e0b53c80194bb574cd98a92b1b">max_load_factor</a>() const noexcept {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">return</span> ht_.max_load_factor();</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    }</div>
+</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span></div>
+<div class="foldopen" id="foldopen00369" data-start="{" data-end="}">
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#acc6b04fb61046b9e1b45a3623080401d">  369</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#acc6b04fb61046b9e1b45a3623080401d">max_load_factor</a>(<span class="keywordtype">float</span> lf) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        ht_.max_load_factor(lf);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    }</div>
+</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span></div>
+<div class="foldopen" id="foldopen00377" data-start="{" data-end="}">
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a9ec8a9f52d651e39ce05f3845901a7ed">  377</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#a9ec8a9f52d651e39ce05f3845901a7ed">rehash</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n) {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        ht_.rehash(n);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    }</div>
+</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span></div>
+<div class="foldopen" id="foldopen00387" data-start="{" data-end="}">
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a0ccdd9eabb50aa639471c5018d83e77c">  387</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#a0ccdd9eabb50aa639471c5018d83e77c">reserve</a>(<a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> n) {</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        ht_.reserve(n);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    }</div>
+</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00398" data-start="{" data-end="}">
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ae490eb8cbebde0c9492c9bd1ee05fd80">  398</a></span>    <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#ae490eb8cbebde0c9492c9bd1ee05fd80">emplace</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keywordflow">return</span> ht_.emplace_equal(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    }</div>
+</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span></div>
+<div class="foldopen" id="foldopen00407" data-start="{" data-end="}">
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#afcf8d8e89195388978ff2d6d69246c2d">  407</a></span>    <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#afcf8d8e89195388978ff2d6d69246c2d">insert</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#abb3a6669aadb8fbcbceccc5c0fdedf0d">value_type</a>&amp; value) {</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        <span class="keywordflow">return</span> ht_.insert_equal(value);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    }</div>
+</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span></div>
+<div class="foldopen" id="foldopen00416" data-start="{" data-end="}">
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a4d56e2347e46f541363335a5b5250ee0">  416</a></span>    <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#a4d56e2347e46f541363335a5b5250ee0">insert</a>(<a class="code hl_typedef" href="classunordered__multiset.html#abb3a6669aadb8fbcbceccc5c0fdedf0d">value_type</a>&amp;&amp; value) {</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        <span class="keywordflow">return</span> ht_.insert_equal(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value));</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    }</div>
+</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span></div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00427" data-start="{" data-end="}">
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#acddae9d16c2b74c68c6249deb54604a1">  427</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#acddae9d16c2b74c68c6249deb54604a1">insert</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>        ht_.insert_equal(first, last);</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    }</div>
+</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span></div>
+<div class="foldopen" id="foldopen00436" data-start="{" data-end="}">
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ac80d10b87385575632e7efcc4d4eee37">  436</a></span>    <a class="code hl_typedef" href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">size_type</a> <a class="code hl_function" href="classunordered__multiset.html#ac80d10b87385575632e7efcc4d4eee37">erase</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        <span class="keywordflow">return</span> ht_.erase(key);</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    }</div>
+</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span></div>
+<div class="foldopen" id="foldopen00444" data-start="{" data-end="}">
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ac61a14b631b6e473408e5d171f21ffdf">  444</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#ac61a14b631b6e473408e5d171f21ffdf">erase</a>(<a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> position) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>        ht_.erase(position);</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    }</div>
+</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span></div>
+<div class="foldopen" id="foldopen00453" data-start="{" data-end="}">
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a012fd490296f4208b5b4c015d59d1a32">  453</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#a012fd490296f4208b5b4c015d59d1a32">erase</a>(<a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> first, <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> last) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        ht_.erase(first, last);</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    }</div>
+</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span></div>
+<div class="foldopen" id="foldopen00460" data-start="{" data-end="}">
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#ab9a26afc57c268b55c0c4317005c1858">  460</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#ab9a26afc57c268b55c0c4317005c1858">clear</a>() noexcept {</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>        ht_.clear();</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    }</div>
+</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span></div>
+<div class="foldopen" id="foldopen00468" data-start="{" data-end="}">
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a672d778caa363664c77c7b2a8ed8c927">  468</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classunordered__multiset.html#a672d778caa363664c77c7b2a8ed8c927">swap</a>(<a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; other)</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    <span class="keyword">noexcept</span>(is_nothrow_swappable_v&lt;base_type&gt;) {</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>        ht_.swap(other.ht_);</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    }</div>
+</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span></div>
+<div class="foldopen" id="foldopen00478" data-start="{" data-end="}">
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#af99446bd03906138052653b37b5cc48e">  478</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">iterator</a> <a class="code hl_function" href="classunordered__multiset.html#af99446bd03906138052653b37b5cc48e">find</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key) {</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>        <span class="keywordflow">return</span> ht_.find(key);</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    }</div>
+</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span></div>
+<div class="foldopen" id="foldopen00487" data-start="{" data-end="}">
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#af936842c67a49af6495e245a79069295">  487</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">const_iterator</a> <a class="code hl_function" href="classunordered__multiset.html#af936842c67a49af6495e245a79069295">find</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>        <span class="keywordflow">return</span> ht_.find(key);</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    }</div>
+</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span></div>
+<div class="foldopen" id="foldopen00496" data-start="{" data-end="}">
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a54e7cbc18e4391c7d0b917461eee459a">  496</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="structpair.html">pair&lt;iterator, iterator&gt;</a> <a class="code hl_function" href="classunordered__multiset.html#a54e7cbc18e4391c7d0b917461eee459a">equal_range</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key) {</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>        <span class="keywordflow">return</span> ht_.equal_range(key);</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>    }</div>
+</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span></div>
+<div class="foldopen" id="foldopen00505" data-start="{" data-end="}">
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#af2a1e4f0da31fdaa3ad2a3d8318604ca">  505</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="structpair.html">pair&lt;const_iterator, const_iterator&gt;</a> <a class="code hl_function" href="classunordered__multiset.html#af2a1e4f0da31fdaa3ad2a3d8318604ca">equal_range</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">key_type</a>&amp; key)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        <span class="keywordflow">return</span> ht_.equal_range(key);</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>    }</div>
+</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span></div>
+<div class="foldopen" id="foldopen00514" data-start="{" data-end="}">
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a19ad6ca3834ac4398fe2ffe600b4420c">  514</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classunordered__multiset.html#a19ad6ca3834ac4398fe2ffe600b4420c">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; rhs) <span class="keyword">const</span></div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(ht_ == rhs.ht_)) {</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>        <span class="keywordflow">return</span> ht_ == rhs.ht_;</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    }</div>
+</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span></div>
+<div class="foldopen" id="foldopen00524" data-start="{" data-end="}">
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno"><a class="line" href="classunordered__multiset.html#a2753de329a3b70bae36293cdc01850fb">  524</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classunordered__multiset.html#a2753de329a3b70bae36293cdc01850fb">operator &lt;</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset</a>&amp; rhs) <span class="keyword">const</span></div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(ht_ &lt; rhs.ht_)) {</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>        <span class="keywordflow">return</span> ht_ &lt; rhs.ht_;</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    }</div>
+</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>};</div>
+</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span><span class="preprocessor">#if NEFORCE_SUPPORT_DEDUCTION_GUIDES</span></div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> HashFcn = hash&lt;iter_value_t&lt;Iterator&gt;&gt;, <span class="keyword">typename</span> Compare</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    = equal_to&lt;iter_value_t&lt;Iterator&gt;&gt;, <span class="keyword">typename</span> Alloc = allocator&lt;iter_value_t&lt;Iterator&gt;&gt;&gt;</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;iter_value_t&lt;Iterator&gt;</a>, HashFcn, Compare, Alloc&gt;;</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> HashFcn = hash&lt;Value&gt;, <span class="keyword">typename</span> Compare = equal_to&lt;Value&gt;,</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    <span class="keyword">typename</span> Alloc = allocator&lt;Value&gt;&gt;</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(std::initializer_list&lt;Value&gt;, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;Value, HashFcn, Compare, Alloc&gt;</a>;</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span> </div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(Iterator, Iterator, Alloc)</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;iter_value_t&lt;Iterator&gt;</a>, <a class="code hl_struct" href="structhash.html">hash&lt;iter_value_t&lt;Iterator&gt;</a>&gt;, <a class="code hl_struct" href="structequal__to.html">equal_to&lt;iter_value_t&lt;Iterator&gt;</a>&gt;, Alloc&gt;;</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span> </div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> HashFcn, <span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(Iterator, Iterator, HashFcn, Alloc)</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;iter_value_t&lt;Iterator&gt;</a>, HashFcn, <a class="code hl_struct" href="structequal__to.html">equal_to&lt;iter_value_t&lt;Iterator&gt;</a>&gt;, Alloc&gt;;</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span> </div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(std::initializer_list&lt;Value&gt;, Alloc)</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;Value, hash&lt;Value&gt;</a>, <a class="code hl_struct" href="structequal__to.html">equal_to&lt;Value&gt;</a>, Alloc&gt;;</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> HashFcn, <span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span><a class="code hl_class" href="classunordered__multiset.html">unordered_multiset</a>(std::initializer_list&lt;Value&gt;, HashFcn, Alloc)</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>-&gt; <a class="code hl_class" href="classunordered__multiset.html">unordered_multiset&lt;Value, HashFcn, equal_to&lt;Value&gt;</a>, Alloc&gt;;</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span> <span class="comment">// UnorderedMultiSet</span></div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span> </div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_CONTAINER_UNORDERED_MULTISET_HPP__</span></div>
+<div class="ttc" id="aclasshashtable_html"><div class="ttname"><a href="classhashtable.html">hashtable</a></div><div class="ttdoc">哈希表容器</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00228">hashtable.hpp:228</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a2776dd83d03ad5a303d786f90cf394e1"><div class="ttname"><a href="classhashtable.html#a2776dd83d03ad5a303d786f90cf394e1">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::const_pointer</a></div><div class="ttdeci">const Value * const_pointer</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00237">hashtable.hpp:237</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a283933168f42e039508f8c756c5d0124"><div class="ttname"><a href="classhashtable.html#a283933168f42e039508f8c756c5d0124">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::hasher</a></div><div class="ttdeci">HashFcn hasher</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00231">hashtable.hpp:231</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a384b9b4e9ed2153582c4f6f118542fa9"><div class="ttname"><a href="classhashtable.html#a384b9b4e9ed2153582c4f6f118542fa9">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::difference_type</a></div><div class="ttdeci">ptrdiff_t difference_type</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00240">hashtable.hpp:240</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a6b95bd41b2d19b8ad99a1fdefade3fc4"><div class="ttname"><a href="classhashtable.html#a6b95bd41b2d19b8ad99a1fdefade3fc4">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::const_reference</a></div><div class="ttdeci">const Value &amp; const_reference</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00238">hashtable.hpp:238</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a7187950e0d6060fc8ee371fb3ac1ad6a"><div class="ttname"><a href="classhashtable.html#a7187950e0d6060fc8ee371fb3ac1ad6a">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::const_iterator</a></div><div class="ttdeci">hashtable_iterator&lt; true, hashtable &gt; const_iterator</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00242">hashtable.hpp:242</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a7dfad262d218f67878950a8044718468"><div class="ttname"><a href="classhashtable.html#a7dfad262d218f67878950a8044718468">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::allocator_type</a></div><div class="ttdeci">Alloc allocator_type</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00243">hashtable.hpp:243</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a8a8736c15142a779db875a0ab1c4d15a"><div class="ttname"><a href="classhashtable.html#a8a8736c15142a779db875a0ab1c4d15a">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::iterator</a></div><div class="ttdeci">hashtable_iterator&lt; false, hashtable &gt; iterator</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00241">hashtable.hpp:241</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a938c4e2cb0e775c00a9ffa0bb433b4d3"><div class="ttname"><a href="classhashtable.html#a938c4e2cb0e775c00a9ffa0bb433b4d3">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::value_type</a></div><div class="ttdeci">Value value_type</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00234">hashtable.hpp:234</a></div></div>
+<div class="ttc" id="aclasshashtable_html_a943ab934a2ae3aee17931f48d5435d62"><div class="ttname"><a href="classhashtable.html#a943ab934a2ae3aee17931f48d5435d62">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::size_type</a></div><div class="ttdeci">size_t size_type</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00239">hashtable.hpp:239</a></div></div>
+<div class="ttc" id="aclasshashtable_html_aae291f880b71bf248fa077e9aa7e9940"><div class="ttname"><a href="classhashtable.html#aae291f880b71bf248fa077e9aa7e9940">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::key_type</a></div><div class="ttdeci">Value key_type</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00230">hashtable.hpp:230</a></div></div>
+<div class="ttc" id="aclasshashtable_html_acc0ee670388f0cd08557180388bf3f18"><div class="ttname"><a href="classhashtable.html#acc0ee670388f0cd08557180388bf3f18">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;::key_equal</a></div><div class="ttdeci">EqualKey key_equal</div><div class="ttdef"><b>定义</b> <a href="hashtable_8hpp_source.html#l00232">hashtable.hpp:232</a></div></div>
+<div class="ttc" id="aclasslist_html"><div class="ttname"><a href="classlist.html">list</a></div><div class="ttdoc">双向链表容器</div><div class="ttdef"><b>定义</b> <a href="list_8hpp_source.html#l00169">list.hpp:169</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html"><div class="ttname"><a href="classunordered__multiset.html">unordered_multiset</a></div><div class="ttdoc">无序多重集合容器</div><div class="ttdef"><b>定义</b> <a href="#l00037">unordered_multiset.hpp:37</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a012fd490296f4208b5b4c015d59d1a32"><div class="ttname"><a href="classunordered__multiset.html#a012fd490296f4208b5b4c015d59d1a32">unordered_multiset::erase</a></div><div class="ttdeci">void erase(iterator first, iterator last) noexcept</div><div class="ttdoc">删除指定范围内的元素</div><div class="ttdef"><b>定义</b> <a href="#l00453">unordered_multiset.hpp:453</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a071942972a8d472cb4a0836c6e2d53ba"><div class="ttname"><a href="classunordered__multiset.html#a071942972a8d472cb4a0836c6e2d53ba">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(size_type n, const hasher &amp;hf)</div><div class="ttdoc">构造函数，指定初始桶数和哈希函数</div><div class="ttdef"><b>定义</b> <a href="#l00088">unordered_multiset.hpp:88</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a0ccdd9eabb50aa639471c5018d83e77c"><div class="ttname"><a href="classunordered__multiset.html#a0ccdd9eabb50aa639471c5018d83e77c">unordered_multiset::reserve</a></div><div class="ttdeci">void reserve(size_type n)</div><div class="ttdoc">预留空间</div><div class="ttdef"><b>定义</b> <a href="#l00387">unordered_multiset.hpp:387</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a0f3e0981180f8b7c37928a6dfdda2c7c"><div class="ttname"><a href="classunordered__multiset.html#a0f3e0981180f8b7c37928a6dfdda2c7c">unordered_multiset::count</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type count(const key_type &amp;key) const noexcept(noexcept(ht_.count(key)))</div><div class="ttdoc">统计具有指定键的元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00301">unordered_multiset.hpp:301</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a19ad6ca3834ac4398fe2ffe600b4420c"><div class="ttname"><a href="classunordered__multiset.html#a19ad6ca3834ac4398fe2ffe600b4420c">unordered_multiset::operator==</a></div><div class="ttdeci">NEFORCE_NODISCARD bool operator==(const unordered_multiset &amp;rhs) const noexcept(noexcept(ht_==rhs.ht_))</div><div class="ttdoc">相等比较操作符</div><div class="ttdef"><b>定义</b> <a href="#l00514">unordered_multiset.hpp:514</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a20ad28e73442f4626a2459f416bd56df"><div class="ttname"><a href="classunordered__multiset.html#a20ad28e73442f4626a2459f416bd56df">unordered_multiset::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD const_iterator begin() const noexcept</div><div class="ttdoc">获取常量起始迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00244">unordered_multiset.hpp:244</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a21e954496237acfdc4b3aa17612ec0b8"><div class="ttname"><a href="classunordered__multiset.html#a21e954496237acfdc4b3aa17612ec0b8">unordered_multiset::reference</a></div><div class="ttdeci">typename base_type::const_reference reference</div><div class="ttdoc">引用类型</div><div class="ttdef"><b>定义</b> <a href="#l00058">unordered_multiset.hpp:58</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a221a9a272c6e511f1489206440f39886"><div class="ttname"><a href="classunordered__multiset.html#a221a9a272c6e511f1489206440f39886">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(std::initializer_list&lt; value_type &gt; ilist)</div><div class="ttdoc">初始化列表构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00194">unordered_multiset.hpp:194</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a2753de329a3b70bae36293cdc01850fb"><div class="ttname"><a href="classunordered__multiset.html#a2753de329a3b70bae36293cdc01850fb">unordered_multiset::operator&lt;</a></div><div class="ttdeci">NEFORCE_NODISCARD bool operator&lt;(const unordered_multiset &amp;rhs) const noexcept(noexcept(ht_&lt; rhs.ht_))</div><div class="ttdoc">小于比较操作符</div><div class="ttdef"><b>定义</b> <a href="#l00524">unordered_multiset.hpp:524</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a279964503ed53a465ec01357f1993852"><div class="ttname"><a href="classunordered__multiset.html#a279964503ed53a465ec01357f1993852">unordered_multiset::end</a></div><div class="ttdeci">NEFORCE_NODISCARD const_iterator end() const noexcept</div><div class="ttdoc">获取常量结束迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00252">unordered_multiset.hpp:252</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a2def565eba41ac5be3248bfdefaf7da5"><div class="ttname"><a href="classunordered__multiset.html#a2def565eba41ac5be3248bfdefaf7da5">unordered_multiset::const_iterator</a></div><div class="ttdeci">typename base_type::const_iterator const_iterator</div><div class="ttdoc">常量迭代器类型</div><div class="ttdef"><b>定义</b> <a href="#l00061">unordered_multiset.hpp:61</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a3320e11dc146c1dd7caea1a05a2bed20"><div class="ttname"><a href="classunordered__multiset.html#a3320e11dc146c1dd7caea1a05a2bed20">unordered_multiset::const_reference</a></div><div class="ttdeci">typename base_type::const_reference const_reference</div><div class="ttdoc">常量引用类型</div><div class="ttdef"><b>定义</b> <a href="#l00059">unordered_multiset.hpp:59</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a33414909c3c42eafd52378eef1b98364"><div class="ttname"><a href="classunordered__multiset.html#a33414909c3c42eafd52378eef1b98364">unordered_multiset::max_size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type max_size() const noexcept</div><div class="ttdoc">获取最大可能大小</div><div class="ttdef"><b>定义</b> <a href="#l00284">unordered_multiset.hpp:284</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a46180465fa811d284b34b426aa353bba"><div class="ttname"><a href="classunordered__multiset.html#a46180465fa811d284b34b426aa353bba">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(Iterator first, Iterator last, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</div><div class="ttdoc">范围构造函数，指定初始桶数、哈希函数和键相等比较函数</div><div class="ttdef"><b>定义</b> <a href="#l00185">unordered_multiset.hpp:185</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a47c6d3c57bd302b464112057237f5a6f"><div class="ttname"><a href="classunordered__multiset.html#a47c6d3c57bd302b464112057237f5a6f">unordered_multiset::operator=</a></div><div class="ttdeci">unordered_multiset &amp; operator=(const unordered_multiset &amp;other)</div><div class="ttdoc">拷贝赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00112">unordered_multiset.hpp:112</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a4d56e2347e46f541363335a5b5250ee0"><div class="ttname"><a href="classunordered__multiset.html#a4d56e2347e46f541363335a5b5250ee0">unordered_multiset::insert</a></div><div class="ttdeci">iterator insert(value_type &amp;&amp;value)</div><div class="ttdoc">移动插入元素</div><div class="ttdef"><b>定义</b> <a href="#l00416">unordered_multiset.hpp:416</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a4eec354946af6356e926640f86d60b13"><div class="ttname"><a href="classunordered__multiset.html#a4eec354946af6356e926640f86d60b13">unordered_multiset::allocator_type</a></div><div class="ttdeci">typename base_type::allocator_type allocator_type</div><div class="ttdoc">分配器类型</div><div class="ttdef"><b>定义</b> <a href="#l00062">unordered_multiset.hpp:62</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a548e9aadb8da709394bb55609adf7cd3"><div class="ttname"><a href="classunordered__multiset.html#a548e9aadb8da709394bb55609adf7cd3">unordered_multiset::cend</a></div><div class="ttdeci">NEFORCE_NODISCARD const_iterator cend() const noexcept</div><div class="ttdoc">获取常量结束迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00268">unordered_multiset.hpp:268</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a54e7cbc18e4391c7d0b917461eee459a"><div class="ttname"><a href="classunordered__multiset.html#a54e7cbc18e4391c7d0b917461eee459a">unordered_multiset::equal_range</a></div><div class="ttdeci">NEFORCE_NODISCARD pair&lt; iterator, iterator &gt; equal_range(const key_type &amp;key)</div><div class="ttdoc">获取等于指定键的元素范围</div><div class="ttdef"><b>定义</b> <a href="#l00496">unordered_multiset.hpp:496</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a5863ecba294836b1555e3df9b05efb49"><div class="ttname"><a href="classunordered__multiset.html#a5863ecba294836b1555e3df9b05efb49">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(const unordered_multiset &amp;other)</div><div class="ttdoc">拷贝构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00104">unordered_multiset.hpp:104</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a5e2e94d704231bbc5d3e07a55601b06e"><div class="ttname"><a href="classunordered__multiset.html#a5e2e94d704231bbc5d3e07a55601b06e">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf)</div><div class="ttdoc">初始化列表构造函数，指定初始桶数和哈希函数</div><div class="ttdef"><b>定义</b> <a href="#l00211">unordered_multiset.hpp:211</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a61c17e47336a4445746f361879d9253d"><div class="ttname"><a href="classunordered__multiset.html#a61c17e47336a4445746f361879d9253d">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</div><div class="ttdoc">初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数</div><div class="ttdef"><b>定义</b> <a href="#l00221">unordered_multiset.hpp:221</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a636695fc654c69a9c4de74037dd729e1"><div class="ttname"><a href="classunordered__multiset.html#a636695fc654c69a9c4de74037dd729e1">unordered_multiset::pointer</a></div><div class="ttdeci">typename base_type::const_pointer pointer</div><div class="ttdoc">指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00056">unordered_multiset.hpp:56</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a6700033320ac3015d22b01deca912889"><div class="ttname"><a href="classunordered__multiset.html#a6700033320ac3015d22b01deca912889">unordered_multiset::size_type</a></div><div class="ttdeci">typename base_type::size_type size_type</div><div class="ttdoc">大小类型</div><div class="ttdef"><b>定义</b> <a href="#l00054">unordered_multiset.hpp:54</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a672d778caa363664c77c7b2a8ed8c927"><div class="ttname"><a href="classunordered__multiset.html#a672d778caa363664c77c7b2a8ed8c927">unordered_multiset::swap</a></div><div class="ttdeci">void swap(unordered_multiset &amp;other) noexcept(is_nothrow_swappable_v&lt; base_type &gt;)</div><div class="ttdoc">交换两个unordered_multiset的内容</div><div class="ttdef"><b>定义</b> <a href="#l00468">unordered_multiset.hpp:468</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a69a1535a2716d33fd9fd25205c648d58"><div class="ttname"><a href="classunordered__multiset.html#a69a1535a2716d33fd9fd25205c648d58">unordered_multiset::key_equal</a></div><div class="ttdeci">typename base_type::key_equal key_equal</div><div class="ttdoc">键相等比较函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00052">unordered_multiset.hpp:52</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a7135a0043e29d16626c5bd79910376be"><div class="ttname"><a href="classunordered__multiset.html#a7135a0043e29d16626c5bd79910376be">unordered_multiset::size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type size() const noexcept</div><div class="ttdoc">获取元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00276">unordered_multiset.hpp:276</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a780dc88fd47f8676917177767f796d76"><div class="ttname"><a href="classunordered__multiset.html#a780dc88fd47f8676917177767f796d76">unordered_multiset::load_factor</a></div><div class="ttdeci">NEFORCE_NODISCARD float load_factor() const noexcept</div><div class="ttdoc">获取当前负载因子</div><div class="ttdef"><b>定义</b> <a href="#l00353">unordered_multiset.hpp:353</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a7896067031d362eef7a62055888c5e26"><div class="ttname"><a href="classunordered__multiset.html#a7896067031d362eef7a62055888c5e26">unordered_multiset::buckets_size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type buckets_size() const noexcept</div><div class="ttdoc">获取桶数量</div><div class="ttdef"><b>定义</b> <a href="#l00310">unordered_multiset.hpp:310</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a843f0c54fb99dc4c6a11b324e19c7bc9"><div class="ttname"><a href="classunordered__multiset.html#a843f0c54fb99dc4c6a11b324e19c7bc9">unordered_multiset::hash_func</a></div><div class="ttdeci">NEFORCE_NODISCARD hasher hash_func() const noexcept(noexcept(ht_.hash_func()))</div><div class="ttdoc">获取哈希函数对象</div><div class="ttdef"><b>定义</b> <a href="#l00335">unordered_multiset.hpp:335</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a84a8bf29b50d91b0cf2653526697b0d2"><div class="ttname"><a href="classunordered__multiset.html#a84a8bf29b50d91b0cf2653526697b0d2">unordered_multiset::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="#l00292">unordered_multiset.hpp:292</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a892b23f2972c2e46928b514ab1d447b1"><div class="ttname"><a href="classunordered__multiset.html#a892b23f2972c2e46928b514ab1d447b1">unordered_multiset::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD iterator begin() noexcept</div><div class="ttdoc">获取起始迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00228">unordered_multiset.hpp:228</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a8d5921038ceeb8ab2e136d99d58e91fb"><div class="ttname"><a href="classunordered__multiset.html#a8d5921038ceeb8ab2e136d99d58e91fb">unordered_multiset::key_eql</a></div><div class="ttdeci">NEFORCE_NODISCARD key_equal key_eql() const noexcept(noexcept(ht_.key_eql()))</div><div class="ttdoc">获取键相等比较函数对象</div><div class="ttdef"><b>定义</b> <a href="#l00344">unordered_multiset.hpp:344</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a92c71287edd9c95300e462136598c031"><div class="ttname"><a href="classunordered__multiset.html#a92c71287edd9c95300e462136598c031">unordered_multiset::bucket_size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type bucket_size(size_type n) const noexcept</div><div class="ttdoc">获取指定桶的大小</div><div class="ttdef"><b>定义</b> <a href="#l00327">unordered_multiset.hpp:327</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a93bf59f5ce2fde95b09783dbecc3eb65"><div class="ttname"><a href="classunordered__multiset.html#a93bf59f5ce2fde95b09783dbecc3eb65">unordered_multiset::hasher</a></div><div class="ttdeci">typename base_type::hasher hasher</div><div class="ttdoc">哈希函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00051">unordered_multiset.hpp:51</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a9863e676b83d35e553a9285bfae939c5"><div class="ttname"><a href="classunordered__multiset.html#a9863e676b83d35e553a9285bfae939c5">unordered_multiset::cbegin</a></div><div class="ttdeci">NEFORCE_NODISCARD const_iterator cbegin() const noexcept</div><div class="ttdoc">获取常量起始迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00260">unordered_multiset.hpp:260</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a9a1a1bc3b036023bed6c209f99e8fe56"><div class="ttname"><a href="classunordered__multiset.html#a9a1a1bc3b036023bed6c209f99e8fe56">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(size_type n)</div><div class="ttdoc">构造函数，指定初始桶数</div><div class="ttdef"><b>定义</b> <a href="#l00080">unordered_multiset.hpp:80</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a9d34a001d9765fcb39b2661a8dc3b233"><div class="ttname"><a href="classunordered__multiset.html#a9d34a001d9765fcb39b2661a8dc3b233">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(std::initializer_list&lt; value_type &gt; ilist, size_type n)</div><div class="ttdoc">初始化列表构造函数，指定初始桶数</div><div class="ttdef"><b>定义</b> <a href="#l00202">unordered_multiset.hpp:202</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a9e738e2b47ecc2169d41433254afc571"><div class="ttname"><a href="classunordered__multiset.html#a9e738e2b47ecc2169d41433254afc571">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(Iterator first, Iterator last)</div><div class="ttdoc">范围构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00143">unordered_multiset.hpp:143</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_a9ec8a9f52d651e39ce05f3845901a7ed"><div class="ttname"><a href="classunordered__multiset.html#a9ec8a9f52d651e39ce05f3845901a7ed">unordered_multiset::rehash</a></div><div class="ttdeci">void rehash(size_type n)</div><div class="ttdoc">重新哈希，调整桶数量</div><div class="ttdef"><b>定义</b> <a href="#l00377">unordered_multiset.hpp:377</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_aa03ce861320b22b3ed0666f3dc157f2f"><div class="ttname"><a href="classunordered__multiset.html#aa03ce861320b22b3ed0666f3dc157f2f">unordered_multiset::difference_type</a></div><div class="ttdeci">typename base_type::difference_type difference_type</div><div class="ttdoc">差值类型</div><div class="ttdef"><b>定义</b> <a href="#l00055">unordered_multiset.hpp:55</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_aa18dc620744dff82deb1e81dd31810fc"><div class="ttname"><a href="classunordered__multiset.html#aa18dc620744dff82deb1e81dd31810fc">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(Iterator first, Iterator list, size_type n)</div><div class="ttdoc">范围构造函数，指定初始桶数</div><div class="ttdef"><b>定义</b> <a href="#l00156">unordered_multiset.hpp:156</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_aa86842cd1118aa626afac34f2d805b35"><div class="ttname"><a href="classunordered__multiset.html#aa86842cd1118aa626afac34f2d805b35">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(size_type n, const hasher &amp;hf, const key_equal &amp;eql)</div><div class="ttdoc">构造函数，指定初始桶数、哈希函数和键相等比较函数</div><div class="ttdef"><b>定义</b> <a href="#l00097">unordered_multiset.hpp:97</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_aabd6c5843a90d41ce823e012c6d7c9ae"><div class="ttname"><a href="classunordered__multiset.html#aabd6c5843a90d41ce823e012c6d7c9ae">unordered_multiset::buckets_max_count</a></div><div class="ttdeci">NEFORCE_NODISCARD size_type buckets_max_count() const noexcept</div><div class="ttdoc">获取最大桶数量</div><div class="ttdef"><b>定义</b> <a href="#l00318">unordered_multiset.hpp:318</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ab9a26afc57c268b55c0c4317005c1858"><div class="ttname"><a href="classunordered__multiset.html#ab9a26afc57c268b55c0c4317005c1858">unordered_multiset::clear</a></div><div class="ttdeci">void clear() noexcept</div><div class="ttdoc">清空unordered_multiset</div><div class="ttdef"><b>定义</b> <a href="#l00460">unordered_multiset.hpp:460</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_abb3a6669aadb8fbcbceccc5c0fdedf0d"><div class="ttname"><a href="classunordered__multiset.html#abb3a6669aadb8fbcbceccc5c0fdedf0d">unordered_multiset::value_type</a></div><div class="ttdeci">typename base_type::value_type value_type</div><div class="ttdoc">值类型</div><div class="ttdef"><b>定义</b> <a href="#l00050">unordered_multiset.hpp:50</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_abd1af0581b147d63d25099ba3225b690"><div class="ttname"><a href="classunordered__multiset.html#abd1af0581b147d63d25099ba3225b690">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(unordered_multiset &amp;&amp;other) noexcept(is_nothrow_move_constructible_v&lt; base_type &gt;)</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00121">unordered_multiset.hpp:121</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ac4531d9452a3cea4cf342ecf918448e5"><div class="ttname"><a href="classunordered__multiset.html#ac4531d9452a3cea4cf342ecf918448e5">unordered_multiset::key_type</a></div><div class="ttdeci">typename base_type::key_type key_type</div><div class="ttdoc">键类型</div><div class="ttdef"><b>定义</b> <a href="#l00049">unordered_multiset.hpp:49</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ac61a14b631b6e473408e5d171f21ffdf"><div class="ttname"><a href="classunordered__multiset.html#ac61a14b631b6e473408e5d171f21ffdf">unordered_multiset::erase</a></div><div class="ttdeci">void erase(iterator position) noexcept</div><div class="ttdoc">删除指定位置的元素</div><div class="ttdef"><b>定义</b> <a href="#l00444">unordered_multiset.hpp:444</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ac80d10b87385575632e7efcc4d4eee37"><div class="ttname"><a href="classunordered__multiset.html#ac80d10b87385575632e7efcc4d4eee37">unordered_multiset::erase</a></div><div class="ttdeci">size_type erase(const key_type &amp;key) noexcept</div><div class="ttdoc">删除所有具有指定键的元素</div><div class="ttdef"><b>定义</b> <a href="#l00436">unordered_multiset.hpp:436</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_acc168cc712c69cb0b7e5cca49c1365cd"><div class="ttname"><a href="classunordered__multiset.html#acc168cc712c69cb0b7e5cca49c1365cd">unordered_multiset::iterator</a></div><div class="ttdeci">typename base_type::iterator iterator</div><div class="ttdoc">迭代器类型</div><div class="ttdef"><b>定义</b> <a href="#l00060">unordered_multiset.hpp:60</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_acc6b04fb61046b9e1b45a3623080401d"><div class="ttname"><a href="classunordered__multiset.html#acc6b04fb61046b9e1b45a3623080401d">unordered_multiset::max_load_factor</a></div><div class="ttdeci">void max_load_factor(float lf) noexcept</div><div class="ttdoc">设置最大负载因子</div><div class="ttdef"><b>定义</b> <a href="#l00369">unordered_multiset.hpp:369</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_acddae9d16c2b74c68c6249deb54604a1"><div class="ttname"><a href="classunordered__multiset.html#acddae9d16c2b74c68c6249deb54604a1">unordered_multiset::insert</a></div><div class="ttdeci">void insert(Iterator first, Iterator last)</div><div class="ttdoc">范围插入元素</div><div class="ttdef"><b>定义</b> <a href="#l00427">unordered_multiset.hpp:427</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_adc11a7eb3557e7f811d781415ac63b4b"><div class="ttname"><a href="classunordered__multiset.html#adc11a7eb3557e7f811d781415ac63b4b">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset()</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00073">unordered_multiset.hpp:73</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ae3013a73a2a617ce5de1b891ae06673f"><div class="ttname"><a href="classunordered__multiset.html#ae3013a73a2a617ce5de1b891ae06673f">unordered_multiset::end</a></div><div class="ttdeci">NEFORCE_NODISCARD iterator end() noexcept</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00236">unordered_multiset.hpp:236</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ae41ff2e0b53c80194bb574cd98a92b1b"><div class="ttname"><a href="classunordered__multiset.html#ae41ff2e0b53c80194bb574cd98a92b1b">unordered_multiset::max_load_factor</a></div><div class="ttdeci">NEFORCE_NODISCARD float max_load_factor() const noexcept</div><div class="ttdoc">获取最大负载因子</div><div class="ttdef"><b>定义</b> <a href="#l00361">unordered_multiset.hpp:361</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_ae490eb8cbebde0c9492c9bd1ee05fd80"><div class="ttname"><a href="classunordered__multiset.html#ae490eb8cbebde0c9492c9bd1ee05fd80">unordered_multiset::emplace</a></div><div class="ttdeci">iterator emplace(Args &amp;&amp;... args)</div><div class="ttdoc">在unordered_multiset中就地构造元素</div><div class="ttdef"><b>定义</b> <a href="#l00398">unordered_multiset.hpp:398</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_af2a1e4f0da31fdaa3ad2a3d8318604ca"><div class="ttname"><a href="classunordered__multiset.html#af2a1e4f0da31fdaa3ad2a3d8318604ca">unordered_multiset::equal_range</a></div><div class="ttdeci">NEFORCE_NODISCARD pair&lt; const_iterator, const_iterator &gt; equal_range(const key_type &amp;key) const</div><div class="ttdoc">获取等于指定键的常量元素范围</div><div class="ttdef"><b>定义</b> <a href="#l00505">unordered_multiset.hpp:505</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_af396cf8572d6081de7a331e3802efbb8"><div class="ttname"><a href="classunordered__multiset.html#af396cf8572d6081de7a331e3802efbb8">unordered_multiset::const_pointer</a></div><div class="ttdeci">typename base_type::const_pointer const_pointer</div><div class="ttdoc">常量指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00057">unordered_multiset.hpp:57</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_af936842c67a49af6495e245a79069295"><div class="ttname"><a href="classunordered__multiset.html#af936842c67a49af6495e245a79069295">unordered_multiset::find</a></div><div class="ttdeci">NEFORCE_NODISCARD const_iterator find(const key_type &amp;key) const</div><div class="ttdoc">查找具有指定键的常量元素</div><div class="ttdef"><b>定义</b> <a href="#l00487">unordered_multiset.hpp:487</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_af99446bd03906138052653b37b5cc48e"><div class="ttname"><a href="classunordered__multiset.html#af99446bd03906138052653b37b5cc48e">unordered_multiset::find</a></div><div class="ttdeci">NEFORCE_NODISCARD iterator find(const key_type &amp;key)</div><div class="ttdoc">查找具有指定键的元素</div><div class="ttdef"><b>定义</b> <a href="#l00478">unordered_multiset.hpp:478</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_afcf8d8e89195388978ff2d6d69246c2d"><div class="ttname"><a href="classunordered__multiset.html#afcf8d8e89195388978ff2d6d69246c2d">unordered_multiset::insert</a></div><div class="ttdeci">iterator insert(const value_type &amp;value)</div><div class="ttdoc">拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="#l00407">unordered_multiset.hpp:407</a></div></div>
+<div class="ttc" id="aclassunordered__multiset_html_affd3161cec595ce804cc0d16aded1246"><div class="ttname"><a href="classunordered__multiset.html#affd3161cec595ce804cc0d16aded1246">unordered_multiset::unordered_multiset</a></div><div class="ttdeci">unordered_multiset(Iterator first, Iterator last, size_type n, const hasher &amp;hf)</div><div class="ttdoc">范围构造函数，指定初始桶数和哈希函数</div><div class="ttdef"><b>定义</b> <a href="#l00170">unordered_multiset.hpp:170</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03044">type_traits.hpp:3044</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="ahashtable_8hpp_html"><div class="ttname"><a href="hashtable_8hpp.html">hashtable.hpp</a></div><div class="ttdoc">哈希表容器</div></div>
+<div class="ttc" id="astructequal__to_html"><div class="ttname"><a href="structequal__to.html">equal_to</a></div><div class="ttdoc">相等比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00257">functor.hpp:257</a></div></div>
+<div class="ttc" id="astructhash_html"><div class="ttname"><a href="structhash.html">hash</a></div><div class="ttdoc">哈希函数的主模板</div><div class="ttdef"><b>定义</b> <a href="hash_8hpp_source.html#l00031">hash.hpp:31</a></div></div>
+<div class="ttc" id="astructicollector_html"><div class="ttname"><a href="structicollector.html">icollector</a></div><div class="ttdoc">集合器接口模板</div><div class="ttdef"><b>定义</b> <a href="icollector_8hpp_source.html#l00028">icollector.hpp:28</a></div></div>
+<div class="ttc" id="astructpair_html"><div class="ttname"><a href="structpair.html">pair</a></div><div class="ttdoc">存储两个值的元组对</div><div class="ttdef"><b>定义</b> <a href="pair_8hpp_source.html#l00097">pair.hpp:97</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>container</b></li><li class="navelem"><a href="unordered__multiset_8hpp.html">unordered_multiset.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

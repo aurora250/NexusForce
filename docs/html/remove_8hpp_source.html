@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: remove.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('remove_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">remove.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="remove_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ALGORITHM_REMOVE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ALGORITHM_REMOVE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="search_8hpp.html">NeForce/core/algorithm/search.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="reference__wrapper_8hpp.html">NeForce/core/utility/reference_wrapper.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> T,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga1df961b0e78c205fa25515491f6351cd">   40</a></span><span class="keyword">constexpr</span> Iterator2 <a class="code hl_function" href="group___remove_algorithms.html#ga1df961b0e78c205fa25515491f6351cd">remove_copy</a>(Iterator1 first, Iterator1 last, Iterator2 result, <span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (*first != value) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            *result = *first;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            ++result;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> Predicate,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga4d00d790872d59348250d2e6cf269234">   66</a></span><span class="keyword">constexpr</span> Iterator2 <a class="code hl_function" href="group___remove_algorithms.html#ga4d00d790872d59348250d2e6cf269234">remove_copy_if</a>(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">if</span> (!pred(*first)) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            *result = *first;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            ++result;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, enable_if_t&lt;is_ranges_fwd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga6ebee7fbecf7983d218544a20420f55c">   92</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___remove_algorithms.html#ga6ebee7fbecf7983d218544a20420f55c">remove</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    first = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(first, last, value);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = first;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">return</span> first == last ? first : <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___remove_algorithms.html#ga1df961b0e78c205fa25515491f6351cd">remove_copy</a>(++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>, last, first, value);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate, enable_if_t&lt;is_ranges_fwd_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga49fb89299333bc6fad2db15128aad32d">  114</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___remove_algorithms.html#ga49fb89299333bc6fad2db15128aad32d">remove_if</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    first = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___finding_algorithms.html#gae76070d9ad2fdc3aad442e963b4819c8">find_if</a>(first, last, pred);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = first;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> first == last ? first : <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___remove_algorithms.html#ga4d00d790872d59348250d2e6cf269234">remove_copy_if</a>(++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>, last, first, pred);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container, <span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga80e72b34181ffb739e061b6dbe19a6b6">  135</a></span><span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___remove_algorithms.html#ga80e72b34181ffb739e061b6dbe19a6b6">erase</a>(Container&amp; cont, <span class="keyword">const</span> U&amp; value) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keyword">using </span>T = <span class="keyword">decltype</span>(*cont.begin());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval&lt;T&gt;</a>().operator =(<a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval&lt;U&gt;</a>()),</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="stringliteral">&quot;U must be comparable to the value type of Container&quot;</span>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keyword">const</span> <span class="keyword">auto</span> old_size = cont.size();</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a> = cont.end();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">auto</span> removed = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___remove_algorithms.html#ga49fb89299333bc6fad2db15128aad32d">remove_if</a>(cont.begin(), <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        [&amp;value](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; iter) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            return *iter == value;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        });</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    cont.erase(removed, <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">return</span> old_size - cont.size();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>}</div>
+</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="group___remove_algorithms.html#ga5d86f8052a2e5759aeab543c23f3c861">  166</a></span><span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___remove_algorithms.html#ga5d86f8052a2e5759aeab543c23f3c861">erase_if</a>(Container&amp; cont, Predicate pred) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> old_size = cont.size();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a> = cont.end();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keyword">auto</span> removed = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___remove_algorithms.html#ga49fb89299333bc6fad2db15128aad32d">remove_if</a>(cont.begin(), <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>,</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        [ref_pred = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___reference_wrapper.html#ga65ec3600aa7a6390944677be016c5f77">ref</a>(pred)](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; iter) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            <span class="keywordflow">return</span> ref_pred(*iter);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        });</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    cont.erase(removed, <a class="code hl_function" href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a>);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">return</span> old_size - cont.size();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> <span class="comment">// RemoveAlgorithms</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_REMOVE_HPP__</span></div>
+<div class="ttc" id="agroup___declval_tools_html_ga7c6502597045c02b014ec72343367f5c"><div class="ttname"><a href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a></div><div class="ttdeci">add_rvalue_reference_t&lt; T &gt; declval() noexcept</div><div class="ttdoc">获取类型的右值引用，仅用于非求值上下文</div></div>
+<div class="ttc" id="agroup___finding_algorithms_html_gae76070d9ad2fdc3aad442e963b4819c8"><div class="ttname"><a href="group___finding_algorithms.html#gae76070d9ad2fdc3aad442e963b4819c8">find_if</a></div><div class="ttdeci">constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">查找范围内第一个满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00388">search.hpp:388</a></div></div>
+<div class="ttc" id="agroup___finding_algorithms_html_gaf00ba933b64f438e9c32ebf9cb1d7c8d"><div class="ttname"><a href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">查找范围内第一个等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00372">search.hpp:372</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_ga47b4de454cb338a8959fd068e1d827e6"><div class="ttname"><a href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_fwd_iter_v</div><div class="ttdoc">检查是否为范围前向迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00582">concepts.hpp:582</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga81a6fcf5c05367caa72c5e1e26ffa38f"><div class="ttname"><a href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a></div><div class="ttdeci">constexpr Iterator next(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</div><div class="ttdoc">获取迭代器的后一个位置</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00134">iterator.hpp:134</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___reference_wrapper_html_ga65ec3600aa7a6390944677be016c5f77"><div class="ttname"><a href="group___reference_wrapper.html#ga65ec3600aa7a6390944677be016c5f77">ref</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr reference_wrapper&lt; T &gt; ref(T &amp;val) noexcept</div><div class="ttdoc">创建引用包装器</div><div class="ttdef"><b>定义</b> <a href="reference__wrapper_8hpp_source.html#l00137">reference_wrapper.hpp:137</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga1df961b0e78c205fa25515491f6351cd"><div class="ttname"><a href="group___remove_algorithms.html#ga1df961b0e78c205fa25515491f6351cd">remove_copy</a></div><div class="ttdeci">constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;value)</div><div class="ttdoc">复制范围中不等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="#l00040">remove.hpp:40</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga49fb89299333bc6fad2db15128aad32d"><div class="ttname"><a href="group___remove_algorithms.html#ga49fb89299333bc6fad2db15128aad32d">remove_if</a></div><div class="ttdeci">constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">移除范围中满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00114">remove.hpp:114</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga4d00d790872d59348250d2e6cf269234"><div class="ttname"><a href="group___remove_algorithms.html#ga4d00d790872d59348250d2e6cf269234">remove_copy_if</a></div><div class="ttdeci">constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred)</div><div class="ttdoc">复制范围中不满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00066">remove.hpp:66</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga5d86f8052a2e5759aeab543c23f3c861"><div class="ttname"><a href="group___remove_algorithms.html#ga5d86f8052a2e5759aeab543c23f3c861">erase_if</a></div><div class="ttdeci">constexpr size_t erase_if(Container &amp;cont, Predicate pred)</div><div class="ttdoc">从容器中删除所有满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00166">remove.hpp:166</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga6ebee7fbecf7983d218544a20420f55c"><div class="ttname"><a href="group___remove_algorithms.html#ga6ebee7fbecf7983d218544a20420f55c">remove</a></div><div class="ttdeci">constexpr Iterator remove(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">移除范围中等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="#l00092">remove.hpp:92</a></div></div>
+<div class="ttc" id="agroup___remove_algorithms_html_ga80e72b34181ffb739e061b6dbe19a6b6"><div class="ttname"><a href="group___remove_algorithms.html#ga80e72b34181ffb739e061b6dbe19a6b6">erase</a></div><div class="ttdeci">constexpr size_t erase(Container &amp;cont, const U &amp;value)</div><div class="ttdoc">从容器中删除所有等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="#l00135">remove.hpp:135</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga4957a4e04980dc4efffacefa1de50c3c"><div class="ttname"><a href="group___type_erasure_functions.html#ga4957a4e04980dc4efffacefa1de50c3c">end</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) end(Container &amp;cont) noexcept(noexcept(cont.end()))</div><div class="ttdoc">获取容器的结束迭代器</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00043">type_erase.hpp:43</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="areference__wrapper_8hpp_html"><div class="ttname"><a href="reference__wrapper_8hpp.html">reference_wrapper.hpp</a></div><div class="ttdoc">引用包装器</div></div>
+<div class="ttc" id="asearch_8hpp_html"><div class="ttname"><a href="search_8hpp.html">search.hpp</a></div><div class="ttdoc">查找和搜索算法</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="remove_8hpp.html">remove.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

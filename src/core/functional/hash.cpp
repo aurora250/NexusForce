@@ -1,15 +1,15 @@
-#include <MSTL/core/functional/hash.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/functional/hash.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 // use switch penetrate
 #pragma warning(push)
 #pragma warning(disable: 26819)
 
-MSTL_INLINE17 constexpr uint32_t BLOCK_MULTIPLIER32_1 = 0xcc9e2d51;
-MSTL_INLINE17 constexpr uint32_t BLOCK_MULTIPLIER32_2 = 0x1b873593;
-MSTL_INLINE17 constexpr uint32_t HASH_UPDATE_CONSTANT32 = 0xe6546b64;
-MSTL_INLINE17 constexpr uint32_t FINAL_MIX_MULTIPLIER32_1 = 0x85ebca6b;
-MSTL_INLINE17 constexpr uint32_t FINAL_MIX_MULTIPLIER32_2 = 0xc2b2ae35;
+NEFORCE_INLINE17 constexpr uint32_t BLOCK_MULTIPLIER32_1 = 0xcc9e2d51;
+NEFORCE_INLINE17 constexpr uint32_t BLOCK_MULTIPLIER32_2 = 0x1b873593;
+NEFORCE_INLINE17 constexpr uint32_t HASH_UPDATE_CONSTANT32 = 0xe6546b64;
+NEFORCE_INLINE17 constexpr uint32_t FINAL_MIX_MULTIPLIER32_1 = 0x85ebca6b;
+NEFORCE_INLINE17 constexpr uint32_t FINAL_MIX_MULTIPLIER32_2 = 0xc2b2ae35;
 
 static uint32_t hash_rotate_x32(const uint32_t x, const int r) noexcept {
     return (x << r) | (x >> (32 - r));
@@ -59,20 +59,20 @@ uint32_t MurmurHash_x32(const void* key, const size_t len, const uint32_t seed) 
     return h1;
 }
 
-#ifdef MSTL_DATA_BUS_WIDTH_64__
+#ifdef NEFORCE_ARCH_BITS_64
 
 constexpr uint64_t hash_rotate_x64(const uint64_t x, const int r) noexcept {
     return (x << r) | (x >> (64 - r));
 }
 
-MSTL_INLINE17 constexpr uint64_t MULTIPLIER64_1 = 0x87c37b91114253d5ULL;
-MSTL_INLINE17 constexpr uint64_t MULTIPLIER64_2 = 0x4cf5ad432745937fULL;
-MSTL_INLINE17 constexpr uint64_t FINAL_MIX_MULTIPLIER64_1 = 0xff51afd7ed558ccdULL;
-MSTL_INLINE17 constexpr uint64_t FINAL_MIX_MULTIPLIER64_2 = 0xc4ceb9fe1a85ec53ULL;
-MSTL_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_1 = 0x52dce729;
-MSTL_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_2 = 0x38495ab5;
+NEFORCE_INLINE17 constexpr uint64_t MULTIPLIER64_1 = 0x87c37b91114253d5ULL;
+NEFORCE_INLINE17 constexpr uint64_t MULTIPLIER64_2 = 0x4cf5ad432745937fULL;
+NEFORCE_INLINE17 constexpr uint64_t FINAL_MIX_MULTIPLIER64_1 = 0xff51afd7ed558ccdULL;
+NEFORCE_INLINE17 constexpr uint64_t FINAL_MIX_MULTIPLIER64_2 = 0xc4ceb9fe1a85ec53ULL;
+NEFORCE_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_1 = 0x52dce729;
+NEFORCE_INLINE17 constexpr uint64_t HASH_UPDATE_CONSTANT64_2 = 0x38495ab5;
 
-MSTL_CONSTEXPR14 uint64_t hash_mix_x64(uint64_t k) noexcept {
+NEFORCE_CONSTEXPR14 uint64_t hash_mix_x64(uint64_t k) noexcept {
     k ^= k >> 33;
     k *= FINAL_MIX_MULTIPLIER64_1;
     k ^= k >> 33;
@@ -156,4 +156,4 @@ murmur_hash MurmurHash_x64(const void* key, const size_t len, const uint32_t see
 
 #pragma warning(pop)
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

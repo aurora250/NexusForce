@@ -1,5 +1,5 @@
-#include <MSTL/core/utility/any.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/any.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 any::any(const any& other) {
     if (!other.has_value()) manage_ = nullptr;
@@ -30,7 +30,7 @@ any& any::operator =(any&& other) noexcept {
     return *this;
 }
 
-MSTL_NODISCARD const std::type_info& any::type() const noexcept {
+NEFORCE_NODISCARD const std::type_info& any::type() const noexcept {
     if (!has_value()) return typeid(void);
     ArgT arg{};
     manage_(GET_TYPE_INFO, this, &arg);
@@ -59,4 +59,4 @@ void any::swap(any& rhs) noexcept {
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

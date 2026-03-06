@@ -1,6 +1,6 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/ini/ini_parser.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/ini/ini_parser.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 void ini_parser::skip_whitespace() noexcept {
     while (pos_ < len_ && is_space(current())) {
@@ -83,7 +83,7 @@ void ini_parser::parse_line(const string& line) {
     if (is_section_line(line, section_name)) {
         auto new_section = make_unique<ini_section>(section_name);
         current_section_ = new_section.get();
-        root_->add_section(section_name, _MSTL move(new_section));
+        root_->add_section(section_name, _NEFORCE move(new_section));
         return;
     }
 
@@ -120,7 +120,7 @@ unique_ptr<ini_document> ini_parser::parse() {
         }
     }
 
-    return _MSTL move(root_);
+    return _NEFORCE move(root_);
 }
 
 optional<unique_ptr<ini_document>> ini_parser::try_parse() {
@@ -131,4 +131,4 @@ optional<unique_ptr<ini_document>> ini_parser::try_parse() {
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

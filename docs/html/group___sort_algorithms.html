@@ -1,0 +1,2274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 排序算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___sort_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">排序算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>排序算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga9da5b819e039a124551628d31a384925" id="r_ga9da5b819e039a124551628d31a384925"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9da5b819e039a124551628d31a384925 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga9da5b819e039a124551628d31a384925">bubble_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga9da5b819e039a124551628d31a384925"><td class="mdescLeft">&#160;</td><td class="mdescRight">冒泡排序  <br /></td></tr>
+<tr class="memitem:ga38b39d6d4265a3a7e829bdf9219b8b30" id="r_ga38b39d6d4265a3a7e829bdf9219b8b30"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga38b39d6d4265a3a7e829bdf9219b8b30 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga38b39d6d4265a3a7e829bdf9219b8b30">bubble_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga38b39d6d4265a3a7e829bdf9219b8b30"><td class="mdescLeft">&#160;</td><td class="mdescRight">冒泡排序（默认升序）  <br /></td></tr>
+<tr class="memitem:ga0269642b310324d681da6f3c6a7299e8" id="r_ga0269642b310324d681da6f3c6a7299e8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga0269642b310324d681da6f3c6a7299e8 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga0269642b310324d681da6f3c6a7299e8">cocktail_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga0269642b310324d681da6f3c6a7299e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">鸡尾酒排序（双向冒泡排序）  <br /></td></tr>
+<tr class="memitem:gab4370b27a1fe63f986c990d6d24ce1ca" id="r_gab4370b27a1fe63f986c990d6d24ce1ca"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gab4370b27a1fe63f986c990d6d24ce1ca template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gab4370b27a1fe63f986c990d6d24ce1ca">cocktail_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab4370b27a1fe63f986c990d6d24ce1ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">鸡尾酒排序（默认升序）  <br /></td></tr>
+<tr class="memitem:gac1080ab53248eeae66de90dff74048cb" id="r_gac1080ab53248eeae66de90dff74048cb"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac1080ab53248eeae66de90dff74048cb template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gac1080ab53248eeae66de90dff74048cb">select_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gac1080ab53248eeae66de90dff74048cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">选择排序  <br /></td></tr>
+<tr class="memitem:gaa914cf59e17489231832a5f5353d9e2e" id="r_gaa914cf59e17489231832a5f5353d9e2e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaa914cf59e17489231832a5f5353d9e2e template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gaa914cf59e17489231832a5f5353d9e2e">select_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gaa914cf59e17489231832a5f5353d9e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">选择排序（默认升序）  <br /></td></tr>
+<tr class="memitem:gad58219b25c336c59023f210a295514d5" id="r_gad58219b25c336c59023f210a295514d5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad58219b25c336c59023f210a295514d5 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gad58219b25c336c59023f210a295514d5">shell_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gad58219b25c336c59023f210a295514d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">希尔排序  <br /></td></tr>
+<tr class="memitem:ga449b0e936d1bec8d1953ec623db36263" id="r_ga449b0e936d1bec8d1953ec623db36263"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga449b0e936d1bec8d1953ec623db36263 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga449b0e936d1bec8d1953ec623db36263">shell_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga449b0e936d1bec8d1953ec623db36263"><td class="mdescLeft">&#160;</td><td class="mdescRight">希尔排序（默认升序）  <br /></td></tr>
+<tr class="memitem:ga07ee6b9c817ebbb796ddba78cecbf0a7" id="r_ga07ee6b9c817ebbb796ddba78cecbf0a7"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, typename IndexMapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga07ee6b9c817ebbb796ddba78cecbf0a7 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga07ee6b9c817ebbb796ddba78cecbf0a7">counting_sort</a> (Iterator first, Iterator last, Compare comp, IndexMapper mapper)</td></tr>
+<tr class="memdesc:ga07ee6b9c817ebbb796ddba78cecbf0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">计数排序  <br /></td></tr>
+<tr class="memitem:ga7527b751368819fb2511186c6539e747" id="r_ga7527b751368819fb2511186c6539e747"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga7527b751368819fb2511186c6539e747 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga7527b751368819fb2511186c6539e747">counting_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga7527b751368819fb2511186c6539e747"><td class="mdescLeft">&#160;</td><td class="mdescRight">计数排序（默认升序）  <br /></td></tr>
+<tr class="memitem:ga64f9b60ef44a3e562d3780e03d499f50" id="r_ga64f9b60ef44a3e562d3780e03d499f50"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga64f9b60ef44a3e562d3780e03d499f50 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga64f9b60ef44a3e562d3780e03d499f50">bucket_sort_less</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga64f9b60ef44a3e562d3780e03d499f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">桶排序（升序）  <br /></td></tr>
+<tr class="memitem:gab1e043397e26132dec9cbe418533c374" id="r_gab1e043397e26132dec9cbe418533c374"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab1e043397e26132dec9cbe418533c374 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gab1e043397e26132dec9cbe418533c374">bucket_sort_greater</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab1e043397e26132dec9cbe418533c374"><td class="mdescLeft">&#160;</td><td class="mdescRight">桶排序（降序）  <br /></td></tr>
+<tr class="memitem:gac70d6532149ccfe44bb5ed022e42be4f" id="r_gac70d6532149ccfe44bb5ed022e42be4f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gac70d6532149ccfe44bb5ed022e42be4f template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gac70d6532149ccfe44bb5ed022e42be4f">bucket_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gac70d6532149ccfe44bb5ed022e42be4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">桶排序（默认升序）  <br /></td></tr>
+<tr class="memitem:ga9cff80850740c00c0de252351dd160a6" id="r_ga9cff80850740c00c0de252351dd160a6"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Mapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9cff80850740c00c0de252351dd160a6 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga9cff80850740c00c0de252351dd160a6">radix_sort_less</a> (Iterator first, Iterator last, Mapper mapper)</td></tr>
+<tr class="memdesc:ga9cff80850740c00c0de252351dd160a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">基数排序（升序）  <br /></td></tr>
+<tr class="memitem:ga14c5e0c863c544362ac0c4da79c7920f" id="r_ga14c5e0c863c544362ac0c4da79c7920f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Mapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga14c5e0c863c544362ac0c4da79c7920f template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga14c5e0c863c544362ac0c4da79c7920f">radix_sort_greater</a> (Iterator first, Iterator last, Mapper mapper)</td></tr>
+<tr class="memdesc:ga14c5e0c863c544362ac0c4da79c7920f"><td class="mdescLeft">&#160;</td><td class="mdescRight">基数排序（降序）  <br /></td></tr>
+<tr class="memitem:ga1adff02964b17e52d35f799743b1e36b" id="r_ga1adff02964b17e52d35f799743b1e36b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Mapper = _NEFORCE identity&lt;iter_value_t&lt;Iterator&gt;&gt;&gt; </td></tr>
+<tr class="memitem:ga1adff02964b17e52d35f799743b1e36b template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga1adff02964b17e52d35f799743b1e36b">radix_sort</a> (Iterator first, Iterator last, Mapper mapper=Mapper())</td></tr>
+<tr class="memdesc:ga1adff02964b17e52d35f799743b1e36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">基数排序（默认升序）  <br /></td></tr>
+<tr class="memitem:gac47db5825225d750719417a44e89876c" id="r_gac47db5825225d750719417a44e89876c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gac47db5825225d750719417a44e89876c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gac47db5825225d750719417a44e89876c">smooth_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gac47db5825225d750719417a44e89876c"><td class="mdescLeft">&#160;</td><td class="mdescRight">平滑排序  <br /></td></tr>
+<tr class="memitem:ga099bbd8c3bdd5df32563eece0ec203d9" id="r_ga099bbd8c3bdd5df32563eece0ec203d9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga099bbd8c3bdd5df32563eece0ec203d9 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga099bbd8c3bdd5df32563eece0ec203d9">tim_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga099bbd8c3bdd5df32563eece0ec203d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tim排序  <br /></td></tr>
+<tr class="memitem:ga72746fd9d7faa395313fcf685cb12677" id="r_ga72746fd9d7faa395313fcf685cb12677"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga72746fd9d7faa395313fcf685cb12677 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga72746fd9d7faa395313fcf685cb12677">tim_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga72746fd9d7faa395313fcf685cb12677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tim排序（默认升序）  <br /></td></tr>
+<tr class="memitem:gab55fe662d65f8fc2ca77a84307e0a068" id="r_gab55fe662d65f8fc2ca77a84307e0a068"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab55fe662d65f8fc2ca77a84307e0a068 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab55fe662d65f8fc2ca77a84307e0a068">monkey_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gab55fe662d65f8fc2ca77a84307e0a068"><td class="mdescLeft">&#160;</td><td class="mdescRight">猴子排序  <br /></td></tr>
+<tr class="memitem:gad7b84f243460dc2ca0d24e44f0a1c504" id="r_gad7b84f243460dc2ca0d24e44f0a1c504"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gad7b84f243460dc2ca0d24e44f0a1c504 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad7b84f243460dc2ca0d24e44f0a1c504">monkey_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gad7b84f243460dc2ca0d24e44f0a1c504"><td class="mdescLeft">&#160;</td><td class="mdescRight">猴子排序（默认升序）  <br /></td></tr>
+<tr class="memitem:ga5fce1d0fb240bb3578519e037bac0b00" id="r_ga5fce1d0fb240bb3578519e037bac0b00"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga5fce1d0fb240bb3578519e037bac0b00 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga5fce1d0fb240bb3578519e037bac0b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:ga54b0b59c4c05a63c1b96fdad1d71e61e" id="r_ga54b0b59c4c05a63c1b96fdad1d71e61e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga54b0b59c4c05a63c1b96fdad1d71e61e template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga54b0b59c4c05a63c1b96fdad1d71e61e">is_sorted</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga54b0b59c4c05a63c1b96fdad1d71e61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:gab783225826837f46b5125cf43ecd442b" id="r_gab783225826837f46b5125cf43ecd442b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab783225826837f46b5125cf43ecd442b template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gab783225826837f46b5125cf43ecd442b"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:ga1364d104f129566eaea032b500fbb87a" id="r_ga1364d104f129566eaea032b500fbb87a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga1364d104f129566eaea032b500fbb87a template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga1364d104f129566eaea032b500fbb87a">is_sorted_until</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga1364d104f129566eaea032b500fbb87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:ga22c30ead6a92afb912c68e2f9364a819" id="r_ga22c30ead6a92afb912c68e2f9364a819"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga22c30ead6a92afb912c68e2f9364a819 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga22c30ead6a92afb912c68e2f9364a819"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:ga121f4d074409e1a9fa7d105543adae87" id="r_ga121f4d074409e1a9fa7d105543adae87"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga121f4d074409e1a9fa7d105543adae87 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga121f4d074409e1a9fa7d105543adae87">merge_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga121f4d074409e1a9fa7d105543adae87"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:gad27000a1c2793398bcb92fb151d8aeca" id="r_gad27000a1c2793398bcb92fb151d8aeca"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad27000a1c2793398bcb92fb151d8aeca template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gad27000a1c2793398bcb92fb151d8aeca"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga93c3ca069ff13f30369021482848ccc8" id="r_ga93c3ca069ff13f30369021482848ccc8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga93c3ca069ff13f30369021482848ccc8 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga93c3ca069ff13f30369021482848ccc8">partial_sort</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:ga93c3ca069ff13f30369021482848ccc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:gaab427767ef61a5d9de340c035ea6f103" id="r_gaab427767ef61a5d9de340c035ea6f103"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaab427767ef61a5d9de340c035ea6f103 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</td></tr>
+<tr class="memdesc:gaab427767ef61a5d9de340c035ea6f103"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制到另一个范围  <br /></td></tr>
+<tr class="memitem:ga29e746c754c35147ebf13ab20c9a7ce2" id="r_ga29e746c754c35147ebf13ab20c9a7ce2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga29e746c754c35147ebf13ab20c9a7ce2 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga29e746c754c35147ebf13ab20c9a7ce2">partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</td></tr>
+<tr class="memdesc:ga29e746c754c35147ebf13ab20c9a7ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制  <br /></td></tr>
+<tr class="memitem:ga1886b1ec068eee2817df757f1991980d" id="r_ga1886b1ec068eee2817df757f1991980d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1886b1ec068eee2817df757f1991980d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga1886b1ec068eee2817df757f1991980d"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga8a0aec613c2b702a0f34cf6299b7b190" id="r_ga8a0aec613c2b702a0f34cf6299b7b190"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga8a0aec613c2b702a0f34cf6299b7b190 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8a0aec613c2b702a0f34cf6299b7b190">insertion_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga8a0aec613c2b702a0f34cf6299b7b190"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga0ee44dde2bc3a33ba32cc85cc55dbe21" id="r_ga0ee44dde2bc3a33ba32cc85cc55dbe21"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga0ee44dde2bc3a33ba32cc85cc55dbe21 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a> (Iterator first, Iterator last, int depth_limit, Compare comp)</td></tr>
+<tr class="memdesc:ga0ee44dde2bc3a33ba32cc85cc55dbe21"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:gaffb3fd567cdefa23e2ab6a1a5a6e6947" id="r_gaffb3fd567cdefa23e2ab6a1a5a6e6947"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaffb3fd567cdefa23e2ab6a1a5a6e6947 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaffb3fd567cdefa23e2ab6a1a5a6e6947">introspective_sort</a> (Iterator first, Iterator last, int depth_limit)</td></tr>
+<tr class="memdesc:gaffb3fd567cdefa23e2ab6a1a5a6e6947"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:ga7782ccaeaf7cafbeea2439ca26d33338" id="r_ga7782ccaeaf7cafbeea2439ca26d33338"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7782ccaeaf7cafbeea2439ca26d33338 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga7782ccaeaf7cafbeea2439ca26d33338"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga5daa37ac5f6fc132c53c076b24ce6163" id="r_ga5daa37ac5f6fc132c53c076b24ce6163"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga5daa37ac5f6fc132c53c076b24ce6163 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga5daa37ac5f6fc132c53c076b24ce6163">quick_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga5daa37ac5f6fc132c53c076b24ce6163"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:gad43eb8f252707a714bbfd78ab025c3e5" id="r_gad43eb8f252707a714bbfd78ab025c3e5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad43eb8f252707a714bbfd78ab025c3e5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad43eb8f252707a714bbfd78ab025c3e5">sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gad43eb8f252707a714bbfd78ab025c3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga7a4fdc8969bfed2d02cdd1941044a8d9" id="r_ga7a4fdc8969bfed2d02cdd1941044a8d9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga7a4fdc8969bfed2d02cdd1941044a8d9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7a4fdc8969bfed2d02cdd1941044a8d9">sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga7a4fdc8969bfed2d02cdd1941044a8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga351f34ece579b7648aaa887896850608" id="r_ga351f34ece579b7648aaa887896850608"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga351f34ece579b7648aaa887896850608 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga351f34ece579b7648aaa887896850608">nth_element</a> (Iterator first, Iterator nth, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga351f34ece579b7648aaa887896850608"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+<tr class="memitem:gaf843abe1431e912979c95e0052a24a79" id="r_gaf843abe1431e912979c95e0052a24a79"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaf843abe1431e912979c95e0052a24a79 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaf843abe1431e912979c95e0052a24a79">nth_element</a> (Iterator first, Iterator nth, Iterator last)</td></tr>
+<tr class="memdesc:gaf843abe1431e912979c95e0052a24a79"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>排序算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga38b39d6d4265a3a7e829bdf9219b8b30" name="ga38b39d6d4265a3a7e829bdf9219b8b30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga38b39d6d4265a3a7e829bdf9219b8b30">&#9670;&#160;</a></span>bubble_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void bubble_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>冒泡排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>双向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00062">62</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00036">bubble_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga9da5b819e039a124551628d31a384925" name="ga9da5b819e039a124551628d31a384925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9da5b819e039a124551628d31a384925">&#9670;&#160;</a></span>bubble_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void bubble_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>冒泡排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>双向迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：平均O(N²)，最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定</p>
+<p>通过重复交换相邻的逆序元素将最大元素冒泡到末尾。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>, <a class="el" href="reverse__iterator_8hpp_source.html#l00384">make_reverse_iterator()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00062">bubble_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gac70d6532149ccfe44bb5ed022e42be4f" name="gac70d6532149ccfe44bb5ed022e42be4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac70d6532149ccfe44bb5ed022e42be4f">&#9670;&#160;</a></span>bucket_sort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void bucket_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>桶排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>前向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00341">341</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00282">bucket_sort_less()</a>.</p>
+
+</div>
+</div>
+<a id="gab1e043397e26132dec9cbe418533c374" name="gab1e043397e26132dec9cbe418533c374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab1e043397e26132dec9cbe418533c374">&#9670;&#160;</a></span>bucket_sort_greater()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void bucket_sort_greater </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>桶排序（降序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>前向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00312">312</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="pair_8hpp_source.html#l00101">pair&lt; T1, T2 &gt;::first</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="pair_8hpp_source.html#l00102">pair&lt; T1, T2 &gt;::second</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00691">vector&lt; T, Alloc &gt;::size()</a>.</p>
+
+</div>
+</div>
+<a id="ga64f9b60ef44a3e562d3780e03d499f50" name="ga64f9b60ef44a3e562d3780e03d499f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64f9b60ef44a3e562d3780e03d499f50">&#9670;&#160;</a></span>bucket_sort_less()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void bucket_sort_less </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>桶排序（升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>前向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：平均O(N + k)，最差O(N²) 空间复杂度：O(N + k) 稳定性：稳定</p>
+<p>适用于均匀分布的整数或浮点数。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00282">282</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="pair_8hpp_source.html#l00101">pair&lt; T1, T2 &gt;::first</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="pair_8hpp_source.html#l00102">pair&lt; T1, T2 &gt;::second</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00691">vector&lt; T, Alloc &gt;::size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00341">bucket_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gab4370b27a1fe63f986c990d6d24ce1ca" name="gab4370b27a1fe63f986c990d6d24ce1ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4370b27a1fe63f986c990d6d24ce1ca">&#9670;&#160;</a></span>cocktail_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void cocktail_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>鸡尾酒排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>双向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00119">119</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00081">cocktail_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga0269642b310324d681da6f3c6a7299e8" name="ga0269642b310324d681da6f3c6a7299e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0269642b310324d681da6f3c6a7299e8">&#9670;&#160;</a></span>cocktail_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void cocktail_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>鸡尾酒排序（双向冒泡排序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>双向迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：平均O(N²)，最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定</p>
+<p>冒泡排序的改进版本，同时从两端进行冒泡，减少循环次数。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00118">prev()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00119">cocktail_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga7527b751368819fb2511186c6539e747" name="ga7527b751368819fb2511186c6539e747"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7527b751368819fb2511186c6539e747">&#9670;&#160;</a></span>counting_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void counting_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>计数排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00263">263</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00225">counting_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga07ee6b9c817ebbb796ddba78cecbf0a7" name="ga07ee6b9c817ebbb796ddba78cecbf0a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07ee6b9c817ebbb796ddba78cecbf0a7">&#9670;&#160;</a></span>counting_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, typename IndexMapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void counting_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IndexMapper</td>          <td class="paramname"><span class="paramname"><em>mapper</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>计数排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+    <tr><td class="paramname">IndexMapper</td><td>索引映射函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+    <tr><td class="paramname">mapper</td><td>将元素映射为整数索引的函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：O(N + k)，其中k是元素范围 空间复杂度：O(k) 稳定性：稳定</p>
+<p>适用于整数或可映射为整数的类型，范围不宜过大。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00225">225</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="vector_8hpp_source.html#l00597">vector&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>, <a class="el" href="search_8hpp_source.html#l00350">count()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="vector_8hpp_source.html#l00605">vector&lt; T, Alloc &gt;::end()</a>, <a class="el" href="reverse__iterator_8hpp_source.html#l00384">make_reverse_iterator()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00263">counting_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga8a0aec613c2b702a0f34cf6299b7b190" name="ga8a0aec613c2b702a0f34cf6299b7b190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a0aec613c2b702a0f34cf6299b7b190">&#9670;&#160;</a></span>insertion_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>插入排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00293">293</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00273">insertion_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga1886b1ec068eee2817df757f1991980d" name="ga1886b1ec068eee2817df757f1991980d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1886b1ec068eee2817df757f1991980d">&#9670;&#160;</a></span>insertion_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>插入排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>简单的稳定排序算法，适用于小规模或基本有序的数据。 将每个元素插入到前面已排序子序列的正确位置。</p>
+<p>时间复杂度：最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00273">273</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00225">copy_backward()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00293">insertion_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00489">nth_element()</a>, <a class="el" href="sort_8hpp_source.html#l00449">sort()</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00517">tim_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaffb3fd567cdefa23e2ab6a1a5a6e6947" name="gaffb3fd567cdefa23e2ab6a1a5a6e6947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaffb3fd567cdefa23e2ab6a1a5a6e6947">&#9670;&#160;</a></span>introspective_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void introspective_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>depth_limit</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内省排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">depth_limit</td><td>递归深度限制 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00339">339</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga0ee44dde2bc3a33ba32cc85cc55dbe21" name="ga0ee44dde2bc3a33ba32cc85cc55dbe21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ee44dde2bc3a33ba32cc85cc55dbe21">&#9670;&#160;</a></span>introspective_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void introspective_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>depth_limit</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内省排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">depth_limit</td><td>递归深度限制 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>结合了快速排序、堆排序和插入排序的混合排序算法：</p><ol type="1">
+<li>使用快速排序递归分区</li>
+<li>当递归深度过大时切换到堆排序，避免快速排序的最坏情况</li>
+<li>对小规模子序列使用插入排序</li>
+</ol>
+<p>时间复杂度：O(N log N) 空间复杂度：O(log N) 稳定性：不稳定 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00317">317</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a>, <a class="el" href="compare_8hpp_source.html#l00205">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00150">partial_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00339">introspective_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga54b0b59c4c05a63c1b96fdad1d71e61e" name="ga54b0b59c4c05a63c1b96fdad1d71e61e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54b0b59c4c05a63c1b96fdad1d71e61e">&#9670;&#160;</a></span>is_sorted() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否已排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围已排序则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00055">55</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a>.</p>
+
+</div>
+</div>
+<a id="ga5fce1d0fb240bb3578519e037bac0b00" name="ga5fce1d0fb240bb3578519e037bac0b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5fce1d0fb240bb3578519e037bac0b00">&#9670;&#160;</a></span>is_sorted() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否已排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围已按comp排序则返回true，否则返回false</dd></dl>
+<p>检查范围 [first, last) 是否按照比较函数 comp 排序。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00055">is_sorted()</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00563">monkey_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga1364d104f129566eaea032b500fbb87a" name="ga1364d104f129566eaea032b500fbb87a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1364d104f129566eaea032b500fbb87a">&#9670;&#160;</a></span>is_sorted_until() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator is_sorted_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找首个破坏排序的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向首个破坏排序的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00071">is_sorted_until()</a>.</p>
+
+</div>
+</div>
+<a id="gab783225826837f46b5125cf43ecd442b" name="gab783225826837f46b5125cf43ecd442b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab783225826837f46b5125cf43ecd442b">&#9670;&#160;</a></span>is_sorted_until() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator is_sorted_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找首个破坏排序的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向首个破坏排序的元素的迭代器，如果整个范围已排序则返回last</dd></dl>
+<p>在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00134">next()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00089">is_sorted_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga121f4d074409e1a9fa7d105543adae87" name="ga121f4d074409e1a9fa7d105543adae87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga121f4d074409e1a9fa7d105543adae87">&#9670;&#160;</a></span>merge_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void merge_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>归并排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00113">merge_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga22c30ead6a92afb912c68e2f9364a819" name="ga22c30ead6a92afb912c68e2f9364a819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga22c30ead6a92afb912c68e2f9364a819">&#9670;&#160;</a></span>merge_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void merge_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>归并排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用分治策略的稳定排序算法：</p><ol type="1">
+<li>递归地将序列分成两半</li>
+<li>分别对两半进行排序</li>
+<li>合并两个已排序的子序列</li>
+</ol>
+<p>时间复杂度：O(N log N) 空间复杂度：O(N) 稳定性：稳定 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="merge_8hpp_source.html#l00258">inplace_merge()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00113">merge_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00129">merge_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00113">merge_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gad7b84f243460dc2ca0d24e44f0a1c504" name="gad7b84f243460dc2ca0d24e44f0a1c504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7b84f243460dc2ca0d24e44f0a1c504">&#9670;&#160;</a></span>monkey_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void monkey_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>猴子排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00576">576</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00563">monkey_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gab55fe662d65f8fc2ca77a84307e0a068" name="gab55fe662d65f8fc2ca77a84307e0a068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab55fe662d65f8fc2ca77a84307e0a068">&#9670;&#160;</a></span>monkey_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void monkey_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>猴子排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：平均O((N+1)!)，理论上无限 空间复杂度：O(1) 稳定性：不稳定</p>
+<p>通过随机打乱并检查是否有序来进行排序。 仅用于教学和娱乐目的，切勿用于实际生产环境。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00563">563</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="sort_8hpp_source.html#l00036">is_sorted()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00576">monkey_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaf843abe1431e912979c95e0052a24a79" name="gaf843abe1431e912979c95e0052a24a79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf843abe1431e912979c95e0052a24a79">&#9670;&#160;</a></span>nth_element() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void nth_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>nth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>第n个元素选择 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">nth</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00507">507</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00489">nth_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga351f34ece579b7648aaa887896850608" name="ga351f34ece579b7648aaa887896850608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga351f34ece579b7648aaa887896850608">&#9670;&#160;</a></span>nth_element() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void nth_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>nth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>第n个元素选择 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">nth</td><td>目标位置（0-based） </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>重新排列范围 [first, last)，使得位置 nth 的元素是排序后的正确元素， 并且 nth 之前的元素都不大于它，之后的元素都不小于它。 使用快速选择算法实现。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00489">489</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="sort_8hpp_source.html#l00273">insertion_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00205">median()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00507">nth_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga93c3ca069ff13f30369021482848ccc8" name="ga93c3ca069ff13f30369021482848ccc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga93c3ca069ff13f30369021482848ccc8">&#9670;&#160;</a></span>partial_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void partial_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>部分排序的边界 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00169">169</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00150">partial_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gad27000a1c2793398bcb92fb151d8aeca" name="gad27000a1c2793398bcb92fb151d8aeca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad27000a1c2793398bcb92fb151d8aeca">&#9670;&#160;</a></span>partial_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void partial_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>部分排序的边界 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>对范围 [first, last) 进行部分排序，使得 [first, middle) 包含整个范围中最小的元素， 并且这个子范围是已排序的。使用堆排序算法实现。 适用只需要前k个最小（或最大）元素的情况。</p>
+<p>时间复杂度：O(N log k)，其中k = middle - first </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00150">150</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="heap_8hpp_source.html#l00299">make_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00273">sort_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00169">partial_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga29e746c754c35147ebf13ab20c9a7ce2" name="ga29e746c754c35147ebf13ab20c9a7ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga29e746c754c35147ebf13ab20c9a7ce2">&#9670;&#160;</a></span>partial_sort_copy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 partial_sort_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序并复制 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result_first</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">result_last</td><td>输出范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围的实际结束位置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00223">223</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00191">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="gaab427767ef61a5d9de340c035ea6f103" name="gaab427767ef61a5d9de340c035ea6f103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab427767ef61a5d9de340c035ea6f103">&#9670;&#160;</a></span>partial_sort_copy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 partial_sort_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result_last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分排序并复制到另一个范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result_first</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">result_last</td><td>输出范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围的实际结束位置</dd></dl>
+<p>从输入范围中选取最小的元素，部分排序后复制到输出范围。</p>
+<p>时间复杂度：O(N log M)，其中M = result_last - result_first </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00191">191</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="heap_8hpp_source.html#l00173">adjust_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00299">make_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00273">sort_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00223">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga5daa37ac5f6fc132c53c076b24ce6163" name="ga5daa37ac5f6fc132c53c076b24ce6163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5daa37ac5f6fc132c53c076b24ce6163">&#9670;&#160;</a></span>quick_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void quick_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>快速排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00381">381</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00364">quick_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga7782ccaeaf7cafbeea2439ca26d33338" name="ga7782ccaeaf7cafbeea2439ca26d33338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7782ccaeaf7cafbeea2439ca26d33338">&#9670;&#160;</a></span>quick_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void quick_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>快速排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>经典的分治排序算法：</p><ol type="1">
+<li>选择基准值，这里选择最后一个元素</li>
+<li>分区：将小于基准值的放在左边，大于等于的放在右边</li>
+<li>递归排序左右两部分</li>
+</ol>
+<p>时间复杂度：平均O(N log N)，最差O(N²) 空间复杂度：O(log N)（递归栈） 稳定性：不稳定</p>
+<dl class="section note"><dt>注解</dt><dd>此实现容易在已排序数据上出现最坏情况。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00364">364</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00364">quick_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00381">quick_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00364">quick_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga1adff02964b17e52d35f799743b1e36b" name="ga1adff02964b17e52d35f799743b1e36b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1adff02964b17e52d35f799743b1e36b">&#9670;&#160;</a></span>radix_sort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Mapper = _NEFORCE identity&lt;iter_value_t&lt;Iterator&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void radix_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mapper</td>          <td class="paramname"><span class="paramname"><em>mapper</em></span><span class="paramdefsep"> = </span><span class="paramdefval">Mapper()</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>基数排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Mapper</td><td>映射函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">mapper</td><td>将元素映射为整数的函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00478">478</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00387">radix_sort_less()</a>.</p>
+
+</div>
+</div>
+<a id="ga14c5e0c863c544362ac0c4da79c7920f" name="ga14c5e0c863c544362ac0c4da79c7920f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga14c5e0c863c544362ac0c4da79c7920f">&#9670;&#160;</a></span>radix_sort_greater()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Mapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void radix_sort_greater </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mapper</td>          <td class="paramname"><span class="paramname"><em>mapper</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>基数排序（降序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Mapper</td><td>映射函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">mapper</td><td>将元素映射为整数的函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00433">433</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="vector_8hpp_source.html#l00597">vector&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="search_8hpp_source.html#l00350">count()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="vector_8hpp_source.html#l00605">vector&lt; T, Alloc &gt;::end()</a>, <a class="el" href="shift_8hpp_source.html#l00360">fill()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00867">transform()</a>.</p>
+
+</div>
+</div>
+<a id="ga9cff80850740c00c0de252351dd160a6" name="ga9cff80850740c00c0de252351dd160a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9cff80850740c00c0de252351dd160a6">&#9670;&#160;</a></span>radix_sort_less()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Mapper, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void radix_sort_less </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mapper</td>          <td class="paramname"><span class="paramname"><em>mapper</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>基数排序（升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Mapper</td><td>映射函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">mapper</td><td>将元素映射为整数的函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：O(d * (N + k))，d是位数 空间复杂度：O(N + k) 稳定性：稳定</p>
+<p>适用于整数或可分解为固定数位的类型。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00387">387</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="vector_8hpp_source.html#l00597">vector&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="search_8hpp_source.html#l00350">count()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="vector_8hpp_source.html#l00605">vector&lt; T, Alloc &gt;::end()</a>, <a class="el" href="shift_8hpp_source.html#l00360">fill()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00867">transform()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00478">radix_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gaa914cf59e17489231832a5f5353d9e2e" name="gaa914cf59e17489231832a5f5353d9e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa914cf59e17489231832a5f5353d9e2e">&#9670;&#160;</a></span>select_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void select_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>选择排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>前向迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00160">160</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00139">select_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gac1080ab53248eeae66de90dff74048cb" name="gac1080ab53248eeae66de90dff74048cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1080ab53248eeae66de90dff74048cb">&#9670;&#160;</a></span>select_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void select_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>选择排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>前向迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：O(N²) 空间复杂度：O(1) 稳定性：不稳定</p>
+<p>每次从未排序部分选择元素放到已排序部分的末尾。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00139">139</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00173">min()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00160">select_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga449b0e936d1bec8d1953ec623db36263" name="ga449b0e936d1bec8d1953ec623db36263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga449b0e936d1bec8d1953ec623db36263">&#9670;&#160;</a></span>shell_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void shell_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>希尔排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00203">203</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00180">shell_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gad58219b25c336c59023f210a295514d5" name="gad58219b25c336c59023f210a295514d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad58219b25c336c59023f210a295514d5">&#9670;&#160;</a></span>shell_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void shell_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>希尔排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：平均O(N log N)，最差O(N²) 空间复杂度：O(1) 稳定性：不稳定</p>
+<p>插入排序的改进版本，通过比较相距一定间隔的元素来工作。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00180">180</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00203">shell_sort()</a>.</p>
+
+</div>
+</div>
+<a id="gac47db5825225d750719417a44e89876c" name="gac47db5825225d750719417a44e89876c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac47db5825225d750719417a44e89876c">&#9670;&#160;</a></span>smooth_sort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void smooth_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>平滑排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：O(N log N) 空间复杂度：O(1) 稳定性：不稳定</p>
+<p>基于莱昂纳多堆的排序算法，是堆排序的改进版本， 在部分有序的序列上表现优异。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00496">496</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00216">make_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00172">sort_leonardo_heap()</a>.</p>
+
+</div>
+</div>
+<a id="ga7a4fdc8969bfed2d02cdd1941044a8d9" name="ga7a4fdc8969bfed2d02cdd1941044a8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7a4fdc8969bfed2d02cdd1941044a8d9">&#9670;&#160;</a></span>sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标准排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00470">470</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00449">sort()</a>.</p>
+
+</div>
+</div>
+<a id="gad43eb8f252707a714bbfd78ab025c3e5" name="gad43eb8f252707a714bbfd78ab025c3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad43eb8f252707a714bbfd78ab025c3e5">&#9670;&#160;</a></span>sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标准排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>标准排序算法，基于内省排序实现：</p><ol type="1">
+<li>对大规模数据使用内省排序（快速排序+堆排序）</li>
+<li>对阈值内的小规模数据使用插入排序</li>
+<li>对大规模数据中的小尾部使用优化的插入排序</li>
+</ol>
+<p>时间复杂度：O(N log N) 空间复杂度：O(log N) 稳定性：不稳定 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 第 <a class="el" href="sort_8hpp_source.html#l00449">449</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00273">insertion_sort()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00470">sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga72746fd9d7faa395313fcf685cb12677" name="ga72746fd9d7faa395313fcf685cb12677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga72746fd9d7faa395313fcf685cb12677">&#9670;&#160;</a></span>tim_sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void tim_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tim排序（默认升序） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00542">542</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00517">tim_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga099bbd8c3bdd5df32563eece0ec203d9" name="ga099bbd8c3bdd5df32563eece0ec203d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga099bbd8c3bdd5df32563eece0ec203d9">&#9670;&#160;</a></span>tim_sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void tim_sort </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tim排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>序列起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>序列结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>时间复杂度：O(N log N) 空间复杂度：O(N) 稳定性：稳定</p>
+<p>混合排序算法，结合了归并排序和插入排序。 </p>
+
+<p class="definition">在文件 <a class="el" href="ext__sort_8hpp_source.html">ext_sort.hpp</a> 第 <a class="el" href="ext__sort_8hpp_source.html#l00517">517</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="merge_8hpp_source.html#l00258">inplace_merge()</a>, <a class="el" href="sort_8hpp_source.html#l00273">insertion_sort()</a>, <a class="el" href="compare_8hpp_source.html#l00173">min()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00308">size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00542">tim_sort()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

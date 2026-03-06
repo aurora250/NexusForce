@@ -1,0 +1,105 @@
+@PACKAGE_INIT@
+
+set(NEXUSFORCE_VERSION @NEXUSFORCE_VERSION@)
+set(NEXUSFORCE_ENABLE_POSTGRESQL @NEXUSFORCE_ENABLE_POSTGRESQL@)
+set(NEXUSFORCE_ENABLE_MYSQL @NEXUSFORCE_ENABLE_MYSQL@)
+set(NEXUSFORCE_ENABLE_SQLITE3 @NEXUSFORCE_ENABLE_SQLITE3@)
+set(NEXUSFORCE_ENABLE_REDIS @NEXUSFORCE_ENABLE_REDIS@)
+set(NEXUSFORCE_ENABLE_ZLIB @NEXUSFORCE_ENABLE_ZLIB@)
+set(NEXUSFORCE_ENABLE_OPENSSL @NEXUSFORCE_ENABLE_OPENSSL@)
+set(NEXUSFORCE_ENABLE_PCRE2 @NEXUSFORCE_ENABLE_PCRE2@)
+set(NEXUSFORCE_USING_SSO @NEXUSFORCE_USING_SSO@)
+set(NEXUSFORCE_USING_PCRE2_JIT @NEXUSFORCE_USING_PCRE2_JIT@)
+
+
+include(CMakeFindDependencyMacro)
+
+
+include("${CMAKE_CURRENT_LIST_DIR}/NexusForceCompilerOptions.cmake")
+
+function(nexusforce_apply_compiler_options target)
+    nexusforce_compiler_options(${target})
+endfunction()
+
+
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    message(STATUS "NexusForce: vcpkg toolchain not detected. Please ensure dependencies are available.")
+endif()
+
+if(@NEXUSFORCE_ENABLE_ZLIB@)
+    find_dependency(ZLIB)
+endif()
+
+if(@NEXUSFORCE_ENABLE_OPENSSL@)
+    find_dependency(OpenSSL COMPONENTS Crypto SSL)
+endif()
+
+if(@NEXUSFORCE_ENABLE_POSTGRESQL@)
+    find_dependency(PostgreSQL)
+endif()
+
+if(@NEXUSFORCE_ENABLE_MYSQL@)
+    find_dependency(unofficial-libmysql CONFIG)
+endif()
+
+if(@NEXUSFORCE_ENABLE_SQLITE3@)
+    find_dependency(unofficial-sqlite3 CONFIG)
+endif()
+
+if(@NEXUSFORCE_ENABLE_REDIS@)
+    find_dependency(hiredis CONFIG)
+endif()
+
+if(@NEXUSFORCE_ENABLE_PCRE2@)
+    find_dependency(pcre2 CONFIG COMPONENTS 8BIT)
+
+    if(pcre2_FOUND AND @NEXUSFORCE_USING_PCRE2_JIT@)
+        message(STATUS "NexusForce: PCRE2 JIT requested - ensure PCRE2 was built with JIT support")
+    endif()
+endif()
+
+
+include("${CMAKE_CURRENT_LIST_DIR}/NexusForceTargets.cmake")
+
+
+if(WIN32)
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        set(_NEXUSFORCE_LIB_SUBDIR "Debug")
+    elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+        set(_NEXUSFORCE_LIB_SUBDIR "RelWithDebInfo")
+    elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+        set(_NEXUSFORCE_LIB_SUBDIR "MinSizeRel")
+    else()
+        set(_NEXUSFORCE_LIB_SUBDIR "Release")
+    endif()
+
+    set(NEXUSFORCE_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../lib/${_NEXUSFORCE_LIB_SUBDIR}")
+elseif(UNIX AND NOT APPLE)
+    set(NEXUSFORCE_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../lib")
+endif()
+
+set(NEXUSFORCE_LIBRARY_DIRS "${NEXUSFORCE_LIBRARY_DIR}")
+
+
+if(NOT TARGET NexusForce::NexusForce)
+    include("${CMAKE_CURRENT_LIST_DIR}/NexusForceTargets.cmake")
+endif()
+
+set(NEXUSFORCE_FOUND TRUE)
+set(NEXUSFORCE_INCLUDE_DIRS "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+set(NEXUSFORCE_LIBRARIES NexusForce::NexusForce)
+
+message(STATUS "Found NexusForce ${NEXUSFORCE_VERSION}")
+message(STATUS "  Include directory: ${NEXUSFORCE_INCLUDE_DIRS}")
+message(STATUS "  Libraries: NexusForce::NexusForce (imported target)")
+message(STATUS "  Features enabled:")
+message(STATUS "    PostgreSQL:   ${NEXUSFORCE_ENABLE_POSTGRESQL}")
+message(STATUS "    MySQL:        ${NEXUSFORCE_ENABLE_MYSQL}")
+message(STATUS "    SQLite3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
+message(STATUS "    Redis:        ${NEXUSFORCE_ENABLE_REDIS}")
+message(STATUS "    zlib:         ${NEXUSFORCE_ENABLE_ZLIB}")
+message(STATUS "    OpenSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
+message(STATUS "    PCRE2:        ${NEXUSFORCE_ENABLE_PCRE2}")
+
+message(STATUS "    Using SSO:    ${NEXUSFORCE_USING_SSO}")
+message(STATUS "    Using JIT:    ${NEXUSFORCE_USING_PCRE2_JIT}")

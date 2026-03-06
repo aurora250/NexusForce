@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: plugin_manager.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('plugin__manager_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">plugin_manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="plugin__manager_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_PLUGIN_PLUGIN_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_PLUGIN_PLUGIN_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">NeForce/core/async/mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="dynamic__library_8hpp.html">NeForce/core/system/dynamic_library.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="plugin__entry_8hpp.html">NeForce/plugin/plugin_entry.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classplugin__manager.html">   31</a></span><span class="keyword">class </span>NEFORCE_API plugin_manager {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a0814c10a16076c9d160da50950074b6a">   33</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classplugin__manager.html#a0814c10a16076c9d160da50950074b6a">library_ptr</a> = <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;dynamic_library&gt;</a>;  </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_{};                           </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, plugin_ptr&gt;</a> plugins_{};     </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    unordered_map&lt;string, library_ptr&gt; libraries_{};  </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    unordered_map&lt;string, string&gt; plugin_to_library_{};  </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    plugin_manager() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    plugin_manager(<span class="keyword">const</span> plugin_manager&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    plugin_manager&amp; operator =(<span class="keyword">const</span> plugin_manager&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    plugin_manager(plugin_manager&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    plugin_manager&amp; operator =(plugin_manager&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a531cd15ddab97272ca891f2b5bc748fb">   55</a></span>    <a class="code hl_function" href="classplugin__manager.html#a531cd15ddab97272ca891f2b5bc748fb">~plugin_manager</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a737ae3ae9b83dea4f53e54d9c5232626">   61</a></span>    <span class="keyword">static</span> plugin_manager&amp; <a class="code hl_function" href="classplugin__manager.html#a737ae3ae9b83dea4f53e54d9c5232626">instance</a>() {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">static</span> plugin_manager manager;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> manager;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a051225a7c34fc2d4dc5a94f1e14207d9">   75</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classplugin__manager.html#a051225a7c34fc2d4dc5a94f1e14207d9">load_plugins</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; pth);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a6739effe7939146b9c9bcb196748f01d">   85</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classplugin__manager.html#a6739effe7939146b9c9bcb196748f01d">load_plugin</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> pth);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">   94</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">unload_plugin</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">  101</a></span>    NEFORCE_NODISCARD <a class="code hl_struct" href="structiplugin.html">iplugin</a>* <a class="code hl_function" href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">get_plugin</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a5128cb71a99ec357efbb85c6d501445b">  107</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_function" href="classplugin__manager.html#a5128cb71a99ec357efbb85c6d501445b">list_plugins</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a448552a566139683700bd74ddc8c303c">  114</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classplugin__manager.html#a448552a566139683700bd74ddc8c303c">initialize_all</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a1130feb332d99fa333e02f278c015789">  122</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classplugin__manager.html#a1130feb332d99fa333e02f278c015789">shutdown_all</a>() noexcept;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>};</div>
+</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> <span class="comment">// Plugin</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_PLUGIN_PLUGIN_MANAGER_HPP__</span></div>
+<div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00037">mutex.hpp:37</a></div></div>
+<div class="ttc" id="aclassplugin__manager_html_a051225a7c34fc2d4dc5a94f1e14207d9"><div class="ttname"><a href="classplugin__manager.html#a051225a7c34fc2d4dc5a94f1e14207d9">plugin_manager::load_plugins</a></div><div class="ttdeci">size_t load_plugins(const string &amp;pth)</div><div class="ttdoc">从目录加载所有插件</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a0814c10a16076c9d160da50950074b6a"><div class="ttname"><a href="classplugin__manager.html#a0814c10a16076c9d160da50950074b6a">plugin_manager::library_ptr</a></div><div class="ttdeci">unique_ptr&lt; dynamic_library &gt; library_ptr</div><div class="ttdoc">动态库指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00033">plugin_manager.hpp:33</a></div></div>
+<div class="ttc" id="aclassplugin__manager_html_a1130feb332d99fa333e02f278c015789"><div class="ttname"><a href="classplugin__manager.html#a1130feb332d99fa333e02f278c015789">plugin_manager::shutdown_all</a></div><div class="ttdeci">void shutdown_all() noexcept</div><div class="ttdoc">关闭所有插件</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a448552a566139683700bd74ddc8c303c"><div class="ttname"><a href="classplugin__manager.html#a448552a566139683700bd74ddc8c303c">plugin_manager::initialize_all</a></div><div class="ttdeci">void initialize_all()</div><div class="ttdoc">初始化所有插件</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a5128cb71a99ec357efbb85c6d501445b"><div class="ttname"><a href="classplugin__manager.html#a5128cb71a99ec357efbb85c6d501445b">plugin_manager::list_plugins</a></div><div class="ttdeci">NEFORCE_NODISCARD vector&lt; string &gt; list_plugins() const</div><div class="ttdoc">获取所有已加载插件名称</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a531cd15ddab97272ca891f2b5bc748fb"><div class="ttname"><a href="classplugin__manager.html#a531cd15ddab97272ca891f2b5bc748fb">plugin_manager::~plugin_manager</a></div><div class="ttdeci">~plugin_manager()</div><div class="ttdoc">析构函数，关闭所有插件</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a6739effe7939146b9c9bcb196748f01d"><div class="ttname"><a href="classplugin__manager.html#a6739effe7939146b9c9bcb196748f01d">plugin_manager::load_plugin</a></div><div class="ttdeci">void load_plugin(string_view pth)</div><div class="ttdoc">加载单个插件</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a737ae3ae9b83dea4f53e54d9c5232626"><div class="ttname"><a href="classplugin__manager.html#a737ae3ae9b83dea4f53e54d9c5232626">plugin_manager::instance</a></div><div class="ttdeci">static plugin_manager &amp; instance()</div><div class="ttdoc">获取单例实例</div><div class="ttdef"><b>定义</b> <a href="#l00061">plugin_manager.hpp:61</a></div></div>
+<div class="ttc" id="aclassplugin__manager_html_a785b545933063abb5225b0a54cb016b2"><div class="ttname"><a href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">plugin_manager::get_plugin</a></div><div class="ttdeci">NEFORCE_NODISCARD iplugin * get_plugin(const string &amp;name)</div><div class="ttdoc">获取插件实例</div></div>
+<div class="ttc" id="aclassplugin__manager_html_a9beb1072652ecc2f9080f8a545a781ae"><div class="ttname"><a href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin</a></div><div class="ttdeci">bool unload_plugin(const string &amp;name)</div><div class="ttdoc">卸载插件</div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="adynamic__library_8hpp_html"><div class="ttname"><a href="dynamic__library_8hpp.html">dynamic_library.hpp</a></div><div class="ttdoc">动态库加载器</div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="aplugin__entry_8hpp_html"><div class="ttname"><a href="plugin__entry_8hpp.html">plugin_entry.hpp</a></div><div class="ttdoc">插件入口点定义</div></div>
+<div class="ttc" id="astructiplugin_html"><div class="ttname"><a href="structiplugin.html">iplugin</a></div><div class="ttdoc">插件接口基类</div><div class="ttdef"><b>定义</b> <a href="iplugin_8hpp_source.html#l00044">iplugin.hpp:44</a></div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>plugin</b></li><li class="navelem"><a href="plugin__manager_8hpp.html">plugin_manager.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

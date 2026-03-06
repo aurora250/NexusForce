@@ -1,9 +1,9 @@
-#include <MSTL/core/async/futex.hpp>
-#include <MSTL/core/numeric/numeric_traits.hpp>
-#include <MSTL/core/exception/terminate.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/time/clocks.hpp>
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/async/futex.hpp>
+#include <NeForce/core/numeric/numeric_traits.hpp>
+#include <NeForce/core/exception/terminate.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/time/clocks.hpp>
+#include <NeForce/core/config/windef.hpp>
 #include <errhandlingapi.h>
 #include <synchapi.h>
 #include <winerror.h>
@@ -14,21 +14,21 @@
 #undef min
 #endif
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <linux/futex.h>
 #include <syscall.h>
 #include <unistd.h>
 #include <time.h>
 #include <errno.h>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 bool futex_wait_until(
     void* addr, platform_wait_t value,
     const bool has_timeout, const int64_t sec, const int64_t ns,
     const bool is_monotonic) {
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!has_timeout) {
         return ::WaitOnAddress(
             addr, &value, sizeof(::DWORD),
@@ -53,7 +53,7 @@ bool futex_wait_until(
     }
 
     if (has_timeout) {
-        ::timespec ts{ sec, ns };
+        ::timespec ts{ static_cast<ssize_t>(sec), static_cast<ssize_t>(ns) };
 
         const long ret = ::syscall(
             SYS_futex, addr, oper, value, &ts, nullptr,
@@ -73,18 +73,18 @@ bool futex_wait_until(
 }
 
 void futex_wait(void* addr, const platform_wait_t value) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     auto p = static_cast<volatile platform_wait_t*>(addr);
     const ::BOOL result = ::WaitOnAddress(
         p,
         const_cast<platform_wait_t*>(&value),
         sizeof(platform_wait_t),
-        _MSTL numeric_traits<::DWORD>::max());
+        _NEFORCE numeric_traits<::DWORD>::max());
 
     if (result == 0) {
         ::DWORD err = ::GetLastError();
         if (err != 0 && err != ERROR_TIMEOUT) {
-            _MSTL terminate();
+            _NEFORCE terminate();
         }
     }
 #else
@@ -95,12 +95,12 @@ void futex_wait(void* addr, const platform_wait_t value) noexcept {
 
     if (!err) return;
     if (errno == EAGAIN) return;
-    _MSTL terminate();
+    _NEFORCE terminate();
 #endif
 }
 
 void futex_notify(void* addr, const bool all) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const auto p = static_cast<volatile platform_wait_t*>(addr);
     if (all) {
         ::WakeByAddressAll(const_cast<platform_wait_t*>(p));
@@ -115,4 +115,4 @@ void futex_notify(void* addr, const bool all) noexcept {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

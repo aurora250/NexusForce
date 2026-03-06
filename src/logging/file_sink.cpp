@@ -1,5 +1,5 @@
-#include <MSTL/logging/file_sink.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/logging/file_sink.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 void file_sink::open_new_file() {
     string filename = base_filename_.str();
@@ -28,7 +28,7 @@ void file_sink::rotate_file() {
 
 void file_sink::rotate_by_date(string today) {
     file_.close();
-    current_date_ = _MSTL move(today);
+    current_date_ = _NEFORCE move(today);
     file_index_ = 0;
     current_size_ = 0;
     open_new_file();
@@ -36,12 +36,12 @@ void file_sink::rotate_by_date(string today) {
 
 static string default_format(log_event event) {
     string result;
-    result += "["_s + to_string(event.level) + "] " + _MSTL move(event.message);
+    result += "["_s + to_string(event.level) + "] " + _NEFORCE move(event.message);
     return result;
 }
 
 file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation)
-: base_filename_(_MSTL move(filename)), max_file_size_(max_file_size),
+: base_filename_(_NEFORCE move(filename)), max_file_size_(max_file_size),
   current_size_(0), file_index_(0), enable_date_rotation_(enable_date_rotation) {
     if (enable_date_rotation_) {
         current_date_ = datetime::now().date().to_string();
@@ -74,4 +74,4 @@ void file_sink::flush() {
     file_.flush();
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sysinfo.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sysinfo_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sysinfo.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sysinfo_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SYSTEM_SYSINFO_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SYSTEM_SYSINFO_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classsysinfo.html">   35</a></span><span class="keyword">class </span>NEFORCE_API sysinfo {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html">   43</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structsysinfo_1_1system__info.html">system_info</a> {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a89824b325e7a16edf0e1c776ed1cfd5e">   44</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a89824b325e7a16edf0e1c776ed1cfd5e">processor_numbers</a>{0};      </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a7ec79ae14223229f474ddca0e4c75023">   45</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a7ec79ae14223229f474ddca0e4c75023">page_size</a>{0};              </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a0b813b3fa50d3c8fcc3838f808069013">   46</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a0b813b3fa50d3c8fcc3838f808069013">allocation_granularity</a>{0}; </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a44d42c84ecc1eba388c1a87134517b41">   47</a></span>        <a class="code hl_typedef" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a44d42c84ecc1eba388c1a87134517b41">min_app_address</a>{0};       </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a3de0dd16d5a0437550cd0a18ded29c99">   48</a></span>        <a class="code hl_typedef" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a3de0dd16d5a0437550cd0a18ded29c99">max_app_address</a>{0};       </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#ab4cccf7a5a08e7b3fd531e4013e4e9a5">   49</a></span>        <a class="code hl_typedef" href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#ab4cccf7a5a08e7b3fd531e4013e4e9a5">active_processor_mask</a>{0}; </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a52684dbb07828a82036b3858050b6947">   50</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a52684dbb07828a82036b3858050b6947">processor_level</a>{0};        </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structsysinfo_1_1system__info.html#a89038a3ebb1bdaebff488872f57e8557">   51</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> <a class="code hl_variable" href="structsysinfo_1_1system__info.html#a89038a3ebb1bdaebff488872f57e8557">processor_revision</a>{0};     </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    };</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="};">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html">   60</a></span>    <span class="keyword">struct </span>NEFORCE_API <a class="code hl_struct" href="structsysinfo_1_1memory__info.html">memory_info</a> {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c">   61</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c">total_physical</a>{0};     </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35">   62</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35">available_physical</a>{0}; </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0">   63</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0">total_virtual</a>{0};      </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2">   64</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2">available_virtual</a>{0};  </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#ab819612aaac6f40253537d938978b5c5">   65</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#ab819612aaac6f40253537d938978b5c5">total_page_file</a>{0};    </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff">   66</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff">available_page_file</a>{0}; </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#ac441be26de90e27c2403b0e904573a6b">   72</a></span>        NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a> <a class="code hl_function" href="structsysinfo_1_1memory__info.html#ac441be26de90e27c2403b0e904573a6b">physical_memory_usage</a>() const noexcept {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c">total_physical</a> == 0) <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">return</span> 100.0 * (1.0 - <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a><span class="keyword">&gt;</span>(<a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35">available_physical</a>) / <a class="code hl_variable" href="structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c">total_physical</a>);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="structsysinfo_1_1memory__info.html#a4011ac0c3f351714ff2c30dc250483ef">   81</a></span>        NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="structsysinfo_1_1memory__info.html#a4011ac0c3f351714ff2c30dc250483ef">available_memory</a>() const noexcept;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    };</div>
+</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="};">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html">   90</a></span>    struct <a class="code hl_struct" href="structsysinfo_1_1_c_p_u__info.html">CPU_info</a> {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b">   91</a></span>        <span class="keywordtype">string</span> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b">vendor</a>{};          </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11">   92</a></span>        <span class="keywordtype">string</span> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11">brand</a>{};           </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#aad2f7f4d8b6e92bf324e7dfbc6011705">   93</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#aad2f7f4d8b6e92bf324e7dfbc6011705">max_MHz</a>{0};      </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572">   94</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572">current_MHZ</a>{0};  </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215">   95</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215">cores</a>{0};        </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530">   96</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530">logical_processors</a>{0}; </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#a13f2d5ac60ff53dfb5415c8a4c55ee49">   97</a></span>        <span class="keywordtype">string</span> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#a13f2d5ac60ff53dfb5415c8a4c55ee49">features</a>{};        </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="structsysinfo_1_1_c_p_u__info.html#a7fcdb67c44d302cdead6baa15ace39bf">  103</a></span>        NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="structsysinfo_1_1_c_p_u__info.html#a7fcdb67c44d302cdead6baa15ace39bf">hyperthreading</a>() const noexcept {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530">logical_processors</a> &gt; <a class="code hl_variable" href="structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215">cores</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    };</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="};">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html">  112</a></span>    <span class="keyword">struct </span>NEFORCE_API <a class="code hl_struct" href="structsysinfo_1_1os__version__info.html">os_version_info</a> {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a4bc0bcb61957f45421e727cabcf43de8">  113</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a4bc0bcb61957f45421e727cabcf43de8">major</a>{0};      </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767">  114</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767">minor</a>{0};      </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6">  115</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6">build</a>{0};      </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f">  116</a></span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f">platform_id</a>{0}; </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c">  117</a></span>        <span class="keywordtype">string</span> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c">csd_version</a>{};   </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a38e874b972252277bf6b51d499755f62">  118</a></span>        <span class="keywordtype">string</span> <a class="code hl_variable" href="structsysinfo_1_1os__version__info.html#a38e874b972252277bf6b51d499755f62">product_name</a>{};  </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="structsysinfo_1_1os__version__info.html#a4a621a548d804a4689c9844f1eb55b24">  124</a></span>        NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="structsysinfo_1_1os__version__info.html#a4a621a548d804a4689c9844f1eb55b24">version</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    };</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="foldopen" id="foldopen00131" data-start="{" data-end="};">
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63">  131</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63">architecture</a> {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a696b031073e74bf2cb98e5ef201d4aa3">  132</a></span>        UNKNOWN, </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7">  133</a></span>        X86,     </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f">  134</a></span>        X64,     </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1">  135</a></span>        ARM,     </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4">  136</a></span>        ARM64,   </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a">  137</a></span>        IA64     </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    };</div>
+</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    system_info system_info_{};        </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    memory_info memory_info_{};        </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    CPU_info cpu_info_{};              </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    os_version_info os_version_info_{}; </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    architecture architecture_ = architecture::UNKNOWN; </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_typedef" href="group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56">atomic_bool</a> initialized_{<span class="keyword">false</span>};   </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    sysinfo();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    ~sysinfo() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">void</span> init();</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classsysinfo.html#ab0e30ca44fa6f3c63e74c2af4de36134">  170</a></span>    <span class="keyword">static</span> sysinfo&amp; <a class="code hl_function" href="classsysinfo.html#ab0e30ca44fa6f3c63e74c2af4de36134">instance</a>() {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keyword">static</span> sysinfo <a class="code hl_function" href="classsysinfo.html#ab0e30ca44fa6f3c63e74c2af4de36134">instance</a>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classsysinfo.html#ab0e30ca44fa6f3c63e74c2af4de36134">instance</a>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_class" href="classsysinfo.html">sysinfo</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_class" href="classsysinfo.html">sysinfo</a>(<a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp; operator =(<a class="code hl_class" href="classsysinfo.html">sysinfo</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb">  185</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb">refresh</a>();</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span></div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602">  191</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structsysinfo_1_1system__info.html">system_info</a>&amp; <a class="code hl_function" href="classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602">get_system_info</a>() const noexcept {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">return</span> system_info_;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
+</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span></div>
+<div class="foldopen" id="foldopen00199" data-start="{" data-end="}">
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6">  199</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structsysinfo_1_1memory__info.html">memory_info</a>&amp; <a class="code hl_function" href="classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6">get_memory_info</a>() const noexcept {</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">return</span> memory_info_;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
+</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span></div>
+<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5">  207</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structsysinfo_1_1_c_p_u__info.html">CPU_info</a>&amp; <a class="code hl_function" href="classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5">get_CPU_info</a>() const noexcept {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">return</span> cpu_info_;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    }</div>
+</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span></div>
+<div class="foldopen" id="foldopen00215" data-start="{" data-end="}">
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f">  215</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structsysinfo_1_1os__version__info.html">os_version_info</a>&amp; <a class="code hl_function" href="classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f">get_os_version_info</a>() const noexcept {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">return</span> os_version_info_;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
+</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span></div>
+<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9">  223</a></span>    <a class="code hl_enumeration" href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63">architecture</a> <a class="code hl_function" href="classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9">get_architecture</a>() const noexcept {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">return</span> architecture_;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span></div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classsysinfo.html#ab9331206875e9553e338c5a34d601498">  231</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classsysinfo.html#ab9331206875e9553e338c5a34d601498">is_initialized</a>() const noexcept {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">return</span> initialized_.load(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    }</div>
+</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classsysinfo.html#a06e01f2c6df396c5529d8245d9edb7d5">  240</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsysinfo.html#a06e01f2c6df396c5529d8245d9edb7d5">format_bytes</a>(<a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> bytes);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno"><a class="line" href="classsysinfo.html#a96c3ce9d36b77c0ac689072e4d8290d6">  246</a></span>    <span class="keyword">static</span> <a class="code hl_typedef" href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a> <a class="code hl_function" href="classsysinfo.html#a96c3ce9d36b77c0ac689072e4d8290d6">cpu_usage</a>();</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classsysinfo.html#aaa3de3f24697ecebf3cea3f89c92d807">  252</a></span>    <span class="keyword">static</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_function" href="classsysinfo.html#aaa3de3f24697ecebf3cea3f89c92d807">process_count</a>();</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>};</div>
+</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> <span class="comment">// SystemInfo</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SYSTEM_SYSINFO_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclasssysinfo_html"><div class="ttname"><a href="classsysinfo.html">sysinfo</a></div><div class="ttdoc">系统信息单例类</div><div class="ttdef"><b>定义</b> <a href="#l00035">sysinfo.hpp:35</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a06e01f2c6df396c5529d8245d9edb7d5"><div class="ttname"><a href="classsysinfo.html#a06e01f2c6df396c5529d8245d9edb7d5">sysinfo::format_bytes</a></div><div class="ttdeci">static string format_bytes(uint64_t bytes)</div><div class="ttdoc">格式化字节数为可读字符串</div></div>
+<div class="ttc" id="aclasssysinfo_html_a12cd20c6d4ac8029b5c12430d8508ed5"><div class="ttname"><a href="classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5">sysinfo::get_CPU_info</a></div><div class="ttdeci">const CPU_info &amp; get_CPU_info() const noexcept</div><div class="ttdoc">获取CPU信息</div><div class="ttdef"><b>定义</b> <a href="#l00207">sysinfo.hpp:207</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a263fc148efdf13bbca1b9923aba436a9"><div class="ttname"><a href="classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9">sysinfo::get_architecture</a></div><div class="ttdeci">architecture get_architecture() const noexcept</div><div class="ttdoc">获取系统架构</div><div class="ttdef"><b>定义</b> <a href="#l00223">sysinfo.hpp:223</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a38b1558f84e3d0dec584ba243ee27d6f"><div class="ttname"><a href="classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f">sysinfo::get_os_version_info</a></div><div class="ttdeci">const os_version_info &amp; get_os_version_info() const noexcept</div><div class="ttdoc">获取操作系统版本信息</div><div class="ttdef"><b>定义</b> <a href="#l00215">sysinfo.hpp:215</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a5cb2bb37d607fada00bb5f2726727e63"><div class="ttname"><a href="classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63">sysinfo::architecture</a></div><div class="ttdeci">architecture</div><div class="ttdoc">系统架构枚举</div><div class="ttdef"><b>定义</b> <a href="#l00131">sysinfo.hpp:131</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a683ee1cdfdb503e7e36a3348bfa81602"><div class="ttname"><a href="classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602">sysinfo::get_system_info</a></div><div class="ttdeci">const system_info &amp; get_system_info() const noexcept</div><div class="ttdoc">获取系统底层信息</div><div class="ttdef"><b>定义</b> <a href="#l00191">sysinfo.hpp:191</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a6f58a437df985dfc5817a76dbfe967e6"><div class="ttname"><a href="classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6">sysinfo::get_memory_info</a></div><div class="ttdeci">const memory_info &amp; get_memory_info() const noexcept</div><div class="ttdoc">获取内存信息</div><div class="ttdef"><b>定义</b> <a href="#l00199">sysinfo.hpp:199</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_a96c3ce9d36b77c0ac689072e4d8290d6"><div class="ttname"><a href="classsysinfo.html#a96c3ce9d36b77c0ac689072e4d8290d6">sysinfo::cpu_usage</a></div><div class="ttdeci">static float64_t cpu_usage()</div><div class="ttdoc">获取当前CPU使用率</div></div>
+<div class="ttc" id="aclasssysinfo_html_aa59d27a7571c3ccfa6fff2c833f6efeb"><div class="ttname"><a href="classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb">sysinfo::refresh</a></div><div class="ttdeci">void refresh()</div><div class="ttdoc">刷新系统信息</div></div>
+<div class="ttc" id="aclasssysinfo_html_aaa3de3f24697ecebf3cea3f89c92d807"><div class="ttname"><a href="classsysinfo.html#aaa3de3f24697ecebf3cea3f89c92d807">sysinfo::process_count</a></div><div class="ttdeci">static uint32_t process_count()</div><div class="ttdoc">获取当前运行的进程数量</div></div>
+<div class="ttc" id="aclasssysinfo_html_ab0e30ca44fa6f3c63e74c2af4de36134"><div class="ttname"><a href="classsysinfo.html#ab0e30ca44fa6f3c63e74c2af4de36134">sysinfo::instance</a></div><div class="ttdeci">static sysinfo &amp; instance()</div><div class="ttdoc">获取单例实例</div><div class="ttdef"><b>定义</b> <a href="#l00170">sysinfo.hpp:170</a></div></div>
+<div class="ttc" id="aclasssysinfo_html_ab9331206875e9553e338c5a34d601498"><div class="ttname"><a href="classsysinfo.html#ab9331206875e9553e338c5a34d601498">sysinfo::is_initialized</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_initialized() const noexcept</div><div class="ttdoc">检查是否已初始化</div><div class="ttdef"><b>定义</b> <a href="#l00231">sysinfo.hpp:231</a></div></div>
+<div class="ttc" id="agroup___atomic_operations_html_ga0d0e16e0a3616ac69b5870d3d9f0be56"><div class="ttname"><a href="group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56">atomic_bool</a></div><div class="ttdeci">atomic&lt; bool &gt; atomic_bool</div><div class="ttdoc">布尔原子类型</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00908">atomic.hpp:908</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga5e9a37eab818d71cd4a6a9344e776c7b"><div class="ttname"><a href="group___core_types.html#ga5e9a37eab818d71cd4a6a9344e776c7b">float64_t</a></div><div class="ttdeci">double float64_t</div><div class="ttdoc">64位双精度浮点数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00136">types.hpp:136</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gac472f4b38d5bc0ba23a6113984118c24"><div class="ttname"><a href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acquire</div><div class="ttdoc">获取内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00043">atomic_base.hpp:43</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_ga5b7cbd695e4ef11023a4088e5ebe9612"><div class="ttname"><a href="group___platform_dependent_types.html#ga5b7cbd695e4ef11023a4088e5ebe9612">uintptr_t</a></div><div class="ttdeci">uint64_t uintptr_t</div><div class="ttdoc">可容纳指针的无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00194">types.hpp:194</a></div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html">sysinfo::CPU_info</a></div><div class="ttdoc">CPU信息</div><div class="ttdef"><b>定义</b> <a href="#l00090">sysinfo.hpp:90</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_a13f2d5ac60ff53dfb5415c8a4c55ee49"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#a13f2d5ac60ff53dfb5415c8a4c55ee49">sysinfo::CPU_info::features</a></div><div class="ttdeci">string features</div><div class="ttdoc">支持的指令集特性</div><div class="ttdef"><b>定义</b> <a href="#l00097">sysinfo.hpp:97</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_a72950152b1295f64fbae6363e0a91215"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215">sysinfo::CPU_info::cores</a></div><div class="ttdeci">uint32_t cores</div><div class="ttdoc">物理核心数</div><div class="ttdef"><b>定义</b> <a href="#l00095">sysinfo.hpp:95</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_a7fcdb67c44d302cdead6baa15ace39bf"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#a7fcdb67c44d302cdead6baa15ace39bf">sysinfo::CPU_info::hyperthreading</a></div><div class="ttdeci">NEFORCE_NODISCARD bool hyperthreading() const noexcept</div><div class="ttdoc">检查是否支持超线程</div><div class="ttdef"><b>定义</b> <a href="#l00103">sysinfo.hpp:103</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_a7ff7cd89432a692e8d9e5f802c9d3572"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572">sysinfo::CPU_info::current_MHZ</a></div><div class="ttdeci">uint32_t current_MHZ</div><div class="ttdoc">当前频率</div><div class="ttdef"><b>定义</b> <a href="#l00094">sysinfo.hpp:94</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_aad2f7f4d8b6e92bf324e7dfbc6011705"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#aad2f7f4d8b6e92bf324e7dfbc6011705">sysinfo::CPU_info::max_MHz</a></div><div class="ttdeci">uint32_t max_MHz</div><div class="ttdoc">最大频率</div><div class="ttdef"><b>定义</b> <a href="#l00093">sysinfo.hpp:93</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_ac444585514c69df4fb285d73905c8b11"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11">sysinfo::CPU_info::brand</a></div><div class="ttdeci">string brand</div><div class="ttdoc">型号名称</div><div class="ttdef"><b>定义</b> <a href="#l00092">sysinfo.hpp:92</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_ad92712b7ebb0f39a392fa9b79c6d591b"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b">sysinfo::CPU_info::vendor</a></div><div class="ttdeci">string vendor</div><div class="ttdoc">厂商名称</div><div class="ttdef"><b>定义</b> <a href="#l00091">sysinfo.hpp:91</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1_c_p_u__info_html_af1ecda498492da2dd5ad938d5096a530"><div class="ttname"><a href="structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530">sysinfo::CPU_info::logical_processors</a></div><div class="ttdeci">uint32_t logical_processors</div><div class="ttdoc">逻辑处理器数</div><div class="ttdef"><b>定义</b> <a href="#l00096">sysinfo.hpp:96</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html"><div class="ttname"><a href="structsysinfo_1_1memory__info.html">sysinfo::memory_info</a></div><div class="ttdoc">内存信息</div><div class="ttdef"><b>定义</b> <a href="#l00060">sysinfo.hpp:60</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_a04be20191bbc0dc8ab34a2b24b471c0c"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c">sysinfo::memory_info::total_physical</a></div><div class="ttdeci">uint64_t total_physical</div><div class="ttdoc">物理内存总量</div><div class="ttdef"><b>定义</b> <a href="#l00061">sysinfo.hpp:61</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_a1092f6344f1cb17952196fce0f494ca2"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2">sysinfo::memory_info::available_virtual</a></div><div class="ttdeci">uint64_t available_virtual</div><div class="ttdoc">可用虚拟内存</div><div class="ttdef"><b>定义</b> <a href="#l00064">sysinfo.hpp:64</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_a21a729921aebe562a2cf6ff03b02fe35"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35">sysinfo::memory_info::available_physical</a></div><div class="ttdeci">uint64_t available_physical</div><div class="ttdoc">可用物理内存</div><div class="ttdef"><b>定义</b> <a href="#l00062">sysinfo.hpp:62</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_a4011ac0c3f351714ff2c30dc250483ef"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#a4011ac0c3f351714ff2c30dc250483ef">sysinfo::memory_info::available_memory</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t available_memory() const noexcept</div><div class="ttdoc">获取总可用内存</div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_a4c5e4ce8d790deca09645139ea1710ff"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff">sysinfo::memory_info::available_page_file</a></div><div class="ttdeci">uint64_t available_page_file</div><div class="ttdoc">可用页面文件</div><div class="ttdef"><b>定义</b> <a href="#l00066">sysinfo.hpp:66</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_ab819612aaac6f40253537d938978b5c5"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#ab819612aaac6f40253537d938978b5c5">sysinfo::memory_info::total_page_file</a></div><div class="ttdeci">uint64_t total_page_file</div><div class="ttdoc">页面文件总量</div><div class="ttdef"><b>定义</b> <a href="#l00065">sysinfo.hpp:65</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_ac441be26de90e27c2403b0e904573a6b"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#ac441be26de90e27c2403b0e904573a6b">sysinfo::memory_info::physical_memory_usage</a></div><div class="ttdeci">NEFORCE_NODISCARD float64_t physical_memory_usage() const noexcept</div><div class="ttdoc">计算物理内存使用率</div><div class="ttdef"><b>定义</b> <a href="#l00072">sysinfo.hpp:72</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1memory__info_html_afe2a7222ee4f088e014338f60e9a70e0"><div class="ttname"><a href="structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0">sysinfo::memory_info::total_virtual</a></div><div class="ttdeci">uint64_t total_virtual</div><div class="ttdoc">虚拟内存总量</div><div class="ttdef"><b>定义</b> <a href="#l00063">sysinfo.hpp:63</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html">sysinfo::os_version_info</a></div><div class="ttdoc">操作系统版本信息</div><div class="ttdef"><b>定义</b> <a href="#l00112">sysinfo.hpp:112</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a201fa2fa0bd48266b2fc5b51d2adffe6"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6">sysinfo::os_version_info::build</a></div><div class="ttdeci">uint32_t build</div><div class="ttdoc">构建号</div><div class="ttdef"><b>定义</b> <a href="#l00115">sysinfo.hpp:115</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a340ac2d32b3d93b475587aab92695c5f"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f">sysinfo::os_version_info::platform_id</a></div><div class="ttdeci">uint32_t platform_id</div><div class="ttdoc">平台ID</div><div class="ttdef"><b>定义</b> <a href="#l00116">sysinfo.hpp:116</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a38e874b972252277bf6b51d499755f62"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a38e874b972252277bf6b51d499755f62">sysinfo::os_version_info::product_name</a></div><div class="ttdeci">string product_name</div><div class="ttdoc">产品名称</div><div class="ttdef"><b>定义</b> <a href="#l00118">sysinfo.hpp:118</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a4a621a548d804a4689c9844f1eb55b24"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a4a621a548d804a4689c9844f1eb55b24">sysinfo::os_version_info::version</a></div><div class="ttdeci">NEFORCE_NODISCARD string version() const</div><div class="ttdoc">获取版本字符串</div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a4bc0bcb61957f45421e727cabcf43de8"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a4bc0bcb61957f45421e727cabcf43de8">sysinfo::os_version_info::major</a></div><div class="ttdeci">uint32_t major</div><div class="ttdoc">主版本号</div><div class="ttdef"><b>定义</b> <a href="#l00113">sysinfo.hpp:113</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a89f969c3030593ee73ee26fa9a09b55c"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c">sysinfo::os_version_info::csd_version</a></div><div class="ttdeci">string csd_version</div><div class="ttdoc">补丁版本</div><div class="ttdef"><b>定义</b> <a href="#l00117">sysinfo.hpp:117</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1os__version__info_html_a8c7e7dd389d78e4994a8432e60306767"><div class="ttname"><a href="structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767">sysinfo::os_version_info::minor</a></div><div class="ttdeci">uint32_t minor</div><div class="ttdoc">次版本号</div><div class="ttdef"><b>定义</b> <a href="#l00114">sysinfo.hpp:114</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html"><div class="ttname"><a href="structsysinfo_1_1system__info.html">sysinfo::system_info</a></div><div class="ttdoc">系统底层信息</div><div class="ttdef"><b>定义</b> <a href="#l00043">sysinfo.hpp:43</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a0b813b3fa50d3c8fcc3838f808069013"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a0b813b3fa50d3c8fcc3838f808069013">sysinfo::system_info::allocation_granularity</a></div><div class="ttdeci">uint32_t allocation_granularity</div><div class="ttdoc">内存分配粒度</div><div class="ttdef"><b>定义</b> <a href="#l00046">sysinfo.hpp:46</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a3de0dd16d5a0437550cd0a18ded29c99"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a3de0dd16d5a0437550cd0a18ded29c99">sysinfo::system_info::max_app_address</a></div><div class="ttdeci">uintptr_t max_app_address</div><div class="ttdoc">应用程序最大地址</div><div class="ttdef"><b>定义</b> <a href="#l00048">sysinfo.hpp:48</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a44d42c84ecc1eba388c1a87134517b41"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a44d42c84ecc1eba388c1a87134517b41">sysinfo::system_info::min_app_address</a></div><div class="ttdeci">uintptr_t min_app_address</div><div class="ttdoc">应用程序最小地址</div><div class="ttdef"><b>定义</b> <a href="#l00047">sysinfo.hpp:47</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a52684dbb07828a82036b3858050b6947"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a52684dbb07828a82036b3858050b6947">sysinfo::system_info::processor_level</a></div><div class="ttdeci">uint16_t processor_level</div><div class="ttdoc">处理器级别</div><div class="ttdef"><b>定义</b> <a href="#l00050">sysinfo.hpp:50</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a7ec79ae14223229f474ddca0e4c75023"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a7ec79ae14223229f474ddca0e4c75023">sysinfo::system_info::page_size</a></div><div class="ttdeci">uint32_t page_size</div><div class="ttdoc">内存页大小</div><div class="ttdef"><b>定义</b> <a href="#l00045">sysinfo.hpp:45</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a89038a3ebb1bdaebff488872f57e8557"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a89038a3ebb1bdaebff488872f57e8557">sysinfo::system_info::processor_revision</a></div><div class="ttdeci">uint16_t processor_revision</div><div class="ttdoc">处理器修订版本</div><div class="ttdef"><b>定义</b> <a href="#l00051">sysinfo.hpp:51</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_a89824b325e7a16edf0e1c776ed1cfd5e"><div class="ttname"><a href="structsysinfo_1_1system__info.html#a89824b325e7a16edf0e1c776ed1cfd5e">sysinfo::system_info::processor_numbers</a></div><div class="ttdeci">uint32_t processor_numbers</div><div class="ttdoc">处理器数量</div><div class="ttdef"><b>定义</b> <a href="#l00044">sysinfo.hpp:44</a></div></div>
+<div class="ttc" id="astructsysinfo_1_1system__info_html_ab4cccf7a5a08e7b3fd531e4013e4e9a5"><div class="ttname"><a href="structsysinfo_1_1system__info.html#ab4cccf7a5a08e7b3fd531e4013e4e9a5">sysinfo::system_info::active_processor_mask</a></div><div class="ttdeci">uintptr_t active_processor_mask</div><div class="ttdoc">活动处理器掩码</div><div class="ttdef"><b>定义</b> <a href="#l00049">sysinfo.hpp:49</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>system</b></li><li class="navelem"><a href="sysinfo_8hpp.html">sysinfo.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

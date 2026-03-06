@@ -1,5 +1,5 @@
-#include <MSTL/core/file/toml/toml_builder.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/file/toml/toml_builder.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 toml_builder::toml_builder() {
     root_ = make_unique<toml_table>();
@@ -16,7 +16,7 @@ toml_builder& toml_builder::key(string key) {
         throw_exception(toml_exception("Cannot set key in non-table context"));
     }
 
-    current_key_ = _MSTL move(key);
+    current_key_ = _NEFORCE move(key);
     return *this;
 }
 
@@ -67,7 +67,7 @@ toml_builder& toml_builder::begin_inline_table() {
 
     const auto& top = contexts_.top();
     if (top.type == array) {
-        top.array_ptr->add_element(_MSTL move(table_ptr));
+        top.array_ptr->add_element(_NEFORCE move(table_ptr));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for inline table"));
@@ -75,7 +75,7 @@ toml_builder& toml_builder::begin_inline_table() {
         if (top.table_ptr->has_member(current_key_)) {
             throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
-        top.table_ptr->add_member(current_key_, _MSTL move(table_ptr));
+        top.table_ptr->add_member(current_key_, _NEFORCE move(table_ptr));
         current_key_.clear();
     }
 
@@ -110,7 +110,7 @@ toml_builder& toml_builder::begin_array() {
 
     const auto& top = contexts_.top();
     if (top.type == array) {
-        top.array_ptr->add_element(_MSTL move(arr));
+        top.array_ptr->add_element(_NEFORCE move(arr));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for array"));
@@ -118,7 +118,7 @@ toml_builder& toml_builder::begin_array() {
         if (top.table_ptr->has_member(current_key_)) {
             throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
-        top.table_ptr->add_member(current_key_, _MSTL move(arr));
+        top.table_ptr->add_member(current_key_, _NEFORCE move(arr));
         current_key_.clear();
     }
 
@@ -155,7 +155,7 @@ toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
     toml_array* arr = get_or_create_array_for_array_table(path);
     auto new_table = make_unique<toml_table>();
     toml_table* new_table_ptr = new_table.get();
-    arr->add_element(_MSTL move(new_table));
+    arr->add_element(_NEFORCE move(new_table));
 
     // 压入新的上下文
     contexts_.push(frame(table, new_table_ptr));
@@ -168,7 +168,7 @@ toml_builder& toml_builder::end_array_table() {
     return end_table();
 }
 
-toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_table(_NEFORCE function<void(toml_builder&)>&& build_func) {
     if (contexts_.empty()) {
         throw_exception(toml_exception("Cannot create table at root using value_table"));
     }
@@ -178,7 +178,7 @@ toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& bu
 
     const auto& top = contexts_.top();
     if (top.type == array) {
-        top.array_ptr->add_element(_MSTL move(unique_table));
+        top.array_ptr->add_element(_NEFORCE move(unique_table));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
             throw_exception(toml_exception("No key set for table"));
@@ -186,7 +186,7 @@ toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& bu
         if (top.table_ptr->has_member(current_key_)) {
             throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
         }
-        top.table_ptr->add_member(current_key_, _MSTL move(unique_table));
+        top.table_ptr->add_member(current_key_, _NEFORCE move(unique_table));
         current_key_.clear();
     }
 
@@ -197,14 +197,14 @@ toml_builder& toml_builder::value_table(_MSTL function<void(toml_builder&)>&& bu
     return *this;
 }
 
-toml_builder& toml_builder::value_inline_table(_MSTL function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_inline_table(_NEFORCE function<void(toml_builder&)>&& build_func) {
     begin_inline_table();
     build_func(*this);
     end_inline_table();
     return *this;
 }
 
-toml_builder& toml_builder::value_array(_MSTL function<void(toml_builder&)>&& build_func) {
+toml_builder& toml_builder::value_array(_NEFORCE function<void(toml_builder&)>&& build_func) {
     begin_array();
     build_func(*this);
     end_array();
@@ -216,7 +216,7 @@ unique_ptr<toml_table> toml_builder::build() {
         throw_exception(toml_exception("Unclosed table or array context"));
     }
 
-    return _MSTL move(root_);
+    return _NEFORCE move(root_);
 }
 
 toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) const {
@@ -234,7 +234,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
         } else {
             auto new_table = make_unique<toml_table>();
             toml_table* new_table_ptr = new_table.get();
-            current->add_member(key, _MSTL move(new_table));
+            current->add_member(key, _NEFORCE move(new_table));
             current = new_table_ptr;
         }
     }
@@ -261,9 +261,9 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
     } else {
         auto new_array = make_unique<toml_array>();
         toml_array* new_array_ptr = new_array.get();
-        parent->add_member(array_name, _MSTL move(new_array));
+        parent->add_member(array_name, _NEFORCE move(new_array));
         return new_array_ptr;
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

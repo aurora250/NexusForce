@@ -1,11 +1,16 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/system/stacktrace.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/async/call_once.hpp>
-#include <MSTL/core/async/mutex.hpp>
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/system/stacktrace.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/async/call_once.hpp>
+#include <NeForce/core/async/mutex.hpp>
 #include <windef.h>
 #include <WinBase.h>
+#ifdef NEFORCE_COMPILER_MSVC
 #include <verrsrc.h>
+#endif
+#ifdef NEFORCE_COMPILER_MINGW
+#include <winver.h>
+#endif
 #include <DbgHelp.h>
 #else
 #include <execinfo.h>
@@ -13,9 +18,9 @@
 #include <cxxabi.h>
 #include <cstdlib>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
 static void ensure_initialized() noexcept {
     static once_flag init_flag{};
@@ -34,7 +39,7 @@ static mutex& dbghelp_mutex() {
 
 string stacktrace::frame::name() const {
     if (!address_) return "<empty>";
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ensure_initialized();
 
     lock<mutex> lock(dbghelp_mutex());
@@ -71,13 +76,13 @@ string stacktrace::frame::to_string() const {
     string result = address_string(address_);
     const string symbol = name();
     if (!symbol.empty() && symbol != "<unknown>") {
-        result += " in " + _MSTL move(symbol);
+        result += " in " + _NEFORCE move(symbol);
     }
     return result;
 }
 
 stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     vector<void *> buffer(max_depth);
     const ::USHORT captured = ::CaptureStackBackTrace(
         static_cast<::DWORD>(skip + 2), static_cast<::DWORD>(max_depth),
@@ -91,7 +96,7 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
     const int captured = ::backtrace(buffer.data(), static_cast<int>(buffer.size()));
     if (captured <= 0) return;
 
-    const size_t to_skip = _MSTL min(static_cast<size_t>(captured), skip + 2);
+    const size_t to_skip = _NEFORCE min(static_cast<size_t>(captured), skip + 2);
     const size_t valid_frames = captured - to_skip;
 
     frames_.reserve(valid_frames);
@@ -104,10 +109,10 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
 string stacktrace::to_string() const {
     string result;
     for (size_t i = 0; i < frames_.size(); ++i) {
-        result += _MSTL to_string("#", i, " ", frames_[i]);
+        result += _NEFORCE to_string("#", i, " ", frames_[i]);
         if (i + 1 < frames_.size()) result += "\n";
     }
     return result;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

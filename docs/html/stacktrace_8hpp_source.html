@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: stacktrace.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('stacktrace_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">stacktrace.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="stacktrace_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SYSTEM_STACKTRACE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SYSTEM_STACKTRACE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="istringify_8hpp.html">NeForce/core/interface/istringify.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classstacktrace.html">   29</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classstacktrace.html#a813ed64b17ef7710a1cb83830c8c7285">stacktrace</a> : <span class="keyword">public</span> <a class="code hl_class" href="structistringify.html">istringify</a>&lt;stacktrace&gt; {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html">   37</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">frame</a> : <span class="keyword">public</span> <a class="code hl_class" href="structistringify.html">istringify</a>&lt;frame&gt; {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">void</span>* address_ = <span class="keyword">nullptr</span>;  </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">   45</a></span>        <a class="code hl_function" href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">frame</a>() noexcept {}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#ad2db5bd1f9458436821eb027f01cecbc">   51</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classstacktrace_1_1frame.html#ad2db5bd1f9458436821eb027f01cecbc">frame</a>(<span class="keywordtype">void</span>* addr) noexcept :</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        address_(addr) {}</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#acd940cf6e507cad788d3e13caa8714fb">   58</a></span>        NEFORCE_NODISCARD <span class="keywordtype">void</span>* <a class="code hl_function" href="classstacktrace_1_1frame.html#acd940cf6e507cad788d3e13caa8714fb">address</a>() const noexcept {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">return</span> address_;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#a734aa3c6e120b107e6ab4c08b12f267e">   68</a></span>        NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classstacktrace_1_1frame.html#a734aa3c6e120b107e6ab4c08b12f267e">name</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#ab503bc2b3d194153ed2134390e832943">   75</a></span>        NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">frame</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">return</span> address_ == other.address_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#a25e992aeb4fa0ea8152f2e479c392025">   84</a></span>        NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator !=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">frame</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classstacktrace_1_1frame.html#a0f0f134b3c35d75ddbfcc788281d9c12">   94</a></span>        NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classstacktrace_1_1frame.html#a0f0f134b3c35d75ddbfcc788281d9c12">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    };</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_class" href="classvector.html">vector&lt;frame&gt;</a> frames_;  </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classstacktrace.html#a813ed64b17ef7710a1cb83830c8c7285">  108</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classstacktrace.html#a813ed64b17ef7710a1cb83830c8c7285">stacktrace</a>(<span class="keywordtype">size_t</span> skip = 0, <span class="keywordtype">size_t</span> max_depth = 64);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classstacktrace.html#a1756b8f231b7f47d02d2fc4afb2edc67">  114</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classstacktrace.html#a1756b8f231b7f47d02d2fc4afb2edc67">size</a>() const noexcept {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> frames_.size();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span></div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classstacktrace.html#af9fa2eed1377e56cabfd46b339769d37">  122</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classstacktrace.html#af9fa2eed1377e56cabfd46b339769d37">empty</a>() const noexcept {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">return</span> frames_.empty();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classstacktrace.html#aa85775ec20f9e2920cadbf6c4b1caa40">  131</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classstacktrace_1_1frame.html">frame</a>&amp; operator [](<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> frames_[idx];</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classstacktrace.html#ae1c787a07f7a71bad575db38a8b2ab2b">  140</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classstacktrace_1_1frame.html">frame</a>&amp; operator [](<span class="keyword">const</span> <span class="keywordtype">size_t</span> idx) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span> frames_[idx];</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classstacktrace.html#a8e0407e64b0790a2e00fb4b557307dfe">  148</a></span>    NEFORCE_NODISCARD <span class="keyword">auto</span> <a class="code hl_function" href="classstacktrace.html#a8e0407e64b0790a2e00fb4b557307dfe">begin</a>() const noexcept {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">return</span> frames_.begin();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
+<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classstacktrace.html#a3476bfbbd09c21a809651dc14ace3b13">  156</a></span>    NEFORCE_NODISCARD <span class="keyword">auto</span> <a class="code hl_function" href="classstacktrace.html#a3476bfbbd09c21a809651dc14ace3b13">end</a>() const noexcept {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">return</span> frames_.end();</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span></div>
+<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classstacktrace.html#af021a7962620aaec9e7c79816a7a791a">  164</a></span>    NEFORCE_NODISCARD <span class="keyword">auto</span> <a class="code hl_function" href="classstacktrace.html#af021a7962620aaec9e7c79816a7a791a">cbegin</a>() const noexcept {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">return</span> frames_.cbegin();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span></div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classstacktrace.html#ad21d0b9cac9ac8e0bdcaa76885806aba">  172</a></span>    NEFORCE_NODISCARD <span class="keyword">auto</span> <a class="code hl_function" href="classstacktrace.html#ad21d0b9cac9ac8e0bdcaa76885806aba">cend</a>() const noexcept {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">return</span> frames_.cend();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classstacktrace.html#a033fa5d7619565f286d595bd86b4054e">  182</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classstacktrace.html#a033fa5d7619565f286d595bd86b4054e">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>};</div>
+</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> <span class="comment">// Stacktrace</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SYSTEM_STACKTRACE_HPP__</span></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html"><div class="ttname"><a href="classstacktrace_1_1frame.html">stacktrace::frame</a></div><div class="ttdoc">堆栈帧类</div><div class="ttdef"><b>定义</b> <a href="#l00037">stacktrace.hpp:37</a></div></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html_a0f0f134b3c35d75ddbfcc788281d9c12"><div class="ttname"><a href="classstacktrace_1_1frame.html#a0f0f134b3c35d75ddbfcc788281d9c12">stacktrace::frame::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html_a734aa3c6e120b107e6ab4c08b12f267e"><div class="ttname"><a href="classstacktrace_1_1frame.html#a734aa3c6e120b107e6ab4c08b12f267e">stacktrace::frame::name</a></div><div class="ttdeci">NEFORCE_NODISCARD string name() const</div><div class="ttdoc">获取函数符号名称</div></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html_a9a10dc564b6aed231f6e67d4dcd74e2a"><div class="ttname"><a href="classstacktrace_1_1frame.html#a9a10dc564b6aed231f6e67d4dcd74e2a">stacktrace::frame::frame</a></div><div class="ttdeci">frame() noexcept</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00045">stacktrace.hpp:45</a></div></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html_acd940cf6e507cad788d3e13caa8714fb"><div class="ttname"><a href="classstacktrace_1_1frame.html#acd940cf6e507cad788d3e13caa8714fb">stacktrace::frame::address</a></div><div class="ttdeci">NEFORCE_NODISCARD void * address() const noexcept</div><div class="ttdoc">获取返回地址</div><div class="ttdef"><b>定义</b> <a href="#l00058">stacktrace.hpp:58</a></div></div>
+<div class="ttc" id="aclassstacktrace_1_1frame_html_ad2db5bd1f9458436821eb027f01cecbc"><div class="ttname"><a href="classstacktrace_1_1frame.html#ad2db5bd1f9458436821eb027f01cecbc">stacktrace::frame::frame</a></div><div class="ttdeci">frame(void *addr) noexcept</div><div class="ttdoc">从地址构造堆栈帧</div><div class="ttdef"><b>定义</b> <a href="#l00051">stacktrace.hpp:51</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_a033fa5d7619565f286d595bd86b4054e"><div class="ttname"><a href="classstacktrace.html#a033fa5d7619565f286d595bd86b4054e">stacktrace::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div></div>
+<div class="ttc" id="aclassstacktrace_html_a1756b8f231b7f47d02d2fc4afb2edc67"><div class="ttname"><a href="classstacktrace.html#a1756b8f231b7f47d02d2fc4afb2edc67">stacktrace::size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t size() const noexcept</div><div class="ttdoc">获取堆栈深度</div><div class="ttdef"><b>定义</b> <a href="#l00114">stacktrace.hpp:114</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_a3476bfbbd09c21a809651dc14ace3b13"><div class="ttname"><a href="classstacktrace.html#a3476bfbbd09c21a809651dc14ace3b13">stacktrace::end</a></div><div class="ttdeci">NEFORCE_NODISCARD auto end() const noexcept</div><div class="ttdoc">获取结束常量迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00156">stacktrace.hpp:156</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_a813ed64b17ef7710a1cb83830c8c7285"><div class="ttname"><a href="classstacktrace.html#a813ed64b17ef7710a1cb83830c8c7285">stacktrace::stacktrace</a></div><div class="ttdeci">stacktrace(size_t skip=0, size_t max_depth=64)</div><div class="ttdoc">构造函数，捕获当前堆栈</div></div>
+<div class="ttc" id="aclassstacktrace_html_a8e0407e64b0790a2e00fb4b557307dfe"><div class="ttname"><a href="classstacktrace.html#a8e0407e64b0790a2e00fb4b557307dfe">stacktrace::begin</a></div><div class="ttdeci">NEFORCE_NODISCARD auto begin() const noexcept</div><div class="ttdoc">获取起始常量迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00148">stacktrace.hpp:148</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_ad21d0b9cac9ac8e0bdcaa76885806aba"><div class="ttname"><a href="classstacktrace.html#ad21d0b9cac9ac8e0bdcaa76885806aba">stacktrace::cend</a></div><div class="ttdeci">NEFORCE_NODISCARD auto cend() const noexcept</div><div class="ttdoc">获取结束常量迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00172">stacktrace.hpp:172</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_af021a7962620aaec9e7c79816a7a791a"><div class="ttname"><a href="classstacktrace.html#af021a7962620aaec9e7c79816a7a791a">stacktrace::cbegin</a></div><div class="ttdeci">NEFORCE_NODISCARD auto cbegin() const noexcept</div><div class="ttdoc">获取起始常量迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00164">stacktrace.hpp:164</a></div></div>
+<div class="ttc" id="aclassstacktrace_html_af9fa2eed1377e56cabfd46b339769d37"><div class="ttname"><a href="classstacktrace.html#af9fa2eed1377e56cabfd46b339769d37">stacktrace::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD bool empty() const noexcept</div><div class="ttdoc">检查堆栈是否为空</div><div class="ttdef"><b>定义</b> <a href="#l00122">stacktrace.hpp:122</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga4063e745b1da8e2d0122514512f9a9a1"><div class="ttname"><a href="group___function_wrapper.html#ga4063e745b1da8e2d0122514512f9a9a1">operator!=</a></div><div class="ttdeci">bool operator!=(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">不等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00564">function.hpp:564</a></div></div>
+<div class="ttc" id="agroup___function_wrapper_html_ga445cf4ef6b33e97b2e24b538f3efcd33"><div class="ttname"><a href="group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33">operator==</a></div><div class="ttdeci">bool operator==(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</div><div class="ttdoc">等于空指针比较</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00538">function.hpp:538</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="aistringify_8hpp_html"><div class="ttname"><a href="istringify_8hpp.html">istringify.hpp</a></div><div class="ttdoc">可字符串化接口</div></div>
+<div class="ttc" id="astructistringify_html"><div class="ttname"><a href="structistringify.html">istringify</a></div><div class="ttdoc">可字符串化接口</div><div class="ttdef"><b>定义</b> <a href="istringify_8hpp_source.html#l00032">istringify.hpp:32</a></div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>system</b></li><li class="navelem"><a href="stacktrace_8hpp.html">stacktrace.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

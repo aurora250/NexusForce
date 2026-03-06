@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 数值算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___numeric_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">数值算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>数值算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga2ac777a4b58ddbe0537524d67199580d" id="r_ga2ac777a4b58ddbe0537524d67199580d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga2ac777a4b58ddbe0537524d67199580d template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 T&#160;</td><td class="memItemRight"><a class="el" href="#ga2ac777a4b58ddbe0537524d67199580d">accumulate</a> (Iterator first, Iterator second, T init, BinaryOperation binary_op)</td></tr>
+<tr class="memdesc:ga2ac777a4b58ddbe0537524d67199580d"><td class="mdescLeft">&#160;</td><td class="mdescRight">累积计算  <br /></td></tr>
+<tr class="memitem:ga7a9cc270ca835bb529230eca40474712" id="r_ga7a9cc270ca835bb529230eca40474712"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
+<tr class="memitem:ga7a9cc270ca835bb529230eca40474712 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 T&#160;</td><td class="memItemRight"><a class="el" href="#ga7a9cc270ca835bb529230eca40474712">accumulate</a> (Iterator first, Iterator second, T init)</td></tr>
+<tr class="memdesc:ga7a9cc270ca835bb529230eca40474712"><td class="mdescLeft">&#160;</td><td class="mdescRight">累积计算  <br /></td></tr>
+<tr class="memitem:ga4972b9ca243ab625127b4c15097d868c" id="r_ga4972b9ca243ab625127b4c15097d868c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga4972b9ca243ab625127b4c15097d868c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga4972b9ca243ab625127b4c15097d868c">adjacent_difference</a> (Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op)</td></tr>
+<tr class="memdesc:ga4972b9ca243ab625127b4c15097d868c"><td class="mdescLeft">&#160;</td><td class="mdescRight">相邻差分计算  <br /></td></tr>
+<tr class="memitem:ga4cd18d604cda18d558c13214d6d633f3" id="r_ga4cd18d604cda18d558c13214d6d633f3"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga4cd18d604cda18d558c13214d6d633f3 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga4cd18d604cda18d558c13214d6d633f3">adjacent_difference</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:ga4cd18d604cda18d558c13214d6d633f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">相邻差分计算  <br /></td></tr>
+<tr class="memitem:ga307dbbb893254b488ba24150f80edc58" id="r_ga307dbbb893254b488ba24150f80edc58"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename T, typename BinaryOperation1, typename BinaryOperation2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga307dbbb893254b488ba24150f80edc58 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 T&#160;</td><td class="memItemRight"><a class="el" href="#ga307dbbb893254b488ba24150f80edc58">inner_product</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, T init, BinaryOperation1 binary_op1, BinaryOperation2 binary_op2)</td></tr>
+<tr class="memdesc:ga307dbbb893254b488ba24150f80edc58"><td class="mdescLeft">&#160;</td><td class="mdescRight">内积计算  <br /></td></tr>
+<tr class="memitem:gad2f9bb087aba832a9f91798d9e2a3a17" id="r_gad2f9bb087aba832a9f91798d9e2a3a17"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename T&gt; </td></tr>
+<tr class="memitem:gad2f9bb087aba832a9f91798d9e2a3a17 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 T&#160;</td><td class="memItemRight"><a class="el" href="#gad2f9bb087aba832a9f91798d9e2a3a17">inner_product</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, T init)</td></tr>
+<tr class="memdesc:gad2f9bb087aba832a9f91798d9e2a3a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">内积计算  <br /></td></tr>
+<tr class="memitem:ga521bebf3e6205951ebcfceaf2d499973" id="r_ga521bebf3e6205951ebcfceaf2d499973"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga521bebf3e6205951ebcfceaf2d499973 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga521bebf3e6205951ebcfceaf2d499973">partial_sum</a> (Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op)</td></tr>
+<tr class="memdesc:ga521bebf3e6205951ebcfceaf2d499973"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分和计算  <br /></td></tr>
+<tr class="memitem:ga71e3a0a106a564257ca72805723c7756" id="r_ga71e3a0a106a564257ca72805723c7756"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga71e3a0a106a564257ca72805723c7756 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga71e3a0a106a564257ca72805723c7756">partial_sum</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:ga71e3a0a106a564257ca72805723c7756"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分和计算  <br /></td></tr>
+<tr class="memitem:ga32c7bb8649158d0806c748df3b5e5626" id="r_ga32c7bb8649158d0806c748df3b5e5626"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga32c7bb8649158d0806c748df3b5e5626 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga32c7bb8649158d0806c748df3b5e5626">sequence_fill</a> (Iterator first, Iterator last, T value)</td></tr>
+<tr class="memdesc:ga32c7bb8649158d0806c748df3b5e5626"><td class="mdescLeft">&#160;</td><td class="mdescRight">顺序填充递增序列  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>数值算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga7a9cc270ca835bb529230eca40474712" name="ga7a9cc270ca835bb529230eca40474712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7a9cc270ca835bb529230eca40474712">&#9670;&#160;</a></span>accumulate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 T accumulate </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>second</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>init</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>累积计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>初始值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">second</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">init</td><td>初始值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>所有元素与初始值的和</dd></dl>
+<p>默认使用加法运算的累积计算。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00056">56</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="numeric_8hpp_source.html#l00037">accumulate()</a>.</p>
+
+</div>
+</div>
+<a id="ga2ac777a4b58ddbe0537524d67199580d" name="ga2ac777a4b58ddbe0537524d67199580d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2ac777a4b58ddbe0537524d67199580d">&#9670;&#160;</a></span>accumulate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 T accumulate </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>second</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation</td>          <td class="paramname"><span class="paramname"><em>binary_op</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>累积计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>初始值类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation</td><td>二元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">second</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">init</td><td>初始值 </td></tr>
+    <tr><td class="paramname">binary_op</td><td>二元操作函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>累积计算的结果</dd></dl>
+<p>对范围 [first, second) 中的元素执行累积计算 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00037">37</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric_8hpp_source.html#l00056">accumulate()</a>.</p>
+
+</div>
+</div>
+<a id="ga4cd18d604cda18d558c13214d6d633f3" name="ga4cd18d604cda18d558c13214d6d633f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4cd18d604cda18d558c13214d6d633f3">&#9670;&#160;</a></span>adjacent_difference() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 adjacent_difference </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>相邻差分计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束迭代器 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>默认使用减法运算的相邻差分计算。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00102">102</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="numeric_8hpp_source.html#l00075">adjacent_difference()</a>.</p>
+
+</div>
+</div>
+<a id="ga4972b9ca243ab625127b4c15097d868c" name="ga4972b9ca243ab625127b4c15097d868c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4972b9ca243ab625127b4c15097d868c">&#9670;&#160;</a></span>adjacent_difference() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 adjacent_difference </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation</td>          <td class="paramname"><span class="paramname"><em>binary_op</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>相邻差分计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation</td><td>二元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束迭代器 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始迭代器 </td></tr>
+    <tr><td class="paramname">binary_op</td><td>二元操作函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算相邻元素的差分并存储到输出范围。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00075">75</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric_8hpp_source.html#l00102">adjacent_difference()</a>.</p>
+
+</div>
+</div>
+<a id="gad2f9bb087aba832a9f91798d9e2a3a17" name="gad2f9bb087aba832a9f91798d9e2a3a17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad2f9bb087aba832a9f91798d9e2a3a17">&#9670;&#160;</a></span>inner_product() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 T inner_product </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>init</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内积计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>初始值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束迭代器 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始迭代器 </td></tr>
+    <tr><td class="paramname">init</td><td>初始值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个范围的内积</dd></dl>
+<p>默认使用乘法和加法运算的内积计算，即点积。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00147">147</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="numeric_8hpp_source.html#l00125">inner_product()</a>.</p>
+
+</div>
+</div>
+<a id="ga307dbbb893254b488ba24150f80edc58" name="ga307dbbb893254b488ba24150f80edc58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga307dbbb893254b488ba24150f80edc58">&#9670;&#160;</a></span>inner_product() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename T, typename BinaryOperation1, typename BinaryOperation2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 T inner_product </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation1</td>          <td class="paramname"><span class="paramname"><em>binary_op1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation2</td>          <td class="paramname"><span class="paramname"><em>binary_op2</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>内积计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>初始值类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation1</td><td>第一个二元操作类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation2</td><td>第二个二元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束迭代器 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始迭代器 </td></tr>
+    <tr><td class="paramname">init</td><td>初始值 </td></tr>
+    <tr><td class="paramname">binary_op1</td><td>累积操作函数对象 </td></tr>
+    <tr><td class="paramname">binary_op2</td><td>元素对操作函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个范围的内积结果</dd></dl>
+<p>计算两个范围的内积。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00125">125</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric_8hpp_source.html#l00147">inner_product()</a>.</p>
+
+</div>
+</div>
+<a id="ga71e3a0a106a564257ca72805723c7756" name="ga71e3a0a106a564257ca72805723c7756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga71e3a0a106a564257ca72805723c7756">&#9670;&#160;</a></span>partial_sum() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 partial_sum </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分和计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束迭代器 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>默认使用加法运算的部分和计算，即前缀和。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00189">189</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="numeric_8hpp_source.html#l00166">partial_sum()</a>.</p>
+
+</div>
+</div>
+<a id="ga521bebf3e6205951ebcfceaf2d499973" name="ga521bebf3e6205951ebcfceaf2d499973"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga521bebf3e6205951ebcfceaf2d499973">&#9670;&#160;</a></span>partial_sum() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 partial_sum </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation</td>          <td class="paramname"><span class="paramname"><em>binary_op</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>部分和计算 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation</td><td>二元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束迭代器 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始迭代器 </td></tr>
+    <tr><td class="paramname">binary_op</td><td>二元操作函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>计算前缀和并存储到输出范围。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00166">166</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="numeric_8hpp_source.html#l00189">partial_sum()</a>.</p>
+
+</div>
+</div>
+<a id="ga32c7bb8649158d0806c748df3b5e5626" name="ga32c7bb8649158d0806c748df3b5e5626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga32c7bb8649158d0806c748df3b5e5626">&#9670;&#160;</a></span>sequence_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void sequence_fill </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>顺序填充递增序列 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">value</td><td>起始值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>用从value开始的连续值填充范围 [first, last)。 </p>
+
+<p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00204">204</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: string_util.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('string__util_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">string_util.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="string__util_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_STRING_STRING_UTIL_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_STRING_STRING_UTIL_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">   32</a></span><a class="code hl_class" href="classvector.html">vector&lt;string_view&gt;</a> NEFORCE_API <a class="code hl_function" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str, <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> delimiters, <span class="keywordtype">bool</span> skip_empty = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___string.html#gab8924a5b88df8158bd610f32bec327b2">   44</a></span><a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> NEFORCE_API <a class="code hl_function" href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; delimiters, <span class="keywordtype">bool</span> skip_empty = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">   55</a></span><span class="keywordtype">string</span> NEFORCE_API <a class="code hl_function" href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">join</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; vec, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; delimiter = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___string.html#ga6b8e132fa76560bf2f5190d1085f0a92">   66</a></span><span class="keywordtype">string</span> NEFORCE_API <a class="code hl_function" href="group___string.html#ga6b8e132fa76560bf2f5190d1085f0a92">join_fast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; vec, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; delimiter = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group___string.html#ga4d37427ce538fce65fdc3ebc85daba67">   76</a></span><span class="keywordtype">string</span> NEFORCE_API <a class="code hl_function" href="group___string.html#ga4d37427ce538fce65fdc3ebc85daba67">join_accumulate</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> &amp;vec, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; delimiter = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___string.html#ga9d4fc5f1340f6a60f1a5a5ca602df7c4">   85</a></span><a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> NEFORCE_API <a class="code hl_function" href="group___string.html#ga9d4fc5f1340f6a60f1a5a5ca602df7c4">unique</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; vec);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> <span class="comment">// String</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_STRING_STRING_UTIL_HPP__</span></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___string_html_ga3961240d8c1324f4022b14f6841c4269"><div class="ttname"><a href="group___string.html#ga3961240d8c1324f4022b14f6841c4269">split</a></div><div class="ttdeci">vector&lt; string_view &gt; NEFORCE_API split(string_view str, string_view delimiters, bool skip_empty=true)</div><div class="ttdoc">分割字符串视图</div></div>
+<div class="ttc" id="agroup___string_html_ga4b89da25cf0f107d7d651df1522976f2"><div class="ttname"><a href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">join</a></div><div class="ttdeci">string NEFORCE_API join(const vector&lt; string &gt; &amp;vec, const string &amp;delimiter=&quot;&quot;)</div><div class="ttdoc">连接字符串</div></div>
+<div class="ttc" id="agroup___string_html_ga4d37427ce538fce65fdc3ebc85daba67"><div class="ttname"><a href="group___string.html#ga4d37427ce538fce65fdc3ebc85daba67">join_accumulate</a></div><div class="ttdeci">string NEFORCE_API join_accumulate(const vector&lt; string &gt; &amp;vec, const string &amp;delimiter=&quot;&quot;)</div><div class="ttdoc">使用累加方式连接字符串</div></div>
+<div class="ttc" id="agroup___string_html_ga6b8e132fa76560bf2f5190d1085f0a92"><div class="ttname"><a href="group___string.html#ga6b8e132fa76560bf2f5190d1085f0a92">join_fast</a></div><div class="ttdeci">string NEFORCE_API join_fast(const vector&lt; string &gt; &amp;vec, const string &amp;delimiter=&quot;&quot;)</div><div class="ttdoc">快速连接字符串</div></div>
+<div class="ttc" id="agroup___string_html_ga9d4fc5f1340f6a60f1a5a5ca602df7c4"><div class="ttname"><a href="group___string.html#ga9d4fc5f1340f6a60f1a5a5ca602df7c4">unique</a></div><div class="ttdeci">vector&lt; string &gt; NEFORCE_API unique(const vector&lt; string &gt; &amp;vec)</div><div class="ttdoc">字符串去重</div></div>
+<div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><a href="string__util_8hpp.html">string_util.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

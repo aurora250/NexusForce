@@ -1,6 +1,6 @@
-#include <MSTL/core/file/yaml/yaml_value.hpp>
-MSTL_BEGIN_NAMESPACE__
-MSTL_BEGIN_INNER__
+#include <NeForce/core/file/yaml/yaml_value.hpp>
+NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_INNER__
 
 static bool needs_quotes(const string& str) {
     if (str.empty()) return true;
@@ -139,13 +139,13 @@ static void stringify_value(string& result, const yaml_value* value,
                 result += "|\n";
                 string line;
                 size_t pos = 0;
-                while (_MSTL getline(val, pos, line)) {
+                while (_NEFORCE getline(val, pos, line)) {
                     result += string(indent, ' ') + line + "\n";
                 }
             } else if (str->get_style() == yaml_string::Folded) {
                 result += ">\n";
                 const string indent_str(indent, ' ');
-                result += _MSTL move(indent_str) + val + "\n";
+                result += _NEFORCE move(indent_str) + val + "\n";
             } else {
                 result += val;
             }
@@ -189,5 +189,5 @@ string yaml_value_document(const yaml_value* root) {
     return result;
 }
 
-MSTL_END_INNER__
-MSTL_END_NAMESPACE__
+NEFORCE_END_INNER__
+NEFORCE_END_NAMESPACE__

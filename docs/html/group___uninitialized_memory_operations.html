@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 未初始化内存操作</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___uninitialized_memory_operations.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">未初始化内存操作 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>在未初始化内存上进行的安全操作  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga4d93b8cbcb234fc1fb491b210cba104c" id="r_ga4d93b8cbcb234fc1fb491b210cba104c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga4d93b8cbcb234fc1fb491b210cba104c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga4d93b8cbcb234fc1fb491b210cba104c">uninitialized_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:ga4d93b8cbcb234fc1fb491b210cba104c"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制元素到未初始化内存  <br /></td></tr>
+<tr class="memitem:ga8347755732957b3cf8227ccb09e75013" id="r_ga8347755732957b3cf8227ccb09e75013"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8347755732957b3cf8227ccb09e75013 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8347755732957b3cf8227ccb09e75013">uninitialized_copy_n</a> (Iterator1 first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, Iterator2 result)</td></tr>
+<tr class="memdesc:ga8347755732957b3cf8227ccb09e75013"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制指定数量的元素到未初始化内存  <br /></td></tr>
+<tr class="memitem:ga6f02528bc88e238474438f8dbb3a4805" id="r_ga6f02528bc88e238474438f8dbb3a4805"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga6f02528bc88e238474438f8dbb3a4805 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga6f02528bc88e238474438f8dbb3a4805">uninitialized_fill</a> (Iterator first, Iterator last, const T &amp;x)</td></tr>
+<tr class="memdesc:ga6f02528bc88e238474438f8dbb3a4805"><td class="mdescLeft">&#160;</td><td class="mdescRight">在未初始化内存上填充值  <br /></td></tr>
+<tr class="memitem:gaa3c7446fdf46fd39cfbe18593667d6d5" id="r_gaa3c7446fdf46fd39cfbe18593667d6d5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaa3c7446fdf46fd39cfbe18593667d6d5 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gaa3c7446fdf46fd39cfbe18593667d6d5">uninitialized_fill_n</a> (Iterator first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n, const T &amp;x)</td></tr>
+<tr class="memdesc:gaa3c7446fdf46fd39cfbe18593667d6d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">在未初始化内存中用指定值填充指定数量的元素  <br /></td></tr>
+<tr class="memitem:gab368b716a7ab773696dcb93099e696d1" id="r_gab368b716a7ab773696dcb93099e696d1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab368b716a7ab773696dcb93099e696d1 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gab368b716a7ab773696dcb93099e696d1">uninitialized_move</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:gab368b716a7ab773696dcb93099e696d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">在未初始化内存中移动元素  <br /></td></tr>
+<tr class="memitem:gaa2ab37896d6d250c2b6f0abb74b24fd0" id="r_gaa2ab37896d6d250c2b6f0abb74b24fd0"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaa2ab37896d6d250c2b6f0abb74b24fd0 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaa2ab37896d6d250c2b6f0abb74b24fd0">uninitialized_move_n</a> (Iterator1 first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, Iterator2 result)</td></tr>
+<tr class="memdesc:gaa2ab37896d6d250c2b6f0abb74b24fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">在未初始化内存中移动指定数量的元素  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>在未初始化内存上进行的安全操作 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga4d93b8cbcb234fc1fb491b210cba104c" name="ga4d93b8cbcb234fc1fb491b210cba104c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d93b8cbcb234fc1fb491b210cba104c">&#9670;&#160;</a></span>uninitialized_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 uninitialized_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>复制元素到未初始化内存 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的元素复制到未初始化的内存区域 [result, ...)。 如果复制过程中抛出异常，已构造的元素会被析构。 </p>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00566">vector&lt; byte_t &gt;::operator=()</a>.</p>
+
+</div>
+</div>
+<a id="ga8347755732957b3cf8227ccb09e75013" name="ga8347755732957b3cf8227ccb09e75013"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8347755732957b3cf8227ccb09e75013">&#9670;&#160;</a></span>uninitialized_copy_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; uninitialized_copy_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>复制指定数量的元素到未初始化内存 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入起始 </td></tr>
+    <tr><td class="paramname">count</td><td>要复制的元素数量 </td></tr>
+    <tr><td class="paramname">result</td><td>输出起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;输入结束迭代器, 输出结束迭代器&gt; </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>从 first 开始复制 count 个元素到未初始化的内存区域。 </p>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00156">156</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a> , 以及 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01771">basic_string&lt; char &gt;::append()</a>.</p>
+
+</div>
+</div>
+<a id="ga6f02528bc88e238474438f8dbb3a4805" name="ga6f02528bc88e238474438f8dbb3a4805"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f02528bc88e238474438f8dbb3a4805">&#9670;&#160;</a></span>uninitialized_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void uninitialized_fill </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>在未初始化内存上填充值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">x</td><td>要填充的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在未初始化的内存区域 [first, last) 上构造值为 x 的对象。 如果构造过程中抛出异常，已构造的元素会被析构。 </p>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00219">219</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>.</p>
+
+</div>
+</div>
+<a id="gaa3c7446fdf46fd39cfbe18593667d6d5" name="gaa3c7446fdf46fd39cfbe18593667d6d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa3c7446fdf46fd39cfbe18593667d6d5">&#9670;&#160;</a></span>uninitialized_fill_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator uninitialized_fill_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>在未初始化内存中用指定值填充指定数量的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始位置 </td></tr>
+    <tr><td class="paramname">n</td><td>要填充的元素数量 </td></tr>
+    <tr><td class="paramname">x</td><td>要填充的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>填充后的结束迭代器 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>类似于 <a class="el" href="group___shift_algorithms.html#ga92d51dc7fd2c34cc77ffd15c33af4e7b" title="填充指定数量的元素">fill_n()</a>，但在未初始化内存上操作。 </p>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00285">285</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l00969">vector&lt; byte_t &gt;::assign()</a>, <a class="el" href="deque_8hpp_source.html#l01341">deque&lt; T, Alloc, BufSize &gt;::insert()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>.</p>
+
+</div>
+</div>
+<a id="gab368b716a7ab773696dcb93099e696d1" name="gab368b716a7ab773696dcb93099e696d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab368b716a7ab773696dcb93099e696d1">&#9670;&#160;</a></span>uninitialized_move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator2 uninitialized_move </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>在未初始化内存中移动元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的元素移动到以 result 开始的未初始化内存区域。 使用移动构造函数构造对象，可能使源对象处于有效但未指定的状态。 </p>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00353">353</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l00871">vector&lt; byte_t &gt;::emplace()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="vector_8hpp_source.html#l00817">vector&lt; byte_t &gt;::reserve()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01156">vector&lt; byte_t &gt;::shrink_to_fit()</a>.</p>
+
+</div>
+</div>
+<a id="gaa2ab37896d6d250c2b6f0abb74b24fd0" name="gaa2ab37896d6d250c2b6f0abb74b24fd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa2ab37896d6d250c2b6f0abb74b24fd0">&#9670;&#160;</a></span>uninitialized_move_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; uninitialized_move_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>在未初始化内存中移动指定数量的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入起始迭代器 </td></tr>
+    <tr><td class="paramname">count</td><td>要移动的元素数量 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;输入结束迭代器, 输出结束迭代器&gt; </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structmemory__exception.html" title="内存操作异常">memory_exception</a></td><td>当值类型为非平凡类型时，如果构造过程中发生异常 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="uninitialized_8hpp_source.html">uninitialized.hpp</a> 第 <a class="el" href="uninitialized_8hpp_source.html#l00419">419</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a> , 以及 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

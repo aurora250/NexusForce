@@ -1,0 +1,784 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: logger类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classlogger.html','','classlogger-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">logger类 参考<div class="ingroups"><a class="el" href="group___logging.html">日志系统</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>日志记录器单例类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="logger_8hpp_source.html">logger.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aadd537feeeb16186f6aeb4ca0267a8d7" id="r_aadd537feeeb16186f6aeb4ca0267a8d7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aadd537feeeb16186f6aeb4ca0267a8d7">~logger</a> ()</td></tr>
+<tr class="memdesc:aadd537feeeb16186f6aeb4ca0267a8d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:ae8938cbad141b618717fe8f79975da52" id="r_ae8938cbad141b618717fe8f79975da52"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae8938cbad141b618717fe8f79975da52">add_sink</a> (<a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classlog__sink.html">log_sink</a> &gt; sink)</td></tr>
+<tr class="memdesc:ae8938cbad141b618717fe8f79975da52"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加输出目标  <br /></td></tr>
+<tr class="memitem:ad61dfa82a2953138ac21bac32de1e76b" id="r_ad61dfa82a2953138ac21bac32de1e76b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad61dfa82a2953138ac21bac32de1e76b">set_level</a> (<a class="el" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> level)</td></tr>
+<tr class="memdesc:ad61dfa82a2953138ac21bac32de1e76b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置日志级别  <br /></td></tr>
+<tr class="memitem:a376dadd9adb1d4ad20a8baf4c0eae393" id="r_a376dadd9adb1d4ad20a8baf4c0eae393"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a376dadd9adb1d4ad20a8baf4c0eae393">set_filter</a> (<a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="structlog__event.html">log_event</a> &amp;)&gt; filter)</td></tr>
+<tr class="memdesc:a376dadd9adb1d4ad20a8baf4c0eae393"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置日志过滤器  <br /></td></tr>
+<tr class="memitem:a362589e68610127e4333750d3fa0cfec" id="r_a362589e68610127e4333750d3fa0cfec"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a362589e68610127e4333750d3fa0cfec">add_context</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> value)</td></tr>
+<tr class="memdesc:a362589e68610127e4333750d3fa0cfec"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加上下文信息  <br /></td></tr>
+<tr class="memitem:a3585afd24a1d66f0d98b9421c358835c" id="r_a3585afd24a1d66f0d98b9421c358835c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3585afd24a1d66f0d98b9421c358835c">remove_context</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key)</td></tr>
+<tr class="memdesc:a3585afd24a1d66f0d98b9421c358835c"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除上下文信息  <br /></td></tr>
+<tr class="memitem:a5d5089ffd2e6075a5014f23219431106" id="r_a5d5089ffd2e6075a5014f23219431106"><td class="memItemLeft"><a id="a5d5089ffd2e6075a5014f23219431106" name="a5d5089ffd2e6075a5014f23219431106"></a>
+void&#160;</td><td class="memItemRight"><b>clear_context</b> ()</td></tr>
+<tr class="memdesc:a5d5089ffd2e6075a5014f23219431106"><td class="mdescLeft">&#160;</td><td class="mdescRight">清除所有上下文信息 <br /></td></tr>
+<tr class="memitem:a52c424cfb33dbf22a8c622981a7ee322" id="r_a52c424cfb33dbf22a8c622981a7ee322"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a52c424cfb33dbf22a8c622981a7ee322">enable_async</a> (bool <a class="el" href="group___async.html#gacb2c2756930195cd969cc14a06c437bf">async</a>)</td></tr>
+<tr class="memdesc:a52c424cfb33dbf22a8c622981a7ee322"><td class="mdescLeft">&#160;</td><td class="mdescRight">启用或禁用异步模式  <br /></td></tr>
+<tr class="memitem:ab60290adc63a7f00e22aa528175e60ac" id="r_ab60290adc63a7f00e22aa528175e60ac"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log</a> (<a class="el" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a> level, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:ab60290adc63a7f00e22aa528175e60ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录日志  <br /></td></tr>
+<tr class="memitem:add2ab5e5a609ed985fea57f08c5339c0" id="r_add2ab5e5a609ed985fea57f08c5339c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#add2ab5e5a609ed985fea57f08c5339c0">trace</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:add2ab5e5a609ed985fea57f08c5339c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录TRACE级别日志  <br /></td></tr>
+<tr class="memitem:aaead4684c8116a6976c782b91184ee00" id="r_aaead4684c8116a6976c782b91184ee00"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaead4684c8116a6976c782b91184ee00">debug</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:aaead4684c8116a6976c782b91184ee00"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录DEBUG级别日志  <br /></td></tr>
+<tr class="memitem:ada300819bc418a229e937e04b24e5603" id="r_ada300819bc418a229e937e04b24e5603"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ada300819bc418a229e937e04b24e5603">info</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:ada300819bc418a229e937e04b24e5603"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录INFO级别日志  <br /></td></tr>
+<tr class="memitem:a4c7c282cf9a88235db72a7804c377e8c" id="r_a4c7c282cf9a88235db72a7804c377e8c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4c7c282cf9a88235db72a7804c377e8c">warn</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:a4c7c282cf9a88235db72a7804c377e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录WARN级别日志  <br /></td></tr>
+<tr class="memitem:a0a005d9efecd9deb6bb5660e9a241adf" id="r_a0a005d9efecd9deb6bb5660e9a241adf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0a005d9efecd9deb6bb5660e9a241adf">error</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:a0a005d9efecd9deb6bb5660e9a241adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录ERROR级别日志  <br /></td></tr>
+<tr class="memitem:accda3e202af750cbc4750ac8ddb7c91e" id="r_accda3e202af750cbc4750ac8ddb7c91e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#accda3e202af750cbc4750ac8ddb7c91e">fatal</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> msg, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classfile.html">file</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> func, int line)</td></tr>
+<tr class="memdesc:accda3e202af750cbc4750ac8ddb7c91e"><td class="mdescLeft">&#160;</td><td class="mdescRight">记录FATAL级别日志  <br /></td></tr>
+<tr class="memitem:af026254ee95ac41660de5d9010cd7a49" id="r_af026254ee95ac41660de5d9010cd7a49"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af026254ee95ac41660de5d9010cd7a49">flush</a> ()</td></tr>
+<tr class="memdesc:af026254ee95ac41660de5d9010cd7a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新所有输出目标  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a7e29f44b7511600dd3e1b27fc61d20d2" id="r_a7e29f44b7511600dd3e1b27fc61d20d2"><td class="memItemLeft">static <a class="el" href="classlogger.html">logger</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7e29f44b7511600dd3e1b27fc61d20d2">instance</a> ()</td></tr>
+<tr class="memdesc:a7e29f44b7511600dd3e1b27fc61d20d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>日志记录器单例类 </p>
+<p>提供全局日志记录功能，支持：</p><ul>
+<li>多级别日志</li>
+<li>同步/异步模式</li>
+<li>多输出目标</li>
+<li>日志过滤</li>
+<li>全局上下文信息</li>
+<li>线程安全 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00037">37</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="aadd537feeeb16186f6aeb4ca0267a8d7" name="aadd537feeeb16186f6aeb4ca0267a8d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd537feeeb16186f6aeb4ca0267a8d7">&#9670;&#160;</a></span>~logger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">logger::~logger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>等待所有日志处理完成，清理资源。 </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a362589e68610127e4333750d3fa0cfec" name="a362589e68610127e4333750d3fa0cfec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362589e68610127e4333750d3fa0cfec">&#9670;&#160;</a></span>add_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::add_context </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加上下文信息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+    <tr><td class="paramname">value</td><td>值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>上下文信息会附加到每条日志中。 </p>
+
+</div>
+</div>
+<a id="ae8938cbad141b618717fe8f79975da52" name="ae8938cbad141b618717fe8f79975da52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8938cbad141b618717fe8f79975da52">&#9670;&#160;</a></span>add_sink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::add_sink </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classlog__sink.html">log_sink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sink</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加输出目标 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sink</td><td>输出目标的共享指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaead4684c8116a6976c782b91184ee00" name="aaead4684c8116a6976c782b91184ee00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaead4684c8116a6976c782b91184ee00">&#9670;&#160;</a></span>debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::debug </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录DEBUG级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00198">198</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__event_8hpp_source.html#l00035">DEBUG</a>, <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="a52c424cfb33dbf22a8c622981a7ee322" name="a52c424cfb33dbf22a8c622981a7ee322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52c424cfb33dbf22a8c622981a7ee322">&#9670;&#160;</a></span>enable_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::enable_async </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>async</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>启用或禁用异步模式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">async</td><td>true为异步，false为同步</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>异步模式下日志写入不会阻塞调用线程。 </p>
+
+<p class="reference">引用了 <a class="el" href="async_8hpp_source.html#l00038">async()</a>.</p>
+
+</div>
+</div>
+<a id="a0a005d9efecd9deb6bb5660e9a241adf" name="a0a005d9efecd9deb6bb5660e9a241adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a005d9efecd9deb6bb5660e9a241adf">&#9670;&#160;</a></span>error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录ERROR级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__event_8hpp_source.html#l00038">ERROR</a>, <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="accda3e202af750cbc4750ac8ddb7c91e" name="accda3e202af750cbc4750ac8ddb7c91e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accda3e202af750cbc4750ac8ddb7c91e">&#9670;&#160;</a></span>fatal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::fatal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录FATAL级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00242">242</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__event_8hpp_source.html#l00039">FATAL</a>, <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="af026254ee95ac41660de5d9010cd7a49" name="af026254ee95ac41660de5d9010cd7a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af026254ee95ac41660de5d9010cd7a49">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::flush </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>刷新所有输出目标 </p>
+<p>确保所有日志都被实际输出。 异步模式下会等待工作线程处理完所有日志。 </p>
+
+</div>
+</div>
+<a id="ada300819bc418a229e937e04b24e5603" name="ada300819bc418a229e937e04b24e5603"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada300819bc418a229e937e04b24e5603">&#9670;&#160;</a></span>info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::info </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录INFO级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00209">209</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__event_8hpp_source.html#l00036">INFO</a>, <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="a7e29f44b7511600dd3e1b27fc61d20d2" name="a7e29f44b7511600dd3e1b27fc61d20d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e29f44b7511600dd3e1b27fc61d20d2">&#9670;&#160;</a></span>instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger.html">logger</a> &amp; logger::instance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取单例实例 </p>
+<dl class="section return"><dt>返回</dt><dd>日志记录器实例引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00103">103</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a>.</p>
+
+</div>
+</div>
+<a id="ab60290adc63a7f00e22aa528175e60ac" name="ab60290adc63a7f00e22aa528175e60ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab60290adc63a7f00e22aa528175e60ac">&#9670;&#160;</a></span>log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::log </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a></td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>记录日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>日志级别 </td></tr>
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="logger_8hpp_source.html#l00198">debug()</a>, <a class="el" href="logger_8hpp_source.html#l00231">error()</a>, <a class="el" href="logger_8hpp_source.html#l00242">fatal()</a>, <a class="el" href="logger_8hpp_source.html#l00209">info()</a>, <a class="el" href="logger_8hpp_source.html#l00103">instance()</a>, <a class="el" href="logger_8hpp_source.html#l00187">trace()</a> , 以及 <a class="el" href="logger_8hpp_source.html#l00220">warn()</a>.</p>
+
+</div>
+</div>
+<a id="a3585afd24a1d66f0d98b9421c358835c" name="a3585afd24a1d66f0d98b9421c358835c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3585afd24a1d66f0d98b9421c358835c">&#9670;&#160;</a></span>remove_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::remove_context </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移除上下文信息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要移除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a376dadd9adb1d4ad20a8baf4c0eae393" name="a376dadd9adb1d4ad20a8baf4c0eae393"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a376dadd9adb1d4ad20a8baf4c0eae393">&#9670;&#160;</a></span>set_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::set_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="structlog__event.html">log_event</a> &amp;)&gt;</td>          <td class="paramname"><span class="paramname"><em>filter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置日志过滤器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filter</td><td>过滤器函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>过滤器返回true表示接受该日志，false表示拒绝。 </p>
+
+</div>
+</div>
+<a id="ad61dfa82a2953138ac21bac32de1e76b" name="ad61dfa82a2953138ac21bac32de1e76b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad61dfa82a2953138ac21bac32de1e76b">&#9670;&#160;</a></span>set_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::set_level </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___logging.html#gaa5a9053636a30269210c54e734e0d583">LOG_LEVEL</a></td>          <td class="paramname"><span class="paramname"><em>level</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置日志级别 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>新的日志级别</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>低于此级别的日志将被忽略。 </p>
+
+</div>
+</div>
+<a id="add2ab5e5a609ed985fea57f08c5339c0" name="add2ab5e5a609ed985fea57f08c5339c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add2ab5e5a609ed985fea57f08c5339c0">&#9670;&#160;</a></span>trace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::trace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录TRACE级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00187">187</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="log__event_8hpp_source.html#l00034">TRACE</a>.</p>
+
+</div>
+</div>
+<a id="a4c7c282cf9a88235db72a7804c377e8c" name="a4c7c282cf9a88235db72a7804c377e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c7c282cf9a88235db72a7804c377e8c">&#9670;&#160;</a></span>warn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logger::warn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>记录WARN级别日志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>日志消息 </td></tr>
+    <tr><td class="paramname">file</td><td>源文件名 </td></tr>
+    <tr><td class="paramname">func</td><td>函数名 </td></tr>
+    <tr><td class="paramname">line</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="logger_8hpp_source.html">logger.hpp</a> 第 <a class="el" href="logger_8hpp_source.html#l00220">220</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#ab60290adc63a7f00e22aa528175e60ac">log()</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="log__event_8hpp_source.html#l00037">WARN</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="logger_8hpp_source.html">logger.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classlogger.html">logger</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

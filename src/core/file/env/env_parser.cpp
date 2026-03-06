@@ -1,6 +1,6 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/env/env_parser.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/env/env_parser.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 void env_parser::skip_whitespace() noexcept {
     while (pos_ < len_ && (text_[pos_] == ' ' || text_[pos_] == '	')) {
@@ -195,7 +195,7 @@ void env_parser::parse_line(const string& line) const {
     string name;
     unique_ptr<env_variable> variable;
     if (parse_variable_line(line, name, variable)) {
-        root_->add_variable(name, _MSTL move(variable));
+        root_->add_variable(name, _NEFORCE move(variable));
     }
 }
 
@@ -214,7 +214,7 @@ unique_ptr<env_document> env_parser::parse() {
         parse_line(line);
     }
 
-    return _MSTL move(root_);
+    return _NEFORCE move(root_);
 }
 
 optional<unique_ptr<env_document>> env_parser::try_parse() {
@@ -225,4 +225,4 @@ optional<unique_ptr<env_document>> env_parser::try_parse() {
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

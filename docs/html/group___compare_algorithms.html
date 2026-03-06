@@ -1,0 +1,1724 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 比较算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___compare_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">比较算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>比较算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga036b36b8a9c1e27a0552d0534da786da" id="r_ga036b36b8a9c1e27a0552d0534da786da"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga036b36b8a9c1e27a0552d0534da786da template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga036b36b8a9c1e27a0552d0534da786da">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2)))</td></tr>
+<tr class="memdesc:ga036b36b8a9c1e27a0552d0534da786da"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:ga30ce5b72d86c71092da113c7703b0cd9" id="r_ga30ce5b72d86c71092da113c7703b0cd9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga30ce5b72d86c71092da113c7703b0cd9 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga30ce5b72d86c71092da113c7703b0cd9">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> equal(first1, last1, first2, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structequal__to.html">equal_to</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator1 &gt; &gt;())))</td></tr>
+<tr class="memdesc:ga30ce5b72d86c71092da113c7703b0cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:ga65b86622c1e8805c6d4511950105672c" id="r_ga65b86622c1e8805c6d4511950105672c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga65b86622c1e8805c6d4511950105672c template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga65b86622c1e8805c6d4511950105672c">equal_range</a> (Iterator first, Iterator last, const T &amp;value, Compare comp)</td></tr>
+<tr class="memdesc:ga65b86622c1e8805c6d4511950105672c"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
+<tr class="memitem:gac30be768f6bc7c5ca6d488a61f2335ba" id="r_gac30be768f6bc7c5ca6d488a61f2335ba"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
+<tr class="memitem:gac30be768f6bc7c5ca6d488a61f2335ba template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac30be768f6bc7c5ca6d488a61f2335ba">equal_range</a> (Iterator first, Iterator last, const T &amp;value)</td></tr>
+<tr class="memdesc:gac30be768f6bc7c5ca6d488a61f2335ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
+<tr class="memitem:ga01c48c11cc5d3222cb2e3adf0f843f3e" id="r_ga01c48c11cc5d3222cb2e3adf0f843f3e"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga01c48c11cc5d3222cb2e3adf0f843f3e template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a> (const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
+<tr class="memdesc:ga01c48c11cc5d3222cb2e3adf0f843f3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较大者  <br /></td></tr>
+<tr class="memitem:ga153f43401447b5e3e172c42e6461b926" id="r_ga153f43401447b5e3e172c42e6461b926"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga153f43401447b5e3e172c42e6461b926 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga153f43401447b5e3e172c42e6461b926">max</a> (const T &amp;a, const T &amp;b) noexcept(noexcept(a&lt; b))</td></tr>
+<tr class="memdesc:ga153f43401447b5e3e172c42e6461b926"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较大者  <br /></td></tr>
+<tr class="memitem:gabf4803a4eaf181e17a6893b2aea9a4c5" id="r_gabf4803a4eaf181e17a6893b2aea9a4c5"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:gabf4803a4eaf181e17a6893b2aea9a4c5 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gabf4803a4eaf181e17a6893b2aea9a4c5">min</a> (const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(b, a)))</td></tr>
+<tr class="memdesc:gabf4803a4eaf181e17a6893b2aea9a4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较小者  <br /></td></tr>
+<tr class="memitem:gaf9b881461c8e7da079e090bf6760a6d1" id="r_gaf9b881461c8e7da079e090bf6760a6d1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf9b881461c8e7da079e090bf6760a6d1 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaf9b881461c8e7da079e090bf6760a6d1">min</a> (const T &amp;a, const T &amp;b) noexcept(noexcept(b&lt; a))</td></tr>
+<tr class="memdesc:gaf9b881461c8e7da079e090bf6760a6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较小者  <br /></td></tr>
+<tr class="memitem:ga69873b0598cc28f930d89d2930e78f85" id="r_ga69873b0598cc28f930d89d2930e78f85"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga69873b0598cc28f930d89d2930e78f85 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga69873b0598cc28f930d89d2930e78f85">median</a> (const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
+<tr class="memdesc:ga69873b0598cc28f930d89d2930e78f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:gabbd04f7b10b553579113f5f424c6ee9e" id="r_gabbd04f7b10b553579113f5f424c6ee9e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabbd04f7b10b553579113f5f424c6ee9e template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gabbd04f7b10b553579113f5f424c6ee9e">median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> median(a, b, c, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
+<tr class="memdesc:gabbd04f7b10b553579113f5f424c6ee9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:ga93f642042bfad29f941dc8f66c12ecaf" id="r_ga93f642042bfad29f941dc8f66c12ecaf"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga93f642042bfad29f941dc8f66c12ecaf template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga93f642042bfad29f941dc8f66c12ecaf">minmax</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga93f642042bfad29f941dc8f66c12ecaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
+<tr class="memitem:ga61158fd40dfd86ed5f3fc4834f321fed" id="r_ga61158fd40dfd86ed5f3fc4834f321fed"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga61158fd40dfd86ed5f3fc4834f321fed template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga61158fd40dfd86ed5f3fc4834f321fed">minmax</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga61158fd40dfd86ed5f3fc4834f321fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小值和最大值  <br /></td></tr>
+<tr class="memitem:ga3cc3e298f8ce7cca7211883311e56b5e" id="r_ga3cc3e298f8ce7cca7211883311e56b5e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3cc3e298f8ce7cca7211883311e56b5e template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga3cc3e298f8ce7cca7211883311e56b5e">max_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga3cc3e298f8ce7cca7211883311e56b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
+<tr class="memitem:gaa226ea8eefb93332e43e44ab173c650e" id="r_gaa226ea8eefb93332e43e44ab173c650e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaa226ea8eefb93332e43e44ab173c650e template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gaa226ea8eefb93332e43e44ab173c650e">max_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gaa226ea8eefb93332e43e44ab173c650e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
+<tr class="memitem:ga21bf5779df2939ac7e9bbf2fa016798c" id="r_ga21bf5779df2939ac7e9bbf2fa016798c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga21bf5779df2939ac7e9bbf2fa016798c template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga21bf5779df2939ac7e9bbf2fa016798c">max</a> (std::initializer_list&lt; T &gt; <a class="el" href="classlist.html">list</a>)</td></tr>
+<tr class="memdesc:ga21bf5779df2939ac7e9bbf2fa016798c"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最大值  <br /></td></tr>
+<tr class="memitem:ga3e7d0df68e92c6f3efa9ad08941c0912" id="r_ga3e7d0df68e92c6f3efa9ad08941c0912"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3e7d0df68e92c6f3efa9ad08941c0912 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga3e7d0df68e92c6f3efa9ad08941c0912">min_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga3e7d0df68e92c6f3efa9ad08941c0912"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
+<tr class="memitem:ga4ee266bd70d4abf25afc39fe5eb8ac53" id="r_ga4ee266bd70d4abf25afc39fe5eb8ac53"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga4ee266bd70d4abf25afc39fe5eb8ac53 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga4ee266bd70d4abf25afc39fe5eb8ac53">min_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga4ee266bd70d4abf25afc39fe5eb8ac53"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最小元素  <br /></td></tr>
+<tr class="memitem:ga69a55cc167f3341fffddaffc0686dc2a" id="r_ga69a55cc167f3341fffddaffc0686dc2a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga69a55cc167f3341fffddaffc0686dc2a template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga69a55cc167f3341fffddaffc0686dc2a">min</a> (std::initializer_list&lt; T &gt; <a class="el" href="classlist.html">list</a>)</td></tr>
+<tr class="memdesc:ga69a55cc167f3341fffddaffc0686dc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回初始化列表中的最小值  <br /></td></tr>
+<tr class="memitem:ga99bb01978c10c89f43e747fa2dfaecd7" id="r_ga99bb01978c10c89f43e747fa2dfaecd7"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga99bb01978c10c89f43e747fa2dfaecd7 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga99bb01978c10c89f43e747fa2dfaecd7">minmax_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga99bb01978c10c89f43e747fa2dfaecd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
+<tr class="memitem:ga4bf98caed4f28cf09092e830792d143a" id="r_ga4bf98caed4f28cf09092e830792d143a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga4bf98caed4f28cf09092e830792d143a template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4bf98caed4f28cf09092e830792d143a">minmax_element</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga4bf98caed4f28cf09092e830792d143a"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
+<tr class="memitem:ga6adb4308a8ce2f67f21bf8b2599fa4ad" id="r_ga6adb4308a8ce2f67f21bf8b2599fa4ad"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga6adb4308a8ce2f67f21bf8b2599fa4ad template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga6adb4308a8ce2f67f21bf8b2599fa4ad">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper, Compare comp) noexcept(noexcept(comp(value, lower)))</td></tr>
+<tr class="memdesc:ga6adb4308a8ce2f67f21bf8b2599fa4ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:gaed82ddbf10f93f2a7912dea29587ea4d" id="r_gaed82ddbf10f93f2a7912dea29587ea4d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaed82ddbf10f93f2a7912dea29587ea4d template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaed82ddbf10f93f2a7912dea29587ea4d">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> clamp(value, lower, upper, <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structless.html">less</a>&lt; T &gt;())))</td></tr>
+<tr class="memdesc:gaed82ddbf10f93f2a7912dea29587ea4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:gac2a7bf2e648cdd3aeb26ac994c4cc026" id="r_gac2a7bf2e648cdd3aeb26ac994c4cc026"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac2a7bf2e648cdd3aeb26ac994c4cc026 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#gac2a7bf2e648cdd3aeb26ac994c4cc026">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))</td></tr>
+<tr class="memdesc:gac2a7bf2e648cdd3aeb26ac994c4cc026"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:ga8b23344007862fb7f8c57cb7e8ef9faa" id="r_ga8b23344007862fb7f8c57cb7e8ef9faa"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8b23344007862fb7f8c57cb7e8ef9faa template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga8b23344007862fb7f8c57cb7e8ef9faa">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __lexicographical_compare_aux(first1, last1, first2, last2)))</td></tr>
+<tr class="memdesc:ga8b23344007862fb7f8c57cb7e8ef9faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
+<tr class="memitem:ga59e483a83ea490570027f614657e74b8" id="r_ga59e483a83ea490570027f614657e74b8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga59e483a83ea490570027f614657e74b8 template"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ga59e483a83ea490570027f614657e74b8">mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Compare comp)</td></tr>
+<tr class="memdesc:ga59e483a83ea490570027f614657e74b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
+<tr class="memitem:ga16ccb89e351ec10651b7c27d3bdc9c37" id="r_ga16ccb89e351ec10651b7c27d3bdc9c37"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga16ccb89e351ec10651b7c27d3bdc9c37 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga16ccb89e351ec10651b7c27d3bdc9c37">mismatch</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2)</td></tr>
+<tr class="memdesc:ga16ccb89e351ec10651b7c27d3bdc9c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找两个范围中首个不匹配的元素  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>比较算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gaed82ddbf10f93f2a7912dea29587ea4d" name="gaed82ddbf10f93f2a7912dea29587ea4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaed82ddbf10f93f2a7912dea29587ea4d">&#9670;&#160;</a></span>clamp() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; clamp </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>lower</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>upper</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将值限制在指定范围内 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要限制的值 </td></tr>
+    <tr><td class="paramname">lower</td><td>下限值 </td></tr>
+    <tr><td class="paramname">upper</td><td>上限值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>限制后的值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00440">440</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00422">clamp()</a>.</p>
+
+</div>
+</div>
+<a id="ga6adb4308a8ce2f67f21bf8b2599fa4ad" name="ga6adb4308a8ce2f67f21bf8b2599fa4ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6adb4308a8ce2f67f21bf8b2599fa4ad">&#9670;&#160;</a></span>clamp() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Compare&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; clamp </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>lower</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>upper</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将值限制在指定范围内 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要限制的值 </td></tr>
+    <tr><td class="paramname">lower</td><td>下限值 </td></tr>
+    <tr><td class="paramname">upper</td><td>上限值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>限制后的值</dd></dl>
+<p>将 value 限制在 [lower, upper] 范围内：</p><ul>
+<li>如果 value &lt; lower，返回 lower</li>
+<li>如果 value &gt; upper，返回 upper</li>
+<li>否则返回 value</li>
+</ul>
+<p>要求 lower &lt;= upper </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00422">422</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00440">clamp()</a>.</p>
+
+</div>
+</div>
+<a id="ga30ce5b72d86c71092da113c7703b0cd9" name="ga30ce5b72d86c71092da113c7703b0cd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga30ce5b72d86c71092da113c7703b0cd9">&#9670;&#160;</a></span>equal() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD constexpr bool equal </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>比较两个范围是否相等 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个范围相等则返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00067">67</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00049">equal()</a>.</p>
+
+</div>
+</div>
+<a id="ga036b36b8a9c1e27a0552d0534da786da" name="ga036b36b8a9c1e27a0552d0534da786da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga036b36b8a9c1e27a0552d0534da786da">&#9670;&#160;</a></span>equal() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD constexpr bool equal </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryPredicate</td>          <td class="paramname"><span class="paramname"><em>binary_pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>比较两个范围是否相等 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryPredicate</td><td>二元谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">binary_pred</td><td>相等性谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个范围相等则返回true，否则返回false</dd></dl>
+<p>比较范围 [first1, last1) 和以 first2 开始的范围是否相等。 使用二元谓词 binary_pred 判断两个元素是否相等。 要求第二个范围至少与第一个范围一样长。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00049">49</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00067">equal()</a>, <a class="el" href="array_8hpp_source.html#l00448">array&lt; T, Size &gt;::operator==()</a>, <a class="el" href="bitmap_8hpp_source.html#l01158">bitmap::operator==()</a>, <a class="el" href="deque_8hpp_source.html#l01499">deque&lt; T, Alloc, BufSize &gt;::operator==()</a>, <a class="el" href="list_8hpp_source.html#l01087">list&lt; T, Alloc &gt;::operator==()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01546">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01253">vector&lt; byte_t &gt;::operator==()</a>.</p>
+
+</div>
+</div>
+<a id="gac30be768f6bc7c5ca6d488a61f2335ba" name="gac30be768f6bc7c5ca6d488a61f2335ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac30be768f6bc7c5ca6d488a61f2335ba">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt; equal_range </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找值的相等范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">value</td><td>要查找的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含相等范围的pair&lt;起始迭代器, 结束迭代器&gt; </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00122">122</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00087">equal_range()</a>.</p>
+
+</div>
+</div>
+<a id="ga65b86622c1e8805c6d4511950105672c" name="ga65b86622c1e8805c6d4511950105672c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga65b86622c1e8805c6d4511950105672c">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt; equal_range </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找值的相等范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">value</td><td>要查找的值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含相等范围的pair&lt;起始迭代器, 结束迭代器&gt;</dd></dl>
+<p>在已排序的范围 [first, last) 中查找所有等于 value 的元素。 返回的pair包含相等范围的 [起始, 结束) 迭代器。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00087">87</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00090">advance()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="search_8hpp_source.html#l00037">lower_bound()</a> , 以及 <a class="el" href="search_8hpp_source.html#l00087">upper_bound()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00122">equal_range()</a>.</p>
+
+</div>
+</div>
+<a id="ga8b23344007862fb7f8c57cb7e8ef9faa" name="ga8b23344007862fb7f8c57cb7e8ef9faa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b23344007862fb7f8c57cb7e8ef9faa">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD constexpr bool lexicographical_compare </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>字典序比较两个范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果第一个范围字典序小于第二个范围则返回true，否则返回false</dd></dl>
+<p>对连续迭代器进行优化，使用内存比较提高性能。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00543">543</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+</div>
+</div>
+<a id="gac2a7bf2e648cdd3aeb26ac994c4cc026" name="gac2a7bf2e648cdd3aeb26ac994c4cc026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2a7bf2e648cdd3aeb26ac994c4cc026">&#9670;&#160;</a></span>lexicographical_compare() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD constexpr bool lexicographical_compare </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>last2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>字典序比较两个范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">last2</td><td>第二个范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果第一个范围字典序小于第二个范围则返回true，否则返回false</dd></dl>
+<p>比较范围 [first1, last1) 和 [first2, last2) 的字典序：</p><ol type="1">
+<li>比较对应元素，直到找到不相等的元素</li>
+<li>第一个范围的元素小于第二个范围的对应元素时返回true</li>
+<li>所有对应元素都相等，但第一个范围较短时返回true </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00465">465</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00456">array&lt; T, Size &gt;::operator&lt;()</a>, <a class="el" href="bitmap_8hpp_source.html#l01168">bitmap::operator&lt;()</a>, <a class="el" href="deque_8hpp_source.html#l01509">deque&lt; T, Alloc, BufSize &gt;::operator&lt;()</a>, <a class="el" href="hashtable_8hpp_source.html#l01368">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator&lt;()</a>, <a class="el" href="list_8hpp_source.html#l01097">list&lt; T, Alloc &gt;::operator&lt;()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01556">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator&lt;()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01263">vector&lt; byte_t &gt;::operator&lt;()</a>.</p>
+
+</div>
+</div>
+<a id="ga153f43401447b5e3e172c42e6461b926" name="ga153f43401447b5e3e172c42e6461b926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga153f43401447b5e3e172c42e6461b926">&#9670;&#160;</a></span>max() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; max </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回两个值中的较大者 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a和b中的较大者 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00154">154</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga01c48c11cc5d3222cb2e3adf0f843f3e" name="ga01c48c11cc5d3222cb2e3adf0f843f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga01c48c11cc5d3222cb2e3adf0f843f3e">&#9670;&#160;</a></span>max() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Compare&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; max </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回两个值中的较大者 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a和b中的较大者</dd></dl>
+<p>使用比较函数 comp 判断大小：</p><ul>
+<li>如果 comp(a, b) 返回 true，则 b 较大</li>
+<li>否则 a 较大 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00141">141</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00801">allocate_shared()</a>, <a class="el" href="basic__string_8hpp_source.html#l00777">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00738">make_shared()</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00110">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00101">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00218">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00208">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00061">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00073">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00183">random_mt::next_int()</a>, <a class="el" href="classrandom__mt.html#a8c694174037ef836a33063c5399dcc5f">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00246">secret::next_int()</a>, <a class="el" href="classsecret.html#a349824b70b51e399f70c774f67c316bb">secret::next_int()</a>, <a class="el" href="hashtable_8hpp_source.html#l00876">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="vector_8hpp_source.html#l00817">vector&lt; byte_t &gt;::reserve()</a> , 以及 <a class="el" href="variant_8hpp_source.html#l00558">variant&lt; Types &gt;::swap()</a>.</p>
+
+</div>
+</div>
+<a id="ga21bf5779df2939ac7e9bbf2fa016798c" name="ga21bf5779df2939ac7e9bbf2fa016798c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga21bf5779df2939ac7e9bbf2fa016798c">&#9670;&#160;</a></span>max() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; max </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>list</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回初始化列表中的最大值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列表中的最大值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00323">323</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>.</p>
+
+</div>
+</div>
+<a id="gaa226ea8eefb93332e43e44ab173c650e" name="gaa226ea8eefb93332e43e44ab173c650e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa226ea8eefb93332e43e44ab173c650e">&#9670;&#160;</a></span>max_element() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator max_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最大元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00312">312</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga3cc3e298f8ce7cca7211883311e56b5e" name="ga3cc3e298f8ce7cca7211883311e56b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3cc3e298f8ce7cca7211883311e56b5e">&#9670;&#160;</a></span>max_element() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator max_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最大元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的迭代器，如果范围为空则返回first</dd></dl>
+<p>查找范围 [first, last) 中的最大元素。 如果有多个最大元素，返回第一个遇到的。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00296">296</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00323">max()</a>, <a class="el" href="compare_8hpp_source.html#l00312">max_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+
+</div>
+</div>
+<a id="gabbd04f7b10b553579113f5f424c6ee9e" name="gabbd04f7b10b553579113f5f424c6ee9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabbd04f7b10b553579113f5f424c6ee9e">&#9670;&#160;</a></span>median() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; median </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回三个值的中位数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+    <tr><td class="paramname">c</td><td>第三个值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a、b、c中的中位数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00232">232</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00205">median()</a>.</p>
+
+</div>
+</div>
+<a id="ga69873b0598cc28f930d89d2930e78f85" name="ga69873b0598cc28f930d89d2930e78f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69873b0598cc28f930d89d2930e78f85">&#9670;&#160;</a></span>median() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Compare&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; median </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回三个值的中位数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+    <tr><td class="paramname">c</td><td>第三个值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a、b、c中的中位数</dd></dl>
+<p>使用比较函数 comp 确定三个值的中位数。 最多进行3次比较。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00205">205</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00317">introspective_sort()</a>, <a class="el" href="compare_8hpp_source.html#l00232">median()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00489">nth_element()</a>.</p>
+
+</div>
+</div>
+<a id="gaf9b881461c8e7da079e090bf6760a6d1" name="gaf9b881461c8e7da079e090bf6760a6d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf9b881461c8e7da079e090bf6760a6d1">&#9670;&#160;</a></span>min() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; min </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回两个值中的较小者 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a和b中的较小者 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00186">186</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gabf4803a4eaf181e17a6893b2aea9a4c5" name="gabf4803a4eaf181e17a6893b2aea9a4c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabf4803a4eaf181e17a6893b2aea9a4c5">&#9670;&#160;</a></span>min() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Compare&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; min </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回两个值中的较小者 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个值 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>a和b中的较小者</dd></dl>
+<p>使用比较函数 comp 判断大小：</p><ul>
+<li>如果 comp(b, a) 返回 true，则 b 较小</li>
+<li>否则 a 较小 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00173">173</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01664">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01631">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01027">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="char__traits_8hpp_source.html#l00357">char_traits_compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00692">char_traits_find_last_not_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00542">char_traits_find_last_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00424">char_traits_rfind()</a>, <a class="el" href="char__traits_8hpp_source.html#l00449">char_traits_rfind_char()</a>, <a class="el" href="char__traits_8hpp_source.html#l00750">char_traits_rfind_not_char()</a>, <a class="el" href="basic__string_8hpp_source.html#l02163">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l01989">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01976">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00101">random_lcd::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00208">random_mt::next_double()</a>, <a class="el" href="random_8hpp_source.html#l00073">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00183">random_mt::next_int()</a>, <a class="el" href="classsecret.html#a349824b70b51e399f70c774f67c316bb">secret::next_int()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00139">select_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02130">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00517">tim_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02150">basic_string&lt; char &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00769">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00759">vector&lt; byte_t &gt;::view()</a>.</p>
+
+</div>
+</div>
+<a id="ga69a55cc167f3341fffddaffc0686dc2a" name="ga69a55cc167f3341fffddaffc0686dc2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69a55cc167f3341fffddaffc0686dc2a">&#9670;&#160;</a></span>min() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; min </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>list</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回初始化列表中的最小值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列表中的最小值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00368">368</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="list_8hpp_source.html#l00383">list&lt; T, Alloc &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; T, Alloc &gt;::end()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga4ee266bd70d4abf25afc39fe5eb8ac53" name="ga4ee266bd70d4abf25afc39fe5eb8ac53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4ee266bd70d4abf25afc39fe5eb8ac53">&#9670;&#160;</a></span>min_element() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator min_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最小元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00357">357</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga3e7d0df68e92c6f3efa9ad08941c0912" name="ga3e7d0df68e92c6f3efa9ad08941c0912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e7d0df68e92c6f3efa9ad08941c0912">&#9670;&#160;</a></span>min_element() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator min_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最小元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器，如果范围为空则返回first</dd></dl>
+<p>查找范围 [first, last) 中的最小元素。 如果有多个最小元素，返回第一个遇到的。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00341">341</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00368">min()</a>, <a class="el" href="compare_8hpp_source.html#l00357">min_element()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga61158fd40dfd86ed5f3fc4834f321fed" name="ga61158fd40dfd86ed5f3fc4834f321fed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61158fd40dfd86ed5f3fc4834f321fed">&#9670;&#160;</a></span>minmax() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt; minmax </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最小值和最大值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含最小值和最大值的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00278">278</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00252">minmax()</a>.</p>
+
+</div>
+</div>
+<a id="ga93f642042bfad29f941dc8f66c12ecaf" name="ga93f642042bfad29f941dc8f66c12ecaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga93f642042bfad29f941dc8f66c12ecaf">&#9670;&#160;</a></span>minmax() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt; constexpr minmax </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找范围中的最小值和最大值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含最小值和最大值的pair</dd></dl>
+<p>同时查找范围 [first, last) 中的最小值和最大值。 如果范围为空，返回默认构造的pair。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00252">252</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00278">minmax()</a>.</p>
+
+</div>
+</div>
+<a id="ga4bf98caed4f28cf09092e830792d143a" name="ga4bf98caed4f28cf09092e830792d143a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4bf98caed4f28cf09092e830792d143a">&#9670;&#160;</a></span>minmax_element() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt; minmax_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>同时查找范围中的最小和最大元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;指向最小元素的迭代器, 指向最大元素的迭代器&gt; </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00399">399</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00385">minmax_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga99bb01978c10c89f43e747fa2dfaecd7" name="ga99bb01978c10c89f43e747fa2dfaecd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga99bb01978c10c89f43e747fa2dfaecd7">&#9670;&#160;</a></span>minmax_element() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt; minmax_element </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>同时查找范围中的最小和最大元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;指向最小元素的迭代器, 指向最大元素的迭代器&gt;</dd></dl>
+<p>同时查找范围 [first, last) 中的最小和最大元素。 如果范围为空，两个迭代器都指向first。 </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00385">385</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>, <a class="el" href="compare_8hpp_source.html#l00141">max()</a>, <a class="el" href="compare_8hpp_source.html#l00296">max_element()</a>, <a class="el" href="compare_8hpp_source.html#l00173">min()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00341">min_element()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ext__sort_8hpp_source.html#l00312">bucket_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00282">bucket_sort_less()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00225">counting_sort()</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00399">minmax_element()</a>.</p>
+
+</div>
+</div>
+<a id="ga16ccb89e351ec10651b7c27d3bdc9c37" name="ga16ccb89e351ec10651b7c27d3bdc9c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga16ccb89e351ec10651b7c27d3bdc9c37">&#9670;&#160;</a></span>mismatch() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; mismatch </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找两个范围中首个不匹配的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt; </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00585">585</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="compare_8hpp_source.html#l00568">mismatch()</a>.</p>
+
+</div>
+</div>
+<a id="ga59e483a83ea490570027f614657e74b8" name="ga59e483a83ea490570027f614657e74b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59e483a83ea490570027f614657e74b8">&#9670;&#160;</a></span>mismatch() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; constexpr mismatch </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找两个范围中首个不匹配的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt;</dd></dl>
+<p>比较范围 [first1, last1) 和以 first2 开始的范围， 返回第一个不满足 comp(*it1, *it2) 的位置。 如果所有对应元素都满足谓词，返回 pair&lt;last1, first2 + (last1 - first1)&gt; </p>
+
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00568">568</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00448">make_pair()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00585">mismatch()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

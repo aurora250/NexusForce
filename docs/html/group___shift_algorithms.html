@@ -1,0 +1,1957 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 修改算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___shift_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">修改算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>移位和修改算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga0c879898e7c6083eb3b23a8e7e5c59f5" id="r_ga0c879898e7c6083eb3b23a8e7e5c59f5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga0c879898e7c6083eb3b23a8e7e5c59f5 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga0c879898e7c6083eb3b23a8e7e5c59f5">copy</a> (Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __copy_aux(first, last, result)))</td></tr>
+<tr class="memdesc:ga0c879898e7c6083eb3b23a8e7e5c59f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制范围元素  <br /></td></tr>
+<tr class="memitem:gaf9836032be2bd0295ae2a4ed4dd5ace9" id="r_gaf9836032be2bd0295ae2a4ed4dd5ace9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf9836032be2bd0295ae2a4ed4dd5ace9 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf9836032be2bd0295ae2a4ed4dd5ace9">copy_n</a> (Iterator1 first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, Iterator2 result)</td></tr>
+<tr class="memdesc:gaf9836032be2bd0295ae2a4ed4dd5ace9"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制指定数量的元素  <br /></td></tr>
+<tr class="memitem:ga67989ef667ba7bc077104bcbd66957f0" id="r_ga67989ef667ba7bc077104bcbd66957f0"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Pred&gt; </td></tr>
+<tr class="memitem:ga67989ef667ba7bc077104bcbd66957f0 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga67989ef667ba7bc077104bcbd66957f0">copy_if</a> (Iterator1 first, Iterator1 last, Iterator2 result, Pred pred)</td></tr>
+<tr class="memdesc:ga67989ef667ba7bc077104bcbd66957f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制满足谓词的元素  <br /></td></tr>
+<tr class="memitem:gab80e03c7d3a15005c73569c911556d71" id="r_gab80e03c7d3a15005c73569c911556d71"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab80e03c7d3a15005c73569c911556d71 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gab80e03c7d3a15005c73569c911556d71">copy_backward</a> (Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __copy_backward_aux(first, last, result)))</td></tr>
+<tr class="memdesc:gab80e03c7d3a15005c73569c911556d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向复制范围元素  <br /></td></tr>
+<tr class="memitem:ga6755e7b2dc828b8cfde67b5dd45c3e8a" id="r_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga6755e7b2dc828b8cfde67b5dd45c3e8a template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a> (Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __move_aux(first, last, result)))</td></tr>
+<tr class="memdesc:ga6755e7b2dc828b8cfde67b5dd45c3e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动范围元素  <br /></td></tr>
+<tr class="memitem:ga94a2c2b5af901fdbfa8af2f06b7152e6" id="r_ga94a2c2b5af901fdbfa8af2f06b7152e6"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga94a2c2b5af901fdbfa8af2f06b7152e6 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga94a2c2b5af901fdbfa8af2f06b7152e6">move_backward</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:ga94a2c2b5af901fdbfa8af2f06b7152e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向移动范围元素  <br /></td></tr>
+<tr class="memitem:gaf5945283d037f38202d8de8766c84467" id="r_gaf5945283d037f38202d8de8766c84467"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf5945283d037f38202d8de8766c84467 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#gaf5945283d037f38202d8de8766c84467">fill</a> (Iterator first, Iterator last, const T &amp;value) noexcept(is_nothrow_assignable_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, T &gt;)</td></tr>
+<tr class="memdesc:gaf5945283d037f38202d8de8766c84467"><td class="mdescLeft">&#160;</td><td class="mdescRight">填充范围元素  <br /></td></tr>
+<tr class="memitem:ga92d51dc7fd2c34cc77ffd15c33af4e7b" id="r_ga92d51dc7fd2c34cc77ffd15c33af4e7b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga92d51dc7fd2c34cc77ffd15c33af4e7b template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga92d51dc7fd2c34cc77ffd15c33af4e7b">fill_n</a> (Iterator first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n, const T &amp;value) noexcept(is_nothrow_assignable_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt;, T &gt;)</td></tr>
+<tr class="memdesc:ga92d51dc7fd2c34cc77ffd15c33af4e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">填充指定数量的元素  <br /></td></tr>
+<tr class="memitem:ga151971a7781537166e3cbc15d28b0557" id="r_ga151971a7781537166e3cbc15d28b0557"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga151971a7781537166e3cbc15d28b0557 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga151971a7781537166e3cbc15d28b0557">iter_swap</a> (Iterator1 a, Iterator2 b) noexcept(noexcept(<a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="group___unique_pointer.html#ga3def886ee466fc780671110b23c22e0d">swap</a>(*a, *b)))</td></tr>
+<tr class="memdesc:ga151971a7781537166e3cbc15d28b0557"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换迭代器指向的元素  <br /></td></tr>
+<tr class="memitem:gabe60078b667654dbeb1ab6580fc7a217" id="r_gabe60078b667654dbeb1ab6580fc7a217"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gabe60078b667654dbeb1ab6580fc7a217 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gabe60078b667654dbeb1ab6580fc7a217">swap_ranges</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2)</td></tr>
+<tr class="memdesc:gabe60078b667654dbeb1ab6580fc7a217"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个范围的元素  <br /></td></tr>
+<tr class="memitem:gaef3b3752cc4bad5b4ddaa284f12f5828" id="r_gaef3b3752cc4bad5b4ddaa284f12f5828"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Function, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaef3b3752cc4bad5b4ddaa284f12f5828 template"><td class="memItemLeft">constexpr Function&#160;</td><td class="memItemRight"><a class="el" href="#gaef3b3752cc4bad5b4ddaa284f12f5828">for_each</a> (Iterator first, Iterator last, Function f)</td></tr>
+<tr class="memdesc:gaef3b3752cc4bad5b4ddaa284f12f5828"><td class="mdescLeft">&#160;</td><td class="mdescRight">对范围元素应用函数  <br /></td></tr>
+<tr class="memitem:ga062575eef30cce84db8b7f8bc81a0e9d" id="r_ga062575eef30cce84db8b7f8bc81a0e9d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Function, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga062575eef30cce84db8b7f8bc81a0e9d template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga062575eef30cce84db8b7f8bc81a0e9d">for_each_n</a> (Iterator first, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n, Function f)</td></tr>
+<tr class="memdesc:ga062575eef30cce84db8b7f8bc81a0e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">对指定数量的元素应用函数  <br /></td></tr>
+<tr class="memitem:gaa1ab84080d07c2cfb0b0c76809e2b790" id="r_gaa1ab84080d07c2cfb0b0c76809e2b790"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaa1ab84080d07c2cfb0b0c76809e2b790 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#gaa1ab84080d07c2cfb0b0c76809e2b790">generate</a> (Iterator first, Iterator last, Generator gen)</td></tr>
+<tr class="memdesc:gaa1ab84080d07c2cfb0b0c76809e2b790"><td class="mdescLeft">&#160;</td><td class="mdescRight">用生成器的值填充范围  <br /></td></tr>
+<tr class="memitem:ga90dadfc896ddfb828253d77fe5ef1a61" id="r_ga90dadfc896ddfb828253d77fe5ef1a61"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga90dadfc896ddfb828253d77fe5ef1a61 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga90dadfc896ddfb828253d77fe5ef1a61">generate_n</a> (Iterator first, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n, Generator gen)</td></tr>
+<tr class="memdesc:ga90dadfc896ddfb828253d77fe5ef1a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">用生成器的值填充指定数量的元素  <br /></td></tr>
+<tr class="memitem:ga5895f126b88d01e49718c95eb44cb54b" id="r_ga5895f126b88d01e49718c95eb44cb54b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga5895f126b88d01e49718c95eb44cb54b template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga5895f126b88d01e49718c95eb44cb54b">replace_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;old_value, const T &amp;new_value)</td></tr>
+<tr class="memdesc:ga5895f126b88d01e49718c95eb44cb54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">替换并复制元素  <br /></td></tr>
+<tr class="memitem:ga8b09d51ebb2fa81f97440946d71c6806" id="r_ga8b09d51ebb2fa81f97440946d71c6806"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Predicate, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8b09d51ebb2fa81f97440946d71c6806 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga8b09d51ebb2fa81f97440946d71c6806">replace_copy_if</a> (Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred, const T &amp;new_value)</td></tr>
+<tr class="memdesc:ga8b09d51ebb2fa81f97440946d71c6806"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据谓词替换并复制元素  <br /></td></tr>
+<tr class="memitem:ga55154a1e62192c0e9344e3a51ccc874f" id="r_ga55154a1e62192c0e9344e3a51ccc874f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga55154a1e62192c0e9344e3a51ccc874f template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga55154a1e62192c0e9344e3a51ccc874f">replace</a> (Iterator first, Iterator last, const T &amp;old_value, const T &amp;new_value)</td></tr>
+<tr class="memdesc:ga55154a1e62192c0e9344e3a51ccc874f"><td class="mdescLeft">&#160;</td><td class="mdescRight">替换范围元素  <br /></td></tr>
+<tr class="memitem:gaf51226e95cfb4d69ea140775ad96691c" id="r_gaf51226e95cfb4d69ea140775ad96691c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf51226e95cfb4d69ea140775ad96691c template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#gaf51226e95cfb4d69ea140775ad96691c">replace_if</a> (Iterator first, Iterator last, Predicate pred, const T &amp;new_value)</td></tr>
+<tr class="memdesc:gaf51226e95cfb4d69ea140775ad96691c"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据谓词替换范围元素  <br /></td></tr>
+<tr class="memitem:ga65795dc50dbe67e95955d9701d9753ea" id="r_ga65795dc50dbe67e95955d9701d9753ea"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga65795dc50dbe67e95955d9701d9753ea template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga65795dc50dbe67e95955d9701d9753ea">reverse</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga65795dc50dbe67e95955d9701d9753ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">反转范围元素顺序  <br /></td></tr>
+<tr class="memitem:gaafa05ee40b57af1f57912bbc1f69b0ae" id="r_gaafa05ee40b57af1f57912bbc1f69b0ae"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaafa05ee40b57af1f57912bbc1f69b0ae template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#gaafa05ee40b57af1f57912bbc1f69b0ae">rotate</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:gaafa05ee40b57af1f57912bbc1f69b0ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">旋转范围元素  <br /></td></tr>
+<tr class="memitem:ga20ccff2d3feb36be7aac6e65c3fd131d" id="r_ga20ccff2d3feb36be7aac6e65c3fd131d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga20ccff2d3feb36be7aac6e65c3fd131d template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga20ccff2d3feb36be7aac6e65c3fd131d">rotate_copy</a> (Iterator1 first, Iterator1 middle, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:ga20ccff2d3feb36be7aac6e65c3fd131d"><td class="mdescLeft">&#160;</td><td class="mdescRight">旋转并复制元素  <br /></td></tr>
+<tr class="memitem:ga1f882f1e5b60286d45d5246f264bb980" id="r_ga1f882f1e5b60286d45d5246f264bb980"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_default_constructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1f882f1e5b60286d45d5246f264bb980 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga1f882f1e5b60286d45d5246f264bb980">shift_left</a> (Iterator first, Iterator last, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n)</td></tr>
+<tr class="memdesc:ga1f882f1e5b60286d45d5246f264bb980"><td class="mdescLeft">&#160;</td><td class="mdescRight">向左移位  <br /></td></tr>
+<tr class="memitem:ga8c48f4df36598b4cf7781449c9ee78f8" id="r_ga8c48f4df36598b4cf7781449c9ee78f8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_default_constructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8c48f4df36598b4cf7781449c9ee78f8 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga8c48f4df36598b4cf7781449c9ee78f8">shift_right</a> (Iterator first, Iterator last, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n)</td></tr>
+<tr class="memdesc:ga8c48f4df36598b4cf7781449c9ee78f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">向右移位  <br /></td></tr>
+<tr class="memitem:gaf74fb6288b592e5ac9b1fdd28a2265a3" id="r_gaf74fb6288b592e5ac9b1fdd28a2265a3"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename UnaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf74fb6288b592e5ac9b1fdd28a2265a3 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gaf74fb6288b592e5ac9b1fdd28a2265a3">transform</a> (Iterator1 first, Iterator1 last, Iterator2 result, UnaryOperation op) noexcept(noexcept(++first) &amp;&amp;noexcept(++result) &amp;&amp;noexcept(*result=op(*first)))</td></tr>
+<tr class="memdesc:gaf74fb6288b592e5ac9b1fdd28a2265a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">对范围元素应用一元变换  <br /></td></tr>
+<tr class="memitem:ga1e89ea15beb86d2cb38dd0fff0abdcfd" id="r_ga1e89ea15beb86d2cb38dd0fff0abdcfd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1e89ea15beb86d2cb38dd0fff0abdcfd template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#ga1e89ea15beb86d2cb38dd0fff0abdcfd">transform</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator3 result, BinaryOperation binary_op) noexcept(noexcept(++first1) &amp;&amp;noexcept(first2) &amp;&amp;noexcept(++result) &amp;&amp;noexcept(*result=binary_op(*first1, *first2)))</td></tr>
+<tr class="memdesc:ga1e89ea15beb86d2cb38dd0fff0abdcfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">对两个范围元素应用二元变换  <br /></td></tr>
+<tr class="memitem:ga95649ec1530e8ff2e2bab56d961ddc54" id="r_ga95649ec1530e8ff2e2bab56d961ddc54"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga95649ec1530e8ff2e2bab56d961ddc54 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#ga95649ec1530e8ff2e2bab56d961ddc54">unique_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result, BinaryPredicate binary_pred)</td></tr>
+<tr class="memdesc:ga95649ec1530e8ff2e2bab56d961ddc54"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制唯一元素  <br /></td></tr>
+<tr class="memitem:gabb53c1ce754dcdb62ab7891781a7bd81" id="r_gabb53c1ce754dcdb62ab7891781a7bd81"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:gabb53c1ce754dcdb62ab7891781a7bd81 template"><td class="memItemLeft">constexpr Iterator2&#160;</td><td class="memItemRight"><a class="el" href="#gabb53c1ce754dcdb62ab7891781a7bd81">unique_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result)</td></tr>
+<tr class="memdesc:gabb53c1ce754dcdb62ab7891781a7bd81"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制唯一元素（使用相等比较）  <br /></td></tr>
+<tr class="memitem:ga33e0487e679163c7746ed6d8faab3df9" id="r_ga33e0487e679163c7746ed6d8faab3df9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga33e0487e679163c7746ed6d8faab3df9 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga33e0487e679163c7746ed6d8faab3df9">unique</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga33e0487e679163c7746ed6d8faab3df9"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除连续重复元素  <br /></td></tr>
+<tr class="memitem:ga04bd91ece3d6126c4894c2cf5f136d5d" id="r_ga04bd91ece3d6126c4894c2cf5f136d5d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga04bd91ece3d6126c4894c2cf5f136d5d template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga04bd91ece3d6126c4894c2cf5f136d5d">unique</a> (Iterator first, Iterator last, BinaryPredicate binary_pred)</td></tr>
+<tr class="memdesc:ga04bd91ece3d6126c4894c2cf5f136d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据谓词移除连续重复元素  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>移位和修改算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga0c879898e7c6083eb3b23a8e7e5c59f5" name="ga0c879898e7c6083eb3b23a8e7e5c59f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0c879898e7c6083eb3b23a8e7e5c59f5">&#9670;&#160;</a></span>copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>将范围 [first, last) 的元素复制到以 result 开始的位置。 对连续迭代器使用内存移动优化，非连续迭代器使用循环复制。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00083">83</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00212">array&lt; T, Size &gt;::array()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00225">counting_sort()</a>, <a class="el" href="deque_8hpp_source.html#l01381">deque&lt; T, Alloc, BufSize &gt;::erase()</a>, <a class="el" href="deque_8hpp_source.html#l01362">deque&lt; T, Alloc, BufSize &gt;::erase()</a>, <a class="el" href="merge_8hpp_source.html#l00045">merge()</a>, <a class="el" href="deque_8hpp_source.html#l00889">deque&lt; T, Alloc, BufSize &gt;::operator=()</a>, <a class="el" href="vector_8hpp_source.html#l00566">vector&lt; byte_t &gt;::operator=()</a>, <a class="el" href="shift_8hpp_source.html#l00789">rotate_copy()</a>, <a class="el" href="algorithm_2set_8hpp_source.html#l00109">set_difference()</a>, <a class="el" href="algorithm_2set_8hpp_source.html#l00143">set_symmetric_difference()</a>, <a class="el" href="algorithm_2set_8hpp_source.html#l00042">set_union()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00806">shift_left()</a>.</p>
+
+</div>
+</div>
+<a id="gab80e03c7d3a15005c73569c911556d71" name="gab80e03c7d3a15005c73569c911556d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab80e03c7d3a15005c73569c911556d71">&#9670;&#160;</a></span>copy_backward()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 copy_backward </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>反向复制范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围起始</dd></dl>
+<p>将范围 [first, last) 的元素反向复制到以 result-1 开始向前的位置。 用于处理目标范围与源范围重叠的情况。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00225">225</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01381">deque&lt; T, Alloc, BufSize &gt;::erase()</a>, <a class="el" href="deque_8hpp_source.html#l01362">deque&lt; T, Alloc, BufSize &gt;::erase()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00273">insertion_sort()</a>.</p>
+
+</div>
+</div>
+<a id="ga67989ef667ba7bc077104bcbd66957f0" name="ga67989ef667ba7bc077104bcbd66957f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga67989ef667ba7bc077104bcbd66957f0">&#9670;&#160;</a></span>copy_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 copy_if </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制满足谓词的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">Pred</td><td>一元谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">pred</td><td>一元谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>复制范围 [first, last) 中满足谓词 unary_pred 的所有元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00158">158</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf9836032be2bd0295ae2a4ed4dd5ace9" name="gaf9836032be2bd0295ae2a4ed4dd5ace9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf9836032be2bd0295ae2a4ed4dd5ace9">&#9670;&#160;</a></span>copy_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; Iterator1, Iterator2 &gt; copy_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制指定数量的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入起始迭代器 </td></tr>
+    <tr><td class="paramname">count</td><td>要复制的元素数量 </td></tr>
+    <tr><td class="paramname">result</td><td>输出起始迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>pair&lt;输入结束迭代器, 输出结束迭代器&gt;</dd></dl>
+<p>从 first 开始复制 count 个元素到 result。 返回复制后的输入和输出结束迭代器。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00140">140</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a> , 以及 <a class="el" href="search_8hpp_source.html#l00350">count()</a>.</p>
+
+</div>
+</div>
+<a id="gaf5945283d037f38202d8de8766c84467" name="gaf5945283d037f38202d8de8766c84467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5945283d037f38202d8de8766c84467">&#9670;&#160;</a></span>fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>填充范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">value</td><td>要填充的值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的所有元素设置为 value。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00360">360</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l00969">vector&lt; byte_t &gt;::assign()</a>, <a class="el" href="bitmap_8hpp_source.html#l00692">bitmap::bitmap()</a>, <a class="el" href="bitmap_8hpp_source.html#l00704">bitmap::bitmap()</a>, <a class="el" href="bloom__filter_8hpp_source.html#l00246">bloom_filter&lt; T, Hash &gt;::clear()</a>, <a class="el" href="bitmap_8hpp_source.html#l01056">bitmap::insert()</a>, <a class="el" href="vector_8hpp_source.html#l01076">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00433">radix_sort_greater()</a> , 以及 <a class="el" href="ext__sort_8hpp_source.html#l00387">radix_sort_less()</a>.</p>
+
+</div>
+</div>
+<a id="ga92d51dc7fd2c34cc77ffd15c33af4e7b" name="ga92d51dc7fd2c34cc77ffd15c33af4e7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga92d51dc7fd2c34cc77ffd15c33af4e7b">&#9670;&#160;</a></span>fill_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator fill_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>填充指定数量的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>要填充的元素数量 </td></tr>
+    <tr><td class="paramname">value</td><td>要填充的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>填充后的结束迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00377">377</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l00969">vector&lt; byte_t &gt;::assign()</a> , 以及 <a class="el" href="array_8hpp_source.html#l00430">array&lt; T, Size &gt;::fill()</a>.</p>
+
+</div>
+</div>
+<a id="gaef3b3752cc4bad5b4ddaa284f12f5828" name="gaef3b3752cc4bad5b4ddaa284f12f5828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaef3b3752cc4bad5b4ddaa284f12f5828">&#9670;&#160;</a></span>for_each()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Function, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Function for_each </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function</td>          <td class="paramname"><span class="paramname"><em>f</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对范围元素应用函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Function</td><td>函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">f</td><td>要应用的函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>传入的函数对象</dd></dl>
+<p>对范围 [first, last) 的每个元素应用函数 f。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00435">435</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga062575eef30cce84db8b7f8bc81a0e9d" name="ga062575eef30cce84db8b7f8bc81a0e9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga062575eef30cce84db8b7f8bc81a0e9d">&#9670;&#160;</a></span>for_each_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Function, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator for_each_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function</td>          <td class="paramname"><span class="paramname"><em>f</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对指定数量的元素应用函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Function</td><td>函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>要处理的元素数量 </td></tr>
+    <tr><td class="paramname">f</td><td>要应用的函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>处理后的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00452">452</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa1ab84080d07c2cfb0b0c76809e2b790" name="gaa1ab84080d07c2cfb0b0c76809e2b790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa1ab84080d07c2cfb0b0c76809e2b790">&#9670;&#160;</a></span>generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void generate </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Generator</td>          <td class="paramname"><span class="paramname"><em>gen</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>用生成器的值填充范围 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Generator</td><td>生成器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">gen</td><td>生成器函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>对范围 [first, last) 的每个元素调用 gen() 并赋值。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00472">472</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga90dadfc896ddfb828253d77fe5ef1a61" name="ga90dadfc896ddfb828253d77fe5ef1a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga90dadfc896ddfb828253d77fe5ef1a61">&#9670;&#160;</a></span>generate_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Generator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator generate_n </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Generator</td>          <td class="paramname"><span class="paramname"><em>gen</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>用生成器的值填充指定数量的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Generator</td><td>生成器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">n</td><td>要填充的元素数量 </td></tr>
+    <tr><td class="paramname">gen</td><td>生成器函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>填充后的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00488">488</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga151971a7781537166e3cbc15d28b0557" name="ga151971a7781537166e3cbc15d28b0557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga151971a7781537166e3cbc15d28b0557">&#9670;&#160;</a></span>iter_swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iter_swap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换迭代器指向的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个迭代器 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>交换两个迭代器指向的元素的值。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00397">397</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00034">adjust_leonardo_heap()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00036">bubble_sort()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00081">cocktail_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00083">lomuto_partition()</a>, <a class="el" href="permutation_8hpp_source.html#l00110">next_permutation()</a>, <a class="el" href="partition_8hpp_source.html#l00040">partition()</a>, <a class="el" href="permutation_8hpp_source.html#l00165">prev_permutation()</a>, <a class="el" href="sort_8hpp_source.html#l00364">quick_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02311">basic_string&lt; char &gt;::reverse()</a>, <a class="el" href="shift_8hpp_source.html#l00632">reverse()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00139">select_sort()</a>, <a class="el" href="shuffle_8hpp_source.html#l00034">shuffle()</a>, <a class="el" href="shuffle_8hpp_source.html#l00063">shuffle()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00415">swap_ranges()</a>.</p>
+
+</div>
+</div>
+<a id="ga6755e7b2dc828b8cfde67b5dd45c3e8a" name="ga6755e7b2dc828b8cfde67b5dd45c3e8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6755e7b2dc828b8cfde67b5dd45c3e8a">&#9670;&#160;</a></span>move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 move </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束迭代器</dd></dl>
+<p>将范围 [first, last) 的元素移动到以 result 开始的位置。 移动后源位置的对象状态是未定义的。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00285">285</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="env__builder_8hpp_source.html#l00197">env_builder::add()</a>, <a class="el" href="env__builder_8hpp_source.html#l00189">env_builder::add()</a>, <a class="el" href="env__value_8hpp_source.html#l00312">env_document::add_comment()</a>, <a class="el" href="json__value_8hpp_source.html#l00414">json_array::add_element()</a>, <a class="el" href="toml__value_8hpp_source.html#l00523">toml_array::add_element()</a>, <a class="el" href="json__value_8hpp_source.html#l00341">json_object::add_member()</a>, <a class="el" href="toml__value_8hpp_source.html#l00607">toml_table::add_member()</a>, <a class="el" href="ini__value_8hpp_source.html#l00241">ini_section::add_property()</a>, <a class="el" href="ini__value_8hpp_source.html#l00383">ini_document::add_section()</a>, <a class="el" href="timer_8hpp_source.html#l00154">timer_scheduler&lt; Clock &gt;::add_task()</a>, <a class="el" href="env__value_8hpp_source.html#l00244">env_document::add_variable()</a>, <a class="el" href="trace__memory_8hpp_source.html#l00117">trace_allocator&lt; U &gt;::allocate()</a>, <a class="el" href="optional_8hpp_source.html#l00640">optional&lt; T &gt;::and_then()</a>, <a class="el" href="optional_8hpp_source.html#l00626">optional&lt; T &gt;::and_then()</a>, <a class="el" href="optional_8hpp_source.html#l01160">optional&lt; T &amp; &gt;::and_then()</a>, <a class="el" href="optional_8hpp_source.html#l01148">optional&lt; T &amp; &gt;::and_then()</a>, <a class="el" href="basic__string_8hpp_source.html#l01678">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01689">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01869">basic_string&lt; char &gt;::assign()</a>, <a class="el" href="async_8hpp_source.html#l00038">async()</a>, <a class="el" href="generator_8hpp_source.html#l00595">task&lt; T &gt;::awaiter::await_resume()</a>, <a class="el" href="barrier_8hpp_source.html#l00244">barrier&lt; CmplFunc &gt;::barrier()</a>, <a class="el" href="basic__string_8hpp_source.html#l00876">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="bitmap_8hpp_source.html#l00731">bitmap::bitmap()</a>, <a class="el" href="check__type_8hpp_source.html#l00392">check_type()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00066">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00213">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair()</a>, <a class="el" href="signals_8hpp_source.html#l00439">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00457">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00427">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00634">signal&lt; Types &gt;::connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00581">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00607">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00661">signal&lt; Types &gt;::connect_transformed()</a>, <a class="el" href="http__constants_8hpp_source.html#l00323">HTTP_CONTENT::content()</a>, <a class="el" href="http__constants_8hpp_source.html#l00547">HTTP_COOKIE_NAME::cookie_name()</a>, <a class="el" href="logger_8hpp_source.html#l00198">logger::debug()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00972">dynamic_pointer_cast()</a>, <a class="el" href="exception__ptr_8hpp_source.html#l00129">exception_ptr::ecb::ecb()</a>, <a class="el" href="signals_8hpp_source.html#l00509">signal&lt; Types &gt;::emit_executor()</a>, <a class="el" href="vector_8hpp_source.html#l00871">vector&lt; byte_t &gt;::emplace()</a>, <a class="el" href="env__value_8hpp_source.html#l00124">env_variable::env_variable()</a>, <a class="el" href="vector_8hpp_source.html#l01140">vector&lt; byte_t &gt;::erase()</a>, <a class="el" href="logger_8hpp_source.html#l00231">logger::error()</a>, <a class="el" href="type__traits_8hpp_source.html#l04073">exchange()</a>, <a class="el" href="logger_8hpp_source.html#l00242">logger::fatal()</a>, <a class="el" href="file_8hpp_source.html#l00209">file::file()</a>, <a class="el" href="generator_8hpp_source.html#l00451">generator&lt; T &gt;::fold()</a>, <a class="el" href="future_8hpp_source.html#l00932">future&lt; Res &gt;::get()</a>, <a class="el" href="array_8hpp_source.html#l00666">get()</a>, <a class="el" href="array_8hpp_source.html#l00680">get()</a>, <a class="el" href="generator_8hpp_source.html#l00680">task&lt; T &gt;::get()</a>, <a class="el" href="hashtable_8hpp_source.html#l00675">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::hashtable()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00111">hazard_pointer_obj&lt; T, Deleter &gt;::hazard_pointer_obj()</a>, <a class="el" href="http__constants_8hpp_source.html#l00395">HTTP_METHOD::HTTP_METHOD()</a>, <a class="el" href="logger_8hpp_source.html#l00209">logger::info()</a>, <a class="el" href="ini__parser_8hpp_source.html#l00137">ini_parser::ini_parser()</a>, <a class="el" href="deque_8hpp_source.html#l01302">deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00667">list&lt; T, Alloc &gt;::insert()</a>, <a class="el" href="map_8hpp_source.html#l00395">map&lt; Key, T, Compare, Alloc &gt;::insert()</a>, <a class="el" href="map_8hpp_source.html#l00363">map&lt; Key, T, Compare, Alloc &gt;::insert()</a>, <a class="el" href="multimap_8hpp_source.html#l00393">multimap&lt; Key, T, Compare, Alloc &gt;::insert()</a>, <a class="el" href="multimap_8hpp_source.html#l00361">multimap&lt; Key, T, Compare, Alloc &gt;::insert()</a>, <a class="el" href="multiset_8hpp_source.html#l00335">multiset&lt; Key, Compare, Alloc &gt;::insert()</a>, <a class="el" href="multiset_8hpp_source.html#l00303">multiset&lt; Key, Compare, Alloc &gt;::insert()</a>, <a class="el" href="container_2set_8hpp_source.html#l00336">set&lt; Key, Compare, Alloc &gt;::insert()</a>, <a class="el" href="container_2set_8hpp_source.html#l00304">set&lt; Key, Compare, Alloc &gt;::insert()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00416">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert()</a>, <a class="el" href="unordered__multiset_8hpp_source.html#l00416">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert()</a>, <a class="el" href="vector_8hpp_source.html#l01034">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="hashtable_8hpp_source.html#l00988">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01292">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01235">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>, <a class="el" href="hashtable_8hpp_source.html#l00970">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01192">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01131">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>, <a class="el" href="exception__ptr_8hpp_source.html#l00332">exception_ptr::make_exception_ptr</a>, <a class="el" href="reverse__iterator_8hpp_source.html#l00384">make_reverse_iterator()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00738">make_shared()</a>, <a class="el" href="map_8hpp_source.html#l00131">map&lt; Key, T, Compare, Alloc &gt;::map()</a>, <a class="el" href="http__constants_8hpp_source.html#l00432">HTTP_METHOD::method()</a>, <a class="el" href="multimap_8hpp_source.html#l00130">multimap&lt; Key, T, Compare, Alloc &gt;::multimap()</a>, <a class="el" href="multiset_8hpp_source.html#l00104">multiset&lt; Key, Compare, Alloc &gt;::multiset()</a>, <a class="el" href="bind_8hpp_source.html#l00928">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00941">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()()</a>, <a class="el" href="optional_8hpp_source.html#l00737">optional&lt; T &gt;::operator*()</a>, <a class="el" href="optional_8hpp_source.html#l00731">optional&lt; T &gt;::operator*()</a>, <a class="el" href="basic__string_8hpp_source.html#l01831">basic_string&lt; char &gt;::operator+=()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00062">back_insert_iterator&lt; Container &gt;::operator=()</a>, <a class="el" href="basic__string_8hpp_source.html#l00907">basic_string&lt; char &gt;::operator=()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00075">compressed_pair&lt; IfEmpty, T, Compressed &gt;::operator=()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00056">compressed_pair&lt; IfEmpty, T, Compressed &gt;::operator=()</a>, <a class="el" href="compressed__pair_8hpp_source.html#l00224">compressed_pair&lt; IfEmpty, T, false &gt;::operator=()</a>, <a class="el" href="exception__ptr_8hpp_source.html#l00231">exception_ptr::operator=()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00129">front_insert_iterator&lt; Container &gt;::operator=()</a>, <a class="el" href="function_8hpp_source.html#l00392">function&lt; Res(Args...)&gt;::operator=()</a>, <a class="el" href="future_8hpp_source.html#l00922">future&lt; Res &gt;::operator=()</a>, <a class="el" href="http__constants_8hpp_source.html#l00250">HTTP_CONTENT::operator=()</a>, <a class="el" href="http__constants_8hpp_source.html#l00505">HTTP_COOKIE_NAME::operator=()</a>, <a class="el" href="http__constants_8hpp_source.html#l00368">HTTP_METHOD::operator=()</a>, <a class="el" href="http__constants_8hpp_source.html#l00403">HTTP_METHOD::operator=()</a>, <a class="el" href="insert__iterator_8hpp_source.html#l00199">insert_iterator&lt; Container &gt;::operator=()</a>, <a class="el" href="map_8hpp_source.html#l00140">map&lt; Key, T, Compare, Alloc &gt;::operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00139">multimap&lt; Key, T, Compare, Alloc &gt;::operator=()</a>, <a class="el" href="multiset_8hpp_source.html#l00113">multiset&lt; Key, Compare, Alloc &gt;::operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00348">optional&lt; T &gt;::operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00315">optional&lt; T &gt;::operator=()</a>, <a class="el" href="optional_8hpp_source.html#l00182">optional&lt; T &gt;::operator=()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00083">packaged_task&lt; Res(Args...)&gt;::operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00082">promise&lt; Res &gt;::operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00198">promise&lt; Res &amp; &gt;::operator=()</a>, <a class="el" href="promise_8hpp_source.html#l00308">promise&lt; void &gt;::operator=()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00956">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=()</a>, <a class="el" href="signals_8hpp_source.html#l00153">scoped_connection::operator=()</a>, <a class="el" href="scoped__thread_8hpp_source.html#l00129">scoped_thread::operator=()</a>, <a class="el" href="container_2set_8hpp_source.html#l00113">set&lt; Key, Compare, Alloc &gt;::operator=()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00129">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00130">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=()</a>, <a class="el" href="unordered__multiset_8hpp_source.html#l00130">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=()</a>, <a class="el" href="unordered__set_8hpp_source.html#l00128">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=()</a>, <a class="el" href="map_8hpp_source.html#l00550">map&lt; Key, T, Compare, Alloc &gt;::operator[]()</a>, <a class="el" href="optional_8hpp_source.html#l00335">optional&lt; T &gt;::optional()</a>, <a class="el" href="optional_8hpp_source.html#l00285">optional&lt; T &gt;::optional()</a>, <a class="el" href="optional_8hpp_source.html#l00168">optional&lt; T &gt;::optional()</a>, <a class="el" href="optional_8hpp_source.html#l00584">optional&lt; T &gt;::or_else()</a>, <a class="el" href="optional_8hpp_source.html#l01112">optional&lt; T &amp; &gt;::or_else()</a>, <a class="el" href="pair_8hpp_source.html#l00302">pair&lt; const Key, T &gt;::pair()</a>, <a class="el" href="vector_8hpp_source.html#l00955">vector&lt; byte_t &gt;::pop_back_v()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00092">priority_queue&lt; T, Sequence, Compare &gt;::priority_queue()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00162">priority_queue&lt; T, Sequence, Compare &gt;::priority_queue()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00214">priority_queue&lt; T, Sequence, Compare &gt;::push()</a>, <a class="el" href="queue_8hpp_source.html#l00204">queue&lt; T, Sequence &gt;::push()</a>, <a class="el" href="stack_8hpp_source.html#l00140">stack&lt; T, Sequence &gt;::push()</a>, <a class="el" href="deque_8hpp_source.html#l01200">deque&lt; T, Alloc, BufSize &gt;::push_back()</a>, <a class="el" href="vector_8hpp_source.html#l00937">vector&lt; byte_t &gt;::push_back()</a>, <a class="el" href="deque_8hpp_source.html#l01208">deque&lt; T, Alloc, BufSize &gt;::push_front()</a>, <a class="el" href="queue_8hpp_source.html#l00071">queue&lt; T, Sequence &gt;::queue()</a>, <a class="el" href="rb__tree_8hpp_source.html#l00940">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rb_tree()</a>, <a class="el" href="console_8hpp_source.html#l00237">sys_console::read()</a>, <a class="el" href="console_8hpp_source.html#l00271">sys_console::readln()</a>, <a class="el" href="iplugin_8hpp_source.html#l00145">plugin_deleter::rebind()</a>, <a class="el" href="signals_8hpp_source.html#l00182">scoped_connection::release()</a>, <a class="el" href="basic__string_8hpp_source.html#l02117">basic_string&lt; char &gt;::repeat()</a>, <a class="el" href="bitmap_8hpp_source.html#l00979">bitmap::reserve()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00494">shared_ptr&lt; periodic_task_state &gt;::reset()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00390">unique_ptr&lt; iplugin, plugin_deleter &gt;::reset()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00595">unique_ptr&lt; T[], Deleter &gt;::reset()</a>, <a class="el" href="hazard__ptr_8hpp_source.html#l00285">hazard_pointer_domain::retire()</a>, <a class="el" href="generator_8hpp_source.html#l00553">task&lt; T &gt;::promise_type::return_value()</a>, <a class="el" href="reverse__iterator_8hpp_source.html#l00052">reverse_iterator&lt; Iterator &gt;::reverse_iterator()</a>, <a class="el" href="container_2set_8hpp_source.html#l00104">set&lt; Key, Compare, Alloc &gt;::set()</a>, <a class="el" href="ini__value_8hpp_source.html#l00234">ini_section::set_name()</a>, <a class="el" href="ini__value_8hpp_source.html#l00250">ini_section::set_property()</a>, <a class="el" href="env__value_8hpp_source.html#l00149">env_variable::set_value()</a>, <a class="el" href="ini__value_8hpp_source.html#l00149">ini_property::set_value()</a>, <a class="el" href="env__value_8hpp_source.html#l00255">env_document::set_variable()</a>, <a class="el" href="stack_8hpp_source.html#l00068">stack&lt; T, Sequence &gt;::stack()</a>, <a class="el" href="color_8hpp_source.html#l00600">color::swap()</a>, <a class="el" href="optional_8hpp_source.html#l00804">optional&lt; T &gt;::swap()</a>, <a class="el" href="type__traits_8hpp_source.html#l04050">swap()</a>, <a class="el" href="icharacter_8hpp_source.html#l00171">to_string&lt; char &gt;()</a>, <a class="el" href="icharacter_8hpp_source.html#l00370">to_u16string&lt; char16_t &gt;()</a>, <a class="el" href="icharacter_8hpp_source.html#l00435">to_u32string&lt; char32_t &gt;()</a>, <a class="el" href="icharacter_8hpp_source.html#l00236">to_wstring&lt; wchar_t &gt;()</a>, <a class="el" href="logger_8hpp_source.html#l00187">logger::trace()</a>, <a class="el" href="optional_8hpp_source.html#l00696">optional&lt; T &gt;::transform()</a>, <a class="el" href="optional_8hpp_source.html#l00682">optional&lt; T &gt;::transform()</a>, <a class="el" href="optional_8hpp_source.html#l01208">optional&lt; T &amp; &gt;::transform()</a>, <a class="el" href="optional_8hpp_source.html#l01196">optional&lt; T &amp; &gt;::transform()</a>, <a class="el" href="barrier_8hpp_source.html#l00134">tree_barrier&lt; CmplFunc &gt;::tree_barrier()</a>, <a class="el" href="iobject_8hpp_source.html#l00052">iobject&lt; T &gt;::try_parse()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00120">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map()</a>, <a class="el" href="unordered__multimap_8hpp_source.html#l00121">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap()</a>, <a class="el" href="unordered__multiset_8hpp_source.html#l00121">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::unordered_multiset()</a>, <a class="el" href="unordered__set_8hpp_source.html#l00119">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::unordered_set()</a>, <a class="el" href="url_8hpp_source.html#l00053">url::url()</a>, <a class="el" href="json__builder_8hpp_source.html#l00301">json_builder::value()</a>, <a class="el" href="optional_8hpp_source.html#l00528">optional&lt; T &gt;::value()</a>, <a class="el" href="optional_8hpp_source.html#l00516">optional&lt; T &gt;::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00349">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00379">toml_builder::value()</a>, <a class="el" href="optional_8hpp_source.html#l00553">optional&lt; T &gt;::value_or()</a>, <a class="el" href="optional_8hpp_source.html#l01088">optional&lt; T &amp; &gt;::value_or()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00390">toml_builder::value_string()</a>, <a class="el" href="barrier_8hpp_source.html#l00263">barrier&lt; CmplFunc &gt;::wait()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00326">condition_variable::wait_for()</a>, <a class="el" href="logger_8hpp_source.html#l00220">logger::warn()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00061">packaged_task&lt; Res(Args...)&gt;::~packaged_task()</a>, <a class="el" href="promise_8hpp_source.html#l00095">promise&lt; Res &gt;::~promise()</a>, <a class="el" href="promise_8hpp_source.html#l00209">promise&lt; Res &amp; &gt;::~promise()</a>, <a class="el" href="promise_8hpp_source.html#l00319">promise&lt; void &gt;::~promise()</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00297">unique_ptr&lt; iplugin, plugin_deleter &gt;::~unique_ptr()</a>.</p>
+
+</div>
+</div>
+<a id="ga94a2c2b5af901fdbfa8af2f06b7152e6" name="ga94a2c2b5af901fdbfa8af2f06b7152e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga94a2c2b5af901fdbfa8af2f06b7152e6">&#9670;&#160;</a></span>move_backward()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 move_backward </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>反向移动范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围起始</dd></dl>
+<p>将范围 [first, last) 的元素反向移动到以 result-1 开始向前的位置。 用于处理目标范围与源范围重叠的情况。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00343">343</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="vector_8hpp_source.html#l00871">vector&lt; byte_t &gt;::emplace()</a>, <a class="el" href="vector_8hpp_source.html#l01120">vector&lt; byte_t &gt;::erase()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00835">shift_right()</a>.</p>
+
+</div>
+</div>
+<a id="ga55154a1e62192c0e9344e3a51ccc874f" name="ga55154a1e62192c0e9344e3a51ccc874f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga55154a1e62192c0e9344e3a51ccc874f">&#9670;&#160;</a></span>replace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void replace </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>old_value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>new_value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>替换范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">old_value</td><td>要替换的旧值 </td></tr>
+    <tr><td class="paramname">new_value</td><td>要替换的新值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 中等于 old_value 的所有元素替换为 new_value。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00557">557</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga5895f126b88d01e49718c95eb44cb54b" name="ga5895f126b88d01e49718c95eb44cb54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5895f126b88d01e49718c95eb44cb54b">&#9670;&#160;</a></span>replace_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 replace_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>old_value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>new_value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>替换并复制元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">old_value</td><td>要替换的旧值 </td></tr>
+    <tr><td class="paramname">new_value</td><td>要替换的新值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>将范围 [first, last) 的元素复制到 result，同时将等于 old_value 的元素替换为 new_value。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00512">512</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8b09d51ebb2fa81f97440946d71c6806" name="ga8b09d51ebb2fa81f97440946d71c6806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b09d51ebb2fa81f97440946d71c6806">&#9670;&#160;</a></span>replace_copy_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Predicate, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 replace_copy_if </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>new_value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据谓词替换并复制元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">Predicate</td><td>谓词类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">pred</td><td>替换谓词 </td></tr>
+    <tr><td class="paramname">new_value</td><td>要替换的新值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>将范围 [first, last) 的元素复制到 result，同时将满足 pred 的元素替换为 new_value。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00537">537</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf51226e95cfb4d69ea140775ad96691c" name="gaf51226e95cfb4d69ea140775ad96691c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf51226e95cfb4d69ea140775ad96691c">&#9670;&#160;</a></span>replace_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Predicate, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void replace_if </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>new_value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据谓词替换范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">Predicate</td><td>谓词类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">pred</td><td>替换谓词 </td></tr>
+    <tr><td class="paramname">new_value</td><td>要替换的新值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 中满足 pred 的所有元素替换为 new_value。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00578">578</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga65795dc50dbe67e95955d9701d9753ea" name="ga65795dc50dbe67e95955d9701d9753ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga65795dc50dbe67e95955d9701d9753ea">&#9670;&#160;</a></span>reverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reverse </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>反转范围元素顺序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的元素顺序反转。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00632">632</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="concepts_8hpp_source.html#l00620">is_ranges_rnd_iter_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="permutation_8hpp_source.html#l00110">next_permutation()</a> , 以及 <a class="el" href="permutation_8hpp_source.html#l00165">prev_permutation()</a>.</p>
+
+</div>
+</div>
+<a id="gaafa05ee40b57af1f57912bbc1f69b0ae" name="gaafa05ee40b57af1f57912bbc1f69b0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaafa05ee40b57af1f57912bbc1f69b0ae">&#9670;&#160;</a></span>rotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rotate </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>旋转范围元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>旋转中心 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 旋转，使 middle 成为新的第一个元素。 旋转后范围变为 [middle, last) + [first, middle)。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00770">770</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+</div>
+</div>
+<a id="ga20ccff2d3feb36be7aac6e65c3fd131d" name="ga20ccff2d3feb36be7aac6e65c3fd131d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga20ccff2d3feb36be7aac6e65c3fd131d">&#9670;&#160;</a></span>rotate_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 rotate_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>middle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>旋转并复制元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">middle</td><td>旋转中心 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>将旋转后的范围 [first, last) 复制到 result。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00789">789</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga1f882f1e5b60286d45d5246f264bb980" name="ga1f882f1e5b60286d45d5246f264bb980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f882f1e5b60286d45d5246f264bb980">&#9670;&#160;</a></span>shift_left()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_default_constructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shift_left </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向左移位 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">n</td><td>移位数量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的元素向左移动 n 个位置。 移出的元素用默认构造值填充。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00806">806</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00083">copy()</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00118">prev()</a>.</p>
+
+</div>
+</div>
+<a id="ga8c48f4df36598b4cf7781449c9ee78f8" name="ga8c48f4df36598b4cf7781449c9ee78f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8c48f4df36598b4cf7781449c9ee78f8">&#9670;&#160;</a></span>shift_right()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a>&lt; Iterator &gt; &amp;&amp;is_default_constructible_v&lt; <a class="el" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a>&lt; Iterator &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shift_right </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向右移位 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">n</td><td>移位数量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 的元素向右移动 n 个位置。 移出的元素用默认构造值填充。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00835">835</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="iterator_8hpp_source.html#l00170">distance()</a>, <a class="el" href="type__erase_8hpp_source.html#l00043">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04381">initialize()</a>, <a class="el" href="shift_8hpp_source.html#l00343">move_backward()</a>, <a class="el" href="iterator_8hpp_source.html#l00134">next()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00118">prev()</a>.</p>
+
+</div>
+</div>
+<a id="gabe60078b667654dbeb1ab6580fc7a217" name="gabe60078b667654dbeb1ab6580fc7a217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe60078b667654dbeb1ab6580fc7a217">&#9670;&#160;</a></span>swap_ranges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 swap_ranges </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个范围的元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个范围迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个范围迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>第二个范围结束迭代器</dd></dl>
+<p>交换范围 [first1, last1) 和以 first2 开始的范围的对应元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00415">415</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00397">iter_swap()</a>.</p>
+
+</div>
+</div>
+<a id="gaf74fb6288b592e5ac9b1fdd28a2265a3" name="gaf74fb6288b592e5ac9b1fdd28a2265a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf74fb6288b592e5ac9b1fdd28a2265a3">&#9670;&#160;</a></span>transform() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename UnaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 transform </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UnaryOperation</td>          <td class="paramname"><span class="paramname"><em>op</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对范围元素应用一元变换 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">UnaryOperation</td><td>一元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">op</td><td>一元操作函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>对范围 [first, last) 的每个元素应用 op，结果存储到 result。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00867">867</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00661">signal&lt; Types &gt;::connect_transformed()</a>, <a class="el" href="basic__string_8hpp_source.html#l02686">basic_string&lt; char &gt;::lowercase()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00433">radix_sort_greater()</a>, <a class="el" href="ext__sort_8hpp_source.html#l00387">radix_sort_less()</a>, <a class="el" href="parallel_8hpp_source.html#l00071">transform_reduce()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02694">basic_string&lt; char &gt;::uppercase()</a>.</p>
+
+</div>
+</div>
+<a id="ga1e89ea15beb86d2cb38dd0fff0abdcfd" name="ga1e89ea15beb86d2cb38dd0fff0abdcfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e89ea15beb86d2cb38dd0fff0abdcfd">&#9670;&#160;</a></span>transform() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename Iterator3, typename BinaryOperation, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator3 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator3 transform </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>first2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator3</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOperation</td>          <td class="paramname"><span class="paramname"><em>binary_op</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对两个范围元素应用二元变换 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>第一个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>第二个输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator3</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryOperation</td><td>二元操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first1</td><td>第一个输入范围起始 </td></tr>
+    <tr><td class="paramname">last1</td><td>第一个输入范围结束 </td></tr>
+    <tr><td class="paramname">first2</td><td>第二个输入范围起始 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">binary_op</td><td>二元操作函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>对范围 [first1, last1) 和以 first2 开始的范围的对应元素应用 binary_op， 结果存储到 result。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00893">893</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga33e0487e679163c7746ed6d8faab3df9" name="ga33e0487e679163c7746ed6d8faab3df9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga33e0487e679163c7746ed6d8faab3df9">&#9670;&#160;</a></span>unique() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator unique </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除连续重复元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>新逻辑结束迭代器</dd></dl>
+<p>移除范围 [first, last) 中连续的重复元素，保留每个重复组的第一个元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00956">956</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="search_8hpp_source.html#l00270">adjacent_find()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00922">unique_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga04bd91ece3d6126c4894c2cf5f136d5d" name="ga04bd91ece3d6126c4894c2cf5f136d5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04bd91ece3d6126c4894c2cf5f136d5d">&#9670;&#160;</a></span>unique() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator unique </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryPredicate</td>          <td class="paramname"><span class="paramname"><em>binary_pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据谓词移除连续重复元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryPredicate</td><td>二元谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束 </td></tr>
+    <tr><td class="paramname">binary_pred</td><td>相等性谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>新逻辑结束迭代器</dd></dl>
+<p>使用指定的二元谓词判断元素是否相等，移除连续的重复元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00973">973</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="search_8hpp_source.html#l00270">adjacent_find()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00922">unique_copy()</a>.</p>
+
+</div>
+</div>
+<a id="gabb53c1ce754dcdb62ab7891781a7bd81" name="gabb53c1ce754dcdb62ab7891781a7bd81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb53c1ce754dcdb62ab7891781a7bd81">&#9670;&#160;</a></span>unique_copy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 unique_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制唯一元素（使用相等比较） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00942">942</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00922">unique_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga95649ec1530e8ff2e2bab56d961ddc54" name="ga95649ec1530e8ff2e2bab56d961ddc54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga95649ec1530e8ff2e2bab56d961ddc54">&#9670;&#160;</a></span>unique_copy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator2 unique_copy </td>
+          <td>(</td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator1</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator2</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryPredicate</td>          <td class="paramname"><span class="paramname"><em>binary_pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制唯一元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator1</td><td>输入迭代器类型 </td></tr>
+    <tr><td class="paramname">Iterator2</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">BinaryPredicate</td><td>二元谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>输入范围起始 </td></tr>
+    <tr><td class="paramname">last</td><td>输入范围结束 </td></tr>
+    <tr><td class="paramname">result</td><td>输出范围起始 </td></tr>
+    <tr><td class="paramname">binary_pred</td><td>相等性谓词 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>输出范围结束</dd></dl>
+<p>复制范围 [first, last) 中的元素到 result，跳过连续的重复元素。 只有与前一个元素不重复的元素才会被复制。 </p>
+
+<p class="definition">在文件 <a class="el" href="shift_8hpp_source.html">shift.hpp</a> 第 <a class="el" href="shift_8hpp_source.html#l00922">922</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="shift_8hpp_source.html#l00956">unique()</a>, <a class="el" href="shift_8hpp_source.html#l00973">unique()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00942">unique_copy()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
-#include <MSTL/core/system/console.hpp>
-#include <MSTL/logging/log_sink.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/logging/log_sink.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 log_formatter::log_formatter(string pattern)
 : pattern_(move(pattern)) {
@@ -70,7 +70,7 @@ string log_formatter::resolve_placeholder(string ph, const log_event& event) con
 }
 
 void log_sink::set_formatter(unique_ptr<log_formatter> formatter) {
-    formatter_ = _MSTL move(formatter);
+    formatter_ = _NEFORCE move(formatter);
 }
 
 string console_sink::default_format(const log_event& ev) {
@@ -88,4 +88,4 @@ void console_sink::flush() {
     console.flush();
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

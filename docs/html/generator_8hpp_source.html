@@ -1,0 +1,939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: generator.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('generator_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">generator.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_GENERATOR_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_GENERATOR_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="coroutine_8hpp.html">NeForce/core/async/coroutine.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="exception__ptr_8hpp.html">NeForce/core/exception/exception_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="optional_8hpp.html">NeForce/core/utility/optional.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classcancellation__token.html">   23</a></span><span class="keyword">class </span><a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structcancellation__token_1_1check__awaiter.html">   31</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcancellation__token_1_1check__awaiter.html">check_awaiter</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">   32</a></span>        <span class="keyword">const</span> <a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a>* <a class="code hl_variable" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">token</a>;  </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798">   38</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798">await_ready</a>() const noexcept {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">token</a> &amp;&amp; <a class="code hl_variable" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">token</a>-&gt;is_cancelled();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab">   46</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab">await_suspend</a>(<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> h) <span class="keyword">const</span> <span class="keyword">noexcept</span> {}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d">   52</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d">await_resume</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">token</a> &amp;&amp; <a class="code hl_variable" href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">token</a>-&gt;is_cancelled()) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                throw_exception(<a class="code hl_struct" href="structexception.html">exception</a>(<span class="stringliteral">&quot;Operation cancelled&quot;</span>));</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    };</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">struct </span>state {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> cancelled{<span class="keyword">false</span>};   </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        atomic&lt;size_t&gt; ref_count{1};     </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    state* state_;  </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> release() {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span> (state_ &amp;&amp; state_-&gt;ref_count.fetch_sub(1, <a class="code hl_variable" href="group___memory_order.html#ga3b921278ed46859e35eae165a2f2e96d">memory_order_acq_rel</a>) == 1) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keyword">delete</span> state_;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">   79</a></span>    <a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a>()</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    : state_(new state()) {}</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7">   86</a></span>    <a class="code hl_function" href="classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7">cancellation_token</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a>&amp; other)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    : state_(other.state_) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">if</span> (state_) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            state_-&gt;ref_count.fetch_add(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9">   98</a></span>    <a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a>&amp; <a class="code hl_function" href="classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9">operator =</a>(<span class="keyword">const</span> <a class="code hl_function" href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token</a>&amp; other) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            release();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            state_ = other.state_;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">if</span> (state_) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                state_-&gt;ref_count.fetch_add(1, <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classcancellation__token.html#a8e560556afc7e861711e374069764bfc">  112</a></span>    <a class="code hl_function" href="classcancellation__token.html#a8e560556afc7e861711e374069764bfc">~cancellation_token</a>() {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        release();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classcancellation__token.html#a1c816b81662bc8177659073b145a9616">  119</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classcancellation__token.html#a1c816b81662bc8177659073b145a9616">cancel</a>() noexcept {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">if</span> (state_) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            state_-&gt;cancelled.store(<span class="keyword">true</span>, <a class="code hl_variable" href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
+</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d">  129</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d">is_cancelled</a>() const noexcept {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">return</span> state_ &amp;&amp; state_-&gt;cancelled.load(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5">  137</a></span>    <a class="code hl_struct" href="structcancellation__token_1_1check__awaiter.html">check_awaiter</a> <a class="code hl_function" href="classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5">check</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structcancellation__token_1_1check__awaiter.html">check_awaiter</a>{<span class="keyword">this</span>};</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>};</div>
+</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="};">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classgenerator.html">  152</a></span><span class="keyword">class </span><a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="};">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html">  158</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structgenerator_1_1promise__type.html">promise_type</a> {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4">  159</a></span>        <a class="code hl_class" href="classoptional.html">optional&lt;T&gt;</a> <a class="code hl_variable" href="structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4">current_value</a>;  </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#aa06b2a1a6c755d6f6056fdb0da186066">  160</a></span>        <a class="code hl_class" href="classexception__ptr.html">exception_ptr</a> <a class="code hl_variable" href="structgenerator_1_1promise__type.html#aa06b2a1a6c755d6f6056fdb0da186066">exception</a>;    </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#afc0b169ccb92470755768b8f740b44c7">  166</a></span>        <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> <a class="code hl_function" href="structgenerator_1_1promise__type.html#afc0b169ccb92470755768b8f740b44c7">get_return_object</a>() {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>{<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;::from_promise</a>(*<span class="keyword">this</span>)};</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }</div>
+</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#aed95a50722368ca9c6b475553e331c2a">  174</a></span>        <a class="code hl_struct" href="structsuspend__always.html">suspend_always</a> <a class="code hl_function" href="structgenerator_1_1promise__type.html#aed95a50722368ca9c6b475553e331c2a">initial_suspend</a>() noexcept { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#ae9d736767bfc21d8b1f7a4a98e38dff8">  180</a></span>        <a class="code hl_struct" href="structsuspend__always.html">suspend_always</a> <a class="code hl_function" href="structgenerator_1_1promise__type.html#ae9d736767bfc21d8b1f7a4a98e38dff8">final_suspend</a>() noexcept { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span></div>
+<div class="foldopen" id="foldopen00187" data-start="{" data-end="}">
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#a8c82b2d45c73631296c21d01c754b266">  187</a></span>        <a class="code hl_struct" href="structsuspend__always.html">suspend_always</a> <a class="code hl_function" href="structgenerator_1_1promise__type.html#a8c82b2d45c73631296c21d01c754b266">yield_value</a>(T value) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <a class="code hl_variable" href="structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4">current_value</a> = _NEFORCEmove(value);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
+</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#a43f2773994f02536927ca12d37ad528a">  195</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structgenerator_1_1promise__type.html#a43f2773994f02536927ca12d37ad528a">return_void</a>() noexcept {}</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span></div>
+<div class="foldopen" id="foldopen00200" data-start="{" data-end="}">
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="structgenerator_1_1promise__type.html#adae56dfd455e63193f90202e9fd67e52">  200</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structgenerator_1_1promise__type.html#adae56dfd455e63193f90202e9fd67e52">unhandled_exception</a>() {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <a class="code hl_variable" href="structgenerator_1_1promise__type.html#aa06b2a1a6c755d6f6056fdb0da186066">exception</a> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a>();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        }</div>
+</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    };</div>
+</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="foldopen" id="foldopen00209" data-start="{" data-end="};">
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html">  209</a></span>    <span class="keyword">struct </span><a class="code hl_function" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">iterator</a> {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keyword">using </span>iterator_category = <a class="code hl_struct" href="structinput__iterator__tag.html">input_iterator_tag</a>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keyword">using </span>value_type = T;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keyword">using </span>difference_type = <a class="code hl_typedef" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keyword">using </span>pointer = T*;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keyword">using </span>reference = T&amp;;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">  216</a></span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> <a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>;  </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">  221</a></span>        <a class="code hl_function" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">iterator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span></div>
+<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#ac0b71ccb94ce5853821103101d8104fd">  227</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#ac0b71ccb94ce5853821103101d8104fd">iterator</a>(<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        : <a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>(h) {}</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="foldopen" id="foldopen00234" data-start="{" data-end="}">
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#ae31bd496427c6d187a9afd5bad691921">  234</a></span>        <a class="code hl_function" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">iterator</a>&amp; <a class="code hl_function" href="structgenerator_1_1iterator.html#ae31bd496427c6d187a9afd5bad691921">operator ++</a>() {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>.resume();</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>.done()) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                <a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        }</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="foldopen" id="foldopen00245" data-start="{" data-end="}">
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#a27fbb1bed7bd4eb2bbbe158cbe1a5666">  245</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#ae31bd496427c6d187a9afd5bad691921">operator ++</a>(<span class="keywordtype">int</span>) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            ++(*this);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        }</div>
+</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
+<div class="foldopen" id="foldopen00253" data-start="{" data-end="}">
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#a1226c1f65215b7bb04a24f6aea3bf8c5">  253</a></span>        T&amp; <a class="code hl_function" href="structgenerator_1_1iterator.html#a1226c1f65215b7bb04a24f6aea3bf8c5">operator *</a>() const noexcept {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            NEFORCE_CONSTEXPR_ASSERT(<a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>.promise().current_value.has_value());</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordflow">return</span> *<a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>.promise().current_value;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        }</div>
+</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span></div>
+<div class="foldopen" id="foldopen00262" data-start="{" data-end="}">
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#acb23463d005b1a5246a1457dba742611">  262</a></span>        T* <a class="code hl_function" href="structgenerator_1_1iterator.html#acb23463d005b1a5246a1457dba742611">operator -&gt;</a>() const noexcept {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            <span class="keywordflow">return</span> &amp;(*<a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a>.promise().current_value);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        }</div>
+</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span></div>
+<div class="foldopen" id="foldopen00271" data-start="{" data-end="}">
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#a90319e961db3c0c96f9fdaa4345b2ad3">  271</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#a90319e961db3c0c96f9fdaa4345b2ad3">operator ==</a>(<span class="keyword">const</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">handle</a> == other.handle;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        }</div>
+</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span></div>
+<div class="foldopen" id="foldopen00280" data-start="{" data-end="}">
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="structgenerator_1_1iterator.html#a5df07d4ba62c8c45fe6d95a12d00eab5">  280</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#a5df07d4ba62c8c45fe6d95a12d00eab5">operator !=</a>(<span class="keyword">const</span> <a class="code hl_function" href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">iterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
+</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    };</div>
+</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> handle_;  </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">  293</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>(<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h)</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    : handle_(h) {}</div>
+</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span></div>
+<div class="foldopen" id="foldopen00300" data-start="{" data-end="}">
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="classgenerator.html#aa48ca8ad825e064655e761d732e65819">  300</a></span>    <a class="code hl_function" href="classgenerator.html#aa48ca8ad825e064655e761d732e65819">generator</a>(<a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    : handle_(other.handle_) {</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    }</div>
+</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span></div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="}">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25">  310</a></span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>&amp; <a class="code hl_function" href="classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25">operator =</a>(<a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                handle_.destroy();</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            }</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            handle_ = other.handle_;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        }</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    }</div>
+</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span></div>
+<div class="foldopen" id="foldopen00324" data-start="{" data-end="}">
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classgenerator.html#abb02336a640655e154ad36b3098d2089">  324</a></span>    <a class="code hl_function" href="classgenerator.html#abb02336a640655e154ad36b3098d2089">~generator</a>() {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>            handle_.destroy();</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        }</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    }</div>
+</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>(<span class="keyword">const</span> <a class="code hl_class" href="classgenerator.html">generator</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <a class="code hl_class" href="classgenerator.html">generator</a>&amp; <a class="code hl_function" href="classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25">operator =</a>(<span class="keyword">const</span> <a class="code hl_class" href="classgenerator.html">generator</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span></div>
+<div class="foldopen" id="foldopen00337" data-start="{" data-end="}">
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno"><a class="line" href="classgenerator.html#a93d1141d7d23880142c7c76ebccd9b72">  337</a></span>    <a class="code hl_class" href="structgenerator_1_1iterator.html">iterator</a> <a class="code hl_function" href="classgenerator.html#a93d1141d7d23880142c7c76ebccd9b72">begin</a>() {</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            handle_.resume();</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            <span class="keywordflow">if</span> (handle_.promise().exception) {</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(handle_.promise().exception);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            <span class="keywordflow">if</span> (handle_.done()) {</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="structgenerator_1_1iterator.html">iterator</a>{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>            }</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        }</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="structgenerator_1_1iterator.html">iterator</a>{handle_};</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    }</div>
+</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span></div>
+<div class="foldopen" id="foldopen00354" data-start="{" data-end="}">
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="classgenerator.html#ac71d240be5537e677c32f705a10e032c">  354</a></span>    <a class="code hl_class" href="structgenerator_1_1iterator.html">iterator</a> <a class="code hl_function" href="classgenerator.html#ac71d240be5537e677c32f705a10e032c">end</a>() {</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="structgenerator_1_1iterator.html">iterator</a>{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    }</div>
+</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
+<div class="foldopen" id="foldopen00365" data-start="{" data-end="}">
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno"><a class="line" href="classgenerator.html#a78f3cce891b72e1fbe4c095c60853277">  365</a></span>    <a class="code hl_typedef" href="group___invoke_result.html#ga94f3f930be3994abb39153e17a724b1a">invoke_result_t&lt;F, T&gt;</a> <a class="code hl_function" href="classgenerator.html#a78f3cce891b72e1fbe4c095c60853277">map</a>(F&amp;&amp; func) {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            <span class="keyword">co_yield</span> func(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        }</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    }</div>
+</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span></div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="foldopen" id="foldopen00378" data-start="{" data-end="}">
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno"><a class="line" href="classgenerator.html#ab1f5a6a5b71d484d89a8198e9a2c50dc">  378</a></span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> <a class="code hl_function" href="classgenerator.html#ab1f5a6a5b71d484d89a8198e9a2c50dc">filter</a>(Pred&amp;&amp; pred) {</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            <span class="keywordflow">if</span> (pred(value)) {</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>                <span class="keyword">co_yield</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;decltype(value)&gt;</a>(value);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>            }</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        }</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    }</div>
+</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span></div>
+<div class="foldopen" id="foldopen00391" data-start="{" data-end="}">
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno"><a class="line" href="classgenerator.html#a46d368ae7fd0d8678a0a704aa92bd397">  391</a></span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> <a class="code hl_function" href="classgenerator.html#a46d368ae7fd0d8678a0a704aa92bd397">take</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> n) {</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> = 0;</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> &gt;= n) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>            <span class="keyword">co_yield</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;decltype(value)&gt;</a>(value);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>            ++<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        }</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    }</div>
+</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span></div>
+<div class="foldopen" id="foldopen00405" data-start="{" data-end="}">
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno"><a class="line" href="classgenerator.html#a309904d7d8382a112f6367f880698b28">  405</a></span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> <a class="code hl_function" href="classgenerator.html#a309904d7d8382a112f6367f880698b28">skip</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> n) {</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> = 0;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> &lt; n) {</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                ++<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            }</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            <span class="keyword">co_yield</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;decltype(value)&gt;</a>(value);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        }</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    }</div>
+</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span></div>
+<div class="foldopen" id="foldopen00421" data-start="{" data-end="}">
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno"><a class="line" href="classgenerator.html#a5105f0069374425b8a26c1201dc6f13d">  421</a></span>    <a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a> <a class="code hl_function" href="classgenerator.html#a5105f0069374425b8a26c1201dc6f13d">chain</a>(<a class="code hl_function" href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator</a>&amp;&amp; other) {</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>            <span class="keyword">co_yield</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;decltype(value)&gt;</a>(value);</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        }</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : other) {</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>            <span class="keyword">co_yield</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;decltype(value)&gt;</a>(value);</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>        }</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    }</div>
+</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span></div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
+<div class="foldopen" id="foldopen00436" data-start="{" data-end="}">
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno"><a class="line" href="classgenerator.html#a84a424f19a10b9aa131ab3a41a96cec8">  436</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classgenerator.html#a84a424f19a10b9aa131ab3a41a96cec8">for_each</a>(F&amp;&amp; func) {</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>            func(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>        }</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>    }</div>
+</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span></div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Acc, <span class="keyword">typename</span> F&gt;</div>
+<div class="foldopen" id="foldopen00451" data-start="{" data-end="}">
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno"><a class="line" href="classgenerator.html#aa4f9b8c2bbf7ade48a1c22232388bdac">  451</a></span>    Acc <a class="code hl_function" href="classgenerator.html#aa4f9b8c2bbf7ade48a1c22232388bdac">fold</a>(Acc init, F&amp;&amp; func) {</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>        Acc result = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(init);</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : *<span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>            result = func(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(result), <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>        }</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    }</div>
+</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>};</div>
+</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span> </div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span></div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00470" data-start="{" data-end="};">
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno"><a class="line" href="classtask.html">  470</a></span><span class="keyword">class </span><a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a> {</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00476" data-start="{" data-end="};">
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html">  476</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structtask_1_1promise__type.html">promise_type</a> {</div>
+<div class="foldopen" id="foldopen00481" data-start="{" data-end="};">
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type_1_1final__awaiter.html">  481</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structtask_1_1promise__type_1_1final__awaiter.html">final_awaiter</a> {</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f">  486</a></span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f">await_ready</a>() noexcept { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span></div>
+<div class="foldopen" id="foldopen00493" data-start="{" data-end="}">
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type_1_1final__awaiter.html#ac9266960119774b0ecd39811a7ed9f6c">  493</a></span>            <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#ac9266960119774b0ecd39811a7ed9f6c">await_suspend</a>(</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>                <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>                <span class="keyword">auto</span>&amp; <a class="code hl_class" href="classpromise.html">promise</a> = h.<a class="code hl_function" href="classpromise.html#a980a39afa21321c8e9ec5022b0a0123c">promise</a>();</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>                <span class="keywordflow">if</span> (<a class="code hl_class" href="classpromise.html">promise</a>.continuation) {</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>                    <span class="keywordflow">return</span> <a class="code hl_class" href="classpromise.html">promise</a>.continuation;</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>                }</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="group___coroutine.html#ga43aa77a087a863d0064283cc5871fde7">noop_coroutine</a>();</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>            }</div>
+</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span></div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31">  505</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31">await_resume</a>() noexcept {}</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        };</div>
+</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span> </div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a8e97bb2e04e2d02a562757f8268395ff">  508</a></span>        <a class="code hl_class" href="classoptional.html">optional&lt;T&gt;</a> <a class="code hl_variable" href="structtask_1_1promise__type.html#a8e97bb2e04e2d02a562757f8268395ff">result</a>;              </div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#ae9b2d8a552ea4349ae65ae6687bae3e2">  509</a></span>        <a class="code hl_class" href="classexception__ptr.html">exception_ptr</a> <a class="code hl_variable" href="structtask_1_1promise__type.html#ae9b2d8a552ea4349ae65ae6687bae3e2">exception</a>;         </div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520">  510</a></span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_variable" href="structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520">continuation</a>; </div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">  511</a></span>        <a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>* <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> = <span class="keyword">nullptr</span>;  </div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span></div>
+<div class="foldopen" id="foldopen00517" data-start="{" data-end="}">
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa">  517</a></span>        <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a> <a class="code hl_function" href="structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa">get_return_object</a>() {</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>{<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;::from_promise</a>(*<span class="keyword">this</span>)};</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        }</div>
+</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span></div>
+<div class="foldopen" id="foldopen00525" data-start="{" data-end="}">
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c">  525</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c">set_cancellation_token</a>(<a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>* t) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>            <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> = t;</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>        }</div>
+</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span></div>
+<div class="foldopen" id="foldopen00533" data-start="{" data-end="}">
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7">  533</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7">is_cancelled</a>() const noexcept {</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> &amp;&amp; <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a>-&gt;is_cancelled();</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>        }</div>
+</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span></div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167">  541</a></span>        <a class="code hl_struct" href="structsuspend__always.html">suspend_always</a> <a class="code hl_function" href="structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167">initial_suspend</a>() noexcept { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span></div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18">  547</a></span>        <a class="code hl_struct" href="structtask_1_1promise__type_1_1final__awaiter.html">final_awaiter</a> <a class="code hl_function" href="structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18">final_suspend</a>() noexcept { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span></div>
+<div class="foldopen" id="foldopen00553" data-start="{" data-end="}">
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002">  553</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002">return_value</a>(T value) {</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>            <a class="code hl_variable" href="structtask_1_1promise__type.html#a8e97bb2e04e2d02a562757f8268395ff">result</a> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value);</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        }</div>
+</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span></div>
+<div class="foldopen" id="foldopen00560" data-start="{" data-end="}">
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno"><a class="line" href="structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644">  560</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644">unhandled_exception</a>() noexcept {</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>            <a class="code hl_variable" href="structtask_1_1promise__type.html#ae9b2d8a552ea4349ae65ae6687bae3e2">exception</a> = <a class="code hl_function" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a>();</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>        }</div>
+</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    };</div>
+</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span></div>
+<div class="foldopen" id="foldopen00569" data-start="{" data-end="};">
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno"><a class="line" href="structtask_1_1awaiter.html">  569</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structtask_1_1awaiter.html">awaiter</a> {</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno"><a class="line" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">  570</a></span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>;  </div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span></div>
+<div class="foldopen" id="foldopen00576" data-start="{" data-end="}">
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno"><a class="line" href="structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db">  576</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db">await_ready</a>() const noexcept {</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.done();</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>        }</div>
+</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span></div>
+<div class="foldopen" id="foldopen00585" data-start="{" data-end="}">
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno"><a class="line" href="structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e">  585</a></span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_function" href="structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e">await_suspend</a>(</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>            <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> continuation) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>            <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().continuation = continuation;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>        }</div>
+</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span></div>
+<div class="foldopen" id="foldopen00595" data-start="{" data-end="}">
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno"><a class="line" href="structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51">  595</a></span>        T <a class="code hl_function" href="structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51">await_resume</a>() {</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().exception) {</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>                <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(<a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().exception);</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>            }</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>            <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(*<a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().result);</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>        }</div>
+</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    };</div>
+</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span> </div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>    <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> handle_;  </div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span> </div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00611" data-start="{" data-end="}">
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno"><a class="line" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">  611</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>(<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h)</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    : handle_(h) {}</div>
+</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span></div>
+<div class="foldopen" id="foldopen00618" data-start="{" data-end="}">
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno"><a class="line" href="classtask.html#a5e94b9581b7921975806fdc1483f78f4">  618</a></span>    <a class="code hl_function" href="classtask.html#a5e94b9581b7921975806fdc1483f78f4">task</a>(<a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    : handle_(other.handle_) {</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    }</div>
+</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span></div>
+<div class="foldopen" id="foldopen00628" data-start="{" data-end="}">
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno"><a class="line" href="classtask.html#a20d669386e15b25103aee3212ae684ad">  628</a></span>    <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>&amp; <a class="code hl_function" href="classtask.html#a20d669386e15b25103aee3212ae684ad">operator =</a>(<a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>            <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>                handle_.destroy();</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>            }</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>            handle_ = other.handle_;</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>            other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>        }</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    }</div>
+</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span></div>
+<div class="foldopen" id="foldopen00642" data-start="{" data-end="}">
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno"><a class="line" href="classtask.html#abcf9c660515466997e2ba3e6d5166dd1">  642</a></span>    <a class="code hl_function" href="classtask.html#abcf9c660515466997e2ba3e6d5166dd1">~task</a>() {</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>            handle_.destroy();</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>        }</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    }</div>
+</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span> </div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>(<span class="keyword">const</span> <a class="code hl_class" href="classtask.html">task</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>    <a class="code hl_class" href="classtask.html">task</a>&amp; <a class="code hl_function" href="classtask.html#a20d669386e15b25103aee3212ae684ad">operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classtask.html">task</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span></div>
+<div class="foldopen" id="foldopen00655" data-start="{" data-end="}">
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno"><a class="line" href="classtask.html#a3650489fb1edb0a9ab612b126b94c112">  655</a></span>    <a class="code hl_struct" href="structtask_1_1awaiter.html">awaiter</a> <span class="keyword">operator</span> <span class="keyword">co_await</span>() {</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structtask_1_1awaiter.html">awaiter</a>{handle_};</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    }</div>
+</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span></div>
+<div class="foldopen" id="foldopen00663" data-start="{" data-end="}">
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno"><a class="line" href="classtask.html#ab631774bfa12bb16808de715b5844278">  663</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtask.html#ab631774bfa12bb16808de715b5844278">done</a>() const noexcept {</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        <span class="keywordflow">return</span> handle_.done();</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    }</div>
+</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span></div>
+<div class="foldopen" id="foldopen00670" data-start="{" data-end="}">
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno"><a class="line" href="classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4">  670</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4">resume</a>() {</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        <span class="keywordflow">if</span> (handle_ &amp;&amp; !handle_.done()) {</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>            handle_.resume();</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>        }</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    }</div>
+</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span></div>
+<div class="foldopen" id="foldopen00680" data-start="{" data-end="}">
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno"><a class="line" href="classtask.html#a58502672d9bef3a69f89611e79483c31">  680</a></span>    T <a class="code hl_function" href="classtask.html#a58502672d9bef3a69f89611e79483c31">get</a>() {</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>        <span class="keywordflow">while</span> (!handle_.done()) {</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>            handle_.resume();</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>        }</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>        <span class="keywordflow">if</span> (handle_.promise().exception) {</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(handle_.promise().exception);</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>        }</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(*handle_.promise().result);</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    }</div>
+</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span></div>
+<div class="foldopen" id="foldopen00694" data-start="{" data-end="}">
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno"><a class="line" href="classtask.html#a055a89b2c4ef8ad941976ae9ce12349f">  694</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtask.html#a055a89b2c4ef8ad941976ae9ce12349f">set_cancellation_token</a>(<a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>&amp; token) {</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>            handle_.promise().set_cancellation_token(&amp;token);</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>        }</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    }</div>
+</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span></div>
+<div class="foldopen" id="foldopen00704" data-start="{" data-end="}">
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno"><a class="line" href="classtask.html#ac359179551baf1c15f49de6ec5653b0a">  704</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtask.html#ac359179551baf1c15f49de6ec5653b0a">is_cancelled</a>() const noexcept {</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>        <span class="keywordflow">return</span> handle_ &amp;&amp; handle_.promise().is_cancelled();</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    }</div>
+</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>};</div>
+</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span> </div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span></div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00714" data-start="{" data-end="};">
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno"><a class="line" href="classtask_3_01void_01_4.html">  714</a></span><span class="keyword">class </span>task&lt;void&gt; {</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keyword">struct </span>promise_type {</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>        <a class="code hl_class" href="classexception__ptr.html">exception_ptr</a> <a class="code hl_struct" href="structexception.html">exception</a>;</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_variable" href="structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520">continuation</a>;</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>        <a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>* <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span> </div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>        task <a class="code hl_function" href="structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa">get_return_object</a>() {</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>            <span class="keywordflow">return</span> task{<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;::from_promise</a>(*<span class="keyword">this</span>)};</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>        }</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span> </div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c">set_cancellation_token</a>(<a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>* t) {</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>            <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> = t;</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>        }</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span> </div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7">is_cancelled</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a> &amp;&amp; <a class="code hl_variable" href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">token</a>-&gt;<a class="code hl_function" href="classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d">is_cancelled</a>();</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>        }</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span> </div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>        <a class="code hl_struct" href="structsuspend__always.html">suspend_always</a> <a class="code hl_function" href="structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167">initial_suspend</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span> </div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>        <span class="keyword">struct </span>final_awaiter {</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f">await_ready</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span> </div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>            <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#ac9266960119774b0ecd39811a7ed9f6c">await_suspend</a>(</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>                <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>                <span class="keyword">auto</span>&amp; <a class="code hl_class" href="classpromise.html">promise</a> = h.<a class="code hl_function" href="classpromise.html#a980a39afa21321c8e9ec5022b0a0123c">promise</a>();</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>                <span class="keywordflow">if</span> (<a class="code hl_class" href="classpromise.html">promise</a>.continuation) {</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>                    <span class="keywordflow">return</span> <a class="code hl_class" href="classpromise.html">promise</a>.continuation;</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>                }</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="group___coroutine.html#ga43aa77a087a863d0064283cc5871fde7">noop_coroutine</a>();</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>            }</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31">await_resume</a>() <span class="keyword">noexcept</span> {}</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>        };</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span> </div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>        final_awaiter <a class="code hl_function" href="structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18">final_suspend</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span> </div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>        <span class="keywordtype">void</span> return_void() <span class="keyword">noexcept</span> {}</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span> </div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644">unhandled_exception</a>() {</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>            <a class="code hl_struct" href="structexception.html">exception</a> = <a class="code hl_function" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a>();</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>        }</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    };</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span> </div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>    <span class="keyword">struct </span>awaiter {</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>;</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span> </div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db">await_ready</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.done();</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>        }</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>        <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> <a class="code hl_function" href="structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e">await_suspend</a>(</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>            <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;&gt;</a> continuation) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>            <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().continuation = continuation;</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>;</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>        }</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51">await_resume</a>() {</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().exception) {</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>                <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(<a class="code hl_variable" href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">handle</a>.promise().exception);</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>            }</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>        }</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>    };</div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span> </div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    <a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> handle_;</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span> </div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>(<a class="code hl_typedef" href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle&lt;promise_type&gt;</a> h) : handle_(h) {}</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span> </div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>(task&amp;&amp; other) noexcept : handle_(other.handle_) {</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>        other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    }</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span> </div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    task&amp; <a class="code hl_function" href="classtask.html#a20d669386e15b25103aee3212ae684ad">operator=</a>(task&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>            <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>                handle_.destroy();</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>            }</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>            handle_ = other.handle_;</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>            other.handle_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>        }</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    }</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span> </div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    <a class="code hl_function" href="classtask.html#abcf9c660515466997e2ba3e6d5166dd1">~task</a>() {</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>            handle_.destroy();</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>        }</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    }</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span> </div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>    <a class="code hl_function" href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task</a>(<span class="keyword">const</span> task&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    task&amp; <a class="code hl_function" href="classtask.html#a20d669386e15b25103aee3212ae684ad">operator =</a>(<span class="keyword">const</span> task&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span> </div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    awaiter <span class="keyword">operator</span> <span class="keyword">co_await</span>() {</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>        <span class="keywordflow">return</span> awaiter{handle_};</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    }</div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span> </div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtask.html#ab631774bfa12bb16808de715b5844278">done</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>        <span class="keywordflow">return</span> handle_.<a class="code hl_function" href="classtask.html#ab631774bfa12bb16808de715b5844278">done</a>();</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    }</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span> </div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4">resume</a>() {</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>        <span class="keywordflow">if</span> (handle_ &amp;&amp; !handle_.done()) {</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>            handle_.resume();</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        }</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    }</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span> </div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtask.html#a58502672d9bef3a69f89611e79483c31">get</a>() {</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>        <span class="keywordflow">while</span> (!handle_.done()) {</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>            handle_.resume();</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>        }</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>        <span class="keywordflow">if</span> (handle_.promise().exception) {</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>            <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(handle_.promise().exception);</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>        }</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    }</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span> </div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtask.html#a055a89b2c4ef8ad941976ae9ce12349f">set_cancellation_token</a>(<a class="code hl_class" href="classcancellation__token.html">cancellation_token</a>&amp; token) {</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>        <span class="keywordflow">if</span> (handle_) {</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>            handle_.promise().set_cancellation_token(&amp;token);</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>        }</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    }</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span> </div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtask.html#ac359179551baf1c15f49de6ec5653b0a">is_cancelled</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>        <span class="keywordflow">return</span> handle_ &amp;&amp; handle_.promise().is_cancelled();</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>    }</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>};</div>
+</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span> </div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span></div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span> </div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>    <span class="keyword">struct </span>when_all_result {</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>    tuple&lt;Ts...&gt; values;</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>};</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span> </div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span><span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> Tuple, <span class="keyword">typename</span>... Tasks, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(I &lt; <span class="keyword">sizeof</span>...(Tasks)), <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span><a class="code hl_class" href="classtask.html">task&lt;void&gt;</a> when_all_helper(Tuple&amp; results, Tasks&amp;&amp;... tasks) {</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>    <span class="keyword">auto</span>&amp; current_task = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___async.html#ga10972b510a9c0e438c6d5b217ea9a473">get&lt;I&gt;</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___tuple.html#gab4c17a8aa555027fca3b1d2888decfc7">forward_as_tuple</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Tasks&gt;</a>(tasks)...));</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___async.html#ga10972b510a9c0e438c6d5b217ea9a473">get&lt;I&gt;</a>(results) = <span class="keyword">co_await</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(current_task);</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>    <span class="keyword">co_await</span> when_all_helper&lt;I + 1&gt;(results, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Tasks&gt;</a>(tasks)...);</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    <span class="keyword">co_return</span>;</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>}</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span> </div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span><span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> Tuple, <span class="keyword">typename</span>... Tasks, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;I == <span class="keyword">sizeof</span>...(Tasks), <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span><a class="code hl_class" href="classtask.html">task&lt;void&gt;</a> when_all_helper(Tuple&amp;, Tasks&amp;&amp;...) {</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <span class="keyword">co_return</span>;</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>}</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span> </div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span></div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tasks&gt;</div>
+<div class="foldopen" id="foldopen00877" data-start="{" data-end="}">
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno"><a class="line" href="group___coroutine.html#ga8c72fd92de476361237939b98f6a450c">  877</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group___coroutine.html#ga8c72fd92de476361237939b98f6a450c">when_all</a>(Tasks&amp;&amp;... tasks) -&gt; <a class="code hl_class" href="classtask.html">task</a>&lt;tuple&lt;<span class="keyword">typename</span> Tasks::promise_type::result_type...&gt;&gt; {</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>    tuple&lt;<span class="keyword">typename</span> Tasks::promise_type::result_type...&gt; results;</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>    <span class="keyword">co_await</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> when_all_helper&lt;0&gt;(results, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Tasks&gt;</a>(tasks)...);</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>    <span class="keyword">co_return</span> results;</div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>}</div>
+</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span> </div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span></div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Factory&gt;</div>
+<div class="foldopen" id="foldopen00896" data-start="{" data-end="}">
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno"><a class="line" href="group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1">  896</a></span><a class="code hl_class" href="classtask.html">task&lt;T&gt;</a> <a class="code hl_function" href="group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1">retry</a>(Factory&amp;&amp; factory, <span class="keyword">const</span> <span class="keywordtype">size_t</span> max_attempts,</div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>              <a class="code hl_class" href="classfunction.html">function</a>&lt;<span class="keywordtype">bool</span>(<span class="keyword">const</span> <a class="code hl_class" href="classexception__ptr.html">exception_ptr</a>&amp;)&gt; should_retry = <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keyword">static_assert</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> is_invocable_r_v&lt;task&lt;T&gt;, Factory&gt;, <span class="stringliteral">&quot;Factory must return task&lt;T&gt;&quot;</span>);</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span> </div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    <a class="code hl_class" href="classexception__ptr.html">exception_ptr</a> last_exception;</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span> </div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> attempt = 0; attempt &lt; max_attempts; ++attempt) {</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>            <span class="keyword">co_return</span> <span class="keyword">co_await</span> factory();</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>        } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>            last_exception = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a>();</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span> </div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>            <span class="keywordflow">if</span> (should_retry &amp;&amp; !should_retry(last_exception)) {</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>                <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(last_exception);</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>            }</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>            <span class="keywordflow">if</span> (attempt == max_attempts - 1) {</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>                <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(last_exception);</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>            }</div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>        }</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>    }</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span> </div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>    <a class="code hl_function" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a>(last_exception);</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>}</div>
+</div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> <span class="comment">// Coroutine</span></div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span> </div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_GENERATOR_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclasscancellation__token_html"><div class="ttname"><a href="classcancellation__token.html">cancellation_token</a></div><div class="ttdoc">取消令牌</div><div class="ttdef"><b>定义</b> <a href="#l00023">generator.hpp:23</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_a1c816b81662bc8177659073b145a9616"><div class="ttname"><a href="classcancellation__token.html#a1c816b81662bc8177659073b145a9616">cancellation_token::cancel</a></div><div class="ttdeci">void cancel() noexcept</div><div class="ttdoc">请求取消</div><div class="ttdef"><b>定义</b> <a href="#l00119">generator.hpp:119</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_a52c484072d073e4d76ab6c8c3bf6cff5"><div class="ttname"><a href="classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5">cancellation_token::check</a></div><div class="ttdeci">check_awaiter check() const</div><div class="ttdoc">获取取消检查等待器</div><div class="ttdef"><b>定义</b> <a href="#l00137">generator.hpp:137</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_a8e560556afc7e861711e374069764bfc"><div class="ttname"><a href="classcancellation__token.html#a8e560556afc7e861711e374069764bfc">cancellation_token::~cancellation_token</a></div><div class="ttdeci">~cancellation_token()</div><div class="ttdoc">析构函数，释放状态</div><div class="ttdef"><b>定义</b> <a href="#l00112">generator.hpp:112</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_a957e3f2937364b799e2a242cc5905ba9"><div class="ttname"><a href="classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9">cancellation_token::operator=</a></div><div class="ttdeci">cancellation_token &amp; operator=(const cancellation_token &amp;other)</div><div class="ttdoc">拷贝赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00098">generator.hpp:98</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_ab7f18cffb62c36a8579967ed1763371d"><div class="ttname"><a href="classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d">cancellation_token::is_cancelled</a></div><div class="ttdeci">bool is_cancelled() const noexcept</div><div class="ttdoc">检查是否已被取消</div><div class="ttdef"><b>定义</b> <a href="#l00129">generator.hpp:129</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_ab8b7df3b72290f339ea460e6f39fd641"><div class="ttname"><a href="classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641">cancellation_token::cancellation_token</a></div><div class="ttdeci">cancellation_token()</div><div class="ttdoc">默认构造函数，创建新的取消令牌</div><div class="ttdef"><b>定义</b> <a href="#l00079">generator.hpp:79</a></div></div>
+<div class="ttc" id="aclasscancellation__token_html_af58b901c45f45ac616d47ebd3dc56ea7"><div class="ttname"><a href="classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7">cancellation_token::cancellation_token</a></div><div class="ttdeci">cancellation_token(const cancellation_token &amp;other)</div><div class="ttdoc">拷贝构造函数，共享状态</div><div class="ttdef"><b>定义</b> <a href="#l00086">generator.hpp:86</a></div></div>
+<div class="ttc" id="aclassexception__ptr_html"><div class="ttname"><a href="classexception__ptr.html">exception_ptr</a></div><div class="ttdoc">异常指针类</div><div class="ttdef"><b>定义</b> <a href="exception__ptr_8hpp_source.html#l00113">exception_ptr.hpp:113</a></div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00029">function.hpp:29</a></div></div>
+<div class="ttc" id="aclassgenerator_html"><div class="ttname"><a href="classgenerator.html">generator</a></div><div class="ttdoc">懒序列生成器</div><div class="ttdef"><b>定义</b> <a href="#l00152">generator.hpp:152</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a0661e73e83bff68ae103e256007c3f2a"><div class="ttname"><a href="classgenerator.html#a0661e73e83bff68ae103e256007c3f2a">generator::generator</a></div><div class="ttdeci">generator(coroutine_handle&lt; promise_type &gt; h)</div><div class="ttdoc">从协程句柄构造</div><div class="ttdef"><b>定义</b> <a href="#l00293">generator.hpp:293</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a309904d7d8382a112f6367f880698b28"><div class="ttname"><a href="classgenerator.html#a309904d7d8382a112f6367f880698b28">generator::skip</a></div><div class="ttdeci">generator skip(const size_t n)</div><div class="ttdoc">跳过前n个元素</div><div class="ttdef"><b>定义</b> <a href="#l00405">generator.hpp:405</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a46d368ae7fd0d8678a0a704aa92bd397"><div class="ttname"><a href="classgenerator.html#a46d368ae7fd0d8678a0a704aa92bd397">generator::take</a></div><div class="ttdeci">generator take(const size_t n)</div><div class="ttdoc">取前n个元素</div><div class="ttdef"><b>定义</b> <a href="#l00391">generator.hpp:391</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a5105f0069374425b8a26c1201dc6f13d"><div class="ttname"><a href="classgenerator.html#a5105f0069374425b8a26c1201dc6f13d">generator::chain</a></div><div class="ttdeci">generator chain(generator &amp;&amp;other)</div><div class="ttdoc">连接两个生成器</div><div class="ttdef"><b>定义</b> <a href="#l00421">generator.hpp:421</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a74c79ed421adae0f2c9100a32fef7d25"><div class="ttname"><a href="classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25">generator::operator=</a></div><div class="ttdeci">generator &amp; operator=(generator &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00310">generator.hpp:310</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a78f3cce891b72e1fbe4c095c60853277"><div class="ttname"><a href="classgenerator.html#a78f3cce891b72e1fbe4c095c60853277">generator::map</a></div><div class="ttdeci">invoke_result_t&lt; F, T &gt; map(F &amp;&amp;func)</div><div class="ttdoc">映射变换</div><div class="ttdef"><b>定义</b> <a href="#l00365">generator.hpp:365</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a84a424f19a10b9aa131ab3a41a96cec8"><div class="ttname"><a href="classgenerator.html#a84a424f19a10b9aa131ab3a41a96cec8">generator::for_each</a></div><div class="ttdeci">void for_each(F &amp;&amp;func)</div><div class="ttdoc">遍历每个元素</div><div class="ttdef"><b>定义</b> <a href="#l00436">generator.hpp:436</a></div></div>
+<div class="ttc" id="aclassgenerator_html_a93d1141d7d23880142c7c76ebccd9b72"><div class="ttname"><a href="classgenerator.html#a93d1141d7d23880142c7c76ebccd9b72">generator::begin</a></div><div class="ttdeci">iterator begin()</div><div class="ttdoc">获取起始迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00337">generator.hpp:337</a></div></div>
+<div class="ttc" id="aclassgenerator_html_aa48ca8ad825e064655e761d732e65819"><div class="ttname"><a href="classgenerator.html#aa48ca8ad825e064655e761d732e65819">generator::generator</a></div><div class="ttdeci">generator(generator &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00300">generator.hpp:300</a></div></div>
+<div class="ttc" id="aclassgenerator_html_aa4f9b8c2bbf7ade48a1c22232388bdac"><div class="ttname"><a href="classgenerator.html#aa4f9b8c2bbf7ade48a1c22232388bdac">generator::fold</a></div><div class="ttdeci">Acc fold(Acc init, F &amp;&amp;func)</div><div class="ttdoc">折叠（归约）</div><div class="ttdef"><b>定义</b> <a href="#l00451">generator.hpp:451</a></div></div>
+<div class="ttc" id="aclassgenerator_html_ab1f5a6a5b71d484d89a8198e9a2c50dc"><div class="ttname"><a href="classgenerator.html#ab1f5a6a5b71d484d89a8198e9a2c50dc">generator::filter</a></div><div class="ttdeci">generator filter(Pred &amp;&amp;pred)</div><div class="ttdoc">过滤</div><div class="ttdef"><b>定义</b> <a href="#l00378">generator.hpp:378</a></div></div>
+<div class="ttc" id="aclassgenerator_html_abb02336a640655e154ad36b3098d2089"><div class="ttname"><a href="classgenerator.html#abb02336a640655e154ad36b3098d2089">generator::~generator</a></div><div class="ttdeci">~generator()</div><div class="ttdoc">析构函数，销毁协程</div><div class="ttdef"><b>定义</b> <a href="#l00324">generator.hpp:324</a></div></div>
+<div class="ttc" id="aclassgenerator_html_ac71d240be5537e677c32f705a10e032c"><div class="ttname"><a href="classgenerator.html#ac71d240be5537e677c32f705a10e032c">generator::end</a></div><div class="ttdeci">iterator end()</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00354">generator.hpp:354</a></div></div>
+<div class="ttc" id="aclassoptional_html"><div class="ttname"><a href="classoptional.html">optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00061">optional.hpp:61</a></div></div>
+<div class="ttc" id="aclasspromise_html"><div class="ttname"><a href="classpromise.html">promise</a></div><div class="ttdoc">Promise类模板</div><div class="ttdef"><b>定义</b> <a href="promise_8hpp_source.html#l00032">promise.hpp:32</a></div></div>
+<div class="ttc" id="aclasspromise_html_a980a39afa21321c8e9ec5022b0a0123c"><div class="ttname"><a href="classpromise.html#a980a39afa21321c8e9ec5022b0a0123c">promise::promise</a></div><div class="ttdeci">promise()</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="promise_8hpp_source.html#l00065">promise.hpp:65</a></div></div>
+<div class="ttc" id="aclasstask_html"><div class="ttname"><a href="classtask.html">task</a></div><div class="ttdoc">异步任务</div><div class="ttdef"><b>定义</b> <a href="#l00470">generator.hpp:470</a></div></div>
+<div class="ttc" id="aclasstask_html_a055a89b2c4ef8ad941976ae9ce12349f"><div class="ttname"><a href="classtask.html#a055a89b2c4ef8ad941976ae9ce12349f">task::set_cancellation_token</a></div><div class="ttdeci">void set_cancellation_token(cancellation_token &amp;token)</div><div class="ttdoc">设置取消令牌</div><div class="ttdef"><b>定义</b> <a href="#l00694">generator.hpp:694</a></div></div>
+<div class="ttc" id="aclasstask_html_a20d669386e15b25103aee3212ae684ad"><div class="ttname"><a href="classtask.html#a20d669386e15b25103aee3212ae684ad">task::operator=</a></div><div class="ttdeci">task &amp; operator=(task &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00628">generator.hpp:628</a></div></div>
+<div class="ttc" id="aclasstask_html_a4eb3a6735d6e5bf52b2d7534ba0769d4"><div class="ttname"><a href="classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4">task::resume</a></div><div class="ttdeci">void resume()</div><div class="ttdoc">恢复任务执行</div><div class="ttdef"><b>定义</b> <a href="#l00670">generator.hpp:670</a></div></div>
+<div class="ttc" id="aclasstask_html_a58502672d9bef3a69f89611e79483c31"><div class="ttname"><a href="classtask.html#a58502672d9bef3a69f89611e79483c31">task::get</a></div><div class="ttdeci">T get()</div><div class="ttdoc">同步获取任务结果</div><div class="ttdef"><b>定义</b> <a href="#l00680">generator.hpp:680</a></div></div>
+<div class="ttc" id="aclasstask_html_a5e94b9581b7921975806fdc1483f78f4"><div class="ttname"><a href="classtask.html#a5e94b9581b7921975806fdc1483f78f4">task::task</a></div><div class="ttdeci">task(task &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00618">generator.hpp:618</a></div></div>
+<div class="ttc" id="aclasstask_html_ab631774bfa12bb16808de715b5844278"><div class="ttname"><a href="classtask.html#ab631774bfa12bb16808de715b5844278">task::done</a></div><div class="ttdeci">bool done() const noexcept</div><div class="ttdoc">检查任务是否已完成</div><div class="ttdef"><b>定义</b> <a href="#l00663">generator.hpp:663</a></div></div>
+<div class="ttc" id="aclasstask_html_abcf9c660515466997e2ba3e6d5166dd1"><div class="ttname"><a href="classtask.html#abcf9c660515466997e2ba3e6d5166dd1">task::~task</a></div><div class="ttdeci">~task()</div><div class="ttdoc">析构函数，销毁协程</div><div class="ttdef"><b>定义</b> <a href="#l00642">generator.hpp:642</a></div></div>
+<div class="ttc" id="aclasstask_html_ac359179551baf1c15f49de6ec5653b0a"><div class="ttname"><a href="classtask.html#ac359179551baf1c15f49de6ec5653b0a">task::is_cancelled</a></div><div class="ttdeci">bool is_cancelled() const noexcept</div><div class="ttdoc">检查任务是否被取消</div><div class="ttdef"><b>定义</b> <a href="#l00704">generator.hpp:704</a></div></div>
+<div class="ttc" id="aclasstask_html_ae229bb88041fade9c572408e8dcbedfd"><div class="ttname"><a href="classtask.html#ae229bb88041fade9c572408e8dcbedfd">task::task</a></div><div class="ttdeci">task(coroutine_handle&lt; promise_type &gt; h)</div><div class="ttdoc">从协程句柄构造</div><div class="ttdef"><b>定义</b> <a href="#l00611">generator.hpp:611</a></div></div>
+<div class="ttc" id="acoroutine_8hpp_html"><div class="ttname"><a href="coroutine_8hpp.html">coroutine.hpp</a></div><div class="ttdoc">协程支持</div></div>
+<div class="ttc" id="aexception__ptr_8hpp_html"><div class="ttname"><a href="exception__ptr_8hpp.html">exception_ptr.hpp</a></div><div class="ttdoc">异常指针实现</div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03044">type_traits.hpp:3044</a></div></div>
+<div class="ttc" id="agroup___async_html_ga10972b510a9c0e438c6d5b217ea9a473"><div class="ttname"><a href="group___async.html#ga10972b510a9c0e438c6d5b217ea9a473">get</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE enable_if_t&lt; is_void_v&lt; T &gt;, future_result_t&lt; T &gt; &gt; get(future&lt; T &gt; &amp;f)</div><div class="ttdoc">通用future结果获取函数</div><div class="ttdef"><b>定义</b> <a href="future_8hpp_source.html#l01203">future.hpp:1203</a></div></div>
+<div class="ttc" id="agroup___coroutine_html_ga43aa77a087a863d0064283cc5871fde7"><div class="ttname"><a href="group___coroutine.html#ga43aa77a087a863d0064283cc5871fde7">noop_coroutine</a></div><div class="ttdeci">noop_coroutine_handle noop_coroutine() noexcept</div><div class="ttdoc">获取空操作协程句柄</div><div class="ttdef"><b>定义</b> <a href="coroutine_8hpp_source.html#l00091">coroutine.hpp:91</a></div></div>
+<div class="ttc" id="agroup___coroutine_html_ga6b28debebaa0f1d57331130e5ccb6181"><div class="ttname"><a href="group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle</a></div><div class="ttdeci">std::coroutine_handle&lt; Promise &gt; coroutine_handle</div><div class="ttdoc">协程句柄</div><div class="ttdef"><b>定义</b> <a href="coroutine_8hpp_source.html#l00064">coroutine.hpp:64</a></div></div>
+<div class="ttc" id="agroup___coroutine_html_ga79f854a5ada0083996d280c91b6cb2c1"><div class="ttname"><a href="group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1">retry</a></div><div class="ttdeci">task&lt; T &gt; retry(Factory &amp;&amp;factory, const size_t max_attempts, function&lt; bool(const exception_ptr &amp;)&gt; should_retry=nullptr)</div><div class="ttdoc">带重试的异步操作</div><div class="ttdef"><b>定义</b> <a href="#l00896">generator.hpp:896</a></div></div>
+<div class="ttc" id="agroup___coroutine_html_ga8c72fd92de476361237939b98f6a450c"><div class="ttname"><a href="group___coroutine.html#ga8c72fd92de476361237939b98f6a450c">when_all</a></div><div class="ttdeci">auto when_all(Tasks &amp;&amp;... tasks) -&gt; task&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</div><div class="ttdoc">等待所有任务完成</div><div class="ttdef"><b>定义</b> <a href="#l00877">generator.hpp:877</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00350">search.hpp:350</a></div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga12342507bc5abdc903c22fabac839d32"><div class="ttname"><a href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a></div><div class="ttdeci">void NEFORCE_API rethrow_exception(const exception_ptr &amp;p)</div><div class="ttdoc">重新抛出异常</div></div>
+<div class="ttc" id="agroup___exception_handling_html_gae2436c911c2e23511a3012d0ddc2a419"><div class="ttname"><a href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a></div><div class="ttdeci">exception_ptr NEFORCE_API current_exception() noexcept</div><div class="ttdoc">获取当前异常</div></div>
+<div class="ttc" id="agroup___invoke_result_html_ga94f3f930be3994abb39153e17a724b1a"><div class="ttname"><a href="group___invoke_result.html#ga94f3f930be3994abb39153e17a724b1a">invoke_result_t</a></div><div class="ttdeci">typename _INNER __invoke_result_aux&lt; F, Args... &gt;::type invoke_result_t</div><div class="ttdoc">invoke_result的便捷别名</div><div class="ttdef"><b>定义</b> <a href="invoke_8hpp_source.html#l00318">invoke.hpp:318</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga3b921278ed46859e35eae165a2f2e96d"><div class="ttname"><a href="group___memory_order.html#ga3b921278ed46859e35eae165a2f2e96d">memory_order_acq_rel</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acq_rel</div><div class="ttdoc">获取-释放内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00047">atomic_base.hpp:47</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga80883e2cd37a8e670dc016e91059d936"><div class="ttname"><a href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_release</div><div class="ttdoc">释放内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00045">atomic_base.hpp:45</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gab7d3a13cfab1d0d9d1e747ac3d774d61"><div class="ttname"><a href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_relaxed</div><div class="ttdoc">宽松内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00039">atomic_base.hpp:39</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gac472f4b38d5bc0ba23a6113984118c24"><div class="ttname"><a href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acquire</div><div class="ttdoc">获取内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00043">atomic_base.hpp:43</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_gad967839dbf3a606e0d4c9d556c0e5e7c"><div class="ttname"><a href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></div><div class="ttdeci">int64_t ptrdiff_t</div><div class="ttdoc">指针差类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00178">types.hpp:178</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___tuple_html_gab4c17a8aa555027fca3b1d2888decfc7"><div class="ttname"><a href="group___tuple.html#gab4c17a8aa555027fca3b1d2888decfc7">forward_as_tuple</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;&amp;... &gt; forward_as_tuple(Types &amp;&amp;... args) noexcept</div><div class="ttdoc">创建转发引用元组</div><div class="ttdef"><b>定义</b> <a href="tuple_8hpp_source.html#l00748">tuple.hpp:748</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="aoptional_8hpp_html"><div class="ttname"><a href="optional_8hpp.html">optional.hpp</a></div><div class="ttdoc">可选值类型</div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00031">atomic.hpp:31</a></div></div>
+<div class="ttc" id="astructcancellation__token_1_1check__awaiter_html"><div class="ttname"><a href="structcancellation__token_1_1check__awaiter.html">cancellation_token::check_awaiter</a></div><div class="ttdoc">取消检查等待器</div><div class="ttdef"><b>定义</b> <a href="#l00031">generator.hpp:31</a></div></div>
+<div class="ttc" id="astructcancellation__token_1_1check__awaiter_html_a37b0c4e38de746e7ca7dca8354aed798"><div class="ttname"><a href="structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798">cancellation_token::check_awaiter::await_ready</a></div><div class="ttdeci">bool await_ready() const noexcept</div><div class="ttdoc">检查是否可立即恢复</div><div class="ttdef"><b>定义</b> <a href="#l00038">generator.hpp:38</a></div></div>
+<div class="ttc" id="astructcancellation__token_1_1check__awaiter_html_a6b7a548a0164dca499a1aa75cccba7d2"><div class="ttname"><a href="structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2">cancellation_token::check_awaiter::token</a></div><div class="ttdeci">const cancellation_token * token</div><div class="ttdoc">令牌指针</div><div class="ttdef"><b>定义</b> <a href="#l00032">generator.hpp:32</a></div></div>
+<div class="ttc" id="astructcancellation__token_1_1check__awaiter_html_ab9f45a67e46515646ca6b302a64b7b5d"><div class="ttname"><a href="structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d">cancellation_token::check_awaiter::await_resume</a></div><div class="ttdeci">void await_resume() const</div><div class="ttdoc">恢复时执行的操作</div><div class="ttdef"><b>定义</b> <a href="#l00052">generator.hpp:52</a></div></div>
+<div class="ttc" id="astructcancellation__token_1_1check__awaiter_html_af127c8ef34d7e722eac42f8633cedcab"><div class="ttname"><a href="structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab">cancellation_token::check_awaiter::await_suspend</a></div><div class="ttdeci">void await_suspend(coroutine_handle&lt;&gt; h) const noexcept</div><div class="ttdoc">暂停协程（实际上从不暂停）</div><div class="ttdef"><b>定义</b> <a href="#l00046">generator.hpp:46</a></div></div>
+<div class="ttc" id="astructexception_html"><div class="ttname"><a href="structexception.html">exception</a></div><div class="ttdoc">异常基类</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00081">exception.hpp:81</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html"><div class="ttname"><a href="structgenerator_1_1iterator.html">generator::iterator</a></div><div class="ttdoc">生成器的输入迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00209">generator.hpp:209</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_a1226c1f65215b7bb04a24f6aea3bf8c5"><div class="ttname"><a href="structgenerator_1_1iterator.html#a1226c1f65215b7bb04a24f6aea3bf8c5">generator::iterator::operator*</a></div><div class="ttdeci">T &amp; operator*() const noexcept</div><div class="ttdoc">解引用，获取当前值</div><div class="ttdef"><b>定义</b> <a href="#l00253">generator.hpp:253</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_a5df07d4ba62c8c45fe6d95a12d00eab5"><div class="ttname"><a href="structgenerator_1_1iterator.html#a5df07d4ba62c8c45fe6d95a12d00eab5">generator::iterator::operator!=</a></div><div class="ttdeci">bool operator!=(const iterator &amp;other) const noexcept</div><div class="ttdoc">不等比较</div><div class="ttdef"><b>定义</b> <a href="#l00280">generator.hpp:280</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_a90319e961db3c0c96f9fdaa4345b2ad3"><div class="ttname"><a href="structgenerator_1_1iterator.html#a90319e961db3c0c96f9fdaa4345b2ad3">generator::iterator::operator==</a></div><div class="ttdeci">bool operator==(const iterator &amp;other) const noexcept</div><div class="ttdoc">相等比较</div><div class="ttdef"><b>定义</b> <a href="#l00271">generator.hpp:271</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_abd3f4c65afa1e9f9fb05a97e2ae5465a"><div class="ttname"><a href="structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a">generator::iterator::handle</a></div><div class="ttdeci">coroutine_handle&lt; promise_type &gt; handle</div><div class="ttdoc">协程句柄</div><div class="ttdef"><b>定义</b> <a href="#l00216">generator.hpp:216</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_ac0b71ccb94ce5853821103101d8104fd"><div class="ttname"><a href="structgenerator_1_1iterator.html#ac0b71ccb94ce5853821103101d8104fd">generator::iterator::iterator</a></div><div class="ttdeci">iterator(coroutine_handle&lt; promise_type &gt; h)</div><div class="ttdoc">从协程句柄构造</div><div class="ttdef"><b>定义</b> <a href="#l00227">generator.hpp:227</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_acb23463d005b1a5246a1457dba742611"><div class="ttname"><a href="structgenerator_1_1iterator.html#acb23463d005b1a5246a1457dba742611">generator::iterator::operator-&gt;</a></div><div class="ttdeci">T * operator-&gt;() const noexcept</div><div class="ttdoc">箭头操作符</div><div class="ttdef"><b>定义</b> <a href="#l00262">generator.hpp:262</a></div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_ae205b60cef5cab709bda4965b929d4dd"><div class="ttname"><a href="structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd">generator::iterator::iterator</a></div><div class="ttdeci">iterator()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="astructgenerator_1_1iterator_html_ae31bd496427c6d187a9afd5bad691921"><div class="ttname"><a href="structgenerator_1_1iterator.html#ae31bd496427c6d187a9afd5bad691921">generator::iterator::operator++</a></div><div class="ttdeci">iterator &amp; operator++()</div><div class="ttdoc">前置递增，恢复协程获取下一个值</div><div class="ttdef"><b>定义</b> <a href="#l00234">generator.hpp:234</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html"><div class="ttname"><a href="structgenerator_1_1promise__type.html">generator::promise_type</a></div><div class="ttdoc">生成器的promise类型</div><div class="ttdef"><b>定义</b> <a href="#l00158">generator.hpp:158</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_a1703105ffebd308baa63d484212a96d4"><div class="ttname"><a href="structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4">generator::promise_type::current_value</a></div><div class="ttdeci">optional&lt; T &gt; current_value</div><div class="ttdoc">当前产生的值</div><div class="ttdef"><b>定义</b> <a href="#l00159">generator.hpp:159</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_a43f2773994f02536927ca12d37ad528a"><div class="ttname"><a href="structgenerator_1_1promise__type.html#a43f2773994f02536927ca12d37ad528a">generator::promise_type::return_void</a></div><div class="ttdeci">void return_void() noexcept</div><div class="ttdoc">返回void（生成器不返回值）</div><div class="ttdef"><b>定义</b> <a href="#l00195">generator.hpp:195</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_a8c82b2d45c73631296c21d01c754b266"><div class="ttname"><a href="structgenerator_1_1promise__type.html#a8c82b2d45c73631296c21d01c754b266">generator::promise_type::yield_value</a></div><div class="ttdeci">suspend_always yield_value(T value)</div><div class="ttdoc">产生一个值</div><div class="ttdef"><b>定义</b> <a href="#l00187">generator.hpp:187</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_aa06b2a1a6c755d6f6056fdb0da186066"><div class="ttname"><a href="structgenerator_1_1promise__type.html#aa06b2a1a6c755d6f6056fdb0da186066">generator::promise_type::exception</a></div><div class="ttdeci">exception_ptr exception</div><div class="ttdoc">异常指针</div><div class="ttdef"><b>定义</b> <a href="#l00160">generator.hpp:160</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_adae56dfd455e63193f90202e9fd67e52"><div class="ttname"><a href="structgenerator_1_1promise__type.html#adae56dfd455e63193f90202e9fd67e52">generator::promise_type::unhandled_exception</a></div><div class="ttdeci">void unhandled_exception()</div><div class="ttdoc">处理未捕获的异常</div><div class="ttdef"><b>定义</b> <a href="#l00200">generator.hpp:200</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_ae9d736767bfc21d8b1f7a4a98e38dff8"><div class="ttname"><a href="structgenerator_1_1promise__type.html#ae9d736767bfc21d8b1f7a4a98e38dff8">generator::promise_type::final_suspend</a></div><div class="ttdeci">suspend_always final_suspend() noexcept</div><div class="ttdoc">最终暂停点</div><div class="ttdef"><b>定义</b> <a href="#l00180">generator.hpp:180</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_aed95a50722368ca9c6b475553e331c2a"><div class="ttname"><a href="structgenerator_1_1promise__type.html#aed95a50722368ca9c6b475553e331c2a">generator::promise_type::initial_suspend</a></div><div class="ttdeci">suspend_always initial_suspend() noexcept</div><div class="ttdoc">初始暂停点</div><div class="ttdef"><b>定义</b> <a href="#l00174">generator.hpp:174</a></div></div>
+<div class="ttc" id="astructgenerator_1_1promise__type_html_afc0b169ccb92470755768b8f740b44c7"><div class="ttname"><a href="structgenerator_1_1promise__type.html#afc0b169ccb92470755768b8f740b44c7">generator::promise_type::get_return_object</a></div><div class="ttdeci">generator get_return_object()</div><div class="ttdoc">获取生成器对象</div><div class="ttdef"><b>定义</b> <a href="#l00166">generator.hpp:166</a></div></div>
+<div class="ttc" id="astructinput__iterator__tag_html"><div class="ttname"><a href="structinput__iterator__tag.html">input_iterator_tag</a></div><div class="ttdoc">输入迭代器标签</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00363">types.hpp:363</a></div></div>
+<div class="ttc" id="astructsuspend__always_html"><div class="ttname"><a href="structsuspend__always.html">suspend_always</a></div><div class="ttdoc">始终暂停的等待器</div><div class="ttdef"><b>定义</b> <a href="coroutine_8hpp_source.html#l00103">coroutine.hpp:103</a></div></div>
+<div class="ttc" id="astructtask_1_1awaiter_html"><div class="ttname"><a href="structtask_1_1awaiter.html">task::awaiter</a></div><div class="ttdoc">任务等待器</div><div class="ttdef"><b>定义</b> <a href="#l00569">generator.hpp:569</a></div></div>
+<div class="ttc" id="astructtask_1_1awaiter_html_a3b7c9f9896ec3150586e5dcd54dfec05"><div class="ttname"><a href="structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05">task::awaiter::handle</a></div><div class="ttdeci">coroutine_handle&lt; promise_type &gt; handle</div><div class="ttdoc">协程句柄</div><div class="ttdef"><b>定义</b> <a href="#l00570">generator.hpp:570</a></div></div>
+<div class="ttc" id="astructtask_1_1awaiter_html_a851717827edd19b476f3f9339730a0db"><div class="ttname"><a href="structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db">task::awaiter::await_ready</a></div><div class="ttdeci">bool await_ready() const noexcept</div><div class="ttdoc">检查是否可立即恢复</div><div class="ttdef"><b>定义</b> <a href="#l00576">generator.hpp:576</a></div></div>
+<div class="ttc" id="astructtask_1_1awaiter_html_a9dd1df2703e550a5dd2759dd453eac51"><div class="ttname"><a href="structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51">task::awaiter::await_resume</a></div><div class="ttdeci">T await_resume()</div><div class="ttdoc">恢复时获取结果</div><div class="ttdef"><b>定义</b> <a href="#l00595">generator.hpp:595</a></div></div>
+<div class="ttc" id="astructtask_1_1awaiter_html_acb1099aa7940b78bc6f08516dfe4190e"><div class="ttname"><a href="structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e">task::awaiter::await_suspend</a></div><div class="ttdeci">coroutine_handle await_suspend(coroutine_handle&lt;&gt; continuation) noexcept</div><div class="ttdoc">暂停时执行的操作</div><div class="ttdef"><b>定义</b> <a href="#l00585">generator.hpp:585</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_1_1final__awaiter_html"><div class="ttname"><a href="structtask_1_1promise__type_1_1final__awaiter.html">task::promise_type::final_awaiter</a></div><div class="ttdoc">最终等待器</div><div class="ttdef"><b>定义</b> <a href="#l00481">generator.hpp:481</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_1_1final__awaiter_html_a19038e9552c057303552ca44cb07ec31"><div class="ttname"><a href="structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31">task::promise_type::final_awaiter::await_resume</a></div><div class="ttdeci">void await_resume() noexcept</div><div class="ttdoc">恢复时执行的操作</div><div class="ttdef"><b>定义</b> <a href="#l00505">generator.hpp:505</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_1_1final__awaiter_html_a8eec994c01bff91f6e824770f4a3e89f"><div class="ttname"><a href="structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f">task::promise_type::final_awaiter::await_ready</a></div><div class="ttdeci">bool await_ready() noexcept</div><div class="ttdoc">检查是否可立即恢复</div><div class="ttdef"><b>定义</b> <a href="#l00486">generator.hpp:486</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_1_1final__awaiter_html_ac9266960119774b0ecd39811a7ed9f6c"><div class="ttname"><a href="structtask_1_1promise__type_1_1final__awaiter.html#ac9266960119774b0ecd39811a7ed9f6c">task::promise_type::final_awaiter::await_suspend</a></div><div class="ttdeci">coroutine_handle await_suspend(coroutine_handle&lt; promise_type &gt; h) noexcept</div><div class="ttdoc">暂停时执行的操作</div><div class="ttdef"><b>定义</b> <a href="#l00493">generator.hpp:493</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html"><div class="ttname"><a href="structtask_1_1promise__type.html">task::promise_type</a></div><div class="ttdoc">任务的promise类型</div><div class="ttdef"><b>定义</b> <a href="#l00476">generator.hpp:476</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a367a255980a9849de883c314ffd5f644"><div class="ttname"><a href="structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644">task::promise_type::unhandled_exception</a></div><div class="ttdeci">void unhandled_exception() noexcept</div><div class="ttdoc">处理未捕获的异常</div><div class="ttdef"><b>定义</b> <a href="#l00560">generator.hpp:560</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a4b2240e1afadcea4b4f98414914cc002"><div class="ttname"><a href="structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002">task::promise_type::return_value</a></div><div class="ttdeci">void return_value(T value)</div><div class="ttdoc">设置返回值</div><div class="ttdef"><b>定义</b> <a href="#l00553">generator.hpp:553</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a5339e9a8325537229a77e5263fd4a15c"><div class="ttname"><a href="structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c">task::promise_type::set_cancellation_token</a></div><div class="ttdeci">void set_cancellation_token(cancellation_token *t) noexcept</div><div class="ttdoc">设置取消令牌</div><div class="ttdef"><b>定义</b> <a href="#l00525">generator.hpp:525</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a6cd0f261bbc603cb79641a1437352a18"><div class="ttname"><a href="structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18">task::promise_type::final_suspend</a></div><div class="ttdeci">final_awaiter final_suspend() noexcept</div><div class="ttdoc">最终暂停点</div><div class="ttdef"><b>定义</b> <a href="#l00547">generator.hpp:547</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a8e97bb2e04e2d02a562757f8268395ff"><div class="ttname"><a href="structtask_1_1promise__type.html#a8e97bb2e04e2d02a562757f8268395ff">task::promise_type::result</a></div><div class="ttdeci">optional&lt; T &gt; result</div><div class="ttdoc">结果值</div><div class="ttdef"><b>定义</b> <a href="#l00508">generator.hpp:508</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_a9e4d9fe9831164c452a700ce6010335f"><div class="ttname"><a href="structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f">task::promise_type::token</a></div><div class="ttdeci">cancellation_token * token</div><div class="ttdoc">取消令牌</div><div class="ttdef"><b>定义</b> <a href="#l00511">generator.hpp:511</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_aad034494a4dbaa044bcaf37154e08aaa"><div class="ttname"><a href="structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa">task::promise_type::get_return_object</a></div><div class="ttdeci">task get_return_object()</div><div class="ttdoc">获取任务对象</div><div class="ttdef"><b>定义</b> <a href="#l00517">generator.hpp:517</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_ab8c38567c42f18a7b160266fbccc6520"><div class="ttname"><a href="structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520">task::promise_type::continuation</a></div><div class="ttdeci">coroutine_handle continuation</div><div class="ttdoc">继续执行的协程</div><div class="ttdef"><b>定义</b> <a href="#l00510">generator.hpp:510</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_add4f907d33863244ecf95b06eaacbdf7"><div class="ttname"><a href="structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7">task::promise_type::is_cancelled</a></div><div class="ttdeci">bool is_cancelled() const noexcept</div><div class="ttdoc">检查是否已取消</div><div class="ttdef"><b>定义</b> <a href="#l00533">generator.hpp:533</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_ade322af155aa4cbedfa55e785c5de167"><div class="ttname"><a href="structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167">task::promise_type::initial_suspend</a></div><div class="ttdeci">suspend_always initial_suspend() noexcept</div><div class="ttdoc">初始暂停点</div><div class="ttdef"><b>定义</b> <a href="#l00541">generator.hpp:541</a></div></div>
+<div class="ttc" id="astructtask_1_1promise__type_html_ae9b2d8a552ea4349ae65ae6687bae3e2"><div class="ttname"><a href="structtask_1_1promise__type.html#ae9b2d8a552ea4349ae65ae6687bae3e2">task::promise_type::exception</a></div><div class="ttdeci">exception_ptr exception</div><div class="ttdoc">异常指针</div><div class="ttdef"><b>定义</b> <a href="#l00509">generator.hpp:509</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><b>generator.hpp</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

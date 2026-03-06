@@ -1,0 +1,186 @@
+#include <NeForce/network/ssl/ssl_context.hpp>
+#ifdef NEFORCE_SUPPORT_OPENSSL
+#include <openssl/err.h>
+NEFORCE_BEGIN_NAMESPACE__
+
+int ssl_exception::last_error() noexcept {
+    return static_cast<int>(::ERR_get_error());
+}
+
+string ssl_exception::last_error_message() {
+    char buf[256];
+    const auto err = ::ERR_get_error();
+    if (err == 0) return "";
+    ::ERR_error_string_n(err, buf, sizeof(buf));
+    return {buf};
+}
+
+ssl_context::ssl_context(const ssl_method method) {
+    const SSL_METHOD* ssl_method;
+
+    switch (method) {
+        case ssl_method::TLS_SERVER: {
+            ssl_method = ::TLS_server_method();
+            break;
+        }
+        case ssl_method::TLS_CLIENT: {
+            ssl_method = ::TLS_client_method();
+            break;
+        }
+        case ssl_method::TLS_SERVER_DTLS: {
+            ssl_method = ::DTLS_server_method();
+            break;
+        }
+        case ssl_method::TLS_CLIENT_DTLS: {
+            ssl_method = ::DTLS_client_method();
+            break;
+        }
+        default: {
+            NEFORCE_UNREACHABLE;
+        }
+    }
+
+    if (!ssl_method) {
+        throw_exception(ssl_exception("Failed to get SSL method"));
+    }
+
+    ctx_.reset(::SSL_CTX_new(ssl_method));
+    if (!ctx_) {
+        throw_exception(ssl_exception("SSL_CTX_new failed"));
+    }
+
+    set_default_options();
+}
+
+bool ssl_context::load_certificate(const string& cert_file, const string& key_file) {
+    if (!ctx_) {
+        return false;
+    }
+    if (::SSL_CTX_use_certificate_file(ctx_.get(), cert_file.data(), SSL_FILETYPE_PEM) <= 0) {
+        return false;
+    }
+    if (::SSL_CTX_use_PrivateKey_file(ctx_.get(), key_file.data(), SSL_FILETYPE_PEM) <= 0) {
+        return false;
+    }
+    if (!::SSL_CTX_check_private_key(ctx_.get())) {
+        return false;
+    }
+    return true;
+}
+
+void ssl_context::load_certificate_from_memory(const string& cert_pem, const string& key_pem) {
+    if (!ctx_) {
+        throw_exception(ssl_exception("SSL context is not initialized"));
+    }
+    if (cert_pem.empty() || key_pem.empty()) {
+        throw_exception(value_exception("Certificate or key PEM data is empty"));
+    }
+
+    ::BIO *cert_bio = ::BIO_new_mem_buf(cert_pem.data(), cert_pem.size());
+    ::BIO *key_bio = ::BIO_new_mem_buf(key_pem.data(), key_pem.size());
+
+    if (!cert_bio || !key_bio) {
+        if (cert_bio) ::BIO_free(cert_bio);
+        if (key_bio) ::BIO_free(key_bio);
+        throw_exception(ssl_exception("Failed to create BIO"));
+    }
+
+    ::X509* cert = ::PEM_read_bio_X509(cert_bio, nullptr, nullptr, nullptr);
+    ::EVP_PKEY* key = ::PEM_read_bio_PrivateKey(key_bio, nullptr, nullptr, nullptr);
+
+    ::BIO_free(cert_bio);
+    ::BIO_free(key_bio);
+
+    if (!cert || !key) {
+        if (cert) ::X509_free(cert);
+        if (key) ::EVP_PKEY_free(key);
+        throw_exception(ssl_exception("Failed to parse PEM data"));
+    }
+
+    const int cert_result = ::SSL_CTX_use_certificate(ctx_.get(), cert);
+    const int key_result = ::SSL_CTX_use_PrivateKey(ctx_.get(), key);
+
+    ::X509_free(cert);
+    ::EVP_PKEY_free(key);
+
+    if (cert_result <= 0 || key_result <= 0) {
+        throw_exception(ssl_exception("Failed to set certificate or private key"));
+    }
+    if (::SSL_CTX_check_private_key(ctx_.get()) != 1) {
+        throw_exception(ssl_exception("Private key does not match certificate"));
+    }
+}
+
+void ssl_context::load_verify_locations(const string& ca_file, const string& ca_path) {
+    if (::SSL_CTX_load_verify_locations(ctx_.get(),
+                                       ca_file.empty() ? nullptr : ca_file.data(),
+                                       ca_path.empty() ? nullptr : ca_path.data()) <= 0) {
+        throw_exception(ssl_exception("Failed to load CA certificates"));
+                                       }
+}
+
+void ssl_context::set_verify_mode(int mode) {
+    ::SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
+}
+
+void ssl_context::require_client_certificate() {
+    ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, nullptr);
+}
+
+void ssl_context::set_cipher_list(const string& ciphers) {
+    if (::SSL_CTX_set_cipher_list(ctx_.get(), ciphers.data()) <= 0) {
+        throw_exception(ssl_exception("Failed to set cipher list"));
+    }
+}
+
+void ssl_context::set_ciphersuites(const string& ciphersuites) {
+    if (::SSL_CTX_set_ciphersuites(ctx_.get(), ciphersuites.data()) <= 0) {
+        throw_exception(ssl_exception("Failed to set ciphersuites"));
+    }
+}
+
+void ssl_context::set_default_options() {
+    if (!ctx_) return;
+
+    long options = SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1;
+    options |= SSL_OP_SINGLE_DH_USE | SSL_OP_SINGLE_ECDH_USE;
+    options |= SSL_OP_CIPHER_SERVER_PREFERENCE;
+    options |= SSL_OP_NO_COMPRESSION;
+
+    ::SSL_CTX_set_options(ctx_.get(), options);
+    ::SSL_CTX_set_min_proto_version(ctx_.get(), TLS1_2_VERSION);
+
+    set_cipher_list("HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4");
+    set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256");
+}
+
+void ssl_context::set_session_cache_size(long size) {
+    ::SSL_CTX_sess_set_cache_size(ctx_.get(), size);
+}
+
+void ssl_context::set_timeout(long seconds) {
+    ::SSL_CTX_set_timeout(ctx_.get(), seconds);
+}
+
+void ssl_context::set_alpn_protos(const vector<string>& protocols) {
+    if (!ctx_) {
+        throw_exception(ssl_exception("SSL context is not initialized"));
+    }
+    if (protocols.empty()) return;
+
+    byte_vector alpn_data;
+    for (const auto& proto : protocols) {
+        if (proto.empty() || proto.size() > 255) {
+            throw_exception(value_exception("Invalid ALPN protocol length"));
+        }
+        alpn_data.push_back(static_cast<byte_t>(proto.size()));
+        alpn_data.insert(alpn_data.end(), proto.begin(), proto.end());
+    }
+
+    if (::SSL_CTX_set_alpn_protos(ctx_.get(), alpn_data.data(), static_cast<unsigned int>(alpn_data.size())) != 0) {
+        throw_exception(ssl_exception("Failed to set ALPN protocols"));
+    }
+}
+
+NEFORCE_END_NAMESPACE__
+#endif

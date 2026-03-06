@@ -1,23 +1,23 @@
-#include <MSTL/core/system/sysinfo.hpp>
-#include <MSTL/core/string/to_string.hpp>
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/async/mutex.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/memory/bit.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
+#include <NeForce/core/string/to_string.hpp>
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/async/mutex.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/memory/bit.hpp>
 #include <intrin.h>
 #include <comdef.h>
 #include <pdh.h>
 #include <psapi.h>
 #include <winternl.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/file/file.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <NeForce/core/file/file.hpp>
 #include <sys/sysinfo.h>
 #include <sys/utsname.h>
 #include <unistd.h>
 #include <dirent.h>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 static mutex& sysinfo_mutex() {
     static mutex sysinfo_mutex_;
@@ -25,7 +25,7 @@ static mutex& sysinfo_mutex() {
 }
 
 size_t sysinfo::memory_info::available_memory() const noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return available_physical + available_virtual;
 #else
     struct ::sysinfo info{};
@@ -41,22 +41,22 @@ string sysinfo::os_version_info::version() const {
 }
 
 static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     int cpu_info_data[4] = { -1 };
     char vendor[13] = {};
     char brand[49] = {};
 
     ::__cpuid(cpu_info_data, 0);
-    _MSTL memory_copy(vendor, &cpu_info_data[1], 4);
-    _MSTL memory_copy(vendor + 4, &cpu_info_data[3], 4);
-    _MSTL memory_copy(vendor + 8, &cpu_info_data[2], 4);
+    _NEFORCE memory_copy(vendor, &cpu_info_data[1], 4);
+    _NEFORCE memory_copy(vendor + 4, &cpu_info_data[3], 4);
+    _NEFORCE memory_copy(vendor + 8, &cpu_info_data[2], 4);
     vendor[12] = '\0';
 
     CPU_info.vendor = vendor;
 
     for (int i = 0x80000002; i <= 0x80000004; i++) {
         ::__cpuid(cpu_info_data, i);
-        _MSTL memory_copy(brand + (i - 0x80000002) * 16, cpu_info_data, sizeof(cpu_info_data));
+        _NEFORCE memory_copy(brand + (i - 0x80000002) * 16, cpu_info_data, sizeof(cpu_info_data));
     }
     brand[48] = '\0';
     CPU_info.brand = brand;
@@ -75,7 +75,7 @@ static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
                 for (::DWORD i = 0; i < buffer_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++) {
                     if (buffer[i].Relationship == ::RelationProcessorCore) {
                         processor_core_count++;
-                        logical_processor_count += _MSTL popcount(buffer[i].ProcessorMask);
+                        logical_processor_count += _NEFORCE popcount(buffer[i].ProcessorMask);
                     }
                 }
 
@@ -109,7 +109,7 @@ static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
     const string cpuinfo_str = cpuinfo.read();
     size_t pos = 0;
     
-    while (_MSTL getline(cpuinfo_str.view(), pos, line)) {
+    while (_NEFORCE getline(cpuinfo_str.view(), pos, line)) {
         if (line.empty()) continue;
         
         if (line.find("processor") == 0) {
@@ -193,7 +193,7 @@ static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
 }
 
 static void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
     if (ntdll) {
         using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
@@ -235,7 +235,7 @@ static void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
 
         string current_number;
         for (const char c: release) {
-            if (_MSTL is_digit(c)) {
+            if (_NEFORCE is_digit(c)) {
                 current_number += c;
             } else if (c == '.' && !current_number.empty() && part_index < 3) {
                 version_parts[part_index] = to_int32(current_number.view());
@@ -305,7 +305,7 @@ sysinfo::sysinfo() {
 }
 
 void sysinfo::init() {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SYSTEM_INFO system_info{};
     ::GetSystemInfo(&system_info);
 
@@ -369,7 +369,7 @@ void sysinfo::init() {
     system_info_.processor_numbers = ::sysconf(::_SC_NPROCESSORS_ONLN);
     system_info_.allocation_granularity = system_info_.page_size;
 
-#ifdef MSTL_DATA_BUS_WIDTH_64__
+#ifdef NEFORCE_ARCH_BITS_64
     system_info_.min_app_address = 0x400000;
     system_info_.max_app_address = 0x7fffffffffff;
 #else
@@ -420,11 +420,11 @@ void sysinfo::init() {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
                     string_view value = line.view(colon + 1);
-                    MSTL_IGNORE value.trim_left();
+                    NEFORCE_IGNORE value.trim_left();
                     if (value.ends_with("kB")) {
                         value = value.substr(0, value.length() - 2);
                     }
-                    MSTL_IGNORE value.trim_right();
+                    NEFORCE_IGNORE value.trim_right();
                     if (!value.empty()) {
                         memory_info_.total_physical = to_uint64(value) * 1024;
                     }
@@ -433,11 +433,11 @@ void sysinfo::init() {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
                     string_view value = line.view(colon + 1);
-                    MSTL_IGNORE value.trim_left();
+                    NEFORCE_IGNORE value.trim_left();
                     if (value.ends_with("kB")) {
                         value = value.substr(0, value.length() - 2);
                     }
-                    MSTL_IGNORE value.trim_right();
+                    NEFORCE_IGNORE value.trim_right();
                     if (!value.empty()) {
                         memory_info_.available_physical = to_uint64(value) * 1024;
                     }
@@ -470,7 +470,7 @@ string sysinfo::format_bytes(const uint64_t bytes) {
 }
 
 float64_t sysinfo::cpu_usage() {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     static ::PDH_HQUERY cpu_query;
     static ::PDH_HCOUNTER cpu_total;
     static bool initialized = false;
@@ -560,7 +560,7 @@ float64_t sysinfo::cpu_usage() {
 }
 
 uint32_t sysinfo::process_count() {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD processes[1024];
     ::DWORD needed;
     if (!::EnumProcesses(processes, sizeof(processes), &needed)) {
@@ -576,7 +576,7 @@ uint32_t sysinfo::process_count() {
             if (entry->d_type == DT_DIR) {
                 bool is_numeric = true;
                 for (int i = 0; entry->d_name[i] != '\0'; i++) {
-                    if (!_MSTL is_digit(entry->d_name[i])) {
+                    if (!_NEFORCE is_digit(entry->d_name[i])) {
                         is_numeric = false;
                         break;
                     }
@@ -592,4 +592,4 @@ uint32_t sysinfo::process_count() {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

@@ -1,6 +1,6 @@
-#include <MSTL/core/system/pipe.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/system/pipe.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <windef.h>
 #include <WinBase.h>
 #ifdef max
@@ -15,10 +15,10 @@
 #include <cstring>
 #include <cerrno>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 pipe::pipe(bool inheritable) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SECURITY_ATTRIBUTES sa{};
     sa.nLength = sizeof(sa);
     sa.bInheritHandle = inheritable ? TRUE : FALSE;
@@ -52,7 +52,7 @@ pipe::~pipe() {
 }
 
 pipe::pipe(pipe&& other) noexcept
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 : read_handle_(other.read_handle_), write_handle_(other.write_handle_) {
     other.read_handle_ = nullptr;
     other.write_handle_ = nullptr;
@@ -67,7 +67,7 @@ pipe::pipe(pipe&& other) noexcept
 pipe& pipe::operator =(pipe&& other) noexcept {
     if (this != &other) {
         close();
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         read_handle_ = other.read_handle_;
         write_handle_ = other.write_handle_;
         other.read_handle_ = nullptr;
@@ -83,7 +83,7 @@ pipe& pipe::operator =(pipe&& other) noexcept {
 }
 
 int pipe::read(void* buffer, size_t size) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (read_handle_ == nullptr) return -1;
 
     ::DWORD bytes_read;
@@ -102,10 +102,10 @@ int pipe::read(void* buffer, size_t size) noexcept {
 string pipe::read_available() noexcept {
     string output;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (read_handle_ == nullptr) return output;
 
-    constexpr ::DWORD buffer_size = 4096;
+    constexpr ::DWORD buffer_size = MEMORY_BIG_ALLOC_THRESHHOLD;
     char buffer[buffer_size];
     ::DWORD bytes_read;
 
@@ -128,7 +128,7 @@ string pipe::read_available() noexcept {
 #else
     if (fds_[0] < 0) return output;
 
-    char buffer[4096];
+    char buffer[MEMORY_BIG_ALLOC_THRESHHOLD];
     const int flags = ::fcntl(fds_[0], F_GETFL, 0);
     ::fcntl(fds_[0], F_SETFL, flags | O_NONBLOCK);
 
@@ -149,7 +149,7 @@ string pipe::read_available() noexcept {
 }
 
 int pipe::write(const void* data, size_t size) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (write_handle_ == nullptr) return -1;
 
     ::DWORD bytes_written;
@@ -166,7 +166,7 @@ int pipe::write(const void* data, size_t size) noexcept {
 }
 
 void pipe::close_read() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (read_handle_ != nullptr) {
         ::CloseHandle(read_handle_);
         read_handle_ = nullptr;
@@ -180,7 +180,7 @@ void pipe::close_read() noexcept {
 }
 
 void pipe::close_write() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (write_handle_ != nullptr) {
         ::CloseHandle(write_handle_);
         write_handle_ = nullptr;
@@ -199,7 +199,7 @@ void pipe::close() noexcept {
 }
 
 bool pipe::is_valid() const noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return read_handle_ != nullptr || write_handle_ != nullptr;
 #else
     return fds_[0] >= 0 || fds_[1] >= 0;
@@ -207,7 +207,7 @@ bool pipe::is_valid() const noexcept {
 }
 
 pipe::native_handle_type pipe::detach_read_handle() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     native_handle_type handle = read_handle_;
     read_handle_ = nullptr;
     return handle;
@@ -219,7 +219,7 @@ pipe::native_handle_type pipe::detach_read_handle() noexcept {
 }
 
 pipe::native_handle_type pipe::detach_write_handle() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     native_handle_type handle = write_handle_;
     write_handle_ = nullptr;
     return handle;
@@ -230,4 +230,4 @@ pipe::native_handle_type pipe::detach_write_handle() noexcept {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

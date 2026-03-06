@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sort.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sort_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sort.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>排序算法  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="merge_8hpp_source.html">NeForce/core/algorithm/merge.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="heap_8hpp_source.html">NeForce/core/algorithm/heap.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="partition_8hpp_source.html">NeForce/core/algorithm/partition.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="compare_8hpp_source.html">NeForce/core/algorithm/compare.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+sort.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="sort_8hpp__incl.svg" width="1064" height="1216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="sort_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga5fce1d0fb240bb3578519e037bac0b00" id="r_ga5fce1d0fb240bb3578519e037bac0b00"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga5fce1d0fb240bb3578519e037bac0b00 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga5fce1d0fb240bb3578519e037bac0b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:ga54b0b59c4c05a63c1b96fdad1d71e61e" id="r_ga54b0b59c4c05a63c1b96fdad1d71e61e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga54b0b59c4c05a63c1b96fdad1d71e61e template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga54b0b59c4c05a63c1b96fdad1d71e61e">is_sorted</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga54b0b59c4c05a63c1b96fdad1d71e61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否已排序  <br /></td></tr>
+<tr class="memitem:gab783225826837f46b5125cf43ecd442b" id="r_gab783225826837f46b5125cf43ecd442b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab783225826837f46b5125cf43ecd442b template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gab783225826837f46b5125cf43ecd442b"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:ga1364d104f129566eaea032b500fbb87a" id="r_ga1364d104f129566eaea032b500fbb87a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga1364d104f129566eaea032b500fbb87a template"><td class="memItemLeft">Iterator&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga1364d104f129566eaea032b500fbb87a">is_sorted_until</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga1364d104f129566eaea032b500fbb87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找首个破坏排序的元素  <br /></td></tr>
+<tr class="memitem:ga22c30ead6a92afb912c68e2f9364a819" id="r_ga22c30ead6a92afb912c68e2f9364a819"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga22c30ead6a92afb912c68e2f9364a819 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga22c30ead6a92afb912c68e2f9364a819"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:ga121f4d074409e1a9fa7d105543adae87" id="r_ga121f4d074409e1a9fa7d105543adae87"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga121f4d074409e1a9fa7d105543adae87 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga121f4d074409e1a9fa7d105543adae87">merge_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga121f4d074409e1a9fa7d105543adae87"><td class="mdescLeft">&#160;</td><td class="mdescRight">归并排序  <br /></td></tr>
+<tr class="memitem:gad27000a1c2793398bcb92fb151d8aeca" id="r_gad27000a1c2793398bcb92fb151d8aeca"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad27000a1c2793398bcb92fb151d8aeca template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gad27000a1c2793398bcb92fb151d8aeca"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:ga93c3ca069ff13f30369021482848ccc8" id="r_ga93c3ca069ff13f30369021482848ccc8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga93c3ca069ff13f30369021482848ccc8 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga93c3ca069ff13f30369021482848ccc8">partial_sort</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:ga93c3ca069ff13f30369021482848ccc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序  <br /></td></tr>
+<tr class="memitem:gaab427767ef61a5d9de340c035ea6f103" id="r_gaab427767ef61a5d9de340c035ea6f103"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a>&lt; Iterator1 &gt; &amp;&amp;<a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator2 &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaab427767ef61a5d9de340c035ea6f103 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</td></tr>
+<tr class="memdesc:gaab427767ef61a5d9de340c035ea6f103"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制到另一个范围  <br /></td></tr>
+<tr class="memitem:ga29e746c754c35147ebf13ab20c9a7ce2" id="r_ga29e746c754c35147ebf13ab20c9a7ce2"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga29e746c754c35147ebf13ab20c9a7ce2 template"><td class="memItemLeft">Iterator2&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga29e746c754c35147ebf13ab20c9a7ce2">partial_sort_copy</a> (Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</td></tr>
+<tr class="memdesc:ga29e746c754c35147ebf13ab20c9a7ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">部分排序并复制  <br /></td></tr>
+<tr class="memitem:ga1886b1ec068eee2817df757f1991980d" id="r_ga1886b1ec068eee2817df757f1991980d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1886b1ec068eee2817df757f1991980d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga1886b1ec068eee2817df757f1991980d"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga8a0aec613c2b702a0f34cf6299b7b190" id="r_ga8a0aec613c2b702a0f34cf6299b7b190"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga8a0aec613c2b702a0f34cf6299b7b190 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga8a0aec613c2b702a0f34cf6299b7b190">insertion_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga8a0aec613c2b702a0f34cf6299b7b190"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入排序  <br /></td></tr>
+<tr class="memitem:ga0ee44dde2bc3a33ba32cc85cc55dbe21" id="r_ga0ee44dde2bc3a33ba32cc85cc55dbe21"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga0ee44dde2bc3a33ba32cc85cc55dbe21 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a> (Iterator first, Iterator last, int depth_limit, Compare comp)</td></tr>
+<tr class="memdesc:ga0ee44dde2bc3a33ba32cc85cc55dbe21"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:gaffb3fd567cdefa23e2ab6a1a5a6e6947" id="r_gaffb3fd567cdefa23e2ab6a1a5a6e6947"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaffb3fd567cdefa23e2ab6a1a5a6e6947 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaffb3fd567cdefa23e2ab6a1a5a6e6947">introspective_sort</a> (Iterator first, Iterator last, int depth_limit)</td></tr>
+<tr class="memdesc:gaffb3fd567cdefa23e2ab6a1a5a6e6947"><td class="mdescLeft">&#160;</td><td class="mdescRight">内省排序  <br /></td></tr>
+<tr class="memitem:ga7782ccaeaf7cafbeea2439ca26d33338" id="r_ga7782ccaeaf7cafbeea2439ca26d33338"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7782ccaeaf7cafbeea2439ca26d33338 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga7782ccaeaf7cafbeea2439ca26d33338"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:ga5daa37ac5f6fc132c53c076b24ce6163" id="r_ga5daa37ac5f6fc132c53c076b24ce6163"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga5daa37ac5f6fc132c53c076b24ce6163 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga5daa37ac5f6fc132c53c076b24ce6163">quick_sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga5daa37ac5f6fc132c53c076b24ce6163"><td class="mdescLeft">&#160;</td><td class="mdescRight">快速排序  <br /></td></tr>
+<tr class="memitem:gad43eb8f252707a714bbfd78ab025c3e5" id="r_gad43eb8f252707a714bbfd78ab025c3e5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad43eb8f252707a714bbfd78ab025c3e5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">sort</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gad43eb8f252707a714bbfd78ab025c3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga7a4fdc8969bfed2d02cdd1941044a8d9" id="r_ga7a4fdc8969bfed2d02cdd1941044a8d9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga7a4fdc8969bfed2d02cdd1941044a8d9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga7a4fdc8969bfed2d02cdd1941044a8d9">sort</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga7a4fdc8969bfed2d02cdd1941044a8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准排序  <br /></td></tr>
+<tr class="memitem:ga351f34ece579b7648aaa887896850608" id="r_ga351f34ece579b7648aaa887896850608"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga351f34ece579b7648aaa887896850608 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">nth_element</a> (Iterator first, Iterator nth, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga351f34ece579b7648aaa887896850608"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+<tr class="memitem:gaf843abe1431e912979c95e0052a24a79" id="r_gaf843abe1431e912979c95e0052a24a79"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaf843abe1431e912979c95e0052a24a79 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___sort_algorithms.html#gaf843abe1431e912979c95e0052a24a79">nth_element</a> (Iterator first, Iterator nth, Iterator last)</td></tr>
+<tr class="memdesc:gaf843abe1431e912979c95e0052a24a79"><td class="mdescLeft">&#160;</td><td class="mdescRight">第n个元素选择  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>排序算法 </p>
+<p>此文件提供了标准排序算法实现， 包括多种排序算法、排序检查和部分排序功能。 </p>
+
+<p class="definition">在文件 <a class="el" href="sort_8hpp_source.html">sort.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="sort_8hpp.html">sort.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

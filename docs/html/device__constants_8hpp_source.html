@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: device_constants.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('device__constants_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">device_constants.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_CONSTANTS_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_CONSTANTS_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="path_8hpp.html">NeForce/core/file/path.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">enum class</span> DEVICE_TYPE {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    SERIAL_PORT,</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    STORAGE,</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    HID,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    NETWORK,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    AUDIO,</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    VIDEO,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    GENERIC,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    UNKNOWN</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">string</span> NEFORCE_API to_string(DEVICE_TYPE type);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>DEVICE_TYPE NEFORCE_API to_device_t(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">enum class</span> DEVICE_OPEN_MODE {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    READ,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    WRITE,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    READ_WRITE,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    NON_BLOCKING</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">enum class</span> DEVICE_OPEN_FLAG : <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    NONE            = 0,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_enumvalue" href="group___file.html#gga6c3d23ab55b986046a20482ba1d037e2af45c3a0bb3687ed8e221253b3fd4a2ce">EXCLUSIVE</a>       = 1 &lt;&lt; 0,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NO_INHERIT      = 1 &lt;&lt; 1,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ASYNC           = 1 &lt;&lt; 2,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    DIRECT_IO       = 1 &lt;&lt; 3,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    SYNC            = 1 &lt;&lt; 4,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    CREATE          = 1 &lt;&lt; 5</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">constexpr</span> DEVICE_OPEN_FLAG <a class="code hl_function" href="group___memory_order.html#ga4d9a876d4d53afcbc2b20efdf7f0d170">operator|</a>(DEVICE_OPEN_FLAG a, DEVICE_OPEN_FLAG b) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>DEVICE_OPEN_FLAG<span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(a) | <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(b));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">constexpr</span> DEVICE_OPEN_FLAG <a class="code hl_function" href="group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6">operator&amp;</a>(DEVICE_OPEN_FLAG a, DEVICE_OPEN_FLAG b) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>DEVICE_OPEN_FLAG<span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(a) &amp; <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(b));</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">enum class</span> DEVICE_IO_DIRECT {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    READ, <span class="comment">// IN</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    WRITE, <span class="comment">// OUT</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    BOTH</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">enum class</span> DEVICE_EVENT {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    DATA_AVAILABLE,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    WRITE_READY,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    ERROR_OCCURRED,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    DISCONNECTED</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">struct </span>device_info {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> path path;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">string</span> friendly_name;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">string</span> hardware_id;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">string</span> manufacturer;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">string</span> description;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    DEVICE_TYPE type{DEVICE_TYPE::UNKNOWN};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> vendor_id{0};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> product_id{0};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> device_id{0};</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> size_bytes{0};</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> block_size{512};</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">bool</span> removable{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> present{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">bool</span> exclusive{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keyword">class </span>ioctl_command {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">using </span>native_type = ::DWORD;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keyword">using </span>native_type = <span class="keywordtype">unsigned</span> long;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">explicit</span> ioctl_command(native_type code, <span class="keyword">const</span> <span class="keywordtype">void</span>* in_data = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordtype">size_t</span> in_size = 0, <span class="keywordtype">void</span>* out_data = <span class="keyword">nullptr</span>, <span class="keywordtype">size_t</span> out_size = 0)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        : code_(code), in_data_(in_data), in_size_(in_size),</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>          out_data_(out_data), out_size_(out_size) {}</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    NEFORCE_NODISCARD native_type code() const noexcept { <span class="keywordflow">return</span> code_; }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">void</span>* in_data() const noexcept { <span class="keywordflow">return</span> in_data_; }</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> in_size() const noexcept { <span class="keywordflow">return</span> in_size_; }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    NEFORCE_NODISCARD <span class="keywordtype">void</span>* out_data() const noexcept { <span class="keywordflow">return</span> out_data_; }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> out_size() const noexcept { <span class="keywordflow">return</span> out_size_; }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">static</span> ioctl_command make(native_type code, <span class="keyword">const</span> T&amp; <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> ioctl_command(code, &amp;<a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">static</span> ioctl_command make_with_output(native_type code, T&amp; output) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span> ioctl_command(code, <span class="keyword">nullptr</span>, 0, &amp;output, <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    native_type code_;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">const</span> <span class="keywordtype">void</span>* in_data_;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">size_t</span> in_size_;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span>* out_data_;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">size_t</span> out_size_;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="keyword">using </span>device_event_callback = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(DEVICE_EVENT)&gt;;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keyword">using </span>data_received_callback = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<span class="keyword">const</span> <span class="keywordtype">void</span>*, <span class="keywordtype">size_t</span>)&gt;;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keyword">using </span>io_completion_callback = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<span class="keywordtype">size_t</span>, <span class="keywordtype">int</span>)&gt;;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_CONSTANTS_HPP__</span></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00029">function.hpp:29</a></div></div>
+<div class="ttc" id="afunction_8hpp_html"><div class="ttname"><a href="function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
+<div class="ttc" id="agroup___file_html_gga6c3d23ab55b986046a20482ba1d037e2af45c3a0bb3687ed8e221253b3fd4a2ce"><div class="ttname"><a href="group___file.html#gga6c3d23ab55b986046a20482ba1d037e2af45c3a0bb3687ed8e221253b3fd4a2ce">FILE_LOCK::EXCLUSIVE</a></div><div class="ttdeci">@ EXCLUSIVE</div><div class="ttdoc">独占锁</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00225">file_constants.hpp:225</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga4d9a876d4d53afcbc2b20efdf7f0d170"><div class="ttname"><a href="group___memory_order.html#ga4d9a876d4d53afcbc2b20efdf7f0d170">operator|</a></div><div class="ttdeci">constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noexcept</div><div class="ttdoc">内存顺序与修饰符的或操作符</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00073">atomic_base.hpp:73</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gaa412d48215ac5173e7fc457a4e9443e6"><div class="ttname"><a href="group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6">operator&amp;</a></div><div class="ttdeci">constexpr memory_order operator&amp;(memory_order mo, memory_order_modifier mod) noexcept</div><div class="ttdoc">内存顺序与修饰符的与操作符</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00085">atomic_base.hpp:85</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
+<div class="ttc" id="apath_8hpp_html"><div class="ttname"><a href="path_8hpp.html">path.hpp</a></div><div class="ttdoc">文件路径类</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>system</b></li><li class="navelem"><b>device</b></li><li class="navelem"><b>device_constants.hpp</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

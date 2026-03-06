@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 协程</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___coroutine.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">协程 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>协程支持  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:coroutine_5Ftraits_3C_20Res_2C_20Args_20_3E" id="r_coroutine_5Ftraits_3C_20Res_2C_20Args_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcoroutine__traits.html">coroutine_traits&lt; Res, Args &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">协程特征主模板  <a href="structcoroutine__traits.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:suspend_5Falways" id="r_suspend_5Falways"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsuspend__always.html">suspend_always</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">始终暂停的等待器  <a href="structsuspend__always.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:suspend_5Fnever" id="r_suspend_5Fnever"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsuspend__never.html">suspend_never</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">从不暂停的等待器  <a href="structsuspend__never.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:cancellation_5Ftoken" id="r_cancellation_5Ftoken"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classcancellation__token.html">cancellation_token</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消令牌  <a href="classcancellation__token.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:generator_3C_20T_20_3E" id="r_generator_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classgenerator.html">generator&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">懒序列生成器  <a href="classgenerator.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:task_3C_20T_20_3E" id="r_task_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtask.html">task&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步任务  <a href="classtask.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:task_3C_20void_20_3E" id="r_task_3C_20void_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtask_3_01void_01_4.html">task&lt; void &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">void特化的任务类  <a href="classtask_3_01void_01_4.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:ga6b28debebaa0f1d57331130e5ccb6181" id="r_ga6b28debebaa0f1d57331130e5ccb6181"><td class="memTemplParams" colspan="2">template&lt;typename Promise = void&gt; </td></tr>
+<tr class="memitem:ga6b28debebaa0f1d57331130e5ccb6181 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle</a> = std::coroutine_handle&lt;Promise&gt;</td></tr>
+<tr class="memdesc:ga6b28debebaa0f1d57331130e5ccb6181"><td class="mdescLeft">&#160;</td><td class="mdescRight">协程句柄  <br /></td></tr>
+<tr class="memitem:ga703e941b1a9f15e23513daa24ed4d587" id="r_ga703e941b1a9f15e23513daa24ed4d587"><td class="memItemLeft"><a id="ga703e941b1a9f15e23513daa24ed4d587" name="ga703e941b1a9f15e23513daa24ed4d587"></a>
+using&#160;</td><td class="memItemRight"><b>noop_coroutine_promise</b> = <a class="el" href="#ga8688aa61087dce3a6914a4d6c7f7b55a">std::noop_coroutine_handle</a></td></tr>
+<tr class="memdesc:ga703e941b1a9f15e23513daa24ed4d587"><td class="mdescLeft">&#160;</td><td class="mdescRight">空操作协程的promise类型别名 <br /></td></tr>
+<tr class="memitem:ga8688aa61087dce3a6914a4d6c7f7b55a" id="r_ga8688aa61087dce3a6914a4d6c7f7b55a"><td class="memItemLeft"><a id="ga8688aa61087dce3a6914a4d6c7f7b55a" name="ga8688aa61087dce3a6914a4d6c7f7b55a"></a>
+using&#160;</td><td class="memItemRight"><b>noop_coroutine_handle</b> = <a class="el" href="#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle</a>&lt;<a class="el" href="#ga703e941b1a9f15e23513daa24ed4d587">noop_coroutine_promise</a>&gt;</td></tr>
+<tr class="memdesc:ga8688aa61087dce3a6914a4d6c7f7b55a"><td class="mdescLeft">&#160;</td><td class="mdescRight">空操作协程句柄类型别名 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga43aa77a087a863d0064283cc5871fde7" id="r_ga43aa77a087a863d0064283cc5871fde7"><td class="memItemLeft"><a class="el" href="#ga8688aa61087dce3a6914a4d6c7f7b55a">noop_coroutine_handle</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga43aa77a087a863d0064283cc5871fde7">noop_coroutine</a> () noexcept</td></tr>
+<tr class="memdesc:ga43aa77a087a863d0064283cc5871fde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取空操作协程句柄  <br /></td></tr>
+<tr class="memitem:ga8c72fd92de476361237939b98f6a450c" id="r_ga8c72fd92de476361237939b98f6a450c"><td class="memTemplParams" colspan="2">template&lt;typename... Tasks&gt; </td></tr>
+<tr class="memitem:ga8c72fd92de476361237939b98f6a450c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ga8c72fd92de476361237939b98f6a450c">when_all</a> (Tasks &amp;&amp;... tasks) -&gt; <a class="el" href="classtask.html">task</a>&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</td></tr>
+<tr class="memdesc:ga8c72fd92de476361237939b98f6a450c"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待所有任务完成  <br /></td></tr>
+<tr class="memitem:ga79f854a5ada0083996d280c91b6cb2c1" id="r_ga79f854a5ada0083996d280c91b6cb2c1"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Factory&gt; </td></tr>
+<tr class="memitem:ga79f854a5ada0083996d280c91b6cb2c1 template"><td class="memItemLeft"><a class="el" href="classtask.html">task</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga79f854a5ada0083996d280c91b6cb2c1">retry</a> (Factory &amp;&amp;factory, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> max_attempts, <a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;)&gt; should_retry=nullptr)</td></tr>
+<tr class="memdesc:ga79f854a5ada0083996d280c91b6cb2c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">带重试的异步操作  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>协程支持 </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">类型定义说明</h2>
+<a id="ga6b28debebaa0f1d57331130e5ccb6181" name="ga6b28debebaa0f1d57331130e5ccb6181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b28debebaa0f1d57331130e5ccb6181">&#9670;&#160;</a></span>coroutine_handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Promise = void&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ga6b28debebaa0f1d57331130e5ccb6181">coroutine_handle</a> = std::coroutine_handle&lt;Promise&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>协程句柄 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Promise</td><td>promise类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用自定义coroutine_handle会编译失败， 故对std::coroutine_handle重新导出，用于管理协程的生命周期。 提供恢复、销毁等操作。 </p>
+
+<p class="definition">在文件 <a class="el" href="coroutine_8hpp_source.html">coroutine.hpp</a> 第 <a class="el" href="coroutine_8hpp_source.html#l00064">64</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga43aa77a087a863d0064283cc5871fde7" name="ga43aa77a087a863d0064283cc5871fde7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga43aa77a087a863d0064283cc5871fde7">&#9670;&#160;</a></span>noop_coroutine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ga8688aa61087dce3a6914a4d6c7f7b55a">noop_coroutine_handle</a> noop_coroutine </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取空操作协程句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>空操作协程句柄</dd></dl>
+<p>空操作协程是一个特殊协程，永远不会完成，调用resume无效果。 可用于需要协程句柄但不需要实际协程的场景。 </p>
+
+<p class="definition">在文件 <a class="el" href="coroutine_8hpp_source.html">coroutine.hpp</a> 第 <a class="el" href="coroutine_8hpp_source.html#l00091">91</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00493">task&lt; T &gt;::promise_type::final_awaiter::await_suspend()</a>.</p>
+
+</div>
+</div>
+<a id="ga79f854a5ada0083996d280c91b6cb2c1" name="ga79f854a5ada0083996d280c91b6cb2c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga79f854a5ada0083996d280c91b6cb2c1">&#9670;&#160;</a></span>retry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Factory&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtask.html">task</a>&lt; T &gt; retry </td>
+          <td>(</td>
+          <td class="paramtype">Factory &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>factory</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>max_attempts</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;)&gt;</td>          <td class="paramname"><span class="paramname"><em>should_retry</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>带重试的异步操作 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>结果类型 </td></tr>
+    <tr><td class="paramname">Factory</td><td>工厂函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factory</td><td>返回task&lt;T&gt;的工厂函数 </td></tr>
+    <tr><td class="paramname">max_attempts</td><td>最大尝试次数 </td></tr>
+    <tr><td class="paramname">should_retry</td><td>判断是否应该重试的函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>任务结果</dd></dl>
+<p>执行异步操作，失败时根据策略重试。 </p>
+
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00896">896</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception()</a> , 以及 <a class="el" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00290">lock_free_queue&lt; T &gt;::try_pop()</a>.</p>
+
+</div>
+</div>
+<a id="ga8c72fd92de476361237939b98f6a450c" name="ga8c72fd92de476361237939b98f6a450c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8c72fd92de476361237939b98f6a450c">&#9670;&#160;</a></span>when_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Tasks&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto when_all </td>
+          <td>(</td>
+          <td class="paramtype">Tasks &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>tasks</em></span></td><td>)</td>
+          <td> -&gt; <a class="el" href="classtask.html">task</a>&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>等待所有任务完成 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Tasks</td><td>任务类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tasks</td><td>要等待的任务 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含所有任务结果的任务</dd></dl>
+<p>并行执行多个任务，等待所有任务完成后返回结果元组。 </p>
+
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00877">877</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>, <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+var bit_8hpp =
+[
+    [ "bit_ceil", "group___bit_manipulation.html#gac832844ba0a5424f07b316752a6cbc7f", null ],
+    [ "bit_extract", "group___bit_manipulation.html#gaca5121f02918b2cea077eb25512cb83c", null ],
+    [ "bit_floor", "group___bit_manipulation.html#gace6550d923413b36d07c574320cff214", null ],
+    [ "bit_insert", "group___bit_manipulation.html#ga94e957353d602566dffa7ae6f07376bf", null ],
+    [ "bit_width", "group___bit_manipulation.html#gae781ff6a7fad2bc8db38b0c3b371658e", null ],
+    [ "clz32", "group___bit_counting.html#ga7eab8660ce57f82d76864c980f77a087", null ],
+    [ "countl_one", "group___bit_counting.html#ga1da158bf3815ab2e7503f8cd52d9ca96", null ],
+    [ "countl_zero", "group___bit_counting.html#gaccd54859db374262f5c36034b8669abb", null ],
+    [ "countr_one", "group___bit_counting.html#gab8f133d4b23b52b75fd0c952d85af189", null ],
+    [ "countr_zero", "group___bit_counting.html#gaf2706acea69cb92b45211c361b3cd40b", null ],
+    [ "has_single_bit", "group___bit_manipulation.html#gaca7d03246c48e209e00c3355d632e1da", null ],
+    [ "highest_set_bit_pos", "group___bit_counting.html#ga4bdc65d39ae6ee2a96635db35ef668ad", null ],
+    [ "lowest_set_bit_pos", "group___bit_counting.html#ga68513d991c2a3a4be5f5d3bbd9827913", null ],
+    [ "mask_from_to", "group___bit_manipulation.html#ga502c62305af2c0eb853c3d7d755933bd", null ],
+    [ "parity", "group___bit_counting.html#ga1a1649ec9d3f0fb2aad2df2550467318", null ],
+    [ "parity32", "group___bit_counting.html#ga2bfc6542da7cf0106ecf09fbd4394fa8", null ],
+    [ "popcount", "group___bit_counting.html#ga7493eb3d8ac54b313025c16119a3e9df", null ],
+    [ "popcount32", "group___bit_counting.html#ga2e8de9ca6e14827b422486dc3ed35706", null ],
+    [ "reverse_bits", "group___bit_manipulation.html#ga6d479a2f9fba29a8fc0109f60c2b4254", null ],
+    [ "reverse_bits32", "group___bit_manipulation.html#gab8b0fc7d380d8ef733a8fe1239af4e1b", null ],
+    [ "rotate_l", "group___bit_manipulation.html#gaa39eb44c719b7d31251a6b5ac1568ad0", null ],
+    [ "rotate_l32", "group___bit_manipulation.html#ga7ffc0b6cc2b91ee7a9c02fecd46da794", null ],
+    [ "rotate_r", "group___bit_manipulation.html#gae161496fd9c8999a12cf45d93ec19750", null ],
+    [ "rotate_r32", "group___bit_manipulation.html#ga4af877bc0364692757d58127e24750a8", null ]
+];

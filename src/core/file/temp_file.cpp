@@ -1,11 +1,11 @@
-#include <MSTL/core/file/temp_file.hpp>
-#include <MSTL/core/time/clocks.hpp>
-#include <MSTL/core/async/thread.hpp>
-#include <MSTL/core/async/atomic.hpp>
-#include <MSTL/core/system/environment.hpp>
-#include <MSTL/core/system/process.hpp>
-#include <MSTL/core/numeric/random.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/file/temp_file.hpp>
+#include <NeForce/core/time/clocks.hpp>
+#include <NeForce/core/async/thread.hpp>
+#include <NeForce/core/async/atomic.hpp>
+#include <NeForce/core/system/environment.hpp>
+#include <NeForce/core/system/process.hpp>
+#include <NeForce/core/numeric/random.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 static vector<path>& get_temp_registry() {
     static vector<path> registry;
@@ -51,9 +51,9 @@ void temp_file::cleanup_all_temp_files() {
         if (temp_path.exists()) {
             try {
                 if (temp_path.is_directory()) {
-                    MSTL_IGNORE temp_path.remove_all();
+                    NEFORCE_IGNORE temp_path.remove_all();
                 } else {
-                    MSTL_IGNORE temp_path.remove();
+                    NEFORCE_IGNORE temp_path.remove();
                 }
             } catch (...) {}
         }
@@ -75,7 +75,7 @@ temp_file::temp_file(const string& prefix, const string& suffix, const FILE_CREA
         }
     } catch (...) {
         if (file_.path().exists()) {
-            MSTL_IGNORE file_.path().remove();
+            NEFORCE_IGNORE file_.path().remove();
         }
         throw;
     }
@@ -94,7 +94,7 @@ temp_file::~temp_file() {
 }
 
 temp_file::temp_file(temp_file&& other) noexcept
-: file_(_MSTL move(other.file_)), delete_policy_(other.delete_policy_) {
+: file_(_NEFORCE move(other.file_)), delete_policy_(other.delete_policy_) {
     other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
 }
 
@@ -102,7 +102,7 @@ temp_file& temp_file::operator =(temp_file&& other) noexcept {
     if (this != addressof(other)) {
         cleanup();
 
-        file_ = _MSTL move(other.file_);
+        file_ = _NEFORCE move(other.file_);
 
         delete_policy_ = other.delete_policy_;
         other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
@@ -118,7 +118,7 @@ void temp_file::cleanup() {
     if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
         lock<mutex> lock(get_registry_mutex());
         auto& registry = get_temp_registry();
-        const auto it = _MSTL find(registry.begin(), registry.end(), file_.path());
+        const auto it = _NEFORCE find(registry.begin(), registry.end(), file_.path());
         if (it != registry.end()) {
             registry.erase(it);
         }
@@ -131,7 +131,7 @@ void temp_file::release() {
 
     lock<mutex> lock(get_registry_mutex());
     auto& registry = get_temp_registry();
-    const auto it = _MSTL find(registry.begin(), registry.end(), file_.path());
+    const auto it = _NEFORCE find(registry.begin(), registry.end(), file_.path());
     if (it != registry.end()) {
         registry.erase(it);
     }
@@ -142,4 +142,4 @@ temp_file temp_file::create_temp_file(const string& prefix,
     return temp_file(prefix, suffix, mode, DELETE_POLICY::AUTO_DELETE);
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

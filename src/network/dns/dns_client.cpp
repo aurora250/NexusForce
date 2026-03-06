@@ -1,40 +1,26 @@
-#include <MSTL/network/tcp_socket.hpp>
-#include <MSTL/core/async/async.hpp>
-#include <MSTL/core/string/vsprintf.hpp>
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/network/dns/dns_client.hpp>
-#ifdef MSTL_PLATFORM_LINUX__
-#include <arpa/inet.h>
-#endif
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/async/async.hpp>
+#include <NeForce/core/numeric/random.hpp>
+#include <NeForce/core/string/format.hpp>
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/network/dns/dns_client.hpp>
+#include <NeForce/network/socket/tcp_socket.hpp>
+#include <NeForce/network/socket/udp_socket.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
-vector<byte_t> dns_client::build_dns_query(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
-    vector<byte_t> query;
-
-    dns_header header;
-    header.id = ::htons(generate_query_id());
-    header.flags = ::htons(0x0100);
-    header.qdcount = ::htons(1);
-
-    query.resize(sizeof(dns_header));
-    memory_copy(query.data(), &header, sizeof(dns_header));
-
-    auto encoded_domain = encode_domain_name(domain);
-    query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
-
-    uint16_t qtype = ::htons(static_cast<uint16_t>(type));
-    uint16_t qclass_val = ::htons(static_cast<uint16_t>(qclass));
-
-    query.insert(query.end(), reinterpret_cast<byte_t*>(&qtype),
-        reinterpret_cast<byte_t*>(&qtype) + sizeof(qtype));
-    query.insert(query.end(), reinterpret_cast<byte_t*>(&qclass_val),
-        reinterpret_cast<byte_t*>(&qclass_val) + sizeof(qclass_val));
-
-    return query;
+static uint16_t generate_dns_client_id() {
+    thread_local random_mt tls_random;
+    thread_local bool seeded = false;
+    if (!seeded) {
+        tls_random.set_seed(static_cast<uint32_t>(
+            steady_clock::now().since_epoch().count() ^
+            this_thread::id().native_handle()));
+        seeded = true;
+    }
+    return tls_random.next_int(1, 65535);
 }
 
-vector<byte_t> dns_client::encode_domain_name(const string& domain) {
-    vector<byte_t> encoded;
+static byte_vector encode_domain_name(const string_view domain) {
+    byte_vector encoded;
     size_t start = 0;
     size_t pos;
 
@@ -61,7 +47,32 @@ vector<byte_t> dns_client::encode_domain_name(const string& domain) {
     return encoded;
 }
 
-string dns_client::decode_domain_name(const vector<byte_t>& data, size_t& offset) {
+static byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+    byte_vector query;
+
+    dns_header header;
+    header.id = ::htons(generate_dns_client_id());
+    header.flags = ::htons(0x0100);
+    header.qdcount = ::htons(1);
+
+    query.resize(sizeof(dns_header));
+    memory_copy(query.data(), &header, sizeof(dns_header));
+
+    auto encoded_domain = encode_domain_name(domain);
+    query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
+
+    uint16_t qtype = ::htons(static_cast<uint16_t>(type));
+    uint16_t qclass_val = ::htons(static_cast<uint16_t>(qclass));
+
+    query.insert(query.end(), reinterpret_cast<byte_t*>(&qtype),
+        reinterpret_cast<byte_t*>(&qtype) + sizeof(qtype));
+    query.insert(query.end(), reinterpret_cast<byte_t*>(&qclass_val),
+        reinterpret_cast<byte_t*>(&qclass_val) + sizeof(qclass_val));
+
+    return query;
+}
+
+static string decode_domain_name(const byte_vector& data, size_t& offset) {
     string name;
     bool jumped = false;
     size_t original_offset = offset;
@@ -115,69 +126,109 @@ string dns_client::decode_domain_name(const vector<byte_t>& data, size_t& offset
     return name;
 }
 
-vector<byte_t> dns_client::send_udp_query(const vector<byte_t>& query) const {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    winsock_initialized();
-#endif
+byte_vector dns_client::send_udp_query(const byte_vector& query) const {
+    thread_local udp_socket tls_udp_socket;
 
-    const tcp_socket udp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::DATAGRAM, SOCKET_PROTOCOL::UDP);
-
-    if (!udp_sock.is_valid()) {
-        throw_exception(dns_exception("Failed to create UDP socket"));
+    if (!tls_udp_socket.is_open()) {
+        tls_udp_socket.open();
+        if (!tls_udp_socket.is_open()) {
+            throw_exception(dns_exception("Failed to create UDP socket"));
+        }
     }
-    if (!udp_sock.set_receive_timeout(timeout_)) {
+
+    if (!tls_udp_socket.set_receive_timeout(config_.timeout)) {
         throw_exception(dns_exception("Failed to set socket timeout"));
     }
 
-    const ssize_t sent = udp_sock.sendto(query.data(), query.size(), dns_server_.data(), dns_port_);
+    const ssize_t sent = tls_udp_socket.send_to(
+        memory_view<const char>{
+            reinterpret_cast<const char*>(query.data()),
+            query.size()
+        },
+        *ip_address::parse(config_.server, config_.port));
+
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
         throw_exception(dns_exception("Failed to send UDP query"));
     }
 
-    vector<byte_t> buffer(512);
-    const ssize_t received = udp_sock.receive_from(buffer.data(), buffer.size());
-    if (received < 0) {
+    byte_vector buffer(512);
+    const auto received = tls_udp_socket.receive_from(
+        memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
+    if (received.first < 0) {
         throw_exception(dns_exception("UDP query timeout or receive error"));
     }
-    buffer.resize(received);
+    buffer.resize(received.first);
     return buffer;
 }
 
-vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    winsock_initialized();
-#endif
+byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
+    thread_local struct tcp_socket_state {
+        tcp_socket socket;
+        string server;
+        int port = 0;
+    } tls_tcp_state;
 
-    const tcp_socket tcp_sock(SOCKET_DOMAIN::IPV4, SOCKET_TYPE::STREAM, SOCKET_PROTOCOL::TCP);
+    auto connect = [&] {
+        tls_tcp_state.socket.close();
+        tls_tcp_state.socket.open();
+        if (!tls_tcp_state.socket.is_open()) {
+            throw_exception(dns_exception("Failed to create TCP socket"));
+        }
+        if (!tls_tcp_state.socket.set_receive_timeout(config_.timeout) ||
+            !tls_tcp_state.socket.set_send_timeout(config_.timeout)) {
+            tls_tcp_state.socket.close();
+            throw_exception(dns_exception("Failed to set socket timeout"));
+        }
+        tls_tcp_state.socket.connect(*ip_address::parse(config_.server, config_.port));
+        tls_tcp_state.server = config_.server;
+        tls_tcp_state.port = config_.port;
+    };
 
-    if (!tcp_sock.is_valid()) {
-        throw_exception(dns_exception("Failed to create TCP socket"));
-    }
-    if (!tcp_sock.set_receive_timeout(timeout_) || !tcp_sock.set_send_timeout(timeout_)) {
-        throw_exception(dns_exception("Failed to set socket timeout"));
-    }
-    if (!tcp_sock.connect_ipv4(dns_server_.data(), dns_port_)) {
-        throw_exception(dns_exception("Failed to connect to DNS server"));
+    if (tls_tcp_state.socket.is_open()) {
+        if (tls_tcp_state.server != config_.server || tls_tcp_state.port != config_.port) {
+            connect();
+        }
+    } else {
+        connect();
     }
 
-    const uint16_t length = ::htons(static_cast<uint16_t>(query.size()));
-    if (tcp_sock.send(&length, 2) != 2) {
-        throw_exception(dns_exception("Failed to send query length"));
-    }
-    if (tcp_sock.send(query.data(), query.size()) != static_cast<ssize_t>(query.size())) {
-        throw_exception(dns_exception("Failed to send query data"));
+    auto send_request = [&]() -> bool {
+        const uint16_t length = ::htons(static_cast<uint16_t>(query.size()));
+        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(&length), 2}) != 2) {
+            return false;
+        }
+        if (tls_tcp_state.socket.send(memory_view<const char>{
+                reinterpret_cast<const char*>(query.data()), query.size()
+            }) != static_cast<ssize_t>(query.size())) {
+            return false;
+            }
+        return true;
+    };
+
+    if (!send_request()) {
+        try {
+            connect();
+        } catch (...) {
+            throw_exception(dns_exception("Failed to reconnect TCP socket"));
+        }
+        if (!send_request()) {
+            throw_exception(dns_exception("Failed to send query data after reconnect"));
+        }
     }
 
     uint16_t res_len;
-    if (tcp_sock.receive(&res_len, 2) != 2) {
+    if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
         throw_exception(dns_exception("Failed to receive response length"));
     }
     res_len = ::ntohs(res_len);
 
-    vector<byte_t> buffer(res_len);
+    byte_vector buffer(res_len);
     size_t total = 0;
     while (total < res_len) {
-        const ssize_t received = tcp_sock.receive(buffer.data() + total, res_len - total);
+        const ssize_t received = tls_tcp_state.socket.receive(memory_view<char>{
+            reinterpret_cast<char*>(buffer.data() + total),
+            res_len - total
+        });
         if (received <= 0) {
             throw_exception(dns_exception("Failed to receive complete response"));
         }
@@ -187,7 +238,7 @@ vector<byte_t> dns_client::send_tcp_query(const vector<byte_t>& query) const {
     return buffer;
 }
 
-string dns_client::parse_a_record(const vector<byte_t>& rdata) {
+static string parse_a_record(const byte_vector& rdata) {
     if (rdata.size() != 4) {
         throw_exception(dns_exception("Invalid A record length"));
     }
@@ -198,7 +249,7 @@ string dns_client::parse_a_record(const vector<byte_t>& rdata) {
     return {ip};
 }
 
-string dns_client::parse_aaaa_record(const vector<byte_t>& rdata) {
+static string parse_aaaa_record(const byte_vector& rdata) {
     if (rdata.size() != 16) {
         throw_exception(dns_exception("Invalid AAAA record length"));
     }
@@ -209,7 +260,7 @@ string dns_client::parse_aaaa_record(const vector<byte_t>& rdata) {
     return {ip};
 }
 
-string dns_client::parse_mx_record(const vector<byte_t>& data, size_t offset, const uint16_t rdlength) {
+static string parse_mx_record(const byte_vector& data, size_t offset, const uint16_t rdlength) {
     if (rdlength < 2) {
         throw_exception(dns_exception("Invalid MX record length"));
     }
@@ -219,7 +270,7 @@ string dns_client::parse_mx_record(const vector<byte_t>& data, size_t offset, co
     return to_string(preference) + " " + exchange;
 }
 
-string dns_client::parse_txt_record(const vector<byte_t>& rdata) {
+static string parse_txt_record(const byte_vector& rdata) {
     string result;
     size_t offset = 0;
 
@@ -236,7 +287,7 @@ string dns_client::parse_txt_record(const vector<byte_t>& rdata) {
     return result;
 }
 
-dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t& offset) {
+static dns_record parse_resource_record(const byte_vector& data, size_t& offset) {
     dns_record record;
     record.name = decode_domain_name(data, offset);
 
@@ -257,7 +308,7 @@ dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t&
         throw_exception(dns_exception("RDATA exceeds buffer"));
     }
 
-    vector<byte_t> rdata(data.begin() + offset, data.begin() + offset + rdlength);
+    byte_vector rdata(data.begin() + offset, data.begin() + offset + rdlength);
     size_t rdata_offset = offset;
 
     switch (record.type) {
@@ -279,9 +330,7 @@ dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t&
         } default: {
             record.data = "";
             for (const byte_t byte : rdata) {
-                char hex[4];
-                _MSTL snprintf(hex, sizeof(hex), "%02x", byte);
-                record.data += hex;
+                record.data += format("{:02x}", byte);
             }
             break;
         }
@@ -291,7 +340,7 @@ dns_record dns_client::parse_resource_record(const vector<byte_t>& data, size_t&
     return record;
 }
 
-dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) {
+static dns_query_result parse_dns_response(const byte_vector& response) {
     if (response.size() < sizeof(dns_header)) {
         throw_exception(dns_exception("Response too short"));
     }
@@ -330,17 +379,14 @@ dns_query_result dns_client::parse_dns_response(const vector<byte_t>& response) 
     return result;
 }
 
-dns_client::dns_client(string dns_server, const uint16_t dns_port,
-    const milliseconds timeout, const bool use_tcp)
-: dns_server_(_MSTL move(dns_server)), dns_port_(dns_port), timeout_(timeout), use_tcp_(use_tcp) {}
-
-void dns_client::set_dns_server(const string& server, const uint16_t port) {
-    dns_server_ = server;
-    dns_port_ = port;
+static string create_cache_key(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+    return domain + "_"_s + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
 }
 
-dns_query_result dns_client::query(
-    const string& domain, const DNS_RECORD type, const DNS_QUERY qclass) {
+dns_client::dns_client(config cfg, const bool use_tcp)
+: config_(move(cfg)), use_tcp_(use_tcp) {}
+
+dns_query_result dns_client::query(const string_view domain, const DNS_RECORD type, const DNS_QUERY qclass) {
     const auto start_time = steady_clock::now();
 
     const auto cache_key = create_cache_key(domain, type, qclass);
@@ -350,11 +396,15 @@ dns_query_result dns_client::query(
     }
 
     const auto query_data = build_dns_query(domain, type, qclass);
-    vector<byte_t> response;
+    byte_vector response;
     if (use_tcp_) {
         response = send_tcp_query(query_data);
     } else {
         response = send_udp_query(query_data);
+        const auto result = parse_dns_response(response);
+        if (result.truncated) {
+            response = send_tcp_query(query_data);
+        }
     }
 
     auto result = parse_dns_response(response);
@@ -366,14 +416,13 @@ dns_query_result dns_client::query(
     return result;
 }
 
-future<dns_query_result> dns_client::query_async(
-    const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
-    return _MSTL async(launch::async, [this, domain, type, qclass] {
-        return query(domain, type, qclass);
+future<dns_query_result> dns_client::query_async(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
+    return async(launch::async, [this, domain, type, qclass] {
+        return query(domain.view(), type, qclass);
     });
 }
 
-vector<string> dns_client::resolve_a(const string& domain) {
+vector<string> dns_client::resolve_a(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::A);
     vector<string> ips;
 
@@ -386,7 +435,7 @@ vector<string> dns_client::resolve_a(const string& domain) {
     return ips;
 }
 
-vector<string> dns_client::resolve_aaaa(const string& domain) {
+vector<string> dns_client::resolve_aaaa(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::AAAA);
     vector<string> ips;
 
@@ -399,7 +448,7 @@ vector<string> dns_client::resolve_aaaa(const string& domain) {
     return ips;
 }
 
-vector<string> dns_client::resolve_cname(const string& domain) {
+vector<string> dns_client::resolve_cname(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::CNAME);
     vector<string> cnames;
 
@@ -412,7 +461,7 @@ vector<string> dns_client::resolve_cname(const string& domain) {
     return cnames;
 }
 
-vector<string> dns_client::resolve_mx(const string& domain) {
+vector<string> dns_client::resolve_mx(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::MX);
     vector<string> mx_records;
 
@@ -425,7 +474,7 @@ vector<string> dns_client::resolve_mx(const string& domain) {
     return mx_records;
 }
 
-vector<string> dns_client::resolve_txt(const string& domain) {
+vector<string> dns_client::resolve_txt(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::TXT);
     vector<string> txt_records;
 
@@ -437,40 +486,39 @@ vector<string> dns_client::resolve_txt(const string& domain) {
     return txt_records;
 }
 
-string dns_client::reverse_query(const string& ip) {
+string dns_client::reverse_query(const string_view ip) {
     string reverse_domain;
 
     if (ip.find(':') != string::npos) {
         throw_exception(dns_exception("IPv6 reverse query not fully implemented"));
     } else {
-        vector<string> parts;
+        vector<string_view> parts;
         size_t start = 0;
         size_t pos;
 
         while ((pos = ip.find('.', start)) != string::npos) {
-            parts.push_back(ip.substr(start, pos - start));
+            parts.push_back(ip.view(start, pos - start));
             start = pos + 1;
         }
         if (start < ip.length()) {
-            parts.push_back(ip.substr(start));
+            parts.push_back(ip.view(start));
         }
 
         if (parts.size() != 4) {
             throw_exception(dns_exception("Invalid IPv4 address"));
         }
-        reverse_domain = parts[3] + "." + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
+        reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
     }
 
-    const auto result = query(reverse_domain, DNS_RECORD::PTR);
+    const auto result = query(reverse_domain.view(), DNS_RECORD::PTR);
     if (!result.answers.empty() && result.answers[0].type == DNS_RECORD::PTR) {
         return result.answers[0].data;
     }
     return "";
 }
 
-vector<dns_query_result> dns_client::batch_query(
-    const vector<string>& domains, const DNS_RECORD type) {
-    vector<_MSTL future<dns_query_result>> futures;
+vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, const DNS_RECORD type) {
+    vector<future<dns_query_result>> futures;
 
     for (const auto& domain : domains) {
         futures.push_back(query_async(domain, type));
@@ -488,11 +536,6 @@ vector<dns_query_result> dns_client::batch_query(
     }
 
     return results;
-}
-
-string dns_client::create_cache_key(
-    const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
-    return domain + "_" + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
 }
 
 optional<dns_query_result> dns_client::check_cache(const string& key) {
@@ -515,4 +558,4 @@ void dns_client::update_cache(const string& key, const dns_query_result& result)
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

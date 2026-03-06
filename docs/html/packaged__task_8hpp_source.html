@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: packaged_task.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('packaged__task_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">packaged_task.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="packaged__task_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="promise_8hpp.html">NeForce/core/async/promise.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Res, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html">   30</a></span><span class="keyword">class </span><a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&lt;Res(Args...)&gt; {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">using </span>StateType = <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::task_state_base&lt;Res(Args...)&gt;;  </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;StateType&gt;</a> state_ptr;  </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">   41</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>() noexcept {}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> = enable_if_t&lt;!is_same_v&lt;packaged_task, remove_cvref_t&lt;Func&gt;&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a1e138c21753a8bef3af52ab548884825">   52</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a1e138c21753a8bef3af52ab548884825">packaged_task</a>(Func&amp;&amp; <a class="code hl_class" href="classfunction.html">function</a>)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    : state_ptr(<a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> create_task_state&lt;Res(Args...)&gt;(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;Func&gt;(<a class="code hl_class" href="classfunction.html">function</a>)))</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    {}</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a94bb0b76b969c5a71970777406a2b768">   61</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a94bb0b76b969c5a71970777406a2b768">~packaged_task</a>() {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(state_ptr) &amp;&amp; !state_ptr.unique()) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            state_ptr-&gt;break_promise(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(state_ptr-&gt;result_storage));</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a474623a4049c9013b4b948e1f100d0">   67</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a474623a4049c9013b4b948e1f100d0">packaged_task</a>(<span class="keyword">const</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a32c746c6407f06616b1c2eead52151">   68</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a78e3200ea269e7f873e946b362315ff8">   74</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a78e3200ea269e7f873e946b362315ff8">packaged_task</a>(<a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        this-&gt;<a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(other);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#acdf07176055889ad21430d63393c1fc3">   83</a></span>    <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp; operator =(<a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(other)).swap(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#aa6f152cd498d6f799acdeafdbf183616">   92</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#aa6f152cd498d6f799acdeafdbf183616">swap</a>(<a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        state_ptr.swap(other.state_ptr);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4">  100</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4">valid</a>() const noexcept {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(state_ptr);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
+</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a41f6eea0c7672b66b7bcae8096460d4a">  109</a></span>    <a class="code hl_class" href="classfuture.html">future&lt;Res&gt;</a> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a41f6eea0c7672b66b7bcae8096460d4a">get_future</a>() {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classfuture.html">future&lt;Res&gt;</a>(state_ptr);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#adb6b72da7146d018b37b4374f66109f6">  120</a></span>    <span class="keywordtype">void</span> operator ()(Args... args) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::state_base::check(state_ptr);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        state_ptr-&gt;run(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
+</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7d75a082c1163b3d71f5bfa88ff616ab">  133</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7d75a082c1163b3d71f5bfa88ff616ab">make_ready_at_thread_exit</a>(Args... args) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::state_base::check(state_ptr);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        state_ptr-&gt;run_delayed(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)..., state_ptr);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a13ff349103d61896e17b7afed6947cec">  145</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a13ff349103d61896e17b7afed6947cec">reset</a>() {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __future_base::state_base::check(state_ptr);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_function" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task</a> temp;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        temp.state_ptr = state_ptr;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        state_ptr = state_ptr-&gt;reset();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>};</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Res, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>packaged_task(Res(*)(Args...)) -&gt; packaged_task&lt;Res(Args...)&gt;;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> Sign = <span class="keyword">typename</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __function_guide_helper&lt;<span class="keyword">decltype</span>(&amp;Func::operator ())&gt;::type&gt;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>packaged_task(Func) -&gt; packaged_task&lt;Sign&gt;;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> BoundFunc, <span class="keyword">typename</span> Res&gt;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">class </span>__future_base::deferred_state final</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    : <span class="keyword">public</span> __future_base::state_base {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keyword">using </span>PtrType = __future_base::Ptr&lt;basic_result&lt;Res&gt;&gt;;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    PtrType result_storage;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    BoundFunc <a class="code hl_class" href="classfunction.html">function</a>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">void</span> complete_async()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        state_base::set_result(create_task_setter(result_storage, <a class="code hl_class" href="classfunction.html">function</a>), <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">bool</span> is_deferred_future()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">explicit</span> deferred_state(Args&amp;&amp;... args)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    : result_storage(new basic_result&lt;Res&gt;()),</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_class" href="classfunction.html">function</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;Args&gt;(args)...) {}</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>};</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="keyword">class </span>__future_base::async_state_common</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    : <span class="keyword">public</span> __future_base::state_base {</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> thread thread;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> once_flag once_flag;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    ~async_state_common() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordtype">void</span> complete_async()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <a class="code hl_function" href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">join</a>();</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">join</a>() {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___call_once.html#ga6b72113ff3b073878b5fc971d6fe1026">call_once</a>(once_flag, &amp;<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> thread::join, &amp;thread);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>};</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func, <span class="keyword">typename</span> Res&gt;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">class </span>__future_base::async_state_impl final</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    : <span class="keyword">public</span> __future_base::async_state_common {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keyword">using </span>PtrType = __future_base::Ptr&lt;basic_result&lt;Res&gt;&gt;;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    PtrType result_storage;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    Func function;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">void</span> run() {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            state_base::set_result(__future_base::create_task_setter(result_storage, function));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(result_storage)) {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                state_base::break_promise(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(result_storage));</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            }</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="keywordflow">throw</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keyword">explicit</span> async_state_impl(Args&amp;&amp;... args)</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    : result_storage(new basic_result&lt;Res&gt;()),</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      function(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt;Args&gt;(args)...) {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        thread = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> thread{&amp;async_state_impl::run, <span class="keyword">this</span>};</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    ~async_state_impl()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">if</span> (thread.joinable()) {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            thread.join();</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>};</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> <span class="comment">// Async</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__</span></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00029">function.hpp:29</a></div></div>
+<div class="ttc" id="aclassfuture_html"><div class="ttname"><a href="classfuture.html">future</a></div><div class="ttdoc">独占future类模板</div><div class="ttdef"><b>定义</b> <a href="future_8hpp_source.html#l00878">future.hpp:878</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a13ff349103d61896e17b7afed6947cec"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a13ff349103d61896e17b7afed6947cec">packaged_task&lt; Res(Args...)&gt;::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">重置任务</div><div class="ttdef"><b>定义</b> <a href="#l00145">packaged_task.hpp:145</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a1e138c21753a8bef3af52ab548884825"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a1e138c21753a8bef3af52ab548884825">packaged_task&lt; Res(Args...)&gt;::packaged_task</a></div><div class="ttdeci">packaged_task(Func &amp;&amp;function)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00052">packaged_task.hpp:52</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a3a474623a4049c9013b4b948e1f100d0"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a474623a4049c9013b4b948e1f100d0">packaged_task&lt; Res(Args...)&gt;::packaged_task</a></div><div class="ttdeci">packaged_task(const packaged_task &amp;)=delete</div><div class="ttdoc">禁止拷贝构造</div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a41f6eea0c7672b66b7bcae8096460d4a"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a41f6eea0c7672b66b7bcae8096460d4a">packaged_task&lt; Res(Args...)&gt;::get_future</a></div><div class="ttdeci">future&lt; Res &gt; get_future()</div><div class="ttdoc">获取关联的future对象</div><div class="ttdef"><b>定义</b> <a href="#l00109">packaged_task.hpp:109</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a78e3200ea269e7f873e946b362315ff8"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a78e3200ea269e7f873e946b362315ff8">packaged_task&lt; Res(Args...)&gt;::packaged_task</a></div><div class="ttdeci">packaged_task(packaged_task &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00074">packaged_task.hpp:74</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a7cd09ddad944479f2a571e124afe79b4"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4">packaged_task&lt; Res(Args...)&gt;::valid</a></div><div class="ttdeci">bool valid() const noexcept</div><div class="ttdoc">检查任务是否有效</div><div class="ttdef"><b>定义</b> <a href="#l00100">packaged_task.hpp:100</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a7d75a082c1163b3d71f5bfa88ff616ab"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7d75a082c1163b3d71f5bfa88ff616ab">packaged_task&lt; Res(Args...)&gt;::make_ready_at_thread_exit</a></div><div class="ttdeci">void make_ready_at_thread_exit(Args... args)</div><div class="ttdoc">在线程退出时标记任务完成</div><div class="ttdef"><b>定义</b> <a href="#l00133">packaged_task.hpp:133</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a9344ccdedcc2820d362e32277696e453"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a9344ccdedcc2820d362e32277696e453">packaged_task&lt; Res(Args...)&gt;::packaged_task</a></div><div class="ttdeci">packaged_task() noexcept</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00041">packaged_task.hpp:41</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_a94bb0b76b969c5a71970777406a2b768"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a94bb0b76b969c5a71970777406a2b768">packaged_task&lt; Res(Args...)&gt;::~packaged_task</a></div><div class="ttdeci">~packaged_task()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00061">packaged_task.hpp:61</a></div></div>
+<div class="ttc" id="aclasspackaged__task_3_01_res_07_args_8_8_8_08_4_html_aa6f152cd498d6f799acdeafdbf183616"><div class="ttname"><a href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#aa6f152cd498d6f799acdeafdbf183616">packaged_task&lt; Res(Args...)&gt;::swap</a></div><div class="ttdeci">void swap(packaged_task &amp;other) noexcept</div><div class="ttdoc">交换两个packaged_task对象</div><div class="ttdef"><b>定义</b> <a href="#l00092">packaged_task.hpp:92</a></div></div>
+<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00267">shared_ptr.hpp:267</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03044">type_traits.hpp:3044</a></div></div>
+<div class="ttc" id="agroup___call_once_html_ga6b72113ff3b073878b5fc971d6fe1026"><div class="ttname"><a href="group___call_once.html#ga6b72113ff3b073878b5fc971d6fe1026">call_once</a></div><div class="ttdeci">void call_once(once_flag &amp;flag, Callable &amp;&amp;func, Args &amp;&amp;... args)</div><div class="ttdoc">单次调用函数</div><div class="ttdef"><b>定义</b> <a href="call__once_8hpp_source.html#l00065">call_once.hpp:65</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___string_html_ga4b89da25cf0f107d7d651df1522976f2"><div class="ttname"><a href="group___string.html#ga4b89da25cf0f107d7d651df1522976f2">join</a></div><div class="ttdeci">string NEFORCE_API join(const vector&lt; string &gt; &amp;vec, const string &amp;delimiter=&quot;&quot;)</div><div class="ttdoc">连接字符串</div></div>
+<div class="ttc" id="agroup___swap_utility_html_ga6a39d376fb4396550fe3dadb383d17df"><div class="ttname"><a href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a></div><div class="ttdeci">void swap()=delete</div><div class="ttdoc">删除无参数的swap重载</div></div>
+<div class="ttc" id="apromise_8hpp_html"><div class="ttname"><a href="promise_8hpp.html">promise.hpp</a></div><div class="ttdoc">异步结果生产者</div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程支持</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="packaged__task_8hpp.html">packaged_task.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

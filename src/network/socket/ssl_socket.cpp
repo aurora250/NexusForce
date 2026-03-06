@@ -1,0 +1,91 @@
+#include <NeForce/network/socket/ssl_socket.hpp>
+#ifdef NEFORCE_SUPPORT_OPENSSL
+NEFORCE_BEGIN_NAMESPACE__
+
+void ssl_socket::init_server_ssl(const ssl_context& ctx) {
+    if (!is_open()) {
+        throw_exception(value_exception("Socket is not open"));
+    }
+    if (!ctx.is_valid()) {
+        throw_exception(ssl_exception("Invalid SSL context"));
+    }
+
+    try {
+        ssl_.emplace(ctx);
+        ssl_->set_fd(native_handle());
+        ssl_->accept();
+    } catch (...) {
+        ssl_.reset();
+        throw;
+    }
+}
+
+void ssl_socket::init_client_ssl(const ssl_context& ctx) {
+    if (!is_open()) {
+        throw_exception(value_exception("Socket is not open"));
+    }
+    if (!ctx.is_valid()) {
+        throw_exception(ssl_exception("Invalid SSL context"));
+    }
+
+    try {
+        ssl_.emplace(ctx);
+        ssl_->set_fd(native_handle());
+        ssl_->connect();
+    } catch (...) {
+        ssl_.reset();
+        throw;
+    }
+}
+
+string ssl_socket::peer_certificate_info() const {
+    if (!ssl_ || !ssl_->is_valid()) {
+        return "";
+    }
+
+    ::X509* cert = ssl_->get_peer_certificate();
+    if (!cert) {
+        return "";
+    }
+
+    string result;
+
+    char* subj = X509_NAME_oneline(X509_get_subject_name(cert), nullptr, 0);
+    char* issuer = X509_NAME_oneline(X509_get_issuer_name(cert), nullptr, 0);
+
+    if (subj) {
+        result = "Subject: " + string(subj) + "\n";
+        ::OPENSSL_free(subj);
+    }
+    if (issuer) {
+        result += "Issuer: " + string(issuer);
+        ::OPENSSL_free(issuer);
+    }
+
+    X509_free(cert);
+
+    return result;
+}
+
+ssize_t ssl_socket::send(memory_view<const char> data, const int flags) {
+    if (ssl_ && ssl_->is_valid()) {
+        if (data.empty()) {
+            return 0;
+        }
+        return ssl_->write(data.data(), data.size());
+    }
+    return tcp_socket::send(data, flags);
+}
+
+ssize_t ssl_socket::receive(memory_view<char> buffer, const int flags) {
+    if (ssl_ && ssl_->is_valid()) {
+        if (buffer.empty()) {
+            return 0;
+        }
+        return ssl_->read(buffer.data(), buffer.size());
+    }
+    return tcp_socket::receive(buffer, flags);
+}
+
+NEFORCE_END_NAMESPACE__
+#endif

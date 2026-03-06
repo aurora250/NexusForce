@@ -1,8 +1,8 @@
-#include <MSTL/core/utility/hexadecimal.hpp>
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/algorithm/remove.hpp>
-#include <MSTL/core/file/toml/toml_parser.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/algorithm/remove.hpp>
+#include <NeForce/core/file/toml/toml_parser.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 void toml_parser::skip_whitespace() noexcept {
     while (pos_ < len_) {
@@ -97,8 +97,8 @@ bool toml_parser::match(const char ch) noexcept {
 
 void toml_parser::throw_parse_error(string message) const {
     const string error_msg =
-        "Line " + _MSTL to_string(line_) +
-        ", Column " + _MSTL to_string(column_) + ": " + move(message);
+        "Line " + _NEFORCE to_string(line_) +
+        ", Column " + _NEFORCE to_string(column_) + ": " + move(message);
     throw_exception(toml_exception(error_msg.data()));
 }
 
@@ -167,7 +167,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                         throw_parse_error("Unexpected end after \\u");
                     }
                     const char32_t cp = parse_unicode_escape(4);
-                    result += _MSTL to_string(cp);
+                    result += _NEFORCE to_string(cp);
                     break;
                 }
                 case 'U': {
@@ -176,7 +176,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                         throw_parse_error("Unexpected end after \\U");
                     }
                     const char32_t cp = parse_unicode_escape(8);
-                    result += _MSTL to_string(cp);
+                    result += _NEFORCE to_string(cp);
                     break;
                 }
                 default:
@@ -190,7 +190,7 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
     }
 
     expect('"');
-    return make_unique<toml_string>(_MSTL move(result), toml_string::Basic);
+    return make_unique<toml_string>(_NEFORCE move(result), toml_string::Basic);
 }
 
 unique_ptr<toml_string> toml_parser::parse_literal_string() {
@@ -206,7 +206,7 @@ unique_ptr<toml_string> toml_parser::parse_literal_string() {
     }
 
     expect('\'');
-    return make_unique<toml_string>(_MSTL move(result), toml_string::Literal);
+    return make_unique<toml_string>(_NEFORCE move(result), toml_string::Literal);
 }
 
 unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
@@ -261,13 +261,13 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                 case 'u': {
                     advance();
                     const char32_t cp = parse_unicode_escape(4);
-                    result += _MSTL to_string(cp);
+                    result += _NEFORCE to_string(cp);
                     break;
                 }
                 case 'U': {
                     advance();
                     const char32_t cp = parse_unicode_escape(8);
-                    result += _MSTL to_string(cp);
+                    result += _NEFORCE to_string(cp);
                     break;
                 }
                 default:
@@ -280,7 +280,7 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
         }
     }
 
-    return make_unique<toml_string>(_MSTL move(result), toml_string::MultiBasic);
+    return make_unique<toml_string>(_NEFORCE move(result), toml_string::MultiBasic);
 }
 
 unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
@@ -303,7 +303,7 @@ unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
         advance();
     }
 
-    return make_unique<toml_string>(_MSTL move(result), toml_string::MultiLiteral);
+    return make_unique<toml_string>(_NEFORCE move(result), toml_string::MultiLiteral);
 }
 
 unique_ptr<toml_value> toml_parser::parse_number() {
@@ -376,7 +376,7 @@ unique_ptr<toml_value> toml_parser::parse_number() {
     }
 
     string num_str = text_.substr(start_pos, pos_ - start_pos);
-    num_str.erase(_MSTL remove(num_str.begin(), num_str.end(), '_'), num_str.end());
+    num_str.erase(_NEFORCE remove(num_str.begin(), num_str.end(), '_'), num_str.end());
 
     try {
         if (is_float) {
@@ -427,7 +427,7 @@ unique_ptr<toml_integer> toml_parser::parse_integer(const int base) {
     }
 
     string num_str = text_.substr(start_pos, pos_ - start_pos);
-    num_str.erase(_MSTL remove(num_str.begin(), num_str.end(), '_'), num_str.end());
+    num_str.erase(_NEFORCE remove(num_str.begin(), num_str.end(), '_'), num_str.end());
 
     try {
         int64_t val;
@@ -512,7 +512,7 @@ unique_ptr<toml_array> toml_parser::parse_array() {
             }
         }
 
-        arr->add_element(_MSTL move(element));
+        arr->add_element(_NEFORCE move(element));
         skip_whitespace_and_comments();
 
         if (current() == ',') {
@@ -544,7 +544,7 @@ unique_ptr<toml_table> toml_parser::parse_inline_table() {
         if (table->has_member(key)) {
             throw_parse_error("Duplicate key in inline table: " + key);
         }
-        table->add_member(key, _MSTL move(value));
+        table->add_member(key, _NEFORCE move(value));
 
         skip_whitespace_no_newline();
 
@@ -668,7 +668,7 @@ void toml_parser::parse_key_value() {
         } else if (!member) {
             auto new_table = make_unique<toml_table>();
             sub_table = new_table.get();
-            table->add_member(k, _MSTL move(new_table));
+            table->add_member(k, _NEFORCE move(new_table));
         } else {
             throw_parse_error("Key '" + k + "' already exists but is not a table");
         }
@@ -681,7 +681,7 @@ void toml_parser::parse_key_value() {
     if (table->has_member(last_key)) {
         throw_parse_error("Duplicate key: " + last_key);
     }
-    table->add_member(last_key, _MSTL move(val));
+    table->add_member(last_key, _NEFORCE move(val));
 }
 
 void toml_parser::parse_table_header() {
@@ -726,13 +726,13 @@ void toml_parser::parse_array_table_header() {
     } else {
         auto new_array = make_unique<toml_array>();
         arr = new_array.get();
-        parent->add_member(array_key, _MSTL move(new_array));
+        parent->add_member(array_key, _NEFORCE move(new_array));
     }
 
     auto new_table = make_unique<toml_table>();
     toml_table* new_table_ptr = new_table.get();
 
-    arr->add_element(_MSTL move(new_table));
+    arr->add_element(_NEFORCE move(new_table));
     context_stack_.push_back({ctb_, ctp_});
     ctb_ = new_table_ptr;
     ctp_ = path;
@@ -748,7 +748,7 @@ toml_table* toml_parser::get_or_create_table(const vector<string>& path) const {
         } else if (!member) {
             auto new_table = make_unique<toml_table>();
             toml_table* new_tbl_ptr = new_table.get();
-            tbl->add_member(key, _MSTL move(new_table));
+            tbl->add_member(key, _NEFORCE move(new_table));
             tbl = new_tbl_ptr;
         } else {
             throw_parse_error("Key '" + key + "' already exists but is not a table");
@@ -801,7 +801,7 @@ unique_ptr<toml_table> toml_parser::parse() {
             parse_key_value();
         }
     }
-    return _MSTL move(root_);
+    return _NEFORCE move(root_);
 }
 
 optional<unique_ptr<toml_table>> toml_parser::try_parse() {
@@ -812,4 +812,4 @@ optional<unique_ptr<toml_table>> toml_parser::try_parse() {
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

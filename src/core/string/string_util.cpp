@@ -1,7 +1,7 @@
-#include <MSTL/core/string/string_util.hpp>
-#include <MSTL/core/algorithm/numeric.hpp>
-#include <MSTL/core/container/unordered_set.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/string/string_util.hpp>
+#include <NeForce/core/algorithm/numeric.hpp>
+#include <NeForce/core/container/unordered_set.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 vector<string_view> split(const string_view str, const string_view delimiters, const bool skip_empty) {
     vector<string_view> tokens;
@@ -78,7 +78,7 @@ string join_fast(const vector<string>& vec, const string& delimiter) {
 
 string join_accumulate(const vector<string>& vec, const string& delimiter) {
     if (vec.empty()) return "";
-    return _MSTL accumulate(next(vec.begin()), vec.end(), vec[0],
+    return _NEFORCE accumulate(next(vec.begin()), vec.end(), vec[0],
          [&delimiter](const string& a, const string& b) {
              return a + delimiter + b;
          });
@@ -96,4 +96,4 @@ vector<string> unique(const vector<string>& vec) {
     return result;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

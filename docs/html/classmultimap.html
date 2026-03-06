@@ -1,0 +1,2212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: multimap&lt; Key, T, Compare, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classmultimap.html','','classmultimap-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">multimap&lt; Key, T, Compare, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___multi_map.html">多重映射</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>多重映射容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="multimap_8hpp_source.html">multimap.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:value_5Fcompare" id="r_value_5Fcompare"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structmultimap_1_1value__compare.html">value_compare</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">值比较函数对象  <a href="structmultimap_1_1value__compare.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ae71d521660bcf2afce975a573c205893" id="r_ae71d521660bcf2afce975a573c205893"><td class="memItemLeft"><a id="ae71d521660bcf2afce975a573c205893" name="ae71d521660bcf2afce975a573c205893"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = Key</td></tr>
+<tr class="memdesc:ae71d521660bcf2afce975a573c205893"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:a5addf571cc4ac7791a2fba0505bfe61c" id="r_a5addf571cc4ac7791a2fba0505bfe61c"><td class="memItemLeft"><a id="a5addf571cc4ac7791a2fba0505bfe61c" name="a5addf571cc4ac7791a2fba0505bfe61c"></a>
+using&#160;</td><td class="memItemRight"><b>data_type</b> = T</td></tr>
+<tr class="memdesc:a5addf571cc4ac7791a2fba0505bfe61c"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据类型 <br /></td></tr>
+<tr class="memitem:a76c4172b8de4587017b3fab9ef0d3e25" id="r_a76c4172b8de4587017b3fab9ef0d3e25"><td class="memItemLeft"><a id="a76c4172b8de4587017b3fab9ef0d3e25" name="a76c4172b8de4587017b3fab9ef0d3e25"></a>
+using&#160;</td><td class="memItemRight"><b>mapped_type</b> = T</td></tr>
+<tr class="memdesc:a76c4172b8de4587017b3fab9ef0d3e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">映射值类型 <br /></td></tr>
+<tr class="memitem:a1a59b4d4c2350609c9b68eba16b04266" id="r_a1a59b4d4c2350609c9b68eba16b04266"><td class="memItemLeft"><a id="a1a59b4d4c2350609c9b68eba16b04266" name="a1a59b4d4c2350609c9b68eba16b04266"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = <a class="el" href="structpair.html">pair</a>&lt;const Key, T&gt;</td></tr>
+<tr class="memdesc:a1a59b4d4c2350609c9b68eba16b04266"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:a1ff501e9a90f790358915b73b91920ce" id="r_a1ff501e9a90f790358915b73b91920ce"><td class="memItemLeft"><a id="a1ff501e9a90f790358915b73b91920ce" name="a1ff501e9a90f790358915b73b91920ce"></a>
+using&#160;</td><td class="memItemRight"><b>key_compare</b> = Compare</td></tr>
+<tr class="memdesc:a1ff501e9a90f790358915b73b91920ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">键比较函数类型 <br /></td></tr>
+<tr class="memitem:aa1e38e849bbb4d8bcc5fc04e67a3a7d7" id="r_aa1e38e849bbb4d8bcc5fc04e67a3a7d7"><td class="memItemLeft"><a id="aa1e38e849bbb4d8bcc5fc04e67a3a7d7" name="aa1e38e849bbb4d8bcc5fc04e67a3a7d7"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = typename <a class="el" href="classrb__tree.html#aee0ea092a682d33d8e1d2a8ce3c18673">base_type::size_type</a></td></tr>
+<tr class="memdesc:aa1e38e849bbb4d8bcc5fc04e67a3a7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:ad817d84ac01533d516de1d12cbceb90b" id="r_ad817d84ac01533d516de1d12cbceb90b"><td class="memItemLeft"><a id="ad817d84ac01533d516de1d12cbceb90b" name="ad817d84ac01533d516de1d12cbceb90b"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename <a class="el" href="classrb__tree.html#a60390825c16e7b5f8155442d2486a6e4">base_type::difference_type</a></td></tr>
+<tr class="memdesc:ad817d84ac01533d516de1d12cbceb90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a525330faff52a681ff28d39396a96c46" id="r_a525330faff52a681ff28d39396a96c46"><td class="memItemLeft"><a id="a525330faff52a681ff28d39396a96c46" name="a525330faff52a681ff28d39396a96c46"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = typename <a class="el" href="classrb__tree.html#ae4cf825e89c4768b58ed37f063c10ecf">base_type::pointer</a></td></tr>
+<tr class="memdesc:a525330faff52a681ff28d39396a96c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a2e487215457a0afa657dfcadc24d1d66" id="r_a2e487215457a0afa657dfcadc24d1d66"><td class="memItemLeft"><a id="a2e487215457a0afa657dfcadc24d1d66" name="a2e487215457a0afa657dfcadc24d1d66"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = typename <a class="el" href="classrb__tree.html#ab5f284eeec9f830a54913d1283d53ab2">base_type::const_pointer</a></td></tr>
+<tr class="memdesc:a2e487215457a0afa657dfcadc24d1d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:a550ce1ff129f7a00d8ba34fcb0848fea" id="r_a550ce1ff129f7a00d8ba34fcb0848fea"><td class="memItemLeft"><a id="a550ce1ff129f7a00d8ba34fcb0848fea" name="a550ce1ff129f7a00d8ba34fcb0848fea"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = typename <a class="el" href="classrb__tree.html#ab88a6037629751726bb95b223b48e62a">base_type::reference</a></td></tr>
+<tr class="memdesc:a550ce1ff129f7a00d8ba34fcb0848fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:afe0af69bcc94335598a0695da554c67d" id="r_afe0af69bcc94335598a0695da554c67d"><td class="memItemLeft"><a id="afe0af69bcc94335598a0695da554c67d" name="afe0af69bcc94335598a0695da554c67d"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = typename <a class="el" href="classrb__tree.html#a225425b29129200acd3f15781ae5ff38">base_type::const_reference</a></td></tr>
+<tr class="memdesc:afe0af69bcc94335598a0695da554c67d"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:aab149add0bec11252fc757be3d417e12" id="r_aab149add0bec11252fc757be3d417e12"><td class="memItemLeft"><a id="aab149add0bec11252fc757be3d417e12" name="aab149add0bec11252fc757be3d417e12"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = typename <a class="el" href="classrb__tree.html#aa4161fdc742ab41d0141078d2748b246">base_type::iterator</a></td></tr>
+<tr class="memdesc:aab149add0bec11252fc757be3d417e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a3979af3ba87f785896a4dcbdad47a474" id="r_a3979af3ba87f785896a4dcbdad47a474"><td class="memItemLeft"><a id="a3979af3ba87f785896a4dcbdad47a474" name="a3979af3ba87f785896a4dcbdad47a474"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = typename <a class="el" href="classrb__tree.html#a4df9d34f6c2de3dba7462d84c593c380">base_type::const_iterator</a></td></tr>
+<tr class="memdesc:a3979af3ba87f785896a4dcbdad47a474"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:adcfff654cf1fe744d52a06b66a6a6336" id="r_adcfff654cf1fe744d52a06b66a6a6336"><td class="memItemLeft"><a id="adcfff654cf1fe744d52a06b66a6a6336" name="adcfff654cf1fe744d52a06b66a6a6336"></a>
+using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = typename <a class="el" href="classrb__tree.html#a27ceda79573b8b314e4e855fdd1903f0">base_type::reverse_iterator</a></td></tr>
+<tr class="memdesc:adcfff654cf1fe744d52a06b66a6a6336"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向迭代器类型 <br /></td></tr>
+<tr class="memitem:afcb86053f4027d973fa27ac559da64fc" id="r_afcb86053f4027d973fa27ac559da64fc"><td class="memItemLeft"><a id="afcb86053f4027d973fa27ac559da64fc" name="afcb86053f4027d973fa27ac559da64fc"></a>
+using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = typename <a class="el" href="classrb__tree.html#a188c3fb201ca2a878f6f3a4843956f34">base_type::const_reverse_iterator</a></td></tr>
+<tr class="memdesc:afcb86053f4027d973fa27ac559da64fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量反向迭代器类型 <br /></td></tr>
+<tr class="memitem:af99cb0ac1190d681ca89840d26aac67f" id="r_af99cb0ac1190d681ca89840d26aac67f"><td class="memItemLeft"><a id="af99cb0ac1190d681ca89840d26aac67f" name="af99cb0ac1190d681ca89840d26aac67f"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = typename <a class="el" href="classrb__tree.html#ab93a38a029b781c1f2c29216bfcf185c">base_type::allocator_type</a></td></tr>
+<tr class="memdesc:af99cb0ac1190d681ca89840d26aac67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ae39a1e919294157ba8d68a1b9bc620ea" id="r_ae39a1e919294157ba8d68a1b9bc620ea"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae39a1e919294157ba8d68a1b9bc620ea">multimap</a> ()</td></tr>
+<tr class="memdesc:ae39a1e919294157ba8d68a1b9bc620ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:a1ff47dea3aa3e04fb9675d4d0638b691" id="r_a1ff47dea3aa3e04fb9675d4d0638b691"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1ff47dea3aa3e04fb9675d4d0638b691">multimap</a> (const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:a1ff47dea3aa3e04fb9675d4d0638b691"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:a4c803e9e996d775130543fdd32538d8e" id="r_a4c803e9e996d775130543fdd32538d8e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4c803e9e996d775130543fdd32538d8e">multimap</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;other)</td></tr>
+<tr class="memdesc:a4c803e9e996d775130543fdd32538d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:affefa2a7a9f1e9c89949e76ffab0fbba" id="r_affefa2a7a9f1e9c89949e76ffab0fbba"><td class="memItemLeft"><a class="el" href="classmultimap.html">multimap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#affefa2a7a9f1e9c89949e76ffab0fbba">operator=</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;other)</td></tr>
+<tr class="memdesc:affefa2a7a9f1e9c89949e76ffab0fbba"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:af629ba77888a949a21f6648bf6d0a510" id="r_af629ba77888a949a21f6648bf6d0a510"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af629ba77888a949a21f6648bf6d0a510">multimap</a> (<a class="el" href="classmultimap.html">multimap</a> &amp;&amp;other) noexcept(is_nothrow_move_constructible_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:af629ba77888a949a21f6648bf6d0a510"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a4d0e3e812ef242912dca474af1149972" id="r_a4d0e3e812ef242912dca474af1149972"><td class="memItemLeft"><a class="el" href="classmultimap.html">multimap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4d0e3e812ef242912dca474af1149972">operator=</a> (<a class="el" href="classmultimap.html">multimap</a> &amp;&amp;other) noexcept(is_nothrow_move_assignable_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a4d0e3e812ef242912dca474af1149972"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:a9691404b63a8c5a8882dd56b5ae9a2ce" id="r_a9691404b63a8c5a8882dd56b5ae9a2ce"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:a9691404b63a8c5a8882dd56b5ae9a2ce template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9691404b63a8c5a8882dd56b5ae9a2ce">multimap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a9691404b63a8c5a8882dd56b5ae9a2ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数  <br /></td></tr>
+<tr class="memitem:ab1b673ff6c8d5d46368d5d9aa710b44f" id="r_ab1b673ff6c8d5d46368d5d9aa710b44f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ab1b673ff6c8d5d46368d5d9aa710b44f template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab1b673ff6c8d5d46368d5d9aa710b44f">multimap</a> (Iterator first, Iterator last, const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:ab1b673ff6c8d5d46368d5d9aa710b44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:ad8ddecfa5c9179fb65b3e9376a9c94f8" id="r_ad8ddecfa5c9179fb65b3e9376a9c94f8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad8ddecfa5c9179fb65b3e9376a9c94f8">multimap</a> (std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:ad8ddecfa5c9179fb65b3e9376a9c94f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数  <br /></td></tr>
+<tr class="memitem:ade55296d14e5157e99e271ab8b122d4b" id="r_ade55296d14e5157e99e271ab8b122d4b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ade55296d14e5157e99e271ab8b122d4b">multimap</a> (std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt; ilist, const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:ade55296d14e5157e99e271ab8b122d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:abb8eaaaa6a43c7db5e7a29b2f2c20113" id="r_abb8eaaaa6a43c7db5e7a29b2f2c20113"><td class="memItemLeft"><a class="el" href="classmultimap.html">multimap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abb8eaaaa6a43c7db5e7a29b2f2c20113">operator=</a> (std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:abb8eaaaa6a43c7db5e7a29b2f2c20113"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表赋值运算符  <br /></td></tr>
+<tr class="memitem:aa6805aca3816cfa74b1583f67d0053f2" id="r_aa6805aca3816cfa74b1583f67d0053f2"><td class="memItemLeft"><a id="aa6805aca3816cfa74b1583f67d0053f2" name="aa6805aca3816cfa74b1583f67d0053f2"></a>
+&#160;</td><td class="memItemRight"><b>~multimap</b> ()=default</td></tr>
+<tr class="memdesc:aa6805aca3816cfa74b1583f67d0053f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:acf71327da9be508b06a29a7a9260d4fe" id="r_acf71327da9be508b06a29a7a9260d4fe"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#acf71327da9be508b06a29a7a9260d4fe">begin</a> () noexcept</td></tr>
+<tr class="memdesc:acf71327da9be508b06a29a7a9260d4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:ad49fc08f28a91e2a05709fba346bd458" id="r_ad49fc08f28a91e2a05709fba346bd458"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad49fc08f28a91e2a05709fba346bd458">end</a> () noexcept</td></tr>
+<tr class="memdesc:ad49fc08f28a91e2a05709fba346bd458"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a960e640bb9633cc35a00eea22d099424" id="r_a960e640bb9633cc35a00eea22d099424"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a960e640bb9633cc35a00eea22d099424">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a960e640bb9633cc35a00eea22d099424"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a95a8309f33dba1fa8cd5400dbd400f0c" id="r_a95a8309f33dba1fa8cd5400dbd400f0c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a95a8309f33dba1fa8cd5400dbd400f0c">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a95a8309f33dba1fa8cd5400dbd400f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:aba61c75eb09f19d0ddaf22fa56f59390" id="r_aba61c75eb09f19d0ddaf22fa56f59390"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aba61c75eb09f19d0ddaf22fa56f59390">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:aba61c75eb09f19d0ddaf22fa56f59390"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a0df2487c21877b67e260ed974c7d3656" id="r_a0df2487c21877b67e260ed974c7d3656"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0df2487c21877b67e260ed974c7d3656">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:a0df2487c21877b67e260ed974c7d3656"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:ae7b36210b8320e898102ded56f56da90" id="r_ae7b36210b8320e898102ded56f56da90"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#adcfff654cf1fe744d52a06b66a6a6336">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae7b36210b8320e898102ded56f56da90">rbegin</a> () noexcept</td></tr>
+<tr class="memdesc:ae7b36210b8320e898102ded56f56da90"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向起始迭代器  <br /></td></tr>
+<tr class="memitem:ab338194c5f89d8cc5b645bf63b17db1f" id="r_ab338194c5f89d8cc5b645bf63b17db1f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#adcfff654cf1fe744d52a06b66a6a6336">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab338194c5f89d8cc5b645bf63b17db1f">rend</a> () noexcept</td></tr>
+<tr class="memdesc:ab338194c5f89d8cc5b645bf63b17db1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向结束迭代器  <br /></td></tr>
+<tr class="memitem:afd0b837e2231854403b8927e2d4dbad4" id="r_afd0b837e2231854403b8927e2d4dbad4"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#afd0b837e2231854403b8927e2d4dbad4">rbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:afd0b837e2231854403b8927e2d4dbad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:afcd8419ea83a33dfdeaa11f69ab23238" id="r_afcd8419ea83a33dfdeaa11f69ab23238"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#afcd8419ea83a33dfdeaa11f69ab23238">rend</a> () const noexcept</td></tr>
+<tr class="memdesc:afcd8419ea83a33dfdeaa11f69ab23238"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a2777448dfa2937dd4c86a7f49618bbe2" id="r_a2777448dfa2937dd4c86a7f49618bbe2"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2777448dfa2937dd4c86a7f49618bbe2">crbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a2777448dfa2937dd4c86a7f49618bbe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:aeb140b382bc924b7ed2261d5434bf2ab" id="r_aeb140b382bc924b7ed2261d5434bf2ab"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aeb140b382bc924b7ed2261d5434bf2ab">crend</a> () const noexcept</td></tr>
+<tr class="memdesc:aeb140b382bc924b7ed2261d5434bf2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a5203f3bbd94081806c390d84ca098d21" id="r_a5203f3bbd94081806c390d84ca098d21"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5203f3bbd94081806c390d84ca098d21">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a5203f3bbd94081806c390d84ca098d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元素数量  <br /></td></tr>
+<tr class="memitem:a606fe1343864f15d6abd3b91dc2262be" id="r_a606fe1343864f15d6abd3b91dc2262be"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a606fe1343864f15d6abd3b91dc2262be">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a606fe1343864f15d6abd3b91dc2262be"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:a3bd1adfd16f10f4d0f5128870fa978d3" id="r_a3bd1adfd16f10f4d0f5128870fa978d3"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a3bd1adfd16f10f4d0f5128870fa978d3">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a3bd1adfd16f10f4d0f5128870fa978d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:aa8922eb5d9d641cac3097549ab514085" id="r_aa8922eb5d9d641cac3097549ab514085"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa8922eb5d9d641cac3097549ab514085">key_comp</a> () const noexcept</td></tr>
+<tr class="memdesc:aa8922eb5d9d641cac3097549ab514085"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键比较函数对象  <br /></td></tr>
+<tr class="memitem:a80ae615b1a1fe58fadf6f7b15aab5d0d" id="r_a80ae615b1a1fe58fadf6f7b15aab5d0d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structmultimap_1_1value__compare.html">value_compare</a>&#160;</td><td class="memItemRight"><a class="el" href="#a80ae615b1a1fe58fadf6f7b15aab5d0d">value_comp</a> () const noexcept</td></tr>
+<tr class="memdesc:a80ae615b1a1fe58fadf6f7b15aab5d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取值比较函数对象  <br /></td></tr>
+<tr class="memitem:a5eb34cc11bd291040e5eb4b93cf0c6e1" id="r_a5eb34cc11bd291040e5eb4b93cf0c6e1"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a5eb34cc11bd291040e5eb4b93cf0c6e1 template"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5eb34cc11bd291040e5eb4b93cf0c6e1">emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a5eb34cc11bd291040e5eb4b93cf0c6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">在multimap中就地构造元素  <br /></td></tr>
+<tr class="memitem:a8c9cc1f5e3899c24bd6453b42b7cbc91" id="r_a8c9cc1f5e3899c24bd6453b42b7cbc91"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8c9cc1f5e3899c24bd6453b42b7cbc91">insert</a> (const <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a8c9cc1f5e3899c24bd6453b42b7cbc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝插入元素  <br /></td></tr>
+<tr class="memitem:ad0ff0756318bf7907996f3f018b6ac0c" id="r_ad0ff0756318bf7907996f3f018b6ac0c"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad0ff0756318bf7907996f3f018b6ac0c">insert</a> (<a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:ad0ff0756318bf7907996f3f018b6ac0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动插入元素  <br /></td></tr>
+<tr class="memitem:a26a0d8866a5123bdfb585b732595da8e" id="r_a26a0d8866a5123bdfb585b732595da8e"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a26a0d8866a5123bdfb585b732595da8e template"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a26a0d8866a5123bdfb585b732595da8e">emplace_hint</a> (<a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> position, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a26a0d8866a5123bdfb585b732595da8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近就地构造元素  <br /></td></tr>
+<tr class="memitem:a37096f1285c59b38242b8c864cc64663" id="r_a37096f1285c59b38242b8c864cc64663"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a37096f1285c59b38242b8c864cc64663">insert</a> (<a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> position, const <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a37096f1285c59b38242b8c864cc64663"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a73bb911e17a942653e92d1d0058bab45" id="r_a73bb911e17a942653e92d1d0058bab45"><td class="memItemLeft"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a73bb911e17a942653e92d1d0058bab45">insert</a> (<a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> position, <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a73bb911e17a942653e92d1d0058bab45"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近移动插入元素  <br /></td></tr>
+<tr class="memitem:adeea8de3b0d6846f8952c9627ef9b424" id="r_adeea8de3b0d6846f8952c9627ef9b424"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:adeea8de3b0d6846f8952c9627ef9b424 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adeea8de3b0d6846f8952c9627ef9b424">insert</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:adeea8de3b0d6846f8952c9627ef9b424"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素  <br /></td></tr>
+<tr class="memitem:a4b8e00817f849811776d64103629915c" id="r_a4b8e00817f849811776d64103629915c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4b8e00817f849811776d64103629915c">erase</a> (<a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> position) noexcept(noexcept(tree_.erase(position)))</td></tr>
+<tr class="memdesc:a4b8e00817f849811776d64103629915c"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:a15ec1a83760564784deb4f85fa5520ca" id="r_a15ec1a83760564784deb4f85fa5520ca"><td class="memItemLeft"><a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a15ec1a83760564784deb4f85fa5520ca">erase</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) noexcept(noexcept(tree_.erase(key)))</td></tr>
+<tr class="memdesc:a15ec1a83760564784deb4f85fa5520ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除所有具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a60509432f984b4dbdbf808d9175c836f" id="r_a60509432f984b4dbdbf808d9175c836f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a60509432f984b4dbdbf808d9175c836f">erase</a> (<a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> first, <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> last) noexcept(noexcept(tree_.erase(first, last)))</td></tr>
+<tr class="memdesc:a60509432f984b4dbdbf808d9175c836f"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:a70b5c8a7fca333d51799638a34d5b6ba" id="r_a70b5c8a7fca333d51799638a34d5b6ba"><td class="memItemLeft"><a id="a70b5c8a7fca333d51799638a34d5b6ba" name="a70b5c8a7fca333d51799638a34d5b6ba"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept(noexcept(tree_.clear()))</td></tr>
+<tr class="memdesc:a70b5c8a7fca333d51799638a34d5b6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空multimap <br /></td></tr>
+<tr class="memitem:a446c51b047bb01f1041b2e72bbcd6348" id="r_a446c51b047bb01f1041b2e72bbcd6348"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a446c51b047bb01f1041b2e72bbcd6348">find</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a446c51b047bb01f1041b2e72bbcd6348"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a533f7753efe0831ca2f73097989e3f74" id="r_a533f7753efe0831ca2f73097989e3f74"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a533f7753efe0831ca2f73097989e3f74">find</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a533f7753efe0831ca2f73097989e3f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的常量元素  <br /></td></tr>
+<tr class="memitem:a62663b0d578a87e853fa4ba8ed1f8ba8" id="r_a62663b0d578a87e853fa4ba8ed1f8ba8"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a62663b0d578a87e853fa4ba8ed1f8ba8">count</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a62663b0d578a87e853fa4ba8ed1f8ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计具有指定键的元素数量  <br /></td></tr>
+<tr class="memitem:a6ba205138090a42de4f65a21a142baef" id="r_a6ba205138090a42de4f65a21a142baef"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6ba205138090a42de4f65a21a142baef">lower_bound</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a6ba205138090a42de4f65a21a142baef"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a3ab40c8a6abee7732d86df0e541bad71" id="r_a3ab40c8a6abee7732d86df0e541bad71"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3ab40c8a6abee7732d86df0e541bad71">lower_bound</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a3ab40c8a6abee7732d86df0e541bad71"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的常量元素位置  <br /></td></tr>
+<tr class="memitem:a2926c6c06fd4c0aa459d391f880b3155" id="r_a2926c6c06fd4c0aa459d391f880b3155"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2926c6c06fd4c0aa459d391f880b3155">upper_bound</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a2926c6c06fd4c0aa459d391f880b3155"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a554dcb522deef20ab783ecb6ad9b2daf" id="r_a554dcb522deef20ab783ecb6ad9b2daf"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a554dcb522deef20ab783ecb6ad9b2daf">upper_bound</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a554dcb522deef20ab783ecb6ad9b2daf"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的常量元素位置  <br /></td></tr>
+<tr class="memitem:aba61e6e1046ce2b58ef70830cedda3b7" id="r_aba61e6e1046ce2b58ef70830cedda3b7"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>, <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aba61e6e1046ce2b58ef70830cedda3b7">equal_range</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:aba61e6e1046ce2b58ef70830cedda3b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围  <br /></td></tr>
+<tr class="memitem:af70e8ca11bbbc6a49fb43de3a6ae463c" id="r_af70e8ca11bbbc6a49fb43de3a6ae463c"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>, <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af70e8ca11bbbc6a49fb43de3a6ae463c">equal_range</a> (const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:af70e8ca11bbbc6a49fb43de3a6ae463c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的常量元素范围  <br /></td></tr>
+<tr class="memitem:afffcff4cad1b5f690b1019ea607a87b4" id="r_afffcff4cad1b5f690b1019ea607a87b4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afffcff4cad1b5f690b1019ea607a87b4">swap</a> (<a class="el" href="classmultimap.html">multimap</a> &amp;other) noexcept(is_nothrow_swappable_v&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:afffcff4cad1b5f690b1019ea607a87b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个multimap的内容  <br /></td></tr>
+<tr class="memitem:a6723c8693bd3bed9087e05dc010486df" id="r_a6723c8693bd3bed9087e05dc010486df"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a6723c8693bd3bed9087e05dc010486df">operator==</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_==rhs.tree_))</td></tr>
+<tr class="memdesc:a6723c8693bd3bed9087e05dc010486df"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:afb57706691a89f8d49f99f384eb15a18" id="r_afb57706691a89f8d49f99f384eb15a18"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#afb57706691a89f8d49f99f384eb15a18">operator&lt;</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_&lt; rhs.tree_))</td></tr>
+<tr class="memdesc:afb57706691a89f8d49f99f384eb15a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt;<br />
+class multimap&lt; Key, T, Compare, Alloc &gt;</div><p>多重映射容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>键比较函数类型，默认为less&lt;Key&gt; </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 支持快速的键查找，但键可以重复出现。底层使用红黑树实现。 </p>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00037">37</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ae39a1e919294157ba8d68a1b9bc620ea" name="ae39a1e919294157ba8d68a1b9bc620ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39a1e919294157ba8d68a1b9bc620ea">&#9670;&#160;</a></span>multimap() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>构造一个空multimap，使用默认的比较函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00099">99</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00113">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00130">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00550">operator&lt;()</a>, <a class="el" href="multimap_8hpp_source.html#l00121">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00139">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00190">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00540">operator==()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00530">swap()</a>.</p>
+
+</div>
+</div>
+<a id="a1ff47dea3aa3e04fb9675d4d0638b691" name="a1ff47dea3aa3e04fb9675d4d0638b691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ff47dea3aa3e04fb9675d4d0638b691">&#9670;&#160;</a></span>multimap() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00106">106</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4c803e9e996d775130543fdd32538d8e" name="a4c803e9e996d775130543fdd32538d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c803e9e996d775130543fdd32538d8e">&#9670;&#160;</a></span>multimap() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="af629ba77888a949a21f6648bf6d0a510" name="af629ba77888a949a21f6648bf6d0a510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af629ba77888a949a21f6648bf6d0a510">&#9670;&#160;</a></span>multimap() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a9691404b63a8c5a8882dd56b5ae9a2ce" name="a9691404b63a8c5a8882dd56b5ae9a2ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9691404b63a8c5a8882dd56b5ae9a2ce">&#9670;&#160;</a></span>multimap() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00152">152</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab1b673ff6c8d5d46368d5d9aa710b44f" name="ab1b673ff6c8d5d46368d5d9aa710b44f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b673ff6c8d5d46368d5d9aa710b44f">&#9670;&#160;</a></span>multimap() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数，指定比较函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00165">165</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad8ddecfa5c9179fb65b3e9376a9c94f8" name="ad8ddecfa5c9179fb65b3e9376a9c94f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ddecfa5c9179fb65b3e9376a9c94f8">&#9670;&#160;</a></span>multimap() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00174">174</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00205">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="ade55296d14e5157e99e271ab8b122d4b" name="ade55296d14e5157e99e271ab8b122d4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade55296d14e5157e99e271ab8b122d4b">&#9670;&#160;</a></span>multimap() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::multimap </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数，指定比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00182">182</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00205">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a960e640bb9633cc35a00eea22d099424" name="a960e640bb9633cc35a00eea22d099424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a960e640bb9633cc35a00eea22d099424">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00221">221</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acf71327da9be508b06a29a7a9260d4fe" name="acf71327da9be508b06a29a7a9260d4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf71327da9be508b06a29a7a9260d4fe">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00205">205</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="aba61c75eb09f19d0ddaf22fa56f59390" name="aba61c75eb09f19d0ddaf22fa56f59390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba61c75eb09f19d0ddaf22fa56f59390">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00236">236</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0df2487c21877b67e260ed974c7d3656" name="a0df2487c21877b67e260ed974c7d3656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0df2487c21877b67e260ed974c7d3656">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00244">244</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a62663b0d578a87e853fa4ba8ed1f8ba8" name="a62663b0d578a87e853fa4ba8ed1f8ba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62663b0d578a87e853fa4ba8ed1f8ba8">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>统计具有指定键的元素数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要统计的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00468">468</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2777448dfa2937dd4c86a7f49618bbe2" name="a2777448dfa2937dd4c86a7f49618bbe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2777448dfa2937dd4c86a7f49618bbe2">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00284">284</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aeb140b382bc924b7ed2261d5434bf2ab" name="aeb140b382bc924b7ed2261d5434bf2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb140b382bc924b7ed2261d5434bf2ab">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00292">292</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5eb34cc11bd291040e5eb4b93cf0c6e1" name="a5eb34cc11bd291040e5eb4b93cf0c6e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb34cc11bd291040e5eb4b93cf0c6e1">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在multimap中就地构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00343">343</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+
+</div>
+</div>
+<a id="a26a0d8866a5123bdfb585b732595da8e" name="a26a0d8866a5123bdfb585b732595da8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26a0d8866a5123bdfb585b732595da8e">&#9670;&#160;</a></span>emplace_hint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::emplace_hint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近就地构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00373">373</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+
+</div>
+</div>
+<a id="a3bd1adfd16f10f4d0f5128870fa978d3" name="a3bd1adfd16f10f4d0f5128870fa978d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bd1adfd16f10f4d0f5128870fa978d3">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00316">316</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a95a8309f33dba1fa8cd5400dbd400f0c" name="a95a8309f33dba1fa8cd5400dbd400f0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95a8309f33dba1fa8cd5400dbd400f0c">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00228">228</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad49fc08f28a91e2a05709fba346bd458" name="ad49fc08f28a91e2a05709fba346bd458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad49fc08f28a91e2a05709fba346bd458">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00213">213</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="aba61e6e1046ce2b58ef70830cedda3b7" name="aba61e6e1046ce2b58ef70830cedda3b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba61e6e1046ce2b58ef70830cedda3b7">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a>, <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> &gt; <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00513">513</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af70e8ca11bbbc6a49fb43de3a6ae463c" name="af70e8ca11bbbc6a49fb43de3a6ae463c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af70e8ca11bbbc6a49fb43de3a6ae463c">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a>, <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> &gt; <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的常量元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00522">522</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a15ec1a83760564784deb4f85fa5520ca" name="a15ec1a83760564784deb4f85fa5520ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ec1a83760564784deb4f85fa5520ca">&#9670;&#160;</a></span>erase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除所有具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要删除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00422">422</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a60509432f984b4dbdbf808d9175c836f" name="a60509432f984b4dbdbf808d9175c836f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60509432f984b4dbdbf808d9175c836f">&#9670;&#160;</a></span>erase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00432">432</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4b8e00817f849811776d64103629915c" name="a4b8e00817f849811776d64103629915c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8e00817f849811776d64103629915c">&#9670;&#160;</a></span>erase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00412">412</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a446c51b047bb01f1041b2e72bbcd6348" name="a446c51b047bb01f1041b2e72bbcd6348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a446c51b047bb01f1041b2e72bbcd6348">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00450">450</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a533f7753efe0831ca2f73097989e3f74" name="a533f7753efe0831ca2f73097989e3f74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533f7753efe0831ca2f73097989e3f74">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的常量元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00459">459</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8c9cc1f5e3899c24bd6453b42b7cbc91" name="a8c9cc1f5e3899c24bd6453b42b7cbc91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9cc1f5e3899c24bd6453b42b7cbc91">&#9670;&#160;</a></span>insert() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00352">352</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00190">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="adeea8de3b0d6846f8952c9627ef9b424" name="adeea8de3b0d6846f8952c9627ef9b424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeea8de3b0d6846f8952c9627ef9b424">&#9670;&#160;</a></span>insert() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00404">404</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a37096f1285c59b38242b8c864cc64663" name="a37096f1285c59b38242b8c864cc64663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37096f1285c59b38242b8c864cc64663">&#9670;&#160;</a></span>insert() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00383">383</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a73bb911e17a942653e92d1d0058bab45" name="a73bb911e17a942653e92d1d0058bab45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73bb911e17a942653e92d1d0058bab45">&#9670;&#160;</a></span>insert() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00393">393</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="ad0ff0756318bf7907996f3f018b6ac0c" name="ad0ff0756318bf7907996f3f018b6ac0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ff0756318bf7907996f3f018b6ac0c">&#9670;&#160;</a></span>insert() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="aa8922eb5d9d641cac3097549ab514085" name="aa8922eb5d9d641cac3097549ab514085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8922eb5d9d641cac3097549ab514085">&#9670;&#160;</a></span>key_comp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a1ff501e9a90f790358915b73b91920ce">key_compare</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::key_comp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00324">324</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6ba205138090a42de4f65a21a142baef" name="a6ba205138090a42de4f65a21a142baef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ba205138090a42de4f65a21a142baef">&#9670;&#160;</a></span>lower_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00477">477</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3ab40c8a6abee7732d86df0e541bad71" name="a3ab40c8a6abee7732d86df0e541bad71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab40c8a6abee7732d86df0e541bad71">&#9670;&#160;</a></span>lower_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的常量元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00486">486</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a606fe1343864f15d6abd3b91dc2262be" name="a606fe1343864f15d6abd3b91dc2262be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a606fe1343864f15d6abd3b91dc2262be">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00308">308</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afb57706691a89f8d49f99f384eb15a18" name="afb57706691a89f8d49f99f384eb15a18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb57706691a89f8d49f99f384eb15a18">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00550">550</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="affefa2a7a9f1e9c89949e76ffab0fbba" name="affefa2a7a9f1e9c89949e76ffab0fbba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affefa2a7a9f1e9c89949e76ffab0fbba">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a> &amp; <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00121">121</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a4d0e3e812ef242912dca474af1149972" name="a4d0e3e812ef242912dca474af1149972"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d0e3e812ef242912dca474af1149972">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a> &amp; <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00139">139</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a>, <a class="el" href="shift_8hpp_source.html#l00285">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="abb8eaaaa6a43c7db5e7a29b2f2c20113" name="abb8eaaaa6a43c7db5e7a29b2f2c20113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb8eaaaa6a43c7db5e7a29b2f2c20113">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmultimap.html">multimap</a> &amp; <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a1a59b4d4c2350609c9b68eba16b04266">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00190">190</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00440">clear()</a>, <a class="el" href="multimap_8hpp_source.html#l00352">insert()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a6723c8693bd3bed9087e05dc010486df" name="a6723c8693bd3bed9087e05dc010486df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6723c8693bd3bed9087e05dc010486df">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个multimap大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00540">540</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="afd0b837e2231854403b8927e2d4dbad4" name="afd0b837e2231854403b8927e2d4dbad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd0b837e2231854403b8927e2d4dbad4">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00268">268</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae7b36210b8320e898102ded56f56da90" name="ae7b36210b8320e898102ded56f56da90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7b36210b8320e898102ded56f56da90">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#adcfff654cf1fe744d52a06b66a6a6336">reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00252">252</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afcd8419ea83a33dfdeaa11f69ab23238" name="afcd8419ea83a33dfdeaa11f69ab23238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcd8419ea83a33dfdeaa11f69ab23238">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#afcb86053f4027d973fa27ac559da64fc">const_reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00276">276</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab338194c5f89d8cc5b645bf63b17db1f" name="ab338194c5f89d8cc5b645bf63b17db1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab338194c5f89d8cc5b645bf63b17db1f">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#adcfff654cf1fe744d52a06b66a6a6336">reverse_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00260">260</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5203f3bbd94081806c390d84ca098d21" name="a5203f3bbd94081806c390d84ca098d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5203f3bbd94081806c390d84ca098d21">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aa1e38e849bbb4d8bcc5fc04e67a3a7d7">size_type</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>multimap中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00300">300</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afffcff4cad1b5f690b1019ea607a87b4" name="afffcff4cad1b5f690b1019ea607a87b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afffcff4cad1b5f690b1019ea607a87b4">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个multimap的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00530">530</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00099">multimap()</a>.</p>
+
+</div>
+</div>
+<a id="a2926c6c06fd4c0aa459d391f880b3155" name="a2926c6c06fd4c0aa459d391f880b3155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2926c6c06fd4c0aa459d391f880b3155">&#9670;&#160;</a></span>upper_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#aab149add0bec11252fc757be3d417e12">iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00495">495</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a554dcb522deef20ab783ecb6ad9b2daf" name="a554dcb522deef20ab783ecb6ad9b2daf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554dcb522deef20ab783ecb6ad9b2daf">&#9670;&#160;</a></span>upper_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a3979af3ba87f785896a4dcbdad47a474">const_iterator</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ae71d521660bcf2afce975a573c205893">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的常量元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00504">504</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a80ae615b1a1fe58fadf6f7b15aab5d0d" name="a80ae615b1a1fe58fadf6f7b15aab5d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ae615b1a1fe58fadf6f7b15aab5d0d">&#9670;&#160;</a></span>value_comp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="structmultimap_1_1value__compare.html">value_compare</a> <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::value_comp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取值比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>值比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00332">332</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="multimap_8hpp_source.html">multimap.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classmultimap.html">multimap</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

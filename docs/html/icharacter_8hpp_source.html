@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: icharacter.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('icharacter_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">icharacter.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="icharacter_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_INTERFACE_ICHARACTER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_INTERFACE_ICHARACTER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ipackage_8hpp.html">NeForce/core/interface/ipackage.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> CharT&gt;</div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structicharacter.html">   31</a></span><span class="keyword">struct </span><a class="code hl_function" href="structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416">icharacter</a> : <a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>&lt;T, CharT&gt; {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static_assert</span>(is_character_v&lt;CharT&gt;, <span class="stringliteral">&quot;CharT must be character.&quot;</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416">   37</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416">icharacter</a>() noexcept = default;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structicharacter.html#a50417e7f290cfdc1f9a5070a3aecbe0e">   43</a></span>    constexpr <a class="code hl_function" href="structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416">icharacter</a>(CharT <a class="code hl_function" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">value</a>) noexcept</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    : <a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>&lt;T, CharT&gt;(<a class="code hl_function" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">value</a>) {}</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structicharacter.html#a8e6c3790d0b57f1c16281e92b3f73a7f">   50</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">ipackage&lt;T, CharT&gt;::value_</a> != <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize&lt;CharT&gt;</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structicharacter.html#af848fd327a6fd1643241e07e941961f3">   59</a></span>    <span class="keyword">static</span> NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="structicharacter.html#af848fd327a6fd1643241e07e941961f3">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> T::to_string(obj);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structicharacter.html#a021c658eb03f1b1466c3f607a240005a">   68</a></span>    <span class="keyword">static</span> NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="structicharacter.html#a021c658eb03f1b1466c3f607a240005a">to_wstring</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> T::to_wstring(obj);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">static</span> NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> T::to_u8string(obj);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="foldopen" id="foldopen00088" data-start="{" data-end="}">
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="structicharacter.html#ab22e50ec249a833b9a21e0d4a841f18b">   88</a></span>    <span class="keyword">static</span> NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="structicharacter.html#ab22e50ec249a833b9a21e0d4a841f18b">to_u16string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> T::to_u16string(obj);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structicharacter.html#aa4a5dc5ce1cd5f3b27b9c9f16e949c12">   97</a></span>    <span class="keyword">static</span> NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="structicharacter.html#aa4a5dc5ce1cd5f3b27b9c9f16e949c12">to_u32string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">return</span> T::to_u32string(obj);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>};</div>
+</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> <span class="comment">// CRTPInterfaces</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">  117</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a>(<span class="keyword">const</span> CharT&amp; c) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">::to_string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>(1, c).view());</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="group___to_string.html#gaa798142a72a71d25394f1ca62dce3996">  128</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a>(<span class="keyword">const</span> CharT* x) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">::to_string</a>(<a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>(x));</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="group___to_string.html#ga29887aec0e5918732e1137b8efc89ef7">  139</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a> x) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">::to_string</a>(x);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="group___to_string.html#gaa01564d742c111d8bc26d09d6ab32f99">  150</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp; x) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">::to_string</a>(x.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>());</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="group___to_string.html#ga6a95dfac223f390c14a66fac35c45234">  161</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">::to_string</a>(x.view());</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00171" data-start="{" data-end="}">
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="group___to_string.html#gad5698b72220289bfb51e3451dcbc0d8c">  171</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___to_string.html#gad5698b72220289bfb51e3451dcbc0d8c">to_string&lt;char&gt;</a>(<span class="keywordtype">string</span>&amp;&amp; x) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">  182</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a>(<span class="keyword">const</span> CharT&amp; x) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">::to_wstring</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>(1, x).view());</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="group___to_string.html#ga4eab75a2ff6e1572c7b42811b68a68dc">  193</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a>(<span class="keyword">const</span> CharT* x) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">::to_wstring</a>(<a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>(x));</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="group___to_string.html#gaf68a050eb9ab2a1266371199b374fd84">  204</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a> x) {</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">::to_wstring</a>(x);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
+</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00215" data-start="{" data-end="}">
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="group___to_string.html#ga9ead54814a95394820cdf7411e55f2f9">  215</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp; x) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">::to_wstring</a>(x.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>());</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
+</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="group___to_string.html#ga079542eccb8702a6d11cf21bc8e0b199">  226</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">::to_wstring</a>(x.view());</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>}</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="group___to_string.html#gaf2d0b3f893049512f91617c933dceb39">  236</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> <a class="code hl_function" href="group___to_string.html#gaf2d0b3f893049512f91617c933dceb39">to_wstring&lt;wchar_t&gt;</a>(<a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>}</div>
+</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<span class="keyword">const</span> CharT&amp; x) {</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;::to_u8string(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>(1, x).view());</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>}</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<span class="keyword">const</span> CharT* x) {</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;::to_u8string(<a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>(x));</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>}</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a> x) {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;::to_u8string(x);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>}</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp; x) {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;::to_u8string(x.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>());</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>}</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;::to_u8string(x.view());</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>}</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> to_u8string&lt;char8_t&gt;(<a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x);</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00316" data-start="{" data-end="}">
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">  316</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a>(<span class="keyword">const</span> CharT&amp; x) {</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">::to_u16string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>(1, x).view());</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>}</div>
+</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00327" data-start="{" data-end="}">
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno"><a class="line" href="group___to_string.html#gadf468b6fe0a4e8fc869cf10db8dea48e">  327</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a>(<span class="keyword">const</span> CharT* x) {</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">::to_u16string</a>(<a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>(x));</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}</div>
+</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00338" data-start="{" data-end="}">
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="group___to_string.html#ga3ec5c90ce1414c3f765b6712f7f3e32a">  338</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a> x) {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">::to_u16string</a>(x);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>}</div>
+</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00349" data-start="{" data-end="}">
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno"><a class="line" href="group___to_string.html#ga780f053d7c78196892938651ec9b27a2">  349</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp; x) {</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">::to_u16string</a>(x.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>());</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>}</div>
+</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00360" data-start="{" data-end="}">
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="group___to_string.html#ga3ec9a07e43145de697e4c34749a1f568">  360</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gaa848493506a654e560e16f20bb525412">::to_u16string</a>(x.view());</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>}</div>
+</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00370" data-start="{" data-end="}">
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno"><a class="line" href="group___to_string.html#ga52128258412667136a88578404038752">  370</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a> <a class="code hl_function" href="group___to_string.html#ga52128258412667136a88578404038752">to_u16string&lt;char16_t&gt;</a>(<a class="code hl_typedef" href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>}</div>
+</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00381" data-start="{" data-end="}">
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="group___to_string.html#gae12d3855127588058de032cea88642ca">  381</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a>(<span class="keyword">const</span> CharT&amp; x) {</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">::to_u32string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>(1, x).view());</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>}</div>
+</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00392" data-start="{" data-end="}">
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno"><a class="line" href="group___to_string.html#ga07a98671eab3c1be8b4e6e7bcbeb1028">  392</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a>(<span class="keyword">const</span> CharT* x) {</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">::to_u32string</a>(<a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a>(x));</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>}</div>
+</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00403" data-start="{" data-end="}">
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno"><a class="line" href="group___to_string.html#ga4c31ab410e7009961afb4e73902a9fec">  403</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string__view.html">basic_string_view&lt;CharT&gt;</a> x) {</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">::to_u32string</a>(x);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>}</div>
+</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00414" data-start="{" data-end="}">
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno"><a class="line" href="group___to_string.html#ga6319ab9d4ee8d8194e90bf2799792d8b">  414</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp; x) {</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">::to_u32string</a>(x.<a class="code hl_function" href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">view</a>());</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>}</div>
+</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span></div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CharT, enable_if_t&lt;is_standard_<span class="keywordtype">char</span>acter_v&lt;CharT&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00425" data-start="{" data-end="}">
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno"><a class="line" href="group___to_string.html#ga482acc0905edaea6b71ff5f423cfbde1">  425</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a>(<a class="code hl_class" href="classbasic__string.html">basic_string&lt;CharT&gt;</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structicharacter.html">icharacter&lt;package_t&lt;CharT&gt;</a>, CharT&gt;<a class="code hl_function" href="group___to_string.html#gae12d3855127588058de032cea88642ca">::to_u32string</a>(x.view());</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>}</div>
+</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00435" data-start="{" data-end="}">
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno"><a class="line" href="group___to_string.html#gad4578acd201621d372fd4e8be4f29153">  435</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> <a class="code hl_function" href="group___to_string.html#gad4578acd201621d372fd4e8be4f29153">to_u32string&lt;char32_t&gt;</a>(<a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a>&amp;&amp; x) {</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x);</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>}</div>
+</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> <span class="comment">// ToString</span></div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span> </div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_INTERFACE_ICHARACTER_HPP__</span></div>
+<div class="ttc" id="aclassbasic__string__view_html"><div class="ttname"><a href="classbasic__string__view.html">basic_string_view</a></div><div class="ttdoc">基本字符串视图模板</div><div class="ttdef"><b>定义</b> <a href="basic__string__view_8hpp_source.html#l00177">basic_string_view.hpp:177</a></div></div>
+<div class="ttc" id="aclassbasic__string_html"><div class="ttname"><a href="classbasic__string.html">basic_string</a></div><div class="ttdoc">基础字符串模板</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l00175">basic_string.hpp:175</a></div></div>
+<div class="ttc" id="aclassbasic__string_html_a123c35595a7addcd463a2ca11eba7a32"><div class="ttname"><a href="classbasic__string.html#a123c35595a7addcd463a2ca11eba7a32">basic_string::view</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02140">basic_string.hpp:2140</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___string_html_ga5a46d14521a34d38878f9d7b09aa6452"><div class="ttname"><a href="group___string.html#ga5a46d14521a34d38878f9d7b09aa6452">u16string</a></div><div class="ttdeci">basic_string&lt; char16_t &gt; u16string</div><div class="ttdoc">UTF-16字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00033">string.hpp:33</a></div></div>
+<div class="ttc" id="agroup___string_html_gaa25cbe3f775d6f4076da8510ffa1a0f4"><div class="ttname"><a href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a></div><div class="ttdeci">basic_string&lt; char8_t &gt; u8string</div><div class="ttdoc">UTF-8字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00029">string.hpp:29</a></div></div>
+<div class="ttc" id="agroup___string_html_gac8b291943e376bed3f3ed295a7dd68af"><div class="ttname"><a href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a></div><div class="ttdeci">basic_string&lt; wchar_t &gt; wstring</div><div class="ttdoc">宽字符字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00025">string.hpp:25</a></div></div>
+<div class="ttc" id="agroup___string_html_gae9d2688d8ad654e665cf2b8032125af9"><div class="ttname"><a href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a></div><div class="ttdeci">basic_string&lt; char32_t &gt; u32string</div><div class="ttdoc">UTF-32字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00036">string.hpp:36</a></div></div>
+<div class="ttc" id="agroup___to_string_html_ga52128258412667136a88578404038752"><div class="ttname"><a href="group___to_string.html#ga52128258412667136a88578404038752">to_u16string&lt; char16_t &gt;</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 u16string to_u16string&lt; char16_t &gt;(u16string &amp;&amp;x)</div><div class="ttdoc">char16_t类型右值UTF-16字符串特化 - 直接移动</div><div class="ttdef"><b>定义</b> <a href="#l00370">icharacter.hpp:370</a></div></div>
+<div class="ttc" id="agroup___to_string_html_ga9251b4c6b76ff16b3e76a7fe9f7f5f13"><div class="ttname"><a href="group___to_string.html#ga9251b4c6b76ff16b3e76a7fe9f7f5f13">to_wstring</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 wstring to_wstring(const CharT &amp;x)</div><div class="ttdoc">将字符转换为宽字符串</div><div class="ttdef"><b>定义</b> <a href="#l00182">icharacter.hpp:182</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gaa848493506a654e560e16f20bb525412"><div class="ttname"><a href="group___to_string.html#gaa848493506a654e560e16f20bb525412">to_u16string</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 u16string to_u16string(const CharT &amp;x)</div><div class="ttdoc">将字符转换为UTF-16字符串</div><div class="ttdef"><b>定义</b> <a href="#l00316">icharacter.hpp:316</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gad4578acd201621d372fd4e8be4f29153"><div class="ttname"><a href="group___to_string.html#gad4578acd201621d372fd4e8be4f29153">to_u32string&lt; char32_t &gt;</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 u32string to_u32string&lt; char32_t &gt;(u32string &amp;&amp;x)</div><div class="ttdoc">char32_t类型右值UTF-32字符串特化 - 直接移动</div><div class="ttdef"><b>定义</b> <a href="#l00435">icharacter.hpp:435</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gad5698b72220289bfb51e3451dcbc0d8c"><div class="ttname"><a href="group___to_string.html#gad5698b72220289bfb51e3451dcbc0d8c">to_string&lt; char &gt;</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 string to_string&lt; char &gt;(string &amp;&amp;x)</div><div class="ttdoc">char类型右值字符串特化 - 直接移动</div><div class="ttdef"><b>定义</b> <a href="#l00171">icharacter.hpp:171</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gada4d51c7f47cc769a7a7480a2db53788"><div class="ttname"><a href="group___to_string.html#gada4d51c7f47cc769a7a7480a2db53788">to_string</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 string to_string(const CharT &amp;c)</div><div class="ttdoc">将字符转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="#l00117">icharacter.hpp:117</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gae12d3855127588058de032cea88642ca"><div class="ttname"><a href="group___to_string.html#gae12d3855127588058de032cea88642ca">to_u32string</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 u32string to_u32string(const CharT &amp;x)</div><div class="ttdoc">将字符转换为UTF-32字符串</div><div class="ttdef"><b>定义</b> <a href="#l00381">icharacter.hpp:381</a></div></div>
+<div class="ttc" id="agroup___to_string_html_gaf2d0b3f893049512f91617c933dceb39"><div class="ttname"><a href="group___to_string.html#gaf2d0b3f893049512f91617c933dceb39">to_wstring&lt; wchar_t &gt;</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 wstring to_wstring&lt; wchar_t &gt;(wstring &amp;&amp;x)</div><div class="ttdoc">wchar_t类型右值宽字符串特化 - 直接移动</div><div class="ttdef"><b>定义</b> <a href="#l00236">icharacter.hpp:236</a></div></div>
+<div class="ttc" id="agroup___type_initialize_function_html_gafff7aa9d7280a07a58464ccdf4a8931a"><div class="ttname"><a href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE constexpr T initialize() noexcept(is_nothrow_default_constructible&lt; T &gt;::value)</div><div class="ttdoc">返回类型T的默认初始化值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l04381">type_traits.hpp:4381</a></div></div>
+<div class="ttc" id="aipackage_8hpp_html"><div class="ttname"><a href="ipackage_8hpp.html">ipackage.hpp</a></div><div class="ttdoc">基础数值包装接口</div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructicharacter_html"><div class="ttname"><a href="structicharacter.html">icharacter</a></div><div class="ttdoc">字符类型接口</div><div class="ttdef"><b>定义</b> <a href="#l00031">icharacter.hpp:31</a></div></div>
+<div class="ttc" id="astructicharacter_html_a021c658eb03f1b1466c3f607a240005a"><div class="ttname"><a href="structicharacter.html#a021c658eb03f1b1466c3f607a240005a">icharacter::to_wstring</a></div><div class="ttdeci">static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view&lt; CharT &gt; &amp;obj)</div><div class="ttdoc">转换为宽字符串</div><div class="ttdef"><b>定义</b> <a href="#l00068">icharacter.hpp:68</a></div></div>
+<div class="ttc" id="astructicharacter_html_a22456a37b9244e03357d6f8a0c3ac416"><div class="ttname"><a href="structicharacter.html#a22456a37b9244e03357d6f8a0c3ac416">icharacter::icharacter</a></div><div class="ttdeci">constexpr icharacter() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="astructicharacter_html_aa4a5dc5ce1cd5f3b27b9c9f16e949c12"><div class="ttname"><a href="structicharacter.html#aa4a5dc5ce1cd5f3b27b9c9f16e949c12">icharacter::to_u32string</a></div><div class="ttdeci">static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view&lt; CharT &gt; &amp;obj)</div><div class="ttdoc">转换为UTF-32字符串</div><div class="ttdef"><b>定义</b> <a href="#l00097">icharacter.hpp:97</a></div></div>
+<div class="ttc" id="astructicharacter_html_ab22e50ec249a833b9a21e0d4a841f18b"><div class="ttname"><a href="structicharacter.html#ab22e50ec249a833b9a21e0d4a841f18b">icharacter::to_u16string</a></div><div class="ttdeci">static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view&lt; CharT &gt; &amp;obj)</div><div class="ttdoc">转换为UTF-16字符串</div><div class="ttdef"><b>定义</b> <a href="#l00088">icharacter.hpp:88</a></div></div>
+<div class="ttc" id="astructicharacter_html_af848fd327a6fd1643241e07e941961f3"><div class="ttname"><a href="structicharacter.html#af848fd327a6fd1643241e07e941961f3">icharacter::to_string</a></div><div class="ttdeci">static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view&lt; CharT &gt; &amp;obj)</div><div class="ttdoc">转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="#l00059">icharacter.hpp:59</a></div></div>
+<div class="ttc" id="astructipackage_html_a7aa989ea26f1dddba13c3bf018b51901"><div class="ttname"><a href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage&lt; T, CharT &gt;::ipackage</a></div><div class="ttdeci">constexpr ipackage() noexcept=default</div></div>
+<div class="ttc" id="astructipackage_html_a9d233c90c8df39928d28b30b8b54a3c5"><div class="ttname"><a href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">ipackage::value_</a></div><div class="ttdeci">package_type value_</div><div class="ttdoc">存储的数值</div><div class="ttdef"><b>定义</b> <a href="ipackage_8hpp_source.html#l00056">ipackage.hpp:56</a></div></div>
+<div class="ttc" id="astructipackage_html_aaae996c512fb34155e8ce5f6f6b943c9"><div class="ttname"><a href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">ipackage::value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr package_type value() const noexcept</div><div class="ttdoc">获取数值</div><div class="ttdef"><b>定义</b> <a href="ipackage_8hpp_source.html#l00112">ipackage.hpp:112</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>interface</b></li><li class="navelem"><a href="icharacter_8hpp.html">icharacter.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

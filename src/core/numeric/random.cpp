@@ -1,7 +1,7 @@
-#include <MSTL/core/numeric/random.hpp>
-#include <MSTL/core/time/datetime.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/numeric/random.hpp>
+#include <NeForce/core/time/datetime.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <minwindef.h>
 #include <minwinbase.h>
 #include <windef.h>
@@ -13,14 +13,14 @@
 #undef min
 #endif
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/fcntl.h>
 #include <unistd.h>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 random_lcd::random_lcd()
-: seed_(static_cast<seed_type>(_MSTL timestamp::now())) {}
+: seed_(static_cast<seed_type>(_NEFORCE timestamp::now())) {}
 
 void random_mt::twist() {
     for (size_t i = 0; i < n; ++i) {
@@ -34,7 +34,7 @@ void random_mt::twist() {
 }
 
 random_mt::random_mt() {
-    set_seed(static_cast<seed_type>(_MSTL timestamp::now()));
+    set_seed(static_cast<seed_type>(_NEFORCE timestamp::now()));
 }
 
 void random_mt::set_seed(const seed_type seed) {
@@ -105,7 +105,7 @@ double secret::next_double() {
 }
 
 bool secret::is_supported() {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::HCRYPTPROV hProv;
     const bool supported = ::CryptAcquireContext(
         &hProv, nullptr, nullptr, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT);
@@ -113,7 +113,7 @@ bool secret::is_supported() {
         ::CryptReleaseContext(hProv, 0);
     }
     return supported;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if (fd == -1) {
         return false;
@@ -130,7 +130,7 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
         throw_exception(value_exception("Invalid buffer or length"));
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     HCRYPTPROV hProv = 0;
     if (!::CryptAcquireContext(&hProv, nullptr, nullptr,
         PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
@@ -143,7 +143,7 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
     }
 
     ::CryptReleaseContext(hProv, 0);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if(fd == -1) {
         throw_exception(file_exception("Failed to open /dev/urandom"));
@@ -164,4 +164,4 @@ void secret::get_random_bytes(byte_t* buffer, size_t length) {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

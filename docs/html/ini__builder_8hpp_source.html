@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: ini_builder.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ini__builder_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ini_builder.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ini__builder_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_FILE_INI_INI_BUILDER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_FILE_INI_INI_BUILDER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ini__value_8hpp.html">NeForce/core/file/ini/ini_value.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classini__builder.html">   34</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_document&gt;</a> root_;   </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classini__section.html">ini_section</a>* current_section_ = <span class="keyword">nullptr</span>;   </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">string</span> current_key_;   </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> test_exception() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">   56</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>(<span class="keyword">const</span> <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classini__builder.html#a7492177a96534afdb9211bcb0a06e8c7">   65</a></span>    <a class="code hl_function" href="classini__builder.html#a7492177a96534afdb9211bcb0a06e8c7">ini_builder</a>(<a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp;&amp; other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classini__builder.html#a5b510ceb6d7b7209e0ccf3a4de43a974">   72</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; operator =(<a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp;&amp; other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">   82</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">begin_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classini__builder.html#a91ce1b6ebe2327cd2d9bfd2abb6ec06c">   90</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a91ce1b6ebe2327cd2d9bfd2abb6ec06c">end_section</a>();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classini__builder.html#ae6ec40c1674af57e665cc76a396bb767">  100</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#ae6ec40c1674af57e665cc76a396bb767">key</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classini__builder.html#ae6ec40c1674af57e665cc76a396bb767">key</a>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">  108</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>(<span class="keywordtype">string</span> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classini__builder.html#afc06392c5a3748f6a1c2ebb72a53f28f">  116</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#afc06392c5a3748f6a1c2ebb72a53f28f">value</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>) { <span class="keywordflow">return</span> this-&gt;<a class="code hl_function" href="classini__builder.html#afc06392c5a3748f6a1c2ebb72a53f28f">value</a>(<span class="keywordtype">string</span>(value)); }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classini__builder.html#a4db23b4aee582ad4bd453b55d48c0433">  124</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a4db23b4aee582ad4bd453b55d48c0433">value</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>) { <span class="keywordflow">return</span> this-&gt;<a class="code hl_function" href="classini__builder.html#a4db23b4aee582ad4bd453b55d48c0433">value</a>(<span class="keywordtype">string</span>(value)); }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classini__builder.html#a071e60c05ccc86710d27480398d32b4f">  132</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a071e60c05ccc86710d27480398d32b4f">value</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classini__builder.html#a9009d53d2d348912fb2bf40f56da982e">  140</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a9009d53d2d348912fb2bf40f56da982e">value</a>(<a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classini__builder.html#a3157be364ab0321ada26356be193f641">  148</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a3157be364ab0321ada26356be193f641">value</a>(<span class="keywordtype">double</span> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classini__builder.html#a5c3dd9ce22280984d8bd7d3f69da70ae">  156</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a5c3dd9ce22280984d8bd7d3f69da70ae">value</a>(<span class="keywordtype">bool</span> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classini__builder.html#a3165ddf148f06f35a7a7b49e774af646">  165</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#a3165ddf148f06f35a7a7b49e774af646">value</a>(<span class="keywordtype">double</span> <a class="code hl_function" href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">value</a>, <span class="keywordtype">int</span> precision);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classini__builder.html#aa679a98a37b87316f9fe875058dad9cb">  177</a></span>    <a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp; <a class="code hl_function" href="classini__builder.html#aa679a98a37b87316f9fe875058dad9cb">value_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_class" href="classfunction.html">function</a>&lt;<span class="keywordtype">void</span>(<a class="code hl_function" href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder</a>&amp;)&gt;&amp;&amp; func);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classini__builder.html#a4370a91dbf524a84823e72510cb39ac2">  186</a></span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_document&gt;</a> <a class="code hl_function" href="classini__builder.html#a4370a91dbf524a84823e72510cb39ac2">build</a>() noexcept;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>};</div>
+</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> <span class="comment">// IniConfig</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_FILE_INI_INI_BUILDER_HPP__</span></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00029">function.hpp:29</a></div></div>
+<div class="ttc" id="aclassini__builder_html_a071e60c05ccc86710d27480398d32b4f"><div class="ttname"><a href="classini__builder.html#a071e60c05ccc86710d27480398d32b4f">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(int value)</div><div class="ttdoc">设置当前键的值（整数版本）</div></div>
+<div class="ttc" id="aclassini__builder_html_a09330734c323b5fb5de6be2ab390f68f"><div class="ttname"><a href="classini__builder.html#a09330734c323b5fb5de6be2ab390f68f">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(string value)</div><div class="ttdoc">设置当前键的值（字符串版本）</div></div>
+<div class="ttc" id="aclassini__builder_html_a3157be364ab0321ada26356be193f641"><div class="ttname"><a href="classini__builder.html#a3157be364ab0321ada26356be193f641">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(double value)</div><div class="ttdoc">设置当前键的值（浮点数版本）</div></div>
+<div class="ttc" id="aclassini__builder_html_a3165ddf148f06f35a7a7b49e774af646"><div class="ttname"><a href="classini__builder.html#a3165ddf148f06f35a7a7b49e774af646">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(double value, int precision)</div><div class="ttdoc">设置当前键的值（浮点数版本，指定精度）</div></div>
+<div class="ttc" id="aclassini__builder_html_a4370a91dbf524a84823e72510cb39ac2"><div class="ttname"><a href="classini__builder.html#a4370a91dbf524a84823e72510cb39ac2">ini_builder::build</a></div><div class="ttdeci">unique_ptr&lt; ini_document &gt; build() noexcept</div><div class="ttdoc">构建文档</div></div>
+<div class="ttc" id="aclassini__builder_html_a44b845c6e271597ff3777dfb5ad79384"><div class="ttname"><a href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section</a></div><div class="ttdeci">ini_builder &amp; begin_section(const string &amp;name)</div><div class="ttdoc">开始一个新节</div></div>
+<div class="ttc" id="aclassini__builder_html_a4db23b4aee582ad4bd453b55d48c0433"><div class="ttname"><a href="classini__builder.html#a4db23b4aee582ad4bd453b55d48c0433">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(const string_view value)</div><div class="ttdoc">设置当前键的值（字符串视图版本）</div><div class="ttdef"><b>定义</b> <a href="#l00124">ini_builder.hpp:124</a></div></div>
+<div class="ttc" id="aclassini__builder_html_a5c3dd9ce22280984d8bd7d3f69da70ae"><div class="ttname"><a href="classini__builder.html#a5c3dd9ce22280984d8bd7d3f69da70ae">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(bool value)</div><div class="ttdoc">设置当前键的值（布尔值版本）</div></div>
+<div class="ttc" id="aclassini__builder_html_a7492177a96534afdb9211bcb0a06e8c7"><div class="ttname"><a href="classini__builder.html#a7492177a96534afdb9211bcb0a06e8c7">ini_builder::ini_builder</a></div><div class="ttdeci">ini_builder(ini_builder &amp;&amp;other)=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassini__builder_html_a9009d53d2d348912fb2bf40f56da982e"><div class="ttname"><a href="classini__builder.html#a9009d53d2d348912fb2bf40f56da982e">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(int64_t value)</div><div class="ttdoc">设置当前键的值（64位整数版本）</div></div>
+<div class="ttc" id="aclassini__builder_html_a91ce1b6ebe2327cd2d9bfd2abb6ec06c"><div class="ttname"><a href="classini__builder.html#a91ce1b6ebe2327cd2d9bfd2abb6ec06c">ini_builder::end_section</a></div><div class="ttdeci">ini_builder &amp; end_section()</div><div class="ttdoc">结束当前节</div></div>
+<div class="ttc" id="aclassini__builder_html_aa679a98a37b87316f9fe875058dad9cb"><div class="ttname"><a href="classini__builder.html#aa679a98a37b87316f9fe875058dad9cb">ini_builder::value_section</a></div><div class="ttdeci">ini_builder &amp; value_section(const string &amp;name, _NEFORCE function&lt; void(ini_builder &amp;)&gt; &amp;&amp;func)</div><div class="ttdoc">使用函数式方式定义值节</div></div>
+<div class="ttc" id="aclassini__builder_html_ae6ec40c1674af57e665cc76a396bb767"><div class="ttname"><a href="classini__builder.html#ae6ec40c1674af57e665cc76a396bb767">ini_builder::key</a></div><div class="ttdeci">ini_builder &amp; key(const string &amp;key)</div><div class="ttdoc">设置当前键名</div></div>
+<div class="ttc" id="aclassini__builder_html_afa27f3ea82d3b0a156667c231fca7af8"><div class="ttname"><a href="classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8">ini_builder::ini_builder</a></div><div class="ttdeci">ini_builder()</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassini__builder_html_afc06392c5a3748f6a1c2ebb72a53f28f"><div class="ttname"><a href="classini__builder.html#afc06392c5a3748f6a1c2ebb72a53f28f">ini_builder::value</a></div><div class="ttdeci">ini_builder &amp; value(const char *value)</div><div class="ttdoc">设置当前键的值（C字符串版本）</div><div class="ttdef"><b>定义</b> <a href="#l00116">ini_builder.hpp:116</a></div></div>
+<div class="ttc" id="aclassini__section_html"><div class="ttname"><a href="classini__section.html">ini_section</a></div><div class="ttdoc">ini节类</div><div class="ttdef"><b>定义</b> <a href="ini__value_8hpp_source.html#l00181">ini_value.hpp:181</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="afunction_8hpp_html"><div class="ttname"><a href="function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00013">string_view.hpp:13</a></div></div>
+<div class="ttc" id="aini__value_8hpp_html"><div class="ttname"><a href="ini__value_8hpp.html">ini_value.hpp</a></div><div class="ttdoc">ini配置变量</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>file</b></li><li class="navelem"><b>ini</b></li><li class="navelem"><a href="ini__builder_8hpp.html">ini_builder.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

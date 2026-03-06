@@ -1,0 +1,95 @@
+PROJECT_NAME           = "@PROJECT_NAME@"
+PROJECT_NUMBER         = @PROJECT_VERSION@
+PROJECT_BRIEF          = "A Modern C++ Library with extended functionality, web components, and utility libraries"
+OUTPUT_DIRECTORY       = "@DOXYGEN_OUTPUT_DIR@"
+
+INPUT                  = "@DOXYGEN_INPUT_DIRS@"
+
+RECURSIVE              = YES
+MARKDOWN_SUPPORT = YES
+
+FILE_PATTERNS          = *.hpp \
+                         *.cpp \
+                         *.md
+
+HTML_DYNAMIC_SECTIONS  = NO
+PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1
+
+OUTPUT_LANGUAGE        = Chinese
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+HTML_OUTPUT            = html
+LATEX_OUTPUT           = latex
+RTF_OUTPUT             = rtf
+MAN_OUTPUT             = man
+XML_OUTPUT             = xml
+
+EXTRACT_ALL            = NO      # 只提取有文档的内容
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_ANON_NSPACES   = NO
+
+SHOW_FILES             = YES
+SHOW_INCLUDE_FILES     = YES     # 查看实现文件内容
+SOURCE_BROWSER         = YES     # 源代码浏览
+INLINE_SOURCES         = NO      # 在文档中嵌入源代码
+INLINE_SIMPLE_STRUCTS  = NO      # 在文档中嵌入简单类定义
+REFERENCES_LINK_SOURCE = YES     # 链接到源码
+REFERENCED_BY_RELATION = YES     # 显示被引用关系
+REFERENCES_RELATION    = YES     # 显示引用关系
+BRIEF_MEMBER_DESC      = YES     # 简化变量文档
+
+HIDE_UNDOC_MEMBERS     = YES     # 隐藏未文档化的成员
+HIDE_UNDOC_CLASSES     = YES     # 隐藏未文档化的类
+HIDE_FRIEND_COMPOUNDS  = YES
+HIDE_IN_BODY_DOCS      = YES     # 隐藏所有初始值，适用于宏、变量
+
+GRAPHICAL_HIERARCHY    = YES     # 图形化继承层次
+INCLUDE_GRAPH          = YES     # 包含关系图
+INCLUDED_BY_GRAPH      = NO      # 被包含关系图
+COLLABORATION_GRAPH    = NO      # 协作图
+UML_LOOK               = NO      # 简化 UML 样式
+
+HAVE_DOT               = @HAVE_DOT@
+DOT_NUM_THREADS        = 0       # 使用所有 CPU 核心
+DOT_GRAPH_MAX_NODES    = 100     # 限制节点数量
+MAX_DOT_GRAPH_DEPTH    = 10      # 限制图表深度
+DOT_IMAGE_FORMAT       = svg     # 使用 SVG，更小更清晰
+
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
+
+ALPHABETICAL_INDEX     = YES
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 250
+DISABLE_INDEX          = NO
+
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+
+FULL_PATH_NAMES        = NO      # 使用相对路径
+STRIP_FROM_PATH        = "@CMAKE_CURRENT_SOURCE_DIR@"
+
+AUTOLINK_SUPPORT       = YES
+TYPEDEF_HIDES_STRUCT   = YES
+
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO      # 警告未文档化的内容
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = NO      # 警告缺少参数文档=
+
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SEARCH_INCLUDES        = YES
+SKIP_FUNCTION_MACROS   = NO
+
+LOOKUP_CACHE_SIZE      = 0       # 解析深度自动调整

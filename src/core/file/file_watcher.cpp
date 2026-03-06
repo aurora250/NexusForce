@@ -1,13 +1,13 @@
-#include <MSTL/core/file/file_watcher.hpp>
-#include <MSTL/core/string/to_string.hpp>
-#include <MSTL/core/time/duration.hpp>
-#ifdef MSTL_PLATFORM_LINUX__
+#include <NeForce/core/file/file_watcher.hpp>
+#include <NeForce/core/string/to_string.hpp>
+#include <NeForce/core/time/duration.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/inotify.h>
 #include <sys/eventfd.h>
 #include <poll.h>
 #include <cerrno>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 file_watcher::file_watcher(const path& watch_path, const bool recursive)
     : watch_path_(watch_path), recursive_(recursive) {
@@ -23,7 +23,7 @@ file_watcher::~file_watcher() {
         watch_thread_.join();
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (completion_port_ != INVALID_HANDLE_VALUE) {
         ::CloseHandle(completion_port_);
         completion_port_ = INVALID_HANDLE_VALUE;
@@ -32,7 +32,7 @@ file_watcher::~file_watcher() {
         ::CloseHandle(dir_handle_);
         dir_handle_ = INVALID_HANDLE_VALUE;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (event_fd_ != -1) {
         ::close(event_fd_);
         event_fd_ = -1;
@@ -49,13 +49,13 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 
     {
         lock<mutex> lock(callback_mutex_);
-        callback_ = _MSTL move(callback);
+        callback_ = _NEFORCE move(callback);
         current_events_ = events;
     }
     watching_.store(true);
     stopping_.store(false);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     dir_handle_ = ::CreateFile(
         watch_path_.data(),
@@ -81,7 +81,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 
     watch_thread_ = thread(&file_watcher::watch_thread_func, this);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 
     inotify_fd_ = ::inotify_init1(IN_NONBLOCK);
     if (inotify_fd_ == -1) {
@@ -139,14 +139,14 @@ void file_watcher::stop() {
 
     stopping_.store(true);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (completion_port_ != INVALID_HANDLE_VALUE) {
         ::PostQueuedCompletionStatus(completion_port_, 0, 0, nullptr);
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (event_fd_ != -1) {
         constexpr uint64_t value = 1;
-        MSTL_IGNORE ::write(event_fd_, &value, sizeof(value));
+        NEFORCE_IGNORE ::write(event_fd_, &value, sizeof(value));
     }
 #endif
 
@@ -154,7 +154,7 @@ void file_watcher::stop() {
         watch_thread_.join();
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     if (dir_handle_ != INVALID_HANDLE_VALUE) {
         ::CancelIoEx(dir_handle_, nullptr);
@@ -166,7 +166,7 @@ void file_watcher::stop() {
         overlapped_.hEvent = nullptr;
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 
     if (watch_descriptor_ != -1) {
         ::inotify_rm_watch(inotify_fd_, watch_descriptor_);
@@ -182,12 +182,11 @@ void file_watcher::stop() {
 
 
 void file_watcher::watch_thread_func() {
-    constexpr size_t BUFFER_SIZE = 4096;
-    buffer_.resize(BUFFER_SIZE);
+    buffer_.resize(MEMORY_BIG_ALLOC_THRESHHOLD);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
-    _MSTL memory_zero(&overlapped_);
+    _NEFORCE memory_zero(&overlapped_);
     overlapped_.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
     if (!overlapped_.hEvent) {
         watching_.store(false);
@@ -323,7 +322,7 @@ void file_watcher::watch_thread_func() {
         overlapped_.hEvent = nullptr;
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 
     ::pollfd fds[2];
     fds[0].fd = inotify_fd_;
@@ -344,7 +343,7 @@ void file_watcher::watch_thread_func() {
 
         if (fds[1].revents & POLLIN) {
             uint64_t value;
-            MSTL_IGNORE ::read(event_fd_, &value, sizeof(value));
+            NEFORCE_IGNORE ::read(event_fd_, &value, sizeof(value));
             break;
         }
 
@@ -409,7 +408,7 @@ bool file_watcher::update_watch(const FILE_WATCH_EVENT events) {
     current_events_ = events;
 
     if (saved_callback) {
-        return start(_MSTL move(saved_callback), events);
+        return start(_NEFORCE move(saved_callback), events);
     }
     return true;
 }
@@ -435,9 +434,9 @@ bool file_watcher::update_recursive(const bool recursive) {
     recursive_ = recursive;
 
     if (saved_callback) {
-        return start(_MSTL move(saved_callback), saved_events);
+        return start(_NEFORCE move(saved_callback), saved_events);
     }
     return true;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

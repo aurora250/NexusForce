@@ -1,0 +1,634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 堆算法</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___heap_algorithms.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">堆算法 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>堆算法的实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga87cf689bef52f316f6ddc8f97f36b137" id="r_ga87cf689bef52f316f6ddc8f97f36b137"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga87cf689bef52f316f6ddc8f97f36b137 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga87cf689bef52f316f6ddc8f97f36b137">is_heap_until</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga87cf689bef52f316f6ddc8f97f36b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找堆中破坏堆性质的首个元素  <br /></td></tr>
+<tr class="memitem:ga09ba1ac8dc54510c385ce824ded6a0e4" id="r_ga09ba1ac8dc54510c385ce824ded6a0e4"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga09ba1ac8dc54510c385ce824ded6a0e4 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga09ba1ac8dc54510c385ce824ded6a0e4">is_heap_until</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga09ba1ac8dc54510c385ce824ded6a0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找堆中破坏堆性质的首个元素  <br /></td></tr>
+<tr class="memitem:ga77df75aa85fe67062828470f55396e37" id="r_ga77df75aa85fe67062828470f55396e37"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga77df75aa85fe67062828470f55396e37 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga77df75aa85fe67062828470f55396e37">is_heap</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga77df75aa85fe67062828470f55396e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否为有效堆  <br /></td></tr>
+<tr class="memitem:gab88565a9dd6e7411905bdd482cf8ded3" id="r_gab88565a9dd6e7411905bdd482cf8ded3"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab88565a9dd6e7411905bdd482cf8ded3 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gab88565a9dd6e7411905bdd482cf8ded3">is_heap</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gab88565a9dd6e7411905bdd482cf8ded3"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查范围是否为有效堆  <br /></td></tr>
+<tr class="memitem:gaa516d00ea08fbf97ba69e2ba4a3f8a4c" id="r_gaa516d00ea08fbf97ba69e2ba4a3f8a4c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaa516d00ea08fbf97ba69e2ba4a3f8a4c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gaa516d00ea08fbf97ba69e2ba4a3f8a4c">push_heap</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaa516d00ea08fbf97ba69e2ba4a3f8a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">向堆中插入元素  <br /></td></tr>
+<tr class="memitem:ga9a7cd69ef0925d6148c77e1d36268dc9" id="r_ga9a7cd69ef0925d6148c77e1d36268dc9"><td class="memTemplParams" colspan="2"><a id="ga9a7cd69ef0925d6148c77e1d36268dc9" name="ga9a7cd69ef0925d6148c77e1d36268dc9"></a>
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9a7cd69ef0925d6148c77e1d36268dc9 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>push_heap</b> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga9a7cd69ef0925d6148c77e1d36268dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">向堆中插入元素 <br /></td></tr>
+<tr class="memitem:ga16e8117ec3de7dcf87ae62c7e6e4ec50" id="r_ga16e8117ec3de7dcf87ae62c7e6e4ec50"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Distance, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga16e8117ec3de7dcf87ae62c7e6e4ec50 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga16e8117ec3de7dcf87ae62c7e6e4ec50">adjust_heap</a> (Iterator first, Distance hole_index, Distance len, T value, Compare comp)</td></tr>
+<tr class="memdesc:ga16e8117ec3de7dcf87ae62c7e6e4ec50"><td class="mdescLeft">&#160;</td><td class="mdescRight">堆调整辅助函数  <br /></td></tr>
+<tr class="memitem:ga7d76f4264eb60d80808c3c9e940ca538" id="r_ga7d76f4264eb60d80808c3c9e940ca538"><td class="memTemplParams" colspan="2"><a id="ga7d76f4264eb60d80808c3c9e940ca538" name="ga7d76f4264eb60d80808c3c9e940ca538"></a>
+template&lt;typename Iterator, typename Distance, typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7d76f4264eb60d80808c3c9e940ca538 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>adjust_heap</b> (Iterator first, Distance hole_index, Distance len, T value)</td></tr>
+<tr class="memdesc:ga7d76f4264eb60d80808c3c9e940ca538"><td class="mdescLeft">&#160;</td><td class="mdescRight">堆调整辅助函数 <br /></td></tr>
+<tr class="memitem:ga2c0b87c60775b16dbc86dd864991f28c" id="r_ga2c0b87c60775b16dbc86dd864991f28c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga2c0b87c60775b16dbc86dd864991f28c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga2c0b87c60775b16dbc86dd864991f28c">pop_heap</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga2c0b87c60775b16dbc86dd864991f28c"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除堆顶元素  <br /></td></tr>
+<tr class="memitem:gaf771b3f11ed40bfa6e7d8b5f893c5beb" id="r_gaf771b3f11ed40bfa6e7d8b5f893c5beb"><td class="memTemplParams" colspan="2"><a id="gaf771b3f11ed40bfa6e7d8b5f893c5beb" name="gaf771b3f11ed40bfa6e7d8b5f893c5beb"></a>
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf771b3f11ed40bfa6e7d8b5f893c5beb template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>pop_heap</b> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:gaf771b3f11ed40bfa6e7d8b5f893c5beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除堆顶元素 <br /></td></tr>
+<tr class="memitem:gaccdac1809fcd635ea1d4cda2b94ccfba" id="r_gaccdac1809fcd635ea1d4cda2b94ccfba"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaccdac1809fcd635ea1d4cda2b94ccfba template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gaccdac1809fcd635ea1d4cda2b94ccfba">sort_heap</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:gaccdac1809fcd635ea1d4cda2b94ccfba"><td class="mdescLeft">&#160;</td><td class="mdescRight">将堆转换为有序序列  <br /></td></tr>
+<tr class="memitem:ga2291f61d676b1dc6b300a68ac0d28f8a" id="r_ga2291f61d676b1dc6b300a68ac0d28f8a"><td class="memTemplParams" colspan="2"><a id="ga2291f61d676b1dc6b300a68ac0d28f8a" name="ga2291f61d676b1dc6b300a68ac0d28f8a"></a>
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga2291f61d676b1dc6b300a68ac0d28f8a template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>sort_heap</b> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga2291f61d676b1dc6b300a68ac0d28f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将堆转换为有序序列 <br /></td></tr>
+<tr class="memitem:ga427912570db28bed6f6e3962ffe7ca37" id="r_ga427912570db28bed6f6e3962ffe7ca37"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga427912570db28bed6f6e3962ffe7ca37 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga427912570db28bed6f6e3962ffe7ca37">make_heap</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga427912570db28bed6f6e3962ffe7ca37"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建堆  <br /></td></tr>
+<tr class="memitem:ga9fb47a2cd0820261461997a12a7fc2ad" id="r_ga9fb47a2cd0820261461997a12a7fc2ad"><td class="memTemplParams" colspan="2"><a id="ga9fb47a2cd0820261461997a12a7fc2ad" name="ga9fb47a2cd0820261461997a12a7fc2ad"></a>
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga9fb47a2cd0820261461997a12a7fc2ad template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>make_heap</b> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga9fb47a2cd0820261461997a12a7fc2ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建堆 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>堆算法的实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga16e8117ec3de7dcf87ae62c7e6e4ec50" name="ga16e8117ec3de7dcf87ae62c7e6e4ec50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga16e8117ec3de7dcf87ae62c7e6e4ec50">&#9670;&#160;</a></span>adjust_heap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Distance, typename T, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void adjust_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>hole_index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Distance</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>堆调整辅助函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Distance</td><td>距离类型 </td></tr>
+    <tr><td class="paramname">T</td><td>元素值类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">hole_index</td><td>空洞位置索引 </td></tr>
+    <tr><td class="paramname">len</td><td>堆长度 </td></tr>
+    <tr><td class="paramname">value</td><td>要调整的值 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在指定位置向下调整堆，然后在调整后的位置向上调整。 用于删除堆顶元素后的堆调整。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00173">173</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00195">adjust_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00299">make_heap()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00191">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="gab88565a9dd6e7411905bdd482cf8ded3" name="gab88565a9dd6e7411905bdd482cf8ded3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab88565a9dd6e7411905bdd482cf8ded3">&#9670;&#160;</a></span>is_heap() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 bool is_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否为有效堆 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围是有效堆则返回 true，否则返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00084">84</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00036">is_heap_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga77df75aa85fe67062828470f55396e37" name="ga77df75aa85fe67062828470f55396e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga77df75aa85fe67062828470f55396e37">&#9670;&#160;</a></span>is_heap() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 bool is_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>检查范围是否为有效堆 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果范围是有效堆则返回 true，否则返回 false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00072">72</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00036">is_heap_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga09ba1ac8dc54510c385ce824ded6a0e4" name="ga09ba1ac8dc54510c385ce824ded6a0e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga09ba1ac8dc54510c385ce824ded6a0e4">&#9670;&#160;</a></span>is_heap_until() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator is_heap_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找堆中破坏堆性质的首个元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>堆结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>破坏堆性质的第一个元素的迭代器，如果范围是有效堆则返回 last</dd></dl>
+<p>默认使用小于比较，创建最大堆。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00058">58</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00036">is_heap_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga87cf689bef52f316f6ddc8f97f36b137" name="ga87cf689bef52f316f6ddc8f97f36b137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga87cf689bef52f316f6ddc8f97f36b137">&#9670;&#160;</a></span>is_heap_until() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 Iterator is_heap_until </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>查找堆中破坏堆性质的首个元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>堆结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>破坏堆性质的第一个元素的迭代器，如果范围是有效堆则返回 last</dd></dl>
+<p>检查范围 [first, last) 是否满足堆性质，返回第一个破坏堆性质的元素。 堆性质：</p><ul>
+<li>对于最大堆，父节点不小于子节点；</li>
+<li>对于最小堆，父节点不大于子节点。 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00084">is_heap()</a>, <a class="el" href="heap_8hpp_source.html#l00072">is_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00058">is_heap_until()</a>.</p>
+
+</div>
+</div>
+<a id="ga427912570db28bed6f6e3962ffe7ca37" name="ga427912570db28bed6f6e3962ffe7ca37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga427912570db28bed6f6e3962ffe7ca37">&#9670;&#160;</a></span>make_heap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void make_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>创建堆 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将范围 [first, last) 重新排列，使其满足堆性质。 从最后一个非叶子节点开始，向前调整每个节点。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00299">299</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00173">adjust_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="heap_8hpp_source.html#l00317">make_heap()</a>, <a class="el" href="sort_8hpp_source.html#l00150">partial_sort()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00191">partial_sort_copy()</a>.</p>
+
+</div>
+</div>
+<a id="ga2c0b87c60775b16dbc86dd864991f28c" name="ga2c0b87c60775b16dbc86dd864991f28c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2c0b87c60775b16dbc86dd864991f28c">&#9670;&#160;</a></span>pop_heap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void pop_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>删除堆顶元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>堆结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将堆的最大（或最小）元素移动到 last-1 位置， 并使范围 [first, last-1) 成为有效堆。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00247">247</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00224">priority_queue&lt; T, Sequence, Compare &gt;::pop()</a>, <a class="el" href="heap_8hpp_source.html#l00257">pop_heap()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00273">sort_heap()</a>.</p>
+
+</div>
+</div>
+<a id="gaa516d00ea08fbf97ba69e2ba4a3f8a4c" name="gaa516d00ea08fbf97ba69e2ba4a3f8a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa516d00ea08fbf97ba69e2ba4a3f8a4c">&#9670;&#160;</a></span>push_heap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void push_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>向堆中插入元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>堆结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>假设范围 [first, last-1) 是有效堆，将 *(last-1) 插入堆中。 调用后范围 [first, last) 是有效堆。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00142">142</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="priority__queue_8hpp_source.html#l00237">priority_queue&lt; T, Sequence, Compare &gt;::emplace()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00203">priority_queue&lt; T, Sequence, Compare &gt;::push()</a>, <a class="el" href="priority__queue_8hpp_source.html#l00214">priority_queue&lt; T, Sequence, Compare &gt;::push()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00152">push_heap()</a>.</p>
+
+</div>
+</div>
+<a id="gaccdac1809fcd635ea1d4cda2b94ccfba" name="gaccdac1809fcd635ea1d4cda2b94ccfba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaccdac1809fcd635ea1d4cda2b94ccfba">&#9670;&#160;</a></span>sort_heap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Compare, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 void sort_heap </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将堆转换为有序序列 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>堆起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>堆结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>通过反复弹出堆顶元素，将堆转换为升序（或降序）序列。 操作后，范围 [first, last) 不再满足堆性质，而是已排序。 </p>
+
+<p class="definition">在文件 <a class="el" href="heap_8hpp_source.html">heap.hpp</a> 第 <a class="el" href="heap_8hpp_source.html#l00273">273</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00247">pop_heap()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00150">partial_sort()</a>, <a class="el" href="sort_8hpp_source.html#l00191">partial_sort_copy()</a> , 以及 <a class="el" href="heap_8hpp_source.html#l00283">sort_heap()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

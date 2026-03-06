@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: futex.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('futex_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">futex.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>快速用户空间互斥锁  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="type__traits_8hpp_source.html">NeForce/core/typeinfo/type_traits.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+futex.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="futex_8hpp__incl.svg" width="243" height="400"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="futex_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:ga4e69cddccd65383e4497831dc239b6a9" id="r_ga4e69cddccd65383e4497831dc239b6a9"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a></td></tr>
+<tr class="memdesc:ga4e69cddccd65383e4497831dc239b6a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">平台等待类型别名  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gab7057283120da679629ce8fb1238219b" id="r_gab7057283120da679629ce8fb1238219b"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___futex.html#gab7057283120da679629ce8fb1238219b">futex_wait_flags</a> : platform_wait_t { <br />
+&#160;&#160;<a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75">futex_wait_flags::private_flag</a> = 0
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">futex_wait_flags::wait</a> = 0
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">futex_wait_flags::wake</a> = 1
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d">futex_wait_flags::wait_bitset</a> = 9
+, <br />
+&#160;&#160;<a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc">futex_wait_flags::wake_bitset</a> = 10
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef">futex_wait_flags::wait_private</a> = wait | private_flag
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95">futex_wait_flags::wake_private</a> = wake | private_flag
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945">futex_wait_flags::wait_bitset_private</a> = wait_bitset | private_flag
+, <br />
+&#160;&#160;<a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49">futex_wait_flags::wake_bitset_private</a> = wake_bitset | private_flag
+, <a class="el" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8">futex_wait_flags::bitset_match_any</a> = -1
+<br />
+ }</td></tr>
+<tr class="memdesc:gab7057283120da679629ce8fb1238219b"><td class="mdescLeft">&#160;</td><td class="mdescRight">FUTEX操作标志枚举  <a href="group___futex.html#gab7057283120da679629ce8fb1238219b">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga26f36b601d9ad2d293b3345e1eaf5306" id="r_ga26f36b601d9ad2d293b3345e1eaf5306"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a> (void *addr, <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> value) noexcept</td></tr>
+<tr class="memdesc:ga26f36b601d9ad2d293b3345e1eaf5306"><td class="mdescLeft">&#160;</td><td class="mdescRight">无限期等待FUTEX  <br /></td></tr>
+<tr class="memitem:ga48d2abd213cbed922449fad6f05638ed" id="r_ga48d2abd213cbed922449fad6f05638ed"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___futex.html#ga48d2abd213cbed922449fad6f05638ed">futex_wait_until</a> (void *addr, <a class="el" href="group___futex.html#ga4e69cddccd65383e4497831dc239b6a9">platform_wait_t</a> value, bool has_timeout, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> sec, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ns, bool is_monotonic=false)</td></tr>
+<tr class="memdesc:ga48d2abd213cbed922449fad6f05638ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待FUTEX直到指定时间点或条件满足  <br /></td></tr>
+<tr class="memitem:ga05f2a678e4c7a16ecc3ba93dba798e19" id="r_ga05f2a678e4c7a16ecc3ba93dba798e19"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify</a> (void *addr, bool all) noexcept</td></tr>
+<tr class="memdesc:ga05f2a678e4c7a16ecc3ba93dba798e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知等待的线程  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>快速用户空间互斥锁 </p>
+<p>此文件提供了FUTEX（Fast Userspace muTEX）的跨平台封装，用于实现高效的同步原语。 FUTEX是Linux独有的高性能同步机制，这里提供了跨平台的统一接口。 </p>
+
+<p class="definition">在文件 <a class="el" href="futex_8hpp_source.html">futex.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="futex_8hpp.html">futex.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

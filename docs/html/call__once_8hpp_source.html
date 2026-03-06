@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: call_once.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('call__once_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">call_once.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="call__once_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_CALL_ONCE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_CALL_ONCE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="invoke_8hpp.html">NeForce/core/functional/invoke.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classonce__flag.html">   30</a></span><span class="keyword">class </span><a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;uint32_t&gt;</a> state_;  </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Callable, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code hl_friend" href="classonce__flag.html#a6b72113ff3b073878b5fc971d6fe1026">call_once</a>(<a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a>&amp; flag, Callable&amp;&amp; func, Args&amp;&amp;... args);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">   43</a></span>    <a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a>() noexcept : state_(0) {}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a>(<span class="keyword">const</span> <a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a>(<a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp; operator =(<a class="code hl_class" href="classonce__flag.html">once_flag</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Callable, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classonce__flag.html#a6b72113ff3b073878b5fc971d6fe1026">   65</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___call_once.html#ga6b72113ff3b073878b5fc971d6fe1026">call_once</a>(<a class="code hl_function" href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag</a>&amp; flag, Callable&amp;&amp; func, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span> (flag.state_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>) == 2) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> spin_count = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> state = flag.state_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">if</span> (state == 2) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (state == 0) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> expected = 0;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">if</span> (flag.state_.<a class="code hl_function" href="structatomic.html#a1464cb79d660c630d2fe3a44a7b8adba">compare_exchange_strong</a>(</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    expected, 1,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    <a class="code hl_variable" href="group___memory_order.html#ga3b921278ed46859e35eae165a2f2e96d">memory_order_acq_rel</a>,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    <a class="code hl_variable" href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a>)) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___invoke_function.html#ga7a594af8ce76532c80fe80966c396d34">invoke</a>&lt;Callable, Args...&gt;(</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Callable&gt;</a>(func),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    );</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    flag.state_.<a class="code hl_function" href="structatomic.html#a3e1268f8d4abb49382c713740a13234a">store</a>(2, <a class="code hl_variable" href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a>);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    flag.state_.<a class="code hl_function" href="structatomic.html#a3e1268f8d4abb49382c713740a13234a">store</a>(0, <a class="code hl_variable" href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a>);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    <span class="keywordflow">throw</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            spin_count = 0;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">if</span> (spin_count &lt; 10) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">for</span> (<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> i = 0; i &lt; (1u &lt;&lt; spin_count); ++i) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                this_thread::relax();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            ++spin_count;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            this_thread::yield();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> <span class="comment">// CallOnce</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_CALL_ONCE_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclassonce__flag_html"><div class="ttname"><a href="classonce__flag.html">once_flag</a></div><div class="ttdoc">一次性调用标志类</div><div class="ttdef"><b>定义</b> <a href="#l00030">call_once.hpp:30</a></div></div>
+<div class="ttc" id="aclassonce__flag_html_a273559a94e2299b126f1718a3d85a692"><div class="ttname"><a href="classonce__flag.html#a273559a94e2299b126f1718a3d85a692">once_flag::once_flag</a></div><div class="ttdeci">once_flag() noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00043">call_once.hpp:43</a></div></div>
+<div class="ttc" id="aclassonce__flag_html_a6b72113ff3b073878b5fc971d6fe1026"><div class="ttname"><a href="classonce__flag.html#a6b72113ff3b073878b5fc971d6fe1026">once_flag::call_once</a></div><div class="ttdeci">friend void call_once(once_flag &amp;flag, Callable &amp;&amp;func, Args &amp;&amp;... args)</div><div class="ttdoc">单次调用函数</div><div class="ttdef"><b>定义</b> <a href="#l00065">call_once.hpp:65</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03044">type_traits.hpp:3044</a></div></div>
+<div class="ttc" id="agroup___call_once_html_ga6b72113ff3b073878b5fc971d6fe1026"><div class="ttname"><a href="group___call_once.html#ga6b72113ff3b073878b5fc971d6fe1026">call_once</a></div><div class="ttdeci">void call_once(once_flag &amp;flag, Callable &amp;&amp;func, Args &amp;&amp;... args)</div><div class="ttdoc">单次调用函数</div><div class="ttdef"><b>定义</b> <a href="#l00065">call_once.hpp:65</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___invoke_function_html_ga7a594af8ce76532c80fe80966c396d34"><div class="ttname"><a href="group___invoke_function.html#ga7a594af8ce76532c80fe80966c396d34">invoke</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 _INNER __invoke_result_aux&lt; Callable, Args... &gt;::type invoke(Callable &amp;&amp;f, Args &amp;&amp;... args) noexcept(is_nothrow_invocable&lt; Callable, Args... &gt;::value)</div><div class="ttdoc">统一调用接口</div><div class="ttdef"><b>定义</b> <a href="invoke_8hpp_source.html#l00559">invoke.hpp:559</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga3b921278ed46859e35eae165a2f2e96d"><div class="ttname"><a href="group___memory_order.html#ga3b921278ed46859e35eae165a2f2e96d">memory_order_acq_rel</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acq_rel</div><div class="ttdoc">获取-释放内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00047">atomic_base.hpp:47</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga80883e2cd37a8e670dc016e91059d936"><div class="ttname"><a href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_release</div><div class="ttdoc">释放内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00045">atomic_base.hpp:45</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gab7d3a13cfab1d0d9d1e747ac3d774d61"><div class="ttname"><a href="group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61">memory_order_relaxed</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_relaxed</div><div class="ttdoc">宽松内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00039">atomic_base.hpp:39</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gac472f4b38d5bc0ba23a6113984118c24"><div class="ttname"><a href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acquire</div><div class="ttdoc">获取内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00043">atomic_base.hpp:43</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="ainvoke_8hpp_html"><div class="ttname"><a href="invoke_8hpp.html">invoke.hpp</a></div><div class="ttdoc">统一调用接口</div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00031">atomic.hpp:31</a></div></div>
+<div class="ttc" id="astructatomic_html_a08238b88fc524dbab833b1f2efbca3ec"><div class="ttname"><a href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">atomic::load</a></div><div class="ttdeci">T load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00135">atomic.hpp:135</a></div></div>
+<div class="ttc" id="astructatomic_html_a1464cb79d660c630d2fe3a44a7b8adba"><div class="ttname"><a href="structatomic.html#a1464cb79d660c630d2fe3a44a7b8adba">atomic::compare_exchange_strong</a></div><div class="ttdeci">bool compare_exchange_strong(T &amp;expected, T desired, const memory_order success, const memory_order failure) noexcept</div><div class="ttdoc">强比较交换操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00214">atomic.hpp:214</a></div></div>
+<div class="ttc" id="astructatomic_html_a3e1268f8d4abb49382c713740a13234a"><div class="ttname"><a href="structatomic.html#a3e1268f8d4abb49382c713740a13234a">atomic::store</a></div><div class="ttdeci">void store(T value, const memory_order mo=memory_order_seq_cst) noexcept</div><div class="ttdoc">原子存储操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00119">atomic.hpp:119</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="call__once_8hpp.html">call_once.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: shared_mutex.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">shared_mutex.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="shared__mutex_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_SHARED_MUTEX_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_SHARED_MUTEX_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classshared__mutex.html">   27</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">   32</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">native_handle_type</a> =</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        ::SRWLOCK;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        ::pthread_rwlock_t;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">native_handle_type</a> shared_mutex_;  </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">   46</a></span>    <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a5259f863bc290cdfcaaaf88de24eb7ac">   51</a></span>    <a class="code hl_function" href="classshared__mutex.html#a5259f863bc290cdfcaaaf88de24eb7ac">~shared_mutex</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>(<span class="keyword">const</span> <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>(<a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp; operator =(<a class="code hl_function" href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a2987ccff9a8a6f8cc56fcc0404559dd7">   63</a></span>    <a class="code hl_typedef" href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">native_handle_type</a>* <a class="code hl_function" href="classshared__mutex.html#a2987ccff9a8a6f8cc56fcc0404559dd7">native_handle</a>() noexcept {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> &amp;shared_mutex_;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a4b97190f9dc31feb62e044b3ee2750d3">   71</a></span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">native_handle_type</a>* <a class="code hl_function" href="classshared__mutex.html#a4b97190f9dc31feb62e044b3ee2750d3">native_handle</a>() const noexcept {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> &amp;shared_mutex_;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a884fce8e4110970b8c63b1be978b5939">   81</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__mutex.html#a884fce8e4110970b8c63b1be978b5939">lock</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classshared__mutex.html#acf6dc50ff19f916e3b31162b5c1a30d2">   88</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__mutex.html#acf6dc50ff19f916e3b31162b5c1a30d2">unlock</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a8b1ac910c1d7a971b3a40c07d30d0724">   96</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classshared__mutex.html#a8b1ac910c1d7a971b3a40c07d30d0724">try_lock</a>() noexcept;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classshared__mutex.html#ac22e3fe87b908ac6d38fcd497aceaa1d">  104</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__mutex.html#ac22e3fe87b908ac6d38fcd497aceaa1d">lock_shared</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="classshared__mutex.html#a254c8b541f6aa24d9d65812a5cf2acc5">  111</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__mutex.html#a254c8b541f6aa24d9d65812a5cf2acc5">unlock_shared</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classshared__mutex.html#ac7dd4921f6124a5591cbc9a56569bc7c">  119</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classshared__mutex.html#ac7dd4921f6124a5591cbc9a56569bc7c">try_lock_shared</a>() noexcept;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>template &lt;typename SharedMutex&gt;</div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="};">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classshared__lock.html">  130</a></span>class <a class="code hl_function" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock</a> {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">  132</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> = SharedMutex;  </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>* mutex_ = <span class="keyword">nullptr</span>;  </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">bool</span> owns_lock_ = <span class="keyword">false</span>;       </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">  144</a></span>    <a class="code hl_function" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classshared__lock.html#afc9a15f2802f37810eb955782c5bc56d">  152</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classshared__lock.html#afc9a15f2802f37810eb955782c5bc56d">shared_lock</a>(<a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>&amp; m)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    : mutex_(&amp;m), owns_lock_(true) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        mutex_-&gt;lock_shared();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classshared__lock.html#a5457fcedef9bfee60164ca07f4fb4de1">  164</a></span>    <a class="code hl_function" href="classshared__lock.html#a5457fcedef9bfee60164ca07f4fb4de1">shared_lock</a>(<a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>&amp; m, <a class="code hl_struct" href="structdefer__lock__tag.html">defer_lock_tag</a> tag) noexcept</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    : mutex_(&amp;m) {}</div>
+</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span></div>
+<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classshared__lock.html#afe149c809800ac2ab99c6140a8c46490">  174</a></span>    <a class="code hl_function" href="classshared__lock.html#afe149c809800ac2ab99c6140a8c46490">shared_lock</a>(<a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>&amp; m, <a class="code hl_struct" href="structtry__lock__tag.html">try_lock_tag</a> tag) noexcept</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    : mutex_(&amp;m), owns_lock_(m.try_lock_shared()) {}</div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_class" href="classshared__lock.html">shared_lock</a>(<span class="keyword">const</span> <a class="code hl_class" href="classshared__lock.html">shared_lock</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_class" href="classshared__lock.html">shared_lock</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classshared__lock.html">shared_lock</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span></div>
+<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classshared__lock.html#a1177948b8f2cd8cad8fe9e18b543747b">  186</a></span>    <a class="code hl_function" href="classshared__lock.html#a1177948b8f2cd8cad8fe9e18b543747b">shared_lock</a>(<a class="code hl_function" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        other.mutex_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        other.owns_lock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
+</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span></div>
+<div class="foldopen" id="foldopen00199" data-start="{" data-end="}">
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="classshared__lock.html#a4c66a9c5c30d81a6e1b170dde4028a82">  199</a></span>    <a class="code hl_function" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock</a>&amp; operator =(<a class="code hl_function" href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a>(other) == <span class="keyword">this</span>) <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">if</span> (owns_lock_) mutex_-&gt;unlock_shared();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        mutex_ = other.mutex_;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        owns_lock_ = other.owns_lock_;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        other.mutex_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        other.owns_lock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span></div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classshared__lock.html#a09cd913ffb52b9607316cf60610d98ed">  214</a></span>    <a class="code hl_function" href="classshared__lock.html#a09cd913ffb52b9607316cf60610d98ed">~shared_lock</a>() {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">if</span> (owns_lock_) mutex_-&gt;unlock_shared();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    }</div>
+</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="classshared__lock.html#a6eae6df07ed587161a3e6d28a0527a9c">  222</a></span>    NEFORCE_NODISCARD <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept { <span class="keywordflow">return</span> owns_lock_; }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classshared__lock.html#a82fc8d66a9615845125dbf93e40ba856">  228</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classshared__lock.html#a82fc8d66a9615845125dbf93e40ba856">owns_lock</a>() const noexcept { <span class="keywordflow">return</span> owns_lock_; }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="classshared__lock.html#a839809cd7bc530f7da8ea551c8f78056">  234</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>* <a class="code hl_function" href="classshared__lock.html#a839809cd7bc530f7da8ea551c8f78056">mutex</a>() const noexcept { <span class="keywordflow">return</span> mutex_; }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span></div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06">  241</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06">lock</a>() {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">if</span> (!mutex_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">if</span> (owns_lock_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        mutex_-&gt;lock_shared();</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        owns_lock_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span></div>
+<div class="foldopen" id="foldopen00253" data-start="{" data-end="}">
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08">  253</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08">unlock</a>() {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordflow">if</span> (!mutex_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">if</span> (!owns_lock_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        mutex_-&gt;unlock_shared();</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        owns_lock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span></div>
+<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2">  266</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2">try_lock</a>() noexcept {</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">if</span> (!mutex_) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">if</span> (owns_lock_) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        owns_lock_ = mutex_-&gt;try_lock_shared();</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> owns_lock_;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
+</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span></div>
+<div class="foldopen" id="foldopen00279" data-start="{" data-end="}">
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classshared__lock.html#a510931a6627f2dcb9ac52e687546800b">  279</a></span>    <a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>* <a class="code hl_function" href="classshared__lock.html#a510931a6627f2dcb9ac52e687546800b">release</a>() noexcept {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_typedef" href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a>* ret = mutex_;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        mutex_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        owns_lock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    }</div>
+</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>};</div>
+</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> <span class="comment">// Mutex</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_SHARED_MUTEX_HPP__</span></div>
+<div class="ttc" id="aclassshared__lock_html"><div class="ttname"><a href="classshared__lock.html">shared_lock</a></div><div class="ttdoc">共享锁类模板</div><div class="ttdef"><b>定义</b> <a href="#l00130">shared_mutex.hpp:130</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a09cd913ffb52b9607316cf60610d98ed"><div class="ttname"><a href="classshared__lock.html#a09cd913ffb52b9607316cf60610d98ed">shared_lock::~shared_lock</a></div><div class="ttdeci">~shared_lock()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00214">shared_mutex.hpp:214</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a0dcaaf18ba7b622310b1977eeb7f940d"><div class="ttname"><a href="classshared__lock.html#a0dcaaf18ba7b622310b1977eeb7f940d">shared_lock::mutex_type</a></div><div class="ttdeci">SharedMutex mutex_type</div><div class="ttdoc">共享互斥锁类型</div><div class="ttdef"><b>定义</b> <a href="#l00132">shared_mutex.hpp:132</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a1177948b8f2cd8cad8fe9e18b543747b"><div class="ttname"><a href="classshared__lock.html#a1177948b8f2cd8cad8fe9e18b543747b">shared_lock::shared_lock</a></div><div class="ttdeci">shared_lock(shared_lock &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00186">shared_mutex.hpp:186</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a510931a6627f2dcb9ac52e687546800b"><div class="ttname"><a href="classshared__lock.html#a510931a6627f2dcb9ac52e687546800b">shared_lock::release</a></div><div class="ttdeci">mutex_type * release() noexcept</div><div class="ttdoc">释放所有权</div><div class="ttdef"><b>定义</b> <a href="#l00279">shared_mutex.hpp:279</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a5457fcedef9bfee60164ca07f4fb4de1"><div class="ttname"><a href="classshared__lock.html#a5457fcedef9bfee60164ca07f4fb4de1">shared_lock::shared_lock</a></div><div class="ttdeci">shared_lock(mutex_type &amp;m, defer_lock_tag tag) noexcept</div><div class="ttdoc">延迟锁定构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00164">shared_mutex.hpp:164</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a54df05d7997d6de8dcabfa916773934b"><div class="ttname"><a href="classshared__lock.html#a54df05d7997d6de8dcabfa916773934b">shared_lock::shared_lock</a></div><div class="ttdeci">shared_lock()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassshared__lock_html_a65cab5e791cfcc07c95fa0a3e1ae92d2"><div class="ttname"><a href="classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2">shared_lock::try_lock</a></div><div class="ttdeci">bool try_lock() noexcept</div><div class="ttdoc">尝试获取读锁</div><div class="ttdef"><b>定义</b> <a href="#l00266">shared_mutex.hpp:266</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a6f23f530fdf0db5d46479d3aea0f2b06"><div class="ttname"><a href="classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06">shared_lock::lock</a></div><div class="ttdeci">void lock()</div><div class="ttdoc">获取读锁</div><div class="ttdef"><b>定义</b> <a href="#l00241">shared_mutex.hpp:241</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a790e469cdff391b2ecea7b2f3bea4a08"><div class="ttname"><a href="classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08">shared_lock::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">释放读锁</div><div class="ttdef"><b>定义</b> <a href="#l00253">shared_mutex.hpp:253</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a82fc8d66a9615845125dbf93e40ba856"><div class="ttname"><a href="classshared__lock.html#a82fc8d66a9615845125dbf93e40ba856">shared_lock::owns_lock</a></div><div class="ttdeci">NEFORCE_NODISCARD bool owns_lock() const noexcept</div><div class="ttdoc">检查是否拥有共享锁</div><div class="ttdef"><b>定义</b> <a href="#l00228">shared_mutex.hpp:228</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_a839809cd7bc530f7da8ea551c8f78056"><div class="ttname"><a href="classshared__lock.html#a839809cd7bc530f7da8ea551c8f78056">shared_lock::mutex</a></div><div class="ttdeci">NEFORCE_NODISCARD mutex_type * mutex() const noexcept</div><div class="ttdoc">获取管理的共享互斥锁指针</div><div class="ttdef"><b>定义</b> <a href="#l00234">shared_mutex.hpp:234</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_afc9a15f2802f37810eb955782c5bc56d"><div class="ttname"><a href="classshared__lock.html#afc9a15f2802f37810eb955782c5bc56d">shared_lock::shared_lock</a></div><div class="ttdeci">shared_lock(mutex_type &amp;m)</div><div class="ttdoc">从共享互斥锁构造</div><div class="ttdef"><b>定义</b> <a href="#l00152">shared_mutex.hpp:152</a></div></div>
+<div class="ttc" id="aclassshared__lock_html_afe149c809800ac2ab99c6140a8c46490"><div class="ttname"><a href="classshared__lock.html#afe149c809800ac2ab99c6140a8c46490">shared_lock::shared_lock</a></div><div class="ttdeci">shared_lock(mutex_type &amp;m, try_lock_tag tag) noexcept</div><div class="ttdoc">尝试锁定构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00174">shared_mutex.hpp:174</a></div></div>
+<div class="ttc" id="aclassshared__mutex_html_a254c8b541f6aa24d9d65812a5cf2acc5"><div class="ttname"><a href="classshared__mutex.html#a254c8b541f6aa24d9d65812a5cf2acc5">shared_mutex::unlock_shared</a></div><div class="ttdeci">void unlock_shared()</div><div class="ttdoc">释放读锁</div></div>
+<div class="ttc" id="aclassshared__mutex_html_a2987ccff9a8a6f8cc56fcc0404559dd7"><div class="ttname"><a href="classshared__mutex.html#a2987ccff9a8a6f8cc56fcc0404559dd7">shared_mutex::native_handle</a></div><div class="ttdeci">native_handle_type * native_handle() noexcept</div><div class="ttdoc">获取原生句柄</div><div class="ttdef"><b>定义</b> <a href="#l00063">shared_mutex.hpp:63</a></div></div>
+<div class="ttc" id="aclassshared__mutex_html_a4b97190f9dc31feb62e044b3ee2750d3"><div class="ttname"><a href="classshared__mutex.html#a4b97190f9dc31feb62e044b3ee2750d3">shared_mutex::native_handle</a></div><div class="ttdeci">const native_handle_type * native_handle() const noexcept</div><div class="ttdoc">获取常量原生句柄</div><div class="ttdef"><b>定义</b> <a href="#l00071">shared_mutex.hpp:71</a></div></div>
+<div class="ttc" id="aclassshared__mutex_html_a5259f863bc290cdfcaaaf88de24eb7ac"><div class="ttname"><a href="classshared__mutex.html#a5259f863bc290cdfcaaaf88de24eb7ac">shared_mutex::~shared_mutex</a></div><div class="ttdeci">~shared_mutex()</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclassshared__mutex_html_a6a64da225b115ba0c204cc67894ae5bc"><div class="ttname"><a href="classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc">shared_mutex::native_handle_type</a></div><div class="ttdeci">::pthread_rwlock_t native_handle_type</div><div class="ttdoc">共享互斥锁的系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="#l00032">shared_mutex.hpp:32</a></div></div>
+<div class="ttc" id="aclassshared__mutex_html_a7e1f8ffdf08b615e34c87302dc500eea"><div class="ttname"><a href="classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea">shared_mutex::shared_mutex</a></div><div class="ttdeci">shared_mutex()</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassshared__mutex_html_a884fce8e4110970b8c63b1be978b5939"><div class="ttname"><a href="classshared__mutex.html#a884fce8e4110970b8c63b1be978b5939">shared_mutex::lock</a></div><div class="ttdeci">void lock()</div><div class="ttdoc">获取写锁</div></div>
+<div class="ttc" id="aclassshared__mutex_html_a8b1ac910c1d7a971b3a40c07d30d0724"><div class="ttname"><a href="classshared__mutex.html#a8b1ac910c1d7a971b3a40c07d30d0724">shared_mutex::try_lock</a></div><div class="ttdeci">bool try_lock() noexcept</div><div class="ttdoc">尝试获取写锁</div></div>
+<div class="ttc" id="aclassshared__mutex_html_ac22e3fe87b908ac6d38fcd497aceaa1d"><div class="ttname"><a href="classshared__mutex.html#ac22e3fe87b908ac6d38fcd497aceaa1d">shared_mutex::lock_shared</a></div><div class="ttdeci">void lock_shared()</div><div class="ttdoc">获取读锁</div></div>
+<div class="ttc" id="aclassshared__mutex_html_ac7dd4921f6124a5591cbc9a56569bc7c"><div class="ttname"><a href="classshared__mutex.html#ac7dd4921f6124a5591cbc9a56569bc7c">shared_mutex::try_lock_shared</a></div><div class="ttdeci">bool try_lock_shared() noexcept</div><div class="ttdoc">尝试获取读锁</div></div>
+<div class="ttc" id="aclassshared__mutex_html_acf6dc50ff19f916e3b31162b5c1a30d2"><div class="ttname"><a href="classshared__mutex.html#acf6dc50ff19f916e3b31162b5c1a30d2">shared_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">释放写锁</div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga19657f9185af45f84174ff975bae1fa7"><div class="ttname"><a href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03100">type_traits.hpp:3100</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="astructdefer__lock__tag_html"><div class="ttname"><a href="structdefer__lock__tag.html">defer_lock_tag</a></div><div class="ttdoc">延迟锁定标签</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00223">mutex.hpp:223</a></div></div>
+<div class="ttc" id="astructtry__lock__tag_html"><div class="ttname"><a href="structtry__lock__tag.html">try_lock_tag</a></div><div class="ttdoc">尝试锁定标签</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00237">mutex.hpp:237</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="shared__mutex_8hpp.html">shared_mutex.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,118 +1,188 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.19)
 
-set(MSTL_VERSION_MAJOR 1)
-set(MSTL_VERSION_MINOR 4)
-set(MSTL_VERSION_PATCH 0)
-set(MSTL_VERSION "${MSTL_VERSION_MAJOR}.${MSTL_VERSION_MINOR}.${MSTL_VERSION_PATCH}")
 
-project(MSTL
-        VERSION ${MSTL_VERSION}
+file(READ "config.json" JSON_CONTENT)
+
+
+if(WIN32)
+    string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg windows)
+else()
+    string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg linux)
+endif()
+
+set(CMAKE_TOOLCHAIN_FILE "${CONFIG_VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake")
+
+
+string(JSON CONFIG_CPP_STANDARD      GET ${JSON_CONTENT} standard)
+string(JSON CONFIG_ENABLE_POSTGRESQL GET ${JSON_CONTENT} dependency postgresql switch)
+string(JSON CONFIG_ENABLE_MYSQL      GET ${JSON_CONTENT} dependency mysql      switch)
+string(JSON CONFIG_ENABLE_SQLITE3    GET ${JSON_CONTENT} dependency sqlite3    switch)
+string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    switch)
+string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
+string(JSON CONFIG_ENABLE_OPENSSL    GET ${JSON_CONTENT} dependency openssl    switch)
+string(JSON CONFIG_ENABLE_PCRE2      GET ${JSON_CONTENT} dependency pcre2      switch)
+
+string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
+string(JSON CONFIG_USING_JIT         GET ${JSON_CONTENT} feature jit)
+
+string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
+string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
+string(JSON CONFIG_BUILD_DOCS        GET ${JSON_CONTENT} build docs)
+
+
+set(NEXUSFORCE_VERSION_MAJOR 1)
+set(NEXUSFORCE_VERSION_MINOR 0)
+set(NEXUSFORCE_VERSION_PATCH 0)
+set(NEXUSFORCE_VERSION "${NEXUSFORCE_VERSION_MAJOR}.${NEXUSFORCE_VERSION_MINOR}.${NEXUSFORCE_VERSION_PATCH}")
+
+project(NexusForce
+        VERSION ${NEXUSFORCE_VERSION}
         LANGUAGES CXX
 )
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-if(CMAKE_CONFIGURATION_TYPES)
-    set(CMAKE_CONFIGURATION_TYPES
-            "Debug;Release;RelWithDebInfo;MinSizeRel"
-            CACHE STRING "Configurations for MSTL" FORCE
-    )
+
+set(VCPKG_MANIFEST_MODE ON)
+set(VCPKG_MANIFEST_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(VCPKG_INSTALLED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg_installed")
+
+set(VCPKG_MANIFEST_INSTALL ON)
+
+if(DEFINED CMAKE_TOOLCHAIN_FILE AND EXISTS ${CMAKE_TOOLCHAIN_FILE})
+    message(STATUS "Using vcpkg toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+else()
+    message(WARNING "vcpkg toolchain not detected. Please set CMAKE_TOOLCHAIN_FILE to use vcpkg-managed dependencies.")
+    message(STATUS "Example: -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake")
 endif()
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(NEXUSFORCE_ARCH "x64")
+    if(WIN32)
+        set(NEXUSFORCE_VCPKG_TRIPLET "x64-windows" CACHE STRING "vcpkg triplet for x64")
+    else()
+        set(NEXUSFORCE_VCPKG_TRIPLET "x64-linux" CACHE STRING "vcpkg triplet for x64")
+    endif()
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set(NEXUSFORCE_ARCH "x86")
+    if(WIN32)
+        set(NEXUSFORCE_VCPKG_TRIPLET "x86-windows" CACHE STRING "vcpkg triplet for x86")
+    else()
+        set(NEXUSFORCE_VCPKG_TRIPLET "x86-linux" CACHE STRING "vcpkg triplet for x86")
+    endif()
+else()
+    message(FATAL_ERROR "NexusForce can only be compiled in X64 or X86 system")
+endif()
+
+if(NOT DEFINED VCPKG_TARGET_TRIPLET)
+    set(VCPKG_TARGET_TRIPLET ${NEXUSFORCE_VCPKG_TRIPLET} CACHE STRING "vcpkg triplet")
+endif()
+
 
 set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
 set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY ON)
 set(CMAKE_FIND_USE_PACKAGE_REGISTRY OFF)
-
-
-set(CMAKE_CXX_STANDARD 20)
-
-if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard used by MSTL")
-elseif(CMAKE_CXX_STANDARD LESS 14)
-    message(FATAL_ERROR "MSTL can only be compiled with C++14 or higher standard")
-endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(MSTL_ARCH "x64")
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    set(MSTL_ARCH "x86")
-else()
-    message(FATAL_ERROR "MSTL can only be compiled in X64 or X86 system")
+
+set(NEXUSFORCE_VALID_STANDARDS 20 17 14)
+
+
+if(CONFIG_CPP_STANDARD IN_LIST NEXUSFORCE_VALID_STANDARDS)
+    set(CMAKE_CXX_STANDARD ${CONFIG_CPP_STANDARD})
 endif()
 
-message(STATUS "Current Architecture: ${MSTL_ARCH}")
-message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ standard 20 used by NexusForce")
+elseif(CMAKE_CXX_STANDARD LESS 14)
+    message(FATAL_ERROR "NexusForce can only be compiled with C++ standard 14 or higher standard")
+endif()
+
+if(CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_CONFIGURATION_TYPES
+            "Debug;Release;RelWithDebInfo;MinSizeRel"
+            CACHE STRING "Configurations for NexusForce" FORCE
+    )
+endif()
 
 
-option(MSTL_ENABLE_POSTGRESQL "Enable PostgreSQL database support" ON)
-option(MSTL_ENABLE_MYSQL      "Enable MySQL database support"      ON)
-option(MSTL_ENABLE_SQLITE3    "Enable SQLite3 database support"    ON)
-option(MSTL_ENABLE_REDIS      "Enable Redis database support"      ON)
-option(MSTL_ENABLE_ZLIB       "Enable zlib compression support"    ON)
-option(MSTL_ENABLE_OPENSSL    "Enable OpenSSL support"             ON)
+option(NEXUSFORCE_ENABLE_POSTGRESQL "Enable PostgreSQL database support" ${CONFIG_ENABLE_POSTGRESQL})
+option(NEXUSFORCE_ENABLE_MYSQL      "Enable MySQL database support"      ${CONFIG_ENABLE_MYSQL})
+option(NEXUSFORCE_ENABLE_SQLITE3    "Enable SQLite3 database support"    ${CONFIG_ENABLE_SQLITE3})
+option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFIG_ENABLE_HIREDIS})
+option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
+option(NEXUSFORCE_ENABLE_OPENSSL    "Enable OpenSSL support"             ${CONFIG_ENABLE_OPENSSL})
+option(NEXUSFORCE_ENABLE_PCRE2      "Enable PCRE2 support"               ${CONFIG_ENABLE_PCRE2})
 
-option(MSTL_USING_SSO         "Using SSO string"                   ON)
+option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
+option(NEXUSFORCE_USING_PCRE2_JIT   "Using PCRE2 JIT"                    ${CONFIG_USING_JIT})
 
-option(MSTL_BUILD_TESTS       "Build unit tests"                   ON)
-option(MSTL_BUILD_EXAMPLES    "Build example programs"             OFF)
-option(MSTL_BUILD_DOCS        "Build documentation with Doxygen"   ON)
+option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
+option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
+option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
 
 
 message(STATUS "Project Configuration:")
-message(STATUS "  MSTL_ENABLE_POSTGRESQL:   ${MSTL_ENABLE_POSTGRESQL}")
-message(STATUS "  MSTL_ENABLE_MYSQL:        ${MSTL_ENABLE_MYSQL}")
-message(STATUS "  MSTL_ENABLE_SQLITE3:      ${MSTL_ENABLE_SQLITE3}")
-message(STATUS "  MSTL_ENABLE_REDIS:        ${MSTL_ENABLE_REDIS}")
-message(STATUS "  MSTL_ENABLE_ZLIB:         ${MSTL_ENABLE_ZLIB}")
-message(STATUS "  MSTL_ENABLE_OPENSSL:      ${MSTL_ENABLE_OPENSSL}")
 
-message(STATUS "  MSTL_USING_SSO:           ${MSTL_USING_SSO}")
+message(STATUS "Current Architecture: ${NEXUSFORCE_ARCH}")
+message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
+message(STATUS "vcpkg triplet: ${VCPKG_TARGET_TRIPLET}")
 
-message(STATUS "  MSTL_BUILD_TESTS:         ${MSTL_BUILD_TESTS}")
-message(STATUS "  MSTL_BUILD_EXAMPLES:      ${MSTL_BUILD_EXAMPLES}")
-message(STATUS "  MSTL_BUILD_DOCS:          ${MSTL_BUILD_DOCS}")
+message(STATUS "  NEXUSFORCE_ENABLE_POSTGRESQL:   ${NEXUSFORCE_ENABLE_POSTGRESQL}")
+message(STATUS "  NEXUSFORCE_ENABLE_MYSQL:        ${NEXUSFORCE_ENABLE_MYSQL}")
+message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
+message(STATUS "  NEXUSFORCE_ENABLE_REDIS:        ${NEXUSFORCE_ENABLE_REDIS}")
+message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
+message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
+message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ${NEXUSFORCE_ENABLE_PCRE2}")
+
+message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
+message(STATUS "  NEXUSFORCE_USING_PCRE2_JIT:     ${NEXUSFORCE_USING_PCRE2_JIT}")
+
+message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
+message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")
+message(STATUS "  NEXUSFORCE_BUILD_DOCS:          ${NEXUSFORCE_BUILD_DOCS}")
 
 
 add_subdirectory(src)
 
 
-if(MSTL_BUILD_TESTS)
+if(NEXUSFORCE_BUILD_TESTS)
     add_subdirectory(tests)
 else()
-    message(STATUS "Skipping tests build (MSTL_BUILD_TESTS=OFF)")
+    message(STATUS "Skipping tests build (NEXUSFORCE_BUILD_TESTS=OFF)")
 endif()
 
-if(MSTL_BUILD_EXAMPLES)
+if(NEXUSFORCE_BUILD_EXAMPLES)
     add_subdirectory(examples)
 else()
-    message(STATUS "Skipping examples build (MSTL_BUILD_EXAMPLES=OFF)")
+    message(STATUS "Skipping examples build (NEXUSFORCE_BUILD_EXAMPLES=OFF)")
 endif()
 
-if(MSTL_BUILD_DOCS)
-    add_subdirectory(docsconfig)
+if(NEXUSFORCE_BUILD_DOCS)
+    add_subdirectory(docs)
 else()
-    message(STATUS "Skipping documentation build (MSTL_BUILD_DOCS=OFF)")
+    message(STATUS "Skipping documentation build (NEXUSFORCE_BUILD_DOCS=OFF)")
 endif()
 
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/MSTL/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/MSTL
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/NexusForce/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/NexusForce
         FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h" PATTERN "*.asm"
 )
 
-set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/MSTL)
+set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/NexusForce)
 
 write_basic_package_version_file(
-        ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfigVersion.cmake
-        VERSION ${MSTL_VERSION}
+        ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfigVersion.cmake
+        VERSION ${NEXUSFORCE_VERSION}
         COMPATIBILITY SameMajorVersion
 )
 
 configure_package_config_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/MSTLConfig.cmake.in
-        ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfig.cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/NexusForceConfig.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfig.cmake
         INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
         PATH_VARS
             CMAKE_INSTALL_INCLUDEDIR
@@ -123,13 +193,18 @@ configure_package_config_file(
 
 
 install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfig.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/MSTLConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfigVersion.cmake
         DESTINATION ${INSTALL_CONFIGDIR}
 )
 
-install(EXPORT MSTLTargets
-        FILE MSTLTargets.cmake
-        NAMESPACE MSTL::
+install(FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/NexusForceCompilerOptions.cmake
+        DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+install(EXPORT NexusForceTargets
+        FILE NexusForceTargets.cmake
+        NAMESPACE NexusForce::
         DESTINATION ${INSTALL_CONFIGDIR}
 )

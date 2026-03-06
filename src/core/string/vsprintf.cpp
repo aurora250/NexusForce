@@ -1,26 +1,26 @@
-#include <MSTL/core/string/vsprintf.hpp>
-#include <MSTL/core/numeric/numeric_types.hpp>
-#include <MSTL/core/memory/standard_allocator.hpp>
-#include <MSTL/core/string/char_types.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/string/vsprintf.hpp>
+#include <NeForce/core/numeric/numeric_types.hpp>
+#include <NeForce/core/memory/standard_allocator.hpp>
+#include <NeForce/core/string/char_types.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_INNER__
+NEFORCE_BEGIN_INNER__
 
 static int skip_atoi(const char **s) {
 	int i = 0;
-	while (_MSTL is_digit(**s)) {
+	while (_NEFORCE is_digit(**s)) {
 	    i = i * 10 + *((*s)++) - '0';
 	}
 	return i;
 }
 
-MSTL_INLINE17 constexpr int32_t ZEROPAD = 1;
-MSTL_INLINE17 constexpr int32_t SIGN = 2;
-MSTL_INLINE17 constexpr int32_t PLUS = 4;
-MSTL_INLINE17 constexpr int32_t SPACE = 8;
-MSTL_INLINE17 constexpr int32_t LEFT = 16;
-MSTL_INLINE17 constexpr int32_t SPECIAL = 32;
-MSTL_INLINE17 constexpr int32_t SMALL = 64;
+NEFORCE_INLINE17 constexpr int32_t ZEROPAD = 1;
+NEFORCE_INLINE17 constexpr int32_t SIGN = 2;
+NEFORCE_INLINE17 constexpr int32_t PLUS = 4;
+NEFORCE_INLINE17 constexpr int32_t SPACE = 8;
+NEFORCE_INLINE17 constexpr int32_t LEFT = 16;
+NEFORCE_INLINE17 constexpr int32_t SPECIAL = 32;
+NEFORCE_INLINE17 constexpr int32_t SMALL = 64;
 
 static unsigned int do_div(unsigned int* n, const unsigned int base) {
     const unsigned int remainder = *n % base;
@@ -107,11 +107,11 @@ static char* float_number(char* str, double num,
     int int_len = 0;
     int frac_len = 0;
 
-    if (_MSTL is_nan(num)) {
+    if (_NEFORCE is_nan(num)) {
         const char* nan_str = (flags & _INNER SMALL) ? "nan" : "NAN";
-        return _MSTL string_copy(str, nan_str);
+        return _NEFORCE string_copy(str, nan_str);
     }
-    if (_MSTL is_infinity(num)) {
+    if (_NEFORCE is_infinity(num)) {
         const char* inf_str = (flags & _INNER SMALL) ? "inf" : "INF";
         if (num < 0) {
             sign = '-';
@@ -120,7 +120,7 @@ static char* float_number(char* str, double num,
         }
 
         if (sign) *str++ = sign;
-        return _MSTL string_copy(str, inf_str);
+        return _NEFORCE string_copy(str, inf_str);
     }
 
     if (num < 0) {
@@ -219,7 +219,7 @@ static char* float_number(char* str, double num,
     return str;
 }
 
-MSTL_END_INNER__
+NEFORCE_END_INNER__
 
 
 int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
@@ -249,7 +249,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		}
 
 		int field_width = -1;
-		if (_MSTL is_digit(*fmt))
+		if (_NEFORCE is_digit(*fmt))
 			field_width = _INNER skip_atoi(&fmt);
 		else if (*fmt == '*') {
 			field_width = va_arg(args, int);
@@ -262,7 +262,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		int precision = -1;
 		if (*fmt == '.') {
 			++fmt;
-			if (_MSTL is_digit(*fmt))
+			if (_NEFORCE is_digit(*fmt))
 				precision = _INNER skip_atoi(&fmt);
 			else if (*fmt == '*') {
 				precision = va_arg(args, int);
@@ -288,7 +288,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		    case 's': {
                 const char *s = va_arg(args, char *);
 		        if (!s) s = "(null)";
-		        int len = _MSTL string_length(s);
+		        int len = _NEFORCE string_length(s);
 		        if (precision < 0) {
 		            precision = len;
 		        } else if (len > precision) {
@@ -374,7 +374,7 @@ int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) 
     if (!buf || size == 0 || !fmt) return -1;
 
     char temp[MEMORY_BIG_ALLOC_THRESHHOLD];
-    int len = _MSTL vsprintf(temp, fmt, args);
+    int len = _NEFORCE vsprintf(temp, fmt, args);
 
     if (len < 0) {
         buf[0] = '\0';
@@ -388,7 +388,7 @@ int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) 
 
     if (size > 0) {
         const size_t copy_len = (len < size - 1) ? len : size - 1;
-        _MSTL memory_copy(buf, temp, copy_len);
+        _NEFORCE memory_copy(buf, temp, copy_len);
         buf[copy_len] = '\0';
     }
     return len;
@@ -398,7 +398,7 @@ int sprintf(char *buf, const char *fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
-    const int result = _MSTL vsprintf(buf, fmt, args);
+    const int result = _NEFORCE vsprintf(buf, fmt, args);
     va_end(args);
 
     return result;
@@ -408,7 +408,7 @@ int snprintf(char *buf, const size_t size, const char *fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
-    const int result = _MSTL vsnprintf(buf, size, fmt, args);
+    const int result = _NEFORCE vsnprintf(buf, size, fmt, args);
     va_end(args);
 
     return result;
@@ -419,10 +419,10 @@ int scprintf(const char *fmt, ...) noexcept {
 
     va_start(args, fmt);
     char temp[MEMORY_BIG_ALLOC_THRESHHOLD];
-    const int length = _MSTL vsprintf(temp, fmt, args);
+    const int length = _NEFORCE vsprintf(temp, fmt, args);
     va_end(args);
 
     return length;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

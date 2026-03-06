@@ -1,50 +1,50 @@
-#include <MSTL/network/http/http_router.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/network/http/http_router.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 http_router::http_router() {
     setup_default_handlers();
 }
 
 void http_router::get(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::GET.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::GET.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::post(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::POST.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::POST.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::put(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::PUT.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::PUT.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::del(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::DELETE.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::DELETE.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::head(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::HEAD.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::HEAD.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::options(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::OPTIONS.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::OPTIONS.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::trace(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::TRACE.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::TRACE.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::connect(const string& path, handler_func handler) {
-    routes_[HTTP_METHOD::CONNECT.method()][path] = _MSTL move(handler);
+    routes_[HTTP_METHOD::CONNECT.method()][path] = _NEFORCE move(handler);
 }
 
 void http_router::get_post(const string& path, handler_func handler) {
     get(path, handler);
-    post(path, _MSTL move(handler));
+    post(path, _NEFORCE move(handler));
 }
 
 void http_router::post_delete(const string& path, handler_func handler) {
     post(path, handler);
-    del(path, _MSTL move(handler));
+    del(path, _NEFORCE move(handler));
 }
 
 void http_router::all(const string& path, handler_func handler) {
@@ -55,7 +55,7 @@ void http_router::all(const string& path, handler_func handler) {
     head(path, handler);
     options(path, handler);
     trace(path, handler);
-    connect(path, _MSTL move(handler));
+    connect(path, _NEFORCE move(handler));
 }
 
 void http_router::route(const HTTP_METHOD& method, const string& path, handler_func handler) {
@@ -97,15 +97,15 @@ vector<string> http_router::split_methods(const string& method_str) {
 
 void http_router::setup_default_handlers() {
     not_found_handler_ = [](http_request& request, http_response& response) {
-        response.set_not_found();
-        response.set_status_msg("Not Found");
-        response.set_body("404 - Resource not found: " + request.path());
+        response.status = HTTP_STATUS::S4_NOT_FOUNT;
+        response.status_message = "Not Found";
+        response.body = "404 - Resource not found: " + request.path;
     };
 
     method_not_allowed_handler_ = [](http_request& request, http_response& response) {
-        response.set_status(HTTP_STATUS::S4_METHOD_NOT_ALLOWED);
-        response.set_status_msg("Method Not Allowed");
-        response.set_body("405 - Method not allowed: " + request.method().to_string());
+        response.status = HTTP_STATUS::S4_METHOD_NOT_ALLOWED;
+        response.status_message = "Method Not Allowed";
+        response.body = "405 - Method not allowed: " + request.method.to_string();
     };
 }
 
@@ -118,14 +118,14 @@ http_response http_router::handle_request(http_request& request) {
 
     middleware_chain_.execute_filters(request, response);
 
-    auto* handler = find_handler(request.method(), request.path());
+    auto* handler = find_handler(request.method, request.path);
     if (handler) {
         (*handler)(request, response);
     } else {
         bool path_exists = false;
         for (const auto& elm : routes_) {
             const auto& paths = elm.second;
-            if (paths.find(request.path()) != paths.end()) {
+            if (paths.find(request.path) != paths.end()) {
                 path_exists = true;
                 break;
             }
@@ -143,4 +143,4 @@ http_response http_router::handle_request(http_request& request) {
     return response;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

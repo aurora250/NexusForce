@@ -1,11 +1,11 @@
-#include <MSTL/logging/logger.hpp>
-#include <MSTL/core/system/console.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/logging/logger.hpp>
+#include <NeForce/core/system/console.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 void logger::enqueue(log_event&& event) {
     {
         lock<mutex> lock(queue_mutex_);
-        queue_.push(_MSTL move(event));
+        queue_.push(_NEFORCE move(event));
     }
     cv_.notify_one();
 }
@@ -56,7 +56,7 @@ void logger::worker_loop() {
             });
 
             while (!queue_.empty()) {
-                events.push_back(_MSTL move(queue_.front()));
+                events.push_back(_NEFORCE move(queue_.front()));
                 queue_.pop();
             }
 
@@ -156,7 +156,7 @@ void logger::enable_async(const bool async) {
     } else {
         lock<mutex> lk(queue_mutex_);
         while (!queue_.empty()) {
-            log_event ev = _MSTL move(queue_.front());
+            log_event ev = _NEFORCE move(queue_.front());
             queue_.pop();
             lock<mutex> slk(sinks_mutex_);
             for (const auto& sink : sinks_) {
@@ -217,4 +217,4 @@ void logger::flush() {
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

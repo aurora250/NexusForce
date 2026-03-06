@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: file_watcher.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('file__watcher_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">file_watcher.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="file__watcher_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_FILE_FILE_WATCHER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_FILE_FILE_WATCHER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">NeForce/core/async/mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="file__constants_8hpp.html">NeForce/core/file/file_constants.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="path_8hpp.html">NeForce/core/file/path.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classfile__watcher.html">   33</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">using </span>callback_t = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<span class="keyword">const</span> <a class="code hl_class" href="classpath.html">path</a>&amp;, <a class="code hl_enumeration" href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a>)&gt;;  </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classpath.html">path</a> watch_path_;                    </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> recursive_;                     </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> watching_{<span class="keyword">false</span>};       </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> stopping_{<span class="keyword">false</span>};       </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    callback_t callback_;                </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_enumeration" href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a> current_events_{<a class="code hl_enumvalue" href="group___file.html#ggaa0b5e9e5c8a86dff59422965cfd27cefa5fb1f955b45e38e31789286a1790398d">FILE_WATCH_EVENT::ALL</a>};  </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classvector.html">vector&lt;char&gt;</a> buffer_;                </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_class" href="classmutex.html">mutex</a> callback_mutex_;               </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;      </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE; </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_enumvalue" href="group___file.html#gga2a2a018f90da3e2064ba746291f699c9a9cfe110ae43252e200f2d562efc30ce4">::OVERLAPPED</a> overlapped_{};                        </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">int</span> inotify_fd_ = -1;        </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">int</span> watch_descriptor_ = -1;  </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> event_fd_ = -1;          </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_class" href="classthread.html">thread</a> watch_thread_;        </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> watch_thread_func();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">   72</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a>(<span class="keyword">const</span> <a class="code hl_class" href="classpath.html">path</a>&amp; <a class="code hl_function" href="classfile__watcher.html#a360ac515e0d01a6829d99dce0491bd50">watch_path</a>, <span class="keywordtype">bool</span> recursive = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a1cfab722bf2385f8154c4e4040a73d16">   79</a></span>    <a class="code hl_function" href="classfile__watcher.html#a1cfab722bf2385f8154c4e4040a73d16">~file_watcher</a>();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a>(<span class="keyword">const</span> <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classfile__watcher.html#ab8e5fcb2705c34f843281a311fd3f294">   93</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classfile__watcher.html#ab8e5fcb2705c34f843281a311fd3f294">start</a>(callback_t callback, <a class="code hl_enumeration" href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a> events = <a class="code hl_enumvalue" href="group___file.html#ggaa0b5e9e5c8a86dff59422965cfd27cefa5fb1f955b45e38e31789286a1790398d">FILE_WATCH_EVENT::ALL</a>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a6540e99efd23e8b52d78019871d52c04">  100</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classfile__watcher.html#a6540e99efd23e8b52d78019871d52c04">stop</a>();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a360ac515e0d01a6829d99dce0491bd50">  106</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classpath.html">path</a>&amp; <a class="code hl_function" href="classfile__watcher.html#a360ac515e0d01a6829d99dce0491bd50">watch_path</a>() const noexcept {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span> watch_path_;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a5bcb87ff5e34d7f5e6286f931aa2cf18">  114</a></span>    NEFORCE_NODISCARD <a class="code hl_enumeration" href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a> <a class="code hl_function" href="classfile__watcher.html#a5bcb87ff5e34d7f5e6286f931aa2cf18">current_events</a>() const noexcept {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> current_events_;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span></div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a4cec770ffe6dac4559783c12dfc5b00e">  122</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classfile__watcher.html#a4cec770ffe6dac4559783c12dfc5b00e">is_watching</a>() const noexcept {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">return</span> watching_.load();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classfile__watcher.html#af490b718f07aa8c285280a050c52e902">  130</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classfile__watcher.html#af490b718f07aa8c285280a050c52e902">is_recursive</a>() const noexcept {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> recursive_;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a4efba80fac59c688f59fdabcaa022da1">  141</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classfile__watcher.html#a4efba80fac59c688f59fdabcaa022da1">update_watch</a>(<a class="code hl_enumeration" href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a> events);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classfile__watcher.html#a3f9a8e33c3225c12b8ee6b9f00d0bb7c">  150</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classfile__watcher.html#a3f9a8e33c3225c12b8ee6b9f00d0bb7c">update_recursive</a>(<span class="keywordtype">bool</span> recursive);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>};</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> <span class="comment">// File</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_FILE_FILE_WATCHER_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclassfile__watcher_html_a1cfab722bf2385f8154c4e4040a73d16"><div class="ttname"><a href="classfile__watcher.html#a1cfab722bf2385f8154c4e4040a73d16">file_watcher::~file_watcher</a></div><div class="ttdeci">~file_watcher()</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclassfile__watcher_html_a360ac515e0d01a6829d99dce0491bd50"><div class="ttname"><a href="classfile__watcher.html#a360ac515e0d01a6829d99dce0491bd50">file_watcher::watch_path</a></div><div class="ttdeci">NEFORCE_NODISCARD const path &amp; watch_path() const noexcept</div><div class="ttdoc">获取监视的目录路径</div><div class="ttdef"><b>定义</b> <a href="#l00106">file_watcher.hpp:106</a></div></div>
+<div class="ttc" id="aclassfile__watcher_html_a3f9a8e33c3225c12b8ee6b9f00d0bb7c"><div class="ttname"><a href="classfile__watcher.html#a3f9a8e33c3225c12b8ee6b9f00d0bb7c">file_watcher::update_recursive</a></div><div class="ttdeci">bool update_recursive(bool recursive)</div><div class="ttdoc">更新递归设置</div></div>
+<div class="ttc" id="aclassfile__watcher_html_a4cec770ffe6dac4559783c12dfc5b00e"><div class="ttname"><a href="classfile__watcher.html#a4cec770ffe6dac4559783c12dfc5b00e">file_watcher::is_watching</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_watching() const noexcept</div><div class="ttdoc">检查是否正在监视</div><div class="ttdef"><b>定义</b> <a href="#l00122">file_watcher.hpp:122</a></div></div>
+<div class="ttc" id="aclassfile__watcher_html_a4efba80fac59c688f59fdabcaa022da1"><div class="ttname"><a href="classfile__watcher.html#a4efba80fac59c688f59fdabcaa022da1">file_watcher::update_watch</a></div><div class="ttdeci">bool update_watch(FILE_WATCH_EVENT events)</div><div class="ttdoc">更新监视的事件类型</div></div>
+<div class="ttc" id="aclassfile__watcher_html_a5bcb87ff5e34d7f5e6286f931aa2cf18"><div class="ttname"><a href="classfile__watcher.html#a5bcb87ff5e34d7f5e6286f931aa2cf18">file_watcher::current_events</a></div><div class="ttdeci">NEFORCE_NODISCARD FILE_WATCH_EVENT current_events() const noexcept</div><div class="ttdoc">获取当前监视的事件类型</div><div class="ttdef"><b>定义</b> <a href="#l00114">file_watcher.hpp:114</a></div></div>
+<div class="ttc" id="aclassfile__watcher_html_a6540e99efd23e8b52d78019871d52c04"><div class="ttname"><a href="classfile__watcher.html#a6540e99efd23e8b52d78019871d52c04">file_watcher::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">停止监视</div></div>
+<div class="ttc" id="aclassfile__watcher_html_ab8e5fcb2705c34f843281a311fd3f294"><div class="ttname"><a href="classfile__watcher.html#ab8e5fcb2705c34f843281a311fd3f294">file_watcher::start</a></div><div class="ttdeci">bool start(callback_t callback, FILE_WATCH_EVENT events=FILE_WATCH_EVENT::ALL)</div><div class="ttdoc">开始监视</div></div>
+<div class="ttc" id="aclassfile__watcher_html_ae4288000ed8b461a80964e4d85885385"><div class="ttname"><a href="classfile__watcher.html#ae4288000ed8b461a80964e4d85885385">file_watcher::file_watcher</a></div><div class="ttdeci">file_watcher(const path &amp;watch_path, bool recursive=false)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassfile__watcher_html_af490b718f07aa8c285280a050c52e902"><div class="ttname"><a href="classfile__watcher.html#af490b718f07aa8c285280a050c52e902">file_watcher::is_recursive</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_recursive() const noexcept</div><div class="ttdoc">检查是否递归监视子目录</div><div class="ttdef"><b>定义</b> <a href="#l00130">file_watcher.hpp:130</a></div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="function_8hpp_source.html#l00029">function.hpp:29</a></div></div>
+<div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00037">mutex.hpp:37</a></div></div>
+<div class="ttc" id="aclasspath_html"><div class="ttname"><a href="classpath.html">path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00032">path.hpp:32</a></div></div>
+<div class="ttc" id="aclassthread_html"><div class="ttname"><a href="classthread.html">thread</a></div><div class="ttdoc">线程类</div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="afile__constants_8hpp_html"><div class="ttname"><a href="file__constants_8hpp.html">file_constants.hpp</a></div><div class="ttdoc">文件操作常量定义</div></div>
+<div class="ttc" id="afunction_8hpp_html"><div class="ttname"><a href="function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___file_html_gaa0b5e9e5c8a86dff59422965cfd27cef"><div class="ttname"><a href="group___file.html#gaa0b5e9e5c8a86dff59422965cfd27cef">FILE_WATCH_EVENT</a></div><div class="ttdeci">FILE_WATCH_EVENT</div><div class="ttdoc">文件监视事件枚举</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00247">file_constants.hpp:247</a></div></div>
+<div class="ttc" id="agroup___file_html_gga2a2a018f90da3e2064ba746291f699c9a9cfe110ae43252e200f2d562efc30ce4"><div class="ttname"><a href="group___file.html#gga2a2a018f90da3e2064ba746291f699c9a9cfe110ae43252e200f2d562efc30ce4">FILE_ATTRI::OVERLAPPED</a></div><div class="ttdeci">@ OVERLAPPED</div><div class="ttdoc">Linux不支持异步I/O标志</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00175">file_constants.hpp:175</a></div></div>
+<div class="ttc" id="agroup___file_html_ggaa0b5e9e5c8a86dff59422965cfd27cefa5fb1f955b45e38e31789286a1790398d"><div class="ttname"><a href="group___file.html#ggaa0b5e9e5c8a86dff59422965cfd27cefa5fb1f955b45e38e31789286a1790398d">FILE_WATCH_EVENT::ALL</a></div><div class="ttdeci">@ ALL</div><div class="ttdoc">所有事件</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00253">file_constants.hpp:253</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="apath_8hpp_html"><div class="ttname"><a href="path_8hpp.html">path.hpp</a></div><div class="ttdoc">文件路径类</div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00031">atomic.hpp:31</a></div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程支持</div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>file</b></li><li class="navelem"><a href="file__watcher_8hpp.html">file_watcher.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

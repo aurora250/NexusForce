@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['quick_5fsort_0',['quick_sort',['../group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338',1,'quick_sort(Iterator first, Iterator last, Compare comp):&#160;sort.hpp'],['../group___sort_algorithms.html#ga5daa37ac5f6fc132c53c076b24ce6163',1,'quick_sort(Iterator first, Iterator last):&#160;sort.hpp']]],
-  ['quiet_5fnan_1',['quiet_nan',['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; char &gt;::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; char16_t &gt;::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; char32_t &gt;::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; const T &gt;::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; const volatile T &gt;::quiet_nan()'],['../classnumeric__traits.html#ab7f06a1c38784c4256b8dec54861159d',1,'numeric_traits&lt; volatile T &gt;::quiet_nan()']]]
-];

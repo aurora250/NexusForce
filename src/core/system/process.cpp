@@ -1,6 +1,6 @@
-#include <MSTL/core/system/process.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/system/process.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <windef.h>
 #include <WinBase.h>
 #include <Psapi.h>
@@ -11,17 +11,17 @@
 #undef min
 #endif
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/system/console.hpp>
-#include <MSTL/core/file/file.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/core/file/file.hpp>
 #include <sys/wait.h>
 #include <cerrno>
 #include <cstring>
 #include <csignal>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 
 static char** build_argv(
     const string& executable, const vector<string>& args) {
@@ -29,11 +29,11 @@ static char** build_argv(
     const auto argv = new char*[argc];
 
     argv[0] = new char[executable.length() + 1];
-    _MSTL string_copy(argv[0], executable.data());
+    _NEFORCE string_copy(argv[0], executable.data());
 
     for (size_t i = 0; i < args.size(); ++i) {
         argv[i + 1] = new char[args[i].length() + 1];
-        _MSTL string_copy(argv[i + 1], args[i].data());
+        _NEFORCE string_copy(argv[i + 1], args[i].data());
     }
 
     argv[argc - 1] = nullptr;
@@ -50,7 +50,7 @@ static void free_argv(char** argv) noexcept{
 
 #endif
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
 static string build_command_line(const string& executable, const vector<string>& args) {
     string cmd_line = "\"" + executable + "\"";
@@ -67,7 +67,7 @@ process::state_info process::create(
     const string& executable, const vector<string>& args, bool capture_output) {
     state_info info{};
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::STARTUPINFOA si{};
     si.cb = sizeof(::STARTUPINFOA);
 
@@ -147,7 +147,7 @@ process::state_info process::create(
 }
 
 int process::wait_for(state_info& info, int timeout_ms) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::DWORD timeout = (timeout_ms < 0) ?
         numeric_traits<::DWORD>::max() :
         static_cast<::DWORD>(timeout_ms);
@@ -205,7 +205,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
 }
 
 bool process::terminate(const state_info& info) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::BOOL result = ::TerminateProcess(info.process_handle, 1);
     if (result) {
         ::CloseHandle(info.process_handle);
@@ -225,7 +225,7 @@ bool process::terminate(const state_info& info) noexcept {
 }
 
 bool process::suspend(const state_info& info) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (info.thread_handle == nullptr) return false;
     return ::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
@@ -234,7 +234,7 @@ bool process::suspend(const state_info& info) noexcept {
 }
 
 bool process::resume(const state_info& info) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (info.thread_handle == nullptr) return false;
     return ::ResumeThread(info.thread_handle) != static_cast<::DWORD>(-1);
 #else
@@ -243,7 +243,7 @@ bool process::resume(const state_info& info) noexcept {
 }
 
 bool process::is_running(const state_info& info) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD exit_code;
     if (::GetExitCodeProcess(info.process_handle, &exit_code)) {
         return exit_code == STILL_ACTIVE;
@@ -256,7 +256,7 @@ bool process::is_running(const state_info& info) noexcept {
 }
 
 process::native_id_type process::current_id() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetCurrentProcessId();
 #else
     return ::getpid();
@@ -265,7 +265,7 @@ process::native_id_type process::current_id() noexcept {
 
 process::memory_info process::get_memory_info(const state_info& info) noexcept {
     memory_info mem_info = {0, 0, 0, 0};
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::PROCESS_MEMORY_COUNTERS pmc;
     if (::GetProcessMemoryInfo(info.process_handle, &pmc, sizeof(pmc))) {
         mem_info.working_set_size = pmc.WorkingSetSize;
@@ -284,7 +284,7 @@ process::memory_info process::get_memory_info(const state_info& info) noexcept {
         string tmp;
         size_t pos;
         getline(text, pos, tmp, [](char c) { return is_space(c); });
-        size_t size MSTL_UNUSED = to_uint64(tmp.view());
+        size_t size NEFORCE_UNUSED = to_uint64(tmp.view());
         getline(text, pos, tmp, [](char c) { return is_space(c); });
         const size_t rss = to_uint64(tmp.view());
         mem_info.working_set_size = rss * sysconf(_SC_PAGE_SIZE);
@@ -299,7 +299,7 @@ process::state process::get_state(const state_info& info) noexcept {
         return state::exited;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD exit_code;
     if (::GetExitCodeProcess(info.process_handle, &exit_code) && exit_code == STILL_ACTIVE) {
         if (::SuspendThread(info.thread_handle) != static_cast<::DWORD>(-1)) {
@@ -324,7 +324,7 @@ process::state process::get_state(const state_info& info) noexcept {
 }
 
 bool process::check_permission(const state_info& info, permission permission) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD desired_access = 0;
 
     if ((static_cast<int>(permission) & static_cast<int>(permission::read)) != 0) {
@@ -370,7 +370,7 @@ bool process::check_permission(const state_info& info, permission permission) no
 }
 
 string process::name(native_id_type process_id) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE hProcess = ::OpenProcess(
         PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
         FALSE,
@@ -408,4 +408,4 @@ string process::name(native_id_type process_id) noexcept {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

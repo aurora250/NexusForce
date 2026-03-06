@@ -1,0 +1,26 @@
+var group___string_operations =
+[
+    [ "string_compare", "group___string_operations.html#ga66435457bd7a3b93d4ce2ee17a72f698", null ],
+    [ "string_compare", "group___string_operations.html#gadcce3d331cce0104dfbe84f17657c268", null ],
+    [ "string_compare_ignore_case", "group___string_operations.html#gabc68823d8f3e9dbb1b213f7b88d84878", null ],
+    [ "string_compare_ignore_case", "group___string_operations.html#ga9abdfd7cabb7b3bb16b0658ad76574c1", null ],
+    [ "string_concatenate", "group___string_operations.html#ga64735eb717b22449bd0a90f8cc994b80", null ],
+    [ "string_concatenate", "group___string_operations.html#ga1c8d8e2d7fb1168075254fdfb64ae0d2", null ],
+    [ "string_copy", "group___string_operations.html#ga32e3d14580f551b5516d7dc5693ed649", null ],
+    [ "string_copy", "group___string_operations.html#ga750727c383bac362aceda4acd5b50f75", null ],
+    [ "string_copy_offset", "group___string_operations.html#gaaa0d9e86ebc26ac4aa3d72b0895ba40c", null ],
+    [ "string_copy_offset", "group___string_operations.html#gacd531fe2621a9feedd04bd4da8fedf4c", null ],
+    [ "string_find", "group___string_operations.html#ga151ef08015f0ff951fc76644c1f9c583", null ],
+    [ "string_find", "group___string_operations.html#ga210788c1c81b6a4a30ef1c37b53e9c3f", null ],
+    [ "string_find_any", "group___string_operations.html#ga867363b01add331d154ec936caf0fa24", null ],
+    [ "string_find_last", "group___string_operations.html#gabc11ebb793a884564a609b2d2a2df27c", null ],
+    [ "string_find_pattern", "group___string_operations.html#gaa3786ec975118f882849bb50619ac4bf", null ],
+    [ "string_find_pattern_ignored_case", "group___string_operations.html#ga62a57f0b9dc8309e5ebf3394320a2d5a", null ],
+    [ "string_length", "group___string_operations.html#ga0e8fab30e2216887d2734637a4d099b2", null ],
+    [ "string_length", "group___string_operations.html#ga03fb2cee5d166b1e24c581b8cfd23e70", null ],
+    [ "string_reverse", "group___string_operations.html#ga2a21d2ded53762ac24a9524831e174d5", null ],
+    [ "string_set", "group___string_operations.html#gad62301c4e3eabe23cbdec7ecb306688c", null ],
+    [ "string_set", "group___string_operations.html#gafadcfa9c4007db8398b7eef78d184600", null ],
+    [ "string_span_in", "group___string_operations.html#ga4539ba21e67e2d174ccbea4773204edd", null ],
+    [ "string_span_not_in", "group___string_operations.html#ga04dd9171ba35f6788375bca0b67e6abd", null ]
+];

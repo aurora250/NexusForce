@@ -1,11 +1,11 @@
-#include <MSTL/core/async/thread.hpp>
-#include <MSTL/core/time/clocks.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/async/thread.hpp>
+#include <NeForce/core/time/clocks.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #include <windef.h>
 #include <process.h>
 #include <WinBase.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <linux/futex.h>
 #include <cerrno>
 #include <ctime>
@@ -14,10 +14,10 @@
 #define FUTEX_BITSET_MATCH_ANY 0xffffffff
 #endif
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 void thread::start_thread_impl(void* args) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     unsigned int thread_id;
     handle_ = reinterpret_cast<native_handle_type>(
         ::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id)
@@ -38,7 +38,7 @@ void thread::start_thread_impl(void* args) {
 
 thread::thread(thread&& other) noexcept
     : handle_(other.handle_), id_(other.id_), state_(other.state_) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     other.handle_ = nullptr;
 #else
     other.handle_ = native_handle_type{};
@@ -50,13 +50,13 @@ thread::thread(thread&& other) noexcept
 thread& thread::operator =(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
-            _MSTL terminate();
+            _NEFORCE terminate();
         }
 
         handle_ = other.handle_;
         id_ = other.id_;
         state_ = other.state_;
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         other.handle_ = nullptr;
 #else
         other.handle_ = native_handle_type{};
@@ -69,7 +69,7 @@ thread& thread::operator =(thread&& other) noexcept {
 
 thread::~thread() {
     if (joinable()) {
-        _MSTL terminate();
+        _NEFORCE terminate();
     }
 }
 
@@ -78,7 +78,7 @@ void thread::join() {
         throw_exception(thread_exception("Thread is not joinable"));
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (::WaitForSingleObject(handle_, numeric_traits<::DWORD>::max()) != WAIT_OBJECT_0) {
         throw_exception(thread_exception("Fail to join thread"));
     }
@@ -97,7 +97,7 @@ void thread::detach() {
     if (!joinable()) {
         throw_exception(thread_exception("Thread is not detachable"));
     }
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (::CloseHandle(handle_) == FALSE) {
         throw_exception(thread_exception("Fail to detach thread"));
     }
@@ -111,11 +111,11 @@ void thread::detach() {
     state_ = DETACHED;
 }
 
-MSTL_BEGIN_THIS_THREAD__
+NEFORCE_BEGIN_THIS_THREAD__
 
-void MSTL_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
+void NEFORCE_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
     if (!busy_wait) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         ::Sleep(ms);
 #else
         ::timespec ts;
@@ -125,7 +125,7 @@ void MSTL_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
 #endif
     } else {
         if (ms == 0) return;
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         static ::LARGE_INTEGER frequency{0};
         if (frequency.QuadPart == 0) {
             ::QueryPerformanceFrequency(&frequency);
@@ -163,7 +163,7 @@ void MSTL_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
                 break;
             }
 
-            auto remaining = _MSTL time_cast<milliseconds>(target_time - now);
+            auto remaining = _NEFORCE time_cast<milliseconds>(target_time - now);
 
             if (remaining.count() > 1) {
                 ::timespec ts;
@@ -178,7 +178,7 @@ void MSTL_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
     }
 }
 
-void MSTL_API sleep_for_us(uint64_t ms) noexcept {
+void NEFORCE_API sleep_for_us(uint64_t ms) noexcept {
     if (ms == 0) return;
 
     if (ms >= 1000) {
@@ -187,7 +187,7 @@ void MSTL_API sleep_for_us(uint64_t ms) noexcept {
         if (ms == 0) return;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     static ::LARGE_INTEGER frequency{0};
     if (frequency.QuadPart == 0) {
         ::QueryPerformanceFrequency(&frequency);
@@ -213,10 +213,10 @@ void MSTL_API sleep_for_us(uint64_t ms) noexcept {
 #endif
 }
 
-void MSTL_API sleep_for_ns(uint64_t ns) noexcept {
+void NEFORCE_API sleep_for_ns(uint64_t ns) noexcept {
     if (ns < 1000) {
         for (uint64_t i = 0; i < ns / 10; ++i) {
-#ifdef MSTL_COMPILER_MSVC__
+#ifdef NEFORCE_COMPILER_MSVC
             ::_mm_mfence();
 #else
             asm volatile("" ::: "memory");
@@ -232,7 +232,7 @@ void MSTL_API sleep_for_ns(uint64_t ns) noexcept {
         if (ns == 0) return;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     static ::LARGE_INTEGER frequency{0};
     if (frequency.QuadPart == 0) {
         ::QueryPerformanceFrequency(&frequency);
@@ -258,8 +258,8 @@ void MSTL_API sleep_for_ns(uint64_t ns) noexcept {
 #endif
 }
 
-bool MSTL_API affinity(size_t cpu_mask) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+bool NEFORCE_API affinity(size_t cpu_mask) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetThreadAffinityMask(::GetCurrentThread(), cpu_mask) != 0;
 #else
     ::cpu_set_t cpuset;
@@ -273,8 +273,8 @@ bool MSTL_API affinity(size_t cpu_mask) noexcept {
 #endif
 }
 
-bool MSTL_API priority(int priority) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+bool NEFORCE_API priority(int priority) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
     int win_priority;
     if (priority >= 90) win_priority = THREAD_PRIORITY_TIME_CRITICAL;
     else if (priority >= 70) win_priority = THREAD_PRIORITY_HIGHEST;
@@ -296,6 +296,6 @@ bool MSTL_API priority(int priority) noexcept {
 #endif
 }
 
-MSTL_END_THIS_THREAD__
+NEFORCE_END_THIS_THREAD__
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

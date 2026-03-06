@@ -1,0 +1,915 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: unique_ptr.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('unique__ptr_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">unique_ptr.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="unique__ptr_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="functor_8hpp.html">NeForce/core/functional/functor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="invoke_8hpp.html">NeForce/core/functional/invoke.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="deleter_8hpp.html">NeForce/core/utility/deleter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="compressed__pair_8hpp.html">NeForce/core/utility/compressed_pair.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">class </span>__unique_ptr_impl {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">struct </span>inner_ptr {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">using </span>type = U*;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">struct </span>inner_ptr&lt;U, E, <a class="code hl_typedef" href="group___type_traits_utilities.html#gab8ddf9531fc4ac7ce28574db20c8f20e">void_t</a>&lt;typename <a class="code hl_typedef" href="group___remove_qualifiers.html#ga5993e4587ccd2777e95893329360358a">remove_reference_t</a>&lt;E&gt;::pointer&gt;&gt; {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">using </span>type = <span class="keyword">typename</span> remove_reference&lt;E&gt;::type::pointer;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    };</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">using </span>DeleterConstraint = enable_if&lt;is_default_constructible&lt;Deleter&gt;::value&gt;;  </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> inner_ptr&lt;T, Deleter&gt;::type;  </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    compressed_pair&lt;Deleter, pointer&gt; ptr_pair_{default_construct_tag{}, <span class="keyword">nullptr</span>};  </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        !<a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_rvalue_reference&lt;Deleter&gt;::value</a>,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="stringliteral">&quot;deleter type of unique_ptr must be a function object type or an lvalue reference type&quot;</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    __unique_ptr_impl() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    NEFORCE_CONSTEXPR20 __unique_ptr_impl(pointer ptr)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    : ptr_pair_(default_construct_tag{}, ptr) {}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    NEFORCE_CONSTEXPR20 __unique_ptr_impl(pointer ptr, Deleter&amp;&amp; deleter)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    : ptr_pair_(exact_arg_construct_tag{}, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter), ptr) {}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    NEFORCE_CONSTEXPR20 __unique_ptr_impl(pointer ptr, <span class="keyword">const</span> Deleter&amp; deleter)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    : ptr_pair_(exact_arg_construct_tag{}, deleter, ptr) {}</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    NEFORCE_CONSTEXPR20 __unique_ptr_impl(__unique_ptr_impl&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    : ptr_pair_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(other.ptr_pair_)) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        other.get_ptr() = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    NEFORCE_CONSTEXPR20 __unique_ptr_impl&amp; operator =(__unique_ptr_impl&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        this-&gt;reset(other.release());</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    NEFORCE_CONSTEXPR20 pointer&amp; get_ptr() noexcept {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">return</span> ptr_pair_.<a class="code hl_variable" href="structcompressed__pair.html#a85011ff9527606e2f8a5d97e7c5c3b68">value</a>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    NEFORCE_CONSTEXPR20 pointer get_ptr() const noexcept {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> ptr_pair_.<a class="code hl_variable" href="structcompressed__pair.html#a85011ff9527606e2f8a5d97e7c5c3b68">value</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    NEFORCE_CONSTEXPR20 Deleter&amp; get_deleter() noexcept {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">return</span> ptr_pair_.<a class="code hl_function" href="structcompressed__pair.html#a85a04540976b1f54013555e57e63b81e">get_base</a>();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    NEFORCE_CONSTEXPR20 <span class="keyword">const</span> Deleter&amp; get_deleter() const noexcept {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">return</span> ptr_pair_.<a class="code hl_function" href="structcompressed__pair.html#a85a04540976b1f54013555e57e63b81e">get_base</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> reset(pointer ptr) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">const</span> pointer old = get_ptr();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        get_ptr() = ptr;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">if</span> (old) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            ptr_pair_.<a class="code hl_function" href="structcompressed__pair.html#a85a04540976b1f54013555e57e63b81e">get_base</a>()(old);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    NEFORCE_CONSTEXPR20 pointer <a class="code hl_enumvalue" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">release</a>() noexcept {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        pointer p = get_ptr();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        get_ptr() = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span> p;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(__unique_ptr_impl&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(ptr_pair_, other.ptr_pair_);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>};</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">bool</span> MoveConstructible = <a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_move_constructible&lt;Deleter&gt;::value</a>,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">bool</span> MoveAssignable = <a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_move_assignable&lt;Deleter&gt;::value</a>&gt;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">struct </span>__unique_ptr_data : __unique_ptr_impl&lt;T, Deleter&gt; {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">using </span>base_type = __unique_ptr_impl&lt;T, Deleter&gt;;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> base_type::pointer;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    __unique_ptr_data() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    : base_type(ptr) {}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, Deleter&amp;&amp; deleter)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    : base_type(ptr, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, <span class="keyword">const</span> Deleter&amp; deleter)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    : base_type(ptr, deleter) {}</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    __unique_ptr_data(__unique_ptr_data&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    __unique_ptr_data&amp; operator =(__unique_ptr_data&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>};</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">// 删除器可移动构造但不可移动赋值</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keyword">struct </span>__unique_ptr_data&lt;T, Deleter, true, false&gt; : __unique_ptr_impl&lt;T, Deleter&gt; {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">using </span>base_type = __unique_ptr_impl&lt;T, Deleter&gt;;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> base_type::pointer;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    __unique_ptr_data() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    : base_type(ptr) {}</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, Deleter&amp;&amp; deleter)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    : base_type(ptr, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, <span class="keyword">const</span> Deleter&amp; deleter)</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    : base_type(ptr, deleter) {}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    __unique_ptr_data(__unique_ptr_data&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    __unique_ptr_data&amp; operator =(__unique_ptr_data&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>};</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">// 删除器可移动赋值但不可移动构造</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">struct </span>__unique_ptr_data&lt;T, Deleter, false, true&gt; : __unique_ptr_impl&lt;T, Deleter&gt; {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">using </span>base_type = __unique_ptr_impl&lt;T, Deleter&gt;;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> base_type::pointer;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    __unique_ptr_data() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr)</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    : base_type(ptr) {}</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, Deleter&amp;&amp; deleter)</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    : base_type(ptr, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, <span class="keyword">const</span> Deleter&amp; deleter)</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    : base_type(ptr, deleter) {}</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    __unique_ptr_data(__unique_ptr_data&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    __unique_ptr_data&amp; operator =(__unique_ptr_data&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>};</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">// 删除器既不可移动构造也不可移动赋值</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keyword">struct </span>__unique_ptr_data&lt;T, Deleter, false, false&gt; : __unique_ptr_impl&lt;T, Deleter&gt; {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keyword">using </span>base_type = __unique_ptr_impl&lt;T, Deleter&gt;;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">using </span>pointer = <span class="keyword">typename</span> base_type::pointer;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    __unique_ptr_data() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr)</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    : base_type(ptr) {}</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, Deleter&amp;&amp; deleter)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    : base_type(ptr, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    NEFORCE_CONSTEXPR20 __unique_ptr_data(pointer ptr, <span class="keyword">const</span> Deleter&amp; deleter)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    : base_type(ptr, deleter) {}</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    __unique_ptr_data(__unique_ptr_data&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    __unique_ptr_data&amp; operator =(__unique_ptr_data&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>};</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter = default_delete&lt;T&gt;&gt;</div>
+<div class="foldopen" id="foldopen00224" data-start="{" data-end="};">
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="classunique__ptr.html">  224</a></span><span class="keyword">class </span><a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a> {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keyword">using </span>DeleterConstraint = <span class="keyword">typename</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_impl&lt;T, U&gt;::DeleterConstraint::type;  </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_data&lt;T, Deleter&gt; data_{};  </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">  232</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>       = <span class="keyword">typename</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_impl&lt;T, Deleter&gt;::pointer;  </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">  233</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">element_type</a>  = T;        </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">  234</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>  = Deleter;  </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keyword">using </span>safe_conversion = <a class="code hl_struct" href="structconjunction.html">conjunction</a>&lt;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <a class="code hl_struct" href="structis__convertible.html">is_convertible&lt;typename unique_ptr&lt;U, E&gt;::pointer</a>, <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>&gt;,</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <a class="code hl_struct" href="structnegation.html">negation&lt;is_array&lt;U&gt;</a>&gt;&gt;;  </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Del = Deleter, <span class="keyword">typename</span> = DeleterConstra<span class="keywordtype">int</span>&lt;Del&gt;&gt;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">  248</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>(<a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> = <span class="keyword">nullptr</span>) noexcept {}</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Del = Deleter, <span class="keyword">typename</span> = DeleterConstra<span class="keywordtype">int</span>&lt;Del&gt;&gt;</div>
+<div class="foldopen" id="foldopen00256" data-start="{" data-end="}">
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a37d8df72732fc43a9ae2b12a33d71cd5">  256</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#a37d8df72732fc43a9ae2b12a33d71cd5">unique_ptr</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> ptr) noexcept</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    : data_(ptr) {}</div>
+</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span></div>
+<div class="foldopen" id="foldopen00264" data-start="{" data-end="}">
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a0b73b217dba624cc177e31a92a67abde">  264</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#a0b73b217dba624cc177e31a92a67abde">unique_ptr</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> ptr, <span class="keyword">const</span> <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>&amp; deleter) noexcept</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    : data_(ptr, deleter) {}</div>
+</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>
+<div class="foldopen" id="foldopen00272" data-start="{" data-end="}">
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="classunique__ptr.html#ae5126ac024712167a5df454b5205ff0c">  272</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#ae5126ac024712167a5df454b5205ff0c">unique_ptr</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> ptr, <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>&amp;&amp; deleter) noexcept</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    : data_(ptr, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Del = deleter_type, <span class="keyword">typename</span> DelMoveRef = remove_reference_t&lt;Del&gt;&gt;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classunique__ptr.html#ac0f7c385918fbd385cd79b8a93aafc1e">  279</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#ac0f7c385918fbd385cd79b8a93aafc1e">unique_ptr</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_lvalue_reference&lt;Del&gt;::value</a>, DelMoveRef&amp;&amp;&gt;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a91d8da266b48e5b9704fbb2c3a5de2e7">  281</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#a91d8da266b48e5b9704fbb2c3a5de2e7">unique_ptr</a>(<a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp;&amp;) = <span class="keywordflow">default</span>;  </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;,</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        conditional_t&lt;is_reference&lt;Deleter&gt;::value, is_same&lt;E, Deleter&gt;, is_convertible&lt;E, Deleter&gt;&gt;&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="classunique__ptr.html#ac76aab0320b12cf48ee7223aef959a11">  291</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#ac76aab0320b12cf48ee7223aef959a11">unique_ptr</a>(<a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr&lt;U, E&gt;</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    : data_(other.release(), <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;E&gt;</a>(other.get_deleter())) {}</div>
+</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span></div>
+<div class="foldopen" id="foldopen00297" data-start="{" data-end="}">
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a031e2eb70a769560ba8d41719a2cde0a">  297</a></span>    <a class="code hl_function" href="classunique__ptr.html#a031e2eb70a769560ba8d41719a2cde0a">~unique_ptr</a>() noexcept {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structis__invocable.html">is_invocable&lt;deleter_type&amp;, pointer&gt;::value</a>,</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            <span class="stringliteral">&quot;deleter of unique_ptr must be invocable with a pointer&quot;</span>);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="keyword">auto</span>&amp; ptr = data_.get_ptr();</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            <a class="code hl_function" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">get_deleter</a>()(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(ptr));</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        }</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        ptr = <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>();</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    }</div>
+</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">  308</a></span>    <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp;&amp;) = <span class="keywordflow">default</span>;  </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_struct" href="structconjunction.html">conjunction</a>&lt;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        safe_conversion&lt;U, E&gt;, <a class="code hl_struct" href="structis__assignable.html">is_assignable&lt;deleter_type&amp;, E&amp;&amp;&gt;</a>&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classunique__ptr.html#aa4d65bea3aaebd7a7b0d990ee7a30a78">  319</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr&lt;U, E&gt;</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">reset</a>(other.release());</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <a class="code hl_function" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">get_deleter</a>() = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;E&gt;</a>(other.get_deleter());</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    }</div>
+</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span></div>
+<div class="foldopen" id="foldopen00329" data-start="{" data-end="}">
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno"><a class="line" href="classunique__ptr.html#aaf3c2fe3b6799f61dcbbfa9b9f87d930">  329</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">reset</a>();</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    }</div>
+</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span></div>
+<div class="foldopen" id="foldopen00338" data-start="{" data-end="}">
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a73450603f460b996bb1847b2f536c0f5">  338</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t&lt;element_type&gt;</a> <a class="code hl_function" href="classunique__ptr.html#a73450603f460b996bb1847b2f536c0f5">operator *</a>() const</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    noexcept(noexcept(*<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>&gt;())) {</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordflow">return</span> *<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    }</div>
+</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span></div>
+<div class="foldopen" id="foldopen00347" data-start="{" data-end="}">
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="classunique__ptr.html#adad9506f6921b78de331b68fccb8b1d2">  347</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> <a class="code hl_function" href="classunique__ptr.html#adad9506f6921b78de331b68fccb8b1d2">operator -&gt;</a>() const noexcept {</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    }</div>
+</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span></div>
+<div class="foldopen" id="foldopen00354" data-start="{" data-end="}">
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">  354</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> <a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() const noexcept {</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">return</span> data_.get_ptr();</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    }</div>
+</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span></div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="foldopen" id="foldopen00362" data-start="{" data-end="}">
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">  362</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>&amp; <a class="code hl_function" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">get_deleter</a>() noexcept {</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        <span class="keywordflow">return</span> data_.get_deleter();</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    }</div>
+</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span></div>
+<div class="foldopen" id="foldopen00368" data-start="{" data-end="}">
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a070e07e28830e0188bc7f4d3b84c2474">  368</a></span>    NEFORCE_CONSTEXPR20 <span class="keyword">const</span> <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>&amp; <a class="code hl_function" href="classunique__ptr.html#a070e07e28830e0188bc7f4d3b84c2474">get_deleter</a>() const noexcept {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keywordflow">return</span> data_.get_deleter();</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    }</div>
+</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span></div>
+<div class="foldopen" id="foldopen00376" data-start="{" data-end="}">
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a4840d18cb509de8bed78c676c64c27f4">  376</a></span>    NEFORCE_CONSTEXPR20 <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() == <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>() ? false : <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    }</div>
+</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span></div>
+<div class="foldopen" id="foldopen00383" data-start="{" data-end="}">
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a372af837a21128e149811e6c53d97dc1">  383</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> <a class="code hl_function" href="classunique__ptr.html#a372af837a21128e149811e6c53d97dc1">release</a>() noexcept {</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">return</span> data_.release();</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    }</div>
+</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span></div>
+<div class="foldopen" id="foldopen00390" data-start="{" data-end="}">
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">  390</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">reset</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a> ptr = <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>()) noexcept {</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structis__invocable.html">is_invocable&lt;deleter_type&amp;, pointer&gt;::value</a>,</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>            <span class="stringliteral">&quot;deleter of unique_ptr must be invocable with a pointer&quot;</span>);</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        data_.reset(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(ptr));</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    }</div>
+</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span></div>
+<div class="foldopen" id="foldopen00400" data-start="{" data-end="}">
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno"><a class="line" href="classunique__ptr.html#adb40e2b3a4e6594b17a1f660c290bc40">  400</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="classunique__ptr.html#adb40e2b3a4e6594b17a1f660c290bc40">swap</a>(<a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        <span class="keyword">static_assert</span>(<a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_swappable&lt;Deleter&gt;::value</a>, <span class="stringliteral">&quot;deleter must be swappable.&quot;</span>);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        data_.swap(other.data_);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    }</div>
+</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno"><a class="line" href="classunique__ptr.html#a04aa7a3fb6a443aa527817467d0529c4">  405</a></span>    <a class="code hl_function" href="classunique__ptr.html#a04aa7a3fb6a443aa527817467d0529c4">unique_ptr</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno"><a class="line" href="classunique__ptr.html#afbeafb2421d40f94c069e7b339164353">  406</a></span>    <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>};</div>
+</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span></div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="foldopen" id="foldopen00415" data-start="{" data-end="};">
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html">  415</a></span><span class="keyword">class </span><a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&lt;T[], Deleter&gt; {</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="keyword">using </span>DeleterConstraint =</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="keyword">typename</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_impl&lt;T, U&gt;::DeleterConstraint::type;  </div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_data&lt;T, Deleter&gt; data_{};  </div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0">  423</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0">pointer</a>           = <span class="keyword">typename</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __unique_ptr_impl&lt;T, Deleter&gt;::pointer;  </div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8ace3789d9c673b8141ac033485fca51">  424</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8ace3789d9c673b8141ac033485fca51">element_type</a>    = T;        </div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">  425</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a>    = Deleter;  </div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span> </div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, <span class="keyword">typename</span> UP = unique_ptr&lt;U, E&gt;,</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        <span class="keyword">typename</span> UP_po<span class="keywordtype">int</span>er = <span class="keyword">typename</span> UP::po<span class="keywordtype">int</span>er,</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keyword">typename</span> UP_element_type = <span class="keyword">typename</span> UP::element_type&gt;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    <span class="keyword">using </span>safe_conversion = <a class="code hl_struct" href="structconjunction.html">conjunction&lt;is_array&lt;U&gt;</a>, <a class="code hl_struct" href="structis__same.html">is_same&lt;pointer, element_type*&gt;</a>,</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>          <a class="code hl_struct" href="structis__same.html">is_same&lt;UP_pointer, UP_element_type*&gt;</a>, <a class="code hl_struct" href="structis__convertible.html">is_convertible</a>&lt;UP_element_type(*)[], <a class="code hl_typedef" href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">element_type</a>(*)[]&gt;&gt;;</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span> </div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keyword">using </span>safe_conversion_raw = <a class="code hl_struct" href="structconjunction.html">conjunction&lt;disjunction&lt;disjunction&lt;is_same&lt;U, pointer&gt;</a>, <a class="code hl_struct" href="structis__same.html">is_same&lt;U, nullptr_t&gt;</a>&gt;,</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        <a class="code hl_struct" href="structconjunction.html">conjunction&lt;is_pointer&lt;U&gt;</a>, <a class="code hl_struct" href="structis__same.html">is_same&lt;pointer, element_type*&gt;</a>,</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>            <a class="code hl_struct" href="structis__convertible.html">is_convertible&lt;remove_pointer_t&lt;U&gt;</a>(*)[],<a class="code hl_typedef" href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">element_type</a>(*)[]&gt;&gt;&gt;&gt;;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Del = Deleter, <span class="keyword">typename</span> = DeleterConstra<span class="keywordtype">int</span>&lt;Del&gt;,</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        enable_if_t&lt;safe_conversion_raw&lt;U&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">  448</a></span>    NEFORCE_CONSTEXPR20 <span class="keyword">explicit</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>(U ptr) noexcept : data_(ptr) {}</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span></div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Del = <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>,</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>        <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction&lt;safe_conversion_raw&lt;U&gt;</a>, <a class="code hl_struct" href="structis__copy__constructible.html">is_copy_constructible&lt;Del&gt;</a>&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00459" data-start="{" data-end="}">
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8e4e3f9349fad379cd3c58b8cf0c53dc">  459</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8e4e3f9349fad379cd3c58b8cf0c53dc">unique_ptr</a>(U ptr, <span class="keyword">const</span> <a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a>&amp; deleter) noexcept</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    : data_(ptr, deleter) {}</div>
+</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span></div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Del = <a class="code hl_typedef" href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">deleter_type</a>,</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>        <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;conjunction&lt;safe_conversion_raw&lt;U&gt;</a>, <a class="code hl_struct" href="structis__move__constructible.html">is_move_constructible&lt;Del&gt;</a>&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00471" data-start="{" data-end="}">
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a007644845a7ac5df7d978b2d490b86b4">  471</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a007644845a7ac5df7d978b2d490b86b4">unique_ptr</a>(U ptr, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_lvalue_reference&lt;Del&gt;::value</a>, Del&amp;&amp;&gt; deleter) noexcept</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>    : data_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(ptr), <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(deleter)) {}</div>
+</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span></div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Del = deleter_type, <span class="keyword">typename</span> DelMoveRef = remove_reference_t&lt;Del&gt;,</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>        enable_if_t&lt;safe_conversion_raw&lt;U&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a2ee129da9363b6b3475290f1509a26da">  479</a></span>    <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a2ee129da9363b6b3475290f1509a26da">unique_ptr</a>(U, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_lvalue_reference&lt;Del&gt;::value</a>, DelMoveRef&amp;&amp;&gt;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span> </div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a036c26c7881d6e934e2467c4094470f2">  481</a></span>    <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a036c26c7881d6e934e2467c4094470f2">unique_ptr</a>(<a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp;&amp;) = <span class="keywordflow">default</span>;  </div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span></div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Del = Deleter, <span class="keyword">typename</span> = DeleterConstra<span class="keywordtype">int</span>&lt;Del&gt;&gt;</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a730f845540bdebd23e29dbc5af946581">  488</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a730f845540bdebd23e29dbc5af946581">unique_ptr</a>(<a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> = <span class="keyword">nullptr</span>) noexcept {}</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span></div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;,</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>           conditional_t&lt;is_reference&lt;Deleter&gt;::value, is_same&lt;E, Deleter&gt;, is_convertible&lt;E, Deleter&gt;&gt;&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00498" data-start="{" data-end="}">
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a73848629a27adffebcc5c8a47a330e6e">  498</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a73848629a27adffebcc5c8a47a330e6e">unique_ptr</a>(<a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr&lt;U, E&gt;</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    : data_(other.release(), <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;E&gt;</a>(other.get_deleter())) {}</div>
+</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span></div>
+<div class="foldopen" id="foldopen00504" data-start="{" data-end="}">
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a90cd8a46e18a6842ed8ed1d30c0d9e0a">  504</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a90cd8a46e18a6842ed8ed1d30c0d9e0a">~unique_ptr</a>() {</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>        <span class="keyword">auto</span>&amp; ptr = data_.get_ptr();</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            <a class="code hl_function" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">get_deleter</a>()(ptr);</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        }</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        ptr = <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>();</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>    }</div>
+</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span> </div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a2d549d3e328c2c71b7e13aa054887e49">  512</a></span>    <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp;&amp;) = <span class="keywordflow">default</span>;  </div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span></div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> E, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;<a class="code hl_struct" href="structconjunction.html">conjunction</a>&lt;</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>        safe_conversion&lt;U, E&gt;, <a class="code hl_struct" href="structis__assignable.html">is_assignable&lt;deleter_type&amp;, E&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&gt;::value&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00523" data-start="{" data-end="}">
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad1f11fdde703e70ac712dfea679c0fc8">  523</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr&lt;U, E&gt;</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>        <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">unique_ptr::reset</a>(other.release());</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>        <a class="code hl_function" href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">get_deleter</a>() = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;E&gt;</a>(other.get_deleter());</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    }</div>
+</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span></div>
+<div class="foldopen" id="foldopen00533" data-start="{" data-end="}">
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#accad32a5dda96be9d8c9522ec1dc5dc3">  533</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>        <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">reset</a>();</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>    }</div>
+</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span></div>
+<div class="foldopen" id="foldopen00543" data-start="{" data-end="}">
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a419a6712835ceb63c2332d96fae3327e">  543</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t&lt;element_type&gt;</a> operator [](<span class="keywordtype">size_t</span> idx)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>        NEFORCE_DEBUG_VERIFY(<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() != <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>(), <span class="stringliteral">&quot;_NEFORCE add_lvalue_reference_t&lt;element_type&gt; failed&quot;</span>);</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>()[idx];</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    }</div>
+</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span></div>
+<div class="foldopen" id="foldopen00551" data-start="{" data-end="}">
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a94f46cbb8e45deafbf4458282d9e3809">  551</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0">pointer</a> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a94f46cbb8e45deafbf4458282d9e3809">get</a>() const noexcept {</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        <span class="keywordflow">return</span> data_.get_ptr();</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    }</div>
+</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span></div>
+<div class="foldopen" id="foldopen00558" data-start="{" data-end="}">
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a555e3e95e5899d41276d58bf27d11462">  558</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a>&amp; <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a555e3e95e5899d41276d58bf27d11462">get_deleter</a>() noexcept {</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>        <span class="keywordflow">return</span> data_.get_deleter();</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    }</div>
+</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span></div>
+<div class="foldopen" id="foldopen00565" data-start="{" data-end="}">
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a0397d22ea05cd43bc444504cd2a69597">  565</a></span>    NEFORCE_CONSTEXPR20 <span class="keyword">const</span> <a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a>&amp; <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a0397d22ea05cd43bc444504cd2a69597">get_deleter</a>() const noexcept {</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>        <span class="keywordflow">return</span> data_.get_deleter();</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    }</div>
+</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span></div>
+<div class="foldopen" id="foldopen00573" data-start="{" data-end="}">
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ab8c3eb74c61eed55b2ad0d82307e9b7e">  573</a></span>    NEFORCE_CONSTEXPR20 <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() == <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>() ? false : <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    }</div>
+</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span></div>
+<div class="foldopen" id="foldopen00580" data-start="{" data-end="}">
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#afeb39ccd70dade8f8fb67c87701b490d">  580</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0">pointer</a> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#afeb39ccd70dade8f8fb67c87701b490d">release</a>() noexcept {</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>        <span class="keywordflow">return</span> data_.release();</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    }</div>
+</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span></div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>        <a class="code hl_struct" href="structconjunction.html">conjunction&lt;disjunction&lt;is_same&lt;U, pointer&gt;</a>,</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            <a class="code hl_struct" href="structconjunction.html">conjunction&lt;is_same&lt;pointer, element_type*&gt;</a>,</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>                <a class="code hl_struct" href="structis__pointer.html">is_pointer&lt;U&gt;</a>,</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>                <a class="code hl_struct" href="structis__convertible.html">is_convertible&lt;remove_pointer_t&lt;U&gt;</a>(*)[],<a class="code hl_typedef" href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">element_type</a>(*)[]&gt;&gt;&gt;</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>        &gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00595" data-start="{" data-end="}">
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9e16512f0f1ee0f05ccebe9fd4199d15">  595</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9e16512f0f1ee0f05ccebe9fd4199d15">reset</a>(U ptr) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>        data_.reset(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(ptr));</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>    }</div>
+</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span></div>
+<div class="foldopen" id="foldopen00602" data-start="{" data-end="}">
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a3b9e3e5a15f0865eb7d104f9498d052c">  602</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a3b9e3e5a15f0865eb7d104f9498d052c">reset</a>(<a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> = <span class="keyword">nullptr</span>) noexcept {</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>        <a class="code hl_function" href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">unique_ptr::reset</a>(<a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">pointer</a>());</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>    }</div>
+</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span></div>
+<div class="foldopen" id="foldopen00610" data-start="{" data-end="}">
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8a09e0389ccad830e6eb29f8b5333b57">  610</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">void</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8a09e0389ccad830e6eb29f8b5333b57">swap</a>(<a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        data_.swap(other.data_);</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    }</div>
+</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span> </div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#af7b8378e519200606d28105970b6a595">  614</a></span>    <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#af7b8378e519200606d28105970b6a595">unique_ptr</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno"><a class="line" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a811910b5dc18f52dd96f853c80f3f37a">  615</a></span>    <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp; <a class="code hl_function" href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">operator =</a>(<span class="keyword">const</span> <a class="code hl_function" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a>&amp;) = <span class="keyword">delete</span>;  </div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>};</div>
+</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span></div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter,</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_swappable&lt;Deleter&gt;::value</a> &amp;&amp; <a class="code hl_variable" href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">is_swappable&lt;T&gt;::value</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00627" data-start="{" data-end="}">
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga3def886ee466fc780671110b23c22e0d">  627</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, Deleter&gt;</a>&amp; lhs, <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, Deleter&gt;</a>&amp; rhs) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    lhs.swap(rhs);</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>}</div>
+</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span></div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00642" data-start="{" data-end="}">
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga2e039c6b9e49d933db1ac1539445e924">  642</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga2e039c6b9e49d933db1ac1539445e924">operator ==</a>(</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    <span class="keywordflow">return</span> lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() == rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>}</div>
+</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span></div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00655" data-start="{" data-end="}">
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gafd5d8431a973b7e88c2b83662ed5b553">  655</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga2e039c6b9e49d933db1ac1539445e924">operator ==</a>(</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <span class="keywordflow">return</span> !lhs;</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>}</div>
+</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span></div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00668" data-start="{" data-end="}">
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga5c5d88f05ed7eea2ba7cd8f22ae2c900">  668</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga2e039c6b9e49d933db1ac1539445e924">operator ==</a>(</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    <span class="keywordflow">return</span> !rhs;</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>}</div>
+</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span></div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00684" data-start="{" data-end="}">
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga0d10eece7e529593dc6583c08d4aa0ba">  684</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga0d10eece7e529593dc6583c08d4aa0ba">operator !=</a>(</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="keywordflow">return</span> lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() != rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>}</div>
+</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span></div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00697" data-start="{" data-end="}">
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaa81f43cac5be85f21cb5fc7aa8897a81">  697</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga0d10eece7e529593dc6583c08d4aa0ba">operator !=</a>(</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(lhs);</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>}</div>
+</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span></div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00710" data-start="{" data-end="}">
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga9d36175d06f29041f3b87d1992eb9c82">  710</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga0d10eece7e529593dc6583c08d4aa0ba">operator !=</a>(</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(rhs);</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>}</div>
+</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span></div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00726" data-start="{" data-end="}">
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gac57ff1dd79c7a12174cfb51867d3b6b5">  726</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gac57ff1dd79c7a12174cfb51867d3b6b5">operator &lt;</a>(</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>    <span class="keyword">using </span>common_t = <a class="code hl_typedef" href="group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84">common_type_t</a>&lt;</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>        <span class="keyword">typename</span> <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">unique_ptr&lt;T, D&gt;::pointer</a>,</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>        <span class="keyword">typename</span> <a class="code hl_typedef" href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">unique_ptr&lt;U, E&gt;::pointer</a>&gt;;</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less&lt;common_t&gt;</a>()(lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>(), rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>());</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>}</div>
+</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span></div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00742" data-start="{" data-end="}">
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gacb305365ebe27fa4b08f8366746d16e8">  742</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gac57ff1dd79c7a12174cfb51867d3b6b5">operator &lt;</a>(</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</a>&gt;()(lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>(), <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>}</div>
+</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span></div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00755" data-start="{" data-end="}">
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga62d95b48fc30554a8a17bae773cd28e9">  755</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gac57ff1dd79c7a12174cfb51867d3b6b5">operator &lt;</a>(</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</a>&gt;()(<span class="keyword">nullptr</span>, rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>());</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>}</div>
+</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span></div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00771" data-start="{" data-end="}">
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075">  771</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075">operator &gt;</a>(</div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keywordflow">return</span> rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>() &lt; lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>();</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>}</div>
+</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span></div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00784" data-start="{" data-end="}">
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaf24cc2d1dc41828a7dadc44989277be3">  784</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075">operator &gt;</a>(</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</a>&gt;()(<span class="keyword">nullptr</span>, lhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>());</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>}</div>
+</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span></div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00797" data-start="{" data-end="}">
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga641dcafc05495ad745fe78f409626369">  797</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075">operator &gt;</a>(</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</a>&gt;()(rhs.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>(), <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>}</div>
+</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span></div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00813" data-start="{" data-end="}">
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gad817ab15dc22c8dd18504afbbadb5073">  813</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gad817ab15dc22c8dd18504afbbadb5073">operator &lt;=</a>(</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    <span class="keywordflow">return</span> !(lhs &gt; rhs);</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>}</div>
+</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span></div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00826" data-start="{" data-end="}">
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gad41de667371a616e5aa51830795b25e6">  826</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gad817ab15dc22c8dd18504afbbadb5073">operator &lt;=</a>(</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    <span class="keywordflow">return</span> !(lhs &gt; <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>}</div>
+</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span></div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00839" data-start="{" data-end="}">
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d">  839</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#gad817ab15dc22c8dd18504afbbadb5073">operator &lt;=</a>(</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    <span class="keywordflow">return</span> !(<span class="keyword">nullptr</span> &gt; rhs);</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>}</div>
+</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span></div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D, <span class="keyword">typename</span> U, <span class="keyword">typename</span> E&gt;</div>
+<div class="foldopen" id="foldopen00855" data-start="{" data-end="}">
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3">  855</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3">operator &gt;=</a>(</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U, E&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    <span class="keywordflow">return</span> !(lhs &lt; rhs);</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>}</div>
+</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span></div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00868" data-start="{" data-end="}">
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga5ddd67c0ff52ee718fde2ce960b50f0c">  868</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3">operator &gt;=</a>(</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; lhs, <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) {</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <span class="keywordflow">return</span> !(lhs &lt; <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>}</div>
+</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span></div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> D&gt;</div>
+<div class="foldopen" id="foldopen00881" data-start="{" data-end="}">
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga9d125b022b79c38f6384b92692ebd2a1">  881</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">bool</span> <a class="code hl_function" href="group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3">operator &gt;=</a>(</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>    <a class="code hl_typedef" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, <span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, D&gt;</a>&amp; rhs) {</div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>    <span class="keywordflow">return</span> !(<span class="keyword">nullptr</span> &lt; rhs);</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>}</div>
+</div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span> </div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span></div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaad50c03769543ab8a0f83240b2152639">  895</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#gaad50c03769543ab8a0f83240b2152639">static_pointer_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp; ptr) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span></div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128">  905</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128">const_pointer_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp; ptr) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span></div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga4a0ef43262a18e3281a1515365f4cc73">  915</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga4a0ef43262a18e3281a1515365f4cc73">reinterpret_pointer_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp; ptr) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span></div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaf11f91854b5e34801552478983db3e00">  925</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#gaf11f91854b5e34801552478983db3e00">dynamic_pointer_cast</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp; ptr) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span> </div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span></div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00936" data-start="{" data-end="}">
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga65025ff0afc45ff0daebc7d1c5424901">  936</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#gaad50c03769543ab8a0f83240b2152639">static_pointer_cast</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp;&amp; ptr) {</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr.release()), ptr.get_deleter());</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>}</div>
+</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span></div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00948" data-start="{" data-end="}">
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gaa1882c39d000059af9a4806b14ee003c">  948</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128">const_pointer_cast</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp;&amp; ptr) {</div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(<span class="keyword">const_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr.release()), ptr.get_deleter());</div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>}</div>
+</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span></div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00960" data-start="{" data-end="}">
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga5ac19d9b78091a60e8306da54e056826">  960</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga4a0ef43262a18e3281a1515365f4cc73">reinterpret_pointer_cast</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp;&amp; ptr) {</div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(<span class="keyword">reinterpret_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr.release()), ptr.get_deleter());</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>}</div>
+</div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span></div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00972" data-start="{" data-end="}">
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gafe56143bed93a0219a73b7f3aca1180b">  972</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#gaf11f91854b5e34801552478983db3e00">dynamic_pointer_cast</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;U&gt;</a>&amp;&amp; ptr) {</div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>    T* tmp = <span class="keyword">dynamic_cast&lt;</span>T*<span class="keyword">&gt;</span>(ptr.release());</div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>    <span class="keywordflow">if</span> (tmp != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(tmp, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(ptr.get_deleter()).template rebind&lt;T&gt;());</div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>    }</div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>}</div>
+</div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span> </div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span></div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</div>
+<div class="foldopen" id="foldopen00987" data-start="{" data-end="};">
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno"><a class="line" href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html">  987</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhash.html">hash</a>&lt;<a class="code hl_class" href="classunique__ptr.html">unique_ptr</a>&lt;T, Deleter&gt;&gt; {</div>
+<div class="foldopen" id="foldopen00993" data-start="{" data-end="}">
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno"><a class="line" href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html#ab39395368c801c244cce1a2476a10653">  993</a></span>    NEFORCE_CONSTEXPR20 <span class="keywordtype">size_t</span> operator ()(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T, Deleter&gt;</a>&amp; ptr) <span class="keyword">const</span></div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_struct" href="structhash.html">hash&lt;T&gt;</a>()(ptr.get()))) {</div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structhash.html">hash&lt;T&gt;</a>()(ptr.get());</div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>    }</div>
+</div>
+<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>};</div>
+</div>
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span> </div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span></div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;!is_array&lt;T&gt;::value</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen01008" data-start="{" data-end="}">
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7"> 1008</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(<span class="keyword">new</span> T(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;Args&gt;</a>(args)...));</div>
+<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>}</div>
+</div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span></div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>template &lt;typename T, enable_if_t&lt;is_unbounded_array&lt;T&gt;::value, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen01019" data-start="{" data-end="}">
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gab4d3b888298c124ec2952f99cf23ef9d"> 1019</a></span>NEFORCE_CONSTEXPR20 <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a>(<span class="keyword">new</span> <a class="code hl_typedef" href="group___remove_qualifiers.html#gaff3a021106d8984e6a7283adfcae4117">remove_extent_t&lt;T&gt;</a>[len]());</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>}</div>
+</div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span></div>
+<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_bounded_array&lt;T&gt;::value</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"><a class="line" href="group___unique_pointer.html#gad7eab479e3aa31dc40743c1c0431cd0b"> 1029</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;T&gt;</a> <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a>(Args&amp;&amp;...) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span> <span class="comment">// UniquePointer</span></div>
+<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span> </div>
+<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</span></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a007644845a7ac5df7d978b2d490b86b4"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a007644845a7ac5df7d978b2d490b86b4">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(U ptr, enable_if_t&lt;!is_lvalue_reference&lt; Del &gt;::value, Del &amp;&amp; &gt; deleter) noexcept</div><div class="ttdoc">从指针和移动删除器构造</div><div class="ttdef"><b>定义</b> <a href="#l00471">unique_ptr.hpp:471</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a036c26c7881d6e934e2467c4094470f2"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a036c26c7881d6e934e2467c4094470f2">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">unique_ptr(unique_ptr &amp;&amp;)=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a0397d22ea05cd43bc444504cd2a69597"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a0397d22ea05cd43bc444504cd2a69597">unique_ptr&lt; T[], Deleter &gt;::get_deleter</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 const deleter_type &amp; get_deleter() const noexcept</div><div class="ttdoc">获取删除器常量引用</div><div class="ttdef"><b>定义</b> <a href="#l00565">unique_ptr.hpp:565</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a2ee129da9363b6b3475290f1509a26da"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a2ee129da9363b6b3475290f1509a26da">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">unique_ptr(U, enable_if_t&lt; is_lvalue_reference&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;)=delete</div><div class="ttdoc">禁止从右值引用删除器构造</div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a337628ce74bdaf0e4246f1deea147071"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a337628ce74bdaf0e4246f1deea147071">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(U ptr) noexcept</div><div class="ttdoc">从指针构造</div><div class="ttdef"><b>定义</b> <a href="#l00448">unique_ptr.hpp:448</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a3b9e3e5a15f0865eb7d104f9498d052c"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a3b9e3e5a15f0865eb7d104f9498d052c">unique_ptr&lt; T[], Deleter &gt;::reset</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void reset(nullptr_t=nullptr) noexcept</div><div class="ttdoc">重置为空指针</div><div class="ttdef"><b>定义</b> <a href="#l00602">unique_ptr.hpp:602</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a555e3e95e5899d41276d58bf27d11462"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a555e3e95e5899d41276d58bf27d11462">unique_ptr&lt; T[], Deleter &gt;::get_deleter</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 deleter_type &amp; get_deleter() noexcept</div><div class="ttdoc">获取删除器引用</div><div class="ttdef"><b>定义</b> <a href="#l00558">unique_ptr.hpp:558</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a730f845540bdebd23e29dbc5af946581"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a730f845540bdebd23e29dbc5af946581">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">constexpr unique_ptr(nullptr_t=nullptr) noexcept</div><div class="ttdoc">空指针构造</div><div class="ttdef"><b>定义</b> <a href="#l00488">unique_ptr.hpp:488</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a73848629a27adffebcc5c8a47a330e6e"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a73848629a27adffebcc5c8a47a330e6e">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</div><div class="ttdoc">从其他unique_ptr转换构造</div><div class="ttdef"><b>定义</b> <a href="#l00498">unique_ptr.hpp:498</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a8a09e0389ccad830e6eb29f8b5333b57"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8a09e0389ccad830e6eb29f8b5333b57">unique_ptr&lt; T[], Deleter &gt;::swap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void swap(unique_ptr &amp;other) noexcept</div><div class="ttdoc">交换两个unique_ptr</div><div class="ttdef"><b>定义</b> <a href="#l00610">unique_ptr.hpp:610</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a8ace3789d9c673b8141ac033485fca51"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8ace3789d9c673b8141ac033485fca51">unique_ptr&lt; T[], Deleter &gt;::element_type</a></div><div class="ttdeci">T element_type</div><div class="ttdoc">元素类型</div><div class="ttdef"><b>定义</b> <a href="#l00424">unique_ptr.hpp:424</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a8e4e3f9349fad379cd3c58b8cf0c53dc"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a8e4e3f9349fad379cd3c58b8cf0c53dc">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(U ptr, const deleter_type &amp;deleter) noexcept</div><div class="ttdoc">从指针和复制删除器构造</div><div class="ttdef"><b>定义</b> <a href="#l00459">unique_ptr.hpp:459</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a90cd8a46e18a6842ed8ed1d30c0d9e0a"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a90cd8a46e18a6842ed8ed1d30c0d9e0a">unique_ptr&lt; T[], Deleter &gt;::~unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 ~unique_ptr()</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00504">unique_ptr.hpp:504</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a94f46cbb8e45deafbf4458282d9e3809"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a94f46cbb8e45deafbf4458282d9e3809">unique_ptr&lt; T[], Deleter &gt;::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="#l00551">unique_ptr.hpp:551</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a9504d2b7f5461b852f2eaf56350b74b1"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9504d2b7f5461b852f2eaf56350b74b1">unique_ptr&lt; T[], Deleter &gt;::deleter_type</a></div><div class="ttdeci">Deleter deleter_type</div><div class="ttdoc">删除器类型</div><div class="ttdef"><b>定义</b> <a href="#l00425">unique_ptr.hpp:425</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_a9e16512f0f1ee0f05ccebe9fd4199d15"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a9e16512f0f1ee0f05ccebe9fd4199d15">unique_ptr&lt; T[], Deleter &gt;::reset</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void reset(U ptr) noexcept</div><div class="ttdoc">重置管理的指针</div><div class="ttdef"><b>定义</b> <a href="#l00595">unique_ptr.hpp:595</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_ad5e742f84c0f704db85f9c7a4921bab0"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ad5e742f84c0f704db85f9c7a4921bab0">unique_ptr&lt; T[], Deleter &gt;::pointer</a></div><div class="ttdeci">typename _INNER __unique_ptr_impl&lt; T, Deleter &gt;::pointer pointer</div><div class="ttdoc">指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00423">unique_ptr.hpp:423</a></div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_af7b8378e519200606d28105970b6a595"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#af7b8378e519200606d28105970b6a595">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</a></div><div class="ttdeci">unique_ptr(const unique_ptr &amp;)=delete</div><div class="ttdoc">禁止复制构造</div></div>
+<div class="ttc" id="aclassunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_html_afeb39ccd70dade8f8fb67c87701b490d"><div class="ttname"><a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#afeb39ccd70dade8f8fb67c87701b490d">unique_ptr&lt; T[], Deleter &gt;::release</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer release() noexcept</div><div class="ttdoc">释放所有权</div><div class="ttdef"><b>定义</b> <a href="#l00580">unique_ptr.hpp:580</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a031e2eb70a769560ba8d41719a2cde0a"><div class="ttname"><a href="classunique__ptr.html#a031e2eb70a769560ba8d41719a2cde0a">unique_ptr::~unique_ptr</a></div><div class="ttdeci">~unique_ptr() noexcept</div><div class="ttdoc">析构函数</div><div class="ttdef"><b>定义</b> <a href="#l00297">unique_ptr.hpp:297</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a04aa7a3fb6a443aa527817467d0529c4"><div class="ttname"><a href="classunique__ptr.html#a04aa7a3fb6a443aa527817467d0529c4">unique_ptr::unique_ptr</a></div><div class="ttdeci">unique_ptr(const unique_ptr &amp;)=delete</div><div class="ttdoc">禁止复制构造</div></div>
+<div class="ttc" id="aclassunique__ptr_html_a070e07e28830e0188bc7f4d3b84c2474"><div class="ttname"><a href="classunique__ptr.html#a070e07e28830e0188bc7f4d3b84c2474">unique_ptr::get_deleter</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 const deleter_type &amp; get_deleter() const noexcept</div><div class="ttdoc">获取删除器常量引用</div><div class="ttdef"><b>定义</b> <a href="#l00368">unique_ptr.hpp:368</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a0897adc49645599a28665301f66a75fe"><div class="ttname"><a href="classunique__ptr.html#a0897adc49645599a28665301f66a75fe">unique_ptr::unique_ptr</a></div><div class="ttdeci">constexpr unique_ptr(nullptr_t=nullptr) noexcept</div><div class="ttdoc">空指针构造</div><div class="ttdef"><b>定义</b> <a href="#l00248">unique_ptr.hpp:248</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a0b73b217dba624cc177e31a92a67abde"><div class="ttname"><a href="classunique__ptr.html#a0b73b217dba624cc177e31a92a67abde">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(pointer ptr, const deleter_type &amp;deleter) noexcept</div><div class="ttdoc">从指针和复制删除器复制构造</div><div class="ttdef"><b>定义</b> <a href="#l00264">unique_ptr.hpp:264</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a0ba4ef13bb1c4661fc036ebcd0a01f5a"><div class="ttname"><a href="classunique__ptr.html#a0ba4ef13bb1c4661fc036ebcd0a01f5a">unique_ptr::reset</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void reset(pointer ptr=pointer()) noexcept</div><div class="ttdoc">重置管理的指针</div><div class="ttdef"><b>定义</b> <a href="#l00390">unique_ptr.hpp:390</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a372af837a21128e149811e6c53d97dc1"><div class="ttname"><a href="classunique__ptr.html#a372af837a21128e149811e6c53d97dc1">unique_ptr::release</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer release() noexcept</div><div class="ttdoc">释放所有权</div><div class="ttdef"><b>定义</b> <a href="#l00383">unique_ptr.hpp:383</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a37d8df72732fc43a9ae2b12a33d71cd5"><div class="ttname"><a href="classunique__ptr.html#a37d8df72732fc43a9ae2b12a33d71cd5">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(pointer ptr) noexcept</div><div class="ttdoc">从指针构造</div><div class="ttdef"><b>定义</b> <a href="#l00256">unique_ptr.hpp:256</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a4d0c960b47f45e09fa187a23e4e10204"><div class="ttname"><a href="classunique__ptr.html#a4d0c960b47f45e09fa187a23e4e10204">unique_ptr::deleter_type</a></div><div class="ttdeci">Deleter deleter_type</div><div class="ttdoc">删除器类型</div><div class="ttdef"><b>定义</b> <a href="#l00234">unique_ptr.hpp:234</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a5b0e52953588ac3a4d9bb65ca3ddfbc0"><div class="ttname"><a href="classunique__ptr.html#a5b0e52953588ac3a4d9bb65ca3ddfbc0">unique_ptr::element_type</a></div><div class="ttdeci">T element_type</div><div class="ttdoc">元素类型</div><div class="ttdef"><b>定义</b> <a href="#l00233">unique_ptr.hpp:233</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a73450603f460b996bb1847b2f536c0f5"><div class="ttname"><a href="classunique__ptr.html#a73450603f460b996bb1847b2f536c0f5">unique_ptr::operator*</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 add_lvalue_reference_t&lt; element_type &gt; operator*() const noexcept(noexcept(*_NEFORCE declval&lt; pointer &gt;()))</div><div class="ttdoc">解引用运算符</div><div class="ttdef"><b>定义</b> <a href="#l00338">unique_ptr.hpp:338</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a8daf3d74c9e6d9003a46a083dfbb2dc7"><div class="ttname"><a href="classunique__ptr.html#a8daf3d74c9e6d9003a46a083dfbb2dc7">unique_ptr::get_deleter</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 deleter_type &amp; get_deleter() noexcept</div><div class="ttdoc">获取删除器引用</div><div class="ttdef"><b>定义</b> <a href="#l00362">unique_ptr.hpp:362</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_a91d8da266b48e5b9704fbb2c3a5de2e7"><div class="ttname"><a href="classunique__ptr.html#a91d8da266b48e5b9704fbb2c3a5de2e7">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(unique_ptr &amp;&amp;)=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassunique__ptr_html_a9d579e03d27a2ae4bfd504bc4f244f3d"><div class="ttname"><a href="classunique__ptr.html#a9d579e03d27a2ae4bfd504bc4f244f3d">unique_ptr::pointer</a></div><div class="ttdeci">typename _INNER __unique_ptr_impl&lt; T, Deleter &gt;::pointer pointer</div><div class="ttdoc">指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00232">unique_ptr.hpp:232</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_aaad36e992e2a4169701ba56b75718638"><div class="ttname"><a href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">unique_ptr::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="#l00354">unique_ptr.hpp:354</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_ac0f7c385918fbd385cd79b8a93aafc1e"><div class="ttname"><a href="classunique__ptr.html#ac0f7c385918fbd385cd79b8a93aafc1e">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(pointer, enable_if_t&lt; is_lvalue_reference&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;)=delete</div><div class="ttdoc">禁止从右值引用删除器构造</div></div>
+<div class="ttc" id="aclassunique__ptr_html_ac76aab0320b12cf48ee7223aef959a11"><div class="ttname"><a href="classunique__ptr.html#ac76aab0320b12cf48ee7223aef959a11">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</div><div class="ttdoc">从其他unique_ptr转换构造</div><div class="ttdef"><b>定义</b> <a href="#l00291">unique_ptr.hpp:291</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_adad9506f6921b78de331b68fccb8b1d2"><div class="ttname"><a href="classunique__ptr.html#adad9506f6921b78de331b68fccb8b1d2">unique_ptr::operator-&gt;</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer operator-&gt;() const noexcept</div><div class="ttdoc">成员访问运算符</div><div class="ttdef"><b>定义</b> <a href="#l00347">unique_ptr.hpp:347</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_adb40e2b3a4e6594b17a1f660c290bc40"><div class="ttname"><a href="classunique__ptr.html#adb40e2b3a4e6594b17a1f660c290bc40">unique_ptr::swap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void swap(unique_ptr &amp;other) noexcept</div><div class="ttdoc">交换两个unique_ptr</div><div class="ttdef"><b>定义</b> <a href="#l00400">unique_ptr.hpp:400</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_ae5126ac024712167a5df454b5205ff0c"><div class="ttname"><a href="classunique__ptr.html#ae5126ac024712167a5df454b5205ff0c">unique_ptr::unique_ptr</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr(pointer ptr, deleter_type &amp;&amp;deleter) noexcept</div><div class="ttdoc">从指针和移动删除器移动构造</div><div class="ttdef"><b>定义</b> <a href="#l00272">unique_ptr.hpp:272</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_af142ef4ee5570389000944c5d9c94d3f"><div class="ttname"><a href="classunique__ptr.html#af142ef4ee5570389000944c5d9c94d3f">unique_ptr::operator=</a></div><div class="ttdeci">unique_ptr &amp; operator=(unique_ptr &amp;&amp;)=default</div><div class="ttdoc">移动赋值运算符</div></div>
+<div class="ttc" id="acompressed__pair_8hpp_html"><div class="ttname"><a href="compressed__pair_8hpp.html">compressed_pair.hpp</a></div><div class="ttdoc">压缩对实现</div></div>
+<div class="ttc" id="adeleter_8hpp_html"><div class="ttname"><a href="deleter_8hpp.html">deleter.hpp</a></div><div class="ttdoc">智能指针删除器</div></div>
+<div class="ttc" id="afunctor_8hpp_html"><div class="ttname"><a href="functor_8hpp.html">functor.hpp</a></div><div class="ttdoc">仿函数</div></div>
+<div class="ttc" id="agroup___add_qualifiers_html_gac084a21f7a057df50ed3f436567e993f"><div class="ttname"><a href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a></div><div class="ttdeci">typename add_reference&lt; T &gt;::lvalue add_lvalue_reference_t</div><div class="ttdoc">add_lvalue_reference的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l01123">type_traits.hpp:1123</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03044">type_traits.hpp:3044</a></div></div>
+<div class="ttc" id="agroup___core_types_html_gafb2c9350d32e78a0e4c960b9859ccb40"><div class="ttname"><a href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></div><div class="ttdeci">decltype(nullptr) nullptr_t</div><div class="ttdoc">空指针类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00025">types.hpp:25</a></div></div>
+<div class="ttc" id="agroup___declval_tools_html_ga7c6502597045c02b014ec72343367f5c"><div class="ttname"><a href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a></div><div class="ttdeci">add_rvalue_reference_t&lt; T &gt; declval() noexcept</div><div class="ttdoc">获取类型的右值引用，仅用于非求值上下文</div></div>
+<div class="ttc" id="agroup___memory_order_html_ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4"><div class="ttname"><a href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a></div><div class="ttdeci">@ release</div><div class="ttdoc">释放操作，确保前面的读写不会被重排到后面</div><div class="ttdef"><b>定义</b> <a href="atomic__base_8hpp_source.html#l00033">atomic_base.hpp:33</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___remove_qualifiers_html_ga5993e4587ccd2777e95893329360358a"><div class="ttname"><a href="group___remove_qualifiers.html#ga5993e4587ccd2777e95893329360358a">remove_reference_t</a></div><div class="ttdeci">typename remove_reference&lt; T &gt;::type remove_reference_t</div><div class="ttdoc">remove_reference的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00490">type_traits.hpp:490</a></div></div>
+<div class="ttc" id="agroup___remove_qualifiers_html_gaff3a021106d8984e6a7283adfcae4117"><div class="ttname"><a href="group___remove_qualifiers.html#gaff3a021106d8984e6a7283adfcae4117">remove_extent_t</a></div><div class="ttdeci">typename remove_extent&lt; T &gt;::type remove_extent_t</div><div class="ttdoc">remove_extent的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00556">type_traits.hpp:556</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___swap_utility_html_ga6a39d376fb4396550fe3dadb383d17df"><div class="ttname"><a href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a></div><div class="ttdeci">void swap()=delete</div><div class="ttdoc">删除无参数的swap重载</div></div>
+<div class="ttc" id="agroup___type_attribute_operations_html_ga63597ca81f0a3a80001c836bc4cbbb84"><div class="ttname"><a href="group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84">common_type_t</a></div><div class="ttdeci">typename common_type&lt; Types... &gt;::type common_type_t</div><div class="ttdoc">common_type的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03675">type_traits.hpp:3675</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gab8ddf9531fc4ac7ce28574db20c8f20e"><div class="ttname"><a href="group___type_traits_utilities.html#gab8ddf9531fc4ac7ce28574db20c8f20e">void_t</a></div><div class="ttdeci">void void_t</div><div class="ttdoc">将任意类型映射为void</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00090">type_traits.hpp:90</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga0d10eece7e529593dc6583c08d4aa0ba"><div class="ttname"><a href="group___unique_pointer.html#ga0d10eece7e529593dc6583c08d4aa0ba">operator!=</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">不等比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00684">unique_ptr.hpp:684</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga1392a16f6940e75495ba167745eff5b7"><div class="ttname"><a href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="#l01008">unique_ptr.hpp:1008</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga2e039c6b9e49d933db1ac1539445e924"><div class="ttname"><a href="group___unique_pointer.html#ga2e039c6b9e49d933db1ac1539445e924">operator==</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">相等比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00642">unique_ptr.hpp:642</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga366aeaf83540a81f667c532c781530e3"><div class="ttname"><a href="group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3">operator&gt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;=(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">大于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00855">unique_ptr.hpp:855</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga4a0ef43262a18e3281a1515365f4cc73"><div class="ttname"><a href="group___unique_pointer.html#ga4a0ef43262a18e3281a1515365f4cc73">reinterpret_pointer_cast</a></div><div class="ttdeci">unique_ptr&lt; T &gt; reinterpret_pointer_cast(const unique_ptr&lt; U &gt; &amp;ptr)=delete</div><div class="ttdoc">禁止的reinterpret_pointer_cast</div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga8236ff854917f0a44e679af28ba98128"><div class="ttname"><a href="group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128">const_pointer_cast</a></div><div class="ttdeci">unique_ptr&lt; T &gt; const_pointer_cast(const unique_ptr&lt; U &gt; &amp;ptr)=delete</div><div class="ttdoc">禁止的const_pointer_cast</div></div>
+<div class="ttc" id="agroup___unique_pointer_html_gaad50c03769543ab8a0f83240b2152639"><div class="ttname"><a href="group___unique_pointer.html#gaad50c03769543ab8a0f83240b2152639">static_pointer_cast</a></div><div class="ttdeci">unique_ptr&lt; T &gt; static_pointer_cast(const unique_ptr&lt; U &gt; &amp;ptr)=delete</div><div class="ttdoc">禁止的static_pointer_cast</div></div>
+<div class="ttc" id="agroup___unique_pointer_html_gac57ff1dd79c7a12174cfb51867d3b6b5"><div class="ttname"><a href="group___unique_pointer.html#gac57ff1dd79c7a12174cfb51867d3b6b5">operator&lt;</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">小于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00726">unique_ptr.hpp:726</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_gad817ab15dc22c8dd18504afbbadb5073"><div class="ttname"><a href="group___unique_pointer.html#gad817ab15dc22c8dd18504afbbadb5073">operator&lt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;=(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">小于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00813">unique_ptr.hpp:813</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_gaf11f91854b5e34801552478983db3e00"><div class="ttname"><a href="group___unique_pointer.html#gaf11f91854b5e34801552478983db3e00">dynamic_pointer_cast</a></div><div class="ttdeci">unique_ptr&lt; T &gt; dynamic_pointer_cast(const unique_ptr&lt; U &gt; &amp;ptr)=delete</div><div class="ttdoc">禁止的dynamic_pointer_cast</div></div>
+<div class="ttc" id="agroup___unique_pointer_html_gaf4c9e805e471b53f0d1758160d98c075"><div class="ttname"><a href="group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075">operator&gt;</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</div><div class="ttdoc">大于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00771">unique_ptr.hpp:771</a></div></div>
+<div class="ttc" id="ainvoke_8hpp_html"><div class="ttname"><a href="invoke_8hpp.html">invoke.hpp</a></div><div class="ttdoc">统一调用接口</div></div>
+<div class="ttc" id="astructcompressed__pair_html_a85011ff9527606e2f8a5d97e7c5c3b68"><div class="ttname"><a href="structcompressed__pair.html#a85011ff9527606e2f8a5d97e7c5c3b68">compressed_pair::value</a></div><div class="ttdeci">T value</div><div class="ttdoc">存储的值</div><div class="ttdef"><b>定义</b> <a href="compressed__pair_8hpp_source.html#l00034">compressed_pair.hpp:34</a></div></div>
+<div class="ttc" id="astructcompressed__pair_html_a85a04540976b1f54013555e57e63b81e"><div class="ttname"><a href="structcompressed__pair.html#a85a04540976b1f54013555e57e63b81e">compressed_pair::get_base</a></div><div class="ttdeci">constexpr compressed_pair &amp; get_base() noexcept</div><div class="ttdoc">获取基类引用</div><div class="ttdef"><b>定义</b> <a href="compressed__pair_8hpp_source.html#l00112">compressed_pair.hpp:112</a></div></div>
+<div class="ttc" id="astructconjunction_html"><div class="ttname"><a href="structconjunction.html">conjunction</a></div><div class="ttdoc">类型集合的逻辑与操作</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00310">type_traits.hpp:310</a></div></div>
+<div class="ttc" id="astructhash_html"><div class="ttname"><a href="structhash.html">hash</a></div><div class="ttdoc">哈希函数的主模板</div><div class="ttdef"><b>定义</b> <a href="hash_8hpp_source.html#l00031">hash.hpp:31</a></div></div>
+<div class="ttc" id="astructintegral__constant_html_acb06165dd4022817b14af1688a5c36f1"><div class="ttname"><a href="structintegral__constant.html#acb06165dd4022817b14af1688a5c36f1">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00031">type_traits.hpp:31</a></div></div>
+<div class="ttc" id="astructis__assignable_html"><div class="ttname"><a href="structis__assignable.html">is_assignable</a></div><div class="ttdoc">判断类型是否可以使用指定类型的值进行赋值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02485">type_traits.hpp:2485</a></div></div>
+<div class="ttc" id="astructis__convertible_html"><div class="ttname"><a href="structis__convertible.html">is_convertible</a></div><div class="ttdoc">判断类型From是否可以隐式转换为类型To</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03164">type_traits.hpp:3170</a></div></div>
+<div class="ttc" id="astructis__copy__constructible_html"><div class="ttname"><a href="structis__copy__constructible.html">is_copy_constructible</a></div><div class="ttdoc">判断类型是否可复制构造</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02395">type_traits.hpp:2396</a></div></div>
+<div class="ttc" id="astructis__invocable_html"><div class="ttname"><a href="structis__invocable.html">is_invocable</a></div><div class="ttdoc">判断类型是否可调用</div><div class="ttdef"><b>定义</b> <a href="invoke_8hpp_source.html#l00401">invoke.hpp:401</a></div></div>
+<div class="ttc" id="astructis__move__constructible_html"><div class="ttname"><a href="structis__move__constructible.html">is_move_constructible</a></div><div class="ttdoc">判断类型是否可移动构造</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02466">type_traits.hpp:2466</a></div></div>
+<div class="ttc" id="astructis__pointer_html"><div class="ttname"><a href="structis__pointer.html">is_pointer</a></div><div class="ttdoc">判断类型是否为指针类型</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l01572">type_traits.hpp:1572</a></div></div>
+<div class="ttc" id="astructis__same_html"><div class="ttname"><a href="structis__same.html">is_same</a></div><div class="ttdoc">判断两个类型是否相同</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00173">type_traits.hpp:173</a></div></div>
+<div class="ttc" id="astructless_html"><div class="ttname"><a href="structless.html">less</a></div><div class="ttdoc">小于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00347">functor.hpp:347</a></div></div>
+<div class="ttc" id="astructnegation_html"><div class="ttname"><a href="structnegation.html">negation</a></div><div class="ttdoc">逻辑非包装器</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00154">type_traits.hpp:154</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>memory</b></li><li class="navelem"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,20 +1,20 @@
-#include <MSTL/core/system/signal.hpp>
-#include <MSTL/core/algorithm/remove.hpp>
-#include <MSTL/core/system/console.hpp>
-#include <MSTL/core/exception/terminate.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/system/signal.hpp>
+#include <NeForce/core/algorithm/remove.hpp>
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/core/exception/terminate.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #include <windef.h>
 #include <WinBase.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <cstring>
 #include <cstdlib>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_INNER__
+NEFORCE_BEGIN_INNER__
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
 static ::BOOL __stdcall windows_handler(const ::DWORD event) {
     signal_manager& manager = signal_manager::instance();
@@ -35,11 +35,11 @@ static void alarm_handler(int sig) {
 
 #endif
 
-MSTL_END_INNER__
+NEFORCE_END_INNER__
 
 
 static thread_local SIGNAL_EVENT current_signal =
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
 #else
     static_cast<SIGNAL_EVENT>(SIGTERM);
@@ -47,7 +47,7 @@ static thread_local SIGNAL_EVENT current_signal =
 
 static thread_local void* signal_context = nullptr;
 
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 unordered_map<SIGNAL_EVENT, int> signal_manager::windows_to_posix_map_ = {
     {SIGNAL_EVENT::CTRL_BREAK, SIGTERM},
     {SIGNAL_EVENT::CLOSE,      SIGHUP},
@@ -75,7 +75,7 @@ signal_manager::~signal_manager() {
 }
 
 void signal_manager::initialize_platform() {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCtrlHandler(_INNER windows_handler, TRUE);
 
     handlers_[SIGNAL_EVENT::INTERRUPT]  = nullptr;
@@ -120,7 +120,7 @@ void signal_manager::initialize_platform() {
 }
 
 void signal_manager::cleanup_platform() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCtrlHandler(_INNER windows_handler, FALSE);
 #else
     for (int sig = 1; sig < 64; ++sig) {
@@ -145,7 +145,7 @@ void signal_manager::register_handler(const SIGNAL_EVENT event, signal_handler h
     lock<mutex> lock(mutex_);
 
     if (!is_platform_signal(event)) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         printcln(color::yellow(), "Registering custom event: ", static_cast<::DWORD>(event));
 #else
         if (is_windows_simulated_event(event)) {
@@ -204,7 +204,7 @@ SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
 void signal_manager::send_signal(SIGNAL_EVENT event, void* context) {
     lock<mutex> lock(mutex_);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (static_cast<DWORD>(event) == CTRL_C_EVENT ||
         static_cast<DWORD>(event) == CTRL_BREAK_EVENT) {
         pending_signals_.emplace_back(event, context, steady_clock::now());
@@ -254,7 +254,7 @@ void signal_manager::start_monitoring() {
     signal_thread_ = thread(&signal_manager::signal_thread_func, this);
     timeout_thread_ = thread(&signal_manager::timeout_monitor_thread, this);
     
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetThreadPriority(signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);
 #else
     ::sched_param param;
@@ -283,7 +283,7 @@ bool signal_manager::is_running() const {
 }
 
 void signal_manager::signal_thread_func() {
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     ::sched_param param;
     param.sched_priority = 10;
     ::pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
@@ -360,7 +360,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
         const bool should_exit = !handler(move(event), move(context));
 
         current_signal =
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
             static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
 #else
             static_cast<SIGNAL_EVENT>(SIGTERM);
@@ -368,11 +368,11 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
         signal_context = nullptr;
 
         if (should_exit && event == SIGNAL_EVENT::FORCE_EXIT) {
-            _MSTL terminate();
+            _NEFORCE terminate();
         }
     } else {
         switch (event) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
             case SIGNAL_EVENT::INTERRUPT:
             case SIGNAL_EVENT::CTRL_BREAK:
             case SIGNAL_EVENT::CLOSE:
@@ -387,7 +387,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
                 running_ = false;
                 break;
             }
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
             case SIGNAL_EVENT::SEGMENT_FAULT:
             case SIGNAL_EVENT::ILLEGAL_INSTR: {
                 printcln(color::red(), "Simulated critical error!");
@@ -416,7 +416,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
 }
 
 bool signal_manager::block_signals(const vector<SIGNAL_EVENT>& signals_to_block) const {
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     ::sigset_t mask;
     ::sigemptyset(&mask);
     
@@ -433,7 +433,7 @@ bool signal_manager::block_signals(const vector<SIGNAL_EVENT>& signals_to_block)
 }
 
 bool signal_manager::unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unblock) const {
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     ::sigset_t mask;
     ::sigemptyset(&mask);
     
@@ -449,4 +449,4 @@ bool signal_manager::unblock_signals(const vector<SIGNAL_EVENT>& signals_to_unbl
     return true;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: env_value.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('env__value_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">env_value.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="env__value_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_FILE_ENV_ENV_VALUE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_FILE_ENV_ENV_VALUE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="istringify_8hpp.html">NeForce/core/interface/istringify.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_define" href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a>(<a class="code hl_struct" href="structenv__exception.html">env_exception</a>, value_exception, <span class="stringliteral">&quot;ENV Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>class <a class="code hl_class" href="classenv__variable.html">env_variable</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classenv__value.html">   46</a></span>class NEFORCE_API <a class="code hl_class" href="classenv__value.html">env_value</a> : public <a class="code hl_class" href="structistringify.html">istringify</a>&lt;<a class="code hl_class" href="classenv__value.html">env_value</a>&gt; {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="};">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5af">   52</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5af">types</a> {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be">   53</a></span>        <a class="code hl_enumvalue" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be">Variable</a>  </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classenv__value.html#aea8033fba4703a097fbcec974276dd45">   59</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classenv__value.html#aea8033fba4703a097fbcec974276dd45">~env_value</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classenv__value.html#a61699803e9ea077a48ee2fc5f8cce019">   65</a></span>    NEFORCE_NODISCARD <span class="keyword">virtual</span> <a class="code hl_enumeration" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5af">types</a> <a class="code hl_function" href="classenv__value.html#a61699803e9ea077a48ee2fc5f8cce019">type</a>() const noexcept = 0;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classenv__value.html#a01e05632f5314d3c2579f54a9dfd5828">   71</a></span>    NEFORCE_NODISCARD virtual const <a class="code hl_class" href="classenv__variable.html">env_variable</a>* <a class="code hl_function" href="classenv__value.html#a01e05632f5314d3c2579f54a9dfd5828">as_variable</a>() const noexcept { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classenv__value.html#aa874d0508a18550e5a332b26d4e919a9">   77</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classenv__value.html#aa874d0508a18550e5a332b26d4e919a9">is_variable</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classenv__value.html#a61699803e9ea077a48ee2fc5f8cce019">type</a>() == <a class="code hl_enumvalue" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be">Variable</a>; }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga51ed38ac998784edffc52e4c4e266c17">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> to_document() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>};</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="};">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classenv__variable.html">  100</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classenv__variable.html#a6046a654c4babe133b6e5b17ebc5438c">env_variable</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classenv__value.html">env_value</a> {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="};">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">  106</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">quote_type</a> {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21">  107</a></span>        <a class="code hl_enumvalue" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21">None</a>,   </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3">  108</a></span>        <a class="code hl_enumvalue" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3">Single</a>, </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50">  109</a></span>        <a class="code hl_enumvalue" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50">Double</a>  </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    };</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">string</span> value_;                  </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    quote_type quote_type_ = None;  </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">bool</span> is_exported_ = <span class="keyword">false</span>;      </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classenv__variable.html#a6046a654c4babe133b6e5b17ebc5438c">  124</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classenv__variable.html#a6046a654c4babe133b6e5b17ebc5438c">env_variable</a>(<span class="keywordtype">string</span> value, <span class="keyword">const</span> <a class="code hl_enumeration" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">quote_type</a> quote = <a class="code hl_enumvalue" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21">None</a>, <span class="keyword">const</span> <span class="keywordtype">bool</span> exported = <span class="keyword">false</span>) noexcept</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    : value_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value)), quote_type_(quote), is_exported_(exported) {}</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classenv__variable.html#a6b238f7727ab92f8b5eca7f797e9e1d0">  131</a></span>    NEFORCE_NODISCARD <a class="code hl_enumeration" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5af">types</a> <a class="code hl_function" href="classenv__variable.html#a6b238f7727ab92f8b5eca7f797e9e1d0">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="classenv__value.html#a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be">Variable</a>; }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classenv__variable.html#a1a5e57fad7ce03c29bfc7580eb1a9085">  137</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_function" href="classenv__variable.html#a6046a654c4babe133b6e5b17ebc5438c">env_variable</a>* <a class="code hl_function" href="classenv__variable.html#a1a5e57fad7ce03c29bfc7580eb1a9085">as_variable</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classenv__variable.html#a04204bb9786394af9be3a8c1a8f3cc3f">  143</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classenv__variable.html#a04204bb9786394af9be3a8c1a8f3cc3f">get_value</a>() const noexcept { <span class="keywordflow">return</span> value_; }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classenv__variable.html#ae71b8878e096f455f05f39d701ef86c8">  149</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__variable.html#ae71b8878e096f455f05f39d701ef86c8">set_value</a>(<span class="keywordtype">string</span> value) <span class="keyword">noexcept</span> { value_ = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value); }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classenv__variable.html#ac7e4e2b71981ae3657284838c5bd2e21">  155</a></span>    NEFORCE_NODISCARD <a class="code hl_enumeration" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">quote_type</a> <a class="code hl_function" href="classenv__variable.html#ac7e4e2b71981ae3657284838c5bd2e21">get_quote_type</a>() const noexcept { <span class="keywordflow">return</span> quote_type_; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classenv__variable.html#a670f0d2edf9af55cbfc1b8bcd8df7b9a">  161</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__variable.html#a670f0d2edf9af55cbfc1b8bcd8df7b9a">set_quote_type</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">quote_type</a> quote) <span class="keyword">noexcept</span> { quote_type_ = quote; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="classenv__variable.html#abcd9ee79f1c851d10a2af6e0b8ac83c7">  167</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classenv__variable.html#abcd9ee79f1c851d10a2af6e0b8ac83c7">is_exported</a>() const noexcept { <span class="keywordflow">return</span> is_exported_; }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classenv__variable.html#a1a663a5c216c5a30ee7a2d62396eb057">  173</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__variable.html#a1a663a5c216c5a30ee7a2d62396eb057">set_exported</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> exported) <span class="keyword">noexcept</span> { is_exported_ = exported; }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classenv__variable.html#a337711fc4af6e60ff01432aae04f0029">  180</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classenv__variable.html#a337711fc4af6e60ff01432aae04f0029">get_int</a>(<span class="keywordtype">int</span> default_value = 0) const noexcept;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classenv__variable.html#a8eea0ed10ff8c02802a87ffabbed5868">  187</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> <a class="code hl_function" href="classenv__variable.html#a8eea0ed10ff8c02802a87ffabbed5868">get_int64</a>(<a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> default_value = 0) const noexcept;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="classenv__variable.html#ae4da71d27fb603fcf3ea1ad0808ddaea">  194</a></span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> <a class="code hl_function" href="classenv__variable.html#ae4da71d27fb603fcf3ea1ad0808ddaea">get_double</a>(<span class="keywordtype">double</span> default_value = 0.0) const noexcept;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="classenv__variable.html#a4af88206d532ba8d44c8c2b4232efd2d">  201</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classenv__variable.html#a4af88206d532ba8d44c8c2b4232efd2d">get_bool</a>(<span class="keywordtype">bool</span> default_value = false) const noexcept;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>};</div>
+</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="foldopen" id="foldopen00212" data-start="{" data-end="};">
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="classenv__document.html">  212</a></span>class NEFORCE_API <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a> final {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;env_variable&gt;</a>&gt; variables_;  </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> comments_;  </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">  221</a></span>    <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>(<span class="keyword">const</span> <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="classenv__document.html#a646438e19f3cec646852a659c940c09c">  230</a></span>    <a class="code hl_function" href="classenv__document.html#a646438e19f3cec646852a659c940c09c">env_document</a>(<a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classenv__document.html#a4a9bc79fd9889797f1e29c792041d965">  237</a></span>    <a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp; operator =(<a class="code hl_function" href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document</a>&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span></div>
+<div class="foldopen" id="foldopen00244" data-start="{" data-end="}">
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="classenv__document.html#af9134380fc056f1a9605a35ec0ef8a9b">  244</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__document.html#af9134380fc056f1a9605a35ec0ef8a9b">add_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;env_variable&gt;</a> variable) {</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        variables_[name] = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(variable);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span></div>
+<div class="foldopen" id="foldopen00255" data-start="{" data-end="}">
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classenv__document.html#a81b7190ea0b57c461429b12ebe628dcb">  255</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__document.html#a81b7190ea0b57c461429b12ebe628dcb">set_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keywordtype">string</span> value,</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                      <a class="code hl_enumeration" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">env_variable::quote_type</a> quote = <a class="code hl_enumvalue" href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21">env_variable::None</a>,</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                      <span class="keywordtype">bool</span> exported = <span class="keyword">false</span>) {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        variables_[name] = <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique&lt;env_variable&gt;</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value), quote, exported);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
+</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span></div>
+<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classenv__document.html#a19357104de5a9477941980c8f8973218">  266</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classenv__variable.html">env_variable</a>* <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = variables_.find(name);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">if</span> (it != variables_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
+</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span></div>
+<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="classenv__document.html#ab5e47024ac20ea40a17908f715390444">  277</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classenv__variable.html">env_variable</a>* <a class="code hl_function" href="classenv__document.html#ab5e47024ac20ea40a17908f715390444">get_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name) {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = variables_.find(name);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <span class="keywordflow">if</span> (it != variables_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    }</div>
+</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span></div>
+<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classenv__document.html#a8338acd16458381a11e658bbf839e47e">  288</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classenv__document.html#a8338acd16458381a11e658bbf839e47e">has_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">return</span> variables_.find(name) != variables_.end();</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
+</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span></div>
+<div class="foldopen" id="foldopen00296" data-start="{" data-end="}">
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="classenv__document.html#a3c1ef5060483e825066c5964ae019497">  296</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__document.html#a3c1ef5060483e825066c5964ae019497">remove_variable</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name) {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        variables_.erase(name);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
+</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span></div>
+<div class="foldopen" id="foldopen00304" data-start="{" data-end="}">
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="classenv__document.html#acf1b192405c264da2144cf12145fda63">  304</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;env_variable&gt;</a>&gt;&amp; <a class="code hl_function" href="classenv__document.html#acf1b192405c264da2144cf12145fda63">get_variables</a>() const noexcept {</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <span class="keywordflow">return</span> variables_;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    }</div>
+</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span></div>
+<div class="foldopen" id="foldopen00312" data-start="{" data-end="}">
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="classenv__document.html#a5dd5d74e5cec10f278e290be98fddca9">  312</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classenv__document.html#a5dd5d74e5cec10f278e290be98fddca9">add_comment</a>(<span class="keywordtype">string</span> comment) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        comments_.emplace_back(<a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(comment));</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    }</div>
+</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span></div>
+<div class="foldopen" id="foldopen00320" data-start="{" data-end="}">
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno"><a class="line" href="classenv__document.html#ad6cc5670f2fab2fcf136fb08ec4ac301">  320</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_function" href="classenv__document.html#ad6cc5670f2fab2fcf136fb08ec4ac301">get_comments</a>() const noexcept {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <span class="keywordflow">return</span> comments_;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    }</div>
+</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span></div>
+<div class="foldopen" id="foldopen00330" data-start="{" data-end="}">
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classenv__document.html#a2ee50a29526af8428366196fa6eab18d">  330</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classenv__document.html#a2ee50a29526af8428366196fa6eab18d">get_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; default_value = <span class="stringliteral">&quot;&quot;</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* var = <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(name);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        <span class="keywordflow">return</span> var ? var-&gt;get_value() : default_value;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    }</div>
+</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span></div>
+<div class="foldopen" id="foldopen00341" data-start="{" data-end="}">
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno"><a class="line" href="classenv__document.html#ae25010d6987565f84d572f8cf8933eab">  341</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classenv__document.html#ae25010d6987565f84d572f8cf8933eab">get_int</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keyword">const</span> <span class="keywordtype">int</span> default_value = 0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* var = <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(name);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordflow">return</span> var ? var-&gt;get_int(default_value) : default_value;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
+</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span></div>
+<div class="foldopen" id="foldopen00352" data-start="{" data-end="}">
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno"><a class="line" href="classenv__document.html#a0f67842dd5a4d9e1a6585030f93048c2">  352</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> <a class="code hl_function" href="classenv__document.html#a0f67842dd5a4d9e1a6585030f93048c2">get_int64</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> default_value = 0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* var = <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(name);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keywordflow">return</span> var ? var-&gt;get_int64(default_value) : default_value;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    }</div>
+</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span></div>
+<div class="foldopen" id="foldopen00363" data-start="{" data-end="}">
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno"><a class="line" href="classenv__document.html#a3620f82893dee8e243f731bfad693510">  363</a></span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> <a class="code hl_function" href="classenv__document.html#a3620f82893dee8e243f731bfad693510">get_double</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keyword">const</span> <span class="keywordtype">double</span> default_value = 0.0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* var = <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(name);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">return</span> var ? var-&gt;get_double(default_value) : default_value;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    }</div>
+</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span></div>
+<div class="foldopen" id="foldopen00374" data-start="{" data-end="}">
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="classenv__document.html#a667a10890be97a8783cf1ed3662783bb">  374</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classenv__document.html#a667a10890be97a8783cf1ed3662783bb">get_bool</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keyword">const</span> <span class="keywordtype">bool</span> default_value = <span class="keyword">false</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* var = <a class="code hl_function" href="classenv__document.html#a19357104de5a9477941980c8f8973218">get_variable</a>(name);</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="keywordflow">return</span> var ? var-&gt;get_bool(default_value) : default_value;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    }</div>
+</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>};</div>
+</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="keywordtype">string</span> NEFORCE_API env_value_to_string(<span class="keyword">const</span> env_value* value, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keywordtype">string</span> NEFORCE_API env_document_to_string(<span class="keyword">const</span> env_document* doc);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span></div>
+<div class="foldopen" id="foldopen00413" data-start="{" data-end="}">
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="group___env_config.html#ga51ed38ac998784edffc52e4c4e266c17">  413</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classenv__value.html">env_value</a>* value) {</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_value_to_string(value);</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>}</div>
+</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span></div>
+<div class="foldopen" id="foldopen00422" data-start="{" data-end="}">
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno"><a class="line" href="group___env_config.html#ga3bef4745c860d3f2819d97256c571fea">  422</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classenv__value.html">env_value</a>&amp; value) {</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_value_to_string(&amp;value);</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>}</div>
+</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span></div>
+<div class="foldopen" id="foldopen00431" data-start="{" data-end="}">
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno"><a class="line" href="group___env_config.html#ga420418bb5bf8c1be8f3d82e6e4a552ce">  431</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;env_value&gt;</a>&amp; value) {</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_value_to_string(value.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>());</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>}</div>
+</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span></div>
+<div class="foldopen" id="foldopen00440" data-start="{" data-end="}">
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno"><a class="line" href="group___env_config.html#ga6763c31dd895542f0bf6b3f3cd6c27b5">  440</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classenv__document.html">env_document</a>&amp; doc) {</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_document_to_string(&amp;doc);</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>}</div>
+</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span> </div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
+<div class="foldopen" id="foldopen00445" data-start="{" data-end="}">
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno"><a class="line" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">  445</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">env_value::to_string</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_value_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>}</div>
+</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span> </div>
+<div class="foldopen" id="foldopen00449" data-start="{" data-end="}">
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="group___env_config.html#gae76b8450372210a70d786ed9fbfe0174">  449</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#gae76b8450372210a70d786ed9fbfe0174">env_value::to_document</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_value_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>}</div>
+</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span> </div>
+<div class="foldopen" id="foldopen00453" data-start="{" data-end="}">
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="group___env_config.html#ga3f671f0fa480e536bb4139128def75ac">  453</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___env_config.html#ga3f671f0fa480e536bb4139128def75ac">env_document::to_string</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> env_document_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>}</div>
+</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span> <span class="comment">// EnvConfig</span></div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span> </div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_FILE_ENV_ENV_VALUE_HPP__</span></div>
+<div class="ttc" id="aclassenv__document_html"><div class="ttname"><a href="classenv__document.html">env_document</a></div><div class="ttdoc">环境变量文档类</div><div class="ttdef"><b>定义</b> <a href="#l00212">env_value.hpp:212</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a0f67842dd5a4d9e1a6585030f93048c2"><div class="ttname"><a href="classenv__document.html#a0f67842dd5a4d9e1a6585030f93048c2">env_document::get_int64</a></div><div class="ttdeci">NEFORCE_NODISCARD int64_t get_int64(const string &amp;name, const int64_t default_value=0) const</div><div class="ttdoc">获取64位整数值</div><div class="ttdef"><b>定义</b> <a href="#l00352">env_value.hpp:352</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a19357104de5a9477941980c8f8973218"><div class="ttname"><a href="classenv__document.html#a19357104de5a9477941980c8f8973218">env_document::get_variable</a></div><div class="ttdeci">NEFORCE_NODISCARD const env_variable * get_variable(const string &amp;name) const</div><div class="ttdoc">获取常量变量指针</div><div class="ttdef"><b>定义</b> <a href="#l00266">env_value.hpp:266</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a2ee50a29526af8428366196fa6eab18d"><div class="ttname"><a href="classenv__document.html#a2ee50a29526af8428366196fa6eab18d">env_document::get_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string get_string(const string &amp;name, const string &amp;default_value=&quot;&quot;) const</div><div class="ttdoc">获取字符串值</div><div class="ttdef"><b>定义</b> <a href="#l00330">env_value.hpp:330</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a3620f82893dee8e243f731bfad693510"><div class="ttname"><a href="classenv__document.html#a3620f82893dee8e243f731bfad693510">env_document::get_double</a></div><div class="ttdeci">NEFORCE_NODISCARD double get_double(const string &amp;name, const double default_value=0.0) const</div><div class="ttdoc">获取双精度浮点值</div><div class="ttdef"><b>定义</b> <a href="#l00363">env_value.hpp:363</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a3c1ef5060483e825066c5964ae019497"><div class="ttname"><a href="classenv__document.html#a3c1ef5060483e825066c5964ae019497">env_document::remove_variable</a></div><div class="ttdeci">void remove_variable(const string &amp;name)</div><div class="ttdoc">移除变量</div><div class="ttdef"><b>定义</b> <a href="#l00296">env_value.hpp:296</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a45c3cc9d435d0f1500e66e556f7cbb37"><div class="ttname"><a href="classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37">env_document::env_document</a></div><div class="ttdeci">env_document()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassenv__document_html_a5dd5d74e5cec10f278e290be98fddca9"><div class="ttname"><a href="classenv__document.html#a5dd5d74e5cec10f278e290be98fddca9">env_document::add_comment</a></div><div class="ttdeci">void add_comment(string comment) noexcept</div><div class="ttdoc">添加注释</div><div class="ttdef"><b>定义</b> <a href="#l00312">env_value.hpp:312</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a646438e19f3cec646852a659c940c09c"><div class="ttname"><a href="classenv__document.html#a646438e19f3cec646852a659c940c09c">env_document::env_document</a></div><div class="ttdeci">env_document(env_document &amp;&amp;other) noexcept=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassenv__document_html_a667a10890be97a8783cf1ed3662783bb"><div class="ttname"><a href="classenv__document.html#a667a10890be97a8783cf1ed3662783bb">env_document::get_bool</a></div><div class="ttdeci">NEFORCE_NODISCARD bool get_bool(const string &amp;name, const bool default_value=false) const</div><div class="ttdoc">获取布尔值</div><div class="ttdef"><b>定义</b> <a href="#l00374">env_value.hpp:374</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a81b7190ea0b57c461429b12ebe628dcb"><div class="ttname"><a href="classenv__document.html#a81b7190ea0b57c461429b12ebe628dcb">env_document::set_variable</a></div><div class="ttdeci">void set_variable(const string &amp;name, string value, env_variable::quote_type quote=env_variable::None, bool exported=false)</div><div class="ttdoc">设置变量</div><div class="ttdef"><b>定义</b> <a href="#l00255">env_value.hpp:255</a></div></div>
+<div class="ttc" id="aclassenv__document_html_a8338acd16458381a11e658bbf839e47e"><div class="ttname"><a href="classenv__document.html#a8338acd16458381a11e658bbf839e47e">env_document::has_variable</a></div><div class="ttdeci">NEFORCE_NODISCARD bool has_variable(const string &amp;name) const</div><div class="ttdoc">检查变量是否存在</div><div class="ttdef"><b>定义</b> <a href="#l00288">env_value.hpp:288</a></div></div>
+<div class="ttc" id="aclassenv__document_html_ab5e47024ac20ea40a17908f715390444"><div class="ttname"><a href="classenv__document.html#ab5e47024ac20ea40a17908f715390444">env_document::get_variable</a></div><div class="ttdeci">NEFORCE_NODISCARD env_variable * get_variable(const string &amp;name)</div><div class="ttdoc">获取变量指针</div><div class="ttdef"><b>定义</b> <a href="#l00277">env_value.hpp:277</a></div></div>
+<div class="ttc" id="aclassenv__document_html_acf1b192405c264da2144cf12145fda63"><div class="ttname"><a href="classenv__document.html#acf1b192405c264da2144cf12145fda63">env_document::get_variables</a></div><div class="ttdeci">NEFORCE_NODISCARD const unordered_map&lt; string, unique_ptr&lt; env_variable &gt; &gt; &amp; get_variables() const noexcept</div><div class="ttdoc">获取所有变量的常量引用</div><div class="ttdef"><b>定义</b> <a href="#l00304">env_value.hpp:304</a></div></div>
+<div class="ttc" id="aclassenv__document_html_ad6cc5670f2fab2fcf136fb08ec4ac301"><div class="ttname"><a href="classenv__document.html#ad6cc5670f2fab2fcf136fb08ec4ac301">env_document::get_comments</a></div><div class="ttdeci">NEFORCE_NODISCARD const vector&lt; string &gt; &amp; get_comments() const noexcept</div><div class="ttdoc">获取所有注释</div><div class="ttdef"><b>定义</b> <a href="#l00320">env_value.hpp:320</a></div></div>
+<div class="ttc" id="aclassenv__document_html_ae25010d6987565f84d572f8cf8933eab"><div class="ttname"><a href="classenv__document.html#ae25010d6987565f84d572f8cf8933eab">env_document::get_int</a></div><div class="ttdeci">NEFORCE_NODISCARD int get_int(const string &amp;name, const int default_value=0) const</div><div class="ttdoc">获取整数值</div><div class="ttdef"><b>定义</b> <a href="#l00341">env_value.hpp:341</a></div></div>
+<div class="ttc" id="aclassenv__document_html_af9134380fc056f1a9605a35ec0ef8a9b"><div class="ttname"><a href="classenv__document.html#af9134380fc056f1a9605a35ec0ef8a9b">env_document::add_variable</a></div><div class="ttdeci">void add_variable(const string &amp;name, unique_ptr&lt; env_variable &gt; variable)</div><div class="ttdoc">添加变量</div><div class="ttdef"><b>定义</b> <a href="#l00244">env_value.hpp:244</a></div></div>
+<div class="ttc" id="aclassenv__value_html"><div class="ttname"><a href="classenv__value.html">env_value</a></div><div class="ttdoc">环境值抽象基类</div><div class="ttdef"><b>定义</b> <a href="#l00046">env_value.hpp:46</a></div></div>
+<div class="ttc" id="aclassenv__value_html_a01e05632f5314d3c2579f54a9dfd5828"><div class="ttname"><a href="classenv__value.html#a01e05632f5314d3c2579f54a9dfd5828">env_value::as_variable</a></div><div class="ttdeci">virtual NEFORCE_NODISCARD const env_variable * as_variable() const noexcept</div><div class="ttdoc">转换为环境变量指针</div><div class="ttdef"><b>定义</b> <a href="#l00071">env_value.hpp:71</a></div></div>
+<div class="ttc" id="aclassenv__value_html_a4b7defaa2e38d393d76981919865b5af"><div class="ttname"><a href="classenv__value.html#a4b7defaa2e38d393d76981919865b5af">env_value::types</a></div><div class="ttdeci">types</div><div class="ttdoc">环境值类型枚举</div><div class="ttdef"><b>定义</b> <a href="#l00052">env_value.hpp:52</a></div></div>
+<div class="ttc" id="aclassenv__value_html_a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be"><div class="ttname"><a href="classenv__value.html#a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be">env_value::Variable</a></div><div class="ttdeci">@ Variable</div><div class="ttdoc">变量类型</div><div class="ttdef"><b>定义</b> <a href="#l00053">env_value.hpp:53</a></div></div>
+<div class="ttc" id="aclassenv__value_html_a61699803e9ea077a48ee2fc5f8cce019"><div class="ttname"><a href="classenv__value.html#a61699803e9ea077a48ee2fc5f8cce019">env_value::type</a></div><div class="ttdeci">virtual NEFORCE_NODISCARD types type() const noexcept=0</div><div class="ttdoc">获取环境值类型</div></div>
+<div class="ttc" id="aclassenv__value_html_aa874d0508a18550e5a332b26d4e919a9"><div class="ttname"><a href="classenv__value.html#aa874d0508a18550e5a332b26d4e919a9">env_value::is_variable</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_variable() const noexcept</div><div class="ttdoc">判断是否为变量类型</div><div class="ttdef"><b>定义</b> <a href="#l00077">env_value.hpp:77</a></div></div>
+<div class="ttc" id="aclassenv__value_html_aea8033fba4703a097fbcec974276dd45"><div class="ttname"><a href="classenv__value.html#aea8033fba4703a097fbcec974276dd45">env_value::~env_value</a></div><div class="ttdeci">virtual ~env_value()=default</div><div class="ttdoc">虚析构函数</div></div>
+<div class="ttc" id="aclassenv__variable_html"><div class="ttname"><a href="classenv__variable.html">env_variable</a></div><div class="ttdoc">环境变量类</div><div class="ttdef"><b>定义</b> <a href="#l00100">env_value.hpp:100</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a04204bb9786394af9be3a8c1a8f3cc3f"><div class="ttname"><a href="classenv__variable.html#a04204bb9786394af9be3a8c1a8f3cc3f">env_variable::get_value</a></div><div class="ttdeci">NEFORCE_NODISCARD const string &amp; get_value() const noexcept</div><div class="ttdoc">获取变量值</div><div class="ttdef"><b>定义</b> <a href="#l00143">env_value.hpp:143</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a1a5e57fad7ce03c29bfc7580eb1a9085"><div class="ttname"><a href="classenv__variable.html#a1a5e57fad7ce03c29bfc7580eb1a9085">env_variable::as_variable</a></div><div class="ttdeci">NEFORCE_NODISCARD const env_variable * as_variable() const noexcept override</div><div class="ttdoc">转换为环境变量指针</div><div class="ttdef"><b>定义</b> <a href="#l00137">env_value.hpp:137</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a1a663a5c216c5a30ee7a2d62396eb057"><div class="ttname"><a href="classenv__variable.html#a1a663a5c216c5a30ee7a2d62396eb057">env_variable::set_exported</a></div><div class="ttdeci">void set_exported(const bool exported) noexcept</div><div class="ttdoc">设置导出标记</div><div class="ttdef"><b>定义</b> <a href="#l00173">env_value.hpp:173</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a337711fc4af6e60ff01432aae04f0029"><div class="ttname"><a href="classenv__variable.html#a337711fc4af6e60ff01432aae04f0029">env_variable::get_int</a></div><div class="ttdeci">NEFORCE_NODISCARD int get_int(int default_value=0) const noexcept</div><div class="ttdoc">获取整数值</div></div>
+<div class="ttc" id="aclassenv__variable_html_a3c9dac569ea7176d7ffc478c6ad4ae40"><div class="ttname"><a href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40">env_variable::quote_type</a></div><div class="ttdeci">quote_type</div><div class="ttdoc">引号类型枚举</div><div class="ttdef"><b>定义</b> <a href="#l00106">env_value.hpp:106</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3"><div class="ttname"><a href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3">env_variable::Single</a></div><div class="ttdeci">@ Single</div><div class="ttdoc">单引号</div><div class="ttdef"><b>定义</b> <a href="#l00108">env_value.hpp:108</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21"><div class="ttname"><a href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21">env_variable::None</a></div><div class="ttdeci">@ None</div><div class="ttdoc">无引号</div><div class="ttdef"><b>定义</b> <a href="#l00107">env_value.hpp:107</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50"><div class="ttname"><a href="classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50">env_variable::Double</a></div><div class="ttdeci">@ Double</div><div class="ttdoc">双引号</div><div class="ttdef"><b>定义</b> <a href="#l00109">env_value.hpp:109</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a4af88206d532ba8d44c8c2b4232efd2d"><div class="ttname"><a href="classenv__variable.html#a4af88206d532ba8d44c8c2b4232efd2d">env_variable::get_bool</a></div><div class="ttdeci">NEFORCE_NODISCARD bool get_bool(bool default_value=false) const noexcept</div><div class="ttdoc">获取布尔值</div></div>
+<div class="ttc" id="aclassenv__variable_html_a6046a654c4babe133b6e5b17ebc5438c"><div class="ttname"><a href="classenv__variable.html#a6046a654c4babe133b6e5b17ebc5438c">env_variable::env_variable</a></div><div class="ttdeci">env_variable(string value, const quote_type quote=None, const bool exported=false) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00124">env_value.hpp:124</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a670f0d2edf9af55cbfc1b8bcd8df7b9a"><div class="ttname"><a href="classenv__variable.html#a670f0d2edf9af55cbfc1b8bcd8df7b9a">env_variable::set_quote_type</a></div><div class="ttdeci">void set_quote_type(const quote_type quote) noexcept</div><div class="ttdoc">设置引号类型</div><div class="ttdef"><b>定义</b> <a href="#l00161">env_value.hpp:161</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a6b238f7727ab92f8b5eca7f797e9e1d0"><div class="ttname"><a href="classenv__variable.html#a6b238f7727ab92f8b5eca7f797e9e1d0">env_variable::type</a></div><div class="ttdeci">NEFORCE_NODISCARD types type() const noexcept override</div><div class="ttdoc">获取类型</div><div class="ttdef"><b>定义</b> <a href="#l00131">env_value.hpp:131</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_a8eea0ed10ff8c02802a87ffabbed5868"><div class="ttname"><a href="classenv__variable.html#a8eea0ed10ff8c02802a87ffabbed5868">env_variable::get_int64</a></div><div class="ttdeci">NEFORCE_NODISCARD int64_t get_int64(int64_t default_value=0) const noexcept</div><div class="ttdoc">获取64位整数值</div></div>
+<div class="ttc" id="aclassenv__variable_html_abcd9ee79f1c851d10a2af6e0b8ac83c7"><div class="ttname"><a href="classenv__variable.html#abcd9ee79f1c851d10a2af6e0b8ac83c7">env_variable::is_exported</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_exported() const noexcept</div><div class="ttdoc">检查是否导出</div><div class="ttdef"><b>定义</b> <a href="#l00167">env_value.hpp:167</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_ac7e4e2b71981ae3657284838c5bd2e21"><div class="ttname"><a href="classenv__variable.html#ac7e4e2b71981ae3657284838c5bd2e21">env_variable::get_quote_type</a></div><div class="ttdeci">NEFORCE_NODISCARD quote_type get_quote_type() const noexcept</div><div class="ttdoc">获取引号类型</div><div class="ttdef"><b>定义</b> <a href="#l00155">env_value.hpp:155</a></div></div>
+<div class="ttc" id="aclassenv__variable_html_ae4da71d27fb603fcf3ea1ad0808ddaea"><div class="ttname"><a href="classenv__variable.html#ae4da71d27fb603fcf3ea1ad0808ddaea">env_variable::get_double</a></div><div class="ttdeci">NEFORCE_NODISCARD double get_double(double default_value=0.0) const noexcept</div><div class="ttdoc">获取双精度浮点值</div></div>
+<div class="ttc" id="aclassenv__variable_html_ae71b8878e096f455f05f39d701ef86c8"><div class="ttname"><a href="classenv__variable.html#ae71b8878e096f455f05f39d701ef86c8">env_variable::set_value</a></div><div class="ttdeci">void set_value(string value) noexcept</div><div class="ttdoc">设置变量值</div><div class="ttdef"><b>定义</b> <a href="#l00149">env_value.hpp:149</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_aaad36e992e2a4169701ba56b75718638"><div class="ttname"><a href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">unique_ptr::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00354">unique_ptr.hpp:354</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00172">vector.hpp:172</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___env_config_html_ga3f671f0fa480e536bb4139128def75ac"><div class="ttname"><a href="group___env_config.html#ga3f671f0fa480e536bb4139128def75ac">env_document::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00453">env_value.hpp:453</a></div></div>
+<div class="ttc" id="agroup___env_config_html_ga4b9196f61d484e7782e29fe7bb875970"><div class="ttname"><a href="group___env_config.html#ga4b9196f61d484e7782e29fe7bb875970">env_value::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00445">env_value.hpp:445</a></div></div>
+<div class="ttc" id="agroup___env_config_html_ga51ed38ac998784edffc52e4c4e266c17"><div class="ttname"><a href="group___env_config.html#ga51ed38ac998784edffc52e4c4e266c17">to_string</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value *value)</div><div class="ttdoc">环境值指针转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00413">env_value.hpp:413</a></div></div>
+<div class="ttc" id="agroup___env_config_html_gae76b8450372210a70d786ed9fbfe0174"><div class="ttname"><a href="group___env_config.html#gae76b8450372210a70d786ed9fbfe0174">env_value::to_document</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_document() const</div><div class="ttdoc">转换为文档字符串</div><div class="ttdef"><b>定义</b> <a href="#l00449">env_value.hpp:449</a></div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga438313508830676344f6ccbfad172758"><div class="ttname"><a href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a></div><div class="ttdeci">#define NEFORCE_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建最终异常类宏</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00064">exception.hpp:64</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga1392a16f6940e75495ba167745eff5b7"><div class="ttname"><a href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l01008">unique_ptr.hpp:1008</a></div></div>
+<div class="ttc" id="aistringify_8hpp_html"><div class="ttname"><a href="istringify_8hpp.html">istringify.hpp</a></div><div class="ttdoc">可字符串化接口</div></div>
+<div class="ttc" id="astructenv__exception_html"><div class="ttname"><a href="structenv__exception.html">env_exception</a></div><div class="ttdoc">env格式操作失败</div></div>
+<div class="ttc" id="astructistringify_html"><div class="ttname"><a href="structistringify.html">istringify</a></div><div class="ttdoc">可字符串化接口</div><div class="ttdef"><b>定义</b> <a href="istringify_8hpp_source.html#l00032">istringify.hpp:32</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>file</b></li><li class="navelem"><b>env</b></li><li class="navelem"><a href="env__value_8hpp.html">env_value.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

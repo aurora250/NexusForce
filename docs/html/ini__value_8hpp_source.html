@@ -1,0 +1,514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: ini_value.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ini__value_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ini_value.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ini__value_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_FILE_INI_INI_VALUE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_FILE_INI_INI_VALUE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="istringify_8hpp.html">NeForce/core/interface/istringify.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_define" href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a>(<a class="code hl_struct" href="structini__exception.html">ini_exception</a>, value_exception, <span class="stringliteral">&quot;INI Operation Failed.&quot;</span>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> <span class="comment">// Exceptions</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>class <a class="code hl_class" href="classini__value.html">ini_value</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>class <a class="code hl_class" href="classini__section.html">ini_section</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>class <a class="code hl_class" href="classini__property.html">ini_property</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classini__value.html">   48</a></span>class NEFORCE_API <a class="code hl_class" href="classini__value.html">ini_value</a> : public <a class="code hl_class" href="structistringify.html">istringify</a>&lt;<a class="code hl_class" href="classini__value.html">ini_value</a>&gt; {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">   54</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">types</a> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">   55</a></span>        <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">Section</a>,  </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">   56</a></span>        <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">Property</a>  </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    };</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classini__value.html#ac1f79723f0630c412b8c15deb2b60725">   62</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classini__value.html#ac1f79723f0630c412b8c15deb2b60725">~ini_value</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classini__value.html#a721b4228adb73ddc402724c6f34889fb">   68</a></span>    NEFORCE_NODISCARD <span class="keyword">virtual</span> <a class="code hl_enumeration" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">types</a> <a class="code hl_function" href="classini__value.html#a721b4228adb73ddc402724c6f34889fb">type</a>() const noexcept = 0;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classini__value.html#aea8366c0aeecc956e688dd6800073f8b">   74</a></span>    NEFORCE_NODISCARD virtual const <a class="code hl_class" href="classini__section.html">ini_section</a>* <a class="code hl_function" href="classini__value.html#aea8366c0aeecc956e688dd6800073f8b">as_section</a>() const noexcept { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classini__value.html#afdd462e394276b2b6f9adb7436cd755d">   80</a></span>    NEFORCE_NODISCARD <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* <a class="code hl_function" href="classini__value.html#afdd462e394276b2b6f9adb7436cd755d">as_property</a>() const noexcept { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classini__value.html#aeba633d0c30110bc93e5602b52d04474">   86</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__value.html#aeba633d0c30110bc93e5602b52d04474">is_section</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classini__value.html#a721b4228adb73ddc402724c6f34889fb">type</a>() == <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">Section</a>; }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classini__value.html#a21831bfb54cc6721ee70433915d11227">   92</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__value.html#a21831bfb54cc6721ee70433915d11227">is_property</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classini__value.html#a721b4228adb73ddc402724c6f34889fb">type</a>() == <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">Property</a>; }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga339ebd18befc1e220495c0392f94d9da">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> to_document() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classini__property.html">  115</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classini__property.html#a52d5c591bffd50853791709083e96abc">ini_property</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classini__value.html">ini_value</a> {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">string</span> value_;  </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classini__property.html#a52d5c591bffd50853791709083e96abc">  124</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classini__property.html#a52d5c591bffd50853791709083e96abc">ini_property</a>(<span class="keywordtype">string</span> value) noexcept</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    : value_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value)) {}</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classini__property.html#a4c41a9e8c251ed0e03f02240e15e4f12">  131</a></span>    NEFORCE_NODISCARD <a class="code hl_enumeration" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">types</a> <a class="code hl_function" href="classini__property.html#a4c41a9e8c251ed0e03f02240e15e4f12">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">Property</a>; }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classini__property.html#a8d1b3c477368a5d1e6c20d045846d2bf">  137</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_function" href="classini__property.html#a52d5c591bffd50853791709083e96abc">ini_property</a>* <a class="code hl_function" href="classini__property.html#a8d1b3c477368a5d1e6c20d045846d2bf">as_property</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classini__property.html#a9ec12d57e8e895cbd2834976a77d598e">  143</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classini__property.html#a9ec12d57e8e895cbd2834976a77d598e">get_value</a>() const noexcept { <span class="keywordflow">return</span> value_; }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classini__property.html#abd2d7fd6a4392725d6572047132fcf60">  149</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classini__property.html#abd2d7fd6a4392725d6572047132fcf60">set_value</a>(<span class="keywordtype">string</span> value) <span class="keyword">noexcept</span> { value_ = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value); }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classini__property.html#a841b1832b8cc3974109c32abf2245b81">  156</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classini__property.html#a841b1832b8cc3974109c32abf2245b81">get_int</a>(<span class="keywordtype">int</span> default_value = 0) const noexcept;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classini__property.html#a91e2c323dd2d782a5cf3bce1e5eef252">  163</a></span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> <a class="code hl_function" href="classini__property.html#a91e2c323dd2d782a5cf3bce1e5eef252">get_double</a>(<span class="keywordtype">double</span> default_value = 0.0) const noexcept;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classini__property.html#aa12d3d2e929bf07faf3288ce4b2b9427">  170</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__property.html#aa12d3d2e929bf07faf3288ce4b2b9427">get_bool</a>(<span class="keywordtype">bool</span> default_value = false) const noexcept;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>};</div>
+</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span></div>
+<div class="foldopen" id="foldopen00181" data-start="{" data-end="};">
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classini__section.html">  181</a></span>class NEFORCE_API ini_section final : public <a class="code hl_class" href="classini__value.html">ini_value</a> {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;ini_property&gt;</a>&gt; properties_;  </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordtype">string</span> name_{};   </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    ini_section() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span></div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classini__section.html#aace03d46152dcf1568e8c110e426dedd">  193</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classini__section.html#aace03d46152dcf1568e8c110e426dedd">ini_section</a>(<span class="keywordtype">string</span> name) noexcept</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    : name_(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(name)) {}</div>
+</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <a class="code hl_class" href="classini__section.html">ini_section</a>(<span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <a class="code hl_class" href="classini__section.html">ini_section</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classini__section.html#a7af51ac11e4a14f4bbe9431a738594d4">  203</a></span>    <a class="code hl_function" href="classini__section.html#a7af51ac11e4a14f4bbe9431a738594d4">ini_section</a>(ini_section&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classini__section.html#acc341158b740c4cedc0fba41c3e19eaf">  210</a></span>    ini_section&amp; operator =(ini_section&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classini__section.html#a9aad0d586d89f3086f31f99a70d35577">  216</a></span>    NEFORCE_NODISCARD <a class="code hl_enumeration" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">types</a> <a class="code hl_function" href="classini__section.html#a9aad0d586d89f3086f31f99a70d35577">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">Section</a>; }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="classini__section.html#a048e7f1be2af206b142718b902a804ae">  222</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> ini_section* <a class="code hl_function" href="classini__section.html#a048e7f1be2af206b142718b902a804ae">as_section</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="keyword">this</span>; }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classini__section.html#ac1a10078457ac0ebe02550ba02d16f45">  228</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classini__section.html#ac1a10078457ac0ebe02550ba02d16f45">get_name</a>() const noexcept { <span class="keywordflow">return</span> name_; }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="classini__section.html#a4e0fd26ecdb47cf9d234c97765297193">  234</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classini__section.html#a4e0fd26ecdb47cf9d234c97765297193">set_name</a>(<span class="keywordtype">string</span> name) <span class="keyword">noexcept</span> { name_ = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(name); }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span></div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="classini__section.html#afe373c9c751b4810ffaff7e2d2412dd8">  241</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classini__section.html#afe373c9c751b4810ffaff7e2d2412dd8">add_property</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_property&gt;</a> property) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        properties_[key] = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(property);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    }</div>
+</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span></div>
+<div class="foldopen" id="foldopen00250" data-start="{" data-end="}">
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="classini__section.html#aff20d7467b26968d562ebb85e2d5be84">  250</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classini__section.html#aff20d7467b26968d562ebb85e2d5be84">set_property</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">string</span> value) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        properties_[key] = <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique&lt;ini_property&gt;</a>(<a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(value));</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
+</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span></div>
+<div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">  259</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* <a class="code hl_function" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">get_property</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = properties_.find(key);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keywordflow">if</span> (it != properties_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    }</div>
+</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span></div>
+<div class="foldopen" id="foldopen00270" data-start="{" data-end="}">
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="classini__section.html#a6b94abf0d6853be7d3943f38fd61ac6f">  270</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classini__property.html">ini_property</a>* <a class="code hl_function" href="classini__section.html#a6b94abf0d6853be7d3943f38fd61ac6f">get_property</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key) {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = properties_.find(key);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">if</span> (it != properties_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
+</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span></div>
+<div class="foldopen" id="foldopen00281" data-start="{" data-end="}">
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="classini__section.html#af8a1de61b5a471bd121ff50adac75058">  281</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__section.html#af8a1de61b5a471bd121ff50adac75058">has_property</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">return</span> properties_.find(key) != properties_.end();</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    }</div>
+</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span></div>
+<div class="foldopen" id="foldopen00289" data-start="{" data-end="}">
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="classini__section.html#ac7c2d6f76bdf5ee3aeac6a4d17d191ee">  289</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;ini_property&gt;</a>&gt;&amp; <a class="code hl_function" href="classini__section.html#ac7c2d6f76bdf5ee3aeac6a4d17d191ee">get_properties</a>() const noexcept {</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span> properties_;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span></div>
+<div class="foldopen" id="foldopen00299" data-start="{" data-end="}">
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classini__section.html#a665924e08fdd706108eba39def61dca9">  299</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classini__section.html#a665924e08fdd706108eba39def61dca9">get_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; default_value = <span class="stringliteral">&quot;&quot;</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* prop = <a class="code hl_function" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">get_property</a>(key);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="keywordflow">return</span> prop ? prop-&gt;<a class="code hl_function" href="classini__property.html#a9ec12d57e8e895cbd2834976a77d598e">get_value</a>() : default_value;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    }</div>
+</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span></div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="}">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classini__section.html#ac64e7b3461eafb76535ec916a8953359">  310</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classini__section.html#ac64e7b3461eafb76535ec916a8953359">get_int</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">int</span> default_value = 0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* prop = <a class="code hl_function" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">get_property</a>(key);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="keywordflow">return</span> prop ? prop-&gt;<a class="code hl_function" href="classini__property.html#a841b1832b8cc3974109c32abf2245b81">get_int</a>(default_value) : default_value;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    }</div>
+</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span></div>
+<div class="foldopen" id="foldopen00321" data-start="{" data-end="}">
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classini__section.html#aa1eac6426e2698bbaa25c2038fdfb2bf">  321</a></span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> <a class="code hl_function" href="classini__section.html#aa1eac6426e2698bbaa25c2038fdfb2bf">get_double</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">double</span> default_value = 0.0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* prop = <a class="code hl_function" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">get_property</a>(key);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <span class="keywordflow">return</span> prop ? prop-&gt;<a class="code hl_function" href="classini__property.html#a91e2c323dd2d782a5cf3bce1e5eef252">get_double</a>(default_value) : default_value;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
+</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span></div>
+<div class="foldopen" id="foldopen00332" data-start="{" data-end="}">
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="classini__section.html#ad528f63992e01c210a3f29d9881cef54">  332</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__section.html#ad528f63992e01c210a3f29d9881cef54">get_bool</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">bool</span> default_value = <span class="keyword">false</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__property.html">ini_property</a>* prop = <a class="code hl_function" href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">get_property</a>(key);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">return</span> prop ? prop-&gt;<a class="code hl_function" href="classini__property.html#aa12d3d2e929bf07faf3288ce4b2b9427">get_bool</a>(default_value) : default_value;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    }</div>
+</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>};</div>
+</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span></div>
+<div class="foldopen" id="foldopen00346" data-start="{" data-end="};">
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno"><a class="line" href="classini__document.html">  346</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document</a> final {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;ini_section&gt;</a>&gt; sections_;  </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_section&gt;</a> global_section_;  </div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00357" data-start="{" data-end="}">
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">  357</a></span>    <a class="code hl_function" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document</a>()</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    : global_section_(<a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a>&lt;<a class="code hl_class" href="classini__section.html">ini_section</a>&gt;(<span class="stringliteral">&quot;&quot;</span>)) {}</div>
+</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <a class="code hl_class" href="classini__document.html">ini_document</a>(<span class="keyword">const</span> <a class="code hl_class" href="classini__document.html">ini_document</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <a class="code hl_class" href="classini__document.html">ini_document</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_class" href="classini__document.html">ini_document</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno"><a class="line" href="classini__document.html#af47f33d45370ff9f9d58b9c5ed5a36b6">  367</a></span>    <a class="code hl_function" href="classini__document.html#af47f33d45370ff9f9d58b9c5ed5a36b6">ini_document</a>(<a class="code hl_function" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document</a>&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="classini__document.html#af54adac8913fa4335850f5ea41c05530">  374</a></span>    <a class="code hl_function" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document</a>&amp; operator =(<a class="code hl_function" href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document</a>&amp;&amp; other) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span></div>
+<div class="foldopen" id="foldopen00383" data-start="{" data-end="}">
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno"><a class="line" href="classini__document.html#adf0d69636ff1a6c09b8191eda8164ddf">  383</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classini__document.html#adf0d69636ff1a6c09b8191eda8164ddf">add_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_section&gt;</a> section) {</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">if</span> (name.<a class="code hl_function" href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">empty</a>()) {</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            global_section_ = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(section);</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>            sections_[name] = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(section);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        }</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    }</div>
+</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span></div>
+<div class="foldopen" id="foldopen00396" data-start="{" data-end="}">
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno"><a class="line" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">  396</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* <a class="code hl_function" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">get_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keywordflow">if</span> (name.<a class="code hl_function" href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">empty</a>()) <span class="keywordflow">return</span> global_section_.get();</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = sections_.find(name);</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keywordflow">if</span> (it != sections_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    }</div>
+</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span></div>
+<div class="foldopen" id="foldopen00408" data-start="{" data-end="}">
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno"><a class="line" href="classini__document.html#acd03326fe4f1daee0e4381590a5dbdf3">  408</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classini__section.html">ini_section</a>* <a class="code hl_function" href="classini__document.html#acd03326fe4f1daee0e4381590a5dbdf3">get_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name) {</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <span class="keywordflow">if</span> (name.<a class="code hl_function" href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">empty</a>()) <span class="keywordflow">return</span> global_section_.get();</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = sections_.find(name);</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        <span class="keywordflow">if</span> (it != sections_.end()) <span class="keywordflow">return</span> it-&gt;second.get();</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    }</div>
+</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span></div>
+<div class="foldopen" id="foldopen00420" data-start="{" data-end="}">
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno"><a class="line" href="classini__document.html#a39180b19126198a95f268753ba91df8f">  420</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__document.html#a39180b19126198a95f268753ba91df8f">has_section</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        <span class="keywordflow">if</span> (name.<a class="code hl_function" href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">empty</a>()) <span class="keywordflow">return</span> global_section_ != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        <span class="keywordflow">return</span> sections_.find(name) != sections_.end();</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    }</div>
+</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span></div>
+<div class="foldopen" id="foldopen00429" data-start="{" data-end="}">
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno"><a class="line" href="classini__document.html#a39b134e975024849cddaac33f34dc93a">  429</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, unique_ptr&lt;ini_section&gt;</a>&gt;&amp; <a class="code hl_function" href="classini__document.html#a39b134e975024849cddaac33f34dc93a">get_sections</a>() const noexcept {</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keywordflow">return</span> sections_;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    }</div>
+</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span></div>
+<div class="foldopen" id="foldopen00437" data-start="{" data-end="}">
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno"><a class="line" href="classini__document.html#a60e6c5b52b64e37fa96bb65166dabc3d">  437</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* <a class="code hl_function" href="classini__document.html#a60e6c5b52b64e37fa96bb65166dabc3d">get_global_section</a>() const noexcept {</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>        <span class="keywordflow">return</span> global_section_.get();</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    }</div>
+</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span></div>
+<div class="foldopen" id="foldopen00445" data-start="{" data-end="}">
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno"><a class="line" href="classini__document.html#a2964601ed0a25ee274a8dbdbc5997f91">  445</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classini__section.html">ini_section</a>* <a class="code hl_function" href="classini__document.html#a2964601ed0a25ee274a8dbdbc5997f91">get_global_section</a>() noexcept {</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        <span class="keywordflow">return</span> global_section_.get();</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    }</div>
+</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span></div>
+<div class="foldopen" id="foldopen00456" data-start="{" data-end="}">
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno"><a class="line" href="classini__document.html#a337d79602e5de4c228eed1bf75761980">  456</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classini__document.html#a337d79602e5de4c228eed1bf75761980">get_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; section, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; default_value = <span class="stringliteral">&quot;&quot;</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* sec = <a class="code hl_function" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">get_section</a>(section);</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>        <span class="keywordflow">return</span> sec ? sec-&gt;<a class="code hl_function" href="classini__section.html#a665924e08fdd706108eba39def61dca9">get_string</a>(key, default_value) : default_value;</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    }</div>
+</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span></div>
+<div class="foldopen" id="foldopen00468" data-start="{" data-end="}">
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno"><a class="line" href="classini__document.html#a59c26f81f45c74eec5fc4acc8db60c0c">  468</a></span>    NEFORCE_NODISCARD <span class="keywordtype">int</span> <a class="code hl_function" href="classini__document.html#a59c26f81f45c74eec5fc4acc8db60c0c">get_int</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; section, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">int</span> default_value = 0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* sec = <a class="code hl_function" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">get_section</a>(section);</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>        <span class="keywordflow">return</span> sec ? sec-&gt;<a class="code hl_function" href="classini__section.html#ac64e7b3461eafb76535ec916a8953359">get_int</a>(key, default_value) : default_value;</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    }</div>
+</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span></div>
+<div class="foldopen" id="foldopen00480" data-start="{" data-end="}">
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno"><a class="line" href="classini__document.html#a94713bb28421068a89320ca927d62679">  480</a></span>    NEFORCE_NODISCARD <span class="keywordtype">double</span> <a class="code hl_function" href="classini__document.html#a94713bb28421068a89320ca927d62679">get_double</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; section, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">double</span> default_value = 0.0)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* sec = <a class="code hl_function" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">get_section</a>(section);</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>        <span class="keywordflow">return</span> sec ? sec-&gt;<a class="code hl_function" href="classini__section.html#aa1eac6426e2698bbaa25c2038fdfb2bf">get_double</a>(key, default_value) : default_value;</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>    }</div>
+</div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span></div>
+<div class="foldopen" id="foldopen00492" data-start="{" data-end="}">
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno"><a class="line" href="classini__document.html#aabf27f8bc55b8a2701eae8a309af9a3b">  492</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classini__document.html#aabf27f8bc55b8a2701eae8a309af9a3b">get_bool</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; section, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">bool</span> default_value = <span class="keyword">false</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>        <span class="keyword">const</span> <a class="code hl_class" href="classini__section.html">ini_section</a>* sec = <a class="code hl_function" href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">get_section</a>(section);</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>        <span class="keywordflow">return</span> sec ? sec-&gt;<a class="code hl_function" href="classini__section.html#ad528f63992e01c210a3f29d9881cef54">get_bool</a>(key, default_value) : default_value;</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    }</div>
+</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span></div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">to_string</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>};</div>
+</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span></div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span></div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span><span class="keywordtype">string</span> NEFORCE_API ini_value_to_string(<span class="keyword">const</span> ini_value* value);</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span></div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span><span class="keywordtype">string</span> NEFORCE_API ini_document_to_string(<span class="keyword">const</span> ini_document* doc);</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span> </div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span> </div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span></div>
+<div class="foldopen" id="foldopen00530" data-start="{" data-end="}">
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno"><a class="line" href="group___ini_config.html#ga339ebd18befc1e220495c0392f94d9da">  530</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classini__value.html">ini_value</a>* value) {</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_value_to_string(value);</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>}</div>
+</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span></div>
+<div class="foldopen" id="foldopen00539" data-start="{" data-end="}">
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno"><a class="line" href="group___ini_config.html#gad57ea443840597329ace1f7f9092ffb7">  539</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classini__value.html">ini_value</a>&amp; value) {</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_value_to_string(&amp;value);</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>}</div>
+</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span></div>
+<div class="foldopen" id="foldopen00548" data-start="{" data-end="}">
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno"><a class="line" href="group___ini_config.html#ga130d9b71a44899abb7d3fd0357913b93">  548</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;ini_value&gt;</a>&amp; value) {</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_value_to_string(value.<a class="code hl_function" href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">get</a>());</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>}</div>
+</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span></div>
+<div class="foldopen" id="foldopen00557" data-start="{" data-end="}">
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno"><a class="line" href="group___ini_config.html#gac7d6c8791d6e3d9bc93729b53e9a416b">  557</a></span>NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">to_string</a>(<span class="keyword">const</span> <a class="code hl_class" href="classini__document.html">ini_document</a>&amp; doc) {</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_document_to_string(&amp;doc);</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>}</div>
+</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span> </div>
+<div class="foldopen" id="foldopen00561" data-start="{" data-end="}">
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno"><a class="line" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">  561</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">ini_value::to_string</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_value_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>}</div>
+</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
+<div class="foldopen" id="foldopen00565" data-start="{" data-end="}">
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno"><a class="line" href="group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147">  565</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147">ini_value::to_document</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_value_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>}</div>
+</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span> </div>
+<div class="foldopen" id="foldopen00569" data-start="{" data-end="}">
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno"><a class="line" href="group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b">  569</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keywordtype">string</span> <a class="code hl_function" href="group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b">ini_document::to_string</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> ini_document_to_string(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>}</div>
+</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> <span class="comment">// IniConfig</span></div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span> </div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_FILE_INI_INI_VALUE_HPP__</span></div>
+<div class="ttc" id="aclassbasic__string_html_add7a1394ef40179cf7b12b4f98c38f9d"><div class="ttname"><a href="classbasic__string.html#add7a1394ef40179cf7b12b4f98c38f9d">basic_string::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01271">basic_string.hpp:1271</a></div></div>
+<div class="ttc" id="aclassini__document_html"><div class="ttname"><a href="classini__document.html">ini_document</a></div><div class="ttdoc">ini文档类</div><div class="ttdef"><b>定义</b> <a href="#l00346">ini_value.hpp:346</a></div></div>
+<div class="ttc" id="aclassini__document_html_a078513d51cc82dab3fcf523b4a51ab92"><div class="ttname"><a href="classini__document.html#a078513d51cc82dab3fcf523b4a51ab92">ini_document::get_section</a></div><div class="ttdeci">NEFORCE_NODISCARD const ini_section * get_section(const string &amp;name) const</div><div class="ttdoc">获取常量节指针</div><div class="ttdef"><b>定义</b> <a href="#l00396">ini_value.hpp:396</a></div></div>
+<div class="ttc" id="aclassini__document_html_a2964601ed0a25ee274a8dbdbc5997f91"><div class="ttname"><a href="classini__document.html#a2964601ed0a25ee274a8dbdbc5997f91">ini_document::get_global_section</a></div><div class="ttdeci">NEFORCE_NODISCARD ini_section * get_global_section() noexcept</div><div class="ttdoc">获取全局节的指针</div><div class="ttdef"><b>定义</b> <a href="#l00445">ini_value.hpp:445</a></div></div>
+<div class="ttc" id="aclassini__document_html_a32fd6d1eb003f7a3971d90575f8cd0cc"><div class="ttname"><a href="classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc">ini_document::ini_document</a></div><div class="ttdeci">ini_document()</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00357">ini_value.hpp:357</a></div></div>
+<div class="ttc" id="aclassini__document_html_a337d79602e5de4c228eed1bf75761980"><div class="ttname"><a href="classini__document.html#a337d79602e5de4c228eed1bf75761980">ini_document::get_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string get_string(const string &amp;section, const string &amp;key, const string &amp;default_value=&quot;&quot;) const</div><div class="ttdoc">获取字符串值</div><div class="ttdef"><b>定义</b> <a href="#l00456">ini_value.hpp:456</a></div></div>
+<div class="ttc" id="aclassini__document_html_a39180b19126198a95f268753ba91df8f"><div class="ttname"><a href="classini__document.html#a39180b19126198a95f268753ba91df8f">ini_document::has_section</a></div><div class="ttdeci">NEFORCE_NODISCARD bool has_section(const string &amp;name) const</div><div class="ttdoc">检查节是否存在</div><div class="ttdef"><b>定义</b> <a href="#l00420">ini_value.hpp:420</a></div></div>
+<div class="ttc" id="aclassini__document_html_a39b134e975024849cddaac33f34dc93a"><div class="ttname"><a href="classini__document.html#a39b134e975024849cddaac33f34dc93a">ini_document::get_sections</a></div><div class="ttdeci">NEFORCE_NODISCARD const unordered_map&lt; string, unique_ptr&lt; ini_section &gt; &gt; &amp; get_sections() const noexcept</div><div class="ttdoc">获取所有节的常量引用</div><div class="ttdef"><b>定义</b> <a href="#l00429">ini_value.hpp:429</a></div></div>
+<div class="ttc" id="aclassini__document_html_a59c26f81f45c74eec5fc4acc8db60c0c"><div class="ttname"><a href="classini__document.html#a59c26f81f45c74eec5fc4acc8db60c0c">ini_document::get_int</a></div><div class="ttdeci">NEFORCE_NODISCARD int get_int(const string &amp;section, const string &amp;key, int default_value=0) const</div><div class="ttdoc">获取整数值</div><div class="ttdef"><b>定义</b> <a href="#l00468">ini_value.hpp:468</a></div></div>
+<div class="ttc" id="aclassini__document_html_a60e6c5b52b64e37fa96bb65166dabc3d"><div class="ttname"><a href="classini__document.html#a60e6c5b52b64e37fa96bb65166dabc3d">ini_document::get_global_section</a></div><div class="ttdeci">NEFORCE_NODISCARD const ini_section * get_global_section() const noexcept</div><div class="ttdoc">获取全局节的常量指针</div><div class="ttdef"><b>定义</b> <a href="#l00437">ini_value.hpp:437</a></div></div>
+<div class="ttc" id="aclassini__document_html_a94713bb28421068a89320ca927d62679"><div class="ttname"><a href="classini__document.html#a94713bb28421068a89320ca927d62679">ini_document::get_double</a></div><div class="ttdeci">NEFORCE_NODISCARD double get_double(const string &amp;section, const string &amp;key, double default_value=0.0) const</div><div class="ttdoc">获取双精度浮点值</div><div class="ttdef"><b>定义</b> <a href="#l00480">ini_value.hpp:480</a></div></div>
+<div class="ttc" id="aclassini__document_html_aabf27f8bc55b8a2701eae8a309af9a3b"><div class="ttname"><a href="classini__document.html#aabf27f8bc55b8a2701eae8a309af9a3b">ini_document::get_bool</a></div><div class="ttdeci">NEFORCE_NODISCARD bool get_bool(const string &amp;section, const string &amp;key, bool default_value=false) const</div><div class="ttdoc">获取布尔值</div><div class="ttdef"><b>定义</b> <a href="#l00492">ini_value.hpp:492</a></div></div>
+<div class="ttc" id="aclassini__document_html_acd03326fe4f1daee0e4381590a5dbdf3"><div class="ttname"><a href="classini__document.html#acd03326fe4f1daee0e4381590a5dbdf3">ini_document::get_section</a></div><div class="ttdeci">NEFORCE_NODISCARD ini_section * get_section(const string &amp;name)</div><div class="ttdoc">获取节指针</div><div class="ttdef"><b>定义</b> <a href="#l00408">ini_value.hpp:408</a></div></div>
+<div class="ttc" id="aclassini__document_html_adf0d69636ff1a6c09b8191eda8164ddf"><div class="ttname"><a href="classini__document.html#adf0d69636ff1a6c09b8191eda8164ddf">ini_document::add_section</a></div><div class="ttdeci">void add_section(const string &amp;name, unique_ptr&lt; ini_section &gt; section)</div><div class="ttdoc">添加节</div><div class="ttdef"><b>定义</b> <a href="#l00383">ini_value.hpp:383</a></div></div>
+<div class="ttc" id="aclassini__document_html_af47f33d45370ff9f9d58b9c5ed5a36b6"><div class="ttname"><a href="classini__document.html#af47f33d45370ff9f9d58b9c5ed5a36b6">ini_document::ini_document</a></div><div class="ttdeci">ini_document(ini_document &amp;&amp;other) noexcept=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassini__property_html"><div class="ttname"><a href="classini__property.html">ini_property</a></div><div class="ttdoc">ini属性类</div><div class="ttdef"><b>定义</b> <a href="#l00115">ini_value.hpp:115</a></div></div>
+<div class="ttc" id="aclassini__property_html_a4c41a9e8c251ed0e03f02240e15e4f12"><div class="ttname"><a href="classini__property.html#a4c41a9e8c251ed0e03f02240e15e4f12">ini_property::type</a></div><div class="ttdeci">NEFORCE_NODISCARD types type() const noexcept override</div><div class="ttdoc">获取类型</div><div class="ttdef"><b>定义</b> <a href="#l00131">ini_value.hpp:131</a></div></div>
+<div class="ttc" id="aclassini__property_html_a52d5c591bffd50853791709083e96abc"><div class="ttname"><a href="classini__property.html#a52d5c591bffd50853791709083e96abc">ini_property::ini_property</a></div><div class="ttdeci">ini_property(string value) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00124">ini_value.hpp:124</a></div></div>
+<div class="ttc" id="aclassini__property_html_a841b1832b8cc3974109c32abf2245b81"><div class="ttname"><a href="classini__property.html#a841b1832b8cc3974109c32abf2245b81">ini_property::get_int</a></div><div class="ttdeci">NEFORCE_NODISCARD int get_int(int default_value=0) const noexcept</div><div class="ttdoc">获取整数值</div></div>
+<div class="ttc" id="aclassini__property_html_a8d1b3c477368a5d1e6c20d045846d2bf"><div class="ttname"><a href="classini__property.html#a8d1b3c477368a5d1e6c20d045846d2bf">ini_property::as_property</a></div><div class="ttdeci">NEFORCE_NODISCARD const ini_property * as_property() const noexcept override</div><div class="ttdoc">转换为属性指针</div><div class="ttdef"><b>定义</b> <a href="#l00137">ini_value.hpp:137</a></div></div>
+<div class="ttc" id="aclassini__property_html_a91e2c323dd2d782a5cf3bce1e5eef252"><div class="ttname"><a href="classini__property.html#a91e2c323dd2d782a5cf3bce1e5eef252">ini_property::get_double</a></div><div class="ttdeci">NEFORCE_NODISCARD double get_double(double default_value=0.0) const noexcept</div><div class="ttdoc">获取双精度浮点值</div></div>
+<div class="ttc" id="aclassini__property_html_a9ec12d57e8e895cbd2834976a77d598e"><div class="ttname"><a href="classini__property.html#a9ec12d57e8e895cbd2834976a77d598e">ini_property::get_value</a></div><div class="ttdeci">NEFORCE_NODISCARD const string &amp; get_value() const noexcept</div><div class="ttdoc">获取属性值</div><div class="ttdef"><b>定义</b> <a href="#l00143">ini_value.hpp:143</a></div></div>
+<div class="ttc" id="aclassini__property_html_aa12d3d2e929bf07faf3288ce4b2b9427"><div class="ttname"><a href="classini__property.html#aa12d3d2e929bf07faf3288ce4b2b9427">ini_property::get_bool</a></div><div class="ttdeci">NEFORCE_NODISCARD bool get_bool(bool default_value=false) const noexcept</div><div class="ttdoc">获取布尔值</div></div>
+<div class="ttc" id="aclassini__property_html_abd2d7fd6a4392725d6572047132fcf60"><div class="ttname"><a href="classini__property.html#abd2d7fd6a4392725d6572047132fcf60">ini_property::set_value</a></div><div class="ttdeci">void set_value(string value) noexcept</div><div class="ttdoc">设置属性值</div><div class="ttdef"><b>定义</b> <a href="#l00149">ini_value.hpp:149</a></div></div>
+<div class="ttc" id="aclassini__section_html"><div class="ttname"><a href="classini__section.html">ini_section</a></div><div class="ttdoc">ini节类</div><div class="ttdef"><b>定义</b> <a href="#l00181">ini_value.hpp:181</a></div></div>
+<div class="ttc" id="aclassini__section_html_a048e7f1be2af206b142718b902a804ae"><div class="ttname"><a href="classini__section.html#a048e7f1be2af206b142718b902a804ae">ini_section::as_section</a></div><div class="ttdeci">NEFORCE_NODISCARD const ini_section * as_section() const noexcept override</div><div class="ttdoc">转换为节指针</div><div class="ttdef"><b>定义</b> <a href="#l00222">ini_value.hpp:222</a></div></div>
+<div class="ttc" id="aclassini__section_html_a3b52c9013ed94c3369bd5f0927fe5d06"><div class="ttname"><a href="classini__section.html#a3b52c9013ed94c3369bd5f0927fe5d06">ini_section::get_property</a></div><div class="ttdeci">NEFORCE_NODISCARD const ini_property * get_property(const string &amp;key) const</div><div class="ttdoc">获取常量属性指针</div><div class="ttdef"><b>定义</b> <a href="#l00259">ini_value.hpp:259</a></div></div>
+<div class="ttc" id="aclassini__section_html_a4e0fd26ecdb47cf9d234c97765297193"><div class="ttname"><a href="classini__section.html#a4e0fd26ecdb47cf9d234c97765297193">ini_section::set_name</a></div><div class="ttdeci">void set_name(string name) noexcept</div><div class="ttdoc">设置节名称</div><div class="ttdef"><b>定义</b> <a href="#l00234">ini_value.hpp:234</a></div></div>
+<div class="ttc" id="aclassini__section_html_a665924e08fdd706108eba39def61dca9"><div class="ttname"><a href="classini__section.html#a665924e08fdd706108eba39def61dca9">ini_section::get_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string get_string(const string &amp;key, const string &amp;default_value=&quot;&quot;) const</div><div class="ttdoc">获取字符串值</div><div class="ttdef"><b>定义</b> <a href="#l00299">ini_value.hpp:299</a></div></div>
+<div class="ttc" id="aclassini__section_html_a6b94abf0d6853be7d3943f38fd61ac6f"><div class="ttname"><a href="classini__section.html#a6b94abf0d6853be7d3943f38fd61ac6f">ini_section::get_property</a></div><div class="ttdeci">NEFORCE_NODISCARD ini_property * get_property(const string &amp;key)</div><div class="ttdoc">获取属性指针</div><div class="ttdef"><b>定义</b> <a href="#l00270">ini_value.hpp:270</a></div></div>
+<div class="ttc" id="aclassini__section_html_a7af51ac11e4a14f4bbe9431a738594d4"><div class="ttname"><a href="classini__section.html#a7af51ac11e4a14f4bbe9431a738594d4">ini_section::ini_section</a></div><div class="ttdeci">ini_section(ini_section &amp;&amp;other) noexcept=default</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclassini__section_html_a9aad0d586d89f3086f31f99a70d35577"><div class="ttname"><a href="classini__section.html#a9aad0d586d89f3086f31f99a70d35577">ini_section::type</a></div><div class="ttdeci">NEFORCE_NODISCARD types type() const noexcept override</div><div class="ttdoc">获取类型</div><div class="ttdef"><b>定义</b> <a href="#l00216">ini_value.hpp:216</a></div></div>
+<div class="ttc" id="aclassini__section_html_aa1eac6426e2698bbaa25c2038fdfb2bf"><div class="ttname"><a href="classini__section.html#aa1eac6426e2698bbaa25c2038fdfb2bf">ini_section::get_double</a></div><div class="ttdeci">NEFORCE_NODISCARD double get_double(const string &amp;key, double default_value=0.0) const</div><div class="ttdoc">获取双精度浮点值</div><div class="ttdef"><b>定义</b> <a href="#l00321">ini_value.hpp:321</a></div></div>
+<div class="ttc" id="aclassini__section_html_aace03d46152dcf1568e8c110e426dedd"><div class="ttname"><a href="classini__section.html#aace03d46152dcf1568e8c110e426dedd">ini_section::ini_section</a></div><div class="ttdeci">ini_section(string name) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00193">ini_value.hpp:193</a></div></div>
+<div class="ttc" id="aclassini__section_html_ac1a10078457ac0ebe02550ba02d16f45"><div class="ttname"><a href="classini__section.html#ac1a10078457ac0ebe02550ba02d16f45">ini_section::get_name</a></div><div class="ttdeci">NEFORCE_NODISCARD const string &amp; get_name() const noexcept</div><div class="ttdoc">获取节名称</div><div class="ttdef"><b>定义</b> <a href="#l00228">ini_value.hpp:228</a></div></div>
+<div class="ttc" id="aclassini__section_html_ac64e7b3461eafb76535ec916a8953359"><div class="ttname"><a href="classini__section.html#ac64e7b3461eafb76535ec916a8953359">ini_section::get_int</a></div><div class="ttdeci">NEFORCE_NODISCARD int get_int(const string &amp;key, int default_value=0) const</div><div class="ttdoc">获取整数值</div><div class="ttdef"><b>定义</b> <a href="#l00310">ini_value.hpp:310</a></div></div>
+<div class="ttc" id="aclassini__section_html_ac7c2d6f76bdf5ee3aeac6a4d17d191ee"><div class="ttname"><a href="classini__section.html#ac7c2d6f76bdf5ee3aeac6a4d17d191ee">ini_section::get_properties</a></div><div class="ttdeci">NEFORCE_NODISCARD const unordered_map&lt; string, unique_ptr&lt; ini_property &gt; &gt; &amp; get_properties() const noexcept</div><div class="ttdoc">获取所有属性的常量引用</div><div class="ttdef"><b>定义</b> <a href="#l00289">ini_value.hpp:289</a></div></div>
+<div class="ttc" id="aclassini__section_html_ad528f63992e01c210a3f29d9881cef54"><div class="ttname"><a href="classini__section.html#ad528f63992e01c210a3f29d9881cef54">ini_section::get_bool</a></div><div class="ttdeci">NEFORCE_NODISCARD bool get_bool(const string &amp;key, bool default_value=false) const</div><div class="ttdoc">获取布尔值</div><div class="ttdef"><b>定义</b> <a href="#l00332">ini_value.hpp:332</a></div></div>
+<div class="ttc" id="aclassini__section_html_af8a1de61b5a471bd121ff50adac75058"><div class="ttname"><a href="classini__section.html#af8a1de61b5a471bd121ff50adac75058">ini_section::has_property</a></div><div class="ttdeci">NEFORCE_NODISCARD bool has_property(const string &amp;key) const</div><div class="ttdoc">检查属性是否存在</div><div class="ttdef"><b>定义</b> <a href="#l00281">ini_value.hpp:281</a></div></div>
+<div class="ttc" id="aclassini__section_html_afe373c9c751b4810ffaff7e2d2412dd8"><div class="ttname"><a href="classini__section.html#afe373c9c751b4810ffaff7e2d2412dd8">ini_section::add_property</a></div><div class="ttdeci">void add_property(const string &amp;key, unique_ptr&lt; ini_property &gt; property)</div><div class="ttdoc">添加属性</div><div class="ttdef"><b>定义</b> <a href="#l00241">ini_value.hpp:241</a></div></div>
+<div class="ttc" id="aclassini__section_html_aff20d7467b26968d562ebb85e2d5be84"><div class="ttname"><a href="classini__section.html#aff20d7467b26968d562ebb85e2d5be84">ini_section::set_property</a></div><div class="ttdeci">void set_property(const string &amp;key, string value)</div><div class="ttdoc">设置属性</div><div class="ttdef"><b>定义</b> <a href="#l00250">ini_value.hpp:250</a></div></div>
+<div class="ttc" id="aclassini__value_html"><div class="ttname"><a href="classini__value.html">ini_value</a></div><div class="ttdoc">ini值抽象基类</div><div class="ttdef"><b>定义</b> <a href="#l00048">ini_value.hpp:48</a></div></div>
+<div class="ttc" id="aclassini__value_html_a21831bfb54cc6721ee70433915d11227"><div class="ttname"><a href="classini__value.html#a21831bfb54cc6721ee70433915d11227">ini_value::is_property</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_property() const noexcept</div><div class="ttdoc">判断是否为属性类型</div><div class="ttdef"><b>定义</b> <a href="#l00092">ini_value.hpp:92</a></div></div>
+<div class="ttc" id="aclassini__value_html_a6a636deb4a29b4f18255a0ede3dca2f0"><div class="ttname"><a href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0">ini_value::types</a></div><div class="ttdeci">types</div><div class="ttdoc">ini值类型枚举</div><div class="ttdef"><b>定义</b> <a href="#l00054">ini_value.hpp:54</a></div></div>
+<div class="ttc" id="aclassini__value_html_a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562"><div class="ttname"><a href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">ini_value::Property</a></div><div class="ttdeci">@ Property</div><div class="ttdoc">属性类型</div><div class="ttdef"><b>定义</b> <a href="#l00056">ini_value.hpp:56</a></div></div>
+<div class="ttc" id="aclassini__value_html_a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86"><div class="ttname"><a href="classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">ini_value::Section</a></div><div class="ttdeci">@ Section</div><div class="ttdoc">节类型</div><div class="ttdef"><b>定义</b> <a href="#l00055">ini_value.hpp:55</a></div></div>
+<div class="ttc" id="aclassini__value_html_a721b4228adb73ddc402724c6f34889fb"><div class="ttname"><a href="classini__value.html#a721b4228adb73ddc402724c6f34889fb">ini_value::type</a></div><div class="ttdeci">virtual NEFORCE_NODISCARD types type() const noexcept=0</div><div class="ttdoc">获取ini值类型</div></div>
+<div class="ttc" id="aclassini__value_html_ac1f79723f0630c412b8c15deb2b60725"><div class="ttname"><a href="classini__value.html#ac1f79723f0630c412b8c15deb2b60725">ini_value::~ini_value</a></div><div class="ttdeci">virtual ~ini_value()=default</div><div class="ttdoc">虚析构函数</div></div>
+<div class="ttc" id="aclassini__value_html_aea8366c0aeecc956e688dd6800073f8b"><div class="ttname"><a href="classini__value.html#aea8366c0aeecc956e688dd6800073f8b">ini_value::as_section</a></div><div class="ttdeci">virtual NEFORCE_NODISCARD const ini_section * as_section() const noexcept</div><div class="ttdoc">转换为节指针</div><div class="ttdef"><b>定义</b> <a href="#l00074">ini_value.hpp:74</a></div></div>
+<div class="ttc" id="aclassini__value_html_aeba633d0c30110bc93e5602b52d04474"><div class="ttname"><a href="classini__value.html#aeba633d0c30110bc93e5602b52d04474">ini_value::is_section</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_section() const noexcept</div><div class="ttdoc">判断是否为节类型</div><div class="ttdef"><b>定义</b> <a href="#l00086">ini_value.hpp:86</a></div></div>
+<div class="ttc" id="aclassini__value_html_afdd462e394276b2b6f9adb7436cd755d"><div class="ttname"><a href="classini__value.html#afdd462e394276b2b6f9adb7436cd755d">ini_value::as_property</a></div><div class="ttdeci">virtual NEFORCE_NODISCARD const ini_property * as_property() const noexcept</div><div class="ttdoc">转换为属性指针</div><div class="ttdef"><b>定义</b> <a href="#l00080">ini_value.hpp:80</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html_aaad36e992e2a4169701ba56b75718638"><div class="ttname"><a href="classunique__ptr.html#aaad36e992e2a4169701ba56b75718638">unique_ptr::get</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 pointer get() const noexcept</div><div class="ttdoc">获取原始指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00354">unique_ptr.hpp:354</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="agroup___exception_handling_html_ga438313508830676344f6ccbfad172758"><div class="ttname"><a href="group___exception_handling.html#ga438313508830676344f6ccbfad172758">NEFORCE_ERROR_BUILD_FINAL_CLASS</a></div><div class="ttdeci">#define NEFORCE_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO)</div><div class="ttdoc">构建最终异常类宏</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00064">exception.hpp:64</a></div></div>
+<div class="ttc" id="agroup___ini_config_html_ga339ebd18befc1e220495c0392f94d9da"><div class="ttname"><a href="group___ini_config.html#ga339ebd18befc1e220495c0392f94d9da">to_string</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value *value)</div><div class="ttdoc">ini值指针转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00530">ini_value.hpp:530</a></div></div>
+<div class="ttc" id="agroup___ini_config_html_ga99c7c99d26b1d83b1a990501ed7ffede"><div class="ttname"><a href="group___ini_config.html#ga99c7c99d26b1d83b1a990501ed7ffede">ini_value::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00561">ini_value.hpp:561</a></div></div>
+<div class="ttc" id="agroup___ini_config_html_gac63ce33922f3996edc6d5a681cd78147"><div class="ttname"><a href="group___ini_config.html#gac63ce33922f3996edc6d5a681cd78147">ini_value::to_document</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_document() const</div><div class="ttdoc">转换为文档字符串</div><div class="ttdef"><b>定义</b> <a href="#l00565">ini_value.hpp:565</a></div></div>
+<div class="ttc" id="agroup___ini_config_html_gac6bc4eafd282f592ac7d5b2b500be97b"><div class="ttname"><a href="group___ini_config.html#gac6bc4eafd282f592ac7d5b2b500be97b">ini_document::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00569">ini_value.hpp:569</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga1392a16f6940e75495ba167745eff5b7"><div class="ttname"><a href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l01008">unique_ptr.hpp:1008</a></div></div>
+<div class="ttc" id="aistringify_8hpp_html"><div class="ttname"><a href="istringify_8hpp.html">istringify.hpp</a></div><div class="ttdoc">可字符串化接口</div></div>
+<div class="ttc" id="astructini__exception_html"><div class="ttname"><a href="structini__exception.html">ini_exception</a></div><div class="ttdoc">ini格式操作失败</div></div>
+<div class="ttc" id="astructistringify_html"><div class="ttname"><a href="structistringify.html">istringify</a></div><div class="ttdoc">可字符串化接口</div><div class="ttdef"><b>定义</b> <a href="istringify_8hpp_source.html#l00032">istringify.hpp:32</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>file</b></li><li class="navelem"><b>ini</b></li><li class="navelem"><a href="ini__value_8hpp.html">ini_value.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

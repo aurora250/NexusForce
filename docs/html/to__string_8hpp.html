@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: to_string.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('to__string_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">to_string.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>类型到字符串的转换函数  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="istringify_8hpp_source.html">NeForce/core/interface/istringify.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="icollector_8hpp_source.html">NeForce/core/interface/icollector.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="type__erase_8hpp_source.html">NeForce/core/algorithm/type_erase.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="character_8hpp_source.html">NeForce/core/string/character.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+to_string.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="to__string_8hpp__incl.svg" width="1427" height="1488"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="to__string_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga801e4d9a7e7bb386d60e07ab8492c1b0" id="r_ga801e4d9a7e7bb386d60e07ab8492c1b0"><td class="memTemplParams" colspan="2">template&lt;typename T, typename P = package_t&lt;T&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_packaged_v&lt; T &gt; &amp;&amp;is_base_of_v&lt; <a class="el" href="structistringify.html">istringify</a>&lt; P &gt;, P &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga801e4d9a7e7bb386d60e07ab8492c1b0 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga801e4d9a7e7bb386d60e07ab8492c1b0">to_string</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:ga801e4d9a7e7bb386d60e07ab8492c1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">将可包装类型转换为字符串  <br /></td></tr>
+<tr class="memitem:gaec0c42db45ec17d4fcfc7fd3d05e3628" id="r_gaec0c42db45ec17d4fcfc7fd3d05e3628"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#gaec0c42db45ec17d4fcfc7fd3d05e3628">to_string</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> np)</td></tr>
+<tr class="memdesc:gaec0c42db45ec17d4fcfc7fd3d05e3628"><td class="mdescLeft">&#160;</td><td class="mdescRight">将空指针转换为字符串  <br /></td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_pointer_v&lt; T &gt; &amp;&amp;!is_cstring_v&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;ptr)</td></tr>
+<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将指针转换为字符串  <br /></td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;c)</td></tr>
+<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将容器转换为字符串  <br /></td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_unbounded_array_v&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;)</td></tr>
+<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将无界数组转换为字符串  <br /></td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_bounded_array_v&lt; T &gt; &amp;&amp;!is_cstring_v&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;arr)</td></tr>
+<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将有界数组转换为字符串  <br /></td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structexception.html">exception</a>, T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;obj)</td></tr>
+<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将异常转换为字符串  <br /></td></tr>
+<tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d" id="r_ga094214fc66ed142546ccf87a3dd3084d"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
+<tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga094214fc66ed142546ccf87a3dd3084d">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, true &gt; &amp;obj)</td></tr>
+<tr class="memdesc:ga094214fc66ed142546ccf87a3dd3084d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（已压缩版本）转换为字符串  <br /></td></tr>
+<tr class="memitem:ga3a2ec08d836344f9ff90f555c1db97a5" id="r_ga3a2ec08d836344f9ff90f555c1db97a5"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
+<tr class="memitem:ga3a2ec08d836344f9ff90f555c1db97a5 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga3a2ec08d836344f9ff90f555c1db97a5">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, false &gt; &amp;obj)</td></tr>
+<tr class="memdesc:ga3a2ec08d836344f9ff90f555c1db97a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（未压缩版本）转换为字符串  <br /></td></tr>
+<tr class="memitem:ga0f8469e436acf31ada4f8c5af47ba82a" id="r_ga0f8469e436acf31ada4f8c5af47ba82a"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:ga0f8469e436acf31ada4f8c5af47ba82a template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga0f8469e436acf31ada4f8c5af47ba82a">to_string</a> (const <a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;obj)</td></tr>
+<tr class="memdesc:ga0f8469e436acf31ada4f8c5af47ba82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将对转换为字符串  <br /></td></tr>
+<tr class="memitem:ga26dff0e6014b2d81ef57177e67ecd86a" id="r_ga26dff0e6014b2d81ef57177e67ecd86a"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ga26dff0e6014b2d81ef57177e67ecd86a template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga26dff0e6014b2d81ef57177e67ecd86a">to_string</a> (const tuple&lt; Args... &gt; &amp;tup)</td></tr>
+<tr class="memdesc:ga26dff0e6014b2d81ef57177e67ecd86a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将元组转换为字符串  <br /></td></tr>
+<tr class="memitem:gaaea09a977e7aca90ca8a7932146302c4" id="r_gaaea09a977e7aca90ca8a7932146302c4"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 1), int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaaea09a977e7aca90ca8a7932146302c4 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#gaaea09a977e7aca90ca8a7932146302c4">to_string</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:gaaea09a977e7aca90ca8a7932146302c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">将多个参数转换为字符串并连接  <br /></td></tr>
+<tr class="memitem:ga5a2a115e331bd1a82024837f9e433a94" id="r_ga5a2a115e331bd1a82024837f9e433a94"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga5a2a115e331bd1a82024837f9e433a94 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga5a2a115e331bd1a82024837f9e433a94">to_string_with_precision</a> (T x, int precision, bool scientific=false)</td></tr>
+<tr class="memdesc:ga5a2a115e331bd1a82024837f9e433a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（带精度控制）  <br /></td></tr>
+<tr class="memitem:gab3736804eb4cabadcc2e6f47424fa071" id="r_gab3736804eb4cabadcc2e6f47424fa071"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab3736804eb4cabadcc2e6f47424fa071 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#gab3736804eb4cabadcc2e6f47424fa071">to_string_general</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:gab3736804eb4cabadcc2e6f47424fa071"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（通用格式）  <br /></td></tr>
+<tr class="memitem:ga7054cdde046bf5c14e9905779ad35a07" id="r_ga7054cdde046bf5c14e9905779ad35a07"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga7054cdde046bf5c14e9905779ad35a07 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#ga7054cdde046bf5c14e9905779ad35a07">to_string_fixed</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:ga7054cdde046bf5c14e9905779ad35a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（固定小数格式）  <br /></td></tr>
+<tr class="memitem:gab003720775a25ba5769677b38db10a44" id="r_gab003720775a25ba5769677b38db10a44"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab003720775a25ba5769677b38db10a44 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___to_string.html#gab003720775a25ba5769677b38db10a44">to_string_scientific</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:gab003720775a25ba5769677b38db10a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（科学计数法格式）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>类型到字符串的转换函数 </p>
+<p>此文件提供了将各种类型转换为字符串的通用函数。 支持基本类型、容器、元组、枚举、异常等多种类型的字符串表示。 </p>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 中定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_unbounded_array_v&lt; T &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将无界数组转换为字符串 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>数组类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>空数组字符串"[]" </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_bounded_array_v&lt; T &gt; &amp;&amp;!is_cstring_v&lt; T &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>arr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将有界数组转换为字符串 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>数组类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arr</td><td>数组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>字符串表示 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00106">106</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+</div>
+</div>
+<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将容器转换为字符串 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>容器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>容器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>字符串表示 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00333">_INNER</a>.</p>
+
+</div>
+</div>
+<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_base_of_v&lt; <a class="el" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="el" href="structexception.html">exception</a>, T &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将异常转换为字符串 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>异常类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>异常对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>格式为"类型(what)"的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00117">117</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; is_pointer_v&lt; T &gt; &amp;&amp;!is_cstring_v&lt; T &gt;, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将指针转换为字符串 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>指针类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指针的地址字符串</dd></dl>
+<p>将指针转换为地址字符串，排除C风格字符串。 </p>
+
+<p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 第 <a class="el" href="to__string_8hpp_source.html#l00055">55</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="string_8hpp_source.html#l00320">address_string()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><a href="to__string_8hpp.html">to_string.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

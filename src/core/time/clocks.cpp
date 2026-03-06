@@ -1,10 +1,14 @@
-#include <MSTL/core/time/clocks.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/time/clocks.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <handleapi.h>
 #include <profileapi.h>
 #include <synchapi.h>
 #include <sysinfoapi.h>
+#ifdef NEFORCE_COMPILER_MINGW
+#include <windef.h>
+#include <winbase.h>
+#endif
 #ifdef max
 #undef max
 #endif
@@ -12,15 +16,15 @@
 #undef min
 #endif
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <ctime>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
-MSTL_BEGIN_INNER__
+NEFORCE_BEGIN_INNER__
 
-void sleep_for_aux(int64_t s, int64_t ns) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+void sleep_for_aux(const ssize_t s, const ssize_t ns) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
     li.QuadPart = -(ns / 100);
 
@@ -30,16 +34,16 @@ void sleep_for_aux(int64_t s, int64_t ns) {
         ::WaitForSingleObject(timer, numeric_traits<::DWORD>::max());
         ::CloseHandle(timer);
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::timespec ts{s, ns};
     while (::nanosleep(&ts, &ts) == -1) {}
 #endif
 }
 
-MSTL_END_INNER__
+NEFORCE_END_INNER__
 
 system_clock::time_point system_clock::now() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::FILETIME ft;
     ::GetSystemTimePreciseAsFileTime(&ft);
     const uint64_t file_time = static_cast<uint64_t>(ft.dwHighDateTime) << 32 | ft.dwLowDateTime;
@@ -48,7 +52,7 @@ system_clock::time_point system_clock::now() noexcept {
     const uint64_t ticks_since_unix_epoch = file_time - unix_epoch_offset;
     const uint64_t nanos = ticks_since_unix_epoch * 100;
     rep total_nanos = static_cast<rep>(nanos);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::timespec ts{};
     ::clock_gettime(CLOCK_REALTIME, &ts);
 
@@ -59,7 +63,7 @@ system_clock::time_point system_clock::now() noexcept {
 }
 
 steady_clock::time_point steady_clock::now() noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER count;
     ::QueryPerformanceCounter(&count);
 
@@ -74,7 +78,7 @@ steady_clock::time_point steady_clock::now() noexcept {
     const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
     const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
     rep total_nanos = ticks * nanos_per_tick + (ticks * remainder) / static_cast<rep>(freq.QuadPart);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::timespec ts{};
     ::clock_gettime(CLOCK_MONOTONIC, &ts);
 
@@ -104,5 +108,5 @@ milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_
     return diff_ms;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__
 

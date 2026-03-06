@@ -1,6 +1,6 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/env/env_value.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/env/env_value.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 int env_variable::get_int(const int default_value) const noexcept {
     try {
@@ -34,7 +34,7 @@ bool env_variable::get_bool(const bool default_value) const noexcept {
     }
 }
 
-MSTL_BEGIN_INNER__
+NEFORCE_BEGIN_INNER__
 
 static string escape_env_value(const string& value, env_variable::quote_type qt) {
     if (qt == env_variable::None) {
@@ -54,7 +54,7 @@ static string escape_env_value(const string& value, env_variable::quote_type qt)
     }
 }
 
-string MSTL_API env_value_to_string(const env_value* value, const string& key) {
+string NEFORCE_API env_value_to_string(const env_value* value, const string& key) {
     if (!value) return "";
 
     switch (value->type()) {
@@ -93,7 +93,7 @@ string MSTL_API env_value_to_string(const env_value* value, const string& key) {
     }
 }
 
-string MSTL_API env_document_to_string(const env_document* doc) {
+string NEFORCE_API env_document_to_string(const env_document* doc) {
     if (!doc) return "";
     string result;
     for (const auto& comment : doc->get_comments()) {
@@ -108,6 +108,6 @@ string MSTL_API env_document_to_string(const env_document* doc) {
     return result;
 }
 
-MSTL_END_INNER__
+NEFORCE_END_INNER__
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

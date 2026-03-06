@@ -1,16 +1,16 @@
-#include <MSTL/core/system/dynamic_library.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/config/windef.hpp>
+#include <NeForce/core/system/dynamic_library.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <libloaderapi.h>
 #else
 #include <dlfcn.h>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 void dynamic_library::open() {
     if (handle_) return;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::LoadLibraryA(path_.data());
     if (!handle_) {
         throw_exception(dynamic_library_exception("dynamic library load failed."));
@@ -25,7 +25,7 @@ void dynamic_library::open() {
 
 void dynamic_library::close() {
     if (handle_) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         ::FreeLibrary(static_cast<::HMODULE>(handle_));
 #else
         ::dlclose(handle_);
@@ -63,7 +63,7 @@ void* dynamic_library::symbol(const string& name) const {
         throw_exception(dynamic_library_exception("Library not loaded"));
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data());
     if (!proc) {
         throw_exception(dynamic_library_exception("GetProcAddress failed"));
@@ -83,7 +83,7 @@ void* dynamic_library::symbol(const string& name) const {
 bool dynamic_library::has_symbol(const string& name) const noexcept {
     if (!is_open()) return false;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data()) != nullptr;
 #else
     ::dlerror();
@@ -92,4 +92,4 @@ bool dynamic_library::has_symbol(const string& name) const noexcept {
 #endif
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

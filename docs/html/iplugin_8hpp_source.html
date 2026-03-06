@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: iplugin.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('iplugin_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">iplugin.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="iplugin_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_PLUGIN_IPLUGIN_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_PLUGIN_IPLUGIN_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structplugin__info.html">   28</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structplugin__info.html">plugin_info</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structplugin__info.html#a5808cef84f5064e059009a108108c7f0">   29</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structplugin__info.html#a5808cef84f5064e059009a108108c7f0">name</a>;           </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structplugin__info.html#a899b491fc4007aeae0431f4d030e904a">   30</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structplugin__info.html#a899b491fc4007aeae0431f4d030e904a">version</a>;        </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structplugin__info.html#ac9c48c117b3400890a4e83dfd9fc31cd">   31</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structplugin__info.html#ac9c48c117b3400890a4e83dfd9fc31cd">author</a>;         </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structplugin__info.html#a23f446a01701d7d0f86e3d1e0b672811">   32</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structplugin__info.html#a23f446a01701d7d0f86e3d1e0b672811">description</a>;    </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structplugin__info.html#abc39f8b5799194f35cd5827f3faa564a">   33</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="structplugin__info.html#abc39f8b5799194f35cd5827f3faa564a">library_path</a>;   </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structiplugin.html">   44</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiplugin.html">iplugin</a> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">virtual</span> <a class="code hl_struct" href="structiplugin.html">~iplugin</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structiplugin.html#a23d6085a2e63cbf778e215d44490ebd4">   51</a></span>    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code hl_struct" href="structplugin__info.html">plugin_info</a>&amp; <a class="code hl_function" href="structiplugin.html#a23d6085a2e63cbf778e215d44490ebd4">get_info</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structiplugin.html#a470ea9b8c6b7058e8a2bb69ffe364e02">   58</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structiplugin.html#a470ea9b8c6b7058e8a2bb69ffe364e02">initialize</a>() = 0;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structiplugin.html#a5b1f48287bf155612ce014811215da5c">   63</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structiplugin.html#a5b1f48287bf155612ce014811215da5c">execute</a>() = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structiplugin.html#ae5d9267f0a284319b9df78496ae6c8b3">   70</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structiplugin.html#ae5d9267f0a284319b9df78496ae6c8b3">shutdown</a>() = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structplugin__deleter.html">   80</a></span><span class="keyword">struct </span><a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a> {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762">   82</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762">deleter_type</a> = void(*)(<a class="code hl_struct" href="structiplugin.html">iplugin</a>*);  </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_typedef" href="structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762">deleter_type</a> func_ = <span class="keyword">nullptr</span>;  </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">   91</a></span>    <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>() noexcept = default;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a2c7aac329f10395b5c36bbce38dec815">   96</a></span>    ~<a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>() = default;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a03fbca2183006f758b8a204211ba1a4a">  102</a></span>    explicit <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>(<a class="code hl_typedef" href="structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762">deleter_type</a> func) noexcept</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    : func_(func) {}</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structplugin__deleter.html">plugin_deleter</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_struct" href="structplugin__deleter.html">plugin_deleter</a>&amp; operator =(<span class="keyword">const</span> <a class="code hl_struct" href="structplugin__deleter.html">plugin_deleter</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a197e3056079c0f53fbb92666edb102ca">  112</a></span>    <a class="code hl_function" href="structplugin__deleter.html#a197e3056079c0f53fbb92666edb102ca">plugin_deleter</a>(<a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    : func_(other.func_) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        other.func_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a254543f507a3e2553e27e592203c8392">  122</a></span>    <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>&amp; operator =(<a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        func_ = other.func_;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        other.func_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span></div>
+<div class="foldopen" id="foldopen00134" data-start="{" data-end="}">
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a187bdbd4fd32319ac32cd8d1227814b2">  134</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structplugin__deleter.html#a187bdbd4fd32319ac32cd8d1227814b2">operator ()</a>(<a class="code hl_struct" href="structiplugin.html">iplugin</a>* plugin) <span class="keyword">const</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keyword">noexcept</span>(is_nothrow_invocable_v&lt;deleter_type, iplugin*&gt;) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">if</span> (plugin) func_(plugin);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="structplugin__deleter.html#a41b7c48f4f89afe74821e7d3106576be">  145</a></span>    <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a> <a class="code hl_function" href="structplugin__deleter.html#a41b7c48f4f89afe74821e7d3106576be">rebind</a>() &amp;&amp; <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(*<span class="keyword">this</span>));</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    }</div>
+</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>};</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="group___plugin.html#gaf947f049a3822c8b84313e907b0ebb58">  156</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___plugin.html#gaf947f049a3822c8b84313e907b0ebb58">plugin_ptr</a> = <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;iplugin, plugin_deleter&gt;</a>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> <span class="comment">// Plugin</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_PLUGIN_IPLUGIN_HPP__</span></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00224">unique_ptr.hpp:224</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___plugin_html_gaf947f049a3822c8b84313e907b0ebb58"><div class="ttname"><a href="group___plugin.html#gaf947f049a3822c8b84313e907b0ebb58">plugin_ptr</a></div><div class="ttdeci">unique_ptr&lt; iplugin, plugin_deleter &gt; plugin_ptr</div><div class="ttdoc">插件唯一指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00156">iplugin.hpp:156</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructiplugin_html"><div class="ttname"><a href="structiplugin.html">iplugin</a></div><div class="ttdoc">插件接口基类</div><div class="ttdef"><b>定义</b> <a href="#l00044">iplugin.hpp:44</a></div></div>
+<div class="ttc" id="astructiplugin_html_a23d6085a2e63cbf778e215d44490ebd4"><div class="ttname"><a href="structiplugin.html#a23d6085a2e63cbf778e215d44490ebd4">iplugin::get_info</a></div><div class="ttdeci">virtual const plugin_info &amp; get_info() const =0</div><div class="ttdoc">获取插件信息</div></div>
+<div class="ttc" id="astructiplugin_html_a470ea9b8c6b7058e8a2bb69ffe364e02"><div class="ttname"><a href="structiplugin.html#a470ea9b8c6b7058e8a2bb69ffe364e02">iplugin::initialize</a></div><div class="ttdeci">virtual void initialize()=0</div><div class="ttdoc">初始化插件</div></div>
+<div class="ttc" id="astructiplugin_html_a5b1f48287bf155612ce014811215da5c"><div class="ttname"><a href="structiplugin.html#a5b1f48287bf155612ce014811215da5c">iplugin::execute</a></div><div class="ttdeci">virtual void execute()=0</div><div class="ttdoc">执行插件的主要功能</div></div>
+<div class="ttc" id="astructiplugin_html_ae5d9267f0a284319b9df78496ae6c8b3"><div class="ttname"><a href="structiplugin.html#ae5d9267f0a284319b9df78496ae6c8b3">iplugin::shutdown</a></div><div class="ttdeci">virtual void shutdown()=0</div><div class="ttdoc">关闭插件</div></div>
+<div class="ttc" id="astructplugin__deleter_html"><div class="ttname"><a href="structplugin__deleter.html">plugin_deleter</a></div><div class="ttdoc">插件自定义删除器</div><div class="ttdef"><b>定义</b> <a href="#l00080">iplugin.hpp:80</a></div></div>
+<div class="ttc" id="astructplugin__deleter_html_a057a1491b7a95e65738daefe599b113a"><div class="ttname"><a href="structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a">plugin_deleter::plugin_deleter</a></div><div class="ttdeci">plugin_deleter() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="astructplugin__deleter_html_a122ab5f33b2c0ebcf295e666322e9762"><div class="ttname"><a href="structplugin__deleter.html#a122ab5f33b2c0ebcf295e666322e9762">plugin_deleter::deleter_type</a></div><div class="ttdeci">void(*)(iplugin *) deleter_type</div><div class="ttdoc">删除函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00082">iplugin.hpp:82</a></div></div>
+<div class="ttc" id="astructplugin__deleter_html_a187bdbd4fd32319ac32cd8d1227814b2"><div class="ttname"><a href="structplugin__deleter.html#a187bdbd4fd32319ac32cd8d1227814b2">plugin_deleter::operator()</a></div><div class="ttdeci">void operator()(iplugin *plugin) const noexcept(is_nothrow_invocable_v&lt; deleter_type, iplugin * &gt;)</div><div class="ttdoc">函数调用运算符</div><div class="ttdef"><b>定义</b> <a href="#l00134">iplugin.hpp:134</a></div></div>
+<div class="ttc" id="astructplugin__deleter_html_a197e3056079c0f53fbb92666edb102ca"><div class="ttname"><a href="structplugin__deleter.html#a197e3056079c0f53fbb92666edb102ca">plugin_deleter::plugin_deleter</a></div><div class="ttdeci">plugin_deleter(plugin_deleter &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00112">iplugin.hpp:112</a></div></div>
+<div class="ttc" id="astructplugin__deleter_html_a41b7c48f4f89afe74821e7d3106576be"><div class="ttname"><a href="structplugin__deleter.html#a41b7c48f4f89afe74821e7d3106576be">plugin_deleter::rebind</a></div><div class="ttdeci">plugin_deleter rebind() &amp;&amp;noexcept</div><div class="ttdoc">重新绑定删除器</div><div class="ttdef"><b>定义</b> <a href="#l00145">iplugin.hpp:145</a></div></div>
+<div class="ttc" id="astructplugin__info_html"><div class="ttname"><a href="structplugin__info.html">plugin_info</a></div><div class="ttdoc">插件信息结构</div><div class="ttdef"><b>定义</b> <a href="#l00028">iplugin.hpp:28</a></div></div>
+<div class="ttc" id="astructplugin__info_html_a23f446a01701d7d0f86e3d1e0b672811"><div class="ttname"><a href="structplugin__info.html#a23f446a01701d7d0f86e3d1e0b672811">plugin_info::description</a></div><div class="ttdeci">string description</div><div class="ttdoc">插件描述</div><div class="ttdef"><b>定义</b> <a href="#l00032">iplugin.hpp:32</a></div></div>
+<div class="ttc" id="astructplugin__info_html_a5808cef84f5064e059009a108108c7f0"><div class="ttname"><a href="structplugin__info.html#a5808cef84f5064e059009a108108c7f0">plugin_info::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">插件名称</div><div class="ttdef"><b>定义</b> <a href="#l00029">iplugin.hpp:29</a></div></div>
+<div class="ttc" id="astructplugin__info_html_a899b491fc4007aeae0431f4d030e904a"><div class="ttname"><a href="structplugin__info.html#a899b491fc4007aeae0431f4d030e904a">plugin_info::version</a></div><div class="ttdeci">string version</div><div class="ttdoc">插件版本</div><div class="ttdef"><b>定义</b> <a href="#l00030">iplugin.hpp:30</a></div></div>
+<div class="ttc" id="astructplugin__info_html_abc39f8b5799194f35cd5827f3faa564a"><div class="ttname"><a href="structplugin__info.html#abc39f8b5799194f35cd5827f3faa564a">plugin_info::library_path</a></div><div class="ttdeci">string library_path</div><div class="ttdoc">插件库路径</div><div class="ttdef"><b>定义</b> <a href="#l00033">iplugin.hpp:33</a></div></div>
+<div class="ttc" id="astructplugin__info_html_ac9c48c117b3400890a4e83dfd9fc31cd"><div class="ttname"><a href="structplugin__info.html#ac9c48c117b3400890a4e83dfd9fc31cd">plugin_info::author</a></div><div class="ttdeci">string author</div><div class="ttdoc">插件作者</div><div class="ttdef"><b>定义</b> <a href="#l00031">iplugin.hpp:31</a></div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>plugin</b></li><li class="navelem"><a href="iplugin_8hpp.html">iplugin.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

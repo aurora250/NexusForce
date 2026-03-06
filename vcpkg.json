@@ -1,21 +1,23 @@
 {
-  "name": "mstl",
-  "version": "1.4.0",
+  "name": "nexusforce",
+  "version": "1.0.0",
   "description": "A Modern C++ Library with extended functionality",
-  "homepage": "https://github.com/aurora250/MSTL",
+  "homepage": "https://github.com/aurora250/NexusForce",
+  "builtin-baseline": "62159a45e18f3a9ac0548628dcaf74fcb60c6ff9",
   "dependencies": [
     {
       "name": "openssl",
       "features": ["tools"]
     },
-    {
-      "name": "libpq",
-      "features": ["ssl"]
-    },
-    "zlib",
+    "libpq",
     "libmysql",
+    "zlib",
     "sqlite3",
-    "hiredis"
+    "hiredis",
+    {
+      "name": "pcre2",
+      "features": ["jit"]
+    }
   ],
   "features": {
     "postgresql": {
@@ -41,7 +43,11 @@
     "openssl": {
       "description": "OpenSSL support",
       "dependencies": ["openssl"]
+    },
+    "pcre2": {
+      "description": "pcre2 support",
+      "dependencies": ["pcre2"]
     }
   },
-  "default-features": ["postgresql", "mysql", "sqlite3", "redis", "zlib", "openssl"]
+  "default-features": ["postgresql", "mysql", "sqlite3", "redis", "zlib", "openssl", "pcre2"]
 }

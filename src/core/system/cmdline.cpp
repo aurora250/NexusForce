@@ -1,25 +1,25 @@
-#include <MSTL/core/system/cmdline.hpp>
-#include <MSTL/core/system/console.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
-#include <MSTL/core/string/to_string.hpp>
+#include <NeForce/core/system/cmdline.hpp>
+#include <NeForce/core/system/console.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/string/to_string.hpp>
 #include <processthreadsapi.h>
 #include <windef.h>
 #include <shellapi.h>
 #include <WinBase.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/file/file.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <NeForce/core/file/file.hpp>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 cmdline::option::option(string lname, const char sname, string desc,
     const bool req_val, const bool allow_multi, string def_val)
-    : long_name(_MSTL move(lname)),
+    : long_name(_NEFORCE move(lname)),
     short_name(sname),
-    description(_MSTL move(desc)),
+    description(_NEFORCE move(desc)),
     requires_value(req_val),
     allow_multiple(allow_multi),
-    default_value(_MSTL move(def_val)) {}
+    default_value(_NEFORCE move(def_val)) {}
 
 void cmdline::add_option(const string& long_name, const char short_name,
     const string& description, const bool requires_value,
@@ -35,7 +35,7 @@ void cmdline::add_option(const string& long_name, const char short_name,
     }
 
     const option opt(long_name, short_name, description, requires_value, allow_multiple, default_value);
-    options_.push_back(_MSTL move(opt));
+    options_.push_back(_NEFORCE move(opt));
 
     if (!long_name.empty()) options_long_[long_name] = &options_.back();
     if (short_name != 0) options_short_[short_name] = &options_.back();
@@ -47,14 +47,14 @@ void cmdline::parse_os_args() {
 }
 
 void cmdline::parse(const int argc, char* argv[]) {
-    _MSTL vector<string> args;
+    _NEFORCE vector<string> args;
     for (int i = 0; i < argc; ++i) {
         args.push_back(argv[i]);
     }
     parse(args);
 }
 
-void cmdline::parse(const _MSTL vector<string>& args) {
+void cmdline::parse(const _NEFORCE vector<string>& args) {
     if (args.empty()) return;
 
     program_name_ = args[0];
@@ -107,7 +107,7 @@ size_t cmdline::count(const string& name) const {
 }
 
 void cmdline::print_help() const {
-    _MSTL println("Usage: ", program_name_, " [options] [positional...]\n\nOptions:");
+    _NEFORCE println("Usage: ", program_name_, " [options] [positional...]\n\nOptions:");
 
     for (const auto& opt : options_) {
         string str;
@@ -124,7 +124,7 @@ void cmdline::print_help() const {
             str += " <value>";
         }
 
-        string opt_str = _MSTL move(str);
+        string opt_str = _NEFORCE move(str);
         print(opt_str);
 
         if (opt_str.length() < 30) {
@@ -146,17 +146,17 @@ void cmdline::print_help() const {
     }
 }
 
-_MSTL vector<string> cmdline::get_os_argv() {
-    _MSTL vector<string> args;
+_NEFORCE vector<string> cmdline::get_os_argv() {
+    _NEFORCE vector<string> args;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     int argc = 0;
     ::LPWSTR* argv_wide = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
     if (!argv_wide) {
         throw_exception(cmdline_exception("CommandLineToArgvW failed"));
     }
     for (int i = 0; i < argc; ++i) {
-        args.push_back(_MSTL to_string(argv_wide[i]));
+        args.push_back(_NEFORCE to_string(argv_wide[i]));
     }
     ::LocalFree(argv_wide);
 #else
@@ -165,7 +165,7 @@ _MSTL vector<string> cmdline::get_os_argv() {
         throw_exception(cmdline_exception("Failed to open /proc/self/cmdline"));
     }
 
-    string buffer(4096, '\0');
+    string buffer(MEMORY_BIG_ALLOC_THRESHHOLD, '\0');
     const size_t bytes_read = cmdline_file.read_binary(buffer, buffer.size());
     if (bytes_read == 0) {
         throw_exception(cmdline_exception("No data read from /proc/self/cmdline"));
@@ -197,7 +197,7 @@ cmdline::option* cmdline::find_option_short(const char name) {
     return it == options_short_.end() ? nullptr : it->second;
 }
 
-void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& args, size_t& index) {
+void cmdline::parse_long_option(const string& arg, const _NEFORCE vector<string>& args, size_t& index) {
     const size_t eq_pos = arg.find('=');
     const string name = arg.substr(2, eq_pos == string::npos ? string::npos : eq_pos - 2);
 
@@ -219,11 +219,11 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
         }
 
         if (opt->allow_multiple) {
-            opt->values.push_back(_MSTL move(value));
+            opt->values.push_back(_NEFORCE move(value));
         }
         else {
             opt->values.clear();
-            opt->values.push_back(_MSTL move(value));
+            opt->values.push_back(_NEFORCE move(value));
         }
     }
     else {
@@ -237,7 +237,7 @@ void cmdline::parse_long_option(const string& arg, const _MSTL vector<string>& a
     }
 }
 
-void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>& args, size_t& index) {
+void cmdline::parse_short_options(const string& arg, const _NEFORCE vector<string>& args, size_t& index) {
     for (size_t j = 1; j < arg.size(); ++j) {
         const char short_name = arg[j];
         option* opt = find_option_short(short_name);
@@ -253,21 +253,21 @@ void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>&
                 }
                 const string value = args[++index];
                 if (opt->allow_multiple) {
-                    opt->values.push_back(_MSTL move(value));
+                    opt->values.push_back(_NEFORCE move(value));
                 }
                 else {
                     opt->values.clear();
-                    opt->values.push_back(_MSTL move(value));
+                    opt->values.push_back(_NEFORCE move(value));
                 }
             }
             else {
                 const string value = arg.substr(j + 1);
                 if (opt->allow_multiple) {
-                    opt->values.push_back(_MSTL move(value));
+                    opt->values.push_back(_NEFORCE move(value));
                 }
                 else {
                     opt->values.clear();
-                    opt->values.push_back(_MSTL move(value));
+                    opt->values.push_back(_NEFORCE move(value));
                 }
                 break;
             }
@@ -284,4 +284,4 @@ void cmdline::parse_short_options(const string& arg, const _MSTL vector<string>&
     }
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

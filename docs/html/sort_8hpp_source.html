@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sort.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sort_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sort.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sort_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ALGORITHM_SORT_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ALGORITHM_SORT_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="merge_8hpp.html">NeForce/core/algorithm/merge.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="heap_8hpp.html">NeForce/core/algorithm/heap.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="partition_8hpp.html">NeForce/core/algorithm/partition.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="compare_8hpp.html">NeForce/core/algorithm/compare.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">   36</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>(first);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">for</span> (; <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> != last; ++first, ++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> (comp(*<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>, *first)) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga54b0b59c4c05a63c1b96fdad1d71e61e">   55</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">   71</a></span>Iterator <a class="code hl_function" href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>(first);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">for</span> (; <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> != last; ++first, ++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (comp(*<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>, *first))</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga1364d104f129566eaea032b500fbb87a">   89</a></span>Iterator <a class="code hl_function" href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">  113</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___iterator_operation.html#gab75627c1df8e95d5e92adc5faa6f13d3">distance</a>(first, last);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">if</span> (n &lt; 2) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    Iterator mid = first + n / 2;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a>(first, mid);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a>(mid, last);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___merge_algorithms.html#ga33c87a66ef070be6001c33a05fd4e755">inplace_merge</a>(first, mid, last, comp);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga121f4d074409e1a9fa7d105543adae87">  129</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
+</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">  150</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a>(Iterator first, Iterator middle, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (first == middle) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___heap_algorithms.html#ga427912570db28bed6f6e3962ffe7ca37">make_heap</a>(first, middle, comp);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">for</span> (Iterator i = middle; i &lt; last; ++i) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">if</span> (comp(*i, *first)) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> pop_heap_aux(first, middle, i, *i, comp);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___heap_algorithms.html#gaccdac1809fcd635ea1d4cda2b94ccfba">sort_heap</a>(first, middle, comp);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00169" data-start="{" data-end="}">
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga93c3ca069ff13f30369021482848ccc8">  169</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a>(Iterator first, Iterator middle, Iterator last) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a>(first, middle, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
+</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator2&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">  191</a></span>Iterator2 <a class="code hl_function" href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a>(Iterator1 first, Iterator1 last,</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    Iterator2 result_first, Iterator2 result_last, Compare comp) {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">if</span> (result_first == result_last) <span class="keywordflow">return</span> result_last;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    Iterator2 result_real_last = result_first;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; result_real_last != result_last) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        *result_real_last = *first;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        ++result_real_last;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        ++first;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___heap_algorithms.html#ga427912570db28bed6f6e3962ffe7ca37">make_heap</a>(result_first, result_real_last, comp);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">while</span> (first != last) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">if</span> (comp(*first, *result_first)) {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___heap_algorithms.html#ga16e8117ec3de7dcf87ae62c7e6e4ec50">adjust_heap</a>(result_first, <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator1&gt;</a>(0),</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                Distance(result_real_last - result_first), *first, comp);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        ++first;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___heap_algorithms.html#gaccdac1809fcd635ea1d4cda2b94ccfba">sort_heap</a>(result_first, result_real_last, comp);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">return</span> result_real_last;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>}</div>
+</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga29e746c754c35147ebf13ab20c9a7ce2">  223</a></span>Iterator2 <a class="code hl_function" href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a>(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last) {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a>(first, result_first, result_last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>}</div>
+</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keywordtype">void</span> __insertion_sort_aux(Iterator last, T value, Compare comp) {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = last;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    --<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordflow">while</span> (comp(value, *<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        *last = *<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        last = <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        --<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    *last = value;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>}</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00273" data-start="{" data-end="}">
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">  273</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordflow">for</span> (Iterator i = first + 1; i != last; ++i) {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a> value = *i;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">if</span> (comp(value, *first)) {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#gab80e03c7d3a15005c73569c911556d71">copy_backward</a>(first, i, i + 1);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            *first = value;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __insertion_sort_aux(i, value, comp);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    }</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>}</div>
+</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga8a0aec613c2b702a0f34cf6299b7b190">  293</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>}</div>
+</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">  317</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a>(Iterator first, Iterator last, <span class="keywordtype">int</span> depth_limit, Compare comp) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordflow">while</span> (first &lt; last) {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">if</span> (depth_limit == 0) {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a>(first, last, last, comp);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        }</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        --depth_limit;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        Iterator cut = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___partition_algorithms.html#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a>(</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___compare_algorithms.html#ga69873b0598cc28f930d89d2930e78f85">median</a>(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a>(cut, last, depth_limit, comp);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        last = cut;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    }</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}</div>
+</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00339" data-start="{" data-end="}">
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gaffb3fd567cdefa23e2ab6a1a5a6e6947">  339</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a>(Iterator first, Iterator last, <span class="keywordtype">int</span> depth_limit) {</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a>(first, last, depth_limit, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>}</div>
+</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00364" data-start="{" data-end="}">
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">  364</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordflow">if</span> (first &lt; last) {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        Iterator pov = last - 1;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        Iterator cut = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___partition_algorithms.html#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a>(first, last, *pov, comp);</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga151971a7781537166e3cbc15d28b0557">iter_swap</a>(cut, pov);</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a>(first, cut, comp);</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a>(cut + 1, last, comp);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    }</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>}</div>
+</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00381" data-start="{" data-end="}">
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga5daa37ac5f6fc132c53c076b24ce6163">  381</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>}</div>
+</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span><a class="code hl_define" href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare&gt;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="keywordtype">void</span> __intro_sort_dispatch(Iterator first, Iterator last, <span class="keywordtype">int</span> depth_limit, Compare comp) {</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <span class="keywordflow">while</span> (last - first &gt; MEMORY_ALIGN_THRESHHOLD) {</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        <span class="keywordflow">if</span> (depth_limit == 0) {</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>            <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a>(first, last, last, comp);</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        }</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        --depth_limit;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        Iterator cut = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___partition_algorithms.html#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a>(</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___compare_algorithms.html#ga69873b0598cc28f930d89d2930e78f85">median</a>(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __intro_sort_dispatch(cut, last, depth_limit, comp);</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>        last = cut;</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    }</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>}</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span></div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>NEFORCE_CONST_FUNCTION <span class="keyword">constexpr</span> <span class="keywordtype">int</span> __log2_int(<span class="keywordtype">int</span> x) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    <span class="keywordtype">int</span> k = 0;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    <span class="keywordflow">for</span> (; x &gt; 1; x &gt;&gt;= 1) ++k;</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    <span class="keywordflow">return</span> k;</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>}</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span> </div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><a class="code hl_define" href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span></div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00449" data-start="{" data-end="}">
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">  449</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">sort</a>(Iterator first, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __intro_sort_dispatch(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __log2_int(last - first) * 2, comp);</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="keywordflow">if</span> (last - first &gt; MEMORY_ALIGN_THRESHHOLD) {</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(first, first + MEMORY_ALIGN_THRESHHOLD, comp);</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        <span class="keywordflow">for</span> (Iterator i = first + MEMORY_ALIGN_THRESHHOLD; i != last; ++i) {</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>            <a class="code hl_define" href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a> __insertion_sort_aux(i, *i, comp);</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        }</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    }</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(first, last, comp);</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    }</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>}</div>
+</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span></div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00470" data-start="{" data-end="}">
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga7a4fdc8969bfed2d02cdd1941044a8d9">  470</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">sort</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">sort</a>(first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>}</div>
+</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span></div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Compare, <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>    <a class="code hl_variable" href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00489" data-start="{" data-end="}">
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">  489</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">nth_element</a>(Iterator first, Iterator nth, Iterator last, Compare comp) {</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="keywordflow">while</span> (last - first &gt; 3) {</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        Iterator cut = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___partition_algorithms.html#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a>(</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>            first, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___compare_algorithms.html#ga69873b0598cc28f930d89d2930e78f85">median</a>(*first, *(first + (last - first) / 2), *(last - 1), comp), comp);</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>        <span class="keywordflow">if</span> (cut &lt;= nth) first = cut;</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>        <span class="keywordflow">else</span> last = cut;</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    }</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a>(first, last, comp);</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>}</div>
+</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span></div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00507" data-start="{" data-end="}">
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno"><a class="line" href="group___sort_algorithms.html#gaf843abe1431e912979c95e0052a24a79">  507</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">nth_element</a>(Iterator first, Iterator nth, Iterator last) {</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>    <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">nth_element</a>(first, nth, last, <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>}</div>
+</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span> <span class="comment">// SortAlgorithms</span></div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span> </div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_SORT_HPP__</span></div>
+<div class="ttc" id="acompare_8hpp_html"><div class="ttname"><a href="compare_8hpp.html">compare.hpp</a></div><div class="ttdoc">比较算法</div></div>
+<div class="ttc" id="agroup___compare_algorithms_html_ga69873b0598cc28f930d89d2930e78f85"><div class="ttname"><a href="group___compare_algorithms.html#ga69873b0598cc28f930d89d2930e78f85">median</a></div><div class="ttdeci">constexpr const T &amp; median(const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</div><div class="ttdoc">返回三个值的中位数</div><div class="ttdef"><b>定义</b> <a href="compare_8hpp_source.html#l00205">compare.hpp:205</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga16e8117ec3de7dcf87ae62c7e6e4ec50"><div class="ttname"><a href="group___heap_algorithms.html#ga16e8117ec3de7dcf87ae62c7e6e4ec50">adjust_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void adjust_heap(Iterator first, Distance hole_index, Distance len, T value, Compare comp)</div><div class="ttdoc">堆调整辅助函数</div><div class="ttdef"><b>定义</b> <a href="heap_8hpp_source.html#l00173">heap.hpp:173</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_ga427912570db28bed6f6e3962ffe7ca37"><div class="ttname"><a href="group___heap_algorithms.html#ga427912570db28bed6f6e3962ffe7ca37">make_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void make_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">创建堆</div><div class="ttdef"><b>定义</b> <a href="heap_8hpp_source.html#l00299">heap.hpp:299</a></div></div>
+<div class="ttc" id="agroup___heap_algorithms_html_gaccdac1809fcd635ea1d4cda2b94ccfba"><div class="ttname"><a href="group___heap_algorithms.html#gaccdac1809fcd635ea1d4cda2b94ccfba">sort_heap</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 void sort_heap(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">将堆转换为有序序列</div><div class="ttdef"><b>定义</b> <a href="heap_8hpp_source.html#l00273">heap.hpp:273</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_ga0cd01d6904a8c302e61f27b32d50c9fa"><div class="ttname"><a href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_input_iter_v</div><div class="ttdoc">检查是否为范围输入迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00562">concepts.hpp:562</a></div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_gafd48e5648f10e974c82b7b9adf9abdc8"><div class="ttname"><a href="group___iterator_category_checks.html#gafd48e5648f10e974c82b7b9adf9abdc8">is_ranges_rnd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_rnd_iter_v</div><div class="ttdoc">检查是否为范围随机访问迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00620">concepts.hpp:620</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga81a6fcf5c05367caa72c5e1e26ffa38f"><div class="ttname"><a href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a></div><div class="ttdeci">constexpr Iterator next(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</div><div class="ttdoc">获取迭代器的后一个位置</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00134">iterator.hpp:134</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_gab75627c1df8e95d5e92adc5faa6f13d3"><div class="ttname"><a href="group___iterator_operation.html#gab75627c1df8e95d5e92adc5faa6f13d3">distance</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; distance(Iterator first, Iterator last)</div><div class="ttdoc">计算两个迭代器之间的距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00170">iterator.hpp:170</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gad620992f7bf5c8c7b5dfae7a3dd55781"><div class="ttname"><a href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::value_type iter_value_t</div><div class="ttdoc">获取迭代器的值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00093">iterator_traits.hpp:93</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gaf61f58aa2abc24434e0b77340ddf2cfa"><div class="ttname"><a href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00101">iterator_traits.hpp:101</a></div></div>
+<div class="ttc" id="agroup___merge_algorithms_html_ga33c87a66ef070be6001c33a05fd4e755"><div class="ttname"><a href="group___merge_algorithms.html#ga33c87a66ef070be6001c33a05fd4e755">inplace_merge</a></div><div class="ttdeci">constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp)</div><div class="ttdoc">原地合并两个已排序的连续范围</div><div class="ttdef"><b>定义</b> <a href="merge_8hpp_source.html#l00258">merge.hpp:258</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga118ac33368d5c06e1839fa87b29521c4"><div class="ttname"><a href="group___namespace_macros.html#ga118ac33368d5c06e1839fa87b29521c4">NEFORCE_BEGIN_INNER__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_INNER__</div><div class="ttdoc">开始inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00321">c++config.hpp:321</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga7329c0ebb3b16b09c913ebe284561a1c"><div class="ttname"><a href="group___namespace_macros.html#ga7329c0ebb3b16b09c913ebe284561a1c">_INNER</a></div><div class="ttdeci">#define _INNER</div><div class="ttdoc">inner命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00333">c++config.hpp:333</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaf9898c456a36eb511cc72e004f9b6ecd"><div class="ttname"><a href="group___namespace_macros.html#gaf9898c456a36eb511cc72e004f9b6ecd">NEFORCE_END_INNER__</a></div><div class="ttdeci">#define NEFORCE_END_INNER__</div><div class="ttdoc">结束inner命名空间</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00327">c++config.hpp:327</a></div></div>
+<div class="ttc" id="agroup___partition_algorithms_html_gab6d7a6734184b726fc208d71e43706fe"><div class="ttname"><a href="group___partition_algorithms.html#gab6d7a6734184b726fc208d71e43706fe">lomuto_partition</a></div><div class="ttdeci">constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T &amp;pivot, Compare comp)</div><div class="ttdoc">Lomuto分区算法</div><div class="ttdef"><b>定义</b> <a href="partition_8hpp_source.html#l00083">partition.hpp:83</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga151971a7781537166e3cbc15d28b0557"><div class="ttname"><a href="group___shift_algorithms.html#ga151971a7781537166e3cbc15d28b0557">iter_swap</a></div><div class="ttdeci">constexpr void iter_swap(Iterator1 a, Iterator2 b) noexcept(noexcept(_NEFORCE swap(*a, *b)))</div><div class="ttdoc">交换迭代器指向的元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00397">shift.hpp:397</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gab80e03c7d3a15005c73569c911556d71"><div class="ttname"><a href="group___shift_algorithms.html#gab80e03c7d3a15005c73569c911556d71">copy_backward</a></div><div class="ttdeci">constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __copy_backward_aux(first, last, result)))</div><div class="ttdoc">反向复制范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00225">shift.hpp:225</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga0ee44dde2bc3a33ba32cc85cc55dbe21"><div class="ttname"><a href="group___sort_algorithms.html#ga0ee44dde2bc3a33ba32cc85cc55dbe21">introspective_sort</a></div><div class="ttdeci">void introspective_sort(Iterator first, Iterator last, int depth_limit, Compare comp)</div><div class="ttdoc">内省排序</div><div class="ttdef"><b>定义</b> <a href="#l00317">sort.hpp:317</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga1886b1ec068eee2817df757f1991980d"><div class="ttname"><a href="group___sort_algorithms.html#ga1886b1ec068eee2817df757f1991980d">insertion_sort</a></div><div class="ttdeci">void insertion_sort(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">插入排序</div><div class="ttdef"><b>定义</b> <a href="#l00273">sort.hpp:273</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga22c30ead6a92afb912c68e2f9364a819"><div class="ttname"><a href="group___sort_algorithms.html#ga22c30ead6a92afb912c68e2f9364a819">merge_sort</a></div><div class="ttdeci">void merge_sort(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">归并排序</div><div class="ttdef"><b>定义</b> <a href="#l00113">sort.hpp:113</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga351f34ece579b7648aaa887896850608"><div class="ttname"><a href="group___sort_algorithms.html#ga351f34ece579b7648aaa887896850608">nth_element</a></div><div class="ttdeci">void nth_element(Iterator first, Iterator nth, Iterator last, Compare comp)</div><div class="ttdoc">第n个元素选择</div><div class="ttdef"><b>定义</b> <a href="#l00489">sort.hpp:489</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga5fce1d0fb240bb3578519e037bac0b00"><div class="ttname"><a href="group___sort_algorithms.html#ga5fce1d0fb240bb3578519e037bac0b00">is_sorted</a></div><div class="ttdeci">bool is_sorted(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">检查范围是否已排序</div><div class="ttdef"><b>定义</b> <a href="#l00036">sort.hpp:36</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_ga7782ccaeaf7cafbeea2439ca26d33338"><div class="ttname"><a href="group___sort_algorithms.html#ga7782ccaeaf7cafbeea2439ca26d33338">quick_sort</a></div><div class="ttdeci">void quick_sort(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">快速排序</div><div class="ttdef"><b>定义</b> <a href="#l00364">sort.hpp:364</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_gaab427767ef61a5d9de340c035ea6f103"><div class="ttname"><a href="group___sort_algorithms.html#gaab427767ef61a5d9de340c035ea6f103">partial_sort_copy</a></div><div class="ttdeci">Iterator2 partial_sort_copy(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</div><div class="ttdoc">部分排序并复制到另一个范围</div><div class="ttdef"><b>定义</b> <a href="#l00191">sort.hpp:191</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_gab783225826837f46b5125cf43ecd442b"><div class="ttname"><a href="group___sort_algorithms.html#gab783225826837f46b5125cf43ecd442b">is_sorted_until</a></div><div class="ttdeci">Iterator is_sorted_until(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">查找首个破坏排序的元素</div><div class="ttdef"><b>定义</b> <a href="#l00071">sort.hpp:71</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_gad27000a1c2793398bcb92fb151d8aeca"><div class="ttname"><a href="group___sort_algorithms.html#gad27000a1c2793398bcb92fb151d8aeca">partial_sort</a></div><div class="ttdeci">void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp)</div><div class="ttdoc">部分排序</div><div class="ttdef"><b>定义</b> <a href="#l00150">sort.hpp:150</a></div></div>
+<div class="ttc" id="agroup___sort_algorithms_html_gad43eb8f252707a714bbfd78ab025c3e5"><div class="ttname"><a href="group___sort_algorithms.html#gad43eb8f252707a714bbfd78ab025c3e5">sort</a></div><div class="ttdeci">void sort(Iterator first, Iterator last, Compare comp)</div><div class="ttdoc">标准排序</div><div class="ttdef"><b>定义</b> <a href="#l00449">sort.hpp:449</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00116">type_traits.hpp:116</a></div></div>
+<div class="ttc" id="aheap_8hpp_html"><div class="ttname"><a href="heap_8hpp.html">heap.hpp</a></div><div class="ttdoc">堆算法</div></div>
+<div class="ttc" id="amerge_8hpp_html"><div class="ttname"><a href="merge_8hpp.html">merge.hpp</a></div><div class="ttdoc">合并算法</div></div>
+<div class="ttc" id="apartition_8hpp_html"><div class="ttname"><a href="partition_8hpp.html">partition.hpp</a></div><div class="ttdoc">分区算法</div></div>
+<div class="ttc" id="astructless_html"><div class="ttname"><a href="structless.html">less</a></div><div class="ttdoc">小于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00347">functor.hpp:347</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>algorithm</b></li><li class="navelem"><a href="sort_8hpp.html">sort.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

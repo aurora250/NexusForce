@@ -1,0 +1,5 @@
+var classhazard__pointer__obj__base =
+[
+    [ "destroy", "classhazard__pointer__obj__base.html#a9e179233d5b592750c0e44262f75dfe8", null ],
+    [ "next", "classhazard__pointer__obj__base.html#ade76a3fc1006cff9269564b074937bf7", null ]
+];

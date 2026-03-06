@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 原子内存序</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___memory_order.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">原子内存序 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>原子内存顺序行为  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gad658351bedece1752acbd72886a7e0e4" id="r_gad658351bedece1752acbd72886a7e0e4"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> : int32_t { <br />
+&#160;&#160;<a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b">memory_order::relaxed</a>
+, <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0">memory_order::consume</a>
+, <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144">memory_order::acquire</a>
+, <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a>
+, <br />
+&#160;&#160;<a class="el" href="#ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c">memory_order::acq_rel</a>
+, <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604">memory_order::seq_cst</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gad658351bedece1752acbd72886a7e0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序  <a href="#gad658351bedece1752acbd72886a7e0e4">更多...</a><br /></td></tr>
+<tr class="memitem:gaf6c9980cf35b938ee765508ef4dc6d42" id="r_gaf6c9980cf35b938ee765508ef4dc6d42"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> : int64_t { <a class="el" href="#ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8">memory_order_modifier::memory_order_mask</a> = 0x0ffff
+, <a class="el" href="#ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2">memory_order_modifier::memory_order_modifier_mask</a> = 0xffff0000
+, <a class="el" href="#ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c">memory_order_modifier::memory_order_hle_acquire</a> = 0x10000
+, <a class="el" href="#ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783">memory_order_modifier::memory_order_hle_release</a> = 0x20000
+ }</td></tr>
+<tr class="memdesc:gaf6c9980cf35b938ee765508ef4dc6d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序修饰符枚举  <a href="#gaf6c9980cf35b938ee765508ef4dc6d42">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga4d9a876d4d53afcbc2b20efdf7f0d170" id="r_ga4d9a876d4d53afcbc2b20efdf7f0d170"><td class="memItemLeft">constexpr <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga4d9a876d4d53afcbc2b20efdf7f0d170">operator|</a> (<a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo, <a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> mod) noexcept</td></tr>
+<tr class="memdesc:ga4d9a876d4d53afcbc2b20efdf7f0d170"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序与修饰符的或操作符  <br /></td></tr>
+<tr class="memitem:gaa412d48215ac5173e7fc457a4e9443e6" id="r_gaa412d48215ac5173e7fc457a4e9443e6"><td class="memItemLeft">constexpr <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaa412d48215ac5173e7fc457a4e9443e6">operator&amp;</a> (<a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo, <a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> mod) noexcept</td></tr>
+<tr class="memdesc:gaa412d48215ac5173e7fc457a4e9443e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存顺序与修饰符的与操作符  <br /></td></tr>
+<tr class="memitem:gafda3e5c6834532546b1eaef81affc2b2" id="r_gafda3e5c6834532546b1eaef81affc2b2"><td class="memItemLeft">constexpr <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a>&#160;</td><td class="memItemRight"><a class="el" href="#gafda3e5c6834532546b1eaef81affc2b2">cmpexch_failure_order</a> (const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gafda3e5c6834532546b1eaef81affc2b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原子比较交换操作失败时的内存顺序  <br /></td></tr>
+<tr class="memitem:ga0ebbd1fbd5cee109f313d7ef89dd257f" id="r_ga0ebbd1fbd5cee109f313d7ef89dd257f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga0ebbd1fbd5cee109f313d7ef89dd257f">is_valid_cmpexch_failure_order</a> (const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga0ebbd1fbd5cee109f313d7ef89dd257f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查比较交换失败内存顺序是否有效  <br /></td></tr>
+<tr class="memitem:gad09904472351069bf4052ca1aa2cef7b" id="r_gad09904472351069bf4052ca1aa2cef7b"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#gad09904472351069bf4052ca1aa2cef7b">atomic_thread_fence</a> (const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gad09904472351069bf4052ca1aa2cef7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程内存屏障  <br /></td></tr>
+<tr class="memitem:ga68dc6572818e290f920ee64fad9f0d62" id="r_ga68dc6572818e290f920ee64fad9f0d62"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ga68dc6572818e290f920ee64fad9f0d62">atomic_signal_fence</a> (const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga68dc6572818e290f920ee64fad9f0d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">信号内存屏障  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:gab7d3a13cfab1d0d9d1e747ac3d774d61" id="r_gab7d3a13cfab1d0d9d1e747ac3d774d61"><td class="memItemLeft"><a id="gab7d3a13cfab1d0d9d1e747ac3d774d61" name="gab7d3a13cfab1d0d9d1e747ac3d774d61"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_relaxed</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b">memory_order::relaxed</a></td></tr>
+<tr class="memdesc:gab7d3a13cfab1d0d9d1e747ac3d774d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">宽松内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga5f22a1191ac5d936f9fc1c7b3b72eddd" id="r_ga5f22a1191ac5d936f9fc1c7b3b72eddd"><td class="memItemLeft"><a id="ga5f22a1191ac5d936f9fc1c7b3b72eddd" name="ga5f22a1191ac5d936f9fc1c7b3b72eddd"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_consume</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0">memory_order::consume</a></td></tr>
+<tr class="memdesc:ga5f22a1191ac5d936f9fc1c7b3b72eddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据依赖内存顺序常量 <br /></td></tr>
+<tr class="memitem:gac472f4b38d5bc0ba23a6113984118c24" id="r_gac472f4b38d5bc0ba23a6113984118c24"><td class="memItemLeft"><a id="gac472f4b38d5bc0ba23a6113984118c24" name="gac472f4b38d5bc0ba23a6113984118c24"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_acquire</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144">memory_order::acquire</a></td></tr>
+<tr class="memdesc:gac472f4b38d5bc0ba23a6113984118c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga80883e2cd37a8e670dc016e91059d936" id="r_ga80883e2cd37a8e670dc016e91059d936"><td class="memItemLeft"><a id="ga80883e2cd37a8e670dc016e91059d936" name="ga80883e2cd37a8e670dc016e91059d936"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_release</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a></td></tr>
+<tr class="memdesc:ga80883e2cd37a8e670dc016e91059d936"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga3b921278ed46859e35eae165a2f2e96d" id="r_ga3b921278ed46859e35eae165a2f2e96d"><td class="memItemLeft"><a id="ga3b921278ed46859e35eae165a2f2e96d" name="ga3b921278ed46859e35eae165a2f2e96d"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_acq_rel</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c">memory_order::acq_rel</a></td></tr>
+<tr class="memdesc:ga3b921278ed46859e35eae165a2f2e96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取-释放内存顺序常量 <br /></td></tr>
+<tr class="memitem:ga9e670570506f24d28d99c8e004906bb3" id="r_ga9e670570506f24d28d99c8e004906bb3"><td class="memItemLeft"><a id="ga9e670570506f24d28d99c8e004906bb3" name="ga9e670570506f24d28d99c8e004906bb3"></a>
+NEFORCE_INLINE17 constexpr auto&#160;</td><td class="memItemRight"><b>memory_order_seq_cst</b> = <a class="el" href="#ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604">memory_order::seq_cst</a></td></tr>
+<tr class="memdesc:ga9e670570506f24d28d99c8e004906bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">顺序一致性内存顺序常量 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>原子内存顺序行为 </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
+<a id="gad658351bedece1752acbd72886a7e0e4" name="gad658351bedece1752acbd72886a7e0e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad658351bedece1752acbd72886a7e0e4">&#9670;&#160;</a></span>memory_order</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> : <a class="el" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>内存顺序 </p>
+<p>定义原子操作的内存顺序语义，控制不同线程间的内存可见性顺序。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b" name="ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b"></a>relaxed&#160;</td><td class="fielddoc"><p>最宽松的内存顺序，只保证原子性 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0" name="ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0"></a>consume&#160;</td><td class="fielddoc"><p>数据依赖顺序，用于依赖读取的场景 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144" name="ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144"></a>acquire&#160;</td><td class="fielddoc"><p>获取操作，确保后续读写不会被重排到前面 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4" name="ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4"></a>release&#160;</td><td class="fielddoc"><p>释放操作，确保前面的读写不会被重排到后面 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c" name="ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c"></a>acq_rel&#160;</td><td class="fielddoc"><p>获取-释放组合操作 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604" name="ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604"></a>seq_cst&#160;</td><td class="fielddoc"><p>顺序一致性，最严格的内存顺序 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00029">29</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf6c9980cf35b938ee765508ef4dc6d42" name="gaf6c9980cf35b938ee765508ef4dc6d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6c9980cf35b938ee765508ef4dc6d42">&#9670;&#160;</a></span>memory_order_modifier</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a> : <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>内存顺序修饰符枚举 </p>
+<p>用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8" name="ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8"></a>memory_order_mask&#160;</td><td class="fielddoc"><p>内存顺序掩码 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2" name="ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2"></a>memory_order_modifier_mask&#160;</td><td class="fielddoc"><p>修饰符掩码 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c" name="ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c"></a>memory_order_hle_acquire&#160;</td><td class="fielddoc"><p>HLE获取修饰符 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783" name="ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783"></a>memory_order_hle_release&#160;</td><td class="fielddoc"><p>HLE释放修饰符 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga68dc6572818e290f920ee64fad9f0d62" name="ga68dc6572818e290f920ee64fad9f0d62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga68dc6572818e290f920ee64fad9f0d62">&#9670;&#160;</a></span>atomic_signal_fence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_signal_fence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>信号内存屏障 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mo</td><td>内存顺序</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在同一线程内的信号处理程序和普通代码间插入内存屏障。 </p>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00162">162</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00039">memory_order_relaxed</a>.</p>
+
+</div>
+</div>
+<a id="gad09904472351069bf4052ca1aa2cef7b" name="gad09904472351069bf4052ca1aa2cef7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad09904472351069bf4052ca1aa2cef7b">&#9670;&#160;</a></span>atomic_thread_fence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>线程内存屏障 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mo</td><td>内存顺序</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在不同线程间插入内存屏障，确保内存操作的顺序性。 </p>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00132">132</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00043">memory_order_acquire</a>, <a class="el" href="atomic__base_8hpp_source.html#l00041">memory_order_consume</a>, <a class="el" href="atomic__base_8hpp_source.html#l00039">memory_order_relaxed</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00049">memory_order_seq_cst</a>.</p>
+
+</div>
+</div>
+<a id="gafda3e5c6834532546b1eaef81affc2b2" name="gafda3e5c6834532546b1eaef81affc2b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafda3e5c6834532546b1eaef81affc2b2">&#9670;&#160;</a></span>cmpexch_failure_order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> cmpexch_failure_order </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原子比较交换操作失败时的内存顺序 </p>
+<p>对于原子比较交换（compare-exchange）操作，成功和失败的内存顺序可以不同。 此函数根据给定的内存顺序，返回对应的失败内存顺序。</p>
+<p>转换规则：</p><ul>
+<li>如果基础内存顺序为 <span class="tt"><a class="el" href="#ga3b921278ed46859e35eae165a2f2e96d" title="获取-释放内存顺序常量">memory_order_acq_rel</a></span>，失败顺序为 <span class="tt"><a class="el" href="#gac472f4b38d5bc0ba23a6113984118c24" title="获取内存顺序常量">memory_order_acquire</a></span></li>
+<li>如果基础内存顺序为 <span class="tt"><a class="el" href="#ga80883e2cd37a8e670dc016e91059d936" title="释放内存顺序常量">memory_order_release</a></span>，失败顺序为 <span class="tt"><a class="el" href="#gab7d3a13cfab1d0d9d1e747ac3d774d61" title="宽松内存顺序常量">memory_order_relaxed</a></span></li>
+<li>其他基础内存顺序保持不变</li>
+<li>保留原始内存顺序中的所有修饰符 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00102">102</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00047">memory_order_acq_rel</a>, <a class="el" href="atomic__base_8hpp_source.html#l00043">memory_order_acquire</a>, <a class="el" href="atomic__base_8hpp_source.html#l00059">memory_order_mask</a>, <a class="el" href="atomic__base_8hpp_source.html#l00060">memory_order_modifier_mask</a>, <a class="el" href="atomic__base_8hpp_source.html#l00039">memory_order_relaxed</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00045">memory_order_release</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00240">atomic&lt; int8_t &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00248">atomic&lt; int8_t &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01880">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01889">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02479">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02488">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02754">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02762">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03459">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03005">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03169">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00193">atomic&lt; int8_t &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00201">atomic&lt; int8_t &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01831">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01841">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02425">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02435">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02738">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02746">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03447">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02993">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l03157">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a>.</p>
+
+</div>
+</div>
+<a id="ga0ebbd1fbd5cee109f313d7ef89dd257f" name="ga0ebbd1fbd5cee109f313d7ef89dd257f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ebbd1fbd5cee109f313d7ef89dd257f">&#9670;&#160;</a></span>is_valid_cmpexch_failure_order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_valid_cmpexch_failure_order </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查比较交换失败内存顺序是否有效 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mo</td><td>待检查的内存顺序 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否有效 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>失败内存顺序不能是release或acq_rel </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00120">120</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00047">memory_order_acq_rel</a>, <a class="el" href="atomic__base_8hpp_source.html#l00059">memory_order_mask</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l00045">memory_order_release</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00758">atomic_cmpexch_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01140">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00630">atomic_cmpexch_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01014">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00214">atomic&lt; int8_t &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00225">atomic&lt; int8_t &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02450">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00171">atomic&lt; int8_t &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00180">atomic&lt; int8_t &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02395">atomic_base&lt; T * &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02408">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>.</p>
+
+</div>
+</div>
+<a id="gaa412d48215ac5173e7fc457a4e9443e6" name="gaa412d48215ac5173e7fc457a4e9443e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa412d48215ac5173e7fc457a4e9443e6">&#9670;&#160;</a></span>operator&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> operator&amp; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a></td>          <td class="paramname"><span class="paramname"><em>mod</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>内存顺序与修饰符的与操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mo</td><td>内存顺序 </td></tr>
+    <tr><td class="paramname">mod</td><td>内存顺序修饰符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>提取后的内存顺序</dd></dl>
+<dl class="section note"><dt>注解</dt><dd>用于从组合值中提取特定的内存顺序或修饰符 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga4d9a876d4d53afcbc2b20efdf7f0d170" name="ga4d9a876d4d53afcbc2b20efdf7f0d170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d9a876d4d53afcbc2b20efdf7f0d170">&#9670;&#160;</a></span>operator|()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a> operator| </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#gaf6c9980cf35b938ee765508ef4dc6d42">memory_order_modifier</a></td>          <td class="paramname"><span class="paramname"><em>mod</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>内存顺序与修饰符的或操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mo</td><td>内存顺序 </td></tr>
+    <tr><td class="paramname">mod</td><td>内存顺序修饰符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>组合后的内存顺序</dd></dl>
+<dl class="section note"><dt>注解</dt><dd>用于将内存顺序与修饰符组合使用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l00073">73</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

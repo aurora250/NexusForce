@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: ipackage.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ipackage_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ipackage.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ipackage_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="icommon_8hpp.html">NeForce/core/interface/icommon.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="inumeric_8hpp.html">NeForce/core/interface/inumeric.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> PackageT&gt;</div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structipackage.html">   32</a></span><span class="keyword">struct </span><a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a> : <a class="code hl_struct" href="structicommon.html">icommon</a>&lt;T&gt;, <a class="code hl_struct" href="structiarithmetic.html">iarithmetic</a>&lt;T&gt;, <a class="code hl_struct" href="structibinary.html">ibinary</a>&lt;T&gt; {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">static_assert</span>(is_arithmetic_v&lt;PackageT&gt;, <span class="stringliteral">&quot;PackageT must be arithmetic.&quot;</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; derived() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T&amp;<span class="keyword">&gt;</span>(*this);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">constexpr</span> T&amp; derived() <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T&amp;<span class="keyword">&gt;</span>(*this);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">   53</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a> = PackageT;  </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">   56</a></span>    <a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>{<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize&lt;package_type&gt;</a>()};  </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">   64</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>() noexcept = default;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structipackage.html#a549625561e81e554b6552a292cf69aea">   72</a></span>    explicit constexpr <a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>(<a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a> <a class="code hl_function" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">value</a>) noexcept</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    : <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>(<a class="code hl_function" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">value</a>) {}</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structipackage.html#a4da02ab67ec801560ff02e4784324750">   79</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="structipackage.html#a4da02ab67ec801560ff02e4784324750">ipackage</a>(<span class="keyword">const</span> <a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>&amp; other) noexcept</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    : <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>(other.value_) {}</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structipackage.html#a129b2b663ac277c5f6d11bd1720e6ea7">   86</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="structipackage.html#a129b2b663ac277c5f6d11bd1720e6ea7">ipackage</a>(<a class="code hl_function" href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    : <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>(other.value_) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        other.value_ = <a class="code hl_function" href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize&lt;package_type&gt;</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structipackage.html#aef48c710de7f2a81b1e238892b026f5f">   97</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="structipackage.html#aef48c710de7f2a81b1e238892b026f5f">~ipackage</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structipackage.html#a2070d73d6d864bd28fdb4fb21a557a2c">  104</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keyword">operator</span> <a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a>() const noexcept {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">  112</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a> <a class="code hl_function" href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">value</a>() const noexcept {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="structipackage.html#a71bf94256e403d35c6c31538706c5912">  120</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> <a class="code hl_function" href="structipackage.html#a71bf94256e403d35c6c31538706c5912">to_int64</a>() const noexcept {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a><span class="keyword">&gt;</span>(<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span></div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="structipackage.html#a49612c03a3d8d0cfcb1b4887fe7ea906">  128</a></span>    NEFORCE_NODISCARD <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="structipackage.html#a49612c03a3d8d0cfcb1b4887fe7ea906">bytes</a>() noexcept {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a>);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
+<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="structipackage.html#a815b7deb82b47cee3e6212b9c7e99f00">  136</a></span>    NEFORCE_NODISCARD <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="structipackage.html#a815b7deb82b47cee3e6212b9c7e99f00">bits</a>() noexcept {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">package_type</a>) * 8;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
+</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structipackage.html#ad1e3d75da1e20eb27d2153b318a224cd">  144</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="structipackage.html#ad1e3d75da1e20eb27d2153b318a224cd">to_hash</a>() const noexcept {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_struct" href="structhash.html">hash&lt;package_type&gt;</a>()(<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="structipackage.html#adc466b28cb59337e62b09c4ae8ea6ecf">  152</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structipackage.html#adc466b28cb59337e62b09c4ae8ea6ecf">swap</a>(T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a>(<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>, other.value_);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="structipackage.html#a05794b8047878569161bf530835ffdf3">  161</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structipackage.html#a05794b8047878569161bf530835ffdf3">operator ==</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> == other.value_;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="structipackage.html#a2dc7aff12cc56305323a15dba56f8dd5">  170</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structipackage.html#a2dc7aff12cc56305323a15dba56f8dd5">operator &lt;</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> &lt; other.value_;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
+</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span></div>
+<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="structipackage.html#ad5ce36d807db7fcbf1e911059a56a0ee">  179</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#ad5ce36d807db7fcbf1e911059a56a0ee">operator +=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> += other.value_;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    }</div>
+</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
+<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="structipackage.html#a52b642942569147d303a46bfd7e42fc4">  189</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a52b642942569147d303a46bfd7e42fc4">operator -=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> -= other.value_;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span></div>
+<div class="foldopen" id="foldopen00199" data-start="{" data-end="}">
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="structipackage.html#a1302c99f56d1e980353bbe9a1d3261e9">  199</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a1302c99f56d1e980353bbe9a1d3261e9">operator *=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> *= other.value_;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
+</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span></div>
+<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="structipackage.html#a2bce454349f18fe7cbc65c51c58f8e2c">  210</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a2bce454349f18fe7cbc65c51c58f8e2c">operator /=</a>(<span class="keyword">const</span> T&amp; other) {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">if</span> (other.value_ == 0) {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            throw_exception(<a class="code hl_struct" href="structmath__exception.html">math_exception</a>(<span class="stringliteral">&quot;Division by zero&quot;</span>));</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> /= other;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    }</div>
+</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
+<div class="foldopen" id="foldopen00224" data-start="{" data-end="}">
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29">  224</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29">operator %=</a>(<span class="keyword">const</span> T&amp; other) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> = <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___math_functions.html#ga6899e0a404b3a92a4f981c6eee3f54c9">float_mod</a>(<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>, other.value_);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span></div>
+<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="structipackage.html#aa1d8a1d7b26ad471834d88ff96e762f1">  233</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> T <a class="code hl_function" href="structipackage.html#aa1d8a1d7b26ad471834d88ff96e762f1">operator -</a>() const noexcept {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">return</span> T(-<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
+</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span></div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="structipackage.html#aa2cd49f6f5f220f96ad4c72da396962b">  241</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#aa2cd49f6f5f220f96ad4c72da396962b">operator ++</a>() noexcept {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        ++<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
+</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span></div>
+<div class="foldopen" id="foldopen00250" data-start="{" data-end="}">
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="structipackage.html#ae9caaebee49246b2dc19c1e657d1478a">  250</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#ae9caaebee49246b2dc19c1e657d1478a">operator --</a>() noexcept {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        --<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a>;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    }</div>
+</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span></div>
+<div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="structipackage.html#a97a0891d74d3ddf93066e6c35d20ff39">  259</a></span>    <span class="keyword">constexpr</span> T <a class="code hl_function" href="structipackage.html#a97a0891d74d3ddf93066e6c35d20ff39">operator ~</a>() const noexcept {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">return</span> T{<a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">~value_</a>};</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
+</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span></div>
+<div class="foldopen" id="foldopen00268" data-start="{" data-end="}">
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="structipackage.html#a3ec6d843b7be2f992350939e1162cf42">  268</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a3ec6d843b7be2f992350939e1162cf42">operator &amp;=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> &amp;= other.value_;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
+</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span></div>
+<div class="foldopen" id="foldopen00278" data-start="{" data-end="}">
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="structipackage.html#a73916d2f53368f67416f8139a71748a4">  278</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a73916d2f53368f67416f8139a71748a4">operator |=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> |= other.value_;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    }</div>
+</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span></div>
+<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="structipackage.html#a525f7518065af3d6684c57b517f35350">  288</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a525f7518065af3d6684c57b517f35350">operator ^=</a>(<span class="keyword">const</span> T&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> ^= other.value_;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span></div>
+<div class="foldopen" id="foldopen00299" data-start="{" data-end="}">
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="structipackage.html#a07302e7c4ea610e490085bb9d074e967">  299</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a07302e7c4ea610e490085bb9d074e967">operator &lt;&lt;=</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> shift) {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <span class="keywordflow">if</span> (shift &gt;= 64) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            throw_exception(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;Shift count out of range&quot;</span>));</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> &lt;&lt;= shift;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    }</div>
+</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span></div>
+<div class="foldopen" id="foldopen00313" data-start="{" data-end="}">
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="structipackage.html#a3a0b3a31597d9ef3b4a8857321fe6aac">  313</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="structipackage.html#a3a0b3a31597d9ef3b4a8857321fe6aac">operator &gt;&gt;=</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> shift) {</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordflow">if</span> (shift &gt;= 64) {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            throw_exception(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;Shift count out of range&quot;</span>));</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        <a class="code hl_variable" href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">value_</a> &gt;&gt;= shift;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="keywordflow">return</span> derived();</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    }</div>
+</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>};</div>
+</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> <span class="comment">// CRTPInterfaces</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_INTERFACE_IPACKAGE_HPP__</span></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___math_functions_html_ga6899e0a404b3a92a4f981c6eee3f54c9"><div class="ttname"><a href="group___math_functions.html#ga6899e0a404b3a92a4f981c6eee3f54c9">float_mod</a></div><div class="ttdeci">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00234">math.hpp:234</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___swap_utility_html_ga6a39d376fb4396550fe3dadb383d17df"><div class="ttname"><a href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap</a></div><div class="ttdeci">void swap()=delete</div><div class="ttdoc">删除无参数的swap重载</div></div>
+<div class="ttc" id="agroup___type_initialize_function_html_gafff7aa9d7280a07a58464ccdf4a8931a"><div class="ttname"><a href="group___type_initialize_function.html#gafff7aa9d7280a07a58464ccdf4a8931a">initialize</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE constexpr T initialize() noexcept(is_nothrow_default_constructible&lt; T &gt;::value)</div><div class="ttdoc">返回类型T的默认初始化值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l04381">type_traits.hpp:4381</a></div></div>
+<div class="ttc" id="aicommon_8hpp_html"><div class="ttname"><a href="icommon_8hpp.html">icommon.hpp</a></div><div class="ttdoc">基本接口基类</div></div>
+<div class="ttc" id="ainumeric_8hpp_html"><div class="ttname"><a href="inumeric_8hpp.html">inumeric.hpp</a></div><div class="ttdoc">数值操作接口</div></div>
+<div class="ttc" id="astructhash_html"><div class="ttname"><a href="structhash.html">hash</a></div><div class="ttdoc">哈希函数的主模板</div><div class="ttdef"><b>定义</b> <a href="hash_8hpp_source.html#l00031">hash.hpp:31</a></div></div>
+<div class="ttc" id="astructiarithmetic_html"><div class="ttname"><a href="structiarithmetic.html">iarithmetic</a></div><div class="ttdoc">算术运算接口基类</div><div class="ttdef"><b>定义</b> <a href="inumeric_8hpp_source.html#l00030">inumeric.hpp:30</a></div></div>
+<div class="ttc" id="astructibinary_html"><div class="ttname"><a href="structibinary.html">ibinary</a></div><div class="ttdoc">位运算接口基类</div><div class="ttdef"><b>定义</b> <a href="inumeric_8hpp_source.html#l00217">inumeric.hpp:217</a></div></div>
+<div class="ttc" id="astructicommon_html"><div class="ttname"><a href="structicommon.html">icommon</a></div><div class="ttdoc">通用接口，同时具备可比较和可哈希功能</div><div class="ttdef"><b>定义</b> <a href="icommon_8hpp_source.html#l00158">icommon.hpp:158</a></div></div>
+<div class="ttc" id="astructipackage_html_a05794b8047878569161bf530835ffdf3"><div class="ttname"><a href="structipackage.html#a05794b8047878569161bf530835ffdf3">ipackage::operator==</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator==(const T &amp;other) const noexcept</div><div class="ttdoc">相等比较操作符</div><div class="ttdef"><b>定义</b> <a href="#l00161">ipackage.hpp:161</a></div></div>
+<div class="ttc" id="astructipackage_html_a07302e7c4ea610e490085bb9d074e967"><div class="ttname"><a href="structipackage.html#a07302e7c4ea610e490085bb9d074e967">ipackage::operator&lt;&lt;=</a></div><div class="ttdeci">constexpr T &amp; operator&lt;&lt;=(const uint32_t shift)</div><div class="ttdoc">左移赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00299">ipackage.hpp:299</a></div></div>
+<div class="ttc" id="astructipackage_html_a129b2b663ac277c5f6d11bd1720e6ea7"><div class="ttname"><a href="structipackage.html#a129b2b663ac277c5f6d11bd1720e6ea7">ipackage::ipackage</a></div><div class="ttdeci">constexpr ipackage(ipackage &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00086">ipackage.hpp:86</a></div></div>
+<div class="ttc" id="astructipackage_html_a1302c99f56d1e980353bbe9a1d3261e9"><div class="ttname"><a href="structipackage.html#a1302c99f56d1e980353bbe9a1d3261e9">ipackage::operator*=</a></div><div class="ttdeci">constexpr T &amp; operator*=(const T &amp;other) noexcept</div><div class="ttdoc">乘法赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00199">ipackage.hpp:199</a></div></div>
+<div class="ttc" id="astructipackage_html_a2bce454349f18fe7cbc65c51c58f8e2c"><div class="ttname"><a href="structipackage.html#a2bce454349f18fe7cbc65c51c58f8e2c">ipackage::operator/=</a></div><div class="ttdeci">constexpr T &amp; operator/=(const T &amp;other)</div><div class="ttdoc">除法赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00210">ipackage.hpp:210</a></div></div>
+<div class="ttc" id="astructipackage_html_a2dc7aff12cc56305323a15dba56f8dd5"><div class="ttname"><a href="structipackage.html#a2dc7aff12cc56305323a15dba56f8dd5">ipackage::operator&lt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&lt;(const T &amp;other) const noexcept</div><div class="ttdoc">小于比较操作符</div><div class="ttdef"><b>定义</b> <a href="#l00170">ipackage.hpp:170</a></div></div>
+<div class="ttc" id="astructipackage_html_a3a0b3a31597d9ef3b4a8857321fe6aac"><div class="ttname"><a href="structipackage.html#a3a0b3a31597d9ef3b4a8857321fe6aac">ipackage::operator&gt;&gt;=</a></div><div class="ttdeci">constexpr T &amp; operator&gt;&gt;=(const uint32_t shift)</div><div class="ttdoc">右移赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00313">ipackage.hpp:313</a></div></div>
+<div class="ttc" id="astructipackage_html_a3ec6d843b7be2f992350939e1162cf42"><div class="ttname"><a href="structipackage.html#a3ec6d843b7be2f992350939e1162cf42">ipackage::operator&amp;=</a></div><div class="ttdeci">constexpr T &amp; operator&amp;=(const T &amp;other) noexcept</div><div class="ttdoc">按位与赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00268">ipackage.hpp:268</a></div></div>
+<div class="ttc" id="astructipackage_html_a49612c03a3d8d0cfcb1b4887fe7ea906"><div class="ttname"><a href="structipackage.html#a49612c03a3d8d0cfcb1b4887fe7ea906">ipackage::bytes</a></div><div class="ttdeci">static NEFORCE_NODISCARD constexpr size_t bytes() noexcept</div><div class="ttdoc">获取类型字节大小</div><div class="ttdef"><b>定义</b> <a href="#l00128">ipackage.hpp:128</a></div></div>
+<div class="ttc" id="astructipackage_html_a4da02ab67ec801560ff02e4784324750"><div class="ttname"><a href="structipackage.html#a4da02ab67ec801560ff02e4784324750">ipackage::ipackage</a></div><div class="ttdeci">constexpr ipackage(const ipackage &amp;other) noexcept</div><div class="ttdoc">拷贝构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00079">ipackage.hpp:79</a></div></div>
+<div class="ttc" id="astructipackage_html_a525f7518065af3d6684c57b517f35350"><div class="ttname"><a href="structipackage.html#a525f7518065af3d6684c57b517f35350">ipackage::operator^=</a></div><div class="ttdeci">constexpr T &amp; operator^=(const T &amp;other) noexcept</div><div class="ttdoc">按位异或赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00288">ipackage.hpp:288</a></div></div>
+<div class="ttc" id="astructipackage_html_a52b642942569147d303a46bfd7e42fc4"><div class="ttname"><a href="structipackage.html#a52b642942569147d303a46bfd7e42fc4">ipackage::operator-=</a></div><div class="ttdeci">constexpr T &amp; operator-=(const T &amp;other) noexcept</div><div class="ttdoc">减法赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00189">ipackage.hpp:189</a></div></div>
+<div class="ttc" id="astructipackage_html_a71bf94256e403d35c6c31538706c5912"><div class="ttname"><a href="structipackage.html#a71bf94256e403d35c6c31538706c5912">ipackage::to_int64</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr int64_t to_int64() const noexcept</div><div class="ttdoc">转换为64位整数</div><div class="ttdef"><b>定义</b> <a href="#l00120">ipackage.hpp:120</a></div></div>
+<div class="ttc" id="astructipackage_html_a73916d2f53368f67416f8139a71748a4"><div class="ttname"><a href="structipackage.html#a73916d2f53368f67416f8139a71748a4">ipackage::operator|=</a></div><div class="ttdeci">constexpr T &amp; operator|=(const T &amp;other) noexcept</div><div class="ttdoc">按位或赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00278">ipackage.hpp:278</a></div></div>
+<div class="ttc" id="astructipackage_html_a7aa989ea26f1dddba13c3bf018b51901"><div class="ttname"><a href="structipackage.html#a7aa989ea26f1dddba13c3bf018b51901">ipackage::ipackage</a></div><div class="ttdeci">constexpr ipackage() noexcept=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="astructipackage_html_a815b7deb82b47cee3e6212b9c7e99f00"><div class="ttname"><a href="structipackage.html#a815b7deb82b47cee3e6212b9c7e99f00">ipackage::bits</a></div><div class="ttdeci">static NEFORCE_NODISCARD constexpr size_t bits() noexcept</div><div class="ttdoc">获取类型位大小</div><div class="ttdef"><b>定义</b> <a href="#l00136">ipackage.hpp:136</a></div></div>
+<div class="ttc" id="astructipackage_html_a92ce2f75002df8eab6ade4cf29bc0b29"><div class="ttname"><a href="structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29">ipackage::operator%=</a></div><div class="ttdeci">constexpr T &amp; operator%=(const T &amp;other)</div><div class="ttdoc">取模赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00224">ipackage.hpp:224</a></div></div>
+<div class="ttc" id="astructipackage_html_a97a0891d74d3ddf93066e6c35d20ff39"><div class="ttname"><a href="structipackage.html#a97a0891d74d3ddf93066e6c35d20ff39">ipackage::operator~</a></div><div class="ttdeci">constexpr T operator~() const noexcept</div><div class="ttdoc">按位取反操作符</div><div class="ttdef"><b>定义</b> <a href="#l00259">ipackage.hpp:259</a></div></div>
+<div class="ttc" id="astructipackage_html_a9b67a2bdf72c87bb04bc1320af0f6816"><div class="ttname"><a href="structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816">ipackage::package_type</a></div><div class="ttdeci">PackageT package_type</div><div class="ttdoc">包装类型</div><div class="ttdef"><b>定义</b> <a href="#l00053">ipackage.hpp:53</a></div></div>
+<div class="ttc" id="astructipackage_html_a9d233c90c8df39928d28b30b8b54a3c5"><div class="ttname"><a href="structipackage.html#a9d233c90c8df39928d28b30b8b54a3c5">ipackage&lt; integer16, int16_t &gt;::value_</a></div><div class="ttdeci">package_type value_</div><div class="ttdef"><b>定义</b> <a href="#l00056">ipackage.hpp:56</a></div></div>
+<div class="ttc" id="astructipackage_html_aa1d8a1d7b26ad471834d88ff96e762f1"><div class="ttname"><a href="structipackage.html#aa1d8a1d7b26ad471834d88ff96e762f1">ipackage::operator-</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T operator-() const noexcept</div><div class="ttdoc">一元负号操作符</div><div class="ttdef"><b>定义</b> <a href="#l00233">ipackage.hpp:233</a></div></div>
+<div class="ttc" id="astructipackage_html_aa2cd49f6f5f220f96ad4c72da396962b"><div class="ttname"><a href="structipackage.html#aa2cd49f6f5f220f96ad4c72da396962b">ipackage::operator++</a></div><div class="ttdeci">constexpr T &amp; operator++() noexcept</div><div class="ttdoc">前置递增操作符</div><div class="ttdef"><b>定义</b> <a href="#l00241">ipackage.hpp:241</a></div></div>
+<div class="ttc" id="astructipackage_html_aaae996c512fb34155e8ce5f6f6b943c9"><div class="ttname"><a href="structipackage.html#aaae996c512fb34155e8ce5f6f6b943c9">ipackage&lt; integer16, int16_t &gt;::value</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr package_type value() const noexcept</div><div class="ttdef"><b>定义</b> <a href="#l00112">ipackage.hpp:112</a></div></div>
+<div class="ttc" id="astructipackage_html_ad1e3d75da1e20eb27d2153b318a224cd"><div class="ttname"><a href="structipackage.html#ad1e3d75da1e20eb27d2153b318a224cd">ipackage::to_hash</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept</div><div class="ttdoc">计算哈希值</div><div class="ttdef"><b>定义</b> <a href="#l00144">ipackage.hpp:144</a></div></div>
+<div class="ttc" id="astructipackage_html_ad5ce36d807db7fcbf1e911059a56a0ee"><div class="ttname"><a href="structipackage.html#ad5ce36d807db7fcbf1e911059a56a0ee">ipackage::operator+=</a></div><div class="ttdeci">constexpr T &amp; operator+=(const T &amp;other) noexcept</div><div class="ttdoc">加法赋值操作符</div><div class="ttdef"><b>定义</b> <a href="#l00179">ipackage.hpp:179</a></div></div>
+<div class="ttc" id="astructipackage_html_adc466b28cb59337e62b09c4ae8ea6ecf"><div class="ttname"><a href="structipackage.html#adc466b28cb59337e62b09c4ae8ea6ecf">ipackage::swap</a></div><div class="ttdeci">constexpr void swap(T &amp;other) noexcept</div><div class="ttdoc">交换内容</div><div class="ttdef"><b>定义</b> <a href="#l00152">ipackage.hpp:152</a></div></div>
+<div class="ttc" id="astructipackage_html_ae9caaebee49246b2dc19c1e657d1478a"><div class="ttname"><a href="structipackage.html#ae9caaebee49246b2dc19c1e657d1478a">ipackage::operator--</a></div><div class="ttdeci">constexpr T &amp; operator--() noexcept</div><div class="ttdoc">前置递减操作符</div><div class="ttdef"><b>定义</b> <a href="#l00250">ipackage.hpp:250</a></div></div>
+<div class="ttc" id="astructipackage_html_aef48c710de7f2a81b1e238892b026f5f"><div class="ttname"><a href="structipackage.html#aef48c710de7f2a81b1e238892b026f5f">ipackage::~ipackage</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 ~ipackage()=default</div><div class="ttdoc">受保护的析构函数</div></div>
+<div class="ttc" id="astructmath__exception_html"><div class="ttname"><a href="structmath__exception.html">math_exception</a></div><div class="ttdoc">数学计算异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00237">exception.hpp:237</a></div></div>
+<div class="ttc" id="astructvalue__exception_html"><div class="ttname"><a href="structvalue__exception.html">value_exception</a></div><div class="ttdoc">变量处理异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00219">exception.hpp:219</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>interface</b></li><li class="navelem"><a href="ipackage_8hpp.html">ipackage.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

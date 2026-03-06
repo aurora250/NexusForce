@@ -1,6 +1,6 @@
-#include <MSTL/compress/zlib_compress.hpp>
-#ifdef MSTL_SUPPORT_ZLIB__
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/compress/zlib_compress.hpp>
+#ifdef NEFORCE_SUPPORT_ZLIB
+NEFORCE_BEGIN_NAMESPACE__
 
 static void check_zlib_error(const int ret_code) {
     if (ret_code != Z_OK) {
@@ -293,5 +293,5 @@ byte_vector zlib_compressor::stream_decompressor::finish() {
     return decompress(cbyte_view{}, true);
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__
 #endif

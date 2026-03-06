@@ -1,73 +1,117 @@
-#include <MSTL/core/utility/hexadecimal.hpp>
-#include <MSTL/core/string/string_util.hpp>
-#include <MSTL/core/time/datetime.hpp>
-#include <MSTL/network/http/http_client.hpp>
-#ifdef MSTL_PLATFORM_LINUX__
-#include <arpa/inet.h>
-#endif
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/async/async.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/network/http/http_client.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 string http_client::build_request_str(const http_client_request& req, const url& req_url) const {
-    string req_str = req.method.method() + " " + req.path + " " + req.version + HTTP_CRLF;
+    string req_str = req.method.method() + " " + req.path + " " + req.version + "\r\n";
     req_str += "Host: " + req.host;
-
-    if (req.port != 80 && req.port != 443) {
-        req_str += ":" + _MSTL to_string(req.port);
+    if ((req_url.scheme == "http" && req.port != 80) || (req_url.scheme == "https" && req.port != 443)) {
+        req_str += ":" + to_string(req.port);
     }
-    req_str += HTTP_CRLF;
+    req_str += "\r\n";
 
     string cookie_header = build_cookie_header(req_url);
-
     if (!cookie_header.empty()) {
-        req_str += "Cookie: " + _MSTL move(cookie_header) + HTTP_CRLF;
+        req_str += "Cookie: " + move(cookie_header) + "\r\n";
+    }
+
+    for (const auto& kv : persistent_headers_) {
+        const string& key = kv.first;
+        const string& value = kv.second;
+        if (req.headers.find(key) == req.headers.end() && key != "Host" && key != "Cookie") {
+            req_str += key + ": " + value + "\r\n";
+        }
     }
 
     bool has_content_type = false;
-    for (const auto &kv : req.headers) {
+    for (const auto& kv : req.headers) {
         string key = kv.first;
         string value = kv.second;
 
-        if (key == "Content-Type") has_content_type = true;
-        if (key == "Host" || key == "Cookie") continue;
-
-        req_str += key + ": " + value + HTTP_CRLF;
+        string key_lower = key;
+        key_lower.lowercase();
+        if (key_lower == "content-type") has_content_type = true;
+        if (key_lower != "host" && key_lower != "cookie") {
+            req_str += key + ": " + value + "\r\n";
+        }
     }
 
     if (!req.body.empty()) {
         if (!has_content_type) {
-            req_str += "Content-Type: application/x-www-form-urlencoded"_s + HTTP_CRLF;
+            req_str += "Content-Type: application/x-www-form-urlencoded\r\n";
         }
-        req_str += "Content-Length: " + _MSTL to_string(req.body.size()) + HTTP_CRLF;
+        req_str += "Content-Length: " + to_string(req.body.size()) + "\r\n";
     }
-    req_str += "Connection: close"_s + HTTP_CRLF2;
-    if (!req.body.empty()) req_str += req.body;
+
+    if (!config_.keep_alive) {
+        req_str += "Connection: close\r\n";
+    }
+
+    req_str += "\r\n";
+
+    if (!req.body.empty()) {
+        req_str += req.body;
+    }
+
     return req_str;
 }
 
 bool http_client::send_request(const string_view request_str) {
-    const ssize_t total = static_cast<ssize_t>(request_str.size());
-    ssize_t sent = 0;
-
-    while (sent < total) {
-        ssize_t n = client_.send(request_str.view(sent, total - sent));
-        if (n <= 0) return false;
-        sent += n;
+    try {
+        const ssize_t sent = client_.send(request_str);
+        return sent == static_cast<ssize_t>(request_str.size());
+    } catch (...) {
+        return false;
     }
-    return true;
 }
 
-bool http_client::read_response(string& out_data) const {
-    constexpr size_t buf_size = 8192;
-    char buffer[buf_size];
-    out_data.clear();
+optional<http_client_response> http_client::read_response() {
+    http_client_response response;
+    string response_data;
+    char buffer[8192];
 
-    while (true) {
-        const ssize_t n = client_.receive(buffer, buf_size);
-        if (n == 0) break;
-        if (n < 0) return false;
-        out_data.append(buffer, n);
+    auto start_time = steady_clock::now();
+
+    try {
+        while (response_data.size() < config_.max_response_size) {
+            ssize_t n = client_.receive(buffer, sizeof(buffer));
+            if (n < 0) {
+                // 超时或错误
+                break;
+            }
+            if (n == 0) {
+                // 连接关闭
+                break;
+            }
+
+            response_data.append(buffer, n);
+
+            if (response_data.find("\r\n\r\n") != string::npos) {
+                http_client_response temp;
+                if (parse_response(response_data.view(), temp)) {
+                    if (temp.content_length > 0) {
+                        size_t header_end = response_data.find("\r\n\r\n") + 4;
+                        size_t body_received = response_data.size() - header_end;
+                        if (body_received >= temp.content_length) {
+                            break;
+                        }
+                    } else if (!temp.chunked) {}
+                }
+            }
+        }
+
+        if (!parse_response(response_data.view(), response)) {
+            return none;
+        }
+
+        response.total_time = time_cast<milliseconds>(steady_clock::now() - start_time);
+
+        return response;
+
+    } catch (...) {
+        return none;
     }
-    return true;
 }
 
 bool http_client::parse_chunked_body(const string_view chunked, string& decoded) {
@@ -76,23 +120,168 @@ bool http_client::parse_chunked_body(const string_view chunked, string& decoded)
     const size_t size = chunked.size();
 
     while (pos < size) {
-        const auto line_end = chunked.find(HTTP_CRLF, pos);
+        const auto line_end = chunked.find("\r\n", pos);
         if (line_end == string::npos) return false;
-        auto size_str = chunked.substr(pos, line_end - pos);
-        auto chunk_size = _MSTL hexadecimal::parse(size_str.trim()).value();
-        if (!chunk_size) return false;
+
+        auto size_str = chunked.substr(pos, line_end - pos).trim();
+        size_t semicolon = size_str.find(';');
+        if (semicolon != string::npos) {
+            size_str = size_str.substr(0, semicolon);
+        }
+
+        size_t chunk_size = 0;
+        try {
+            chunk_size = hexadecimal::parse(size_str);
+        } catch (...) {
+            return false;
+        }
 
         pos = line_end + 2;
-        if (pos + chunk_size > size) return false;
+
+        if (chunk_size == 0) {
+            pos += 2;
+            break;
+        }
+        if (pos + chunk_size + 2 > size) {
+            return false;
+        }
 
         decoded.append(chunked.substr(pos, chunk_size));
         pos += chunk_size + 2;
     }
-    return false;
+    return true;
 }
 
-cookie http_client::parse_set_cookie(const string_view str,
-    string default_domain, string default_path) {
+string http_client::url_encode(string_view str) {
+    string result;
+    result.reserve(str.size() * 3);
+
+    for (unsigned char c : str) {
+        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+            result += c;
+        } else if (c == ' ') {
+            result += '+';
+        } else {
+            result += '%';
+            result += "0123456789ABCDEF"[c >> 4];
+            result += "0123456789ABCDEF"[c & 0x0F];
+        }
+    }
+    return result;
+}
+
+string http_client::url_decode(string_view str) {
+    string result;
+    result.reserve(str.size());
+
+    for (size_t i = 0; i < str.size(); ++i) {
+        if (str[i] == '%' && i + 2 < str.size()) {
+            int high = hexadecimal::digit_value(str[i + 1]);
+            int low = hexadecimal::digit_value(str[i + 2]);
+            if (high >= 0 && low >= 0) {
+                result += static_cast<char>((high << 4) | low);
+                i += 2;
+            } else {
+                result += str[i];
+            }
+        } else if (str[i] == '+') {
+            result += ' ';
+        } else {
+            result += str[i];
+        }
+    }
+    return result;
+}
+
+http_client_response http_client::do_request(http_client_request request, int redirect_count) {
+    http_client_response response;
+
+    url req_url;
+    req_url.scheme = (request.port == 443) ? "https" : "http";
+    req_url.host = request.host;
+    req_url.port = request.port;
+    req_url.path = request.path;
+
+    bool is_ssl = (req_url.scheme == "https");
+
+    try {
+        if (!client_.is_connected()) {
+            if (!client_.connect(request.host, request.port)) {
+                response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+                response.status_message = "Connection failed";
+                response.effective_url = req_url.to_string();
+                return response;
+            }
+        }
+    } catch (const exception& e) {
+        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status_message = "Connection error: "_s + e.what();
+        response.effective_url = req_url.to_string();
+        return response;
+    }
+
+    string request_str = build_request_str(request, req_url);
+    if (!send_request(request_str.view())) {
+        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status_message = "Send failed";
+        response.effective_url = req_url.to_string();
+        return response;
+    }
+
+    auto resp_opt = read_response();
+    if (!resp_opt) {
+        response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
+        response.status_message = "Receive/Parse failed";
+        response.effective_url = req_url.to_string();
+        return response;
+    }
+
+    response = move(*resp_opt);
+    response.effective_url = req_url.to_string();
+    response.redirect_count = redirect_count;
+
+    update_cookies(response.cookies, req_url);
+    const auto status_num = static_cast<uint16_t>(response.status);
+    const bool is_redirect =
+        status_num == 301 || status_num == 302 || status_num == 303 ||
+        status_num == 307 || status_num == 308;
+
+    if (config_.follow_redirects && is_redirect && redirect_count < config_.max_redirects) {
+        string_view location = response.header("Location");
+        if (!location.empty()) {
+            url new_url;
+            if (location.starts_with("http://") || location.starts_with("https://")) {
+                new_url = url(location);
+            } else if (location.starts_with("/")) {
+                new_url = req_url;
+                new_url.path = location;
+            } else {
+                new_url = req_url;
+                size_t last_slash = new_url.path.find_last_of('/');
+                if (last_slash != string::npos) {
+                    new_url.path = new_url.path.substr(0, last_slash + 1) + location;
+                } else {
+                    new_url.path = "/"_s + location;
+                }
+            }
+
+            http_client_request new_req;
+            new_req.host = new_url.host;
+            new_req.port = url::default_port(new_url.scheme.view());
+            new_req.method = request.method;
+            new_req.path = new_url.path.empty() ? "/" : new_url.path;
+            new_req.version = request.version;
+            new_req.headers = request.headers;
+            new_req.body = request.body;
+
+            return do_request(move(new_req), redirect_count + 1);
+        }
+    }
+
+    return response;
+}
+
+cookie http_client::parse_set_cookie(const string_view str, string default_domain, string default_path) {
     vector<string_view> tokens;
     size_t start = 0, end;
     while ((end = str.find(';', start)) != string::npos) {
@@ -101,42 +290,42 @@ cookie http_client::parse_set_cookie(const string_view str,
     }
     tokens.push_back(str.substr(start).trim());
 
-    cookie c;
+    cookie c{};
     if (tokens.empty()) return c;
 
     const size_t eq_pos = tokens[0].find('=');
     if (eq_pos == string::npos) {
         return c;
     }
-    c.set_name(HTTP_COOKIE_NAME(string{tokens[0].substr(0, eq_pos)}));
-    c.set_value(string{tokens[0].substr(eq_pos + 1)});
-    c.set_domain(move(default_domain));
-    c.set_path(default_path.empty() ? "/" : move(default_path));
+    c.name = tokens[0].substr(0, eq_pos);
+    c.value = tokens[0].substr(eq_pos + 1);
+    c.domain = move(default_domain);
+    c.path = default_path.empty() ? "/" : move(default_path);
 
     for (size_t i = 1; i < tokens.size(); ++i) {
-        auto &attr = tokens[i];
+        auto& attr = tokens[i];
         auto lower_attr = string(attr);
         lower_attr.lowercase();
 
         if (lower_attr.starts_with("domain=")) {
-            c.set_domain(string(attr.substr(7)));
+            c.domain = attr.substr(7);
         } else if (lower_attr.starts_with("path=")) {
-            c.set_path(string(attr.substr(5)));
+            c.path = attr.substr(5);
         } else if (lower_attr == "secure") {
-            c.set_secure(true);
+            c.secure = true;
         } else if (lower_attr == "httponly") {
-            c.set_http_only(true);
+            c.http_only = true;
         } else if (lower_attr.starts_with("max-age=")) {
             try {
-                c.set_max_age(integer32::parse(attr.substr(8)));
+                c.max_age = integer32::parse(attr.substr(8));
             } catch (...) {
                 // ignore
             }
         } else if (lower_attr.starts_with("samesite=")) {
-            c.set_same_site(string(attr.substr(9)));
+            c.same_site = attr.substr(9);
         } else if (lower_attr.starts_with("expires=")) {
             try {
-                c.set_expires(datetime::parse_GMT(attr.substr(8)));
+                c.expires = datetime::parse_GMT(attr.substr(8));
             } catch (...) {
                 // ignore
             }
@@ -149,7 +338,9 @@ cookie http_client::parse_set_cookie(const string_view str,
 void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& request_url) {
     for (const auto &c : resp_cookies) {
         // 简化：以 name@domain+path 作为key，支持多域名路径cookie隔离
-        string key = c.name().cookie_name() + "@" + (c.domain().empty() ? request_url.host : c.domain()) + c.path();
+        string domain = c.domain.empty() ? request_url.host : c.domain;
+        string path = c.path;
+        string key = c.name.cookie_name() + "@" + domain + path;
         cookie_jar_[key] = c;
     }
 }
@@ -159,180 +350,249 @@ string http_client::build_cookie_header(const url& request_url) const {
     for (const auto& kv : cookie_jar_) {
         const auto& c = kv.second;
         // 只发送有效、未过期、作用域匹配的cookie （简化实现，不做完整子域判定）
-        if (c.max_age() == 0) continue;
+        if (c.max_age == 0) continue;
 
-        if (request_url.host == c.domain() || c.domain().empty()) {
+        if (request_url.host == c.domain || c.domain.empty()) {
             if (!cookie_header.empty()) cookie_header += "; ";
-            cookie_header += c.name().cookie_name() + "=" + c.value();
+            cookie_header += c.name.cookie_name() + "=" + c.value;
         }
     }
     return cookie_header;
 }
 
 bool http_client::parse_response(const string_view resp_str, http_client_response& resp) {
-    const size_t pos = resp_str.find(HTTP_CRLF);
-    if (pos == string::npos) return false;
+    const size_t line_end = resp_str.find("\r\n");
+    if (line_end == string::npos) return false;
 
-    const string_view status_line = resp_str.substr(0, pos);
+    const string_view status_line = resp_str.substr(0, line_end);
+
     const size_t sp1 = status_line.find(' ');
     if (sp1 == string::npos) return false;
+
+    const string_view version_str = status_line.substr(0, sp1);
+    if (version_str.starts_with("HTTP/")) {
+        const string_view ver = version_str.substr(5);
+        const size_t dot = ver.find('.');
+        if (dot != string::npos) {
+            try {
+                resp.http_version_major = static_cast<uint16_t>(uinteger16::parse(ver.substr(0, dot)));
+                resp.http_version_minor = static_cast<uint16_t>(uinteger16::parse(ver.substr(dot + 1)));
+            } catch (...) {
+                // ignore
+            }
+        }
+    }
+
     const size_t sp2 = status_line.find(' ', sp1 + 1);
     if (sp2 == string::npos) return false;
 
-    resp.set_version(status_line.substr(0, sp1));
     uint16_t code = to_uint16(status_line.substr(sp1 + 1, sp2 - sp1 - 1));
-    resp.set_status(static_cast<HTTP_STATUS>(code));
-    resp.set_status_msg(status_line.substr(sp2 + 1));
+    resp.status = static_cast<HTTP_STATUS>(code);
+    resp.status_message = status_line.substr(sp2 + 1);
 
-    const size_t header_start = pos + 2;
-    const size_t header_end = resp_str.find(HTTP_CRLF2, header_start);
+    const size_t header_start = line_end + 2;
+    const size_t header_end = resp_str.find("\r\n\r\n", header_start);
     if (header_end == string::npos) return false;
 
     const string_view headers_block = resp_str.substr(header_start, header_end - header_start);
-    size_t line_start = 0;
-    while (line_start < headers_block.size()) {
-        const auto line_end = headers_block.find(HTTP_CRLF, line_start);
-        string_view line = headers_block.substr(line_start, line_end == string::npos ?
-                headers_block.size() - line_start : line_end - line_start);
-        line_start = (line_end == string::npos) ? headers_block.size() : (line_end + 2);
-        if (line.empty()) break;
-        const size_t colon = line.find(':');
-        if (colon == string::npos) continue;
+    size_t hpos = 0;
 
-        string key = line.substr(0, colon).trim();
-        string val = line.substr(colon + 1).trim();
-        resp.add_header(key, val);
-        key.lowercase();
-        if (key == "set-cookie") {
-            cookie c = parse_set_cookie(val.view(), resp.header("host"), "/");
-            resp.append_cookie(_MSTL move(c));
+    while (hpos < headers_block.size()) {
+        const auto hline_end = headers_block.find("\r\n", hpos);
+        string_view line = headers_block.substr(hpos,
+            (hline_end == string::npos) ? headers_block.size() - hpos : hline_end - hpos);
+
+        if (line.empty()) break;
+
+        const size_t colon = line.find(':');
+        if (colon != string::npos) {
+            string key = line.substr(0, colon).trim();
+            string val = line.substr(colon + 1).trim();
+            resp.headers[key].push_back(val);
+
+            string key_lower = key;
+            key_lower.lowercase();
+            if (key_lower == "set-cookie") {
+                cookie c = parse_set_cookie(val.view(), resp.header("host"), "/");
+                resp.cookies.emplace_back(move(c));
+            } else if (key_lower == "transfer-encoding") {
+                resp.chunked = val.find("chunked") != string::npos;
+            } else if (key_lower == "content-length") {
+                try {
+                    resp.content_length = uinteger64::parse(val.view());
+                } catch (...) {
+                    // ignore
+                }
+            }
         }
+
+        hpos = (hline_end == string::npos) ? headers_block.size() : hline_end + 2;
     }
 
     const string_view body_part = resp_str.substr(header_end + 4);
-    const string& encoding = resp.header("Transfer-Encoding");
-    const string& length = resp.header("Content-Length");
 
-    bool is_chunked = false;
-    if (!encoding.empty()) {
-        string encoding_lower = encoding;
-        encoding_lower.lowercase();
-        vector<string_view> encodings = _MSTL split(encoding_lower.view(), ","_sv);
-        for (const auto& enc : encodings) {
-            if (enc.trim() == "chunked") {
-                is_chunked = true;
-                break;
-            }
-        }
-    }
-
-    if (is_chunked) {
+    if (resp.chunked) {
         string decoded;
         if (parse_chunked_body(body_part, decoded)) {
-            resp.append_body(_MSTL move(decoded));
+            resp.body += move(decoded);
         } else {
             return false;
         }
-    } else if (!length.empty()) {
-        uint64_t cl;
-        try {
-            cl = uinteger64::parse(length.view());
-        } catch (...) {
-            return false;
-        }
-        if (body_part.size() < cl) return false;
-        resp.append_body(body_part.substr(0, cl));
+    } else if (resp.content_length > 0) {
+        if (body_part.size() < resp.content_length) return false;
+        resp.body += body_part.substr(0, resp.content_length);
     } else {
-        resp.append_body(body_part);
+        resp.body += body_part;
     }
+
     return true;
 }
 
-http_client_response http_client::request(http_client_request req) {
-    int redirect_count = 0;
-
-    url req_url;
-    req_url.scheme = (req.port == 443) ? "https" : "http";
-    req_url.host = req.host;
-    req_url.port = req.port;
-    req_url.path = req.path;
-
-    while (redirect_count <= max_redirect_) {
-        if (!client_.connect(req.host, req.port)) {
-            http_client_response resp;
-            resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-            resp.set_status_msg("Connect failed");
-            return resp;
-        }
-
-        const string req_str = build_request_str(req, req_url);
-        if (!send_request(req_str.view())) {
-            close();
-            http_client_response resp;
-            resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-            resp.set_status_msg("Send failed");
-            return resp;
-        }
-
-        string resp_str;
-        if (!read_response(resp_str)) {
-            close();
-            http_client_response resp;
-            resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-            resp.set_status_msg("Receive failed");
-            return resp;
-        }
-
-        http_client_response resp;
-        if (!parse_response(resp_str.view(), resp)) {
-            close();
-            resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-            resp.set_status_msg("Parse failed");
-            return resp;
-        }
-
-        update_cookies(resp.cookies(), req_url);
-
-        if ((resp.status() == HTTP_STATUS::S3_FOUND ||
-             resp.status() == HTTP_STATUS::S3_MOVED_PERMANENT ||
-             resp.status() == HTTP_STATUS::S3_TEMPORARY_REDIRECT ||
-             resp.status() == HTTP_STATUS::S3_PERMANENT_REDIRECT) &&
-             !resp.header("Location").empty()) {
-
-            const string& location = resp.header("Location");
-
-            if (location.starts_with("http://") || location.starts_with("https://")) {
-                url new_url(location);
-                req.host = new_url.host;
-                req.port = new_url.port ? new_url.port : (new_url.scheme == "https" ? 443 : 80);
-                req.path = new_url.path.empty() ? "/" : new_url.path;
-                req_url = new_url;
-            } else if (location.starts_with("/")) {
-                req.path = location;
-                req_url.path = location;
-            } else {
-                size_t last_slash = req.path.find_last_of('/');
-                if (last_slash != string::npos) {
-                    req.path = req.path.substr(0, last_slash + 1) + location;
-                } else {
-                    req.path = "/" + location;
-                }
-                req_url.path = req.path;
-            }
-
-            redirect_count++;
-            close();
-            continue;
-        }
-
-        close();
-        return resp;
-    }
-
-    http_client_response resp;
-    resp.set_status(HTTP_STATUS::S5_INTERNAL_ERROR);
-    resp.set_status_msg("Too many redirects");
-    return resp;
+http_client::http_client(config config)
+: config_(move(config)) {
+    persistent_headers_["User-Agent"] = "NeForce HTTP Client/1.0";
+    persistent_headers_["Accept"] = "*/*";
 }
 
-MSTL_END_NAMESPACE__
+#ifdef NEFORCE_SUPPORT_OPENSSL
+http_client::http_client(ssl_context ctx, config config)
+: client_(move(ctx)), config_(move(config)) {
+    persistent_headers_["User-Agent"] = "NeForce HTTP Client/1.0";
+    persistent_headers_["Accept"] = "*/*";
+}
+#endif
+
+void http_client::set_ssl_context(ssl_context ctx) {
+    client_.set_ssl_context(move(ctx));
+}
+
+void http_client::set_cookie(const cookie& c, const string& domain, const string& path) {
+    string key = c.name.cookie_name() + "@" + domain + path;
+    cookie_jar_[key] = c;
+}
+
+http_client_response http_client::get(const string& url_str, const unordered_map<string, string>& headers) {
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::GET;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+
+    return request(move(req));
+}
+
+http_client_response http_client::post(
+    const string& url_str,
+    const string& body,
+    const string& content_type,
+    const unordered_map<string, string>& headers) {
+
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::POST;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+    req.headers["Content-Type"] = content_type;
+    req.body = body;
+
+    return request(move(req));
+}
+
+http_client_response http_client::put(
+    const string& url_str,
+    const string& body,
+    const string& content_type,
+    const unordered_map<string, string>& headers) {
+
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::PUT;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+    req.headers["Content-Type"] = content_type;
+    req.body = body;
+
+    return request(move(req));
+}
+
+http_client_response http_client::del(const string& url_str, const unordered_map<string, string>& headers) {
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::DELETE;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+
+    return request(move(req));
+}
+
+http_client_response http_client::head(const string& url_str, const unordered_map<string, string>& headers) {
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::HEAD;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+
+    return request(move(req));
+}
+
+http_client_response http_client::options(const string& url_str, const unordered_map<string, string>& headers) {
+    url parsed_url(url_str.view());
+    http_client_request req;
+    req.host = parsed_url.host;
+    req.port = url::default_port(parsed_url.scheme.view());
+
+    req.method = HTTP_METHOD::OPTIONS;
+    req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
+    if (!parsed_url.query.empty()) {
+        req.path += "?" + parsed_url.query;
+    }
+    req.headers = headers;
+
+    return request(move(req));
+}
+
+http_client_response http_client::request(http_client_request req) {
+    return do_request(move(req), 0);
+}
+
+future<http_client_response> http_client::request_async(http_client_request req) {
+    return _NEFORCE async(launch::async, [this, req = move(req)]() mutable {
+        return request(move(req));
+    });
+}
+
+void http_client::close() {
+    client_.disconnect();
+}
+
+NEFORCE_END_NAMESPACE__

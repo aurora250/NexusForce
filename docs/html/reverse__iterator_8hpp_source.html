@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: reverse_iterator.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('reverse__iterator_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">reverse_iterator.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="reverse__iterator_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ITERATOR_REVERSE_ITERATOR_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ITERATOR_REVERSE_ITERATOR_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="iterator_8hpp.html">NeForce/core/algorithm/iterator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classreverse__iterator.html">   29</a></span><span class="keyword">class </span><a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;reverse iterator requires bidirectional iterator.&quot;</span>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#ac30c8f1038128537164537818fe21501">   33</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classreverse__iterator.html#ac30c8f1038128537164537818fe21501">iterator_category</a> = <a class="code hl_typedef" href="group___iterator_traits.html#ga72a1e059640b5b980f882da92f94dd12">iter_category_t&lt;Iterator&gt;</a>;    </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#ab671c4bc441e0af338677871ee451f49">   34</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classreverse__iterator.html#ab671c4bc441e0af338677871ee451f49">value_type</a>        = <a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>;       </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">   35</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a>   = <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a>;  </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a91f87c35a37b95ced9d9dca6dcf9d8be">   36</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classreverse__iterator.html#a91f87c35a37b95ced9d9dca6dcf9d8be">pointer</a>           = <a class="code hl_typedef" href="group___iterator_traits.html#gaf6942166677058c886c9f50e90b2e44a">iter_pointer_t&lt;Iterator&gt;</a>;     </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a3d3ea8f41b2ffb41243f498e5c4670d2">   37</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classreverse__iterator.html#a3d3ea8f41b2ffb41243f498e5c4670d2">reference</a>         = <a class="code hl_typedef" href="group___iterator_traits.html#ga213268e516d5934afda281661d30db20">iter_reference_t&lt;Iterator&gt;</a>;   </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    Iterator current;  </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">   46</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#abb52d38962aa3904d3fba5e2a49f86dc">   52</a></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classreverse__iterator.html#abb52d38962aa3904d3fba5e2a49f86dc">reverse_iterator</a>(Iterator x)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">noexcept</span>(is_nothrow_move_constructible_v&lt;Iterator&gt;)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    : current(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(x)) {}</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">requires</span>(!same_as&lt;U, Iterator&gt; &amp;&amp; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;const U&amp;, Iterator&gt;</a>)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a3d07fe00fa7ef9a2a795ecf8221aac12">   67</a></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classreverse__iterator.html#a3d07fe00fa7ef9a2a795ecf8221aac12">reverse_iterator</a>(<span class="keyword">const</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator&lt;U&gt;</a>&amp; x)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">noexcept</span>(is_nothrow_constructible_v&lt;Iterator, const U&amp;&gt;)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    : current(x.current) {}</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keyword">requires</span>(!same_as&lt;U, Iterator&gt; &amp;&amp; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;const U&amp;, Iterator&gt;</a></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    &amp;&amp; assignable_from&lt;Iterator&amp;, const U&amp;&gt;)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a42fd3c9fdf91abbd6c32099fa81f7581">   82</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>&amp; <a class="code hl_function" href="classreverse__iterator.html#a42fd3c9fdf91abbd6c32099fa81f7581">operator =</a>(<span class="keyword">const</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator&lt;U&gt;</a>&amp; x)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">noexcept</span>(<a class="code hl_struct" href="structis__nothrow__assignable.html">is_nothrow_assignable&lt;reverse_iterator&amp;, const U&amp;&gt;::value</a>) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        current = x.current;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a57c5106c3ee8385f3c4de9f416d9d231">   88</a></span>    NEFORCE_CONSTEXPR20 <a class="code hl_function" href="classreverse__iterator.html#a57c5106c3ee8385f3c4de9f416d9d231">~reverse_iterator</a>() noexcept = default;  </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a934a6fcde787f94a4be5134b90067690">   96</a></span>    NEFORCE_NODISCARD constexpr <a class="code hl_typedef" href="classreverse__iterator.html#a3d3ea8f41b2ffb41243f498e5c4670d2">reference</a> operator *() const</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        noexcept(<a class="code hl_struct" href="structis__nothrow__copy__assignable.html">is_nothrow_copy_assignable</a>&lt;Iterator&gt;::value &amp;&amp; noexcept(*--(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;Iterator&amp;&gt;()))) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        Iterator iter = current;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">return</span> *--iter;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a66bffd245b5a54a9449bc01288dd7edd">  108</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classreverse__iterator.html#a91f87c35a37b95ced9d9dca6dcf9d8be">pointer</a> <a class="code hl_function" href="classreverse__iterator.html#a66bffd245b5a54a9449bc01288dd7edd">operator -&gt;</a>() const</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        noexcept(<a class="code hl_struct" href="structis__nothrow__copy__constructible.html">is_nothrow_copy_constructible</a>&lt;Iterator&gt;::value &amp;&amp; noexcept(--(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt;Iterator&amp;&gt;()))</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            &amp;&amp; <a class="code hl_struct" href="structis__nothrow__arrow.html">is_nothrow_arrow</a>&lt;Iterator&amp;, <a class="code hl_typedef" href="classreverse__iterator.html#a91f87c35a37b95ced9d9dca6dcf9d8be">pointer</a>&gt;::value)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keyword">requires</span> (is_pointer_v&lt;Iterator&gt; || <span class="keyword">requires</span>(<span class="keyword">const</span> Iterator it) { it.operator-&gt;(); })</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        Iterator tmp = current;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        --tmp;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___iterator_operation.html#ga720710ba0a6ddb8ac7aa954b0ee25b31">to_pointer</a>(tmp);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="foldopen" id="foldopen00126" data-start="{" data-end="}">
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a59c692e8591a094c998c7696f801944e">  126</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>&amp; <a class="code hl_function" href="classreverse__iterator.html#a59c692e8591a094c998c7696f801944e">operator ++</a>()</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>         noexcept(noexcept(--current)) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        --current;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
+<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#ae437b4dc413e3971a593ef4f99a03474">  136</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> <a class="code hl_function" href="classreverse__iterator.html#a59c692e8591a094c998c7696f801944e">operator ++</a>(<span class="keywordtype">int</span>)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keyword">noexcept</span>(is_nothrow_copy_constructible_v&lt;Iterator&gt; &amp;&amp; <span class="keyword">noexcept</span>(--current)) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> tmp = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        --current;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#ab45ba22481b2de29de058af726a5bc23">  149</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>&amp; <a class="code hl_function" href="classreverse__iterator.html#ab45ba22481b2de29de058af726a5bc23">operator --</a>()</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        noexcept(noexcept(++current)) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        ++current;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
+</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span></div>
+<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a3f42d158817aa0b2a985aae6e7360f37">  159</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> <a class="code hl_function" href="classreverse__iterator.html#ab45ba22481b2de29de058af726a5bc23">operator --</a>(<span class="keywordtype">int</span>)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keyword">noexcept</span>(is_nothrow_copy_constructible_v&lt;Iterator&gt; &amp;&amp; <span class="keyword">noexcept</span>(++current)) {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> tmp = *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        ++current;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span></div>
+<div class="foldopen" id="foldopen00173" data-start="{" data-end="}">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a2c02cd88fda0e147f454194553acd4dd">  173</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> <a class="code hl_function" href="classreverse__iterator.html#a2c02cd88fda0e147f454194553acd4dd">operator +</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a> n) <span class="keyword">const</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>(current - n))) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>(current - n);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    }</div>
+</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span></div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a1ccb1befc3d1380e9729da2dd8eed838">  183</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>&amp; <a class="code hl_function" href="classreverse__iterator.html#a1ccb1befc3d1380e9729da2dd8eed838">operator +=</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a> n)</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(current -= n)) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        current -= n;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
+</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span></div>
+<div class="foldopen" id="foldopen00196" data-start="{" data-end="}">
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#ad5711e41a2d1dc7241fae7843f343224">  196</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a> <a class="code hl_function" href="classreverse__iterator.html#ad5711e41a2d1dc7241fae7843f343224">operator -</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a> n) <span class="keyword">const</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>(current + n))) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>(current + n);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span></div>
+<div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a4aed3111608860d3a3396bc807f0e558">  206</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>&amp; <a class="code hl_function" href="classreverse__iterator.html#a4aed3111608860d3a3396bc807f0e558">operator -=</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a> n)</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(current += n)) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        current += n;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
+</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
+<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#a3298113887155f456cd1ce4829440143">  217</a></span>    <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classreverse__iterator.html#a3d3ea8f41b2ffb41243f498e5c4670d2">reference</a> <a class="code hl_function" href="classreverse__iterator.html#a3298113887155f456cd1ce4829440143">operator []</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">difference_type</a> n) <span class="keyword">const</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;reference&gt;</a>(<a class="code hl_function" href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator</a>(current - n)))) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">return</span> *(*<span class="keyword">this</span> + n);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
+</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
+<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="classreverse__iterator.html#aa6f3c60fcf9f61ba651faafa365419dd">  226</a></span>    NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keyword">const</span> Iterator&amp; <a class="code hl_function" href="classreverse__iterator.html#aa6f3c60fcf9f61ba651faafa365419dd">base</a>() const noexcept {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">return</span> current;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    }</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>};</div>
+</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#ga6dd9a32173ec7c45156d0eb7e62944f6">  240</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#ga6dd9a32173ec7c45156d0eb7e62944f6">operator ==</a>(</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() == y.base())))</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() == y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>{</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">return</span> x.base() == y.base();</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>}</div>
+</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#gae4dd6f4c5516acaef498c1a6a4beec2e">  259</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#gae4dd6f4c5516acaef498c1a6a4beec2e">operator !=</a>(</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() != y.base())))</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() != y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>{</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordflow">return</span> x.base() != y.base();</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>}</div>
+</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00279" data-start="{" data-end="}">
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#gaded53567f72561d12f5e4e40b308427c">  279</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#gaded53567f72561d12f5e4e40b308427c">operator &lt;</a>(</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() &gt; y.base())))</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() &gt; y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>{</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keywordflow">return</span> x.base() &gt; y.base();</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>}</div>
+</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00298" data-start="{" data-end="}">
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#ga01a7fb7328da12f977ae1e03b4d6a6d1">  298</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#ga01a7fb7328da12f977ae1e03b4d6a6d1">operator &gt;</a>(</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() &lt; y.base())))</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() &lt; y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>{</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keywordflow">return</span> x.base() &lt; y.base();</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>}</div>
+</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#gacd7bee6fa7d3853c6c53bccd6786a3a7">  317</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#gacd7bee6fa7d3853c6c53bccd6786a3a7">operator &lt;=</a>(</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() &gt;= y.base())))</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() &gt;= y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>{</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordflow">return</span> x.base() &gt;= y.base();</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>}</div>
+</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00336" data-start="{" data-end="}">
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#ga9da909707579bae198f18ec9c15663be">  336</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___reverse_iterator.html#ga9da909707579bae198f18ec9c15663be">operator &gt;=</a>(</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy&lt;bool&gt;</a>(x.base() &lt;= y.base())))</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>#ifdef <a class="code hl_define" href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="keyword">requires</span> <span class="keyword">requires</span> { { x.base() &lt;= y.base() } -&gt; <a class="code hl_concept" href="conceptconvertible__to.html">convertible_to&lt;bool&gt;</a>; }</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_20</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>{</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordflow">return</span> x.base() &lt;= y.base();</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>}</div>
+</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00356" data-start="{" data-end="}">
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#gafbb97c88b13308edd787795371db5100">  356</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <span class="keyword">operator</span> -(</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>&amp; x, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>&amp; y)</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(y.base() - x.base())) {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">return</span> y.base() - x.base();</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
+</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00370" data-start="{" data-end="}">
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#ga0eb2ca2718e24e302693e7e62daffc6f">  370</a></span><span class="keyword">constexpr</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator&gt;</a> <a class="code hl_function" href="group___reverse_iterator.html#ga0eb2ca2718e24e302693e7e62daffc6f">operator +</a>(</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n, <span class="keyword">const</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator&gt;</a>&amp; x)</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <span class="keyword">noexcept</span>(<span class="keyword">noexcept</span>(x + n)) {</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">return</span> x + n;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>}</div>
+</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator&gt;</a></div>
+<div class="foldopen" id="foldopen00384" data-start="{" data-end="}">
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno"><a class="line" href="group___reverse_iterator.html#gad063eb64aebb24b59e51d3f37dd66685">  384</a></span><a class="code hl_function" href="group___reverse_iterator.html#gad063eb64aebb24b59e51d3f37dd66685">make_reverse_iterator</a>(Iterator it) <span class="keyword">noexcept</span>(is_nothrow_move_constructible_v&lt;Iterator&gt;) {</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator&gt;</a>(<a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> <a class="code hl_function" href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a>(it));</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>}</div>
+</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> <span class="comment">// ReverseIterator</span></div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ITERATOR_REVERSE_ITERATOR_HPP__</span></div>
+<div class="ttc" id="aclassreverse__iterator_html"><div class="ttname"><a href="classreverse__iterator.html">reverse_iterator</a></div><div class="ttdoc">反向迭代器模板类</div><div class="ttdef"><b>定义</b> <a href="#l00029">reverse_iterator.hpp:29</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a08e08a0bd3a64674f2ba263cd3fc2c86"><div class="ttname"><a href="classreverse__iterator.html#a08e08a0bd3a64674f2ba263cd3fc2c86">reverse_iterator::reverse_iterator</a></div><div class="ttdeci">constexpr reverse_iterator()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a1ccb1befc3d1380e9729da2dd8eed838"><div class="ttname"><a href="classreverse__iterator.html#a1ccb1befc3d1380e9729da2dd8eed838">reverse_iterator::operator+=</a></div><div class="ttdeci">constexpr reverse_iterator &amp; operator+=(const difference_type n) noexcept(noexcept(current -=n))</div><div class="ttdoc">复合加法赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00183">reverse_iterator.hpp:183</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a2c02cd88fda0e147f454194553acd4dd"><div class="ttname"><a href="classreverse__iterator.html#a2c02cd88fda0e147f454194553acd4dd">reverse_iterator::operator+</a></div><div class="ttdeci">constexpr reverse_iterator operator+(const difference_type n) const noexcept(noexcept(reverse_iterator(current - n)))</div><div class="ttdoc">加法运算符</div><div class="ttdef"><b>定义</b> <a href="#l00173">reverse_iterator.hpp:173</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a3298113887155f456cd1ce4829440143"><div class="ttname"><a href="classreverse__iterator.html#a3298113887155f456cd1ce4829440143">reverse_iterator::operator[]</a></div><div class="ttdeci">constexpr reference operator[](const difference_type n) const noexcept(noexcept(_NEFORCE declcopy&lt; reference &gt;(reverse_iterator(current - n))))</div><div class="ttdoc">下标运算符</div><div class="ttdef"><b>定义</b> <a href="#l00217">reverse_iterator.hpp:217</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a3d07fe00fa7ef9a2a795ecf8221aac12"><div class="ttname"><a href="classreverse__iterator.html#a3d07fe00fa7ef9a2a795ecf8221aac12">reverse_iterator::reverse_iterator</a></div><div class="ttdeci">constexpr reverse_iterator(const reverse_iterator&lt; U &gt; &amp;x) noexcept(is_nothrow_constructible_v&lt; Iterator, const U &amp; &gt;)</div><div class="ttdoc">从其他类型的反向迭代器构造</div><div class="ttdef"><b>定义</b> <a href="#l00067">reverse_iterator.hpp:67</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a3d3ea8f41b2ffb41243f498e5c4670d2"><div class="ttname"><a href="classreverse__iterator.html#a3d3ea8f41b2ffb41243f498e5c4670d2">reverse_iterator::reference</a></div><div class="ttdeci">iter_reference_t&lt; Iterator &gt; reference</div><div class="ttdoc">引用类型</div><div class="ttdef"><b>定义</b> <a href="#l00037">reverse_iterator.hpp:37</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a42fd3c9fdf91abbd6c32099fa81f7581"><div class="ttname"><a href="classreverse__iterator.html#a42fd3c9fdf91abbd6c32099fa81f7581">reverse_iterator::operator=</a></div><div class="ttdeci">constexpr reverse_iterator &amp; operator=(const reverse_iterator&lt; U &gt; &amp;x) noexcept(is_nothrow_assignable&lt; reverse_iterator &amp;, const U &amp; &gt;::value)</div><div class="ttdoc">从其他类型的反向迭代器赋值</div><div class="ttdef"><b>定义</b> <a href="#l00082">reverse_iterator.hpp:82</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a4aed3111608860d3a3396bc807f0e558"><div class="ttname"><a href="classreverse__iterator.html#a4aed3111608860d3a3396bc807f0e558">reverse_iterator::operator-=</a></div><div class="ttdeci">constexpr reverse_iterator &amp; operator-=(const difference_type n) noexcept(noexcept(current+=n))</div><div class="ttdoc">复合减法赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00206">reverse_iterator.hpp:206</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a50fc233f3b61a47617e93a72116ce8f9"><div class="ttname"><a href="classreverse__iterator.html#a50fc233f3b61a47617e93a72116ce8f9">reverse_iterator::difference_type</a></div><div class="ttdeci">iter_difference_t&lt; Iterator &gt; difference_type</div><div class="ttdoc">差值类型</div><div class="ttdef"><b>定义</b> <a href="#l00035">reverse_iterator.hpp:35</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a57c5106c3ee8385f3c4de9f416d9d231"><div class="ttname"><a href="classreverse__iterator.html#a57c5106c3ee8385f3c4de9f416d9d231">reverse_iterator::~reverse_iterator</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 ~reverse_iterator() noexcept=default</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a59c692e8591a094c998c7696f801944e"><div class="ttname"><a href="classreverse__iterator.html#a59c692e8591a094c998c7696f801944e">reverse_iterator::operator++</a></div><div class="ttdeci">constexpr reverse_iterator &amp; operator++() noexcept(noexcept(--current))</div><div class="ttdoc">前缀递增运算符</div><div class="ttdef"><b>定义</b> <a href="#l00126">reverse_iterator.hpp:126</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a66bffd245b5a54a9449bc01288dd7edd"><div class="ttname"><a href="classreverse__iterator.html#a66bffd245b5a54a9449bc01288dd7edd">reverse_iterator::operator-&gt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr pointer operator-&gt;() const noexcept(is_nothrow_copy_constructible&lt; Iterator &gt;::value &amp;&amp;noexcept(--(_NEFORCE declval&lt; Iterator &amp; &gt;())) &amp;&amp;is_nothrow_arrow&lt; Iterator &amp;, pointer &gt;::value)</div><div class="ttdoc">成员访问运算符</div><div class="ttdef"><b>定义</b> <a href="#l00108">reverse_iterator.hpp:108</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_a91f87c35a37b95ced9d9dca6dcf9d8be"><div class="ttname"><a href="classreverse__iterator.html#a91f87c35a37b95ced9d9dca6dcf9d8be">reverse_iterator::pointer</a></div><div class="ttdeci">iter_pointer_t&lt; Iterator &gt; pointer</div><div class="ttdoc">指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00036">reverse_iterator.hpp:36</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_aa6f3c60fcf9f61ba651faafa365419dd"><div class="ttname"><a href="classreverse__iterator.html#aa6f3c60fcf9f61ba651faafa365419dd">reverse_iterator::base</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr const Iterator &amp; base() const noexcept</div><div class="ttdoc">获取底层迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00226">reverse_iterator.hpp:226</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_ab45ba22481b2de29de058af726a5bc23"><div class="ttname"><a href="classreverse__iterator.html#ab45ba22481b2de29de058af726a5bc23">reverse_iterator::operator--</a></div><div class="ttdeci">constexpr reverse_iterator &amp; operator--() noexcept(noexcept(++current))</div><div class="ttdoc">前缀递减运算符</div><div class="ttdef"><b>定义</b> <a href="#l00149">reverse_iterator.hpp:149</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_ab671c4bc441e0af338677871ee451f49"><div class="ttname"><a href="classreverse__iterator.html#ab671c4bc441e0af338677871ee451f49">reverse_iterator::value_type</a></div><div class="ttdeci">iter_value_t&lt; Iterator &gt; value_type</div><div class="ttdoc">值类型</div><div class="ttdef"><b>定义</b> <a href="#l00034">reverse_iterator.hpp:34</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_abb52d38962aa3904d3fba5e2a49f86dc"><div class="ttname"><a href="classreverse__iterator.html#abb52d38962aa3904d3fba5e2a49f86dc">reverse_iterator::reverse_iterator</a></div><div class="ttdeci">constexpr reverse_iterator(Iterator x) noexcept(is_nothrow_move_constructible_v&lt; Iterator &gt;)</div><div class="ttdoc">从底层迭代器构造</div><div class="ttdef"><b>定义</b> <a href="#l00052">reverse_iterator.hpp:52</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_ac30c8f1038128537164537818fe21501"><div class="ttname"><a href="classreverse__iterator.html#ac30c8f1038128537164537818fe21501">reverse_iterator::iterator_category</a></div><div class="ttdeci">iter_category_t&lt; Iterator &gt; iterator_category</div><div class="ttdoc">迭代器类别</div><div class="ttdef"><b>定义</b> <a href="#l00033">reverse_iterator.hpp:33</a></div></div>
+<div class="ttc" id="aclassreverse__iterator_html_ad5711e41a2d1dc7241fae7843f343224"><div class="ttname"><a href="classreverse__iterator.html#ad5711e41a2d1dc7241fae7843f343224">reverse_iterator::operator-</a></div><div class="ttdeci">constexpr reverse_iterator operator-(const difference_type n) const noexcept(noexcept(reverse_iterator(current+n)))</div><div class="ttdoc">减法运算符</div><div class="ttdef"><b>定义</b> <a href="#l00196">reverse_iterator.hpp:196</a></div></div>
+<div class="ttc" id="aconceptconvertible__to_html"><div class="ttname"><a href="conceptconvertible__to.html">convertible_to</a></div><div class="ttdoc">检查类型From是否可以转换为类型To</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03190">type_traits.hpp:3190</a></div></div>
+<div class="ttc" id="agroup___cxx_standard_detection_html_ga15a44225a036fa856299c55ee8951862"><div class="ttname"><a href="group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862">NEFORCE_STANDARD_20</a></div><div class="ttdeci">#define NEFORCE_STANDARD_20</div><div class="ttdoc">使用C++20或更高标准编译</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00479">c++config.hpp:479</a></div></div>
+<div class="ttc" id="agroup___declval_tools_html_ga1eddc4b727874e17997d01e1646a2fca"><div class="ttname"><a href="group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca">declcopy</a></div><div class="ttdeci">type_identity_t&lt; T &gt; declcopy(type_identity_t&lt; T &gt;) noexcept</div><div class="ttdoc">获取类型的副本，仅用于非求值上下文</div></div>
+<div class="ttc" id="agroup___declval_tools_html_ga7c6502597045c02b014ec72343367f5c"><div class="ttname"><a href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a></div><div class="ttdeci">add_rvalue_reference_t&lt; T &gt; declval() noexcept</div><div class="ttdoc">获取类型的右值引用，仅用于非求值上下文</div></div>
+<div class="ttc" id="agroup___iterator_category_checks_html_ga56f3ab178cee74039e73463d63a71658"><div class="ttname"><a href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_bid_iter_v</div><div class="ttdoc">检查是否为范围双向迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00601">concepts.hpp:601</a></div></div>
+<div class="ttc" id="agroup___iterator_operation_html_ga720710ba0a6ddb8ac7aa954b0ee25b31"><div class="ttname"><a href="group___iterator_operation.html#ga720710ba0a6ddb8ac7aa954b0ee25b31">to_pointer</a></div><div class="ttdeci">constexpr iter_pointer_t&lt; Iterator &gt; to_pointer(Iterator iter)</div><div class="ttdoc">将迭代器转换为原始指针</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00043">iterator.hpp:43</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_ga213268e516d5934afda281661d30db20"><div class="ttname"><a href="group___iterator_traits.html#ga213268e516d5934afda281661d30db20">iter_reference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::reference iter_reference_t</div><div class="ttdoc">获取迭代器的引用类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00117">iterator_traits.hpp:117</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_ga72a1e059640b5b980f882da92f94dd12"><div class="ttname"><a href="group___iterator_traits.html#ga72a1e059640b5b980f882da92f94dd12">iter_category_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::iterator_category iter_category_t</div><div class="ttdoc">获取迭代器的类别标签</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00085">iterator_traits.hpp:85</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gad620992f7bf5c8c7b5dfae7a3dd55781"><div class="ttname"><a href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::value_type iter_value_t</div><div class="ttdoc">获取迭代器的值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00093">iterator_traits.hpp:93</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gaf61f58aa2abc24434e0b77340ddf2cfa"><div class="ttname"><a href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00101">iterator_traits.hpp:101</a></div></div>
+<div class="ttc" id="agroup___iterator_traits_html_gaf6942166677058c886c9f50e90b2e44a"><div class="ttname"><a href="group___iterator_traits.html#gaf6942166677058c886c9f50e90b2e44a">iter_pointer_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::pointer iter_pointer_t</div><div class="ttdoc">获取迭代器的指针类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00109">iterator_traits.hpp:109</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_ga01a7fb7328da12f977ae1e03b4d6a6d1"><div class="ttname"><a href="group___reverse_iterator.html#ga01a7fb7328da12f977ae1e03b4d6a6d1">operator&gt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&gt;(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt; y.base())))</div><div class="ttdoc">大于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00298">reverse_iterator.hpp:298</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_ga0eb2ca2718e24e302693e7e62daffc6f"><div class="ttname"><a href="group___reverse_iterator.html#ga0eb2ca2718e24e302693e7e62daffc6f">operator+</a></div><div class="ttdeci">constexpr reverse_iterator&lt; Iterator &gt; operator+(iter_difference_t&lt; Iterator &gt; n, const reverse_iterator&lt; Iterator &gt; &amp;x) noexcept(noexcept(x+n))</div><div class="ttdoc">与整数相加的运算符</div><div class="ttdef"><b>定义</b> <a href="#l00370">reverse_iterator.hpp:370</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_ga6dd9a32173ec7c45156d0eb7e62944f6"><div class="ttname"><a href="group___reverse_iterator.html#ga6dd9a32173ec7c45156d0eb7e62944f6">operator==</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator==(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()==y.base())))</div><div class="ttdoc">相等比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00240">reverse_iterator.hpp:240</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_ga9da909707579bae198f18ec9c15663be"><div class="ttname"><a href="group___reverse_iterator.html#ga9da909707579bae198f18ec9c15663be">operator&gt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&gt;=(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt;=y.base())))</div><div class="ttdoc">大于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00336">reverse_iterator.hpp:336</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_gacd7bee6fa7d3853c6c53bccd6786a3a7"><div class="ttname"><a href="group___reverse_iterator.html#gacd7bee6fa7d3853c6c53bccd6786a3a7">operator&lt;=</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&lt;=(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt;=y.base())))</div><div class="ttdoc">小于等于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00317">reverse_iterator.hpp:317</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_gad063eb64aebb24b59e51d3f37dd66685"><div class="ttname"><a href="group___reverse_iterator.html#gad063eb64aebb24b59e51d3f37dd66685">make_reverse_iterator</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr reverse_iterator&lt; Iterator &gt; make_reverse_iterator(Iterator it) noexcept(is_nothrow_move_constructible_v&lt; Iterator &gt;)</div><div class="ttdoc">创建反向迭代器</div><div class="ttdef"><b>定义</b> <a href="#l00384">reverse_iterator.hpp:384</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_gaded53567f72561d12f5e4e40b308427c"><div class="ttname"><a href="group___reverse_iterator.html#gaded53567f72561d12f5e4e40b308427c">operator&lt;</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator&lt;(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt; y.base())))</div><div class="ttdoc">小于比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00279">reverse_iterator.hpp:279</a></div></div>
+<div class="ttc" id="agroup___reverse_iterator_html_gae4dd6f4c5516acaef498c1a6a4beec2e"><div class="ttname"><a href="group___reverse_iterator.html#gae4dd6f4c5516acaef498c1a6a4beec2e">operator!=</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr bool operator!=(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y) noexcept(noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() !=y.base())))</div><div class="ttdoc">不等比较运算符</div><div class="ttdef"><b>定义</b> <a href="#l00259">reverse_iterator.hpp:259</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga6755e7b2dc828b8cfde67b5dd45c3e8a"><div class="ttname"><a href="group___shift_algorithms.html#ga6755e7b2dc828b8cfde67b5dd45c3e8a">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(_INNER __move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00285">shift.hpp:285</a></div></div>
+<div class="ttc" id="aiterator_8hpp_html"><div class="ttname"><a href="iterator_8hpp.html">iterator.hpp</a></div><div class="ttdoc">迭代器操作算法</div></div>
+<div class="ttc" id="astructis__nothrow__arrow_html"><div class="ttname"><a href="structis__nothrow__arrow.html">is_nothrow_arrow</a></div><div class="ttdoc">判断迭代器的箭头运算符是否不会抛出异常</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03254">type_traits.hpp:3254</a></div></div>
+<div class="ttc" id="astructis__nothrow__assignable_html"><div class="ttname"><a href="structis__nothrow__assignable.html">is_nothrow_assignable</a></div><div class="ttdoc">判断类型是否可以使用指定类型的值进行无异常赋值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02889">type_traits.hpp:2889</a></div></div>
+<div class="ttc" id="astructis__nothrow__copy__assignable_html"><div class="ttname"><a href="structis__nothrow__copy__assignable.html">is_nothrow_copy_assignable</a></div><div class="ttdoc">判断类型是否可无异常复制赋值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02912">type_traits.hpp:2913</a></div></div>
+<div class="ttc" id="astructis__nothrow__copy__constructible_html"><div class="ttname"><a href="structis__nothrow__copy__constructible.html">is_nothrow_copy_constructible</a></div><div class="ttdoc">判断类型是否可无异常复制构造</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l02833">type_traits.hpp:2834</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>iterator</b></li><li class="navelem"><a href="reverse__iterator_8hpp.html">reverse_iterator.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

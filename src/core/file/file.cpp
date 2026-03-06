@@ -1,10 +1,10 @@
-#include <MSTL/core/file/file.hpp>
-#include <MSTL/core/system/sysinfo.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/file/file.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
 #include <winioctl.h>
 #include <memoryapi.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/file.h>
 #include <sys/time.h>
 #include <sys/mman.h>
@@ -14,7 +14,7 @@
 #include <cerrno>
 #include <unistd.h>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 file::line_iterator::line_iterator(const file* f) : file_(f) {
     if (file_ && file_->is_opened()) {
@@ -37,10 +37,10 @@ file::line_iterator file::line_iterator::operator++(int) {
 
 
 file::async_context::async_context(string&& d)
-: data(_MSTL move(d)), is_write(true) {
+: data(_NEFORCE move(d)), is_write(true) {
     cb = new aiocb_type{};
-    _MSTL memory_zero(cb);
-#ifdef MSTL_PLATFORM_WINDOWS__
+    _NEFORCE memory_zero(cb);
+#ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
 }
@@ -48,19 +48,30 @@ file::async_context::async_context(string&& d)
 file::async_context::async_context(string* buf)
 : buffer(buf), is_write(false) {
     cb = new aiocb_type{};
-    _MSTL memory_zero(cb);
-#ifdef MSTL_PLATFORM_WINDOWS__
+    _NEFORCE memory_zero(cb);
+#ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
 }
 
 file::async_context::~async_context() {
     if (cb) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
         if (cb->hEvent) ::CloseHandle(cb->hEvent);
 #endif
         delete cb;
     }
+}
+
+
+static NEFORCE_ALWAYS_INLINE const native_handle_type& INVALID_HANDLE() noexcept {
+    static const auto INVALID_HANDLE =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        INVALID_HANDLE_VALUE;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+            -1;
+#endif
+    return INVALID_HANDLE;
 }
 
 bool file::complete_async_result(async_result& result, const size_type bytes_transferred) {
@@ -68,11 +79,11 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
     result.bytes_transferred = bytes_transferred;
     result.error_code = 0;
 
-    _MSTL lock<mutex> lk(async_mutex_);
+    _NEFORCE lock<mutex> lk(async_mutex_);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (result.cb) {
-        auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+        auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
         if (it != async_operations_.end()) {
             async_operations_.erase(it);
         }
@@ -85,9 +96,9 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
 
         result.cb = nullptr;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (result.cb) {
-        auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+        auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
         if (it != async_operations_.end()) {
             async_operations_.erase(it);
         }
@@ -107,7 +118,7 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
 }
 
 bool file::check_async_completion(async_result& result) {
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     if (!result.cb) {
         result.error_code = EINVAL;
         return false;
@@ -140,7 +151,7 @@ bool file::check_async_completion(async_result& result) {
 bool file::flush_write_buffer() const noexcept {
     if (write_buffer_pos_ == 0) return true;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     size_type bytes_written;
     const ::BOOL success = ::WriteFile(
         handle_,
@@ -152,7 +163,7 @@ bool file::flush_write_buffer() const noexcept {
     if (!success || bytes_written != write_buffer_pos_) {
         return false;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ssize_t total_written = 0;
     while (total_written < static_cast<ssize_t>(write_buffer_pos_)) {
         const ssize_t bytes_written = ::write(
@@ -177,7 +188,7 @@ bool file::fill_read_buffer() const noexcept {
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     size_type bytes_read;
     const ::BOOL success = ::ReadFile(
         handle_, read_buffer_.data(),
@@ -189,7 +200,7 @@ bool file::fill_read_buffer() const noexcept {
         return false;
     }
     read_buffer_size_ = bytes_read;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ssize_t bytes_read;
     do {
         bytes_read = ::read(handle_, read_buffer_.data(), buffer_size_);
@@ -206,13 +217,13 @@ bool file::fill_read_buffer() const noexcept {
     return true;
 }
 
-datetime file::filetime_to_datetime(const time_type& ft) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    if (ft.dwHighDateTime == 0 && ft.dwLowDateTime == 0) {
+static inline datetime filetime_to_datetime(const file::time_type& file_time) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (file_time.dwHighDateTime == 0 && file_time.dwLowDateTime == 0) {
         return datetime::epoch();
     }
     ::SYSTEMTIME st_utc;
-    if (!::FileTimeToSystemTime(&ft, &st_utc)) {
+    if (!::FileTimeToSystemTime(&file_time, &st_utc)) {
         return datetime::epoch();
     }
     ::SYSTEMTIME st_local;
@@ -223,7 +234,7 @@ datetime file::filetime_to_datetime(const time_type& ft) noexcept {
         st_local.wYear, st_local.wMonth, st_local.wDay,
         st_local.wHour, st_local.wMinute, st_local.wSecond
     );
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (ft == 0) return datetime::epoch();
     ::tm tm_local{};
     ::localtime_r(&ft, &tm_local);
@@ -234,16 +245,16 @@ datetime file::filetime_to_datetime(const time_type& ft) noexcept {
 #endif
 }
 
-file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    time_type ft = {0, 0};
+static inline file::time_type datetime_to_filetime(const datetime& date_time) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    file::time_type ft = {0, 0};
     ::SYSTEMTIME st_local;
-    st_local.wYear = static_cast<::WORD>(dt.year());
-    st_local.wMonth = static_cast<::WORD>(dt.month());
-    st_local.wDay = static_cast<::WORD>(dt.day());
-    st_local.wHour = static_cast<::WORD>(dt.hours());
-    st_local.wMinute = static_cast<::WORD>(dt.minutes());
-    st_local.wSecond = static_cast<::WORD>(dt.seconds());
+    st_local.wYear = static_cast<::WORD>(date_time.year());
+    st_local.wMonth = static_cast<::WORD>(date_time.month());
+    st_local.wDay = static_cast<::WORD>(date_time.day());
+    st_local.wHour = static_cast<::WORD>(date_time.hours());
+    st_local.wMinute = static_cast<::WORD>(date_time.minutes());
+    st_local.wSecond = static_cast<::WORD>(date_time.seconds());
     st_local.wMilliseconds = 0;
 
     ::SYSTEMTIME st_utc;
@@ -255,7 +266,7 @@ file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
         ft.dwLowDateTime = 0;
     }
     return ft;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::tm tm_val{};
     tm_val.tm_year = dt.year() - 1900;
     tm_val.tm_mon = dt.month() - 1;
@@ -269,14 +280,14 @@ file::time_type file::datetime_to_filetime(const datetime& dt) noexcept {
 #endif
 }
 
-string file::get_last_error_msg() {
-#ifdef MSTL_PLATFORM_WINDOWS__
-    const size_type error_code = ::GetLastError();
+static inline string get_last_error_msg() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const auto error_code = ::GetLastError();
     if (error_code == 0) {
         return {};
     }
     ::LPSTR message_buffer = nullptr;
-    const size_type size = ::FormatMessageA(
+    const auto size = ::FormatMessageA(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
@@ -284,16 +295,16 @@ string file::get_last_error_msg() {
     string message(message_buffer, size);
     ::LocalFree(message_buffer);
     return message;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     char buffer[256];
     return ::strerror_r(errno, buffer, sizeof(buffer));
 #endif
 }
 
 void file::set_last_error() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     last_error_code_ = static_cast<int>(::GetLastError());
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     last_error_code_ = errno;
 #endif
     last_error_msg_ = get_last_error_msg();
@@ -305,22 +316,22 @@ void file::adjust_buffer_size() {
     const size_type file_sz = size();
 
     if (file_sz == 0) {
-        buffer_size_ = FILE_BUFFER_SIZE / 4;
-    } else if (file_sz < FILE_BUFFER_SIZE) {
+        buffer_size_ = buffer_size / 4;
+    } else if (file_sz < buffer_size) {
         buffer_size_ = file_sz;
-    } else if (file_sz > FILE_BUFFER_SIZE * 1000) {
-        buffer_size_ = FILE_BUFFER_SIZE * 8;
-    } else if (file_sz > FILE_BUFFER_SIZE * 100) {
-        buffer_size_ = FILE_BUFFER_SIZE * 4;
+    } else if (file_sz > buffer_size * 1000) {
+        buffer_size_ = buffer_size * 8;
+    } else if (file_sz > buffer_size * 100) {
+        buffer_size_ = buffer_size * 4;
     } else {
-        buffer_size_ = FILE_BUFFER_SIZE;
+        buffer_size_ = buffer_size;
     }
 
     read_buffer_.resize(buffer_size_);
     write_buffer_.resize(buffer_size_);
 }
 
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
 static ::mode_t convert_attributes(const FILE_ATTRI attr) {
     ::mode_t mode = 0;
 
@@ -333,29 +344,31 @@ static ::mode_t convert_attributes(const FILE_ATTRI attr) {
 }
 #endif
 
+file::file()
+    : handle_(INVALID_HANDLE_VALUE) {}
 
 file::file(file&& other) noexcept
     : handle_(other.handle_),
-      path_(_MSTL move(other.path_)),
+      path_(_NEFORCE move(other.path_)),
       opened_(other.opened_),
       append_mode_(other.append_mode_),
-      read_buffer_(_MSTL move(other.read_buffer_)),
+      read_buffer_(_NEFORCE move(other.read_buffer_)),
       read_buffer_pos_(other.read_buffer_pos_),
       read_buffer_size_(other.read_buffer_size_),
-      write_buffer_(_MSTL move(other.write_buffer_)),
+      write_buffer_(_NEFORCE move(other.write_buffer_)),
       write_buffer_pos_(other.write_buffer_pos_),
       mapped_ptr_(other.mapped_ptr_),
       mapped_size_(other.mapped_size_),
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
       mapping_handle_(other.mapping_handle_),
 #endif
-      last_error_msg_(_MSTL move(other.last_error_msg_)),
+      last_error_msg_(_NEFORCE move(other.last_error_msg_)),
       last_error_code_(other.last_error_code_) {
 
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
-    other.path_ = _MSTL path{};
+    other.path_ = _NEFORCE path{};
     other.read_buffer_.clear();
     other.read_buffer_pos_ = 0;
     other.read_buffer_size_ = 0;
@@ -363,30 +376,30 @@ file::file(file&& other) noexcept
     other.write_buffer_pos_ = 0;
     other.mapped_ptr_ = nullptr;
     other.mapped_size_ = 0;
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     other.mapping_handle_ = INVALID_HANDLE_VALUE;
 #endif
     other.last_error_code_ = 0;
 }
 
 file& file::operator =(file&& other) noexcept {
-    if (this == _MSTL addressof(other)) return *this;
+    if (this == _NEFORCE addressof(other)) return *this;
 
     this->close();
     handle_ = other.handle_;
-    path_ = _MSTL move(other.path_);
+    path_ = _NEFORCE move(other.path_);
     opened_ = other.opened_;
     append_mode_ = other.append_mode_;
-    read_buffer_ = _MSTL move(other.read_buffer_);
+    read_buffer_ = _NEFORCE move(other.read_buffer_);
     read_buffer_pos_ = other.read_buffer_pos_;
     read_buffer_size_ = other.read_buffer_size_;
-    write_buffer_ = _MSTL move(other.write_buffer_);
+    write_buffer_ = _NEFORCE move(other.write_buffer_);
     write_buffer_pos_ = other.write_buffer_pos_;
 
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
-    other.path_ = _MSTL path{};
+    other.path_ = _NEFORCE path{};
     other.read_buffer_.clear();
     other.read_buffer_pos_ = 0;
     other.read_buffer_size_ = 0;
@@ -399,9 +412,9 @@ file& file::operator =(file&& other) noexcept {
 file::~file() {
     unmap();
 
-    _MSTL lock<mutex> lk(async_mutex_);
+    _NEFORCE lock<mutex> lk(async_mutex_);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     for (auto* ov : async_operations_) {
         if (ov) {
             ::CancelIoEx(handle_, ov);
@@ -419,7 +432,7 @@ file::~file() {
             delete ov;
         }
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     for (auto* aiocb : async_operations_) {
         if (aiocb) {
             ::aio_cancel(handle_, aiocb);
@@ -443,7 +456,7 @@ file::~file() {
     this->close();
 }
 
-bool file::open(_MSTL path p, const bool append,
+bool file::open(_NEFORCE path p, const bool append,
     FILE_ACCESS access,
     FILE_SHARED share_mode,
     FILE_CREATION creation,
@@ -457,7 +470,7 @@ bool file::open(_MSTL path p, const bool append,
     read_buffer_size_ = 0;
     write_buffer_pos_ = 0;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::CreateFileA(
         p.data(),
         static_cast<fud_t>(access),
@@ -467,7 +480,7 @@ bool file::open(_MSTL path p, const bool append,
         static_cast<fud_t>(attributes),
         nullptr
     );
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     auto flags = static_cast<fud_t>(access);
     const auto creation_flags = static_cast<fud_t>(creation);
 
@@ -506,7 +519,7 @@ bool file::open(_MSTL path p, const bool append,
         set_last_error();
         return false;
     }
-#ifdef MSTL_PLATFORM_LINUX__
+#ifdef NEFORCE_PLATFORM_LINUX
     else {
         const int fd_flags = ::fcntl(handle_, F_GETFD);
         if (fd_flags != -1) {
@@ -516,7 +529,7 @@ bool file::open(_MSTL path p, const bool append,
     }
 #endif
 
-    path_ = _MSTL move(p);
+    path_ = _NEFORCE move(p);
     opened_ = true;
     append_mode_ = append;
 
@@ -539,10 +552,10 @@ bool file::open(const bool append,
 
 void file::close() noexcept {
     if (opened_ && handle_ != INVALID_HANDLE()) {
-        MSTL_IGNORE this->flush();
-#ifdef MSTL_PLATFORM_WINDOWS__
+        NEFORCE_IGNORE this->flush();
+#ifdef NEFORCE_PLATFORM_WINDOWS
         ::CloseHandle(handle_);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
         ::close(handle_);
 #endif
         handle_ = INVALID_HANDLE();
@@ -553,7 +566,7 @@ void file::close() noexcept {
         read_buffer_size_ = 0;
         write_buffer_.clear();
         write_buffer_pos_ = 0;
-        buffer_size_ = FILE_BUFFER_SIZE;
+        buffer_size_ = buffer_size;
         async_operations_.clear();
     }
 }
@@ -562,9 +575,9 @@ bool file::flush() noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
     if (!flush_write_buffer()) return false;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::FlushFileBuffers(handle_) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     return ::fdatasync(handle_) == 0;
 #endif
 }
@@ -595,9 +608,9 @@ file::size_type file::write(const void* data, const size_type size) {
         const auto ptr = static_cast<const byte_t*>(data);
 
         while (total_written < size) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
             size_type bytes_written = 0;
-            const size_type to_write = _MSTL min<size_type>(
+            const size_type to_write = _NEFORCE min<size_type>(
                 size - total_written,
                 numeric_traits<size_type>::max()
             );
@@ -607,7 +620,7 @@ file::size_type file::write(const void* data, const size_type size) {
             }
             total_written += bytes_written;
             if (bytes_written != to_write) break;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
             const ssize_t written = ::write(
                 handle_, ptr + total_written, size - total_written);
             if (written == -1) {
@@ -628,9 +641,9 @@ file::size_type file::write(const void* data, const size_type size) {
 
     while (remaining > 0) {
         const size_type available = buffer_size_ - write_buffer_pos_;
-        const size_type to_copy = _MSTL min(remaining, available);
+        const size_type to_copy = _NEFORCE min(remaining, available);
 
-        _MSTL copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
+        _NEFORCE copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
         write_buffer_pos_ += to_copy;
         total_written += to_copy;
         ptr += to_copy;
@@ -650,12 +663,12 @@ file::size_type file::write(const void* data, const size_type size) {
     return total_written;
 }
 
-file::size_type file::read(string& str, const size_type size) const {
+file::size_type file::read(string& out, const size_type size) const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
-    str.clear();
+    out.clear();
     if (size == 0) return 0;
-    str.resize(size);
-    return file::read(str.data(), size);
+    out.resize(size);
+    return file::read(out.data(), size);
 }
 
 file::size_type file::read(void* buffer, const size_type size) const {
@@ -674,9 +687,9 @@ file::size_type file::read(void* buffer, const size_type size) const {
         }
 
         const size_type available_in_buffer = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read = _MSTL min(remaining, available_in_buffer);
+        const size_type to_read = _NEFORCE min(remaining, available_in_buffer);
 
-        _MSTL copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
+        _NEFORCE copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
         read_buffer_pos_ += to_read;
         ptr += to_read;
         total_read += to_read;
@@ -686,8 +699,8 @@ file::size_type file::read(void* buffer, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read(string& str) const {
-    return this->read(str, str.size());
+file::size_type file::read(string& out) const {
+    return this->read(out, out.size());
 }
 
 string file::read() const {
@@ -742,9 +755,9 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
             char* data = chunk.data();
 
             while (bytes_read < to_read) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
                 size_type bytes_read_now = 0;
-                const size_type to_read_now = _MSTL min<size_type>(
+                const size_type to_read_now = _NEFORCE min<size_type>(
                     to_read - bytes_read,
                     numeric_traits<size_type>::max()
                 );
@@ -756,7 +769,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
                               }
                 bytes_read += bytes_read_now;
                 if (bytes_read_now == 0) break;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
                 const ssize_t bytes_read_now = ::read(handle_,
                     data + bytes_read, to_read - bytes_read);
                 if (bytes_read_now == -1) {
@@ -780,7 +793,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
         }
 
         if (!chunk.empty()) {
-            chunks.push_back(_MSTL move(chunk));
+            chunks.push_back(_NEFORCE move(chunk));
         } else {
             break;
         }
@@ -825,8 +838,8 @@ bool file::write_chunks(const vector<string>& chunks) {
                     break;
                 }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
-                const size_type to_write = _MSTL min<size_type>(
+#ifdef NEFORCE_PLATFORM_WINDOWS
+                const size_type to_write = _NEFORCE min<size_type>(
                     remaining,
                     numeric_traits<size_type>::max()
                 );
@@ -839,7 +852,7 @@ bool file::write_chunks(const vector<string>& chunks) {
                     break;
                 }
                 bytes_written = written_now;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
                 const ssize_t written_now = ::write(handle_,
                                             data + (chunk.size() - remaining),
                                             remaining);
@@ -882,7 +895,7 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
         return info;
     }
     if (chunk_size == 0) {
-        chunk_size = FILE_BUFFER_SIZE * 16;
+        chunk_size = buffer_size * 16;
     }
 
     const size_type file_sz = size();
@@ -897,10 +910,10 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
     while (offset < file_sz) {
         chunk_info ci{};
         ci.offset = offset;
-        ci.chunk_index = index;
+        ci.index = index;
 
         const size_type remaining = file_sz - offset;
-        ci.size = _MSTL min(remaining, chunk_size);
+        ci.size = _NEFORCE min(remaining, chunk_size);
         info.push_back(ci);
 
         if (file_sz - offset < ci.size) break;
@@ -911,11 +924,11 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
     return info;
 }
 
-file::size_type file::read_binary(void* buffer, const size_type size) const {
-    if (!opened_ || handle_ == INVALID_HANDLE() || !buffer) return 0;
+file::size_type file::read_binary(void* out, const size_type size) const {
+    if (!opened_ || handle_ == INVALID_HANDLE() || !out) return 0;
     if (size == 0) return 0;
 
-    auto ptr = static_cast<byte_t*>(buffer);
+    auto ptr = static_cast<byte_t*>(out);
     size_type total_read = 0;
     size_type remaining = size;
 
@@ -927,9 +940,9 @@ file::size_type file::read_binary(void* buffer, const size_type size) const {
         }
 
         const size_type available = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read = _MSTL min(remaining, available);
+        const size_type to_read = _NEFORCE min(remaining, available);
 
-        _MSTL memory_copy(ptr, read_buffer_.data() + read_buffer_pos_, to_read);
+        _NEFORCE memory_copy(ptr, read_buffer_.data() + read_buffer_pos_, to_read);
         read_buffer_pos_ += to_read;
         ptr += to_read;
         total_read += to_read;
@@ -938,24 +951,24 @@ file::size_type file::read_binary(void* buffer, const size_type size) const {
     return total_read;
 }
 
-file::size_type file::read_binary(string& str, const size_type size) const {
+file::size_type file::read_binary(string& out, const size_type size) const {
     if (!opened_ || handle_ == INVALID_HANDLE()) return 0;
     if (size == 0) {
-        str.clear();
+        out.clear();
         return 0;
     }
-    str.resize(size);
-    const size_type total_read = file::read_binary(str.data(), size);
+    out.resize(size);
+    const size_type total_read = file::read_binary(out.data(), size);
     if (total_read < size) {
-        str.resize(total_read);
+        out.resize(total_read);
     }
     return total_read;
 }
 
-file::size_type file::read_binary(string& str) const {
+file::size_type file::read_binary(string& out) const {
     const size_type s = size();
-    str.resize(s);
-    return this->read_binary(str, s);
+    out.resize(s);
+    return this->read_binary(out, s);
 }
 
 string file::read_binary() const {
@@ -1027,7 +1040,7 @@ vector<string> file::read_lines() const {
         if (!line.empty() && line.back() == '\r') {
             line.pop_back();
         }
-        lines.emplace_back(_MSTL move(line));
+        lines.emplace_back(_NEFORCE move(line));
         start = end + 1;
         end = content.find('\n', start);
     }
@@ -1068,7 +1081,7 @@ file::async_result file::async_read(
 
     auto* context = new async_context(&buffer);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!context->cb->hEvent) {
         delete context;
         set_last_error();
@@ -1094,7 +1107,7 @@ file::async_result file::async_read(
     }
 
     size_type bytes_read = 0;
-    const size_type read_size = _MSTL min<size_type>(size, numeric_traits<size_type>::max());
+    const size_type read_size = _NEFORCE min<size_type>(size, numeric_traits<size_type>::max());
 
     if (::ReadFile(handle_, buffer.data(), read_size, &bytes_read, context->cb)) {
         result.completed = true;
@@ -1107,7 +1120,7 @@ file::async_result file::async_read(
             result.cb = context->cb;
             result.user_context = context;
 
-            _MSTL lock<mutex> lock(async_mutex_);
+            _NEFORCE lock<mutex> lock(async_mutex_);
             async_operations_.push_back(context->cb);
             async_contexts_[context->cb] = context;
         } else {
@@ -1116,7 +1129,7 @@ file::async_result file::async_read(
             delete context;
         }
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (offset >= 0) {
         context->cb->aio_offset = offset;
     } else {
@@ -1142,7 +1155,7 @@ file::async_result file::async_read(
         result.cb = context->cb;
         result.user_context = context;
 
-        _MSTL lock<mutex> lock(async_mutex_);
+        _NEFORCE lock<mutex> lock(async_mutex_);
         async_operations_.push_back(context->cb);
         async_contexts_[context->cb] = context;
     } else {
@@ -1166,10 +1179,10 @@ file::async_result file::async_write(string data,
     }
 
     const size_type real_size = (size == numeric_traits<size_type>::max()) ?
-        data.size() : _MSTL min(size, static_cast<size_type>(data.size()));
+        data.size() : _NEFORCE min(size, static_cast<size_type>(data.size()));
 
-    auto* context = new async_context(_MSTL move(data));
-#ifdef MSTL_PLATFORM_WINDOWS__
+    auto* context = new async_context(_NEFORCE move(data));
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!context->cb->hEvent) {
         delete context;
         set_last_error();
@@ -1191,7 +1204,7 @@ file::async_result file::async_write(string data,
     }
 
     size_type bytes_written = 0;
-    const size_type write_size = _MSTL min<size_type>(real_size, numeric_traits<size_type>::max());
+    const size_type write_size = _NEFORCE min<size_type>(real_size, numeric_traits<size_type>::max());
 
     if (::WriteFile(handle_, data.data(), write_size, &bytes_written, context->cb)) {
         result.completed = true;
@@ -1204,7 +1217,7 @@ file::async_result file::async_write(string data,
             result.cb = context->cb;
             result.user_context = context;
 
-            _MSTL lock<mutex> lock(async_mutex_);
+            _NEFORCE lock<mutex> lock(async_mutex_);
             async_operations_.push_back(context->cb);
             async_contexts_[context->cb] = context;
         } else {
@@ -1213,7 +1226,7 @@ file::async_result file::async_write(string data,
             delete context;
         }
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (offset >= 0) {
         context->cb->aio_offset = offset;
     } else {
@@ -1235,7 +1248,7 @@ file::async_result file::async_write(string data,
         result.cb = context->cb;
         result.user_context = context;
 
-        _MSTL lock<mutex> lock(async_mutex_);
+        _NEFORCE lock<mutex> lock(async_mutex_);
         async_operations_.push_back(context->cb);
         async_contexts_[context->cb] = context;
     } else {
@@ -1251,7 +1264,7 @@ file::async_result file::async_write(string data,
 bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
     if (result.completed) return true;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!result.cb) {
         result.error_code = ERROR_INVALID_PARAMETER;
         return false;
@@ -1281,7 +1294,7 @@ bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
             }
         }
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (!result.cb) {
         result.error_code = EINVAL;
         return false;
@@ -1324,10 +1337,10 @@ bool file::wait_async(async_result& result, const uint32_t timeout_ms) {
 
 void file::cancel_async(async_result& result) {
     if (result.completed) return;
-    _MSTL lock<mutex> lock(async_mutex_);
+    _NEFORCE lock<mutex> lock(async_mutex_);
     if (!result.cb) return;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!::CancelIoEx(handle_, result.cb)) {
         size_type bytes_transferred = 0;
         if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE)) {
@@ -1342,7 +1355,7 @@ void file::cancel_async(async_result& result) {
         result.error_code = ERROR_OPERATION_ABORTED;
     }
 
-    auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+    auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
@@ -1360,7 +1373,7 @@ void file::cancel_async(async_result& result) {
         delete result.cb;
         result.cb = nullptr;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const int cancel_result = ::aio_cancel(handle_, result.cb);
 
     if (cancel_result == AIO_CANCELED) {
@@ -1385,7 +1398,7 @@ void file::cancel_async(async_result& result) {
         result.error_code = errno;
     }
 
-    const auto it = _MSTL find(async_operations_.begin(), async_operations_.end(), result.cb);
+    const auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
@@ -1428,7 +1441,7 @@ file::size_type file::size() const {
         }
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER file_size;
     if (!::GetFileSizeEx(handle_, &file_size)) {
         set_last_error();
@@ -1442,7 +1455,7 @@ file::size_type file::size() const {
     }
 
     return static_cast<size_type>(file_size.QuadPart);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         set_last_error();
@@ -1483,10 +1496,10 @@ uint64_t file::size64() const {
         if (!flush_write_buffer()) {
             return 0;
         }
-        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
+        NEFORCE_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER file_size;
     if (!::GetFileSizeEx(handle_, &file_size)) {
         set_last_error();
@@ -1494,7 +1507,7 @@ uint64_t file::size64() const {
     }
     return static_cast<uint64_t>(file_size.QuadPart);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         set_last_error();
@@ -1504,13 +1517,13 @@ uint64_t file::size64() const {
 #endif
 }
 
-file::size_type file::size(const _MSTL path& p) {
+file::size_type file::size(const _NEFORCE path& p) {
     size_type sz = 0;
     file::size(p, sz);
     return sz;
 }
 
-bool file::size(const _MSTL path& p, size_type& size) {
+bool file::size(const _NEFORCE path& p, size_type& size) {
     file f;
     if (f.open(p, false, FILE_ACCESS::READ)) {
         size = f.size();
@@ -1519,15 +1532,15 @@ bool file::size(const _MSTL path& p, size_type& size) {
     return false;
 }
 
-bool file::create_and_write(const _MSTL path& p, const string& content, const bool append) {
-    const _MSTL path parent = p.parent_path();
+bool file::create_and_write(const _NEFORCE path& p, const string& content, const bool append) {
+    const _NEFORCE path parent = p.parent_path();
     if (!parent.empty() && !parent.exists()) {
         if (!parent.create_directories()) {
             return false;
         }
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     file f;
     if (!f.open(p, append,
         append ? FILE_ACCESS::APPEND : FILE_ACCESS::WRITE,
@@ -1539,7 +1552,7 @@ bool file::create_and_write(const _MSTL path& p, const string& content, const bo
     const size_type bytes_written = f.write(content, content.size());
     return bytes_written == content.size();
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     int flags = O_WRONLY | O_CREAT;
     if (append) {
         flags |= O_APPEND;
@@ -1561,11 +1574,11 @@ void file::clear_error() noexcept {
     last_error_code_ = 0;
 }
 
-bool file::compare(const _MSTL path& file1, const _MSTL path& file2, const bool binary) {
+bool file::compare(const _NEFORCE path& file1, const _NEFORCE path& file2, const bool binary) {
     return binary ? compare_binary(file1, file2) : compare_text(file1, file2);
 }
 
-bool file::compare_binary(const _MSTL path& file1, const _MSTL path& file2) {
+bool file::compare_binary(const _NEFORCE path& file1, const _NEFORCE path& file2) {
     const size_type size1 = file::size(file1);
     const size_type size2 = file::size(file2);
     if (size1 != size2) return false;
@@ -1589,7 +1602,7 @@ bool file::compare_binary(const _MSTL path& file1, const _MSTL path& file2) {
 
     while (total_read < size1) {
         const size_type remaining = size1 - total_read;
-        const size_type to_read = _MSTL min(remaining, COMPARE_BUFFER_SIZE);
+        const size_type to_read = _NEFORCE min(remaining, COMPARE_BUFFER_SIZE);
 
         const size_type bytes_read1 = f1.read_binary(buffer1, to_read);
         const size_type bytes_read2 = f2.read_binary(buffer2, to_read);
@@ -1598,7 +1611,7 @@ bool file::compare_binary(const _MSTL path& file1, const _MSTL path& file2) {
             result = false;
             break;
         }
-        if (_MSTL memory_compare(buffer1.data(), buffer2.data(), to_read) != 0) {
+        if (_NEFORCE memory_compare(buffer1.data(), buffer2.data(), to_read) != 0) {
             result = false;
             break;
         }
@@ -1609,7 +1622,7 @@ bool file::compare_binary(const _MSTL path& file1, const _MSTL path& file2) {
     return result;
 }
 
-bool file::compare_text(const _MSTL path& file1, const _MSTL path& file2,
+bool file::compare_text(const _NEFORCE path& file1, const _NEFORCE path& file2,
     const bool ignore_case, const bool ignore_whitespace) {
     if (!ignore_case && !ignore_whitespace) {
         return compare_binary(file1, file2);
@@ -1635,10 +1648,10 @@ bool file::compare_text(const _MSTL path& file1, const _MSTL path& file2,
             size_t start = 0;
             size_t end = str.length();
 
-            while (start < end && _MSTL is_space(str[start])) {
+            while (start < end && _NEFORCE is_space(str[start])) {
                 ++start;
             }
-            while (end > start && _MSTL is_space(str[end - 1])) {
+            while (end > start && _NEFORCE is_space(str[end - 1])) {
                 --end;
             }
 
@@ -1694,7 +1707,7 @@ bool file::compare_text(const _MSTL path& file1, const _MSTL path& file2,
 }
 
 vector<file::binary_diff_entry> file::binary_diff(
-    const _MSTL path& file1, const _MSTL path& file2, const size_type max_diffs) {
+    const _NEFORCE path& file1, const _NEFORCE path& file2, const size_type max_diffs) {
     vector<binary_diff_entry> diffs;
     diffs.reserve(max_diffs);
 
@@ -1712,7 +1725,7 @@ vector<file::binary_diff_entry> file::binary_diff(
 
     if (size1 != size2 && diffs.size() < max_diffs) {
         binary_diff_entry entry;
-        entry.offset = static_cast<difference_type>(_MSTL min(size1, size2));
+        entry.offset = static_cast<difference_type>(_NEFORCE min(size1, size2));
         entry.byte1 = 0;
         entry.byte2 = 0;
         entry.is_size_diff = true;
@@ -1720,7 +1733,7 @@ vector<file::binary_diff_entry> file::binary_diff(
         diffs.push_back(entry);
     }
 
-    const size_type min_size = _MSTL min(size1, size2);
+    const size_type min_size = _NEFORCE min(size1, size2);
     if (min_size == 0) return diffs;
 
     constexpr size_type BLOCK_SIZE = 64 * 1024;
@@ -1730,14 +1743,14 @@ vector<file::binary_diff_entry> file::binary_diff(
 
     while (offset < min_size && diffs.size() < max_diffs) {
         const size_type remaining = min_size - offset;
-        const size_type to_read = _MSTL min(remaining, BLOCK_SIZE);
+        const size_type to_read = _NEFORCE min(remaining, BLOCK_SIZE);
         const size_type bytes1 = f1.read_binary(buffer1, to_read);
         const size_type bytes2 = f2.read_binary(buffer2, to_read);
 
         if (bytes1 != to_read || bytes2 != to_read) {
             break;
         }
-        if (_MSTL memory_compare(buffer1.data(), buffer2.data(), to_read) == 0) {
+        if (_NEFORCE memory_compare(buffer1.data(), buffer2.data(), to_read) == 0) {
             offset += to_read;
             continue;
         }
@@ -1782,7 +1795,7 @@ bool file::seek(const difference_type distance, FILE_POINTER method) const noexc
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
     li.QuadPart = distance;
 
@@ -1792,7 +1805,7 @@ bool file::seek(const difference_type distance, FILE_POINTER method) const noexc
         set_last_error();
         return false;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type new_pos = ::lseek(
         handle_, distance, static_cast<fud_t>(method));
     if (new_pos == -1) {
@@ -1809,7 +1822,7 @@ file::difference_type file::tell() const noexcept {
         return -1;
     }
     difference_type system_pos;
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
     ::LARGE_INTEGER current_pos;
     if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
@@ -1817,7 +1830,7 @@ file::difference_type file::tell() const noexcept {
         return -1;
     }
     system_pos = current_pos.QuadPart;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
     if (pos == -1) {
         set_last_error();
@@ -1840,14 +1853,14 @@ file::difference_type file::tell() const noexcept {
 file::difference_type file::system_tell() const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return -1;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::LARGE_INTEGER li_zero{};
     ::LARGE_INTEGER current_pos;
     if (!::SetFilePointerEx(handle_, li_zero, &current_pos, FILE_CURRENT)) {
         return -1;
     }
     return current_pos.QuadPart;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
     if (pos == -1) {
         set_last_error();
@@ -1871,11 +1884,11 @@ bool file::prefetch(const size_type hint_size) const noexcept {
         if (hint_size > numeric_traits<size_type>::max() / 2) {
             prefetch_size = numeric_traits<size_type>::max();
         } else {
-            prefetch_size = _MSTL min(hint_size * 2, buffer_size_);
+            prefetch_size = _NEFORCE min(hint_size * 2, buffer_size_);
         }
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const difference_type current_pos = tell();
     if (current_pos < 0) {
         return false;
@@ -1953,7 +1966,7 @@ bool file::prefetch(const size_type hint_size) const noexcept {
     }
     ::CloseHandle(hMapping);
     return pView != nullptr;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type current_pos = tell();
     if (current_pos >= 0) {
         const int advice_result = ::posix_fadvise(
@@ -2017,7 +2030,7 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const difference_type current_pos = tell();
     if (current_pos < 0) return false;
 
@@ -2027,7 +2040,7 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
 
     if (!::SetEndOfFile(handle_)) {
         set_last_error();
-        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
+        NEFORCE_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
         return false;
     }
 
@@ -2036,12 +2049,12 @@ if (!opened_ || handle_ == INVALID_HANDLE()) {
             set_last_error();
         }
     } else {
-        MSTL_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
+        NEFORCE_IGNORE seek(current_pos, FILE_POINTER::BEGIN);
     }
 
     return true;
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type current_pos = tell();
     if (current_pos < 0) {
         return false;
@@ -2080,7 +2093,7 @@ bool file::lock(
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     if (!flush_write_buffer()) {
         set_last_error();
         return false;
@@ -2125,9 +2138,9 @@ bool file::lock(
     }
     return true;
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::flock fl{};
-    _MSTL memory_zero(&fl);
+    _NEFORCE memory_zero(&fl);
 
     if (mode == FILE_LOCK::EXCLUSIVE ||
         (static_cast<fud_t>(mode) & LOCK_EX) != 0) {
@@ -2168,7 +2181,7 @@ bool file::unlock(const difference_type offset, const difference_type length) co
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::OVERLAPPED ov{};
     const ::ULARGE_INTEGER offset_ul = {
         static_cast<::DWORD>(offset & 0xFFFFFFFF),
@@ -2197,9 +2210,9 @@ bool file::unlock(const difference_type offset, const difference_type length) co
         return false;
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::flock fl{};
-    _MSTL memory_zero(&fl);
+    _NEFORCE memory_zero(&fl);
 
     fl.l_type = F_UNLCK;
     fl.l_whence = SEEK_SET;
@@ -2216,9 +2229,9 @@ bool file::unlock(const difference_type offset, const difference_type length) co
 }
 
 bool file::try_lock(const difference_type offset, const difference_type length, FILE_LOCK mode) const noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCKFILE_FAIL_IMMEDIATELY);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const auto nonblocking_mode = static_cast<FILE_LOCK>(static_cast<fud_t>(mode) | LOCK_NB);
 #endif
     return lock(offset, length, nonblocking_mode);
@@ -2229,10 +2242,10 @@ bool file::is_locked(const difference_type offset, const difference_type length,
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const bool can_lock = try_lock(offset, length, FILE_LOCK::SHARED);
     if (can_lock) {
-        MSTL_IGNORE unlock(offset, length);
+        NEFORCE_IGNORE unlock(offset, length);
         if (lock_out) *lock_out = FILE_LOCK::SHARED;
         return false;
     }
@@ -2246,7 +2259,7 @@ bool file::is_locked(const difference_type offset, const difference_type length,
 
 #else
     struct ::flock fl{};
-    _MSTL memory_zero(&fl);
+    _NEFORCE memory_zero(&fl);
 
     fl.l_type = F_WRLCK;
     fl.l_whence = SEEK_SET;
@@ -2282,7 +2295,7 @@ bool file::unlock_whole() const noexcept {
 }
 
 bool file::map(size_type offset, size_type size, const FILE_ACCESS access, const FILE_MAP_HINT hint) {
-    _MSTL lock<mutex> lock(map_mutex_);
+    _NEFORCE lock<mutex> lock(map_mutex_);
 
     if (mapped_ptr_) {
         unmap();
@@ -2323,7 +2336,7 @@ bool file::map(size_type offset, size_type size, const FILE_ACCESS access, const
     read_buffer_pos_ = 0;
     read_buffer_size_ = 0;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     const uint32_t allocation_granularity =
         sysinfo::instance().get_system_info().allocation_granularity;;
@@ -2421,7 +2434,7 @@ bool file::map(size_type offset, size_type size, const FILE_ACCESS access, const
         }
     }
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 
     const difference_type page_size = ::sysconf(_SC_PAGESIZE);
     if (page_size < 0) {
@@ -2502,11 +2515,11 @@ bool file::map(size_type offset, size_type size, const FILE_ACCESS access, const
 }
 
 void file::unmap() noexcept {
-    _MSTL lock<mutex> lock(map_mutex_);
+    _NEFORCE lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) return;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const uint32_t allocation_granularity = sysinfo::instance().get_system_info().allocation_granularity;
     const uintptr_t base_address = reinterpret_cast<uintptr_t>(mapped_ptr_) - (mapped_offset_ % allocation_granularity);
 
@@ -2518,7 +2531,7 @@ void file::unmap() noexcept {
         ::CloseHandle(mapping_handle_);
         mapping_handle_ = INVALID_HANDLE_VALUE;
     }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const long page_size = ::sysconf(_SC_PAGESIZE);
     if (page_size > 0) {
         const difference_type page_mask = page_size - 1;
@@ -2542,7 +2555,7 @@ void file::unmap() noexcept {
 }
 
 bool file::remap(const size_type new_offset, const size_type new_size) {
-    _MSTL lock<mutex> lock(map_mutex_);
+    _NEFORCE lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
         return map(new_offset, new_size, mapped_access_);
@@ -2553,7 +2566,7 @@ bool file::remap(const size_type new_offset, const size_type new_size) {
 }
 
 bool file::flush_mapped(const bool async) {
-    _MSTL lock<mutex> lock(map_mutex_);
+    _NEFORCE lock<mutex> lock(map_mutex_);
 
     if (!mapped_ptr_) {
         last_error_code_ = EINVAL;
@@ -2564,7 +2577,7 @@ bool file::flush_mapped(const bool async) {
         return true;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     if (!::FlushViewOfFile(mapped_ptr_, mapped_size_)) {
         set_last_error();
@@ -2579,7 +2592,7 @@ bool file::flush_mapped(const bool async) {
     }
     return true;
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     int flags = MS_SYNC;
     if (async) {
         flags = MS_ASYNC;
@@ -2608,7 +2621,7 @@ bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
         return false;
     }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     ::SIZE_T min_working_set, max_working_set;
     if (!::GetProcessWorkingSetSize(::GetCurrentProcess(), &min_working_set, &max_working_set)) {
@@ -2624,7 +2637,7 @@ bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
     }
     return true;
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const difference_type page_size = ::sysconf(_SC_PAGESIZE);
     if (page_size <= 0) {
         return false;
@@ -2641,7 +2654,7 @@ bool file::lock_mapped_pages(const bool lock_in_memory) const noexcept {
 }
 
 file::map_info file::map_infos() const noexcept {
-    _MSTL lock<mutex> lock(map_mutex_);
+    _NEFORCE lock<mutex> lock(map_mutex_);
 
     map_info info;
     info.address = mapped_ptr_;
@@ -2656,11 +2669,11 @@ file::map_info file::map_infos() const noexcept {
 FILE_ATTRI file::attributes() const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return FILE_ATTRI::OTHERS;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::BY_HANDLE_FILE_INFORMATION info;
     if (!::GetFileInformationByHandle(handle_, &info)) return FILE_ATTRI::OTHERS;
     return static_cast<FILE_ATTRI>(info.dwFileAttributes);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) return FILE_ATTRI::OTHERS;
     return static_cast<FILE_ATTRI>(st.st_mode);
@@ -2670,9 +2683,9 @@ FILE_ATTRI file::attributes() const noexcept {
 bool file::set_attributes(FILE_ATTRI attr) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetFileAttributesA(path_.data(), static_cast<fud_t>(attr)) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st_old{};
     if (::fstat64(handle_, &st_old) == -1) return false;
 
@@ -2684,7 +2697,7 @@ bool file::set_attributes(FILE_ATTRI attr) noexcept {
 #endif
 }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 datetime file::creation_time() const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
 
@@ -2698,12 +2711,12 @@ datetime file::creation_time() const noexcept {
 datetime file::last_access_time() const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     time_type ft_create, ft_access, ft_write;
     if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write))
         return datetime::epoch();
     return filetime_to_datetime(ft_access);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         const ::time_t now = ::time(nullptr);
@@ -2716,12 +2729,12 @@ datetime file::last_access_time() const noexcept {
 datetime file::last_write_time() const noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return datetime::epoch();
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     time_type ft_create, ft_access, ft_write;
     if (!::GetFileTime(handle_, &ft_create, &ft_access, &ft_write))
         return datetime::epoch();
     return filetime_to_datetime(ft_write);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         const ::time_t now = ::time(nullptr);
@@ -2731,7 +2744,7 @@ datetime file::last_write_time() const noexcept {
 #endif
 }
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 bool file::set_all_times(const datetime& create,
     const datetime& access, const datetime& write) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
@@ -2741,7 +2754,7 @@ bool file::set_all_times(const datetime& create,
     const time_type ft_write = datetime_to_filetime(write);
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
 }
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 bool file::set_all_times(const datetime& access, const datetime& write) noexcept {
     if (!opened_ || handle_ == INVALID_HANDLE()) return false;
 
@@ -2754,7 +2767,7 @@ bool file::set_all_times(const datetime& access, const datetime& write) noexcept
 }
 #endif
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 bool file::set_creation_time(const datetime& dt) noexcept {
     const time_type ft_create = datetime_to_filetime(dt);
     time_type ft_access, ft_write;
@@ -2765,38 +2778,39 @@ bool file::set_creation_time(const datetime& dt) noexcept {
 #endif
 
 bool file::set_last_access_time(const datetime& dt) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const time_type ft_access = datetime_to_filetime(dt);
     time_type ft_create, ft_write;
 
     if (!::GetFileTime(handle_, &ft_create, nullptr, &ft_write)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     return set_all_times(dt, last_write_time());
 #endif
 }
 
 bool file::set_last_write_time(const datetime& dt) noexcept {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const time_type ft_write = datetime_to_filetime(dt);
     time_type ft_create, ft_access;
 
     if (!::GetFileTime(handle_, &ft_create, &ft_access, nullptr)) return false;
     return ::SetFileTime(handle_, &ft_create, &ft_access, &ft_write) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     return set_all_times(last_access_time(), dt.to_UTC());
 #endif
 }
 
-bool file::read(const _MSTL path& p, string& content,
+bool file::read(const _NEFORCE path& p, string& content,
     FILE_CREATION creation, FILE_ATTRI attributes) {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     file f;
     if (!f.open(p, false,
         FILE_ACCESS::READ,
         FILE_SHARED::SHARE_READ,
-        creation, attributes))
+        creation, attributes)) {
         return false;
+    }
 
     const size_type sz = f.size();
     if (sz == 0) {
@@ -2807,7 +2821,7 @@ bool file::read(const _MSTL path& p, string& content,
     content.resize(sz);
     const size_type bytes_read = f.read(content, sz);
     return bytes_read == sz;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const int fd = ::open(p.data(), O_RDONLY);
     if (fd == -1) return false;
 
@@ -2824,13 +2838,13 @@ bool file::read(const _MSTL path& p, string& content,
 #endif
 }
 
-string file::read(const _MSTL path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
+string file::read(const _NEFORCE path& p, FILE_CREATION creation, FILE_ATTRI attributes) {
     string content;
     file::read(p, content, creation, attributes);
     return content;
 }
 
-bool file::read_binary(const _MSTL path& p, string& content,
+bool file::read_binary(const _NEFORCE path& p, string& content,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
     file f;
     if (!f.open(p, false,
@@ -2849,7 +2863,7 @@ bool file::read_binary(const _MSTL path& p, string& content,
     return true;
 }
 
-string file::read_binary(const _MSTL path& p,
+string file::read_binary(const _NEFORCE path& p,
     const FILE_CREATION creation, const FILE_ATTRI attributes) {
     string content;
     file::read_binary(p, content, creation, attributes);
@@ -2867,7 +2881,7 @@ file_lock_guard::file_lock_guard(
 
 file_lock_guard::~file_lock_guard() {
     if (locked_) {
-        MSTL_IGNORE file_.unlock(offset_, length_);
+        NEFORCE_IGNORE file_.unlock(offset_, length_);
     }
 }
 
@@ -2881,4 +2895,4 @@ bool file_lock_guard::unlock() {
     return false;
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

@@ -1,0 +1,1479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: 独占智能指针</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___unique_pointer.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">独占智能指针 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>独占智能指针类和辅助工具  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:unique_5Fptr_3C_20T_2C_20Deleter_20_3E" id="r_unique_5Fptr_3C_20T_2C_20Deleter_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr.html">unique_ptr&lt; T, Deleter &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">独占智能指针  <a href="classunique__ptr.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:unique_5Fptr_3C_20T_5B_5D_2C_20Deleter_20_3E" id="r_unique_5Fptr_3C_20T_5B_5D_2C_20Deleter_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html">unique_ptr&lt; T[], Deleter &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">数组特化的unique_ptr  <a href="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:hash_3C_20unique_5Fptr_3C_20T_2C_20Deleter_20_3E_20_3E" id="r_hash_3C_20unique_5Fptr_3C_20T_2C_20Deleter_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html">hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr的哈希特化  <a href="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga3def886ee466fc780671110b23c22e0d" id="r_ga3def886ee466fc780671110b23c22e0d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Deleter, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__swappable.html">is_swappable</a>&lt; Deleter &gt;::value &amp;&amp;<a class="el" href="structis__swappable.html">is_swappable</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3def886ee466fc780671110b23c22e0d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3def886ee466fc780671110b23c22e0d">swap</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt; &amp;lhs, <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt; &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:ga3def886ee466fc780671110b23c22e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个unique_ptr  <br /></td></tr>
+<tr class="memitem:ga2e039c6b9e49d933db1ac1539445e924" id="r_ga2e039c6b9e49d933db1ac1539445e924"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:ga2e039c6b9e49d933db1ac1539445e924 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga2e039c6b9e49d933db1ac1539445e924">operator==</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga2e039c6b9e49d933db1ac1539445e924"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:gafd5d8431a973b7e88c2b83662ed5b553" id="r_gafd5d8431a973b7e88c2b83662ed5b553"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gafd5d8431a973b7e88c2b83662ed5b553 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gafd5d8431a973b7e88c2b83662ed5b553">operator==</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:gafd5d8431a973b7e88c2b83662ed5b553"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的相等比较运算符  <br /></td></tr>
+<tr class="memitem:ga5c5d88f05ed7eea2ba7cd8f22ae2c900" id="r_ga5c5d88f05ed7eea2ba7cd8f22ae2c900"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga5c5d88f05ed7eea2ba7cd8f22ae2c900 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga5c5d88f05ed7eea2ba7cd8f22ae2c900">operator==</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga5c5d88f05ed7eea2ba7cd8f22ae2c900"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的相等比较运算符  <br /></td></tr>
+<tr class="memitem:ga0d10eece7e529593dc6583c08d4aa0ba" id="r_ga0d10eece7e529593dc6583c08d4aa0ba"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:ga0d10eece7e529593dc6583c08d4aa0ba template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga0d10eece7e529593dc6583c08d4aa0ba">operator!=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga0d10eece7e529593dc6583c08d4aa0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较运算符  <br /></td></tr>
+<tr class="memitem:gaa81f43cac5be85f21cb5fc7aa8897a81" id="r_gaa81f43cac5be85f21cb5fc7aa8897a81"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gaa81f43cac5be85f21cb5fc7aa8897a81 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gaa81f43cac5be85f21cb5fc7aa8897a81">operator!=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:gaa81f43cac5be85f21cb5fc7aa8897a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的不等比较运算符  <br /></td></tr>
+<tr class="memitem:ga9d36175d06f29041f3b87d1992eb9c82" id="r_ga9d36175d06f29041f3b87d1992eb9c82"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga9d36175d06f29041f3b87d1992eb9c82 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9d36175d06f29041f3b87d1992eb9c82">operator!=</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga9d36175d06f29041f3b87d1992eb9c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的不等比较运算符  <br /></td></tr>
+<tr class="memitem:gac57ff1dd79c7a12174cfb51867d3b6b5" id="r_gac57ff1dd79c7a12174cfb51867d3b6b5"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:gac57ff1dd79c7a12174cfb51867d3b6b5 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gac57ff1dd79c7a12174cfb51867d3b6b5">operator&lt;</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:gac57ff1dd79c7a12174cfb51867d3b6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:gacb305365ebe27fa4b08f8366746d16e8" id="r_gacb305365ebe27fa4b08f8366746d16e8"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gacb305365ebe27fa4b08f8366746d16e8 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gacb305365ebe27fa4b08f8366746d16e8">operator&lt;</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:gacb305365ebe27fa4b08f8366746d16e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的小于比较运算符  <br /></td></tr>
+<tr class="memitem:ga62d95b48fc30554a8a17bae773cd28e9" id="r_ga62d95b48fc30554a8a17bae773cd28e9"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga62d95b48fc30554a8a17bae773cd28e9 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga62d95b48fc30554a8a17bae773cd28e9">operator&lt;</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga62d95b48fc30554a8a17bae773cd28e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的小于比较运算符  <br /></td></tr>
+<tr class="memitem:gaf4c9e805e471b53f0d1758160d98c075" id="r_gaf4c9e805e471b53f0d1758160d98c075"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:gaf4c9e805e471b53f0d1758160d98c075 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gaf4c9e805e471b53f0d1758160d98c075">operator&gt;</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:gaf4c9e805e471b53f0d1758160d98c075"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于比较运算符  <br /></td></tr>
+<tr class="memitem:gaf24cc2d1dc41828a7dadc44989277be3" id="r_gaf24cc2d1dc41828a7dadc44989277be3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gaf24cc2d1dc41828a7dadc44989277be3 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gaf24cc2d1dc41828a7dadc44989277be3">operator&gt;</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:gaf24cc2d1dc41828a7dadc44989277be3"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的大于比较运算符  <br /></td></tr>
+<tr class="memitem:ga641dcafc05495ad745fe78f409626369" id="r_ga641dcafc05495ad745fe78f409626369"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga641dcafc05495ad745fe78f409626369 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga641dcafc05495ad745fe78f409626369">operator&gt;</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga641dcafc05495ad745fe78f409626369"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的大于比较运算符  <br /></td></tr>
+<tr class="memitem:gad817ab15dc22c8dd18504afbbadb5073" id="r_gad817ab15dc22c8dd18504afbbadb5073"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:gad817ab15dc22c8dd18504afbbadb5073 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gad817ab15dc22c8dd18504afbbadb5073">operator&lt;=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:gad817ab15dc22c8dd18504afbbadb5073"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:gad41de667371a616e5aa51830795b25e6" id="r_gad41de667371a616e5aa51830795b25e6"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gad41de667371a616e5aa51830795b25e6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gad41de667371a616e5aa51830795b25e6">operator&lt;=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:gad41de667371a616e5aa51830795b25e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d" id="r_gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d">operator&lt;=</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:ga366aeaf83540a81f667c532c781530e3" id="r_ga366aeaf83540a81f667c532c781530e3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D, typename U, typename E&gt; </td></tr>
+<tr class="memitem:ga366aeaf83540a81f667c532c781530e3 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga366aeaf83540a81f667c532c781530e3">operator&gt;=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga366aeaf83540a81f667c532c781530e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符  <br /></td></tr>
+<tr class="memitem:ga5ddd67c0ff52ee718fde2ce960b50f0c" id="r_ga5ddd67c0ff52ee718fde2ce960b50f0c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga5ddd67c0ff52ee718fde2ce960b50f0c template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga5ddd67c0ff52ee718fde2ce960b50f0c">operator&gt;=</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;lhs, <a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>)</td></tr>
+<tr class="memdesc:ga5ddd67c0ff52ee718fde2ce960b50f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">与nullptr的大于等于比较运算符  <br /></td></tr>
+<tr class="memitem:ga9d125b022b79c38f6384b92692ebd2a1" id="r_ga9d125b022b79c38f6384b92692ebd2a1"><td class="memTemplParams" colspan="2">template&lt;typename T, typename D&gt; </td></tr>
+<tr class="memitem:ga9d125b022b79c38f6384b92692ebd2a1 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9d125b022b79c38f6384b92692ebd2a1">operator&gt;=</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>, const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ga9d125b022b79c38f6384b92692ebd2a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr与unique_ptr的大于等于比较运算符  <br /></td></tr>
+<tr class="memitem:gaad50c03769543ab8a0f83240b2152639" id="r_gaad50c03769543ab8a0f83240b2152639"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gaad50c03769543ab8a0f83240b2152639 template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaad50c03769543ab8a0f83240b2152639">static_pointer_cast</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;ptr)=delete</td></tr>
+<tr class="memdesc:gaad50c03769543ab8a0f83240b2152639"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止的static_pointer_cast  <br /></td></tr>
+<tr class="memitem:ga8236ff854917f0a44e679af28ba98128" id="r_ga8236ff854917f0a44e679af28ba98128"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:ga8236ff854917f0a44e679af28ba98128 template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8236ff854917f0a44e679af28ba98128">const_pointer_cast</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;ptr)=delete</td></tr>
+<tr class="memdesc:ga8236ff854917f0a44e679af28ba98128"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止的const_pointer_cast  <br /></td></tr>
+<tr class="memitem:ga4a0ef43262a18e3281a1515365f4cc73" id="r_ga4a0ef43262a18e3281a1515365f4cc73"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:ga4a0ef43262a18e3281a1515365f4cc73 template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4a0ef43262a18e3281a1515365f4cc73">reinterpret_pointer_cast</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;ptr)=delete</td></tr>
+<tr class="memdesc:ga4a0ef43262a18e3281a1515365f4cc73"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止的reinterpret_pointer_cast  <br /></td></tr>
+<tr class="memitem:gaf11f91854b5e34801552478983db3e00" id="r_gaf11f91854b5e34801552478983db3e00"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gaf11f91854b5e34801552478983db3e00 template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf11f91854b5e34801552478983db3e00">dynamic_pointer_cast</a> (const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;ptr)=delete</td></tr>
+<tr class="memdesc:gaf11f91854b5e34801552478983db3e00"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止的dynamic_pointer_cast  <br /></td></tr>
+<tr class="memitem:ga65025ff0afc45ff0daebc7d1c5424901" id="r_ga65025ff0afc45ff0daebc7d1c5424901"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:ga65025ff0afc45ff0daebc7d1c5424901 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga65025ff0afc45ff0daebc7d1c5424901">static_pointer_cast</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;ptr)</td></tr>
+<tr class="memdesc:ga65025ff0afc45ff0daebc7d1c5424901"><td class="mdescLeft">&#160;</td><td class="mdescRight">static_pointer_cast  <br /></td></tr>
+<tr class="memitem:gaa1882c39d000059af9a4806b14ee003c" id="r_gaa1882c39d000059af9a4806b14ee003c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gaa1882c39d000059af9a4806b14ee003c template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaa1882c39d000059af9a4806b14ee003c">const_pointer_cast</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;ptr)</td></tr>
+<tr class="memdesc:gaa1882c39d000059af9a4806b14ee003c"><td class="mdescLeft">&#160;</td><td class="mdescRight">const_pointer_cast  <br /></td></tr>
+<tr class="memitem:ga5ac19d9b78091a60e8306da54e056826" id="r_ga5ac19d9b78091a60e8306da54e056826"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:ga5ac19d9b78091a60e8306da54e056826 template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga5ac19d9b78091a60e8306da54e056826">reinterpret_pointer_cast</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;ptr)</td></tr>
+<tr class="memdesc:ga5ac19d9b78091a60e8306da54e056826"><td class="mdescLeft">&#160;</td><td class="mdescRight">const_pointer_cast  <br /></td></tr>
+<tr class="memitem:gafe56143bed93a0219a73b7f3aca1180b" id="r_gafe56143bed93a0219a73b7f3aca1180b"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:gafe56143bed93a0219a73b7f3aca1180b template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gafe56143bed93a0219a73b7f3aca1180b">dynamic_pointer_cast</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;ptr)</td></tr>
+<tr class="memdesc:gafe56143bed93a0219a73b7f3aca1180b"><td class="mdescLeft">&#160;</td><td class="mdescRight">reinterpret_pointer_cast  <br /></td></tr>
+<tr class="memitem:ga1392a16f6940e75495ba167745eff5b7" id="r_ga1392a16f6940e75495ba167745eff5b7"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="structis__array.html">is_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga1392a16f6940e75495ba167745eff5b7 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga1392a16f6940e75495ba167745eff5b7">make_unique</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ga1392a16f6940e75495ba167745eff5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建unique_ptr  <br /></td></tr>
+<tr class="memitem:gab4d3b888298c124ec2952f99cf23ef9d" id="r_gab4d3b888298c124ec2952f99cf23ef9d"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__unbounded__array.html">is_unbounded_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gab4d3b888298c124ec2952f99cf23ef9d template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab4d3b888298c124ec2952f99cf23ef9d">make_unique</a> (const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> len)</td></tr>
+<tr class="memdesc:gab4d3b888298c124ec2952f99cf23ef9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建unique_ptr  <br /></td></tr>
+<tr class="memitem:gad7eab479e3aa31dc40743c1c0431cd0b" id="r_gad7eab479e3aa31dc40743c1c0431cd0b"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__bounded__array.html">is_bounded_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gad7eab479e3aa31dc40743c1c0431cd0b template"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gad7eab479e3aa31dc40743c1c0431cd0b">make_unique</a> (Args &amp;&amp;...)=delete</td></tr>
+<tr class="memdesc:gad7eab479e3aa31dc40743c1c0431cd0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止创建已知边界数组的make_unique  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>独占智能指针类和辅助工具 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="ga8236ff854917f0a44e679af28ba98128" name="ga8236ff854917f0a44e679af28ba98128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8236ff854917f0a44e679af28ba98128">&#9670;&#160;</a></span>const_pointer_cast() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; const_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁止的const_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>由于unique_ptr是独占所有权，不能从const引用转换 </dd></dl>
+
+</div>
+</div>
+<a id="gaa1882c39d000059af9a4806b14ee003c" name="gaa1882c39d000059af9a4806b14ee003c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa1882c39d000059af9a4806b14ee003c">&#9670;&#160;</a></span>const_pointer_cast() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; const_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>const_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>转换后的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00948">948</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf11f91854b5e34801552478983db3e00" name="gaf11f91854b5e34801552478983db3e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf11f91854b5e34801552478983db3e00">&#9670;&#160;</a></span>dynamic_pointer_cast() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; dynamic_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁止的dynamic_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>由于unique_ptr是独占所有权，不能从const引用转换 </dd></dl>
+
+</div>
+</div>
+<a id="gafe56143bed93a0219a73b7f3aca1180b" name="gafe56143bed93a0219a73b7f3aca1180b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafe56143bed93a0219a73b7f3aca1180b">&#9670;&#160;</a></span>dynamic_pointer_cast() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; dynamic_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reinterpret_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>转换后的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00972">972</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00285">move()</a>.</p>
+
+</div>
+</div>
+<a id="ga1392a16f6940e75495ba167745eff5b7" name="ga1392a16f6940e75495ba167745eff5b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1392a16f6940e75495ba167745eff5b7">&#9670;&#160;</a></span>make_unique() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="structis__array.html">is_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; make_unique </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>创建unique_ptr </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>构造函数参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造函数参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>管理新对象的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l01008">1008</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03044">forward()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="exception__ptr_8hpp_source.html#l00101">typed_exception_wrapper&lt; Ex &gt;::clone()</a>, <a class="el" href="env__parser_8hpp_source.html#l00159">env_parser::env_parser()</a>, <a class="el" href="ini__value_8hpp_source.html#l00357">ini_document::ini_document()</a>, <a class="el" href="ini__parser_8hpp_source.html#l00137">ini_parser::ini_parser()</a>, <a class="el" href="exception__ptr_8hpp_source.html#l00332">exception_ptr::make_exception_ptr</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00261">lock_free_queue&lt; T &gt;::pop()</a>, <a class="el" href="ini__value_8hpp_source.html#l00250">ini_section::set_property()</a>, <a class="el" href="env__value_8hpp_source.html#l00255">env_document::set_variable()</a>, <a class="el" href="toml__parser_8hpp_source.html#l00347">toml_parser::toml_parser()</a>, <a class="el" href="barrier_8hpp_source.html#l00134">tree_barrier&lt; CmplFunc &gt;::tree_barrier()</a>, <a class="el" href="lock__free__queue_8hpp_source.html#l00290">lock_free_queue&lt; T &gt;::try_pop()</a>, <a class="el" href="json__builder_8hpp_source.html#l00291">json_builder::value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00271">json_builder::value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00281">json_builder::value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00241">json_builder::value()</a>, <a class="el" href="json__builder_8hpp_source.html#l00231">json_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00309">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00339">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00319">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00299">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00349">toml_builder::value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00401">toml_builder::value_datetime()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00390">toml_builder::value_string()</a>.</p>
+
+</div>
+</div>
+<a id="gad7eab479e3aa31dc40743c1c0431cd0b" name="gad7eab479e3aa31dc40743c1c0431cd0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7eab479e3aa31dc40743c1c0431cd0b">&#9670;&#160;</a></span>make_unique() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__bounded__array.html">is_bounded_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; make_unique </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>...</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁止创建已知边界数组的make_unique </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>已知边界数组类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00302">NEFORCE_END_NAMESPACE__</a>.</p>
+
+</div>
+</div>
+<a id="gab4d3b888298c124ec2952f99cf23ef9d" name="gab4d3b888298c124ec2952f99cf23ef9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4d3b888298c124ec2952f99cf23ef9d">&#9670;&#160;</a></span>make_unique() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__unbounded__array.html">is_unbounded_array</a>&lt; T &gt;::value, int &gt; = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; make_unique </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>创建unique_ptr </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>数组元素类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">len</td><td>数组长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>管理新数组的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l01019">1019</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga0d10eece7e529593dc6583c08d4aa0ba" name="ga0d10eece7e529593dc6583c08d4aa0ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0d10eece7e529593dc6583c08d4aa0ba">&#9670;&#160;</a></span>operator!=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>不等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否不等 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00684">684</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="gaa81f43cac5be85f21cb5fc7aa8897a81" name="gaa81f43cac5be85f21cb5fc7aa8897a81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa81f43cac5be85f21cb5fc7aa8897a81">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的不等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否非空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00697">697</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga9d36175d06f29041f3b87d1992eb9c82" name="ga9d36175d06f29041f3b87d1992eb9c82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d36175d06f29041f3b87d1992eb9c82">&#9670;&#160;</a></span>operator!=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的不等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否非空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00710">710</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gac57ff1dd79c7a12174cfb51867d3b6b5" name="gac57ff1dd79c7a12174cfb51867d3b6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac57ff1dd79c7a12174cfb51867d3b6b5">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>小于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否小于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00726">726</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="gacb305365ebe27fa4b08f8366746d16e8" name="gacb305365ebe27fa4b08f8366746d16e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacb305365ebe27fa4b08f8366746d16e8">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的小于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否小于nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00742">742</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="ga62d95b48fc30554a8a17bae773cd28e9" name="ga62d95b48fc30554a8a17bae773cd28e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62d95b48fc30554a8a17bae773cd28e9">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的小于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>nullptr是否小于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00755">755</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="gad817ab15dc22c8dd18504afbbadb5073" name="gad817ab15dc22c8dd18504afbbadb5073"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad817ab15dc22c8dd18504afbbadb5073">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>小于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否小于等于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00813">813</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad41de667371a616e5aa51830795b25e6" name="gad41de667371a616e5aa51830795b25e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad41de667371a616e5aa51830795b25e6">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的小于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否小于等于nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00826">826</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d" name="gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的小于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>nullptr是否小于等于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00839">839</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga2e039c6b9e49d933db1ac1539445e924" name="ga2e039c6b9e49d933db1ac1539445e924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2e039c6b9e49d933db1ac1539445e924">&#9670;&#160;</a></span>operator==() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>相等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00642">642</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="gafd5d8431a973b7e88c2b83662ed5b553" name="gafd5d8431a973b7e88c2b83662ed5b553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafd5d8431a973b7e88c2b83662ed5b553">&#9670;&#160;</a></span>operator==() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的相等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00655">655</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga5c5d88f05ed7eea2ba7cd8f22ae2c900" name="ga5c5d88f05ed7eea2ba7cd8f22ae2c900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5c5d88f05ed7eea2ba7cd8f22ae2c900">&#9670;&#160;</a></span>operator==() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的相等比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00668">668</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf4c9e805e471b53f0d1758160d98c075" name="gaf4c9e805e471b53f0d1758160d98c075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf4c9e805e471b53f0d1758160d98c075">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>大于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否大于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00771">771</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="gaf24cc2d1dc41828a7dadc44989277be3" name="gaf24cc2d1dc41828a7dadc44989277be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf24cc2d1dc41828a7dadc44989277be3">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的大于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否大于nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00784">784</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="ga641dcafc05495ad745fe78f409626369" name="ga641dcafc05495ad745fe78f409626369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga641dcafc05495ad745fe78f409626369">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的大于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>nullptr是否大于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00797">797</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="c_09_09config_8hpp_source.html#l00308">_NEFORCE</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00354">unique_ptr&lt; T, Deleter &gt;::get()</a>.</p>
+
+</div>
+</div>
+<a id="ga366aeaf83540a81f667c532c781530e3" name="ga366aeaf83540a81f667c532c781530e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga366aeaf83540a81f667c532c781530e3">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D, typename U, typename E&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>大于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>左操作数元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>左操作数删除器类型 </td></tr>
+    <tr><td class="paramname">U</td><td>右操作数元素类型 </td></tr>
+    <tr><td class="paramname">E</td><td>右操作数删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否大于等于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00855">855</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga5ddd67c0ff52ee718fde2ce960b50f0c" name="ga5ddd67c0ff52ee718fde2ce960b50f0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ddd67c0ff52ee718fde2ce960b50f0c">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>与nullptr的大于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否大于等于nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00868">868</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga9d125b022b79c38f6384b92692ebd2a1" name="ga9d125b022b79c38f6384b92692ebd2a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d125b022b79c38f6384b92692ebd2a1">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, D &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nullptr与unique_ptr的大于等于比较运算符 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">D</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>unique_ptr对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>nullptr是否大于等于 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00881">881</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga4a0ef43262a18e3281a1515365f4cc73" name="ga4a0ef43262a18e3281a1515365f4cc73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4a0ef43262a18e3281a1515365f4cc73">&#9670;&#160;</a></span>reinterpret_pointer_cast() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; reinterpret_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁止的reinterpret_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>由于unique_ptr是独占所有权，不能从const引用转换 </dd></dl>
+
+</div>
+</div>
+<a id="ga5ac19d9b78091a60e8306da54e056826" name="ga5ac19d9b78091a60e8306da54e056826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ac19d9b78091a60e8306da54e056826">&#9670;&#160;</a></span>reinterpret_pointer_cast() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; reinterpret_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>const_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>转换后的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00960">960</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaad50c03769543ab8a0f83240b2152639" name="gaad50c03769543ab8a0f83240b2152639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad50c03769543ab8a0f83240b2152639">&#9670;&#160;</a></span>static_pointer_cast() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; static_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁止的static_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>由于unique_ptr是独占所有权，不能从const引用转换 </dd></dl>
+
+</div>
+</div>
+<a id="ga65025ff0afc45ff0daebc7d1c5424901" name="ga65025ff0afc45ff0daebc7d1c5424901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga65025ff0afc45ff0daebc7d1c5424901">&#9670;&#160;</a></span>static_pointer_cast() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt; static_pointer_cast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>static_pointer_cast </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+    <tr><td class="paramname">U</td><td>源类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>源unique_ptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>转换后的unique_ptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00936">936</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga3def886ee466fc780671110b23c22e0d" name="ga3def886ee466fc780671110b23c22e0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3def886ee466fc780671110b23c22e0d">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Deleter, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__swappable.html">is_swappable</a>&lt; Deleter &gt;::value &amp;&amp;<a class="el" href="structis__swappable.html">is_swappable</a>&lt; T &gt;::value, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个unique_ptr </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">Deleter</td><td>删除器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00627">627</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

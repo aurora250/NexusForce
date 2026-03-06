@@ -1,11 +1,11 @@
-#include <MSTL/core/utility/hexadecimal.hpp>
-#include <MSTL/core/encrypt/encrypt.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/core/encrypt/encrypt.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
-bstring XOR::encrypt(const bstring_view data, const bstring_view key) {
+byte_vector XOR::encrypt(const cbyte_view data, const cbyte_view key) {
     if (key.empty()) throw_exception(value_exception("Key cannot be empty"));
 
-    bstring result;
+    byte_vector result;
     result.reserve(data.size());
 
     for (size_t i = 0; i < data.size(); ++i) {
@@ -15,16 +15,27 @@ bstring XOR::encrypt(const bstring_view data, const bstring_view key) {
 }
 
 
-string base64::encode(const bstring_view data) {
+static constexpr auto base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+static constexpr int base64_char_to_index(const char c) {
+    if (c >= 'A' && c <= 'Z') return c - 'A';
+    if (c >= 'a' && c <= 'z') return c - 'a' + 26;
+    if (c >= '0' && c <= '9') return c - '0' + 52;
+    if (c == '+') return 62;
+    if (c == '/') return 63;
+    return -1;
+}
+
+string base64::encode(const cbyte_view data) {
     string result;
     size_t i = 0;
 
     while (i + 2 < data.size()) {
         const uint32_t val = (data[i] << 16) | (data[i + 1] << 8) | data[i + 2];
-        result.push_back(chars[(val >> 18) & 0x3F]);
-        result.push_back(chars[(val >> 12) & 0x3F]);
-        result.push_back(chars[(val >> 6) & 0x3F]);
-        result.push_back(chars[val & 0x3F]);
+        result.push_back(base64_chars[(val >> 18) & 0x3F]);
+        result.push_back(base64_chars[(val >> 12) & 0x3F]);
+        result.push_back(base64_chars[(val >> 6) & 0x3F]);
+        result.push_back(base64_chars[val & 0x3F]);
         i += 3;
     }
 
@@ -32,23 +43,23 @@ string base64::encode(const bstring_view data) {
         uint32_t val = data[i] << 16;
         if (i + 1 < data.size()) val |= data[i + 1] << 8;
 
-        result.push_back(chars[(val >> 18) & 0x3F]);
-        result.push_back(chars[(val >> 12) & 0x3F]);
-        result.push_back(i + 1 < data.size() ? chars[(val >> 6) & 0x3F] : '=');
+        result.push_back(base64_chars[(val >> 18) & 0x3F]);
+        result.push_back(base64_chars[(val >> 12) & 0x3F]);
+        result.push_back(i + 1 < data.size() ? base64_chars[(val >> 6) & 0x3F] : '=');
         result.push_back('=');
     }
     return result;
 }
 
-bstring base64::decode(const string_view data) {
-    bstring result;
+byte_vector base64::decode(const string_view data) {
+    byte_vector result;
     size_t i = 0;
 
     while (i + 3 < data.size()) {
-        const int a = char_to_index(data[i]);
-        const int b = char_to_index(data[i + 1]);
-        const int c = data[i + 2] == '=' ? 0 : char_to_index(data[i + 2]);
-        const int d = data[i + 3] == '=' ? 0 : char_to_index(data[i + 3]);
+        const int a = base64_char_to_index(data[i]);
+        const int b = base64_char_to_index(data[i + 1]);
+        const int c = data[i + 2] == '=' ? 0 : base64_char_to_index(data[i + 2]);
+        const int d = data[i + 3] == '=' ? 0 : base64_char_to_index(data[i + 3]);
 
         if (a < 0 || b < 0) throw_exception(value_exception("Invalid Base64 character"));
 
@@ -63,8 +74,46 @@ bstring base64::decode(const string_view data) {
 }
 
 
-bstring MD5::hash(const bstring_view data) {
-    bstring byte_data{data};
+static constexpr uint32_t md5_S[64] = {
+    7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+    5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+    4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+    6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
+};
+
+static constexpr uint32_t md5_K[64] = {
+    0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, 0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
+    0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be, 0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821,
+    0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa, 0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
+    0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed, 0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a,
+    0xfffa3942, 0x8771f681, 0x6d9d6122, 0xfde5380c, 0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
+    0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05, 0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665,
+    0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039, 0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
+    0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1, 0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
+};
+
+static constexpr uint32_t md5_rotleft(const uint32_t x, const uint32_t c) {
+    return (x << c) | (x >> (32 - c));
+}
+
+static constexpr uint32_t md5_F(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return (x & y) | (~x & z);
+}
+
+static constexpr uint32_t md5_G(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return (x & z) | (y & ~z);
+}
+
+static constexpr uint32_t md5_H(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return x ^ y ^ z;
+}
+
+static constexpr uint32_t md5_I(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return y ^ (x | ~z);
+}
+
+byte_vector MD5::hash(const cbyte_view data) {
+    byte_vector byte_data{data.begin(), data.end()};
     const uint64_t original_len = byte_data.size();
     byte_data.push_back(0x80);
     while ((byte_data.size() % 64) != 56) {
@@ -94,24 +143,24 @@ bstring MD5::hash(const bstring_view data) {
         for (int i = 0; i < 64; ++i) {
             uint32_t f, g;
             if (i < 16) {
-                f = F(b, c, d);
+                f = md5_F(b, c, d);
                 g = i;
             } else if (i < 32) {
-                f = G(b, c, d);
+                f = md5_G(b, c, d);
                 g = (5 * i + 1) % 16;
             } else if (i < 48) {
-                f = H(b, c, d);
+                f = md5_H(b, c, d);
                 g = (3 * i + 5) % 16;
             } else {
-                f = I(b, c, d);
+                f = md5_I(b, c, d);
                 g = (7 * i) % 16;
             }
 
-            f = f + a + K[i] + w[g];
+            f = f + a + md5_K[i] + w[g];
             a = d;
             d = c;
             c = b;
-            b = b + rotleft(f, S[i]);
+            b = b + md5_rotleft(f, md5_S[i]);
         }
         h0 += a;
         h1 += b;
@@ -119,7 +168,7 @@ bstring MD5::hash(const bstring_view data) {
         h3 += d;
     }
 
-    bstring result(16);
+    byte_vector result(16);
     for (int i = 0; i < 4; ++i) {
         result[i] = (h0 >> (i * 8)) & 0xFF;
         result[i + 4] = (h1 >> (i * 8)) & 0xFF;
@@ -129,8 +178,8 @@ bstring MD5::hash(const bstring_view data) {
     return result;
 }
 
-string MD5::hash_hex(const bstring_view data) {
-    bstring hash_result = hash(data);
+string MD5::hash_hex(const cbyte_view data) {
+    byte_vector hash_result = hash(data);
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
@@ -139,12 +188,13 @@ string MD5::hash_hex(const bstring_view data) {
     return hex_result;
 }
 
-constexpr uint32_t MD5::S[64];
-constexpr uint32_t MD5::K[64];
 
+static constexpr uint32_t SHA1_rotleft(const uint32_t x, const uint32_t c) {
+    return (x << c) | (x >> (32 - c));
+}
 
-bstring SHA1::hash(const bstring_view data) {
-    bstring byte_data{data};
+byte_vector SHA1::hash(cbyte_view data) {
+    byte_vector byte_data{data.data(), data.size()};
     const uint64_t original_len = byte_data.size();
     byte_data.push_back(0x80);
 
@@ -173,7 +223,7 @@ bstring SHA1::hash(const bstring_view data) {
         }
 
         for (int i = 16; i < 80; ++i) {
-            w[i] = rotleft(w[i-3] ^ w[i-8] ^ w[i-14] ^ w[i-16], 1);
+            w[i] = SHA1_rotleft(w[i-3] ^ w[i-8] ^ w[i-14] ^ w[i-16], 1);
         }
 
         uint32_t a = h0, b = h1, c = h2, d = h3, e = h4;
@@ -195,10 +245,10 @@ bstring SHA1::hash(const bstring_view data) {
                 k = 0xCA62C1D6;
             }
 
-            const uint32_t temp = rotleft(a, 5) + f + e + k + w[i];
+            const uint32_t temp = SHA1_rotleft(a, 5) + f + e + k + w[i];
             e = d;
             d = c;
-            c = rotleft(b, 30);
+            c = SHA1_rotleft(b, 30);
             b = a;
             a = temp;
         }
@@ -210,7 +260,7 @@ bstring SHA1::hash(const bstring_view data) {
         h4 += e;
     }
 
-    bstring result(20);
+    byte_vector result(20);
     for (int i = 0; i < 4; ++i) {
         result[i] = (h0 >> (24 - i * 8)) & 0xFF;
         result[i + 4] = (h1 >> (24 - i * 8)) & 0xFF;
@@ -221,8 +271,8 @@ bstring SHA1::hash(const bstring_view data) {
     return result;
 }
 
-string SHA1::hash_hex(const bstring_view data) {
-    bstring hash_result = hash(data);
+string SHA1::hash_hex(cbyte_view data) {
+    byte_vector hash_result = hash(data);
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
@@ -232,8 +282,47 @@ string SHA1::hash_hex(const bstring_view data) {
 }
 
 
-bstring SHA256::hash(const bstring_view data) {
-    bstring byte_data{data};
+static constexpr uint32_t SHA256_K[64] = {
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+};
+
+static constexpr uint32_t SHA256_rotr(const uint32_t x, const uint32_t n) {
+    return (x >> n) | (x << (32 - n));
+}
+
+static constexpr uint32_t SHA256_ch(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return (x & y) ^ (~x & z);
+}
+
+static constexpr uint32_t SHA256_maj(const uint32_t x, const uint32_t y, const uint32_t z) {
+    return (x & y) ^ (x & z) ^ (y & z);
+}
+
+static constexpr uint32_t SHA256_sig0(const uint32_t x) {
+    return SHA256_rotr(x, 2) ^ SHA256_rotr(x, 13) ^ SHA256_rotr(x, 22);
+}
+
+static constexpr uint32_t SHA256_sig1(const uint32_t x) {
+    return SHA256_rotr(x, 6) ^ SHA256_rotr(x, 11) ^ SHA256_rotr(x, 25);
+}
+
+static constexpr uint32_t SHA256_gamma0(const uint32_t x) {
+    return SHA256_rotr(x, 7) ^ SHA256_rotr(x, 18) ^ (x >> 3);
+}
+
+static constexpr uint32_t SHA256_gamma1(const uint32_t x) {
+    return SHA256_rotr(x, 17) ^ SHA256_rotr(x, 19) ^ (x >> 10);
+}
+
+byte_vector SHA256::hash(const cbyte_view data) {
+    byte_vector byte_data{data.data(), data.size()};
     const uint64_t original_len = byte_data.size();
     byte_data.push_back(0x80);
 
@@ -260,14 +349,14 @@ bstring SHA256::hash(const bstring_view data) {
         }
 
         for (int i = 16; i < 64; ++i) {
-            w[i] = gamma1(w[i-2]) + w[i-7] + gamma0(w[i-15]) + w[i-16];
+            w[i] = SHA256_gamma1(w[i-2]) + w[i-7] + SHA256_gamma0(w[i-15]) + w[i-16];
         }
         uint32_t a = h[0], b = h[1], c = h[2], d = h[3];
         uint32_t e = h[4], f = h[5], g = h[6], h_val = h[7];
 
         for (int i = 0; i < 64; ++i) {
-            const uint32_t t1 = h_val + sig1(e) + ch(e, f, g) + K[i] + w[i];
-            const uint32_t t2 = sig0(a) + maj(a, b, c);
+            const uint32_t t1 = h_val + SHA256_sig1(e) + SHA256_ch(e, f, g) + SHA256_K[i] + w[i];
+            const uint32_t t2 = SHA256_sig0(a) + SHA256_maj(a, b, c);
 
             h_val = g;
             g = f;
@@ -282,7 +371,7 @@ bstring SHA256::hash(const bstring_view data) {
         h[4] += e; h[5] += f; h[6] += g; h[7] += h_val;
     }
 
-    bstring result(32);
+    byte_vector result(32);
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 4; ++j) {
             result[i * 4 + j] = (h[i] >> (24 - j * 8)) & 0xFF;
@@ -291,8 +380,8 @@ bstring SHA256::hash(const bstring_view data) {
     return result;
 }
 
-string SHA256::hash_hex(const bstring_view data) {
-    bstring hash_result = hash(data);
+string SHA256::hash_hex(const cbyte_view data) {
+    byte_vector hash_result = hash(data);
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
@@ -301,10 +390,67 @@ string SHA256::hash_hex(const bstring_view data) {
     return hex_result;
 }
 
-constexpr uint32_t SHA256::K[64];
 
+static constexpr byte_t AES256_sbox[256] = {
+    0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
+    0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
+    0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
+    0x04, 0xc7, 0x23, 0xc3, 0x18, 0x96, 0x05, 0x9a, 0x07, 0x12, 0x80, 0xe2, 0xeb, 0x27, 0xb2, 0x75,
+    0x09, 0x83, 0x2c, 0x1a, 0x1b, 0x6e, 0x5a, 0xa0, 0x52, 0x3b, 0xd6, 0xb3, 0x29, 0xe3, 0x2f, 0x84,
+    0x53, 0xd1, 0x00, 0xed, 0x20, 0xfc, 0xb1, 0x5b, 0x6a, 0xcb, 0xbe, 0x39, 0x4a, 0x4c, 0x58, 0xcf,
+    0xd0, 0xef, 0xaa, 0xfb, 0x43, 0x4d, 0x33, 0x85, 0x45, 0xf9, 0x02, 0x7f, 0x50, 0x3c, 0x9f, 0xa8,
+    0x51, 0xa3, 0x40, 0x8f, 0x92, 0x9d, 0x38, 0xf5, 0xbc, 0xb6, 0xda, 0x21, 0x10, 0xff, 0xf3, 0xd2,
+    0xcd, 0x0c, 0x13, 0xec, 0x5f, 0x97, 0x44, 0x17, 0xc4, 0xa7, 0x7e, 0x3d, 0x64, 0x5d, 0x19, 0x73,
+    0x60, 0x81, 0x4f, 0xdc, 0x22, 0x2a, 0x90, 0x88, 0x46, 0xee, 0xb8, 0x14, 0xde, 0x5e, 0x0b, 0xdb,
+    0xe0, 0x32, 0x3a, 0x0a, 0x49, 0x06, 0x24, 0x5c, 0xc2, 0xd3, 0xac, 0x62, 0x91, 0x95, 0xe4, 0x79,
+    0xe7, 0xc8, 0x37, 0x6d, 0x8d, 0xd5, 0x4e, 0xa9, 0x6c, 0x56, 0xf4, 0xea, 0x65, 0x7a, 0xae, 0x08,
+    0xba, 0x78, 0x25, 0x2e, 0x1c, 0xa6, 0xb4, 0xc6, 0xe8, 0xdd, 0x74, 0x1f, 0x4b, 0xbd, 0x8b, 0x8a,
+    0x70, 0x3e, 0xb5, 0x66, 0x48, 0x03, 0xf6, 0x0e, 0x61, 0x35, 0x57, 0xb9, 0x86, 0xc1, 0x1d, 0x9e,
+    0xe1, 0xf8, 0x98, 0x11, 0x69, 0xd9, 0x8e, 0x94, 0x9b, 0x1e, 0x87, 0xe9, 0xce, 0x55, 0x28, 0xdf,
+    0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16
+};
 
-byte_t AES256::gf_mult(byte_t a, byte_t b) {
+static constexpr byte_t AES256_inv_sbox[256] = {
+    0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb,
+    0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb,
+    0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e,
+    0x08, 0x2e, 0xa1, 0x66, 0x28, 0xd9, 0x24, 0xb2, 0x76, 0x5b, 0xa2, 0x49, 0x6d, 0x8b, 0xd1, 0x25,
+    0x72, 0xf8, 0xf6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xd4, 0xa4, 0x5c, 0xcc, 0x5d, 0x65, 0xb6, 0x92,
+    0x6c, 0x70, 0x48, 0x50, 0xfd, 0xed, 0xb9, 0xda, 0x5e, 0x15, 0x46, 0x57, 0xa7, 0x8d, 0x9d, 0x84,
+    0x90, 0xd8, 0xab, 0x00, 0x8c, 0xbc, 0xd3, 0x0a, 0xf7, 0xe4, 0x58, 0x05, 0xb8, 0xb3, 0x45, 0x06,
+    0xd0, 0x2c, 0x1e, 0x8f, 0xca, 0x3f, 0x0f, 0x02, 0xc1, 0xaf, 0xbd, 0x03, 0x01, 0x13, 0x8a, 0x6b,
+    0x3a, 0x91, 0x11, 0x41, 0x4f, 0x67, 0xdc, 0xea, 0x97, 0xf2, 0xcf, 0xce, 0xf0, 0xb4, 0xe6, 0x73,
+    0x96, 0xac, 0x74, 0x22, 0xe7, 0xad, 0x35, 0x85, 0xe2, 0xf9, 0x37, 0xe8, 0x1c, 0x75, 0xdf, 0x6e,
+    0x47, 0xf1, 0x1a, 0x71, 0x1d, 0x29, 0xc5, 0x89, 0x6f, 0xb7, 0x62, 0x0e, 0xaa, 0x18, 0xbe, 0x1b,
+    0xfc, 0x56, 0x3e, 0x4b, 0xc6, 0xd2, 0x79, 0x20, 0x9a, 0xdb, 0xc0, 0xfe, 0x78, 0xcd, 0x5a, 0xf4,
+    0x1f, 0xdd, 0xa8, 0x33, 0x88, 0x07, 0xc7, 0x31, 0xb1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xec, 0x5f,
+    0x60, 0x51, 0x7f, 0xa9, 0x19, 0xb5, 0x4a, 0x0d, 0x2d, 0xe5, 0x7a, 0x9f, 0x93, 0xc9, 0x9c, 0xef,
+    0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61,
+    0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d
+};
+
+static constexpr byte_t AES256_rcon[15] = {
+    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a
+};
+
+static constexpr void AES256_sub_bytes(byte_t state[16]) {
+    for (int i = 0; i < 16; ++i) {
+        state[i] = AES256_sbox[state[i]];
+    }
+}
+static constexpr void AES256_inv_sub_bytes(byte_t state[16])  {
+    for (int i = 0; i < 16; ++i) {
+        state[i] = AES256_inv_sbox[state[i]];
+    }
+}
+
+static constexpr void AES256_add_round_key(byte_t state[16], const byte_t* round_key) {
+    for (int i = 0; i < 16; ++i) {
+        state[i] ^= round_key[i];
+    }
+}
+
+static constexpr byte_t AES256_gf_mult(byte_t a, byte_t b) {
     byte_t result = 0;
     for (int i = 0; i < 8; ++i) {
         if ((b & 1) == 1) {
@@ -320,7 +466,7 @@ byte_t AES256::gf_mult(byte_t a, byte_t b) {
     return result;
 }
 
-void AES256::key_expansion(const byte_t* key, byte_t* expanded_key) {
+static constexpr void AES256_key_expansion(const byte_t* key, byte_t* expanded_key) {
     memory_copy(expanded_key, key, 32);
     for (int i = 8; i < 60; ++i) {
         byte_t temp[4];
@@ -333,12 +479,12 @@ void AES256::key_expansion(const byte_t* key, byte_t* expanded_key) {
             temp[2] = temp[3];
             temp[3] = t;
             for (int j = 0; j < 4; ++j) {
-                temp[j] = sbox[temp[j]];
+                temp[j] = AES256_sbox[temp[j]];
             }
-            temp[0] ^= rcon[i / 8 - 1];
+            temp[0] ^= AES256_rcon[i / 8 - 1];
         } else if (i % 8 == 4) {
             for (int j = 0; j < 4; ++j) {
-                temp[j] = sbox[temp[j]];
+                temp[j] = AES256_sbox[temp[j]];
             }
         }
 
@@ -348,7 +494,7 @@ void AES256::key_expansion(const byte_t* key, byte_t* expanded_key) {
     }
 }
 
-void AES256::shift_rows(byte_t state[16]) {
+static constexpr void AES256_shift_rows(byte_t state[16]) {
     byte_t temp = state[1];
     state[1] = state[5];
     state[5] = state[9];
@@ -369,7 +515,7 @@ void AES256::shift_rows(byte_t state[16]) {
     state[7] = temp;
 }
 
-void AES256::inv_shift_rows(byte_t state[16]) {
+static constexpr void AES256_inv_shift_rows(byte_t state[16]) {
     byte_t temp = state[13];
     state[13] = state[9];
     state[9] = state[5];
@@ -390,65 +536,65 @@ void AES256::inv_shift_rows(byte_t state[16]) {
     state[3] = temp;
 }
 
-void AES256::mix_columns(byte_t state[16]) {
+static constexpr void AES256_mix_columns(byte_t state[16]) {
     for (int c = 0; c < 4; ++c) {
         const byte_t s0 = state[c * 4];
         const byte_t s1 = state[c * 4 + 1];
         const byte_t s2 = state[c * 4 + 2];
         const byte_t s3 = state[c * 4 + 3];
 
-        state[c * 4] = gf_mult(0x02, s0) ^ gf_mult(0x03, s1) ^ s2 ^ s3;
-        state[c * 4 + 1] = s0 ^ gf_mult(0x02, s1) ^ gf_mult(0x03, s2) ^ s3;
-        state[c * 4 + 2] = s0 ^ s1 ^ gf_mult(0x02, s2) ^ gf_mult(0x03, s3);
-        state[c * 4 + 3] = gf_mult(0x03, s0) ^ s1 ^ s2 ^ gf_mult(0x02, s3);
+        state[c * 4] = AES256_gf_mult(0x02, s0) ^ AES256_gf_mult(0x03, s1) ^ s2 ^ s3;
+        state[c * 4 + 1] = s0 ^ AES256_gf_mult(0x02, s1) ^ AES256_gf_mult(0x03, s2) ^ s3;
+        state[c * 4 + 2] = s0 ^ s1 ^ AES256_gf_mult(0x02, s2) ^ AES256_gf_mult(0x03, s3);
+        state[c * 4 + 3] = AES256_gf_mult(0x03, s0) ^ s1 ^ s2 ^ AES256_gf_mult(0x02, s3);
     }
 }
 
-void AES256::inv_mix_columns(byte_t state[16]) {
+static constexpr void inv_mix_columns(byte_t state[16]) {
     for (int c = 0; c < 4; ++c) {
         const byte_t s0 = state[c * 4];
         const byte_t s1 = state[c * 4 + 1];
         const byte_t s2 = state[c * 4 + 2];
         const byte_t s3 = state[c * 4 + 3];
 
-        state[c * 4] = gf_mult(0x0e, s0) ^ gf_mult(0x0b, s1) ^ gf_mult(0x0d, s2) ^ gf_mult(0x09, s3);
-        state[c * 4 + 1] = gf_mult(0x09, s0) ^ gf_mult(0x0e, s1) ^ gf_mult(0x0b, s2) ^ gf_mult(0x0d, s3);
-        state[c * 4 + 2] = gf_mult(0x0d, s0) ^ gf_mult(0x09, s1) ^ gf_mult(0x0e, s2) ^ gf_mult(0x0b, s3);
-        state[c * 4 + 3] = gf_mult(0x0b, s0) ^ gf_mult(0x0d, s1) ^ gf_mult(0x09, s2) ^ gf_mult(0x0e, s3);
+        state[c * 4] = AES256_gf_mult(0x0e, s0) ^ AES256_gf_mult(0x0b, s1) ^ AES256_gf_mult(0x0d, s2) ^ AES256_gf_mult(0x09, s3);
+        state[c * 4 + 1] = AES256_gf_mult(0x09, s0) ^ AES256_gf_mult(0x0e, s1) ^ AES256_gf_mult(0x0b, s2) ^ AES256_gf_mult(0x0d, s3);
+        state[c * 4 + 2] = AES256_gf_mult(0x0d, s0) ^ AES256_gf_mult(0x09, s1) ^ AES256_gf_mult(0x0e, s2) ^ AES256_gf_mult(0x0b, s3);
+        state[c * 4 + 3] = AES256_gf_mult(0x0b, s0) ^ AES256_gf_mult(0x0d, s1) ^ AES256_gf_mult(0x09, s2) ^ AES256_gf_mult(0x0e, s3);
     }
 }
 
-void AES256::encrypt_block(byte_t block[16], const byte_t* expanded_key) {
-    add_round_key(block, expanded_key);
+static constexpr void encrypt_block(byte_t block[16], const byte_t* expanded_key) {
+    AES256_add_round_key(block, expanded_key);
 
     for (int round = 1; round < 14; ++round) {
-        sub_bytes(block);
-        shift_rows(block);
-        mix_columns(block);
-        add_round_key(block, expanded_key + round * 16);
+        AES256_sub_bytes(block);
+        AES256_shift_rows(block);
+        AES256_mix_columns(block);
+        AES256_add_round_key(block, expanded_key + round * 16);
     }
 
-    sub_bytes(block);
-    shift_rows(block);
-    add_round_key(block, expanded_key + 14 * 16);
+    AES256_sub_bytes(block);
+    AES256_shift_rows(block);
+    AES256_add_round_key(block, expanded_key + 14 * 16);
 }
 
-void AES256::decrypt_block(byte_t block[16], const byte_t* expanded_key) {
-    add_round_key(block, expanded_key + 14 * 16);
+static constexpr void decrypt_block(byte_t block[16], const byte_t* expanded_key) {
+    AES256_add_round_key(block, expanded_key + 14 * 16);
 
     for (int round = 13; round >= 1; --round) {
-        inv_shift_rows(block);
-        inv_sub_bytes(block);
-        add_round_key(block, expanded_key + round * 16);
+        AES256_inv_shift_rows(block);
+        AES256_inv_sub_bytes(block);
+        AES256_add_round_key(block, expanded_key + round * 16);
         inv_mix_columns(block);
     }
 
-    inv_shift_rows(block);
-    inv_sub_bytes(block);
-    add_round_key(block, expanded_key);
+    AES256_inv_shift_rows(block);
+    AES256_inv_sub_bytes(block);
+    AES256_add_round_key(block, expanded_key);
 }
 
-bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
+byte_vector AES256::encrypt(const cbyte_view data, const cbyte_view key) {
     if (key.size() != 32) {
         throw_exception(value_exception("AES-256 requires 32-byte key"));
     }
@@ -457,8 +603,8 @@ bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
     }
 
     byte_t expanded_key[240];
-    key_expansion(key.data(), expanded_key);
-    bstring result;
+    AES256_key_expansion(key.data(), expanded_key);
+    byte_vector result;
     result.reserve(data.size());
 
     for (size_t i = 0; i < data.size(); i += 16) {
@@ -472,7 +618,7 @@ bstring AES256::encrypt(const bstring_view data, const bstring_view key) {
     return result;
 }
 
-bstring AES256::decrypt(const bstring_view data, const bstring_view key) {
+byte_vector AES256::decrypt(const cbyte_view data, const cbyte_view key) {
     if (key.size() != 32) {
         throw_exception(value_exception("AES-256 requires 32-byte key"));
     }
@@ -481,8 +627,8 @@ bstring AES256::decrypt(const bstring_view data, const bstring_view key) {
     }
 
     byte_t expanded_key[240];
-    key_expansion(key.data(), expanded_key);
-    bstring result;
+    AES256_key_expansion(key.data(), expanded_key);
+    byte_vector result;
     result.reserve(data.size());
 
     for (size_t i = 0; i < data.size(); i += 16) {
@@ -496,8 +642,8 @@ bstring AES256::decrypt(const bstring_view data, const bstring_view key) {
     return result;
 }
 
-bstring AES256::encrypt_pkcs7(const bstring_view data, const bstring_view key) {
-    bstring byte_data{data};
+byte_vector AES256::encrypt_pkcs7(const cbyte_view data, const cbyte_view key) {
+    byte_vector byte_data{data.data(), data.size()};
     const byte_t padding = 16 - (byte_data.size() % 16);
     for (int i = 0; i < padding; ++i) {
         byte_data.push_back(padding);
@@ -505,8 +651,8 @@ bstring AES256::encrypt_pkcs7(const bstring_view data, const bstring_view key) {
     return encrypt(byte_data.view(), key);
 }
 
-bstring AES256::decrypt_pkcs7(const bstring_view data, const bstring_view key) {
-    bstring decrypted = decrypt(data, key);
+byte_vector AES256::decrypt_pkcs7(const cbyte_view data, const cbyte_view key) {
+    byte_vector decrypted = decrypt(data, key);
     if (decrypted.empty()) return decrypted;
 
     const byte_t padding_len = decrypted.back();
@@ -533,7 +679,7 @@ bstring AES256::decrypt_pkcs7(const bstring_view data, const bstring_view key) {
 }
 
 string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
-    bstring key_bytes;
+    byte_vector key_bytes;
     key_bytes.reserve(32);
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
@@ -542,8 +688,8 @@ string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
         }
     }
 
-    const bstring data_bytes(reinterpret_cast<const byte_t*>(data.data()), data.size());
-    bstring encrypted = encrypt_pkcs7(data_bytes.view(), key_bytes.view());
+    const byte_vector data_bytes(reinterpret_cast<const byte_t*>(data.data()), data.size());
+    byte_vector encrypted = encrypt_pkcs7(data_bytes.view(), key_bytes.view());
 
     string result;
     for (const byte_t byte : encrypted) {
@@ -554,7 +700,7 @@ string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
 }
 
 string AES256::decrypt_hex(const string_view encrypted_hex, const string_view key_hex) {
-    bstring key_bytes;
+    byte_vector key_bytes;
     for (size_t i = 0; i < key_hex.size(); i += 2) {
         if (i + 1 < key_hex.size()) {
             const auto hex_val = hexadecimal::parse(key_hex.substr(i, 2));
@@ -562,19 +708,15 @@ string AES256::decrypt_hex(const string_view encrypted_hex, const string_view ke
         }
     }
 
-    bstring encrypted_bytes;
+    byte_vector encrypted_bytes;
     for (size_t i = 0; i < encrypted_hex.size(); i += 2) {
         if (i + 1 < encrypted_hex.size()) {
             const auto hex_val = hexadecimal::parse(encrypted_hex.substr(i, 2));
             encrypted_bytes.push_back(static_cast<byte_t>(hex_val.value()));
         }
     }
-    bstring decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());
+    byte_vector decrypted = decrypt_pkcs7(encrypted_bytes.view(), key_bytes.view());
     return string(reinterpret_cast<const char*>(decrypted.data()), decrypted.size());
 }
 
-constexpr byte_t AES256::sbox[256];
-constexpr byte_t AES256::inv_sbox[256];
-constexpr byte_t AES256::rcon[15];
-
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

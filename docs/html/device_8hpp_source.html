@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: device.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('device_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">device.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="file_8hpp.html">NeForce/core/file/file.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">NeForce/core/async/mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="duration_8hpp.html">NeForce/core/time/duration.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="optional_8hpp.html">NeForce/core/utility/optional.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;device_constants.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;SetupAPI.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifdef max</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#undef max</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifdef min</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#undef min</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">class </span>NEFORCE_API device {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">using </span>async_result = file::async_result;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">using </span>device_handle = <a class="code hl_typedef" href="classfile.html#a30b2b8adffad97371482122392915fb4">file::native_handle_type</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    file file_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    DEVICE_TYPE device_type_{DEVICE_TYPE::UNKNOWN};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> timeout_{1000};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">bool</span> is_blocking_{<span class="keyword">true</span>};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">mutable</span> mutex io_mutex_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    FILE_ACCESS dmode_to_faccess(DEVICE_OPEN_MODE mode) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_enumeration" href="group___file.html#ga10a90139d8b591b0972433407fd0e255">FILE_CREATION</a> dflags_to_fcreation(DEVICE_OPEN_FLAG flags) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_enumeration" href="group___file.html#ga2a2a018f90da3e2064ba746291f699c9">FILE_ATTRI</a> dflags_to_fattri(DEVICE_OPEN_FLAG flags) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> DEVICE_TYPE try_device_type(<span class="keyword">const</span> path&amp; pth);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> DEVICE_TYPE try_device_type_from_guid(<span class="keyword">const</span> GUID&amp; guid);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">static</span> <span class="keywordtype">string</span> get_device_property(::HDEVINFO dev_info_set,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        ::PSP_DEVINFO_DATA dev_info_data, ::DWORD property);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> DEVICE_TYPE guess_device_type_from_path(<span class="keyword">const</span> path&amp; pth);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">static</span> <span class="keywordtype">string</span> read_sysfs_attribute(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; device_path,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; attribute);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    device() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">virtual</span> ~device();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">explicit</span> device(path device_path,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        DEVICE_OPEN_MODE mode = DEVICE_OPEN_MODE::READ_WRITE,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        DEVICE_OPEN_FLAG flags = DEVICE_OPEN_FLAG::NONE);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    device(<span class="keyword">const</span> device&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    device&amp; operator =(<span class="keyword">const</span> device&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    device(device&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    device&amp; operator =(device&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> open(<span class="keyword">const</span> path&amp; device_path,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        DEVICE_OPEN_MODE mode = DEVICE_OPEN_MODE::READ_WRITE,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        DEVICE_OPEN_FLAG flags = DEVICE_OPEN_FLAG::NONE);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> reopen(DEVICE_OPEN_MODE new_mode,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        DEVICE_OPEN_FLAG new_flags = DEVICE_OPEN_FLAG::NONE);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> close() noexcept;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">bool</span> is_open() const noexcept;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">size_t</span> read(<span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a> = <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(-1));</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">size_t</span> write(const <span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a> = <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(-1));</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    async_result async_read(<span class="keywordtype">string</span>&amp; buffer, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>, <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> offset = -1);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    async_result async_write(const <span class="keywordtype">string</span>&amp; <a class="code hl_function" href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a>, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>, <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> offset = -1);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> wait_async(async_result&amp; result, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> timeout_ms = 0xFFFFFFFF);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> cancel_async(async_result&amp; result);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> ioctl(const ioctl_command&amp; cmd);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> flush();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> sync() noexcept;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">bool</span> <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">wait</a>(DEVICE_IO_DIRECT direction, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a> = <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(-1)) const;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">bool</span> is_readable(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a> = <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(0)) const;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">bool</span> is_writable(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a> = <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(0)) const;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> set_timeout(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> <a class="code hl_enumvalue" href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">timeout</a>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> get_timeout() const noexcept { <span class="keywordflow">return</span> timeout_; }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> set_blocking(<span class="keywordtype">bool</span> blocking);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">bool</span> is_blocking() const noexcept { <span class="keywordflow">return</span> is_blocking_; }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_define" href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a> device_info device_info() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">const</span> path&amp; device_path() const noexcept { <span class="keywordflow">return</span> file_.<a class="code hl_function" href="classfile.html#a5384268d0db86fdc649a48d561e0d6ed">path</a>(); }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    DEVICE_TYPE device_type() const noexcept { <span class="keywordflow">return</span> device_type_; }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span>* map_memory(<span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">void</span> unmap_memory() noexcept;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">bool</span> is_mapped() const noexcept { <span class="keywordflow">return</span> file_.<a class="code hl_function" href="classfile.html#a56abceea37caee63f5d6fc7acb7cadb7">is_mapped</a>(); }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">bool</span> supports_direct_io() const noexcept;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    device_handle native_handle() const noexcept { <span class="keywordflow">return</span> file_.<a class="code hl_function" href="classfile.html#ae87b2c210586c6c009a3c45b22fbecfb">native_handle</a>(); }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    file&amp; file_handle() noexcept { <span class="keywordflow">return</span> file_; }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">const</span> file&amp; file_handle() const noexcept { <span class="keywordflow">return</span> file_; }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">static</span> vector&lt;_NEFORCE device_info&gt; enumerate(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filter = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">static</span> vector&lt;_NEFORCE device_info&gt; find_by_vid_pid(<a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> vid, <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> pid);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">static</span> optional&lt;_NEFORCE device_info&gt; find_by_path(path pth);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; device_path) { <span class="keywordflow">return</span> <a class="code hl_function" href="classpath.html#af2268dd293d007b2944f6b023c9ee4cf">path::exists</a>(device_path); }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> is_device(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; path);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>};</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><a class="code hl_define" href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SYSTEM_DEVICE_DEVICE_HPP__</span></div>
+<div class="ttc" id="aclassfile_html_a30b2b8adffad97371482122392915fb4"><div class="ttname"><a href="classfile.html#a30b2b8adffad97371482122392915fb4">file::native_handle_type</a></div><div class="ttdeci">int native_handle_type</div><div class="ttdoc">文件句柄类型</div><div class="ttdef"><b>定义</b> <a href="file_8hpp_source.html#l00087">file.hpp:87</a></div></div>
+<div class="ttc" id="aclassfile_html_a5384268d0db86fdc649a48d561e0d6ed"><div class="ttname"><a href="classfile.html#a5384268d0db86fdc649a48d561e0d6ed">file::path</a></div><div class="ttdeci">NEFORCE_NODISCARD const _NEFORCE path &amp; path() const noexcept</div><div class="ttdoc">获取文件路径</div><div class="ttdef"><b>定义</b> <a href="file_8hpp_source.html#l00456">file.hpp:456</a></div></div>
+<div class="ttc" id="aclassfile_html_a56abceea37caee63f5d6fc7acb7cadb7"><div class="ttname"><a href="classfile.html#a56abceea37caee63f5d6fc7acb7cadb7">file::is_mapped</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_mapped() const noexcept</div><div class="ttdoc">检查是否已映射</div><div class="ttdef"><b>定义</b> <a href="file_8hpp_source.html#l00721">file.hpp:721</a></div></div>
+<div class="ttc" id="aclassfile_html_ae87b2c210586c6c009a3c45b22fbecfb"><div class="ttname"><a href="classfile.html#ae87b2c210586c6c009a3c45b22fbecfb">file::native_handle</a></div><div class="ttdeci">NEFORCE_NODISCARD native_handle_type native_handle() const noexcept</div><div class="ttdoc">获取原生文件句柄</div><div class="ttdef"><b>定义</b> <a href="file_8hpp_source.html#l00276">file.hpp:276</a></div></div>
+<div class="ttc" id="aclasspath_html_af2268dd293d007b2944f6b023c9ee4cf"><div class="ttname"><a href="classpath.html#af2268dd293d007b2944f6b023c9ee4cf">path::exists</a></div><div class="ttdeci">NEFORCE_NODISCARD bool exists() const noexcept</div><div class="ttdoc">检查路径是否存在</div></div>
+<div class="ttc" id="aduration_8hpp_html"><div class="ttname"><a href="duration_8hpp.html">duration.hpp</a></div><div class="ttdoc">持续时间类型</div></div>
+<div class="ttc" id="afile_8hpp_html"><div class="ttname"><a href="file_8hpp.html">file.hpp</a></div><div class="ttdoc">文件操作类</div></div>
+<div class="ttc" id="agroup___condition_variables_html_gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc"><div class="ttname"><a href="group___condition_variables.html#gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc">cv_status::timeout</a></div><div class="ttdeci">@ timeout</div><div class="ttdoc">等待超时</div><div class="ttdef"><b>定义</b> <a href="condition__variable_8hpp_source.html#l00029">condition_variable.hpp:29</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00160">duration.hpp:160</a></div></div>
+<div class="ttc" id="agroup___file_html_ga10a90139d8b591b0972433407fd0e255"><div class="ttname"><a href="group___file.html#ga10a90139d8b591b0972433407fd0e255">FILE_CREATION</a></div><div class="ttdeci">FILE_CREATION</div><div class="ttdoc">文件创建方式枚举</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00119">file_constants.hpp:119</a></div></div>
+<div class="ttc" id="agroup___file_html_ga2a2a018f90da3e2064ba746291f699c9"><div class="ttname"><a href="group___file.html#ga2a2a018f90da3e2064ba746291f699c9">FILE_ATTRI</a></div><div class="ttdeci">FILE_ATTRI</div><div class="ttdoc">文件属性和标志枚举</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00150">file_constants.hpp:150</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b">futex_wait_flags::wait</a></div><div class="ttdeci">@ wait</div><div class="ttdoc">等待操作</div><div class="ttdef"><b>定义</b> <a href="futex_8hpp_source.html#l00042">futex.hpp:42</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_ga13115f062edb906194001c7423df13c8"><div class="ttname"><a href="group___namespace_macros.html#ga13115f062edb906194001c7423df13c8">_NEFORCE</a></div><div class="ttdeci">#define _NEFORCE</div><div class="ttdoc">全局命名空间前缀</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00308">c++config.hpp:308</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gaab73cc236248cd2881c359d8369fc964"><div class="ttname"><a href="group___namespace_macros.html#gaab73cc236248cd2881c359d8369fc964">NEFORCE_BEGIN_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_BEGIN_NAMESPACE__</div><div class="ttdoc">开始全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00296">c++config.hpp:296</a></div></div>
+<div class="ttc" id="agroup___namespace_macros_html_gadb1381ab66808a4a73686e214ff4edc5"><div class="ttname"><a href="group___namespace_macros.html#gadb1381ab66808a4a73686e214ff4edc5">NEFORCE_END_NAMESPACE__</a></div><div class="ttdeci">#define NEFORCE_END_NAMESPACE__</div><div class="ttdoc">结束全局命名空间neforce</div><div class="ttdef"><b>定义</b> <a href="c_09_09config_8hpp_source.html#l00302">c++config.hpp:302</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00308">type_erase.hpp:308</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gae37a9f659d89ae7d0be67aced9ef2b93"><div class="ttname"><a href="group___type_erasure_functions.html#gae37a9f659d89ae7d0be67aced9ef2b93">data</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00419">type_erase.hpp:419</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="aoptional_8hpp_html"><div class="ttname"><a href="optional_8hpp.html">optional.hpp</a></div><div class="ttdoc">可选值类型</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>system</b></li><li class="navelem"><b>device</b></li><li class="navelem"><b>device.hpp</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

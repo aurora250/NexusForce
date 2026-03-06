@@ -1,25 +1,32 @@
-#include <MSTL/core/system/console.hpp>
-#ifdef MSTL_PLATFORM_WINDOWS__
+#include <NeForce/core/system/console.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_COMPILER_MSVC
 #include <consoleapi.h>
 #include <consoleapi2.h>
+#endif
+#ifdef NEFORCE_COMPILER_MINGW
+#include <windef.h>
+#include <wingdi.h>
+#include <wincon.h>
+#endif
 #include <WinBase.h>
 #include <WinNls.h>
 #endif
-#ifdef MSTL_PLATFORM_LINUX__
-#include <MSTL/core/system/environment.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <NeForce/core/system/environment.hpp>
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <unistd.h>
 #include <cerrno>
 #include <cstdlib>
 #endif
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 void sys_console::print_string_unsafe(const string_view str) const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written;
     ::WriteConsoleA(out_, str.data(), str.length(), &written, nullptr);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     size_t total = 0;
     while (total < str.length()) {
         const ssize_t written = ::write(out_, str.data() + total, str.length() - total);
@@ -34,9 +41,9 @@ void sys_console::print_string_unsafe(const string_view str) const {
 
 void sys_console::set_color_unsafe(const color& color, const bool use_256_color) const {
     if (use_256_color) {
-        this->print_string_unsafe("\033[38;5;" + _MSTL to_string(color.to_ansi_256()) + "m");
+        this->print_string_unsafe("\033[38;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
     } else {
-        this->print_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(false)) + "m");
+        this->print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(false)) + "m");
     }
 }
 
@@ -68,7 +75,7 @@ void sys_console::typewriter_print_unsafe(const string_view text,
 }
 
 string sys_console::readln_unsafe() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     string result;
     char buffer[1024];
     ::DWORD read;
@@ -96,7 +103,7 @@ string sys_console::readln_unsafe() const {
     } while (true);
 
     return result;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     string line;
     while (true) {
         char ch;
@@ -111,7 +118,7 @@ string sys_console::readln_unsafe() const {
 }
 
 string sys_console::read_unsafe() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     string result;
     char ch;
     ::DWORD read;
@@ -120,7 +127,7 @@ string sys_console::read_unsafe() const {
         if (!::ReadConsoleA(in_, &ch, 1, &read, nullptr) || read == 0) {
             break;
         }
-        if (_MSTL is_space(ch)) {
+        if (_NEFORCE is_space(ch)) {
             if (result.empty()) {
                 continue;
             }
@@ -129,7 +136,7 @@ string sys_console::read_unsafe() const {
         result.push_back(ch);
     }
     return result;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     string result;
 
     ::termios old_tio, new_tio;
@@ -152,7 +159,7 @@ string sys_console::read_unsafe() const {
                 }
                 break;
             }
-            if (_MSTL is_space(ch)) {
+            if (_NEFORCE is_space(ch)) {
                 if (result.empty()) {
                     continue;
                 }
@@ -170,7 +177,7 @@ string sys_console::read_unsafe() const {
 }
 
 char sys_console::read_char_unsafe() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD original_mode = 0;
     ::GetConsoleMode(in_, &original_mode);
     ::SetConsoleMode(in_, original_mode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT));
@@ -196,7 +203,7 @@ char sys_console::read_char_unsafe() const {
     }
     ::SetConsoleMode(in_, original_mode);
     return '\0';
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::termios old_tio, new_tio;
     ::tcgetattr(in_, &old_tio);
     new_tio = old_tio;
@@ -214,17 +221,17 @@ char sys_console::read_char_unsafe() const {
 }
 
 void sys_console::flush_unsafe() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::FlushConsoleInputBuffer(in_);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::tcflush(in_, TCIFLUSH);
 #endif
 }
 
 void sys_console::beep_unsafe() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::Beep(800, 200);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (is_interactive()) {
         print_string_unsafe("\a");
         flush_unsafe();
@@ -238,7 +245,7 @@ void sys_console::flash_screen_unsafe() const {
     if (!is_interactive() || !supports_colors()) {
         return;
     }
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
@@ -249,7 +256,7 @@ void sys_console::flash_screen_unsafe() const {
     this_thread::sleep_for(milliseconds(100));
     ::SetConsoleTextAttribute(out_, csbi.wAttributes);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
 
     print_string_unsafe("\033[7m");
     flush_unsafe();
@@ -273,7 +280,7 @@ void sys_console::fade_effect_unsafe(
     constexpr int steps = 50;
     const auto step_duration = duration / steps;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
 #else
@@ -301,7 +308,7 @@ void sys_console::fade_effect_unsafe(
     }
 
     print_string_unsafe("\033[0m");
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCursorPosition(out_, csbi.dwCursorPosition);
 #else
     print_string_unsafe("\033[u");
@@ -310,13 +317,13 @@ void sys_console::fade_effect_unsafe(
 }
 
 sys_console::sys_console()
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
 : out_(INVALID_HANDLE_VALUE), in_(INVALID_HANDLE_VALUE)
 #else
 : out_(STDOUT_FILENO), in_(STDIN_FILENO)
 #endif
 {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     out_ = ::GetStdHandle(STD_OUTPUT_HANDLE);
     in_ = ::GetStdHandle(STD_INPUT_HANDLE);
 
@@ -376,7 +383,7 @@ void sys_console::println() {
 
 void sys_console::clear() {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::COORD top_left = { 0, 0 };
     ::CONSOLE_SCREEN_BUFFER_INFO screen;
     ::DWORD written;
@@ -386,7 +393,7 @@ void sys_console::clear() {
     ::FillConsoleOutputCharacterA(out_, ' ', length, top_left, &written);
     ::FillConsoleOutputAttribute(out_, screen.wAttributes, length, top_left, &written);
     ::SetConsoleCursorPosition(out_, top_left);
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     this->print_string_unsafe("\033[2J\033[1;1H");
 #endif
 }
@@ -395,7 +402,7 @@ void sys_console::pause(const string_view msg) {
     lock<mutex> lock(mutex_);
     this->flush_unsafe();
     this->print_string_unsafe(msg);
-    MSTL_IGNORE this->readln_unsafe();
+    NEFORCE_IGNORE this->readln_unsafe();
     this->flush_unsafe();
 }
 
@@ -426,7 +433,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     }
     string password;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     print_string_unsafe(prompt);
     flush_unsafe();
 
@@ -500,7 +507,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     }
     ::SetConsoleMode(in_, original_mode);
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     print_string_unsafe(prompt);
     flush_unsafe();
 
@@ -614,9 +621,9 @@ void sys_console::set_color(const color& color, const bool use_256_color) {
 void sys_console::set_background_color(const color& color, const bool use_256_color) {
     lock<mutex> lock(mutex_);
     if (use_256_color) {
-        this->print_string_unsafe("\033[48;5;" + _MSTL to_string(color.to_ansi_256()) + "m");
+        this->print_string_unsafe("\033[48;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
     } else {
-        this->print_string_unsafe("\033[" + _MSTL to_string(color.to_ansi_basic(true)) + "m");
+        this->print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(true)) + "m");
     }
 }
 
@@ -647,7 +654,7 @@ void sys_console::progress_bar(double percentage, const int width,
     bar.push_back(']');
     if (show_percentage) {
         bar.append(" ");
-        bar.append(_MSTL to_string(static_cast<int>(display_percentage * 100)));
+        bar.append(_NEFORCE to_string(static_cast<int>(display_percentage * 100)));
         bar.append("%");
     }
 
@@ -658,17 +665,17 @@ void sys_console::progress_bar(double percentage, const int width,
 
 void sys_console::set_cursor_position(int row, int column) {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     const ::COORD pos{static_cast<::SHORT>(column), static_cast<::SHORT>(row)};
     ::SetConsoleCursorPosition(out_, pos);
 #else
-    this->print_string_unsafe("\033[" + _MSTL to_string(row) + ";" + _MSTL to_string(column) + "H");
+    this->print_string_unsafe("\033[" + _NEFORCE to_string(row) + ";" + _NEFORCE to_string(column) + "H");
 #endif
 }
 
 void sys_console::save_cursor_position() {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
     const auto pos = csbi.dwCursorPosition;
@@ -680,7 +687,7 @@ void sys_console::save_cursor_position() {
 
 void sys_console::restore_cursor_position() {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCursorPosition(out_, ::COORD{
         static_cast<::SHORT>(saved_cursor_pos_.width),
         static_cast<::SHORT>(saved_cursor_pos_.height)
@@ -692,7 +699,7 @@ void sys_console::restore_cursor_position() {
 
 void sys_console::hide_cursor() {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_CURSOR_INFO cursorInfo{};
     ::GetConsoleCursorInfo(out_, &cursorInfo);
     cursorInfo.bVisible = false;
@@ -704,7 +711,7 @@ void sys_console::hide_cursor() {
 
 void sys_console::show_cursor() {
     lock<mutex> lock(mutex_);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_CURSOR_INFO cursorInfo{};
     ::GetConsoleCursorInfo(out_, &cursorInfo);
     cursorInfo.bVisible = true;
@@ -717,7 +724,7 @@ void sys_console::show_cursor() {
 sys_console::console_size sys_console::get_console_size() const {
     lock<mutex> lock(mutex_);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     if (::GetConsoleScreenBufferInfo(out_, &csbi)) {
         return console_size{
@@ -727,7 +734,7 @@ sys_console::console_size sys_console::get_console_size() const {
     }
     return console_size{80, 24};
 
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::winsize ws;
     if (::ioctl(out_, TIOCGWINSZ, &ws) == 0) {
         return console_size{ws.ws_col, ws.ws_row};
@@ -736,8 +743,8 @@ sys_console::console_size sys_console::get_console_size() const {
     const string rows = environment::get("LINES");
     if (!cols.empty() && !rows.empty()) {
         return console_size{
-            _MSTL to_int32(cols.view()),
-            _MSTL to_int32(rows.view())
+            _NEFORCE to_int32(cols.view()),
+            _NEFORCE to_int32(rows.view())
         };
     }
     return console_size{80, 24};
@@ -755,11 +762,11 @@ bool sys_console::is_terminal_resized() {
 }
 
 bool sys_console::supports_colors() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD mode;
     ::GetConsoleMode(out_, &mode);
     return (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const string term = environment::get("TERM");
     if (term.empty()) return false;
     return (::isatty(out_) && (
@@ -775,9 +782,9 @@ bool sys_console::supports_colors() const {
 bool sys_console::supports_truecolor() const {
     if (!supports_colors()) return false;
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return true;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const string colorterm = environment::get("COLORTERM");
     return !colorterm.empty() && (
         colorterm.find("truecolor") != string::npos ||
@@ -787,9 +794,9 @@ bool sys_console::supports_truecolor() const {
 }
 
 bool sys_console::supports_unicode() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetConsoleOutputCP() == CP_UTF8;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const string lang = environment::get("LANG");
     const string lc_all = environment::get("LC_ALL");
     const string lc_ctype = environment::get("LC_CTYPE");
@@ -803,17 +810,17 @@ bool sys_console::supports_unicode() const {
 }
 
 bool sys_console::is_interactive() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return out_ != INVALID_HANDLE_VALUE && ::GetFileType(out_) == FILE_TYPE_CHAR;
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     return ::isatty(out_);
 #endif
 }
 
 string sys_console::console_type() const {
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return "windows_console";
-#elif defined(MSTL_PLATFORM_LINUX__)
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const string term = environment::get("TERM");
     return !term.empty() ? term : "unknown";
 #endif
@@ -876,7 +883,7 @@ void sys_console::fade_in_out(const string_view text, const milliseconds in_dura
     const milliseconds hold_duration, const milliseconds out_duration) {
     lock<mutex> lock(mutex_);
 
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::CONSOLE_SCREEN_BUFFER_INFO csbi{};
     ::GetConsoleScreenBufferInfo(out_, &csbi);
 #else
@@ -888,7 +895,7 @@ void sys_console::fade_in_out(const string_view text, const milliseconds in_dura
     }
     fade_effect_unsafe(text, color::white(), color::black(), out_duration, false);
     print_string_unsafe("\r\033[2K");
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetConsoleCursorPosition(out_, csbi.dwCursorPosition);
 #else
     print_string_unsafe("\033[u");
@@ -896,4 +903,4 @@ void sys_console::fade_in_out(const string_view text, const milliseconds in_dura
     flush_unsafe();
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

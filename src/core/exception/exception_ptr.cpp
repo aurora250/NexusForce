@@ -1,8 +1,8 @@
-#include <MSTL/core/exception/exception.hpp>
-#include <MSTL/core/exception/exception_ptr.hpp>
-#include <MSTL/core/exception/terminate.hpp>
+#include <NeForce/core/exception/exception.hpp>
+#include <NeForce/core/exception/exception_ptr.hpp>
+#include <NeForce/core/exception/terminate.hpp>
 #include <exception>
-MSTL_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_NAMESPACE__
 
 exception_ptr current_exception() noexcept {
     if (std::uncaught_exceptions() == 0) {
@@ -22,9 +22,9 @@ exception_ptr current_exception() noexcept {
 
 void rethrow_exception(const exception_ptr& p) {
     if (!p || !p.ecb_ || !p.ecb_->wrapper) {
-        _MSTL terminate();
+        _NEFORCE terminate();
     }
     p.ecb_->wrapper->rethrow();
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

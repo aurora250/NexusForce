@@ -1,6 +1,6 @@
-#include <MSTL/core/utility/packages.hpp>
-#include <MSTL/core/file/ini/ini_value.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/file/ini/ini_value.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 int ini_property::get_int(const int default_value) const noexcept {
     try {
@@ -26,9 +26,9 @@ bool ini_property::get_bool(const bool default_value) const noexcept {
     }
 }
 
-MSTL_BEGIN_INNER__
+NEFORCE_BEGIN_INNER__
 
-string MSTL_API ini_value_to_string(const ini_value* value) {
+string NEFORCE_API ini_value_to_string(const ini_value* value) {
     if (!value) return "";
 
     switch (value->type()) {
@@ -52,7 +52,7 @@ string MSTL_API ini_value_to_string(const ini_value* value) {
     }
 }
 
-string MSTL_API ini_document_to_string(const ini_document* doc) {
+string NEFORCE_API ini_document_to_string(const ini_document* doc) {
     if (!doc) return "";
     string result;
     const ini_section* global = doc->get_global_section();
@@ -73,6 +73,6 @@ string MSTL_API ini_document_to_string(const ini_document* doc) {
     return result;
 }
 
-MSTL_END_INNER__
+NEFORCE_END_INNER__
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__

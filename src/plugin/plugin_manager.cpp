@@ -1,10 +1,10 @@
-#include <MSTL/plugin/plugin_manager.hpp>
-#include <MSTL/core/file/path.hpp>
-MSTL_BEGIN_NAMESPACE__
+#include <NeForce/plugin/plugin_manager.hpp>
+#include <NeForce/core/file/path.hpp>
+NEFORCE_BEGIN_NAMESPACE__
 
 static bool is_plugin_file(const string_view p) {
     const auto ext = path::extension(p);
-#ifdef MSTL_PLATFORM_WINDOWS__
+#ifdef NEFORCE_PLATFORM_WINDOWS
     return (ext == ".dll");
 #else
     return (ext == ".so");
@@ -42,8 +42,8 @@ void plugin_manager::load_plugin(const string_view pth) {
 
     auto lib = make_unique<dynamic_library>(pth);
 
-    const auto create_func = lib->to_symbol<iplugin*(*)()>(MSTL_PLUGIN_CREATE_FUNC);
-    auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(MSTL_PLUGIN_DESTROY_FUNC);
+    const auto create_func = lib->to_symbol<iplugin*(*)()>(NEFORCE_PLUGIN_CREATE_FUNC);
+    auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
 
     iplugin* raw_ptr = create_func();
     if (!raw_ptr) {
@@ -115,4 +115,4 @@ void plugin_manager::shutdown_all() noexcept {
     plugin_to_library_.clear();
 }
 
-MSTL_END_NAMESPACE__
+NEFORCE_END_NAMESPACE__
