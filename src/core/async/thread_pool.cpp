@@ -206,7 +206,7 @@ void thread_pool::thread_function(const id_type thread_id) {
         }
     }
 
-    t_worker_ctx = &worker_contexts_[thread_id];
+    get_worker_context() = &worker_contexts_[thread_id];
     auto last = system_clock::now();
 
     constexpr size_t MIN_WAIT_MS = 1;      // 最小等待 1ms
@@ -216,8 +216,8 @@ void thread_pool::thread_function(const id_type thread_id) {
     for (;;) {
         optional<task_type> task{};
 
-        if (!t_worker_ctx->queue.empty()) {
-            task = t_worker_ctx->queue.try_pop();
+        if (!get_worker_context()->queue.empty()) {
+            task = get_worker_context()->queue.try_pop();
         }
 
         if (!task) {
@@ -230,11 +230,11 @@ void thread_pool::thread_function(const id_type thread_id) {
         }
 
         if (!task) {
-            task = try_steal_task(*t_worker_ctx);
+            task = try_steal_task(*get_worker_context());
         }
 
         if (task) {
-            t_worker_ctx->consecutive_idle_count = 0;
+            get_worker_context()->consecutive_idle_count = 0;
 
             --idle_thread_size_;
             (*task)();
@@ -242,9 +242,9 @@ void thread_pool::thread_function(const id_type thread_id) {
             ++idle_thread_size_;
             last = system_clock::now();
         } else {
-            ++t_worker_ctx->consecutive_idle_count;
+            ++get_worker_context()->consecutive_idle_count;
 
-            const size_t shift = _NEFORCE min(t_worker_ctx->consecutive_idle_count, MAX_IDLE_SHIFT);
+            const size_t shift = _NEFORCE min(get_worker_context()->consecutive_idle_count, MAX_IDLE_SHIFT);
             size_t wait_ms = _NEFORCE min(MIN_WAIT_MS << shift, MAX_WAIT_MS);
 
             smart_lock<mutex> lk(task_queue_mtx_);
@@ -263,7 +263,7 @@ void thread_pool::thread_function(const id_type thread_id) {
 
                 threads_map_.erase(thread_id);
                 exit_cond_.notify_all();
-                t_worker_ctx = nullptr;
+                get_worker_context() = nullptr;
                 return;
             }
 
@@ -289,7 +289,7 @@ void thread_pool::thread_function(const id_type thread_id) {
 
                         threads_map_.erase(thread_id);
                         --idle_thread_size_;
-                        t_worker_ctx = nullptr;
+                        get_worker_context() = nullptr;
                         return;
                     }
                 }

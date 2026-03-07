@@ -32,9 +32,9 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 对范围 [first, second) 中的元素执行累积计算
  */
-template <typename Iterator, typename T, typename BinaryOperation,
-	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename BinaryOperation>
 NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init, BinaryOperation binary_op) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
 	for (; first != second; ++first) {
 		init = binary_op(init, *first);
 	}
@@ -70,15 +70,16 @@ NEFORCE_CONSTEXPR20 T accumulate(Iterator first, Iterator second, T init) {
  *
  * 计算相邻元素的差分并存储到输出范围。
  */
-template <typename Iterator1, typename Iterator2, typename BinaryOperation,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-NEFORCE_CONSTEXPR20 Iterator2 adjacent_difference(
-	Iterator1 first, Iterator1 last,
-	Iterator2 result, BinaryOperation binary_op) {
+template <typename Iterator1, typename Iterator2, typename BinaryOperation>
+NEFORCE_CONSTEXPR20 Iterator2 adjacent_difference(Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
+
 	if (first == last) return result;
+
 	using T = iter_value_t<Iterator1>;
 	*result = *first;
 	T value = *first;
+
 	while (++first != last) {
 		T tem = *first;
 		*++result = binary_op(tem, value);
@@ -120,10 +121,13 @@ NEFORCE_CONSTEXPR20 Iterator2 adjacent_difference(Iterator1 first, Iterator1 las
  *
  * 计算两个范围的内积。
  */
-template <typename Iterator1, typename Iterator2, typename T, typename BinaryOperation1, typename BinaryOperation2,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-NEFORCE_CONSTEXPR20 T inner_product(Iterator1 first1, Iterator1 last1, Iterator2 first2, T init,
+template <typename Iterator1, typename Iterator2, typename T, typename BinaryOperation1, typename BinaryOperation2>
+NEFORCE_CONSTEXPR20 T inner_product(
+    Iterator1 first1, Iterator1 last1, Iterator2 first2, T init,
 	BinaryOperation1 binary_op1, BinaryOperation2 binary_op2) {
+
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
+
 	for (; first1 != last1; ++first1, ++first2) {
 		init = binary_op1(init, binary_op2(*first1, *first2));
 	}
@@ -161,12 +165,15 @@ NEFORCE_CONSTEXPR20 T inner_product(Iterator1 first1, Iterator1 last1, Iterator2
  *
  * 计算前缀和并存储到输出范围。
  */
-template <typename Iterator1, typename Iterator2, typename BinaryOperation,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename BinaryOperation>
 NEFORCE_CONSTEXPR20 Iterator2 partial_sum(Iterator1 first, Iterator1 last, Iterator2 result, BinaryOperation binary_op) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
+
 	if (first == last) return result;
+
 	*result = *first;
 	iter_value_t<Iterator1> value = *first;
+
 	while (++first != last) {
 		value = binary_op(value, *first);
 		*++result = value;
@@ -200,8 +207,10 @@ NEFORCE_CONSTEXPR20 Iterator2 partial_sum(Iterator1 first, Iterator1 last, Itera
  *
  * 用从value开始的连续值填充范围 [first, last)。
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 NEFORCE_CONSTEXPR20 void sequence_fill(Iterator first, Iterator last, T value) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	while (first != last) {
 		*first++ = value;
 		++value;

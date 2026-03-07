@@ -9,6 +9,7 @@
  * 包括复制、移动、填充、替换、旋转、反转等序列操作。
  */
 
+#include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/utility/pair.hpp"
 #include "NeForce/core/algorithm/search.hpp"
@@ -34,10 +35,12 @@ NEFORCE_BEGIN_INNER__
  *
  * 使用循环逐个元素复制。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__copy_aux(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(is_nothrow_assignable_v<iter_value_t<Iterator2>, iter_value_t<Iterator1>>) {
-	iter_difference_t<Iterator1> n = _NEFORCE distance(first, last);
+	auto n = _NEFORCE distance(first, last);
 	for (; n > 0; --n, ++first, ++result) {
 		*result = *first;
 	}
@@ -55,8 +58,10 @@ noexcept(is_nothrow_assignable_v<iter_value_t<Iterator2>, iter_value_t<Iterator1
  *
  * 使用内存移动优化复制操作。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	const auto bytes = n * sizeof(iter_value_t<Iterator1>);
 	_NEFORCE memory_move(_NEFORCE addressof(*result), _NEFORCE addressof(*first), bytes);
@@ -78,10 +83,10 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 的元素复制到以 result 开始的位置。
  * 对连续迭代器使用内存移动优化，非连续迭代器使用循环复制。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-	is_iter_v<Iterator1> && is_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 copy(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(noexcept(_INNER __copy_aux(first, last, result))) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
 	if (first == last) return result;
 	return _INNER __copy_aux(first, last, result);
 }
@@ -98,8 +103,10 @@ NEFORCE_BEGIN_INNER__
  * @param result 输出起始
  * @return pair<输入结束迭代器, 输出结束迭代器>
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-constexpr pair<Iterator1, Iterator2> __copy_n_aux(Iterator1 first, size_t count, Iterator2 result) {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_rnd_iter_v<Iterator1>, pair<Iterator1, Iterator2>>
+__copy_n_aux(Iterator1 first, iter_difference_t<Iterator1> count, Iterator2 result) {
 	Iterator1 last = first + count;
 	return pair<Iterator1, Iterator2>(last, _NEFORCE copy(first, last, result));
 }
@@ -113,8 +120,10 @@ constexpr pair<Iterator1, Iterator2> __copy_n_aux(Iterator1 first, size_t count,
  * @param result 输出起始
  * @return pair<输入结束迭代器, 输出结束迭代器>
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, int> = 0>
-constexpr pair<Iterator1, Iterator2> __copy_n_aux(Iterator1 first, size_t count, Iterator2 result) {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!is_ranges_rnd_iter_v<Iterator1>, pair<Iterator1, Iterator2>>
+__copy_n_aux(Iterator1 first, iter_difference_t<Iterator1> count, Iterator2 result) {
 	for (; count > 0; --count, ++first, ++result) {
 		*result = *first;
 	}
@@ -135,9 +144,9 @@ NEFORCE_END_INNER__
  * 从 first 开始复制 count 个元素到 result。
  * 返回复制后的输入和输出结束迭代器。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-    is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-constexpr pair<Iterator1, Iterator2> copy_n(Iterator1 first, size_t count, Iterator2 result) {
+template <typename Iterator1, typename Iterator2>
+constexpr pair<Iterator1, Iterator2> copy_n(Iterator1 first, iter_difference_t<Iterator1> count, Iterator2 result) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
 	return _INNER __copy_n_aux(first, count, result);
 }
 
@@ -156,6 +165,8 @@ constexpr pair<Iterator1, Iterator2> copy_n(Iterator1 first, size_t count, Itera
  */
 template <typename Iterator1, typename Iterator2, typename Pred>
 constexpr Iterator2 copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Pred pred) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
+
 	for (; first != last; ++first) {
 		if (pred(*first)) {
 			*result++ = *first;
@@ -178,8 +189,10 @@ NEFORCE_BEGIN_INNER__
  *
  * 从后向前逐个元素复制。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(is_nothrow_copy_assignable_v<iter_value_t<Iterator1>>) {
 	iter_difference_t<Iterator1> n = _NEFORCE distance(first, last);
 	for (; n > 0; --n) {
@@ -199,12 +212,15 @@ noexcept(is_nothrow_copy_assignable_v<iter_value_t<Iterator1>>) {
  *
  * 使用内存移动优化反向复制。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_NEFORCE memory_move(_NEFORCE addressof(*result), _NEFORCE addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -220,10 +236,11 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 的元素反向复制到以 result-1 开始向前的位置。
  * 用于处理目标范围与源范围重叠的情况。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-	is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(noexcept(_INNER __copy_backward_aux(first, last, result))) {
+    static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, "Iterators must be bidirectional_iterator");
+
 	if (first == last) return result;
 	return _INNER __copy_backward_aux(first, last, result);
 }
@@ -240,8 +257,10 @@ NEFORCE_BEGIN_INNER__
  * @param result 输出范围起始
  * @return 输出范围结束
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result)
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__move_aux(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(is_nothrow_move_assignable_v<iter_value_t<Iterator1>>) {
 	iter_difference_t<Iterator1> n = _NEFORCE distance(first, last);
 	for (; n > 0; --n, ++first, ++result) {
@@ -259,12 +278,15 @@ noexcept(is_nothrow_move_assignable_v<iter_value_t<Iterator1>>) {
  * @param result 输出范围起始
  * @return 输出范围结束
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__move_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_NEFORCE memory_move(_NEFORCE addressof(*result), _NEFORCE addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result + n;
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -280,10 +302,11 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 的元素移动到以 result 开始的位置。
  * 移动后源位置的对象状态是未定义的。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result)
 noexcept(noexcept(_INNER __move_aux(first, last, result))) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
+
 	if (first == last) return result;
 	return _INNER __move_aux(first, last, result);
 }
@@ -300,8 +323,10 @@ NEFORCE_BEGIN_INNER__
  * @param result 输出范围结束
  * @return 输出范围起始
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<!is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
 	for (size_t n = _NEFORCE distance(first, last); n > 0; --n) {
 		*--result = _NEFORCE move(*--last);
 	}
@@ -317,8 +342,10 @@ constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterato
  * @param result 输出范围结束
  * @return 输出范围起始
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_cot_iter_v<Iterator1>, int> = 0>
-constexpr Iterator2 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_cot_iter_v<Iterator1>, Iterator2>
+__move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
 	const auto n = static_cast<size_t>(last - first);
 	_NEFORCE memory_move(_NEFORCE addressof(*result), _NEFORCE addressof(*first), n * sizeof(iter_value_t<Iterator1>));
 	return result;
@@ -338,9 +365,9 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 的元素反向移动到以 result-1 开始向前的位置。
  * 用于处理目标范围与源范围重叠的情况。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-	is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
+    static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, "Iterators must be bidirectional_iterator");
 	if (first == last) return result;
 	return _INNER __move_backward_aux(first, last, result);
 }
@@ -356,9 +383,12 @@ constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 res
  *
  * 将范围 [first, last) 的所有元素设置为 value。
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 constexpr void fill(Iterator first, Iterator last, const T& value)
 noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterators must be input_iterator");
+    static_assert(is_assignable_v<decltype(*first), T>, "Iterators must be assignable from T");
+
 	for (; first != last; ++first) {
 		*first = value;
 	}
@@ -373,9 +403,12 @@ noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
  * @param value 要填充的值
  * @return 填充后的结束迭代器
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator fill_n(Iterator first, size_t n, const T& value)
+template <typename Iterator, typename T>
+constexpr Iterator fill_n(Iterator first, iter_difference_t<Iterator> n, const T& value)
 noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterators must be input_iterator");
+    static_assert(is_assignable_v<decltype(*first), T>, "Iterators must be assignable from T");
+
 	for (; n > 0; --n, ++first) {
 		*first = value;
 	}
@@ -392,10 +425,10 @@ noexcept(is_nothrow_assignable_v<iter_value_t<Iterator>, T>) {
  *
  * 交换两个迭代器指向的元素的值。
  */
-template <typename Iterator1, typename Iterator2, enable_if_t<
-	is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr void iter_swap(Iterator1 a, Iterator2 b)
 noexcept(noexcept(_NEFORCE swap(*a, *b))) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
 	_NEFORCE swap(*a, *b);
 }
 
@@ -410,8 +443,7 @@ noexcept(noexcept(_NEFORCE swap(*a, *b))) {
  *
  * 交换范围 [first1, last1) 和以 first2 开始的范围的对应元素。
  */
-template <typename Iterator1, typename Iterator2,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 swap_ranges(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
 	for (; first1 != last1; ++first1, ++first2) {
 		_NEFORCE iter_swap(first1, first2);
@@ -431,8 +463,11 @@ constexpr Iterator2 swap_ranges(Iterator1 first1, Iterator1 last1, Iterator2 fir
  *
  * 对范围 [first, last) 的每个元素应用函数 f。
  */
-template <typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Function>
 constexpr Function for_each(Iterator first, Iterator last, Function f) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+    static_assert(is_invocable_v<Function, decltype(*first)>, "Function must be invocable");
+
 	for (; first != last; ++first) {
 		f(*first);
 	}
@@ -448,8 +483,11 @@ constexpr Function for_each(Iterator first, Iterator last, Function f) {
  * @param f 要应用的函数
  * @return 处理后的迭代器
  */
-template <typename Iterator, typename Function, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator for_each_n(Iterator first, const size_t n, Function f) {
+template <typename Iterator, typename Function>
+constexpr Iterator for_each_n(Iterator first, iter_difference_t<Iterator> n, Function f) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+    static_assert(is_invocable_v<Function, decltype(*first)>, "Function must be invocable");
+
 	for (size_t i = 0; i < n; i++) {
 		f(*first);
 		++first;
@@ -468,8 +506,12 @@ constexpr Iterator for_each_n(Iterator first, const size_t n, Function f) {
  *
  * 对范围 [first, last) 的每个元素调用 gen() 并赋值。
  */
-template <typename Iterator, typename Generator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Generator>
 constexpr void generate(Iterator first, Iterator last, Generator gen) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+    static_assert(is_invocable_v<Generator>, "Generator must be invocable");
+    static_assert(is_assignable_v<decltype(*first), invoke_result_t<Generator>>, "Generator must be assignable from invoke_result");
+
 	for (; first != last; ++first) {
 		*first = gen();
 	}
@@ -484,8 +526,12 @@ constexpr void generate(Iterator first, Iterator last, Generator gen) {
  * @param gen 生成器函数
  * @return 填充后的迭代器
  */
-template <typename Iterator, typename Generator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
-constexpr Iterator generate_n(Iterator first, size_t n, Generator gen) {
+template <typename Iterator, typename Generator>
+constexpr Iterator generate_n(Iterator first, iter_difference_t<Iterator> n, Generator gen) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+    static_assert(is_invocable_v<Generator>, "Generator must be invocable");
+    static_assert(is_assignable_v<decltype(*first), invoke_result_t<Generator>>, "Generator must be assignable from invoke_result");
+
 	for (; n > 0; --n, ++first) {
 		*first = gen();
 	}
@@ -507,10 +553,11 @@ constexpr Iterator generate_n(Iterator first, size_t n, Generator gen) {
  *
  * 将范围 [first, last) 的元素复制到 result，同时将等于 old_value 的元素替换为 new_value。
  */
-template <typename Iterator1, typename Iterator2, typename T,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 replace_copy(Iterator1 first, Iterator1 last, Iterator2 result,
-	const T& old_value, const T& new_value) {
+template <typename Iterator1, typename Iterator2, typename T>
+constexpr Iterator2 replace_copy(Iterator1 first, Iterator1 last, Iterator2 result, const T& old_value, const T& new_value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterators must be forward_iterator");
+    static_assert(is_assignable_v<decltype(*result), const T&>, "*result must be assignable from const T");
+
 	for (; first != last; ++first, ++result) {
 		*result = *first == old_value ? new_value : *first;
 	}
@@ -532,10 +579,12 @@ constexpr Iterator2 replace_copy(Iterator1 first, Iterator1 last, Iterator2 resu
  *
  * 将范围 [first, last) 的元素复制到 result，同时将满足 pred 的元素替换为 new_value。
  */
-template <typename Iterator1, typename Iterator2, typename Predicate, typename T,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 replace_copy_if(Iterator1 first, Iterator1 last, Iterator2 result,
-	Predicate pred, const T& new_value) {
+template <typename Iterator1, typename Iterator2, typename Predicate, typename T>
+constexpr Iterator2 replace_copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred, const T& new_value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterators must be forward_iterator");
+    static_assert(is_invocable_v<Predicate, decltype(*first)>, "Predicate must be invocable");
+    static_assert(is_assignable_v<decltype(*result), const T&>, "*result must be assignable from const T");
+
 	for (; first != last; ++first, ++result) {
 		*result = pred(*first) ? new_value : *first;
 	}
@@ -553,8 +602,11 @@ constexpr Iterator2 replace_copy_if(Iterator1 first, Iterator1 last, Iterator2 r
  *
  * 将范围 [first, last) 中等于 old_value 的所有元素替换为 new_value。
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 constexpr void replace(Iterator first, Iterator last, const T& old_value, const T& new_value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterators must be forward_iterator");
+    static_assert(is_assignable_v<decltype(*first), const T&>, "*result must be assignable from const T");
+
 	for (; first != last; ++first) {
 		if (*first == old_value) {
 			*first = new_value;
@@ -574,8 +626,12 @@ constexpr void replace(Iterator first, Iterator last, const T& old_value, const 
  *
  * 将范围 [first, last) 中满足 pred 的所有元素替换为 new_value。
  */
-template <typename Iterator, typename Predicate, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate, typename T>
 constexpr void replace_if(Iterator first, Iterator last, Predicate pred, const T& new_value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterators must be forward_iterator");
+    static_assert(is_invocable_v<Predicate, decltype(*first)>, "Predicate must be invocable");
+    static_assert(is_assignable_v<decltype(*first), const T&>, "*result must be assignable from const T");
+
 	for (; first != last; ++first) {
 		if (pred(*first)) *first = new_value;
 	}
@@ -591,13 +647,15 @@ NEFORCE_BEGIN_INNER__
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void __reverse_aux(Iterator first, Iterator last) {
+template <typename Iterator>
+enable_if_t<is_ranges_rnd_iter_v<Iterator>>
+__reverse_aux(Iterator first, Iterator last) {
 	while (first < last) {
 		--last;
 		_NEFORCE iter_swap(first, last);
 		++first;
 	}
+    return;
 }
 
 /**
@@ -606,14 +664,16 @@ void __reverse_aux(Iterator first, Iterator last) {
  * @param first 范围起始
  * @param last 范围结束
  */
-template <typename Iterator, enable_if_t<!is_ranges_rnd_iter_v<Iterator>, int> = 0>
-void __reverse_aux(Iterator first, Iterator last) {
+template <typename Iterator>
+enable_if_t<!is_ranges_rnd_iter_v<Iterator>>
+__reverse_aux(Iterator first, Iterator last) {
 	while (true) {
 		if (first == last || first == --last) return;
 		--last;
 		_NEFORCE iter_swap(first, last);
 		++first;
 	}
+    return;
 }
 
 NEFORCE_END_INNER__
@@ -628,8 +688,10 @@ NEFORCE_END_INNER__
  *
  * 将范围 [first, last) 的元素顺序反转。
  */
-template <typename Iterator, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 constexpr void reverse(Iterator first, Iterator last) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterators must be bidirectional_iterator");
+
 #ifdef NEFORCE_STANDARD_17
 	if constexpr (is_ranges_rnd_iter_v<Iterator>) {
 		while (first < last) {
@@ -653,9 +715,11 @@ constexpr void reverse(Iterator first, Iterator last) {
 
 /// @cond
 NEFORCE_BEGIN_INNER__
-#ifndef NEFORCE_STANDARD_17
-template <typename Iterator, enable_if_t<!is_ranges_bid_iter_v<Iterator>, int> = 0>
-void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
+
+template <typename Iterator>
+constexpr
+enable_if_t<!is_ranges_bid_iter_v<Iterator>>
+__rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
 	for (Iterator i = middle; ;) {
 		_NEFORCE iter_swap(first, i);
 		++first;
@@ -668,13 +732,15 @@ void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
 			i = middle;
 	}
 }
-template <typename Iterator, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
-void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
+
+template <typename Iterator>
+constexpr
+enable_if_t<is_ranges_bid_iter_v<Iterator>>
+__rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
 	_NEFORCE reverse(first, middle);
 	_NEFORCE reverse(middle, last);
 	_NEFORCE reverse(first, last);
 }
-#endif // NEFORCE_STANDARD_17
 
 /**
  * @brief 旋转辅助函数（非随机访问迭代器版本）
@@ -683,44 +749,24 @@ void __rotate_aux_dispatch(Iterator first, Iterator middle, Iterator last) {
  * @param middle 旋转中心
  * @param last 范围结束
  */
-template <typename Iterator, enable_if_t<!is_ranges_rnd_iter_v<Iterator>, int> = 0>
-constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
+template <typename Iterator>
+constexpr
+enable_if_t<!is_ranges_rnd_iter_v<Iterator>>
+__rotate_aux(Iterator first, Iterator middle, Iterator last) {
 	if (first == middle || middle == last) return;
-#ifdef NEFORCE_STANDARD_17
-	if constexpr (is_ranges_bid_iter_v<Iterator>) {
-		_NEFORCE reverse(first, middle);
-		_NEFORCE reverse(middle, last);
-		_NEFORCE reverse(first, last);
-	}
-	else {
-		for (Iterator i = middle; ;) {
-			_NEFORCE iter_swap(first, i);
-			++first;
-			++i;
-			if (first == middle) {
-				if (i == last) return;
-				middle = i;
-			} else if (i == last) {
-				i = middle;
-			}
-		}
-	}
-#else
 	_INNER __rotate_aux_dispatch(first, middle, last);
-#endif
 }
 
 /**
  * @brief 旋转循环辅助函数
  * @tparam Iterator 迭代器类型
- * @tparam Distance 距离类型
  * @param first 范围起始
  * @param last 范围结束
  * @param initial 循环起始位置
  * @param shift 旋转步长
  */
-template <typename Iterator, typename Distance>
-constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initial, Distance shift) {
+template <typename Iterator>
+constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initial, iter_difference_t<Iterator> shift) {
 	iter_value_t<Iterator> value = *initial;
 	Iterator ptr1 = initial;
 	Iterator ptr2 = ptr1 + shift;
@@ -733,7 +779,7 @@ constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initia
 			ptr2 = first + (shift - (last - ptr2));
 		}
 	}
-	*ptr1 = value;
+	*ptr1 = _NEFORCE move(value);
 }
 
 /**
@@ -745,12 +791,15 @@ constexpr void __rotate_cycle_aux(Iterator first, Iterator last, Iterator initia
  *
  * 使用循环旋转算法，基于最大公约数优化。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
-constexpr void __rotate_aux(Iterator first, Iterator middle, Iterator last) {
-	iter_difference_t<Iterator> n = _NEFORCE gcd(last - first, middle - first);
+template <typename Iterator>
+constexpr
+enable_if_t<is_ranges_rnd_iter_v<Iterator>>
+__rotate_aux(Iterator first, Iterator middle, Iterator last) {
+	auto n = _NEFORCE gcd(last - first, middle - first);
 	while (n--) {
 		_INNER __rotate_cycle_aux(first, last, first + n, middle - first);
 	}
+    return;
 }
 
 NEFORCE_END_INNER__
@@ -766,8 +815,10 @@ NEFORCE_END_INNER__
  * 将范围 [first, last) 旋转，使 middle 成为新的第一个元素。
  * 旋转后范围变为 [middle, last) + [first, middle)。
  */
-template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 constexpr void rotate(Iterator first, Iterator middle, Iterator last) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterators must be forward_iterator");
+
 	if (first == middle || middle == last) return;
 	_INNER __rotate_aux(first, middle, last);
 }
@@ -784,8 +835,7 @@ constexpr void rotate(Iterator first, Iterator middle, Iterator last) {
  *
  * 将旋转后的范围 [first, last) 复制到 result。
  */
-template <typename Iterator1, typename Iterator2,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 rotate_copy(Iterator1 first, Iterator1 middle, Iterator1 last, Iterator2 result) {
 	return _NEFORCE copy(first, middle, _NEFORCE copy(middle, last, result));
 }
@@ -801,13 +851,15 @@ constexpr Iterator2 rotate_copy(Iterator1 first, Iterator1 middle, Iterator1 las
  * 将范围 [first, last) 的元素向左移动 n 个位置。
  * 移出的元素用默认构造值填充。
  */
-template <typename Iterator,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator> && is_default_constructible_v<iter_value_t<Iterator>>, int> = 0>
-constexpr void shift_left(Iterator first, Iterator last, size_t n) {
+template <typename Iterator>
+constexpr void shift_left(Iterator first, Iterator last, iter_difference_t<Iterator> n) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterators must be forward_iterator");
+    static_assert(is_assignable_v<decltype(*first), add_rvalue_reference_t<iter_value_t<Iterator>>>, "*first must be assignable");
+
 	if (first == last || n == 0) return;
 	if (n >= _NEFORCE distance(first, last)) {
 		for (; first != last; ++first) {
-			*first = _NEFORCE initialize<iter_value_t<Iterator>>();
+			*first = _NEFORCE move(_NEFORCE initialize<iter_value_t<Iterator>>());
 		}
 		return;
 	}
@@ -815,7 +867,7 @@ constexpr void shift_left(Iterator first, Iterator last, size_t n) {
 	_NEFORCE copy(new_first, last, first);
 	Iterator end = _NEFORCE prev(last, -n);
 	for (; end != last; ++end) {
-		*end = _NEFORCE initialize<iter_value_t<Iterator>>();
+		*end = _NEFORCE move(_NEFORCE initialize<iter_value_t<Iterator>>());
 	}
 }
 
@@ -830,13 +882,15 @@ constexpr void shift_left(Iterator first, Iterator last, size_t n) {
  * 将范围 [first, last) 的元素向右移动 n 个位置。
  * 移出的元素用默认构造值填充。
  */
-template <typename Iterator,
-	enable_if_t<is_ranges_bid_iter_v<Iterator> && is_default_constructible_v<iter_value_t<Iterator>>, int> = 0>
-constexpr void shift_right(Iterator first, Iterator last, size_t n) {
+template <typename Iterator>
+constexpr void shift_right(Iterator first, Iterator last, iter_difference_t<Iterator> n) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterators must be bidirectional_iterator");
+    static_assert(is_assignable_v<decltype(*first), add_rvalue_reference_t<iter_value_t<Iterator>>>, "*first must be assignable");
+
 	if (first == last || n == 0) return;
 	if (n >= _NEFORCE distance(first, last)) {
 		for (; first != last; ++first) {
-			*first = _NEFORCE initialize<iter_value_t<Iterator>>();
+			*first = _NEFORCE move(_NEFORCE initialize<iter_value_t<Iterator>>());
 		}
 		return;
 	}
@@ -844,7 +898,7 @@ constexpr void shift_right(Iterator first, Iterator last, size_t n) {
 	_NEFORCE move_backward(first, new_last, last);
 	auto end = _NEFORCE next(first, n);
 	for (; first != end; ++first) {
-		*first = _NEFORCE initialize<iter_value_t<Iterator>>();
+		*first = _NEFORCE move(_NEFORCE initialize<iter_value_t<Iterator>>());
 	}
 }
 
@@ -862,10 +916,13 @@ constexpr void shift_right(Iterator first, Iterator last, size_t n) {
  *
  * 对范围 [first, last) 的每个元素应用 op，结果存储到 result。
  */
-template <typename Iterator1, typename Iterator2, typename UnaryOperation,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename UnaryOperation>
 constexpr Iterator2 transform(Iterator1 first, Iterator1 last, Iterator2 result, UnaryOperation op)
 noexcept(noexcept(++first) && noexcept(++result) && noexcept(*result = op(*first))) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterators must be forward_iterator");
+    static_assert(is_invocable_v<UnaryOperation, decltype(*first)>, "UnaryOperation must be invocable");
+    static_assert(is_assignable_v<decltype(*result), invoke_result_t<UnaryOperation, decltype(*first)>>, "*result must be assignable");
+
 	for (; first != last; ++first, ++result) {
 		*result = op(*first);
 	}
@@ -888,14 +945,19 @@ noexcept(noexcept(++first) && noexcept(++result) && noexcept(*result = op(*first
  * 对范围 [first1, last1) 和以 first2 开始的范围的对应元素应用 binary_op，
  * 结果存储到 result。
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3, typename BinaryOperation,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
-constexpr Iterator3 transform(
-	Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator3 result, BinaryOperation binary_op
-) noexcept(
-	noexcept(++first1) && noexcept(first2) &&
-	noexcept(++result) && noexcept(*result = binary_op(*first1, *first2))
-) {
+template <typename Iterator1, typename Iterator2, typename Iterator3, typename BinaryOperation>
+constexpr Iterator3 transform(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator3 result, BinaryOperation binary_op)
+noexcept(noexcept(++first1) && noexcept(first2) && noexcept(++result) && noexcept(*result = binary_op(*first1, *first2))) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterators must be forward_iterator");
+    static_assert(
+        is_invocable_v<BinaryOperation, decltype(*first1), decltype(*first2)>,
+        "UnaryOperation must be invocable");
+    static_assert(
+        is_assignable_v<decltype(*result), invoke_result_t<BinaryOperation, decltype(*first1), decltype(*first2)>>,
+        "*result must be assignable");
+
 	for (; first1 != last1; ++first1, ++first2, ++result) {
 		*result = binary_op(*first1, *first2);
 	}
@@ -917,14 +979,19 @@ constexpr Iterator3 transform(
  * 复制范围 [first, last) 中的元素到 result，跳过连续的重复元素。
  * 只有与前一个元素不重复的元素才会被复制。
  */
-template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last,
-	Iterator2 result, BinaryPredicate binary_pred) {
+template <typename Iterator1, typename Iterator2, typename BinaryPredicate>
+constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last, Iterator2 result, BinaryPredicate binary_pred) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterators must be forward_iterator");
+    static_assert(is_invocable_v<BinaryPredicate, decltype(*result), decltype(*first)>, "BinaryPredicate must be invocable");
+
 	if (first == last) return result;
+
 	*result = *first;
+
 	while (++first != last) {
-		if (!binary_pred(*result, *first)) *++result = *first;
+		if (!binary_pred(*result, *first)) {
+		    *++result = *first;
+		}
 	}
 	return ++result;
 }
@@ -952,7 +1019,7 @@ constexpr Iterator2 unique_copy(Iterator1 first, Iterator1 last, Iterator2 resul
  *
  * 移除范围 [first, last) 中连续的重复元素，保留每个重复组的第一个元素。
  */
-template <typename Iterator, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 constexpr Iterator unique(Iterator first, Iterator last) {
 	first = _NEFORCE adjacent_find(first, last);
 	return _NEFORCE unique_copy(first, last, first);
@@ -969,7 +1036,7 @@ constexpr Iterator unique(Iterator first, Iterator last) {
  *
  * 使用指定的二元谓词判断元素是否相等，移除连续的重复元素。
  */
-template <typename Iterator, typename BinaryPredicate, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename BinaryPredicate>
 constexpr Iterator unique(Iterator first, Iterator last, BinaryPredicate binary_pred) {
 	first = _NEFORCE adjacent_find(first, last, binary_pred);
 	return _NEFORCE unique_copy(first, last, first, binary_pred);

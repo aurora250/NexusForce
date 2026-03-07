@@ -94,7 +94,9 @@ For documentation, please visit [NexusForce](https://nexusforce.org.cn)
 
 This project is licensed under the [MIT License](LICENSE)
 
-## Version
+## CHANGELOG
+
+For CHANGELOG, please visit [CHANGELOG](CHANGELOG.md)
 
 ## TODO
 

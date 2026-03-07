@@ -4,6 +4,7 @@
 #include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/endian.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/network/http/http_server_message.hpp"
 #include "NeForce/network/socket/ssl_socket.hpp"
@@ -20,13 +21,13 @@ enum class websocket_opcode : uint8_t {
 
 #pragma pack(push, 1)
 struct websocket_frame_header {
-    uint8_t fin : 1;
-    uint8_t rsv1 : 1;
-    uint8_t rsv2 : 1;
-    uint8_t rsv3 : 1;
-    uint8_t opcode : 4;
-    uint8_t masked : 1;
-    uint8_t payload_len : 7;
+    byte_t fin : 1;
+    byte_t rsv1 : 1;
+    byte_t rsv2 : 1;
+    byte_t rsv3 : 1;
+    byte_t opcode : 4;
+    byte_t masked : 1;
+    byte_t payload_len : 7;
 };
 #pragma pack(pop)
 
@@ -187,7 +188,7 @@ private:
                 return false;
             }
 
-            websocket_frame_header header;
+            websocket_frame_header header{};
             ssize_t n = socket_.receive(memory_view<char>(reinterpret_cast<char*>(&header), 1));
             if (n <= 0) return false;
 
@@ -201,12 +202,12 @@ private:
                 uint16_t net_len;
                 n = socket_.receive(memory_view<char>(reinterpret_cast<char*>(&net_len), 2));
                 if (n != 2) return false;
-                payload_len = ntohs(net_len);
+                payload_len = endian::network_to_host<uint16_t>(net_len);
             } else if (payload_len == 127) {
                 uint64_t net_len;
                 n = socket_.receive(memory_view<char>(reinterpret_cast<char*>(&net_len), 8));
                 if (n != 8) return false;
-                payload_len = ntohll(net_len);
+                payload_len = endian::network_to_host<uint64_t>(net_len);
             }
 
             constexpr uint64_t MAX_MESSAGE_SIZE = 64 * 1024 * 1024; // 64MB

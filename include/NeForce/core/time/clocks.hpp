@@ -30,10 +30,9 @@ struct NEFORCE_API system_clock {
     using duration = nanoseconds;   ///< 持续时间类型
     using rep = duration::rep;            ///< 数值类型
     using period = duration::period;      ///< 时间单位比例
-    using time_point = time_point<system_clock>; ///< 时间点类型
+    using time_point = _NEFORCE time_point<system_clock>; ///< 时间点类型
 
-    static_assert(system_clock::duration::min() < system_clock::duration::zero(),
-        "a clock's minimum duration cannot be less than its epoch");
+    static_assert(duration::min() < duration::zero(), "a clock's minimum duration cannot be less than its epoch");
 
     /**
      * @brief 时钟稳定性标识
@@ -66,7 +65,7 @@ struct NEFORCE_API system_clock {
      */
     static time_point from_seconds(const seconds time_value) noexcept {
         using TP = _NEFORCE time_point<system_clock, seconds>;
-        return time_cast<system_clock::duration>(TP(time_value));
+        return time_cast<duration>(TP(time_value));
     }
 };
 

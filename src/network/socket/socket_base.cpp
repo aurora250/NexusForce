@@ -2,6 +2,11 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <NeForce/core/async/atomic.hpp>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <netinet/tcp.h>
+#include <fcntl.h>
+#include <unistd.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -119,11 +124,11 @@ bool socket_base::shutdown_both() noexcept {
 #endif
 }
 
-bool socket_base::set_option(const int level, const int optname, const void* value, const int len) noexcept {
+bool socket_base::set_option(const int level, const int optname, const void* value, const __socklen_t len) noexcept {
     return ::setsockopt(fd_, level, optname, static_cast<const char*>(value), len) == 0;
 }
 
-bool socket_base::get_option(const int level, const int optname, void* optval, int* optlen) const noexcept {
+bool socket_base::get_option(const int level, const int optname, void* optval, ::socklen_t* optlen) const noexcept {
     if (!is_open()) {
         return false;
     }

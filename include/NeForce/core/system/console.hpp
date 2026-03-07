@@ -582,7 +582,7 @@ struct io_base<T[N], enable_if_t<is_character_v<T> && !is_same_v<remove_cvref_t<
 template <typename T, size_t N>
 struct io_base<T[N], enable_if_t<is_character_v<T> && is_same_v<remove_cvref_t<T>, char>>> {
     static void write(sys_console& console, const T(& value)[N]) {
-        console.print_string(string_view(value, N));
+        console.print_string(string_view(value));
     }
 };
 
@@ -596,7 +596,7 @@ struct io_base<const T[N], enable_if_t<is_character_v<T>>> {
 template <typename T, size_t N>
 struct io_base<const T[N], enable_if_t<is_character_v<T> && is_same_v<remove_cvref_t<T>, char>>> {
     static void write(sys_console& console, const T(& value)[N]) {
-        console.print_string(string_view(value, N));
+        console.print_string(string_view(value));
     }
 };
 

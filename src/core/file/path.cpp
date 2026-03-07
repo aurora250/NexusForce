@@ -377,7 +377,7 @@ bool path::create_directories(const string& path) {
     return ::CreateDirectoryA(path.data(), nullptr) ||
         ::GetLastError() == ERROR_ALREADY_EXISTS;
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    while ((pos = path.find_first_of(FILE_SPLITER, pos + 1)) != string::npos) {
+    while ((pos = path.find_first_of(spliter, pos + 1)) != string::npos) {
         subdir = path.substr(0, pos);
         if (::mkdir(subdir.data(), 0755) == -1 && errno != EEXIST) {
             return false;
@@ -468,7 +468,7 @@ bool path::remove_all_in_directory(const string& target, const bool recursive) n
     ::FindClose(find_handle);
 
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    ::DIR* dir = ::opendir(directory_path.data());
+    ::DIR* dir = ::opendir(target.data());
     if (dir == nullptr) return false;
 
     ::dirent* entry;
@@ -476,7 +476,7 @@ bool path::remove_all_in_directory(const string& target, const bool recursive) n
         string item_name = entry->d_name;
         if (item_name == "." || item_name == "..") continue;
 
-        string full_path = directory_path + "/" + item_name;
+        string full_path = target + "/" + item_name;
 
         if (path::is_directory(full_path.view())) {
             if (recursive) {
@@ -670,7 +670,7 @@ bool path::copy_directory(const path& src, const path& dest, const bool overwrit
     return success;
 
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    ::DIR* dir = ::opendir(source.data());
+    ::DIR* dir = ::opendir(src.data());
     if (dir == nullptr) return false;
 
     bool success = true;
@@ -680,15 +680,15 @@ bool path::copy_directory(const path& src, const path& dest, const bool overwrit
         string item = entry->d_name;
         if (item == "." || item == "..") continue;
 
-        path src_path = source / path{item};
-        path dst_path = destination / path{item};
+        path src_path = src / path{item};
+        path dst_path = dest / path{item};
 
         if (src_path.is_directory()) {
-            if (!path::copy_directory(src_path, dst_path, overwrite)) {
+            if (!copy_directory(src_path, dst_path, overwrite)) {
                 success = false;
             }
         } else {
-            if (!path::copy(src_path, dst_path, overwrite)) {
+            if (!copy(src_path, dst_path, overwrite)) {
                 success = false;
             }
         }

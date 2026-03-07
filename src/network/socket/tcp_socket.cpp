@@ -1,4 +1,7 @@
 #include <NeForce/network/socket/tcp_socket.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <fcntl.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 bool tcp_socket::wait_for_write(const milliseconds timeout) {
@@ -45,7 +48,7 @@ void tcp_socket::connect(const ip_address& endpoint) {
     }
 }
 
-bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout, const bool was_blocking) {
+bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout, bool was_blocking) {
     if (!is_open()) {
         throw_exception(value_exception("Socket is not open"));
     }
@@ -126,7 +129,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     }
 
     int optval = 0;
-    int optlen = sizeof(optval);
+    ::socklen_t optlen = sizeof(optval);
     if (!get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen) || optval != 0) {
         if (was_blocking) {
             NEFORCE_IGNORE set_nonblocking(false);

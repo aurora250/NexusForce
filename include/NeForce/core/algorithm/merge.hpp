@@ -40,10 +40,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * 2. 输出范围不与任一输入范围重叠
  * 3. 输出范围有足够的空间容纳所有元素
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename Iterator3, typename Compare>
 constexpr Iterator3 merge(Iterator1 first1, Iterator1 last1, Iterator2 first2,
 	Iterator2 last2, Iterator3 result, Compare comp) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterator must be forward_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (comp(*first2, *first1)) {
 			*result = *first2;
@@ -80,7 +83,6 @@ NEFORCE_BEGIN_INNER__
 /**
  * @brief 原地合并辅助函数（不使用缓冲区）
  * @tparam Iterator 迭代器类型
- * @tparam Distance 距离类型
  * @tparam Compare 比较函数类型
  * @param first 范围起始
  * @param middle 范围中间分割点
@@ -91,9 +93,11 @@ NEFORCE_BEGIN_INNER__
  *
  * 使用旋转和递归在原地合并两个已排序的子范围。
  */
-template <typename Iterator, typename Distance, typename Compare>
-constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Iterator last,
-	Distance len1, Distance len2, Compare comp) {
+template <typename Iterator, typename Compare>
+constexpr void __merge_without_buffer_aux(
+    Iterator first, Iterator middle, Iterator last,
+    iter_difference_t<Iterator> len1, iter_difference_t<Iterator> len2, Compare comp) {
+
 	if (len1 == 0 || len2 == 0) return;
 	if (len1 + len2 == 2) {
 		if (comp(*middle, *first)) _NEFORCE iter_swap(first, middle);
@@ -101,8 +105,8 @@ constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Itera
 	}
 	Iterator first_cut = first;
 	Iterator second_cut = middle;
-	Distance len11 = 0;
-	Distance len22 = 0;
+	iter_difference_t<Iterator> len11 = 0;
+	auto len22 = len11;
 	if (len1 > len2) {
 		len11 = len1 / 2;
 		_NEFORCE advance(first_cut, len11);
@@ -125,7 +129,6 @@ constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Itera
  * @brief 带缓冲区的旋转辅助函数
  * @tparam Iterator1 主迭代器类型
  * @tparam Iterator2 缓冲区迭代器类型
- * @tparam Distance 距离类型
  * @param first 范围起始
  * @param middle 旋转中心
  * @param last 范围结束
@@ -137,9 +140,12 @@ constexpr void __merge_without_buffer_aux(Iterator first, Iterator middle, Itera
  *
  * 使用缓冲区优化旋转操作，选择最小的部分放入缓冲区。
  */
-template <typename Iterator1, typename Iterator2, typename Distance>
-constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, Iterator1 last,
-	Distance len1, Distance len2, Iterator2 buffer, Distance buffer_size) {
+template <typename Iterator1, typename Iterator2>
+constexpr Iterator1 __rotate_with_buffer_aux(
+    Iterator1 first, Iterator1 middle, Iterator1 last,
+	iter_difference_t<Iterator1> len1, iter_difference_t<Iterator1> len2,
+	Iterator2 buffer, iter_difference_t<Iterator2> buffer_size) {
+
 	Iterator2 buffer_end;
 	if (len1 > len2 && len2 <= buffer_size) {
 		buffer_end = _NEFORCE copy(middle, last, buffer);
@@ -159,7 +165,6 @@ constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, 
 /**
  * @brief 原地合并辅助函数（使用缓冲区）
  * @tparam Iterator 主迭代器类型
- * @tparam Distance 距离类型
  * @tparam Pointer 缓冲区指针类型
  * @tparam Compare 比较函数类型
  * @param first 范围起始
@@ -173,9 +178,12 @@ constexpr Iterator1 __rotate_with_buffer_aux(Iterator1 first, Iterator1 middle, 
  *
  * 使用临时缓冲区优化原地合并算法。
  */
-template <typename Iterator, typename Distance, typename Pointer, typename Compare>
-constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator last,
-	Distance len1, Distance len2, Pointer buffer, Distance buffer_size, Compare comp) {
+template <typename Iterator, typename Pointer, typename Compare>
+constexpr void __merge_with_buffer_aux(
+    Iterator first, Iterator middle, Iterator last,
+	iter_difference_t<Iterator> len1, iter_difference_t<Iterator> len2,
+	Pointer buffer, iter_difference_t<Iterator> buffer_size, Compare comp) {
+
 	if (len1 <= len2 && len1 <= buffer_size) {
 		Pointer end_buffer = _NEFORCE copy(first, middle, buffer);
 		_NEFORCE merge(buffer, end_buffer, middle, last, first, comp);
@@ -214,8 +222,8 @@ constexpr void __merge_with_buffer_aux(Iterator first, Iterator middle, Iterator
 	else {
 		Iterator first_cut = first;
 		Iterator second_cut = middle;
-		Distance len11 = 0;
-		Distance len22 = 0;
+		iter_difference_t<Iterator> len11 = 0;
+		auto len22 = len11;
 		if (len1 > len2) {
 			len11 = len1 / 2;
 			_NEFORCE advance(first_cut, len11);
@@ -254,18 +262,16 @@ NEFORCE_END_INNER__
  *
  * 算法尝试分配临时缓冲区以提高性能，如果分配失败则使用无缓冲区的算法。
  */
-template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be a bidirectional_iterator");
+
 	if (first == middle || middle == last) return;
-	using Distance = iter_difference_t<Iterator>;
-	Distance len1 = _NEFORCE distance(first, middle);
-	Distance len2 = _NEFORCE distance(middle, last);
+	auto len1 = _NEFORCE distance(first, middle);
+	auto len2 = _NEFORCE distance(middle, last);
 	try {
 		temporary_buffer<Iterator> buffer(first, last);
-		_INNER __merge_with_buffer_aux(
-			first, middle, last, len1, len2,
-			buffer.begin(), Distance(buffer.size()), comp
-		);
+		_INNER __merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
 	} catch (...) {
 		_INNER __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
 	}

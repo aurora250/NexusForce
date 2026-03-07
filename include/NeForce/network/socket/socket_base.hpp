@@ -2,6 +2,9 @@
 #define NEFORCE_NETWORK_SOCKET_SOCKET_BASE_HPP__
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/ip_address.hpp"
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <cerrno>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -106,8 +109,8 @@ public:
     bool shutdown_receive() noexcept;
     bool shutdown_both() noexcept;
 
-    bool set_option(int level, int optname, const void* value, int len) noexcept;
-    bool get_option(int level, int optname, void* optval, int* optlen) const noexcept;
+    bool set_option(int level, int optname, const void* value, ::socklen_t len) noexcept;
+    bool get_option(int level, int optname, void* optval, ::socklen_t* optlen) const noexcept;
 
     bool set_reuse_address(bool enable = true) noexcept;
     bool set_reuse_port(bool enable = true) noexcept;

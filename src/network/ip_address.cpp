@@ -1,5 +1,9 @@
+#include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/ip_address.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <arpa/inet.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 ip_address ip_address::any(const uint16_t port, const int family) noexcept {
@@ -8,13 +12,13 @@ ip_address ip_address::any(const uint16_t port, const int family) noexcept {
         ::sockaddr_in6 a6{};
         a6.sin6_family = AF_INET6;
         a6.sin6_addr = ::in6addr_any;
-        a6.sin6_port = ::htons(port);
+        a6.sin6_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a6;
     } else if (family == AF_INET) {
         ::sockaddr_in a4{};
         a4.sin_family = AF_INET;
         a4.sin_addr.s_addr = INADDR_ANY;
-        a4.sin_port = ::htons(port);
+        a4.sin_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a4;
     }
     return move(result);
@@ -26,13 +30,13 @@ ip_address ip_address::loopback(const uint16_t port, const int family) noexcept 
         ::sockaddr_in6 a6{};
         a6.sin6_family = AF_INET6;
         a6.sin6_addr = ::in6addr_loopback;
-        a6.sin6_port = ::htons(port);
+        a6.sin6_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a6;
     } else if (family == AF_INET) {
         ::sockaddr_in a4{};
         a4.sin_family = AF_INET;
-        a4.sin_addr.s_addr = ::htonl(INADDR_LOOPBACK);
-        a4.sin_port = ::htons(port);
+        a4.sin_addr.s_addr = endian::host_to_network<uint32_t>(INADDR_LOOPBACK);
+        a4.sin_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a4;
     }
     return move(result);
@@ -81,9 +85,9 @@ NEFORCE_NODISCARD int ip_address::family() const noexcept {
 NEFORCE_NODISCARD uint16_t ip_address::port() const noexcept {
     return addr_.visit([](const auto& addr) -> uint16_t {
         if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
-            return ::ntohs(addr.sin_port);
+            return endian::network_to_host<uint16_t>(addr.sin_port);
         } else if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in6>) {
-            return ::ntohs(addr.sin6_port);
+            return endian::network_to_host<uint16_t>(addr.sin6_port);
         }
         return 0;
     });
@@ -96,11 +100,13 @@ string ip_address::to_string() const {
         using T = decay_t<decltype(addr)>;
         if constexpr (is_same_v<T, ::sockaddr_in>) {
             if (::inet_ntop(AF_INET, &addr.sin_addr, buffer, sizeof(buffer))) {
-                return string(buffer) + ":" + _NEFORCE to_string(::ntohs(addr.sin_port));
+                return string(buffer) + ":" +
+                    _NEFORCE to_string(endian::network_to_host<uint16_t>(addr.sin_port));
             }
         } else if constexpr (is_same_v<T, ::sockaddr_in6>) {
             if (::inet_ntop(AF_INET6, &addr.sin6_addr, buffer, sizeof(buffer))) {
-                return "["_s + string(buffer) + "]:" + _NEFORCE to_string(::ntohs(addr.sin6_port));
+                return "["_s + string(buffer) + "]:" +
+                    _NEFORCE to_string(endian::network_to_host<uint16_t>(addr.sin6_port));
             }
         }
         return {};
@@ -113,7 +119,7 @@ optional<ip_address> ip_address::parse(const string& host, const uint16_t port) 
     ::sockaddr_in a4{};
     if (::inet_pton(AF_INET, host.data(), &a4.sin_addr) == 1) {
         a4.sin_family = AF_INET;
-        a4.sin_port = ::htons(port);
+        a4.sin_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a4;
         return result;
     }
@@ -121,7 +127,7 @@ optional<ip_address> ip_address::parse(const string& host, const uint16_t port) 
     ::sockaddr_in6 a6{};
     if (::inet_pton(AF_INET6, host.data(), &a6.sin6_addr) == 1) {
         a6.sin6_family = AF_INET6;
-        a6.sin6_port = ::htons(port);
+        a6.sin6_port = endian::host_to_network<uint16_t>(port);
         result.addr_ = a6;
         return result;
     }

@@ -36,8 +36,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * 3. 交换这两个元素
  * 4. 重复直到两个扫描指针相遇
  */
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr Iterator partition(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be bidirectional_iterator");
+    static_assert(is_invocable_v<Predicate, decltype(*first)>, "Predicate must be invocable");
+
 	while (true) {
 		while (true) {
 			if (first == last) return first;
@@ -79,8 +82,11 @@ constexpr Iterator partition(Iterator first, Iterator last, Predicate pred) {
  * 4. 交换这两个元素
  * 5. 重复直到指针相遇
  */
-template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename Compare>
 constexpr Iterator lomuto_partition(Iterator first, Iterator last, const T& pivot, Compare comp) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+
 	while (first < last) {
 		while (comp(*first, pivot)) ++first;
 		--last;

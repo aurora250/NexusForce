@@ -1,10 +1,14 @@
 #include <NeForce/core/async/async.hpp>
+#include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/string/format.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/dns/dns_client.hpp>
 #include <NeForce/network/socket/tcp_socket.hpp>
 #include <NeForce/network/socket/udp_socket.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <arpa/inet.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 static uint16_t generate_dns_client_id() {
@@ -51,9 +55,9 @@ static byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DN
     byte_vector query;
 
     dns_header header;
-    header.id = ::htons(generate_dns_client_id());
-    header.flags = ::htons(0x0100);
-    header.qdcount = ::htons(1);
+    header.id = endian::host_to_network<uint16_t>(generate_dns_client_id());
+    header.flags = endian::host_to_network<uint16_t>(0x0100);
+    header.qdcount = endian::host_to_network<uint16_t>(1);
 
     query.resize(sizeof(dns_header));
     memory_copy(query.data(), &header, sizeof(dns_header));
@@ -61,8 +65,8 @@ static byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DN
     auto encoded_domain = encode_domain_name(domain);
     query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
 
-    uint16_t qtype = ::htons(static_cast<uint16_t>(type));
-    uint16_t qclass_val = ::htons(static_cast<uint16_t>(qclass));
+    uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
+    uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
 
     query.insert(query.end(), reinterpret_cast<byte_t*>(&qtype),
         reinterpret_cast<byte_t*>(&qtype) + sizeof(qtype));
@@ -193,7 +197,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     }
 
     auto send_request = [&]() -> bool {
-        const uint16_t length = ::htons(static_cast<uint16_t>(query.size()));
+        const auto length = endian::host_to_network<uint16_t>(query.size());
         if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(&length), 2}) != 2) {
             return false;
         }
@@ -220,7 +224,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
         throw_exception(dns_exception("Failed to receive response length"));
     }
-    res_len = ::ntohs(res_len);
+    res_len = endian::network_to_host<uint16_t>(res_len);
 
     byte_vector buffer(res_len);
     size_t total = 0;
@@ -264,7 +268,7 @@ static string parse_mx_record(const byte_vector& data, size_t offset, const uint
     if (rdlength < 2) {
         throw_exception(dns_exception("Invalid MX record length"));
     }
-    const uint16_t preference = ::ntohs(*reinterpret_cast<const uint16_t*>(&data[offset]));
+    const auto preference = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(&data[offset]));
     offset += 2;
     const string exchange = decode_domain_name(data, offset);
     return to_string(preference) + " " + exchange;
@@ -295,13 +299,13 @@ static dns_record parse_resource_record(const byte_vector& data, size_t& offset)
         throw_exception(dns_exception("Incomplete resource record"));
     }
 
-    record.type = static_cast<DNS_RECORD>(::ntohs(*reinterpret_cast<const uint16_t*>(&data[offset])));
+    record.type = static_cast<DNS_RECORD>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
     offset += 2;
-    record.class_type = static_cast<DNS_QUERY>(::ntohs(*reinterpret_cast<const uint16_t*>(&data[offset])));
+    record.class_type = static_cast<DNS_QUERY>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
     offset += 2;
-    record.ttl = ::ntohl(*reinterpret_cast<const uint32_t*>(&data[offset]));
+    record.ttl = endian::network_to_host(*reinterpret_cast<const uint32_t*>(&data[offset]));
     offset += 4;
-    const uint16_t rdlength = ::ntohs(*reinterpret_cast<const uint16_t*>(&data[offset]));
+    const auto rdlength = endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset]));
     offset += 2;
 
     if (offset + rdlength > data.size()) {
@@ -349,12 +353,12 @@ static dns_query_result parse_dns_response(const byte_vector& response) {
     dns_header header;
     memory_copy(&header, response.data(), sizeof(dns_header));
 
-    header.id = ::ntohs(header.id);
-    header.flags = ::ntohs(header.flags);
-    header.qdcount = ::ntohs(header.qdcount);
-    header.ancount = ::ntohs(header.ancount);
-    header.nscount = ::ntohs(header.nscount);
-    header.arcount = ::ntohs(header.arcount);
+    header.id = endian::network_to_host<uint16_t>(header.id);
+    header.flags = endian::network_to_host<uint16_t>(header.flags);
+    header.qdcount = endian::network_to_host<uint16_t>(header.qdcount);
+    header.ancount = endian::network_to_host<uint16_t>(header.ancount);
+    header.nscount = endian::network_to_host<uint16_t>(header.nscount);
+    header.arcount = endian::network_to_host<uint16_t>(header.arcount);
 
     result.response_code = static_cast<DNS_RESPONSE>(header.flags & 0x000F);
     result.truncated = (header.flags & 0x0200) != 0;

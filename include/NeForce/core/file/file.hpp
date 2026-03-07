@@ -157,10 +157,10 @@ private:
     bool append_mode_ = false;                 ///< 是否为追加模式
 
     size_type buffer_size_ = buffer_size;   ///< 缓冲区大小
-    mutable vector<byte_t> read_buffer_{};     ///< 读缓冲区
+    mutable byte_vector read_buffer_{};     ///< 读缓冲区
     mutable size_type read_buffer_pos_ = 0;    ///< 读缓冲区位置
     mutable size_type read_buffer_size_ = 0;   ///< 读缓冲区有效数据大小
-    mutable vector<byte_t> write_buffer_{};    ///< 写缓冲区
+    mutable byte_vector write_buffer_{};    ///< 写缓冲区
     mutable size_type write_buffer_pos_ = 0;   ///< 写缓冲区位置
 
     mutable mutex map_mutex_;                  ///< 映射操作互斥锁

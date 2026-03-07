@@ -57,14 +57,13 @@ NEFORCE_BEGIN_INNER__
  * @typedef alloc_size_t
  * @brief 分配器使用的内存大小类型
  */
-using alloc_size_t = size_t;
-
+using alloc_size_t =
 /// @cond
-// #ifdef NEFORCE_COMPILER_GCC
-// using alloc_size_t = uint32_t;
-// #else
-// using alloc_size_t = size_t;
-// #endif
+#ifdef NEFORCE_COMPILER_GCC
+    uint32_t;
+#else
+    size_t;
+#endif
 /// @endcond
 
 

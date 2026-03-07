@@ -378,7 +378,7 @@ void test_math() {
         println(arctangent(numeric_traits<decimal_t>::max()), arctangent(numeric_traits<decimal_t>::min_nega()));
         // println(tangent(_CONSTANTS PI / 2));  // MathError
         println(tangent(0));
-        println(around_pi(_CONSTANTS PI), " : ", around_pi(6.28));
+        println(around_pi(_CONSTANTS PI), ":", around_pi(6.28));
     } catch (const exception& e) {
         println(e);
     }

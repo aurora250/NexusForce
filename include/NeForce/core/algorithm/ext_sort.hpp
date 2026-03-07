@@ -32,8 +32,10 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 通过重复交换相邻的逆序元素将最大元素冒泡到末尾。
  */
-template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+
     if (first == last) return;
     auto revend = _NEFORCE make_reverse_iterator(first);
     auto revstart = _NEFORCE make_reverse_iterator(--last);
@@ -77,8 +79,11 @@ NEFORCE_CONSTEXPR20 void bubble_sort(Iterator first, Iterator last) {
  *
  * 冒泡排序的改进版本，同时从两端进行冒泡，减少循环次数。
  */
-template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be bidirectional_iterator");
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+
     if (first == last) return;
     bool swapped = true;
     Iterator left = first;
@@ -134,9 +139,11 @@ NEFORCE_CONSTEXPR20 void cocktail_sort(Iterator first, Iterator last) {
  *
  * 每次从未排序部分选择元素放到已排序部分的末尾。
  */
-template <typename Iterator, typename Compare, enable_if_t<
-    is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+
     if (first == last) return;
     Iterator min;
     for (Iterator i = first; i != last; ++i) {
@@ -178,17 +185,19 @@ NEFORCE_CONSTEXPR20 void select_sort(Iterator first, Iterator last) {
 template <typename Iterator, typename Compare, enable_if_t<
     is_ranges_rnd_iter_v<Iterator>, int> = 0>
 NEFORCE_CONSTEXPR20 void shell_sort(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+
     if (first == last) return;
-    using Distance = iter_difference_t<Iterator>;
-    using T = iter_value_t<Iterator>;
-    Distance dist = _NEFORCE distance(first, last);
-    for (Distance gap = dist / 2; gap > 0; gap /= 2) {
+    auto dist = _NEFORCE distance(first, last);
+    for (auto gap = dist / 2; gap > 0; gap /= 2) {
         for (Iterator i = first + gap; i < last; ++i) {
-            T temp = *i;
+            iter_value_t<Iterator> temp = *i;
             Iterator j;
-            for (j = i; j >= first + gap && comp(temp, *(j - gap)); j -= gap)
+            for (j = i; j >= first + gap && comp(temp, *(j - gap)); j -= gap) {
                 *j = *(j - gap);
-            *j = temp;
+            }
+            *j = _NEFORCE move(temp);
         }
     }
 }
@@ -220,9 +229,12 @@ NEFORCE_CONSTEXPR20 void shell_sort(Iterator first, Iterator last) {
  *
  * 适用于整数或可映射为整数的类型，范围不宜过大。
  */
-template <typename Iterator, typename Compare, typename IndexMapper, enable_if_t<
-    is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare, typename IndexMapper>
 NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare comp, IndexMapper mapper) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+    static_assert(is_invocable_v<Compare, decltype(*first), decltype(*first)>, "Compare must be invocable");
+    static_assert(is_invocable_v<IndexMapper, decltype(*first)>, "IndexMapper must be invocable");
+
     if (first == last) return;
     auto min_max = _NEFORCE minmax_element(first, last, comp);
     auto min_val = mapper(*min_max.first);
@@ -238,8 +250,9 @@ NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare co
         ++count[static_cast<size_t>(value - min_val)];
     }
 
-    for (size_t i = 1; i < count.size(); ++i)
+    for (size_t i = 1; i < count.size(); ++i) {
         count[i] += count[i - 1];
+    }
 
     vector<iter_value_t<Iterator>> sorted(_NEFORCE distance(first, last));
     auto bound = _NEFORCE make_reverse_iterator(first);
@@ -261,8 +274,10 @@ NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare co
  */
 template <typename Iterator>
 NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
-    _NEFORCE counting_sort(first, last,
-        _NEFORCE less<iter_value_t<Iterator>>(), _NEFORCE identity<iter_value_t<Iterator>>());
+    _NEFORCE counting_sort(
+        first, last,
+        _NEFORCE less<iter_value_t<Iterator>>(),
+        _NEFORCE identity<iter_value_t<Iterator>>());
 }
 
 /**
@@ -277,9 +292,10 @@ NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last) {
  *
  * 适用于均匀分布的整数或浮点数。
  */
-template <typename Iterator, enable_if_t<
-    is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 NEFORCE_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
     using T = iter_value_t<Iterator>;
     pair<Iterator, Iterator> min_max = _NEFORCE minmax_element(first, last);
     T min_val = *min_max.first;
@@ -307,9 +323,10 @@ NEFORCE_CONSTEXPR20 void bucket_sort_less(Iterator first, Iterator last) {
  * @param first 序列起始迭代器
  * @param last 序列结束迭代器
  */
-template <typename Iterator, enable_if_t<
-    is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 NEFORCE_CONSTEXPR20 void bucket_sort_greater(Iterator first, Iterator last) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
     using T = iter_value_t<Iterator>;
     pair<Iterator, Iterator> min_max = _NEFORCE minmax_element(first, last);
     T min_val = *min_max.first;
@@ -382,13 +399,15 @@ NEFORCE_END_INNER__
  *
  * 适用于整数或可分解为固定数位的类型。
  */
-template <typename Iterator, typename Mapper, enable_if_t<
-    is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Mapper>
 NEFORCE_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper mapper) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+    static_assert(is_invocable_v<Mapper, decltype(*first)>, "Mapper must be invocable");
+
     if (first == last) return;
     using Mapped = remove_reference_t<decltype(mapper(*first))>;
 
-    iter_difference_t<Iterator> length = _NEFORCE distance(first, last);
+    auto length = _NEFORCE distance(first, last);
     vector<Mapped> mapped_values(length);
     vector<iter_value_t<Iterator>> bucket(length);
     vector<int> count(10);
@@ -428,9 +447,11 @@ NEFORCE_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper m
  * @param last 序列结束迭代器
  * @param mapper 将元素映射为整数的函数
  */
-template <typename Iterator, typename Mapper, enable_if_t<
-    is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Mapper>
 NEFORCE_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mapper mapper) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+    static_assert(is_invocable_v<Mapper, decltype(*first)>, "Mapper must be invocable");
+
     if (first == last) return;
     using Mapped = remove_cvref_t<decltype(mapper(*first))>;
 
@@ -512,16 +533,15 @@ NEFORCE_CONSTEXPR20 void smooth_sort(Iterator first, Iterator last) {
  *
  * 混合排序算法，结合了归并排序和插入排序。
  */
-template <typename Iterator, typename Compare, enable_if_t<
-    is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
-    constexpr int MIN_MERGE = 32;
+    constexpr int min_merge = 32;
     iter_difference_t<Iterator> n = _NEFORCE distance(first, last);
-    for (Iterator i = first; i < last; i += MIN_MERGE) {
-        Iterator end = _NEFORCE min(i + MIN_MERGE, last);
+    for (Iterator i = first; i < last; i += min_merge) {
+        Iterator end = _NEFORCE min(i + min_merge, last);
         _NEFORCE insertion_sort(i, end, comp);
     }
-    for (int size = MIN_MERGE; size < n; size *= 2) {
+    for (int size = min_merge; size < n; size *= 2) {
         for (Iterator left = first; left < last; left += 2 * size) {
             Iterator mid = left + size;
             Iterator right = _NEFORCE min(left + 2 * size, last);
@@ -558,8 +578,7 @@ NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last) {
  * 通过随机打乱并检查是否有序来进行排序。
  * 仅用于教学和娱乐目的，切勿用于实际生产环境。
  */
-template <typename Iterator, typename Compare, enable_if_t<
-    is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 void monkey_sort(Iterator first, Iterator last, Compare comp) {
     while (!_NEFORCE is_sorted(first, last, comp)) {
         _NEFORCE shuffle(first, last);

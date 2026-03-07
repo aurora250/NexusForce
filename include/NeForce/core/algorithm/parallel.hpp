@@ -32,15 +32,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * 使用分治法的并行归约算法。将范围分成两半，分别在不同线程中计算，最后合并结果。
  * 当元素数量小于阈值时，使用串行算法。
  */
-template <typename Iterator, typename BinaryOperation, typename Result,
-    size_t Threshhold = 10, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename BinaryOperation, typename Result, size_t Threshhold = 10>
 void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
     const size_t dist = _NEFORCE distance(first, last);
     if (dist <= Threshhold) {
         for (Iterator it = first; it != last; ++it)
             res = op(res, *it);
-    }
-    else {
+    } else {
         Iterator mid = _NEFORCE next(first, dist / 2);
         Result l_res = res, r_res = res;
         _NEFORCE thread r_thd(reduce<Iterator, BinaryOperation, Result, Threshhold>, mid, last, op, _NEFORCE ref(r_res));
@@ -66,15 +66,15 @@ void reduce(Iterator first, Iterator last, BinaryOperation op, Result& res) {
  * 先对每个元素应用变换操作，然后进行归约。使用分治法的并行算法。
  * 当元素数量小于阈值时，使用串行算法。
  */
-template <typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result,
-    size_t Threshhold = 10, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename UnaryOperation, typename BinaryOp, typename Result, size_t Threshhold = 10>
 void transform_reduce(Iterator first, Iterator last, UnaryOperation transform, BinaryOp reduce, Result& res) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
     const size_t dist = _NEFORCE distance(first, last);
     if (dist <= Threshhold) {
         for (Iterator it = first; it != last; ++it)
             res = reduce(res, transform(*it));
-    }
-    else {
+    } else {
         Iterator mid = _NEFORCE next(first, dist / 2);
         Result l_res = _NEFORCE initialize<Result>(), r_res = _NEFORCE initialize<Result>();
         _NEFORCE thread r_thd(transform_reduce<Iterator, UnaryOperation, BinaryOp, Result, Threshhold>,

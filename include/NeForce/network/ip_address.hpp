@@ -12,6 +12,9 @@
 #undef min
 #endif
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <netinet/in.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API ip_address : public istringify<ip_address> {

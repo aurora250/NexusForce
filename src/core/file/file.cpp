@@ -64,15 +64,18 @@ file::async_context::~async_context() {
 }
 
 
-static NEFORCE_ALWAYS_INLINE const native_handle_type& INVALID_HANDLE() noexcept {
-    static const auto INVALID_HANDLE =
+namespace {
+    const native_handle_type& INVALID_HANDLE() noexcept {
+        static const auto INVALID_HANDLE =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        INVALID_HANDLE_VALUE;
+            INVALID_HANDLE_VALUE;
 #elif defined(NEFORCE_PLATFORM_LINUX)
             -1;
 #endif
-    return INVALID_HANDLE;
+        return INVALID_HANDLE;
+    }
 }
+
 
 bool file::complete_async_result(async_result& result, const size_type bytes_transferred) {
     result.completed = true;
@@ -235,9 +238,9 @@ static inline datetime filetime_to_datetime(const file::time_type& file_time) no
         st_local.wHour, st_local.wMinute, st_local.wSecond
     );
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    if (ft == 0) return datetime::epoch();
+    if (file_time == 0) return datetime::epoch();
     ::tm tm_local{};
-    ::localtime_r(&ft, &tm_local);
+    ::localtime_r(&file_time, &tm_local);
     return datetime(
         tm_local.tm_year + 1900, tm_local.tm_mon + 1, tm_local.tm_mday,
         tm_local.tm_hour, tm_local.tm_min, tm_local.tm_sec, tm_local.tm_gmtoff
@@ -268,13 +271,13 @@ static inline file::time_type datetime_to_filetime(const datetime& date_time) no
     return ft;
 #elif defined(NEFORCE_PLATFORM_LINUX)
     ::tm tm_val{};
-    tm_val.tm_year = dt.year() - 1900;
-    tm_val.tm_mon = dt.month() - 1;
-    tm_val.tm_mday = dt.day();
-    tm_val.tm_hour = dt.hours();
-    tm_val.tm_min = dt.minutes();
-    tm_val.tm_sec = dt.seconds();
-    tm_val.tm_gmtoff = dt.offset_seconds();
+    tm_val.tm_year = date_time.year() - 1900;
+    tm_val.tm_mon = date_time.month() - 1;
+    tm_val.tm_mday = date_time.day();
+    tm_val.tm_hour = date_time.hours();
+    tm_val.tm_min = date_time.minutes();
+    tm_val.tm_sec = date_time.seconds();
+    tm_val.tm_gmtoff = date_time.offset_seconds();
     tm_val.tm_isdst = -1;
     return ::mktime(&tm_val);
 #endif
@@ -345,7 +348,7 @@ static ::mode_t convert_attributes(const FILE_ATTRI attr) {
 #endif
 
 file::file()
-    : handle_(INVALID_HANDLE_VALUE) {}
+: handle_(INVALID_HANDLE()) {}
 
 file::file(file&& other) noexcept
     : handle_(other.handle_),

@@ -47,10 +47,13 @@ private:
     http_client_response do_request(http_client_request req, int redirect_count = 0);
 
 public:
-    explicit http_client(config config = {});
+    http_client()
+    : http_client(config()) {}
+
+    explicit http_client(config config);
 
 #ifdef NEFORCE_SUPPORT_OPENSSL
-    explicit http_client(ssl_context ctx, config config = {});
+    explicit http_client(ssl_context ctx, config config);
 #endif
 
     ~http_client() = default;

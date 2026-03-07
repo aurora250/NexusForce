@@ -205,8 +205,8 @@ struct task_info {
 
 template <typename T>
 struct submit_result {
-	future<T> future;
-	shared_ptr<task_info> task_info;
+	_NEFORCE future<T> future;
+	shared_ptr<_NEFORCE task_info> task_info;
 
 	NEFORCE_NODISCARD explicit operator bool() const noexcept {
 		return future.valid() && task_info;
@@ -353,14 +353,14 @@ public:
 	}
 };
 
-NEFORCE_INLINE17 thread_local worker_context* t_worker_ctx = nullptr;
-NEFORCE_INLINE17 thread_local shared_ptr<task_group> t_current_task_group = nullptr;
 
 NEFORCE_ALWAYS_INLINE_INLINE worker_context*& get_worker_context() noexcept {
+	thread_local worker_context* t_worker_ctx = nullptr;
 	return t_worker_ctx;
 }
 
 NEFORCE_ALWAYS_INLINE_INLINE shared_ptr<task_group>& get_current_task_group() noexcept {
+	thread_local shared_ptr<task_group> t_current_task_group = nullptr;
 	return t_current_task_group;
 }
 

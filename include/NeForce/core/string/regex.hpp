@@ -81,6 +81,11 @@ public:
 };
 
 
+class NEFORCE_API regex_iterator;
+
+class NEFORCE_API regex_token_iterator;
+
+
 class NEFORCE_API regex {
 private:
     struct pcre2_code_deleter {

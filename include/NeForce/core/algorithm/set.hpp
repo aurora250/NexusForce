@@ -37,9 +37,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * 1. 两个输入范围都已按升序排序
  * 2. 输出范围不与输入范围重叠
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename Iterator3>
 constexpr Iterator3 set_union(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterator must be forward_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (*first1 < *first2) {
 			*result = *first1;
@@ -71,10 +74,12 @@ constexpr Iterator3 set_union(Iterator1 first1, Iterator1 last1, Iterator2 first
  * 计算两个已排序范围 [first1, last1) 和 [first2, last2) 的交集。
  * 结果包含同时出现在两个输入范围中的元素。
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
-constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1,
-	Iterator2 first2, Iterator2 last2, Iterator3 result) {
+template <typename Iterator1, typename Iterator2, typename Iterator3>
+constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterator must be forward_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (*first1 < *first2) {
 			++first1;
@@ -104,10 +109,12 @@ constexpr Iterator3 set_intersection(Iterator1 first1, Iterator1 last1,
  * 计算两个已排序范围 [first1, last1) 和 [first2, last2) 的差集。
  * 结果包含出现在第一个范围但不出现在第二个范围中的元素。
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
-constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1,
-	Iterator2 first2, Iterator2 last2, Iterator3 result) {
+template <typename Iterator1, typename Iterator2, typename Iterator3>
+constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterator must be forward_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (*first1 < *first2) {
 			*result = *first1;
@@ -138,10 +145,12 @@ constexpr Iterator3 set_difference(Iterator1 first1, Iterator1 last1,
  * 结果包含出现在任一输入范围但不同时出现在两个范围中的元素。
  * 即：并集减去交集。
  */
-template <typename Iterator1, typename Iterator2, typename Iterator3,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>, int> = 0>
-constexpr Iterator3 set_symmetric_difference(Iterator1 first1, Iterator1 last1,
-	Iterator2 first2, Iterator2 last2, Iterator3 result) {
+template <typename Iterator1, typename Iterator2, typename Iterator3>
+constexpr Iterator3 set_symmetric_difference(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result) {
+    static_assert(
+        is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2> && is_ranges_fwd_iter_v<Iterator3>,
+        "Iterator must be forward_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (*first1 < *first2) {
 			*result = *first1;

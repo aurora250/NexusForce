@@ -21,14 +21,21 @@ NEFORCE_BEGIN_NAMESPACE__
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Ptr, enable_if_t<is_pointer_v<Ptr>, int> = 0>
-constexpr iter_pointer_t<Ptr> __to_pointer_aux(Ptr iter) {
+
+template <typename Ptr>
+constexpr
+enable_if_t<is_pointer_v<Ptr>, iter_pointer_t<Ptr>>
+__to_pointer_aux(Ptr iter) {
     return iter;
 }
-template <typename Iterator, enable_if_t<!is_pointer_v<Iterator>, int> = 0>
-constexpr iter_pointer_t<Iterator> __to_pointer_aux(Iterator iter) {
+
+template <typename Iterator>
+constexpr
+enable_if_t<!is_pointer_v<Iterator>, iter_pointer_t<Iterator>>
+__to_pointer_aux(Iterator iter) {
     return iter.operator->();
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 #endif // NEFORCE_STANDARD_17
@@ -56,20 +63,30 @@ constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Iterator, typename Distance, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
-constexpr void __advance_aux(Iterator& i, Distance n) {
+
+template <typename Iterator, typename Distance>
+constexpr
+enable_if_t<is_rnd_iter_v<Iterator>>
+__advance_aux(Iterator& i, Distance n) {
     i += n;
 }
-template <typename Iterator, typename Distance, enable_if_t<!is_rnd_iter_v<Iterator> && is_ranges_bid_iter_v<Iterator>, int> = 0>
-constexpr void __advance_aux(Iterator& i, Distance n) {
+
+template <typename Iterator, typename Distance>
+constexpr
+enable_if_t<!is_rnd_iter_v<Iterator> && is_ranges_bid_iter_v<Iterator>>
+__advance_aux(Iterator& i, Distance n) {
     for (; n < 0; ++n) --i;
     for (; 0 < n; --n) ++i;
 }
-template <typename Iterator, typename Distance, enable_if_t<!is_rnd_iter_v<Iterator> && !is_ranges_bid_iter_v<Iterator>, int> = 0>
-constexpr void __advance_aux(Iterator& i, Distance n) {
+
+template <typename Iterator, typename Distance>
+constexpr
+enable_if_t<!is_rnd_iter_v<Iterator> && !is_ranges_bid_iter_v<Iterator>>
+__advance_aux(Iterator& i, Distance n) {
     NEFORCE_DEBUG_VERIFY__(is_signed_v<Distance> && n >= 0, "negative advance of non-bidirectional iterator");
     for (; 0 < n; --n) ++i;
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 #endif // NEFORCE_STANDARD_17
@@ -86,8 +103,11 @@ NEFORCE_END_INNER__
  * - 双向迭代器：支持正负距离
  * - 前向迭代器：只支持非负距离
  */
-template <typename Iterator, typename Distance, enable_if_t<is_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Distance>
 constexpr void advance(Iterator& i, Distance n) {
+    static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
+    static_assert(is_arithmetic_v<Distance>, "Distance must be arithmetic");
+
 #ifdef NEFORCE_STANDARD_17
     if constexpr (is_rnd_iter_v<Iterator>) {
         i += n;
@@ -141,16 +161,23 @@ constexpr Iterator next(Iterator iter, iter_difference_t<Iterator> n = 1) {
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Iterator, enable_if_t<is_rnd_iter_v<Iterator>, int> = 0>
-constexpr iter_difference_t<Iterator> __distance_aux(Iterator first, Iterator last) {
+
+template <typename Iterator>
+constexpr
+enable_if_t<is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>>
+__distance_aux(Iterator first, Iterator last) {
     return last - first;
 }
-template <typename Iterator, enable_if_t<!is_rnd_iter_v<Iterator>, int> = 0>
-constexpr iter_difference_t<Iterator> __distance_aux(Iterator first, Iterator last) {
+
+template <typename Iterator>
+constexpr
+enable_if_t<!is_rnd_iter_v<Iterator>, iter_difference_t<Iterator>>
+__distance_aux(Iterator first, Iterator last) {
     iter_difference_t<Iterator> n = 0;
     while (first != last) { ++first; ++n; }
     return n;
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 #endif // NEFORCE_STANDARD_17
@@ -166,8 +193,10 @@ NEFORCE_END_INNER__
  * - 随机访问迭代器：直接使用减法
  * - 其他迭代器：遍历计数
  */
-template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
+    static_assert(is_iter_v<Iterator>, "Iterator must be iterator");
+
 #ifdef NEFORCE_STANDARD_17
     if constexpr (is_ranges_rnd_iter_v<Iterator>) {
         return last - first;

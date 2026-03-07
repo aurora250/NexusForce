@@ -7,8 +7,8 @@ class NEFORCE_API serial_port final : public device {
 public:
     struct serial_config {
         uint32_t baud_rate = 115200u;
-        uint8_t data_bits = 8u;
-        uint8_t stop_bits = 1u;
+        byte_t data_bits = 8u;
+        byte_t stop_bits = 1u;
         char parity = 'N';
         bool flow_control = false;
         bool xon_xoff = false;

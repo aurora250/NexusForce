@@ -12,7 +12,7 @@ public:
 
 protected:
     struct NEFORCE_API session_manager {
-        unordered_map<string, session> sessions_;
+        unordered_map<string, _NEFORCE session> sessions_;
         mutable mutex mutex_;
         atomic<bool> cleanup_running_;
         thread cleanup_thread_;
@@ -24,7 +24,7 @@ protected:
 
         ~session_manager();
 
-        session* get_session(const string& session_id, bool create = true);
+        _NEFORCE session* get_session(const string& session_id, bool create = true);
 
         void remove_session(const string& session_id) noexcept;
 

@@ -1,6 +1,8 @@
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/time/duration.hpp>
+
+#include "NeForce/core/file/file.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/inotify.h>
 #include <sys/eventfd.h>
@@ -348,7 +350,7 @@ void file_watcher::watch_thread_func() {
         }
 
         if (fds[0].revents & POLLIN) {
-            const ssize_t len = ::read(inotify_fd_, buffer_.data(), BUFFER_SIZE);
+            const ssize_t len = ::read(inotify_fd_, buffer_.data(), file::buffer_size);
             if (len <= 0) {
                 if (errno == EAGAIN || errno == EWOULDBLOCK) {
                     continue;

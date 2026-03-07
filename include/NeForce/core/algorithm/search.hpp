@@ -33,8 +33,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * 在有序范围[first, last)中执行二分查找，返回第一个满足!comp(*it, value)的
  * 元素位置。要求范围已按照comp排序。
  */
-template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename Compare>
 constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value, Compare comp) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	using Distance = iter_difference_t<Iterator>;
 	Distance len = _NEFORCE distance(first, last);
 	Distance half;
@@ -83,8 +85,10 @@ constexpr Iterator lower_bound(Iterator first, Iterator last, const T& value) {
  * 在有序范围[first, last)中执行二分查找，返回第一个满足comp(value, *it)的
  * 元素位置。要求范围已按照comp排序。
  */
-template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename Compare>
 constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value, Compare comp) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	using Distance = iter_difference_t<Iterator>;
 	Distance len = _NEFORCE distance(first, last);
 	Distance half;
@@ -128,7 +132,7 @@ constexpr Iterator upper_bound(Iterator first, Iterator last, const T& value) {
  * @param value 要查找的值
  * @return 如果找到value则返回true，否则返回false
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 constexpr bool binary_search(Iterator first, Iterator last, const T& value) {
 	Iterator i = _NEFORCE lower_bound(first, last, value);
 	return i != last && !(value < *i);
@@ -145,7 +149,7 @@ constexpr bool binary_search(Iterator first, Iterator last, const T& value) {
  * @param comp 比较函数
  * @return 如果找到value则返回true，否则返回false
  */
-template <typename Iterator, typename T, typename Compare, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename Compare>
 constexpr bool binary_search(Iterator first, Iterator last, const T& value, Compare comp) {
 	Iterator i = _NEFORCE lower_bound(first, last, value, comp);
 	return i != last && !comp(value, *i);
@@ -163,9 +167,10 @@ constexpr bool binary_search(Iterator first, Iterator last, const T& value, Comp
  * @param comp 比较函数
  * @return 如果主序列包含子序列的所有元素则返回true，否则返回false
  */
-template <typename Iterator1, typename Iterator2, typename Compare,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename Compare>
 constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
+
 	while (first1 != last1 && first2 != last2) {
 		if (comp(*first2, *first1)) return false;
 
@@ -207,8 +212,10 @@ constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Ite
  * @param pred 谓词函数
  * @return 如果所有元素都满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	for (; first != last; ++first) {
 		if (!pred(*first)) return false;
 	}
@@ -224,8 +231,10 @@ constexpr bool all_of(Iterator first, Iterator last, Predicate pred) {
  * @param pred 谓词函数
  * @return 如果有任意元素满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	for (; first != last; ++first) {
 		if (pred(*first)) return true;
 	}
@@ -241,8 +250,10 @@ constexpr bool any_of(Iterator first, Iterator last, Predicate pred) {
  * @param pred 谓词函数
  * @return 如果没有元素满足谓词则返回true，否则返回false
  */
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr bool none_of(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	for (; first != last; ++first) {
 		if (pred(*first)) return false;
 	}
@@ -259,15 +270,17 @@ constexpr bool none_of(Iterator first, Iterator last, Predicate pred) {
 
 /**
  * @brief 查找第一对满足条件的相邻元素
- * @tparam Iterator 迭代器类型，需要满足前向迭代器要求
+ * @tparam Iterator 迭代器类型
  * @tparam BinaryPredicate 二元谓词函数类型
  * @param first 范围的起始迭代器
  * @param last 范围的终止迭代器
  * @param binary_pred 二元谓词函数
  * @return 指向第一对相邻元素中第一个元素的迭代器，或last如果未找到
  */
-template <typename Iterator, typename BinaryPredicate, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename BinaryPredicate>
 constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate binary_pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	if (first == last) return last;
 	Iterator next = first;
 	while (++next != last) {
@@ -284,7 +297,7 @@ constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate 
  * @param last 范围的终止迭代器
  * @return 指向第一对相等相邻元素中第一个元素的迭代器，或last如果未找到
  */
-template <typename Iterator, enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 constexpr Iterator adjacent_find(Iterator first, Iterator last) {
 	return _NEFORCE adjacent_find(first, last, _NEFORCE equal_to<iter_value_t<Iterator>>());
 }
@@ -327,9 +340,10 @@ constexpr iter_difference_t<Iterator> count_if(Iterator first, Iterator last, co
  * @param pred 谓词函数
  * @return 满足谓词的元素数量
  */
-template <typename Iterator, typename Predicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr iter_difference_t<Iterator> count_if(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	iter_difference_t<Iterator> n = 0;
 	for (; first != last; ++first) {
 		if (pred(*first)) ++n;
@@ -370,6 +384,8 @@ constexpr iter_difference_t<Iterator> count(Iterator first, Iterator last, const
  */
 template <typename Iterator, typename T>
 NEFORCE_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T& value) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	while (first != last && *first != value) ++first;
 	return first;
 }
@@ -383,9 +399,10 @@ NEFORCE_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T
  * @param pred 谓词函数
  * @return 指向第一个满足pred的元素的迭代器，或last如果未找到
  */
-template <typename Iterator, typename Predicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	while (first != last && !pred(*first)) ++first;
 	return first;
 }
@@ -402,6 +419,8 @@ constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred) {
 template <typename Iterator, typename Predicate,
 	enable_if_t<is_ranges_input_iter_v<Iterator>, int> = 0>
 constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_input_iter_v<Iterator>, "Iterator must be input_iterator");
+
 	while (first != last && pred(*first)) ++first;
 	return first;
 }
@@ -426,12 +445,15 @@ constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred) {
  * @param binary_pred 二元谓词函数
  * @return 指向子序列第一次出现位置的迭代器，或last1如果未找到
  */
-template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
-constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2,
+template <typename Iterator1, typename Iterator2, typename BinaryPredicate>
+constexpr Iterator1 search(
+    Iterator1 first1, Iterator1 last1, Iterator2 first2,
 	Iterator2 last2, BinaryPredicate binary_pred) {
-	iter_difference_t<Iterator1> d1 = _NEFORCE distance(first1, last1);
-	iter_difference_t<Iterator2> d2 = _NEFORCE distance(first2, last2);
+
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+
+	const auto d1 = _NEFORCE distance(first1, last1);
+	const auto d2 = _NEFORCE distance(first2, last2);
 	if (d1 < d2) return last1;
 
 	Iterator1 current1 = first1;
@@ -477,8 +499,10 @@ constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, 
  * @param value 要查找的值
  * @return 指向连续n个value的子序列起始位置的迭代器，或last如果未找到
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T& value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	first = _NEFORCE find(first, last, value);
 	while (first != last) {
 		size_t n = count - 1;
@@ -507,16 +531,20 @@ constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, c
  * @param binary_pred 二元谓词函数
  * @return 指向连续n个满足谓词的子序列起始位置的迭代器，或last如果未找到
  */
-template <typename Iterator, typename T, typename BinaryPredicate, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T, typename BinaryPredicate>
 constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T& value, BinaryPredicate binary_pred) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	while (first != last) {
 		if (binary_pred(*first, value)) break;
 		++first;
 	}
+
 	while (first != last) {
 		size_t n = count - 1;
 		Iterator i = first;
 		++i;
+
 		while (i != last && n != 0 && binary_pred(*i, value)) {
 			++i;
 			--n;
@@ -535,9 +563,11 @@ constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, c
 #ifndef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
-template <typename Iterator1, typename Iterator2,
-	enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
-constexpr Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, Iterator1>
+__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
 	using reviter1 = _NEFORCE reverse_iterator<Iterator1>;
 	using reviter2 = _NEFORCE reverse_iterator<Iterator2>;
 	reviter1 rlast1(first1);
@@ -548,9 +578,11 @@ constexpr Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 
 	_NEFORCE advance(result, -distance(first2, last2));
 	return result;
 }
-template <typename Iterator1, typename Iterator2,
-	enable_if_t<!(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>), int> = 0>
-constexpr Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+
+template <typename Iterator1, typename Iterator2>
+constexpr
+enable_if_t<!(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>), Iterator1>
+__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
 	Iterator1 result = last1;
 	while (true) {
 		Iterator1 new_result = _NEFORCE search(first1, last1, first2, last2);
@@ -560,6 +592,7 @@ constexpr Iterator1 __find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 
 		++first1;
 	}
 }
+
 NEFORCE_END_INNER__
 /// @endcond
 #endif // NEFORCE_STANDARD_17
@@ -574,9 +607,10 @@ NEFORCE_END_INNER__
  * @param last2 子序列终止迭代器
  * @return 指向子序列最后一次出现位置的迭代器，或last1如果未找到
  */
-template <typename Iterator1, typename Iterator2,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2>
 constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+
 	if (first2 == last2) return last1;
 #ifdef NEFORCE_STANDARD_17
 	if constexpr (is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>) {
@@ -619,10 +653,10 @@ constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2
  * @param comp 二元谓词函数
  * @return 指向第一个出现在集合中的元素的迭代器，或last1如果未找到
  */
-template <typename Iterator1, typename Iterator2, typename BinaryPredicate,
-	enable_if_t<is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, int> = 0>
-constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1,
-	Iterator2 first2, Iterator2 last2, BinaryPredicate comp) {
+template <typename Iterator1, typename Iterator2, typename BinaryPredicate>
+constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate comp) {
+    static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
+
 	for (; first1 != last1; ++first1) {
 		for (Iterator2 iter = first2; iter != last2; ++iter) {
 			if (comp(*first1, *iter)) return first1;

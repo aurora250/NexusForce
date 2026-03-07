@@ -6,7 +6,7 @@ endif()
 
 find_program(DOT_EXECUTABLE dot
         HINTS
-        "D:/Graphviz/bin"
+        "${CONFIG_DOT_EXECUTABLE}/bin"
         "C:/Program Files/Graphviz/bin"
         "C:/Program Files (x86)/Graphviz/bin"
         "/usr/bin"

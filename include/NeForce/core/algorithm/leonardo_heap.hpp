@@ -30,8 +30,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * 调整指定位置的莱昂纳多堆，确保堆性质得以维护。
  * 如果父节点小于子节点，则进行交换并递归调整。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, vector<int>& levels) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
 	size_t child_heap1;
 	size_t child_heap2;
 	while (level_index > 0) {
@@ -84,8 +86,10 @@ void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, 
  *
  * 将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 void push_leonardo_heap(Iterator first, Iterator last) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
 	if (first == last) return;
 	const size_t size = _NEFORCE distance(first, last);
 	vector<int> levels = { 1 };
@@ -127,8 +131,10 @@ void push_leonardo_heap(Iterator first, Iterator last) {
  *
  * 移除堆顶元素，并重新调整堆。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 void pop_leonardo_heap(Iterator first, Iterator last) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
 	if (first == last) return;
 	const size_t size = _NEFORCE distance(first, last);
 	vector<int> levels = { 1 };
@@ -168,8 +174,10 @@ void pop_leonardo_heap(Iterator first, Iterator last) {
  *
  * 实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 void sort_leonardo_heap(Iterator first, Iterator last) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
 	if (first == last) return;
 	const size_t size = _NEFORCE distance(first, last);
 	vector<int> levels = { 1 };
@@ -212,8 +220,10 @@ void sort_leonardo_heap(Iterator first, Iterator last) {
  *
  * 将指定范围内的元素构建成一个莱昂纳多堆。
  */
-template <typename Iterator, enable_if_t<is_ranges_rnd_iter_v<Iterator>, int> = 0>
+template <typename Iterator>
 void make_leonardo_heap(Iterator first, Iterator last) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
 	if (first == last) return;
 	const size_t size = _NEFORCE distance(first, last);
 	vector<int> levels = { 1 };

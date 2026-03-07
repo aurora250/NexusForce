@@ -156,8 +156,8 @@ string http_client::url_encode(string_view str) {
     string result;
     result.reserve(str.size() * 3);
 
-    for (unsigned char c : str) {
-        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+    for (const auto c : str) {
+        if (is_alpha_or_digit(c) || c == '-' || c == '_' || c == '.' || c == '~') {
             result += c;
         } else if (c == ' ') {
             result += '+';

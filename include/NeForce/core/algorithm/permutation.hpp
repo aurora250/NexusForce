@@ -36,11 +36,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * 2. 否则，对于第一个范围中的每个元素，统计在两个范围中出现的次数
  * 3. 如果任何元素的计数不同，返回false
  */
-template <typename Iterator1, typename Iterator2, typename BinaryPred,
-	enable_if_t<is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename BinaryPred>
 constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPred pred) {
-	iter_difference_t<Iterator1> len1 = _NEFORCE distance(first1, last1);
-	iter_difference_t<Iterator2> len2 = _NEFORCE distance(first2, last2);
+    static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, "Iterator must be bidirectional_iterator");
+
+	const auto len1 = _NEFORCE distance(first1, last1);
+	const auto len2 = _NEFORCE distance(first2, last2);
 	if (len1 != len2) return false;
 
 	for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
@@ -106,8 +107,10 @@ constexpr bool is_permutation(Iterator1 first1, Iterator1 last1, Iterator2 first
  *
  * 如果已经是最后一个排列（完全降序），则变换为第一个排列（完全升序）并返回false。
  */
-template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 constexpr bool next_permutation(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be bidirectional_iterator");
+
 	if (first == last) return false;
 	Iterator i = first;
 	++i;
@@ -161,8 +164,10 @@ constexpr bool next_permutation(Iterator first, Iterator last) {
  *
  * 如果已经是第一个排列（完全升序），则变换为最后一个排列（完全降序）并返回false。
  */
-template <typename Iterator, typename Compare, enable_if_t<is_ranges_bid_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Compare>
 constexpr bool prev_permutation(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be bidirectional_iterator");
+
 	if (first == last) return false;
 	Iterator i = first;
 	++i;

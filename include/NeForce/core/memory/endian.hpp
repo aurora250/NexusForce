@@ -18,9 +18,10 @@ public:
 
     static constexpr bool is_big_endian = !is_little_endian;
 
-    static bool is_little_endian_runtime() noexcept {
+    static NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE
+    bool is_little_endian_runtime() noexcept {
         constexpr uint16_t test = 0x0001;
-        return *reinterpret_cast<const uint8_t*>(&test) == 0x01;
+        return *reinterpret_cast<const byte_t*>(&test) == 0x01;
     }
 
     static constexpr uint16_t byteswap16(uint16_t value) noexcept {
@@ -104,19 +105,19 @@ public:
         return value;
     }
 
-    static uint16_t read_le16(const uint8_t* data) noexcept {
+    static uint16_t read_le16(const byte_t* data) noexcept {
         return static_cast<uint16_t>(data[0]) |
                (static_cast<uint16_t>(data[1]) << 8);
     }
 
-    static uint32_t read_le32(const uint8_t* data) noexcept {
+    static uint32_t read_le32(const byte_t* data) noexcept {
         return static_cast<uint32_t>(data[0]) |
                (static_cast<uint32_t>(data[1]) << 8) |
                (static_cast<uint32_t>(data[2]) << 16) |
                (static_cast<uint32_t>(data[3]) << 24);
     }
 
-    static uint64_t read_le64(const uint8_t* data) noexcept {
+    static uint64_t read_le64(const byte_t* data) noexcept {
         uint64_t value = 0;
         for (int i = 0; i < 8; ++i) {
             value |= static_cast<uint64_t>(data[i]) << (i * 8);
@@ -124,18 +125,18 @@ public:
         return value;
     }
 
-    static uint16_t read_be16(const uint8_t* data) noexcept {
+    static uint16_t read_be16(const byte_t* data) noexcept {
         return (static_cast<uint16_t>(data[0]) << 8) | static_cast<uint16_t>(data[1]);
     }
 
-    static uint32_t read_be32(const uint8_t* data) noexcept {
+    static uint32_t read_be32(const byte_t* data) noexcept {
         return (static_cast<uint32_t>(data[0]) << 24) |
                (static_cast<uint32_t>(data[1]) << 16) |
                (static_cast<uint32_t>(data[2]) << 8) |
                static_cast<uint32_t>(data[3]);
     }
 
-    static uint64_t read_be64(const uint8_t* data) noexcept {
+    static uint64_t read_be64(const byte_t* data) noexcept {
         uint64_t value = 0;
         for (int i = 0; i < 8; ++i) {
             value |= static_cast<uint64_t>(data[i]) << ((7 - i) * 8);
@@ -143,37 +144,37 @@ public:
         return value;
     }
 
-    static void write_le16(uint8_t* dest, uint16_t value) noexcept {
-        dest[0] = static_cast<uint8_t>(value & 0xFF);
-        dest[1] = static_cast<uint8_t>((value >> 8) & 0xFF);
+    static void write_le16(byte_t* dest, uint16_t value) noexcept {
+        dest[0] = static_cast<byte_t>(value & 0xFF);
+        dest[1] = static_cast<byte_t>((value >> 8) & 0xFF);
     }
 
-    static void write_le32(uint8_t* dest, uint32_t value) noexcept {
+    static void write_le32(byte_t* dest, uint32_t value) noexcept {
         for (int i = 0; i < 4; ++i) {
-            dest[i] = static_cast<uint8_t>((value >> (i * 8)) & 0xFF);
+            dest[i] = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         }
     }
 
-    static void write_le64(uint8_t* dest, uint64_t value) noexcept {
+    static void write_le64(byte_t* dest, uint64_t value) noexcept {
         for (int i = 0; i < 8; ++i) {
-            dest[i] = static_cast<uint8_t>((value >> (i * 8)) & 0xFF);
+            dest[i] = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         }
     }
 
-    static void write_be16(uint8_t* dest, uint16_t value) noexcept {
-        dest[0] = static_cast<uint8_t>((value >> 8) & 0xFF);
-        dest[1] = static_cast<uint8_t>(value & 0xFF);
+    static void write_be16(byte_t* dest, uint16_t value) noexcept {
+        dest[0] = static_cast<byte_t>((value >> 8) & 0xFF);
+        dest[1] = static_cast<byte_t>(value & 0xFF);
     }
 
-    static void write_be32(uint8_t* dest, uint32_t value) noexcept {
+    static void write_be32(byte_t* dest, uint32_t value) noexcept {
         for (int i = 0; i < 4; ++i) {
-            dest[i] = static_cast<uint8_t>((value >> ((3 - i) * 8)) & 0xFF);
+            dest[i] = static_cast<byte_t>((value >> ((3 - i) * 8)) & 0xFF);
         }
     }
 
-    static void write_be64(uint8_t* dest, uint64_t value) noexcept {
+    static void write_be64(byte_t* dest, uint64_t value) noexcept {
         for (int i = 0; i < 8; ++i) {
-            dest[i] = static_cast<uint8_t>((value >> ((7 - i) * 8)) & 0xFF);
+            dest[i] = static_cast<byte_t>((value >> ((7 - i) * 8)) & 0xFF);
         }
     }
 };

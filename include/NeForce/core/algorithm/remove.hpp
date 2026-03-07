@@ -35,9 +35,10 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 如果 pred(*it) 返回 true，则该元素将被排除。
  */
-template <typename Iterator1, typename Iterator2, typename T,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename T>
 constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 result, const T& value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+
 	for (; first != last; ++first) {
 		if (*first != value) {
 			*result = *first;
@@ -61,9 +62,10 @@ constexpr Iterator2 remove_copy(Iterator1 first, Iterator1 last, Iterator2 resul
  * 将范围 [first, last) 中不满足谓词 pred 的所有元素复制到以 result 开始的范围。
  * 原范围保持不变。
  */
-template <typename Iterator1, typename Iterator2, typename Predicate,
-	enable_if_t<is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
+template <typename Iterator1, typename Iterator2, typename Predicate>
 constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred) {
+    static_assert(is_ranges_fwd_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, "Iterator must be forward_iterator");
+
 	for (; first != last; ++first) {
 		if (!pred(*first)) {
 			*result = *first;
@@ -88,8 +90,10 @@ constexpr Iterator2 remove_copy_if(Iterator1 first, Iterator1 last, Iterator2 re
  *
  * @note 算法保持剩余元素的相对顺序
  */
-template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename T>
 constexpr Iterator remove(Iterator first, Iterator last, const T& value) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	first = _NEFORCE find(first, last, value);
 	Iterator next = first;
 	return first == last ? first : _NEFORCE remove_copy(++next, last, first, value);
@@ -110,8 +114,10 @@ constexpr Iterator remove(Iterator first, Iterator last, const T& value) {
  *
  * @note 算法保持剩余元素的相对顺序
  */
-template <typename Iterator, typename Predicate, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
+template <typename Iterator, typename Predicate>
 constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
+    static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterator must be forward_iterator");
+
 	first = _NEFORCE find_if(first, last, pred);
 	Iterator next = first;
 	return first == last ? first : _NEFORCE remove_copy_if(++next, last, first, pred);
@@ -133,9 +139,8 @@ constexpr Iterator remove_if(Iterator first, Iterator last, Predicate pred) {
  */
 template <typename Container, typename U>
 constexpr size_t erase(Container& cont, const U& value) {
-	using T = decltype(*cont.begin());
 	static_assert(
-		declval<T>().operator =(declval<U>()),
+		declval<decltype(*cont.begin())>().operator ==(declval<U>()),
 		"U must be comparable to the value type of Container");
 
 	const auto old_size = cont.size();
