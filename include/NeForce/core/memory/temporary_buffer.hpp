@@ -78,7 +78,7 @@ private:
      * 对于平凡可复制类型，不需要初始化缓冲区。
      */
     template <typename U = value_type, enable_if_t<is_trivially_copy_assignable_v<U>, int> = 0>
-    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) noexcept {}
+    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) noexcept {}
 
     /**
      * @brief 初始化缓冲区（非平凡可复制类型）
@@ -89,7 +89,7 @@ private:
      * 对于非平凡可复制类型，使用未初始化填充算法初始化缓冲区。
      */
     template <typename U = value_type, enable_if_t<!is_trivially_copy_assignable_v<U>, int> = 0>
-    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) {
+    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& val) {
         _NEFORCE uninitialized_fill_n(buffer_, len_, val);
     }
 

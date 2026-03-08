@@ -256,7 +256,7 @@ public:
     }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Sequence>
 queue(Sequence) -> queue<typename Sequence::value_type, Sequence>;
 #endif

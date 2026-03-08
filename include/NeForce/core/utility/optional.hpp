@@ -1310,7 +1310,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename T>
 optional(T) -> optional<T>;
 #endif

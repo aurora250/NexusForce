@@ -624,7 +624,7 @@ public:
 		base_type::swap(t.get_rest());
 	}
 };
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename... Types>
 tuple(Types...) -> tuple<Types...>;
 

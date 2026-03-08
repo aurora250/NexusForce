@@ -548,7 +548,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename HashFcn = hash<iter_map_key_t<Iterator>>,
     typename Compare = equal_to<iter_map_key_t<Iterator>>, typename Alloc>
 unordered_multimap(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())

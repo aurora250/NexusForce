@@ -238,12 +238,16 @@ class weak_ptr;
 NEFORCE_BEGIN_INNER__
 
 template <typename T>
+void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type) noexcept {
+    if (ptr) static_cast<enable_shared_from_this<T>*>(ptr)->owner_ = owner;
+}
+
+template <typename T>
+void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexcept {}
+
+template <typename T>
 void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
-    if constexpr (is_base_of_v<enable_shared_from_this<T>, T>) {
-        if (ptr) {
-            static_cast<enable_shared_from_this<T>*>(ptr)->owner_ = owner;
-        }
-    }
+    _INNER __setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from_this<T>, T>{});
 }
 
 template <typename T>
@@ -677,6 +681,9 @@ template <typename T>
 struct enable_shared_from_this {
 private:
     mutable _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+
+    template <typename U>
+    friend void _INNER __setup_enable_shared_from_impl(U* ptr, _INNER __smart_ptr_counter* owner, true_type) noexcept;
 
     template <typename U>
     friend void _INNER __setup_enable_shared_from(U*, _INNER __smart_ptr_counter*) noexcept;

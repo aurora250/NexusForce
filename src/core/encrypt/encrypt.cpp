@@ -163,7 +163,7 @@ namespace {
         }
         return result;
     }
-    constexpr void AES256_key_expansion(const byte_t* key, byte_t* expanded_key) {
+    NEFORCE_CONSTEXPR20 void AES256_key_expansion(const byte_t* key, byte_t* expanded_key) {
         memory_copy(expanded_key, key, 32);
         for (int i = 8; i < 60; ++i) {
             byte_t temp[4];

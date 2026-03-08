@@ -271,7 +271,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Compare, typename Sequence>
 priority_queue(Compare, Sequence) -> priority_queue<typename Sequence::value_type, Sequence, Compare>;
 

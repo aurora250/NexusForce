@@ -1100,7 +1100,7 @@ public:
     }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename Alloc>
 list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_value_t<Iterator>, Alloc>;
 #endif

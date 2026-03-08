@@ -4,7 +4,6 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/NexusForceCompilerOptions.cmake)
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/device.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
@@ -271,6 +270,17 @@ if(NEXUSFORCE_ENABLE_OPENSSL)
     endif()
 else()
     message(STATUS "OpenSSL support disabled")
+endif()
+
+if(NEXUSFORCE_ENABLE_PUGIXML)
+    find_package(pugixml REQUIRED)
+    if(TARGET pugixml::pugixml)
+        target_link_libraries(NexusForce PUBLIC pugixml::pugixml)
+        target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_PUGIXML)
+        message(STATUS "pugixml linked successfully")
+    endif()
+else()
+    message(STATUS "pugixml support disabled")
 endif()
 
 

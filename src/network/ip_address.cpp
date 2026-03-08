@@ -6,6 +6,131 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    struct data_visitor {
+        template <typename T>
+        enable_if_t<!is_same_v<T, none_t>, const ::sockaddr*>
+        operator ()(const T& value) noexcept {
+            return reinterpret_cast<const ::sockaddr*>(&value);
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, none_t>, const ::sockaddr*>
+        operator ()(const T&) noexcept {
+            return nullptr;
+        }
+    };
+
+    struct size_visitor {
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in>, int>
+        operator ()(const T&) noexcept {
+            return sizeof(::sockaddr_in);
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, int>
+        operator ()(const T&) noexcept {
+            return sizeof(::sockaddr_in6);
+        }
+        template <typename T>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int>
+        operator ()(const T&) noexcept {
+            return 0;
+        }
+    };
+
+    struct family_visitor {
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in>, int>
+        operator ()(const T& value) noexcept {
+            return value.sin_family;
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, int>
+        operator ()(const T& value) noexcept {
+            return value.sin6_family;
+        }
+        template <typename T>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int>
+        operator ()(const T&) noexcept {
+            return AF_UNSPEC;
+        }
+    };
+
+    struct port_visitor {
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in>, uint16_t>
+        operator ()(const T& value) noexcept {
+            return endian::network_to_host<uint16_t>(value.sin_port);
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, uint16_t>
+        operator ()(const T& value) noexcept {
+            return endian::network_to_host<uint16_t>(value.sin6_port);
+        }
+        template <typename T>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, uint16_t>
+        operator ()(const T&) noexcept {
+            return 0;
+        }
+    };
+
+    struct to_string_visitor {
+        char buffer[INET6_ADDRSTRLEN];
+
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in>, string>
+        operator ()(const T& value) noexcept {
+            if (::inet_ntop(AF_INET, &value.sin_addr, buffer, sizeof(buffer))) {
+                return
+                    string(buffer) + ":" +
+                    _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin_port));
+            }
+            return {};
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, string>
+        operator ()(const T& value) noexcept {
+            if (::inet_ntop(AF_INET6, &value.sin6_addr, buffer, sizeof(buffer))) {
+                return
+                    "["_s + string(buffer) + "]:" +
+                    _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin6_port));
+            }
+            return {};
+        }
+        template <typename T>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, string>
+        operator ()(const T&) noexcept {
+            return {};
+        }
+    };
+
+    struct equal_visitor {
+        const ip_address& other;
+
+        equal_visitor(const ip_address& other) noexcept
+        : other(other) {}
+
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in>, bool>
+        operator ()(const T& value) noexcept {
+            const auto& a2 = other.address().get<::sockaddr_in>();
+            return _NEFORCE memory_compare(&value.sin_addr, &a2.sin_addr, sizeof(::in_addr)) == 0;
+        }
+        template <typename T>
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, bool>
+        operator ()(const T& value) noexcept {
+            const auto& a2 = other.address().get<::sockaddr_in6>();
+            return _NEFORCE memory_compare(&value.sin6_addr, &a2.sin6_addr, sizeof(::in6_addr)) == 0;
+        }
+        template <typename T>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, bool>
+        operator ()(const T&) noexcept {
+            return false;
+        }
+    };
+}
+
+
 ip_address ip_address::any(const uint16_t port, const int family) noexcept {
     ip_address result;
     if (family == AF_INET6) {
@@ -43,74 +168,27 @@ ip_address ip_address::loopback(const uint16_t port, const int family) noexcept 
 }
 
 const ::sockaddr* ip_address::data() const noexcept {
-    return addr_.visit([](const auto& addr) -> const ::sockaddr* {
-        if constexpr (!is_same_v<decay_t<decltype(addr)>, none_t>) {
-            return reinterpret_cast<const ::sockaddr*>(&addr);
-        }
-        return nullptr;
-    });
+    return addr_.visit(data_visitor{});
 }
 
 ::sockaddr* ip_address::data() noexcept {
-    return addr_.visit([](auto& addr) -> ::sockaddr* {
-        if constexpr (!is_same_v<decay_t<decltype(addr)>, none_t>) {
-            return reinterpret_cast<::sockaddr*>(&addr);
-        }
-        return nullptr;
-    });
+    return const_cast<::sockaddr*>(addr_.visit(data_visitor{}));
 }
 
 int ip_address::size() const noexcept {
-    return addr_.visit([](const auto& addr) -> int {
-        if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
-            return sizeof(::sockaddr_in);
-        } else if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in6>) {
-            return sizeof(::sockaddr_in6);
-        }
-        return 0;
-    });
+    return addr_.visit(size_visitor{});
 }
 
 int ip_address::family() const noexcept {
-    return addr_.visit([](const auto& addr) -> int {
-        if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
-            return addr.sin_family;
-        } else if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in6>) {
-            return addr.sin6_family;
-        }
-        return AF_UNSPEC;
-    });
+    return addr_.visit(family_visitor{});
 }
 
 uint16_t ip_address::port() const noexcept {
-    return addr_.visit([](const auto& addr) -> uint16_t {
-        if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
-            return endian::network_to_host<uint16_t>(addr.sin_port);
-        } else if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in6>) {
-            return endian::network_to_host<uint16_t>(addr.sin6_port);
-        }
-        return 0;
-    });
+    return addr_.visit(port_visitor{});
 }
 
 string ip_address::to_string() const {
-    char buffer[INET6_ADDRSTRLEN];
-
-    return addr_.visit([&](const auto& addr) -> string {
-        using T = decay_t<decltype(addr)>;
-        if constexpr (is_same_v<T, ::sockaddr_in>) {
-            if (::inet_ntop(AF_INET, &addr.sin_addr, buffer, sizeof(buffer))) {
-                return string(buffer) + ":" +
-                    _NEFORCE to_string(endian::network_to_host<uint16_t>(addr.sin_port));
-            }
-        } else if constexpr (is_same_v<T, ::sockaddr_in6>) {
-            if (::inet_ntop(AF_INET6, &addr.sin6_addr, buffer, sizeof(buffer))) {
-                return "["_s + string(buffer) + "]:" +
-                    _NEFORCE to_string(endian::network_to_host<uint16_t>(addr.sin6_port));
-            }
-        }
-        return {};
-    });
+    return addr_.visit(to_string_visitor{});
 }
 
 optional<ip_address> ip_address::parse(const string& host, const uint16_t port) noexcept {
@@ -146,17 +224,7 @@ bool ip_address::operator ==(const ip_address& other) const noexcept {
         return false;
     }
 
-    return addr_.visit([&](const auto& a1) -> bool {
-        using T = decay_t<decltype(a1)>;
-        if constexpr (is_same_v<T, ::sockaddr_in>) {
-            const auto& a2 = other.addr_.get<::sockaddr_in>();
-            return _NEFORCE memory_compare(&a1.sin_addr, &a2.sin_addr, sizeof(::in_addr)) == 0;
-        } else if constexpr (is_same_v<T, ::sockaddr_in6>) {
-            const auto& a2 = other.addr_.get<::sockaddr_in6>();
-            return _NEFORCE memory_compare(&a1.sin6_addr, &a2.sin6_addr, sizeof(::in6_addr)) == 0;
-        }
-        return false;
-    });
+    return addr_.visit(equal_visitor{other});
 }
 
 NEFORCE_END_NAMESPACE__

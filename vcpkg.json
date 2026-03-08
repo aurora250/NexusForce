@@ -18,7 +18,8 @@
     {
       "name": "pcre2",
       "features": ["jit"]
-    }
+    },
+    "pugixml"
   ],
   "features": {
     "postgresql": {
@@ -52,12 +53,16 @@
     "pcre2": {
       "description": "pcre2 support",
       "dependencies": ["pcre2"]
+    },
+    "pugixml": {
+      "description": "pugixml support",
+      "dependencies": ["pugixml"]
     }
   },
   "default-features": [
     "postgresql", "mysql", "sqlite3", "redis",
     "zlib", "lz4",
     "openssl",
-    "pcre2"
+    "pcre2", "pugixml"
   ]
 }

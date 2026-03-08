@@ -481,7 +481,7 @@ public:
     }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename Compare = less<iter_value_t<Iterator>>,
 	typename Alloc = allocator<iter_value_t<Iterator>>>
 multiset(Iterator, Iterator, Compare = Compare(), Alloc = Alloc())

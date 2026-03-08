@@ -553,7 +553,7 @@ public:
 	}
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename Compare, typename Alloc
 	= allocator<pair<const iter_map_key_t<Iterator>, iter_map_value_t<Iterator>>>>
 multimap(Iterator, Iterator, Compare = Compare(), Alloc = Alloc()) ->

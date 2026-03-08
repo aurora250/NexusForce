@@ -268,7 +268,8 @@ http_response http_router::handle_request(http_request& request) {
             }
         } else {
             bool path_exists = false;
-            for (const auto& [method, entries] : routes_) {
+            for (const auto& route : routes_) {
+                const auto& entries = route.second;
                 for (const auto& entry : entries) {
                     if (entry.is_regex) {
                         if (entry.regex_pattern->match(request.path)) {
@@ -309,7 +310,8 @@ http_response http_router::handle_request(http_request& request) {
 
 size_t http_router::route_count() const noexcept {
     size_t count = 0;
-    for (const auto& [method, entries] : routes_) {
+    for (const auto& route : routes_) {
+        const auto& entries = route.second;
         count += entries.size();
     }
     return count;

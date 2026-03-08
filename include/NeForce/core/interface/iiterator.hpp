@@ -27,7 +27,6 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Iterator>
 struct iiterator {
-public:
 private:
     constexpr Iterator& derived() noexcept {
         return static_cast<Iterator&>(*this);
@@ -97,7 +96,8 @@ public:
      * @param n 要前进的距离
      * @return 前进后的迭代器引用
      */
-    constexpr Iterator& operator +=(auto&& n) noexcept {
+    template <typename Distance>
+    constexpr Iterator& operator +=(Distance n) noexcept {
         derived().advance(n);
         return derived();
     }
@@ -107,7 +107,8 @@ public:
      * @param n 要前进的距离
      * @return 前进后的新迭代器
      */
-    NEFORCE_NODISCARD constexpr Iterator operator +(auto&& n) const noexcept {
+    template <typename Distance>
+    NEFORCE_NODISCARD constexpr Iterator operator +(Distance n) const noexcept {
         Iterator temp = derived();
         temp.advance(n);
         return temp;
@@ -119,7 +120,8 @@ public:
      * @param it 迭代器
      * @return 前进后的新迭代器
      */
-    NEFORCE_NODISCARD friend constexpr Iterator operator +(auto&& n, const iiterator& it) noexcept {
+    template <typename Distance>
+    NEFORCE_NODISCARD friend constexpr Iterator operator +(Distance n, const iiterator& it) noexcept {
         return it.derived() + n;
     }
 
@@ -128,7 +130,8 @@ public:
      * @param n 要后退的距离
      * @return 后退后的迭代器引用
      */
-    constexpr Iterator& operator -=(auto&& n) noexcept {
+    template <typename Distance>
+    constexpr Iterator& operator -=(Distance n) noexcept {
         derived().advance(-n);
         return derived();
     }

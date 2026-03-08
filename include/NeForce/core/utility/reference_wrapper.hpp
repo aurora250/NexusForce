@@ -120,7 +120,7 @@ public:
     }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename T>
 reference_wrapper(T&) -> reference_wrapper<T>;
 #endif

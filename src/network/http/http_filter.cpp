@@ -125,8 +125,10 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
 
     if (log_headers && !request.headers.empty()) {
         log_msg += "\n  Headers:";
-        for (const auto& [key, value] : request.headers) {
-            log_msg += "\n" + key + ": " + value;
+        for (const auto& pair : request.headers) {
+            const string key = pair.first;
+            const string value = pair.second;
+            log_msg += "\n" + move(key) + ": " + move(value);
         }
     }
 
@@ -157,7 +159,9 @@ void logging_filter::post_filter(http_request& request, http_response& response)
 
     if (log_headers && !response.headers.empty()) {
         log_msg += "\nHeaders:";
-        for (const auto& [key, value] : response.headers) {
+        for (const auto& pair : response.headers) {
+            const string key = pair.first;
+            const string value = pair.second;
             log_msg += "\n" + key + ": " + value;
         }
     }
@@ -194,9 +198,11 @@ static_file_filter::static_file_filter(string root_path)
 }
 
 optional<HTTP_CONTENT> static_file_filter::get_mime_type(const string& path) const {
-    for (const auto& [ext, type] : mime_types_) {
+    for (const auto& mime : mime_types_) {
+        const auto& ext = mime.first;
+        auto type = mime.second;
         if (path.ends_with(ext.view())) {
-            return optional<HTTP_CONTENT>{type};
+            return optional<HTTP_CONTENT>{move(type)};
         }
     }
     return none;
@@ -286,7 +292,7 @@ bool rate_limit_filter::pre_filter(http_request& request, http_response& respons
         return true;
     }
 
-    lock lock(mutex_);
+    lock<mutex> lk(mutex_);
 
     const auto now = datetime::now();
     auto& info = client_requests_[client_ip];
@@ -316,7 +322,7 @@ bool rate_limit_filter::pre_filter(http_request& request, http_response& respons
 }
 
 void rate_limit_filter::cleanup_old_entries() {
-    lock lock(mutex_);
+    lock<mutex> lk(mutex_);
 
     const auto now = datetime::now();
     for (auto it = client_requests_.begin(); it != client_requests_.end();) {

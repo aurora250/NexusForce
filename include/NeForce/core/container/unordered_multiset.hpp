@@ -527,7 +527,7 @@ public:
     }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename HashFcn = hash<iter_value_t<Iterator>>, typename Compare
     = equal_to<iter_value_t<Iterator>>, typename Alloc = allocator<iter_value_t<Iterator>>>
 unordered_multiset(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())

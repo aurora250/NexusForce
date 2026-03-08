@@ -501,7 +501,7 @@ public:
 	}
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 /// @cond
 NEFORCE_BEGIN_INNER__
 

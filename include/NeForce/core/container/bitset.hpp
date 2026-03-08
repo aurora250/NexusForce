@@ -97,38 +97,21 @@ private:
 
     array<block_type, block_count> blocks{};  ///< 存储单元的数组
 
-    /**
-     * @brief 获取最后一个存储单元的掩码
-     * @return 掩码值，用于清除超出N的位
-     */
+private:
     static constexpr block_type last_block_mask() noexcept {
         const size_t excess = block_count * bits_per_block - N;
         if (excess == 0) return static_cast<block_type>(~0ULL);
         return (static_cast<block_type>(1ULL) << (bits_per_block - excess)) - 1;
     }
 
-    /**
-     * @brief 检查位置是否有效
-     * @param pos 要检查的位置
-     */
     NEFORCE_ALWAYS_INLINE constexpr void check_range(const size_t pos) const noexcept {
         NEFORCE_DEBUG_VERIFY(pos < N, "bitset position out of range");
     }
 
-    /**
-     * @brief 计算位置所在的存储单元索引
-     * @param pos 位位置
-     * @return 存储单元索引
-     */
     NEFORCE_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept {
         return pos / bits_per_block;
     }
 
-    /**
-     * @brief 计算位置在存储单元内的位偏移
-     * @param pos 位位置
-     * @return 位偏移
-     */
     NEFORCE_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept {
         return pos % bits_per_block;
     }

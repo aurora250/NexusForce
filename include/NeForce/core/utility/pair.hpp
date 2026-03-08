@@ -428,7 +428,7 @@ struct pair : icommon<pair<T1, T2>> {
 	}
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename T1, typename T2>
 pair(T1, T2) -> pair<T1, T2>;
 #endif

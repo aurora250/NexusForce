@@ -21,14 +21,14 @@ namespace {
     constexpr int32_t SPECIAL = 32;
     constexpr int32_t SMALL = 64;
 
-    constexpr unsigned int do_div(unsigned int* n, const unsigned int base) {
-        const unsigned int remainder = *n % base;
+    constexpr uint32_t do_div(uint32_t* n, const uint32_t base) {
+        const uint32_t remainder = *n % base;
         *n = *n / base;
         return remainder;
     }
 
-    constexpr char* number(
-        char * str, const long long num,
+    NEFORCE_CONSTEXPR20 char* number(
+        char* str, const int64_t num,
         const int base, int size,
         int precision, int type) {
 
@@ -101,7 +101,7 @@ namespace {
         return str;
     }
 
-    constexpr char* float_number(
+    NEFORCE_CONSTEXPR20 char* float_number(
         char* str, double num,
         const int field_width, int precision,
         const int flags) {

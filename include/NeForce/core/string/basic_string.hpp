@@ -2730,7 +2730,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename Alloc = allocator<iter_value_t<Iterator>>>
 basic_string(Iterator, Iterator, Alloc = Alloc())
 -> basic_string<iter_value_t<Iterator>, char_traits<iter_value_t<Iterator>>, Alloc>;

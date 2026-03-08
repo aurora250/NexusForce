@@ -18,8 +18,11 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API ip_address : public istringify<ip_address> {
+public:
+    using address_type = variant<none_t, ::sockaddr_in, ::sockaddr_in6>;
+
 private:
-    variant<none_t, ::sockaddr_in, ::sockaddr_in6> addr_;
+    address_type addr_;
 
 public:
     ip_address() noexcept = default;
@@ -54,6 +57,10 @@ public:
     NEFORCE_NODISCARD const ::sockaddr* data() const noexcept;
     NEFORCE_NODISCARD ::sockaddr* data() noexcept;
     NEFORCE_NODISCARD int size() const noexcept;
+
+    NEFORCE_NODISCARD const address_type& address() const noexcept {
+        return addr_;
+    }
 
     NEFORCE_NODISCARD int family() const noexcept;
     NEFORCE_NODISCARD uint16_t port() const noexcept;

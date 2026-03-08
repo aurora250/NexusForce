@@ -525,6 +525,7 @@ void test_timer(){
 }
 
 void test_vthread() {
+#ifdef NEFORCE_STANDARD_20
     virtual_thread::initialize(4);
 
     auto vt1 = virtual_thread::start([] {
@@ -550,6 +551,7 @@ void test_vthread() {
 
     this_thread::sleep_for(seconds(2));
     virtual_thread::shutdown();
+#endif
 }
 
 void test_logging() {

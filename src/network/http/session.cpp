@@ -154,8 +154,10 @@ string session::to_string() const {
 
     if (!data.empty()) {
         result += "Data:\n";
-        for (const auto& [key, value] : data) {
-            result += "  " + key + " = " + value + "\n";
+        for (const auto& pair : data) {
+            const string key = pair.first;
+            const string value = pair.second;
+            result += "  " + move(key) + " = " + move(value) + "\n";
         }
     }
 

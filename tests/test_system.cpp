@@ -115,11 +115,7 @@ void test_console() {
 }
 
 void test_device() {
-    auto devices = device::enumerate();
 
-    for (size_t i = 0; i < devices.size(); ++i) {
-        println("[", i, "]", devices[i].path, "-", devices[i].description, "-", to_string(devices[i].type));
-    }
 }
 
 void test_sysinfo() {

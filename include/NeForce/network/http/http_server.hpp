@@ -100,7 +100,7 @@ private:
                 max_header_size_,
                 max_body_size_);
 
-            if constexpr (is_same_v<SocketType, ssl_socket>) {
+            if (client_socket.is_ssl()) {
                 request.set_header(HTTP_KEY::X_Forwarded_Proto, "https");
             }
 

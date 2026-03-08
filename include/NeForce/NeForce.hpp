@@ -61,8 +61,6 @@
 #include "NeForce/core/string/vsprintf.hpp"
 #include "NeForce/core/system/cmdline.hpp"
 #include "NeForce/core/system/console.hpp"
-#include "NeForce/core/system/device/serial_port.hpp"
-#include "NeForce/core/system/device/storage_device.hpp"
 #include "NeForce/core/system/process.hpp"
 #include "NeForce/core/system/signal.hpp"
 #include "NeForce/core/system/sysinfo.hpp"

@@ -510,11 +510,6 @@
 /** @} */ // CxxStandardDetection
 
 
-#ifdef NEFORCE_STANDARD_17
-	#define NEFORCE_SUPPORT_DEDUCTION_GUIDES 1
-#endif
-
-
 #ifdef NEFORCE_STANDARD_11
 	#define NEFORCE_CONSTEXPR11 constexpr
 #else

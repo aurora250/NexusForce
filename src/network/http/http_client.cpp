@@ -256,7 +256,9 @@ namespace {
         string result;
         bool first = true;
 
-        for (const auto& [key, value] : params) {
+        for (const auto& pair : params) {
+            const auto& key = pair.first;
+            const auto& value = pair.second;
             if (!first) {
                 result += "&";
             }
@@ -275,7 +277,9 @@ string http_client_request::build_full_path() const {
     if (!query_params.empty()) {
         full_path += "?";
         bool first = true;
-        for (const auto& [key, value] : query_params) {
+        for (const auto& pair : query_params) {
+            const auto& key = pair.first;
+            const auto& value = pair.second;
             if (!first) {
                 full_path += "&";
             }
@@ -566,7 +570,7 @@ http_client_response http_client::do_request(http_client_request request, int re
 }
 
 void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& request_url) {
-    lock lock(mutex_);
+    lock<mutex> lk(mutex_);
 
     for (const auto &c : resp_cookies) {
         string domain = c.domain.empty() ? request_url.host : c.domain;
@@ -583,10 +587,9 @@ void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& 
 
 string http_client::build_cookie_header(const url& request_url) const {
     string cookie_header;
-    const auto now = datetime::now();
 
-    for (const auto& kv : cookie_jar_) {
-        const auto& c = kv.second;
+    for (const auto& pair : cookie_jar_) {
+        const auto& c = pair.second;
         if (c.max_age == 0) {
             continue;
         }
@@ -622,7 +625,7 @@ string http_client::build_cookie_header(const url& request_url) const {
 }
 
 void http_client::set_cookie(const cookie& c, const string& domain, const string& path) {
-    lock lock(mutex_);
+    lock<mutex> lk(mutex_);
     const string key = c.name.cookie_name() + "@" + domain + path;
     cookie_jar_[key] = c;
 }

@@ -610,7 +610,7 @@ public:
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t to_hash() const;
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename... Args>
 variant(Args...) -> variant<Args...>;
 #endif

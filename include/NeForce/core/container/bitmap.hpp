@@ -192,14 +192,14 @@ private:
 
 private:
     template <typename Ref>
-    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20
+    NEFORCE_CONSTEXPR20
     enable_if_t<is_boolean_v<Ref>, Ref>
     reference_dispatch() const noexcept {
         return (*ptr_ & (1U << off_)) != 0;
     }
 
     template <typename Ref>
-    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20
+    NEFORCE_CONSTEXPR20
     enable_if_t<!is_boolean_v<Ref>, Ref>
     reference_dispatch() const noexcept {
         return Ref(ptr_, 1U << off_);

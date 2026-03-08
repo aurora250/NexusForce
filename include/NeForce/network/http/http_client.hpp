@@ -74,7 +74,7 @@ public:
     http_client& operator =(http_client&&) noexcept = default;
 
     void set_config(config cfg) {
-        lock lk(mutex_);
+        lock<mutex> lk(mutex_);
         config_ = move(cfg);
     }
 
@@ -90,12 +90,12 @@ public:
     }
 
     void set_default_header(const string& key, string value) {
-        lock lk(mutex_);
+        lock<mutex> lk(mutex_);
         persistent_headers_[key] = move(value);
     }
 
     void remove_default_header(const string& key) {
-        lock lk(mutex_);
+        lock<mutex> lk(mutex_);
         persistent_headers_.erase(key);
     }
 
@@ -137,14 +137,14 @@ public:
 #endif
 
     void clear_cookies() {
-        lock lk(mutex_);
+        lock<mutex> lk(mutex_);
         cookie_jar_.clear();
     }
 
     void set_cookie(const cookie& c, const string& domain, const string& path = "/");
 
     NEFORCE_NODISCARD unordered_map<string, cookie> get_cookies() const {
-        lock lk(mutex_);
+        lock<mutex> lk(mutex_);
         return cookie_jar_;
     }
 

@@ -179,23 +179,23 @@ public:
     /**
      * @brief 从迭代器范围构造
      * @tparam Iterator 起始迭代器类型
-     * @tparam End 结束迭代器类型
      * @param first 起始迭代器
      * @param last 结束迭代器
      *
      * 当Extent为静态大小时，范围大小必须等于Extent。
      */
-    template <typename Iterator, typename End, enable_if_t<is_cot_iter_v<Iterator>, int> = 0>
+    template <typename Iterator, enable_if_t<is_cot_iter_v<Iterator>, int> = 0>
 #ifdef NEFORCE_STANDARD_20
-     requires is_compatible_ref<iter_reference_t<Iterator>>::value && (!is_convertible_v<End, size_type>)
+     requires is_compatible_ref<iter_reference_t<Iterator>>::value
 #endif
     constexpr
 #ifdef NEFORCE_STANDARD_20
     explicit(Extent != dynamic_extent)
 #endif
-    memory_view(Iterator first, End last) noexcept(noexcept(last - first))
+    memory_view(Iterator first, Iterator last)
+    noexcept(noexcept(_NEFORCE distance(first, last)))
     : extent_pair_(exact_arg_construct_tag{}, static_cast<size_type>(last - first), _NEFORCE to_address(first)) {
-        memory_view::check_extend<Extent>(last - first);
+        memory_view::check_extend<Extent>(_NEFORCE distance(first, last));
     }
 
     /**
@@ -444,7 +444,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename T, size_t ArrayExtent>
 memory_view(T(&)[ArrayExtent]) -> memory_view<T, ArrayExtent>;
 

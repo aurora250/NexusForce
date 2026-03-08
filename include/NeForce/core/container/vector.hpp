@@ -1266,7 +1266,7 @@ public:
 	}
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename T, typename Alloc>
 vector(T, Alloc = Alloc()) -> vector<T, Alloc>;
 

@@ -46,7 +46,7 @@ private:
 
 public:
     constexpr array_iterator() noexcept = default;
-    constexpr ~array_iterator() = default;
+    NEFORCE_CONSTEXPR20 ~array_iterator() = default;
 
     constexpr array_iterator(const array_iterator&) noexcept = default;
     constexpr array_iterator& operator =(const array_iterator&) noexcept = default;
@@ -612,7 +612,7 @@ public:
     bool operator <(const array&) const noexcept { return false; }
 };
 
-#if NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 NEFORCE_BEGIN_INNER__
 template <typename First, typename... Rest>
 struct __array_same {
@@ -623,7 +623,7 @@ NEFORCE_END_INNER__
 
 template <typename First, typename... Rest>
 array(First, Rest...) -> array<typename _INNER __array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
-#endif // NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#endif
 
 
 /**

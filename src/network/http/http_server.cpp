@@ -148,13 +148,13 @@ void http_server_base::session_manager::cleanup_expired_sessions()  {
 }
 
 bool http_server_base::session_manager::session_exists(const string& session_id) const noexcept {
-    lock<mutex> lock(mutex_);
+    lock<mutex> lk(mutex_);
     const auto it = sessions_.find(session_id);
     return it != sessions_.end() && it->second.is_valid();
 }
 
 size_t http_server_base::session_manager::session_count() const noexcept {
-    lock lock(mutex_);
+    lock<mutex> lk(mutex_);
     return sessions_.size();
 }
 
@@ -385,8 +385,10 @@ string http_server_base::build_response_str(const http_response& response) {
         result += HTTP_KEY::Content_Length + ": " + _NEFORCE to_string(response.body.size()) + "\r\n";
     }
 
-    for (const auto& [key, value] : response.headers) {
-        result += key + ": " + value + "\r\n";
+    for (const auto& pair : response.headers) {
+        const auto key = pair.first;
+        const auto value = pair.second;
+        result += move(key) + ": " + move(value) + "\r\n";
     }
     result += "\r\n";
 

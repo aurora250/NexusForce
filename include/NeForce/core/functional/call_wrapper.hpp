@@ -76,7 +76,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename... Types>
 call_wrapper(Types...) -> call_wrapper<Types...>;
 #endif

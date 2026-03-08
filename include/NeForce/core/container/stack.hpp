@@ -181,7 +181,7 @@ public:
     }
 };
 
-#ifdef NEFORCE_SUPPORT_DEDUCTION_GUIDES
+#ifdef NEFORCE_STANDARD_17
 template <typename Sequence>
 stack(Sequence) -> stack<typename Sequence::value_type, Sequence>;
 #endif
