@@ -49,8 +49,8 @@ protected:
         tcp_socket* client_socket,
         session_manager& manager,
         const HTTP_COOKIE_NAME& name,
-        size_t max_header_size = max_header_size,
-        size_t max_body_size = max_body_size);
+        size_t max_header_size = http_server_base::max_header_size,
+        size_t max_body_size = http_server_base::max_body_size);
 
     static void add_session_cookie(
         const http_request& request,
