@@ -415,6 +415,7 @@ public:
     static const HTTP_METHOD OPTIONS;   ///< OPTIONS方法
     static const HTTP_METHOD TRACE;     ///< TRACE方法
     static const HTTP_METHOD CONNECT;   ///< CONNECT方法
+    static const HTTP_METHOD PATCH;     ///< PATCH方法
     static const HTTP_METHOD DEFAULT;   ///< 默认方法
 
     /**
@@ -464,6 +465,7 @@ public:
     NEFORCE_NODISCARD bool is_options() const noexcept { return method_ == OPTIONS.method_; }
     NEFORCE_NODISCARD bool is_trace() const noexcept { return method_ == TRACE.method_; }
     NEFORCE_NODISCARD bool is_connect() const noexcept { return method_ == CONNECT.method_; }
+    NEFORCE_NODISCARD bool is_patch() const noexcept { return method_ == PATCH.method_; }
 
     /**
      * @brief 转换为字符串
@@ -555,6 +557,21 @@ public:
     NEFORCE_NODISCARD string to_string() const {
         return cookie_;
     }
+};
+
+
+struct NEFORCE_API HTTP_KEY {
+    static const string Access_Control_Allow_Credentials;
+    static const string Access_Control_Allow_Headers;
+    static const string Access_Control_Allow_Methods;
+    static const string Access_Control_Allow_Origin;
+    static const string Access_Control_Max_Age;
+    static const string Connection;
+    static const string Content_Length;
+    static const string Content_Type;
+    static const string Lax;
+    static const string Strict;
+    static const string X_Forwarded_Proto;
 };
 
 /** @} */ // Http

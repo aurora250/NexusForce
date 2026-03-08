@@ -15,7 +15,7 @@ enum class ssl_method {
 };
 
 
-class ssl_context {
+class NEFORCE_API ssl_context {
 private:
     struct ctx_deleter {
         void operator ()(::SSL_CTX* ctx) const noexcept {
@@ -27,11 +27,19 @@ private:
 
 public:
     explicit ssl_context(ssl_method method = ssl_method::TLS_SERVER);
+    ~ssl_context() = default;
+
+    ssl_context(const ssl_context&) = delete;
+    ssl_context& operator =(const ssl_context&) = delete;
+
+    ssl_context(ssl_context&& other) noexcept = default;
+    ssl_context& operator =(ssl_context&& other) noexcept = default;
 
     bool load_certificate(const string& cert_file, const string& key_file);
     void load_certificate_from_memory(const string& cert_pem, const string& key_pem);
-    void load_verify_locations(const string& ca_file, const string& ca_path = "");
+    bool load_verify_locations(const string& ca_file, const string& ca_path = "");
 
+    void set_options(long options);
     void set_verify_mode(int mode);
 
     void require_client_certificate();
@@ -40,14 +48,11 @@ public:
     void set_ciphersuites(const string& ciphersuites);
 
     void set_default_options();
-
     void set_session_cache_size(long size);
-
     void set_timeout(long seconds);
-
     void set_alpn_protos(const vector<string>& protocols);
 
-    ::SSL_CTX* native_handle() const noexcept {
+    NEFORCE_NODISCARD ::SSL_CTX* native_handle() const noexcept {
         return ctx_.get();
     }
 
@@ -55,7 +60,7 @@ public:
         return ctx_ != nullptr;
     }
 
-    bool is_valid() const noexcept {
+    NEFORCE_NODISCARD bool is_valid() const noexcept {
         return ctx_ != nullptr;
     }
 };

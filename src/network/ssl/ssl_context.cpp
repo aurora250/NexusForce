@@ -3,6 +3,43 @@
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    constexpr auto cipher_list =
+            "ECDHE-ECDSA-AES128-GCM-SHA256:"
+            "ECDHE-RSA-AES128-GCM-SHA256:"
+            "ECDHE-ECDSA-AES256-GCM-SHA384:"
+            "ECDHE-RSA-AES256-GCM-SHA384:"
+            "ECDHE-ECDSA-CHACHA20-POLY1305:"
+            "ECDHE-RSA-CHACHA20-POLY1305:"
+            "DHE-RSA-AES128-GCM-SHA256:"
+            "DHE-RSA-AES256-GCM-SHA384:"
+            "ECDHE-ECDSA-AES128-SHA256:"
+            "ECDHE-RSA-AES128-SHA256:"
+            "ECDHE-ECDSA-AES256-SHA384:"
+            "ECDHE-RSA-AES256-SHA384:"
+            "DHE-RSA-AES128-SHA256:"
+            "DHE-RSA-AES256-SHA256:"
+            "AES128-GCM-SHA256:"
+            "AES256-GCM-SHA384:"
+            "AES128-SHA256:"
+            "AES256-SHA256";
+
+    SSL_METHOD* convert_method(const ssl_method method) {
+        switch (method) {
+            case ssl_method::TLS_CLIENT: {
+                return const_cast<SSL_METHOD*>(TLS_client_method());
+            }
+            case ssl_method::TLS_SERVER: {
+                return const_cast<SSL_METHOD*>(TLS_server_method());
+            }
+            default: {
+                return const_cast<SSL_METHOD*>(TLS_method());
+            }
+        }
+    }
+}
+
+
 int ssl_exception::last_error() noexcept {
     return static_cast<int>(::ERR_get_error());
 }
@@ -16,40 +53,48 @@ string ssl_exception::last_error_message() {
 }
 
 ssl_context::ssl_context(const ssl_method method) {
-    const SSL_METHOD* ssl_method;
-
-    switch (method) {
-        case ssl_method::TLS_SERVER: {
-            ssl_method = ::TLS_server_method();
-            break;
-        }
-        case ssl_method::TLS_CLIENT: {
-            ssl_method = ::TLS_client_method();
-            break;
-        }
-        case ssl_method::TLS_SERVER_DTLS: {
-            ssl_method = ::DTLS_server_method();
-            break;
-        }
-        case ssl_method::TLS_CLIENT_DTLS: {
-            ssl_method = ::DTLS_client_method();
-            break;
-        }
-        default: {
-            NEFORCE_UNREACHABLE;
-        }
-    }
-
-    if (!ssl_method) {
-        throw_exception(ssl_exception("Failed to get SSL method"));
-    }
-
-    ctx_.reset(::SSL_CTX_new(ssl_method));
+    ctx_ = ::SSL_CTX_new(convert_method(method));
     if (!ctx_) {
-        throw_exception(ssl_exception("SSL_CTX_new failed"));
+        throw_exception(ssl_exception("Failed to create SSL context"));
     }
 
-    set_default_options();
+    ::SSL_CTX_set_options(ctx_.get(),
+            SSL_OP_NO_SSLv2 |
+            SSL_OP_NO_SSLv3
+        );
+
+    if (::SSL_CTX_set_cipher_list(ctx_.get(), cipher_list) != 1) {
+        ::SSL_CTX_set_cipher_list(ctx_.get(), "DEFAULT:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK");
+    }
+
+#ifdef TLS1_3_VERSION
+    ::SSL_CTX_set_ciphersuites(ctx_.get(),
+        "TLS_AES_128_GCM_SHA256:"
+        "TLS_AES_256_GCM_SHA384:"
+        "TLS_CHACHA20_POLY1305_SHA256");
+#endif
+
+    if (::SSL_CTX_set_default_verify_paths(ctx_.get()) != 1) {
+        const char* ca_paths[] = {
+            "/etc/ssl/certs",
+            "/etc/pki/tls/certs",
+            "/usr/local/share/certs",
+            "/etc/ssl/cert.pem",
+            nullptr
+        };
+
+        for (int i = 0; ca_paths[i] != nullptr; ++i) {
+            ::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, ca_paths[i]);
+        }
+    }
+
+    ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER, nullptr);
+}
+
+void ssl_context::set_options(const long options) {
+    if (ctx_) {
+        SSL_CTX_set_options(ctx_.get(), options);
+    }
 }
 
 bool ssl_context::load_certificate(const string& cert_file, const string& key_file) {
@@ -62,10 +107,7 @@ bool ssl_context::load_certificate(const string& cert_file, const string& key_fi
     if (::SSL_CTX_use_PrivateKey_file(ctx_.get(), key_file.data(), SSL_FILETYPE_PEM) <= 0) {
         return false;
     }
-    if (!::SSL_CTX_check_private_key(ctx_.get())) {
-        return false;
-    }
-    return true;
+    return SSL_CTX_check_private_key(ctx_.get()) == 1;
 }
 
 void ssl_context::load_certificate_from_memory(const string& cert_pem, const string& key_pem) {
@@ -111,16 +153,21 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     }
 }
 
-void ssl_context::load_verify_locations(const string& ca_file, const string& ca_path) {
-    if (::SSL_CTX_load_verify_locations(ctx_.get(),
-                                       ca_file.empty() ? nullptr : ca_file.data(),
-                                       ca_path.empty() ? nullptr : ca_path.data()) <= 0) {
-        throw_exception(ssl_exception("Failed to load CA certificates"));
-                                       }
+bool ssl_context::load_verify_locations(const string& ca_file, const string& ca_path) {
+    if (!ctx_) {
+        return false;
+    }
+
+    const char* file_ptr = ca_file.empty() ? nullptr : ca_file.data();
+    const char* path_ptr = ca_path.empty() ? nullptr : ca_path.data();
+
+    return SSL_CTX_load_verify_locations(ctx_.get(), file_ptr, path_ptr) == 1;
 }
 
-void ssl_context::set_verify_mode(int mode) {
-    ::SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
+void ssl_context::set_verify_mode(const int mode) {
+    if (ctx_) {
+        SSL_CTX_set_verify(ctx_.get(), mode, nullptr);
+    }
 }
 
 void ssl_context::require_client_certificate() {

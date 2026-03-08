@@ -44,7 +44,7 @@ public:
 
     void accept();
 
-    void connect();
+    bool connect();
 
     ssize_t read(void* buffer, size_t size);
 
@@ -54,21 +54,23 @@ public:
 
     bool write_all(const void* data, size_t size);
 
-    int pending() const;
+    NEFORCE_NODISCARD int pending() const;
 
-    ::X509* get_peer_certificate() const;
+    void set_sni_hostname(const string& hostname);
 
-    bool verify_peer() const;
+    NEFORCE_NODISCARD ::X509* get_peer_certificate() const;
 
-    string get_cipher_name() const;
+    NEFORCE_NODISCARD bool verify_peer() const;
 
-    string get_version() const;
+    NEFORCE_NODISCARD string get_cipher_name() const;
 
-    const string& last_error() const {
+    NEFORCE_NODISCARD string get_version() const;
+
+    NEFORCE_NODISCARD const string& last_error() const {
         return last_error_;
     }
 
-    bool is_valid() const noexcept {
+    NEFORCE_NODISCARD bool is_valid() const noexcept {
         return ssl_ != nullptr;
     }
 
@@ -76,11 +78,11 @@ public:
         return is_valid();
     }
 
-    ::SSL* native_handle() const noexcept {
+    NEFORCE_NODISCARD ::SSL* native_handle() const noexcept {
         return ssl_.get();
     }
 
-    ::SSL* release() noexcept {
+    NEFORCE_NODISCARD ::SSL* release() noexcept {
         return ssl_.release();
     }
 };

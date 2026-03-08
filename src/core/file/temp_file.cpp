@@ -7,36 +7,39 @@
 #include <NeForce/core/numeric/random.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-static vector<path>& get_temp_registry() {
-    static vector<path> registry;
-    return registry;
+namespace {
+    vector<path>& get_temp_registry() {
+        static vector<path> registry;
+        return registry;
+    }
+
+    mutex& get_registry_mutex() {
+        static mutex mutex;
+        return mutex;
+    }
+
+    path generate_unique_path(const string& prefix, const string& suffix) {
+        const path temp_dir{environment::temp_directory()};
+        static atomic<uint64_t> counter{0};
+        counter.fetch_add(1, memory_order_relaxed);
+
+        const auto nanos = system_clock::now().since_epoch().to_nano();
+        const auto pid = process::current_id();
+        random_mt rand;
+        const uint64_t random_part = rand.next_int();
+        const string filename = format(
+            "{}_{}_{}_{}_{}{}",
+            prefix,
+            nanos.count(),
+            pid,
+            this_thread::id().native_handle(),
+            random_part,
+            suffix
+        );
+        return temp_dir / path(filename);
+    }
 }
 
-static mutex& get_registry_mutex() {
-    static mutex mutex;
-    return mutex;
-}
-
-static path generate_unique_path(const string& prefix, const string& suffix) {
-    const path temp_dir{environment::temp_directory()};
-    static atomic<uint64_t> counter{0};
-    counter.fetch_add(1, memory_order_relaxed);
-
-    const auto nanos = system_clock::now().since_epoch().to_nano();
-    const int pid = process::current_id();
-    random_mt rand;
-    const uint64_t random_part = rand.next_int();
-    const string filename = format(
-        "{}_{}_{}_{}_{}{}",
-        prefix,
-        nanos.count(),
-        pid,
-        this_thread::id().native_handle(),
-        random_part,
-        suffix
-    );
-    return temp_dir / path(filename);
-}
 
 void temp_file::register_for_cleanup(const path& temp_path) {
     lock<mutex> lock(get_registry_mutex());

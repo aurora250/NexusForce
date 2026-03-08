@@ -3,18 +3,21 @@
 #include <NeForce/network/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-static bool should_encode(const char c, const bool encode_slash) noexcept {
-    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
-        return false;
+namespace {
+    bool should_encode(const char c, const bool encode_slash) noexcept {
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+            return false;
+        }
+        if (c == '-' || c == '_' || c == '.' || c == '~') {
+            return false;
+        }
+        if (!encode_slash && c == '/') {
+            return false;
+        }
+        return true;
     }
-    if (c == '-' || c == '_' || c == '.' || c == '~') {
-        return false;
-    }
-    if (!encode_slash && c == '/') {
-        return false;
-    }
-    return true;
 }
+
 
 bool url::is_valid() const noexcept {
     if (scheme.empty() || host.empty()) {
@@ -47,6 +50,11 @@ url url::parse(const string_view str) {
         throw_exception(network_exception("URL scheme invalid"));
     }
 
+    size_t at_pos = str.find('@', pos);
+    if (at_pos != string::npos && at_pos < str.find('/', pos)) {
+        at_pos = pos;
+    }
+
     const size_t path_pos = str.find('/', pos);
     const size_t query_pos = str.find('?', pos);
     const size_t fragment_pos = str.find('#', pos);
@@ -57,33 +65,37 @@ url url::parse(const string_view str) {
     if (fragment_pos != string::npos) host_end = min(host_end, fragment_pos);
 
     const string_view host_port = str.substr(pos, host_end - pos);
-    size_t colon = host_port.find(':');
+    size_t colon_pos = string::npos;
 
     if (host_port.starts_with('[')) {
         const size_t bracket_end = host_port.find(']');
         if (bracket_end == string::npos) {
-            throw_exception(network_exception("URL malformed"));
+            throw_exception(network_exception("URL malformed: unclosed IPv6 address"));
         }
-        target.host = host_port.substr(0, bracket_end + 1);
+        target.host = host_port.substr(1, bracket_end - 1);
         if (bracket_end + 1 < host_port.size() && host_port[bracket_end + 1] == ':') {
-            colon = bracket_end + 1;
+            colon_pos = bracket_end + 1;
         }
     } else {
-        colon = host_port.find_last_of(':');
+        colon_pos = host_port.find_last_of(':');
+        if (colon_pos != string::npos) {
+            target.host = host_port.substr(0, colon_pos);
+        } else {
+            target.host = host_port;
+        }
     }
 
-    if (colon != string::npos && colon < host_port.size() - 1) {
-        if (target.host.empty()) {
-            target.host = host_port.substr(0, colon);
+    if (colon_pos != string::npos && colon_pos < host_port.size() - 1) {
+        string_view port_str = host_port.substr(colon_pos + 1);
+        try {
+            target.port = uinteger16::parse(port_str);
+        } catch (...) {
+            throw_exception(network_exception("URL invalid port"));
         }
-        target.port = uinteger16::parse(host_port.substr(colon + 1));
         if (target.port == 0) {
             throw_exception(network_exception("URL invalid port"));
         }
     } else {
-        if (target.host.empty()) {
-            target.host = host_port;
-        }
         target.port = default_port(target.scheme.view());
     }
 
@@ -94,13 +106,11 @@ url url::parse(const string_view str) {
     pos = host_end;
 
     size_t path_end = len;
-    if (query_pos != string::npos) path_end = _NEFORCE min(path_end, query_pos);
-    if (fragment_pos != string::npos) path_end = _NEFORCE min(path_end, fragment_pos);
+    if (query_pos != string::npos) path_end = min(path_end, query_pos);
+    if (fragment_pos != string::npos) path_end = min(path_end, fragment_pos);
 
     if (pos < path_end && str[pos] == '/') {
         target.path = str.substr(pos, path_end - pos);
-    } else if (pos < len && str[pos] != '?' && str[pos] != '#') {
-        throw_exception(network_exception("URL invalid path"));
     } else {
         target.path = "/";
     }
@@ -206,10 +216,10 @@ uint16_t url::default_port(const string_view scheme) noexcept {
 string_view url::default_scheme(const uint16_t port, const bool is_ws) noexcept {
     switch (port) {
         case 80: {
-            return is_ws ? "http" : "ws";
+            return is_ws ? "ws" : "http";
         }
         case 443: {
-            return is_ws ? "https" : "wss";
+            return is_ws ? "wss" : "https";
         }
         case 21: {
             return "ftp";

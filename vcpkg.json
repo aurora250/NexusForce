@@ -12,6 +12,7 @@
     "libpq",
     "libmysql",
     "zlib",
+    "lz4",
     "sqlite3",
     "hiredis",
     {
@@ -40,6 +41,10 @@
       "description": "zlib compression support",
       "dependencies": ["zlib"]
     },
+    "lz4": {
+      "description": "lz4 compression support",
+      "dependencies": ["lz4"]
+    },
     "openssl": {
       "description": "OpenSSL support",
       "dependencies": ["openssl"]
@@ -49,5 +54,10 @@
       "dependencies": ["pcre2"]
     }
   },
-  "default-features": ["postgresql", "mysql", "sqlite3", "redis", "zlib", "openssl", "pcre2"]
+  "default-features": [
+    "postgresql", "mysql", "sqlite3", "redis",
+    "zlib", "lz4",
+    "openssl",
+    "pcre2"
+  ]
 }

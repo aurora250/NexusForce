@@ -1,5 +1,37 @@
 #include "test.h"
 
+void test_lz4() {
+#ifdef NEFORCE_SUPPORT_LZ4
+    {
+        string_view original = "Hello, World! This is a test string for compression.";
+
+        auto compressed = lz4_compressor::compress(original);
+        println("Original size:", original.size(), "bytes");
+        println("Compressed size:", compressed.size(), "bytes");
+
+        auto decompressed = lz4_compressor::decompress(compressed.view(), original.size());
+        string_view result(reinterpret_cast<const char*>(decompressed.data()), decompressed.size());
+
+        println("Decompressed:", result);
+        println("Match:", (original == result ? "Yes" : "No"));
+    }
+    {
+        string base = "Hello World! ";
+        string repeating;
+        for (int i = 0; i < 100; ++i) {
+            repeating += base;
+        }
+
+        auto compressed = lz4_compressor::compress(repeating.view());
+        println("Original size:", repeating.size(), "bytes");
+        println("Compressed size:", compressed.size(), "bytes");
+
+        auto decompressed = lz4_compressor::decompress(compressed.view(), repeating.size());
+        println("Compression ratio:", static_cast<double>(compressed.size()) / repeating.size());
+    }
+#endif
+}
+
 void test_zlib() {
 #ifdef NEFORCE_SUPPORT_ZLIB
     {
@@ -14,9 +46,7 @@ void test_zlib() {
                     compressed.size(),
                     100.0 * compressed.size() / original.size());
 
-        auto decompressed = zlib_compressor::decompress(
-            cbyte_view(compressed.data(), compressed.size())
-        );
+        auto decompressed = zlib_compressor::decompress(compressed.view());
 
         string result(reinterpret_cast<const char*>(decompressed.data()), decompressed.size());
         printfln("Match: {}\n", result == original ? "✓" : "✗");
@@ -38,7 +68,7 @@ void test_zlib() {
         println();
     }
     {
-        compressor comp;
+        zlib_compressor::stream_compressor comp;
 
         vector<string_view> chunks = {
             "First chunk. ",
@@ -61,10 +91,8 @@ void test_zlib() {
         printfln("Output: {} bytes", comp.bytes_output());
         printfln("Ratio: {:.2f}%", comp.compression_ratio() * 100);
 
-        decompressor decomp;
-        auto decompressed = decomp.decompress(
-            cbyte_view(all_compressed.data(), all_compressed.size()), true
-        );
+        zlib_compressor::stream_decompressor decomp;
+        auto decompressed = decomp.decompress(all_compressed.view(), true);
 
         string result(reinterpret_cast<const char*>(decompressed.data()),
                      decompressed.size());
@@ -85,26 +113,20 @@ void test_zlib() {
                     compressed.size() / 1024,
                     100.0 * compressed.size() / data_size);
 
-        auto decompressed = zlib_compressor::decompress(
-            cbyte_view(compressed.data(), compressed.size()),
-            data_size
-        );
+        auto decompressed = zlib_compressor::decompress(compressed.view(), data_size);
 
         bool match = (decompressed.size() == large_data.size()) &&
-                     equal(decompressed.begin(), decompressed.end(),
-                               large_data.begin());
+                     equal(decompressed.begin(), decompressed.end(), large_data.begin());
         printfln("Match: {}\n", match ? "✓" : "✗");
     }
     {
-        compressor comp(compress_level::best_compression);
-        decompressor decomp;
+        zlib_compressor::stream_compressor comp(compress_level::best_compression);
+        zlib_compressor::stream_decompressor decomp;
 
         string data = "Test data for statistics. "_s.repeat(10);
 
         auto compressed = comp.compress(data.view(), true);
-        auto decompressed = decomp.decompress(
-            cbyte_view(compressed.data(), compressed.size()), true
-        );
+        auto decompressed = decomp.decompress(compressed.view(), true);
 
         println("Compression:");
         printfln("  Input:  {} bytes", comp.bytes_input());

@@ -24,22 +24,22 @@ public:
     ~ssl_socket() override = default;
 
     void init_server_ssl(const ssl_context& ctx);
-    void init_client_ssl(const ssl_context& ctx);
+    void init_client_ssl(const ssl_context& ctx, const string& hostname = "");
 
-    string peer_certificate_info() const;
+    NEFORCE_NODISCARD string peer_certificate_info() const;
 
     ssize_t send(memory_view<const char> data, int flags = 0) override;
     ssize_t receive(memory_view<char> buffer, int flags = 0) override;
 
-    bool is_ssl() const noexcept override {
+    NEFORCE_NODISCARD bool is_ssl() const noexcept override {
         return ssl_.has_value();
     }
 
-    ssl_stream& ssl() noexcept {
+    NEFORCE_NODISCARD ssl_stream& ssl() noexcept {
         return *ssl_;
     }
 
-    const ssl_stream& ssl() const noexcept {
+    NEFORCE_NODISCARD const ssl_stream& ssl() const noexcept {
         return *ssl_;
     }
 };

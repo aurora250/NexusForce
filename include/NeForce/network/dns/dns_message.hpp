@@ -68,7 +68,7 @@ struct dns_query_result {
     bool truncated;
     bool recursive_available;
 
-    bool is_success() const noexcept {
+    NEFORCE_NODISCARD bool is_success() const noexcept {
         return response_code == DNS_RESPONSE::NON_ERROR;
     }
 };

@@ -16,6 +16,115 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    const native_handle_type& INVALID_HANDLE() noexcept {
+        static const auto INVALID_HANDLE =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            INVALID_HANDLE_VALUE;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+            -1;
+#endif
+        return INVALID_HANDLE;
+    }
+
+    datetime filetime_to_datetime(const file::time_type& file_time) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        if (file_time.dwHighDateTime == 0 && file_time.dwLowDateTime == 0) {
+            return datetime::epoch();
+        }
+        ::SYSTEMTIME st_utc;
+        if (!::FileTimeToSystemTime(&file_time, &st_utc)) {
+            return datetime::epoch();
+        }
+        ::SYSTEMTIME st_local;
+        if (!::SystemTimeToTzSpecificLocalTime(nullptr, &st_utc, &st_local)) {
+            return datetime::epoch();
+        }
+        return datetime(
+            st_local.wYear, st_local.wMonth, st_local.wDay,
+            st_local.wHour, st_local.wMinute, st_local.wSecond
+        );
+#elif defined(NEFORCE_PLATFORM_LINUX)
+        if (file_time == 0) return datetime::epoch();
+        ::tm tm_local{};
+        ::localtime_r(&file_time, &tm_local);
+        return datetime(
+            tm_local.tm_year + 1900, tm_local.tm_mon + 1, tm_local.tm_mday,
+            tm_local.tm_hour, tm_local.tm_min, tm_local.tm_sec, tm_local.tm_gmtoff
+        );
+#endif
+    }
+
+    file::time_type datetime_to_filetime(const datetime& date_time) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        file::time_type ft = {0, 0};
+        ::SYSTEMTIME st_local;
+        st_local.wYear = static_cast<::WORD>(date_time.year());
+        st_local.wMonth = static_cast<::WORD>(date_time.month());
+        st_local.wDay = static_cast<::WORD>(date_time.day());
+        st_local.wHour = static_cast<::WORD>(date_time.hours());
+        st_local.wMinute = static_cast<::WORD>(date_time.minutes());
+        st_local.wSecond = static_cast<::WORD>(date_time.seconds());
+        st_local.wMilliseconds = 0;
+
+        ::SYSTEMTIME st_utc;
+        if (!::TzSpecificLocalTimeToSystemTime(nullptr, &st_local, &st_utc)) {
+            return ft;
+        }
+        if (!::SystemTimeToFileTime(&st_utc, &ft)) {
+            ft.dwHighDateTime = 0;
+            ft.dwLowDateTime = 0;
+        }
+        return ft;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+        ::tm tm_val{};
+        tm_val.tm_year = date_time.year() - 1900;
+        tm_val.tm_mon = date_time.month() - 1;
+        tm_val.tm_mday = date_time.day();
+        tm_val.tm_hour = date_time.hours();
+        tm_val.tm_min = date_time.minutes();
+        tm_val.tm_sec = date_time.seconds();
+        tm_val.tm_gmtoff = date_time.offset_seconds();
+        tm_val.tm_isdst = -1;
+        return ::mktime(&tm_val);
+#endif
+    }
+
+    string get_last_error_msg() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const auto error_code = ::GetLastError();
+        if (error_code == 0) {
+            return {};
+        }
+        ::LPSTR message_buffer = nullptr;
+        const auto size = ::FormatMessageA(
+            FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+            nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+            reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
+
+        string message(message_buffer, size);
+        ::LocalFree(message_buffer);
+        return message;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+        char buffer[256];
+        return ::strerror_r(errno, buffer, sizeof(buffer));
+#endif
+    }
+
+#ifdef NEFORCE_PLATFORM_LINUX
+    ::mode_t convert_attributes(const FILE_ATTRI attr) {
+        ::mode_t mode = 0;
+        if ((attr & FILE_ATTRI::READONLY) != FILE_ATTRI::OTHERS) {
+            mode |= S_IRUSR | S_IRGRP | S_IROTH;
+        } else {
+            mode |= S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+        }
+        return mode;
+    }
+#endif
+}
+
+
 file::line_iterator::line_iterator(const file* f) : file_(f) {
     if (file_ && file_->is_opened()) {
         ++(*this);
@@ -60,19 +169,6 @@ file::async_context::~async_context() {
         if (cb->hEvent) ::CloseHandle(cb->hEvent);
 #endif
         delete cb;
-    }
-}
-
-
-namespace {
-    const native_handle_type& INVALID_HANDLE() noexcept {
-        static const auto INVALID_HANDLE =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            INVALID_HANDLE_VALUE;
-#elif defined(NEFORCE_PLATFORM_LINUX)
-            -1;
-#endif
-        return INVALID_HANDLE;
     }
 }
 
@@ -220,90 +316,6 @@ bool file::fill_read_buffer() const noexcept {
     return true;
 }
 
-static inline datetime filetime_to_datetime(const file::time_type& file_time) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (file_time.dwHighDateTime == 0 && file_time.dwLowDateTime == 0) {
-        return datetime::epoch();
-    }
-    ::SYSTEMTIME st_utc;
-    if (!::FileTimeToSystemTime(&file_time, &st_utc)) {
-        return datetime::epoch();
-    }
-    ::SYSTEMTIME st_local;
-    if (!::SystemTimeToTzSpecificLocalTime(nullptr, &st_utc, &st_local)) {
-        return datetime::epoch();
-    }
-    return datetime(
-        st_local.wYear, st_local.wMonth, st_local.wDay,
-        st_local.wHour, st_local.wMinute, st_local.wSecond
-    );
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    if (file_time == 0) return datetime::epoch();
-    ::tm tm_local{};
-    ::localtime_r(&file_time, &tm_local);
-    return datetime(
-        tm_local.tm_year + 1900, tm_local.tm_mon + 1, tm_local.tm_mday,
-        tm_local.tm_hour, tm_local.tm_min, tm_local.tm_sec, tm_local.tm_gmtoff
-    );
-#endif
-}
-
-static inline file::time_type datetime_to_filetime(const datetime& date_time) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    file::time_type ft = {0, 0};
-    ::SYSTEMTIME st_local;
-    st_local.wYear = static_cast<::WORD>(date_time.year());
-    st_local.wMonth = static_cast<::WORD>(date_time.month());
-    st_local.wDay = static_cast<::WORD>(date_time.day());
-    st_local.wHour = static_cast<::WORD>(date_time.hours());
-    st_local.wMinute = static_cast<::WORD>(date_time.minutes());
-    st_local.wSecond = static_cast<::WORD>(date_time.seconds());
-    st_local.wMilliseconds = 0;
-
-    ::SYSTEMTIME st_utc;
-    if (!::TzSpecificLocalTimeToSystemTime(nullptr, &st_local, &st_utc)) {
-        return ft;
-    }
-    if (!::SystemTimeToFileTime(&st_utc, &ft)) {
-        ft.dwHighDateTime = 0;
-        ft.dwLowDateTime = 0;
-    }
-    return ft;
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    ::tm tm_val{};
-    tm_val.tm_year = date_time.year() - 1900;
-    tm_val.tm_mon = date_time.month() - 1;
-    tm_val.tm_mday = date_time.day();
-    tm_val.tm_hour = date_time.hours();
-    tm_val.tm_min = date_time.minutes();
-    tm_val.tm_sec = date_time.seconds();
-    tm_val.tm_gmtoff = date_time.offset_seconds();
-    tm_val.tm_isdst = -1;
-    return ::mktime(&tm_val);
-#endif
-}
-
-static inline string get_last_error_msg() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    const auto error_code = ::GetLastError();
-    if (error_code == 0) {
-        return {};
-    }
-    ::LPSTR message_buffer = nullptr;
-    const auto size = ::FormatMessageA(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-        nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        reinterpret_cast<::LPSTR>(&message_buffer), 0, nullptr);
-
-    string message(message_buffer, size);
-    ::LocalFree(message_buffer);
-    return message;
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    char buffer[256];
-    return ::strerror_r(errno, buffer, sizeof(buffer));
-#endif
-}
-
 void file::set_last_error() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     last_error_code_ = static_cast<int>(::GetLastError());
@@ -333,19 +345,6 @@ void file::adjust_buffer_size() {
     read_buffer_.resize(buffer_size_);
     write_buffer_.resize(buffer_size_);
 }
-
-#ifdef NEFORCE_PLATFORM_LINUX
-static ::mode_t convert_attributes(const FILE_ATTRI attr) {
-    ::mode_t mode = 0;
-
-    if ((attr & FILE_ATTRI::READONLY) != FILE_ATTRI::OTHERS) {
-        mode |= S_IRUSR | S_IRGRP | S_IROTH;
-    } else {
-        mode |= S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-    }
-    return mode;
-}
-#endif
 
 file::file()
 : handle_(INVALID_HANDLE()) {}

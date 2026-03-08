@@ -10,31 +10,31 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+namespace {
+    struct winsock_initializer {
+        static atomic<int> ref_count;
 
-struct winsock_initializer {
-    static atomic<int> ref_count;
-
-    winsock_initializer() {
-        const int prev = ref_count.fetch_add(1);
-        if (prev == 0) {
-            ::WSADATA wsa_data;
-            if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
-                ref_count.fetch_sub(1);
-                throw_exception(system_exception("WSAStartup failed"));
+        winsock_initializer() {
+            const int prev = ref_count.fetch_add(1);
+            if (prev == 0) {
+                ::WSADATA wsa_data;
+                if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
+                    ref_count.fetch_sub(1);
+                    throw_exception(system_exception("WSAStartup failed"));
+                }
             }
         }
-    }
 
-    ~winsock_initializer() {
-        const int prev = ref_count.fetch_sub(1);
-        if (prev == 1) {
-            ::WSACleanup();
+        ~winsock_initializer() {
+            const int prev = ref_count.fetch_sub(1);
+            if (prev == 1) {
+                ::WSACleanup();
+            }
         }
-    }
-};
+    };
 
-atomic<int> winsock_initializer::ref_count{0};
-
+    atomic<int> winsock_initializer::ref_count{0};
+}
 #endif
 
 socket_base::socket_base() {
@@ -124,7 +124,7 @@ bool socket_base::shutdown_both() noexcept {
 #endif
 }
 
-bool socket_base::set_option(const int level, const int optname, const void* value, const __socklen_t len) noexcept {
+bool socket_base::set_option(const int level, const int optname, const void* value, const ::socklen_t len) noexcept {
     return ::setsockopt(fd_, level, optname, static_cast<const char*>(value), len) == 0;
 }
 

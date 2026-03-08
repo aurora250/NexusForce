@@ -19,10 +19,266 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-static mutex& sysinfo_mutex() {
-    static mutex sysinfo_mutex_;
-    return sysinfo_mutex_;
+namespace {
+    mutex& sysinfo_mutex() {
+        static mutex sysinfo_mutex_;
+        return sysinfo_mutex_;
+    }
+
+    void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        int cpu_info_data[4] = { -1 };
+        char vendor[13] = {};
+        char brand[49] = {};
+
+        ::__cpuid(cpu_info_data, 0);
+        _NEFORCE memory_copy(vendor, &cpu_info_data[1], 4);
+        _NEFORCE memory_copy(vendor + 4, &cpu_info_data[3], 4);
+        _NEFORCE memory_copy(vendor + 8, &cpu_info_data[2], 4);
+        vendor[12] = '\0';
+
+        CPU_info.vendor = vendor;
+
+        for (int i = 0x80000002; i <= 0x80000004; i++) {
+            ::__cpuid(cpu_info_data, i);
+            _NEFORCE memory_copy(brand + (i - 0x80000002) * 16, cpu_info_data, sizeof(cpu_info_data));
+        }
+        brand[48] = '\0';
+        CPU_info.brand = brand;
+        CPU_info.brand.trim_right();
+
+        ::DWORD buffer_size = 0;
+        ::GetLogicalProcessorInformation(nullptr, &buffer_size);
+
+        if (::GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+            const auto buffer = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(malloc(buffer_size));
+            if (buffer) {
+                if (::GetLogicalProcessorInformation(buffer, &buffer_size)) {
+                    ::DWORD logical_processor_count = 0;
+                    ::DWORD processor_core_count = 0;
+
+                    for (::DWORD i = 0; i < buffer_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++) {
+                        if (buffer[i].Relationship == ::RelationProcessorCore) {
+                            processor_core_count++;
+                            logical_processor_count += _NEFORCE popcount(buffer[i].ProcessorMask);
+                        }
+                    }
+
+                    CPU_info.cores = processor_core_count;
+                    CPU_info.logical_processors = logical_processor_count;
+                }
+                free(buffer);
+            }
+        }
+
+        ::HKEY hkey = nullptr;
+        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+            R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)",
+            0, KEY_READ, &hkey) == ERROR_SUCCESS) {
+
+            ::DWORD mhz = 0;
+            ::DWORD size = sizeof(::DWORD);
+
+            if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr,
+                reinterpret_cast<::LPBYTE>(&mhz), &size) == ERROR_SUCCESS) {
+                CPU_info.current_MHZ = mhz;
+                }
+
+            ::RegCloseKey(hkey);
+            }
+#else
+        const file cpuinfo(path("/proc/cpuinfo"));
+        string_view line;
+        bool first_processor = true;
+        uint32_t processor_count = 0;
+        const string cpuinfo_str = cpuinfo.read();
+        size_t pos = 0;
+
+        while (_NEFORCE getline(cpuinfo_str.view(), pos, line)) {
+            if (line.empty()) continue;
+
+            if (line.find("processor") == 0) {
+                processor_count++;
+                continue;
+            }
+
+            if (first_processor) {
+                if (line.find("vendor_id") == 0) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        CPU_info.vendor = line.substr(colon + 2);
+                    }
+                } else if (line.find("model name") == 0) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        CPU_info.brand = line.substr(colon + 2);
+                    }
+                } else if (line.find("cpu cores") == 0) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        CPU_info.cores = to_uint32(line.view(colon + 2));
+                    }
+                } else if (line.find("flags") == 0 || line.find("Features") == 0) {
+                    const size_t colon = line.find(':');
+                    if (colon != string::npos) {
+                        CPU_info.features = line.substr(colon + 2);
+                    }
+                }
+            }
+
+            if (line.find("cpu MHz") == 0 && CPU_info.current_MHZ == 0) {
+                const size_t colon = line.find(':');
+                if (colon != string::npos) {
+                    CPU_info.current_MHZ = to_uint32(line.view(colon + 2));
+                }
+            }
+        }
+
+        CPU_info.logical_processors = ::sysconf(::_SC_NPROCESSORS_ONLN);
+        if (CPU_info.cores == 0) {
+            CPU_info.cores = ::sysconf(::_SC_NPROCESSORS_CONF);
+        }
+
+        const path cpuinfo_max_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
+        const file cpu_max_freq(cpuinfo_max_freq);
+        if (cpu_max_freq.is_opened()) {
+            string_view freq_str;
+            size_t cmf_pos = 0;
+            const string data = cpu_max_freq.read();
+
+            getline(data.view(), cmf_pos, freq_str,
+            [](const char c) {
+                return is_space(c);
+            });
+
+            if (!freq_str.empty()) {
+                CPU_info.max_MHz = to_uint64(freq_str) / 1000;
+            }
+        }
+
+        if (CPU_info.current_MHZ == 0) {
+            const path scaling_cur_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
+            const file cpu_cur_freq(scaling_cur_freq);
+            if (cpu_cur_freq.is_opened()) {
+                string_view freq_str;
+                size_t cmf_pos = 0;
+                const string data = cpu_cur_freq.read();
+
+                getline(data.view(), cmf_pos, freq_str,
+                [](const char c) {
+                    return is_space(c);
+                });
+
+                if (!freq_str.empty()) {
+                    CPU_info.current_MHZ = to_uint64(freq_str) / 1000;
+                }
+            }
+        }
+#endif
+    }
+
+    void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
+        if (ntdll) {
+            using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
+            const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(
+                ::GetProcAddress(ntdll, "RtlGetVersion"));
+
+            ::OSVERSIONINFOW version_info = { sizeof(version_info) };
+            if (RtlGetVersion(&version_info) == 0) {
+                os_version_info.major = version_info.dwMajorVersion;
+                os_version_info.minor = version_info.dwMinorVersion;
+                os_version_info.build = version_info.dwBuildNumber;
+                os_version_info.platform_id = version_info.dwPlatformId;
+                os_version_info.csd_version = wcharacter::to_string(version_info.szCSDVersion);
+            }
+        }
+
+        ::HKEY hkey{};
+        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+            R"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)",
+            0, KEY_READ, &hkey) == ERROR_SUCCESS) {
+
+            char product_name[256];
+            ::DWORD size = sizeof(product_name);
+
+            if (::RegQueryValueEx(hkey, "ProductName", nullptr, nullptr,
+                reinterpret_cast<::LPBYTE>(product_name), &size) == ERROR_SUCCESS) {
+                os_version_info.product_name = product_name;
+                }
+
+            ::RegCloseKey(hkey);
+            }
+#else
+        ::utsname uname_data{};
+        if (::uname(&uname_data) == 0) {
+            string release = uname_data.release;
+
+            int version_parts[3] = {0, 0, 0};
+            int part_index = 0;
+
+            string current_number;
+            for (const char c: release) {
+                if (_NEFORCE is_digit(c)) {
+                    current_number += c;
+                } else if (c == '.' && !current_number.empty() && part_index < 3) {
+                    version_parts[part_index] = to_int32(current_number.view());
+                    part_index++;
+                    current_number.clear();
+
+                    if (part_index >= 3) {
+                        break;
+                    }
+                } else if (!current_number.empty() && part_index < 3) {
+                    version_parts[part_index] = to_int32(current_number.view());
+                    part_index++;
+                    if (part_index >= 3)
+                        break;
+                    current_number.clear();
+
+                    if (c == '-' || c == '+' || c == ' ') {
+                        break;
+                    }
+                }
+            }
+
+            if (!current_number.empty() && part_index < 3) {
+                version_parts[part_index] = to_int32(current_number.view());
+            }
+
+            os_version_info.major = version_parts[0];
+            os_version_info.minor = version_parts[1];
+            os_version_info.build = version_parts[2];
+            os_version_info.product_name = uname_data.sysname;
+        }
+
+        const file os_release(path("/etc/os-release"));
+        if (!os_release.is_opened()) return;
+
+        string_view line;
+        size_t pos = 0;
+        const string data = os_release.read();
+        while (getline(data.view(), pos, line)) {
+            if (line.find("PRETTY_NAME") == 0) {
+                const size_t eq_pos = line.find('=');
+                if (eq_pos != string::npos) {
+                    string_view value = line.substr(eq_pos + 1);
+                    if (value.front() == '"' && value.back() == '"') {
+                        value = value.substr(1, value.length() - 2);
+                    }
+                    if (!os_version_info.product_name.empty()) {
+                        os_version_info.product_name += " ";
+                    }
+                    os_version_info.product_name += value;
+                }
+                break;
+            }
+        }
+#endif
+    }
 }
+
 
 size_t sysinfo::memory_info::available_memory() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -38,260 +294,6 @@ size_t sysinfo::memory_info::available_memory() const noexcept {
 
 string sysinfo::os_version_info::version() const {
     return to_string(major) + "." + to_string(minor) + "." + to_string(build);
-}
-
-static void get_cpu_info_internal(sysinfo::CPU_info& CPU_info) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    int cpu_info_data[4] = { -1 };
-    char vendor[13] = {};
-    char brand[49] = {};
-
-    ::__cpuid(cpu_info_data, 0);
-    _NEFORCE memory_copy(vendor, &cpu_info_data[1], 4);
-    _NEFORCE memory_copy(vendor + 4, &cpu_info_data[3], 4);
-    _NEFORCE memory_copy(vendor + 8, &cpu_info_data[2], 4);
-    vendor[12] = '\0';
-
-    CPU_info.vendor = vendor;
-
-    for (int i = 0x80000002; i <= 0x80000004; i++) {
-        ::__cpuid(cpu_info_data, i);
-        _NEFORCE memory_copy(brand + (i - 0x80000002) * 16, cpu_info_data, sizeof(cpu_info_data));
-    }
-    brand[48] = '\0';
-    CPU_info.brand = brand;
-    CPU_info.brand.trim_right();
-
-    ::DWORD buffer_size = 0;
-    ::GetLogicalProcessorInformation(nullptr, &buffer_size);
-
-    if (::GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
-        const auto buffer = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(malloc(buffer_size));
-        if (buffer) {
-            if (::GetLogicalProcessorInformation(buffer, &buffer_size)) {
-                ::DWORD logical_processor_count = 0;
-                ::DWORD processor_core_count = 0;
-
-                for (::DWORD i = 0; i < buffer_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION); i++) {
-                    if (buffer[i].Relationship == ::RelationProcessorCore) {
-                        processor_core_count++;
-                        logical_processor_count += _NEFORCE popcount(buffer[i].ProcessorMask);
-                    }
-                }
-
-                CPU_info.cores = processor_core_count;
-                CPU_info.logical_processors = logical_processor_count;
-            }
-            free(buffer);
-        }
-    }
-
-    ::HKEY hkey = nullptr;
-    if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-        "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
-        0, KEY_READ, &hkey) == ERROR_SUCCESS) {
-
-        ::DWORD mhz = 0;
-        ::DWORD size = sizeof(::DWORD);
-
-        if (::RegQueryValueEx(hkey, "~MHz", nullptr, nullptr,
-            reinterpret_cast<::LPBYTE>(&mhz), &size) == ERROR_SUCCESS) {
-            CPU_info.current_MHZ = mhz;
-        }
-
-        ::RegCloseKey(hkey);
-    }
-#else
-    const file cpuinfo(path("/proc/cpuinfo"));
-    string_view line;
-    bool first_processor = true;
-    uint32_t processor_count = 0;
-    const string cpuinfo_str = cpuinfo.read();
-    size_t pos = 0;
-    
-    while (_NEFORCE getline(cpuinfo_str.view(), pos, line)) {
-        if (line.empty()) continue;
-        
-        if (line.find("processor") == 0) {
-            processor_count++;
-            continue;
-        }
-        
-        if (first_processor) {
-            if (line.find("vendor_id") == 0) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    CPU_info.vendor = line.substr(colon + 2);
-                }
-            } else if (line.find("model name") == 0) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    CPU_info.brand = line.substr(colon + 2);
-                }
-            } else if (line.find("cpu cores") == 0) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    CPU_info.cores = to_uint32(line.view(colon + 2));
-                }
-            } else if (line.find("flags") == 0 || line.find("Features") == 0) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    CPU_info.features = line.substr(colon + 2);
-                }
-            }
-        }
-        
-        if (line.find("cpu MHz") == 0 && CPU_info.current_MHZ == 0) {
-            const size_t colon = line.find(':');
-            if (colon != string::npos) {
-                CPU_info.current_MHZ = to_uint32(line.view(colon + 2));
-            }
-        }
-    }
-
-    CPU_info.logical_processors = ::sysconf(::_SC_NPROCESSORS_ONLN);
-    if (CPU_info.cores == 0) {
-        CPU_info.cores = ::sysconf(::_SC_NPROCESSORS_CONF);
-    }
-
-    const path cpuinfo_max_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
-    const file cpu_max_freq(cpuinfo_max_freq);
-    if (cpu_max_freq.is_opened()) {
-        string_view freq_str;
-        size_t cmf_pos = 0;
-        const string data = cpu_max_freq.read();
-
-        getline(data.view(), cmf_pos, freq_str,
-        [](const char c) {
-            return is_space(c);
-        });
-
-        if (!freq_str.empty()) {
-            CPU_info.max_MHz = to_uint64(freq_str) / 1000;
-        }
-    }
-
-    if (CPU_info.current_MHZ == 0) {
-        const path scaling_cur_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
-        const file cpu_cur_freq(scaling_cur_freq);
-        if (cpu_cur_freq.is_opened()) {
-            string_view freq_str;
-            size_t cmf_pos = 0;
-            const string data = cpu_cur_freq.read();
-
-            getline(data.view(), cmf_pos, freq_str,
-            [](const char c) {
-                return is_space(c);
-            });
-
-            if (!freq_str.empty()) {
-                CPU_info.current_MHZ = to_uint64(freq_str) / 1000;
-            }
-        }
-    }
-#endif
-}
-
-static void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
-    if (ntdll) {
-        using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
-        const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(
-            ::GetProcAddress(ntdll, "RtlGetVersion"));
-
-        ::OSVERSIONINFOW version_info = { sizeof(version_info) };
-        if (RtlGetVersion(&version_info) == 0) {
-            os_version_info.major = version_info.dwMajorVersion;
-            os_version_info.minor = version_info.dwMinorVersion;
-            os_version_info.build = version_info.dwBuildNumber;
-            os_version_info.platform_id = version_info.dwPlatformId;
-            os_version_info.csd_version = wcharacter::to_string(version_info.szCSDVersion);
-        }
-    }
-
-    ::HKEY hkey{};
-    if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-        "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-        0, KEY_READ, &hkey) == ERROR_SUCCESS) {
-
-        char product_name[256];
-        ::DWORD size = sizeof(product_name);
-
-        if (::RegQueryValueEx(hkey, "ProductName", nullptr, nullptr,
-            reinterpret_cast<::LPBYTE>(product_name), &size) == ERROR_SUCCESS) {
-            os_version_info.product_name = product_name;
-        }
-
-        ::RegCloseKey(hkey);
-    }
-#else
-    ::utsname uname_data{};
-    if (::uname(&uname_data) == 0) {
-        string release = uname_data.release;
-
-        int version_parts[3] = {0, 0, 0};
-        int part_index = 0;
-
-        string current_number;
-        for (const char c: release) {
-            if (_NEFORCE is_digit(c)) {
-                current_number += c;
-            } else if (c == '.' && !current_number.empty() && part_index < 3) {
-                version_parts[part_index] = to_int32(current_number.view());
-                part_index++;
-                current_number.clear();
-
-                if (part_index >= 3) {
-                    break;
-                }
-            } else if (!current_number.empty() && part_index < 3) {
-                version_parts[part_index] = to_int32(current_number.view());
-                part_index++;
-                if (part_index >= 3)
-                    break;
-                current_number.clear();
-
-                if (c == '-' || c == '+' || c == ' ') {
-                    break;
-                }
-            }
-        }
-
-        if (!current_number.empty() && part_index < 3) {
-            version_parts[part_index] = to_int32(current_number.view());
-        }
-
-        os_version_info.major = version_parts[0];
-        os_version_info.minor = version_parts[1];
-        os_version_info.build = version_parts[2];
-        os_version_info.product_name = uname_data.sysname;
-    }
-
-    const file os_release(path("/etc/os-release"));
-    if (!os_release.is_opened()) return;
-
-    string_view line;
-    size_t pos = 0;
-    const string data = os_release.read();
-    while (getline(data.view(), pos, line)) {
-        if (line.find("PRETTY_NAME") == 0) {
-            const size_t eq_pos = line.find('=');
-            if (eq_pos != string::npos) {
-                string_view value = line.substr(eq_pos + 1);
-                if (value.front() == '"' && value.back() == '"') {
-                    value = value.substr(1, value.length() - 2);
-                }
-                if (!os_version_info.product_name.empty()) {
-                    os_version_info.product_name += " ";
-                }
-                os_version_info.product_name += value;
-            }
-            break;
-        }
-    }
-
-#endif
 }
 
 sysinfo::sysinfo() {

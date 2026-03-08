@@ -1,6 +1,5 @@
 #ifndef NEFORCE_CORE_STRING_REGEX_HPP__
 #define NEFORCE_CORE_STRING_REGEX_HPP__
-#ifdef NEFORCE_SUPPORT_PCRE2
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
@@ -34,42 +33,40 @@ public:
     NEFORCE_NODISCARD bool matched() const noexcept {
         return position_ != string::npos;
     }
+
     NEFORCE_NODISCARD size_t position() const noexcept {
         return position_;
     }
+
     NEFORCE_NODISCARD size_t length() const noexcept {
         return length_;
     }
+
     NEFORCE_NODISCARD string_view data() const noexcept {
-        return matched() ? groups_[0].view() : ""_sv;
+        return matched() ? groups_[0].view() : "";
     }
+
     NEFORCE_NODISCARD size_t size() const noexcept {
         return groups_.size();
     }
     
     NEFORCE_NODISCARD string_view operator [](const size_t idx) const noexcept {
-        if (idx >= groups_.size()) return ""_sv;
-        return groups_[idx].view();
+        return idx < groups_.size() ? groups_[idx].view() : "";
     }
 
     NEFORCE_NODISCARD pair<size_t, size_t> position(const size_t idx) const noexcept {
-        if (idx >= group_positions_.size()) {
-            return {string::npos, 0};
-        }
-        return group_positions_[idx];
+        return idx < group_positions_.size() ? group_positions_[idx] : pair<size_t, size_t>{string::npos, 0};
     }
 
     NEFORCE_NODISCARD string_view prefix() const noexcept {
-        if (!matched()) return ""_sv;
-        return subject_.view(0, position_);
+        return matched() ? subject_.view(0, position_) : "";
     }
 
     NEFORCE_NODISCARD string_view suffix() const noexcept {
-        if (!matched()) return ""_sv;
-        return subject_.view(position_ + length_);
+        return matched() ? subject_.view(position_ + length_) : "";
     }
 
-    string format(string_view fmt) const;
+    NEFORCE_NODISCARD string format(string_view fmt) const;
 
     NEFORCE_NODISCARD iterator begin() const noexcept {
         return groups_.begin();
@@ -110,6 +107,7 @@ private:
 
 private:
     void compile(const string& pattern, uint32_t options = 0);
+    void compile(string&& pattern, uint32_t options = 0);
     
     match_result do_match(PCRE2_SPTR subject, size_t length,
                           size_t start_offset, uint32_t options,
@@ -117,6 +115,7 @@ private:
     
 public:
     explicit regex(const string& pattern, uint32_t options = 0);
+    explicit regex(string&& pattern, uint32_t options = 0);
     
     regex(regex&& other) noexcept;
     regex& operator =(regex&& other) noexcept;
@@ -124,6 +123,7 @@ public:
     regex(const regex&) = delete;
     regex& operator =(const regex&) = delete;
 
+    NEFORCE_NODISCARD match_result do_match(const string& str) const;
     NEFORCE_NODISCARD bool match(const string& str) const;
     
     NEFORCE_NODISCARD match_result search(const string& str, size_t pos = 0) const;
@@ -300,5 +300,4 @@ inline regex_iterator regex::end(const string& str) const {
 }
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_CORE_STRING_REGEX_HPP__

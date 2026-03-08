@@ -27,6 +27,14 @@ protected:
 
 protected:
     void accept_loop() {
+        if (!acceptor_.set_nonblocking(true)) {
+            if (exception_handler_) {
+                exception_handler_(socket_exception("Failed to set acceptor to non-blocking mode"));
+            }
+            running_ = false;
+            return;
+        }
+
         while (running_) {
             try {
                 auto client = acceptor_.accept_nonblock();
@@ -66,9 +74,7 @@ protected:
     }
 
 public:
-    explicit basic_tcp_server(
-        const uint16_t port,
-        const size_t worker_count = thread_pool::max_threshhold)
+    explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold)
     : port_(port) {
         if (worker_count == 0) {
             throw_exception(value_exception("Worker count must be greater than 0"));
@@ -87,12 +93,20 @@ public:
     basic_tcp_server(basic_tcp_server&&) noexcept = default;
     basic_tcp_server& operator =(basic_tcp_server&&) noexcept = default;
     
-    void set_client_handler(client_handler_t handler) {
+    bool set_client_handler(client_handler_t handler) {
+        if (running_) {
+            return false;
+        }
         client_handler_ = _NEFORCE move(handler);
+        return true;
     }
 
-    void set_exception_handler(exception_handler_t handler) {
+    bool set_exception_handler(exception_handler_t handler) {
+        if (running_) {
+            return false;
+        }
         exception_handler_ = _NEFORCE move(handler);
+        return true;
     }
 
     virtual bool load_certificate(const string&, const string&) {
@@ -104,6 +118,9 @@ public:
             return true;
         }
         if (backlog <= 0) {
+            return false;
+        }
+        if (!client_handler_) {
             return false;
         }
 
@@ -138,11 +155,11 @@ public:
         client_pool_.stop();
     }
 
-    bool is_running() const noexcept {
+    NEFORCE_NODISCARD bool is_running() const noexcept {
         return running_;
     }
 
-    uint16_t port() const noexcept {
+    NEFORCE_NODISCARD uint16_t port() const noexcept {
         return port_;
     }
 };
@@ -178,13 +195,13 @@ protected:
     }
 
 public:
-    explicit ssl_server(
-        const uint16_t port,
-        const size_t worker_count = thread_pool::max_threshhold)
-    : basic_tcp_server<ssl_socket>(port, worker_count),
-      ssl_ctx_(ssl_method::TLS_SERVER) {}
+    explicit ssl_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold)
+    : basic_tcp_server<ssl_socket>(port, worker_count), ssl_ctx_(ssl_method::TLS_SERVER) {}
 
     bool load_certificate(const string& cert_file, const string& key_file) override {
+        if (is_running()) {
+            return false;
+        }
         if (cert_file.empty() || key_file.empty()) {
             return false;
         }
@@ -192,17 +209,20 @@ public:
     }
 
     void set_ssl_context(ssl_context ctx) {
+        if (is_running()) {
+            throw_exception(ssl_exception("Cannot set SSL context while server is running"));
+        }
         if (!ctx.is_valid()) {
             throw_exception(ssl_exception("Invalid SSL context"));
         }
         ssl_ctx_ = _NEFORCE move(ctx);
     }
 
-    ssl_context& get_ssl_context() noexcept {
+    NEFORCE_NODISCARD ssl_context& get_ssl_context() noexcept {
         return ssl_ctx_;
     }
 
-    const ssl_context& get_ssl_context() const noexcept {
+    NEFORCE_NODISCARD const ssl_context& get_ssl_context() const noexcept {
         return ssl_ctx_;
     }
 
@@ -215,7 +235,6 @@ public:
 };
 
 #endif // NEFORCE_SUPPORT_OPENSSL
-
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__

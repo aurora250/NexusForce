@@ -2683,17 +2683,19 @@ public:
     /**
      * @brief 转换为小写
      */
-    NEFORCE_CONSTEXPR20 void lowercase()
+    NEFORCE_CONSTEXPR20 basic_string& lowercase()
     noexcept(noexcept(_NEFORCE transform(begin(), end(), begin(), _NEFORCE to_lowercase<CharT>))) {
         _NEFORCE transform(begin(), end(), begin(), _NEFORCE to_lowercase<CharT>);
+        return *this;
     }
 
     /**
      * @brief 转换为大写
      */
-    NEFORCE_CONSTEXPR20 void uppercase()
+    NEFORCE_CONSTEXPR20 basic_string& uppercase()
     noexcept(noexcept(_NEFORCE transform(begin(), end(), begin(), _NEFORCE to_uppercase<CharT>))) {
         _NEFORCE transform(begin(), end(), begin(), _NEFORCE to_uppercase<CharT>);
+        return *this;
     }
 
     /**

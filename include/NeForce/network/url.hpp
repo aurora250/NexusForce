@@ -45,18 +45,8 @@ struct url : iobject<url> {
      */
     url() = default;
 
-    /**
-     * @brief 字符串视图构造函数
-     * @param text URL字符串视图
-     * @throws network_exception 当URL格式无效时抛出
-     */
-    explicit url(const string_view text) {
-        url tmp;
-        if (!tmp.try_parse(text)) {
-            throw_exception(network_exception("Invalid URL format"));
-        }
-        *this = _NEFORCE move(tmp);
-    }
+    url(url&& other) = default;
+    url& operator =(url&& other) = default;
 
     /**
      * @brief 验证URL是否有效

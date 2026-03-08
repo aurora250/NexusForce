@@ -2,14 +2,17 @@
 #include <NeForce/core/file/path.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-static bool is_plugin_file(const string_view p) {
-    const auto ext = path::extension(p);
+namespace {
+    bool is_plugin_file(const string_view p) {
+        const auto ext = path::extension(p);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return (ext == ".dll");
+        return (ext == ".dll");
 #else
-    return (ext == ".so");
+        return (ext == ".so");
 #endif
+    }
 }
+
 
 plugin_manager::~plugin_manager() {
     shutdown_all();
@@ -43,7 +46,7 @@ void plugin_manager::load_plugin(const string_view pth) {
     auto lib = make_unique<dynamic_library>(pth);
 
     const auto create_func = lib->to_symbol<iplugin*(*)()>(NEFORCE_PLUGIN_CREATE_FUNC);
-    auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
+    const auto destroy_func = lib->to_symbol<void(*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
 
     iplugin* raw_ptr = create_func();
     if (!raw_ptr) {

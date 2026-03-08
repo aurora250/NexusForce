@@ -1,9 +1,40 @@
 #include <NeForce/core/async/thread_pool.hpp>
+#include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    thread_local worker_context* t_worker_ctx = nullptr;
+    thread_local shared_ptr<task_group> t_current_task_group = nullptr;
+
+    struct thread_pool_id_generator {
+        static uint32_t& get_id() noexcept {
+            static uint32_t pool_thread_id = 0;
+            return pool_thread_id;
+        }
+        static uint32_t get_new_id() noexcept {
+            return get_id()++;
+        }
+        static void reset_id() noexcept {
+            get_id() = 0;
+        }
+    };
+}
+
+
 STEAL_STRATEGY local_queue::steal_strategy_ = STEAL_STRATEGY::ADAPTIVE;
+
 uint32_t local_queue::fixed_batch_size_ = 4;
+
+
+worker_context*& get_worker_context() noexcept {
+    return t_worker_ctx;
+}
+
+shared_ptr<task_group>& get_current_task_group() noexcept {
+    return t_current_task_group;
+}
+
 
 uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tail) {
     uint64_t cur_src_head = head_.load(memory_order_acquire);
@@ -155,15 +186,6 @@ worker_context& worker_context::operator =(worker_context&& other) noexcept {
     }
     return *this;
 }
-
-struct thread_pool_id_generator {
-    static uint32_t& get_id() noexcept {
-        static uint32_t pool_thread_id = 0;
-        return pool_thread_id;
-    }
-    static uint32_t get_new_id() noexcept { return get_id()++; }
-    static void reset_id() noexcept { get_id() = 0; }
-};
 
 NEFORCE_BEGIN_INNER__
 

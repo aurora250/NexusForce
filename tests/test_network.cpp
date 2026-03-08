@@ -1,13 +1,12 @@
 #include "test.h"
 
-
 void handle_session_api(
     http_request &request, http_response &response, http_server &server) {
-    session *sess = server.session(request);
+    session *sess = server.get_session(request);
     string action = request.parameter("action");
 
     if (action == "create") {
-        sess = server.session(request, true);
+        sess = server.get_session(request, true);
         response.status = HTTP_STATUS::S2_OK;
         response.status_message = "OK";
         response.set_content_type(HTTP_CONTENT::JSON_APP);
@@ -79,7 +78,7 @@ void handle_session_attribute(http_request &request, http_response &response, ht
         attrValue = request.parameter("attrValue");
     }
 
-    session *sess = server.session(request, true);
+    session *sess = server.get_session(request, true);
 
     if (!attrName.empty()) {
         (*sess)[attrName] = attrValue;
@@ -201,12 +200,12 @@ void test_https_server() {
 
         http_router& r = server.router();
 
-        r.get("/", [](http_request& req, http_response& res) {
-            printcln(color::cyan(), "HTTPS Request from:", req.header("User-Agent"));
+        r.get("/", [](http_request& request, http_response& response) {
+            printcln(color::cyan(), "HTTPS Request from:", request.header("User-Agent"));
 
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
 
             const string html = R"(
 <!DOCTYPE html>
@@ -228,43 +227,43 @@ void test_https_server() {
 </html>
             )";
 
-            res.body = html;
+            response.body = html;
         });
 
-        r.get("/api/info", [](http_request& req, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::JSON_APP);
+        r.get("/api/info", [](http_request& request, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
 
-            json_builder response;
-            response.begin_object()
-                .key("https").value(req.header(HTTP_KEY::X_Forwarded_Proto) == "https")
-                .key("method").value(req.method.to_string())
-                .key("path").value(req.path)
-                .key("user_agent").value(req.header("User-Agent"))
+            json_builder json;
+            json.begin_object()
+                .key("https").value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                .key("method").value(request.method.to_string())
+                .key("path").value(request.path)
+                .key("user_agent").value(request.header("User-Agent"))
                 .end_object();
 
-            res.body = response.build()->to_string();
+            response.body = json.build()->to_string();
         });
 
-        r.post("/api/echo", [](http_request& req, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::JSON_APP);
+        r.post("/api/echo", [](http_request& request, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
 
-            json_builder response;
-            response.begin_object()
-                .key("https").value(req.header(HTTP_KEY::X_Forwarded_Proto) == "https")
-                .key("body").value(req.body)
-                .key("content_type").value(req.header(HTTP_KEY::Content_Type))
+            json_builder json;
+            json.begin_object()
+                .key("https").value(request.header(HTTP_KEY::X_Forwarded_Proto) == "https")
+                .key("body").value(request.body)
+                .key("content_type").value(request.header(HTTP_KEY::Content_Type))
                 .end_object();
 
-            res.body = response.build()->to_string();
+            response.body = json.build()->to_string();
         });
 
-        r.set_not_found_handler([](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S4_NOT_FOUNT;
-            res.body = "HTTPS 404 - Not Found";
+        r.set_not_found_handler([](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S4_NOT_FOUNT;
+            response.body = "HTTPS 404 - Not Found";
         });
 
         if (server.start()) {
@@ -276,7 +275,14 @@ void test_https_server() {
 
             signal_manager::instance().register_handler(
                 SIGNAL_EVENT::INTERRUPT,
-                signal_handler
+                [&server](SIGNAL_EVENT event, void* context) -> bool {
+                    if (event == SIGNAL_EVENT::INTERRUPT) {
+                        println("Interrupting...");
+                        server.stop();
+                        immediate_exit(0);
+                    }
+                    return false;
+                }
             );
 
             while (true) {
@@ -293,87 +299,87 @@ void test_http_server() {
     try {
         http_server server(8080, 128);
 
-        http_router& r = server.router();
-        r.use(new logging_filter());
-        r.use(new cors_filter("http://127.0.0.1:5500"));
-        r.use(new static_file_filter(res_root().str()));
+        http_router& router = server.router();
+        router.use(make_unique<logging_filter>());
+        router.use(make_unique<cors_filter>("http://127.0.0.1:5500"));
+        router.use(make_unique<static_file_filter>(res_root().str()));
 
-        r.post("/old-link", [](http_request&, http_response& res) {
-            res.redirect_url = "/new-link";
+        router.post("/old-link", [](http_request&, http_response& response) {
+            response.redirect_url = "/new-link";
         });
-        r.post("/forward-me", [](http_request&, http_response& res) {
-            res.forward_path = "/forward-target";
+        router.post("/forward-me", [](http_request&, http_response& response) {
+            response.forward_path = "/forward-target";
         });
-        r.post("/forward-target", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.body = "Forward Successfully";
+        router.post("/forward-target", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.body = "Forward Successfully";
         });
 
-        r.get_post("/api/session",
-            [&server](http_request& req, http_response& res) {
-                handle_session_api(req, res, server);
+        router.get_post("/api/session",
+            [&server](http_request& request, http_response& response) {
+                handle_session_api(request, response, server);
             }
         );
-        r.get_post("/api/session-attribute",
-            [&server](http_request& req, http_response& res) {
-                handle_session_attribute(req, res, server);
+        router.get_post("/api/session-attribute",
+            [&server](http_request& request, http_response& response) {
+                handle_session_attribute(request, response, server);
             }
         );
-        r.post_delete("/api/cookie",
-            [](http_request& req, http_response& res) {
-                handle_cookie_api(req, res);
+        router.post_delete("/api/cookie",
+            [](http_request& request, http_response& response) {
+                handle_cookie_api(request, response);
             }
         );
 
-        r.get("/api/logger-test", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.body = "Logging filter test successful";
+        router.get("/api/logger-test", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.body = "Logging filter test successful";
         });
-        r.get("/api/data", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::JSON_APP);
-            res.body = R"({"status":"success"})";
-        });
-
-        r.get("/", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.body = file::read(res_root() / "index.html");
+        router.get("/api/data/*", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::JSON_APP);
+            response.body = R"({"status":"success"})";
         });
 
-        r.get("/detail", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.body = file::read(res_root() / "detail.html");
+        router.get("/", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.body = file::read(res_root() / "index.html");
         });
 
-        r.get("/new-link", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.body = file::read(res_root() / "index.html");
+        router.get("/detail", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.body = file::read(res_root() / "detail.html");
         });
 
-        r.get("/test", [](http_request&, http_response& res) {
-            res.status = HTTP_STATUS::S2_OK;
-            res.status_message = "OK";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            res.body = file::read(res_root() / "test.html");
+        router.get("/new-link", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.body = file::read(res_root() / "index.html");
         });
 
-        r.set_not_found_handler([](http_request&, http_response &res) {
-            res.status = HTTP_STATUS::S4_NOT_FOUNT;
-            res.status_message = "Not Found";
-            res.set_content_type(HTTP_CONTENT::HTML_TEXT);
+        router.get("/test", [](http_request&, http_response& response) {
+            response.status = HTTP_STATUS::S2_OK;
+            response.status_message = "OK";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
+            response.body = file::read(res_root() / "test.html");
+        });
+
+        router.set_not_found_handler([](http_request&, http_response &response) {
+            response.status = HTTP_STATUS::S4_NOT_FOUNT;
+            response.status_message = "Not Found";
+            response.set_content_type(HTTP_CONTENT::HTML_TEXT);
             try {
-                res.body = file::read(res_root() / "404err.html");
+                response.body = file::read(res_root() / "404err.html");
             } catch (...) {
-                res.body = "<h1>404 - Page Not Found</h1>";
+                response.body = "<h1>404 - Page Not Found</h1>";
             }
         });
 
@@ -412,8 +418,7 @@ void test_http_server() {
                     if (event == SIGNAL_EVENT::INTERRUPT) {
                         println("Interrupting...");
                         server.stop();
-                        signal_manager::instance().stop_monitoring();
-                        std::exit(0);
+                        immediate_exit(0);
                     }
                     return false;
                 }
@@ -435,18 +440,21 @@ void test_http_client() {
     try {
         http_client::config config;
         config.connect_timeout = milliseconds(5000);
+        config.receive_timeout = milliseconds(5000);
         config.follow_redirects = true;
         config.max_redirects = 5;
+        config.verify_ssl = true;
         http_client client(config);
 
-        http_client_request req;
-        req.host = "www.example.com";
-        req.port = 80;
-        req.method = HTTP_METHOD::GET;
-        req.path = "/";
-        req.headers["User-Agent"] = "NeForce HTTP Client/1.0";
-        req.headers["Accept"] = "*/*";
-        auto response = client.request(move(req));
+        const path pem = res_root() / "cacert.pem";
+        client.get_client().load_ca_file(pem.str());
+
+        auto response = client.get("https://www.example.com");
+        if (response.is_success()) {
+            println("Response:", response.body);
+        } else {
+            println("Request failed:", response.status_message);
+        }
 
         println("HTTP Version: HTTP/", response.http_version_major, ".", response.http_version_minor);
         println("Status Message: ", response.status_message);

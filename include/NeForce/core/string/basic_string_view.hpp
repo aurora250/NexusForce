@@ -385,7 +385,7 @@ public:
      * @return 指定位置的字符引用
      */
     NEFORCE_NODISCARD constexpr const_reference operator [](const size_type n) const noexcept {
-        NEFORCE_DEBUG_VERIFY(n < size_, "basic string view index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(n <= size_, "basic string view index out of ranges.");
         return data_[n];
     }
 
@@ -395,7 +395,7 @@ public:
      * @return 指定位置的字符引用
      */
     NEFORCE_NODISCARD constexpr const_reference at(const size_type n) const {
-        NEFORCE_DEBUG_VERIFY(n < size_, "basic string view index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(n <= size_, "basic string view index out of ranges.");
         return data_[n];
     }
 
@@ -430,7 +430,7 @@ public:
      * @return 实际复制的字符数
      */
     constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const {
-        NEFORCE_DEBUG_VERIFY(off < size_, "basic string view index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(off <= size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
         Traits::copy(str, data_ + off, count);
         return count;
@@ -443,7 +443,7 @@ public:
      * @return 子字符串视图
      */
     NEFORCE_NODISCARD constexpr basic_string_view substr(const size_type off = 0, size_type count = npos) const {
-        NEFORCE_DEBUG_VERIFY(off < size_, "basic string view index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(off <= size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
         return basic_string_view(data_ + off, count);
     }

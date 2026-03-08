@@ -20,22 +20,22 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-
-static void ensure_initialized() noexcept {
-    static once_flag init_flag{};
-    call_once(init_flag, [](){
-        ::SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
-        if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {}
-    });
-}
-
-static mutex& dbghelp_mutex() {
-    static mutex mtx{};
-    return mtx;
-}
-
+    void ensure_initialized() noexcept {
+        static once_flag init_flag{};
+        call_once(init_flag, [](){
+            ::SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
+            if (!::SymInitialize(::GetCurrentProcess(), nullptr, 1)) {}
+        });
+    }
+    mutex& dbghelp_mutex() {
+        static mutex mtx{};
+        return mtx;
+    }
 #endif
+}
+
 
 string stacktrace::frame::name() const {
     if (!address_) return "<empty>";

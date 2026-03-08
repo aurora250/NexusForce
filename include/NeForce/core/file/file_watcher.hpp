@@ -69,7 +69,7 @@ public:
      * @param recursive 是否递归监视子目录
      * @throws system_exception 路径不存在或不是目录时抛出
      */
-    explicit file_watcher(const path& watch_path, bool recursive = false);
+    explicit file_watcher(path watch_path, bool recursive = false);
 
     /**
      * @brief 析构函数

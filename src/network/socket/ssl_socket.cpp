@@ -20,7 +20,7 @@ void ssl_socket::init_server_ssl(const ssl_context& ctx) {
     }
 }
 
-void ssl_socket::init_client_ssl(const ssl_context& ctx) {
+void ssl_socket::init_client_ssl(const ssl_context& ctx, const string& hostname) {
     if (!is_open()) {
         throw_exception(value_exception("Socket is not open"));
     }
@@ -31,6 +31,9 @@ void ssl_socket::init_client_ssl(const ssl_context& ctx) {
     try {
         ssl_.emplace(ctx);
         ssl_->set_fd(native_handle());
+        if (!hostname.empty()) {
+            ssl_->set_sni_hostname(hostname);
+        }
         ssl_->connect();
     } catch (...) {
         ssl_.reset();

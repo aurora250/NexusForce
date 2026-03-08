@@ -12,7 +12,9 @@ public:
     udp_socket& operator =(udp_socket&& other) = default;
 
     void open(int family = AF_INET);
+
     void bind(const ip_address& endpoint);
+
     void connect(const ip_address& endpoint);
 
     ssize_t send_to(memory_view<const char> data, const ip_address& endpoint, int flags = 0);

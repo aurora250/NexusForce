@@ -1,8 +1,6 @@
+#include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/string/to_string.hpp>
-#include <NeForce/core/time/duration.hpp>
-
-#include "NeForce/core/file/file.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/inotify.h>
 #include <sys/eventfd.h>
@@ -11,8 +9,8 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-file_watcher::file_watcher(const path& watch_path, const bool recursive)
-    : watch_path_(watch_path), recursive_(recursive) {
+file_watcher::file_watcher(path watch_path, const bool recursive)
+: watch_path_(move(watch_path)), recursive_(recursive) {
     if (!watch_path_.exists() || !watch_path_.is_directory()) {
         throw_exception(system_exception("Watch path must be an existing directory"));
     }

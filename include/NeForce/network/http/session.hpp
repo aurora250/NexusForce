@@ -6,21 +6,6 @@
 #include "NeForce/network/http/http_constants.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-struct NEFORCE_API HTTP_KEY {
-    static const string Access_Control_Allow_Credentials;
-    static const string Access_Control_Allow_Headers;
-    static const string Access_Control_Allow_Methods;
-    static const string Access_Control_Allow_Origin;
-    static const string Access_Control_Max_Age;
-    static const string Connection;
-    static const string Content_Length;
-    static const string Content_Type;
-    static const string Lax;
-    static const string Strict;
-    static const string X_Forwarded_Proto;
-};
-
-
 struct NEFORCE_API cookie : istringify<cookie> {
     HTTP_COOKIE_NAME name{};
     string value{};
@@ -33,6 +18,11 @@ struct NEFORCE_API cookie : istringify<cookie> {
     datetime expires{};
 
     NEFORCE_NODISCARD string to_string() const;
+
+    NEFORCE_NODISCARD bool is_valid() const noexcept;
+    NEFORCE_NODISCARD bool is_expired() const noexcept;
+
+    void set_expires_from_now(int64_t seconds);
 };
 
 
@@ -45,19 +35,31 @@ struct NEFORCE_API session : istringify<session> {
     bool is_new = true;
     bool invalidated = false;
 
-    explicit session(string session_id)
-    : id(_NEFORCE move(session_id)) {}
+    NEFORCE_NODISCARD string& operator [](const string& key);
 
-    NEFORCE_NODISCARD string& operator [](const string& key) {
-        last_access = datetime::now();
-        return data[key];
-    }
+    NEFORCE_NODISCARD string_view get(const string& key) const;
+    void set(const string& key, string value);
 
-    NEFORCE_NODISCARD bool is_valid() const noexcept {
-        return !invalidated && !expired();
-    }
+    bool remove(const string& key);
+    void clear();
+
+    void invalidate() noexcept;
+
+    void touch() noexcept;
+
+    NEFORCE_NODISCARD bool contains(const string& key) const noexcept;
+
+    NEFORCE_NODISCARD bool is_valid() const noexcept;
 
     NEFORCE_NODISCARD bool expired(int max_inactive = 0) const noexcept;
+
+    NEFORCE_NODISCARD int64_t age() const noexcept {
+        return datetime::now() - create_time;
+    }
+
+    NEFORCE_NODISCARD int64_t idle_time() const noexcept {
+        return datetime::now() - last_access;
+    }
 
     NEFORCE_NODISCARD string to_string() const;
 };

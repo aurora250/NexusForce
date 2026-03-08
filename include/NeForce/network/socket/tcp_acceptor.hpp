@@ -9,9 +9,9 @@ public:
 
     void open(const ip_address& endpoint, int backlog = SOMAXCONN);
 
-    tcp_socket accept();
+    NEFORCE_NODISCARD tcp_socket accept();
 
-    optional<tcp_socket> accept_nonblock();
+    NEFORCE_NODISCARD optional<tcp_socket> accept_nonblock();
 };
 
 NEFORCE_END_NAMESPACE__

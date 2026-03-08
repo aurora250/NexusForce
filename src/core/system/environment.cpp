@@ -10,35 +10,38 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-static shared_mutex& get_mutex() {
-    static shared_mutex mutex;
-    return mutex;
-}
-
-static string get_unsafe(const string& name) {
-#ifdef NEFORCE_COMPILER_MSVC
-    char* value = nullptr;
-    size_t size = 0;
-
-    if (::_dupenv_s(&value, &size, name.data()) == 0 && value != nullptr) {
-        string result(value);
-        ::free(value);
-        return result;
+namespace {
+    shared_mutex& get_mutex() {
+        static shared_mutex mutex;
+        return mutex;
     }
-    return "";
+
+    string get_unsafe(const string& name) {
+#ifdef NEFORCE_COMPILER_MSVC
+        char* value = nullptr;
+        size_t size = 0;
+
+        if (::_dupenv_s(&value, &size, name.data()) == 0 && value != nullptr) {
+            string result(value);
+            ::free(value);
+            return result;
+        }
+        return "";
 #else
-    const char* value = ::getenv(name.data());
-    return value ? string(value) : "";
+        const char* value = ::getenv(name.data());
+        return value ? string(value) : "";
 #endif
+    }
+
+    bool set_unsafe(const string& name, const string& value, const bool overwrite = true) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return ::_putenv_s(name.data(), value.data()) == 0;
+#else
+        return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
+#endif
+    }
 }
 
-static bool set_unsafe(const string& name, const string& value, const bool overwrite = true) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::_putenv_s(name.data(), value.data()) == 0;
-#else
-    return ::setenv(name.data(), value.data(), overwrite ? 1 : 0) == 0;
-#endif
-}
 
 string environment::get(const string& name) {
     shared_lock<shared_mutex> lock(get_mutex());

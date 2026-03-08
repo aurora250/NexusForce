@@ -21,46 +21,42 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_PLATFORM_LINUX
-
-static char** build_argv(
-    const string& executable, const vector<string>& args) {
-    const size_t argc = args.size() + 2;
-    const auto argv = new char*[argc];
-
-    argv[0] = new char[executable.length() + 1];
-    _NEFORCE string_copy(argv[0], executable.data());
-
-    for (size_t i = 0; i < args.size(); ++i) {
-        argv[i + 1] = new char[args[i].length() + 1];
-        _NEFORCE string_copy(argv[i + 1], args[i].data());
-    }
-
-    argv[argc - 1] = nullptr;
-    return argv;
-}
-
-static void free_argv(char** argv) noexcept{
-    if (argv) {
-        for (int i = 0; argv[i] != nullptr; ++i)
-            delete[] argv[i];
-        delete[] argv;
-    }
-}
-
-#endif
-
+namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-
-static string build_command_line(const string& executable, const vector<string>& args) {
-    string cmd_line = "\"" + executable + "\"";
-    for (const auto& arg : args) {
-        cmd_line += " \"" + arg + "\"";
+    string build_command_line(const string& executable, const vector<string>& args) {
+        string cmd_line = "\"" + executable + "\"";
+        for (const auto& arg : args) {
+            cmd_line += " \"" + arg + "\"";
+        }
+        return cmd_line;
     }
-    return cmd_line;
-}
-
 #endif
+
+#ifdef NEFORCE_PLATFORM_LINUX
+    char** build_argv(const string& executable, const vector<string>& args) {
+        const size_t argc = args.size() + 2;
+        const auto argv = new char*[argc];
+
+        argv[0] = new char[executable.length() + 1];
+        _NEFORCE string_copy(argv[0], executable.data());
+
+        for (size_t i = 0; i < args.size(); ++i) {
+            argv[i + 1] = new char[args[i].length() + 1];
+            _NEFORCE string_copy(argv[i + 1], args[i].data());
+        }
+
+        argv[argc - 1] = nullptr;
+        return argv;
+    }
+    void free_argv(char** argv) noexcept{
+        if (argv) {
+            for (int i = 0; argv[i] != nullptr; ++i)
+                delete[] argv[i];
+            delete[] argv;
+        }
+    }
+#endif
+}
 
 
 process::state_info process::create(

@@ -1,15 +1,18 @@
 #include <NeForce/core/async/at_thread_exit.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-struct thread_exit_registry {
-    at_thread_exit_elt* thread_exit_list = nullptr;
+namespace {
+    struct thread_exit_registry {
+        at_thread_exit_elt* thread_exit_list = nullptr;
 
-    ~thread_exit_registry() {
-        at_thread_exit_callbacks();
-    }
-};
+        ~thread_exit_registry() {
+            at_thread_exit_callbacks();
+        }
+    };
 
-static thread_local thread_exit_registry thread_registry;
+    thread_local thread_exit_registry thread_registry;
+}
+
 
 void at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept {
     elt->next = thread_registry.thread_exit_list;

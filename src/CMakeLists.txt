@@ -91,6 +91,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/websocket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
 )
@@ -181,7 +182,7 @@ if(WIN32)
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(NexusForce PUBLIC
-            atomic
+            atomic pthread
     )
 endif()
 
@@ -231,7 +232,7 @@ if(NEXUSFORCE_ENABLE_REDIS)
     if(TARGET hiredis::hiredis)
         target_link_libraries(NexusForce PUBLIC hiredis::hiredis)
         target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_HIREDIS NEFORCE_SUPPORT_DB)
-        message(STATUS "Redis (hiredis) linked successfully")
+        message(STATUS "hiredis linked successfully")
     else()
         message(WARNING "hiredis not found - related functionality will be disabled")
     endif()
@@ -250,6 +251,17 @@ else()
     message(STATUS "zlib support disabled")
 endif()
 
+if(NEXUSFORCE_ENABLE_LZ4)
+    find_package(lz4 REQUIRED)
+    if(TARGET lz4::lz4)
+        target_link_libraries(NexusForce PUBLIC lz4::lz4)
+        target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_LZ4)
+        message(STATUS "lz4 linked successfully")
+    endif()
+else()
+    message(STATUS "lz4 support disabled")
+endif()
+
 if(NEXUSFORCE_ENABLE_OPENSSL)
     find_package(OpenSSL REQUIRED)
     if(TARGET OpenSSL::SSL AND TARGET OpenSSL::Crypto)
@@ -261,26 +273,14 @@ else()
     message(STATUS "OpenSSL support disabled")
 endif()
 
-if(NEXUSFORCE_ENABLE_PCRE2)
-    find_package(pcre2 CONFIG QUIET COMPONENTS 8BIT)
-    if(TARGET PCRE2::8BIT)
-        target_link_libraries(NexusForce PUBLIC PCRE2::8BIT)
-        target_compile_definitions(NexusForce PUBLIC
-                NEFORCE_SUPPORT_PCRE2
-                PCRE2_CODE_UNIT_WIDTH=8
-        )
-        if(NEXUSFORCE_USING_PCRE2_JIT)
-            target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_PCRE2_JIT)
-            message(STATUS "PCRE2 with JIT linked successfully")
-        else()
-            message(STATUS "PCRE2 linked successfully")
-        endif()
-    else()
-        message(WARNING "PCRE2 not found - related functionality will be disabled")
-    endif()
-else()
-    message(STATUS "PCRE2 support disabled")
-endif()
+
+find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
+target_link_libraries(NexusForce PUBLIC PCRE2::8BIT)
+target_compile_definitions(NexusForce PUBLIC
+        NEFORCE_SUPPORT_PCRE2
+        PCRE2_CODE_UNIT_WIDTH=8
+)
+message(STATUS "PCRE2 with JIT linked successfully")
 
 
 # 安装库文件

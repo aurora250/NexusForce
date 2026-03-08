@@ -2,7 +2,7 @@ function(nexusforce_compiler_options target)
     if(MSVC)
         target_compile_options(${target} PRIVATE
                 $<$<COMPILE_LANGUAGE:CXX>:
-                /utf-8
+                /utf-8 /wd4819
                 $<$<CONFIG:Debug>:/WX /Od /Zi /MDd /bigobj>
                 $<$<CONFIG:Release>:/O2 /Zc:__cplusplus /MD>
                 >
@@ -13,6 +13,8 @@ function(nexusforce_compiler_options target)
                 >
         )
 
+        string(REPLACE "/showIncludes" "" CMAKE_DEPFILE_FLAGS_C "${CMAKE_DEPFILE_FLAGS_C}")
+        string(REPLACE "/showIncludes" "" CMAKE_DEPFILE_FLAGS_CXX "${CMAKE_DEPFILE_FLAGS_CXX}")
         set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
         add_compile_options(
                 "$<$<CONFIG:Debug>:/MDd>"

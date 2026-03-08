@@ -2,23 +2,38 @@
 #ifdef NEFORCE_SUPPORT_ZLIB
 NEFORCE_BEGIN_NAMESPACE__
 
-static void check_zlib_error(const int ret_code) {
-    if (ret_code != Z_OK) {
-        const char* msg;
-        switch (ret_code) {
-            case Z_MEM_ERROR: msg = "Memory error"; break;
-            case Z_BUF_ERROR: msg = "Buffer error"; break;
-            case Z_STREAM_ERROR: msg = "Stream error"; break;
-            case Z_DATA_ERROR: msg = "Data error"; break;
-            case Z_VERSION_ERROR: msg = "Version mismatch"; break;
-            default: msg = "Unknown error"; break;
+namespace {
+    void check_zlib_error(const int ret_code) {
+        if (ret_code != Z_OK) {
+            const char* msg;
+            switch (ret_code) {
+                case Z_MEM_ERROR: msg = "Memory error"; break;
+                case Z_BUF_ERROR: msg = "Buffer error"; break;
+                case Z_STREAM_ERROR: msg = "Stream error"; break;
+                case Z_DATA_ERROR: msg = "Data error"; break;
+                case Z_VERSION_ERROR: msg = "Version mismatch"; break;
+                default: msg = "Unknown error"; break;
+            }
+            throw_exception(zlib_exception(msg, zlib_exception::static_type, ret_code));
         }
-        throw_exception(zlib_exception(msg, zlib_exception::static_type, ret_code));
     }
 }
 
-byte_vector zlib_compressor::compress_data(const byte_t* data, const size_t size,
-                                           compress_level level, compress_strategy strategy) {
+
+byte_vector zlib_compressor::compress_data(
+    const byte_t* data, const size_t size,
+    const compress_level level,
+    const compress_strategy strategy,
+    const compress_format format) {
+
+    int window_bits = MAX_WBITS;
+    switch (format) {
+        case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
+        case compress_format::deflate: window_bits = -MAX_WBITS; break;
+        case compress_format::zlib:    window_bits = MAX_WBITS; break;
+        default: NEFORCE_UNREACHABLE;
+    }
+
     ::uLongf compressed_size = ::compressBound(static_cast<::uLong>(size));
     byte_vector compressed(compressed_size);
 
@@ -31,7 +46,7 @@ byte_vector zlib_compressor::compress_data(const byte_t* data, const size_t size
     const int init_result = ::deflateInit2(&stream,
         static_cast<int>(level),
         Z_DEFLATED,
-        MAX_WBITS,
+        window_bits,
         MAX_MEM_LEVEL,
         static_cast<int>(strategy)
     );
@@ -53,52 +68,64 @@ byte_vector zlib_compressor::compress_data(const byte_t* data, const size_t size
     return compressed;
 }
 
-byte_vector zlib_compressor::decompress_data(const byte_t* data, const size_t size, size_t estimated_original_size) {
+byte_vector zlib_compressor::decompress_data(
+    byte_t* data, const size_t size,
+    size_t estimated_original_size,
+    const compress_format format) {
+
     if (estimated_original_size == 0) {
         estimated_original_size = size * 4;
     }
+
+    int window_bits = MAX_WBITS;
+    switch (format) {
+        case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
+        case compress_format::deflate: window_bits = -MAX_WBITS; break;
+        case compress_format::zlib:    window_bits = MAX_WBITS; break;
+        default: NEFORCE_UNREACHABLE;
+    }
     
-    byte_vector decompressed(estimated_original_size);
-    ::uLongf decompressed_size = 0;
-    int result = Z_BUF_ERROR;
-    int attempt = 0;
-    constexpr int MAX_ATTEMPTS = 5;
-    constexpr size_t MAX_BUFFER_SIZE = 1024 * 1024 * 1024;
+    ::z_stream stream{};
+    stream.next_in = data;
+    stream.avail_in = static_cast<::uInt>(size);
+
+    const int init_result = ::inflateInit2(&stream, window_bits);
+    check_zlib_error(init_result);
+
+    byte_vector decompressed;
+    decompressed.reserve(estimated_original_size);
+
+    constexpr size_t CHUNK_SIZE = 16384;
+    int result = Z_OK;
     
     do {
-        if (attempt > 0) {
-            estimated_original_size *= 2;
-            if (estimated_original_size > MAX_BUFFER_SIZE) {
-                throw_exception(zlib_exception("Decompression buffer size exceeded maximum limit"));
-            }
-        }
+        decompressed.resize(decompressed.size() + CHUNK_SIZE);
+        stream.next_out = decompressed.data() + decompressed.size() - CHUNK_SIZE;
+        stream.avail_out = CHUNK_SIZE;
 
-        decompressed.resize(estimated_original_size);
-        decompressed_size = static_cast<::uLongf>(decompressed.size());
+        result = ::inflate(&stream, Z_NO_FLUSH);
 
-        result = ::uncompress(
-            decompressed.data(), &decompressed_size,
-            data, static_cast<::uLong>(size)
-        );
-
-        if (result == Z_OK) {
-            decompressed.resize(decompressed_size);
-            break;
-        } else if (result == Z_BUF_ERROR) {
-            attempt++;
-            if (attempt >= MAX_ATTEMPTS) {
-                throw_exception(zlib_exception("Exceeded maximum decompression buffer attempts"));
-            }
-        } else {
+        if (result == Z_STREAM_ERROR || result == Z_NEED_DICT ||
+            result == Z_DATA_ERROR || result == Z_MEM_ERROR) {
+            ::inflateEnd(&stream);
             check_zlib_error(result);
-        }
-    } while (result == Z_BUF_ERROR);
+            }
+
+        size_t have = CHUNK_SIZE - stream.avail_out;
+        decompressed.resize(decompressed.size() - CHUNK_SIZE + have);
+    } while (result != Z_STREAM_END);
+
+    const int end_result = ::inflateEnd(&stream);
+    check_zlib_error(end_result);
 
     return decompressed;
 }
 
-zlib_compressor::stream_compressor::stream_compressor(const compress_level level, const compress_strategy strategy) {
-    reset(level, strategy);
+zlib_compressor::stream_compressor::stream_compressor(
+    const compress_level level,
+    const compress_strategy strategy,
+    const compress_format format) {
+    reset(level, strategy, format);
 }
 
 zlib_compressor::stream_compressor::~stream_compressor() {
@@ -136,9 +163,21 @@ zlib_compressor::stream_compressor::operator =(stream_compressor&& other) noexce
     return *this;
 }
 
-void zlib_compressor::stream_compressor::reset(compress_level level, compress_strategy strategy) {
+void zlib_compressor::stream_compressor::reset(
+    compress_level level,
+    compress_strategy strategy,
+    compress_format format) {
+
     if (initialized_) {
         ::deflateEnd(&stream_);
+    }
+
+    int window_bits = MAX_WBITS;
+    switch (format) {
+        case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
+        case compress_format::deflate: window_bits = -MAX_WBITS; break;
+        case compress_format::zlib:    window_bits = MAX_WBITS; break;
+        default: NEFORCE_UNREACHABLE;
     }
     
     stream_ = {};
@@ -146,7 +185,7 @@ void zlib_compressor::stream_compressor::reset(compress_level level, compress_st
         &stream_,
         static_cast<int>(level),
         Z_DEFLATED,
-        MAX_WBITS,
+        window_bits,
         MAX_MEM_LEVEL,
         static_cast<int>(strategy));
     
@@ -201,8 +240,8 @@ byte_vector zlib_compressor::stream_compressor::finish() {
     return compress(cbyte_view{}, true);
 }
 
-zlib_compressor::stream_decompressor::stream_decompressor() {
-    reset();
+zlib_compressor::stream_decompressor::stream_decompressor(const compress_format format) {
+    reset(format);
 }
 
 zlib_compressor::stream_decompressor::~stream_decompressor() {
@@ -240,27 +279,36 @@ zlib_compressor::stream_decompressor::operator =(stream_decompressor&& other) no
     return *this;
 }
 
-void zlib_compressor::stream_decompressor::reset() {
+void zlib_compressor::stream_decompressor::reset(const compress_format format) {
     if (initialized_) {
         ::inflateEnd(&stream_);
     }
-    
+
+    int window_bits = MAX_WBITS;
+    switch (format) {
+        case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
+        case compress_format::deflate: window_bits = -MAX_WBITS; break;
+        case compress_format::zlib:    window_bits = MAX_WBITS; break;
+        default: NEFORCE_UNREACHABLE;
+    }
+
     stream_ = {};
-    const int result = ::inflateInit2(&stream_, MAX_WBITS);
+    const int result = ::inflateInit2(&stream_, window_bits);
     check_zlib_error(result);
     initialized_ = true;
     bytes_input_ = 0;
     bytes_output_ = 0;
 }
 
-byte_vector zlib_compressor::stream_decompressor::decompress(const cbyte_view& data, const bool finish) {
+byte_vector zlib_compressor::stream_decompressor::decompress(
+    const byte_view& data, const bool finish) {
     if (!initialized_) {
         throw_exception(zlib_exception("Decompressor not initialized"));
     }
 
-    if (data.size() > 0) {
+    if (!data.empty()) {
         stream_.avail_in = static_cast<::uInt>(data.size());
-        stream_.next_in = const_cast<byte_t*>(data.data());
+        stream_.next_in = data.data();
         bytes_input_ += data.size();
     }
 
@@ -290,7 +338,7 @@ byte_vector zlib_compressor::stream_decompressor::decompress(const cbyte_view& d
 }
 
 byte_vector zlib_compressor::stream_decompressor::finish() {
-    return decompress(cbyte_view{}, true);
+    return decompress(byte_view{}, true);
 }
 
 NEFORCE_END_NAMESPACE__

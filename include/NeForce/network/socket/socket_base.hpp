@@ -89,11 +89,11 @@ public:
         close();
     }
 
-    native_handle_type native_handle() const noexcept {
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
         return fd_;
     }
 
-    bool is_open() const noexcept {
+    NEFORCE_NODISCARD bool is_open() const noexcept {
         return fd_ != invalid_handle;
     }
 
@@ -125,8 +125,8 @@ public:
     bool set_send_timeout(milliseconds timeout) noexcept;
     bool set_receive_timeout(milliseconds timeout) noexcept;
 
-    optional<ip_address> local_endpoint() const;
-    optional<ip_address> remote_endpoint() const;
+    NEFORCE_NODISCARD optional<ip_address> local_endpoint() const;
+    NEFORCE_NODISCARD optional<ip_address> remote_endpoint() const;
 };
 
 NEFORCE_END_NAMESPACE__

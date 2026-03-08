@@ -71,7 +71,7 @@ int ip_address::size() const noexcept {
     });
 }
 
-NEFORCE_NODISCARD int ip_address::family() const noexcept {
+int ip_address::family() const noexcept {
     return addr_.visit([](const auto& addr) -> int {
         if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
             return addr.sin_family;
@@ -82,7 +82,7 @@ NEFORCE_NODISCARD int ip_address::family() const noexcept {
     });
 }
 
-NEFORCE_NODISCARD uint16_t ip_address::port() const noexcept {
+uint16_t ip_address::port() const noexcept {
     return addr_.visit([](const auto& addr) -> uint16_t {
         if constexpr (is_same_v<decay_t<decltype(addr)>, ::sockaddr_in>) {
             return endian::network_to_host<uint16_t>(addr.sin_port);

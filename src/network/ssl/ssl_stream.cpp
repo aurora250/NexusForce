@@ -100,15 +100,50 @@ void ssl_stream::accept() {
     }
 }
 
-void ssl_stream::connect() {
+bool ssl_stream::connect() {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL object not initialized"));
+        throw_exception(ssl_exception("SSL not initialized"));
+    }
+    SSL_set_connect_state(ssl_.get());
+
+    const int ret = SSL_connect(ssl_.get());
+
+    if (ret != 1) {
+        const int err = SSL_get_error(ssl_.get(), ret);
+        const auto ssl_err = ERR_get_error();
+        char err_buf[256];
+        ERR_error_string_n(ssl_err, err_buf, sizeof(err_buf));
+
+        string error_msg = "SSL handshake failed: ";
+        error_msg += err_buf;
+
+        switch (err) {
+            case SSL_ERROR_SYSCALL: {
+                error_msg += " (System call error)";
+                break;
+            }
+            case SSL_ERROR_SSL: {
+                error_msg += " (SSL protocol error)";
+                break;
+            }
+            case SSL_ERROR_WANT_READ: {
+                error_msg += " (Want read)";
+                break;
+            }
+            case SSL_ERROR_WANT_WRITE: {
+                error_msg += " (Want write)";
+                break;
+            }
+            case SSL_ERROR_ZERO_RETURN: {
+                error_msg += " (Connection closed)";
+                break;
+            }
+            default: NEFORCE_UNREACHABLE;
+        }
+        throw_exception(ssl_exception(error_msg.data()));
     }
 
-    const int ret = ::SSL_connect(ssl_.get());
-    if (ret != 1) {
-        handle_ssl_error(ret, "SSL_connect");
-    }
+    return true;
 }
 
 ssize_t ssl_stream::read(void* buffer, const size_t size) {
@@ -244,15 +279,52 @@ int ssl_stream::pending() const {
     return ::SSL_pending(ssl_.get());
 }
 
+void ssl_stream::set_sni_hostname(const string& hostname) {
+    if (!ssl_) {
+        throw_exception(ssl_exception("SSL object not initialized"));
+    }
+
+    if (hostname.empty()) {
+        throw_exception(value_exception("Hostname cannot be null"));
+    }
+
+    if (::SSL_set_tlsext_host_name(ssl_.get(), hostname.data()) != 1) {
+        const auto err = ::ERR_get_error();
+        char buf[256];
+        ::ERR_error_string_n(err, buf, sizeof(buf));
+
+        string error_msg = "SSL_set_tlsext_host_name failed: ";
+        error_msg += buf;
+        throw_exception(ssl_exception(error_msg.data()));
+    }
+
+#if OPENSSL_VERSION_NUMBER >= 0x10002000L
+    ::X509_VERIFY_PARAM* param = ::SSL_get0_param(ssl_.get());
+    if (param) {
+        ::X509_VERIFY_PARAM_set1_host(param, hostname.data(), 0);
+    }
+#endif
+}
+
 ::X509* ssl_stream::get_peer_certificate() const {
     if (!ssl_) return nullptr;
     return ::SSL_get_peer_certificate(ssl_.get());
 }
 
 bool ssl_stream::verify_peer() const {
-    if (!ssl_) return false;
-    long result = ::SSL_get_verify_result(ssl_.get());
-    return result == X509_V_OK;
+    if (!ssl_) {
+        return false;
+    }
+
+    ::X509* cert = ::SSL_get_peer_certificate(ssl_.get());
+    if (!cert) {
+        return false;
+    }
+
+    const long verify_result = ::SSL_get_verify_result(ssl_.get());
+    ::X509_free(cert);
+
+    return verify_result == X509_V_OK;
 }
 
 string ssl_stream::get_cipher_name() const {

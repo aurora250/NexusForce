@@ -14,13 +14,13 @@ public:
 
     void set_ssl_context(ssl_context ctx);
 
-    ssl_socket accept_ssl();
+    NEFORCE_NODISCARD ssl_socket accept_ssl();
 
-    ssl_context& context() noexcept {
+    NEFORCE_NODISCARD ssl_context& context() noexcept {
         return ctx_;
     }
 
-    const ssl_context& context() const noexcept {
+    NEFORCE_NODISCARD const ssl_context& context() const noexcept {
         return ctx_;
     }
 };

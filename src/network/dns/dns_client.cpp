@@ -11,124 +11,332 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-static uint16_t generate_dns_client_id() {
-    thread_local random_mt tls_random;
-    thread_local bool seeded = false;
-    if (!seeded) {
-        tls_random.set_seed(static_cast<uint32_t>(
-            steady_clock::now().since_epoch().count() ^
-            this_thread::id().native_handle()));
-        seeded = true;
-    }
-    return tls_random.next_int(1, 65535);
-}
-
-static byte_vector encode_domain_name(const string_view domain) {
-    byte_vector encoded;
-    size_t start = 0;
-    size_t pos;
-
-    while ((pos = domain.find('.', start)) != string::npos) {
-        const auto len = pos - start;
-        if (len > 63) {
-            throw_exception(dns_exception("Label too long in domain name"));
+namespace {
+    uint16_t generate_dns_client_id() {
+        thread_local random_mt tls_random;
+        thread_local bool seeded = false;
+        if (!seeded) {
+            const auto seed =
+                steady_clock::now().since_epoch().count() ^
+                this_thread::id().native_handle();
+            tls_random.set_seed(seed);
+            seeded = true;
         }
-        encoded.push_back(static_cast<byte_t>(len));
-        encoded.insert(encoded.end(), domain.begin() + start, domain.begin() + pos);
-        start = pos + 1;
+        return tls_random.next_int(1, 65535);
     }
 
-    if (start < domain.length()) {
-        const auto len = domain.length() - start;
-        if (len > 63) {
-            throw_exception(dns_exception("Label too long in domain name"));
+    byte_vector encode_domain_name(const string_view domain) {
+        if (domain.empty() || domain.length() > 253) {
+            throw_exception(dns_exception("Invalid domain name length"));
         }
-        encoded.push_back(static_cast<byte_t>(len));
-        encoded.insert(encoded.end(), domain.begin() + start, domain.end());
+
+        byte_vector encoded;
+        encoded.reserve(domain.length() + 2);
+
+        size_t start = 0;
+        size_t pos;
+
+        while ((pos = domain.find('.', start)) != string::npos) {
+            const auto len = pos - start;
+            if (len == 0 || len > 63) {
+                throw_exception(dns_exception("Invalid label length in domain name"));
+            }
+            encoded.push_back(static_cast<byte_t>(len));
+            encoded.insert(encoded.end(), domain.begin() + start, domain.begin() + pos);
+            start = pos + 1;
+        }
+
+        if (start < domain.length()) {
+            const auto len = domain.length() - start;
+            if (len == 0 || len > 63) {
+                throw_exception(dns_exception("Invalid label length in domain name"));
+            }
+            encoded.push_back(static_cast<byte_t>(len));
+            encoded.insert(encoded.end(), domain.begin() + start, domain.end());
+        }
+
+        encoded.push_back(0);
+        return encoded;
     }
 
-    encoded.push_back(0);
-    return encoded;
-}
+    byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+        byte_vector query;
+        query.reserve(sizeof(dns_header) + domain.length() + 6);
 
-static byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
-    byte_vector query;
+        dns_header header;
+        header.id = endian::host_to_network<uint16_t>(generate_dns_client_id());
+        header.flags = endian::host_to_network<uint16_t>(0x0100);
+        header.qdcount = endian::host_to_network<uint16_t>(1);
 
-    dns_header header;
-    header.id = endian::host_to_network<uint16_t>(generate_dns_client_id());
-    header.flags = endian::host_to_network<uint16_t>(0x0100);
-    header.qdcount = endian::host_to_network<uint16_t>(1);
+        query.resize(sizeof(dns_header));
+        memory_copy(query.data(), &header, sizeof(dns_header));
 
-    query.resize(sizeof(dns_header));
-    memory_copy(query.data(), &header, sizeof(dns_header));
+        auto encoded_domain = encode_domain_name(domain);
+        query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
 
-    auto encoded_domain = encode_domain_name(domain);
-    query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
+        uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
+        uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
 
-    uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
-    uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
+        query.insert(
+            query.end(),
+            reinterpret_cast<const byte_t*>(&qtype),
+            reinterpret_cast<const byte_t*>(&qtype) + sizeof(qtype));
+        query.insert(
+            query.end(),
+            reinterpret_cast<const byte_t*>(&qclass_val),
+            reinterpret_cast<const byte_t*>(&qclass_val) + sizeof(qclass_val));
 
-    query.insert(query.end(), reinterpret_cast<byte_t*>(&qtype),
-        reinterpret_cast<byte_t*>(&qtype) + sizeof(qtype));
-    query.insert(query.end(), reinterpret_cast<byte_t*>(&qclass_val),
-        reinterpret_cast<byte_t*>(&qclass_val) + sizeof(qclass_val));
+        return query;
+    }
 
-    return query;
-}
+    string decode_domain_name(const byte_vector& data, size_t& offset) {
+        constexpr int max_jumps = 5;
+        constexpr size_t max_name_length = 253;
 
-static string decode_domain_name(const byte_vector& data, size_t& offset) {
-    string name;
-    bool jumped = false;
-    size_t original_offset = offset;
-    int jumps = 0;
+        string name;
+        name.reserve(64);
 
-    while (offset < data.size()) {
-        const byte_t len = data[offset];
+        bool jumped = false;
+        size_t original_offset = offset;
+        int jumps = 0;
 
-        if ((len & 0xC0) == 0xC0) {
-            constexpr int MAX_JUMPS = 5;
-            if (offset + 1 >= data.size()) {
-                throw_exception(dns_exception("Invalid pointer in domain name"));
+        while (offset < data.size()) {
+            const byte_t len = data[offset];
+
+            if ((len & 0xC0) == 0xC0) {
+                if (offset + 1 >= data.size()) {
+                    throw_exception(dns_exception::parse_error("Invalid pointer in domain name"));
+                }
+
+                if (!jumped) {
+                    original_offset = offset + 2;
+                }
+
+                const uint16_t pointer = ((len & 0x3F) << 8) | data[offset + 1];
+                if (pointer >= data.size()) {
+                    throw_exception(dns_exception::parse_error("Pointer exceeds buffer"));
+                }
+
+                offset = pointer;
+                jumped = true;
+
+                if (++jumps > max_jumps) {
+                    throw_exception(dns_exception::parse_error("Too many jumps in domain name"));
+                }
+                continue;
             }
 
-            if (!jumped) {
-                original_offset = offset + 2;
+            if (len == 0) {
+                offset++;
+                break;
             }
 
-            const uint16_t pointer = ((len & 0x3F) << 8) | data[offset + 1];
-            offset = pointer;
-            jumped = true;
-
-            if (++jumps > MAX_JUMPS) {
-                throw_exception(dns_exception("Too many jumps in domain name"));
+            if (len > 63) {
+                throw_exception(dns_exception::parse_error("Invalid label length"));
             }
-            continue;
+            if (offset + 1 + len > data.size()) {
+                throw_exception(dns_exception::parse_error("Domain name exceeds buffer"));
+            }
+
+            if (!name.empty()) {
+                name += '.';
+            }
+
+            if (name.length() + len + 1 > max_name_length) {
+                throw_exception(dns_exception::parse_error("Domain name too long"));
+            }
+
+            name.append(reinterpret_cast<const char*>(&data[offset + 1]), len);
+            offset += 1 + len;
         }
 
-        if (len == 0) {
-            offset++;
-            break;
-        }
-        if (len > 63) {
-            throw_exception(dns_exception("Invalid label length"));
-        }
-        if (offset + 1 + len > data.size()) {
-            throw_exception(dns_exception("Domain name exceeds buffer"));
+        if (jumped) {
+            offset = original_offset;
         }
 
-        if (!name.empty()) {
-            name += '.';
-        }
-        name.append(reinterpret_cast<const char*>(&data[offset + 1]), len);
-        offset += 1 + len;
+        return name;
     }
 
-    if (jumped) {
-        offset = original_offset;
+    string parse_a_record(const byte_vector& rdata) {
+        if (rdata.size() != 4) {
+            throw_exception(dns_exception::parse_error("Invalid A record length"));
+        }
+
+        char ip[INET_ADDRSTRLEN];
+        if (::inet_ntop(AF_INET, rdata.data(), ip, INET_ADDRSTRLEN) == nullptr) {
+            throw_exception(dns_exception::parse_error("Failed to parse A record"));
+        }
+
+        return {ip};
     }
 
-    return name;
+    string parse_aaaa_record(const byte_vector& rdata) {
+        if (rdata.size() != 16) {
+            throw_exception(dns_exception::parse_error("Invalid AAAA record length"));
+        }
+
+        char ip[INET6_ADDRSTRLEN];
+        if (::inet_ntop(AF_INET6, rdata.data(), ip, INET6_ADDRSTRLEN) == nullptr) {
+            throw_exception(dns_exception::parse_error("Failed to parse AAAA record"));
+        }
+
+        return {ip};
+    }
+
+    string parse_mx_record(const byte_vector& data, size_t offset, const uint16_t rdlength) {
+        if (rdlength < 2) {
+            throw_exception(dns_exception::parse_error("Invalid MX record length"));
+        }
+        if (offset + 2 > data.size()) {
+            throw_exception(dns_exception::parse_error("MX record exceeds buffer"));
+        }
+
+        const auto preference = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(&data[offset]));
+        offset += 2;
+
+        const string exchange = decode_domain_name(data, offset);
+        return _NEFORCE to_string(preference) + " " + exchange;
+    }
+
+    string parse_txt_record(const byte_vector& rdata) {
+        string result;
+        size_t offset = 0;
+
+        while (offset < rdata.size()) {
+            const byte_t len = rdata[offset++];
+
+            if (offset + len > rdata.size()) {
+                throw_exception(dns_exception::parse_error("Invalid TXT record"));
+            }
+
+            result.append(reinterpret_cast<const char*>(&rdata[offset]), len);
+            offset += len;
+        }
+
+        return result;
+    }
+
+    dns_record parse_resource_record(const byte_vector& data, size_t& offset) {
+        dns_record record;
+        record.name = decode_domain_name(data, offset);
+
+        if (offset + 10 > data.size()) {
+            throw_exception(dns_exception::parse_error("Incomplete resource record"));
+        }
+
+        record.type = static_cast<DNS_RECORD>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+        offset += 2;
+
+        record.class_type = static_cast<DNS_QUERY>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+        offset += 2;
+
+        record.ttl = endian::network_to_host(*reinterpret_cast<const uint32_t*>(&data[offset]));
+        offset += 4;
+
+        const auto rdlength = endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset]));
+        offset += 2;
+
+        if (offset + rdlength > data.size()) {
+            throw_exception(dns_exception::parse_error("RDATA exceeds buffer"));
+        }
+
+        byte_vector rdata(data.begin() + offset, data.begin() + offset + rdlength);
+        size_t rdata_offset = offset;
+
+        try {
+            switch (record.type) {
+                case DNS_RECORD::A: {
+                    record.data = parse_a_record(rdata);
+                    break;
+                }
+                case DNS_RECORD::AAAA: {
+                    record.data = parse_aaaa_record(rdata);
+                    break;
+                }
+                case DNS_RECORD::CNAME:
+                case DNS_RECORD::NS:
+                case DNS_RECORD::PTR: {
+                    record.data = decode_domain_name(data, rdata_offset);
+                    break;
+                }
+                case DNS_RECORD::MX: {
+                    record.data = parse_mx_record(data, rdata_offset, rdlength);
+                    break;
+                }
+                case DNS_RECORD::TXT: {
+                    record.data = parse_txt_record(rdata);
+                    break;
+                }
+                default: {
+                    record.data = "";
+                    for (const byte_t byte : rdata) {
+                        record.data += format("{:02x}", byte);
+                    }
+                    break;
+                }
+            }
+        } catch (...) {
+            offset += rdlength;
+            throw;
+        }
+
+        offset += rdlength;
+        return record;
+    }
+
+    dns_query_result parse_dns_response(const byte_vector& response) {
+        if (response.size() < sizeof(dns_header)) {
+            throw_exception(dns_exception::parse_error("Response too short"));
+        }
+
+        dns_query_result result;
+        dns_header header;
+        memory_copy(&header, response.data(), sizeof(dns_header));
+
+        header.id = endian::network_to_host<uint16_t>(header.id);
+        header.flags = endian::network_to_host<uint16_t>(header.flags);
+        header.qdcount = endian::network_to_host<uint16_t>(header.qdcount);
+        header.ancount = endian::network_to_host<uint16_t>(header.ancount);
+        header.nscount = endian::network_to_host<uint16_t>(header.nscount);
+        header.arcount = endian::network_to_host<uint16_t>(header.arcount);
+
+        result.response_code = static_cast<DNS_RESPONSE>(header.flags & 0x000F);
+        result.truncated = (header.flags & 0x0200) != 0;
+        result.recursive_available = (header.flags & 0x0080) != 0;
+
+        size_t offset = sizeof(dns_header);
+
+        for (uint16_t i = 0; i < header.qdcount; ++i) {
+            decode_domain_name(response, offset);
+            if (offset + 4 > response.size()) {
+                throw_exception(dns_exception::parse_error("Question section exceeds buffer"));
+            }
+            offset += 4;
+        }
+
+        result.answers.reserve(header.ancount);
+        for (uint16_t i = 0; i < header.ancount; ++i) {
+            result.answers.push_back(parse_resource_record(response, offset));
+        }
+
+        result.authorities.reserve(header.nscount);
+        for (uint16_t i = 0; i < header.nscount; ++i) {
+            result.authorities.push_back(parse_resource_record(response, offset));
+        }
+
+        result.additional.reserve(header.arcount);
+        for (uint16_t i = 0; i < header.arcount; ++i) {
+            result.additional.push_back(parse_resource_record(response, offset));
+        }
+
+        return result;
+    }
+
+    string create_cache_key(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+        return domain + "_"_s + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
+    }
 }
+
 
 byte_vector dns_client::send_udp_query(const byte_vector& query) const {
     thread_local udp_socket tls_udp_socket;
@@ -136,12 +344,17 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
     if (!tls_udp_socket.is_open()) {
         tls_udp_socket.open();
         if (!tls_udp_socket.is_open()) {
-            throw_exception(dns_exception("Failed to create UDP socket"));
+            throw_exception(dns_exception::network_error("Failed to create UDP socket"));
         }
     }
 
     if (!tls_udp_socket.set_receive_timeout(config_.timeout)) {
-        throw_exception(dns_exception("Failed to set socket timeout"));
+        throw_exception(dns_exception::network_error("Failed to set socket timeout"));
+    }
+
+    const auto endpoint = ip_address::parse(config_.server, config_.port);
+    if (!endpoint) {
+        throw_exception(dns_exception::network_error("Invalid DNS server address"));
     }
 
     const ssize_t sent = tls_udp_socket.send_to(
@@ -149,18 +362,23 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
             reinterpret_cast<const char*>(query.data()),
             query.size()
         },
-        *ip_address::parse(config_.server, config_.port));
+        *endpoint);
 
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
-        throw_exception(dns_exception("Failed to send UDP query"));
+        throw_exception(dns_exception::network_error("Failed to send UDP query"));
     }
 
     byte_vector buffer(512);
     const auto received = tls_udp_socket.receive_from(
         memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
+
     if (received.first < 0) {
-        throw_exception(dns_exception("UDP query timeout or receive error"));
+        throw_exception(dns_exception::timeout());
     }
+    if (received.first == 0) {
+        throw_exception(dns_exception::network_error("Empty response received"));
+    }
+
     buffer.resize(received.first);
     return buffer;
 }
@@ -175,15 +393,23 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     auto connect = [&] {
         tls_tcp_state.socket.close();
         tls_tcp_state.socket.open();
+
         if (!tls_tcp_state.socket.is_open()) {
-            throw_exception(dns_exception("Failed to create TCP socket"));
+            throw_exception(dns_exception::network_error("Failed to create TCP socket"));
         }
         if (!tls_tcp_state.socket.set_receive_timeout(config_.timeout) ||
             !tls_tcp_state.socket.set_send_timeout(config_.timeout)) {
             tls_tcp_state.socket.close();
-            throw_exception(dns_exception("Failed to set socket timeout"));
+            throw_exception(dns_exception::network_error("Failed to set socket timeout"));
         }
-        tls_tcp_state.socket.connect(*ip_address::parse(config_.server, config_.port));
+
+        const auto endpoint = ip_address::parse(config_.server, config_.port);
+        if (!endpoint) {
+            tls_tcp_state.socket.close();
+            throw_exception(dns_exception::network_error("Invalid DNS server address"));
+        }
+
+        tls_tcp_state.socket.connect(*endpoint);
         tls_tcp_state.server = config_.server;
         tls_tcp_state.port = config_.port;
     };
@@ -197,15 +423,23 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     }
 
     auto send_request = [&]() -> bool {
-        const auto length = endian::host_to_network<uint16_t>(query.size());
-        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(&length), 2}) != 2) {
+        if (query.size() > 65535) {
             return false;
         }
+
+        const auto length = endian::host_to_network<uint16_t>(query.size());
+        if (tls_tcp_state.socket.send(memory_view<const char>{
+            reinterpret_cast<const char*>(&length), 2
+        }) != 2) {
+            return false;
+        }
+
         if (tls_tcp_state.socket.send(memory_view<const char>{
                 reinterpret_cast<const char*>(query.data()), query.size()
-            }) != static_cast<ssize_t>(query.size())) {
+        }) != query.size()) {
             return false;
-            }
+        }
+
         return true;
     };
 
@@ -213,184 +447,60 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         try {
             connect();
         } catch (...) {
-            throw_exception(dns_exception("Failed to reconnect TCP socket"));
+            throw_exception(dns_exception::network_error("Failed to reconnect TCP socket"));
         }
         if (!send_request()) {
-            throw_exception(dns_exception("Failed to send query data after reconnect"));
+            throw_exception(dns_exception::network_error("Failed to send query data after reconnect"));
         }
     }
 
     uint16_t res_len;
     if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
-        throw_exception(dns_exception("Failed to receive response length"));
+        throw_exception(dns_exception::network_error("Failed to receive response length"));
     }
+
     res_len = endian::network_to_host<uint16_t>(res_len);
+    if (res_len == 0 || res_len > 65535) {
+        throw_exception(dns_exception::parse_error("Invalid response length"));
+    }
 
     byte_vector buffer(res_len);
     size_t total = 0;
+
     while (total < res_len) {
         const ssize_t received = tls_tcp_state.socket.receive(memory_view<char>{
             reinterpret_cast<char*>(buffer.data() + total),
             res_len - total
         });
+
         if (received <= 0) {
-            throw_exception(dns_exception("Failed to receive complete response"));
+            throw_exception(dns_exception::network_error("Failed to receive complete response"));
         }
+
         total += received;
     }
 
     return buffer;
 }
 
-static string parse_a_record(const byte_vector& rdata) {
-    if (rdata.size() != 4) {
-        throw_exception(dns_exception("Invalid A record length"));
-    }
-    char ip[INET_ADDRSTRLEN];
-    if (::inet_ntop(AF_INET, rdata.data(), ip, INET_ADDRSTRLEN) == nullptr) {
-        throw_exception(dns_exception("Failed to parse A record"));
-    }
-    return {ip};
-}
-
-static string parse_aaaa_record(const byte_vector& rdata) {
-    if (rdata.size() != 16) {
-        throw_exception(dns_exception("Invalid AAAA record length"));
-    }
-    char ip[INET6_ADDRSTRLEN];
-    if (::inet_ntop(AF_INET6, rdata.data(), ip, INET6_ADDRSTRLEN) == nullptr) {
-        throw_exception(dns_exception("Failed to parse AAAA record"));
-    }
-    return {ip};
-}
-
-static string parse_mx_record(const byte_vector& data, size_t offset, const uint16_t rdlength) {
-    if (rdlength < 2) {
-        throw_exception(dns_exception("Invalid MX record length"));
-    }
-    const auto preference = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(&data[offset]));
-    offset += 2;
-    const string exchange = decode_domain_name(data, offset);
-    return to_string(preference) + " " + exchange;
-}
-
-static string parse_txt_record(const byte_vector& rdata) {
-    string result;
-    size_t offset = 0;
-
-    while (offset < rdata.size()) {
-        const byte_t len = rdata[offset++];
-        if (offset + len > rdata.size()) {
-            throw_exception(dns_exception("Invalid TXT record"));
-        }
-
-        result.append(reinterpret_cast<const char*>(&rdata[offset]), len);
-        offset += len;
-    }
-
-    return result;
-}
-
-static dns_record parse_resource_record(const byte_vector& data, size_t& offset) {
-    dns_record record;
-    record.name = decode_domain_name(data, offset);
-
-    if (offset + 10 > data.size()) {
-        throw_exception(dns_exception("Incomplete resource record"));
-    }
-
-    record.type = static_cast<DNS_RECORD>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
-    offset += 2;
-    record.class_type = static_cast<DNS_QUERY>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
-    offset += 2;
-    record.ttl = endian::network_to_host(*reinterpret_cast<const uint32_t*>(&data[offset]));
-    offset += 4;
-    const auto rdlength = endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset]));
-    offset += 2;
-
-    if (offset + rdlength > data.size()) {
-        throw_exception(dns_exception("RDATA exceeds buffer"));
-    }
-
-    byte_vector rdata(data.begin() + offset, data.begin() + offset + rdlength);
-    size_t rdata_offset = offset;
-
-    switch (record.type) {
-        case DNS_RECORD::A: {
-            record.data = parse_a_record(rdata);
-            break;
-        } case DNS_RECORD::AAAA: {
-            record.data = parse_aaaa_record(rdata);
-            break;
-        } case DNS_RECORD::CNAME: case DNS_RECORD::NS: case DNS_RECORD::PTR: {
-            record.data = decode_domain_name(data, rdata_offset);
-            break;
-        } case DNS_RECORD::MX: {
-            record.data = parse_mx_record(data, rdata_offset, rdlength);
-            break;
-        } case DNS_RECORD::TXT: {
-            record.data = parse_txt_record(rdata);
-            break;
-        } default: {
-            record.data = "";
-            for (const byte_t byte : rdata) {
-                record.data += format("{:02x}", byte);
-            }
-            break;
-        }
-    }
-
-    offset += rdlength;
-    return record;
-}
-
-static dns_query_result parse_dns_response(const byte_vector& response) {
-    if (response.size() < sizeof(dns_header)) {
-        throw_exception(dns_exception("Response too short"));
-    }
-
-    dns_query_result result;
-    dns_header header;
-    memory_copy(&header, response.data(), sizeof(dns_header));
-
-    header.id = endian::network_to_host<uint16_t>(header.id);
-    header.flags = endian::network_to_host<uint16_t>(header.flags);
-    header.qdcount = endian::network_to_host<uint16_t>(header.qdcount);
-    header.ancount = endian::network_to_host<uint16_t>(header.ancount);
-    header.nscount = endian::network_to_host<uint16_t>(header.nscount);
-    header.arcount = endian::network_to_host<uint16_t>(header.arcount);
-
-    result.response_code = static_cast<DNS_RESPONSE>(header.flags & 0x000F);
-    result.truncated = (header.flags & 0x0200) != 0;
-    result.recursive_available = (header.flags & 0x0080) != 0;
-
-    size_t offset = sizeof(dns_header);
-    for (uint16_t i = 0; i < header.qdcount; ++i) {
-        decode_domain_name(response, offset);
-        offset += 4;
-    }
-
-    for (uint16_t i = 0; i < header.ancount; ++i) {
-        result.answers.push_back(parse_resource_record(response, offset));
-    }
-    for (uint16_t i = 0; i < header.nscount; ++i) {
-        result.authorities.push_back(parse_resource_record(response, offset));
-    }
-    for (uint16_t i = 0; i < header.arcount; ++i) {
-        result.additional.push_back(parse_resource_record(response, offset));
-    }
-
-    return result;
-}
-
-static string create_cache_key(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
-    return domain + "_"_s + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
-}
-
 dns_client::dns_client(config cfg, const bool use_tcp)
-: config_(move(cfg)), use_tcp_(use_tcp) {}
+: config_(move(cfg)), use_tcp_(use_tcp) {
+    if (config_.server.empty()) {
+        throw_exception(dns_exception("DNS server address cannot be empty"));
+    }
+    if (config_.port <= 0 || config_.port > 65535) {
+        throw_exception(dns_exception("Invalid DNS server port"));
+    }
+    if (config_.timeout <= milliseconds(0)) {
+        throw_exception(dns_exception("Timeout must be positive"));
+    }
+}
 
 dns_query_result dns_client::query(const string_view domain, const DNS_RECORD type, const DNS_QUERY qclass) {
+    if (domain.empty()) {
+        throw_exception(dns_exception("Domain name cannot be empty"));
+    }
+
     const auto start_time = steady_clock::now();
 
     const auto cache_key = create_cache_key(domain, type, qclass);
@@ -401,13 +511,20 @@ dns_query_result dns_client::query(const string_view domain, const DNS_RECORD ty
 
     const auto query_data = build_dns_query(domain, type, qclass);
     byte_vector response;
+
     if (use_tcp_) {
         response = send_tcp_query(query_data);
     } else {
         response = send_udp_query(query_data);
-        const auto result = parse_dns_response(response);
+        auto result = parse_dns_response(response);
+
         if (result.truncated) {
             response = send_tcp_query(query_data);
+        } else {
+            const auto end_time = steady_clock::now();
+            result.query_time = time_cast<milliseconds>(end_time - start_time);
+            update_cache(cache_key, result);
+            return result;
         }
     }
 
@@ -429,6 +546,7 @@ future<dns_query_result> dns_client::query_async(const string& domain, DNS_RECOR
 vector<string> dns_client::resolve_a(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::A);
     vector<string> ips;
+    ips.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
         if (record.type == DNS_RECORD::A) {
@@ -442,6 +560,7 @@ vector<string> dns_client::resolve_a(const string_view domain) {
 vector<string> dns_client::resolve_aaaa(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::AAAA);
     vector<string> ips;
+    ips.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
         if (record.type == DNS_RECORD::AAAA) {
@@ -455,6 +574,7 @@ vector<string> dns_client::resolve_aaaa(const string_view domain) {
 vector<string> dns_client::resolve_cname(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::CNAME);
     vector<string> cnames;
+    cnames.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
         if (record.type == DNS_RECORD::CNAME) {
@@ -468,6 +588,7 @@ vector<string> dns_client::resolve_cname(const string_view domain) {
 vector<string> dns_client::resolve_mx(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::MX);
     vector<string> mx_records;
+    mx_records.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
         if (record.type == DNS_RECORD::MX) {
@@ -481,6 +602,7 @@ vector<string> dns_client::resolve_mx(const string_view domain) {
 vector<string> dns_client::resolve_txt(const string_view domain) {
     const auto result = query(domain, DNS_RECORD::TXT);
     vector<string> txt_records;
+    txt_records.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
         if (record.type == DNS_RECORD::TXT) {
@@ -491,12 +613,18 @@ vector<string> dns_client::resolve_txt(const string_view domain) {
 }
 
 string dns_client::reverse_query(const string_view ip) {
+    if (ip.empty()) {
+        throw_exception(dns_exception("IP address cannot be empty"));
+    }
+
     string reverse_domain;
 
     if (ip.find(':') != string::npos) {
         throw_exception(dns_exception("IPv6 reverse query not fully implemented"));
     } else {
         vector<string_view> parts;
+        parts.reserve(4);
+
         size_t start = 0;
         size_t pos;
 
@@ -504,6 +632,7 @@ string dns_client::reverse_query(const string_view ip) {
             parts.push_back(ip.view(start, pos - start));
             start = pos + 1;
         }
+
         if (start < ip.length()) {
             parts.push_back(ip.view(start));
         }
@@ -511,10 +640,12 @@ string dns_client::reverse_query(const string_view ip) {
         if (parts.size() != 4) {
             throw_exception(dns_exception("Invalid IPv4 address"));
         }
+
         reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
     }
 
     const auto result = query(reverse_domain.view(), DNS_RECORD::PTR);
+
     if (!result.answers.empty() && result.answers[0].type == DNS_RECORD::PTR) {
         return result.answers[0].data;
     }
@@ -522,13 +653,20 @@ string dns_client::reverse_query(const string_view ip) {
 }
 
 vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, const DNS_RECORD type) {
+    if (domains.empty()) {
+        return {};
+    }
+
     vector<future<dns_query_result>> futures;
+    futures.reserve(domains.size());
 
     for (const auto& domain : domains) {
         futures.push_back(query_async(domain, type));
     }
 
     vector<dns_query_result> results;
+    results.reserve(futures.size());
+
     for (auto& future : futures) {
         try {
             results.push_back(future.get());
@@ -547,9 +685,8 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
     if (it != cache_.end()) {
         const auto now = steady_clock::now();
         const auto cache_age = time_cast<seconds>(now - it->second.second);
-
         if (cache_age < cache_ttl_) {
-            return dns_query_result(it->second.first);
+            return optional<dns_query_result>{it->second.first};
         }
         cache_.erase(it);
     }

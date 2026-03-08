@@ -4,222 +4,226 @@
 #include <NeForce/core/string/char_types.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-NEFORCE_BEGIN_INNER__
-
-static int skip_atoi(const char **s) {
-	int i = 0;
-	while (_NEFORCE is_digit(**s)) {
-	    i = i * 10 + *((*s)++) - '0';
-	}
-	return i;
-}
-
-NEFORCE_INLINE17 constexpr int32_t ZEROPAD = 1;
-NEFORCE_INLINE17 constexpr int32_t SIGN = 2;
-NEFORCE_INLINE17 constexpr int32_t PLUS = 4;
-NEFORCE_INLINE17 constexpr int32_t SPACE = 8;
-NEFORCE_INLINE17 constexpr int32_t LEFT = 16;
-NEFORCE_INLINE17 constexpr int32_t SPECIAL = 32;
-NEFORCE_INLINE17 constexpr int32_t SMALL = 64;
-
-static unsigned int do_div(unsigned int* n, const unsigned int base) {
-    const unsigned int remainder = *n % base;
-    *n = *n / base;
-    return remainder;
-}
-
-static char* number(char * str, const long long num,
-    const int base, int size, int precision ,int type) {
-    char sign = 0, tmp[66];
-    auto digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    if (type & SMALL) digits = "0123456789abcdefghijklmnopqrstuvwxyz";
-    if (type & LEFT) type &= ~ZEROPAD;
-    if (base < 2 || base > 36) {
-        *str++ = '[';
-        *str++ = 'E';
-        *str++ = ']';
-        return str;
-    }
-
-    const char c = (type & ZEROPAD) ? '0' : ' ';
-    unsigned long long unum;
-
-    if (type & SIGN && num < 0) {
-        sign = '-';
-        unum = -static_cast<unsigned long long>(num);
-    } else {
-        sign = (type & PLUS) ? '+' : ((type & SPACE) ? ' ' : 0);
-        unum = static_cast<unsigned long long>(num);
-    }
-
-    if (sign) size--;
-
-    if (type & SPECIAL) {
-        if (base == 16) size -= 2;
-        else if (base == 8) size--;
-    }
-
-    int i = 0;
-    if (unum == 0) {
-        tmp[i++] = '0';
-    } else {
-        while (unum != 0) {
-            const unsigned int digit = static_cast<unsigned int>(unum % base);
-            unum /= base;
-            tmp[i++] = digits[digit];
+namespace {
+    NEFORCE_CONST_FUNCTION constexpr int skip_atoi(const char **s) {
+        int i = 0;
+        while (_NEFORCE is_digit(**s)) {
+            i = i * 10 + *((*s)++) - '0';
         }
+        return i;
     }
 
-    if (i > precision) precision = i;
-    size -= precision;
+    constexpr int32_t ZEROPAD = 1;
+    constexpr int32_t SIGN = 2;
+    constexpr int32_t PLUS = 4;
+    constexpr int32_t SPACE = 8;
+    constexpr int32_t LEFT = 16;
+    constexpr int32_t SPECIAL = 32;
+    constexpr int32_t SMALL = 64;
 
-    if (!(type & (ZEROPAD + LEFT))) {
-        while(size-- > 0) *str++ = ' ';
+    constexpr unsigned int do_div(unsigned int* n, const unsigned int base) {
+        const unsigned int remainder = *n % base;
+        *n = *n / base;
+        return remainder;
     }
 
-    if (sign) *str++ = sign;
+    constexpr char* number(
+        char * str, const long long num,
+        const int base, int size,
+        int precision, int type) {
 
-    if (type & SPECIAL) {
-        if (base == 8) {
-            *str++ = '0';
-        } else if (base == 16) {
-            *str++ = '0';
-            *str++ = (type & SMALL) ? 'x' : 'X';
+        char sign = 0, tmp[66];
+        auto digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        if (type & SMALL) digits = "0123456789abcdefghijklmnopqrstuvwxyz";
+        if (type & LEFT) type &= ~ZEROPAD;
+        if (base < 2 || base > 36) {
+            *str++ = '[';
+            *str++ = 'E';
+            *str++ = ']';
+            return str;
         }
-    }
 
-    if (!(type & LEFT)) {
-        while(size-- > 0) *str++ = c;
-    }
-    while(i < precision--) *str++ = '0';
-    while(i-- > 0) *str++ = tmp[i];
-    while(size-- > 0) *str++ = ' ';
+        const char c = (type & ZEROPAD) ? '0' : ' ';
+        unsigned long long unum;
 
-    return str;
-}
-
-static char* float_number(char* str, double num,
-    const int field_width, int precision, const int flags) {
-    char sign = 0;
-    char int_buf[64];
-    char frac_buf[64];
-    int int_len = 0;
-    int frac_len = 0;
-
-    if (_NEFORCE is_nan(num)) {
-        const char* nan_str = (flags & _INNER SMALL) ? "nan" : "NAN";
-        return _NEFORCE string_copy(str, nan_str);
-    }
-    if (_NEFORCE is_infinity(num)) {
-        const char* inf_str = (flags & _INNER SMALL) ? "inf" : "INF";
-        if (num < 0) {
+        if (type & SIGN && num < 0) {
             sign = '-';
+            unum = -static_cast<unsigned long long>(num);
         } else {
-            sign = (flags & _INNER PLUS) ? '+' : ((flags & _INNER SPACE) ? ' ' : 0);
+            sign = (type & PLUS) ? '+' : ((type & SPACE) ? ' ' : 0);
+            unum = static_cast<unsigned long long>(num);
         }
 
-        if (sign) *str++ = sign;
-        return _NEFORCE string_copy(str, inf_str);
-    }
+        if (sign) size--;
 
-    if (num < 0) {
-        sign = '-';
-        num = -num;
-    } else {
-        sign = (flags & _INNER PLUS) ? '+' : ((flags & _INNER SPACE) ? ' ' : 0);
-    }
-
-    if (precision < 0) precision = 6;
-    if (precision > 20) precision = 20;
-
-    auto int_part = static_cast<long long>(num);
-    double fractional = num - static_cast<double>(int_part);
-
-    if (int_part == 0) {
-        int_buf[int_len++] = '0';
-    } else {
-        long long temp = int_part;
-        while (temp != 0) {
-            int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
-            temp /= 10;
-        }
-        for (int i = 0; i < int_len / 2; ++i) {
-            const char tmp = int_buf[i];
-            int_buf[i] = int_buf[int_len - 1 - i];
-            int_buf[int_len - 1 - i] = tmp;
-        }
-    }
-
-    if (precision > 0) {
-        double scale = 1.0;
-        for (int i = 0; i < precision; ++i) {
-            scale *= 10.0;
+        if (type & SPECIAL) {
+            if (base == 16) size -= 2;
+            else if (base == 8) size--;
         }
 
-        fractional = fractional * scale + 0.5;
-        auto frac_val = static_cast<long long>(fractional);
-
-        if (frac_val >= static_cast<long long>(scale)) {
-            frac_val -= static_cast<long long>(scale);
-            int_part++;
-            if (int_part > 0) {
-                int_len = 0;
-                long long temp = int_part;
-                while (temp != 0) {
-                    int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
-                    temp /= 10;
-                }
-                for (int i = 0; i < int_len / 2; ++i) {
-                    const char tmp = int_buf[i];
-                    int_buf[i] = int_buf[int_len - 1 - i];
-                    int_buf[int_len - 1 - i] = tmp;
-                }
+        int i = 0;
+        if (unum == 0) {
+            tmp[i++] = '0';
+        } else {
+            while (unum != 0) {
+                const auto digit = static_cast<unsigned int>(unum % base);
+                unum /= base;
+                tmp[i++] = digits[digit];
             }
         }
 
-        for (int i = precision - 1; i >= 0; --i) {
-            frac_buf[i] = '0' + static_cast<char>(frac_val % 10);
-            frac_val /= 10;
+        if (i > precision) precision = i;
+        size -= precision;
+
+        if (!(type & (ZEROPAD + LEFT))) {
+            while(size-- > 0) *str++ = ' ';
         }
-        frac_len = precision;
-    }
 
-    const int sign_len = (sign != 0) ? 1 : 0;
-    const int dot_len = (precision > 0) ? 1 : 0;
-    const int total_num_len = int_len + dot_len + frac_len;
-    const int total_len = sign_len + total_num_len;
-    int pad = field_width > total_len ? field_width - total_len : 0;
+        if (sign) *str++ = sign;
 
-    if (!(flags & _INNER LEFT) && !(flags & _INNER ZEROPAD)) {
-        while (pad-- > 0) *str++ = ' ';
-    }
-
-    if (sign) *str++ = sign;
-
-    if (!(flags & _INNER LEFT) && (flags & _INNER ZEROPAD)) {
-        while (pad-- > 0) *str++ = '0';
-    }
-
-    for (int i = 0; i < int_len; ++i) {
-        *str++ = int_buf[i];
-    }
-
-    if (precision > 0) {
-        *str++ = '.';
-        for (int i = 0; i < frac_len; ++i) {
-            *str++ = frac_buf[i];
+        if (type & SPECIAL) {
+            if (base == 8) {
+                *str++ = '0';
+            } else if (base == 16) {
+                *str++ = '0';
+                *str++ = (type & SMALL) ? 'x' : 'X';
+            }
         }
+
+        if (!(type & LEFT)) {
+            while(size-- > 0) *str++ = c;
+        }
+        while(i < precision--) *str++ = '0';
+        while(i-- > 0) *str++ = tmp[i];
+        while(size-- > 0) *str++ = ' ';
+
+        return str;
     }
 
-    if (flags & _INNER LEFT) {
-        while (pad-- > 0) *str++ = ' ';
-    }
+    constexpr char* float_number(
+        char* str, double num,
+        const int field_width, int precision,
+        const int flags) {
 
-    return str;
+        char sign = 0;
+        char int_buf[64];
+        char frac_buf[64];
+        int int_len = 0;
+        int frac_len = 0;
+
+        if (_NEFORCE is_nan(num)) {
+            const char* nan_str = (flags & SMALL) ? "nan" : "NAN";
+            return _NEFORCE string_copy(str, nan_str);
+        }
+        if (_NEFORCE is_infinity(num)) {
+            const char* inf_str = (flags & SMALL) ? "inf" : "INF";
+            if (num < 0) {
+                sign = '-';
+            } else {
+                sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
+            }
+
+            if (sign) *str++ = sign;
+            return _NEFORCE string_copy(str, inf_str);
+        }
+
+        if (num < 0) {
+            sign = '-';
+            num = -num;
+        } else {
+            sign = (flags & PLUS) ? '+' : ((flags & SPACE) ? ' ' : 0);
+        }
+
+        if (precision < 0) precision = 6;
+        if (precision > 20) precision = 20;
+
+        auto int_part = static_cast<long long>(num);
+        double fractional = num - static_cast<double>(int_part);
+
+        if (int_part == 0) {
+            int_buf[int_len++] = '0';
+        } else {
+            long long temp = int_part;
+            while (temp != 0) {
+                int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
+                temp /= 10;
+            }
+            for (int i = 0; i < int_len / 2; ++i) {
+                const char tmp = int_buf[i];
+                int_buf[i] = int_buf[int_len - 1 - i];
+                int_buf[int_len - 1 - i] = tmp;
+            }
+        }
+
+        if (precision > 0) {
+            double scale = 1.0;
+            for (int i = 0; i < precision; ++i) {
+                scale *= 10.0;
+            }
+
+            fractional = fractional * scale + 0.5;
+            auto frac_val = static_cast<long long>(fractional);
+
+            if (frac_val >= static_cast<long long>(scale)) {
+                frac_val -= static_cast<long long>(scale);
+                int_part++;
+                if (int_part > 0) {
+                    int_len = 0;
+                    long long temp = int_part;
+                    while (temp != 0) {
+                        int_buf[int_len++] = '0' + static_cast<char>(temp % 10);
+                        temp /= 10;
+                    }
+                    for (int i = 0; i < int_len / 2; ++i) {
+                        const char tmp = int_buf[i];
+                        int_buf[i] = int_buf[int_len - 1 - i];
+                        int_buf[int_len - 1 - i] = tmp;
+                    }
+                }
+            }
+
+            for (int i = precision - 1; i >= 0; --i) {
+                frac_buf[i] = '0' + static_cast<char>(frac_val % 10);
+                frac_val /= 10;
+            }
+            frac_len = precision;
+        }
+
+        const int sign_len = (sign != 0) ? 1 : 0;
+        const int dot_len = (precision > 0) ? 1 : 0;
+        const int total_num_len = int_len + dot_len + frac_len;
+        const int total_len = sign_len + total_num_len;
+        int pad = field_width > total_len ? field_width - total_len : 0;
+
+        if (!(flags & LEFT) && !(flags & ZEROPAD)) {
+            while (pad-- > 0) *str++ = ' ';
+        }
+
+        if (sign) *str++ = sign;
+
+        if (!(flags & LEFT) && (flags & ZEROPAD)) {
+            while (pad-- > 0) *str++ = '0';
+        }
+
+        for (int i = 0; i < int_len; ++i) {
+            *str++ = int_buf[i];
+        }
+
+        if (precision > 0) {
+            *str++ = '.';
+            for (int i = 0; i < frac_len; ++i) {
+                *str++ = frac_buf[i];
+            }
+        }
+
+        if (flags & LEFT) {
+            while (pad-- > 0) *str++ = ' ';
+        }
+
+        return str;
+    }
 }
-
-NEFORCE_END_INNER__
 
 
 int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
@@ -239,23 +243,23 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		while(!break_flag) {
 			++fmt;
 			switch (*fmt) {
-				case '-': flags |= _INNER LEFT; break;
-				case '+': flags |= _INNER PLUS; break;
-				case ' ': flags |= _INNER SPACE; break;
-				case '#': flags |= _INNER SPECIAL; break;
-				case '0': flags |= _INNER ZEROPAD; break;
+				case '-': flags |= LEFT; break;
+				case '+': flags |= PLUS; break;
+				case ' ': flags |= SPACE; break;
+				case '#': flags |= SPECIAL; break;
+				case '0': flags |= ZEROPAD; break;
 				default: break_flag = true; break;
 			}
 		}
 
 		int field_width = -1;
 		if (_NEFORCE is_digit(*fmt))
-			field_width = _INNER skip_atoi(&fmt);
+			field_width = skip_atoi(&fmt);
 		else if (*fmt == '*') {
 			field_width = va_arg(args, int);
 			if (field_width < 0) {
 				field_width = -field_width;
-				flags |= _INNER LEFT;
+				flags |= LEFT;
 			}
 		}
 
@@ -263,7 +267,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		if (*fmt == '.') {
 			++fmt;
 			if (_NEFORCE is_digit(*fmt))
-				precision = _INNER skip_atoi(&fmt);
+				precision = skip_atoi(&fmt);
 			else if (*fmt == '*') {
 				precision = va_arg(args, int);
 			}
@@ -278,7 +282,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 
 		switch (*fmt) {
 		    case 'c': {
-		        if (!(flags & _INNER LEFT)) {
+		        if (!(flags & LEFT)) {
 		            while (--field_width > 0) *str++ = ' ';
 		        }
 		        *str++ = static_cast<byte_t>(va_arg(args, int));
@@ -295,7 +299,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		            len = precision;
 		        }
 
-		        if (!(flags & _INNER LEFT)) {
+		        if (!(flags & LEFT)) {
 		            while (len < field_width--) *str++ = ' ';
 		        }
 
@@ -304,43 +308,43 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		        break;
 		    }
 		    case 'o': {
-		        str = _INNER number(str, va_arg(args, unsigned long), 8,
+		        str = number(str, va_arg(args, unsigned long), 8,
                     field_width, precision, flags);
 		        break;
 		    }
 		    case 'p': {
 		        if (field_width == -1) {
 		            field_width = 8;
-		            flags |= _INNER ZEROPAD;
+		            flags |= ZEROPAD;
 		        }
-		        str = _INNER number(str,
+		        str = number(str,
                     reinterpret_cast<size_t>(va_arg(args, void *)), 16,
                     field_width, precision, flags);
 		        break;
 		    }
 		    case 'x': {
-		        flags |= _INNER SMALL;
+		        flags |= SMALL;
 		    }
 		    case 'X': {
-		        str = _INNER number(str, va_arg(args, unsigned long), 16,
+		        str = number(str, va_arg(args, unsigned long), 16,
                     field_width, precision, flags);
 		        break;
 		    }
 		    case 'd': case 'i': {
-		        flags |= _INNER SIGN;
+		        flags |= SIGN;
 		    }
 		    case 'u': {
-		        str = _INNER number(str, va_arg(args, unsigned long), 10,
+		        str = number(str, va_arg(args, unsigned long), 10,
                     field_width, precision, flags);
 		        break;
 		    }
 		    case 'f': {
 		        if (qualifier == 'L') {
 		            const long double ld = va_arg(args, long double);
-		            str = _INNER float_number(str, static_cast<double>(ld), field_width, precision, flags);
+		            str = float_number(str, static_cast<double>(ld), field_width, precision, flags);
 		        } else {
 		            const double d = va_arg(args, double);
-		            str = _INNER float_number(str, d, field_width, precision, flags);
+		            str = float_number(str, d, field_width, precision, flags);
 		        }
 		        break;
 		    }

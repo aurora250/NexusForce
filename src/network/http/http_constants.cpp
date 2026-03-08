@@ -25,11 +25,24 @@ const HTTP_METHOD HTTP_METHOD::DELETE{"DELETE"};
 const HTTP_METHOD HTTP_METHOD::OPTIONS{"OPTIONS"};
 const HTTP_METHOD HTTP_METHOD::TRACE{"TRACE"};
 const HTTP_METHOD HTTP_METHOD::CONNECT{"CONNECT"};
+const HTTP_METHOD HTTP_METHOD::PATCH{"PATCH"};
 const HTTP_METHOD HTTP_METHOD::DEFAULT = GET & POST & DELETE & PUT & OPTIONS;
 
 const HTTP_COOKIE_NAME HTTP_COOKIE_NAME::JSESSIONID{"JSESSIONID"};
 const HTTP_COOKIE_NAME HTTP_COOKIE_NAME::SESSIONID{"SESSIONID"};
 const HTTP_COOKIE_NAME HTTP_COOKIE_NAME::PHPSESSID{"PHPSESSID"};
 const HTTP_COOKIE_NAME HTTP_COOKIE_NAME::ASPSESSIONID{"ASP.NET_SessionId"};
+
+const string HTTP_KEY::Access_Control_Allow_Credentials{"Access-Control-Allow-Credentials"};
+const string HTTP_KEY::Access_Control_Allow_Headers{"Access-Control-Allow-Headers"};
+const string HTTP_KEY::Access_Control_Allow_Methods{"Access-Control-Allow-Methods"};
+const string HTTP_KEY::Access_Control_Allow_Origin{"Access-Control-Allow-Origin"};
+const string HTTP_KEY::Access_Control_Max_Age{"Access-Control-Max-Age"};
+const string HTTP_KEY::Connection{"Connection"};
+const string HTTP_KEY::Content_Length{"Content-Length"};
+const string HTTP_KEY::Content_Type{"Content-Type"};
+const string HTTP_KEY::Lax{"Lax"};
+const string HTTP_KEY::Strict{"Strict"};
+const string HTTP_KEY::X_Forwarded_Proto{"X-Forwarded-Proto"};
 
 NEFORCE_END_NAMESPACE__

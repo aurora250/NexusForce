@@ -12,40 +12,40 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-NEFORCE_BEGIN_INNER__
-
+namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-
-static ::BOOL __stdcall windows_handler(const ::DWORD event) {
-    signal_manager& manager = signal_manager::instance();
-    manager.send_signal(static_cast<SIGNAL_EVENT>(event));
-    return TRUE;
-}
-
+    ::BOOL __stdcall windows_handler(const ::DWORD event) {
+        signal_manager& manager = signal_manager::instance();
+        manager.send_signal(static_cast<SIGNAL_EVENT>(event));
+        return TRUE;
+    }
 #else
+    void posix_handler(const int sig) {
+        signal_manager &manager = signal_manager::instance();
+        manager.send_signal(static_cast<SIGNAL_EVENT>(sig));
+    }
+    void alarm_handler(int sig) {
+        signal_manager::instance().send_signal(SIGNAL_EVENT::TIMEOUT);
+    }
 
-static void posix_handler(const int sig) {
-    signal_manager &manager = signal_manager::instance();
-    manager.send_signal(static_cast<SIGNAL_EVENT>(sig));
-}
-
-static void alarm_handler(int sig) {
-    signal_manager::instance().send_signal(SIGNAL_EVENT::TIMEOUT);
-}
-
+    bool is_valid_posix_signal(const int sig) {
+        return sig > 0 && sig < 64;
+    }
+    bool is_windows_simulated_event(SIGNAL_EVENT event) {
+        const int value = static_cast<int>(event);
+        return value >= 1000 && value < 2000;
+    }
 #endif
 
-NEFORCE_END_INNER__
-
-
-static thread_local SIGNAL_EVENT current_signal =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
+    thread_local SIGNAL_EVENT current_signal =
+    #ifdef NEFORCE_PLATFORM_WINDOWS
+        static_cast<SIGNAL_EVENT>(CTRL_C_EVENT);
 #else
-    static_cast<SIGNAL_EVENT>(SIGTERM);
+        static_cast<SIGNAL_EVENT>(SIGTERM);
 #endif
 
-static thread_local void* signal_context = nullptr;
+    thread_local void* signal_context = nullptr;
+}
 
 #ifdef NEFORCE_PLATFORM_LINUX
 unordered_map<SIGNAL_EVENT, int> signal_manager::windows_to_posix_map_ = {
@@ -54,15 +54,6 @@ unordered_map<SIGNAL_EVENT, int> signal_manager::windows_to_posix_map_ = {
     {SIGNAL_EVENT::LOGOFF,     SIGTERM},
     {SIGNAL_EVENT::SHUTDOWN,   SIGTERM}
 };
-
-static bool is_valid_posix_signal(const int sig) {
-    return sig > 0 && sig < 64;
-}
-
-static bool is_windows_simulated_event(SIGNAL_EVENT event) {
-    const int value = static_cast<int>(event);
-    return value >= 1000 && value < 2000;
-}
 #endif
 
 signal_manager::signal_manager() {
@@ -76,7 +67,7 @@ signal_manager::~signal_manager() {
 
 void signal_manager::initialize_platform() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::SetConsoleCtrlHandler(_INNER windows_handler, TRUE);
+    ::SetConsoleCtrlHandler(windows_handler, TRUE);
 
     handlers_[SIGNAL_EVENT::INTERRUPT]  = nullptr;
     handlers_[SIGNAL_EVENT::CTRL_BREAK] = nullptr;
@@ -121,7 +112,7 @@ void signal_manager::initialize_platform() {
 
 void signal_manager::cleanup_platform() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::SetConsoleCtrlHandler(_INNER windows_handler, FALSE);
+    ::SetConsoleCtrlHandler(windows_handler, FALSE);
 #else
     for (int sig = 1; sig < 64; ++sig) {
         if (old_actions_[sig].sa_handler != SIG_DFL &&

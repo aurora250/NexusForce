@@ -92,6 +92,31 @@ void regex::compile(const string& pattern, const uint32_t options) {
     options_ = options;
 }
 
+void regex::compile(string&& pattern, const uint32_t options) {
+    int errorcode;
+    PCRE2_SIZE erroroffset;
+
+    code_.reset(pcre2_compile(
+        reinterpret_cast<PCRE2_SPTR>(pattern.data()),
+        pattern.length(),
+        options,
+        &errorcode,
+        &erroroffset,
+        nullptr
+    ));
+
+    if (!code_) {
+        char error_message[256];
+        pcre2_get_error_message(errorcode, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
+        throw_exception(regex_exception(error_message));
+    }
+
+    pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
+
+    pattern_ = move(pattern);
+    options_ = options;
+}
+
 match_result regex::do_match(const PCRE2_SPTR subject, const size_t length,
                       const size_t start_offset, const uint32_t options,
                       const string& subject_str) const {
@@ -158,6 +183,10 @@ regex::regex(const string& pattern, const uint32_t options) {
     compile(pattern, options);
 }
 
+regex::regex(string&& pattern, const uint32_t options) {
+    compile(move(pattern), options);
+}
+
 regex::regex(regex&& other) noexcept
 : code_(move(other.code_)),
   pattern_(move(other.pattern_)),
@@ -172,6 +201,16 @@ regex& regex::operator =(regex&& other) noexcept {
         capture_count_ = other.capture_count_;
     }
     return *this;
+}
+
+match_result regex::do_match(const string& str) const {
+    return do_match(
+        reinterpret_cast<PCRE2_SPTR>(str.data()),
+        str.length(),
+        0,
+        PCRE2_ANCHORED | PCRE2_ENDANCHORED,
+        str
+    );
 }
 
 bool regex::match(const string& str) const {
@@ -379,12 +418,12 @@ regex_iterator regex_iterator::from_index(const regex* re, const string& str, pt
 }
 
 regex_iterator::reference regex_iterator::operator *() const noexcept {
-    static const match_result empty_result;
+    thread_local const match_result empty_result{};
     build_cache();
     if (current_index_ >= 0 &&
         current_index_ < static_cast<ptrdiff_t>(cached_matches_.size())) {
         return cached_matches_[current_index_];
-        }
+    }
     return empty_result;
 }
 

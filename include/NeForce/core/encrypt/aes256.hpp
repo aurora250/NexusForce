@@ -1,7 +1,6 @@
 #ifndef NEFORCE_CORE_ENCRYPT_AES256_HPP__
 #define NEFORCE_CORE_ENCRYPT_AES256_HPP__
 #include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/memory/memory_view.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

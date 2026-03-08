@@ -358,6 +358,23 @@ void test_hashtable() {
     println(fus2_str);
 }
 
+void test_cache() {
+    lru_cache<int, string> lru(2);
+    lru.put(1, "one");
+    lru.put(2, "two");
+    println(lru.get(1).value_or("(null)"));
+    lru.put(3, "three");
+    println(lru.get(2).value_or("(null)"));
+
+    ttl_cache<int, string> ttl(3, seconds(5));
+    ttl.put(1, "one");
+    ttl.put(2, "two", seconds(1));
+    this_thread::sleep_for(milliseconds(1100));
+    println(ttl.get(1).value_or("(null)"));
+    println(ttl.get(2).value_or("(null)"));
+    ttl.cleanup();
+}
+
 void test_math() {
     try {
         println(power(2, 10));

@@ -6,8 +6,10 @@
  * @brief NexusForce常用功能集
  *
  * 此文件提供了所有常用功能的头文件集合。
+ * 避免使用此头文件以避免引入不被使用的头文件。
  */
 
+#include "NeForce/compress/lz4_compress.hpp"
 #include "NeForce/compress/zlib_compress.hpp"
 #include "NeForce/core/algorithm/algorithm.hpp"
 #include "NeForce/core/algorithm/ext_sort.hpp"
@@ -21,20 +23,23 @@
 #include "NeForce/core/async/signals.hpp"
 #include "NeForce/core/async/thread_pool.hpp"
 #include "NeForce/core/async/virtual_thread.hpp"
-#include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/bloom_filter.hpp"
 #include "NeForce/core/container/bitmap.hpp"
 #include "NeForce/core/container/bitset.hpp"
 #include "NeForce/core/container/list.hpp"
-#include "NeForce/core/container/map.hpp"
 #include "NeForce/core/container/multimap.hpp"
 #include "NeForce/core/container/multiset.hpp"
 #include "NeForce/core/container/set.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/ttl_cache.hpp"
 #include "NeForce/core/container/unordered_multimap.hpp"
 #include "NeForce/core/container/unordered_multiset.hpp"
 #include "NeForce/core/container/unordered_set.hpp"
-#include "NeForce/core/encrypt/encrypt.hpp"
+#include "NeForce/core/encrypt/aes256.hpp"
+#include "NeForce/core/encrypt/base64.hpp"
+#include "NeForce/core/encrypt/md5.hpp"
+#include "NeForce/core/encrypt/sha1.hpp"
+#include "NeForce/core/encrypt/sha256.hpp"
+#include "NeForce/core/encrypt/xor.hpp"
 #include "NeForce/core/exception/breakpoint.hpp"
 #include "NeForce/core/file/env/env_builder.hpp"
 #include "NeForce/core/file/env/env_parser.hpp"
@@ -53,7 +58,6 @@
 #include "NeForce/core/iterator/ranges.hpp"
 #include "NeForce/core/memory/endian.hpp"
 #include "NeForce/core/memory/trace_memory.hpp"
-#include "NeForce/core/string/regex.hpp"
 #include "NeForce/core/string/vsprintf.hpp"
 #include "NeForce/core/system/cmdline.hpp"
 #include "NeForce/core/system/console.hpp"

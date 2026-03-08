@@ -24,11 +24,10 @@ string(JSON CONFIG_ENABLE_MYSQL      GET ${JSON_CONTENT} dependency mysql      s
 string(JSON CONFIG_ENABLE_SQLITE3    GET ${JSON_CONTENT} dependency sqlite3    switch)
 string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    switch)
 string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
+string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        switch)
 string(JSON CONFIG_ENABLE_OPENSSL    GET ${JSON_CONTENT} dependency openssl    switch)
-string(JSON CONFIG_ENABLE_PCRE2      GET ${JSON_CONTENT} dependency pcre2      switch)
 
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
-string(JSON CONFIG_USING_JIT         GET ${JSON_CONTENT} feature jit)
 
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
 string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
@@ -117,11 +116,10 @@ option(NEXUSFORCE_ENABLE_MYSQL      "Enable MySQL database support"      ${CONFI
 option(NEXUSFORCE_ENABLE_SQLITE3    "Enable SQLite3 database support"    ${CONFIG_ENABLE_SQLITE3})
 option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFIG_ENABLE_HIREDIS})
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
+option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
 option(NEXUSFORCE_ENABLE_OPENSSL    "Enable OpenSSL support"             ${CONFIG_ENABLE_OPENSSL})
-option(NEXUSFORCE_ENABLE_PCRE2      "Enable PCRE2 support"               ${CONFIG_ENABLE_PCRE2})
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
-option(NEXUSFORCE_USING_PCRE2_JIT   "Using PCRE2 JIT"                    ${CONFIG_USING_JIT})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -139,11 +137,12 @@ message(STATUS "  NEXUSFORCE_ENABLE_MYSQL:        ${NEXUSFORCE_ENABLE_MYSQL}")
 message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
 message(STATUS "  NEXUSFORCE_ENABLE_REDIS:        ${NEXUSFORCE_ENABLE_REDIS}")
 message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
+message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
-message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ${NEXUSFORCE_ENABLE_PCRE2}")
+message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON")
 
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
-message(STATUS "  NEXUSFORCE_USING_PCRE2_JIT:     ${NEXUSFORCE_USING_PCRE2_JIT}")
+message(STATUS "  NEXUSFORCE_USING_PCRE2_JIT:     ON")
 
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")

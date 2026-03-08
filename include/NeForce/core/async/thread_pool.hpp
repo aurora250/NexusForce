@@ -2,10 +2,8 @@
 #define NEFORCE_CORE_ASYNC_THREAD_POOL_HPP__
 #include "NeForce/core/async/packaged_task.hpp"
 #include "NeForce/core/async/timer.hpp"
-#include "NeForce/core/container/array.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/system/sysinfo.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -354,15 +352,9 @@ public:
 };
 
 
-NEFORCE_ALWAYS_INLINE_INLINE worker_context*& get_worker_context() noexcept {
-	thread_local worker_context* t_worker_ctx = nullptr;
-	return t_worker_ctx;
-}
+NEFORCE_API worker_context*& get_worker_context() noexcept;
 
-NEFORCE_ALWAYS_INLINE_INLINE shared_ptr<task_group>& get_current_task_group() noexcept {
-	thread_local shared_ptr<task_group> t_current_task_group = nullptr;
-	return t_current_task_group;
-}
+NEFORCE_API shared_ptr<task_group>& get_current_task_group() noexcept;
 
 
 template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>

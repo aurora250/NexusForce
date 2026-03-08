@@ -51,6 +51,7 @@ inline int sum_3(int a, int b, int c) {
 
 void test_tuple();
 void test_hashtable();
+void test_cache();
 void test_math();
 
 void test_sort();
@@ -73,6 +74,8 @@ void test_ext_tpool();
 void test_tpool();
 void test_dns();
 void test_process();
+
+void test_lz4();
 void test_zlib();
 
 #endif //TRY_H

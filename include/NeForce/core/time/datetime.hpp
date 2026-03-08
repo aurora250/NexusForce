@@ -116,6 +116,14 @@ public:
     }
 
     /**
+     * @brief 检查日期是否有效
+     * @return 是否有效
+     */
+    constexpr bool is_valid() const noexcept {
+        return is_valid(year_, month_, day_);
+    }
+
+    /**
      * @brief 获取纪元起始日期（1970-01-01）
      * @return 纪元起始日期
      */
@@ -462,6 +470,14 @@ public:
     }
 
     /**
+     * @brief 检查时间是否有效
+     * @return 是否有效
+     */
+    constexpr bool is_valid() const noexcept {
+        return is_valid(hours_, minutes_, seconds_);
+    }
+
+    /**
      * @brief 重置为00:00:00
      */
     constexpr void clear() noexcept {
@@ -804,6 +820,14 @@ public:
     : date_(date), time_(time), offset_seconds_(offset), has_timezone_(true) {
         date.clear();
         time.clear();
+    }
+
+    /**
+     * @brief 检查时间是否有效
+     * @return 是否有效
+     */
+    constexpr bool is_valid() const noexcept {
+        return date_.is_valid() && time_.is_valid();
     }
 
     /**
