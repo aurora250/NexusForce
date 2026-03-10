@@ -8,7 +8,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 template <typename SocketT>
 class basic_tcp_client {
-    static_assert(is_base_of_v<tcp_socket, SocketT>, "tcp_client must derive from tcp_socket");
+    static_assert(is_base_of_v<tcp_socket, SocketT>, "SocketT must derive from tcp_socket");
 
 public:
     using socket_type = SocketT;
@@ -36,9 +36,9 @@ private:
     atomic<bool> is_reconnecting_{false};
 
 protected:
-    exception_handler_t exception_handler_;
     connect_callback_t connect_callback_;
     disconnect_callback_t disconnect_callback_;
+    exception_handler_t exception_handler_;
 
 private:
     bool try_connect_to_ip(const string& ip, const uint16_t port) {

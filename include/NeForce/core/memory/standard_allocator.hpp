@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/exception/exception.hpp"
-#include <new>
+#include <mimalloc.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -119,12 +119,12 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
 #ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
-        if (block_size <= bytes)
+        if (block_size <= bytes) {
             throw_exception(memory_exception("invalid block size."));
-        const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
+        }
+        const auto holder = reinterpret_cast<uintptr_t>(::mi_malloc(block_size));
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
-        const auto ptr = reinterpret_cast<void*>(
-            (holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1)); // align the memory address
+        const auto ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
         static_cast<uintptr_t*>(ptr)[-1] = holder;
 #ifdef NEFORCE_STATE_DEBUG
         static_cast<uintptr_t*>(ptr)[-2] = MEMORY_BIG_ALLOC_SENTINEL;
@@ -132,7 +132,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         return ptr;
     }
 #endif
-    return operator new(bytes);
+    return ::mi_malloc(bytes);
 }
 
 #ifdef NEFORCE_STANDARD_17
@@ -149,14 +149,16 @@ template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD) ,int> = 0>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
     size_t align = Align;
 #ifdef NEFORCE_COMPILER_MSVC
-    if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD)
+    if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
+    }
 #endif
 #if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
-    if (_NEFORCE is_constant_evaluated())
-        return operator new(bytes);
+    if (_NEFORCE is_constant_evaluated()) {
+        return ::mi_malloc(bytes);
+    }
 #endif
-    return operator new(bytes, std::align_val_t{ align });
+    return ::mi_malloc_aligned(bytes, align);
 }
 
 /**
@@ -189,8 +191,9 @@ template <size_t Align>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const _INNER alloc_size_t bytes) {
     if (bytes == 0) return nullptr;
 #ifdef NEFORCE_STANDARD_20
-    if (_NEFORCE is_constant_evaluated())
-        return operator new(bytes);
+    if (_NEFORCE is_constant_evaluated()) {
+        return ::mi_malloc(bytes);
+    }
 #endif // NEFORCE_STANDARD_20
 
 #ifdef NEFORCE_STANDARD_17
@@ -230,11 +233,11 @@ void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
         ptr = reinterpret_cast<void*>(holder);
     }
 #endif
-    operator delete(ptr
 #if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
-        , bytes
+    ::mi_free_size(ptr, bytes);
+#else
+    ::mi_free(ptr);
 #endif
-        );
 }
 
 #ifdef NEFORCE_STANDARD_17
@@ -255,11 +258,11 @@ NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& 
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
     }
 #endif
-    operator delete(ptr,
 #if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
-        bytes,
+    ::mi_free_size_aligned(ptr, bytes, align);
+#else
+    ::mi_free_aligned(ptr, align);
 #endif
-        std::align_val_t{ align });
 }
 
 /**
@@ -290,7 +293,7 @@ template <size_t Align>
 NEFORCE_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexcept {
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
-        operator delete(ptr);
+        ::mi_free(ptr);
         return;
     }
 #endif // NEFORCE_STANDARD_20
@@ -333,10 +336,10 @@ public:
 
 private:
     /// 最终对齐大小：取类型对齐要求和阈值中的较大值
-    static constexpr _INNER alloc_size_t FINAL_ALIGN_SIZE =
-        alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T) : MEMORY_ALIGN_THRESHHOLD;\
-
-    static constexpr size_type VALUE_SIZE = sizeof(value_type);  ///< 单个元素大小
+    static constexpr _INNER alloc_size_t align_size =
+        alignof(T) > MEMORY_ALIGN_THRESHHOLD ?
+        alignof(T) :
+        MEMORY_ALIGN_THRESHHOLD;
 
 public:
     NEFORCE_CONSTEXPR20 standard_allocator() noexcept = default;  ///< 默认构造函数
@@ -361,12 +364,12 @@ public:
      * 分配 n 个 T 类型的连续内存空间。
      */
     NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 NEFORCE_ALLOC_OPTIMIZE static pointer allocate(const size_type n) {
-        const size_type alloc_size = VALUE_SIZE * n;
+        const size_type alloc_size = sizeof(value_type) * n;
         NEFORCE_DEBUG_VERIFY(
             alloc_size <= static_cast<size_type>(-1),
             "allocation will cause memory overflow.");
         try {
-            return static_cast<T*>(_NEFORCE allocate<FINAL_ALIGN_SIZE>(alloc_size));
+            return static_cast<T*>(_NEFORCE allocate<align_size>(alloc_size));
         } catch (...) {
             throw_exception(allocate_exception("standard allocate failed"));
         }
@@ -390,7 +393,7 @@ public:
      */
     NEFORCE_CONSTEXPR20 static void deallocate(pointer p, const size_type n) noexcept {
         NEFORCE_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
-        _NEFORCE deallocate<FINAL_ALIGN_SIZE>(p, n * VALUE_SIZE);
+        _NEFORCE deallocate<align_size>(p, n * sizeof(value_type));
     }
 
     /**

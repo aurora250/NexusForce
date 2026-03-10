@@ -26,7 +26,6 @@ string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    s
 string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
 string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        switch)
 string(JSON CONFIG_ENABLE_OPENSSL    GET ${JSON_CONTENT} dependency openssl    switch)
-string(JSON CONFIG_ENABLE_PUGIXML    GET ${JSON_CONTENT} dependency pugixml    switch)
 
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 
@@ -119,7 +118,6 @@ option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFI
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
 option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
 option(NEXUSFORCE_ENABLE_OPENSSL    "Enable OpenSSL support"             ${CONFIG_ENABLE_OPENSSL})
-option(NEXUSFORCE_ENABLE_PUGIXML    "Enable pugixml support"             ${CONFIG_ENABLE_PUGIXML})
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
 
@@ -142,7 +140,7 @@ message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
 message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
 message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON")
-message(STATUS "  NEXUSFORCE_ENABLE_PUGIXML:      ${NEXUSFORCE_ENABLE_PUGIXML}")
+message(STATUS "  NEXUSFORCE_ENABLE_MIMALLOC:     ON")
 
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_PCRE2_JIT:     ON")

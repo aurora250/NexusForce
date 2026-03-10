@@ -272,17 +272,6 @@ else()
     message(STATUS "OpenSSL support disabled")
 endif()
 
-if(NEXUSFORCE_ENABLE_PUGIXML)
-    find_package(pugixml REQUIRED)
-    if(TARGET pugixml::pugixml)
-        target_link_libraries(NexusForce PUBLIC pugixml::pugixml)
-        target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_PUGIXML)
-        message(STATUS "pugixml linked successfully")
-    endif()
-else()
-    message(STATUS "pugixml support disabled")
-endif()
-
 
 find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
 target_link_libraries(NexusForce PUBLIC PCRE2::8BIT)
@@ -291,6 +280,13 @@ target_compile_definitions(NexusForce PUBLIC
         PCRE2_CODE_UNIT_WIDTH=8
 )
 message(STATUS "PCRE2 with JIT linked successfully")
+
+find_package(mimalloc CONFIG REQUIRED)
+target_link_libraries(NexusForce PUBLIC mimalloc-static)
+target_compile_definitions(NexusForce PUBLIC
+        NEFORCE_SUPPORT_MIMALLOC
+)
+message(STATUS "mimalloc linked successfully")
 
 
 # 安装库文件

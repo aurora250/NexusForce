@@ -9,6 +9,8 @@ NEFORCE_BEGIN_NAMESPACE__
 
 template <typename SocketT>
 class basic_tcp_server {
+    static_assert(is_base_of_v<tcp_socket, SocketT>, "SocketT must derive from tcp_socket");
+
 public:
     using socket_type = SocketT;
     using client_handler_t = function<void(socket_type)>;

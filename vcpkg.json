@@ -19,7 +19,7 @@
       "name": "pcre2",
       "features": ["jit"]
     },
-    "pugixml"
+    "mimalloc"
   ],
   "features": {
     "postgresql": {
@@ -54,15 +54,15 @@
       "description": "pcre2 support",
       "dependencies": ["pcre2"]
     },
-    "pugixml": {
-      "description": "pugixml support",
-      "dependencies": ["pugixml"]
+    "mimalloc": {
+      "description": "mimalloc support",
+      "dependencies": ["mimalloc"]
     }
   },
   "default-features": [
     "postgresql", "mysql", "sqlite3", "redis",
     "zlib", "lz4",
     "openssl",
-    "pcre2", "pugixml"
+    "pcre2", "mimalloc"
   ]
 }

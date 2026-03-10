@@ -14,7 +14,7 @@
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
-#include <new>
+#include <mimalloc.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -46,9 +46,7 @@ protected:
     /**
      * @brief 删除控制块自身
      */
-    virtual void delete_this() noexcept {
-        delete this;
-    }
+    virtual void delete_this() noexcept = 0;
 
 public:
     /**
@@ -155,6 +153,10 @@ struct __smart_ptr_counter_impl final : __smart_ptr_counter {
         ptr_pair_.get_base()(ptr_pair_.value);
         ptr_pair_.value = nullptr;
     }
+
+    void delete_this() noexcept override {
+        ::mi_free(this);
+    }
 };
 
 /**
@@ -178,12 +180,11 @@ struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     }
 
     void delete_this() noexcept override {
-        operator delete(mem_
 #if NEFORCE_STANDARD_17
-            , static_cast<std::align_val_t>(
-                _NEFORCE max(alignof(T), alignof(__smart_ptr_counter_impl_fused)))
+        ::mi_free_aligned(mem_, _NEFORCE max(alignof(T), alignof(__smart_ptr_counter_impl_fused)));
+#else
+        ::mi_free(mem_);
 #endif
-        );
     }
 };
 
@@ -273,15 +274,23 @@ public:
     using element_type = T;  ///< 元素类型
 
 private:
+    using owner_type = _INNER __smart_ptr_counter;
+
+    template <typename U, typename Deleter>
+    using owner_del = _INNER __smart_ptr_counter_impl<U, Deleter>;
+
+    template <typename U>
+    using owner_default = _INNER __smart_ptr_counter_impl<U, default_delete<U>>;
+
     element_type* ptr_ = nullptr;   ///< 管理的对象指针
-    _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+    owner_type* owner_ = nullptr;  ///< 控制块指针
 
     /**
      * @brief 私有构造函数
      * @param ptr 对象指针
      * @param owner 控制块指针
      */
-    explicit shared_ptr(T* ptr, _INNER __smart_ptr_counter* owner) noexcept
+    explicit shared_ptr(T* ptr, owner_type* owner) noexcept
     : ptr_(ptr), owner_(owner) {}
 
     template <typename U>
@@ -309,7 +318,8 @@ public:
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr(U* ptr)
-    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr)) {
+    : ptr_(ptr), owner_(static_cast<owner_default<U>*>(::mi_malloc(sizeof(owner_default<U>)))) {
+        _NEFORCE construct(static_cast<owner_default<U>*>(owner_), ptr_);
         _INNER __setup_enable_shared_from(ptr_, owner_);
     }
 
@@ -322,7 +332,8 @@ public:
      */
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(U* ptr, Deleter&& deleter)
-    : ptr_(ptr), owner_(new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _NEFORCE forward<Deleter>(deleter))) {
+    : ptr_(ptr), owner_(static_cast<owner_del<U, Deleter>*>(::mi_malloc(sizeof(owner_del<U, Deleter>)))) {
+        _NEFORCE construct(static_cast<owner_del<U, Deleter>*>(owner_), ptr_, _NEFORCE forward<Deleter>(deleter));
         _INNER __setup_enable_shared_from(ptr_, owner_);
     }
 
@@ -483,7 +494,8 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = new _INNER __smart_ptr_counter_impl<U, default_delete<U>>(ptr);
+        owner_ = static_cast<owner_default<U>*>(::mi_malloc(sizeof(owner_default<U>)));
+        _NEFORCE construct(static_cast<owner_default<U>*>(owner_), ptr_);
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
@@ -500,7 +512,8 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = new _INNER __smart_ptr_counter_impl<U, Deleter>(ptr, _NEFORCE move(deleter));
+        owner_ = static_cast<owner_del<U, Deleter>*>(::mi_malloc(sizeof(owner_del<U, Deleter>)));
+        _NEFORCE construct(static_cast<owner_del<U, Deleter>*>(owner_), ptr_, _NEFORCE move(deleter));
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
@@ -749,10 +762,10 @@ make_shared(Args&&... args) {
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
 #if NEFORCE_STANDARD_17
-    void* mem = ::operator new(size, static_cast<std::align_val_t>(align));
+    void* mem = ::mi_malloc_aligned(size, align);
     Counter* counter = static_cast<Counter*>(mem);
 #else
-    void* mem = ::operator new(size + align - 1);
+    void* mem = ::mi_malloc(size + align - 1);
     size_t aligned_addr = (reinterpret_cast<size_t>(mem) + (align - 1)) & ~(align - 1);
     Counter* counter = reinterpret_cast<Counter*>(aligned_addr);
 #endif
@@ -761,13 +774,13 @@ make_shared(Args&&... args) {
         _NEFORCE construct(object, _NEFORCE forward<Args>(args)...);
     } catch (...) {
 #if NEFORCE_STANDARD_17
-        operator delete(mem, static_cast<std::align_val_t>(align));
+        ::mi_free_aligned(mem, align);
 #else
-        operator delete(mem);
+        ::mi_free(mem);
 #endif
         throw_exception(memory_exception("shared ptr construction failed."));
     }
-    new (counter) Counter(object, mem, _NEFORCE move(deleter));
+    _NEFORCE construct(reinterpret_cast<Counter*>(counter), object, mem, _NEFORCE move(deleter));
     _INNER __setup_enable_shared_from(object, counter);
     return _INNER __make_shared_fused(object, counter);
 }
@@ -783,11 +796,12 @@ template <typename T>
 enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>>
 make_shared(const size_t len) {
     using value = remove_extent_t<T>;
-    auto* tmp = new value[len]();
+    void* tmp = nullptr;
     try {
+        tmp = ::mi_malloc(len * sizeof(value));
         return shared_ptr<T>(tmp);
     } catch (...) {
-        delete[] tmp;
+        ::mi_free(tmp);
         throw_exception(memory_exception("shared ptr construction failed."));
     }
     NEFORCE_UNREACHABLE;
@@ -834,7 +848,9 @@ allocate_shared(Alloc& alloc, Args&&... args) {
 
     ControlBlock* ctrl_block = nullptr;
     try {
-        ctrl_block = ::new (aligned_mem) ControlBlock(object_ptr, raw_mem, raw_size, deleter, alloc);
+        _NEFORCE construct(
+            reinterpret_cast<ControlBlock*>(aligned_mem),
+            object_ptr, raw_mem, raw_size, deleter, alloc);
     } catch (...) {
         allocator_traits<Alloc>::destroy(alloc, object_ptr);
         allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
