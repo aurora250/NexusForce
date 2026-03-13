@@ -14,7 +14,7 @@
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
-#include <mimalloc.h>
+#include <new>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -155,7 +155,7 @@ struct __smart_ptr_counter_impl final : __smart_ptr_counter {
     }
 
     void delete_this() noexcept override {
-        ::mi_free(this);
+        delete this;
     }
 };
 
@@ -169,10 +169,11 @@ struct __smart_ptr_counter_impl final : __smart_ptr_counter {
 template <typename T, typename Deleter>
 struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
     compressed_pair<Deleter, T*> ptr_pair_{default_construct_tag{}, nullptr};
+    size_t align_;
     void* mem_;
 
-    explicit __smart_ptr_counter_impl_fused(T* ptr, void* mem, Deleter deleter) noexcept
-    : ptr_pair_(exact_arg_construct_tag{}, _NEFORCE move(deleter), ptr), mem_(mem) {}
+    explicit __smart_ptr_counter_impl_fused(T* ptr, void* mem, size_t align, Deleter deleter) noexcept
+    : ptr_pair_(exact_arg_construct_tag{}, _NEFORCE move(deleter), ptr), align_(align), mem_(mem) {}
 
     void delete_object() noexcept override {
         ptr_pair_.get_base()(ptr_pair_.value);
@@ -181,9 +182,9 @@ struct __smart_ptr_counter_impl_fused final : __smart_ptr_counter {
 
     void delete_this() noexcept override {
 #if NEFORCE_STANDARD_17
-        ::mi_free_aligned(mem_, _NEFORCE max(alignof(T), alignof(__smart_ptr_counter_impl_fused)));
+        operator delete(mem_, std::align_val_t{ align_ });
 #else
-        ::mi_free(mem_);
+        operator delete(mem_);
 #endif
     }
 };
@@ -277,7 +278,7 @@ private:
     using owner_type = _INNER __smart_ptr_counter;
 
     template <typename U, typename Deleter>
-    using owner_del = _INNER __smart_ptr_counter_impl<U, Deleter>;
+    using owner_deleter = _INNER __smart_ptr_counter_impl<U, Deleter>;
 
     template <typename U>
     using owner_default = _INNER __smart_ptr_counter_impl<U, default_delete<U>>;
@@ -318,8 +319,7 @@ public:
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr(U* ptr)
-    : ptr_(ptr), owner_(static_cast<owner_default<U>*>(::mi_malloc(sizeof(owner_default<U>)))) {
-        _NEFORCE construct(static_cast<owner_default<U>*>(owner_), ptr_);
+    : ptr_(ptr), owner_(new owner_default<U>(ptr_)) {
         _INNER __setup_enable_shared_from(ptr_, owner_);
     }
 
@@ -332,8 +332,7 @@ public:
      */
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(U* ptr, Deleter&& deleter)
-    : ptr_(ptr), owner_(static_cast<owner_del<U, Deleter>*>(::mi_malloc(sizeof(owner_del<U, Deleter>)))) {
-        _NEFORCE construct(static_cast<owner_del<U, Deleter>*>(owner_), ptr_, _NEFORCE forward<Deleter>(deleter));
+    : ptr_(ptr), owner_(new owner_deleter<U, Deleter>(ptr_, _NEFORCE forward<Deleter>(deleter))) {
         _INNER __setup_enable_shared_from(ptr_, owner_);
     }
 
@@ -494,8 +493,7 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = static_cast<owner_default<U>*>(::mi_malloc(sizeof(owner_default<U>)));
-        _NEFORCE construct(static_cast<owner_default<U>*>(owner_), ptr_);
+        owner_ = new owner_default<U>(ptr_);
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
@@ -512,8 +510,7 @@ public:
         ptr_ = nullptr;
         owner_ = nullptr;
         ptr_ = ptr;
-        owner_ = static_cast<owner_del<U, Deleter>*>(::mi_malloc(sizeof(owner_del<U, Deleter>)));
-        _NEFORCE construct(static_cast<owner_del<U, Deleter>*>(owner_), ptr_, _NEFORCE move(deleter));
+        owner_ = new owner_deleter<U, Deleter>(ptr_, _NEFORCE move(deleter));
         _INNER __setup_enable_shared_from<T>(ptr_, owner_);
     }
 
@@ -756,31 +753,34 @@ protected:
 template <typename T, typename... Args>
 enable_if_t<!is_unbounded_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>>
 make_shared(Args&&... args) {
-    auto const deleter = [](T* ptr) noexcept { ptr->~T(); };
+    auto const deleter =
+        [](T* ptr) noexcept(is_nothrow_destructible_v<T>) {
+            ptr->~T();
+        };
     using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
     constexpr size_t align = max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
 #if NEFORCE_STANDARD_17
-    void* mem = ::mi_malloc_aligned(size, align);
-    Counter* counter = static_cast<Counter*>(mem);
+    void* mem = operator new(size, std::align_val_t{ align });
+    auto* counter = static_cast<Counter*>(mem);
 #else
-    void* mem = ::mi_malloc(size + align - 1);
+    void* mem = operator new(size + align - 1);
     size_t aligned_addr = (reinterpret_cast<size_t>(mem) + (align - 1)) & ~(align - 1);
     Counter* counter = reinterpret_cast<Counter*>(aligned_addr);
 #endif
     T* object = reinterpret_cast<T*>(reinterpret_cast<byte_t*>(counter) + offset);
     try {
-        _NEFORCE construct(object, _NEFORCE forward<Args>(args)...);
+        _NEFORCE construct(object, _NEFORCE forward<Args>( args)...);
     } catch (...) {
 #if NEFORCE_STANDARD_17
-        ::mi_free_aligned(mem, align);
+        operator delete(mem, std::align_val_t{ align });
 #else
-        ::mi_free(mem);
+        operator delete(mem);
 #endif
         throw_exception(memory_exception("shared ptr construction failed."));
     }
-    _NEFORCE construct(reinterpret_cast<Counter*>(counter), object, mem, _NEFORCE move(deleter));
+    _NEFORCE construct(reinterpret_cast<Counter*>(counter), object, mem, align, _NEFORCE move(deleter));
     _INNER __setup_enable_shared_from(object, counter);
     return _INNER __make_shared_fused(object, counter);
 }
@@ -798,10 +798,10 @@ make_shared(const size_t len) {
     using value = remove_extent_t<T>;
     void* tmp = nullptr;
     try {
-        tmp = ::mi_malloc(len * sizeof(value));
+        tmp = new value[len];
         return shared_ptr<T>(tmp);
     } catch (...) {
-        ::mi_free(tmp);
+        operator delete [](tmp);
         throw_exception(memory_exception("shared ptr construction failed."));
     }
     NEFORCE_UNREACHABLE;

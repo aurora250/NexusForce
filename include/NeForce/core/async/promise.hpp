@@ -8,7 +8,6 @@
  * 此文件提供了promise的实现作为结果的生产者。
  */
 
-#include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/async/future.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

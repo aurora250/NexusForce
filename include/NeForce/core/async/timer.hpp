@@ -69,7 +69,7 @@ private:
     map<token, typename set<node>::iterator> node_map_;  ///< ID到迭代器的映射
 
     thread thread_;          ///< 调度线程
-    mutex mutex_;            ///< 互斥锁
+    mutable mutex mutex_;    ///< 互斥锁
     condition_variable cv_;  ///< 条件变量
     token next_id_;          ///< 下一个可用的任务ID
     atomic_bool stopped_;    ///< 停止标志
@@ -213,7 +213,7 @@ public:
      * @return 任务数量
      */
     NEFORCE_NODISCARD size_t size() const {
-        lock<mutex> lock(const_cast<mutex&>(mutex_));
+        lock<mutex> lock(mutex_);
         return nodes_.size();
     }
 };

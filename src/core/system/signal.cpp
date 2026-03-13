@@ -84,13 +84,13 @@ void signal_manager::initialize_platform() {
     };
 #else
     struct ::sigaction sa_alarm;
-    sa_alarm.sa_handler = _INNER alarm_handler;
+    sa_alarm.sa_handler = alarm_handler;
     ::sigemptyset(&sa_alarm.sa_mask);
     sa_alarm.sa_flags = SA_RESTART;
     ::sigaction(SIGALRM, &sa_alarm, nullptr);
 
     struct ::sigaction sa;
-    sa.sa_handler = _INNER posix_handler;
+    sa.sa_handler = posix_handler;
     ::sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 

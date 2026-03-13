@@ -256,11 +256,11 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(network_exception, exception, "Network Operati
  */
 void NEFORCE_API throw_with_stack(const exception& err);
 
-#if defined(NEFORCE_STATE_DEBUG) || !defined(NDEBUG)
-#define throw_exception(err) throw_with_stack(err)
-#else
+// #if defined(NEFORCE_STATE_DEBUG) || !defined(NDEBUG)
+// #define throw_exception(err) throw_with_stack(err)
+// #else
 #define throw_exception(err) throw err
-#endif
+// #endif
 
 /** @} */ // ExceptionHandling
 

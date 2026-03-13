@@ -209,6 +209,11 @@ struct submit_result {
 	NEFORCE_NODISCARD explicit operator bool() const noexcept {
 		return future.valid() && task_info;
 	}
+
+    ~submit_result() {
+	    future.wait();
+	    task_info.reset();
+	}
 };
 
 
@@ -317,28 +322,28 @@ public:
     bool start(size_t init_thread_size = 3);
     pool_statistics stop();
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_task(priority_type priority, Func&& func, Args&&... args);
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_task(Func&& func, Args&&... args) {
-		return this->submit_task(0, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_task(priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_after(int64_t delay_ms, priority_type priority, Func&& func, Args&&... args);
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_after(int64_t delay_ms, Func&& func, Args&&... args) {
-		return this->submit_after(delay_ms, 0, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_after(delay_ms, priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	periodic_token submit_every(int64_t interval_ms, priority_type priority, Func&& func, Args&&... args);
 
-	template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int> = 0>
+	template <typename Func, typename... Args>
 	periodic_token submit_every(int64_t interval_ms, Func&& func, Args&&... args) {
-		return this->submit_every(interval_ms, 0, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_every(interval_ms, priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
 	static void cancel_periodic_task(const periodic_token& token) {
@@ -357,10 +362,12 @@ NEFORCE_API worker_context*& get_worker_context() noexcept;
 NEFORCE_API shared_ptr<task_group>& get_current_task_group() noexcept;
 
 
-template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+template <typename Func, typename... Args>
 submit_result<invoke_result_t<Func, Args...>>
 thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... args) {
-	using Result = decltype(func(_NEFORCE forward<Args>(args)...));
+    static_assert(is_invocable_v<Func, Args...>, "Func must be invocable with Args");
+
+	using Result = invoke_result_t<Func, Args...>;
 
 	auto info = make_shared<task_info>(generate_task_id(), priority);
 
@@ -473,7 +480,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		&& task_size_.load() > idle_thread_size_
 		&& threads_map_.size() < thread_threshhold_) {
 
-		auto ptr = _NEFORCE make_unique<_INNER manual_thread>(
+		unique_ptr<_INNER manual_thread> ptr = _NEFORCE make_unique<_INNER manual_thread>(
 			[this](const id_type id) {
 				thread_function(id);
 			});
@@ -488,18 +495,20 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 	        }
 	    }
 
-		threads_map_.emplace(thread_id, _NEFORCE move(ptr));
+		threads_map_.emplace(thread_id, move(ptr));
 		threads_map_[thread_id]->start();
 		++idle_thread_size_;
 	}
 
-	return submit_result<Result>{_NEFORCE move(res), info};
+	return submit_result<Result>{move(res), move(info)};
 }
 
-template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+template <typename Func, typename... Args>
 submit_result<invoke_result_t<Func, Args...>>
 thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, Func&& func, Args&&... args) {
-	using Result = decltype(func(args...));
+    static_assert(is_invocable_v<Func, Args...>, "Func must be invocable with Args");
+
+    using Result = invoke_result_t<Func, Args...>;
 
 	auto info = make_shared<task_info>(generate_task_id(), priority);
 
@@ -547,7 +556,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 	return submit_result<Result>{_NEFORCE move(res), info};
 }
 
-template <typename Func, typename... Args, enable_if_t<is_invocable_v<Func, Args...>, int>>
+template <typename Func, typename... Args>
 thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const priority_type priority, Func &&func, Args &&...args) {
     auto state = make_shared<periodic_task_state>();
 	auto task = _NEFORCE make_shared<function<void()>>(

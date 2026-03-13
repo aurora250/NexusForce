@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/exception/exception.hpp"
-#include <mimalloc.h>
+#include <new>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -122,7 +122,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         if (block_size <= bytes) {
             throw_exception(memory_exception("invalid block size."));
         }
-        const auto holder = reinterpret_cast<uintptr_t>(::mi_malloc(block_size));
+        const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
         const auto ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
         static_cast<uintptr_t*>(ptr)[-1] = holder;
@@ -132,7 +132,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         return ptr;
     }
 #endif
-    return ::mi_malloc(bytes);
+    return operator new(bytes);
 }
 
 #ifdef NEFORCE_STANDARD_17
@@ -155,10 +155,10 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc
 #endif
 #if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
     if (_NEFORCE is_constant_evaluated()) {
-        return ::mi_malloc(bytes);
+        return operator new(bytes);
     }
 #endif
-    return ::mi_malloc_aligned(bytes, align);
+    return operator new(bytes, std::align_val_t{ align });
 }
 
 /**
@@ -192,7 +192,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const _INNER alloc_siz
     if (bytes == 0) return nullptr;
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
-        return ::mi_malloc(bytes);
+        return operator new(bytes);
     }
 #endif // NEFORCE_STANDARD_20
 
@@ -234,9 +234,9 @@ void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
     }
 #endif
 #if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
-    ::mi_free_size(ptr, bytes);
+    operator delete(ptr, bytes);
 #else
-    ::mi_free(ptr);
+    operator delete(ptr);
 #endif
 }
 
@@ -259,9 +259,9 @@ NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& 
     }
 #endif
 #if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
-    ::mi_free_size_aligned(ptr, bytes, align);
+    operator delete(ptr, bytes, std::align_val_t{ align });
 #else
-    ::mi_free_aligned(ptr, align);
+    operator delete(ptr, std::align_val_t{ align });
 #endif
 }
 
@@ -293,7 +293,7 @@ template <size_t Align>
 NEFORCE_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexcept {
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
-        ::mi_free(ptr);
+        operator delete(ptr);
         return;
     }
 #endif // NEFORCE_STANDARD_20

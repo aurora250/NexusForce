@@ -14,7 +14,7 @@ namespace {
         while (pos < pattern.length()) {
             if (pattern[pos] == ':') {
                 size_t end = pos + 1;
-                while (end < pattern.length() && (isalnum(pattern[end]) || pattern[end] == '_')) {
+                while (end < pattern.length() && (is_digit(pattern[end]) || pattern[end] == '_')) {
                     ++end;
                 }
 

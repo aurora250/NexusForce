@@ -4,9 +4,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    thread_local worker_context* t_worker_ctx = nullptr;
-    thread_local shared_ptr<task_group> t_current_task_group = nullptr;
-
     struct thread_pool_id_generator {
         static uint32_t& get_id() noexcept {
             static uint32_t pool_thread_id = 0;
@@ -28,10 +25,12 @@ uint32_t local_queue::fixed_batch_size_ = 4;
 
 
 worker_context*& get_worker_context() noexcept {
+    thread_local worker_context* t_worker_ctx{nullptr};
     return t_worker_ctx;
 }
 
 shared_ptr<task_group>& get_current_task_group() noexcept {
+    thread_local shared_ptr<task_group> t_current_task_group{nullptr};
     return t_current_task_group;
 }
 
@@ -471,6 +470,7 @@ bool thread_pool::start(const size_t init_thread_size) {
 thread_pool::pool_statistics thread_pool::stop() {
     if (!is_running_) return {};
     is_running_ = false;
+    timer_.cancel_all();
 
     {
         smart_lock<mutex> lk(task_queue_mtx_);

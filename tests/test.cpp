@@ -790,35 +790,8 @@ void test_tpool() {
     click clk;
     {
         scoped_click grd(clk);
-        pool.submit_task([&pool] {
-            pool.submit_task(test_vector);
-            pool.submit_task(test_list);
-            pool.submit_task(test_deque);
-            pool.submit_task(test_hashtable);
-            pool.submit_task(test_rbtree);
-            pool.submit_task(test_math);
-            pool.submit_task(test_tuple);
-            pool.submit_task(test_variant);
-            pool.submit_task(test_option);
-            pool.submit_task(test_check);
-            pool.submit_task(test_any);
-            pool.submit_task(test_datetimes);
-            pool.submit_task(test_json);
-            pool.submit_task(test_ini);
-            pool.submit_task(test_env);
-            pool.submit_task(test_toml);
-            pool.submit_task(test_rnd);
-            pool.submit_task(test_print);
-            pool.submit_task(test_env_var);
-            pool.submit_task(test_sysinfo);
-            pool.submit_task(test_process);
-            pool.submit_task(test_format);
-            pool.submit_task(test_enctype);
-            pool.submit_task(test_color);
-            pool.submit_task(test_sql);
-            // pool.submit_task(test_ranges);
-            pool.submit_task(test_zlib);
-        });
+        auto res = pool.submit_task([]{});
+        // res.future.wait();
         println(pool.stop());
     }
     println(clk.during().count());

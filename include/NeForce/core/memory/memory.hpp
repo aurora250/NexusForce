@@ -882,15 +882,11 @@ string_set(CharT* str, const CharT value) noexcept {
 template <typename CharT>
 constexpr CharT*
 string_set(CharT* str, const CharT value, const size_t count) noexcept {
-	if (str == nullptr || count == 0) return str;
-	CharT* original = str;
-	size_t processed = 0;
-	while (*str != static_cast<CharT>(0) && processed < count) {
-		*str = value;
-		++str;
-		++processed;
-	}
-	return original;
+    if (str == nullptr || count == 0) return str;
+    for (size_t i = 0; i < count; ++i) {
+        str[i] = value;
+    }
+    return str;
 }
 
 /**

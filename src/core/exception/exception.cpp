@@ -9,7 +9,7 @@
 #include <errhandlingapi.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#include <signal.h>
+#include <csignal>
 
 #ifndef SYS_exit
 #if defined(NEFORCE_ARCH_X86_32)
@@ -259,14 +259,13 @@ namespace {
             bool is_used;
         };
 
-        array<handler_entry, max_handler_threshhold> atexit_handlers;
-        array<handler_entry, max_handler_threshhold> quick_exit_handlers;
-        size_t atexit_count;
-        size_t quick_exit_count;
+        array<handler_entry, max_handler_threshhold> atexit_handlers{};
+        array<handler_entry, max_handler_threshhold> quick_exit_handlers{};
+        size_t atexit_count{0};
+        size_t quick_exit_count{0};
         mutex mtx;
 
-        exit_handler_manager()
-        : atexit_count(0), quick_exit_count(0) {
+        exit_handler_manager() {
             fill(atexit_handlers.begin(), atexit_handlers.end(), handler_entry{nullptr, false});
             fill(quick_exit_handlers.begin(), quick_exit_handlers.end(), handler_entry{nullptr, false});
         }

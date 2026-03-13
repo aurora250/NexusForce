@@ -30,10 +30,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * 仅当T可以从Args...构造时才启用此重载。
  */
 template <typename T, typename... Args>
-NEFORCE_CONSTEXPR20 enable_if_t<is_constructible_v<T, Args...>, void*>
-construct(T* ptr, Args&&... args)
+NEFORCE_CONSTEXPR20 T* construct(T* ptr, Args&&... args)
 noexcept(is_nothrow_constructible_v<T, Args...>) {
-    return new (static_cast<void*>(ptr)) T(_NEFORCE forward<Args>(args)...);
+    static_assert(is_constructible_v<T, Args...>, "T must be constructible with arguments");
+    return static_cast<T*>(new (static_cast<void*>(ptr)) T(_NEFORCE forward<Args>(args)...));
 }
 
 /**
