@@ -1,6 +1,15 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-3-7
+## [0.1.1] - 2026-3-17
+
+### 🚀 New Features
+- ICMP 支持
+
+### 🐛 Bug Fixes
+- 修复 make_shared 内存泄漏
+
+
+## [0.1.0] - 2026-3-7
 
 ### 🚀 New Features
 - PCRE2 正则表达式支持
