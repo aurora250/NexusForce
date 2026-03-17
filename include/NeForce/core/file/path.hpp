@@ -47,7 +47,7 @@ public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
         "\\/";
 #elif defined(NEFORCE_PLATFORM_LINUX)
-         "/";
+        "/";
 #endif
 
     /**

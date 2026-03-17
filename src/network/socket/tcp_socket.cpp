@@ -6,7 +6,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    bool wait_for_write(native_handle_type fd, const milliseconds timeout) {
+    bool wait_for_write(tcp_socket::native_handle_type fd, const milliseconds timeout) {
         ::fd_set write_fds;
         FD_ZERO(&write_fds);
         FD_SET(fd, &write_fds);

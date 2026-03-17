@@ -25,22 +25,19 @@ NEFORCE_BEGIN_NAMESPACE__
  * 用于配合call_once函数，确保某个函数在多个线程中只被执行一次。
  * 每个once_flag实例对应一个需要只执行一次的函数。
  *
+ * 状态标志：0=未执行，1=执行中，2=已执行
+ *
  * @note 不可拷贝、不可移动
  */
 class once_flag {
 private:
-    atomic<uint32_t> state_;  ///< 状态标志：0=未执行，1=执行中，2=已执行
+    atomic<uint32_t> state_{0};
 
     template <typename Callable, typename... Args>
     friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
 
 public:
-    /**
-     * @brief 构造函数
-     *
-     * 初始化once_flag为未执行状态。
-     */
-    once_flag() noexcept : state_(0) {}
+    once_flag() noexcept = default;
     once_flag(const once_flag&) = delete;
     once_flag& operator =(const once_flag&) = delete;
     once_flag(once_flag&&) = delete;

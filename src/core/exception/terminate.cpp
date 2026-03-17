@@ -2,7 +2,7 @@
 #include <NeForce/core/async/mutex.hpp>
 #include <NeForce/core/container/array.hpp>
 #include <NeForce/core/exception/terminate.hpp>
-#include <cstdio> // ::fflush
+#include <stdio.h> // ::fflush
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <errhandlingapi.h>
 #endif

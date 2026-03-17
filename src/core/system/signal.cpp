@@ -3,6 +3,7 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/exception/terminate.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#include <NeForce/core/config/windef.hpp>
 #include <windef.h>
 #include <WinBase.h>
 #endif

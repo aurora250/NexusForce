@@ -360,23 +360,22 @@ file::file()
 : handle_(INVALID_HANDLE()) {}
 
 file::file(file&& other) noexcept
-    : handle_(other.handle_),
-      path_(_NEFORCE move(other.path_)),
-      opened_(other.opened_),
-      append_mode_(other.append_mode_),
-      read_buffer_(_NEFORCE move(other.read_buffer_)),
-      read_buffer_pos_(other.read_buffer_pos_),
-      read_buffer_size_(other.read_buffer_size_),
-      write_buffer_(_NEFORCE move(other.write_buffer_)),
-      write_buffer_pos_(other.write_buffer_pos_),
-      mapped_ptr_(other.mapped_ptr_),
-      mapped_size_(other.mapped_size_),
+: handle_(other.handle_),
+  path_(_NEFORCE move(other.path_)),
+  opened_(other.opened_),
+  append_mode_(other.append_mode_),
+  read_buffer_(_NEFORCE move(other.read_buffer_)),
+  read_buffer_pos_(other.read_buffer_pos_),
+  read_buffer_size_(other.read_buffer_size_),
+  write_buffer_(_NEFORCE move(other.write_buffer_)),
+  write_buffer_pos_(other.write_buffer_pos_),
+  mapped_ptr_(other.mapped_ptr_),
+  mapped_size_(other.mapped_size_),
 #ifdef NEFORCE_PLATFORM_WINDOWS
-      mapping_handle_(other.mapping_handle_),
+  mapping_handle_(other.mapping_handle_),
 #endif
-      last_error_msg_(_NEFORCE move(other.last_error_msg_)),
-      last_error_code_(other.last_error_code_) {
-
+  last_error_msg_(_NEFORCE move(other.last_error_msg_)),
+  last_error_code_(other.last_error_code_) {
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
     other.append_mode_ = false;
@@ -389,7 +388,7 @@ file::file(file&& other) noexcept
     other.mapped_ptr_ = nullptr;
     other.mapped_size_ = 0;
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    other.mapping_handle_ = INVALID_HANDLE_VALUE;
+    other.mapping_handle_ = INVALID_HANDLE();
 #endif
     other.last_error_code_ = 0;
 }
@@ -468,11 +467,11 @@ file::~file() {
     this->close();
 }
 
-bool file::open(_NEFORCE path p, const bool append,
-    FILE_ACCESS access,
-    FILE_SHARED share_mode,
-    FILE_CREATION creation,
-    FILE_ATTRI attributes) {
+bool file::open(
+    _NEFORCE path p, const bool append,
+    FILE_ACCESS access, FILE_SHARED share_mode,
+    FILE_CREATION creation, FILE_ATTRI attributes) {
+
     this->close();
     clear_error();
 

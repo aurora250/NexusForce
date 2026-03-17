@@ -249,8 +249,8 @@ void file_watcher::watch_thread_func() {
 
             while (fni && watching_.load()) {
                 const wstring wide_filename(fni->FileName, fni->FileNameLength / sizeof(wchar_t));
-                const string utf8_filename = to_string(wide_filename);
-                path full_path = watch_path_ / path(utf8_filename);
+                const path utf8_filename{to_string(wide_filename)};
+                path full_path = watch_path_ / utf8_filename;
                 auto event_type = FILE_WATCH_EVENT::ACCESSED;
 
                 switch (fni->Action) {
