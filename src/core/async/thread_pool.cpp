@@ -470,7 +470,6 @@ bool thread_pool::start(const size_t init_thread_size) {
 thread_pool::pool_statistics thread_pool::stop() {
     if (!is_running_) return {};
     is_running_ = false;
-    timer_.cancel_all();
 
     {
         smart_lock<mutex> lk(task_queue_mtx_);

@@ -39,8 +39,7 @@ void condition_variable_base::wait(mutex& mtx) {
 #endif
 }
 
-cv_status condition_variable_base::wait_until(
-    mutex& mtx, const int64_t sec, const int64_t ns) {
+cv_status condition_variable_base::wait_until(mutex& mtx, const int64_t sec, const int64_t ns) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const milliseconds timeout_ms = relative_time(sec, ns, false);
     const ::BOOL result = ::SleepConditionVariableSRW(
@@ -60,8 +59,7 @@ cv_status condition_variable_base::wait_until(
 #endif
 }
 
-cv_status condition_variable_base::wait_until(
-    mutex& mtx, const bool is_monotonic, const int64_t sec, const int64_t ns) {
+cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotonic, const int64_t sec, const int64_t ns) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const milliseconds timeout_ms = relative_time(sec, ns, is_monotonic);
     ::BOOL result = ::SleepConditionVariableSRW(

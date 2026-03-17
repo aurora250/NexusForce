@@ -5,9 +5,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API tcp_socket : public socket_base {
-private:
-    bool wait_for_write(milliseconds timeout);
-
 public:
     tcp_socket() = default;
 

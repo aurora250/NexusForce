@@ -82,6 +82,7 @@
 #include "NeForce/network/http/http_client.hpp"
 #include "NeForce/network/http/http_server.hpp"
 #include "NeForce/network/http/http_server.hpp"
+#include "NeForce/network/socket/icmp_socket.hpp"
 #include "NeForce/network/socket/ssl_acceptor.hpp"
 #include "NeForce/network/socket/tcp_acceptor.hpp"
 #include "NeForce/network/socket/udp_socket.hpp"

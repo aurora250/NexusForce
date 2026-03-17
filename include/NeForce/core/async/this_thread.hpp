@@ -8,7 +8,7 @@
  * 此文件提供了跨平台的当前线程操作函数。
  */
 
-#include "NeForce/core/config/windef.hpp"
+#include "NeForce/core/typeinfo/types.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <emmintrin.h>
 #include <processthreadsapi.h>

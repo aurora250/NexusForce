@@ -173,7 +173,7 @@ NEFORCE_CONSTEXPR20 string to_string(const TASK_STATUS status) {
 
 
 struct task_info {
-	using priority_type = uint32_t;
+	enum class priority_type : uint32_t {};
 
 	const uint64_t id;
 	atomic<TASK_STATUS> status{TASK_STATUS::PENDING};
@@ -208,11 +208,6 @@ struct submit_result {
 
 	NEFORCE_NODISCARD explicit operator bool() const noexcept {
 		return future.valid() && task_info;
-	}
-
-    ~submit_result() {
-	    future.wait();
-	    task_info.reset();
 	}
 };
 
@@ -429,7 +424,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 	future<Result> res = task->get_future();
 	task_type job([task] { (*task)(); });
 
-	if (priority > 0) {
+	if (static_cast<uint32_t>(priority) > 0) {
 		smart_lock<mutex> lock(task_queue_mtx_);
 
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
@@ -469,7 +464,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 				return submit_result<Result>{dummy_task->get_future(), info};
 			}
 
-			task_queue_.emplace(move(job), 0, info);
+			task_queue_.emplace(move(job), priority_type{0}, info);
 			++task_size_;
 			++total_submitted_tasks_;
 			not_empty_.notify_one();

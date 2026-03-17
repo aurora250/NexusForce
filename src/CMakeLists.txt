@@ -44,9 +44,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/hazard_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
@@ -70,6 +72,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/icmp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/socket_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_socket.cpp
@@ -280,13 +283,6 @@ target_compile_definitions(NexusForce PUBLIC
         PCRE2_CODE_UNIT_WIDTH=8
 )
 message(STATUS "PCRE2 with JIT linked successfully")
-
-find_package(mimalloc CONFIG REQUIRED)
-target_link_libraries(NexusForce PUBLIC mimalloc-static)
-target_compile_definitions(NexusForce PUBLIC
-        NEFORCE_SUPPORT_MIMALLOC
-)
-message(STATUS "mimalloc linked successfully")
 
 
 # 安装库文件

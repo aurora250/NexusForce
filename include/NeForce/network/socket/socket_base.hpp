@@ -2,9 +2,6 @@
 #define NEFORCE_NETWORK_SOCKET_SOCKET_BASE_HPP__
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/ip_address.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
-#include <cerrno>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -18,22 +15,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @extends network_exception
  * @brief socket操作异常
  */
-struct socket_exception final : network_exception {
-    static int last_error() noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return ::WSAGetLastError();
-#else
-        return errno;
-#endif
-    }
-
-    static bool is_would_block(int error) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return error == WSAEWOULDBLOCK;
-#else
-        return error == EWOULDBLOCK || error == EAGAIN;
-#endif
-    }
+struct NEFORCE_API socket_exception final : network_exception {
+    static int last_error() noexcept;
+    static bool is_would_block(int error) noexcept;
 
     explicit socket_exception(
         const char* info = "Socket Operation Failed.",

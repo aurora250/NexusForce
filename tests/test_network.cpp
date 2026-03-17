@@ -569,3 +569,105 @@ void test_dns() {
         printcln(color::red(), "DNS test error: " + string(e.what()));
     }
 }
+
+void test_traceroute() {
+    try {
+        icmp_socket icmp;
+        icmp.open(AF_INET);
+
+        auto dest_opt = ip_address::parse("8.8.8.8", 0);
+        if (!dest_opt.has_value()) {
+            println("解析目标地址失败");
+            return;
+        }
+        ip_address dest = dest_opt.value();
+
+        println("开始 traceroute 到", dest.to_string());
+        println("最多 30 跳，每跳 3 次探测，超时 1 秒\n");
+
+        auto hops = icmp.traceroute(dest, 30, milliseconds(1000), 3);
+
+        println("traceroute 到目标，最大", hops.size(), "跳");
+        println(" 跳数           IP地址           RTT1     RTT2     RTT3");
+        println("------   -------------------   ------   ------   ------");
+
+        for (size_t i = 0; i < hops.size(); ++i) {
+            const auto& hop = hops[i];
+
+            neforce::printf("  {}     ", (i + 1));
+
+            if (hop.address.is_valid()) {
+                print(hop.address.to_string());
+            } else {
+                print("      *      ");
+            }
+
+            for (int p = 0; p < 3; ++p) {
+                if (hop.rtt[p].count() >= 0) {
+                    neforce::printf("    {}ms    ", hop.rtt[p].count());
+                } else {
+                    print("    *    ");
+                }
+            }
+            println();
+
+            if (hop.reached) {
+                println("\n*** 已达到目标地址 ***");
+                break;
+            }
+        }
+
+    } catch (const socket_exception& e) {
+        println("套接字错误:", e.what());
+        if (e.code() == 1) {
+            println("需要管理员/root权限才能创建原始ICMP套接字");
+        }
+    } catch (const exception& e) {
+        println("未知错误:", e.what());
+    }
+}
+
+void test_ping() {
+    try {
+        icmp_socket icmp;
+        icmp.open(AF_INET);
+
+        auto dest = ip_address::parse("8.8.8.8", 0);
+        if (!dest.has_value()) {
+            println("无法解析目标地址\n");
+            return;
+        }
+
+        printfln("正在 Ping {} ...\n", dest->to_string());
+
+        char custom_data[] = "Hello NeForce Ping!";
+
+        int success_count = 0;
+        for (int i = 0; i < 4; i++) {
+            auto result = icmp.ping(*dest, milliseconds(2000), i, custom_data, sizeof(custom_data));
+
+            if (result.success) {
+                success_count++;
+                printfln("来自 {} 的回复: 字节={} 时间={}ms TTL={}\n",
+                               result.destination.to_string(),
+                               result.reply_size,
+                               result.rtt.count(),
+                               result.reply_ttl);
+            } else {
+                printfln("请求超时 (序列号 {})\n", i);
+            }
+
+            if (i < 3) {
+                this_thread::sleep_for(milliseconds(1000));
+            }
+        }
+
+        int loss_rate = (4 - success_count) * 100 / 4;
+        println("\nPing 统计信息:\n");
+        printfln("    已发送 = 4, 已接收 = {}, 丢失 = {} ({}% 丢失)\n",
+                     success_count, 4 - success_count, loss_rate);
+
+    } catch (const exception& e) {
+        printfln("Ping 失败: {}\n", e.what());
+    }
+}

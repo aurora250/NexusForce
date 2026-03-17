@@ -1,24 +1,28 @@
 #include <NeForce/network/socket/tcp_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <fcntl.h>
+#include <errno.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-bool tcp_socket::wait_for_write(const milliseconds timeout) {
-    ::fd_set write_fds;
-    FD_ZERO(&write_fds);
-    FD_SET(fd_, &write_fds);
+namespace {
+    bool wait_for_write(native_handle_type fd, const milliseconds timeout) {
+        ::fd_set write_fds;
+        FD_ZERO(&write_fds);
+        FD_SET(fd, &write_fds);
 
-    ::timeval tv;
-    tv.tv_sec = static_cast<long>(timeout.count() / 1000);
-    tv.tv_usec = static_cast<long>((timeout.count() % 1000) * 1000);
+        ::timeval tv{};
+        tv.tv_sec = static_cast<long>(timeout.count() / 1000);
+        tv.tv_usec = static_cast<long>((timeout.count() % 1000) * 1000);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::select(0, nullptr, &write_fds, nullptr, &tv) > 0;
+        return ::select(0, nullptr, &write_fds, nullptr, &tv) > 0;
 #else
-    return ::select(static_cast<int>(fd_ + 1), nullptr, &write_fds, nullptr, &tv) > 0;
+        return ::select(static_cast<int>(fd + 1), nullptr, &write_fds, nullptr, &tv) > 0;
 #endif
+    }
 }
+
 
 void tcp_socket::open(const int family) {
     if (family != AF_INET && family != AF_INET6) {
@@ -61,7 +65,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     unsigned long mode = 1;
     ::ioctlsocket(fd_, FIONBIO, &mode);
 #else
-    int flags = ::fcntl(fd_, F_GETFL, 0);
+    const int flags = ::fcntl(fd_, F_GETFL, 0);
     if (flags == -1) {
         throw_exception(socket_exception("Failed to get socket flags"));
     }
@@ -167,7 +171,7 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const milliseconds 
     if (data.empty()) return 0;
 
     if (timeout.count() > 0) {
-        if (!wait_for_write(timeout)) {
+        if (!wait_for_write(fd_, timeout)) {
             throw_exception(socket_exception("Send timeout"));
         }
     }

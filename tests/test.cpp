@@ -727,9 +727,9 @@ void test_ext_tpool() {
     pool.start(5);
 
     pool.submit_task([]{ println("Normal task"); });
-    pool.submit_task(10, []{ println("High priority task"); });
-    pool.submit_task(1, []{ println("Low priority task"); });
-    pool.submit_after(1000, 5, []{ println("Delayed high priority"); });
+    pool.submit_task(thread_pool::priority_type{10}, []{ println("High priority task"); });
+    pool.submit_task(thread_pool::priority_type{1}, []{ println("Low priority task"); });
+    pool.submit_after(1000, thread_pool::priority_type{5}, []{ println("Delayed high priority"); });
     this_thread::sleep_for(seconds(3));
 
     println(timestamp::now());
@@ -790,8 +790,36 @@ void test_tpool() {
     click clk;
     {
         scoped_click grd(clk);
-        auto res = pool.submit_task([]{});
-        // res.future.wait();
+        pool.submit_task([&pool] {
+            pool.submit_task(test_sysinfo);
+            pool.submit_task(test_file);
+            pool.submit_task(test_datetimes);
+            pool.submit_task(test_print);
+            pool.submit_task(test_env_var);
+            pool.submit_task(test_rnd);
+            pool.submit_task(test_regex);
+            pool.submit_task(test_format);
+            pool.submit_task(test_color);
+            pool.submit_task(test_enctype);
+            pool.submit_task(test_ini);
+            pool.submit_task(test_toml);
+            pool.submit_task(test_json);
+            pool.submit_task(test_list);
+            pool.submit_task(test_deque);
+            pool.submit_task(test_stack);
+            pool.submit_task(test_vector);
+            pool.submit_task(test_pqueue);
+            pool.submit_task(test_rbtree);
+            pool.submit_task(test_hashtable);
+            pool.submit_task(test_tuple);
+            pool.submit_task(test_variant);
+            pool.submit_task(test_option);
+            pool.submit_task(test_any);
+            pool.submit_task(test_math);
+            pool.submit_task(test_sql);
+            pool.submit_task(test_lz4);
+            pool.submit_task(test_zlib);
+        });
         println(pool.stop());
     }
     println(clk.during().count());

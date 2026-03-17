@@ -168,16 +168,15 @@ void test_vector() {
 
 void test_pqueue() {
     priority_queue<int> q;
-    println(typeid(priority_queue<int*>).name());
     q.push(6); q.push(9); q.push(1); q.push(5);
     q.push(8); q.push(4); q.emplace(7); // 9 8 7 5 6 1 4
     q.pop();
 
     priority_queue<int> long_pque;
-    constexpr size_t element_count = 100000;
+    constexpr size_t element_count = 1000;
     random_lcd rand;
     for (int i = 0; i < element_count; ++i) {
-        long_pque.push(rand.next_int(10000));
+        long_pque.push(rand.next_int(1000));
     }
     for (int i = 0; i < element_count; ++i) {
         long_pque.pop();

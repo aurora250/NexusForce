@@ -848,7 +848,7 @@ allocate_shared(Alloc& alloc, Args&&... args) {
 
     ControlBlock* ctrl_block = nullptr;
     try {
-        _NEFORCE construct(
+        ctrl_block = _NEFORCE construct(
             reinterpret_cast<ControlBlock*>(aligned_mem),
             object_ptr, raw_mem, raw_size, deleter, alloc);
     } catch (...) {

@@ -6,6 +6,7 @@
 #include <netinet/tcp.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -36,6 +37,23 @@ namespace {
     atomic<int> winsock_initializer::ref_count{0};
 }
 #endif
+
+
+int socket_exception::last_error() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return ::WSAGetLastError();
+#else
+    return errno;
+#endif
+}
+
+bool socket_exception::is_would_block(int error) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return error == WSAEWOULDBLOCK;
+#else
+    return error == EWOULDBLOCK;
+#endif
+}
 
 socket_base::socket_base() {
 #ifdef NEFORCE_PLATFORM_WINDOWS

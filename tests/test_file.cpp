@@ -5,8 +5,7 @@ const path& res_root() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         {R"(D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
 #elif defined(NEFORCE_PLATFORM_LINUX)
-        {R"(/home/huenqi/Workspace/NexusForce/tests/resource)"};
-        // {R"(/mnt/d/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
+        {R"(/media/huenqi/Programming/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
 #endif
     return res_root;
 }
