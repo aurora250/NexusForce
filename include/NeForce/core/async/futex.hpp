@@ -41,8 +41,16 @@ enum class futex_wait_flags : platform_wait_t {
     private_flag = 0,                  ///< 私有标志位
     wait = 0,                          ///< 等待操作
     wake = 1,                          ///< 唤醒操作
+    requeue = 3,                       ///< 将等待队列转移到另一个FUTEX
+    cmp_requeue = 4,                   ///< 带比较的转移
+    wake_op = 5,                       ///< 唤醒并原子修改另一个FUTEX
+    lock_pi = 6,                       ///< 优先级继承锁（加锁）
+    unlock_pi = 7,                     ///< 优先级继承锁（解锁）
+    trylock_pi = 8,                    ///< 尝试加锁（非阻塞）
     wait_bitset = 9,                   ///< 位集等待操作
     wake_bitset = 10,                  ///< 位集唤醒操作
+    wait_requeue_pi = 11,              ///< 等待并转移到PI FUTEX
+    cmp_requeue_pi = 12,               ///< 带比较的等待并转移
     wait_private = wait | private_flag,    ///< 私有等待操作
     wake_private = wake | private_flag,    ///< 私有唤醒操作
     wait_bitset_private = wait_bitset | private_flag,  ///< 私有位集等待操作

@@ -1,5 +1,5 @@
-#ifndef TRY_H
-#define TRY_H
+#ifndef NEFORCE_TEST_H
+#define NEFORCE_TEST_H
 #include <NeForce/NeForce.hpp>
 using namespace neforce;
 
@@ -24,6 +24,9 @@ void test_regex();
 void test_format();
 void test_enctype();
 void test_check();
+void test_sql();
+void test_ranges();
+void test_reflect();
 
 void test_https_server();
 void test_http_server();
@@ -61,16 +64,16 @@ void test_st();
 void test_timer();
 void test_vthread();
 void test_logging();
-void test_ranges();
-void test_sql();
+
 void test_mysql();
 void test_redis();
 void test_pgsql();
 void test_dbpool();
+
 void test_ext_tpool();
 void test_tpool();
 
 void test_lz4();
 void test_zlib();
 
-#endif //TRY_H
+#endif // NEFORCE_TEST_H

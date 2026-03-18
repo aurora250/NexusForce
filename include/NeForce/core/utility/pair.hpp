@@ -757,10 +757,8 @@ NEFORCE_NODISCARD constexpr const T2&& get(const pair<T1, T2>&& pir) noexcept {
 
 NEFORCE_END_NAMESPACE__
 
+#ifdef NEFORCE_STANDARD_17
 #include <utility>
-
-/// @cond
-/// 为支持结构化解绑添加的std特化
 namespace std {
 	template <typename T1, typename T2>
 	struct tuple_size<_NEFORCE pair<T1, T2>> : _NEFORCE integral_constant<_NEFORCE size_t, 2> {};
@@ -770,6 +768,6 @@ namespace std {
 		using type = _NEFORCE tuple_element_t<I, _NEFORCE pair<T1, T2>>;
 	};
 }
-/// @endcond
+#endif
 
 #endif // NEFORCE_CORE_UTILITY_PAIR_HPP__

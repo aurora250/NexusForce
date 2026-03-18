@@ -456,6 +456,31 @@
  */
 #define _LITERALS __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_LITERALS_NAMESPACE__ ::
 
+
+/**
+ * @def __NEFORCE_REFLECT_NAMESPACE__
+ * @brief reflect命名空间名称
+ */
+#define __NEFORCE_REFLECT_NAMESPACE__ reflect
+
+/**
+ * @def NEFORCE_BEGIN_REFLECT__
+ * @brief 开始reflect命名空间
+ */
+#define NEFORCE_BEGIN_REFLECT__ namespace __NEFORCE_REFLECT_NAMESPACE__ {
+
+/**
+ * @def NEFORCE_END_REFLECT__
+ * @brief 结束reflect命名空间
+ */
+#define NEFORCE_END_REFLECT__ }
+
+/**
+ * @def _REFLECT
+ * @brief reflect命名空间前缀
+ */
+#define _REFLECT __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_REFLECT_NAMESPACE__ ::
+
 /** @} */ // NamespaceMacros
 
 /**
@@ -717,6 +742,11 @@
 	MAC(float) \
 	MAC(double) \
 	MAC(long double)
+
+#define NEFORCE_MACRO_RANGE_ARITHMETIC(MAC) \
+	NEFORCE_MACRO_RANGE_CHARS(MAC) \
+	NEFORCE_MACRO_RANGE_INT(MAC) \
+	NEFORCE_MACRO_RANGE_FLOAT(MAC)
 
 
 #define NEFORCE_MACRO_RANGES_CV(MAC) \

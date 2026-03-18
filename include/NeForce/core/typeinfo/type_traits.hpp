@@ -3112,6 +3112,12 @@ template <typename T>
 const T* addressof(const T&&) = delete;
 
 
+template <typename T, typename U>
+constexpr size_t offset_of(U T::* member) {
+    return reinterpret_cast<size_t>(&(reinterpret_cast<T const volatile*>(nullptr)->*member));
+}
+
+
 #ifdef NEFORCE_STANDARD_17
 /**
  * @brief 检查当前上下文是否在常量求值中
@@ -4386,18 +4392,15 @@ noexcept(is_nothrow_default_constructible<T>::value) {
     return T();
 }
 
-#define __NEFORCE_INITIALIZE_BASIC_FUNCTION__(OPT) \
+#define __NEFORCE_INITIALIZE_BASIC_FUNCTION(OPT) \
 template <> \
 NEFORCE_ALWAYS_INLINE constexpr OPT \
 initialize() noexcept { \
     return static_cast<OPT>(0); \
 }
 
-NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_INITIALIZE_BASIC_FUNCTION__)
-NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_INITIALIZE_BASIC_FUNCTION__)
-NEFORCE_MACRO_RANGE_INT(__NEFORCE_INITIALIZE_BASIC_FUNCTION__)
-
-#undef INITIALIZE_BASIC_FUNCTION__
+NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_INITIALIZE_BASIC_FUNCTION)
+#undef __NEFORCE_INITIALIZE_BASIC_FUNCTION
 
 /** @} */ // TypeInitializeFunction
 

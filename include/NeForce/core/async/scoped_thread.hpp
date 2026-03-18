@@ -39,32 +39,12 @@ private:
     stop_source stop_source_{none};
     thread thread_{};
 
-    /**
-     * @brief 创建线程（成员函数指针版本，期望stop_token）
-     * @tparam Callable 成员函数指针类型
-     * @tparam Object 对象类型
-     * @tparam Args 参数类型
-     * @param source 停止源
-     * @param func 成员函数指针
-     * @param object 对象
-     * @param args 额外参数
-     * @return 创建的线程
-     */
     template <typename Callable, typename Object, typename... Args, enable_if_t<
         pmf_expects_stop_token<Callable, Args...>, int> = 0>
     static thread create(stop_source& source, Callable func, Object&& object, Args&&... args) {
         return thread{func, _NEFORCE forward<Object>(object), source.get_token(), _NEFORCE forward<Args>(args)...};
     }
 
-    /**
-     * @brief 创建线程（普通可调用对象版本，期望stop_token）
-     * @tparam Callable 可调用类型
-     * @tparam Args 参数类型
-     * @param source 停止源
-     * @param func 可调用对象
-     * @param args 参数
-     * @return 创建的线程
-     */
     template <typename Callable, typename... Args, enable_if_t<
         !pmf_expects_stop_token<Callable, Args...> &&
         is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>, int> = 0>
@@ -72,14 +52,6 @@ private:
         return thread{_NEFORCE forward<Callable>(func), source.get_token(), _NEFORCE forward<Args>(args)...};
     }
 
-    /**
-     * @brief 创建线程（普通可调用对象版本，不期望stop_token）
-     * @tparam Callable 可调用类型
-     * @tparam Args 参数类型
-     * @param func 可调用对象
-     * @param args 参数
-     * @return 创建的线程
-     */
     template <typename Callable, typename... Args, enable_if_t<
         !pmf_expects_stop_token<Callable, Args...> &&
         !is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>, int> = 0>

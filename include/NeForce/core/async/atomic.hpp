@@ -8,7 +8,7 @@
  * 此文件提供了完整的原子类型实现，包括通用原子类型和特定类型的特化。
  */
 
-#include "atomic_base.hpp"
+#include "NeForce/core/async/atomic_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

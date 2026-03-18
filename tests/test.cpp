@@ -814,6 +814,7 @@ void test_tpool() {
             pool.submit_task(test_tuple);
             pool.submit_task(test_variant);
             pool.submit_task(test_option);
+            pool.submit_task(test_reflect);
             pool.submit_task(test_any);
             pool.submit_task(test_math);
             pool.submit_task(test_sql);

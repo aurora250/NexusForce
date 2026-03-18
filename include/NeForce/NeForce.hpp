@@ -59,6 +59,7 @@
 #include "NeForce/core/memory/endian.hpp"
 #include "NeForce/core/memory/trace_memory.hpp"
 #include "NeForce/core/string/vsprintf.hpp"
+#include "NeForce/core/reflect/reflect.hpp"
 #include "NeForce/core/system/cmdline.hpp"
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/core/system/process.hpp"

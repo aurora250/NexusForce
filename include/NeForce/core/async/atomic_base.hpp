@@ -8,7 +8,7 @@
  * 此文件提供了原子操作的基本工具，包括内存序定义、原子类型基础类等。
  */
 
-#include "atomic_wait.hpp"
+#include "NeForce/core/async/atomic_wait.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <intrin.h>
 #endif
@@ -174,12 +174,6 @@ NEFORCE_BEGIN_INNER__
 
 #ifdef NEFORCE_COMPILER_MSVC
 
-/**
- * @brief 交换操作实现模板
- * @tparam Size 数据类型大小
- *
- * 针对不同大小的数据类型提供特定的交换操作实现。
- */
 template <size_t Size>
 struct interlocked_exchange_impl;
 
@@ -192,7 +186,6 @@ struct interlocked_exchange_impl<1> {
 		    static_cast<char>(value)));
 	}
 };
-
 template <>
 struct interlocked_exchange_impl<2> {
 	template <typename T>
@@ -202,7 +195,6 @@ struct interlocked_exchange_impl<2> {
 		    static_cast<short>(value)));
 	}
 };
-
 template <>
 struct interlocked_exchange_impl<4> {
 	template <typename T>
@@ -212,7 +204,6 @@ struct interlocked_exchange_impl<4> {
 		    static_cast<long>(value)));
 	}
 };
-
 template <>
 struct interlocked_exchange_impl<8> {
 	template <typename T>
@@ -223,11 +214,6 @@ struct interlocked_exchange_impl<8> {
 	}
 };
 
-
-/**
- * @brief 获取并添加操作实现模板
- * @tparam Size 数据类型大小
- */
 template <size_t Size>
 struct interlocked_compare_exchange_impl;
 
@@ -244,7 +230,6 @@ struct interlocked_compare_exchange_impl<1> {
 		return false;
 	}
 };
-
 template <>
 struct interlocked_compare_exchange_impl<2> {
 	template <typename T>
@@ -258,7 +243,6 @@ struct interlocked_compare_exchange_impl<2> {
 		return false;
 	}
 };
-
 template <>
 struct interlocked_compare_exchange_impl<4> {
 	template <typename T>
@@ -272,7 +256,6 @@ struct interlocked_compare_exchange_impl<4> {
 		return false;
 	}
 };
-
 template <>
 struct interlocked_compare_exchange_impl<8> {
 	template <typename T>
@@ -286,7 +269,6 @@ struct interlocked_compare_exchange_impl<8> {
 		return false;
 	}
 };
-
 template <>
 struct interlocked_compare_exchange_impl<16> {
 	template <typename T>
@@ -307,11 +289,6 @@ struct interlocked_compare_exchange_impl<16> {
 	}
 };
 
-
-/**
- * @brief 获取并与操作实现模板
- * @tparam Size 数据类型大小
- */
 template <size_t Size>
 struct interlocked_fetch_add_impl;
 
@@ -324,7 +301,6 @@ struct interlocked_fetch_add_impl<1> {
 		    static_cast<char>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_add_impl<2> {
 	template <typename T>
@@ -334,7 +310,6 @@ struct interlocked_fetch_add_impl<2> {
 		    static_cast<short>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_add_impl<4> {
 	template <typename T>
@@ -344,7 +319,6 @@ struct interlocked_fetch_add_impl<4> {
 		    static_cast<long>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_add_impl<8> {
 	template <typename T>
@@ -355,11 +329,6 @@ struct interlocked_fetch_add_impl<8> {
 	}
 };
 
-
-/**
- * @brief 获取并与操作实现模板
- * @tparam Size 数据类型大小
- */
 template <size_t Size>
 struct interlocked_fetch_and_impl;
 
@@ -372,7 +341,6 @@ struct interlocked_fetch_and_impl<1> {
 		    static_cast<char>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_and_impl<2> {
 	template <typename T>
@@ -382,7 +350,6 @@ struct interlocked_fetch_and_impl<2> {
 		    static_cast<short>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_and_impl<4> {
 	template <typename T>
@@ -392,7 +359,6 @@ struct interlocked_fetch_and_impl<4> {
 		    static_cast<long>(value)));
 	}
 };
-
 template <>
 struct interlocked_fetch_and_impl<8> {
 	template <typename T>
@@ -403,11 +369,6 @@ struct interlocked_fetch_and_impl<8> {
 	}
 };
 
-
-/**
- * @brief 获取并或操作实现模板
- * @tparam Size 数据类型大小
- */
 template <size_t Size>
 struct interlocked_fetch_or_impl;
 
@@ -445,11 +406,6 @@ struct interlocked_fetch_or_impl<8> {
 	}
 };
 
-
-/**
- * @brief 获取并异或操作实现模板
- * @tparam Size 数据类型大小
- */
 template <size_t Size>
 struct interlocked_fetch_xor_impl;
 
@@ -490,20 +446,11 @@ struct interlocked_fetch_xor_impl<8> {
 #endif
 
 #ifdef NEFORCE_COMPILER_GNUC
-
-/**
- * @brief 编译时常量：是否总是无锁
- * @tparam Size 数据类型大小
- *
- * 查询特定大小的数据类型是否总是支持无锁原子操作。
- */
 template <size_t Size>
 struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = __atomic_always_lock_free(Size, nullptr);
 };
-
 #else
-
 template <size_t Size>
 struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = false;
@@ -524,7 +471,6 @@ template <>
 struct atomic_is_always_lock_free_impl<8> {
 	static constexpr bool value = true;
 };
-
 #endif
 
 NEFORCE_END_INNER__
@@ -2027,11 +1973,6 @@ struct atomic_base<T*> {
 private:
 	value_type ptr_ = nullptr;  ///< 存储的指针
 
-	/**
-	 * @brief 计算实际类型大小
-	 * @param dest 元素数量
-	 * @return 字节大小
-	 */
     NEFORCE_ALWAYS_INLINE_INLINE static constexpr difference_type
 	real_type_sizes(const difference_type dest) noexcept {
 		return dest * sizeof(T);
@@ -3043,7 +2984,6 @@ struct atomic_ref_base<T, true, false> {
 	static_assert(is_integral_like_v<T>, "atomic_ref need integral-like T");
 
 private:
-
 	T* ptr_;   ///< 指向被引用整数的指针
 
 public:
@@ -3541,11 +3481,6 @@ public:
 private:
 	T** ptr_;  ///< 指向指针的指针
 
-	/**
-	 * @brief 计算实际类型大小
-	 * @param dest 元素数量
-	 * @return 字节大小
-	 */
 	static constexpr difference_type real_type_sizes(const difference_type dest) noexcept {
 		static_assert(is_object_v<T>, "atomic_ref_base need object T");
 		return dest * sizeof(T);

@@ -5,6 +5,7 @@ add_executable(NexusForceTests
         test_db.cpp
         test_network.cpp
         test_system.cpp
+        test_reflect.cpp
         test.cpp
         test.h
 )

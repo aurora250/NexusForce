@@ -904,8 +904,7 @@ constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_s
 
 NEFORCE_END_NAMESPACE__
 
-/// @cond
-/// 为支持结构化解绑添加的std特化
+#ifdef NEFORCE_STANDARD_17
 namespace std {
 	template <typename... Types>
 	struct tuple_size<_NEFORCE tuple<Types...>> : _NEFORCE integral_constant<_NEFORCE size_t, sizeof...(Types)> {};
@@ -915,6 +914,6 @@ namespace std {
 		using type = _NEFORCE tuple_element_t<I, _NEFORCE tuple<Types...>>;
 	};
 }
-/// @endcond
+#endif
 
 #endif // NEFORCE_CORE_UTILITY_TUPLE_HPP__

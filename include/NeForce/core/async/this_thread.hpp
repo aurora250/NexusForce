@@ -28,11 +28,6 @@
 #include <riscv_pause.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @namespace this_thread
- * @brief 当前线程操作命名空间
- */
 NEFORCE_BEGIN_THIS_THREAD__
 
 /**

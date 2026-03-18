@@ -2726,7 +2726,7 @@ public:
 
     /// 计算哈希值
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t to_hash() const noexcept {
-        return _INNER FNV_hash_string(data(), size());
+        return _NEFORCE FNV_hash_string(data(), size());
     }
 };
 

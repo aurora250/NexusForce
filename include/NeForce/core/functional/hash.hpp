@@ -106,10 +106,6 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash(const byte_t* first, const size_t count) noe
     return result;
 }
 
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
 /**
  * @brief 整数类型的FNV哈希
  * @tparam T 整数类型
@@ -117,7 +113,7 @@ NEFORCE_BEGIN_INNER__
  * @return 整数的哈希值
  */
 template <typename T>
-NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T& value) noexcept {
+NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
     static_assert(is_integral<T>::value, "T must be integral");
 
     size_t result = _CONSTANTS FNV_OFFSET_BASIS;
@@ -148,12 +144,8 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) n
     return result;
 }
 
-NEFORCE_END_INNER__
-/// @endcond
-
 /** @} */ // FNVHash
 
-/// @cond
 
 template <>
 struct hash<bool> {
@@ -164,35 +156,33 @@ struct hash<bool> {
 
 #define __NEFORCE_BUILD_INTEGER_HASH_STRUCT(OPT) \
 template <> struct hash<OPT> { \
-    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT& x) const noexcept { \
-        return x == 0.0f ? 0 : _INNER FNV_hash_integer(x); \
+    NEFORCE_NODISCARD constexpr size_t operator ()(const OPT x) const noexcept { \
+        return x == 0.0f ? 0 : FNV_hash_integer(x); \
     } \
 };
 
 NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_BUILD_INTEGER_HASH_STRUCT)
 NEFORCE_MACRO_RANGE_INT(__NEFORCE_BUILD_INTEGER_HASH_STRUCT)
-#undef FLOAT_HASH_STRUCT__
-
-NEFORCE_BEGIN_INNER__
-template <typename T>
-union __float_converter { T f; uint64_t i; };
-NEFORCE_END_INNER__
+#undef __NEFORCE_BUILD_INTEGER_HASH_STRUCT
 
 #define __NEFORCE_BUILD_FLOAT_HASH_STRUCT(OPT) \
 template <> \
 struct hash<OPT> { \
+private: \
+    union __float_converter { OPT f; uint64_t i; }; \
+    \
+public: \
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 size_t operator ()(const OPT x) const noexcept { \
         if (x == 0.0f) return 0; \
-        _INNER __float_converter<OPT> converter{}; \
+        __float_converter converter{}; \
         converter.f = x; \
-        return _INNER FNV_hash_integer(converter.i); \
+        return FNV_hash_integer(converter.i); \
     } \
 };
 
 NEFORCE_MACRO_RANGE_FLOAT(__NEFORCE_BUILD_FLOAT_HASH_STRUCT)
 #undef __NEFORCE_BUILD_FLOAT_HASH_STRUCT
 
-/// @endcond
 
 /**
  * @defgroup DJB2Hash DJB2哈希算法

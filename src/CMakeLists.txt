@@ -2,76 +2,94 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/NexusForceCompilerOptions.cmake)
 
 # 链接文件
 set(CPP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/hazard_ptr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_parser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/json/json_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/hazard_ptr.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_result.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/file_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/websocket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/icmp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/socket_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_acceptor.cpp
@@ -79,22 +97,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/tcp_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/tcp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/udp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_message.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_stream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/websocket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
+
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
 )
 

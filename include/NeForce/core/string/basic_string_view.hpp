@@ -1009,7 +1009,7 @@ public:
      * @return 哈希值
      */
     NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return _INNER FNV_hash_string(this->data(), this->length());
+        return _NEFORCE FNV_hash_string(this->data(), this->length());
     }
 };
 

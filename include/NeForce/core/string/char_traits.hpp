@@ -765,25 +765,25 @@ constexpr size_t char_traits_rfind_not_char(const char_traits_ptr_t<Traits> dest
 template <> \
 struct hash<OPT*> { \
     NEFORCE_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return _INNER FNV_hash_string(str, char_traits<OPT>::length(str)); \
+        return FNV_hash_string(str, char_traits<OPT>::length(str)); \
     } \
 }; \
 template <> \
 struct hash<const OPT*> { \
     NEFORCE_NODISCARD constexpr size_t operator ()(const OPT* str) const noexcept { \
-        return _INNER FNV_hash_string(str, char_traits<OPT>::length(str)); \
+        return FNV_hash_string(str, char_traits<OPT>::length(str)); \
     } \
 }; \
 template <size_t N> \
 struct hash<OPT[N]> { \
     NEFORCE_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
-        return _INNER FNV_hash_string(str, N - 1); \
+        return FNV_hash_string(str, N - 1); \
     } \
 }; \
 template <size_t N> \
 struct hash<const OPT[N]> { \
     NEFORCE_NODISCARD constexpr size_t operator ()(const OPT (&str)[N]) const noexcept { \
-        return _INNER FNV_hash_string(str, N - 1); \
+        return FNV_hash_string(str, N - 1); \
     } \
 };
 
