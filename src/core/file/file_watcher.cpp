@@ -12,7 +12,7 @@ NEFORCE_BEGIN_NAMESPACE__
 file_watcher::file_watcher(path watch_path, const bool recursive)
 : watch_path_(move(watch_path)), recursive_(recursive) {
     if (!watch_path_.exists() || !watch_path_.is_directory()) {
-        throw_exception(system_exception("Watch path must be an existing directory"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Watch path must be an existing directory"));
     }
 }
 
@@ -49,7 +49,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 
     {
         lock<mutex> lock(callback_mutex_);
-        callback_ = _NEFORCE move(callback);
+        callback_ = move(callback);
         current_events_ = events;
     }
     watching_.store(true);
@@ -186,7 +186,7 @@ void file_watcher::watch_thread_func() {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
-    _NEFORCE memory_zero(&overlapped_);
+    memory_zero(&overlapped_);
     overlapped_.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
     if (!overlapped_.hEvent) {
         watching_.store(false);
@@ -408,7 +408,7 @@ bool file_watcher::update_watch(const FILE_WATCH_EVENT events) {
     current_events_ = events;
 
     if (saved_callback) {
-        return start(_NEFORCE move(saved_callback), events);
+        return start(move(saved_callback), events);
     }
     return true;
 }
@@ -434,7 +434,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     recursive_ = recursive;
 
     if (saved_callback) {
-        return start(_NEFORCE move(saved_callback), saved_events);
+        return start(move(saved_callback), saved_events);
     }
     return true;
 }

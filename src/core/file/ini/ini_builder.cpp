@@ -4,10 +4,10 @@ NEFORCE_BEGIN_NAMESPACE__
 
 void ini_builder::test_exception() const {
     if (!current_section_) {
-        throw_exception(ini_exception("No section context for value"));
+        NEFORCE_THROW_EXCEPTION(ini_exception("No section context for value"));
     }
     if (current_key_.empty()) {
-        throw_exception(ini_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(ini_exception("No key set for value"));
     }
 }
 
@@ -32,7 +32,7 @@ ini_builder& ini_builder::end_section() {
 
 ini_builder& ini_builder::key(const string& key) {
     if (!current_section_) {
-        throw_exception(ini_exception("No section context for key"));
+        NEFORCE_THROW_EXCEPTION(ini_exception("No section context for key"));
     }
     current_key_ = key;
     return *this;

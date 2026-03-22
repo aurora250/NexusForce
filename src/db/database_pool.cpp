@@ -11,7 +11,7 @@ NEFORCE_BEGIN_NAMESPACE__
 void database_pool::produce_connect_task() {
     while (true) {
         if (!running_) break;
-        _NEFORCE smart_lock<_NEFORCE mutex> lock(queue_mtx_);
+        smart_lock<mutex> lock(queue_mtx_);
         while (!connect_queue_.empty()) {
             cv_.wait(lock);
             if (!running_) break;
@@ -31,13 +31,13 @@ void database_pool::produce_connect_task() {
 void database_pool::scanner_connect_task() {
     while (true) {
         if (!running_) break;
-        _NEFORCE this_thread::sleep_for(seconds(max_idle_time_));
+        this_thread::sleep_for(max_idle_time_);
         if (!running_) break;
-        _NEFORCE lock<_NEFORCE mutex> lock(queue_mtx_);
+        lock<mutex> lock(queue_mtx_);
 
         while (connect_queue_.size() > init_size_) {
             const idb_connect* ptr = connect_queue_.front();
-            if (ptr->get_alive() >= max_idle_time_ * 1000) {
+            if (ptr->get_alive() >= time_cast<milliseconds>(max_idle_time_)) {
                 connect_queue_.pop();
                 delete ptr;
             } else {
@@ -48,40 +48,40 @@ void database_pool::scanner_connect_task() {
 }
 
 database_pool::database_pool(
-    const DB_TYPE type, const db_config& config,
+    const db_type type, const db_config& config,
     const size_t init_size, const size_t max_size,
-    const size_t max_idle_time, const size_t connect_timeout)
+    const seconds max_idle_time, const milliseconds connect_timeout)
 : config_(config), init_size_(init_size),
-max_size_(max_size), max_idle_time_(max_idle_time),
-connect_timeout_(connect_timeout), running_(true) {
+  max_size_(max_size), max_idle_time_(max_idle_time),
+  connect_timeout_(connect_timeout), running_(true) {
     switch(type) {
 #ifdef NEFORCE_SUPPORT_MYSQL
-        case DB_TYPE::MYSQL: {
+        case db_type::MYSQL: {
             factory_ = make_unique<mysql_factory>(config);
             break;
         }
 #endif
 #ifdef NEFORCE_SUPPORT_SQLITE3
-        case DB_TYPE::SQLITE3: {
+        case db_type::SQLITE3: {
             factory_ = make_unique<sqlite_factory>(config);
             break;
         }
 #endif
 #ifdef NEFORCE_SUPPORT_HIREDIS
-        case DB_TYPE::REDIS: {
+        case db_type::REDIS: {
             factory_ = make_unique<redis_factory>(config);
             break;
         }
 #endif
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-        case DB_TYPE::POSTGRESQL: {
+        case db_type::POSTGRESQL: {
             factory_ = make_unique<pgsql_factory>(config);
             break;
         }
 #endif
         default: {
-            throw_exception(value_exception("Useless Database Type"));
-            break;
+            NEFORCE_THROW_EXCEPTION(value_exception("Useless Database Type"));
+            unreachable();
         }
     }
 
@@ -105,8 +105,8 @@ connect_timeout_(connect_timeout), running_(true) {
             --i;
         }
     }
-    produce_ = _NEFORCE thread([this] { produce_connect_task(); });
-    scanner_ = _NEFORCE thread([this] { scanner_connect_task(); });
+    produce_ = thread([this] { produce_connect_task(); });
+    scanner_ = thread([this] { scanner_connect_task(); });
 }
 
 void database_pool::stop() {

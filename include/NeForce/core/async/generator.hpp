@@ -51,7 +51,7 @@ public:
          */
         void await_resume() const {
             if (token && token->is_cancelled()) {
-                throw_exception(exception("Operation cancelled"));
+                NEFORCE_THROW_EXCEPTION(exception("Operation cancelled"));
             }
         }
     };

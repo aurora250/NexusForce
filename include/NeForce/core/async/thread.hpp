@@ -186,7 +186,7 @@ private:
         try {
             data->run();
         } catch (...) {
-            _NEFORCE terminate();
+            terminate();
         }
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return 0;

@@ -25,19 +25,19 @@ pipe::pipe(bool inheritable) {
     sa.lpSecurityDescriptor = nullptr;
 
     if (!::CreatePipe(&read_handle_, &write_handle_, &sa, 0)) {
-        throw_exception(pipe_exception("CreatePipe failed"));
+        NEFORCE_THROW_EXCEPTION(pipe_exception("CreatePipe failed"));
     }
 
     if (!inheritable) {
         if (!::SetHandleInformation(read_handle_, HANDLE_FLAG_INHERIT, 0)) {
             ::CloseHandle(read_handle_);
             ::CloseHandle(write_handle_);
-            throw_exception(pipe_exception("SetHandleInformation failed"));
+            NEFORCE_THROW_EXCEPTION(pipe_exception("SetHandleInformation failed"));
         }
     }
 #else
     if (::pipe(fds_) == -1) {
-        throw_exception(pipe_exception(::strerror(errno)));
+        NEFORCE_THROW_EXCEPTION(pipe_exception(::strerror(errno)));
     }
 
     if (!inheritable) {

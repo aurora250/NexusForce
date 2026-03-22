@@ -3118,18 +3118,6 @@ constexpr size_t offset_of(U T::* member) {
 }
 
 
-#ifdef NEFORCE_STANDARD_17
-/**
- * @brief 检查当前上下文是否在常量求值中
- * @return 如果在常量求值上下文中返回true，否则返回false
- *
- * 用于区分编译时和运行时
- */
-NEFORCE_NODISCARD constexpr bool is_constant_evaluated() noexcept {
-    return __builtin_is_constant_evaluated();
-}
-#endif
-
 /** @} */ // ArgsForwardFunctions
 
 /**

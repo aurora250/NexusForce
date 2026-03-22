@@ -18,23 +18,11 @@ pgsql_tb_result::~pgsql_tb_result() {
     }
 }
 
-void pgsql_tb_result::init_column_names() const {
-    if (!column_names_.empty() || !result_) {
-        return;
-    }
-
-    column_names_.reserve(column_count_);
-    for (int i = 0; i < column_count_; ++i) {
-        column_names_.emplace_back(PQfname(result_, i));
-    }
-}
-
 bool pgsql_tb_result::is_null(const size_type index) const {
     if (static_cast<int>(index) >= column_count_) {
-        throw_exception(database_exception("Column index out of range"));
+        NEFORCE_THROW_EXCEPTION(database_exception("Column index out of range"));
     }
-    return ::PQgetisnull(
-        result_, current_row_, static_cast<int>(index)) != 0;
+    return ::PQgetisnull(result_, current_row_, static_cast<int>(index)) != 0;
 }
 
 bool pgsql_tb_result::next() noexcept {
@@ -46,25 +34,22 @@ bool pgsql_tb_result::next() noexcept {
 }
 
 const vector<string_view>& pgsql_tb_result::column_names() const {
-    this->init_column_names();
+    if (!(column_names_.empty() && result_)) {
+        column_names_.reserve(column_count_);
+        for (int i = 0; i < column_count_; ++i) {
+            column_names_.emplace_back(PQfname(result_, i));
+        }
+    }
     return column_names_;
 }
 
 string_view pgsql_tb_result::get(const size_type index) const {
-    if (is_null(index)) {
-        return string_view();
-    }
-    const char* value = ::PQgetvalue(
-        result_, current_row_, static_cast<int>(index));
-    return string_view(value);
+    if (is_null(index)) return string_view();
+    return ::PQgetvalue(result_, current_row_, static_cast<int>(index));
 }
 
 bool pgsql_tb_result::get_bool(const size_type index) const {
     return boolean::parse(get(index)).value();
-}
-
-int8_t pgsql_tb_result::get_int8(const size_type index) const {
-    return static_cast<int8_t>(get_int16(index));
 }
 
 int16_t pgsql_tb_result::get_int16(const size_type index) const {
@@ -92,18 +77,15 @@ decimal_t pgsql_tb_result::get_decimal(const size_type index) const {
 }
 
 vector<char> pgsql_tb_result::get_blob(const size_type index) const {
-    if (is_null(index)) {
-        return {};
-    }
-    const char* value = ::PQgetvalue(
-        result_, current_row_, static_cast<int>(index));
-    const int length = ::PQgetlength(
-        result_, current_row_, static_cast<int>(index));
+    if (is_null(index)) return {};
+
+    const string_view value = ::PQgetvalue(result_, current_row_, static_cast<int>(index));
+    const int length = ::PQgetlength(result_, current_row_, static_cast<int>(index));
 
     if (length > 2 && value[0] == '\\' && value[1] == 'x') {
         size_t unescaped_length = 0;
         byte_t* unescaped = ::PQunescapeBytea(
-            reinterpret_cast<const byte_t*>(value),
+            reinterpret_cast<const byte_t*>(value.data()),
             &unescaped_length
         );
 
@@ -114,11 +96,11 @@ vector<char> pgsql_tb_result::get_blob(const size_type index) const {
         }
     }
 
-    return vector<char>(value, value + length);
+    return vector<char>(value.data(), value.data() + length);
 }
 
 uint64_t pgsql_tb_result::get_bit(const size_type index) const {
-    return _NEFORCE strtoull(get(index).data(), nullptr, 2);
+    return to_uint64(get(index).data(), nullptr, 2);
 }
 
 date pgsql_tb_result::get_date(const size_type index) const {

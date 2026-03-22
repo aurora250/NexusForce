@@ -39,12 +39,12 @@ public:
      * @return 对应的数值（0-15）
      * @throws value_exception 无效字符时抛出
      */
-    static NEFORCE_CONSTEXPR20 int digit_value(const char c) {
+    static NEFORCE_CONSTEXPR20 byte_t digit_value(const char c) {
         if (c >= '0' && c <= '9') return c - '0';
         if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
         if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
-        throw_exception(value_exception("Invalid hexadecimal character"));
-        NEFORCE_UNREACHABLE;
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid hexadecimal character"));
+        unreachable();
     }
 
 private:
@@ -84,22 +84,22 @@ private:
             if (is_xdigit(c)) {
                 const int digit = digit_value(c);
                 if (result > (numeric_traits<uint64_t>::max() >> 4)) {
-                    throw_exception(value_exception("Hexadecimal value too large"));
+                    NEFORCE_THROW_EXCEPTION(value_exception("Hexadecimal value too large"));
                 }
                 result = (result << 4) | static_cast<uint64_t>(digit);
             } else if (!is_space(c)) {
-                throw_exception(value_exception("Invalid hexadecimal character"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid hexadecimal character"));
             }
         }
 
         if (negative) {
             if (result > static_cast<uint64_t>(numeric_traits<int64_t>::max()) + 1) {
-                throw_exception(value_exception("Hexadecimal value out of range"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Hexadecimal value out of range"));
             }
             return -static_cast<int64_t>(result);
         }
         if (result > static_cast<uint64_t>(numeric_traits<int64_t>::max())) {
-            throw_exception(value_exception("Hexadecimal value out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Hexadecimal value out of range"));
         }
         return static_cast<value_type>(result);
     }
@@ -182,7 +182,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr bool get_bit(const size_t position) const {
         if (position >= 64) {
-            throw_exception(value_exception("Bit position out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
         return (value_ >> position) & 1;
     }
@@ -196,7 +196,7 @@ public:
      */
     constexpr hexadecimal& set_bit(const size_t position, const bool bit_value_ = true) {
         if (position >= 64) {
-            throw_exception(value_exception("Bit position out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
         if (bit_value_) {
             value_ |= (1ULL << position);
@@ -214,7 +214,7 @@ public:
      */
     constexpr hexadecimal& flip_bit(const size_t position) {
         if (position >= 64) {
-            throw_exception(value_exception("Bit position out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
         value_ ^= (1ULL << position);
         return *this;

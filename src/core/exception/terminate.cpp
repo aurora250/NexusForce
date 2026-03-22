@@ -381,7 +381,7 @@ void abort() {
 
     immediate_exit(1);
 #endif
-    NEFORCE_UNREACHABLE;
+    unreachable();
 }
 
 int set_exit(const exit_handler handler) noexcept {
@@ -402,7 +402,7 @@ void exit(const int status) {
 #else
     syscall_exit_group(status);
 #endif
-    NEFORCE_UNREACHABLE;
+    unreachable();
 }
 
 void immediate_exit(const int status) noexcept {
@@ -413,7 +413,7 @@ void immediate_exit(const int status) noexcept {
 #else
     syscall_exit(status);
 #endif
-    NEFORCE_UNREACHABLE;
+    unreachable();
 }
 
 void quick_exit(const int status) noexcept {

@@ -4,10 +4,10 @@ NEFORCE_BEGIN_NAMESPACE__
 
 void ssl_socket::init_server_ssl(const ssl_context& ctx) {
     if (!is_open()) {
-        throw_exception(value_exception("Socket is not open"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
     }
     if (!ctx.is_valid()) {
-        throw_exception(ssl_exception("Invalid SSL context"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
 
     try {
@@ -22,10 +22,10 @@ void ssl_socket::init_server_ssl(const ssl_context& ctx) {
 
 void ssl_socket::init_client_ssl(const ssl_context& ctx, const string& hostname) {
     if (!is_open()) {
-        throw_exception(value_exception("Socket is not open"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
     }
     if (!ctx.is_valid()) {
-        throw_exception(ssl_exception("Invalid SSL context"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
 
     try {

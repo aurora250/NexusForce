@@ -1,10 +1,10 @@
 #ifndef NEFORCE_DATABASE_DB_INTERFACE_HPP__
 #define NEFORCE_DATABASE_DB_INTERFACE_HPP__
-#include "../core/container/vector.hpp"
-#include "../core/time/datetime.hpp"
-#include "../core/memory/unique_ptr.hpp"
-#include "db_config.hpp"
-#include <ctime>
+#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
+#include "NeForce/core/time/clocks.hpp"
+#include "NeForce/core/time/datetime.hpp"
+#include "NeForce/db/db_config.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API idb_result {
@@ -25,23 +25,22 @@ struct NEFORCE_API idb_tb_result : idb_result {
     virtual const vector<string_view>& column_names() const = 0;
 
     virtual string_view get(size_type) const = 0;
+
     virtual bool get_bool(size_type) const = 0;
-    virtual int8_t get_int8(size_type) const = 0;
     virtual int16_t get_int16(size_type) const = 0;
     virtual int32_t get_int32(size_type) const = 0;
     virtual int64_t get_int64(size_type) const = 0;
     virtual float32_t get_float32(size_type) const = 0;
     virtual float64_t get_float64(size_type) const = 0;
     virtual decimal_t get_decimal(size_type) const = 0;
+
     virtual vector<char> get_blob(size_type) const = 0;
-    virtual string get_set(size_type) const = 0;
     virtual uint64_t get_bit(size_type) const = 0;
+
     virtual date get_date(size_type) const = 0;
     virtual time get_time(size_type) const = 0;
     virtual datetime get_datetime(size_type) const = 0;
     virtual timestamp get_timestamp(size_type) const = 0;
-    virtual string get_string(size_type) const = 0;
-    virtual string_view get_enum(size_type) const = 0;
 };
 
 struct NEFORCE_API idb_kv_result : idb_result {
@@ -83,27 +82,36 @@ struct NEFORCE_API idb_prepared_statement {
 
 
 struct NEFORCE_API idb_connect {
-    using clock_type = std::clock_t;
+public:
+    using clock_type = milliseconds;
 
+private:
+    clock_type alive_time_{0};
+
+public:
     virtual ~idb_connect() = default;
 
-    virtual bool connect_to(const _NEFORCE string& user, const _NEFORCE string& password,
-        const _NEFORCE string& dbname, const _NEFORCE string& ip,
-        uint32_t port, const _NEFORCE string& character_set) = 0;
-    virtual bool connect_to(const db_config& config) = 0;
+    virtual bool connect(const db_config& config) = 0;
+    virtual bool reconnect(const db_config& config) = 0;
+    virtual void close() = 0;
 
-    virtual bool set_character_set(const _NEFORCE string& encoding) const = 0;
+    virtual bool set_character_set(const string& encoding) const = 0;
+
     virtual string_view get_character_set() const = 0;
     virtual string_view get_error() const = 0;
     virtual uint32_t get_errno() const = 0;
 
-    virtual bool update(const _NEFORCE string& sql) const = 0;
+    virtual bool update(const string& sql) const = 0;
+
     virtual bool connected() const = 0;
     virtual bool is_valid() const = 0;
-    virtual void close() = 0;
-    virtual void refresh_alive() = 0;
-    virtual clock_type get_alive() const = 0;
-    virtual bool reset_connect(const db_config& config) = 0;
+
+    void refresh_alive() noexcept {
+        alive_time_ = time_cast<milliseconds>(steady_clock::now().since_epoch());
+    }
+    NEFORCE_NODISCARD clock_type get_alive() const noexcept {
+        return time_cast<milliseconds>(steady_clock::now().since_epoch()) - alive_time_;
+    }
 };
 
 struct NEFORCE_API idb_tb_connect : idb_connect {
@@ -143,7 +151,7 @@ protected:
     db_config config_;
 
 public:
-    explicit idb_factory(db_config config) : config_(_NEFORCE move(config)) {}
+    explicit idb_factory(db_config config) : config_(move(config)) {}
     virtual ~idb_factory() = default;
 
     virtual idb_connect* create_connect() = 0;

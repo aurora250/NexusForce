@@ -209,7 +209,7 @@ public:
      */
     constexpr T& operator /=(const T& other) {
         if (other.value_ == 0) {
-            throw_exception(math_exception("Division by zero"));
+            NEFORCE_THROW_EXCEPTION(math_exception("Division by zero"));
         }
         value_ /= other;
         return derived();
@@ -298,7 +298,7 @@ public:
      */
     constexpr T& operator <<=(const uint32_t shift) {
         if (shift >= 64) {
-            throw_exception(value_exception("Shift count out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Shift count out of range"));
         }
         value_ <<= shift;
         return derived();
@@ -312,7 +312,7 @@ public:
      */
     constexpr T& operator >>=(const uint32_t shift) {
         if (shift >= 64) {
-            throw_exception(value_exception("Shift count out of range"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Shift count out of range"));
         }
         value_ >>= shift;
         return derived();

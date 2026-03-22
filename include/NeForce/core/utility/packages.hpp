@@ -71,7 +71,7 @@ struct boolean : ipackage<boolean, bool>, iobject<boolean> {
                 obj = static_cast<bool>(to_int32(str.view(), nullptr, 10));
             }
         } catch (...) {
-            throw_exception(typecast_exception("Convert from string to boolean failed."));
+            NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string to boolean failed."));
         }
         return obj;
     }

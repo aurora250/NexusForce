@@ -79,7 +79,7 @@ public:
     explicit basic_tcp_server(const uint16_t port, const size_t worker_count = thread_pool::max_threshhold)
     : port_(port) {
         if (worker_count == 0) {
-            throw_exception(value_exception("Worker count must be greater than 0"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
         }
         client_pool_.set_thread_threshhold(worker_count);
         client_pool_.start();
@@ -212,10 +212,10 @@ public:
 
     void set_ssl_context(ssl_context ctx) {
         if (is_running()) {
-            throw_exception(ssl_exception("Cannot set SSL context while server is running"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot set SSL context while server is running"));
         }
         if (!ctx.is_valid()) {
-            throw_exception(ssl_exception("Invalid SSL context"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
         }
         ssl_ctx_ = _NEFORCE move(ctx);
     }

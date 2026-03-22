@@ -14,13 +14,13 @@ void thread::start_thread_impl(void* args) {
         ::_beginthreadex(nullptr, 0, thread_entry, args, 0, &thread_id)
     );
     if (handle_ == nullptr) {
-        throw_exception(thread_exception("Failed to create thread"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
     }
     id_ = id(thread_id);
 #else
     native_handle_type tid;
     if (::pthread_create(&tid, nullptr, thread_entry, args) != 0) {
-        throw_exception(thread_exception("Failed to create thread"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
     }
     handle_ = tid;
     id_ = id(tid);
@@ -66,18 +66,18 @@ thread::~thread() {
 
 void thread::join() {
     if (!joinable()) {
-        throw_exception(thread_exception("Thread is not joinable"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Thread is not joinable"));
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (::WaitForSingleObject(handle_, numeric_traits<::DWORD>::max()) != WAIT_OBJECT_0) {
-        throw_exception(thread_exception("Fail to join thread"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Fail to join thread"));
     }
     ::CloseHandle(handle_);
     handle_ = nullptr;
 #else
     if (::pthread_join(handle_, nullptr) != 0) {
-        throw_exception(thread_exception("Thread is not joinable"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Thread is not joinable"));
     }
     handle_ = native_handle_type{};
 #endif
@@ -86,16 +86,16 @@ void thread::join() {
 
 void thread::detach() {
     if (!joinable()) {
-        throw_exception(thread_exception("Thread is not detachable"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Thread is not detachable"));
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (::CloseHandle(handle_) == FALSE) {
-        throw_exception(thread_exception("Fail to detach thread"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Fail to detach thread"));
     }
     handle_ = nullptr;
 #else
     if (::pthread_detach(handle_) != 0) {
-        throw_exception(thread_exception("Fail to detach thread"));
+        NEFORCE_THROW_EXCEPTION(thread_exception("Fail to detach thread"));
     }
     handle_ = native_handle_type{};
 #endif

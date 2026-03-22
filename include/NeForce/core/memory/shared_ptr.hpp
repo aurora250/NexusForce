@@ -718,7 +718,7 @@ protected:
     shared_ptr<T> shared_from_this() {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
         if (!owner_) {
-            throw_exception(memory_exception("smart pointer share failed."));
+            NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
         return _INNER __make_shared_fused(static_cast<T*>(this), owner_);
@@ -732,7 +732,7 @@ protected:
     shared_ptr<const T> shared_from_this() const {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
         if (!owner_) {
-            throw_exception(memory_exception("smart pointer share failed."));
+            NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
         return _INNER __make_shared_fused(static_cast<const T*>(this), owner_);
@@ -778,7 +778,7 @@ make_shared(Args&&... args) {
 #else
         operator delete(mem);
 #endif
-        throw_exception(memory_exception("shared ptr construction failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr construction failed."));
     }
     _NEFORCE construct(reinterpret_cast<Counter*>(counter), object, mem, align, _NEFORCE move(deleter));
     _INNER __setup_enable_shared_from(object, counter);
@@ -802,9 +802,9 @@ make_shared(const size_t len) {
         return shared_ptr<T>(tmp);
     } catch (...) {
         operator delete [](tmp);
-        throw_exception(memory_exception("shared ptr construction failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr construction failed."));
     }
-    NEFORCE_UNREACHABLE;
+    unreachable();
 }
 
 /**
@@ -843,7 +843,7 @@ allocate_shared(Alloc& alloc, Args&&... args) {
         allocator_traits<Alloc>::construct(alloc, object_ptr, _NEFORCE forward<Args>(args)...);
     } catch (...) {
         allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw_exception(memory_exception("shared ptr ref object construction failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr ref object construction failed."));
     }
 
     ControlBlock* ctrl_block = nullptr;
@@ -854,7 +854,7 @@ allocate_shared(Alloc& alloc, Args&&... args) {
     } catch (...) {
         allocator_traits<Alloc>::destroy(alloc, object_ptr);
         allocator_traits<byte_allocator>::deallocate(byte_alloc, raw_mem, raw_size);
-        throw_exception(memory_exception("shared ptr control block construction failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr control block construction failed."));
     }
 
     _INNER __setup_enable_shared_from(object_ptr, ctrl_block);

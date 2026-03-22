@@ -31,7 +31,7 @@ void icmp_socket::send_echo_request(
     const uint8_t ttl, const void* data, const size_t data_len) {
 
     if (!is_open()) {
-        throw_exception(value_exception("ICMP socket not opened"));
+        NEFORCE_THROW_EXCEPTION(value_exception("ICMP socket not opened"));
     }
 
     size_t packet_len = sizeof(icmp_header) + data_len;
@@ -49,18 +49,18 @@ void icmp_socket::send_echo_request(
 
 #ifdef NEFORCE_PLATFORM_LINUX
     if (::setsockopt(fd_, IPPROTO_IP, IP_TTL, &ttl, sizeof(ttl)) < 0) {
-        throw_exception(socket_exception("Set IP_TTL failed."));
+        NEFORCE_THROW_EXCEPTION(socket_exception("Set IP_TTL failed."));
     }
 #endif
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (::setsockopt(fd_, IPPROTO_IP, IP_TTL, reinterpret_cast<const char*>(&ttl), sizeof(ttl)) < 0) {
-        throw_exception(socket_exception("Set IP_TTL failed."));
+        NEFORCE_THROW_EXCEPTION(socket_exception("Set IP_TTL failed."));
     }
 #endif
 
     const ssize_t sent = ::sendto(fd_, packet.data(), static_cast<int>(packet_len), 0, dest.data(), dest.size());
     if (sent < 0) {
-        throw_exception(socket_exception("sendto failed"));
+        NEFORCE_THROW_EXCEPTION(socket_exception("sendto failed"));
     }
 }
 
@@ -74,7 +74,7 @@ bool icmp_socket::receive_reply(
 
     bool old_blocking = true;
     if (!set_nonblocking(true)) {
-        throw_exception(socket_exception("Set nonblocking mode failed"));
+        NEFORCE_THROW_EXCEPTION(socket_exception("Set nonblocking mode failed"));
     }
 
     char recv_buffer[65536];
@@ -107,7 +107,7 @@ bool icmp_socket::receive_reply(
                 continue;
             }
             set_nonblocking(old_blocking);
-            throw_exception(socket_exception("select failed"));
+            NEFORCE_THROW_EXCEPTION(socket_exception("select failed"));
         }
 
         if (sel_ret == 0) {
@@ -127,7 +127,7 @@ bool icmp_socket::receive_reply(
                 continue;
             }
             set_nonblocking(old_blocking);
-            throw_exception(socket_exception("recvfrom failed"));
+            NEFORCE_THROW_EXCEPTION(socket_exception("recvfrom failed"));
         }
 
         if (peer_addr.ss_family == AF_INET) {
@@ -211,13 +211,13 @@ bool icmp_socket::receive_reply(
 
 void icmp_socket::open(const int family) {
     if (family != AF_INET) {
-        throw_exception(value_exception("icmp_socket support IPv4 only"));
+        NEFORCE_THROW_EXCEPTION(value_exception("icmp_socket support IPv4 only"));
     }
     close();
 
     fd_ = ::socket(family, SOCK_RAW, IPPROTO_ICMP);
     if (!is_open()) {
-        throw_exception(socket_exception("create raw ICMP socket failed (you may need root)"));
+        NEFORCE_THROW_EXCEPTION(socket_exception("create raw ICMP socket failed (you may need root)"));
     }
 
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -231,7 +231,7 @@ icmp_socket::ping_result icmp_socket::ping(
     const uint16_t sequence, const void* data, const size_t data_len) {
 
     if (!dest.is_valid() || !dest.is_ipv4()) {
-        throw_exception(value_exception("ping target must be valid IPv4 address"));
+        NEFORCE_THROW_EXCEPTION(value_exception("ping target must be valid IPv4 address"));
     }
 
     const uint16_t id = process::current_id();
@@ -262,7 +262,7 @@ vector<icmp_socket::traceroute_hop> icmp_socket::traceroute(
     const milliseconds probe_timeout, const int probes_per_hop) {
 
     if (!dest.is_valid() || !dest.is_ipv4()) {
-        throw_exception(value_exception("traceroute target must be valid IPv4 address"));
+        NEFORCE_THROW_EXCEPTION(value_exception("traceroute target must be valid IPv4 address"));
     }
 
     vector<traceroute_hop> hops;

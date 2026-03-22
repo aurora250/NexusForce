@@ -3,20 +3,12 @@
 #include <NeForce/db/sqlite/sqlite_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-void sqlite_prepared_statement::clear_bindings() noexcept {
+void sqlite_prepared_statement::clear_bindings() {
     if (stmt_) {
         ::sqlite3_clear_bindings(stmt_);
     }
     param_buffers_.clear();
     param_buffers_.resize(param_count_);
-}
-
-void sqlite_prepared_statement::reset_statement() noexcept {
-    if (stmt_) {
-        ::sqlite3_reset(stmt_);
-        ::sqlite3_clear_bindings(stmt_);
-    }
-    clear_bindings();
 }
 
 sqlite_prepared_statement::sqlite_prepared_statement(

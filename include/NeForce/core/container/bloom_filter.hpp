@@ -121,7 +121,7 @@ public:
     : m_(compute_m(expected_insertions, false_positive_prob)),
       k_(compute_k(expected_insertions, m_)), bits_(m_, false), hasher_(Hash()) {
         if (expected_insertions == 0 || false_positive_prob <= 0.0 || false_positive_prob >= 1.0) {
-            throw_exception(value_exception("expected_insertions must be positive and false_positive_prob in (0,1)"));
+            NEFORCE_THROW_EXCEPTION(value_exception("expected_insertions must be positive and false_positive_prob in (0,1)"));
         }
     }
 
@@ -136,7 +136,7 @@ public:
     bloom_filter(const size_t m, const size_t k)
     : m_(m), k_(k), bits_(m_, false), hasher_(Hash()) {
         if (m == 0 || k == 0) {
-            throw_exception(value_exception("m and k must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("m and k must be positive"));
         }
     }
 
@@ -258,7 +258,7 @@ public:
      */
     bloom_filter& merge(const bloom_filter& other) {
         if (m_ != other.m_ || k_ != other.k_) {
-            throw_exception(value_exception("Filters must have same parameters to merge"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Filters must have same parameters to merge"));
         }
 
         for (size_t i = 0; i < m_; ++i) {
@@ -278,7 +278,7 @@ public:
      */
     bloom_filter intersect(const bloom_filter& other) const {
         if (m_ != other.m_ || k_ != other.k_) {
-            throw_exception(value_exception("Filters must have same parameters for intersection"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Filters must have same parameters for intersection"));
         }
 
         bloom_filter result(m_, k_);
@@ -326,7 +326,7 @@ public:
      */
     void from_bytes(const byte_vector& bytes) {
         if (bytes.size() * 8 < m_) {
-            throw_exception(value_exception("Insufficient byte data"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Insufficient byte data"));
         }
         for (size_t i = 0; i < m_; ++i) {
             bits_[i] = (bytes[i / 8] >> (i % 8)) & 1;

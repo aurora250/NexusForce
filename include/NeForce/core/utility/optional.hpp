@@ -491,7 +491,7 @@ public:
      */
     constexpr const_reference value() const & {
         if (!have_value_) {
-            throw_exception(optional_exception("optional have no value"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
         return *get_ptr();
     }
@@ -503,7 +503,7 @@ public:
      */
     constexpr reference value() & {
         if (!have_value_) {
-            throw_exception(optional_exception("optional have no value"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
         return *get_ptr();
     }
@@ -515,7 +515,7 @@ public:
      */
     constexpr const value_type&& value() const && {
         if (!have_value_) {
-            throw_exception(optional_exception("optional have no value"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
         return _NEFORCE move(*get_ptr());
     }
@@ -527,7 +527,7 @@ public:
      */
     constexpr value_type&& value() && {
         if (!have_value_) {
-            throw_exception(optional_exception("optional have no value"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no value"));
         }
         return _NEFORCE move(*get_ptr());
     }
@@ -1027,7 +1027,7 @@ public:
      */
     constexpr const T& value() const & {
         if (!ptr_) {
-            throw_exception(optional_exception("optional have no reference"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
     }
@@ -1039,7 +1039,7 @@ public:
      */
     constexpr T& value() & {
         if (!ptr_) {
-            throw_exception(optional_exception("optional have no reference"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
     }
@@ -1051,7 +1051,7 @@ public:
      */
     constexpr const T&& value() const && {
         if (!ptr_) {
-            throw_exception(optional_exception("optional have no reference"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
     }
@@ -1063,7 +1063,7 @@ public:
      */
     constexpr T&& value() && {
         if (!ptr_) {
-            throw_exception(optional_exception("optional have no reference"));
+            NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
     }

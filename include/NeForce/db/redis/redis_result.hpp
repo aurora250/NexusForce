@@ -7,34 +7,26 @@ NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API redis_result final : idb_kv_result {
 private:
-    ::redisReply* reply_ = nullptr;
+    ::redisReply* result_ = nullptr;
     size_type cursor_ = 0;
     size_type rows_ = 0;
-    unique_ptr<vector<string>> column_names_ =
-        make_unique<vector<string>>();
-    unique_ptr<vector<pair<string, string>>> kv_pairs_ =
-        make_unique<vector<pair<string, string>>>();
+
+    unique_ptr<vector<string>> column_names_;
+    unique_ptr<vector<pair<string, string>>> kv_pairs_;
 
     size_type kv_cursor_ = 0;
     bool is_array_ = false;
 
-    static string format_redis_reply_element(::redisReply* element);
-    void process_reply();
     string get_string() const;
 
 public:
-    redis_result() noexcept = default;
+    redis_result() noexcept;
+    explicit redis_result(::redisReply* reply) noexcept;
+    ~redis_result() override;
 
-    explicit redis_result(::redisReply* reply) noexcept
-    : reply_(reply) {
-        process_reply();
+    NEFORCE_NODISCARD bool empty() const noexcept override {
+        return !result_ || (rows_ == 0 && kv_pairs_->empty());
     }
-
-    ~redis_result() override {
-        if (reply_) ::freeReplyObject(reply_);
-    }
-
-    NEFORCE_NODISCARD bool empty() const noexcept override { return !reply_ || (rows_ == 0 && kv_pairs_->empty()); }
     NEFORCE_NODISCARD bool next() noexcept override;
 
     NEFORCE_NODISCARD string_view key() const noexcept override;
@@ -46,8 +38,12 @@ public:
     NEFORCE_NODISCARD vector<string> value_array() const override;
     NEFORCE_NODISCARD const vector<pair<string, string>>& value_hash() const override { return *kv_pairs_; }
 
-    NEFORCE_NODISCARD int type() const noexcept { return reply_ ? reply_->type : -1; }
-    NEFORCE_NODISCARD bool is_nil() const noexcept { return reply_ && reply_->type == REDIS_REPLY_NIL; }
+    NEFORCE_NODISCARD int type() const noexcept {
+        return result_ ? result_->type : -1;
+    }
+    NEFORCE_NODISCARD bool is_nil() const noexcept {
+        return result_ && result_->type == REDIS_REPLY_NIL;
+    }
 };
 
 NEFORCE_END_NAMESPACE__

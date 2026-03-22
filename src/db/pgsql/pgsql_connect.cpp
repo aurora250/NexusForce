@@ -5,146 +5,114 @@
 #include <NeForce/db/pgsql/pgsql_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-void pgsql_connect::clear_error() noexcept {
+namespace {
+    string build_conn_string(const db_config& config) {
+        string result;
+
+        if (!config.host.empty()) {
+            result += "host=" + config.host + " ";
+        }
+        if (config.port > 0) {
+            result += "port=" + _NEFORCE to_string(config.port) + " ";
+        }
+        if (!config.database.empty()) {
+            result += "dbname=" + config.database + " ";
+        }
+        if (!config.username.empty()) {
+            result += "user=" + config.username + " ";
+        }
+        if (!config.password.empty()) {
+            result += "password=" + config.password + " ";
+        }
+        if (!config.charset.empty()) {
+            result += "client_encoding=" + config.charset;
+        }
+        return result;
+    }
+}
+
+bool pgsql_connect::connect(const db_config& config) {
     last_error_.clear();
     last_errno_ = 0;
-}
-
-void pgsql_connect::set_error(string error, const uint32_t errno_val) {
-    last_error_ = _NEFORCE move(error);
-    last_errno_ = errno_val;
-}
-
-void pgsql_connect::update_error() {
-    if (conn_) {
-        last_error_ = PQerrorMessage(conn_);
-        last_errno_ = 1;
-    }
-}
-
-string pgsql_connect::build_conn_string(
-    const string& user, const string& password,
-    const string& dbname, const string& host,
-    const uint32_t port) const {
-    string result;
-
-    if (!host.empty()) {
-        result += "host=" + host + " ";
-    }
-    if (port > 0) {
-        result += "port=" + _NEFORCE to_string(port) + " ";
-    }
-    if (!dbname.empty()) {
-        result += "dbname=" + dbname + " ";
-    }
-    if (!user.empty()) {
-        result += "user=" + user + " ";
-    }
-    if (!password.empty()) {
-        result += "password=" + password + " ";
-    }
-    return result;
-}
-
-bool pgsql_connect::connect_to(
-    const string& user, const string& password,
-    const string& dbname, const string& ip,
-    const uint32_t port, const string& character_set) {
-    clear_error();
     close();
 
-    string conn_str = build_conn_string(user, password, dbname, ip, port);
+    string conn_str = build_conn_string(config);
+    link_ = ::PQconnectdb(conn_str.data());
 
-    if (!character_set.empty()) {
-        conn_str += "client_encoding=" + character_set;
-    }
-
-    conn_ = ::PQconnectdb(conn_str.data());
-
-    if (!conn_ || ::PQstatus(conn_) != ::CONNECTION_OK) {
-        update_error();
+    if (!link_ || ::PQstatus(link_) != ::CONNECTION_OK) {
+        last_error_ = ::PQerrorMessage(link_);
+        last_errno_ = 1;
         close();
         return false;
     }
 
-    charset_ = character_set;
     refresh_alive();
-
-    config_.username = user;
-    config_.password = password;
-    config_.database = dbname;
-    config_.host = ip;
-    config_.port = static_cast<uint16_t>(port);
-    config_.charset = character_set;
-
     return true;
 }
 
-bool pgsql_connect::connect_to(const db_config& config) {
-    const bool ok = connect_to(
-        config.username, config.password, config.database,
-        config.host, config.port, config.charset);
-    if (ok) {
-        config_ = config;
+bool pgsql_connect::reconnect(const db_config& config) {
+    close();
+    return connect(config);
+}
+
+void pgsql_connect::close() {
+    if (link_) {
+        ::PQfinish(link_);
+        link_ = nullptr;
     }
-    return ok;
+    last_error_.clear();
+    last_errno_ = 0;
 }
 
 bool pgsql_connect::set_character_set(const string& encoding) const {
-    if (!conn_) return false;
-    ::PGresult* res = ::PQexec(
-        conn_, ("SET client_encoding TO " + encoding).data());
+    if (!link_) return false;
+
+    ::PGresult* res = ::PQexec(link_, ("SET client_encoding TO " + encoding).data());
     if (!res) return false;
+
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
     return status == ::PGRES_COMMAND_OK;
 }
 
 string_view pgsql_connect::get_character_set() const {
-    if (!conn_) return {};
-    ::PGresult* res = ::PQexec(conn_, "SHOW client_encoding");
+    if (!link_) return {};
+
+    ::PGresult* res = ::PQexec(link_, "SHOW client_encoding");
     if (!res) return {};
+
     if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
         ::PQclear(res);
         return {};
     }
-    char* encoding = ::PQgetvalue(res, 0, 0);
-    const string_view ret = encoding ? string_view(encoding) : string_view{};
+
+    const char* encoding = ::PQgetvalue(res, 0, 0);
+    const string_view ret = encoding ? string_view(encoding) : ""_sv;
     ::PQclear(res);
     return ret;
 }
 
 bool pgsql_connect::update(const string& sql) const {
-    if (!conn_) return false;
-    ::PGresult* res = ::PQexec(conn_, sql.data());
+    if (!link_) return false;
+
+    ::PGresult* res = ::PQexec(link_, sql.data());
     if (!res) return false;
+
     const ::ExecStatusType status = ::PQresultStatus(res);
     ::PQclear(res);
     return status == ::PGRES_COMMAND_OK;
 }
 
 bool pgsql_connect::connected() const {
-    return conn_ != nullptr &&
-        ::PQstatus(conn_) == ::CONNECTION_OK;
-}
-
-void pgsql_connect::close() {
-    if (conn_) {
-        ::PQfinish(conn_);
-        conn_ = nullptr;
-    }
-    clear_error();
-}
-
-bool pgsql_connect::reset_connect(const db_config& config) {
-    close();
-    return connect_to(config);
+    return link_ != nullptr && ::PQstatus(link_) == ::CONNECTION_OK;
 }
 
 unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
-    if (!conn_) return nullptr;
-    ::PGresult* res = ::PQexec(conn_, sql.data());
+    if (!link_) return nullptr;
+
+    ::PGresult* res = ::PQexec(link_, sql.data());
     if (!res) return nullptr;
+
     if (::PQresultStatus(res) != ::PGRES_TUPLES_OK) {
         ::PQclear(res);
         return nullptr;
@@ -153,8 +121,10 @@ unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
 }
 
 unique_ptr<idb_prepared_statement> pgsql_connect::prepare_statement(const string& sql) const {
-    if (!conn_) return nullptr;
-    const auto stmt = new pgsql_prepared_statement(conn_, sql);
+    if (!link_) return nullptr;
+
+    const auto stmt = new pgsql_prepared_statement(link_, sql);
+
     if (!stmt->param_count() && sql.find('$') != string::npos) {
         delete stmt;
         return nullptr;
@@ -164,7 +134,7 @@ unique_ptr<idb_prepared_statement> pgsql_connect::prepare_statement(const string
 
 idb_connect* pgsql_factory::create_connect() {
     const auto conn = new pgsql_connect();
-    if (!conn->connect_to(config_)) {
+    if (!conn->connect(config_)) {
         delete conn;
         return nullptr;
     }

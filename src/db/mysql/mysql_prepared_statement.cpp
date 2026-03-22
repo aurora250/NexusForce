@@ -3,21 +3,29 @@
 #include <NeForce/db/mysql/mysql_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    void throw_if_stmt_null(const ::MYSQL_STMT* ptr_) {
+        if (ptr_) return;
+        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Prepared statement not initialized"));
+    }
+}
+
+
 mysql_prepared_statement::mysql_prepared_statement(::MYSQL* conn, const string_view sql)
 : conn_(conn) {
     if (!conn_) {
-        throw_exception(database_prepared_stmt_exception("Invalid MySQL connection pointer"));
+        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("Invalid MySQL connection pointer"));
     }
     stmt_ = ::mysql_stmt_init(conn_);
     if (!stmt_) {
-        throw_exception(database_prepared_stmt_exception("mysql_stmt_init failed"));
+        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception("mysql_stmt_init failed"));
     }
 
     if (::mysql_stmt_prepare(stmt_, sql.data(), sql.size())) {
         const string_view err = ::mysql_stmt_error(stmt_);
         ::mysql_stmt_close(stmt_);
         stmt_ = nullptr;
-        throw_exception(database_prepared_stmt_exception(err.data()));
+        NEFORCE_THROW_EXCEPTION(database_prepared_stmt_exception(err.data()));
     }
 
     param_count_ = ::mysql_stmt_param_count(stmt_);
@@ -36,9 +44,9 @@ mysql_prepared_statement::~mysql_prepared_statement() {
 }
 
 mysql_prepared_statement::mysql_prepared_statement(mysql_prepared_statement&& other) noexcept
-        : stmt_(other.stmt_), conn_(other.conn_), param_count_(other.param_count_),
-          bind_params_(_NEFORCE move(other.bind_params_)),
-          param_buffers_(_NEFORCE move(other.param_buffers_)) {
+: stmt_(other.stmt_), conn_(other.conn_), param_count_(other.param_count_),
+  bind_params_(move(other.bind_params_)),
+  param_buffers_(move(other.param_buffers_)) {
     other.stmt_ = nullptr;
     other.conn_ = nullptr;
     other.param_count_ = 0;
@@ -46,14 +54,22 @@ mysql_prepared_statement::mysql_prepared_statement(mysql_prepared_statement&& ot
 
 mysql_prepared_statement& mysql_prepared_statement::operator =(mysql_prepared_statement&& other) noexcept {
     if (_NEFORCE addressof(other) == this) return *this;
+
     if (stmt_) ::mysql_stmt_close(stmt_);
-    swap(other);
+    stmt_ = other.stmt_;
+    conn_ = other.conn_;
+    param_count_ = other.param_count_;
+    bind_params_ = move(other.bind_params_);
+    param_buffers_ = move(other.param_buffers_);
+    other.stmt_ = nullptr;
+    other.conn_ = nullptr;
+    other.param_count_ = 0;
     return *this;
 }
 
 bool mysql_prepared_statement::bind_param(const uint32_t index, const string_view value) {
     try {
-        throw_if_stmt_null();
+        throw_if_stmt_null(stmt_);
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
@@ -75,7 +91,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const string_vie
 
 bool mysql_prepared_statement::bind_param(const uint32_t index, const int32_t value) {
     try {
-        throw_if_stmt_null();
+        throw_if_stmt_null(stmt_);
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
@@ -95,7 +111,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int32_t va
 
 bool mysql_prepared_statement::bind_param(const uint32_t index, const int64_t value) {
     try {
-        throw_if_stmt_null();
+        throw_if_stmt_null(stmt_);
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
@@ -115,7 +131,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int64_t va
 
 bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t value) {
     try {
-        throw_if_stmt_null();
+        throw_if_stmt_null(stmt_);
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
@@ -134,7 +150,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t 
 
 bool mysql_prepared_statement::bind_param(const uint32_t index, const void* data, const size_t length) {
     try {
-        throw_if_stmt_null();
+        throw_if_stmt_null(stmt_);
         if (index >= param_count_) return false;
 
         vector<char>& buffer = param_buffers_[index];
@@ -153,7 +169,7 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const void* data
 }
 
 bool mysql_prepared_statement::execute() {
-    throw_if_stmt_null();
+    throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
         if (::mysql_stmt_bind_param(stmt_, bind_params_.data())) {
             return false;
@@ -163,7 +179,7 @@ bool mysql_prepared_statement::execute() {
 }
 
 unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {
-    throw_if_stmt_null();
+    throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
         if (::mysql_stmt_bind_param(stmt_, bind_params_.data()) != 0) {
             return nullptr;
@@ -183,17 +199,6 @@ string_view mysql_prepared_statement::get_error() const noexcept {
 uint32_t mysql_prepared_statement::get_errno() const noexcept {
     if (!stmt_) return 0;
     return ::mysql_stmt_errno(stmt_);
-}
-
-void mysql_prepared_statement::swap(mysql_prepared_statement& other) noexcept {
-    stmt_ = other.stmt_;
-    conn_ = other.conn_;
-    param_count_ = other.param_count_;
-    bind_params_ = _NEFORCE move(other.bind_params_);
-    param_buffers_ = _NEFORCE move(other.param_buffers_);
-    other.stmt_ = nullptr;
-    other.conn_ = nullptr;
-    other.param_count_ = 0;
 }
 
 NEFORCE_END_NAMESPACE__

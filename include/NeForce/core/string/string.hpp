@@ -296,18 +296,6 @@ NEFORCE_CONSTEXPR20 bool getline(const basic_string<CharT>& data, size_t& pos,
     return has_read;
 }
 
-/// @cond
-NEFORCE_BEGIN_INNER__
-#ifdef NEFORCE_ARCH_BITS_64
-NEFORCE_INLINE17 constexpr uintptr_t ADDRESS_MASK = 0xF000000000000000ULL;
-NEFORCE_INLINE17 constexpr int ADDRESS_SHIFT = 60;
-#else
-NEFORCE_INLINE17 constexpr uintptr_t ADDRESS_MASK = 0xF0000000UL;
-NEFORCE_INLINE17 constexpr int ADDRESS_SHIFT = 28;
-#endif
-NEFORCE_END_INNER__
-/// @endcond
-
 /**
  * @brief 将指针转换为十六进制地址字符串
  * @param p 要转换的指针
@@ -319,12 +307,20 @@ NEFORCE_END_INNER__
  */
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string address_string(const void* p) {
     if (p == nullptr) return {"nullptr"};
-    
-    const uintptr_t addr_val = reinterpret_cast<uintptr_t>(p);
-    constexpr size_t hex_digit_count = sizeof(void*) * 2;
+
+#ifdef NEFORCE_ARCH_BITS_64
+    constexpr uintptr_t address_mask = 0xF000000000000000ULL;
+    constexpr int address_shift = 60;
+#else
+    constexpr uintptr_t address_mask = 0xF0000000UL;
+    constexpr int address_shift = 28;
+#endif
     constexpr char hex_digits[] = "0123456789abcdef";
-    uintptr_t mask = _INNER ADDRESS_MASK;
-    int shift = _INNER ADDRESS_SHIFT;
+    constexpr size_t hex_digit_count = sizeof(void*) * 2;
+
+    const uintptr_t addr_val = reinterpret_cast<uintptr_t>(p);
+    uintptr_t mask = address_mask;
+    int shift = address_shift;
 
     string result{"0x"};
     result.reserve(2 + hex_digit_count);

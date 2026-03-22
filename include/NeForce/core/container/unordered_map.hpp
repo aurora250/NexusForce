@@ -522,7 +522,7 @@ public:
     NEFORCE_NODISCARD const T& at(const key_type& key) const {
         auto iter = ht_.find(key);
         if (iter == end()) {
-            throw_exception(iterator_exception("unordered_map key-value does not exists"));
+            NEFORCE_THROW_EXCEPTION(iterator_exception("unordered_map key-value does not exists"));
         }
         return iter->second;
     }
@@ -536,7 +536,7 @@ public:
     NEFORCE_NODISCARD T& at(const key_type& key) {
         auto iter = ht_.find(key);
         if (iter == end()) {
-            throw_exception(iterator_exception("unordered_map key-value does not exists"));
+            NEFORCE_THROW_EXCEPTION(iterator_exception("unordered_map key-value does not exists"));
         }
         return iter->second;
     }

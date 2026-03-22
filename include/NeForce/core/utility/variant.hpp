@@ -435,7 +435,7 @@ public:
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     NEFORCE_CONSTEXPR20 variant_alternative_t<variant, Idx>& get() {
         if(index_ != Idx) {
-            throw_exception(value_exception("Template index not match."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Template index not match."));
         }
         return *reinterpret_cast<variant_alternative_t<variant, Idx>*>(union_);
     }
@@ -460,7 +460,7 @@ public:
     template <size_t Idx, enable_if_t<(Idx < sizeof...(Types)), int> = 0>
     NEFORCE_CONSTEXPR20 variant_alternative_t<variant, Idx> const& get() const {
         if(index_ != Idx) {
-            throw_exception(value_exception("Template index not match."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Template index not match."));
         }
         return *reinterpret_cast<variant_alternative_t<variant, Idx> const*>(union_);
     }

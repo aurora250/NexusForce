@@ -72,7 +72,7 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
                 }
             }
             default: {
-                NEFORCE_UNREACHABLE;
+                unreachable();
             }
         }
 

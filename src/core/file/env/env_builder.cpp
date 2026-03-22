@@ -33,7 +33,7 @@ env_builder& env_builder::exported(const bool exported) noexcept {
 
 env_builder& env_builder::value(string value) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(current_key_, _NEFORCE move(value), current_quote_type_, current_exported_);
@@ -45,7 +45,7 @@ env_builder& env_builder::value(string value) {
 
 env_builder& env_builder::value(const int value) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(current_key_, _NEFORCE to_string(value), current_quote_type_, current_exported_);
@@ -57,7 +57,7 @@ env_builder& env_builder::value(const int value) {
 
 env_builder& env_builder::value(const int64_t value) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(current_key_, _NEFORCE to_string(value), current_quote_type_, current_exported_);
@@ -69,7 +69,7 @@ env_builder& env_builder::value(const int64_t value) {
 
 env_builder& env_builder::value(const double value) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(current_key_, _NEFORCE to_string(value), current_quote_type_, current_exported_);
@@ -81,7 +81,7 @@ env_builder& env_builder::value(const double value) {
 
 env_builder& env_builder::value(const bool value) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(current_key_, _NEFORCE to_string(value), current_quote_type_, current_exported_);
@@ -93,7 +93,7 @@ env_builder& env_builder::value(const bool value) {
 
 env_builder& env_builder::value(const double value, const int precision) {
     if (current_key_.empty()) {
-        throw_exception(env_exception("No key set for value"));
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
     root_->set_variable(

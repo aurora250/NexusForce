@@ -2,13 +2,26 @@
 #ifdef NEFORCE_SUPPORT_SQLITE3
 NEFORCE_BEGIN_NAMESPACE__
 
-sqlite_result::sqlite_result(::sqlite3_stmt* statement) noexcept : stmt_(statement) {
+sqlite_result::sqlite_result() noexcept
+: column_names_(make_unique<vector<string_view>>()),
+  column_types_(make_unique<vector<int>>()) {}
+
+sqlite_result::sqlite_result(::sqlite3_stmt* statement) noexcept
+: stmt_(statement),
+  column_names_(make_unique<vector<string_view>>()),
+  column_types_(make_unique<vector<int>>()) {
     if (stmt_) {
         columns_ = ::sqlite3_column_count(stmt_);
         for (int i = 0; i < columns_; ++i) {
             column_names_->push_back(::sqlite3_column_name(stmt_, i));
             column_types_->push_back(::sqlite3_column_type(stmt_, i));
         }
+    }
+}
+
+sqlite_result::~sqlite_result() {
+    if (stmt_) {
+        ::sqlite3_finalize(stmt_);
     }
 }
 
@@ -21,19 +34,13 @@ _NEFORCE string_view sqlite_result::get(const size_type n) const noexcept {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, n));
-    return text ? string_view{text} : string_view{};
+    return text ? string_view{text} : ""_sv;
 }
 
 bool sqlite_result::get_bool(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     return ::sqlite3_column_int(stmt_, n) != 0;
-}
-
-int8_t sqlite_result::get_int8(const size_type n) const {
-    NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
-    NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<int8_t>(::sqlite3_column_int(stmt_, n));
 }
 
 int16_t sqlite_result::get_int16(const size_type n) const {

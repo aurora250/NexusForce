@@ -127,7 +127,7 @@ struct NEFORCE_API steady_clock {
  *
  * @note 输入支持纳秒精度，但输出仅保留毫秒精度
  */
-milliseconds NEFORCE_API relative_time(int64_t sec, int64_t nsec, bool is_monotonic = false);
+milliseconds NEFORCE_API relative_time(int64_t sec, int64_t nsec, bool is_monotonic = false) noexcept;
 
 
 /**

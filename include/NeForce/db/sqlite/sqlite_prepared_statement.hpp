@@ -15,8 +15,7 @@ private:
     bool prepared_ = false;
     mutable string last_error_;
 
-    void clear_bindings() noexcept;
-    void reset_statement() noexcept;
+    void clear_bindings();
 
 public:
     explicit sqlite_prepared_statement(::sqlite3* db, const string& sql);

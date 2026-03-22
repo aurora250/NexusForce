@@ -99,7 +99,7 @@ void toml_parser::throw_parse_error(string message) const {
     const string error_msg =
         "Line " + _NEFORCE to_string(line_) +
         ", Column " + _NEFORCE to_string(column_) + ": " + move(message);
-    throw_exception(toml_exception(error_msg.data()));
+    NEFORCE_THROW_EXCEPTION(toml_exception(error_msg.data()));
 }
 
 char32_t toml_parser::parse_unicode_escape(const size_t digits) {

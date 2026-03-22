@@ -64,7 +64,7 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator
         for (; result != cur; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized copy failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized copy failed."));
     }
     return cur;
 }
@@ -116,7 +116,7 @@ NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_copy_n_aux(
         for (; result != cur; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized copy n failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized copy n failed."));
     }
     return pair<Iterator1, Iterator2>(first, cur);
 }
@@ -196,7 +196,7 @@ NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last,
         for (; cur != first; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized fill failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized fill failed."));
     }
 }
 
@@ -261,7 +261,7 @@ NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n
         for (; cur != first; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized fill n failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized fill n failed."));
     }
     return cur;
 }
@@ -328,7 +328,7 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator
         for (; result != cur; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized move failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized move failed."));
     }
     return cur;
 }
@@ -380,7 +380,7 @@ NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> __uninitialized_move_n_aux(
         for (; result != cur; --cur) {
             _NEFORCE destroy(&*cur);
         }
-        throw_exception(memory_exception("uninitialized move n failed."));
+        NEFORCE_THROW_EXCEPTION(memory_exception("uninitialized move n failed."));
     }
     return pair<Iterator1, Iterator2>(first, cur);
 }

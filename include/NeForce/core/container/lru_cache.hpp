@@ -27,7 +27,7 @@ public:
     explicit lru_cache(size_type capacity)
     : capacity_(capacity) {
         if (capacity_ == 0) {
-            throw_exception(value_exception("lru_cache capacity must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("lru_cache capacity must be positive"));
         }
     }
 

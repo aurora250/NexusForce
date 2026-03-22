@@ -39,6 +39,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
@@ -55,6 +57,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/uuid.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
@@ -288,6 +291,7 @@ target_compile_definitions(NexusForce PUBLIC
         PCRE2_CODE_UNIT_WIDTH=8
 )
 message(STATUS "PCRE2 with JIT linked successfully")
+message(STATUS "")
 
 
 # 安装库文件

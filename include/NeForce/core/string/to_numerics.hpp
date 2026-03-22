@@ -509,7 +509,7 @@ to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float32_t num = _NEFORCE strtof(sv, &endptr);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -527,7 +527,7 @@ to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const float64_t num = _NEFORCE strtod(sv, &endptr);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -545,7 +545,7 @@ to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
     const decimal_t num = _NEFORCE strtold(sv, &endptr);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -564,7 +564,7 @@ to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int64_t num = _NEFORCE strtoll(sv, &endptr, base);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -583,7 +583,7 @@ to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint64_t num = _NEFORCE strtoull(sv, &endptr, base);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -602,7 +602,7 @@ to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const int32_t num = _NEFORCE strtol(sv, &endptr, base);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;
@@ -621,7 +621,7 @@ to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
     const uint32_t num = _NEFORCE strtoul(sv, &endptr, base);
     if (sv.data() == endptr) {
-        throw_exception(typecast_exception("Convert from string failed."));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
     if (idx) *idx = static_cast<size_t>(endptr - sv.data());
     return num;

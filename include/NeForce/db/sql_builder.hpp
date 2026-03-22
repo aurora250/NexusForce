@@ -21,7 +21,7 @@ enum class SQL_ORDER_TYPE {
 };
 
 
-struct NEFORCE_API select_data {
+struct select_data {
     vector<string> fields;
     vector<string> join_clauses;
     vector<string> group_by_fields;
@@ -32,12 +32,12 @@ struct NEFORCE_API select_data {
     bool distinct = false;
 };
 
-struct NEFORCE_API insert_data {
+struct insert_data {
     vector<string> fields;
     vector<string> placeholders;
 };
 
-struct NEFORCE_API update_data {
+struct update_data {
     vector<string> assignments;
 };
 

@@ -417,7 +417,7 @@ public:
                 break;
             }
             default: {
-                NEFORCE_UNREACHABLE;
+                unreachable();
             }
         }
     }
@@ -459,7 +459,7 @@ public:
                 return value_.time().to_string();
             }
             default: {
-                NEFORCE_UNREACHABLE;
+                unreachable();
             }
         }
     }

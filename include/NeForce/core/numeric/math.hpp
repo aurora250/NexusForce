@@ -53,8 +53,6 @@ NEFORCE_INLINE17 constexpr uint32_t FIBONACCI_COUNT = extent_v<decltype(FIBONACC
 
 /** @} */ // MathConstants
 
-NEFORCE_INLINE17 constexpr size_t EZ_CONSTANT = 591'60'15'3;
-
 NEFORCE_END_CONSTANTS__
 
 /**
@@ -233,7 +231,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm(const T& m, const T& n) noexcep
 template <typename T>
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T float_mod(const T x, const T y) {
 	static_assert(is_arithmetic_v<T>, "arithmetic required");
-	if (y == 0) throw_exception(math_exception("zero can not be dividend."));
+	if (y == 0) NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
 	const T result = x - static_cast<make_integer_t<sizeof(T)>>(x / y) * y;
 	return result;
 }
@@ -306,7 +304,7 @@ template <typename T>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 T logarithm(const T x, const uint32_t base) {
 	const auto under = _NEFORCE logarithm_e(static_cast<float64_t>(base));
 	if (under == 0) {
-		throw_exception(math_exception("zero can not be dividend."));
+		NEFORCE_THROW_EXCEPTION(math_exception("zero can not be dividend."));
 	}
 	return _NEFORCE logarithm_e(x) / under;
 }
@@ -527,7 +525,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate(const decimal_t x)
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple(const decimal_t x, const decimal_t axis,
 	const decimal_t toler = _CONSTANTS PRECISE_TOLERANCE) {
 	if (absolute(axis) < _CONSTANTS PRECISE_TOLERANCE) {
-		throw_exception(math_exception("Axis Cannot be 0"));
+		NEFORCE_THROW_EXCEPTION(math_exception("Axis Cannot be 0"));
 	}
 	const decimal_t multi = _NEFORCE round(x / axis) * axis;
 	return absolute(x - multi) < toler;
@@ -655,7 +653,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent(const decimal_t x) {
     const decimal_t multiple = (2 * _NEFORCE round((2 * x - _CONSTANTS PI)
         / (2 * _CONSTANTS PI)) + 1) * (_CONSTANTS PI / 2);
     if (absolute(x - multiple) < _CONSTANTS LOW_PRECISE_TOLERANCE) {
-        throw_exception(math_exception("Tangent Range Exceeded"));
+        NEFORCE_THROW_EXCEPTION(math_exception("Tangent Range Exceeded"));
     }
 	return sine(x) / cosine(x);
 }
@@ -719,7 +717,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arctangent(const decimal_t x
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arcsine(const decimal_t x) {
     if (_NEFORCE absolute(x) > 1) {
-	    throw_exception(math_exception("Arcsine Range Exceeded"));
+	    NEFORCE_THROW_EXCEPTION(math_exception("Arcsine Range Exceeded"));
     }
     return arctangent(x / square_root(1 - x * x));
 }
@@ -732,7 +730,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arcsine(const decimal_t x) {
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arccosine(const decimal_t x) {
     if (_NEFORCE absolute(x) > 1) {
-	    throw_exception(math_exception("Arccosine Range Exceeded"));
+	    NEFORCE_THROW_EXCEPTION(math_exception("Arccosine Range Exceeded"));
     }
     return _CONSTANTS PI / 2.0 - arcsine(x);
 }

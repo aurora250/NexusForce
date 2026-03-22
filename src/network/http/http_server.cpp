@@ -224,7 +224,7 @@ http_request http_server_base::parse_request(
     while (true) {
         const ssize_t bytes_read = client_socket->receive(memory_view<char>(buffer));
         if (bytes_read <= 0) {
-            throw_exception(http_exception("Connection closed while reading request"));
+            NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading request"));
         }
         request_data.append(buffer, bytes_read);
 
@@ -239,13 +239,13 @@ http_request http_server_base::parse_request(
                     try {
                         content_length = uinteger64::parse(cl_str);
                     } catch (...) {
-                        throw_exception(http_exception("Invalid Content-Length"));
+                        NEFORCE_THROW_EXCEPTION(http_exception("Invalid Content-Length"));
                     }
                 }
             }
 
             if (content_length > max_body_size) {
-                throw_exception(http_exception("Request body too large"));
+                NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
             }
 
             const size_t body_start = header_end + 4;
@@ -260,7 +260,7 @@ http_request http_server_base::parse_request(
                     const ssize_t n = client_socket->receive(memory_view<char>(buffer, to_read));
 
                     if (n <= 0) {
-                        throw_exception(http_exception("Connection closed while reading body"));
+                        NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading body"));
                     }
 
                     request_data.append(buffer, n);
@@ -271,7 +271,7 @@ http_request http_server_base::parse_request(
         }
 
         if (request_data.size() > max_header_size) {
-            throw_exception(http_exception("Request header too large"));
+            NEFORCE_THROW_EXCEPTION(http_exception("Request header too large"));
         }
     }
 
@@ -284,14 +284,14 @@ http_request http_server_base::parse_request(
         const size_t pos1 = line.find(' ');
 
         if (pos1 == string::npos) {
-            throw_exception(http_exception("Invalid request line"));
+            NEFORCE_THROW_EXCEPTION(http_exception("Invalid request line"));
         }
 
         request.method = line.view(0, pos1);
         const size_t pos2 = line.find(' ', pos1 + 1);
 
         if (pos2 == string::npos) {
-            throw_exception(http_exception("Invalid request line"));
+            NEFORCE_THROW_EXCEPTION(http_exception("Invalid request line"));
         }
 
         request.path = line.view(pos1 + 1, pos2 - pos1 - 1);

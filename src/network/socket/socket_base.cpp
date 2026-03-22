@@ -21,7 +21,7 @@ namespace {
                 ::WSADATA wsa_data;
                 if (::WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
                     ref_count.fetch_sub(1);
-                    throw_exception(system_exception("WSAStartup failed"));
+                    NEFORCE_THROW_EXCEPTION(system_exception("WSAStartup failed"));
                 }
             }
         }

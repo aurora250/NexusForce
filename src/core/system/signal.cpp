@@ -131,7 +131,7 @@ void signal_manager::cleanup_platform() const {
 
 void signal_manager::register_handler(const SIGNAL_EVENT event, signal_handler handler) {
     if (!handler) {
-        throw_exception(system_exception("Signal handler cannot be null"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }
 
     lock<mutex> lock(mutex_);
@@ -154,7 +154,7 @@ void signal_manager::register_handler(const SIGNAL_EVENT event, signal_handler h
 void signal_manager::register_handlers(
     const vector<SIGNAL_EVENT>& events, signal_handler handler) {
     if (!handler) {
-        throw_exception(system_exception("Signal handler cannot be null"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }
 
     lock<mutex> lock(mutex_);

@@ -88,7 +88,7 @@ private:
     template <typename T>
     toml_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
-            throw_exception(toml_exception("Cannot add value to root (root must be a table)"));
+            NEFORCE_THROW_EXCEPTION(toml_exception("Cannot add value to root (root must be a table)"));
         }
 
         const auto& top = contexts_.top();
@@ -96,10 +96,10 @@ private:
             top.array_ptr->add_element(_NEFORCE move(value));
         } else if (top.type == table || top.type == inline_table) {
             if (current_key_.empty()) {
-                throw_exception(toml_exception("No key set for value in table"));
+                NEFORCE_THROW_EXCEPTION(toml_exception("No key set for value in table"));
             }
             if (top.table_ptr->has_member(current_key_)) {
-                throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
+                NEFORCE_THROW_EXCEPTION(toml_exception(("Duplicate key: " + current_key_).data()));
             }
             top.table_ptr->add_member(current_key_, _NEFORCE move(value));
             current_key_.clear();

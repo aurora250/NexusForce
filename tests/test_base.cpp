@@ -200,7 +200,7 @@ void test_rbtree() {
     random_lcd rand;
     for (int i = 0; i < 100000; ++i) {
         int key = i;
-        long_map.insert({key, rand.next_double(0, 10000)});
+        long_map.insert({key, rand.next_float(0.f, 10000.f)});
     }
     for (int i = 0; i < 100000; ++i) {
         long_map.erase(i);
@@ -221,7 +221,7 @@ void test_rbtree() {
     multimap<int, float> long_multimap;
     for (int i = 0; i < 100000; ++i) {
         int key = i;
-        long_multimap.insert({key, rand.next_double(0, 10000)});
+        long_multimap.insert({key, rand.next_float(0.f, 10000.f)});
     }
     for (int i = 0; i < 100000; ++i) {
         long_multimap.erase(i);
@@ -469,7 +469,7 @@ string generate_random_string(size_t length) {
     s.reserve(length);
     random_lcd rand;
     for (size_t i = 0; i < length; ++i) {
-        s += chars[rand.next_int() % chars.size()];
+        s += chars[rand.next_int<int>() % chars.size()];
     }
     return s;
 }
@@ -507,11 +507,11 @@ void test_string_modification(size_t initial_length, size_t operations) {
     random_lcd rand;
     for (size_t i = 0; i < operations; ++i) {
         if (i % 2 == 0) {
-            size_t pos = rand.next_int() % (str.size() + 1);
+            size_t pos = rand.next_int<int>() % (str.size() + 1);
             str.insert(pos, 1, 'X');
         } else {
             if (str.empty()) break;
-            size_t pos = rand.next_int() % str.size();
+            size_t pos = rand.next_int<int>() % str.size();
             str.erase(pos, 1);
         }
     }
@@ -526,7 +526,7 @@ void test_string_search_replace(size_t str_length, size_t pattern_count) {
     const string replacement = "XYZ";
     random_lcd rand;
     for (size_t i = 0; i < pattern_count; ++i) {
-        size_t pos = rand.next_int() % (str.size() - pattern.size() + 1);
+        size_t pos = rand.next_int<int>() % (str.size() - pattern.size() + 1);
         str.replace(pos, pattern.size(), pattern);
     }
 
@@ -554,10 +554,10 @@ void test_max_memory_string() {
 #else
             1ULL * 1024 * 1024 * 1024;  // 1GB
 #endif
-        max_test_size = _NEFORCE min(max_test_size, upper_limit);
+        max_test_size = min(max_test_size, upper_limit);
 
         if (max_test_size == 0) {
-            throw_exception(memory_exception("Insufficient system memory for test."));
+            NEFORCE_THROW_EXCEPTION(memory_exception("Insufficient system memory for test."));
         }
 
         string huge_str;
@@ -570,7 +570,7 @@ void test_max_memory_string() {
                   , max_test_size / (1024 * 1024), " MB)");
 
         while (total_written < max_test_size) {
-            size_t write = _NEFORCE min(chunk, max_test_size - total_written);
+            size_t write = min(chunk, max_test_size - total_written);
             huge_str.append(write, 'A');
             total_written += write;
 

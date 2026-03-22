@@ -27,8 +27,25 @@ pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, const string&
     }
     param_count_ = max_param;
 
-    init_params();
-    prepare();
+    data_->param_values.resize(param_count_);
+    data_->param_ptrs.resize(param_count_, nullptr);
+    data_->param_lengths.resize(param_count_, 0);
+    data_->param_formats.resize(param_count_, 0);;
+
+    last_error_.clear();
+    last_errno_ = 0;
+
+    ::PGresult* result = ::PQprepare(conn_, stmt_name_.data(), sql_.data(), param_count_, nullptr);
+    if (!result) {
+        set_error("Failed to prepare statement", 1);
+        return;
+    }
+
+    const ::ExecStatusType status = ::PQresultStatus(result);
+    ::PQclear(result);
+    if (status != ::PGRES_COMMAND_OK) {
+        set_error(::PQerrorMessage(conn_), 2);
+    }
 }
 
 pgsql_prepared_statement::~pgsql_prepared_statement() {
@@ -38,46 +55,12 @@ pgsql_prepared_statement::~pgsql_prepared_statement() {
         if (result) {
             ::PQclear(result);
         }
-        delete data_;
+        data_.reset();
     }
-}
-
-void pgsql_prepared_statement::init_params() const {
-    data_->param_values.resize(param_count_);
-    data_->param_ptrs.resize(param_count_, nullptr);
-    data_->param_lengths.resize(param_count_, 0);
-    data_->param_formats.resize(param_count_, 0);
-}
-
-bool pgsql_prepared_statement::prepare() {
-    clear_error();
-
-    ::PGresult* result = ::PQprepare(
-        conn_, stmt_name_.data(), sql_.data(), param_count_, nullptr);
-
-    if (!result) {
-        set_error("Failed to prepare statement", 1);
-        return false;
-    }
-
-    const ::ExecStatusType status = ::PQresultStatus(result);
-    ::PQclear(result);
-
-    if (status != ::PGRES_COMMAND_OK) {
-        set_error(::PQerrorMessage(conn_), 2);
-        return false;
-    }
-
-    return true;
-}
-
-void pgsql_prepared_statement::clear_error() noexcept {
-    last_error_.clear();
-    last_errno_ = 0;
 }
 
 void pgsql_prepared_statement::set_error(string error, const uint32_t errno_val) noexcept {
-    last_error_ = _NEFORCE move(error);
+    last_error_ = move(error);
     last_errno_ = errno_val;
 }
 
@@ -136,7 +119,8 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const void* data
 }
 
 bool pgsql_prepared_statement::execute() {
-    clear_error();
+    last_error_.clear();
+    last_errno_ = 0;
 
     ::PGresult* result = ::PQexecPrepared(
         conn_, stmt_name_.data(), param_count_,
@@ -160,7 +144,8 @@ bool pgsql_prepared_statement::execute() {
 }
 
 unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
-    clear_error();
+    last_error_.clear();
+    last_errno_ = 0;
 
     ::PGresult* result = ::PQexecPrepared(
         conn_, stmt_name_.data(), param_count_,

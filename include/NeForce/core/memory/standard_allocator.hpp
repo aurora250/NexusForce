@@ -120,7 +120,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
         if (block_size <= bytes) {
-            throw_exception(memory_exception("invalid block size."));
+            NEFORCE_THROW_EXCEPTION(memory_exception("invalid block size."));
         }
         const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
@@ -371,9 +371,9 @@ public:
         try {
             return static_cast<T*>(_NEFORCE allocate<align_size>(alloc_size));
         } catch (...) {
-            throw_exception(allocate_exception("standard allocate failed"));
+            NEFORCE_THROW_EXCEPTION(allocate_exception("standard allocate failed"));
         }
-        NEFORCE_UNREACHABLE;
+        unreachable();
     }
 
     /**

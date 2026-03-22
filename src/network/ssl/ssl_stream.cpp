@@ -27,23 +27,23 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
         }
         case SSL_ERROR_ZERO_RETURN: {
             last_error_ = string(operation) + " connection closed";
-            throw_exception(ssl_exception("SSL connection closed cleanly"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("SSL connection closed cleanly"));
         }
         case SSL_ERROR_SYSCALL: {
             const unsigned long ssl_err = ::ERR_get_error();
             if (ssl_err == 0) {
                 if (ret == 0) {
                     last_error_ = string(operation) + " unexpected EOF";
-                    throw_exception(ssl_exception("Unexpected EOF in SSL operation"));
+                    NEFORCE_THROW_EXCEPTION(ssl_exception("Unexpected EOF in SSL operation"));
                 } else {
                     last_error_ = string(operation) + " system call error";
-                    throw_exception(ssl_exception("System call error in SSL operation"));
+                    NEFORCE_THROW_EXCEPTION(ssl_exception("System call error in SSL operation"));
                 }
             } else {
                 char buf[256];
                 ::ERR_error_string_n(ssl_err, buf, sizeof(buf));
                 last_error_ = string(operation) + " syscall error: " + buf;
-                throw_exception(ssl_exception(static_cast<int>(ssl_err)));
+                NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
             }
             break;
         }
@@ -52,24 +52,24 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
             char buf[256];
             ::ERR_error_string_n(ssl_err, buf, sizeof(buf));
             last_error_ = string(operation) + " SSL protocol error: " + buf;
-            throw_exception(ssl_exception(static_cast<int>(ssl_err)));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
             break;
         }
         default: {
             last_error_ = string(operation) + " unknown error";
-            throw_exception(ssl_exception(err));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(err));
         }
     }
 }
 
 void ssl_stream::reset(const ssl_context& ctx) {
     if (!ctx.is_valid()) {
-        throw_exception(ssl_exception("Invalid SSL context"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
 
     ssl_.reset(::SSL_new(ctx.native_handle()));
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL_new failed"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL_new failed"));
     }
 
     last_error_.clear();
@@ -77,21 +77,21 @@ void ssl_stream::reset(const ssl_context& ctx) {
 
 void ssl_stream::set_fd(const native_handle_type fd) {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL object not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
 
     if (fd == socket_base::invalid_handle) {
-        throw_exception(value_exception("Invalid file descriptor"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid file descriptor"));
     }
 
     if (::SSL_set_fd(ssl_.get(), static_cast<int>(fd)) != 1) {
-        throw_exception(ssl_exception("SSL_set_fd failed"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL_set_fd failed"));
     }
 }
 
 void ssl_stream::accept() {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL object not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
 
     const int ret = ::SSL_accept(ssl_.get());
@@ -102,7 +102,7 @@ void ssl_stream::accept() {
 
 bool ssl_stream::connect() {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL not initialized"));
     }
     SSL_set_connect_state(ssl_.get());
 
@@ -138,9 +138,9 @@ bool ssl_stream::connect() {
                 error_msg += " (Connection closed)";
                 break;
             }
-            default: NEFORCE_UNREACHABLE;
+            default: unreachable();
         }
-        throw_exception(ssl_exception(error_msg.data()));
+        NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
     }
 
     return true;
@@ -207,7 +207,7 @@ ssize_t ssl_stream::write(const void* buffer, const size_t size) {
 
 vector<char> ssl_stream::read_all(const size_t max_size) {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL object not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
     if (max_size == 0) {
         return vector<char>();
@@ -223,7 +223,7 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
         const ssize_t ret = read(temp, to_read);
 
         if (ret < 0) {
-            throw_exception(ssl_exception("Failed to read data"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to read data"));
         }
         if (ret == 0) {
             break;
@@ -281,11 +281,11 @@ int ssl_stream::pending() const {
 
 void ssl_stream::set_sni_hostname(const string& hostname) {
     if (!ssl_) {
-        throw_exception(ssl_exception("SSL object not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
 
     if (hostname.empty()) {
-        throw_exception(value_exception("Hostname cannot be null"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Hostname cannot be null"));
     }
 
     if (::SSL_set_tlsext_host_name(ssl_.get(), hostname.data()) != 1) {
@@ -295,7 +295,7 @@ void ssl_stream::set_sni_hostname(const string& hostname) {
 
         string error_msg = "SSL_set_tlsext_host_name failed: ";
         error_msg += buf;
-        throw_exception(ssl_exception(error_msg.data()));
+        NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
     }
 
 #if OPENSSL_VERSION_NUMBER >= 0x10002000L

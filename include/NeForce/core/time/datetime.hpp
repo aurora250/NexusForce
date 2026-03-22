@@ -369,7 +369,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr static date parse(const string_view view) {
         if (view.size() != 10 || view[4] != '-' || view[7] != '-') {
-            throw_exception(value_exception("Wrong string formation."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Wrong string formation."));
         }
         const date_type year = integer32::parse(view.substr(0, 4));
         const date_type month = integer32::parse(view.substr(5, 2));
@@ -644,7 +644,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr time parse(const string_view view) {
         if (view.size() != 8 || view[2] != ':' || view[5] != ':') {
-            throw_exception(value_exception("Wrong string formation."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Wrong string formation."));
         }
         const time_type hour = integer32::parse(view.substr(0, 2));
         const time_type minute = integer32::parse(view.substr(3, 2));
@@ -1198,7 +1198,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr datetime parse_ISO_UTC(const string_view view) {
         if (view.size() < 20 || view[10] != 'T') {
-            throw_exception(value_exception("Invalid ISO UTC datetime format."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ISO UTC datetime format."));
         }
 
         const _NEFORCE date d = date::parse(view.substr(0, 10));
@@ -1274,17 +1274,17 @@ public:
      */
     NEFORCE_NODISCARD static constexpr datetime parse_GMT(string_view view) {
         if (view.size() < 29) {
-            throw_exception(value_exception("Invalid date length."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid date length."));
         }
         if (view.substr(3, 2) != ", ") {
-            throw_exception(value_exception("Invalid date format"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid date format"));
         }
 
         view.remove_prefix(5);
         const int day = integer32::parse(view.substr(0, 2));
         view.remove_prefix(3);
         const int mon = months_to_int(view.substr(0, 3));
-        if (mon == 0) throw_exception(value_exception("Invalid month in date"));
+        if (mon == 0) NEFORCE_THROW_EXCEPTION(value_exception("Invalid month in date"));
         view.remove_prefix(4);
         const int year = integer32::parse(view.substr(0, 4));
         view.remove_prefix(5);
@@ -1296,7 +1296,7 @@ public:
         view.remove_prefix(3);
 
         if (view != "GMT") {
-            throw_exception(value_exception("Invalid timezone in date"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid timezone in date"));
         }
         return datetime(year, mon, day, hour, minute, second);
     }
@@ -1332,7 +1332,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr datetime parse_ISO(const string_view view) {
         if (view.size() < 19 || view[10] != 'T') {
-            throw_exception(value_exception("Invalid ISO datetime format."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ISO datetime format."));
         }
         const _NEFORCE date d = _NEFORCE date::parse(view.substr(0, 10));
         size_t time_len = 8;
@@ -1374,7 +1374,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr datetime parse(const string_view view) {
         if (view.size() != 19 || view[10] != ' ') {
-            throw_exception(value_exception("Wrong string formation."));
+            NEFORCE_THROW_EXCEPTION(value_exception("Wrong string formation."));
         }
         const _NEFORCE date d = date::parse(view.substr(0, 10));
         const _NEFORCE time t = time::parse(view.substr(11, 8));

@@ -315,7 +315,7 @@ private:
             _NEFORCE construct(&n->data, _NEFORCE forward<Args>(args)...);
         } catch (...) {
             hashtable::delete_node(n);
-            throw_exception(memory_exception("hashtable construct node failed."));
+            NEFORCE_THROW_EXCEPTION(memory_exception("hashtable construct node failed."));
         }
         return n;
     }
@@ -883,7 +883,7 @@ public:
 
         const size_type n = hashtable::next_size(target);
         if (n < target) {
-            throw_exception(value_exception("hashtable size exceeds max count"));
+            NEFORCE_THROW_EXCEPTION(value_exception("hashtable size exceeds max count"));
         }
 
         vector<link_type> new_buckets(n, nullptr);
@@ -918,7 +918,7 @@ public:
             _NEFORCE ceil(static_cast<double>(n) / max_load_factor()));
 
         if (needed > static_cast<float>(buckets_max_size())) {
-            throw_exception(value_exception("hashtable size exceeds max count"));
+            NEFORCE_THROW_EXCEPTION(value_exception("hashtable size exceeds max count"));
         }
         rehash(static_cast<size_type>(needed));
     }

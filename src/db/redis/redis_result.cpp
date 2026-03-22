@@ -3,41 +3,65 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-_NEFORCE string redis_result::format_redis_reply_element(::redisReply* element) {
-    switch (element->type) {
-        case REDIS_REPLY_STRING:
-        case REDIS_REPLY_STATUS:
-        case REDIS_REPLY_ERROR:
-            return {element->str, element->len};
-        case REDIS_REPLY_INTEGER:
-            return _NEFORCE to_string(element->integer);
-        case REDIS_REPLY_NIL:
-            return {};
-        case REDIS_REPLY_ARRAY: {
-            string result;
-            for (size_t i = 0; i < element->elements; ++i) {
-                if (i > 0) result += " ";
-                result += format_redis_reply_element(element->element[i]);
+namespace {
+    string format_redis_reply_element(::redisReply* element) {
+        switch (element->type) {
+            case REDIS_REPLY_STRING:
+            case REDIS_REPLY_STATUS:
+            case REDIS_REPLY_ERROR:
+                return {element->str, element->len};
+            case REDIS_REPLY_INTEGER:
+                return _NEFORCE to_string(element->integer);
+            case REDIS_REPLY_NIL:
+                return {};
+            case REDIS_REPLY_ARRAY: {
+                string result;
+                for (size_t i = 0; i < element->elements; ++i) {
+                    if (i > 0) result += " ";
+                    result += format_redis_reply_element(element->element[i]);
+                }
+                return result;
             }
-            return result;
+            default: {
+                return "unsupported-type";
+            }
         }
-        default:
-            return "unsupported-type";
     }
 }
 
-void redis_result::process_reply() {
-    if (!reply_) return;
 
-    switch (reply_->type) {
+string redis_result::get_string() const {
+    if (empty()) return {};
+
+    if (!kv_pairs_->empty() && kv_cursor_ > 0) {
+        return string(value());
+    }
+    if (is_array_ && cursor_ > 0) {
+        ::redisReply* element = result_->element[cursor_ - 1];
+        return format_redis_reply_element(element);
+    }
+    return format_redis_reply_element(result_);
+}
+
+redis_result::redis_result() noexcept
+: column_names_(make_unique<vector<string>>()),
+  kv_pairs_(make_unique<vector<pair<string, string>>>()){}
+
+redis_result::redis_result(::redisReply* reply) noexcept
+: result_(reply),
+  column_names_(make_unique<vector<string>>()),
+  kv_pairs_(make_unique<vector<pair<string, string>>>()) {
+    if (!result_) return;
+
+    switch (result_->type) {
         case REDIS_REPLY_ARRAY: {
             is_array_ = true;
-            rows_ = reply_->elements;
+            rows_ = result_->elements;
 
             if (rows_ % 2 == 0) {
                 for (size_t i = 0; i < rows_; i += 2) {
-                    const string key = format_redis_reply_element(reply_->element[i]);
-                    const string value = format_redis_reply_element(reply_->element[i + 1]);
+                    const string key = format_redis_reply_element(result_->element[i]);
+                    const string value = format_redis_reply_element(result_->element[i + 1]);
                     kv_pairs_->emplace_back(_NEFORCE move(key), _NEFORCE move(value));
                 }
                 rows_ = kv_pairs_->size();
@@ -46,11 +70,13 @@ void redis_result::process_reply() {
             }
             break;
         }
-        case REDIS_REPLY_STRING: case REDIS_REPLY_STATUS:
-        case REDIS_REPLY_ERROR: case REDIS_REPLY_INTEGER: {
+        case REDIS_REPLY_STRING:
+        case REDIS_REPLY_STATUS:
+        case REDIS_REPLY_ERROR:
+        case REDIS_REPLY_INTEGER: {
             rows_ = 1;
             column_names_->push_back("result");
-            string value = format_redis_reply_element(reply_);
+            string value = format_redis_reply_element(result_);
             kv_pairs_->emplace_back("", _NEFORCE move(value));
             break;
         }
@@ -66,17 +92,10 @@ void redis_result::process_reply() {
     }
 }
 
-string redis_result::get_string() const {
-    if (empty()) return {};
-
-    if (!kv_pairs_->empty() && kv_cursor_ > 0) {
-        return string(value());
+redis_result::~redis_result() {
+    if (result_) {
+        ::freeReplyObject(result_);
     }
-    if (is_array_ && cursor_ > 0) {
-        ::redisReply* element = reply_->element[cursor_ - 1];
-        return format_redis_reply_element(element);
-    }
-    return format_redis_reply_element(reply_);
 }
 
 bool redis_result::next() noexcept {
@@ -101,9 +120,9 @@ bool redis_result::value_bool() const {
 }
 
 int64_t redis_result::value_int64() const {
-    if (!reply_) return 0;
-    if (reply_->type == REDIS_REPLY_INTEGER) {
-        return reply_->integer;
+    if (!result_) return 0;
+    if (result_->type == REDIS_REPLY_INTEGER) {
+        return result_->integer;
     }
     return integer64::parse(get_string().view());
 }
@@ -114,9 +133,9 @@ double redis_result::value_double() const {
 
 vector<string> redis_result::value_array() const {
     vector<string> result;
-    if (reply_ && reply_->type == REDIS_REPLY_ARRAY) {
-        for (size_t i = 0; i < reply_->elements; ++i) {
-            string value = format_redis_reply_element(reply_->element[i]);
+    if (result_ && result_->type == REDIS_REPLY_ARRAY) {
+        for (size_t i = 0; i < result_->elements; ++i) {
+            string value = format_redis_reply_element(result_->element[i]);
             result.push_back(_NEFORCE move(value));
         }
     }

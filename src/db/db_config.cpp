@@ -1,5 +1,4 @@
 #include <NeForce/db/db_config.hpp>
-#ifdef NEFORCE_SUPPORT_DB
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
@@ -42,4 +41,3 @@ db_config db_config::for_redis(const string& db) {
 #endif
 
 NEFORCE_END_NAMESPACE__
-#endif

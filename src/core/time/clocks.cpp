@@ -43,52 +43,60 @@ void sleep_for_aux(const ssize_t s, const ssize_t ns) {
 NEFORCE_END_INNER__
 
 system_clock::time_point system_clock::now() noexcept {
+    try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::FILETIME ft;
-    ::GetSystemTimePreciseAsFileTime(&ft);
-    const uint64_t file_time = static_cast<uint64_t>(ft.dwHighDateTime) << 32 | ft.dwLowDateTime;
-    constexpr uint64_t unix_epoch_offset = 116444736000000000ULL;
+        ::FILETIME ft;
+        ::GetSystemTimePreciseAsFileTime(&ft);
+        const uint64_t file_time = static_cast<uint64_t>(ft.dwHighDateTime) << 32 | ft.dwLowDateTime;
+        constexpr uint64_t unix_epoch_offset = 116444736000000000ULL;
 
-    const uint64_t ticks_since_unix_epoch = file_time - unix_epoch_offset;
-    const uint64_t nanos = ticks_since_unix_epoch * 100;
-    rep total_nanos = static_cast<rep>(nanos);
+        const uint64_t ticks_since_unix_epoch = file_time - unix_epoch_offset;
+        const uint64_t nanos = ticks_since_unix_epoch * 100;
+        rep total_nanos = static_cast<rep>(nanos);
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    ::timespec ts{};
-    ::clock_gettime(CLOCK_REALTIME, &ts);
+        ::timespec ts{};
+        ::clock_gettime(CLOCK_REALTIME, &ts);
 
-    using rep = system_clock::rep;
-    const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
+        using rep = system_clock::rep;
+        const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
 #endif
-    return time_point(duration(total_nanos));
+        return time_point(duration(total_nanos));
+    } catch (...) {
+        return time_point();
+    }
 }
 
 steady_clock::time_point steady_clock::now() noexcept {
+    try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::LARGE_INTEGER count;
-    ::QueryPerformanceCounter(&count);
+        ::LARGE_INTEGER count;
+        ::QueryPerformanceCounter(&count);
 
-    static const ::LARGE_INTEGER freq = []() {
-        ::LARGE_INTEGER f;
-        ::QueryPerformanceFrequency(&f);
-        return f;
-    }();
+        static const ::LARGE_INTEGER freq = []() {
+            ::LARGE_INTEGER f;
+            ::QueryPerformanceFrequency(&f);
+            return f;
+        }();
 
-    using rep = steady_clock::rep;
-    const rep ticks = static_cast<rep>(count.QuadPart);
-    const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
-    const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
-    rep total_nanos = ticks * nanos_per_tick + (ticks * remainder) / static_cast<rep>(freq.QuadPart);
+        using rep = steady_clock::rep;
+        const rep ticks = static_cast<rep>(count.QuadPart);
+        const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
+        const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
+        rep total_nanos = ticks * nanos_per_tick + (ticks * remainder) / static_cast<rep>(freq.QuadPart);
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    ::timespec ts{};
-    ::clock_gettime(CLOCK_MONOTONIC, &ts);
+        ::timespec ts{};
+        ::clock_gettime(CLOCK_MONOTONIC, &ts);
 
-    using rep = steady_clock::rep;
-    const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
+        using rep = steady_clock::rep;
+        const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
 #endif
-    return time_point(duration(total_nanos));
+        return time_point(duration(total_nanos));
+    } catch (...) {
+        return time_point();
+    }
 }
 
-milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_monotonic) {
+milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_monotonic) noexcept {
     const nanoseconds abs_ns = seconds(sec) + nanoseconds(nsec);
 
     nanoseconds diff_ns;

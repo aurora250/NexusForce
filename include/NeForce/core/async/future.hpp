@@ -151,7 +151,7 @@ constexpr const char* future_errc_cstr(const future_errc code) {
             return "broken_promise";
         }
         default: {
-            NEFORCE_UNREACHABLE;
+            unreachable();
         }
     }
 }
@@ -425,7 +425,7 @@ struct __future_base {
             if (did_set) {
                 status.store_notify_all(status::ready, memory_order_release);
             } else if (!ignore_failure) {
-                throw_exception(future_exception(future_errc_cstr(future_errc::promise_already_satisfied)));
+                NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::promise_already_satisfied)));
             }
         }
 
@@ -444,7 +444,7 @@ struct __future_base {
             function<PtrType()> func = _NEFORCE forward<Callable>(result_func);
             call_once(flag, &state_base::do_set, this, _NEFORCE addressof(func), _NEFORCE addressof(did_set));
             if (!did_set) {
-                throw_exception(future_exception(future_errc_cstr(future_errc::promise_already_satisfied)));
+                NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::promise_already_satisfied)));
             }
             mr->shared_state = _NEFORCE move(self);
             mr->set();
@@ -471,7 +471,7 @@ struct __future_base {
          */
         void set_retrieved_flag() {
             if (retrieved.test_and_set(memory_order_acquire)) {
-                throw_exception(future_exception(future_errc_cstr(future_errc::future_already_retrieved)));
+                NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::future_already_retrieved)));
             }
         }
 
@@ -577,7 +577,7 @@ struct __future_base {
         template <typename T>
         static void check(const shared_ptr<T>& ptr) {
             if (!static_cast<bool>(ptr)) {
-                throw_exception(future_exception(future_errc_cstr(future_errc::no_state)));
+                NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::no_state)));
             }
         }
 

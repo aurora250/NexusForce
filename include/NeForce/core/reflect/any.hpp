@@ -109,13 +109,15 @@ public:
     template <typename T>
     T& get() {
         if (auto* ptr = cast<T>()) return *ptr;
-        throw_exception(typecast_exception("Not a valid type"));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
+        unreachable();
     }
 
     template <typename T>
     const T& get() const {
         if (auto* ptr = cast<T>()) return *ptr;
-        throw_exception(typecast_exception("Not a valid type"));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
+        unreachable();
     }
 
     template <typename T>
@@ -126,7 +128,8 @@ public:
     template <typename T>
     T convert() const {
         if (auto* ptr = cast<T>()) return *ptr;
-        throw_exception(typecast_exception("Not a valid type"));
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
+        unreachable();
     }
 };
 

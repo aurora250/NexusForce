@@ -586,14 +586,14 @@ NEFORCE_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos) {
                 result += '{';
                 pos += 2;
             } else {
-                throw_exception(value_exception("Not enough arguments for format string"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Not enough arguments for format string"));
             }
         } else if (fmt[pos] == '}') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '}') {
                 result += '}';
                 pos += 2;
             } else {
-                throw_exception(value_exception("Unmatched '}' in format string"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '}' in format string"));
             }
         } else {
             result += fmt[pos];
@@ -636,7 +636,7 @@ NEFORCE_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First
                 if (depth > 0) ++end_pos;
             }
             if (depth != 0) {
-                throw_exception(value_exception("Unmatched '{' in format string"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '{' in format string"));
             }
 
             const string_view spec_str = fmt.substr(pos, end_pos - pos);
@@ -657,7 +657,7 @@ NEFORCE_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First
                 result += '}';
                 pos += 2;
             } else {
-                throw_exception(value_exception("Unmatched '}' in format string"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '}' in format string"));
             }
         } else {
             result += fmt[pos];

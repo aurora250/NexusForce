@@ -2,6 +2,47 @@
 #define NEFORCE_CORE_CONFIG_CPPCONFIG_HPP__
 
 /**
+ * @mainpage 首页
+ *
+ * @section intro 简介
+ *
+ * 本项目旨在建立功能健全、风格统一、可读性强、社区共建、跨平台兼容的现代C++开发库。
+ * 通过清晰的架构设计、规范的代码实现、丰富的设计模式应用， 为项目开发提供实用的工具集，
+ * 同时也为C++学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
+ *
+ * 有劳各位多多issue，使本项目趋于健全。如有不足，还望斧正。
+ *
+ * 本库使用IO设备时默认您的操作系统字符集为UTF-8，如不是，请尝试设置，否则可能乱码。
+ *
+ * @section environment 支持环境
+ *
+ *
+ * | 平台        | 指令集 | 位宽  | 编译器   | C++标准 |
+ * |-----------|-----|-----|-------|-------|
+ * | WINDOWS   | X86 | 32位 | MSVC  | 14    |
+ * | LINUX     |     | 64位 | MinGW | 17    |
+ * |           |     |      | GCC   | 20    |
+ * |           |     |      | CLANG |       |
+ *
+ *
+ * @section dependency 前置依赖
+ *
+ * - CMake 3.19+
+ * - 可选依赖：
+ *   - PostGreSQL
+ *   - MySQL
+ *   - SQLite3
+ *   - hiredis
+ *   - zlib
+ *   - OpenSSL
+ *   - pcre2
+ *
+ * @section license 开源协议
+ *
+ * 本项目基于 MIT 开源协议。
+ */
+
+/**
  * @file c++config.hpp
  * @brief 核心配置
  *
@@ -10,7 +51,6 @@
  * 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
  */
 
-#include "NeForce/core/config/mainpage.hpp"
 #include <assert.h>
 
 /**
@@ -691,15 +731,6 @@
 #endif
 
 
-#ifdef NEFORCE_COMPILER_GNUC
-    #define NEFORCE_UNREACHABLE __builtin_unreachable()
-#elif defined(NEFORCE_COMPILER_MSVC)
-    #define NEFORCE_UNREACHABLE __assume(false)
-#else
-    #define NEFORCE_UNREACHABLE ((void)0)
-#endif
-
-
 #define NEFORCE_MACRO_RANGE_BASIC_CHARS(MAC) \
 	MAC(char) \
 	MAC(signed char) \
@@ -787,11 +818,51 @@
 #endif
 
 
+NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @brief 标记不可达代码路径
+ *
+ * 该函数用于向编译器指示当前代码路径永远不会被执行。当编译器遇到此调用时，
+ * 可以进行激进的优化，假设此后的代码永远不会运行。如果实际执行到了此函数，
+ * 将导致未定义行为（通常是程序崩溃或产生不可预测的结果）。
+ *
+ * @note 此函数永远不会返回，调用后程序行为未定义。
+ * @warning 仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。
+ */
+NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE
+void unreachable() noexcept {
+#ifdef NEFORCE_COMPILER_GNUC
+    __builtin_unreachable();
+#else
+    __assume(false);
+#endif
+}
+
+#ifdef NEFORCE_STANDARD_17
+
+/**
+ * @brief 检查当前上下文是否在常量求值中
+ * @return 如果在常量求值上下文中返回true，否则返回false
+ *
+ * 用于区分编译时和运行时
+ */
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE
+constexpr bool is_constant_evaluated() noexcept {
+    return __builtin_is_constant_evaluated();
+}
+
+#endif
+
+NEFORCE_END_NAMESPACE__
+
+
 #if defined(NEFORCE_STANDARD_20)
 #define NEFORCE_CONSTEXPR_ASSERT(COND) \
 do { \
-    if (__builtin_is_constant_evaluated() && !bool(COND)) \
-        NEFORCE_UNREACHABLE; \
+    if (is_constant_evaluated() && !bool(COND)) { \
+        unreachable(); \
+    } \
 } while (false);
 #else
 #define NEFORCE_CONSTEXPR_ASSERT(COND)

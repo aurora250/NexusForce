@@ -2,9 +2,6 @@
 #define NEFORCE_DATABASE_MYSQL_PREPARED_STATEMENT_HPP__
 #ifdef NEFORCE_SUPPORT_MYSQL
 #include "NeForce/db/db_interface.hpp"
-#ifdef CR_OUT_OF_MEMORY
-#undef CR_OUT_OF_MEMORY
-#endif
 #include <mysql/mysql.h>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -17,20 +14,8 @@ private:
     vector<::MYSQL_BIND> bind_params_;
     vector<vector<char>> param_buffers_;
 
-    NEFORCE_ALWAYS_INLINE void throw_if_stmt_null() const {
-        if (!stmt_) {
-            throw_exception(database_prepared_stmt_exception("Prepared statement not initialized"));
-        }
-    }
-
 public:
-    explicit mysql_prepared_statement(::MYSQL* conn, string_view sql);
-
-    explicit mysql_prepared_statement(::MYSQL* conn, const string& sql)
-    : mysql_prepared_statement(conn, sql.view()) {}
-
-    explicit mysql_prepared_statement(::MYSQL* conn, const char* sql)
-   : mysql_prepared_statement(conn, string_view{sql}) {}
+    mysql_prepared_statement(::MYSQL* conn, string_view sql);
 
     mysql_prepared_statement(mysql_prepared_statement&& other) noexcept;
     mysql_prepared_statement& operator =(mysql_prepared_statement&& other) noexcept;
@@ -55,8 +40,6 @@ public:
 
     NEFORCE_NODISCARD string_view get_error() const noexcept override;
     NEFORCE_NODISCARD uint32_t get_errno() const noexcept override;
-
-    void swap(mysql_prepared_statement& other) noexcept;
 };
 
 NEFORCE_END_NAMESPACE__

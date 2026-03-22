@@ -7,35 +7,20 @@ NEFORCE_BEGIN_NAMESPACE__
 
 struct NEFORCE_API redis_connect final : idb_kv_connect {
 private:
-    ::redisContext* context_ = nullptr;
-    clock_type alive_time_ = 0;
+    ::redisContext* link_ = nullptr;
     mutable string last_error_{};
 
     ::redisReply* execute_command(string_view command, const vector<string_view>& args = {}) const;
     bool authenticate(const string& password) const;
     bool select_database(const string& db_index) const;
-    bool connect_to_host(const string& host, uint16_t port, const string& password, const string& dbname);
 
 public:
     redis_connect() = default;
     ~redis_connect() override { close(); }
 
-    bool connect_to(const string&, const string& password,
-        const string& dbname, const string& host,
-        const uint32_t port, const string&) override {
-        return connect_to_host(host, port, password, dbname);
-    }
-
-    bool connect_to(const db_config& config) override {
-        return connect_to_host(
-            config.host,
-            config.port,
-            config.password,
-            config.database
-            );
-    }
-
-    bool reset_connect(const db_config& config) override;
+    bool connect(const db_config& config) override;
+    bool reconnect(const db_config& config) override;
+    void close() noexcept override;
 
     NEFORCE_DEPRECATED_FOR("Redis not support setting character sets")
     bool set_character_set(const string&) const noexcept override { return false; }
@@ -44,17 +29,13 @@ public:
     string_view get_character_set() const noexcept override { return ""; }
 
     string_view get_error() const noexcept override;
-    uint32_t get_errno() const noexcept override { return context_ ? context_->err : 0; }
+    uint32_t get_errno() const noexcept override { return link_ ? link_->err : 0; }
 
     bool update(const string& sql) const noexcept override;
     unique_ptr<idb_kv_result> query(const string& sql) const override;
 
-    bool connected() const noexcept override { return context_ != nullptr && !context_->err; }
+    bool connected() const noexcept override { return link_ != nullptr && !link_->err; }
     bool is_valid() const noexcept override;
-
-    void close() noexcept override;
-    void refresh_alive() noexcept override { alive_time_ = std::clock(); }
-    clock_type get_alive() const noexcept override { return std::clock() - alive_time_; }
 
     bool set(const string& key, const string& value) override;
     bool setex(const string& key, const string& value, int seconds) override;

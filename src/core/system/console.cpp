@@ -328,7 +328,7 @@ sys_console::sys_console()
     in_ = ::GetStdHandle(STD_INPUT_HANDLE);
 
     if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
-        throw_exception(console_exception("Failed to get console handles"));
+        NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console handles"));
     }
 
     ::SetConsoleOutputCP(CP_UTF8);
@@ -439,14 +439,14 @@ string sys_console::password(const string_view prompt, const char mask, const bo
 
     ::DWORD original_mode = 0;
     if (!::GetConsoleMode(in_, &original_mode)) {
-        throw_exception(console_exception("Failed to get console mode"));
+        NEFORCE_THROW_EXCEPTION(console_exception("Failed to get console mode"));
     }
     ::DWORD new_mode = original_mode;
     new_mode &= ~ENABLE_ECHO_INPUT;
     new_mode &= ~ENABLE_LINE_INPUT;
     new_mode |= ENABLE_PROCESSED_INPUT;
     if (!::SetConsoleMode(in_, new_mode)) {
-        throw_exception(console_exception("Failed to set console mode"));
+        NEFORCE_THROW_EXCEPTION(console_exception("Failed to set console mode"));
     }
 
     try {
@@ -483,7 +483,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
             } else if (ch == '\x03') {
                 print_string_unsafe("^C\n");
                 ::SetConsoleMode(in_, original_mode);
-                throw_exception(console_exception("Interrupted by user"));
+                NEFORCE_THROW_EXCEPTION(console_exception("Interrupted by user"));
             } else if (ch == '\x00' || ch == '\xe0') {
                 ::ReadConsoleA(in_, &ch, 1, &read, nullptr);
                 continue;
@@ -548,7 +548,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
                 }
             } else if (ch == '\x03') {
                 print_string_unsafe("^C\n");
-                throw_exception(console_exception("Interrupted by user"));
+                NEFORCE_THROW_EXCEPTION(console_exception("Interrupted by user"));
             } else if (ch == '\x15') {
                 while (!password.empty()) {
                     password.pop_back();

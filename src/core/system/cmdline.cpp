@@ -25,13 +25,13 @@ void cmdline::add_option(const string& long_name, const char short_name,
     const string& description, const bool requires_value,
     const bool allow_multiple, const string& default_value) {
     if (long_name.empty() && short_name == 0) {
-        throw_exception(cmdline_exception("Option must have at least one name"));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception("Option must have at least one name"));
     }
     if (!long_name.empty() && options_long_.count(long_name)) {
-        throw_exception(cmdline_exception(("Duplicate long option: " + long_name).data()));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate long option: " + long_name).data()));
     }
     if (short_name != 0 && options_short_.count(short_name)) {
-        throw_exception(cmdline_exception(("Duplicate short option: "_s + short_name).data()));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Duplicate short option: "_s + short_name).data()));
     }
 
     const option opt(long_name, short_name, description, requires_value, allow_multiple, default_value);
@@ -89,7 +89,7 @@ string cmdline::get(const string& long_name, const size_t index) const {
         if (!it->second->default_value.empty()) {
             return it->second->default_value;
         }
-        throw_exception(cmdline_exception(("Option not found or no value: " + long_name).data()));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found or no value: " + long_name).data()));
     }
     return it->second->values[index];
 }
@@ -153,7 +153,7 @@ _NEFORCE vector<string> cmdline::get_os_argv() {
     int argc = 0;
     ::LPWSTR* argv_wide = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
     if (!argv_wide) {
-        throw_exception(cmdline_exception("CommandLineToArgvW failed"));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception("CommandLineToArgvW failed"));
     }
     for (int i = 0; i < argc; ++i) {
         args.push_back(_NEFORCE to_string(argv_wide[i]));
@@ -162,13 +162,13 @@ _NEFORCE vector<string> cmdline::get_os_argv() {
 #else
     file cmdline_file(path{"/proc/self/cmdline"});
     if (!cmdline_file.is_opened()) {
-        throw_exception(cmdline_exception("Failed to open /proc/self/cmdline"));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception("Failed to open /proc/self/cmdline"));
     }
 
     string buffer(MEMORY_BIG_ALLOC_THRESHHOLD, '\0');
     const size_t bytes_read = cmdline_file.read_binary(buffer, buffer.size());
     if (bytes_read == 0) {
-        throw_exception(cmdline_exception("No data read from /proc/self/cmdline"));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception("No data read from /proc/self/cmdline"));
     }
 
     size_t start = 0;
@@ -203,7 +203,7 @@ void cmdline::parse_long_option(const string& arg, const _NEFORCE vector<string>
 
     option* opt = find_option_long(name);
     if (!opt) {
-        throw_exception(cmdline_exception(("Unknown option: " + arg).data()));
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unknown option: " + arg).data()));
     }
 
     if (opt->requires_value) {
@@ -213,7 +213,7 @@ void cmdline::parse_long_option(const string& arg, const _NEFORCE vector<string>
         }
         else {
             if (index + 1 >= args.size()) {
-                throw_exception(cmdline_exception(("Option requires a value: --" + name).data()));
+                NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option requires a value: --" + name).data()));
             }
             value = args[++index];
         }
@@ -243,13 +243,13 @@ void cmdline::parse_short_options(const string& arg, const _NEFORCE vector<strin
         option* opt = find_option_short(short_name);
 
         if (!opt) {
-            throw_exception(cmdline_exception(("Unknown short option: -"_s + short_name).data()));
+            NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unknown short option: -"_s + short_name).data()));
         }
 
         if (opt->requires_value) {
             if (j == arg.size() - 1) {
                 if (index + 1 >= args.size()) {
-                    throw_exception(cmdline_exception(("Option requires a value: -"_s + short_name).data()));
+                    NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option requires a value: -"_s + short_name).data()));
                 }
                 const string value = args[++index];
                 if (opt->allow_multiple) {

@@ -27,7 +27,7 @@ namespace {
 
     byte_vector encode_domain_name(const string_view domain) {
         if (domain.empty() || domain.length() > 253) {
-            throw_exception(dns_exception("Invalid domain name length"));
+            NEFORCE_THROW_EXCEPTION(dns_exception("Invalid domain name length"));
         }
 
         byte_vector encoded;
@@ -39,7 +39,7 @@ namespace {
         while ((pos = domain.find('.', start)) != string::npos) {
             const auto len = pos - start;
             if (len == 0 || len > 63) {
-                throw_exception(dns_exception("Invalid label length in domain name"));
+                NEFORCE_THROW_EXCEPTION(dns_exception("Invalid label length in domain name"));
             }
             encoded.push_back(static_cast<byte_t>(len));
             encoded.insert(encoded.end(), domain.begin() + start, domain.begin() + pos);
@@ -49,7 +49,7 @@ namespace {
         if (start < domain.length()) {
             const auto len = domain.length() - start;
             if (len == 0 || len > 63) {
-                throw_exception(dns_exception("Invalid label length in domain name"));
+                NEFORCE_THROW_EXCEPTION(dns_exception("Invalid label length in domain name"));
             }
             encoded.push_back(static_cast<byte_t>(len));
             encoded.insert(encoded.end(), domain.begin() + start, domain.end());
@@ -105,7 +105,7 @@ namespace {
 
             if ((len & 0xC0) == 0xC0) {
                 if (offset + 1 >= data.size()) {
-                    throw_exception(dns_exception::parse_error("Invalid pointer in domain name"));
+                    NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid pointer in domain name"));
                 }
 
                 if (!jumped) {
@@ -114,14 +114,14 @@ namespace {
 
                 const uint16_t pointer = ((len & 0x3F) << 8) | data[offset + 1];
                 if (pointer >= data.size()) {
-                    throw_exception(dns_exception::parse_error("Pointer exceeds buffer"));
+                    NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Pointer exceeds buffer"));
                 }
 
                 offset = pointer;
                 jumped = true;
 
                 if (++jumps > max_jumps) {
-                    throw_exception(dns_exception::parse_error("Too many jumps in domain name"));
+                    NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Too many jumps in domain name"));
                 }
                 continue;
             }
@@ -132,10 +132,10 @@ namespace {
             }
 
             if (len > 63) {
-                throw_exception(dns_exception::parse_error("Invalid label length"));
+                NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid label length"));
             }
             if (offset + 1 + len > data.size()) {
-                throw_exception(dns_exception::parse_error("Domain name exceeds buffer"));
+                NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Domain name exceeds buffer"));
             }
 
             if (!name.empty()) {
@@ -143,7 +143,7 @@ namespace {
             }
 
             if (name.length() + len + 1 > max_name_length) {
-                throw_exception(dns_exception::parse_error("Domain name too long"));
+                NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Domain name too long"));
             }
 
             name.append(reinterpret_cast<const char*>(&data[offset + 1]), len);
@@ -159,12 +159,12 @@ namespace {
 
     string parse_a_record(const byte_vector& rdata) {
         if (rdata.size() != 4) {
-            throw_exception(dns_exception::parse_error("Invalid A record length"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid A record length"));
         }
 
         char ip[INET_ADDRSTRLEN];
         if (::inet_ntop(AF_INET, rdata.data(), ip, INET_ADDRSTRLEN) == nullptr) {
-            throw_exception(dns_exception::parse_error("Failed to parse A record"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Failed to parse A record"));
         }
 
         return {ip};
@@ -172,12 +172,12 @@ namespace {
 
     string parse_aaaa_record(const byte_vector& rdata) {
         if (rdata.size() != 16) {
-            throw_exception(dns_exception::parse_error("Invalid AAAA record length"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid AAAA record length"));
         }
 
         char ip[INET6_ADDRSTRLEN];
         if (::inet_ntop(AF_INET6, rdata.data(), ip, INET6_ADDRSTRLEN) == nullptr) {
-            throw_exception(dns_exception::parse_error("Failed to parse AAAA record"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Failed to parse AAAA record"));
         }
 
         return {ip};
@@ -185,10 +185,10 @@ namespace {
 
     string parse_mx_record(const byte_vector& data, size_t offset, const uint16_t rdlength) {
         if (rdlength < 2) {
-            throw_exception(dns_exception::parse_error("Invalid MX record length"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid MX record length"));
         }
         if (offset + 2 > data.size()) {
-            throw_exception(dns_exception::parse_error("MX record exceeds buffer"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("MX record exceeds buffer"));
         }
 
         const auto preference = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(&data[offset]));
@@ -206,7 +206,7 @@ namespace {
             const byte_t len = rdata[offset++];
 
             if (offset + len > rdata.size()) {
-                throw_exception(dns_exception::parse_error("Invalid TXT record"));
+                NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid TXT record"));
             }
 
             result.append(reinterpret_cast<const char*>(&rdata[offset]), len);
@@ -221,7 +221,7 @@ namespace {
         record.name = decode_domain_name(data, offset);
 
         if (offset + 10 > data.size()) {
-            throw_exception(dns_exception::parse_error("Incomplete resource record"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Incomplete resource record"));
         }
 
         record.type = static_cast<DNS_RECORD>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
@@ -237,7 +237,7 @@ namespace {
         offset += 2;
 
         if (offset + rdlength > data.size()) {
-            throw_exception(dns_exception::parse_error("RDATA exceeds buffer"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("RDATA exceeds buffer"));
         }
 
         byte_vector rdata(data.begin() + offset, data.begin() + offset + rdlength);
@@ -286,7 +286,7 @@ namespace {
 
     dns_query_result parse_dns_response(const byte_vector& response) {
         if (response.size() < sizeof(dns_header)) {
-            throw_exception(dns_exception::parse_error("Response too short"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Response too short"));
         }
 
         dns_query_result result;
@@ -309,7 +309,7 @@ namespace {
         for (uint16_t i = 0; i < header.qdcount; ++i) {
             decode_domain_name(response, offset);
             if (offset + 4 > response.size()) {
-                throw_exception(dns_exception::parse_error("Question section exceeds buffer"));
+                NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Question section exceeds buffer"));
             }
             offset += 4;
         }
@@ -344,17 +344,17 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
     if (!tls_udp_socket.is_open()) {
         tls_udp_socket.open();
         if (!tls_udp_socket.is_open()) {
-            throw_exception(dns_exception::network_error("Failed to create UDP socket"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create UDP socket"));
         }
     }
 
     if (!tls_udp_socket.set_receive_timeout(config_.timeout)) {
-        throw_exception(dns_exception::network_error("Failed to set socket timeout"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to set socket timeout"));
     }
 
     const auto endpoint = ip_address::parse(config_.server, config_.port);
     if (!endpoint) {
-        throw_exception(dns_exception::network_error("Invalid DNS server address"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Invalid DNS server address"));
     }
 
     const ssize_t sent = tls_udp_socket.send_to(
@@ -365,7 +365,7 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
         *endpoint);
 
     if (sent < 0 || static_cast<size_t>(sent) != query.size()) {
-        throw_exception(dns_exception::network_error("Failed to send UDP query"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to send UDP query"));
     }
 
     byte_vector buffer(512);
@@ -373,10 +373,10 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
         memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
 
     if (received.first < 0) {
-        throw_exception(dns_exception::timeout());
+        NEFORCE_THROW_EXCEPTION(dns_exception::timeout());
     }
     if (received.first == 0) {
-        throw_exception(dns_exception::network_error("Empty response received"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Empty response received"));
     }
 
     buffer.resize(received.first);
@@ -395,18 +395,18 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         tls_tcp_state.socket.open();
 
         if (!tls_tcp_state.socket.is_open()) {
-            throw_exception(dns_exception::network_error("Failed to create TCP socket"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create TCP socket"));
         }
         if (!tls_tcp_state.socket.set_receive_timeout(config_.timeout) ||
             !tls_tcp_state.socket.set_send_timeout(config_.timeout)) {
             tls_tcp_state.socket.close();
-            throw_exception(dns_exception::network_error("Failed to set socket timeout"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to set socket timeout"));
         }
 
         const auto endpoint = ip_address::parse(config_.server, config_.port);
         if (!endpoint) {
             tls_tcp_state.socket.close();
-            throw_exception(dns_exception::network_error("Invalid DNS server address"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Invalid DNS server address"));
         }
 
         tls_tcp_state.socket.connect(*endpoint);
@@ -447,21 +447,21 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         try {
             connect();
         } catch (...) {
-            throw_exception(dns_exception::network_error("Failed to reconnect TCP socket"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to reconnect TCP socket"));
         }
         if (!send_request()) {
-            throw_exception(dns_exception::network_error("Failed to send query data after reconnect"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to send query data after reconnect"));
         }
     }
 
     uint16_t res_len;
     if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
-        throw_exception(dns_exception::network_error("Failed to receive response length"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive response length"));
     }
 
     res_len = endian::network_to_host<uint16_t>(res_len);
     if (res_len == 0 || res_len > 65535) {
-        throw_exception(dns_exception::parse_error("Invalid response length"));
+        NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid response length"));
     }
 
     byte_vector buffer(res_len);
@@ -474,7 +474,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
         });
 
         if (received <= 0) {
-            throw_exception(dns_exception::network_error("Failed to receive complete response"));
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive complete response"));
         }
 
         total += received;
@@ -486,19 +486,19 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
 dns_client::dns_client(config cfg, const bool use_tcp)
 : config_(move(cfg)), use_tcp_(use_tcp) {
     if (config_.server.empty()) {
-        throw_exception(dns_exception("DNS server address cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("DNS server address cannot be empty"));
     }
     if (config_.port <= 0 || config_.port > 65535) {
-        throw_exception(dns_exception("Invalid DNS server port"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("Invalid DNS server port"));
     }
     if (config_.timeout <= milliseconds(0)) {
-        throw_exception(dns_exception("Timeout must be positive"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("Timeout must be positive"));
     }
 }
 
 dns_query_result dns_client::query(const string_view domain, const DNS_RECORD type, const DNS_QUERY qclass) {
     if (domain.empty()) {
-        throw_exception(dns_exception("Domain name cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("Domain name cannot be empty"));
     }
 
     const auto start_time = steady_clock::now();
@@ -614,13 +614,13 @@ vector<string> dns_client::resolve_txt(const string_view domain) {
 
 string dns_client::reverse_query(const string_view ip) {
     if (ip.empty()) {
-        throw_exception(dns_exception("IP address cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("IP address cannot be empty"));
     }
 
     string reverse_domain;
 
     if (ip.find(':') != string::npos) {
-        throw_exception(dns_exception("IPv6 reverse query not fully implemented"));
+        NEFORCE_THROW_EXCEPTION(dns_exception("IPv6 reverse query not fully implemented"));
     } else {
         vector<string_view> parts;
         parts.reserve(4);
@@ -638,7 +638,7 @@ string dns_client::reverse_query(const string_view ip) {
         }
 
         if (parts.size() != 4) {
-            throw_exception(dns_exception("Invalid IPv4 address"));
+            NEFORCE_THROW_EXCEPTION(dns_exception("Invalid IPv4 address"));
         }
 
         reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";

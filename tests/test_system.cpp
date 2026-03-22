@@ -101,7 +101,7 @@ void test_console() {
     println(rawi);
     console.readln(rawi);
     println(rawi);
-    _NEFORCE boolean b;
+    boolean b;
     b.try_parse("true");
     println(b);
     console.readln(b);
@@ -280,7 +280,10 @@ void test_process() {
 }
 
 void test_rnd() {
-    println(_NEFORCE secret::is_supported(), secret::next_double(), secret::next_int(1, 10));
-    println(_NEFORCE random_lcd().next_int(10, 20), random_lcd().next_int(10, 20), random_lcd().next_int(10, 20));
-    println(_NEFORCE random_mt().next_int(10, 20), random_mt().next_int(10, 20), random_mt().next_int(10, 20));
+    println(secret::system_supported(), secret::next_float<double>(), secret::next_int(1, 10));
+    println(random_lcd().next_int(10, 20), random_lcd().next_int(10, 20), random_lcd().next_int(10, 20));
+    println(random_mt().next_int(10, 20), random_mt().next_int(10, 20), random_mt().next_int(10, 20));
+
+    println("UUID V4:", uuid::v4());
+    println("UUID V7:", uuid::v7());
 }

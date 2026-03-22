@@ -14,7 +14,7 @@ namespace {
                 case Z_VERSION_ERROR: msg = "Version mismatch"; break;
                 default: msg = "Unknown error"; break;
             }
-            throw_exception(zlib_exception(msg, zlib_exception::static_type, ret_code));
+            NEFORCE_THROW_EXCEPTION(zlib_exception(msg, zlib_exception::static_type, ret_code));
         }
     }
 }
@@ -31,7 +31,7 @@ byte_vector zlib_compressor::compress_data(
         case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
         case compress_format::deflate: window_bits = -MAX_WBITS; break;
         case compress_format::zlib:    window_bits = MAX_WBITS; break;
-        default: NEFORCE_UNREACHABLE;
+        default: unreachable();
     }
 
     ::uLongf compressed_size = ::compressBound(static_cast<::uLong>(size));
@@ -82,7 +82,7 @@ byte_vector zlib_compressor::decompress_data(
         case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
         case compress_format::deflate: window_bits = -MAX_WBITS; break;
         case compress_format::zlib:    window_bits = MAX_WBITS; break;
-        default: NEFORCE_UNREACHABLE;
+        default: unreachable();
     }
     
     ::z_stream stream{};
@@ -177,7 +177,7 @@ void zlib_compressor::stream_compressor::reset(
         case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
         case compress_format::deflate: window_bits = -MAX_WBITS; break;
         case compress_format::zlib:    window_bits = MAX_WBITS; break;
-        default: NEFORCE_UNREACHABLE;
+        default: unreachable();
     }
     
     stream_ = {};
@@ -197,7 +197,7 @@ void zlib_compressor::stream_compressor::reset(
 
 byte_vector zlib_compressor::stream_compressor::compress(const cbyte_view& data, const bool finish) {
     if (!initialized_) {
-        throw_exception(zlib_exception("Compressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(zlib_exception("Compressor not initialized"));
     }
 
     if (data.size() > 0) {
@@ -289,7 +289,7 @@ void zlib_compressor::stream_decompressor::reset(const compress_format format) {
         case compress_format::gzip:    window_bits = MAX_WBITS + 16; break;
         case compress_format::deflate: window_bits = -MAX_WBITS; break;
         case compress_format::zlib:    window_bits = MAX_WBITS; break;
-        default: NEFORCE_UNREACHABLE;
+        default: unreachable();
     }
 
     stream_ = {};
@@ -303,7 +303,7 @@ void zlib_compressor::stream_decompressor::reset(const compress_format format) {
 byte_vector zlib_compressor::stream_decompressor::decompress(
     const byte_view& data, const bool finish) {
     if (!initialized_) {
-        throw_exception(zlib_exception("Decompressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(zlib_exception("Decompressor not initialized"));
     }
 
     if (!data.empty()) {

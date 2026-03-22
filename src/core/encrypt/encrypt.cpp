@@ -296,7 +296,7 @@ namespace {
 
 
 byte_vector XOR::encrypt(const cbyte_view data, const cbyte_view key) {
-    if (key.empty()) throw_exception(value_exception("Key cannot be empty"));
+    if (key.empty()) NEFORCE_THROW_EXCEPTION(value_exception("Key cannot be empty"));
 
     byte_vector result;
     result.reserve(data.size());
@@ -344,7 +344,7 @@ byte_vector base64::decode(const string_view data) {
         const int d = data[i + 3] == '=' ? 0 : base64_char_to_index(data[i + 3]);
 
         if (a < 0 || b < 0) {
-            throw_exception(value_exception("Invalid Base64 character"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64 character"));
         }
 
         const uint32_t val = (a << 18) | (b << 12) | (c << 6) | d;
@@ -596,10 +596,10 @@ string SHA256::hash_hex(const cbyte_view data) {
 
 byte_vector AES256::encrypt(const cbyte_view data, const cbyte_view key) {
     if (key.size() != 32) {
-        throw_exception(value_exception("AES-256 requires 32-byte key"));
+        NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }
     if (data.size() % 16 != 0) {
-        throw_exception(value_exception("Data size must be multiple of 16 bytes"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Data size must be multiple of 16 bytes"));
     }
 
     byte_t expanded_key[240];
@@ -620,10 +620,10 @@ byte_vector AES256::encrypt(const cbyte_view data, const cbyte_view key) {
 
 byte_vector AES256::decrypt(const cbyte_view data, const cbyte_view key) {
     if (key.size() != 32) {
-        throw_exception(value_exception("AES-256 requires 32-byte key"));
+        NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }
     if (data.size() % 16 != 0) {
-        throw_exception(value_exception("Data size must be multiple of 16 bytes"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Data size must be multiple of 16 bytes"));
     }
 
     byte_t expanded_key[240];
@@ -659,18 +659,18 @@ byte_vector AES256::decrypt_pkcs7(const cbyte_view data, const cbyte_view key) {
     const size_t original_size = decrypted.size();
 
     if (padding_len == 0 || padding_len > 16) {
-        throw_exception(value_exception("Invalid PKCS7 padding (invalid length)"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid PKCS7 padding (invalid length)"));
     }
     if (padding_len > original_size) {
-        throw_exception(value_exception("Invalid PKCS7 padding (length exceeds data size)"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid PKCS7 padding (length exceeds data size)"));
     }
     const size_t new_size = original_size - padding_len;
     if (new_size >= original_size) {
-        throw_exception(value_exception("Invalid PKCS7 padding (overflow detected)"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid PKCS7 padding (overflow detected)"));
     }
     for (size_t i = new_size; i < original_size; ++i) {
         if (decrypted[i] != padding_len) {
-            throw_exception(value_exception("Invalid PKCS7 padding (mismatched value)"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid PKCS7 padding (mismatched value)"));
         }
     }
 

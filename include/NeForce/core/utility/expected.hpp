@@ -521,25 +521,25 @@ public:
     constexpr const T& value() const & {
         if (has_value_) NEFORCE_LIKELY
             return value_;
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr T& value() & {
         if (has_value_) NEFORCE_LIKELY
             return value_;
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr const T&& value() const && {
         if (has_value_) NEFORCE_LIKELY
             return _NEFORCE move(value_);
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr T&& value() && {
         if (has_value_) NEFORCE_LIKELY
             return _NEFORCE move(value_);
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr const ErrorT& error() const & noexcept {
@@ -1176,13 +1176,13 @@ public:
     constexpr void value() const & {
         if (has_value_) NEFORCE_LIKELY
             return;
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr void value() && {
         if (has_value_) NEFORCE_LIKELY
             return;
-        throw_exception(expected_exception(error_));
+        NEFORCE_THROW_EXCEPTION(expected_exception(error_));
     }
 
     constexpr const ErrorT& error() const & noexcept {

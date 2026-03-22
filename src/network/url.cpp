@@ -34,7 +34,7 @@ bool url::is_valid() const noexcept {
 
 url url::parse(const string_view str) {
     if (str.empty()) {
-        throw_exception(network_exception("URL is empty"));
+        NEFORCE_THROW_EXCEPTION(network_exception("URL is empty"));
     }
 
     url target{};
@@ -42,12 +42,12 @@ url url::parse(const string_view str) {
 
     const auto scheme_end = str.find("://");
     if (scheme_end == string::npos) {
-        throw_exception(network_exception("URL missing scheme"));
+        NEFORCE_THROW_EXCEPTION(network_exception("URL missing scheme"));
     }
     target.scheme = str.substr(0, scheme_end);
     size_t pos = scheme_end + 3;
     if (pos >= len) {
-        throw_exception(network_exception("URL scheme invalid"));
+        NEFORCE_THROW_EXCEPTION(network_exception("URL scheme invalid"));
     }
 
     size_t at_pos = str.find('@', pos);
@@ -70,7 +70,7 @@ url url::parse(const string_view str) {
     if (host_port.starts_with('[')) {
         const size_t bracket_end = host_port.find(']');
         if (bracket_end == string::npos) {
-            throw_exception(network_exception("URL malformed: unclosed IPv6 address"));
+            NEFORCE_THROW_EXCEPTION(network_exception("URL malformed: unclosed IPv6 address"));
         }
         target.host = host_port.substr(1, bracket_end - 1);
         if (bracket_end + 1 < host_port.size() && host_port[bracket_end + 1] == ':') {
@@ -90,17 +90,17 @@ url url::parse(const string_view str) {
         try {
             target.port = uinteger16::parse(port_str);
         } catch (...) {
-            throw_exception(network_exception("URL invalid port"));
+            NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
         }
         if (target.port == 0) {
-            throw_exception(network_exception("URL invalid port"));
+            NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
         }
     } else {
         target.port = default_port(target.scheme.view());
     }
 
     if (target.host.empty()) {
-        throw_exception(network_exception("URL invalid host"));
+        NEFORCE_THROW_EXCEPTION(network_exception("URL invalid host"));
     }
 
     pos = host_end;

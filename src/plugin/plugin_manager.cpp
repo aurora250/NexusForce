@@ -22,7 +22,7 @@ size_t plugin_manager::load_plugins(const string& pth) {
     size_t count = 0;
 
     if (!path::exists(pth) || !path::is_directory(pth)) {
-        throw_exception(value_exception("Invalid plugin directory"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid plugin directory"));
     }
 
     const path pths(pth);
@@ -40,7 +40,7 @@ void plugin_manager::load_plugin(const string_view pth) {
     lock<mutex> lock(mutex_);
 
     if (libraries_.count(pth)) {
-        throw_exception(system_exception("Plugin already loaded"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Plugin already loaded"));
     }
 
     auto lib = make_unique<dynamic_library>(pth);
@@ -50,7 +50,7 @@ void plugin_manager::load_plugin(const string_view pth) {
 
     iplugin* raw_ptr = create_func();
     if (!raw_ptr) {
-        throw_exception(system_exception("Plugin creation returned null"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Plugin creation returned null"));
     }
 
     plugin_deleter deleter(destroy_func);
@@ -58,7 +58,7 @@ void plugin_manager::load_plugin(const string_view pth) {
 
     const string& name = plugin->get_info().name;
     if (plugins_.count(name)) {
-        throw_exception(system_exception("Plugin already exists"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Plugin already exists"));
     }
 
     const string lib_path = pth;

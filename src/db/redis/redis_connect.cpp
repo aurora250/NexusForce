@@ -5,7 +5,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 ::redisReply* redis_connect::execute_command(
     const string_view command, const vector<string_view>& args) const {
-    if (!context_) return nullptr;
+    if (!link_) return nullptr;
 
     vector<const char*> argv;
     vector<size_t> argvlen;
@@ -19,7 +19,7 @@ NEFORCE_BEGIN_NAMESPACE__
     }
 
     return static_cast<::redisReply*>(
-        ::redisCommandArgv(context_, argv.size(), argv.data(), argvlen.data())
+        ::redisCommandArgv(link_, argv.size(), argv.data(), argvlen.data())
     );
 }
 
@@ -56,46 +56,50 @@ bool redis_connect::select_database(const string& db_index) const {
     }
 }
 
-bool redis_connect::connect_to_host(
-    const string& host, const uint16_t port,
-    const string& password, const string& dbname) {
-    context_ = ::redisConnect(host.data(), port);
-    if (!context_ || context_->err) {
-        if (context_) {
-            last_error_ = context_->errstr;
-            ::redisFree(context_);
-            context_ = nullptr;
+bool redis_connect::connect(const db_config& config) {
+    link_ = ::redisConnect(config.host.data(), config.port);
+    if (!link_ || link_->err) {
+        if (link_) {
+            last_error_ = link_->errstr;
+            ::redisFree(link_);
+            link_ = nullptr;
         } else {
             last_error_ = "Connection failed";
         }
         return false;
     }
-    if (!authenticate(password)) {
+    if (!authenticate(config.password)) {
         close();
         return false;
     }
-    if (!select_database(dbname)) {
+    if (!select_database(config.database)) {
         close();
         return false;
     }
     return true;
 }
 
-bool redis_connect::reset_connect(const db_config& config) {
+bool redis_connect::reconnect(const db_config& config) {
     close();
-    return connect_to(config);
+    return connect(config);
+}
+
+void redis_connect::close() noexcept {
+    if (!link_) return;
+    ::redisFree(link_);
+    link_ = nullptr;
 }
 
 string_view redis_connect::get_error() const noexcept {
-    if (context_ && context_->errstr[0] != '\0') {
-        last_error_ = context_->errstr;
+    if (link_ && link_->errstr[0] != '\0') {
+        last_error_ = link_->errstr;
     }
     return {last_error_.data(), last_error_.size()};
 }
 
 bool redis_connect::update(const string& sql) const noexcept {
     const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(context_, sql.data())
+        ::redisCommand(link_, sql.data())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
@@ -110,7 +114,7 @@ bool redis_connect::update(const string& sql) const noexcept {
 
 unique_ptr<idb_kv_result> redis_connect::query(const string& sql) const {
     const auto reply = static_cast<::redisReply*>(
-        ::redisCommand(context_, sql.data())
+        ::redisCommand(link_, sql.data())
         );
     if (!reply || reply->type == REDIS_REPLY_ERROR) {
         if (reply) {
@@ -132,12 +136,6 @@ bool redis_connect::is_valid() const noexcept {
     }
     ::freeReplyObject(reply);
     return true;
-}
-
-void redis_connect::close() noexcept {
-    if (!context_) return;
-    ::redisFree(context_);
-    context_ = nullptr;
 }
 
 bool redis_connect::set(const string& key, const string& value) {
@@ -336,7 +334,7 @@ unique_ptr<idb_kv_result> redis_connect::smembers(const string& key) {
 
 idb_connect* redis_factory::create_connect() {
     auto conn = new redis_connect();
-    if (!conn->connect_to(config_)) {
+    if (!conn->connect(config_)) {
         delete conn;
         return nullptr;
     }

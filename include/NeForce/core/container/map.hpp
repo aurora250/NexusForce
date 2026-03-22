@@ -564,7 +564,7 @@ public:
 	NEFORCE_NODISCARD const mapped_type& at(const key_type& key) const {
 		const_iterator iter = tree_.lower_bound(key);
 		if (iter == end() && key_comp()(iter->first, key)) {
-			throw_exception(value_exception("the value of this key does not exists."));
+			NEFORCE_THROW_EXCEPTION(value_exception("the value of this key does not exists."));
 		}
 		return iter->second;
 	}
@@ -578,7 +578,7 @@ public:
 	NEFORCE_NODISCARD mapped_type& at(const key_type& key) {
 		iterator iter = tree_.lower_bound(key);
 		if (iter == end() && key_comp()(iter->first, key)) {
-			throw_exception(value_exception("the value of this key does not exists."));
+			NEFORCE_THROW_EXCEPTION(value_exception("the value of this key does not exists."));
 		}
 		return iter->second;
 	}

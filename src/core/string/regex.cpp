@@ -83,7 +83,7 @@ void regex::compile(const string& pattern, const uint32_t options) {
     if (!code_) {
         char error_message[256];
         pcre2_get_error_message(errorcode, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
-        throw_exception(regex_exception(error_message));
+        NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
     pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
@@ -108,7 +108,7 @@ void regex::compile(string&& pattern, const uint32_t options) {
     if (!code_) {
         char error_message[256];
         pcre2_get_error_message(errorcode, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
-        throw_exception(regex_exception(error_message));
+        NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
     pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
@@ -121,7 +121,7 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length,
                       const size_t start_offset, const uint32_t options,
                       const string& subject_str) const {
     if (!code_) {
-        throw_exception(regex_exception("Uninitialized regex object"));
+        NEFORCE_THROW_EXCEPTION(regex_exception("Uninitialized regex object"));
     }
 
     const unique_ptr<pcre2_match_data, pcre2_match_data_deleter> match_data(
@@ -129,7 +129,7 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length,
     );
 
     if (!match_data) {
-        throw_exception(regex_exception("Failed to create match data"));
+        NEFORCE_THROW_EXCEPTION(regex_exception("Failed to create match data"));
     }
 
     const int rc = pcre2_match(
@@ -148,7 +148,7 @@ match_result regex::do_match(const PCRE2_SPTR subject, const size_t length,
         }
         char error_message[256];
         pcre2_get_error_message(rc, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
-        throw_exception(regex_exception(error_message));
+        NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
     const PCRE2_SIZE* ovector = pcre2_get_ovector_pointer(match_data.get());

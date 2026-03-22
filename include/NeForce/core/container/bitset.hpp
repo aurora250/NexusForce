@@ -162,7 +162,7 @@ public:
             } else if (c == zero) {
                 reset(pos);
             } else {
-                throw_exception(value_exception("bitset string ctor: invalid character"));
+                NEFORCE_THROW_EXCEPTION(value_exception("bitset string ctor: invalid character"));
             }
         }
     }
@@ -466,7 +466,7 @@ public:
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ulong_blocks; i < block_count; ++i) {
                 if (blocks[i] != 0) {
-                    throw_exception(value_exception("bitset to_ulong overflow"));
+                    NEFORCE_THROW_EXCEPTION(value_exception("bitset to_ulong overflow"));
                 }
             }
 
@@ -476,7 +476,7 @@ public:
                 constexpr size_t last_ulong_block = ulong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ulong_block] & mask) != 0) {
-                    throw_exception(value_exception("bitset to_ulong overflow"));
+                    NEFORCE_THROW_EXCEPTION(value_exception("bitset to_ulong overflow"));
                 }
             }
         }
@@ -504,7 +504,7 @@ public:
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ullong_blocks; i < block_count; ++i) {
                 if (blocks[i] != 0) {
-                    throw_exception(value_exception("bitset to_ullong overflow"));
+                    NEFORCE_THROW_EXCEPTION(value_exception("bitset to_ullong overflow"));
                 }
             }
 
@@ -514,7 +514,7 @@ public:
                 constexpr size_t last_ullong_block = ullong_bits / bits_per_block;
                 block_type mask = (~static_cast<block_type>(0ULL)) << remainder_bits;
                 if ((blocks[last_ullong_block] & mask) != 0) {
-                    throw_exception(value_exception("bitset to_ullong overflow"));
+                    NEFORCE_THROW_EXCEPTION(value_exception("bitset to_ullong overflow"));
                 }
             }
         }

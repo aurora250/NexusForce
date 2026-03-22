@@ -167,7 +167,7 @@ NEFORCE_CONSTEXPR20 string to_string(const TASK_STATUS status) {
 		case TASK_STATUS::RUNNING: return "RUNNING";
 		case TASK_STATUS::COMPLETED: return "COMPLETED";
 		case TASK_STATUS::FAILED: return "FAILED";
-		default: NEFORCE_UNREACHABLE;
+		default: unreachable();
 	}
 }
 

@@ -86,7 +86,7 @@ process::state_info process::create(
     );
 
     if (!success) {
-        throw_exception(process_exception("CreateProcess failed"));
+        NEFORCE_THROW_EXCEPTION(process_exception("CreateProcess failed"));
     }
 
     info.process_handle = pi.hProcess;
@@ -104,7 +104,7 @@ process::state_info process::create(
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
-        throw_exception(process_exception(::strerror(errno)));
+        NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
     }
 
     if (pid == 0) {
@@ -153,13 +153,13 @@ int process::wait_for(state_info& info, int timeout_ms) {
         return -1;
     }
     if (result == WAIT_FAILED) {
-        throw_exception(process_exception("WaitForSingleObject failed"));
+        NEFORCE_THROW_EXCEPTION(process_exception("WaitForSingleObject failed"));
     }
     info.stdout_output = info.stdout_pipe.read_available();
 
     ::DWORD exit_code;
     if (!::GetExitCodeProcess(info.process_handle, &exit_code)) {
-        throw_exception(process_exception("GetExitCodeProcess failed"));
+        NEFORCE_THROW_EXCEPTION(process_exception("GetExitCodeProcess failed"));
     }
     return static_cast<int>(exit_code);
 #else
@@ -167,7 +167,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
 
     if (timeout_ms < 0) {
         if (::waitpid(info.process_id, &status, 0) == -1) {
-            throw_exception(process_exception(::strerror(errno)));
+            NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
         }
     } else {
         int elapsed = 0;
@@ -176,7 +176,7 @@ int process::wait_for(state_info& info, int timeout_ms) {
             constexpr int sleep_interval = 100;
             const ::pid_t result = ::waitpid(info.process_id, &status, WNOHANG);
             if (result == -1) {
-                throw_exception(process_exception(::strerror(errno)));
+                NEFORCE_THROW_EXCEPTION(process_exception(::strerror(errno)));
             }
             if (result > 0) break;
 

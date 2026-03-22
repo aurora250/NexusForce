@@ -5,29 +5,24 @@
 #include <libpq-fe.h>
 NEFORCE_BEGIN_NAMESPACE__
 
-NEFORCE_BEGIN_INNER__
-struct __pgsql_pstmt_data {
-    vector<string> param_values{};
-    vector<const char*> param_ptrs{};
-    vector<int> param_lengths{};
-    vector<int> param_formats{};
-};
-NEFORCE_END_INNER__
-
 class NEFORCE_API pgsql_prepared_statement final : public idb_prepared_statement {
 private:
+    struct pstmt_data {
+        vector<string> param_values{};
+        vector<const char*> param_ptrs{};
+        vector<int> param_lengths{};
+        vector<int> param_formats{};
+    };
+
     ::PGconn* conn_ = nullptr;
     string stmt_name_{};
     string sql_{};
     uint32_t param_count_ = 0;
-    _INNER __pgsql_pstmt_data* data_ = new _INNER __pgsql_pstmt_data();
+    unique_ptr<pstmt_data> data_ = make_unique<pstmt_data>();
     vector<vector<char>> param_buffers_{};
     string last_error_{};
     uint32_t last_errno_ = 0;
 
-    void init_params() const;
-    bool prepare();
-    void clear_error() noexcept;
     void set_error(string error, uint32_t errno_val = 0) noexcept;
 
 public:

@@ -245,7 +245,7 @@ NEFORCE_CONSTEXPR20 void counting_sort(Iterator first, Iterator last, Compare co
     for (Iterator it = first; it != last; ++it) {
         auto value = mapper(*it);
         if (value < min_val || value > max_val) {
-            throw_exception(iterator_exception("element out of range for counting sort."));
+            NEFORCE_THROW_EXCEPTION(iterator_exception("element out of range for counting sort."));
         }
         ++count[static_cast<size_t>(value - min_val)];
     }

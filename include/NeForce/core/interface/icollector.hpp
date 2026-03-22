@@ -27,10 +27,6 @@ NEFORCE_BEGIN_NAMESPACE__
 template <typename T>
 struct icollector : icomparable<T> {
 private:
-    /**
-     * @brief 获取派生类常量引用
-     * @return 派生类常量引用
-     */
     constexpr const T& derived() const noexcept {
         return static_cast<const T&>(*this);
     }

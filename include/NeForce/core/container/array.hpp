@@ -556,40 +556,40 @@ public:
     }
 
     NEFORCE_NODISCARD reference at(size_type) {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return array_[0];
     }
 
     NEFORCE_NODISCARD const_reference at(size_type) const {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return array_[0];
     }
 
     NEFORCE_NODISCARD reference operator [](size_type) noexcept {
-        throw_exception(iterator_exception("array index out of range"));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
     NEFORCE_NODISCARD const_reference operator [](size_type) const noexcept {
-        throw_exception(iterator_exception("array index out of range"));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
 
     NEFORCE_NODISCARD reference front() noexcept {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
     NEFORCE_NODISCARD const_reference front() const noexcept {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
 
     NEFORCE_NODISCARD reference back() noexcept {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
 
     NEFORCE_NODISCARD const_reference back() const noexcept {
-        throw_exception(iterator_exception("array empty."));
+        NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return *data();
     }
 

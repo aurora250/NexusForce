@@ -6,7 +6,7 @@ NEFORCE_BEGIN_NAMESPACE__
 byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size, const int level) {
     const int max_compressed_size = LZ4_compressBound(static_cast<int>(size));
     if (max_compressed_size <= 0) {
-        throw_exception(lz4_exception("Input size too large for LZ4 compression"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Input size too large for LZ4 compression"));
     }
 
     byte_vector compressed(max_compressed_size);
@@ -32,7 +32,7 @@ byte_vector lz4_compressor::compress_data(const byte_t* data, const size_t size,
     }
 
     if (compressed_size <= 0) {
-        throw_exception(lz4_exception("LZ4 compression failed"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 compression failed"));
     }
 
     compressed.resize(compressed_size);
@@ -54,7 +54,7 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
         if (attempt > 0) {
             estimated_original_size *= 2;
             if (estimated_original_size > MAX_BUFFER_SIZE) {
-                throw_exception(lz4_exception("Decompression buffer size exceeded maximum limit"));
+                NEFORCE_THROW_EXCEPTION(lz4_exception("Decompression buffer size exceeded maximum limit"));
             }
             decompressed.resize(estimated_original_size);
         }
@@ -72,10 +72,10 @@ byte_vector lz4_compressor::decompress_data(const byte_t* data, const size_t siz
         } else if (result == 0) {
             attempt++;
             if (attempt >= MAX_ATTEMPTS) {
-                throw_exception(lz4_exception("Exceeded maximum decompression buffer attempts"));
+                NEFORCE_THROW_EXCEPTION(lz4_exception("Exceeded maximum decompression buffer attempts"));
             }
         } else {
-            throw_exception(lz4_exception("LZ4 decompression failed"));
+            NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 decompression failed"));
         }
     } while (result <= 0);
 
@@ -127,7 +127,7 @@ void lz4_compressor::stream_compressor::reset(const int level) {
 
     stream_ = LZ4_createStream();
     if (!stream_) {
-        throw_exception(lz4_exception("Failed to create LZ4 stream"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Failed to create LZ4 stream"));
     }
 
     use_hc_ = (level >= 1 && level <= 12);
@@ -138,14 +138,14 @@ void lz4_compressor::stream_compressor::reset(const int level) {
 
 byte_vector lz4_compressor::stream_compressor::compress(const cbyte_view& data, const bool finish) {
     if (!stream_) {
-        throw_exception(lz4_exception("Compressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Compressor not initialized"));
     }
     if (finished_) {
-        throw_exception(lz4_exception("Compressor already finished"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Compressor already finished"));
     }
 
     if (data.size() > block_size) {
-        throw_exception(lz4_exception("Input block size exceeds maximum (64KB)"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Input block size exceeds maximum (64KB)"));
     }
 
     byte_vector output;
@@ -176,7 +176,7 @@ byte_vector lz4_compressor::stream_compressor::compress(const cbyte_view& data, 
         }
 
         if (compressed_size <= 0) {
-            throw_exception(lz4_exception("LZ4 stream compression failed"));
+            NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 stream compression failed"));
         }
 
         output.resize(compressed_size);
@@ -197,7 +197,7 @@ byte_vector lz4_compressor::stream_compressor::compress(const string_view data, 
 
 byte_vector lz4_compressor::stream_compressor::finish() {
     if (!stream_) {
-        throw_exception(lz4_exception("Compressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Compressor not initialized"));
     }
 
     finished_ = true;
@@ -246,7 +246,7 @@ void lz4_compressor::stream_decompressor::reset() {
 
     stream_ = LZ4_createStreamDecode();
     if (!stream_) {
-        throw_exception(lz4_exception("Failed to create LZ4 decode stream"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Failed to create LZ4 decode stream"));
     }
 
     bytes_input_ = 0;
@@ -255,10 +255,10 @@ void lz4_compressor::stream_decompressor::reset() {
 
 byte_vector lz4_compressor::stream_decompressor::decompress(const byte_view& data, const bool finish) {
     if (!stream_) {
-        throw_exception(lz4_exception("Decompressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Decompressor not initialized"));
     }
     if (finished_) {
-        throw_exception(lz4_exception("Decompressor already finished"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Decompressor already finished"));
     }
 
     byte_vector output;
@@ -275,7 +275,7 @@ byte_vector lz4_compressor::stream_decompressor::decompress(const byte_view& dat
         );
 
         if (decompressed_size < 0) {
-            throw_exception(lz4_exception("LZ4 stream decompression failed"));
+            NEFORCE_THROW_EXCEPTION(lz4_exception("LZ4 stream decompression failed"));
         }
 
         output.resize(decompressed_size);
@@ -292,7 +292,7 @@ byte_vector lz4_compressor::stream_decompressor::decompress(const byte_view& dat
 
 byte_vector lz4_compressor::stream_decompressor::finish() {
     if (!stream_) {
-        throw_exception(lz4_exception("Compressor not initialized"));
+        NEFORCE_THROW_EXCEPTION(lz4_exception("Compressor not initialized"));
     }
 
     finished_ = true;

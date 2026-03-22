@@ -8,12 +8,12 @@ toml_builder::toml_builder() {
 
 toml_builder& toml_builder::key(string key) {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("Cannot set key outside of a table context"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot set key outside of a table context"));
     }
 
     const auto& top = contexts_.top();
     if (top.type != table && top.type != inline_table) {
-        throw_exception(toml_exception("Cannot set key in non-table context"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot set key in non-table context"));
     }
 
     current_key_ = _NEFORCE move(key);
@@ -26,7 +26,7 @@ toml_builder& toml_builder::begin_table(const string& name) {
 
 toml_builder& toml_builder::begin_table(const vector<string>& path) {
     if (path.empty()) {
-        throw_exception(toml_exception("Table path cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Table path cannot be empty"));
     }
 
     toml_table* table_ptr = get_or_create_table_path(path);
@@ -39,16 +39,16 @@ toml_builder& toml_builder::begin_table(const vector<string>& path) {
 
 toml_builder& toml_builder::end_table() {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("No table to end"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("No table to end"));
     }
 
     const auto& top = contexts_.top();
     if (top.type != table) {
-        throw_exception(toml_exception("Current context is not a table"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Current context is not a table"));
     }
 
     if (contexts_.size() == 1) {
-        throw_exception(toml_exception("Cannot end root table"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot end root table"));
     }
 
     contexts_.pop();
@@ -59,7 +59,7 @@ toml_builder& toml_builder::end_table() {
 
 toml_builder& toml_builder::begin_inline_table() {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("Cannot create inline table at root"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot create inline table at root"));
     }
 
     auto table_ptr = make_unique<toml_table>(true);
@@ -70,10 +70,10 @@ toml_builder& toml_builder::begin_inline_table() {
         top.array_ptr->add_element(_NEFORCE move(table_ptr));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
-            throw_exception(toml_exception("No key set for inline table"));
+            NEFORCE_THROW_EXCEPTION(toml_exception("No key set for inline table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
+            NEFORCE_THROW_EXCEPTION(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _NEFORCE move(table_ptr));
         current_key_.clear();
@@ -86,12 +86,12 @@ toml_builder& toml_builder::begin_inline_table() {
 
 toml_builder& toml_builder::end_inline_table() {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("No inline table to end"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("No inline table to end"));
     }
 
     const auto& top = contexts_.top();
     if (top.type != inline_table) {
-        throw_exception(toml_exception("Current context is not an inline table"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Current context is not an inline table"));
     }
 
     contexts_.pop();
@@ -102,7 +102,7 @@ toml_builder& toml_builder::end_inline_table() {
 
 toml_builder& toml_builder::begin_array() {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("Cannot create array at root"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot create array at root"));
     }
 
     auto arr = make_unique<toml_array>();
@@ -113,10 +113,10 @@ toml_builder& toml_builder::begin_array() {
         top.array_ptr->add_element(_NEFORCE move(arr));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
-            throw_exception(toml_exception("No key set for array"));
+            NEFORCE_THROW_EXCEPTION(toml_exception("No key set for array"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
+            NEFORCE_THROW_EXCEPTION(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _NEFORCE move(arr));
         current_key_.clear();
@@ -129,12 +129,12 @@ toml_builder& toml_builder::begin_array() {
 
 toml_builder& toml_builder::end_array() {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("No array to end"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("No array to end"));
     }
 
     const auto& top = contexts_.top();
     if (top.type != array) {
-        throw_exception(toml_exception("Current context is not an array"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Current context is not an array"));
     }
 
     contexts_.pop();
@@ -149,7 +149,7 @@ toml_builder& toml_builder::begin_array_table(const string& name) {
 
 toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
     if (path.empty()) {
-        throw_exception(toml_exception("Array table path cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Array table path cannot be empty"));
     }
 
     toml_array* arr = get_or_create_array_for_array_table(path);
@@ -170,7 +170,7 @@ toml_builder& toml_builder::end_array_table() {
 
 toml_builder& toml_builder::value_table(_NEFORCE function<void(toml_builder&)>&& build_func) {
     if (contexts_.empty()) {
-        throw_exception(toml_exception("Cannot create table at root using value_table"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Cannot create table at root using value_table"));
     }
 
     auto unique_table = make_unique<toml_table>();
@@ -181,10 +181,10 @@ toml_builder& toml_builder::value_table(_NEFORCE function<void(toml_builder&)>&&
         top.array_ptr->add_element(_NEFORCE move(unique_table));
     } else if (top.type == table || top.type == inline_table) {
         if (current_key_.empty()) {
-            throw_exception(toml_exception("No key set for table"));
+            NEFORCE_THROW_EXCEPTION(toml_exception("No key set for table"));
         }
         if (top.table_ptr->has_member(current_key_)) {
-            throw_exception(toml_exception(("Duplicate key: " + current_key_).data()));
+            NEFORCE_THROW_EXCEPTION(toml_exception(("Duplicate key: " + current_key_).data()));
         }
         top.table_ptr->add_member(current_key_, _NEFORCE move(unique_table));
         current_key_.clear();
@@ -213,7 +213,7 @@ toml_builder& toml_builder::value_array(_NEFORCE function<void(toml_builder&)>&&
 
 unique_ptr<toml_table> toml_builder::build() {
     if (contexts_.size() != 1) {
-        throw_exception(toml_exception("Unclosed table or array context"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Unclosed table or array context"));
     }
 
     return _NEFORCE move(root_);
@@ -227,7 +227,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
 
         if (existing) {
             if (!existing->is_table()) {
-                throw_exception(toml_exception(
+                NEFORCE_THROW_EXCEPTION(toml_exception(
                     ("Key '" + key + "' already exists and is not a table").data()));
             }
             current = const_cast<toml_table*>(existing->as_table());
@@ -244,7 +244,7 @@ toml_table* toml_builder::get_or_create_table_path(const vector<string>& path) c
 
 toml_array* toml_builder::get_or_create_array_for_array_table(const vector<string>& path)const {
     if (path.empty()) {
-        throw_exception(toml_exception("Array table path cannot be empty"));
+        NEFORCE_THROW_EXCEPTION(toml_exception("Array table path cannot be empty"));
     }
 
     vector<string> parent_path(path.begin(), path.end() - 1);
@@ -254,7 +254,7 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
 
     if (existing) {
         if (!existing->is_array()) {
-            throw_exception(toml_exception(
+            NEFORCE_THROW_EXCEPTION(toml_exception(
                 ("Key '" + array_name + "' already exists and is not an array").data()));
         }
         return const_cast<toml_array*>(existing->as_array());

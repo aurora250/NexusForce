@@ -62,7 +62,7 @@ template <typename Ret, typename Class, typename... Args>
 decltype(auto) make_member_invoker(Ret (Class::*func)(Args...)) {
     return [func](void* obj, const vector<_REFLECT any>& args) -> _REFLECT any {
         if (sizeof...(Args) != args.size()) {
-            throw_exception(value_exception("Argument count mismatch"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
 
         if constexpr (is_void_v<Ret>) {
@@ -79,7 +79,7 @@ template <typename Ret, typename Class, typename... Args>
 decltype(auto) make_const_member_invoker(Ret (Class::*func)(Args...) const) {
     return [func](void* obj, const vector<_REFLECT any>& args) -> _REFLECT any {
         if (sizeof...(Args) != args.size()) {
-            throw_exception(value_exception("Argument count mismatch"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
 
         if constexpr (is_void_v<Ret>) {
@@ -96,7 +96,7 @@ template <typename Ret, typename... Args>
 decltype(auto) make_static_invoker(Ret (*func)(Args...)) {
     return [func](void*, const vector<_REFLECT any>& args) -> _REFLECT any {
         if (sizeof...(Args) != args.size()) {
-            throw_exception(value_exception("Argument count mismatch"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
 
         if constexpr (is_void_v<Ret>) {

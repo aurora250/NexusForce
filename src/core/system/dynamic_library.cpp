@@ -13,12 +13,12 @@ void dynamic_library::open() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     handle_ = ::LoadLibraryA(path_.data());
     if (!handle_) {
-        throw_exception(dynamic_library_exception("dynamic library load failed."));
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception("dynamic library load failed."));
     }
 #else
     handle_ = ::dlopen(path_.data(), RTLD_LAZY | RTLD_LOCAL);
     if (!handle_) {
-        throw_exception(dynamic_library_exception(::dlerror()));
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception(::dlerror()));
     }
 #endif
 }
@@ -60,13 +60,13 @@ dynamic_library::~dynamic_library() {
 
 void* dynamic_library::symbol(const string& name) const {
     if (!is_open()) {
-        throw_exception(dynamic_library_exception("Library not loaded"));
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception("Library not loaded"));
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::FARPROC proc = ::GetProcAddress(static_cast<::HMODULE>(handle_), name.data());
     if (!proc) {
-        throw_exception(dynamic_library_exception("GetProcAddress failed"));
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception("GetProcAddress failed"));
     }
     return reinterpret_cast<void*>(proc);
 #else
@@ -74,7 +74,7 @@ void* dynamic_library::symbol(const string& name) const {
     void* sym = ::dlsym(handle_, name.data());
     const char* error = ::dlerror();
     if (error) {
-        throw_exception(dynamic_library_exception(error));
+        NEFORCE_THROW_EXCEPTION(dynamic_library_exception(error));
     }
     return sym;
 #endif

@@ -48,7 +48,7 @@ NEFORCE_CONSTEXPR20 string to_string(const LOG_LEVEL level) {
         case LOG_LEVEL::WARN:  return "WARN";
         case LOG_LEVEL::ERROR: return "ERROR";
         case LOG_LEVEL::FATAL: return "FATAL";
-        default: NEFORCE_UNREACHABLE;
+        default: unreachable();
     }
 }
 

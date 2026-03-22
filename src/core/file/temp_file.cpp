@@ -26,7 +26,7 @@ namespace {
         const auto nanos = system_clock::now().since_epoch().to_nano();
         const auto pid = process::current_id();
         random_mt rand;
-        const uint64_t random_part = rand.next_int();
+        const uint64_t random_part = rand.next_uint64();
         const string filename = format(
             "{}_{}_{}_{}_{}{}",
             prefix,
@@ -74,7 +74,7 @@ temp_file::temp_file(const string& prefix, const string& suffix, const FILE_CREA
                 register_for_cleanup(file_.path());
             }
         } else {
-            throw_exception(system_exception("Failed to create temporary file"));
+            NEFORCE_THROW_EXCEPTION(system_exception("Failed to create temporary file"));
         }
     } catch (...) {
         if (file_.path().exists()) {

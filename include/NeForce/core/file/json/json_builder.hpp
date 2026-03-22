@@ -84,7 +84,7 @@ private:
     json_builder& value_impl(unique_ptr<T> value) {
         if (contexts_.empty()) {
             if (root_) {
-                throw_exception(json_exception("Multiple root values not allowed"));
+                NEFORCE_THROW_EXCEPTION(json_exception("Multiple root values not allowed"));
             }
             root_ = _NEFORCE move(value);
         } else {
@@ -93,7 +93,7 @@ private:
                 top.array_ptr->add_element(_NEFORCE move(value));
             } else if (top.type == object) {
                 if (current_key_.empty()) {
-                    throw_exception(json_exception("No key set for value in object"));
+                    NEFORCE_THROW_EXCEPTION(json_exception("No key set for value in object"));
                 }
                 top.object_ptr->add_member(current_key_, _NEFORCE move(value));
                 current_key_.clear();

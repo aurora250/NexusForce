@@ -144,7 +144,7 @@ public:
 
     void set_connect_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
-            throw_exception(value_exception("Connect timeout must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Connect timeout must be positive"));
         }
         connect_timeout_ = timeout;
     }
@@ -155,7 +155,7 @@ public:
 
     void set_send_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
-            throw_exception(value_exception("Connect timeout must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Connect timeout must be positive"));
         }
         send_timeout_ = timeout;
     }
@@ -166,7 +166,7 @@ public:
 
     void set_recv_timeout(const duration timeout) {
         if (timeout <= duration(0)) {
-            throw_exception(value_exception("Connect timeout must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Connect timeout must be positive"));
         }
         recv_timeout_ = timeout;
     }
@@ -177,7 +177,7 @@ public:
 
     void set_auto_reconnect(const bool enable, const int max_attempts = 3) {
         if (max_attempts <= 0) {
-            throw_exception(value_exception("Reconnect attempts must be positive"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Reconnect attempts must be positive"));
         }
         auto_reconnect_ = enable;
         reconnect_attempts_ = max_attempts;
@@ -197,7 +197,7 @@ public:
 
     void set_reconnect_delay(const duration delay) {
         if (delay < duration(0)) {
-            throw_exception(value_exception("Reconnect delay cannot be negative"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Reconnect delay cannot be negative"));
         }
         reconnect_delay_ = delay;
     }
@@ -562,14 +562,14 @@ public:
 
     NEFORCE_NODISCARD socket_type& socket() {
         if (!socket_.has_value()) {
-            throw_exception(value_exception("Socket is not connected"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Socket is not connected"));
         }
         return *socket_;
     }
 
     NEFORCE_NODISCARD const socket_type& socket() const {
         if (!socket_.has_value()) {
-            throw_exception(value_exception("Socket is not connected"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Socket is not connected"));
         }
         return *socket_;
     }
@@ -648,10 +648,10 @@ public:
 
     void set_ssl_context(ssl_context ctx) {
         if (is_connected()) {
-            throw_exception(ssl_exception("Cannot set SSL context while connected"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot set SSL context while connected"));
         }
         if (!ctx.is_valid()) {
-            throw_exception(ssl_exception("Invalid SSL context"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
         }
 
         ctx.set_options(
@@ -666,7 +666,7 @@ public:
 
     void set_verify_peer(const bool verify) {
         if (is_connected()) {
-            throw_exception(ssl_exception("Cannot change verification mode while connected"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot change verification mode while connected"));
         }
         verify_peer_ = verify;
         if (ssl_ctx_ && ssl_ctx_->is_valid()) {
@@ -680,7 +680,7 @@ public:
 
     void set_sni_hostname(string hostname) {
         if (is_connected()) {
-            throw_exception(ssl_exception("Cannot set SNI hostname while connected"));
+            NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot set SNI hostname while connected"));
         }
         sni_hostname_ = _NEFORCE move(hostname);
     }

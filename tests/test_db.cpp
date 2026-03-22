@@ -102,7 +102,7 @@ void test_mysql() {
 #ifdef NEFORCE_SUPPORT_MYSQL
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
-    database_pool pool(DB_TYPE::MYSQL, mysql_config, 10, 20, 2);
+    database_pool pool(db_type::MYSQL, mysql_config, 10, 20, seconds{2});
 
     const auto sql = sql_builder()
         .select({"ISBN", "BookName"})
@@ -128,7 +128,7 @@ void test_mysql() {
 void test_redis() {
 #ifdef NEFORCE_SUPPORT_HIREDIS
     db_config redis_config = db_config::for_redis("0");
-    database_pool pool(DB_TYPE::REDIS, redis_config, 10, 20, 2);
+    database_pool pool(db_type::REDIS, redis_config, 10, 20, seconds{2});
     auto conn = dynamic_pointer_cast<redis_connect>(pool.get_kv_connect());
     println(conn->is_valid());
     println(conn->update("SET age 20"));
@@ -146,7 +146,7 @@ void test_pgsql() {
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
     db_config postgre_config = db_config::for_postgresql();
     postgre_config.password = "483674";
-    database_pool pool(DB_TYPE::POSTGRESQL, postgre_config, 10, 20, 2);
+    database_pool pool(db_type::POSTGRESQL, postgre_config, 10, 20, seconds{2});
 
     const auto sql = sql_builder()
         .select({"username", "email"})
@@ -177,7 +177,7 @@ void test_dbpool() {
     mysql_config.password = "147258hu";
 
     {
-        database_pool pool(DB_TYPE::MYSQL, mysql_config);
+        database_pool pool(db_type::MYSQL, mysql_config);
         for (int i = 0; i < 5000; i++) {
             bool fin = pool.get_connect()->update("SELECT 1");
         }
@@ -209,8 +209,8 @@ void test_dbpool() {
         char sql[power(2, 10)] = {};
         _NEFORCE sprintf(sql, "SELECT 1");
         auto* conn = new mysql_connect();
-        if(conn->connect_to(mysql_config)) {
-            bool fin = conn->update(sql);
+        if(conn->connect(mysql_config)) {
+            (void) conn->update(sql);
         }
         delete conn;
     }

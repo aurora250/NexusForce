@@ -71,7 +71,7 @@ struct click {
      */
     nanoseconds during() const {
         if (!started || !stopped) {
-            throw_exception(value_exception("click not properly started/stopped"));
+            NEFORCE_THROW_EXCEPTION(value_exception("click not properly started/stopped"));
         }
         return last_time - start_time;
     }

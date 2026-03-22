@@ -89,7 +89,7 @@ public:
         static_assert(is_constructible_v<T, Args...>, "Constructor must be constructible from Args");
         meta_.constructor([](const vector<any>& args) -> any {
             if (args.size() != sizeof...(Args)) {
-                throw_exception(value_exception("Constructor argument count mismatch"));
+                NEFORCE_THROW_EXCEPTION(value_exception("Constructor argument count mismatch"));
             }
             return type_builder::create_with_args<Args...>(args, make_index_sequence<sizeof...(Args)>{});
         });
@@ -97,7 +97,7 @@ public:
     }
 
     meta_type& meta() noexcept { return meta_; }
-    meta_type& meta() const noexcept { return meta_; }
+    const meta_type& meta() const noexcept { return meta_; }
 };
 
 template <typename T>

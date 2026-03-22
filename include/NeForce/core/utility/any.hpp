@@ -498,8 +498,8 @@ T any_cast(const any& value) {
     if (ptr) {
         return static_cast<T>(*ptr);
     }
-    throw_exception(anycast_exception());
-    NEFORCE_UNREACHABLE;
+    NEFORCE_THROW_EXCEPTION(anycast_exception());
+    unreachable();
 }
 
 
@@ -534,7 +534,7 @@ void any::internal_manage<T>::manage(const any_operation op, const any* value, A
             break;
         }
         default: {
-            NEFORCE_UNREACHABLE;
+            unreachable();
         }
     }
 }
@@ -567,7 +567,7 @@ void any::external_manage<T>::manage(const any_operation op, const any* value, A
             break;
         }
         default: {
-            NEFORCE_UNREACHABLE;
+            unreachable();
         }
     }
 }

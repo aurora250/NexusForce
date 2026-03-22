@@ -56,9 +56,11 @@ set(VCPKG_MANIFEST_INSTALL ON)
 
 if(DEFINED CMAKE_TOOLCHAIN_FILE AND EXISTS ${CMAKE_TOOLCHAIN_FILE})
     message(STATUS "Using vcpkg toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+    message(STATUS "")
 else()
     message(WARNING "vcpkg toolchain not detected. Please set CMAKE_TOOLCHAIN_FILE to use vcpkg-managed dependencies.")
     message(STATUS "Example: -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake")
+    message(STATUS "")
 endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -127,11 +129,11 @@ option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFI
 
 
 message(STATUS "Project Configuration:")
-
+message(STATUS "")
 message(STATUS "Current Architecture: ${NEXUSFORCE_ARCH}")
 message(STATUS "C++ Standard Version: ${CMAKE_CXX_STANDARD}")
 message(STATUS "vcpkg triplet: ${VCPKG_TARGET_TRIPLET}")
-
+message(STATUS "")
 message(STATUS "  NEXUSFORCE_ENABLE_POSTGRESQL:   ${NEXUSFORCE_ENABLE_POSTGRESQL}")
 message(STATUS "  NEXUSFORCE_ENABLE_MYSQL:        ${NEXUSFORCE_ENABLE_MYSQL}")
 message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
@@ -140,12 +142,13 @@ message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
 message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
 message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON")
-
+message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
-
+message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")
 message(STATUS "  NEXUSFORCE_BUILD_DOCS:          ${NEXUSFORCE_BUILD_DOCS}")
+message(STATUS "")
 
 
 add_subdirectory(src)

@@ -153,13 +153,13 @@ string environment::current_directory() {
     char buffer[MAX_PATH];
     const ::DWORD length = ::GetCurrentDirectoryA(MAX_PATH, buffer);
     if (length == 0) {
-        throw_exception(system_exception("Failed to get current directory"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Failed to get current directory"));
     }
     return string(buffer);
 #else
     char* buffer = ::getcwd(nullptr, 0);
     if (buffer == nullptr) {
-        throw_exception(system_exception("Failed to get current directory"));
+        NEFORCE_THROW_EXCEPTION(system_exception("Failed to get current directory"));
     }
     string result(buffer);
     ::free(buffer);

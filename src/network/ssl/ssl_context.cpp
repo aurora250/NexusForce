@@ -55,7 +55,7 @@ string ssl_exception::last_error_message() {
 ssl_context::ssl_context(const ssl_method method) {
     ctx_ = ::SSL_CTX_new(convert_method(method));
     if (!ctx_) {
-        throw_exception(ssl_exception("Failed to create SSL context"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create SSL context"));
     }
 
     ::SSL_CTX_set_options(ctx_.get(),
@@ -112,10 +112,10 @@ bool ssl_context::load_certificate(const string& cert_file, const string& key_fi
 
 void ssl_context::load_certificate_from_memory(const string& cert_pem, const string& key_pem) {
     if (!ctx_) {
-        throw_exception(ssl_exception("SSL context is not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
     if (cert_pem.empty() || key_pem.empty()) {
-        throw_exception(value_exception("Certificate or key PEM data is empty"));
+        NEFORCE_THROW_EXCEPTION(value_exception("Certificate or key PEM data is empty"));
     }
 
     ::BIO *cert_bio = ::BIO_new_mem_buf(cert_pem.data(), cert_pem.size());
@@ -124,7 +124,7 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     if (!cert_bio || !key_bio) {
         if (cert_bio) ::BIO_free(cert_bio);
         if (key_bio) ::BIO_free(key_bio);
-        throw_exception(ssl_exception("Failed to create BIO"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create BIO"));
     }
 
     ::X509* cert = ::PEM_read_bio_X509(cert_bio, nullptr, nullptr, nullptr);
@@ -136,7 +136,7 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     if (!cert || !key) {
         if (cert) ::X509_free(cert);
         if (key) ::EVP_PKEY_free(key);
-        throw_exception(ssl_exception("Failed to parse PEM data"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to parse PEM data"));
     }
 
     const int cert_result = ::SSL_CTX_use_certificate(ctx_.get(), cert);
@@ -146,10 +146,10 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     ::EVP_PKEY_free(key);
 
     if (cert_result <= 0 || key_result <= 0) {
-        throw_exception(ssl_exception("Failed to set certificate or private key"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set certificate or private key"));
     }
     if (::SSL_CTX_check_private_key(ctx_.get()) != 1) {
-        throw_exception(ssl_exception("Private key does not match certificate"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Private key does not match certificate"));
     }
 }
 
@@ -176,13 +176,13 @@ void ssl_context::require_client_certificate() {
 
 void ssl_context::set_cipher_list(const string& ciphers) {
     if (::SSL_CTX_set_cipher_list(ctx_.get(), ciphers.data()) <= 0) {
-        throw_exception(ssl_exception("Failed to set cipher list"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set cipher list"));
     }
 }
 
 void ssl_context::set_ciphersuites(const string& ciphersuites) {
     if (::SSL_CTX_set_ciphersuites(ctx_.get(), ciphersuites.data()) <= 0) {
-        throw_exception(ssl_exception("Failed to set ciphersuites"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set ciphersuites"));
     }
 }
 
@@ -211,21 +211,21 @@ void ssl_context::set_timeout(long seconds) {
 
 void ssl_context::set_alpn_protos(const vector<string>& protocols) {
     if (!ctx_) {
-        throw_exception(ssl_exception("SSL context is not initialized"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
     if (protocols.empty()) return;
 
     byte_vector alpn_data;
     for (const auto& proto : protocols) {
         if (proto.empty() || proto.size() > 255) {
-            throw_exception(value_exception("Invalid ALPN protocol length"));
+            NEFORCE_THROW_EXCEPTION(value_exception("Invalid ALPN protocol length"));
         }
         alpn_data.push_back(static_cast<byte_t>(proto.size()));
         alpn_data.insert(alpn_data.end(), proto.begin(), proto.end());
     }
 
     if (::SSL_CTX_set_alpn_protos(ctx_.get(), alpn_data.data(), static_cast<unsigned int>(alpn_data.size())) != 0) {
-        throw_exception(ssl_exception("Failed to set ALPN protocols"));
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set ALPN protocols"));
     }
 }
 
