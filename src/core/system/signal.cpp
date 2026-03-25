@@ -392,7 +392,7 @@ void signal_manager::process_signal(SIGNAL_EVENT event, void* context) {
             case SIGNAL_EVENT::FLOATING_POINT:
             case SIGNAL_EVENT::BUS_ERROR: {
                 printcln(color::red(), "Critical error detected!");
-                std::abort();
+                abort();
                 break;
             }
 #endif

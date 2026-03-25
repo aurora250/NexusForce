@@ -2,7 +2,8 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <NeForce/core/config/windef.hpp>
 #include <libloaderapi.h>
-#else
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <dlfcn.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

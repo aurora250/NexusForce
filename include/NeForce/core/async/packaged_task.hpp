@@ -28,7 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Res, typename... Args>
 class packaged_task<Res(Args...)> {
-    using StateType = _INNER __future_base::task_state_base<Res(Args...)>;  ///< 状态类型
+    using StateType = inner::__future_base::task_state_base<Res(Args...)>;  ///< 状态类型
 
     shared_ptr<StateType> state_ptr;  ///< 任务状态共享指针
 
@@ -50,7 +50,7 @@ public:
      */
     template <typename Func, typename = enable_if_t<!is_same_v<packaged_task, remove_cvref_t<Func>>>>
     explicit packaged_task(Func&& function)
-    : state_ptr(_INNER create_task_state<Res(Args...)>(_NEFORCE forward<Func>(function)))
+    : state_ptr(inner::create_task_state<Res(Args...)>(_NEFORCE forward<Func>(function)))
     {}
 
     /**
@@ -118,7 +118,7 @@ public:
      * 同步执行包装的任务，结果或异常会传递给关联的future。
      */
     void operator ()(Args... args) {
-        _INNER __future_base::state_base::check(state_ptr);
+        inner::__future_base::state_base::check(state_ptr);
         state_ptr->run(_NEFORCE forward<Args>(args)...);
     }
 
@@ -131,7 +131,7 @@ public:
      * 适用于需要保证某些资源在结果设置前有效的场景。
      */
     void make_ready_at_thread_exit(Args... args) {
-        _INNER __future_base::state_base::check(state_ptr);
+        inner::__future_base::state_base::check(state_ptr);
         state_ptr->run_delayed(_NEFORCE forward<Args>(args)..., state_ptr);
     }
 
@@ -143,7 +143,7 @@ public:
      * 原有任务函数保持不变，但会创建新的共享状态。
      */
     void reset() {
-        _INNER __future_base::state_base::check(state_ptr);
+        inner::__future_base::state_base::check(state_ptr);
         packaged_task temp;
         temp.state_ptr = state_ptr;
         state_ptr = state_ptr->reset();
@@ -155,7 +155,7 @@ template <typename Res, typename... Args>
 packaged_task(Res(*)(Args...)) -> packaged_task<Res(Args...)>;
 
 template <typename Func, typename Sign = typename
-    _INNER __function_guide_helper<decltype(&Func::operator ())>::type>
+    inner::__function_guide_helper<decltype(&Func::operator ())>::type>
 packaged_task(Func) -> packaged_task<Sign>;
 #endif
 

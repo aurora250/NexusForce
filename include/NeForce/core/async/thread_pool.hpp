@@ -139,7 +139,7 @@ public:
 
 
 struct NEFORCE_API worker_context {
-    using id_type = _INNER manual_thread::id_type;
+    using id_type = inner::manual_thread::id_type;
 
 	local_queue queue{};
 	id_type id{0};
@@ -180,7 +180,7 @@ struct task_info {
 	timestamp submit_time{timestamp::now()};
 	timestamp start_time{0};
 	timestamp finish_time{0};
-	_INNER manual_thread::id_type worker_thread_id{0};
+	inner::manual_thread::id_type worker_thread_id{0};
 	string error{};
 	priority_type priority;
 
@@ -230,7 +230,7 @@ public:
 		NEFORCE_NODISCARD string to_string() const;
 	};
 
-    using id_type = _INNER manual_thread::id_type;
+    using id_type = inner::manual_thread::id_type;
 	using periodic_token = shared_ptr<periodic_task_state>;
 	using priority_type = task_info::priority_type;
 
@@ -254,7 +254,7 @@ private:
 		}
 	};
 
-	unordered_map<id_type, unique_ptr<_INNER manual_thread>> threads_map_;
+	unordered_map<id_type, unique_ptr<inner::manual_thread>> threads_map_;
 	unordered_map<id_type, worker_context> worker_contexts_;
 	vector<atomic<worker_context*>> worker_contexts_ptr_;
 	mutex worker_contexts_mtx_;
@@ -475,7 +475,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		&& task_size_.load() > idle_thread_size_
 		&& threads_map_.size() < thread_threshhold_) {
 
-		unique_ptr<_INNER manual_thread> ptr = _NEFORCE make_unique<_INNER manual_thread>(
+		unique_ptr<inner::manual_thread> ptr = _NEFORCE make_unique<inner::manual_thread>(
 			[this](const id_type id) {
 				thread_function(id);
 			});

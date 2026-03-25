@@ -637,7 +637,7 @@ constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2
 		}
 	}
 #else
-	return _INNER __find_end_aux(first1, last1, first2, last2);
+	return inner::__find_end_aux(first1, last1, first2, last2);
 #endif
 }
 

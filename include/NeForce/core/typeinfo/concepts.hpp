@@ -500,14 +500,14 @@ struct is_view : false_type {};
  * @tparam D 派生类类型
  */
 template <typename D>
-struct is_view<_NEFORCE_RANGES view_base<D>> : true_type {};
+struct is_view<ranges::view_base<D>> : true_type {};
 
 /**
  * @var is_view_v
  * @brief is_view的便捷变量模板
  */
 template <typename T>
-NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<_NEFORCE_RANGES view_base<T>, T>;
+NEFORCE_INLINE17 constexpr bool is_view_v = is_base_of_v<ranges::view_base<T>, T>;
 
 /** @} */ // View
 
@@ -536,7 +536,7 @@ NEFORCE_END_INNER__
  * 检查迭代器是否具有迭代器类别定义。
  */
 template <typename Iterator>
-NEFORCE_INLINE17 constexpr bool is_ranges_iter_v = _INNER __is_iterator_with_cate_v<Iterator>;
+NEFORCE_INLINE17 constexpr bool is_ranges_iter_v = inner::__is_iterator_with_cate_v<Iterator>;
 
 /**
  * @var is_iter_v

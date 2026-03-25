@@ -25,7 +25,7 @@ struct ref_wrapper_constructable_from : false_type {};
 
 template <typename T, typename U>
 struct ref_wrapper_constructable_from<T, U, void_t<
-    decltype(_INNER __ref_wrapper_construct_aux<T>(_NEFORCE declval<U>()))>>
+    decltype(inner::__ref_wrapper_construct_aux<T>(_NEFORCE declval<U>()))>>
     : true_type {};
 
 
@@ -39,7 +39,7 @@ template <typename F, typename... Args>
 struct is_nothrow_invocable;
 
 template <typename Callable, typename... Args>
-NEFORCE_CONSTEXPR14 typename _INNER __invoke_result_aux<Callable, Args...>::type
+NEFORCE_CONSTEXPR14 typename inner::__invoke_result_aux<Callable, Args...>::type
 invoke(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable<Callable, Args...>::value);
 
@@ -80,9 +80,9 @@ public:
      */
     template <typename U, enable_if_t<
         conjunction<negation<is_same<remove_cvref_t<U>, reference_wrapper>>,
-            _INNER ref_wrapper_constructable_from<T, U>>::value, int> = 0>
+            inner::ref_wrapper_constructable_from<T, U>>::value, int> = 0>
     NEFORCE_CONSTEXPR14 reference_wrapper(U&& x)
-        noexcept(noexcept(_INNER __ref_wrapper_construct_aux<T>(_NEFORCE declval<U>()))) {
+        noexcept(noexcept(inner::__ref_wrapper_construct_aux<T>(_NEFORCE declval<U>()))) {
         T& ref = static_cast<U&&>(x);
         ptr_ = _NEFORCE addressof(ref);
     }
@@ -114,7 +114,7 @@ public:
      * 如果T是可调用类型，可以通过reference_wrapper直接调用包装的函数。
      */
     template <typename... Args>
-    NEFORCE_CONSTEXPR14 typename _INNER __invoke_result_aux<T&, Args...>::type
+    NEFORCE_CONSTEXPR14 typename inner::__invoke_result_aux<T&, Args...>::type
     operator ()(Args&&... args) const noexcept(is_nothrow_invocable<T&, Args...>::value) {
         return _NEFORCE invoke(this->get(), _NEFORCE forward<Args>(args)...);
     }

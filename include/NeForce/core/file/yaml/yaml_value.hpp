@@ -264,31 +264,31 @@ string NEFORCE_API yaml_value_document(const yaml_value* root);
 NEFORCE_END_INNER__
 
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const yaml_value* value) {
-    return _INNER yaml_value_to_string(value);
+    return inner::yaml_value_to_string(value);
 }
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const yaml_value& value) {
-    return _INNER yaml_value_to_string(&value);
+    return inner::yaml_value_to_string(&value);
 }
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const yaml_ptr& value) {
-    return _INNER yaml_value_to_string(value.get());
+    return inner::yaml_value_to_string(value.get());
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string yaml_value::to_string() const {
-    return _INNER yaml_value_to_string(this);
+    return inner::yaml_value_to_string(this);
 }
 
 NEFORCE_ALWAYS_INLINE_INLINE string yaml_document(const yaml_value* value) {
-    return _INNER yaml_value_document(value);
+    return inner::yaml_value_document(value);
 }
 NEFORCE_ALWAYS_INLINE_INLINE string yaml_document(const yaml_value& value) {
-    return _INNER yaml_value_document(&value);
+    return inner::yaml_value_document(&value);
 }
 NEFORCE_ALWAYS_INLINE_INLINE string yaml_document(const yaml_ptr& value) {
-    return _INNER yaml_value_document(value.get());
+    return inner::yaml_value_document(value.get());
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string yaml_value::to_document() const {
-    return _INNER yaml_value_document(this);
+    return inner::yaml_value_document(this);
 }
 
 NEFORCE_END_NAMESPACE__

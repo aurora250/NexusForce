@@ -98,10 +98,10 @@ NEFORCE_END_CONSTANTS__
  * FNV_hash函数使用FNV-1a版本算法，先异或再乘法的顺序。
  */
 NEFORCE_CONSTEXPR14 size_t FNV_hash(const byte_t* first, const size_t count) noexcept {
-    size_t result = _CONSTANTS FNV_OFFSET_BASIS;
+    size_t result = constants::FNV_OFFSET_BASIS;
     for (size_t i = 0; i < count; i++) {
         result ^= static_cast<size_t>(first[i]);
-        result *= _CONSTANTS FNV_PRIME;
+        result *= constants::FNV_PRIME;
     }
     return result;
 }
@@ -116,11 +116,11 @@ template <typename T>
 NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
     static_assert(is_integral<T>::value, "T must be integral");
 
-    size_t result = _CONSTANTS FNV_OFFSET_BASIS;
+    size_t result = constants::FNV_OFFSET_BASIS;
     for (size_t i = 0; i < sizeof(T); ++i) {
         const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         result ^= static_cast<size_t>(byte_val);
-        result *= _CONSTANTS FNV_PRIME;
+        result *= constants::FNV_PRIME;
     }
     return result;
 }
@@ -136,10 +136,10 @@ template <typename CharT>
 NEFORCE_CONSTEXPR14 size_t FNV_hash_string(const CharT* str, const size_t len) noexcept {
     static_assert(is_character<CharT>::value, "CharT must be character types");
 
-    size_t result = _CONSTANTS FNV_OFFSET_BASIS;
+    size_t result = constants::FNV_OFFSET_BASIS;
     for (size_t i = 0; i < len; ++i) {
         result ^= static_cast<size_t>(static_cast<byte_t>(str[i]));
-        result *= _CONSTANTS FNV_PRIME;
+        result *= constants::FNV_PRIME;
     }
     return result;
 }

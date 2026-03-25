@@ -426,9 +426,9 @@ struct formatter<T, enable_if_t<is_integral_v<T> && is_unsigned_v<T>>> {
         }
 
         if (base == 10) {
-            digits = _INNER __uint_to_string<char>(static_cast<const unpackage_t<T>&>(value));
+            digits = inner::__uint_to_string<char>(static_cast<const unpackage_t<T>&>(value));
         } else {
-            digits = _INNER __uint_to_string_base(static_cast<const unpackage_t<T>&>(value), base, uppercase);
+            digits = inner::__uint_to_string_base(static_cast<const unpackage_t<T>&>(value), base, uppercase);
         }
 
         string base_prefix = "";
@@ -643,14 +643,14 @@ NEFORCE_CONSTEXPR20 string format_impl(const string_view fmt, size_t& pos, First
             pos = end_pos + 1;
             format_options opts;
             if (spec_str.empty()) {
-                opts = _INNER parse_number_format("");
+                opts = inner::parse_number_format("");
             } else if (spec_str[0] == ':') {
-                opts = _INNER parse_number_format(spec_str.substr(1));
+                opts = inner::parse_number_format(spec_str.substr(1));
             } else {
-                opts = _INNER parse_number_format(spec_str);
+                opts = inner::parse_number_format(spec_str);
             }
             result += formatter<decay_t<First>>()(_NEFORCE forward<First>(first), opts);
-            result += _INNER format_impl(fmt, pos, _NEFORCE forward<Rest>(rest)...);
+            result += inner::format_impl(fmt, pos, _NEFORCE forward<Rest>(rest)...);
             return result;
         } else if (fmt[pos] == '}') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '}') {
@@ -681,7 +681,7 @@ NEFORCE_END_INNER__
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     size_t pos = 0;
-    return _INNER format_impl(fmt, pos, _NEFORCE forward<Args>(args)...);
+    return inner::format_impl(fmt, pos, _NEFORCE forward<Args>(args)...);
 }
 
 /** @} */ // StringFormat

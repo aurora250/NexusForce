@@ -131,7 +131,7 @@ NEFORCE_CONSTEXPR20 void push_heap_aux(
     iter_difference_t<Iterator> hole_index,
     iter_difference_t<Iterator> top_index,
     T value) {
-	_INNER push_heap_aux(first, hole_index, top_index, value, less<iter_value_t<Iterator>>());
+	inner::push_heap_aux(first, hole_index, top_index, value, less<iter_value_t<Iterator>>());
 }
 
 NEFORCE_END_INNER__
@@ -152,7 +152,7 @@ NEFORCE_END_INNER__
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void push_heap(Iterator first, Iterator last, Compare comp) {
 	if (last - first < 2) return;
-	_INNER push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);
+	inner::push_heap_aux(first, last - first - 1, 0, *(last - 1), comp);
 }
 
 /**
@@ -196,7 +196,7 @@ NEFORCE_CONSTEXPR20 void adjust_heap(
 		hole_index = child;
 		child = 2 * hole_index + 1;
 	}
-	_INNER push_heap_aux(first, hole_index, top_index, value, comp);
+	inner::push_heap_aux(first, hole_index, top_index, value, comp);
 }
 
 /**
@@ -239,7 +239,7 @@ NEFORCE_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator re
  */
 template <typename Iterator, typename T>
 NEFORCE_CONSTEXPR20 void pop_heap_aux(Iterator first, Iterator last, Iterator result, T value) {
-	_INNER pop_heap_aux(first, last, result, value, less<iter_value_t<Iterator>>());
+	inner::pop_heap_aux(first, last, result, value, less<iter_value_t<Iterator>>());
 }
 
 NEFORCE_END_INNER__
@@ -261,7 +261,7 @@ template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void pop_heap(Iterator first, Iterator last, Compare comp) {
 	if (last - first < 2) return;
 	--last;
-	_INNER pop_heap_aux(first, last, last, *last, comp);
+	inner::pop_heap_aux(first, last, last, *last, comp);
 }
 
 /**

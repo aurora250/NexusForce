@@ -12,18 +12,18 @@ public:
 
 private:
     string_view name_;
-    type_id type_id_;
+    reflect::type_id type_id_;
     getter getter_;
     setter setter_;
 
 public:
-    meta_property(string_view name, type_id type_id, getter getter, setter setter)
+    meta_property(string_view name, reflect::type_id type_id, getter getter, setter setter)
     : name_(name), type_id_(type_id), getter_(move(getter)), setter_(move(setter)) {}
 
-    string_view name() const noexcept { return name_; }
-    type_id type_id() const noexcept { return type_id_; }
+    NEFORCE_NODISCARD string_view name() const noexcept { return name_; }
+    NEFORCE_NODISCARD reflect::type_id type_id() const noexcept { return type_id_; }
 
-    any get(void* obj) const {
+    NEFORCE_NODISCARD any get(void* obj) const {
         if (!obj || !getter_) return any{};
         return getter_(move(obj));
     }

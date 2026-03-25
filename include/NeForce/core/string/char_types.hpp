@@ -127,7 +127,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_ctype(const CharT c, uint64_t 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept {
-	return _NEFORCE is_ctype(c, _CONSTANTS PUNCT_MASK_LOW, _CONSTANTS PUNCT_MASK_HIGH);
+	return _NEFORCE is_ctype(c, constants::PUNCT_MASK_LOW, constants::PUNCT_MASK_HIGH);
 }
 
 /**
@@ -140,7 +140,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept {
-	return _NEFORCE is_ctype(c, _CONSTANTS CNTRL_MASK_LOW, _CONSTANTS CNTRL_MASK_HIGH);
+	return _NEFORCE is_ctype(c, constants::CNTRL_MASK_LOW, constants::CNTRL_MASK_HIGH);
 }
 
 /**
@@ -170,7 +170,7 @@ template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
 	const auto uc = static_cast<make_unsigned_t<CharT>>(c);
-	return uc < 64 && (_CONSTANTS BLANK_MASK & (1ULL << uc)) != 0;
+	return uc < 64 && (constants::BLANK_MASK & (1ULL << uc)) != 0;
 }
 
 /**
@@ -213,7 +213,7 @@ template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character type is necessary");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
-    return uc < 64 && (_CONSTANTS SPACE_MASK & (1ULL << uc)) != 0;
+    return uc < 64 && (constants::SPACE_MASK & (1ULL << uc)) != 0;
 }
 
 /**

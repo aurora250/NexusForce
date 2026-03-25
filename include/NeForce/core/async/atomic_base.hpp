@@ -445,12 +445,7 @@ struct interlocked_fetch_xor_impl<8> {
 
 #endif
 
-#ifdef NEFORCE_COMPILER_GNUC
-template <size_t Size>
-struct atomic_is_always_lock_free_impl {
-	static constexpr bool value = __atomic_always_lock_free(Size, nullptr);
-};
-#else
+#ifdef NEFORCE_COMPILER_MSVC
 template <size_t Size>
 struct atomic_is_always_lock_free_impl {
 	static constexpr bool value = false;
@@ -505,7 +500,7 @@ atomic_store(volatile T* ptr, remove_volatile_t<T> value, const memory_order mo)
 #ifdef NEFORCE_COMPILER_GNUC
     __atomic_store_n(ptr, value, static_cast<int32_t>(mo));
 #else
-    _INNER interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
+    inner::interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst || mo == memory_order_release) {
 		::_ReadWriteBarrier();
 	}
@@ -551,7 +546,7 @@ atomic_exchange(volatile T* ptr, remove_volatile_t<T> value, const memory_order 
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_exchange_n(ptr, value, static_cast<int32_t>(mo));
 #else
-	remove_volatile_t<T> old = _INNER interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
+	remove_volatile_t<T> old = inner::interlocked_exchange_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -584,7 +579,7 @@ atomic_cmpexch_weak(
 		static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
 #if defined(NEFORCE_ARCH_X86)
-	const bool result = _INNER interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, desired);
+	const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, desired);
 	if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -716,7 +711,7 @@ atomic_cmpexch_strong(
 #else
 	remove_volatile_t<T> old_val = *expected;
 	while (true) {
-		if (_INNER cmpexch_weak(ptr, expected, desired, success, failure)) {
+		if (inner::cmpexch_weak(ptr, expected, desired, success, failure)) {
 			return true;
 		}
 		if (*expected != old_val) {
@@ -743,7 +738,7 @@ atomic_fetch_add(volatile T* ptr, atomic_diff_t<T> value, const memory_order mo)
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_fetch_add(ptr, value, static_cast<int32_t>(mo));
 #else
-	remove_volatile_t<T> old = _INNER interlocked_fetch_add_impl<sizeof(T)>::call(ptr, value);
+	remove_volatile_t<T> old = inner::interlocked_fetch_add_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -787,7 +782,7 @@ atomic_fetch_and(volatile T* ptr, remove_volatile_t<T> value, const memory_order
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_fetch_and(ptr, value, static_cast<int32_t>(mo));
 #else
-	remove_volatile_t<T> old = _INNER interlocked_fetch_and_impl<sizeof(T)>::call(ptr, value);
+	remove_volatile_t<T> old = inner::interlocked_fetch_and_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -811,7 +806,7 @@ atomic_fetch_or(volatile T* ptr, remove_volatile_t<T> value, const memory_order 
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_fetch_or(ptr, value, static_cast<int32_t>(mo));
 #else
-	remove_volatile_t<T> old = _INNER interlocked_fetch_or_impl<sizeof(T)>::call(ptr, value);
+	remove_volatile_t<T> old = inner::interlocked_fetch_or_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -835,7 +830,7 @@ atomic_fetch_xor(volatile T* ptr, remove_volatile_t<T> value, const memory_order
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_fetch_xor(ptr, value, static_cast<int32_t>(mo));
 #else
-	remove_volatile_t<T> old = _INNER interlocked_fetch_xor_impl<sizeof(T)>::call(ptr, value);
+	remove_volatile_t<T> old = inner::interlocked_fetch_xor_impl<sizeof(T)>::call(ptr, value);
 	if (mo == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -967,7 +962,7 @@ atomic_cmpexch_weak_any(
 		static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
 #if defined(NEFORCE_ARCH_X86)
-	const bool result = _INNER interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
+	const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
 	if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -1093,7 +1088,7 @@ atomic_cmpexch_strong_any(
 		static_cast<int32_t>(success), static_cast<int32_t>(failure));
 #else
 #if defined(NEFORCE_ARCH_X86)
-	const bool result = _INNER interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
+	const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
 	if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
 		::_ReadWriteBarrier();
 	}
@@ -1101,7 +1096,7 @@ atomic_cmpexch_strong_any(
 #else
 	remove_volatile_t<T> old_val = *expected;
 	while (true) {
-		if (_INNER cmpexch_weak(ptr, expected, desired, success, failure)) {
+		if (inner::cmpexch_weak(ptr, expected, desired, success, failure)) {
 			return true;
 		}
 		if (*expected != old_val) {
@@ -1267,7 +1262,7 @@ constexpr bool is_always_lock_free() noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
 	return __atomic_is_lock_free(Size, reinterpret_cast<void *>(-Align));
 #else
-	return _INNER atomic_is_always_lock_free_impl<Size>::value;
+	return inner::atomic_is_always_lock_free_impl<Size>::value;
 #endif
 }
 

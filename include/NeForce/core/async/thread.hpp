@@ -160,6 +160,11 @@ private:
         void run() override { func_(); }
     };
 
+    struct thread_monitor {
+        thread_monitor() noexcept;
+        ~thread_monitor();
+    };
+
 public:
     /**
      * @brief 系统线程句柄类型
@@ -241,6 +246,7 @@ public:
     template <typename F, typename... Args, typename = enable_if_t<!is_same_v<decay_t<F>, thread>>>
     explicit thread(F&& f, Args&&... args) {
         auto func = [func = _NEFORCE move(f), args = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...)]() mutable {
+            thread_monitor monitor{};
             return _NEFORCE apply(_NEFORCE move(func), _NEFORCE move(args));
         };
         thread::start_thread(_NEFORCE move(func));

@@ -306,7 +306,7 @@ NEFORCE_END_INNER__
  * @tparam Args 参数类型
  */
 template <typename F, typename... Args>
-struct invoke_result<F(Args...)> : _INNER __invoke_result_aux<F, Args...> {};
+struct invoke_result<F(Args...)> : inner::__invoke_result_aux<F, Args...> {};
 
 /**
  * @typedef invoke_result_t
@@ -315,7 +315,7 @@ struct invoke_result<F(Args...)> : _INNER __invoke_result_aux<F, Args...> {};
  * @tparam Args 参数类型
  */
 template <typename F, typename... Args>
-using invoke_result_t = typename _INNER __invoke_result_aux<F, Args...>::type;
+using invoke_result_t = typename inner::__invoke_result_aux<F, Args...>::type;
 
 /** @} */ // InvokeResult
 
@@ -398,7 +398,7 @@ NEFORCE_END_INNER__
  * 检查是否可以使用给定的参数调用F，不关心返回类型。
  */
 template <typename F, typename... Args>
-struct is_invocable : _INNER __is_invocable_aux<_INNER __invoke_result_aux<F, Args...>, void>::type {};
+struct is_invocable : inner::__is_invocable_aux<inner::__invoke_result_aux<F, Args...>, void>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -420,7 +420,7 @@ NEFORCE_INLINE17 constexpr bool is_invocable_v = is_invocable<F, Args...>::value
  * 检查是否可以使用给定的参数调用F，并且返回类型可以转换为Ret。
  */
 template <typename Ret, typename F, typename... Args>
-struct is_invocable_r : _INNER __is_invocable_aux<_INNER __invoke_result_aux<F, Args...>, Ret>::type {};
+struct is_invocable_r : inner::__is_invocable_aux<inner::__invoke_result_aux<F, Args...>, Ret>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -488,7 +488,7 @@ NEFORCE_END_INNER__
  */
 template <typename F, typename... Args>
 struct is_nothrow_invocable : conjunction<
-    is_invocable<F, Args...>, _INNER __bind_invoke_is_nothrow<F, Args...>>::type {};
+    is_invocable<F, Args...>, inner::__bind_invoke_is_nothrow<F, Args...>>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -521,7 +521,7 @@ NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_other_tag, F&& f, Args&&... arg
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
 NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_ref_tag, MemFun&& f, T&& t, Args&&... args) {
-    return (_INNER __invoke_forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
+    return (inner::__invoke_forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
 NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args){
@@ -529,7 +529,7 @@ NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T
 }
 template <typename Res, typename MemPtr, typename T>
 NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_ref_tag, MemPtr&& f, T&& t) {
-    return _INNER __invoke_forward<T>(t).*f;
+    return inner::__invoke_forward<T>(t).*f;
 }
 template <typename Res, typename MemPtr, typename T>
 NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_deref_tag, MemPtr&& f, T&& t) {
@@ -555,13 +555,13 @@ NEFORCE_END_INNER__
  * 4. 函数对象调用
  */
 template <typename Callable, typename... Args>
-NEFORCE_CONSTEXPR14 typename _INNER __invoke_result_aux<Callable, Args...>::type
+NEFORCE_CONSTEXPR14 typename inner::__invoke_result_aux<Callable, Args...>::type
 invoke(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    using result = _INNER __invoke_result_aux<Callable, Args...>;
+    using result = inner::__invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
-    return _INNER __invoke_dispatch<type>(tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
+    return inner::__invoke_dispatch<type>(tag{}, _NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...);
 }
 
 
@@ -602,10 +602,10 @@ template <typename Res, typename Callable, typename... Args>
 NEFORCE_CONSTEXPR14 enable_if_t<is_invocable_r<Res, Callable, Args...>::value, Res>
 invoke_r(Callable&& f, Args&&... args)
 noexcept(is_nothrow_invocable<Callable, Args...>::value) {
-    using result = _INNER  __invoke_result_aux<Callable, Args...>;
+    using result = inner:: __invoke_result_aux<Callable, Args...>;
     using type = typename result::type;
     using tag = typename result::invoke_type;
-    return _INNER __invoke_r_dispatch<type, tag, Res, Callable, Args...>(
+    return inner::__invoke_r_dispatch<type, tag, Res, Callable, Args...>(
     	_NEFORCE forward<Callable>(f), _NEFORCE forward<Args>(args)...
 	);
 }

@@ -54,7 +54,7 @@ NEFORCE_END_INNER__
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 struct common_type<duration<Rep1, Period1>, duration<Rep2, Period2>>
-    : _INNER __duration_common_type<common_type<Rep1, Rep2>, typename Period1::type, typename Period2::type>
+    : inner::__duration_common_type<common_type<Rep1, Rep2>, typename Period1::type, typename Period2::type>
 {};
 
 template <typename Rep, typename Period>
@@ -149,7 +149,7 @@ constexpr ToDur time_cast(const duration<Rep, Period>& value) {
 	using to_rep = typename ToDur::rep;
 	using conversion_factor = ratio_divide<Period, to_period>;
 	using common_rep = common_type_t<to_rep, Rep, intmax_t>;
-	using duration_caster = _INNER __duration_cast_impl<ToDur, conversion_factor, common_rep,
+	using duration_caster = inner::__duration_cast_impl<ToDur, conversion_factor, common_rep,
 		conversion_factor::num == 1, conversion_factor::den == 1>;
 	return duration_caster::__cast(value);
 }
@@ -504,7 +504,7 @@ operator -(const duration<Rep1, Period1>& lhs, const duration<Rep2, Period2>& rh
  * @return 持续时间乘以标量的结果
  */
 template <typename Rep1, typename Period, typename Rep2>
-constexpr duration<_INNER __common_rep_t<Rep1, Rep2>, Period>
+constexpr duration<inner::__common_rep_t<Rep1, Rep2>, Period>
 operator *(const duration<Rep1, Period>& value, const Rep2& scalar) {
     using common_duration = duration<common_type_t<Rep1, Rep2>, Period>;
     return common_duration(common_duration(value).count() * scalar);
@@ -520,7 +520,7 @@ operator *(const duration<Rep1, Period>& value, const Rep2& scalar) {
  * @return 标量乘以持续时间的结果
  */
 template <typename Rep1, typename Rep2, typename Period>
-constexpr duration<_INNER __common_rep_t<Rep2, Rep1>, Period>
+constexpr duration<inner::__common_rep_t<Rep2, Rep1>, Period>
 operator *(const Rep1& scalar, const duration<Rep2, Period>& value) {
     return value * scalar;
 }
@@ -535,7 +535,7 @@ operator *(const Rep1& scalar, const duration<Rep2, Period>& value) {
  * @return 持续时间除以标量的结果
  */
 template <typename Rep1, typename Period, typename Rep2>
-constexpr duration<_INNER __common_rep_t<Rep1, enable_if_t<!is_duration_v<Rep2>, Rep2>>, Period>
+constexpr duration<inner::__common_rep_t<Rep1, enable_if_t<!is_duration_v<Rep2>, Rep2>>, Period>
 operator /(const duration<Rep1, Period>& value, const Rep2& scalar) {
     using common_duration = duration<common_type_t<Rep1, Rep2>, Period>;
     return common_duration(common_duration(value).count() / scalar);
@@ -570,7 +570,7 @@ operator /(const duration<Rep1, Period1>& lhs, const duration<Rep2, Period2>& rh
  * @return 持续时间对标量取模的结果
  */
 template <typename Rep1, typename Period, typename Rep2>
-constexpr duration<_INNER __common_rep_t<Rep1, enable_if_t<!is_duration_v<Rep2>, Rep2>>, Period>
+constexpr duration<inner::__common_rep_t<Rep1, enable_if_t<!is_duration_v<Rep2>, Rep2>>, Period>
 operator %(const duration<Rep1, Period>& value, const Rep2& scalar) {
     using common_duration = duration<common_type_t<Rep1, Rep2>, Period>;
     return common_duration(common_duration(value).count() % scalar);
@@ -780,7 +780,7 @@ constexpr duration<decimal_t, ratio<3600, 1>> operator ""_h(const decimal_t hour
  */
 template <char... Digits>
 constexpr hours operator ""_h() noexcept {
-	return _INNER __check_overflow<hours, Digits...>();
+	return inner::__check_overflow<hours, Digits...>();
 }
 
 /**
@@ -799,7 +799,7 @@ constexpr duration<decimal_t, ratio<60, 1>> operator ""_min(const decimal_t mins
  */
 template <char... Digits>
 constexpr minutes operator ""_min() noexcept {
-	return _INNER __check_overflow<minutes, Digits...>();
+	return inner::__check_overflow<minutes, Digits...>();
 }
 
 /**
@@ -818,7 +818,7 @@ constexpr duration<decimal_t> operator ""_s(const decimal_t secs) noexcept {
  */
 template <char... Digits>
 constexpr seconds operator ""_s() noexcept {
-	return _INNER __check_overflow<seconds, Digits...>();
+	return inner::__check_overflow<seconds, Digits...>();
 }
 
 /**
@@ -837,7 +837,7 @@ constexpr duration<decimal_t, milli> operator ""_ms(const decimal_t msecs) noexc
  */
 template <char... Digits>
 constexpr milliseconds operator ""_ms() noexcept {
-	return _INNER __check_overflow<milliseconds, Digits...>();
+	return inner::__check_overflow<milliseconds, Digits...>();
 }
 
 /**
@@ -856,7 +856,7 @@ constexpr duration<decimal_t, micro> operator ""_us(const decimal_t usecs) noexc
  */
 template <char... Digits>
 constexpr microseconds operator ""_us() noexcept {
-	return _INNER __check_overflow<microseconds, Digits...>();
+	return inner::__check_overflow<microseconds, Digits...>();
 }
 
 /**
@@ -875,7 +875,7 @@ constexpr duration<decimal_t, nano> operator ""_ns(const decimal_t nsecs) noexce
  */
 template <char... Digits>
 constexpr nanoseconds operator ""_ns() noexcept {
-	return _INNER __check_overflow<nanoseconds, Digits...>();
+	return inner::__check_overflow<nanoseconds, Digits...>();
 }
 
 /** @} */ // UserLiterals
@@ -910,11 +910,11 @@ void sleep_for(const duration<Rep, Period> time) {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
 	const nanoseconds ns = time.to_nano();
-    _INNER sleep_for_aux(0, ns.count());
+    inner::sleep_for_aux(0, ns.count());
 #elif defined(NEFORCE_PLATFORM_LINUX)
     const seconds s = time.to_sec();
     const nanoseconds ns(time - s);
-    _INNER sleep_for_aux(s.count(), ns.count());
+    inner::sleep_for_aux(s.count(), ns.count());
 #endif
 }
 

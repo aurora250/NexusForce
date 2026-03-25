@@ -55,14 +55,14 @@ NEFORCE_END_CONSTANTS__
  */
 constexpr int popcount64(const uint64_t x) noexcept {
     return
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
+        constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 32) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 40) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 48) & 0xFFULL)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 56) & 0xFFULL)];
 }
 
 /**
@@ -95,10 +95,10 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
  */
 constexpr int popcount32(const uint32_t x) noexcept {
     return
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
-        _CONSTANTS POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
+        constants::POPCOUNT_TABLE[static_cast<byte_t>(x & 0xFFU)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 8) & 0xFFU)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 16) & 0xFFU)] +
+        constants::POPCOUNT_TABLE[static_cast<byte_t>((x >> 24) & 0xFFU)];
 }
 
 /**

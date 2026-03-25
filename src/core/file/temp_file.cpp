@@ -97,7 +97,7 @@ temp_file::~temp_file() {
 }
 
 temp_file::temp_file(temp_file&& other) noexcept
-: file_(_NEFORCE move(other.file_)), delete_policy_(other.delete_policy_) {
+: file_(move(other.file_)), delete_policy_(other.delete_policy_) {
     other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
 }
 
@@ -105,7 +105,7 @@ temp_file& temp_file::operator =(temp_file&& other) noexcept {
     if (this != addressof(other)) {
         cleanup();
 
-        file_ = _NEFORCE move(other.file_);
+        file_ = move(other.file_);
 
         delete_policy_ = other.delete_policy_;
         other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
@@ -121,7 +121,7 @@ void temp_file::cleanup() {
     if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
         lock<mutex> lock(get_registry_mutex());
         auto& registry = get_temp_registry();
-        const auto it = _NEFORCE find(registry.begin(), registry.end(), file_.path());
+        const auto it = find(registry.begin(), registry.end(), file_.path());
         if (it != registry.end()) {
             registry.erase(it);
         }
@@ -134,7 +134,7 @@ void temp_file::release() {
 
     lock<mutex> lock(get_registry_mutex());
     auto& registry = get_temp_registry();
-    const auto it = _NEFORCE find(registry.begin(), registry.end(), file_.path());
+    const auto it = find(registry.begin(), registry.end(), file_.path());
     if (it != registry.end()) {
         registry.erase(it);
     }

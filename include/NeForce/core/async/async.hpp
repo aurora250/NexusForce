@@ -37,10 +37,10 @@ template <typename Func, typename... Args>
 NEFORCE_NODISCARD future<async_result_t<Func, Args...>>
 async(launch policy, Func&& function, Args&&... args) {
     using Wrapper = call_wrapper<Func, Args...>;
-    using AsyncState = _INNER __future_base::async_state_impl<Wrapper, async_result_t<Func, Args...>>;
-    using DeferredState = _INNER __future_base::deferred_state<Wrapper, async_result_t<Func, Args...>>;
+    using AsyncState = inner::__future_base::async_state_impl<Wrapper, async_result_t<Func, Args...>>;
+    using DeferredState = inner::__future_base::deferred_state<Wrapper, async_result_t<Func, Args...>>;
 
-    shared_ptr<_INNER __future_base::state_base> state;
+    shared_ptr<inner::__future_base::state_base> state;
     if ((policy & launch::async) == launch::async) {
         state = _NEFORCE make_shared<AsyncState>(
             _NEFORCE forward<Func>(function),

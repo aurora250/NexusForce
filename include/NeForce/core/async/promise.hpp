@@ -34,16 +34,16 @@ class promise {
     static_assert(is_destructible_v<Res>, "result type must be destructible");
 
 public:
-    using state_type = _INNER __future_base::state_base;   ///< 状态类型
-    using result_type = _INNER __future_base::basic_result<Res>;   ///< 结果类型
-    using ptr_type = _INNER __future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;   ///< 状态类型
+    using result_type = inner::__future_base::basic_result<Res>;   ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
 
 private:
     shared_ptr<state_type> future_ptr;  ///< 共享状态指针
     ptr_type storage;  ///< 结果存储
 
     template <typename T, typename U>
-    friend struct _INNER __future_base::state_base::setter;
+    friend struct inner::__future_base::state_base::setter;
 
     /**
      * @brief 获取内部状态引用
@@ -51,7 +51,7 @@ private:
      * @throw future_exception 如果状态无效
      */
     NEFORCE_NODISCARD state_type& state() const {
-        _INNER __future_base::state_base::check(future_ptr);
+        inner::__future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
 
@@ -160,19 +160,19 @@ public:
 template <typename Res>
 class promise<Res&> {
 public:
-    using state_type = _INNER __future_base::state_base;   ///< 状态类型
-    using result_type = _INNER __future_base::basic_result<Res&>;   ///< 结果类型
-    using ptr_type = _INNER __future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;   ///< 状态类型
+    using result_type = inner::__future_base::basic_result<Res&>;   ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
 
 private:
     shared_ptr<state_type> future_ptr;  ///< 共享状态指针
     ptr_type storage;   ///< 结果存储
 
     template <typename T, typename U>
-    friend struct _INNER __future_base::state_base::setter;
+    friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
-        _INNER __future_base::state_base::check(future_ptr);
+        inner::__future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
 
@@ -270,19 +270,19 @@ public:
 template <>
 class promise<void> {
 public:
-    using state_type = _INNER __future_base::state_base;   ///< 状态类型
-    using result_type = _INNER __future_base::basic_result<void>;   ///< 结果类型
-    using ptr_type = _INNER __future_base::Ptr<result_type>;   ///< 结果指针类型
+    using state_type = inner::__future_base::state_base;   ///< 状态类型
+    using result_type = inner::__future_base::basic_result<void>;   ///< 结果类型
+    using ptr_type = inner::__future_base::Ptr<result_type>;   ///< 结果指针类型
 
 private:
     shared_ptr<state_type> future_ptr;   ///< 共享状态指针
     ptr_type storage;   ///< 结果存储
 
     template <typename T, typename U>
-    friend struct _INNER __future_base::state_base::setter;
+    friend struct inner::__future_base::state_base::setter;
 
     NEFORCE_NODISCARD state_type& state() const {
-        _INNER __future_base::state_base::check(future_ptr);
+        inner::__future_base::state_base::check(future_ptr);
         return *future_ptr;
     }
 
@@ -552,7 +552,7 @@ create_task_state(Func&& func, const Alloc& alloc = Alloc()) {
 template <typename Func, typename Alloc, typename Res, typename... Args>
 shared_ptr<__future_base::task_state_base<Res(Args...)>>
 __future_base::task_state<Func, Alloc, Res(Args...)>::reset() {
-    return _INNER create_task_state<Res(Args...)>(_NEFORCE move(impl.function_ptr), static_cast<Alloc&>(impl));
+    return inner::create_task_state<Res(Args...)>(_NEFORCE move(impl.function_ptr), static_cast<Alloc&>(impl));
 }
 
 NEFORCE_END_INNER__

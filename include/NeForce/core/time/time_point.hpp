@@ -39,7 +39,7 @@ NEFORCE_END_INNER__
 
 template <typename Clock, typename Dur1, typename Dur2>
 struct common_type<time_point<Clock, Dur1>, time_point<Clock, Dur2>>
-    : _INNER __timepoint_common_type<common_type<Dur1, Dur2>, Clock>
+    : inner::__timepoint_common_type<common_type<Dur1, Dur2>, Clock>
 {};
 
 template <typename Clock, typename Dur>

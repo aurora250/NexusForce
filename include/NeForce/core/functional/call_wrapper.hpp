@@ -33,7 +33,7 @@ private:
 
     template <typename Func, typename... Args>
     struct result_t<_NEFORCE tuple<Func, Args...>>
-        : _INNER __invoke_result_aux<Func, Args...> {};
+        : inner::__invoke_result_aux<Func, Args...> {};
 
     using Tuple = _NEFORCE tuple<decay_t<Types>...>;
 

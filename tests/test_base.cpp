@@ -382,7 +382,7 @@ void test_math() {
         println(sine(1));
         println(cosine(angular2radian(270)));
         println(remainder(73.263, 0.9973));
-        println(float_part(_CONSTANTS PI));
+        println(float_part(constants::PI));
         println(exponential(3));
         println(logarithm_e(165.f));
         println(logarithm_10(147.f));
@@ -392,9 +392,9 @@ void test_math() {
         println(arcsine(1), arcsine(0), arcsine(-1));
         println(arccosine(1), arccosine(0), arccosine(-1));
         println(arctangent(numeric_traits<decimal_t>::max()), arctangent(numeric_traits<decimal_t>::min_nega()));
-        // println(tangent(_CONSTANTS PI / 2));  // MathError
+        // println(tangent(constants::PI / 2));  // MathError
         println(tangent(0));
-        println(around_pi(_CONSTANTS PI), ":", around_pi(6.28));
+        println(around_pi(constants::PI), ":", around_pi(6.28));
     } catch (const exception& e) {
         println(e);
     }

@@ -265,8 +265,8 @@ void thread_pool::thread_function(const id_type thread_id) {
         } else {
             ++get_worker_context()->consecutive_idle_count;
 
-            const size_t shift = _NEFORCE min(get_worker_context()->consecutive_idle_count, MAX_IDLE_SHIFT);
-            size_t wait_ms = _NEFORCE min(MIN_WAIT_MS << shift, MAX_WAIT_MS);
+            const size_t shift = min(get_worker_context()->consecutive_idle_count, MAX_IDLE_SHIFT);
+            size_t wait_ms = min(MIN_WAIT_MS << shift, MAX_WAIT_MS);
 
             smart_lock<mutex> lk(task_queue_mtx_);
 
@@ -444,7 +444,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     idle_thread_size_ = 0;
 
     for (id_type i = 0; i < init_thread_size_; i++) {
-        auto ptr = make_unique<_INNER manual_thread>(
+        auto ptr = make_unique<inner::manual_thread>(
             [this](const int id) {
                 thread_function(id);
             });

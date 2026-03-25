@@ -1,11 +1,10 @@
 #include <NeForce/core/exception/exception.hpp>
 #include <NeForce/core/exception/exception_ptr.hpp>
 #include <NeForce/core/exception/terminate.hpp>
-#include <exception>
 NEFORCE_BEGIN_NAMESPACE__
 
 exception_ptr current_exception() noexcept {
-    if (std::uncaught_exceptions() == 0) {
+    if (uncaught_exceptions() == 0) {
         return exception_ptr();
     }
 
@@ -22,7 +21,7 @@ exception_ptr current_exception() noexcept {
 
 void rethrow_exception(const exception_ptr& p) {
     if (!p || !p.ecb_ || !p.ecb_->wrapper) {
-        _NEFORCE terminate();
+        terminate();
     }
     p.ecb_->wrapper->rethrow();
 }

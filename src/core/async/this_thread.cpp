@@ -61,7 +61,7 @@ void NEFORCE_API sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept 
                 break;
             }
 
-            auto remaining = _NEFORCE time_cast<milliseconds>(target_time - now);
+            auto remaining = time_cast<milliseconds>(target_time - now);
 
             if (remaining.count() > 1) {
                 ::timespec ts;

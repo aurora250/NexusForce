@@ -3,7 +3,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void json_parser::skip_space() noexcept {
-    while (pos_ < len_ && _NEFORCE is_space(text_[pos_])) {
+    while (pos_ < len_ && is_space(text_[pos_])) {
         pos_++;
     }
 }
@@ -46,23 +46,23 @@ unique_ptr<json_number> json_parser::parse_number() {
         pos_++;
         if (pos_ < len_ && text_[pos_] == '.') {
             pos_++;
-            if (pos_ >= len_ || !_NEFORCE is_digit(text_[pos_])) {
+            if (pos_ >= len_ || !is_digit(text_[pos_])) {
                 NEFORCE_THROW_EXCEPTION(json_exception("Invalid decimal part"));
             }
-            while (pos_ < len_ && _NEFORCE is_digit(text_[pos_])) {
+            while (pos_ < len_ && is_digit(text_[pos_])) {
                 pos_++;
             }
         }
-    } else if (_NEFORCE is_digit(current())) {
-        while (pos_ < len_ && _NEFORCE is_digit(text_[pos_])) {
+    } else if (is_digit(current())) {
+        while (pos_ < len_ && is_digit(text_[pos_])) {
             pos_++;
         }
         if (pos_ < len_ && text_[pos_] == '.') {
             pos_++;
-            if (pos_ >= len_ || !_NEFORCE is_digit(text_[pos_])) {
+            if (pos_ >= len_ || !is_digit(text_[pos_])) {
                 NEFORCE_THROW_EXCEPTION(json_exception("Invalid decimal part"));
             }
-            while (pos_ < len_ && _NEFORCE is_digit(text_[pos_])) {
+            while (pos_ < len_ && is_digit(text_[pos_])) {
                 pos_++;
             }
         }
@@ -75,10 +75,10 @@ unique_ptr<json_number> json_parser::parse_number() {
         if (pos_ < len_ && (text_[pos_] == '+' || text_[pos_] == '-')) {
             pos_++;
         }
-        if (pos_ >= len_ || !_NEFORCE is_digit(text_[pos_])) {
+        if (pos_ >= len_ || !is_digit(text_[pos_])) {
             NEFORCE_THROW_EXCEPTION(json_exception("Invalid exponent part"));
         }
-        while (pos_ < len_ && _NEFORCE is_digit(text_[pos_])) {
+        while (pos_ < len_ && is_digit(text_[pos_])) {
             pos_++;
         }
     }
@@ -94,7 +94,7 @@ unique_ptr<json_number> json_parser::parse_number() {
 
 unique_ptr<json_value> json_parser::parse_keyword() {
     const size_t start = pos_;
-    while (pos_ < len_ && _NEFORCE is_alpha(text_[pos_])) {
+    while (pos_ < len_ && is_alpha(text_[pos_])) {
         pos_++;
     }
 
@@ -123,7 +123,7 @@ unique_ptr<json_array> json_parser::parse_array() {
     while (true) {
         skip_space();
         auto element = parse_value();
-        array->add_element(_NEFORCE move(element));
+        array->add_element(move(element));
         skip_space();
 
         if (current() == ']') {
@@ -165,7 +165,7 @@ unique_ptr<json_object> json_parser::parse_object() {
         skip_space();
 
         auto value = parse_value();
-        object->add_member(key, _NEFORCE move(value));
+        object->add_member(key, move(value));
 
         skip_space();
         if (current() == '}') {

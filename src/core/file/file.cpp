@@ -156,9 +156,9 @@ file::line_iterator file::line_iterator::operator++(int) {
 
 
 file::async_context::async_context(string&& d)
-: data(_NEFORCE move(d)), is_write(true) {
+: data(move(d)), is_write(true) {
     cb = new aiocb_type{};
-    _NEFORCE memory_zero(cb);
+    memory_zero(cb);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
@@ -167,7 +167,7 @@ file::async_context::async_context(string&& d)
 file::async_context::async_context(string* buf)
 : buffer(buf), is_write(false) {
     cb = new aiocb_type{};
-    _NEFORCE memory_zero(cb);
+    memory_zero(cb);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     cb->hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
 #endif
@@ -192,7 +192,7 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (result.cb) {
-        auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
+        auto it = find(async_operations_.begin(), async_operations_.end(), result.cb);
         if (it != async_operations_.end()) {
             async_operations_.erase(it);
         }
@@ -207,7 +207,7 @@ bool file::complete_async_result(async_result& result, const size_type bytes_tra
     }
 #elif defined(NEFORCE_PLATFORM_LINUX)
     if (result.cb) {
-        auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
+        auto it = find(async_operations_.begin(), async_operations_.end(), result.cb);
         if (it != async_operations_.end()) {
             async_operations_.erase(it);
         }
@@ -361,20 +361,20 @@ file::file()
 
 file::file(file&& other) noexcept
 : handle_(other.handle_),
-  path_(_NEFORCE move(other.path_)),
+  path_(move(other.path_)),
   opened_(other.opened_),
   append_mode_(other.append_mode_),
-  read_buffer_(_NEFORCE move(other.read_buffer_)),
+  read_buffer_(move(other.read_buffer_)),
   read_buffer_pos_(other.read_buffer_pos_),
   read_buffer_size_(other.read_buffer_size_),
-  write_buffer_(_NEFORCE move(other.write_buffer_)),
+  write_buffer_(move(other.write_buffer_)),
   write_buffer_pos_(other.write_buffer_pos_),
   mapped_ptr_(other.mapped_ptr_),
   mapped_size_(other.mapped_size_),
 #ifdef NEFORCE_PLATFORM_WINDOWS
   mapping_handle_(other.mapping_handle_),
 #endif
-  last_error_msg_(_NEFORCE move(other.last_error_msg_)),
+  last_error_msg_(move(other.last_error_msg_)),
   last_error_code_(other.last_error_code_) {
     other.handle_ = INVALID_HANDLE();
     other.opened_ = false;
@@ -394,17 +394,17 @@ file::file(file&& other) noexcept
 }
 
 file& file::operator =(file&& other) noexcept {
-    if (this == _NEFORCE addressof(other)) return *this;
+    if (this == addressof(other)) return *this;
 
     this->close();
     handle_ = other.handle_;
-    path_ = _NEFORCE move(other.path_);
+    path_ = move(other.path_);
     opened_ = other.opened_;
     append_mode_ = other.append_mode_;
-    read_buffer_ = _NEFORCE move(other.read_buffer_);
+    read_buffer_ = move(other.read_buffer_);
     read_buffer_pos_ = other.read_buffer_pos_;
     read_buffer_size_ = other.read_buffer_size_;
-    write_buffer_ = _NEFORCE move(other.write_buffer_);
+    write_buffer_ = move(other.write_buffer_);
     write_buffer_pos_ = other.write_buffer_pos_;
 
     other.handle_ = INVALID_HANDLE();
@@ -540,7 +540,7 @@ bool file::open(
     }
 #endif
 
-    path_ = _NEFORCE move(p);
+    path_ = move(p);
     opened_ = true;
     append_mode_ = append;
 
@@ -621,7 +621,7 @@ file::size_type file::write(const void* data, const size_type size) {
         while (total_written < size) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             size_type bytes_written = 0;
-            const size_type to_write = _NEFORCE min<size_type>(
+            const size_type to_write = min<size_type>(
                 size - total_written,
                 numeric_traits<size_type>::max()
             );
@@ -652,9 +652,9 @@ file::size_type file::write(const void* data, const size_type size) {
 
     while (remaining > 0) {
         const size_type available = buffer_size_ - write_buffer_pos_;
-        const size_type to_copy = _NEFORCE min(remaining, available);
+        const size_type to_copy = min(remaining, available);
 
-        _NEFORCE copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
+        copy_n(ptr, to_copy, write_buffer_.begin() + write_buffer_pos_);
         write_buffer_pos_ += to_copy;
         total_written += to_copy;
         ptr += to_copy;
@@ -698,9 +698,9 @@ file::size_type file::read(void* buffer, const size_type size) const {
         }
 
         const size_type available_in_buffer = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read = _NEFORCE min(remaining, available_in_buffer);
+        const size_type to_read = min(remaining, available_in_buffer);
 
-        _NEFORCE copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
+        copy_n(read_buffer_.data() + read_buffer_pos_, to_read, ptr);
         read_buffer_pos_ += to_read;
         ptr += to_read;
         total_read += to_read;
@@ -768,7 +768,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
             while (bytes_read < to_read) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
                 size_type bytes_read_now = 0;
-                const size_type to_read_now = _NEFORCE min<size_type>(
+                const size_type to_read_now = min<size_type>(
                     to_read - bytes_read,
                     numeric_traits<size_type>::max()
                 );
@@ -804,7 +804,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
         }
 
         if (!chunk.empty()) {
-            chunks.push_back(_NEFORCE move(chunk));
+            chunks.push_back(move(chunk));
         } else {
             break;
         }
@@ -850,7 +850,7 @@ bool file::write_chunks(const vector<string>& chunks) {
                 }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-                const size_type to_write = _NEFORCE min<size_type>(
+                const size_type to_write = min<size_type>(
                     remaining,
                     numeric_traits<size_type>::max()
                 );
@@ -924,7 +924,7 @@ vector<file::chunk_info> file::chunks_info(size_type chunk_size) const {
         ci.index = index;
 
         const size_type remaining = file_sz - offset;
-        ci.size = _NEFORCE min(remaining, chunk_size);
+        ci.size = min(remaining, chunk_size);
         info.push_back(ci);
 
         if (file_sz - offset < ci.size) break;
@@ -951,9 +951,9 @@ file::size_type file::read_binary(void* out, const size_type size) const {
         }
 
         const size_type available = read_buffer_size_ - read_buffer_pos_;
-        const size_type to_read = _NEFORCE min(remaining, available);
+        const size_type to_read = min(remaining, available);
 
-        _NEFORCE memory_copy(ptr, read_buffer_.data() + read_buffer_pos_, to_read);
+        memory_copy(ptr, read_buffer_.data() + read_buffer_pos_, to_read);
         read_buffer_pos_ += to_read;
         ptr += to_read;
         total_read += to_read;
@@ -1051,7 +1051,7 @@ vector<string> file::read_lines() const {
         if (!line.empty() && line.back() == '\r') {
             line.pop_back();
         }
-        lines.emplace_back(_NEFORCE move(line));
+        lines.emplace_back(move(line));
         start = end + 1;
         end = content.find('\n', start);
     }
@@ -1118,7 +1118,7 @@ file::async_result file::async_read(
     }
 
     size_type bytes_read = 0;
-    const size_type read_size = _NEFORCE min<size_type>(size, numeric_traits<size_type>::max());
+    const size_type read_size = min<size_type>(size, numeric_traits<size_type>::max());
 
     if (::ReadFile(handle_, buffer.data(), read_size, &bytes_read, context->cb)) {
         result.completed = true;
@@ -1190,9 +1190,9 @@ file::async_result file::async_write(string data,
     }
 
     const size_type real_size = (size == numeric_traits<size_type>::max()) ?
-        data.size() : _NEFORCE min(size, static_cast<size_type>(data.size()));
+        data.size() : min(size, static_cast<size_type>(data.size()));
 
-    auto* context = new async_context(_NEFORCE move(data));
+    auto* context = new async_context(move(data));
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (!context->cb->hEvent) {
         delete context;
@@ -1215,7 +1215,7 @@ file::async_result file::async_write(string data,
     }
 
     size_type bytes_written = 0;
-    const size_type write_size = _NEFORCE min<size_type>(real_size, numeric_traits<size_type>::max());
+    const size_type write_size = min<size_type>(real_size, numeric_traits<size_type>::max());
 
     if (::WriteFile(handle_, data.data(), write_size, &bytes_written, context->cb)) {
         result.completed = true;
@@ -1366,7 +1366,7 @@ void file::cancel_async(async_result& result) {
         result.error_code = ERROR_OPERATION_ABORTED;
     }
 
-    auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
+    auto it = find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
@@ -1409,7 +1409,7 @@ void file::cancel_async(async_result& result) {
         result.error_code = errno;
     }
 
-    const auto it = _NEFORCE find(async_operations_.begin(), async_operations_.end(), result.cb);
+    const auto it = find(async_operations_.begin(), async_operations_.end(), result.cb);
     if (it != async_operations_.end()) {
         async_operations_.erase(it);
     }
@@ -1613,7 +1613,7 @@ bool file::compare_binary(const _NEFORCE path& file1, const _NEFORCE path& file2
 
     while (total_read < size1) {
         const size_type remaining = size1 - total_read;
-        const size_type to_read = _NEFORCE min(remaining, COMPARE_BUFFER_SIZE);
+        const size_type to_read = min(remaining, COMPARE_BUFFER_SIZE);
 
         const size_type bytes_read1 = f1.read_binary(buffer1, to_read);
         const size_type bytes_read2 = f2.read_binary(buffer2, to_read);
@@ -1622,7 +1622,7 @@ bool file::compare_binary(const _NEFORCE path& file1, const _NEFORCE path& file2
             result = false;
             break;
         }
-        if (_NEFORCE memory_compare(buffer1.data(), buffer2.data(), to_read) != 0) {
+        if (memory_compare(buffer1.data(), buffer2.data(), to_read) != 0) {
             result = false;
             break;
         }
@@ -1659,10 +1659,10 @@ bool file::compare_text(const _NEFORCE path& file1, const _NEFORCE path& file2,
             size_t start = 0;
             size_t end = str.length();
 
-            while (start < end && _NEFORCE is_space(str[start])) {
+            while (start < end && is_space(str[start])) {
                 ++start;
             }
-            while (end > start && _NEFORCE is_space(str[end - 1])) {
+            while (end > start && is_space(str[end - 1])) {
                 --end;
             }
 
@@ -1736,7 +1736,7 @@ vector<file::binary_diff_entry> file::binary_diff(
 
     if (size1 != size2 && diffs.size() < max_diffs) {
         binary_diff_entry entry;
-        entry.offset = static_cast<difference_type>(_NEFORCE min(size1, size2));
+        entry.offset = static_cast<difference_type>(min(size1, size2));
         entry.byte1 = 0;
         entry.byte2 = 0;
         entry.is_size_diff = true;
@@ -1744,7 +1744,7 @@ vector<file::binary_diff_entry> file::binary_diff(
         diffs.push_back(entry);
     }
 
-    const size_type min_size = _NEFORCE min(size1, size2);
+    const size_type min_size = min(size1, size2);
     if (min_size == 0) return diffs;
 
     constexpr size_type BLOCK_SIZE = 64 * 1024;
@@ -1754,14 +1754,14 @@ vector<file::binary_diff_entry> file::binary_diff(
 
     while (offset < min_size && diffs.size() < max_diffs) {
         const size_type remaining = min_size - offset;
-        const size_type to_read = _NEFORCE min(remaining, BLOCK_SIZE);
+        const size_type to_read = min(remaining, BLOCK_SIZE);
         const size_type bytes1 = f1.read_binary(buffer1, to_read);
         const size_type bytes2 = f2.read_binary(buffer2, to_read);
 
         if (bytes1 != to_read || bytes2 != to_read) {
             break;
         }
-        if (_NEFORCE memory_compare(buffer1.data(), buffer2.data(), to_read) == 0) {
+        if (memory_compare(buffer1.data(), buffer2.data(), to_read) == 0) {
             offset += to_read;
             continue;
         }
@@ -1895,7 +1895,7 @@ bool file::prefetch(const size_type hint_size) const noexcept {
         if (hint_size > numeric_traits<size_type>::max() / 2) {
             prefetch_size = numeric_traits<size_type>::max();
         } else {
-            prefetch_size = _NEFORCE min(hint_size * 2, buffer_size_);
+            prefetch_size = min(hint_size * 2, buffer_size_);
         }
     }
 
@@ -2151,7 +2151,7 @@ bool file::lock(
 
 #elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::flock fl{};
-    _NEFORCE memory_zero(&fl);
+    memory_zero(&fl);
 
     if (mode == FILE_LOCK::EXCLUSIVE ||
         (static_cast<fud_t>(mode) & LOCK_EX) != 0) {
@@ -2223,7 +2223,7 @@ bool file::unlock(const difference_type offset, const difference_type length) co
 
 #elif defined(NEFORCE_PLATFORM_LINUX)
     struct ::flock fl{};
-    _NEFORCE memory_zero(&fl);
+    memory_zero(&fl);
 
     fl.l_type = F_UNLCK;
     fl.l_whence = SEEK_SET;
@@ -2270,7 +2270,7 @@ bool file::is_locked(const difference_type offset, const difference_type length,
 
 #else
     struct ::flock fl{};
-    _NEFORCE memory_zero(&fl);
+    memory_zero(&fl);
 
     fl.l_type = F_WRLCK;
     fl.l_whence = SEEK_SET;

@@ -79,7 +79,7 @@ NEFORCE_END_INNER__
  * 4. 支持分配器的重新绑定
  */
 template <typename Alloc>
-struct allocator_traits : _INNER __allocator_traits_base {
+struct allocator_traits : inner::__allocator_traits_base {
 	using allocator_type = Alloc;
 	using value_type	 = typename Alloc::value_type;
 	using pointer		 = detected_or_t<value_type*, __pointer, Alloc>;

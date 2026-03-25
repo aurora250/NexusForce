@@ -263,8 +263,8 @@ private:
      * @return 素数
      */
     NEFORCE_NODISCARD static size_type next_size(const size_type n) noexcept {
-        const size_t* first = _CONSTANTS HASH_PRIME_LIST;
-        const size_t* last = _CONSTANTS HASH_PRIME_LIST + _CONSTANTS HASH_PRIMER_COUNT;
+        const size_t* first = constants::HASH_PRIME_LIST;
+        const size_t* last = constants::HASH_PRIME_LIST + constants::HASH_PRIMER_COUNT;
         const size_t* pos = _NEFORCE lower_bound(first, last, n);
         return pos == last ? *(last - 1) : *pos;
     }
@@ -798,7 +798,7 @@ public:
      * @return 最大桶数量
      */
     NEFORCE_NODISCARD static size_type buckets_max_size() noexcept {
-        return _CONSTANTS HASH_PRIME_LIST[_CONSTANTS HASH_PRIMER_COUNT - 1];
+        return constants::HASH_PRIME_LIST[constants::HASH_PRIMER_COUNT - 1];
     }
 
     /**

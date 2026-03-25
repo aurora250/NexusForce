@@ -55,7 +55,7 @@ struct none_t : icommon<none_t> {
      * @brief 计算哈希值
      * @return FNV偏移基准值
      */
-    constexpr size_t to_hash() const noexcept { return _CONSTANTS FNV_OFFSET_BASIS; }
+    constexpr size_t to_hash() const noexcept { return constants::FNV_OFFSET_BASIS; }
 
     /**
      * @brief 交换操作

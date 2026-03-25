@@ -29,7 +29,7 @@ struct __tuple_constructible_aux<true, tuple<Dests...>, Srcs...> :
  */
 template <typename Dest, typename... Srcs>
 struct tuple_constructible : bool_constant<
-	_INNER __tuple_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+	inner::__tuple_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
 template <bool Same, typename Dest, typename... Srcs>
@@ -47,7 +47,7 @@ struct __tuple_explicitly_convertible_aux<true, tuple<Dests...>, Srcs...> : bool
  */
 template <typename Dest, typename... Srcs>
 struct tuple_explicitly_convertible : bool_constant<
-	_INNER __tuple_explicitly_convertible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+	inner::__tuple_explicitly_convertible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
 /**
@@ -89,7 +89,7 @@ struct __tuple_nothrow_constructible_aux<true, tuple<Dests...>, Srcs...> : bool_
  */
 template <typename Dest, typename... Srcs>
 struct tuple_nothrow_constructible : bool_constant<
-	_INNER __tuple_nothrow_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+	inner::__tuple_nothrow_constructible_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
 template <typename Self, typename Tuple, typename... U>
@@ -109,7 +109,7 @@ struct __tuple_convertible_aux<tuple<Self>, Tuple, U>
  */
 template <typename Self, typename Tuple, typename... U>
 struct tuple_convertible : bool_constant<
-	_INNER __tuple_convertible_aux<Self, Tuple, U...>::value> {};
+	inner::__tuple_convertible_aux<Self, Tuple, U...>::value> {};
 
 
 template <bool Same, typename Dest, typename... Srcs>
@@ -127,7 +127,7 @@ struct __tuple_assignable_aux<true, tuple<Dests...>, Srcs...> : bool_constant<
  */
 template <typename Dest, typename... Srcs>
 struct tuple_assignable : bool_constant<
-	_INNER __tuple_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+	inner::__tuple_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 
 template <bool Same, typename Dest, typename... Srcs>
@@ -145,7 +145,7 @@ struct __tuple_nothrow_assignable_aux<true, tuple<Dests...>, Srcs...> : bool_con
  */
 template <typename Dest, typename... Srcs>
 struct tuple_nothrow_assignable : bool_constant<
-	_INNER __tuple_nothrow_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
+	inner::__tuple_nothrow_assignable_aux<tuple_size<Dest>::value == sizeof...(Srcs), Dest, Srcs...>::value> {};
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -217,7 +217,7 @@ struct tuple<> : icommon<tuple<>> {
 	 * @return FNV偏移基准值
 	 */
 	NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t to_hash() const noexcept {
-		return _CONSTANTS FNV_OFFSET_BASIS;
+		return constants::FNV_OFFSET_BASIS;
 	}
 };
 
@@ -307,8 +307,8 @@ public:
 	 * @param rest_arg 剩余元素
 	 */
 	template <typename T = This, enable_if_t<
-		_INNER tuple_constructible<tuple, const T&, const Rest&...>::value, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value)
+		inner::tuple_constructible<tuple, const T&, const Rest&...>::value, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value)
 		tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction_v<
 			is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
@@ -320,10 +320,10 @@ public:
 	 * @param this_arg 第一个元素参数
 	 * @param rest_arg 剩余元素参数
 	 */
-	template <typename U1, typename... U2, enable_if_t<conjunction_v<_INNER tuple_perfect_forward<tuple, U1, U2...>,
-		_INNER tuple_constructible<tuple, U1, U2...>>, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value)
-		tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
+	template <typename U1, typename... U2, enable_if_t<conjunction_v<inner::tuple_perfect_forward<tuple, U1, U2...>,
+		inner::tuple_constructible<tuple, U1, U2...>>, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, U1, U2...>::value)
+		tuple(U1&& this_arg, U2&&... rest_arg) noexcept(inner::tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _NEFORCE forward<U1>(this_arg), _NEFORCE forward<U2>(rest_arg)...) {}
 
 	/**
@@ -331,10 +331,10 @@ public:
 	 * @tparam U 源元组元素类型
 	 * @param tup 源元组
 	 */
-	template <typename... U, enable_if_t<conjunction_v<_INNER tuple_constructible<tuple, const U&...>,
-		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const U&...>::value)
-		tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction_v<inner::tuple_constructible<tuple, const U&...>,
+		inner::tuple_convertible<tuple, const tuple<U...>&, U...>>, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, const U&...>::value)
+		tuple(const tuple<U...>& tup) noexcept(inner::tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
 	/**
@@ -342,10 +342,10 @@ public:
 	 * @tparam U 源元组元素类型
 	 * @param tup 源元组
 	 */
-	template <typename... U, enable_if_t<conjunction_v<_INNER tuple_constructible<tuple, U...>,
-		_INNER tuple_convertible<tuple, tuple<U...>, U...>>, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, U...>::value)
-		tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
+	template <typename... U, enable_if_t<conjunction_v<inner::tuple_constructible<tuple, U...>,
+		inner::tuple_convertible<tuple, tuple<U...>, U...>>, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, U...>::value)
+		tuple(tuple<U...>&& tup) noexcept(inner::tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _NEFORCE move(tup)) {}
 
 	/**
@@ -355,9 +355,9 @@ public:
 	 * @param pir 源pair
 	 */
 	template <typename T1, typename T2, enable_if_t<
-		_INNER tuple_constructible<tuple, const T1&, const T2&>::value, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value)
-        tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+		inner::tuple_constructible<tuple, const T1&, const T2&>::value, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, const T1&, const T2&>::value)
+        tuple(const pair<T1, T2>& pir) noexcept(inner::tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
         : tuple(unpack_utility_construct_tag{}, pir) {}
 
 	/**
@@ -366,9 +366,9 @@ public:
 	 * @tparam T2 第二个元素类型
 	 * @param pir 源pair
 	 */
-    template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, T1, T2>::value, int> = 0>
-	constexpr explicit(_INNER tuple_explicitly_convertible<tuple, T1, T2>::value)
-		tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
+    template <typename T1, typename T2, enable_if_t<inner::tuple_constructible<tuple, T1, T2>::value, int> = 0>
+	constexpr explicit(inner::tuple_explicitly_convertible<tuple, T1, T2>::value)
+		tuple(pair<T1, T2>&& pir) noexcept(inner::tuple_nothrow_constructible<tuple, T1, T2>::value)
         : tuple(unpack_utility_construct_tag{}, _NEFORCE move(pir)) {}
 #else
 	template <typename T = This, enable_if_t<
@@ -387,72 +387,72 @@ public:
 		is_nothrow_default_constructible<T>, is_nothrow_default_constructible<Rest>...>::value)
 		: base_type(), data_() {}
 
-	template <typename T = This, enable_if_t<_INNER tuple_constructible<tuple, const T&, const Rest&...>::value &&
-		_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
+	template <typename T = This, enable_if_t<inner::tuple_constructible<tuple, const T&, const Rest&...>::value &&
+		inner::tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
 	explicit tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction<
 		is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>::value)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
 
-	template <typename T = This, enable_if_t<_INNER tuple_constructible<tuple, const T&, const Rest&...>::value &&
-		!_INNER tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
+	template <typename T = This, enable_if_t<inner::tuple_constructible<tuple, const T&, const Rest&...>::value &&
+		!inner::tuple_explicitly_convertible<tuple, const T&, const Rest&...>::value, int> = 0>
 	tuple(const T& this_arg, const Rest&... rest_arg) noexcept(conjunction<
 		is_nothrow_copy_constructible<T>, is_nothrow_copy_constructible<Rest>...>::value)
 		: tuple(exact_arg_construct_tag{}, this_arg, rest_arg...) {}
 
 	template <typename U1, typename... U2, enable_if_t<
-		conjunction<_INNER tuple_constructible<tuple, U1, U2...>, _INNER tuple_convertible<tuple, U1, U2...>>::value &&
-		_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
-	explicit tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
+		conjunction<inner::tuple_constructible<tuple, U1, U2...>, inner::tuple_convertible<tuple, U1, U2...>>::value &&
+		inner::tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
+	explicit tuple(U1&& this_arg, U2&&... rest_arg) noexcept(inner::tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _NEFORCE forward<U1>(this_arg), _NEFORCE forward<U2>(rest_arg)...) {}
 
 	template <typename U1, typename... U2, enable_if_t<
-		conjunction<_INNER tuple_constructible<tuple, U1, U2...>, _INNER tuple_convertible<tuple, U1, U2...>>::value &&
-		!_INNER tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
-	tuple(U1&& this_arg, U2&&... rest_arg) noexcept(_INNER tuple_nothrow_constructible<tuple, U1, U2...>::value)
+		conjunction<inner::tuple_constructible<tuple, U1, U2...>, inner::tuple_convertible<tuple, U1, U2...>>::value &&
+		!inner::tuple_explicitly_convertible<tuple, U1, U2...>::value, int> = 0>
+	tuple(U1&& this_arg, U2&&... rest_arg) noexcept(inner::tuple_nothrow_constructible<tuple, U1, U2...>::value)
 		: tuple(exact_arg_construct_tag{}, _NEFORCE forward<U1>(this_arg), _NEFORCE forward<U2>(rest_arg)...) {}
 
-	template <typename... U, enable_if_t<conjunction<_INNER tuple_constructible<tuple, const U&...>,
-		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
-		_INNER tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
-	explicit tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction<inner::tuple_constructible<tuple, const U&...>,
+		inner::tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
+		inner::tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
+	explicit tuple(const tuple<U...>& tup) noexcept(inner::tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
-	template <typename... U, enable_if_t<conjunction<_INNER tuple_constructible<tuple, const U&...>,
-		_INNER tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
-		!_INNER tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
-	tuple(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, const U&...>::value)
+	template <typename... U, enable_if_t<conjunction<inner::tuple_constructible<tuple, const U&...>,
+		inner::tuple_convertible<tuple, const tuple<U...>&, U...>>::value &&
+		!inner::tuple_explicitly_convertible<tuple, const U&...>::value, int> = 0>
+	tuple(const tuple<U...>& tup) noexcept(inner::tuple_nothrow_constructible<tuple, const U&...>::value)
 		: tuple(unpack_utility_construct_tag{}, tup) {}
 
 	template <typename... U, enable_if_t<
-		conjunction<_INNER tuple_constructible<tuple, U...>, _INNER tuple_convertible<tuple, tuple<U...>, U...>>::value &&
-		_INNER tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
-	explicit tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
+		conjunction<inner::tuple_constructible<tuple, U...>, inner::tuple_convertible<tuple, tuple<U...>, U...>>::value &&
+		inner::tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
+	explicit tuple(tuple<U...>&& tup) noexcept(inner::tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _NEFORCE move(tup)) {}
 
 	template <typename... U, enable_if_t<
-		conjunction<_INNER tuple_constructible<tuple, U...>, _INNER tuple_convertible<tuple, tuple<U...>, U...>>::value &&
-		!_INNER tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
-	tuple(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_constructible<tuple, U...>::value)
+		conjunction<inner::tuple_constructible<tuple, U...>, inner::tuple_convertible<tuple, tuple<U...>, U...>>::value &&
+		!inner::tuple_explicitly_convertible<tuple, U...>::value, int> = 0>
+	tuple(tuple<U...>&& tup) noexcept(inner::tuple_nothrow_constructible<tuple, U...>::value)
 		: tuple(unpack_utility_construct_tag{}, _NEFORCE move(tup)) {}
 
-	template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, const T1&, const T2&>::value &&
-		_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
-	explicit tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+	template <typename T1, typename T2, enable_if_t<inner::tuple_constructible<tuple, const T1&, const T2&>::value &&
+		inner::tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
+	explicit tuple(const pair<T1, T2>& pir) noexcept(inner::tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
 		: tuple(unpack_utility_construct_tag{}, pir) {}
 
-	template <typename T1, typename T2, enable_if_t<_INNER tuple_constructible<tuple, const T1&, const T2&>::value &&
-		!_INNER tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
-	tuple(const pair<T1, T2>& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
+	template <typename T1, typename T2, enable_if_t<inner::tuple_constructible<tuple, const T1&, const T2&>::value &&
+		!inner::tuple_explicitly_convertible<tuple, const T1&, const T2&>::value, int> = 0>
+	tuple(const pair<T1, T2>& pir) noexcept(inner::tuple_nothrow_constructible<tuple, const T1&, const T2&>::value)
 		: tuple(unpack_utility_construct_tag{}, pir) {}
 
 	template <typename T1, typename T2, enable_if_t<
-		_INNER tuple_constructible<tuple, T1, T2>::value && _INNER tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
-	explicit tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
+		inner::tuple_constructible<tuple, T1, T2>::value && inner::tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
+	explicit tuple(pair<T1, T2>&& pir) noexcept(inner::tuple_nothrow_constructible<tuple, T1, T2>::value)
 		: tuple(unpack_utility_construct_tag{}, _NEFORCE move(pir)) {}
 
 	template <typename T1, typename T2, enable_if_t<
-		_INNER tuple_constructible<tuple, T1, T2>::value && !_INNER tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
-	tuple(pair<T1, T2>&& pir) noexcept(_INNER tuple_nothrow_constructible<tuple, T1, T2>::value)
+		inner::tuple_constructible<tuple, T1, T2>::value && !inner::tuple_explicitly_convertible<tuple, T1, T2>::value, int> = 0>
+	tuple(pair<T1, T2>&& pir) noexcept(inner::tuple_nothrow_constructible<tuple, T1, T2>::value)
 		: tuple(unpack_utility_construct_tag{}, _NEFORCE move(pir)) {}
 #endif
 
@@ -496,8 +496,8 @@ public:
 	 * @return 当前元组的引用
 	 */
 	template <typename... U, enable_if_t<
-		conjunction<negation<is_same<tuple, tuple<U...>>>, _INNER tuple_assignable<tuple, const U&...>>::value, int> = 0>
-	NEFORCE_CONSTEXPR14 tuple& operator =(const tuple<U...>& tup) noexcept(_INNER tuple_nothrow_assignable<tuple, const U&...>::value) {
+		conjunction<negation<is_same<tuple, tuple<U...>>>, inner::tuple_assignable<tuple, const U&...>>::value, int> = 0>
+	NEFORCE_CONSTEXPR14 tuple& operator =(const tuple<U...>& tup) noexcept(inner::tuple_nothrow_assignable<tuple, const U&...>::value) {
 		data_ = tup.data_;
 		get_rest() = tup.get_rest();
 		return *this;
@@ -510,8 +510,8 @@ public:
 	 * @return 当前元组的引用
 	 */
 	template <typename... U, enable_if_t<
-		conjunction<negation<is_same<tuple, tuple<U...>>>, _INNER tuple_assignable<tuple, U...>>::value, int> = 0>
-	NEFORCE_CONSTEXPR14 tuple& operator =(tuple<U...>&& tup) noexcept(_INNER tuple_nothrow_assignable<tuple, U...>::value) {
+		conjunction<negation<is_same<tuple, tuple<U...>>>, inner::tuple_assignable<tuple, U...>>::value, int> = 0>
+	NEFORCE_CONSTEXPR14 tuple& operator =(tuple<U...>&& tup) noexcept(inner::tuple_nothrow_assignable<tuple, U...>::value) {
 		data_ = _NEFORCE forward<typename tuple<U...>::this_type>(tup.data_);
 		get_rest() = _NEFORCE forward<typename tuple<U...>::super>(tup.get_rest());
 		return *this;
@@ -525,9 +525,9 @@ public:
 	 * @return 当前元组的引用
 	 */
 	template <typename T1, typename T2, enable_if_t<
-		_INNER tuple_assignable<tuple, const T1&, const T2&>::value, int> = 0>
+		inner::tuple_assignable<tuple, const T1&, const T2&>::value, int> = 0>
 	NEFORCE_CONSTEXPR14 tuple& operator =(const pair<T1, T2>& pir) noexcept(
-		_INNER tuple_nothrow_assignable<tuple, const T1&, const T2&>::value) {
+		inner::tuple_nothrow_assignable<tuple, const T1&, const T2&>::value) {
 		data_ = pir.first;
 		get_rest().data_ = pir.second;
 		return *this;
@@ -541,9 +541,9 @@ public:
 	 * @return 当前元组的引用
 	 */
 	template <typename T1, typename T2, enable_if_t<
-		_INNER tuple_assignable<tuple, T1, T2>::value, int> = 0>
+		inner::tuple_assignable<tuple, T1, T2>::value, int> = 0>
 	NEFORCE_CONSTEXPR14 tuple& operator =(pair<T1, T2>&& pir) noexcept(
-		_INNER tuple_nothrow_assignable<tuple, T1, T2>::value) {
+		inner::tuple_nothrow_assignable<tuple, T1, T2>::value) {
 		data_ = _NEFORCE forward<T1>(pir.first);
 		get_rest().data_ = _NEFORCE forward<T2>(pir.second);
 		return *this;
@@ -786,12 +786,12 @@ NEFORCE_END_INNER__
  * @param tup 源元组
  * @return 构造的对象
  */
-template <typename T, typename Tuple, enable_if_t<_INNER constructible_from_tuple<T, Tuple>::value, int> = 0>
+template <typename T, typename Tuple, enable_if_t<inner::constructible_from_tuple<T, Tuple>::value, int> = 0>
 NEFORCE_NODISCARD constexpr T make_from_tuple(Tuple&& tup)
-noexcept(noexcept(_INNER __broaden_make_from_tuple<T>(
+noexcept(noexcept(inner::__broaden_make_from_tuple<T>(
 		_NEFORCE forward<Tuple>(tup),
 		make_index_sequence<tuple_size<remove_reference_t<Tuple>>::value>{}))) {
-	return _INNER __broaden_make_from_tuple<T>(
+	return inner::__broaden_make_from_tuple<T>(
 		_NEFORCE forward<Tuple>(tup),
 		make_index_sequence<tuple_size<remove_reference_t<Tuple>>::value>{}
 	);
@@ -847,12 +847,12 @@ NEFORCE_END_INNER__
  * @return 连接后的元组
  */
 template <typename... Tuples>
-NEFORCE_NODISCARD constexpr typename _INNER tuple_cat_bind_t<Tuples...>::Ret tuple_cat(Tuples&&... tuples) {
-	using CatImpl		= _INNER tuple_cat_bind_t<Tuples...>;
+NEFORCE_NODISCARD constexpr typename inner::tuple_cat_bind_t<Tuples...>::Ret tuple_cat(Tuples&&... tuples) {
+	using CatImpl		= inner::tuple_cat_bind_t<Tuples...>;
 	using Ret			= typename CatImpl::Ret;
 	using ElementIdxSeq	= typename CatImpl::ElementIdxSeq;
 	using TupleIdxSeq	= typename CatImpl::TupleIdxSeq;
-	return _INNER __tuple_cat_in_turn<Ret>(
+	return inner::__tuple_cat_in_turn<Ret>(
 		ElementIdxSeq{},
 		TupleIdxSeq{},
 		_NEFORCE forward_as_tuple(_NEFORCE forward<Tuples>(tuples)...)
@@ -898,7 +898,7 @@ constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_s
 #ifdef NEFORCE_STANDARD_17
 	return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_NEFORCE get<Idx>(tup)) ^ ...);
 #else
-	return _INNER __broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
+	return inner::__broadern_tuple_hash_aux<Tuple, sizeof...(Idx)>::hash(tup);
 #endif // NEFORCE_STANDARD_17
 }
 

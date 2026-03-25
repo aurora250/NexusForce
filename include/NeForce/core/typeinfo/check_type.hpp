@@ -391,7 +391,7 @@ NEFORCE_END_INNER__
 template <typename T>
 NEFORCE_CONSTEXPR20 string check_type() {
     string str;
-    _INNER check<T> { str };
+    inner::check<T> { str };
     return _NEFORCE move(str);
 }
 

@@ -171,7 +171,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc
  */
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
-    return _INNER __allocate_aux<Align>(bytes);
+    return inner::__allocate_aux<Align>(bytes);
 }
 
 #endif
@@ -188,7 +188,7 @@ NEFORCE_END_INNER__
  * 内存分配的统一入口。
  */
 template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const _INNER alloc_size_t bytes) {
+NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const inner::alloc_size_t bytes) {
     if (bytes == 0) return nullptr;
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
@@ -197,9 +197,9 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const _INNER alloc_siz
 #endif // NEFORCE_STANDARD_20
 
 #ifdef NEFORCE_STANDARD_17
-    return _INNER __allocate_dispatch<Align>(bytes);
+    return inner::__allocate_dispatch<Align>(bytes);
 #else
-    return _INNER __allocate_aux<Align>(bytes);
+    return inner::__allocate_aux<Align>(bytes);
 #endif // NEFORCE_STANDARD_17
 }
 
@@ -216,7 +216,7 @@ NEFORCE_BEGIN_INNER__
  * 处理内存释放的基础函数，包含编译器特定的优化。
  */
 template <size_t Align>
-void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
+void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
 #ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         bytes += MEMORY_NO_USER_SIZE;
@@ -251,7 +251,7 @@ void __deallocate_aux(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
  * 使用对齐释放操作符，支持大于阈值的高对齐要求。
  */
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
-NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
+NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, inner::alloc_size_t& bytes) noexcept {
     size_t align = Align;
 #ifdef NEFORCE_COMPILER_MSVC
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD) {
@@ -272,8 +272,8 @@ NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& 
  * @param[in,out] bytes 要释放的字节数引用
  */
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
-NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, _INNER alloc_size_t& bytes) noexcept {
-    _INNER __deallocate_aux<Align>(ptr, bytes);
+NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, inner::alloc_size_t& bytes) noexcept {
+    inner::__deallocate_aux<Align>(ptr, bytes);
 }
 
 #endif // NEFORCE_STANDARD_17
@@ -290,7 +290,7 @@ NEFORCE_END_INNER__
  * 内存释放的统一入口。
  */
 template <size_t Align>
-NEFORCE_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexcept {
+NEFORCE_CONSTEXPR20 void deallocate(void* ptr, inner::alloc_size_t bytes) noexcept {
 #ifdef NEFORCE_STANDARD_20
     if (_NEFORCE is_constant_evaluated()) {
         operator delete(ptr);
@@ -299,9 +299,9 @@ NEFORCE_CONSTEXPR20 void deallocate(void* ptr, _INNER alloc_size_t bytes) noexce
 #endif // NEFORCE_STANDARD_20
 
 #ifdef NEFORCE_STANDARD_17
-    _INNER __deallocate_dispatch<Align>(ptr, bytes);
+    inner::__deallocate_dispatch<Align>(ptr, bytes);
 #else
-    _INNER __deallocate_aux<Align>(ptr, bytes);
+    inner::__deallocate_aux<Align>(ptr, bytes);
 #endif // NEFORCE_STANDARD_17
 }
 
@@ -320,7 +320,7 @@ class standard_allocator {
 public:
     using value_type = T;       ///< 元素类型
     using pointer    = T*;      ///< 指针类型
-    using size_type  = _INNER alloc_size_t;  ///< 大小类型
+    using size_type  = inner::alloc_size_t;  ///< 大小类型
 
     /**
      * @struct rebind
@@ -336,7 +336,7 @@ public:
 
 private:
     /// 最终对齐大小：取类型对齐要求和阈值中的较大值
-    static constexpr _INNER alloc_size_t align_size =
+    static constexpr inner::alloc_size_t align_size =
         alignof(T) > MEMORY_ALIGN_THRESHHOLD ?
         alignof(T) :
         MEMORY_ALIGN_THRESHHOLD;

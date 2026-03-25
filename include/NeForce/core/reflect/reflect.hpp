@@ -50,7 +50,7 @@ public:
 
     template <typename Ret, typename... Args>
     type_builder& function(string_view name, Ret(T::*func)(Args...)) {
-        auto invoker = _INNER make_member_invoker(func);
+        auto invoker = inner::make_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
             meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
@@ -60,7 +60,7 @@ public:
 
     template <typename Ret, typename... Args>
     type_builder& function(string_view name, Ret(T::*func)(Args...) const) {
-        auto invoker = _INNER make_const_member_invoker(func);
+        auto invoker = inner::make_const_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
             meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
@@ -70,7 +70,7 @@ public:
 
     template <typename Ret, typename... Args>
     type_builder& static_function(string_view name, Ret (*func)(Args...)) {
-        auto invoker = _INNER make_static_invoker(func);
+        auto invoker = inner::make_static_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
         return *this;
@@ -96,8 +96,8 @@ public:
         return *this;
     }
 
-    meta_type& meta() noexcept { return meta_; }
-    const meta_type& meta() const noexcept { return meta_; }
+    NEFORCE_NODISCARD meta_type& meta() noexcept { return meta_; }
+    NEFORCE_NODISCARD const meta_type& meta() const noexcept { return meta_; }
 };
 
 template <typename T>
@@ -106,20 +106,20 @@ type_builder<T> reflect(string_view name) {
 }
 
 
-#define REFLECT_REGISTER_N(Class, Name) \
-    static auto _reflect_##Class = _REFLECT reflect<Class>(Name)
+#define NEFORCE_REFLECT_REGISTER_N(Class, Name) \
+    static auto _neforce_reflect_##Class = _NEFORCE reflect::reflect<Class>(Name)
 
-#define REFLECT_REGISTER_N_DERIVED(Class, Base, Name) \
-    static auto _reflect_##Class = []() { \
-        _REFLECT registry::instance().resolve_all_bases(); \
-        return _REFLECT reflect<Class>(#Class).template base<Base>(); \
+#define NEFORCE_REFLECT_REGISTER_N_DERIVED(Class, Base, Name) \
+    static auto _neforce_reflect_##Class = []() { \
+        _NEFORCE reflect::registry::instance().resolve_all_bases(); \
+        return _NEFORCE reflect::reflect<Class>(#Class).template base<Base>(); \
     }()
 
-#define REFLECT_REGISTER(Class) \
-    REFLECT_REGISTER_N(Class, #Class)
+#define NEFORCE_REFLECT_REGISTER(Class) \
+    NEFORCE_REFLECT_REGISTER_N(Class, #Class)
 
-#define REFLECT_REGISTER_DERIVED(Class, Base) \
-    REFLECT_REGISTER_N_DERIVED(Class, Base, #Class)
+#define NEFORCE_REFLECT_REGISTER_DERIVED(Class, Base) \
+    NEFORCE_REFLECT_REGISTER_N_DERIVED(Class, Base, #Class)
 
 NEFORCE_END_REFLECT__
 NEFORCE_END_NAMESPACE__

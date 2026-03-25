@@ -117,7 +117,7 @@ NEFORCE_END_INNER__
  * @tparam ratio2 第二个比率
  */
 template <typename ratio1, typename ratio2>
-using ratio_multiply = typename _INNER __ratio_multiply_impl<ratio1, ratio2>::type;
+using ratio_multiply = typename inner::__ratio_multiply_impl<ratio1, ratio2>::type;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -157,7 +157,7 @@ NEFORCE_END_INNER__
  * @tparam ratio2 除数比率
  */
 template <typename ratio1, typename ratio2>
-using ratio_divide = typename _INNER __ratio_divide_impl<ratio1, ratio2>::type;
+using ratio_divide = typename inner::__ratio_divide_impl<ratio1, ratio2>::type;
 
 
 /**
@@ -236,7 +236,7 @@ NEFORCE_END_INNER__
  * @tparam ratio2 第二个比率
  */
 template <typename ratio1, typename ratio2>
-struct ratio_less : _INNER __ratio_less_impl<ratio1, ratio2>::type {};
+struct ratio_less : inner::__ratio_less_impl<ratio1, ratio2>::type {};
 
 /**
  * @struct ratio_less_equal
@@ -476,7 +476,7 @@ NEFORCE_END_INNER__
  * @tparam ratio2 第二个比率
  */
 template <typename ratio1, typename ratio2>
-using ratio_add = typename _INNER ratio_add<ratio1, ratio2>::type;
+using ratio_add = typename inner::ratio_add<ratio1, ratio2>::type;
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -513,7 +513,7 @@ NEFORCE_END_INNER__
  * @tparam ratio2 减数比率
  */
 template <typename ratio1, typename ratio2>
-using ratio_subtract = typename _INNER ratio_subtract<ratio1, ratio2>::type;
+using ratio_subtract = typename inner::ratio_subtract<ratio1, ratio2>::type;
 
 /** @} */ // RatioClass
 

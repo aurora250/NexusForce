@@ -338,7 +338,7 @@ void set_terminate(const terminate_handler handler) noexcept {
 void terminate() {
     const auto handler = get_terminate_handler().load(memory_order_acquire);
     if (handler) handler();
-    _NEFORCE abort();
+    abort();
 }
 
 void abort() {
@@ -370,7 +370,7 @@ void abort() {
     ::sigaction(SIGABRT, &sa, &old_sa);
 
     // SIGABRT
-    ::kill(getpid(), SIGABRT);
+    ::kill(::getpid(), SIGABRT);
 
     constexpr ::timespec ts = { .tv_sec = 0, .tv_nsec = 1000000 }; // 1ms
     ::nanosleep(&ts, nullptr);

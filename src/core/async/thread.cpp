@@ -1,4 +1,5 @@
 #include <NeForce/core/async/thread.hpp>
+#include <NeForce/core/async/thread_tracker.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <windef.h>
@@ -6,6 +7,17 @@
 #include <WinBase.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+atomic<int> thread_tracker::count_{0};
+
+
+thread::thread_monitor::thread_monitor() noexcept {
+    thread_tracker::instance().on_thread_create();
+}
+
+thread::thread_monitor::~thread_monitor() {
+    thread_tracker::instance().on_thread_destroy();
+}
 
 void thread::start_thread_impl(void* args) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -28,7 +40,7 @@ void thread::start_thread_impl(void* args) {
 }
 
 thread::thread(thread&& other) noexcept
-    : handle_(other.handle_), id_(other.id_), state_(other.state_) {
+: handle_(other.handle_), id_(other.id_), state_(other.state_) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     other.handle_ = nullptr;
 #else
@@ -41,7 +53,7 @@ thread::thread(thread&& other) noexcept
 thread& thread::operator =(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
-            _NEFORCE terminate();
+            terminate();
         }
 
         handle_ = other.handle_;
@@ -60,7 +72,7 @@ thread& thread::operator =(thread&& other) noexcept {
 
 thread::~thread() {
     if (joinable()) {
-        _NEFORCE terminate();
+        terminate();
     }
 }
 

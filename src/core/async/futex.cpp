@@ -79,12 +79,12 @@ void futex_wait(void* addr, const platform_wait_t value) noexcept {
         p,
         const_cast<platform_wait_t*>(&value),
         sizeof(platform_wait_t),
-        _NEFORCE numeric_traits<::DWORD>::max());
+        numeric_traits<::DWORD>::max());
 
     if (result == 0) {
         ::DWORD err = ::GetLastError();
         if (err != 0 && err != ERROR_TIMEOUT) {
-            _NEFORCE terminate();
+            terminate();
         }
     }
 #else
@@ -95,7 +95,7 @@ void futex_wait(void* addr, const platform_wait_t value) noexcept {
 
     if (!err) return;
     if (errno == EAGAIN) return;
-    _NEFORCE terminate();
+    terminate();
 #endif
 }
 
@@ -114,5 +114,104 @@ void futex_notify(void* addr, const bool all) noexcept {
         all ? numeric_traits<platform_wait_t>::max() : 1);
 #endif
 }
+
+#ifdef NEFORCE_PLATFORM_LINUX
+
+int futex(void* wait_addr, futex_wait_flags flags, int wake_count,
+          void* requeue_addr, int requeue_count, int cmp_value) noexcept {
+    const long ret = ::syscall(SYS_futex, wait_addr, static_cast<int>(flags),
+                               wake_count, requeue_count, requeue_addr, cmp_value);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_requeue(void* wait_addr, int wake_count, void* requeue_addr, int requeue_count) noexcept {
+    const long ret = ::syscall(SYS_futex, wait_addr,
+                               static_cast<int>(futex_wait_flags::requeue) | FUTEX_PRIVATE_FLAG,
+                               wake_count, requeue_count, requeue_addr, 0);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_cmp_requeue(void* wait_addr, int wake_count,
+                      void* requeue_addr, int requeue_count,
+                      int cmp_value) noexcept {
+    const long ret = ::syscall(SYS_futex, wait_addr,
+                               static_cast<int>(futex_wait_flags::cmp_requeue) | FUTEX_PRIVATE_FLAG,
+                               wake_count, requeue_count, requeue_addr, cmp_value);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_wake_op(void* addr, int wake_count, void* op_addr,
+                  int op_arg, int op, int cmp, int cmp_arg) noexcept {
+    const unsigned int val3 = (op << 28) | (cmp << 24) | (op_arg << 12) | (cmp_arg);
+    const long ret = ::syscall(SYS_futex, addr,
+                               static_cast<int>(futex_wait_flags::wake_op) | FUTEX_PRIVATE_FLAG,
+                               wake_count, op_addr, nullptr, val3);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_lock_pi(void* addr) noexcept {
+    const long ret = ::syscall(SYS_futex, addr,
+                               static_cast<int>(futex_wait_flags::lock_pi) | FUTEX_PRIVATE_FLAG,
+                               nullptr, nullptr, nullptr, 0);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_trylock_pi(void* addr) noexcept {
+    const long ret = ::syscall(SYS_futex, addr,
+                               static_cast<int>(futex_wait_flags::trylock_pi) | FUTEX_PRIVATE_FLAG,
+                               nullptr, nullptr, nullptr, 0);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_unlock_pi(void* addr) noexcept {
+    const long ret = ::syscall(SYS_futex, addr,
+                               static_cast<int>(futex_wait_flags::unlock_pi) | FUTEX_PRIVATE_FLAG,
+                               nullptr, nullptr, nullptr, 0);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_wait_requeue_pi(void* wait_addr, int value, void* requeue_addr) noexcept {
+    const long ret = ::syscall(SYS_futex, wait_addr,
+                               static_cast<int>(futex_wait_flags::wait_requeue_pi) | FUTEX_PRIVATE_FLAG,
+                               value, requeue_addr, nullptr, 0);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+int futex_cmp_requeue_pi(void* wait_addr, int wake_count,
+                         void* requeue_addr, int cmp_value) noexcept {
+    const long ret = ::syscall(SYS_futex, wait_addr,
+                               static_cast<int>(futex_wait_flags::cmp_requeue_pi) | FUTEX_PRIVATE_FLAG,
+                               wake_count, requeue_addr, nullptr, cmp_value);
+    if (ret == -1) {
+        return -errno;
+    }
+    return 0;
+}
+
+#endif // NEFORCE_PLATFORM_LINUX
 
 NEFORCE_END_NAMESPACE__

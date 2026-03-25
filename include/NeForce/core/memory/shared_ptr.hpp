@@ -26,6 +26,10 @@ NEFORCE_BEGIN_NAMESPACE__
 /// @cond
 NEFORCE_BEGIN_INNER__
 
+template <typename T>
+class smart_pointer_atomic;
+
+
 /**
  * @struct __smart_ptr_counter
  * @brief 智能指针计数器基类
@@ -249,7 +253,7 @@ void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexc
 
 template <typename T>
 void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
-    _INNER __setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from_this<T>, T>{});
+    inner::__setup_enable_shared_from_impl(ptr, owner, is_base_of<enable_shared_from_this<T>, T>{});
 }
 
 template <typename T>
@@ -275,13 +279,13 @@ public:
     using element_type = T;  ///< 元素类型
 
 private:
-    using owner_type = _INNER __smart_ptr_counter;
+    using owner_type = inner::__smart_ptr_counter;
 
     template <typename U, typename Deleter>
-    using owner_deleter = _INNER __smart_ptr_counter_impl<U, Deleter>;
+    using owner_deleter = inner::__smart_ptr_counter_impl<U, Deleter>;
 
     template <typename U>
-    using owner_default = _INNER __smart_ptr_counter_impl<U, default_delete<U>>;
+    using owner_default = inner::__smart_ptr_counter_impl<U, default_delete<U>>;
 
     element_type* ptr_ = nullptr;   ///< 管理的对象指针
     owner_type* owner_ = nullptr;  ///< 控制块指针
@@ -301,7 +305,10 @@ private:
     friend class weak_ptr;
 
     template <typename U>
-    friend shared_ptr<U> _INNER __make_shared_fused(U*, _INNER __smart_ptr_counter*) noexcept;
+    friend class inner::smart_pointer_atomic;
+
+    template <typename U>
+    friend shared_ptr<U> inner::__make_shared_fused(U*, inner::__smart_ptr_counter*) noexcept;
 
 public:
     /**
@@ -320,7 +327,7 @@ public:
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     shared_ptr(U* ptr)
     : ptr_(ptr), owner_(new owner_default<U>(ptr_)) {
-        _INNER __setup_enable_shared_from(ptr_, owner_);
+        inner::__setup_enable_shared_from(ptr_, owner_);
     }
 
     /**
@@ -333,7 +340,7 @@ public:
     template <typename U, typename Deleter, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     explicit shared_ptr(U* ptr, Deleter&& deleter)
     : ptr_(ptr), owner_(new owner_deleter<U, Deleter>(ptr_, _NEFORCE forward<Deleter>(deleter))) {
-        _INNER __setup_enable_shared_from(ptr_, owner_);
+        inner::__setup_enable_shared_from(ptr_, owner_);
     }
 
     /**
@@ -494,7 +501,7 @@ public:
         owner_ = nullptr;
         ptr_ = ptr;
         owner_ = new owner_default<U>(ptr_);
-        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
+        inner::__setup_enable_shared_from<T>(ptr_, owner_);
     }
 
     /**
@@ -511,7 +518,7 @@ public:
         owner_ = nullptr;
         ptr_ = ptr;
         owner_ = new owner_deleter<U, Deleter>(ptr_, _NEFORCE move(deleter));
-        _INNER __setup_enable_shared_from<T>(ptr_, owner_);
+        inner::__setup_enable_shared_from<T>(ptr_, owner_);
     }
 
     /**
@@ -690,13 +697,13 @@ public:
 template <typename T>
 struct enable_shared_from_this {
 private:
-    mutable _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+    mutable inner::__smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
 
     template <typename U>
-    friend void _INNER __setup_enable_shared_from_impl(U* ptr, _INNER __smart_ptr_counter* owner, true_type) noexcept;
+    friend void inner::__setup_enable_shared_from_impl(U* ptr, inner::__smart_ptr_counter* owner, true_type) noexcept;
 
     template <typename U>
-    friend void _INNER __setup_enable_shared_from(U*, _INNER __smart_ptr_counter*) noexcept;
+    friend void inner::__setup_enable_shared_from(U*, inner::__smart_ptr_counter*) noexcept;
 
     template <typename U>
     friend class shared_ptr;
@@ -721,7 +728,7 @@ protected:
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
-        return _INNER __make_shared_fused(static_cast<T*>(this), owner_);
+        return inner::__make_shared_fused(static_cast<T*>(this), owner_);
     }
 
     /**
@@ -735,9 +742,19 @@ protected:
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
-        return _INNER __make_shared_fused(static_cast<const T*>(this), owner_);
+        return inner::__make_shared_fused(static_cast<const T*>(this), owner_);
     }
 };
+
+
+template <typename T>
+struct is_shared_ptr : false_type {};
+
+template <typename T>
+struct is_shared_ptr<shared_ptr<T>> : true_type {};
+
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_shared_ptr_v = is_shared_ptr<T>::value;
 
 
 /**
@@ -757,7 +774,7 @@ make_shared(Args&&... args) {
         [](T* ptr) noexcept(is_nothrow_destructible_v<T>) {
             ptr->~T();
         };
-    using Counter = _INNER __smart_ptr_counter_impl_fused<T, decltype(deleter)>;
+    using Counter = inner::__smart_ptr_counter_impl_fused<T, decltype(deleter)>;
     constexpr size_t align = max(alignof(T), alignof(Counter));
     constexpr size_t offset = (sizeof(Counter) + align - 1) & ~(align - 1);
     constexpr size_t size = offset + sizeof(T);
@@ -781,8 +798,8 @@ make_shared(Args&&... args) {
         NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr construction failed."));
     }
     _NEFORCE construct(reinterpret_cast<Counter*>(counter), object, mem, align, _NEFORCE move(deleter));
-    _INNER __setup_enable_shared_from(object, counter);
-    return _INNER __make_shared_fused(object, counter);
+    inner::__setup_enable_shared_from(object, counter);
+    return inner::__make_shared_fused(object, counter);
 }
 
 /**
@@ -821,7 +838,7 @@ template <typename T, typename Alloc, typename... Args>
 enable_if_t<!is_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>>
 allocate_shared(Alloc& alloc, Args&&... args) {
     auto deleter = [](T* p) { p->~T(); };
-    using ControlBlock = _INNER __smart_ptr_counter_impl_allocated<T, decltype(deleter), Alloc>;
+    using ControlBlock = inner::__smart_ptr_counter_impl_allocated<T, decltype(deleter), Alloc>;
 
     const size_t align = _NEFORCE max(alignof(ControlBlock), alignof(T));
     const size_t offset = (sizeof(ControlBlock) + align - 1) & ~(align - 1);
@@ -857,8 +874,8 @@ allocate_shared(Alloc& alloc, Args&&... args) {
         NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr control block construction failed."));
     }
 
-    _INNER __setup_enable_shared_from(object_ptr, ctrl_block);
-    return _INNER __make_shared_fused(object_ptr, ctrl_block);
+    inner::__setup_enable_shared_from(object_ptr, ctrl_block);
+    return inner::__make_shared_fused(object_ptr, ctrl_block);
 }
 
 
@@ -918,6 +935,267 @@ struct hash<shared_ptr<T>> {
     NEFORCE_CONSTEXPR20 size_t operator ()(const shared_ptr<T>& ptr) const
     noexcept(noexcept(_NEFORCE declval<_NEFORCE hash<T*>>()(_NEFORCE declval<T*>()))) {
         return hash<T*>()(ptr.get());
+    }
+};
+
+
+NEFORCE_BEGIN_INNER__
+
+template <typename T>
+class smart_pointer_atomic {
+public:
+      using value_type = T;
+
+private:
+    struct atomic_counter {
+    private:
+        mutable atomic_base<uintptr_t> value_{0};
+
+        static constexpr uintptr_t lock_bit{1};
+
+    public:
+        using count_type = inner::__smart_ptr_counter;
+
+        constexpr atomic_counter() noexcept = default;
+
+        explicit
+        atomic_counter(count_type* counter) noexcept
+        : value_(reinterpret_cast<uintptr_t>(counter)) {
+            counter = nullptr;
+        }
+
+        ~atomic_counter() {
+            auto value = value_.load(memory_order_relaxed);
+            NEFORCE_CONSTEXPR_ASSERT(!(value & lock_bit));
+            if (auto counter = reinterpret_cast<count_type*>(value)) {
+                if constexpr (is_shared_ptr_v<T>) {
+                    counter->decref_strong();
+                } else {
+                    counter->decref_weak();
+                }
+            }
+        }
+
+        atomic_counter(const atomic_counter&) = delete;
+        atomic_counter& operator=(const atomic_counter&) = delete;
+
+        count_type* lock(memory_order mo) const noexcept {
+            auto cur = value_.load(memory_order_relaxed);
+            while (cur & lock_bit) {
+                this_thread::relax();
+                cur = value_.load(memory_order_relaxed);
+            }
+
+            while (!value_.compare_exchange_strong(cur, cur | lock_bit, mo, memory_order_relaxed)) {
+                this_thread::relax();
+                cur = cur & ~lock_bit;
+            }
+            return reinterpret_cast<count_type*>(cur);
+        }
+
+        void unlock(memory_order mo) const noexcept {
+            value_.fetch_sub(1, mo);
+        }
+
+        void swap_unlock(count_type* counter, memory_order mo) noexcept {
+            if (mo != memory_order_seq_cst) {
+                mo = memory_order_release;
+            }
+            auto addr = reinterpret_cast<uintptr_t>(counter);
+            addr = value_.exchange(addr, mo);
+            counter = reinterpret_cast<count_type*>(addr & ~lock_bit);
+        }
+
+        void wait_unlock(memory_order mo) const noexcept {
+            const auto value = value_.fetch_sub(1, memory_order_relaxed);
+            value_.wait(value & ~lock_bit, mo);
+        }
+
+        void notify_one() noexcept {
+            value_.notify_one();
+        }
+
+        void notify_all() noexcept {
+            value_.notify_all();
+        }
+    };
+
+    typename T::element_type* ptr_ = nullptr;
+    atomic_counter refcount_;
+
+    friend struct atomic<T>;
+
+private:
+    static typename atomic_counter::count_type* add_ref(typename atomic_counter::count_type* counter) {
+        if (counter) {
+            if constexpr (is_shared_ptr_v<T>) {
+                counter->incref_strong();
+            } else {
+                counter->incref_weak();
+            }
+        }
+        return counter;
+    }
+
+public:
+    constexpr smart_pointer_atomic() noexcept = default;
+
+    explicit smart_pointer_atomic(value_type value) noexcept
+    : ptr_(value.ptr_), refcount_(move(value.owner_)) {}
+
+    ~smart_pointer_atomic() = default;
+
+    smart_pointer_atomic(const smart_pointer_atomic&) = delete;
+    void operator =(const smart_pointer_atomic&) = delete;
+
+    value_type load(memory_order mo) const noexcept {
+        NEFORCE_CONSTEXPR_ASSERT(mo != memory_order_release && mo != memory_order_acq_rel);
+        if (mo != memory_order_seq_cst)
+            mo = memory_order_acquire;
+
+        value_type value;
+        auto counter = refcount_.lock(mo);
+        value.ptr_ = ptr_;
+        value.owner_ = add_ref(counter);
+        refcount_.unlock(memory_order_relaxed);
+        return value;
+    }
+
+    void swap(value_type& value, memory_order mo) noexcept {
+        refcount_.lock(memory_order_acquire);
+        _NEFORCE swap(ptr_, value.ptr_);
+        refcount_.swap_unlock(value.owner_, mo);
+    }
+
+    bool compare_exchange_strong(value_type& expected, value_type desired, memory_order mo1, memory_order mo2) noexcept {
+        bool result = true;
+        auto counter = refcount_.lock(memory_order_acquire);
+        if (ptr_ == expected.ptr_ && counter == expected.owner_) {
+            ptr_ = desired.ptr_;
+            refcount_.swap_unlock(desired.owner_, mo1);
+        } else {
+            T sink = move(expected);
+            expected.ptr_ = ptr_;
+            expected.owner_ = add_ref(counter);
+            refcount_.unlock(mo2);
+            result = false;
+        }
+        return result;
+    }
+
+    void wait(value_type mold, memory_order mo) const noexcept {
+        auto counter = refcount_.lock(memory_order_acquire);
+        if (ptr_ == mold.ptr_ && counter == mold.owner_) {
+            refcount_.wait_unlock(mo);
+        } else {
+            refcount_.unlock(memory_order_relaxed);
+        }
+    }
+
+    void notify_one() noexcept {
+        refcount_.notify_one();
+    }
+
+    void notify_all() noexcept {
+        refcount_.notify_all();
+    }
+};
+
+NEFORCE_END_INNER__
+
+
+template <typename T>
+struct atomic<shared_ptr<T>> {
+public:
+    using value_type = shared_ptr<T>;
+
+    static constexpr bool is_always_lock_free = false;
+
+private:
+    inner::smart_pointer_atomic<value_type> atomic_;
+
+public:
+    bool is_lock_free() const noexcept {
+        return false;
+    }
+
+    constexpr atomic(nullptr_t = nullptr) noexcept {}
+
+    atomic(value_type value) noexcept
+    : atomic_(move(value)) {}
+
+    atomic(const atomic&) = delete;
+    void operator =(const atomic&) = delete;
+
+    value_type load(memory_order mo = memory_order_seq_cst) const noexcept {
+        return atomic_.load(mo);
+    }
+
+    operator value_type() const noexcept {
+        return atomic_.load(memory_order_seq_cst);
+    }
+
+    void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
+        atomic_.swap(desired, mo);
+    }
+
+    void operator =(value_type desired) noexcept {
+        atomic_.swap(desired, memory_order_seq_cst);
+    }
+
+    void operator =(nullptr_t) noexcept {
+        store(nullptr);
+    }
+
+    value_type exchange(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
+        atomic_.swap(desired, mo);
+        return desired;
+    }
+
+    bool compare_exchange_strong(value_type& expected, value_type desired,
+                                 memory_order mo, memory_order mo2) noexcept {
+        return atomic_.compare_exchange_strong(expected, desired, mo, mo2);
+    }
+
+    bool compare_exchange_strong(value_type& expected, value_type desired,
+                                 memory_order mo = memory_order_seq_cst) noexcept {
+        memory_order mo2;
+        switch (mo) {
+            case memory_order_acq_rel: {
+                mo2 = memory_order_acquire;
+                break;
+            }
+            case memory_order_release: {
+                mo2 = memory_order_relaxed;
+                break;
+            }
+            default: {
+                mo2 = mo;
+            }
+        }
+        return compare_exchange_strong(expected, move(desired), mo, mo2);
+    }
+
+    bool compare_exchange_weak(value_type& expected, value_type desired,
+                               memory_order mo, memory_order mo2) noexcept {
+        return compare_exchange_strong(expected, move(desired), mo, mo2);
+    }
+
+    bool compare_exchange_weak(value_type& expected, value_type desired,
+                               memory_order mo = memory_order_seq_cst) noexcept {
+        return compare_exchange_strong(expected, move(desired), mo);
+    }
+
+    void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept {
+        atomic_.wait(move(mold), mo);
+    }
+
+    void notify_one() noexcept {
+        atomic_.notify_one();
+    }
+
+    void notify_all() noexcept {
+        atomic_.notify_all();
     }
 };
 

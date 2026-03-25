@@ -176,12 +176,12 @@ void sleep_until(const time_point<Clock, Dur>& time) {
     auto current = Clock::now();
     if (Clock::is_steady) {
         if (current < time) {
-            _THIS_THREAD sleep_for(time - current);
+            this_thread::sleep_for(time - current);
         }
         return;
     }
     while (current < time) {
-        _THIS_THREAD sleep_for(time - current);
+        this_thread::sleep_for(time - current);
         current = Clock::now();
     }
 }

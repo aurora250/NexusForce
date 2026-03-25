@@ -83,7 +83,7 @@ NEFORCE_END_INNER__
  */
 template <typename T, enable_if_t<is_base_of_v<icollector<T>, T>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& c) {
-    return _INNER collector_to_string(c);
+    return inner::collector_to_string(c);
 }
 
 /**
@@ -104,7 +104,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T&) {
  */
 template <typename T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& arr) {
-    return _INNER collector_to_string(arr);
+    return inner::collector_to_string(arr);
 }
 
 /**
@@ -165,7 +165,7 @@ NEFORCE_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& resu
 template <typename Tuple, size_t I, enable_if_t<I < tuple_size_v<Tuple> - 1, int> = 0>
 NEFORCE_CONSTEXPR20 void __to_string_tuple_elements(const Tuple& t, string& result) {
     result += to_string(_NEFORCE get<I>(t)) + ", ";
-    _INNER __to_string_tuple_elements<Tuple, I + 1>(t, result);
+    inner::__to_string_tuple_elements<Tuple, I + 1>(t, result);
 }
 
 template <typename... UArgs, enable_if_t<sizeof...(UArgs) == 0, int> = 0>
@@ -177,7 +177,7 @@ template <typename... UArgs, enable_if_t<sizeof...(UArgs) != 0, int> = 0>
 NEFORCE_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>& t) {
     string result;
     result += "( ";
-    _INNER __to_string_tuple_elements<decltype(t), 0>(t, result);
+    inner::__to_string_tuple_elements<decltype(t), 0>(t, result);
     result += " )";
     return result;
 }
@@ -193,7 +193,7 @@ NEFORCE_END_INNER__
  */
 template <typename... Args>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const tuple<Args...>& tup) {
-    return _INNER __to_string_tuple_dispatch(tup);
+    return inner::__to_string_tuple_dispatch(tup);
 }
 
 
@@ -223,7 +223,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(Args&&... args) {
 #ifdef NEFORCE_STANDARD_17
     return (to_string(_NEFORCE forward<Args>(args)) + ...);
 #else
-    return _INNER to_string_concat(_NEFORCE forward<Args>(args)...);
+    return inner::to_string_concat(_NEFORCE forward<Args>(args)...);
 #endif
 }
 
@@ -266,7 +266,7 @@ NEFORCE_NODISCARD constexpr CharT* __uint_to_buff(CharT* riter, UT ux) noexcept 
 #ifdef NEFORCE_ARCH_BITS_64
     UT holder = ux;
 #else
-    _INNER __uint_to_buff_aux(riter, ux);
+    inner::__uint_to_buff_aux(riter, ux);
     auto holder = static_cast<uint32_t>(ux);
 #endif
     do {
@@ -293,10 +293,10 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __int_to_string(const 
     using UT = make_unsigned_t<T>;
     const auto unsigned_x = static_cast<UT>(x);
     if (x < 0) {
-        rnext = _INNER __uint_to_buff(rnext, static_cast<UT>(0 - unsigned_x));
+        rnext = inner::__uint_to_buff(rnext, static_cast<UT>(0 - unsigned_x));
         *--rnext = '-';
     } else {
-        rnext = _INNER __uint_to_buff(rnext, unsigned_x);
+        rnext = inner::__uint_to_buff(rnext, unsigned_x);
     }
     const size_t count = buffer_end - rnext;
     return basic_string<CharT>(rnext, count);
@@ -315,7 +315,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) 
 
     CharT buffer[21];
     CharT* const buffer_end = buffer + 21;
-    CharT* const rnext = _INNER __uint_to_buff(buffer_end, x);
+    CharT* const rnext = inner::__uint_to_buff(buffer_end, x);
     const size_t count = buffer_end - rnext;
     return basic_string<CharT>(rnext, count);
 }
@@ -347,12 +347,12 @@ NEFORCE_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base,
 template <typename T, enable_if_t<
     disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>, is_same<T, signed char>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
-    return _INNER __int_to_string<char>(x);
+    return inner::__int_to_string<char>(x);
 }
 template <typename T, enable_if_t<
     disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>, is_same<T, unsigned char>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
-    return _INNER __uint_to_string<char>(x);
+    return inner::__uint_to_string<char>(x);
 }
 
 /**
@@ -416,7 +416,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
         auto integer_part = static_cast<uint64_t>(x);
         T fractional_part = x - integer_part;
 
-        result += _INNER __uint_to_string<CharT>(integer_part);
+        result += inner::__uint_to_string<CharT>(integer_part);
 
         if (precision > 0) {
             result += '.';
@@ -439,13 +439,13 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
         if (exponent < 10) {
             result += '0';
         }
-        result += _INNER __uint_to_string<CharT>(static_cast<uint64_t>(exponent));
+        result += inner::__uint_to_string<CharT>(static_cast<uint64_t>(exponent));
 
     } else {
         auto integer_part = static_cast<uint64_t>(x);
         T fractional_part = x - integer_part;
 
-        result += _INNER __uint_to_string<CharT>(integer_part);
+        result += inner::__uint_to_string<CharT>(integer_part);
 
         if (precision > 0) {
             result += '.';
@@ -470,7 +470,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
  */
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string(T x) {
-    return _INNER __float_to_string_with_precision<CharT>(x, 6, false, false);
+    return inner::__float_to_string_with_precision<CharT>(x, 6, false, false);
 }
 
 NEFORCE_END_INNER__
@@ -486,7 +486,7 @@ NEFORCE_END_INNER__
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision(T x, int precision, bool scientific = false) {
-    return _INNER __float_to_string_with_precision<char>(x, precision, scientific, scientific);
+    return inner::__float_to_string_with_precision<char>(x, precision, scientific, scientific);
 }
 
 /**
@@ -498,7 +498,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision(T x, int p
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_general(T x, int precision = 6) {
-    return _INNER __float_to_string_with_precision<char>(x, precision, false, false);
+    return inner::__float_to_string_with_precision<char>(x, precision, false, false);
 }
 
 /**
@@ -510,7 +510,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_general(T x, int precisio
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_fixed(T x, int precision = 6) {
-    return _INNER __float_to_string_with_precision<char>(x, precision, false, true);
+    return inner::__float_to_string_with_precision<char>(x, precision, false, true);
 }
 
 /**
@@ -522,7 +522,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_fixed(T x, int precision 
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_scientific(T x, int precision = 6) {
-    return _INNER __float_to_string_with_precision<char>(x, precision, true, false);
+    return inner::__float_to_string_with_precision<char>(x, precision, true, false);
 }
 
 /** @} */ // ToString

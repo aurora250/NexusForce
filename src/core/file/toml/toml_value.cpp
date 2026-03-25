@@ -24,7 +24,7 @@ string NEFORCE_API toml_value_to_string(const toml_value* value) {
 
             switch (str_type) {
                 case toml_string::Basic: {
-                    return "\"" + _NEFORCE escape(str) + "\"";
+                    return "\"" + escape(str) + "\"";
                 }
                 case toml_string::Literal: {
                     string lit;
@@ -37,7 +37,7 @@ string NEFORCE_API toml_value_to_string(const toml_value* value) {
                     return lit;
                 }
                 case toml_string::MultiBasic: {
-                    string escaped = _NEFORCE escape(str);
+                    string escaped = escape(str);
                     if (!escaped.empty() && escaped.back() == '"') {
                         escaped.pop_back();
                         escaped += "\\\"";
@@ -48,7 +48,7 @@ string NEFORCE_API toml_value_to_string(const toml_value* value) {
                     return "'''" + str + "'''";
                 }
                 default: {
-                    return "\"" + _NEFORCE escape(str) + "\"";
+                    return "\"" + escape(str) + "\"";
                 }
             }
         }
@@ -85,7 +85,7 @@ string NEFORCE_API toml_value_to_string(const toml_value* value) {
                     }
 
                     if (needs_quotes) {
-                        result += "\"" + _NEFORCE escape(key) + "\"";
+                        result += "\"" + escape(key) + "\"";
                     } else {
                         result += key;
                     }
@@ -113,7 +113,7 @@ static NEFORCE_ALWAYS_INLINE_INLINE string toml_quote_key_if_needed(const string
     }
 
     if (needs_quotes) {
-        return "\"" + _NEFORCE escape(key) + "\"";
+        return "\"" + escape(key) + "\"";
     }
     return key;
 }
@@ -218,7 +218,7 @@ string NEFORCE_API toml_value_document(const toml_value* value) {
             if (is_nan(val)) {
                 return "nan";
             } else if (is_infinity(val)) {
-                return _NEFORCE signbit(val) ? "-inf" : "inf";
+                return signbit(val) ? "-inf" : "inf";
             } else {
                 return _NEFORCE to_string(val);
             }
@@ -230,7 +230,7 @@ string NEFORCE_API toml_value_document(const toml_value* value) {
 
             switch (str_type) {
                 case toml_string::Basic: {
-                    return "\"" + _NEFORCE escape(str) + "\"";
+                    return "\"" + escape(str) + "\"";
                 }
                 case toml_string::Literal: {
                     string lit = "'";
@@ -242,7 +242,7 @@ string NEFORCE_API toml_value_document(const toml_value* value) {
                     return lit;
                 }
                 case toml_string::MultiBasic: {
-                    string escaped = _NEFORCE escape(str);
+                    string escaped = escape(str);
                     if (!escaped.empty() && escaped.back() == '"') {
                         escaped.pop_back();
                         escaped += "\\\"";
@@ -253,7 +253,7 @@ string NEFORCE_API toml_value_document(const toml_value* value) {
                     return "'''" + str + "'''";
                 }
                 default: {
-                    return "\"" + _NEFORCE escape(str) + "\"";
+                    return "\"" + escape(str) + "\"";
                 }
             }
         }

@@ -158,7 +158,7 @@ void partial_sort(Iterator first, Iterator middle, Iterator last, Compare comp) 
     _NEFORCE make_heap(first, middle, comp);
     for (Iterator i = middle; i < last; ++i) {
         if (comp(*i, *first)) {
-	        _INNER pop_heap_aux(first, middle, i, *i, comp);
+	        inner::pop_heap_aux(first, middle, i, *i, comp);
         }
     }
     _NEFORCE sort_heap(first, middle, comp);
@@ -289,7 +289,7 @@ void insertion_sort(Iterator first, Iterator last, Compare comp) {
             _NEFORCE copy_backward(first, i, i + 1);
             *first = value;
         } else {
-	        _INNER __insertion_sort_aux(i, value, comp);
+	        inner::__insertion_sort_aux(i, value, comp);
         }
     }
 }
@@ -419,7 +419,7 @@ void __intro_sort_dispatch(Iterator first, Iterator last, int depth_limit, Compa
             first, last,
             _NEFORCE median(*first, *(first + (last - first) / 2), *(last - 1), comp),
             comp);
-        _INNER __intro_sort_dispatch(cut, last, depth_limit, comp);
+        inner::__intro_sort_dispatch(cut, last, depth_limit, comp);
         last = cut;
     }
 }
@@ -461,13 +461,13 @@ template <typename Iterator, typename Compare>
 void sort(Iterator first, Iterator last, Compare comp) {
     if (first == last) return;
 
-    _INNER __intro_sort_dispatch(first, last, _INNER __log2_int(last - first) * 2, comp);
+    inner::__intro_sort_dispatch(first, last, inner::__log2_int(last - first) * 2, comp);
     constexpr size_t threshhold = MEMORY_ALIGN_THRESHHOLD;
 
     if (last - first > threshhold) {
         _NEFORCE insertion_sort(first, first + threshhold, comp);
         for (Iterator i = first + threshhold; i != last; ++i) {
-	        _INNER __insertion_sort_aux(i, *i, comp);
+	        inner::__insertion_sort_aux(i, *i, comp);
         }
     }
     else {

@@ -49,7 +49,7 @@ NEFORCE_END_INNER__
  * @tparam Args 协程参数类型
  */
 template <typename Res, typename... Args>
-struct coroutine_traits : _INNER coroutine_traits_impl<Res> {};
+struct coroutine_traits : inner::coroutine_traits_impl<Res> {};
 
 
 /**

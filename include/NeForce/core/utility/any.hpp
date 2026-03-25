@@ -202,7 +202,7 @@ class NEFORCE_API any {
     storage_internal storage_{};    ///< 存储对象
 
     template <typename T, typename U>
-    friend const T* _INNER __any_cast_aux_dispatch_impl(const any* value, _INNER any_cast_true_tag) noexcept;
+    friend const T* inner::__any_cast_aux_dispatch_impl(const any* value, inner::any_cast_true_tag) noexcept;
 
     /**
      * @brief 尝试构造值
@@ -437,7 +437,7 @@ const T* __any_cast_aux_dispatch(const any* value) noexcept {
         (is_same_v<decay_t<U>, U> || is_copy_constructible_v<U>),
         any_cast_true_tag, any_cast_false_tag
     >;
-    return _INNER __any_cast_aux_dispatch_impl<T, U>(value, tag{});
+    return inner::__any_cast_aux_dispatch_impl<T, U>(value, tag{});
 }
 
 template <typename T, enable_if_t<is_object_v<T>, int> = 0>
@@ -463,7 +463,7 @@ NEFORCE_END_INNER__
  */
 template <typename T>
 const T* any_cast(const any* value) noexcept {
-    return _INNER __any_cast_aux<T>(value);
+    return inner::__any_cast_aux<T>(value);
 }
 
 /**

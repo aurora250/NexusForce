@@ -90,7 +90,7 @@ private:
     using is_compatible_ref = is_array_convertible<Element, remove_reference_t<Ref>>;
 
     /// 压缩存储：范围存储和指针
-    compressed_pair<_INNER extent_storage<Extent>, pointer> extent_pair_;
+    compressed_pair<inner::extent_storage<Extent>, pointer> extent_pair_;
 
     template <typename U, size_t OE>
     friend class memory_view;

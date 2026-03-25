@@ -705,7 +705,7 @@ NEFORCE_END_INNER__
 
 template <typename... Types>
 NEFORCE_CONSTEXPR20 size_t variant<Types...>::to_hash() const {
-    constexpr _INNER __variant_elem_hasher hasher{};
+    constexpr inner::__variant_elem_hasher hasher{};
     return variant::visit(hasher);
 }
 

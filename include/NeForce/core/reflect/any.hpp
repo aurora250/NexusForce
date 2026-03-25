@@ -31,7 +31,7 @@ private:
     struct concepts {
         virtual ~concepts() = default;
         virtual unique_ptr<concepts> clone() const = 0;
-        virtual _REFLECT type_id type_id() const noexcept = 0;
+        virtual reflect::type_id type_id() const noexcept = 0;
     };
 
     template <typename T>
@@ -45,7 +45,7 @@ private:
             return _NEFORCE make_unique<model<T>>(value_);
         }
 
-        _REFLECT type_id type_id() const noexcept override {
+        reflect::type_id type_id() const noexcept override {
             return type_name_v<T>.to_hash();
         }
     };
@@ -56,7 +56,7 @@ public:
     any() noexcept = default;
 
     template <typename T, typename = enable_if_t<!is_same_v<decay_t<T>, any>>>
-    any(T&& value)
+    explicit any(T&& value)
     : storage_(_NEFORCE make_unique<model<decay_t<T>>>(_NEFORCE forward<T>(value))) {}
 
     any(any&&) noexcept = default;
@@ -79,15 +79,15 @@ public:
         return *this;
     }
 
-    type_id type_id() const noexcept {
+    NEFORCE_NODISCARD reflect::type_id type_id() const noexcept {
         return storage_ ? storage_->type_id() : 0;
     }
 
-    bool has_value() const noexcept { return !!storage_; }
+    NEFORCE_NODISCARD bool has_value() const noexcept { return !!storage_; }
     explicit operator bool() const noexcept { return has_value(); }
 
     template <typename T>
-    T* cast() noexcept {
+    NEFORCE_NODISCARD T* cast() noexcept {
         if (!storage_) return nullptr;
         if (storage_->type_id() != type_name_v<T>.to_hash()) {
             return nullptr;
@@ -97,7 +97,7 @@ public:
     }
 
     template <typename T>
-    const T* cast() const noexcept {
+    NEFORCE_NODISCARD const T* cast() const noexcept {
         if (!storage_) return nullptr;
         if (storage_->type_id() != type_name_v<T>.to_hash()) {
             return nullptr;
@@ -107,26 +107,26 @@ public:
     }
 
     template <typename T>
-    T& get() {
+    NEFORCE_NODISCARD T& get() {
         if (auto* ptr = cast<T>()) return *ptr;
         NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
         unreachable();
     }
 
     template <typename T>
-    const T& get() const {
+    NEFORCE_NODISCARD const T& get() const {
         if (auto* ptr = cast<T>()) return *ptr;
         NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
         unreachable();
     }
 
     template <typename T>
-    bool can_cast() const noexcept {
+    NEFORCE_NODISCARD bool can_cast() const noexcept {
         return cast<T>() != nullptr;
     }
 
     template <typename T>
-    T convert() const {
+    NEFORCE_NODISCARD T convert() const {
         if (auto* ptr = cast<T>()) return *ptr;
         NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
         unreachable();

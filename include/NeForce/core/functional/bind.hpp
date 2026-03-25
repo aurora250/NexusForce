@@ -151,8 +151,8 @@ struct weak_result_type : __weak_result_type_memfun<remove_cv_t<Func>> {};
  * @tparam IsMemFunc 是否为成员函数指针
  */
 template <typename MemberPtr, bool IsMemFunc = is_member_function_pointer_v<MemberPtr>>
-class mem_func_base : public _INNER mem_func_traits<MemberPtr>::maybe_type {
-    using Traits = _INNER mem_func_traits<MemberPtr>;  ///< 特性类型
+class mem_func_base : public inner::mem_func_traits<MemberPtr>::maybe_type {
+    using Traits = inner::mem_func_traits<MemberPtr>;  ///< 特性类型
     using Arity = typename Traits::arity;              ///< 参数数量
     using Varargs = typename Traits::vararg;           ///< 是否可变参数
 
@@ -430,7 +430,7 @@ class binder;
  * 组合后调用原始函数。支持占位符参数重排。
  */
 template <typename Func, typename... BoundArgs>
-class binder<Func(BoundArgs...)> : public _INNER weak_result_type<Func> {
+class binder<Func(BoundArgs...)> : public inner::weak_result_type<Func> {
 private:
     using BoundIndexes = build_index_tuple_t<sizeof...(BoundArgs)>;  ///< 绑定参数的索引序列
 
@@ -446,7 +446,7 @@ private:
      */
     template <typename BoundArg, typename CallArgs>
     struct arg_mapper_result {
-        using type = decltype(_INNER bind_arg_mapper<remove_cv_t<BoundArg>>()(
+        using type = decltype(inner::bind_arg_mapper<remove_cv_t<BoundArg>>()(
             _NEFORCE declval<BoundArg&>(), _NEFORCE declval<CallArgs&>()));
     };
 
@@ -486,7 +486,7 @@ private:
      * @tparam CallArgs 调用参数元组类型
      */
     template <typename BoundArg, typename CallArgs>
-    using arg_mapper_type = decltype(_INNER bind_arg_mapper<remove_cv_t<BoundArg>>()(
+    using arg_mapper_type = decltype(inner::bind_arg_mapper<remove_cv_t<BoundArg>>()(
         _NEFORCE declval<BoundArg&>(), _NEFORCE declval<CallArgs&>()));
 
     /**
@@ -510,7 +510,7 @@ private:
     template <typename Res, typename... Args, size_t... Indexes>
     NEFORCE_CONSTEXPR20 Res call(tuple<Args...>&& args, index_tuple<Indexes...> idx) {
         return _NEFORCE invoke(functor_,
-            _INNER bind_arg_mapper<BoundArgs>()(_NEFORCE get<Indexes>(bound_args_), args)...
+            inner::bind_arg_mapper<BoundArgs>()(_NEFORCE get<Indexes>(bound_args_), args)...
         );
     }
 
@@ -526,7 +526,7 @@ private:
     template <typename Res, typename... Args, _NEFORCE size_t... Indexes>
     NEFORCE_CONSTEXPR20 Res call_const(tuple<Args...>&& args, index_tuple<Indexes...> idx) const {
         return _NEFORCE invoke(functor_,
-            _INNER bind_arg_mapper<BoundArgs>()(_NEFORCE get<Indexes>(bound_args_), args)...
+            inner::bind_arg_mapper<BoundArgs>()(_NEFORCE get<Indexes>(bound_args_), args)...
         );
     }
 
@@ -616,7 +616,7 @@ private:
      */
     template <typename Result, typename... Args, size_t... Indexes>
     NEFORCE_CONSTEXPR20 Result call(tuple<Args...>&& args, index_tuple<Indexes...> idx) {
-        return _NEFORCE invoke_r<Res>(functor_, _INNER bind_arg_mapper<BoundArgs>()(
+        return _NEFORCE invoke_r<Res>(functor_, inner::bind_arg_mapper<BoundArgs>()(
             _NEFORCE get<Indexes>(bound_args_), args)...);
     }
 
@@ -631,7 +631,7 @@ private:
      */
     template <typename Result, typename... Args, _NEFORCE size_t... Indexes>
     NEFORCE_CONSTEXPR20 Result call(tuple<Args...>&& args, index_tuple<Indexes...> idx) const {
-        return _NEFORCE invoke_r<Res>(functor_, _INNER bind_arg_mapper<BoundArgs>()(
+        return _NEFORCE invoke_r<Res>(functor_, inner::bind_arg_mapper<BoundArgs>()(
             _NEFORCE get<Indexes>(bound_args_), args)...);
     }
 
@@ -745,7 +745,7 @@ NEFORCE_END_INNER__
  */
 template <bool IntLike, typename Func, typename... BoundArgs>
 struct bind_helper
-    : _INNER bind_check_arity<decay_t<Func>, BoundArgs...> {
+    : inner::bind_check_arity<decay_t<Func>, BoundArgs...> {
     using func_type = decay_t<Func>;  ///< 函数类型
     using type = binder<func_type(decay_t<BoundArgs>...)>;  ///< 推导出的binder类型
 };
@@ -791,7 +791,7 @@ bind(Func&& func, BoundArgs&&... args) {
  */
 template <typename Res, typename Func, typename... BoundArgs>
 struct bindr_helper
-    : _INNER bind_check_arity<decay_t<Func>, BoundArgs...> {
+    : inner::bind_check_arity<decay_t<Func>, BoundArgs...> {
     using type = bindrer<Res, decay_t<Func>(decay_t<BoundArgs>...)>;
 };
 

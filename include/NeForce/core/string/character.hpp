@@ -55,7 +55,7 @@ NEFORCE_CONSTEXPR20 void __append_utf8_char_aux<u8string>(u8string& result) {
 template <typename T>
 NEFORCE_CONSTEXPR20 void append_utf8_char(basic_string<T>& result, uint32_t cp) {
     if (cp > 0x10FFFF || _NEFORCE is_high_surrogate(cp) || _NEFORCE is_low_surrogate(cp)) {
-        _INNER __append_utf8_char_aux(result);
+        inner::__append_utf8_char_aux(result);
         return;
     }
 
@@ -217,7 +217,7 @@ constexpr bool is_valid_unicode_codepoint(const uint32_t cp) noexcept {
  */
 template <typename T>
 NEFORCE_CONSTEXPR20 void codepoint_to_utf16(basic_string<T>& result, uint32_t cp) {
-    if (!_INNER is_valid_unicode_codepoint(cp)) {
+    if (!inner::is_valid_unicode_codepoint(cp)) {
         result.push_back(0xFFFD);
         return;
     }
@@ -249,7 +249,7 @@ NEFORCE_CONSTEXPR20 void codepoint_to_utf16(basic_string<T>& result, uint32_t cp
  */
 template <typename T>
 NEFORCE_CONSTEXPR20 void codepoint_to_wchar(basic_string<T>& result, uint32_t cp) {
-    if (!_INNER is_valid_unicode_codepoint(cp)) {
+    if (!inner::is_valid_unicode_codepoint(cp)) {
         result.push_back(0xFFFD);
         return;
     }
@@ -355,10 +355,10 @@ struct character : icharacter<character, char> {
 
         while (i < len) {
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
-                _INNER codepoint_to_wchar(result, cp);
+            if (inner::decode_utf8_char(data, i, len, cp)) {
+                inner::codepoint_to_wchar(result, cp);
             } else {
-                _INNER codepoint_to_wchar(result, 0xFFFD);
+                inner::codepoint_to_wchar(result, 0xFFFD);
             }
         }
         return result;
@@ -397,8 +397,8 @@ struct character : icharacter<character, char> {
 
         while (i < len) {
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
-                _INNER codepoint_to_utf16(result, cp);
+            if (inner::decode_utf8_char(data, i, len, cp)) {
+                inner::codepoint_to_utf16(result, cp);
             } else {
                 result.push_back(0xFFFD);
             }
@@ -422,7 +422,7 @@ struct character : icharacter<character, char> {
 
         while (i < len) {
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
+            if (inner::decode_utf8_char(data, i, len, cp)) {
                 result.push_back(static_cast<char32_t>(cp));
             } else {
                 result.push_back(0xFFFD);
@@ -467,17 +467,17 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         for (size_t i = 0; i < obj.size(); ) {
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
-                _INNER append_utf8_char(result, cp);
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+                inner::append_utf8_char(result, cp);
                 i += chars_consumed;
             } else {
-                _INNER append_utf8_char(result, 0xFFFD);
+                inner::append_utf8_char(result, 0xFFFD);
                 i++;
             }
         }
 #elif defined(NEFORCE_PLATFORM_LINUX)
         for (const value_type i : obj) {
-            _INNER append_utf8_char(result, i);
+            inner::append_utf8_char(result, i);
         }
 #endif
         return result;
@@ -506,17 +506,17 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         for (size_t i = 0; i < obj.size(); ) {
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
-                _INNER append_utf8_char(result, cp);
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+                inner::append_utf8_char(result, cp);
                 i += chars_consumed;
             } else {
-                _INNER append_utf8_char(result, 0xFFFD);
+                inner::append_utf8_char(result, 0xFFFD);
                 i++;
             }
         }
 #elif defined(NEFORCE_PLATFORM_LINUX)
         for (const value_type i : obj) {
-            _INNER append_utf8_char(result, i);
+            inner::append_utf8_char(result, i);
         }
 #endif
         return result;
@@ -540,7 +540,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
 #elif defined(NEFORCE_PLATFORM_LINUX)
         result.reserve(obj.size() * 2);
         for (const value_type i : obj) {
-            _INNER codepoint_to_utf16(result, i);
+            inner::codepoint_to_utf16(result, i);
         }
 #endif
         return result;
@@ -560,7 +560,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
         for (size_t i = 0; i < obj.size(); ) {
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
                 result.push_back(static_cast<char32_t>(cp));
                 i += chars_consumed;
             } else {
@@ -610,7 +610,7 @@ struct u8character : icharacter<u8character, char8_t> {
     static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) return {};
         string result;
-        _INNER append_ascii_chars(result, obj.data(), obj.size());
+        inner::append_ascii_chars(result, obj.data(), obj.size());
         return result;
     }
 
@@ -629,8 +629,8 @@ struct u8character : icharacter<u8character, char8_t> {
         while (i < len) {
             const auto data = reinterpret_cast<const byte_t*>(obj.data());
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
-                _INNER codepoint_to_wchar(result, cp);
+            if (inner::decode_utf8_char(data, i, len, cp)) {
+                inner::codepoint_to_wchar(result, cp);
             } else {
                 result.push_back(0xFFFD);
             }
@@ -662,8 +662,8 @@ struct u8character : icharacter<u8character, char8_t> {
         while (i < len) {
             const auto data = reinterpret_cast<const byte_t*>(obj.data());
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
-                _INNER codepoint_to_utf16(result, cp);
+            if (inner::decode_utf8_char(data, i, len, cp)) {
+                inner::codepoint_to_utf16(result, cp);
             } else {
                 result.push_back(0xFFFD);
             }
@@ -686,7 +686,7 @@ struct u8character : icharacter<u8character, char8_t> {
         while (i < len) {
             const auto data = reinterpret_cast<const byte_t*>(obj.data());
             uint32_t cp;
-            if (_INNER decode_utf8_char(data, i, len, cp)) {
+            if (inner::decode_utf8_char(data, i, len, cp)) {
                 result.push_back(static_cast<char32_t>(cp));
             } else {
                 result.push_back(0xFFFD);
@@ -738,15 +738,15 @@ struct u16character : icharacter<u16character, char16_t> {
             uint32_t cp;
             size_t chars_consumed;
 
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
                 if (cp <= 0x10FFFF && !_NEFORCE is_high_surrogate(cp) && !_NEFORCE is_low_surrogate(cp)) {
-                    _INNER append_utf8_char(result, cp);
+                    inner::append_utf8_char(result, cp);
                 } else {
-                    _INNER append_utf8_char(result, 0xFFFD);
+                    inner::append_utf8_char(result, 0xFFFD);
                 }
                 i += chars_consumed;
             } else {
-                _INNER append_utf8_char(result, 0xFFFD);
+                inner::append_utf8_char(result, 0xFFFD);
                 i++;
             }
         }
@@ -771,8 +771,8 @@ struct u16character : icharacter<u16character, char16_t> {
 
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
-                _INNER codepoint_to_wchar(result, cp);
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+                inner::codepoint_to_wchar(result, cp);
                 i += chars_consumed;
             } else {
                 result.push_back(0xFFFD);
@@ -801,11 +801,11 @@ struct u16character : icharacter<u16character, char16_t> {
 
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
-                _INNER append_utf8_char(result, cp);
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+                inner::append_utf8_char(result, cp);
                 i += chars_consumed;
             } else {
-                _INNER append_utf8_char(result, 0xFFFD);
+                inner::append_utf8_char(result, 0xFFFD);
                 i++;
             }
         }
@@ -840,7 +840,7 @@ struct u16character : icharacter<u16character, char16_t> {
 
             uint32_t cp;
             size_t chars_consumed;
-            if (_INNER get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
+            if (inner::get_utf16_codepoint(obj.data(), i, obj.size(), cp, chars_consumed)) {
                 result.push_back(static_cast<char32_t>(cp));
                 i += chars_consumed;
             } else {
@@ -883,7 +883,7 @@ struct u32character : icharacter<u32character, char32_t> {
         if (obj.empty()) return {};
         string result;
         for (const value_type i : obj) {
-            _INNER append_utf8_char(result, i);
+            inner::append_utf8_char(result, i);
         }
         return result;
     }
@@ -898,7 +898,7 @@ struct u32character : icharacter<u32character, char32_t> {
         wstring result;
         result.reserve(obj.size());
         for (const value_type i : obj) {
-            _INNER codepoint_to_wchar(result, i);
+            inner::codepoint_to_wchar(result, i);
         }
         return result;
     }
@@ -914,7 +914,7 @@ struct u32character : icharacter<u32character, char32_t> {
         u8string result;
         result.reserve(obj.size() * 4);
         for (const value_type i : obj) {
-            _INNER append_utf8_char(result, i);
+            inner::append_utf8_char(result, i);
         }
         return result;
     }
@@ -930,7 +930,7 @@ struct u32character : icharacter<u32character, char32_t> {
         u16string result;
         result.reserve(obj.size() * 2);
         for (const value_type i : obj) {
-            _INNER codepoint_to_utf16(result, i);
+            inner::codepoint_to_utf16(result, i);
         }
         return result;
     }

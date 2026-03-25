@@ -366,12 +366,6 @@
  */
 #define NEFORCE_END_INNER__ }
 
-/**
- * @def _INNER
- * @brief inner命名空间前缀
- */
-#define _INNER __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_INNER_NAMESPACE__ ::
-
 
 /**
  * @def __NEFORCE_CONSTANTS_NAMESPACE__
@@ -390,12 +384,6 @@
  * @brief 结束constants命名空间
  */
 #define NEFORCE_END_CONSTANTS__ }
-
-/**
- * @def _CONSTANTS
- * @brief constants命名空间前缀
- */
-#define _CONSTANTS __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_CONSTANTS_NAMESPACE__ ::
 
 
 /**
@@ -416,12 +404,6 @@
  */
 #define NEFORCE_END_THIS_THREAD__ }
 
-/**
- * @def _THIS_THREAD
- * @brief this_thread命名空间前缀
- */
-#define _THIS_THREAD __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_THIS_THREAD_NAMESPACE__ ::
-
 
 /**
  * @def __NEFORCE_RANGES_NAMESPACE__
@@ -441,11 +423,6 @@
  */
 #define NEFORCE_END_RANGES__ }
 
-/**
- * @def _NEFORCE_RANGES
- * @brief ranges命名空间前缀
- */
-#define _NEFORCE_RANGES __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_RANGES_NAMESPACE__ ::
 
 /**
  * @def __NEFORCE_RANGES_VIEWS_NAMESPACE__
@@ -464,12 +441,6 @@
  * @brief 结束ranges::view命名空间
  */
 #define NEFORCE_END_RANGES_VIEWS__ }
-
-/**
- * @def _RANGES_VIEWS
- * @brief ranges::view命名空间前缀
- */
-#define _RANGES_VIEWS __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_RANGES_NAMESPACE__ :: __NEFORCE_RANGES_VIEWS_NAMESPACE__ ::
 
 
 /**
@@ -490,12 +461,6 @@
  */
 #define NEFORCE_END_LITERALS__ }
 
-/**
- * @def _LITERALS
- * @brief literals命名空间前缀
- */
-#define _LITERALS __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_LITERALS_NAMESPACE__ ::
-
 
 /**
  * @def __NEFORCE_REFLECT_NAMESPACE__
@@ -514,12 +479,6 @@
  * @brief 结束reflect命名空间
  */
 #define NEFORCE_END_REFLECT__ }
-
-/**
- * @def _REFLECT
- * @brief reflect命名空间前缀
- */
-#define _REFLECT __NEFORCE_GLOBAL_NAMESPACE__ :: __NEFORCE_REFLECT_NAMESPACE__ ::
 
 /** @} */ // NamespaceMacros
 
@@ -860,8 +819,8 @@ NEFORCE_END_NAMESPACE__
 #if defined(NEFORCE_STANDARD_20)
 #define NEFORCE_CONSTEXPR_ASSERT(COND) \
 do { \
-    if (is_constant_evaluated() && !bool(COND)) { \
-        unreachable(); \
+    if (_NEFORCE is_constant_evaluated() && !bool(COND)) { \
+        _NEFORCE unreachable(); \
     } \
 } while (false);
 #else

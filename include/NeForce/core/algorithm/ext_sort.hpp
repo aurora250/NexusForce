@@ -417,17 +417,17 @@ NEFORCE_CONSTEXPR20 void radix_sort_less(Iterator first, Iterator last, Mapper m
         value = mapper(*it++);
     }
 
-    for (int d = 1; d <= _INNER __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
+    for (int d = 1; d <= inner::__max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
         _NEFORCE fill(count.begin(), count.end(), 0);
         for(const auto& num : mapped_values) {
-            ++count[_INNER __get_number_aux(num, d)];
+            ++count[inner::__get_number_aux(num, d)];
         }
 
         for (size_t i = 1; i < count.size(); ++i) {
             count[i] += count[i - 1];
         }
         for (auto iter = mapped_values.rbegin(); iter != mapped_values.rend(); ++iter) {
-            const int k = _INNER __get_number_aux(*iter, d);
+            const int k = inner::__get_number_aux(*iter, d);
             bucket[--count[k]] = *(first + _NEFORCE distance(mapped_values.begin(), iter.base() - 1));
         }
 
@@ -464,10 +464,10 @@ NEFORCE_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mappe
     for (auto& value : mapped_values) {
         value = mapper(*it++);
     }
-    for (int d = 1; d <= _INNER __max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
+    for (int d = 1; d <= inner::__max_bit_aux(mapped_values.begin(), mapped_values.end()); ++d) {
         _NEFORCE fill(count.begin(), count.end(), 0);
         for(const auto& num : mapped_values) {
-            ++count[_INNER __get_number_aux(*num, d)];
+            ++count[inner::__get_number_aux(*num, d)];
         }
 
         for (size_t i = count.size() - 1; i > 0; --i) {
@@ -475,7 +475,7 @@ NEFORCE_CONSTEXPR20 void radix_sort_greater(Iterator first, Iterator last, Mappe
         }
 
         for (auto iter = mapped_values.rbegin(); iter != mapped_values.rend(); ++iter) {
-            const int k = _INNER __get_number_aux(*iter, d);
+            const int k = inner::__get_number_aux(*iter, d);
             bucket[--count[k]] = *(first + _NEFORCE distance(mapped_values.begin(), iter.base() - 1));
         }
 

@@ -2,7 +2,8 @@
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <debugapi.h>
-#else
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
 #include <NeForce/core/file/file.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -19,7 +20,7 @@ bool is_debugger_present() noexcept {
     string line;
     size_t pos = 0;
     const string read = status_file.read();
-    while (_NEFORCE getline(read, pos, line)) {
+    while (getline(read, pos, line)) {
         if (line.compare(0, 10, "TracerPid:") == 0) {
             const size_t f = line.find_first_of("0123456789");
             if (f != string::npos) {

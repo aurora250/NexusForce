@@ -7,7 +7,7 @@ env_builder::env_builder() {
 }
 
 env_builder& env_builder::key(string key) noexcept {
-    current_key_ = _NEFORCE move(key);
+    current_key_ = move(key);
     return *this;
 }
 
@@ -36,7 +36,7 @@ env_builder& env_builder::value(string value) {
         NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
     }
 
-    root_->set_variable(current_key_, _NEFORCE move(value), current_quote_type_, current_exported_);
+    root_->set_variable(current_key_, move(value), current_quote_type_, current_exported_);
     current_key_.clear();
     current_quote_type_ = env_variable::None;
     current_exported_ = false;
@@ -97,7 +97,7 @@ env_builder& env_builder::value(const double value, const int precision) {
     }
 
     root_->set_variable(
-        current_key_, _NEFORCE to_string_with_precision(value, precision),
+        current_key_, to_string_with_precision(value, precision),
         current_quote_type_, current_exported_);
 
     current_key_.clear();
@@ -118,7 +118,7 @@ env_builder& env_builder::blank_line() noexcept {
 }
 
 env_builder& env_builder::add(string key, string value) {
-    return this->key(move(key)).value(_NEFORCE move(value));
+    return this->key(move(key)).value(move(value));
 }
 
 env_builder& env_builder::add(string key, const int value) {
@@ -138,11 +138,11 @@ env_builder& env_builder::add(string key, const bool value) {
 }
 
 env_builder& env_builder::add_export(string key, string value) {
-    return this->exported().key(move(key)).value(_NEFORCE move(value));
+    return this->exported().key(move(key)).value(move(value));
 }
 
 unique_ptr<env_document> env_builder::build() noexcept {
-    return _NEFORCE move(root_);
+    return move(root_);
 }
 
 NEFORCE_END_NAMESPACE__

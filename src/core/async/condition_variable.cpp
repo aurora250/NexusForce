@@ -31,7 +31,7 @@ void condition_variable_base::wait(mutex& mtx) {
     const ::BOOL result = ::SleepConditionVariableSRW(
         &cond_, mtx.native_handle(), numeric_traits<::DWORD>::max(), 0);
     if (!result) {
-        _NEFORCE terminate();
+        terminate();
     }
 #else
     int err NEFORCE_UNUSED = ::__gthread_cond_wait(&cond_, mtx.native_handle());
@@ -51,7 +51,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const int64_t sec, con
     if (err == ERROR_TIMEOUT) {
         return cv_status::timeout;
     }
-    _NEFORCE terminate();
+    terminate();
 #else
     const ::timespec ts { static_cast<ssize_t>(sec), static_cast<ssize_t>(ns) };
     const int result = ::__gthread_cond_timedwait(&cond_, mtx.native_handle(), &ts);
@@ -71,7 +71,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
     if (err == ERROR_TIMEOUT) {
         return cv_status::timeout;
     }
-    _NEFORCE terminate();
+    terminate();
 #else
     const ::timespec ts { static_cast<ssize_t>(sec), static_cast<ssize_t>(ns) };
     const int result = ::pthread_cond_clockwait(

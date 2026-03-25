@@ -224,12 +224,12 @@ template <typename T, typename Deleter = default_delete<T>>
 class unique_ptr {
 private:
     template <typename U>
-	using DeleterConstraint = typename _INNER __unique_ptr_impl<T, U>::DeleterConstraint::type;  ///< 删除器约束类型
+	using DeleterConstraint = typename inner::__unique_ptr_impl<T, U>::DeleterConstraint::type;  ///< 删除器约束类型
 
-    _INNER __unique_ptr_data<T, Deleter> data_{};  ///< 内部数据存储
+    inner::__unique_ptr_data<T, Deleter> data_{};  ///< 内部数据存储
 
 public:
-    using pointer       = typename _INNER __unique_ptr_impl<T, Deleter>::pointer;  ///< 指针类型
+    using pointer       = typename inner::__unique_ptr_impl<T, Deleter>::pointer;  ///< 指针类型
     using element_type  = T;        ///< 元素类型
     using deleter_type  = Deleter;  ///< 删除器类型
 
@@ -415,12 +415,12 @@ template <typename T, typename Deleter>
 class unique_ptr<T[], Deleter> {
     template <typename U>
     using DeleterConstraint =
-        typename _INNER __unique_ptr_impl<T, U>::DeleterConstraint::type;  ///< 删除器约束类型
+        typename inner::__unique_ptr_impl<T, U>::DeleterConstraint::type;  ///< 删除器约束类型
 
-    _INNER __unique_ptr_data<T, Deleter> data_{};  ///< 内部数据存储
+    inner::__unique_ptr_data<T, Deleter> data_{};  ///< 内部数据存储
 
 public:
-    using pointer	        = typename _INNER __unique_ptr_impl<T, Deleter>::pointer;  ///< 指针类型
+    using pointer	        = typename inner::__unique_ptr_impl<T, Deleter>::pointer;  ///< 指针类型
     using element_type    = T;        ///< 元素类型
     using deleter_type    = Deleter;  ///< 删除器类型
 

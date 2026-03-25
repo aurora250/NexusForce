@@ -83,7 +83,7 @@ void ini_parser::parse_line(const string& line) {
     if (is_section_line(line, section_name)) {
         auto new_section = make_unique<ini_section>(section_name);
         current_section_ = new_section.get();
-        root_->add_section(section_name, _NEFORCE move(new_section));
+        root_->add_section(section_name, move(new_section));
         return;
     }
 
@@ -120,7 +120,7 @@ unique_ptr<ini_document> ini_parser::parse() {
         }
     }
 
-    return _NEFORCE move(root_);
+    return move(root_);
 }
 
 optional<unique_ptr<ini_document>> ini_parser::try_parse() {

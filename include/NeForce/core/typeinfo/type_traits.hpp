@@ -271,7 +271,7 @@ struct disjunction : false_type {};
 /// @cond
 template <typename First, typename... Rest>
 struct disjunction<First, Rest...>
-    : _INNER __disjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
+    : inner::__disjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
 };
 /// @endcond
 
@@ -312,7 +312,7 @@ struct conjunction : true_type {};
 /// @cond
 template <typename First, typename... Rest>
 struct conjunction<First, Rest...>
-    : _INNER __conjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
+    : inner::__conjunction_aux<static_cast<bool>(First::value), First, Rest...>::type {
 };
 /// @endcond
 
@@ -721,7 +721,7 @@ NEFORCE_END_INNER__
  * 移除cv限定符后检查是否为void类型。
  */
 template <typename T>
-struct is_void : _INNER __is_void_helper<remove_cv_t<T>>::type {};
+struct is_void : inner::__is_void_helper<remove_cv_t<T>>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -980,7 +980,7 @@ NEFORCE_END_INNER__
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_signed : bool_constant<_INNER __check_sign_aux<unpack_remove_cvref_t<T>>::is_signed> {};
+struct is_signed : bool_constant<inner::__check_sign_aux<unpack_remove_cvref_t<T>>::is_signed> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -997,7 +997,7 @@ NEFORCE_INLINE17 constexpr bool is_signed_v = is_signed<T>::value;
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_unsigned : bool_constant<_INNER __check_sign_aux<unpack_remove_cvref_t<T>>::is_unsigned> {};
+struct is_unsigned : bool_constant<inner::__check_sign_aux<unpack_remove_cvref_t<T>>::is_unsigned> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -1886,7 +1886,7 @@ struct __is_member_function_pointer_aux<T C::*> : is_function<T> {};
 NEFORCE_END_INNER__
 
 template <typename T>
-struct is_member_function_pointer : _INNER __is_member_function_pointer_aux<remove_cv_t<T>> {};
+struct is_member_function_pointer : inner::__is_member_function_pointer_aux<remove_cv_t<T>> {};
 #endif
 /// @endcond
 
@@ -2087,7 +2087,7 @@ NEFORCE_END_INNER__
  * 对于非枚举类型，不提供::type成员。
  */
 template <typename T>
-struct underlying_type : _INNER __underlying_type_aux<T> {};
+struct underlying_type : inner::__underlying_type_aux<T> {};
 
 /**
  * @typedef underlying_type_t
@@ -2445,8 +2445,9 @@ struct is_implicitly_default_constructible : false_type {};
 
 /// @cond
 template <typename T>
-struct is_implicitly_default_constructible
-    <T, void_t<decltype(_INNER __implicitly_default_construct_aux<T>({}))>> : true_type {};
+struct is_implicitly_default_constructible<
+    T, void_t<decltype(inner::__implicitly_default_construct_aux<T>({}))>
+> : true_type {};
 /// @endcond
 
 #ifdef NEFORCE_STANDARD_14
@@ -2586,7 +2587,7 @@ struct __is_destructible_dispatch<T, false, true> : true_type {};
 NEFORCE_END_INNER__
 
 template <typename T>
-struct is_destructible : _INNER __is_destructible_dispatch<T>::type {};
+struct is_destructible : inner::__is_destructible_dispatch<T>::type {};
 #endif
 /// @endcond
 
@@ -2796,7 +2797,9 @@ NEFORCE_END_INNER__
 
 template <typename T>
 struct is_nothrow_default_constructible : conjunction<
-    is_default_constructible<T>, _INNER __is_nothrow_default_constructible_dispatch<T>> {};
+    is_default_constructible<T>,
+    inner::__is_nothrow_default_constructible_dispatch<T>
+> {};
 
 NEFORCE_BEGIN_INNER__
 
@@ -2812,7 +2815,9 @@ NEFORCE_END_INNER__
 
 template <typename T, typename... Args>
 struct is_nothrow_constructible : conjunction<
-    is_constructible<T, Args...>, _INNER __is_nothrow_constructible_dispatch<T, Args...>> {};
+    is_constructible<T, Args...>,
+    inner::__is_nothrow_constructible_dispatch<T, Args...>
+> {};
 #endif
 /// @endcond
 
@@ -2992,7 +2997,7 @@ struct is_nothrow_destructible :
 #ifdef NEFORCE_COMPILER_MSVC
     bool_constant<__is_nothrow_destructible(T)> {};
 #else
-    _INNER __is_nothrow_destructible_dispatch<T>::type {};
+    inner::__is_nothrow_destructible_dispatch<T>::type {};
 #endif
 /// @endcond
 
@@ -3163,7 +3168,7 @@ struct is_convertible :
 #elif defined(NEFORCE_COMPILER_CLANG)
     bool_constant<__is_convertible(From, To)> {};
 #else
-    _INNER __is_convertible_helper<From, To>::type {};
+    inner::__is_convertible_helper<From, To>::type {};
 #endif
 
 #ifdef NEFORCE_STANDARD_14
@@ -3351,7 +3356,7 @@ NEFORCE_END_INNER__
  */
 template <typename T>
 struct make_signed {
-    using type = typename _INNER __set_sign<T>::signed_type;
+    using type = typename inner::__set_sign<T>::signed_type;
 };
 
 /**
@@ -3370,7 +3375,7 @@ using make_signed_t = typename make_signed<T>::type;
  */
 template <typename T>
 struct make_unsigned {
-    using type = typename _INNER __set_sign<T>::unsigned_type;
+    using type = typename inner::__set_sign<T>::unsigned_type;
 };
 
 /**
@@ -3406,7 +3411,7 @@ NEFORCE_END_INNER__
  */
 template <size_t Size, bool IsSigned = true>
 struct make_integer {
-    using type = typename _INNER __make_integer_impl<Size, IsSigned>::type;
+    using type = typename inner::__make_integer_impl<Size, IsSigned>::type;
 };
 
 /**
@@ -3619,7 +3624,7 @@ NEFORCE_END_INNER__
  * @tparam Args 模板参数
  */
 template <typename Default, template <typename...> class Op, typename... Args>
-using detected_or = _INNER __detector<Default, void, Op, Args...>;
+using detected_or = inner::__detector<Default, void, Op, Args...>;
 
 /**
  * @typedef detected_or_t
@@ -3678,7 +3683,7 @@ template <typename T1>
 struct common_type<T1> : common_type<T1, T1> {};
 
 template <typename T1, typename T2>
-struct common_type<T1, T2> : _INNER __oper_decay_aux<T1, T2> {};
+struct common_type<T1, T2> : inner::__oper_decay_aux<T1, T2> {};
 
 template <typename T1, typename T2, typename... Rest>
 struct common_type<T1, T2, Rest...> : common_type<common_type_t<T1, T2>, Rest...> {};
@@ -3799,7 +3804,7 @@ NEFORCE_END_INNER__
 
 
 template <typename T1, typename T2>
-struct common_reference<T1, T2> : _INNER __common_reference_ptr_aux<T1, T2> {};
+struct common_reference<T1, T2> : inner::__common_reference_ptr_aux<T1, T2> {};
 
 template <typename T1, typename T2, typename T3, typename... Rest>
 struct common_reference<T1, T2, T3, Rest...> {};
@@ -4225,7 +4230,7 @@ NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>:
  */
 template <typename Container>
 struct is_iterable : bool_constant<
-    _INNER __has_valid_begin_end<Container>::value &&
+    inner::__has_valid_begin_end<Container>::value &&
     is_incrementible<decltype(declval<Container>().begin())>::value
 > {};
 
@@ -4271,7 +4276,7 @@ NEFORCE_END_INNER__
 template <typename Map>
 struct is_maplike : bool_constant<
     is_iterable<Map>::value &&
-    _INNER __has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value
+    inner::__has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value
 > {};
 
 #ifdef NEFORCE_STANDARD_14
@@ -4310,7 +4315,7 @@ NEFORCE_END_INNER__
  * @tparam Args 构造参数类型
  */
 template <typename Alloc, typename T, typename... Args>
-struct has_construct : _INNER __has_construct_impl<Alloc, T, Args...>::type {};
+struct has_construct : inner::__has_construct_impl<Alloc, T, Args...>::type {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -4344,7 +4349,7 @@ NEFORCE_END_INNER__
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct has_base : bool_constant<_INNER __has_base_impl<T>::value> {};
+struct has_base : bool_constant<inner::__has_base_impl<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**

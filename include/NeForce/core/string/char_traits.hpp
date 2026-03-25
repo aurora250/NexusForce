@@ -479,7 +479,7 @@ template <typename Traits, enable_if_t<
 constexpr size_t char_traits_find_first_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
     const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
     if (rsc_size != 0 && start < dest_size) {
-        _INNER __string_bitmap<char_traits_char_t<Traits>> match;
+        inner::__string_bitmap<char_traits_char_t<Traits>> match;
         if (!match.mark(rsc, rsc + rsc_size)) {
             return (char_traits_find_first_of<Traits, false>)
                 (dest, dest_size, start, rsc, rsc_size);
@@ -542,7 +542,7 @@ template <typename Traits, enable_if_t<
 constexpr size_t char_traits_find_last_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
     const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
     if (rsc_size != 0 && dest_size != 0) {
-        _INNER __string_bitmap<char_traits_char_t<Traits>> match;
+        inner::__string_bitmap<char_traits_char_t<Traits>> match;
         if (!match.mark(rsc, rsc + rsc_size))
             return (char_traits_find_last_of<Traits, false>)
             (dest, dest_size, start, rsc, rsc_size);
@@ -607,7 +607,7 @@ template <typename Traits, enable_if_t<
 constexpr size_t char_traits_find_first_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
     const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
     if (start < dest_size) {
-        _INNER __string_bitmap<char_traits_char_t<Traits>> match;
+        inner::__string_bitmap<char_traits_char_t<Traits>> match;
         if (!match.mark(rsc, rsc + rsc_size))
             return (char_traits_find_first_not_of<Traits, false>)
             (dest, dest_size, start, rsc, rsc_size);
@@ -692,7 +692,7 @@ template <typename Traits, enable_if_t<
 constexpr size_t char_traits_find_last_not_of(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
     const size_t start, const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
     if (dest_size != 0) {
-        _INNER __string_bitmap<char_traits_char_t<Traits>> match;
+        inner::__string_bitmap<char_traits_char_t<Traits>> match;
         if (!match.mark(rsc, rsc + rsc_size))
             return (char_traits_find_last_not_of<Traits, false>)
             (dest, dest_size, start, rsc, rsc_size);

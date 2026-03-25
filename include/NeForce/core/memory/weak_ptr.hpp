@@ -33,13 +33,16 @@ public:
 
 private:
     element_type* ptr_ = nullptr;   ///< 观察的对象指针
-    _INNER __smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
+    inner::__smart_ptr_counter* owner_ = nullptr;  ///< 控制块指针
 
     template <typename U>
     friend class weak_ptr;
 
     template <typename U>
     friend class shared_ptr;
+
+    template <typename U>
+    friend class inner::smart_pointer_atomic;
 
 public:
     /**
@@ -59,7 +62,7 @@ public:
      */
     template <typename U, enable_if_t<is_convertible_v<U*, T*>, int> = 0>
     weak_ptr(const shared_ptr<U>& sp) noexcept
-    : ptr_(sp.get()), owner_(reinterpret_cast<_INNER __smart_ptr_counter*>(sp.owner_)) {
+    : ptr_(sp.get()), owner_(reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_)) {
         if (owner_) {
             owner_->incref_weak();
         }
@@ -158,7 +161,7 @@ public:
     weak_ptr& operator =(const shared_ptr<U>& sp) noexcept {
         if (owner_) owner_->decref_weak();
         ptr_ = sp.get();
-        owner_ = reinterpret_cast<_INNER __smart_ptr_counter*>(sp.owner_);
+        owner_ = reinterpret_cast<inner::__smart_ptr_counter*>(sp.owner_);
         if (owner_) owner_->incref_weak();
         return *this;
     }
@@ -265,7 +268,7 @@ public:
      */
     template <typename U>
     NEFORCE_NODISCARD bool owner_equal(const shared_ptr<U>& rhs) const noexcept {
-        return owner_ == reinterpret_cast<_INNER __smart_ptr_counter*>(rhs.owner_);
+        return owner_ == reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 
     /**
@@ -287,7 +290,7 @@ public:
      */
     template <typename U>
     NEFORCE_NODISCARD bool owner_before(const shared_ptr<U>& rhs) const noexcept {
-        return owner_ < reinterpret_cast<_INNER __smart_ptr_counter*>(rhs.owner_);
+        return owner_ < reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 };
 
@@ -403,6 +406,99 @@ struct owner_less<void> {
         return lhs.owner_before(rhs);
     }
 };
+
+
+template <typename T>
+struct atomic<weak_ptr<T>> {
+public:
+    using value_type = weak_ptr<T>;
+
+    static constexpr bool is_always_lock_free = false;
+
+private:
+    inner::smart_pointer_atomic<value_type> atomic_;
+
+public:
+    bool is_lock_free() const noexcept {
+        return false;
+    }
+
+    constexpr atomic() noexcept = default;
+
+    atomic(value_type value) noexcept
+    : atomic_(move(value)) {}
+
+    atomic(const atomic&) = delete;
+    void operator =(const atomic&) = delete;
+
+    value_type load(memory_order mo = memory_order_seq_cst) const noexcept {
+        return atomic_.load(mo);
+    }
+
+    operator value_type() const noexcept {
+        return atomic_.load(memory_order_seq_cst);
+    }
+
+    void store(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
+        atomic_.swap(desired, mo);
+    }
+
+    void operator =(value_type desired) noexcept {
+        atomic_.swap(desired, memory_order_seq_cst);
+    }
+
+    value_type exchange(value_type desired, memory_order mo = memory_order_seq_cst) noexcept {
+        atomic_.swap(desired, mo);
+        return desired;
+    }
+
+    bool compare_exchange_strong(value_type& expected, value_type desired,
+                                 memory_order mo, memory_order mo2) noexcept {
+        return atomic_.compare_exchange_strong(expected, desired, mo, mo2);
+    }
+
+    bool compare_exchange_strong(value_type& expected, value_type desired,
+                                 memory_order mo = memory_order_seq_cst) noexcept {
+        memory_order mo2;
+        switch (mo) {
+            case memory_order_acq_rel: {
+                mo2 = memory_order_acquire;
+                break;
+            }
+            case memory_order_release: {
+                mo2 = memory_order_relaxed;
+                break;
+            }
+            default: {
+                mo2 = mo;
+            }
+        }
+        return compare_exchange_strong(expected, move(desired), mo, mo2);
+    }
+
+    bool compare_exchange_weak(value_type& expected, value_type desired,
+                               memory_order mo, memory_order mo2) noexcept {
+        return compare_exchange_strong(expected, move(desired), mo, mo2);
+    }
+
+    bool compare_exchange_weak(value_type& expected, value_type desired,
+                               memory_order mo = memory_order_seq_cst) noexcept {
+        return compare_exchange_strong(expected, move(desired), mo);
+    }
+
+    void wait(value_type mold, memory_order mo = memory_order_seq_cst) const noexcept {
+        atomic_.wait(move(mold), mo);
+    }
+
+    void notify_one() noexcept {
+        atomic_.notify_one();
+    }
+
+    void notify_all() noexcept {
+        atomic_.notify_all();
+    }
+};
+
 
 /** @} */ // WeakPointer
 

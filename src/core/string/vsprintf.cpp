@@ -7,7 +7,7 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
     NEFORCE_CONST_FUNCTION constexpr int skip_atoi(const char **s) {
         int i = 0;
-        while (_NEFORCE is_digit(**s)) {
+        while (is_digit(**s)) {
             i = i * 10 + *((*s)++) - '0';
         }
         return i;
@@ -112,11 +112,11 @@ namespace {
         int int_len = 0;
         int frac_len = 0;
 
-        if (_NEFORCE is_nan(num)) {
+        if (is_nan(num)) {
             const char* nan_str = (flags & SMALL) ? "nan" : "NAN";
-            return _NEFORCE string_copy(str, nan_str);
+            return string_copy(str, nan_str);
         }
-        if (_NEFORCE is_infinity(num)) {
+        if (is_infinity(num)) {
             const char* inf_str = (flags & SMALL) ? "inf" : "INF";
             if (num < 0) {
                 sign = '-';
@@ -125,7 +125,7 @@ namespace {
             }
 
             if (sign) *str++ = sign;
-            return _NEFORCE string_copy(str, inf_str);
+            return string_copy(str, inf_str);
         }
 
         if (num < 0) {
@@ -253,7 +253,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		}
 
 		int field_width = -1;
-		if (_NEFORCE is_digit(*fmt))
+		if (is_digit(*fmt))
 			field_width = skip_atoi(&fmt);
 		else if (*fmt == '*') {
 			field_width = va_arg(args, int);
@@ -266,7 +266,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		int precision = -1;
 		if (*fmt == '.') {
 			++fmt;
-			if (_NEFORCE is_digit(*fmt))
+			if (is_digit(*fmt))
 				precision = skip_atoi(&fmt);
 			else if (*fmt == '*') {
 				precision = va_arg(args, int);
@@ -292,7 +292,7 @@ int vsprintf(char *buf, const char *fmt, std::va_list args) noexcept {
 		    case 's': {
                 const char *s = va_arg(args, char *);
 		        if (!s) s = "(null)";
-		        int len = _NEFORCE string_length(s);
+		        int len = string_length(s);
 		        if (precision < 0) {
 		            precision = len;
 		        } else if (len > precision) {
@@ -378,7 +378,7 @@ int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) 
     if (!buf || size == 0 || !fmt) return -1;
 
     char temp[MEMORY_BIG_ALLOC_THRESHHOLD];
-    int len = _NEFORCE vsprintf(temp, fmt, args);
+    int len = vsprintf(temp, fmt, args);
 
     if (len < 0) {
         buf[0] = '\0';
@@ -392,7 +392,7 @@ int vsnprintf(char *buf, const size_t size, const char *fmt, std::va_list args) 
 
     if (size > 0) {
         const size_t copy_len = (len < size - 1) ? len : size - 1;
-        _NEFORCE memory_copy(buf, temp, copy_len);
+        memory_copy(buf, temp, copy_len);
         buf[copy_len] = '\0';
     }
     return len;
@@ -402,7 +402,7 @@ int sprintf(char *buf, const char *fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
-    const int result = _NEFORCE vsprintf(buf, fmt, args);
+    const int result = vsprintf(buf, fmt, args);
     va_end(args);
 
     return result;
@@ -412,7 +412,7 @@ int snprintf(char *buf, const size_t size, const char *fmt, ...) noexcept {
     std::va_list args;
 
     va_start(args, fmt);
-    const int result = _NEFORCE vsnprintf(buf, size, fmt, args);
+    const int result = vsnprintf(buf, size, fmt, args);
     va_end(args);
 
     return result;
@@ -423,7 +423,7 @@ int scprintf(const char *fmt, ...) noexcept {
 
     va_start(args, fmt);
     char temp[MEMORY_BIG_ALLOC_THRESHHOLD];
-    const int length = _NEFORCE vsprintf(temp, fmt, args);
+    const int length = vsprintf(temp, fmt, args);
     va_end(args);
 
     return length;

@@ -97,14 +97,14 @@ template <typename Clock, typename Dur>
 enable_if_t<is_same_v<wait_clock_t, Clock>, bool>
 __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
     const time_point<Clock, Dur>& timeout) {
-    return _INNER __platform_wait_until_impl(addr, old, timeout);
+    return inner::__platform_wait_until_impl(addr, old, timeout);
 }
 
 template <typename Clock, typename Dur>
 enable_if_t<!is_same_v<wait_clock_t, Clock>, bool>
 __platform_wait_until_dispatch(const platform_wait_t* addr, platform_wait_t old,
     const time_point<Clock, Dur>& timeout) {
-    if (!_INNER __platform_wait_until_impl(addr, old, _INNER to_wait_clock(timeout))) {
+    if (!inner::__platform_wait_until_impl(addr, old, inner::to_wait_clock(timeout))) {
         if (Clock::now() < timeout) return true;
     }
     return false;
@@ -134,7 +134,7 @@ template <typename Clock, typename Dur>
 bool futex_wait_until(
     const platform_wait_t* addr, platform_wait_t old,
     const time_point<Clock, Dur>& timeout) {
-    return _INNER __platform_wait_until_dispatch(addr, old, timeout);
+    return inner::__platform_wait_until_dispatch(addr, old, timeout);
 }
 
 /** @} */ // Futex
@@ -155,18 +155,18 @@ bool futex_wait_until(
  * - 长时间等待：睡眠等待
  */
 struct timed_backoff_spin_policy {
-    _INNER wait_clock_t::time_point deadline;
-    _INNER wait_clock_t::time_point start_time;
+    inner::wait_clock_t::time_point deadline;
+    inner::wait_clock_t::time_point start_time;
 
     template <typename Clock, typename Dur>
     timed_backoff_spin_policy(
         time_point<Clock, Dur> deadline_time = Clock::time_point::max(),
         time_point<Clock, Dur> start_time_point = Clock::now()) noexcept
-    : deadline(_INNER to_wait_clock(deadline_time)),
-      start_time(_INNER to_wait_clock(start_time_point)) {}
+    : deadline(inner::to_wait_clock(deadline_time)),
+      start_time(inner::to_wait_clock(start_time_point)) {}
 
     bool operator ()() const noexcept {
-        const auto now = _INNER wait_clock_t::now();
+        const auto now = inner::wait_clock_t::now();
         if (deadline <= now) {
             return false;
         }
@@ -392,7 +392,7 @@ NEFORCE_END_INNER__
 template <typename T, typename Func, typename Clock, typename Dur>
 bool atomic_wait_address_until_v(const T* addr, T&& old,
     Func&& func, const time_point<Clock, Dur>& timeout) noexcept {
-    _INNER enters_timed_wait waiter{addr};
+    inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until_v(old, func, timeout);
 }
 
@@ -412,7 +412,7 @@ bool atomic_wait_address_until_v(const T* addr, T&& old,
 template <typename T, typename Pred, typename Clock, typename Dur>
 bool atomic_wait_address_until(const T* addr, Pred pred,
     const time_point<Clock, Dur>& timeout) noexcept {
-    _INNER enters_timed_wait waiter{addr};
+    inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until(pred, timeout);
 }
 
@@ -431,7 +431,7 @@ bool atomic_wait_address_until(const T* addr, Pred pred,
 template <typename Pred, typename Clock, typename Dur>
 bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred,
     const time_point<Clock, Dur>& timeout) noexcept {
-    _INNER bare_timed_wait waiter{addr};
+    inner::bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_until(pred, timeout);
 }
 
@@ -452,7 +452,7 @@ bool atomic_wait_address_until(const platform_wait_t* addr, Pred pred,
 template <typename T, typename Func, typename Rep, typename Period>
 bool atomic_wait_address_for_v(const T* addr, T&& old, Func&& func,
     const duration<Rep, Period>& rt) noexcept {
-    _INNER enters_timed_wait waiter{addr};
+    inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for_v(old, func, rt);
 }
 
@@ -472,7 +472,7 @@ bool atomic_wait_address_for_v(const T* addr, T&& old, Func&& func,
 template <typename T, typename Pred, typename Rep, typename Period>
 bool atomic_wait_address_for(const T* addr, Pred pred,
     const duration<Rep, Period>& rt) noexcept {
-    _INNER enters_timed_wait waiter{addr};
+    inner::enters_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for(pred, rt);
 }
 
@@ -491,7 +491,7 @@ bool atomic_wait_address_for(const T* addr, Pred pred,
 template <typename Pred, typename Rep, typename Period>
 bool atomic_wait_address_for(const platform_wait_t* addr, Pred pred,
     const duration<Rep, Period>& rt) noexcept {
-    _INNER bare_timed_wait waiter{addr};
+    inner::bare_timed_wait waiter{addr};
     return waiter.waiter_do_wait_for(pred, rt);
 }
 

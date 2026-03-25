@@ -232,7 +232,7 @@ private:
     static constexpr uintmax_t num_high_shifted = (NumHigh % Den) * shift_factor1;  ///< 缩放后的被除数高位
     static constexpr uintmax_t num_low_high = (leading_zeros != 0) ? (NumLow / shift_factor2) : 0;  ///< 被除数低位的高位部分
     static constexpr uintmax_t scaled_num_high = num_high_shifted + num_low_high;  ///< 缩放后的被除数高位
-    using division_result = _INNER __big_div_impl<scaled_num_high, scaled_num_low, scaled_den>;  ///< 除法结果
+    using division_result = inner::__big_div_impl<scaled_num_high, scaled_num_low, scaled_den>;  ///< 除法结果
 
 public:
     static constexpr uintmax_t quotient_high = NumHigh / Den;  ///< 商的高位
@@ -300,64 +300,64 @@ NEFORCE_END_INNER__
 /// @endcond
 
 template <uint32_t Base>
-struct static_char_digit<Base, '2'> : _INNER __static_char_digit_aux<Base, 2> {};
+struct static_char_digit<Base, '2'> : inner::__static_char_digit_aux<Base, 2> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '3'> : _INNER __static_char_digit_aux<Base, 3> {};
+struct static_char_digit<Base, '3'> : inner::__static_char_digit_aux<Base, 3> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '4'> : _INNER __static_char_digit_aux<Base, 4> {};
+struct static_char_digit<Base, '4'> : inner::__static_char_digit_aux<Base, 4> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '5'> : _INNER __static_char_digit_aux<Base, 5> {};
+struct static_char_digit<Base, '5'> : inner::__static_char_digit_aux<Base, 5> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '6'> : _INNER __static_char_digit_aux<Base, 6> {};
+struct static_char_digit<Base, '6'> : inner::__static_char_digit_aux<Base, 6> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '7'> : _INNER __static_char_digit_aux<Base, 7> {};
+struct static_char_digit<Base, '7'> : inner::__static_char_digit_aux<Base, 7> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '8'> : _INNER __static_char_digit_aux<Base, 8> {};
+struct static_char_digit<Base, '8'> : inner::__static_char_digit_aux<Base, 8> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, '9'> : _INNER __static_char_digit_aux<Base, 9> {};
+struct static_char_digit<Base, '9'> : inner::__static_char_digit_aux<Base, 9> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'a'> : _INNER __static_char_digit_aux<Base, 0xa> {};
+struct static_char_digit<Base, 'a'> : inner::__static_char_digit_aux<Base, 0xa> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'A'> : _INNER __static_char_digit_aux<Base, 0xa> {};
+struct static_char_digit<Base, 'A'> : inner::__static_char_digit_aux<Base, 0xa> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'b'> : _INNER __static_char_digit_aux<Base, 0xb> {};
+struct static_char_digit<Base, 'b'> : inner::__static_char_digit_aux<Base, 0xb> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'B'> : _INNER __static_char_digit_aux<Base, 0xb> {};
+struct static_char_digit<Base, 'B'> : inner::__static_char_digit_aux<Base, 0xb> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'c'> : _INNER __static_char_digit_aux<Base, 0xc> {};
+struct static_char_digit<Base, 'c'> : inner::__static_char_digit_aux<Base, 0xc> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'C'> : _INNER __static_char_digit_aux<Base, 0xc> {};
+struct static_char_digit<Base, 'C'> : inner::__static_char_digit_aux<Base, 0xc> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'd'> : _INNER __static_char_digit_aux<Base, 0xd> {};
+struct static_char_digit<Base, 'd'> : inner::__static_char_digit_aux<Base, 0xd> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'D'> : _INNER __static_char_digit_aux<Base, 0xd> {};
+struct static_char_digit<Base, 'D'> : inner::__static_char_digit_aux<Base, 0xd> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'e'> : _INNER __static_char_digit_aux<Base, 0xe> {};
+struct static_char_digit<Base, 'e'> : inner::__static_char_digit_aux<Base, 0xe> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'E'> : _INNER __static_char_digit_aux<Base, 0xe> {};
+struct static_char_digit<Base, 'E'> : inner::__static_char_digit_aux<Base, 0xe> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'f'> : _INNER __static_char_digit_aux<Base, 0xf> {};
+struct static_char_digit<Base, 'f'> : inner::__static_char_digit_aux<Base, 0xf> {};
 
 template <uint32_t Base>
-struct static_char_digit<Base, 'F'> : _INNER __static_char_digit_aux<Base, 0xf> {};
+struct static_char_digit<Base, 'F'> : inner::__static_char_digit_aux<Base, 0xf> {};
 
 template <uint32_t Base>
 struct static_char_digit<Base, '\''> : uint32_constant<0> {
@@ -408,7 +408,7 @@ NEFORCE_END_INNER__
  * 计算每个数字位置的权重，即基数的幂。
  */
 template <uint32_t Base, char... Digits>
-struct static_power : _INNER __power_helper<Base, Digits...>::type {};
+struct static_power : inner::__power_helper<Base, Digits...>::type {};
 
 template <uint32_t Base>
 struct static_power<Base> : uint64_constant<0> {};
@@ -467,7 +467,7 @@ NEFORCE_END_INNER__
  */
 template <uint32_t Base, char... Digits>
 struct static_number :
-    _INNER __number_aux<Base, static_power<Base, Digits...>::value, Digits...>::type {};
+    inner::__number_aux<Base, static_power<Base, Digits...>::value, Digits...>::type {};
 
 template <uint32_t Base>
 struct static_number<Base> : uint64_constant<0> {};
@@ -542,7 +542,7 @@ NEFORCE_END_INNER__
  * 从unsigned数值中选择第一个能容纳解析出的数值的类型。
  */
 template <char... Digits>
-using static_select_int_t = typename _INNER __select_int_base<
+using static_select_int_t = typename inner::__select_int_base<
     static_parse_int<Digits...>::value,
     unsigned char,
     unsigned short,

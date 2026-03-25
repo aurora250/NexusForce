@@ -250,6 +250,9 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(network_exception, exception, "Network Operati
 
 /** @} */ // Exceptions
 
+
+int NEFORCE_API uncaught_exceptions() noexcept NEFORCE_PURE_FUNCTION;
+
 /**
  * @brief 抛出异常并打印堆栈信息
  * @param err 要抛出的异常对象

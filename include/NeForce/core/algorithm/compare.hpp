@@ -543,9 +543,9 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator1, typename Iterator2>
 NEFORCE_NODISCARD constexpr bool lexicographical_compare(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)
-noexcept(noexcept(_INNER __lexicographical_compare_aux(first1, last1, first2, last2))) {
+noexcept(noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2))) {
     static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterator must be input_iterator");
-	return _INNER __lexicographical_compare_aux(first1, last1, first2, last2);
+	return inner::__lexicographical_compare_aux(first1, last1, first2, last2);
 }
 
 

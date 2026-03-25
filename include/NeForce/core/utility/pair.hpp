@@ -300,8 +300,8 @@ struct pair : icommon<pair<T1, T2>> {
 	 */
 	template <typename Tuple1, typename Tuple2, size_t... Index1, size_t... Index2>
 	constexpr pair(Tuple1& t1, Tuple2& t2, index_sequence<Index1...> idx1, index_sequence<Index2...> idx2)
-		: first(_INNER __pair_get_from_tuple<Index1>(_NEFORCE move(t1))...),
-		second(_INNER __pair_get_from_tuple<Index2>(_NEFORCE move(t2))...) {}
+		: first(inner::__pair_get_from_tuple<Index1>(_NEFORCE move(t1))...),
+		second(inner::__pair_get_from_tuple<Index2>(_NEFORCE move(t2))...) {}
 
 	/**
 	 * @brief 从两个tuple构造pair
@@ -608,7 +608,7 @@ get(pair<T1, T2>& pir) noexcept {
 template <size_t Index, typename T1, typename T2>
 NEFORCE_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&
 get(pair<T1, T2>& pir) noexcept {
-	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
+	return inner::__pair_get_helper<Index, T1, T2>::get(pir);
 }
 #endif // NEFORCE_STANDARD_17
 
@@ -649,7 +649,7 @@ get(const pair<T1, T2>& pir) noexcept {
 template <size_t Index, typename T1, typename T2>
 NEFORCE_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&
 get(const pair<T1, T2>& pir) noexcept {
-	return _INNER __pair_get_helper<Index, T1, T2>::get(pir);
+	return inner::__pair_get_helper<Index, T1, T2>::get(pir);
 }
 #endif // NEFORCE_STANDARD_17
 
@@ -691,7 +691,7 @@ template <size_t Index, typename T1, typename T2>
 NEFORCE_NODISCARD constexpr tuple_element_t<Index, pair<T1, T2>>&&
 get(pair<T1, T2>&& pir) noexcept {
 	return _NEFORCE forward<tuple_element_t<Index, pair<T1, T2>>>(
-		_INNER __pair_get_helper<Index, T1, T2>::get(_NEFORCE forward<pair<T1, T2>>(pir)));
+		inner::__pair_get_helper<Index, T1, T2>::get(_NEFORCE forward<pair<T1, T2>>(pir)));
 }
 #endif // NEFORCE_STANDARD_17
 
@@ -733,7 +733,7 @@ template <size_t Index, typename T1, typename T2>
 NEFORCE_NODISCARD constexpr const tuple_element_t<Index, pair<T1, T2>>&&
 get(const pair<T1, T2>&& pir) noexcept {
 	return _NEFORCE forward<const tuple_element_t<Index, pair<T1, T2>>>(
-		_INNER __pair_get_helper<Index, T1, T2>::get(_NEFORCE forward<const pair<T1, T2>>(pir)));
+		inner::__pair_get_helper<Index, T1, T2>::get(_NEFORCE forward<const pair<T1, T2>>(pir)));
 }
 #endif // NEFORCE_STANDARD_17
 

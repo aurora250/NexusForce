@@ -121,8 +121,8 @@ constexpr void __merge_without_buffer_aux(
 	_NEFORCE rotate(first_cut, middle, second_cut);
 	Iterator new_middle = first_cut;
 	_NEFORCE advance(new_middle, len22);
-	_INNER __merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
-	_INNER __merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
+	inner::__merge_without_buffer_aux(first, first_cut, new_middle, len11, len22, comp);
+	inner::__merge_without_buffer_aux(new_middle, second_cut, last, len1 - len11, len2 - len22, comp);
 }
 
 /**
@@ -235,12 +235,12 @@ constexpr void __merge_with_buffer_aux(
 			first_cut = _NEFORCE upper_bound(first, middle, *second_cut, comp);
 			len11 = _NEFORCE distance(first, first_cut);
 		}
-		Iterator new_middle = _INNER __rotate_with_buffer_aux(
+		Iterator new_middle = inner::__rotate_with_buffer_aux(
 			first_cut, middle, second_cut, len1 - len11, len22, buffer, buffer_size);
 
-		_INNER __merge_with_buffer_aux(
+		inner::__merge_with_buffer_aux(
 			first, first_cut, new_middle, len11, len22, buffer, buffer_size, comp);
-		_INNER __merge_with_buffer_aux(
+		inner::__merge_with_buffer_aux(
 			new_middle, second_cut, last, len1 - len11, len2 - len22, buffer, buffer_size, comp);
 	}
 }
@@ -271,9 +271,9 @@ constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Com
 	auto len2 = _NEFORCE distance(middle, last);
 	try {
 		temporary_buffer<Iterator> buffer(first, last);
-		_INNER __merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
+		inner::__merge_with_buffer_aux(first, middle, last, len1, len2, buffer.begin(), buffer.size(), comp);
 	} catch (...) {
-		_INNER __merge_without_buffer_aux(first, middle, last, len1, len2, comp);
+		inner::__merge_without_buffer_aux(first, middle, last, len1, len2, comp);
 	}
 }
 

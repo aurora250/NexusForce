@@ -195,7 +195,7 @@ void env_parser::parse_line(const string& line) const {
     string name;
     unique_ptr<env_variable> variable;
     if (parse_variable_line(line, name, variable)) {
-        root_->add_variable(name, _NEFORCE move(variable));
+        root_->add_variable(name, move(variable));
     }
 }
 
@@ -214,7 +214,7 @@ unique_ptr<env_document> env_parser::parse() {
         parse_line(line);
     }
 
-    return _NEFORCE move(root_);
+    return move(root_);
 }
 
 optional<unique_ptr<env_document>> env_parser::try_parse() {

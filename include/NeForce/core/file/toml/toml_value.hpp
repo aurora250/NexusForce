@@ -687,7 +687,7 @@ NEFORCE_END_INNER__
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const toml_value* value) {
-    return _INNER toml_value_to_string(value);
+    return inner::toml_value_to_string(value);
 }
 
 /**
@@ -696,7 +696,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const toml_value* value) {
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const toml_value& value) {
-    return _INNER toml_value_to_string(&value);
+    return inner::toml_value_to_string(&value);
 }
 
 /**
@@ -705,11 +705,11 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const toml_value& value) {
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<toml_value>& value) {
-    return _INNER toml_value_to_string(value.get());
+    return inner::toml_value_to_string(value.get());
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string toml_value::to_string() const {
-    return _INNER toml_value_to_string(this);
+    return inner::toml_value_to_string(this);
 }
 
 
@@ -719,7 +719,7 @@ NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string toml_value::to_string() co
  * @return 完整的toml文档字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string toml_document(const toml_value* value) {
-    return _INNER toml_value_document(value);
+    return inner::toml_value_document(value);
 }
 
 /**
@@ -728,7 +728,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string toml_document(const toml_value* value) {
  * @return 完整的toml文档字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string toml_document(const toml_value& value) {
-    return _INNER toml_value_document(&value);
+    return inner::toml_value_document(&value);
 }
 
 /**
@@ -737,11 +737,11 @@ NEFORCE_ALWAYS_INLINE_INLINE string toml_document(const toml_value& value) {
  * @return 完整的toml文档字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string toml_document(const unique_ptr<toml_value>& value) {
-    return _INNER toml_value_document(value.get());
+    return inner::toml_value_document(value.get());
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string toml_value::to_document() const {
-    return _INNER toml_value_document(this);
+    return inner::toml_value_document(this);
 }
 
 /** @} */ // TomlConfig

@@ -78,7 +78,7 @@ string join_fast(const vector<string>& vec, const string& delimiter) {
 
 string join_accumulate(const vector<string>& vec, const string& delimiter) {
     if (vec.empty()) return "";
-    return _NEFORCE accumulate(next(vec.begin()), vec.end(), vec[0],
+    return accumulate(next(vec.begin()), vec.end(), vec[0],
          [&delimiter](const string& a, const string& b) {
              return a + delimiter + b;
          });

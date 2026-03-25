@@ -622,7 +622,7 @@ struct __array_same {
 NEFORCE_END_INNER__
 
 template <typename First, typename... Rest>
-array(First, Rest...) -> array<typename _INNER __array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
+array(First, Rest...) -> array<typename inner::__array_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
 #endif
 
 

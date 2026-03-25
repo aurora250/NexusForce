@@ -528,7 +528,7 @@ NEFORCE_END_INNER__
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value* value) {
-    return _INNER ini_value_to_string(value);
+    return inner::ini_value_to_string(value);
 }
 
 /**
@@ -537,7 +537,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value* value) {
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value& value) {
-    return _INNER ini_value_to_string(&value);
+    return inner::ini_value_to_string(&value);
 }
 
 /**
@@ -546,7 +546,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value& value) {
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<ini_value>& value) {
-    return _INNER ini_value_to_string(value.get());
+    return inner::ini_value_to_string(value.get());
 }
 
 /**
@@ -555,19 +555,19 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<ini_value>& value
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_document& doc) {
-    return _INNER ini_document_to_string(&doc);
+    return inner::ini_document_to_string(&doc);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_value::to_string() const {
-    return _INNER ini_value_to_string(this);
+    return inner::ini_value_to_string(this);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_value::to_document() const {
-    return _INNER ini_value_to_string(this);
+    return inner::ini_value_to_string(this);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_document::to_string() const {
-    return _INNER ini_document_to_string(this);
+    return inner::ini_document_to_string(this);
 }
 
 /** @} */ // IniConfig

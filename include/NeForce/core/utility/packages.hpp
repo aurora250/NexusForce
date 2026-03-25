@@ -107,11 +107,11 @@ struct SIGN## integer## BYTE : iobject<SIGN## integer## BYTE>, ipackage<SIGN## i
     } \
     \
     NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) { \
-        return _INNER __int_to_string_dispatch(value); \
+        return inner::__int_to_string_dispatch(value); \
     } \
     \
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { \
-        return _INNER __int_to_string_dispatch(value_); \
+        return inner::__int_to_string_dispatch(value_); \
     } \
     \
     NEFORCE_NODISCARD static constexpr SIGN## integer## BYTE parse(const string_view str) { \
@@ -218,7 +218,7 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
         return float32(value).to_string();
     }
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return _INNER __float_to_string<char>(value_);
+        return inner::__float_to_string<char>(value_);
     }
 
     NEFORCE_NODISCARD static constexpr float32 parse(const string_view str) {
@@ -256,7 +256,7 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
         return float64(value).to_string();
     }
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return _INNER __float_to_string<char>(value_);
+        return inner::__float_to_string<char>(value_);
     }
 
     NEFORCE_NODISCARD static constexpr float64 parse(const string_view str) {
@@ -294,7 +294,7 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
         return decimal(value).to_string();
     }
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return _INNER __float_to_string<char>(value_);
+        return inner::__float_to_string<char>(value_);
     }
 
     NEFORCE_NODISCARD static constexpr decimal parse(const string_view str) {

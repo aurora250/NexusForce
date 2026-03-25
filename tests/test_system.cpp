@@ -2,9 +2,9 @@
 
 
 void test_print() {
-    decimal_t f = _CONSTANTS PI;
-    _INNER FUNCTION_OPERATE enu = _INNER FUNCTION_OPERATE::GET_PTR;
-    _INNER __nocopy_type uni{};
+    decimal_t f = constants::PI;
+    inner::FUNCTION_OPERATE enu = inner::FUNCTION_OPERATE::GET_PTR;
+    inner::__nocopy_type uni{};
     int c_arr[2];
     int* pa = ::new int[2];
     string address = to_string(pa);
@@ -286,4 +286,15 @@ void test_rnd() {
 
     println("UUID V4:", uuid::v4());
     println("UUID V7:", uuid::v7());
+}
+
+void test_atomic() {
+    atomic<shared_ptr<int>> aptr{make_shared<int>(2)};
+    println(*aptr.load().get());
+    aptr.store(make_shared<int>(3));
+    println(*aptr.load().get());
+
+    auto a = make_shared<int>(4);
+    atomic<weak_ptr<int>> wptr{a};
+    println(wptr.load().expired());
 }

@@ -55,7 +55,7 @@ constexpr iter_pointer_t<Iterator> to_pointer(Iterator iter) {
         return iter.operator ->();
     }
 #else
-    return _INNER __to_pointer_aux(iter);
+    return inner::__to_pointer_aux(iter);
 #endif
 }
 
@@ -121,7 +121,7 @@ constexpr void advance(Iterator& i, Distance n) {
         for (; 0 < n; --n) ++i;
     }
 #else
-    _INNER __advance_aux(i, n);
+    inner::__advance_aux(i, n);
 #endif
 }
 
@@ -206,7 +206,7 @@ constexpr iter_difference_t<Iterator> distance(Iterator first, Iterator last) {
         return n;
     }
 #else
-    return _INNER __distance_aux(first, last);
+    return inner::__distance_aux(first, last);
 #endif
 }
 

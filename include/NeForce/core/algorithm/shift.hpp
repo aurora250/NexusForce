@@ -85,10 +85,10 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 copy(Iterator1 first, Iterator1 last, Iterator2 result)
-noexcept(noexcept(_INNER __copy_aux(first, last, result))) {
+noexcept(noexcept(inner::__copy_aux(first, last, result))) {
     static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
 	if (first == last) return result;
-	return _INNER __copy_aux(first, last, result);
+	return inner::__copy_aux(first, last, result);
 }
 
 /// @cond
@@ -147,7 +147,7 @@ NEFORCE_END_INNER__
 template <typename Iterator1, typename Iterator2>
 constexpr pair<Iterator1, Iterator2> copy_n(Iterator1 first, iter_difference_t<Iterator1> count, Iterator2 result) {
     static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
-	return _INNER __copy_n_aux(first, count, result);
+	return inner::__copy_n_aux(first, count, result);
 }
 
 /**
@@ -238,11 +238,11 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 copy_backward(Iterator1 first, Iterator1 last, Iterator2 result)
-noexcept(noexcept(_INNER __copy_backward_aux(first, last, result))) {
+noexcept(noexcept(inner::__copy_backward_aux(first, last, result))) {
     static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, "Iterators must be bidirectional_iterator");
 
 	if (first == last) return result;
-	return _INNER __copy_backward_aux(first, last, result);
+	return inner::__copy_backward_aux(first, last, result);
 }
 
 /// @cond
@@ -304,11 +304,11 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result)
-noexcept(noexcept(_INNER __move_aux(first, last, result))) {
+noexcept(noexcept(inner::__move_aux(first, last, result))) {
     static_assert(is_ranges_input_iter_v<Iterator1> && is_ranges_input_iter_v<Iterator2>, "Iterators must be input_iterator");
 
 	if (first == last) return result;
-	return _INNER __move_aux(first, last, result);
+	return inner::__move_aux(first, last, result);
 }
 
 /// @cond
@@ -369,7 +369,7 @@ template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 move_backward(Iterator1 first, Iterator1 last, Iterator2 result) {
     static_assert(is_ranges_bid_iter_v<Iterator1> && is_ranges_bid_iter_v<Iterator2>, "Iterators must be bidirectional_iterator");
 	if (first == last) return result;
-	return _INNER __move_backward_aux(first, last, result);
+	return inner::__move_backward_aux(first, last, result);
 }
 
 
@@ -709,7 +709,7 @@ constexpr void reverse(Iterator first, Iterator last) {
 		}
 	}
 #else
-	_INNER __reverse_aux(first, last);
+	inner::__reverse_aux(first, last);
 #endif
 }
 
@@ -754,7 +754,7 @@ constexpr
 enable_if_t<!is_ranges_rnd_iter_v<Iterator>>
 __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 	if (first == middle || middle == last) return;
-	_INNER __rotate_aux_dispatch(first, middle, last);
+	inner::__rotate_aux_dispatch(first, middle, last);
 }
 
 /**
@@ -797,7 +797,7 @@ enable_if_t<is_ranges_rnd_iter_v<Iterator>>
 __rotate_aux(Iterator first, Iterator middle, Iterator last) {
 	auto n = _NEFORCE gcd(last - first, middle - first);
 	while (n--) {
-		_INNER __rotate_cycle_aux(first, last, first + n, middle - first);
+		inner::__rotate_cycle_aux(first, last, first + n, middle - first);
 	}
     return;
 }
@@ -820,7 +820,7 @@ constexpr void rotate(Iterator first, Iterator middle, Iterator last) {
     static_assert(is_ranges_fwd_iter_v<Iterator>, "Iterators must be forward_iterator");
 
 	if (first == middle || middle == last) return;
-	_INNER __rotate_aux(first, middle, last);
+	inner::__rotate_aux(first, middle, last);
 }
 
 /**

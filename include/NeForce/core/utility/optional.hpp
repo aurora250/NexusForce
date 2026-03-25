@@ -794,7 +794,7 @@ public:
      * @return 哈希值
      */
     constexpr size_t to_hash() const noexcept {
-        return have_value_ ? hash<T>()(*get_ptr()) : _CONSTANTS FNV_OFFSET_BASIS;
+        return have_value_ ? hash<T>()(*get_ptr()) : constants::FNV_OFFSET_BASIS;
     }
 
     /**
@@ -1298,7 +1298,7 @@ public:
      * @return 哈希值
      */
     constexpr size_t to_hash() const noexcept {
-        return ptr_ ? hash<remove_cvref_t<T>>()(*ptr_) : _CONSTANTS FNV_OFFSET_BASIS;
+        return ptr_ ? hash<remove_cvref_t<T>>()(*ptr_) : constants::FNV_OFFSET_BASIS;
     }
 
     /**

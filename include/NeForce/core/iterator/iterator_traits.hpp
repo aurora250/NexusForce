@@ -54,7 +54,7 @@ NEFORCE_END_INNER__
  * 这是迭代器特性的主要接口，算法应通过此模板查询迭代器属性。
  */
 template <typename Iterator>
-struct iterator_traits : _INNER iterator_traits_base<Iterator> {};
+struct iterator_traits : inner::iterator_traits_base<Iterator> {};
 
 /**
  * @brief 原始指针的迭代器特性特化
@@ -163,7 +163,7 @@ static constexpr decltype(auto) __to_address(const Ptr& ptr) noexcept {
 
 template <typename Ptr, enable_if_t<!is_pointer<Ptr>::value && !has_base<Ptr>::value, int> = 0>
 static constexpr decltype(auto) __to_address(const Ptr& ptr) noexcept {
-    return _INNER __to_address(ptr.operator ->());
+    return inner::__to_address(ptr.operator ->());
 }
 
 template <typename Ptr, enable_if_t<!is_pointer<Ptr>::value && has_base<Ptr>::value, int> = 0>
@@ -216,7 +216,7 @@ struct pointer_traits_base {
      * @return 原始地址
      */
     NEFORCE_NODISCARD static constexpr decltype(auto) to_address(const Ptr& ptr) noexcept {
-        return _INNER __to_address(ptr);
+        return inner::__to_address(ptr);
     }
 };
 
@@ -247,14 +247,14 @@ NEFORCE_END_INNER__
  * 4. 从引用创建指针
  */
 template <typename T>
-struct pointer_traits : _INNER pointer_traits_extract<T> {
+struct pointer_traits : inner::pointer_traits_extract<T> {
     /**
      * @brief 获取指针指向的原始地址
      * @param ptr 指针对象
      * @return 原始地址
      */
     NEFORCE_NODISCARD static constexpr decltype(auto) to_address(const T& ptr) noexcept {
-        return _INNER __to_address(ptr);
+        return inner::__to_address(ptr);
     }
 };
 

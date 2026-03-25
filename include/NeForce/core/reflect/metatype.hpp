@@ -12,10 +12,10 @@ class registry;
 
 class meta_type {
 public:
-    using constructor_func = function<any(const vector<any>&)>;
+    using constructor_func = _NEFORCE function<any(const vector<any>&)>;
 
 private:
-    type_id type_id_;
+    reflect::type_id type_id_;
     string_view name_;
     size_t size_;
     constructor_func constructor_;
@@ -25,8 +25,8 @@ private:
     unordered_map<string, unique_ptr<meta_function>> functions_;
 
     void collect_properties(vector<pair<string, const meta_property*>>& result,
-                            vector<type_id>* visited = nullptr) const {
-        vector<_REFLECT type_id> local_visited;
+                            vector<reflect::type_id>* visited = nullptr) const {
+        vector<reflect::type_id> local_visited;
         if (!visited) visited = &local_visited;
 
         if (find(visited->begin(), visited->end(), type_id_) != visited->end()) {
@@ -46,8 +46,8 @@ private:
     }
 
     void collect_functions(vector<pair<string, const meta_function*>>& result,
-                           vector<type_id>* visited = nullptr) const {
-        vector<_REFLECT type_id> local_visited;
+                           vector<reflect::type_id>* visited = nullptr) const {
+        vector<reflect::type_id> local_visited;
         if (!visited) visited = &local_visited;
 
         if (find(visited->begin(), visited->end(), type_id_) != visited->end()) {
@@ -67,13 +67,13 @@ private:
     }
 
 public:
-    meta_type(string_view name, type_id id, size_t size)
+    meta_type(string_view name, reflect::type_id id, size_t size)
     : type_id_(id), name_(name), size_(size) {}
 
-    type_id type_id() const noexcept { return type_id_; }
-    string_view name() const noexcept { return name_; }
-    size_t size() const noexcept { return size_; }
-    const vector<meta_type*>& base_types() const { return base_types_; }
+    NEFORCE_NODISCARD reflect::type_id type_id() const noexcept { return type_id_; }
+    NEFORCE_NODISCARD string_view name() const noexcept { return name_; }
+    NEFORCE_NODISCARD size_t size() const noexcept { return size_; }
+    NEFORCE_NODISCARD const vector<meta_type*>& base_types() const { return base_types_; }
 
     meta_type& base_type(meta_type* base) {
         if (base) base_types_.push_back(base);
@@ -85,7 +85,7 @@ public:
         return *this;
     }
 
-    bool is_derived_from(_REFLECT type_id base_id) const {
+    NEFORCE_NODISCARD bool is_derived_from(reflect::type_id base_id) const {
         if (type_id_ == base_id) return true;
         for (auto* base : base_types_) {
             if (base && base->is_derived_from(base_id)) return true;
@@ -93,12 +93,12 @@ public:
         return false;
     }
 
-    bool is_derived_from(string_view base_name) const {
+    NEFORCE_NODISCARD bool is_derived_from(string_view base_name) const {
         return is_derived_from(base_name.to_hash());
     }
 
     meta_type& property(string_view name,
-                       _REFLECT type_id prop_type_id,
+                       reflect::type_id prop_type_id,
                        meta_property::getter getter,
                        meta_property::setter setter) {
         properties_.emplace(name, make_unique<meta_property>(name, prop_type_id, move(getter), move(setter)));
@@ -115,7 +115,7 @@ public:
         return *this;
     }
 
-    const meta_property* get_property(string_view name) const {
+    NEFORCE_NODISCARD const meta_property* get_property(string_view name) const {
         auto it = properties_.find(string(name));
         if (it != properties_.end()) {
             return it->second.get();
@@ -131,7 +131,7 @@ public:
         return nullptr;
     }
 
-    const meta_function* get_function(string_view name) const {
+    NEFORCE_NODISCARD const meta_function* get_function(string_view name) const {
         auto it = functions_.find(string(name));
         if (it != functions_.end()) {
             return it->second.get();
@@ -147,24 +147,24 @@ public:
         return nullptr;
     }
 
-    any create() const {
+    NEFORCE_NODISCARD any create() const {
         return constructor_ ? constructor_({}) : any{};
     }
 
-    any create(const vector<any>& args) const {
+    NEFORCE_NODISCARD any create(const vector<any>& args) const {
         return constructor_ ? constructor_(args) : any{};
     }
 
-    const auto& properties() const { return properties_; }
-    const auto& functions() const { return functions_; }
+    NEFORCE_NODISCARD const auto& properties() const { return properties_; }
+    NEFORCE_NODISCARD const auto& functions() const { return functions_; }
 
-    vector<pair<string, const meta_property*>> all_properties() const {
+    NEFORCE_NODISCARD vector<pair<string, const meta_property*>> all_properties() const {
         vector<pair<string, const meta_property*>> result;
         collect_properties(result);
         return result;
     }
 
-    vector<pair<string, const meta_function*>> all_functions() const {
+    NEFORCE_NODISCARD vector<pair<string, const meta_function*>> all_functions() const {
         vector<pair<string, const meta_function*>> result;
         collect_functions(result);
         return result;

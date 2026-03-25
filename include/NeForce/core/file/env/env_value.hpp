@@ -411,7 +411,7 @@ NEFORCE_END_INNER__
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value* value) {
-    return _INNER env_value_to_string(value);
+    return inner::env_value_to_string(value);
 }
 
 /**
@@ -420,7 +420,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value* value) {
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value& value) {
-    return _INNER env_value_to_string(&value);
+    return inner::env_value_to_string(&value);
 }
 
 /**
@@ -429,7 +429,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value& value) {
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<env_value>& value) {
-    return _INNER env_value_to_string(value.get());
+    return inner::env_value_to_string(value.get());
 }
 
 /**
@@ -438,20 +438,20 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<env_value>& value
  * @return 字符串表示
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_document& doc) {
-    return _INNER env_document_to_string(&doc);
+    return inner::env_document_to_string(&doc);
 }
 
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_value::to_string() const {
-    return _INNER env_value_to_string(this);
+    return inner::env_value_to_string(this);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_value::to_document() const {
-    return _INNER env_value_to_string(this);
+    return inner::env_value_to_string(this);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_document::to_string() const {
-    return _INNER env_document_to_string(this);
+    return inner::env_document_to_string(this);
 }
 
 /** @} */ // EnvConfig

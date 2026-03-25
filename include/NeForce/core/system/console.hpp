@@ -500,7 +500,7 @@ public:
 
 #ifdef NEFORCE_STANDARD_20
 template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<_NEFORCE_RANGES view_base<T>, T>>> {
+struct io_base<T, enable_if_t<is_base_of_v<ranges::view_base<T>, T>>> {
     static void write(sys_console& console, const T& value) {
         string result;
         if (value.begin() == value.end()) {
@@ -706,7 +706,7 @@ template <typename First, typename... Rests>
 void print_rests(const First& first, const Rests&... rests) {
     console.print(" ");
     console.print<remove_cvref_t<First>>(first);
-    _INNER print_rests(rests...);
+    inner::print_rests(rests...);
 }
 
 NEFORCE_ALWAYS_INLINE_INLINE void printc_rests(const color&) {}
@@ -715,7 +715,7 @@ template <typename First, typename... Rests>
 void printc_rests(const color& color, const First& first, const Rests&... rests) {
     console.print(" ");
     console.printc<remove_cvref_t<First>>(color, first);
-    _INNER printc_rests(color, rests...);
+    inner::printc_rests(color, rests...);
 }
 
 NEFORCE_END_INNER__
@@ -729,7 +729,7 @@ void print(const This& t) {
 template <typename This, typename... Rests>
 void print(const This& t, const Rests&... rests) {
     console.print<remove_cvref_t<This>>(t);
-    _INNER print_rests(rests...);
+    inner::print_rests(rests...);
 }
 
 template <typename This>
@@ -740,7 +740,7 @@ void printc(const color& color, const This& t) {
 template <typename This, typename... Rests>
 void printc(const color& color, const This& t, const Rests&... rests) {
     console.printc<remove_cvref_t<This>>(color, t);
-    _INNER printc_rests(color, rests...);
+    inner::printc_rests(color, rests...);
 }
 
 template <typename This>
@@ -752,14 +752,14 @@ void println(const This& t) {
 template <typename This, typename... Rests>
 void println(const This& t, const Rests&... rests) {
     console.print<remove_cvref_t<This>>(t);
-    _INNER print_rests(rests...);
+    inner::print_rests(rests...);
     println();
 }
 
 template <typename This, typename ...Rests>
 void printcln(const color& color, const This& t, const Rests&... rests) {
     console.printc<remove_cvref_t<This>>(color, t);
-    _INNER printc_rests(color, rests...);
+    inner::printc_rests(color, rests...);
     println();
 }
 

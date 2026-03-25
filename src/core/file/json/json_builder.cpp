@@ -9,16 +9,16 @@ json_builder& json_builder::begin_object() {
         if (root_) {
             NEFORCE_THROW_EXCEPTION(json_exception("Root value already set"));
         }
-        root_ = _NEFORCE move(new_object);
+        root_ = move(new_object);
     } else {
         const auto & current = contexts_.top();
         if (current.type == array) {
-            current.array_ptr->add_element(_NEFORCE move(new_object));
+            current.array_ptr->add_element(move(new_object));
         } else if (current.type == object) {
             if (current_key_.empty()) {
                 NEFORCE_THROW_EXCEPTION(json_exception("No key set for object value"));
             }
-            current.object_ptr->add_member(current_key_, _NEFORCE move(new_object));
+            current.object_ptr->add_member(current_key_, move(new_object));
             current_key_.clear();
         }
     }
@@ -35,16 +35,16 @@ json_builder& json_builder::begin_array() {
         if (root_) {
             NEFORCE_THROW_EXCEPTION(json_exception("Root value already set"));
         }
-        root_ = _NEFORCE move(new_array);
+        root_ = move(new_array);
     } else {
         const auto & current = contexts_.top();
         if (current.type == array) {
-            current.array_ptr->add_element(_NEFORCE move(new_array));
+            current.array_ptr->add_element(move(new_array));
         } else if (current.type == object) {
             if (current_key_.empty()) {
                 NEFORCE_THROW_EXCEPTION(json_exception("No key set for array value"));
             }
-            current.object_ptr->add_member(current_key_, _NEFORCE move(new_array));
+            current.object_ptr->add_member(current_key_, move(new_array));
             current_key_.clear();
         }
     }
@@ -83,22 +83,22 @@ json_builder& json_builder::key(const string& key) {
     return *this;
 }
 
-json_builder& json_builder::value_object(_NEFORCE function<void(json_builder&)>&& build_func) {
+json_builder& json_builder::value_object(function<void(json_builder&)>&& build_func) {
     json_builder inner_builder;
     inner_builder.begin_object();
     build_func(inner_builder);
     inner_builder.end_object();
     auto obj = inner_builder.build();
-    return value_impl(_NEFORCE move(obj));
+    return value_impl(move(obj));
 }
 
-json_builder& json_builder::value_array(_NEFORCE function<void(json_builder&)>&& build_func) {
+json_builder& json_builder::value_array(function<void(json_builder&)>&& build_func) {
     json_builder inner_builder;
     inner_builder.begin_array();
     build_func(inner_builder);
     inner_builder.end_array();
     auto arr = inner_builder.build();
-    return value_impl(_NEFORCE move(arr));
+    return value_impl(move(arr));
 }
 
 unique_ptr<json_value> json_builder::build() {
@@ -111,7 +111,7 @@ unique_ptr<json_value> json_builder::build() {
     if (!root_) {
         NEFORCE_THROW_EXCEPTION(json_exception("No JSON value built"));
     }
-    return _NEFORCE move(root_);
+    return move(root_);
 }
 
 NEFORCE_END_NAMESPACE__

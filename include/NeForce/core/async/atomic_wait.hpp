@@ -411,7 +411,7 @@ NEFORCE_END_INNER__
  */
 template <typename T, typename Func>
 void atomic_wait_address_v(const T* addr, T old, Func f) noexcept {
-    _INNER enters_wait waiter(addr);
+    inner::enters_wait waiter(addr);
     waiter.waiter_do_wait_v(old, f);
 }
 
@@ -426,7 +426,7 @@ void atomic_wait_address_v(const T* addr, T old, Func f) noexcept {
  */
 template <typename T, typename Pred>
 void atomic_wait_address(const T* addr, Pred pred) noexcept {
-    _INNER enters_wait waiter(addr);
+    inner::enters_wait waiter(addr);
     waiter.waiter_do_wait(pred);
 }
 
@@ -441,7 +441,7 @@ void atomic_wait_address(const T* addr, Pred pred) noexcept {
  */
 template <typename T>
 void atomic_notify_address(const T* addr, const bool all) noexcept {
-	_INNER bare_wait waiter(addr);
+	inner::bare_wait waiter(addr);
 	waiter.waiter_notify(all);
 }
 

@@ -466,7 +466,7 @@ NEFORCE_END_INNER__
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value* value) {
-    return _INNER json_value_to_string(value);
+    return inner::json_value_to_string(value);
 }
 
 /**
@@ -475,7 +475,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value* value) {
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
-    return _INNER json_value_to_string(&value);
+    return inner::json_value_to_string(&value);
 }
 
 /**
@@ -484,7 +484,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
  * @return 紧凑格式字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<json_value>& value) {
-    return _INNER json_value_to_string(value.get());
+    return inner::json_value_to_string(value.get());
 }
 
 /**
@@ -493,7 +493,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<json_value>& valu
  * @return 格式化后的字符串（默认2空格缩进）
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {
-    return _INNER json_value_to_indent_string(value, 0);
+    return inner::json_value_to_indent_string(value, 0);
 }
 
 /**
@@ -502,7 +502,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {
  * @return 格式化后的字符串（默认2空格缩进）
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value& value) {
-    return _INNER json_value_to_indent_string(&value, 0);
+    return inner::json_value_to_indent_string(&value, 0);
 }
 
 /**
@@ -511,7 +511,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value& value) {
  * @return 格式化后的字符串（默认2空格缩进）
  */
 NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const unique_ptr<json_value>& value) {
-    return _INNER json_value_to_indent_string(value.get() ,0);
+    return inner::json_value_to_indent_string(value.get() ,0);
 }
 
 NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string json_value::to_string() const {

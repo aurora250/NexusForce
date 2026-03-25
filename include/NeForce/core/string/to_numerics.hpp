@@ -431,7 +431,7 @@ NEFORCE_END_INNER__
  * @return 转换后的64位有符号整数
  */
 constexpr int64_t strtoll(const string_view sv, char** endptr, const int base) {
-    return _INNER str_to_ints<int64_t>(sv, endptr, base);
+    return inner::str_to_ints<int64_t>(sv, endptr, base);
 }
 
 /**
@@ -442,7 +442,7 @@ constexpr int64_t strtoll(const string_view sv, char** endptr, const int base) {
  * @return 转换后的长整型有符号整数
  */
 constexpr long strtol(const string_view sv, char** endptr, const int base) {
-    return _INNER str_to_ints<long>(sv, endptr, base);
+    return inner::str_to_ints<long>(sv, endptr, base);
 }
 
 /**
@@ -453,7 +453,7 @@ constexpr long strtol(const string_view sv, char** endptr, const int base) {
  * @return 转换后的64位无符号整数
  */
 constexpr uint64_t strtoull(const string_view sv, char** endptr, const int base) {
-    return _INNER str_to_uints<uint64_t>(sv, endptr, base);
+    return inner::str_to_uints<uint64_t>(sv, endptr, base);
 }
 
 /**
@@ -464,7 +464,7 @@ constexpr uint64_t strtoull(const string_view sv, char** endptr, const int base)
  * @return 转换后的无符号长整型
  */
 constexpr unsigned long strtoul(const string_view sv, char** endptr, const int base) {
-    return _INNER str_to_uints<unsigned long>(sv, endptr, base);
+    return inner::str_to_uints<unsigned long>(sv, endptr, base);
 }
 
 /**
@@ -474,7 +474,7 @@ constexpr unsigned long strtoul(const string_view sv, char** endptr, const int b
  * @return 转换后的单精度浮点数
  */
 constexpr float strtof(const string_view sv, char** endptr) {
-    return _INNER str_to_floats<float>(sv, endptr);
+    return inner::str_to_floats<float>(sv, endptr);
 }
 
 /**
@@ -484,7 +484,7 @@ constexpr float strtof(const string_view sv, char** endptr) {
  * @return 转换后的双精度浮点数
  */
 constexpr double strtod(const string_view sv, char** endptr) {
-    return _INNER str_to_floats<double>(sv, endptr);
+    return inner::str_to_floats<double>(sv, endptr);
 }
 
 /**
@@ -494,7 +494,7 @@ constexpr double strtod(const string_view sv, char** endptr) {
  * @return 转换后的长双精度浮点数
  */
 constexpr long double strtold(const string_view sv, char** endptr) {
-    return _INNER str_to_floats<long double>(sv, endptr);
+    return inner::str_to_floats<long double>(sv, endptr);
 }
 
 /**

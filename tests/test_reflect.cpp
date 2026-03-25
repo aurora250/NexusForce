@@ -82,7 +82,7 @@ template <> struct neforce::reflect::type_name<rectangle> {
 };
 
 
-REFLECT_REGISTER(shape)
+NEFORCE_REFLECT_REGISTER(shape)
     .constructor()
     .property("name", &shape::name)
     .property("x", &shape::x)
@@ -91,16 +91,16 @@ REFLECT_REGISTER(shape)
     .function("area", &shape::area)
     .function("position", &shape::position);
 
-REFLECT_REGISTER_DERIVED(circle, shape)
+NEFORCE_REFLECT_REGISTER_DERIVED(circle, shape)
     .constructor()
-    .constructor<double, double, double>()
+    // .constructor<double, double, double>()
     .property("radius", &circle::radius)
     .function("area", &circle::area)
     .function("circumference", &circle::circumference)
     .function("set_radius", &circle::set_radius)
     .function("scale", &circle::scale);
 
-REFLECT_REGISTER_DERIVED(rectangle, shape)
+NEFORCE_REFLECT_REGISTER_DERIVED(rectangle, shape)
     .constructor()
     .property("width", &rectangle::width)
     .property("height", &rectangle::height)

@@ -123,7 +123,7 @@ NEFORCE_END_INNER__
  */
 class condition_variable {
 public:
-    using base_type = _INNER condition_variable_base;  ///< 基类类型
+    using base_type = inner::condition_variable_base;  ///< 基类类型
     using native_handle_type = base_type::native_handle_type;  ///< 原生句柄类型
     using clock_type = _NEFORCE steady_clock;  ///< 默认时钟类型
 

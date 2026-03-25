@@ -47,7 +47,7 @@ ini_builder& ini_builder::value(string value) {
 
 ini_builder& ini_builder::value(const int value) {
     test_exception();
-    current_section_->set_property(current_key_, _NEFORCE to_string(value));
+    current_section_->set_property(current_key_, to_string(value));
     current_key_.clear();
     return *this;
 }
@@ -80,7 +80,7 @@ ini_builder& ini_builder::value(const double value, const int precision) {
     return *this;
 }
 
-ini_builder& ini_builder::value_section(const string& name, _NEFORCE function<void(ini_builder&)>&& func) {
+ini_builder& ini_builder::value_section(const string& name, function<void(ini_builder&)>&& func) {
     begin_section(name);
     func(*this);
     end_section();
@@ -88,7 +88,7 @@ ini_builder& ini_builder::value_section(const string& name, _NEFORCE function<vo
 }
 
 unique_ptr<ini_document> ini_builder::build() noexcept {
-    return _NEFORCE move(root_);
+    return move(root_);
 }
 
 NEFORCE_END_NAMESPACE__

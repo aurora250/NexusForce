@@ -876,7 +876,7 @@ NEFORCE_END_INNER__
 template <typename... Tasks>
 auto when_all(Tasks&&... tasks) -> task<tuple<typename Tasks::promise_type::result_type...>> {
     tuple<typename Tasks::promise_type::result_type...> results;
-    co_await _INNER when_all_helper<0>(results, _NEFORCE forward<Tasks>(tasks)...);
+    co_await inner::when_all_helper<0>(results, _NEFORCE forward<Tasks>(tasks)...);
     co_return results;
 }
 

@@ -88,7 +88,7 @@ NEFORCE_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 uninitialized_copy(Iterator1 first, Iterator1 last, Iterator2 result) {
     if (first == last) return result;
-    return _INNER __uninitialized_copy_aux(first, last, result);
+    return inner::__uninitialized_copy_aux(first, last, result);
 }
 
 /// @cond
@@ -155,7 +155,7 @@ NEFORCE_END_INNER__
 template <typename Iterator1, typename Iterator2, enable_if_t<is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_copy_n(
     Iterator1 first, size_t count, Iterator2 result) {
-    return _INNER __uninitialized_copy_n_aux(first, count, result);
+    return inner::__uninitialized_copy_n_aux(first, count, result);
 }
 
 /// @cond
@@ -218,7 +218,7 @@ NEFORCE_END_INNER__
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 NEFORCE_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, const T& x) {
     if (first == last) return;
-    _INNER __uninitialized_fill_aux(first, last, x);
+    inner::__uninitialized_fill_aux(first, last, x);
 }
 
 /// @cond
@@ -283,7 +283,7 @@ NEFORCE_END_INNER__
  */
 template <typename Iterator, typename T, enable_if_t<is_ranges_fwd_iter_v<Iterator>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator uninitialized_fill_n(Iterator first, size_t n, const T& x) {
-    return _INNER __uninitialized_fill_n_aux(first, n, x);
+    return inner::__uninitialized_fill_n_aux(first, n, x);
 }
 
 /// @cond
@@ -352,7 +352,7 @@ template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 uninitialized_move(Iterator1 first, Iterator1 last, Iterator2 result) {
     if (first == last) return result;
-    return _INNER __uninitialized_move_aux(first, last, result);
+    return inner::__uninitialized_move_aux(first, last, result);
 }
 
 /// @cond
@@ -418,7 +418,7 @@ template <typename Iterator1, typename Iterator2, enable_if_t<
     is_ranges_input_iter_v<Iterator1> && is_ranges_fwd_iter_v<Iterator2>, int> = 0>
 NEFORCE_CONSTEXPR20 pair<Iterator1, Iterator2> uninitialized_move_n(
     Iterator1 first, size_t count, Iterator2 result) {
-    return _INNER __uninitialized_move_n_aux(first, count, result);
+    return inner::__uninitialized_move_n_aux(first, count, result);
 }
 
 /** @} */ // UninitializedAlgorithms

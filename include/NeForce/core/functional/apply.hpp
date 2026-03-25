@@ -61,9 +61,9 @@ NEFORCE_END_INNER__
  */
 template <typename Func, typename Tuple>
 constexpr decltype(auto) apply(Func&& f, Tuple&& t)
-noexcept(_INNER __apply_unpack_tuple<_NEFORCE is_nothrow_invocable, Func, Tuple>::value) {
+noexcept(inner::__apply_unpack_tuple<_NEFORCE is_nothrow_invocable, Func, Tuple>::value) {
     using Indices = make_index_sequence<tuple_size<remove_reference_t<Tuple>>::value>;
-    return _INNER __apply_impl(_NEFORCE forward<Func>(f), _NEFORCE forward<Tuple>(t), Indices{});
+    return inner::__apply_impl(_NEFORCE forward<Func>(f), _NEFORCE forward<Tuple>(t), Indices{});
 }
 
 /** @} */ // Tuple

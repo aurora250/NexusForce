@@ -264,7 +264,7 @@ struct __future_base {
      */
     template <typename Res, typename Alloc>
     struct allocated_result final : basic_result<Res>, Alloc {
-        using allocator_type = _INNER __allocator_traits_base::alloc_rebind_t<Alloc, allocated_result>;
+        using allocator_type = inner::__allocator_traits_base::alloc_rebind_t<Alloc, allocated_result>;
 
         /**
          * @brief 构造函数
@@ -860,10 +860,10 @@ NEFORCE_END_INNER__
 
 
 template <typename Res, typename Arg>
-struct is_location_invariant<_INNER __future_base::state_base::setter<Res, Arg>> : true_type {};
+struct is_location_invariant<inner::__future_base::state_base::setter<Res, Arg>> : true_type {};
 
 template <typename ResPtr, typename Func, typename Res>
-struct is_location_invariant<_INNER __future_base::task_setter<ResPtr, Func, Res>> : true_type {};
+struct is_location_invariant<inner::__future_base::task_setter<ResPtr, Func, Res>> : true_type {};
 
 
 /**
@@ -875,7 +875,7 @@ struct is_location_invariant<_INNER __future_base::task_setter<ResPtr, Func, Res
  * @note 不支持拷贝，仅支持移动
  */
 template <typename Res>
-class future : public _INNER __basic_future<Res> {
+class future : public inner::__basic_future<Res> {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
@@ -889,7 +889,7 @@ class future : public _INNER __basic_future<Res> {
     friend future<async_result_t<Function, Args...>>
     async(launch, Function&&, Args&&...);
 
-    using base_type = _INNER __basic_future<Res>;
+    using base_type = inner::__basic_future<Res>;
     using state_type = typename base_type::state_type;
 
     /**
@@ -946,7 +946,7 @@ public:
  * @tparam Res 引用类型
  */
 template <typename Res>
-class future<Res&> : public _INNER __basic_future<Res&> {
+class future<Res&> : public inner::__basic_future<Res&> {
     friend class promise<Res&>;
 
     template <typename Sign>
@@ -956,7 +956,7 @@ class future<Res&> : public _INNER __basic_future<Res&> {
     friend future<async_result_t<Function, Args...>>
     async(launch, Function&&, Args&&...);
 
-    typedef _INNER __basic_future<Res&> base_type;
+    typedef inner::__basic_future<Res&> base_type;
     typedef typename base_type::state_type state_type;
 
     explicit future(const state_type& state) : base_type(state) {}
@@ -990,7 +990,7 @@ public:
  * @brief void类型的future特化
  */
 template <>
-class future<void> : public _INNER __basic_future<void> {
+class future<void> : public inner::__basic_future<void> {
     friend class promise<void>;
 
     template <typename> friend class packaged_task;
@@ -999,7 +999,7 @@ class future<void> : public _INNER __basic_future<void> {
     friend future<async_result_t<Function, Args...>>
     async(launch, Function&&, Args&&...);
 
-    using base_type = _INNER __basic_future<void>;
+    using base_type = inner::__basic_future<void>;
     using state_type = base_type::state_type;
 
     explicit future(const state_type& state) : base_type(state) {}
@@ -1036,12 +1036,12 @@ public:
  * 表示一个异步计算的结果，结果可以被多次获取。
  */
 template <typename Res>
-class shared_future : public _INNER __basic_future<Res> {
+class shared_future : public inner::__basic_future<Res> {
     static_assert(!is_array_v<Res>, "result type must not be an array");
     static_assert(!is_function_v<Res>, "result type must not be a function");
     static_assert(is_destructible_v<Res>, "result type must be destructible");
 
-    using base_type = _INNER __basic_future<Res>;
+    using base_type = inner::__basic_future<Res>;
 
 public:
     constexpr shared_future() noexcept : base_type() {}
@@ -1074,8 +1074,8 @@ public:
  * @tparam Res 引用类型
  */
 template <typename Res>
-class shared_future<Res&> : public _INNER __basic_future<Res&> {
-    using base_type = _INNER __basic_future<Res&>;
+class shared_future<Res&> : public inner::__basic_future<Res&> {
+    using base_type = inner::__basic_future<Res&>;
 
 public:
     constexpr shared_future() noexcept : base_type() {}
@@ -1106,8 +1106,8 @@ public:
  * @brief void类型的共享future特化
  */
 template <>
-class shared_future<void> : public _INNER __basic_future<void> {
-    using base_type = _INNER __basic_future<void>;
+class shared_future<void> : public inner::__basic_future<void> {
+    using base_type = inner::__basic_future<void>;
 
 public:
     constexpr shared_future() noexcept {}
@@ -1136,15 +1136,15 @@ public:
 /// @cond
 
 template <typename Res>
-_INNER __basic_future<Res>::__basic_future(const shared_future<Res>& other) noexcept
+inner::__basic_future<Res>::__basic_future(const shared_future<Res>& other) noexcept
 : state_ptr(other.state_ptr) {}
 
 template <typename Res>
-_INNER __basic_future<Res>::__basic_future(shared_future<Res>&& other) noexcept
+inner::__basic_future<Res>::__basic_future(shared_future<Res>&& other) noexcept
 : state_ptr(_NEFORCE move(other.state_ptr)) {}
 
 template <typename Res>
-_INNER __basic_future<Res>::__basic_future(future<Res>&& other) noexcept
+inner::__basic_future<Res>::__basic_future(future<Res>&& other) noexcept
 : state_ptr(_NEFORCE move(other.state_ptr)) {}
 
 

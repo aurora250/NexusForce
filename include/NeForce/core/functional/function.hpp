@@ -278,9 +278,9 @@ NEFORCE_END_INNER__
  * 提供类型安全的函数包装，支持存储、复制和调用任意可调用对象。
  */
 template <typename Res, typename... Args>
-class function<Res(Args...)> : _INNER __function_base {
+class function<Res(Args...)> : inner::__function_base {
 private:
-	using invoker_type = Res (*)(const _INNER storage_data&, Args&&...); ///< 调用器类型
+	using invoker_type = Res (*)(const inner::storage_data&, Args&&...); ///< 调用器类型
 
 private:
 	invoker_type invoker_ = nullptr; ///< 调用器函数指针
@@ -299,14 +299,14 @@ private:
 	>> : true_type {};
 
 	template <typename F>
-	using handler_t = _INNER __function_manage_handler<Res(Args...), decay_t<F>>;
+	using handler_t = inner::__function_manage_handler<Res(Args...), decay_t<F>>;
 
 	template <typename F, enable_if_t<is_object_v<F>, int> = 0>
 	NEFORCE_ALWAYS_INLINE const F* __target_impl() const noexcept {
-		if (manager_ == &_INNER __function_handler_dispatch<Res(Args...), F>::manage
+		if (manager_ == &inner::__function_handler_dispatch<Res(Args...), F>::manage
 			|| (manager_ && typeid(F) == target_type())) {
-			_INNER storage_data ptr{};
-			manager_(ptr, func_, _INNER FUNCTION_OPERATE::GET_PTR);
+			inner::storage_data ptr{};
+			manager_(ptr, func_, inner::FUNCTION_OPERATE::GET_PTR);
 			return ptr.access<const F*>();
 		}
 		return nullptr;
@@ -333,7 +333,7 @@ public:
 	 */
 	function(const function& other) : __function_base() {
 		if (static_cast<bool>(other)) {
-			other.manager_(func_, other.func_, _INNER FUNCTION_OPERATE::COPY_PTR);
+			other.manager_(func_, other.func_, inner::FUNCTION_OPERATE::COPY_PTR);
 			invoker_ = other.invoker_;
 			manager_ = other.manager_;
 		}
@@ -401,7 +401,7 @@ public:
 	 */
 	function& operator =(nullptr_t np) noexcept {
 		if (manager_) {
-			manager_(func_, func_, _INNER FUNCTION_OPERATE::DESTROY_PTR);
+			manager_(func_, func_, inner::FUNCTION_OPERATE::DESTROY_PTR);
 			manager_ = nullptr;
 			invoker_ = nullptr;
 		}
@@ -470,8 +470,8 @@ public:
 	 */
 	NEFORCE_NODISCARD const std::type_info& target_type() const noexcept {
 		if (manager_) {
-			_INNER storage_data result{};
-			manager_(result, func_, _INNER FUNCTION_OPERATE::GET_TYPE_INFO);
+			inner::storage_data result{};
+			manager_(result, func_, inner::FUNCTION_OPERATE::GET_TYPE_INFO);
 			if (const auto info = result.access<const std::type_info*>()) {
 				return *info;
 			}
@@ -519,7 +519,7 @@ NEFORCE_END_INNER__
 template <typename Res, typename... Args>
 function(Res(*)(Args...)) -> function<Res(Args...)>;
 
-template <typename Func, typename Sign = typename _INNER __function_guide_helper<
+template <typename Func, typename Sign = typename inner::__function_guide_helper<
 	remove_function_qualifiers_t<decltype(&Func::operator ())>>::type>
 function(Func) -> function<Sign>;
 

@@ -192,7 +192,7 @@ if(WIN32)
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(NexusForce PUBLIC
-            atomic pthread
+            atomic pthread c++abi
     )
 endif()
 
