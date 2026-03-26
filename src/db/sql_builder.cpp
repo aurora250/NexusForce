@@ -2,21 +2,21 @@
 #include <NeForce/db/sql_builder.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-select_data* sql_builder::ensure_select_data() {
+sql_builder::select_data* sql_builder::ensure_select_data() {
     if (!select_data_) {
         select_data_ = make_unique<select_data>();
     }
     return select_data_.get();
 }
 
-insert_data* sql_builder::ensure_insert_data() {
+sql_builder::insert_data* sql_builder::ensure_insert_data() {
     if (!insert_data_) {
         insert_data_ = make_unique<insert_data>();
     }
     return insert_data_.get();
 }
 
-update_data* sql_builder::ensure_update_data() {
+sql_builder::update_data* sql_builder::ensure_update_data() {
     if (!update_data_) {
         update_data_ = make_unique<update_data>();
     }
@@ -73,7 +73,7 @@ sql_builder& sql_builder::operator =(const sql_builder& other) {
 
 sql_builder& sql_builder::select(vector<string> fields) {
     sql_type_ = SQL_OPERATE_TYPE::SELECT;
-    ensure_select_data()->fields = _NEFORCE move(fields);
+    ensure_select_data()->fields = move(fields);
     return *this;
 }
 
@@ -83,14 +83,14 @@ sql_builder& sql_builder::select(const std::initializer_list<string> fields) {
     data->fields.clear();
     data->fields.reserve(fields.size());
     for (const auto& field : fields) {
-        data->fields.emplace_back(_NEFORCE move(field));
+        data->fields.emplace_back(move(field));
     }
     return *this;
 }
 
 sql_builder& sql_builder::select(string field) {
     sql_type_ = SQL_OPERATE_TYPE::SELECT;
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(field));
+    ensure_select_data()->fields.emplace_back(move(field));
     return *this;
 }
 
@@ -108,13 +108,13 @@ sql_builder& sql_builder::distinct() {
 }
 
 sql_builder& sql_builder::from(string table) noexcept {
-    table_ = _NEFORCE move(table);
+    table_ = move(table);
     return *this;
 }
 
 sql_builder& sql_builder::from(string table, string alias) noexcept {
-    table_ = _NEFORCE move(table);
-    table_alias_ = _NEFORCE move(alias);
+    table_ = move(table);
+    table_alias_ = move(alias);
     return *this;
 }
 
@@ -127,171 +127,170 @@ sql_builder& sql_builder::join(const SQL_JOIN_TYPE type, string table, string on
         case SQL_JOIN_TYPE::RIGHT: join_str = "RIGHT JOIN "; break;
         case SQL_JOIN_TYPE::FULL: join_str = "FULL JOIN "; break;
     }
-    join_str += _NEFORCE move(table) + " ON " + _NEFORCE move(on_condition);
-    ensure_select_data()->join_clauses.emplace_back(_NEFORCE move(join_str));
+    join_str += move(table) + " ON " + move(on_condition);
+    ensure_select_data()->join_clauses.emplace_back(move(join_str));
     return *this;
 }
 
 sql_builder& sql_builder::join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::INNER, _NEFORCE move(table), _NEFORCE move(on_condition));
+    return join(SQL_JOIN_TYPE::INNER, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::left_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::LEFT, _NEFORCE move(table), _NEFORCE move(on_condition));
+    return join(SQL_JOIN_TYPE::LEFT, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::right_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::RIGHT, _NEFORCE move(table), _NEFORCE move(on_condition));
+    return join(SQL_JOIN_TYPE::RIGHT, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::inner_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::INNER, _NEFORCE move(table), _NEFORCE move(on_condition));
+    return join(SQL_JOIN_TYPE::INNER, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::full_join(string table, string on_condition) {
-    return join(SQL_JOIN_TYPE::FULL, _NEFORCE move(table), _NEFORCE move(on_condition));
+    return join(SQL_JOIN_TYPE::FULL, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::where(string condition) {
-    where_conditions_.emplace_back(_NEFORCE move(condition));
+    where_conditions_.emplace_back(move(condition));
     return *this;
 }
 
 sql_builder& sql_builder::where_eq(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " = " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " = " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_ne(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " != " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " != " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_gt(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " > " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " > " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_ge(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " >= " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " >= " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_lt(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " < " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " < " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_le(string field, string value) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " <= " + _NEFORCE move(value));
+    where_conditions_.emplace_back(move(field) + " <= " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::where_like(string field, string pattern) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " LIKE " + _NEFORCE move(pattern));
+    where_conditions_.emplace_back(move(field) + " LIKE " + move(pattern));
     return *this;
 }
 
 sql_builder& sql_builder::where_not_like(string field, string pattern) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " NOT LIKE " + _NEFORCE move(pattern));
+    where_conditions_.emplace_back(move(field) + " NOT LIKE " + move(pattern));
     return *this;
 }
 
 sql_builder& sql_builder::where_in(string field, vector<string> values) {
     if (values.empty()) return *this;
-    string condition = _NEFORCE move(field) + " IN (";
+    string condition = move(field) + " IN (";
     for (size_t i = 0; i < values.size(); ++i) {
         if (i > 0) condition += ", ";
-        condition += _NEFORCE move(values[i]);
+        condition += move(values[i]);
     }
     condition += ")";
-    where_conditions_.emplace_back(_NEFORCE move(condition));
+    where_conditions_.emplace_back(move(condition));
     return *this;
 }
 
 sql_builder& sql_builder::where_not_in(string field, vector<string> values) {
     if (values.empty()) return *this;
-    string condition = _NEFORCE move(field) + " NOT IN (";
+    string condition = move(field) + " NOT IN (";
     for (size_t i = 0; i < values.size(); ++i) {
         if (i > 0) condition += ", ";
-        condition += _NEFORCE move(values[i]);
+        condition += move(values[i]);
     }
     condition += ")";
-    where_conditions_.emplace_back(_NEFORCE move(condition));
+    where_conditions_.emplace_back(move(condition));
     return *this;
 }
 
 sql_builder& sql_builder::where_between(string field, string start, string end) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " BETWEEN " + _NEFORCE move(start) + " AND " + _NEFORCE move(end));
+    where_conditions_.emplace_back(move(field) + " BETWEEN " + move(start) + " AND " + move(end));
     return *this;
 }
 
 sql_builder& sql_builder::where_not_between(string field, string start, string end) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " NOT BETWEEN " + _NEFORCE move(start) + " AND " + _NEFORCE move(end));
+    where_conditions_.emplace_back(move(field) + " NOT BETWEEN " + move(start) + " AND " + move(end));
     return *this;
 }
 
 sql_builder& sql_builder::where_is_null(string field) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " IS NULL");
+    where_conditions_.emplace_back(move(field) + " IS NULL");
     return *this;
 }
 
 sql_builder& sql_builder::where_is_not_null(string field) {
-    where_conditions_.emplace_back(_NEFORCE move(field) + " IS NOT NULL");
+    where_conditions_.emplace_back(move(field) + " IS NOT NULL");
     return *this;
 }
 
 sql_builder& sql_builder::where_exists(string subquery) {
-    where_conditions_.emplace_back("EXISTS (" + _NEFORCE move(subquery) + ")");
+    where_conditions_.emplace_back("EXISTS (" + move(subquery) + ")");
     return *this;
 }
 
 sql_builder& sql_builder::where_not_exists(string subquery) {
-    where_conditions_.emplace_back("NOT EXISTS (" + _NEFORCE move(subquery) + ")");
+    where_conditions_.emplace_back("NOT EXISTS (" + move(subquery) + ")");
     return *this;
 }
 
 sql_builder& sql_builder::or_where(string condition) {
     if (!where_conditions_.empty()) {
-        where_conditions_.back() =
-            "(" + _NEFORCE move(where_conditions_.back()) + " OR " + _NEFORCE move(condition) + ")";
+        where_conditions_.back() = "(" + move(where_conditions_.back()) + " OR " + move(condition) + ")";
     } else {
-        where_conditions_.emplace_back(_NEFORCE move(condition));
+        where_conditions_.emplace_back(move(condition));
     }
     return *this;
 }
 
 sql_builder& sql_builder::group_by(string field) {
-    ensure_select_data()->group_by_fields.emplace_back(_NEFORCE move(field));
+    ensure_select_data()->group_by_fields.emplace_back(move(field));
     return *this;
 }
 
 sql_builder& sql_builder::group_by(vector<string> fields) {
     auto* data = ensure_select_data();
     for (const auto& field : fields) {
-        data->group_by_fields.emplace_back(_NEFORCE move(field));
+        data->group_by_fields.emplace_back(move(field));
     }
     return *this;
 }
 
 sql_builder& sql_builder::having(string condition) {
-    ensure_select_data()->having_conditions.emplace_back(_NEFORCE move(condition));
+    ensure_select_data()->having_conditions.emplace_back(move(condition));
     return *this;
 }
 
 
 sql_builder& sql_builder::order_by(string field, const SQL_ORDER_TYPE order) {
-    string order_str = _NEFORCE move(field) + (order == SQL_ORDER_TYPE::ASC ? " ASC" : " DESC");
-    ensure_select_data()->order_by_clauses.emplace_back(_NEFORCE move(order_str));
+    string order_str = move(field) + (order == SQL_ORDER_TYPE::ASC ? " ASC" : " DESC");
+    ensure_select_data()->order_by_clauses.emplace_back(move(order_str));
     return *this;
 }
 
 sql_builder& sql_builder::order_by_asc(string field) {
-    return order_by(_NEFORCE move(field), SQL_ORDER_TYPE::ASC);
+    return order_by(move(field), SQL_ORDER_TYPE::ASC);
 }
 
 sql_builder& sql_builder::order_by_desc(string field) {
-    return order_by(_NEFORCE move(field), SQL_ORDER_TYPE::DESC);
+    return order_by(move(field), SQL_ORDER_TYPE::DESC);
 }
 
 sql_builder& sql_builder::limit(const int count) {
@@ -313,9 +312,9 @@ sql_builder& sql_builder::page(const int page_num, const int page_size) {
 
 sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
     sql_type_ = SQL_OPERATE_TYPE::INSERT;
-    table_ = _NEFORCE move(table);
+    table_ = move(table);
     auto* data = ensure_insert_data();
-    data->fields = _NEFORCE move(fields);
+    data->fields = move(fields);
     data->placeholders.clear();
     data->placeholders.resize(data->fields.size(), "?");
     return *this;
@@ -323,19 +322,19 @@ sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
 
 sql_builder& sql_builder::insert_into(string table) {
     sql_type_ = SQL_OPERATE_TYPE::INSERT;
-    table_ = _NEFORCE move(table);
+    table_ = move(table);
     ensure_insert_data();
     return *this;
 }
 
 sql_builder& sql_builder::values(vector<string> values) {
-    ensure_insert_data()->placeholders = _NEFORCE move(values);
+    ensure_insert_data()->placeholders = move(values);
     return *this;
 }
 
 sql_builder& sql_builder::columns(vector<string> fields) {
     auto* data = ensure_insert_data();
-    data->fields = _NEFORCE move(fields);
+    data->fields = move(fields);
     if (data->placeholders.empty()) {
         data->placeholders.resize(data->fields.size(), "?");
     }
@@ -344,30 +343,28 @@ sql_builder& sql_builder::columns(vector<string> fields) {
 
 sql_builder& sql_builder::update(string table) {
     sql_type_ = SQL_OPERATE_TYPE::UPDATE;
-    table_ = _NEFORCE move(table);
+    table_ = move(table);
     ensure_update_data();
     return *this;
 }
 
 sql_builder& sql_builder::set(string assignment) {
-    ensure_update_data()->assignments.emplace_back(_NEFORCE move(assignment));
+    ensure_update_data()->assignments.emplace_back(move(assignment));
     return *this;
 }
 
 sql_builder& sql_builder::set(string field, string value) {
-    ensure_update_data()->assignments.emplace_back(_NEFORCE move(field) + " = " + _NEFORCE move(value));
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(value));
     return *this;
 }
 
 sql_builder& sql_builder::set_increment(string field, const int value) {
-    ensure_update_data()->assignments.emplace_back(
-        field + " = " + _NEFORCE move(field) + " + " + _NEFORCE to_string(value));
+    ensure_update_data()->assignments.emplace_back(field + " = " + move(field) + " + " + _NEFORCE to_string(value));
     return *this;
 }
 
 sql_builder& sql_builder::set_decrement(string field, const int value) {
-    ensure_update_data()->assignments.emplace_back(
-        _NEFORCE move(field) + " = " + field + " - " + _NEFORCE to_string(value));
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + field + " - " + _NEFORCE to_string(value));
     return *this;
 }
 
@@ -378,20 +375,20 @@ sql_builder& sql_builder::remove() {
 
 sql_builder& sql_builder::delete_from(string table) {
     sql_type_ = SQL_OPERATE_TYPE::DELETE;
-    table_ = _NEFORCE move(table);
+    table_ = move(table);
     return *this;
 }
 
 sql_builder& sql_builder::select_count(string field, string alias) {
-    string expr = "COUNT(" + _NEFORCE move(field) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "COUNT(" + move(field) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_count(string field) {
-    string expr = "COUNT(" + _NEFORCE move(field) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "COUNT(" + move(field) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
@@ -401,79 +398,79 @@ sql_builder& sql_builder::select_count() {
 }
 
 sql_builder& sql_builder::select_sum(string field, string alias) {
-    string expr = "SUM(" + _NEFORCE move(field) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "SUM(" + move(field) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_sum(string field) {
-    string expr = "SUM(" + _NEFORCE move(field) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "SUM(" + move(field) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_avg(string field, string alias) {
-    string expr = "AVG(" + _NEFORCE move(field) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "AVG(" + move(field) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_avg(string field) {
-    string expr = "AVG(" + _NEFORCE move(field) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "AVG(" + move(field) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_max(string field, string alias) {
-    string expr = "MAX(" + _NEFORCE move(field) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "MAX(" + move(field) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_max(string field) {
-    string expr = "MAX(" + _NEFORCE move(field) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "MAX(" + move(field) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_min(string field, string alias) {
-    string expr = "MIN(" + _NEFORCE move(field) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "MIN(" + move(field) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_min(string field) {
-    string expr = "MIN(" + _NEFORCE move(field) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "MIN(" + move(field) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_distinct(string field) {
     ensure_select_data()->distinct = true;
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(field));
+    ensure_select_data()->fields.emplace_back(move(field));
     return *this;
 }
 
 sql_builder& sql_builder::select_subquery(string subquery, string alias) {
-    string expr = "(" + _NEFORCE move(subquery) + ")";
-    if (!alias.empty()) expr += " AS " + _NEFORCE move(alias);
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "(" + move(subquery) + ")";
+    if (!alias.empty()) expr += " AS " + move(alias);
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::select_subquery(string subquery) {
-    string expr = "(" + _NEFORCE move(subquery) + ")";
-    ensure_select_data()->fields.emplace_back(_NEFORCE move(expr));
+    string expr = "(" + move(subquery) + ")";
+    ensure_select_data()->fields.emplace_back(move(expr));
     return *this;
 }
 
 sql_builder& sql_builder::from_subquery(string subquery, string alias) {
-    table_ = "(" + _NEFORCE move(subquery) + ")";
-    table_alias_ = _NEFORCE move(alias);
+    table_ = "(" + move(subquery) + ")";
+    table_alias_ = move(alias);
     return *this;
 }
 
@@ -555,10 +552,10 @@ string sql_builder::build() const {
             // LIMIT & OFFSET
             if (select_data_) {
                 if (select_data_->limit_count > 0) {
-                    result += " LIMIT " + _NEFORCE to_string(select_data_->limit_count);
+                    result += " LIMIT " + to_string(select_data_->limit_count);
                 }
                 if (select_data_->offset_count > 0) {
-                    result += " OFFSET " + _NEFORCE to_string(select_data_->offset_count);
+                    result += " OFFSET " + to_string(select_data_->offset_count);
                 }
             }
 

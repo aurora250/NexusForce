@@ -216,6 +216,14 @@ public:
         reset_color();
     }
 
+    template <typename... Args>
+    void printcf(const color& color, const string_view fmt, Args&&... args) {
+        set_color(color, false);
+        lock<mutex> lock(mutex_);
+        this->print_string_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
+        reset_color();
+    }
+
     /**
      * @brief 读取任意类型的值
      * @tparam T 值类型
@@ -819,6 +827,17 @@ void printf(const string_view fmt, Args&&... args) {
 template <typename... Args>
 void printfln(const string_view fmt, Args&&... args) {
     console.printf(fmt, _NEFORCE forward<Args>(args)...);
+    println();
+}
+
+template <typename... Args>
+void printcf(const color& color, const string_view fmt, Args&&... args) {
+    console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
+}
+
+template <typename... Args>
+void printcfln(const color& color, const string_view fmt, Args&&... args) {
+    console.printcf(color, fmt, _NEFORCE forward<Args>(args)...);
     println();
 }
 

@@ -93,6 +93,7 @@
 #include "NeForce/network/socket/ssl_acceptor.hpp"
 #include "NeForce/network/socket/tcp_acceptor.hpp"
 #include "NeForce/network/socket/udp_socket.hpp"
+#include "NeForce/network/arp.hpp"
 #include "NeForce/network/websocket.hpp"
 #include "NeForce/plugin/plugin_manager.hpp"
 #endif // NEFORCE_NEFORCE_HPP__

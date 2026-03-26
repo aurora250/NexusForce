@@ -10,7 +10,8 @@ bool mysql_connect::connect(const db_config& config) noexcept {
         config.password.data(), config.database.data(), config.port,
         nullptr, 0);
     if (p == nullptr) return false;
-    return set_character_set(config.charset);
+    NEFORCE_IGNORE set_character_set(config.charset);
+    return true;
 }
 
 bool mysql_connect::reconnect(const db_config& config) {

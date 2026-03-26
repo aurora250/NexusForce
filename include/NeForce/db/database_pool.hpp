@@ -9,113 +9,139 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API database_pool {
-private:
-    db_config config_;
-    size_t init_size_;
-    size_t max_size_;
-    seconds max_idle_time_;
-    milliseconds connect_timeout_;
+public:
+    struct pool_config {
+        size_t init_size = 5;
+        size_t min_size = 5;
+        size_t max_size = 64;
+        seconds max_idle_time{60};
+        milliseconds acquire_timeout{3000};
+    };
 
-    unique_ptr<idb_factory> factory_ = nullptr;
-    queue<idb_connect*> connect_queue_;
-    mutex queue_mtx_;
+private:
+    struct connection_entry {
+        idb_connect* conn = nullptr;
+        milliseconds idle_at{0};
+
+        connection_entry() noexcept = default;
+
+        explicit connection_entry(idb_connect* c)
+        : conn(c), idle_at(current_ms()) {}
+
+        milliseconds idle_duration() const noexcept {
+            return current_ms() - idle_at;
+        }
+
+        static milliseconds current_ms() noexcept {
+            return time_cast<milliseconds>(steady_clock::now().since_epoch());
+        }
+    };
+
+    db_config config_;
+    pool_config pool_cfg_;
+    unique_ptr<idb_factory> factory_;
+
+    queue<connection_entry> idle_queue_;
+    mutable mutex queue_mtx_;
     condition_variable cv_;
+
+    atomic<size_t> total_count_{0};
     atomic<bool> running_{false};
 
-    thread produce_;
-    thread scanner_;
+    thread replenish_thread_;
+    thread scanner_thread_;
 
-    void produce_connect_task();
-    void scanner_connect_task();
+    idb_connect* try_create_connect() noexcept;
+
+    void return_connect(idb_connect* conn) noexcept;
+
+    void replenish_task();
+    void scanner_task();
 
     template <typename T>
-    shared_ptr<T> get_connect_impl();
+    shared_ptr<T> acquire_impl();
 
 public:
-    database_pool(
-        db_type type, const db_config& config,
-        size_t init_size = 50, size_t max_size = 1024,
-        seconds max_idle_time = seconds{30},
-        milliseconds connect_timeout = milliseconds{100});
-
-    ~database_pool() { stop(); }
+    database_pool(db_type type, const db_config& config, const pool_config& pool_config = {});
+    ~database_pool();
 
     database_pool(const database_pool&) = delete;
     database_pool& operator =(const database_pool&) = delete;
     database_pool(database_pool&&) = delete;
     database_pool& operator =(database_pool&&) = delete;
 
-    void stop();
+    shared_ptr<idb_connect> get_connect();
+    shared_ptr<idb_tb_connect> get_tb_connect();
+    shared_ptr<idb_kv_connect> get_kv_connect();
 
-    shared_ptr<idb_connect> get_connect() {
-        return get_connect_impl<idb_connect>();
-    }
-    shared_ptr<idb_tb_connect> get_tb_connect() {
-        return get_connect_impl<idb_tb_connect>();
-    }
-    shared_ptr<idb_kv_connect> get_kv_connect() {
-        return get_connect_impl<idb_kv_connect>();
-    }
+    size_t idle_count() const noexcept;
+    size_t total_count() const noexcept;
+    bool is_running() const noexcept { return running_.load(memory_order_acquire); }
+
+    void stop();
 };
 
 
 template <typename T>
-shared_ptr<T> database_pool::get_connect_impl() {
-    smart_lock<mutex> lk1(queue_mtx_);
+shared_ptr<T> database_pool::acquire_impl() {
+    smart_lock<mutex> lk(queue_mtx_);
 
-    while (connect_queue_.empty() && running_) {
-        if (cv_.wait_for(lk1, milliseconds(connect_timeout_)) == cv_status::timeout) {
-            if (connect_queue_.empty()) {
-                if (connect_queue_.size() < max_size_) {
-                    auto* new_conn = factory_->create_connect();
-                    if (new_conn != nullptr) {
-                        new_conn->refresh_alive();
-                        connect_queue_.push(new_conn);
-                        continue;
-                    }
-                }
-                return nullptr;
-            }
-        }
+    const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout, [this] {
+        return !idle_queue_.empty() || !running_.load(memory_order_relaxed);
+    });
+
+    if (!running_.load(memory_order_relaxed)) {
+        return nullptr;
     }
 
-    idb_connect* raw_conn = connect_queue_.front();
-    connect_queue_.pop();
+    if (!got || idle_queue_.empty()) {
+        const size_t cur = total_count_.load(memory_order_relaxed);
+        if (cur >= pool_cfg_.max_size) {
+            return nullptr;
+        }
+        idb_connect* raw = try_create_connect();
+        if (raw == nullptr) {
+            return nullptr;
+        }
 
-    if (!raw_conn->is_valid()) {
-        try {
-            if (!raw_conn->reconnect(config_)) {
-                delete raw_conn;
-                raw_conn = factory_->create_connect();
-                if (raw_conn == nullptr) {
-                    cv_.notify_all();
-                    return nullptr;
-                }
-            }
-        } catch (...) {
-            delete raw_conn;
-            cv_.notify_all();
+        total_count_.fetch_add(1, memory_order_relaxed);
+        T* typed = dynamic_cast<T*>(raw);
+        if (typed == nullptr) {
+            delete raw;
+            total_count_.fetch_sub(1, memory_order_relaxed);
+            return nullptr;
+        }
+        return shared_ptr<T>(typed,
+            [this](T* p) {
+                this->return_connect(p);
+            });
+    }
+
+    const connection_entry entry = idle_queue_.front();
+    idle_queue_.pop();
+    lk.unlock_quiet();
+
+    idb_connect* raw = entry.conn;
+
+    if (!raw->is_valid()) {
+        if (!raw->reconnect(config_)) {
+            delete raw;
+            total_count_.fetch_sub(1, memory_order_relaxed);
+            cv_.notify_one();
             return nullptr;
         }
     }
 
-    shared_ptr<T> conn_ptr {
-        dynamic_cast<T*>(raw_conn),
-        [this](T* p) {
-            lock<mutex> lk2(queue_mtx_);
-            if (p->is_valid()) {
-                p->refresh_alive();
-                connect_queue_.push(p);
-            }
-            else {
-                delete p;
-            }
-            cv_.notify_all();
-        }
-    };
+    T* typed = dynamic_cast<T*>(raw);
+    if (typed == nullptr) {
+        this->return_connect(raw);
+        return nullptr;
+    }
 
-    cv_.notify_all();
-    return conn_ptr;
+    return shared_ptr<T>(typed,
+        [this](T* p) {
+            this->return_connect(p);
+        });
 }
 
 NEFORCE_END_NAMESPACE__

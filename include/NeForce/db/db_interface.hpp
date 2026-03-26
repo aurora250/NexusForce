@@ -24,23 +24,23 @@ struct NEFORCE_API idb_tb_result : idb_result {
 
     virtual const vector<string_view>& column_names() const = 0;
 
-    virtual string_view get(size_type) const = 0;
+    virtual string_view get(size_type n) const = 0;
 
-    virtual bool get_bool(size_type) const = 0;
-    virtual int16_t get_int16(size_type) const = 0;
-    virtual int32_t get_int32(size_type) const = 0;
-    virtual int64_t get_int64(size_type) const = 0;
-    virtual float32_t get_float32(size_type) const = 0;
-    virtual float64_t get_float64(size_type) const = 0;
-    virtual decimal_t get_decimal(size_type) const = 0;
+    virtual bool get_bool(size_type n) const = 0;
+    virtual int16_t get_int16(size_type n) const = 0;
+    virtual int32_t get_int32(size_type n) const = 0;
+    virtual int64_t get_int64(size_type n) const = 0;
+    virtual float32_t get_float32(size_type n) const = 0;
+    virtual float64_t get_float64(size_type n) const = 0;
+    virtual decimal_t get_decimal(size_type n) const = 0;
 
-    virtual vector<char> get_blob(size_type) const = 0;
-    virtual uint64_t get_bit(size_type) const = 0;
+    virtual vector<char> get_blob(size_type n) const = 0;
+    virtual uint64_t get_bit(size_type n) const = 0;
 
-    virtual date get_date(size_type) const = 0;
-    virtual time get_time(size_type) const = 0;
-    virtual datetime get_datetime(size_type) const = 0;
-    virtual timestamp get_timestamp(size_type) const = 0;
+    virtual date get_date(size_type n) const = 0;
+    virtual time get_time(size_type n) const = 0;
+    virtual datetime get_datetime(size_type n) const = 0;
+    virtual timestamp get_timestamp(size_type n) const = 0;
 };
 
 struct NEFORCE_API idb_kv_result : idb_result {

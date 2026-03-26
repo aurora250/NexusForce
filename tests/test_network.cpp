@@ -671,3 +671,21 @@ void test_ping() {
         printfln("Ping 失败: {}\n", e.what());
     }
 }
+
+void test_arp() {
+    arp arp_resolver;
+    if (!arp_resolver.open()) {
+        println("Failed to open ARP resolver");
+        return;
+    }
+
+    auto ip = ip_address::parse("192.168.1.1", 0);
+    if (ip) {
+        auto mac = arp_resolver.resolve(*ip, milliseconds(2000));
+        if (mac) {
+            println(*mac);
+        } else {
+            println("MAC address not resolved");
+        }
+    }
+}

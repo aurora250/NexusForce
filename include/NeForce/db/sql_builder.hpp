@@ -21,28 +21,28 @@ enum class SQL_ORDER_TYPE {
 };
 
 
-struct select_data {
-    vector<string> fields;
-    vector<string> join_clauses;
-    vector<string> group_by_fields;
-    vector<string> having_conditions;
-    vector<string> order_by_clauses;
-    int limit_count = -1;
-    int offset_count = -1;
-    bool distinct = false;
-};
-
-struct insert_data {
-    vector<string> fields;
-    vector<string> placeholders;
-};
-
-struct update_data {
-    vector<string> assignments;
-};
-
-
 class NEFORCE_API sql_builder {
+public:
+    struct select_data {
+        vector<string> fields;
+        vector<string> join_clauses;
+        vector<string> group_by_fields;
+        vector<string> having_conditions;
+        vector<string> order_by_clauses;
+        int limit_count = -1;
+        int offset_count = -1;
+        bool distinct = false;
+    };
+
+    struct insert_data {
+        vector<string> fields;
+        vector<string> placeholders;
+    };
+
+    struct update_data {
+        vector<string> assignments;
+    };
+
 private:
     SQL_OPERATE_TYPE sql_type_ = SQL_OPERATE_TYPE::SELECT;
     string table_;
@@ -169,9 +169,9 @@ public:
 
     sql_builder& reset() noexcept;
 
-    NEFORCE_NODISCARD SQL_OPERATE_TYPE get_type() const noexcept { return sql_type_; }
-    NEFORCE_NODISCARD string_view get_table() const noexcept { return table_.view(); }
-    NEFORCE_NODISCARD bool empty() const noexcept { return table_.empty(); }
+    NEFORCE_NODISCARD SQL_OPERATE_TYPE type() const noexcept { return sql_type_; }
+    NEFORCE_NODISCARD string_view table() const noexcept { return table_.view(); }
+    NEFORCE_NODISCARD bool is_empty() const noexcept { return table_.empty(); }
 
     NEFORCE_NODISCARD string build() const;
 };

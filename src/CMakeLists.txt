@@ -82,7 +82,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/arp.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/mac_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
@@ -189,8 +191,8 @@ nexusforce_compiler_options(NexusForce)
 # 链接系统库
 if(WIN32)
     target_link_libraries(NexusForce PUBLIC
-            ws2_32 wsock32 SetupAPI cfgmgr32 pdh
-            DbgHelp synchronization Shell32 Psapi
+            cfgmgr32 DbgHelp iphlpapi Psapi pdh
+            SetupAPI Shell32 synchronization ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(NexusForce PUBLIC

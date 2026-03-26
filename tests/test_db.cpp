@@ -102,7 +102,12 @@ void test_mysql() {
 #ifdef NEFORCE_SUPPORT_MYSQL
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
-    database_pool pool(db_type::MYSQL, mysql_config, 10, 20, seconds{2});
+    database_pool pool(
+        db_type::MYSQL,
+        mysql_config,
+        database_pool::pool_config{
+            .max_idle_time = seconds{2}
+        });
 
     const auto sql = sql_builder()
         .select({"ISBN", "BookName"})
@@ -128,7 +133,13 @@ void test_mysql() {
 void test_redis() {
 #ifdef NEFORCE_SUPPORT_HIREDIS
     db_config redis_config = db_config::for_redis("0");
-    database_pool pool(db_type::REDIS, redis_config, 10, 20, seconds{2});
+    database_pool pool(
+        db_type::REDIS,
+        redis_config,
+        database_pool::pool_config{
+            .max_idle_time = seconds{2}
+        });
+
     auto conn = dynamic_pointer_cast<redis_connect>(pool.get_kv_connect());
     println(conn->is_valid());
     println(conn->update("SET age 20"));
@@ -146,7 +157,12 @@ void test_pgsql() {
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
     db_config postgre_config = db_config::for_postgresql();
     postgre_config.password = "483674";
-    database_pool pool(db_type::POSTGRESQL, postgre_config, 10, 20, seconds{2});
+    database_pool pool(
+        db_type::POSTGRESQL,
+        postgre_config,
+        database_pool::pool_config{
+            .max_idle_time = seconds{2}
+        });
 
     const auto sql = sql_builder()
         .select({"username", "email"})
@@ -172,48 +188,56 @@ void test_pgsql() {
 
 void test_dbpool() {
 #ifdef NEFORCE_SUPPORT_MYSQL
-    auto begin = timestamp::now();
     db_config mysql_config = db_config::for_mysql("book");
     mysql_config.password = "147258hu";
 
+    database_pool pool(
+        db_type::MYSQL,
+        mysql_config,
+        database_pool::pool_config{
+            .init_size = 20,
+            .min_size = 10,
+            .max_idle_time = seconds{2}
+        });
+
+    click c;
+    c.start();
+
     {
-        database_pool pool(db_type::MYSQL, mysql_config);
-        for (int i = 0; i < 5000; i++) {
-            bool fin = pool.get_connect()->update("SELECT 1");
-        }
-        println(timestamp::now() - begin);
-
-        auto result = pool.get_tb_connect()->query("SELECT * FROM book");
-        while (result->next()) {
-            for (int i = 0; i < result->column_count(); i++) {
-                if (i == 2) {
-                    int count = result->get_int16(i);
-                    print("collected :", count, ", ");
-                } else if (i == 3) {
-                    float count = result->get_float32(i);
-                    print("usable :", count, ", ");
-                } else if (i == 5) {
-                    _NEFORCE datetime dt = result->get_datetime(i);
-                    print("date: ", dt, ", ");
-                } else {
-                    print(result->get(i), ", ");
+        vector<thread> threads;
+        threads.reserve(20);
+        for (int t = 0; t < 20; t++) {
+            threads.emplace_back([&pool] {
+                for (int i = 0; i < 25; i++) {
+                    auto conn = pool.get_connect();
+                    NEFORCE_IGNORE conn->update("SELECT SLEEP(0.01)");
                 }
-            }
-            println();
+            });
         }
-        println(result->row_count(), ", ", result->column_count());
+        for (auto& t : threads) t.join();
     }
 
-    begin = timestamp::now();
-    for (int i = 0; i < 5000; i++) {
-        char sql[power(2, 10)] = {};
-        _NEFORCE sprintf(sql, "SELECT 1");
-        auto* conn = new mysql_connect();
-        if(conn->connect(mysql_config)) {
-            (void) conn->update(sql);
+    c.stop();
+    println("pool: ", c.during_s().count());
+
+    c.start();
+
+    {
+        vector<thread> threads;
+        for (int t = 0; t < 20; t++) {
+            threads.emplace_back([&mysql_config] {
+                for (int i = 0; i < 25; i++) {
+                    auto* conn = new mysql_connect();
+                    NEFORCE_IGNORE conn->connect(mysql_config);
+                    NEFORCE_IGNORE conn->update("SELECT SLEEP(0.01)");
+                    delete conn;
+                }
+            });
         }
-        delete conn;
+        for (auto& t : threads) t.join();
     }
-    println(timestamp::now() - begin);
+
+    c.stop();
+    println("raw: ", c.during_s().count());
 #endif
 }

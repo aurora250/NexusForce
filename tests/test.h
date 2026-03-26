@@ -35,6 +35,7 @@ void test_http_client();
 void test_dns();
 void test_traceroute();
 void test_ping();
+void test_arp();
 
 void test_ini();
 void test_env();

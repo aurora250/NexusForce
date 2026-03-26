@@ -613,6 +613,11 @@ public:
         return color(255, 255, 255, 255);
     }
 
+    /** @brief 灰色 */
+    static constexpr color gray() noexcept {
+        return color(128, 128, 128, 255);
+    }
+
     /** @brief 红色 */
     static constexpr color red() noexcept {
         return color(255, 0, 0, 255);
