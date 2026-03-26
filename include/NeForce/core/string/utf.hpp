@@ -2,10 +2,10 @@
 #define NEFORCE_CORE_STRING_CHARACTER_HPP__
 
 /**
- * @file character.hpp
- * @brief 字符类型包装类
+ * @file utf.hpp
+ * @brief UTF字符包装类
  *
- * 此文件提供了各种字符类型的包装类。
+ * 此文件提供了UTF字符的包装类。
  * 每个包装类都支持字符到各种UTF字符串类型的转换。
  */
 

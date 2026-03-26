@@ -1284,7 +1284,7 @@ struct atomic_flag {
 		bool;
 #endif
 
-	value_type flag_;   ///< 原子标志值
+	value_type flag_{0};   ///< 原子标志值
 
 	atomic_flag() noexcept = default;
 	atomic_flag(const atomic_flag&) = delete;

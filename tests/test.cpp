@@ -797,6 +797,7 @@ void test_tpool() {
             pool.submit_task(test_print);
             pool.submit_task(test_env_var);
             pool.submit_task(test_rnd);
+            pool.submit_task(test_atomic);
             pool.submit_task(test_regex);
             pool.submit_task(test_format);
             pool.submit_task(test_color);

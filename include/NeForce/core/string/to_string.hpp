@@ -12,7 +12,7 @@
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/algorithm/type_erase.hpp"
-#include "NeForce/core/string/character.hpp"
+#include "NeForce/core/string/utf.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

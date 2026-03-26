@@ -9,7 +9,6 @@
  */
 
 #include "NeForce/core/functional/apply.hpp"
-#include "NeForce/core/exception/terminate.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/async/this_thread.hpp"
@@ -160,8 +159,17 @@ private:
         void run() override { func_(); }
     };
 
-    struct thread_monitor {
-        thread_monitor() noexcept;
+    struct thread_startup_args {
+        unique_ptr<data_base> data;
+        thread* self;
+    };
+
+    struct NEFORCE_API thread_monitor {
+    private:
+        const thread* self_;
+
+    public:
+        thread_monitor(const thread* self) noexcept;
         ~thread_monitor();
     };
 
@@ -186,19 +194,7 @@ private:
 #else
     static void*
 #endif
-    thread_entry(void* arg) {
-        const unique_ptr<data_base> data(static_cast<data_base*>(arg));
-        try {
-            data->run();
-        } catch (...) {
-            terminate();
-        }
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return 0;
-#else
-        return nullptr;
-#endif
-    }
+    thread_entry(void* arg);
 
     /**
      * @brief 启动线程实现
@@ -206,7 +202,7 @@ private:
      * @throw thread_exception 如果线程创建失败
      * @note 线程的执行目标报错将导致进程终止
      */
-    void start_thread_impl(void* args);
+    void start_thread_impl(thread_startup_args* args);
 
     /**
      * @brief 启动线程
@@ -218,9 +214,7 @@ private:
     template <typename F>
     void start_thread(F&& f) {
         auto data = _NEFORCE make_unique<thread_data<decay_t<F>>>(_NEFORCE forward<F>(f));
-        this->start_thread_impl(data.get());
-        data.release();
-        state_ = CREATED;
+        this->start_thread_impl(new thread_startup_args{_NEFORCE move(data), this});
     }
 
 public:
@@ -246,7 +240,6 @@ public:
     template <typename F, typename... Args, typename = enable_if_t<!is_same_v<decay_t<F>, thread>>>
     explicit thread(F&& f, Args&&... args) {
         auto func = [func = _NEFORCE move(f), args = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...)]() mutable {
-            thread_monitor monitor{};
             return _NEFORCE apply(_NEFORCE move(func), _NEFORCE move(args));
         };
         thread::start_thread(_NEFORCE move(func));
@@ -323,15 +316,19 @@ public:
      */
     void detach();
 
+    bool name(char* buffer, size_t size) const;
+
+    void set_name(const char* name);
+
     /**
      * @brief 交换两个线程对象
      * @param other 要交换的线程对象
      */
-    void swap(thread& other) noexcept {
-        _NEFORCE swap(handle_, other.handle_);
-        _NEFORCE swap(id_, other.id_);
-        _NEFORCE swap(state_, other.state_);
-    }
+    void swap(thread& other) noexcept;
+
+    static void set_name(native_handle_type handle, const char* name);
+
+    static bool name(native_handle_type handle, char* buffer, size_t size);
 };
 
 /** @} */ // Thread
@@ -354,6 +351,22 @@ NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept {
 #else
     return thread::id(::pthread_self());
 #endif
+}
+
+NEFORCE_ALWAYS_INLINE_INLINE thread::native_handle_type handle() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return ::GetCurrentThread();
+#else
+    return ::pthread_self();
+#endif
+}
+
+NEFORCE_ALWAYS_INLINE_INLINE bool name(char* buffer, size_t size) {
+    return thread::name(this_thread::handle(), buffer, size);
+}
+
+NEFORCE_ALWAYS_INLINE_INLINE void set_name(const char* name) {
+    thread::set_name(this_thread::handle(), name);
 }
 
 /** @} */ // Thread

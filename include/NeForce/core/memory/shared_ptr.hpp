@@ -997,18 +997,20 @@ private:
             value_.fetch_sub(1, mo);
         }
 
-        void swap_unlock(count_type* counter, memory_order mo) noexcept {
+        count_type* swap_unlock(count_type* counter, memory_order mo) noexcept {
             if (mo != memory_order_seq_cst) {
                 mo = memory_order_release;
             }
             auto addr = reinterpret_cast<uintptr_t>(counter);
             addr = value_.exchange(addr, mo);
-            counter = reinterpret_cast<count_type*>(addr & ~lock_bit);
+            return reinterpret_cast<count_type*>(addr & ~lock_bit);
         }
 
         void wait_unlock(memory_order mo) const noexcept {
-            const auto value = value_.fetch_sub(1, memory_order_relaxed);
-            value_.wait(value & ~lock_bit, mo);
+            auto old_value = value_.load(memory_order_relaxed);
+            auto unlocked = old_value & ~lock_bit;
+            value_.fetch_sub(1, memory_order_release);
+            value_.wait(unlocked, mo);
         }
 
         void notify_one() noexcept {
@@ -1064,17 +1066,19 @@ public:
     void swap(value_type& value, memory_order mo) noexcept {
         refcount_.lock(memory_order_acquire);
         _NEFORCE swap(ptr_, value.ptr_);
-        refcount_.swap_unlock(value.owner_, mo);
+        auto* old_owner = refcount_.swap_unlock(value.owner_, mo);
+        value.owner_ = old_owner;
     }
 
     bool compare_exchange_strong(value_type& expected, value_type desired, memory_order mo1, memory_order mo2) noexcept {
         bool result = true;
-        auto counter = refcount_.lock(memory_order_acquire);
+        auto* counter = refcount_.lock(memory_order_acquire);
         if (ptr_ == expected.ptr_ && counter == expected.owner_) {
             ptr_ = desired.ptr_;
-            refcount_.swap_unlock(desired.owner_, mo1);
+            auto* old_owner = refcount_.swap_unlock(desired.owner_, mo1);
+            desired.owner_ = old_owner;
         } else {
-            T sink = move(expected);
+            value_type sink = _NEFORCE move(expected);
             expected.ptr_ = ptr_;
             expected.owner_ = add_ref(counter);
             refcount_.unlock(mo2);
@@ -1084,7 +1088,7 @@ public:
     }
 
     void wait(value_type mold, memory_order mo) const noexcept {
-        auto counter = refcount_.lock(memory_order_acquire);
+        auto* counter = refcount_.lock(memory_order_acquire);
         if (ptr_ == mold.ptr_ && counter == mold.owner_) {
             refcount_.wait_unlock(mo);
         } else {

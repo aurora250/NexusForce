@@ -8,19 +8,6 @@
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-enum class THREAD_POOL_MODE : uint8_t {
-	MODE_FIXED,
-	MODE_CACHED
-};
-
-enum class STEAL_STRATEGY : uint8_t {
-	HALF,
-	FIXED_BATCH,
-	SINGLE,
-	ADAPTIVE
-};
-
-
 NEFORCE_BEGIN_INNER__
 
 class NEFORCE_API manual_thread {
@@ -72,10 +59,17 @@ struct task_group {
 
 class NEFORCE_API local_queue {
 public:
+	enum class steal_strategy : uint8_t {
+		half,
+		fixed_batch,
+		single,
+		adaptive
+	};
+
 	static constexpr size_t queue_size = 256;
 
 private:
-	static STEAL_STRATEGY steal_strategy_;
+	static steal_strategy steal_strategy_;
 	static uint32_t fixed_batch_size_;
 
 	array<function<void()>, queue_size> tasks_{};
@@ -121,7 +115,7 @@ public:
 		return static_cast<size_t>(tail - local_head);
 	}
 
-	static void set_steal_strategy(const STEAL_STRATEGY strategy, const uint32_t batch_size = 4) {
+	static void set_steal_strategy(const steal_strategy strategy, const uint32_t batch_size = 4) {
 		steal_strategy_ = strategy;
 		fixed_batch_size_ = batch_size;
 	}
@@ -154,29 +148,18 @@ struct NEFORCE_API worker_context {
 };
 
 
-enum class TASK_STATUS {
-	PENDING,
-	RUNNING,
-	COMPLETED,
-	FAILED
-};
-
-NEFORCE_CONSTEXPR20 string to_string(const TASK_STATUS status) {
-	switch (status) {
-		case TASK_STATUS::PENDING: return "PENDING";
-		case TASK_STATUS::RUNNING: return "RUNNING";
-		case TASK_STATUS::COMPLETED: return "COMPLETED";
-		case TASK_STATUS::FAILED: return "FAILED";
-		default: unreachable();
-	}
-}
-
-
 struct task_info {
+	enum class status {
+		pending,
+		running,
+		completed,
+		failed
+	};
+
 	enum class priority_type : uint32_t {};
 
 	const uint64_t id;
-	atomic<TASK_STATUS> status{TASK_STATUS::PENDING};
+	atomic<status> status{status::pending};
 	timestamp submit_time{timestamp::now()};
 	timestamp start_time{0};
 	timestamp finish_time{0};
@@ -189,7 +172,7 @@ struct task_info {
 
 	NEFORCE_NODISCARD bool is_finished() const noexcept {
 		const auto s = status.load(memory_order_acquire);
-		return s == TASK_STATUS::COMPLETED || s == TASK_STATUS::FAILED;
+		return s == status::completed || s == status::failed;
 	}
 
 	NEFORCE_NODISCARD int64_t exec_time() const noexcept {
@@ -214,6 +197,11 @@ struct submit_result {
 
 class NEFORCE_API thread_pool {
 public:
+	enum class pool_mode : uint8_t {
+		fixed,
+		cached
+	};
+
 	struct periodic_task_state {
 		atomic_bool cancelled{false};
 	};
@@ -230,6 +218,7 @@ public:
 		NEFORCE_NODISCARD string to_string() const;
 	};
 
+	using steal_strategy = local_queue::steal_strategy;
     using id_type = inner::manual_thread::id_type;
 	using periodic_token = shared_ptr<periodic_task_state>;
 	using priority_type = task_info::priority_type;
@@ -274,7 +263,7 @@ private:
 	condition_variable not_empty_{};
 	condition_variable exit_cond_{};
 
-	atomic<THREAD_POOL_MODE> pool_mode_{THREAD_POOL_MODE::MODE_FIXED};
+	atomic<pool_mode> pool_mode_{pool_mode::fixed};
 	atomic_bool is_running_{false};
 
 	atomic_size_t total_submitted_tasks_{0};
@@ -304,14 +293,14 @@ public:
     thread_pool(thread_pool&&) = default;
     thread_pool& operator =(thread_pool&&) = default;
 
-    bool set_mode(THREAD_POOL_MODE mode) noexcept;
-	bool set_steal_mode(STEAL_STRATEGY strategy, uint32_t steal_batch = 4) noexcept;
+    bool set_mode(pool_mode mode) noexcept;
+	bool set_steal_mode(steal_strategy strategy, uint32_t steal_batch = 4) noexcept;
     bool set_task_threshhold(size_t threshhold) noexcept;
     bool set_thread_threshhold(size_t threshhold) noexcept;
 
     NEFORCE_NODISCARD static size_t max_thread_size() noexcept { return max_threshhold; }
     NEFORCE_NODISCARD bool running() const noexcept { return is_running_; }
-    NEFORCE_NODISCARD THREAD_POOL_MODE mode() const noexcept { return pool_mode_; }
+    NEFORCE_NODISCARD pool_mode mode() const noexcept { return pool_mode_; }
 	NEFORCE_NODISCARD pool_statistics statistics() const;
 
     bool start(size_t init_thread_size = 3);
@@ -383,7 +372,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 
 		 		explicit context_guard(shared_ptr<task_info> i, shared_ptr<task_group> g)
 		 		: info(move(i)), group_inner(move(g)) {
-				 	info->status.store(TASK_STATUS::RUNNING, memory_order_release);
+				 	info->status.store(task_info::status::running, memory_order_release);
 				 	info->start_time = timestamp::now();
 				 	info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
 
@@ -394,9 +383,9 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		 		~context_guard() noexcept {
 		 			try {
 		 				info->finish_time = timestamp::now();
-						auto expected = TASK_STATUS::RUNNING;
+						auto expected = task_info::status::running;
 					       info->status.compare_exchange_strong(expected,
-						       TASK_STATUS::COMPLETED, memory_order_release);
+						       task_info::status::completed, memory_order_release);
 
 		 				get_current_task_group() = prev_group_inner;
 						if (group_inner) group_inner->decrement();
@@ -410,11 +399,11 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 			try {
 				return _NEFORCE apply(func, args);
 			} catch (const exception& e) {
-				info->status.store(TASK_STATUS::FAILED, memory_order_release);
+				info->status.store(task_info::status::failed, memory_order_release);
 				info->error = e.what();
 				throw;
 			} catch (...) {
-				info->status.store(TASK_STATUS::FAILED, memory_order_release);
+				info->status.store(task_info::status::failed, memory_order_release);
 				info->error = "Unknown exception";
 				throw;
 			}
@@ -430,7 +419,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 			return task_queue_.size() < task_threshhold_;
 		})) {
-			info->status.store(TASK_STATUS::FAILED, memory_order_release);
+			info->status.store(task_info::status::failed, memory_order_release);
 			info->error = "Task queue is full";
 
 			auto dummy_task = _NEFORCE make_shared<packaged_task<Result()>>(
@@ -455,7 +444,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 			if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 				return task_queue_.size() < task_threshhold_;
 			})) {
-				info->status.store(TASK_STATUS::FAILED, memory_order_release);
+				info->status.store(task_info::status::failed, memory_order_release);
 				info->error = "Task queue is full";
 
 				auto dummy_task = _NEFORCE make_shared<packaged_task<Result()>>(
@@ -471,28 +460,41 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		}
 	}
 
-	if (pool_mode_.load() == THREAD_POOL_MODE::MODE_CACHED
-		&& task_size_.load() > idle_thread_size_
-		&& threads_map_.size() < thread_threshhold_) {
+	if (pool_mode_.load() == pool_mode::cached
+		&& task_size_.load() > idle_thread_size_) {
 
-		unique_ptr<inner::manual_thread> ptr = _NEFORCE make_unique<inner::manual_thread>(
-			[this](const id_type id) {
-				thread_function(id);
-			});
-		id_type thread_id = ptr->id();
+		inner::manual_thread* t_ptr = nullptr;
+		id_type thread_id = 0;
 
-	    if (thread_id >= worker_contexts_ptr_.size()) {
-	        worker_contexts_ptr_.reserve(thread_id + 1);
-	        for (size_t i = worker_contexts_ptr_.size() - 1; i <= thread_id; i++) {
-	            atomic<worker_context*> tmp;
-	            tmp.store(nullptr, memory_order_relaxed);
-	            worker_contexts_ptr_.emplace_back(move(tmp));
-	        }
-	    }
+		{
+			smart_lock<mutex> lock(task_queue_mtx_);
+			if (threads_map_.size() < thread_threshhold_) {
+				auto ptr = _NEFORCE make_unique<inner::manual_thread>(
+					[this](const id_type id) {
+						thread_function(id);
+					});
 
-		threads_map_.emplace(thread_id, move(ptr));
-		threads_map_[thread_id]->start();
-		++idle_thread_size_;
+				thread_id = ptr->id();
+				t_ptr = ptr.get();
+				threads_map_.emplace(thread_id, move(ptr));
+			}
+		}
+
+		if (t_ptr != nullptr) {
+			{
+				lock<mutex> ctx_lock(worker_contexts_mtx_);
+				if (thread_id >= worker_contexts_ptr_.size()) {
+					worker_contexts_ptr_.reserve(thread_id + 1);
+					for (size_t i = worker_contexts_ptr_.size(); i <= thread_id; i++) {
+						atomic<worker_context*> tmp;
+						tmp.store(nullptr, memory_order_relaxed);
+						worker_contexts_ptr_.emplace_back(move(tmp));
+					}
+				}
+			}
+
+			t_ptr->start();
+		}
 	}
 
 	return submit_result<Result>{move(res), move(info)};
@@ -515,16 +517,16 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 				shared_ptr<task_info> info;
 
 		 		explicit context_guard(shared_ptr<task_info> i) : info(move(i)) {
-				 	info->status.store(TASK_STATUS::RUNNING, memory_order_release);
+				 	info->status.store(task_info::status::running, memory_order_release);
 				 	info->start_time = timestamp::now();
 				 	info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
 		 		}
 
 		 		~context_guard() noexcept {
 				 	info->finish_time = timestamp::now();
-				 	auto expected = TASK_STATUS::RUNNING;
+				 	auto expected = task_info::status::running;
 					info->status.compare_exchange_strong(expected,
-						TASK_STATUS::COMPLETED, memory_order_release);
+						task_info::status::completed, memory_order_release);
 		 		}
 		 	};
 
@@ -533,7 +535,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 			try {
 				return _NEFORCE apply(func, tup);
 			} catch (const exception& e) {
-				info->status.store(TASK_STATUS::FAILED, memory_order_release);
+				info->status.store(task_info::status::failed, memory_order_release);
 				info->error = e.what();
 				throw;
 			}
