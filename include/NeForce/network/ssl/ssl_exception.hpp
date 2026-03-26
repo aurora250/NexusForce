@@ -1,6 +1,5 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -39,5 +38,4 @@ struct NEFORCE_API ssl_exception final : network_exception {
 /** @} */ // Exceptions
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__

@@ -1,13 +1,5 @@
 #ifndef NEFORCE_CORE_ASYNC_THREAD_HPP__
 #define NEFORCE_CORE_ASYNC_THREAD_HPP__
-
-/**
- * @file thread.hpp
- * @brief 线程支持
- *
- * 此文件提供了线程类和相关操作。
- */
-
 #include "NeForce/core/functional/apply.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
@@ -113,6 +105,22 @@ public:
         }
     };
 
+    struct NEFORCE_API hook {
+        enum class point {
+            before_create,
+            after_create,
+            thread_start,
+            thread_end,
+            before_destroy
+        };
+
+        using callback_t = void(*)(point point, id thread_id);
+
+        static void add_hook(callback_t hook);
+        static void remove_hook(callback_t hook);
+        static void invoke(point point, id thread_id);
+    };
+
 private:
     /**
      * @enum state
@@ -143,33 +151,25 @@ private:
      */
     template <typename Callable>
     struct thread_data final : data_base {
-        Callable func_;  ///< 要执行的可调用对象
+        Callable func_;
 
-        /**
-         * @brief 构造函数
-         * @tparam F 可调用对象类型
-         * @param f 可调用对象
-         */
         template <typename F>
         explicit thread_data(F&& f) : func_(_NEFORCE forward<F>(f)) {}
 
-        /**
-         * @brief 执行可调用对象
-         */
         void run() override { func_(); }
     };
 
     struct thread_startup_args {
         unique_ptr<data_base> data;
-        thread* self;
+        id thread_id;
     };
 
     struct NEFORCE_API thread_monitor {
     private:
-        const thread* self_;
+        id thread_id_;
 
     public:
-        thread_monitor(const thread* self) noexcept;
+        thread_monitor(id thread_id);
         ~thread_monitor();
     };
 
@@ -196,25 +196,12 @@ private:
 #endif
     thread_entry(void* arg);
 
-    /**
-     * @brief 启动线程实现
-     * @param args 线程数据指针
-     * @throw thread_exception 如果线程创建失败
-     * @note 线程的执行目标报错将导致进程终止
-     */
     void start_thread_impl(thread_startup_args* args);
 
-    /**
-     * @brief 启动线程
-     * @tparam F 可调用对象类型
-     * @param f 要执行的可调用对象
-     * @throw thread_exception 如果线程创建失败
-     * @note 线程的执行目标报错将导致进程终止
-     */
     template <typename F>
     void start_thread(F&& f) {
         auto data = _NEFORCE make_unique<thread_data<decay_t<F>>>(_NEFORCE forward<F>(f));
-        this->start_thread_impl(new thread_startup_args{_NEFORCE move(data), this});
+        this->start_thread_impl(new thread_startup_args{_NEFORCE move(data), id_});
     }
 
 public:
@@ -245,14 +232,7 @@ public:
         thread::start_thread(_NEFORCE move(func));
     }
 
-    /**
-     * @note 禁止复制构造
-     */
     thread(const thread&) = delete;
-
-    /**
-     * @note 禁止复制赋值
-     */
     thread& operator =(const thread&) = delete;
 
     /**
@@ -316,9 +296,8 @@ public:
      */
     void detach();
 
+    bool set_name(const char* name);
     bool name(char* buffer, size_t size) const;
-
-    void set_name(const char* name);
 
     /**
      * @brief 交换两个线程对象
@@ -326,8 +305,7 @@ public:
      */
     void swap(thread& other) noexcept;
 
-    static void set_name(native_handle_type handle, const char* name);
-
+    static bool set_name(native_handle_type handle, const char* name);
     static bool name(native_handle_type handle, char* buffer, size_t size);
 };
 
@@ -365,8 +343,8 @@ NEFORCE_ALWAYS_INLINE_INLINE bool name(char* buffer, size_t size) {
     return thread::name(this_thread::handle(), buffer, size);
 }
 
-NEFORCE_ALWAYS_INLINE_INLINE void set_name(const char* name) {
-    thread::set_name(this_thread::handle(), name);
+NEFORCE_ALWAYS_INLINE_INLINE bool set_name(const char* name) {
+    return thread::set_name(this_thread::handle(), name);
 }
 
 /** @} */ // Thread

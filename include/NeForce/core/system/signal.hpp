@@ -82,9 +82,9 @@ public:
     using signal_handler = function<bool(SIGNAL_EVENT, void*)>;
 
 private:
-    atomic_bool running_{false};
-    atomic_bool force_exit_{false};
-    atomic_int force_exit_timeout_{5000};
+    atomic<bool> running_{false};
+    atomic<bool> force_exit_{false};
+    atomic<int> force_exit_timeout_{5000};
 
     mutex mutex_;
     condition_variable cv_;

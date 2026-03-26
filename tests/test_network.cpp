@@ -2,7 +2,7 @@
 
 void handle_session_api(
     http_request &request, http_response &response, http_server &server) {
-    session *sess = server.get_session(request);
+    http_session *sess = server.get_session(request);
     string action = request.parameter("action");
 
     if (action == "create") {
@@ -78,7 +78,7 @@ void handle_session_attribute(http_request &request, http_response &response, ht
         attrValue = request.parameter("attrValue");
     }
 
-    session *sess = server.get_session(request, true);
+    http_session *sess = server.get_session(request, true);
 
     if (!attrName.empty()) {
         (*sess)[attrName] = attrValue;
@@ -145,7 +145,7 @@ void handle_cookie_api(
         }
 
         if (!name.cookie_name().empty()) {
-            cookie ck;
+            http_cookie ck;
             ck.name = name;
             ck.value = value;
             if (!max_age_str.empty()) {
@@ -173,7 +173,7 @@ void handle_cookie_api(
     else if (request.method.is_delete()) {
         HTTP_COOKIE_NAME name(request.parameter("name"));
         if (!name.cookie_name().empty()) {
-            cookie ck;
+            http_cookie ck;
             ck.name = name;
             ck.max_age = 0;
             ck.expires = datetime::epoch();
@@ -193,7 +193,6 @@ void handle_cookie_api(
 }
 
 void test_https_server() {
-#ifdef NEFORCE_SUPPORT_OPENSSL
     try {
         https_server server(8443, 128);
         server.load_certificate("D:/OpenSSL/server.crt", "D:/OpenSSL/server.key");
@@ -292,7 +291,6 @@ void test_https_server() {
     } catch (const exception& e) {
         printcln(color::red(), "HTTPS Server error: " + string(e.what()));
     }
-#endif
 }
 
 void test_http_server() {
@@ -486,6 +484,24 @@ void test_http_client() {
     } catch (const exception& e) {
         printcln(color::red(), "HTTP Client error: " + string(e.what()));
     }
+}
+
+void test_download() {
+    http_client::config config;
+    config.connect_timeout = seconds(10);
+    config.receive_timeout = seconds(15);
+    config.follow_redirects = true;
+    config.max_redirects = 5;
+    config.max_response_size = numeric_traits<size_t>::max();
+    config.verify_ssl = true;
+    http_client client(config);
+
+    const path pem = res_root() / "cacert.pem";
+    client.get_client().load_ca_file(pem.str());
+    const bool res = client.download_file(
+        "https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe",
+        res_root() / "python.exe");
+    println("Download result:", res);
 }
 
 void test_dns() {
@@ -688,4 +704,36 @@ void test_arp() {
             println("MAC address not resolved");
         }
     }
+}
+
+void test_smtp() {
+    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ctx.set_default_options();
+    const path pem = res_root() / "cacert.pem";
+    ctx.load_verify_locations(pem.str());
+
+    dns_client dns;
+
+    smtp_socket smtp;
+    smtp.connect(
+       "smtp.qq.com",
+       465,
+       "myhost.local",
+       smtp_socket::tls_mode::implicit,
+       &dns,
+       &ctx,
+       "smtp.qq.com"
+    );
+
+    file code{res_root() / "authcode"};
+    smtp.authenticate("1737900250@qq.com", code.read(), smtp_socket::auth_method::login);
+
+    smtp_message msg;
+    msg.from    = "1737900250@qq.com";
+    msg.to      = { "1737900250@qq.com" };
+    msg.subject = "Hello from NeForce";
+    msg.body    = "This is a test email sent to QQ mailbox.";
+
+    smtp.send(msg);
+    smtp.disconnect();
 }

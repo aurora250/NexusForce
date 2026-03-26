@@ -1,8 +1,9 @@
 #ifndef NEFORCE_NETWORK_WEBSOCKET_HPP__
 #define NEFORCE_NETWORK_WEBSOCKET_HPP__
-#include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/container/queue.hpp"
+#include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/endian.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
@@ -407,9 +408,7 @@ public:
 };
 
 template class websocket_session<tcp_socket>;
-#ifdef NEFORCE_SUPPORT_OPENSSL
 template class websocket_session<ssl_socket>;
-#endif
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_WEBSOCKET_HPP__

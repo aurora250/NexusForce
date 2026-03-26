@@ -87,7 +87,7 @@ http_server_base::session_manager::~session_manager() {
     }
 }
 
-session* http_server_base::session_manager::get_session(const string& session_id, const bool create) {
+http_session* http_server_base::session_manager::get_session(const string& session_id, const bool create) {
     lock<mutex> lock(mutex_);
 
     const auto session_iter = sessions_.find(session_id);
@@ -116,7 +116,7 @@ session* http_server_base::session_manager::get_session(const string& session_id
             new_id = generate_session_id();
         }
 
-        session tmp;
+        http_session tmp;
         tmp.id = new_id;
         const auto pir = sessions_.emplace(new_id, move(tmp));
         return &pir.first->second;
@@ -340,13 +340,13 @@ http_request http_server_base::parse_request(
     return request;
 }
 
-session* http_server_base::get_or_create_session(
+http_session* http_server_base::get_or_create_session(
     http_request& request,
     const bool create,
     session_manager& manager,
     const HTTP_COOKIE_NAME& name) {
 
-    session* sess = request.session;
+    http_session* sess = request.session;
     if (sess) return sess;
 
     const string& session_id = request.cookie(name.cookie_name());
@@ -406,14 +406,14 @@ void http_server_base::send_response(tcp_socket* client_socket, const http_respo
 void http_server_base::add_session_cookie(
     const http_request& request,
     http_response& response,
-    session* session,
+    http_session* session,
     const HTTP_COOKIE_NAME& name) {
 
     if (!session || !session->is_new) {
         return;
     }
 
-    cookie session_cookie;
+    http_cookie session_cookie;
     session_cookie.name = name;
     session_cookie.value = session->id;
     session_cookie.http_only = true;

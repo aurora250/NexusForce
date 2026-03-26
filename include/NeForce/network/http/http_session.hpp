@@ -1,12 +1,11 @@
 #ifndef NEFORCE_NETWORK_HTTP_COOKIE_HPP__
 #define NEFORCE_NETWORK_HTTP_COOKIE_HPP__
-#include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/network/http/http_constants.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-struct NEFORCE_API cookie : istringify<cookie> {
+struct NEFORCE_API http_cookie : istringify<http_cookie> {
     HTTP_COOKIE_NAME name{};
     string value{};
     string domain{};
@@ -26,7 +25,7 @@ struct NEFORCE_API cookie : istringify<cookie> {
 };
 
 
-struct NEFORCE_API session : istringify<session> {
+struct NEFORCE_API http_session : istringify<http_session> {
     string id;
     unordered_map<string, string> data;
     datetime last_access{datetime::now()};

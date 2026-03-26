@@ -264,4 +264,28 @@ optional<ip_address> socket_base::remote_endpoint() const {
     return none;
 }
 
+void socket_base::bind(const ip_address& endpoint) {
+    if (!is_open()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
+    }
+
+    if (!endpoint.is_valid()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint for UDP bind"));
+    }
+
+    if (::bind(fd_, endpoint.data(), endpoint.size()) < 0) {
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to bind UDP socket to endpoint"));
+    }
+}
+
+void socket_base::listen(const int backlog) {
+    if (!is_open()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
+    }
+
+    if (::listen(fd_, backlog) < 0) {
+        NEFORCE_THROW_EXCEPTION(socket_exception("PORT: listen failed"));
+    }
+}
+
 NEFORCE_END_NAMESPACE__

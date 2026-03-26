@@ -86,7 +86,7 @@ namespace {
     }
 
 
-    cookie parse_set_cookie(const string_view str, string default_domain, string default_path) {
+    http_cookie parse_set_cookie(const string_view str, string default_domain, string default_path) {
         vector<string_view> tokens;
         size_t start = 0, end;
 
@@ -96,7 +96,7 @@ namespace {
         }
         tokens.push_back(str.substr(start).trim());
 
-        cookie c{};
+        http_cookie c{};
         if (tokens.empty()) return c;
 
         const size_t eq_pos = tokens[0].find('=');
@@ -142,7 +142,8 @@ namespace {
         return c;
     }
 
-    bool parse_response(const string_view resp_str, http_client_response& resp) {
+    bool parse_response(const string_view resp_str, http_client_response& resp,
+                        const string& request_host, const string& request_path) {
         const size_t line_end = resp_str.find("\r\n");
         if (line_end == string::npos) {
             return false;
@@ -212,7 +213,7 @@ namespace {
                 key_lower.lowercase();
 
                 if (key_lower == "set-cookie") {
-                    cookie c = parse_set_cookie(value, resp.header("host"), "/");
+                    http_cookie c = parse_set_cookie(value, request_host, request_path);
                     resp.cookies.emplace_back(move(c));
                 } else if (key_lower == "transfer-encoding") {
                     resp.chunked = value.find("chunked") != string::npos;
@@ -239,8 +240,11 @@ namespace {
                 return false;
             }
         } else if (resp.content_length > 0) {
-            if (body_part.size() < resp.content_length) return false;
-            resp.body += body_part.substr(0, resp.content_length);
+            const size_t to_copy = min(body_part.size(), resp.content_length);
+            resp.body += body_part.substr(0, to_copy);
+            if (to_copy < resp.content_length) {
+                return false;
+            }
         } else {
             resp.body += body_part;
         }
@@ -295,10 +299,7 @@ string http_client::build_request_str(const http_client_request& req, const url&
     string req_str;
     req_str.reserve(1024);
 
-    string full_path = req.path;
-    if (!req.query_params.empty()) {
-        full_path += "?" + build_query_string(req.query_params);
-    }
+    const string full_path = req.build_full_path();
 
     req_str += req.method.method() + " " + full_path + " " + req.version + "\r\n";
 
@@ -375,71 +376,83 @@ bool http_client::send_request(const string_view request_str, time_point& send_s
     }
 }
 
-optional<http_client_response> http_client::read_response(time_point& receive_start) {
+optional<http_client_response> http_client::read_response(
+    time_point& receive_start,
+    const string& request_host,
+    const string& request_path) {
+
     receive_start = steady_clock::now();
 
-    http_client_response response;
     string response_data;
     vector<char> buffer(config_.buffer_size);
 
-    size_t total_received = 0;
-    bool headers_complete = false;
-    size_t header_end_pos = 0;
-
     try {
-        while (response_data.size() < config_.max_response_size) {
+        size_t header_end_pos = string::npos;
+        while (header_end_pos == string::npos) {
             const ssize_t n = client_.receive(buffer.data(), buffer.size());
-
-            if (n <= 0) {
-                break;
-            }
-
+            if (n <= 0) break;
             response_data.append(buffer.data(), n);
-            total_received += n;
-
-            if (!headers_complete) {
-                header_end_pos = response_data.find("\r\n\r\n");
-                if (header_end_pos != string::npos) {
-                    headers_complete = true;
-
-                    http_client_response temp;
-                    if (parse_response(response_data.view(), temp)) {
-                        if (temp.content_length > 0) {
-                            const size_t body_start = header_end_pos + 4;
-                            size_t body_received = response_data.size() - body_start;
-
-                            if (body_received >= temp.content_length) {
-                                break;
-                            }
-
-                            if (progress_callback_) {
-                                progress_callback_(move(body_received), move(temp.content_length));
-                            }
-                        } else if (!temp.chunked) {
-                            // No content-length and not chunked
-                        }
-                    }
-                }
-            } else if (response.content_length > 0) {
-                const size_t body_start = header_end_pos + 4;
-                size_t body_received = response_data.size() - body_start;
-
-                if (progress_callback_) {
-                    progress_callback_(move(body_received), move(response.content_length));
-                }
-
-                if (body_received >= response.content_length) {
-                    break;
-                }
-            }
+            header_end_pos = response_data.find("\r\n\r\n");
         }
 
-        if (!parse_response(response_data.view(), response)) {
+        if (header_end_pos == string::npos) {
             return none;
         }
-        return response;
-    }
-    catch (const exception& e) {
+
+        http_client_response meta;
+        string header_only = response_data.substr(0, header_end_pos + 4);
+        parse_response(header_only.view(), meta, request_host, request_path);
+
+        const size_t body_start = header_end_pos + 4;
+        size_t body_received = response_data.size() - body_start;
+
+        if (meta.content_length > 0) {
+            if (meta.content_length > config_.max_response_size) {
+                return none;
+            }
+
+            response_data.reserve(body_start + meta.content_length);
+
+            while (body_received < meta.content_length) {
+                const ssize_t n = client_.receive(buffer.data(), buffer.size());
+                if (n <= 0) break;
+                response_data.append(buffer.data(), n);
+                body_received += n;
+
+                if (progress_callback_) {
+                    progress_callback_(move(body_received), move(meta.content_length));
+                }
+            }
+
+            if (body_received < meta.content_length) {
+                return none;
+            }
+        } else if (meta.chunked) {
+            while (true) {
+                if (response_data.find("0\r\n\r\n", body_start) != string::npos) {
+                    break;
+                }
+                if (response_data.size() >= config_.max_response_size) break;
+
+                const ssize_t n = client_.receive(buffer.data(), buffer.size());
+                if (n <= 0) break;
+                response_data.append(buffer.data(), n);
+            }
+        } else {
+            while (response_data.size() < config_.max_response_size) {
+                const ssize_t n = client_.receive(buffer.data(), buffer.size());
+                if (n <= 0) break;
+                response_data.append(buffer.data(), n);
+            }
+        }
+
+        http_client_response final_response;
+        if (!parse_response(response_data.view(), final_response, request_host, request_path)) {
+            return none;
+        }
+        return final_response;
+
+    } catch (const exception& e) {
         if (error_callback_) {
             error_callback_(e);
         }
@@ -458,12 +471,10 @@ bool http_client::ensure_connected(const string& host, const uint16_t port) {
     }
 
     try {
-#ifdef NEFORCE_SUPPORT_OPENSSL
         // Set SNI hostname for HTTPS connections
         if (is_https) {
             client_.set_sni_hostname(host);
         }
-#endif
         return client_.connect(host, port);
     } catch (const exception& e) {
         if (error_callback_) {
@@ -503,7 +514,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     response.send_time = time_cast<milliseconds>(steady_clock::now() - send_start);
 
     steady_clock::time_point receive_start;
-    auto resp_opt = read_response(receive_start);
+    auto resp_opt = read_response(receive_start, request.host, request.path);
     if (!resp_opt) {
         response.status = HTTP_STATUS::S5_INTERNAL_ERROR;
         response.status_message = "Receive/Parse failed";
@@ -569,7 +580,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     return response;
 }
 
-void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& request_url) {
+void http_client::update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url) {
     lock<mutex> lk(mutex_);
 
     for (const auto &c : resp_cookies) {
@@ -577,7 +588,11 @@ void http_client::update_cookies(const vector<cookie>& resp_cookies, const url& 
         string path = c.path;
         string key = c.name.cookie_name() + "@" + domain + path;
 
-        if (c.max_age == 0 || (c.is_valid() && c.expires.is_valid() && c.is_expired())) {
+        const bool should_delete =
+            (c.max_age == 0) ||
+            (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired());
+
+        if (should_delete) {
             cookie_jar_.erase(key);
         } else {
             cookie_jar_[key] = c;
@@ -593,7 +608,7 @@ string http_client::build_cookie_header(const url& request_url) const {
         if (c.max_age == 0) {
             continue;
         }
-        if (c.is_valid() && c.is_expired()) {
+        if (c.max_age > 0 && c.is_valid() && c.expires.is_valid() && c.is_expired()) {
             continue;
         }
 
@@ -624,7 +639,7 @@ string http_client::build_cookie_header(const url& request_url) const {
     return cookie_header;
 }
 
-void http_client::set_cookie(const cookie& c, const string& domain, const string& path) {
+void http_client::set_cookie(const http_cookie& c, const string& domain, const string& path) {
     lock<mutex> lk(mutex_);
     const string key = c.name.cookie_name() + "@" + domain + path;
     cookie_jar_[key] = c;
@@ -640,7 +655,6 @@ http_client::http_client(config config)
     client_.set_recv_timeout(config_.receive_timeout);
 }
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
 http_client::http_client(ssl_context ctx, config config)
 : client_(_NEFORCE move(ctx)), config_(_NEFORCE move(config)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
@@ -660,7 +674,6 @@ void http_client::set_verify_ssl(const bool verify) {
     config_.verify_ssl = verify;
     client_.set_verify_peer(verify);
 }
-#endif
 
 http_client_response http_client::get(const string& url, const unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url{url::parse(url.view())};
@@ -825,22 +838,30 @@ http_client_response http_client::patch(
     return request(_NEFORCE move(req));
 }
 
-bool http_client::download_file(const string& url, path output) {
+bool http_client::download_file(const string& url, path output, bool is_binary) {
     try {
-        const auto response = get(url);
+        auto response = get(url);
 
         if (!response.is_success()) {
             return false;
         }
 
-        file f(move(output));
+        file f(move(output), FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ, FILE_CREATION::CREATE_FORCE);
 
         if (!f.is_opened()) {
             return false;
         }
-        if (f.write(response.body) != response.body.size()) {
-            return false;
+
+        if (is_binary) {
+            if (f.write(response.body.data(), response.body.size()) != response.body.size()) {
+                return false;
+            }
+        } else {
+            if (f.write(response.body) != response.body.size()) {
+                return false;
+            }
         }
+
         return true;
     } catch (const exception& e) {
         if (error_callback_) {

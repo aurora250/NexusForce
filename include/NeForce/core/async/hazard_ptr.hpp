@@ -34,7 +34,7 @@ class hazard_pointer_obj_base;
 struct hazard_pointer_record {
     atomic<void*> hazard_ptr{nullptr};           ///< 受保护的指针
     atomic<hazard_pointer_record*> next{nullptr}; ///< 链表中的下一个记录
-    atomic_bool active{false};                   ///< 记录是否活跃
+    atomic<bool> active{false};                   ///< 记录是否活跃
 
     hazard_pointer_record() = default;
 

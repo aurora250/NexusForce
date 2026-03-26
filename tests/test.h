@@ -32,10 +32,12 @@ void test_reflect();
 void test_https_server();
 void test_http_server();
 void test_http_client();
+void test_download();
 void test_dns();
 void test_traceroute();
 void test_ping();
 void test_arp();
+void test_smtp();
 
 void test_ini();
 void test_env();

@@ -34,8 +34,9 @@ NEFORCE_BEGIN_INNER__
  * 支持自动检测进制：0x或0X前缀表示十六进制，0前缀表示八进制，否则十进制。
  * 支持空格跳过、正负号处理、溢出检测。
  */
-template <typename T, enable_if_t<is_signed_v<T>, int> = 0>
-constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
+template <typename T>
+constexpr enable_if_t<is_signed_v<T>, T>
+str_to_ints(const string_view sv, char** endptr, int base) {
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
@@ -137,8 +138,9 @@ constexpr T str_to_ints(const string_view sv, char** endptr, int base) {
  * 支持自动检测进制：0x或0X前缀表示十六进制，0前缀表示八进制，否则十进制。
  * 支持空格跳过、正负号处理、溢出检测。负数会按照C标准转换为最大值。
  */
-template <typename T, enable_if_t<is_unsigned_v<T>, int> = 0>
-constexpr T str_to_uints(const string_view sv, char** endptr, int base) {
+template <typename T>
+constexpr enable_if_t<is_unsigned_v<T>, T>
+str_to_uints(const string_view sv, char** endptr, int base) {
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
@@ -259,7 +261,7 @@ NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     if (exp < 0 && -exp <= max_table_exp) {
         return neg_pow10_table[-exp];
     }
-    return static_cast<T>(_NEFORCE power(10.0, exp));
+    return static_cast<T>(power(10.0, exp));
 }
 
 /**
@@ -273,7 +275,8 @@ NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
  * 处理精度损失和溢出情况。
  */
 template <typename T>
-constexpr T str_to_floats(const string_view sv, char** endptr) {
+constexpr enable_if_t<is_floating_point_v<T>, T>
+str_to_floats(const string_view sv, char** endptr) {
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
@@ -284,7 +287,7 @@ constexpr T str_to_floats(const string_view sv, char** endptr) {
     }
 
     const char* p = start;
-    while (p != end && _NEFORCE is_space(*p)) ++p;
+    while (p != end && is_space(*p)) ++p;
     const char* start_conversion = p;
 
     int sign = 1;
@@ -424,80 +427,6 @@ NEFORCE_END_INNER__
  */
 
 /**
- * @brief 将字符串转换为64位有符号整数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @param base 进制基数（0表示自动检测）
- * @return 转换后的64位有符号整数
- */
-constexpr int64_t strtoll(const string_view sv, char** endptr, const int base) {
-    return inner::str_to_ints<int64_t>(sv, endptr, base);
-}
-
-/**
- * @brief 将字符串转换为长整型有符号整数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @param base 进制基数（0表示自动检测）
- * @return 转换后的长整型有符号整数
- */
-constexpr long strtol(const string_view sv, char** endptr, const int base) {
-    return inner::str_to_ints<long>(sv, endptr, base);
-}
-
-/**
- * @brief 将字符串转换为64位无符号整数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @param base 进制基数（0表示自动检测）
- * @return 转换后的64位无符号整数
- */
-constexpr uint64_t strtoull(const string_view sv, char** endptr, const int base) {
-    return inner::str_to_uints<uint64_t>(sv, endptr, base);
-}
-
-/**
- * @brief 将字符串转换为无符号长整型
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @param base 进制基数（0表示自动检测）
- * @return 转换后的无符号长整型
- */
-constexpr unsigned long strtoul(const string_view sv, char** endptr, const int base) {
-    return inner::str_to_uints<unsigned long>(sv, endptr, base);
-}
-
-/**
- * @brief 将字符串转换为单精度浮点数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @return 转换后的单精度浮点数
- */
-constexpr float strtof(const string_view sv, char** endptr) {
-    return inner::str_to_floats<float>(sv, endptr);
-}
-
-/**
- * @brief 将字符串转换为双精度浮点数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @return 转换后的双精度浮点数
- */
-constexpr double strtod(const string_view sv, char** endptr) {
-    return inner::str_to_floats<double>(sv, endptr);
-}
-
-/**
- * @brief 将字符串转换为长双精度浮点数
- * @param sv 要转换的字符串视图
- * @param endptr 指向转换结束位置的指针
- * @return 转换后的长双精度浮点数
- */
-constexpr long double strtold(const string_view sv, char** endptr) {
-    return inner::str_to_floats<long double>(sv, endptr);
-}
-
-/**
  * @brief 将字符串转换为32位浮点数
  * @param sv 要转换的字符串视图
  * @param idx 可选参数，存储转换结束位置索引
@@ -507,7 +436,7 @@ constexpr long double strtold(const string_view sv, char** endptr) {
 NEFORCE_NODISCARD constexpr float32_t
 to_float32(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float32_t num = _NEFORCE strtof(sv, &endptr);
+    const float32_t num = inner::str_to_floats<float>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -525,7 +454,7 @@ to_float32(const string_view sv, size_t* idx = nullptr) {
 NEFORCE_NODISCARD constexpr float64_t
 to_float64(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const float64_t num = _NEFORCE strtod(sv, &endptr);
+    const float64_t num = inner::str_to_floats<double>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -543,7 +472,7 @@ to_float64(const string_view sv, size_t* idx = nullptr) {
 NEFORCE_NODISCARD constexpr decimal_t
 to_decimal(const string_view sv, size_t* idx = nullptr) {
     char* endptr = nullptr;
-    const decimal_t num = _NEFORCE strtold(sv, &endptr);
+    const decimal_t num = inner::str_to_floats<long double>(sv, &endptr);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -562,7 +491,7 @@ to_decimal(const string_view sv, size_t* idx = nullptr) {
 NEFORCE_NODISCARD constexpr int64_t
 to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const int64_t num = _NEFORCE strtoll(sv, &endptr, base);
+    const int64_t num = inner::str_to_ints<int64_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -581,7 +510,7 @@ to_int64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
 NEFORCE_NODISCARD constexpr uint64_t
 to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const uint64_t num = _NEFORCE strtoull(sv, &endptr, base);
+    const uint64_t num = inner::str_to_uints<uint64_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -600,7 +529,7 @@ to_uint64(const string_view sv, size_t* idx = nullptr, const int base = 10) {
 NEFORCE_NODISCARD constexpr int32_t
 to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const int32_t num = _NEFORCE strtol(sv, &endptr, base);
+    const int32_t num = inner::str_to_ints<int>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -619,7 +548,7 @@ to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
 NEFORCE_NODISCARD constexpr uint32_t
 to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const uint32_t num = _NEFORCE strtoul(sv, &endptr, base);
+    const uint32_t num = inner::str_to_uints<unsigned long>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }

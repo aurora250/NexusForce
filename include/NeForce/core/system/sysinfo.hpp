@@ -143,7 +143,7 @@ private:
     CPU_info cpu_info_{};              ///< CPU信息
     os_version_info os_version_info_{}; ///< 操作系统信息
     architecture architecture_ = architecture::UNKNOWN; ///< 系统架构
-    atomic_bool initialized_{false};   ///< 初始化标志
+    atomic<bool> initialized_{false};   ///< 初始化标志
 
     /**
      * @brief 私有构造函数

@@ -3,7 +3,7 @@
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/time/duration.hpp"
-#include "NeForce/network/http/session.hpp"
+#include "NeForce/network/http/http_session.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct http_client_response {
@@ -22,7 +22,7 @@ public:
     string status_message;
     unordered_map<string, vector<string>> headers;
     string body;
-    vector<cookie> cookies;
+    vector<http_cookie> cookies;
 
     NEFORCE_NODISCARD string_view header(const string& key) const noexcept {
         const auto it = headers.find(key);

@@ -1,9 +1,7 @@
 #ifndef NEFORCE_NETWORK_TCP_TCP_CLIENT_HPP__
 #define NEFORCE_NETWORK_TCP_TCP_CLIENT_HPP__
 #include "NeForce/network/dns/dns_client.hpp"
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/network/socket/ssl_socket.hpp"
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 template <typename SocketT>
@@ -587,8 +585,6 @@ public:
 using tcp_client = basic_tcp_client<tcp_socket>;
 
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
-
 class ssl_client final : public basic_tcp_client<ssl_socket> {
 private:
     optional<ssl_context> ssl_ctx_;
@@ -732,9 +728,6 @@ public:
         return ssl_initialized_;
     }
 };
-
-#endif // NEFORCE_SUPPORT_OPENSSL
-
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_TCP_TCP_CLIENT_HPP__

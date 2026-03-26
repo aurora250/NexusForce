@@ -1,6 +1,7 @@
 #ifndef NEFORCE_NETWORK_DNS_CLIENT_HPP__
 #define NEFORCE_NETWORK_DNS_CLIENT_HPP__
 #include "NeForce/core/async/future.hpp"
+#include "NeForce/core/async/shared_mutex.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
@@ -18,6 +19,7 @@ public:
 private:
     config config_{};
     unordered_map<string, pair<dns_query_result, steady_clock::time_point>> cache_;
+    mutable shared_mutex cache_mutex_;
     seconds cache_ttl_{300};
     bool use_tcp_ = false;
 

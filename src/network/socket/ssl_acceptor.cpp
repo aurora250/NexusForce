@@ -1,5 +1,4 @@
 #include <NeForce/network/socket/ssl_acceptor.hpp>
-#ifdef NEFORCE_SUPPORT_OPENSSL
 NEFORCE_BEGIN_NAMESPACE__
 
 void ssl_acceptor::set_ssl_context(ssl_context ctx) {
@@ -34,4 +33,3 @@ ssl_socket ssl_acceptor::accept_ssl() {
 }
 
 NEFORCE_END_NAMESPACE__
-#endif

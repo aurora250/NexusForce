@@ -138,7 +138,7 @@ private:
     vector<thread> workers_;  ///< 工作线程集合
     mutex mutex_;  ///< 队列保护互斥锁
     condition_variable cv_;  ///< 条件变量
-    atomic_bool shutdown_;  ///< 关闭标志
+    atomic<bool> shutdown_;  ///< 关闭标志
 
     /**
      * @brief 默认构造函数

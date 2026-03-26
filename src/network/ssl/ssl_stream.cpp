@@ -1,6 +1,5 @@
 #include <NeForce/network/socket/socket_base.hpp>
 #include <NeForce/network/ssl/ssl_stream.hpp>
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -144,6 +143,15 @@ bool ssl_stream::connect() {
     }
 
     return true;
+}
+
+void ssl_stream::close() {
+    auto* ssl = ssl_.release();
+    if (ssl) {
+        ::SSL_shutdown(ssl);
+        ::SSL_free(ssl);
+    }
+    last_error_.clear();
 }
 
 ssize_t ssl_stream::read(void* buffer, const size_t size) {
@@ -338,4 +346,3 @@ string ssl_stream::get_version() const {
 }
 
 NEFORCE_END_NAMESPACE__
-#endif

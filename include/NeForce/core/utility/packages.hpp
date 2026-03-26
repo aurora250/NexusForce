@@ -128,6 +128,14 @@ struct unpackage<SIGN## integer## BYTE> { \
 };
 
 /**
+ * @struct integer8
+ * @brief 8位整数包装类
+ *
+ * 提供8位整数的包装，支持类型转换、字符串表示、解析等功能。
+ */
+__NEFORCE_BUILD_INTEGER_STRUCT(,,8)
+
+/**
  * @struct integer16
  * @brief 16位整数包装类
  *
@@ -150,6 +158,14 @@ __NEFORCE_BUILD_INTEGER_STRUCT(,,32)
  * 提供64位整数的包装，支持类型转换、字符串表示、解析等功能。
  */
 __NEFORCE_BUILD_INTEGER_STRUCT(,,64)
+
+/**
+ * @struct uinteger8
+ * @brief 无符号8位整数包装类
+ *
+ * 提供无符号8位整数的包装，支持类型转换、字符串表示、解析等功能。
+ */
+__NEFORCE_BUILD_INTEGER_STRUCT(u,U,8)
 
 /**
  * @struct uinteger16

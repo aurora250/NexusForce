@@ -72,7 +72,7 @@ private:
     mutable mutex mutex_;    ///< 互斥锁
     condition_variable cv_;  ///< 条件变量
     token next_id_;          ///< 下一个可用的任务ID
-    atomic_bool stopped_;    ///< 停止标志
+    atomic<bool> stopped_;    ///< 停止标志
 
     friend class thread_pool;
 

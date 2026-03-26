@@ -321,7 +321,7 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         const string_view num_str = text_.view(start_pos, pos_ - start_pos);
 
         try {
-            double val = to_float64(num_str);
+            double val = float64::parse(num_str);
             return make_unique<toml_float>(val);
         } catch (...) {
             throw_parse_error("Invalid special float value: "_s + num_str);
@@ -380,7 +380,7 @@ unique_ptr<toml_value> toml_parser::parse_number() {
 
     try {
         if (is_float) {
-            double val = to_float64(num_str.view());
+            double val = float64::parse(num_str.view());
             return make_unique<toml_float>(val);
         } else {
             int64_t val = to_int64(num_str.view(), nullptr, 10);

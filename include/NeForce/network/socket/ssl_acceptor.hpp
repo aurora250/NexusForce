@@ -1,7 +1,6 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_ACCEPTOR_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_ACCEPTOR_HPP__
 #include "NeForce/network/socket/tcp_acceptor.hpp"
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/network/socket/ssl_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -26,5 +25,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_NETWORK_SSL_SSL_ACCEPTOR_HPP__

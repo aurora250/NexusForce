@@ -203,7 +203,7 @@ public:
 	};
 
 	struct periodic_task_state {
-		atomic_bool cancelled{false};
+		atomic<bool> cancelled{false};
 	};
 
 	struct NEFORCE_API pool_statistics : istringify<pool_statistics> {
@@ -254,8 +254,8 @@ private:
 	size_t thread_threshhold_{max_threshhold};
 
 	priority_queue<priority_task> task_queue_{};
-	atomic_uint task_size_{0};
-	atomic_uint idle_thread_size_{0};
+	atomic<uint32_t> task_size_{0};
+	atomic<uint32_t> idle_thread_size_{0};
 	size_t task_threshhold_{task_max_threshhold};
 
 	mutex task_queue_mtx_{};
@@ -264,14 +264,14 @@ private:
 	condition_variable exit_cond_{};
 
 	atomic<pool_mode> pool_mode_{pool_mode::fixed};
-	atomic_bool is_running_{false};
+	atomic<bool> is_running_{false};
 
-	atomic_size_t total_submitted_tasks_{0};
-	atomic_size_t total_completed_tasks_{0};
-	atomic_size_t total_stolen_tasks_{0};
+	atomic<size_t> total_submitted_tasks_{0};
+	atomic<size_t> total_completed_tasks_{0};
+	atomic<size_t> total_stolen_tasks_{0};
 
-	atomic_size_t steal_worker_count_{0};
-	atomic_uint64_t next_task_id_{0};
+	atomic<size_t> steal_worker_count_{0};
+	atomic<uint64_t> next_task_id_{0};
 
 private:
 	uint64_t generate_task_id() {

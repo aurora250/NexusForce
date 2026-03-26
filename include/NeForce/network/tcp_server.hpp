@@ -2,9 +2,7 @@
 #define NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__
 #include "NeForce/core/async/thread_pool.hpp"
 #include "NeForce/network/socket/tcp_acceptor.hpp"
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/network/socket/ssl_socket.hpp"
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 template <typename SocketT>
@@ -170,8 +168,6 @@ public:
 using tcp_server = basic_tcp_server<tcp_socket>;
 
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
-
 class ssl_server final : public basic_tcp_server<ssl_socket> {
 private:
     ssl_context ssl_ctx_;
@@ -235,8 +231,6 @@ public:
         return basic_tcp_server::start(backlog);
     }
 };
-
-#endif // NEFORCE_SUPPORT_OPENSSL
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_TCP_TCP_SERVER_HPP__

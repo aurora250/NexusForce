@@ -1,9 +1,9 @@
+#include <NeForce/core/async/mutex.hpp>
 #include <NeForce/core/async/thread.hpp>
-#include <NeForce/core/async/thread_hook.hpp>
 #include <NeForce/core/async/thread_tracker.hpp>
+#include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/string/utf.hpp>
-#include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <NeForce/core/async/call_once.hpp>
 #include <windef.h>
@@ -12,8 +12,9 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+
     ::HRESULT (WINAPI* pSetThreadDescription)(::HANDLE, ::PCWSTR) = nullptr;
     ::HRESULT (WINAPI* pGetThreadDescription)(::HANDLE, ::PWSTR*) = nullptr;
 
@@ -55,20 +56,50 @@ namespace {
                 reinterpret_cast<::ULONG_PTR*>(&info));
         } __except(EXCEPTION_EXECUTE_HANDLER) {}
     }
-}
+
 #endif
+
+    vector<thread::hook::callback_t>& thread_hook_hooks() {
+        static vector<thread::hook::callback_t> hooks;
+        return hooks;
+    }
+
+    mutex& thread_hook_mutex() {
+        static mutex mtx;
+        return mtx;
+    }
+}
 
 
 atomic<int> thread_tracker::count_{0};
 
 
-thread::thread_monitor::thread_monitor(const thread* self) noexcept : self_(self) {
+void thread::hook::add_hook(callback_t hook) {
+    lock<mutex> lock(thread_hook_mutex());
+    thread_hook_hooks().push_back(_NEFORCE move(hook));
+}
+
+void thread::hook::remove_hook(callback_t hook) {
+    lock<mutex> lock(thread_hook_mutex());
+    auto it = find(thread_hook_hooks().begin(), thread_hook_hooks().end(), _NEFORCE move(hook));
+    if (it != thread_hook_hooks().end()) thread_hook_hooks().erase(it);
+}
+
+void thread::hook::invoke(const point point, const id thread_id) {
+    lock<mutex> lock(thread_hook_mutex());
+    for (auto& hook : thread_hook_hooks()) {
+        hook(point, thread_id);
+    }
+}
+
+thread::thread_monitor::thread_monitor(const id thread_id)
+: thread_id_(thread_id) {
     thread_tracker::instance().on_thread_create();
-    thread_hook::invoke(thread_hook::point::thread_start, self_);
+    hook::invoke(hook::point::thread_start, thread_id_);
 }
 
 thread::thread_monitor::~thread_monitor() {
-    thread_hook::invoke(thread_hook::point::thread_end, self_);
+    hook::invoke(hook::point::thread_end, thread_id_);
     thread_tracker::instance().on_thread_destroy();
 }
 
@@ -79,8 +110,8 @@ void*
 #endif
 thread::thread_entry(void* arg) {
     auto* args = static_cast<thread_startup_args*>(arg);
-    unique_ptr<data_base> data = _NEFORCE move(args->data);
-    thread_monitor monitor(args->self);
+    const unique_ptr<data_base> data = _NEFORCE move(args->data);
+    thread_monitor monitor(args->thread_id);
     delete args;
 
     try {
@@ -97,7 +128,7 @@ thread::thread_entry(void* arg) {
 }
 
 void thread::start_thread_impl(thread_startup_args* args) {
-    thread_hook::invoke(thread_hook::point::before_create, this);
+    hook::invoke(hook::point::before_create, id_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     unsigned int thread_id;
@@ -122,7 +153,7 @@ void thread::start_thread_impl(thread_startup_args* args) {
 #endif
 
     state_ = CREATED;
-    thread_hook::invoke(thread_hook::point::after_create, this);
+    hook::invoke(hook::point::after_create, id_);
 }
 
 thread::thread(thread&& other) noexcept
@@ -139,7 +170,7 @@ thread::thread(thread&& other) noexcept
 thread& thread::operator =(thread&& other) noexcept {
     if (this != &other) {
         if (joinable()) {
-            thread_hook::invoke(thread_hook::point::before_destroy, this);
+            hook::invoke(hook::point::before_destroy, id_);
             terminate();
         }
 
@@ -158,7 +189,7 @@ thread& thread::operator =(thread&& other) noexcept {
 }
 
 thread::~thread() {
-    thread_hook::invoke(thread_hook::point::before_destroy, this);
+    hook::invoke(hook::point::before_destroy, id_);
     if (joinable()) {
         terminate();
     }
@@ -202,14 +233,14 @@ void thread::detach() {
     state_ = DETACHED;
 }
 
-void thread::set_name(const char* name) {
+bool thread::set_name(const char* name) {
     if (!joinable()) {
         NEFORCE_THROW_EXCEPTION(thread_exception("Thread not joinable, cannot set name"));
     }
-    set_name(handle_, name);
+    return set_name(handle_, name);
 }
 
-bool thread::name(char* buffer, size_t size) const {
+bool thread::name(char* buffer, const size_t size) const {
     if (!joinable()) return false;
     return name(handle_, buffer, size);
 }
@@ -220,16 +251,20 @@ void thread::swap(thread& other) noexcept {
     _NEFORCE swap(state_, other.state_);
 }
 
-void thread::set_name(native_handle_type handle, const char* name) {
+bool thread::set_name(native_handle_type handle, const char* name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     init_thread_name_funcs();
     if (pSetThreadDescription) {
         wstring wstr{to_wstring(name)};
-        pSetThreadDescription(handle, wstr.data());
+        HRESULT hr = pSetThreadDescription(handle, wstr.data());
+        return SUCCEEDED(hr);
     } else {
         if (handle == ::GetCurrentThread()) {
             set_thread_name_by_exception(name);
-        } else {}
+            return true;
+        } else {
+            return false;
+        }
     }
 #else
     if (::pthread_setname_np(handle, name) != 0) {
@@ -245,7 +280,7 @@ bool thread::name(native_handle_type handle, char* buffer, size_t size) {
         ::PWSTR wname = nullptr;
         if (SUCCEEDED(pGetThreadDescription(handle, &wname))) {
             string name = to_string(wname);
-            size_t name_len = name.size();
+            const size_t name_len = name.size();
             if (name_len < size) {
                 memory_copy(buffer, name.data(), name_len);
                 buffer[name_len] = '\0';

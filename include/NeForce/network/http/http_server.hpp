@@ -15,7 +15,7 @@ public:
 
 protected:
     struct NEFORCE_API session_manager {
-        unordered_map<string, session> sessions_;
+        unordered_map<string, http_session> sessions_;
         mutable mutex mutex_;
         atomic<bool> cleanup_running_;
         thread cleanup_thread_;
@@ -28,7 +28,7 @@ protected:
         session_manager();
         ~session_manager();
 
-        session* get_session(const string& session_id, bool create = true);
+        http_session* get_session(const string& session_id, bool create = true);
         void remove_session(const string& session_id) noexcept;
 
         void cleanup_expired_sessions();
@@ -55,10 +55,10 @@ protected:
     static void add_session_cookie(
         const http_request& request,
         http_response& response,
-        session* session,
+        http_session* session,
         const HTTP_COOKIE_NAME& name);
 
-    static session* get_or_create_session(
+    static http_session* get_or_create_session(
         http_request& request,
         bool create,
         session_manager& manager,
@@ -108,7 +108,7 @@ private:
                 return;
             }
 
-            session* sess = this->get_or_create_session(request, true, session_manager_, cookie_name_);
+            http_session* sess = this->get_or_create_session(request, true, session_manager_, cookie_name_);
             this->handle_request_with_forward(client_socket, request, sess);
         } catch (const http_exception& e) {
             this->send_error_response(
@@ -155,7 +155,7 @@ private:
         return ws_server_.handle_upgrade(request, _NEFORCE move(client_socket));
     }
 
-    void handle_request_with_forward(socket_type& client_socket, http_request& request, session* sess) {
+    void handle_request_with_forward(socket_type& client_socket, http_request& request, http_session* sess) {
         int forward_count = 0;
 
         while (forward_count < max_forward_count) {
@@ -201,11 +201,9 @@ public:
     basic_http_server(basic_http_server&&) noexcept = default;
     basic_http_server& operator =(basic_http_server&&) noexcept = default;
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
     bool load_certificate(const string& cert_file, const string& key_file) {
         return server_.load_certificate(cert_file, key_file);
     }
-#endif
 
     NEFORCE_NODISCARD http_router& router() noexcept { return router_; }
     NEFORCE_NODISCARD const http_router& router() const noexcept { return router_; }
@@ -237,7 +235,7 @@ public:
         return server_.is_running();
     }
 
-    NEFORCE_NODISCARD session* get_session(http_request& request, bool create = false) {
+    NEFORCE_NODISCARD http_session* get_session(http_request& request, bool create = false) {
         return get_or_create_session(request, create, session_manager_, cookie_name_);
     }
 
@@ -250,15 +248,8 @@ public:
     }
 };
 
-template class basic_http_server<tcp_socket>;
-#ifdef NEFORCE_SUPPORT_OPENSSL
-template class basic_http_server<ssl_socket>;
-#endif
-
 using http_server = basic_http_server<tcp_socket>;
-#ifdef NEFORCE_SUPPORT_OPENSSL
 using https_server = basic_http_server<ssl_socket>;
-#endif
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_SERVER_HPP__

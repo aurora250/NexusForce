@@ -1,6 +1,5 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_STREAM_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_STREAM_HPP__
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/network/ssl/ssl_context.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -45,6 +44,7 @@ public:
     void accept();
 
     bool connect();
+    void close();
 
     ssize_t read(void* buffer, size_t size);
 
@@ -88,5 +88,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_NETWORK_SSL_SSL_STREAM_HPP__

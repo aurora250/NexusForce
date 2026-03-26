@@ -28,16 +28,12 @@ public:
     using error_callback_t = function<void(const exception&)>;
     using time_point = steady_clock::time_point;
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
     using client_type = ssl_client;
-#else
-    using client_type = tcp_client;
-#endif
 
 private:
     client_type client_;
     config config_;
-    unordered_map<string, cookie> cookie_jar_;
+    unordered_map<string, http_cookie> cookie_jar_;
     unordered_map<string, string> persistent_headers_;
     mutable mutex mutex_;
 
@@ -47,9 +43,10 @@ private:
 private:
     string build_request_str(const http_client_request& req, const url& req_url) const;
     bool send_request(string_view request_str, time_point& send_start);
-    optional<http_client_response> read_response(time_point& receive_start);
+    optional<http_client_response> read_response(time_point& receive_start,
+        const string& request_host, const string& request_path);
 
-    void update_cookies(const vector<cookie>& resp_cookies, const url& request_url);
+    void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
     string build_cookie_header(const url& request_url) const;
 
     http_client_response do_request(http_client_request req, int redirect_count = 0);
@@ -60,10 +57,7 @@ public:
     : http_client(config()) {}
 
     explicit http_client(config config);
-
-#ifdef NEFORCE_SUPPORT_OPENSSL
     explicit http_client(ssl_context ctx, config config);
-#endif
 
     ~http_client() = default;
 
@@ -131,19 +125,17 @@ public:
         error_callback_ = move(callback);
     }
 
-#ifdef NEFORCE_SUPPORT_OPENSSL
     void set_ssl_context(ssl_context ctx);
     void set_verify_ssl(bool verify);
-#endif
 
     void clear_cookies() {
         lock<mutex> lk(mutex_);
         cookie_jar_.clear();
     }
 
-    void set_cookie(const cookie& c, const string& domain, const string& path = "/");
+    void set_cookie(const http_cookie& c, const string& domain, const string& path = "/");
 
-    NEFORCE_NODISCARD unordered_map<string, cookie> get_cookies() const {
+    NEFORCE_NODISCARD unordered_map<string, http_cookie> get_cookies() const {
         lock<mutex> lk(mutex_);
         return cookie_jar_;
     }
@@ -186,7 +178,7 @@ public:
 
     http_client_response request(http_client_request req);
 
-    bool download_file(const string& url, path output);
+    bool download_file(const string& url, path output, bool is_binary = true);
 
     future<http_client_response> request_async(http_client_request req);
 

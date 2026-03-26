@@ -1,6 +1,6 @@
 var atomic_8hpp =
 [
-    [ "atomic_bool", "group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56", null ],
+    [ "atomicbool>", "group___atomic_operations.html#ga0d0e16e0a3616ac69b5870d3d9f0be56", null ],
     [ "atomic_char", "group___atomic_operations.html#gaff0a65dea26785793afc898738ad4eb4", null ],
     [ "atomic_char16_t", "group___atomic_operations.html#ga2e43dfaa3b04cfe199094f98199525e5", null ],
     [ "atomic_char32_t", "group___atomic_operations.html#gaa76aa922c4b2a27a72c05d5ded2c83f8", null ],

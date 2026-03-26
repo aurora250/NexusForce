@@ -120,7 +120,7 @@ public:
      */
     struct ecb {
         unique_ptr<exception_wrapper> wrapper;  ///< 异常包装器
-        atomic_int ref_count{1};  ///< 引用计数
+        atomic<int> ref_count{1};  ///< 引用计数
 
         /**
          * @brief 构造函数

@@ -14,20 +14,6 @@ void udp_socket::open(const int family) {
     }
 }
 
-void udp_socket::bind(const ip_address& endpoint) {
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
-    }
-
-    if (!endpoint.is_valid()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint for UDP bind"));
-    }
-
-    if (::bind(fd_, endpoint.data(), endpoint.size()) < 0) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to bind UDP socket to endpoint"));
-    }
-}
-
 void udp_socket::connect(const ip_address& endpoint) {
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));

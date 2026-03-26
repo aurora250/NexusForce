@@ -2128,7 +2128,7 @@ public:
      * @return 子串
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string substr(const size_type off = 0, size_type count = npos) const {
-        NEFORCE_DEBUG_VERIFY(off < size(), "basic_string index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(off <= size(), "basic_string index out of ranges.");
         count = _NEFORCE min(count, size() - off);
         return basic_string(data() + off, count);
     }
@@ -2148,7 +2148,7 @@ public:
      * @return 字符串视图
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 view_type view(const size_type off, size_type count = npos) const noexcept {
-        NEFORCE_DEBUG_VERIFY(off < size(), "basic_string index out of ranges.");
+        NEFORCE_DEBUG_VERIFY(off <= size(), "basic_string index out of ranges.");
         count = _NEFORCE min(count, size() - off);
         return view_type(data() + off, count);
     }

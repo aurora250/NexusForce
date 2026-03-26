@@ -25,7 +25,11 @@ namespace {
         return tls_random.next_int(1, 65535);
     }
 
-    byte_vector encode_domain_name(const string_view domain) {
+    byte_vector encode_domain_name(string_view domain) {
+        while (!domain.empty() && domain.back() == '.') {
+            domain.remove_suffix(1);
+        }
+
         if (domain.empty() || domain.length() > 253) {
             NEFORCE_THROW_EXCEPTION(dns_exception("Invalid domain name length"));
         }
@@ -339,17 +343,31 @@ namespace {
 
 
 byte_vector dns_client::send_udp_query(const byte_vector& query) const {
-    thread_local udp_socket tls_udp_socket;
+    thread_local struct udp_socket_state {
+        udp_socket socket;
+        milliseconds timeout{0};
+        string server;
+        int port = 0;
+    } tls_udp_state;
 
-    if (!tls_udp_socket.is_open()) {
-        tls_udp_socket.open();
-        if (!tls_udp_socket.is_open()) {
+    const bool config_changed = tls_udp_state.server != config_.server || tls_udp_state.port != config_.port;
+
+    if (!tls_udp_state.socket.is_open() || config_changed) {
+        tls_udp_state.socket.close();
+        tls_udp_state.socket.open();
+        if (!tls_udp_state.socket.is_open()) {
             NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create UDP socket"));
         }
+        tls_udp_state.server = config_.server;
+        tls_udp_state.port = config_.port;
+        tls_udp_state.timeout = milliseconds(0);
     }
 
-    if (!tls_udp_socket.set_receive_timeout(config_.timeout)) {
-        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to set socket timeout"));
+    if (tls_udp_state.timeout != config_.timeout) {
+        if (!tls_udp_state.socket.set_receive_timeout(config_.timeout)) {
+            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to set socket timeout"));
+        }
+        tls_udp_state.timeout = config_.timeout;
     }
 
     const auto endpoint = ip_address::parse(config_.server, config_.port);
@@ -357,7 +375,7 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Invalid DNS server address"));
     }
 
-    const ssize_t sent = tls_udp_socket.send_to(
+    const ssize_t sent = tls_udp_state.socket.send_to(
         memory_view<const char>{
             reinterpret_cast<const char*>(query.data()),
             query.size()
@@ -369,7 +387,7 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
     }
 
     byte_vector buffer(512);
-    const auto received = tls_udp_socket.receive_from(
+    const auto received = tls_udp_state.socket.receive_from(
         memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
 
     if (received.first < 0) {
@@ -681,20 +699,44 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
 }
 
 optional<dns_query_result> dns_client::check_cache(const string& key) {
+    constexpr seconds negative_ttl{30};
+
+    {
+        shared_lock<shared_mutex> read_lock(cache_mutex_);
+        const auto it = cache_.find(key);
+        if (it != cache_.end()) {
+            const auto now = steady_clock::now();
+            const auto age = time_cast<seconds>(now - it->second.second);
+            const auto& res = it->second.first;
+            const auto max_ttl = res.is_success() ? cache_ttl_ : negative_ttl;
+            if (age < max_ttl) {
+                return optional<dns_query_result>{res};
+            }
+        } else {
+            return none;
+        }
+    }
+
+    lock<shared_mutex> write_lock(cache_mutex_);
     const auto it = cache_.find(key);
     if (it != cache_.end()) {
         const auto now = steady_clock::now();
-        const auto cache_age = time_cast<seconds>(now - it->second.second);
-        if (cache_age < cache_ttl_) {
-            return optional<dns_query_result>{it->second.first};
+        const auto age = time_cast<seconds>(now - it->second.second);
+        const auto& res = it->second.first;
+        const auto max_ttl = res.is_success() ? cache_ttl_ : negative_ttl;
+        if (age >= max_ttl) {
+            cache_.erase(it);
+        } else {
+            return optional<dns_query_result>{res};
         }
-        cache_.erase(it);
     }
+
     return none;
 }
 
 void dns_client::update_cache(const string& key, const dns_query_result& result) {
     if (result.is_success()) {
+        lock<shared_mutex> write_lock(cache_mutex_);
         cache_[key] = {result, steady_clock::now()};
     }
 }

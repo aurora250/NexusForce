@@ -1,6 +1,6 @@
 #ifndef NEFORCE_NETWORK_HTTP_SERVER_MESSAGE_HPP__
 #define NEFORCE_NETWORK_HTTP_SERVER_MESSAGE_HPP__
-#include "NeForce/network/http/session.hpp"
+#include "NeForce/network/http/http_session.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct http_request {
@@ -15,7 +15,7 @@ struct http_request {
     unordered_map<string, string> parameters;
     unordered_map<string, string> form_data;
 
-    _NEFORCE session* session = nullptr;
+    _NEFORCE http_session* session = nullptr;
 
 
     NEFORCE_NODISCARD string_view parameter(const string& name) const noexcept {
@@ -115,7 +115,7 @@ struct NEFORCE_API http_response {
     HTTP_STATUS status = HTTP_STATUS::S4_NOT_FOUNT;
     string status_message{};
     unordered_map<string, string> headers;
-    vector<cookie> cookies;
+    vector<http_cookie> cookies;
     string body{};
     string redirect_url{};
     string forward_path{};

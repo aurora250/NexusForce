@@ -25,7 +25,6 @@ string(JSON CONFIG_ENABLE_SQLITE3    GET ${JSON_CONTENT} dependency sqlite3    s
 string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    switch)
 string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
 string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        switch)
-string(JSON CONFIG_ENABLE_OPENSSL    GET ${JSON_CONTENT} dependency openssl    switch)
 
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 
@@ -119,7 +118,6 @@ option(NEXUSFORCE_ENABLE_SQLITE3    "Enable SQLite3 database support"    ${CONFI
 option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFIG_ENABLE_HIREDIS})
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
 option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
-option(NEXUSFORCE_ENABLE_OPENSSL    "Enable OpenSSL support"             ${CONFIG_ENABLE_OPENSSL})
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
 
@@ -140,8 +138,8 @@ message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
 message(STATUS "  NEXUSFORCE_ENABLE_REDIS:        ${NEXUSFORCE_ENABLE_REDIS}")
 message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
 message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
-message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ${NEXUSFORCE_ENABLE_OPENSSL}")
-message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON")
+message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ON (NECESSARY)")
+message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON (NECESSARY)")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "")

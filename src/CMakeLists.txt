@@ -12,7 +12,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_hook.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/encrypt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/breakpoint.cpp
@@ -97,7 +96,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ftp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/icmp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/smtp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/socket_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_socket.cpp
@@ -276,17 +277,11 @@ else()
     message(STATUS "lz4 support disabled")
 endif()
 
-if(NEXUSFORCE_ENABLE_OPENSSL)
-    find_package(OpenSSL REQUIRED)
-    if(TARGET OpenSSL::SSL AND TARGET OpenSSL::Crypto)
-        target_link_libraries(NexusForce PUBLIC OpenSSL::SSL OpenSSL::Crypto)
-        target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_OPENSSL)
-        message(STATUS "OpenSSL linked successfully")
-    endif()
-else()
-    message(STATUS "OpenSSL support disabled")
-endif()
 
+find_package(OpenSSL REQUIRED)
+target_link_libraries(NexusForce PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_OPENSSL)
+message(STATUS "OpenSSL linked successfully")
 
 find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
 target_link_libraries(NexusForce PUBLIC PCRE2::8BIT)
@@ -295,6 +290,7 @@ target_compile_definitions(NexusForce PUBLIC
         PCRE2_CODE_UNIT_WIDTH=8
 )
 message(STATUS "PCRE2 with JIT linked successfully")
+
 message(STATUS "")
 
 

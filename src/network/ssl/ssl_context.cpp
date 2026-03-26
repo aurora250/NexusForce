@@ -1,5 +1,4 @@
 #include <NeForce/network/ssl/ssl_context.hpp>
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -230,4 +229,3 @@ void ssl_context::set_alpn_protos(const vector<string>& protocols) {
 }
 
 NEFORCE_END_NAMESPACE__
-#endif

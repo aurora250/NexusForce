@@ -111,6 +111,10 @@ public:
 
     NEFORCE_NODISCARD optional<ip_address> local_endpoint() const;
     NEFORCE_NODISCARD optional<ip_address> remote_endpoint() const;
+
+    void bind(const ip_address& endpoint);
+
+    void listen(int backlog);
 };
 
 NEFORCE_END_NAMESPACE__

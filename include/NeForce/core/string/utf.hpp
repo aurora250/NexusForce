@@ -1,5 +1,5 @@
-#ifndef NEFORCE_CORE_STRING_CHARACTER_HPP__
-#define NEFORCE_CORE_STRING_CHARACTER_HPP__
+#ifndef NEFORCE_CORE_STRING_UTF_HPP__
+#define NEFORCE_CORE_STRING_UTF_HPP__
 
 /**
  * @file utf.hpp
@@ -957,4 +957,4 @@ struct unpackage<u32character> {
 /** @} */ // Packages
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_STRING_CHARACTER_HPP__
+#endif // NEFORCE_CORE_STRING_UTF_HPP__

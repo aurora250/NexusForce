@@ -904,52 +904,6 @@ struct atomic<long double> : atomic_float_base<long double> {
 	using atomic_float_base<long double>::operator =;
 };
 
-
-using atomic_bool     = atomic<bool>;			///< 布尔原子类型
-using atomic_schar    = atomic<signed char>;	///< 有符号字符原子类型
-using atomic_uchar    = atomic<unsigned char>;	///< 无符号字符原子类型
-using atomic_short    = atomic<short>;			///< 短整型原子类型
-using atomic_ushort   = atomic<unsigned short>; ///< 无符号短整型原子类型
-using atomic_int      = atomic<int>;			///< 整型原子类型
-using atomic_uint     = atomic<unsigned int>;	///< 无符号整型原子类型
-using atomic_long     = atomic<long>;			///< 长整型原子类型
-using atomic_ulong    = atomic<unsigned long>;	///< 无符号长整型原子类型
-using atomic_llong    = atomic<long long>;		///< 长长整型原子类型
-using atomic_ullong	  = atomic<unsigned long long>; ///< 无符号长长整型原子类型
-
-using atomic_float    = atomic<float>;       ///< 单精度浮点数原子类型
-using atomic_double   = atomic<double>;      ///< 双精度浮点数原子类型
-using atomic_ldouble  = atomic<long double>; ///< 扩展精度浮点数原子类型
-
-using atomic_char     = atomic<char>;        ///< 字符原子类型
-using atomic_wchar_t  = atomic<wchar_t>;     ///< 宽字符原子类型
-#ifdef NEFORCE_STANDARD_20
-using atomic_char8_t  = atomic<char8_t>;     ///< UTF-8字符原子类型
-#endif
-using atomic_char16_t = atomic<char16_t>;    ///< UTF-16字符原子类型
-using atomic_char32_t = atomic<char32_t>;    ///< UTF-32字符原子类型
-
-using atomic_int8_t   = atomic<int8_t>;      ///< 8位有符号整数原子类型
-using atomic_uint8_t  = atomic<uint8_t>;     ///< 8位无符号整数原子类型
-using atomic_int16_t  = atomic<int16_t>;     ///< 16位有符号整数原子类型
-using atomic_uint16_t = atomic<uint16_t>;    ///< 16位无符号整数原子类型
-using atomic_int32_t  = atomic<int32_t>;     ///< 32位有符号整数原子类型
-using atomic_uint32_t = atomic<uint32_t>;    ///< 32位无符号整数原子类型
-using atomic_int64_t  = atomic<int64_t>;     ///< 64位有符号整数原子类型
-using atomic_uint64_t = atomic<uint64_t>;    ///< 64位无符号整数原子类型
-
-using atomic_float32  = atomic<float32_t>;   ///< 32位浮点数原子类型
-using atomic_float64  = atomic<float64_t>;   ///< 64位浮点数原子类型
-using atomic_decimal  = atomic<decimal_t>;   ///< 十进制浮点数原子类型
-
-using atomic_intptr_t  = atomic<intptr_t>;   ///< 有符号指针整数原子类型
-using atomic_uintptr_t = atomic<uintptr_t>;  ///< 无符号指针整数原子类型
-using atomic_size_t    = atomic<size_t>;     ///< 大小类型原子类型
-using atomic_ptrdiff_t = atomic<ptrdiff_t>;  ///< 指针差值类型原子类型
-
-using atomic_intmax_t  = atomic<intmax_t>;   ///< 最大有符号整数原子类型
-using atomic_uintmax_t = atomic<uintmax_t>;  ///< 最大无符号整数原子类型
-
 /** @} */ // AtomicOperations
 
 NEFORCE_END_NAMESPACE__

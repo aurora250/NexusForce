@@ -1,6 +1,5 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__
-#ifdef NEFORCE_SUPPORT_OPENSSL
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/network/ssl/ssl_exception.hpp"
@@ -66,5 +65,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__

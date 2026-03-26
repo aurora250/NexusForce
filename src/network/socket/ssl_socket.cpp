@@ -1,5 +1,4 @@
 #include <NeForce/network/socket/ssl_socket.hpp>
-#ifdef NEFORCE_SUPPORT_OPENSSL
 NEFORCE_BEGIN_NAMESPACE__
 
 void ssl_socket::init_server_ssl(const ssl_context& ctx) {
@@ -91,4 +90,3 @@ ssize_t ssl_socket::receive(memory_view<char> buffer, const int flags) {
 }
 
 NEFORCE_END_NAMESPACE__
-#endif

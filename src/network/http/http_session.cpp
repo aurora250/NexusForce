@@ -1,9 +1,9 @@
-#include <NeForce/network/http/session.hpp>
+#include <NeForce/network/http/http_session.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/string/to_string.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-NEFORCE_NODISCARD string cookie::to_string() const {
+NEFORCE_NODISCARD string http_cookie::to_string() const {
     if (name.cookie_name().empty()) {
         return "";
     }
@@ -44,7 +44,7 @@ NEFORCE_NODISCARD string cookie::to_string() const {
     return result;
 }
 
-bool cookie::is_valid() const noexcept {
+bool http_cookie::is_valid() const noexcept {
     if (name.cookie_name().empty()) {
         return false;
     }
@@ -56,14 +56,14 @@ bool cookie::is_valid() const noexcept {
     return true;
 }
 
-bool cookie::is_expired() const noexcept {
+bool http_cookie::is_expired() const noexcept {
     if (expires <= datetime::epoch()) {
         return false;
     }
     return expires < datetime::now();
 }
 
-void cookie::set_expires_from_now(const int64_t seconds) {
+void http_cookie::set_expires_from_now(const int64_t seconds) {
     if (seconds <= 0) {
         expires = datetime::epoch();
         return;
@@ -71,12 +71,12 @@ void cookie::set_expires_from_now(const int64_t seconds) {
     expires = datetime::now() + seconds;
 }
 
-string& session::operator [](const string& key) {
+string& http_session::operator [](const string& key) {
     touch();
     return data[key];
 }
 
-string_view session::get(const string& key) const {
+string_view http_session::get(const string& key) const {
     const auto it = data.find(key);
     if (it != data.end()) {
         return it->second.view();
@@ -84,36 +84,36 @@ string_view session::get(const string& key) const {
     return "";
 }
 
-void session::set(const string& key, string value) {
+void http_session::set(const string& key, string value) {
     touch();
     data[key] = _NEFORCE move(value);
 }
 
-bool session::remove(const string& key) {
+bool http_session::remove(const string& key) {
     touch();
     return data.erase(key) > 0;
 }
 
-void session::clear() {
+void http_session::clear() {
     touch();
     data.clear();
 }
 
-void session::invalidate() noexcept {
+void http_session::invalidate() noexcept {
     invalidated = true;
     data.clear();
 }
 
-void session::touch() noexcept {
+void http_session::touch() noexcept {
     last_access = datetime::now();
     is_new = false;
 }
 
-bool session::contains(const string& key) const noexcept {
+bool http_session::contains(const string& key) const noexcept {
     return data.find(key) != data.end();
 }
 
-bool session::is_valid() const noexcept {
+bool http_session::is_valid() const noexcept {
     if (invalidated) {
         return false;
     }
@@ -125,7 +125,7 @@ bool session::is_valid() const noexcept {
     return !expired();
 }
 
-bool session::expired(int max_inactive) const noexcept {
+bool http_session::expired(int max_inactive) const noexcept {
     if (max_inactive <= 0) {
         max_inactive = max_age;
     }
@@ -138,7 +138,7 @@ bool session::expired(int max_inactive) const noexcept {
     return idle > max_inactive;
 }
 
-string session::to_string() const {
+string http_session::to_string() const {
     string result;
     result.reserve(256);
 

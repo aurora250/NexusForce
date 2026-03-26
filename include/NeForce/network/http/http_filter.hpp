@@ -1,7 +1,9 @@
 #ifndef NEFORCE_NETWORK_HTTP_FILTER_HPP__
 #define NEFORCE_NETWORK_HTTP_FILTER_HPP__
 #include "NeForce/core/async/mutex.hpp"
+#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/http/http_server_message.hpp"
