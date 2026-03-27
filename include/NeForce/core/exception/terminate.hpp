@@ -55,7 +55,7 @@ NEFORCE_NORETURN void NEFORCE_API abort();
 
 
 /**
- * @typedef atexit_handler
+ * @typedef exit_handler
  * @brief 退出处理函数指针类型
  *
  * 定义退出处理函数的签名，用于注册在程序正常退出时调用的函数。

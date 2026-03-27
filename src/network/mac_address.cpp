@@ -46,7 +46,10 @@ optional<mac_address> mac_address::get_by_ip(const ip_address& ip, const char* i
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;
-    const ::DWORD ip_addr = endian::host_to_network<::DWORD>(ip.address().get<sockaddr_in>().sin_addr.s_addr);
+    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(
+            ip.address().get<sockaddr_in>().sin_addr.s_addr
+        );
+
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {
         byte_t mac_bytes[6];

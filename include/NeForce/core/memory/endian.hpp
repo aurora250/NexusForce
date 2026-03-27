@@ -86,36 +86,43 @@ private:
 public:
     template <typename T>
     static constexpr T host_to_network(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
 
     template <typename T>
     static constexpr T network_to_host(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network(value);
     }
 
     template <typename T>
     static constexpr T host_to_le(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl3(value);
     }
 
     template <typename T>
     static constexpr T le_to_host(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_le(value);
     }
 
     template <typename T>
     static constexpr T host_to_be(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl1(value);
     }
 
     template <typename T>
     static constexpr T be_to_host(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_be(value);
     }
 
     template <typename T>
     static constexpr T swap_endian(T value) noexcept {
+        static_assert(is_integral_v<T>, "T must be an integral type");
         return endian::host_to_network_impl2(value);
     }
 
@@ -154,11 +161,14 @@ public:
     }
 
     static uint64_t read_be64(const byte_t* data) noexcept {
-        uint64_t value = 0;
-        for (int i = 0; i < 8; ++i) {
-            value |= static_cast<uint64_t>(data[i]) << ((7 - i) * 8);
-        }
-        return value;
+        return (static_cast<uint64_t>(data[0]) << 56) |
+               (static_cast<uint64_t>(data[1]) << 48) |
+               (static_cast<uint64_t>(data[2]) << 40) |
+               (static_cast<uint64_t>(data[3]) << 32) |
+               (static_cast<uint64_t>(data[4]) << 24) |
+               (static_cast<uint64_t>(data[5]) << 16) |
+               (static_cast<uint64_t>(data[6]) << 8)  |
+                static_cast<uint64_t>(data[7]);
     }
 
     static void write_le16(byte_t* dest, uint16_t value) noexcept {

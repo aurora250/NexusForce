@@ -38,18 +38,7 @@ struct at_thread_exit_elt {
  * 将一个回调函数注册到当前线程的退出回调列表中。
  * 回调函数将在当前线程退出时被调用，参数为elt指针本身。
  */
-void NEFORCE_API at_thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept;
-
-/**
- * @brief 执行线程退出回调
- *
- * 执行所有已注册的线程退出回调。
- * 通常在以下情况下被调用：
- * 1. 线程正常退出
- * 2. 线程局部存储的析构函数中
- * 按照注册的逆序执行回调。
- */
-void NEFORCE_API at_thread_exit_callbacks();
+void NEFORCE_API thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept;
 
 /** @} */ // ThreadExit
 

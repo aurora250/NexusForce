@@ -632,7 +632,7 @@ struct __future_base {
              * @brief 设置就绪标记
              */
             void set() {
-                _NEFORCE at_thread_exit_register(this, &make_ready::run);
+                thread_exit_register(this, &make_ready::run);
             }
         };
     };

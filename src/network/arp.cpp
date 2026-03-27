@@ -1,7 +1,6 @@
 #include <NeForce/network/arp.hpp>
 #include <NeForce/core/memory/endian.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#include <NeForce/core/utility/packages.hpp>
 #include <iphlpapi.h>
 #include <ws2tcpip.h>
 #endif
@@ -185,7 +184,9 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
 
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;
-    const ::DWORD ip_addr = endian::host_to_network<::DWORD>(target.address().get<sockaddr_in>().sin_addr.s_addr);
+    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(
+        target.address().get<::sockaddr_in>().sin_addr.s_addr
+    );
 
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {

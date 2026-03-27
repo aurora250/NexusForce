@@ -31,7 +31,7 @@ struct ip_header {
 #pragma pack(pop)
 
 
-class NEFORCE_API icmp_socket : public socket_base {
+class NEFORCE_API icmp_socket final : public socket_base {
 public:
     enum icmp_type : uint8_t {
         ICMP_ECHO_REPLY   = 0,

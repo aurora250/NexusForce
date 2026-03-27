@@ -1,7 +1,6 @@
 #ifndef NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #define NEFORCE_CORE_UTILITY_EXPECTED_HPP__
-#include "../exception/exception.hpp"
-#ifdef NEFORCE_STANDARD_20
+#include "NeForce/core/exception/exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 NEFORCE_ERROR_BUILD_FINAL_CLASS(expected_exception, memory_exception, "Expected Operation Failed.")
@@ -133,7 +132,7 @@ private:
 
 public:
     constexpr explicit temporary_guard(T& value)
-        : guarded_ptr(_NEFORCE addressof(value)), temp(_NEFORCE move(value)) {
+    : guarded_ptr(_NEFORCE addressof(value)), temp(_NEFORCE move(value)) {
         _NEFORCE destroy(guarded_ptr);
     }
 
@@ -153,20 +152,32 @@ public:
 };
 
 template <typename NT, typename OT, typename Arg>
-constexpr void reinitialize(NT* new_val, OT* old_val, Arg&& arg)
+constexpr enable_if_t<is_nothrow_constructible_v<NT, Arg>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg)
 noexcept(is_nothrow_constructible_v<NT, Arg>) {
-    if constexpr (is_nothrow_constructible_v<NT, Arg>) {
-        _NEFORCE destroy(old_val);
-        _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
-    } else if constexpr (is_nothrow_move_constructible_v<NT>) {
-        NT temp(_NEFORCE forward<Arg>(arg));
-        _NEFORCE destroy(old_val);
-        _NEFORCE construct(new_val, _NEFORCE move(temp));
-    } else {
-        temporary_guard<OT> guard(*old_val);
-        _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
-        guard.release();
-    }
+    _NEFORCE destroy(old_val);
+    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
+    return;
+}
+
+template <typename NT, typename OT, typename Arg>
+constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && is_nothrow_move_constructible_v<NT>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg)
+noexcept(is_nothrow_constructible_v<NT, Arg>) {
+    NT temp(_NEFORCE forward<Arg>(arg));
+    _NEFORCE destroy(old_val);
+    _NEFORCE construct(new_val, _NEFORCE move(temp));
+    return;
+}
+
+template <typename NT, typename OT, typename Arg>
+constexpr enable_if_t<!is_nothrow_constructible_v<NT, Arg> && !is_nothrow_move_constructible_v<NT>>
+reinitialize(NT* new_val, OT* old_val, Arg&& arg)
+noexcept(is_nothrow_constructible_v<NT, Arg>) {
+    temporary_guard<OT> guard(*old_val);
+    _NEFORCE construct(new_val, _NEFORCE forward<Arg>(arg));
+    guard.release();
+    return;
 }
 
 template <typename T, typename ErrorT, typename>
@@ -179,7 +190,7 @@ class expected {
     static_assert(inner::can_be_unexpected<ErrorT>);
 
     template <typename U, typename Err, typename UE = unexpected<ErrorT>>
-    static constexpr bool constructible_from_expected = disjunction_v<
+    using constructible_from_expected = disjunction<
         is_constructible<T, expected<U, Err>&>,
         is_constructible<T, expected<U, Err>>,
         is_constructible<T, const expected<U, Err>&>,
@@ -255,7 +266,7 @@ public:
     template <typename U, typename Gr>
     requires (is_constructible_v<T, const U&>)
         && (is_constructible_v<ErrorT, const Gr&>)
-        && (!constructible_from_expected<U, Gr>)
+        && (!constructible_from_expected<U, Gr>::value)
     constexpr explicit(explicit_conversion<const U&, const Gr&>)
     expected(const expected<U, Gr>& other)
     noexcept(conjunction_v<
@@ -272,7 +283,7 @@ public:
     template <typename U, typename Gr>
     requires is_constructible_v<T, U>
         && is_constructible_v<ErrorT, Gr>
-        && (!constructible_from_expected<U, Gr>)
+        && (!constructible_from_expected<U, Gr>::value)
     constexpr explicit(explicit_conversion<U, Gr>)
     expected(expected<U, Gr>&& other)
     noexcept(conjunction_v<
@@ -1454,5 +1465,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif
 #endif // NEFORCE_CORE_UTILITY_EXPECTED_HPP__
