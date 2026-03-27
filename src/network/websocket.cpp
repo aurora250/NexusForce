@@ -10,14 +10,14 @@ byte_vector websocket_session_base::build_frame(websocket_opcode opcode, const s
     first_byte |= static_cast<byte_t>(opcode) & 0x0F;
     frame.push_back(first_byte);
 
-    uint8_t second_byte = 0;
+    byte_t second_byte = 0;
     if (masked) {
         second_byte |= 0x80;
     }
 
     size_t len = payload.size();
     if (len < 126) {
-        second_byte |= static_cast<uint8_t>(len);
+        second_byte |= static_cast<byte_t>(len);
         frame.push_back(static_cast<byte_t>(second_byte));
     } else if (len <= 0xFFFF) {
         second_byte |= 126;

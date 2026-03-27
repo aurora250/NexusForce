@@ -195,7 +195,13 @@ void handle_cookie_api(
 void test_https_server() {
     try {
         https_server server(8443, 128);
-        server.load_certificate("D:/OpenSSL/server.crt", "D:/OpenSSL/server.key");
+        server.load_certificate(
+#ifdef NEFORCE_PLATFORM_LINUX
+            "/home/huenqi/server.crt", "/home/huenqi/server.key"
+#else
+            "D:/OpenSSL/server.crt", "D:/OpenSSL/server.key"
+#endif
+            );
 
         http_router& r = server.router();
 
@@ -284,7 +290,7 @@ void test_https_server() {
                 }
             );
 
-            while (true) {
+            while (server.is_running()) {
                 this_thread::sleep_for(seconds(1));
             }
         }
@@ -691,7 +697,7 @@ void test_ping() {
 void test_arp() {
     arp arp_resolver;
     if (!arp_resolver.open()) {
-        println("Failed to open ARP resolver");
+        println("Failed to open ARP resolver (you may need root)");
         return;
     }
 

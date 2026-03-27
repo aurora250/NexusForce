@@ -36,6 +36,7 @@ public:
     }
 
     const bytes_type& bytes() const noexcept { return bytes_; }
+    bytes_type& bytes() noexcept { return bytes_; }
 };
 
 NEFORCE_END_NAMESPACE__

@@ -1,5 +1,8 @@
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/socket/ftp_socket.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <arpa/inet.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -25,13 +28,13 @@ namespace {
         return result;
     }
 
-    void write_data_channel(tcp_socket& sock, const char* data, size_t len) {
+    void write_data_channel(tcp_socket& sock, const char* data, const size_t len) {
         size_t total = 0;
         while (total < len) {
             const ssize_t n = ::send(
-                static_cast<int>(sock.native_handle()),
+                sock.native_handle(),
                 data + total,
-                static_cast<int>(len - total), 0);
+                len - total, 0);
             if (n <= 0) {
                 NEFORCE_THROW_EXCEPTION(ftp_exception("Data channel write failed"));
             }
@@ -39,7 +42,7 @@ namespace {
         }
     }
 
-    void write_data_channel_tls(ssl_stream& stream, const char* data, size_t len) {
+    void write_data_channel_tls(ssl_stream& stream, const char* data, const size_t len) {
         size_t total = 0;
         while (total < len) {
             const ssize_t n = stream.write(data + total, len - total);
@@ -56,14 +59,14 @@ ssize_t ftp_socket::ctrl_send(const char* data, const size_t len) {
     if (tls_active_) {
         return ctrl_ssl_.write(data, len);
     }
-    return ::send(static_cast<int>(fd_), data, static_cast<int>(len), 0);
+    return ::send(fd_, data, static_cast<int>(len), 0);
 }
 
 ssize_t ftp_socket::ctrl_recv(char* buf, const size_t len) {
     if (tls_active_) {
         return ctrl_ssl_.read(buf, len);
     }
-    return ::recv(static_cast<int>(fd_), buf, static_cast<int>(len), 0);
+    return ::recv(fd_, buf, static_cast<int>(len), 0);
 }
 
 bool ftp_socket::ctrl_read_line(string& out) {
@@ -139,7 +142,7 @@ void ftp_socket::expect_code(const int expected, const string& cmd) {
     }
 }
 
-void ftp_socket::expect_codes(std::initializer_list<int> codes, const string& cmd) {
+void ftp_socket::expect_codes(const std::initializer_list<int> codes, const string& cmd) {
     const auto resp = send_command(cmd);
     for (const int c : codes) {
         if (resp.code == c) return;
@@ -155,7 +158,7 @@ void ftp_socket::do_ctrl_tls_handshake() {
     }
 
     ctrl_ssl_.reset(*ssl_ctx_);
-    ctrl_ssl_.set_fd(static_cast<ssl_stream::native_handle_type>(fd_));
+    ctrl_ssl_.set_fd(fd_);
     if (!sni_host_.empty()) {
         ctrl_ssl_.set_sni_hostname(sni_host_);
     }
@@ -215,64 +218,60 @@ tcp_socket ftp_socket::open_data_channel() {
         data_sock.connect(*data_addr);
         return data_sock;
 
-    } else {
-        const auto local = local_endpoint();
-        if (!local) {
-            NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get local endpoint for PORT"));
-        }
-
-        tcp_socket listen_sock;
-        listen_sock.open(AF_INET);
-        listen_sock.bind(ip_address::any(0, AF_INET));
-        listen_sock.listen(1);
-
-        const auto bound = listen_sock.local_endpoint();
-        if (!bound) {
-            NEFORCE_THROW_EXCEPTION(ftp_exception("PORT: failed to get bound address"));
-        }
-
-        string local_ip;
-        {
-            char buf[INET_ADDRSTRLEN] = {};
-            const auto* sa4 = reinterpret_cast<const ::sockaddr_in*>(local->data());
-            ::inet_ntop(AF_INET, &sa4->sin_addr, buf, sizeof(buf));
-            local_ip = buf;
-        }
-
-        const uint16_t bp = bound->port();
-        string ip_comma = local_ip;
-        for (char& c : ip_comma) if (c == '.') c = ',';
-
-        const string port_cmd = "PORT " + ip_comma + "," +
-                                to_string(bp >> 8) + "," + to_string(bp & 0xFF);
-        expect_code(200, port_cmd);
-
-        {
-            const int lfd = static_cast<int>(listen_sock.native_handle());
-            ::fd_set fds;
-            FD_ZERO(&fds);
-            FD_SET(lfd, &fds);
-            constexpr ::timeval tv { kActiveAcceptTimeoutSec, 0 };
-            const int sel = ::select(lfd + 1, &fds, nullptr, nullptr, &tv);
-            if (sel < 0) {
-                NEFORCE_THROW_EXCEPTION(socket_exception("PORT: select failed"));
-            }
-            if (sel == 0) {
-                NEFORCE_THROW_EXCEPTION(socket_exception("PORT: accept timed out"));
-            }
-        }
-
-        ::sockaddr_storage peer{};
-        ::socklen_t plen = sizeof(peer);
-        const auto client_fd = ::accept(
-            static_cast<int>(listen_sock.native_handle()),
-            reinterpret_cast<::sockaddr*>(&peer), &plen);
-        if (client_fd == INVALID_SOCKET) {
-            NEFORCE_THROW_EXCEPTION(socket_exception("PORT: accept failed"));
-        }
-
-        return tcp_socket(client_fd);
     }
+    const auto local = local_endpoint();
+    if (!local) {
+        NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get local endpoint for PORT"));
+    }
+
+    tcp_socket listen_sock;
+    listen_sock.open(AF_INET);
+    listen_sock.bind(ip_address::any(0, AF_INET));
+    listen_sock.listen(1);
+
+    const auto bound = listen_sock.local_endpoint();
+    if (!bound) {
+        NEFORCE_THROW_EXCEPTION(ftp_exception("PORT: failed to get bound address"));
+    }
+
+    string local_ip;
+    {
+        char buf[INET_ADDRSTRLEN] = {};
+        const auto* sa4 = reinterpret_cast<const ::sockaddr_in*>(local->data());
+        ::inet_ntop(AF_INET, &sa4->sin_addr, buf, sizeof(buf));
+        local_ip = buf;
+    }
+
+    const uint16_t bp = bound->port();
+    string ip_comma = local_ip;
+    for (char& c : ip_comma) if (c == '.') c = ',';
+
+    const string port_cmd = "PORT " + ip_comma + "," + to_string(bp >> 8) + "," + to_string(bp & 0xFF);
+    expect_code(200, port_cmd);
+
+    {
+        const int lfd = static_cast<int>(listen_sock.native_handle());
+        ::fd_set fds;
+        FD_ZERO(&fds);
+        FD_SET(lfd, &fds);
+        ::timeval tv { kActiveAcceptTimeoutSec, 0 };
+        const int sel = ::select(lfd + 1, &fds, nullptr, nullptr, &tv);
+        if (sel < 0) {
+            NEFORCE_THROW_EXCEPTION(socket_exception("PORT: select failed"));
+        }
+        if (sel == 0) {
+            NEFORCE_THROW_EXCEPTION(socket_exception("PORT: accept timed out"));
+        }
+    }
+
+    ::sockaddr_storage peer{};
+    ::socklen_t plen = sizeof(peer);
+    const auto client_fd = ::accept(listen_sock.native_handle(), reinterpret_cast<::sockaddr*>(&peer), &plen);
+    if (client_fd == invalid_handle) {
+        NEFORCE_THROW_EXCEPTION(socket_exception("PORT: accept failed"));
+    }
+
+    return tcp_socket(client_fd);
 }
 
 ssl_stream ftp_socket::wrap_data_channel(tcp_socket&& sock) {

@@ -5,6 +5,12 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <iphlpapi.h>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <linux/if.h>
+#include <net/if_arp.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 optional<mac_address> mac_address::parse(const string& str) noexcept {
@@ -21,10 +27,13 @@ optional<mac_address> mac_address::parse(const string& str) noexcept {
         }
         if (pos + 2 > str.size()) return none;
 
-        const byte_t high = hexadecimal::digit_value(str[pos]);
-        const byte_t low  = hexadecimal::digit_value(str[pos + 1]);
-        if (high == -1 || low == -1) return none;
-        ptr[i] = (high << 4) | low;
+        try {
+            const byte_t high = hexadecimal::digit_value(str[pos]);
+            const byte_t low  = hexadecimal::digit_value(str[pos + 1]);
+            ptr[i] = (high << 4) | low;
+        } catch (...) {
+            return none;
+        }
         pos += 2;
     }
     return result;
@@ -40,29 +49,29 @@ optional<mac_address> mac_address::get_by_ip(const ip_address& ip, const char* i
     const ::DWORD ip_addr = endian::host_to_network<::DWORD>(ip.address().get<sockaddr_in>().sin_addr.s_addr);
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
     if (ret == NO_ERROR && mac_len == 6) {
-        uint8_t mac_bytes[6];
+        byte_t mac_bytes[6];
         memory_copy(mac_bytes, mac, 6);
         return mac_address(mac_bytes);
     }
     return none;
 #else
-    struct arpreq req;
+    ::arpreq req;
     memory_zero(&req);
 
-    struct sockaddr_in* sin = (struct sockaddr_in*)&req.arp_pa;
+    auto* sin = reinterpret_cast<::sockaddr_in*>(&req.arp_pa);
     sin->sin_family = AF_INET;
-    sin->sin_addr.s_addr = endian::host_to_network<int>(ip.address().get<sockaddr_in>().sin_addr.s_addr);
+    sin->sin_addr.s_addr = endian::host_to_network<int>(ip.address().get<::sockaddr_in>().sin_addr.s_addr);
 
     if (iface) {
         string_copy(req.arp_dev, iface, IFNAMSIZ - 1);
         req.arp_dev[IFNAMSIZ - 1] = '\0';
     }
 
-    int fd = socket(AF_INET, SOCK_DGRAM, 0);
+    const int fd = ::socket(AF_INET, SOCK_DGRAM, 0);
     if (fd < 0) return none;
 
-    int ret = ioctl(fd, SIOCGARP, &req);
-    close(fd);
+    const int ret = ::ioctl(fd, SIOCGARP, &req);
+    ::close(fd);
 
     if (ret == 0 && (req.arp_flags & ATF_COM)) {
         uint8_t mac_bytes[6];

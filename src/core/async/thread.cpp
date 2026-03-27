@@ -267,9 +267,7 @@ bool thread::set_name(native_handle_type handle, const char* name) {
         }
     }
 #else
-    if (::pthread_setname_np(handle, name) != 0) {
-        NEFORCE_THROW_EXCEPTION(thread_exception("Failed to set thread name"));
-    }
+    return ::pthread_setname_np(handle, name) == 0;
 #endif
 }
 

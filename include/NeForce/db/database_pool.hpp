@@ -62,7 +62,11 @@ private:
     shared_ptr<T> acquire_impl();
 
 public:
-    database_pool(db_type type, const db_config& config, const pool_config& pool_config = {});
+    database_pool(db_type type, const db_config& config)
+    : database_pool(type, config, pool_config()) {}
+
+    database_pool(db_type type, const db_config& config, const pool_config& pool_config);
+
     ~database_pool();
 
     database_pool(const database_pool&) = delete;
