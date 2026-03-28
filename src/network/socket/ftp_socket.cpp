@@ -206,7 +206,7 @@ tcp_socket ftp_socket::open_data_channel() {
 
         const string data_ip = to_string(nums[0]) + "." + to_string(nums[1]) + "." +
                                to_string(nums[2]) + "." + to_string(nums[3]);
-        const uint16_t data_port = static_cast<uint16_t>(nums[4] * 256 + nums[5]);
+        const ports data_port{static_cast<uint16_t>(nums[4] * 256 + nums[5])};
 
         auto data_addr = ip_address::parse(data_ip, data_port);
         if (!data_addr) {
@@ -214,7 +214,7 @@ tcp_socket ftp_socket::open_data_channel() {
         }
 
         tcp_socket data_sock;
-        data_sock.open(AF_INET);
+        data_sock.open();
         data_sock.connect(*data_addr);
         return data_sock;
 
@@ -225,8 +225,8 @@ tcp_socket ftp_socket::open_data_channel() {
     }
 
     tcp_socket listen_sock;
-    listen_sock.open(AF_INET);
-    listen_sock.bind(ip_address::any(0, AF_INET));
+    listen_sock.open();
+    listen_sock.bind(ip_address::any());
     listen_sock.listen(1);
 
     const auto bound = listen_sock.local_endpoint();
@@ -242,7 +242,7 @@ tcp_socket ftp_socket::open_data_channel() {
         local_ip = buf;
     }
 
-    const uint16_t bp = bound->port();
+    const uint16_t bp = static_cast<uint16_t>(bound->port());
     string ip_comma = local_ip;
     for (char& c : ip_comma) if (c == '.') c = ',';
 
@@ -438,7 +438,7 @@ void ftp_socket::connect(const ip_address& addr, const tls_mode mode,
     }
 }
 
-void ftp_socket::connect(const string& hostname, const uint16_t port, const tls_mode mode,
+void ftp_socket::connect(const string& hostname, const ports port, const tls_mode mode,
                          dns_client* dns, ssl_context* ctx, const string& sni) {
     if (hostname.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("FTP hostname cannot be empty"));
@@ -478,10 +478,10 @@ void ftp_socket::connect(const string& hostname, const uint16_t port, const tls_
             continue;
         }
 
-        connected_  = false;
+        connected_ = false;
         tls_active_ = false;
-        tls_mode_   = mode;
-        ssl_ctx_  = ctx;
+        tls_mode_ = mode;
+        ssl_ctx_ = ctx;
         sni_host_ = sni.empty() ? hostname : sni;
         data_tls_ = false;
 

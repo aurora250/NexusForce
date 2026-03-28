@@ -818,7 +818,7 @@ NEFORCE_INLINE17 constexpr bool is_unpackaged_v = is_unpackaged<T>::value;
  */
 template <typename T>
 struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
-    char, signed char, unsigned char, wchar_t,
+    char, wchar_t,
 #ifdef NEFORCE_STANDARD_20
     char8_t,
 #endif
@@ -832,32 +832,6 @@ struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
  */
 template <typename T>
 NEFORCE_INLINE17 constexpr bool is_character_v = is_character<T>::value;
-#endif
-
-
-/**
- * @struct is_standard_character
- * @brief 判断类型是否为标准字符类型
- * @tparam T 要检查的类型
- *
- * 不包括signed char和unsigned char，只包括标准字符类型。
- */
-template <typename T>
-struct is_standard_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
-    char, wchar_t,
-#ifdef NEFORCE_STANDARD_20
-    char8_t,
-#endif
-    char16_t, char32_t
->::value> {};
-
-#ifdef NEFORCE_STANDARD_14
-/**
- * @var is_standard_character_v
- * @brief is_standard_character的便捷变量模板
- */
-template <typename T>
-NEFORCE_INLINE17 constexpr bool is_standard_character_v = is_standard_character<T>::value;
 #endif
 
 
@@ -888,8 +862,8 @@ NEFORCE_INLINE17 constexpr bool is_boolean_v = is_boolean<T>::value;
  */
 template <typename T>
 struct is_standard_integral : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
-    short, int, long, long long,
-    unsigned short, unsigned int, unsigned long, unsigned long long>::value> {};
+    signed char, short, int, long, long long,
+    unsigned char, unsigned short, unsigned int, unsigned long, unsigned long long>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**

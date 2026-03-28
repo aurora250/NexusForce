@@ -194,7 +194,7 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
 void smtp_socket::do_post_connect(
     const string& domain,
     const tls_mode mode,
-    ssl_context* ctx,
+    const ssl_context* ctx,
     const string& sni_hostname
 ) {
     tls_mode_   = mode;
@@ -219,7 +219,7 @@ void smtp_socket::do_post_connect(
     connected_ = true;
 }
 
-void smtp_socket::do_tls_handshake(ssl_context& ctx, const string& sni_hostname) {
+void smtp_socket::do_tls_handshake(const ssl_context& ctx, const string& sni_hostname) {
     ssl_.reset(ctx);
     ssl_.set_fd(fd_);
 
@@ -232,7 +232,7 @@ void smtp_socket::do_tls_handshake(ssl_context& ctx, const string& sni_hostname)
 }
 
 void smtp_socket::connect(const ip_address& addr, const string& domain,
-                          const tls_mode mode, ssl_context* ctx,
+                          const tls_mode mode, const ssl_context* ctx,
                           const string& sni_hostname) {
     if (!addr.is_valid()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid SMTP server address"));
@@ -253,15 +253,9 @@ void smtp_socket::connect(const ip_address& addr, const string& domain,
     do_post_connect(domain, mode, ctx, sni_hostname);
 }
 
-void smtp_socket::connect(
-    const string& hostname,
-    const uint16_t port,
-    const string& domain,
-    const tls_mode mode,
-    dns_client* dns,
-    ssl_context* ctx,
-    const string& sni_hostname
-) {
+void smtp_socket::connect(const string& hostname, const ports port,
+                          const string& domain, const tls_mode mode, dns_client* dns,
+                          const ssl_context* ctx, const string& sni_hostname) {
     if (hostname.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("SMTP hostname cannot be empty"));
     }
@@ -285,7 +279,6 @@ void smtp_socket::connect(
         NEFORCE_THROW_EXCEPTION(smtp_exception(("DNS resolution failed for host: " + hostname).data()));
     }
 
-    socket_exception last_err;
     for (const auto& ip_str : ips) {
         auto addr = ip_address::parse(ip_str, port);
         if (!addr) continue;
@@ -295,7 +288,6 @@ void smtp_socket::connect(
         if (!is_open()) continue;
 
         if (::connect(fd_, addr->data(), addr->size()) != 0) {
-            last_err = socket_exception();
             close();
             continue;
         }
@@ -319,7 +311,7 @@ void smtp_socket::disconnect() {
     close();
 }
 
-smtp_socket::starttls_result smtp_socket::starttls(ssl_context& ctx, const string& sni_hostname) {
+smtp_socket::starttls_result smtp_socket::starttls(const ssl_context& ctx, const string& sni_hostname) {
     if (!is_connected()) {
         NEFORCE_THROW_EXCEPTION(smtp_exception("Not connected to SMTP server"));
     }

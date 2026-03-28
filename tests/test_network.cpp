@@ -460,10 +460,10 @@ void test_http_client() {
             println("Request failed:", response.status_message);
         }
 
-        println("HTTP Version: HTTP/", response.http_version_major, ".", response.http_version_minor);
+        printfln("HTTP Version: HTTP/{}.{}", response.http_version_major, response.http_version_minor);
         println("Status Message: ", response.status_message);
         println("Effective URL: ", response.effective_url);
-        println("Total Time: ", response.total_time.count(), "ms");
+        printfln("Total Time: {}ms", response.total_time.count());
         println("Headers:");
         for (const auto& elem : response.headers) {
             const auto& key = elem.first;
@@ -476,7 +476,7 @@ void test_http_client() {
         if (!response.body.empty()) {
             println();
             println("Body (first 200 chars):");
-            println(response.body.substr(0, 200), "...");
+            println(response.body.view(0, 200), "...");
         }
 
         const auto& cookies = response.cookies;
@@ -524,7 +524,7 @@ void test_dns() {
 
         dns_client::config custom_config;
         custom_config.server = "192.168.1.1";
-        custom_config.port = 5353;
+        custom_config.port = ports{5353};
         custom_config.timeout = milliseconds(3000);
         dns_client custom_client(custom_config);
 
@@ -567,7 +567,7 @@ void test_dns() {
             "github.com",
             "stackoverflow.com"
         };
-        auto results = client.batch_query(domains, DNS_RECORD::A);
+        auto results = client.batch_query(domains, dns_record::A);
 
         for (size_t i = 0; i < domains.size(); ++i) {
             println(domains[i], ":");
@@ -595,9 +595,9 @@ void test_dns() {
 void test_traceroute() {
     try {
         icmp_socket icmp;
-        icmp.open(AF_INET);
+        icmp.open();
 
-        auto dest_opt = ip_address::parse("8.8.8.8", 0);
+        auto dest_opt = ip_address::parse("8.8.8.8");
         if (!dest_opt.has_value()) {
             println("解析目标地址失败");
             return;
@@ -652,9 +652,9 @@ void test_traceroute() {
 void test_ping() {
     try {
         icmp_socket icmp;
-        icmp.open(AF_INET);
+        icmp.open();
 
-        auto dest = ip_address::parse("8.8.8.8", 0);
+        auto dest = ip_address::parse("8.8.8.8");
         if (!dest.has_value()) {
             println("无法解析目标地址\n");
             return;
@@ -701,7 +701,7 @@ void test_arp() {
         return;
     }
 
-    auto ip = ip_address::parse("192.168.1.1", 0);
+    auto ip = ip_address::parse("192.168.1.1");
     if (ip) {
         auto mac = arp_resolver.resolve(*ip, milliseconds(2000));
         if (mac) {
@@ -723,7 +723,7 @@ void test_smtp() {
     smtp_socket smtp;
     smtp.connect(
        "smtp.qq.com",
-       465,
+       ports{465},
        "myhost.local",
        smtp_socket::tls_mode::implicit,
        &dns,

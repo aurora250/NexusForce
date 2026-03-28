@@ -31,10 +31,6 @@ public:
     NEFORCE_NODISCARD virtual bool is_ssl() const noexcept {
         return false;
     }
-
-    NEFORCE_NODISCARD native_handle_type release() noexcept {
-        return exchange(fd_, invalid_handle);
-    }
 };
 
 NEFORCE_END_NAMESPACE__

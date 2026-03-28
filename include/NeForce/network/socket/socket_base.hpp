@@ -40,14 +40,14 @@ class NEFORCE_API socket_base {
 public:
     using native_handle_type =
     #ifdef NEFORCE_PLATFORM_WINDOWS
-        uintptr_t;
+        ::UINT_PTR;
 #else
         int;
 #endif
 
     static constexpr native_handle_type invalid_handle =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        static_cast<native_handle_type>(~0);
+        numeric_traits<native_handle_type>::max();
 #else
         -1;
 #endif
@@ -85,7 +85,10 @@ public:
         return is_open();
     }
 
+    void open(int family, int type, int protocol);
     bool close() noexcept;
+
+    bool try_open(int family, int type, int protocol) noexcept;
 
     bool set_nonblocking(bool enable) noexcept;
 
@@ -113,8 +116,11 @@ public:
     NEFORCE_NODISCARD optional<ip_address> remote_endpoint() const;
 
     void bind(const ip_address& endpoint);
-
     void listen(int backlog);
+
+    NEFORCE_NODISCARD native_handle_type release() noexcept {
+        return exchange(fd_, invalid_handle);
+    }
 };
 
 NEFORCE_END_NAMESPACE__

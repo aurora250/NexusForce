@@ -16,7 +16,7 @@ public:
 
 private:
     tcp_acceptor acceptor_;
-    uint16_t port_;
+    ports port_;
     atomic<bool> running_{false};
     vector<thread> worker_threads_;
     thread_pool client_pool_;
@@ -50,9 +50,9 @@ protected:
                     continue;
                 }
 
-                client_pool_.submit_task([this, sock = _NEFORCE move(*client)]() mutable {
+                client_pool_.submit_task([this, sock = move(*client)]() mutable {
                     try {
-                        this->handle_client(socket_type(_NEFORCE move(sock)));
+                        this->handle_client(socket_type(move(sock)));
                     } catch (const exception& e) {
                         if (running_ && exception_handler_) {
                             exception_handler_(e);
@@ -105,7 +105,7 @@ public:
         if (running_) {
             return false;
         }
-        exception_handler_ = _NEFORCE move(handler);
+        exception_handler_ = move(handler);
         return true;
     }
 
@@ -159,7 +159,7 @@ public:
         return running_;
     }
 
-    NEFORCE_NODISCARD uint16_t port() const noexcept {
+    NEFORCE_NODISCARD ports port() const noexcept {
         return port_;
     }
 };

@@ -22,8 +22,8 @@ public:
     explicit mac_address(const bytes_type& bytes) noexcept
     : bytes_(bytes) {}
 
-    static optional<mac_address> parse(const string& str) noexcept;
-    static optional<mac_address> get_by_ip(const ip_address& ip, const char* iface = nullptr) noexcept;
+    static optional<mac_address> parse(string_view str) noexcept;
+    static optional<mac_address> parse(const ip_address& ip, const char* iface = nullptr) noexcept;
 
     string to_string() const;
 
@@ -36,7 +36,6 @@ public:
     }
 
     const bytes_type& bytes() const noexcept { return bytes_; }
-    bytes_type& bytes() noexcept { return bytes_; }
 };
 
 NEFORCE_END_NAMESPACE__

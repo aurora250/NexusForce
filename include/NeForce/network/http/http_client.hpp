@@ -21,10 +21,10 @@ public:
         unordered_map<string, string> default_headers;
         string user_agent{"NexusForce HTTP Client/1.0"_sv};
         string proxy_host;
-        uint16_t proxy_port = 0;
+        ports proxy_port;
     };
 
-    using progress_callback_t = function<void(size_t downloaded, size_t total)>;
+    using progress_callback_t = function<void(size_t, size_t)>;
     using error_callback_t = function<void(const exception&)>;
     using time_point = steady_clock::time_point;
 
@@ -43,14 +43,16 @@ private:
 private:
     string build_request_str(const http_client_request& req, const url& req_url) const;
     bool send_request(string_view request_str, time_point& send_start);
+
     optional<http_client_response> read_response(time_point& receive_start,
-        const string& request_host, const string& request_path);
+                                                 const string& request_host,
+                                                 const string& request_path);
 
     void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
     string build_cookie_header(const url& request_url) const;
 
-    http_client_response do_request(http_client_request req, int redirect_count = 0);
-    bool ensure_connected(const string& host, uint16_t port);
+    http_client_response do_request(http_client_request&& request, int redirect_count = 0);
+    bool ensure_connected(const string& host, ports port);
 
 public:
     http_client()
@@ -107,14 +109,14 @@ public:
         config_.receive_timeout = timeout;
     }
 
-    void set_proxy(string host, const uint16_t port) {
+    void set_proxy(string host, const ports port) {
         config_.proxy_host = move(host);
         config_.proxy_port = port;
     }
 
     void clear_proxy() {
         config_.proxy_host.clear();
-        config_.proxy_port = 0;
+        config_.proxy_port = ports::def;
     }
 
     void set_progress_callback(progress_callback_t callback) {

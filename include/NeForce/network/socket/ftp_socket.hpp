@@ -84,7 +84,7 @@ private:
     transfer_mode transfer_mode_ = transfer_mode::binary;
     passive_mode passive_mode_ = passive_mode::passive;
     string server_host_;
-    uint16_t server_port_ = 21;
+    ports server_port_{ports::ftp};
 
     static constexpr int kActiveAcceptTimeoutSec = 30;
 
@@ -131,7 +131,7 @@ public:
     void connect(const ip_address& addr, tls_mode mode = tls_mode::none,
                  ssl_context* ctx = nullptr, const string& sni_hostname = "");
 
-    void connect(const string& hostname, uint16_t port = 21,
+    void connect(const string& hostname, ports port = ports::ftp,
                  tls_mode mode = tls_mode::none, dns_client* dns = nullptr,
                  ssl_context* ctx = nullptr, const string& sni = "");
 

@@ -170,7 +170,7 @@
         #define NEFORCE_COMPILER_MINGW	1
     #endif
 
-	#if !defined(NEFORCE_COMPILER_CLANG) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+	#if !(defined(NEFORCE_COMPILER_CLANG) || defined(NEFORCE_COMPILER_MINGW)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
         /**
          * @def NEFORCE_COMPILER_GCC
          * @brief 定义使用GCC编译器编译
@@ -690,11 +690,6 @@
 #endif
 
 
-#define NEFORCE_MACRO_RANGE_BASIC_CHARS(MAC) \
-	MAC(char) \
-	MAC(signed char) \
-	MAC(unsigned char) \
-
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 
 #define NEFORCE_MACRO_RANGE_UNICODE_CHARS(MAC) \
@@ -708,17 +703,19 @@
 #endif
 
 #define NEFORCE_MACRO_RANGE_CHARS(MAC) \
-	NEFORCE_MACRO_RANGE_BASIC_CHARS(MAC) \
+	MAC(char) \
 	MAC(wchar_t) \
 	NEFORCE_MACRO_RANGE_UNICODE_CHARS(MAC)
 
 #define NEFORCE_MACRO_RANGE_SIGNED_INT(MAC) \
+	MAC(signed char) \
 	MAC(short) \
 	MAC(int) \
 	MAC(long) \
 	MAC(long long)
 
 #define NEFORCE_MACRO_RANGE_UNSIGNED_INT(MAC) \
+	MAC(unsigned char) \
 	MAC(unsigned short) \
 	MAC(unsigned int) \
 	MAC(unsigned long) \

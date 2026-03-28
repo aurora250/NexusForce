@@ -13,7 +13,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-optional<mac_address> mac_address::parse(const string& str) noexcept {
+optional<mac_address> mac_address::parse(const string_view str) noexcept {
     if (str.size() != 17) return none;
 
     mac_address result;
@@ -27,27 +27,26 @@ optional<mac_address> mac_address::parse(const string& str) noexcept {
         }
         if (pos + 2 > str.size()) return none;
 
-        try {
-            const byte_t high = hexadecimal::digit_value(str[pos]);
-            const byte_t low  = hexadecimal::digit_value(str[pos + 1]);
-            ptr[i] = (high << 4) | low;
-        } catch (...) {
+        const auto xpair = hexadecimal::xdigit_value(str[pos], str[pos + 1]);
+        if (!xpair.first) {
             return none;
         }
+        ptr[i] = xpair.second;
         pos += 2;
     }
     return result;
 }
 
 
-optional<mac_address> mac_address::get_by_ip(const ip_address& ip, const char* iface) noexcept {
+optional<mac_address> mac_address::parse(const ip_address& ip, const char* iface) noexcept {
     if (!ip.is_valid() || !ip.is_ipv4()) return none;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::ULONG mac[2] = {0};
-    ::ULONG mac_len = 6;
-    const ::DWORD ip_addr = endian::network_to_host<::DWORD>(
-            ip.address().get<sockaddr_in>().sin_addr.s_addr
+    ::ULONG mac_len = 6; // byte count SendARP expected
+
+    const ::ULONG ip_addr = endian::network_to_host<::ULONG>(
+            ip.address().get<::sockaddr_in>().sin_addr.s_addr
         );
 
     const ::DWORD ret = ::SendARP(ip_addr, 0, mac, &mac_len);
@@ -63,7 +62,7 @@ optional<mac_address> mac_address::get_by_ip(const ip_address& ip, const char* i
 
     auto* sin = reinterpret_cast<::sockaddr_in*>(&req.arp_pa);
     sin->sin_family = AF_INET;
-    sin->sin_addr.s_addr = endian::host_to_network<int>(ip.address().get<::sockaddr_in>().sin_addr.s_addr);
+    sin->sin_addr.s_addr = ip.address().get<::sockaddr_in>().sin_addr.s_addr;
 
     if (iface) {
         string_copy(req.arp_dev, iface, IFNAMSIZ - 1);

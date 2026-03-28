@@ -29,10 +29,9 @@ namespace {
 
         for (size_t i = 0; i < str.size(); ++i) {
             if (str[i] == '%' && i + 2 < str.size()) {
-                const int high = hexadecimal::digit_value(str[i + 1]);
-                const int low = hexadecimal::digit_value(str[i + 2]);
-                if (high >= 0 && low >= 0) {
-                    result += static_cast<char>((high << 4) | low);
+                const auto xpair = hexadecimal::xdigit_value(str[i + 1], str[i + 2]);
+                if (xpair.first) {
+                    result += static_cast<char>(xpair.second);
                     i += 2;
                 } else {
                     result += str[i];
@@ -400,8 +399,7 @@ optional<http_client_response> http_client::read_response(
         }
 
         http_client_response meta;
-        string header_only = response_data.substr(0, header_end_pos + 4);
-        parse_response(header_only.view(), meta, request_host, request_path);
+        parse_response(response_data.view(0, header_end_pos + 4), meta, request_host, request_path);
 
         const size_t body_start = header_end_pos + 4;
         size_t body_received = response_data.size() - body_start;
@@ -460,8 +458,8 @@ optional<http_client_response> http_client::read_response(
     }
 }
 
-bool http_client::ensure_connected(const string& host, const uint16_t port) {
-    const bool is_https = (port == 443);
+bool http_client::ensure_connected(const string& host, const ports port) {
+    const bool is_https = port == ports::https;
 
     if (client_.is_connected()) {
         if (client_.connected_host() == host && client_.connected_port() == port) {
@@ -484,12 +482,12 @@ bool http_client::ensure_connected(const string& host, const uint16_t port) {
     }
 }
 
-http_client_response http_client::do_request(http_client_request request, int redirect_count) {
+http_client_response http_client::do_request(http_client_request&& request, int redirect_count) {
     http_client_response response;
     const auto start_time = steady_clock::now();
 
     url req_url;
-    req_url.scheme = url::default_scheme(request.port);
+    req_url.scheme = request.port.to_string();
     req_url.host = request.host;
     req_url.port = request.port;
     req_url.path = request.path;
@@ -551,7 +549,7 @@ http_client_response http_client::do_request(http_client_request request, int re
 
             http_client_request new_req;
             new_req.host = new_url.host;
-            new_req.port = url::default_port(new_url.scheme.view());
+            new_req.port = ports::parse(new_url.scheme.view());
             new_req.path = new_url.path.empty() ? "/" : new_url.path;
             new_req.version = request.version;
             new_req.headers = request.headers;
@@ -680,7 +678,7 @@ http_client_response http_client::get(const string& url, const unordered_map<str
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::GET;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -702,7 +700,7 @@ http_client_response http_client::post(
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::POST;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -744,7 +742,7 @@ http_client_response http_client::put(
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::PUT;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -764,7 +762,7 @@ http_client_response http_client::del(const string& url, const unordered_map<str
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::DELETE;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -782,7 +780,7 @@ http_client_response http_client::head(const string& url, const unordered_map<st
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::HEAD;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -800,7 +798,7 @@ http_client_response http_client::options(const string& url, const unordered_map
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::OPTIONS;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -823,7 +821,7 @@ http_client_response http_client::patch(
 
     http_client_request req;
     req.host = parsed_url.host;
-    req.port = _NEFORCE url::default_port(parsed_url.scheme.view());
+    req.port = ports::parse(parsed_url.scheme.view());
     req.method = HTTP_METHOD::PATCH;
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
 
@@ -838,7 +836,7 @@ http_client_response http_client::patch(
     return request(_NEFORCE move(req));
 }
 
-bool http_client::download_file(const string& url, path output, bool is_binary) {
+bool http_client::download_file(const string& url, path output, const bool is_binary) {
     try {
         auto response = get(url);
 

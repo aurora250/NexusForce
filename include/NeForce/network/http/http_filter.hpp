@@ -31,10 +31,10 @@ public:
     : owns_filters_(owns_filters) {}
 
     http_filter_chain(const http_filter_chain&) = delete;
-    http_filter_chain& operator=(const http_filter_chain&) = delete;
+    http_filter_chain& operator =(const http_filter_chain&) = delete;
 
     http_filter_chain(http_filter_chain&&) noexcept = default;
-    http_filter_chain& operator=(http_filter_chain&&) noexcept = default;
+    http_filter_chain& operator =(http_filter_chain&&) noexcept = default;
 
     void add_filter(unique_ptr<http_filter> filter);
     void add_filter_ref(http_filter* filter);
@@ -61,7 +61,6 @@ public:
     string allowed_headers{"Content-Type, Cookie, Accept, X-Requested-With"};
     bool allow_credentials = true;
     size_t max_age = 86400;
-
 
     cors_filter() = default;
 

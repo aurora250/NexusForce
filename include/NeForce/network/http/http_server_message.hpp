@@ -15,8 +15,7 @@ struct http_request {
     unordered_map<string, string> parameters;
     unordered_map<string, string> form_data;
 
-    _NEFORCE http_session* session = nullptr;
-
+    http_session* session = nullptr;
 
     NEFORCE_NODISCARD string_view parameter(const string& name) const noexcept {
         const auto it = parameters.find(name);
@@ -143,7 +142,7 @@ struct NEFORCE_API http_response {
     }
 
     void set_content_type(string value) {
-        headers[HTTP_KEY::Content_Type] = _NEFORCE move(value);
+        headers[HTTP_KEY::Content_Type] = move(value);
     }
 };
 

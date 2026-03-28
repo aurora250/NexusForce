@@ -2,6 +2,9 @@
 #define NEFORCE_NETWORK_ARP_HPP__
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/mac_address.hpp"
+#ifdef NEFORCE_PLATFORM_LINUX
+#include "NeForce/network/socket/socket_base.hpp"
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API arp {
@@ -10,7 +13,7 @@ private:
     string iface_;
     bool opened_ = false;
 #else
-    int fd_ = -1;
+    socket_base sock_;
     string iface_;
     mac_address local_mac_;
     uint32_t local_ip_;
@@ -23,7 +26,7 @@ private:
 
 public:
     arp() = default;
-    ~arp();
+    ~arp() = default;
 
     bool open(const char* iface = nullptr) noexcept;
     void close() noexcept;

@@ -86,17 +86,12 @@ url url::parse(const string_view str) {
     }
 
     if (colon_pos != string::npos && colon_pos < host_port.size() - 1) {
-        string_view port_str = host_port.substr(colon_pos + 1);
-        try {
-            target.port = uinteger16::parse(port_str);
-        } catch (...) {
-            NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
-        }
-        if (target.port == 0) {
+        target.port = ports::parse(host_port.substr(colon_pos + 1));
+        if (!target.port) {
             NEFORCE_THROW_EXCEPTION(network_exception("URL invalid port"));
         }
     } else {
-        target.port = default_port(target.scheme.view());
+        target.port = ports::parse(target.scheme.view());
     }
 
     if (target.host.empty()) {
@@ -116,7 +111,7 @@ url url::parse(const string_view str) {
     }
 
     if (query_pos != string::npos && query_pos < len - 1) {
-        size_t query_end = fragment_pos != string::npos ? fragment_pos : len;
+        const size_t query_end = fragment_pos != string::npos ? fragment_pos : len;
         target.query = str.substr(query_pos + 1, query_end - query_pos - 1);
     }
 
@@ -130,16 +125,16 @@ url url::parse(const string_view str) {
 string url::to_string() const {
     string ret = scheme + "://" + host;
 
-    bool show_port = (port != 0);
+    bool show_port = static_cast<bool>(port);
     if (show_port) {
-        const uint16_t dport = default_port(scheme.view());
-        if (dport != 0 && port == dport) {
+        const ports dport = ports::parse(scheme.view());
+        if (!dport && port == dport) {
             show_port = false;
         }
     }
 
     if (show_port) {
-        ret += ":" + _NEFORCE to_string(port);
+        ret += ":" + _NEFORCE to_string(static_cast<uint16_t>(port));
     }
     ret += path.empty() ? "/" : path;
 
@@ -161,7 +156,7 @@ string url::encode(const string_view str, const bool encode_slash) noexcept {
         if (should_encode(c, encode_slash)) {
             result += '%';
             const auto uc = static_cast<unsigned char>(c);
-            const char hex[] = "0123456789ABCDEF";
+            constexpr char hex[] = "0123456789ABCDEF";
             result += hex[uc >> 4];
             result += hex[uc & 0x0F];
         } else {
@@ -182,14 +177,12 @@ optional<string> url::decode(const string_view str) noexcept {
                 return none;
             }
 
-            try {
-                const int high = hexadecimal::digit_value(str[i + 1]);
-                const int low = hexadecimal::digit_value(str[i + 2]);
-                result += static_cast<char>((high << 4) | low);
-                i += 2;
-            } catch (...) {
+            const auto xpair = hexadecimal::xdigit_value(str[i + 1], str[i + 2]);
+            if (!xpair.first) {
                 return none;
             }
+            result += xpair.second;
+            i += 2;
         } else if (str[i] == '+') {
             result += ' ';
         } else {
@@ -198,54 +191,6 @@ optional<string> url::decode(const string_view str) noexcept {
     }
 
     return result;
-}
-
-uint16_t url::default_port(const string_view scheme) noexcept {
-    if (scheme == "http" || scheme == "ws") return 80;
-    if (scheme == "https" || scheme == "wss") return 443;
-    if (scheme == "ftp") return 21;
-    if (scheme == "ssh") return 22;
-    if (scheme == "telnet") return 23;
-    if (scheme == "smtp") return 25;
-    if (scheme == "dns") return 53;
-    if (scheme == "pop3") return 110;
-    if (scheme == "imap") return 143;
-    return 0;
-}
-
-string_view url::default_scheme(const uint16_t port, const bool is_ws) noexcept {
-    switch (port) {
-        case 80: {
-            return is_ws ? "ws" : "http";
-        }
-        case 443: {
-            return is_ws ? "wss" : "https";
-        }
-        case 21: {
-            return "ftp";
-        }
-        case 22: {
-            return "ssh";
-        }
-        case 23: {
-            return "telnet";
-        }
-        case 25: {
-            return "smtp";
-        }
-        case 53: {
-            return "dns";
-        }
-        case 110: {
-            return "pop3";
-        }
-        case 143: {
-            return "imap";
-        }
-        default: {
-            return "";
-        }
-    }
 }
 
 NEFORCE_END_NAMESPACE__

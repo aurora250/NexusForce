@@ -11,7 +11,7 @@
 
 #include "NeForce/core/interface/iobject.hpp"
 #include "NeForce/core/string/to_numerics.hpp"
-#include "NeForce/core/string/to_string.hpp"
+#include "NeForce/core/string/format.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -89,9 +89,17 @@ template <>
 struct package<bool> {
     using type = boolean;
 };
+
 template <>
 struct unpackage<boolean> {
     using type = bool;
+};
+
+template <>
+struct formatter<boolean> {
+    NEFORCE_CONSTEXPR20 string operator ()(const boolean value, const format_options& options) const {
+        return formatter<bool>()(value.value(), options);
+    }
 };
 
 
@@ -125,6 +133,12 @@ struct package<SIGN## int## BYTE## _t> { \
 template <> \
 struct unpackage<SIGN## integer## BYTE> { \
     using type = SIGN## int## BYTE## _t; \
+}; \
+template <> \
+struct formatter<SIGN## integer## BYTE> { \
+    NEFORCE_CONSTEXPR20 string operator ()(const SIGN## integer## BYTE value, const format_options& options) const { \
+        return formatter<SIGN## int## BYTE## _t>()(value.value(), options); \
+    } \
 };
 
 /**
@@ -246,9 +260,17 @@ template <>
 struct package<float32_t> {
     using type = float32;
 };
+
 template <>
 struct unpackage<float32> {
     using type = float32_t;
+};
+
+template <>
+struct formatter<float32> {
+    NEFORCE_CONSTEXPR20 string operator ()(const float32 value, const format_options& options) const {
+        return formatter<float32_t>()(value.value(), options);
+    }
 };
 
 
@@ -284,9 +306,17 @@ template <>
 struct package<float64_t> {
     using type = float64;
 };
+
 template <>
 struct unpackage<float64> {
     using type = float64_t;
+};
+
+template <>
+struct formatter<float64> {
+    NEFORCE_CONSTEXPR20 string operator ()(const float64 value, const format_options& options) const {
+        return formatter<float64_t>()(value.value(), options);
+    }
 };
 
 
@@ -322,9 +352,17 @@ template <>
 struct package<decimal_t> {
     using type = decimal;
 };
+
 template <>
 struct unpackage<decimal> {
     using type = decimal_t;
+};
+
+template <>
+struct formatter<decimal> {
+    NEFORCE_CONSTEXPR20 string operator ()(const decimal value, const format_options& options) const {
+        return formatter<decimal_t>()(value.value(), options);
+    }
 };
 
 /** @} */ // Packages

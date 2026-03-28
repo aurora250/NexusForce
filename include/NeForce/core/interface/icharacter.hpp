@@ -113,7 +113,7 @@ struct icharacter : ipackage<T, CharT> {
  * @param c 单个字符
  * @return 转换后的普通字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 string to_string(const CharT& c) {
     return icharacter<package_t<CharT>, CharT>::to_string(basic_string<CharT>(1, c).view());
 }
@@ -124,7 +124,7 @@ NEFORCE_CONSTEXPR20 string to_string(const CharT& c) {
  * @param x C风格字符串
  * @return 转换后的普通字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 string to_string(const CharT* x) {
     return icharacter<package_t<CharT>, CharT>::to_string(basic_string_view<CharT>(x));
 }
@@ -135,7 +135,7 @@ NEFORCE_CONSTEXPR20 string to_string(const CharT* x) {
  * @param x 字符视图
  * @return 转换后的普通字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<CharT> x) {
     return icharacter<package_t<CharT>, CharT>::to_string(x);
 }
@@ -146,7 +146,7 @@ NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<CharT> x) {
  * @param x 字符串对象
  * @return 转换后的普通字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 string to_string(const basic_string<CharT>& x) {
     return icharacter<package_t<CharT>, CharT>::to_string(x.view());
 }
@@ -157,7 +157,7 @@ NEFORCE_CONSTEXPR20 string to_string(const basic_string<CharT>& x) {
  * @param x 右值字符串对象
  * @return 转换后的普通字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 string to_string(basic_string<CharT>&& x) {
     return icharacter<package_t<CharT>, CharT>::to_string(x.view());
 }
@@ -178,7 +178,7 @@ NEFORCE_CONSTEXPR20 string to_string<char>(string&& x) {
  * @param x 单个字符
  * @return 转换后的宽字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 wstring to_wstring(const CharT& x) {
     return icharacter<package_t<CharT>, CharT>::to_wstring(basic_string<CharT>(1, x).view());
 }
@@ -189,7 +189,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring(const CharT& x) {
  * @param x C风格字符串
  * @return 转换后的宽字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 wstring to_wstring(const CharT* x) {
     return icharacter<package_t<CharT>, CharT>::to_wstring(basic_string_view<CharT>(x));
 }
@@ -200,7 +200,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring(const CharT* x) {
  * @param x 字符视图
  * @return 转换后的宽字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<CharT> x) {
     return icharacter<package_t<CharT>, CharT>::to_wstring(x);
 }
@@ -211,7 +211,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<CharT> x) {
  * @param x 字符串对象
  * @return 转换后的宽字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string<CharT>& x) {
     return icharacter<package_t<CharT>, CharT>::to_wstring(x.view());
 }
@@ -222,7 +222,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string<CharT>& x) {
  * @param x 右值字符串对象
  * @return 转换后的宽字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 wstring to_wstring(basic_string<CharT>&& x) {
     return icharacter<package_t<CharT>, CharT>::to_wstring(x.view());
 }
@@ -245,7 +245,7 @@ NEFORCE_CONSTEXPR20 wstring to_wstring<wchar_t>(wstring&& x) {
  * @param x 单个字符
  * @return 转换后的UTF-8字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u8string to_u8string(const CharT& x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(basic_string<CharT>(1, x).view());
 }
@@ -256,7 +256,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string(const CharT& x) {
  * @param x C风格字符串
  * @return 转换后的UTF-8字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u8string to_u8string(const CharT* x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(basic_string_view<CharT>(x));
 }
@@ -267,7 +267,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string(const CharT* x) {
  * @param x 字符视图
  * @return 转换后的UTF-8字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<CharT> x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(x);
 }
@@ -278,7 +278,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<CharT> x) {
  * @param x 字符串对象
  * @return 转换后的UTF-8字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string<CharT>& x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(x.view());
 }
@@ -289,7 +289,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string<CharT>& x) {
  * @param x 右值字符串对象
  * @return 转换后的UTF-8字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u8string to_u8string(basic_string<CharT>&& x) {
     return icharacter<package_t<CharT>, CharT>::to_u8string(x.view());
 }
@@ -312,7 +312,7 @@ NEFORCE_CONSTEXPR20 u8string to_u8string<char8_t>(u8string&& x) {
  * @param x 单个字符
  * @return 转换后的UTF-16字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u16string to_u16string(const CharT& x) {
     return icharacter<package_t<CharT>, CharT>::to_u16string(basic_string<CharT>(1, x).view());
 }
@@ -323,7 +323,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string(const CharT& x) {
  * @param x C风格字符串
  * @return 转换后的UTF-16字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u16string to_u16string(const CharT* x) {
     return icharacter<package_t<CharT>, CharT>::to_u16string(basic_string_view<CharT>(x));
 }
@@ -334,7 +334,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string(const CharT* x) {
  * @param x 字符视图
  * @return 转换后的UTF-16字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<CharT> x) {
     return icharacter<package_t<CharT>, CharT>::to_u16string(x);
 }
@@ -345,7 +345,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<CharT> x) {
  * @param x 字符串对象
  * @return 转换后的UTF-16字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string<CharT>& x) {
     return icharacter<package_t<CharT>, CharT>::to_u16string(x.view());
 }
@@ -356,7 +356,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string<CharT>& x) {
  * @param x 右值字符串对象
  * @return 转换后的UTF-16字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u16string to_u16string(basic_string<CharT>&& x) {
     return icharacter<package_t<CharT>, CharT>::to_u16string(x.view());
 }
@@ -377,7 +377,7 @@ NEFORCE_CONSTEXPR20 u16string to_u16string<char16_t>(u16string&& x) {
  * @param x 单个字符
  * @return 转换后的UTF-32字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u32string to_u32string(const CharT& x) {
     return icharacter<package_t<CharT>, CharT>::to_u32string(basic_string<CharT>(1, x).view());
 }
@@ -388,7 +388,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string(const CharT& x) {
  * @param x C风格字符串
  * @return 转换后的UTF-32字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u32string to_u32string(const CharT* x) {
     return icharacter<package_t<CharT>, CharT>::to_u32string(basic_string_view<CharT>(x));
 }
@@ -399,7 +399,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string(const CharT* x) {
  * @param x 字符视图
  * @return 转换后的UTF-32字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<CharT> x) {
     return icharacter<package_t<CharT>, CharT>::to_u32string(x);
 }
@@ -410,7 +410,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<CharT> x) {
  * @param x 字符串对象
  * @return 转换后的UTF-32字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string<CharT>& x) {
     return icharacter<package_t<CharT>, CharT>::to_u32string(x.view());
 }
@@ -421,7 +421,7 @@ NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string<CharT>& x) {
  * @param x 右值字符串对象
  * @return 转换后的UTF-32字符串
  */
-template <typename CharT, enable_if_t<is_standard_character_v<CharT>, int> = 0>
+template <typename CharT, enable_if_t<is_character_v<CharT>, int> = 0>
 NEFORCE_CONSTEXPR20 u32string to_u32string(basic_string<CharT>&& x) {
     return icharacter<package_t<CharT>, CharT>::to_u32string(x.view());
 }

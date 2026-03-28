@@ -12,6 +12,8 @@
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/algorithm/type_erase.hpp"
+#include "NeForce/core/numeric/math.hpp"
+#include "NeForce/core/numeric/numeric_types.hpp"
 #include "NeForce/core/string/utf.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -62,12 +64,16 @@ NEFORCE_BEGIN_INNER__
 template <typename Collector>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string collector_to_string(const Collector& c) {
     if (_NEFORCE empty(c)) return {"[]"};
+
     string result;
     result += "[ ";
-    for (auto iter = _NEFORCE cbegin(c); iter != _NEFORCE cend(c); ++iter) {
-        if (iter != _NEFORCE cbegin(c)) result += ", ";
+
+    auto begin = _NEFORCE cbegin(c);
+    for (auto iter = begin; iter != _NEFORCE cend(c); ++iter) {
+        if (iter != begin) result += ", ";
         result += to_string(*iter);
     }
+
     result += " ]";
     return result;
 }
@@ -313,8 +319,9 @@ template <typename CharT, typename T>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) {
     static_assert(is_unsigned_v<T>, "T must be a integral type");
 
-    CharT buffer[21];
-    CharT* const buffer_end = buffer + 21;
+    CharT buffer[numeric_traits<uintmax_t>::digits10 + 2]; // digits10 + sign + '\0'
+    constexpr size_t buffer_size = extent_v<decltype(buffer)>;
+    CharT* const buffer_end = buffer + buffer_size;
     CharT* const rnext = inner::__uint_to_buff(buffer_end, x);
     const size_t count = buffer_end - rnext;
     return basic_string<CharT>(rnext, count);
@@ -328,29 +335,32 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __uint_to_string(T x) 
  * @return 进制字符串
  */
 NEFORCE_CONSTEXPR20 string __uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
-    if (value == 0) {
-        return "0";
-    }
+    if (value == 0) return "0";
+
     string result;
+    result.reserve(20);
+
     constexpr auto digits_lower = "0123456789abcdef";
     constexpr auto digits_upper = "0123456789ABCDEF";
     const auto digits = uppercase ? digits_upper : digits_lower;
+
     while (value > 0) {
         const uint64_t remainder = value % base;
         value /= base;
         result.push_back(digits[remainder]);
     }
+
     result.reverse();
     return result;
 }
 
 template <typename T, enable_if_t<
-    disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>, is_same<T, signed char>>, int> = 0>
+    disjunction_v<conjunction<is_standard_integral<T>, is_signed<T>>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
     return inner::__int_to_string<char>(x);
 }
 template <typename T, enable_if_t<
-    disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>, is_same<T, unsigned char>>, int> = 0>
+    disjunction_v<conjunction<is_standard_integral<T>, is_unsigned<T>>>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(const T x) {
     return inner::__uint_to_string<char>(x);
 }
@@ -370,15 +380,16 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
     T x, int precision = 6, const bool force_scientific = false, const bool force_fixed = false) {
     static_assert(is_floating_point_v<T>, "T must be a floating point type");
 
-    if (x == numeric_traits<T>::quiet_nan()) return basic_string<CharT>{"nan"};
+    if (_NEFORCE is_nan(x)) return basic_string<CharT>{"nan"};
+
     constexpr T inf = numeric_traits<T>::infinity();
-    if (x == inf || x == -inf) {
-        return (x < 0) ? basic_string<CharT>{"-inf"} : basic_string<CharT>{"inf"};
-    }
+    if (x == inf)  return basic_string<CharT>{"inf"};
+    if (x == -inf) return basic_string<CharT>{"-inf"};
 
     basic_string<CharT> result;
 
-    if (x < 0) {
+    const bool is_negative = (x < 0);
+    if (is_negative) {
         result += '-';
         x = -x;
     }
@@ -386,76 +397,94 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string_with
     if (precision < 0) precision = 0;
 
     bool use_scientific = false;
+    int exponent = 0;
+
     if (force_scientific) {
         use_scientific = true;
     } else if (force_fixed) {
         use_scientific = false;
     } else {
-        use_scientific = (x >= 1e6 || (x > 0 && x < 1e-4));
+        use_scientific = (x != 0) && (x >= 1e6 || x < 1e-4);
+    }
+
+    if (use_scientific && x != 0) {
+        const double log_val = logarithm_10(static_cast<double>(x));
+        exponent = static_cast<int>(log_val >= 0
+            ? log_val
+            : log_val - 1.0);
+
+        if (exponent >= 0) {
+            for (int i = 0; i < exponent; ++i) x /= static_cast<T>(10);
+        } else {
+            for (int i = 0; i < -exponent; ++i) x *= static_cast<T>(10);
+        }
+
+        if (x >= static_cast<T>(10)) {
+            x /= static_cast<T>(10);
+            ++exponent;
+        } else if (x < static_cast<T>(1) && x > static_cast<T>(0)) {
+            x *= static_cast<T>(10);
+            --exponent;
+        }
+    }
+
+    auto integer_part = static_cast<uint64_t>(x);
+    T fractional_part = x - static_cast<T>(integer_part);
+
+    uint64_t frac_int = 0;
+    uint64_t frac_scale = 1;
+
+    if (precision > 0) {
+        const int safe_precision = (precision > 18) ? 18 : precision;
+        for (int i = 0; i < safe_precision; ++i) {
+            frac_scale *= 10;
+        }
+
+        frac_int = static_cast<uint64_t>(
+            fractional_part * static_cast<T>(frac_scale) + static_cast<T>(0.5)
+        );
+
+        if (frac_int >= frac_scale) {
+            frac_int -= frac_scale;
+            ++integer_part;
+
+            if (use_scientific && integer_part >= 10) {
+                integer_part /= 10;
+                ++exponent;
+            }
+        }
+    }
+
+    result += inner::__uint_to_string<CharT>(integer_part);
+
+    if (precision > 0) {
+        result += static_cast<CharT>('.');
+        basic_string<CharT> frac_str = inner::__uint_to_string<CharT>(frac_int);
+
+        const int safe_precision = (precision > 18) ? 18 : precision;
+        const int leading_zeros = safe_precision - static_cast<int>(frac_str.size());
+        for (int i = 0; i < leading_zeros; ++i) {
+            result += static_cast<CharT>('0');
+        }
+        result += frac_str;
+
+        for (int i = safe_precision; i < precision; ++i) {
+            result += static_cast<CharT>('0');
+        }
     }
 
     if (use_scientific) {
-        int exponent = 0;
-
-        if (x == 0) {
-            exponent = 0;
-        } else {
-            if (x >= 1) {
-                while (x >= 10) {
-                    x /= 10;
-                    ++exponent;
-                }
-            } else {
-                while (x < 1) {
-                    x *= 10;
-                    --exponent;
-                }
-            }
-        }
-
-        auto integer_part = static_cast<uint64_t>(x);
-        T fractional_part = x - integer_part;
-
-        result += inner::__uint_to_string<CharT>(integer_part);
-
-        if (precision > 0) {
-            result += '.';
-            for (int i = 0; i < precision; ++i) {
-                fractional_part *= 10;
-                auto digit = static_cast<int>(fractional_part);
-                result += static_cast<CharT>('0' + digit);
-                fractional_part -= digit;
-            }
-        }
-
-        result += 'e';
+        result += static_cast<CharT>('e');
         if (exponent >= 0) {
-            result += '+';
+            result += static_cast<CharT>('+');
         } else {
-            result += '-';
+            result += static_cast<CharT>('-');
             exponent = -exponent;
         }
-
         if (exponent < 10) {
-            result += '0';
+            result += static_cast<CharT>('0');
         }
         result += inner::__uint_to_string<CharT>(static_cast<uint64_t>(exponent));
-
-    } else {
-        auto integer_part = static_cast<uint64_t>(x);
-        T fractional_part = x - integer_part;
-
-        result += inner::__uint_to_string<CharT>(integer_part);
-
-        if (precision > 0) {
-            result += '.';
-            for (int i = 0; i < precision; ++i) {
-                fractional_part *= 10;
-                auto digit = static_cast<int>(fractional_part);
-                result += static_cast<CharT>('0' + digit);
-                fractional_part -= digit;
-            }
-        }
     }
 
     return result;
@@ -486,7 +515,7 @@ NEFORCE_END_INNER__
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision(T x, int precision, bool scientific = false) {
-    return inner::__float_to_string_with_precision<char>(x, precision, scientific, scientific);
+    return inner::__float_to_string_with_precision<char>(x, precision, scientific, !scientific);
 }
 
 /**

@@ -89,14 +89,10 @@ private:
 
     vector<string> do_ehlo(const string& domain);
 
-    void do_post_connect(
-        const string& domain,
-        tls_mode mode,
-        ssl_context* ctx,
-        const string& sni_hostname
-    );
+    void do_post_connect(const string& domain, tls_mode mode,
+                         const ssl_context* ctx, const string& sni_hostname);
 
-    void do_tls_handshake(ssl_context& ctx, const string& sni_hostname);
+    void do_tls_handshake(const ssl_context& ctx, const string& sni_hostname);
 
 public:
     smtp_socket() = default;
@@ -115,7 +111,7 @@ public:
     void connect(const ip_address& addr,
                  const string& domain = "localhost",
                  tls_mode mode = tls_mode::none,
-                 ssl_context* ctx = nullptr,
+                 const ssl_context* ctx = nullptr,
                  const string& sni_hostname = "");
 
     /**
@@ -129,11 +125,11 @@ public:
      * @param sni_hostname SNI主机名，为空则使用hostname
      */
     void connect(const string& hostname,
-                 uint16_t port,
+                 ports port,
                  const string& domain = "localhost",
                  tls_mode mode = tls_mode::none,
                  dns_client* dns = nullptr,
-                 ssl_context* ctx = nullptr,
+                 const ssl_context* ctx = nullptr,
                  const string& sni_hostname = "");
 
     /**
@@ -142,7 +138,7 @@ public:
      * @param sni_hostname SNI主机名
      * @return STARTTLS协商结果
      */
-    starttls_result starttls(ssl_context& ctx, const string& sni_hostname = "");
+    starttls_result starttls(const ssl_context& ctx, const string& sni_hostname = "");
 
     /**
      * @brief 断开连接，发送QUIT命令

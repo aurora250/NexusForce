@@ -211,8 +211,9 @@ bool icmp_socket::receive_reply(
 
 void icmp_socket::open(const int family) {
     if (family != AF_INET) {
-        NEFORCE_THROW_EXCEPTION(value_exception("icmp_socket support IPv4 only"));
+        NEFORCE_THROW_EXCEPTION(value_exception("ICMP socket support IPv4 only"));
     }
+
     close();
 
     fd_ = ::socket(family, SOCK_RAW, IPPROTO_ICMP);

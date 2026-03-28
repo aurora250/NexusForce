@@ -41,6 +41,7 @@ namespace {
         call_once(init_module_flag, init_thread_name);
     }
 
+#ifdef NEFORCE_COMPILER_MSVC
     void set_thread_name_by_exception(const char* name) {
         constexpr ::DWORD MSVC_EXCEPTION = 0x406D1388;
         THREADNAME_INFO info;
@@ -56,6 +57,7 @@ namespace {
                 reinterpret_cast<::ULONG_PTR*>(&info));
         } __except(EXCEPTION_EXECUTE_HANDLER) {}
     }
+#endif
 
 #endif
 
@@ -259,10 +261,14 @@ bool thread::set_name(native_handle_type handle, const char* name) {
         HRESULT hr = pSetThreadDescription(handle, wstr.data());
         return SUCCEEDED(hr);
     } else {
+#ifdef NEFORCE_COMPILER_MSVC
         if (handle == ::GetCurrentThread()) {
             set_thread_name_by_exception(name);
             return true;
-        } else {
+        }
+        else
+#endif
+        {
             return false;
         }
     }

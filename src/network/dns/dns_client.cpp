@@ -63,7 +63,7 @@ namespace {
         return encoded;
     }
 
-    byte_vector build_dns_query(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+    byte_vector build_dns_query(const string_view domain, const dns_record::raw type, dns_query qclass) {
         byte_vector query;
         query.reserve(sizeof(dns_header) + domain.length() + 6);
 
@@ -78,8 +78,8 @@ namespace {
         auto encoded_domain = encode_domain_name(domain);
         query.insert(query.end(), encoded_domain.begin(), encoded_domain.end());
 
-        uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
-        uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
+        const uint16_t qtype = endian::host_to_network(static_cast<uint16_t>(type));
+        const uint16_t qclass_val = endian::host_to_network(static_cast<uint16_t>(qclass));
 
         query.insert(
             query.end(),
@@ -228,10 +228,12 @@ namespace {
             NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Incomplete resource record"));
         }
 
-        record.type = static_cast<DNS_RECORD>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+        record.type = static_cast<dns_record::raw>(
+            endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
         offset += 2;
 
-        record.class_type = static_cast<DNS_QUERY>(endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
+        record.class_type = static_cast<dns_query>(
+            endian::network_to_host(*reinterpret_cast<const uint16_t*>(&data[offset])));
         offset += 2;
 
         record.ttl = endian::network_to_host(*reinterpret_cast<const uint32_t*>(&data[offset]));
@@ -249,25 +251,25 @@ namespace {
 
         try {
             switch (record.type) {
-                case DNS_RECORD::A: {
+                case dns_record::A: {
                     record.data = parse_a_record(rdata);
                     break;
                 }
-                case DNS_RECORD::AAAA: {
+                case dns_record::AAAA: {
                     record.data = parse_aaaa_record(rdata);
                     break;
                 }
-                case DNS_RECORD::CNAME:
-                case DNS_RECORD::NS:
-                case DNS_RECORD::PTR: {
+                case dns_record::CNAME:
+                case dns_record::NS:
+                case dns_record::PTR: {
                     record.data = decode_domain_name(data, rdata_offset);
                     break;
                 }
-                case DNS_RECORD::MX: {
+                case dns_record::MX: {
                     record.data = parse_mx_record(data, rdata_offset, rdlength);
                     break;
                 }
-                case DNS_RECORD::TXT: {
+                case dns_record::TXT: {
                     record.data = parse_txt_record(rdata);
                     break;
                 }
@@ -304,7 +306,7 @@ namespace {
         header.nscount = endian::network_to_host<uint16_t>(header.nscount);
         header.arcount = endian::network_to_host<uint16_t>(header.arcount);
 
-        result.response_code = static_cast<DNS_RESPONSE>(header.flags & 0x000F);
+        result.response_code = static_cast<dns_response>(header.flags & 0x000F);
         result.truncated = (header.flags & 0x0200) != 0;
         result.recursive_available = (header.flags & 0x0080) != 0;
 
@@ -336,7 +338,7 @@ namespace {
         return result;
     }
 
-    string create_cache_key(const string_view domain, DNS_RECORD type, DNS_QUERY qclass) {
+    string create_cache_key(const string_view domain, const dns_record::raw type, dns_query qclass) {
         return domain + "_"_s + to_string(static_cast<int>(type)) + "_" + to_string(static_cast<int>(qclass));
     }
 }
@@ -347,7 +349,7 @@ byte_vector dns_client::send_udp_query(const byte_vector& query) const {
         udp_socket socket;
         milliseconds timeout{0};
         string server;
-        int port = 0;
+        ports port;
     } tls_udp_state;
 
     const bool config_changed = tls_udp_state.server != config_.server || tls_udp_state.port != config_.port;
@@ -405,7 +407,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
     thread_local struct tcp_socket_state {
         tcp_socket socket;
         string server;
-        int port = 0;
+        ports port;
     } tls_tcp_state;
 
     auto connect = [&] {
@@ -506,15 +508,12 @@ dns_client::dns_client(config cfg, const bool use_tcp)
     if (config_.server.empty()) {
         NEFORCE_THROW_EXCEPTION(dns_exception("DNS server address cannot be empty"));
     }
-    if (config_.port <= 0 || config_.port > 65535) {
-        NEFORCE_THROW_EXCEPTION(dns_exception("Invalid DNS server port"));
-    }
     if (config_.timeout <= milliseconds(0)) {
         NEFORCE_THROW_EXCEPTION(dns_exception("Timeout must be positive"));
     }
 }
 
-dns_query_result dns_client::query(const string_view domain, const DNS_RECORD type, const DNS_QUERY qclass) {
+dns_query_result dns_client::query(const string_view domain, const dns_record::raw type, const dns_query qclass) {
     if (domain.empty()) {
         NEFORCE_THROW_EXCEPTION(dns_exception("Domain name cannot be empty"));
     }
@@ -555,19 +554,19 @@ dns_query_result dns_client::query(const string_view domain, const DNS_RECORD ty
     return result;
 }
 
-future<dns_query_result> dns_client::query_async(const string& domain, DNS_RECORD type, DNS_QUERY qclass) {
+future<dns_query_result> dns_client::query_async(const string& domain, dns_record::raw type, dns_query qclass) {
     return async(launch::async, [this, domain, type, qclass] {
         return query(domain.view(), type, qclass);
     });
 }
 
 vector<string> dns_client::resolve_a(const string_view domain) {
-    const auto result = query(domain, DNS_RECORD::A);
+    const auto result = query(domain, dns_record::A);
     vector<string> ips;
     ips.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
-        if (record.type == DNS_RECORD::A) {
+        if (record.type == dns_record::A) {
             ips.push_back(record.data);
         }
     }
@@ -576,12 +575,12 @@ vector<string> dns_client::resolve_a(const string_view domain) {
 }
 
 vector<string> dns_client::resolve_aaaa(const string_view domain) {
-    const auto result = query(domain, DNS_RECORD::AAAA);
+    const auto result = query(domain, dns_record::AAAA);
     vector<string> ips;
     ips.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
-        if (record.type == DNS_RECORD::AAAA) {
+        if (record.type == dns_record::AAAA) {
             ips.push_back(record.data);
         }
     }
@@ -590,12 +589,12 @@ vector<string> dns_client::resolve_aaaa(const string_view domain) {
 }
 
 vector<string> dns_client::resolve_cname(const string_view domain) {
-    const auto result = query(domain, DNS_RECORD::CNAME);
+    const auto result = query(domain, dns_record::CNAME);
     vector<string> cnames;
     cnames.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
-        if (record.type == DNS_RECORD::CNAME) {
+        if (record.type == dns_record::CNAME) {
             cnames.push_back(record.data);
         }
     }
@@ -604,12 +603,12 @@ vector<string> dns_client::resolve_cname(const string_view domain) {
 }
 
 vector<string> dns_client::resolve_mx(const string_view domain) {
-    const auto result = query(domain, DNS_RECORD::MX);
+    const auto result = query(domain, dns_record::MX);
     vector<string> mx_records;
     mx_records.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
-        if (record.type == DNS_RECORD::MX) {
+        if (record.type == dns_record::MX) {
             mx_records.push_back(record.data);
         }
     }
@@ -618,12 +617,12 @@ vector<string> dns_client::resolve_mx(const string_view domain) {
 }
 
 vector<string> dns_client::resolve_txt(const string_view domain) {
-    const auto result = query(domain, DNS_RECORD::TXT);
+    const auto result = query(domain, dns_record::TXT);
     vector<string> txt_records;
     txt_records.reserve(result.answers.size());
 
     for (const auto& record : result.answers) {
-        if (record.type == DNS_RECORD::TXT) {
+        if (record.type == dns_record::TXT) {
             txt_records.push_back(record.data);
         }
     }
@@ -662,15 +661,15 @@ string dns_client::reverse_query(const string_view ip) {
         reverse_domain = parts[3] + "."_s + parts[2] + "." + parts[1] + "." + parts[0] + ".in-addr.arpa";
     }
 
-    const auto result = query(reverse_domain.view(), DNS_RECORD::PTR);
+    const auto result = query(reverse_domain.view(), dns_record::PTR);
 
-    if (!result.answers.empty() && result.answers[0].type == DNS_RECORD::PTR) {
+    if (!result.answers.empty() && result.answers[0].type == dns_record::PTR) {
         return result.answers[0].data;
     }
     return "";
 }
 
-vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, const DNS_RECORD type) {
+vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, const dns_record::raw type) {
     if (domains.empty()) {
         return {};
     }
@@ -690,7 +689,7 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
             results.push_back(future.get());
         } catch (...) {
             dns_query_result failed_result;
-            failed_result.response_code = DNS_RESPONSE::SERVER_FAILURE;
+            failed_result.response_code = dns_response::SERVER_FAILURE;
             results.push_back(failed_result);
         }
     }

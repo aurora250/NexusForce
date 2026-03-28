@@ -33,18 +33,27 @@ public:
     using base = ipackage;       ///< 基类类型
 
 public:
+    static constexpr byte_t invalid_xdigit = numeric_traits<byte_t>::max();
+    
     /**
      * @brief 将十六进制字符转换为对应的数值
      * @param c 十六进制字符（0-9, a-f, A-F）
-     * @return 对应的数值（0-15）
-     * @throws value_exception 无效字符时抛出
+     * @return 对应的数值（0-15），当字符无效时返回invalid_xdigit
      */
-    static NEFORCE_CONSTEXPR20 byte_t digit_value(const char c) {
+    static constexpr byte_t xdigit_value(const char c) noexcept {
         if (c >= '0' && c <= '9') return c - '0';
         if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
         if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid hexadecimal character"));
-        unreachable();
+        return invalid_xdigit;
+    }
+
+    static constexpr pair<bool, byte_t> xdigit_value(const char high, const char low) noexcept {
+        const byte_t xhigh = xdigit_value(high);
+        const byte_t xlow = xdigit_value(low);
+        if (xhigh == invalid_xdigit || xlow == invalid_xdigit) {
+            return {false, invalid_xdigit};
+        }
+        return {true, high << 4 | low};
     }
 
 private:
@@ -82,7 +91,7 @@ private:
         while (start < view.size()) {
             const char c = view[start++];
             if (is_xdigit(c)) {
-                const int digit = digit_value(c);
+                const int digit = xdigit_value(c);
                 if (result > (numeric_traits<uint64_t>::max() >> 4)) {
                     NEFORCE_THROW_EXCEPTION(value_exception("Hexadecimal value too large"));
                 }

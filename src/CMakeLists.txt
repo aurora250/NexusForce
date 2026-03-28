@@ -84,6 +84,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/arp.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/mac_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ports.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/url.cpp
@@ -197,7 +198,7 @@ if(WIN32)
     )
 elseif(UNIX AND NOT APPLE)
     target_link_libraries(NexusForce PUBLIC
-            atomic pthread c++abi
+            atomic c++abi pthread
     )
 endif()
 

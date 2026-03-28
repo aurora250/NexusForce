@@ -26,6 +26,7 @@ uuid::uuid(const string_view bytes) {
 
         size_t pos = 0;
         size_t byte_index = 0;
+
         while (byte_index < 16) {
             if (pos == 8 || pos == 13 || pos == 18 || pos == 23) {
                 ++pos;
@@ -34,9 +35,12 @@ uuid::uuid(const string_view bytes) {
             if (pos + 1 >= bytes.size()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("unexpected end of UUID string"));
             }
-            const byte_t high = hexadecimal::digit_value(bytes[pos]);
-            const byte_t low = hexadecimal::digit_value(bytes[pos + 1]);
-            data_[byte_index++] = (high << 4) | low;
+
+            const auto xpair = hexadecimal::xdigit_value(bytes[pos], bytes[pos + 1]);
+            if (!xpair.first) {
+                NEFORCE_THROW_EXCEPTION(value_exception("invalid UUID string"));
+            }
+            data_[byte_index++] = xpair.second;
             pos += 2;
         }
         return;
@@ -44,9 +48,11 @@ uuid::uuid(const string_view bytes) {
 
     if (bytes.size() == 32) {
         for (size_t i = 0; i < 16; ++i) {
-            const byte_t high = hexadecimal::digit_value(bytes[i * 2]);
-            const byte_t low  = hexadecimal::digit_value(bytes[i * 2 + 1]);
-            data_[i] = (high << 4) | low;
+            const auto xpair = hexadecimal::xdigit_value(bytes[i * 2], bytes[i * 2 + 1]);
+            if (!xpair.first) {
+                NEFORCE_THROW_EXCEPTION(value_exception("invalid UUID string"));
+            }
+            data_[i] = xpair.second;
         }
         return;
     }

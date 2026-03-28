@@ -12,7 +12,7 @@ public:
     using socket_type = SocketT;
     using duration = milliseconds;
     using exception_handler_t = function<void(const exception&)>;
-    using connect_callback_t = function<void(const string&, uint16_t)>;
+    using connect_callback_t = function<void(const string&, ports)>;
     using disconnect_callback_t = function<void()>;
 
 private:
@@ -20,7 +20,7 @@ private:
     optional<socket_type> socket_;
 
     string connected_host_;
-    uint16_t connected_port_ = 0;
+    ports connected_port_;
     int reconnect_attempts_ = 3;
     atomic<int> current_reconnect_attempt_{0};
 
@@ -39,7 +39,7 @@ protected:
     exception_handler_t exception_handler_;
 
 private:
-    bool try_connect_to_ip(const string& ip, const uint16_t port) {
+    bool try_connect_to_ip(const string& ip, const ports port) {
         const bool is_ipv6_conn = ip.find(':') != string::npos;
 
         try {
@@ -228,13 +228,13 @@ public:
         disconnect_callback_ = move(callback);
     }
 
-    virtual bool connect(const string& host, uint16_t port) {
+    virtual bool connect(const string& host, ports port) {
         if (host.empty()) {
             handle_exception(value_exception("Host cannot be empty"));
             return false;
         }
 
-        if (port == 0) {
+        if (!port) {
             handle_exception(value_exception("Port cannot be zero"));
             return false;
         }
@@ -319,7 +319,7 @@ public:
 
         socket_.reset();
         connected_host_.clear();
-        connected_port_ = 0;
+        connected_port_ = ports::def;
     }
 
     ssize_t send(const void* data, const size_t length) {
@@ -554,7 +554,7 @@ public:
         return connected_host_;
     }
 
-    NEFORCE_NODISCARD uint16_t connected_port() const noexcept {
+    NEFORCE_NODISCARD ports connected_port() const noexcept {
         return connected_port_;
     }
 

@@ -8,8 +8,8 @@
  * 此文件提供了URL（统一资源定位符）的解析和构建功能。
  */
 
-#include "NeForce/core/interface/iobject.hpp"
 #include "NeForce/core/utility/optional.hpp"
+#include "NeForce/network/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -35,7 +35,7 @@ NEFORCE_BEGIN_NAMESPACE__
 struct url : iobject<url> {
     string scheme;      ///< 协议类型
     string host;        ///< 主机名或IP地址
-    uint16_t port = 0;  ///< 端口号（0表示使用默认端口）
+    ports port;         ///< 端口号
     string path;        ///< 资源路径
     string query;       ///< 查询字符串
     string fragment;    ///< 片段标识符
@@ -96,15 +96,6 @@ struct url : iobject<url> {
      * 将%XX格式转换回原始字符
      */
     NEFORCE_NODISCARD static optional<string> decode(string_view str) noexcept;
-
-    /**
-     * @brief 获取默认端口号
-     * @param scheme 协议名称
-     * @return 默认端口号，未知协议返回0
-     */
-    NEFORCE_NODISCARD static uint16_t default_port(string_view scheme) noexcept;
-
-    NEFORCE_NODISCARD static string_view default_scheme(uint16_t port, bool is_ws = false) noexcept;
 };
 
 /** @} */ // Network

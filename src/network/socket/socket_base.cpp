@@ -69,6 +69,19 @@ socket_base& socket_base::operator =(socket_base&& other) noexcept {
     return *this;
 }
 
+void socket_base::open(const int family, const int type, const int protocol) {
+    if (family != AF_INET && family != AF_INET6) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family for socket"));
+    }
+
+    close();
+
+    fd_ = ::socket(family, type, protocol);
+    if (!is_open()) {
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create socket"));
+    }
+}
+
 bool socket_base::close() noexcept {
     if (!is_open()) {
         return true;
@@ -83,6 +96,16 @@ bool socket_base::close() noexcept {
 
     fd_ = invalid_handle;
     return success;
+}
+
+bool socket_base::try_open(const int family, const int type, const int protocol) noexcept {
+    if (family != AF_INET && family != AF_INET6) {
+        return false;
+    }
+
+    close();
+    fd_ = ::socket(family, type, protocol);
+    return is_open();
 }
 
 bool socket_base::set_nonblocking(const bool enable) noexcept {

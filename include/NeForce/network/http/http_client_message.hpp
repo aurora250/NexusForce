@@ -4,6 +4,7 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/http/http_session.hpp"
+#include "NeForce/network/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 struct http_client_response {
@@ -69,7 +70,7 @@ public:
 struct http_client_request {
     HTTP_METHOD method{HTTP_METHOD::GET};
     string host;
-    uint16_t port = 80;
+    ports port;
     string path = "/";
     string version = "HTTP/1.1";
     unordered_map<string, string> headers;

@@ -71,7 +71,7 @@ struct variant : icommon<variant<Types...>> {
     static_assert(
         !is_any_of<none_t, Types...>::value ||
         (is_any_of<none_t, Types...>::value && is_same<get_first_para_t<Types...>, none_t>::value),
-        "if variant holds non, it should be at the first place");
+        "if variant holds none, it should be in the first place");
 
 private:
     size_t index_ = 0;  ///< 当前存储类型的索引

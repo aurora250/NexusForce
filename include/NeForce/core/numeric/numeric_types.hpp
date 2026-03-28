@@ -9,8 +9,8 @@
  * 包括符号位检测、特殊值判断、正规性检查等功能。
  */
 
-#include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
+#include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -112,7 +112,8 @@ template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_normal(const T x) noexcept {
 	if (!_NEFORCE is_finite(x)) return false;
 	if (x == 0) return false;
-	return _NEFORCE absolute(x) >= numeric_traits<T>::min();
+    const T abs = x < 0 ? -x : x;
+	return abs >= numeric_traits<T>::min();
 }
 
 /**
@@ -128,7 +129,8 @@ template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
 NEFORCE_CONST_FUNCTION constexpr bool is_subnormal(const T x) noexcept {
 	if (!_NEFORCE is_finite(x)) return false;
 	if (x == 0) return false;
-	return _NEFORCE absolute(x) < numeric_traits<T>::min();
+    const T abs = x < 0 ? -x : x;
+	return abs < numeric_traits<T>::min();
 }
 
 /**

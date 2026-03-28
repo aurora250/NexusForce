@@ -6,13 +6,14 @@
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/dns/dns_message.hpp"
+#include "NeForce/network/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API dns_client {
 public:
     struct config {
         string server{"8.8.8.8"};
-        int port{53};
+        ports port{ports::dns};
         milliseconds timeout{5000};
     };
 
@@ -45,14 +46,14 @@ public:
 
     dns_query_result query(
         string_view domain,
-        DNS_RECORD type = DNS_RECORD::A,
-        DNS_QUERY qclass = DNS_QUERY::INTERNET
+        dns_record::raw type = dns_record::A,
+        dns_query qclass = dns_query::INTERNET
     );
 
     future<dns_query_result> query_async(
         const string& domain,
-        DNS_RECORD type = DNS_RECORD::A,
-        DNS_QUERY qclass = DNS_QUERY::INTERNET
+        dns_record::raw type = dns_record::A,
+        dns_query qclass = dns_query::INTERNET
     );
 
     vector<string> resolve_a(string_view domain);
@@ -62,7 +63,7 @@ public:
     vector<string> resolve_txt(string_view domain);
     string reverse_query(string_view ip);
 
-    vector<dns_query_result> batch_query(const vector<string>& domains, DNS_RECORD type = DNS_RECORD::A);
+    vector<dns_query_result> batch_query(const vector<string>& domains, dns_record::raw type = dns_record::A);
 };
 
 NEFORCE_END_NAMESPACE__
