@@ -64,7 +64,7 @@ namespace {
 
             size_t chunk_size = 0;
             try {
-                chunk_size = hexadecimal::parse(size_str);
+                chunk_size = hexadecimal::parse(size_str).value();
             } catch (...) {
                 return false;
             }
@@ -123,7 +123,7 @@ namespace {
                 c.http_only = true;
             } else if (lower_attr.starts_with("max-age=")) {
                 try {
-                    c.max_age = integer32::parse(attr.substr(8));
+                    c.max_age = integer32::parse(attr.substr(8)).value();
                 } catch (...) {
                     // ignore
                 }
@@ -162,8 +162,8 @@ namespace {
             const size_t dot = ver.find('.');
             if (dot != string::npos) {
                 try {
-                    resp.http_version_major = static_cast<uint16_t>(uinteger16::parse(ver.substr(0, dot)));
-                    resp.http_version_minor = static_cast<uint16_t>(uinteger16::parse(ver.substr(dot + 1)));
+                    resp.http_version_major = uinteger16::parse(ver.substr(0, dot)).value();
+                    resp.http_version_minor = uinteger16::parse(ver.substr(dot + 1)).value();
                 } catch (...) {
                     // ignore
                 }
@@ -177,7 +177,7 @@ namespace {
         }
 
         try {
-            uint16_t code = uinteger16::parse(status_line.substr(sp1 + 1, sp2 - sp1 - 1));
+            uint16_t code = uinteger16::parse(status_line.substr(sp1 + 1, sp2 - sp1 - 1)).value();
             resp.status = static_cast<HTTP_STATUS>(code);
         } catch (...) {
             // ignore
@@ -218,7 +218,7 @@ namespace {
                     resp.chunked = value.find("chunked") != string::npos;
                 } else if (key_lower == "content-length") {
                     try {
-                        resp.content_length = uinteger64::parse(value);
+                        resp.content_length = uinteger64::parse(value).value();
                     } catch (...) {
                         // ignore
                     }

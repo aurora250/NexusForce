@@ -371,9 +371,9 @@ public:
         if (view.size() != 10 || view[4] != '-' || view[7] != '-') {
             NEFORCE_THROW_EXCEPTION(value_exception("Wrong string formation."));
         }
-        const date_type year = integer32::parse(view.substr(0, 4));
-        const date_type month = integer32::parse(view.substr(5, 2));
-        const date_type day = integer32::parse(view.substr(8, 2));
+        const date_type year = integer32::parse(view.substr(0, 4)).value();
+        const date_type month = integer32::parse(view.substr(5, 2)).value();
+        const date_type day = integer32::parse(view.substr(8, 2)).value();
         return date(year, month, day);
     }
 
@@ -646,9 +646,9 @@ public:
         if (view.size() != 8 || view[2] != ':' || view[5] != ':') {
             NEFORCE_THROW_EXCEPTION(value_exception("Wrong string formation."));
         }
-        const time_type hour = integer32::parse(view.substr(0, 2));
-        const time_type minute = integer32::parse(view.substr(3, 2));
-        const time_type second = integer32::parse(view.substr(6, 2));
+        const time_type hour = integer32::parse(view.substr(0, 2)).value();
+        const time_type minute = integer32::parse(view.substr(3, 2)).value();
+        const time_type second = integer32::parse(view.substr(6, 2)).value();
         return time(hour, minute, second);
     }
 
@@ -1211,12 +1211,12 @@ public:
             int hours = 0, minutes = 0;
             size_t pos = 20;
             if (view.size() >= pos + 2) {
-                hours = integer32::parse(view.substr(pos, 2));
+                hours = integer32::parse(view.substr(pos, 2)).value();
                 pos += 2;
                 if (view.size() >= pos + 3 && view[pos] == ':') {
                     pos++;
                     if (view.size() >= pos + 2) {
-                        minutes = integer32::parse(view.substr(pos, 2));
+                        minutes = integer32::parse(view.substr(pos, 2)).value();
                     }
                 }
             }
@@ -1281,18 +1281,18 @@ public:
         }
 
         view.remove_prefix(5);
-        const int day = integer32::parse(view.substr(0, 2));
+        const int day = integer32::parse(view.substr(0, 2)).value();
         view.remove_prefix(3);
         const int mon = months_to_int(view.substr(0, 3));
         if (mon == 0) NEFORCE_THROW_EXCEPTION(value_exception("Invalid month in date"));
         view.remove_prefix(4);
-        const int year = integer32::parse(view.substr(0, 4));
+        const int year = integer32::parse(view.substr(0, 4)).value();
         view.remove_prefix(5);
-        const int hour = integer32::parse(view.substr(0, 2));
+        const int hour = integer32::parse(view.substr(0, 2)).value();
         view.remove_prefix(3);
-        const int minute = integer32::parse(view.substr(0, 2));
+        const int minute = integer32::parse(view.substr(0, 2)).value();
         view.remove_prefix(3);
-        const int second = integer32::parse(view.substr(0, 2));
+        const int second = integer32::parse(view.substr(0, 2)).value();
         view.remove_prefix(3);
 
         if (view != "GMT") {
@@ -1482,7 +1482,7 @@ public:
      * @return 解析得到的时间戳
      */
     NEFORCE_NODISCARD static constexpr timestamp parse(const string_view view) {
-        return timestamp{integer64::parse(view)};
+        return timestamp{integer64::parse(view).value()};
     }
 
     /**

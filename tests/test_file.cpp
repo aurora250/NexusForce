@@ -282,7 +282,7 @@ void test_datetime() {
 void test_timestamp() {
     _NEFORCE datetime epoch = _NEFORCE datetime::epoch();
     _NEFORCE timestamp ts1(epoch);
-    assert(ts1 == 0);
+    assert(ts1.value() == 0);
     assert(ts1.to_datetime() == epoch);
 
     _NEFORCE timestamp ts2(86400);
@@ -292,7 +292,7 @@ void test_timestamp() {
     _NEFORCE timestamp ts3(100);
     _NEFORCE timestamp ts4(200);
     assert(ts3 < ts4);
-    assert(ts4 - ts3 == 100);
+    assert(ts4.value() - ts3.value() == 100);
 
     println("test_timestamp passed");
 }

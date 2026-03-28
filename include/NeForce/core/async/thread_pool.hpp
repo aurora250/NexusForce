@@ -179,7 +179,7 @@ struct task_info {
 		if (start_time.value() == 0 || finish_time.value() == 0) {
 			return -1;
 		}
-		return finish_time - start_time;
+		return finish_time.value() - start_time.value();
 	}
 };
 

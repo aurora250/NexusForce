@@ -70,7 +70,7 @@ string http_server_base::session_manager::generate_session_id()  {
     string str;
     str.reserve(32);
     for (int i = 0; i < 32; ++i) {
-        str += format("{x}", rand_.next_int(0, 15));
+        str += format("{:x}", rand_.next_int(0, 15));
     }
     return move(str);
 }
@@ -237,7 +237,7 @@ http_request http_server_base::parse_request(
                 if (cl_end != string::npos) {
                     const auto cl_str = request_data.view(cl_pos + 15, cl_end - cl_pos - 15).trim();
                     try {
-                        content_length = uinteger64::parse(cl_str);
+                        content_length = uinteger64::parse(cl_str).value();
                     } catch (...) {
                         NEFORCE_THROW_EXCEPTION(http_exception("Invalid Content-Length"));
                     }

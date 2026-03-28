@@ -4,7 +4,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 int env_variable::get_int(const int default_value) const noexcept {
     try {
-        return integer32::parse(value_.view());
+        return integer32::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
@@ -12,7 +12,7 @@ int env_variable::get_int(const int default_value) const noexcept {
 
 int64_t env_variable::get_int64(const int64_t default_value) const noexcept {
     try {
-        return integer64::parse(value_.view());
+        return integer64::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
@@ -20,7 +20,7 @@ int64_t env_variable::get_int64(const int64_t default_value) const noexcept {
 
 double env_variable::get_double(const double default_value) const noexcept {
     try {
-        return float64::parse(value_.view());
+        return float64::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
@@ -28,7 +28,7 @@ double env_variable::get_double(const double default_value) const noexcept {
 
 bool env_variable::get_bool(const bool default_value) const noexcept {
     try {
-        return boolean::parse(value_.view());
+        return boolean::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }

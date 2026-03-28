@@ -217,79 +217,79 @@ void test_regex() {
 void test_format() {
     {
         hexadecimal x(255);
-        println(format("{#x}", x));  // "0xff"
-        println(format("{#X}", x));  // "0XFF"
-        println(format("{x}", x));   // "ff"
+        println(format("{:#x}", x));  // "0xff"
+        println(format("{:#X}", x));  // "0XFF"
+        println(format("{:x}", x));   // "ff"
 
-        println(format("{#10x}", x));     // "      0xff"
-        println(format("{*>#10x}", x));   // "******0xff"
-        println(format("{0=#10x}", x));   // "0x000000ff"
+        println(format("{:#10x}", x));     // "      0xff"
+        println(format("{:*>#10x}", x));   // "******0xff"
+        println(format("{:0=#10x}", x));   // "0x000000ff"
 
-        println(format("{<#10x}", x));  // "0xff      "
-        println(format("{=#10x}", x));  // "0x      ff"
+        println(format("{:<#10x}", x));  // "0xff      "
+        println(format("{:=#10x}", x));  // "0x      ff"
 
-        println(format("{-=#10X}", x));  // "0X      FF"
+        println(format("{:-=#10X}", x));  // "0X      FF"
 
         hexadecimal neg(-255);
-        println(absolute(neg), sign(neg));
-        println(format("{0=#10x}", neg)); // "-0x00000ff"
-        println(format("{#10x}", neg));   // "      -0xff"
+        println(absolute(neg.value()), sign(neg.value()));
+        println(format("{:0=#10x}", neg)); // "-0x00000ff"
+        println(format("{:#10x}", neg));   // "      -0xff"
 
-        println(format("{#x}", x));    // "0xff"
-        println(format("{#X}", x));    // "0XFF"
-        println(format("{#08x}", x));  // "0x0000ff"
-        println(format("{x}", x));     // "ff"
+        println(format("{:#x}", x));    // "0xff"
+        println(format("{:#X}", x));    // "0XFF"
+        println(format("{:#08x}", x));  // "0x0000ff"
+        println(format("{:x}", x));     // "ff"
 
 
         hexadecimal hex(255);
-        string result1 = format("{#010X}", hex);  // "0X000000FF"
+        string result1 = format("{:#010X}", hex);  // "0X000000FF"
         println(result1);
         hexadecimal tmp(222);
         _NEFORCE swap(hex, tmp);
-        println(format("{#010X}", hex));          // "0X000000DE"
+        println(format("{:#010X}", hex));          // "0X000000DE"
         println(hexadecimal(222));
 
         integer64 num(12345);
-        string result2 = format("{+>15d}", num);  // "        +12345"
+        string result2 = format("{:+>15d}", num);  // "        +12345"
         println(result2);
 
-        string result3 = format("{#b}", num);  // "0b11000000111001"
+        string result3 = format("{:#b}", num);  // "0b11000000111001"
         println(result3);
 
         decimal dec(3.14159);
-        string result4 = format("{.2f}", dec);  // "3.14"
+        string result4 = format("{:.2f}", dec);  // "3.14"
         println(result4);
-        string result5 = format("{.3e}", dec);  // "3.141e+00"
+        string result5 = format("{:.3e}", dec);  // "3.142e+00"
         println(result5);
 
-        string result6 = format("{^20x}", hex);      // "       de       "
+        string result6 = format("{:^20x}", hex);      // "       de       "
         println(result6);
-        string result7 = format("{#o}", num);        // "0o30071"
+        string result7 = format("{:#o}", num);        // "0o30071"
         println(result7);
-        string result8 = format("{+10.4f}", dec);    // "   +3.1415"
+        string result8 = format("{:+10.4f}", dec);    // "   +3.1415"
         println(result8);
 
-        string r1 = format("{.2f}", dec);  // "3.14"
+        string r1 = format("{:.2f}", dec);  // "3.14"
         println(r1);
-        string r2 = format("{.4e}", dec);  // "3.1415e+00"
+        string r2 = format("{:.4e}", dec);  // "3.1416e+00"
         println(r2);
-        string r3 = format("{.6g}", dec);  // "3.141589"
+        string r3 = format("{:.6g}", dec);  // "3.141590"
         println(r3);
-        string r4 = format("{+10.3f}", dec);  // "    +3.141"
+        string r4 = format("{:+10.3f}", dec);  // "    +3.141"
         println(r4);
     }
     {
         uinteger32 x(255u);
-        println(format("{d}", x));  // "255"
-        println(format("{b}", x));  // "11111111"
-        println(format("{#b}", x));  // "0b11111111"
-        println(format("{10d}", x));  // "       255"
-        println(format("{<10d}", x)); // "255       "
-        println(format("{010d}", x)); // "0000000255"
+        println(format("{:d}", x));  // "255"
+        println(format("{:b}", x));  // "11111111"
+        println(format("{:#b}", x));  // "0b11111111"
+        println(format("{:10d}", x));  // "       255"
+        println(format("{:<10d}", x)); // "255       "
+        println(format("{:010d}", x)); // "0000000255"
 
         uint64_t ull = 123456789ULL;
         println(ull);
-        println(format("{#x}", ull));
+        println(format("{:#x}", ull));
     }
 }
 

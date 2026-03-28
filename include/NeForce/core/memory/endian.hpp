@@ -14,6 +14,7 @@ public:
         __BYTE_ORDER == __LITTLE_ENDIAN;
 #else
         false;
+#warning "Unsupported costexpr endian type"
 #endif
 
     static constexpr bool is_big_endian = !is_little_endian;

@@ -53,7 +53,7 @@ uint64_t random_mt::generate_64bit() noexcept {
 }
 
 random_mt::random_mt() noexcept {
-    set_seed(static_cast<seed_type>(timestamp::now()));
+    set_seed(static_cast<seed_type>(timestamp::now().value()));
 }
 
 void random_mt::set_seed(const seed_type seed) noexcept {

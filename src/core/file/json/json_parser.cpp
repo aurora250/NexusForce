@@ -84,7 +84,7 @@ unique_ptr<json_number> json_parser::parse_number() {
     }
 
     try {
-        double value = float64::parse(text_.view(start, pos_ - start));
+        double value = float64::parse(text_.view(start, pos_ - start)).value();
         return make_unique<json_number>(value);
     } catch (...) {
         NEFORCE_THROW_EXCEPTION(json_exception("Invalid number value"));

@@ -9,8 +9,8 @@
  * 支持不同字符类型到各种字符串类型的转换功能。
  */
 
-#include "NeForce/core/string/string.hpp"
 #include "NeForce/core/interface/ipackage.hpp"
+#include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -31,10 +31,14 @@ template <typename T, typename CharT>
 struct icharacter : ipackage<T, CharT> {
     static_assert(is_character_v<CharT>, "CharT must be character.");
 
-    /**
-     * @brief 默认构造函数
-     */
     constexpr icharacter() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~icharacter() = default;
+
+    constexpr icharacter(const icharacter&) noexcept = default;
+    constexpr icharacter(icharacter&&) noexcept = default;
+
+    constexpr icharacter& operator =(const icharacter&) noexcept = default;
+    constexpr icharacter& operator =(icharacter&&) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -45,10 +49,10 @@ struct icharacter : ipackage<T, CharT> {
 
     /**
      * @brief 转换为bool操作符
-     * @return 字符是否非空（不等于初始化值）
+     * @return 字符是否非空
      */
     NEFORCE_NODISCARD constexpr explicit operator bool() const noexcept {
-        return ipackage<T, CharT>::value_ != _NEFORCE initialize<CharT>();
+        return ipackage<T, CharT>::value_ != static_cast<CharT>(0);
     }
 
     /**

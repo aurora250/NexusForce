@@ -461,24 +461,6 @@ NEFORCE_END_INNER__
 
 
 /**
- * @brief json值指针转换为紧凑格式字符串
- * @param value json值指针
- * @return 紧凑格式字符串
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value* value) {
-    return inner::json_value_to_string(value);
-}
-
-/**
- * @brief json值引用转换为紧凑格式字符串
- * @param value json值引用
- * @return 紧凑格式字符串
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const json_value& value) {
-    return inner::json_value_to_string(&value);
-}
-
-/**
  * @brief json值智能指针转换为紧凑格式字符串
  * @param value json值智能指针
  * @return 紧凑格式字符串

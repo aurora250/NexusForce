@@ -53,15 +53,16 @@ public:
     using package_type = PackageT;  ///< 包装类型
 
 protected:
-    package_type value_{_NEFORCE initialize<package_type>()};  ///< 存储的数值
+    package_type value_{static_cast<package_type>(0)};  ///< 存储的数值
 
 public:
-    /**
-     * @brief 默认构造函数
-     *
-     * 构造一个值为默认初始化值的包装对象。
-     */
     constexpr ipackage() noexcept = default;
+
+    constexpr ipackage(const ipackage& other) noexcept = default;
+    constexpr ipackage(ipackage&& other) noexcept = default;
+
+    constexpr ipackage& operator =(const ipackage& other) noexcept = default;
+    constexpr ipackage& operator =(ipackage&& other) noexcept = default;
 
     /**
      * @brief 构造函数
@@ -71,22 +72,6 @@ public:
      */
     explicit constexpr ipackage(package_type value) noexcept
     : value_(value) {}
-
-    /**
-     * @brief 拷贝构造函数
-     * @param other 源对象
-     */
-    constexpr ipackage(const ipackage& other) noexcept
-    : value_(other.value_) {}
-
-    /**
-     * @brief 移动构造函数
-     * @param other 源对象
-     */
-    constexpr ipackage(ipackage&& other) noexcept
-    : value_(other.value_) {
-        other.value_ = initialize<package_type>();
-    }
 
 protected:
     /**
@@ -101,7 +86,7 @@ public:
      * @brief 类型转换操作符
      * @return 转换为包装类型的数值
      */
-    NEFORCE_NODISCARD constexpr operator package_type() const noexcept {
+    NEFORCE_NODISCARD explicit constexpr operator package_type() const noexcept {
         return value_;
     }
 
@@ -211,7 +196,7 @@ public:
         if (other.value_ == 0) {
             NEFORCE_THROW_EXCEPTION(math_exception("Division by zero"));
         }
-        value_ /= other;
+        value_ /= other.value_;
         return derived();
     }
 

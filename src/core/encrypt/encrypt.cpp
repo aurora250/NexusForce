@@ -429,7 +429,7 @@ string MD5::hash_hex(const cbyte_view data) {
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("{02x}", hex_byte);
+        hex_result += format("{:02x}", hex_byte);
     }
     return hex_result;
 }
@@ -518,7 +518,7 @@ string SHA1::hash_hex(cbyte_view data) {
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("{02x}", hex_byte);
+        hex_result += format("{:02x}", hex_byte);
     }
     return hex_result;
 }
@@ -588,7 +588,7 @@ string SHA256::hash_hex(const cbyte_view data) {
     string hex_result;
     for (const byte_t byte : hash_result) {
         hexadecimal hex_byte(byte);
-        hex_result += format("{02x}", hex_byte);
+        hex_result += format("{:02x}", hex_byte);
     }
     return hex_result;
 }
@@ -694,7 +694,7 @@ string AES256::encrypt_hex(const string_view data, const string_view key_hex) {
     string result;
     for (const byte_t byte : encrypted) {
         hexadecimal hex_byte(byte);
-        result += format("{02x}", hex_byte);
+        result += format("{:02x}", hex_byte);
     }
     return result;
 }

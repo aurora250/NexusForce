@@ -817,7 +817,7 @@ NEFORCE_INLINE17 constexpr bool is_unpackaged_v = is_unpackaged<T>::value;
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_character : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
+struct is_character : bool_constant<is_any_of<remove_cvref_t<T>,
     char, wchar_t,
 #ifdef NEFORCE_STANDARD_20
     char8_t,
@@ -841,7 +841,7 @@ NEFORCE_INLINE17 constexpr bool is_character_v = is_character<T>::value;
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_boolean : bool_constant<is_same<unpack_remove_cvref_t<T>, bool>::value> {};
+struct is_boolean : bool_constant<is_same<remove_cvref_t<T>, bool>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -861,7 +861,7 @@ NEFORCE_INLINE17 constexpr bool is_boolean_v = is_boolean<T>::value;
  * 包括所有标准整数类型，不包括字符类型和布尔类型。
  */
 template <typename T>
-struct is_standard_integral : bool_constant<is_any_of<unpack_remove_cvref_t<T>,
+struct is_standard_integral : bool_constant<is_any_of<remove_cvref_t<T>,
     signed char, short, int, long, long long,
     unsigned char, unsigned short, unsigned int, unsigned long, unsigned long long>::value> {};
 
@@ -901,7 +901,7 @@ NEFORCE_INLINE17 constexpr bool is_integral_v = is_integral<T>::value;
  * @tparam T 要检查的类型
  */
 template <typename T>
-struct is_floating_point : bool_constant<is_any_of<unpack_remove_cvref_t<T>, float, double, long double>::value> {};
+struct is_floating_point : bool_constant<is_any_of<remove_cvref_t<T>, float, double, long double>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**

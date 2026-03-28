@@ -2,9 +2,33 @@
 #include <NeForce/core/file/ini/ini_value.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    string ini_value_to_string(const ini_value* value) {
+        switch (value->type()) {
+            case ini_value::Property: {
+                return value->as_property()->get_value();
+            }
+            case ini_value::Section: {
+                const ini_section* section = value->as_section();
+                string result;
+                if (!section->get_name().empty()) {
+                    result += "[" + section->get_name() + "]\n";
+                }
+                for (const auto& prop : section->get_properties()) {
+                    result += prop.first + " = " + prop.second->get_value() + "\n";
+                }
+                return result;
+            }
+            default: {
+                return "";
+            }
+        }
+    }
+}
+
 int ini_property::get_int(const int default_value) const noexcept {
     try {
-        return integer32::parse(value_.view());
+        return integer32::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
@@ -12,7 +36,7 @@ int ini_property::get_int(const int default_value) const noexcept {
 
 double ini_property::get_double(const double default_value) const noexcept {
     try {
-        return float64::parse(value_.view());
+        return float64::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
@@ -20,42 +44,23 @@ double ini_property::get_double(const double default_value) const noexcept {
 
 bool ini_property::get_bool(const bool default_value) const noexcept {
     try {
-        return boolean::parse(value_.view());
+        return boolean::parse(value_.view()).value();
     } catch (...) {
         return default_value;
     }
 }
 
-NEFORCE_BEGIN_INNER__
-
-string NEFORCE_API ini_value_to_string(const ini_value* value) {
-    if (!value) return "";
-
-    switch (value->type()) {
-        case ini_value::Property: {
-            return value->as_property()->get_value();
-        }
-        case ini_value::Section: {
-            const ini_section* section = value->as_section();
-            string result;
-            if (!section->get_name().empty()) {
-                result += "[" + section->get_name() + "]\n";
-            }
-            for (const auto& prop : section->get_properties()) {
-                result += prop.first + " = " + prop.second->get_value() + "\n";
-            }
-            return result;
-        }
-        default: {
-            return "";
-        }
-    }
+string ini_value::to_string() const {
+    return ini_value_to_string(this);
 }
 
-string NEFORCE_API ini_document_to_string(const ini_document* doc) {
-    if (!doc) return "";
+string ini_value::to_document() const {
+    return ini_value_to_string(this);
+}
+
+string ini_document::to_string() const {
     string result;
-    const ini_section* global = doc->get_global_section();
+    const ini_section* global = get_global_section();
     if (global && !global->get_properties().empty()) {
         for (const auto& prop : global->get_properties()) {
             result += prop.first + " = " + prop.second->get_value() + "\n";
@@ -63,7 +68,7 @@ string NEFORCE_API ini_document_to_string(const ini_document* doc) {
         result += "\n";
     }
 
-    for (const auto& sec : doc->get_sections()) {
+    for (const auto& sec : get_sections()) {
         result += "[" + sec.first + "]\n";
         for (const auto& prop : sec.second->get_properties()) {
             result += prop.first + " = " + prop.second->get_value() + "\n";
@@ -72,7 +77,5 @@ string NEFORCE_API ini_document_to_string(const ini_document* doc) {
     }
     return result;
 }
-
-NEFORCE_END_INNER__
 
 NEFORCE_END_NAMESPACE__

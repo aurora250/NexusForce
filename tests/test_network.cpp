@@ -149,7 +149,7 @@ void handle_cookie_api(
             ck.name = name;
             ck.value = value;
             if (!max_age_str.empty()) {
-                ck.max_age = integer32::parse(max_age_str.view());
+                ck.max_age = integer32::parse(max_age_str.view()).value();
             }
             response.cookies.emplace_back(move(ck));
 

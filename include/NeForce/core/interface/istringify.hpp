@@ -11,7 +11,6 @@
  */
 
 #include "NeForce/core/string/string.hpp"
-#include "NeForce/core/string/lexical_cast.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -73,15 +72,6 @@ template <typename T, enable_if_t<is_base_of_v<istringify<T>, T>, int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& obj) {
     return obj.to_string();
 }
-
-
-template <typename From>
-struct lexical_caster<string, From> {
-    static enable_if_t<is_base_of_v<istringify<From>, From>, string>
-    cast(const From& value) {
-        return value.to_string();
-    }
-};
 
 /** @} */ // ToString
 

@@ -245,7 +245,7 @@ decimal_t mysql_prepared_result::get_decimal(const size_type n) const {
 
     if ((*is_null_)[n]) return {};
 
-    return decimal::parse({(*buffers_)[n].data(), (*lengths_)[n]});
+    return decimal::parse({(*buffers_)[n].data(), (*lengths_)[n]}).value();
 }
 
 vector<char> mysql_prepared_result::get_blob(const size_type n) const {

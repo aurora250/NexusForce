@@ -466,7 +466,7 @@ public:
      * @return 格式为RRGGBBAA的十六进制字符串
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
-        return _NEFORCE format("{02X}{02X}{02X}{02X}", r, g, b, a);
+        return _NEFORCE format("{:02X}{:02X}{:02X}{:02X}", r, g, b, a);
     }
 
     /**
@@ -555,9 +555,9 @@ public:
      */
     NEFORCE_NODISCARD constexpr integer32 to_ansi_foreground(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return {38 * 100 + 5 * 10 + to_ansi_256()};
+            return integer32{38 * 100 + 5 * 10 + to_ansi_256()};
         }
-        return {to_ansi_basic(false)};
+        return integer32{to_ansi_basic(false)};
     }
 
     /**
@@ -567,9 +567,9 @@ public:
      */
     NEFORCE_NODISCARD constexpr integer32 to_ansi_background(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return {48 * 100 + 5 * 10 + to_ansi_256()};
+            return integer32{48 * 100 + 5 * 10 + to_ansi_256()};
         }
-        return {to_ansi_basic(true)};
+        return integer32{to_ansi_basic(true)};
     }
 
     /**
@@ -579,9 +579,9 @@ public:
      */
     NEFORCE_NODISCARD constexpr integer32 to_integer32(const bool use_256_color = true) const noexcept {
         if (use_256_color) {
-            return {to_ansi_256()};
+            return integer32{to_ansi_256()};
         }
-        return {to_ansi_basic(false)};
+        return integer32{to_ansi_basic(false)};
     }
 
     /**

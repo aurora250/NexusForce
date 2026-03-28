@@ -196,7 +196,7 @@ tcp_socket ftp_socket::open_data_channel() {
             const auto token = (comma == string::npos)
                 ? nums_str.substr(pos)
                 : nums_str.substr(pos, comma - pos);
-            nums[idx++] = integer32::parse(token);
+            nums[idx++] = integer32::parse(token).value();
             if (comma == string::npos) break;
             pos = comma + 1;
         }

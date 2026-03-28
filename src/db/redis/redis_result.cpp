@@ -124,11 +124,11 @@ int64_t redis_result::value_int64() const {
     if (result_->type == REDIS_REPLY_INTEGER) {
         return result_->integer;
     }
-    return integer64::parse(get_string().view());
+    return integer64::parse(get_string().view()).value();
 }
 
 double redis_result::value_double() const {
-    return float64::parse(get_string().view());
+    return float64::parse(get_string().view()).value();
 }
 
 vector<string> redis_result::value_array() const {

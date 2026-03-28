@@ -43,7 +43,7 @@ string match_result::format(const string_view fmt) const {
                 if (j < fmt.length()) {
                     const string_view group_ref = fmt.view(i + 2, j - (i + 2));
                     try {
-                        const int group = integer32::parse(group_ref);
+                        const int group = integer32::parse(group_ref).value();
                         if (group >= 0 && group < static_cast<int>(groups_.size())) {
                             result += groups_[group];
                         }

@@ -846,7 +846,7 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
 
     try {
         if (is_float) {
-            return make_shared<yaml_float>(float64::parse(num_str.view()));
+            return make_shared<yaml_float>(float64::parse(num_str.view()).value());
         } else if (is_hex) {
             return make_shared<yaml_integer>(to_int64(num_str.view(), nullptr, 16));
         } else if (is_octal) {

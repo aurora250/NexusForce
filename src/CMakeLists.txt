@@ -41,6 +41,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp

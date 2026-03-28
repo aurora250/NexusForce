@@ -343,7 +343,7 @@ public:
  * 管理整个ini配置文件，包含多个节(section)和一个全局节。
  * 提供节的增删改查操作和类型安全的属性访问接口。
  */
-class NEFORCE_API ini_document final {
+class NEFORCE_API ini_document final : public istringify<ini_document> {
 private:
     unordered_map<string, unique_ptr<ini_section>> sections_;  ///< 节映射表
     unique_ptr<ini_section> global_section_;  ///< 全局节（无名节）
@@ -500,75 +500,6 @@ public:
      */
     NEFORCE_NODISCARD string to_string() const;
 };
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-/**
- * @brief ini值转换为字符串的内部实现
- * @param value ini值指针
- * @return 字符串表示
- */
-string NEFORCE_API ini_value_to_string(const ini_value* value);
-
-/**
- * @brief ini文档转换为字符串的内部实现
- * @param doc ini文档指针
- * @return 字符串表示
- */
-string NEFORCE_API ini_document_to_string(const ini_document* doc);
-
-NEFORCE_END_INNER__
-/// @endcond
-
-
-/**
- * @brief ini值指针转换为字符串
- * @param value ini值指针
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value* value) {
-    return inner::ini_value_to_string(value);
-}
-
-/**
- * @brief ini值引用转换为字符串
- * @param value ini值引用
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_value& value) {
-    return inner::ini_value_to_string(&value);
-}
-
-/**
- * @brief ini值智能指针转换为字符串
- * @param value ini值智能指针
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<ini_value>& value) {
-    return inner::ini_value_to_string(value.get());
-}
-
-/**
- * @brief ini文档转换为字符串
- * @param doc ini文档引用
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const ini_document& doc) {
-    return inner::ini_document_to_string(&doc);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_value::to_string() const {
-    return inner::ini_value_to_string(this);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_value::to_document() const {
-    return inner::ini_value_to_string(this);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string ini_document::to_string() const {
-    return inner::ini_document_to_string(this);
-}
 
 /** @} */ // IniConfig
 

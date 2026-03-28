@@ -41,7 +41,7 @@ bool mysql_result::get_bool(const size_type n) const {
     if (column_types_->at(n) != ::MYSQL_TYPE_BOOL) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to bool mismatch"));
     }
-    return boolean::parse(cursor_[n]);
+    return boolean::parse(cursor_[n]).value();
 }
 
 int16_t mysql_result::get_int16(const size_type n) const {
@@ -53,7 +53,7 @@ int16_t mysql_result::get_int16(const size_type n) const {
           type == ::MYSQL_TYPE_BOOL)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int16 mismatch"));
     }
-    return integer16::parse(cursor_[n]);
+    return integer16::parse(cursor_[n]).value();
 }
 
 int32_t mysql_result::get_int32(const size_type n) const {
@@ -65,7 +65,7 @@ int32_t mysql_result::get_int32(const size_type n) const {
           type == ::MYSQL_TYPE_BOOL)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int32 mismatch"));
     }
-    return integer32::parse(cursor_[n]);
+    return integer32::parse(cursor_[n]).value();
 }
 
 int64_t mysql_result::get_int64(const size_type n) const {
@@ -77,7 +77,7 @@ int64_t mysql_result::get_int64(const size_type n) const {
           type == ::MYSQL_TYPE_TINY || type == ::MYSQL_TYPE_BOOL)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to int64 mismatch"));
     }
-    return integer64::parse(cursor_[n]);
+    return integer64::parse(cursor_[n]).value();
 }
 
 float32_t mysql_result::get_float32(const size_type n) const {
@@ -88,7 +88,7 @@ float32_t mysql_result::get_float32(const size_type n) const {
           type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to float32 mismatch"));
     }
-    return float32::parse(cursor_[n]);
+    return float32::parse(cursor_[n]).value();
 }
 
 float64_t mysql_result::get_float64(const size_type n) const {
@@ -100,7 +100,7 @@ float64_t mysql_result::get_float64(const size_type n) const {
           type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to float64 mismatch"));
     }
-    return float64::parse(cursor_[n]);
+    return float64::parse(cursor_[n]).value();
 }
 
 decimal_t mysql_result::get_decimal(const size_type n) const {
@@ -113,7 +113,7 @@ decimal_t mysql_result::get_decimal(const size_type n) const {
           type == ::MYSQL_TYPE_SHORT || type == ::MYSQL_TYPE_TINY)) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to decimal mismatch"));
     }
-    return decimal::parse(cursor_[n]);
+    return decimal::parse(cursor_[n]).value();
 }
 
 vector<char> mysql_result::get_blob(const size_type n) const {

@@ -291,47 +291,5 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit_or_alpha(const CharT c)
 
 /** @} */ // CharTypeChecking
 
-/**
- * @defgroup UnicodeSurrogate Unicode代理对处理
- * @brief UTF-16代理对相关函数
- * @{
- */
-
-/**
- * @brief 检查字符是否为高代理项
- * @param c UTF-16字符
- * @return 如果字符是高代理项则返回true，否则返回false
- *
- * 高代理项的范围是0xD800-0xDBFF。
- */
-NEFORCE_CONST_FUNCTION constexpr bool is_high_surrogate(const char16_t c) noexcept {
-    return c >= 0xD800 && c <= 0xDBFF;
-}
-
-/**
- * @brief 检查字符是否为低代理项
- * @param c UTF-16字符
- * @return 如果字符是低代理项则返回true，否则返回false
- *
- * 低代理项的范围是0xDC00-0xDFFF。
- */
-NEFORCE_CONST_FUNCTION constexpr bool is_low_surrogate(const char16_t c) noexcept {
-    return c >= 0xDC00 && c <= 0xDFFF;
-}
-
-/**
- * @brief 组合高代理项和低代理项为完整的Unicode码点
- * @param high 高代理项
- * @param low 低代理项
- * @return 组合后的Unicode码点
- *
- * 根据UTF-16编码规则将两个代理项组合为完整的码点。
- */
-NEFORCE_CONST_FUNCTION constexpr uint32_t combine_surrogates(const char16_t high, const char16_t low) noexcept {
-    return 0x10000 + ((static_cast<uint32_t>(high) - 0xD800) << 10) + (static_cast<uint32_t>(low) - 0xDC00);
-}
-
-/** @} */ // UnicodeSurrogate
-
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_STRING_CHAR_TYPES_HPP__

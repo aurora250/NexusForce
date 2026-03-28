@@ -173,7 +173,22 @@ public:
     NEFORCE_CONSTEXPR20 explicit hexadecimal(const string& str)
     : hexadecimal(str.view()) {}
 
-    NEFORCE_BUILD_PACKAGE_CONSTRUCTOR(hexadecimal)
+    constexpr hexadecimal() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~hexadecimal() = default;
+
+    constexpr hexadecimal(const hexadecimal&) noexcept = default;
+    constexpr hexadecimal(hexadecimal&&) noexcept = default;
+
+    constexpr hexadecimal& operator =(const hexadecimal& other) noexcept = default;
+    constexpr hexadecimal& operator =(hexadecimal&& other) noexcept = default;
+
+    explicit constexpr hexadecimal(const value_type value) noexcept
+    : base(value) {}
+
+    constexpr hexadecimal& operator =(const value_type value) noexcept {
+        value_ = value;
+        return *this;
+    }
 
     /**
      * @brief 转换为bool操作符
@@ -251,14 +266,6 @@ struct unpackage<hexadecimal> {
     using type = int64_t;
 };
 
-
-template <>
-struct formatter<hexadecimal> {
-    NEFORCE_CONSTEXPR20 string operator ()(const hexadecimal& value, const format_options& options) const {
-        return formatter<int64_t>()(value.value(), options);
-    }
-};
-
 /** @} */ // Packages
 
 /**
@@ -268,7 +275,7 @@ struct formatter<hexadecimal> {
  */
 
 NEFORCE_CONSTEXPR20 string hexadecimal::to_string() const {
-    return _NEFORCE format("{#x}", *this);
+    return _NEFORCE format("{:#x}", *this);
 }
 
 /** @} */ // ToString
