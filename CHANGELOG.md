@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-03-31
+## [1.0.0] - 2026-03-29
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
@@ -24,7 +24,7 @@
 - 添加系统信息获取类 sysinfo
 - 添加范围计时类 click
 - 添加 scope 操作
-- 添加 UUUID v4 / v7 生成器
+- 添加 UUID v4 / v7 生成器
 - 添加 ICMP / SMTP socket 操作
 - 添加 ARP / MAC / IP / ports 操作
 - 添加 Websockets 通信操作
@@ -36,7 +36,7 @@
 - 优化 FUTEX 设计结构
 - 优化 call_once 设计
 - 优化 path / file 设计，分离职责到子工具类
-- 优化 random 设计
+- 优化随机数生成器的结构设计
 - 优化 UTF 转换操作实现
 - 优化 formatter 实现
 - 使用 none 统一工具类的空表示
