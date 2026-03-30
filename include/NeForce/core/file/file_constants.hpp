@@ -12,6 +12,8 @@
 #include "NeForce/core/config/windef.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <windef.h>
+#include <minwinbase.h>
+#include <apisetcconv.h>
 #include <winreg.h>
 #include <WinUser.h>
 #include <WinBase.h>
