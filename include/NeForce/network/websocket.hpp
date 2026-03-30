@@ -140,7 +140,7 @@ private:
 
         while (running_) {
             {
-                smart_lock<mutex> lock(write_mutex_);
+                unique_lock<mutex> lock(write_mutex_);
                 write_cv_.wait(lock, [this] {
                     return !running_ || !write_queue_.empty();
                 });

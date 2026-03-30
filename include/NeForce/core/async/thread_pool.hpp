@@ -414,7 +414,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 	task_type job([task] { (*task)(); });
 
 	if (static_cast<uint32_t>(priority) > 0) {
-		smart_lock<mutex> lock(task_queue_mtx_);
+		unique_lock<mutex> lock(task_queue_mtx_);
 
 		if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 			return task_queue_.size() < task_threshhold_;
@@ -440,7 +440,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 			ctx->queue.push_back(move(job));
 			++total_submitted_tasks_;
 		} else {
-			smart_lock<mutex> lock(task_queue_mtx_);
+			unique_lock<mutex> lock(task_queue_mtx_);
 			if (!not_full_.wait_for(lock, seconds(1), [&]()->bool {
 				return task_queue_.size() < task_threshhold_;
 			})) {
@@ -467,7 +467,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 		id_type thread_id = 0;
 
 		{
-			smart_lock<mutex> lock(task_queue_mtx_);
+			unique_lock<mutex> lock(task_queue_mtx_);
 			if (threads_map_.size() < thread_threshhold_) {
 				auto ptr = _NEFORCE make_unique<inner::manual_thread>(
 					[this](const id_type id) {

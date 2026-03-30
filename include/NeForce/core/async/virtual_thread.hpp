@@ -156,7 +156,7 @@ private:
             coroutine_handle<> handle;
 
             {
-                smart_lock<mutex> lock(mutex_);
+                unique_lock<mutex> lock(mutex_);
                 cv_.wait(lock, [this] {
                     return shutdown_ || !task_queue_.empty();
                 });

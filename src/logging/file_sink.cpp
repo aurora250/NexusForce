@@ -12,9 +12,9 @@ void file_sink::open_new_file() {
     }
 
     if (!file_.open(path(filename), true,
-                    FILE_ACCESS::WRITE,
-                    FILE_SHARED::SHARE_WRITE,
-                    FILE_CREATION::OPEN_FORCE)) {
+                    file_access::WRITE,
+                    file_shared::SHARE_WRITE,
+                    file_creation::OPEN_FORCE)) {
         NEFORCE_THROW_EXCEPTION(file_exception("Failed to open log file"));
     }
     current_size_ = file_.size();

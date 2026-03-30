@@ -102,7 +102,7 @@ shared_ptr<idb_kv_connect> database_pool::get_kv_connect() {
 }
 
 size_t database_pool::idle_count() const noexcept {
-    smart_lock<mutex> lk(queue_mtx_);
+    unique_lock<mutex> lk(queue_mtx_);
     return idle_queue_.size();
 }
 
@@ -123,7 +123,7 @@ void database_pool::stop() {
     if (replenish_thread_.joinable()) replenish_thread_.join();
     if (scanner_thread_.joinable())   scanner_thread_.join();
 
-    smart_lock<mutex> lk(queue_mtx_);
+    unique_lock<mutex> lk(queue_mtx_);
     while (!idle_queue_.empty()) {
         delete idle_queue_.front().conn;
         idle_queue_.pop();
@@ -154,7 +154,7 @@ void database_pool::return_connect(idb_connect* conn) noexcept {
         return;
     }
 
-    smart_lock<mutex> lk(queue_mtx_);
+    unique_lock<mutex> lk(queue_mtx_);
 
     if (idle_queue_.size() >= pool_cfg_.max_size) {
         lk.unlock_quiet();
@@ -171,7 +171,7 @@ void database_pool::return_connect(idb_connect* conn) noexcept {
 
 void database_pool::replenish_task() {
     while (running_.load(memory_order_acquire)) {
-        smart_lock<mutex> lk(queue_mtx_);
+        unique_lock<mutex> lk(queue_mtx_);
 
         cv_.wait(lk, [this] {
             return !running_.load(memory_order_relaxed) || idle_queue_.size() < pool_cfg_.min_size;
@@ -195,7 +195,7 @@ void database_pool::replenish_task() {
 
             total_count_.fetch_add(1, memory_order_relaxed);
 
-            smart_lock<mutex> lk2(queue_mtx_);
+            unique_lock<mutex> lk2(queue_mtx_);
             idle_queue_.emplace(conn);
             lk2.unlock_quiet();
 
@@ -207,7 +207,7 @@ void database_pool::replenish_task() {
 void database_pool::scanner_task() {
     while (running_.load(memory_order_acquire)) {
         {
-            smart_lock<mutex> lk(queue_mtx_);
+            unique_lock<mutex> lk(queue_mtx_);
             cv_.wait_for(lk, pool_cfg_.max_idle_time / 2, [this] {
                 return !running_.load(memory_order_relaxed);
             });
@@ -215,7 +215,7 @@ void database_pool::scanner_task() {
 
         if (!running_.load(memory_order_relaxed)) break;
 
-        smart_lock<mutex> lk(queue_mtx_);
+        unique_lock<mutex> lk(queue_mtx_);
 
         size_t removed = 0;
         while (idle_queue_.size() > pool_cfg_.min_size) {

@@ -349,42 +349,43 @@ void test_http_server() {
         });
 
         router.get("/", [](http_request&, http_response& response) {
+            static file index{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
             response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            response.body = file::read(res_root() / "index.html");
+            response.body = index.read();
         });
 
         router.get("/detail", [](http_request&, http_response& response) {
+            static file detail{res_root() / "detail.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
             response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            response.body = file::read(res_root() / "detail.html");
+            response.body = detail.read();
         });
 
         router.get("/new-link", [](http_request&, http_response& response) {
+            static file index{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
             response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            response.body = file::read(res_root() / "index.html");
+            response.body = index.read();
         });
 
         router.get("/test", [](http_request&, http_response& response) {
+            static file test{res_root() / "index.html"};
             response.status = HTTP_STATUS::S2_OK;
             response.status_message = "OK";
             response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            response.body = file::read(res_root() / "test.html");
+            response.body = test.read();
         });
 
         router.set_not_found_handler([](http_request&, http_response &response) {
+            static file err{res_root() / "404err.html"};
             response.status = HTTP_STATUS::S4_NOT_FOUNT;
             response.status_message = "Not Found";
             response.set_content_type(HTTP_CONTENT::HTML_TEXT);
-            try {
-                response.body = file::read(res_root() / "404err.html");
-            } catch (...) {
-                response.body = "<h1>404 - Page Not Found</h1>";
-            }
+            response.body = err.read();
         });
 
         auto& ws = server.websocket();

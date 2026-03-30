@@ -18,8 +18,14 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_async.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_diff.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_info.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_locker.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_mapper.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/filesystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp

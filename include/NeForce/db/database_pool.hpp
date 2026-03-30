@@ -88,7 +88,7 @@ public:
 
 template <typename T>
 shared_ptr<T> database_pool::acquire_impl() {
-    smart_lock<mutex> lk(queue_mtx_);
+    unique_lock<mutex> lk(queue_mtx_);
 
     const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout, [this] {
         return !idle_queue_.empty() || !running_.load(memory_order_relaxed);

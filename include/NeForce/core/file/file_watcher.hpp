@@ -32,20 +32,20 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_watcher {
 private:
-    using callback_t = function<void(const path&, FILE_WATCH_EVENT)>;  ///< 事件回调类型
+    using callback_t = function<void(const path&, file_watch_event)>;  ///< 事件回调类型
 
     path watch_path_;                    ///< 监视的目录路径
     bool recursive_;                     ///< 是否递归监视子目录
     atomic<bool> watching_{false};       ///< 是否正在监视
     atomic<bool> stopping_{false};       ///< 是否正在停止
     callback_t callback_;                ///< 事件回调函数
-    FILE_WATCH_EVENT current_events_{FILE_WATCH_EVENT::ALL};  ///< 当前监视的事件类型
+    file_watch_event current_events_{file_watch_event::ALL};  ///< 当前监视的事件类型
     vector<char> buffer_;                ///< 事件数据缓冲区
     mutex callback_mutex_;               ///< 回调函数互斥锁
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;      ///< 目录句柄
-    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE; ///< I/O完成端口
+    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;       ///< 目录句柄
+    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE;  ///< I/O完成端口
     ::OVERLAPPED overlapped_{};                        ///< 重叠I/O结构
 #else
     int inotify_fd_ = -1;        ///< inotify文件描述符
@@ -90,7 +90,7 @@ public:
      * 启动一个后台线程开始监视文件系统事件。
      * 当指定的事件发生时，回调函数会被调用，参数为文件路径和事件类型。
      */
-    bool start(callback_t callback, FILE_WATCH_EVENT events = FILE_WATCH_EVENT::ALL);
+    bool start(callback_t callback, file_watch_event events = file_watch_event::ALL);
 
     /**
      * @brief 停止监视
@@ -111,7 +111,7 @@ public:
      * @brief 获取当前监视的事件类型
      * @return 事件类型
      */
-    NEFORCE_NODISCARD FILE_WATCH_EVENT current_events() const noexcept {
+    NEFORCE_NODISCARD file_watch_event current_events() const noexcept {
         return current_events_;
     }
 
@@ -138,7 +138,7 @@ public:
      *
      * 如果正在监视中，会重启监视器以应用新的事件类型。
      */
-    bool update_watch(FILE_WATCH_EVENT events);
+    bool update_watch(file_watch_event events);
 
     /**
      * @brief 更新递归设置

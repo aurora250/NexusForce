@@ -20,7 +20,6 @@ void test_print() {
 #else
     void (bit_reference::* mfp)() const noexcept = &bit_reference::flip;
 #endif
-    typecast_exception err;
     compressed_pair<io_base<int>, int> cp;
     tuple<int, char, decimal_t, int*> tup{1, 't', f, nullptr};
     pair<int, char> pir{1, '1'};
@@ -55,7 +54,7 @@ void test_print() {
     println('c', nullptr);
     println(&RB_TREE_RED, &RB_TREE_BLACK);
     println(f, static_cast<size_t>(enu));
-    println(escape("\n\\\"\v"), cs, err);
+    println(escape("\n\\\"\v"), cs);
     println(p, c_arr, arr);
     println(lls);
     println(bm);

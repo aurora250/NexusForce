@@ -664,13 +664,6 @@ struct io_base<T, enable_if_t<is_bounded_array_v<T> && !is_cstring_v<T>>> {
     }
 };
 
-template <typename T>
-struct io_base<T, enable_if_t<is_base_of_v<exception, T>>> {
-    static void write(sys_console& console, const T& value) {
-        io_base<string>::write(console, _NEFORCE to_string(value));
-    }
-};
-
 template <typename IfEmpty, typename T, bool Compressed>
 struct io_base<compressed_pair<IfEmpty, T, Compressed>> {
     static void write(sys_console& console, const compressed_pair<IfEmpty, T, Compressed>& value) {

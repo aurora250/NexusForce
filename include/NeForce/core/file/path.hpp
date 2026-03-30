@@ -341,10 +341,10 @@ public:
 
     /**
      * @brief 路径连接赋值操作符（字符串视图版本）
-     * @param path 要连接的路径字符串视图
+     * @param other 要连接的路径字符串视图
      * @return 自身引用
      */
-    path& operator /=(string_view path);
+    path& operator /=(string_view other);
 
     /**
      * @brief 路径连接操作符
@@ -355,10 +355,10 @@ public:
 
     /**
      * @brief 路径连接操作符（字符串视图版本）
-     * @param path 要连接的路径字符串视图
+     * @param pth 要连接的路径字符串视图
      * @return 连接后的新路径
      */
-    path operator /(string_view path) const;
+    path operator /(string_view pth) const;
 
     /**
      * @brief 检查路径是否存在
@@ -377,68 +377,6 @@ public:
      * @return 是否为文件
      */
     NEFORCE_NODISCARD bool is_file() const noexcept;
-
-    /**
-     * @brief 创建目录（包括所有父目录）
-     * @return 是否创建成功
-     */
-    bool create_directories() const;
-
-    /**
-     * @brief 删除文件
-     * @return 是否删除成功
-     */
-    bool remove() const noexcept;
-
-    /**
-     * @brief 删除空目录
-     * @return 是否删除成功
-     */
-    bool remove_directory() const noexcept;
-
-    /**
-     * @brief 删除目录中的所有内容
-     * @param recursive 是否递归删除子目录
-     * @return 是否全部删除成功
-     */
-    bool remove_all_in_directory(bool recursive = true) const noexcept;
-
-    /**
-     * @brief 删除文件或目录
-     * @return 是否全部删除成功
-     */
-    bool remove_all() const noexcept;
-
-    /**
-     * @brief 复制文件到目标位置
-     * @param to 目标路径
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否复制成功
-     */
-    bool copy(const path& to, bool overwrite = true) const;
-
-    /**
-     * @brief 复制目录到目标位置
-     * @param dest 目标路径
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否复制成功
-     */
-    bool copy_directory(const path& dest, bool overwrite = true) const;
-
-    /**
-     * @brief 移动文件或目录到目标位置
-     * @param to 目标路径
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否移动成功
-     */
-    bool move(const path& to, bool overwrite = true) const noexcept;
-
-    /**
-     * @brief 重命名文件或目录
-     * @param name 新名称
-     * @return 是否重命名成功
-     */
-    bool rename(const path& name) const;
 
     /**
      * @brief 检查路径是否存在
@@ -469,80 +407,9 @@ public:
     NEFORCE_NODISCARD static string_view extension(string_view path) noexcept;
 
     /**
-     * @brief 创建目录
-     * @param path 要创建的路径
-     * @return 是否创建成功
-     */
-    static bool create_directories(const string& path);
-
-    /**
-     * @brief 删除文件
-     * @param path 要删除的文件路径
-     * @return 是否删除成功
-     */
-    static bool remove(const string& path) noexcept;
-
-    /**
-     * @brief 删除空目录
-     * @param path 要删除的目录路径
-     * @return 是否删除成功
-     */
-    static bool remove_directory(const string& path) noexcept;
-
-    /**
-     * @brief 删除目录中的所有内容
-     * @param target 目录路径
-     * @param recursive 是否递归删除子目录
-     * @return 是否全部删除成功
-     */
-    static bool remove_all_in_directory(const string& target, bool recursive = true) noexcept;
-
-    /**
-     * @brief 删除文件或目录
-     * @param path 要删除的路径
-     * @return 是否全部删除成功
-     */
-    static bool remove_all(const string& path) noexcept;
-
-    /**
-     * @brief 复制文件
-     * @param from 源路径
-     * @param to 目标路径
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否复制成功
-     */
-    static bool copy(const path& from, const path& to, bool overwrite = true);
-
-    /**
-     * @brief 复制目录
-     * @param src 源目录
-     * @param dest 目标目录
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否复制成功
-     */
-    static bool copy_directory(const path& src, const path& dest, bool overwrite = true);
-
-    /**
-     * @brief 移动文件或目录
-     * @param from 源路径
-     * @param to 目标路径
-     * @param overwrite 是否覆盖已存在的文件
-     * @return 是否移动成功
-     */
-    static bool move(const path& from, const path& to, bool overwrite = true) noexcept;
-
-    /**
-     * @brief 重命名文件或目录
-     * @param old_name 原名称
-     * @param new_name 新名称
-     * @return 是否重命名成功
-     */
-    static bool rename(const path& old_name, const path& new_name);
-
-    /**
      * @brief 转换为字符串视图
      */
-    operator string_view() const noexcept {
+    explicit operator string_view() const noexcept {
         return path_.view();
     }
 

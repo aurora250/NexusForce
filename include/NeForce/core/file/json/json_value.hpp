@@ -150,9 +150,15 @@ public:
 
     /**
      * @brief 转换为紧凑格式字符串
-     * @return json值的紧凑格式字符串表示（无缩进）
+     * @return json值的紧凑格式字符串
      */
     NEFORCE_NODISCARD string to_string() const;
+
+    /**
+     * @brief 转换为缩进格式字符串
+     * @return json值的格式化字符串（默认2空格缩进）
+     */
+    NEFORCE_NODISCARD string to_indent_string() const;
 };
 
 
@@ -437,68 +443,6 @@ public:
      */
     NEFORCE_NODISCARD const vector<unique_ptr<json_value>>& get_elements() const noexcept { return elements_; }
 };
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-/**
- * @brief json值转换为紧凑格式字符串的内部实现
- * @param value json值指针
- * @return 紧凑格式字符串
- */
-string NEFORCE_API json_value_to_string(const json_value* value);
-
-/**
- * @brief json值转换为缩进格式字符串的内部实现
- * @param value json值指针
- * @param indent 当前缩进级别
- * @return 格式化后的字符串
- */
-string NEFORCE_API json_value_to_indent_string(const json_value* value, int indent);
-
-NEFORCE_END_INNER__
-/// @endcond
-
-
-/**
- * @brief json值智能指针转换为紧凑格式字符串
- * @param value json值智能指针
- * @return 紧凑格式字符串
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<json_value>& value) {
-    return inner::json_value_to_string(value.get());
-}
-
-/**
- * @brief json值指针转换为缩进格式字符串
- * @param value json值指针
- * @return 格式化后的字符串（默认2空格缩进）
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value* value) {
-    return inner::json_value_to_indent_string(value, 0);
-}
-
-/**
- * @brief json值引用转换为缩进格式字符串
- * @param value json值引用
- * @return 格式化后的字符串（默认2空格缩进）
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const json_value& value) {
-    return inner::json_value_to_indent_string(&value, 0);
-}
-
-/**
- * @brief json值智能指针转换为缩进格式字符串
- * @param value json值智能指针
- * @return 格式化后的字符串（默认2空格缩进）
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_indent_string(const unique_ptr<json_value>& value) {
-    return inner::json_value_to_indent_string(value.get() ,0);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string json_value::to_string() const {
-    return _NEFORCE to_indent_string(this);
-}
 
 /** @} */ // JsonConfig
 

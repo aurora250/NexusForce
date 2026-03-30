@@ -1,4 +1,5 @@
 #include <NeForce/core/file/temp_file.hpp>
+#include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/async/thread.hpp>
 #include <NeForce/core/async/atomic.hpp>
@@ -27,6 +28,7 @@ namespace {
         const auto pid = process::current_id();
         random_mt rand;
         const uint64_t random_part = rand.next_uint64();
+
         const string filename = format(
             "{}_{}_{}_{}_{}{}",
             prefix,
@@ -42,53 +44,70 @@ namespace {
 
 
 void temp_file::register_for_cleanup(const path& temp_path) {
-    lock<mutex> lock(get_registry_mutex());
-    get_temp_registry().push_back(temp_path);
+    lock<mutex> lk(get_registry_mutex());
+    auto& registry = get_temp_registry();
+    if (find(registry.begin(), registry.end(), temp_path) == registry.end()) {
+        registry.push_back(temp_path);
+    }
 }
 
 void temp_file::cleanup_all_temp_files() {
-    lock<mutex> lock(get_registry_mutex());
-    auto& registry = get_temp_registry();
+    vector<path> to_delete;
+    {
+        lock<mutex> lk(get_registry_mutex());
+        auto& registry = get_temp_registry();
+        to_delete = registry;
+        registry.clear();
+    }
 
-    for (const auto& temp_path : registry) {
+    for (const auto& temp_path : to_delete) {
         if (temp_path.exists()) {
             try {
                 if (temp_path.is_directory()) {
-                    NEFORCE_IGNORE temp_path.remove_all();
+                    filesystem::remove_all(temp_path);
                 } else {
-                    NEFORCE_IGNORE temp_path.remove();
+                    filesystem::remove(temp_path);
                 }
-            } catch (...) {}
+            } catch (...) { /* ignore */ }
         }
     }
-
-    registry.clear();
 }
 
-temp_file::temp_file(const string& prefix, const string& suffix, const FILE_CREATION mode, const DELETE_POLICY policy)
-: file_(generate_unique_path(prefix, suffix), FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ, mode),
+temp_file::temp_file(const string& prefix, const string& suffix, const file_creation mode, const delete_policy policy)
+: file_(generate_unique_path(prefix, suffix), false, file_access::READ_WRITE, file_shared::SHARE_READ, mode),
   delete_policy_(policy) {
-    try {
+    constexpr int max_retries = 8;
+    bool opened = false;
+
+    for (int i = 0; i < max_retries; ++i) {
+        const path candidate = generate_unique_path(prefix, suffix);
+        file_ = _NEFORCE file(candidate, false,
+                              file_access::READ_WRITE,
+                              file_shared::SHARE_READ,
+                              mode);
         if (file_.is_opened()) {
-            if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
-                register_for_cleanup(file_.path());
-            }
-        } else {
-            NEFORCE_THROW_EXCEPTION(system_exception("Failed to create temporary file"));
+            opened = true;
+            break;
         }
-    } catch (...) {
-        if (file_.path().exists()) {
-            NEFORCE_IGNORE file_.path().remove();
-        }
-        throw;
+    }
+
+    if (!opened) {
+        NEFORCE_THROW_EXCEPTION(system_exception("Failed to create temporary file"));
+    }
+
+    if (delete_policy_ == delete_policy::AUTO_DELETE) {
+        register_for_cleanup(file_.file_path());
     }
 }
 
-temp_file::temp_file(const path& existing_path, const DELETE_POLICY policy)
-: file_(existing_path, FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ_WRITE, FILE_CREATION::OPEN_EXIST),
+temp_file::temp_file(const path& existing_path, const delete_policy policy)
+: file_(existing_path, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST),
   delete_policy_(policy) {
-    if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
-        register_for_cleanup(file_.path());
+    if (!file_.is_opened()) {
+        NEFORCE_THROW_EXCEPTION(system_exception("Failed to open existing file as temporary file"));
+    }
+    if (delete_policy_ == delete_policy::AUTO_DELETE) {
+        register_for_cleanup(file_.file_path());
     }
 }
 
@@ -98,51 +117,70 @@ temp_file::~temp_file() {
 
 temp_file::temp_file(temp_file&& other) noexcept
 : file_(move(other.file_)), delete_policy_(other.delete_policy_) {
-    other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
+    other.delete_policy_ = delete_policy::KEEP_ON_EXIT;
 }
 
 temp_file& temp_file::operator =(temp_file&& other) noexcept {
-    if (this != addressof(other)) {
-        cleanup();
+    if (addressof(other) == this) return *this;
 
-        file_ = move(other.file_);
+    cleanup();
 
-        delete_policy_ = other.delete_policy_;
-        other.delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
-    }
+    const path other_path = other.file_.file_path();
+    const delete_policy other_policy = other.delete_policy_;
+
+    file_ = move(other.file_);
+    delete_policy_ = other_policy;
+    other.delete_policy_ = delete_policy::KEEP_ON_EXIT;
+
     return *this;
 }
 
 void temp_file::cleanup() {
-    if (delete_policy_ == DELETE_POLICY::KEEP_ON_EXIT) {
+    if (delete_policy_ == delete_policy::KEEP_ON_EXIT) {
+        file_.close();
         return;
     }
 
-    if (delete_policy_ == DELETE_POLICY::AUTO_DELETE) {
-        lock<mutex> lock(get_registry_mutex());
+    const path file_path = file_.file_path();
+    file_.close();
+
+    {
+        lock<mutex> lk(get_registry_mutex());
         auto& registry = get_temp_registry();
-        const auto it = find(registry.begin(), registry.end(), file_.path());
+        const auto it = find(registry.begin(), registry.end(), file_path);
         if (it != registry.end()) {
             registry.erase(it);
         }
     }
-    file_.close();
-}
 
-void temp_file::release() {
-    delete_policy_ = DELETE_POLICY::MANUAL_DELETE;
-
-    lock<mutex> lock(get_registry_mutex());
-    auto& registry = get_temp_registry();
-    const auto it = find(registry.begin(), registry.end(), file_.path());
-    if (it != registry.end()) {
-        registry.erase(it);
+    if (delete_policy_ == delete_policy::AUTO_DELETE) {
+        if (file_path.exists()) {
+            try {
+                if (file_path.is_directory()) {
+                    filesystem::remove_all(file_path);
+                } else {
+                    filesystem::remove(file_path);
+                }
+            } catch (...) {}
+        }
     }
 }
 
+void temp_file::release() {
+    {
+        lock<mutex> lk(get_registry_mutex());
+        auto& registry = get_temp_registry();
+        const auto it = find(registry.begin(), registry.end(), file_.file_path());
+        if (it != registry.end()) {
+            registry.erase(it);
+        }
+    }
+    delete_policy_ = delete_policy::MANUAL_DELETE;
+}
+
 temp_file temp_file::create_temp_file(const string& prefix,
-    const string& suffix, const FILE_CREATION mode) {
-    return temp_file(prefix, suffix, mode, DELETE_POLICY::AUTO_DELETE);
+    const string& suffix, const file_creation mode) {
+    return temp_file(prefix, suffix, mode, delete_policy::AUTO_DELETE);
 }
 
 NEFORCE_END_NAMESPACE__

@@ -209,7 +209,7 @@ public:
  * 管理多个环境变量和相关注释，提供变量的增删改查操作。
  * 支持将整个文档序列化为字符串。
  */
-class NEFORCE_API env_document final {
+class NEFORCE_API env_document final : public istringify<env_document> {
 private:
     unordered_map<string, unique_ptr<env_variable>> variables_;  ///< 变量映射表
     vector<string> comments_;  ///< 注释列表
@@ -382,77 +382,6 @@ public:
      */
     NEFORCE_NODISCARD string to_string() const;
 };
-
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-/**
- * @brief 环境值转换为字符串的内部实现
- * @param value 环境值指针
- * @param key 变量键名
- * @return 字符串表示
- */
-string NEFORCE_API env_value_to_string(const env_value* value, const string& key = "");
-
-/**
- * @brief 环境文档转换为字符串的内部实现
- * @param doc 环境文档指针
- * @return 字符串表示
- */
-string NEFORCE_API env_document_to_string(const env_document* doc);
-
-NEFORCE_END_INNER__
-/// @endcond
-
-
-/**
- * @brief 环境值指针转换为字符串
- * @param value 环境值指针
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value* value) {
-    return inner::env_value_to_string(value);
-}
-
-/**
- * @brief 环境值引用转换为字符串
- * @param value 环境值引用
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_value& value) {
-    return inner::env_value_to_string(&value);
-}
-
-/**
- * @brief 环境值智能指针转换为字符串
- * @param value 环境值智能指针
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const unique_ptr<env_value>& value) {
-    return inner::env_value_to_string(value.get());
-}
-
-/**
- * @brief 环境文档转换为字符串
- * @param doc 环境文档引用
- * @return 字符串表示
- */
-NEFORCE_ALWAYS_INLINE_INLINE string to_string(const env_document& doc) {
-    return inner::env_document_to_string(&doc);
-}
-
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_value::to_string() const {
-    return inner::env_value_to_string(this);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_value::to_document() const {
-    return inner::env_value_to_string(this);
-}
-
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE string env_document::to_string() const {
-    return inner::env_document_to_string(this);
-}
 
 /** @} */ // EnvConfig
 

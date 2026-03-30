@@ -87,7 +87,7 @@ private:
      */
     void run() {
         while (!stopped_.load()) {
-            smart_lock<mutex> lock(mutex_);
+            unique_lock<mutex> lock(mutex_);
 
             if (nodes_.empty()) {
                 cv_.wait(lock, [this] {
@@ -152,7 +152,7 @@ public:
      * 如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。
      */
     token add_task(time_point expire, handler_type&& handler) {
-        smart_lock<mutex> lock(mutex_);
+        unique_lock<mutex> lock(mutex_);
         token id = next_id_++;
 
         const bool is_earliest = nodes_.empty() || expire < nodes_.begin()->expire;
@@ -178,7 +178,7 @@ public:
      * 如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。
      */
     bool cancel(token id) {
-        smart_lock<mutex> lock(mutex_);
+        unique_lock<mutex> lock(mutex_);
         auto it_map = node_map_.find(id);
         if (it_map == node_map_.end()) {
             return false;
@@ -201,7 +201,7 @@ public:
      * @brief 取消所有定时任务
      */
     void cancel_all() {
-        smart_lock<mutex> lock(mutex_);
+        unique_lock<mutex> lock(mutex_);
         nodes_.clear();
         node_map_.clear();
         lock.unlock_quiet();

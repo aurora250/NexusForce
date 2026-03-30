@@ -114,17 +114,6 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& arr) {
 }
 
 /**
- * @brief 将异常转换为字符串
- * @tparam T 异常类型
- * @param obj 异常对象
- * @return 格式为"类型(what)"的字符串
- */
-template <typename T, enable_if_t<is_base_of_v<_NEFORCE exception, T>, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& obj) {
-    return string(obj.type()) + "(" + obj.what() + ")";
-}
-
-/**
  * @brief 将压缩对（已压缩版本）转换为字符串
  * @tparam IfEmpty 空基类类型
  * @tparam T 值类型

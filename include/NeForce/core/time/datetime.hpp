@@ -65,7 +65,7 @@ public:
      *
      * 如果日期无效，将保持默认值1970-01-01。
      */
-    constexpr explicit date( date_type year, const date_type month, const date_type day) noexcept {
+    constexpr explicit date(date_type year, const date_type month, const date_type day) noexcept {
         if (is_valid(year, month, day)) {
             year_ = year;
             month_ = month;
@@ -1129,6 +1129,23 @@ public:
         time_type sec_diff = day_diff * 86400;
         sec_diff += (time_ - other.time_);
         return sec_diff;
+    }
+
+    /**
+     * @brief 从 Unix 时间戳（秒）构造 datetime
+     * @param seconds 从 1970-01-01 00:00:00 UTC 开始的秒数
+     * @return 对应的 datetime 对象
+     */
+    static constexpr datetime from_unix(const int64_t seconds) noexcept {
+        return epoch() + seconds;
+    }
+
+    /**
+     * @brief 转换为 Unix 时间戳（秒）
+     * @return 从 1970-01-01 00:00:00 UTC 开始的秒数
+     */
+    constexpr int64_t to_unix() const noexcept {
+        return *this - epoch();
     }
 
     /**

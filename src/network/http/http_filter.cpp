@@ -1,5 +1,5 @@
-// #include <NeForce/core/algorithm/remove.hpp>
 #include <NeForce/core/file/file.hpp>
+#include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/network/http/http_filter.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -16,19 +16,6 @@ void http_filter_chain::add_filter_ref(http_filter* filter) {
         owns_filters_ = false;
     }
 }
-
-// bool http_filter_chain::remove_filter(const string& filter_name) {
-//     auto it = remove_if(filters_.begin(), filters_.end(),
-//         [&filter_name](const unique_ptr<http_filter>& f) {
-//             return f && f->name() == filter_name;
-//         });
-//
-//     if (it != filters_.end()) {
-//         filters_.erase(it, filters_.end());
-//         return true;
-//     }
-//     return false;
-// }
 
 void http_filter_chain::clear() noexcept {
     if (owns_filters_) {
@@ -223,9 +210,9 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
         return true;
     }
 
-    const string& path = request.path;
+    const string& req_path = request.path;
 
-    if (!is_safe_path(path)) {
+    if (!is_safe_path(req_path)) {
         response.status = HTTP_STATUS::S4_FORBIDDEN;
         response.status_message = "Forbidden";
         response.set_content_type(HTTP_CONTENT::PLAIN_TEXT);
@@ -233,19 +220,19 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
         return false;
     }
 
-    const auto mime_type = get_mime_type(path);
+    const auto mime_type = get_mime_type(req_path);
     if (!mime_type) {
         return true;
     }
 
     try {
-        const _NEFORCE path file_path(root_path_ + path);
+        const path file_path(root_path_ + req_path);
 
         if (!file_path.exists()) {
             return true;
         }
 
-        const size_t file_size = file::size(file_path);
+        const size_t file_size = filesystem::size(file_path);
         if (file_size > max_file_size_) {
             response.status = HTTP_STATUS::S4_PAYLOAD_LARGE;
             response.status_message = "Payload Too Large";

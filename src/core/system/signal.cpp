@@ -169,7 +169,7 @@ void signal_manager::remove_handler(const SIGNAL_EVENT event) {
 }
 
 SIGNAL_EVENT signal_manager::wait_for_signal(const int timeout_ms) {
-    smart_lock<mutex> lock(mutex_);
+    unique_lock<mutex> lock(mutex_);
     
     if (timeout_ms >= 0) {
         const auto timeout_time = steady_clock::now() + milliseconds(timeout_ms);

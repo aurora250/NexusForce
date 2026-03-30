@@ -28,10 +28,10 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API temp_file {
 public:
     /**
-     * @enum DELETE_POLICY
+     * @enum delete_policy
      * @brief 临时文件删除策略
      */
-    enum class DELETE_POLICY {
+    enum class delete_policy {
         AUTO_DELETE,   ///< 析构自动删除
         MANUAL_DELETE, ///< 手动删除
         KEEP_ON_EXIT   ///< 程序退出时保留
@@ -39,7 +39,7 @@ public:
 
 private:
     _NEFORCE file file_;   ///< 内部文件对象
-    DELETE_POLICY delete_policy_ = DELETE_POLICY::AUTO_DELETE;   ///< 删除策略
+    delete_policy delete_policy_ = delete_policy::AUTO_DELETE;   ///< 删除策略
 
 public:
     /**
@@ -54,8 +54,8 @@ public:
      * 生成规则：{prefix}_{纳秒时间}_{进程ID}_{线程ID}_{随机数}{suffix}
      */
     explicit temp_file(const string& prefix = "tmp", const string& suffix = ".tmp",
-                       FILE_CREATION mode = FILE_CREATION::CREATE_FORCE,
-                       DELETE_POLICY policy = DELETE_POLICY::AUTO_DELETE);
+                       file_creation mode = file_creation::CREATE_FORCE,
+                       delete_policy policy = delete_policy::AUTO_DELETE);
 
     /**
      * @brief 构造函数：接管已有的文件作为临时文件
@@ -66,7 +66,7 @@ public:
      * 将指定的现有文件作为临时文件管理，不会生成新文件。
      */
     explicit temp_file(const path& existing_path,
-                       DELETE_POLICY policy = DELETE_POLICY::AUTO_DELETE);
+                       delete_policy policy = delete_policy::AUTO_DELETE);
 
     /**
      * @brief 析构函数
@@ -119,14 +119,14 @@ public:
      * 调用后，析构时不会删除文件，也不从全局注册表中移除。
      */
     void keep() noexcept {
-        delete_policy_ = DELETE_POLICY::KEEP_ON_EXIT;
+        delete_policy_ = delete_policy::KEEP_ON_EXIT;
     }
 
     /**
      * @brief 设置删除策略
      * @param policy 新的删除策略
      */
-    void set_delete_policy(const DELETE_POLICY policy) noexcept {
+    void set_delete_policy(const delete_policy policy) noexcept {
         delete_policy_ = policy;
     }
 
@@ -134,7 +134,7 @@ public:
      * @brief 获取当前删除策略
      * @return 删除策略
      */
-    NEFORCE_NODISCARD DELETE_POLICY delete_policy() const noexcept {
+    NEFORCE_NODISCARD delete_policy policy() const noexcept {
         return delete_policy_;
     }
 
@@ -167,7 +167,7 @@ public:
      */
     NEFORCE_NODISCARD static temp_file create_temp_file(
         const string& prefix = "tmp", const string& suffix = ".tmp",
-        FILE_CREATION mode = FILE_CREATION::CREATE_FORCE);
+        file_creation mode = file_creation::CREATE_FORCE);
 
     /**
      * @brief 清理所有已注册的临时文件

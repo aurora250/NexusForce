@@ -26,6 +26,7 @@ namespace {
     }
 }
 
+
 int ini_property::get_int(const int default_value) const noexcept {
     try {
         return integer32::parse(value_.view()).value();

@@ -6,14 +6,13 @@
  * @brief 文件操作类
  */
 
-#include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/file/file_constants.hpp"
+#include "NeForce/core/file/file_async.hpp"
+#include "NeForce/core/file/file_diff.hpp"
+#include "NeForce/core/file/file_info.hpp"
+#include "NeForce/core/file/file_locker.hpp"
+#include "NeForce/core/file/file_mapper.hpp"
 #include "NeForce/core/file/path.hpp"
-#include "NeForce/core/time/datetime.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
-#include <aio.h>
-#endif
+#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -76,17 +75,13 @@ public:
     };
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD;           ///< 大小类型
-    using difference_type = ::LONGLONG;  ///< 差值类型
-    using native_handle_type = ::HANDLE; ///< 文件句柄类型
-    using time_type = ::FILETIME;        ///< 时间类型
-    using aiocb_type = ::OVERLAPPED;     ///< 异步I/O控制块类型
+    using size_type          = ::DWORD;
+    using difference_type    = ::LONGLONG;
+    using native_handle_type = ::HANDLE;
 #else
-    using size_type = size_t;            ///< 大小类型
-    using difference_type = ::off_t;     ///< 差值类型
-    using native_handle_type = int;      ///< 文件句柄类型
-    using time_type = ::time_t;          ///< 时间类型
-    using aiocb_type = ::aiocb;          ///< 异步I/O控制块类型
+    using size_type          = size_t;
+    using difference_type    = ::off_t;
+    using native_handle_type = int;
 #endif
 
     /**
@@ -99,90 +94,30 @@ public:
         size_type index;           ///< 块索引
     };
 
-    /**
-     * @struct map_info
-     * @brief 内存映射信息
-     */
-    struct map_info {
-        void* address = nullptr;   ///< 映射地址
-        size_type size = 0;        ///< 映射大小
-        size_type offset = 0;      ///< 映射偏移
-        FILE_ACCESS access = FILE_ACCESS::READ; ///< 访问模式
-        bool is_mapped = false;    ///< 是否已映射
-    };
-
-    /**
-     * @struct binary_diff_entry
-     * @brief 二进制差异条目
-     */
-    struct binary_diff_entry {
-        difference_type offset = 0; ///< 差异位置
-        byte_t byte1 = 0;           ///< 文件1的字节
-        byte_t byte2 = 0;           ///< 文件2的字节
-        int64_t size_diff = 0;      ///< 大小差异
-        bool is_size_diff = false;  ///< 是否为大小差异
-    };
-
-    /**
-     * @struct async_context
-     * @brief 异步操作上下文
-     */
-    struct async_context {
-        string data{};              ///< 写入数据
-        string* buffer = nullptr;   ///< 读取缓冲区
-        aiocb_type* cb = nullptr;   ///< 控制块
-        bool is_write;              ///< 是否为写入操作
-
-        explicit async_context(string&& d);
-        explicit async_context(string* buf);
-        ~async_context();
-    };
-
-    /**
-     * @struct async_result
-     * @brief 异步操作结果
-     */
-    struct async_result {
-        bool completed = false;          ///< 是否完成
-        size_t bytes_transferred = 0;    ///< 传输字节数
-        int error_code = 0;              ///< 错误码
-        aiocb_type* cb = nullptr;        ///< 控制块
-        async_context* user_context = nullptr;  ///< 用户上下文
-    };
-
 private:
     native_handle_type handle_;    ///< 文件句柄
-    _NEFORCE path path_{};                        ///< 文件路径
-    bool opened_ = false;                      ///< 是否已打开
-    bool append_mode_ = false;                 ///< 是否为追加模式
+    path path_{};         ///< 文件路径
+    bool opened_ = false;          ///< 是否已打开
+    bool append_mode_ = false;     ///< 是否为追加模式
 
-    size_type buffer_size_ = buffer_size;   ///< 缓冲区大小
-    mutable byte_vector read_buffer_{};     ///< 读缓冲区
+    size_type buffer_size_ = buffer_size;      ///< 缓冲区大小
+    mutable byte_vector read_buffer_{};        ///< 读缓冲区
     mutable size_type read_buffer_pos_ = 0;    ///< 读缓冲区位置
     mutable size_type read_buffer_size_ = 0;   ///< 读缓冲区有效数据大小
-    mutable byte_vector write_buffer_{};    ///< 写缓冲区
+    mutable byte_vector write_buffer_{};       ///< 写缓冲区
     mutable size_type write_buffer_pos_ = 0;   ///< 写缓冲区位置
 
-    mutable mutex map_mutex_;                  ///< 映射操作互斥锁
-    void* mapped_ptr_ = nullptr;               ///< 映射地址
-    size_type mapped_size_ = 0;                ///< 映射大小
-    size_type mapped_offset_ = 0;              ///< 映射偏移
-    FILE_ACCESS mapped_access_ = FILE_ACCESS::READ;  ///< 映射访问模式
-    size_type is_mapped_ = false;               ///< 是否已映射
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::HANDLE mapping_handle_ = INVALID_HANDLE_VALUE;  ///< 映射句柄
-#endif
+    mutable string last_error_msg_;            ///< 最后错误信息
+    mutable int last_error_code_ = 0;          ///< 最后错误码
 
-    mutable mutex async_mutex_;                  ///< 异步操作互斥锁
-    mutable vector<aiocb_type*> async_operations_;   ///< 异步操作列表
-    mutable unordered_map<aiocb_type*, async_context*> async_contexts_;   ///< 异步上下文映射
-
-    mutable string last_error_msg_;              ///< 最后错误信息
-    mutable int last_error_code_ = 0;            ///< 最后错误码
+    unique_ptr<file_mapper> map_;
+    unique_ptr<file_locker> locker_;
+    unique_ptr<file_info> info_;
+    unique_ptr<file_async> async_;
 
 private:
-    bool complete_async_result(async_result& result, size_type bytes_transferred);
-    bool check_async_completion(async_result& result);
+    void init_sub_objects() noexcept;
+    void reset_sub_objects() noexcept;
 
     bool flush_write_buffer() const noexcept;
     bool fill_read_buffer() const noexcept;
@@ -199,22 +134,19 @@ public:
 
     /**
      * @brief 构造函数（打开文件）
-     * @param p 文件路径
+     * @param pth 文件路径
+     * @param append 是否为追加模式
      * @param access 访问模式
      * @param share_mode 共享模式
      * @param creation 创建方式
      * @param attributes 文件属性
-     * @param append 是否为追加模式
      */
     explicit file(
-        _NEFORCE path p,
-        FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL,
-        bool append = false) : path_(_NEFORCE move(p)) {
-        this->open(path_, append, access, share_mode, creation, attributes);
-    }
+        path pth, bool append = false,
+        file_access access = file_access::READ_WRITE,
+        file_shared share_mode = file_shared::SHARE_READ,
+        file_creation creation = file_creation::OPEN_EXIST,
+        file_attri attributes = file_attri::NORMAL);
 
     file(const file&) = delete;
     file& operator =(const file&) = delete;
@@ -229,7 +161,7 @@ public:
 
     /**
      * @brief 打开文件
-     * @param p 文件路径
+     * @param pth 文件路径
      * @param append 是否为追加模式
      * @param access 访问模式
      * @param share_mode 共享模式
@@ -237,11 +169,11 @@ public:
      * @param attributes 文件属性
      * @return 是否成功
      */
-    bool open(_NEFORCE path p, bool append = false,
-        FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ_WRITE,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
+    bool open(path pth, bool append = false,
+              file_access access = file_access::READ_WRITE,
+              file_shared share_mode = file_shared::SHARE_READ_WRITE,
+              file_creation creation = file_creation::OPEN_EXIST,
+              file_attri attributes = file_attri::NORMAL);
 
     /**
      * @brief 重新打开文件（使用原有路径）
@@ -253,10 +185,10 @@ public:
      * @return 是否成功
      */
     bool open(bool append = false,
-        FILE_ACCESS access = FILE_ACCESS::READ_WRITE,
-        FILE_SHARED share_mode = FILE_SHARED::SHARE_READ_WRITE,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
+              file_access access = file_access::READ_WRITE,
+              file_shared share_mode = file_shared::SHARE_READ_WRITE,
+              file_creation creation = file_creation::OPEN_EXIST,
+              file_attri attributes = file_attri::NORMAL);
 
     /**
      * @brief 关闭文件
@@ -268,14 +200,6 @@ public:
      * @return 是否成功
      */
     bool flush() noexcept;
-
-    /**
-     * @brief 获取原生文件句柄
-     * @return 文件句柄
-     */
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
-        return handle_;
-    }
 
     /**
      * @brief 写入数据
@@ -399,36 +323,38 @@ public:
     NEFORCE_NODISCARD vector<chunk_info> chunks_info(size_type chunk_size) const;
 
     /**
-     * @brief 异步读取
-     * @param buffer 输出缓冲区
-     * @param size 要读取的大小
-     * @param offset 读取偏移（-1表示当前位置）
-     * @return 异步结果
+     * @brief 移动文件指针
+     * @param distance 移动距离
+     * @param method 移动方式
+     * @return 是否成功
      */
-    async_result async_read(string& buffer, size_type size, difference_type offset = -1) const;
+    bool seek(difference_type distance, file_pointer method = file_pointer::END) const noexcept;
 
     /**
-     * @brief 异步写入
-     * @param data 要写入的数据
-     * @param size 要写入的大小
-     * @param offset 写入偏移（-1表示当前位置）
-     * @return 异步结果
+     * @brief 获取当前文件指针位置
+     * @return 当前位置，-1表示错误
      */
-    async_result async_write(string data, size_type size, difference_type offset = -1);
+    difference_type tell() const noexcept;
 
     /**
-     * @brief 等待异步操作完成
-     * @param result 异步结果
-     * @param timeout_ms 超时时间（毫秒）
-     * @return 是否完成
+     * @brief 获取系统文件指针位置
+     * @return 系统当前位置
      */
-    bool wait_async(async_result& result, uint32_t timeout_ms = numeric_traits<uint32_t>::max());
+    difference_type system_tell() const noexcept;
 
     /**
-     * @brief 取消异步操作
-     * @param result 异步结果
+     * @brief 预取数据到缓存
+     * @param hint_size 提示大小
+     * @return 是否成功
      */
-    void cancel_async(async_result& result);
+    bool prefetch(size_type hint_size = 0) const noexcept;
+
+    /**
+     * @brief 截断文件
+     * @param size 新大小
+     * @return 是否成功
+     */
+    bool truncate(difference_type size) const noexcept;
 
     /**
      * @brief 获取文件大小
@@ -450,10 +376,18 @@ public:
     NEFORCE_NODISCARD uint64_t size64() const;
 
     /**
+     * @brief 获取原生文件句柄
+     * @return 文件句柄
+     */
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
+        return handle_;
+    }
+
+    /**
      * @brief 获取文件路径
      * @return 路径引用
      */
-    NEFORCE_NODISCARD const _NEFORCE path& path() const noexcept {
+    NEFORCE_NODISCARD const path& file_path() const noexcept {
         return path_;
     }
 
@@ -512,412 +446,28 @@ public:
     }
 
     /**
-     * @brief 比较两个文件
-     * @param file1 文件1路径
-     * @param file2 文件2路径
-     * @param binary 是否使用二进制比较
-     * @return 是否相等
+     * @brief 内存映射操作
      */
-    NEFORCE_NODISCARD static bool compare(const _NEFORCE path& file1, const _NEFORCE path& file2, bool binary = true);
+    NEFORCE_NODISCARD file_mapper& mapper() noexcept { return *map_; }
+    NEFORCE_NODISCARD const file_mapper& mapper() const noexcept { return *map_; }
 
     /**
-     * @brief 二进制比较两个文件
-     * @param file1 文件1路径
-     * @param file2 文件2路径
-     * @return 是否相等
+     * @brief 文件锁操作
      */
-    NEFORCE_NODISCARD static bool compare_binary(const _NEFORCE path& file1, const _NEFORCE path& file2);
+    NEFORCE_NODISCARD file_locker& locker() noexcept { return *locker_; }
+    NEFORCE_NODISCARD const file_locker& locker() const noexcept { return *locker_; }
 
     /**
-     * @brief 文本比较两个文件
-     * @param file1 文件1路径
-     * @param file2 文件2路径
-     * @param ignore_case 忽略大小写
-     * @param ignore_whitespace 忽略空白
-     * @return 是否相等
+     * @brief 文件属性与时间
      */
-    NEFORCE_NODISCARD static bool compare_text(
-        const _NEFORCE path& file1, const _NEFORCE path& file2,
-        bool ignore_case = false, bool ignore_whitespace = false);
+    NEFORCE_NODISCARD file_info& info() noexcept { return *info_; }
+    NEFORCE_NODISCARD const file_info& info() const noexcept { return *info_; }
 
     /**
-     * @brief 获取二进制差异
-     * @param file1 文件1路径
-     * @param file2 文件2路径
-     * @param max_diffs 最大差异数
-     * @return 差异条目向量
+     * @brief 异步 I/O
      */
-    NEFORCE_NODISCARD static vector<binary_diff_entry> binary_diff(
-        const _NEFORCE path& file1,
-        const _NEFORCE path& file2,
-        size_type max_diffs = 100);
-
-    /**
-     * @brief 移动文件指针
-     * @param distance 移动距离
-     * @param method 移动方式
-     * @return 是否成功
-     */
-    bool seek(difference_type distance, FILE_POINTER method = FILE_POINTER::END) const noexcept;
-
-    /**
-     * @brief 获取当前文件指针位置
-     * @return 当前位置，-1表示错误
-     */
-    difference_type tell() const noexcept;
-
-    /**
-     * @brief 获取系统文件指针位置
-     * @return 系统当前位置
-     */
-    difference_type system_tell() const noexcept;
-
-    /**
-     * @brief 预取数据到缓存
-     * @param hint_size 提示大小
-     * @return 是否成功
-     */
-    bool prefetch(size_type hint_size = 0) const noexcept;
-
-    /**
-     * @brief 截断文件
-     * @param size 新大小
-     * @return 是否成功
-     */
-    bool truncate(difference_type size) const noexcept;
-
-    /**
-     * @brief 锁定文件区域
-     * @param offset 起始偏移
-     * @param length 锁定长度（0表示到文件尾）
-     * @param mode 锁定模式
-     * @return 是否成功
-     */
-    bool lock(difference_type offset, difference_type length, FILE_LOCK mode = FILE_LOCK::EXCLUSIVE) const noexcept;
-
-    /**
-     * @brief 解锁文件区域
-     * @param offset 起始偏移
-     * @param length 锁定长度
-     * @return 是否成功
-     */
-    bool unlock(difference_type offset, difference_type length) const noexcept;
-
-    /**
-     * @brief 尝试锁定文件区域
-     * @param offset 起始偏移
-     * @param length 锁定长度
-     * @param mode 锁定模式
-     * @return 是否成功
-     */
-    bool try_lock(difference_type offset, difference_type length, FILE_LOCK mode) const noexcept;
-
-    /**
-     * @brief 检查文件区域是否被锁定
-     * @param offset 起始偏移
-     * @param length 锁定长度
-     * @param lock_out 输出锁定类型
-     * @return 是否被锁定
-     */
-    NEFORCE_NODISCARD bool is_locked(
-        difference_type offset,
-        difference_type length,
-        FILE_LOCK* lock_out) const noexcept;
-
-    /**
-     * @brief 锁定整个文件
-     * @param mode 锁定模式
-     * @return 是否成功
-     */
-    bool lock_whole(FILE_LOCK mode) const noexcept;
-
-    /**
-     * @brief 解锁整个文件
-     * @return 是否成功
-     */
-    bool unlock_whole() const noexcept;
-
-    /**
-     * @brief 映射文件到内存
-     * @param offset 映射偏移
-     * @param size 映射大小（0表示到文件尾）
-     * @param access 访问模式
-     * @param hint 访问提示
-     * @return 是否成功
-     */
-    bool map(size_type offset = 0, size_type size = 0,
-             FILE_ACCESS access = FILE_ACCESS::READ,
-             FILE_MAP_HINT hint = FILE_MAP_HINT::SEQUENTIAL);
-
-    /**
-     * @brief 解除映射
-     */
-    void unmap() noexcept;
-
-    /**
-     * @brief 重新映射
-     * @param new_offset 新偏移
-     * @param new_size 新大小
-     * @return 是否成功
-     */
-    bool remap(size_type new_offset, size_type new_size);
-
-    /**
-     * @brief 刷新映射区域
-     * @param async 是否异步
-     * @return 是否成功
-     */
-    bool flush_mapped(bool async = false);
-
-    /**
-     * @brief 锁定/解锁映射页
-     * @param lock_in_memory 是否锁定
-     * @return 是否成功
-     */
-    bool lock_mapped_pages(bool lock_in_memory) const noexcept;
-
-    /**
-     * @brief 获取映射信息
-     * @return 映射信息
-     */
-    NEFORCE_NODISCARD map_info map_infos() const noexcept;
-
-    /**
-     * @brief 获取映射数据指针
-     * @return 映射地址
-     */
-    NEFORCE_NODISCARD void* mapped_data() const noexcept {
-        return mapped_ptr_;
-    }
-
-    /**
-     * @brief 获取映射大小
-     * @return 映射大小
-     */
-    NEFORCE_NODISCARD size_type mapped_size() const noexcept {
-        return mapped_size_;
-    }
-
-    /**
-     * @brief 获取映射偏移
-     * @return 映射偏移
-     */
-    NEFORCE_NODISCARD size_type mapped_offset() const noexcept {
-        return mapped_offset_;
-    }
-
-    /**
-     * @brief 获取映射访问模式
-     * @return 访问模式
-     */
-    NEFORCE_NODISCARD FILE_ACCESS mapped_access() const noexcept {
-        return mapped_access_;
-    }
-
-    /**
-     * @brief 检查是否已映射
-     * @return 是否已映射
-     */
-    NEFORCE_NODISCARD bool is_mapped() const noexcept {
-        return mapped_ptr_ != nullptr;
-    }
-
-    /**
-     * @brief 获取文件属性
-     * @return 文件属性
-     */
-    NEFORCE_NODISCARD FILE_ATTRI attributes() const noexcept;
-
-    /**
-     * @brief 设置文件属性
-     * @param attr 文件属性
-     * @return 是否成功
-     */
-    bool set_attributes(FILE_ATTRI attr) noexcept;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    /**
-     * @brief 获取文件创建时间
-     * @return 创建时间
-     */
-    NEFORCE_NODISCARD datetime creation_time() const noexcept;
-#endif
-
-    /**
-     * @brief 获取最后访问时间
-     * @return 最后访问时间
-     */
-    NEFORCE_NODISCARD datetime last_access_time() const noexcept;
-
-    /**
-     * @brief 获取最后修改时间
-     * @return 最后修改时间
-     */
-    NEFORCE_NODISCARD datetime last_write_time() const noexcept;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    /**
-     * @brief 设置所有时间
-     * @param create 创建时间
-     * @param access 访问时间
-     * @param write 修改时间
-     * @return 是否成功
-     */
-    bool set_all_times(const datetime& create, const datetime& access, const datetime& write) noexcept;
-#else
-    /**
-     * @brief 设置所有时间
-     * @param access 访问时间
-     * @param write 修改时间
-     * @return 是否成功
-     */
-    bool set_all_times(const datetime& access, const datetime& write) noexcept;
-#endif
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    /**
-     * @brief 设置创建时间
-     * @param dt 创建时间
-     * @return 是否成功
-     */
-    bool set_creation_time(const datetime& dt) noexcept;
-#endif
-
-    /**
-     * @brief 设置最后访问时间
-     * @param dt 访问时间
-     * @return 是否成功
-     */
-    bool set_last_access_time(const datetime& dt) noexcept;
-
-    /**
-     * @brief 设置最后修改时间
-     * @param dt 修改时间
-     * @return 是否成功
-     */
-    bool set_last_write_time(const datetime& dt) noexcept;
-
-    /**
-     * @brief 获取文件大小
-     * @param p 文件路径
-     * @return 文件大小
-     */
-    NEFORCE_NODISCARD static size_type size(const _NEFORCE path& p);
-
-    /**
-     * @brief 获取文件大小
-     * @param p 文件路径
-     * @param size 输出大小
-     * @return 是否成功
-     */
-    static bool size(const _NEFORCE path& p, size_type& size);
-
-    /**
-     * @brief 创建并写入文件
-     * @param p 文件路径
-     * @param content 内容
-     * @param append 是否追加
-     * @return 是否成功
-     */
-    static bool create_and_write(const _NEFORCE path& p, const string& content, bool append = false);
-
-    /**
-     * @brief 读取文件内容
-     * @param p 文件路径
-     * @param content 输出内容
-     * @param creation 创建方式
-     * @param attributes 文件属性
-     * @return 是否成功
-     */
-    static bool read(
-        const _NEFORCE path& p, string& content,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
-
-    /**
-     * @brief 读取文件内容
-     * @param p 文件路径
-     * @param creation 创建方式
-     * @param attributes 文件属性
-     * @return 文件内容
-     */
-    NEFORCE_NODISCARD static string read(
-        const _NEFORCE path& p,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
-
-    /**
-     * @brief 读取二进制文件
-     * @param p 文件路径
-     * @param content 输出内容
-     * @param creation 创建方式
-     * @param attributes 文件属性
-     * @return 是否成功
-     */
-    static bool read_binary(
-        const _NEFORCE path& p, string& content,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
-
-    /**
-     * @brief 读取二进制文件
-     * @param p 文件路径
-     * @param creation 创建方式
-     * @param attributes 文件属性
-     * @return 文件内容
-     */
-    NEFORCE_NODISCARD static string read_binary(
-        const _NEFORCE path& p,
-        FILE_CREATION creation = FILE_CREATION::OPEN_EXIST,
-        FILE_ATTRI attributes = FILE_ATTRI::NORMAL);
-};
-
-
-/**
- * @class file_lock_guard
- * @brief 文件锁守卫
- *
- * RAII风格的自动文件锁管理类。
- */
-class NEFORCE_API file_lock_guard {
-public:
-    using difference_type = file::difference_type;
-
-private:
- file& file_;                ///< 文件引用
- difference_type offset_;    ///< 锁定偏移
- difference_type length_;    ///< 锁定长度
- bool locked_;               ///< 是否已锁定
-
-public:
-    /**
-     * @brief 构造函数（自动加锁）
-     * @param f 文件对象
-     * @param offset 锁定偏移
-     * @param length 锁定长度
-     * @param mode 锁定模式
-     */
-    file_lock_guard(file& f, difference_type offset, difference_type length, FILE_LOCK mode);
-
-    /**
-     * @brief 析构函数（自动解锁）
-     */
-    ~file_lock_guard();
-
-    file_lock_guard(const file_lock_guard&) = delete;
-    file_lock_guard& operator =(const file_lock_guard&) = delete;
-
-    /**
-     * @brief 检查是否已锁定
-     * @return 是否已锁定
-     */
-    NEFORCE_NODISCARD bool is_locked() const { return locked_; }
-
-    /**
-     * @brief 手动解锁
-     * @return 是否成功
-     */
-    bool unlock();
+    NEFORCE_NODISCARD file_async& async() noexcept { return *async_; }
+    NEFORCE_NODISCARD const file_async& async() const noexcept { return *async_; }
 };
 
 /** @} */ // File

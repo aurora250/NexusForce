@@ -844,7 +844,7 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
             return false;
         }
 
-        file f(move(output), FILE_ACCESS::READ_WRITE, FILE_SHARED::SHARE_READ, FILE_CREATION::CREATE_FORCE);
+        file f(move(output), false, file_access::READ_WRITE, file_shared::SHARE_READ, file_creation::CREATE_FORCE);
 
         if (!f.is_opened()) {
             return false;

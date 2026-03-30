@@ -138,7 +138,7 @@ private:
      * @return 等待状态
      */
     template <typename Dur>
-    cv_status __wait_until_impl(smart_lock<mutex>& lock,
+    cv_status __wait_until_impl(unique_lock<mutex>& lock,
         const time_point<steady_clock, Dur>& util) {
         auto s = util.to_sec();
         const nanoseconds ns(util - s);
@@ -156,7 +156,7 @@ private:
      * @return 等待状态
      */
     template <typename Dur>
-    cv_status __wait_until_impl(smart_lock<mutex>& lock,
+    cv_status __wait_until_impl(unique_lock<mutex>& lock,
         const time_point<system_clock, Dur>& util) {
         auto sec = util.to_sec();
         const nanoseconds nanosec(util - sec);
@@ -211,7 +211,7 @@ public:
      *
      * 原子地解锁互斥锁并等待条件变量，被唤醒后重新锁定互斥锁。
      */
-    void wait(smart_lock<mutex>& lock) {
+    void wait(unique_lock<mutex>& lock) {
         cond_.wait(*lock.mutex());
     }
 
@@ -224,7 +224,7 @@ public:
      * 等待直到谓词返回true。防止虚假唤醒。
      */
     template <typename Pred>
-    void wait(smart_lock<mutex>& lock, Pred pred) {
+    void wait(unique_lock<mutex>& lock, Pred pred) {
         while (!pred()) wait(lock);
     }
 
@@ -236,7 +236,7 @@ public:
      * @return 等待结果状态
      */
     template <typename Dur>
-    cv_status wait_until(smart_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
+    cv_status wait_until(unique_lock<mutex>& lock, const time_point<steady_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
@@ -248,7 +248,7 @@ public:
      * @return 等待结果状态
      */
     template <typename Dur>
-    cv_status wait_until(smart_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
+    cv_status wait_until(unique_lock<mutex>& lock, const time_point<system_clock, Dur>& util) {
         return this->__wait_until_impl(lock, util);
     }
 
@@ -263,7 +263,7 @@ public:
      * 支持任意时钟类型的等待，通过转换到稳定时钟实现。
      */
     template <typename Clock, typename Dur>
-    cv_status wait_until(smart_lock<mutex>& lock, const time_point<Clock, Dur>& util) {
+    cv_status wait_until(unique_lock<mutex>& lock, const time_point<Clock, Dur>& util) {
         const typename Clock::time_point entry = Clock::now();
         const auto atime = clock_type::now() + ceil<clock_type::duration>(util - entry);
 
@@ -289,7 +289,7 @@ public:
      * 等待直到谓词成立或超时，防止虚假唤醒。
      */
     template <typename Clock, typename Dur, typename Pred>
-    bool wait_until(smart_lock<mutex>& lock, const time_point<Clock, Dur>& util, Pred pred) {
+    bool wait_until(unique_lock<mutex>& lock, const time_point<Clock, Dur>& util, Pred pred) {
         while (!pred()) {
             if (this->wait_until(lock, util) == cv_status::timeout) {
                 return pred();
@@ -307,7 +307,7 @@ public:
      * @return 等待结果状态
      */
     template <typename Rep, typename Period>
-    cv_status wait_for(smart_lock<mutex>& lock, const duration<Rep, Period>& rest) {
+    cv_status wait_for(unique_lock<mutex>& lock, const duration<Rep, Period>& rest) {
         const auto atime = steady_clock::now() + ceil<steady_clock::duration>(rest);
         return this->wait_until(lock, atime);
     }
@@ -323,7 +323,7 @@ public:
      * @return 谓词是否成立
      */
     template <typename Rep, typename Period, typename Pred>
-    bool wait_for(smart_lock<mutex>& lock, const duration<Rep, Period>& rest, Pred pred) {
+    bool wait_for(unique_lock<mutex>& lock, const duration<Rep, Period>& rest, Pred pred) {
         const auto atime = steady_clock::now() + ceil<steady_clock::duration>(rest);
         return this->wait_until(lock, atime, _NEFORCE move(pred));
     }

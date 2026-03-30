@@ -271,7 +271,7 @@ void thread_pool::thread_function(const id_type thread_id) {
             const size_t shift = min(get_worker_context()->consecutive_idle_count, MAX_IDLE_SHIFT);
             size_t wait_ms = min(MIN_WAIT_MS << shift, MAX_WAIT_MS);
 
-            smart_lock<mutex> lk(task_queue_mtx_);
+            unique_lock<mutex> lk(task_queue_mtx_);
 
             if (!is_running_) {
                 --idle_thread_size_;
@@ -449,7 +449,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     init_thread_size_ = init_thread_size;
     idle_thread_size_ = 0;
 
-    smart_lock<mutex> lk(task_queue_mtx_);
+    unique_lock<mutex> lk(task_queue_mtx_);
 
     for (id_type i = 0; i < init_thread_size_; i++) {
         auto ptr = make_unique<inner::manual_thread>(
@@ -483,7 +483,7 @@ thread_pool::pool_statistics thread_pool::stop() {
     is_running_ = false;
 
     {
-        smart_lock<mutex> lk(task_queue_mtx_);
+        unique_lock<mutex> lk(task_queue_mtx_);
         not_empty_.notify_all();
 
         exit_cond_.wait(lk, [&] { return threads_map_.empty(); });

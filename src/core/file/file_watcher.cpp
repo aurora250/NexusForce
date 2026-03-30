@@ -18,33 +18,9 @@ file_watcher::file_watcher(path watch_path, const bool recursive)
 
 file_watcher::~file_watcher() {
     stop();
-
-    if (watch_thread_.joinable()) {
-        watch_thread_.join();
-    }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (completion_port_ != INVALID_HANDLE_VALUE) {
-        ::CloseHandle(completion_port_);
-        completion_port_ = INVALID_HANDLE_VALUE;
-    }
-    if (dir_handle_ != INVALID_HANDLE_VALUE) {
-        ::CloseHandle(dir_handle_);
-        dir_handle_ = INVALID_HANDLE_VALUE;
-    }
-#elif defined(NEFORCE_PLATFORM_LINUX)
-    if (event_fd_ != -1) {
-        ::close(event_fd_);
-        event_fd_ = -1;
-    }
-    if (inotify_fd_ != -1) {
-        ::close(inotify_fd_);
-        inotify_fd_ = -1;
-    }
-#endif
 }
 
-bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
+bool file_watcher::start(callback_t callback, file_watch_event events) {
     if (watching_.load()) return false;
 
     {
@@ -81,8 +57,7 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
 
     watch_thread_ = thread(&file_watcher::watch_thread_func, this);
 
-#elif defined(NEFORCE_PLATFORM_LINUX)
-
+#else
     inotify_fd_ = ::inotify_init1(IN_NONBLOCK);
     if (inotify_fd_ == -1) {
         watching_.store(false);
@@ -98,16 +73,16 @@ bool file_watcher::start(callback_t callback, FILE_WATCH_EVENT events) {
     }
 
     uint32_t mask = 0;
-    if (static_cast<int>(events) & static_cast<int>(FILE_WATCH_EVENT::CREATED)) {
+    if (static_cast<int>(events) & static_cast<int>(file_watch_event::CREATED)) {
         mask |= IN_CREATE | IN_MOVED_TO;
     }
-    if (static_cast<int>(events) & static_cast<int>(FILE_WATCH_EVENT::DELETED)) {
+    if (static_cast<int>(events) & static_cast<int>(file_watch_event::DELETED)) {
         mask |= IN_DELETE | IN_MOVED_FROM;
     }
-    if (static_cast<int>(events) & static_cast<int>(FILE_WATCH_EVENT::MODIFIED)) {
+    if (static_cast<int>(events) & static_cast<int>(file_watch_event::MODIFIED)) {
         mask |= IN_MODIFY | IN_ATTRIB;
     }
-    if (static_cast<int>(events) & static_cast<int>(FILE_WATCH_EVENT::ACCESSED)) {
+    if (static_cast<int>(events) & static_cast<int>(file_watch_event::ACCESSED)) {
         mask |= IN_ACCESS;
     }
 
@@ -143,7 +118,10 @@ void file_watcher::stop() {
     if (completion_port_ != INVALID_HANDLE_VALUE) {
         ::PostQueuedCompletionStatus(completion_port_, 0, 0, nullptr);
     }
-#elif defined(NEFORCE_PLATFORM_LINUX)
+    if (dir_handle_ != INVALID_HANDLE_VALUE) {
+        ::CancelIoEx(dir_handle_, nullptr);
+    }
+#else
     if (event_fd_ != -1) {
         constexpr uint64_t value = 1;
         NEFORCE_IGNORE ::write(event_fd_, &value, sizeof(value));
@@ -155,22 +133,26 @@ void file_watcher::stop() {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-
+    if (completion_port_ != INVALID_HANDLE_VALUE) {
+        ::CloseHandle(completion_port_);
+        completion_port_ = INVALID_HANDLE_VALUE;
+    }
     if (dir_handle_ != INVALID_HANDLE_VALUE) {
-        ::CancelIoEx(dir_handle_, nullptr);
         ::CloseHandle(dir_handle_);
         dir_handle_ = INVALID_HANDLE_VALUE;
     }
-    if (overlapped_.hEvent) {
-        ::CloseHandle(overlapped_.hEvent);
-        overlapped_.hEvent = nullptr;
-    }
-
-#elif defined(NEFORCE_PLATFORM_LINUX)
-
+#else
     if (watch_descriptor_ != -1) {
         ::inotify_rm_watch(inotify_fd_, watch_descriptor_);
         watch_descriptor_ = -1;
+    }
+    if (event_fd_ != -1) {
+        ::close(event_fd_);
+        event_fd_ = -1;
+    }
+    if (inotify_fd_ != -1) {
+        ::close(inotify_fd_);
+        inotify_fd_ = -1;
     }
 #endif
 
@@ -185,12 +167,34 @@ void file_watcher::watch_thread_func() {
     buffer_.resize(MEMORY_BIG_ALLOC_THRESHHOLD);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-
-    memory_zero(&overlapped_);
-    overlapped_.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
-    if (!overlapped_.hEvent) {
+    ::OVERLAPPED local_overlapped{};
+    memory_zero(&local_overlapped);
+    local_overlapped.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+    if (!local_overlapped.hEvent) {
         watching_.store(false);
         return;
+    }
+
+    ::DWORD notify_filter = 0;
+    {
+        const int ev = static_cast<int>(current_events_);
+        if (ev & static_cast<int>(file_watch_event::CREATED)) {
+            notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME
+                           | FILE_NOTIFY_CHANGE_CREATION;
+        }
+        if (ev & static_cast<int>(file_watch_event::DELETED)) {
+            notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME;
+        }
+        if (ev & static_cast<int>(file_watch_event::MODIFIED)) {
+            notify_filter |= FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE
+                           | FILE_NOTIFY_CHANGE_ATTRIBUTES | FILE_NOTIFY_CHANGE_SECURITY;
+        }
+        if (ev & static_cast<int>(file_watch_event::ACCESSED)) {
+            notify_filter |= FILE_NOTIFY_CHANGE_LAST_ACCESS;
+        }
+        if (notify_filter == 0) {
+            notify_filter = FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME;
+        }
     }
 
     ::DWORD bytes_returned = 0;
@@ -199,22 +203,14 @@ void file_watcher::watch_thread_func() {
         buffer_.data(),
         static_cast<::DWORD>(buffer_.size()),
         recursive_ ? TRUE : FALSE,
-        FILE_NOTIFY_CHANGE_FILE_NAME |
-        FILE_NOTIFY_CHANGE_DIR_NAME |
-        FILE_NOTIFY_CHANGE_ATTRIBUTES |
-        FILE_NOTIFY_CHANGE_SIZE |
-        FILE_NOTIFY_CHANGE_LAST_WRITE |
-        FILE_NOTIFY_CHANGE_LAST_ACCESS |
-        FILE_NOTIFY_CHANGE_CREATION |
-        FILE_NOTIFY_CHANGE_SECURITY,
+        notify_filter,
         &bytes_returned,
-        &overlapped_,
+        &local_overlapped,
         nullptr
     );
 
     if (!result) {
-        ::CloseHandle(overlapped_.hEvent);
-        overlapped_.hEvent = nullptr;
+        ::CloseHandle(local_overlapped.hEvent);
         watching_.store(false);
         return;
     }
@@ -234,9 +230,7 @@ void file_watcher::watch_thread_func() {
 
         if (!io_completed) {
             const ::DWORD error = ::GetLastError();
-            if (error == WAIT_TIMEOUT) {
-                continue;
-            }
+            if (error == WAIT_TIMEOUT) continue;
             break;
         }
 
@@ -249,32 +243,32 @@ void file_watcher::watch_thread_func() {
 
             while (fni && watching_.load()) {
                 const wstring wide_filename(fni->FileName, fni->FileNameLength / sizeof(wchar_t));
-                const path utf8_filename{to_string(wide_filename)};
-                path full_path = watch_path_ / utf8_filename;
-                auto event_type = FILE_WATCH_EVENT::ACCESSED;
+                const string utf8_name = to_string(wide_filename);
+                if (!utf8_name.empty()) {
+                    const path full_path = watch_path_ / path{utf8_name};
+                    auto event_type = file_watch_event::ACCESSED;
 
-                switch (fni->Action) {
-                    case FILE_ACTION_ADDED:
-                    case FILE_ACTION_RENAMED_NEW_NAME: {
-                        event_type = FILE_WATCH_EVENT::CREATED;
-                        break;
+                    switch (fni->Action) {
+                        case FILE_ACTION_ADDED:
+                        case FILE_ACTION_RENAMED_NEW_NAME: {
+                            event_type = file_watch_event::CREATED;
+                            break;
+                        }
+                        case FILE_ACTION_MODIFIED: {
+                            event_type = file_watch_event::MODIFIED;
+                            break;
+                        }
+                        case FILE_ACTION_REMOVED:
+                        case FILE_ACTION_RENAMED_OLD_NAME: {
+                            event_type = file_watch_event::DELETED;
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
                     }
-                    case FILE_ACTION_MODIFIED: {
-                        event_type = FILE_WATCH_EVENT::MODIFIED;
-                        break;
-                    }
-                    case FILE_ACTION_REMOVED:
-                    case FILE_ACTION_RENAMED_OLD_NAME: {
-                        event_type = FILE_WATCH_EVENT::DELETED;
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
-                }
 
-                if (callback_) {
-                    lock<mutex> lock(callback_mutex_);
+                    lock<mutex> lk(callback_mutex_);
                     if (callback_) {
                         callback_(full_path, move(event_type));
                     }
@@ -291,39 +285,25 @@ void file_watcher::watch_thread_func() {
         }
 
         if (watching_.load()) {
-            ::ResetEvent(overlapped_.hEvent);
+            ::ResetEvent(local_overlapped.hEvent);
             bytes_returned = 0;
             result = ::ReadDirectoryChangesW(
                 dir_handle_,
                 buffer_.data(),
                 static_cast<::DWORD>(buffer_.size()),
                 recursive_ ? TRUE : FALSE,
-                FILE_NOTIFY_CHANGE_FILE_NAME |
-                FILE_NOTIFY_CHANGE_DIR_NAME |
-                FILE_NOTIFY_CHANGE_ATTRIBUTES |
-                FILE_NOTIFY_CHANGE_SIZE |
-                FILE_NOTIFY_CHANGE_LAST_WRITE |
-                FILE_NOTIFY_CHANGE_LAST_ACCESS |
-                FILE_NOTIFY_CHANGE_CREATION |
-                FILE_NOTIFY_CHANGE_SECURITY,
+                notify_filter,
                 &bytes_returned,
-                &overlapped_,
+                &local_overlapped,
                 nullptr
             );
-
-            if (!result) {
-                break;
-            }
+            if (!result) break;
         }
     }
 
-    if (overlapped_.hEvent) {
-        ::CloseHandle(overlapped_.hEvent);
-        overlapped_.hEvent = nullptr;
-    }
+    ::CloseHandle(local_overlapped.hEvent);
 
-#elif defined(NEFORCE_PLATFORM_LINUX)
-
+#else
     ::pollfd fds[2];
     fds[0].fd = inotify_fd_;
     fds[0].events = POLLIN;
@@ -333,9 +313,7 @@ void file_watcher::watch_thread_func() {
     while (watching_.load() && !stopping_.load()) {
         const int poll_result = ::poll(fds, 2, 1000);
         if (poll_result == -1) {
-            if (errno == EINTR) {
-                continue;
-            }
+            if (errno == EINTR) continue;
             break;
         } else if (poll_result == 0) {
             continue;
@@ -348,39 +326,39 @@ void file_watcher::watch_thread_func() {
         }
 
         if (fds[0].revents & POLLIN) {
-            const ssize_t len = ::read(inotify_fd_, buffer_.data(), file::buffer_size);
+            const ssize_t len = ::read(inotify_fd_, buffer_.data(), buffer_.size());
             if (len <= 0) {
-                if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                    continue;
-                }
+                if (errno == EAGAIN || errno == EWOULDBLOCK) continue;
                 break;
             }
 
             char* ptr = buffer_.data();
             while (ptr < buffer_.data() + len) {
                 auto* event = reinterpret_cast<struct ::inotify_event*>(ptr);
-                auto evt = FILE_WATCH_EVENT::ACCESSED;
+
+                file_watch_event evt = file_watch_event::ACCESSED;
+                bool matched = true;
 
                 if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
-                    evt = FILE_WATCH_EVENT::CREATED;
+                    evt = file_watch_event::CREATED;
                 } else if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
-                    evt = FILE_WATCH_EVENT::DELETED;
+                    evt = file_watch_event::DELETED;
                 } else if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
-                    evt = FILE_WATCH_EVENT::MODIFIED;
+                    evt = file_watch_event::MODIFIED;
                 } else if (event->mask & IN_ACCESS) {
-                    evt = FILE_WATCH_EVENT::ACCESSED;
+                    evt = file_watch_event::ACCESSED;
                 } else {
-                    ptr += sizeof(::inotify_event) + event->len;
-                    continue;
+                    matched = false;
                 }
 
-                if (callback_ && event->len > 0) {
+                if (matched && event->len > 0) {
                     path full_path = watch_path_ / path(event->name);
-                    lock<mutex> lock(callback_mutex_);
+                    lock<mutex> lk(callback_mutex_);
                     if (callback_) {
-                        callback_(full_path, move(evt));
+                        callback_(full_path, evt);
                     }
                 }
+
                 ptr += sizeof(::inotify_event) + event->len;
             }
         }
@@ -388,19 +366,18 @@ void file_watcher::watch_thread_func() {
 #endif
 }
 
-bool file_watcher::update_watch(const FILE_WATCH_EVENT events) {
+bool file_watcher::update_watch(const file_watch_event events) {
     if (current_events_ == events) {
         return true;
     }
     if (!watching_.load()) {
         current_events_ = events;
-        return false;
+        return true;
     }
 
     callback_t saved_callback;
-
     {
-        lock<mutex> lock(callback_mutex_);
+        lock<mutex> lk(callback_mutex_);
         saved_callback = callback_;
     }
 
@@ -423,7 +400,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     }
 
     callback_t saved_callback;
-    FILE_WATCH_EVENT saved_events;
+    file_watch_event saved_events;
     {
         lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;

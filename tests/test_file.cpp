@@ -16,84 +16,84 @@ static const path TEST_SUB_DIR{TEST_DIR / "sub_dir"};
 static const string TEST_CONTENT = "Hello!\nSecond line.\r\nThird line";
 
 void test_file_basic_operations() {
-    bool create_ok = file::create_and_write(TEST_FILE, TEST_CONTENT);
-    assert(create_ok);
-    assert(TEST_FILE.exists());
-    assert(TEST_FILE.is_file());
-    assert(!TEST_FILE.is_directory());
-
-    assert(file::size(TEST_FILE) == TEST_CONTENT.size());
-
-    string read_content;
-    bool read_ok = file::read(TEST_FILE, read_content);
-    assert(read_ok);
-    assert(read_content == TEST_CONTENT);
-
+    {
+        bool create_ok = filesystem::create_and_write(TEST_FILE, TEST_CONTENT);
+        NEFORCE_ASSERTION(create_ok);
+        NEFORCE_ASSERTION(TEST_FILE.exists());
+        NEFORCE_ASSERTION(TEST_FILE.is_file());
+        NEFORCE_ASSERTION(!TEST_FILE.is_directory());
+        NEFORCE_ASSERTION(filesystem::size(TEST_FILE) == TEST_CONTENT.size());
+    }
+    {
+        file read_file(TEST_FILE);
+        string read_content = read_file.read();
+        NEFORCE_ASSERTION(read_content == TEST_CONTENT);
+    }
     {
         file f;
-        assert(!f.is_opened());
-        assert(f.open(TEST_FILE));
-        assert(f.is_opened());
-        assert(f.path() == TEST_FILE);
+        NEFORCE_ASSERTION(!f.is_opened());
+        NEFORCE_ASSERTION(f.open(TEST_FILE));
+        NEFORCE_ASSERTION(f.is_opened());
+        NEFORCE_ASSERTION(f.file_path() == TEST_FILE);
 
         string line;
-        assert(f.read_line(line));
-        assert(line == "Hello!");
-        assert(f.read_line(line));
-        assert(line == "Second line.");
-        assert(f.read_line(line));
-        assert(line == "Third line");
+        NEFORCE_ASSERTION(f.read_line(line));
+        NEFORCE_ASSERTION(line == "Hello!");
+        NEFORCE_ASSERTION(f.read_line(line));
+        NEFORCE_ASSERTION(line == "Second line.");
+        NEFORCE_ASSERTION(f.read_line(line));
+        NEFORCE_ASSERTION(line == "Third line");
 
-        assert(f.seek(0, FILE_POINTER::BEGIN));
-        assert(f.tell() == 0);
-        assert(f.seek(5, FILE_POINTER::CURRENT));
-        assert(f.tell() == 5);
+        NEFORCE_ASSERTION(f.seek(0, file_pointer::BEGIN));
+        NEFORCE_ASSERTION(f.tell() == 0);
+        NEFORCE_ASSERTION(f.seek(5, file_pointer::CURRENT));
+        NEFORCE_ASSERTION(f.tell() == 5);
 
-        assert(f.truncate(10));
-        assert(f.size() == 10);
+        NEFORCE_ASSERTION(f.truncate(10));
+        NEFORCE_ASSERTION(f.size() == 10);
 
-        assert(f.seek(0, FILE_POINTER::BEGIN));
+        NEFORCE_ASSERTION(f.seek(0, file_pointer::BEGIN));
         string new_content = "New content after truncate";
         size_t written = f.write(new_content);
-        assert(written == new_content.size());
-        assert(f.flush());
+        NEFORCE_ASSERTION(written == new_content.size());
+        NEFORCE_ASSERTION(f.flush());
 
-        assert(f.size() == new_content.size());
+        NEFORCE_ASSERTION(f.size() == new_content.size());
 
         f.close();
-        assert(!f.is_opened());
+        NEFORCE_ASSERTION(!f.is_opened());
     }
     println("test file basic operations passed");
 }
 
 void test_directory_operations() {
-    assert(!TEST_SUB_DIR.exists());
-    bool dir_ok = TEST_SUB_DIR.create_directories();
-    assert(dir_ok);
-    assert(TEST_SUB_DIR.exists());
-    assert(TEST_SUB_DIR.is_directory());
+    NEFORCE_ASSERTION(!TEST_SUB_DIR.exists());
+    bool dir_ok = filesystem::create_directories(TEST_SUB_DIR);
+    NEFORCE_ASSERTION(dir_ok);
+    NEFORCE_ASSERTION(TEST_SUB_DIR.exists());
+    NEFORCE_ASSERTION(TEST_SUB_DIR.is_directory());
 
     path sub_file = {TEST_SUB_DIR / "sub_file.txt"};
-    assert(file::create_and_write(sub_file, "sub content"));
-    assert(sub_file.exists());
+    NEFORCE_ASSERTION(filesystem::create_and_write(sub_file, "sub content"));
+    NEFORCE_ASSERTION(sub_file.exists());
     println("test dictionary operations passed");
 }
 
 void test_file_attributes_and_times() {
     file f(TEST_FILE);
-    assert(f.open(TEST_FILE));
+    NEFORCE_ASSERTION(f.open(TEST_FILE));
 
-    _NEFORCE FILE_ATTRI original_attr = f.attributes();
-    bool set_attr_ok = f.set_attributes(_NEFORCE FILE_ATTRI::READONLY);
-    assert(set_attr_ok);
-    assert(static_cast<bool>(f.attributes() & _NEFORCE FILE_ATTRI::READONLY));
-    assert(f.set_attributes(original_attr));
-    assert(f.attributes() == original_attr);
+    file_attri original_attr = f.info().attributes();
+    bool set_attr_ok = f.info().set_attributes(file_attri::READONLY);
+    NEFORCE_ASSERTION(set_attr_ok);
+    NEFORCE_ASSERTION(static_cast<bool>(f.info().attributes() & file_attri::READONLY));
+    NEFORCE_ASSERTION(f.info().set_attributes(original_attr));
+    NEFORCE_ASSERTION(f.info().attributes() == original_attr);
 
-    _NEFORCE datetime now = _NEFORCE datetime::now();
-    bool set_time_ok = f.set_last_write_time(now);
-    assert(set_time_ok);
-    assert(f.last_write_time() == now);
+    datetime now = datetime::now();
+    bool set_time_ok = f.info().set_last_write_time(now);
+    NEFORCE_ASSERTION(set_time_ok);
+    NEFORCE_ASSERTION(f.info().last_write_time() == now);
 
     f.close();
     println("test file attributes and times passed");
@@ -102,69 +102,50 @@ void test_file_attributes_and_times() {
 void test_file_lock_and_other_operations() {
     {
         file f(TEST_FILE);
-        assert(f.open(TEST_FILE));
+        NEFORCE_ASSERTION(f.is_opened());
 
-        bool locked = f.lock(0, 10, FILE_LOCK::EXCLUSIVE);
-        assert(locked);
-        bool unlocked = f.unlock(0, 10);
-        assert(unlocked);
+        bool locked = f.locker().lock_whole();
+        NEFORCE_ASSERTION(locked);
+        bool unlocked = f.locker().unlock_whole();
+        NEFORCE_ASSERTION(unlocked);
     }
+    {
+        file copy_file{path{TEST_FILE.str() + ".copy"}};
+        NEFORCE_ASSERTION(filesystem::copy(TEST_FILE, copy_file.file_path()));
+        NEFORCE_ASSERTION(copy_file.file_path().exists());
+        string copy_content;
+        copy_file.read(copy_content);
 
-    path copy_file{TEST_FILE.str() + ".copy"};
-    assert(TEST_FILE.copy(copy_file));
-    assert(copy_file.exists());
-    string copy_content;
-    file::read(copy_file, copy_content);
+        path move_file{TEST_DIR / "moved_file.txt"};
+        NEFORCE_ASSERTION(filesystem::move(copy_file.file_path(), move_file));
+        NEFORCE_ASSERTION(!copy_file.file_path().exists());
+        NEFORCE_ASSERTION(move_file.exists());
 
-    path move_file{TEST_DIR / "moved_file.txt"};
-    assert(copy_file.move(move_file));
-    assert(!copy_file.exists());
-    assert(move_file.exists());
-
-    path rename_file{TEST_DIR / "renamed_file.txt"};
-    assert(move_file.rename(rename_file));
-    assert(!move_file.exists());
-    assert(rename_file.exists());
+        path rename_file{TEST_DIR / "renamed_file.txt"};
+        NEFORCE_ASSERTION(filesystem::rename(move_file, rename_file));
+        NEFORCE_ASSERTION(!move_file.exists());
+        NEFORCE_ASSERTION(rename_file.exists());
+    }
     println("test file lock and other operations passed");
-}
-
-void test_move_semantics() {
-    file f1(TEST_FILE);
-    assert(f1.open(TEST_FILE));
-    file f2 = _NEFORCE move(f1);
-    assert(!f1.is_opened());
-    assert(f2.is_opened());
-    assert(f2.path().str() == TEST_FILE.str());
-
-    file f3;
-    f3 = _NEFORCE move(f2);
-    assert(!f2.is_opened());
-    assert(f3.is_opened());
-    assert(f3.path() == TEST_FILE);
-    println("test move semantics passed");
 }
 
 void clean_up() {
     if (TEST_FILE.exists()) {
-        if (TEST_FILE.is_directory()) {
-            TEST_FILE.remove_directory();
-        } else {
-            TEST_FILE.remove();
-        }
+        println(filesystem::remove(TEST_FILE));
     }
     path sub_file = TEST_SUB_DIR / "sub_file.txt";
     if (sub_file.exists()) {
-        sub_file.remove();
+        filesystem::remove(sub_file);
     }
     path rename_file = TEST_DIR / "renamed_file.txt";
     if (rename_file.exists()) {
-        rename_file.remove();
+        filesystem::remove(rename_file);
     }
     if (TEST_SUB_DIR.exists()) {
-        TEST_SUB_DIR.remove_directory();
+        filesystem::remove_directory(TEST_SUB_DIR);
     }
     if (TEST_DIR.exists()) {
-        TEST_DIR.remove_directory();
+        filesystem::remove_directory(TEST_DIR);
     }
 }
 
@@ -174,7 +155,6 @@ void test_file() {
         test_file_basic_operations();
         test_directory_operations();
         test_file_lock_and_other_operations();
-        test_move_semantics();
         test_file_attributes_and_times();
         clean_up();
     } catch (...) {
@@ -184,95 +164,94 @@ void test_file() {
 
 
 void test_date() {
-    _NEFORCE date d1(2024, 2, 29);
-    assert(d1.year() == 2024 && d1.month() == 2 && d1.day() == 29);
+    date d1(2024, 2, 29);
+    NEFORCE_ASSERTION(d1.year() == 2024 && d1.month() == 2 && d1.day() == 29);
 
-    _NEFORCE date d2(2023, 2, 29);
-    assert(d2 == _NEFORCE date::epoch());
+    date d2(2023, 2, 29);
+    NEFORCE_ASSERTION(d2 == date::epoch());
 
-    assert(_NEFORCE date::is_leap_year(2020) == true);
-    assert(_NEFORCE date::is_leap_year(2019) == false);
-    assert(_NEFORCE date::is_leap_year(2100) == false);
-    assert(_NEFORCE date::is_leap_year(2400) == true);
+    NEFORCE_ASSERTION(date::is_leap_year(2020) == true);
+    NEFORCE_ASSERTION(date::is_leap_year(2019) == false);
+    NEFORCE_ASSERTION(date::is_leap_year(2100) == false);
+    NEFORCE_ASSERTION(date::is_leap_year(2400) == true);
 
-    assert(_NEFORCE date::days_of_month(2024, 2) == 29);
-    assert(_NEFORCE date::days_of_month(2023, 2) == 28);
-    assert(_NEFORCE date::days_of_month(2023, 4) == 30);
+    NEFORCE_ASSERTION(date::days_of_month(2024, 2) == 29);
+    NEFORCE_ASSERTION(date::days_of_month(2023, 2) == 28);
+    NEFORCE_ASSERTION(date::days_of_month(2023, 4) == 30);
 
-    _NEFORCE date d3(2024, 1, 1);
-    assert(d3.days_of_week() == 1);
+    date d3(2024, 1, 1);
+    NEFORCE_ASSERTION(d3.days_of_week() == 1);
 
-    _NEFORCE date d4(2024, 3, 1);
-    assert(d4.days_of_year() == 61);
+    date d4(2024, 3, 1);
+    NEFORCE_ASSERTION(d4.days_of_year() == 61);
 
-    _NEFORCE date d5(2024, 2, 28);
+    date d5(2024, 2, 28);
     d5 += 2;
-    assert(d5.month() == 3 && d5.day() == 1);
+    NEFORCE_ASSERTION(d5.month() == 3 && d5.day() == 1);
 
-    _NEFORCE date d6(2024, 3, 1);
+    date d6(2024, 3, 1);
     d6 -= 1;
-    assert(d6.month() == 2 && d6.day() == 29);
+    NEFORCE_ASSERTION(d6.month() == 2 && d6.day() == 29);
 
-    assert(_NEFORCE date(2024, 1, 1) < _NEFORCE date(2024, 1, 2));
-    assert(_NEFORCE date(2024, 1, 1) > _NEFORCE date(2023, 12, 31));
+    NEFORCE_ASSERTION(date(2024, 1, 1) < date(2024, 1, 2));
+    NEFORCE_ASSERTION(date(2024, 1, 1) > date(2023, 12, 31));
 
-    auto str = _NEFORCE date(2024, 5, 10).to_string();
-    assert(str == "2024-05-10");
-    assert(_NEFORCE date::parse("2024-05-10") == _NEFORCE date(2024, 5, 10));
-    assert(_NEFORCE date().try_parse("invalid") == false);
+    auto str = date(2024, 5, 10).to_string();
+    NEFORCE_ASSERTION(str == "2024-05-10");
+    NEFORCE_ASSERTION(date::parse("2024-05-10") == date(2024, 5, 10));
+    NEFORCE_ASSERTION(date().try_parse("invalid") == false);
 
     println("test_date passed");
 }
 
 void test_time() {
     using neforce::time;
-    _NEFORCE time t1(23, 59, 59);
-    assert(t1.hours() == 23 && t1.minutes() == 59 && t1.seconds() == 59);
+    time t1(23, 59, 59);
+    NEFORCE_ASSERTION(t1.hours() == 23 && t1.minutes() == 59 && t1.seconds() == 59);
 
-    _NEFORCE time t2(25, 60, 60);
-    assert(t2 == _NEFORCE time(0, 0, 0));
+    time t2(25, 60, 60);
+    NEFORCE_ASSERTION(t2 == time(0, 0, 0));
 
-    assert(_NEFORCE time(1, 2, 3).to_seconds() == 3600 + 120 + 3);
+    NEFORCE_ASSERTION(time(1, 2, 3).to_seconds() == 3600 + 120 + 3);
 
-    _NEFORCE time t3(23, 59, 59);
+    time t3(23, 59, 59);
     t3 += 2;  // 00:00:01
-    assert(t3.hours() == 0 && t3.seconds() == 1);
+    NEFORCE_ASSERTION(t3.hours() == 0 && t3.seconds() == 1);
 
-    _NEFORCE time t4(0, 0, 1);
+    time t4(0, 0, 1);
     t4 -= 2;  // 23:59:59
-    assert(t4.hours() == 23 && t4.seconds() == 59);
+    NEFORCE_ASSERTION(t4.hours() == 23 && t4.seconds() == 59);
 
-    assert(_NEFORCE time(12, 0, 0) < _NEFORCE time(13, 0, 0));
-    assert(_NEFORCE time(12, 30, 0) > _NEFORCE time(12, 29, 59));
+    NEFORCE_ASSERTION(time(12, 0, 0) < time(13, 0, 0));
+    NEFORCE_ASSERTION(time(12, 30, 0) > time(12, 29, 59));
 
-    assert(_NEFORCE time(9, 8, 7).to_string() == "09:08:07");
-    assert(_NEFORCE time::parse("09:08:07") == _NEFORCE time(9, 8, 7));
-    assert(_NEFORCE time().try_parse("invalid") == false);
+    NEFORCE_ASSERTION(time(9, 8, 7).to_string() == "09:08:07");
+    NEFORCE_ASSERTION(time::parse("09:08:07") == time(9, 8, 7));
+    NEFORCE_ASSERTION(time().try_parse("invalid") == false);
 
     println("test_time passed");
 }
 
 void test_datetime() {
     using neforce::time;
-    _NEFORCE datetime dt1(_NEFORCE date(2024, 1, 1), _NEFORCE time(12, 0, 0));
-    assert(dt1.year() == 2024 && dt1.hours() == 12);
+    datetime dt1(date(2024, 1, 1), time(12, 0, 0));
+    NEFORCE_ASSERTION(dt1.year() == 2024 && dt1.hours() == 12);
 
-    _NEFORCE datetime dt2(2024, 2, 28, 23, 59, 59);
+    datetime dt2(2024, 2, 28, 23, 59, 59);
     dt2 += 2;
-    assert(dt2.month() == 2 && dt2.day() == 29 && dt2.seconds() == 1);
+    NEFORCE_ASSERTION(dt2.month() == 2 && dt2.day() == 29 && dt2.seconds() == 1);
 
-    _NEFORCE datetime dt3(2024, 3, 1, 0, 0, 0);
+    datetime dt3(2024, 3, 1, 0, 0, 0);
     dt3 -= 1;
-    assert(dt3.month() == 2 && dt3.day() == 29);
+    NEFORCE_ASSERTION(dt3.month() == 2 && dt3.day() == 29);
 
-    _NEFORCE datetime dt4(2024, 1, 1, 0, 0, 0);
-    _NEFORCE datetime dt5(2023, 12, 31, 23, 59, 59);
-    assert(dt4 - dt5 == 1);
+    datetime dt4(2024, 1, 1, 0, 0, 0);
+    datetime dt5(2023, 12, 31, 23, 59, 59);
+    NEFORCE_ASSERTION(dt4 - dt5 == 1);
 
-    assert(_NEFORCE datetime(2024, 5, 10, 9, 8, 7).to_string() == "2024-05-10 09:08:07");
-    assert(_NEFORCE datetime::parse("2024-05-10 09:08:07")
-        == _NEFORCE datetime(2024, 5, 10, 9, 8, 7));
-    assert(_NEFORCE datetime().try_parse("invalid") == false);
+    NEFORCE_ASSERTION(datetime(2024, 5, 10, 9, 8, 7).to_string() == "2024-05-10 09:08:07");
+    NEFORCE_ASSERTION(datetime::parse("2024-05-10 09:08:07") == datetime(2024, 5, 10, 9, 8, 7));
+    NEFORCE_ASSERTION(datetime().try_parse("invalid") == false);
 
     println(datetime::now());
 
@@ -280,28 +259,28 @@ void test_datetime() {
 }
 
 void test_timestamp() {
-    _NEFORCE datetime epoch = _NEFORCE datetime::epoch();
-    _NEFORCE timestamp ts1(epoch);
-    assert(ts1.value() == 0);
-    assert(ts1.to_datetime() == epoch);
+    datetime epoch = datetime::epoch();
+    timestamp ts1(epoch);
+    NEFORCE_ASSERTION(ts1.value() == 0);
+    NEFORCE_ASSERTION(ts1.to_datetime() == epoch);
 
-    _NEFORCE timestamp ts2(86400);
-    _NEFORCE datetime dt = ts2.to_datetime();
-    assert(dt.day() == 2);
+    timestamp ts2(86400);
+    datetime dt = ts2.to_datetime();
+    NEFORCE_ASSERTION(dt.day() == 2);
 
-    _NEFORCE timestamp ts3(100);
-    _NEFORCE timestamp ts4(200);
-    assert(ts3 < ts4);
-    assert(ts4.value() - ts3.value() == 100);
+    timestamp ts3(100);
+    timestamp ts4(200);
+    NEFORCE_ASSERTION(ts3 < ts4);
+    NEFORCE_ASSERTION(ts4.value() - ts3.value() == 100);
 
     println("test_timestamp passed");
 }
 
 void test_utc_conversion() {
-    _NEFORCE datetime dt(2024, 1, 1, 0, 0, 0);
-    _NEFORCE datetime utc = dt.to_UTC();
-    _NEFORCE datetime local = _NEFORCE datetime::from_UTC(dt);
-    assert(local != dt);
+    datetime dt(2024, 1, 1, 0, 0, 0);
+    datetime utc = dt.to_UTC();
+    datetime local = datetime::from_UTC(utc);
+    NEFORCE_ASSERTION(local != dt);
 
     println("test_utc_conversion passed");
 }

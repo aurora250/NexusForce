@@ -49,7 +49,7 @@ void logger::worker_loop() {
         bool should_flush = false;
 
         {
-            smart_lock<mutex> lock(queue_mutex_);
+            unique_lock<mutex> lock(queue_mutex_);
             cv_.wait_for(lock, milliseconds(100), [this] {
                 return !queue_.empty() ||
                        flush_requested_.load(memory_order_acquire);
@@ -205,7 +205,7 @@ void logger::flush() {
         flush_requested_.store(true, memory_order_release);
         cv_.notify_one();
 
-        smart_lock<mutex> lock(flush_mutex_);
+        unique_lock<mutex> lock(flush_mutex_);
         flush_cv_.wait(lock, [this] {
             return !flush_requested_.load(memory_order_acquire);
         });

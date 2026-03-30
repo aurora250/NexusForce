@@ -46,6 +46,7 @@
 #include "NeForce/core/file/env/env_builder.hpp"
 #include "NeForce/core/file/env/env_parser.hpp"
 #include "NeForce/core/file/file_watcher.hpp"
+#include "NeForce/core/file/filesystem.hpp"
 #include "NeForce/core/file/ini/ini_builder.hpp"
 #include "NeForce/core/file/ini/ini_parser.hpp"
 #include "NeForce/core/file/json/json_builder.hpp"

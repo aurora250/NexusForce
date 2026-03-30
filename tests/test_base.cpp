@@ -152,7 +152,7 @@ void test_vector() {
         vec.assign(anotherVec.begin(), anotherVec.end());
         println(vec);
     } catch (exception& error) {
-        println(error);
+        println(error.what());
     }
 
     vector<int> long_vector;
@@ -396,7 +396,7 @@ void test_math() {
         println(tangent(0));
         println(around_pi(constants::PI), ":", around_pi(6.28));
     } catch (const exception& e) {
-        println(e);
+        println(e.what());
     }
 }
 

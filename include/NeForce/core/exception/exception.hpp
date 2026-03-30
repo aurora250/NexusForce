@@ -265,6 +265,8 @@ void NEFORCE_API throw_with_stack(const exception& err);
 #define NEFORCE_THROW_EXCEPTION(err) throw err
 #endif
 
+#define NEFORCE_ASSERTION(COND) if (!(COND)) { _NEFORCE terminate(); }
+
 /** @} */ // ExceptionHandling
 
 NEFORCE_END_NAMESPACE__

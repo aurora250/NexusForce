@@ -177,11 +177,10 @@ public:
  * @class lock
  * @brief 锁管理器模板
  * @tparam Mutex 互斥锁类型
- * @tparam WithDefer 是否启用支持延迟锁操作的特化
  *
  * RAII风格的锁管理器，在构造时锁定互斥锁，在析构时解锁。
  */
-template <typename Mutex, bool WithDefer = false>
+template <typename Mutex>
 class lock {
 public:
     using mutex_type = Mutex;  ///< 互斥锁类型
@@ -244,14 +243,13 @@ NEFORCE_INLINE17 constexpr try_lock_tag try_lock{};
 
 
 /**
- * @brief 智能锁管理器模板
+ * @brief 独占锁管理器模板
  * @tparam Mutex 互斥锁类型
  *
- * 更灵活的RAII锁管理器，支持延迟锁定、尝试锁定、转移所有权等特性。
- * 提供更多的控制能力。
+ * 独占锁，支持延迟锁定、尝试锁定、转移所有权等特性。
  */
 template <typename Mutex>
-class lock<Mutex, true> {
+class unique_lock {
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 
@@ -265,7 +263,7 @@ public:
      *
      * 创建不管理任何互斥锁的唯一锁。
      */
-    lock() = default;
+    unique_lock() = default;
 
     /**
      * @brief 从互斥锁构造
@@ -273,7 +271,7 @@ public:
      *
      * 构造时立即锁定互斥锁。
      */
-    explicit lock(mutex_type& m)
+    explicit unique_lock(mutex_type& m)
     : mutex_(&m), owns_lock_(true) {
         mutex_->lock();
     }
@@ -285,7 +283,7 @@ public:
      *
      * 构造时不锁定互斥锁，稍后可以调用lock()锁定。
      */
-    lock(mutex_type& m, defer_lock_tag tag) noexcept
+    unique_lock(mutex_type& m, defer_lock_tag tag) noexcept
     : mutex_(&m) {}
 
     /**
@@ -295,11 +293,11 @@ public:
      *
      * 构造时尝试锁定互斥锁，如果失败则不会阻塞。
      */
-    lock(mutex_type& m, try_lock_tag tag) noexcept
+    unique_lock(mutex_type& m, try_lock_tag tag) noexcept
     : mutex_(&m), owns_lock_(m.try_lock()) {}
 
-    lock(const lock&) = delete;
-    lock& operator =(const lock&) = delete;
+    unique_lock(const unique_lock&) = delete;
+    unique_lock& operator =(const unique_lock&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -307,7 +305,7 @@ public:
      *
      * 转移互斥锁的所有权和锁定状态。
      */
-    lock(lock&& other) noexcept
+    unique_lock(unique_lock&& other) noexcept
         : mutex_(other.mutex_), owns_lock_(other.owns_lock_) {
         other.mutex_ = nullptr;
         other.owns_lock_ = false;
@@ -320,7 +318,7 @@ public:
      *
      * 释放当前锁，然后转移所有权。
      */
-    lock& operator =(lock&& other) noexcept {
+    unique_lock& operator =(unique_lock&& other) noexcept {
         if (_NEFORCE addressof(other) == this) return *this;
         if (owns_lock_) mutex_->unlock();
         mutex_ = other.mutex_;
@@ -335,7 +333,7 @@ public:
      *
      * 如果拥有锁的所有权，则解锁互斥锁。
      */
-    ~lock() {
+    ~unique_lock() {
         if (owns_lock_) mutex_->unlock();
     }
 
@@ -413,13 +411,6 @@ public:
         return ret;
     }
 };
-
-/**
- * @typedef smart_lock
- * @brief 智能锁管理器的便捷类型别名
- */
-template <typename Mutex>
-using smart_lock = lock<Mutex, true>;
 
 /** @} */ // Mutex
 
