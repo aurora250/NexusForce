@@ -55,7 +55,8 @@ bool arp::local_info(const char* iface) noexcept {
     const bool res = query_sock.try_open(AF_INET, SOCK_DGRAM, 0);
     if (!res) return false;
 
-    int fd = query_sock.native_handle();
+    const int fd = query_sock.native_handle();
+    ::ifreq ifr;
 
     if (!iface || *iface == '\0') {
         ::ifconf ifc;
@@ -73,10 +74,10 @@ bool arp::local_info(const char* iface) noexcept {
             string_copy(ifr.ifr_name, it->ifr_name, IFNAMSIZ - 1);
             ifr.ifr_name[IFNAMSIZ - 1] = '\0';
 
-            if (::ioctl(tmp, SIOCGIFFLAGS, &ifr) < 0) continue;
+            if (::ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) continue;
             if (!(ifr.ifr_flags & IFF_UP)) continue;
             if (ifr.ifr_flags & IFF_LOOPBACK) continue;
-            if (::ioctl(tmp, SIOCGIFADDR, &ifr) < 0) continue;
+            if (::ioctl(fd, SIOCGIFADDR, &ifr) < 0) continue;
 
             if (ifr.ifr_addr.sa_family == AF_INET) {
                 found = true;
@@ -89,10 +90,9 @@ bool arp::local_info(const char* iface) noexcept {
         iface_ = iface;
     }
 
-    ::ifreq ifr;
     memory_zero(&ifr);
     string_copy(ifr.ifr_name, iface_.data(), IFNAMSIZ - 1);
-    if (::ioctl(tmp, SIOCGIFINDEX, &ifr) < 0) {
+    if (::ioctl(fd, SIOCGIFINDEX, &ifr) < 0) {
         return false;
     }
 
@@ -100,7 +100,7 @@ bool arp::local_info(const char* iface) noexcept {
     if (::ioctl(fd, SIOCGIFHWADDR, &ifr) < 0) {
         return false;
     }
-    memory_copy(local_mac_.bytes().data(), ifr.ifr_hwaddr.sa_data, 6);
+    memory_copy(const_cast<byte_t*>(local_mac_.bytes().data()), ifr.ifr_hwaddr.sa_data, 6);
 
     if (::ioctl(fd, SIOCGIFADDR, &ifr) < 0) {
         return false;
@@ -134,7 +134,7 @@ bool arp::open(const char* iface) noexcept {
     addr.sll_family = AF_PACKET;
     addr.sll_protocol = endian::host_to_network<uint16_t>(ETH_P_ARP);
     addr.sll_ifindex = ifindex_;
-    if (::bind(fd_, reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) < 0) {
+    if (::bind(sock_.native_handle(), reinterpret_cast<::sockaddr*>(&addr), sizeof(addr)) < 0) {
         close();
         return false;
     }
@@ -208,12 +208,12 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     while (remaining.count() > 0) {
         ::fd_set readfds;
         FD_ZERO(&readfds);
-        FD_SET(fd_, &readfds);
+        FD_SET(sock_.native_handle(), &readfds);
         ::timeval tv;
         tv.tv_sec = remaining.count() / 1000;
         tv.tv_usec = (remaining.count() % 1000) * 1000;
 
-        const int sel = ::select(fd_ + 1, &readfds, nullptr, nullptr, &tv);
+        const int sel = ::select(sock_.native_handle() + 1, &readfds, nullptr, nullptr, &tv);
         if (sel < 0) {
             if (errno == EINTR) {
                 auto elapsed = steady_clock::now() - start;

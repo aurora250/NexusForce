@@ -1,4 +1,10 @@
 #include <NeForce/core/file/file.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <sys/stat.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {

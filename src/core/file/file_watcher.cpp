@@ -336,7 +336,7 @@ void file_watcher::watch_thread_func() {
             while (ptr < buffer_.data() + len) {
                 auto* event = reinterpret_cast<struct ::inotify_event*>(ptr);
 
-                file_watch_event evt = file_watch_event::ACCESSED;
+                auto evt = file_watch_event::ACCESSED;
                 bool matched = true;
 
                 if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
@@ -355,7 +355,7 @@ void file_watcher::watch_thread_func() {
                     path full_path = watch_path_ / path(event->name);
                     lock<mutex> lk(callback_mutex_);
                     if (callback_) {
-                        callback_(full_path, evt);
+                        callback_(full_path, move(evt));
                     }
                 }
 

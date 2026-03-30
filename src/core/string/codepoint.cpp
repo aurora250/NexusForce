@@ -178,7 +178,7 @@ void codepoint::append_to(wstring& result) const {
         result.push_back(low_surrogate);
     }
 #else
-    result.push_back(static_cast<wchar_t>(cp));
+    result.push_back(static_cast<wchar_t>(value_));
 #endif
 }
 

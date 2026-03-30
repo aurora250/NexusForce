@@ -2,6 +2,11 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #include <NeForce/core/system/sysinfo.hpp>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {

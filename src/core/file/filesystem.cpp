@@ -1,5 +1,12 @@
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/file/file.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#include <sys/stat.h>
+#include <errno.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <stdio.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 bool filesystem::create_directories(const path& p) {
@@ -96,7 +103,7 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) no
     while ((entry = ::readdir(dir)) != nullptr) {
         const string name = entry->d_name;
         if (name == "." || name == "..") continue;
-        const path full = target / path{name};
+        const path full = p / path{name};
 
         if (full.is_directory()) {
             if (recursive) {

@@ -14,12 +14,8 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <sys/stat.h>
-#include <sys/time.h>
 #include <dirent.h>
-#include <cerrno>
 #include <cstdlib>
-#include <cstdio>
-#include <unistd.h>
 #include <fcntl.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
