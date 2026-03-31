@@ -598,7 +598,7 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
  */
 template <typename First, typename... Rest>
 NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out,
-                                       First&& first, Rest&&... rest) {
+                                     First&& first, Rest&&... rest) {
     while (pos < fmt.size()) {
         if (fmt[pos] == '{') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '{') {

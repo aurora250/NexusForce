@@ -6,12 +6,7 @@ void tcp_acceptor::open(const ip_address& endpoint, const int backlog) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint for TCP acceptor"));
     }
 
-    close();
-
-    fd_ = ::socket(endpoint.family(), SOCK_STREAM, IPPROTO_TCP);
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create TCP acceptor socket"));
-    }
+    open_ip(endpoint.family(), SOCK_STREAM, IPPROTO_TCP);
 
     if (!set_reuse_address(true)) {
         close();

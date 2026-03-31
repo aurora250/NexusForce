@@ -336,7 +336,7 @@ public:
      */
     template <typename T, typename... Args, typename DT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<DT>, is_constructible<DT, Args&&...>>, int> = 0>
-    const DT& emplace(Args&&... args) {
+    DT& emplace(Args&&... args) {
         any::try_emplace<DT>(_NEFORCE forward<Args>(args)...);
         return *manage_t<DT>::access(storage_);
     }
@@ -352,7 +352,7 @@ public:
      */
     template <typename T, typename U, typename... Args, typename DT = decay_t<T>,
         enable_if_t<conjunction_v<is_copy_constructible<DT>, is_constructible<DT, std::initializer_list<U>&, Args&&...>>, int> = 0>
-    const DT& emplace(std::initializer_list<U> ilist, Args&&... args) {
+    DT& emplace(std::initializer_list<U> ilist, Args&&... args) {
         any::try_emplace<DT, U>(ilist, _NEFORCE forward<Args>(args)...);
         return *manage_t<DT>::access(storage_);
     }
@@ -421,8 +421,9 @@ NEFORCE_BEGIN_INNER__
 
 template <typename T, typename U>
 const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag) noexcept {
-    if (value->manage_ == &any::manage_t<U>::manage || value->type() == typeid(T))
+    if (value->manage_ == &any::manage_t<U>::manage) {
         return static_cast<const T*>(any::manage_t<U>::access(value->storage_));
+    }
     return nullptr;
 }
 
@@ -435,8 +436,7 @@ template <typename T, typename U>
 const T* __any_cast_aux_dispatch(const any* value) noexcept {
     using tag = conditional_t<
         (is_same_v<decay_t<U>, U> || is_copy_constructible_v<U>),
-        any_cast_true_tag, any_cast_false_tag
-    >;
+        any_cast_true_tag, any_cast_false_tag>;
     return inner::__any_cast_aux_dispatch_impl<T, U>(value, tag{});
 }
 

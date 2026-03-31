@@ -1,5 +1,5 @@
 #include <NeForce/core/utility/packages.hpp>
-#include <NeForce/network/socket/ftp_socket.hpp>
+#include <NeForce/network/ftp_client.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <arpa/inet.h>
 #endif
@@ -55,21 +55,21 @@ namespace {
 }
 
 
-ssize_t ftp_socket::ctrl_send(const char* data, const size_t len) {
+ssize_t ftp_client::ctrl_send(const char* data, const size_t len) {
     if (tls_active_) {
         return ctrl_ssl_.write(data, len);
     }
     return ::send(fd_, data, static_cast<int>(len), 0);
 }
 
-ssize_t ftp_socket::ctrl_recv(char* buf, const size_t len) {
+ssize_t ftp_client::ctrl_recv(char* buf, const size_t len) {
     if (tls_active_) {
         return ctrl_ssl_.read(buf, len);
     }
     return ::recv(fd_, buf, static_cast<int>(len), 0);
 }
 
-bool ftp_socket::ctrl_read_line(string& out) {
+bool ftp_client::ctrl_read_line(string& out) {
     out.clear();
     char ch;
     while (true) {
@@ -81,7 +81,7 @@ bool ftp_socket::ctrl_read_line(string& out) {
     }
 }
 
-ftp_socket::response ftp_socket::read_response() {
+ftp_client::response ftp_client::read_response() {
     response resp{0, {}};
     string line;
 
@@ -119,7 +119,7 @@ ftp_socket::response ftp_socket::read_response() {
     return resp;
 }
 
-ftp_socket::response ftp_socket::send_command(const string& cmd) {
+ftp_client::response ftp_client::send_command(const string& cmd) {
     const string full = cmd + "\r\n";
     size_t total = 0;
     while (total < full.size()) {
@@ -132,7 +132,7 @@ ftp_socket::response ftp_socket::send_command(const string& cmd) {
     return read_response();
 }
 
-void ftp_socket::expect_code(const int expected, const string& cmd) {
+void ftp_client::expect_code(const int expected, const string& cmd) {
     const auto resp = send_command(cmd);
     if (resp.code != expected) {
         const string err = "FTP command failed [" + cmd + "] expected=" +
@@ -142,7 +142,7 @@ void ftp_socket::expect_code(const int expected, const string& cmd) {
     }
 }
 
-void ftp_socket::expect_codes(const std::initializer_list<int> codes, const string& cmd) {
+void ftp_client::expect_codes(const std::initializer_list<int> codes, const string& cmd) {
     const auto resp = send_command(cmd);
     for (const int c : codes) {
         if (resp.code == c) return;
@@ -152,7 +152,7 @@ void ftp_socket::expect_codes(const std::initializer_list<int> codes, const stri
     NEFORCE_THROW_EXCEPTION(ftp_exception(err.data()));
 }
 
-void ftp_socket::do_ctrl_tls_handshake() {
+void ftp_client::do_ctrl_tls_handshake() {
     if (!ssl_ctx_) {
         NEFORCE_THROW_EXCEPTION(value_exception("ssl_context required for FTPS"));
     }
@@ -167,13 +167,7 @@ void ftp_socket::do_ctrl_tls_handshake() {
     tls_active_ = true;
 }
 
-void ftp_socket::send_pbsz_prot() {
-    expect_code(200, "PBSZ 0");
-    expect_code(200, "PROT P");
-    data_tls_ = true;
-}
-
-tcp_socket ftp_socket::open_data_channel() {
+tcp_socket ftp_client::open_data_channel() {
     if (passive_mode_ == passive_mode::passive) {
         const auto resp = send_command("PASV");
         if (resp.code != 227) {
@@ -215,7 +209,7 @@ tcp_socket ftp_socket::open_data_channel() {
 
         tcp_socket data_sock;
         data_sock.open();
-        data_sock.connect(*data_addr);
+        static_cast<ip_socket&>(data_sock).connect(*data_addr);
         return data_sock;
 
     }
@@ -274,7 +268,7 @@ tcp_socket ftp_socket::open_data_channel() {
     return tcp_socket(client_fd);
 }
 
-ssl_stream ftp_socket::wrap_data_channel(tcp_socket&& sock) {
+ssl_stream ftp_client::wrap_data_channel(tcp_socket&& sock) {
     if (ssl_ctx_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(value_exception("ssl_context required for data channel TLS"));
     }
@@ -291,7 +285,7 @@ ssl_stream ftp_socket::wrap_data_channel(tcp_socket&& sock) {
     return data_ssl;
 }
 
-void ftp_socket::do_post_connect() {
+void ftp_client::do_post_connect() {
     const auto greeting = read_response();
     if (greeting.code != 220) {
         close();
@@ -300,7 +294,7 @@ void ftp_socket::do_post_connect() {
     connected_ = true;
 }
 
-vector<char> ftp_socket::download_impl(const string& remote_path,
+vector<char> ftp_client::download_impl(const string& remote_path,
                                        tcp_socket& data_sock,
                                        const uint64_t offset) {
     if (offset > 0) {
@@ -322,7 +316,7 @@ vector<char> ftp_socket::download_impl(const string& remote_path,
     return data;
 }
 
-void ftp_socket::upload_impl(const string& remote_path,
+void ftp_client::upload_impl(const string& remote_path,
                              tcp_socket& data_sock,
                              const char* data, const size_t len,
                              const uint64_t offset) {
@@ -343,7 +337,15 @@ void ftp_socket::upload_impl(const string& remote_path,
     NEFORCE_IGNORE read_response();
 }
 
-ftp_socket::entry ftp_socket::parse_list_entry(const string& line) {
+void ftp_client::open_and_connect(const ip_address& addr) {
+    open_ip(addr.family(), SOCK_STREAM, IPPROTO_TCP);
+    if (::connect(fd_, addr.data(), addr.size()) != 0) {
+        close();
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to FTP server"));
+    }
+}
+
+ftp_client::entry ftp_client::parse_list_entry(const string& line) {
     entry e;
     e.raw = line;
 
@@ -396,35 +398,26 @@ ftp_socket::entry ftp_socket::parse_list_entry(const string& line) {
     return e;
 }
 
-ftp_socket::~ftp_socket() {
+ftp_client::~ftp_client() {
     if (connected_) {
         disconnect();
     }
 }
 
-void ftp_socket::connect(const ip_address& addr, const tls_mode mode,
+void ftp_client::connect(const ip_address& addr, const tls_mode mode,
                          ssl_context* ctx, const string& sni_hostname) {
     if (!addr.is_valid()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid FTP server address"));
     }
 
-    close();
-    connected_  = false;
+    connected_ = false;
     tls_active_ = false;
-    tls_mode_   = mode;
-    ssl_ctx_  = ctx;
+    tls_mode_ = mode;
+    ssl_ctx_ = ctx;
     sni_host_ = sni_hostname;
     data_tls_ = false;
 
-    fd_ = ::socket(addr.family(), SOCK_STREAM, IPPROTO_TCP);
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create TCP socket for FTP"));
-    }
-
-    if (::connect(fd_, addr.data(), addr.size()) != 0) {
-        close();
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to FTP server"));
-    }
+    open_and_connect(addr);
 
     if (mode == tls_mode::implicit_) {
         do_ctrl_tls_handshake();
@@ -438,7 +431,7 @@ void ftp_socket::connect(const ip_address& addr, const tls_mode mode,
     }
 }
 
-void ftp_socket::connect(const string& hostname, const ports port, const tls_mode mode,
+void ftp_client::connect(const string& hostname, const ports port, const tls_mode mode,
                          dns_client* dns, ssl_context* ctx, const string& sni) {
     if (hostname.empty()) {
         NEFORCE_THROW_EXCEPTION(value_exception("FTP hostname cannot be empty"));
@@ -469,21 +462,18 @@ void ftp_socket::connect(const string& hostname, const ports port, const tls_mod
         auto addr = ip_address::parse(ip_str, port);
         if (!addr) continue;
 
-        close();
-        fd_ = ::socket(addr->family(), SOCK_STREAM, IPPROTO_TCP);
-        if (!is_open()) continue;
+        try {
+            connected_ = false;
+            tls_active_ = false;
+            tls_mode_ = mode;
+            ssl_ctx_ = ctx;
+            sni_host_ = sni.empty() ? hostname : sni;
+            data_tls_ = false;
 
-        if (::connect(fd_, addr->data(), addr->size()) != 0) {
-            close();
+            open_and_connect(*addr);
+        } catch (...) {
             continue;
         }
-
-        connected_ = false;
-        tls_active_ = false;
-        tls_mode_ = mode;
-        ssl_ctx_ = ctx;
-        sni_host_ = sni.empty() ? hostname : sni;
-        data_tls_ = false;
 
         if (mode == tls_mode::implicit_) {
             do_ctrl_tls_handshake();
@@ -501,7 +491,7 @@ void ftp_socket::connect(const string& hostname, const ports port, const tls_mod
     NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to any resolved address for FTP host"));
 }
 
-ftp_socket::tls_info ftp_socket::upgrade_tls(ssl_context& ctx, const string& sni_hostname) {
+ftp_client::tls_info ftp_client::upgrade_tls(ssl_context& ctx, const string& sni_hostname) {
     if (!is_connected()) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("Not connected to FTP server"));
     }
@@ -525,7 +515,7 @@ ftp_socket::tls_info ftp_socket::upgrade_tls(ssl_context& ctx, const string& sni
     return info;
 }
 
-void ftp_socket::disconnect() {
+void ftp_client::disconnect() {
     if (is_open()) {
         NEFORCE_IGNORE send_command("QUIT");
     }
@@ -541,7 +531,7 @@ void ftp_socket::disconnect() {
     close();
 }
 
-void ftp_socket::login(const string& username, const string& password) {
+void ftp_client::login(const string& username, const string& password) {
     if (!is_connected()) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("Not connected to FTP server"));
     }
@@ -556,16 +546,16 @@ void ftp_socket::login(const string& username, const string& password) {
     set_transfer_mode(transfer_mode::binary);
 }
 
-void ftp_socket::login_anonymous() {
+void ftp_client::login_anonymous() {
     login("anonymous", "anonymous@");
 }
 
-void ftp_socket::set_transfer_mode(const transfer_mode mode) {
+void ftp_client::set_transfer_mode(const transfer_mode mode) {
     transfer_mode_ = mode;
     expect_code(200, mode == transfer_mode::binary ? "TYPE I" : "TYPE A");
 }
 
-void ftp_socket::set_data_protection(const bool protect) {
+void ftp_client::set_data_protection(const bool protect) {
     if (!tls_active_) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("TLS not active on control channel"));
     }
@@ -574,7 +564,7 @@ void ftp_socket::set_data_protection(const bool protect) {
     data_tls_ = protect;
 }
 
-string ftp_socket::pwd() {
+string ftp_client::pwd() {
     const auto resp = send_command("PWD");
     if (resp.code != 257) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("PWD failed"));
@@ -588,23 +578,23 @@ string ftp_socket::pwd() {
     return msg;
 }
 
-void ftp_socket::cwd(const string& path) {
+void ftp_client::cwd(const string& path) {
     expect_code(250, "CWD " + path);
 }
 
-void ftp_socket::cdup() {
+void ftp_client::cdup() {
     expect_code(250, "CDUP");
 }
 
-void ftp_socket::mkdir(const string& path) {
+void ftp_client::mkdir(const string& path) {
     expect_codes({257}, "MKD " + path);
 }
 
-void ftp_socket::rmdir(const string& path) {
+void ftp_client::rmdir(const string& path) {
     expect_code(250, "RMD " + path);
 }
 
-vector<ftp_socket::entry> ftp_socket::list(const string& path) {
+vector<ftp_client::entry> ftp_client::list(const string& path) {
     auto data_sock = open_data_channel();
 
     const string cmd = path.empty() ? "LIST" : "LIST " + path;
@@ -637,7 +627,7 @@ vector<ftp_socket::entry> ftp_socket::list(const string& path) {
     return entries;
 }
 
-vector<string> ftp_socket::nlst(const string& path) {
+vector<string> ftp_client::nlst(const string& path) {
     auto data_sock = open_data_channel();
 
     const string cmd = path.empty() ? "NLST" : "NLST " + path;
@@ -668,7 +658,7 @@ vector<string> ftp_socket::nlst(const string& path) {
     return names;
 }
 
-uint64_t ftp_socket::file_size(const string& remote_path) {
+uint64_t ftp_client::file_size(const string& remote_path) {
     const auto resp = send_command("SIZE " + remote_path);
     if (resp.code != 213) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("SIZE command failed"));
@@ -676,42 +666,42 @@ uint64_t ftp_socket::file_size(const string& remote_path) {
     return static_cast<uint64_t>(to_int64(resp.message.view()));
 }
 
-void ftp_socket::rename(const string& from, const string& to) {
+void ftp_client::rename(const string& from, const string& to) {
     expect_code(350, "RNFR " + from);
     expect_code(250, "RNTO " + to);
 }
 
-void ftp_socket::remove(const string& remote_path) {
+void ftp_client::remove(const string& remote_path) {
     expect_code(250, "DELE " + remote_path);
 }
 
-vector<char> ftp_socket::download(const string& remote_path) {
+vector<char> ftp_client::download(const string& remote_path) {
     auto data_sock = open_data_channel();
     return download_impl(remote_path, data_sock, 0);
 }
 
-void ftp_socket::upload(const string& remote_path, const char* data, const size_t len) {
+void ftp_client::upload(const string& remote_path, const char* data, const size_t len) {
     auto data_sock = open_data_channel();
     upload_impl(remote_path, data_sock, data, len, 0);
 }
 
-vector<char> ftp_socket::download_resume(const string& remote_path, const uint64_t offset) {
+vector<char> ftp_client::download_resume(const string& remote_path, const uint64_t offset) {
     auto data_sock = open_data_channel();
     return download_impl(remote_path, data_sock, offset);
 }
 
-void ftp_socket::upload_resume(const string& remote_path,
+void ftp_client::upload_resume(const string& remote_path,
                                const char* data, const size_t len,
                                const uint64_t offset) {
     auto data_sock = open_data_channel();
     upload_impl(remote_path, data_sock, data, len, offset);
 }
 
-void ftp_socket::noop() {
+void ftp_client::noop() {
     expect_code(200, "NOOP");
 }
 
-ftp_socket::tls_info ftp_socket::get_tls_info() const noexcept {
+ftp_client::tls_info ftp_client::get_tls_info() const noexcept {
     tls_info info;
     info.active = tls_active_;
     if (tls_active_) {

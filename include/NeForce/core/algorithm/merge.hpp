@@ -263,7 +263,7 @@ NEFORCE_END_INNER__
  * 算法尝试分配临时缓冲区以提高性能，如果分配失败则使用无缓冲区的算法。
  */
 template <typename Iterator, typename Compare>
-constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
+NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last, Compare comp) {
     static_assert(is_ranges_bid_iter_v<Iterator>, "Iterator must be a bidirectional_iterator");
 
 	if (first == middle || middle == last) return;
@@ -285,7 +285,7 @@ constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last, Com
  * @param last 范围结束
  */
 template <typename Iterator>
-constexpr void inplace_merge(Iterator first, Iterator middle, Iterator last) {
+NEFORCE_CONSTEXPR20 void inplace_merge(Iterator first, Iterator middle, Iterator last) {
 	return _NEFORCE inplace_merge(first, middle, last, _NEFORCE less<iter_value_t<Iterator>>());
 }
 

@@ -59,7 +59,9 @@ namespace {
 
         result += "MIME-Version: 1.0\r\n";
 
-        for (const auto& [key, value] : msg.extra_headers) {
+        for (const auto& header : msg.extra_headers) {
+            const auto& key = header.first;
+            const auto& value = header.second;
             result += key + ": " + value + "\r\n";
         }
 
@@ -231,25 +233,21 @@ void smtp_socket::do_tls_handshake(const ssl_context& ctx, const string& sni_hos
     tls_active_ = true;
 }
 
+void smtp_socket::open_and_connect(const ip_address& addr) {
+    open_ip(addr.family(), SOCK_STREAM, IPPROTO_TCP);
+    if (::connect(fd_, addr.data(), addr.size()) != 0) {
+        close();
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to SMTP server"));
+    }
+}
+
 void smtp_socket::connect(const ip_address& addr, const string& domain,
                           const tls_mode mode, const ssl_context* ctx,
                           const string& sni_hostname) {
     if (!addr.is_valid()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid SMTP server address"));
     }
-
-    close();
-
-    fd_ = ::socket(addr.family(), SOCK_STREAM, IPPROTO_TCP);
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create TCP socket for SMTP"));
-    }
-
-    if (::connect(fd_, addr.data(), addr.size()) != 0) {
-        close();
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to SMTP server"));
-    }
-
+    open_and_connect(addr);
     do_post_connect(domain, mode, ctx, sni_hostname);
 }
 
@@ -283,12 +281,9 @@ void smtp_socket::connect(const string& hostname, const ports port,
         auto addr = ip_address::parse(ip_str, port);
         if (!addr) continue;
 
-        close();
-        fd_ = ::socket(addr->family(), SOCK_STREAM, IPPROTO_TCP);
-        if (!is_open()) continue;
-
-        if (::connect(fd_, addr->data(), addr->size()) != 0) {
-            close();
+        try {
+            open_and_connect(*addr);
+        } catch (...) {
             continue;
         }
 

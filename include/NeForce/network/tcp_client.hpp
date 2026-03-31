@@ -319,7 +319,7 @@ public:
 
         socket_.reset();
         connected_host_.clear();
-        connected_port_ = ports::def;
+        connected_port_ = ports::undef;
     }
 
     ssize_t send(const void* data, const size_t length) {

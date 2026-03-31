@@ -3,7 +3,7 @@
 #include "NeForce/network/socket/tcp_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-class NEFORCE_API tcp_acceptor : public socket_base {
+class NEFORCE_API tcp_acceptor : public ip_socket {
 public:
     tcp_acceptor() = default;
 

@@ -303,8 +303,7 @@ private:
 
 	template <typename F, enable_if_t<is_object_v<F>, int> = 0>
 	NEFORCE_ALWAYS_INLINE const F* __target_impl() const noexcept {
-		if (manager_ == &inner::__function_handler_dispatch<Res(Args...), F>::manage
-			|| (manager_ && typeid(F) == target_type())) {
+		if (manager_ == &inner::__function_handler_dispatch<Res(Args...), F>::manage) {
 			inner::storage_data ptr{};
 			manager_(ptr, func_, inner::FUNCTION_OPERATE::GET_PTR);
 			return ptr.access<const F*>();
@@ -331,7 +330,8 @@ public:
 	 * @brief 复制构造函数
 	 * @param other 要复制的function对象
 	 */
-	function(const function& other) : __function_base() {
+	function(const function& other)
+	: __function_base() {
 		if (static_cast<bool>(other)) {
 			other.manager_(func_, other.func_, inner::FUNCTION_OPERATE::COPY_PTR);
 			invoker_ = other.invoker_;
@@ -344,13 +344,12 @@ public:
 	 * @param other 要移动的function对象
 	 */
 	function(function&& other) noexcept
-	: __function_base(), invoker_(other.invoker_) {
-		if (static_cast<bool>(other)) {
-			func_ = other.func_;
-			manager_ = other.manager_;
-			other.manager_ = nullptr;
-			other.invoker_ = nullptr;
-		}
+	: __function_base() {
+		func_ = other.func_;
+		manager_ = other.manager_;
+		invoker_ = other.invoker_;
+		other.manager_ = nullptr;
+		other.invoker_ = nullptr;
 	}
 
 	/**
@@ -456,8 +455,7 @@ public:
 	 * @return 调用结果
 	 * @throw memory_exception 如果function为空
 	 */
-	Res operator ()(Args&&... args) const
-    noexcept(noexcept(invoker_(func_, _NEFORCE forward<Args>(args)...))) {
+	Res operator ()(Args&&... args) const {
 		if (empty()) {
 		    NEFORCE_THROW_EXCEPTION(memory_exception("functional pointing to null."));
 		}
@@ -497,7 +495,7 @@ public:
 	template <typename F>
 	F* target() noexcept {
 		const F* f = const_cast<const function*>(this)->target<F>();
-		return *const_cast<F**>(&f);
+		return const_cast<F*>(f);
 	}
 };
 

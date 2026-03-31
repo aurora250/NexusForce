@@ -813,10 +813,10 @@ template <typename T>
 enable_if_t<is_unbounded_array_v<T>, shared_ptr<T>>
 make_shared(const size_t len) {
     using value = remove_extent_t<T>;
-    void* tmp = nullptr;
+    value* tmp = nullptr;
     try {
         tmp = new value[len];
-        return shared_ptr<T>(tmp);
+        return shared_ptr<T[]>(tmp, default_delete<value[]>{});
     } catch (...) {
         operator delete [](tmp);
         NEFORCE_THROW_EXCEPTION(memory_exception("shared ptr construction failed."));
@@ -948,18 +948,26 @@ public:
 
 private:
     struct atomic_counter {
+    public:
+        using count_type = inner::__smart_ptr_counter;
+
     private:
         mutable atomic_base<uintptr_t> value_{0};
 
         static constexpr uintptr_t lock_bit{1};
 
-    public:
-        using count_type = inner::__smart_ptr_counter;
+        static void dereference(count_type* counter, true_type) noexcept {
+            counter->decref_strong();
+        }
 
+        static void dereference(count_type* counter, false_type) noexcept {
+            counter->decref_weak();
+        }
+
+    public:
         constexpr atomic_counter() noexcept = default;
 
-        explicit
-        atomic_counter(count_type* counter) noexcept
+        explicit atomic_counter(count_type* counter) noexcept
         : value_(reinterpret_cast<uintptr_t>(counter)) {
             counter = nullptr;
         }
@@ -968,18 +976,17 @@ private:
             auto value = value_.load(memory_order_relaxed);
             NEFORCE_CONSTEXPR_ASSERT(!(value & lock_bit));
             if (auto counter = reinterpret_cast<count_type*>(value)) {
-                if constexpr (is_shared_ptr_v<T>) {
-                    counter->decref_strong();
-                } else {
-                    counter->decref_weak();
-                }
+                this->dereference(counter, is_shared_ptr<T>());
             }
         }
 
         atomic_counter(const atomic_counter&) = delete;
-        atomic_counter& operator=(const atomic_counter&) = delete;
+        atomic_counter& operator =(const atomic_counter&) = delete;
 
         count_type* lock(memory_order mo) const noexcept {
+            if (mo != memory_order_seq_cst) {
+                mo = memory_order_acquire;
+            }
             auto cur = value_.load(memory_order_relaxed);
             while (cur & lock_bit) {
                 this_thread::relax();
@@ -1007,10 +1014,12 @@ private:
         }
 
         void wait_unlock(memory_order mo) const noexcept {
-            auto old_value = value_.load(memory_order_relaxed);
-            auto unlocked = old_value & ~lock_bit;
+            const auto old_value = value_.load(memory_order_relaxed);
+            const auto unlocked = old_value & ~lock_bit;
             value_.fetch_sub(1, memory_order_release);
-            value_.wait(unlocked, mo);
+            if (value_.load(memory_order_acquire) == unlocked) {
+                value_.wait(unlocked, mo);
+            }
         }
 
         void notify_one() noexcept {
@@ -1028,13 +1037,18 @@ private:
     friend struct atomic<T>;
 
 private:
-    static typename atomic_counter::count_type* add_ref(typename atomic_counter::count_type* counter) {
+    static typename atomic_counter::count_type* incref(
+        typename atomic_counter::count_type* counter, true_type) {
         if (counter) {
-            if constexpr (is_shared_ptr_v<T>) {
-                counter->incref_strong();
-            } else {
-                counter->incref_weak();
-            }
+            counter->incref_strong();
+        }
+        return counter;
+    }
+
+    static typename atomic_counter::count_type* incref(
+        typename atomic_counter::count_type* counter, false_type) {
+        if (counter) {
+            counter->incref_weak();
         }
         return counter;
     }
@@ -1043,7 +1057,10 @@ public:
     constexpr smart_pointer_atomic() noexcept = default;
 
     explicit smart_pointer_atomic(value_type value) noexcept
-    : ptr_(value.ptr_), refcount_(move(value.owner_)) {}
+    : ptr_(value.ptr_), refcount_(value.owner_) {
+        value.owner_ = nullptr;
+        value.ptr_ = nullptr;
+    }
 
     ~smart_pointer_atomic() = default;
 
@@ -1058,7 +1075,7 @@ public:
         value_type value;
         auto counter = refcount_.lock(mo);
         value.ptr_ = ptr_;
-        value.owner_ = add_ref(counter);
+        value.owner_ = this->incref(counter, is_shared_ptr<T>());
         refcount_.unlock(memory_order_relaxed);
         return value;
     }
@@ -1078,10 +1095,10 @@ public:
             auto* old_owner = refcount_.swap_unlock(desired.owner_, mo1);
             desired.owner_ = old_owner;
         } else {
-            value_type sink = _NEFORCE move(expected);
-            expected.ptr_ = ptr_;
-            expected.owner_ = add_ref(counter);
+            auto* new_counter = this->incref(counter, is_shared_ptr<T>());
             refcount_.unlock(mo2);
+            expected.ptr_ = ptr_;
+            expected.owner_ = new_counter;
             result = false;
         }
         return result;

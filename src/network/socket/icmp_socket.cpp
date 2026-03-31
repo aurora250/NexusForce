@@ -2,6 +2,7 @@
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/network/socket/icmp_socket.hpp>
+#include <NeForce/network/socket/ip_socket.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #include <errno.h>
 #endif

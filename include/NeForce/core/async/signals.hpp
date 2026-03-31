@@ -13,6 +13,7 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/apply.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
+#include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -199,6 +200,7 @@ class signal_blocker {
 private:
     shared_ptr<bool> blocked_flag_;  ///< 阻塞标志
     bool old_value_;                 ///< 原值
+    bool released_ = false;          ///< 是否已手动解除
 
 public:
     /**
@@ -215,7 +217,7 @@ public:
      * @brief 析构函数，恢复原状态
      */
     ~signal_blocker() {
-        if (blocked_flag_) {
+        if (blocked_flag_ && !released_) {
             *blocked_flag_ = old_value_;
         }
     }
@@ -229,8 +231,9 @@ public:
      * 提前解除阻塞，不会等待析构时恢复。
      */
     void unblock() noexcept {
-        if (blocked_flag_) {
-            *blocked_flag_ = false;
+        if (blocked_flag_ && !released_) {
+            *blocked_flag_ = old_value_;
+            released_ = true;
         }
     }
 };
@@ -406,6 +409,16 @@ private:
         return conn;
     }
 
+    size_t slot_count_unlocked() const noexcept {
+        size_t count = 0;
+        for (const auto& slot : slots_) {
+            if (slot.connected_flag && *slot.connected_flag) {
+                ++count;
+            }
+        }
+        return count;
+    }
+
 public:
     signal() = default;
     signal(const signal&) = delete;
@@ -478,23 +491,33 @@ public:
      * 如果信号被阻塞，则什么也不做。
      */
     void emit(Types... args) {
-        this->with_lock([this, args...] {
+        vector<slot_entry> snapshot;
+        {
+            lock<mutex> lk(mutex_);
             if (is_blocked()) return;
+            snapshot = slots_;
+        }
 
-            for (auto it = slots_.begin(); it != slots_.end();) {
-                if (!it->connected_flag || !(*it->connected_flag)) {
-                    it = slots_.erase(it);
-                    continue;
-                }
+        for (auto& slot : snapshot) {
+            if (!slot.connected_flag || !(*slot.connected_flag)) continue;
 
-                const callback_result res = it->callback(_NEFORCE forward<Types>(args)...);
-                if (res == callback_result::erase) {
-                    it = slots_.erase(it);
-                } else {
-                    ++it;
-                }
+            const callback_result res = slot.callback(args...);
+            if (res == callback_result::erase) {
+                *slot.connected_flag = false;
             }
-        });
+        }
+
+        {
+            lock<mutex> lk(mutex_);
+            slots_.erase(
+                _NEFORCE remove_if(slots_.begin(), slots_.end(),
+                    [](const slot_entry& s) {
+                        return !s.connected_flag || !(*s.connected_flag);
+                    }
+                ),
+                slots_.end()
+            );
+        }
     }
 
     /**
@@ -507,11 +530,15 @@ public:
      */
     template <typename Executor>
     void emit_executor(Executor& executor, Types... args) {
+        auto weak_flag = weak_ptr<bool>(blocked_flag_);
         auto args_tuple = _NEFORCE make_tuple(_NEFORCE forward<Types>(args)...);
 
-        executor.post([this, args_tuple = _NEFORCE move(args_tuple)]() mutable {
-            _NEFORCE apply([this](auto&&... args) {
-                this->emit(_NEFORCE forward<decltype(args)>(args)...);
+        executor.post([this, weak_flag = _NEFORCE move(weak_flag),
+                       args_tuple = _NEFORCE move(args_tuple)]() mutable {
+            if (weak_flag.expired()) return;
+
+            _NEFORCE apply([this](auto&&... a) {
+                this->emit(_NEFORCE forward<decltype(a)>(a)...);
             }, _NEFORCE move(args_tuple));
         });
     }
@@ -543,8 +570,8 @@ public:
      * 当此信号触发时，会转发给other信号。
      */
     connection connect_signal(signal& other, int priority = 0) {
-        return this->connect([&other](Types... args) {
-            other.emit(_NEFORCE forward<Types>(args)...);
+        return this->connect([other_ptr = &other](Types... args) {
+            other_ptr->emit(args...);
             return callback_result::keep;
         }, priority);
     }
@@ -560,7 +587,7 @@ public:
     connection connect_signal(signal* other, int priority = 0) {
         return this->connect([other](Types... args) {
             if (other) {
-                other->emit(_NEFORCE forward<Types>(args)...);
+                other->emit(args...);
             }
             return callback_result::keep;
         }, priority);
@@ -689,13 +716,7 @@ public:
      */
     size_t slot_count() const noexcept {
         return this->with_lock([this] {
-            size_t count = 0;
-            for (const auto& slot : slots_) {
-                if (slot.connected_flag && *slot.connected_flag) {
-                    ++count;
-                }
-            }
-            return count;
+            return slot_count_unlocked();
         });
     }
 
@@ -704,7 +725,9 @@ public:
      * @return 是否为空
      */
     NEFORCE_NODISCARD bool empty() const noexcept {
-        return slot_count() == 0;
+        return this->with_lock([this] {
+            return slot_count_unlocked() == 0;
+        });
     }
 };
 

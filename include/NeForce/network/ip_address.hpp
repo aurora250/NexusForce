@@ -52,8 +52,8 @@ public:
         return addr_.holds_alternative<::sockaddr_in6>();
     }
 
-    NEFORCE_NODISCARD static ip_address any(ports port = ports::def, int family = AF_INET) noexcept;
-    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::def, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address any(ports port = ports::undef, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::undef, int family = AF_INET) noexcept;
 
     NEFORCE_NODISCARD const ::sockaddr* data() const noexcept;
     NEFORCE_NODISCARD ::sockaddr* data() noexcept;
@@ -67,7 +67,7 @@ public:
     NEFORCE_NODISCARD ports port() const noexcept;
 
     NEFORCE_NODISCARD string to_string() const;
-    NEFORCE_NODISCARD static optional<ip_address> parse(const string& host, ports port = ports::def) noexcept;
+    NEFORCE_NODISCARD static optional<ip_address> parse(const string& host, ports port = ports::undef) noexcept;
 
     NEFORCE_NODISCARD bool operator ==(const ip_address& other) const noexcept;
     NEFORCE_NODISCARD bool operator !=(const ip_address& other) const noexcept {

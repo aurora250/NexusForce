@@ -193,7 +193,7 @@ rb_tree_insert_rebalance(rb_tree_node_base* insert, rb_tree_node_base*& root) no
  */
 NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base*
 rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
-                            rb_tree_node_base*& leftmost, rb_tree_node_base*& rightmost) noexcept {
+                        rb_tree_node_base*& leftmost, rb_tree_node_base*& rightmost) noexcept {
     rb_tree_node_base* y = erase;
     rb_tree_node_base* x;
     rb_tree_node_base* x_parent;
@@ -277,7 +277,7 @@ rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
         while (x != root && (x == nullptr || x->color_ == RB_TREE_BLACK)) {
             if (x == x_parent->left_) {
                 rb_tree_node_base* w = x_parent->right_;
-
+                NEFORCE_DEBUG_VERIFY(w != nullptr, "RB-tree structure corrupted: right sibling is null");
                 if (w == nullptr) {
                     x = x_parent;
                     x_parent = x_parent->parent_;
@@ -311,7 +311,7 @@ rb_tree_erase_rebalance(rb_tree_node_base* erase, rb_tree_node_base*& root,
                 }
             } else {
                 rb_tree_node_base* w = x_parent->left_;
-
+                NEFORCE_DEBUG_VERIFY(w != nullptr, "RB-tree structure corrupted: left sibling is null");
                 if (w == nullptr) {
                     x = x_parent;
                     x_parent = x_parent->parent_;
@@ -597,6 +597,27 @@ private:
     template <bool, typename> friend struct rb_tree_iterator;
 
 private:
+    struct node_guard {
+    private:
+        rb_tree* tree_;
+        link_type node_;
+        bool released_ = false;
+
+    public:
+        node_guard(rb_tree* t, link_type n) noexcept
+        : tree_(t), node_(n) {}
+
+        ~node_guard() {
+            if (!released_) {
+                tree_->destroy_node(node_);
+            }
+        }
+
+        link_type release() noexcept {
+            released_ = true; return node_;
+        }
+    };
+
     /**
      * @brief 获取根节点
      * @return 根节点引用
@@ -769,7 +790,7 @@ private:
     link_type copy_under(link_type src_root, link_type parent) {
         link_type top = rb_tree::copy_node(src_root);
         top->parent_ = parent;
-        try{
+        try {
             if (src_root->right_ != nullptr) {
                 top->right_ = rb_tree::copy_under(rb_tree::right(src_root), top);
             }
@@ -784,13 +805,6 @@ private:
                 }
                 parent = y;
                 src_root = rb_tree::left(src_root);
-            }
-            if (root() != nullptr) {
-                leftmost() = rb_tree::minimum(root());
-                rightmost() = rb_tree::maximum(root());
-            } else {
-                leftmost() = header_;
-                rightmost() = header_;
             }
         } catch (...) {
             rb_tree::erase_under(top);
@@ -1142,18 +1156,23 @@ public:
     template <typename... Args>
     iterator emplace_unique_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
+        node_guard guard(this, tmp);
 
         if (position.node_ == header_->left_) {
             if (size() > 0 && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
+                guard.release();
                 return rb_tree::insert_into(position.node_, position.node_, tmp);
             }
+            guard.release();
             return rb_tree::insert_unique(tmp).first;
         }
 
         if (position.node_ == header_) {
             if (key_compare_(rb_tree::key(rightmost()), rb_tree::key(tmp))) {
+                guard.release();
                 return rb_tree::insert_into(nullptr, rightmost(), tmp);
             }
+            guard.release();
             return rb_tree::insert_unique(tmp).first;
         }
 
@@ -1163,13 +1182,16 @@ public:
         if (key_compare_(rb_tree::key(before.node_), rb_tree::key(tmp)) &&
             key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
             if (rb_tree::right(link_type(before.node_)) == nullptr) {
+                guard.release();
                 return rb_tree::insert_into(nullptr, before.node_, tmp);
             }
             if (rb_tree::left(link_type(position.node_)) == nullptr) {
+                guard.release();
                 return rb_tree::insert_into(position.node_, position.node_, tmp);
             }
         }
 
+        guard.release();
         return rb_tree::insert_unique(tmp).first;
     }
 
@@ -1246,30 +1268,40 @@ public:
     template <typename... Args>
     iterator emplace_equal_hint(iterator position, Args&&... args) {
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
+        node_guard guard(this, tmp);
 
         if (position.node_ == header_->left_) {
             if (size() > 0 && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
+                guard.release();
                 return rb_tree::insert_into(position.node_, position.node_, tmp);
             }
+            guard.release();
             return rb_tree::insert_equal(tmp);
         }
 
         if (position.node_ == header_) {
             if (!key_compare_(rb_tree::key(tmp), rb_tree::key(rightmost()))) {
+                guard.release();
                 return rb_tree::insert_into(nullptr, rightmost(), tmp);
             }
+            guard.release();
             return rb_tree::insert_equal(tmp);
         }
 
         iterator before = position;
         --before;
+
         if (!key_compare_(rb_tree::key(tmp), rb_tree::key(before.node_)) &&
             !key_compare_(rb_tree::key(position.node_), rb_tree::key(tmp))) {
             if (rb_tree::right(link_type(before.node_)) == nullptr) {
+                guard.release();
                 return rb_tree::insert_into(nullptr, before.node_, tmp);
             }
+            guard.release();
             return rb_tree::insert_into(position.node_, position.node_, tmp);
         }
+
+        guard.release();
         return rb_tree::insert_equal(tmp);
     }
 
@@ -1352,6 +1384,7 @@ public:
      */
     void clear()
     noexcept(is_nothrow_destructible_v<link_node>) {
+        if (header_ == nullptr) return;
         if (size_pair_.value == 0) return;
         rb_tree::erase_under(root());
         leftmost() = header_;

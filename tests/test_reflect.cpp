@@ -136,13 +136,13 @@ void test_reflect() {
     }
 
     println("\nAll properties of circle (including base):");
-    for (const auto& [name, prop] : circle_meta->all_properties()) {
-        println("  -", name);
+    for (const auto& property : circle_meta->all_properties()) {
+        println("  -", property.first);
     }
 
     println("\nAll functions of circle (including base):");
-    for (const auto& [name, func] : circle_meta->all_functions()) {
-        println("  -", name);
+    for (const auto& f : circle_meta->all_functions()) {
+        println("  -", f.first);
     }
 
     auto* rect_meta = reflect::registry::instance().find("rectangle");

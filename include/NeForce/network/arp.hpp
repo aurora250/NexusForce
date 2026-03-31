@@ -9,12 +9,11 @@ NEFORCE_BEGIN_NAMESPACE__
 
 class NEFORCE_API arp {
 private:
-#ifdef NEFORCE_PLATFORM_WINDOWS
     string iface_;
+#ifdef NEFORCE_PLATFORM_WINDOWS
     bool opened_ = false;
 #else
     socket_base sock_;
-    string iface_;
     mac_address local_mac_;
     uint32_t local_ip_;
     int ifindex_ = -1;

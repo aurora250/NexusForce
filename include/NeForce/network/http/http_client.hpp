@@ -116,7 +116,7 @@ public:
 
     void clear_proxy() {
         config_.proxy_host.clear();
-        config_.proxy_port = ports::def;
+        config_.proxy_port = ports::undef;
     }
 
     void set_progress_callback(progress_callback_t callback) {

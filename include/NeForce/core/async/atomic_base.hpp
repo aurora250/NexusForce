@@ -9,7 +9,7 @@
  */
 
 #include "NeForce/core/async/atomic_wait.hpp"
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_COMPILER_MSVC
 #include <intrin.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -466,6 +466,14 @@ template <>
 struct atomic_is_always_lock_free_impl<8> {
 	static constexpr bool value = true;
 };
+template <>
+struct atomic_is_always_lock_free_impl<16> {
+#ifdef NEFORCE_ARCH_X86_64
+    static constexpr bool value = true;
+#else
+    static constexpr bool value = false;
+#endif
+};
 #endif
 
 NEFORCE_END_INNER__
@@ -620,15 +628,37 @@ atomic_cmpexch_weak(
 			: [ptr] "r" (ptr), [old_val] "r" (old_val), [desired] "r" (desired)
 			: "cc", "memory");
 	} else NEFORCE_IF_CONSTEXPR (sizeof(T) == 8) {
+		uint32_t loaded_lo, loaded_hi;
+		uint32_t old_lo = static_cast<uint32_t>(old_val);
+		uint32_t old_hi = static_cast<uint32_t>(static_cast<uint64_t>(old_val) >> 32);
+		uint32_t des_lo = static_cast<uint32_t>(static_cast<uint64_t>(desired));
+		uint32_t des_hi = static_cast<uint32_t>(static_cast<uint64_t>(desired) >> 32);
+		uint32_t tmp_success = 0;
 		asm volatile(
-			"ldrexd %[loaded], [%[ptr]]\n\t"
-			"cmp %[loaded], %[old_val]\n\t"
-			"bne 1f\n\t"
-			"strexd %w[success], %[desired], [%[ptr]]\n\t"
+			"ldrexd %[lo], %[hi], [%[ptr]]\n\t"
+			"cmp    %[lo], %[old_lo]\n\t"
+			"cmpeq  %[hi], %[old_hi]\n\t"
+			"bne    1f\n\t"
+			"strexd %[success], %[des_lo], %[des_hi], [%[ptr]]\n\t"
 			"1:"
-			: [loaded] "=&r" (loaded), [success] "=&r" (success_flag)
-			: [ptr] "r" (ptr), [old_val] "r" (old_val), [desired] "r" (desired)
+			: [lo]      "=&r" (loaded_lo),
+			  [hi]      "=&r" (loaded_hi),
+			  [success] "=&r" (tmp_success)
+			: [ptr]     "r"   (ptr),
+			  [old_lo]  "r"   (old_lo),
+			  [old_hi]  "r"   (old_hi),
+			  [des_lo]  "r"   (des_lo),
+			  [des_hi]  "r"   (des_hi)
 			: "cc", "memory");
+		loaded = static_cast<T>(
+			static_cast<uint64_t>(loaded_lo) |
+			(static_cast<uint64_t>(loaded_hi) << 32));
+		success_flag = (tmp_success == 0);
+		if (loaded != old_val) {
+			*expected = loaded;
+			return false;
+		}
+		return success_flag;
 	}
 #elif defined(NEFORCE_ARCH_RISCV)
 	NEFORCE_IF_CONSTEXPR (sizeof(T) == 4) {
@@ -652,15 +682,21 @@ atomic_cmpexch_weak(
 	}
 #elif defined(NEFORCE_ARCH_LOONGARCH)
 	NEFORCE_IF_CONSTEXPR (sizeof(T) == 4) {
+		uint32_t sc_result;
+		uint32_t des_copy = static_cast<uint32_t>(desired);
 		asm volatile(
-			"ll.w %[loaded], %[ptr]\n\t"
-			"bne %[loaded], %[old_val], 1f\n\t"
-			"sc.w %[desired], %[ptr]\n\t"
-			"move %[success], %[desired]\n\t"
-			"1:"
-			: [loaded] "=&r" (loaded), [success] "=&r" (success_flag)
-			: [ptr] "m" (*ptr), [old_val] "r" (old_val), [desired] "r" (desired)
+			"ll.w   %[loaded],    %[ptr]\n\t"
+			"bne    %[loaded],    %[old_val], 1f\n\t"
+			"sc.w   %[des_copy],  %[ptr]\n\t"
+			"1:\n\t"
+			"move   %[success],   %[des_copy]\n\t"
+			: [loaded]   "=&r" (loaded),
+			  [des_copy] "+r"  (des_copy),
+			  [success]  "=r"  (sc_result)
+			: [ptr]      "m"   (*ptr),
+			  [old_val]  "r"   (old_val)
 			: "memory");
+		success_flag = (sc_result == 0);
 	} else NEFORCE_IF_CONSTEXPR (sizeof(T) == 8) {
 		asm volatile(
 			"ll.d %[loaded], %[ptr]\n\t"
@@ -711,7 +747,7 @@ atomic_cmpexch_strong(
 #else
 	remove_volatile_t<T> old_val = *expected;
 	while (true) {
-		if (inner::cmpexch_weak(ptr, expected, desired, success, failure)) {
+		if (_NEFORCE atomic_cmpexch_weak(ptr, expected, desired, success, failure)) {
 			return true;
 		}
 		if (*expected != old_val) {
@@ -1096,10 +1132,10 @@ atomic_cmpexch_strong_any(
 #else
 	remove_volatile_t<T> old_val = *expected;
 	while (true) {
-		if (inner::cmpexch_weak(ptr, expected, desired, success, failure)) {
+		if (_NEFORCE atomic_cmpexch_weak_any(ptr, expected, desired, success, failure)) {
 			return true;
 		}
-		if (*expected != old_val) {
+		if (_NEFORCE memory_compare<remove_volatile_t<T>>(old_val, *expected) != 0) {
 			return false;
 		}
 	}
@@ -1172,7 +1208,7 @@ atomic_exchange_any(T* ptr, remove_volatile_t<T> desired, memory_order mo) noexc
 	__atomic_exchange(ptr, _NEFORCE addressof(desired), dest, static_cast<int32_t>(mo));
 	return *dest;
 #else
-	remove_volatile_t<T> old = _NEFORCE atomic_load(ptr, memory_order_relaxed);
+	remove_volatile_t<T> old = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
 	while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old, &desired, mo, memory_order_relaxed)) {
 		// Retry
 	}
@@ -1190,11 +1226,11 @@ atomic_exchange_any(T* ptr, remove_volatile_t<T> desired, memory_order mo) noexc
  */
 template <typename T>
 T atomic_fetch_add_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
-	remove_volatile_t<T> old_value = _NEFORCE atomic_load(ptr, memory_order_relaxed);
-	remove_volatile_t<T> new_value = old_value + value;
-	while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed)) {
+	remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
+	remove_volatile_t<T> new_value;
+	do {
 		new_value = old_value + value;
-	}
+	} while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed));
 	return old_value;
 }
 
@@ -1208,11 +1244,11 @@ T atomic_fetch_add_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noex
  */
 template <typename T>
 T atomic_fetch_sub_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
-	remove_volatile_t<T> old_value = _NEFORCE atomic_load(ptr, memory_order_relaxed);
-	remove_volatile_t<T> new_value = old_value - value;
-	while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed)) {
+	remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
+	remove_volatile_t<T> new_value;
+	do {
 		new_value = old_value - value;
-	}
+	} while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed));
 	return old_value;
 }
 
@@ -1221,15 +1257,16 @@ T atomic_fetch_sub_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noex
  * @tparam T 浮点类型
  * @param ptr 目标指针
  * @param value 要添加的值
+ * @param mo 内存顺序
  * @return 添加后的值
  */
 template <typename T>
-T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value) noexcept {
-	remove_volatile_t<T> old_value = _NEFORCE atomic_load(ptr, memory_order_relaxed);
-	remove_volatile_t<T> new_value = old_value + value;
-	while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, memory_order_seq_cst, memory_order_relaxed)) {
+T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+	remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
+	remove_volatile_t<T> new_value;
+	do {
 		new_value = old_value + value;
-	}
+	} while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed));
 	return new_value;
 }
 
@@ -1238,15 +1275,16 @@ T atomic_add_fetch_any(T* ptr, remove_volatile_t<T> value) noexcept {
  * @tparam T 浮点类型
  * @param ptr 目标指针
  * @param value 要减去的值
+ * @param mo 内存顺序
  * @return 减去后的值
  */
 template <typename T>
-T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value) noexcept {
-	remove_volatile_t<T> old_value = _NEFORCE atomic_load(ptr, memory_order_relaxed);
-	remove_volatile_t<T> new_value = old_value - value;
-	while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, memory_order_seq_cst, memory_order_relaxed)) {
+T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noexcept {
+	remove_volatile_t<T> old_value = _NEFORCE atomic_load_any(ptr, memory_order_relaxed);
+	remove_volatile_t<T> new_value;
+	do {
 		new_value = old_value - value;
-	}
+	} while (!_NEFORCE atomic_cmpexch_weak_any(ptr, &old_value, &new_value, mo, memory_order_relaxed));
 	return new_value;
 }
 
@@ -1278,7 +1316,7 @@ struct atomic_flag {
 	 * @brief 原子标志类型
 	 */
 	using value_type =
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_COMPILER_MSVC
 		long;
 #else
 		bool;
@@ -1341,7 +1379,7 @@ struct atomic_flag {
 #ifdef NEFORCE_COMPILER_GNUC
 		value_type value;
 		__atomic_load(&flag_, &value, static_cast<int32_t>(mo));
-		return value == sizeof(value_type);
+		return value != static_cast<value_type>(0);
 #else
 		const long as_bytes = flag_;
 		if (mo != memory_order_relaxed) ::_ReadWriteBarrier();
@@ -1357,7 +1395,7 @@ struct atomic_flag {
 #ifdef NEFORCE_COMPILER_GNUC
 		value_type value;
 		__atomic_load(&flag_, &value, static_cast<int32_t>(mo));
-		return value == sizeof(value_type);
+		return value != static_cast<value_type>(0);
 #else
 		const long as_bytes = flag_;
 		if (mo != memory_order_relaxed) ::_ReadWriteBarrier();
@@ -2060,30 +2098,14 @@ public:
 	 * @return 递增后的指针
 	 */
 	value_type operator ++() noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_add_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-			::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				static_cast<long long>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr + sizeof(T));
-#endif
+		return fetch_add(1) + 1;
 	}
 
 	/**
 	 * @brief volatile版本的前置递增运算符
 	 */
 	value_type operator ++() volatile noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_add_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-		    ::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				static_cast<long long>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr + sizeof(T));
-#endif
+		return fetch_add(1) + 1;
 	}
 
 	/**
@@ -2091,30 +2113,14 @@ public:
 	 * @return 递减后的指针
 	 */
 	value_type operator --() noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_sub_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-			::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				-static_cast<ptrdiff_t>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr - sizeof(T));
-#endif
+		return fetch_sub(1) - 1;
 	}
 
 	/**
 	 * @brief volatile版本的前置递减运算符
 	 */
 	value_type operator --() volatile noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_sub_fetch(&ptr_, real_type_sizes(1), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-		    ::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				-static_cast<ptrdiff_t>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr - sizeof(T));
-#endif
+		return fetch_sub(1) - 1;
 	}
 
 	/**
@@ -2123,30 +2129,14 @@ public:
 	 * @return 增加后的指针
 	 */
 	value_type operator +=(const ptrdiff_t dest) noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_add_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-			::_interlockedexchangeadd64(
-			reinterpret_cast<volatile long long*>(&ptr_),
-			static_cast<long long>(dest * sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr + dest * sizeof(T));
-#endif
+		return fetch_add(dest) + dest;
 	}
 
 	/**
 	 * @brief volatile版本的指针加法赋值运算符
 	 */
 	value_type operator +=(const ptrdiff_t dest) volatile noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_add_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-		    ::_interlockedexchangeadd64(
-			reinterpret_cast<volatile long long*>(&ptr_),
-			static_cast<long long>(dest * sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr + dest * sizeof(T));
-#endif
+		return fetch_add(dest) + dest;
 	}
 
 	/**
@@ -2155,30 +2145,14 @@ public:
 	 * @return 减少后的指针
 	 */
 	value_type operator -=(const ptrdiff_t dest) noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_sub_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-			::_interlockedexchangeadd64(
-			reinterpret_cast<volatile long long*>(&ptr_),
-			-dest * static_cast<ptrdiff_t>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr - dest * sizeof(T));
-#endif
+		return fetch_sub(dest) - dest;
 	}
 
 	/**
 	 * @brief volatile版本的指针减法赋值运算符
 	 */
 	value_type operator -=(const ptrdiff_t dest) volatile noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_sub_fetch(&ptr_, real_type_sizes(dest), static_cast<int32_t>(memory_order_seq_cst));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-		    ::_interlockedexchangeadd64(
-			reinterpret_cast<volatile long long*>(&ptr_),
-			-dest * static_cast<ptrdiff_t>(sizeof(T))));
-		return reinterpret_cast<value_type>(old_ptr - dest * sizeof(T));
-#endif
+		return fetch_sub(dest) - dest;
 	}
 
 	/**
@@ -2399,6 +2373,7 @@ public:
 	compare_exchange_strong(
 		value_type& expected, value_type desired,
 		const memory_order success, const memory_order failure) volatile noexcept {
+		NEFORCE_CONSTEXPR_ASSERT(is_valid_cmpexch_failure_order(failure));
 		return _NEFORCE atomic_cmpexch_strong_any(
 			_NEFORCE addressof(ptr_), _NEFORCE addressof(expected),
 			_NEFORCE addressof(desired), success, failure);
@@ -2460,7 +2435,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE value_type
 	fetch_add(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_fetch_add(&ptr_, dest * sizeof(T), mo);
+		const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_add_any(
+			reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)),
+			byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 
 	/**
@@ -2468,7 +2447,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE_INLINE value_type
 	fetch_add(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return _NEFORCE atomic_fetch_add(&ptr_, dest * sizeof(T), mo);
+		const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_add_any(
+			reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)),
+			byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 
 	/**
@@ -2479,18 +2462,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE value_type
 	fetch_sub(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_fetch_sub(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-			::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				-dest * static_cast<ptrdiff_t>(sizeof(T))));
-		if (mo == memory_order_seq_cst) {
-			::_ReadWriteBarrier();
-		}
-		return reinterpret_cast<value_type>(old_ptr);
-#endif
+		const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_sub_any(
+			reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)),
+			byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 
 	/**
@@ -2498,18 +2474,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE_INLINE value_type
 	fetch_sub(const ptrdiff_t dest, const memory_order mo = memory_order_seq_cst) volatile noexcept {
-#ifdef NEFORCE_COMPILER_GNUC
-		return __atomic_fetch_sub(&ptr_, real_type_sizes(dest), static_cast<int32_t>(mo));
-#else
-		const char* old_ptr = reinterpret_cast<char*>(
-		    ::_interlockedexchangeadd64(
-				reinterpret_cast<volatile long long*>(&ptr_),
-				-dest * static_cast<ptrdiff_t>(sizeof(T))));
-		if (mo == memory_order_seq_cst) {
-			::_ReadWriteBarrier();
-		}
-		return reinterpret_cast<value_type>(old_ptr);
-#endif
+		const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_sub_any(
+			reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)),
+			byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 };
 
@@ -2529,7 +2498,7 @@ struct atomic_float_base {
 	using difference_type = value_type;   ///< 差值类型
 
 private:
-	alignas(alignof(Float)) Float float_ = _NEFORCE initialize<Float>();   ///< 浮点数值存储
+	alignas(alignof(Float)) Float float_ = static_cast<Float>(0);   ///< 浮点数值存储
 	
 public:
 	/// @brief 是否总是无锁
@@ -2641,7 +2610,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_weak_any(&float_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2649,7 +2618,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) volatile noexcept {
-		return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_weak_any(&float_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2657,7 +2626,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_strong_any(&float_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2665,7 +2634,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) volatile noexcept {
-		return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_strong_any(&float_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2673,7 +2642,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -2681,7 +2650,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -2689,7 +2658,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -2697,7 +2666,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) volatile noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -2766,14 +2735,14 @@ public:
 	 * @return 加法后的值
 	 */
 	value_type operator +=(value_type value) noexcept {
-		return _NEFORCE atomic_add_fetch_any(&float_, value);
+		return _NEFORCE atomic_add_fetch_any(&float_, value, memory_order_seq_cst);
 	}
 
 	/**
 	 * @brief volatile版本的加法赋值运算符
 	 */
 	value_type operator +=(value_type value) volatile noexcept {
-		return _NEFORCE atomic_add_fetch_any(&float_, value);
+		return _NEFORCE atomic_add_fetch_any(&float_, value, memory_order_seq_cst);
 	}
 
 	/**
@@ -2782,14 +2751,14 @@ public:
 	 * @return 减法后的值
 	 */
 	value_type operator -=(value_type value) noexcept {
-		return _NEFORCE atomic_sub_fetch_any(&float_, value);
+		return _NEFORCE atomic_sub_fetch_any(&float_, value, memory_order_seq_cst);
 	}
 
 	/**
 	 * @brief volatile版本的减法赋值运算符
 	 */
 	value_type operator -=(value_type value) volatile noexcept {
-		return _NEFORCE atomic_sub_fetch_any(&float_, value);
+		return _NEFORCE atomic_sub_fetch_any(&float_, value, memory_order_seq_cst);
 	}
 };
 
@@ -2903,7 +2872,7 @@ public:
 	 */
 	bool compare_exchange_weak(T& expected, T desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2916,7 +2885,7 @@ public:
 	 */
 	bool compare_exchange_strong(T& expected, T desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -2928,7 +2897,7 @@ public:
 	 */
 	bool compare_exchange_weak(T& expected, T desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -2940,7 +2909,7 @@ public:
 	 */
 	bool compare_exchange_strong(T& expected, T desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3091,7 +3060,7 @@ public:
 	 */
 	bool compare_exchange_weak(T& expected, T desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3103,7 +3072,7 @@ public:
 	 */
 	bool compare_exchange_strong(T& expected, T desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3356,7 +3325,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -3369,7 +3338,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -3381,7 +3350,7 @@ public:
 	 */
 	bool compare_exchange_weak(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3393,7 +3362,7 @@ public:
 	 */
 	bool compare_exchange_strong(Float& expected, Float desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3447,8 +3416,8 @@ public:
 	 * @param value 要加的值
 	 * @return 加法后的值
 	 */
-	value_type operator +=(value_type value) const noexcept {
-		return _NEFORCE atomic_add_fetch_any(ptr_, value);
+	value_type operator +=(value_type value) noexcept {
+		return _NEFORCE atomic_add_fetch_any(ptr_, value, memory_order_seq_cst);
 	}
 
 	/**
@@ -3456,8 +3425,8 @@ public:
 	 * @param value 要减的值
 	 * @return 减法后的值
 	 */
-	value_type operator -=(value_type value) const noexcept {
-		return _NEFORCE atomic_sub_fetch_any(ptr_, value);
+	value_type operator -=(value_type value) noexcept {
+		return _NEFORCE atomic_sub_fetch_any(ptr_, value, memory_order_seq_cst);
 	}
 };
 
@@ -3563,7 +3532,7 @@ public:
 	 */
 	bool compare_exchange_weak(T*& expected, T* desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -3576,7 +3545,7 @@ public:
 	 */
 	bool compare_exchange_strong(T*& expected, T* desire,
 		const memory_order success, const memory_order failure) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, success, failure);
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, success, failure);
 	}
 
 	/**
@@ -3588,7 +3557,7 @@ public:
 	 */
 	bool compare_exchange_weak(T*& expected, T* desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_weak(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_weak_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3600,7 +3569,7 @@ public:
 	 */
 	bool compare_exchange_strong(T*& expected, T* desire,
 		const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_cmpexch_strong(expected, desire, mo, cmpexch_failure_order(mo));
+		return _NEFORCE atomic_cmpexch_strong_any(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
 	}
 
 	/**
@@ -3637,7 +3606,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE value_type
 	fetch_add(const difference_type dest, const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_fetch_add_any(ptr_, real_type_sizes(dest), mo);
+		const uintptr_t byte_offset = static_cast<uintptr_t>(
+			dest * static_cast<difference_type>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_add_any(
+			reinterpret_cast<uintptr_t*>(ptr_), byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 
 	/**
@@ -3648,7 +3621,11 @@ public:
 	 */
 	NEFORCE_ALWAYS_INLINE value_type
 	fetch_sub(const difference_type dest, const memory_order mo = memory_order_seq_cst) noexcept {
-		return _NEFORCE atomic_fetch_sub_any(ptr_, real_type_sizes(dest), mo);
+		const uintptr_t byte_offset = static_cast<uintptr_t>(
+			dest * static_cast<difference_type>(sizeof(T)));
+		uintptr_t old_val = _NEFORCE atomic_fetch_sub_any(
+			reinterpret_cast<uintptr_t*>(ptr_), byte_offset, mo);
+		return reinterpret_cast<value_type>(old_val);
 	}
 
 	/**
@@ -3672,7 +3649,7 @@ public:
 	 * @return 递增后的指针
 	 */
 	value_type operator ++() noexcept {
-		return _NEFORCE atomic_add_fetch_any(ptr_, real_type_sizes(1));
+		return fetch_add(1) + 1;
 	}
 
 	/**
@@ -3680,7 +3657,7 @@ public:
 	 * @return 递减后的指针
 	 */
 	value_type operator --() noexcept {
-		return _NEFORCE atomic_sub_fetch_any(ptr_, real_type_sizes(1));
+		return fetch_sub(1) - 1;
 	}
 
 	/**
@@ -3689,7 +3666,7 @@ public:
 	 * @return 增加后的指针
 	 */
 	value_type operator +=(const difference_type dest) noexcept {
-	    return _NEFORCE atomic_add_fetch_any(ptr_, real_type_sizes(dest));
+		return fetch_add(dest) + dest;
 	}
 
 	/**
@@ -3698,7 +3675,7 @@ public:
 	 * @return 减少后的指针
 	 */
 	value_type operator -=(const difference_type dest) noexcept {
-	    return _NEFORCE atomic_sub_fetch_any(ptr_, real_type_sizes(dest));
+		return fetch_sub(dest) - dest;
 	}
 };
 

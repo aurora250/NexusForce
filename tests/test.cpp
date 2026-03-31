@@ -727,9 +727,9 @@ void test_ext_tpool() {
     pool.start(5);
 
     pool.submit_task([]{ println("Normal task"); });
-    pool.submit_task(thread_pool::priority_type{10}, []{ println("High priority task"); });
-    pool.submit_task(thread_pool::priority_type{1}, []{ println("Low priority task"); });
-    pool.submit_after(1000, thread_pool::priority_type{5}, []{ println("Delayed high priority"); });
+    pool.submit_task(static_cast<thread_pool::priority_type>(10), []{ println("High priority task"); });
+    pool.submit_task(static_cast<thread_pool::priority_type>(1), []{ println("Low priority task"); });
+    pool.submit_after(1000, static_cast<thread_pool::priority_type>(5), []{ println("Delayed high priority"); });
     this_thread::sleep_for(seconds(3));
 
     println(timestamp::now());

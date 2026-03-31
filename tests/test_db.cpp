@@ -106,7 +106,7 @@ void test_mysql() {
         db_type::MYSQL,
         mysql_config,
         database_pool::pool_config{
-            .max_idle_time = seconds{2}
+            5, 5, 64, seconds{2}
         });
 
     const auto sql = sql_builder()
@@ -137,7 +137,7 @@ void test_redis() {
         db_type::REDIS,
         redis_config,
         database_pool::pool_config{
-            .max_idle_time = seconds{2}
+            5, 5, 64, seconds{2}
         });
 
     auto conn = dynamic_pointer_cast<redis_connect>(pool.get_kv_connect());
@@ -161,7 +161,7 @@ void test_pgsql() {
         db_type::POSTGRESQL,
         postgre_config,
         database_pool::pool_config{
-            .max_idle_time = seconds{2}
+            5, 5, 64, seconds{2}
         });
 
     const auto sql = sql_builder()
@@ -195,9 +195,7 @@ void test_dbpool() {
         db_type::MYSQL,
         mysql_config,
         database_pool::pool_config{
-            .init_size = 20,
-            .min_size = 10,
-            .max_idle_time = seconds{2}
+            20, 10, 64, seconds{2}
         });
 
     click c;

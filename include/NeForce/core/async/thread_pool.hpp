@@ -311,7 +311,7 @@ public:
 
 	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_task(Func&& func, Args&&... args) {
-		return this->submit_task(priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_task(static_cast<priority_type>(0), _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
 	template <typename Func, typename... Args>
@@ -319,7 +319,7 @@ public:
 
 	template <typename Func, typename... Args>
 	submit_result<invoke_result_t<Func, Args...>> submit_after(int64_t delay_ms, Func&& func, Args&&... args) {
-		return this->submit_after(delay_ms, priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_after(delay_ms, static_cast<priority_type>(0), _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
 	template <typename Func, typename... Args>
@@ -327,7 +327,7 @@ public:
 
 	template <typename Func, typename... Args>
 	periodic_token submit_every(int64_t interval_ms, Func&& func, Args&&... args) {
-		return this->submit_every(interval_ms, priority_type{0}, _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+		return this->submit_every(interval_ms, static_cast<priority_type>(0), _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
 	}
 
 	static void cancel_periodic_task(const periodic_token& token) {
@@ -453,7 +453,7 @@ thread_pool::submit_task(const priority_type priority, Func&& func, Args&&... ar
 				return submit_result<Result>{dummy_task->get_future(), info};
 			}
 
-			task_queue_.emplace(move(job), priority_type{0}, info);
+			task_queue_.emplace(move(job), static_cast<priority_type>(0), info);
 			++task_size_;
 			++total_submitted_tasks_;
 			not_empty_.notify_one();

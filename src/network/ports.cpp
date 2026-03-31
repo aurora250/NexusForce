@@ -51,7 +51,7 @@ ports ports::parse(const string_view scheme) noexcept {
     if (scheme == "dns") return ports::dns;
     if (scheme == "pop3") return ports::pop3;
     if (scheme == "imap") return ports::imap;
-    return ports::def;
+    return ports::undef;
 }
 
 string ports::to_string() const {

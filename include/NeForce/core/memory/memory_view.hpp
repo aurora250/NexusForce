@@ -36,6 +36,14 @@ NEFORCE_BEGIN_INNER__
  */
 template <size_t Extent>
 struct extent_storage {
+    constexpr extent_storage() noexcept = default;
+
+    constexpr extent_storage(const extent_storage&) noexcept = default;
+    constexpr extent_storage& operator =(const extent_storage&) noexcept = default;
+
+    constexpr extent_storage(extent_storage&&) noexcept = default;
+    constexpr extent_storage& operator =(extent_storage&&) noexcept = default;
+
     constexpr extent_storage(size_t) noexcept {}
     static constexpr size_t extent() noexcept { return Extent; }
 };
@@ -46,10 +54,23 @@ struct extent_storage {
 template <>
 struct extent_storage<dynamic_extent> {
 private:
-    size_t extent_value_;  ///< 动态大小值
+    size_t extent_value_ = 0;
+
 public:
-    constexpr extent_storage(const size_t extent_value) noexcept : extent_value_(extent_value) {}
-    constexpr size_t extent() const noexcept { return extent_value_; }
+    constexpr extent_storage() noexcept = default;
+
+    constexpr extent_storage(const extent_storage&) noexcept = default;
+    constexpr extent_storage& operator =(const extent_storage&) noexcept = default;
+
+    constexpr extent_storage(extent_storage&&) noexcept = default;
+    constexpr extent_storage& operator =(extent_storage&&) noexcept = default;
+
+    constexpr extent_storage(const size_t extent_value) noexcept
+    : extent_value_(extent_value) {}
+
+    constexpr size_t extent() const noexcept {
+        return extent_value_;
+    }
 };
 
 NEFORCE_END_INNER__

@@ -34,13 +34,15 @@ private:
         }
         visited->push_back(type_id_);
 
-        for (auto* base : base_types_) {
+        for (const auto* base : base_types_) {
             if (base) {
                 base->collect_properties(result, visited);
             }
         }
 
-        for (const auto& [name, prop] : properties_) {
+        for (const auto& property : properties_) {
+            const auto& name = property.first;
+            const auto& prop = property.second;
             result.emplace_back(name, prop.get());
         }
     }
@@ -55,13 +57,15 @@ private:
         }
         visited->push_back(type_id_);
 
-        for (auto* base : base_types_) {
+        for (const auto* base : base_types_) {
             if (base) {
                 base->collect_functions(result, visited);
             }
         }
 
-        for (const auto& [name, func] : functions_) {
+        for (const auto& f : functions_) {
+            const auto& name = f.first;
+            const auto& func = f.second;
             result.emplace_back(name, func.get());
         }
     }
@@ -106,7 +110,7 @@ public:
     }
 
     meta_function* function(string_view name, meta_function::invoker invoker) {
-        auto [it, inserted] = functions_.emplace(name, make_unique<meta_function>(name, move(invoker)));
+        const auto it = functions_.emplace(name, make_unique<meta_function>(name, move(invoker))).first;
         return it->second.get();
     }
 
@@ -116,12 +120,12 @@ public:
     }
 
     NEFORCE_NODISCARD const meta_property* get_property(string_view name) const {
-        auto it = properties_.find(string(name));
+        const auto it = properties_.find(string(name));
         if (it != properties_.end()) {
             return it->second.get();
         }
 
-        for (auto* base : base_types_) {
+        for (const auto* base : base_types_) {
             if (base) {
                 if (auto* prop = base->get_property(name)) {
                     return prop;
@@ -132,12 +136,12 @@ public:
     }
 
     NEFORCE_NODISCARD const meta_function* get_function(string_view name) const {
-        auto it = functions_.find(string(name));
+        const auto it = functions_.find(string(name));
         if (it != functions_.end()) {
             return it->second.get();
         }
 
-        for (auto* base : base_types_) {
+        for (const auto* base : base_types_) {
             if (base) {
                 if (auto* func = base->get_function(name)) {
                     return func;

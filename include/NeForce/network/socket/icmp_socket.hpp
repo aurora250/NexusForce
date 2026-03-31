@@ -5,7 +5,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 #pragma pack(push, 1)
-
 struct icmp_header {
     uint8_t type;
     uint8_t code;
@@ -13,21 +12,6 @@ struct icmp_header {
     uint16_t id;
     uint16_t sequence;
 };
-
-struct ip_header {
-    uint8_t ihl : 4;
-    uint8_t version : 4;
-    uint8_t tos;
-    uint16_t total_len;
-    uint16_t id;
-    uint16_t frag_off;
-    uint8_t ttl;
-    uint8_t protocol;
-    uint16_t checksum;
-    uint32_t src_addr;
-    uint32_t dest_addr;
-};
-
 #pragma pack(pop)
 
 

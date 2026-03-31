@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NETWORK_SOCKET_FTP_SOCKET_HPP__
-#define NEFORCE_NETWORK_SOCKET_FTP_SOCKET_HPP__
+#ifndef NEFORCE_NETWORK_FTP_CLIENT_HPP__
+#define NEFORCE_NETWORK_FTP_CLIENT_HPP__
 #include "NeForce/network/dns/dns_client.hpp"
 #include "NeForce/network/socket/tcp_socket.hpp"
 #include "NeForce/network/ssl/ssl_stream.hpp"
@@ -26,7 +26,7 @@ struct NEFORCE_API ftp_exception final : network_exception {
 };
 
 
-class NEFORCE_API ftp_socket final : public socket_base {
+class NEFORCE_API ftp_client final : public ip_socket {
 public:
     enum class transfer_mode {
         ascii,
@@ -102,8 +102,6 @@ private:
     ssl_stream wrap_data_channel(tcp_socket&& sock);
 
     void do_ctrl_tls_handshake();
-    void send_pbsz_prot();
-
     void do_post_connect();
 
     vector<char> download_impl(const string& remote_path,
@@ -115,18 +113,20 @@ private:
                      const char* data, size_t len,
                      uint64_t offset);
 
+    void open_and_connect(const ip_address& addr);
+
     static entry parse_list_entry(const string& line);
 
 public:
-    ftp_socket() = default;
+    ftp_client() = default;
 
-    ftp_socket(ftp_socket&& other) = default;
-    ftp_socket& operator =(ftp_socket&& other) = default;
+    ftp_client(ftp_client&& other) = default;
+    ftp_client& operator =(ftp_client&& other) = default;
 
-    ftp_socket(const ftp_socket&) = delete;
-    ftp_socket& operator =(const ftp_socket&) = delete;
+    ftp_client(const ftp_client&) = delete;
+    ftp_client& operator =(const ftp_client&) = delete;
 
-    ~ftp_socket() override;
+    ~ftp_client() override;
 
     void connect(const ip_address& addr, tls_mode mode = tls_mode::none,
                  ssl_context* ctx = nullptr, const string& sni_hostname = "");
@@ -178,4 +178,4 @@ public:
 };
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NETWORK_SOCKET_FTP_SOCKET_HPP__
+#endif // NEFORCE_NETWORK_FTP_CLIENT_HPP__

@@ -405,7 +405,7 @@ void test_http_server() {
                 }
             });
 
-            session->set_close_handler([](WEBSOCKET_STATUS status, const string& reason) {
+            session->set_close_handler([](websocket_status status, const string& reason) {
                 println("Connection closed:", reason);
             });
 

@@ -33,12 +33,13 @@
 - 使用外部配置 cmake 选项
 - 使用 vcpkg 包管理
 - 大幅优化 network 结构设计
-- 优化 FUTEX 设计结构
+- 优化 FUTEX / atomic 设计结构
 - 优化 call_once 设计
 - 优化 path / file 设计，分离职责到子工具类
 - 优化随机数生成器的结构设计
 - 优化 UTF 转换操作实现
 - 优化 formatter 实现
+- 优化 expected 结构
 - 使用 none 统一工具类的空表示
 - 优化 WinSock 初始化方式
 - 优化数据库连接池实现
@@ -155,7 +156,7 @@
 - 支持 C++17 类型推导
 - 添加内存的就地构造与销毁操作
 - 支持反向迭代器 reverse_iterator
-- 添加常用数学常量及函数体系
+- 添加常用数学常量及超越函数
 - 添加标准内存分配器
 - 添加独占指针 unique_ptr 与共享指针 shared_ptr
 - 添加 MySQL 连接池
@@ -171,6 +172,7 @@
 - 健全基本类型别名，适配32位系统
 - 健全 pair / tuple 结构的实现
 - 健全 concepts 结构
+- 使用编译器attributes、constexpr与noexcept优化代码实现
 - 使用 SFINAE 健全标准算法的实现
 - 使用 DEBUG 调试宏健全容器的内存操作
 - 使用 static_assert 限制容器的模板参数类型
@@ -199,4 +201,4 @@
 - 标准算法库 algo / algobase / numeric / heap 初步实现
 - 仿函数系统初步实现
 - 迭代器标签与萃取系统初步实现
-- sin 构建
+- 使用 cmake 构建

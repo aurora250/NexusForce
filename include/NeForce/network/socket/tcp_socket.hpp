@@ -1,24 +1,23 @@
 #ifndef NEFORCE_NETWORK_SOCKET_TCP_SOCKET_HPP__
 #define NEFORCE_NETWORK_SOCKET_TCP_SOCKET_HPP__
 #include "NeForce/core/container/vector.hpp"
-#include "NeForce/network/socket/socket_base.hpp"
+#include "NeForce/network/socket/ip_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-class NEFORCE_API tcp_socket : public socket_base {
+class NEFORCE_API tcp_socket : public ip_socket {
 public:
     tcp_socket() = default;
 
-    tcp_socket(tcp_socket&& other) = default;
-    tcp_socket &operator =(tcp_socket&& other) = default;
+    tcp_socket(tcp_socket&&) = default;
+    tcp_socket& operator=(tcp_socket&&) = default;
 
-    explicit tcp_socket(const native_handle_type fd)
-    : socket_base(fd) {}
+    explicit tcp_socket(native_handle_type fd)
+    : ip_socket(fd) {}
 
     ~tcp_socket() override = default;
 
     void open(int family = AF_INET);
 
-    void connect(const ip_address& endpoint);
     bool connect(const ip_address& endpoint, milliseconds timeout, bool was_blocking = true);
 
     virtual ssize_t send(memory_view<const char> data, int flags = 0);

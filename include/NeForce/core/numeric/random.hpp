@@ -49,6 +49,14 @@ private:
         return result;
     }
 
+    decltype(auto) generate(true_type) noexcept {
+        return generate_32bit();
+    }
+
+    decltype(auto) generate(false_type) noexcept {
+        return generate_64bit();
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -102,12 +110,7 @@ public:
     template <typename T>
     T next_int() noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit());
-        } else {
-            return static_cast<T>(generate_64bit());
-        }
+        return static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
     }
 
     /**
@@ -139,14 +142,9 @@ public:
     template <typename T>
     T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit()) /
-                   static_cast<T>(numeric_traits<uint32_t>::max());
-        } else {
-            return static_cast<T>(generate_64bit()) /
-                   static_cast<T>(numeric_traits<uint64_t>::max());
-        }
+        auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
+        using IntT = decay_t<decltype(gen)>;
+        return gen / numeric_traits<IntT>::max();
     }
 
     /**
@@ -206,6 +204,14 @@ private:
     seed_type generate_32bit() noexcept;
     uint64_t generate_64bit() noexcept;
 
+    decltype(auto) generate(true_type) noexcept {
+        return generate_32bit();
+    }
+
+    decltype(auto) generate(false_type) noexcept {
+        return generate_64bit();
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -253,7 +259,7 @@ public:
      * @return [min, max)范围内的随机整数
      */
     template <typename T>
-    int next_int(T min, T max) noexcept {
+    T next_int(T min, T max) noexcept {
         if (min >= max) return min;
         return min + this->next_int<T>(max - min);
     }
@@ -264,14 +270,9 @@ public:
      * @return 完整范围的随机整数
      */
     template <typename T>
-    int next_int() noexcept {
+    T next_int() noexcept {
         static_assert(is_integral_v<T>, "only integral types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit());
-        } else {
-            return static_cast<T>(generate_64bit());
-        }
+        return static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
     }
 
     /**
@@ -303,14 +304,9 @@ public:
     template <typename T>
     T next_float() noexcept {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit()) /
-                   static_cast<T>(numeric_traits<uint32_t>::max());
-        } else {
-            return static_cast<T>(generate_64bit()) /
-                   static_cast<T>(numeric_traits<uint64_t>::max());
-        }
+        auto gen = static_cast<T>(this->generate(bool_constant<sizeof(T) <= 4>()));
+        using IntT = decay_t<decltype(gen)>;
+        return gen / numeric_traits<IntT>::max();
     }
 
     /**
@@ -362,6 +358,14 @@ private:
         return value;
     }
 
+    static decltype(auto) generate(true_type) noexcept {
+        return generate_32bit();
+    }
+
+    static decltype(auto) generate(false_type) noexcept {
+        return generate_64bit();
+    }
+
 public:
     /**
      * @brief 生成 [0, max) 范围内的随机整数
@@ -402,12 +406,7 @@ public:
     template <typename T>
     static T next_int() {
         static_assert(is_integral_v<T>, "only integral types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit());
-        } else {
-            return static_cast<T>(generate_64bit());
-        }
+        return static_cast<T>(secret::generate(bool_constant<sizeof(T) <= 4>()));
     }
 
     /**
@@ -439,14 +438,9 @@ public:
     template <typename T>
     static T next_float() {
         static_assert(is_floating_point_v<T>, "only floating point types are supported");
-
-        if constexpr (sizeof(T) <= 4) {
-            return static_cast<T>(generate_32bit()) /
-                   static_cast<T>(numeric_traits<uint32_t>::max());
-        } else {
-            return static_cast<T>(generate_64bit()) /
-                   static_cast<T>(numeric_traits<uint64_t>::max());
-        }
+        auto gen = static_cast<T>(secret::generate(bool_constant<sizeof(T) <= 4>()));
+        using IntT = decay_t<decltype(gen)>;
+        return gen / numeric_traits<IntT>::max();
     }
 
     /**

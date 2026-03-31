@@ -86,7 +86,7 @@ public:
     }
 
     void open(int family, int type, int protocol);
-    bool close() noexcept;
+    virtual bool close() noexcept;
 
     bool try_open(int family, int type, int protocol) noexcept;
 

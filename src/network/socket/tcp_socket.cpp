@@ -25,31 +25,7 @@ namespace {
 
 
 void tcp_socket::open(const int family) {
-    if (family != AF_INET && family != AF_INET6) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family for TCP socket"));
-    }
-
-    close();
-
-    fd_ = ::socket(family, SOCK_STREAM, IPPROTO_TCP);
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create TCP socket"));
-    }
-}
-
-void tcp_socket::connect(const ip_address& endpoint) {
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
-    }
-
-    if (!endpoint.is_valid()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint"));
-    }
-
-    const int result = ::connect(fd_, endpoint.data(), endpoint.size());
-    if (result < 0) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to remote endpoint"));
-    }
+    open_ip(family, SOCK_STREAM, IPPROTO_TCP);
 }
 
 bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout, bool was_blocking) {

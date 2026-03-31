@@ -429,7 +429,7 @@ byte_vector dns_client::send_tcp_query(const byte_vector& query) const {
             NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Invalid DNS server address"));
         }
 
-        tls_tcp_state.socket.connect(*endpoint);
+        static_cast<ip_socket&>(tls_tcp_state.socket).connect(*endpoint);
         tls_tcp_state.server = config_.server;
         tls_tcp_state.port = config_.port;
     };

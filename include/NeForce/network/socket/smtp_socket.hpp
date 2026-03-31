@@ -3,7 +3,7 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/container/map.hpp"
 #include "NeForce/network/dns/dns_client.hpp"
-#include "NeForce/network/socket/socket_base.hpp"
+#include "NeForce/network/socket/ip_socket.hpp"
 #include "NeForce/network/ssl/ssl_stream.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -40,7 +40,7 @@ struct NEFORCE_API smtp_message {
 };
 
 
-class NEFORCE_API smtp_socket final : public socket_base {
+class NEFORCE_API smtp_socket final : public ip_socket {
 public:
     enum class auth_method {
         none,
@@ -94,11 +94,13 @@ private:
 
     void do_tls_handshake(const ssl_context& ctx, const string& sni_hostname);
 
+    void open_and_connect(const ip_address& addr);
+
 public:
     smtp_socket() = default;
 
     explicit smtp_socket(native_handle_type fd) noexcept
-    : socket_base(fd) {}
+    : ip_socket(fd) {}
 
     /**
      * @brief 连接SMTP服务器

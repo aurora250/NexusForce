@@ -8,6 +8,7 @@
  * 此文件提供了信号量的实现，用于控制对共享资源的并发访问。
  */
 
+#include "atomic_base.hpp"
 #include "atomic_timed_wait.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -155,6 +156,114 @@ public:
  * 用于实现互斥锁或类似的功能，但比互斥锁更轻量级。
  */
 using binary_semaphore = counting_semaphore<1>;
+
+
+/**
+ * @class semaphore
+ * @brief 系统信号量
+ *
+ * 操作系统原生信号量
+ */
+class NEFORCE_API semaphore {
+public:
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    static constexpr long max_count = numeric_traits<long>::max();
+    using native_handle_type = ::HANDLE;
+#else
+    static constexpr int max_count = SEM_VALUE_MAX;
+    using native_handle_type = ::sem_t;
+#endif
+
+private:
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::HANDLE handle_ = nullptr;
+#else
+    ::sem_t sem_{};
+#endif
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    bool try_acquire_for_impl(milliseconds timeout) noexcept;
+#else
+    bool try_acquire_for_impl(nanoseconds timeout) noexcept;
+#endif
+
+public:
+    /**
+     * @brief 构造系统级信号量
+     * @param initial 初始计数值，必须 >= 0
+     * @param maximum 最大计数值（Windows），必须 >= initial
+     */
+    explicit semaphore(long initial = 0, long maximum = max_count);
+
+    /**
+     * @brief 析构函数，释放系统资源
+     */
+    ~semaphore() noexcept;
+
+    semaphore(const semaphore&) = delete;
+    semaphore& operator =(const semaphore&) = delete;
+    semaphore(semaphore&&) = delete;
+    semaphore& operator =(semaphore&&) = delete;
+
+    /**
+     * @brief 阻塞获取信号量
+     *
+     * 将计数器减 1；若计数器为 0 则阻塞，直到其他线程调用 release()。
+     */
+    void acquire() noexcept;
+
+    /**
+     * @brief 非阻塞尝试获取信号量
+     * @return 成功返回 true，信号量已为 0 时返回 false
+     */
+    bool try_acquire() noexcept;
+
+    /**
+     * @brief 在相对超时时间内尝试获取信号量
+     * @tparam Rep    时间表示类型
+     * @tparam Period 时间单位比例
+     * @param  relative 相对超时时长
+     * @return 成功获取返回 true，超时返回 false
+     */
+    template <typename Rep, typename Period>
+    bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return semaphore::try_acquire_for_impl(_NEFORCE time_cast<milliseconds>(relative));
+#else
+        return semaphore::try_acquire_for_impl(_NEFORCE time_cast<nanoseconds>(relative));
+#endif
+    }
+
+    /**
+     * @brief 在绝对时间点前尝试获取信号量
+     * @tparam Clock 时钟类型
+     * @tparam Dur 持续时间类型
+     * @param  timeout 绝对超时时间点
+     * @return 成功获取返回 true，超时返回 false
+     */
+    template <typename Clock, typename Dur>
+    bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
+        auto now = Clock::now();
+        if (timeout <= now) {
+            return try_acquire();
+        }
+        return try_acquire_for(timeout - now);
+    }
+
+    /**
+     * @brief 释放信号量
+     * @param update 释放数量，默认为 1，必须 > 0
+     *
+     * 将计数器增加 update，并唤醒对应数量的等待线程。
+     */
+    void release(long update = 1);
+
+    /**
+     * @brief 查询当前信号量计数值（仅供参考，不保证时序一致性）
+     * @return 当前计数值，失败返回 -1
+     */
+    int value() const noexcept;
+};
 
 /** @} */ // Semaphores
 

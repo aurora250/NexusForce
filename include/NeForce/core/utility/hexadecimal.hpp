@@ -11,7 +11,6 @@
 
 #include "NeForce/core/interface/iobject.hpp"
 #include "NeForce/core/string/format.hpp"
-#include "NeForce/core/string/to_numerics.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -47,13 +46,13 @@ public:
         return invalid_xdigit;
     }
 
-    static constexpr pair<bool, byte_t> xdigit_value(const char high, const char low) noexcept {
+    static NEFORCE_CONSTEXPR20 pair<bool, byte_t> xdigit_value(const char high, const char low) noexcept {
         const byte_t xhigh = xdigit_value(high);
         const byte_t xlow = xdigit_value(low);
         if (xhigh == invalid_xdigit || xlow == invalid_xdigit) {
             return {false, invalid_xdigit};
         }
-        return {true, high << 4 | low};
+        return pair<bool, byte_t>{true, high << 4 | low};
     }
 
 private:
@@ -72,7 +71,7 @@ private:
         bool negative = false;
         size_t start = 0;
 
-        while (start < view.size() && _NEFORCE is_space(view[start])) ++start;
+        while (start < view.size() && is_space(view[start])) ++start;
         if (start == view.size()) return 0;
 
         if (view[start] == '-') {
@@ -195,7 +194,7 @@ public:
      * @return 值是否非零
      */
     NEFORCE_NODISCARD explicit constexpr operator bool() const noexcept {
-        return value_ != _NEFORCE initialize<value_type>();
+        return value_ != static_cast<value_type>(0);
     }
 
     /**
@@ -248,7 +247,9 @@ public:
      * @brief 转换为字符串
      * @return 十六进制格式的字符串（带0x前缀）
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const;
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const {
+        return format("{:#x}", *this);
+    }
 
     /**
      * @brief 从字符串解析十六进制值
@@ -267,18 +268,6 @@ struct unpackage<hexadecimal> {
 };
 
 /** @} */ // Packages
-
-/**
- * @defgroup ToString 转换字符串
- * @brief 各类型到字符串的转换函数
- * @{
- */
-
-NEFORCE_CONSTEXPR20 string hexadecimal::to_string() const {
-    return _NEFORCE format("{:#x}", *this);
-}
-
-/** @} */ // ToString
 
 NEFORCE_BEGIN_LITERALS__
 

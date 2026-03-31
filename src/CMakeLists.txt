@@ -10,6 +10,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/hazard_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/semaphore.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
@@ -89,6 +90,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/network/arp.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/mac_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ports.cpp
@@ -104,8 +107,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ftp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/icmp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ip_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/smtp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/socket_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/socket/ssl_acceptor.cpp

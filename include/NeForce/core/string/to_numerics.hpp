@@ -37,6 +37,8 @@ NEFORCE_BEGIN_INNER__
 template <typename T>
 constexpr enable_if_t<is_signed_v<T>, T>
 str_to_ints(const string_view sv, char** endptr, int base) {
+    using UT = make_unsigned_t<T>;
+
     const char* start = sv.data();
     const size_t len = sv.size();
     const char* end = start + len;
@@ -74,38 +76,40 @@ str_to_ints(const string_view sv, char** endptr, int base) {
         } else {
             base = 10;
         }
-    }
-
-    if (base == 16 && p + 1 < end && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
+    } else if (base == 16 && p + 1 < end && *p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) {
         p += 2;
     }
 
-    const T cutoff = numeric_traits<T>::min() / base;
-    const T cutlim = numeric_traits<T>::min() % base;
-    T result = 0;
+    const UT umax = static_cast<UT>(numeric_traits<T>::max());
+    const UT umin_abs = static_cast<UT>(numeric_traits<T>::max()) + static_cast<UT>(1);
+    const UT limit = (sign > 0) ? umax : umin_abs;
+    const UT cutoff = limit / static_cast<UT>(base);
+    const UT cutlim = limit % static_cast<UT>(base);
+
+    UT result = 0;
     bool any_converted = false;
     bool overflow = false;
 
     while (p != end) {
-        int digit = 0;
+        uint32_t digit = 0;
         const char c = *p;
         if (c >= '0' && c <= '9') {
-            digit = c - '0';
+            digit = static_cast<uint32_t>(c - '0');
         } else if (c >= 'a' && c <= 'z') {
-            digit = c - 'a' + 10;
+            digit = static_cast<uint32_t>(c - 'a' + 10);
         } else if (c >= 'A' && c <= 'Z') {
-            digit = c - 'A' + 10;
+            digit = static_cast<uint32_t>(c - 'A' + 10);
         } else {
             break;
         }
-        if (digit >= base) break;
+        if (digit >= static_cast<uint32_t>(base)) break;
 
         any_converted = true;
         if (!overflow) {
-            if (result < cutoff || (result == cutoff && digit > -cutlim)) {
+            if (result > cutoff || (result == cutoff && static_cast<UT>(digit) > cutlim)) {
                 overflow = true;
             } else {
-                result = result * base - digit;
+                result = result * static_cast<UT>(base) + static_cast<UT>(digit);
             }
         }
         ++p;
@@ -115,16 +119,21 @@ str_to_ints(const string_view sv, char** endptr, int base) {
         *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
-    if (!any_converted) return 0;
+    if (!any_converted) {
+        return 0;
+    }
+
     if (overflow)
         return (sign > 0) ? numeric_traits<T>::max() : numeric_traits<T>::min();
 
     if (sign > 0) {
-        if (result == numeric_traits<T>::min())
-            return numeric_traits<T>::max();
-        return -result;
+        return static_cast<T>(result);
+    } else {
+        if (result == umin_abs) {
+            return numeric_traits<T>::min();
+        }
+        return static_cast<T>(~result + static_cast<UT>(1));
     }
-    return result;
 }
 
 /**
@@ -304,10 +313,11 @@ str_to_floats(const string_view sv, char** endptr) {
         if (p + 3 <= end) {
             const char c1 = p[1], c2 = p[2];
             if ((c1 == 'n' || c1 == 'N') && (c2 == 'f' || c2 == 'F')) {
-                if (p + 3 == end || !is_alpha_or_digit(p[3])) {
+                const bool terminated = (p + 3 == end) || !is_alpha_or_digit(p[3]);
+                if (terminated) {
                     p += 3;
-                    T inf_val = numeric_traits<T>::infinity();
                     if (endptr) *endptr = const_cast<char*>(p);
+                    const T inf_val = numeric_traits<T>::infinity();
                     return (sign < 0) ? -inf_val : inf_val;
                 }
             }
@@ -318,7 +328,8 @@ str_to_floats(const string_view sv, char** endptr) {
         if (p + 3 <= end) {
             const char c1 = p[1], c2 = p[2];
             if ((c1 == 'a' || c1 == 'A') && (c2 == 'n' || c2 == 'N')) {
-                if (p + 3 == end || !is_alpha_or_digit(p[3])) {
+                const bool terminated = (p + 3 == end) || !is_alpha_or_digit(p[3]);
+                if (terminated) {
                     p += 3;
                     if (p != end && *p == '(') {
                         ++p;
@@ -342,7 +353,7 @@ str_to_floats(const string_view sv, char** endptr) {
     while (p != end && *p >= '0' && *p <= '9') {
         has_digits = true;
         if (digits_count < numeric_traits<T>::digits10) {
-            significand = significand * 10 + (*p - '0');
+            significand = significand * static_cast<T>(10) + static_cast<T>(*p - '0');
         } else {
             exponent++;
         }
@@ -355,7 +366,7 @@ str_to_floats(const string_view sv, char** endptr) {
         while (p != end && *p >= '0' && *p <= '9') {
             has_digits = true;
             if (digits_count < numeric_traits<T>::digits10) {
-                significand = significand * 10 + (*p - '0');
+                significand = significand * static_cast<T>(10) + static_cast<T>(*p - '0');
                 exponent--;
             }
             digits_count++;
@@ -369,7 +380,9 @@ str_to_floats(const string_view sv, char** endptr) {
     }
 
     if (p != end && (*p == 'e' || *p == 'E')) {
+        const char* e_pos = p;
         ++p;
+
         int exp_sign = 1;
         if (p != end && *p == '+') {
             ++p;
@@ -381,37 +394,41 @@ str_to_floats(const string_view sv, char** endptr) {
         if (p != end && *p >= '0' && *p <= '9') {
             int exp_val = 0;
             while (p != end && *p >= '0' && *p <= '9') {
-                if (exp_val < 10000) {
+                if (exp_val < 100000) {
                     exp_val = exp_val * 10 + (*p - '0');
                 }
                 ++p;
             }
             exponent += exp_sign * exp_val;
         } else {
-            --p;
-            if (p != start_conversion && (p[-1] == '+' || p[-1] == '-')) --p;
+            p = e_pos;
         }
     }
 
     T result = significand;
 
     if (exponent != 0) {
-        if (exponent > 400) {
+        constexpr int max_exp = numeric_traits<T>::max_exponent10 + 50;
+        constexpr int min_exp = numeric_traits<T>::min_exponent10 - 50;
+
+        if (exponent > max_exp) {
             if (endptr) *endptr = const_cast<char*>(p);
-            return sign * numeric_traits<T>::max();
-        } else if (exponent < -400) {
+            return (sign > 0) ? numeric_traits<T>::infinity() : -numeric_traits<T>::infinity();
+        } else if (exponent < min_exp) {
             if (endptr) *endptr = const_cast<char*>(p);
-            return T(0);
+            return static_cast<T>(0);
         } else {
             result *= fast_pow10<T>(exponent);
         }
     }
 
-    result *= sign;
     const T inf = numeric_traits<T>::infinity();
     if (result == inf || result == -inf) {
-        result = sign * numeric_traits<T>::max();
+        if (endptr) *endptr = const_cast<char*>(p);
+        return (sign > 0) ? inf : -inf;
     }
+
+    result = (sign > 0) ? result : -result;
 
     if (endptr) *endptr = const_cast<char*>(p);
     return result;
@@ -548,7 +565,7 @@ to_int32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
 NEFORCE_NODISCARD constexpr uint32_t
 to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
     char* endptr = nullptr;
-    const uint32_t num = inner::str_to_uints<unsigned long>(sv, &endptr, base);
+    const uint32_t num = inner::str_to_uints<uint32_t>(sv, &endptr, base);
     if (sv.data() == endptr) {
         NEFORCE_THROW_EXCEPTION(typecast_exception("Convert from string failed."));
     }
@@ -566,7 +583,12 @@ to_uint32(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  */
 NEFORCE_NODISCARD constexpr int16_t
 to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<int16_t>(to_int32(sv, idx, base));
+    const int32_t val = to_int32(sv, idx, base);
+    if (val > static_cast<int32_t>(numeric_traits<int16_t>::max()) ||
+        val < static_cast<int32_t>(numeric_traits<int16_t>::min())) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of int16_t range."));
+    }
+    return static_cast<int16_t>(val);
 }
 
 /**
@@ -579,7 +601,11 @@ to_int16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  */
 NEFORCE_NODISCARD constexpr uint16_t
 to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<uint16_t>(to_uint32(sv, idx, base));
+    const uint32_t val = to_uint32(sv, idx, base);
+    if (val > static_cast<uint32_t>(numeric_traits<uint16_t>::max())) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of uint16_t range."));
+    }
+    return static_cast<uint16_t>(val);
 }
 
 /**
@@ -592,7 +618,12 @@ to_uint16(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  */
 NEFORCE_NODISCARD constexpr int8_t
 to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<int8_t>(to_int32(sv, idx, base));
+    const int32_t val = to_int32(sv, idx, base);
+    if (val > static_cast<int32_t>(numeric_traits<int8_t>::max()) ||
+        val < static_cast<int32_t>(numeric_traits<int8_t>::min())) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of int8_t range."));
+    }
+    return static_cast<int8_t>(val);
 }
 
 /**
@@ -605,7 +636,11 @@ to_int8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
  */
 NEFORCE_NODISCARD constexpr uint8_t
 to_uint8(const string_view sv, size_t* idx = nullptr, const int base = 10) {
-    return static_cast<uint8_t>(to_uint32(sv, idx, base));
+    const uint32_t val = to_uint32(sv, idx, base);
+    if (val > static_cast<uint32_t>(numeric_traits<uint8_t>::max())) {
+        NEFORCE_THROW_EXCEPTION(typecast_exception("Value out of uint8_t range."));
+    }
+    return static_cast<uint8_t>(val);
 }
 
 /** @} */ // StringNumerics

@@ -2,30 +2,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void udp_socket::open(const int family) {
-    if (family != AF_INET && family != AF_INET6) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family for UDP socket"));
-    }
-
-    close();
-
-    fd_ = ::socket(family, SOCK_DGRAM, IPPROTO_UDP);
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create UDP socket"));
-    }
-}
-
-void udp_socket::connect(const ip_address& endpoint) {
-    if (!is_open()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));
-    }
-
-    if (!endpoint.is_valid()) {
-        NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint for UDP connect"));
-    }
-
-    if (::connect(fd_, endpoint.data(), endpoint.size()) < 0) {
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect UDP socket to remote endpoint"));
-    }
+    open_ip(family, SOCK_DGRAM, IPPROTO_UDP);
 }
 
 ssize_t udp_socket::send_to(memory_view<const char> data, const ip_address& endpoint, const int flags) {
