@@ -4,14 +4,16 @@ cmake_minimum_required(VERSION 3.19)
 file(READ "config.json" JSON_CONTENT)
 
 
-if(WIN32)
-    string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg windows)
+if(DEFINED ENV{VCPKG_ROOT})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE PATH "vcpkg toolchain")
 else()
-    string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg linux)
+    if(WIN32)
+        string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg windows)
+    else()
+        string(JSON CONFIG_VCPKG_PATH GET ${JSON_CONTENT} vcpkg linux)
+    endif()
+    set(CMAKE_TOOLCHAIN_FILE "${CONFIG_VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake")
 endif()
-
-set(CMAKE_TOOLCHAIN_FILE "${CONFIG_VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake")
-
 
 if(WIN32)
     string(JSON CONFIG_DOT_EXECUTABLE GET ${JSON_CONTENT} graphviz windows)
