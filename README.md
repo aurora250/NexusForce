@@ -1,9 +1,14 @@
 # NexusForce V1.0.0
 
 [![vcpkg](https://img.shields.io/badge/vcpkg-Enabled-red.svg)](https://vcpkg.io)
+[![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B.svg)](https://cmake.org)
+[![C++](https://img.shields.io/badge/C++-14/17/20-00599C.svg)](https://isocpp.org)
 [![Valgrind](https://img.shields.io/badge/Valgrind-Tested-green.svg)](https://valgrind.org)
 [![Memory Leak](https://img.shields.io/badge/Memory%20Leak-None-green.svg)](valgrind)
+[![CodeQL](https://img.shields.io/badge/CodeQL-Analyzed-30363d.svg)](https://codeql.github.com)
 [![License](https://img.shields.io/badge/License-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
+[![Docs](https://img.shields.io/badge/Docs-Website-4CAF50.svg)](https://nexusforce.org.cn)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/aurora250/NexusForce/pulls)
 
 > 通过其他语言阅读: [English](README.EN.md)
 
@@ -196,7 +201,8 @@
 
 ### 前置依赖
 
-- CMake 3.19+
+- [CMake](https://cmake.org/) 3.19+
+- [vcpkg](https://github.com/microsoft/vcpkg)
 - 必选依赖:
   - pcre2
   - OpenSSL

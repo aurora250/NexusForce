@@ -1,0 +1,231 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - dev
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
+        default: '1.0.0'
+      prerelease:
+        description: 'Is this a prerelease?'
+        type: boolean
+        default: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+      prerelease: ${{ steps.get_version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get version from tag or input
+        id: get_version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+            PRERELEASE="${{ github.event.inputs.prerelease }}"
+          else
+            VERSION="${GITHUB_REF#refs/tags/v}"
+            PRERELEASE="false"
+            if [[ "$VERSION" == *-* ]]; then
+              PRERELEASE="true"
+            fi
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "prerelease=$PRERELEASE" >> $GITHUB_OUTPUT
+          echo "Release version: $VERSION (prerelease: $PRERELEASE)"
+
+      - name: Validate version format
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          if ! [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "Invalid version format: $VERSION"
+            exit 1
+          fi
+
+  build-linux:
+    needs: validate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x64, x86]
+        include:
+          - arch: x64
+            triplet: x64-linux
+            cmake_arch: x86_64
+          - arch: x86
+            triplet: x86-linux
+            cmake_arch: i386
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            pkg-config \
+            ${{ matrix.arch == 'x86' && 'gcc-multilib g++-multilib' || '' }}
+
+      - name: Setup vcpkg
+        run: |
+          git clone https://github.com/Microsoft/vcpkg.git ${{ runner.workspace }}/vcpkg
+          ${{ runner.workspace }}/vcpkg/bootstrap-vcpkg.sh
+          echo "VCPKG_ROOT=${{ runner.workspace }}/vcpkg" >> $GITHUB_ENV
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=${{ runner.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake \
+            -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }} \
+            -DCMAKE_CXX_FLAGS="${{ matrix.arch == 'x86' && '-m32' || '' }}"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel $(nproc)
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p dist
+          VERSION="${{ needs.validate.outputs.version }}"
+          
+          cp build/bin/NexusForce* dist/ 2>/dev/null || true
+          cp build/lib/libNexusForce* dist/ 2>/dev/null || true
+          
+          cp -r include dist/
+          
+          cp config.json.example dist/ 2>/dev/null || true
+          
+          cp README.md dist/ 2>/dev/null || true
+          cp LICENSE dist/ 2>/dev/null || true
+          
+          cd dist
+          tar -czf ../NexusForce-${VERSION}-linux-${{ matrix.arch }}.tar.gz *
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: NexusForce-linux-${{ matrix.arch }}
+          path: NexusForce-*.tar.gz
+
+  build-windows:
+    needs: validate
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64, x86]
+        include:
+          - arch: x64
+            triplet: x64-windows-static-md
+            cmake_arch: x64
+          - arch: x86
+            triplet: x86-windows-static-md
+            cmake_arch: Win32
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup vcpkg
+        run: |
+          git clone https://github.com/Microsoft/vcpkg.git ${{ runner.workspace }}/vcpkg
+          & "${{ runner.workspace }}/vcpkg/bootstrap-vcpkg.bat"
+          echo "VCPKG_ROOT=${{ runner.workspace }}/vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Configure CMake
+        run: |
+          cmake -B build `
+            -G "Visual Studio 17 2022" `
+            -A ${{ matrix.cmake_arch }} `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_TOOLCHAIN_FILE=${{ runner.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake `
+            -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Prepare artifacts
+        run: |
+          New-Item -ItemType Directory -Force -Path dist
+          $VERSION = "${{ needs.validate.outputs.version }}"
+          
+          Copy-Item build/bin/Release/*.dll dist/ -ErrorAction SilentlyContinue
+          Copy-Item build/bin/Release/*.exe dist/ -ErrorAction SilentlyContinue
+          Copy-Item build/lib/Release/*.lib dist/ -ErrorAction SilentlyContinue
+          
+          Copy-Item -Recurse include dist/
+          
+          Copy-Item config.json.example dist/ -ErrorAction SilentlyContinue
+          Copy-Item README.md dist/ -ErrorAction SilentlyContinue
+          Copy-Item LICENSE dist/ -ErrorAction SilentlyContinue
+          
+          Compress-Archive -Path dist/* -DestinationPath NexusForce-${VERSION}-windows-${{ matrix.arch }}.zip
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: NexusForce-windows-${{ matrix.arch }}
+          path: NexusForce-*.zip
+
+  create-release:
+    needs: [validate, build-linux, build-windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          name: Release v${{ needs.validate.outputs.version }}
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: ${{ needs.validate.outputs.prerelease == 'true' }}
+          files: |
+            artifacts/**/*.tar.gz
+            artifacts/**/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate checksums
+        run: |
+          cd artifacts
+          find . -name "*.tar.gz" -o -name "*.zip" | xargs sha256sum > checksums.txt
+
+      - name: Upload checksums
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          files: artifacts/checksums.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#  publish-packages:
+#    needs: [validate, create-release]
+#    runs-on: ubuntu-latest
+#    if: github.event_name != 'workflow_dispatch' || !github.event.inputs.prerelease
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Publish to vcpkg
+#        run: |
+#          echo "Publishing to vcpkg registry..."
