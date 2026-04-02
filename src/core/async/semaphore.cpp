@@ -1,8 +1,8 @@
 #include <NeForce/core/async/semaphore.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <handleapi.h>
-#    include <windef.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <errno.h>

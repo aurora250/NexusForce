@@ -18,9 +18,8 @@
 #    include <consoleapi.h>
 #endif
 #ifdef NEFORCE_COMPILER_MINGW
-#    include <wincon.h>
 #    include <windef.h>
-#    include <wingdi.h>
+#    include <wincon.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <csignal>

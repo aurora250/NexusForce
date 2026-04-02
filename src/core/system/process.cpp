@@ -1,9 +1,9 @@
 #include <NeForce/core/system/process.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
-#    include <Psapi.h>
-#    include <WinBase.h>
 #    include <windef.h>
+#    include <WinBase.h>
+#    include <Psapi.h>
 #    ifdef max
 #        undef max
 #    endif

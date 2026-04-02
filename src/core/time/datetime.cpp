@@ -2,6 +2,7 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
 #    include <sysinfoapi.h>
+#    include <timezoneapi.h>
 #else
 #    include <time.h>
 #endif

@@ -1,14 +1,14 @@
 # NexusForce V1.0.0
 
-[![vcpkg](https://img.shields.io/badge/vcpkg-Enabled-red.svg)](https://vcpkg.io)
-[![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B.svg)](https://cmake.org)
-[![C++](https://img.shields.io/badge/C++-14/17/20-00599C.svg)](https://isocpp.org)
-[![Valgrind](https://img.shields.io/badge/Valgrind-Tested-green.svg)](https://valgrind.org)
-[![Memory Leak](https://img.shields.io/badge/Memory%20Leak-None-green.svg)](valgrind)
-[![CodeQL](https://img.shields.io/badge/CodeQL-Analyzed-30363d.svg)](https://codeql.github.com)
-[![License](https://img.shields.io/badge/License-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
-[![Docs](https://img.shields.io/badge/Docs-Website-4CAF50.svg)](https://nexusforce.org.cn)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/aurora250/NexusForce/pulls)
+[![vcpkg](https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white)](https://vcpkg.io)
+[![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white)](https://cmake.org)
+[![C++](https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white)](https://isocpp.org)
+[![Valgrind](https://img.shields.io/badge/Valgrind-Tested-2E8B57?style=flat-square&logo=valgrind&logoColor=white)](https://valgrind.org)
+[![Memory Leak](https://img.shields.io/badge/Memory%20Leak-None-00C853?style=flat-square)](valgrind)
+[![CodeQL](https://img.shields.io/badge/CodeQL-Analyzed-1E6F9F?style=flat-square&logo=github&logoColor=white)](https://codeql.github.com)
+[![License](https://img.shields.io/badge/License-MIT-F9A825?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Docs](https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&logo=readthedocs&logoColor=white)](https://nexusforce.org.cn)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&logo=git&logoColor=white)](https://github.com/aurora250/NexusForce/pulls)
 
 > 通过其他语言阅读: [English](README.EN.md)
 

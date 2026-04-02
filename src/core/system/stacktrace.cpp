@@ -3,8 +3,8 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/async/call_once.hpp>
 #    include <NeForce/core/async/mutex.hpp>
-#    include <WinBase.h>
 #    include <windef.h>
+#    include <WinBase.h>
 #    ifdef NEFORCE_COMPILER_MSVC
 #        include <verrsrc.h>
 #    endif

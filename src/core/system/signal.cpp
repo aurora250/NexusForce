@@ -3,9 +3,8 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/system/signal.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <NeForce/core/config/windef.hpp>
-#    include <WinBase.h>
 #    include <windef.h>
+#    include <WinBase.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <cstdlib>

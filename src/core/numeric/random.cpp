@@ -2,10 +2,10 @@
 #include <NeForce/core/time/datetime.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
+#    include <windef.h>
 #    include <minwinbase.h>
 #    include <minwindef.h>
 #    include <wincrypt.h>
-#    include <windef.h>
 #    ifdef max
 #        undef max
 #    endif

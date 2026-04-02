@@ -5,8 +5,8 @@
 #        include <consoleapi2.h>
 #    endif
 #    ifdef NEFORCE_COMPILER_MINGW
-#        include <wincon.h>
 #        include <windef.h>
+#        include <wincon.h>
 #        include <wingdi.h>
 #    endif
 #    include <WinBase.h>

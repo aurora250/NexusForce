@@ -11,12 +11,8 @@
 
 #include "NeForce/core/config/windef.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <WinBase.h>
-#    include <WinUser.h>
-#    include <apisetcconv.h>
-#    include <minwinbase.h>
 #    include <windef.h>
-#    include <winreg.h>
+#    include <WinBase.h>
 #    ifdef max
 #        undef max
 #    endif

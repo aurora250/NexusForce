@@ -1,8 +1,8 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <WinBase.h>
 #    include <windef.h>
+#    include <WinBase.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <ctime>

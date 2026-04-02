@@ -263,7 +263,7 @@ private:
 #else
     static void*
 #endif
-    thread_entry(void* arg);
+            thread_entry(void* arg);
 
     void start_thread_impl(thread_startup_args* args);
 

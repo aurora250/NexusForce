@@ -10,9 +10,9 @@
 
 #include "NeForce/core/typeinfo/types.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include "NeForce/core/config/windef.hpp"
 #    include <processthreadsapi.h>
 #    include <synchapi.h>
-#    include "NeForce/core/config/windef.hpp"
 #    ifdef max
 #        undef max
 #    endif

@@ -185,7 +185,7 @@
 ### 📚 Documentation
 - 添加 README 模块介绍
 
-## [0.1.0] - 2024-21-17
+## [0.1.0] - 2024-12-17
 
 ### 🚀 New Features
 - array / vector / list / deque / rbtree / hashtable 容器及其配接器 queue / stack 初步实现

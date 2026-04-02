@@ -4,8 +4,8 @@
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
-#    include <WinBase.h>
 #    include <windef.h>
+#    include <WinBase.h>
 #    ifdef max
 #        undef max
 #    endif

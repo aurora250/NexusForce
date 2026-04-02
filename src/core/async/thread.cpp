@@ -6,9 +6,9 @@
 #include <NeForce/core/string/utf.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/async/call_once.hpp>
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <process.h>
-#    include <windef.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

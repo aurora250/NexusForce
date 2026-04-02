@@ -2,9 +2,9 @@
 #include <NeForce/core/file/path_tree.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <fileapi.h>
-#    include <windef.h>
 #    ifdef max
 #        undef max
 #    endif

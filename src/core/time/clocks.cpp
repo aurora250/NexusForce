@@ -6,8 +6,8 @@
 #    include <synchapi.h>
 #    include <sysinfoapi.h>
 #    ifdef NEFORCE_COMPILER_MINGW
-#        include <winbase.h>
 #        include <windef.h>
+#        include <winbase.h>
 #    endif
 #    ifdef max
 #        undef max

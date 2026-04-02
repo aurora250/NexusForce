@@ -2,10 +2,10 @@
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/string/to_string.hpp>
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <processthreadsapi.h>
 #    include <shellapi.h>
-#    include <windef.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/file/file.hpp>

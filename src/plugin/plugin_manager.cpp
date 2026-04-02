@@ -43,7 +43,7 @@ void plugin_manager::load_plugin(const string_view pth) {
 
     auto lib = make_unique<dynamic_library>(pth);
 
-    const auto create_func = lib->to_symbol<iplugin* (*)()>(NEFORCE_PLUGIN_CREATE_FUNC);
+    const auto create_func = lib->to_symbol<iplugin* (*) ()>(NEFORCE_PLUGIN_CREATE_FUNC);
     const auto destroy_func = lib->to_symbol<void (*)(iplugin*)>(NEFORCE_PLUGIN_DESTROY_FUNC);
 
     iplugin* raw_ptr = create_func();
